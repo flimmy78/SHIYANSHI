@@ -1,0 +1,83 @@
+﻿@model Langben.DAL.METERING_STANDARD_DEVICE_CHECK
+
+@{
+    Layout = "~/Views/Shared/Create.cshtml";
+}
+@using Common
+@using Models
+ 
+@section CurentPlace {
+ 
+      创建  
+ 
+ }
+@using (Html.BeginForm("", "api/METERING_STANDARD_DEVICE_CHECKApi/Post"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="创建" />
+            <input class="a2 f2" type="button" onclick="BackList('METERING_STANDARD_DEVICE_CHECK')" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                 
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CERTIFICATE_NUM)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CERTIFICATE_NUM)
+                @Html.ValidationMessageFor(model => model.CERTIFICATE_NUM)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CHECK_DATE)：
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("CHECK_DATE", ((Model != null && Model.CHECK_DATE != null) ? Model.CHECK_DATE.ToString().AsDateTime().ToString("yyyy-MM-dd") : ""), new { style = "width: 244px;", @class="easyui-datebox" })
+                @Html.ValidationMessageFor(model => model.CHECK_DATE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.VALID_TO)：
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("VALID_TO", ((Model != null && Model.VALID_TO != null) ? Model.VALID_TO.ToString().AsDateTime().ToString("yyyy-MM-dd") : ""), new { style = "width: 244px;", @class="easyui-datebox" })
+                @Html.ValidationMessageFor(model => model.VALID_TO)
+            </div>
+        <div class="editor-label">
+            <a class="anUnderLine" onclick="showModalOnly('METERING_STANDARD_DEVICEID','../../METERING_STANDARD_DEVICE');">
+                @Html.LabelFor(model => model.METERING_STANDARD_DEVICEID) 
+            </a>：
+        </div>
+        <div class="editor-field">
+            <div id="checkMETERING_STANDARD_DEVICEID">            
+            </div>
+            @Html.HiddenFor(model => model.METERING_STANDARD_DEVICEID)
+        </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>
+        </div>
+    </fieldset>
+} 
+
+
+    
+    <script type="text/javascript">
+
+        $(function () {
+            
+        });
+              
+
+    </script>
+
+

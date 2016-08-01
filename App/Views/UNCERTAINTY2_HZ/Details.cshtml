@@ -1,0 +1,114 @@
+﻿@model Langben.DAL.UNCERTAINTY2_HZ
+
+@{
+    Layout = "~/Views/Shared/Details.cshtml";
+}
+@using Common
+ @section CurentPlace {
+    详细  
+}
+ 
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="button" onclick="window.location.href = 'javascript:history.go(-1)';" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                  
+                <div class="display-label">
+                      @Html.LabelFor(model => model.RANGE) :
+                </div>
+                <div class="display-field" id='RANGE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.RANGE_UNIT) :
+                </div>
+                <div class="display-field" id='RANGE_UNIT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.MIN_FREQUENCY) :
+                </div>
+                <div class="display-field" id='MIN_FREQUENCY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.MIN_FREQUENCY_UNIT) :
+                </div>
+                <div class="display-field" id='MIN_FREQUENCY_UNIT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.MAX_FREQUENCY) :
+                </div>
+                <div class="display-field" id='MAX_FREQUENCY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.MAX_FREQUENCY_UNIT) :
+                </div>
+                <div class="display-field" id='MAX_FREQUENCY_UNIT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.INDEX1) :
+                </div>
+                <div class="display-field" id='INDEX1'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.INDEX1_UNIT) :
+                </div>
+                <div class="display-field" id='INDEX1_UNIT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.INDEX2) :
+                </div>
+                <div class="display-field" id='INDEX2'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.INDEX2_UNIT) :
+                </div>
+                <div class="display-field" id='INDEX2_UNIT'>
+                </div>        
+                <div class="display-label">
+                      @Html.LabelFor(model => model.RULEID) :
+                </div>
+                <div class="display-field">
+                    @if (Model.RULE != null)
+                       {
+                    @Model.RULE.NAME
+                    } 
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATETIME) :
+                </div>
+                <div class="display-field" id='CREATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATEPERSON) :
+                </div>
+                <div class="display-field" id='CREATEPERSON'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATETIME) :
+                </div>
+                <div class="display-field" id='UPDATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATEPERSON) :
+                </div>
+                <div class="display-field" id='UPDATEPERSON'>
+                </div>
+        </div>
+    </fieldset>
+
+<script type="text/javascript">
+
+    $(function () {
+        // 获取内容并显示
+        var id = '@ViewBag.Id';
+        $.ajax({
+            url: "/api/UNCERTAINTY2_HZApi/" + id,
+            type: "POST",
+            // async: false,
+            success: function (res) {
+		$("#RANGE").html(res.RANGE);$("#RANGE_UNIT").html(res.RANGE_UNIT);$("#MIN_FREQUENCY").html(res.MIN_FREQUENCY);$("#MIN_FREQUENCY_UNIT").html(res.MIN_FREQUENCY_UNIT);$("#MAX_FREQUENCY").html(res.MAX_FREQUENCY);$("#MAX_FREQUENCY_UNIT").html(res.MAX_FREQUENCY_UNIT);$("#INDEX1").html(res.INDEX1);$("#INDEX1_UNIT").html(res.INDEX1_UNIT);$("#INDEX2").html(res.INDEX2);$("#INDEX2_UNIT").html(res.INDEX2_UNIT);$("#CREATETIME").html(res.CREATETIME);$("#CREATEPERSON").html(res.CREATEPERSON);$("#UPDATETIME").html(res.UPDATETIME);$("#UPDATEPERSON").html(res.UPDATEPERSON);
+            }
+        })
+    });
+</script>
+

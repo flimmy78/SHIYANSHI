@@ -1,0 +1,94 @@
+﻿@model Langben.DAL.SCHEME
+
+@{
+    Layout = "~/Views/Shared/Details.cshtml";
+}
+@using Common
+ @section CurentPlace {
+    详细  
+}
+ 
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="button" onclick="window.location.href = 'javascript:history.go(-1)';" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                  
+                <div class="display-label">
+                      @Html.LabelFor(model => model.NAME) :
+                </div>
+                <div class="display-field" id='NAME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.REPORT_CATEGORY) :
+                </div>
+                <div class="display-field" id='REPORT_CATEGORY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CERTIFICATE_CATEGORY) :
+                </div>
+                <div class="display-field" id='CERTIFICATE_CATEGORY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.STATUS) :
+                </div>
+                <div class="display-field" id='STATUS'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ISPUBLISH) :
+                </div>
+                <div class="display-field" id='ISPUBLISH'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.COPYID) :
+                </div>
+                <div class="display-field" id='COPYID'>
+                </div>        
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID) :
+                </div>
+                <div class="display-field">
+                    @if (Model.UNDERTAKE_LABORATORY != null)
+                       {
+                    @Model.UNDERTAKE_LABORATORY.NAME
+                    } 
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATETIME) :
+                </div>
+                <div class="display-field" id='CREATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATEPERSON) :
+                </div>
+                <div class="display-field" id='CREATEPERSON'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATETIME) :
+                </div>
+                <div class="display-field" id='UPDATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATEPERSON) :
+                </div>
+                <div class="display-field" id='UPDATEPERSON'>
+                </div>
+        </div>
+    </fieldset>
+
+<script type="text/javascript">
+
+    $(function () {
+        // 获取内容并显示
+        var id = '@ViewBag.Id';
+        $.ajax({
+            url: "/api/SCHEMEApi/" + id,
+            type: "POST",
+            // async: false,
+            success: function (res) {
+		$("#NAME").html(res.NAME);$("#REPORT_CATEGORY").html(res.REPORT_CATEGORY);$("#CERTIFICATE_CATEGORY").html(res.CERTIFICATE_CATEGORY);$("#STATUS").html(res.STATUS);$("#ISPUBLISH").html(res.ISPUBLISH);$("#COPYID").html(res.COPYID);$("#CREATETIME").html(res.CREATETIME);$("#CREATEPERSON").html(res.CREATEPERSON);$("#UPDATETIME").html(res.UPDATETIME);$("#UPDATEPERSON").html(res.UPDATEPERSON);
+            }
+        })
+    });
+</script>
+

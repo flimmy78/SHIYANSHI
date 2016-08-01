@@ -1,0 +1,181 @@
+﻿@model Langben.DAL.TRANSMITTER_POWER_FACTOR
+
+@{
+    Layout = "~/Views/Shared/Create.cshtml";
+}
+@using Common
+@using Models
+ 
+@section CurentPlace {
+ 
+      创建  
+ 
+ }
+@using (Html.BeginForm("", "api/TRANSMITTER_POWER_FACTORApi/Post"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="创建" />
+            <input class="a2 f2" type="button" onclick="BackList('TRANSMITTER_POWER_FACTOR')" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                 
+            <div class="editor-label">
+                @Html.LabelFor(model => model.TEST_QUANTITY)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.TEST_QUANTITY)
+                @Html.ValidationMessageFor(model => model.TEST_QUANTITY)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.GRADE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.GRADE)
+                @Html.ValidationMessageFor(model => model.GRADE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.TEST_POINT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.TEST_POINT)
+                @Html.ValidationMessageFor(model => model.TEST_POINT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.TEST_POINT_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.TEST_POINT_UNIT)
+                @Html.ValidationMessageFor(model => model.TEST_POINT_UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.U)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.U)
+                @Html.ValidationMessageFor(model => model.U)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.U_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.U_UNIT)
+                @Html.ValidationMessageFor(model => model.U_UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.A)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.A)
+                @Html.ValidationMessageFor(model => model.A)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.A_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.A_UNIT)
+                @Html.ValidationMessageFor(model => model.A_UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.TWO_INPUT_STANDARD_VALUES)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.TWO_INPUT_STANDARD_VALUES)
+                @Html.ValidationMessageFor(model => model.TWO_INPUT_STANDARD_VALUES)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.TWO_INPUT_STANDARD_VALUES_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.TWO_INPUT_STANDARD_VALUES_UNIT)
+                @Html.ValidationMessageFor(model => model.TWO_INPUT_STANDARD_VALUES_UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.STANDARD_OUTPUT_VALUE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.STANDARD_OUTPUT_VALUE)
+                @Html.ValidationMessageFor(model => model.STANDARD_OUTPUT_VALUE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.STANDARD_OUTPUT_VALUE_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.STANDARD_OUTPUT_VALUE_UNIT)
+                @Html.ValidationMessageFor(model => model.STANDARD_OUTPUT_VALUE_UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ACTUAL_OUTPUT_VALUE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ACTUAL_OUTPUT_VALUE)
+                @Html.ValidationMessageFor(model => model.ACTUAL_OUTPUT_VALUE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ACTUAL_OUTPUT_VALUE_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ACTUAL_OUTPUT_VALUE_UNIT)
+                @Html.ValidationMessageFor(model => model.ACTUAL_OUTPUT_VALUE_UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.REFERENCE_ERROR)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.REFERENCE_ERROR)
+                @Html.ValidationMessageFor(model => model.REFERENCE_ERROR)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.REFERENCE_ERROR_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.REFERENCE_ERROR_UNIT)
+                @Html.ValidationMessageFor(model => model.REFERENCE_ERROR_UNIT)
+            </div>
+        <div class="editor-label">
+            <a class="anUnderLine" onclick="showModalOnly('TRANSMITTER_HEADID','../../TRANSMITTER_HEAD');">
+                @Html.LabelFor(model => model.TRANSMITTER_HEADID) 
+            </a>：
+        </div>
+        <div class="editor-field">
+            <div id="checkTRANSMITTER_HEADID">            
+            </div>
+            @Html.HiddenFor(model => model.TRANSMITTER_HEADID)
+        </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PREPARE_SCHEMEID)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.PREPARE_SCHEMEID)
+                @Html.ValidationMessageFor(model => model.PREPARE_SCHEMEID)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>
+        </div>
+    </fieldset>
+} 
+
+
+    
+    <script type="text/javascript">
+
+        $(function () {
+            
+        });
+              
+
+    </script>
+
+

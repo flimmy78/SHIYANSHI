@@ -1,0 +1,76 @@
+﻿@model Langben.DAL.ALLOWABLE_ERROR
+
+@{
+    Layout = "~/Views/Shared/Create.cshtml";
+}
+@using Common
+@using Models
+ 
+@section CurentPlace {
+ 
+      创建  
+ 
+ }
+@using (Html.BeginForm("", "api/ALLOWABLE_ERRORApi/Post"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="创建" />
+            <input class="a2 f2" type="button" onclick="BackList('ALLOWABLE_ERROR')" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                 
+            <div class="editor-label">
+                @Html.LabelFor(model => model.VALUE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.VALUE)
+                @Html.ValidationMessageFor(model => model.VALUE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UNIT)
+                @Html.ValidationMessageFor(model => model.UNIT)
+            </div>
+        <div class="editor-label">
+            <a class="anUnderLine" onclick="showModalOnly('METERING_STANDARD_DEVICEID','../../METERING_STANDARD_DEVICE');">
+                @Html.LabelFor(model => model.METERING_STANDARD_DEVICEID) 
+            </a>：
+        </div>
+        <div class="editor-field">
+            <div id="checkMETERING_STANDARD_DEVICEID">            
+            </div>
+            @Html.HiddenFor(model => model.METERING_STANDARD_DEVICEID)
+        </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>
+        </div>
+    </fieldset>
+} 
+
+
+    
+    <script type="text/javascript">
+
+        $(function () {
+            
+        });
+              
+
+    </script>
+
+

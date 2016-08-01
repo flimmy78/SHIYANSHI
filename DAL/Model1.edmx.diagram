@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b73df3eafea7429cb817a185619e7cc0" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.AC_VOLTAGE_CURRENT" Width="1.5" PointX="3" PointY="18.25" />
+        <EntityTypeShape EntityType="Model.ACTIVE_POWER" Width="1.5" PointX="3" PointY="49.25" />
+        <EntityTypeShape EntityType="Model.ALLOWABLE_ERROR" Width="1.5" PointX="10.25" PointY="14.125" />
+        <EntityTypeShape EntityType="Model.APPLIANCE_DETAIL_INFORMATION" Width="1.5" PointX="10.25" PointY="6.625" />
+        <EntityTypeShape EntityType="Model.APPLIANCE_LABORATORY" Width="1.5" PointX="12.5" PointY="22.5" />
+        <EntityTypeShape EntityType="Model.APPLIANCECOLLECTION" Width="1.5" PointX="12.5" PointY="7.375" />
+        <EntityTypeShape EntityType="Model.COMPANY" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.CROSS_COS" Width="1.5" PointX="22" PointY="12.25" />
+        <EntityTypeShape EntityType="Model.CROSS_FREQUENCY_POWER_FACTOR" Width="1.5" PointX="22" PointY="7.75" />
+        <EntityTypeShape EntityType="Model.CROSS_HEAD" Width="1.5" PointX="19.75" PointY="9.625" />
+        <EntityTypeShape EntityType="Model.CROSS_SIN" Width="1.5" PointX="22" PointY="17" />
+        <EntityTypeShape EntityType="Model.CROSS_VOLTAGE_CURRENT" Width="1.5" PointX="22" PointY="1.75" />
+        <EntityTypeShape EntityType="Model.DC_CURRENT_OUTPUT" Width="1.5" PointX="3" PointY="42.5" />
+        <EntityTypeShape EntityType="Model.DC_VOLTAGE_CURRENT_MEASURE" Width="1.5" PointX="3" PointY="30" />
+        <EntityTypeShape EntityType="Model.DC_VOLTAGE_CURRENT_MEASURE_CH" Width="1.5" PointX="3" PointY="23.25" />
+        <EntityTypeShape EntityType="Model.DC_VOLTAGE_MEASURE_NO_INDEX" Width="1.5" PointX="3" PointY="3.375" />
+        <EntityTypeShape EntityType="Model.DC_VOLTAGE_OUTPUT" Width="1.5" PointX="3" PointY="36.75" />
+        <EntityTypeShape EntityType="Model.ERROR_LIMIT" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.FILE_UPLOADER" Width="1.5" PointX="12.5" PointY="26.5" />
+        <EntityTypeShape EntityType="Model.FREQUENCY" Width="1.5" PointX="3" PointY="13.5" />
+        <EntityTypeShape EntityType="Model.METERING_STANDARD_DEVICE" Width="1.5" PointX="8" PointY="15.375" />
+        <EntityTypeShape EntityType="Model.METERING_STANDARD_DEVICE_CHECK" Width="1.5" PointX="10.25" PointY="33.25" />
+        <EntityTypeShape EntityType="Model.ORDER_TASK_INFORMATION" Width="1.5" PointX="8" PointY="7.125" />
+        <EntityTypeShape EntityType="Model.OVERALL_TABLE" Width="1.5" PointX="0.75" PointY="26.5" />
+        <EntityTypeShape EntityType="Model.PHASE" Width="1.5" PointX="3" PointY="8.375" />
+        <EntityTypeShape EntityType="Model.PREPARE_SCHEME" Width="1.5" PointX="10.25" PointY="18" />
+        <EntityTypeShape EntityType="Model.PRINTREPORT" Width="1.5" PointX="12.5" PointY="19.25" />
+        <EntityTypeShape EntityType="Model.QUALIFIED_UNQUALIFIED_TEST_ITE" Width="1.5" PointX="12.5" PointY="38.5" />
+        <EntityTypeShape EntityType="Model.REPORTCOLLECTION" Width="1.5" PointX="12.5" PointY="15.25" />
+        <EntityTypeShape EntityType="Model.RULE" Width="1.5" PointX="8" PointY="43.375" />
+        <EntityTypeShape EntityType="Model.SCHEME" Width="1.5" PointX="8" PointY="24.25" />
+        <EntityTypeShape EntityType="Model.SCHEME_RULE" Width="1.5" PointX="13.25" PointY="35" />
+        <EntityTypeShape EntityType="Model.TABLE_BODY_XY" Width="1.5" PointX="13.25" PointY="59.375" />
+        <EntityTypeShape EntityType="Model.TABLE_HEAD_XY" Width="1.5" PointX="13.25" PointY="55.625" />
+        <EntityTypeShape EntityType="Model.TEST_ITEM_FORMAT" Width="1.5" PointX="11" PointY="57.625" />
+        <EntityTypeShape EntityType="Model.THREE_PHASE_UNCERTAINTY" Width="1.5" PointX="10.25" PointY="44.75" />
+        <EntityTypeShape EntityType="Model.TRANSMITER_SIN" Width="1.5" PointX="17" PointY="13.25" />
+        <EntityTypeShape EntityType="Model.TRANSMITTER_COS" Width="1.5" PointX="17" PointY="7.375" />
+        <EntityTypeShape EntityType="Model.TRANSMITTER_FREQUENCY_PHASE" Width="1.5" PointX="17" PointY="2" />
+        <EntityTypeShape EntityType="Model.TRANSMITTER_HEAD" Width="1.5" PointX="14.75" PointY="10.875" />
+        <EntityTypeShape EntityType="Model.TRANSMITTER_POWER_FACTOR" Width="1.5" PointX="17" PointY="19" />
+        <EntityTypeShape EntityType="Model.TRANSMITTER_RANGE" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.UNCERTAINTY" Width="1.5" PointX="10.25" PointY="48.5" />
+        <EntityTypeShape EntityType="Model.UNCERTAINTY2_HZ" Width="1.5" PointX="10.25" PointY="52.625" />
+        <EntityTypeShape EntityType="Model.UNCERTAINTYPARAMETERMANAGEMENT" Width="1.5" PointX="10.25" PointY="37.75" />
+        <EntityTypeShape EntityType="Model.UNDERTAKE_LABORATORY" Width="1.5" PointX="5.75" PointY="26.5" />
+        <EntityTypeShape EntityType="Model.VBAOGAODAYIN" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.VJIANDINGRENWU" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.VQIJULINGQU1" Width="1.5" PointX="5.75" PointY="20.75" />
+        <EntityTypeShape EntityType="Model.VQIJULINGQU2" Width="1.5" PointX="19.75" PointY="21.75" />
+        <EntityTypeShape EntityType="Model.VRUKU" Width="1.5" PointX="21.75" PointY="21.75" />
+        <EntityTypeShape EntityType="Model.VSHENHE" Width="1.5" PointX="23.75" PointY="21.75" />
+        <EntityTypeShape EntityType="Model.VSHENPI" Width="1.5" PointX="24.75" PointY="0.75" />
+        <AssociationConnector Association="Model.FK_AC_VOLTA_REFERENCE_OVERALL_" />
+        <AssociationConnector Association="Model.FK_ACTIVE_P_REFERENCE_OVERALL_" />
+        <AssociationConnector Association="Model.FK_MAXIMUM__REFERENCE_METERIN2" />
+        <AssociationConnector Association="Model.FK_APPLIANC_REFERENCE_APPLIAN2" />
+        <AssociationConnector Association="Model.FK_APPLIANC_REFERENCE_APPLIANC" />
+        <AssociationConnector Association="Model.FK_APPLIANC_REFERENCE_ORDER_TA" />
+        <AssociationConnector Association="Model.FK_APPLIANC_REFERENCE_PREPARE_" />
+        <AssociationConnector Association="Model.FK_APPLIANC_REFERENCE_UNDERTAK" />
+        <AssociationConnector Association="Model.FK_COMPANY_REFERENCE_COMPANY" />
+        <AssociationConnector Association="Model.FK_CROSS_CO_REFERENCE_CROSS_HE" />
+        <AssociationConnector Association="Model.FK_CROSS_FR_REFERENCE_CROSS_HE" />
+        <AssociationConnector Association="Model.FK_CROSS_SI_REFERENCE_CROSS_HE" />
+        <AssociationConnector Association="Model.FK_CROSS_VO_REFERENCE_CROSS_HE" />
+        <AssociationConnector Association="Model.FK_DC_CURRE_REFERENCE_OVERALL_" />
+        <AssociationConnector Association="Model.FK_DC_VOLTA_REFERENCE_OVERALL3" />
+        <AssociationConnector Association="Model.FK_DC_VOLTA_REFERENCE_OVERALL_" />
+        <AssociationConnector Association="Model.FK_DC_VOLTA_REFERENCE_OVERALL4" />
+        <AssociationConnector Association="Model.FK_DC_VOLTA_REFERENCE_OVERALL2" />
+        <AssociationConnector Association="Model.FK_FILE_UPL_REFERENCE_PREPARE_" />
+        <AssociationConnector Association="Model.FK_FREQUENC_REFERENCE_OVERALL_" />
+        <AssociationConnector Association="Model.FK_METERING_REFERENCE_METERIN2" />
+        <AssociationConnector Association="Model.FK_METERING_REFERENCE_UNDERTAK" />
+        <AssociationConnector Association="Model.FK_PHASE_REFERENCE_OVERALL_" />
+        <AssociationConnector Association="Model.FK_PREPARE__REFERENCE_SCHEME" />
+        <AssociationConnector Association="Model.FK_PRINTREP_REFERENCE_PREPARE_" />
+        <AssociationConnector Association="Model.FK_QUALIFIED_UN" />
+        <AssociationConnector Association="Model.FK_REPORTCO_REFERENCE_PREPARE_" />
+        <AssociationConnector Association="Model.FK_ONE_PHAS_REFERENCE_RULE2" />
+        <AssociationConnector Association="Model.FK_RULE_REFERENCE_RULE" />
+        <AssociationConnector Association="Model.FK_RULE_REFERENCE_UNDERTAK" />
+        <AssociationConnector Association="Model.FK_SCHEME_R_REFERENCE_RULE" />
+        <AssociationConnector Association="Model.FK_THREE_PH_REFERENCE_RULE" />
+        <AssociationConnector Association="Model.FK_UNCERTAI_REFERENCE_RULE" />
+        <AssociationConnector Association="Model.FK_UNCERTAI_REFERENCE_RULE2" />
+        <AssociationConnector Association="Model.FK_SCHEME_R_REFERENCE_SCHEME" />
+        <AssociationConnector Association="Model.FK_SCHEME_REFERENCE_UNDERTAK" />
+        <AssociationConnector Association="Model.FK_SCHEME_R_REFERENCE_TEST_ITE" />
+        <AssociationConnector Association="Model.FK_TABLE_BO_REFERENCE_TEST_ITE" />
+        <AssociationConnector Association="Model.FK_TABLE_HE_REFERENCE_TEST_ITE" />
+        <AssociationConnector Association="Model.FK_TRANSMIT_REFERENCE_TRANSMIT" />
+        <AssociationConnector Association="Model.FK_TRANSMIT_REFERENCE_TRANSMI3" />
+        <AssociationConnector Association="Model.FK_TRANSMIT_REFERENCE_TRANSMI2" />
+        <AssociationConnector Association="Model.FK_TRANSMIT_REFERENCE_TRANSMI4" />
+        <AssociationConnector Association="Model.METERING_STANDARD_DEVICEPREPAR" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

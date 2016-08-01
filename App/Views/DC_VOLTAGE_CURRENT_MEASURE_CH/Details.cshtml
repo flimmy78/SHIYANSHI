@@ -1,0 +1,164 @@
+﻿@model Langben.DAL.DC_VOLTAGE_CURRENT_MEASURE_CH
+
+@{
+    Layout = "~/Views/Shared/Details.cshtml";
+}
+@using Common
+ @section CurentPlace {
+    详细  
+}
+ 
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="button" onclick="window.location.href = 'javascript:history.go(-1)';" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                  
+                <div class="display-label">
+                      @Html.LabelFor(model => model.RANGE) :
+                </div>
+                <div class="display-field" id='RANGE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.RANGE_UNIT) :
+                </div>
+                <div class="display-field" id='RANGE_UNIT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.STANDARD_VALUE) :
+                </div>
+                <div class="display-field" id='STANDARD_VALUE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.STANDARD_VALUE_UNIT) :
+                </div>
+                <div class="display-field" id='STANDARD_VALUE_UNIT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.DISPLAY_VALUE_POSITIVE) :
+                </div>
+                <div class="display-field" id='DISPLAY_VALUE_POSITIVE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.DISPLAY_VALUE_POSITIVE_UNIT) :
+                </div>
+                <div class="display-field" id='DISPLAY_VALUE_POSITIVE_UNIT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.DISPLAY_VALUE_NEGATIVE) :
+                </div>
+                <div class="display-field" id='DISPLAY_VALUE_NEGATIVE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.DISPLAY_VALUE_NEGATIVE_UNIT) :
+                </div>
+                <div class="display-field" id='DISPLAY_VALUE_NEGATIVE_UNIT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.RELATIVE_ERROR_POSITIVE) :
+                </div>
+                <div class="display-field" id='RELATIVE_ERROR_POSITIVE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.RELATIVE_ERROR_POSITIVE_UNIT) :
+                </div>
+                <div class="display-field" id='RELATIVE_ERROR_POSITIVE_UNIT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.RELATIVE_ERROR_NEGATIVE) :
+                </div>
+                <div class="display-field" id='RELATIVE_ERROR_NEGATIVE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.RELATIVE_ERROR_NEGATIVE_UNIT) :
+                </div>
+                <div class="display-field" id='RELATIVE_ERROR_NEGATIVE_UNIT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UNCERTAINTY_DEGREE) :
+                </div>
+                <div class="display-field" id='UNCERTAINTY_DEGREE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UNCERTAINTY_DEGREE_UNIT) :
+                </div>
+                <div class="display-field" id='UNCERTAINTY_DEGREE_UNIT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.INDEX1) :
+                </div>
+                <div class="display-field" id='INDEX1'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.INDEX2) :
+                </div>
+                <div class="display-field" id='INDEX2'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.INDEX2_UNIT) :
+                </div>
+                <div class="display-field" id='INDEX2_UNIT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.RESOLUTION) :
+                </div>
+                <div class="display-field" id='RESOLUTION'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.STATUS) :
+                </div>
+                <div class="display-field" id='STATUS'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.PREPARE_SCHEMEID) :
+                </div>
+                <div class="display-field" id='PREPARE_SCHEMEID'>
+                </div>        
+                <div class="display-label">
+                      @Html.LabelFor(model => model.OVERALL_TABLEID) :
+                </div>
+                <div class="display-field">
+                    @if (Model.OVERALL_TABLE != null)
+                       {
+                    @Model.OVERALL_TABLE.NAME
+                    } 
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATETIME) :
+                </div>
+                <div class="display-field" id='CREATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATEPERSON) :
+                </div>
+                <div class="display-field" id='CREATEPERSON'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATETIME) :
+                </div>
+                <div class="display-field" id='UPDATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATEPERSON) :
+                </div>
+                <div class="display-field" id='UPDATEPERSON'>
+                </div>
+        </div>
+    </fieldset>
+
+<script type="text/javascript">
+
+    $(function () {
+        // 获取内容并显示
+        var id = '@ViewBag.Id';
+        $.ajax({
+            url: "/api/DC_VOLTAGE_CURRENT_MEASURE_CHApi/" + id,
+            type: "POST",
+            // async: false,
+            success: function (res) {
+		$("#RANGE").html(res.RANGE);$("#RANGE_UNIT").html(res.RANGE_UNIT);$("#STANDARD_VALUE").html(res.STANDARD_VALUE);$("#STANDARD_VALUE_UNIT").html(res.STANDARD_VALUE_UNIT);$("#DISPLAY_VALUE_POSITIVE").html(res.DISPLAY_VALUE_POSITIVE);$("#DISPLAY_VALUE_POSITIVE_UNIT").html(res.DISPLAY_VALUE_POSITIVE_UNIT);$("#DISPLAY_VALUE_NEGATIVE").html(res.DISPLAY_VALUE_NEGATIVE);$("#DISPLAY_VALUE_NEGATIVE_UNIT").html(res.DISPLAY_VALUE_NEGATIVE_UNIT);$("#RELATIVE_ERROR_POSITIVE").html(res.RELATIVE_ERROR_POSITIVE);$("#RELATIVE_ERROR_POSITIVE_UNIT").html(res.RELATIVE_ERROR_POSITIVE_UNIT);$("#RELATIVE_ERROR_NEGATIVE").html(res.RELATIVE_ERROR_NEGATIVE);$("#RELATIVE_ERROR_NEGATIVE_UNIT").html(res.RELATIVE_ERROR_NEGATIVE_UNIT);$("#UNCERTAINTY_DEGREE").html(res.UNCERTAINTY_DEGREE);$("#UNCERTAINTY_DEGREE_UNIT").html(res.UNCERTAINTY_DEGREE_UNIT);$("#INDEX1").html(res.INDEX1);$("#INDEX2").html(res.INDEX2);$("#INDEX2_UNIT").html(res.INDEX2_UNIT);$("#RESOLUTION").html(res.RESOLUTION);$("#STATUS").html(res.STATUS);$("#PREPARE_SCHEMEID").html(res.PREPARE_SCHEMEID);$("#CREATETIME").html(res.CREATETIME);$("#CREATEPERSON").html(res.CREATEPERSON);$("#UPDATETIME").html(res.UPDATETIME);$("#UPDATEPERSON").html(res.UPDATEPERSON);
+            }
+        })
+    });
+</script>
+

@@ -1,0 +1,107 @@
+﻿@model Langben.DAL.RULE
+
+@{
+    Layout = "~/Views/Shared/Create.cshtml";
+}
+@using Common
+@using Models
+ 
+@section CurentPlace {
+ 
+      创建  
+ 
+ }
+@using (Html.BeginForm("", "api/RULEApi/Post"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="创建" />
+            <input class="a2 f2" type="button" onclick="BackList('RULE')" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                 
+            <div class="editor-label">
+                @Html.LabelFor(model => model.NAME)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.NAME)
+                @Html.ValidationMessageFor(model => model.NAME)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SCHEME_MENU)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.SCHEME_MENU)
+                @Html.ValidationMessageFor(model => model.SCHEME_MENU)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SORT) ：
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SORT, new {  onkeyup = "isInt(this)", @class="text-box single-line" })
+                @Html.ValidationMessageFor(model => model.SORT) 
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.IS_UNCERTAINTY)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.IS_UNCERTAINTY)
+                @Html.ValidationMessageFor(model => model.IS_UNCERTAINTY)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UNCERTAINTY_MENU)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UNCERTAINTY_MENU)
+                @Html.ValidationMessageFor(model => model.UNCERTAINTY_MENU)
+            </div>
+        <div class="editor-label">
+            <a class="anUnderLine" onclick="showModalOnly('UNDERTAKE_LABORATORYID','../../UNDERTAKE_LABORATORY');">
+                @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID) 
+            </a>：
+        </div>
+        <div class="editor-field">
+            <div id="checkUNDERTAKE_LABORATORYID">            
+            </div>
+            @Html.HiddenFor(model => model.UNDERTAKE_LABORATORYID)
+        </div>
+        <div class="editor-label">
+            <a class="anUnderLine" onclick="showModalOnly('PARENTID','../../RULE');">
+                @Html.LabelFor(model => model.PARENTID) 
+            </a>：
+        </div>
+        <div class="editor-field">
+            <div id="checkPARENTID">               
+            </div>
+            @Html.HiddenFor(model => model.PARENTID)
+        </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>
+        </div>
+    </fieldset>
+} 
+
+
+    
+    <script type="text/javascript">
+
+        $(function () {
+            
+        });
+              
+
+    </script>
+
+

@@ -1,0 +1,97 @@
+﻿@model Langben.DAL.TABLE_BODY_XY
+
+@{
+    Layout = "~/Views/Shared/Create.cshtml";
+}
+@using Common
+@using Models
+ 
+@section CurentPlace {
+ 
+      创建  
+ 
+ }
+@using (Html.BeginForm("", "api/TABLE_BODY_XYApi/Post"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="创建" />
+            <input class="a2 f2" type="button" onclick="BackList('TABLE_BODY_XY')" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                 
+            <div class="editor-label">
+                @Html.LabelFor(model => model.X) ：
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.X, new {  onkeyup = "isInt(this)", @class="text-box single-line" })
+                @Html.ValidationMessageFor(model => model.X) 
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Y) ：
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.Y, new {  onkeyup = "isInt(this)", @class="text-box single-line" })
+                @Html.ValidationMessageFor(model => model.Y) 
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CATEGORY)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CATEGORY)
+                @Html.ValidationMessageFor(model => model.CATEGORY)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DEFAULT_VALUE) ：
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.DEFAULT_VALUE, new {  onkeyup = "isInt(this)", @class="text-box single-line" })
+                @Html.ValidationMessageFor(model => model.DEFAULT_VALUE) 
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MERGE_Y) ：
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.MERGE_Y, new {  onkeyup = "isInt(this)", @class="text-box single-line" })
+                @Html.ValidationMessageFor(model => model.MERGE_Y) 
+            </div>
+        <div class="editor-label">
+            <a class="anUnderLine" onclick="showModalOnly('TEST_ITEM_FORMATID','../../TEST_ITEM_FORMAT');">
+                @Html.LabelFor(model => model.TEST_ITEM_FORMATID) 
+            </a>：
+        </div>
+        <div class="editor-field">
+            <div id="checkTEST_ITEM_FORMATID">            
+            </div>
+            @Html.HiddenFor(model => model.TEST_ITEM_FORMATID)
+        </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>
+        </div>
+    </fieldset>
+} 
+
+
+    
+    <script type="text/javascript">
+
+        $(function () {
+            
+        });
+              
+
+    </script>
+
+

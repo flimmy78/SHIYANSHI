@@ -1,0 +1,102 @@
+﻿@model Langben.DAL.ALLOWABLE_ERROR
+
+@{
+    Layout = "~/Views/Shared/Edit.cshtml";
+}
+@using Common
+@using Models
+ @section CurentPlace {
+    修改  
+}
+
+@using (Html.BeginForm("", "api/ALLOWABLE_ERRORApi/Put"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="修改" />
+            <input class="a2 f2" type="button" onclick="BackList('ALLOWABLE_ERROR')" value="返回列表" />
+        </legend>
+        <div class="bigdiv">
+            @Html.HiddenFor(model => model.ID )      
+            <div class="editor-label">
+                @Html.LabelFor(model => model.VALUE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.VALUE)
+                @Html.ValidationMessageFor(model => model.VALUE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UNIT)
+                @Html.ValidationMessageFor(model => model.UNIT)
+            </div>      
+            <div class="editor-label">
+                <a class="anUnderLine" onclick="showModalOnly('METERING_STANDARD_DEVICEID','../../METERING_STANDARD_DEVICE');">
+                    @Html.LabelFor(model => model.METERING_STANDARD_DEVICEID) 
+                </a>：
+            </div>
+            <div class="editor-field">
+                <div id="checkMETERING_STANDARD_DEVICEID">
+                        @if(Model!=null)
+                        {
+                        if (null != Model.METERING_STANDARD_DEVICEID)                      
+                        { 
+                    <table id="@Model.METERING_STANDARD_DEVICEID"
+                        class="deleteStyle">
+                        <tr>
+                            <td>
+                                <img alt="删除"  title="点击删除" onclick="deleteTable('@Model.METERING_STANDARD_DEVICEID ','METERING_STANDARD_DEVICEID');" src="../../../Images/deleteimge.png" />
+                            </td>
+                            <td>
+                                @Model.METERING_STANDARD_DEVICE.NAME
+                            </td>
+                        </tr>
+                    </table>
+                    }} 
+                </div>
+                @Html.HiddenFor(model => model.METERING_STANDARD_DEVICEID)
+            </div>@Html.HiddenFor(model => model.CREATETIME )      
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>
+        </div>
+    </fieldset>
+}
+
+
+
+    <script type="text/javascript">
+
+        $(function () {
+            
+
+            // 获取待编辑内容并显示
+            var id = '@ViewBag.Id';
+            $.ajax({
+                url: "/api/ALLOWABLE_ERRORApi/" + id,
+                type: "POST",
+                // async: false,
+                success: function (res) {
+                    $("#ID").val(res.ID);$("#VALUE").val(res.VALUE);$("#UNIT").val(res.UNIT);$("#CREATETIME").val(res.CREATETIME);$("#CREATEPERSON").val(res.CREATEPERSON);$("#UPDATEPERSON").val(res.UPDATEPERSON);
+                }
+            })
+        });
+        
+
+    </script>
+
+
+

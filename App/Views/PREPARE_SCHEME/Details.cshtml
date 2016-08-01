@@ -1,0 +1,244 @@
+﻿@model Langben.DAL.PREPARE_SCHEME
+
+@{
+    Layout = "~/Views/Shared/Details.cshtml";
+}
+@using Common
+ @section CurentPlace {
+    详细  
+}
+ 
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="button" onclick="window.location.href = 'javascript:history.go(-1)';" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                  
+                <div class="display-label">
+                      @Html.LabelFor(model => model.REPORT_CATEGORY) :
+                </div>
+                <div class="display-field" id='REPORT_CATEGORY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CERTIFICATE_CATEGORY) :
+                </div>
+                <div class="display-field" id='CERTIFICATE_CATEGORY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CNAS) :
+                </div>
+                <div class="display-field" id='CNAS'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CONTROL_NUMBER) :
+                </div>
+                <div class="display-field" id='CONTROL_NUMBER'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CERTIFICATION_AUTHORITY) :
+                </div>
+                <div class="display-field" id='CERTIFICATION_AUTHORITY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.QUALIFICATIONS) :
+                </div>
+                <div class="display-field" id='QUALIFICATIONS'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.TEMPERATURE) :
+                </div>
+                <div class="display-field" id='TEMPERATURE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.HUMIDITY) :
+                </div>
+                <div class="display-field" id='HUMIDITY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CHECK_PLACE) :
+                </div>
+                <div class="display-field" id='CHECK_PLACE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CHECKERID) :
+                </div>
+                <div class="display-field" id='CHECKERID'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.DETECTERID) :
+                </div>
+                <div class="display-field" id='DETECTERID'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.APPROVALID) :
+                </div>
+                <div class="display-field" id='APPROVALID'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CALIBRATION_DATE) :
+                </div>
+                <div class="display-field" id='CALIBRATION_DATE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CONCLUSION) :
+                </div>
+                <div class="display-field" id='CONCLUSION'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CONCLUSION_EXPLAIN) :
+                </div>
+                <div class="display-field" id='CONCLUSION_EXPLAIN'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.VALIDITY_PERIOD) :
+                </div>
+                <div class="display-field" id='VALIDITY_PERIOD'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CALIBRATION_INSTRUCTIONS) :
+                </div>
+                <div class="display-field" id='CALIBRATION_INSTRUCTIONS'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ACCURACY_GRADE) :
+                </div>
+                <div class="display-field" id='ACCURACY_GRADE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.RATED_FREQUENCY) :
+                </div>
+                <div class="display-field" id='RATED_FREQUENCY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.PULSE_CONSTANT) :
+                </div>
+                <div class="display-field" id='PULSE_CONSTANT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.EXTERNAL_RESITANCE_VALUE) :
+                </div>
+                <div class="display-field" id='EXTERNAL_RESITANCE_VALUE'>
+                </div>        
+                <div class="display-label">
+                      @Html.LabelFor(model => model.SCHEMEID) :
+                </div>
+                <div class="display-field">
+                    @if (Model.SCHEME != null)
+                       {
+                    @Model.SCHEME.NAME
+                    } 
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATETIME) :
+                </div>
+                <div class="display-field" id='CREATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATEPERSON) :
+                </div>
+                <div class="display-field" id='CREATEPERSON'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATETIME) :
+                </div>
+                <div class="display-field" id='UPDATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATEPERSON) :
+                </div>
+                <div class="display-field" id='UPDATEPERSON'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.AUDITOPINION) :
+                </div>
+                <div class="display-field" id='AUDITOPINION'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.AUDITTIME) :
+                </div>
+                <div class="display-field" id='AUDITTIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.AUDITTEPERSON) :
+                </div>
+                <div class="display-field" id='AUDITTEPERSON'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ISAGGREY) :
+                </div>
+                <div class="display-field" id='ISAGGREY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.APPROVAL) :
+                </div>
+                <div class="display-field" id='APPROVAL'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.APPROVALDATE) :
+                </div>
+                <div class="display-field" id='APPROVALDATE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.APPROVALEPERSON) :
+                </div>
+                <div class="display-field" id='APPROVALEPERSON'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.APPROVALISAGGREY) :
+                </div>
+                <div class="display-field" id='APPROVALISAGGREY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.PRINTSTATUS) :
+                </div>
+                <div class="display-field" id='PRINTSTATUS'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ISBACK) :
+                </div>
+                <div class="display-field" id='ISBACK'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.REPORTNUMBER) :
+                </div>
+                <div class="display-field" id='REPORTNUMBER'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.REPORTSTATUS) :
+                </div>
+                <div class="display-field" id='REPORTSTATUS'>
+                </div>    
+                <div class="display-label">
+                      @Html.LabelFor(model => model.METERING_STANDARD_DEVICEID) :
+                </div>
+                <div class="display-field">            
+                    @{string ids40 = string.Empty;
+                       foreach (var item40 in Model.METERING_STANDARD_DEVICE)
+                       {
+                           ids40 += item40.NAME;
+                           ids40 += " , ";
+                                 
+                     } 
+                    
+                @ids40   
+                  }
+                </div>
+        </div>
+    </fieldset>
+
+<script type="text/javascript">
+
+    $(function () {
+        // 获取内容并显示
+        var id = '@ViewBag.Id';
+        $.ajax({
+            url: "/api/PREPARE_SCHEMEApi/" + id,
+            type: "POST",
+            // async: false,
+            success: function (res) {
+		$("#REPORT_CATEGORY").html(res.REPORT_CATEGORY);$("#CERTIFICATE_CATEGORY").html(res.CERTIFICATE_CATEGORY);$("#CNAS").html(res.CNAS);$("#CONTROL_NUMBER").html(res.CONTROL_NUMBER);$("#CERTIFICATION_AUTHORITY").html(res.CERTIFICATION_AUTHORITY);$("#QUALIFICATIONS").html(res.QUALIFICATIONS);$("#TEMPERATURE").html(res.TEMPERATURE);$("#HUMIDITY").html(res.HUMIDITY);$("#CHECK_PLACE").html(res.CHECK_PLACE);$("#CHECKERID").html(res.CHECKERID);$("#DETECTERID").html(res.DETECTERID);$("#APPROVALID").html(res.APPROVALID);$("#CALIBRATION_DATE").html(res.CALIBRATION_DATE);$("#CONCLUSION").html(res.CONCLUSION);$("#CONCLUSION_EXPLAIN").html(res.CONCLUSION_EXPLAIN);$("#VALIDITY_PERIOD").html(res.VALIDITY_PERIOD);$("#CALIBRATION_INSTRUCTIONS").html(res.CALIBRATION_INSTRUCTIONS);$("#ACCURACY_GRADE").html(res.ACCURACY_GRADE);$("#RATED_FREQUENCY").html(res.RATED_FREQUENCY);$("#PULSE_CONSTANT").html(res.PULSE_CONSTANT);$("#EXTERNAL_RESITANCE_VALUE").html(res.EXTERNAL_RESITANCE_VALUE);$("#CREATETIME").html(res.CREATETIME);$("#CREATEPERSON").html(res.CREATEPERSON);$("#UPDATETIME").html(res.UPDATETIME);$("#UPDATEPERSON").html(res.UPDATEPERSON);$("#AUDITOPINION").html(res.AUDITOPINION);$("#AUDITTIME").html(res.AUDITTIME);$("#AUDITTEPERSON").html(res.AUDITTEPERSON);$("#ISAGGREY").html(res.ISAGGREY);$("#APPROVAL").html(res.APPROVAL);$("#APPROVALDATE").html(res.APPROVALDATE);$("#APPROVALEPERSON").html(res.APPROVALEPERSON);$("#APPROVALISAGGREY").html(res.APPROVALISAGGREY);$("#PRINTSTATUS").html(res.PRINTSTATUS);$("#ISBACK").html(res.ISBACK);$("#REPORTNUMBER").html(res.REPORTNUMBER);$("#REPORTSTATUS").html(res.REPORTSTATUS);
+            }
+        })
+    });
+</script>
+

@@ -1,0 +1,135 @@
+﻿@model Langben.DAL.ORDER_TASK_INFORMATION
+
+@{
+    Layout = "~/Views/Shared/Details.cshtml";
+}
+@using Common
+ @section CurentPlace {
+    详细  
+}
+ 
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="button" onclick="window.location.href = 'javascript:history.go(-1)';" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                  
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ORDER_NUMBER) :
+                </div>
+                <div class="display-field" id='ORDER_NUMBER'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ACCEPT_ORGNIZATION) :
+                </div>
+                <div class="display-field" id='ACCEPT_ORGNIZATION'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.INSPECTION_ENTERPRISE) :
+                </div>
+                <div class="display-field" id='INSPECTION_ENTERPRISE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_ADDRESS) :
+                </div>
+                <div class="display-field" id='INSPECTION_ENTERPRISE_ADDRESS'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_POST) :
+                </div>
+                <div class="display-field" id='INSPECTION_ENTERPRISE_POST'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CONTACTS) :
+                </div>
+                <div class="display-field" id='CONTACTS'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CONTACT_PHONE) :
+                </div>
+                <div class="display-field" id='CONTACT_PHONE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.FAX) :
+                </div>
+                <div class="display-field" id='FAX'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE) :
+                </div>
+                <div class="display-field" id='CERTIFICATE_ENTERPRISE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS) :
+                </div>
+                <div class="display-field" id='CERTIFICATE_ENTERPRISE_ADDRESS'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_POST) :
+                </div>
+                <div class="display-field" id='CERTIFICATE_ENTERPRISE_POST'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CONTACTS2) :
+                </div>
+                <div class="display-field" id='CONTACTS2'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CONTACT_PHONE2) :
+                </div>
+                <div class="display-field" id='CONTACT_PHONE2'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.FAX2) :
+                </div>
+                <div class="display-field" id='FAX2'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS) :
+                </div>
+                <div class="display-field" id='CUSTOMER_SPECIFIC_REQUIREMENTS'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ORDER_STATUS) :
+                </div>
+                <div class="display-field" id='ORDER_STATUS'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATETIME) :
+                </div>
+                <div class="display-field" id='CREATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATEPERSON) :
+                </div>
+                <div class="display-field" id='CREATEPERSON'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATETIME) :
+                </div>
+                <div class="display-field" id='UPDATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATEPERSON) :
+                </div>
+                <div class="display-field" id='UPDATEPERSON'>
+                </div>
+        </div>
+    </fieldset>
+
+<script type="text/javascript">
+
+    $(function () {
+        // 获取内容并显示
+        var id = '@ViewBag.Id';
+        $.ajax({
+            url: "/api/ORDER_TASK_INFORMATIONApi/" + id,
+            type: "POST",
+            // async: false,
+            success: function (res) {
+		$("#ORDER_NUMBER").html(res.ORDER_NUMBER);$("#ACCEPT_ORGNIZATION").html(res.ACCEPT_ORGNIZATION);$("#INSPECTION_ENTERPRISE").html(res.INSPECTION_ENTERPRISE);$("#INSPECTION_ENTERPRISE_ADDRESS").html(res.INSPECTION_ENTERPRISE_ADDRESS);$("#INSPECTION_ENTERPRISE_POST").html(res.INSPECTION_ENTERPRISE_POST);$("#CONTACTS").html(res.CONTACTS);$("#CONTACT_PHONE").html(res.CONTACT_PHONE);$("#FAX").html(res.FAX);$("#CERTIFICATE_ENTERPRISE").html(res.CERTIFICATE_ENTERPRISE);$("#CERTIFICATE_ENTERPRISE_ADDRESS").html(res.CERTIFICATE_ENTERPRISE_ADDRESS);$("#CERTIFICATE_ENTERPRISE_POST").html(res.CERTIFICATE_ENTERPRISE_POST);$("#CONTACTS2").html(res.CONTACTS2);$("#CONTACT_PHONE2").html(res.CONTACT_PHONE2);$("#FAX2").html(res.FAX2);$("#CUSTOMER_SPECIFIC_REQUIREMENTS").html(res.CUSTOMER_SPECIFIC_REQUIREMENTS);$("#ORDER_STATUS").html(res.ORDER_STATUS);$("#CREATETIME").html(res.CREATETIME);$("#CREATEPERSON").html(res.CREATEPERSON);$("#UPDATETIME").html(res.UPDATETIME);$("#UPDATEPERSON").html(res.UPDATEPERSON);
+            }
+        })
+    });
+</script>
+

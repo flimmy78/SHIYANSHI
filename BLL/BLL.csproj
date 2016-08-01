@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{90AE47ED-B0D9-4B2A-A7AC-1C6D74B51DE6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Langben.BLL</RootNamespace>
+    <AssemblyName>BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>F:\demo\Solution\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Framework\DataOfDiffrent.cs" />
+    <Compile Include="Framework\ExceptionsHander.cs" />
+    <Compile Include="Framework\SysFieldHander.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ORDER_TASK_INFORMATIONBLL.cs" />
+    <Compile Include="APPLIANCE_DETAIL_INFORMATIONBLL.cs" />
+    <Compile Include="UNDERTAKE_LABORATORYBLL.cs" />
+    <Compile Include="APPLIANCE_LABORATORYBLL.cs" />
+    <Compile Include="RULEBLL.cs" />
+    <Compile Include="SCHEMEBLL.cs" />
+    <Compile Include="TEST_ITEM_FORMATBLL.cs" />
+    <Compile Include="SCHEME_RULEBLL.cs" />
+    <Compile Include="TABLE_BODY_XYBLL.cs" />
+    <Compile Include="TABLE_HEAD_XYBLL.cs" />
+    <Compile Include="METERING_STANDARD_DEVICEBLL.cs" />
+    <Compile Include="ALLOWABLE_ERRORBLL.cs" />
+    <Compile Include="METERING_STANDARD_DEVICE_CHECKBLL.cs" />
+    <Compile Include="THREE_PHASE_UNCERTAINTYBLL.cs" />
+    <Compile Include="UNCERTAINTYBLL.cs" />
+    <Compile Include="UNCERTAINTY2_HZBLL.cs" />
+    <Compile Include="ERROR_LIMITBLL.cs" />
+    <Compile Include="PREPARE_SCHEMEBLL.cs" />
+    <Compile Include="DC_VOLTAGE_OUTPUTBLL.cs" />
+    <Compile Include="FREQUENCYBLL.cs" />
+    <Compile Include="PHASEBLL.cs" />
+    <Compile Include="AC_VOLTAGE_CURRENTBLL.cs" />
+    <Compile Include="DC_VOLTAGE_CURRENT_MEASUREBLL.cs" />
+    <Compile Include="DC_VOLTAGE_MEASURE_NO_INDEXBLL.cs" />
+    <Compile Include="DC_VOLTAGE_CURRENT_MEASURE_CHBLL.cs" />
+    <Compile Include="ACTIVE_POWERBLL.cs" />
+    <Compile Include="DC_CURRENT_OUTPUTBLL.cs" />
+    <Compile Include="TRANSMITTER_RANGEBLL.cs" />
+    <Compile Include="TRANSMITTER_FREQUENCY_PHASEBLL.cs" />
+    <Compile Include="TRANSMITTER_COSBLL.cs" />
+    <Compile Include="TRANSMITTER_POWER_FACTORBLL.cs" />
+    <Compile Include="CROSS_HEADBLL.cs" />
+    <Compile Include="CROSS_VOLTAGE_CURRENTBLL.cs" />
+    <Compile Include="CROSS_COSBLL.cs" />
+    <Compile Include="CROSS_FREQUENCY_POWER_FACTORBLL.cs" />
+    <Compile Include="TRANSMITTER_HEADBLL.cs" />
+    <Compile Include="TRANSMITER_SINBLL.cs" />
+    <Compile Include="CROSS_SINBLL.cs" />
+    <Compile Include="OVERALL_TABLEBLL.cs" />
+    <Compile Include="QUALIFIED_UNQUALIFIED_TEST_ITEBLL.cs" />
+    <Compile Include="FILE_UPLOADERBLL.cs" />
+    <Compile Include="PRINTREPORTBLL.cs" />
+    <Compile Include="APPLIANCECOLLECTIONBLL.cs" />
+    <Compile Include="REPORTCOLLECTIONBLL.cs" />
+    <Compile Include="UNCERTAINTYPARAMETERMANAGEMENTBLL.cs" />
+    <Compile Include="COMPANYBLL.cs" />
+    <Compile Include="VJIANDINGRENWUBLL.cs" />
+    <Compile Include="VSHENHEBLL.cs" />
+    <Compile Include="VSHENPIBLL.cs" />
+    <Compile Include="VRUKUBLL.cs" />
+    <Compile Include="VBAOGAODAYINBLL.cs" />
+    <Compile Include="VQIJULINGQU2BLL.cs" />
+    <Compile Include="VQIJULINGQU1BLL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{ade2ca10-f91e-4312-ba9d-5d264291e549}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{e65234d6-46da-4301-94dc-a500a324028c}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IBLL\IBLL.csproj">
+      <Project>{9b7fca89-a8a4-4fa8-b67b-0bf0fe9c53cd}</Project>
+      <Name>IBLL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

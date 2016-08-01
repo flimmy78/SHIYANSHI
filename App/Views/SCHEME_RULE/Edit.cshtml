@@ -1,0 +1,126 @@
+﻿@model Langben.DAL.SCHEME_RULE
+
+@{
+    Layout = "~/Views/Shared/Edit.cshtml";
+}
+@using Common
+@using Models
+ @section CurentPlace {
+    修改  
+}
+
+@using (Html.BeginForm("", "api/SCHEME_RULEApi/Put"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="修改" />
+            <input class="a2 f2" type="button" onclick="BackList('SCHEME_RULE')" value="返回列表" />
+        </legend>
+        <div class="bigdiv">
+            @Html.HiddenFor(model => model.ID )       
+            <div class="editor-label">
+                <a class="anUnderLine" onclick="showModalOnly('RULEID','../../RULE');">
+                    @Html.LabelFor(model => model.RULEID) 
+                </a>：
+            </div>
+            <div class="editor-field">
+                <div id="checkRULEID">
+                        @if(Model!=null)
+                        {
+                        if (null != Model.RULEID)                      
+                        { 
+                    <table id="@Model.RULEID"
+                        class="deleteStyle">
+                        <tr>
+                            <td>
+                                <img alt="删除"  title="点击删除" onclick="deleteTable('@Model.RULEID ','RULEID');" src="../../../Images/deleteimge.png" />
+                            </td>
+                            <td>
+                                @Model.RULE.NAME
+                            </td>
+                        </tr>
+                    </table>
+                    }} 
+                </div>
+                @Html.HiddenFor(model => model.RULEID)
+            </div>      
+            <div class="editor-label">
+                <a class="anUnderLine" onclick="showModalOnly('SCHEMEID','../../SCHEME');">
+                    @Html.LabelFor(model => model.SCHEMEID) 
+                </a>：
+            </div>
+            <div class="editor-field">
+                <div id="checkSCHEMEID">
+                        @if(Model!=null)
+                        {
+                        if (null != Model.SCHEMEID)                      
+                        { 
+                    <table id="@Model.SCHEMEID"
+                        class="deleteStyle">
+                        <tr>
+                            <td>
+                                <img alt="删除"  title="点击删除" onclick="deleteTable('@Model.SCHEMEID ','SCHEMEID');" src="../../../Images/deleteimge.png" />
+                            </td>
+                            <td>
+                                @Model.SCHEME.NAME
+                            </td>
+                        </tr>
+                    </table>
+                    }} 
+                </div>
+                @Html.HiddenFor(model => model.SCHEMEID)
+            </div>      
+            <div class="editor-label">
+                <a class="anUnderLine" onclick="showModalOnly('TEST_ITEM_FORMATID','../../TEST_ITEM_FORMAT');">
+                    @Html.LabelFor(model => model.TEST_ITEM_FORMATID) 
+                </a>：
+            </div>
+            <div class="editor-field">
+                <div id="checkTEST_ITEM_FORMATID">
+                        @if(Model!=null)
+                        {
+                        if (null != Model.TEST_ITEM_FORMATID)                      
+                        { 
+                    <table id="@Model.TEST_ITEM_FORMATID"
+                        class="deleteStyle">
+                        <tr>
+                            <td>
+                                <img alt="删除"  title="点击删除" onclick="deleteTable('@Model.TEST_ITEM_FORMATID ','TEST_ITEM_FORMATID');" src="../../../Images/deleteimge.png" />
+                            </td>
+                            <td>
+                                @Model.TEST_ITEM_FORMAT.ROW_COUNT
+                            </td>
+                        </tr>
+                    </table>
+                    }} 
+                </div>
+                @Html.HiddenFor(model => model.TEST_ITEM_FORMATID)
+            </div>
+        </div>
+    </fieldset>
+}
+
+
+
+    <script type="text/javascript">
+
+        $(function () {
+            
+
+            // 获取待编辑内容并显示
+            var id = '@ViewBag.Id';
+            $.ajax({
+                url: "/api/SCHEME_RULEApi/" + id,
+                type: "POST",
+                // async: false,
+                success: function (res) {
+                    $("#ID").val(res.ID);
+                }
+            })
+        });
+        
+
+    </script>
+
+
+

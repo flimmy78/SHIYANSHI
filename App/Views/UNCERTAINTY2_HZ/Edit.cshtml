@@ -1,0 +1,158 @@
+﻿@model Langben.DAL.UNCERTAINTY2_HZ
+
+@{
+    Layout = "~/Views/Shared/Edit.cshtml";
+}
+@using Common
+@using Models
+ @section CurentPlace {
+    修改  
+}
+
+@using (Html.BeginForm("", "api/UNCERTAINTY2_HZApi/Put"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="修改" />
+            <input class="a2 f2" type="button" onclick="BackList('UNCERTAINTY2_HZ')" value="返回列表" />
+        </legend>
+        <div class="bigdiv">
+            @Html.HiddenFor(model => model.ID )      
+            <div class="editor-label">
+                @Html.LabelFor(model => model.RANGE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.RANGE)
+                @Html.ValidationMessageFor(model => model.RANGE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.RANGE_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.RANGE_UNIT)
+                @Html.ValidationMessageFor(model => model.RANGE_UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MIN_FREQUENCY)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.MIN_FREQUENCY)
+                @Html.ValidationMessageFor(model => model.MIN_FREQUENCY)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MIN_FREQUENCY_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.MIN_FREQUENCY_UNIT)
+                @Html.ValidationMessageFor(model => model.MIN_FREQUENCY_UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MAX_FREQUENCY)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.MAX_FREQUENCY)
+                @Html.ValidationMessageFor(model => model.MAX_FREQUENCY)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MAX_FREQUENCY_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.MAX_FREQUENCY_UNIT)
+                @Html.ValidationMessageFor(model => model.MAX_FREQUENCY_UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INDEX1)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INDEX1)
+                @Html.ValidationMessageFor(model => model.INDEX1)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INDEX1_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INDEX1_UNIT)
+                @Html.ValidationMessageFor(model => model.INDEX1_UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INDEX2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INDEX2)
+                @Html.ValidationMessageFor(model => model.INDEX2)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INDEX2_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INDEX2_UNIT)
+                @Html.ValidationMessageFor(model => model.INDEX2_UNIT)
+            </div>      
+            <div class="editor-label">
+                <a class="anUnderLine" onclick="showModalOnly('RULEID','../../RULE');">
+                    @Html.LabelFor(model => model.RULEID) 
+                </a>：
+            </div>
+            <div class="editor-field">
+                <div id="checkRULEID">
+                        @if(Model!=null)
+                        {
+                        if (null != Model.RULEID)                      
+                        { 
+                    <table id="@Model.RULEID"
+                        class="deleteStyle">
+                        <tr>
+                            <td>
+                                <img alt="删除"  title="点击删除" onclick="deleteTable('@Model.RULEID ','RULEID');" src="../../../Images/deleteimge.png" />
+                            </td>
+                            <td>
+                                @Model.RULE.NAME
+                            </td>
+                        </tr>
+                    </table>
+                    }} 
+                </div>
+                @Html.HiddenFor(model => model.RULEID)
+            </div>@Html.HiddenFor(model => model.CREATETIME )      
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>
+        </div>
+    </fieldset>
+}
+
+
+
+    <script type="text/javascript">
+
+        $(function () {
+            
+
+            // 获取待编辑内容并显示
+            var id = '@ViewBag.Id';
+            $.ajax({
+                url: "/api/UNCERTAINTY2_HZApi/" + id,
+                type: "POST",
+                // async: false,
+                success: function (res) {
+                    $("#ID").val(res.ID);$("#RANGE").val(res.RANGE);$("#RANGE_UNIT").val(res.RANGE_UNIT);$("#MIN_FREQUENCY").val(res.MIN_FREQUENCY);$("#MIN_FREQUENCY_UNIT").val(res.MIN_FREQUENCY_UNIT);$("#MAX_FREQUENCY").val(res.MAX_FREQUENCY);$("#MAX_FREQUENCY_UNIT").val(res.MAX_FREQUENCY_UNIT);$("#INDEX1").val(res.INDEX1);$("#INDEX1_UNIT").val(res.INDEX1_UNIT);$("#INDEX2").val(res.INDEX2);$("#INDEX2_UNIT").val(res.INDEX2_UNIT);$("#CREATETIME").val(res.CREATETIME);$("#CREATEPERSON").val(res.CREATEPERSON);$("#UPDATEPERSON").val(res.UPDATEPERSON);
+                }
+            })
+        });
+        
+
+    </script>
+
+
+

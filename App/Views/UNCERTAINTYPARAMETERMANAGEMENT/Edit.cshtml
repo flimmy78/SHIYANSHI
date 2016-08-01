@@ -1,0 +1,123 @@
+﻿@model Langben.DAL.UNCERTAINTYPARAMETERMANAGEMENT
+
+@{
+    Layout = "~/Views/Shared/Edit.cshtml";
+}
+@using Common
+@using Models
+ @section CurentPlace {
+    修改  
+}
+
+@using (Html.BeginForm("", "api/UNCERTAINTYPARAMETERMANAGEMENTApi/Put"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="修改" />
+            <input class="a2 f2" type="button" onclick="BackList('UNCERTAINTYPARAMETERMANAGEMENT')" value="返回列表" />
+        </legend>
+        <div class="bigdiv">
+            @Html.HiddenFor(model => model.ID )      
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SOURCEOFERROR)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.SOURCEOFERROR)
+                @Html.ValidationMessageFor(model => model.SOURCEOFERROR)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.LIMIT_VALUE) ：
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.LIMIT_VALUE, new {  onkeyup = "isInt(this)", @class="text-box single-line" })
+                @Html.ValidationMessageFor(model => model.LIMIT_VALUE) 
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ERRORDISTRIBUTION)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ERRORDISTRIBUTION)
+                @Html.ValidationMessageFor(model => model.ERRORDISTRIBUTION)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.k)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.k)
+                @Html.ValidationMessageFor(model => model.k)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UNCERTAINTYDEGREE) ：
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.UNCERTAINTYDEGREE, new {  onkeyup = "isInt(this)", @class="text-box single-line" })
+                @Html.ValidationMessageFor(model => model.UNCERTAINTYDEGREE) 
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>@Html.HiddenFor(model => model.CREATETIME )      
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>      
+            <div class="editor-label">
+                <a class="anUnderLine" onclick="showModalOnly('RULEID','../../RULE');">
+                    @Html.LabelFor(model => model.RULEID) 
+                </a>：
+            </div>
+            <div class="editor-field">
+                <div id="checkRULEID">
+                        @if(Model!=null)
+                        {
+                        if (null != Model.RULEID)                      
+                        { 
+                    <table id="@Model.RULEID"
+                        class="deleteStyle">
+                        <tr>
+                            <td>
+                                <img alt="删除"  title="点击删除" onclick="deleteTable('@Model.RULEID ','RULEID');" src="../../../Images/deleteimge.png" />
+                            </td>
+                            <td>
+                                @Model.RULE.NAME
+                            </td>
+                        </tr>
+                    </table>
+                    }} 
+                </div>
+                @Html.HiddenFor(model => model.RULEID)
+            </div>
+        </div>
+    </fieldset>
+}
+
+
+
+    <script type="text/javascript">
+
+        $(function () {
+            
+
+            // 获取待编辑内容并显示
+            var id = '@ViewBag.Id';
+            $.ajax({
+                url: "/api/UNCERTAINTYPARAMETERMANAGEMENTApi/" + id,
+                type: "POST",
+                // async: false,
+                success: function (res) {
+                    $("#ID").val(res.ID);$("#SOURCEOFERROR").val(res.SOURCEOFERROR);$("#LIMIT_VALUE").val(res.LIMIT_VALUE);$("#ERRORDISTRIBUTION").val(res.ERRORDISTRIBUTION);$("#k").val(res.k);$("#UNCERTAINTYDEGREE").val(res.UNCERTAINTYDEGREE);$("#UPDATEPERSON").val(res.UPDATEPERSON);$("#CREATETIME").val(res.CREATETIME);$("#CREATEPERSON").val(res.CREATEPERSON);
+                }
+            })
+        });
+        
+
+    </script>
+
+
+

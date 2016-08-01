@@ -1,0 +1,174 @@
+﻿@model Langben.DAL.ORDER_TASK_INFORMATION
+
+@{
+    Layout = "~/Views/Shared/Edit.cshtml";
+}
+@using Common
+@using Models
+ @section CurentPlace {
+    修改  
+}
+
+@using (Html.BeginForm("", "api/ORDER_TASK_INFORMATIONApi/Put"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="修改" />
+            <input class="a2 f2" type="button" onclick="BackList('ORDER_TASK_INFORMATION')" value="返回列表" />
+        </legend>
+        <div class="bigdiv">
+            @Html.HiddenFor(model => model.ID )      
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ORDER_NUMBER)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ORDER_NUMBER)
+                @Html.ValidationMessageFor(model => model.ORDER_NUMBER)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ACCEPT_ORGNIZATION)
+                @Html.ValidationMessageFor(model => model.ACCEPT_ORGNIZATION)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INSPECTION_ENTERPRISE)
+                @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+                @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_POST)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_POST)
+                @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_POST)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CONTACTS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACTS)
+                @Html.ValidationMessageFor(model => model.CONTACTS)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CONTACT_PHONE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACT_PHONE)
+                @Html.ValidationMessageFor(model => model.CONTACT_PHONE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FAX)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FAX)
+                @Html.ValidationMessageFor(model => model.FAX)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE)
+                @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
+                @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_POST)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_POST)
+                @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_POST)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CONTACTS2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACTS2)
+                @Html.ValidationMessageFor(model => model.CONTACTS2)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CONTACT_PHONE2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACT_PHONE2)
+                @Html.ValidationMessageFor(model => model.CONTACT_PHONE2)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FAX2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FAX2)
+                @Html.ValidationMessageFor(model => model.FAX2)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
+                @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ORDER_STATUS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ORDER_STATUS)
+                @Html.ValidationMessageFor(model => model.ORDER_STATUS)
+            </div>@Html.HiddenFor(model => model.CREATETIME )      
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>
+        </div>
+    </fieldset>
+}
+
+
+
+    <script type="text/javascript">
+
+        $(function () {
+            
+
+            // 获取待编辑内容并显示
+            var id = '@ViewBag.Id';
+            $.ajax({
+                url: "/api/ORDER_TASK_INFORMATIONApi/" + id,
+                type: "POST",
+                // async: false,
+                success: function (res) {
+                    $("#ID").val(res.ID);$("#ORDER_NUMBER").val(res.ORDER_NUMBER);$("#ACCEPT_ORGNIZATION").val(res.ACCEPT_ORGNIZATION);$("#INSPECTION_ENTERPRISE").val(res.INSPECTION_ENTERPRISE);$("#INSPECTION_ENTERPRISE_ADDRESS").val(res.INSPECTION_ENTERPRISE_ADDRESS);$("#INSPECTION_ENTERPRISE_POST").val(res.INSPECTION_ENTERPRISE_POST);$("#CONTACTS").val(res.CONTACTS);$("#CONTACT_PHONE").val(res.CONTACT_PHONE);$("#FAX").val(res.FAX);$("#CERTIFICATE_ENTERPRISE").val(res.CERTIFICATE_ENTERPRISE);$("#CERTIFICATE_ENTERPRISE_ADDRESS").val(res.CERTIFICATE_ENTERPRISE_ADDRESS);$("#CERTIFICATE_ENTERPRISE_POST").val(res.CERTIFICATE_ENTERPRISE_POST);$("#CONTACTS2").val(res.CONTACTS2);$("#CONTACT_PHONE2").val(res.CONTACT_PHONE2);$("#FAX2").val(res.FAX2);$("#CUSTOMER_SPECIFIC_REQUIREMENTS").val(res.CUSTOMER_SPECIFIC_REQUIREMENTS);$("#ORDER_STATUS").val(res.ORDER_STATUS);$("#CREATETIME").val(res.CREATETIME);$("#CREATEPERSON").val(res.CREATEPERSON);$("#UPDATEPERSON").val(res.UPDATEPERSON);
+                }
+            })
+        });
+        
+
+    </script>
+
+
+

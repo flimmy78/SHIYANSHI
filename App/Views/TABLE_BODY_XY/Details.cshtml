@@ -1,0 +1,89 @@
+﻿@model Langben.DAL.TABLE_BODY_XY
+
+@{
+    Layout = "~/Views/Shared/Details.cshtml";
+}
+@using Common
+ @section CurentPlace {
+    详细  
+}
+ 
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="button" onclick="window.location.href = 'javascript:history.go(-1)';" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                  
+                <div class="display-label">
+                      @Html.LabelFor(model => model.X) :
+                </div>
+                <div class="display-field" id='X'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.Y) :
+                </div>
+                <div class="display-field" id='Y'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CATEGORY) :
+                </div>
+                <div class="display-field" id='CATEGORY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.DEFAULT_VALUE) :
+                </div>
+                <div class="display-field" id='DEFAULT_VALUE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.MERGE_Y) :
+                </div>
+                <div class="display-field" id='MERGE_Y'>
+                </div>        
+                <div class="display-label">
+                      @Html.LabelFor(model => model.TEST_ITEM_FORMATID) :
+                </div>
+                <div class="display-field">
+                    @if (Model.TEST_ITEM_FORMAT != null)
+                       {
+                    @Model.TEST_ITEM_FORMAT.ROW_COUNT
+                    } 
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATETIME) :
+                </div>
+                <div class="display-field" id='CREATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATEPERSON) :
+                </div>
+                <div class="display-field" id='CREATEPERSON'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATETIME) :
+                </div>
+                <div class="display-field" id='UPDATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATEPERSON) :
+                </div>
+                <div class="display-field" id='UPDATEPERSON'>
+                </div>
+        </div>
+    </fieldset>
+
+<script type="text/javascript">
+
+    $(function () {
+        // 获取内容并显示
+        var id = '@ViewBag.Id';
+        $.ajax({
+            url: "/api/TABLE_BODY_XYApi/" + id,
+            type: "POST",
+            // async: false,
+            success: function (res) {
+		$("#X").html(res.X);$("#Y").html(res.Y);$("#CATEGORY").html(res.CATEGORY);$("#DEFAULT_VALUE").html(res.DEFAULT_VALUE);$("#MERGE_Y").html(res.MERGE_Y);$("#CREATETIME").html(res.CREATETIME);$("#CREATEPERSON").html(res.CREATEPERSON);$("#UPDATETIME").html(res.UPDATETIME);$("#UPDATEPERSON").html(res.UPDATEPERSON);
+            }
+        })
+    });
+</script>
+

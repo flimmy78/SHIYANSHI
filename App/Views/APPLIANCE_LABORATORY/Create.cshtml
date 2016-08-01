@@ -1,0 +1,68 @@
+﻿@model Langben.DAL.APPLIANCE_LABORATORY
+
+@{
+    Layout = "~/Views/Shared/Create.cshtml";
+}
+@using Common
+@using Models
+ 
+@section CurentPlace {
+ 
+      创建  
+ 
+ }
+@using (Html.BeginForm("", "api/APPLIANCE_LABORATORYApi/Post"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="创建" />
+            <input class="a2 f2" type="button" onclick="BackList('APPLIANCE_LABORATORY')" value="返回" />
+        </legend>
+        <div class="bigdiv">
+            
+        <div class="editor-label">
+            <a class="anUnderLine" onclick="showModalOnly('UNDERTAKE_LABORATORYID','../../UNDERTAKE_LABORATORY');">
+                @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID) 
+            </a>：
+        </div>
+        <div class="editor-field">
+            <div id="checkUNDERTAKE_LABORATORYID">            
+            </div>
+            @Html.HiddenFor(model => model.UNDERTAKE_LABORATORYID)
+        </div>
+        <div class="editor-label">
+            <a class="anUnderLine" onclick="showModalOnly('APPLIANCE_DETAIL_INFORMATIOID','../../APPLIANCE_DETAIL_INFORMATION');">
+                @Html.LabelFor(model => model.APPLIANCE_DETAIL_INFORMATIOID) 
+            </a>：
+        </div>
+        <div class="editor-field">
+            <div id="checkAPPLIANCE_DETAIL_INFORMATIOID">            
+            </div>
+            @Html.HiddenFor(model => model.APPLIANCE_DETAIL_INFORMATIOID)
+        </div>
+        <div class="editor-label">
+            <a class="anUnderLine" onclick="showModalOnly('PREPARE_SCHEMEID','../../PREPARE_SCHEME');">
+                @Html.LabelFor(model => model.PREPARE_SCHEMEID) 
+            </a>：
+        </div>
+        <div class="editor-field">
+            <div id="checkPREPARE_SCHEMEID">            
+            </div>
+            @Html.HiddenFor(model => model.PREPARE_SCHEMEID)
+        </div>
+        </div>
+    </fieldset>
+} 
+
+
+    
+    <script type="text/javascript">
+
+        $(function () {
+            
+        });
+              
+
+    </script>
+
+

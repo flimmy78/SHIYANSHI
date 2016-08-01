@@ -1,0 +1,129 @@
+﻿@model Langben.DAL.TRANSMITTER_HEAD
+
+@{
+    Layout = "~/Views/Shared/Create.cshtml";
+}
+@using Common
+@using Models
+ 
+@section CurentPlace {
+ 
+      创建  
+ 
+ }
+@using (Html.BeginForm("", "api/TRANSMITTER_HEADApi/Post"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="创建" />
+            <input class="a2 f2" type="button" onclick="BackList('TRANSMITTER_HEAD')" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                 
+            <div class="editor-label">
+                @Html.LabelFor(model => model.类型)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.类型)
+                @Html.ValidationMessageFor(model => model.类型)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.变送器输入开始)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.变送器输入开始)
+                @Html.ValidationMessageFor(model => model.变送器输入开始)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.变送器输入开始单位)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.变送器输入开始单位)
+                @Html.ValidationMessageFor(model => model.变送器输入开始单位)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.变送器输入结束)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.变送器输入结束)
+                @Html.ValidationMessageFor(model => model.变送器输入结束)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.变送器输入结束单位)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.变送器输入结束单位)
+                @Html.ValidationMessageFor(model => model.变送器输入结束单位)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.通道)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.通道)
+                @Html.ValidationMessageFor(model => model.通道)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Un)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Un)
+                @Html.ValidationMessageFor(model => model.Un)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Un单位)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Un单位)
+                @Html.ValidationMessageFor(model => model.Un单位)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.In)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.In)
+                @Html.ValidationMessageFor(model => model.In)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.In单位)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.In单位)
+                @Html.ValidationMessageFor(model => model.In单位)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PREPARE_SCHEMEID)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.PREPARE_SCHEMEID)
+                @Html.ValidationMessageFor(model => model.PREPARE_SCHEMEID)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>
+        </div>
+    </fieldset>
+} 
+
+
+    
+    <script type="text/javascript">
+
+        $(function () {
+            
+        });
+              
+
+    </script>
+
+

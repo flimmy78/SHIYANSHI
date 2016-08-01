@@ -1,0 +1,104 @@
+﻿@model Langben.DAL.METERING_STANDARD_DEVICE
+
+@{
+    Layout = "~/Views/Shared/Details.cshtml";
+}
+@using Common
+ @section CurentPlace {
+    详细  
+}
+ 
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="button" onclick="window.location.href = 'javascript:history.go(-1)';" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                  
+                <div class="display-label">
+                      @Html.LabelFor(model => model.NAME) :
+                </div>
+                <div class="display-field" id='NAME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.TEST_RANGE) :
+                </div>
+                <div class="display-field" id='TEST_RANGE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.FACTORY_NUM) :
+                </div>
+                <div class="display-field" id='FACTORY_NUM'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CATEGORY) :
+                </div>
+                <div class="display-field" id='CATEGORY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.STATUS) :
+                </div>
+                <div class="display-field" id='STATUS'>
+                </div>        
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID) :
+                </div>
+                <div class="display-field">
+                    @if (Model.UNDERTAKE_LABORATORY != null)
+                       {
+                    @Model.UNDERTAKE_LABORATORY.NAME
+                    } 
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATETIME) :
+                </div>
+                <div class="display-field" id='CREATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATEPERSON) :
+                </div>
+                <div class="display-field" id='CREATEPERSON'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATETIME) :
+                </div>
+                <div class="display-field" id='UPDATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATEPERSON) :
+                </div>
+                <div class="display-field" id='UPDATEPERSON'>
+                </div>    
+                <div class="display-label">
+                      @Html.LabelFor(model => model.PREPARE_SCHEMEID) :
+                </div>
+                <div class="display-field">            
+                    @{string ids12 = string.Empty;
+                       foreach (var item12 in Model.PREPARE_SCHEME)
+                       {
+                           ids12 += item12.REPORT_CATEGORY;
+                           ids12 += " , ";
+                                 
+                     } 
+                    
+                @ids12   
+                  }
+                </div>
+        </div>
+    </fieldset>
+
+<script type="text/javascript">
+
+    $(function () {
+        // 获取内容并显示
+        var id = '@ViewBag.Id';
+        $.ajax({
+            url: "/api/METERING_STANDARD_DEVICEApi/" + id,
+            type: "POST",
+            // async: false,
+            success: function (res) {
+		$("#NAME").html(res.NAME);$("#TEST_RANGE").html(res.TEST_RANGE);$("#FACTORY_NUM").html(res.FACTORY_NUM);$("#CATEGORY").html(res.CATEGORY);$("#STATUS").html(res.STATUS);$("#CREATETIME").html(res.CREATETIME);$("#CREATEPERSON").html(res.CREATEPERSON);$("#UPDATETIME").html(res.UPDATETIME);$("#UPDATEPERSON").html(res.UPDATEPERSON);
+            }
+        })
+    });
+</script>
+

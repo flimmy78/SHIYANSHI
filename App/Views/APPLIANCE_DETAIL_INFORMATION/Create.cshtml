@@ -1,0 +1,188 @@
+﻿@model Langben.DAL.APPLIANCE_DETAIL_INFORMATION
+
+@{
+    Layout = "~/Views/Shared/Create.cshtml";
+}
+@using Common
+@using Models
+ 
+@section CurentPlace {
+ 
+      创建  
+ 
+ }
+@using (Html.BeginForm("", "api/APPLIANCE_DETAIL_INFORMATIONApi/Post"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="创建" />
+            <input class="a2 f2" type="button" onclick="BackList('APPLIANCE_DETAIL_INFORMATION')" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                 
+            <div class="editor-label">
+                @Html.LabelFor(model => model.BAR_CODE_NUM)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.BAR_CODE_NUM)
+                @Html.ValidationMessageFor(model => model.BAR_CODE_NUM)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.APPLIANCE_NAME)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.APPLIANCE_NAME)
+                @Html.ValidationMessageFor(model => model.APPLIANCE_NAME)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MODEL)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.MODEL)
+                @Html.ValidationMessageFor(model => model.MODEL)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FORMAT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FORMAT)
+                @Html.ValidationMessageFor(model => model.FORMAT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FACTORY_NUM)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FACTORY_NUM)
+                @Html.ValidationMessageFor(model => model.FACTORY_NUM)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.NUM) ：
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.NUM, new {  onkeyup = "isInt(this)", @class="text-box single-line" })
+                @Html.ValidationMessageFor(model => model.NUM) 
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ATTACHMENT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ATTACHMENT)
+                @Html.ValidationMessageFor(model => model.ATTACHMENT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.APPEARANCE_STATUS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.APPEARANCE_STATUS)
+                @Html.ValidationMessageFor(model => model.APPEARANCE_STATUS)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MAKE_ORGANIZATION)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.MAKE_ORGANIZATION)
+                @Html.ValidationMessageFor(model => model.MAKE_ORGANIZATION)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.REMARKS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.REMARKS)
+                @Html.ValidationMessageFor(model => model.REMARKS)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.END_PLAN_DATE)：
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("END_PLAN_DATE", ((Model != null && Model.END_PLAN_DATE != null) ? Model.END_PLAN_DATE.ToString().AsDateTime().ToString("yyyy-MM-dd") : ""), new { style = "width: 244px;", @class="easyui-datebox" })
+                @Html.ValidationMessageFor(model => model.END_PLAN_DATE)
+            </div>
+        <div class="editor-label">
+            <a class="anUnderLine" onclick="showModalOnly('ORDER_TASK_INFORMATIONID','../../ORDER_TASK_INFORMATION');">
+                @Html.LabelFor(model => model.ORDER_TASK_INFORMATIONID) 
+            </a>：
+        </div>
+        <div class="editor-field">
+            <div id="checkORDER_TASK_INFORMATIONID">            
+            </div>
+            @Html.HiddenFor(model => model.ORDER_TASK_INFORMATIONID)
+        </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.APPLIANCE_RECIVE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.APPLIANCE_RECIVE)
+                @Html.ValidationMessageFor(model => model.APPLIANCE_RECIVE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.APPLIANCE_PROGRESS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.APPLIANCE_PROGRESS)
+                @Html.ValidationMessageFor(model => model.APPLIANCE_PROGRESS)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ORDER_STATUS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ORDER_STATUS)
+                @Html.ValidationMessageFor(model => model.ORDER_STATUS)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ISOVERDUE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ISOVERDUE)
+                @Html.ValidationMessageFor(model => model.ISOVERDUE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OVERDUE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.OVERDUE)
+                @Html.ValidationMessageFor(model => model.OVERDUE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.STORAGEINSTRUCTIONS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.STORAGEINSTRUCTIONS)
+                @Html.ValidationMessageFor(model => model.STORAGEINSTRUCTIONS)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.STORAGEINSTRUCTI_STATU)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.STORAGEINSTRUCTI_STATU)
+                @Html.ValidationMessageFor(model => model.STORAGEINSTRUCTI_STATU)
+            </div>
+        </div>
+    </fieldset>
+} 
+
+
+    
+    <script type="text/javascript">
+
+        $(function () {
+            
+        });
+              
+
+    </script>
+
+

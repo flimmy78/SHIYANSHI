@@ -1,0 +1,278 @@
+﻿
+@model Langben.DAL.PREPARE_SCHEME 
+@{ Layout = "~/Views/Shared/Index.cshtml"; }
+@using Common 
+@using Models
+<script src="~/Scripts/JScriptIndex.js"></script>
+<div id="divQuery">
+    
+    <div class='input_search' style="padding-top:10px;">
+        <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
+            查 询
+        </a>
+    </div>
+</div>
+ <br style="clear: both;" />
+
+<script type="text/javascript" language="javascript">
+        $(function () {
+
+            $('#flexigridData').datagrid({
+                title: '预备方案', //列表的标题
+                iconCls: 'icon-site',
+                width: 'auto',
+                height: 'auto',
+                //nowrap: false,
+                striped: true,
+                collapsible: true,
+                url: 'api/PREPARE_SCHEMEApi/PostData', //获取数据的url
+                sortName: 'ID',
+                sortOrder: 'desc',
+                idField: 'ID',
+
+                toolbar: [
+                 
+                     {
+                        text: '详细',
+                        iconCls: 'icon-search',
+                        handler: function () {
+                            return getView();
+                        }
+                    }, {
+                        text: '创建',
+                        iconCls: 'icon-add',
+                        handler: function () {
+                            return flexiCreate();
+                        }
+                    },  {
+                        text: '删除',
+                        iconCls: 'icon-remove',
+                        handler: function () {
+                            return flexiDelete();
+                        }
+                    }, {
+                        text: '修改',
+                        iconCls: 'icon-edit',
+                        handler: function () {
+                            return flexiModify();
+                        }
+                    }, {
+                        text: '导出',
+                        iconCls: 'icon-excel',
+                        handler: function () {
+                            return flexiExport();
+                        }
+                    } ],
+                columns: [[
+                   
+                    
+					{ field: 'REPORT_CATEGORY', title: '@Html.DisplayNameFor(model => model.REPORT_CATEGORY)', width: 21 }
+					,{ field: 'CERTIFICATE_CATEGORY', title:  '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 21 }
+					,{ field: 'CNAS', title:  '@Html.DisplayNameFor(model => model.CNAS)', width: 21 }
+					,{ field: 'CONTROL_NUMBER', title:  '@Html.DisplayNameFor(model => model.CONTROL_NUMBER)', width: 21 }
+					,{ field: 'CERTIFICATION_AUTHORITY', title:  '@Html.DisplayNameFor(model => model.CERTIFICATION_AUTHORITY)', width: 21 }
+					,{ field: 'QUALIFICATIONS', title:  '@Html.DisplayNameFor(model => model.QUALIFICATIONS)', width: 21 }
+					,{ field: 'TEMPERATURE', title:  '@Html.DisplayNameFor(model => model.TEMPERATURE)', width: 21 }
+					,{ field: 'HUMIDITY', title:  '@Html.DisplayNameFor(model => model.HUMIDITY)', width: 21 }
+					,{ field: 'CHECK_PLACE', title:  '@Html.DisplayNameFor(model => model.CHECK_PLACE)', width: 21 }
+					,{ field: 'CHECKERID', title:  '@Html.DisplayNameFor(model => model.CHECKERID)', width: 21 }
+					,{ field: 'DETECTERID', title:  '@Html.DisplayNameFor(model => model.DETECTERID)', width: 21 }
+					,{ field: 'APPROVALID', title:  '@Html.DisplayNameFor(model => model.APPROVALID)', width: 21 }
+					,{ field: 'CALIBRATION_DATE', title:  '@Html.DisplayNameFor(model => model.CALIBRATION_DATE)', width: 21
+                    , formatter: formatDatebox
+}
+					,{ field: 'CONCLUSION', title:  '@Html.DisplayNameFor(model => model.CONCLUSION)', width: 21 }
+					,{ field: 'CONCLUSION_EXPLAIN', title:  '@Html.DisplayNameFor(model => model.CONCLUSION_EXPLAIN)', width: 21 }
+					,{ field: 'VALIDITY_PERIOD', title:  '@Html.DisplayNameFor(model => model.VALIDITY_PERIOD)', width: 21
+                    , formatter: formatDatebox
+}
+					,{ field: 'CALIBRATION_INSTRUCTIONS', title:  '@Html.DisplayNameFor(model => model.CALIBRATION_INSTRUCTIONS)', width: 21 }
+					,{ field: 'ACCURACY_GRADE', title:  '@Html.DisplayNameFor(model => model.ACCURACY_GRADE)', width: 21 }
+					,{ field: 'RATED_FREQUENCY', title:  '@Html.DisplayNameFor(model => model.RATED_FREQUENCY)', width: 21 }
+					,{ field: 'PULSE_CONSTANT', title:  '@Html.DisplayNameFor(model => model.PULSE_CONSTANT)', width: 21 }
+					,{ field: 'EXTERNAL_RESITANCE_VALUE', title:  '@Html.DisplayNameFor(model => model.EXTERNAL_RESITANCE_VALUE)', width: 21 }
+					,{ field: 'SCHEMEID', title: '@Html.DisplayNameFor(model => model.SCHEMEIDOld)', width: 21 }
+					,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 21
+                    , formatter: formatDatebox
+}
+					,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 21 }
+					,{ field: 'UPDATETIME', title:  '@Html.DisplayNameFor(model => model.UPDATETIME)', width: 21
+                    , formatter: formatDatebox
+}
+					,{ field: 'UPDATEPERSON', title:  '@Html.DisplayNameFor(model => model.UPDATEPERSON)', width: 21 }
+					,{ field: 'AUDITOPINION', title:  '@Html.DisplayNameFor(model => model.AUDITOPINION)', width: 21 }
+					,{ field: 'AUDITTIME', title:  '@Html.DisplayNameFor(model => model.AUDITTIME)', width: 21
+                    , formatter: formatDatebox
+}
+					,{ field: 'AUDITTEPERSON', title:  '@Html.DisplayNameFor(model => model.AUDITTEPERSON)', width: 21 }
+					,{ field: 'ISAGGREY', title:  '@Html.DisplayNameFor(model => model.ISAGGREY)', width: 21 }
+					,{ field: 'APPROVAL', title:  '@Html.DisplayNameFor(model => model.APPROVAL)', width: 21 }
+					,{ field: 'APPROVALDATE', title:  '@Html.DisplayNameFor(model => model.APPROVALDATE)', width: 21
+                    , formatter: formatDatebox
+}
+					,{ field: 'APPROVALEPERSON', title:  '@Html.DisplayNameFor(model => model.APPROVALEPERSON)', width: 21 }
+					,{ field: 'APPROVALISAGGREY', title:  '@Html.DisplayNameFor(model => model.APPROVALISAGGREY)', width: 21 }
+					,{ field: 'PRINTSTATUS', title:  '@Html.DisplayNameFor(model => model.PRINTSTATUS)', width: 21 }
+					,{ field: 'ISBACK', title:  '@Html.DisplayNameFor(model => model.ISBACK)', width: 21 }
+					,{ field: 'REPORTNUMBER', title:  '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 21 }
+					,{ field: 'REPORTSTATUS', title:  '@Html.DisplayNameFor(model => model.REPORTSTATUS)', width: 21 }					//, { display: '@Html.DisplayNameFor(model => model.METERING_STANDARD_DEVICEID)', name: 'METERING_STANDARD_DEVICEID', width: 21, sortable: false, align: 'left' }
+
+                ]],
+                pagination: true,
+                rownumbers: true
+
+            });
+
+             var parent = window.dialogArguments; //获取父页面
+            if (parent == "undefined" || parent == null) {
+                //    不是在iframe中打开的
+            } else {
+                //隐藏所有的按钮和分隔符
+                $(".l-btn.l-btn-plain").hide();
+                $(".datagrid-btn-separator").hide();
+                //添加选择按钮
+                $('#flexigridData').datagrid("addToolbarItem", [{ "text": "选择", "iconCls": "icon-ok", handler: function () { flexiSelect(); } }]);
+            }
+        });
+
+        //“查询”按钮，弹出查询框
+        function flexiQuery() {
+
+            //将查询条件按照分隔符拼接成字符串
+            var search = "";
+            $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
+                if (this.id)
+                    search = search + this.id + "&" + this.value + "^";
+                else
+                    search = search + this.name + "&" + this.value + "^";
+            });
+            //执行查询
+            $('#flexigridData').datagrid('load', { search: search });
+        };
+        //“导出”按钮     在6.0版本中修改
+        function flexiExport() {
+
+            //将查询条件按照分隔符拼接成字符串
+            var search = "";
+            $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
+                search = search + this.id + "&" + this.value + "^";
+            });
+          
+            var p = $('#flexigridData').datagrid('options').columns[0];
+            var field = [];//所有的列名
+            var title = [];//所有的标题名称
+            $(p).each(function () {
+                field.push(this.field);
+                title.push(this.title);              
+            });
+           
+            $.post("api/PREPARE_SCHEMEApi/PostExport",
+                {
+                    title: title.join(","),
+                    field: field.join(","),
+                    sortName: $('#flexigridData').datagrid('options').sortName,
+                    sortOrder: $('#flexigridData').datagrid('options').sortOrder,
+                    search: search
+                }, function (res) {
+                    if (res.Code == 1) {
+                        window.location.href = res.Message;
+                    }
+                    else $.messager.alert('操作提示', res.Message, 'info');
+
+                });
+        };
+        //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
+        function flexiSelect() {
+
+            var rows = $('#flexigridData').datagrid('getSelections');
+            if (rows.length == 0) {
+                $.messager.alert('操作提示', '请选择数据!', 'warning');
+                return false;
+            }
+
+            var arr = [];
+            for (var i = 0; i < rows.length; i++) {
+                arr.push(rows[i].ID);
+            }
+            arr.push("^");
+            for (var i = 0; i < rows.length; i++) {
+                arr.push(rows[i].REPORT_CATEGORY);
+            }
+            //主键列和显示列之间用 ^ 分割   每一项用 , 分割
+            if (arr.length > 0) {//一条数据和多于一条
+                returnParent(arr.join("&")); //每一项用 & 分割
+            }
+        }
+        //导航到查看详细的按钮
+        function getView() {
+
+            var arr = $('#flexigridData').datagrid('getSelections');
+
+            if (arr.length == 1) {
+                window.location.href = "../PREPARE_SCHEME/Details/" + arr[0].ID;
+               
+            } else {
+                $.messager.alert('操作提示', '请选择一条数据!', 'warning');
+            }
+            return false;
+        }
+        //导航到创建的按钮
+        function flexiCreate() {
+
+            window.location.href = "../PREPARE_SCHEME/Create";
+            return false;
+        }
+        //导航到修改的按钮
+        function flexiModify() {
+
+            var arr = $('#flexigridData').datagrid('getSelections');
+
+            if (arr.length == 1) {
+                window.location.href = "../PREPARE_SCHEME/Edit/" + arr[0].ID;
+
+            } else {
+                $.messager.alert('操作提示', '请选择一条数据!', 'warning');
+            }
+            return false;
+
+        };
+        //删除的按钮
+        function flexiDelete() {
+
+            var rows = $('#flexigridData').datagrid('getSelections');
+            if (rows.length == 0) {
+                $.messager.alert('操作提示', '请选择数据!', 'warning');
+                return false;
+            }
+
+            var arr = [];
+            for (var i = 0; i < rows.length; i++) {
+                arr.push(rows[i].ID);
+            }
+
+            $.messager.confirm('操作提示', "确认删除这 " + arr.length + " 项吗？", function (r) {
+                if (r) {
+                    $.ajax({
+                        url: "api/PREPARE_SCHEMEApi/Delete?query=" + arr.join(","),
+                        type: "DELETE",
+                        success: function (res) {
+                            if (res.Code == 1) {
+                                //移除删除的数据
+
+                                $.messager.alert('操作提示', res.Message, 'info');
+                                $("#flexigridData").datagrid("reload");
+                                $("#flexigridData").datagrid("clearSelections");
+                            }
+                            else {
+                                $.messager.alert('操作提示', res.Message, 'info');
+                            }
+
+                        }
+                    })
+                }
+            });
+
+        };
+
+</script>
+

@@ -1,0 +1,130 @@
+﻿@model Langben.DAL.UNCERTAINTY
+
+@{
+    Layout = "~/Views/Shared/Edit.cshtml";
+}
+@using Common
+@using Models
+ @section CurentPlace {
+    修改  
+}
+
+@using (Html.BeginForm("", "api/UNCERTAINTYApi/Put"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="修改" />
+            <input class="a2 f2" type="button" onclick="BackList('UNCERTAINTY')" value="返回列表" />
+        </legend>
+        <div class="bigdiv">
+            @Html.HiddenFor(model => model.ID )      
+            <div class="editor-label">
+                @Html.LabelFor(model => model.RANGE) ：
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.RANGE, new {  onkeyup = "isInt(this)", @class="text-box single-line" })
+                @Html.ValidationMessageFor(model => model.RANGE) 
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.RANGE_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.RANGE_UNIT)
+                @Html.ValidationMessageFor(model => model.RANGE_UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.KPI_1) ：
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.KPI_1, new {  onkeyup = "isInt(this)", @class="text-box single-line" })
+                @Html.ValidationMessageFor(model => model.KPI_1) 
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.KPI_1_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.KPI_1_UNIT)
+                @Html.ValidationMessageFor(model => model.KPI_1_UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.KPI_2) ：
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.KPI_2, new {  onkeyup = "isInt(this)", @class="text-box single-line" })
+                @Html.ValidationMessageFor(model => model.KPI_2) 
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.KPI_2_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.KPI_2_UNIT)
+                @Html.ValidationMessageFor(model => model.KPI_2_UNIT)
+            </div>      
+            <div class="editor-label">
+                <a class="anUnderLine" onclick="showModalOnly('RULEID','../../RULE');">
+                    @Html.LabelFor(model => model.RULEID) 
+                </a>：
+            </div>
+            <div class="editor-field">
+                <div id="checkRULEID">
+                        @if(Model!=null)
+                        {
+                        if (null != Model.RULEID)                      
+                        { 
+                    <table id="@Model.RULEID"
+                        class="deleteStyle">
+                        <tr>
+                            <td>
+                                <img alt="删除"  title="点击删除" onclick="deleteTable('@Model.RULEID ','RULEID');" src="../../../Images/deleteimge.png" />
+                            </td>
+                            <td>
+                                @Model.RULE.NAME
+                            </td>
+                        </tr>
+                    </table>
+                    }} 
+                </div>
+                @Html.HiddenFor(model => model.RULEID)
+            </div>@Html.HiddenFor(model => model.CREATETIME )      
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>
+        </div>
+    </fieldset>
+}
+
+
+
+    <script type="text/javascript">
+
+        $(function () {
+            
+
+            // 获取待编辑内容并显示
+            var id = '@ViewBag.Id';
+            $.ajax({
+                url: "/api/UNCERTAINTYApi/" + id,
+                type: "POST",
+                // async: false,
+                success: function (res) {
+                    $("#ID").val(res.ID);$("#RANGE").val(res.RANGE);$("#RANGE_UNIT").val(res.RANGE_UNIT);$("#KPI_1").val(res.KPI_1);$("#KPI_1_UNIT").val(res.KPI_1_UNIT);$("#KPI_2").val(res.KPI_2);$("#KPI_2_UNIT").val(res.KPI_2_UNIT);$("#CREATETIME").val(res.CREATETIME);$("#CREATEPERSON").val(res.CREATEPERSON);$("#UPDATEPERSON").val(res.UPDATEPERSON);
+                }
+            })
+        });
+        
+
+    </script>
+
+
+

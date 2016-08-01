@@ -1,0 +1,139 @@
+﻿@model Langben.DAL.TRANSMITTER_HEAD
+
+@{
+    Layout = "~/Views/Shared/Edit.cshtml";
+}
+@using Common
+@using Models
+ @section CurentPlace {
+    修改  
+}
+
+@using (Html.BeginForm("", "api/TRANSMITTER_HEADApi/Put"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="修改" />
+            <input class="a2 f2" type="button" onclick="BackList('TRANSMITTER_HEAD')" value="返回列表" />
+        </legend>
+        <div class="bigdiv">
+            @Html.HiddenFor(model => model.ID )      
+            <div class="editor-label">
+                @Html.LabelFor(model => model.类型)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.类型)
+                @Html.ValidationMessageFor(model => model.类型)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.变送器输入开始)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.变送器输入开始)
+                @Html.ValidationMessageFor(model => model.变送器输入开始)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.变送器输入开始单位)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.变送器输入开始单位)
+                @Html.ValidationMessageFor(model => model.变送器输入开始单位)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.变送器输入结束)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.变送器输入结束)
+                @Html.ValidationMessageFor(model => model.变送器输入结束)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.变送器输入结束单位)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.变送器输入结束单位)
+                @Html.ValidationMessageFor(model => model.变送器输入结束单位)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.通道)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.通道)
+                @Html.ValidationMessageFor(model => model.通道)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Un)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Un)
+                @Html.ValidationMessageFor(model => model.Un)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Un单位)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Un单位)
+                @Html.ValidationMessageFor(model => model.Un单位)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.In)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.In)
+                @Html.ValidationMessageFor(model => model.In)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.In单位)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.In单位)
+                @Html.ValidationMessageFor(model => model.In单位)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PREPARE_SCHEMEID)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.PREPARE_SCHEMEID)
+                @Html.ValidationMessageFor(model => model.PREPARE_SCHEMEID)
+            </div>@Html.HiddenFor(model => model.CREATETIME )      
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>
+        </div>
+    </fieldset>
+}
+
+
+
+    <script type="text/javascript">
+
+        $(function () {
+            
+
+            // 获取待编辑内容并显示
+            var id = '@ViewBag.Id';
+            $.ajax({
+                url: "/api/TRANSMITTER_HEADApi/" + id,
+                type: "POST",
+                // async: false,
+                success: function (res) {
+                    $("#ID").val(res.ID);$("#类型").val(res.类型);$("#变送器输入开始").val(res.变送器输入开始);$("#变送器输入开始单位").val(res.变送器输入开始单位);$("#变送器输入结束").val(res.变送器输入结束);$("#变送器输入结束单位").val(res.变送器输入结束单位);$("#通道").val(res.通道);$("#Un").val(res.Un);$("#Un单位").val(res.Un单位);$("#In").val(res.In);$("#In单位").val(res.In单位);$("#PREPARE_SCHEMEID").val(res.PREPARE_SCHEMEID);$("#CREATETIME").val(res.CREATETIME);$("#CREATEPERSON").val(res.CREATEPERSON);$("#UPDATEPERSON").val(res.UPDATEPERSON);
+                }
+            })
+        });
+        
+
+    </script>
+
+
+

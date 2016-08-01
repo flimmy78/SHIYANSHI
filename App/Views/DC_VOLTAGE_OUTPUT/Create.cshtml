@@ -1,0 +1,167 @@
+﻿@model Langben.DAL.DC_VOLTAGE_OUTPUT
+
+@{
+    Layout = "~/Views/Shared/Create.cshtml";
+}
+@using Common
+@using Models
+ 
+@section CurentPlace {
+ 
+      创建  
+ 
+ }
+@using (Html.BeginForm("", "api/DC_VOLTAGE_OUTPUTApi/Post"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="创建" />
+            <input class="a2 f2" type="button" onclick="BackList('DC_VOLTAGE_OUTPUT')" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                 
+            <div class="editor-label">
+                @Html.LabelFor(model => model.RANGE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.RANGE)
+                @Html.ValidationMessageFor(model => model.RANGE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.RANGE_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.RANGE_UNIT)
+                @Html.ValidationMessageFor(model => model.RANGE_UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OUTPUT_VALUE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.OUTPUT_VALUE)
+                @Html.ValidationMessageFor(model => model.OUTPUT_VALUE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OUTPUT_VALUE_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.OUTPUT_VALUE_UNIT)
+                @Html.ValidationMessageFor(model => model.OUTPUT_VALUE_UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ACTUAL_OUTPUT_VALUE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ACTUAL_OUTPUT_VALUE)
+                @Html.ValidationMessageFor(model => model.ACTUAL_OUTPUT_VALUE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ACTUAL_OUTPUT_VALUE_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ACTUAL_OUTPUT_VALUE_UNIT)
+                @Html.ValidationMessageFor(model => model.ACTUAL_OUTPUT_VALUE_UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.RELATIVE_ERROR)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.RELATIVE_ERROR)
+                @Html.ValidationMessageFor(model => model.RELATIVE_ERROR)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.RELATIVE_ERROR_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.RELATIVE_ERROR_UNIT)
+                @Html.ValidationMessageFor(model => model.RELATIVE_ERROR_UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UNCERTAINTY_DEGREE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UNCERTAINTY_DEGREE)
+                @Html.ValidationMessageFor(model => model.UNCERTAINTY_DEGREE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UNCERTAINTY_DEGREE_UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UNCERTAINTY_DEGREE_UNIT)
+                @Html.ValidationMessageFor(model => model.UNCERTAINTY_DEGREE_UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INDEX1)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INDEX1)
+                @Html.ValidationMessageFor(model => model.INDEX1)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INDEX2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INDEX2)
+                @Html.ValidationMessageFor(model => model.INDEX2)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.RESOLUTION)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.RESOLUTION)
+                @Html.ValidationMessageFor(model => model.RESOLUTION)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.REFERENCE_RANGE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.REFERENCE_RANGE)
+                @Html.ValidationMessageFor(model => model.REFERENCE_RANGE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PREPARE_SCHEMEID)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.PREPARE_SCHEMEID)
+                @Html.ValidationMessageFor(model => model.PREPARE_SCHEMEID)
+            </div>
+        <div class="editor-label">
+            <a class="anUnderLine" onclick="showModalOnly('OVERALL_TABLEID','../../OVERALL_TABLE');">
+                @Html.LabelFor(model => model.OVERALL_TABLEID) 
+            </a>：
+        </div>
+        <div class="editor-field">
+            <div id="checkOVERALL_TABLEID">            
+            </div>
+            @Html.HiddenFor(model => model.OVERALL_TABLEID)
+        </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>
+        </div>
+    </fieldset>
+} 
+
+
+    
+    <script type="text/javascript">
+
+        $(function () {
+            
+        });
+              
+
+    </script>
+
+

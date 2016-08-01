@@ -1,0 +1,167 @@
+﻿@model Langben.DAL.FILE_UPLOADER
+
+@{
+    Layout = "~/Views/Shared/Create.cshtml";
+}
+@using Common
+@using Models
+ 
+@section CurentPlace {
+ 
+      创建  
+ 
+ }
+@using (Html.BeginForm("", "api/FILE_UPLOADERApi/Post"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="创建" />
+            <input class="a2 f2" type="button" onclick="BackList('FILE_UPLOADER')" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                 
+            <div class="editor-label">
+                @Html.LabelFor(model => model.NAME)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.NAME)
+                @Html.ValidationMessageFor(model => model.NAME)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PATH)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.PATH)
+                @Html.ValidationMessageFor(model => model.PATH)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FULLPATH)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FULLPATH)
+                @Html.ValidationMessageFor(model => model.FULLPATH)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SUFFIX)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.SUFFIX)
+                @Html.ValidationMessageFor(model => model.SUFFIX)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SIZE) ：
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SIZE, new {  onkeyup = "isInt(this)", @class="text-box single-line" })
+                @Html.ValidationMessageFor(model => model.SIZE) 
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.REMARK)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.REMARK)
+                @Html.ValidationMessageFor(model => model.REMARK)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.NAME2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.NAME2)
+                @Html.ValidationMessageFor(model => model.NAME2)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PATH2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.PATH2)
+                @Html.ValidationMessageFor(model => model.PATH2)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FULLPATH2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FULLPATH2)
+                @Html.ValidationMessageFor(model => model.FULLPATH2)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SUFFIX2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.SUFFIX2)
+                @Html.ValidationMessageFor(model => model.SUFFIX2)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SIZE2) ：
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.SIZE2, new {  onkeyup = "isInt(this)", @class="text-box single-line" })
+                @Html.ValidationMessageFor(model => model.SIZE2) 
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.REMARK2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.REMARK2)
+                @Html.ValidationMessageFor(model => model.REMARK2)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.STATE2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.STATE2)
+                @Html.ValidationMessageFor(model => model.STATE2)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.STATE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.STATE)
+                @Html.ValidationMessageFor(model => model.STATE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CONCLUSION)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONCLUSION)
+                @Html.ValidationMessageFor(model => model.CONCLUSION)
+            </div>
+        <div class="editor-label">
+            <a class="anUnderLine" onclick="showModalOnly('PREPARE_SCHEMEID','../../PREPARE_SCHEME');">
+                @Html.LabelFor(model => model.PREPARE_SCHEMEID) 
+            </a>：
+        </div>
+        <div class="editor-field">
+            <div id="checkPREPARE_SCHEMEID">            
+            </div>
+            @Html.HiddenFor(model => model.PREPARE_SCHEMEID)
+        </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>
+        </div>
+    </fieldset>
+} 
+
+
+    
+    <script type="text/javascript">
+
+        $(function () {
+            
+        });
+              
+
+    </script>
+
+

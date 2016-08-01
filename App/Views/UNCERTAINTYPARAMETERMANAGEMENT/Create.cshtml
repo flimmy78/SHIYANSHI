@@ -1,0 +1,97 @@
+﻿@model Langben.DAL.UNCERTAINTYPARAMETERMANAGEMENT
+
+@{
+    Layout = "~/Views/Shared/Create.cshtml";
+}
+@using Common
+@using Models
+ 
+@section CurentPlace {
+ 
+      创建  
+ 
+ }
+@using (Html.BeginForm("", "api/UNCERTAINTYPARAMETERMANAGEMENTApi/Post"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="创建" />
+            <input class="a2 f2" type="button" onclick="BackList('UNCERTAINTYPARAMETERMANAGEMENT')" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                 
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SOURCEOFERROR)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.SOURCEOFERROR)
+                @Html.ValidationMessageFor(model => model.SOURCEOFERROR)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.LIMIT_VALUE) ：
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.LIMIT_VALUE, new {  onkeyup = "isInt(this)", @class="text-box single-line" })
+                @Html.ValidationMessageFor(model => model.LIMIT_VALUE) 
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ERRORDISTRIBUTION)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ERRORDISTRIBUTION)
+                @Html.ValidationMessageFor(model => model.ERRORDISTRIBUTION)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.k)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.k)
+                @Html.ValidationMessageFor(model => model.k)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UNCERTAINTYDEGREE) ：
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.UNCERTAINTYDEGREE, new {  onkeyup = "isInt(this)", @class="text-box single-line" })
+                @Html.ValidationMessageFor(model => model.UNCERTAINTYDEGREE) 
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>
+        <div class="editor-label">
+            <a class="anUnderLine" onclick="showModalOnly('RULEID','../../RULE');">
+                @Html.LabelFor(model => model.RULEID) 
+            </a>：
+        </div>
+        <div class="editor-field">
+            <div id="checkRULEID">            
+            </div>
+            @Html.HiddenFor(model => model.RULEID)
+        </div>
+        </div>
+    </fieldset>
+} 
+
+
+    
+    <script type="text/javascript">
+
+        $(function () {
+            
+        });
+              
+
+    </script>
+
+

@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E65234D6-46DA-4301-94DC-A500A324028C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Langben.DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.1.2400\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.12.1.2400\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ACTIVE_POWER.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ACTIVE_POWERMeta.cs" />
+    <Compile Include="ACTIVE_POWERRepository.cs" />
+    <Compile Include="AC_VOLTAGE_CURRENT.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AC_VOLTAGE_CURRENTMeta.cs" />
+    <Compile Include="AC_VOLTAGE_CURRENTRepository.cs" />
+    <Compile Include="ALLOWABLE_ERROR.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ALLOWABLE_ERRORMeta.cs" />
+    <Compile Include="ALLOWABLE_ERRORRepository.cs" />
+    <Compile Include="APPLIANCECOLLECTION.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APPLIANCECOLLECTIONMeta.cs" />
+    <Compile Include="APPLIANCECOLLECTIONRepository.cs" />
+    <Compile Include="APPLIANCE_DETAIL_INFORMATION.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APPLIANCE_DETAIL_INFORMATIONMeta.cs" />
+    <Compile Include="APPLIANCE_DETAIL_INFORMATIONRepository.cs" />
+    <Compile Include="APPLIANCE_LABORATORY.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APPLIANCE_LABORATORYMeta.cs" />
+    <Compile Include="APPLIANCE_LABORATORYRepository.cs" />
+    <Compile Include="COMPANY.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COMPANYMeta.cs" />
+    <Compile Include="COMPANYRepository.cs" />
+    <Compile Include="CROSS_COS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CROSS_COSMeta.cs" />
+    <Compile Include="CROSS_COSRepository.cs" />
+    <Compile Include="CROSS_FREQUENCY_POWER_FACTOR.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CROSS_FREQUENCY_POWER_FACTORMeta.cs" />
+    <Compile Include="CROSS_FREQUENCY_POWER_FACTORRepository.cs" />
+    <Compile Include="CROSS_HEAD.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CROSS_HEADMeta.cs" />
+    <Compile Include="CROSS_HEADRepository.cs" />
+    <Compile Include="CROSS_SIN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CROSS_SINMeta.cs" />
+    <Compile Include="CROSS_SINRepository.cs" />
+    <Compile Include="CROSS_VOLTAGE_CURRENT.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CROSS_VOLTAGE_CURRENTMeta.cs" />
+    <Compile Include="CROSS_VOLTAGE_CURRENTRepository.cs" />
+    <Compile Include="DC_CURRENT_OUTPUT.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_CURRENT_OUTPUTMeta.cs" />
+    <Compile Include="DC_CURRENT_OUTPUTRepository.cs" />
+    <Compile Include="DC_VOLTAGE_CURRENT_MEASURE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_VOLTAGE_CURRENT_MEASUREMeta.cs" />
+    <Compile Include="DC_VOLTAGE_CURRENT_MEASURERepository.cs" />
+    <Compile Include="DC_VOLTAGE_CURRENT_MEASURE_CH.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_VOLTAGE_CURRENT_MEASURE_CHMeta.cs" />
+    <Compile Include="DC_VOLTAGE_CURRENT_MEASURE_CHRepository.cs" />
+    <Compile Include="DC_VOLTAGE_MEASURE_NO_INDEX.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_VOLTAGE_MEASURE_NO_INDEXMeta.cs" />
+    <Compile Include="DC_VOLTAGE_MEASURE_NO_INDEXRepository.cs" />
+    <Compile Include="DC_VOLTAGE_OUTPUT.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DC_VOLTAGE_OUTPUTMeta.cs" />
+    <Compile Include="DC_VOLTAGE_OUTPUTRepository.cs" />
+    <Compile Include="ERROR_LIMIT.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERROR_LIMITMeta.cs" />
+    <Compile Include="ERROR_LIMITRepository.cs" />
+    <Compile Include="FILE_UPLOADER.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FILE_UPLOADERMeta.cs" />
+    <Compile Include="FILE_UPLOADERRepository.cs" />
+    <Compile Include="Framework\BaseRepository.cs" />
+    <Compile Include="Framework\BaseViewRepository.cs" />
+    <Compile Include="Framework\IBaseEntity.cs" />
+    <Compile Include="FREQUENCY.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FREQUENCYMeta.cs" />
+    <Compile Include="FREQUENCYRepository.cs" />
+    <Compile Include="METERING_STANDARD_DEVICE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="METERING_STANDARD_DEVICEMeta.cs" />
+    <Compile Include="METERING_STANDARD_DEVICERepository.cs" />
+    <Compile Include="METERING_STANDARD_DEVICE_CHECK.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="METERING_STANDARD_DEVICE_CHECKMeta.cs" />
+    <Compile Include="METERING_STANDARD_DEVICE_CHECKRepository.cs" />
+    <Compile Include="Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ORDER_TASK_INFORMATION.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORDER_TASK_INFORMATIONMeta.cs" />
+    <Compile Include="ORDER_TASK_INFORMATIONRepository.cs" />
+    <Compile Include="OVERALL_TABLE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OVERALL_TABLEMeta.cs" />
+    <Compile Include="OVERALL_TABLERepository.cs" />
+    <Compile Include="PHASE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PHASEMeta.cs" />
+    <Compile Include="PHASERepository.cs" />
+    <Compile Include="PREPARE_SCHEME.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PREPARE_SCHEMEMeta.cs" />
+    <Compile Include="PREPARE_SCHEMERepository.cs" />
+    <Compile Include="PRINTREPORT.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PRINTREPORTMeta.cs" />
+    <Compile Include="PRINTREPORTRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QUALIFIED_UNQUALIFIED_TEST_ITE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QUALIFIED_UNQUALIFIED_TEST_ITEMeta.cs" />
+    <Compile Include="QUALIFIED_UNQUALIFIED_TEST_ITERepository.cs" />
+    <Compile Include="REPORTCOLLECTION.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="REPORTCOLLECTIONMeta.cs" />
+    <Compile Include="REPORTCOLLECTIONRepository.cs" />
+    <Compile Include="RULE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RULEMeta.cs" />
+    <Compile Include="RULERepository.cs" />
+    <Compile Include="SCHEME.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SCHEMEMeta.cs" />
+    <Compile Include="SCHEMERepository.cs" />
+    <Compile Include="SCHEME_RULE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SCHEME_RULEMeta.cs" />
+    <Compile Include="SCHEME_RULERepository.cs" />
+    <Compile Include="TABLE_BODY_XY.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TABLE_BODY_XYMeta.cs" />
+    <Compile Include="TABLE_BODY_XYRepository.cs" />
+    <Compile Include="TABLE_HEAD_XY.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TABLE_HEAD_XYMeta.cs" />
+    <Compile Include="TABLE_HEAD_XYRepository.cs" />
+    <Compile Include="TEST_ITEM_FORMAT.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TEST_ITEM_FORMATMeta.cs" />
+    <Compile Include="TEST_ITEM_FORMATRepository.cs" />
+    <Compile Include="THREE_PHASE_UNCERTAINTY.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="THREE_PHASE_UNCERTAINTYMeta.cs" />
+    <Compile Include="THREE_PHASE_UNCERTAINTYRepository.cs" />
+    <Compile Include="TRANSMITER_SIN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TRANSMITER_SINMeta.cs" />
+    <Compile Include="TRANSMITER_SINRepository.cs" />
+    <Compile Include="TRANSMITTER_COS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TRANSMITTER_COSMeta.cs" />
+    <Compile Include="TRANSMITTER_COSRepository.cs" />
+    <Compile Include="TRANSMITTER_FREQUENCY_PHASE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TRANSMITTER_FREQUENCY_PHASEMeta.cs" />
+    <Compile Include="TRANSMITTER_FREQUENCY_PHASERepository.cs" />
+    <Compile Include="TRANSMITTER_HEAD.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TRANSMITTER_HEADMeta.cs" />
+    <Compile Include="TRANSMITTER_HEADRepository.cs" />
+    <Compile Include="TRANSMITTER_POWER_FACTOR.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TRANSMITTER_POWER_FACTORMeta.cs" />
+    <Compile Include="TRANSMITTER_POWER_FACTORRepository.cs" />
+    <Compile Include="TRANSMITTER_RANGE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TRANSMITTER_RANGEMeta.cs" />
+    <Compile Include="TRANSMITTER_RANGERepository.cs" />
+    <Compile Include="UNCERTAINTY.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UNCERTAINTY2_HZ.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UNCERTAINTY2_HZMeta.cs" />
+    <Compile Include="UNCERTAINTY2_HZRepository.cs" />
+    <Compile Include="UNCERTAINTYMeta.cs" />
+    <Compile Include="UNCERTAINTYPARAMETERMANAGEMENT.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UNCERTAINTYPARAMETERMANAGEMENTMeta.cs" />
+    <Compile Include="UNCERTAINTYPARAMETERMANAGEMENTRepository.cs" />
+    <Compile Include="UNCERTAINTYRepository.cs" />
+    <Compile Include="UNDERTAKE_LABORATORY.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UNDERTAKE_LABORATORYMeta.cs" />
+    <Compile Include="UNDERTAKE_LABORATORYRepository.cs" />
+    <Compile Include="VBAOGAODAYIN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VBAOGAODAYINMeta.cs" />
+    <Compile Include="VBAOGAODAYINRepository.cs" />
+    <Compile Include="VJIANDINGRENWU.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VJIANDINGRENWUMeta.cs" />
+    <Compile Include="VJIANDINGRENWURepository.cs" />
+    <Compile Include="VQIJULINGQU1.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VQIJULINGQU1Meta.cs" />
+    <Compile Include="VQIJULINGQU1Repository.cs" />
+    <Compile Include="VQIJULINGQU2.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VQIJULINGQU2Meta.cs" />
+    <Compile Include="VQIJULINGQU2Repository.cs" />
+    <Compile Include="VRUKU.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VRUKUMeta.cs" />
+    <Compile Include="VRUKURepository.cs" />
+    <Compile Include="VSHENHE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSHENHEMeta.cs" />
+    <Compile Include="VSHENHERepository.cs" />
+    <Compile Include="VSHENPI.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSHENPIMeta.cs" />
+    <Compile Include="VSHENPIRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{ade2ca10-f91e-4312-ba9d-5d264291e549}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

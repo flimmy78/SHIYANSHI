@@ -1,0 +1,763 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{09A415DA-8901-40AB-8EE8-7AE86B72FA7C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Langben.App</RootNamespace>
+    <AssemblyName>App</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.0.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.0.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.0.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.0.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Codes\BaseApiController.cs" />
+    <Compile Include="Codes\BaseController.cs" />
+    <Compile Include="Codes\LogClassModels.cs" />
+    <Compile Include="Codes\SupportFilter.cs" />
+    <Compile Include="Codes\SysFieldModels.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HtmlHelper\CheckBoxListHelper.cs" />
+    <Compile Include="HtmlHelper\Easyui.cs" />
+    <Compile Include="HtmlHelper\RadioButtonListHelper.cs" />
+    <Compile Include="Models\EmptyClass.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Default.css" />
+    <Content Include="Content\StyleSheet.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\anquantuichu.gif" />
+    <Content Include="Images\bangzhu.gif" />
+    <Content Include="Images\beijing.gif" />
+    <Content Include="Images\buttonOn_login.gif" />
+    <Content Include="Images\deleteimge.png" />
+    <Content Include="Images\direction.gif" />
+    <Content Include="Images\duanxinxi.gif" />
+    <Content Include="Images\excelcss.jpg" />
+    <Content Include="Images\line_n2.gif" />
+    <Content Include="Images\login_bottom.gif" />
+    <Content Include="Images\login_midbg.gif" />
+    <Content Include="Images\login_pic.gif" />
+    <Content Include="Images\login_top.gif" />
+    <Content Include="Images\mimaxiugai.gif" />
+    <Content Include="Images\noscript.gif" />
+    <Content Include="Images\notfound.gif" />
+    <Content Include="Images\password_bg.gif" />
+    <Content Include="Images\tabicons.png" />
+    <Content Include="Images\top-back.gif" />
+    <Content Include="Images\username_bg.gif" />
+    <Content Include="Images\view.png" />
+    <Content Include="Images\yuanjiao.gif" />
+    <Content Include="Images\yuanjiao.png" />
+    <Content Include="Res\easyui\jquery.easyui.min.js" />
+    <Content Include="Res\easyui\locale\easyui-lang-zh_CN.js" />
+    <Content Include="Res\easyui\themes\default\accordion.css" />
+    <Content Include="Res\easyui\themes\default\calendar.css" />
+    <Content Include="Res\easyui\themes\default\combo.css" />
+    <Content Include="Res\easyui\themes\default\combobox.css" />
+    <Content Include="Res\easyui\themes\default\datagrid.css" />
+    <Content Include="Res\easyui\themes\default\datebox.css" />
+    <Content Include="Res\easyui\themes\default\dialog.css" />
+    <Content Include="Res\easyui\themes\default\easyui.css" />
+    <Content Include="Res\easyui\themes\default\images\accordion_arrows.png" />
+    <Content Include="Res\easyui\themes\default\images\blank.gif" />
+    <Content Include="Res\easyui\themes\default\images\calendar_arrows.png" />
+    <Content Include="Res\easyui\themes\default\images\combo_arrow.png" />
+    <Content Include="Res\easyui\themes\default\images\datagrid_icons.png" />
+    <Content Include="Res\easyui\themes\default\images\datebox_arrow.png" />
+    <Content Include="Res\easyui\themes\default\images\layout_arrows.png" />
+    <Content Include="Res\easyui\themes\default\images\linkbutton_bg.png" />
+    <Content Include="Res\easyui\themes\default\images\loading.gif" />
+    <Content Include="Res\easyui\themes\default\images\menu_arrows.png" />
+    <Content Include="Res\easyui\themes\default\images\messager_icons.png" />
+    <Content Include="Res\easyui\themes\default\images\pagination_icons.png" />
+    <Content Include="Res\easyui\themes\default\images\panel_tools.png" />
+    <Content Include="Res\easyui\themes\default\images\searchbox_button.png" />
+    <Content Include="Res\easyui\themes\default\images\slider_handle.png" />
+    <Content Include="Res\easyui\themes\default\images\spinner_arrows.png" />
+    <Content Include="Res\easyui\themes\default\images\tabs_icons.png" />
+    <Content Include="Res\easyui\themes\default\images\tree_icons.png" />
+    <Content Include="Res\easyui\themes\default\images\validatebox_warning.png" />
+    <Content Include="Res\easyui\themes\default\layout.css" />
+    <Content Include="Res\easyui\themes\default\linkbutton.css" />
+    <Content Include="Res\easyui\themes\default\menu.css" />
+    <Content Include="Res\easyui\themes\default\menubutton.css" />
+    <Content Include="Res\easyui\themes\default\messager.css" />
+    <Content Include="Res\easyui\themes\default\numberbox.css" />
+    <Content Include="Res\easyui\themes\default\pagination.css" />
+    <Content Include="Res\easyui\themes\default\panel.css" />
+    <Content Include="Res\easyui\themes\default\progressbar.css" />
+    <Content Include="Res\easyui\themes\default\propertygrid.css" />
+    <Content Include="Res\easyui\themes\default\searchbox.css" />
+    <Content Include="Res\easyui\themes\default\slider.css" />
+    <Content Include="Res\easyui\themes\default\spinner.css" />
+    <Content Include="Res\easyui\themes\default\splitbutton.css" />
+    <Content Include="Res\easyui\themes\default\tabs.css" />
+    <Content Include="Res\easyui\themes\default\textbox.css" />
+    <Content Include="Res\easyui\themes\default\tooltip.css" />
+    <Content Include="Res\easyui\themes\default\tree.css" />
+    <Content Include="Res\easyui\themes\default\validatebox.css" />
+    <Content Include="Res\easyui\themes\default\window.css" />
+    <Content Include="Res\easyui\themes\icon.css" />
+    <Content Include="Res\easyui\themes\icons\back.png" />
+    <Content Include="Res\easyui\themes\icons\blank.gif" />
+    <Content Include="Res\easyui\themes\icons\cancel.png" />
+    <Content Include="Res\easyui\themes\icons\cut.png" />
+    <Content Include="Res\easyui\themes\icons\edit_add.png" />
+    <Content Include="Res\easyui\themes\icons\edit_remove.png" />
+    <Content Include="Res\easyui\themes\icons\filesave.png" />
+    <Content Include="Res\easyui\themes\icons\filter.png" />
+    <Content Include="Res\easyui\themes\icons\help.png" />
+    <Content Include="Res\easyui\themes\icons\large_chart.png" />
+    <Content Include="Res\easyui\themes\icons\large_clipart.png" />
+    <Content Include="Res\easyui\themes\icons\large_picture.png" />
+    <Content Include="Res\easyui\themes\icons\large_shapes.png" />
+    <Content Include="Res\easyui\themes\icons\large_smartart.png" />
+    <Content Include="Res\easyui\themes\icons\mini_add.png" />
+    <Content Include="Res\easyui\themes\icons\mini_edit.png" />
+    <Content Include="Res\easyui\themes\icons\mini_refresh.png" />
+    <Content Include="Res\easyui\themes\icons\no.png" />
+    <Content Include="Res\easyui\themes\icons\ok.png" />
+    <Content Include="Res\easyui\themes\icons\pencil.png" />
+    <Content Include="Res\easyui\themes\icons\print.png" />
+    <Content Include="Res\easyui\themes\icons\redo.png" />
+    <Content Include="Res\easyui\themes\icons\reload.png" />
+    <Content Include="Res\easyui\themes\icons\search.png" />
+    <Content Include="Res\easyui\themes\icons\sum.png" />
+    <Content Include="Res\easyui\themes\icons\tip.png" />
+    <Content Include="Res\easyui\themes\icons\undo.png" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\cancel.png" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\expressInstall.swf" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\jquery-1.4.2.min.js" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\jquery.uploadify.v2.1.4.js" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\jquery.uploadify.v2.1.4.min.js" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\swfobject.js" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\uploadify.allglyphs.swf" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\uploadify.css" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\uploadify.swf" />
+    <Content Include="Res\My97DatePicker\calendar.js" />
+    <Content Include="Res\My97DatePicker\demo.htm" />
+    <Content Include="Res\My97DatePicker\lang\en.js" />
+    <Content Include="Res\My97DatePicker\lang\zh-cn.js" />
+    <Content Include="Res\My97DatePicker\lang\zh-tw.js" />
+    <Content Include="Res\My97DatePicker\skin\datePicker.gif" />
+    <Content Include="Res\My97DatePicker\skin\default\datepicker.css" />
+    <Content Include="Res\My97DatePicker\skin\default\img.gif" />
+    <Content Include="Res\My97DatePicker\skin\WdatePicker.css" />
+    <Content Include="Res\My97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="Res\My97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="Res\My97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="Res\My97DatePicker\WdatePicker.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\check.php" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\air\logging\FileTarget.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\crypto\HMAC.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\crypto\MD5.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\crypto\MD5Stream.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\crypto\SHA1.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\crypto\SHA224.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\crypto\SHA256.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\crypto\WSSEUsernameToken.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\errors\IllegalStateError.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\fileformats\vcard\Address.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\fileformats\vcard\Email.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\fileformats\vcard\Phone.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\fileformats\vcard\VCard.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\fileformats\vcard\VCardParser.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\images\BitString.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\images\JPGEncoder.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\images\PNGEncoder.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\net\DynamicURLLoader.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\net\IURIResolver.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\net\MimeTypeMap.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\net\proxies\RFC2817Socket.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\net\URI.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\net\URIEncodingBitmap.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\Database.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\Definition.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\Dict.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\DictionaryServer.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\events\ConnectedEvent.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\events\DatabaseEvent.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\events\DefinitionEvent.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\events\DefinitionHeaderEvent.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\events\DictionaryServerEvent.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\events\DisconnectedEvent.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\events\ErrorEvent.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\events\MatchEvent.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\events\MatchStrategiesEvent.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\events\NoMatchEvent.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\MatchStrategy.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\Response.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\util\CompleteResponseEvent.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\protocols\dict\util\SocketHelper.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\serialization\json\JSON.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\serialization\json\JSONDecoder.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\serialization\json\JSONEncoder.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\serialization\json\JSONParseError.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\serialization\json\JSONToken.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\serialization\json\JSONTokenizer.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\serialization\json\JSONTokenType.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\utils\ArrayUtil.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\utils\DateUtil.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\utils\DictionaryUtil.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\utils\IntUtil.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\utils\NumberFormatter.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\utils\StringUtil.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\utils\XMLUtil.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\webapis\events\ServiceEvent.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\webapis\ServiceBase.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\com\adobe\webapis\URLLoaderBase.as" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\FileUploader.ashx" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\FileUploaderExcle.ashx" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\uploadify.fla" />
+    <Content Include="Res\jquery.uploadify-v2.1.4\uploadify.php" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\jquery.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\JScriptCommon.js" />
+    <Content Include="Scripts\JScriptIndex.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="up\b.xls" />
+    <None Include="Views\Home\Index.cshtml" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\Create.cshtml" />
+    <Content Include="Views\Shared\Details.cshtml" />
+    <Content Include="Views\Shared\Edit.cshtml" />
+    <Content Include="Views\Shared\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{90ae47ed-b0d9-4b2a-a7ac-1c6d74b51de6}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{ade2ca10-f91e-4312-ba9d-5d264291e549}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{e65234d6-46da-4301-94dc-a500a324028c}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IBLL\IBLL.csproj">
+      <Project>{9b7fca89-a8a4-4fa8-b67b-0bf0fe9c53cd}</Project>
+      <Name>IBLL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ACTIVE_POWER\Create.cshtml" />
+    <Content Include="Views\ACTIVE_POWER\Details.cshtml" />
+    <Content Include="Views\ACTIVE_POWER\Edit.cshtml" />
+    <Content Include="Views\ACTIVE_POWER\Index.cshtml" />
+    <Content Include="Views\AC_VOLTAGE_CURRENT\Create.cshtml" />
+    <Content Include="Views\AC_VOLTAGE_CURRENT\Details.cshtml" />
+    <Content Include="Views\AC_VOLTAGE_CURRENT\Edit.cshtml" />
+    <Content Include="Views\AC_VOLTAGE_CURRENT\Index.cshtml" />
+    <Content Include="Views\ALLOWABLE_ERROR\Create.cshtml" />
+    <Content Include="Views\ALLOWABLE_ERROR\Details.cshtml" />
+    <Content Include="Views\ALLOWABLE_ERROR\Edit.cshtml" />
+    <Content Include="Views\ALLOWABLE_ERROR\Index.cshtml" />
+    <Content Include="Views\APPLIANCECOLLECTION\Create.cshtml" />
+    <Content Include="Views\APPLIANCECOLLECTION\Details.cshtml" />
+    <Content Include="Views\APPLIANCECOLLECTION\Edit.cshtml" />
+    <Content Include="Views\APPLIANCECOLLECTION\Index.cshtml" />
+    <Content Include="Views\APPLIANCE_DETAIL_INFORMATION\Create.cshtml" />
+    <Content Include="Views\APPLIANCE_DETAIL_INFORMATION\Details.cshtml" />
+    <Content Include="Views\APPLIANCE_DETAIL_INFORMATION\Edit.cshtml" />
+    <Content Include="Views\APPLIANCE_DETAIL_INFORMATION\Index.cshtml" />
+    <Content Include="Views\APPLIANCE_LABORATORY\Create.cshtml" />
+    <Content Include="Views\APPLIANCE_LABORATORY\Details.cshtml" />
+    <Content Include="Views\APPLIANCE_LABORATORY\Edit.cshtml" />
+    <Content Include="Views\APPLIANCE_LABORATORY\Index.cshtml" />
+    <Content Include="Views\COMPANY\Create.cshtml" />
+    <Content Include="Views\COMPANY\Details.cshtml" />
+    <Content Include="Views\COMPANY\Edit.cshtml" />
+    <Content Include="Views\COMPANY\Index.cshtml" />
+    <Content Include="Views\COMPANY\IndexSef.cshtml" />
+    <Content Include="Views\COMPANYTree\Index.cshtml" />
+    <Content Include="Views\CROSS_COS\Create.cshtml" />
+    <Content Include="Views\CROSS_COS\Details.cshtml" />
+    <Content Include="Views\CROSS_COS\Edit.cshtml" />
+    <Content Include="Views\CROSS_COS\Index.cshtml" />
+    <Content Include="Views\CROSS_FREQUENCY_POWER_FACTOR\Create.cshtml" />
+    <Content Include="Views\CROSS_FREQUENCY_POWER_FACTOR\Details.cshtml" />
+    <Content Include="Views\CROSS_FREQUENCY_POWER_FACTOR\Edit.cshtml" />
+    <Content Include="Views\CROSS_FREQUENCY_POWER_FACTOR\Index.cshtml" />
+    <Content Include="Views\CROSS_HEAD\Create.cshtml" />
+    <Content Include="Views\CROSS_HEAD\Details.cshtml" />
+    <Content Include="Views\CROSS_HEAD\Edit.cshtml" />
+    <Content Include="Views\CROSS_HEAD\Index.cshtml" />
+    <Content Include="Views\CROSS_SIN\Create.cshtml" />
+    <Content Include="Views\CROSS_SIN\Details.cshtml" />
+    <Content Include="Views\CROSS_SIN\Edit.cshtml" />
+    <Content Include="Views\CROSS_SIN\Index.cshtml" />
+    <Content Include="Views\CROSS_VOLTAGE_CURRENT\Create.cshtml" />
+    <Content Include="Views\CROSS_VOLTAGE_CURRENT\Details.cshtml" />
+    <Content Include="Views\CROSS_VOLTAGE_CURRENT\Edit.cshtml" />
+    <Content Include="Views\CROSS_VOLTAGE_CURRENT\Index.cshtml" />
+    <Content Include="Views\DC_CURRENT_OUTPUT\Create.cshtml" />
+    <Content Include="Views\DC_CURRENT_OUTPUT\Details.cshtml" />
+    <Content Include="Views\DC_CURRENT_OUTPUT\Edit.cshtml" />
+    <Content Include="Views\DC_CURRENT_OUTPUT\Index.cshtml" />
+    <Content Include="Views\DC_VOLTAGE_CURRENT_MEASURE\Create.cshtml" />
+    <Content Include="Views\DC_VOLTAGE_CURRENT_MEASURE\Details.cshtml" />
+    <Content Include="Views\DC_VOLTAGE_CURRENT_MEASURE\Edit.cshtml" />
+    <Content Include="Views\DC_VOLTAGE_CURRENT_MEASURE\Index.cshtml" />
+    <Content Include="Views\DC_VOLTAGE_CURRENT_MEASURE_CH\Create.cshtml" />
+    <Content Include="Views\DC_VOLTAGE_CURRENT_MEASURE_CH\Details.cshtml" />
+    <Content Include="Views\DC_VOLTAGE_CURRENT_MEASURE_CH\Edit.cshtml" />
+    <Content Include="Views\DC_VOLTAGE_CURRENT_MEASURE_CH\Index.cshtml" />
+    <Content Include="Views\DC_VOLTAGE_MEASURE_NO_INDEX\Create.cshtml" />
+    <Content Include="Views\DC_VOLTAGE_MEASURE_NO_INDEX\Details.cshtml" />
+    <Content Include="Views\DC_VOLTAGE_MEASURE_NO_INDEX\Edit.cshtml" />
+    <Content Include="Views\DC_VOLTAGE_MEASURE_NO_INDEX\Index.cshtml" />
+    <Content Include="Views\DC_VOLTAGE_OUTPUT\Create.cshtml" />
+    <Content Include="Views\DC_VOLTAGE_OUTPUT\Details.cshtml" />
+    <Content Include="Views\DC_VOLTAGE_OUTPUT\Edit.cshtml" />
+    <Content Include="Views\DC_VOLTAGE_OUTPUT\Index.cshtml" />
+    <Content Include="Views\ERROR_LIMIT\Create.cshtml" />
+    <Content Include="Views\ERROR_LIMIT\Details.cshtml" />
+    <Content Include="Views\ERROR_LIMIT\Edit.cshtml" />
+    <Content Include="Views\ERROR_LIMIT\Index.cshtml" />
+    <Content Include="Views\FILE_UPLOADER\Create.cshtml" />
+    <Content Include="Views\FILE_UPLOADER\Details.cshtml" />
+    <Content Include="Views\FILE_UPLOADER\Edit.cshtml" />
+    <Content Include="Views\FILE_UPLOADER\Index.cshtml" />
+    <Content Include="Views\FREQUENCY\Create.cshtml" />
+    <Content Include="Views\FREQUENCY\Details.cshtml" />
+    <Content Include="Views\FREQUENCY\Edit.cshtml" />
+    <Content Include="Views\FREQUENCY\Index.cshtml" />
+    <Content Include="Views\METERING_STANDARD_DEVICE\Create.cshtml" />
+    <Content Include="Views\METERING_STANDARD_DEVICE\Details.cshtml" />
+    <Content Include="Views\METERING_STANDARD_DEVICE\Edit.cshtml" />
+    <Content Include="Views\METERING_STANDARD_DEVICE\Index.cshtml" />
+    <Content Include="Views\METERING_STANDARD_DEVICE_CHECK\Create.cshtml" />
+    <Content Include="Views\METERING_STANDARD_DEVICE_CHECK\Details.cshtml" />
+    <Content Include="Views\METERING_STANDARD_DEVICE_CHECK\Edit.cshtml" />
+    <Content Include="Views\METERING_STANDARD_DEVICE_CHECK\Index.cshtml" />
+    <Content Include="Views\ORDER_TASK_INFORMATION\Create.cshtml" />
+    <Content Include="Views\ORDER_TASK_INFORMATION\Details.cshtml" />
+    <Content Include="Views\ORDER_TASK_INFORMATION\Edit.cshtml" />
+    <Content Include="Views\ORDER_TASK_INFORMATION\Index.cshtml" />
+    <Content Include="Views\OVERALL_TABLE\Create.cshtml" />
+    <Content Include="Views\OVERALL_TABLE\Details.cshtml" />
+    <Content Include="Views\OVERALL_TABLE\Edit.cshtml" />
+    <Content Include="Views\OVERALL_TABLE\Index.cshtml" />
+    <Content Include="Views\PHASE\Create.cshtml" />
+    <Content Include="Views\PHASE\Details.cshtml" />
+    <Content Include="Views\PHASE\Edit.cshtml" />
+    <Content Include="Views\PHASE\Index.cshtml" />
+    <Content Include="Views\PREPARE_SCHEME\Create.cshtml" />
+    <Content Include="Views\PREPARE_SCHEME\Details.cshtml" />
+    <Content Include="Views\PREPARE_SCHEME\Edit.cshtml" />
+    <Content Include="Views\PREPARE_SCHEME\Index.cshtml" />
+    <Content Include="Views\PRINTREPORT\Create.cshtml" />
+    <Content Include="Views\PRINTREPORT\Details.cshtml" />
+    <Content Include="Views\PRINTREPORT\Edit.cshtml" />
+    <Content Include="Views\PRINTREPORT\Index.cshtml" />
+    <Content Include="Views\QUALIFIED_UNQUALIFIED_TEST_ITE\Create.cshtml" />
+    <Content Include="Views\QUALIFIED_UNQUALIFIED_TEST_ITE\Details.cshtml" />
+    <Content Include="Views\QUALIFIED_UNQUALIFIED_TEST_ITE\Edit.cshtml" />
+    <Content Include="Views\QUALIFIED_UNQUALIFIED_TEST_ITE\Index.cshtml" />
+    <Content Include="Views\REPORTCOLLECTION\Create.cshtml" />
+    <Content Include="Views\REPORTCOLLECTION\Details.cshtml" />
+    <Content Include="Views\REPORTCOLLECTION\Edit.cshtml" />
+    <Content Include="Views\REPORTCOLLECTION\Index.cshtml" />
+    <Content Include="Views\RULE\Create.cshtml" />
+    <Content Include="Views\RULE\Details.cshtml" />
+    <Content Include="Views\RULE\Edit.cshtml" />
+    <Content Include="Views\RULE\Index.cshtml" />
+    <Content Include="Views\RULE\IndexSef.cshtml" />
+    <Content Include="Views\RULETree\Index.cshtml" />
+    <Content Include="Views\SCHEME\Create.cshtml" />
+    <Content Include="Views\SCHEME\Details.cshtml" />
+    <Content Include="Views\SCHEME\Edit.cshtml" />
+    <Content Include="Views\SCHEME\Index.cshtml" />
+    <Content Include="Views\SCHEME_RULE\Create.cshtml" />
+    <Content Include="Views\SCHEME_RULE\Details.cshtml" />
+    <Content Include="Views\SCHEME_RULE\Edit.cshtml" />
+    <Content Include="Views\SCHEME_RULE\Index.cshtml" />
+    <Content Include="Views\TABLE_BODY_XY\Create.cshtml" />
+    <Content Include="Views\TABLE_BODY_XY\Details.cshtml" />
+    <Content Include="Views\TABLE_BODY_XY\Edit.cshtml" />
+    <Content Include="Views\TABLE_BODY_XY\Index.cshtml" />
+    <Content Include="Views\TABLE_HEAD_XY\Create.cshtml" />
+    <Content Include="Views\TABLE_HEAD_XY\Details.cshtml" />
+    <Content Include="Views\TABLE_HEAD_XY\Edit.cshtml" />
+    <Content Include="Views\TABLE_HEAD_XY\Index.cshtml" />
+    <Content Include="Views\TEST_ITEM_FORMAT\Create.cshtml" />
+    <Content Include="Views\TEST_ITEM_FORMAT\Details.cshtml" />
+    <Content Include="Views\TEST_ITEM_FORMAT\Edit.cshtml" />
+    <Content Include="Views\TEST_ITEM_FORMAT\Index.cshtml" />
+    <Content Include="Views\THREE_PHASE_UNCERTAINTY\Create.cshtml" />
+    <Content Include="Views\THREE_PHASE_UNCERTAINTY\Details.cshtml" />
+    <Content Include="Views\THREE_PHASE_UNCERTAINTY\Edit.cshtml" />
+    <Content Include="Views\THREE_PHASE_UNCERTAINTY\Index.cshtml" />
+    <Content Include="Views\TRANSMITER_SIN\Create.cshtml" />
+    <Content Include="Views\TRANSMITER_SIN\Details.cshtml" />
+    <Content Include="Views\TRANSMITER_SIN\Edit.cshtml" />
+    <Content Include="Views\TRANSMITER_SIN\Index.cshtml" />
+    <Content Include="Views\TRANSMITTER_COS\Create.cshtml" />
+    <Content Include="Views\TRANSMITTER_COS\Details.cshtml" />
+    <Content Include="Views\TRANSMITTER_COS\Edit.cshtml" />
+    <Content Include="Views\TRANSMITTER_COS\Index.cshtml" />
+    <Content Include="Views\TRANSMITTER_FREQUENCY_PHASE\Create.cshtml" />
+    <Content Include="Views\TRANSMITTER_FREQUENCY_PHASE\Details.cshtml" />
+    <Content Include="Views\TRANSMITTER_FREQUENCY_PHASE\Edit.cshtml" />
+    <Content Include="Views\TRANSMITTER_FREQUENCY_PHASE\Index.cshtml" />
+    <Content Include="Views\TRANSMITTER_HEAD\Create.cshtml" />
+    <Content Include="Views\TRANSMITTER_HEAD\Details.cshtml" />
+    <Content Include="Views\TRANSMITTER_HEAD\Edit.cshtml" />
+    <Content Include="Views\TRANSMITTER_HEAD\Index.cshtml" />
+    <Content Include="Views\TRANSMITTER_POWER_FACTOR\Create.cshtml" />
+    <Content Include="Views\TRANSMITTER_POWER_FACTOR\Details.cshtml" />
+    <Content Include="Views\TRANSMITTER_POWER_FACTOR\Edit.cshtml" />
+    <Content Include="Views\TRANSMITTER_POWER_FACTOR\Index.cshtml" />
+    <Content Include="Views\TRANSMITTER_RANGE\Create.cshtml" />
+    <Content Include="Views\TRANSMITTER_RANGE\Details.cshtml" />
+    <Content Include="Views\TRANSMITTER_RANGE\Edit.cshtml" />
+    <Content Include="Views\TRANSMITTER_RANGE\Index.cshtml" />
+    <Content Include="Views\UNCERTAINTY\Create.cshtml" />
+    <Content Include="Views\UNCERTAINTY\Details.cshtml" />
+    <Content Include="Views\UNCERTAINTY\Edit.cshtml" />
+    <Content Include="Views\UNCERTAINTY\Index.cshtml" />
+    <Content Include="Views\UNCERTAINTY2_HZ\Create.cshtml" />
+    <Content Include="Views\UNCERTAINTY2_HZ\Details.cshtml" />
+    <Content Include="Views\UNCERTAINTY2_HZ\Edit.cshtml" />
+    <Content Include="Views\UNCERTAINTY2_HZ\Index.cshtml" />
+    <Content Include="Views\UNCERTAINTYPARAMETERMANAGEMENT\Create.cshtml" />
+    <Content Include="Views\UNCERTAINTYPARAMETERMANAGEMENT\Details.cshtml" />
+    <Content Include="Views\UNCERTAINTYPARAMETERMANAGEMENT\Edit.cshtml" />
+    <Content Include="Views\UNCERTAINTYPARAMETERMANAGEMENT\Index.cshtml" />
+    <Content Include="Views\UNDERTAKE_LABORATORY\Create.cshtml" />
+    <Content Include="Views\UNDERTAKE_LABORATORY\Details.cshtml" />
+    <Content Include="Views\UNDERTAKE_LABORATORY\Edit.cshtml" />
+    <Content Include="Views\UNDERTAKE_LABORATORY\Index.cshtml" />
+    <Content Include="Views\VBAOGAODAYIN\Index.cshtml" />
+    <Content Include="Views\VJIANDINGRENWU\Index.cshtml" />
+    <Content Include="Views\VQIJULINGQU1\Index.cshtml" />
+    <Content Include="Views\VQIJULINGQU2\Index.cshtml" />
+    <Content Include="Views\VRUKU\Index.cshtml" />
+    <Content Include="Views\VSHENHE\Index.cshtml" />
+    <Content Include="Views\VSHENPI\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\ACTIVE_POWERApiController.cs" />
+    <Compile Include="Controllers\ACTIVE_POWERController.cs" />
+    <Compile Include="Controllers\AC_VOLTAGE_CURRENTApiController.cs" />
+    <Compile Include="Controllers\AC_VOLTAGE_CURRENTController.cs" />
+    <Compile Include="Controllers\ALLOWABLE_ERRORApiController.cs" />
+    <Compile Include="Controllers\ALLOWABLE_ERRORController.cs" />
+    <Compile Include="Controllers\APPLIANCECOLLECTIONApiController.cs" />
+    <Compile Include="Controllers\APPLIANCECOLLECTIONController.cs" />
+    <Compile Include="Controllers\APPLIANCE_DETAIL_INFORMATIONApiController.cs" />
+    <Compile Include="Controllers\APPLIANCE_DETAIL_INFORMATIONController.cs" />
+    <Compile Include="Controllers\APPLIANCE_LABORATORYApiController.cs" />
+    <Compile Include="Controllers\APPLIANCE_LABORATORYController.cs" />
+    <Compile Include="Controllers\COMPANYApiController.cs" />
+    <Compile Include="Controllers\COMPANYController.cs" />
+    <Compile Include="Controllers\COMPANYTreeController.cs" />
+    <Compile Include="Controllers\CROSS_COSApiController.cs" />
+    <Compile Include="Controllers\CROSS_COSController.cs" />
+    <Compile Include="Controllers\CROSS_FREQUENCY_POWER_FACTORApiController.cs" />
+    <Compile Include="Controllers\CROSS_FREQUENCY_POWER_FACTORController.cs" />
+    <Compile Include="Controllers\CROSS_HEADApiController.cs" />
+    <Compile Include="Controllers\CROSS_HEADController.cs" />
+    <Compile Include="Controllers\CROSS_SINApiController.cs" />
+    <Compile Include="Controllers\CROSS_SINController.cs" />
+    <Compile Include="Controllers\CROSS_VOLTAGE_CURRENTApiController.cs" />
+    <Compile Include="Controllers\CROSS_VOLTAGE_CURRENTController.cs" />
+    <Compile Include="Controllers\DC_CURRENT_OUTPUTApiController.cs" />
+    <Compile Include="Controllers\DC_CURRENT_OUTPUTController.cs" />
+    <Compile Include="Controllers\DC_VOLTAGE_CURRENT_MEASUREApiController.cs" />
+    <Compile Include="Controllers\DC_VOLTAGE_CURRENT_MEASUREController.cs" />
+    <Compile Include="Controllers\DC_VOLTAGE_CURRENT_MEASURE_CHApiController.cs" />
+    <Compile Include="Controllers\DC_VOLTAGE_CURRENT_MEASURE_CHController.cs" />
+    <Compile Include="Controllers\DC_VOLTAGE_MEASURE_NO_INDEXApiController.cs" />
+    <Compile Include="Controllers\DC_VOLTAGE_MEASURE_NO_INDEXController.cs" />
+    <Compile Include="Controllers\DC_VOLTAGE_OUTPUTApiController.cs" />
+    <Compile Include="Controllers\DC_VOLTAGE_OUTPUTController.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\ERROR_LIMITApiController.cs" />
+    <Compile Include="Controllers\ERROR_LIMITController.cs" />
+    <Compile Include="Controllers\FILE_UPLOADERApiController.cs" />
+    <Compile Include="Controllers\FILE_UPLOADERController.cs" />
+    <Compile Include="Controllers\FREQUENCYApiController.cs" />
+    <Compile Include="Controllers\FREQUENCYController.cs" />
+    <Compile Include="Controllers\METERING_STANDARD_DEVICEApiController.cs" />
+    <Compile Include="Controllers\METERING_STANDARD_DEVICEController.cs" />
+    <Compile Include="Controllers\METERING_STANDARD_DEVICE_CHECKApiController.cs" />
+    <Compile Include="Controllers\METERING_STANDARD_DEVICE_CHECKController.cs" />
+    <Compile Include="Controllers\ORDER_TASK_INFORMATIONApiController.cs" />
+    <Compile Include="Controllers\ORDER_TASK_INFORMATIONController.cs" />
+    <Compile Include="Controllers\OVERALL_TABLEApiController.cs" />
+    <Compile Include="Controllers\OVERALL_TABLEController.cs" />
+    <Compile Include="Controllers\PHASEApiController.cs" />
+    <Compile Include="Controllers\PHASEController.cs" />
+    <Compile Include="Controllers\PREPARE_SCHEMEApiController.cs" />
+    <Compile Include="Controllers\PREPARE_SCHEMEController.cs" />
+    <Compile Include="Controllers\PRINTREPORTApiController.cs" />
+    <Compile Include="Controllers\PRINTREPORTController.cs" />
+    <Compile Include="Controllers\QUALIFIED_UNQUALIFIED_TEST_ITEApiController.cs" />
+    <Compile Include="Controllers\QUALIFIED_UNQUALIFIED_TEST_ITEController.cs" />
+    <Compile Include="Controllers\REPORTCOLLECTIONApiController.cs" />
+    <Compile Include="Controllers\REPORTCOLLECTIONController.cs" />
+    <Compile Include="Controllers\RULEApiController.cs" />
+    <Compile Include="Controllers\RULEController.cs" />
+    <Compile Include="Controllers\RULETreeController.cs" />
+    <Compile Include="Controllers\SCHEMEApiController.cs" />
+    <Compile Include="Controllers\SCHEMEController.cs" />
+    <Compile Include="Controllers\SCHEME_RULEApiController.cs" />
+    <Compile Include="Controllers\SCHEME_RULEController.cs" />
+    <Compile Include="Controllers\TABLE_BODY_XYApiController.cs" />
+    <Compile Include="Controllers\TABLE_BODY_XYController.cs" />
+    <Compile Include="Controllers\TABLE_HEAD_XYApiController.cs" />
+    <Compile Include="Controllers\TABLE_HEAD_XYController.cs" />
+    <Compile Include="Controllers\TEST_ITEM_FORMATApiController.cs" />
+    <Compile Include="Controllers\TEST_ITEM_FORMATController.cs" />
+    <Compile Include="Controllers\THREE_PHASE_UNCERTAINTYApiController.cs" />
+    <Compile Include="Controllers\THREE_PHASE_UNCERTAINTYController.cs" />
+    <Compile Include="Controllers\TRANSMITER_SINApiController.cs" />
+    <Compile Include="Controllers\TRANSMITER_SINController.cs" />
+    <Compile Include="Controllers\TRANSMITTER_COSApiController.cs" />
+    <Compile Include="Controllers\TRANSMITTER_COSController.cs" />
+    <Compile Include="Controllers\TRANSMITTER_FREQUENCY_PHASEApiController.cs" />
+    <Compile Include="Controllers\TRANSMITTER_FREQUENCY_PHASEController.cs" />
+    <Compile Include="Controllers\TRANSMITTER_HEADApiController.cs" />
+    <Compile Include="Controllers\TRANSMITTER_HEADController.cs" />
+    <Compile Include="Controllers\TRANSMITTER_POWER_FACTORApiController.cs" />
+    <Compile Include="Controllers\TRANSMITTER_POWER_FACTORController.cs" />
+    <Compile Include="Controllers\TRANSMITTER_RANGEApiController.cs" />
+    <Compile Include="Controllers\TRANSMITTER_RANGEController.cs" />
+    <Compile Include="Controllers\UNCERTAINTY2_HZApiController.cs" />
+    <Compile Include="Controllers\UNCERTAINTY2_HZController.cs" />
+    <Compile Include="Controllers\UNCERTAINTYApiController.cs" />
+    <Compile Include="Controllers\UNCERTAINTYController.cs" />
+    <Compile Include="Controllers\UNCERTAINTYPARAMETERMANAGEMENTApiController.cs" />
+    <Compile Include="Controllers\UNCERTAINTYPARAMETERMANAGEMENTController.cs" />
+    <Compile Include="Controllers\UNDERTAKE_LABORATORYApiController.cs" />
+    <Compile Include="Controllers\UNDERTAKE_LABORATORYController.cs" />
+    <Compile Include="Controllers\VBAOGAODAYINApiController.cs" />
+    <Compile Include="Controllers\VBAOGAODAYINController.cs" />
+    <Compile Include="Controllers\VJIANDINGRENWUApiController.cs" />
+    <Compile Include="Controllers\VJIANDINGRENWUController.cs" />
+    <Compile Include="Controllers\VQIJULINGQU1ApiController.cs" />
+    <Compile Include="Controllers\VQIJULINGQU1Controller.cs" />
+    <Compile Include="Controllers\VQIJULINGQU2ApiController.cs" />
+    <Compile Include="Controllers\VQIJULINGQU2Controller.cs" />
+    <Compile Include="Controllers\VRUKUApiController.cs" />
+    <Compile Include="Controllers\VRUKUController.cs" />
+    <Compile Include="Controllers\VSHENHEApiController.cs" />
+    <Compile Include="Controllers\VSHENHEController.cs" />
+    <Compile Include="Controllers\VSHENPIApiController.cs" />
+    <Compile Include="Controllers\VSHENPIController.cs" />
+    <Compile Include="Models\COMPANYTreeModel.cs" />
+    <Compile Include="Models\RULETreeModel.cs" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55977</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55977/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
