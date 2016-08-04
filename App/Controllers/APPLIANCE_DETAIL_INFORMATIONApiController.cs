@@ -129,6 +129,8 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>  
+        /// 
+        [System.Web.Http.HttpPost]
         public Common.ClientResult.Result Put([FromBody]APPLIANCE_DETAIL_INFORMATION entity)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();

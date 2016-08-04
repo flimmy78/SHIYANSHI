@@ -11,7 +11,7 @@
 <script src="~/Scripts/jquery.edatagrid.js"></script>
 
 
-@section CurentPlace {
+@section HeadContent {
 
     创建
 
@@ -22,6 +22,110 @@
     型号：@Html.Editor("VERSION")
     器具名称：@Html.Editor("APPLIANCE_NAME")
 </div>
+<br style="clear:both;" />
+<table id="ApplianceDate"  
+			singleSelect="true"></table>
+<input type="button" onclick="seng()" value="查询" />
+
+<script type="text/javascript">
+    function flexiInsert() {
+        $('#ApplianceDate').edatagrid('addRow', 0)
+       // $("#xu").val();
+    }
+    function flexiSave() {
+        $('#ApplianceDate').edatagrid('saveRow')
+        // $("#xu").val();
+    }
+    $(function () {
+        $('#ApplianceDate').edatagrid({
+            url: '',//../Appliance/Create/APPLIANCE_NAME
+            saveUrl: "/api/APPLIANCE_DETAIL_INFORMATIONApi/Post",
+            updateUrl: "/api/APPLIANCE_DETAIL_INFORMATIONApi/Put",
+            destroyUrl: "/api/APPLIANCE_DETAIL_INFORMATIONApi/Delete",
+            toolbar: [
+
+             {
+                 text: '新增',
+                 iconCls: 'icon-add',
+                 handler: function () {
+                     return flexiInsert();
+                 }
+             }, {
+                 text: '复制新增',
+                 iconCls: 'icon-add',
+                 handler: function () {
+                     return flexiCreate();
+                 }
+             },
+               {
+                   text: '保存',
+                   iconCls: 'icon-add',
+                   handler: function () {
+                       return flexiSave();
+                   }
+               }, {
+                 text: '删除',
+                 iconCls: 'icon-remove',
+                 handler: function () {
+                     return flexiDelete();
+                 }
+             }],
+            columns: [[
+             { field: 'box', title: '@Html.CheckBox("box")', width: 35 }
+           
+           , { field: 'APPLIANCE_NAME', title: '*器具名称', width: 135, editor: 'text' }
+           , { field: 'VERSION', title: '*型号', width: 65, editor: 'text' }
+           , { field: 'FORMAT', title: '规格', width: 65, editor: 'text' }
+           , { field: 'FACTORY_NUM', title: '出厂编号', width: 65, editor: 'text' }
+           , { field: 'NUM', title: '*数量', width: 65, editor: 'text' }
+           , { field: 'ATTACHMENT', title: '附件', width: 135, editor: 'text' }
+           , { field: 'APPEARANCE_STATUS', title: '*外观状态', width: 65, editor: 'text' }
+           , { field: 'MAKE_ORGANIZATION', title: '制造单位', width: 65, editor: 'text' }
+           , { field: 'a', title: '*承接实验室', width: 135, editor: 'options' }
+           , { field: 'APPLIANCE_RECIVE', title: '器具接收', width: 65 }
+           , { field: 'REMARKS', title: '备注', width: 135, editor: 'text' }
+            ]]
+        });
+        //输入显示下拉框
+        //出厂编号
+        $("#FACTORY_NUM").ajaxStop();
+        $("#FACTORY_NUM").autocomplete({
+            source: "../Appliance/SearchAutoComplete/FACTORY_NUM",
+            minLength: 1,//键入的字数
+            select: function (event, ui) {
+                $("#BAR_CODE_NUM").val(ui.item.BAR_CODE_NUM);//条形码
+                $("#VERSION").val(ui.item.VERSION);//型号
+                $("#APPLIANCE_NAME").val(ui.item.APPLIANCE_NAME);//器具名称
+            }
+        });
+        //型号
+        $("#VERSION").ajaxStop();
+        $("#VERSION").autocomplete({
+            source: "../Appliance/SearchAutoComplete/VERSION",
+            minLength: 1,//键入的字数
+            select: function (event, ui) {
+                $("#BAR_CODE_NUM").val(ui.item.BAR_CODE_NUM);//条形码
+                $("#FACTORY_NUM").val(ui.item.FACTORY_NUM);//出厂编号
+                $("#APPLIANCE_NAME").val(ui.item.APPLIANCE_NAME);//器具名称
+            }
+        });
+        //器具名称
+        $("#APPLIANCE_NAME").ajaxStop();
+        $("#APPLIANCE_NAME").autocomplete({
+            source: "../Appliance/SearchAutoComplete/APPLIANCE_NAME",
+            minLength: 1,//键入的字数
+            select: function (event, ui) {
+                $("#BAR_CODE_NUM").val(ui.item.BAR_CODE_NUM);//条形码
+                $("#VERSION").val(ui.item.VERSION);//型号
+                $("#FACTORY_NUM").val(ui.item.FACTORY_NUM);//出厂编号
+            }
+        });
+    });
+    //
+
+</script>
+
+
 <div class="bigdiv">
 
     <div class="editor-label">
@@ -151,99 +255,5 @@
         @Html.ValidationMessageFor(model => model.UPDATEPERSON)
     </div>
 </div>
-<table id="ApplianceDate" style="width:600px;height:200px" singleSelect="true"></table>
-<input type="button" onclick="seng()" value="确定" />
 
-
-<script type="text/javascript">
-    function flexiInsert() {
-        $('#ApplianceDate').edatagrid('addRow')
-        $("#xu").val();
-    }
-    $(function () {
-        $('#ApplianceDate').edatagrid({
-            url: '../Appliance/Create/APPLIANCE_NAME',
-            saveUrl: "",
-            updateUrl: "",
-            destroyUrl: "",
-            toolbar: [
-
-             {
-                 text: '新增',
-                 iconCls: 'icon-add',
-                 handler: function () {
-                     return flexiInsert();
-                 }
-             }, {
-                 text: '复制新增',
-                 iconCls: 'icon-add',
-                 handler: function () {
-                     return flexiCreate();
-                 }
-             }, {
-                 text: '删除',
-                 iconCls: 'icon-remove',
-                 handler: function () {
-                     return flexiDelete();
-                 }
-             }],
-            columns: [[
-             { field: 'box', title: '@Html.CheckBox("box")', width: 35, checkbox:true}
-           , {
-               field: 'xu', title: '序号', width: 35, formatter: function (value) {
-                   value = 1;
-                   return value;
-               }
-           }
-           , { field: 'APPLIANCE_NAME', title: '*器具名称', width: 35, editor: 'text' }
-           , { field: 'VERSION', title: '*型号', width: 35, editor: 'text' }
-           , { field: 'FORMAT', title: '规格', width: 35, editor: 'text' }
-           , { field: 'FACTORY_NUM', title: '出厂编号', width: 35, editor: 'text'}
-           , { field: 'NUM', title: '*数量', width: 35, editor: 'text' }
-           , { field: 'ATTACHMENT', title: '附件', width: 35, editor: 'text'}
-           , { field: 'APPEARANCE_STATUS', title: '*外观状态', width: 35, editor: 'text'}
-           , { field: 'MAKE_ORGANIZATION', title: '制造单位', width: 35, editor: 'text'}
-           , { field: 'a', title: '*承接实验室', width: 35,editor:'options'}
-           , { field: 'APPLIANCE_RECIVE', title: '器具接收', width: 35 }
-           , { field: 'REMARKS', title: '备注', width: 35 ,editor:'text' }
-    ]]
-    });
-    //输入显示下拉框
-    //出厂编号
-    $("#FACTORY_NUM").ajaxStop();
-    $("#FACTORY_NUM").autocomplete({
-        source: "../Appliance/SearchAutoComplete/FACTORY_NUM",
-        minLength: 1,//键入的字数
-        select: function (event, ui) {
-            $("#BAR_CODE_NUM").val(ui.item.BAR_CODE_NUM);//条形码
-            $("#VERSION").val(ui.item.VERSION);//型号
-            $("#APPLIANCE_NAME").val(ui.item.APPLIANCE_NAME);//器具名称
-        }
-    });
-    //型号
-    $("#VERSION").ajaxStop();
-    $("#VERSION").autocomplete({
-        source: "../Appliance/SearchAutoComplete/VERSION",
-        minLength: 1,//键入的字数
-        select: function (event, ui) {
-            $("#BAR_CODE_NUM").val(ui.item.BAR_CODE_NUM);//条形码
-            $("#FACTORY_NUM").val(ui.item.FACTORY_NUM);//出厂编号
-            $("#APPLIANCE_NAME").val(ui.item.APPLIANCE_NAME);//器具名称
-        }
-    });
-    //器具名称
-    $("#APPLIANCE_NAME").ajaxStop();
-    $("#APPLIANCE_NAME").autocomplete({
-        source: "../Appliance/SearchAutoComplete/APPLIANCE_NAME",
-        minLength: 1,//键入的字数
-        select: function (event, ui) {
-            $("#BAR_CODE_NUM").val(ui.item.BAR_CODE_NUM);//条形码
-            $("#VERSION").val(ui.item.VERSION);//型号
-            $("#FACTORY_NUM").val(ui.item.FACTORY_NUM);//出厂编号
-        }
-    });
-    });
-    //
-
-</script>
 
