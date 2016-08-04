@@ -158,6 +158,7 @@
 <script type="text/javascript">
     function flexiInsert() {
         $('#ApplianceDate').edatagrid('addRow')
+        $("#xu").val();
     }
     $(function () {
         $('#ApplianceDate').edatagrid({
@@ -187,8 +188,13 @@
                  }
              }],
             columns: [[
-             { field: 'box', title: '@Html.CheckBox("box")', width: 35, editor: '' }
-           , { field: 'x', title: '序号', width: 35 }
+             { field: 'box', title: '@Html.CheckBox("box")', width: 35, checkbox:true}
+           , {
+               field: 'xu', title: '序号', width: 35, formatter: function (value) {
+                   value = 1;
+                   return value;
+               }
+           }
            , { field: 'APPLIANCE_NAME', title: '*器具名称', width: 35, editor: 'text' }
            , { field: 'VERSION', title: '*型号', width: 35, editor: 'text' }
            , { field: 'FORMAT', title: '规格', width: 35, editor: 'text' }
@@ -197,7 +203,7 @@
            , { field: 'ATTACHMENT', title: '附件', width: 35, editor: 'text'}
            , { field: 'APPEARANCE_STATUS', title: '*外观状态', width: 35, editor: 'text'}
            , { field: 'MAKE_ORGANIZATION', title: '制造单位', width: 35, editor: 'text'}
-           , { field: 'a', title: '*承接实验室', width: 35 }
+           , { field: 'a', title: '*承接实验室', width: 35,editor:'options'}
            , { field: 'APPLIANCE_RECIVE', title: '器具接收', width: 35 }
            , { field: 'REMARKS', title: '备注', width: 35 ,editor:'text' }
     ]]
