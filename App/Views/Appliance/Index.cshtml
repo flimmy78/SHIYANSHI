@@ -1,0 +1,255 @@
+﻿@model Langben.DAL.ORDER_TASK_INFORMATION
+@{
+    Layout = "~/Views/Shared/Create.cshtml";
+}
+@using Common
+@using Models
+@*百度模式输入显示下拉框*@
+<link href="~/Content/jquery-ui-1.10.1.custom.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui-1.10.1.custom.min.js"></script>
+@*表格*@
+<script src="~/Scripts/jquery.edatagrid.js"></script>
+
+
+@section CurentPlace {
+
+    创建
+
+}
+<div>
+    条形码：@Html.Editor("BAR_CODE_NUM",new { })
+    出厂编号：@Html.Editor("FACTORY_NUM")
+    型号：@Html.Editor("VERSION")
+    器具名称：@Html.Editor("APPLIANCE_NAME")
+</div>
+<div class="bigdiv">
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.ORDER_NUMBER)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.ORDER_NUMBER)
+        @Html.ValidationMessageFor(model => model.ORDER_NUMBER)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.ACCEPT_ORGNIZATION)
+        @Html.ValidationMessageFor(model => model.ACCEPT_ORGNIZATION)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.INSPECTION_ENTERPRISE)
+        @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+        @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_POST)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_POST)
+        @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_POST)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.CONTACTS)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.CONTACTS)
+        @Html.ValidationMessageFor(model => model.CONTACTS)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.CONTACT_PHONE)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.CONTACT_PHONE)
+        @Html.ValidationMessageFor(model => model.CONTACT_PHONE)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.FAX)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.FAX)
+        @Html.ValidationMessageFor(model => model.FAX)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE)
+        @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
+        @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_POST)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_POST)
+        @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_POST)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.CONTACTS2)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.CONTACTS2)
+        @Html.ValidationMessageFor(model => model.CONTACTS2)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.CONTACT_PHONE2)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.CONTACT_PHONE2)
+        @Html.ValidationMessageFor(model => model.CONTACT_PHONE2)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.FAX2)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.FAX2)
+        @Html.ValidationMessageFor(model => model.FAX2)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
+        @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.ORDER_STATUS)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.ORDER_STATUS)
+        @Html.ValidationMessageFor(model => model.ORDER_STATUS)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.CREATEPERSON)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.CREATEPERSON)
+        @Html.ValidationMessageFor(model => model.CREATEPERSON)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.UPDATEPERSON)：
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.UPDATEPERSON)
+        @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+    </div>
+</div>
+<input type="button" value="新增" onclick="javascript: $('#tt').edatagrid('addRow')" />
+<table id="tt" style="width:600px;height:200px" singleSelect="true">
+  
+</table>
+<input type="button" onclick="seng()"  value="确定"/>
+@using (Html.BeginForm("", "api/ORDER_TASK_INFORMATIONApi/Post"))
+{
+
+}
+
+
+
+<script type="text/javascript">
+    $(function () {
+
+        $('#tt').edatagrid({
+            url: 'datagrid_data.json',
+            saveUrl:"",
+            updateUrl:"",
+            destroyUrl:"",
+            toolbar: [
+                 
+             {
+                 text: '详细',
+                 iconCls: 'icon-search',
+                 handler: function () {
+                     return getView();
+                 }
+             }, {
+                 text: '创建',
+                 iconCls: 'icon-add',
+                 handler: function () {
+                     return flexiCreate();
+                 }
+             },  {
+                 text: '删除',
+                 iconCls: 'icon-remove',
+                 handler: function () {
+                     return flexiDelete();
+                 }
+             }, {
+                 text: '修改',
+                 iconCls: 'icon-edit',
+                 handler: function () {
+                     return flexiModify();
+                 }
+             }, {
+                 text: '导出',
+                 iconCls: 'icon-excel',
+                 handler: function () {
+                     return flexiExport();
+                 }
+             } ],
+            columns: [[                                 
+                           @*{ field: 'BAR_CODE_NUM', title: '@Html.DisplayNameFor(model => model.Appliance.BAR_CODE_NUM)', width: 35 }
+           ,{ field: 'APPLIANCE_NAME', title:  '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 35 }
+           ,{ field: 'MODEL', title:  '@Html.DisplayNameFor(model => model.MODEL)', width: 35 }
+           ,{ field: 'FORMAT', title:  '@Html.DisplayNameFor(model => model.FORMAT)', width: 35 }
+           ,{ field: 'FACTORY_NUM', title:  '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 35 }
+           ,{ field: 'NUM', title:  '@Html.DisplayNameFor(model => model.NUM)', width: 35 }
+           ,{ field: 'ATTACHMENT', title:  '@Html.DisplayNameFor(model => model.ATTACHMENT)', width: 35 }
+           ,{ field: 'APPEARANCE_STATUS', title:  '@Html.DisplayNameFor(model => model.APPEARANCE_STATUS)', width: 35 }
+           ,{ field: 'MAKE_ORGANIZATION', title:  '@Html.DisplayNameFor(model => model.MAKE_ORGANIZATION)', width: 35 }
+           ,{ field: 'REMARKS', title:  '@Html.DisplayNameFor(model => model.REMARKS)', width: 35 }
+           ,{ field: 'END_PLAN_DATE', title:  '@Html.DisplayNameFor(model => model.END_PLAN_DATE)', width: 35
+           , formatter: formatDatebox
+           }
+           ,{ field: 'ORDER_TASK_INFORMATIONID', title: '@Html.DisplayNameFor(model => model.ORDER_TASK_INFORMATIONIDOld)', width: 35 }
+           ,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 35
+           , formatter: formatDatebox
+           }
+           ,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 35 }
+           ,{ field: 'UPDATETIME', title:  '@Html.DisplayNameFor(model => model.UPDATETIME)', width: 35
+           , formatter: formatDatebox
+           }
+           ,{ field: 'UPDATEPERSON', title:  '@Html.DisplayNameFor(model => model.UPDATEPERSON)', width: 35 }
+           ,{ field: 'APPLIANCE_RECIVE', title:  '@Html.DisplayNameFor(model => model.APPLIANCE_RECIVE)', width: 35 }
+           ,{ field: 'APPLIANCE_PROGRESS', title:  '@Html.DisplayNameFor(model => model.APPLIANCE_PROGRESS)', width: 35 }
+           ,{ field: 'ORDER_STATUS', title:  '@Html.DisplayNameFor(model => model.ORDER_STATUS)', width: 35 }
+           ,{ field: 'ISOVERDUE', title:  '@Html.DisplayNameFor(model => model.ISOVERDUE)', width: 35 }
+           ,{ field: 'OVERDUE', title:  '@Html.DisplayNameFor(model => model.OVERDUE)', width: 35 }
+           ,{ field: 'STORAGEINSTRUCTIONS', title:  '@Html.DisplayNameFor(model => model.STORAGEINSTRUCTIONS)', width: 35 }
+           ,{ field: 'STORAGEINSTRUCTI_STATU', title:  '@Html.DisplayNameFor(model => model.STORAGEINSTRUCTI_STATU)', width: 35 }*@
+            ]]
+            });
+        //输入显示下拉框
+            $("#FACTORY_NUM").ajaxStop();
+            $("#FACTORY_NUM").autocomplete({
+                source: "../Appliance/SearchAutoComplete/FACTORY_NUM",
+                minLength: 1,//
+                select: function (event, ui) {
+                    $("#BAR_CODE_NUM").val(ui.item.BAR_CODE_NUM);//条形码
+                    $("#VERSION").val(ui.item.VERSION);//型号
+                    $("#APPLIANCE_NAME").val(ui.item.APPLIANCE_NAME);//器具名称
+                }
+            });
+        });
+    //
+   
+</script>
+
+

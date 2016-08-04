@@ -36,8 +36,8 @@ namespace Langben.App.Controllers
                     ID = s.ID
 					,BAR_CODE_NUM = s.BAR_CODE_NUM
 					,APPLIANCE_NAME = s.APPLIANCE_NAME
-					,MODEL = s.MODEL
-					,FORMAT = s.FORMAT
+					,MODEL = s.VERSION,
+                    FORMAT = s.FORMAT
 					,FACTORY_NUM = s.FACTORY_NUM
 					,NUM = s.NUM
 					,ATTACHMENT = s.ATTACHMENT

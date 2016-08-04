@@ -14,8 +14,8 @@ namespace Langben.DAL
         /// 查询的数据
         /// </summary>
         /// <param name="SysEntities">数据访问的上下文</param>
-        /// <param name="order">排序字段</param>
-        /// <param name="sort">升序asc（默认）还是降序desc</param>
+        /// <param name="order">升序asc（默认）还是降序desc</param>
+        /// <param name="sort">排序字段</param>
         /// <param name="search">查询条件</param>
         /// <param name="listQuery">额外的参数</param>
         /// <returns></returns>      
@@ -75,10 +75,12 @@ namespace Langben.DAL
                     where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
                 }
             }
-            return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext 
+            var data= ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
                      .CreateObjectSet<APPLIANCE_DETAIL_INFORMATION>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                     .AsQueryable(); 
+                     .AsQueryable();       
+            var dfads = db.APPLIANCE_DETAIL_INFORMATION.Count();
+            return data;
 
         }
         /// <summary>

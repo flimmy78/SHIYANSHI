@@ -33,7 +33,7 @@ namespace Langben.DAL
 
 			[ScaffoldColumn(true)]
 			[Display(Name = "型号", Order = 4)]
-			public object MODEL { get; set; }
+			public object VERSION { get; set; }
 
 			[ScaffoldColumn(true)]
 			[Display(Name = "规格", Order = 5)]

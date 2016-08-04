@@ -62,7 +62,13 @@ namespace Langben.App.Controllers
             
             return View();
         }
+        [SupportFilter]
+        public ActionResult Createto(string id)
+        {
 
+            return View();
+        }
+     
         /// <summary>
         /// 首次编辑
         /// </summary>

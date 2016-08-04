@@ -70,7 +70,7 @@
           <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="BAR_CODE_NUM" Type="varchar2" MaxLength="200" />
           <Property Name="APPLIANCE_NAME" Type="varchar2" MaxLength="200" />
-          <Property Name="MODEL" Type="varchar2" MaxLength="200" />
+          <Property Name="VERSION" Type="varchar2" MaxLength="200" />
           <Property Name="FORMAT" Type="varchar2" MaxLength="200" />
           <Property Name="FACTORY_NUM" Type="varchar2" MaxLength="200" />
           <Property Name="NUM" Type="number" Precision="38" Scale="0" />
@@ -2255,7 +2255,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="BAR_CODE_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="MODEL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FORMAT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="NUM" Type="Decimal" Precision="38" Scale="0" />
@@ -2279,6 +2278,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <NavigationProperty Name="APPLIANCE_LABORATORY" Relationship="Model.FK_APPLIANC_REFERENCE_APPLIAN2" FromRole="APPLIANCE_DETAIL_INFORMATION" ToRole="APPLIANCE_LABORATORY" />
           <NavigationProperty Name="APPLIANCECOLLECTION" Relationship="Model.FK_APPLIANC_REFERENCE_APPLIANC" FromRole="APPLIANCE_DETAIL_INFORMATION" ToRole="APPLIANCECOLLECTION" />
           <NavigationProperty Name="ORDER_TASK_INFORMATION" Relationship="Model.FK_APPLIANC_REFERENCE_ORDER_TA" FromRole="APPLIANCE_DETAIL_INFORMATION" ToRole="ORDER_TASK_INFORMATION" />
+          <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="APPLIANCE_LABORATORY">
           <Key>
@@ -3902,6 +3902,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="APPLIANCE_DETAIL_INFORMATION">
             <EntityTypeMapping TypeName="Model.APPLIANCE_DETAIL_INFORMATION">
               <MappingFragment StoreEntitySet="APPLIANCE_DETAIL_INFORMATION">
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
                 <ScalarProperty Name="STORAGEINSTRUCTI_STATU" ColumnName="STORAGEINSTRUCTI_STATU" />
                 <ScalarProperty Name="STORAGEINSTRUCTIONS" ColumnName="STORAGEINSTRUCTIONS" />
                 <ScalarProperty Name="OVERDUE" ColumnName="OVERDUE" />
@@ -3922,7 +3923,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
                 <ScalarProperty Name="NUM" ColumnName="NUM" />
                 <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
                 <ScalarProperty Name="FORMAT" ColumnName="FORMAT" />
-                <ScalarProperty Name="MODEL" ColumnName="MODEL" />
                 <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
                 <ScalarProperty Name="BAR_CODE_NUM" ColumnName="BAR_CODE_NUM" />
                 <ScalarProperty Name="ID" ColumnName="ID" />

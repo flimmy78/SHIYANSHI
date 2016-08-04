@@ -50,6 +50,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ORDER_TASK_INFORMATIONBLL.cs" />
     <Compile Include="APPLIANCE_DETAIL_INFORMATIONBLL.cs" />
+    <Compile Include="Shiyanshi\APPLIANCE_DETAIL_INFORMATIONBLL.cs" />
     <Compile Include="UNDERTAKE_LABORATORYBLL.cs" />
     <Compile Include="APPLIANCE_LABORATORYBLL.cs" />
     <Compile Include="RULEBLL.cs" />

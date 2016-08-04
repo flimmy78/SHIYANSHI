@@ -95,6 +95,7 @@
     <Compile Include="IVBAOGAODAYINBLL.cs" />
     <Compile Include="IVQIJULINGQU2BLL.cs" />
     <Compile Include="IVQIJULINGQU1BLL.cs" />
+    <Compile Include="Shiyanshi\IAPPLIANCE_DETAIL_INFORMATIONBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
