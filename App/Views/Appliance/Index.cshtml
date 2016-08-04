@@ -17,7 +17,7 @@
 
 }
 <div>
-    条形码：@Html.Editor("BAR_CODE_NUM",new { })
+    条形码：@Html.Editor("BAR_CODE_NUM", new { })
     出厂编号：@Html.Editor("FACTORY_NUM")
     型号：@Html.Editor("VERSION")
     器具名称：@Html.Editor("APPLIANCE_NAME")
@@ -151,105 +151,93 @@
         @Html.ValidationMessageFor(model => model.UPDATEPERSON)
     </div>
 </div>
-<input type="button" value="新增" onclick="javascript: $('#tt').edatagrid('addRow')" />
-<table id="tt" style="width:600px;height:200px" singleSelect="true">
-  
-</table>
-<input type="button" onclick="seng()"  value="确定"/>
-@using (Html.BeginForm("", "api/ORDER_TASK_INFORMATIONApi/Post"))
-{
-
-}
-
+<table id="ApplianceDate" style="width:600px;height:200px" singleSelect="true"></table>
+<input type="button" onclick="seng()" value="确定" />
 
 
 <script type="text/javascript">
+    function flexiInsert() {
+        $('#ApplianceDate').edatagrid('addRow')
+    }
     $(function () {
-
-        $('#tt').edatagrid({
-            url: 'datagrid_data.json',
-            saveUrl:"",
-            updateUrl:"",
-            destroyUrl:"",
+        $('#ApplianceDate').edatagrid({
+            url: '../Appliance/Create/APPLIANCE_NAME',
+            saveUrl: "",
+            updateUrl: "",
+            destroyUrl: "",
             toolbar: [
-                 
+
              {
-                 text: '详细',
-                 iconCls: 'icon-search',
+                 text: '新增',
+                 iconCls: 'icon-add',
                  handler: function () {
-                     return getView();
+                     return flexiInsert();
                  }
              }, {
-                 text: '创建',
+                 text: '复制新增',
                  iconCls: 'icon-add',
                  handler: function () {
                      return flexiCreate();
                  }
-             },  {
+             }, {
                  text: '删除',
                  iconCls: 'icon-remove',
                  handler: function () {
                      return flexiDelete();
                  }
-             }, {
-                 text: '修改',
-                 iconCls: 'icon-edit',
-                 handler: function () {
-                     return flexiModify();
-                 }
-             }, {
-                 text: '导出',
-                 iconCls: 'icon-excel',
-                 handler: function () {
-                     return flexiExport();
-                 }
-             } ],
-            columns: [[                                 
-                           @*{ field: 'BAR_CODE_NUM', title: '@Html.DisplayNameFor(model => model.Appliance.BAR_CODE_NUM)', width: 35 }
-           ,{ field: 'APPLIANCE_NAME', title:  '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 35 }
-           ,{ field: 'MODEL', title:  '@Html.DisplayNameFor(model => model.MODEL)', width: 35 }
-           ,{ field: 'FORMAT', title:  '@Html.DisplayNameFor(model => model.FORMAT)', width: 35 }
-           ,{ field: 'FACTORY_NUM', title:  '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 35 }
-           ,{ field: 'NUM', title:  '@Html.DisplayNameFor(model => model.NUM)', width: 35 }
-           ,{ field: 'ATTACHMENT', title:  '@Html.DisplayNameFor(model => model.ATTACHMENT)', width: 35 }
-           ,{ field: 'APPEARANCE_STATUS', title:  '@Html.DisplayNameFor(model => model.APPEARANCE_STATUS)', width: 35 }
-           ,{ field: 'MAKE_ORGANIZATION', title:  '@Html.DisplayNameFor(model => model.MAKE_ORGANIZATION)', width: 35 }
-           ,{ field: 'REMARKS', title:  '@Html.DisplayNameFor(model => model.REMARKS)', width: 35 }
-           ,{ field: 'END_PLAN_DATE', title:  '@Html.DisplayNameFor(model => model.END_PLAN_DATE)', width: 35
-           , formatter: formatDatebox
-           }
-           ,{ field: 'ORDER_TASK_INFORMATIONID', title: '@Html.DisplayNameFor(model => model.ORDER_TASK_INFORMATIONIDOld)', width: 35 }
-           ,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 35
-           , formatter: formatDatebox
-           }
-           ,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 35 }
-           ,{ field: 'UPDATETIME', title:  '@Html.DisplayNameFor(model => model.UPDATETIME)', width: 35
-           , formatter: formatDatebox
-           }
-           ,{ field: 'UPDATEPERSON', title:  '@Html.DisplayNameFor(model => model.UPDATEPERSON)', width: 35 }
-           ,{ field: 'APPLIANCE_RECIVE', title:  '@Html.DisplayNameFor(model => model.APPLIANCE_RECIVE)', width: 35 }
-           ,{ field: 'APPLIANCE_PROGRESS', title:  '@Html.DisplayNameFor(model => model.APPLIANCE_PROGRESS)', width: 35 }
-           ,{ field: 'ORDER_STATUS', title:  '@Html.DisplayNameFor(model => model.ORDER_STATUS)', width: 35 }
-           ,{ field: 'ISOVERDUE', title:  '@Html.DisplayNameFor(model => model.ISOVERDUE)', width: 35 }
-           ,{ field: 'OVERDUE', title:  '@Html.DisplayNameFor(model => model.OVERDUE)', width: 35 }
-           ,{ field: 'STORAGEINSTRUCTIONS', title:  '@Html.DisplayNameFor(model => model.STORAGEINSTRUCTIONS)', width: 35 }
-           ,{ field: 'STORAGEINSTRUCTI_STATU', title:  '@Html.DisplayNameFor(model => model.STORAGEINSTRUCTI_STATU)', width: 35 }*@
-            ]]
-            });
-        //输入显示下拉框
-            $("#FACTORY_NUM").ajaxStop();
-            $("#FACTORY_NUM").autocomplete({
-                source: "../Appliance/SearchAutoComplete/FACTORY_NUM",
-                minLength: 1,//
-                select: function (event, ui) {
-                    $("#BAR_CODE_NUM").val(ui.item.BAR_CODE_NUM);//条形码
-                    $("#VERSION").val(ui.item.VERSION);//型号
-                    $("#APPLIANCE_NAME").val(ui.item.APPLIANCE_NAME);//器具名称
-                }
-            });
-        });
+             }],
+            columns: [[
+             { field: 'box', title: '@Html.CheckBox("box")', width: 35, editor: '' }
+           , { field: 'x', title: '序号', width: 35 }
+           , { field: 'APPLIANCE_NAME', title: '*器具名称', width: 35, editor: 'text' }
+           , { field: 'VERSION', title: '*型号', width: 35, editor: 'text' }
+           , { field: 'FORMAT', title: '规格', width: 35, editor: 'text' }
+           , { field: 'FACTORY_NUM', title: '出厂编号', width: 35, editor: 'text'}
+           , { field: 'NUM', title: '*数量', width: 35, editor: 'text' }
+           , { field: 'ATTACHMENT', title: '附件', width: 35, editor: 'text'}
+           , { field: 'APPEARANCE_STATUS', title: '*外观状态', width: 35, editor: 'text'}
+           , { field: 'MAKE_ORGANIZATION', title: '制造单位', width: 35, editor: 'text'}
+           , { field: 'a', title: '*承接实验室', width: 35 }
+           , { field: 'APPLIANCE_RECIVE', title: '器具接收', width: 35 }
+           , { field: 'REMARKS', title: '备注', width: 35 ,editor:'text' }
+    ]]
+    });
+    //输入显示下拉框
+    //出厂编号
+    $("#FACTORY_NUM").ajaxStop();
+    $("#FACTORY_NUM").autocomplete({
+        source: "../Appliance/SearchAutoComplete/FACTORY_NUM",
+        minLength: 1,//键入的字数
+        select: function (event, ui) {
+            $("#BAR_CODE_NUM").val(ui.item.BAR_CODE_NUM);//条形码
+            $("#VERSION").val(ui.item.VERSION);//型号
+            $("#APPLIANCE_NAME").val(ui.item.APPLIANCE_NAME);//器具名称
+        }
+    });
+    //型号
+    $("#VERSION").ajaxStop();
+    $("#VERSION").autocomplete({
+        source: "../Appliance/SearchAutoComplete/VERSION",
+        minLength: 1,//键入的字数
+        select: function (event, ui) {
+            $("#BAR_CODE_NUM").val(ui.item.BAR_CODE_NUM);//条形码
+            $("#FACTORY_NUM").val(ui.item.FACTORY_NUM);//出厂编号
+            $("#APPLIANCE_NAME").val(ui.item.APPLIANCE_NAME);//器具名称
+        }
+    });
+    //器具名称
+    $("#APPLIANCE_NAME").ajaxStop();
+    $("#APPLIANCE_NAME").autocomplete({
+        source: "../Appliance/SearchAutoComplete/APPLIANCE_NAME",
+        minLength: 1,//键入的字数
+        select: function (event, ui) {
+            $("#BAR_CODE_NUM").val(ui.item.BAR_CODE_NUM);//条形码
+            $("#VERSION").val(ui.item.VERSION);//型号
+            $("#FACTORY_NUM").val(ui.item.FACTORY_NUM);//出厂编号
+        }
+    });
+    });
     //
-   
-</script>
 
+</script>
 

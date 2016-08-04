@@ -29,13 +29,12 @@ namespace Langben.BLL
             using (SysEntities db = new SysEntities())
             {
 
-                var queryData = repository.GetData(db, "DESC", "CREATETIME", search);      
+                var queryData = repository.GetData(db, "DESC", "CREATETIME", search);//调用GetData方法从数据库中获取到相关数据      
                 if (queryData != null)
                 {
                     queryData = queryData.Take(5).Distinct();//5表示显示5行
                     foreach (var item in queryData)
                     {
-                        //listString.Add(item.KeHuMingCheng);
                         if (null == item)
                         {
                             continue;
@@ -45,15 +44,26 @@ namespace Langben.BLL
                             i++;
                             stringBuilder.Append(@"{@BAR_CODE_NUM@:@" + item.BAR_CODE_NUM + "@");
                             stringBuilder.Append(",");
-
-                            stringBuilder.Append(@"@value@:@" + item.FACTORY_NUM + "@");
-
-
-
+                            switch (id)//判断页面上选择的是那个输入框，从而判断value中的值
+                            {
+                                case "FACTORY_NUM":
+                                 stringBuilder.Append(@"@value@:@" + item.FACTORY_NUM + "@");
+                                    break;
+                                case "VERSION":
+                                    stringBuilder.Append(@"@value@:@" + item.VERSION + "@");
+                                    break;
+                                case "APPLIANCE_NAME":
+                                    stringBuilder.Append(@"@value@:@" + item.APPLIANCE_NAME + "@");
+                                    break;
+                                default:
+                                    break;
+                            }
                             stringBuilder.Append(",");
                             stringBuilder.Append(@"@label@:@" + item.BAR_CODE_NUM +","+item.FACTORY_NUM+","+item.VERSION + ","+ item.APPLIANCE_NAME+ "@");
                             stringBuilder.Append(",");
-                            stringBuilder.Append(@"@VERSION@:@" + item.VERSION + "@");//格式：201303151031435196814d1196f3ec9&^20130315103151066797902021918be&
+                            stringBuilder.Append(@"@VERSION@:@" + item.VERSION + "@");
+                            stringBuilder.Append(",");
+                            stringBuilder.Append(@"@FACTORY_NUM@:@" + item.FACTORY_NUM + "@");
                             stringBuilder.Append(",");
                             stringBuilder.Append(@"@APPLIANCE_NAME@:@" + item.APPLIANCE_NAME + "@}");
                         }
@@ -63,11 +73,26 @@ namespace Langben.BLL
                             stringBuilder.Append(",");
                             stringBuilder.Append(@"{@BAR_CODE_NUM@:@" + item.BAR_CODE_NUM + "@");
                             stringBuilder.Append(",");
-                            stringBuilder.Append(@"@value@:@" + item.FACTORY_NUM + "@");
+                            switch (id)//判断页面上选择的是那个输入框，从而判断value中的值
+                            {
+                                case "FACTORY_NUM":
+                                    stringBuilder.Append(@"@value@:@" + item.FACTORY_NUM + "@");
+                                    break;
+                                case "VERSION":
+                                    stringBuilder.Append(@"@value@:@" + item.VERSION + "@");
+                                    break;
+                                case "APPLIANCE_NAME":
+                                    stringBuilder.Append(@"@value@:@" + item.APPLIANCE_NAME + "@");
+                                    break;
+                                default:
+                                    break;
+                            }
                             stringBuilder.Append(",");
                             stringBuilder.Append(@"@label@:@" + item.BAR_CODE_NUM + "," + item.FACTORY_NUM + "," + item.VERSION + "," + item.APPLIANCE_NAME + "@");
                             stringBuilder.Append(",");
-                            stringBuilder.Append(@"@VERSION@:@" + item.VERSION + "@");//格式：201303151031435196814d1196f3ec9&^20130315103151066797902021918be&
+                            stringBuilder.Append(@"@VERSION@:@" + item.VERSION + "@");
+                            stringBuilder.Append(",");
+                            stringBuilder.Append(@"@FACTORY_NUM@:@" + item.FACTORY_NUM + "@");
                             stringBuilder.Append(",");
                             stringBuilder.Append(@"@APPLIANCE_NAME@:@" + item.APPLIANCE_NAME + "@}");
                         }
@@ -79,19 +104,7 @@ namespace Langben.BLL
             return stringBuilder.ToString().Replace('@', '"');
         }
 
-        ///// <summary>
-        ///// 修改状态
-        ///// </summary>
-        ///// <param name="id">模块的主键</param>
-        ///// <returns>一个模块</returns>
-        //public bool StartOrStop(string id, string state)
-        //{
-        //    var entity = repository.GetById(db, id);
-        //    entity.State = state;
-        //    repository.Edit(db, entity, false);
 
-        //    return repository.Save(db) == 1; ;
-        //}
     }
 }
 
