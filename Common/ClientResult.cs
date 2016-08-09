@@ -32,5 +32,12 @@ namespace Common
             public dynamic rows;
 
         }
+        /// <summary>
+        /// 器具登记委托单保存成功返回的相关数据
+        /// </summary>
+        public class OrderTaskGong : Result
+        {
+            public string Id { get; set; }
+        }
     }
 }

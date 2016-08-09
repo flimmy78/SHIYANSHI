@@ -80,7 +80,7 @@ namespace Langben.App.Controllers
         public Common.ClientResult.Result Post([FromBody]ORDER_TASK_INFORMATION entity)
         {           
 
-            Common.ClientResult.Result result = new Common.ClientResult.Result();
+            Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             if (entity != null && ModelState.IsValid)
             {
                 //string currentPerson = GetCurrentPerson();
@@ -95,6 +95,7 @@ namespace Langben.App.Controllers
                         );//写入日志 
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.InsertSucceed;
+                    result.Id = entity.ID;
                     return result; //提示创建成功
                 }
                 else

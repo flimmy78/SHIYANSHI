@@ -404,6 +404,7 @@
     <Content Include="Views\Shared\Details.cshtml" />
     <Content Include="Views\Shared\Edit.cshtml" />
     <Content Include="Views\Shared\Index.cshtml" />
+    <Content Include="Views\Shared\AppCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
