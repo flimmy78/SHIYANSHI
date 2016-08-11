@@ -178,12 +178,12 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="collection"></param>
         /// <returns></returns>  
-        public Common.ClientResult.Result Delete(string query)
+        public Common.ClientResult.Result Delete(string id)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
 
             string returnValue = string.Empty;
-            string[] deleteId = query.GetString().Split(',');
+            string[] deleteId = id.GetString().Split(',');
             if (deleteId != null && deleteId.Length > 0)
             {
                 if (m_BLL.DeleteCollection(ref validationErrors, deleteId))

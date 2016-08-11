@@ -25,7 +25,7 @@
             @Html.LabelFor(model => model.VERSION):
         </div>
         <div class="input_search-field">
-            <input type='text' id='MODEL' />
+            <input type='text' id='VERSION' />
         </div>
     </div>
     <div class="input_search">
@@ -227,7 +227,7 @@
     function panduanlingqu() {
         var arr = $('#flexigridData').datagrid('getSelections');
         if (arr.length>=1) {
-            if (arr[i].ORDER_STATUS != null || arr[i].ORDER_STATUS != "" && arr[i].APPLIANCE_PROGRESS != null || arr[i].APPLIANCE_PROGRESS != "") {
+            if (arr[i].ORDER_STATUS != null && arr[i].APPLIANCE_PROGRESS != null) {
                 $.messager.alert('操作提示', '请选择已领取的数据!', 'warning');
                 return false;
             }
@@ -257,28 +257,36 @@
     function lingqu() {
         var arr = $('#flexigridData').datagrid('getSelections');
         if (arr.length >= 1) {
-            var id = "";
+            var is = "";
             $.messager.confirm('操作提示', "确认领取这 " + arr.length + " 项吗？", function (r) {
                 if (r) {
                     for (var i = 0; i < arr.length; i++) {
                         if ( arr[i].ORDER_STATUS !=null && arr[i].APPLIANCE_PROGRESS != null) {
                             $.messager.alert('操作提示', '不能重复领取!', 'warning');
-                            id = "";
+                            is = "";
                             return false;
                         }
                         else {
-                            id += arr[i].ID + ",";
+                            is += arr[i].ID + ",";
                         }
                     }
-                    id = id.substring(0, id.length - 1) + "&三相";
-                    GetData("/api/VAPPLIANCE_DETAIL_INFORMATIONApi/PutCollection", id);
-                    //$.ajax({
-                    //    url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/PutCollection" + id,
-                    //    type: "POST",
-                    //    // async: false,
-                    //    success: function (res) {
-                    //    }
-                    //})
+                    is = is.substring(0, is.length - 1) + "^三相";
+                    //GetData("/api/VAPPLIANCE_DETAIL_INFORMATIONApi/PutCollection", id);
+                    $.ajax({
+                        url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/Put/"+is,
+                        type: "Put",
+                        // async: false,
+                        success: function (res) {
+                            if (res.Code == 1) {
+                                $.messager.alert('操作提示', res.Message, 'info');
+                                $("#flexigridData").datagrid("reload");
+                                $("#flexigridData").datagrid("clearSelections");
+                            }
+                            else {
+                                $.messager.alert('操作提示', res.Message, 'info');
+                            }
+                        }
+                    })
                 }
             })
         }
@@ -288,11 +296,11 @@
     }
     //选择方案
     function xuanzhefanan() {
-        if (panduan()) {
-            alert("ok");
+        if (panduanlingqu()) {
+            window.location.href = "../VBAOGAODAYIN/Xuanzhefangan/" + arr[0].ID;
         }
         else {
-            alert("no");
+            $.messager.alert('操作提示', '操作有误，请仔细检查!', 'warning');
         }
     }
     //獲取數據集
@@ -302,7 +310,7 @@
     function GetData(posturl, postdata) {
         var rtnValue;
         $.ajax({
-            type: "POST",
+            type: "Delete",
             traditional: true,
             url: posturl,
             async: false,

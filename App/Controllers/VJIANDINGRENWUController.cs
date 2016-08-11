@@ -34,8 +34,9 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
-        public ActionResult Xuanzhefangan()
+        public ActionResult Xuanzhefangan(string id)
         {
+            ViewBag.Id = id;
             return View();
         }
            
