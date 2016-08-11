@@ -145,6 +145,7 @@
     <Compile Include="Codes\LogClassModels.cs" />
     <Compile Include="Codes\SupportFilter.cs" />
     <Compile Include="Codes\SysFieldModels.cs" />
+    <Compile Include="Controllers\VAPPLIANCE_DETAIL_INFORMATIONApiController .cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ApplianceController.cs" />
     <Compile Include="Global.asax.cs">
@@ -403,6 +404,7 @@
     <Content Include="Views\Shared\Edit.cshtml" />
     <Content Include="Views\Shared\Index.cshtml" />
     <Content Include="Views\Shared\AppCreate.cshtml" />
+    <Content Include="Views\VJIANDINGRENWU\Xuanzhefangan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

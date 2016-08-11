@@ -280,7 +280,7 @@
                 if (r) {
                     $.ajax({
                         url: "api/APPLIANCE_DETAIL_INFORMATIONApi/Delete?query=" + arr.join(","),
-                        type: "DELETE",
+                        type: "get",
                         success: function (res) {
                             if (res.Code == 1) {
                                 //移除删除的数据

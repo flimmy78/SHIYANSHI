@@ -29,6 +29,15 @@ namespace Langben.App.Controllers
         
             return View();
         }
+        /// <summary>
+        /// 选择方案
+        /// </summary>
+        /// <returns></returns>
+        [SupportFilter]
+        public ActionResult Xuanzhefangan()
+        {
+            return View();
+        }
            
         /// <summary>
         /// 异步加载数据
@@ -54,8 +63,8 @@ namespace Langben.App.Controllers
                     ID = s.ID
 					,ORDER_NUMBER = s.ORDER_NUMBER
 					,APPLIANCE_NAME = s.APPLIANCE_NAME
-					,MODEL = s.MODEL
-					,FACTORY_NUM = s.FACTORY_NUM
+					,MODEL = s.VERSION,
+                    FACTORY_NUM = s.FACTORY_NUM
 					,CERTIFICATE_ENTERPRISE = s.CERTIFICATE_ENTERPRISE
 					,CUSTOMER_SPECIFIC_REQUIREMENTS = s.CUSTOMER_SPECIFIC_REQUIREMENTS
 					,ORDER_STATUS = s.ORDER_STATUS

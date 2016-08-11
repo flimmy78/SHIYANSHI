@@ -54,7 +54,9 @@
     }
     //新增
     function flexiInsert() {
-        $('#ApplianceDate').edatagrid('addRow', 0)
+        $('#ApplianceDate').edatagrid('addRow', {
+
+        })
         // $("#xu").val();
     }
     //保存
@@ -70,9 +72,10 @@
     function seng() {
         //器具信息绑定
         var search = "";
-        debugger
-        search = "BAR_CODE_NUM" + "&" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "&" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "&" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "&" + $("#APPLIANCE_NAME").val() + "^"
-        $('#ApplianceDate').edatagrid({ url: "/api/APPLIANCE_DETAIL_INFORMATIONApi/PostData" }).edatagrid('load', { search: search });
+      //  search = "BAR_CODE_NUM" + "&" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "&" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "&" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "&" + $("#APPLIANCE_NAME").val() + "^"
+        $('#ApplianceDate').edatagrid({ URL: '/api/APPLIANCE_DETAIL_INFORMATIONApi/PostData' });
+        debugger;
+        $('#ApplianceDate').edatagrid('loadData', { search: search }); //{ url: "/api/APPLIANCE_DETAIL_INFORMATIONApi/PostData" }
         //委托单信息绑定
         //$.ajax({
         //    url: "/api/ORDER_TASK_INFORMATION/Get" + id,
@@ -151,8 +154,14 @@
            , { field: 'NUM', title: '*数量', width: 65, editor: 'text' }
            , { field: 'ATTACHMENT', title: '附件', width: 135, editor: 'text' }
            , {
-               field: 'ORDER_TASK_INFORMATIONID', title: '委托单', width: 135, hidden: true, editor: { type: 'text', value: $("#hiddenid").val() }
-                   //return '<input type="hidden" value="' + $("#hiddenid").val() + '" id="ORDER_TASK_INFORMATIONID"/>';
+               field: 'ORDER_TASK_INFORMATIONID', title: '委托单', width: 135, hidden: true,editor: 'text',  formatter: function (value, row, index){
+                  // type: 'text', value: $("#hiddenid").val()
+                   //<input type="text" class="datagrid-editable-input">
+                   // debugger
+                   return $("#hiddenid").val();
+                  // return '<input type="text" class="datagrid-editable-input" value="' + $("#hiddenid").val() + '" id="ORDER_TASK_INFORMATIONID"/>';
+               }
+                
              
            }
            , {

@@ -956,7 +956,7 @@
           <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="ORDER_NUMBER" Type="varchar2" MaxLength="200" />
           <Property Name="APPLIANCE_NAME" Type="varchar2" MaxLength="200" />
-          <Property Name="MODEL" Type="varchar2" MaxLength="200" />
+          <Property Name="VERSION" Type="varchar2" MaxLength="200" />
           <Property Name="FACTORY_NUM" Type="varchar2" MaxLength="200" />
           <Property Name="CERTIFICATE_ENTERPRISE" Type="varchar2" MaxLength="200" />
           <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="varchar2" MaxLength="4000" />
@@ -1677,7 +1677,7 @@ FROM "TENGFEI"."VBAOGAODAYIN" "VBAOGAODAYIN"</DefiningQuery>
 "VJIANDINGRENWU"."ID" AS "ID", 
 "VJIANDINGRENWU"."ORDER_NUMBER" AS "ORDER_NUMBER", 
 "VJIANDINGRENWU"."APPLIANCE_NAME" AS "APPLIANCE_NAME", 
-"VJIANDINGRENWU"."MODEL" AS "MODEL", 
+"VJIANDINGRENWU"."VERSION" AS "VERSION", 
 "VJIANDINGRENWU"."FACTORY_NUM" AS "FACTORY_NUM", 
 "VJIANDINGRENWU"."CERTIFICATE_ENTERPRISE" AS "CERTIFICATE_ENTERPRISE", 
 "VJIANDINGRENWU"."CUSTOMER_SPECIFIC_REQUIREMENTS" AS "CUSTOMER_SPECIFIC_REQUIREMENTS", 
@@ -3214,7 +3214,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="ORDER_NUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="MODEL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CERTIFICATE_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
@@ -3227,6 +3226,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="APPROVAL" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="INSPECTION_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ISOVERDUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VQIJULINGQU1">
           <Key>
@@ -4820,6 +4820,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="VJIANDINGRENWU">
             <EntityTypeMapping TypeName="Model.VJIANDINGRENWU">
               <MappingFragment StoreEntitySet="VJIANDINGRENWU">
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
                 <ScalarProperty Name="ISOVERDUE" ColumnName="ISOVERDUE" />
                 <ScalarProperty Name="INSPECTION_ENTERPRISE" ColumnName="INSPECTION_ENTERPRISE" />
                 <ScalarProperty Name="APPROVAL" ColumnName="APPROVAL" />
@@ -4832,7 +4833,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
                 <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
                 <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
                 <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
-                <ScalarProperty Name="MODEL" ColumnName="MODEL" />
                 <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
                 <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
