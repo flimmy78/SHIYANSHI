@@ -26,10 +26,10 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult Index()
         {
-        
+
             return View();
         }
-           
+
         /// <summary>
         /// 异步加载数据
         /// </summary>
@@ -52,20 +52,33 @@ namespace Langben.App.Controllers
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID
-					,REPORTNUMBER = s.REPORTNUMBER
-					,ORDER_NUMBER = s.ORDER_NUMBER
-					,APPLIANCE_NAME = s.APPLIANCE_NAME
-					,MODEL = s.MODEL
-					,FACTORY_NUM = s.FACTORY_NUM
-					,CERTIFICATE_ENTERPRISE = s.CERTIFICATE_ENTERPRISE
-					,CUSTOMER_SPECIFIC_REQUIREMENTS = s.CUSTOMER_SPECIFIC_REQUIREMENTS
-					,NAME = s.NAME
-					,ORDER_STATUS = s.ORDER_STATUS
-					,STORAGEINSTRUCTIONS = s.STORAGEINSTRUCTIONS
-					,UNDERTAKE_LABORATORYID = s.UNDERTAKE_LABORATORYID
-					,APPROVALDATE = s.APPROVALDATE
-					,STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU
-					
+                    ,
+                    REPORTNUMBER = s.REPORTNUMBER
+                    ,
+                    ORDER_NUMBER = s.ORDER_NUMBER
+                    ,
+                    APPLIANCE_NAME = s.APPLIANCE_NAME
+                    ,
+                    VERSION = s.VERSION
+                    ,
+                    FACTORY_NUM = s.FACTORY_NUM
+                    ,
+                    CERTIFICATE_ENTERPRISE = s.CERTIFICATE_ENTERPRISE
+                    ,
+                    CUSTOMER_SPECIFIC_REQUIREMENTS = s.CUSTOMER_SPECIFIC_REQUIREMENTS
+                    ,
+                    NAME = s.NAME
+                    ,
+                    ORDER_STATUS = s.ORDER_STATUS
+                    ,
+                    STORAGEINSTRUCTIONS = s.STORAGEINSTRUCTIONS
+                    ,
+                    UNDERTAKE_LABORATORYID = s.UNDERTAKE_LABORATORYID
+                    ,
+                    APPROVALDATE = s.APPROVALDATE
+                    ,
+                    STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU
+
                 }
 
                     )
@@ -84,7 +97,7 @@ namespace Langben.App.Controllers
         {
             m_BLL = bll;
         }
-      
+
     }
 }
 

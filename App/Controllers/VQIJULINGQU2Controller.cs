@@ -26,10 +26,10 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult Index()
         {
-        
+
             return View();
         }
-           
+
         /// <summary>
         /// 异步加载数据
         /// </summary>
@@ -52,17 +52,27 @@ namespace Langben.App.Controllers
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID
-					,APPLIANCE_NAME = s.APPLIANCE_NAME
-					,MODEL = s.MODEL
-					,FACTORY_NUM = s.FACTORY_NUM
-					,NUM = s.NUM
-					,ATTACHMENT = s.ATTACHMENT
-					,NAME = s.NAME
-					,APPLIANCE_RECIVE = s.APPLIANCE_RECIVE
-					,REPORTNUMBER = s.REPORTNUMBER
-					,REMARKS = s.REMARKS
-					,ORDER_NUMBER = s.ORDER_NUMBER
-					
+                    ,
+                    APPLIANCE_NAME = s.APPLIANCE_NAME
+                    ,
+                    VERSION = s.VERSION
+                    ,
+                    FACTORY_NUM = s.FACTORY_NUM
+                    ,
+                    NUM = s.NUM
+                    ,
+                    ATTACHMENT = s.ATTACHMENT
+                    ,
+                    NAME = s.NAME
+                    ,
+                    APPLIANCE_RECIVE = s.APPLIANCE_RECIVE
+                    ,
+                    REPORTNUMBER = s.REPORTNUMBER
+                    ,
+                    REMARKS = s.REMARKS
+                    ,
+                    ORDER_NUMBER = s.ORDER_NUMBER
+
                 }
 
                     )
@@ -81,7 +91,7 @@ namespace Langben.App.Controllers
         {
             m_BLL = bll;
         }
-      
+
     }
 }
 

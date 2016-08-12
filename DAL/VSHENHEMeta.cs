@@ -29,7 +29,7 @@ namespace Langben.DAL
 			public object APPLIANCE_NAME { get; set; }
 
 			[Display(Name = "型号", Order = 5)]
-			public object MODEL { get; set; }
+			public object VERSION { get; set; }
 
 			[Display(Name = "出厂编号", Order = 6)]
 			public object FACTORY_NUM { get; set; }

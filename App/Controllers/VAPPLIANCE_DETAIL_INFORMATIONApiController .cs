@@ -200,12 +200,12 @@ namespace Langben.App.Controllers
         /// <param name="entity"></param>
         /// <returns></returns>  
         /// 
-        [System.Web.Http.HttpPost]
-        public Common.ClientResult.Result PutCollection(string postdata)
+        [System.Web.Http.HttpPut]
+        public Common.ClientResult.Result Put(string id)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             string returnValue = string.Empty;
-            string[] datae = postdata.GetString().Split('&');
+            string[] datae = id.GetString().Split('^');
             string[] deleteId = datae[0].GetString().Split(',');
             if (deleteId != null && deleteId.Length > 0)
             {   //数据校验

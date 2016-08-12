@@ -34,22 +34,37 @@ namespace Langben.App.Controllers
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID
-					,REPORTNUMBER = s.REPORTNUMBER
-					,ORDER_NUMBER = s.ORDER_NUMBER
-					,APPLIANCE_NAME = s.APPLIANCE_NAME
-					,MODEL = s.MODEL
-					,FACTORY_NUM = s.FACTORY_NUM
-					,CERTIFICATE_ENTERPRISE = s.CERTIFICATE_ENTERPRISE
-					,CUSTOMER_SPECIFIC_REQUIREMENTS = s.CUSTOMER_SPECIFIC_REQUIREMENTS
-					,CERTIFICATE_CATEGORY = s.CERTIFICATE_CATEGORY
-					,QUALIFICATIONS = s.QUALIFICATIONS
-					,CONCLUSION_EXPLAIN = s.CONCLUSION_EXPLAIN
-					,CONCLUSION = s.CONCLUSION
-					,UNDERTAKE_LABORATORYID = s.UNDERTAKE_LABORATORYID
-					,APPROVALDATE = s.APPROVALDATE
-					,BAR_CODE_NUM = s.BAR_CODE_NUM
-					,PRINTSTATUS = s.PRINTSTATUS
-					
+                    ,
+                    REPORTNUMBER = s.REPORTNUMBER
+                    ,
+                    ORDER_NUMBER = s.ORDER_NUMBER
+                    ,
+                    APPLIANCE_NAME = s.APPLIANCE_NAME
+                    ,
+                    VERSION = s.VERSION
+                    ,
+                    FACTORY_NUM = s.FACTORY_NUM
+                    ,
+                    CERTIFICATE_ENTERPRISE = s.CERTIFICATE_ENTERPRISE
+                    ,
+                    CUSTOMER_SPECIFIC_REQUIREMENTS = s.CUSTOMER_SPECIFIC_REQUIREMENTS
+                    ,
+                    CERTIFICATE_CATEGORY = s.CERTIFICATE_CATEGORY
+                    ,
+                    QUALIFICATIONS = s.QUALIFICATIONS
+                    ,
+                    CONCLUSION_EXPLAIN = s.CONCLUSION_EXPLAIN
+                    ,
+                    CONCLUSION = s.CONCLUSION
+                    ,
+                    UNDERTAKE_LABORATORYID = s.UNDERTAKE_LABORATORYID
+                    ,
+                    APPROVALDATE = s.APPROVALDATE
+                    ,
+                    BAR_CODE_NUM = s.BAR_CODE_NUM
+                    ,
+                    PRINTSTATUS = s.PRINTSTATUS
+
 
                 })
             };
@@ -66,7 +81,7 @@ namespace Langben.App.Controllers
             VBAOGAODAYIN item = m_BLL.GetById(id);
             return item;
         }
-  
+
 
         IBLL.IVBAOGAODAYINBLL m_BLL;
 
@@ -79,7 +94,7 @@ namespace Langben.App.Controllers
         {
             m_BLL = bll;
         }
-        
+
     }
 }
 

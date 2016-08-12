@@ -254,7 +254,8 @@
             var arr = $('#flexigridData').datagrid('getSelections');
 
             if (arr.length == 1) {
-                window.location.href = "../APPLIANCE_DETAIL_INFORMATION/Edit/" + arr[0].ID;
+               // window.location.href = "../APPLIANCE_DETAIL_INFORMATION/Edit/" + arr[0].ID;
+                window.location.href = "../APPLIANCE_DETAIL_INFORMATION/Edit/";
 
             } else {
                 $.messager.alert('操作提示', '请选择一条数据!', 'warning');
