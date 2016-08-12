@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = "~/Views/Shared/AppCreate.cshtml";
+}
+
+<fieldset>
+    <legend>
+        <label>报告上传</label>
+    </legend>
+    <div>
+        <div class="input_search">
+            <div class="input_search-label">
+                证书编号：
+            </div>
+            <div class="input_search-field">
+                <label>123</label>
+            </div>
+        </div><br />
+        <div class="input_search">
+            <div class="input_search-label">
+                上传原始记录：
+            </div>
+            <div class="input_search-field">
+                <input type="file" />
+                <input type="button" value="上传" />
+            </div>
+        </div><br />
+        <div class="input_search">
+            <div class="input_search-label">
+                上传证书：
+            </div>
+            <div class="input_search-field">
+                <input type="file" />
+                <input type="button" value="上传" />
+            </div>
+        </div><br />
+        <div class="input_search">
+            <div class="input_search-label">
+                结论：
+            </div>
+            <div class="input_search-field">
+                合格： <input type="radio" name="jielun" />
+                不合格： <input type="radio" name="jielun" />
+            </div>
+        </div><br />
+        <input type="button" value="保存" />
+        <input type="button" value="保存并发生审核" />
+    </div>
+</fieldset>

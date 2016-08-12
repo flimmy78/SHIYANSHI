@@ -405,6 +405,8 @@
     <Content Include="Views\Shared\Index.cshtml" />
     <Content Include="Views\Shared\AppCreate.cshtml" />
     <Content Include="Views\VJIANDINGRENWU\Xuanzhefangan.cshtml" />
+    <Content Include="Views\VJIANDINGRENWU\Baogaoshangchuan.cshtml" />
+    <Content Include="Views\VJIANDINGRENWU\Jianlifangan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

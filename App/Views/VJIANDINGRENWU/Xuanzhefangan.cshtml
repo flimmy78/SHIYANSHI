@@ -1,6 +1,6 @@
 ﻿
 @{
-    Layout = "~/Views/Shared/Create.cshtml";
+    Layout = "~/Views/Shared/AppCreate.cshtml";
 }
 
 @using (Html.BeginForm("", "api/PREPARE_SCHEMEApi/Post"))
@@ -59,7 +59,7 @@
                 </div>
             </div><br />
             <div class="input_search">
-                <input type="button" value="报告上传" />
+                <input type="button"  value="报告上传" onclick="shangchuan()"/>
                 <input type="submit" value="建立方案" />
             </div>
         </div>
@@ -67,6 +67,7 @@
     </fieldset>
 }
 <script type="text/javascript">
+    //选择证书
     function zhengshuxuanzhe() {
         var option = $("#aa option:selected");
         var b = option.text();
@@ -83,4 +84,63 @@
             $("#jianding").hide();
         }
     }
+    //报告上传
+    function shangchuan() {
+        var id="@ViewBag.Id";
+        window.location.href = "/VJIANDINGRENWU/Baogaoshangchuan/" + id;
+    }
+</script>
+<script type='text/javascript'>
+        function ajaxFrom(form, url) {
+
+            $.ajax({
+                url: url,
+                type: "Post",
+                data: $(form).serialize(),
+                dataType: "json",
+
+                success: function (data) {
+                    if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                    else if (data.Code == 1) {
+                        var id = "@ViewBag.Id";
+                        window.location.href = "/VJIANDINGRENWU/Jianlifangan/" + id;
+                        return false;
+                    }
+                    else {
+                        if ($.messager) {
+                            $.messager.defaults.ok = '继续';
+                            $.messager.defaults.cancel = '返回';
+
+                            $.messager.confirm('操作提示', data.Message, function (r) {
+                                if (!r) {
+                                    window.location.href = 'javascript:history.go(-1)';
+                                }
+                            });
+                        }
+                    }
+
+
+                }
+            });
+
+        }
+
+        $(function () {
+            $('.easyui-combobox').combobox({
+                width: 243,
+                onSelect: function (record) {
+                    var strs = record.text.split("—");
+                    $(this).combobox('setValue', strs[0]);
+                }
+            });
+            $("form").submit(function (form) {
+                if (form.result) {
+                    ajaxFrom(this, this.action);
+                }
+                return false;
+            });
+            //按钮样式
+            $('.a2').mouseover(function () { this.style.color = "#ae1121"; }).mouseout(function () { this.style.color = "#333"; });
+
+        });
 </script>

@@ -39,7 +39,26 @@ namespace Langben.App.Controllers
             ViewBag.Id = id;
             return View();
         }
-           
+        /// <summary>
+        /// 报告上传
+        /// </summary>
+        /// <returns></returns>
+        [SupportFilter]
+        public ActionResult Baogaoshangchuan(string id)
+        {
+            ViewBag.Id = id;
+            return View();
+        }
+        /// <summary>
+        /// 建立方案
+        /// </summary>
+        /// <returns></returns>
+        [SupportFilter]
+        public ActionResult Jianlifangan(string id)
+        {
+            ViewBag.Id = id;
+            return View();
+        }
         /// <summary>
         /// 异步加载数据
         /// </summary>
