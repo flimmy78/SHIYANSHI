@@ -226,10 +226,11 @@
     //判断是否为领取的器具
     function panduanlingqu() {
         var arr = $('#flexigridData').datagrid('getSelections');
-        if (arr.length>=1) {
-            if (arr[i].ORDER_STATUS != null && arr[i].APPLIANCE_PROGRESS != null) {
+        if (arr.length==1) {
+            if (arr[0].ORDER_STATUS == null && arr[0].APPLIANCE_PROGRESS == null) {
                 $.messager.alert('操作提示', '请选择已领取的数据!', 'warning');
                 return false;
+               
             }
             else {
                 return true;
@@ -297,10 +298,8 @@
     //选择方案
     function xuanzhefanan() {
         if (panduanlingqu()) {
-            window.location.href = "../VBAOGAODAYIN/Xuanzhefangan/" + arr[0].ID;
-        }
-        else {
-            $.messager.alert('操作提示', '操作有误，请仔细检查!', 'warning');
+            var arr = $('#flexigridData').datagrid('getSelections');
+            window.location.href = "../VJIANDINGRENWU/Xuanzhefangan/" + arr[0].ID;
         }
     }
     //獲取數據集

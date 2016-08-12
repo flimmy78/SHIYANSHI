@@ -1,56 +1,86 @@
 ﻿
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/Create.cshtml";
 }
 
-<!DOCTYPE html>
+@using (Html.BeginForm("", "api/PREPARE_SCHEMEApi/Post"))
+{
+    <fieldset>
+        <legend>
+            <label>报告证书类别</label>
+            <input class="a2 f2" type="button" onclick="BackList('VJIANDINGRENWU')" value="返回" />
+        </legend>
+        <div>
+            <div class="input_search">
+                <div class="input_search-label">
+                    报告类别:
+                </div>
+                <div class="input_search-field">
+                    @Html.DropDownList("ORDER_STATUSDDL_String", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "REPORT_CATEGORY"), "请选择", new { id = "REPORT_CATEGORY_String" })
+                </div>
+                <div class="input_search-label">
+                    证书类别:
+                </div>
+                <div class="input_search-field">
+                    <select id="aa" onchange="zhengshuxuanzhe()">
+                        <option value="">请选择</option>
+                        <option value="检定">检定</option>
+                        <option value="校准">校准</option>
+                    </select>
+                    @*@Html.DropDownList("ORDER_STATUSDDL_String", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "CERTIFICATE_CATEGORY"), "请选择", new { id = "CERTIFICATE_CATEGORY_String" })*@
+                </div>
+            </div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Xuanzhefangan</title>
-</head>
-<body>
-    <div>
-        <div class="input_search">
-            <div class="input_search-label">
-                报告类别:
+            <div class="input_search" id="cnas" style="display:none">
+                <div class="input_search-label">
+                    CNAS:
+                </div>
+                <div class="input_search-field">
+                    Yes: <input type="radio" id="cnasyes" name="cnas" />
+                    No: <input type="radio" id="cnasno" name="cnas" />
+                </div>
+
             </div>
-            <div class="input_search-field">
-                @Html.DropDownList("ORDER_STATUSDDL_String", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "REPORT_CATEGORY"), "请选择", new { id = "REPORT_CATEGORY_String" })
+            <div class="input_search" id="jianding" style="display:none">
+                <div class="input_search-label">
+                    检定授权:
+                </div>
+                <div class="input_search-field">
+                    Yes: <input type="radio" id="jiandingyes" name="jianding" />
+                    No: <input type="radio" id="jiandingno" name="jianding" />
+                </div>
             </div>
-            <div class="input_search-label">
-                证书类别:
-            </div>
-            <div class="input_search-field">
-                @Html.DropDownList("ORDER_STATUSDDL_String", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "CERTIFICATE_CATEGORY"), "请选择", new { id = "CERTIFICATE_CATEGORY_String" })
-            </div>
-        </div>
-      
-        <div class="input_search">
-            <div class="input_search-label">
-                CNAS:
-            </div>
-            <div class="input_search-field">
-                Yes: <input type="radio" id="cnasyes" name="cnas" />
-                No: <input type="radio" id="cnasno"  name="cnas"/>
-            </div>
-            <div class="input_search-label">
-                检定授权:
-            </div>
-            <div class="input_search-field">
-                Yes: <input type="radio" id="jiandingyes" name="jianding"/>
-                No: <input type="radio" id="jiandingno" name="jianding"/>
-            </div>
-        </div> 
-        <div class="input_search">
-            <div class="input_search-label">
-                资质:
-            </div>
-            <div class="input_search-field">
-                @Html.DropDownList("ORDER_STATUSDDL_String", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "QUALIFICATIONS"), "请选择", new { id = "QUALIFICATIONS_String" })
+            <div class="input_search">
+                <div class="input_search-label">
+                    资质:
+                </div>
+                <div class="input_search-field">
+                    @Html.DropDownList("ORDER_STATUSDDL_String", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "QUALIFICATIONS"), "请选择", new { id = "QUALIFICATIONS_String" })
+                </div>
+            </div><br />
+            <div class="input_search">
+                <input type="button" value="报告上传" />
+                <input type="submit" value="建立方案" />
             </div>
         </div>
-    </div>
-</body>
-</html>
+
+    </fieldset>
+}
+<script type="text/javascript">
+    function zhengshuxuanzhe() {
+        var option = $("#aa option:selected");
+        var b = option.text();
+        if (b == "检定") {
+            $("#cnas").hide();
+            $("#jianding").show();
+        }
+        else if (b == "校准") {
+            $("#cnas").show();
+            $("#jianding").hide();
+        }
+        else {
+            $("#cnas").hide();
+            $("#jianding").hide();
+        }
+    }
+</script>
