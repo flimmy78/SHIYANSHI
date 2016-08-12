@@ -102,6 +102,38 @@
         <AssociationConnector Association="Model.FK_TRANSMIT_REFERENCE_TRANSMI4" />
         <AssociationConnector Association="Model.METERING_STANDARD_DEVICEPREPAR" />
         <EntityTypeShape EntityType="Model.VJIANDINGRENWU" Width="1.5" PointX="15.75" PointY="0.875" />
+        <EntityTypeShape EntityType="Model.FileUploader" Width="1.5" PointX="24.75" PointY="14.75" />
+        <EntityTypeShape EntityType="Model.SysAnnouncement" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.SysDepartment" Width="1.5" PointX="17.5" PointY="40.375" />
+        <EntityTypeShape EntityType="Model.SysDocument" Width="1.5" PointX="15.25" PointY="40.5" />
+        <EntityTypeShape EntityType="Model.SysDocumentTalk" Width="1.5" PointX="17.5" PointY="44.875" />
+        <EntityTypeShape EntityType="Model.SysEmail" Width="1.5" PointX="27" PointY="10" />
+        <EntityTypeShape EntityType="Model.SysEmailTemp" Width="1.5" PointX="24.75" PointY="10" />
+        <EntityTypeShape EntityType="Model.SysException" Width="1.5" PointX="5.75" PointY="20.75" />
+        <EntityTypeShape EntityType="Model.SysField" Width="1.5" PointX="24.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.SysLog" Width="1.5" PointX="24.75" PointY="18.75" />
+        <EntityTypeShape EntityType="Model.SysMenu" Width="1.5" PointX="19.75" PointY="23.125" />
+        <EntityTypeShape EntityType="Model.SysMenuSysRoleSysOperation" Width="1.5" PointX="24.25" PointY="24" />
+        <EntityTypeShape EntityType="Model.SysMessage" Width="1.5" PointX="27" PointY="6" />
+        <EntityTypeShape EntityType="Model.SysMessageTemp" Width="1.5" PointX="24.75" PointY="6" />
+        <EntityTypeShape EntityType="Model.SysNotice" Width="1.5" PointX="7.75" PointY="20.75" />
+        <EntityTypeShape EntityType="Model.SysOperation" Width="1.5" PointX="22" PointY="23.625" />
+        <EntityTypeShape EntityType="Model.SysPerson" Width="1.5" PointX="19.75" PointY="38.75" />
+        <EntityTypeShape EntityType="Model.SysRole" Width="1.5" PointX="22" PointY="40.875" />
+        <AssociationConnector Association="Model.FK_SYSDEPAR_REFERENCE_SYSDEPAR" />
+        <AssociationConnector Association="Model.FK_SYSPERSO_REFERENCE_SYSDEPAR" />
+        <AssociationConnector Association="Model.FK_SYSDOCUM_REFERENCE_SYSDOCUM" />
+        <AssociationConnector Association="Model.FK_SYSEMAIL_REFERENCE_SYSEMAIL" />
+        <AssociationConnector Association="Model.FK_SYSFIELD_REFERENCE_SYSFIELD" />
+        <AssociationConnector Association="Model.FK_SYSMENU_REFERENCE_SYSMENU" />
+        <AssociationConnector Association="Model.FK_SYSMENUS_REFERENCE_SYSMENU2" />
+        <AssociationConnector Association="Model.FK_SYSMENUS_RE2" />
+        <AssociationConnector Association="Model.FK_SYSMENUS_REFERENCE_SYSROLE" />
+        <AssociationConnector Association="Model.FK_SYSMESSA_REFERENCE_SYSMESSA" />
+        <AssociationConnector Association="Model.SysDocumentSysDepartment" />
+        <AssociationConnector Association="Model.SysDocumentSysPerson" />
+        <AssociationConnector Association="Model.SysMenuSysOperation" />
+        <AssociationConnector Association="Model.SysRoleSysPerson" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

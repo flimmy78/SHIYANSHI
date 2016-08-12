@@ -16,23 +16,20 @@ using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using System.Web;
 
-namespace  Models
+namespace Models
 {
     //[SupportFilter]//此处如果去掉注释，则全部继承BaseController的Controller，都将执行SupportFilter过滤
     public class BaseController : Controller
     {
         /// <summary>
-        /// 获取当前登陆人的名称
+        /// 获取当前登陆人的用户名
         /// </summary>
         /// <returns></returns>
         public string GetCurrentPerson()
         {
-            Account account = GetCurrentAccount();
-            if (account != null && !string.IsNullOrWhiteSpace(account.PersonName))
-            {
-                return account.PersonName;
-            }
-            return string.Empty;
+            return AccountModel.GetCurrentPerson();
+
+
         }
         /// <summary>
         /// 获取当前登陆人的账户信息
@@ -40,12 +37,11 @@ namespace  Models
         /// <returns>账户信息</returns>
         public Account GetCurrentAccount()
         {
-            if (Session["account"] != null)
-            {
-                Account account = (Account)Session["account"];
-                return account;
-            }
-            return null;
+            var account = AccountModel.GetCurrentAccount();
+
+            return account;
+
+
         }
         /// <summary>
         /// 导出数据集到excle
@@ -125,9 +121,74 @@ namespace  Models
             //记录日志
 
         }
-      
+        public string ReadExcle(string path = @"~/up/b.xls", int from = 1)
+        {
+            HSSFWorkbook _book = new HSSFWorkbook();
+            string xlsPath = System.Web.HttpContext.Current.Server.MapPath(path);
+
+            FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
+            IWorkbook hssfworkbook = new HSSFWorkbook(file);
+            ISheet sheet = hssfworkbook.GetSheet("Sheet1");
+            string guid = Guid.NewGuid().ToString();
+            string saveFileName = xlsPath.Path(guid);
+
+
+            StringBuilder sb2 = new StringBuilder();
+
+            string courty = "";
+
+
+            //获取sheet的首行
+            var headerRow = sheet.GetRow(0);
+
+            //一行最后一个方格的编号 即总的列数
+            int cellCount = headerRow.LastCellNum;
+
+            //for (int i = headerRow.FirstCellNum; i < cellCount; i++)
+            //{
+
+            //}
+
+            //最后一列的标号  即总的行数
+            int rowCount = sheet.LastRowNum;
+
+            for (int i = 0; i <= sheet.LastRowNum; i++)
+            {
+
+                var row = sheet.GetRow(i);
+
+                if (row != null)
+                {
+                    courty = row.GetCell(0).ToString();
+                    if (!string.IsNullOrWhiteSpace(courty))
+                    {
+                        courty = courty.Split(' ')[0];
+                        sb2.Append(string.Format("'{0}',", courty));
+
+
+                    }
+                }
+
+
+
+
+            }
+            var da = sb2.ToString();
+
+            hssfworkbook = null;
+            sheet = null;
+
+
+
+
+            //一般只用写这一个就OK了，他会遍历并释放所有资源，但当前版本有问题所以只释放sheet  
+            return string.Format("../../up/{0}.xls", guid);
+            //记录日志
+
+        }
+
         public BaseController()
         { }
-    
-   }
+
+    }
 }

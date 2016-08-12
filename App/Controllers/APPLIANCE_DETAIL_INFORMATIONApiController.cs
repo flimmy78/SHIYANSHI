@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
+ 
 using System.Text;
 using System.EnterpriseServices;
 using System.Configuration;
@@ -24,6 +24,78 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="getParam"></param>
         /// <returns></returns>
+        /// 
+
+        [HttpPost]
+        public Common.ClientResult.DataResult PostDataByID(string id)
+        {
+
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+
+                id = id.Replace("@","&");
+            }
+            int total = 0;
+            List<APPLIANCE_DETAIL_INFORMATION> queryData = m_BLL.GetByParam(null, 1, 1, "ID", "DESC", id, ref total);
+            var data = new Common.ClientResult.DataResult
+            {
+                total = total,
+                rows = queryData.Select(s => new
+                {
+                    ID = s.ID
+                    ,
+                    BAR_CODE_NUM = s.BAR_CODE_NUM
+                    ,
+                    APPLIANCE_NAME = s.APPLIANCE_NAME
+                    ,
+                    MODEL = s.VERSION,
+                    FORMAT = s.FORMAT
+                    ,
+                    FACTORY_NUM = s.FACTORY_NUM
+                    ,
+                    NUM = s.NUM
+                    ,
+                    ATTACHMENT = s.ATTACHMENT
+                    ,
+                    APPEARANCE_STATUS = s.APPEARANCE_STATUS
+                    ,
+                    MAKE_ORGANIZATION = s.MAKE_ORGANIZATION
+                    ,
+                    REMARKS = s.REMARKS
+                    ,
+                    END_PLAN_DATE = s.END_PLAN_DATE
+                    ,
+                    ORDER_TASK_INFORMATIONID = s.ORDER_TASK_INFORMATIONIDOld
+                    ,
+                    CREATETIME = s.CREATETIME
+                    ,
+                    CREATEPERSON = s.CREATEPERSON
+                    ,
+                    UPDATETIME = s.UPDATETIME
+                    ,
+                    UPDATEPERSON = s.UPDATEPERSON
+                    ,
+                    APPLIANCE_RECIVE = s.APPLIANCE_RECIVE
+                    ,
+                    APPLIANCE_PROGRESS = s.APPLIANCE_PROGRESS
+                    ,
+                    ORDER_STATUS = s.ORDER_STATUS
+                    ,
+                    ISOVERDUE = s.ISOVERDUE
+                    ,
+                    OVERDUE = s.OVERDUE
+                    ,
+                    STORAGEINSTRUCTIONS = s.STORAGEINSTRUCTIONS
+                    ,
+                    STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU
+
+
+                })
+            };
+            return data;
+        }
+
+        [HttpPost]
         public Common.ClientResult.DataResult PostData([FromBody]GetDataParam getParam)
         {
             int total = 0;
@@ -34,36 +106,58 @@ namespace Langben.App.Controllers
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID
-					,BAR_CODE_NUM = s.BAR_CODE_NUM
-					,APPLIANCE_NAME = s.APPLIANCE_NAME
-					,MODEL = s.VERSION,
+                    ,
+                    BAR_CODE_NUM = s.BAR_CODE_NUM
+                    ,
+                    APPLIANCE_NAME = s.APPLIANCE_NAME
+                    ,
+                    MODEL = s.VERSION,
                     FORMAT = s.FORMAT
-					,FACTORY_NUM = s.FACTORY_NUM
-					,NUM = s.NUM
-					,ATTACHMENT = s.ATTACHMENT
-					,APPEARANCE_STATUS = s.APPEARANCE_STATUS
-					,MAKE_ORGANIZATION = s.MAKE_ORGANIZATION
-					,REMARKS = s.REMARKS
-					,END_PLAN_DATE = s.END_PLAN_DATE
-					,ORDER_TASK_INFORMATIONID =   s.ORDER_TASK_INFORMATIONIDOld
-					,CREATETIME = s.CREATETIME
-					,CREATEPERSON = s.CREATEPERSON
-					,UPDATETIME = s.UPDATETIME
-					,UPDATEPERSON = s.UPDATEPERSON
-					,APPLIANCE_RECIVE = s.APPLIANCE_RECIVE
-					,APPLIANCE_PROGRESS = s.APPLIANCE_PROGRESS
-					,ORDER_STATUS = s.ORDER_STATUS
-					,ISOVERDUE = s.ISOVERDUE
-					,OVERDUE = s.OVERDUE
-					,STORAGEINSTRUCTIONS = s.STORAGEINSTRUCTIONS
-					,STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU
-					
+                    ,
+                    FACTORY_NUM = s.FACTORY_NUM
+                    ,
+                    NUM = s.NUM
+                    ,
+                    ATTACHMENT = s.ATTACHMENT
+                    ,
+                    APPEARANCE_STATUS = s.APPEARANCE_STATUS
+                    ,
+                    MAKE_ORGANIZATION = s.MAKE_ORGANIZATION
+                    ,
+                    REMARKS = s.REMARKS
+                    ,
+                    END_PLAN_DATE = s.END_PLAN_DATE
+                    ,
+                    ORDER_TASK_INFORMATIONID = s.ORDER_TASK_INFORMATIONIDOld
+                    ,
+                    CREATETIME = s.CREATETIME
+                    ,
+                    CREATEPERSON = s.CREATEPERSON
+                    ,
+                    UPDATETIME = s.UPDATETIME
+                    ,
+                    UPDATEPERSON = s.UPDATEPERSON
+                    ,
+                    APPLIANCE_RECIVE = s.APPLIANCE_RECIVE
+                    ,
+                    APPLIANCE_PROGRESS = s.APPLIANCE_PROGRESS
+                    ,
+                    ORDER_STATUS = s.ORDER_STATUS
+                    ,
+                    ISOVERDUE = s.ISOVERDUE
+                    ,
+                    OVERDUE = s.OVERDUE
+                    ,
+                    STORAGEINSTRUCTIONS = s.STORAGEINSTRUCTIONS
+                    ,
+                    STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU
+
 
                 })
             };
             return data;
         }
-
+       
         /// <summary>
         /// 根据ID获取数据模型
         /// </summary>

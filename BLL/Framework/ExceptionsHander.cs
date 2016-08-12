@@ -19,27 +19,21 @@ namespace Langben.BLL
         /// <param name="ex"></param>
         public static void WriteExceptions(Exception ex)
         {
-            bool exceptionEnabled = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["ExceptionEnabled"]);
-            if (!exceptionEnabled)
+           
+            SysException sysException = new SysException();
+            sysException.CreateTime = DateTime.Now;
+            sysException.Remark = ex.StackTrace;
+            sysException.Message = ex.Message;
+            sysException.LeiXing = "异常";
+            sysException.Message = (ex.InnerException == null) ? string.Empty : ex.InnerException.Message;
+            sysException.Id = Result.GetNewId();
+
+            using (SysExceptionBLL sysExceptionRepository = new SysExceptionBLL())
             {
+                ValidationErrors validationErrors = new ValidationErrors();
+                sysExceptionRepository.Create(ref validationErrors, sysException);
                 return;
             }
-            //此处实现异常的记录
-
-            //SysException sysException = new SysException();
-            //sysException.CreateTime = DateTime.Now;
-            //sysException.Remark = ex.StackTrace;
-            //sysException.Message = ex.Message;
-            //sysException.LeiXing = "异常";
-            //sysException.Result = (ex.InnerException == null) ? string.Empty : ex.InnerException.Message;
-            //sysException.Id = Result.GetNewId();
-
-            //using (SysExceptionBLL sysExceptionRepository = new SysExceptionBLL())
-            //{
-            //    ValidationErrors validationErrors = new ValidationErrors();
-            //    sysExceptionRepository.Create(ref validationErrors, sysException);
-            //    return;
-            //}
 
         }
     }

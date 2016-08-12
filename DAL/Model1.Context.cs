@@ -78,5 +78,23 @@ namespace Langben.DAL
         public virtual DbSet<VSHENHE> VSHENHE { get; set; }
         public virtual DbSet<VSHENPI> VSHENPI { get; set; }
         public virtual DbSet<VJIANDINGRENWU> VJIANDINGRENWU { get; set; }
+        public virtual DbSet<FileUploader> FileUploader { get; set; }
+        public virtual DbSet<SysAnnouncement> SysAnnouncement { get; set; }
+        public virtual DbSet<SysDepartment> SysDepartment { get; set; }
+        public virtual DbSet<SysDocument> SysDocument { get; set; }
+        public virtual DbSet<SysDocumentTalk> SysDocumentTalk { get; set; }
+        public virtual DbSet<SysEmail> SysEmail { get; set; }
+        public virtual DbSet<SysEmailTemp> SysEmailTemp { get; set; }
+        public virtual DbSet<SysException> SysException { get; set; }
+        public virtual DbSet<SysField> SysField { get; set; }
+        public virtual DbSet<SysLog> SysLog { get; set; }
+        public virtual DbSet<SysMenu> SysMenu { get; set; }
+        public virtual DbSet<SysMenuSysRoleSysOperation> SysMenuSysRoleSysOperation { get; set; }
+        public virtual DbSet<SysMessage> SysMessage { get; set; }
+        public virtual DbSet<SysMessageTemp> SysMessageTemp { get; set; }
+        public virtual DbSet<SysNotice> SysNotice { get; set; }
+        public virtual DbSet<SysOperation> SysOperation { get; set; }
+        public virtual DbSet<SysPerson> SysPerson { get; set; }
+        public virtual DbSet<SysRole> SysRole { get; set; }
     }
 }

@@ -12,13 +12,13 @@
  * 
  */
 (function($){
-	// var oldLoadDataMethod = $.fn.datagrid.methods.loadData;
-	// $.fn.datagrid.methods.loadData = function(jq, data){
-	// 	jq.each(function(){
-	// 		$.data(this, 'datagrid').filterSource = null;
-	// 	});
-	// 	return oldLoadDataMethod.call($.fn.datagrid.methods, jq, data);
-	// };
+	 var oldLoadDataMethod = $.fn.datagrid.methods.loadData;
+	 $.fn.datagrid.methods.loadData = function(jq, data){
+	 	jq.each(function(){
+	 		$.data(this, 'datagrid').filterSource = null;
+	 	});
+	 	return oldLoadDataMethod.call($.fn.datagrid.methods, jq, data);
+	 };
 
 	var autoGrids = [];
 	function checkAutoGrid(){

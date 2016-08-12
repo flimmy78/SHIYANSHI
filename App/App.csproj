@@ -134,17 +134,68 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Account\" />
+    <Folder Include="Views\Exception\" />
+    <Folder Include="Views\FileUploader\" />
+    <Folder Include="Views\HomeRight\" />
+    <Folder Include="Views\SysAnnouncement\" />
+    <Folder Include="Views\SysDepartmentTree\" />
+    <Folder Include="Views\SysDepartment\" />
+    <Folder Include="Views\SysDocumentTalk\" />
+    <Folder Include="Views\SysDocument\" />
+    <Folder Include="Views\SysEmailTemp\" />
+    <Folder Include="Views\SysEmail\" />
+    <Folder Include="Views\SysException\" />
+    <Folder Include="Views\SysFieldTree\" />
+    <Folder Include="Views\SysField\" />
+    <Folder Include="Views\SysLog\" />
+    <Folder Include="Views\SysMenuSysRoleSysOperation\" />
+    <Folder Include="Views\SysMenuTree\" />
+    <Folder Include="Views\SysMenu\" />
+    <Folder Include="Views\SysMessageTemp\" />
+    <Folder Include="Views\SysMessage\" />
+    <Folder Include="Views\SysNotice\" />
+    <Folder Include="Views\SysOperation\" />
+    <Folder Include="Views\SysPerson\" />
+    <Folder Include="Views\SysRole\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Codes\AccountModels.cs" />
     <Compile Include="Codes\BaseApiController.cs" />
     <Compile Include="Codes\BaseController.cs" />
+    <Compile Include="Codes\CommonFunc.cs" />
     <Compile Include="Codes\LogClassModels.cs" />
     <Compile Include="Codes\SupportFilter.cs" />
     <Compile Include="Codes\SysFieldModels.cs" />
+    <Compile Include="Codes\Utils.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ExceptionController.cs" />
+    <Compile Include="Controllers\FileUploaderController.cs" />
+    <Compile Include="Controllers\HomeRightController.cs" />
+    <Compile Include="Controllers\SysAnnouncementController.cs" />
+    <Compile Include="Controllers\SysDepartmentController.cs" />
+    <Compile Include="Controllers\SysDepartmentTreeController.cs" />
+    <Compile Include="Controllers\SysDocumentController.cs" />
+    <Compile Include="Controllers\SysDocumentTalkController.cs" />
+    <Compile Include="Controllers\SysEmailController.cs" />
+    <Compile Include="Controllers\SysEmailTempController.cs" />
+    <Compile Include="Controllers\SysExceptionController.cs" />
+    <Compile Include="Controllers\SysFieldController.cs" />
+    <Compile Include="Controllers\SysFieldTreeController.cs" />
+    <Compile Include="Controllers\SysLogController.cs" />
+    <Compile Include="Controllers\SysMenuController.cs" />
+    <Compile Include="Controllers\SysMenuSysRoleSysOperationController.cs" />
+    <Compile Include="Controllers\SysMenuTreeController.cs" />
+    <Compile Include="Controllers\SysMessageController.cs" />
+    <Compile Include="Controllers\SysMessageTempController.cs" />
+    <Compile Include="Controllers\SysNoticeController.cs" />
+    <Compile Include="Controllers\SysOperationController.cs" />
+    <Compile Include="Controllers\SysPersonController.cs" />
+    <Compile Include="Controllers\SysRoleController.cs" />
     <Compile Include="Controllers\VAPPLIANCE_DETAIL_INFORMATIONApiController .cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ApplianceController.cs" />
@@ -155,7 +206,11 @@
     <Compile Include="HtmlHelper\Easyui.cs" />
     <Compile Include="HtmlHelper\RadioButtonListHelper.cs" />
     <Compile Include="Models\ApplianceModel.cs" />
+    <Compile Include="Models\BaseException.cs" />
     <Compile Include="Models\EmptyClass.cs" />
+    <Compile Include="Models\SysDepartmentTreeModel.cs" />
+    <Compile Include="Models\SysFieldTreeModel.cs" />
+    <Compile Include="Models\SysMenuTreeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -388,6 +443,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="up\b.xls" />
     <Content Include="Views\Appliance\Index.cshtml" />
+    <Content Include="Views\Home\Index - 副本.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

@@ -72,10 +72,10 @@
     function seng() {
         //器具信息绑定
         var search = "";
-      //  search = "BAR_CODE_NUM" + "&" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "&" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "&" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "&" + $("#APPLIANCE_NAME").val() + "^"
-        $('#ApplianceDate').edatagrid({ URL: '/api/APPLIANCE_DETAIL_INFORMATIONApi/PostData' });
-        debugger;
-        $('#ApplianceDate').edatagrid('loadData', { search: search }); //{ url: "/api/APPLIANCE_DETAIL_INFORMATIONApi/PostData" }
+        search = "BAR_CODE_NUM" + "@@" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "@@" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "@@" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "@@" + $("#APPLIANCE_NAME").val() + "^"
+        $('#ApplianceDate').edatagrid({ url: '/api/APPLIANCE_DETAIL_INFORMATIONApi/PostDataByID/' + search } );
+ 
+        //$('#ApplianceDate').edatagrid('reload', { id: search }); //{ url: "/api/APPLIANCE_DETAIL_INFORMATIONApi/PostData" }
         //委托单信息绑定
         //$.ajax({
         //    url: "/api/ORDER_TASK_INFORMATION/Get" + id,
