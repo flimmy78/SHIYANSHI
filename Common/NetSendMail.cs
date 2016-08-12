@@ -65,10 +65,15 @@ namespace Common
             MailSend(mailFrom, maiFromlAccount, mailFromPwd, mailSmtpServer, mailTo, mailCC, mailBCC, mailTitle, mailContent, attList, Encoding.UTF8, false);
         }
 
-        public static void MailSendHTML(string mailFrom, string maiFromlAccount, string mailFromPwd, string mailSmtpServer, IList<string> mailTo, IList<string> mailCC, IList<string> mailBCC, string mailTitle, string mailContent)
+        public static void MailSendHTML(string mailTo, string mailTitle, string mailContent)
         {
+            string mailFrom = "ben@langben.com",
+              maiFromlAccount = "service@langben.com",
+              mailFromPwd = "langben123",
+              mailSmtpServer = "smtp.exmail.qq.com";
             List<string> attList = new List<string>();
-            MailSend(mailFrom, maiFromlAccount, mailFromPwd, mailSmtpServer, mailTo, mailCC, mailBCC, mailTitle, mailContent, attList, Encoding.UTF8, true);
+            List<string> mailToList = new List<string>() { mailTo }; IList<string> mailCC = new List<string>(); IList<string> mailBCC = new List<string>();
+            MailSend(mailFrom, maiFromlAccount, mailFromPwd, mailSmtpServer, mailToList, mailCC, mailBCC, mailTitle, mailContent, attList, Encoding.UTF8, true);
         }
     }
 }

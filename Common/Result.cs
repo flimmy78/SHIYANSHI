@@ -16,16 +16,8 @@ namespace Common
         /// <returns></returns>
         public static string GetNewId()
         {
-            //return Guid.NewGuid().ToString();
-            return CreateNewId();
-        }
-        /// <summary>
-        /// 创建不重复的Id
-        /// </summary>
-        /// <returns></returns>
-        private static string CreateNewId()
-        {
-            string id = DateTime.Now.ToString("yyyyMMddHHmmssfffffff");
+            
+            string id = DateTime.Now.ToString("yyMMddHHmmssfffffff");
             string guid = Guid.NewGuid().ToString().Replace("-", "");
 
             id += guid.Substring(0, 10);

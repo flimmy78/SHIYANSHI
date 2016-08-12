@@ -1,15 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
-//using Langben.BLL;
-//using Langben.IBLL;
-//using Langben.DAL;
-
-namespace Models
+using Langben.BLL;
+using Langben.IBLL;
+namespace  Models
 {
-    /// <summary>
-    ///  此处实现数据字典的功能
-    /// </summary>
     public class SysFieldModels
     {
 
@@ -19,13 +13,13 @@ namespace Models
         /// <returns></returns>
         public static SelectList GetSysField(string table, string colum, string parentMyTexts)
         {
-            //if (string.IsNullOrWhiteSpace(table) || string.IsNullOrWhiteSpace(colum) || string.IsNullOrWhiteSpace(parentMyTexts))
+            if (string.IsNullOrWhiteSpace(table) || string.IsNullOrWhiteSpace(colum) || string.IsNullOrWhiteSpace(parentMyTexts))
             {
                 List<SelectList> sl = new List<SelectList>();
                 return new SelectList(sl);
             }
-            //ISysFieldHander baseDDL = new SysFieldHander();
-            //return new SelectList(baseDDL.GetSysField(table, colum, parentMyTexts), "MyTexts", "MyTexts");
+            ISysFieldHander baseDDL = new SysFieldHander();
+            return new SelectList(baseDDL.GetSysField(table, colum, parentMyTexts), "MyTexts", "MyTexts");
 
         }
         /// <summary>
@@ -34,13 +28,13 @@ namespace Models
         /// <returns></returns>
         public static SelectList GetSysField(string table, string colum)
         {
-            //if (string.IsNullOrWhiteSpace(table) || string.IsNullOrWhiteSpace(colum))
+            if (string.IsNullOrWhiteSpace(table) || string.IsNullOrWhiteSpace(colum))
             {
                 List<SelectList> sl = new List<SelectList>();
                 return new SelectList(sl);
             }
-            //ISysFieldHander baseDDL = new SysFieldHander();
-            //return new SelectList(baseDDL.GetSysField(table, colum), "MyTexts", "MyTexts");
+            ISysFieldHander baseDDL = new SysFieldHander();
+            return new SelectList(baseDDL.GetSysField(table, colum), "MyTexts", "MyTexts");
 
         }
         /// <summary>
@@ -49,13 +43,13 @@ namespace Models
         /// <returns></returns>
         public static SelectList GetSysFieldById(string table, string colum)
         {
-            //if (string.IsNullOrWhiteSpace(table) || string.IsNullOrWhiteSpace(colum))
+            if (string.IsNullOrWhiteSpace(table) || string.IsNullOrWhiteSpace(colum))
             {
                 List<SelectList> sl = new List<SelectList>();
                 return new SelectList(sl);
             }
-            //ISysFieldHander baseDDL = new SysFieldHander();
-            //return new SelectList(baseDDL.GetSysField(table, colum), "Id", "MyTexts");
+            ISysFieldHander baseDDL = new SysFieldHander();
+            return new SelectList(baseDDL.GetSysField(table, colum), "Id", "MyTexts");
 
         }
         /// <summary>
@@ -65,13 +59,14 @@ namespace Models
         /// <returns></returns>
         public static string GetMyTextsById(string id)
         {
-            //if (string.IsNullOrWhiteSpace(id))
+            if (string.IsNullOrWhiteSpace(id))
             {
                 return string.Empty;
             }
-            //ISysFieldHander baseDDL = new SysFieldHander();
-            //return baseDDL.GetMyTextsById(id);
+            ISysFieldHander baseDDL = new SysFieldHander();
+            return baseDDL.GetMyTextsById(id);
 
         }
     }
 }
+

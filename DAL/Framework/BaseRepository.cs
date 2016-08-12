@@ -100,6 +100,7 @@ namespace Langben.DAL
         {
             if(isAttach)
                 db.Set<T>().Attach(entity);
+           
             db.Entry(entity).State = System.Data.Entity.EntityState.Modified; 
             return entity;
         }

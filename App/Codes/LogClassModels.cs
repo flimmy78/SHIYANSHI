@@ -6,7 +6,9 @@ using System.Configuration;
 using Common;
 using System.IO;
 using System.Text;
-
+using Langben.DAL;
+using Langben.BLL;
+ 
 namespace Models
 {
     /// <summary>
@@ -27,9 +29,10 @@ namespace Models
         /// </summary>
         Fobid
     }
-
+     
     public class LogClassModels : System.Web.SessionState.IRequiresSessionState
-    {
+    { 
+       
         public static void WriteServiceLog(string message, string logType, LogOpration logOpration = LogOpration.Default)
         {
             try
@@ -44,20 +47,21 @@ namespace Models
                 {
                     //此处实现日志的记录
 
-                    //SysLog sysLog = new SysLog();
-                    //sysLog.Id = Result.GetNewId();
-                    //sysLog.CreateTime = DateTime.Now;
-                    //sysLog.Ip = GetIP();
-                    //sysLog.Message = message;
-                    //sysLog.CreatePerson = AccountModel.GetCurrentPerson();
-                    //sysLog.MenuId = logType;//哪个模块生成的日志
+                    SysLog sysLog = new SysLog();
+                    sysLog.Id = Result.GetNewId();
+                    sysLog.CreateTime = DateTime.Now;
+                    sysLog.Ip = GetIP();
+                    sysLog.Message = message;
 
-                    //using (SysLogBLL sysLogRepository = new SysLogBLL())
-                    //{
-                    //    ValidationErrors validationErrors = new ValidationErrors();
-                    //    sysLogRepository.Create(ref validationErrors, sysLog);
-                    //    return;
-                    //}
+                    sysLog.CreatePerson = AccountModel.GetCurrentPerson();
+                    sysLog.MenuId = logType;//哪个模块生成的日志
+
+                    using (var sysLogRepository = new SysLogBLL())
+                    {
+                        ValidationErrors validationErrors = new ValidationErrors();
+                        sysLogRepository.Create(ref validationErrors, sysLog);
+                        return;
+                    }
                 }
             }
             catch (Exception ep)
