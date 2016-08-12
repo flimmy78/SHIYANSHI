@@ -10,7 +10,7 @@
     </legend>
     <div>
         <div class="input_search">
-            <label>试验方案制定</label><br />
+            <label>试验方案制定</label><br style="clear:both;" />
             <div class="input_search-label">
                 选择方案模板：
             </div>
@@ -19,7 +19,7 @@
                 <input type="button" value="选择" />
             </div>
         </div><br />
-        <label>被检器具主要参数</label><br />
+        <label>被检器具主要参数</label><br style="clear:both;" />
         <div class="input_search">
             <div class="input_search-label">
                 *器具名称：
@@ -68,13 +68,13 @@
                 <input type="text" readonly="readonly" />
             </div>
         </div><br />
-        <label>其他信息</label><br />
+        <label>其他信息</label><br style="clear:both;" />
         <div class="input_search">
             <div class="input_search-label">
                 环境温度：
             </div>
             <div class="input_search-field">
-                <input type="text"  />
+                <input type="text" />
             </div>
         </div><br />
         <div class="input_search">
@@ -82,7 +82,7 @@
                 相对湿度：
             </div>
             <div class="input_search-field">
-                <input type="text"  />
+                <input type="text" />
             </div>
         </div><br />
         <div class="input_search">
@@ -90,7 +90,7 @@
                 检定地点：
             </div>
             <div class="input_search-field">
-                <input type="text"/>
+                <input type="text" />
             </div>
         </div><br />
         <div class="input_search">
@@ -108,8 +108,47 @@
             <div class="input_search-field">
                 <input type="text" />
             </div>
-        </div><br />
-        <label>检定使用的标准器</label><br />
-        <input type="button" value="+" />
+        </div><br style="clear:both;" />
+
+        <table id="jianlifangan"></table><br style="clear:both;" />
+        <input type="button"value="下一步" />
+        <input type="button"value="保存下一步" />
     </div>
 </fieldset>
+<script type="text/javascript">
+    $(function () {
+        $('#jianlifangan').datagrid({
+            title: '检定使用的标准器', //列表的标题
+            iconCls: 'icon-site',
+            width: 'auto',
+            height: 'auto',
+            //nowrap: false,
+            striped: true,
+            collapsible: true,
+            //url: '../VJIANDINGRENWU/GetData', //获取数据的url
+            sortName: 'ID',
+            sortOrder: 'desc',
+            idField: 'ID',
+            toolbar: [
+                 {
+                     text: '+',
+                     iconCls: 'icon-search',
+                     handler: function () {
+                         return lingqu();
+                     }
+                 },
+                  {
+                      text: '删除',
+                      iconCls: 'icon-search',
+                      handler: function () {
+                          return lingqu();
+                      }
+                  }
+            ],
+            columns: [[
+					{ field: 'ID', title: '名称', width: 64 }
+					, { field: 'ORDER_NUMBER', title: '测量范围', width: 64 }
+            ]],
+        })
+    });
+</script>
