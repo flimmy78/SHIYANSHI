@@ -36,8 +36,8 @@
                     CNAS:
                 </div>
                 <div class="input_search-field">
-                    Yes: <input type="radio" id="cnasyes" name="cnas" />
-                    No: <input type="radio" id="cnasno" name="cnas" />
+                    Yes: <input type="radio" id="cnasyes" name="cnas" onclick="zizhiget(this)" value="cnasyes" />
+                    No: <input type="radio" id="cnasno" name="cnas" onclick="zizhiget(this)" value="cnasno" />
                 </div>
 
             </div>
@@ -46,8 +46,8 @@
                     检定授权:
                 </div>
                 <div class="input_search-field">
-                    Yes: <input type="radio" id="jiandingyes" name="jianding" />
-                    No: <input type="radio" id="jiandingno" name="jianding" />
+                    Yes: <input type="radio" id="jiandingyes" name="jianding" onclick="zizhiget(this)" value="jiandingyes" />
+                    No: <input type="radio" id="jiandingno" name="jianding" onclick="zizhiget(this)" value="jiandingno" />
                 </div>
             </div>
             <div class="input_search">
@@ -59,7 +59,7 @@
                 </div>
             </div><br />
             <div class="input_search">
-                <input type="button"  value="报告上传" onclick="shangchuan()"/>
+                <input type="button" value="报告上传" onclick="shangchuan()" />
                 <input type="submit" value="建立方案" />
             </div>
         </div>
@@ -86,61 +86,77 @@
     }
     //报告上传
     function shangchuan() {
-        var id="@ViewBag.Id";
-        window.location.href = "/VJIANDINGRENWU/Baogaoshangchuan/" + id;
+        var id = "@ViewBag.Id";
+        window.location.href = "/VJIANDINGRENWU/BaoGaoShangChuan/" + id;
+    }
+    //重新绑定资质
+    function zizhiget(arr) {
+        var zhi=$(arr).val();
+        if (zhi == "cnasyes") {
+
+        }
+        else if (zhi == "cnasyno") {
+
+        }
+        else if (zhi == "jiandingyes") {
+
+        }
+        else if (zhi == "jiandingno") {
+
+        }
     }
 </script>
 <script type='text/javascript'>
-        function ajaxFrom(form, url) {
+    function ajaxFrom(form, url) {
 
-            $.ajax({
-                url: url,
-                type: "Post",
-                data: $(form).serialize(),
-                dataType: "json",
+        $.ajax({
+            url: url,
+            type: "Post",
+            data: $(form).serialize(),
+            dataType: "json",
 
-                success: function (data) {
-                    if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
-                    else if (data.Code == 1) {
-                        var id = "@ViewBag.Id";
-                        window.location.href = "/VJIANDINGRENWU/Jianlifangan/" + id;
-                        return false;
+            success: function (data) {
+                if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                else if (data.Code == 1) {
+                    var id = "@ViewBag.Id";
+                    window.location.href = "/VJIANDINGRENWU/JianLiFangAn/" + id;
+                    return false;
+                }
+                else {
+                    if ($.messager) {
+                        $.messager.defaults.ok = '继续';
+                        $.messager.defaults.cancel = '返回';
+
+                        $.messager.confirm('操作提示', data.Message, function (r) {
+                            if (!r) {
+                                window.location.href = 'javascript:history.go(-1)';
+                            }
+                        });
                     }
-                    else {
-                        if ($.messager) {
-                            $.messager.defaults.ok = '继续';
-                            $.messager.defaults.cancel = '返回';
-
-                            $.messager.confirm('操作提示', data.Message, function (r) {
-                                if (!r) {
-                                    window.location.href = 'javascript:history.go(-1)';
-                                }
-                            });
-                        }
-                    }
-
-
                 }
-            });
 
-        }
 
-        $(function () {
-            $('.easyui-combobox').combobox({
-                width: 243,
-                onSelect: function (record) {
-                    var strs = record.text.split("—");
-                    $(this).combobox('setValue', strs[0]);
-                }
-            });
-            $("form").submit(function (form) {
-                if (form.result) {
-                    ajaxFrom(this, this.action);
-                }
-                return false;
-            });
-            //按钮样式
-            $('.a2').mouseover(function () { this.style.color = "#ae1121"; }).mouseout(function () { this.style.color = "#333"; });
-
+            }
         });
+
+    }
+
+    $(function () {
+        $('.easyui-combobox').combobox({
+            width: 243,
+            onSelect: function (record) {
+                var strs = record.text.split("—");
+                $(this).combobox('setValue', strs[0]);
+            }
+        });
+        $("form").submit(function (form) {
+            if (form.result) {
+                ajaxFrom(this, this.action);
+            }
+            return false;
+        });
+        //按钮样式
+        $('.a2').mouseover(function () { this.style.color = "#ae1121"; }).mouseout(function () { this.style.color = "#333"; });
+
+    });
 </script>

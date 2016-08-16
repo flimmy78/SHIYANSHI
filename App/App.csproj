@@ -460,9 +460,9 @@
     <Content Include="Views\Shared\Edit.cshtml" />
     <Content Include="Views\Shared\Index.cshtml" />
     <Content Include="Views\Shared\AppCreate.cshtml" />
-    <Content Include="Views\VJIANDINGRENWU\Xuanzhefangan.cshtml" />
-    <Content Include="Views\VJIANDINGRENWU\Baogaoshangchuan.cshtml" />
-    <Content Include="Views\VJIANDINGRENWU\Jianlifangan.cshtml" />
+    <Content Include="Views\VJIANDINGRENWU\XuanZheFangAn.cshtml" />
+    <Content Include="Views\VJIANDINGRENWU\BaogaoShangChuan.cshtml" />
+    <Content Include="Views\VJIANDINGRENWU\JianLiFangAn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

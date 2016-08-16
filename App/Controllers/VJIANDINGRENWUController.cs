@@ -34,7 +34,7 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
-        public ActionResult Xuanzhefangan(string id)
+        public ActionResult XuanZheFangAn(string id)
         {
             ViewBag.Id = id;
             return View();
@@ -44,7 +44,7 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
-        public ActionResult Baogaoshangchuan(string id)
+        public ActionResult BaoGaoShangChuan(string id)
         {
             ViewBag.Id = id;
             return View();
@@ -54,7 +54,7 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
-        public ActionResult Jianlifangan(string id)
+        public ActionResult JianLiFangAn(string id)
         {
             ViewBag.Id = id;
             return View();
