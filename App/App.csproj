@@ -724,6 +724,7 @@
     <Content Include="Views\SysRole\Index.cshtml" />
     <Content Include="Views\SysRole\SetSysMenu.cshtml" />
     <Content Include="Views\Shared\SysCreate.cshtml" />
+    <Content Include="Views\Shared\sysEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
