@@ -134,30 +134,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Account\" />
-    <Folder Include="Views\Exception\" />
-    <Folder Include="Views\FileUploader\" />
-    <Folder Include="Views\HomeRight\" />
-    <Folder Include="Views\SysAnnouncement\" />
-    <Folder Include="Views\SysDepartmentTree\" />
-    <Folder Include="Views\SysDepartment\" />
-    <Folder Include="Views\SysDocumentTalk\" />
-    <Folder Include="Views\SysDocument\" />
-    <Folder Include="Views\SysEmailTemp\" />
-    <Folder Include="Views\SysEmail\" />
-    <Folder Include="Views\SysException\" />
-    <Folder Include="Views\SysFieldTree\" />
-    <Folder Include="Views\SysField\" />
-    <Folder Include="Views\SysLog\" />
-    <Folder Include="Views\SysMenuSysRoleSysOperation\" />
-    <Folder Include="Views\SysMenuTree\" />
-    <Folder Include="Views\SysMenu\" />
-    <Folder Include="Views\SysMessageTemp\" />
-    <Folder Include="Views\SysMessage\" />
-    <Folder Include="Views\SysNotice\" />
-    <Folder Include="Views\SysOperation\" />
-    <Folder Include="Views\SysPerson\" />
-    <Folder Include="Views\SysRole\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -442,52 +418,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="up\b.xls" />
-    <Content Include="Views\Appliance\Index.cshtml" />
-    <Content Include="Views\Home\Index - 副本.cshtml" />
-    <None Include="Views\Home\Index.cshtml" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\Create.cshtml" />
-    <Content Include="Views\Shared\Details.cshtml" />
-    <Content Include="Views\Shared\Edit.cshtml" />
-    <Content Include="Views\Shared\Index.cshtml" />
-    <Content Include="Views\Shared\AppCreate.cshtml" />
-    <Content Include="Views\VJIANDINGRENWU\Xuanzhefangan.cshtml" />
-    <Content Include="Views\VJIANDINGRENWU\Baogaoshangchuan.cshtml" />
-    <Content Include="Views\VJIANDINGRENWU\Jianlifangan.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BLL\BLL.csproj">
-      <Project>{90ae47ed-b0d9-4b2a-a7ac-1c6d74b51de6}</Project>
-      <Name>BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{ade2ca10-f91e-4312-ba9d-5d264291e549}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{e65234d6-46da-4301-94dc-a500a324028c}</Project>
-      <Name>DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IBLL\IBLL.csproj">
-      <Project>{9b7fca89-a8a4-4fa8-b67b-0bf0fe9c53cd}</Project>
-      <Name>IBLL</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\ACTIVE_POWER\Create.cshtml" />
     <Content Include="Views\ACTIVE_POWER\Details.cshtml" />
     <Content Include="Views\ACTIVE_POWER\Edit.cshtml" />
@@ -504,6 +434,7 @@
     <Content Include="Views\APPLIANCECOLLECTION\Details.cshtml" />
     <Content Include="Views\APPLIANCECOLLECTION\Edit.cshtml" />
     <Content Include="Views\APPLIANCECOLLECTION\Index.cshtml" />
+    <Content Include="Views\Appliance\Index.cshtml" />
     <Content Include="Views\APPLIANCE_DETAIL_INFORMATION\Create.cshtml" />
     <Content Include="Views\APPLIANCE_DETAIL_INFORMATION\Details.cshtml" />
     <Content Include="Views\APPLIANCE_DETAIL_INFORMATION\Edit.cshtml" />
@@ -512,12 +443,12 @@
     <Content Include="Views\APPLIANCE_LABORATORY\Details.cshtml" />
     <Content Include="Views\APPLIANCE_LABORATORY\Edit.cshtml" />
     <Content Include="Views\APPLIANCE_LABORATORY\Index.cshtml" />
+    <Content Include="Views\COMPANYTree\Index.cshtml" />
     <Content Include="Views\COMPANY\Create.cshtml" />
     <Content Include="Views\COMPANY\Details.cshtml" />
     <Content Include="Views\COMPANY\Edit.cshtml" />
     <Content Include="Views\COMPANY\Index.cshtml" />
     <Content Include="Views\COMPANY\IndexSef.cshtml" />
-    <Content Include="Views\COMPANYTree\Index.cshtml" />
     <Content Include="Views\CROSS_COS\Create.cshtml" />
     <Content Include="Views\CROSS_COS\Details.cshtml" />
     <Content Include="Views\CROSS_COS\Edit.cshtml" />
@@ -570,6 +501,7 @@
     <Content Include="Views\FREQUENCY\Details.cshtml" />
     <Content Include="Views\FREQUENCY\Edit.cshtml" />
     <Content Include="Views\FREQUENCY\Index.cshtml" />
+    <Content Include="Views\Home\Index - 副本.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\Create.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\Details.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\Edit.cshtml" />
@@ -606,12 +538,12 @@
     <Content Include="Views\REPORTCOLLECTION\Details.cshtml" />
     <Content Include="Views\REPORTCOLLECTION\Edit.cshtml" />
     <Content Include="Views\REPORTCOLLECTION\Index.cshtml" />
+    <Content Include="Views\RULETree\Index.cshtml" />
     <Content Include="Views\RULE\Create.cshtml" />
     <Content Include="Views\RULE\Details.cshtml" />
     <Content Include="Views\RULE\Edit.cshtml" />
     <Content Include="Views\RULE\Index.cshtml" />
     <Content Include="Views\RULE\IndexSef.cshtml" />
-    <Content Include="Views\RULETree\Index.cshtml" />
     <Content Include="Views\SCHEME\Create.cshtml" />
     <Content Include="Views\SCHEME\Details.cshtml" />
     <Content Include="Views\SCHEME\Edit.cshtml" />
@@ -620,6 +552,12 @@
     <Content Include="Views\SCHEME_RULE\Details.cshtml" />
     <Content Include="Views\SCHEME_RULE\Edit.cshtml" />
     <Content Include="Views\SCHEME_RULE\Index.cshtml" />
+    <Content Include="Views\Shared\AppCreate.cshtml" />
+    <Content Include="Views\Shared\Create.cshtml" />
+    <Content Include="Views\Shared\Details.cshtml" />
+    <Content Include="Views\Shared\Edit.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\Index.cshtml" />
     <Content Include="Views\TABLE_BODY_XY\Create.cshtml" />
     <Content Include="Views\TABLE_BODY_XY\Details.cshtml" />
     <Content Include="Views\TABLE_BODY_XY\Edit.cshtml" />
@@ -660,10 +598,6 @@
     <Content Include="Views\TRANSMITTER_RANGE\Details.cshtml" />
     <Content Include="Views\TRANSMITTER_RANGE\Edit.cshtml" />
     <Content Include="Views\TRANSMITTER_RANGE\Index.cshtml" />
-    <Content Include="Views\UNCERTAINTY\Create.cshtml" />
-    <Content Include="Views\UNCERTAINTY\Details.cshtml" />
-    <Content Include="Views\UNCERTAINTY\Edit.cshtml" />
-    <Content Include="Views\UNCERTAINTY\Index.cshtml" />
     <Content Include="Views\UNCERTAINTY2_HZ\Create.cshtml" />
     <Content Include="Views\UNCERTAINTY2_HZ\Details.cshtml" />
     <Content Include="Views\UNCERTAINTY2_HZ\Edit.cshtml" />
@@ -672,17 +606,147 @@
     <Content Include="Views\UNCERTAINTYPARAMETERMANAGEMENT\Details.cshtml" />
     <Content Include="Views\UNCERTAINTYPARAMETERMANAGEMENT\Edit.cshtml" />
     <Content Include="Views\UNCERTAINTYPARAMETERMANAGEMENT\Index.cshtml" />
+    <Content Include="Views\UNCERTAINTY\Create.cshtml" />
+    <Content Include="Views\UNCERTAINTY\Details.cshtml" />
+    <Content Include="Views\UNCERTAINTY\Edit.cshtml" />
+    <Content Include="Views\UNCERTAINTY\Index.cshtml" />
     <Content Include="Views\UNDERTAKE_LABORATORY\Create.cshtml" />
     <Content Include="Views\UNDERTAKE_LABORATORY\Details.cshtml" />
     <Content Include="Views\UNDERTAKE_LABORATORY\Edit.cshtml" />
     <Content Include="Views\UNDERTAKE_LABORATORY\Index.cshtml" />
     <Content Include="Views\VBAOGAODAYIN\Index.cshtml" />
+    <Content Include="Views\VJIANDINGRENWU\Baogaoshangchuan.cshtml" />
     <Content Include="Views\VJIANDINGRENWU\Index.cshtml" />
+    <Content Include="Views\VJIANDINGRENWU\Jianlifangan.cshtml" />
+    <Content Include="Views\VJIANDINGRENWU\Xuanzhefangan.cshtml" />
     <Content Include="Views\VQIJULINGQU1\Index.cshtml" />
     <Content Include="Views\VQIJULINGQU2\Index.cshtml" />
     <Content Include="Views\VRUKU\Index.cshtml" />
     <Content Include="Views\VSHENHE\Index.cshtml" />
     <Content Include="Views\VSHENPI\Index.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\NotFound.cshtml" />
+    <Content Include="Views\Exception\Index.cshtml" />
+    <Content Include="Views\FileUploader\Create.cshtml" />
+    <Content Include="Views\FileUploader\Details.cshtml" />
+    <Content Include="Views\FileUploader\Edit.cshtml" />
+    <Content Include="Views\FileUploader\Index.cshtml" />
+    <Content Include="Views\HomeRight\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\ManyTree.cshtml" />
+    <Content Include="Views\SysAnnouncement\Create.cshtml" />
+    <Content Include="Views\SysAnnouncement\Details.cshtml" />
+    <Content Include="Views\SysAnnouncement\Edit.cshtml" />
+    <Content Include="Views\SysAnnouncement\Index.cshtml" />
+    <Content Include="Views\SysDepartmentTree\Index.cshtml" />
+    <Content Include="Views\SysDepartment\Create.cshtml" />
+    <Content Include="Views\SysDepartment\Details.cshtml" />
+    <Content Include="Views\SysDepartment\Edit.cshtml" />
+    <Content Include="Views\SysDepartment\Index.cshtml" />
+    <Content Include="Views\SysDepartment\IndexSef.cshtml" />
+    <Content Include="Views\SysDocumentTalk\Create.cshtml" />
+    <Content Include="Views\SysDocumentTalk\Details.cshtml" />
+    <Content Include="Views\SysDocumentTalk\Edit.cshtml" />
+    <Content Include="Views\SysDocumentTalk\Index.cshtml" />
+    <Content Include="Views\SysDocument\Create.cshtml" />
+    <Content Include="Views\SysDocument\Details.cshtml" />
+    <Content Include="Views\SysDocument\Edit.cshtml" />
+    <Content Include="Views\SysDocument\Index.cshtml" />
+    <Content Include="Views\SysDocument\IndexSef.cshtml" />
+    <Content Include="Views\SysDocument\SetSysDepartment.cshtml" />
+    <Content Include="Views\SysEmailTemp\Create.cshtml" />
+    <Content Include="Views\SysEmailTemp\Details.cshtml" />
+    <Content Include="Views\SysEmailTemp\Edit.cshtml" />
+    <Content Include="Views\SysEmailTemp\Index.cshtml" />
+    <Content Include="Views\SysEmail\Create.cshtml" />
+    <Content Include="Views\SysEmail\Details.cshtml" />
+    <Content Include="Views\SysEmail\Edit.cshtml" />
+    <Content Include="Views\SysEmail\Index.cshtml" />
+    <Content Include="Views\SysException\Create.cshtml" />
+    <Content Include="Views\SysException\Details.cshtml" />
+    <Content Include="Views\SysException\Edit.cshtml" />
+    <Content Include="Views\SysException\Index.cshtml" />
+    <Content Include="Views\SysFieldTree\Index.cshtml" />
+    <Content Include="Views\SysField\Create.cshtml" />
+    <Content Include="Views\SysField\Details.cshtml" />
+    <Content Include="Views\SysField\Edit.cshtml" />
+    <Content Include="Views\SysField\Index.cshtml" />
+    <Content Include="Views\SysField\IndexSef.cshtml" />
+    <Content Include="Views\SysLog\Create.cshtml" />
+    <Content Include="Views\SysLog\Details.cshtml" />
+    <Content Include="Views\SysLog\Edit.cshtml" />
+    <Content Include="Views\SysLog\Index.cshtml" />
+    <Content Include="Views\SysMenuSysRoleSysOperation\Create.cshtml" />
+    <Content Include="Views\SysMenuSysRoleSysOperation\Details.cshtml" />
+    <Content Include="Views\SysMenuSysRoleSysOperation\Edit.cshtml" />
+    <Content Include="Views\SysMenuSysRoleSysOperation\Index.cshtml" />
+    <Content Include="Views\SysMenuTree\Index.cshtml" />
+    <Content Include="Views\SysMenu\Create.cshtml" />
+    <Content Include="Views\SysMenu\Details.cshtml" />
+    <Content Include="Views\SysMenu\Edit.cshtml" />
+    <Content Include="Views\SysMenu\Index.cshtml" />
+    <Content Include="Views\SysMenu\IndexSef.cshtml" />
+    <Content Include="Views\SysMessageTemp\Create.cshtml" />
+    <Content Include="Views\SysMessageTemp\Details.cshtml" />
+    <Content Include="Views\SysMessageTemp\Edit.cshtml" />
+    <Content Include="Views\SysMessageTemp\Index.cshtml" />
+    <Content Include="Views\SysMessage\Create.cshtml" />
+    <Content Include="Views\SysMessage\Details.cshtml" />
+    <Content Include="Views\SysMessage\Edit.cshtml" />
+    <Content Include="Views\SysMessage\Index.cshtml" />
+    <Content Include="Views\SysNotice\Create.cshtml" />
+    <Content Include="Views\SysNotice\Details.cshtml" />
+    <Content Include="Views\SysNotice\Edit.cshtml" />
+    <Content Include="Views\SysNotice\Index.cshtml" />
+    <Content Include="Views\SysOperation\Create.cshtml" />
+    <Content Include="Views\SysOperation\Details.cshtml" />
+    <Content Include="Views\SysOperation\Edit.cshtml" />
+    <Content Include="Views\SysOperation\Index.cshtml" />
+    <Content Include="Views\SysOperation\Index2.cshtml" />
+    <Content Include="Views\SysOperation\SetSysMenu.cshtml" />
+    <Content Include="Views\SysPerson\Create.cshtml" />
+    <Content Include="Views\SysPerson\Details.cshtml" />
+    <Content Include="Views\SysPerson\Edit.cshtml" />
+    <Content Include="Views\SysPerson\Index.cshtml" />
+    <Content Include="Views\SysRole\Create.cshtml" />
+    <Content Include="Views\SysRole\Details.cshtml" />
+    <Content Include="Views\SysRole\Edit.cshtml" />
+    <Content Include="Views\SysRole\Index.cshtml" />
+    <Content Include="Views\SysRole\SetSysMenu.cshtml" />
+    <Content Include="Views\Shared\SysCreate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{90ae47ed-b0d9-4b2a-a7ac-1c6d74b51de6}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{ade2ca10-f91e-4312-ba9d-5d264291e549}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{e65234d6-46da-4301-94dc-a500a324028c}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IBLL\IBLL.csproj">
+      <Project>{9b7fca89-a8a4-4fa8-b67b-0bf0fe9c53cd}</Project>
+      <Name>IBLL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ACTIVE_POWERApiController.cs" />
