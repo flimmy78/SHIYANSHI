@@ -60,7 +60,7 @@
 					,{ field: 'REPORTNUMBER', title:  '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 86 }
 					,{ field: 'ORDER_NUMBER', title:  '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 86 }
 					,{ field: 'APPLIANCE_NAME', title:  '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 86 }
-					,{ field: 'MODEL', title:  '@Html.DisplayNameFor(model => model.MODEL)', width: 86 }
+					, { field: 'VERSION', title: '@Html.DisplayNameFor(model => model.VERSION)', width: 86 }
 					,{ field: 'FACTORY_NUM', title:  '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 86 }
 					,{ field: 'CERTIFICATE_ENTERPRISE', title:  '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 86 }
 					,{ field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title:  '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 86 }
@@ -68,7 +68,18 @@
 					,{ field: 'QUALIFICATIONS', title:  '@Html.DisplayNameFor(model => model.QUALIFICATIONS)', width: 86 }
 					,{ field: 'CONCLUSION_EXPLAIN', title:  '@Html.DisplayNameFor(model => model.CONCLUSION_EXPLAIN)', width: 86 }
 					,{ field: 'CONCLUSION', title:  '@Html.DisplayNameFor(model => model.CONCLUSION)', width: 86 }
-					,{ field: 'ISAGGREY', title:  '@Html.DisplayNameFor(model => model.ISAGGREY)', width: 86 }
+					, { field: 'ISAGGREY', title: '@Html.DisplayNameFor(model => model.ISAGGREY)', width: 86 }
+                    , {
+                        field: 'aa', title: '操作', width: 86, formatter: function (value, row, index) {
+                            if (row.PREPARE_SCHEMEID!=null) {
+                                var html = "<a href='/VSHENHE/XiaZaiShenHe/" + row.ID + "'>下载审核</a>";
+                            }
+                            else {
+                                var html = "<a href='/VSHENHE/YuLanShenHe/" + row.ID + "'>预览审核</a>";
+                            }
+                            return html;
+                        }
+                    }
                 ]],
             pagination: true,
             rownumbers: true

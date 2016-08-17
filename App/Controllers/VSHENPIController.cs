@@ -29,7 +29,26 @@ namespace Langben.App.Controllers
 
             return View();
         }
-
+        /// <summary>
+        /// 预览审核
+        /// </summary>
+        /// <returns></returns>
+        [SupportFilter]
+        public ActionResult YuLanShenPi(string id)
+        {
+            ViewBag.Id = id;
+            return View();
+        }
+        /// <summary>
+        /// 预览审核
+        /// </summary>
+        /// <returns></returns>
+        [SupportFilter]
+        public ActionResult XiaZaiShenPi(string id)
+        {
+            ViewBag.Id = id;
+            return View();
+        }
         /// <summary>
         /// 异步加载数据
         /// </summary>
@@ -78,6 +97,8 @@ namespace Langben.App.Controllers
                     UNDERTAKE_LABORATORYID = s.UNDERTAKE_LABORATORYID
                     ,
                     APPROVALISAGGREY = s.APPROVALISAGGREY
+                    ,
+                    PREPARE_SCHEMEID = s.PREPARE_SCHEMEID
 
                 }
 

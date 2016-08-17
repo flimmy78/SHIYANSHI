@@ -3,38 +3,38 @@
 @using Common
 @using Models
 <div id="divQuery">
-     
-            <div class="input_search">
-            <div class="input_search-label">
-                    @Html.LabelFor(model => model.ORDER_NUMBER):
-             </div>
-                <div class="input_search-field">
-                    <input type='text' id='ORDER_NUMBER'/>
-               </div>
-            </div>
-            <div class="input_search">
-             <div class="input_search-label">
-                    @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID):
-                </div>
-                <div class="input_search-field">
-                    @Html.DropDownList("UNDERTAKE_LABORATORYIDDDL_String", Models.SysFieldModels.GetSysField("VSHENPI","UNDERTAKE_LABORATORYID"),"请选择",new { id = "UNDERTAKE_LABORATORYIDDDL_String" })
-                </div>
-            </div>
-            <div class="input_search">
-             <div class="input_search-label">
-                    @Html.LabelFor(model => model.APPROVALISAGGREY):
-                </div>
-                <div class="input_search-field">
-                    @Html.DropDownList("APPROVALISAGGREYDDL_String", Models.SysFieldModels.GetSysField("VSHENPI","APPROVALISAGGREY"),"请选择",new { id = "APPROVALISAGGREYDDL_String" })
-                </div>
-            </div>
+
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.ORDER_NUMBER):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='ORDER_NUMBER' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID):
+        </div>
+        <div class="input_search-field">
+            @Html.DropDownList("UNDERTAKE_LABORATORYIDDDL_String", Models.SysFieldModels.GetSysField("VSHENPI", "UNDERTAKE_LABORATORYID"), "请选择", new { id = "UNDERTAKE_LABORATORYIDDDL_String" })
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.APPROVALISAGGREY):
+        </div>
+        <div class="input_search-field">
+            @Html.DropDownList("APPROVALISAGGREYDDL_String", Models.SysFieldModels.GetSysField("VSHENPI", "APPROVALISAGGREY"), "请选择", new { id = "APPROVALISAGGREYDDL_String" })
+        </div>
+    </div>
     <div class='input_search' style="padding-top:10px;">
         <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
             查 询
         </a>
     </div>
 </div>
- <br style="clear: both;" />
+<br style="clear: both;" />
 
 <script type="text/javascript" language="javascript">
     $(function () {
@@ -60,25 +60,35 @@
                      handler: function () {
                          return getView();
                      }
-                 } ],
+                 }],
             columns: [[
 
-                
+
 					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 77 }
-					,{ field: 'REPORTNUMBER', title:  '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 77 }
-					,{ field: 'ORDER_NUMBER', title:  '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 77 }
-					,{ field: 'APPLIANCE_NAME', title:  '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 77 }
-					,{ field: 'MODEL', title:  '@Html.DisplayNameFor(model => model.MODEL)', width: 77 }
-					,{ field: 'FACTORY_NUM', title:  '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 77 }
-					,{ field: 'CERTIFICATE_ENTERPRISE', title:  '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 77 }
-					,{ field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title:  '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 77 }
-					,{ field: 'CERTIFICATE_CATEGORY', title:  '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 77 }
-					,{ field: 'QUALIFICATIONS', title:  '@Html.DisplayNameFor(model => model.QUALIFICATIONS)', width: 77 }
-					,{ field: 'CONCLUSION_EXPLAIN', title:  '@Html.DisplayNameFor(model => model.CONCLUSION_EXPLAIN)', width: 77 }
-					,{ field: 'CONCLUSION', title:  '@Html.DisplayNameFor(model => model.CONCLUSION)', width: 77 }
-					,{ field: 'UNDERTAKE_LABORATORYID', title:  '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYID)', width: 77 }
-					,{ field: 'APPROVALISAGGREY', title:  '@Html.DisplayNameFor(model => model.APPROVALISAGGREY)', width: 77 }
-                ]],
+					, { field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 77 }
+					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 77 }
+					, { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 77 }
+					, { field: 'VERSION', title: '@Html.DisplayNameFor(model => model.VERSION)', width: 77 }
+					, { field: 'FACTORY_NUM', title: '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 77 }
+					, { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 77 }
+					, { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 77 }
+					, { field: 'CERTIFICATE_CATEGORY', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 77 }
+					, { field: 'QUALIFICATIONS', title: '@Html.DisplayNameFor(model => model.QUALIFICATIONS)', width: 77 }
+					, { field: 'CONCLUSION_EXPLAIN', title: '@Html.DisplayNameFor(model => model.CONCLUSION_EXPLAIN)', width: 77 }
+					, { field: 'CONCLUSION', title: '@Html.DisplayNameFor(model => model.CONCLUSION)', width: 77 }
+                    , {
+                        field: 'aa', title: '操作', width: 86, formatter: function (value, row, index) {
+                            if (row.PREPARE_SCHEMEID != null) {
+                                var html = "<a href='/VSHENPI/XiaZaiShenPi/" + row.ID + "'>下载审批</a>";
+                            }
+                            else {
+                                var html = "<a href='/VSHENPI/YuLanShenPi/" + row.ID + "'>预览审批</a>";
+                            }
+                            return html;
+                        }
+                    }
+
+            ]],
             pagination: true,
             rownumbers: true
 
@@ -110,7 +120,7 @@
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
- 
+
     //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
     function flexiSelect() {
 
@@ -146,7 +156,7 @@
         }
         return false;
     }
- 
+
 
 </script>
 

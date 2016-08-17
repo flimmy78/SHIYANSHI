@@ -89,12 +89,13 @@ namespace Langben.App.Controllers
             PREPARE_SCHEME item = m_BLL.GetById(id);
             return item;
         }
- 
+
         /// <summary>
         /// 创建
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
+        [System.Web.Http.HttpPost]
         public Common.ClientResult.Result Post([FromBody]PREPARE_SCHEME entity)
         {           
 

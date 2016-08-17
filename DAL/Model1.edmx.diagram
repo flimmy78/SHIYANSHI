@@ -52,11 +52,10 @@
         <EntityTypeShape EntityType="Model.UNCERTAINTYPARAMETERMANAGEMENT" Width="1.5" PointX="10.25" PointY="37.75" />
         <EntityTypeShape EntityType="Model.UNDERTAKE_LABORATORY" Width="1.5" PointX="5.75" PointY="26.5" />
         <EntityTypeShape EntityType="Model.VBAOGAODAYIN" Width="1.5" PointX="11.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.VQIJULINGQU1" Width="1.5" PointX="9.75" PointY="1" />
+        <EntityTypeShape EntityType="Model.VQIJULINGQU1" Width="1.5" PointX="10.25" PointY="1" />
         <EntityTypeShape EntityType="Model.VQIJULINGQU2" Width="1.5" PointX="3.875" PointY="0.5" />
         <EntityTypeShape EntityType="Model.VRUKU" Width="1.5" PointX="5.875" PointY="0.5" />
-        <EntityTypeShape EntityType="Model.VSHENHE" Width="1.5" PointX="7.875" PointY="0.5" />
-        <EntityTypeShape EntityType="Model.VSHENPI" Width="1.5" PointX="13.625" PointY="0.875" />
+        <EntityTypeShape EntityType="Model.VSHENPI" Width="2" PointX="13.625" PointY="0.875" />
         <AssociationConnector Association="Model.FK_AC_VOLTA_REFERENCE_OVERALL_" />
         <AssociationConnector Association="Model.FK_ACTIVE_P_REFERENCE_OVERALL_" />
         <AssociationConnector Association="Model.FK_MAXIMUM__REFERENCE_METERIN2" />
@@ -134,6 +133,7 @@
         <AssociationConnector Association="Model.SysDocumentSysPerson" />
         <AssociationConnector Association="Model.SysMenuSysOperation" />
         <AssociationConnector Association="Model.SysRoleSysPerson" />
+        <EntityTypeShape EntityType="Model.VSHENHE" Width="1.75" PointX="8" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

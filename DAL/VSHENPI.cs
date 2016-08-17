@@ -28,5 +28,6 @@ namespace Langben.DAL
         public string UNDERTAKE_LABORATORYID { get; set; }
         public string APPROVALISAGGREY { get; set; }
         public string VERSION { get; set; }
+        public string PREPARE_SCHEMEID { get; set; }
     }
 }

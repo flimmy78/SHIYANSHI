@@ -29,7 +29,26 @@ namespace Langben.App.Controllers
 
             return View();
         }
-
+        /// <summary>
+        /// 预览审核
+        /// </summary>
+        /// <returns></returns>
+        [SupportFilter]
+        public ActionResult YuLanShenHe(string id)
+        {
+            ViewBag.Id = id;
+            return View();
+        }
+        /// <summary>
+        /// 预览审核
+        /// </summary>
+        /// <returns></returns>
+        [SupportFilter]
+        public ActionResult XiaZaiShenHe(string id)
+        {
+            ViewBag.Id = id;
+            return View();
+        }
         /// <summary>
         /// 异步加载数据
         /// </summary>
@@ -75,7 +94,8 @@ namespace Langben.App.Controllers
                     ,
                     CONCLUSION = s.CONCLUSION
                     ,
-                    ISAGGREY = s.ISAGGREY
+                    ISAGGREY = s.ISAGGREY,
+                    PREPARE_SCHEMEID = s.PREPARE_SCHEMEID
 
                 }
 

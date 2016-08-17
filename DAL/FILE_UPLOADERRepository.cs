@@ -104,6 +104,16 @@ namespace Langben.DAL
         
         }
         /// <summary>
+        /// 通过预备方案id，判断器具是否为上传报告
+        /// </summary>
+        /// <param name="id">主键</param>
+        /// <returns>附件</returns>
+        public FILE_UPLOADER GetPREPARE_SCHEMEID(SysEntities db, string id)
+        {
+            return db.FILE_UPLOADER.SingleOrDefault(s => s.PREPARE_SCHEMEID== id);
+
+        }
+        /// <summary>
         /// 确定删除一个对象，调用Save方法
         /// </summary>
         /// <param name="id">一条数据的主键</param>

@@ -18,7 +18,8 @@ namespace Langben.DAL
         public string METERING_STANDARD_DEVICEID { get; set; }
         [Display(Name = "标准装置/计量标准器信息")]
         public string METERING_STANDARD_DEVICEIDOld { get; set; }
-        
+        public string aa { get; set; }
+
         #endregion
 
     }

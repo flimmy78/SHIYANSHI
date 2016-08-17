@@ -118,7 +118,7 @@ namespace Langben.BLL
                 {
                     using (TransactionScope transactionScope = new TransactionScope())
                     {
-                        repository.EditCollection(db, deleteCollection,shiyanshi);
+                        repository.EditCollection(db, deleteCollection, shiyanshi);
                         if (deleteCollection.Length == repository.Save(db))
                         {
                             transactionScope.Complete();
@@ -140,6 +140,50 @@ namespace Langben.BLL
             return false;
         }
 
+        /// <summary>
+        /// 修改器具明细信息集合（入库）
+        /// </summary>
+        /// <param name="validationErrors">返回的错误信息</param>
+        /// <param name="deleteCollection">器具明细信息的集合</param>
+        /// <returns></returns>    
+        public bool EditSTORAGEINSTRUCTI_STATU(ref ValidationErrors validationErrors, string[] deleteCollection)
+        {
+            try
+            {
+                if (deleteCollection != null)
+                {
+                    using (TransactionScope transactionScope = new TransactionScope())
+                    {
+                        repository.EditSTORAGEINSTRUCTI_STATU(db, deleteCollection);
+                        if (deleteCollection.Length == repository.Save(db))
+                        {
+                            transactionScope.Complete();
+                            return true;
+                        }
+                        else
+                        {
+                            Transaction.Current.Rollback();
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                validationErrors.Add(ex.Message);
+                ExceptionsHander.WriteExceptions(ex);
+            }
+            return false;
+        }
+        /// <summary>
+        /// 通过器具明细表中的主键id查找委托单表中的受理单位
+        /// </summary>
+        /// <param name="id">器具明细表id</param>
+        /// <returns></returns>
+        public string GetByAPPLIANCE_DETAIL_INFORMATIONId(string id)
+        {
+            return repository.GetByAPPLIANCE_DETAIL_INFORMATIONId(db, id);
+        }
     }
 }
 

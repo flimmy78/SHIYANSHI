@@ -71,7 +71,23 @@ namespace Langben.App.Controllers
             FILE_UPLOADER item = m_BLL.GetById(id);
             return item;
         }
- 
+        /// <summary>
+        /// 通过预备方案id，判断器具是否为上传报告
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string GetPREPARE_SCHEMEID(string id)
+        {
+            FILE_UPLOADER item = m_BLL.GetPREPARE_SCHEMEID(id);
+            if (!string.IsNullOrEmpty(item.PREPARE_SCHEMEID))
+            {
+                return "Yes";
+            }
+            else
+            {
+                return "No";
+            }
+        }
         /// <summary>
         /// 创建
         /// </summary>

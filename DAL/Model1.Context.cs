@@ -75,7 +75,6 @@ namespace Langben.DAL
         public virtual DbSet<VQIJULINGQU1> VQIJULINGQU1 { get; set; }
         public virtual DbSet<VQIJULINGQU2> VQIJULINGQU2 { get; set; }
         public virtual DbSet<VRUKU> VRUKU { get; set; }
-        public virtual DbSet<VSHENHE> VSHENHE { get; set; }
         public virtual DbSet<VSHENPI> VSHENPI { get; set; }
         public virtual DbSet<VJIANDINGRENWU> VJIANDINGRENWU { get; set; }
         public virtual DbSet<FileUploader> FileUploader { get; set; }
@@ -96,5 +95,6 @@ namespace Langben.DAL
         public virtual DbSet<SysOperation> SysOperation { get; set; }
         public virtual DbSet<SysPerson> SysPerson { get; set; }
         public virtual DbSet<SysRole> SysRole { get; set; }
+        public virtual DbSet<VSHENHE> VSHENHE { get; set; }
     }
 }

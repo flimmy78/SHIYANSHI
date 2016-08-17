@@ -16,18 +16,14 @@
                     报告类别:
                 </div>
                 <div class="input_search-field">
-                    @Html.DropDownList("ORDER_STATUSDDL_String", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "REPORT_CATEGORY"), "请选择", new { id = "REPORT_CATEGORY_String" })
+                    @Html.DropDownList("REPORT_CATEGORY", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "REPORT_CATEGORY"), "请选择", new { id = "REPORT_CATEGORY_String" })
                 </div>
                 <div class="input_search-label">
                     证书类别:
                 </div>
                 <div class="input_search-field">
-                    <select id="aa" onchange="zhengshuxuanzhe()">
-                        <option value="">请选择</option>
-                        <option value="检定">检定</option>
-                        <option value="校准">校准</option>
-                    </select>
-                    @*@Html.DropDownList("ORDER_STATUSDDL_String", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "CERTIFICATE_CATEGORY"), "请选择", new { id = "CERTIFICATE_CATEGORY_String" })*@
+                    @*onchange="zhengshuxuanzhe()*@
+                    @Html.DropDownList("CERTIFICATE_CATEGORY", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "CERTIFICATE_CATEGORY"), "请选择", new { id = "CERTIFICATE_CATEGORY_String" })
                 </div>
             </div>
 
@@ -36,8 +32,8 @@
                     CNAS:
                 </div>
                 <div class="input_search-field">
-                    Yes: <input type="radio" id="cnasyes" name="cnas" onclick="zizhiget(this)" value="cnasyes" />
-                    No: <input type="radio" id="cnasno" name="cnas" onclick="zizhiget(this)" value="cnasno" />
+                    Yes: <input type="radio" id="cnasyes" name="CNAS" onclick="zizhiget(this)" value="Yes" atps="cnasyes" />
+                    No: <input type="radio" id="cnasno" name="CNAS" onclick="zizhiget(this)" value="No" atps="cnasno" />
                 </div>
 
             </div>
@@ -46,8 +42,16 @@
                     检定授权:
                 </div>
                 <div class="input_search-field">
-                    Yes: <input type="radio" id="jiandingyes" name="jianding" onclick="zizhiget(this)" value="jiandingyes" />
-                    No: <input type="radio" id="jiandingno" name="jianding" onclick="zizhiget(this)" value="jiandingno" />
+                    Yes: <input type="radio" id="jiandingyes" name="CERTIFICATION_AUTHORITY" onclick="zizhiget(this)" value="Yes" atps="jiandingyes" />
+                    No: <input type="radio" id="jiandingno" name="CERTIFICATION_AUTHORITY" onclick="zizhiget(this)" value="No" atps="jiandingno" />
+                </div>
+            </div>
+            <div class="input_search" id="kongzhi" style="display:none">
+                <div class="input_search-label">
+                    控制编号:
+                </div>
+                <div class="input_search-field">
+                    @Html.DropDownList("CONTROL_NUMBER", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "CONTROL_NUMBER"), "请选择", new { id = "CONTROL_NUMBER_String" })
                 </div>
             </div>
             <div class="input_search">
@@ -55,7 +59,9 @@
                     资质:
                 </div>
                 <div class="input_search-field">
-                    @Html.DropDownList("ORDER_STATUSDDL_String", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "QUALIFICATIONS"), "请选择", new { id = "QUALIFICATIONS_String" })
+                    <select id="QUALIFICATIONS" name="QUALIFICATIONS">
+                        <option value="">请选择</option>
+                    </select>
                 </div>
             </div><br />
             <div class="input_search">
@@ -63,27 +69,10 @@
                 <input type="submit" value="建立方案" />
             </div>
         </div>
-
+        <input type="hidden" value="" id="ACCEPT_ORGNIZATION_HIDDEN" />
     </fieldset>
 }
 <script type="text/javascript">
-    //选择证书
-    function zhengshuxuanzhe() {
-        var option = $("#aa option:selected");
-        var b = option.text();
-        if (b == "检定") {
-            $("#cnas").hide();
-            $("#jianding").show();
-        }
-        else if (b == "校准") {
-            $("#cnas").show();
-            $("#jianding").hide();
-        }
-        else {
-            $("#cnas").hide();
-            $("#jianding").hide();
-        }
-    }
     //报告上传
     function shangchuan() {
         var id = "@ViewBag.Id";
@@ -91,72 +80,209 @@
     }
     //重新绑定资质
     function zizhiget(arr) {
-        var zhi=$(arr).val();
-        if (zhi == "cnasyes") {
+        var zhi = $(arr).attr("atps");
+        var zhi2 = $("#ACCEPT_ORGNIZATION_HIDDEN").val();
+        switch (zhi) {
+            case "cnasyes":
+                $("#kongzhi").show();
+                if (zhi2 == "华北电力科学研究院有限责任公司") {
+                    getCity($("#QUALIFICATIONS"));
+                    $("<option></option>")
+                               .val("本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394")
+                               .text("本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394")
+                               .appendTo($("#QUALIFICATIONS"));
+                }
+                else if (zhi2 == "冀北电力有限公司计量中心") {
+                    getCity($("#QUALIFICATIONS"));
+                    $("<option></option>")
+                               .val("本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394")
+                               .text("本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394")
+                               .appendTo($("#QUALIFICATIONS"));
+                }
+                break;
+            case "cnasyno":
+                if (zhi2 == "华北电力科学研究院有限责任公司") {
+                    getCity($("#QUALIFICATIONS"));
+                    $("<option></option>")
+                               .val("/")
+                               .text("/")
+                               .appendTo($("#QUALIFICATIONS"));
+                }
+                else if (zhi2 == "冀北电力有限公司计量中心") {
+                    getCity($("#QUALIFICATIONS"));
+                    $("<option></option>")
+                                .val("/")
+                               .text("/")
+                               .appendTo($("#QUALIFICATIONS"));
+                }
+                break;
+            case "jiandingyes":
+                $("#kongzhi").hide();
+                if (zhi2 == "华北电力科学研究院有限责任公司") {
+                    getCity($("#QUALIFICATIONS"));
+                    $("<option></option>")
+                               .val("本单位获北京市质量技术监督局专项计量授权，证书编号：（京）法计（2012）006号")
+                               .text("本单位获北京市质量技术监督局专项计量授权，证书编号：（京）法计（2012）006号")
+                               .appendTo($("#QUALIFICATIONS"));
+                }
+                else if (zhi2 == "冀北电力有限公司计量中心") {
+                    getCity($("#QUALIFICATIONS"));
+                    $("<option></option>")
+                               .val("本单位获河北市质量技术监督局专项计量授权，证书编号：（冀）法计（2014）D033号")
+                               .text("本单位获河北市质量技术监督局专项计量授权，证书编号：（冀）法计（2014）D033号")
+                               .appendTo($("#QUALIFICATIONS"));
+                }
+                break;
+            case "jiandingno":
+                $("#kongzhi").hide();
+                if (zhi2 == "华北电力科学研究院有限责任公司") {
+                    getCity($("#QUALIFICATIONS"));
+                    $("<option></option>")
+                               .val("/")
+                               .text("/")
+                               .appendTo($("#QUALIFICATIONS"));
+                }
+                else if (zhi2 == "冀北电力有限公司计量中心") {
+                    getCity($("#QUALIFICATIONS"));
+                    $("<option></option>")
+                                .val("/")
+                               .text("/")
+                               .appendTo($("#QUALIFICATIONS"));
+                }
+                break;
+            default:
 
         }
-        else if (zhi == "cnasyno") {
+    }
 
-        }
-        else if (zhi == "jiandingyes") {
-
-        }
-        else if (zhi == "jiandingno") {
-
-        }
+    function getCity(City) {
+        $(City).empty();
+        $("<option></option>")
+                .val("")
+                .text("请选择")
+                .appendTo($(City));
     }
 </script>
 <script type='text/javascript'>
-    function ajaxFrom(form, url) {
-
+    $(function () {
+        //初始化绑定数据
         $.ajax({
-            url: url,
-            type: "Post",
-            data: $(form).serialize(),
-            dataType: "json",
+            url: "/api/PREPARE_SCHEMEApi/Get/" + "@ViewBag.Id",
+            type: "Get",
+            // async: false,
+            success: function (res) {
+                if (res != null) {
+                    $("#REPORT_CATEGORY_String").val(res.REPORT_CATEGORY);//报告类别
+                    $("#CERTIFICATE_CATEGORY_String").val(res.CERTIFICATE_CATEGORY);//证书类别
+                    $("#CONTROL_NUMBER_String").val(res.CONTROL_NUMBER);//控制编号
+                    $("<option></option>")
+                           .val(res.QUALIFICATIONS)
+                           .text(res.QUALIFICATIONS)
+                           .appendTo($("#QUALIFICATIONS"));
+                    $("#QUALIFICATIONS").val(res.QUALIFICATIONS);//资质
+                    if (res.CERTIFICATE_CATEGORY == "检定") {
+                        $("#jianding").show();
+                        if (res.CERTIFICATION_AUTHORITY=="Yes") {
+                            $("#jiandingyes").attr("checked", 'checked')
+                        }
+                        else if (res.CERTIFICATION_AUTHORITY == "No") {
+                            $("#jiandingno").attr("checked", 'checked')
+                        }
 
-            success: function (data) {
-                if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
-                else if (data.Code == 1) {
-                    var id = "@ViewBag.Id";
-                    window.location.href = "/VJIANDINGRENWU/JianLiFangAn/" + id;
-                    return false;
-                }
-                else {
-                    if ($.messager) {
-                        $.messager.defaults.ok = '继续';
-                        $.messager.defaults.cancel = '返回';
-
-                        $.messager.confirm('操作提示', data.Message, function (r) {
-                            if (!r) {
-                                window.location.href = 'javascript:history.go(-1)';
-                            }
-                        });
+                    }
+                    else if (res.CERTIFICATE_CATEGORY == "校准") {
+                        $("#cnas").show();
+                        if (res.CNAS == "Yes") {
+                            $("#cnasyes").attr("checked", 'checked')
+                            $("#kongzhi").show();
+                        }
+                        else if (res.CNAS == "No") {
+                            $("#cnasno").attr("checked", 'checked')
+                        }
                     }
                 }
-
-
+            }
+        })
+        //选择证书
+        $("#CERTIFICATE_CATEGORY_String").change(function () {
+            var option = $("#CERTIFICATE_CATEGORY_String option:selected");
+            var b = option.text();
+            $("#cnasyes,#cnasno,#jiandingno,#jiandingyes").removeAttr("checked");
+            if (b == "检定") {
+                $("#cnas").hide();
+                $("#jianding").show();
+            }
+            else if (b == "校准") {
+                $("#cnas").show();
+                $("#jianding").hide();
+            }
+            else {
+                $("#cnas").hide();
+                $("#jianding").hide();
             }
         });
-
-    }
-
-    $(function () {
-        $('.easyui-combobox').combobox({
-            width: 243,
-            onSelect: function (record) {
-                var strs = record.text.split("—");
-                $(this).combobox('setValue', strs[0]);
+        //查询受理单位
+        $.ajax({
+            url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/GetGetByAPPLIANCE_DETAIL_INFORMATIONId/" + "@ViewBag.Id",
+            type: "Put",
+            // async: false,
+            success: function (res) {
+                if (res != null) {
+                    $("#ACCEPT_ORGNIZATION_HIDDEN").val(res);
+                }
             }
-        });
-        $("form").submit(function (form) {
-            if (form.result) {
-                ajaxFrom(this, this.action);
-            }
-            return false;
-        });
-        //按钮样式
-        $('.a2').mouseover(function () { this.style.color = "#ae1121"; }).mouseout(function () { this.style.color = "#333"; });
+        })
+        function ajaxFrom(form, url) {
 
+            $.ajax({
+                url: url,
+                type: "Post",
+                data: $(form).serialize(),
+                dataType: "json",
+
+                success: function (data) {
+                    if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                    else if (data.Code == 1) {
+                        var id = "@ViewBag.Id";
+                        window.location.href = "/VJIANDINGRENWU/JianLiFangAn/" + id;
+                        return false;
+                    }
+                    else {
+                        if ($.messager) {
+                            $.messager.defaults.ok = '继续';
+                            $.messager.defaults.cancel = '返回';
+
+                            $.messager.confirm('操作提示', data.Message, function (r) {
+                                if (!r) {
+                                    window.location.href = 'javascript:history.go(-1)';
+                                }
+                            });
+                        }
+                    }
+
+
+                }
+            });
+
+        }
+
+        $(function () {
+            $('.easyui-combobox').combobox({
+                width: 243,
+                onSelect: function (record) {
+                    var strs = record.text.split("—");
+                    $(this).combobox('setValue', strs[0]);
+                }
+            });
+            $("form").submit(function (form) {
+                if (form.result) {
+                    ajaxFrom(this, this.action);
+                }
+                return false;
+            });
+            //按钮样式
+            $('.a2').mouseover(function () { this.style.color = "#ae1121"; }).mouseout(function () { this.style.color = "#333"; });
+
+        })
     });
 </script>

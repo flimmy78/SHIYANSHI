@@ -306,6 +306,8 @@ namespace Langben.App.Controllers
             return result;
         }
 
+       
+
         IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL m_BLL;
 
         ValidationErrors validationErrors = new ValidationErrors();

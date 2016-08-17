@@ -61,7 +61,15 @@ namespace Langben.IBLL
         /// <param name="id">根据主键</param>
         /// <returns></returns>
         [OperationContract]
-        FILE_UPLOADER GetById(string id);    
+        FILE_UPLOADER GetById(string id);
+
+        /// <summary>
+        /// 通过预备方案id，判断器具是否为上传报告
+        /// </summary>
+        /// <param name="id">预备方案id</param>
+        /// <returns></returns>
+        [OperationContract]
+        FILE_UPLOADER GetPREPARE_SCHEMEID(string id);
         /// <summary>
         /// 创建一个对象
         /// </summary>

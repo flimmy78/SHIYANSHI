@@ -14,8 +14,8 @@ namespace Langben.IBLL
 
     public partial interface IAPPLIANCE_DETAIL_INFORMATIONBLL
     {
-        
-        string SearchAutoComplete(string id,  string term);
+
+        string SearchAutoComplete(string id, string term);
         /// <summary>
         /// 修改对象集合
         /// </summary>
@@ -25,6 +25,22 @@ namespace Langben.IBLL
         /// <returns></returns>       
         [OperationContract]
         bool EditCollection(ref Common.ValidationErrors validationErrors, string[] deleteCollection, string shiyanshi);
+        /// <summary>
+        /// 修改对象集合
+        /// </summary>
+        /// <param name="validationErrors">返回的错误信息</param>
+        /// <param name="deleteCollection">主键的集合</param>
+        /// <returns></returns>       
+        [OperationContract]
+        bool EditSTORAGEINSTRUCTI_STATU(ref Common.ValidationErrors validationErrors, string[] deleteCollection);
+        /// <summary>
+        /// 查找委托单中的受理单位
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [OperationContract]
+        string GetByAPPLIANCE_DETAIL_INFORMATIONId(string id); 
+
     }
 }
 

@@ -286,7 +286,15 @@ namespace Langben.BLL
         {           
             return repository.GetById(db, id);           
         }
-
+        /// <summary>
+        /// 通过预备方案id，判断器具是否为上传报告
+        /// </summary>
+        /// <param name="id">预备方案的id</param>
+        /// <returns>一个附件</returns>
+        public FILE_UPLOADER GetPREPARE_SCHEMEID(string id)
+        {
+            return repository.GetById(db, id);
+        }
 
         /// <summary>
         /// 根据PREPARE_SCHEMEIDId，获取所有附件数据

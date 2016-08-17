@@ -3,60 +3,60 @@
 @using Common
 @using Models
 <div id="divQuery">
-     
-            <div class="input_search">
-            <div class="input_search-label">
-                    @Html.LabelFor(model => model.ORDER_NUMBER):
-             </div>
-                <div class="input_search-field">
-                    <input type='text' id='ORDER_NUMBER'/>
-               </div>
-            </div> 
-            <div class="input_search">
-            <div class="input_search-label">
-                    @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE):
-             </div>
-                <div class="input_search-field">
-                    <input type='text' id='CERTIFICATE_ENTERPRISE'/>
-               </div>
-            </div>
-            <div class="input_search">
-             <div class="input_search-label">
-                    @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID):
-                </div>
-                <div class="input_search-field">
-                    @Html.DropDownList("UNDERTAKE_LABORATORYIDDDL_String", Models.SysFieldModels.GetSysField("VRUKU","UNDERTAKE_LABORATORYID"),"请选择",new { id = "UNDERTAKE_LABORATORYIDDDL_String" })
-                </div>
-            </div> 
-            <div class="input_search">
-            <div class="input_search-label">
-                    @Html.LabelFor(model => model.APPROVALDATE):
-             </div>
-                <div class="input_search-field">
-                    <input type='text' id='APPROVALDATE'/>
-               </div>
-            </div>
-            <div class="input_search">
-             <div class="input_search-label">
-                    @Html.LabelFor(model => model.STORAGEINSTRUCTI_STATU):
-                </div>
-                <div class="input_search-field">
-                    @Html.DropDownList("STORAGEINSTRUCTI_STATUDDL_String", Models.SysFieldModels.GetSysField("VRUKU","STORAGEINSTRUCTI_STATU"),"请选择",new { id = "STORAGEINSTRUCTI_STATUDDL_String" })
-                </div>
-            </div>
+
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.ORDER_NUMBER):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='ORDER_NUMBER' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='CERTIFICATE_ENTERPRISE' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID):
+        </div>
+        <div class="input_search-field">
+            @Html.DropDownList("UNDERTAKE_LABORATORYIDDDL_String", Models.SysFieldModels.GetSysField("VRUKU", "UNDERTAKE_LABORATORYID"), "请选择", new { id = "UNDERTAKE_LABORATORYIDDDL_String" })
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.APPROVALDATE):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='APPROVALDATE' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.STORAGEINSTRUCTI_STATU):
+        </div>
+        <div class="input_search-field">
+            @Html.DropDownList("STORAGEINSTRUCTI_STATUDDL_String", Models.SysFieldModels.GetSysField("VRUKU", "STORAGEINSTRUCTI_STATU"), "请选择", new { id = "STORAGEINSTRUCTI_STATUDDL_String" })
+        </div>
+    </div>
     <div class='input_search' style="padding-top:10px;">
         <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
             查 询
         </a>
     </div>
 </div>
- <br style="clear: both;" />
+<br style="clear: both;" />
 
 <script type="text/javascript" language="javascript">
     $(function () {
 
         $('#flexigridData').datagrid({
-            title: '入库', //列表的标题
+            title: '器具信息', //列表的标题
             iconCls: 'icon-site',
             width: 'auto',
             height: 'auto',
@@ -71,30 +71,36 @@
             toolbar: [
 
                  {
-                     text: '详细',
+                     text: '入库',
                      iconCls: 'icon-search',
                      handler: function () {
-                         return getView();
+                         return flexiDelete();
                      }
-                 } ],
+                 },
+                    {
+                        text: '打印入库单',
+                        iconCls: 'icon-search',
+                        handler: function () {
+                            return getView();
+                        }
+                    }
+            ],
             columns: [[
 
-                
+
 					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 77 }
-					,{ field: 'REPORTNUMBER', title:  '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 77 }
-					,{ field: 'ORDER_NUMBER', title:  '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 77 }
-					,{ field: 'APPLIANCE_NAME', title:  '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 77 }
-					,{ field: 'MODEL', title:  '@Html.DisplayNameFor(model => model.MODEL)', width: 77 }
-					,{ field: 'FACTORY_NUM', title:  '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 77 }
-					,{ field: 'CERTIFICATE_ENTERPRISE', title:  '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 77 }
-					,{ field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title:  '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 77 }
-					,{ field: 'NAME', title:  '@Html.DisplayNameFor(model => model.NAME)', width: 77 }
-					,{ field: 'ORDER_STATUS', title:  '@Html.DisplayNameFor(model => model.ORDER_STATUS)', width: 77 }
-					,{ field: 'STORAGEINSTRUCTIONS', title:  '@Html.DisplayNameFor(model => model.STORAGEINSTRUCTIONS)', width: 77 }
-					,{ field: 'UNDERTAKE_LABORATORYID', title:  '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYID)', width: 77 }
-					,{ field: 'APPROVALDATE', title:  '@Html.DisplayNameFor(model => model.APPROVALDATE)', width: 77 }
-					,{ field: 'STORAGEINSTRUCTI_STATU', title:  '@Html.DisplayNameFor(model => model.STORAGEINSTRUCTI_STATU)', width: 77 }
-                ]],
+					, { field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 77 }
+					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 77 }
+					, { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 77 }
+					, { field: 'VERSION', title: '@Html.DisplayNameFor(model => model.VERSION)', width: 77 }
+					, { field: 'FACTORY_NUM', title: '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 77 }
+					, { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 77 }
+					, { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 77 }
+					, { field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', width: 77 }
+					, { field: 'ORDER_STATUS', title: '@Html.DisplayNameFor(model => model.ORDER_STATUS)', width: 77 }
+					, { field: 'STORAGEINSTRUCTIONS', title: '@Html.DisplayNameFor(model => model.STORAGEINSTRUCTIONS)', width: 77 }
+
+            ]],
             pagination: true,
             rownumbers: true
 
@@ -126,7 +132,7 @@
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
- 
+
     //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
     function flexiSelect() {
 
@@ -149,20 +155,43 @@
             returnParent(arr.join("&")); //每一项用 & 分割
         }
     }
-    //导航到查看详细的按钮
-    function getView() {
+    //判断是否选择一条数据
 
-        var arr = $('#flexigridData').datagrid('getSelections');
 
-        if (arr.length == 1) {
-            window.location.href = "../VRUKU/Details/" + arr[0].ID;
-
-        } else {
-            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
+    //入库
+    function flexiDelete() {
+        var rows = $('#flexigridData').datagrid('getSelections');
+        if (rows.length == 0) {
+            $.messager.alert('操作提示', '请选择数据!', 'warning');
+            return false;
         }
-        return false;
-    }
- 
+            var arr = [];
+            for (var i = 0; i < rows.length; i++) {
+                arr.push(rows[i].ID);
+            }
+
+            $.messager.confirm('操作提示', "确认入库这 " + arr.length + " 项吗？", function (r) {
+                if (r) {
+                    $.ajax({
+                        url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/PutSTORAGEINSTRUCTI_STATU/" + arr.join(","),
+                        type: "put",
+                        success: function (res) {
+                            if (res.Code == 1) {
+                                //移除删除的数据
+
+                                $.messager.alert('操作提示', res.Message, 'info');
+                                $("#flexigridData").datagrid("reload");
+                                $("#flexigridData").datagrid("clearSelections");
+                            }
+                            else {
+                                $.messager.alert('操作提示', res.Message, 'info');
+                            }
+
+                        }
+                    })
+                }
+            });     
+    };
 
 </script>
 
