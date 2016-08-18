@@ -134,7 +134,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Account\" />
     <Folder Include="Views\Exception\" />
     <Folder Include="Views\FileUploader\" />
     <Folder Include="Views\HomeRight\" />
@@ -438,6 +437,9 @@
     <Content Include="up\b.xls" />
     <Content Include="Views\Appliance\Index.cshtml" />
     <Content Include="Views\Home\Index - 副本.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\NotFound.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

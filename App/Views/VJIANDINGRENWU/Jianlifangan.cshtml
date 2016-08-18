@@ -110,7 +110,7 @@
             </div>
         </div><br />
         <div class="input_search">
-            <div class="input_search-label">
+            <div class="input_search-label" id="pandundidian">
                 检定地点：
             </div>
             <div class="input_search-field">
@@ -118,7 +118,7 @@
             </div>
         </div><br />
         <div class="input_search">
-            <div class="input_search-label">
+            <div class="input_search-label" id="">
                 *检定日期：
             </div>
             <div class="input_search-field">
@@ -142,7 +142,7 @@
 </fieldset>
 <script type="text/javascript">
     $(function () {
-        var shiyanshi = "电能实验室"
+        var shiyanshi = "电能实验室";
         switch (shiyanshi) {
             case "电能实验室":
                 $("#diannengmaicong").show();
@@ -177,7 +177,13 @@
             default:
 
         }
+        var zhengshuleibei = "检定";
+        if (zhengshuleibei="检定") {
 
+        }
+        else if (zhengshuleibei="校准") {
+
+        }
         $('#biaozhuiqi').datagrid({
             title: '检定使用的标准器', //列表的标题
             iconCls: 'icon-site',
