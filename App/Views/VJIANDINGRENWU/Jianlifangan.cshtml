@@ -65,7 +65,31 @@
                 *准确度等级：
             </div>
             <div class="input_search-field">
-                <input type="text" readonly="readonly" />
+                <input type="text" name="ACCURACY_GRADE" id="ACCURACY_GRADE" />
+            </div>
+        </div><br />
+        <div class="input_search" id="diannengmaicong">
+            <div class="input_search-label">
+                脉冲常数：
+            </div>
+            <div class="input_search-field">
+                <input type="text" name="PULSE_CONSTANT" id="PULSE_CONSTANT" />
+            </div>
+        </div><br />
+        <div class="input_search" id="diannengeding">
+            <div class="input_search-label">
+                额定频率：
+            </div>
+            <div class="input_search-field">
+                <input type="text" name="RATED_FREQUENCY" id="RATED_FREQUENCY" />
+            </div>
+        </div><br />
+        <div class="input_search" id="huganqiwaijie">
+            <div class="input_search-label">
+                外接电阻值：
+            </div>
+            <div class="input_search-field">
+                <input type="text" name="EXTERNAL_RESITANCE_VALUE" id="EXTERNAL_RESITANCE_VALUE" />
             </div>
         </div><br />
         <label>其他信息</label><br style="clear:both;" />
@@ -110,16 +134,51 @@
             </div>
         </div><br style="clear:both;" />
 
-        <table id="jianlifangan"></table><br style="clear:both;" />
-        <input type="button"value="下一步" />
-        <input type="button"value="保存下一步" />
+        <table id="biaozhuiqi"></table><br style="clear:both;" />
+        <table id="biaozhuizhuangzi"></table><br style="clear:both;" />
+        <input type="button" value="下一步" />
+        <input type="button" value="保存下一步" />
     </div>
 </fieldset>
 <script type="text/javascript">
     $(function () {
+        var shiyanshi = "电能实验室"
+        switch (shiyanshi) {
+            case "电能实验室":
+                $("#diannengmaicong").show();
+                $("#diannengeding").show();
+                $("#huganqiwaijie").hide();
+                break;
+            case "直流实验室":
+                $("#diannengmaicong").hide();
+                $("#diannengeding").hide();
+                $("#huganqiwaijie").hide();
+                break;
+            case "指示仪表实验室":
+                $("#diannengmaicong").hide();
+                $("#diannengeding").hide();
+                $("#huganqiwaijie").hide();
+                break;
+            case "互感器实验室":
+                $("#diannengmaicong").hide();
+                $("#diannengeding").show();
+                $("#huganqiwaijie").show();
+                break;
+            case "数表三相实验室":
+                $("#diannengmaicong").hide();
+                $("#diannengeding").hide();
+                $("#huganqiwaijie").hide();
+                break;
+            case "数表单相实验室":
+                $("#diannengmaicong").hide();
+                $("#diannengeding").hide();
+                $("#huganqiwaijie").hide();
+                break;
+            default:
 
+        }
 
-        $('#jianlifangan').datagrid({
+        $('#biaozhuiqi').datagrid({
             title: '检定使用的标准器', //列表的标题
             iconCls: 'icon-site',
             width: 'auto',
@@ -148,7 +207,8 @@
                   }
             ],
             columns: [[
-					{ field: 'ID', title: '名称', width: 64 }
+
+                    { field: 'ID', title: '名称', width: 64 }
 					, { field: 'ORDER_NUMBER', title: '测量范围', width: 64 }
             ]],
         })

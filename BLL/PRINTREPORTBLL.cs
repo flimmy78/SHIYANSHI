@@ -287,7 +287,15 @@ namespace Langben.BLL
             return repository.GetById(db, id);           
         }
 
-
+        /// <summary>
+        /// 根据主键获取一个打印报告
+        /// </summary>
+        /// <param name="id">打印报告的主键</param>
+        /// <returns>一个打印报告</returns>
+        public PRINTREPORT GetPREPARE_SCHEMEID(string id)
+        {
+            return repository.GetById(db, id);
+        }
         /// <summary>
         /// 根据PREPARE_SCHEMEIDId，获取所有打印报告数据
         /// </summary>

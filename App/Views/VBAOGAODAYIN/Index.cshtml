@@ -3,84 +3,84 @@
 @using Common
 @using Models
 <div id="divQuery">
-     
-            <div class="input_search">
-            <div class="input_search-label">
-                    @Html.LabelFor(model => model.REPORTNUMBER):
-             </div>
-                <div class="input_search-field">
-                    <input type='text' id='REPORTNUMBER'/>
-               </div>
-            </div> 
-            <div class="input_search">
-            <div class="input_search-label">
-                    @Html.LabelFor(model => model.ORDER_NUMBER):
-             </div>
-                <div class="input_search-field">
-                    <input type='text' id='ORDER_NUMBER'/>
-               </div>
-            </div> 
-            <div class="input_search">
-            <div class="input_search-label">
-                    @Html.LabelFor(model => model.FACTORY_NUM):
-             </div>
-                <div class="input_search-field">
-                    <input type='text' id='FACTORY_NUM'/>
-               </div>
-            </div> 
-            <div class="input_search">
-            <div class="input_search-label">
-                    @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE):
-             </div>
-                <div class="input_search-field">
-                    <input type='text' id='CERTIFICATE_ENTERPRISE'/>
-               </div>
-            </div>
-            <div class="input_search">
-             <div class="input_search-label">
-                    @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID):
-                </div>
-                <div class="input_search-field">
-                    @Html.DropDownList("UNDERTAKE_LABORATORYIDDDL_String", Models.SysFieldModels.GetSysField("VBAOGAODAYIN","UNDERTAKE_LABORATORYID"),"请选择",new { id = "UNDERTAKE_LABORATORYIDDDL_String" })
-                </div>
-            </div> 
-            <div class="input_search">
-            <div class="input_search-label">
-                    @Html.LabelFor(model => model.APPROVALDATE):
-             </div>
-                <div class="input_search-field">
-                    <input type='text' id='APPROVALDATE'/>
-               </div>
-            </div> 
-            <div class="input_search">
-            <div class="input_search-label">
-                    @Html.LabelFor(model => model.BAR_CODE_NUM):
-             </div>
-                <div class="input_search-field">
-                    <input type='text' id='BAR_CODE_NUM'/>
-               </div>
-            </div>
-            <div class="input_search">
-             <div class="input_search-label">
-                    @Html.LabelFor(model => model.PRINTSTATUS):
-                </div>
-                <div class="input_search-field">
-                    @Html.DropDownList("PRINTSTATUSDDL_String", Models.SysFieldModels.GetSysField("VBAOGAODAYIN","PRINTSTATUS"),"请选择",new { id = "PRINTSTATUSDDL_String" })
-                </div>
-            </div>
+
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.REPORTNUMBER):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='REPORTNUMBER' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.ORDER_NUMBER):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='ORDER_NUMBER' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.FACTORY_NUM):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='FACTORY_NUM' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='CERTIFICATE_ENTERPRISE' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID):
+        </div>
+        <div class="input_search-field">
+            @Html.DropDownList("UNDERTAKE_LABORATORYIDDDL_String", Models.SysFieldModels.GetSysField("VBAOGAODAYIN", "UNDERTAKE_LABORATORYID"), "请选择", new { id = "UNDERTAKE_LABORATORYIDDDL_String" })
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.APPROVALDATE):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='APPROVALDATE' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.BAR_CODE_NUM):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='BAR_CODE_NUM' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.PRINTSTATUS):
+        </div>
+        <div class="input_search-field">
+            @Html.DropDownList("PRINTSTATUSDDL_String", Models.SysFieldModels.GetSysField("VBAOGAODAYIN", "PRINTSTATUS"), "请选择", new { id = "PRINTSTATUSDDL_String" })
+        </div>
+    </div>
     <div class='input_search' style="padding-top:10px;">
         <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
             查 询
         </a>
     </div>
 </div>
- <br style="clear: both;" />
+<br style="clear: both;" />
 
 <script type="text/javascript" language="javascript">
     $(function () {
 
         $('#flexigridData').datagrid({
-            title: '报告打印', //列表的标题
+            title: '器具报告信息', //列表的标题
             iconCls: 'icon-site',
             width: 'auto',
             height: 'auto',
@@ -95,32 +95,42 @@
             toolbar: [
 
                  {
-                     text: '详细',
+                     text: '打印报告',
                      iconCls: 'icon-search',
                      handler: function () {
-                         return getView();
+                         return daying();
                      }
-                 } ],
+                 },
+                    {
+                        text: '报告回收',
+                        iconCls: 'icon-search',
+                        handler: function () {
+                            return getView();
+                        }
+                    }
+            ],
             columns: [[
 
-                
+
 					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 64 }
-					,{ field: 'REPORTNUMBER', title:  '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 64 }
-					,{ field: 'ORDER_NUMBER', title:  '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 64 }
-					,{ field: 'APPLIANCE_NAME', title:  '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 64 }
-					,{ field: 'MODEL', title:  '@Html.DisplayNameFor(model => model.MODEL)', width: 64 }
-					,{ field: 'FACTORY_NUM', title:  '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 64 }
-					,{ field: 'CERTIFICATE_ENTERPRISE', title:  '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 64 }
-					,{ field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title:  '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 64 }
-					,{ field: 'CERTIFICATE_CATEGORY', title:  '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 64 }
-					,{ field: 'QUALIFICATIONS', title:  '@Html.DisplayNameFor(model => model.QUALIFICATIONS)', width: 64 }
-					,{ field: 'CONCLUSION_EXPLAIN', title:  '@Html.DisplayNameFor(model => model.CONCLUSION_EXPLAIN)', width: 64 }
-					,{ field: 'CONCLUSION', title:  '@Html.DisplayNameFor(model => model.CONCLUSION)', width: 64 }
-					,{ field: 'UNDERTAKE_LABORATORYID', title:  '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYID)', width: 64 }
-					,{ field: 'APPROVALDATE', title:  '@Html.DisplayNameFor(model => model.APPROVALDATE)', width: 64 }
-					,{ field: 'BAR_CODE_NUM', title:  '@Html.DisplayNameFor(model => model.BAR_CODE_NUM)', width: 64 }
-					,{ field: 'PRINTSTATUS', title:  '@Html.DisplayNameFor(model => model.PRINTSTATUS)', width: 64 }
-                ]],
+					, { field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 64 }
+					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 64 }
+					, { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 64 }
+					, { field: 'VERSION', title: '@Html.DisplayNameFor(model => model.VERSION)', width: 64 }
+					, { field: 'FACTORY_NUM', title: '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 64 }
+					, { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 64 }
+					, { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 64 }
+					, { field: 'CERTIFICATE_CATEGORY', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 64 }
+					, { field: 'QUALIFICATIONS', title: '@Html.DisplayNameFor(model => model.QUALIFICATIONS)', width: 64 }
+					, { field: 'CONCLUSION_EXPLAIN', title: '@Html.DisplayNameFor(model => model.CONCLUSION_EXPLAIN)', width: 64 }
+					, { field: 'CONCLUSION', title: '@Html.DisplayNameFor(model => model.CONCLUSION)', width: 64 }
+                    , {
+                        field: 'aa', title: '打印记录', width: 86, formatter: function (value, row, index) {
+                            var html = "<a href='/VBAOGAODAYIN/Details/" + row.ID + "'>详情</a>";
+                            return html;
+                        }
+                    }
+            ]],
             pagination: true,
             rownumbers: true
 
@@ -152,7 +162,7 @@
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
- 
+
     //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
     function flexiSelect() {
 
@@ -188,7 +198,29 @@
         }
         return false;
     }
- 
+    //打印
+    function daying() {
+        var arr={
+            PREPARE_SCHEMEID:@ViewBag.Id,
+            CREATEPERSON:"登入者"
+        }
+        $.ajax({
+            url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/Put/" + is,
+            type: "Put",
+            data: arr,
+            // async: false,
+            success: function (res) {
+                if (res.Code == 1) {
+                    $.messager.alert('操作提示', res.Message, 'info');
+                    $("#flexigridData").datagrid("reload");
+                    $("#flexigridData").datagrid("clearSelections");
+                }
+                else {
+                    $.messager.alert('操作提示', res.Message, 'info');
+                }
+            }
+        })
+    }
 
 </script>
 

@@ -29,7 +29,16 @@ namespace Langben.App.Controllers
 
             return View();
         }
-
+        /// <summary>
+        /// 详情
+        /// </summary>
+        /// <returns></returns>
+        [SupportFilter]
+        public ActionResult Details(string id)
+        {
+            ViewBag.Id = id;
+            return View();
+        }
         /// <summary>
         /// 异步加载数据
         /// </summary>
