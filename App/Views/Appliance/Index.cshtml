@@ -23,7 +23,7 @@
 
 <input type="button" onclick="seng()" value="查询" />
 <script type="text/javascript">
-  //委托单保存
+    //委托单保存
     function ajaxFrom(form, url) {
         $.ajax({
             url: url,
@@ -52,13 +52,7 @@
         });
 
     }
-    //新增
-    function flexiInsert() {
-        $('#ApplianceDate').edatagrid('addRow', {
 
-        })
-        // $("#xu").val();
-    }
     //保存
     function flexiSave() {
         $('#ApplianceDate').edatagrid('saveRow')
@@ -73,8 +67,8 @@
         //器具信息绑定
         var search = "";
         search = "BAR_CODE_NUM" + "@@" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "@@" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "@@" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "@@" + $("#APPLIANCE_NAME").val() + "^"
-        $('#ApplianceDate').edatagrid({ url: '/api/APPLIANCE_DETAIL_INFORMATIONApi/PostDataByID/' + search } );
- 
+        $('#ApplianceDate').edatagrid({ url: '/api/APPLIANCE_DETAIL_INFORMATIONApi/PostDataByID/' + search });
+
         //$('#ApplianceDate').edatagrid('reload', { id: search }); //{ url: "/api/APPLIANCE_DETAIL_INFORMATIONApi/PostData" }
         //委托单信息绑定
         //$.ajax({
@@ -110,15 +104,46 @@
             }
             return false;
         });
-    
+        //新增
+        function flexiInsert() {
+            $('#ApplianceDate').edatagrid('addRow', {
+
+            })
+            // $("#xu").val();
+        }
+        var editFlag = undefined;//设置一个编辑标记
+        var url = null;
         var Address = [{ "value": "是", "text": "是" }, { "value": "否", "text": "否" }];
         $('#ApplianceDate').edatagrid({
+            onAdd: function (index, row) {
+                debugger;
+                alert(row);
+            },
+            onEdit: function (index, row) {
+                debugger;
+                alert(row);
+            }
+            , onBeforeSave: function (index) {
+                debugger;
+                alert(index);
+            },
+            onSave: function (index, row) {
+                debugger;
+                alert(row);
+            },
+            onDestroy: function (index, row) {
+                debugger;
+                alert(row);
+            },
+            onError: function (index, row) {
+                debugger;
+                alert(row.msg);
+            },
 
             saveUrl: "/api/APPLIANCE_DETAIL_INFORMATIONApi/Post",
             updateUrl: "/api/APPLIANCE_DETAIL_INFORMATIONApi/Put",
             destroyUrl: "/api/APPLIANCE_DETAIL_INFORMATIONApi/Delete",
             toolbar: [
-
              {
                  text: '新增',
                  iconCls: 'icon-add',
@@ -146,7 +171,10 @@
                    }
                }],
             columns: [[
-             { field: 'ID', title: '选中', width: 35, formatter: function (value, row, index) { return '<input id=\"' + row.ID + '\" type=\"checkbox\">'; } }
+             {
+                 field: 'ID', title: '选中', width: 35, formatter:
+                   function (value, row, index) { return '<input id=\"' + row.ID + '\" type=\"checkbox\">'; }
+             }
            , { field: 'APPLIANCE_NAME', title: '*器具名称', width: 135, editor: 'text' }
            , { field: 'VERSION', title: '*型号', width: 65, editor: 'text' }
            , { field: 'FORMAT', title: '规格', width: 65, editor: 'text' }
@@ -154,23 +182,45 @@
            , { field: 'NUM', title: '*数量', width: 65, editor: 'text' }
            , { field: 'ATTACHMENT', title: '附件', width: 135, editor: 'text' }
            , {
-               field: 'ORDER_TASK_INFORMATIONID', title: '委托单', width: 135, hidden: true,editor: 'text',  formatter: function (value, row, index){
-                  // type: 'text', value: $("#hiddenid").val()
+               field: 'ORDER_TASK_INFORMATIONID', title: '委托单', width: 135, hidden: true, editor: 'text', formatter: function (value, row, index) {
+                   // type: 'text', value: $("#hiddenid").val()
                    //<input type="text" class="datagrid-editable-input">
                    // debugger
                    return $("#hiddenid").val();
-                  // return '<input type="text" class="datagrid-editable-input" value="' + $("#hiddenid").val() + '" id="ORDER_TASK_INFORMATIONID"/>';
+                   // return '<input type="text" class="datagrid-editable-input" value="' + $("#hiddenid").val() + '" id="ORDER_TASK_INFORMATIONID"/>';
                }
-                
-             
+
+
            }
            , {
-               field: 'APPEARANCE_STATUS', title: '*外观状态', width: 65, editor: 'text'}
+               field: 'APPEARANCE_STATUS', title: '*外观状态', width: 65, editor: 'text'
+           }
            , { field: 'MAKE_ORGANIZATION', title: '制造单位', width: 65, editor: 'text' }
            , { field: 'UNDERTAKE_LABORATORYID', title: '*承接实验室', width: 135, editor: { type: 'checkbox', options: { on: 'P', off: '' } } }
            , { field: 'APPLIANCE_RECIVE', title: '器具接收', width: 65, editor: { type: 'combobox', options: { data: Address, valueField: 'value', textField: 'text', panelHeight: 'auto' } } }
            , { field: 'REMARKS', title: '备注', width: 135, editor: 'text' }
-            ]]
+            ]],
+            onBeforeLoad: function (param) {
+                param.url = url;
+            },
+            onAfterEdit: function (rowIndex, rowData, changes) {
+                editFlag = undefined;//重置
+                jQuery("#ApplianceDate").edatagrid("unselectAll");
+            },
+            onDblClickCell: function (rowIndex, field, value) {//双击该行修改内容
+                if (editFlag != undefined) {
+                    jQuery("#ApplianceDate").edatagrid('endEdit', editFlag);//结束编辑，传入之前编辑的行
+                    jQuery("#ApplianceDate").edatagrid('beginEdit', rowIndex);//开启编辑并传入要编辑的行
+                    editFlag = rowIndex;
+                }
+                if (editFlag == undefined) {
+                    jQuery("#ApplianceDate").edatagrid('beginEdit', rowIndex);//开启编辑并传入要编辑的行
+                    editFlag = rowIndex;
+                }
+            },
+            onClickCell: function (rowIndex, field, value) {//双击该行修改内容
+                editFlag = rowIndex;
+            }
         });
 
     });
@@ -217,8 +267,8 @@
         });
     </script>*@
 <div class="bigdiv">
-   @using (Html.BeginForm("", "api/ORDER_TASK_INFORMATIONApi/Post"))
-   {
+    @using (Html.BeginForm("", "api/ORDER_TASK_INFORMATIONApi/Post"))
+    {
 
         <div class="editor-label">
             @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：

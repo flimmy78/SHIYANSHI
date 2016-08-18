@@ -24,6 +24,8 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="getParam"></param>
         /// <returns></returns>
+        /// 
+        [System.Web.Http.HttpPost]
         public Common.ClientResult.DataResult PostData([FromBody]GetDataParam getParam)
         {
             int total = 0;
@@ -84,6 +86,8 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="id">编号</param>
         /// <returns></returns>
+        /// 
+        [System.Web.Http.HttpGet]
         public PREPARE_SCHEME Get(string id)
         {
             PREPARE_SCHEME item = m_BLL.GetById(id);
@@ -145,6 +149,8 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>  
+        /// 
+        [System.Web.Http.HttpPut]
         public Common.ClientResult.Result Put([FromBody]PREPARE_SCHEME entity)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
@@ -192,6 +198,7 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="collection"></param>
         /// <returns></returns>  
+        [System.Web.Http.HttpDelete]
         public Common.ClientResult.Result Delete(string query)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
