@@ -114,8 +114,8 @@
             // 获取待编辑内容并显示
             var id = '@ViewBag.Id';
             $.ajax({
-                url: "/api/COMPANYApi/" + id,
-                type: "POST",
+                url: "/api/COMPANYApi/Get/" + id,
+                type: "Get",
                 // async: false,
                 success: function (res) {
                     $("#ID").val(res.ID);$("#COMPANYNAME").val(res.COMPANYNAME);$("#COMPANYADDRES").val(res.COMPANYADDRES);$("#POSTCODE").val(res.POSTCODE);$("#CONTACTS").val(res.CONTACTS);$("#CONTACTSNUMBER").val(res.CONTACTSNUMBER);$("#FAX").val(res.FAX);$("#CREATETIME").val(res.CREATETIME);$("#CREATEPERSON").val(res.CREATEPERSON);$("#UPDATEPERSON").val(res.UPDATEPERSON);

@@ -149,6 +149,7 @@
     <Compile Include="Codes\SupportFilter.cs" />
     <Compile Include="Codes\SysFieldModels.cs" />
     <Compile Include="Codes\Utils.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ExceptionController.cs" />
     <Compile Include="Controllers\FileUploaderController.cs" />
@@ -410,6 +411,7 @@
     <Content Include="Scripts\jquery-ui-1.10.1.custom.min.js" />
     <Content Include="Scripts\jquery.edatagrid.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <None Include="Properties\PublishProfiles\shiyanshi.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -734,6 +736,7 @@
     <Content Include="Views\SysRole\Edit.cshtml" />
     <Content Include="Views\SysRole\Index.cshtml" />
     <Content Include="Views\SysRole\SetSysMenu.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
