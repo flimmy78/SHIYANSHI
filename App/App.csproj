@@ -243,6 +243,7 @@
     <Content Include="Images\excelcss.jpg" />
     <Content Include="Images\formphoto.png" />
     <Content Include="Images\form_btn.png" />
+    <Content Include="Images\gwlogo.png" />
     <Content Include="Images\icon-signOut.png" />
     <Content Include="Images\left-ctrl.png" />
     <Content Include="Images\line_n2.gif" />
