@@ -475,26 +475,31 @@ namespace Langben.BLL
                         }
                     }
                 }
+                //现在所有的菜单
                 var SysMenusIds = from f in db.SysMenu
                                   where ls.Contains(f.Remark)
-                                  select f.Id; //现在所有的菜单
+                                  select f.Id; 
+                 //删除的菜单
+                var deleteSysMenuSysRoleSysOperation = from f in db.SysMenuSysRoleSysOperation
+                                                       where f.SysRoleId == id
+                                                       select f;
+                foreach (var item in deleteSysMenuSysRoleSysOperation)
+                {
+                    db.SysMenuSysRoleSysOperation.Remove(item);
+                }
 
-                StringBuilder builder = new StringBuilder();
-                builder.AppendFormat("DELETE FROM  [SysMenuSysRoleSysOperation] WHERE [SysRoleId] = '{0}';", id);//删除该角色的所有的菜单和操作
                 foreach (var item in SysMenusIds)
                 {//插入菜单
-                    builder.AppendFormat("INSERT INTO [SysMenuSysRoleSysOperation]([Id],[SysRoleId],[SysMenuId])VALUES('{0}','{1}','{2}');"
-                        , Common.Result.GetNewId(), id, item);
+                    db.SysMenuSysRoleSysOperation.Add(new SysMenuSysRoleSysOperation() { Id = Common.Result.GetNewId(), SysRoleId = id, SysMenuId = item });
                 }
 
                 foreach (var item in ids)
                 {//插入操作
                     if (item.Contains(split))
-                        builder.AppendFormat("INSERT INTO [SysMenuSysRoleSysOperation]([Id],[SysRoleId],[SysMenuId],[SysOperationId])VALUES('{0}','{1}','{2}','{3}');"
-                       , Common.Result.GetNewId(), id, item.Substring(0, item.IndexOf(split)), item.Substring(item.IndexOf(split) + 1));
+                    {
+                        db.SysMenuSysRoleSysOperation.Add(new SysMenuSysRoleSysOperation() { Id = Common.Result.GetNewId(), SysRoleId = id, SysMenuId = item.Substring(0, item.IndexOf(split)), SysOperationId = item.Substring(item.IndexOf(split) + 1) });
+                    }
                 }
-
-                db.Database.ExecuteSqlCommand(builder.ToString());
                 db.SaveChanges();
                 transactionScope.Complete();
                 return true;

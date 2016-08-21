@@ -111,15 +111,15 @@
         </div><br />
         <div class="input_search">
             <div class="input_search-label" id="pandundidian">
-                检定地点：
+
             </div>
             <div class="input_search-field">
                 <input type="text" />
             </div>
         </div><br />
         <div class="input_search">
-            <div class="input_search-label" id="">
-                *检定日期：
+            <div class="input_search-label" id="panduanrqi">
+
             </div>
             <div class="input_search-field">
                 <input type="text" />
@@ -133,15 +133,38 @@
                 <input type="text" />
             </div>
         </div><br style="clear:both;" />
-
-        <table id="biaozhuiqi"></table><br style="clear:both;" />
         <table id="biaozhuizhuangzi"></table><br style="clear:both;" />
+        <table id="biaozhuiqi"></table><br style="clear:both;" />
+        @*弹窗*@
+        <div id="w" class="easyui-window" title="Window Layout" data-options="iconCls:'icon-save'" style="width:700px;height:400px;padding:5px;">
+            <div class="easyui-layout" data-options="fit:true">
+                @*<div data-options="region:'east',split:true" style="width:100%;" id="tanchuandivzhuangzi">
+                    <table id="zhuangzitianjia" style="display:none"></table><br style="clear:both;" />
+                    <table id="qitianjia" style="display:none"></table><br style="clear:both;" />
+                </div>*@
+                <div style="width:100%;display:none" id="tanchuandivzhuangzi">
+                    <table id="zhuangzitianjia" ></table>
+                </div>
+                <div style="width:100%;display:none" id="tanchuandivqi">
+                    <table id="qitianjia" ></table>
+                </div>
+                @*<div data-options="region:'center'" style="padding:10px;display:none;width:100%" id="tanchuandivqi">
+                    <table id="qitianjia"></table><br style="clear:both;" />
+                </div>*@               
+                <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+                    <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="javascript:alert('ok')" style="width:80px">Ok</a>
+                    <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:alert('cancel')" style="width:80px">Cancel</a>
+                </div>
+            </div>
+        </div>
+        @*************************@
         <input type="button" value="下一步" />
         <input type="button" value="保存下一步" />
     </div>
 </fieldset>
 <script type="text/javascript">
     $(function () {
+        $('#w').window('close')
         var shiyanshi = "电能实验室";
         switch (shiyanshi) {
             case "电能实验室":
@@ -177,15 +200,20 @@
             default:
 
         }
+
+        //根据证书的不同展示不同的页面
         var zhengshuleibei = "检定";
-        if (zhengshuleibei="检定") {
-
+        if (zhengshuleibei = "检定") {
+            $("#pandundidian").html("检定地点：");
+            $("#panduanrqi").html(" *检定日期：");
         }
-        else if (zhengshuleibei="校准") {
-
+        else if (zhengshuleibei = "校准") {
+            $("#pandundidian").html("校准地点：");
+            $("#panduanrqi").html(" *校准日期：");
         }
+        //标准器绑定
         $('#biaozhuiqi').datagrid({
-            title: '检定使用的标准器', //列表的标题
+            title: '标准器', //列表的标题
             iconCls: 'icon-site',
             width: 'auto',
             height: 'auto',
@@ -201,7 +229,42 @@
                      text: '+',
                      iconCls: 'icon-search',
                      handler: function () {
-                         return lingqu();
+                         return biaozhunqi();
+                     }
+                 },
+                  {
+                      text: '删除',
+                      iconCls: 'icon-search',
+                      handler: function () {
+                          return lingqu();
+                      }
+                  }
+            ],
+            columns: [[
+
+                    { field: 'ID', title: '名称', width: 64 }
+					, { field: 'ORDER_NUMBER', title: '测量范围', width: 64 }
+            ]],
+        })
+        //标准装置绑定
+        $('#biaozhuizhuangzi').datagrid({
+            title: '标准装置', //列表的标题
+            iconCls: 'icon-site',
+            width: 'auto',
+            height: 'auto',
+            //nowrap: false,
+            striped: true,
+            collapsible: true,
+            //url: '../VJIANDINGRENWU/GetData', //获取数据的url
+            sortName: 'ID',
+            sortOrder: 'desc',
+            idField: 'ID',
+            toolbar: [
+                 {
+                     text: '+',
+                     iconCls: 'icon-search',
+                     handler: function () {
+                         return biaozhunzhuangzi();
                      }
                  },
                   {
@@ -219,4 +282,66 @@
             ]],
         })
     });
+    //标准器的选择
+    function biaozhunqi() {
+        $('#w').window('close')     
+        //标准器弹窗页面添加
+        $('#qitianjia').datagrid({
+            title: '计量标准器列表', //列表的标题
+            iconCls: 'icon-site',
+            width: 'auto',
+            height: 'auto',
+            //nowrap: false,
+            striped: true,
+            collapsible: true,
+            //url: '../VJIANDINGRENWU/GetData', //获取数据的url
+            sortName: 'ID',
+            sortOrder: 'desc',
+            idField: 'ID',
+            columns: [[
+                { field: 'ID', title: '类别', width: 64 }
+                , { field: 'ID', title: '名称', width: 64 }
+				, { field: 'ORDER_NUMBER', title: '出厂编号', width: 64 }
+                , { field: 'ORDER_NUMBER', title: '测量范围', width: 64 }
+                , { field: 'ORDER_NUMBER', title: '不确定度/准确度等级/最大允许误差', width: 64 }
+                , { field: 'ORDER_NUMBER', title: '检定/校准证书编号', width: 64 }
+                , { field: 'ORDER_NUMBER', title: '有效期至', width: 64 }
+            ]],
+        })
+        $("#tanchuandivqi").show();
+        $('#w').window('open');
+        $("#tanchuandivzhuangzi").hide();
+    }
+    //标准装置选择
+    function biaozhunzhuangzi() {
+        $('#w').window('close')  
+        //标准器弹窗页面添加
+        $('#zhuangzitianjia').datagrid({
+            title: '计量标准装置列表', //列表的标题
+            iconCls: 'icon-site',
+            width: 'auto',
+            height: 'auto',
+            //nowrap: false,
+            striped: true,
+            collapsible: true,
+            //url: '../VJIANDINGRENWU/GetData', //获取数据的url
+            sortName: 'ID',
+            sortOrder: 'desc',
+            idField: 'ID',
+            columns: [[
+                 { field: 'ID', title: '名称', width: 64 }
+                , { field: 'ORDER_NUMBER', title: '测量范围', width: 64 }
+                , { field: 'ORDER_NUMBER', title: '不确定度/准确度等级/最大允许误差', width: 64 }
+                , { field: 'ORDER_NUMBER', title: '计量标准证书编号', width: 64 }
+                , { field: 'ORDER_NUMBER', title: '有效期至', width: 64 }
+            ]],
+        })    
+        $("#tanchuandivzhuangzi").show();
+        $('#w').window('open', {
+            collapsible: false,
+            minimizable: false,
+            maximizable: false
+        });
+        $("#tanchuandivqi").hide();
+    }
 </script>

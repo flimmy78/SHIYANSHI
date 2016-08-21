@@ -44,35 +44,8 @@
                 </div>
                 <div class="display-field" id='FAX'>
                 </div>        
-                <div class="display-label">
-                      @Html.LabelFor(model => model.PARENTID) :
-                </div>
-                <div class="display-field">
-                    @if (Model.COMPANY2 != null)
-                       {
-                    @Model.COMPANY2.COMPANYNAME
-                    } 
-                </div>      
-                <div class="display-label">
-                      @Html.LabelFor(model => model.CREATETIME) :
-                </div>
-                <div class="display-field" id='CREATETIME'>
-                </div>      
-                <div class="display-label">
-                      @Html.LabelFor(model => model.CREATEPERSON) :
-                </div>
-                <div class="display-field" id='CREATEPERSON'>
-                </div>      
-                <div class="display-label">
-                      @Html.LabelFor(model => model.UPDATETIME) :
-                </div>
-                <div class="display-field" id='UPDATETIME'>
-                </div>      
-                <div class="display-label">
-                      @Html.LabelFor(model => model.UPDATEPERSON) :
-                </div>
-                <div class="display-field" id='UPDATEPERSON'>
-                </div>
+              
+               
         </div>
     </fieldset>
 
@@ -83,7 +56,7 @@
         var id = '@ViewBag.Id';
         $.ajax({
             url: "/api/COMPANYApi/" + id,
-            type: "POST",
+            type: "Get",
             // async: false,
             success: function (res) {
 		$("#COMPANYNAME").html(res.COMPANYNAME);$("#COMPANYADDRES").html(res.COMPANYADDRES);$("#POSTCODE").html(res.POSTCODE);$("#CONTACTS").html(res.CONTACTS);$("#CONTACTSNUMBER").html(res.CONTACTSNUMBER);$("#FAX").html(res.FAX);$("#CREATETIME").html(res.CREATETIME);$("#CREATEPERSON").html(res.CREATEPERSON);$("#UPDATETIME").html(res.UPDATETIME);$("#UPDATEPERSON").html(res.UPDATEPERSON);

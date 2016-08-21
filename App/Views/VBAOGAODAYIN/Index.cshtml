@@ -3,7 +3,6 @@
 @using Common
 @using Models
 <div id="divQuery">
-
     <div class="input_search">
         <div class="input_search-label">
             @Html.LabelFor(model => model.REPORTNUMBER):
@@ -201,11 +200,11 @@
     //打印
     function daying() {
         var arr={
-            PREPARE_SCHEMEID:@ViewBag.Id,
+            PREPARE_SCHEMEID:"@ViewBag.Id",
             CREATEPERSON:"登入者"
         }
         $.ajax({
-            url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/Put/" + is,
+            //url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/Put/" + is,
             type: "Put",
             data: arr,
             // async: false,

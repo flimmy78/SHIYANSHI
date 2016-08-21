@@ -174,6 +174,8 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
+        /// 
+        [HttpPost]
         public Common.ClientResult.Result Post([FromBody]APPLIANCE_DETAIL_INFORMATION entity)
         {           
 
