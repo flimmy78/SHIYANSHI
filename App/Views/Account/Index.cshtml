@@ -6,104 +6,11 @@
 <html>
 <head>
     <title>登   录</title>
-    <style type="text/css">
-        body
-        {
-            font-family: 微软雅黑, Verdana;
-        }
-        fieldset
-        {
-            margin: 0px 0px 0px 213px;
-            padding: 9px;
-            border: 1px solid #CCC;
-            width: 287px;
-        }
-        
-        input[type="text"], input[type="password"]
-        {
-            font-size: 1.1em;
-            height: 22px;
-            width: 160px;
-            border: 1px solid #CCC;
-        }
-        .editor-label
-        {
-            margin: 1em 0 0 0;
-        }        
-        .personname input
-        {
-            background: url(../images/username_bg.gif) left no-repeat #FFF;
-            border: 1px #ccc solid;
-            padding-left: 28px;
-        }
-        .password input
-        {
-            background: url(../images/password_bg.gif) left no-repeat #FFF;
-            border: 1px #ccc solid;
-            padding-left: 28px;
-        }
-        .validatecode img
-        {
-            vertical-align: middle;
-        }
-        
-        .validatecode input
-        {
-            vertical-align: middle;
-            width: 94px;
-            border: 1px #ccc solid;
-            padding-left: 28px;
-        }
-        .field-validation-error
-        {
-            color: #ff0000;
-        }
-        .login
-        {
-            width: 545px;
-            margin-top: 90px;
-            margin-left: 25%;
-        }
-        .login .top
-        {
-            background: url(../images/login_top.gif) left top no-repeat;
-            width: 545px;
-            height: 86px;
-        }
-        .login .middle
-        {
-            background: url(../images/login_midbg.gif) left top repeat-y;
-            width: 545px;
-        }
-        .login .middle .left
-        {
-            float: left;
-            width: 204px !important;
-            width: 194px;
-            padding-left: 6px !important;
-            padding-left: 0px;
-            margin-left: 6px;
-            overflow: hidden;
-        }
-        
-        .submitcss
-        {
-            background: url(../images/buttonOn_login.gif) left top no-repeat;
-            height: 21px;
-            width: 109px;
-            text-align: center;
-            border: 0px;
-            font-family: 微软雅黑,新宋体;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        .login .bottom
-        {
-            background: url(../images/login_bottom.gif) left top no-repeat;
-            width: 545px;
-            height: 18px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/Content/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/Content/style.css">
+    <script src="/scripts/jquery.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    
     <script type="text/javascript">
       
         function RefreshValidateCode(obj) {
@@ -112,54 +19,62 @@
      </script>
 </head>
  
-<body  >
- 
-    <form id="Form1" method="post">
-        <div class="login">
-            <div class="top">
+<body class="bg1">
+    <div class="container container-login">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <p class="login-top"><img src="/images/logo.png" alt=""><span class="login-top-span">&nbsp;&nbsp;实验室管理系统</span>
+                <p>
             </div>
-            <div class="middle">
-                <div class="left">
-                    <img alt="登录" src="../images/login_pic.gif">
-                </div>
-                <div class="right">
-                    <div class="right2">
-                        <fieldset style="border-top: 0px; border-left: #e8e8e8 1px solid; border-right: #e8e8e8 1px solid;
-                        border-bottom: #e8e8e8 1px solid;">
-                            <div class="editor-label">
-                                用户名：
-                            </div>
-                            <div class="personname">
-                                @Html.TextBoxFor(m => m.PersonName)
-                            </div>
-                            <div class="editor-label">
-                                密&nbsp;&nbsp; 码：
-                            </div>
-                            <div class="password">
-                                @Html.PasswordFor(m => m.Password)
-                            </div>
-                            <div class="editor-label">
-                                验证码：
-                            </div>
-                            <div class="validatecode">
-                                @Html.TextBoxFor(m => m.ValidateCode, new { MaxLength = "4" })
-                                <img alt="点击刷新验证码！" title="点击刷新验证码！" src="/Account/ValidateCode" style="cursor: pointer;"
+            <div class="col-lg-4 col-lg-offset-4 form-div">
+                <img class="form-photo" src="/images/formphoto.png" alt="">
+                <form class="login-form" id="Form1" method="post">
+                    <fieldset>
+
+                        <div class="input-group input-group-div">
+                            <span class="input-group-addon input-icon"><img class="input-icon-img" src="/images/user.png" alt=""></span>
+                            @Html.TextBoxFor(m => m.PersonName, new { @class = "form-control input-login", placeholder = "请输入用户名" })
+                           
+                        </div>
+                        <div class="input-error"> @Html.ValidationMessageFor(m => m.PersonName)</div>
+                        <div class="input-group input-group-div">
+                            <span class="input-group-addon input-icon"><img class="input-icon-img" src="/images/password.png" alt=""></span>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control input-login", placeholder = "请输入密码" })
+                           
+                        </div>
+                        <div class="input-error">@Html.ValidationMessageFor(m => m.Password) </div>
+                        <div class="input-group input-group-div">
+                            @Html.TextBoxFor(m => m.ValidateCode, new { MaxLength = "4", @class = "form-control input-verify", placeholder = "请输入验证码" })
+                            <a class="verify-ctrl" href="javascript:;">
+                                <img alt="点击刷新验证码！" title="点击刷新验证码！" src="/Account/ValidateCode" class="input-verify-img" style="cursor: pointer;"
                                      onclick="RefreshValidateCode(this);" />
-                            </div>
-                            <p>
-                                <input class="submitcss" type="submit" value="登录系统" />
-                            </p>
-                            <p>
-                                @Html.ValidationMessageFor(m => m.PersonName) <br />
-                                @Html.ValidationMessageFor(m => m.Password)
-                            </p>
-                        </fieldset>
-                    </div>
-                </div>
+                               
+                            </a>
+                        </div>
+                        <div class="input-error"> 
+   
+</div>
+                    
+                        <button type="submit" class="btn btn-warning btn-block" >登 录</button>
+                    </fieldset>
+
+                </form>
+                <br><br>
+
+
             </div>
-            <div class="bottom">
+            <div class="col-lg-12 login-foot">
+                <p class="text-center"> 国网冀北电力公司版权所有 </p>
+                <p class="text-center">Powered by 狼奔 © 2016</p>
+            </div>
+            <div id="div_fail" class="reveal-modal1 text-center">
+                <a class="close-reveal-modal lg_x"><img id="btn_fail" src="images/off.png" alt=""></a>
+                <h3 id="message" class="h3_fail">验证码</h3>
+                <a id="btn_fail1" class="close-reveal-modal lg_x">确定</a>
             </div>
         </div>
-    </form>
+    </div>
+
+    
 </body>
 </html>
