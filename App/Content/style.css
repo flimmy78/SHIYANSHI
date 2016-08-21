@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 /* CSS Document */
 
 body{
@@ -55,9 +55,9 @@ body{
 }
 .input-error{
     height: 20px;
-    display:block;
+    display: block;
     width: auto!important;
-    font-size: 12px; color:red
+    font-size: 12px;
 }
 .input-icon{
     background-color: #fff;
@@ -193,7 +193,7 @@ nav .open>a.system-ctrl-photo-a, .nav .open>a.system-ctrl-photo-a:focus, .nav .o
 }
 .carousel-control{
     top: 45%;
-    opacity: 0.8;
+    opacity: 0.8; width:10%
 }
 .column-p{
     margin: 6px 0 2px 0!important;
@@ -226,7 +226,7 @@ nav .open>a.system-ctrl-photo-a, .nav .open>a.system-ctrl-photo-a:focus, .nav .o
     padding-top: 3.5%;
     width: 32%;
     height: 170px;
-    background-color: rgba(255,255,255,1);
+    background-color: rgba(255,255,255,0.8);
     color: #999999!important;
 }
 .column-div-no{
@@ -235,10 +235,11 @@ nav .open>a.system-ctrl-photo-a, .nav .open>a.system-ctrl-photo-a:focus, .nav .o
     margin-right: 0.25%;
     padding-top: 3.5%;
     width: 32%;
-    height: 166px;
-    background-color: rgba(255,255,255,0.2);
+    height: 170px;
+    background-color: rgba(255,255,255,0.8);
     color: #999999;
 }
+.no{ background-image: url(../Images/stop.png); background-position:right bottom ; background-repeat:no-repeat}
 .column-btn{
     display: none;
 }

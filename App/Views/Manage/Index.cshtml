@@ -8,10 +8,139 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit" />
     <title>控制面板</title>
+    <link rel="stylesheet" type="text/css" href="/Content/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/Content/style.css">
+    <script src="/scripts/jquery.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
 </head>
-<body>
-    <div> 
+<body class="bg2">
+    <div class="container container-login">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <ul class="nav navbar-nav login-top">
+                    <li>
+                        <p class="login-top"><img src="/images/logo.png" alt=""><span class="login-top-span">&nbsp;&nbsp;实验室管理系统</span>
+                        <p>
+                    </li>
+                    <li class="dropdown user user-menu system-ctrl-photo pull-right">
+                        <a href="#" class="verify-ctrl dropdown-toggle system-ctrl-photo-a" data-toggle="dropdown"> <img src="/images/user1-160x160.jpg" class="img-circle system-ctrl-photo-img" alt="用户头像"> <span class="system-ctrl-photo-span-t ">刘腾飞</span> <span class="system-ctrl-photo-span-b ">系统管理员</span> </a>
+                        <ul class="dropdown-menu system-ctrl-dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header text-center">
+                                <img src="/images/user1-160x160.jpg" class="img-circle" alt="User Image">
+                                <p>刘腾飞</p>
+                                <p>系统管理员</p>
+                            </li>
+                            <!-- Menu Body -->
+                            <!-- Menu Footer-->
+                            <li class="user-footer"> <a href="#" class="btn"> <img class="user-footer-btn" src="/images/icon-signOut.png" height="20" width="19" alt="退出" /></a></a> </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <img class="system-ctrl-slogan" src="/images/slogan.png" alt="" style="background: #006F67">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <!-- 轮播（Carousel）项目 -->
+                    <div class="carousel-inner">
+                        <div class="item column-bg-div active">
+                            <div class="col-lg-4 column-div">
+                                <a class="verify-ctrl btn ">
+                                    <img src="/images/columnht.png" class="img-circle verify-ctrl-bgcolor1" alt="">
+                                    <p class="column-p">器具登记</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-4 column-div">
+                                <a class="verify-ctrl btn ">
+                                    <img src="/images/columnjm.png" class="img-circle verify-ctrl-bgcolor2" alt="">
+                                    <p class="column-p">器具/报告领取</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-4 column-div">
+                                <a class="verify-ctrl btn ">
+                                    <img src="/images/column-dx.png" class="img-circle verify-ctrl-bgcolor1" alt="">
+                                    <p class="column-p">收发管理</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-4 column-div">
+                                <a class="verify-ctrl btn ">
+                                    <img src="/images/columnhd.png" class="img-circle verify-ctrl-bgcolor3" alt="">
+                                    <p class="column-p">实验室管理</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-4 column-div no">
+                                <a class="verify-ctrl btn disabled">
+                                    <img src="/images/column-ys.png" class="img-circle verify-ctrl-bgcolor5" alt="">
+                                    <p class="column-p">审批管理</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-4 column-div no">
+                                <a class="verify-ctrl btn disabled">
+                                    <img src="/images/columnsj.png" class="img-circle verify-ctrl-bgcolor3" alt="">
+                                    <p class="column-p">数据分析</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="item column-bg-div">
+                            <div class="col-lg-4 column-div no">
+                                <a class="verify-ctrl btn disabled">
+                                    <img src="/images/columnvip.png" class="img-circle verify-ctrl-bgcolor4" alt="">
+                                    <p class="column-p">系统管理</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-4 column-div-no"> </div>
+                            <div class="col-lg-4 column-div-no"> </div>
+                            <div class="col-lg-4 column-div-no"> </div>
+                            <div class="col-lg-4 column-div-no"> </div>
+                            <div class="col-lg-4 column-div-no"> </div>
+                        </div>
+
+                    </div>
+                    <!-- 轮播（Carousel）导航 -->
+                    <a class="carousel-control left" href="#myCarousel"
+                       data-slide="prev"><img src="/images/left-ctrl.png" alt=""></a> <a class="carousel-control right" href="#myCarousel"
+                                                                                        data-slide="next"><img src="/images/right-ctrl.png" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-lg-offset-4 system-ctrl-foot">
+                <p class="text-center"> 国网冀北电力公司版权所有 </p>
+                <p class="text-center">Powered by 狼奔 © 2016</p>
+            </div>
+        </div>
     </div>
+
+    <script type="text/javascript">
+        $().ready(function () {
+            /*    $('.carousel-control.left').css('display','none');*/
+            $('.disabled img').css('background-color', '#c9c9c9');
+        });
+
+    </script>
+    <script type="text/javascript">
+        //系统选择
+
+        //悬停关闭
+        $('.column-div').mouseover(function () {
+            if (!$(this).children('a').hasClass('disabled')) {
+                $(this).css('background-color', 'rgba(255,255,255,1)');
+                $('img:eq(1)', this).css('display', 'inherit');
+            }
+        });
+        $('.column-div').mouseout(function () {
+            $(this).css('background-color', 'rgba(255,255,255,0.8)');
+            $('img:eq(1)', this).css('display', 'none');
+        });
+        //退出按钮悬停
+        $('.user-footer').mouseover(function () {
+            $(this).children('a').children('img').attr('src', 'images/icon-signOuthover.png')
+        })
+        $('.user-footer').mouseout(function () {
+            $(this).children('a').children('img').attr('src', 'images/icon-signOut.png')
+        })
+    </script>
 </body>
 </html>
