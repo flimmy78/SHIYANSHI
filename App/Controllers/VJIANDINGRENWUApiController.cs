@@ -34,22 +34,36 @@ namespace Langben.App.Controllers
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID
-					,ORDER_NUMBER = s.ORDER_NUMBER
-					,APPLIANCE_NAME = s.APPLIANCE_NAME
-					,VERSION = s.VERSION,
+                    ,
+                    ORDER_NUMBER = s.ORDER_NUMBER
+                    ,
+                    APPLIANCE_NAME = s.APPLIANCE_NAME
+                    ,
+                    VERSION = s.VERSION,
                     FACTORY_NUM = s.FACTORY_NUM
-					,CERTIFICATE_ENTERPRISE = s.CERTIFICATE_ENTERPRISE
-					,CUSTOMER_SPECIFIC_REQUIREMENTS = s.CUSTOMER_SPECIFIC_REQUIREMENTS
-					,ORDER_STATUS = s.ORDER_STATUS
-					,CREATEPERSON = s.CREATEPERSON
-					,APPLIANCE_PROGRESS = s.APPLIANCE_PROGRESS
-					,OVERDUE = s.OVERDUE
-					,STATE = s.STATE
-					,REPORTSTATUS = s.REPORTSTATUS
-					,APPROVAL = s.APPROVAL
-					,INSPECTION_ENTERPRISE = s.INSPECTION_ENTERPRISE
-					,ISOVERDUE = s.ISOVERDUE
-					
+                    ,
+                    CERTIFICATE_ENTERPRISE = s.CERTIFICATE_ENTERPRISE
+                    ,
+                    CUSTOMER_SPECIFIC_REQUIREMENTS = s.CUSTOMER_SPECIFIC_REQUIREMENTS
+                    ,
+                    ORDER_STATUS = s.ORDER_STATUS
+                    ,
+                    CREATETIME = s.CREATETIME
+                    ,
+                    APPLIANCE_PROGRESS = s.APPLIANCE_PROGRESS
+                    ,
+                    OVERDUE = s.OVERDUE
+                    ,
+                    STATE = s.STATE
+                    ,
+                    REPORTSTATUS = s.REPORTSTATUS
+                    ,
+                    APPROVAL = s.APPROVAL
+                    ,
+                    INSPECTION_ENTERPRISE = s.INSPECTION_ENTERPRISE
+                    ,
+                    ISOVERDUE = s.ISOVERDUE
+
 
                 })
             };
@@ -66,7 +80,7 @@ namespace Langben.App.Controllers
             VJIANDINGRENWU item = m_BLL.GetById(id);
             return item;
         }
-  
+
 
         IBLL.IVJIANDINGRENWUBLL m_BLL;
 
@@ -79,7 +93,7 @@ namespace Langben.App.Controllers
         {
             m_BLL = bll;
         }
-        
+
     }
 }
 

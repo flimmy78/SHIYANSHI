@@ -34,6 +34,14 @@ namespace Langben.IBLL
         [OperationContract]
         bool EditSTORAGEINSTRUCTI_STATU(ref Common.ValidationErrors validationErrors, string[] deleteCollection);
         /// <summary>
+        /// 修改对象（公用）
+        /// </summary>
+        /// <param name="validationErrors">返回的错误信息</param>
+        /// <param name="deleteCollection">表实体对象</param>
+        /// <returns></returns>       
+        [OperationContract]
+        bool EditField(ref Common.ValidationErrors validationErrors, APPLIANCE_DETAIL_INFORMATION entity);
+        /// <summary>
         /// 查找委托单中的受理单位
         /// </summary>
         /// <param name="id"></param>

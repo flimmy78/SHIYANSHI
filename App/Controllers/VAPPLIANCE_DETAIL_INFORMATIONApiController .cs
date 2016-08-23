@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
+
 using System.Text;
 using System.EnterpriseServices;
 using System.Configuration;
@@ -108,6 +108,53 @@ namespace Langben.App.Controllers
             result.Code = Common.ClientCode.FindNull;
             result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";
             return result; //提示输入的数据的格式不对         
+        }
+        /// <summary>
+        /// 编辑（公用）
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>  
+        /// 
+        [HttpPost]
+        public Common.ClientResult.Result EditField([FromBody]APPLIANCE_DETAIL_INFORMATION entity)
+        {
+            Common.ClientResult.Result result = new Common.ClientResult.Result();
+            if (entity != null && ModelState.IsValid)
+            {   //数据校验
+
+                //string currentPerson = GetCurrentPerson();
+                //entity.UpdateTime = DateTime.Now;
+                //entity.UpdatePerson = currentPerson;
+
+                string returnValue = string.Empty;
+                if (m_BLL.EditField(ref validationErrors, entity))
+                {
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息信息的Id为" + entity.ID, "器具明细信息"
+                        );//写入日志                   
+                    result.Code = Common.ClientCode.Succeed;
+                    result.Message = Suggestion.UpdateSucceed;
+                    return result; //提示更新成功 
+                }
+                else
+                {
+                    if (validationErrors != null && validationErrors.Count > 0)
+                    {
+                        validationErrors.All(a =>
+                        {
+                            returnValue += a.ErrorMessage;
+                            return true;
+                        });
+                    }
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具明细信息信息的Id为" + entity.ID + "," + returnValue, "器具明细信息"
+                        );//写入日志   
+                    result.Code = Common.ClientCode.Fail;
+                    result.Message = Suggestion.UpdateFail + returnValue;
+                    return result; //提示更新失败
+                }
+            }
+            result.Code = Common.ClientCode.FindNull;
+            result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";
+            return result; //提示输入的数据的格式不对                 
         }
         /// <summary>
         /// 查找委托单中的受理单位

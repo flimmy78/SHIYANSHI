@@ -8,7 +8,7 @@ namespace Langben.DAL
     /// <summary>
     /// 器具明细信息
     /// </summary>
-    public partial class APPLIANCE_DETAIL_INFORMATIONRepository 
+    public partial class APPLIANCE_DETAIL_INFORMATIONRepository
     {
 
         /// <summary>
@@ -17,18 +17,63 @@ namespace Langben.DAL
         /// <param name="db">实体数据</param>
         /// <param name="editCollection">主键的集合</param>
         /// <param name="shiyanshi">什么实验室领取的，传实验室名</param>
-        public void EditCollection(SysEntities db, string[] editCollection,string shiyanshi)
+        public void EditCollection(SysEntities db, string[] editCollection, string shiyanshi)
         {
             //数据库设置级联关系，自动删除子表的内容   
             IQueryable<APPLIANCE_DETAIL_INFORMATION> collection = from f in db.APPLIANCE_DETAIL_INFORMATION
-                    where editCollection.Contains(f.ID)
-                    select f;
+                                                                  where editCollection.Contains(f.ID)
+                                                                  select f;
             foreach (var deleteItem in collection)
             {
-                deleteItem.ORDER_STATUS="已领取";
-                deleteItem.APPLIANCE_PROGRESS = shiyanshi+"进行实验";
+                deleteItem.ORDER_STATUS = "已领取";
+                deleteItem.APPLIANCE_PROGRESS = shiyanshi + "进行实验";
             }
         }
+
+        /// <summary>
+        /// 修改对象(公用)
+        /// </summary>
+        /// <param name="db">实体数据</param>
+        /// <param name="entity">表的实体类</param>
+        public void EditField(SysEntities db, APPLIANCE_DETAIL_INFORMATION entity)
+        {
+            //数据库设置级联关系，自动删除子表的内容   
+            IQueryable<APPLIANCE_DETAIL_INFORMATION> collection = from f in db.APPLIANCE_DETAIL_INFORMATION
+                                                                  where f.ID == entity.ID
+                                                                  select f;
+
+            //db.APPLIANCE_DETAIL_INFORMATION.Attach(entity);
+            //db.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+            //int i = db.SaveChanges();
+            foreach (var deleteItem in collection)
+            {
+                deleteItem.BAR_CODE_NUM = entity.BAR_CODE_NUM==null? deleteItem.BAR_CODE_NUM: entity.BAR_CODE_NUM;
+                deleteItem.APPLIANCE_NAME = entity.APPLIANCE_NAME == null ? deleteItem.APPLIANCE_NAME : entity.APPLIANCE_NAME;
+                deleteItem.VERSION = entity.VERSION == null ? deleteItem.VERSION : entity.VERSION;
+                deleteItem.FORMAT = entity.FORMAT == null ? deleteItem.FORMAT : entity.FORMAT;
+                deleteItem.FACTORY_NUM = entity.FACTORY_NUM == null ? deleteItem.FACTORY_NUM : entity.FACTORY_NUM;
+                deleteItem.NUM = entity.NUM == null ? deleteItem.NUM : entity.NUM;
+                deleteItem.ATTACHMENT = entity.ATTACHMENT == null ? deleteItem.ATTACHMENT : entity.ATTACHMENT;
+                deleteItem.APPEARANCE_STATUS = entity.APPEARANCE_STATUS == null ? deleteItem.APPEARANCE_STATUS : entity.APPEARANCE_STATUS;
+                deleteItem.MAKE_ORGANIZATION = entity.MAKE_ORGANIZATION == null ? deleteItem.MAKE_ORGANIZATION : entity.MAKE_ORGANIZATION;
+                deleteItem.REMARKS = entity.REMARKS == null ? deleteItem.REMARKS : entity.REMARKS;
+                deleteItem.END_PLAN_DATE = entity.END_PLAN_DATE == null ? deleteItem.END_PLAN_DATE : entity.END_PLAN_DATE;
+                deleteItem.ORDER_TASK_INFORMATIONID = entity.ORDER_TASK_INFORMATIONID == null ? deleteItem.ORDER_TASK_INFORMATIONID : entity.ORDER_TASK_INFORMATIONID;
+                deleteItem.CREATETIME = entity.CREATETIME == null ? deleteItem.CREATETIME : entity.CREATETIME;
+                deleteItem.CREATEPERSON = entity.CREATEPERSON == null ? deleteItem.CREATEPERSON : entity.CREATEPERSON;
+                deleteItem.UPDATETIME = entity.UPDATETIME == null ? deleteItem.UPDATETIME : entity.UPDATETIME;
+                deleteItem.UPDATEPERSON = entity.UPDATEPERSON == null ? deleteItem.UPDATEPERSON : entity.UPDATEPERSON;
+                deleteItem.APPLIANCE_RECIVE = entity.APPLIANCE_RECIVE == null ? deleteItem.APPLIANCE_RECIVE : entity.APPLIANCE_RECIVE;
+                deleteItem.APPLIANCE_PROGRESS = entity.APPLIANCE_PROGRESS == null ? deleteItem.APPLIANCE_PROGRESS : entity.APPLIANCE_PROGRESS;
+                deleteItem.ORDER_STATUS = entity.ORDER_STATUS == null ? deleteItem.ORDER_STATUS : entity.ORDER_STATUS;
+                deleteItem.ISOVERDUE = entity.ISOVERDUE == null ? deleteItem.ISOVERDUE : entity.ISOVERDUE;
+                deleteItem.OVERDUE = entity.OVERDUE == null ? deleteItem.OVERDUE : entity.OVERDUE;
+                deleteItem.STORAGEINSTRUCTIONS = entity.STORAGEINSTRUCTIONS == null ? deleteItem.STORAGEINSTRUCTIONS : entity.STORAGEINSTRUCTIONS;
+                deleteItem.STORAGEINSTRUCTI_STATU = entity.STORAGEINSTRUCTI_STATU == null ? deleteItem.STORAGEINSTRUCTI_STATU : entity.STORAGEINSTRUCTI_STATU;
+                deleteItem.EQUIPMENT_STATUS_VALUUMN = entity.EQUIPMENT_STATUS_VALUUMN == null ? deleteItem.EQUIPMENT_STATUS_VALUUMN : entity.EQUIPMENT_STATUS_VALUUMN;
+            }
+        }
+
         /// <summary>
         /// 修改对象集合(入库)
         /// </summary>

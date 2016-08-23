@@ -91,6 +91,8 @@
           <Property Name="OVERDUE" Type="varchar2" MaxLength="200" />
           <Property Name="STORAGEINSTRUCTIONS" Type="varchar2" MaxLength="4000" />
           <Property Name="STORAGEINSTRUCTI_STATU" Type="varchar2" MaxLength="200" />
+          <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="varchar2" MaxLength="200" />
+          <Property Name="RETURN_INSTRUCTIONS" Type="varchar2" MaxLength="4000" />
         </EntityType>
         <EntityType Name="APPLIANCE_LABORATORY">
           <Key>
@@ -1265,7 +1267,7 @@
           <Property Name="CERTIFICATE_ENTERPRISE" Type="varchar2" MaxLength="200" />
           <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="varchar2" MaxLength="4000" />
           <Property Name="ORDER_STATUS" Type="varchar2" MaxLength="200" />
-          <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="CREATETIME" Type="date" />
           <Property Name="APPLIANCE_PROGRESS" Type="varchar2" MaxLength="200" />
           <Property Name="OVERDUE" Type="varchar2" MaxLength="200" />
           <Property Name="STATE" Type="varchar2" MaxLength="200" />
@@ -1274,6 +1276,7 @@
           <Property Name="INSPECTION_ENTERPRISE" Type="varchar2" MaxLength="200" />
           <Property Name="ISOVERDUE" Type="varchar2" MaxLength="200" />
           <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
+          <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="varchar2" MaxLength="200" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VQIJULINGQU1”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -2227,7 +2230,7 @@ FROM "TENGFEI"."VBAOGAODAYIN" "VBAOGAODAYIN"</DefiningQuery>
 "VJIANDINGRENWU"."CERTIFICATE_ENTERPRISE" AS "CERTIFICATE_ENTERPRISE", 
 "VJIANDINGRENWU"."CUSTOMER_SPECIFIC_REQUIREMENTS" AS "CUSTOMER_SPECIFIC_REQUIREMENTS", 
 "VJIANDINGRENWU"."ORDER_STATUS" AS "ORDER_STATUS", 
-"VJIANDINGRENWU"."CREATEPERSON" AS "CREATEPERSON", 
+"VJIANDINGRENWU"."CREATETIME" AS "CREATETIME", 
 "VJIANDINGRENWU"."APPLIANCE_PROGRESS" AS "APPLIANCE_PROGRESS", 
 "VJIANDINGRENWU"."OVERDUE" AS "OVERDUE", 
 "VJIANDINGRENWU"."STATE" AS "STATE", 
@@ -2235,7 +2238,8 @@ FROM "TENGFEI"."VBAOGAODAYIN" "VBAOGAODAYIN"</DefiningQuery>
 "VJIANDINGRENWU"."APPROVAL" AS "APPROVAL", 
 "VJIANDINGRENWU"."INSPECTION_ENTERPRISE" AS "INSPECTION_ENTERPRISE", 
 "VJIANDINGRENWU"."ISOVERDUE" AS "ISOVERDUE", 
-"VJIANDINGRENWU"."UNDERTAKE_LABORATORYID" AS "UNDERTAKE_LABORATORYID"
+"VJIANDINGRENWU"."UNDERTAKE_LABORATORYID" AS "UNDERTAKE_LABORATORYID", 
+"VJIANDINGRENWU"."EQUIPMENT_STATUS_VALUUMN" AS "EQUIPMENT_STATUS_VALUUMN"
 FROM "TENGFEI"."VJIANDINGRENWU" "VJIANDINGRENWU"</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VQIJULINGQU1" EntityType="Self.VQIJULINGQU1" store:Type="Views" store:Schema="TENGFEI">
@@ -2973,6 +2977,8 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <NavigationProperty Name="APPLIANCECOLLECTION" Relationship="Model.FK_APPLIANC_REFERENCE_APPLIANC" FromRole="APPLIANCE_DETAIL_INFORMATION" ToRole="APPLIANCECOLLECTION" />
           <NavigationProperty Name="ORDER_TASK_INFORMATION" Relationship="Model.FK_APPLIANC_REFERENCE_ORDER_TA" FromRole="APPLIANCE_DETAIL_INFORMATION" ToRole="ORDER_TASK_INFORMATION" />
           <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RETURN_INSTRUCTIONS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="APPLIANCE_LABORATORY">
           <Key>
@@ -4500,7 +4506,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="CERTIFICATE_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="ORDER_STATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="APPLIANCE_PROGRESS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="OVERDUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="STATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -4509,6 +4514,8 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="INSPECTION_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ISOVERDUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CREATETIME" Type="DateTime" />
         </EntityType>
         <EntityType Name="FileUploader">
           <Key>
@@ -5035,6 +5042,8 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="APPLIANCE_DETAIL_INFORMATION">
             <EntityTypeMapping TypeName="Model.APPLIANCE_DETAIL_INFORMATION">
               <MappingFragment StoreEntitySet="APPLIANCE_DETAIL_INFORMATION">
+                <ScalarProperty Name="RETURN_INSTRUCTIONS" ColumnName="RETURN_INSTRUCTIONS" />
+                <ScalarProperty Name="EQUIPMENT_STATUS_VALUUMN" ColumnName="EQUIPMENT_STATUS_VALUUMN" />
                 <ScalarProperty Name="VERSION" ColumnName="VERSION" />
                 <ScalarProperty Name="STORAGEINSTRUCTI_STATU" ColumnName="STORAGEINSTRUCTI_STATU" />
                 <ScalarProperty Name="STORAGEINSTRUCTIONS" ColumnName="STORAGEINSTRUCTIONS" />
@@ -6032,6 +6041,8 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="VJIANDINGRENWU">
             <EntityTypeMapping TypeName="Model.VJIANDINGRENWU">
               <MappingFragment StoreEntitySet="VJIANDINGRENWU">
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="EQUIPMENT_STATUS_VALUUMN" ColumnName="EQUIPMENT_STATUS_VALUUMN" />
                 <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
                 <ScalarProperty Name="ISOVERDUE" ColumnName="ISOVERDUE" />
                 <ScalarProperty Name="INSPECTION_ENTERPRISE" ColumnName="INSPECTION_ENTERPRISE" />
@@ -6040,7 +6051,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
                 <ScalarProperty Name="STATE" ColumnName="STATE" />
                 <ScalarProperty Name="OVERDUE" ColumnName="OVERDUE" />
                 <ScalarProperty Name="APPLIANCE_PROGRESS" ColumnName="APPLIANCE_PROGRESS" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
                 <ScalarProperty Name="ORDER_STATUS" ColumnName="ORDER_STATUS" />
                 <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
                 <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
