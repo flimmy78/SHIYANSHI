@@ -82,48 +82,48 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
-        public Common.ClientResult.Result Post([FromBody]DC_CURRENT_OUTPUT entity)
-        {           
+        //public Common.ClientResult.Result Post([FromBody]DC_CURRENT_OUTPUT entity)
+        //{           
 
-            Common.ClientResult.Result result = new Common.ClientResult.Result();
-            if (entity != null && ModelState.IsValid)
-            {
-                //string currentPerson = GetCurrentPerson();
-                //entity.CreateTime = DateTime.Now;
-                //entity.CreatePerson = currentPerson;
+        //    Common.ClientResult.Result result = new Common.ClientResult.Result();
+        //    if (entity != null && ModelState.IsValid)
+        //    {
+        //        //string currentPerson = GetCurrentPerson();
+        //        //entity.CreateTime = DateTime.Now;
+        //        //entity.CreatePerson = currentPerson;
               
-                entity.ID = Result.GetNewId();   
-                string returnValue = string.Empty;
-                if (m_BLL.Create(ref validationErrors, entity))
-                {
-                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed  + "，直流电流输出的信息的Id为" + entity.ID,"直流电流输出"
-                        );//写入日志 
-                    result.Code = Common.ClientCode.Succeed;
-                    result.Message = Suggestion.InsertSucceed;
-                    return result; //提示创建成功
-                }
-                else
-                { 
-                    if (validationErrors != null && validationErrors.Count > 0)
-                    {
-                        validationErrors.All(a =>
-                        {
-                            returnValue += a.ErrorMessage;
-                            return true;
-                        });
-                    }
-                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，直流电流输出的信息，" + returnValue,"直流电流输出"
-                        );//写入日志                      
-                    result.Code = Common.ClientCode.Fail;
-                    result.Message = Suggestion.InsertFail + returnValue;
-                    return result; //提示插入失败
-                }
-            }
+        //        entity.ID = Result.GetNewId();   
+        //        string returnValue = string.Empty;
+        //        if (m_BLL.Create(ref validationErrors, entity))
+        //        {
+        //            LogClassModels.WriteServiceLog(Suggestion.InsertSucceed  + "，直流电流输出的信息的Id为" + entity.ID,"直流电流输出"
+        //                );//写入日志 
+        //            result.Code = Common.ClientCode.Succeed;
+        //            result.Message = Suggestion.InsertSucceed;
+        //            return result; //提示创建成功
+        //        }
+        //        else
+        //        { 
+        //            if (validationErrors != null && validationErrors.Count > 0)
+        //            {
+        //                validationErrors.All(a =>
+        //                {
+        //                    returnValue += a.ErrorMessage;
+        //                    return true;
+        //                });
+        //            }
+        //            LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，直流电流输出的信息，" + returnValue,"直流电流输出"
+        //                );//写入日志                      
+        //            result.Code = Common.ClientCode.Fail;
+        //            result.Message = Suggestion.InsertFail + returnValue;
+        //            return result; //提示插入失败
+        //        }
+        //    }
 
-            result.Code = Common.ClientCode.FindNull;
-            result.Message = Suggestion.InsertFail + "，请核对输入的数据的格式"; //提示输入的数据的格式不对 
-            return result;
-        }
+        //    result.Code = Common.ClientCode.FindNull;
+        //    result.Message = Suggestion.InsertFail + "，请核对输入的数据的格式"; //提示输入的数据的格式不对 
+        //    return result;
+        //}
 
         // PUT api/<controller>/5
         /// <summary>

@@ -87,7 +87,7 @@ namespace Langben.App.Controllers
                     Utils.WriteCookie("account", account, 7);
                     //Session["account"] = account;
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Manage");
                 }
             }
 

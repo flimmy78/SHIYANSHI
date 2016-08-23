@@ -149,6 +149,7 @@
     <Compile Include="Codes\SupportFilter.cs" />
     <Compile Include="Codes\SysFieldModels.cs" />
     <Compile Include="Codes\Utils.cs" />
+    <Compile Include="Controllers\ManageTemplateController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ExceptionController.cs" />
@@ -768,6 +769,7 @@
     <Content Include="Views\SysRole\Index.cshtml" />
     <Content Include="Views\SysRole\SetSysMenu.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\ManageTemplate\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
