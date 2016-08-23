@@ -109,14 +109,19 @@
     function chaoqi() {
         var arr = $('#flexigridData').datagrid('getSelections');
         if (arr.length == 1) {
-            if (arr[0].CREATETIME != null) {
-                var datea = dateConvert(arr[0].CREATETIME);
-                var tame = formatterDate(new Date());
-                var distance = shijianjishuan(datea, tame);
-                if (distance > 14) {
-                    $("#w").dialog('open');
-                    $("#chaoqiid").val(arr[0].ID);
-                    return true;
+            if (arr[0].ORDER_STATUS == "已分配" || arr[0].ORDER_STATUS == "已领取" || arr[0].ORDER_STATUS == "试验中") {
+                if (arr[0].CREATETIME != null) {
+                    var datea = dateConvert(arr[0].CREATETIME);
+                    var tame = formatterDate(new Date());
+                    var distance = shijianjishuan(datea, tame);
+                    if (distance >= 15) {
+                        $("#w").dialog('open');
+                        $("#chaoqiid").val(arr[0].ID);
+                        return true;
+                    }
+                    else {
+                        $.messager.alert('操作提示', '请选择超期数据!', 'warning');
+                    }
                 }
                 else {
                     $.messager.alert('操作提示', '请选择超期数据!', 'warning');
@@ -253,7 +258,7 @@
             sortOrder: 'asc',
             idField: 'ID',
             rowStyler: function (value, row, index) {
-                if (row.ORDER_STATUS != "试验完成") {
+                if (row.ORDER_STATUS == "已分配" || row.ORDER_STATUS == "已领取" || row.ORDER_STATUS == "试验中") {
                     if (row.CREATETIME != null) {
                         var datea = dateConvert(row.CREATETIME);
                         var distance = shijianjishuan(datea, tame);
