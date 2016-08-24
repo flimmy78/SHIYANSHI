@@ -28,6 +28,12 @@ namespace Langben.App.Controllers
             return View();
 
         }
+        public ActionResult Add()
+        {
+
+            return View();
+
+        }
     }
          
 }

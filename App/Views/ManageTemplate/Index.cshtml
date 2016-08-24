@@ -9,9 +9,132 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>方案模板管理</title>
+    <link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="/Content/default.css" rel="stylesheet" />
+    <link href="/Content/StyleSheet.css" rel="stylesheet" />
+
+
+    <script src="/Scripts/jquery.min.js"></script>
+    <script src="/Scripts/JScriptCommon.js"></script>
+
+    <script src="/Scripts/jquery.validate.min.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/Res/easyui/jquery.easyui.min.js"></script>
+    <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/Res/My97DatePicker/WdatePicker.js"></script>
+    <script>
+    $(document).ready(function () {
+        $("#DataGrid").datagrid({
+            url: "1.json",
+            method: "GET",
+            title: '',
+            nowrap: false,    // false：单元格自动换行
+            fit: true,
+            fitColumns: false,//是否自适应列宽
+            rownumbers: true, //是否加行号
+            pagination: true, //是否显式分页
+            pageSize: 20, //页容量，必须和pageList对应起来，否则会报错
+            pageNumber: 1, //默认显示第几页
+            pageList: [10, 20, 50],//分页中下拉选项的数值
+            singleSelect: false, //允许选择多行
+            //selectOnCheck: true,//true勾选会选择行，false勾选不选择行, 1.3以后有此选项
+            //checkOnSelect: true, //true选择行勾选，false选择行不勾选, 1.3以后有此选项
+
+
+        });
+    });
+
+
+
+    </script>
 </head>
-<body>
-    <div> 
+<body class="easyui-layout">
+    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true"    style="padding:5px; overflow:hidden;">
+            <table>
+                <tr>
+                    <td> 标准量传部：</td>
+                    <td><select class="easyui-combobox" name="state" style="width:200px;">
+    <option value="AL">指示仪表</option>
+    <option value="AK">直流</option>
+    <option value="AZ">电能</option>
+    <option value="AR">互感器</option>
+    <option value="CA">数表</option>
+
+
+</select></td>
+
+                  
+                </tr>
+            </table>
+        </div>
     </div>
+
+    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false"         style="padding:3px;">
+        <div id="toolbar" class="datagrid-toolbar">
+
+            <a href="Add" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-add'">添加</a>
+
+            <a href="javascript:void(0);" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-edit'" onclick="edit()">编辑</a>
+
+            <a href="javascript:void(0);" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-copy'" onclick="del()">复制</a>
+            <a href="javascript:void(0);" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-stop'" onclick="del()">停用</a>
+
+        </div>
+   
+        <table id="DataGrid" class="easyui-datagrid" title="" style=" height:500px" data-options="fit:true,toolbar:'#toolbar'">
+            <thead>
+                <tr>
+                    <th data-options="field:'ID',checkbox:true"></th>
+                    <th data-options="field:'aa1',align:'center',width:150">实验室</th>
+                    <th data-options="field:'aa2',align:'center',width:180">    报告类别</th>
+                    <th data-options="field:'aa3',width:250,halign:'center',align:'center'">证书类别</th>
+                    <th data-options="field:'aa4',align:'center'">  方案模板名称</th>
+                    <th data-options="field:'aa5',width:140,align:'center'">状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td field="ID"></td>
+                    <td field="aa1">数表实验室</td>
+                    <td field="aa2">数表</td>
+                    <td field="aa3">检定</td>
+                    <td field="aa4"><a href="#">数表三相</a></td>
+                    <td field="aa5">已使用</td>
+                </tr>
+                <tr>
+                    <td field="ID"></td>
+                    <td field="aa1">数表实验室</td>
+                    <td field="aa2">数表</td>
+                    <td field="aa3">检定</td>
+                    <td field="aa4"><a href="#">数表三相</a></td>
+                    <td field="aa5">已使用</td>
+                </tr>
+                <tr>
+                    <td field="ID"></td>
+                    <td field="aa1">数表实验室</td>
+                    <td field="aa2">数表</td>
+                    <td field="aa3">检定</td>
+                    <td field="aa4"><a href="#">数表三相</a></td>
+                    <td field="aa5">已使用</td>
+                </tr>
+                <tr>
+                    <td field="ID"></td>
+                    <td field="aa1">数表实验室</td>
+                    <td field="aa2">数表</td>
+                    <td field="aa3">检定</td>
+                    <td field="aa4"><a href="#">数表三相</a></td>
+                    <td field="aa5">已使用</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 </body>
 </html>
