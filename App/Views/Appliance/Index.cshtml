@@ -274,8 +274,7 @@
             @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ACCEPT_ORGNIZATION)
-            @Html.ValidationMessageFor(model => model.ACCEPT_ORGNIZATION)
+            @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "请选择", new { id = "ACCEPT_ORGNIZATION_String" })
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：

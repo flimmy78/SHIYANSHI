@@ -26,7 +26,7 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult Index()
         {
-        
+
             return View();
         }
         /// <summary>
@@ -74,6 +74,9 @@ namespace Langben.App.Controllers
         {
 
             int total = 0;
+
+            search += "EQUIPMENT_STATUS_VALUUMN&" + Common.OrderStatus.已分配.GetHashCode() + "*" + Common.OrderStatus.已领取.GetHashCode() + "*" + Common.OrderStatus.试验中.GetHashCode() + "*" + Common.OrderStatus.试验完成.GetHashCode() + "*" + Common.OrderStatus.器具已入库.GetHashCode() + "*" + Common.OrderStatus.器具已返还.GetHashCode() + "";
+
             List<VJIANDINGRENWU> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
             {
@@ -81,22 +84,38 @@ namespace Langben.App.Controllers
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID
-					,ORDER_NUMBER = s.ORDER_NUMBER
-					,APPLIANCE_NAME = s.APPLIANCE_NAME
-					,MODEL = s.VERSION,
+                    ,
+                    ORDER_NUMBER = s.ORDER_NUMBER
+                    ,
+                    APPLIANCE_NAME = s.APPLIANCE_NAME
+                    ,
+                    MODEL = s.VERSION,
                     FACTORY_NUM = s.FACTORY_NUM
-					,CERTIFICATE_ENTERPRISE = s.CERTIFICATE_ENTERPRISE
-					,CUSTOMER_SPECIFIC_REQUIREMENTS = s.CUSTOMER_SPECIFIC_REQUIREMENTS
-					,ORDER_STATUS = s.ORDER_STATUS
-					,CREATEPERSON = s.CREATEPERSON
-					,APPLIANCE_PROGRESS = s.APPLIANCE_PROGRESS
-					,OVERDUE = s.OVERDUE
-					,STATE = s.STATE
-					,REPORTSTATUS = s.REPORTSTATUS
-					,APPROVAL = s.APPROVAL
-					,INSPECTION_ENTERPRISE = s.INSPECTION_ENTERPRISE
-					,ISOVERDUE = s.ISOVERDUE
-					
+                    ,
+                    CERTIFICATE_ENTERPRISE = s.CERTIFICATE_ENTERPRISE
+                    ,
+                    CUSTOMER_SPECIFIC_REQUIREMENTS = s.CUSTOMER_SPECIFIC_REQUIREMENTS
+                    ,
+                    ORDER_STATUS = s.ORDER_STATUS
+                    ,
+                    CREATETIME = s.CREATETIME
+                    ,
+                    APPLIANCE_PROGRESS = s.APPLIANCE_PROGRESS
+                    ,
+                    OVERDUE = s.OVERDUE
+                    ,
+                    STATE = s.STATE
+                    ,
+                    REPORTSTATUS = s.REPORTSTATUS
+                    ,
+                    APPROVAL = s.APPROVAL
+                    ,
+                    INSPECTION_ENTERPRISE = s.INSPECTION_ENTERPRISE
+                    ,
+                    ISOVERDUE = s.ISOVERDUE
+                    ,
+                    EQUIPMENT_STATUS_VALUUMN = s.EQUIPMENT_STATUS_VALUUMN
+
                 }
 
                     )
@@ -115,7 +134,7 @@ namespace Langben.App.Controllers
         {
             m_BLL = bll;
         }
-      
+
     }
 }
 

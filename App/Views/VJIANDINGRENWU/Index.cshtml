@@ -3,7 +3,7 @@
 @using Common
 @using Models
 <div id="divQuery">
-
+    <input type="hidden" name="UNDERTAKE_LABORATORYID" value="" />
     <div class="input_search">
         <div class="input_search-label">
             @Html.LabelFor(model => model.ORDER_NUMBER):
@@ -74,11 +74,177 @@
         </a>
     </div>
 </div>
+
+@*弹窗*@
+<div id="w" class="easyui-dialog" title="超期原因" data-options="iconCls:'icon-save'" style="width:700px;height:400px;padding:5px;">
+    <div class="easyui-layout" data-options="fit:true">
+        <input type="hidden" id="chaoqiid" value="" />
+        <textarea name="OVERDUE" style="width:100%;height:100%;" id="OVERDUE">这里写内容</textarea>
+        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="chaoqibaocun()" style="width:80px">Ok</a>
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:$('#w').dialog('close')" style="width:80px">Cancel</a>
+        </div>
+    </div>
+</div>
+<div id="d" class="easyui-dialog" title="退回" data-options="iconCls:'icon-save'" style="width:700px;height:400px;padding:5px;">
+    <div class="easyui-layout" data-options="fit:true">
+        <input type="hidden" id="tuihuiid" value="" />
+        <input type="radio" name="tuihuiaa" value="1" />实验室分错
+        <input type="radio" name="tuihuiaa" value="2" />器具不能检测
+        <textarea name="STORAGEINSTRUCTIONS" style="width:100%;height:100%;" id="STORAGEINSTRUCTIONS">这里写内容</textarea>
+        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="tuihuibaocun()" style="width:80px">OK</a>
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:$('#d').dialog('close')" style="width:80px">Cancel</a>
+        </div>
+    </div>
+</div>
+@*************************@
 <br style="clear: both;" />
+<script type="text/javascript">
+    $(function () {
+        $("#w").dialog('close');
+        $("#d").dialog('close');
+    })
+    //追加超期原因
+    function chaoqi() {
+        var arr = $('#flexigridData').datagrid('getSelections');
+        if (arr.length == 1) {
+            if (arr[0].ORDER_STATUS == "已分配" || arr[0].ORDER_STATUS == "已领取" || arr[0].ORDER_STATUS == "试验中") {
+                if (arr[0].CREATETIME != null) {
+                    var datea = dateConvert(arr[0].CREATETIME);
+                    var tame = formatterDate(new Date());
+                    var distance = shijianjishuan(datea, tame);
+                    if (distance >= 15) {
+                        $("#w").dialog('open');
+                        $("#chaoqiid").val(arr[0].ID);
+                        return true;
+                    }
+                    else {
+                        $.messager.alert('操作提示', '请选择超期数据!', 'warning');
+                    }
+                }
+                else {
+                    $.messager.alert('操作提示', '请选择超期数据!', 'warning');
+                }
+            }
+            else {
+                $.messager.alert('操作提示', '请选择超期数据!', 'warning');
+            }
+        }
+        else {
+            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
+
+        }
+
+    }
+    //超期原因保存
+    function chaoqibaocun() {
+        var arr = {
+            ID: $("#chaoqiid").val(),
+            OVERDUE: $("#OVERDUE").val(),
+            ISOVERDUE: "是"
+        }
+        $.ajax({
+            url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/EditField",
+            type: "Post",
+            data: arr,
+            // async: false,
+            success: function (res) {
+                if (res.Code == 1) {
+                    $.messager.alert('操作提示', "保存成功！", 'info');
+                    $("#flexigridData").datagrid("reload");
+                    $("#flexigridData").datagrid("clearSelections");
+                }
+                else {
+                    $.messager.alert('操作提示', "保存失败！", 'info');
+                }
+            }
+        })
+    }
+    //退回
+    function tuihui() {
+        var arr = $('#flexigridData').datagrid('getSelections');
+        if (arr.length == 1) {
+            $("#d").dialog('open');
+            $("#tuihuiid").val(arr[0].ID);
+            return true;
+        }
+        else {
+            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
+            return false;
+        }
+
+    }
+    //退回保存
+    function tuihuibaocun() {
+        var tuihu = $("input[name='tuihuiaa']:checked").val();
+        var STORAGEINSTRUCTIONS = null;
+        var RETURN_INSTRUCTIONS = null;
+        var ORDER_STATUS = null;
+        var is = false;
+        if (tuihu == "1") {
+            STORAGEINSTRUCTIONS = $("#STORAGEINSTRUCTIONS").val();
+            ORDER_STATUS = "已退回";
+            is = true;
+        }
+        else if (tuihu == "2") {
+            RETURN_INSTRUCTIONS = $("#STORAGEINSTRUCTIONS").val();
+            ORDER_STATUS = "待入库";
+            is = true;
+        }
+        if (is) {
+            var arr = {
+                ID: $("#tuihuiid").val(),
+                STORAGEINSTRUCTIONS: STORAGEINSTRUCTIONS,
+                RETURN_INSTRUCTIONS: RETURN_INSTRUCTIONS,
+                ORDER_STATUS: ORDER_STATUS
+            }
+            $.ajax({
+                url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/EditField",
+                type: "Post",
+                data: arr,
+                // async: false,
+                success: function (res) {
+                    if (res.Code == 1) {
+                        $.messager.alert('操作提示', "保存成功！", 'info');
+                        $("#flexigridData").datagrid("reload");
+                        $("#flexigridData").datagrid("clearSelections");
+                    }
+                    else {
+                        $.messager.alert('操作提示', "保存失败！", 'info');
+                    }
+                }
+            })
+        }
+        else {
+            $.messager.alert('操作提示', "请选择退回原因！", 'info');
+        }
+
+    }
+</script>
+
+
+
 
 <script type="text/javascript" language="javascript">
+    function shijianjishuan(datea, tame) {
+        var sDate = new Date(datea);
+        var eDate = new Date(tame);
+        var fen = ((eDate.getTime() - sDate.getTime()) / 1000) / 60;
+        var distance = parseInt(fen / (24 * 60)); //相隔distance天
+        return distance;
+    }
     $(function () {
+        //&&&&&&&&&&&&&&&&&&&获取当前时间&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+        formatterDate = function (date) {
+            var day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
+            var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"
+            + (date.getMonth() + 1);
+            return date.getFullYear() + '-' + month + '-' + day;
+        };
+        var tame = formatterDate(new Date());
 
+        //&&&&&&&&&&&&&&&&&&&获取当前时间&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
         $('#flexigridData').datagrid({
             title: '检定任务', //列表的标题
             iconCls: 'icon-site',
@@ -88,10 +254,23 @@
             striped: true,
             collapsible: true,
             url: '../VJIANDINGRENWU/GetData', //获取数据的url
-            sortName: 'ID',
-            sortOrder: 'desc',
+            sortName: 'EQUIPMENT_STATUS_VALUUMN',
+            sortOrder: 'asc',
             idField: 'ID',
-
+            rowStyler: function (value, row, index) {
+                if (row.ORDER_STATUS == "已分配" || row.ORDER_STATUS == "已领取" || row.ORDER_STATUS == "试验中") {
+                    if (row.CREATETIME != null) {
+                        var datea = dateConvert(row.CREATETIME);
+                        var distance = shijianjishuan(datea, tame);
+                        if (distance >= 15) {
+                            return 'background-color:#E63F00;';
+                        }
+                        else if (distance >= 11) {
+                            return 'background-color:#EEEE00;';
+                        }
+                    }
+                }
+            },
             toolbar: [
 
                  {
@@ -119,14 +298,14 @@
                         text: '追加超期原因',
                         iconCls: 'icon-search',
                         handler: function () {
-                            return getView();
+                            return chaoqi();
                         }
                     },
             {
                 text: '退回',
                 iconCls: 'icon-search',
                 handler: function () {
-                    return getView();
+                    return tuihui();
                 }
             },
              {
@@ -138,27 +317,34 @@
              }
             ],
             columns: [[
-					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 64, hidden: true }
-					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 64 }
-					, { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 64 }
-					, { field: 'VERSION', title: '@Html.DisplayNameFor(model => model.VERSION)', width: 64 }
-					, { field: 'FACTORY_NUM', title: '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 64 }
-					, { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 64 }
-					, { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 64 }
-					, { field: 'ORDER_STATUS', title: '@Html.DisplayNameFor(model => model.ORDER_STATUS)', width: 64 }
-					, { field: 'CREATEPERSON', title: '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 64 }
-					, { field: 'APPLIANCE_PROGRESS', title: '@Html.DisplayNameFor(model => model.APPLIANCE_PROGRESS)', width: 64 }
-					, { field: 'OVERDUE', title: '@Html.DisplayNameFor(model => model.OVERDUE)', width: 64 }
-					, { field: 'STATE', title: '@Html.DisplayNameFor(model => model.STATE)', width: 64 }
-					, { field: 'REPORTSTATUS', title: '@Html.DisplayNameFor(model => model.REPORTSTATUS)', width: 64 }
-					, { field: 'APPROVAL', title: '@Html.DisplayNameFor(model => model.APPROVAL)', width: 64 }
-					, { field: 'INSPECTION_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.INSPECTION_ENTERPRISE)', width: 64 }
-					, { field: 'ISOVERDUE', title: '@Html.DisplayNameFor(model => model.ISOVERDUE)', width: 64 }
+                    { field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 64, hidden: true }
+                    , { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 64 }
+                    , { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 64 }
+                    , { field: 'VERSION', title: '@Html.DisplayNameFor(model => model.VERSION)', width: 64 }
+                    , { field: 'FACTORY_NUM', title: '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 64 }
+                    , { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 64 }
+                    , { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 64 }
+                    , { field: 'ORDER_STATUS', title: '@Html.DisplayNameFor(model => model.ORDER_STATUS)', width: 64 }
+                    , {
+                        field: 'CREATETIME', title: '@Html.DisplayNameFor(model => model.CREATETIME)', width: 64, formatter: function (value, row, index) {
+                            if (value) {
+                                return dateConvert(value);
+                            }
+                        }
+                    }
+                    , { field: 'APPLIANCE_PROGRESS', title: '@Html.DisplayNameFor(model => model.APPLIANCE_PROGRESS)', width: 64 }
+                    , { field: 'OVERDUE', title: '@Html.DisplayNameFor(model => model.OVERDUE)', width: 64 }
+                    , { field: 'STATE', title: '@Html.DisplayNameFor(model => model.STATE)', width: 64 }
+                    , { field: 'REPORTSTATUS', title: '@Html.DisplayNameFor(model => model.REPORTSTATUS)', width: 64 }
+                    , { field: 'APPROVAL', title: '@Html.DisplayNameFor(model => model.APPROVAL)', width: 64 }
+                    , { field: 'INSPECTION_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.INSPECTION_ENTERPRISE)', width: 64 }
+                    , { field: 'ISOVERDUE', title: '@Html.DisplayNameFor(model => model.ISOVERDUE)', width: 64 }
             ]],
             pagination: true,
             rownumbers: true
 
         });
+
 
         var parent = window.dialogArguments; //获取父页面
         if (parent == "undefined" || parent == null) {
@@ -174,7 +360,6 @@
 
     //“查询”按钮，弹出查询框
     function flexiQuery() {
-
         //将查询条件按照分隔符拼接成字符串
         var search = "";
         $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
@@ -226,11 +411,11 @@
     //判断是否为领取的器具
     function panduanlingqu() {
         var arr = $('#flexigridData').datagrid('getSelections');
-        if (arr.length==1) {
+        if (arr.length == 1) {
             if (arr[0].ORDER_STATUS == null && arr[0].APPLIANCE_PROGRESS == null) {
                 $.messager.alert('操作提示', '请选择已领取的数据!', 'warning');
                 return false;
-               
+
             }
             else {
                 return true;
@@ -262,7 +447,7 @@
             $.messager.confirm('操作提示', "确认领取这 " + arr.length + " 项吗？", function (r) {
                 if (r) {
                     for (var i = 0; i < arr.length; i++) {
-                        if ( arr[i].ORDER_STATUS !=null && arr[i].APPLIANCE_PROGRESS != null) {
+                        if (arr[i].ORDER_STATUS != null && arr[i].APPLIANCE_PROGRESS != null) {
                             $.messager.alert('操作提示', '不能重复领取!', 'warning');
                             is = "";
                             return false;
@@ -272,19 +457,18 @@
                         }
                     }
                     is = is.substring(0, is.length - 1) + "^三相";
-                    //GetData("/api/VAPPLIANCE_DETAIL_INFORMATIONApi/PutCollection", id);
                     $.ajax({
-                        url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/Put/"+is,
+                        url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/Put/" + is,
                         type: "Put",
                         // async: false,
                         success: function (res) {
                             if (res.Code == 1) {
-                                $.messager.alert('操作提示', res.Message, 'info');
+                                $.messager.alert('操作提示', "领取成功！", 'info');
                                 $("#flexigridData").datagrid("reload");
                                 $("#flexigridData").datagrid("clearSelections");
                             }
                             else {
-                                $.messager.alert('操作提示', res.Message, 'info');
+                                $.messager.alert('操作提示', "领取失败！", 'info');
                             }
                         }
                     })
@@ -302,25 +486,5 @@
             window.location.href = "../VJIANDINGRENWU/Xuanzhefangan/" + arr[0].ID;
         }
     }
-    //獲取數據集
-    ///<param name="posturl">請求地址</param>
-    ///<param name="postdata">發送的數據（json格式）</param>
-    ///<returns>json對象陣列</returns>
-    function GetData(posturl, postdata) {
-        var rtnValue;
-        $.ajax({
-            type: "Delete",
-            traditional: true,
-            url: posturl,
-            async: false,
-            data: postdata,
-            success: function (data) {
-                rtnValue = $.parseJSON(data);
-            },
-            error: function (xhr) {
-                displayError(xhr);
-            }
-        });
-        return rtnValue;
-    }
+
 </script>

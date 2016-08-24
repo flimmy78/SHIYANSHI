@@ -176,6 +176,27 @@ namespace Langben.BLL
             return false;
         }
         /// <summary>
+        /// 修改器具明细信息(公用)
+        /// </summary>
+        /// <param name="validationErrors">返回的错误信息</param>
+        /// <param name="deleteCollection">器具明细信息表实体</param>
+        /// <returns></returns>    
+        public bool EditField(ref ValidationErrors validationErrors, APPLIANCE_DETAIL_INFORMATION entity)
+        {
+            try
+            {
+                repository.EditField(db, entity);
+                repository.Save(db);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                validationErrors.Add(ex.Message);
+                ExceptionsHander.WriteExceptions(ex);
+            }
+            return false;
+        }
+        /// <summary>
         /// 通过器具明细表中的主键id查找委托单表中的受理单位
         /// </summary>
         /// <param name="id">器具明细表id</param>
