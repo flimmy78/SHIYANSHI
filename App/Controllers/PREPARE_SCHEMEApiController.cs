@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
+//using System.Web.Mvc;
 using System.Text;
 using System.EnterpriseServices;
 using System.Configuration;
@@ -99,6 +99,7 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
+        //[HttpPost]
         [System.Web.Http.HttpPost]
         public Common.ClientResult.Result Post([FromBody]PREPARE_SCHEME entity)
         {           

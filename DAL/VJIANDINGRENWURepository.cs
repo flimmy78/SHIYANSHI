@@ -23,7 +23,7 @@ namespace Langben.DAL
         {
             string where = string.Empty;
             int flagWhere = 0;
-
+            string EQUIPMENT_STATUS_VALUUMN = string.Empty;
             Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
             if (queryDic != null && queryDic.Count > 0)
             {
@@ -34,9 +34,15 @@ namespace Langben.DAL
                         where += " and ";
                     }
                     flagWhere++;
-                  
-                    
-                    
+                    if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "EQUIPMENT_STATUS_VALUUMN")
+                    {
+                        EQUIPMENT_STATUS_VALUUMN = item.Value;
+                        if (where.IndexOf(" and ") > 0)
+                        {
+                          where= where.Remove(where.LastIndexOf(" and "));
+                        }
+
+                    }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Time)) + "] >=  CAST('" + item.Value + "' as   System.DateTime)";
@@ -57,7 +63,7 @@ namespace Langben.DAL
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(End_Int)) + "] <= " + item.Value.GetInt();
                         continue;
                     }
-     
+
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(DDL_Int)) //精确查询数值
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(DDL_Int)) + "] =" + item.Value;
@@ -68,18 +74,23 @@ namespace Langben.DAL
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(DDL_String)) + "] = '" + item.Value + "'";
                         continue;
                     }
-                    where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
+                    if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key != "EQUIPMENT_STATUS_VALUUMN")
+                    {
+                        where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
+                    }
+
                 }
             }
-            List<string> listEQUIPMENT_STATUS_VALUUMN = new List<string>() { "101", "102", "103", "104", "105", "106" };
-           // where += (string.IsNullOrEmpty(where) ? "it.EQUIPMENT_STATUS_VALUUMN in ('101','102','103','104','105','106')" : where += " and it.EQUIPMENT_STATUS_VALUUMN in ('101','102','103','104','105','106')");
+            string[] EQUIPMENT_STATUS_VALUUMNarr = null;
+            if (!string.IsNullOrEmpty(EQUIPMENT_STATUS_VALUUMN))
+            {
+                EQUIPMENT_STATUS_VALUUMNarr = EQUIPMENT_STATUS_VALUUMN.Split('*');
+            }
             return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
                     .CreateObjectSet<VJIANDINGRENWU>().Where(string.IsNullOrEmpty(where) ? "true" : where)
-                    
-                     // .CreateObjectSet<VJIANDINGRENWU>().Where(where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                     .Where(w => listEQUIPMENT_STATUS_VALUUMN.Contains(w.EQUIPMENT_STATUS_VALUUMN))
-                     .AsQueryable(); 
+                     .Where(w => EQUIPMENT_STATUS_VALUUMNarr.Contains(w.EQUIPMENT_STATUS_VALUUMN))
+                     .AsQueryable();
 
         }
         /// <summary>
@@ -92,7 +103,7 @@ namespace Langben.DAL
             using (SysEntities db = new SysEntities())
             {
                 return GetById(db, id);
-            }                   
+            }
         }
         /// <summary>
         /// 通过主键id，获取检定任务---查看详细，首次编辑
@@ -100,12 +111,12 @@ namespace Langben.DAL
         /// <param name="id">主键</param>
         /// <returns>检定任务</returns>
         public VJIANDINGRENWU GetById(SysEntities db, string id)
-        { 
-                 return db.VJIANDINGRENWU.SingleOrDefault(s => s.ID == id); 
+        {
+            return db.VJIANDINGRENWU.SingleOrDefault(s => s.ID == id);
         }
- 
+
         public void Dispose()
-        {            
+        {
         }
     }
 }

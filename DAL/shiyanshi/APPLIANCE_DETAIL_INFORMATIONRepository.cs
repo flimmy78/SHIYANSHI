@@ -25,8 +25,9 @@ namespace Langben.DAL
                                                                   select f;
             foreach (var deleteItem in collection)
             {
-                deleteItem.ORDER_STATUS = "已领取";
-                deleteItem.APPLIANCE_PROGRESS = shiyanshi + "进行实验";
+                deleteItem.ORDER_STATUS =Common.OrderStatus.已领取.ToString();
+                deleteItem.APPLIANCE_PROGRESS = shiyanshi + Common.ApplianceProgress.进行实验;
+                deleteItem.EQUIPMENT_STATUS_VALUUMN = Common.OrderStatus.已领取.GetHashCode().ToString();
             }
         }
 
@@ -87,7 +88,8 @@ namespace Langben.DAL
                                                                   select f;
             foreach (var deleteItem in collection)
             {
-                deleteItem.STORAGEINSTRUCTI_STATU = "已入库";
+                deleteItem.STORAGEINSTRUCTI_STATU =Common.OrderStatus.器具已入库.ToString();
+                deleteItem.EQUIPMENT_STATUS_VALUUMN = Common.OrderStatus.器具已入库.GetHashCode().ToString();
             }
         }
         /// <summary>

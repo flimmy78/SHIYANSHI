@@ -3,7 +3,7 @@
 @using Common
 @using Models
 <div id="divQuery">
-
+    <input type="hidden" name="UNDERTAKE_LABORATORYID" value="" />
     <div class="input_search">
         <div class="input_search-label">
             @Html.LabelFor(model => model.ORDER_NUMBER):
@@ -184,12 +184,12 @@
         var is = false;
         if (tuihu == "1") {
             STORAGEINSTRUCTIONS = $("#STORAGEINSTRUCTIONS").val();
-            ORDER_STATUS = "退回";
+            ORDER_STATUS = "已退回";
             is = true;
         }
         else if (tuihu == "2") {
             RETURN_INSTRUCTIONS = $("#STORAGEINSTRUCTIONS").val();
-            ORDER_STATUS = "入库";
+            ORDER_STATUS = "待入库";
             is = true;
         }
         if (is) {

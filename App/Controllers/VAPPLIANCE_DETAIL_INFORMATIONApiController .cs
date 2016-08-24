@@ -127,6 +127,13 @@ namespace Langben.App.Controllers
                 //entity.UpdatePerson = currentPerson;
 
                 string returnValue = string.Empty;
+                if (!string.IsNullOrEmpty(entity.ORDER_STATUS))
+                {
+                    if (Enum.IsDefined(typeof(Common.OrderStatus), entity.ORDER_STATUS))
+                    {
+                        entity.EQUIPMENT_STATUS_VALUUMN = Enum.Parse(typeof(Common.OrderStatus), entity.ORDER_STATUS).GetHashCode().ToString();
+                    }
+                }
                 if (m_BLL.EditField(ref validationErrors, entity))
                 {
                     LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息信息的Id为" + entity.ID, "器具明细信息"
