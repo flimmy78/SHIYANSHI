@@ -8,6 +8,6 @@ namespace Common
 {
     public enum OrderStatus
     {
-
+        已分配=1001
     }
 }
