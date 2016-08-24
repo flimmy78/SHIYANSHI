@@ -74,6 +74,10 @@ namespace Langben.App.Controllers
         {
 
             int total = 0;
+            if (!string.IsNullOrEmpty(search))
+            {
+             
+            }
             List<VJIANDINGRENWU> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
             {

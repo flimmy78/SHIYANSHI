@@ -71,9 +71,14 @@ namespace Langben.DAL
                     where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
                 }
             }
-            return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext 
-                     .CreateObjectSet<VJIANDINGRENWU>().Where(string.IsNullOrEmpty(where) ? "true" : where)
+            List<string> listEQUIPMENT_STATUS_VALUUMN = new List<string>() { "101", "102", "103", "104", "105", "106" };
+           // where += (string.IsNullOrEmpty(where) ? "it.EQUIPMENT_STATUS_VALUUMN in ('101','102','103','104','105','106')" : where += " and it.EQUIPMENT_STATUS_VALUUMN in ('101','102','103','104','105','106')");
+            return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
+                    .CreateObjectSet<VJIANDINGRENWU>().Where(string.IsNullOrEmpty(where) ? "true" : where)
+                    
+                     // .CreateObjectSet<VJIANDINGRENWU>().Where(where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
+                     .Where(w => listEQUIPMENT_STATUS_VALUUMN.Contains(w.EQUIPMENT_STATUS_VALUUMN))
                      .AsQueryable(); 
 
         }
