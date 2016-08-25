@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+//using System.Web.Mvc;
 using System.Text;
 using System.EnterpriseServices;
 using System.Configuration;
@@ -11,6 +11,7 @@ using Langben.DAL;
 using Langben.BLL;
 using System.Web.Http;
 using Langben.App.Models;
+using System.Web;
 
 namespace Langben.App.Controllers
 {
@@ -178,7 +179,7 @@ namespace Langben.App.Controllers
             }
             return ACCEPT_ORGNIZATION;
         }
-
+      
         IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL m_BLL;
 
         ValidationErrors validationErrors = new ValidationErrors();

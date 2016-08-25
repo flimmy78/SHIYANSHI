@@ -10,6 +10,8 @@ using System.Text;
 using System.EnterpriseServices;
 using System.Configuration;
 using Models;
+using System.Web;
+using System.Web.Script.Serialization;
 
 namespace Langben.App.Controllers
 {
@@ -122,6 +124,34 @@ namespace Langben.App.Controllers
             });
         }
 
+        /// <summary>
+        /// 文档上传
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [SupportFilter]
+        public Common.ClientResult.Result HDpic(string id)//文档上传
+        {
+            string msg = string.Empty;
+            if (Request.Files.Count > 0)
+            {
+                for (int i = 0; i < Request.Files.Count; i++)
+                {
+                    HttpPostedFileBase pstFile = Request.Files[i];//获取页面选择的文件
+                    string upfile = pstFile.FileName;//文件名
+                    UploadFiles upFiles = new UploadFiles();
+                     msg += upFiles.ReportToUpload(pstFile, upfile, i);//上传文件
+                   
+                }
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            FILE_UPLOADER jg = js.Deserialize<FILE_UPLOADER>(msg);
+            jg.PREPARE_SCHEMEID = id;
+            FILE_UPLOADERApiController filecontroller = new FILE_UPLOADERApiController();
+            Common.ClientResult.Result result = filecontroller.Post(jg);
+            return result;
+        }
 
         IBLL.IVJIANDINGRENWUBLL m_BLL;
 

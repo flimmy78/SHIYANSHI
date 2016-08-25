@@ -16,24 +16,31 @@
                 <label>123</label>
             </div>
         </div><br />
+
         <div class="input_search">
-            <div class="input_search-label">
-                上传原始记录：
-            </div>
+            @*<div class="input_search-label">
+                    上传原始记录：
+                </div>*@
             <div class="input_search-field">
-                <input type="file" />
-                <input type="button" value="上传" />
+                <form id="form1" method="post" enctype="multipart/form-data" action="HDpic">
+                    上传原始记录： <input name="name" type="file" id="file" />
+                    上传证书：<input name="name2" type="file" id="file2" />
+                    <input type="hidden" name="id" value="124" />
+                    <input id="Submit1" type="submit" value="上传" onclick="javascript:if ( $('#file').val() != '' && $('#file2').val() != '') { return true;}else {$.messager.alert('操作提示', '不能为空！','info'); return false;}" />
+                </form>
+                @*<input type="file" name="name" id="file"/>
+                    <input type="button" value="上传" onclick="shangchuan()"/>*@
             </div>
         </div><br />
-        <div class="input_search">
-            <div class="input_search-label">
-                上传证书：
-            </div>
-            <div class="input_search-field">
-                <input type="file" />
-                <input type="button" value="上传" />
-            </div>
-        </div><br />
+        @*<div class="input_search">
+                <div class="input_search-label">
+                    上传证书：
+                </div>
+                <div class="input_search-field">
+                    <input type="file" />
+                    <input type="button" value="上传" />
+                </div>
+            </div><br />*@
         <div class="input_search">
             <div class="input_search-label">
                 结论：
@@ -47,3 +54,25 @@
         <input type="button" value="保存并发生审核" />
     </div>
 </fieldset>
+
+<script type="text/javascript">
+    function shangchuan() {
+        $.ajax({
+            url: "/VJIANDINGRENWU/HDpic",
+            type: "Post",
+            //data: arr,
+            // async: false,
+            success: function (res) {
+                if (res.Code == 1) {
+                    $.messager.alert('操作提示', "保存成功！", 'info');
+                    $("#flexigridData").datagrid("reload");
+                    $("#flexigridData").datagrid("clearSelections");
+                }
+                else {
+                    $.messager.alert('操作提示', "保存失败！", 'info');
+                }
+            }
+        })
+    }
+
+</script>
