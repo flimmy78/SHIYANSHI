@@ -91,17 +91,17 @@
     <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false"         style="padding:3px;">
         <div class="easyui-layout" data-options="fit:true">
 
-            <div data-options="region:'west',collapsible:false,split:false" title="树选择" style="width: 200px;">
-                <ul id="treeDemo" class="ztree">到店付</ul>
+            <div data-options="region:'west',collapsible:false,split:false" title="树选择" style="width: 300px;">
+                <ul id="tt" class="easyui-tree" data-options="url:'/Res/tree_data1.js',method:'get',animate:true,checkbox:true"></ul>
             </div>
 
 
-            <div data-options="region:'center',split:false" title=" 右侧" >
+            <div data-options="region:'center',split:false" title=" 右侧" style="position:relative" >
 
-                辅导费
+                <iframe id="mainframe" name="mainframe" frameborder="0" src="test"></iframe>
             </div>
 
         </div>
-
+</div>
 </body>
 </html>

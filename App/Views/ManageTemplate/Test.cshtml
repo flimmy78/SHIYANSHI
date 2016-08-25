@@ -1,0 +1,204 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>方案模板管理</title>
+    <link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="/Content/default.css" rel="stylesheet" />
+    <link href="/Content/StyleSheet.css" rel="stylesheet" />
+
+
+    <script src="/Scripts/jquery.min.js"></script>
+    <script src="/Scripts/JScriptCommon.js"></script>
+
+    <script src="/Scripts/jquery.validate.min.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/Res/easyui/jquery.easyui.min.js"></script>
+    <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/Res/My97DatePicker/WdatePicker.js"></script>
+    
+</head>
+<body class="easyui-layout">
+    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true"    style="padding:5px; overflow:hidden;">
+            <table>
+                <tr>
+                    
+                    <td>
+                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" style=" margin-left: 10px; margin-right:10px">增加通道</a>
+                       
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false"         style="padding:3px;">
+        <div class="mt10" >
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
+                <thead>
+                    <tr>
+                        <th rowspan="2" align="center">量程</th>
+                        <th rowspan="2" align="center">标准值</th>
+                        <th colspan="2" align="center">
+                            <select class="easyui-combobox" name="state" style="width:100px;">
+                                <option value="AL">&nbsp;&nbsp; </option>
+                                <option value="AK">CH1</option>
+                                <option value="AZ">CH2</option>
+                                <option value="AR">CH3</option>
+                                <option value="CA">CH4</option>
+
+
+                            </select>
+                        </th>
+                        <th colspan="2" align="center">相对误差</th>
+                        <th align="center">校准结果的不确定度</th>
+                    </tr>
+                    <tr>
+                        <th align="center">+</th>
+                        <th align="center">-</th>
+                        <th align="center">+</th>
+                        <th align="center">-</th>
+                        <th align="center">
+                            U(K=<select class="easyui-combobox" name="state" style="width:30px;">
+                                <option value="AL">2 </option>
+                                <option value="AK">3</option>
+                                <option value="AZ">4</option>
+
+
+                            </select>)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="3" align="right">10 V</td>
+                        <td align="right">10.0000 V</td>
+                        <td align="right">V</td>
+                        <td align="right">V</td>
+                        <td align="right"></td>
+                        <td align="right"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td align="right">6.0000 V</td>
+                        <td align="right">V</td>
+                        <td align="right">V</td>
+                        <td align="right"></td>
+                        <td align="right"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td align="right">1.0000 V</td>
+                        <td align="right">V</td>
+                        <td align="right">V</td>
+                        <td align="right"></td>
+                        <td align="right"></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="$('#dlg').dialog('open')">增加量程</a></td>
+                      
+                    </tr>
+                </tfoot>
+            </table>
+
+
+
+        </div>
+
+
+
+        <div class="mt10">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
+                <thead>
+                    <tr>
+                        <th rowspan="2" align="center">量程</th>
+                        <th rowspan="2" align="center">标准值</th>
+                        <th colspan="2" align="center">
+                            <select class="easyui-combobox" name="state" style="width:100px;">
+                                <option value="AL">&nbsp;&nbsp; </option>
+                                <option value="AK">CH1</option>
+                                <option value="AZ">CH2</option>
+                                <option value="AR">CH3</option>
+                                <option value="CA">CH4</option>
+
+
+                            </select>
+                        </th>
+                        <th colspan="2" align="center">相对误差</th>
+                        <th align="center">校准结果的不确定度</th>
+                    </tr>
+                    <tr>
+                        <th align="center">+</th>
+                        <th align="center">-</th>
+                        <th align="center">+</th>
+                        <th align="center">-</th>
+                        <th align="center">
+                            U(K=<select class="easyui-combobox" name="state" style="width:30px;">
+                                <option value="AL">2 </option>
+                                <option value="AK">3</option>
+                                <option value="AZ">4</option>
+
+
+                            </select>)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7"><a href="Add()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">增加量程</a></td>
+
+                    </tr>
+                </tfoot>
+            </table>
+
+
+
+        </div>
+</div>
+
+    <!--增加量程弹层-->
+    <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;pa
+        dding:10px">
+        <table>
+            <tr>
+                <td width="80" align="right">量程值：</td>
+                <td><input type="text" id="txtName" class="easyui-textbox" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">检测点数：</td>
+                <td><input type="text" id="txtName" class="easyui-textbox" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">小数点位数：</td>
+                <td><input type="text" id="txtName" class="easyui-textbox" style="width:200px" /></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

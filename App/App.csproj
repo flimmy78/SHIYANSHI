@@ -467,6 +467,7 @@
     <Content Include="Scripts\jquery.edatagrid.js" />
     <Content Include="Scripts\jquery.min.js" />
     <None Include="Properties\PublishProfiles\shiyanshi.pubxml" />
+    <Content Include="Res\tree_data1.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -794,6 +795,7 @@
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\ManageTemplate\Index.cshtml" />
     <Content Include="Views\ManageTemplate\Add.cshtml" />
+    <Content Include="Views\ManageTemplate\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
