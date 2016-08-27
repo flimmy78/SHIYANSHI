@@ -33,7 +33,7 @@
                 <tr>
                     
                     <td>
-                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" style=" margin-left: 10px; margin-right:10px">增加通道</a>
+                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable(6,6)">增加通道</a>
                        
                     </td>
                 </tr>
@@ -42,7 +42,7 @@
     </div>
 
     <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false"         style="padding:3px;">
-        <div class="mt10" >
+        <div class="mt10" id="tongdao">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
                 <thead>
                     <tr>
@@ -160,7 +160,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="7"><a href="Add()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">增加量程</a></td>
+                        <td colspan="7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="$('#dlg').dialog('open')">增加量程</a></td>
 
                     </tr>
                 </tfoot>
@@ -183,8 +183,7 @@
 					handler:function(){
                     $('#dlg').window('close');
          }
-         }]" style="width:400px;height:200px;pa
-        dding:10px">
+         }]" style="width:400px;height:200px;padding:10px">
         <table>
             <tr>
                 <td width="80" align="right">量程值：</td>
@@ -200,5 +199,24 @@
             </tr>
         </table>
     </div>
+    <script type="text/javascript" language="javascript">
+        //创建通道
+        function CreateTable() {
+            var table = $("<table width='100%' border='0' cellspacing='0' cellpadding='0' class='tbl mt10'>");
+            table.appendTo($('#tongdao'));
+            var thead = $("<thead><tr><th rowspan='2' align='center'>量程</th><th rowspan='2' align='center'>标准值</th> <th colspan='2' align='center'><select class='easyui-combobox' name='state' style='width:100px;'><option value='AL'>&nbsp;&nbsp; </option><option value='AK'>CH1</option><option value='AZ'>CH2</option><option value='AR'>CH3</option><option value='CA'>CH4</option></select></th><th colspan='2' align='center'>相对误差</th><th align='center'>校准结果的不确定度</th></tr><tr><th align='center'>+</th><th align='center'>-</th><th align='center'>+</th><th align='center'>-</th><th align='center'>U(K=<select class='easyui-combobox' name='state' style='width:30px;'><option value='AL'>2 </option><option value='AK'>3</option><option value='AZ'>4</option></select>)</th></tr></thead>");
+            thead.appendTo(table);
+            var tfoot = $("<tfoot><tr><td colspan='7'><a href='javascript:void(0)' class='easyui-linkbutton' data-options='plain:true,iconCls:'icon-add'' onclick='$('#dlg').dialog('open')'>增加量程</a></td></tr></tfoot>");
+            tfoot.appendTo(table);
+         
+        //thead.appendTo(table);
+          //  $('#tongdao').append(table);
+        }
+        function CreateRow() {
+            var $table = $('#table1');
+            var tr = "<tr><td>1</td><td>2</td><td>3</td></tr>";
+            $table.append(tr);
+        }
+    </script>
 </body>
 </html>
