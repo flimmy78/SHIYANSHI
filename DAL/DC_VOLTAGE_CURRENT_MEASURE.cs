@@ -27,6 +27,7 @@ namespace Langben.DAL
         public string RELATIVE_ERROR_POSITIVE_UNIT { get; set; }
         public string RELATIVE_ERROR_NEGATIVE { get; set; }
         public string RELATIVE_ERROR_NEGATIVE_UNIT { get; set; }
+        public string KVALUE { get; set; }
         public string UNCERTAINTY_DEGREE { get; set; }
         public string UNCERTAINTY_DEGREE_UNIT { get; set; }
         public string INDEX1 { get; set; }

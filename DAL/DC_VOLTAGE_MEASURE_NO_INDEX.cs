@@ -23,6 +23,7 @@ namespace Langben.DAL
         public string STANDARD_VALUE_UNIT { get; set; }
         public string RELATIVE_ERROR { get; set; }
         public string RELATIVE_ERROR_UNIT { get; set; }
+        public string KVALUE { get; set; }
         public string UNCERTAINTY_DEGREE { get; set; }
         public string UNCERTAINTY_DEGREE_UNIT { get; set; }
         public string PREPARE_SCHEMEID { get; set; }

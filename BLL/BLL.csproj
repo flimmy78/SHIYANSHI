@@ -80,10 +80,7 @@
     <Compile Include="APPLIANCE_LABORATORYBLL.cs" />
     <Compile Include="RULEBLL.cs" />
     <Compile Include="SCHEMEBLL.cs" />
-    <Compile Include="TEST_ITEM_FORMATBLL.cs" />
     <Compile Include="SCHEME_RULEBLL.cs" />
-    <Compile Include="TABLE_BODY_XYBLL.cs" />
-    <Compile Include="TABLE_HEAD_XYBLL.cs" />
     <Compile Include="METERING_STANDARD_DEVICEBLL.cs" />
     <Compile Include="ALLOWABLE_ERRORBLL.cs" />
     <Compile Include="METERING_STANDARD_DEVICE_CHECKBLL.cs" />

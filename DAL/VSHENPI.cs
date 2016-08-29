@@ -18,6 +18,7 @@ namespace Langben.DAL
         public string REPORTNUMBER { get; set; }
         public string ORDER_NUMBER { get; set; }
         public string APPLIANCE_NAME { get; set; }
+        public string VERSION { get; set; }
         public string FACTORY_NUM { get; set; }
         public string CERTIFICATE_ENTERPRISE { get; set; }
         public string CUSTOMER_SPECIFIC_REQUIREMENTS { get; set; }
@@ -27,7 +28,6 @@ namespace Langben.DAL
         public string CONCLUSION { get; set; }
         public string UNDERTAKE_LABORATORYID { get; set; }
         public string APPROVALISAGGREY { get; set; }
-        public string VERSION { get; set; }
         public string PREPARE_SCHEMEID { get; set; }
     }
 }

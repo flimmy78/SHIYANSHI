@@ -32,6 +32,7 @@ namespace Langben.DAL
         public string IS_UNCERTAINTY { get; set; }
         public string UNCERTAINTY_MENU { get; set; }
         public string UNDERTAKE_LABORATORYID { get; set; }
+        public string INPUTSTATE { get; set; }
         public string PARENTID { get; set; }
         public Nullable<System.DateTime> CREATETIME { get; set; }
         public string CREATEPERSON { get; set; }

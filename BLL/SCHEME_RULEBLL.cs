@@ -74,10 +74,7 @@ namespace Langben.BLL
                                 item.SCHEMEIDOld = item.SCHEME.NAME.GetString();//                            
                         }                  
 
-                        if (item.TEST_ITEM_FORMATID != null && item.TEST_ITEM_FORMAT != null)
-                        { 
-                                item.TEST_ITEM_FORMATIDOld = item.TEST_ITEM_FORMAT.ROW_COUNT.GetString();//                            
-                        }                  
+                                        
 
                     }
  

@@ -30,7 +30,7 @@ namespace Langben.DAL
     
         public string ID { get; set; }
         public string NAME { get; set; }
-        public string CONCLUSION { get; set; }
+        public string KVALUE { get; set; }
         public string PREPARE_SCHEMEID { get; set; }
         public Nullable<System.DateTime> CREATETIME { get; set; }
         public string CREATEPERSON { get; set; }

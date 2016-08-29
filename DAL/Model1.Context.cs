@@ -44,6 +44,7 @@ namespace Langben.DAL
         public virtual DbSet<DC_VOLTAGE_OUTPUT> DC_VOLTAGE_OUTPUT { get; set; }
         public virtual DbSet<ERROR_LIMIT> ERROR_LIMIT { get; set; }
         public virtual DbSet<FILE_UPLOADER> FILE_UPLOADER { get; set; }
+        public virtual DbSet<FileUploader> FileUploader { get; set; }
         public virtual DbSet<FREQUENCY> FREQUENCY { get; set; }
         public virtual DbSet<METERING_STANDARD_DEVICE> METERING_STANDARD_DEVICE { get; set; }
         public virtual DbSet<METERING_STANDARD_DEVICE_CHECK> METERING_STANDARD_DEVICE_CHECK { get; set; }
@@ -57,27 +58,6 @@ namespace Langben.DAL
         public virtual DbSet<RULE> RULE { get; set; }
         public virtual DbSet<SCHEME> SCHEME { get; set; }
         public virtual DbSet<SCHEME_RULE> SCHEME_RULE { get; set; }
-        public virtual DbSet<TABLE_BODY_XY> TABLE_BODY_XY { get; set; }
-        public virtual DbSet<TABLE_HEAD_XY> TABLE_HEAD_XY { get; set; }
-        public virtual DbSet<TEST_ITEM_FORMAT> TEST_ITEM_FORMAT { get; set; }
-        public virtual DbSet<THREE_PHASE_UNCERTAINTY> THREE_PHASE_UNCERTAINTY { get; set; }
-        public virtual DbSet<TRANSMITER_SIN> TRANSMITER_SIN { get; set; }
-        public virtual DbSet<TRANSMITTER_COS> TRANSMITTER_COS { get; set; }
-        public virtual DbSet<TRANSMITTER_FREQUENCY_PHASE> TRANSMITTER_FREQUENCY_PHASE { get; set; }
-        public virtual DbSet<TRANSMITTER_HEAD> TRANSMITTER_HEAD { get; set; }
-        public virtual DbSet<TRANSMITTER_POWER_FACTOR> TRANSMITTER_POWER_FACTOR { get; set; }
-        public virtual DbSet<TRANSMITTER_RANGE> TRANSMITTER_RANGE { get; set; }
-        public virtual DbSet<UNCERTAINTY> UNCERTAINTY { get; set; }
-        public virtual DbSet<UNCERTAINTY2_HZ> UNCERTAINTY2_HZ { get; set; }
-        public virtual DbSet<UNCERTAINTYPARAMETERMANAGEMENT> UNCERTAINTYPARAMETERMANAGEMENT { get; set; }
-        public virtual DbSet<UNDERTAKE_LABORATORY> UNDERTAKE_LABORATORY { get; set; }
-        public virtual DbSet<VBAOGAODAYIN> VBAOGAODAYIN { get; set; }
-        public virtual DbSet<VQIJULINGQU1> VQIJULINGQU1 { get; set; }
-        public virtual DbSet<VQIJULINGQU2> VQIJULINGQU2 { get; set; }
-        public virtual DbSet<VRUKU> VRUKU { get; set; }
-        public virtual DbSet<VSHENPI> VSHENPI { get; set; }
-        public virtual DbSet<VJIANDINGRENWU> VJIANDINGRENWU { get; set; }
-        public virtual DbSet<FileUploader> FileUploader { get; set; }
         public virtual DbSet<SysAnnouncement> SysAnnouncement { get; set; }
         public virtual DbSet<SysDepartment> SysDepartment { get; set; }
         public virtual DbSet<SysDocument> SysDocument { get; set; }
@@ -95,6 +75,23 @@ namespace Langben.DAL
         public virtual DbSet<SysOperation> SysOperation { get; set; }
         public virtual DbSet<SysPerson> SysPerson { get; set; }
         public virtual DbSet<SysRole> SysRole { get; set; }
+        public virtual DbSet<THREE_PHASE_UNCERTAINTY> THREE_PHASE_UNCERTAINTY { get; set; }
+        public virtual DbSet<TRANSMITER_SIN> TRANSMITER_SIN { get; set; }
+        public virtual DbSet<TRANSMITTER_COS> TRANSMITTER_COS { get; set; }
+        public virtual DbSet<TRANSMITTER_FREQUENCY_PHASE> TRANSMITTER_FREQUENCY_PHASE { get; set; }
+        public virtual DbSet<TRANSMITTER_HEAD> TRANSMITTER_HEAD { get; set; }
+        public virtual DbSet<TRANSMITTER_POWER_FACTOR> TRANSMITTER_POWER_FACTOR { get; set; }
+        public virtual DbSet<TRANSMITTER_RANGE> TRANSMITTER_RANGE { get; set; }
+        public virtual DbSet<UNCERTAINTY> UNCERTAINTY { get; set; }
+        public virtual DbSet<UNCERTAINTY2_HZ> UNCERTAINTY2_HZ { get; set; }
+        public virtual DbSet<UNCERTAINTYPARAMETERMANAGEMENT> UNCERTAINTYPARAMETERMANAGEMENT { get; set; }
+        public virtual DbSet<UNDERTAKE_LABORATORY> UNDERTAKE_LABORATORY { get; set; }
+        public virtual DbSet<VBAOGAODAYIN> VBAOGAODAYIN { get; set; }
+        public virtual DbSet<VJIANDINGRENWU> VJIANDINGRENWU { get; set; }
+        public virtual DbSet<VQIJULINGQU1> VQIJULINGQU1 { get; set; }
+        public virtual DbSet<VQIJULINGQU2> VQIJULINGQU2 { get; set; }
+        public virtual DbSet<VRUKU> VRUKU { get; set; }
         public virtual DbSet<VSHENHE> VSHENHE { get; set; }
+        public virtual DbSet<VSHENPI> VSHENPI { get; set; }
     }
 }

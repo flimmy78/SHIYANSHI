@@ -18,6 +18,7 @@ namespace Langben.DAL
         public string REPORTNUMBER { get; set; }
         public string ORDER_NUMBER { get; set; }
         public string APPLIANCE_NAME { get; set; }
+        public string VERSION { get; set; }
         public string FACTORY_NUM { get; set; }
         public string CERTIFICATE_ENTERPRISE { get; set; }
         public string CUSTOMER_SPECIFIC_REQUIREMENTS { get; set; }
@@ -29,6 +30,5 @@ namespace Langben.DAL
         public Nullable<System.DateTime> APPROVALDATE { get; set; }
         public string BAR_CODE_NUM { get; set; }
         public string PRINTSTATUS { get; set; }
-        public string VERSION { get; set; }
     }
 }

@@ -191,8 +191,8 @@ namespace Langben.App.Controllers
                     ,
                     ORDER_STATUS = s.ORDER_STATUS
                     ,
-                    CREATETIME = s.CREATETIME
-                    ,
+                    //CREATETIME = s.CREATETIME
+                    //,
                     APPLIANCE_PROGRESS = s.APPLIANCE_PROGRESS
                     ,
                     OVERDUE = s.OVERDUE

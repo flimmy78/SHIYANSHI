@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 11g                           */
-/* Created on:     2016/8/29 11:56:21                           */
+/* Created on:     2016/8/29 15:21:12                           */
 /*==============================================================*/
 
 
@@ -1641,7 +1641,8 @@ select b.ID, --器具明细id
   d.APPROVAL,                      --审核审批不通过原因
   a.INSPECTION_ENTERPRISE,         --送检单位
   b.ISOVERDUE,                      --是否超期
-c.UNDERTAKE_LABORATORYID--实验室
+c.UNDERTAKE_LABORATORYID,--实验室
+b.EQUIPMENT_STATUS_VALUUMN--状态值
 
 from APPLIANCE_DETAIL_INFORMATION  b
 --器具明细
