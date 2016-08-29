@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 11g                           */
-/* Created on:     2016/8/29 10:51:33                           */
+/* Created on:     2016/8/29 11:23:52                           */
 /*==============================================================*/
 
 
@@ -365,6 +365,8 @@ create table APPLIANCE_DETAIL_INFORMATION
    OVERDUE              VARCHAR2(200),
    STORAGEINSTRUCTIONS  VARCHAR2(4000),
    STORAGEINSTRUCTI_STATU VARCHAR2(200),
+   EQUIPMENT_STATUS_VALUUMN VARCHAR2(200),
+   RETURN_INSTRUCTIONS  VARCHAR2(4000),
    constraint PK_APPLIANCE_DETAIL_INFORMATIO primary key (ID)
 );
 
@@ -403,6 +405,9 @@ comment on column APPLIANCE_DETAIL_INFORMATION.ISOVERDUE is
 
 comment on column APPLIANCE_DETAIL_INFORMATION.STORAGEINSTRUCTI_STATU is
 'DropDown';
+
+comment on column APPLIANCE_DETAIL_INFORMATION.EQUIPMENT_STATUS_VALUUMN is
+'器具状态值用来进行排序';
 
 /*==============================================================*/
 /* Table: APPLIANCE_LABORATORY                                  */
@@ -631,7 +636,7 @@ create table DC_VOLTAGE_CURRENT_MEASURE
    RELATIVE_ERROR_POSITIVE_UNIT VARCHAR2(200),
    RELATIVE_ERROR_NEGATIVE VARCHAR2(200),
    RELATIVE_ERROR_NEGATIVE_UNIT VARCHAR2(200),
-   KVALUE               VARCHAR2(200),
+   KVALUE               VARHCAR2(200),
    UNCERTAINTY_DEGREE   VARCHAR2(200),
    UNCERTAINTY_DEGREE_UNIT VARCHAR2(200),
    INDEX1               VARCHAR2(200),
@@ -726,7 +731,7 @@ create table DC_VOLTAGE_MEASURE_NO_INDEX
    STANDARD_VALUE_UNIT  VARCHAR2(200),
    RELATIVE_ERROR       VARCHAR2(200),
    RELATIVE_ERROR_UNIT  VARCHAR2(200),
-   KVALUE               VARCHAR2(200),
+   KVALUE               VARHCAR2(200),
    UNCERTAINTY_DEGREE   VARCHAR2(200),
    UNCERTAINTY_DEGREE_UNIT VARCHAR2(200),
    PREPARE_SCHEMEID     VARCHAR2(36),
@@ -978,7 +983,7 @@ create table OVERALL_TABLE
 (
    ID                   VARCHAR2(36)         not null,
    NAME                 VARCHAR2(200),
-   KVALUE               VARCHAR2(200),
+   KVALUE               VARHCAR2(200),
    PREPARE_SCHEMEID     VARCHAR2(36),
    CREATETIME           DATE,
    CREATEPERSON         VARCHAR2(200),
