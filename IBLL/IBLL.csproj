@@ -70,10 +70,7 @@
     <Compile Include="IAPPLIANCE_LABORATORYBLL.cs" />
     <Compile Include="IRULEBLL.cs" />
     <Compile Include="ISCHEMEBLL.cs" />
-    <Compile Include="ITEST_ITEM_FORMATBLL.cs" />
     <Compile Include="ISCHEME_RULEBLL.cs" />
-    <Compile Include="ITABLE_BODY_XYBLL.cs" />
-    <Compile Include="ITABLE_HEAD_XYBLL.cs" />
     <Compile Include="IMETERING_STANDARD_DEVICEBLL.cs" />
     <Compile Include="IALLOWABLE_ERRORBLL.cs" />
     <Compile Include="IMETERING_STANDARD_DEVICE_CHECKBLL.cs" />

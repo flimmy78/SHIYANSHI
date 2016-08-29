@@ -333,21 +333,6 @@
     </Compile>
     <Compile Include="SysRoleMeta.cs" />
     <Compile Include="SysRoleRepository.cs" />
-    <Compile Include="TABLE_BODY_XY.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TABLE_BODY_XYMeta.cs" />
-    <Compile Include="TABLE_BODY_XYRepository.cs" />
-    <Compile Include="TABLE_HEAD_XY.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TABLE_HEAD_XYMeta.cs" />
-    <Compile Include="TABLE_HEAD_XYRepository.cs" />
-    <Compile Include="TEST_ITEM_FORMAT.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TEST_ITEM_FORMATMeta.cs" />
-    <Compile Include="TEST_ITEM_FORMATRepository.cs" />
     <Compile Include="THREE_PHASE_UNCERTAINTY.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

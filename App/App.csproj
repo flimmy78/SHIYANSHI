@@ -888,12 +888,6 @@
     <Compile Include="Controllers\SCHEMEController.cs" />
     <Compile Include="Controllers\SCHEME_RULEApiController.cs" />
     <Compile Include="Controllers\SCHEME_RULEController.cs" />
-    <Compile Include="Controllers\TABLE_BODY_XYApiController.cs" />
-    <Compile Include="Controllers\TABLE_BODY_XYController.cs" />
-    <Compile Include="Controllers\TABLE_HEAD_XYApiController.cs" />
-    <Compile Include="Controllers\TABLE_HEAD_XYController.cs" />
-    <Compile Include="Controllers\TEST_ITEM_FORMATApiController.cs" />
-    <Compile Include="Controllers\TEST_ITEM_FORMATController.cs" />
     <Compile Include="Controllers\THREE_PHASE_UNCERTAINTYApiController.cs" />
     <Compile Include="Controllers\THREE_PHASE_UNCERTAINTYController.cs" />
     <Compile Include="Controllers\TRANSMITER_SINApiController.cs" />

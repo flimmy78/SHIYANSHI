@@ -18,6 +18,9 @@ namespace Langben.DAL
         public string CONCLUSION { get; set; }
         public string PREPARE_SCHEMEID { get; set; }
         public string RULEID { get; set; }
+        public string RULENAME { get; set; }
+        public string RULENJOINAME { get; set; }
+        public string HTMLVALUE { get; set; }
         public Nullable<System.DateTime> CREATETIME { get; set; }
         public string CREATEPERSON { get; set; }
         public Nullable<System.DateTime> UPDATETIME { get; set; }

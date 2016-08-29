@@ -16,6 +16,7 @@ namespace Langben.DAL
     {
         public string ID { get; set; }
         public string APPLIANCE_NAME { get; set; }
+        public string VERSION { get; set; }
         public string FACTORY_NUM { get; set; }
         public Nullable<decimal> NUM { get; set; }
         public string ATTACHMENT { get; set; }
@@ -24,6 +25,5 @@ namespace Langben.DAL
         public string REPORTNUMBER { get; set; }
         public string REMARKS { get; set; }
         public string ORDER_NUMBER { get; set; }
-        public string VERSION { get; set; }
     }
 }

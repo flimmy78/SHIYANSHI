@@ -190,9 +190,8 @@ namespace Langben.DAL
         /// <returns></returns>
         public IQueryable<SCHEME_RULE> GetByRefTEST_ITEM_FORMATID(SysEntities db, string id)
         {
-            return from c in db.SCHEME_RULE
-                        where c.TEST_ITEM_FORMATID == id
-                        select c;
+            return null
+                ;   
                       
         }
 

@@ -24,6 +24,7 @@ namespace Langben.DAL
         public string ID { get; set; }
         public string BAR_CODE_NUM { get; set; }
         public string APPLIANCE_NAME { get; set; }
+        public string VERSION { get; set; }
         public string FORMAT { get; set; }
         public string FACTORY_NUM { get; set; }
         public Nullable<decimal> NUM { get; set; }
@@ -44,7 +45,6 @@ namespace Langben.DAL
         public string OVERDUE { get; set; }
         public string STORAGEINSTRUCTIONS { get; set; }
         public string STORAGEINSTRUCTI_STATU { get; set; }
-        public string VERSION { get; set; }
         public string EQUIPMENT_STATUS_VALUUMN { get; set; }
         public string RETURN_INSTRUCTIONS { get; set; }
     

@@ -281,6 +281,7 @@
           <Property Name="RELATIVE_ERROR_POSITIVE_UNIT" Type="varchar2" MaxLength="200" />
           <Property Name="RELATIVE_ERROR_NEGATIVE" Type="varchar2" MaxLength="200" />
           <Property Name="RELATIVE_ERROR_NEGATIVE_UNIT" Type="varchar2" MaxLength="200" />
+          <Property Name="KVALUE" Type="varchar2" MaxLength="200" />
           <Property Name="UNCERTAINTY_DEGREE" Type="varchar2" MaxLength="200" />
           <Property Name="UNCERTAINTY_DEGREE_UNIT" Type="varchar2" MaxLength="200" />
           <Property Name="INDEX1" Type="varchar2" MaxLength="200" />
@@ -339,6 +340,7 @@
           <Property Name="STANDARD_VALUE_UNIT" Type="varchar2" MaxLength="200" />
           <Property Name="RELATIVE_ERROR" Type="varchar2" MaxLength="200" />
           <Property Name="RELATIVE_ERROR_UNIT" Type="varchar2" MaxLength="200" />
+          <Property Name="KVALUE" Type="varchar2" MaxLength="200" />
           <Property Name="UNCERTAINTY_DEGREE" Type="varchar2" MaxLength="200" />
           <Property Name="UNCERTAINTY_DEGREE_UNIT" Type="varchar2" MaxLength="200" />
           <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" />
@@ -518,7 +520,7 @@
           </Key>
           <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="NAME" Type="varchar2" MaxLength="200" />
-          <Property Name="CONCLUSION" Type="varchar2" MaxLength="200" />
+          <Property Name="KVALUE" Type="varchar2" MaxLength="200" />
           <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" />
           <Property Name="CREATETIME" Type="date" />
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
@@ -611,6 +613,9 @@
           <Property Name="CONCLUSION" Type="varchar2" MaxLength="4000" />
           <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" />
           <Property Name="RULEID" Type="varchar2" MaxLength="36" />
+          <Property Name="RULENAME" Type="varchar2" MaxLength="200" />
+          <Property Name="RULENJOINAME" Type="varchar2" MaxLength="2000" />
+          <Property Name="HTMLVALUE" Type="clob" />
           <Property Name="CREATETIME" Type="date" />
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="UPDATETIME" Type="date" />
@@ -639,6 +644,7 @@
           <Property Name="IS_UNCERTAINTY" Type="varchar2" MaxLength="200" />
           <Property Name="UNCERTAINTY_MENU" Type="varchar2" MaxLength="200" />
           <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
+          <Property Name="INPUTSTATE" Type="varchar2" MaxLength="200" />
           <Property Name="PARENTID" Type="varchar2" MaxLength="36" />
           <Property Name="CREATETIME" Type="date" />
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
@@ -669,7 +675,11 @@
           <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="RULEID" Type="varchar2" MaxLength="36" />
           <Property Name="SCHEMEID" Type="varchar2" MaxLength="36" />
-          <Property Name="TEST_ITEM_FORMATID" Type="varchar2" MaxLength="36" />
+          <Property Name="HTMLVALUE" Type="clob" />
+          <Property Name="CREATETIME" Type="date" />
+          <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="UPDATETIME" Type="date" />
+          <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="SysAnnouncement">
           <Key>
@@ -960,50 +970,6 @@
           <Property Name="SysPersonId" Type="nvarchar2" MaxLength="36" Nullable="false" />
           <Property Name="SysRoleId" Type="nvarchar2" MaxLength="36" Nullable="false" />
         </EntityType>
-        <EntityType Name="TABLE_BODY_XY">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
-          <Property Name="X" Type="number" Precision="38" Scale="0" />
-          <Property Name="Y" Type="number" Precision="38" Scale="0" />
-          <Property Name="CATEGORY" Type="varchar2" MaxLength="200" />
-          <Property Name="DEFAULT_VALUE" Type="number" Precision="38" Scale="0" />
-          <Property Name="MERGE_Y" Type="number" Precision="38" Scale="0" />
-          <Property Name="TEST_ITEM_FORMATID" Type="varchar2" MaxLength="36" />
-          <Property Name="CREATETIME" Type="date" />
-          <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
-          <Property Name="UPDATETIME" Type="date" />
-          <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
-        </EntityType>
-        <EntityType Name="TABLE_HEAD_XY">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
-          <Property Name="ROW" Type="number" Precision="38" Scale="0" />
-          <Property Name="COLUMN" Type="number" Precision="38" Scale="0" />
-          <Property Name="CATEGORY" Type="varchar2" MaxLength="200" />
-          <Property Name="TEST_ITEM_FORMATID" Type="varchar2" MaxLength="36" />
-          <Property Name="DEFAULT_VALUE" Type="varchar2" MaxLength="200" />
-          <Property Name="CREATETIME" Type="date" />
-          <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
-          <Property Name="UPDATETIME" Type="date" />
-          <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
-        </EntityType>
-        <EntityType Name="TEST_ITEM_FORMAT">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
-          <Property Name="ROW_COUNT" Type="number" Precision="38" Scale="0" />
-          <Property Name="COLUMN_COUNT" Type="number" Precision="38" Scale="0" />
-          <Property Name="CHANNEL_NUMBER" Type="number" Precision="38" Scale="0" />
-          <Property Name="CREATETIME" Type="date" />
-          <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
-          <Property Name="UPDATETIME" Type="date" />
-          <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
-        </EntityType>
         <EntityType Name="THREE_PHASE_UNCERTAINTY">
           <Key>
             <PropertyRef Name="ID" />
@@ -1267,7 +1233,7 @@
           <Property Name="CERTIFICATE_ENTERPRISE" Type="varchar2" MaxLength="200" />
           <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="varchar2" MaxLength="4000" />
           <Property Name="ORDER_STATUS" Type="varchar2" MaxLength="200" />
-          <Property Name="CREATETIME" Type="date" />
+          <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="APPLIANCE_PROGRESS" Type="varchar2" MaxLength="200" />
           <Property Name="OVERDUE" Type="varchar2" MaxLength="200" />
           <Property Name="STATE" Type="varchar2" MaxLength="200" />
@@ -1782,18 +1748,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SCHEME_R_REFERENCE_TEST_ITE">
-          <End Role="TEST_ITEM_FORMAT" Type="Self.TEST_ITEM_FORMAT" Multiplicity="0..1" />
-          <End Role="SCHEME_RULE" Type="Self.SCHEME_RULE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TEST_ITEM_FORMAT">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="SCHEME_RULE">
-              <PropertyRef Name="TEST_ITEM_FORMATID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SCHEME_REFERENCE_UNDERTAK">
           <End Role="UNDERTAKE_LABORATORY" Type="Self.UNDERTAKE_LABORATORY" Multiplicity="0..1" />
           <End Role="SCHEME" Type="Self.SCHEME" Multiplicity="*" />
@@ -2022,30 +1976,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TABLE_BO_REFERENCE_TEST_ITE">
-          <End Role="TEST_ITEM_FORMAT" Type="Self.TEST_ITEM_FORMAT" Multiplicity="0..1" />
-          <End Role="TABLE_BODY_XY" Type="Self.TABLE_BODY_XY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TEST_ITEM_FORMAT">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TABLE_BODY_XY">
-              <PropertyRef Name="TEST_ITEM_FORMATID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TABLE_HE_REFERENCE_TEST_ITE">
-          <End Role="TEST_ITEM_FORMAT" Type="Self.TEST_ITEM_FORMAT" Multiplicity="0..1" />
-          <End Role="TABLE_HEAD_XY" Type="Self.TABLE_HEAD_XY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TEST_ITEM_FORMAT">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TABLE_HEAD_XY">
-              <PropertyRef Name="TEST_ITEM_FORMATID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_THREE_PH_REFERENCE_RULE">
           <End Role="RULE" Type="Self.RULE" Multiplicity="0..1" />
           <End Role="THREE_PHASE_UNCERTAINTY" Type="Self.THREE_PHASE_UNCERTAINTY" Multiplicity="*" />
@@ -2186,9 +2116,6 @@
           <EntitySet Name="SysPerson" EntityType="Self.SysPerson" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="SysRole" EntityType="Self.SysRole" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="SysRoleSysPerson" EntityType="Self.SysRoleSysPerson" Schema="TENGFEI" store:Type="Tables" />
-          <EntitySet Name="TABLE_BODY_XY" EntityType="Self.TABLE_BODY_XY" Schema="TENGFEI" store:Type="Tables" />
-          <EntitySet Name="TABLE_HEAD_XY" EntityType="Self.TABLE_HEAD_XY" Schema="TENGFEI" store:Type="Tables" />
-          <EntitySet Name="TEST_ITEM_FORMAT" EntityType="Self.TEST_ITEM_FORMAT" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="THREE_PHASE_UNCERTAINTY" EntityType="Self.THREE_PHASE_UNCERTAINTY" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="TRANSMITER_SIN" EntityType="Self.TRANSMITER_SIN" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="TRANSMITTER_COS" EntityType="Self.TRANSMITTER_COS" Schema="TENGFEI" store:Type="Tables" />
@@ -2230,7 +2157,7 @@ FROM "TENGFEI"."VBAOGAODAYIN" "VBAOGAODAYIN"</DefiningQuery>
 "VJIANDINGRENWU"."CERTIFICATE_ENTERPRISE" AS "CERTIFICATE_ENTERPRISE", 
 "VJIANDINGRENWU"."CUSTOMER_SPECIFIC_REQUIREMENTS" AS "CUSTOMER_SPECIFIC_REQUIREMENTS", 
 "VJIANDINGRENWU"."ORDER_STATUS" AS "ORDER_STATUS", 
-"VJIANDINGRENWU"."CREATETIME" AS "CREATETIME", 
+"VJIANDINGRENWU"."CREATEPERSON" AS "CREATEPERSON", 
 "VJIANDINGRENWU"."APPLIANCE_PROGRESS" AS "APPLIANCE_PROGRESS", 
 "VJIANDINGRENWU"."OVERDUE" AS "OVERDUE", 
 "VJIANDINGRENWU"."STATE" AS "STATE", 
@@ -2459,10 +2386,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
             <End Role="SCHEME" EntitySet="SCHEME" />
             <End Role="SCHEME_RULE" EntitySet="SCHEME_RULE" />
           </AssociationSet>
-          <AssociationSet Name="FK_SCHEME_R_REFERENCE_TEST_ITE" Association="Self.FK_SCHEME_R_REFERENCE_TEST_ITE">
-            <End Role="TEST_ITEM_FORMAT" EntitySet="TEST_ITEM_FORMAT" />
-            <End Role="SCHEME_RULE" EntitySet="SCHEME_RULE" />
-          </AssociationSet>
           <AssociationSet Name="FK_SCHEME_REFERENCE_UNDERTAK" Association="Self.FK_SCHEME_REFERENCE_UNDERTAK">
             <End Role="UNDERTAKE_LABORATORY" EntitySet="UNDERTAKE_LABORATORY" />
             <End Role="SCHEME" EntitySet="SCHEME" />
@@ -2539,14 +2462,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
             <End Role="SysRole" EntitySet="SysRole" />
             <End Role="SysRoleSysPerson" EntitySet="SysRoleSysPerson" />
           </AssociationSet>
-          <AssociationSet Name="FK_TABLE_BO_REFERENCE_TEST_ITE" Association="Self.FK_TABLE_BO_REFERENCE_TEST_ITE">
-            <End Role="TEST_ITEM_FORMAT" EntitySet="TEST_ITEM_FORMAT" />
-            <End Role="TABLE_BODY_XY" EntitySet="TABLE_BODY_XY" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TABLE_HE_REFERENCE_TEST_ITE" Association="Self.FK_TABLE_HE_REFERENCE_TEST_ITE">
-            <End Role="TEST_ITEM_FORMAT" EntitySet="TEST_ITEM_FORMAT" />
-            <End Role="TABLE_HEAD_XY" EntitySet="TABLE_HEAD_XY" />
-          </AssociationSet>
           <AssociationSet Name="FK_THREE_PH_REFERENCE_RULE" Association="Self.FK_THREE_PH_REFERENCE_RULE">
             <End Role="RULE" EntitySet="RULE" />
             <End Role="THREE_PHASE_UNCERTAINTY" EntitySet="THREE_PHASE_UNCERTAINTY" />
@@ -2600,6 +2515,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySet Name="DC_VOLTAGE_OUTPUT" EntityType="Model.DC_VOLTAGE_OUTPUT" />
           <EntitySet Name="ERROR_LIMIT" EntityType="Model.ERROR_LIMIT" />
           <EntitySet Name="FILE_UPLOADER" EntityType="Model.FILE_UPLOADER" />
+          <EntitySet Name="FileUploader" EntityType="Model.FileUploader" />
           <EntitySet Name="FREQUENCY" EntityType="Model.FREQUENCY" />
           <EntitySet Name="METERING_STANDARD_DEVICE" EntityType="Model.METERING_STANDARD_DEVICE" />
           <EntitySet Name="METERING_STANDARD_DEVICE_CHECK" EntityType="Model.METERING_STANDARD_DEVICE_CHECK" />
@@ -2613,9 +2529,23 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySet Name="RULE" EntityType="Model.RULE" />
           <EntitySet Name="SCHEME" EntityType="Model.SCHEME" />
           <EntitySet Name="SCHEME_RULE" EntityType="Model.SCHEME_RULE" />
-          <EntitySet Name="TABLE_BODY_XY" EntityType="Model.TABLE_BODY_XY" />
-          <EntitySet Name="TABLE_HEAD_XY" EntityType="Model.TABLE_HEAD_XY" />
-          <EntitySet Name="TEST_ITEM_FORMAT" EntityType="Model.TEST_ITEM_FORMAT" />
+          <EntitySet Name="SysAnnouncement" EntityType="Model.SysAnnouncement" />
+          <EntitySet Name="SysDepartment" EntityType="Model.SysDepartment" />
+          <EntitySet Name="SysDocument" EntityType="Model.SysDocument" />
+          <EntitySet Name="SysDocumentTalk" EntityType="Model.SysDocumentTalk" />
+          <EntitySet Name="SysEmail" EntityType="Model.SysEmail" />
+          <EntitySet Name="SysEmailTemp" EntityType="Model.SysEmailTemp" />
+          <EntitySet Name="SysException" EntityType="Model.SysException" />
+          <EntitySet Name="SysField" EntityType="Model.SysField" />
+          <EntitySet Name="SysLog" EntityType="Model.SysLog" />
+          <EntitySet Name="SysMenu" EntityType="Model.SysMenu" />
+          <EntitySet Name="SysMenuSysRoleSysOperation" EntityType="Model.SysMenuSysRoleSysOperation" />
+          <EntitySet Name="SysMessage" EntityType="Model.SysMessage" />
+          <EntitySet Name="SysMessageTemp" EntityType="Model.SysMessageTemp" />
+          <EntitySet Name="SysNotice" EntityType="Model.SysNotice" />
+          <EntitySet Name="SysOperation" EntityType="Model.SysOperation" />
+          <EntitySet Name="SysPerson" EntityType="Model.SysPerson" />
+          <EntitySet Name="SysRole" EntityType="Model.SysRole" />
           <EntitySet Name="THREE_PHASE_UNCERTAINTY" EntityType="Model.THREE_PHASE_UNCERTAINTY" />
           <EntitySet Name="TRANSMITER_SIN" EntityType="Model.TRANSMITER_SIN" />
           <EntitySet Name="TRANSMITTER_COS" EntityType="Model.TRANSMITTER_COS" />
@@ -2628,9 +2558,11 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySet Name="UNCERTAINTYPARAMETERMANAGEMENT" EntityType="Model.UNCERTAINTYPARAMETERMANAGEMENT" />
           <EntitySet Name="UNDERTAKE_LABORATORY" EntityType="Model.UNDERTAKE_LABORATORY" />
           <EntitySet Name="VBAOGAODAYIN" EntityType="Model.VBAOGAODAYIN" />
+          <EntitySet Name="VJIANDINGRENWU" EntityType="Model.VJIANDINGRENWU" />
           <EntitySet Name="VQIJULINGQU1" EntityType="Model.VQIJULINGQU1" />
           <EntitySet Name="VQIJULINGQU2" EntityType="Model.VQIJULINGQU2" />
           <EntitySet Name="VRUKU" EntityType="Model.VRUKU" />
+          <EntitySet Name="VSHENHE" EntityType="Model.VSHENHE" />
           <EntitySet Name="VSHENPI" EntityType="Model.VSHENPI" />
           <AssociationSet Name="FK_AC_VOLTA_REFERENCE_OVERALL_" Association="Model.FK_AC_VOLTA_REFERENCE_OVERALL_">
             <End Role="OVERALL_TABLE" EntitySet="OVERALL_TABLE" />
@@ -2776,57 +2708,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
             <End Role="UNDERTAKE_LABORATORY" EntitySet="UNDERTAKE_LABORATORY" />
             <End Role="SCHEME" EntitySet="SCHEME" />
           </AssociationSet>
-          <AssociationSet Name="FK_SCHEME_R_REFERENCE_TEST_ITE" Association="Model.FK_SCHEME_R_REFERENCE_TEST_ITE">
-            <End Role="TEST_ITEM_FORMAT" EntitySet="TEST_ITEM_FORMAT" />
-            <End Role="SCHEME_RULE" EntitySet="SCHEME_RULE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TABLE_BO_REFERENCE_TEST_ITE" Association="Model.FK_TABLE_BO_REFERENCE_TEST_ITE">
-            <End Role="TEST_ITEM_FORMAT" EntitySet="TEST_ITEM_FORMAT" />
-            <End Role="TABLE_BODY_XY" EntitySet="TABLE_BODY_XY" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TABLE_HE_REFERENCE_TEST_ITE" Association="Model.FK_TABLE_HE_REFERENCE_TEST_ITE">
-            <End Role="TEST_ITEM_FORMAT" EntitySet="TEST_ITEM_FORMAT" />
-            <End Role="TABLE_HEAD_XY" EntitySet="TABLE_HEAD_XY" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TRANSMIT_REFERENCE_TRANSMIT" Association="Model.FK_TRANSMIT_REFERENCE_TRANSMIT">
-            <End Role="TRANSMITTER_HEAD" EntitySet="TRANSMITTER_HEAD" />
-            <End Role="TRANSMITER_SIN" EntitySet="TRANSMITER_SIN" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TRANSMIT_REFERENCE_TRANSMI3" Association="Model.FK_TRANSMIT_REFERENCE_TRANSMI3">
-            <End Role="TRANSMITTER_HEAD" EntitySet="TRANSMITTER_HEAD" />
-            <End Role="TRANSMITTER_COS" EntitySet="TRANSMITTER_COS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TRANSMIT_REFERENCE_TRANSMI2" Association="Model.FK_TRANSMIT_REFERENCE_TRANSMI2">
-            <End Role="TRANSMITTER_HEAD" EntitySet="TRANSMITTER_HEAD" />
-            <End Role="TRANSMITTER_FREQUENCY_PHASE" EntitySet="TRANSMITTER_FREQUENCY_PHASE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TRANSMIT_REFERENCE_TRANSMI4" Association="Model.FK_TRANSMIT_REFERENCE_TRANSMI4">
-            <End Role="TRANSMITTER_HEAD" EntitySet="TRANSMITTER_HEAD" />
-            <End Role="TRANSMITTER_POWER_FACTOR" EntitySet="TRANSMITTER_POWER_FACTOR" />
-          </AssociationSet>
-          <AssociationSet Name="METERING_STANDARD_DEVICEPREPAR" Association="Model.METERING_STANDARD_DEVICEPREPAR">
-            <End Role="METERING_STANDARD_DEVICE" EntitySet="METERING_STANDARD_DEVICE" />
-            <End Role="PREPARE_SCHEME" EntitySet="PREPARE_SCHEME" />
-          </AssociationSet>
-          <EntitySet Name="VJIANDINGRENWU" EntityType="Model.VJIANDINGRENWU" />
-          <EntitySet Name="FileUploader" EntityType="Model.FileUploader" />
-          <EntitySet Name="SysAnnouncement" EntityType="Model.SysAnnouncement" />
-          <EntitySet Name="SysDepartment" EntityType="Model.SysDepartment" />
-          <EntitySet Name="SysDocument" EntityType="Model.SysDocument" />
-          <EntitySet Name="SysDocumentTalk" EntityType="Model.SysDocumentTalk" />
-          <EntitySet Name="SysEmail" EntityType="Model.SysEmail" />
-          <EntitySet Name="SysEmailTemp" EntityType="Model.SysEmailTemp" />
-          <EntitySet Name="SysException" EntityType="Model.SysException" />
-          <EntitySet Name="SysField" EntityType="Model.SysField" />
-          <EntitySet Name="SysLog" EntityType="Model.SysLog" />
-          <EntitySet Name="SysMenu" EntityType="Model.SysMenu" />
-          <EntitySet Name="SysMenuSysRoleSysOperation" EntityType="Model.SysMenuSysRoleSysOperation" />
-          <EntitySet Name="SysMessage" EntityType="Model.SysMessage" />
-          <EntitySet Name="SysMessageTemp" EntityType="Model.SysMessageTemp" />
-          <EntitySet Name="SysNotice" EntityType="Model.SysNotice" />
-          <EntitySet Name="SysOperation" EntityType="Model.SysOperation" />
-          <EntitySet Name="SysPerson" EntityType="Model.SysPerson" />
-          <EntitySet Name="SysRole" EntityType="Model.SysRole" />
           <AssociationSet Name="FK_SYSDEPAR_REFERENCE_SYSDEPAR" Association="Model.FK_SYSDEPAR_REFERENCE_SYSDEPAR">
             <End Role="SysDepartment" EntitySet="SysDepartment" />
             <End Role="SysDepartment1" EntitySet="SysDepartment" />
@@ -2867,6 +2748,26 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
             <End Role="SysMessageTemp" EntitySet="SysMessageTemp" />
             <End Role="SysMessage" EntitySet="SysMessage" />
           </AssociationSet>
+          <AssociationSet Name="FK_TRANSMIT_REFERENCE_TRANSMIT" Association="Model.FK_TRANSMIT_REFERENCE_TRANSMIT">
+            <End Role="TRANSMITTER_HEAD" EntitySet="TRANSMITTER_HEAD" />
+            <End Role="TRANSMITER_SIN" EntitySet="TRANSMITER_SIN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSMIT_REFERENCE_TRANSMI3" Association="Model.FK_TRANSMIT_REFERENCE_TRANSMI3">
+            <End Role="TRANSMITTER_HEAD" EntitySet="TRANSMITTER_HEAD" />
+            <End Role="TRANSMITTER_COS" EntitySet="TRANSMITTER_COS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSMIT_REFERENCE_TRANSMI2" Association="Model.FK_TRANSMIT_REFERENCE_TRANSMI2">
+            <End Role="TRANSMITTER_HEAD" EntitySet="TRANSMITTER_HEAD" />
+            <End Role="TRANSMITTER_FREQUENCY_PHASE" EntitySet="TRANSMITTER_FREQUENCY_PHASE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANSMIT_REFERENCE_TRANSMI4" Association="Model.FK_TRANSMIT_REFERENCE_TRANSMI4">
+            <End Role="TRANSMITTER_HEAD" EntitySet="TRANSMITTER_HEAD" />
+            <End Role="TRANSMITTER_POWER_FACTOR" EntitySet="TRANSMITTER_POWER_FACTOR" />
+          </AssociationSet>
+          <AssociationSet Name="METERING_STANDARD_DEVICEPREPAR" Association="Model.METERING_STANDARD_DEVICEPREPAR">
+            <End Role="METERING_STANDARD_DEVICE" EntitySet="METERING_STANDARD_DEVICE" />
+            <End Role="PREPARE_SCHEME" EntitySet="PREPARE_SCHEME" />
+          </AssociationSet>
           <AssociationSet Name="SysDocumentSysDepartment" Association="Model.SysDocumentSysDepartment">
             <End Role="SysDocument" EntitySet="SysDocument" />
             <End Role="SysDepartment" EntitySet="SysDepartment" />
@@ -2883,7 +2784,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
             <End Role="SysPerson" EntitySet="SysPerson" />
             <End Role="SysRole" EntitySet="SysRole" />
           </AssociationSet>
-          <EntitySet Name="VSHENHE" EntityType="Model.VSHENHE" />
         </EntityContainer>
         <EntityType Name="AC_VOLTAGE_CURRENT">
           <Key>
@@ -2953,6 +2853,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="BAR_CODE_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FORMAT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="NUM" Type="Decimal" Precision="38" Scale="0" />
@@ -2973,12 +2874,11 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="OVERDUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="STORAGEINSTRUCTIONS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="STORAGEINSTRUCTI_STATU" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RETURN_INSTRUCTIONS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="APPLIANCE_LABORATORY" Relationship="Model.FK_APPLIANC_REFERENCE_APPLIAN2" FromRole="APPLIANCE_DETAIL_INFORMATION" ToRole="APPLIANCE_LABORATORY" />
           <NavigationProperty Name="APPLIANCECOLLECTION" Relationship="Model.FK_APPLIANC_REFERENCE_APPLIANC" FromRole="APPLIANCE_DETAIL_INFORMATION" ToRole="APPLIANCECOLLECTION" />
           <NavigationProperty Name="ORDER_TASK_INFORMATION" Relationship="Model.FK_APPLIANC_REFERENCE_ORDER_TA" FromRole="APPLIANCE_DETAIL_INFORMATION" ToRole="ORDER_TASK_INFORMATION" />
-          <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="RETURN_INSTRUCTIONS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="APPLIANCE_LABORATORY">
           <Key>
@@ -3182,6 +3082,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="RELATIVE_ERROR_POSITIVE_UNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RELATIVE_ERROR_NEGATIVE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RELATIVE_ERROR_NEGATIVE_UNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="KVALUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UNCERTAINTY_DEGREE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UNCERTAINTY_DEGREE_UNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="INDEX1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -3242,6 +3143,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="STANDARD_VALUE_UNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RELATIVE_ERROR" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RELATIVE_ERROR_UNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="KVALUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UNCERTAINTY_DEGREE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UNCERTAINTY_DEGREE_UNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="PREPARE_SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
@@ -3318,6 +3220,21 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PREPARE_SCHEME" Relationship="Model.FK_FILE_UPL_REFERENCE_PREPARE_" FromRole="FILE_UPLOADER" ToRole="PREPARE_SCHEME" />
+        </EntityType>
+        <EntityType Name="FileUploader">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FullPath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Suffix" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" />
+          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="FREQUENCY">
           <Key>
@@ -3408,7 +3325,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           </Key>
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="KVALUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="PREPARE_SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="CREATETIME" Type="DateTime" />
           <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -3519,6 +3436,9 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="CONCLUSION" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="PREPARE_SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="RULEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="RULENAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RULENJOINAME" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="HTMLVALUE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CREATETIME" Type="DateTime" />
           <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UPDATETIME" Type="DateTime" />
@@ -3549,6 +3469,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="IS_UNCERTAINTY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UNCERTAINTY_MENU" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="INPUTSTATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="PARENTID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="CREATETIME" Type="DateTime" />
           <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -3590,59 +3511,298 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="RULEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="TEST_ITEM_FORMATID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="HTMLVALUE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CREATETIME" Type="DateTime" />
+          <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATETIME" Type="DateTime" />
+          <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="RULE" Relationship="Model.FK_SCHEME_R_REFERENCE_RULE" FromRole="SCHEME_RULE" ToRole="RULE" />
           <NavigationProperty Name="SCHEME" Relationship="Model.FK_SCHEME_R_REFERENCE_SCHEME" FromRole="SCHEME_RULE" ToRole="SCHEME" />
-          <NavigationProperty Name="TEST_ITEM_FORMAT" Relationship="Model.FK_SCHEME_R_REFERENCE_TEST_ITE" FromRole="SCHEME_RULE" ToRole="TEST_ITEM_FORMAT" />
         </EntityType>
-        <EntityType Name="TABLE_BODY_XY">
+        <EntityType Name="SysAnnouncement">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="X" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="Y" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="DEFAULT_VALUE" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="MERGE_Y" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="TEST_ITEM_FORMATID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="CREATETIME" Type="DateTime" />
-          <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="UPDATETIME" Type="DateTime" />
-          <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TEST_ITEM_FORMAT" Relationship="Model.FK_TABLE_BO_REFERENCE_TEST_ITE" FromRole="TABLE_BODY_XY" ToRole="TEST_ITEM_FORMAT" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" />
+          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="TABLE_HEAD_XY">
+        <EntityType Name="SysDepartment">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="ROW" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COLUMN" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="TEST_ITEM_FORMATID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="DEFAULT_VALUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CREATETIME" Type="DateTime" />
-          <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="UPDATETIME" Type="DateTime" />
-          <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TEST_ITEM_FORMAT" Relationship="Model.FK_TABLE_HE_REFERENCE_TEST_ITE" FromRole="TABLE_HEAD_XY" ToRole="TEST_ITEM_FORMAT" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Sort" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" />
+          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" />
+          <Property Name="UpdatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SysDepartment1" Relationship="Model.FK_SYSDEPAR_REFERENCE_SYSDEPAR" FromRole="SysDepartment" ToRole="SysDepartment1" />
+          <NavigationProperty Name="SysDepartment2" Relationship="Model.FK_SYSDEPAR_REFERENCE_SYSDEPAR" FromRole="SysDepartment1" ToRole="SysDepartment" />
+          <NavigationProperty Name="SysPerson" Relationship="Model.FK_SYSPERSO_REFERENCE_SYSDEPAR" FromRole="SysDepartment" ToRole="SysPerson" />
+          <NavigationProperty Name="SysDocument" Relationship="Model.SysDocumentSysDepartment" FromRole="SysDepartment" ToRole="SysDocument" />
         </EntityType>
-        <EntityType Name="TEST_ITEM_FORMAT">
+        <EntityType Name="SysDocument">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="ROW_COUNT" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="COLUMN_COUNT" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="CHANNEL_NUMBER" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="CREATETIME" Type="DateTime" />
-          <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="UPDATETIME" Type="DateTime" />
-          <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="SCHEME_RULE" Relationship="Model.FK_SCHEME_R_REFERENCE_TEST_ITE" FromRole="TEST_ITEM_FORMAT" ToRole="SCHEME_RULE" />
-          <NavigationProperty Name="TABLE_BODY_XY" Relationship="Model.FK_TABLE_BO_REFERENCE_TEST_ITE" FromRole="TEST_ITEM_FORMAT" ToRole="TABLE_BODY_XY" />
-          <NavigationProperty Name="TABLE_HEAD_XY" Relationship="Model.FK_TABLE_HE_REFERENCE_TEST_ITE" FromRole="TEST_ITEM_FORMAT" ToRole="TABLE_HEAD_XY" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FullPath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Suffix" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Download" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CreateTime" Type="DateTime" />
+          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SysDocumentTalk" Relationship="Model.FK_SYSDOCUM_REFERENCE_SYSDOCUM" FromRole="SysDocument" ToRole="SysDocumentTalk" />
+          <NavigationProperty Name="SysDepartment" Relationship="Model.SysDocumentSysDepartment" FromRole="SysDocument" ToRole="SysDepartment" />
+          <NavigationProperty Name="SysPerson" Relationship="Model.SysDocumentSysPerson" FromRole="SysDocument" ToRole="SysPerson" />
+        </EntityType>
+        <EntityType Name="SysDocumentTalk">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SysDocumentId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Bad" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="Good" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CreateTime" Type="DateTime" />
+          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SysDocument" Relationship="Model.FK_SYSDOCUM_REFERENCE_SYSDOCUM" FromRole="SysDocumentTalk" ToRole="SysDocument" />
+        </EntityType>
+        <EntityType Name="SysEmail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="SysMailId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Reply_email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Mail_type" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ReadTime" Type="DateTime" />
+          <Property Name="CreateTime" Type="DateTime" />
+          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SysEmailTemp" Relationship="Model.FK_SYSEMAIL_REFERENCE_SYSEMAIL" FromRole="SysEmail" ToRole="SysEmailTemp" />
+        </EntityType>
+        <EntityType Name="SysEmailTemp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Mail_name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Reply_email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsDefault" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Mail_type" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" />
+          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SysEmail" Relationship="Model.FK_SYSEMAIL_REFERENCE_SYSEMAIL" FromRole="SysEmailTemp" ToRole="SysEmail" />
+        </EntityType>
+        <EntityType Name="SysException">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="LeiXing" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Result" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" />
+          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SysField">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="MyTexts" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="MyTables" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MyColums" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Sort" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" />
+          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" />
+          <Property Name="UpdatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SysField1" Relationship="Model.FK_SYSFIELD_REFERENCE_SYSFIELD" FromRole="SysField" ToRole="SysField1" />
+          <NavigationProperty Name="SysField2" Relationship="Model.FK_SYSFIELD_REFERENCE_SYSFIELD" FromRole="SysField1" ToRole="SysField" />
+        </EntityType>
+        <EntityType Name="SysLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="PersonId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Result" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MenuId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Ip" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" />
+          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SysMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Iconic" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Sort" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" />
+          <Property Name="UpdateTime" Type="DateTime" />
+          <Property Name="UpdatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsLeaf" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SysMenu1" Relationship="Model.FK_SYSMENU_REFERENCE_SYSMENU" FromRole="SysMenu" ToRole="SysMenu1" />
+          <NavigationProperty Name="SysMenu2" Relationship="Model.FK_SYSMENU_REFERENCE_SYSMENU" FromRole="SysMenu1" ToRole="SysMenu" />
+          <NavigationProperty Name="SysMenuSysRoleSysOperation" Relationship="Model.FK_SYSMENUS_REFERENCE_SYSMENU2" FromRole="SysMenu" ToRole="SysMenuSysRoleSysOperation" />
+          <NavigationProperty Name="SysOperation" Relationship="Model.SysMenuSysOperation" FromRole="SysMenu" ToRole="SysOperation" />
+        </EntityType>
+        <EntityType Name="SysMenuSysRoleSysOperation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="SysMenuId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="SysOperationId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="SysRoleId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SysMenu" Relationship="Model.FK_SYSMENUS_REFERENCE_SYSMENU2" FromRole="SysMenuSysRoleSysOperation" ToRole="SysMenu" />
+          <NavigationProperty Name="SysOperation" Relationship="Model.FK_SYSMENUS_RE2" FromRole="SysMenuSysRoleSysOperation" ToRole="SysOperation" />
+          <NavigationProperty Name="SysRole" Relationship="Model.FK_SYSMENUS_REFERENCE_SYSROLE" FromRole="SysMenuSysRoleSysOperation" ToRole="SysRole" />
+        </EntityType>
+        <EntityType Name="SysMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="SysMessageTempId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="MessageType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ReadTime" Type="DateTime" />
+          <Property Name="CreateTime" Type="DateTime" />
+          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SysMessageTemp" Relationship="Model.FK_SYSMESSA_REFERENCE_SYSMESSA" FromRole="SysMessage" ToRole="SysMessageTemp" />
+        </EntityType>
+        <EntityType Name="SysMessageTemp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="MessageName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="IsDefault" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MessageType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" />
+          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SysMessage" Relationship="Model.FK_SYSMESSA_REFERENCE_SYSMESSA" FromRole="SysMessageTemp" ToRole="SysMessage" />
+        </EntityType>
+        <EntityType Name="SysNotice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="LostTime" Type="DateTime" />
+          <Property Name="PersonId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" />
+          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SysOperation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Function" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Iconic" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Sort" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" />
+          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SysMenuSysRoleSysOperation" Relationship="Model.FK_SYSMENUS_RE2" FromRole="SysOperation" ToRole="SysMenuSysRoleSysOperation" />
+          <NavigationProperty Name="SysMenu" Relationship="Model.SysMenuSysOperation" FromRole="SysOperation" ToRole="SysMenu" />
+        </EntityType>
+        <EntityType Name="SysPerson">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MyName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SurePassword" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SysDepartmentId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MobilePhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Province" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Village" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" />
+          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" />
+          <Property Name="LogonNum" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="LogonTime" Type="DateTime" />
+          <Property Name="LogonIP" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastLogonTime" Type="DateTime" />
+          <Property Name="LastLogonIP" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PageStyle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Version" Type="DateTime" Precision="6" />
+          <Property Name="HDpic" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SysDepartment" Relationship="Model.FK_SYSPERSO_REFERENCE_SYSDEPAR" FromRole="SysPerson" ToRole="SysDepartment" />
+          <NavigationProperty Name="SysDocument" Relationship="Model.SysDocumentSysPerson" FromRole="SysPerson" ToRole="SysDocument" />
+          <NavigationProperty Name="SysRole" Relationship="Model.SysRoleSysPerson" FromRole="SysPerson" ToRole="SysRole" />
+        </EntityType>
+        <EntityType Name="SysRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" />
+          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" />
+          <Property Name="UpdatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SysMenuSysRoleSysOperation" Relationship="Model.FK_SYSMENUS_REFERENCE_SYSROLE" FromRole="SysRole" ToRole="SysMenuSysRoleSysOperation" />
+          <NavigationProperty Name="SysPerson" Relationship="Model.SysRoleSysPerson" FromRole="SysRole" ToRole="SysPerson" />
         </EntityType>
         <EntityType Name="THREE_PHASE_UNCERTAINTY">
           <Key>
@@ -3894,6 +4054,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="REPORTNUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ORDER_NUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CERTIFICATE_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
@@ -3905,7 +4066,29 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="APPROVALDATE" Type="DateTime" />
           <Property Name="BAR_CODE_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="PRINTSTATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VJIANDINGRENWU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="ORDER_NUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CERTIFICATE_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="ORDER_STATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="APPLIANCE_PROGRESS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="OVERDUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="STATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="REPORTSTATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="APPROVAL" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="INSPECTION_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ISOVERDUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VQIJULINGQU1">
           <Key>
@@ -3925,6 +4108,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           </Key>
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="NUM" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="ATTACHMENT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -3933,7 +4117,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="REPORTNUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="REMARKS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="ORDER_NUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VRUKU">
           <Key>
@@ -3943,6 +4126,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="REPORTNUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ORDER_NUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CERTIFICATE_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
@@ -3952,7 +4136,25 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="APPROVALDATE" Type="DateTime" />
           <Property Name="STORAGEINSTRUCTI_STATU" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VSHENHE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="REPORTNUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ORDER_NUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CERTIFICATE_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="CERTIFICATE_CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="QUALIFICATIONS" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CONCLUSION_EXPLAIN" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="CONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ISAGGREY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PREPARE_SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VSHENPI">
           <Key>
@@ -3962,6 +4164,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="REPORTNUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ORDER_NUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CERTIFICATE_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
@@ -3971,7 +4174,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="CONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="APPROVALISAGGREY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="PREPARE_SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_AC_VOLTA_REFERENCE_OVERALL_">
@@ -4406,417 +4608,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SCHEME_R_REFERENCE_TEST_ITE">
-          <End Type="Model.TEST_ITEM_FORMAT" Role="TEST_ITEM_FORMAT" Multiplicity="0..1" />
-          <End Type="Model.SCHEME_RULE" Role="SCHEME_RULE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TEST_ITEM_FORMAT">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="SCHEME_RULE">
-              <PropertyRef Name="TEST_ITEM_FORMATID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TABLE_BO_REFERENCE_TEST_ITE">
-          <End Type="Model.TEST_ITEM_FORMAT" Role="TEST_ITEM_FORMAT" Multiplicity="0..1" />
-          <End Type="Model.TABLE_BODY_XY" Role="TABLE_BODY_XY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TEST_ITEM_FORMAT">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TABLE_BODY_XY">
-              <PropertyRef Name="TEST_ITEM_FORMATID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TABLE_HE_REFERENCE_TEST_ITE">
-          <End Type="Model.TEST_ITEM_FORMAT" Role="TEST_ITEM_FORMAT" Multiplicity="0..1" />
-          <End Type="Model.TABLE_HEAD_XY" Role="TABLE_HEAD_XY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TEST_ITEM_FORMAT">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TABLE_HEAD_XY">
-              <PropertyRef Name="TEST_ITEM_FORMATID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TRANSMIT_REFERENCE_TRANSMIT">
-          <End Type="Model.TRANSMITTER_HEAD" Role="TRANSMITTER_HEAD" Multiplicity="0..1" />
-          <End Type="Model.TRANSMITER_SIN" Role="TRANSMITER_SIN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TRANSMITTER_HEAD">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TRANSMITER_SIN">
-              <PropertyRef Name="TRANSMITTER_HEADID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TRANSMIT_REFERENCE_TRANSMI3">
-          <End Type="Model.TRANSMITTER_HEAD" Role="TRANSMITTER_HEAD" Multiplicity="0..1" />
-          <End Type="Model.TRANSMITTER_COS" Role="TRANSMITTER_COS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TRANSMITTER_HEAD">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TRANSMITTER_COS">
-              <PropertyRef Name="TRANSMITTER_HEADID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TRANSMIT_REFERENCE_TRANSMI2">
-          <End Type="Model.TRANSMITTER_HEAD" Role="TRANSMITTER_HEAD" Multiplicity="0..1" />
-          <End Type="Model.TRANSMITTER_FREQUENCY_PHASE" Role="TRANSMITTER_FREQUENCY_PHASE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TRANSMITTER_HEAD">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TRANSMITTER_FREQUENCY_PHASE">
-              <PropertyRef Name="TRANSMITTER_HEADID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TRANSMIT_REFERENCE_TRANSMI4">
-          <End Type="Model.TRANSMITTER_HEAD" Role="TRANSMITTER_HEAD" Multiplicity="0..1" />
-          <End Type="Model.TRANSMITTER_POWER_FACTOR" Role="TRANSMITTER_POWER_FACTOR" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TRANSMITTER_HEAD">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TRANSMITTER_POWER_FACTOR">
-              <PropertyRef Name="TRANSMITTER_HEADID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="METERING_STANDARD_DEVICEPREPAR">
-          <End Type="Model.METERING_STANDARD_DEVICE" Role="METERING_STANDARD_DEVICE" Multiplicity="*" />
-          <End Type="Model.PREPARE_SCHEME" Role="PREPARE_SCHEME" Multiplicity="*" />
-        </Association>
-        <EntityType Name="VJIANDINGRENWU">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="ORDER_NUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CERTIFICATE_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="ORDER_STATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="APPLIANCE_PROGRESS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="OVERDUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="STATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="REPORTSTATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="APPROVAL" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="INSPECTION_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="ISOVERDUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CREATETIME" Type="DateTime" />
-        </EntityType>
-        <EntityType Name="FileUploader">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Path" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="FullPath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Suffix" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Size" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" />
-          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="SysAnnouncement">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Message" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" />
-          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="SysDepartment">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ParentId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Sort" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" />
-          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateTime" Type="DateTime" />
-          <Property Name="UpdatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SysDepartment1" Relationship="Model.FK_SYSDEPAR_REFERENCE_SYSDEPAR" FromRole="SysDepartment" ToRole="SysDepartment1" />
-          <NavigationProperty Name="SysDepartment2" Relationship="Model.FK_SYSDEPAR_REFERENCE_SYSDEPAR" FromRole="SysDepartment1" ToRole="SysDepartment" />
-          <NavigationProperty Name="SysPerson" Relationship="Model.FK_SYSPERSO_REFERENCE_SYSDEPAR" FromRole="SysDepartment" ToRole="SysPerson" />
-          <NavigationProperty Name="SysDocument" Relationship="Model.SysDocumentSysDepartment" FromRole="SysDepartment" ToRole="SysDocument" />
-        </EntityType>
-        <EntityType Name="SysDocument">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Path" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="FullPath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Suffix" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Size" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Download" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="CreateTime" Type="DateTime" />
-          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SysDocumentTalk" Relationship="Model.FK_SYSDOCUM_REFERENCE_SYSDOCUM" FromRole="SysDocument" ToRole="SysDocumentTalk" />
-          <NavigationProperty Name="SysDepartment" Relationship="Model.SysDocumentSysDepartment" FromRole="SysDocument" ToRole="SysDepartment" />
-          <NavigationProperty Name="SysPerson" Relationship="Model.SysDocumentSysPerson" FromRole="SysDocument" ToRole="SysPerson" />
-        </EntityType>
-        <EntityType Name="SysDocumentTalk">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="SysDocumentId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Bad" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="Good" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="CreateTime" Type="DateTime" />
-          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SysDocument" Relationship="Model.FK_SYSDOCUM_REFERENCE_SYSDOCUM" FromRole="SysDocumentTalk" ToRole="SysDocument" />
-        </EntityType>
-        <EntityType Name="SysEmail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="SysMailId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Subject" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Reply_email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Mail_type" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ReadTime" Type="DateTime" />
-          <Property Name="CreateTime" Type="DateTime" />
-          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SysEmailTemp" Relationship="Model.FK_SYSEMAIL_REFERENCE_SYSEMAIL" FromRole="SysEmail" ToRole="SysEmailTemp" />
-        </EntityType>
-        <EntityType Name="SysEmailTemp">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Mail_name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Subject" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Reply_email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="IsDefault" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Mail_type" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" />
-          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SysEmail" Relationship="Model.FK_SYSEMAIL_REFERENCE_SYSEMAIL" FromRole="SysEmailTemp" ToRole="SysEmail" />
-        </EntityType>
-        <EntityType Name="SysException">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="LeiXing" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Message" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Result" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" />
-          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="SysField">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="MyTexts" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ParentId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="MyTables" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="MyColums" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Sort" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" />
-          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateTime" Type="DateTime" />
-          <Property Name="UpdatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SysField1" Relationship="Model.FK_SYSFIELD_REFERENCE_SYSFIELD" FromRole="SysField" ToRole="SysField1" />
-          <NavigationProperty Name="SysField2" Relationship="Model.FK_SYSFIELD_REFERENCE_SYSFIELD" FromRole="SysField1" ToRole="SysField" />
-        </EntityType>
-        <EntityType Name="SysLog">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="PersonId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Message" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Result" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="MenuId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Ip" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" />
-          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="SysMenu">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ParentId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Iconic" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Sort" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" />
-          <Property Name="UpdateTime" Type="DateTime" />
-          <Property Name="UpdatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="IsLeaf" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SysMenu1" Relationship="Model.FK_SYSMENU_REFERENCE_SYSMENU" FromRole="SysMenu" ToRole="SysMenu1" />
-          <NavigationProperty Name="SysMenu2" Relationship="Model.FK_SYSMENU_REFERENCE_SYSMENU" FromRole="SysMenu1" ToRole="SysMenu" />
-          <NavigationProperty Name="SysMenuSysRoleSysOperation" Relationship="Model.FK_SYSMENUS_REFERENCE_SYSMENU2" FromRole="SysMenu" ToRole="SysMenuSysRoleSysOperation" />
-          <NavigationProperty Name="SysOperation" Relationship="Model.SysMenuSysOperation" FromRole="SysMenu" ToRole="SysOperation" />
-        </EntityType>
-        <EntityType Name="SysMenuSysRoleSysOperation">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="SysMenuId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="SysOperationId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="SysRoleId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SysMenu" Relationship="Model.FK_SYSMENUS_REFERENCE_SYSMENU2" FromRole="SysMenuSysRoleSysOperation" ToRole="SysMenu" />
-          <NavigationProperty Name="SysOperation" Relationship="Model.FK_SYSMENUS_RE2" FromRole="SysMenuSysRoleSysOperation" ToRole="SysOperation" />
-          <NavigationProperty Name="SysRole" Relationship="Model.FK_SYSMENUS_REFERENCE_SYSROLE" FromRole="SysMenuSysRoleSysOperation" ToRole="SysRole" />
-        </EntityType>
-        <EntityType Name="SysMessage">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
-          <Property Name="SysMessageTempId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="MessageType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ReadTime" Type="DateTime" />
-          <Property Name="CreateTime" Type="DateTime" />
-          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SysMessageTemp" Relationship="Model.FK_SYSMESSA_REFERENCE_SYSMESSA" FromRole="SysMessage" ToRole="SysMessageTemp" />
-        </EntityType>
-        <EntityType Name="SysMessageTemp">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="MessageName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
-          <Property Name="IsDefault" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="MessageType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" />
-          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SysMessage" Relationship="Model.FK_SYSMESSA_REFERENCE_SYSMESSA" FromRole="SysMessageTemp" ToRole="SysMessage" />
-        </EntityType>
-        <EntityType Name="SysNotice">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Message" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="LostTime" Type="DateTime" />
-          <Property Name="PersonId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" />
-          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="SysOperation">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Function" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Iconic" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Sort" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" />
-          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SysMenuSysRoleSysOperation" Relationship="Model.FK_SYSMENUS_RE2" FromRole="SysOperation" ToRole="SysMenuSysRoleSysOperation" />
-          <NavigationProperty Name="SysMenu" Relationship="Model.SysMenuSysOperation" FromRole="SysOperation" ToRole="SysMenu" />
-        </EntityType>
-        <EntityType Name="SysPerson">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="MyName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SurePassword" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Sex" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SysDepartmentId" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Position" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="MobilePhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Province" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Village" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="EmailAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" />
-          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateTime" Type="DateTime" />
-          <Property Name="LogonNum" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="LogonTime" Type="DateTime" />
-          <Property Name="LogonIP" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="LastLogonTime" Type="DateTime" />
-          <Property Name="LastLogonIP" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="PageStyle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="UpdatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Version" Type="DateTime" Precision="6" />
-          <Property Name="HDpic" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="SysDepartment" Relationship="Model.FK_SYSPERSO_REFERENCE_SYSDEPAR" FromRole="SysPerson" ToRole="SysDepartment" />
-          <NavigationProperty Name="SysDocument" Relationship="Model.SysDocumentSysPerson" FromRole="SysPerson" ToRole="SysDocument" />
-          <NavigationProperty Name="SysRole" Relationship="Model.SysRoleSysPerson" FromRole="SysPerson" ToRole="SysRole" />
-        </EntityType>
-        <EntityType Name="SysRole">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" />
-          <Property Name="CreatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateTime" Type="DateTime" />
-          <Property Name="UpdatePerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SysMenuSysRoleSysOperation" Relationship="Model.FK_SYSMENUS_REFERENCE_SYSROLE" FromRole="SysRole" ToRole="SysMenuSysRoleSysOperation" />
-          <NavigationProperty Name="SysPerson" Relationship="Model.SysRoleSysPerson" FromRole="SysRole" ToRole="SysPerson" />
-        </EntityType>
         <Association Name="FK_SYSDEPAR_REFERENCE_SYSDEPAR">
           <End Type="Model.SysDepartment" Role="SysDepartment" Multiplicity="0..1" />
           <End Type="Model.SysDepartment" Role="SysDepartment1" Multiplicity="*" />
@@ -4937,6 +4728,58 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TRANSMIT_REFERENCE_TRANSMIT">
+          <End Type="Model.TRANSMITTER_HEAD" Role="TRANSMITTER_HEAD" Multiplicity="0..1" />
+          <End Type="Model.TRANSMITER_SIN" Role="TRANSMITER_SIN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSMITTER_HEAD">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TRANSMITER_SIN">
+              <PropertyRef Name="TRANSMITTER_HEADID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSMIT_REFERENCE_TRANSMI3">
+          <End Type="Model.TRANSMITTER_HEAD" Role="TRANSMITTER_HEAD" Multiplicity="0..1" />
+          <End Type="Model.TRANSMITTER_COS" Role="TRANSMITTER_COS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSMITTER_HEAD">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TRANSMITTER_COS">
+              <PropertyRef Name="TRANSMITTER_HEADID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSMIT_REFERENCE_TRANSMI2">
+          <End Type="Model.TRANSMITTER_HEAD" Role="TRANSMITTER_HEAD" Multiplicity="0..1" />
+          <End Type="Model.TRANSMITTER_FREQUENCY_PHASE" Role="TRANSMITTER_FREQUENCY_PHASE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSMITTER_HEAD">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TRANSMITTER_FREQUENCY_PHASE">
+              <PropertyRef Name="TRANSMITTER_HEADID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANSMIT_REFERENCE_TRANSMI4">
+          <End Type="Model.TRANSMITTER_HEAD" Role="TRANSMITTER_HEAD" Multiplicity="0..1" />
+          <End Type="Model.TRANSMITTER_POWER_FACTOR" Role="TRANSMITTER_POWER_FACTOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRANSMITTER_HEAD">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TRANSMITTER_POWER_FACTOR">
+              <PropertyRef Name="TRANSMITTER_HEADID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="METERING_STANDARD_DEVICEPREPAR">
+          <End Type="Model.METERING_STANDARD_DEVICE" Role="METERING_STANDARD_DEVICE" Multiplicity="*" />
+          <End Type="Model.PREPARE_SCHEME" Role="PREPARE_SCHEME" Multiplicity="*" />
+        </Association>
         <Association Name="SysDocumentSysDepartment">
           <End Type="Model.SysDocument" Role="SysDocument" Multiplicity="*" />
           <End Type="Model.SysDepartment" Role="SysDepartment" Multiplicity="*" />
@@ -4953,26 +4796,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <End Type="Model.SysPerson" Role="SysPerson" Multiplicity="*" />
           <End Type="Model.SysRole" Role="SysRole" Multiplicity="*" />
         </Association>
-        <EntityType Name="VSHENHE">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="REPORTNUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="ORDER_NUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CERTIFICATE_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="CERTIFICATE_CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="QUALIFICATIONS" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="CONCLUSION_EXPLAIN" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="CONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="ISAGGREY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="PREPARE_SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-        </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -5044,7 +4868,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
               <MappingFragment StoreEntitySet="APPLIANCE_DETAIL_INFORMATION">
                 <ScalarProperty Name="RETURN_INSTRUCTIONS" ColumnName="RETURN_INSTRUCTIONS" />
                 <ScalarProperty Name="EQUIPMENT_STATUS_VALUUMN" ColumnName="EQUIPMENT_STATUS_VALUUMN" />
-                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
                 <ScalarProperty Name="STORAGEINSTRUCTI_STATU" ColumnName="STORAGEINSTRUCTI_STATU" />
                 <ScalarProperty Name="STORAGEINSTRUCTIONS" ColumnName="STORAGEINSTRUCTIONS" />
                 <ScalarProperty Name="OVERDUE" ColumnName="OVERDUE" />
@@ -5065,6 +4888,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
                 <ScalarProperty Name="NUM" ColumnName="NUM" />
                 <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
                 <ScalarProperty Name="FORMAT" ColumnName="FORMAT" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
                 <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
                 <ScalarProperty Name="BAR_CODE_NUM" ColumnName="BAR_CODE_NUM" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -5266,6 +5090,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
                 <ScalarProperty Name="INDEX1" ColumnName="INDEX1" />
                 <ScalarProperty Name="UNCERTAINTY_DEGREE_UNIT" ColumnName="UNCERTAINTY_DEGREE_UNIT" />
                 <ScalarProperty Name="UNCERTAINTY_DEGREE" ColumnName="UNCERTAINTY_DEGREE" />
+                <ScalarProperty Name="KVALUE" ColumnName="KVALUE" />
                 <ScalarProperty Name="RELATIVE_ERROR_NEGATIVE_UNIT" ColumnName="RELATIVE_ERROR_NEGATIVE_UNIT" />
                 <ScalarProperty Name="RELATIVE_ERROR_NEGATIVE" ColumnName="RELATIVE_ERROR_NEGATIVE" />
                 <ScalarProperty Name="RELATIVE_ERROR_POSITIVE_UNIT" ColumnName="RELATIVE_ERROR_POSITIVE_UNIT" />
@@ -5325,6 +5150,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
                 <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
                 <ScalarProperty Name="UNCERTAINTY_DEGREE_UNIT" ColumnName="UNCERTAINTY_DEGREE_UNIT" />
                 <ScalarProperty Name="UNCERTAINTY_DEGREE" ColumnName="UNCERTAINTY_DEGREE" />
+                <ScalarProperty Name="KVALUE" ColumnName="KVALUE" />
                 <ScalarProperty Name="RELATIVE_ERROR_UNIT" ColumnName="RELATIVE_ERROR_UNIT" />
                 <ScalarProperty Name="RELATIVE_ERROR" ColumnName="RELATIVE_ERROR" />
                 <ScalarProperty Name="STANDARD_VALUE_UNIT" ColumnName="STANDARD_VALUE_UNIT" />
@@ -5402,6 +5228,22 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
                 <ScalarProperty Name="PATH" ColumnName="PATH" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileUploader">
+            <EntityTypeMapping TypeName="Model.FileUploader">
+              <MappingFragment StoreEntitySet="FileUploader">
+                <ScalarProperty Name="CreatePerson" ColumnName="CreatePerson" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+                <ScalarProperty Name="FullPath" ColumnName="FullPath" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5493,7 +5335,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
                 <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
                 <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
                 <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
-                <ScalarProperty Name="CONCLUSION" ColumnName="CONCLUSION" />
+                <ScalarProperty Name="KVALUE" ColumnName="KVALUE" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -5587,6 +5429,9 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
                 <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
                 <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="HTMLVALUE" ColumnName="HTMLVALUE" />
+                <ScalarProperty Name="RULENJOINAME" ColumnName="RULENJOINAME" />
+                <ScalarProperty Name="RULENAME" ColumnName="RULENAME" />
                 <ScalarProperty Name="RULEID" ColumnName="RULEID" />
                 <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
                 <ScalarProperty Name="CONCLUSION" ColumnName="CONCLUSION" />
@@ -5615,6 +5460,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
                 <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
                 <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
                 <ScalarProperty Name="PARENTID" ColumnName="PARENTID" />
+                <ScalarProperty Name="INPUTSTATE" ColumnName="INPUTSTATE" />
                 <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
                 <ScalarProperty Name="UNCERTAINTY_MENU" ColumnName="UNCERTAINTY_MENU" />
                 <ScalarProperty Name="IS_UNCERTAINTY" ColumnName="IS_UNCERTAINTY" />
@@ -5646,435 +5492,14 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="SCHEME_RULE">
             <EntityTypeMapping TypeName="Model.SCHEME_RULE">
               <MappingFragment StoreEntitySet="SCHEME_RULE">
-                <ScalarProperty Name="TEST_ITEM_FORMATID" ColumnName="TEST_ITEM_FORMATID" />
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="HTMLVALUE" ColumnName="HTMLVALUE" />
                 <ScalarProperty Name="SCHEMEID" ColumnName="SCHEMEID" />
                 <ScalarProperty Name="RULEID" ColumnName="RULEID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TABLE_BODY_XY">
-            <EntityTypeMapping TypeName="Model.TABLE_BODY_XY">
-              <MappingFragment StoreEntitySet="TABLE_BODY_XY">
-                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
-                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
-                <ScalarProperty Name="TEST_ITEM_FORMATID" ColumnName="TEST_ITEM_FORMATID" />
-                <ScalarProperty Name="MERGE_Y" ColumnName="MERGE_Y" />
-                <ScalarProperty Name="DEFAULT_VALUE" ColumnName="DEFAULT_VALUE" />
-                <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
-                <ScalarProperty Name="Y" ColumnName="Y" />
-                <ScalarProperty Name="X" ColumnName="X" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TABLE_HEAD_XY">
-            <EntityTypeMapping TypeName="Model.TABLE_HEAD_XY">
-              <MappingFragment StoreEntitySet="TABLE_HEAD_XY">
-                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
-                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
-                <ScalarProperty Name="DEFAULT_VALUE" ColumnName="DEFAULT_VALUE" />
-                <ScalarProperty Name="TEST_ITEM_FORMATID" ColumnName="TEST_ITEM_FORMATID" />
-                <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
-                <ScalarProperty Name="COLUMN" ColumnName="COLUMN" />
-                <ScalarProperty Name="ROW" ColumnName="ROW" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TEST_ITEM_FORMAT">
-            <EntityTypeMapping TypeName="Model.TEST_ITEM_FORMAT">
-              <MappingFragment StoreEntitySet="TEST_ITEM_FORMAT">
-                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
-                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
-                <ScalarProperty Name="CHANNEL_NUMBER" ColumnName="CHANNEL_NUMBER" />
-                <ScalarProperty Name="COLUMN_COUNT" ColumnName="COLUMN_COUNT" />
-                <ScalarProperty Name="ROW_COUNT" ColumnName="ROW_COUNT" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="THREE_PHASE_UNCERTAINTY">
-            <EntityTypeMapping TypeName="Model.THREE_PHASE_UNCERTAINTY">
-              <MappingFragment StoreEntitySet="THREE_PHASE_UNCERTAINTY">
-                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
-                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
-                <ScalarProperty Name="RULEID" ColumnName="RULEID" />
-                <ScalarProperty Name="DEGREE3" ColumnName="DEGREE3" />
-                <ScalarProperty Name="DEGREE2" ColumnName="DEGREE2" />
-                <ScalarProperty Name="DEGREE1" ColumnName="DEGREE1" />
-                <ScalarProperty Name="DIGIT" ColumnName="DIGIT" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TRANSMITER_SIN">
-            <EntityTypeMapping TypeName="Model.TRANSMITER_SIN">
-              <MappingFragment StoreEntitySet="TRANSMITER_SIN">
-                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
-                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
-                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
-                <ScalarProperty Name="TRANSMITTER_HEADID" ColumnName="TRANSMITTER_HEADID" />
-                <ScalarProperty Name="REFERENCE_ERROR_UNIT" ColumnName="REFERENCE_ERROR_UNIT" />
-                <ScalarProperty Name="REFERENCE_ERROR" ColumnName="REFERENCE_ERROR" />
-                <ScalarProperty Name="ACTUAL_OUTPUT_VALUE_UNIT" ColumnName="ACTUAL_OUTPUT_VALUE_UNIT" />
-                <ScalarProperty Name="ACTUAL_OUTPUT_VALUE" ColumnName="ACTUAL_OUTPUT_VALUE" />
-                <ScalarProperty Name="STANDARD_OUTPUT_VALUE_UNIT" ColumnName="STANDARD_OUTPUT_VALUE_UNIT" />
-                <ScalarProperty Name="STANDARD_OUTPUT_VALUE" ColumnName="STANDARD_OUTPUT_VALUE" />
-                <ScalarProperty Name="TWO_INPUT_STANDARD_VALUE_UNIT" ColumnName="TWO_INPUT_STANDARD_VALUE_UNIT" />
-                <ScalarProperty Name="TWO_INPUT_STANDARD_VALUE" ColumnName="TWO_INPUT_STANDARD_VALUE" />
-                <ScalarProperty Name="SIN_UNIT" ColumnName="SIN_UNIT" />
-                <ScalarProperty Name="SIN" ColumnName="SIN" />
-                <ScalarProperty Name="TEST_POINT_UNIT" ColumnName="TEST_POINT_UNIT" />
-                <ScalarProperty Name="TEST_POINT" ColumnName="TEST_POINT" />
-                <ScalarProperty Name="GRADE" ColumnName="GRADE" />
-                <ScalarProperty Name="TEST_QUANTITY" ColumnName="TEST_QUANTITY" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TRANSMITTER_COS">
-            <EntityTypeMapping TypeName="Model.TRANSMITTER_COS">
-              <MappingFragment StoreEntitySet="TRANSMITTER_COS">
-                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
-                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
-                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
-                <ScalarProperty Name="TRANSMITTER_HEADID" ColumnName="TRANSMITTER_HEADID" />
-                <ScalarProperty Name="REFERENCE_ERROR_UNIT" ColumnName="REFERENCE_ERROR_UNIT" />
-                <ScalarProperty Name="REFERENCE_ERROR" ColumnName="REFERENCE_ERROR" />
-                <ScalarProperty Name="ACTUAL_OUTPUT_VALUE_UNIT" ColumnName="ACTUAL_OUTPUT_VALUE_UNIT" />
-                <ScalarProperty Name="ACTUAL_OUTPUT_VALUE" ColumnName="ACTUAL_OUTPUT_VALUE" />
-                <ScalarProperty Name="STANDARD_OUTPUT_VALUE_UNIT" ColumnName="STANDARD_OUTPUT_VALUE_UNIT" />
-                <ScalarProperty Name="STANDARD_OUTPUT_VALUE" ColumnName="STANDARD_OUTPUT_VALUE" />
-                <ScalarProperty Name="TWO_INPUT_STANDARD_VALUES_UNIT" ColumnName="TWO_INPUT_STANDARD_VALUES_UNIT" />
-                <ScalarProperty Name="TWO_INPUT_STANDARD_VALUES" ColumnName="TWO_INPUT_STANDARD_VALUES" />
-                <ScalarProperty Name="COS_UNIT" ColumnName="COS_UNIT" />
-                <ScalarProperty Name="COS" ColumnName="COS" />
-                <ScalarProperty Name="TEST_POINT_UNIT" ColumnName="TEST_POINT_UNIT" />
-                <ScalarProperty Name="TEST_POINT" ColumnName="TEST_POINT" />
-                <ScalarProperty Name="GRADE" ColumnName="GRADE" />
-                <ScalarProperty Name="TEST_QUANTITY" ColumnName="TEST_QUANTITY" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TRANSMITTER_FREQUENCY_PHASE">
-            <EntityTypeMapping TypeName="Model.TRANSMITTER_FREQUENCY_PHASE">
-              <MappingFragment StoreEntitySet="TRANSMITTER_FREQUENCY_PHASE">
-                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
-                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
-                <ScalarProperty Name="TRANSMITTER_HEADID" ColumnName="TRANSMITTER_HEADID" />
-                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
-                <ScalarProperty Name="REFERENCE_ERROR_UNIT" ColumnName="REFERENCE_ERROR_UNIT" />
-                <ScalarProperty Name="REFERENCE_ERROR" ColumnName="REFERENCE_ERROR" />
-                <ScalarProperty Name="ACTUAL_OUTPUT_VALUE_UNIT" ColumnName="ACTUAL_OUTPUT_VALUE_UNIT" />
-                <ScalarProperty Name="ACTUAL_OUTPUT_VALUE" ColumnName="ACTUAL_OUTPUT_VALUE" />
-                <ScalarProperty Name="STANDARD_OUTPUT_VALUE_UNIT" ColumnName="STANDARD_OUTPUT_VALUE_UNIT" />
-                <ScalarProperty Name="STANDARD_OUTPUT_VALUE" ColumnName="STANDARD_OUTPUT_VALUE" />
-                <ScalarProperty Name="TWO_INPUT_STANDARD_VALUES_UNIT" ColumnName="TWO_INPUT_STANDARD_VALUES_UNIT" />
-                <ScalarProperty Name="TWO_INPUT_STANDARD_VALUES" ColumnName="TWO_INPUT_STANDARD_VALUES" />
-                <ScalarProperty Name="TEST_POINT_UNIT" ColumnName="TEST_POINT_UNIT" />
-                <ScalarProperty Name="TEST_POINT" ColumnName="TEST_POINT" />
-                <ScalarProperty Name="GRADE" ColumnName="GRADE" />
-                <ScalarProperty Name="TEST_QUANTITY" ColumnName="TEST_QUANTITY" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TRANSMITTER_HEAD">
-            <EntityTypeMapping TypeName="Model.TRANSMITTER_HEAD">
-              <MappingFragment StoreEntitySet="TRANSMITTER_HEAD">
-                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
-                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
-                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
-                <ScalarProperty Name="In单位" ColumnName="In单位" />
-                <ScalarProperty Name="In" ColumnName="In" />
-                <ScalarProperty Name="Un单位" ColumnName="Un单位" />
-                <ScalarProperty Name="Un" ColumnName="Un" />
-                <ScalarProperty Name="通道" ColumnName="通道" />
-                <ScalarProperty Name="变送器输入结束单位" ColumnName="变送器输入结束单位" />
-                <ScalarProperty Name="变送器输入结束" ColumnName="变送器输入结束" />
-                <ScalarProperty Name="变送器输入开始单位" ColumnName="变送器输入开始单位" />
-                <ScalarProperty Name="变送器输入开始" ColumnName="变送器输入开始" />
-                <ScalarProperty Name="类型" ColumnName="类型" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TRANSMITTER_POWER_FACTOR">
-            <EntityTypeMapping TypeName="Model.TRANSMITTER_POWER_FACTOR">
-              <MappingFragment StoreEntitySet="TRANSMITTER_POWER_FACTOR">
-                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
-                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
-                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
-                <ScalarProperty Name="TRANSMITTER_HEADID" ColumnName="TRANSMITTER_HEADID" />
-                <ScalarProperty Name="REFERENCE_ERROR_UNIT" ColumnName="REFERENCE_ERROR_UNIT" />
-                <ScalarProperty Name="REFERENCE_ERROR" ColumnName="REFERENCE_ERROR" />
-                <ScalarProperty Name="ACTUAL_OUTPUT_VALUE_UNIT" ColumnName="ACTUAL_OUTPUT_VALUE_UNIT" />
-                <ScalarProperty Name="ACTUAL_OUTPUT_VALUE" ColumnName="ACTUAL_OUTPUT_VALUE" />
-                <ScalarProperty Name="STANDARD_OUTPUT_VALUE_UNIT" ColumnName="STANDARD_OUTPUT_VALUE_UNIT" />
-                <ScalarProperty Name="STANDARD_OUTPUT_VALUE" ColumnName="STANDARD_OUTPUT_VALUE" />
-                <ScalarProperty Name="TWO_INPUT_STANDARD_VALUES_UNIT" ColumnName="TWO_INPUT_STANDARD_VALUES_UNIT" />
-                <ScalarProperty Name="TWO_INPUT_STANDARD_VALUES" ColumnName="TWO_INPUT_STANDARD_VALUES" />
-                <ScalarProperty Name="A_UNIT" ColumnName="A_UNIT" />
-                <ScalarProperty Name="A" ColumnName="A" />
-                <ScalarProperty Name="U_UNIT" ColumnName="U_UNIT" />
-                <ScalarProperty Name="U" ColumnName="U" />
-                <ScalarProperty Name="TEST_POINT_UNIT" ColumnName="TEST_POINT_UNIT" />
-                <ScalarProperty Name="TEST_POINT" ColumnName="TEST_POINT" />
-                <ScalarProperty Name="GRADE" ColumnName="GRADE" />
-                <ScalarProperty Name="TEST_QUANTITY" ColumnName="TEST_QUANTITY" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TRANSMITTER_RANGE">
-            <EntityTypeMapping TypeName="Model.TRANSMITTER_RANGE">
-              <MappingFragment StoreEntitySet="TRANSMITTER_RANGE">
-                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
-                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
-                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
-                <ScalarProperty Name="OUTPUT_END_UNIT" ColumnName="OUTPUT_END_UNIT" />
-                <ScalarProperty Name="OUTPUT_END" ColumnName="OUTPUT_END" />
-                <ScalarProperty Name="OUTPUT_START_UNIT" ColumnName="OUTPUT_START_UNIT" />
-                <ScalarProperty Name="OUTPUT_START" ColumnName="OUTPUT_START" />
-                <ScalarProperty Name="INPUT_END_UNIT" ColumnName="INPUT_END_UNIT" />
-                <ScalarProperty Name="INPUT_END" ColumnName="INPUT_END" />
-                <ScalarProperty Name="INPUT_START_UNIT" ColumnName="INPUT_START_UNIT" />
-                <ScalarProperty Name="INPUT_START" ColumnName="INPUT_START" />
-                <ScalarProperty Name="TEST_QUANTITY" ColumnName="TEST_QUANTITY" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UNCERTAINTY">
-            <EntityTypeMapping TypeName="Model.UNCERTAINTY">
-              <MappingFragment StoreEntitySet="UNCERTAINTY">
-                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
-                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
-                <ScalarProperty Name="RULEID" ColumnName="RULEID" />
-                <ScalarProperty Name="KPI_2_UNIT" ColumnName="KPI_2_UNIT" />
-                <ScalarProperty Name="KPI_2" ColumnName="KPI_2" />
-                <ScalarProperty Name="KPI_1_UNIT" ColumnName="KPI_1_UNIT" />
-                <ScalarProperty Name="KPI_1" ColumnName="KPI_1" />
-                <ScalarProperty Name="RANGE_UNIT" ColumnName="RANGE_UNIT" />
-                <ScalarProperty Name="RANGE" ColumnName="RANGE" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UNCERTAINTY2_HZ">
-            <EntityTypeMapping TypeName="Model.UNCERTAINTY2_HZ">
-              <MappingFragment StoreEntitySet="UNCERTAINTY2_HZ">
-                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
-                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
-                <ScalarProperty Name="RULEID" ColumnName="RULEID" />
-                <ScalarProperty Name="INDEX2_UNIT" ColumnName="INDEX2_UNIT" />
-                <ScalarProperty Name="INDEX2" ColumnName="INDEX2" />
-                <ScalarProperty Name="INDEX1_UNIT" ColumnName="INDEX1_UNIT" />
-                <ScalarProperty Name="INDEX1" ColumnName="INDEX1" />
-                <ScalarProperty Name="MAX_FREQUENCY_UNIT" ColumnName="MAX_FREQUENCY_UNIT" />
-                <ScalarProperty Name="MAX_FREQUENCY" ColumnName="MAX_FREQUENCY" />
-                <ScalarProperty Name="MIN_FREQUENCY_UNIT" ColumnName="MIN_FREQUENCY_UNIT" />
-                <ScalarProperty Name="MIN_FREQUENCY" ColumnName="MIN_FREQUENCY" />
-                <ScalarProperty Name="RANGE_UNIT" ColumnName="RANGE_UNIT" />
-                <ScalarProperty Name="RANGE" ColumnName="RANGE" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UNCERTAINTYPARAMETERMANAGEMENT">
-            <EntityTypeMapping TypeName="Model.UNCERTAINTYPARAMETERMANAGEMENT">
-              <MappingFragment StoreEntitySet="UNCERTAINTYPARAMETERMANAGEMENT">
-                <ScalarProperty Name="RULEID" ColumnName="RULEID" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
-                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
-                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
-                <ScalarProperty Name="UNCERTAINTYDEGREE" ColumnName="UNCERTAINTYDEGREE" />
-                <ScalarProperty Name="k" ColumnName="k" />
-                <ScalarProperty Name="ERRORDISTRIBUTION" ColumnName="ERRORDISTRIBUTION" />
-                <ScalarProperty Name="LIMIT_VALUE" ColumnName="LIMIT_VALUE" />
-                <ScalarProperty Name="SOURCEOFERROR" ColumnName="SOURCEOFERROR" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UNDERTAKE_LABORATORY">
-            <EntityTypeMapping TypeName="Model.UNDERTAKE_LABORATORY">
-              <MappingFragment StoreEntitySet="UNDERTAKE_LABORATORY">
-                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
-                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VBAOGAODAYIN">
-            <EntityTypeMapping TypeName="Model.VBAOGAODAYIN">
-              <MappingFragment StoreEntitySet="VBAOGAODAYIN">
-                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
-                <ScalarProperty Name="PRINTSTATUS" ColumnName="PRINTSTATUS" />
-                <ScalarProperty Name="BAR_CODE_NUM" ColumnName="BAR_CODE_NUM" />
-                <ScalarProperty Name="APPROVALDATE" ColumnName="APPROVALDATE" />
-                <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
-                <ScalarProperty Name="CONCLUSION" ColumnName="CONCLUSION" />
-                <ScalarProperty Name="CONCLUSION_EXPLAIN" ColumnName="CONCLUSION_EXPLAIN" />
-                <ScalarProperty Name="QUALIFICATIONS" ColumnName="QUALIFICATIONS" />
-                <ScalarProperty Name="CERTIFICATE_CATEGORY" ColumnName="CERTIFICATE_CATEGORY" />
-                <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
-                <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
-                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
-                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
-                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
-                <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VQIJULINGQU1">
-            <EntityTypeMapping TypeName="Model.VQIJULINGQU1">
-              <MappingFragment StoreEntitySet="VQIJULINGQU1">
-                <ScalarProperty Name="REPORTCREATEPERSON" ColumnName="REPORTCREATEPERSON" />
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
-                <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
-                <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
-                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VQIJULINGQU2">
-            <EntityTypeMapping TypeName="Model.VQIJULINGQU2">
-              <MappingFragment StoreEntitySet="VQIJULINGQU2">
-                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
-                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
-                <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
-                <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
-                <ScalarProperty Name="APPLIANCE_RECIVE" ColumnName="APPLIANCE_RECIVE" />
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
-                <ScalarProperty Name="ATTACHMENT" ColumnName="ATTACHMENT" />
-                <ScalarProperty Name="NUM" ColumnName="NUM" />
-                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
-                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VRUKU">
-            <EntityTypeMapping TypeName="Model.VRUKU">
-              <MappingFragment StoreEntitySet="VRUKU">
-                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
-                <ScalarProperty Name="STORAGEINSTRUCTI_STATU" ColumnName="STORAGEINSTRUCTI_STATU" />
-                <ScalarProperty Name="APPROVALDATE" ColumnName="APPROVALDATE" />
-                <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
-                <ScalarProperty Name="STORAGEINSTRUCTIONS" ColumnName="STORAGEINSTRUCTIONS" />
-                <ScalarProperty Name="ORDER_STATUS" ColumnName="ORDER_STATUS" />
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
-                <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
-                <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
-                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
-                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
-                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
-                <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VSHENPI">
-            <EntityTypeMapping TypeName="Model.VSHENPI">
-              <MappingFragment StoreEntitySet="VSHENPI">
-                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
-                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
-                <ScalarProperty Name="APPROVALISAGGREY" ColumnName="APPROVALISAGGREY" />
-                <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
-                <ScalarProperty Name="CONCLUSION" ColumnName="CONCLUSION" />
-                <ScalarProperty Name="CONCLUSION_EXPLAIN" ColumnName="CONCLUSION_EXPLAIN" />
-                <ScalarProperty Name="QUALIFICATIONS" ColumnName="QUALIFICATIONS" />
-                <ScalarProperty Name="CERTIFICATE_CATEGORY" ColumnName="CERTIFICATE_CATEGORY" />
-                <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
-                <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
-                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
-                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
-                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
-                <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="METERING_STANDARD_DEVICEPREPAR" TypeName="Model.METERING_STANDARD_DEVICEPREPAR" StoreEntitySet="METERING_STANDARD_DEVICEPREPAR">
-            <EndProperty Name="PREPARE_SCHEME">
-              <ScalarProperty Name="ID" ColumnName="PREPARE_SCHEME" />
-            </EndProperty>
-            <EndProperty Name="METERING_STANDARD_DEVICE">
-              <ScalarProperty Name="ID" ColumnName="METERING_STANDARD_DEVICEID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <EntitySetMapping Name="VJIANDINGRENWU">
-            <EntityTypeMapping TypeName="Model.VJIANDINGRENWU">
-              <MappingFragment StoreEntitySet="VJIANDINGRENWU">
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
-                <ScalarProperty Name="EQUIPMENT_STATUS_VALUUMN" ColumnName="EQUIPMENT_STATUS_VALUUMN" />
-                <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
-                <ScalarProperty Name="ISOVERDUE" ColumnName="ISOVERDUE" />
-                <ScalarProperty Name="INSPECTION_ENTERPRISE" ColumnName="INSPECTION_ENTERPRISE" />
-                <ScalarProperty Name="APPROVAL" ColumnName="APPROVAL" />
-                <ScalarProperty Name="REPORTSTATUS" ColumnName="REPORTSTATUS" />
-                <ScalarProperty Name="STATE" ColumnName="STATE" />
-                <ScalarProperty Name="OVERDUE" ColumnName="OVERDUE" />
-                <ScalarProperty Name="APPLIANCE_PROGRESS" ColumnName="APPLIANCE_PROGRESS" />
-                <ScalarProperty Name="ORDER_STATUS" ColumnName="ORDER_STATUS" />
-                <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
-                <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
-                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
-                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
-                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
-                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FileUploader">
-            <EntityTypeMapping TypeName="Model.FileUploader">
-              <MappingFragment StoreEntitySet="FileUploader">
-                <ScalarProperty Name="CreatePerson" ColumnName="CreatePerson" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Suffix" ColumnName="Suffix" />
-                <ScalarProperty Name="FullPath" ColumnName="FullPath" />
-                <ScalarProperty Name="Path" ColumnName="Path" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6352,6 +5777,388 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="THREE_PHASE_UNCERTAINTY">
+            <EntityTypeMapping TypeName="Model.THREE_PHASE_UNCERTAINTY">
+              <MappingFragment StoreEntitySet="THREE_PHASE_UNCERTAINTY">
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="RULEID" ColumnName="RULEID" />
+                <ScalarProperty Name="DEGREE3" ColumnName="DEGREE3" />
+                <ScalarProperty Name="DEGREE2" ColumnName="DEGREE2" />
+                <ScalarProperty Name="DEGREE1" ColumnName="DEGREE1" />
+                <ScalarProperty Name="DIGIT" ColumnName="DIGIT" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSMITER_SIN">
+            <EntityTypeMapping TypeName="Model.TRANSMITER_SIN">
+              <MappingFragment StoreEntitySet="TRANSMITER_SIN">
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
+                <ScalarProperty Name="TRANSMITTER_HEADID" ColumnName="TRANSMITTER_HEADID" />
+                <ScalarProperty Name="REFERENCE_ERROR_UNIT" ColumnName="REFERENCE_ERROR_UNIT" />
+                <ScalarProperty Name="REFERENCE_ERROR" ColumnName="REFERENCE_ERROR" />
+                <ScalarProperty Name="ACTUAL_OUTPUT_VALUE_UNIT" ColumnName="ACTUAL_OUTPUT_VALUE_UNIT" />
+                <ScalarProperty Name="ACTUAL_OUTPUT_VALUE" ColumnName="ACTUAL_OUTPUT_VALUE" />
+                <ScalarProperty Name="STANDARD_OUTPUT_VALUE_UNIT" ColumnName="STANDARD_OUTPUT_VALUE_UNIT" />
+                <ScalarProperty Name="STANDARD_OUTPUT_VALUE" ColumnName="STANDARD_OUTPUT_VALUE" />
+                <ScalarProperty Name="TWO_INPUT_STANDARD_VALUE_UNIT" ColumnName="TWO_INPUT_STANDARD_VALUE_UNIT" />
+                <ScalarProperty Name="TWO_INPUT_STANDARD_VALUE" ColumnName="TWO_INPUT_STANDARD_VALUE" />
+                <ScalarProperty Name="SIN_UNIT" ColumnName="SIN_UNIT" />
+                <ScalarProperty Name="SIN" ColumnName="SIN" />
+                <ScalarProperty Name="TEST_POINT_UNIT" ColumnName="TEST_POINT_UNIT" />
+                <ScalarProperty Name="TEST_POINT" ColumnName="TEST_POINT" />
+                <ScalarProperty Name="GRADE" ColumnName="GRADE" />
+                <ScalarProperty Name="TEST_QUANTITY" ColumnName="TEST_QUANTITY" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSMITTER_COS">
+            <EntityTypeMapping TypeName="Model.TRANSMITTER_COS">
+              <MappingFragment StoreEntitySet="TRANSMITTER_COS">
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
+                <ScalarProperty Name="TRANSMITTER_HEADID" ColumnName="TRANSMITTER_HEADID" />
+                <ScalarProperty Name="REFERENCE_ERROR_UNIT" ColumnName="REFERENCE_ERROR_UNIT" />
+                <ScalarProperty Name="REFERENCE_ERROR" ColumnName="REFERENCE_ERROR" />
+                <ScalarProperty Name="ACTUAL_OUTPUT_VALUE_UNIT" ColumnName="ACTUAL_OUTPUT_VALUE_UNIT" />
+                <ScalarProperty Name="ACTUAL_OUTPUT_VALUE" ColumnName="ACTUAL_OUTPUT_VALUE" />
+                <ScalarProperty Name="STANDARD_OUTPUT_VALUE_UNIT" ColumnName="STANDARD_OUTPUT_VALUE_UNIT" />
+                <ScalarProperty Name="STANDARD_OUTPUT_VALUE" ColumnName="STANDARD_OUTPUT_VALUE" />
+                <ScalarProperty Name="TWO_INPUT_STANDARD_VALUES_UNIT" ColumnName="TWO_INPUT_STANDARD_VALUES_UNIT" />
+                <ScalarProperty Name="TWO_INPUT_STANDARD_VALUES" ColumnName="TWO_INPUT_STANDARD_VALUES" />
+                <ScalarProperty Name="COS_UNIT" ColumnName="COS_UNIT" />
+                <ScalarProperty Name="COS" ColumnName="COS" />
+                <ScalarProperty Name="TEST_POINT_UNIT" ColumnName="TEST_POINT_UNIT" />
+                <ScalarProperty Name="TEST_POINT" ColumnName="TEST_POINT" />
+                <ScalarProperty Name="GRADE" ColumnName="GRADE" />
+                <ScalarProperty Name="TEST_QUANTITY" ColumnName="TEST_QUANTITY" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSMITTER_FREQUENCY_PHASE">
+            <EntityTypeMapping TypeName="Model.TRANSMITTER_FREQUENCY_PHASE">
+              <MappingFragment StoreEntitySet="TRANSMITTER_FREQUENCY_PHASE">
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="TRANSMITTER_HEADID" ColumnName="TRANSMITTER_HEADID" />
+                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
+                <ScalarProperty Name="REFERENCE_ERROR_UNIT" ColumnName="REFERENCE_ERROR_UNIT" />
+                <ScalarProperty Name="REFERENCE_ERROR" ColumnName="REFERENCE_ERROR" />
+                <ScalarProperty Name="ACTUAL_OUTPUT_VALUE_UNIT" ColumnName="ACTUAL_OUTPUT_VALUE_UNIT" />
+                <ScalarProperty Name="ACTUAL_OUTPUT_VALUE" ColumnName="ACTUAL_OUTPUT_VALUE" />
+                <ScalarProperty Name="STANDARD_OUTPUT_VALUE_UNIT" ColumnName="STANDARD_OUTPUT_VALUE_UNIT" />
+                <ScalarProperty Name="STANDARD_OUTPUT_VALUE" ColumnName="STANDARD_OUTPUT_VALUE" />
+                <ScalarProperty Name="TWO_INPUT_STANDARD_VALUES_UNIT" ColumnName="TWO_INPUT_STANDARD_VALUES_UNIT" />
+                <ScalarProperty Name="TWO_INPUT_STANDARD_VALUES" ColumnName="TWO_INPUT_STANDARD_VALUES" />
+                <ScalarProperty Name="TEST_POINT_UNIT" ColumnName="TEST_POINT_UNIT" />
+                <ScalarProperty Name="TEST_POINT" ColumnName="TEST_POINT" />
+                <ScalarProperty Name="GRADE" ColumnName="GRADE" />
+                <ScalarProperty Name="TEST_QUANTITY" ColumnName="TEST_QUANTITY" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSMITTER_HEAD">
+            <EntityTypeMapping TypeName="Model.TRANSMITTER_HEAD">
+              <MappingFragment StoreEntitySet="TRANSMITTER_HEAD">
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
+                <ScalarProperty Name="In单位" ColumnName="In单位" />
+                <ScalarProperty Name="In" ColumnName="In" />
+                <ScalarProperty Name="Un单位" ColumnName="Un单位" />
+                <ScalarProperty Name="Un" ColumnName="Un" />
+                <ScalarProperty Name="通道" ColumnName="通道" />
+                <ScalarProperty Name="变送器输入结束单位" ColumnName="变送器输入结束单位" />
+                <ScalarProperty Name="变送器输入结束" ColumnName="变送器输入结束" />
+                <ScalarProperty Name="变送器输入开始单位" ColumnName="变送器输入开始单位" />
+                <ScalarProperty Name="变送器输入开始" ColumnName="变送器输入开始" />
+                <ScalarProperty Name="类型" ColumnName="类型" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSMITTER_POWER_FACTOR">
+            <EntityTypeMapping TypeName="Model.TRANSMITTER_POWER_FACTOR">
+              <MappingFragment StoreEntitySet="TRANSMITTER_POWER_FACTOR">
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
+                <ScalarProperty Name="TRANSMITTER_HEADID" ColumnName="TRANSMITTER_HEADID" />
+                <ScalarProperty Name="REFERENCE_ERROR_UNIT" ColumnName="REFERENCE_ERROR_UNIT" />
+                <ScalarProperty Name="REFERENCE_ERROR" ColumnName="REFERENCE_ERROR" />
+                <ScalarProperty Name="ACTUAL_OUTPUT_VALUE_UNIT" ColumnName="ACTUAL_OUTPUT_VALUE_UNIT" />
+                <ScalarProperty Name="ACTUAL_OUTPUT_VALUE" ColumnName="ACTUAL_OUTPUT_VALUE" />
+                <ScalarProperty Name="STANDARD_OUTPUT_VALUE_UNIT" ColumnName="STANDARD_OUTPUT_VALUE_UNIT" />
+                <ScalarProperty Name="STANDARD_OUTPUT_VALUE" ColumnName="STANDARD_OUTPUT_VALUE" />
+                <ScalarProperty Name="TWO_INPUT_STANDARD_VALUES_UNIT" ColumnName="TWO_INPUT_STANDARD_VALUES_UNIT" />
+                <ScalarProperty Name="TWO_INPUT_STANDARD_VALUES" ColumnName="TWO_INPUT_STANDARD_VALUES" />
+                <ScalarProperty Name="A_UNIT" ColumnName="A_UNIT" />
+                <ScalarProperty Name="A" ColumnName="A" />
+                <ScalarProperty Name="U_UNIT" ColumnName="U_UNIT" />
+                <ScalarProperty Name="U" ColumnName="U" />
+                <ScalarProperty Name="TEST_POINT_UNIT" ColumnName="TEST_POINT_UNIT" />
+                <ScalarProperty Name="TEST_POINT" ColumnName="TEST_POINT" />
+                <ScalarProperty Name="GRADE" ColumnName="GRADE" />
+                <ScalarProperty Name="TEST_QUANTITY" ColumnName="TEST_QUANTITY" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSMITTER_RANGE">
+            <EntityTypeMapping TypeName="Model.TRANSMITTER_RANGE">
+              <MappingFragment StoreEntitySet="TRANSMITTER_RANGE">
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="OUTPUT_END_UNIT" ColumnName="OUTPUT_END_UNIT" />
+                <ScalarProperty Name="OUTPUT_END" ColumnName="OUTPUT_END" />
+                <ScalarProperty Name="OUTPUT_START_UNIT" ColumnName="OUTPUT_START_UNIT" />
+                <ScalarProperty Name="OUTPUT_START" ColumnName="OUTPUT_START" />
+                <ScalarProperty Name="INPUT_END_UNIT" ColumnName="INPUT_END_UNIT" />
+                <ScalarProperty Name="INPUT_END" ColumnName="INPUT_END" />
+                <ScalarProperty Name="INPUT_START_UNIT" ColumnName="INPUT_START_UNIT" />
+                <ScalarProperty Name="INPUT_START" ColumnName="INPUT_START" />
+                <ScalarProperty Name="TEST_QUANTITY" ColumnName="TEST_QUANTITY" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UNCERTAINTY">
+            <EntityTypeMapping TypeName="Model.UNCERTAINTY">
+              <MappingFragment StoreEntitySet="UNCERTAINTY">
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="RULEID" ColumnName="RULEID" />
+                <ScalarProperty Name="KPI_2_UNIT" ColumnName="KPI_2_UNIT" />
+                <ScalarProperty Name="KPI_2" ColumnName="KPI_2" />
+                <ScalarProperty Name="KPI_1_UNIT" ColumnName="KPI_1_UNIT" />
+                <ScalarProperty Name="KPI_1" ColumnName="KPI_1" />
+                <ScalarProperty Name="RANGE_UNIT" ColumnName="RANGE_UNIT" />
+                <ScalarProperty Name="RANGE" ColumnName="RANGE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UNCERTAINTY2_HZ">
+            <EntityTypeMapping TypeName="Model.UNCERTAINTY2_HZ">
+              <MappingFragment StoreEntitySet="UNCERTAINTY2_HZ">
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="RULEID" ColumnName="RULEID" />
+                <ScalarProperty Name="INDEX2_UNIT" ColumnName="INDEX2_UNIT" />
+                <ScalarProperty Name="INDEX2" ColumnName="INDEX2" />
+                <ScalarProperty Name="INDEX1_UNIT" ColumnName="INDEX1_UNIT" />
+                <ScalarProperty Name="INDEX1" ColumnName="INDEX1" />
+                <ScalarProperty Name="MAX_FREQUENCY_UNIT" ColumnName="MAX_FREQUENCY_UNIT" />
+                <ScalarProperty Name="MAX_FREQUENCY" ColumnName="MAX_FREQUENCY" />
+                <ScalarProperty Name="MIN_FREQUENCY_UNIT" ColumnName="MIN_FREQUENCY_UNIT" />
+                <ScalarProperty Name="MIN_FREQUENCY" ColumnName="MIN_FREQUENCY" />
+                <ScalarProperty Name="RANGE_UNIT" ColumnName="RANGE_UNIT" />
+                <ScalarProperty Name="RANGE" ColumnName="RANGE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UNCERTAINTYPARAMETERMANAGEMENT">
+            <EntityTypeMapping TypeName="Model.UNCERTAINTYPARAMETERMANAGEMENT">
+              <MappingFragment StoreEntitySet="UNCERTAINTYPARAMETERMANAGEMENT">
+                <ScalarProperty Name="RULEID" ColumnName="RULEID" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="UNCERTAINTYDEGREE" ColumnName="UNCERTAINTYDEGREE" />
+                <ScalarProperty Name="k" ColumnName="k" />
+                <ScalarProperty Name="ERRORDISTRIBUTION" ColumnName="ERRORDISTRIBUTION" />
+                <ScalarProperty Name="LIMIT_VALUE" ColumnName="LIMIT_VALUE" />
+                <ScalarProperty Name="SOURCEOFERROR" ColumnName="SOURCEOFERROR" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UNDERTAKE_LABORATORY">
+            <EntityTypeMapping TypeName="Model.UNDERTAKE_LABORATORY">
+              <MappingFragment StoreEntitySet="UNDERTAKE_LABORATORY">
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VBAOGAODAYIN">
+            <EntityTypeMapping TypeName="Model.VBAOGAODAYIN">
+              <MappingFragment StoreEntitySet="VBAOGAODAYIN">
+                <ScalarProperty Name="PRINTSTATUS" ColumnName="PRINTSTATUS" />
+                <ScalarProperty Name="BAR_CODE_NUM" ColumnName="BAR_CODE_NUM" />
+                <ScalarProperty Name="APPROVALDATE" ColumnName="APPROVALDATE" />
+                <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
+                <ScalarProperty Name="CONCLUSION" ColumnName="CONCLUSION" />
+                <ScalarProperty Name="CONCLUSION_EXPLAIN" ColumnName="CONCLUSION_EXPLAIN" />
+                <ScalarProperty Name="QUALIFICATIONS" ColumnName="QUALIFICATIONS" />
+                <ScalarProperty Name="CERTIFICATE_CATEGORY" ColumnName="CERTIFICATE_CATEGORY" />
+                <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
+                <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
+                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
+                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
+                <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VJIANDINGRENWU">
+            <EntityTypeMapping TypeName="Model.VJIANDINGRENWU">
+              <MappingFragment StoreEntitySet="VJIANDINGRENWU">
+                <ScalarProperty Name="EQUIPMENT_STATUS_VALUUMN" ColumnName="EQUIPMENT_STATUS_VALUUMN" />
+                <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
+                <ScalarProperty Name="ISOVERDUE" ColumnName="ISOVERDUE" />
+                <ScalarProperty Name="INSPECTION_ENTERPRISE" ColumnName="INSPECTION_ENTERPRISE" />
+                <ScalarProperty Name="APPROVAL" ColumnName="APPROVAL" />
+                <ScalarProperty Name="REPORTSTATUS" ColumnName="REPORTSTATUS" />
+                <ScalarProperty Name="STATE" ColumnName="STATE" />
+                <ScalarProperty Name="OVERDUE" ColumnName="OVERDUE" />
+                <ScalarProperty Name="APPLIANCE_PROGRESS" ColumnName="APPLIANCE_PROGRESS" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="ORDER_STATUS" ColumnName="ORDER_STATUS" />
+                <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
+                <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
+                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
+                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VQIJULINGQU1">
+            <EntityTypeMapping TypeName="Model.VQIJULINGQU1">
+              <MappingFragment StoreEntitySet="VQIJULINGQU1">
+                <ScalarProperty Name="REPORTCREATEPERSON" ColumnName="REPORTCREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
+                <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
+                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VQIJULINGQU2">
+            <EntityTypeMapping TypeName="Model.VQIJULINGQU2">
+              <MappingFragment StoreEntitySet="VQIJULINGQU2">
+                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
+                <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+                <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
+                <ScalarProperty Name="APPLIANCE_RECIVE" ColumnName="APPLIANCE_RECIVE" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ATTACHMENT" ColumnName="ATTACHMENT" />
+                <ScalarProperty Name="NUM" ColumnName="NUM" />
+                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VRUKU">
+            <EntityTypeMapping TypeName="Model.VRUKU">
+              <MappingFragment StoreEntitySet="VRUKU">
+                <ScalarProperty Name="STORAGEINSTRUCTI_STATU" ColumnName="STORAGEINSTRUCTI_STATU" />
+                <ScalarProperty Name="APPROVALDATE" ColumnName="APPROVALDATE" />
+                <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
+                <ScalarProperty Name="STORAGEINSTRUCTIONS" ColumnName="STORAGEINSTRUCTIONS" />
+                <ScalarProperty Name="ORDER_STATUS" ColumnName="ORDER_STATUS" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
+                <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
+                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
+                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
+                <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSHENHE">
+            <EntityTypeMapping TypeName="Model.VSHENHE">
+              <MappingFragment StoreEntitySet="VSHENHE">
+                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
+                <ScalarProperty Name="ISAGGREY" ColumnName="ISAGGREY" />
+                <ScalarProperty Name="CONCLUSION" ColumnName="CONCLUSION" />
+                <ScalarProperty Name="CONCLUSION_EXPLAIN" ColumnName="CONCLUSION_EXPLAIN" />
+                <ScalarProperty Name="QUALIFICATIONS" ColumnName="QUALIFICATIONS" />
+                <ScalarProperty Name="CERTIFICATE_CATEGORY" ColumnName="CERTIFICATE_CATEGORY" />
+                <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
+                <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
+                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
+                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
+                <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSHENPI">
+            <EntityTypeMapping TypeName="Model.VSHENPI">
+              <MappingFragment StoreEntitySet="VSHENPI">
+                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
+                <ScalarProperty Name="APPROVALISAGGREY" ColumnName="APPROVALISAGGREY" />
+                <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
+                <ScalarProperty Name="CONCLUSION" ColumnName="CONCLUSION" />
+                <ScalarProperty Name="CONCLUSION_EXPLAIN" ColumnName="CONCLUSION_EXPLAIN" />
+                <ScalarProperty Name="QUALIFICATIONS" ColumnName="QUALIFICATIONS" />
+                <ScalarProperty Name="CERTIFICATE_CATEGORY" ColumnName="CERTIFICATE_CATEGORY" />
+                <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
+                <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
+                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
+                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
+                <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="METERING_STANDARD_DEVICEPREPAR" TypeName="Model.METERING_STANDARD_DEVICEPREPAR" StoreEntitySet="METERING_STANDARD_DEVICEPREPAR">
+            <EndProperty Name="PREPARE_SCHEME">
+              <ScalarProperty Name="ID" ColumnName="PREPARE_SCHEME" />
+            </EndProperty>
+            <EndProperty Name="METERING_STANDARD_DEVICE">
+              <ScalarProperty Name="ID" ColumnName="METERING_STANDARD_DEVICEID" />
+            </EndProperty>
+          </AssociationSetMapping>
           <AssociationSetMapping Name="SysDocumentSysDepartment" TypeName="Model.SysDocumentSysDepartment" StoreEntitySet="SysDocumentSysDepartment">
             <EndProperty Name="SysDepartment">
               <ScalarProperty Name="Id" ColumnName="SysDepartmentId" />
@@ -6384,26 +6191,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
               <ScalarProperty Name="Id" ColumnName="SysPersonId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="VSHENHE">
-            <EntityTypeMapping TypeName="Model.VSHENHE">
-              <MappingFragment StoreEntitySet="VSHENHE">
-                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
-                <ScalarProperty Name="ISAGGREY" ColumnName="ISAGGREY" />
-                <ScalarProperty Name="CONCLUSION" ColumnName="CONCLUSION" />
-                <ScalarProperty Name="CONCLUSION_EXPLAIN" ColumnName="CONCLUSION_EXPLAIN" />
-                <ScalarProperty Name="QUALIFICATIONS" ColumnName="QUALIFICATIONS" />
-                <ScalarProperty Name="CERTIFICATE_CATEGORY" ColumnName="CERTIFICATE_CATEGORY" />
-                <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
-                <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
-                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
-                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
-                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
-                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
-                <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

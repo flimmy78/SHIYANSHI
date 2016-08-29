@@ -35,7 +35,7 @@ namespace Langben.App.Controllers
                 {
                     ID = s.ID
 					,NAME = s.NAME
-					,CONCLUSION = s.CONCLUSION
+				//	,CONCLUSION = s.CONCLUSION
 					,PREPARE_SCHEMEID = s.PREPARE_SCHEMEID
 					,CREATETIME = s.CREATETIME
 					,CREATEPERSON = s.CREATEPERSON
