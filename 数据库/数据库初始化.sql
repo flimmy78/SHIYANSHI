@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 11g                           */
-/* Created on:     2016/8/29 10:51:33                           */
+/* Created on:     2016/8/29 11:56:21                           */
 /*==============================================================*/
 
 
@@ -365,6 +365,8 @@ create table APPLIANCE_DETAIL_INFORMATION
    OVERDUE              VARCHAR2(200),
    STORAGEINSTRUCTIONS  VARCHAR2(4000),
    STORAGEINSTRUCTI_STATU VARCHAR2(200),
+   EQUIPMENT_STATUS_VALUUMN VARCHAR2(200),
+   RETURN_INSTRUCTIONS  VARCHAR2(4000),
    constraint PK_APPLIANCE_DETAIL_INFORMATIO primary key (ID)
 );
 
@@ -403,6 +405,9 @@ comment on column APPLIANCE_DETAIL_INFORMATION.ISOVERDUE is
 
 comment on column APPLIANCE_DETAIL_INFORMATION.STORAGEINSTRUCTI_STATU is
 'DropDown';
+
+comment on column APPLIANCE_DETAIL_INFORMATION.EQUIPMENT_STATUS_VALUUMN is
+'器具状态值用来进行排序';
 
 /*==============================================================*/
 /* Table: APPLIANCE_LABORATORY                                  */
@@ -1533,11 +1538,11 @@ create table UNDERTAKE_LABORATORY
 /* View: VBAOGAODAYIN                                           */
 /*==============================================================*/
 create or replace view VBAOGAODAYIN(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, UNDERTAKE_LABORATORYID, APPROVALDATE, BAR_CODE_NUM, PRINTSTATUS) as
-select a.ID,
+select d.ID,
   d.REPORTNUMBER,             --报告编号
   a.ORDER_NUMBER,                  --委托单号
   b.APPLIANCE_NAME,                --器具名称
-  b.MODEL,                         --型号
+  b.VERSION,                         --型号
   b.FACTORY_NUM,                   --出厂编号
   a.CERTIFICATE_ENTERPRISE,        --证书单位
   a.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
@@ -1583,13 +1588,13 @@ select a.ID,
   d.APPROVALDATE,           --批准日期
   b.BAR_CODE_NUM,           --条形码
   d.PRINTSTATUS             --打印状态
-from ORDER_TASK_INFORMATION a
-LEFT join APPLIANCE_DETAIL_INFORMATION b
-on a.id=b.ORDER_TASK_INFORMATIONID
+from PREPARE_SCHEME d
 LEFT join APPLIANCE_LABORATORY c
-on b.id=c.APPLIANCE_DETAIL_INFORMATIOID
-LEFT join PREPARE_SCHEME d
 on c.PREPARE_SCHEMEID=d.id
+LEFT join APPLIANCE_DETAIL_INFORMATION b
+on b.id=c.APPLIANCE_DETAIL_INFORMATIOID
+LEFT join ORDER_TASK_INFORMATION a 
+on a.id=b.ORDER_TASK_INFORMATIONID
 with read only;
 
 comment on column VBAOGAODAYIN.REPORTNUMBER is
@@ -1750,11 +1755,11 @@ with read only;
 /* View: VRUKU                                                  */
 /*==============================================================*/
 create or replace view VRUKU(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, NAME, ORDER_STATUS, STORAGEINSTRUCTIONS, UNDERTAKE_LABORATORYID, APPROVALDATE, STORAGEINSTRUCTI_STATU) as
-select a.ID,
+select b.ID,
   d.REPORTNUMBER,             --报告编号
   a.ORDER_NUMBER,                  --委托单号
   b.APPLIANCE_NAME,                --器具名称
-  b.MODEL,                         --型号
+  b.VERSION,                         --型号
   b.FACTORY_NUM,                   --出厂编号
   a.CERTIFICATE_ENTERPRISE,        --证书单位
   a.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
@@ -1764,8 +1769,8 @@ select a.ID,
   c.UNDERTAKE_LABORATORYID,        --实验室
   d.APPROVALDATE,                  --批准日期
   b.STORAGEINSTRUCTI_STATU         --入库状态
-from ORDER_TASK_INFORMATION a
-LEFT join APPLIANCE_DETAIL_INFORMATION b
+from APPLIANCE_DETAIL_INFORMATION b
+LEFT join  ORDER_TASK_INFORMATION a
 on a.id=b.ORDER_TASK_INFORMATIONID
 LEFT join APPLIANCE_LABORATORY c
 on b.id=c.APPLIANCE_DETAIL_INFORMATIOID
@@ -1793,12 +1798,12 @@ comment on column VRUKU.STORAGEINSTRUCTI_STATU is
 /*==============================================================*/
 /* View: VSHENHE                                                */
 /*==============================================================*/
-create or replace view VSHENHE(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, ISAGGREY) as
-select a.ID,
+create or replace view VSHENHE(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, ISAGGREY, PREPARE_SCHEMEID) as
+select b.ID,
   d.REPORTNUMBER,             --报告编号
   a.ORDER_NUMBER,                  --委托单号
   b.APPLIANCE_NAME,                --器具名称
-  b.MODEL,                         --型号
+  b.VERSION,                         --型号
   b.FACTORY_NUM,                   --出厂编号
   a.CERTIFICATE_ENTERPRISE,        --证书单位
   a.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
@@ -1840,15 +1845,18 @@ select a.ID,
   end as qualifications, --资质授权
   d.CONCLUSION_EXPLAIN,  --总结论说明
   d.CONCLUSION,           --总结论
-  d.ISAGGREY--审核同意
+  d.ISAGGREY,--审核同意
+e.PREPARE_SCHEMEID --附件中的预备方案id
   
-from ORDER_TASK_INFORMATION a
-LEFT join APPLIANCE_DETAIL_INFORMATION b
+from APPLIANCE_DETAIL_INFORMATION b
+LEFT join  ORDER_TASK_INFORMATION a
 on a.id=b.ORDER_TASK_INFORMATIONID
 LEFT join APPLIANCE_LABORATORY c
 on b.id=c.APPLIANCE_DETAIL_INFORMATIOID
 LEFT join PREPARE_SCHEME d
 on c.PREPARE_SCHEMEID=d.id
+left join FILE_UPLOADER e
+on d.id=e.PREPARE_SCHEMEID
 with read only;
 
 comment on column VSHENHE.ORDER_NUMBER is
@@ -1860,12 +1868,12 @@ comment on column VSHENHE.ISAGGREY is
 /*==============================================================*/
 /* View: VSHENPI                                                */
 /*==============================================================*/
-create or replace view VSHENPI(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, UNDERTAKE_LABORATORYID, APPROVALISAGGREY) as
-select a.ID,
+create or replace view VSHENPI(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, UNDERTAKE_LABORATORYID, APPROVALISAGGREY, PREPARE_SCHEMEID) as
+select b.ID,
   d.REPORTNUMBER,             --报告编号
   a.ORDER_NUMBER,                  --委托单号
   b.APPLIANCE_NAME,                --器具名称
-  b.MODEL,                         --型号
+  b.VERSION,                         --型号
   b.FACTORY_NUM,                   --出厂编号
   a.CERTIFICATE_ENTERPRISE,        --证书单位
   a.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
@@ -1908,14 +1916,17 @@ select a.ID,
   d.CONCLUSION_EXPLAIN,    --总结论说明
   d.CONCLUSION,            --总结论
   c.UNDERTAKE_LABORATORYID,--实验室
-  d.APPROVALISAGGREY       --同意不同意判断待批还已批
-from ORDER_TASK_INFORMATION a
-LEFT join APPLIANCE_DETAIL_INFORMATION b
+  d.APPROVALISAGGREY ,      --同意不同意判断待批还已批
+e.PREPARE_SCHEMEID --附件中的预备方案id
+from APPLIANCE_DETAIL_INFORMATION b 
+LEFT join ORDER_TASK_INFORMATION a
 on a.id=b.ORDER_TASK_INFORMATIONID
 LEFT join APPLIANCE_LABORATORY c
 on b.id=c.APPLIANCE_DETAIL_INFORMATIOID
 LEFT join PREPARE_SCHEME d
 on c.PREPARE_SCHEMEID=d.id
+left join FILE_UPLOADER e
+on d.id=e.PREPARE_SCHEMEID
 with read only;
 
 comment on column VSHENPI.ORDER_NUMBER is
