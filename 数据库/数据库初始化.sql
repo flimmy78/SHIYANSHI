@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 11g                           */
-/* Created on:     2016/8/12 13:28:27                           */
+/* Created on:     2016/8/29 10:51:33                           */
 /*==============================================================*/
 
 
@@ -106,15 +106,6 @@ alter table SCHEME_RULE
 alter table SCHEME_RULE
    drop constraint FK_SCHEME_R_REFERENCE_SCHEME;
 
-alter table SCHEME_RULE
-   drop constraint FK_SCHEME_R_REFERENCE_TEST_ITE;
-
-alter table TABLE_BODY_XY
-   drop constraint FK_TABLE_BO_REFERENCE_TEST_ITE;
-
-alter table TABLE_HEAD_XY
-   drop constraint FK_TABLE_HE_REFERENCE_TEST_ITE;
-
 alter table THREE_PHASE_UNCERTAINTY
    drop constraint FK_THREE_PH_REFERENCE_RULE;
 
@@ -218,12 +209,6 @@ drop table RULE cascade constraints;
 drop table SCHEME cascade constraints;
 
 drop table SCHEME_RULE cascade constraints;
-
-drop table TABLE_BODY_XY cascade constraints;
-
-drop table TABLE_HEAD_XY cascade constraints;
-
-drop table TEST_ITEM_FORMAT cascade constraints;
 
 drop table THREE_PHASE_UNCERTAINTY cascade constraints;
 
@@ -359,7 +344,7 @@ create table APPLIANCE_DETAIL_INFORMATION
    ID                   VARCHAR2(36)         not null,
    BAR_CODE_NUM         VARCHAR2(200),
    APPLIANCE_NAME       VARCHAR2(200),
-   MODEL                VARCHAR2(200),
+   VERSION              VARCHAR2(200),
    FORMAT               VARCHAR2(200),
    FACTORY_NUM          VARCHAR2(200),
    NUM                  NUMBER,
@@ -389,7 +374,7 @@ comment on column APPLIANCE_DETAIL_INFORMATION.BAR_CODE_NUM is
 comment on column APPLIANCE_DETAIL_INFORMATION.APPLIANCE_NAME is
 'Research';
 
-comment on column APPLIANCE_DETAIL_INFORMATION.MODEL is
+comment on column APPLIANCE_DETAIL_INFORMATION.VERSION is
 'Research';
 
 comment on column APPLIANCE_DETAIL_INFORMATION.FACTORY_NUM is
@@ -646,6 +631,7 @@ create table DC_VOLTAGE_CURRENT_MEASURE
    RELATIVE_ERROR_POSITIVE_UNIT VARCHAR2(200),
    RELATIVE_ERROR_NEGATIVE VARCHAR2(200),
    RELATIVE_ERROR_NEGATIVE_UNIT VARCHAR2(200),
+   KVALUE               VARCHAR2(200),
    UNCERTAINTY_DEGREE   VARCHAR2(200),
    UNCERTAINTY_DEGREE_UNIT VARCHAR2(200),
    INDEX1               VARCHAR2(200),
@@ -672,6 +658,9 @@ comment on column DC_VOLTAGE_CURRENT_MEASURE.RELATIVE_ERROR_POSITIVE_UNIT is
 
 comment on column DC_VOLTAGE_CURRENT_MEASURE.RELATIVE_ERROR_NEGATIVE_UNIT is
 '%';
+
+comment on column DC_VOLTAGE_CURRENT_MEASURE.KVALUE is
+'例如：K=2、k=3';
 
 comment on column DC_VOLTAGE_CURRENT_MEASURE.STATUS is
 '区分不同表格';
@@ -737,6 +726,7 @@ create table DC_VOLTAGE_MEASURE_NO_INDEX
    STANDARD_VALUE_UNIT  VARCHAR2(200),
    RELATIVE_ERROR       VARCHAR2(200),
    RELATIVE_ERROR_UNIT  VARCHAR2(200),
+   KVALUE               VARCHAR2(200),
    UNCERTAINTY_DEGREE   VARCHAR2(200),
    UNCERTAINTY_DEGREE_UNIT VARCHAR2(200),
    PREPARE_SCHEMEID     VARCHAR2(36),
@@ -764,6 +754,9 @@ comment on column DC_VOLTAGE_MEASURE_NO_INDEX.RELATIVE_ERROR is
 
 comment on column DC_VOLTAGE_MEASURE_NO_INDEX.RELATIVE_ERROR_UNIT is
 '% ';
+
+comment on column DC_VOLTAGE_MEASURE_NO_INDEX.KVALUE is
+'例如：K=2、k=3';
 
 /*==============================================================*/
 /* Table: DC_VOLTAGE_OUTPUT                                     */
@@ -985,7 +978,7 @@ create table OVERALL_TABLE
 (
    ID                   VARCHAR2(36)         not null,
    NAME                 VARCHAR2(200),
-   CONCLUSION           VARCHAR2(200),
+   KVALUE               VARCHAR2(200),
    PREPARE_SCHEMEID     VARCHAR2(36),
    CREATETIME           DATE,
    CREATEPERSON         VARCHAR2(200),
@@ -995,8 +988,10 @@ create table OVERALL_TABLE
 );
 
 comment on table OVERALL_TABLE is
-'表格名和检测项的总结论
-除了表格以外的部分';
+'表通道信息';
+
+comment on column OVERALL_TABLE.KVALUE is
+'例如：K=2、k=3';
 
 /*==============================================================*/
 /* Table: PHASE                                                 */
@@ -1119,6 +1114,9 @@ create table QUALIFIED_UNQUALIFIED_TEST_ITE
    CONCLUSION           VARCHAR2(4000),
    PREPARE_SCHEMEID     VARCHAR2(36),
    RULEID               VARCHAR2(36),
+   RULENAME             VARCHAR(200),
+   RULENJOINAME         VARCHAR(2000),
+   HTMLVALUE            CLOB,
    CREATETIME           DATE,
    CREATEPERSON         VARCHAR2(200),
    UPDATETIME           DATE,
@@ -1127,7 +1125,13 @@ create table QUALIFIED_UNQUALIFIED_TEST_ITE
 );
 
 comment on table QUALIFIED_UNQUALIFIED_TEST_ITE is
-'报告对应的合格不合格的检定项目及其项目结论';
+'报告对应的检定项目及其项目结论';
+
+comment on column QUALIFIED_UNQUALIFIED_TEST_ITE.RULENAME is
+'检定项目原始名称';
+
+comment on column QUALIFIED_UNQUALIFIED_TEST_ITE.RULENJOINAME is
+'表格展示一行';
 
 /*==============================================================*/
 /* Table: REPORTCOLLECTION                                      */
@@ -1156,6 +1160,7 @@ create table RULE
    IS_UNCERTAINTY       VARCHAR2(200),
    UNCERTAINTY_MENU     VARCHAR2(200),
    UNDERTAKE_LABORATORYID VARCHAR2(36),
+   INPUTSTATE           VARCHAR2(200),
    PARENTID             VARCHAR2(36),
    CREATETIME           DATE,
    CREATEPERSON         VARCHAR2(200),
@@ -1198,82 +1203,15 @@ create table SCHEME_RULE
    ID                   VARCHAR2(36)         not null,
    RULEID               VARCHAR2(36),
    SCHEMEID             VARCHAR2(36),
-   TEST_ITEM_FORMATID   VARCHAR2(36),
+   HTMLVALUE            CLOB,
+   CREATETIME           DATE,
+   CREATEPERSON         VARCHAR2(200),
+   UPDATETIME           DATE,
+   UPDATEPERSON         VARCHAR2(200),
    constraint PK_SCHEME_RULE primary key (ID)
 );
 
 comment on column SCHEME_RULE.RULEID is
-'标识';
-
-comment on column SCHEME_RULE.TEST_ITEM_FORMATID is
-'标识';
-
-/*==============================================================*/
-/* Table: TABLE_BODY_XY                                         */
-/*==============================================================*/
-create table TABLE_BODY_XY 
-(
-   ID                   VARCHAR2(36)         not null,
-   X                    NUMBER,
-   Y                    NUMBER,
-   CATEGORY             VARCHAR2(200),
-   DEFAULT_VALUE        NUMBER,
-   MERGE_Y              NUMBER,
-   TEST_ITEM_FORMATID   VARCHAR2(36),
-   CREATETIME           DATE,
-   CREATEPERSON         VARCHAR2(200),
-   UPDATETIME           DATE,
-   UPDATEPERSON         VARCHAR2(200),
-   constraint PK_TABLE_BODY_XY primary key (ID)
-);
-
-comment on column TABLE_BODY_XY.CATEGORY is
-'空白、 输入框、下拉框';
-
-comment on column TABLE_BODY_XY.TEST_ITEM_FORMATID is
-'标识';
-
-/*==============================================================*/
-/* Table: TABLE_HEAD_XY                                         */
-/*==============================================================*/
-create table TABLE_HEAD_XY 
-(
-   ID                   VARCHAR2(36)         not null,
-   "ROW"                NUMBER,
-   "COLUMN"             NUMBER,
-   CATEGORY             VARCHAR2(200),
-   TEST_ITEM_FORMATID   VARCHAR2(36),
-   DEFAULT_VALUE        VARCHAR2(200),
-   CREATETIME           DATE,
-   CREATEPERSON         VARCHAR2(200),
-   UPDATETIME           DATE,
-   UPDATEPERSON         VARCHAR2(200),
-   constraint PK_TABLE_HEAD_XY primary key (ID)
-);
-
-comment on column TABLE_HEAD_XY.CATEGORY is
-'空白、 输入框、下拉框';
-
-comment on column TABLE_HEAD_XY.TEST_ITEM_FORMATID is
-'标识';
-
-/*==============================================================*/
-/* Table: TEST_ITEM_FORMAT                                      */
-/*==============================================================*/
-create table TEST_ITEM_FORMAT 
-(
-   ID                   VARCHAR2(36)         not null,
-   ROW_COUNT            NUMBER,
-   COLUMN_COUNT         NUMBER,
-   CHANNEL_NUMBER       NUMBER,
-   CREATETIME           DATE,
-   CREATEPERSON         VARCHAR2(200),
-   UPDATETIME           DATE,
-   UPDATEPERSON         VARCHAR2(200),
-   constraint PK_TEST_ITEM_FORMAT primary key (ID)
-);
-
-comment on column TEST_ITEM_FORMAT.ID is
 '标识';
 
 /*==============================================================*/
@@ -1594,7 +1532,7 @@ create table UNDERTAKE_LABORATORY
 /*==============================================================*/
 /* View: VBAOGAODAYIN                                           */
 /*==============================================================*/
-create or replace view VBAOGAODAYIN as
+create or replace view VBAOGAODAYIN(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, UNDERTAKE_LABORATORYID, APPROVALDATE, BAR_CODE_NUM, PRINTSTATUS) as
 select a.ID,
   d.REPORTNUMBER,             --报告编号
   a.ORDER_NUMBER,                  --委托单号
@@ -1682,10 +1620,10 @@ comment on column VBAOGAODAYIN.PRINTSTATUS is
 /* View: VJIANDINGRENWU                                         */
 /*==============================================================*/
 create or replace view VJIANDINGRENWU as
-select a.ID,
+select b.ID, --器具明细id
   a.ORDER_NUMBER,             --委托单号
   b.APPLIANCE_NAME,                --器具名称
-  b.MODEL,                         --型号
+  b.VERSION,                         --型号
   b.FACTORY_NUM,                   --出厂编号
   a.CERTIFICATE_ENTERPRISE,        --证书单位
   a.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
@@ -1697,15 +1635,22 @@ select a.ID,
   d.REPORTSTATUS,                  --报告状态
   d.APPROVAL,                      --审核审批不通过原因
   a.INSPECTION_ENTERPRISE,         --送检单位
-  b.ISOVERDUE                      --是否超期
-from ORDER_TASK_INFORMATION a
-LEFT join APPLIANCE_DETAIL_INFORMATION b
+  b.ISOVERDUE,                      --是否超期
+c.UNDERTAKE_LABORATORYID--实验室
+
+from APPLIANCE_DETAIL_INFORMATION  b
+--器具明细
+LEFT join ORDER_TASK_INFORMATION a
+--委托单
 on a.id=b.ORDER_TASK_INFORMATIONID
 LEFT join APPLIANCE_LABORATORY c
+--器具明细信息_承接实验室
 on b.id=c.APPLIANCE_DETAIL_INFORMATIOID
 LEFT join PREPARE_SCHEME d
+--预备方案
 on c.PREPARE_SCHEMEID=d.id
 LEFT join FILE_UPLOADER e
+--附件
 on d.id=c.PREPARE_SCHEMEID
 with read only;
 
@@ -1715,7 +1660,7 @@ comment on column VJIANDINGRENWU.ORDER_NUMBER is
 comment on column VJIANDINGRENWU.APPLIANCE_NAME is
 'Research';
 
-comment on column VJIANDINGRENWU.MODEL is
+comment on column VJIANDINGRENWU.VERSION is
 'Research';
 
 comment on column VJIANDINGRENWU.FACTORY_NUM is
@@ -1777,7 +1722,7 @@ comment on column VQIJULINGQU1.REPORTCREATEPERSON is
 /*==============================================================*/
 /* View: VQIJULINGQU2                                           */
 /*==============================================================*/
-create or replace view VQIJULINGQU2 as
+create or replace view VQIJULINGQU2(ID, APPLIANCE_NAME, VERSION, FACTORY_NUM, NUM, ATTACHMENT, NAME, APPLIANCE_RECIVE, REPORTNUMBER, REMARKS, ORDER_NUMBER) as
 select a.ID,
   b.APPLIANCE_NAME, --器具名称
   b.MODEL,               --型号
@@ -1804,7 +1749,7 @@ with read only;
 /*==============================================================*/
 /* View: VRUKU                                                  */
 /*==============================================================*/
-create or replace view VRUKU as
+create or replace view VRUKU(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, NAME, ORDER_STATUS, STORAGEINSTRUCTIONS, UNDERTAKE_LABORATORYID, APPROVALDATE, STORAGEINSTRUCTI_STATU) as
 select a.ID,
   d.REPORTNUMBER,             --报告编号
   a.ORDER_NUMBER,                  --委托单号
@@ -1848,7 +1793,7 @@ comment on column VRUKU.STORAGEINSTRUCTI_STATU is
 /*==============================================================*/
 /* View: VSHENHE                                                */
 /*==============================================================*/
-create or replace view VSHENHE as
+create or replace view VSHENHE(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, ISAGGREY) as
 select a.ID,
   d.REPORTNUMBER,             --报告编号
   a.ORDER_NUMBER,                  --委托单号
@@ -1915,7 +1860,7 @@ comment on column VSHENHE.ISAGGREY is
 /*==============================================================*/
 /* View: VSHENPI                                                */
 /*==============================================================*/
-create or replace view VSHENPI as
+create or replace view VSHENPI(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, UNDERTAKE_LABORATORYID, APPROVALISAGGREY) as
 select a.ID,
   d.REPORTNUMBER,             --报告编号
   a.ORDER_NUMBER,                  --委托单号
@@ -2117,18 +2062,6 @@ alter table SCHEME_RULE
 alter table SCHEME_RULE
    add constraint FK_SCHEME_R_REFERENCE_SCHEME foreign key (SCHEMEID)
       references SCHEME (ID);
-
-alter table SCHEME_RULE
-   add constraint FK_SCHEME_R_REFERENCE_TEST_ITE foreign key (TEST_ITEM_FORMATID)
-      references TEST_ITEM_FORMAT (ID);
-
-alter table TABLE_BODY_XY
-   add constraint FK_TABLE_BO_REFERENCE_TEST_ITE foreign key (TEST_ITEM_FORMATID)
-      references TEST_ITEM_FORMAT (ID);
-
-alter table TABLE_HEAD_XY
-   add constraint FK_TABLE_HE_REFERENCE_TEST_ITE foreign key (TEST_ITEM_FORMATID)
-      references TEST_ITEM_FORMAT (ID);
 
 alter table THREE_PHASE_UNCERTAINTY
    add constraint FK_THREE_PH_REFERENCE_RULE foreign key (RULEID)
