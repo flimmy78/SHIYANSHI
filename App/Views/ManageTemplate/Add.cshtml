@@ -55,32 +55,24 @@
         <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true"    style="padding:5px; overflow:hidden;">
             <table>
                 <tr>
-                    <td> 报告类别：</td>
+                    <td> 实验室：</td>
                     <td><select class="easyui-combobox" name="state" style="height:26px">
 
-                            <option selected="" value="数表">数表</option>
-                            <option value="标源 ">标源 </option>
-                            <option value="继保 ">继保 </option>
-                            <option value="变送 ">变送 </option>
-                            <option value="交采 ">交采 </option>
-                            <option value="仪置 ">仪置 </option>
+                            <option selected="" value="">指示仪表实验室</option>
+                            <option value=" ">标源 </option>
+                            <option value=" ">继保 </option>
+                            <option value=" ">变送 </option>
+                            <option value=" ">交采 </option>
+                            <option value=" ">仪置 </option>
 </select></td>
-                    <td> 证书类别：</td>
-                    <td>
-                        <select class="easyui-combobox" name="state" style="height:26px">
-
-                            <option value="-请选择-">-请选择-</option>
-                            <option selected="" value="校准">校准</option>
-                            <option value="检定">检定</option>
-
-                        </select>
-                    </td>
+                   
+                       
                     <td> 方案模板名称：</td>
                    <td><input type="text" id="txtName" class="easyui-textbox" style="" />
 </td>
                     <td>
-                       <a href="javascript:search()" class="easyui-linkbutton" style=" margin-left: 10px; margin-right:10px">查询新建模板方案</a>
-                       <a href="javascript:search()" class="easyui-linkbutton" style=" margin-left: 10px; margin-right:10px">方案模板发布</a>
+                        <a href="javascript:search()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" style=" margin-left: 10px; margin-right:10px">保存</a>
+                        <a href="javascript:search()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-back'" style=" margin-left: 10px; margin-right:10px">返回</a>
 
                     </td>
                 </tr>

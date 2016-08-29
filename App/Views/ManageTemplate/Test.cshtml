@@ -16,14 +16,13 @@
     <link href="/Content/StyleSheet.css" rel="stylesheet" />
 
 
-    <script src="/Scripts/jquery.min.js"></script>
+    <script src="/Scripts/jquery.min.js"></script>   
     <script src="/Scripts/JScriptCommon.js"></script>
+   <script src="/Res/easyui/jquery.easyui.min.js"></script>
+    <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>       
+  
 
-    <script src="/Scripts/jquery.validate.min.js"></script>
-    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script src="/Res/easyui/jquery.easyui.min.js"></script>
-    <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
-    <script src="/Res/My97DatePicker/WdatePicker.js"></script>
+  
     
 </head>
 <body class="easyui-layout">
@@ -33,7 +32,7 @@
                 <tr>
                     
                     <td>
-                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable(6,6)">增加通道</a>
+                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()" >增加通道</a>
                        
                     </td>
                 </tr>
@@ -80,83 +79,130 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td rowspan="3" align="right">10 V</td>
-                        <td align="right">10.0000 V</td>
-                        <td align="right">V</td>
-                        <td align="right">V</td>
-                        <td align="right"></td>
-                        <td align="right"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td align="right">6.0000 V</td>
-                        <td align="right">V</td>
-                        <td align="right">V</td>
-                        <td align="right"></td>
-                        <td align="right"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td align="right">1.0000 V</td>
-                        <td align="right">V</td>
-                        <td align="right">V</td>
-                        <td align="right"></td>
-                        <td align="right"></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="$('#dlg').dialog('open')">增加量程</a></td>
-                      
-                    </tr>
-                </tfoot>
-            </table>
-
-
-
-        </div>
-
-
-
-        <div class="mt10">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
-                <thead>
-                    <tr>
-                        <th rowspan="2" align="center">量程</th>
-                        <th rowspan="2" align="center">标准值</th>
-                        <th colspan="2" align="center">
-                            <select class="easyui-combobox" name="state" style="width:100px;">
-                                <option value="AL">&nbsp;&nbsp; </option>
-                                <option value="AK">CH1</option>
-                                <option value="AZ">CH2</option>
-                                <option value="AR">CH3</option>
-                                <option value="CA">CH4</option>
+                        <td rowspan="3" align="right">
+                            <input type="text" id="txtName" class="easyui-textbox" style="width:auto" /><select class="easyui-combobox" name="state" style="width:50px; height:25px">
+                                <option value="">MV</option>
+                                <option value="">KV</option>
+                                <option value="">V</option>
+                                <option value="">mV</option>
+                                <option value="">μv</option>
 
 
                             </select>
-                        </th>
-                        <th colspan="2" align="center">相对误差</th>
-                        <th align="center">校准结果的不确定度</th>
+                        </td>
+                        <td align="right">
+                            <input type="text" id="txtName" class="easyui-textbox" style="width:auto" /><select class="easyui-combobox" name="state" style="width:50px; height:25px">
+                                <option value="">MV</option>
+                                <option value="">KV</option>
+                                <option value="">V</option>
+                                <option value="">mV</option>
+                                <option value="">μv</option>
+
+
+                            </select>
+                        </td>
+                        <td align="right">
+                            <input type="text" id="txtName" class="easyui-textbox" style="width:auto" /><select class="easyui-combobox" name="state" style="width:50px; height:25px">
+                                <option value="">MV</option>
+                                <option value="">KV</option>
+                                <option value="">V</option>
+                                <option value="">mV</option>
+                                <option value="">μv</option>
+
+
+                            </select>
+                        </td>
+                        <td align="right">
+                            <input type="text" id="txtName" class="easyui-textbox" style="width:auto" /><select class="easyui-combobox" name="state" style="width:50px; height:25px">
+                                <option value="">MV</option>
+                                <option value="">KV</option>
+                                <option value="">V</option>
+                                <option value="">mV</option>
+                                <option value="">μv</option>
+
+
+                            </select>
+                        </td>
+                        <td align="right"><input type="text" id="txtName3" class="easyui-textbox" style="width:auto" /></td>
+                        <td align="right"><input type="text" id="txtName6" class="easyui-textbox" style="width:auto" /></td>
+                        <td><input type="text" id="txtName9" class="easyui-textbox" style="width:auto" /></td>
                     </tr>
                     <tr>
-                        <th align="center">+</th>
-                        <th align="center">-</th>
-                        <th align="center">+</th>
-                        <th align="center">-</th>
-                        <th align="center">
-                            U(K=<select class="easyui-combobox" name="state" style="width:30px;">
-                                <option value="AL">2 </option>
-                                <option value="AK">3</option>
-                                <option value="AZ">4</option>
+                        <td align="right">
+                            <input type="text" id="txtName" class="easyui-textbox" style="width:auto" /><select class="easyui-combobox" name="state" style="width:50px; height:25px">
+                                <option value="">MV</option>
+                                <option value="">KV</option>
+                                <option value="">V</option>
+                                <option value="">mV</option>
+                                <option value="">μv</option>
 
 
-                            </select>)
-                        </th>
+                            </select>
+                        </td>
+                        <td align="right">
+                            <input type="text" id="txtName" class="easyui-textbox" style="width:auto" /><select class="easyui-combobox" name="state" style="width:50px; height:25px">
+                                <option value="">MV</option>
+                                <option value="">KV</option>
+                                <option value="">V</option>
+                                <option value="">mV</option>
+                                <option value="">μv</option>
+
+
+                            </select>
+                        </td>
+                        <td align="right">
+                            <input type="text" id="txtName" class="easyui-textbox" style="width:auto" /><select class="easyui-combobox" name="state" style="width:50px; height:25px">
+                                <option value="">MV</option>
+                                <option value="">KV</option>
+                                <option value="">V</option>
+                                <option value="">mV</option>
+                                <option value="">μv</option>
+
+
+                            </select>
+                        </td>
+                        <td align="right"><input type="text" id="txtName4" class="easyui-textbox" style="width:auto" /></td>
+                        <td align="right"><input type="text" id="txtName7" class="easyui-textbox" style="width:auto" /></td>
+                        <td><input type="text" id="txtName10" class="easyui-textbox" style="width:auto" /></td>
                     </tr>
-                </thead>
-                <tbody>
-                   
+                    <tr>
+                        <td align="right">
+                            <input type="text" id="txtName" class="easyui-textbox" style="width:auto" /><select class="easyui-combobox" name="state" style="width:50px; height:25px">
+                                <option value="">MV</option>
+                                <option value="">KV</option>
+                                <option value="">V</option>
+                                <option value="">mV</option>
+                                <option value="">μv</option>
+
+
+                            </select>
+                        </td>
+                        <td align="right">
+                            <input type="text" id="txtName" class="easyui-textbox" style="width:auto" /><select class="easyui-combobox" name="state" style="width:50px; height:25px">
+                                <option value="">MV</option>
+                                <option value="">KV</option>
+                                <option value="">V</option>
+                                <option value="">mV</option>
+                                <option value="">μv</option>
+
+
+                            </select>
+                        </td>
+                        <td align="right">
+                            <input type="text" id="txtName2" class="easyui-textbox" style="width:auto" /><select class="easyui-combobox" name="state" style="width:50px; height:25px">
+                                <option value="">MV</option>
+                                <option value="">KV</option>
+                                <option value="">V</option>
+                                <option value="">mV</option>
+                                <option value="">μv</option>
+
+
+                            </select>
+                        </td>
+                        <td align="right"><input type="text" id="txtName5" class="easyui-textbox" style="width:auto" /></td>
+                        <td align="right"><input type="text" id="txtName8" class="easyui-textbox" style="width:auto" /></td>
+                        <td><input type="text" id="txtName11" class="easyui-textbox" style="width:auto" /></td>
+                    </tr>
                 </tbody>
                 <tfoot>
                     <tr>
@@ -169,6 +215,10 @@
 
 
         </div>
+
+
+
+        
 </div>
 
     <!--增加量程弹层-->
@@ -199,23 +249,27 @@
             </tr>
         </table>
     </div>
+    <!--/增加量程弹层-->
+
     <script type="text/javascript" language="javascript">
         //创建通道
         function CreateTable() {
-            var table = $("<table width='100%' border='0' cellspacing='0' cellpadding='0' class='tbl mt10'>");
-            table.appendTo($('#tongdao'));
-            var thead = $("<thead><tr><th rowspan='2' align='center'>量程</th><th rowspan='2' align='center'>标准值</th> <th colspan='2' align='center'><select class='easyui-combobox' name='state' style='width:100px;'><option value='AL'>&nbsp;&nbsp; </option><option value='AK'>CH1</option><option value='AZ'>CH2</option><option value='AR'>CH3</option><option value='CA'>CH4</option></select></th><th colspan='2' align='center'>相对误差</th><th align='center'>校准结果的不确定度</th></tr><tr><th align='center'>+</th><th align='center'>-</th><th align='center'>+</th><th align='center'>-</th><th align='center'>U(K=<select class='easyui-combobox' name='state' style='width:30px;'><option value='AL'>2 </option><option value='AK'>3</option><option value='AZ'>4</option></select>)</th></tr></thead>");
-            thead.appendTo(table);
-            var tfoot = $("<tfoot><tr><td colspan='7'><a href='javascript:void(0)' class='easyui-linkbutton' data-options='plain:true,iconCls:'icon-add'' onclick='$('#dlg').dialog('open')'>增加量程</a></td></tr></tfoot>");
-            tfoot.appendTo(table);
-         
-        //thead.appendTo(table);
-          //  $('#tongdao').append(table);
-        }
+                var tfoot = " <tfoot><tr><td colspan='7'><a href='javascript:void(0)' class='easyui-linkbutton' data-options=\"plain:true,iconCls:'icon-add'\" onclick=\"$('#dlg').dialog('open')\">增加量程</a></td></tr> </tfoot>";
+                var table = "<table width='100%' border='0' cellspacing='0' cellpadding='0' class='tbl mt10' id='tongdao_'+i+''>"
+                    +    "<thead><tr><th rowspan='2' align='center'>量程</th><th rowspan='2' align='center'>标准值</th> <th colspan='2' align='center'><select class='easyui-combobox' name='state' style='width:100px;'><option value='AL'>&nbsp;&nbsp; </option><option value='AK'>CH1</option><option value='AZ'>CH2</option><option value='AR'>CH3</option><option value='CA'>CH4</option></select></th><th colspan='2' align='center'>相对误差</th><th align='center'>校准结果的不确定度</th></tr><tr><th align='center'>+</th><th align='center'>-</th><th align='center'>+</th><th align='center'>-</th><th align='center'>U(K=<select class='easyui-combobox' name='state' style='width:30px;'><option value='AL'>2 </option><option value='AK'>3</option><option value='AZ'>4</option></select>)</th></tr></thead>"
+                    + "<tbody></tbody>"
+                    + tfoot
+                    + "</table>";
+           
+                var tagobj = $(table).appendTo($('#tongdao'));           
+                $.parser.parse(tagobj);
+           
+        };
+      
         function CreateRow() {
-            var $table = $('#table1');
-            var tr = "<tr><td>1</td><td>2</td><td>3</td></tr>";
-            $table.append(tr);
+          var $tbody = $('#table1');
+          var tr = "<tr><td>1</td><td>2</td><td>3</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>";
+           $table.append(tr);
         }
     </script>
 </body>
