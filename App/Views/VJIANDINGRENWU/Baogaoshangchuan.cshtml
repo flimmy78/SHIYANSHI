@@ -22,11 +22,28 @@
                     上传原始记录：
                 </div>*@
             <div class="input_search-field">
-                <form id="form1" method="post" enctype="multipart/form-data" action="HDpic">
+                <form id="form1" method="post" enctype="multipart/form-data" action="BaoGaoShangChuan">
                     上传原始记录： <input name="name" type="file" id="file" />
                     上传证书：<input name="name2" type="file" id="file2" />
-                    <input type="hidden" name="id" value="124" />
-                    <input id="Submit1" type="submit" value="上传" onclick="javascript:if ( $('#file').val() != '' && $('#file2').val() != '') { return true;}else {$.messager.alert('操作提示', '不能为空！','info'); return false;}" />
+                    <div class="input_search">
+                        <div class="input_search-label">
+                            结论：
+                        </div>
+                        <div class="input_search-field">
+                            合格： <input type="radio" name="CONCLUSION" value="合格" />
+                            不合格： <input type="radio" name="CONCLUSION" value="不合格" />
+                        </div>
+                    </div><br />
+                    <input type="hidden" name="PREPARE_SCHEMEID" value="124" @*value="@ViewBag.Id"*@ />
+                    <input type="hidden" name="ID" value="@ViewBag.ID" id="hiddenID" />
+                    <input id="Submit1" type="submit" value="上传" onclick="javascript: if ($('#file').val() != '' && $('#file2').val() != '') { return true; } else {
+    $.messager.alert('操作提示', '请选择上传文件！', 'info'); return false;
+}
+    if ($('input[name=\'CONCLUSION\']:checked').val() == null) {
+        $.messager.alert('操作提示', '请选择结论！', 'info');
+return false;
+}" />
+                    <input type="button" value="发送审核" />
                 </form>
                 @*<input type="file" name="name" id="file"/>
                     <input type="button" value="上传" onclick="shangchuan()"/>*@
@@ -41,38 +58,35 @@
                     <input type="button" value="上传" />
                 </div>
             </div><br />*@
-        <div class="input_search">
-            <div class="input_search-label">
-                结论：
-            </div>
-            <div class="input_search-field">
-                合格： <input type="radio" name="jielun" />
-                不合格： <input type="radio" name="jielun" />
-            </div>
-        </div><br />
+        @*<div class="input_search">
+                <div class="input_search-label">
+                    结论：
+                </div>
+                <div class="input_search-field">
+                    合格： <input type="radio" name="jielun" />
+                    不合格： <input type="radio" name="jielun" />
+                </div>
+            </div><br />*@
         <input type="button" value="保存" />
-        <input type="button" value="保存并发生审核" />
+        <input type="button" value="保存并发送审核" />
     </div>
 </fieldset>
 
 <script type="text/javascript">
-    function shangchuan() {
-        $.ajax({
-            url: "/VJIANDINGRENWU/HDpic",
-            type: "Post",
-            //data: arr,
-            // async: false,
-            success: function (res) {
-                if (res.Code == 1) {
-                    $.messager.alert('操作提示', "保存成功！", 'info');
-                    $("#flexigridData").datagrid("reload");
-                    $("#flexigridData").datagrid("clearSelections");
-                }
-                else {
-                    $.messager.alert('操作提示', "保存失败！", 'info');
-                }
-            }
-        })
-    }
+    $(function () {
+        if ("@ViewBag.Create" == "true") {
+            $.messager.alert('操作提示', "保存成功！", 'info');
+        }
+        else if ("@ViewBag.Create" == "false") {
+            $.messager.alert('操作提示', "保存失败！", 'info');
+            $("#hiddenID").val(null);
+        }
+        else if ("@ViewBag.Edit" == "true") {
+            $.messager.alert('操作提示', "修改成功！", 'info');
+        }
+        else if ("@ViewBag.Edit" == "false") {
+            $.messager.alert('操作提示', "修改失败！", 'info');
+        }
+    })
 
 </script>

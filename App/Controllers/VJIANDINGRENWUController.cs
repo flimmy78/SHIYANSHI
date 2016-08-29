@@ -52,6 +52,97 @@ namespace Langben.App.Controllers
             return View();
         }
         /// <summary>
+        /// 报告上传
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult BaoGaoShangChuan(FILE_UPLOADER file)//文档上传
+        {
+            string msg = string.Empty;
+            if (Request.Files.Count > 0)
+            {
+                for (int i = 0; i < Request.Files.Count; i++)
+                {
+                    HttpPostedFileBase pstFile = Request.Files[i];//获取页面选择的文件
+                    string upfile = pstFile.FileName;//文件名
+                    UploadFiles upFiles = new UploadFiles();
+                    msg += upFiles.ReportToUpload(pstFile, upfile, i);//上传文件
+
+                }
+            }
+            //JavaScriptSerializer js = new JavaScriptSerializer();
+            //FILE_UPLOADER jg = js.Deserialize<FILE_UPLOADER>(msg);
+            //jg.PREPARE_SCHEMEID = file.ID;
+            //jg.CONCLUSION = file.CONCLUSION;
+            FILE_UPLOADER uplo = new FILE_UPLOADER();
+            msg = msg.Substring(1, msg.Length - 1).TrimEnd('}');
+            string[] mg = msg.Split(',');
+            for (int i = 0; i < mg.Length; i++)
+            {
+                string[] m = mg[i].Split('*');
+                switch (m[0].ToString())
+                {
+                    case "NAME":
+                        uplo.NAME = m[1];
+                        break;
+                    case "NAME2":
+                        uplo.NAME2 = m[1];
+                        break;
+                    case "PATH":
+                        uplo.PATH = m[1];
+                        break;
+                    case "PATH2":
+                        uplo.PATH2 = m[1];
+                        break;
+                    case "FULLPATH":
+                        uplo.FULLPATH = m[1];
+                        break;
+                    case "FULLPATH2":
+                        uplo.FULLPATH2 = m[1];
+                        break;
+                    case "SUFFIX":
+                        uplo.SUFFIX = m[1];
+                        break;
+                    case "SUFFIX2":
+                        uplo.SUFFIX2 = m[1];
+                        break;
+                    case "SIZE":
+                        uplo.SIZE = Convert.ToInt32(m[1]);
+                        break;
+                    case "SIZE2":
+                        uplo.SIZE2 = Convert.ToInt32(m[1]);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            uplo.PREPARE_SCHEMEID = file.PREPARE_SCHEMEID;
+            uplo.CONCLUSION = file.CONCLUSION;
+            bool Create = false;
+            bool Edit = false;
+            if (string.IsNullOrEmpty(uplo.ID))
+            {
+                uplo.ID = Result.GetNewId();
+                Create = m_BLL2.Create(ref validationErrors, uplo);
+            }
+            else
+            {
+                Edit = m_BLL2.Edit(ref validationErrors, uplo);
+            }
+
+            ViewBag.ID = uplo.ID;
+            if (Create)
+            {
+                ViewBag.V = Create;
+            }
+            else if (Edit)
+            {
+                ViewBag.V = Edit;
+            }
+   
+            return View();
+        }
+        /// <summary>
         /// 建立方案
         /// </summary>
         /// <returns></returns>
@@ -124,45 +215,20 @@ namespace Langben.App.Controllers
             });
         }
 
-        /// <summary>
-        /// 文档上传
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [SupportFilter]
-        public Common.ClientResult.Result HDpic(string id)//文档上传
-        {
-            string msg = string.Empty;
-            if (Request.Files.Count > 0)
-            {
-                for (int i = 0; i < Request.Files.Count; i++)
-                {
-                    HttpPostedFileBase pstFile = Request.Files[i];//获取页面选择的文件
-                    string upfile = pstFile.FileName;//文件名
-                    UploadFiles upFiles = new UploadFiles();
-                     msg += upFiles.ReportToUpload(pstFile, upfile, i);//上传文件
-                   
-                }
-            }
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            FILE_UPLOADER jg = js.Deserialize<FILE_UPLOADER>(msg);
-            jg.PREPARE_SCHEMEID = id;
-            FILE_UPLOADERApiController filecontroller = new FILE_UPLOADERApiController();
-            Common.ClientResult.Result result = filecontroller.Post(jg);
-            return result;
-        }
+
 
         IBLL.IVJIANDINGRENWUBLL m_BLL;
+        IBLL.IFILE_UPLOADERBLL m_BLL2;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VJIANDINGRENWUController()
-            : this(new VJIANDINGRENWUBLL()) { }
+            : this(new VJIANDINGRENWUBLL(), new FILE_UPLOADERBLL()) { }
 
-        public VJIANDINGRENWUController(VJIANDINGRENWUBLL bll)
+        public VJIANDINGRENWUController(VJIANDINGRENWUBLL bll, FILE_UPLOADERBLL bll2)
         {
             m_BLL = bll;
+            m_BLL2 = bll2;
         }
 
     }

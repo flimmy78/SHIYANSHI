@@ -116,13 +116,15 @@ namespace Common
             }
             if (type == 0)
             {
-                string PATH2 = serverFileName.Substring(1, serverFileName.Length - 1);
-                return "{\"NAME2\":\"" + ramFileName + "\",\"SIZE2\":" + SIZE + ",\"PATH2\":\"" + PATH2 + "\",\"FULLPATH2\":\"" + toFileFullPath + ramFileName + "\",\"SUFFIX2\":\"" + fileExt + "\",";
+                //string PATH2 = serverFileName.Substring(1, serverFileName.Length - 1);
+               //return "{\"NAME2\":\"" + ramFileName + "\",\"SIZE2\":\" "+ SIZE + "\",\"PATH2\":\"" + PATH2 + "\",\"FULLPATH2\":\"" + toFileFullPath + ramFileName + "\",\"SUFFIX2\":\"" + fileExt + "\",";
+                return "{NAME2*" + fileName + ",SIZE2*" + SIZE + ",PATH2*" + ramFileName + ",FULLPATH2*" + toFileFullPath + ramFileName + ",SUFFIX2*" + fileExt + ",";
             }
             else if (type == 1)
             {
-                string PATH = serverFileName.Substring(1, serverFileName.Length - 1);
-                return "\"NAME\":\"" + ramFileName + "\",\"SIZE\":" + SIZE + ",\"PATH\":\"" + PATH + "\",\"FULLPATH\":\"" + toFileFullPath + ramFileName + "\",\"SUFFIX\":\"" + fileExt + "\"}";
+               //string PATH = serverFileName.Substring(1, serverFileName.Length - 1);
+                return "NAME*" + fileName + ",SIZE*" + SIZE + ",PATH*" + ramFileName + ",FULLPATH*" + toFileFullPath + ramFileName + ",SUFFIX*" + fileExt + "}";
+               // return "\"NAME\":\"" + ramFileName + "\",\"SIZE\":\"" + SIZE + "\",\"PATH\":\"" + PATH + "\",\"FULLPATH\":\"" + toFileFullPath + ramFileName + "\",\"SUFFIX\":\"" + fileExt + "\"}";
             }
             return null;
         }
