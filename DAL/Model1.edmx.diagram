@@ -52,7 +52,7 @@
         <EntityTypeShape EntityType="Model.UNCERTAINTYPARAMETERMANAGEMENT" Width="1.5" PointX="10.25" PointY="37.75" />
         <EntityTypeShape EntityType="Model.UNDERTAKE_LABORATORY" Width="1.5" PointX="5.75" PointY="26.5" />
         <EntityTypeShape EntityType="Model.VBAOGAODAYIN" Width="1.5" PointX="11.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.VQIJULINGQU1" Width="1.5" PointX="10.25" PointY="1" />
+        <EntityTypeShape EntityType="Model.VQIJULINGQU1" Width="1.5" PointX="10" PointY="0.625" />
         <EntityTypeShape EntityType="Model.VQIJULINGQU2" Width="1.5" PointX="3.875" PointY="0.5" />
         <EntityTypeShape EntityType="Model.VRUKU" Width="1.5" PointX="5.875" PointY="0.5" />
         <EntityTypeShape EntityType="Model.VSHENPI" Width="2" PointX="13.625" PointY="0.875" />
@@ -100,7 +100,7 @@
         <AssociationConnector Association="Model.FK_TRANSMIT_REFERENCE_TRANSMI2" />
         <AssociationConnector Association="Model.FK_TRANSMIT_REFERENCE_TRANSMI4" />
         <AssociationConnector Association="Model.METERING_STANDARD_DEVICEPREPAR" />
-        <EntityTypeShape EntityType="Model.VJIANDINGRENWU" Width="1.5" PointX="15.75" PointY="0.875" />
+        <EntityTypeShape EntityType="Model.VJIANDINGRENWU" Width="1.5" PointX="16.125" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.FileUploader" Width="1.5" PointX="24.75" PointY="14.75" />
         <EntityTypeShape EntityType="Model.SysAnnouncement" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model.SysDepartment" Width="1.5" PointX="17.5" PointY="40.375" />

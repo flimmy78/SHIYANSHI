@@ -36,11 +36,8 @@
                     </div><br />
                     <input type="hidden" name="PREPARE_SCHEMEID" value="124" @*value="@ViewBag.Id"*@ />
                     <input type="hidden" name="ID" value="@ViewBag.ID" id="hiddenID" />
-                    <input id="Submit1" type="submit" value="上传" onclick="javascript: if ($('#file').val() != '' && $('#file2').val() != '') { return true; } else {
-    $.messager.alert('操作提示', '请选择上传文件！', 'info'); return false;
-}
-    if ($('input[name=\'CONCLUSION\']:checked').val() == null) {
-        $.messager.alert('操作提示', '请选择结论！', 'info');
+                    <input id="Submit1" type="submit" value="上传" onclick="javascript: if ($('#file').val() != '' && $('#file2').val() != '') { return true; } else { $.messager.alert('操作提示', '请选择上传文件！', 'info'); return false;}
+    if ($('input[name=\'CONCLUSION\']:checked').val() == null) { $.messager.alert('操作提示', '请选择结论！', 'info');
 return false;
 }" />
                     <input type="button" value="发送审核" />
