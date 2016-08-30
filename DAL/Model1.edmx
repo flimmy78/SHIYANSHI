@@ -1233,7 +1233,7 @@
           <Property Name="CERTIFICATE_ENTERPRISE" Type="varchar2" MaxLength="200" />
           <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="varchar2" MaxLength="4000" />
           <Property Name="ORDER_STATUS" Type="varchar2" MaxLength="200" />
-          <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="CREATETIME" Type="date" />
           <Property Name="APPLIANCE_PROGRESS" Type="varchar2" MaxLength="200" />
           <Property Name="OVERDUE" Type="varchar2" MaxLength="200" />
           <Property Name="STATE" Type="varchar2" MaxLength="200" />
@@ -2157,7 +2157,7 @@ FROM "TENGFEI"."VBAOGAODAYIN" "VBAOGAODAYIN"</DefiningQuery>
 "VJIANDINGRENWU"."CERTIFICATE_ENTERPRISE" AS "CERTIFICATE_ENTERPRISE", 
 "VJIANDINGRENWU"."CUSTOMER_SPECIFIC_REQUIREMENTS" AS "CUSTOMER_SPECIFIC_REQUIREMENTS", 
 "VJIANDINGRENWU"."ORDER_STATUS" AS "ORDER_STATUS", 
-"VJIANDINGRENWU"."CREATEPERSON" AS "CREATEPERSON", 
+"VJIANDINGRENWU"."CREATETIME" AS "CREATETIME", 
 "VJIANDINGRENWU"."APPLIANCE_PROGRESS" AS "APPLIANCE_PROGRESS", 
 "VJIANDINGRENWU"."OVERDUE" AS "OVERDUE", 
 "VJIANDINGRENWU"."STATE" AS "STATE", 
@@ -4079,7 +4079,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="CERTIFICATE_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="ORDER_STATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="APPLIANCE_PROGRESS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="OVERDUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="STATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -4089,6 +4088,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="ISOVERDUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CREATETIME" Type="DateTime" />
         </EntityType>
         <EntityType Name="VQIJULINGQU1">
           <Key>
@@ -6039,6 +6039,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="VJIANDINGRENWU">
             <EntityTypeMapping TypeName="Model.VJIANDINGRENWU">
               <MappingFragment StoreEntitySet="VJIANDINGRENWU">
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
                 <ScalarProperty Name="EQUIPMENT_STATUS_VALUUMN" ColumnName="EQUIPMENT_STATUS_VALUUMN" />
                 <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
                 <ScalarProperty Name="ISOVERDUE" ColumnName="ISOVERDUE" />
@@ -6048,7 +6049,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
                 <ScalarProperty Name="STATE" ColumnName="STATE" />
                 <ScalarProperty Name="OVERDUE" ColumnName="OVERDUE" />
                 <ScalarProperty Name="APPLIANCE_PROGRESS" ColumnName="APPLIANCE_PROGRESS" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
                 <ScalarProperty Name="ORDER_STATUS" ColumnName="ORDER_STATUS" />
                 <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
                 <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
