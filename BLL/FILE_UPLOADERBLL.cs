@@ -286,6 +286,7 @@ namespace Langben.BLL
         {           
             return repository.GetById(db, id);           
         }
+
         /// <summary>
         /// 通过预备方案id，判断器具是否为上传报告
         /// </summary>
@@ -293,7 +294,7 @@ namespace Langben.BLL
         /// <returns>一个附件</returns>
         public FILE_UPLOADER GetPREPARE_SCHEMEID(string id)
         {
-            return repository.GetById(db, id);
+            return repository.GetPREPARE_SCHEMEID(db, id);
         }
 
         /// <summary>

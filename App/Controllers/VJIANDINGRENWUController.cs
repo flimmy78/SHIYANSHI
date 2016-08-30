@@ -49,10 +49,19 @@ namespace Langben.App.Controllers
         public ActionResult BaoGaoShangChuan(string id)
         {
             ViewBag.Id = id;
+            id = "124";
+            List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(id);
+            foreach (var item in list)
+            {
+                ViewBag.NAME2 = item.NAME2;
+                ViewBag.NAME = item.NAME;
+                ViewBag.ID = item.ID;
+                ViewBag.CONCLUSION = item.CONCLUSION;
+            }
             return View();
         }
         /// <summary>
-        /// 报告上传
+        /// 报告上传(上传按钮)
         /// </summary>
         /// <returns></returns>
         [HttpPost]
@@ -120,26 +129,27 @@ namespace Langben.App.Controllers
             uplo.CONCLUSION = file.CONCLUSION;
             bool Create = false;
             bool Edit = false;
-            if (string.IsNullOrEmpty(uplo.ID))
+            if (string.IsNullOrEmpty(file.ID))
             {
                 uplo.ID = Result.GetNewId();
                 Create = m_BLL2.Create(ref validationErrors, uplo);
             }
             else
             {
+                uplo.ID = file.ID;
                 Edit = m_BLL2.Edit(ref validationErrors, uplo);
             }
 
             ViewBag.ID = uplo.ID;
             if (Create)
             {
-                ViewBag.V = Create;
+                ViewBag.Create = Create;
             }
             else if (Edit)
             {
-                ViewBag.V = Edit;
+                ViewBag.Edit = Edit;
             }
-   
+
             return View();
         }
         /// <summary>
@@ -191,8 +201,8 @@ namespace Langben.App.Controllers
                     ,
                     ORDER_STATUS = s.ORDER_STATUS
                     ,
-                    //CREATETIME = s.CREATETIME
-                    //,
+                    CREATETIME = s.CREATETIME
+                    ,
                     APPLIANCE_PROGRESS = s.APPLIANCE_PROGRESS
                     ,
                     OVERDUE = s.OVERDUE
