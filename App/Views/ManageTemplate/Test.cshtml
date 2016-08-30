@@ -46,8 +46,8 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_0">
                 <thead>
                     <tr>
-                        <th rowspan="2" align="center">量程</th>
-                        <th rowspan="2" align="center">标准值</th>
+                        <th rowspan="2" align="center" width="120">量程</th>
+                        <th rowspan="2" align="center" width="120">标准值</th>
                         <th colspan="2" align="center">
                             <select class="easyui-combobox" name="state" style="width:100px;">
                                 <option value="AL">&nbsp;&nbsp; </option>
@@ -136,7 +136,7 @@
                 + "<tr><td width='40'>结论：</td><td colspan='6'><input class='easyui-textbox' name='' data-options='multiline:true' style='height:30px; width:95%'></td>"
                 + "<tr><td colspan='7'><a href='javascript:void(0)' class='easyui-linkbutton' data-options=\"plain:true,iconCls:'icon-add'\" onclick=\"$('#dlg').dialog('open');set(" + i + ")\">增加量程</a></td></tr> </tfoot>";
             var table = "<table width='100%' border='0' cellspacing='0' cellpadding='0' class='tbl mt10' id='tongdao_" + i + "'>"
-                + "<thead><tr><th rowspan='2' align='center'>量程</th><th rowspan='2' align='center'>标准值</th> <th colspan='2' align='center'><select class='easyui-combobox' name='state' style='width:100px;'><option value='AL'>&nbsp;&nbsp; </option><option value='AK'>CH1</option><option value='AZ'>CH2</option><option value='AR'>CH3</option><option value='CA'>CH4</option></select></th><th colspan='2' align='center'>相对误差</th><th align='center'>校准结果的不确定度</th></tr><tr><th align='center'>+</th><th align='center'>-</th><th align='center'>+</th><th align='center'>-</th><th align='center'>U(K=<select class='easyui-combobox' name='state' style='width:30px;'><option value='AL'>2 </option><option value='AK'>3</option><option value='AZ'>4</option></select>)</th></tr></thead>"
+                + "<thead><tr><th rowspan='2' align='center' width='120'>量程</th><th rowspan='2' align='center' width='120'>标准值</th> <th colspan='2' align='center'><select class='easyui-combobox' name='state' style='width:100px;'><option value='AL'>&nbsp;&nbsp; </option><option value='AK'>CH1</option><option value='AZ'>CH2</option><option value='AR'>CH3</option><option value='CA'>CH4</option></select></th><th colspan='2' align='center'>相对误差</th><th align='center'>校准结果的不确定度</th></tr><tr><th align='center'>+</th><th align='center'>-</th><th align='center'>+</th><th align='center'>-</th><th align='center'>U(K=<select class='easyui-combobox' name='state' style='width:30px;'><option value='AL'>2 </option><option value='AK'>3</option><option value='AZ'>4</option></select>)</th></tr></thead>"
                 + "<tbody id='tbody_" + i + "'></tbody>"
                 + tfoot
                 + "</table>";
