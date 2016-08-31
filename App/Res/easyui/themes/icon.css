@@ -67,21 +67,7 @@
 .icon-more{
 	background:url('icons/more.png') no-repeat center center;
 }
-.icon-home{
-	background:url('icons/home.png') no-repeat center center;
-}
-.icon-shoucang{
-	background:url('icons/shoucang.png') no-repeat center center;
-}
-.icon-copy{
-	background:url('icons/copy.png') no-repeat center center;
-}
-.icon-detail{
-	background:url('icons/detail.png') no-repeat center center;
-}
-.icon-gongkai{
-	background:url('icons/eye.png') no-repeat center center;
-}
+
 
 .icon-mini-add{
 	background:url('icons/mini_add.png') no-repeat center center;
@@ -108,28 +94,3 @@
 .icon-large-chart{
 	background:url('icons/large_chart.png') no-repeat center center;
 }
-.icon-fenpei{
-	background:url('icons/fenpei.png') no-repeat center center;
-}
-.icon-daoru{
-	background:url('icons/daoru.png') no-repeat center center;
-}
-.icon-peizhi{
-	background:url('icons/peizhi.png') no-repeat center center;
-}
-.icon-return{
-	background:url('icons/return.png') no-repeat center center;
-}
-.icon-lucency{
-	background:url('icons/lucency.png') no-repeat center center;
-}
-.icon-toleft{
-	background:url('icons/toleft.png') no-repeat center center;
-}
-.icon-toright{
-	background:url('icons/toright.png') no-repeat center center;
-}
-.icon-stop{
-	background:url('icons/stop.png') no-repeat center center;
-}
-.icon-fabu{background:url('icons/tiqu.png') no-repeat center center;}
