@@ -638,6 +638,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
+          <Property Name="NAMEOTHER" Type="varchar2" MaxLength="200" />
           <Property Name="NAME" Type="varchar2" MaxLength="200" />
           <Property Name="SCHEME_MENU" Type="varchar2" MaxLength="200" />
           <Property Name="SORT" Type="number" Precision="38" Scale="0" />
@@ -660,9 +661,14 @@
           <Property Name="REPORT_CATEGORY" Type="varchar2" MaxLength="200" />
           <Property Name="CERTIFICATE_CATEGORY" Type="varchar2" MaxLength="200" />
           <Property Name="STATUS" Type="varchar2" MaxLength="200" />
+          <Property Name="ISSTOP" Type="varchar2" MaxLength="200" />
           <Property Name="ISPUBLISH" Type="varchar2" MaxLength="200" />
           <Property Name="COPYID" Type="varchar2" MaxLength="36" />
           <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
+          <Property Name="PUBLISHTIME" Type="date" />
+          <Property Name="PUBLISHPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="ISPUBLISHTIME" Type="varchar2" MaxLength="200" />
+          <Property Name="ISPUBLISHPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="CREATETIME" Type="date" />
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="UPDATETIME" Type="date" />
@@ -3463,6 +3469,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="NAMEOTHER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="SCHEME_MENU" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="SORT" Type="Decimal" Precision="38" Scale="0" />
@@ -3493,9 +3500,14 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="REPORT_CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CERTIFICATE_CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="STATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ISSTOP" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ISPUBLISH" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="COPYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="PUBLISHTIME" Type="DateTime" />
+          <Property Name="PUBLISHPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ISPUBLISHTIME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ISPUBLISHPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CREATETIME" Type="DateTime" />
           <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UPDATETIME" Type="DateTime" />
@@ -4079,6 +4091,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="CERTIFICATE_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="ORDER_STATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CREATETIME" Type="DateTime" />
           <Property Name="APPLIANCE_PROGRESS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="OVERDUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="STATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -4088,7 +4101,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="ISOVERDUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CREATETIME" Type="DateTime" />
         </EntityType>
         <EntityType Name="VQIJULINGQU1">
           <Key>
@@ -5467,6 +5479,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
                 <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="SCHEME_MENU" ColumnName="SCHEME_MENU" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="NAMEOTHER" ColumnName="NAMEOTHER" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -5478,9 +5491,14 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
                 <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
                 <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="ISPUBLISHPERSON" ColumnName="ISPUBLISHPERSON" />
+                <ScalarProperty Name="ISPUBLISHTIME" ColumnName="ISPUBLISHTIME" />
+                <ScalarProperty Name="PUBLISHPERSON" ColumnName="PUBLISHPERSON" />
+                <ScalarProperty Name="PUBLISHTIME" ColumnName="PUBLISHTIME" />
                 <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
                 <ScalarProperty Name="COPYID" ColumnName="COPYID" />
                 <ScalarProperty Name="ISPUBLISH" ColumnName="ISPUBLISH" />
+                <ScalarProperty Name="ISSTOP" ColumnName="ISSTOP" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="CERTIFICATE_CATEGORY" ColumnName="CERTIFICATE_CATEGORY" />
                 <ScalarProperty Name="REPORT_CATEGORY" ColumnName="REPORT_CATEGORY" />
@@ -6039,7 +6057,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="VJIANDINGRENWU">
             <EntityTypeMapping TypeName="Model.VJIANDINGRENWU">
               <MappingFragment StoreEntitySet="VJIANDINGRENWU">
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
                 <ScalarProperty Name="EQUIPMENT_STATUS_VALUUMN" ColumnName="EQUIPMENT_STATUS_VALUUMN" />
                 <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
                 <ScalarProperty Name="ISOVERDUE" ColumnName="ISOVERDUE" />
@@ -6049,6 +6066,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
                 <ScalarProperty Name="STATE" ColumnName="STATE" />
                 <ScalarProperty Name="OVERDUE" ColumnName="OVERDUE" />
                 <ScalarProperty Name="APPLIANCE_PROGRESS" ColumnName="APPLIANCE_PROGRESS" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
                 <ScalarProperty Name="ORDER_STATUS" ColumnName="ORDER_STATUS" />
                 <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
                 <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />

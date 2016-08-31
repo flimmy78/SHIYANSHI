@@ -14,50 +14,21 @@
 
 }
 <div>
-    条形码：@Html.Editor("BAR_CODE_NUM", new { })
+    条形码：@Html.Editor("BAR_CODE_NUM")
     出厂编号：@Html.Editor("FACTORY_NUM")
     型号：@Html.Editor("VERSION")
     器具名称：@Html.Editor("APPLIANCE_NAME")
 </div>
 <br style="clear:both;" />
-
+<input type="text" value="调到" name="FACTORY_NUM" />
 <input type="button" onclick="seng()" value="查询" />
 <script type="text/javascript">
     //委托单保存
     function ajaxFrom(form, url) {
-        $.ajax({
-            url: url,
-            type: "Post",
-            data: $(form).serialize(),
-            dataType: "json",
 
-            success: function (data) {
-                if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
-                else {
-                    $("#hiddenid").val(data.Id);
-                    if ($.messager) {
-                        $.messager.defaults.ok = '继续';
-                        $.messager.defaults.cancel = '返回';
-
-                        $.messager.confirm('操作提示', data.Message, function (r) {
-                            if (!r) {
-                                window.location.href = 'javascript:history.go(-1)';
-                            }
-                        });
-                    }
-                }
-
-
-            }
-        });
 
     }
 
-    //保存
-    function flexiSave() {
-        $('#ApplianceDate').edatagrid('saveRow')
-        // $("#xu").val();
-    }
     //删除
     function flexiDelete() {
         $('#ApplianceDate').edatagrid('destroyRow')
@@ -69,35 +40,10 @@
         search = "BAR_CODE_NUM" + "@@" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "@@" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "@@" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "@@" + $("#APPLIANCE_NAME").val() + "^"
         $('#ApplianceDate').edatagrid({ url: '/api/APPLIANCE_DETAIL_INFORMATIONApi/PostDataByID/' + search });
 
-        //$('#ApplianceDate').edatagrid('reload', { id: search }); //{ url: "/api/APPLIANCE_DETAIL_INFORMATIONApi/PostData" }
-        //委托单信息绑定
-        //$.ajax({
-        //    url: "/api/ORDER_TASK_INFORMATION/Get" + id,
-        //    type: "POST",
-        //    // async: false,
-        //    success: function (res) {
-        //        $("#ACCEPT_ORGNIZATION").val(res.ACCEPT_ORGNIZATION);
-        //        $("#INSPECTION_ENTERPRISE").val(res.INSPECTION_ENTERPRISE);
-        //        $("#INSPECTION_ENTERPRISE_ADDRESS").val(res.INSPECTION_ENTERPRISE_ADDRESS);
-        //        $("#INSPECTION_ENTERPRISE_POST").val(res.INSPECTION_ENTERPRISE_POST);
-        //        $("#CONTACTS").val(res.CONTACTS);
-        //        $("#CONTACT_PHONE").val(res.CONTACT_PHONE);
-        //        $("#FAX").val(res.FAX);
-        //        $("#CERTIFICATE_ENTERPRISE").val(res.CERTIFICATE_ENTERPRISE);
-        //        $("#CERTIFICATE_ENTERPRISE_ADDRESS").val(res.CERTIFICATE_ENTERPRISE_ADDRESS);
-        //        $("#CERTIFICATE_ENTERPRISE_POST").val(res.CERTIFICATE_ENTERPRISE_POST);
-        //        $("#CONTACTS2").val(res.CONTACTS2);
-        //        $("#CONTACT_PHONE2").val(res.CONTACT_PHONE2);
-        //        $("#FAX2").val(res.FAX2);
-        //        $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val(res.CUSTOMER_SPECIFIC_REQUIREMENTS);
-        //        $("#ORDER_STATUS").val(res.ORDER_STATUS);
-        //        $("#APPLIANCE_PROGRESS").val(res.APPLIANCE_PROGRESS);
-        //        $("#ORDER_STATUS").val(res.ORDER_STATUS);
-
-        //    }
-        //})
     }
     $(function () {
+
+
         $("form").submit(function (form) {
             if (form.result) {
                 ajaxFrom(this, this.action);
@@ -113,36 +59,49 @@
         }
         var editFlag = undefined;//设置一个编辑标记
         var url = null;
-        var Address = [{ "value": "是", "text": "是" }, { "value": "否", "text": "否" }];
-        $('#ApplianceDate').edatagrid({
-            onAdd: function (index, row) {
-                debugger;
-                alert(row);
-            },
-            onEdit: function (index, row) {
-                debugger;
-                alert(row);
-            }
-            , onBeforeSave: function (index) {
-                debugger;
-                alert(index);
-            },
-            onSave: function (index, row) {
-                debugger;
-                alert(row);
-            },
-            onDestroy: function (index, row) {
-                debugger;
-                alert(row);
-            },
-            onError: function (index, row) {
-                debugger;
-                alert(row.msg);
-            },
 
-            saveUrl: "/api/APPLIANCE_DETAIL_INFORMATIONApi/Post/1",
-            updateUrl: "/api/APPLIANCE_DETAIL_INFORMATIONApi/Put",
-            destroyUrl: "/api/APPLIANCE_DETAIL_INFORMATIONApi/Delete",
+        //保存
+        function flexiSave() {
+            $('#ApplianceDate').edatagrid('saveRow');
+            debugger;
+            var qiju = $('#ApplianceDate').edatagrid('getRows');
+            var weituodan = new Object();
+            weituodan.ACCEPT_ORGNIZATION = $("#ACCEPT_ORGNIZATION").val();
+            $.ajax({
+                url: "",
+                type: "Post",
+                data: {
+                    qiju: qiju, weituodan: weituodan
+                },
+                dataType: "json",
+
+                success: function (data) {
+                    if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                    else {
+                        $("#hiddenid").val(data.Id);
+                        if ($.messager) {
+                            $.messager.defaults.ok = '继续';
+                            $.messager.defaults.cancel = '返回';
+
+                            $.messager.confirm('操作提示', data.Message, function (r) {
+                                if (!r) {
+                                    window.location.href = 'javascript:history.go(-1)';
+                                }
+                            });
+                        }
+                    }
+
+
+                }
+            });
+        }
+
+        $('#ApplianceDate').edatagrid({
+
+
+            //saveUrl: "/api/APPLIANCE_DETAIL_INFORMATIONApi/Post/1",
+            //updateUrl: "/api/APPLIANCE_DETAIL_INFORMATIONApi/Put",
+            // destroyUrl: "/api/APPLIANCE_DETAIL_INFORMATIONApi/Delete",
             toolbar: [
              {
                  text: '新增',
@@ -175,52 +134,62 @@
                  field: 'ID', title: '选中', width: 35, formatter:
                    function (value, row, index) { return '<input id=\"' + row.ID + '\" type=\"checkbox\">'; }
              }
-           , { field: 'APPLIANCE_NAME', title: '*器具名称', width: 135, editor: 'text' }
-           , { field: 'VERSION', title: '*型号', width: 65, editor: 'text' }
+           , {
+               field: 'APPLIANCE_NAME', title: '器具名称', width: 135, editor: {
+                   type: 'validatebox', options: {
+                       precision: 1,
+                       required: true,
+                       missingMessage: '必填'
+                   }
+               }
+           }
+           , {
+               field: 'VERSION', title: '型号', width: 65, editor: {
+                   type: 'validatebox', options: {
+
+                       required: true,
+                       missingMessage: '必填'
+                   }
+               }
+           }, {
+               field: 'NUM', title: '数量', width: 35, editor: {
+                   type: 'validatebox', options: {
+                       required: true,
+                       missingMessage: '必填'
+                   }
+               }
+           }, {
+               field: 'APPEARANCE_STATUS', title: '外观状态', width: 65, editor: {
+                   type: 'validatebox', options: {
+                       required: true,
+                       missingMessage: '必填'
+                   }
+               }
+           }
            , { field: 'FORMAT', title: '规格', width: 65, editor: 'text' }
            , { field: 'FACTORY_NUM', title: '出厂编号', width: 65, editor: 'text' }
-           , { field: 'NUM', title: '*数量', width: 65, editor: 'text' }
+
            , { field: 'ATTACHMENT', title: '附件', width: 135, editor: 'text' }
-           , {
-               field: 'ORDER_TASK_INFORMATIONID', title: '委托单', width: 135, hidden: true, editor: 'text', formatter: function (value, row, index) {
-                   // type: 'text', value: $("#hiddenid").val()
-                   //<input type="text" class="datagrid-editable-input">
-                   // debugger
-                   return $("#hiddenid").val();
-                   // return '<input type="text" class="datagrid-editable-input" value="' + $("#hiddenid").val() + '" id="ORDER_TASK_INFORMATIONID"/>';
-               }
 
-
-           }
-           , {
-               field: 'APPEARANCE_STATUS', title: '*外观状态', width: 65, editor: 'text'
-           }
            , { field: 'MAKE_ORGANIZATION', title: '制造单位', width: 65, editor: 'text' }
-           , { field: 'UNDERTAKE_LABORATORYID', title: '*承接实验室', width: 135, editor: { type: 'checkbox', options: { on: 'P', off: '' } } }
-           , { field: 'APPLIANCE_RECIVE', title: '器具接收', width: 65, editor: { type: 'combobox', options: { data: Address, valueField: 'value', textField: 'text', panelHeight: 'auto' } } }
+           , {
+               field: 'UNDERTAKE_LABORATORYID', title: '承接实验室', width: 135, editor: {
+                   type: 'combobox',
+                   options: {
+                       multiple: true,
+                       data: [{ value: '电能', text: '电能' }, { value: '指示仪表', text: '指示仪表' }, { value: '数字仪表', text: '数字仪表' }, { value: '互感器仪表', text: '互感器仪表' }],
+                       panelHeight: 'auto'
+                   }
+               }
+           }
+           , {
+               field: 'APPLIANCE_RECIVE', title: '器具接收', width: 65, editor: {
+                   type: 'combobox', options: { data: [{ value: '是', text: '是' }, { value: '否', text: '否' }], panelHeight: 'auto' }
+               }
+           }
            , { field: 'REMARKS', title: '备注', width: 135, editor: 'text' }
-            ]],
-            onBeforeLoad: function (param) {
-                param.url = url;
-            },
-            onAfterEdit: function (rowIndex, rowData, changes) {
-                editFlag = undefined;//重置
-                jQuery("#ApplianceDate").edatagrid("unselectAll");
-            },
-            onDblClickCell: function (rowIndex, field, value) {//双击该行修改内容
-                if (editFlag != undefined) {
-                    jQuery("#ApplianceDate").edatagrid('endEdit', editFlag);//结束编辑，传入之前编辑的行
-                    jQuery("#ApplianceDate").edatagrid('beginEdit', rowIndex);//开启编辑并传入要编辑的行
-                    editFlag = rowIndex;
-                }
-                if (editFlag == undefined) {
-                    jQuery("#ApplianceDate").edatagrid('beginEdit', rowIndex);//开启编辑并传入要编辑的行
-                    editFlag = rowIndex;
-                }
-            },
-            onClickCell: function (rowIndex, field, value) {//双击该行修改内容
-                editFlag = rowIndex;
-            }
+            ]]
+
         });
 
     });
@@ -266,110 +235,111 @@
             }
         });
     </script>*@
-<div class="bigdiv">
-    @using (Html.BeginForm("", "api/ORDER_TASK_INFORMATIONApi/Post"))
-    {
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "请选择", new { id = "ACCEPT_ORGNIZATION_String" })
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.INSPECTION_ENTERPRISE)
-            @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
-            @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_POST)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_POST)
-            @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_POST)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CONTACTS)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CONTACTS)
-            @Html.ValidationMessageFor(model => model.CONTACTS)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CONTACT_PHONE)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CONTACT_PHONE)
-            @Html.ValidationMessageFor(model => model.CONTACT_PHONE)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FAX)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FAX)
-            @Html.ValidationMessageFor(model => model.FAX)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE)
-            @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
-            @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_POST)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_POST)
-            @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_POST)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CONTACTS2)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CONTACTS2)
-            @Html.ValidationMessageFor(model => model.CONTACTS2)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CONTACT_PHONE2)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CONTACT_PHONE2)
-            @Html.ValidationMessageFor(model => model.CONTACT_PHONE2)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FAX2)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FAX2)
-            @Html.ValidationMessageFor(model => model.FAX2)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
-            @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
-        </div>
-        <br style="clear:both;" />
-        <input type="submit" value="保存" />
-    }
+<div class="bigdiv">
+    @*@using (Html.BeginForm("", "api/ORDER_TASK_INFORMATIONApi/Post"))
+        {
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "请选择", new { id = "ACCEPT_ORGNIZATION_String" })
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INSPECTION_ENTERPRISE)
+                @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+                @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_POST)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_POST)
+                @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_POST)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CONTACTS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACTS)
+                @Html.ValidationMessageFor(model => model.CONTACTS)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CONTACT_PHONE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACT_PHONE)
+                @Html.ValidationMessageFor(model => model.CONTACT_PHONE)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FAX)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FAX)
+                @Html.ValidationMessageFor(model => model.FAX)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE)
+                @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
+                @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_POST)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_POST)
+                @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_POST)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CONTACTS2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACTS2)
+                @Html.ValidationMessageFor(model => model.CONTACTS2)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CONTACT_PHONE2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACT_PHONE2)
+                @Html.ValidationMessageFor(model => model.CONTACT_PHONE2)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FAX2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FAX2)
+                @Html.ValidationMessageFor(model => model.FAX2)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
+                @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
+            </div>
+            <br style="clear:both;" />
+            <input type="submit" value="保存" />
+        }*@
     <br style="clear:both;" />
     <input type="hidden" value="123" id="hiddenid" />
     <table id="ApplianceDate"

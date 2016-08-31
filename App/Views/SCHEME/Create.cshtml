@@ -49,6 +49,13 @@
                 @Html.ValidationMessageFor(model => model.STATUS)
             </div>     
             <div class="editor-label">
+                @Html.LabelFor(model => model.ISSTOP)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ISSTOP)
+                @Html.ValidationMessageFor(model => model.ISSTOP)
+            </div>     
+            <div class="editor-label">
                 @Html.LabelFor(model => model.ISPUBLISH)：
             </div>
             <div class="editor-field">
@@ -72,6 +79,34 @@
             </div>
             @Html.HiddenFor(model => model.UNDERTAKE_LABORATORYID)
         </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PUBLISHTIME)：
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("PUBLISHTIME", ((Model != null && Model.PUBLISHTIME != null) ? Model.PUBLISHTIME.ToString().AsDateTime().ToString("yyyy-MM-dd") : ""), new { style = "width: 244px;", @class="easyui-datebox" })
+                @Html.ValidationMessageFor(model => model.PUBLISHTIME)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PUBLISHPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.PUBLISHPERSON)
+                @Html.ValidationMessageFor(model => model.PUBLISHPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ISPUBLISHTIME)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ISPUBLISHTIME)
+                @Html.ValidationMessageFor(model => model.ISPUBLISHTIME)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ISPUBLISHPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ISPUBLISHPERSON)
+                @Html.ValidationMessageFor(model => model.ISPUBLISHPERSON)
+            </div>     
             <div class="editor-label">
                 @Html.LabelFor(model => model.CREATEPERSON)：
             </div>

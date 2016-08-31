@@ -39,17 +39,28 @@
             <div id="checkSCHEMEID">            
             </div>
             @Html.HiddenFor(model => model.SCHEMEID)
-        </div>
-        <div class="editor-label">
-            <a class="anUnderLine" onclick="showModalOnly('TEST_ITEM_FORMATID','../../TEST_ITEM_FORMAT');">
-                @Html.LabelFor(model => model.TEST_ITEM_FORMATID) 
-            </a>：
-        </div>
-        <div class="editor-field">
-            <div id="checkTEST_ITEM_FORMATID">            
+        </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.HTMLVALUE)：
             </div>
-            @Html.HiddenFor(model => model.TEST_ITEM_FORMATID)
-        </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.HTMLVALUE)
+                @Html.ValidationMessageFor(model => model.HTMLVALUE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>
         </div>
     </fieldset>
 } 

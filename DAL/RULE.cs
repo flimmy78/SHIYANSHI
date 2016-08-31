@@ -26,6 +26,7 @@ namespace Langben.DAL
         }
     
         public string ID { get; set; }
+        public string NAMEOTHER { get; set; }
         public string NAME { get; set; }
         public string SCHEME_MENU { get; set; }
         public Nullable<decimal> SORT { get; set; }

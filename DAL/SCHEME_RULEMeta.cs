@@ -17,9 +17,6 @@ namespace Langben.DAL
         [Display(Name = "方案")]
         public string SCHEMEIDOld { get; set; }
         
-        [Display(Name = "检测项格式")]
-        public string TEST_ITEM_FORMATIDOld { get; set; }
-        
         #endregion
 
     }
@@ -38,8 +35,26 @@ namespace Langben.DAL
 			public object SCHEMEID { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "检测项格式", Order = 4)]
-			public object TEST_ITEM_FORMATID { get; set; }
+			[Display(Name = "HTMLVALUE", Order = 4)]
+			public object HTMLVALUE { get; set; }
+
+			[ScaffoldColumn(true)]
+			[Display(Name = "创建时间", Order = 5)]
+			[DataType(System.ComponentModel.DataAnnotations.DataType.DateTime,ErrorMessage="时间格式不正确")]
+			public DateTime? CREATETIME { get; set; }
+
+			[ScaffoldColumn(true)]
+			[Display(Name = "创建人", Order = 6)]
+			public object CREATEPERSON { get; set; }
+
+			[ScaffoldColumn(true)]
+			[Display(Name = "修改时间", Order = 7)]
+			[DataType(System.ComponentModel.DataAnnotations.DataType.DateTime,ErrorMessage="时间格式不正确")]
+			public DateTime? UPDATETIME { get; set; }
+
+			[ScaffoldColumn(true)]
+			[Display(Name = "修改人", Order = 8)]
+			public object UPDATEPERSON { get; set; }
 
 
     }

@@ -10,7 +10,7 @@
                      iconCls: 'icon-site',
 //                    url: '../RULE/GetAllMetadata',
                     idField: 'ID',
-                    treeField: 'NAME',
+                    treeField: 'NAMEOTHER',
                     rownumbers: true,
                     toolbar: [
                     {
@@ -41,23 +41,25 @@
                     }],
                   
                     columns: [[ 
-                    	{ field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', width: 115 }
+                    	{ field: 'NAMEOTHER', title: '@Html.DisplayNameFor(model => model.NAMEOTHER)', width: 115 }
                         
-					,{ field: 'SORT', title:  '@Html.DisplayNameFor(model => model.SORT)', width: 77 }
-					,{ field: 'IS_UNCERTAINTY', title:  '@Html.DisplayNameFor(model => model.IS_UNCERTAINTY)', width: 77 }
-					,{ field: 'UNCERTAINTY_MENU', title:  '@Html.DisplayNameFor(model => model.UNCERTAINTY_MENU)', width: 77 }
-					,{ field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width: 77}
-					,{ field: 'PARENTID', title:  '@Html.DisplayNameFor(model => model.PARENTID)', width: 77 }
-					,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 77
+					,{ field: 'SCHEME_MENU', title:  '@Html.DisplayNameFor(model => model.SCHEME_MENU)', width: 64 }
+					,{ field: 'SORT', title:  '@Html.DisplayNameFor(model => model.SORT)', width: 64 }
+					,{ field: 'IS_UNCERTAINTY', title:  '@Html.DisplayNameFor(model => model.IS_UNCERTAINTY)', width: 64 }
+					,{ field: 'UNCERTAINTY_MENU', title:  '@Html.DisplayNameFor(model => model.UNCERTAINTY_MENU)', width: 64 }
+					,{ field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width: 64}
+					,{ field: 'INPUTSTATE', title:  '@Html.DisplayNameFor(model => model.INPUTSTATE)', width: 64 }
+					,{ field: 'PARENTID', title:  '@Html.DisplayNameFor(model => model.PARENTID)', width: 64 }
+					,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 64
                     , formatter: formatDatebox
                     } 
 }
-					,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 77 }
-					,{ field: 'UPDATETIME', title:  '@Html.DisplayNameFor(model => model.UPDATETIME)', width: 77
+					,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 64 }
+					,{ field: 'UPDATETIME', title:  '@Html.DisplayNameFor(model => model.UPDATETIME)', width: 64
                     , formatter: formatDatebox
                     } 
 }
-					,{ field: 'UPDATEPERSON', title:  '@Html.DisplayNameFor(model => model.UPDATEPERSON)', width: 77 }
+					,{ field: 'UPDATEPERSON', title:  '@Html.DisplayNameFor(model => model.UPDATEPERSON)', width: 64 }
 				    ]]
                      ,
                     onBeforeLoad: function (row, param) {
@@ -91,7 +93,7 @@
             var arr = new Array(0);
             arr.push(node.ID);
             arr.push("^"); //主键列和显示列的分割符 ^ 
-            arr.push(node.NAME);
+            arr.push(node.NAMEOTHER);
             //主键列和显示列之间用 ^ 分割   每一项用 , 分割
             if (arr.length == 3) {//一条数据和多于一条
                 returnParent(arr.join("&")); //每一项用 & 分割
