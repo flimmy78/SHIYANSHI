@@ -212,6 +212,7 @@
     <Content Include="Content\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\jquery-ui-1.10.1.custom.min.css" />
+    <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\StyleSheet.css" />
     <Content Include="favicon.ico" />
@@ -470,6 +471,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Scripts\jquery-ui-1.10.1.custom.min.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.edatagrid.js" />
     <Content Include="Scripts\jquery.min.js" />
     <None Include="Properties\PublishProfiles\shiyanshi.pubxml" />

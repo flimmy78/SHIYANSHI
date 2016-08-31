@@ -20,15 +20,10 @@
     器具名称：@Html.Editor("APPLIANCE_NAME")
 </div>
 <br style="clear:both;" />
-<input type="text" value="调到" name="FACTORY_NUM" />
+ 
 <input type="button" onclick="seng()" value="查询" />
 <script type="text/javascript">
-    //委托单保存
-    function ajaxFrom(form, url) {
-
-
-    }
-
+    
     //删除
     function flexiDelete() {
         $('#ApplianceDate').edatagrid('destroyRow')
@@ -43,13 +38,7 @@
     }
     $(function () {
 
-
-        $("form").submit(function (form) {
-            if (form.result) {
-                ajaxFrom(this, this.action);
-            }
-            return false;
-        });
+ 
         //新增
         function flexiInsert() {
             $('#ApplianceDate').edatagrid('addRow', {
@@ -60,18 +49,19 @@
         var editFlag = undefined;//设置一个编辑标记
         var url = null;
 
-        //保存
+        //委托单保存
         function flexiSave() {
             $('#ApplianceDate').edatagrid('saveRow');
             debugger;
             var qiju = $('#ApplianceDate').edatagrid('getRows');
-            var weituodan = new Object();
-            weituodan.ACCEPT_ORGNIZATION = $("#ACCEPT_ORGNIZATION").val();
+            var entity = new Object();
+            entity.INSPECTION_ENTERPRISE_POST = $("#INSPECTION_ENTERPRISE_POST").val();
+            entity.APPLIANCE_DETAIL_INFORMATION = qiju;
             $.ajax({
-                url: "",
+                url: "/ORDER_TASK_INFORMATION/Save",
                 type: "Post",
                 data: {
-                    qiju: qiju, weituodan: weituodan
+                    entity: entity
                 },
                 dataType: "json",
 
@@ -97,8 +87,6 @@
         }
 
         $('#ApplianceDate').edatagrid({
-
-
             //saveUrl: "/api/APPLIANCE_DETAIL_INFORMATIONApi/Post/1",
             //updateUrl: "/api/APPLIANCE_DETAIL_INFORMATIONApi/Put",
             // destroyUrl: "/api/APPLIANCE_DETAIL_INFORMATIONApi/Delete",
@@ -197,9 +185,9 @@
 
 </script>
 @*百度模式输入显示下拉框*@
-@*<link href="~/Content/jquery-ui-1.10.1.custom.min.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-ui-1.10.1.custom.min.js"></script>*@
-@*<script type="text/javascript">
+<link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+<script type="text/javascript">
         //输入显示下拉框
         //出厂编号
         $("#FACTORY_NUM").ajaxStop();
@@ -234,10 +222,10 @@
                 $("#FACTORY_NUM").val(ui.item.FACTORY_NUM);//出厂编号
             }
         });
-    </script>*@
+    </script>
 
 <div class="bigdiv">
-    @*@using (Html.BeginForm("", "api/ORDER_TASK_INFORMATIONApi/Post"))
+     @using (Html.BeginForm("", "api/ORDER_TASK_INFORMATIONApi/Post"))
         {
 
             <div class="editor-label">
@@ -339,7 +327,7 @@
             </div>
             <br style="clear:both;" />
             <input type="submit" value="保存" />
-        }*@
+        } 
     <br style="clear:both;" />
     <input type="hidden" value="123" id="hiddenid" />
     <table id="ApplianceDate"

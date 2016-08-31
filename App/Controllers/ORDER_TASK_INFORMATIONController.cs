@@ -26,10 +26,10 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult Index()
         {
-        
+
             return View();
         }
-         /// <summary>
+        /// <summary>
         /// 列表
         /// </summary>
         /// <returns></returns>
@@ -44,43 +44,54 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [SupportFilter]  
+        [SupportFilter]
         public ActionResult Details(string id)
         {
             ViewBag.Id = id;
             return View();
 
         }
- 
+
         /// <summary>
         /// 首次创建
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
         public ActionResult Create(string id)
-        { 
-            
+        {
+
             return View();
         }
-        [SupportFilter]
+        /// <summary>
+        /// 保存-如果已经存在，判断状态，
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Save(ORDER_TASK_INFORMATION entity)
+        {
+
+            return View();
+
+        }
         public ActionResult Createto(string id)
         {
 
             return View();
         }
-     
+
         /// <summary>
         /// 首次编辑
         /// </summary>
         /// <param name="id">主键</param>
         /// <returns></returns> 
-        [SupportFilter] 
+        [SupportFilter]
         public ActionResult Edit(string id)
         {
             ViewBag.Id = id;
             return View();
         }
-     
+
     }
 }
 
