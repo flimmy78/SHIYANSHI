@@ -66,6 +66,27 @@
 
     }
     $(function () {
+        $.extend($.fn.datagrid.defaults.editors, {
+            text: {
+                init: function (container, options) {
+                    var input = $('<input type="text" class="datagrid-editable-input">').appendTo(container);
+                    return input;
+                },
+                destroy: function (target) {
+                    $(target).remove();
+                },
+                getValue: function (target) {
+                    return $(target).val();
+                },
+                setValue: function (target, value) {
+                    $(target).val(value);
+                },
+                resize: function (target, width) {
+                    $(target)._outerWidth(width);
+                }
+            }
+        });
+
         $("form").submit(function (form) {
             if (form.result) {
                 ajaxFrom(this, this.action);
@@ -142,7 +163,7 @@
            , {
                field: 'VERSION', title: '型号', width: 65, editor: {
                    type: 'validatebox', options: {
-                       value: 1,
+                   
                        required: true,
                        missingMessage: '必填'
                    }
@@ -156,16 +177,17 @@
                }
            }, {
                field: 'APPEARANCE_STATUS', title: '外观状态', width: 65, editor: {
-                   type: 'validatebox', options: {
-                       //setvalue: '必填',
-                       required: true,
-                       missingMessage: '必填'
+                   type: 'text', setValue: function (target, value) {
+                       debugger;
+                       $(target).val('value');
+                   }, options: {
+                      
                    }
-               } 
+               }
            }
            , { field: 'FORMAT', title: '规格', width: 65, editor: 'text' }
            , { field: 'FACTORY_NUM', title: '出厂编号', width: 65, editor: 'text' }
-           
+
            , { field: 'ATTACHMENT', title: '附件', width: 135, editor: 'text' }
 
            , { field: 'MAKE_ORGANIZATION', title: '制造单位', width: 65, editor: 'text' }
@@ -179,7 +201,11 @@
                    }
                }
            }
-           , { field: 'APPLIANCE_RECIVE', title: '器具接收', width: 65, editor: { type: 'combobox', options: { data: Address, valueField: 'value', textField: 'text', panelHeight: 'auto' } } }
+           , {
+               field: 'APPLIANCE_RECIVE', title: '器具接收', width: 65, editor: {
+                   type: 'combobox', options: { data: [{ value: '是', text: '是' }, { value: '否', text: '否' }], panelHeight: 'auto' }
+               }
+           }
            , { field: 'REMARKS', title: '备注', width: 135, editor: 'text' }
             ]]
 
