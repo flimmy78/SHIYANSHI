@@ -479,6 +479,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\UploadFile.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="up\b.xls" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
