@@ -27,50 +27,58 @@ namespace Langben.DAL
 			public object ID { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "名称", Order = 2)]
+			[Display(Name = "别名", Order = 2)]
+			public object NAMEOTHER { get; set; }
+
+			[ScaffoldColumn(true)]
+			[Display(Name = "名称", Order = 3)]
 			public object NAME { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "方案菜单", Order = 3)]
+			[Display(Name = "方案菜单", Order = 4)]
 			public object SCHEME_MENU { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "顺序", Order = 4)]
+			[Display(Name = "顺序", Order = 5)]
 			[Range(0,2147483646, ErrorMessage="数值超出范围")]
 			public int? SORT { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "是否有不确定度", Order = 5)]
+			[Display(Name = "是否有不确定度", Order = 6)]
 			public object IS_UNCERTAINTY { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "不确定度菜单", Order = 6)]
+			[Display(Name = "不确定度菜单", Order = 7)]
 			public object UNCERTAINTY_MENU { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "承接实验室", Order = 7)]
+			[Display(Name = "承接实验室", Order = 8)]
 			public object UNDERTAKE_LABORATORYID { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "检定项目父节点", Order = 8)]
+			[Display(Name = "录入格式", Order = 9)]
+			public object INPUTSTATE { get; set; }
+
+			[ScaffoldColumn(true)]
+			[Display(Name = "检定项目父节点", Order = 10)]
 			public object PARENTID { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "创建时间", Order = 9)]
+			[Display(Name = "创建时间", Order = 11)]
 			[DataType(System.ComponentModel.DataAnnotations.DataType.DateTime,ErrorMessage="时间格式不正确")]
 			public DateTime? CREATETIME { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "创建人", Order = 10)]
+			[Display(Name = "创建人", Order = 12)]
 			public object CREATEPERSON { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "修改时间", Order = 11)]
+			[Display(Name = "修改时间", Order = 13)]
 			[DataType(System.ComponentModel.DataAnnotations.DataType.DateTime,ErrorMessage="时间格式不正确")]
 			public DateTime? UPDATETIME { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "修改人", Order = 12)]
+			[Display(Name = "修改人", Order = 14)]
 			public object UPDATEPERSON { get; set; }
 
 

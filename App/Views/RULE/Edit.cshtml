@@ -19,6 +19,13 @@
         <div class="bigdiv">
             @Html.HiddenFor(model => model.ID )      
             <div class="editor-label">
+                @Html.LabelFor(model => model.NAMEOTHER)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.NAMEOTHER)
+                @Html.ValidationMessageFor(model => model.NAMEOTHER)
+            </div>     
+            <div class="editor-label">
                 @Html.LabelFor(model => model.NAME)：
             </div>
             <div class="editor-field">
@@ -78,6 +85,13 @@
                     }} 
                 </div>
                 @Html.HiddenFor(model => model.UNDERTAKE_LABORATORYID)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INPUTSTATE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INPUTSTATE)
+                @Html.ValidationMessageFor(model => model.INPUTSTATE)
             </div>       
             <div class="editor-label">
                 <a class="anUnderLine" onclick="showModalOnly('PARENTID','../../RULE');">
@@ -97,7 +111,7 @@
                                 <img  alt="删除"  title="点击删除" src="../../../Images/deleteimge.png" onclick="deleteTable('@Model.PARENTID ','PARENTID');"/>
                             </td>
                             <td>
-                                @Model.RULE2.NAME
+                                @Model.RULE2.NAMEOTHER
                             </td>
                         </tr>
                     </table>
@@ -137,7 +151,7 @@
                 type: "POST",
                 // async: false,
                 success: function (res) {
-                    $("#ID").val(res.ID);$("#NAME").val(res.NAME);$("#SCHEME_MENU").val(res.SCHEME_MENU);$("#SORT").val(res.SORT);$("#IS_UNCERTAINTY").val(res.IS_UNCERTAINTY);$("#UNCERTAINTY_MENU").val(res.UNCERTAINTY_MENU);$("#CREATETIME").val(res.CREATETIME);$("#CREATEPERSON").val(res.CREATEPERSON);$("#UPDATEPERSON").val(res.UPDATEPERSON);
+                    $("#ID").val(res.ID);$("#NAMEOTHER").val(res.NAMEOTHER);$("#NAME").val(res.NAME);$("#SCHEME_MENU").val(res.SCHEME_MENU);$("#SORT").val(res.SORT);$("#IS_UNCERTAINTY").val(res.IS_UNCERTAINTY);$("#UNCERTAINTY_MENU").val(res.UNCERTAINTY_MENU);$("#INPUTSTATE").val(res.INPUTSTATE);$("#CREATETIME").val(res.CREATETIME);$("#CREATEPERSON").val(res.CREATEPERSON);$("#UPDATEPERSON").val(res.UPDATEPERSON);
                 }
             })
         });

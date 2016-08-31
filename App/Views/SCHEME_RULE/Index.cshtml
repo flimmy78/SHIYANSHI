@@ -66,9 +66,17 @@
                 columns: [[
                    
                     
-					{ field: 'RULEID', title: '@Html.DisplayNameFor(model => model.RULEID)', width: 389 }
-					,{ field: 'SCHEMEID', title: '@Html.DisplayNameFor(model => model.SCHEMEIDOld)', width: 389 }
-					,{ field: 'TEST_ITEM_FORMATID', title: '@Html.DisplayNameFor(model => model.TEST_ITEM_FORMATIDOld)', width: 389 }
+					{ field: 'RULEID', title: '@Html.DisplayNameFor(model => model.RULEID)', width: 129 }
+					,{ field: 'SCHEMEID', title: '@Html.DisplayNameFor(model => model.SCHEMEIDOld)', width: 129 }
+					,{ field: 'HTMLVALUE', title:  '@Html.DisplayNameFor(model => model.HTMLVALUE)', width: 129 }
+					,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 129
+                    , formatter: formatDatebox
+}
+					,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 129 }
+					,{ field: 'UPDATETIME', title:  '@Html.DisplayNameFor(model => model.UPDATETIME)', width: 129
+                    , formatter: formatDatebox
+}
+					,{ field: 'UPDATEPERSON', title:  '@Html.DisplayNameFor(model => model.UPDATEPERSON)', width: 129 }
                 ]],
                 pagination: true,
                 rownumbers: true

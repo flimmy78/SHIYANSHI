@@ -20,7 +20,7 @@
                 <div class="display-field">
                     @if (Model.RULE != null)
                        {
-                    @Model.RULE.NAME
+                    @Model.RULE.NAMEOTHER
                     } 
                 </div>        
                 <div class="display-label">
@@ -31,15 +31,31 @@
                        {
                     @Model.SCHEME.NAME
                     } 
-                </div>        
+                </div>      
                 <div class="display-label">
-                      @Html.LabelFor(model => model.TEST_ITEM_FORMATID) :
+                      @Html.LabelFor(model => model.HTMLVALUE) :
                 </div>
-                <div class="display-field">
-                    @if (Model.TEST_ITEM_FORMAT != null)
-                       {
-                    @Model.TEST_ITEM_FORMAT.ROW_COUNT
-                    } 
+                <div class="display-field" id='HTMLVALUE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATETIME) :
+                </div>
+                <div class="display-field" id='CREATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATEPERSON) :
+                </div>
+                <div class="display-field" id='CREATEPERSON'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATETIME) :
+                </div>
+                <div class="display-field" id='UPDATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATEPERSON) :
+                </div>
+                <div class="display-field" id='UPDATEPERSON'>
                 </div>
         </div>
     </fieldset>
@@ -54,7 +70,7 @@
             type: "POST",
             // async: false,
             success: function (res) {
-		
+		$("#HTMLVALUE").html(res.HTMLVALUE);$("#CREATETIME").html(res.CREATETIME);$("#CREATEPERSON").html(res.CREATEPERSON);$("#UPDATETIME").html(res.UPDATETIME);$("#UPDATEPERSON").html(res.UPDATEPERSON);
             }
         })
     });

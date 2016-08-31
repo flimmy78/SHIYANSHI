@@ -14,8 +14,8 @@ namespace Langben.DAL
         /// 查询的数据
         /// </summary>
         /// <param name="SysEntities">数据访问的上下文</param>
-        /// <param name="order">升序asc（默认）还是降序desc</param>
-        /// <param name="sort">排序字段</param>
+        /// <param name="order">排序字段</param>
+        /// <param name="sort">升序asc（默认）还是降序desc</param>
         /// <param name="search">查询条件</param>
         /// <param name="listQuery">额外的参数</param>
         /// <returns></returns>      
@@ -44,11 +44,6 @@ namespace Langben.DAL
                     if (queryDic.ContainsKey("SCHEMEID") && !string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Value == "noway" && item.Key == "SCHEMEID")
                     {//查询一对多关系的列名
                         where += "it.SCHEMEID is null";
-                        continue;
-                    }
-                    if (queryDic.ContainsKey("TEST_ITEM_FORMATID") && !string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Value == "noway" && item.Key == "TEST_ITEM_FORMATID")
-                    {//查询一对多关系的列名
-                        where += "it.TEST_ITEM_FORMATID is null";
                         continue;
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
@@ -180,18 +175,6 @@ namespace Langben.DAL
             return from c in db.SCHEME_RULE
                         where c.SCHEMEID == id
                         select c;
-                      
-        }
-
-        /// <summary>
-        /// 根据TEST_ITEM_FORMATID，获取所有方案_规程数据
-        /// </summary>
-        /// <param name="id">外键的主键</param>
-        /// <returns></returns>
-        public IQueryable<SCHEME_RULE> GetByRefTEST_ITEM_FORMATID(SysEntities db, string id)
-        {
-            return null
-                ;   
                       
         }
 

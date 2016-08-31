@@ -14,8 +14,8 @@ namespace Langben.DAL
         /// 查询的数据
         /// </summary>
         /// <param name="SysEntities">数据访问的上下文</param>
-        /// <param name="order">升序asc（默认）还是降序desc</param>
-        /// <param name="sort">排序字段</param>
+        /// <param name="order">排序字段</param>
+        /// <param name="sort">升序asc（默认）还是降序desc</param>
         /// <param name="search">查询条件</param>
         /// <param name="listQuery">额外的参数</param>
         /// <returns></returns>      

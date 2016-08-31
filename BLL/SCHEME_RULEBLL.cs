@@ -42,8 +42,8 @@ namespace Langben.BLL
         /// <param name="id">额外的参数</param>
         /// <param name="page">页码</param>
         /// <param name="rows">每页显示的行数</param>
-        /// <param name="order">升序asc（默认）还是降序desc</param>
-        /// <param name="sort">排序字段</param>
+        /// <param name="order">排序字段</param>
+        /// <param name="sort">升序asc（默认）还是降序desc</param>
         /// <param name="search">查询条件</param>
         /// <param name="total">结果集的总数</param>
         /// <returns>结果集</returns>
@@ -66,15 +66,13 @@ namespace Langben.BLL
                     {
                         if (item.RULEID != null && item.RULE != null)
                         { 
-                                item.RULEIDOld = item.RULE.NAME.GetString();//                            
+                                item.RULEIDOld = item.RULE.NAMEOTHER.GetString();//                            
                         }                  
 
                         if (item.SCHEMEID != null && item.SCHEME != null)
                         { 
                                 item.SCHEMEIDOld = item.SCHEME.NAME.GetString();//                            
                         }                  
-
-                                        
 
                     }
  
@@ -87,8 +85,8 @@ namespace Langben.BLL
         /// <param name="id">额外的参数</param>
         /// <param name="page">页码</param>
         /// <param name="rows">每页显示的行数</param>
-        /// <param name="order">升序asc（默认）还是降序desc</param>
-        /// <param name="sort">排序字段</param>
+        /// <param name="order">排序字段</param>
+        /// <param name="sort">升序asc（默认）还是降序desc</param>
         /// <param name="search">查询条件</param>
         /// <param name="total">结果集的总数</param>
         /// <returns>结果集</returns>
@@ -313,16 +311,6 @@ namespace Langben.BLL
         public List<SCHEME_RULE> GetByRefSCHEMEID(string id)
         {
             return repository.GetByRefSCHEMEID(db, id).ToList();                      
-        }
-
-        /// <summary>
-        /// 根据TEST_ITEM_FORMATIDId，获取所有方案_规程数据
-        /// </summary>
-        /// <param name="id">外键的主键</param>
-        /// <returns></returns>
-        public List<SCHEME_RULE> GetByRefTEST_ITEM_FORMATID(string id)
-        {
-            return repository.GetByRefTEST_ITEM_FORMATID(db, id).ToList();                      
         }
 
         public void Dispose()

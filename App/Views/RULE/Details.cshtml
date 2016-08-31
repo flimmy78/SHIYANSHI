@@ -15,6 +15,11 @@
         <div class="bigdiv">
                   
                 <div class="display-label">
+                      @Html.LabelFor(model => model.NAMEOTHER) :
+                </div>
+                <div class="display-field" id='NAMEOTHER'>
+                </div>      
+                <div class="display-label">
                       @Html.LabelFor(model => model.NAME) :
                 </div>
                 <div class="display-field" id='NAME'>
@@ -47,6 +52,11 @@
                        {
                     @Model.UNDERTAKE_LABORATORY.NAME
                     } 
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.INPUTSTATE) :
+                </div>
+                <div class="display-field" id='INPUTSTATE'>
                 </div>        
                 <div class="display-label">
                       @Html.LabelFor(model => model.PARENTID) :
@@ -54,7 +64,7 @@
                 <div class="display-field">
                     @if (Model.RULE2 != null)
                        {
-                    @Model.RULE2.NAME
+                    @Model.RULE2.NAMEOTHER
                     } 
                 </div>      
                 <div class="display-label">
@@ -90,7 +100,7 @@
             type: "POST",
             // async: false,
             success: function (res) {
-		$("#NAME").html(res.NAME);$("#SCHEME_MENU").html(res.SCHEME_MENU);$("#SORT").html(res.SORT);$("#IS_UNCERTAINTY").html(res.IS_UNCERTAINTY);$("#UNCERTAINTY_MENU").html(res.UNCERTAINTY_MENU);$("#CREATETIME").html(res.CREATETIME);$("#CREATEPERSON").html(res.CREATEPERSON);$("#UPDATETIME").html(res.UPDATETIME);$("#UPDATEPERSON").html(res.UPDATEPERSON);
+		$("#NAMEOTHER").html(res.NAMEOTHER);$("#NAME").html(res.NAME);$("#SCHEME_MENU").html(res.SCHEME_MENU);$("#SORT").html(res.SORT);$("#IS_UNCERTAINTY").html(res.IS_UNCERTAINTY);$("#UNCERTAINTY_MENU").html(res.UNCERTAINTY_MENU);$("#INPUTSTATE").html(res.INPUTSTATE);$("#CREATETIME").html(res.CREATETIME);$("#CREATEPERSON").html(res.CREATEPERSON);$("#UPDATETIME").html(res.UPDATETIME);$("#UPDATEPERSON").html(res.UPDATEPERSON);
             }
         })
     });

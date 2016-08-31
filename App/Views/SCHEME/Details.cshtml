@@ -35,6 +35,11 @@
                 <div class="display-field" id='STATUS'>
                 </div>      
                 <div class="display-label">
+                      @Html.LabelFor(model => model.ISSTOP) :
+                </div>
+                <div class="display-field" id='ISSTOP'>
+                </div>      
+                <div class="display-label">
                       @Html.LabelFor(model => model.ISPUBLISH) :
                 </div>
                 <div class="display-field" id='ISPUBLISH'>
@@ -52,6 +57,26 @@
                        {
                     @Model.UNDERTAKE_LABORATORY.NAME
                     } 
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.PUBLISHTIME) :
+                </div>
+                <div class="display-field" id='PUBLISHTIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.PUBLISHPERSON) :
+                </div>
+                <div class="display-field" id='PUBLISHPERSON'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ISPUBLISHTIME) :
+                </div>
+                <div class="display-field" id='ISPUBLISHTIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ISPUBLISHPERSON) :
+                </div>
+                <div class="display-field" id='ISPUBLISHPERSON'>
                 </div>      
                 <div class="display-label">
                       @Html.LabelFor(model => model.CREATETIME) :
@@ -86,7 +111,7 @@
             type: "POST",
             // async: false,
             success: function (res) {
-		$("#NAME").html(res.NAME);$("#REPORT_CATEGORY").html(res.REPORT_CATEGORY);$("#CERTIFICATE_CATEGORY").html(res.CERTIFICATE_CATEGORY);$("#STATUS").html(res.STATUS);$("#ISPUBLISH").html(res.ISPUBLISH);$("#COPYID").html(res.COPYID);$("#CREATETIME").html(res.CREATETIME);$("#CREATEPERSON").html(res.CREATEPERSON);$("#UPDATETIME").html(res.UPDATETIME);$("#UPDATEPERSON").html(res.UPDATEPERSON);
+		$("#NAME").html(res.NAME);$("#REPORT_CATEGORY").html(res.REPORT_CATEGORY);$("#CERTIFICATE_CATEGORY").html(res.CERTIFICATE_CATEGORY);$("#STATUS").html(res.STATUS);$("#ISSTOP").html(res.ISSTOP);$("#ISPUBLISH").html(res.ISPUBLISH);$("#COPYID").html(res.COPYID);$("#PUBLISHTIME").html(res.PUBLISHTIME);$("#PUBLISHPERSON").html(res.PUBLISHPERSON);$("#ISPUBLISHTIME").html(res.ISPUBLISHTIME);$("#ISPUBLISHPERSON").html(res.ISPUBLISHPERSON);$("#CREATETIME").html(res.CREATETIME);$("#CREATEPERSON").html(res.CREATEPERSON);$("#UPDATETIME").html(res.UPDATETIME);$("#UPDATEPERSON").html(res.UPDATEPERSON);
             }
         })
     });

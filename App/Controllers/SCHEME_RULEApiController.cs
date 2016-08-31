@@ -36,7 +36,11 @@ namespace Langben.App.Controllers
                     ID = s.ID
 					,RULEID =   s.RULEIDOld
 					,SCHEMEID =   s.SCHEMEIDOld
-					,TEST_ITEM_FORMATID =   s.TEST_ITEM_FORMATIDOld
+					,HTMLVALUE = s.HTMLVALUE
+					,CREATETIME = s.CREATETIME
+					,CREATEPERSON = s.CREATEPERSON
+					,UPDATETIME = s.UPDATETIME
+					,UPDATEPERSON = s.UPDATEPERSON
 					
 
                 })
@@ -201,7 +205,6 @@ namespace Langben.App.Controllers
         {
             m_BLL = bll;
         }
-        
     }
 }
 

@@ -66,21 +66,28 @@
                 columns: [[
                    
                     
-					{ field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', width: 77 }
-					,{ field: 'REPORT_CATEGORY', title:  '@Html.DisplayNameFor(model => model.REPORT_CATEGORY)', width: 77 }
-					,{ field: 'CERTIFICATE_CATEGORY', title:  '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 77 }
-					,{ field: 'STATUS', title:  '@Html.DisplayNameFor(model => model.STATUS)', width: 77 }
-					,{ field: 'ISPUBLISH', title:  '@Html.DisplayNameFor(model => model.ISPUBLISH)', width: 77 }
-					,{ field: 'COPYID', title:  '@Html.DisplayNameFor(model => model.COPYID)', width: 77 }
-					,{ field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width: 77 }
-					,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 77
+					{ field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', width: 51 }
+					,{ field: 'REPORT_CATEGORY', title:  '@Html.DisplayNameFor(model => model.REPORT_CATEGORY)', width: 51 }
+					,{ field: 'CERTIFICATE_CATEGORY', title:  '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 51 }
+					,{ field: 'STATUS', title:  '@Html.DisplayNameFor(model => model.STATUS)', width: 51 }
+					,{ field: 'ISSTOP', title:  '@Html.DisplayNameFor(model => model.ISSTOP)', width: 51 }
+					,{ field: 'ISPUBLISH', title:  '@Html.DisplayNameFor(model => model.ISPUBLISH)', width: 51 }
+					,{ field: 'COPYID', title:  '@Html.DisplayNameFor(model => model.COPYID)', width: 51 }
+					,{ field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width: 51 }
+					,{ field: 'PUBLISHTIME', title:  '@Html.DisplayNameFor(model => model.PUBLISHTIME)', width: 51
                     , formatter: formatDatebox
 }
-					,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 77 }
-					,{ field: 'UPDATETIME', title:  '@Html.DisplayNameFor(model => model.UPDATETIME)', width: 77
+					,{ field: 'PUBLISHPERSON', title:  '@Html.DisplayNameFor(model => model.PUBLISHPERSON)', width: 51 }
+					,{ field: 'ISPUBLISHTIME', title:  '@Html.DisplayNameFor(model => model.ISPUBLISHTIME)', width: 51 }
+					,{ field: 'ISPUBLISHPERSON', title:  '@Html.DisplayNameFor(model => model.ISPUBLISHPERSON)', width: 51 }
+					,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 51
                     , formatter: formatDatebox
 }
-					,{ field: 'UPDATEPERSON', title:  '@Html.DisplayNameFor(model => model.UPDATEPERSON)', width: 77 }
+					,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 51 }
+					,{ field: 'UPDATETIME', title:  '@Html.DisplayNameFor(model => model.UPDATETIME)', width: 51
+                    , formatter: formatDatebox
+}
+					,{ field: 'UPDATEPERSON', title:  '@Html.DisplayNameFor(model => model.UPDATEPERSON)', width: 51 }
                 ]],
                 pagination: true,
                 rownumbers: true

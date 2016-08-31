@@ -66,21 +66,23 @@
                 columns: [[
                    
                     
-					{ field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', width: 77 }
-					,{ field: 'SCHEME_MENU', title:  '@Html.DisplayNameFor(model => model.SCHEME_MENU)', width: 77 }
-					,{ field: 'SORT', title:  '@Html.DisplayNameFor(model => model.SORT)', width: 77 }
-					,{ field: 'IS_UNCERTAINTY', title:  '@Html.DisplayNameFor(model => model.IS_UNCERTAINTY)', width: 77 }
-					,{ field: 'UNCERTAINTY_MENU', title:  '@Html.DisplayNameFor(model => model.UNCERTAINTY_MENU)', width: 77 }
-					,{ field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width: 77 }
-					,{ field: 'PARENTID', title:  '@Html.DisplayNameFor(model => model.PARENTID)', width: 77 }
-					,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 77
+					{ field: 'NAMEOTHER', title: '@Html.DisplayNameFor(model => model.NAMEOTHER)', width: 64 }
+					,{ field: 'NAME', title:  '@Html.DisplayNameFor(model => model.NAME)', width: 64 }
+					,{ field: 'SCHEME_MENU', title:  '@Html.DisplayNameFor(model => model.SCHEME_MENU)', width: 64 }
+					,{ field: 'SORT', title:  '@Html.DisplayNameFor(model => model.SORT)', width: 64 }
+					,{ field: 'IS_UNCERTAINTY', title:  '@Html.DisplayNameFor(model => model.IS_UNCERTAINTY)', width: 64 }
+					,{ field: 'UNCERTAINTY_MENU', title:  '@Html.DisplayNameFor(model => model.UNCERTAINTY_MENU)', width: 64 }
+					,{ field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width: 64 }
+					,{ field: 'INPUTSTATE', title:  '@Html.DisplayNameFor(model => model.INPUTSTATE)', width: 64 }
+					,{ field: 'PARENTID', title:  '@Html.DisplayNameFor(model => model.PARENTID)', width: 64 }
+					,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 64
                     , formatter: formatDatebox
 }
-					,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 77 }
-					,{ field: 'UPDATETIME', title:  '@Html.DisplayNameFor(model => model.UPDATETIME)', width: 77
+					,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 64 }
+					,{ field: 'UPDATETIME', title:  '@Html.DisplayNameFor(model => model.UPDATETIME)', width: 64
                     , formatter: formatDatebox
 }
-					,{ field: 'UPDATEPERSON', title:  '@Html.DisplayNameFor(model => model.UPDATEPERSON)', width: 77 }
+					,{ field: 'UPDATEPERSON', title:  '@Html.DisplayNameFor(model => model.UPDATEPERSON)', width: 64 }
                 ]],
                 pagination: true,
                 rownumbers: true
@@ -160,7 +162,7 @@
             }
             arr.push("^");
             for (var i = 0; i < rows.length; i++) {
-                arr.push(rows[i].NAME);
+                arr.push(rows[i].NAMEOTHER);
             }
             //主键列和显示列之间用 ^ 分割   每一项用 , 分割
             if (arr.length > 0) {//一条数据和多于一条

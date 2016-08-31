@@ -14,42 +14,18 @@
 
 }
 <div>
-    条形码：@Html.Editor("BAR_CODE_NUM", new { })
+    条形码：@Html.Editor("BAR_CODE_NUM")
     出厂编号：@Html.Editor("FACTORY_NUM")
     型号：@Html.Editor("VERSION")
     器具名称：@Html.Editor("APPLIANCE_NAME")
 </div>
 <br style="clear:both;" />
-
+<input type="text" value="调到" name="FACTORY_NUM" />
 <input type="button" onclick="seng()" value="查询" />
 <script type="text/javascript">
     //委托单保存
     function ajaxFrom(form, url) {
-        $.ajax({
-            url: url,
-            type: "Post",
-            data: $(form).serialize(),
-            dataType: "json",
 
-            success: function (data) {
-                if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
-                else {
-                    $("#hiddenid").val(data.Id);
-                    if ($.messager) {
-                        $.messager.defaults.ok = '继续';
-                        $.messager.defaults.cancel = '返回';
-
-                        $.messager.confirm('操作提示', data.Message, function (r) {
-                            if (!r) {
-                                window.location.href = 'javascript:history.go(-1)';
-                            }
-                        });
-                    }
-                }
-
-
-            }
-        });
 
     }
 
@@ -66,26 +42,7 @@
 
     }
     $(function () {
-        $.extend($.fn.datagrid.defaults.editors, {
-            text: {
-                init: function (container, options) {
-                    var input = $('<input type="text" class="datagrid-editable-input">').appendTo(container);
-                    return input;
-                },
-                destroy: function (target) {
-                    $(target).remove();
-                },
-                getValue: function (target) {
-                    return $(target).val();
-                },
-                setValue: function (target, value) {
-                    $(target).val(value);
-                },
-                resize: function (target, width) {
-                    $(target)._outerWidth(width);
-                }
-            }
-        });
+
 
         $("form").submit(function (form) {
             if (form.result) {
@@ -102,15 +59,41 @@
         }
         var editFlag = undefined;//设置一个编辑标记
         var url = null;
-        var Address = [{ "value": "是", "text": "是" }, { "value": "否", "text": "否" }];
 
         //保存
         function flexiSave() {
-            $('#ApplianceDate').edatagrid('saveRow')
+            $('#ApplianceDate').edatagrid('saveRow');
             debugger;
-            var datasdf = $('#ApplianceDate').edatagrid('getRows');
+            var qiju = $('#ApplianceDate').edatagrid('getRows');
+            var weituodan = new Object();
+            weituodan.ACCEPT_ORGNIZATION = $("#ACCEPT_ORGNIZATION").val();
+            $.ajax({
+                url: "",
+                type: "Post",
+                data: {
+                    qiju: qiju, weituodan: weituodan
+                },
+                dataType: "json",
 
-            //// $("#xu").val();
+                success: function (data) {
+                    if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                    else {
+                        $("#hiddenid").val(data.Id);
+                        if ($.messager) {
+                            $.messager.defaults.ok = '继续';
+                            $.messager.defaults.cancel = '返回';
+
+                            $.messager.confirm('操作提示', data.Message, function (r) {
+                                if (!r) {
+                                    window.location.href = 'javascript:history.go(-1)';
+                                }
+                            });
+                        }
+                    }
+
+
+                }
+            });
         }
 
         $('#ApplianceDate').edatagrid({
@@ -163,7 +146,7 @@
            , {
                field: 'VERSION', title: '型号', width: 65, editor: {
                    type: 'validatebox', options: {
-                   
+
                        required: true,
                        missingMessage: '必填'
                    }
@@ -177,11 +160,9 @@
                }
            }, {
                field: 'APPEARANCE_STATUS', title: '外观状态', width: 65, editor: {
-                   type: 'text', setValue: function (target, value) {
-                       debugger;
-                       $(target).val('value');
-                   }, options: {
-                      
+                   type: 'validatebox', options: {
+                       required: true,
+                       missingMessage: '必填'
                    }
                }
            }
@@ -215,8 +196,6 @@
     //
 
 </script>
-<input type="checkbox" name="abc" value="1" />
-<select id="cc" data-options="multiple:true, multiline:true" class="easyui-combobox" name="dept" style="width:200px;"><option value="aa">aitem1</option><option>bitem2</option><option>bitem3</option><option>ditem4</option><option>eitem5</option></select>
 @*百度模式输入显示下拉框*@
 @*<link href="~/Content/jquery-ui-1.10.1.custom.min.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-ui-1.10.1.custom.min.js"></script>*@

@@ -34,12 +34,14 @@ namespace Langben.App.Controllers
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID
+					,NAMEOTHER = s.NAMEOTHER
 					,NAME = s.NAME
 					,SCHEME_MENU = s.SCHEME_MENU
 					,SORT = s.SORT
 					,IS_UNCERTAINTY = s.IS_UNCERTAINTY
 					,UNCERTAINTY_MENU = s.UNCERTAINTY_MENU
 					,UNDERTAKE_LABORATORYID =   s.UNDERTAKE_LABORATORYIDOld
+					,INPUTSTATE = s.INPUTSTATE
 					,PARENTID = s.PARENTID
 					,CREATETIME = s.CREATETIME
 					,CREATEPERSON = s.CREATEPERSON
@@ -209,8 +211,6 @@ namespace Langben.App.Controllers
         {
             m_BLL = bll;
         }
-        
-       
     }
 }
 
