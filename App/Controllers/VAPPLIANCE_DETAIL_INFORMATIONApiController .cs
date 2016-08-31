@@ -33,11 +33,23 @@ namespace Langben.App.Controllers
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             string returnValue = string.Empty;
-            string[] datae = id.GetString().Split('^');
-            string[] deleteId = datae[0].GetString().Split(',');
+
+            string[] deleteId = id.Split(',');
             if (deleteId != null && deleteId.Length > 0)
-            {   //数据校验
-                if (m_BLL.EditCollection(ref validationErrors, deleteId, datae[1].ToString()))
+            {
+                Common.Account account = GetCurrentAccount();
+               //判断出是试验完成的id
+                for (int i = 0; i < deleteId.Length; i++)
+                {
+                    deleteId[i]= deleteId[i].Substring(0,deleteId[i].Length - 1);
+                    string ids= deleteId[i].Substring(deleteId[i].Length - 1);
+                    if (ids=="*")
+                    {
+
+                    }
+                }
+                //数据校验
+                if ( m_BLL.EditCollection(ref validationErrors, deleteId, account.UNDERTAKE_LABORATORYName))
                 {
                     LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息信息的Id为" + string.Join(",", deleteId), "器具明细信息"
                         );//写入日志                   
@@ -123,16 +135,16 @@ namespace Langben.App.Controllers
             if (entity != null && ModelState.IsValid)
             {   //数据校验
 
-                //string currentPerson = GetCurrentPerson();
-                //entity.UpdateTime = DateTime.Now;
-                //entity.UpdatePerson = currentPerson;
+                string currentPerson = GetCurrentPerson();
+                entity.UPDATETIME = DateTime.Now;
+                entity.UPDATEPERSON = currentPerson;
 
                 string returnValue = string.Empty;
                 if (!string.IsNullOrEmpty(entity.ORDER_STATUS))
                 {
-                    if (Enum.IsDefined(typeof(Common.OrderStatus), entity.ORDER_STATUS))
+                    if (Enum.IsDefined(typeof(Common.ORDER_STATUS), entity.ORDER_STATUS))
                     {
-                        entity.EQUIPMENT_STATUS_VALUUMN = Enum.Parse(typeof(Common.OrderStatus), entity.ORDER_STATUS).GetHashCode().ToString();
+                        entity.EQUIPMENT_STATUS_VALUUMN = Enum.Parse(typeof(Common.ORDER_STATUS), entity.ORDER_STATUS).GetHashCode().ToString();
                     }
                 }
                 if (m_BLL.EditField(ref validationErrors, entity))

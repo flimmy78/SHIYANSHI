@@ -70,13 +70,49 @@
             </div>
         </div>
         <input type="hidden" value="" id="ACCEPT_ORGNIZATION_HIDDEN" />
+        <input type="hidden" name="APPLIANCE_LABORATORYID" value="@ViewBag.APPLIANCE_LABORATORYID" />
+        <input type="hidden" name="ID" value="@ViewBag.Id" />
     </fieldset>
 }
 <script type="text/javascript">
     //报告上传
     function shangchuan() {
-        var id = "@ViewBag.Id";
-        window.location.href = "/VJIANDINGRENWU/BaoGaoShangChuan/" + id;
+       $("form").submit(function (form) {
+                if (form.result) {
+                    bb(this, this.action);
+                }
+                return false;
+            });
+    }
+    function bb(form, url) {
+        $.ajax({
+            url: url,
+            type: "Post",
+            data: $(form).serialize(),
+            dataType: "json",
+
+            success: function (data) {
+                if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                else if (data.Code == 1) {
+                    var id = "@ViewBag.Id";
+                    window.location.href = "/VJIANDINGRENWU/BaoGaoShangChuan/?id:" + data.Id + "&APPLIANCE_DETAIL_INFORMATIONID:"@ViewBag.APPLIANCE_DETAIL_INFORMATIONID;
+                    return false;
+                }
+                else {
+                    if ($.messager) {
+                        $.messager.defaults.ok = '继续';
+                        $.messager.defaults.cancel = '返回';
+
+                        $.messager.confirm('操作提示', data.Message, function (r) {
+                            if (!r) {
+                                window.location.href = 'javascript:history.go(-1)';
+                            }
+                        });
+                    }
+                }
+
+
+            }})
     }
     //重新绑定资质
     function zizhiget(arr) {

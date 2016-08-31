@@ -29,8 +29,9 @@ namespace Langben.DAL
         public string APPROVAL { get; set; }
         public string INSPECTION_ENTERPRISE { get; set; }
         public string ISOVERDUE { get; set; }
-        public string UNDERTAKE_LABORATORYID { get; set; }
         public string EQUIPMENT_STATUS_VALUUMN { get; set; }
         public Nullable<System.DateTime> CREATETIME { get; set; }
+        public string NAME { get; set; }
+        public Nullable<System.DateTime> UPDATETIME { get; set; }
     }
 }

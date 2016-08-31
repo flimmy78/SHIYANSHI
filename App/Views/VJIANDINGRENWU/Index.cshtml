@@ -443,22 +443,41 @@
     function lingqu() {
         var arr = $('#flexigridData').datagrid('getSelections');
         if (arr.length >= 1) {
-            var is = "";
+            var id = "";
+            var id2 = "";
             $.messager.confirm('操作提示', "确认领取这 " + arr.length + " 项吗？", function (r) {
                 if (r) {
+                    var yinlingqu = null;
                     for (var i = 0; i < arr.length; i++) {
-                        if (arr[i].ORDER_STATUS != null && arr[i].APPLIANCE_PROGRESS != null) {
-                            $.messager.alert('操作提示', '不能重复领取!', 'warning');
-                            is = "";
+                        if (arr[i].ORDER_STATUS == "已分配" || arr[i].ORDER_STATUS == "已领取" || arr[i].ORDER_STATUS == "试验完成") {
+                            if (arr[i].ORDER_STATUS == "已领取") {
+                                yinlingqu = "第" + i + 1 + "行,"
+                                id2 += arr[i].ID + ",";
+                            } else if (arr[i].ORDER_STATUS == "试验完成") {
+                                id += arr[i].ID +"*"+ ",";
+                            }
+                            else {
+                                id += arr[i].ID + ",";
+                            }
+                        }
+
+                        else {
+                            $.messager.alert('操作提示', '请选择正确数据!', 'warning');
                             return false;
                         }
-                        else {
-                            is += arr[i].ID + ",";
-                        }
                     }
-                    is = is.substring(0, is.length - 1) + "^三相";
+                    if (yinlingqu != null) {
+                        $.messager.confirm('操作提示', "" + yinlingqu + "已领取确认重复领取吗？", function (r) {
+                            if (r) {
+                                id += id2;
+                            }
+                            else {
+                                return false;
+                            }
+                        })
+                    }
                     $.ajax({
-                        url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/Put/" + is,
+                        url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/Put/" + id,
                         type: "Put",
                         // async: false,
                         success: function (res) {

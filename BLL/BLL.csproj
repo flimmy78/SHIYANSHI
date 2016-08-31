@@ -59,6 +59,8 @@
     <Compile Include="ORDER_TASK_INFORMATIONBLL.cs" />
     <Compile Include="APPLIANCE_DETAIL_INFORMATIONBLL.cs" />
     <Compile Include="Shiyanshi\APPLIANCE_DETAIL_INFORMATIONBLL.cs" />
+    <Compile Include="Shiyanshi\APPLIANCE_LABORATORYBLL.cs" />
+    <Compile Include="Shiyanshi\PREPARE_SCHEMEBLL.cs" />
     <Compile Include="SysAnnouncementBLL.cs" />
     <Compile Include="SysDepartmentBLL.cs" />
     <Compile Include="SysDocumentBLL.cs" />

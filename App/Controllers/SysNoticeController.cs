@@ -219,8 +219,8 @@ namespace Langben.App.Controllers
             {   //数据校验
             
                 string currentPerson = GetCurrentPerson();                 
-                //entity.UpdateTime = DateTime.Now;
-                //entity.UpdatePerson = currentPerson;
+               // entity.UPDATETIME = DateTime.Now;
+               // entity.UPDATEPERSON = currentPerson;
                            
                 string returnValue = string.Empty;   
                 if (m_BLL.Edit(ref validationErrors, entity))

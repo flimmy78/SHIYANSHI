@@ -73,9 +73,9 @@ namespace Langben.App.Controllers
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
             {
-                //string currentPerson = GetCurrentPerson();
-                //entity.CreateTime = DateTime.Now;
-                //entity.CreatePerson = currentPerson;
+                string currentPerson = GetCurrentPerson();
+               entity.CREATETIME = DateTime.Now;
+                entity.CREATEPERSON = currentPerson;
               
                 entity.ID = Result.GetNewId();   
                 string returnValue = string.Empty;
@@ -122,9 +122,9 @@ namespace Langben.App.Controllers
             if (entity != null && ModelState.IsValid)
             {   //数据校验
 
-                //string currentPerson = GetCurrentPerson();
-                //entity.UpdateTime = DateTime.Now;
-                //entity.UpdatePerson = currentPerson;
+                string currentPerson = GetCurrentPerson();
+                entity.UPDATETIME = DateTime.Now;
+                entity.UPDATEPERSON = currentPerson;
 
                 string returnValue = string.Empty;
                 if (m_BLL.Edit(ref validationErrors, entity))

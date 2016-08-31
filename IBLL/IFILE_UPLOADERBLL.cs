@@ -46,15 +46,7 @@ namespace Langben.IBLL
         /// <returns></returns>
         [OperationContract]
         System.Collections.Generic.List<FILE_UPLOADER> GetAll();
-        
-        /// <summary>
-        /// 根据PREPARE_SCHEMEIDId，获取所有附件数据
-        /// </summary>
-        /// <param name="id">外键的主键</param>
-        /// <returns></returns>
-        List<FILE_UPLOADER> GetByRefPREPARE_SCHEMEID(string id);
-
-        
+   
         /// <summary>
         /// 根据主键，查看详细信息
         /// </summary>

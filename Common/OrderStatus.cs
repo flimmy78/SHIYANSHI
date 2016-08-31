@@ -6,64 +6,70 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    public enum OrderStatus
-    {    
+    //器具状态
+    public enum ORDER_STATUS
+    {
         /// <summary>
-        /// 已分配
+        /// 器具登记完成时
         /// </summary>
         已分配 = 1010,
         /// <summary>
-        /// 已退回
+        /// 器具检定退回到器具登记时
         /// </summary>
         已退回 = 1015,
         /// <summary>
-        /// 已领取
+        /// 点击领取按钮时
         /// </summary>
         已领取 = 1020,
         /// <summary>
-        /// 试验中
-        /// </summary>
-        试验中 = 1030,
-        /// <summary>
-        /// 试验完成
+        /// 审核完成时
         /// </summary>
         试验完成 = 1040,
         /// <summary>
-        /// 已上传
+        /// 批准同意后在没有其余实验室要做实验时器具状态改为待入库
         /// </summary>
-        已上传 = 1050,
+        待入库 = 1041,
         /// <summary>
-        /// 已审核
+        /// 点击入库按钮时
         /// </summary>
-        已审核 = 1060,
+        器具已入库 = 1042,
         /// <summary>
-        /// 已批准
+        /// 器具领取环节
         /// </summary>
-        已批准 = 1070,
+        器具已返还 = 1043,
+
+    }
+
+    //报告状态
+    public enum REPORTSTATUS
+    {
         /// <summary>
-        /// 待入库
+        /// 器具检定完成发往审核时
         /// </summary>
-        待入库 = 1075,
+        待审核 = 1060,
         /// <summary>
-        /// 器具已入库
+        /// 审核不同意时
         /// </summary>
-        器具已入库 = 1080,
+        审核驳回 = 1065,
         /// <summary>
-        /// 器具已返还
+        /// 审核通过发往审批时
         /// </summary>
-        器具已返还 = 1090,
+        待批准 = 1070,
         /// <summary>
-        /// 报告已打印
+        /// 批准不同意时
+        /// </summary>
+        批准驳回 = 1071,
+        /// <summary>
+        /// 批准同意时
+        /// </summary>
+        已批准 = 1072,        
+        /// <summary>
+        /// 报告打印环节
         /// </summary>
         报告已打印 = 1110,
         /// <summary>
-        /// 报告已发放
+        /// 报告领取环节
         /// </summary>
         报告已发放 = 1120
-    }
-
-    public enum ApplianceProgress 
-    {
-        进行实验,
     }
 }

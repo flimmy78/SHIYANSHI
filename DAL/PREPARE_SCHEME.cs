@@ -64,6 +64,10 @@ namespace Langben.DAL
         public string ISBACK { get; set; }
         public string REPORTNUMBER { get; set; }
         public string REPORTSTATUS { get; set; }
+        public Nullable<decimal> SERIALNUMBER { get; set; }
+        public string YEARS { get; set; }
+        public string PACKAGETYPE { get; set; }
+        public string REPORTSTATUSZI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<APPLIANCE_LABORATORY> APPLIANCE_LABORATORY { get; set; }

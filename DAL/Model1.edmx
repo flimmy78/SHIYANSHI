@@ -102,6 +102,14 @@
           <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
           <Property Name="APPLIANCE_DETAIL_INFORMATIOID" Type="varchar2" MaxLength="36" />
           <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" />
+          <Property Name="RECEIVEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="RECEIVETIME" Type="date" />
+          <Property Name="BACKPERSON" Type="nvarchar2" MaxLength="200" />
+          <Property Name="BACKTIME" Type="date" />
+          <Property Name="DISTRIBUTIONPERSON" Type="nvarchar2" MaxLength="200" />
+          <Property Name="DISTRIBUTIONTIME" Type="date" />
+          <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="CREATETIME" Type="date" />
         </EntityType>
         <EntityType Name="APPLIANCECOLLECTION">
           <Key>
@@ -592,6 +600,10 @@
           <Property Name="ISBACK" Type="varchar2" MaxLength="200" />
           <Property Name="REPORTNUMBER" Type="varchar2" MaxLength="200" />
           <Property Name="REPORTSTATUS" Type="varchar2" MaxLength="200" />
+          <Property Name="SERIALNUMBER" Type="number" Precision="38" Scale="0" />
+          <Property Name="YEARS" Type="varchar2" MaxLength="200" />
+          <Property Name="PACKAGETYPE" Type="varchar2" MaxLength="200" />
+          <Property Name="REPORTSTATUSZI" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="PRINTREPORT">
           <Key>
@@ -1241,8 +1253,9 @@
           <Property Name="APPROVAL" Type="varchar2" MaxLength="4000" />
           <Property Name="INSPECTION_ENTERPRISE" Type="varchar2" MaxLength="200" />
           <Property Name="ISOVERDUE" Type="varchar2" MaxLength="200" />
-          <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
+          <Property Name="NAME" Type="varchar2" MaxLength="200" />
           <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="varchar2" MaxLength="200" />
+          <Property Name="UPDATETIME" Type="date" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VQIJULINGQU1”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -2165,8 +2178,9 @@ FROM "TENGFEI"."VBAOGAODAYIN" "VBAOGAODAYIN"</DefiningQuery>
 "VJIANDINGRENWU"."APPROVAL" AS "APPROVAL", 
 "VJIANDINGRENWU"."INSPECTION_ENTERPRISE" AS "INSPECTION_ENTERPRISE", 
 "VJIANDINGRENWU"."ISOVERDUE" AS "ISOVERDUE", 
-"VJIANDINGRENWU"."UNDERTAKE_LABORATORYID" AS "UNDERTAKE_LABORATORYID", 
-"VJIANDINGRENWU"."EQUIPMENT_STATUS_VALUUMN" AS "EQUIPMENT_STATUS_VALUUMN"
+"VJIANDINGRENWU"."NAME" AS "NAME", 
+"VJIANDINGRENWU"."EQUIPMENT_STATUS_VALUUMN" AS "EQUIPMENT_STATUS_VALUUMN", 
+"VJIANDINGRENWU"."UPDATETIME" AS "UPDATETIME"
 FROM "TENGFEI"."VJIANDINGRENWU" "VJIANDINGRENWU"</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VQIJULINGQU1" EntityType="Self.VQIJULINGQU1" store:Type="Views" store:Schema="TENGFEI">
@@ -2891,6 +2905,14 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <NavigationProperty Name="APPLIANCE_DETAIL_INFORMATION" Relationship="Model.FK_APPLIANC_REFERENCE_APPLIAN2" FromRole="APPLIANCE_LABORATORY" ToRole="APPLIANCE_DETAIL_INFORMATION" />
           <NavigationProperty Name="PREPARE_SCHEME" Relationship="Model.FK_APPLIANC_REFERENCE_PREPARE_" FromRole="APPLIANCE_LABORATORY" ToRole="PREPARE_SCHEME" />
           <NavigationProperty Name="UNDERTAKE_LABORATORY" Relationship="Model.FK_APPLIANC_REFERENCE_UNDERTAK" FromRole="APPLIANCE_LABORATORY" ToRole="UNDERTAKE_LABORATORY" />
+          <Property Name="RECEIVEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RECEIVETIME" Type="DateTime" />
+          <Property Name="BACKPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BACKTIME" Type="DateTime" />
+          <Property Name="DISTRIBUTIONPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DISTRIBUTIONTIME" Type="DateTime" />
+          <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CREATETIME" Type="DateTime" />
         </EntityType>
         <EntityType Name="APPLIANCECOLLECTION">
           <Key>
@@ -3414,6 +3436,10 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <NavigationProperty Name="QUALIFIED_UNQUALIFIED_TEST_ITE" Relationship="Model.FK_QUALIFIED_UN" FromRole="PREPARE_SCHEME" ToRole="QUALIFIED_UNQUALIFIED_TEST_ITE" />
           <NavigationProperty Name="REPORTCOLLECTION" Relationship="Model.FK_REPORTCO_REFERENCE_PREPARE_" FromRole="PREPARE_SCHEME" ToRole="REPORTCOLLECTION" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.METERING_STANDARD_DEVICEPREPAR" FromRole="PREPARE_SCHEME" ToRole="METERING_STANDARD_DEVICE" />
+          <Property Name="SERIALNUMBER" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="YEARS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PACKAGETYPE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="REPORTSTATUSZI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PRINTREPORT">
           <Key>
@@ -4086,9 +4112,10 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="APPROVAL" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="INSPECTION_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ISOVERDUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CREATETIME" Type="DateTime" />
+          <Property Name="NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATETIME" Type="DateTime" />
         </EntityType>
         <EntityType Name="VQIJULINGQU1">
           <Key>
@@ -4898,6 +4925,14 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="APPLIANCE_LABORATORY">
             <EntityTypeMapping TypeName="Model.APPLIANCE_LABORATORY">
               <MappingFragment StoreEntitySet="APPLIANCE_LABORATORY">
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="DISTRIBUTIONTIME" ColumnName="DISTRIBUTIONTIME" />
+                <ScalarProperty Name="DISTRIBUTIONPERSON" ColumnName="DISTRIBUTIONPERSON" />
+                <ScalarProperty Name="BACKTIME" ColumnName="BACKTIME" />
+                <ScalarProperty Name="BACKPERSON" ColumnName="BACKPERSON" />
+                <ScalarProperty Name="RECEIVETIME" ColumnName="RECEIVETIME" />
+                <ScalarProperty Name="RECEIVEPERSON" ColumnName="RECEIVEPERSON" />
                 <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
                 <ScalarProperty Name="APPLIANCE_DETAIL_INFORMATIOID" ColumnName="APPLIANCE_DETAIL_INFORMATIOID" />
                 <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
@@ -5367,6 +5402,10 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="PREPARE_SCHEME">
             <EntityTypeMapping TypeName="Model.PREPARE_SCHEME">
               <MappingFragment StoreEntitySet="PREPARE_SCHEME">
+                <ScalarProperty Name="REPORTSTATUSZI" ColumnName="REPORTSTATUSZI" />
+                <ScalarProperty Name="PACKAGETYPE" ColumnName="PACKAGETYPE" />
+                <ScalarProperty Name="YEARS" ColumnName="YEARS" />
+                <ScalarProperty Name="SERIALNUMBER" ColumnName="SERIALNUMBER" />
                 <ScalarProperty Name="REPORTSTATUS" ColumnName="REPORTSTATUS" />
                 <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
                 <ScalarProperty Name="ISBACK" ColumnName="ISBACK" />
@@ -6039,9 +6078,10 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="VJIANDINGRENWU">
             <EntityTypeMapping TypeName="Model.VJIANDINGRENWU">
               <MappingFragment StoreEntitySet="VJIANDINGRENWU">
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
                 <ScalarProperty Name="EQUIPMENT_STATUS_VALUUMN" ColumnName="EQUIPMENT_STATUS_VALUUMN" />
-                <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
                 <ScalarProperty Name="ISOVERDUE" ColumnName="ISOVERDUE" />
                 <ScalarProperty Name="INSPECTION_ENTERPRISE" ColumnName="INSPECTION_ENTERPRISE" />
                 <ScalarProperty Name="APPROVAL" ColumnName="APPROVAL" />
