@@ -69,12 +69,9 @@
                         <th align="center" class="f14"><b>+</b></th>
                         <th align="center" class="f14"><b>-</b></th>
                         <th align="center">
-                            U(K = <select class="easyui-combobox" name="state" style="width:30px;">
+                            U(K = <select name="state" style="width:35px;">
                                 <option value="AL">2 </option>
                                 <option value="AK">3</option>
-                                <option value="AZ">4</option>
-
-
                             </select>)
                         </th>
                     </tr>
@@ -82,8 +79,9 @@
                 <tbody id="tbody_0"></tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open'); set(i)">增加量程</a></td>
-
+                        <td colspan="7">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="$('#dlg').dialog('open'); set(i)">增加量程</a>
+                        </td>
                     </tr>
                 </tfoot>
             </table>
@@ -193,7 +191,8 @@
             for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
                 htmlString.push("<tr>");
                 if (rowidx == 0)
-                    htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"right\"><input class=\"easyui-textbox input-width\" value='" + txtNumber + "' /><select class=\"easyui-combobox1\" name=\"state_" + i + "\" id=\"state_" + i + "\" onchange=\"changeValue(this)\" style=\"width:50px; height:25px\" ><option value=\"\">MV</option><option value=\"\">KV</option><option value=\"\">V</option><option value=\"\">mV</option><option value=\"\">μv</option></select></td>");
+                    htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"right\"><input class=\"easyui-textbox input-width\" value='" + txtNumber
+                        + "' /><select class=\"easyui-combobox1\" name=\"state_" + i + "\" id=\"state_" + i + "\" onchange=\"changeValue(this)\" style=\"width:50px; height:25px\" ><option value=\"\">MV</option><option value=\"\">KV</option><option value=\"\">V</option><option value=\"\">mV</option><option value=\"\">μv</option></select></td>");
 
                 for (var td1 = 0; td1 < 3; td1++) {
                     if (td1 == 0)//标准值这列
@@ -201,7 +200,8 @@
                             standardValue = calculate(rowspanIdx)[rowidx];
                         else
                             standardValue = "";
-                    htmlString.push("<td align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' /><select class=\"easyui-combobox1\" name=\"state\" style=\"width:50px; height:25px\"><option value=\"\">MV</option><option value=\"\">KV</option><option value=\"\">V</option><option value=\"\">mV</option><option value=\"\">μv</option></select></td>");
+                    htmlString.push("<td align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue
+                        + "' /><select class=\"easyui-combobox1\" name=\"state\" style=\"width:50px; height:25px\"><option value=\"\">MV</option><option value=\"\">KV</option><option value=\"\">V</option><option value=\"\">mV</option><option value=\"\">μv</option></select></td>");
                 }
                 for (var td2 = 0; td2 < 2; td2++) {
                     htmlString.push("<td align=\"right\"><input  class=\"easyui-textbox input-width\" /></td>");
@@ -214,7 +214,6 @@
 
 
             htmlString = htmlString.join("");
-            //var tr = '<tr><td rowspan="3" align="right"><input   class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input id="txtName3" class="easyui-textbox input-width"  /></td><td align="right"><input id="txtName6" class="easyui-textbox input-width"  /></td><td><input id="txtName9" class="easyui-textbox input-width"  /></td></tr><tr><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /></td><td align="right"><input class="easyui-textbox input-width"  /></td><td><input id="txtName10" class="easyui-textbox input-width"  /></td></tr><tr><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input id="txtName2" class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input id="txtName5" class="easyui-textbox input-width"  /></td><td align="right"><input id="txtName8" class="easyui-textbox input-width"  /></td><td><input id="txtName11" class="easyui-textbox input-width"  /></td></tr>';
             var tagRow = $("#tbody_" + idx).append(htmlString);
 
             $.parser.parse(tagRow);
