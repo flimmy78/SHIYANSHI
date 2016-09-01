@@ -34,8 +34,9 @@ namespace Langben.App.Controllers
             return View();
 
         }
-        public ActionResult Test()
+        public ActionResult Test(string duoTongDao= "show")
         {
+            ViewBag.DuoTongDao = duoTongDao;//如果想显示“增加通道”按钮，就为show，否则为hidden
 
             return View();
 

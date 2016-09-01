@@ -23,7 +23,6 @@
     <script src="/Scripts/jquery.validate.js"></script>
     <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
-
 </head>
 <body class="easyui-layout">
     <input type="hidden" id="rowindex" />
@@ -31,9 +30,8 @@
         <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
             <table>
                 <tr>
-
                     <td>
-                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a>
+                        <a href="javascript:;" id="tongdaoshow" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a>
                         <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="CreateTable()">保存检测项</a>
                         <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="">重置检测项</a>
                     </td>
@@ -44,66 +42,67 @@
 
     <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
         <div class="mt10" id="tongdao">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_0">
-                <thead>
-                    <tr>
-                        <th rowspan="2" align="center" width="140">量程</th>
-                        <th rowspan="2" align="center" width="140">标准值</th>
-                        <th colspan="2" align="center">
-                            显示值                             <select class="easyui-combobox1" name="sssss" id="sssss" style="width:100px;" onchange="changeValue(this)">
-                                <option value="AL">&nbsp;&nbsp; </option>
-                                <option value="AK">CH1</option>
-                                <option value="AZ">CH2</option>
-                                <option value="AR">CH3</option>
-                                <option value="CA">CH4</option>
+            @* <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_0">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" align="center" width="140">量程</th>
+                                <th rowspan="2" align="center" width="140">标准值</th>
+                                <th colspan="2" align="center">
+                                    显示值
+                                    <select class="easyui-combobox1 tongdao" name="sssss" id="sssss" style="width:100px;" onchange="changeValue(this)">
+                                        <option value="AL">&nbsp;&nbsp; </option>
+                                        <option value="AK">CH1</option>
+                                        <option value="AZ">CH2</option>
+                                        <option value="AR">CH3</option>
+                                        <option value="CA">CH4</option>
 
 
-                            </select>
-                        </th>
-                        <th colspan="2" align="center">相对误差</th>
-                        <th align="center">校准结果的不确定度</th>
-                    </tr>
-                    <tr>
-                        <th align="center" class="f14"><b>+</b></th>
-                        <th align="center" class="f14"><b>-</b></th>
-                        <th align="center" class="f14"><b>+</b></th>
-                        <th align="center" class="f14"><b>-</b></th>
-                        <th align="center">
-                            U(K = <select name="state" style="width:35px;">
-                                <option value="AL">2 </option>
-                                <option value="AK">3</option>
-                            </select>)
-                        </th>
-                    </tr>
-                </thead>
-                <tbody id="tbody_0"></tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="7">
-                            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="$('#dlg').dialog('open'); set(i)">增加量程</a>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
+                                    </select>
+                                </th>
+                                <th colspan="2" align="center">相对误差</th>
+                                <th align="center">校准结果的不确定度</th>
+                            </tr>
+                            <tr>
+                                <th align="center" class="f14"><b>+</b></th>
+                                <th align="center" class="f14"><b>-</b></th>
+                                <th align="center" class="f14"><b>+</b></th>
+                                <th align="center" class="f14"><b>-</b></th>
+                                <th align="center">
+                                    U(K = <select name="state" style="width:35px;">
+                                        <option value="AL">2 </option>
+                                        <option value="AK">3</option>
+                                    </select>)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_0"></tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="7">
+                                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="$('#dlg').dialog('open'); set(i)">增加量程</a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
 
 
 
-        </div>
+                </div>
 
-        <div class="mt10">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
+                <div class="mt10">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
 
-                <tr>
-                    <th width="40">注：</th>
-                    <td colspan="6"><input class="easyui-textbox input-width" name="" data-options="multiline:true" style="height:30px; width:95%"></td>
-                </tr>
-                <tr>
-                    <th width="40">结论：</th>
-                    <td colspan="6"><input class="easyui-textbox input-width" name="" data-options="multiline:true" style="height:30px; width:95%"></td>
-                </tr>
+                        <tr>
+                            <th width="40">注：</th>
+                            <td colspan="6"><input class="easyui-textbox input-width" name="" data-options="multiline:true" style="height:30px; width:95%"></td>
+                        </tr>
+                        <tr>
+                            <th width="40">结论：</th>
+                            <td colspan="6"><input class="easyui-textbox input-width" name="" data-options="multiline:true" style="height:30px; width:95%"></td>
+                        </tr>
 
 
-            </table>
+                    </table>*@
         </div>
 
 
@@ -140,31 +139,35 @@
         </form>
     </div>
     <!--/增加量程弹层-->
-
+    <input type="hidden" id="duotongdao" value="@ViewBag.DuoTongD" />
     <script type="text/javascript" language="javascript">
         //验证数字
         $(function () {
             $("#myform").validate();
+            //通过参数ViewBag.TongDao，决定是否显示多通道
+            var tongdao = $("#duotongdao").val();
+            if (tongdao == "hidden") {
+                $("#tongdaoshow").hide();
+            }
+            CreateTable();
         });
-        // $(document).ready(function () {
 
-        //     $("#sssss").combobox({
-        //         onChange: function (n, o) {
-        //             alert("test!");
-        //         }
-
-        //     });
-
-        //  });
         //共有的通道数量
         var i = 0;
         //创建通道
         function CreateTable() {
+            //通过参数ViewBag.TongDao，决定是否显示多通道
+            var tongdao = $("#duotongdao").val();
+
             i++;
             var tfoot = " <tfoot>"
                 + "<tr><td colspan='7'><a href='javascript:void(0)' class='easyui-linkbutton' data-options=\"plain:true,iconCls:'icon-add'\" onclick=\"$('#dlg').dialog('open');set(" + i + ")\">增加量程</a></td></tr> </tfoot>";
             var table = "<table width='100%' border='0' cellspacing='0' cellpadding='0' class='tbl mt10' id='tongdao_" + i + "'>"
-                + "<thead><tr><th rowspan='2' align='center' width='140'>量程</th><th rowspan='2' align='center' width='140'>标准值</th> <th colspan='2' align='center'>显示值 <select class='easyui-combobox' name='state' style='width:100px;'><option value='AL'>&nbsp;&nbsp; </option><option value='AK'>CH1</option><option value='AZ'>CH2</option><option value='AR'>CH3</option><option value='CA'>CH4</option></select></th><th colspan='2' align='center'>相对误差</th><th align='center'>校准结果的不确定度</th></tr><tr><th align='center'>+</th><th align='center'>-</th><th align='center'>+</th><th align='center'>-</th><th align='center'>U(K=<select class='easyui-combobox' name='state' style='width:30px;'><option value='AL'>2 </option><option value='AK'>3</option><option value='AZ'>4</option></select>)</th></tr></thead>"
+                + "<thead><tr><th rowspan='2' align='center' width='140'>量程</th><th rowspan='2' align='center' width='140'>标准值</th> <th colspan='2' align='center'>显示值 "
+            if (tongdao != "hidden") {
+                table += "<select name='state' style='width:100px;'><option value='AL'>&nbsp;&nbsp; </option><option value='AK'>CH1</option><option value='AZ'>CH2</option><option value='AR'>CH3</option><option value='CA'>CH4</option></select>"
+            }
+            table += "</th><th colspan='2' align='center'>相对误差</th><th align='center'>校准结果的不确定度</th></tr><tr><th align='center'>+</th><th align='center'>-</th><th align='center'>+</th><th align='center'>-</th><th align='center'>U(K=<select name='state' style='width:35px;'><option value='AL'>2 </option><option value='AK'>3</option><option value='AZ'>4</option></select>)</th></tr></thead>"
                 + "<tbody id='tbody_" + i + "'></tbody>"
                 + tfoot
                 + "</table>";
