@@ -288,15 +288,7 @@ namespace Langben.BLL
         }
 
 
-        /// <summary>
-        /// 根据ORDER_TASK_INFORMATIONIDId，获取所有器具明细信息数据
-        /// </summary>
-        /// <param name="id">外键的主键</param>
-        /// <returns></returns>
-        public List<APPLIANCE_DETAIL_INFORMATION> GetByRefORDER_TASK_INFORMATIONID(string id)
-        {
-            return repository.GetByRefORDER_TASK_INFORMATIONID(db, id).ToList();                      
-        }
+    
 
         public void Dispose()
         {

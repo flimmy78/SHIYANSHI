@@ -8,35 +8,31 @@
         <label>报告上传</label>
     </legend>
     <div>
-        <div class="input_search">
-            <div class="input_search-label">
-                证书编号：
-            </div>
-            <div class="input_search-field">
-                <label>123</label>
-            </div>
-        </div><br />
-
-        <div class="input_search">
-            @*<div class="input_search-label">
-                    上传原始记录：
-                </div>*@
-            <div class="input_search-field">
-                <form id="form1" method="post" enctype="multipart/form-data" action="BaoGaoShangChuan">
-                    上传原始记录： <input name="name" type="file" id="file" /><label>@ViewBag.NAME2</label>
-                    上传证书：<input name="name2" type="file" id="file2" /><label>@ViewBag.NAME</label>
-                    <div class="input_search">
-                        <div class="input_search-label">
-                            结论：
-                        </div>
-                        <div class="input_search-field">
-                            合格： <input type="radio" name="CONCLUSION" value="合格" id="CONCLUSION1" />
-                            不合格： <input type="radio" name="CONCLUSION" value="不合格" id="CONCLUSION2" />
-                        </div>
-                    </div><br />
-                    <input type="hidden" name="PREPARE_SCHEMEID" value="124" @*value="@ViewBag.Id"*@ />
-                    <input type="hidden" name="ID" value="@ViewBag.ID" id="hiddenID" />
-                    <input id="Submit1" type="submit" value="上传" onclick="javascript:
+        <div class="input_search-field">
+            <form id="form1" method="post" enctype="multipart/form-data" action="BaoGaoShangChuan">
+                <div class="input_search">
+                    <div class="input_search-label">
+                        证书编号：
+                    </div>
+                    <div class="input_search-field">
+                        <label>@ViewBag.REPORTNUMBER</label>
+                        <input type="hidden" name="REPORTNUMBER" value="@ViewBag.REPORTNUMBER" />
+                    </div>
+                </div><br />
+                上传原始记录： <input name="name" type="file" id="file" /><label>@ViewBag.NAME2</label>
+                上传证书：<input name="name2" type="file" id="file2" /><label>@ViewBag.NAME</label>
+                <div class="input_search">
+                    <div class="input_search-label">
+                        结论：
+                    </div>
+                    <div class="input_search-field">
+                        合格： <input type="radio" name="CONCLUSION" value="合格" id="CONCLUSION1" />
+                        不合格： <input type="radio" name="CONCLUSION" value="不合格" id="CONCLUSION2" />
+                    </div>
+                </div><br />
+                <input type="hidden" name="PREPARE_SCHEMEID" value="124" @*value="@ViewBag.Id"*@ />
+                <input type="hidden" name="ID" value="@ViewBag.ID" id="hiddenID" />
+                <input id="Submit1" type="submit" value="上传" onclick="javascript:
         if ($('#file').val() != '' && $('#file2').val() != '')
         {
             if ($('input[name=CONCLUSION]:checked').val() == undefined) {
@@ -51,32 +47,11 @@
             return false;
         };
   " />
-                    <input type="button" value="发送审核" />
-                </form>
-                @*<input type="file" name="name" id="file"/>
-                    <input type="button" value="上传" onclick="shangchuan()"/>*@
-            </div>
-        </div><br />
-        @*<div class="input_search">
-                <div class="input_search-label">
-                    上传证书：
-                </div>
-                <div class="input_search-field">
-                    <input type="file" />
-                    <input type="button" value="上传" />
-                </div>
-            </div><br />*@
-        @*<div class="input_search">
-                <div class="input_search-label">
-                    结论：
-                </div>
-                <div class="input_search-field">
-                    合格： <input type="radio" name="jielun" />
-                    不合格： <input type="radio" name="jielun" />
-                </div>
-            </div><br />*@
-        <input type="button" value="保存" />
-        <input type="button" value="保存并发送审核" />
+                <input type="button" value="发送审核" onclick="songwangshenghe()" />
+            </form>
+            @*<input type="file" name="name" id="file"/>
+                <input type="button" value="上传" onclick="shangchuan()"/>*@
+        </div>
     </div>
 </fieldset>
 
@@ -97,5 +72,26 @@
             $.messager.alert('操作提示', "修改失败！", 'info');
         }
     })
-
+    //发送审核
+    function songwangshenghe() {
+        var arr = {
+            ID: "@ViewBag.Id",
+            REPORTSTATUS: "@Common.REPORTSTATUS.待审核",
+            REPORTSTATUSZI: "@Common.REPORTSTATUS.待审核.GetHashCode()"
+        }
+        $.ajax({
+            url: "/api/PREPARE_SCHEMEApi/EditField",
+            type: "Post",
+            data: arr,
+            // async: false,
+            success: function (res) {
+                if (res.Code == 1) {
+                    $.messager.alert('操作提示', "成功！", 'info');
+                }
+                else {
+                    $.messager.alert('操作提示', "失败！", 'info');
+                }
+            }
+        })
+    }
 </script>

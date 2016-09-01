@@ -24,6 +24,11 @@ namespace Common
         [DataMember]
         public string Name { get; set; }
         /// <summary>
+        /// 实验室名称
+        /// </summary>
+        [DataMember]
+        public string UNDERTAKE_LABORATORYName { get; set; }
+        /// <summary>
         /// 登录的用户名
         /// </summary>
         [DataMember]

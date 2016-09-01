@@ -8,9 +8,9 @@ namespace Langben.DAL
     [MetadataType(typeof(ORDER_TASK_INFORMATIONMetadata))]//使用ORDER_TASK_INFORMATIONMetadata对ORDER_TASK_INFORMATION进行数据验证
     public partial class ORDER_TASK_INFORMATION 
     {
-      
+
         #region 自定义属性，即由数据实体扩展的实体
-        
+         public bool isNewRecord { get; set; }
         #endregion
 
     }

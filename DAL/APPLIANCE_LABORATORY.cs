@@ -18,6 +18,14 @@ namespace Langben.DAL
         public string UNDERTAKE_LABORATORYID { get; set; }
         public string APPLIANCE_DETAIL_INFORMATIOID { get; set; }
         public string PREPARE_SCHEMEID { get; set; }
+        public string RECEIVEPERSON { get; set; }
+        public Nullable<System.DateTime> RECEIVETIME { get; set; }
+        public string BACKPERSON { get; set; }
+        public Nullable<System.DateTime> BACKTIME { get; set; }
+        public string DISTRIBUTIONPERSON { get; set; }
+        public Nullable<System.DateTime> DISTRIBUTIONTIME { get; set; }
+        public string CREATEPERSON { get; set; }
+        public Nullable<System.DateTime> CREATETIME { get; set; }
     
         public virtual APPLIANCE_DETAIL_INFORMATION APPLIANCE_DETAIL_INFORMATION { get; set; }
         public virtual PREPARE_SCHEME PREPARE_SCHEME { get; set; }

@@ -67,7 +67,11 @@ namespace Langben.DAL
         [Display(Name = "器具状态值", Order = 17)]
         public object EQUIPMENT_STATUS_VALUUMN { get; set; }
 
+        [Display(Name = "所在实验室", Order = 18)]
+        public object NAME { get; set; }
 
+        [Display(Name = "修改时间", Order = 19)]
+        public object UPDATETIME { get; set; }
 
     }
 

@@ -22,7 +22,6 @@ namespace Langben.DAL
         public string CERTIFICATE_ENTERPRISE { get; set; }
         public string CUSTOMER_SPECIFIC_REQUIREMENTS { get; set; }
         public string ORDER_STATUS { get; set; }
-        public Nullable<System.DateTime> CREATETIME { get; set; }
         public string APPLIANCE_PROGRESS { get; set; }
         public string OVERDUE { get; set; }
         public string STATE { get; set; }
@@ -30,7 +29,9 @@ namespace Langben.DAL
         public string APPROVAL { get; set; }
         public string INSPECTION_ENTERPRISE { get; set; }
         public string ISOVERDUE { get; set; }
-        public string UNDERTAKE_LABORATORYID { get; set; }
         public string EQUIPMENT_STATUS_VALUUMN { get; set; }
+        public Nullable<System.DateTime> CREATETIME { get; set; }
+        public string NAME { get; set; }
+        public Nullable<System.DateTime> UPDATETIME { get; set; }
     }
 }
