@@ -600,10 +600,10 @@
           <Property Name="ISBACK" Type="varchar2" MaxLength="200" />
           <Property Name="REPORTNUMBER" Type="varchar2" MaxLength="200" />
           <Property Name="REPORTSTATUS" Type="varchar2" MaxLength="200" />
-          <Property Name="SERIALNUMBER" Type="number" Precision="38" Scale="0" />
-          <Property Name="YEARS" Type="varchar2" MaxLength="200" />
-          <Property Name="PACKAGETYPE" Type="varchar2" MaxLength="200" />
           <Property Name="REPORTSTATUSZI" Type="varchar2" MaxLength="200" />
+          <Property Name="SERIALNUMBER" Type="number" Precision="38" Scale="0" />
+          <Property Name="YEARS" Type="nvarchar2" MaxLength="200" />
+          <Property Name="PACKAGETYPE" Type="nvarchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="PRINTREPORT">
           <Key>
@@ -650,6 +650,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
+          <Property Name="NAMEOTHER" Type="varchar2" MaxLength="200" />
           <Property Name="NAME" Type="varchar2" MaxLength="200" />
           <Property Name="SCHEME_MENU" Type="varchar2" MaxLength="200" />
           <Property Name="SORT" Type="number" Precision="38" Scale="0" />
@@ -672,9 +673,14 @@
           <Property Name="REPORT_CATEGORY" Type="varchar2" MaxLength="200" />
           <Property Name="CERTIFICATE_CATEGORY" Type="varchar2" MaxLength="200" />
           <Property Name="STATUS" Type="varchar2" MaxLength="200" />
+          <Property Name="ISSTOP" Type="varchar2" MaxLength="200" />
           <Property Name="ISPUBLISH" Type="varchar2" MaxLength="200" />
           <Property Name="COPYID" Type="varchar2" MaxLength="36" />
           <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
+          <Property Name="PUBLISHTIME" Type="date" />
+          <Property Name="PUBLISHPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="ISPUBLISHTIME" Type="varchar2" MaxLength="200" />
+          <Property Name="ISPUBLISHPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="CREATETIME" Type="date" />
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="UPDATETIME" Type="date" />
@@ -3509,6 +3515,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <NavigationProperty Name="THREE_PHASE_UNCERTAINTY" Relationship="Model.FK_THREE_PH_REFERENCE_RULE" FromRole="RULE" ToRole="THREE_PHASE_UNCERTAINTY" />
           <NavigationProperty Name="UNCERTAINTYPARAMETERMANAGEMENT" Relationship="Model.FK_UNCERTAI_REFERENCE_RULE" FromRole="RULE" ToRole="UNCERTAINTYPARAMETERMANAGEMENT" />
           <NavigationProperty Name="UNCERTAINTY2_HZ" Relationship="Model.FK_UNCERTAI_REFERENCE_RULE2" FromRole="RULE" ToRole="UNCERTAINTY2_HZ" />
+          <Property Name="NAMEOTHER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="SCHEME">
           <Key>
@@ -3529,6 +3536,11 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <NavigationProperty Name="PREPARE_SCHEME" Relationship="Model.FK_PREPARE__REFERENCE_SCHEME" FromRole="SCHEME" ToRole="PREPARE_SCHEME" />
           <NavigationProperty Name="SCHEME_RULE" Relationship="Model.FK_SCHEME_R_REFERENCE_SCHEME" FromRole="SCHEME" ToRole="SCHEME_RULE" />
           <NavigationProperty Name="UNDERTAKE_LABORATORY" Relationship="Model.FK_SCHEME_REFERENCE_UNDERTAK" FromRole="SCHEME" ToRole="UNDERTAKE_LABORATORY" />
+          <Property Name="ISSTOP" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PUBLISHTIME" Type="DateTime" />
+          <Property Name="PUBLISHPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ISPUBLISHTIME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ISPUBLISHPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="SCHEME_RULE">
           <Key>
@@ -5494,6 +5506,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="RULE">
             <EntityTypeMapping TypeName="Model.RULE">
               <MappingFragment StoreEntitySet="RULE">
+                <ScalarProperty Name="NAMEOTHER" ColumnName="NAMEOTHER" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
                 <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
@@ -5513,6 +5526,11 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="SCHEME">
             <EntityTypeMapping TypeName="Model.SCHEME">
               <MappingFragment StoreEntitySet="SCHEME">
+                <ScalarProperty Name="ISPUBLISHPERSON" ColumnName="ISPUBLISHPERSON" />
+                <ScalarProperty Name="ISPUBLISHTIME" ColumnName="ISPUBLISHTIME" />
+                <ScalarProperty Name="PUBLISHPERSON" ColumnName="PUBLISHPERSON" />
+                <ScalarProperty Name="PUBLISHTIME" ColumnName="PUBLISHTIME" />
+                <ScalarProperty Name="ISSTOP" ColumnName="ISSTOP" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
                 <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />

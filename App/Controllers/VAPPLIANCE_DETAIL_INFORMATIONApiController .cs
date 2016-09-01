@@ -33,21 +33,23 @@ namespace Langben.App.Controllers
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             string returnValue = string.Empty;
-
+            id = id.TrimEnd(',');
             string[] deleteId = id.Split(',');
             if (deleteId != null && deleteId.Length > 0)
             {
-                Common.Account account = GetCurrentAccount();
+                // Common.Account account = GetCurrentAccount();
+                Common.Account account = new Account();
+                account.UNDERTAKE_LABORATORYName = "三相";
                //判断出是试验完成的id
-                for (int i = 0; i < deleteId.Length; i++)
-                {
-                    deleteId[i]= deleteId[i].Substring(0,deleteId[i].Length - 1);
-                    string ids= deleteId[i].Substring(deleteId[i].Length - 1);
-                    if (ids=="*")
-                    {
+                //for (int i = 0; i < deleteId.Length; i++)
+                //{
+                //    deleteId[i]= deleteId[i].Substring(0,deleteId[i].Length - 1);
+                //    string ids= deleteId[i].Substring(deleteId[i].Length - 1);
+                //    if (ids=="*")
+                //    {
 
-                    }
-                }
+                //    }
+                //}
                 //数据校验
                 if ( m_BLL.EditCollection(ref validationErrors, deleteId, account.UNDERTAKE_LABORATORYName))
                 {

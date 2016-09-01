@@ -26,7 +26,6 @@ namespace Langben.DAL
         }
     
         public string ID { get; set; }
-        public string NAMEOTHER { get; set; }
         public string NAME { get; set; }
         public string SCHEME_MENU { get; set; }
         public Nullable<decimal> SORT { get; set; }
@@ -39,6 +38,7 @@ namespace Langben.DAL
         public string CREATEPERSON { get; set; }
         public Nullable<System.DateTime> UPDATETIME { get; set; }
         public string UPDATEPERSON { get; set; }
+        public string NAMEOTHER { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UNCERTAINTY> UNCERTAINTY { get; set; }

@@ -11,6 +11,7 @@ using Langben.DAL;
 using Langben.BLL;
 using System.Web.Http;
 using Langben.App.Models;
+using Newtonsoft.Json;
 
 namespace Langben.App.Controllers
 {
@@ -125,7 +126,7 @@ namespace Langben.App.Controllers
         /// <param name="id">编号</param>
         /// <returns></returns>
         /// 
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public PREPARE_SCHEME Get(string id)
         {
             PREPARE_SCHEME item = m_BLL.GetById(id);
@@ -141,24 +142,52 @@ namespace Langben.App.Controllers
         [System.Web.Http.HttpPost]
         public Common.ClientResult.Result Post([FromBody]PREPARE_SCHEME entity)
         {
-
+            string putid = entity.ID;
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             if (entity != null && ModelState.IsValid)
             {
-                string currentPerson = GetCurrentPerson();
+                //string currentPerson = GetCurrentPerson();
                 entity.CREATETIME = DateTime.Now;
-                entity.CREATEPERSON = currentPerson;
-
+                // entity.CREATEPERSON = currentPerson;
+                //修改证书编号
+               
                 entity.ID = Result.GetNewId();
                 string returnValue = string.Empty;
                 APPLIANCE_LABORATORY app = new APPLIANCE_LABORATORY();
                 app.ID = entity.APPLIANCE_LABORATORYID;
                 app.PREPARE_SCHEMEID = entity.ID;
-                if (!string.IsNullOrEmpty(entity.ID))
+                if (!string.IsNullOrEmpty(putid))//判断是否为第二次进入
                 {
-                    return Put(entity);
+                    //修改
+                    entity.ID = putid;
+                    if (m_BLL.Edit(ref validationErrors, entity) && m_BLL.UPTSerialNumber(entity.ID))
+                    {
+                        LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，预备方案信息的Id为" + entity.ID, "预备方案"
+                            );//写入日志                   
+                        result.Code = Common.ClientCode.Succeed;
+                        result.Message = Suggestion.UpdateSucceed;
+                        result.Id = entity.ID;
+                        return result; //提示更新成功 
+                    }
+                    else
+                    {
+                        if (validationErrors != null && validationErrors.Count > 0)
+                        {
+                            validationErrors.All(a =>
+                            {
+                                returnValue += a.ErrorMessage;
+                                return true;
+                            });
+                        }
+                        LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，预备方案信息的Id为" + entity.ID + "," + returnValue, "预备方案"
+                            );//写入日志   
+                        result.Code = Common.ClientCode.Fail;
+                        result.Message = Suggestion.UpdateFail + returnValue;
+                        return result; //提示更新失败
+                    }                    
                 }
-                if (m_BLL.Create(ref validationErrors, entity) && m_BLL2.EditField(ref validationErrors, app))
+                //新增
+                if (m_BLL.Create(ref validationErrors, entity) && m_BLL2.EditField(ref validationErrors, app) && m_BLL.UPTSerialNumber(entity.ID))
                 {
                     LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，预备方案的信息的Id为" + entity.ID, "预备方案"
                         );//写入日志 
@@ -204,9 +233,9 @@ namespace Langben.App.Controllers
             if (entity != null && ModelState.IsValid)
             {   //数据校验
 
-                string currentPerson = GetCurrentPerson();
+                //string currentPerson = GetCurrentPerson();
                 entity.UPDATETIME = DateTime.Now;
-                entity.UPDATEPERSON = currentPerson;
+               // entity.UPDATEPERSON = currentPerson;
 
                 string returnValue = string.Empty;
                 if (m_BLL.Edit(ref validationErrors, entity))

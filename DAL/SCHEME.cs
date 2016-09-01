@@ -26,18 +26,18 @@ namespace Langben.DAL
         public string REPORT_CATEGORY { get; set; }
         public string CERTIFICATE_CATEGORY { get; set; }
         public string STATUS { get; set; }
-        public string ISSTOP { get; set; }
         public string ISPUBLISH { get; set; }
         public string COPYID { get; set; }
         public string UNDERTAKE_LABORATORYID { get; set; }
-        public Nullable<System.DateTime> PUBLISHTIME { get; set; }
-        public string PUBLISHPERSON { get; set; }
-        public string ISPUBLISHTIME { get; set; }
-        public string ISPUBLISHPERSON { get; set; }
         public Nullable<System.DateTime> CREATETIME { get; set; }
         public string CREATEPERSON { get; set; }
         public Nullable<System.DateTime> UPDATETIME { get; set; }
         public string UPDATEPERSON { get; set; }
+        public string ISSTOP { get; set; }
+        public Nullable<System.DateTime> PUBLISHTIME { get; set; }
+        public string PUBLISHPERSON { get; set; }
+        public string ISPUBLISHTIME { get; set; }
+        public string ISPUBLISHPERSON { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PREPARE_SCHEME> PREPARE_SCHEME { get; set; }

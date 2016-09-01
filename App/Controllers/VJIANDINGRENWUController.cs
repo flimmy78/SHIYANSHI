@@ -37,18 +37,32 @@ namespace Langben.App.Controllers
         /// <returns></returns>
         [SupportFilter]
         public ActionResult XuanZheFangAn(string id)
-        {           
+        {
             string Id = string.Empty;
             string APPLIANCE_LABORATORYID = string.Empty;
             List<APPLIANCE_LABORATORY> list = m_BLL4.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(id);
             foreach (var item in list)
             {
-               Id= item.PREPARE_SCHEMEID;
+                Id = item.PREPARE_SCHEMEID;
                 APPLIANCE_LABORATORYID = item.ID;
             }
             ViewBag.Id = Id;
             ViewBag.APPLIANCE_LABORATORYID = APPLIANCE_LABORATORYID;
             ViewBag.APPLIANCE_DETAIL_INFORMATIONID = id;
+            string erchizi = string.Empty;
+            if (!string.IsNullOrEmpty(Id))
+            {
+                PREPARE_SCHEME prepare = m_BLL3.GetById(Id);//二次进入绑定数据
+                erchizi += "REPORT_CATEGORY*" + prepare.REPORT_CATEGORY + ",";
+                erchizi += "CERTIFICATE_CATEGORY*" + prepare.CERTIFICATE_CATEGORY + ",";
+                erchizi += "CONTROL_NUMBER*" + prepare.CONTROL_NUMBER + ",";
+                erchizi += "QUALIFICATIONS*" + prepare.QUALIFICATIONS + ",";
+                erchizi += "CERTIFICATE_CATEGORY*" + prepare.CERTIFICATE_CATEGORY + ",";
+                erchizi += "CERTIFICATION_AUTHORITY*" + prepare.CERTIFICATION_AUTHORITY + ",";
+                erchizi += "CNAS*" + prepare.CNAS;
+                ViewBag.SBL = erchizi;
+            }
+
             return View();
         }
         /// <summary>
@@ -56,9 +70,10 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
-        public ActionResult BaoGaoShangChuan(string id, string APPLIANCE_DETAIL_INFORMATIONID)
+        public ActionResult BaoGaoShangChuan(string id)
         {
-            ViewBag.Id = id;
+            string[] bs = id.Split('|');
+            ViewBag.Id = bs[0];
             List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(id);
             foreach (var item in list)
             {
@@ -67,8 +82,8 @@ namespace Langben.App.Controllers
                 ViewBag.ID = item.ID;
                 ViewBag.CONCLUSION = item.CONCLUSION;
             }
-            ViewBag.REPORTNUMBER = m_BLL3.GetSerialNumber(id);
-            ViewBag.APPLIANCE_DETAIL_INFORMATIONID = APPLIANCE_DETAIL_INFORMATIONID;//器具明细id
+            ViewBag.REPORTNUMBER = m_BLL3.GetSerialNumber(bs[0]);
+            ViewBag.APPLIANCE_DETAIL_INFORMATIONID = bs[1];//器具明细id
             return View();
         }
         /// <summary>
