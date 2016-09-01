@@ -21,6 +21,13 @@
         <div class="bigdiv">
                  
             <div class="editor-label">
+                @Html.LabelFor(model => model.NAMEOTHER)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.NAMEOTHER)
+                @Html.ValidationMessageFor(model => model.NAMEOTHER)
+            </div>     
+            <div class="editor-label">
                 @Html.LabelFor(model => model.NAME)：
             </div>
             <div class="editor-field">
@@ -64,7 +71,14 @@
             <div id="checkUNDERTAKE_LABORATORYID">            
             </div>
             @Html.HiddenFor(model => model.UNDERTAKE_LABORATORYID)
-        </div>
+        </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INPUTSTATE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INPUTSTATE)
+                @Html.ValidationMessageFor(model => model.INPUTSTATE)
+            </div>
         <div class="editor-label">
             <a class="anUnderLine" onclick="showModalOnly('PARENTID','../../RULE');">
                 @Html.LabelFor(model => model.PARENTID) 

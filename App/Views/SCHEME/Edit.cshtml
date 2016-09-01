@@ -47,6 +47,13 @@
                 @Html.ValidationMessageFor(model => model.STATUS)
             </div>     
             <div class="editor-label">
+                @Html.LabelFor(model => model.ISSTOP)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ISSTOP)
+                @Html.ValidationMessageFor(model => model.ISSTOP)
+            </div>     
+            <div class="editor-label">
                 @Html.LabelFor(model => model.ISPUBLISH)：
             </div>
             <div class="editor-field">
@@ -85,6 +92,34 @@
                     }} 
                 </div>
                 @Html.HiddenFor(model => model.UNDERTAKE_LABORATORYID)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PUBLISHTIME)：
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("PUBLISHTIME", ((Model != null && Model.PUBLISHTIME != null) ? Model.PUBLISHTIME.ToString().AsDateTime().ToString("yyyy-MM-dd") : ""), new { style = "width: 244px;", @class="easyui-datebox" })
+                @Html.ValidationMessageFor(model => model.PUBLISHTIME)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PUBLISHPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.PUBLISHPERSON)
+                @Html.ValidationMessageFor(model => model.PUBLISHPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ISPUBLISHTIME)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ISPUBLISHTIME)
+                @Html.ValidationMessageFor(model => model.ISPUBLISHTIME)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ISPUBLISHPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ISPUBLISHPERSON)
+                @Html.ValidationMessageFor(model => model.ISPUBLISHPERSON)
             </div>@Html.HiddenFor(model => model.CREATETIME )      
             <div class="editor-label">
                 @Html.LabelFor(model => model.CREATEPERSON)：
@@ -118,7 +153,7 @@
                 type: "POST",
                 // async: false,
                 success: function (res) {
-                    $("#ID").val(res.ID);$("#NAME").val(res.NAME);$("#REPORT_CATEGORY").val(res.REPORT_CATEGORY);$("#CERTIFICATE_CATEGORY").val(res.CERTIFICATE_CATEGORY);$("#STATUS").val(res.STATUS);$("#ISPUBLISH").val(res.ISPUBLISH);$("#COPYID").val(res.COPYID);$("#CREATETIME").val(res.CREATETIME);$("#CREATEPERSON").val(res.CREATEPERSON);$("#UPDATEPERSON").val(res.UPDATEPERSON);
+                    $("#ID").val(res.ID);$("#NAME").val(res.NAME);$("#REPORT_CATEGORY").val(res.REPORT_CATEGORY);$("#CERTIFICATE_CATEGORY").val(res.CERTIFICATE_CATEGORY);$("#STATUS").val(res.STATUS);$("#ISSTOP").val(res.ISSTOP);$("#ISPUBLISH").val(res.ISPUBLISH);$("#COPYID").val(res.COPYID);$("#PUBLISHTIME").val(res.PUBLISHTIME);$("#PUBLISHPERSON").val(res.PUBLISHPERSON);$("#ISPUBLISHTIME").val(res.ISPUBLISHTIME);$("#ISPUBLISHPERSON").val(res.ISPUBLISHPERSON);$("#CREATETIME").val(res.CREATETIME);$("#CREATEPERSON").val(res.CREATEPERSON);$("#UPDATEPERSON").val(res.UPDATEPERSON);
                 }
             })
         });

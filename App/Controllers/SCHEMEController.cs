@@ -74,7 +74,16 @@ namespace Langben.App.Controllers
             ViewBag.Id = id;
             return View();
         }
-     
+        IBLL.ISCHEMEBLL m_BLL;
+        ValidationErrors validationErrors = new ValidationErrors();
+        public SCHEMEController()
+                    : this(new SCHEMEBLL()) { }
+
+        public SCHEMEController(SCHEMEBLL bll)
+        {
+            m_BLL = bll;
+        }
+        
     }
 }
 

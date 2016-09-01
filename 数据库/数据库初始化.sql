@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 11g                           */
-/* Created on:     2016/8/29 15:21:12                           */
+/* Created on:     2016/8/31 22:19:45                           */
 /*==============================================================*/
 
 
@@ -1159,6 +1159,7 @@ create table REPORTCOLLECTION
 create table RULE 
 (
    ID                   VARCHAR2(36)         not null,
+   NAMEOTHER            VARCHAR2(200),
    NAME                 VARCHAR2(200),
    SCHEME_MENU          VARCHAR2(200),
    SORT                 NUMBER,
@@ -1187,9 +1188,14 @@ create table SCHEME
    REPORT_CATEGORY      VARCHAR2(200),
    CERTIFICATE_CATEGORY VARCHAR2(200),
    STATUS               VARCHAR2(200),
+   ISSTOP               VARCHAR2(200),
    ISPUBLISH            VARCHAR2(200),
    COPYID               VARCHAR2(36),
    UNDERTAKE_LABORATORYID VARCHAR2(36),
+   PUBLISHTIME          DATE,
+   PUBLISHPERSON        VARCHAR2(200),
+   ISPUBLISHTIME        VARCHAR2(200),
+   ISPUBLISHPERSON      VARCHAR2(200),
    CREATETIME           DATE,
    CREATEPERSON         VARCHAR2(200),
    UPDATETIME           DATE,
@@ -1198,7 +1204,13 @@ create table SCHEME
 );
 
 comment on column SCHEME.STATUS is
-'未使用、已使用';
+'已使用，未使用';
+
+comment on column SCHEME.ISSTOP is
+'停用，启用';
+
+comment on column SCHEME.ISPUBLISH is
+'已发布，未发布';
 
 /*==============================================================*/
 /* Table: SCHEME_RULE                                           */
@@ -1534,6 +1546,9 @@ create table UNDERTAKE_LABORATORY
    constraint PK_UNDERTAKE_LABORATORY primary key (ID)
 );
 
+comment on table UNDERTAKE_LABORATORY is
+'承接实验室主键和名称一样';
+
 /*==============================================================*/
 /* View: VBAOGAODAYIN                                           */
 /*==============================================================*/
@@ -1633,7 +1648,7 @@ select b.ID, --器具明细id
   a.CERTIFICATE_ENTERPRISE,        --证书单位
   a.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
   b.ORDER_STATUS,                  --器具状态
-  a.CREATEPERSON,                  --送检时间
+  a.CREATETIME,                  --送检时间
   b.APPLIANCE_PROGRESS,            --器具进度
   b.OVERDUE,                       --超期原因
   e.STATE,                         --上传状态
@@ -1731,7 +1746,7 @@ comment on column VQIJULINGQU1.REPORTCREATEPERSON is
 create or replace view VQIJULINGQU2(ID, APPLIANCE_NAME, VERSION, FACTORY_NUM, NUM, ATTACHMENT, NAME, APPLIANCE_RECIVE, REPORTNUMBER, REMARKS, ORDER_NUMBER) as
 select a.ID,
   b.APPLIANCE_NAME, --器具名称
-  b.MODEL,               --型号
+  b.VERSION,               --型号
   b.FACTORY_NUM,         --出厂编号
   b.NUM,                 --数量
   b.ATTACHMENT,          --附件

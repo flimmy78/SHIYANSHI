@@ -212,6 +212,7 @@
     <Content Include="Content\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\jquery-ui-1.10.1.custom.min.css" />
+    <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\StyleSheet.css" />
     <Content Include="favicon.ico" />
@@ -280,9 +281,11 @@
     <Content Include="Res\easyui\themes\default\combo.css" />
     <Content Include="Res\easyui\themes\default\combobox.css" />
     <Content Include="Res\easyui\themes\default\datagrid.css" />
+    <Content Include="Res\easyui\themes\default\datalist.css" />
     <Content Include="Res\easyui\themes\default\datebox.css" />
     <Content Include="Res\easyui\themes\default\dialog.css" />
     <Content Include="Res\easyui\themes\default\easyui.css" />
+    <Content Include="Res\easyui\themes\default\filebox.css" />
     <Content Include="Res\easyui\themes\default\images\accordion_arrows.png" />
     <Content Include="Res\easyui\themes\default\images\blank.gif" />
     <Content Include="Res\easyui\themes\default\images\calendar_arrows.png" />
@@ -296,6 +299,8 @@
     <Content Include="Res\easyui\themes\default\images\messager_icons.png" />
     <Content Include="Res\easyui\themes\default\images\pagination_icons.png" />
     <Content Include="Res\easyui\themes\default\images\panel_tools.png" />
+    <Content Include="Res\easyui\themes\default\images\passwordbox_close.png" />
+    <Content Include="Res\easyui\themes\default\images\passwordbox_open.png" />
     <Content Include="Res\easyui\themes\default\images\searchbox_button.png" />
     <Content Include="Res\easyui\themes\default\images\slider_handle.png" />
     <Content Include="Res\easyui\themes\default\images\spinner_arrows.png" />
@@ -310,12 +315,14 @@
     <Content Include="Res\easyui\themes\default\numberbox.css" />
     <Content Include="Res\easyui\themes\default\pagination.css" />
     <Content Include="Res\easyui\themes\default\panel.css" />
+    <Content Include="Res\easyui\themes\default\passwordbox.css" />
     <Content Include="Res\easyui\themes\default\progressbar.css" />
     <Content Include="Res\easyui\themes\default\propertygrid.css" />
     <Content Include="Res\easyui\themes\default\searchbox.css" />
     <Content Include="Res\easyui\themes\default\slider.css" />
     <Content Include="Res\easyui\themes\default\spinner.css" />
     <Content Include="Res\easyui\themes\default\splitbutton.css" />
+    <Content Include="Res\easyui\themes\default\switchbutton.css" />
     <Content Include="Res\easyui\themes\default\tabs.css" />
     <Content Include="Res\easyui\themes\default\textbox.css" />
     <Content Include="Res\easyui\themes\default\tooltip.css" />
@@ -464,6 +471,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Scripts\jquery-ui-1.10.1.custom.min.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.edatagrid.js" />
     <Content Include="Scripts\jquery.min.js" />
     <None Include="Properties\PublishProfiles\shiyanshi.pubxml" />
@@ -479,6 +487,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\UploadFile.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="up\b.xls" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />

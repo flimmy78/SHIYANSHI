@@ -9,7 +9,7 @@ using Common;
 namespace Langben.BLL
 {
     /// <summary>
-    /// 客户管理 
+    /// 器具明细
     /// </summary>
     public partial class APPLIANCE_DETAIL_INFORMATIONBLL : IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL, IDisposable
     {

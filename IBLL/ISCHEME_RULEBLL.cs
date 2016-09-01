@@ -20,8 +20,8 @@ namespace Langben.IBLL
         /// <param name="id">额外的参数</param>
         /// <param name="page">页码</param>
         /// <param name="rows">每页显示的行数</param>
-        /// <param name="order">升序asc（默认）还是降序desc</param>
-        /// <param name="sort">排序字段</param>
+        /// <param name="order">排序字段</param>
+        /// <param name="sort">升序asc（默认）还是降序desc</param>
         /// <param name="search">查询条件</param>
         /// <param name="total">结果集的总数</param>
         /// <returns>结果集</returns>
@@ -33,8 +33,8 @@ namespace Langben.IBLL
         /// <param name="id">额外的参数</param>
         /// <param name="page">页码</param>
         /// <param name="rows">每页显示的行数</param>
-        /// <param name="order">升序asc（默认）还是降序desc</param>
-        /// <param name="sort">排序字段</param>
+        /// <param name="order">排序字段</param>
+        /// <param name="sort">升序asc（默认）还是降序desc</param>
         /// <param name="search">查询条件</param>
         /// <param name="total">结果集的总数</param>
         /// <returns>结果集</returns>
@@ -60,13 +60,6 @@ namespace Langben.IBLL
         /// <param name="id">外键的主键</param>
         /// <returns></returns>
         List<SCHEME_RULE> GetByRefSCHEMEID(string id);
-
-        /// <summary>
-        /// 根据TEST_ITEM_FORMATIDId，获取所有方案_规程数据
-        /// </summary>
-        /// <param name="id">外键的主键</param>
-        /// <returns></returns>
-        List<SCHEME_RULE> GetByRefTEST_ITEM_FORMATID(string id);
 
         
         /// <summary>
