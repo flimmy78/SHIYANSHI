@@ -47,8 +47,13 @@ namespace Langben.IBLL
         /// <param name="id"></param>
         /// <returns></returns>
         [OperationContract]
-        string GetByAPPLIANCE_DETAIL_INFORMATIONId(string id); 
-
+        string GetByAPPLIANCE_DETAIL_INFORMATIONId(string id);
+        /// <summary>
+        /// 根据ORDER_TASK_INFORMATIONIDId，获取所有器具明细信息数据
+        /// </summary>
+        /// <param name="id">外键的主键</param>
+        /// <returns></returns>
+        List<APPLIANCE_DETAIL_INFORMATION> GetByRefORDER_TASK_INFORMATIONID(string id);
     }
 }
 

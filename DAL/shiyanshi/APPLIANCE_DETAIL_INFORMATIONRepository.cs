@@ -25,9 +25,9 @@ namespace Langben.DAL
                                                                   select f;
             foreach (var deleteItem in collection)
             {
-                deleteItem.ORDER_STATUS =Common.OrderStatus.已领取.ToString();
-                deleteItem.APPLIANCE_PROGRESS = shiyanshi + Common.ApplianceProgress.进行实验;
-                deleteItem.EQUIPMENT_STATUS_VALUUMN = Common.OrderStatus.已领取.GetHashCode().ToString();
+                deleteItem.ORDER_STATUS = Common.ORDER_STATUS.已领取.ToString();
+                deleteItem.APPLIANCE_PROGRESS = shiyanshi;
+                deleteItem.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已领取.GetHashCode().ToString();
             }
         }
 
@@ -88,8 +88,8 @@ namespace Langben.DAL
                                                                   select f;
             foreach (var deleteItem in collection)
             {
-                deleteItem.STORAGEINSTRUCTI_STATU =Common.OrderStatus.器具已入库.ToString();
-                deleteItem.EQUIPMENT_STATUS_VALUUMN = Common.OrderStatus.器具已入库.GetHashCode().ToString();
+                deleteItem.STORAGEINSTRUCTI_STATU =Common.ORDER_STATUS.器具已入库.ToString();
+                deleteItem.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.器具已入库.GetHashCode().ToString();
             }
         }
         /// <summary>
@@ -102,7 +102,18 @@ namespace Langben.DAL
             return db.APPLIANCE_DETAIL_INFORMATION.Where(a => a.ID == id).Select(a => a.ORDER_TASK_INFORMATION.ACCEPT_ORGNIZATION).FirstOrDefault();
 
         }
+        /// <summary>
+        /// 根据ORDER_TASK_INFORMATIONID，获取所有器具明细信息数据
+        /// </summary>
+        /// <param name="id">外键的主键</param>
+        /// <returns></returns>
+        public IQueryable<APPLIANCE_DETAIL_INFORMATION> GetByRefORDER_TASK_INFORMATIONID(SysEntities db, string id)
+        {
+            return from c in db.APPLIANCE_DETAIL_INFORMATION
+                   where c.ORDER_TASK_INFORMATIONID == id
+                   select c;
 
+        }
     }
 }
 

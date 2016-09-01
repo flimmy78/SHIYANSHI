@@ -149,18 +149,7 @@ namespace Langben.DAL
             }
         }
 
-        /// <summary>
-        /// 根据ORDER_TASK_INFORMATIONID，获取所有器具明细信息数据
-        /// </summary>
-        /// <param name="id">外键的主键</param>
-        /// <returns></returns>
-        public IQueryable<APPLIANCE_DETAIL_INFORMATION> GetByRefORDER_TASK_INFORMATIONID(SysEntities db, string id)
-        {
-            return from c in db.APPLIANCE_DETAIL_INFORMATION
-                        where c.ORDER_TASK_INFORMATIONID == id
-                        select c;
-                      
-        }
+
 
         public void Dispose()
         {          

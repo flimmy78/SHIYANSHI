@@ -108,7 +108,7 @@ namespace Langben.DAL
         { 
                  return db.PREPARE_SCHEME.SingleOrDefault(s => s.ID == id); 
         }
-        
+ 
         /// <summary>
         /// 获取在该表一条数据中，出现的所有外键实体
         /// </summary>

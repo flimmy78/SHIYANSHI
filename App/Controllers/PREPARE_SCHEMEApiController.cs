@@ -11,6 +11,7 @@ using Langben.DAL;
 using Langben.BLL;
 using System.Web.Http;
 using Langben.App.Models;
+using Newtonsoft.Json;
 
 namespace Langben.App.Controllers
 {
@@ -36,45 +37,83 @@ namespace Langben.App.Controllers
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID
-					,REPORT_CATEGORY = s.REPORT_CATEGORY
-					,CERTIFICATE_CATEGORY = s.CERTIFICATE_CATEGORY
-					,CNAS = s.CNAS
-					,CONTROL_NUMBER = s.CONTROL_NUMBER
-					,CERTIFICATION_AUTHORITY = s.CERTIFICATION_AUTHORITY
-					,QUALIFICATIONS = s.QUALIFICATIONS
-					,TEMPERATURE = s.TEMPERATURE
-					,HUMIDITY = s.HUMIDITY
-					,CHECK_PLACE = s.CHECK_PLACE
-					,CHECKERID = s.CHECKERID
-					,DETECTERID = s.DETECTERID
-					,APPROVALID = s.APPROVALID
-					,CALIBRATION_DATE = s.CALIBRATION_DATE
-					,CONCLUSION = s.CONCLUSION
-					,CONCLUSION_EXPLAIN = s.CONCLUSION_EXPLAIN
-					,VALIDITY_PERIOD = s.VALIDITY_PERIOD
-					,CALIBRATION_INSTRUCTIONS = s.CALIBRATION_INSTRUCTIONS
-					,ACCURACY_GRADE = s.ACCURACY_GRADE
-					,RATED_FREQUENCY = s.RATED_FREQUENCY
-					,PULSE_CONSTANT = s.PULSE_CONSTANT
-					,EXTERNAL_RESITANCE_VALUE = s.EXTERNAL_RESITANCE_VALUE
-					,SCHEMEID =   s.SCHEMEIDOld
-					,CREATETIME = s.CREATETIME
-					,CREATEPERSON = s.CREATEPERSON
-					,UPDATETIME = s.UPDATETIME
-					,UPDATEPERSON = s.UPDATEPERSON
-					,AUDITOPINION = s.AUDITOPINION
-					,AUDITTIME = s.AUDITTIME
-					,AUDITTEPERSON = s.AUDITTEPERSON
-					,ISAGGREY = s.ISAGGREY
-					,APPROVAL = s.APPROVAL
-					,APPROVALDATE = s.APPROVALDATE
-					,APPROVALEPERSON = s.APPROVALEPERSON
-					,APPROVALISAGGREY = s.APPROVALISAGGREY
-					,PRINTSTATUS = s.PRINTSTATUS
-					,ISBACK = s.ISBACK
-					,REPORTNUMBER = s.REPORTNUMBER
-					,REPORTSTATUS = s.REPORTSTATUS
-					
+                    ,
+                    REPORT_CATEGORY = s.REPORT_CATEGORY
+                    ,
+                    CERTIFICATE_CATEGORY = s.CERTIFICATE_CATEGORY
+                    ,
+                    CNAS = s.CNAS
+                    ,
+                    CONTROL_NUMBER = s.CONTROL_NUMBER
+                    ,
+                    CERTIFICATION_AUTHORITY = s.CERTIFICATION_AUTHORITY
+                    ,
+                    QUALIFICATIONS = s.QUALIFICATIONS
+                    ,
+                    TEMPERATURE = s.TEMPERATURE
+                    ,
+                    HUMIDITY = s.HUMIDITY
+                    ,
+                    CHECK_PLACE = s.CHECK_PLACE
+                    ,
+                    CHECKERID = s.CHECKERID
+                    ,
+                    DETECTERID = s.DETECTERID
+                    ,
+                    APPROVALID = s.APPROVALID
+                    ,
+                    CALIBRATION_DATE = s.CALIBRATION_DATE
+                    ,
+                    CONCLUSION = s.CONCLUSION
+                    ,
+                    CONCLUSION_EXPLAIN = s.CONCLUSION_EXPLAIN
+                    ,
+                    VALIDITY_PERIOD = s.VALIDITY_PERIOD
+                    ,
+                    CALIBRATION_INSTRUCTIONS = s.CALIBRATION_INSTRUCTIONS
+                    ,
+                    ACCURACY_GRADE = s.ACCURACY_GRADE
+                    ,
+                    RATED_FREQUENCY = s.RATED_FREQUENCY
+                    ,
+                    PULSE_CONSTANT = s.PULSE_CONSTANT
+                    ,
+                    EXTERNAL_RESITANCE_VALUE = s.EXTERNAL_RESITANCE_VALUE
+                    ,
+                    SCHEMEID = s.SCHEMEIDOld
+                    ,
+                    CREATETIME = s.CREATETIME
+                    ,
+                    CREATEPERSON = s.CREATEPERSON
+                    ,
+                    UPDATETIME = s.UPDATETIME
+                    ,
+                    UPDATEPERSON = s.UPDATEPERSON
+                    ,
+                    AUDITOPINION = s.AUDITOPINION
+                    ,
+                    AUDITTIME = s.AUDITTIME
+                    ,
+                    AUDITTEPERSON = s.AUDITTEPERSON
+                    ,
+                    ISAGGREY = s.ISAGGREY
+                    ,
+                    APPROVAL = s.APPROVAL
+                    ,
+                    APPROVALDATE = s.APPROVALDATE
+                    ,
+                    APPROVALEPERSON = s.APPROVALEPERSON
+                    ,
+                    APPROVALISAGGREY = s.APPROVALISAGGREY
+                    ,
+                    PRINTSTATUS = s.PRINTSTATUS
+                    ,
+                    ISBACK = s.ISBACK
+                    ,
+                    REPORTNUMBER = s.REPORTNUMBER
+                    ,
+                    REPORTSTATUS = s.REPORTSTATUS
+
 
                 })
             };
@@ -87,7 +126,7 @@ namespace Langben.App.Controllers
         /// <param name="id">编号</param>
         /// <returns></returns>
         /// 
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public PREPARE_SCHEME Get(string id)
         {
             PREPARE_SCHEME item = m_BLL.GetById(id);
@@ -102,27 +141,63 @@ namespace Langben.App.Controllers
         //[HttpPost]
         [System.Web.Http.HttpPost]
         public Common.ClientResult.Result Post([FromBody]PREPARE_SCHEME entity)
-        {           
-
-            Common.ClientResult.Result result = new Common.ClientResult.Result();
+        {
+            string putid = entity.ID;
+            Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             if (entity != null && ModelState.IsValid)
             {
                 //string currentPerson = GetCurrentPerson();
-                //entity.CreateTime = DateTime.Now;
-                //entity.CreatePerson = currentPerson;
-              
-                entity.ID = Result.GetNewId();   
+                entity.CREATETIME = DateTime.Now;
+                // entity.CREATEPERSON = currentPerson;
+                //修改证书编号
+               
+                entity.ID = Result.GetNewId();
                 string returnValue = string.Empty;
-                if (m_BLL.Create(ref validationErrors, entity))
+                APPLIANCE_LABORATORY app = new APPLIANCE_LABORATORY();
+                app.ID = entity.APPLIANCE_LABORATORYID;
+                app.PREPARE_SCHEMEID = entity.ID;
+                if (!string.IsNullOrEmpty(putid))//判断是否为第二次进入
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed  + "，预备方案的信息的Id为" + entity.ID,"预备方案"
+                    //修改
+                    entity.ID = putid;
+                    if (m_BLL.Edit(ref validationErrors, entity) && m_BLL.UPTSerialNumber(entity.ID))
+                    {
+                        LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，预备方案信息的Id为" + entity.ID, "预备方案"
+                            );//写入日志                   
+                        result.Code = Common.ClientCode.Succeed;
+                        result.Message = Suggestion.UpdateSucceed;
+                        result.Id = entity.ID;
+                        return result; //提示更新成功 
+                    }
+                    else
+                    {
+                        if (validationErrors != null && validationErrors.Count > 0)
+                        {
+                            validationErrors.All(a =>
+                            {
+                                returnValue += a.ErrorMessage;
+                                return true;
+                            });
+                        }
+                        LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，预备方案信息的Id为" + entity.ID + "," + returnValue, "预备方案"
+                            );//写入日志   
+                        result.Code = Common.ClientCode.Fail;
+                        result.Message = Suggestion.UpdateFail + returnValue;
+                        return result; //提示更新失败
+                    }                    
+                }
+                //新增
+                if (m_BLL.Create(ref validationErrors, entity) && m_BLL2.EditField(ref validationErrors, app) && m_BLL.UPTSerialNumber(entity.ID))
+                {
+                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，预备方案的信息的Id为" + entity.ID, "预备方案"
                         );//写入日志 
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.InsertSucceed;
+                    result.Id = entity.ID;
                     return result; //提示创建成功
                 }
                 else
-                { 
+                {
                     if (validationErrors != null && validationErrors.Count > 0)
                     {
                         validationErrors.All(a =>
@@ -131,7 +206,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，预备方案的信息，" + returnValue,"预备方案"
+                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，预备方案的信息，" + returnValue, "预备方案"
                         );//写入日志                      
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.InsertFail + returnValue;
@@ -154,21 +229,72 @@ namespace Langben.App.Controllers
         [System.Web.Http.HttpPut]
         public Common.ClientResult.Result Put([FromBody]PREPARE_SCHEME entity)
         {
-            Common.ClientResult.Result result = new Common.ClientResult.Result();
+            Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             if (entity != null && ModelState.IsValid)
             {   //数据校验
 
                 //string currentPerson = GetCurrentPerson();
-                //entity.UpdateTime = DateTime.Now;
-                //entity.UpdatePerson = currentPerson;
+                entity.UPDATETIME = DateTime.Now;
+               // entity.UPDATEPERSON = currentPerson;
 
                 string returnValue = string.Empty;
                 if (m_BLL.Edit(ref validationErrors, entity))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，预备方案信息的Id为" + entity.ID,"预备方案"
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，预备方案信息的Id为" + entity.ID, "预备方案"
                         );//写入日志                   
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.UpdateSucceed;
+                    result.Id = entity.ID;
+                    return result; //提示更新成功 
+                }
+                else
+                {
+                    if (validationErrors != null && validationErrors.Count > 0)
+                    {
+                        validationErrors.All(a =>
+                        {
+                            returnValue += a.ErrorMessage;
+                            return true;
+                        });
+                    }
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，预备方案信息的Id为" + entity.ID + "," + returnValue, "预备方案"
+                        );//写入日志   
+                    result.Code = Common.ClientCode.Fail;
+                    result.Message = Suggestion.UpdateFail + returnValue;
+                    return result; //提示更新失败
+                }
+            }
+            result.Code = Common.ClientCode.FindNull;
+            result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";
+            return result; //提示输入的数据的格式不对         
+        }
+
+        // PUT api/<controller>/5
+        /// <summary>
+        /// 编辑(公用)
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>  
+        /// 
+        [System.Web.Http.HttpPut]
+        public Common.ClientResult.Result EditField([FromBody]PREPARE_SCHEME entity)
+        {
+            Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
+            if (entity != null && ModelState.IsValid)
+            {   //数据校验
+
+                string currentPerson = GetCurrentPerson();
+                entity.UPDATETIME = DateTime.Now;
+                entity.UPDATEPERSON = currentPerson;
+
+                string returnValue = string.Empty;
+                if (m_BLL.EditField(ref validationErrors, entity))
+                {
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，预备方案信息的Id为" + entity.ID, "预备方案"
+                        );//写入日志                   
+                    result.Code = Common.ClientCode.Succeed;
+                    result.Message = Suggestion.UpdateSucceed;
+                    result.Id = entity.ID;
                     return result; //提示更新成功 
                 }
                 else
@@ -225,7 +351,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId)+ "," + returnValue, "消息"
+                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId) + "," + returnValue, "消息"
                         );//删除失败，写入日志
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.DeleteFail + returnValue;
@@ -235,17 +361,19 @@ namespace Langben.App.Controllers
         }
 
         IBLL.IPREPARE_SCHEMEBLL m_BLL;
+        IBLL.IAPPLIANCE_LABORATORYBLL m_BLL2;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public PREPARE_SCHEMEApiController()
-            : this(new PREPARE_SCHEMEBLL()) { }
+            : this(new PREPARE_SCHEMEBLL(), new APPLIANCE_LABORATORYBLL()) { }
 
-        public PREPARE_SCHEMEApiController(PREPARE_SCHEMEBLL bll)
+        public PREPARE_SCHEMEApiController(PREPARE_SCHEMEBLL bll, APPLIANCE_LABORATORYBLL bll2)
         {
             m_BLL = bll;
+            m_BLL2 = bll2;
         }
-        
+
     }
 }
 

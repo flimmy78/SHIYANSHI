@@ -38,7 +38,31 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult XuanZheFangAn(string id)
         {
-            ViewBag.Id = id;
+            string Id = string.Empty;
+            string APPLIANCE_LABORATORYID = string.Empty;
+            List<APPLIANCE_LABORATORY> list = m_BLL4.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(id);
+            foreach (var item in list)
+            {
+                Id = item.PREPARE_SCHEMEID;
+                APPLIANCE_LABORATORYID = item.ID;
+            }
+            ViewBag.Id = Id;
+            ViewBag.APPLIANCE_LABORATORYID = APPLIANCE_LABORATORYID;
+            ViewBag.APPLIANCE_DETAIL_INFORMATIONID = id;
+            string erchizi = string.Empty;
+            if (!string.IsNullOrEmpty(Id))
+            {
+                PREPARE_SCHEME prepare = m_BLL3.GetById(Id);//二次进入绑定数据
+                erchizi += "REPORT_CATEGORY*" + prepare.REPORT_CATEGORY + ",";
+                erchizi += "CERTIFICATE_CATEGORY*" + prepare.CERTIFICATE_CATEGORY + ",";
+                erchizi += "CONTROL_NUMBER*" + prepare.CONTROL_NUMBER + ",";
+                erchizi += "QUALIFICATIONS*" + prepare.QUALIFICATIONS + ",";
+                erchizi += "CERTIFICATE_CATEGORY*" + prepare.CERTIFICATE_CATEGORY + ",";
+                erchizi += "CERTIFICATION_AUTHORITY*" + prepare.CERTIFICATION_AUTHORITY + ",";
+                erchizi += "CNAS*" + prepare.CNAS;
+                ViewBag.SBL = erchizi;
+            }
+
             return View();
         }
         /// <summary>
@@ -48,8 +72,8 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult BaoGaoShangChuan(string id)
         {
-            ViewBag.Id = id;
-            id = "124";
+            string[] bs = id.Split('|');
+            ViewBag.Id = bs[0];
             List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(id);
             foreach (var item in list)
             {
@@ -58,6 +82,8 @@ namespace Langben.App.Controllers
                 ViewBag.ID = item.ID;
                 ViewBag.CONCLUSION = item.CONCLUSION;
             }
+            ViewBag.REPORTNUMBER = m_BLL3.GetSerialNumber(bs[0]);
+            ViewBag.APPLIANCE_DETAIL_INFORMATIONID = bs[1];//器具明细id
             return View();
         }
         /// <summary>
@@ -65,10 +91,13 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult BaoGaoShangChuan(FILE_UPLOADER file)//文档上传
+        public ActionResult BaoGaoShangChuan(FILE_UPLOADER file, string REPORTNUMBER)//文档上传
         {
+            PREPARE_SCHEME pre = new PREPARE_SCHEME();
+            pre.REPORTNUMBER = REPORTNUMBER;//证书编号
+            pre.PACKAGETYPE = "上传";
             string msg = string.Empty;
-            if (Request.Files.Count > 0)
+            if (Request.Files.Count > 0)//前端获取文件选择控件值
             {
                 for (int i = 0; i < Request.Files.Count; i++)
                 {
@@ -84,9 +113,9 @@ namespace Langben.App.Controllers
             //jg.PREPARE_SCHEMEID = file.ID;
             //jg.CONCLUSION = file.CONCLUSION;
             FILE_UPLOADER uplo = new FILE_UPLOADER();
-            msg = msg.Substring(1, msg.Length - 1).TrimEnd('}');
+            msg = msg.Substring(1, msg.Length - 1).TrimEnd('}');//去掉头尾｛｝
             string[] mg = msg.Split(',');
-            for (int i = 0; i < mg.Length; i++)
+            for (int i = 0; i < mg.Length; i++)//解析上传文件方法返回的字符串
             {
                 string[] m = mg[i].Split('*');
                 switch (m[0].ToString())
@@ -125,21 +154,35 @@ namespace Langben.App.Controllers
                         break;
                 }
             }
-            uplo.PREPARE_SCHEMEID = file.PREPARE_SCHEMEID;
-            uplo.CONCLUSION = file.CONCLUSION;
+            uplo.PREPARE_SCHEMEID = file.PREPARE_SCHEMEID;//预备方案ID
+            uplo.CONCLUSION = file.CONCLUSION;//结论
             bool Create = false;
             bool Edit = false;
-            if (string.IsNullOrEmpty(file.ID))
+            if (string.IsNullOrEmpty(file.ID))//判断是否为第一次进入
             {
                 uplo.ID = Result.GetNewId();
-                Create = m_BLL2.Create(ref validationErrors, uplo);
+                uplo.CREATETIME = DateTime.Now;//创建时间
+                uplo.CREATEPERSON = GetCurrentPerson();//创建人
+                Create = m_BLL2.Create(ref validationErrors, uplo);//上传信息写入附件表中
+                if (Create)
+                {
+                    Create = m_BLL3.EditField(ref validationErrors, pre);
+                }
+
             }
             else
             {
                 uplo.ID = file.ID;
-                Edit = m_BLL2.Edit(ref validationErrors, uplo);
-            }
+                uplo.UPDATETIME = DateTime.Now;//修改时间
+                uplo.UPDATEPERSON = GetCurrentPerson();//修改人
+                Edit = m_BLL2.Edit(ref validationErrors, uplo);//上传信息修改附件表中
+                if (Edit)
+                {
+                    Edit = m_BLL3.EditField(ref validationErrors, pre);
+                }
 
+            }
+            //返回执行结果是新增还是修改并给出结论
             ViewBag.ID = uplo.ID;
             if (Create)
             {
@@ -149,7 +192,10 @@ namespace Langben.App.Controllers
             {
                 ViewBag.Edit = Edit;
             }
-
+            ViewBag.REPORTNUMBER = REPORTNUMBER;//证书编号
+            ViewBag.NAME2 = uplo.NAME2;//原始记录名称
+            ViewBag.NAME = uplo.NAME;//证书名称
+            ViewBag.CONCLUSION = uplo.CONCLUSION;//结论
             return View();
         }
         /// <summary>
@@ -178,7 +224,7 @@ namespace Langben.App.Controllers
 
             int total = 0;
 
-            search += "EQUIPMENT_STATUS_VALUUMN&" + Common.OrderStatus.已分配.GetHashCode() + "*" + Common.OrderStatus.已领取.GetHashCode() + "*" + Common.OrderStatus.试验中.GetHashCode() + "*" + Common.OrderStatus.试验完成.GetHashCode() + "*" + Common.OrderStatus.器具已入库.GetHashCode() + "*" + Common.OrderStatus.器具已返还.GetHashCode() + "";
+            search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.已分配.GetHashCode() + "*" + Common.ORDER_STATUS.已领取.GetHashCode() + "*" + Common.ORDER_STATUS.试验完成.GetHashCode() + "*" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已返还.GetHashCode() + "";
 
             List<VJIANDINGRENWU> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
@@ -218,6 +264,8 @@ namespace Langben.App.Controllers
                     ISOVERDUE = s.ISOVERDUE
                     ,
                     EQUIPMENT_STATUS_VALUUMN = s.EQUIPMENT_STATUS_VALUUMN
+                    ,
+                    NAME = s.NAME
 
                 }
 
@@ -229,16 +277,20 @@ namespace Langben.App.Controllers
 
         IBLL.IVJIANDINGRENWUBLL m_BLL;
         IBLL.IFILE_UPLOADERBLL m_BLL2;
+        IBLL.IPREPARE_SCHEMEBLL m_BLL3;
+        IBLL.IAPPLIANCE_LABORATORYBLL m_BLL4;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VJIANDINGRENWUController()
-            : this(new VJIANDINGRENWUBLL(), new FILE_UPLOADERBLL()) { }
+            : this(new VJIANDINGRENWUBLL(), new FILE_UPLOADERBLL(), new PREPARE_SCHEMEBLL(), new APPLIANCE_LABORATORYBLL()) { }
 
-        public VJIANDINGRENWUController(VJIANDINGRENWUBLL bll, FILE_UPLOADERBLL bll2)
+        public VJIANDINGRENWUController(VJIANDINGRENWUBLL bll, FILE_UPLOADERBLL bll2, PREPARE_SCHEMEBLL bll3, APPLIANCE_LABORATORYBLL bll4)
         {
             m_BLL = bll;
             m_BLL2 = bll2;
+            m_BLL3 = bll3;
+            m_BLL4 = bll4;
         }
 
     }

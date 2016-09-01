@@ -70,14 +70,55 @@
             </div>
         </div>
         <input type="hidden" value="" id="ACCEPT_ORGNIZATION_HIDDEN" />
+        <input type="hidden" name="APPLIANCE_LABORATORYID" id="APPLIANCE_LABORATORYID_String" value="@ViewBag.APPLIANCE_LABORATORYID" />
+        <input type="hidden" name="ID" id="ID_String" value="@ViewBag.Id" />
     </fieldset>
 }
 <script type="text/javascript">
     //报告上传
     function shangchuan() {
-        var id = "@ViewBag.Id";
-        window.location.href = "/VJIANDINGRENWU/BaoGaoShangChuan/" + id;
+        var arr = {
+            REPORT_CATEGORY: $("#REPORT_CATEGORY_String").val(),
+            CERTIFICATE_CATEGORY: $("#CERTIFICATE_CATEGORY_String").val(),
+            CNAS: $("input[name='CNAS']:checked").val(),
+            CERTIFICATION_AUTHORITY: $("input[name='CERTIFICATION_AUTHORITY']:checked").val(),
+            CONTROL_NUMBER: $("#CONTROL_NUMBER_String").val(),
+            QUALIFICATIONS: $("#QUALIFICATIONS").val(),
+            APPLIANCE_LABORATORYID: $("#APPLIANCE_LABORATORYID_String").val(),
+            ID: $("#ID_String").val()
+        }
+        $.ajax({
+            url: "/api/PREPARE_SCHEMEApi/Post",
+            type: "Post",
+            data: arr,
+            dataType: "json",
+
+            success: function (data) {
+                if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                else if (data.Code == 1) {
+                    alert(data.Id);
+                    var id = "@ViewBag.Id";
+                    window.location.href = "/VJIANDINGRENWU/BaoGaoShangChuan/" + id + "|@ViewBag.APPLIANCE_DETAIL_INFORMATIONID";
+                    return false;
+                }
+                else {
+                    if ($.messager) {
+                        $.messager.defaults.ok = '继续';
+                        $.messager.defaults.cancel = '返回';
+
+                        $.messager.confirm('操作提示', data.Message, function (r) {
+                            if (!r) {
+                                window.location.href = 'javascript:history.go(-1)';
+                            }
+                        });
+                    }
+                }
+
+
+            }
+        })
     }
+
     //重新绑定资质
     function zizhiget(arr) {
         var zhi = $(arr).attr("atps");
@@ -165,44 +206,68 @@
 </script>
 <script type='text/javascript'>
     $(function () {
-        //初始化绑定数据
+        //查询受理单位
         $.ajax({
-            url: "/api/PREPARE_SCHEMEApi/Get/" + "@ViewBag.Id",
-            type: "Get",
+            url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/GetGetByAPPLIANCE_DETAIL_INFORMATIONId/" + "@ViewBag.APPLIANCE_DETAIL_INFORMATIONID",
+            type: "Put",
             // async: false,
             success: function (res) {
                 if (res != null) {
-                    $("#REPORT_CATEGORY_String").val(res.REPORT_CATEGORY);//报告类别
-                    $("#CERTIFICATE_CATEGORY_String").val(res.CERTIFICATE_CATEGORY);//证书类别
-                    $("#CONTROL_NUMBER_String").val(res.CONTROL_NUMBER);//控制编号
-                    $("<option></option>")
-                           .val(res.QUALIFICATIONS)
-                           .text(res.QUALIFICATIONS)
-                           .appendTo($("#QUALIFICATIONS"));
-                    $("#QUALIFICATIONS").val(res.QUALIFICATIONS);//资质
-                    if (res.CERTIFICATE_CATEGORY == "检定") {
-                        $("#jianding").show();
-                        if (res.CERTIFICATION_AUTHORITY=="Yes") {
-                            $("#jiandingyes").attr("checked", 'checked')
-                        }
-                        else if (res.CERTIFICATION_AUTHORITY == "No") {
-                            $("#jiandingno").attr("checked", 'checked')
-                        }
-
-                    }
-                    else if (res.CERTIFICATE_CATEGORY == "校准") {
-                        $("#cnas").show();
-                        if (res.CNAS == "Yes") {
-                            $("#cnasyes").attr("checked", 'checked')
-                            $("#kongzhi").show();
-                        }
-                        else if (res.CNAS == "No") {
-                            $("#cnasno").attr("checked", 'checked')
-                        }
-                    }
+                    $("#ACCEPT_ORGNIZATION_HIDDEN").val(res);
                 }
             }
         })
+        if ("@ViewBag.SBL" != "") {
+            var a = "@ViewBag.SBL";
+            //var arr = new Array();
+            //var arr2 = new Array();
+            var b = a.split(',');
+            for (var i = 0; i < b.length; i++) {
+                var c = b[i].split('*');
+                switch (c[0]) {
+                    case "REPORT_CATEGORY":
+                        $("#REPORT_CATEGORY_String").val(c[1]);//报告类别
+                        break;
+                    case "CONTROL_NUMBER":
+                        $("#CONTROL_NUMBER_String").val(c[1]);//控制编号
+                        break;
+                    case "CERTIFICATE_CATEGORY":
+                        $("#CERTIFICATE_CATEGORY_String").val(c[1]);//证书类别
+                        if (c[1] == "检定") {
+                            $("#jianding").show();
+                            var ja=b[5].split('*')[1];
+                            if (ja== "Yes") {
+                                $("#jiandingyes").attr("checked", 'checked')
+                            }
+                            else if (ja[1] == "No") {
+                                $("#jiandingno").attr("checked", 'checked')
+                            }
+
+                        }
+                        else if (c[1] == "校准") {
+                            $("#cnas").show();
+                            var cb = b[6].split('*')[1];
+                            if (cb == "Yes") {
+                                $("#cnasyes").attr("checked", 'checked')
+                                $("#kongzhi").show();
+                            }
+                            else if (cb[1] == "No") {
+                                $("#cnasno").attr("checked", 'checked')
+                            }
+                        }
+                        break;
+                    case "QUALIFICATIONS":
+                        $("<option></option>")
+                         .val(c[1])
+                         .text(c[1])
+                         .appendTo($("#QUALIFICATIONS"));
+                        $("#QUALIFICATIONS").val(c[1]);//资质
+                        break;
+                    default:
+
+                }
+            }
+        }
         //选择证书
         $("#CERTIFICATE_CATEGORY_String").change(function () {
             var option = $("#CERTIFICATE_CATEGORY_String option:selected");
@@ -221,17 +286,8 @@
                 $("#jianding").hide();
             }
         });
-        //查询受理单位
-        $.ajax({
-            url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/GetGetByAPPLIANCE_DETAIL_INFORMATIONId/" + "@ViewBag.Id",
-            type: "Put",
-            // async: false,
-            success: function (res) {
-                if (res != null) {
-                    $("#ACCEPT_ORGNIZATION_HIDDEN").val(res);
-                }
-            }
-        })
+
+
         function ajaxFrom(form, url) {
 
             $.ajax({

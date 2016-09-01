@@ -249,6 +249,8 @@
     <Compile Include="SCHEME_RULERepository.cs" />
     <Compile Include="shiyanshi\APPLIANCE_DETAIL_INFORMATIONMeta.cs" />
     <Compile Include="shiyanshi\APPLIANCE_DETAIL_INFORMATIONRepository.cs" />
+    <Compile Include="shiyanshi\APPLIANCE_LABORATORYRepository.cs" />
+    <Compile Include="shiyanshi\PREPARE_SCHEMERepository.cs" />
     <Compile Include="SysAnnouncement.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

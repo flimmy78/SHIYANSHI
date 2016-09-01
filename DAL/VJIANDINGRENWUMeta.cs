@@ -43,7 +43,7 @@ namespace Langben.DAL
         [Display(Name = "送检时间", Order = 9)]
         public object CREATETIME { get; set; }
 
-        [Display(Name = "器具进度", Order = 10)]
+        [Display(Name = "所在实验室", Order = 10)]
         public object APPLIANCE_PROGRESS { get; set; }
 
         [Display(Name = "超期原因", Order = 11)]
@@ -67,7 +67,11 @@ namespace Langben.DAL
         [Display(Name = "器具状态值", Order = 17)]
         public object EQUIPMENT_STATUS_VALUUMN { get; set; }
 
+        [Display(Name = "所在实验室", Order = 18)]
+        public object NAME { get; set; }
 
+        [Display(Name = "修改时间", Order = 19)]
+        public object UPDATETIME { get; set; }
 
     }
 
