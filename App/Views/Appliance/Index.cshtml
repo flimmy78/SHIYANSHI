@@ -28,7 +28,7 @@
         @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
     </div>
     <div class="editor-field">
-        @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "请选择", new { id = "ACCEPT_ORGNIZATION_String" })
+        @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "请选择")
     </div>
     <div class="editor-label">
         @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
@@ -121,7 +121,7 @@
         @Html.EditorFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
         @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
     </div>
-   
+
 </div>
 
 <br style="clear:both;" />
@@ -140,7 +140,25 @@
 
     }
     $(function () {
-
+        var editIndex = undefined;
+        function endEditing() {
+            if (editIndex == undefined) { return true }
+            if ($('#dg').datagrid('validateRow', editIndex)) {
+                $('#dg').datagrid('endEdit', editIndex);
+                editIndex = undefined;
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function append() {
+            if (endEditing()) {
+                $('#dg').datagrid('appendRow', { status: 'P' });
+                editIndex = $('#dg').datagrid('getRows').length - 1;
+                $('#dg').datagrid('selectRow', editIndex)
+                        .datagrid('beginEdit', editIndex);
+            }
+        }
         //删除
         function flexiDelete() {
             $('#ApplianceDate').edatagrid('destroyRow');
@@ -149,9 +167,21 @@
         function flexiInsert() {
             $('#ApplianceDate').edatagrid('addRow');
         }
+        //复制新增
+        function flexiInsertCopy() {
+            var row = $('#ApplianceDate').datagrid('getSelected');
+            if (row) {
+                $('#ApplianceDate').datagrid('appendRow', row);
+                
+
+            }
+            else {
+                alert('没有选中行')
+            }
+        }
         //委托单(包含器具信息)保存
         function flexiSave() {
-            //结束器具的编辑状态        
+            //结束器具的编辑状态
             $('#ApplianceDate').edatagrid('saveRow');
             //获取所有器具
             var qiju = $('#ApplianceDate').edatagrid('getRows');
@@ -159,6 +189,7 @@
             var entity = new Object();
             entity.APPLIANCE_DETAIL_INFORMATION = qiju;
             entity.ID = $("#ORDER_TASK_INFORMATIONID").val();
+           
             entity.ACCEPT_ORGNIZATION = $("#ACCEPT_ORGNIZATION option:selected").val();
             entity.INSPECTION_ENTERPRISE = $("#INSPECTION_ENTERPRISE").val();
             entity.INSPECTION_ENTERPRISE_ADDRESS = $("#INSPECTION_ENTERPRISE_ADDRESS").val();
@@ -173,7 +204,7 @@
             entity.CONTACT_PHONE2 = $("#CONTACT_PHONE2").val();
             entity.FAX2 = $("#FAX2").val();
             entity.CUSTOMER_SPECIFIC_REQUIREMENTS = $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val();
-            debugger;
+            
             //将委托单信息发送到服务器
             $.ajax({
                 url: "/ORDER_TASK_INFORMATION/Save",
@@ -215,7 +246,7 @@
                  text: '复制新增',
                  iconCls: 'icon-add',
                  handler: function () {
-                     return  ;
+                     return flexiInsertCopy();
                  }
              }, {
                  text: '删除',
@@ -228,21 +259,21 @@
                    text: '打印器具条形码',
                    iconCls: 'icon-add',
                    handler: function () {
-                       return ;
+                       return;
                    }
                },
                {
                    text: '委托单签名',
                    iconCls: 'icon-add',
                    handler: function () {
-                       return  ;
+                       return;
                    }
                },
                {
                    text: '打印委托单',
                    iconCls: 'icon-add',
                    handler: function () {
-                       return ;
+                       return;
                    }
                },
                {
