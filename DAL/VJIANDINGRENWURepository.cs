@@ -29,20 +29,21 @@ namespace Langben.DAL
             {
                 foreach (var item in queryDic)
                 {
+                    if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "EQUIPMENT_STATUS_VALUUMN")
+                    {
+                        EQUIPMENT_STATUS_VALUUMN = item.Value;
+                        //if (where.IndexOf(" and ") > 0)
+                        //{
+                        //    where = where.Remove(where.LastIndexOf(" and "));
+                        //}
+                        continue;
+                    }
                     if (flagWhere != 0)
                     {
                         where += " and ";
                     }
                     flagWhere++;
-                    if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "EQUIPMENT_STATUS_VALUUMN")
-                    {
-                        EQUIPMENT_STATUS_VALUUMN = item.Value;
-                        if (where.IndexOf(" and ") > 0)
-                        {
-                          where= where.Remove(where.LastIndexOf(" and "));
-                        }
-
-                    }
+                  
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Time)) + "] >=  CAST('" + item.Value + "' as   System.DateTime)";
