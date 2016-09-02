@@ -86,6 +86,8 @@ namespace Langben.App.Controllers
                         item.ID= Result.GetNewId();
                         item.CREATETIME = DateTime.Now;
                         item.CREATEPERSON = currentPerson;
+                        item.ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString();
+                        item.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已分配.GetHashCode().ToString();
                     }
 
                     string returnValue = string.Empty;
