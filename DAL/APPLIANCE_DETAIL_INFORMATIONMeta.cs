@@ -13,6 +13,8 @@ namespace Langben.DAL
 
         [Display(Name = "委托单")]
         public string ORDER_TASK_INFORMATIONIDOld { get; set; }
+        [Display(Name = "委托单")]
+        public string UNDERTAKE_LABORATORYID { get; set; }
 
         #endregion
 
