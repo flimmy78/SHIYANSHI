@@ -97,7 +97,8 @@
                 if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
                 else if (data.Code == 1) {
                     var id = "@ViewBag.Id";
-                    window.location.href = "/VJIANDINGRENWU/BaoGaoShangChuan/" + id + "|@ViewBag.APPLIANCE_DETAIL_INFORMATIONID";
+                    var di = data.Id;
+                    window.location.href = "/VJIANDINGRENWU/BaoGaoShangChuan/" + di+ "|@ViewBag.APPLIANCE_DETAIL_INFORMATIONID";
                     return false;
                 }
                 else {

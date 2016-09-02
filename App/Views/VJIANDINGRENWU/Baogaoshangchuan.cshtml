@@ -8,31 +8,51 @@
         <label>报告上传</label>
     </legend>
     <div>
-        <div class="input_search-field">
-            <form id="form1" method="post" enctype="multipart/form-data" action="BaoGaoShangChuan">
-                <div class="input_search">
-                    <div class="input_search-label">
-                        证书编号：
-                    </div>
-                    <div class="input_search-field">
-                        <label>@ViewBag.REPORTNUMBER</label>
-                        <input type="hidden" name="REPORTNUMBER" value="@ViewBag.REPORTNUMBER" />
-                    </div>
+        <form id="form1" method="post" enctype="multipart/form-data" action="BaoGaoShangChuan">
+            <div class="input_search">
+                <div class="input_search-label">
+                    证书编号：
+                </div>
+                <div class="input_search-field">
+                    <label>@ViewBag.REPORTNUMBER</label>
+                    <input type="hidden" name="REPORTNUMBER" value="@ViewBag.REPORTNUMBER" />
+                </div>
+            </div>
+            <div class="input_search">
+                <div class="input_search-label">
+                    上传原始记录：
+                </div>
+                <div class="input_search-field">
+                    <input name="name" type="file" id="file" /><br />
+                    <label>@ViewBag.NAME2</label>
+                </div>
+            </div>
+            <div class="input_search">
+                <div class="input_search-label">
+                    上传证书：
+                </div>
+                <div class="input_search-field">
+                    <input name="name2" type="file" id="file2" />
                 </div><br />
-                上传原始记录： <input name="name" type="file" id="file" /><label>@ViewBag.NAME2</label>
-                上传证书：<input name="name2" type="file" id="file2" /><label>@ViewBag.NAME</label>
-                <div class="input_search">
+                <label>@ViewBag.NAME</label>
+            </div>
+            <div class="input_search">
+                <div class="input_search-label">
+                    结论：
+                </div>
+                <div class="input_search-field">
                     <div class="input_search-label">
-                        结论：
-                    </div>
-                    <div class="input_search-field">
                         合格： <input type="radio" name="CONCLUSION" value="合格" id="CONCLUSION1" />
                         不合格： <input type="radio" name="CONCLUSION" value="不合格" id="CONCLUSION2" />
                     </div>
-                </div><br />
-                <input type="hidden" name="PREPARE_SCHEMEID"  value="@ViewBag.Id"/>
-                <input type="hidden" name="ID" value="@ViewBag.FILE_UPLOADERID" id="hiddenID" />
-                <input id="Submit1" type="submit" value="上传" onclick="javascript:
+                    <div class="input_search-label">
+                        
+                    </div>
+                </div>
+            </div><br />
+            <input type="hidden" name="PREPARE_SCHEMEID" value="@ViewBag.Id" />
+            <input type="hidden" name="ID" value="@ViewBag.FILE_UPLOADERID" id="hiddenID" />
+            <input id="Submit1" type="submit" value="上传" onclick="javascript:
         if ($('#file').val() != '' && $('#file2').val() != '')
         {
             if ($('input[name=CONCLUSION]:checked').val() == undefined) {
@@ -47,11 +67,8 @@
             return false;
         };
   " />
-                <input type="button" value="发送审核" onclick="songwangshenghe()" />
-            </form>
-            @*<input type="file" name="name" id="file"/>
-                <input type="button" value="上传" onclick="shangchuan()"/>*@
-        </div>
+            <input type="button" value="发送审核" onclick="songwangshenghe()" />
+        </form>
     </div>
 </fieldset>
 
@@ -59,13 +76,13 @@
     $(function () {
         if ("@ViewBag.CONCLUSION" != "") {
             @*$("input[type=radio]").attr("checked", "@ViewBag.CONCLUSION");*@
-            if ("@ViewBag.CONCLUSION"=="合格") {
+            if ("@ViewBag.CONCLUSION" == "合格") {
                 $("#CONCLUSION1").attr("checked", "checked");
             }
             else if ("@ViewBag.CONCLUSION" == "不合格") {
                 $("#CONCLUSION2").attr("checked", "checked");
-            }           
-        }    
+            }
+        }
         if ("@ViewBag.Create" == "True") {
             $.messager.alert('操作提示', "保存成功！", 'info');
         }
@@ -89,7 +106,7 @@
         }
         $.ajax({
             url: "/api/PREPARE_SCHEMEApi/EditField",
-            type: "Post",
+            type: "Put",
             data: arr,
             // async: false,
             success: function (res) {
