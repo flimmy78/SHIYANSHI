@@ -74,13 +74,14 @@ namespace Langben.App.Controllers
         {
             string[] bs = id.Split('|');
             ViewBag.Id = bs[0];
-            List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(id);
+            List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(bs[0]);
             foreach (var item in list)
             {
                 ViewBag.NAME2 = item.NAME2;
                 ViewBag.NAME = item.NAME;
                 ViewBag.ID = item.ID;
                 ViewBag.CONCLUSION = item.CONCLUSION;
+                ViewBag.FILE_UPLOADERID = item.ID;
             }
             ViewBag.REPORTNUMBER = m_BLL3.GetSerialNumber(bs[0]);
             ViewBag.APPLIANCE_DETAIL_INFORMATIONID = bs[1];//器具明细id

@@ -58,15 +58,14 @@
 <script type="text/javascript">
     $(function () {
         if ("@ViewBag.CONCLUSION" != "") {
-            $("input[type=radio]").attr("checked", '@ViewBag.CONCLUSION');
-            @*if ("@ViewBag.CONCLUSION"=="合格") {
-                $("input[type=radio]").attr("checked", 'checked');
+            @*$("input[type=radio]").attr("checked", "@ViewBag.CONCLUSION");*@
+            if ("@ViewBag.CONCLUSION"=="合格") {
+                $("#CONCLUSION1").attr("checked", "checked");
             }
             else if ("@ViewBag.CONCLUSION" == "不合格") {
-                $("input[type=radio]").attr("checked", '@ViewBag.CONCLUSION');
-            }*@           
-        }
-
+                $("#CONCLUSION2").attr("checked", "checked");
+            }           
+        }    
         if ("@ViewBag.Create" == "True") {
             $.messager.alert('操作提示', "保存成功！", 'info');
         }
