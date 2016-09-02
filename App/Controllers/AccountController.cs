@@ -76,6 +76,7 @@ namespace Langben.App.Controllers
                 if (person != null)
                 {//登录成功
                     Account account = new Account();
+                    account.UNDERTAKE_LABORATORYName = person.Province;//实验室
                     account.Name = person.Name;
                     account.PersonName = person.MyName;
                     account.Id = person.Id.ToString();
