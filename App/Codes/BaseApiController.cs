@@ -20,17 +20,14 @@ namespace Models
     public class BaseApiController : ApiController
     {
         /// <summary>
-        /// 获取当前登陆人的名称
+        /// 获取当前登陆人的用户名
         /// </summary>
         /// <returns></returns>
         public string GetCurrentPerson()
         {
-            Account account = GetCurrentAccount();
-            if (account != null && !string.IsNullOrWhiteSpace(account.PersonName))
-            {
-                return account.PersonName;
-            }
-            return string.Empty;
+            return AccountModel.GetCurrentPerson();
+
+
         }
         /// <summary>
         /// 获取当前登陆人的账户信息
@@ -38,12 +35,11 @@ namespace Models
         /// <returns>账户信息</returns>
         public Account GetCurrentAccount()
         {
-            if (HttpContext.Current.Session["account"] != null)
-            {
-                Account account = (Account)HttpContext.Current.Session["account"];
-                return account;
-            }
-            return null;
+            var account = AccountModel.GetCurrentAccount();
+
+            return account;
+
+
         }
         /// <summary>
         /// 导出数据集到excle

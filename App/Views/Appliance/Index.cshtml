@@ -22,7 +22,7 @@
 <br style="clear:both;" />
 
 <input type="button" onclick="seng()" value="查询" />
-<div class="bigdiv">
+<div class="bigdiv" style=" width: 854px;">
 
     <div class="editor-label">
         @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
@@ -295,8 +295,7 @@
                    type: 'combobox',
                    options: {
                        multiple: true,
-                       data: [{ value: '电能', text: '电能' }, { value: '指示仪表', text: '指示仪表' },
-                           { value: '数字仪表', text: '数字仪表' }, { value: '互感器仪表', text: '互感器仪表' }],
+                       data: shiyanshiArray,
                        panelHeight: 'auto'
                    }
                }

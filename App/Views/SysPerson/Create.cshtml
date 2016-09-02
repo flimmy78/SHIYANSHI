@@ -17,7 +17,7 @@
             <input class="a2 f2" type="button" onclick="BackList('SysPerson')" value="返回" />
         </legend>
             <div class="bigdiv">
-                <div style="float:right; width:379px;height:184px;">
+                <div style="float:right; width:379px;height:230px;">
                         <div style="text-align:center;">
                             <img id="showPic" src="~/Images/noPic.jpg" width="149" height="175" style="padding-bottom: 0px;"/>
                             <div id="uploader-demo">
@@ -61,16 +61,7 @@
                 <div class="editor-field">
                     @Html.DropDownListFor(model => model.Sex, Models.SysFieldModels.GetSysField("SysPerson", "Sex"))
                 </div>
-                <div class="editor-label">
-                    <a class="anUnderLine" onclick="showModalOnly('SysDepartmentId','../../SysDepartment');">
-                        @Html.LabelFor(model => model.SysDepartmentId)
-                    </a>：
-                </div>
-                <div class="editor-field">
-                    <div id="checkSysDepartmentId">
-                    </div>
-                    @Html.HiddenFor(model => model.SysDepartmentId)
-                </div>
+                 
                 <div class="editor-label">
                     @Html.LabelFor(model => model.Position)：
                 </div>
@@ -93,23 +84,20 @@
                     @Html.ValidationMessageFor(model => model.PhoneNumber)
                 </div>
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.Province)：
+                    <label for="Province">实验室</label>
                 </div>
                 <div class="editor-field">
-                    @Html.DropDownListFor(model => model.Province,Models.SysFieldModels.GetSysField("SysPerson","Province"),"请选择")
+                    <select id="Province" name="Province">
+                        <option value="数表三相">数表三相</option>
+                        <option value="数表单相">数表单相</option>
+                        <option value="电能">电能</option>
+                        <option value="指示仪表">指示仪表</option>
+                        <option value="直流仪器">直流仪器</option>
+                        <option value="互感器">互感器</option>
+                    </select>
+                 
                 </div>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.City)：
-                </div>
-                <div class="editor-field">
-                    <select id="City" name="City"></select>
-                </div>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Village)：
-                </div>
-                <div class="editor-field">
-                    <select id="Village" name="Village"></select>
-                </div>
+                
                 <div class="editor-label">
                     @Html.LabelFor(model => model.Address)：
                 </div>
@@ -151,34 +139,10 @@
 
         $(function () {
             
-            getCity("#City");
-            $("#Province").change(function () { getCity("#City"); });
-
-            getVillage("#Village");
-            $("#City").change(function () { getVillage("#Village"); });
-
+           
 
         });
         
-        function getCity(City) {
-            $(City).empty();
-            $("<option></option>")
-                    .val("")
-                    .text("请选择")
-                    .appendTo($(City));
-            bindDropDownList(City, "#Province");
-            $(City).change();
-        }
-
-        function getVillage(Village) {
-            $(Village).empty();
-            $("<option></option>")
-                    .val("")
-                    .text("请选择")
-                    .appendTo($(Village));
-            bindDropDownList(Village, "#City");
-            $(Village).change();
-        }
     </script>
 
 
