@@ -39,12 +39,13 @@ namespace Langben.App.Controllers
         public ActionResult XuanZheFangAn(string id)
         {
             string Id = string.Empty;
-            string APPLIANCE_LABORATORYID = string.Empty;
+            string APPLIANCE_LABORATORYID = string.Empty;        
             List<APPLIANCE_LABORATORY> list = m_BLL4.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(id);
             foreach (var item in list)
             {
                 Id = item.PREPARE_SCHEMEID;
                 APPLIANCE_LABORATORYID = item.ID;
+               
             }
             ViewBag.Id = Id;
             ViewBag.APPLIANCE_LABORATORYID = APPLIANCE_LABORATORYID;
