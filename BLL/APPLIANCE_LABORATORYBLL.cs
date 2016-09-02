@@ -69,7 +69,7 @@ namespace Langben.BLL
                                 item.UNDERTAKE_LABORATORYIDOld = item.UNDERTAKE_LABORATORY.NAME.GetString();//                            
                         }                  
 
-                        if (item.APPLIANCE_DETAIL_INFORMATIOID != null && item.APPLIANCE_DETAIL_INFORMATION != null)
+                        if (item.APPLIANCE_DETAIL_INFORMATIONID != null && item.APPLIANCE_DETAIL_INFORMATION != null)
                         { 
                                 item.APPLIANCE_DETAIL_INFORMATIOIDOld = item.APPLIANCE_DETAIL_INFORMATION.BAR_CODE_NUM.GetString();//                            
                         }                  

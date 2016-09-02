@@ -27,6 +27,6 @@ namespace Langben.DAL
         public string CONCLUSION_EXPLAIN { get; set; }
         public string CONCLUSION { get; set; }
         public string ISAGGREY { get; set; }
-        public string PREPARE_SCHEMEID { get; set; }
+        public string PACKAGETYPE { get; set; }
     }
 }

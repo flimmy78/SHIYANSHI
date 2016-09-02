@@ -55,8 +55,8 @@ namespace Langben.DAL
         [Display(Name = "审核结论", Order = 13)]
         public object ISAGGREY { get; set; }
 
-        [Display(Name = "预备方案id", Order = 13)]
-        public object PREPARE_SCHEMEID { get; set; }
+        [Display(Name = "报告类型", Order = 13)]
+        public object PACKAGETYPE { get; set; }
 
     }
 

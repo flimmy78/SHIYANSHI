@@ -16,7 +16,7 @@ namespace Langben.DAL
     {
         public string ID { get; set; }
         public string UNDERTAKE_LABORATORYID { get; set; }
-        public string APPLIANCE_DETAIL_INFORMATIOID { get; set; }
+        public string APPLIANCE_DETAIL_INFORMATIONID { get; set; }
         public string PREPARE_SCHEMEID { get; set; }
         public string RECEIVEPERSON { get; set; }
         public Nullable<System.DateTime> RECEIVETIME { get; set; }

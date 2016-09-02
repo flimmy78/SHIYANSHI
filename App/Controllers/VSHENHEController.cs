@@ -95,7 +95,7 @@ namespace Langben.App.Controllers
                     CONCLUSION = s.CONCLUSION
                     ,
                     ISAGGREY = s.ISAGGREY,
-                    PREPARE_SCHEMEID = s.PREPARE_SCHEMEID
+                    PACKAGETYPE = s.PACKAGETYPE
 
                 }
 

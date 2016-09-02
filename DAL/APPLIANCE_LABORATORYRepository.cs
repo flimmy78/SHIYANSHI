@@ -178,7 +178,7 @@ namespace Langben.DAL
         public IQueryable<APPLIANCE_LABORATORY> GetByRefAPPLIANCE_DETAIL_INFORMATIOID(SysEntities db, string id)
         {
             return from c in db.APPLIANCE_LABORATORY
-                        where c.APPLIANCE_DETAIL_INFORMATIOID == id
+                        where c.APPLIANCE_DETAIL_INFORMATIONID == id
                         select c;
                       
         }
