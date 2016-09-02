@@ -146,11 +146,11 @@ namespace Langben.App.Controllers
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             if (entity != null && ModelState.IsValid)
             {
-                //string currentPerson = GetCurrentPerson();
+                string currentPerson = GetCurrentPerson();
                 entity.CREATETIME = DateTime.Now;
-                // entity.CREATEPERSON = currentPerson;
+                entity.CREATEPERSON = currentPerson;
                 //修改证书编号
-               
+
                 entity.ID = Result.GetNewId();
                 string returnValue = string.Empty;
                 APPLIANCE_LABORATORY app = new APPLIANCE_LABORATORY();
@@ -184,7 +184,7 @@ namespace Langben.App.Controllers
                         result.Code = Common.ClientCode.Fail;
                         result.Message = Suggestion.UpdateFail + returnValue;
                         return result; //提示更新失败
-                    }                    
+                    }
                 }
                 //新增
                 if (m_BLL.Create(ref validationErrors, entity) && m_BLL2.EditField(ref validationErrors, app) && m_BLL.UPTSerialNumber(entity.ID))
@@ -235,7 +235,7 @@ namespace Langben.App.Controllers
 
                 //string currentPerson = GetCurrentPerson();
                 entity.UPDATETIME = DateTime.Now;
-               // entity.UPDATEPERSON = currentPerson;
+                // entity.UPDATEPERSON = currentPerson;
 
                 string returnValue = string.Empty;
                 if (m_BLL.Edit(ref validationErrors, entity))

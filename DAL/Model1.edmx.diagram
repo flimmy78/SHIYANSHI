@@ -67,7 +67,6 @@
         <EntityTypeShape EntityType="Model.UNCERTAINTYPARAMETERMANAGEMENT" Width="1.5" PointX="10.25" PointY="52.25" />
         <EntityTypeShape EntityType="Model.UNDERTAKE_LABORATORY" Width="1.5" PointX="5.75" PointY="28.5" />
         <EntityTypeShape EntityType="Model.VBAOGAODAYIN" Width="1.5" PointX="21.75" PointY="17.75" />
-        <EntityTypeShape EntityType="Model.VJIANDINGRENWU" Width="1.5" PointX="21.75" PointY="22.75" />
         <EntityTypeShape EntityType="Model.VQIJULINGQU1" Width="1.5" PointX="23.75" PointY="20.75" />
         <EntityTypeShape EntityType="Model.VQIJULINGQU2" Width="1.5" PointX="26.75" PointY="0.75" />
         <EntityTypeShape EntityType="Model.VRUKU" Width="1.5" PointX="24.75" PointY="27.75" />
@@ -128,6 +127,7 @@
         <AssociationConnector Association="Model.SysDocumentSysPerson" />
         <AssociationConnector Association="Model.SysMenuSysOperation" />
         <AssociationConnector Association="Model.SysRoleSysPerson" />
+        <EntityTypeShape EntityType="Model.VJIANDINGRENWU" Width="1.5" PointX="29.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

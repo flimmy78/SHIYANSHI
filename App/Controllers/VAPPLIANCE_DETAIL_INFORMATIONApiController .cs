@@ -37,9 +37,9 @@ namespace Langben.App.Controllers
             string[] deleteId = id.Split(',');
             if (deleteId != null && deleteId.Length > 0)
             {
-                // Common.Account account = GetCurrentAccount();
-                Common.Account account = new Account();
-                account.UNDERTAKE_LABORATORYName = "三相";
+                Common.Account account = GetCurrentAccount();
+                //Common.Account account = new Account();
+                //account.UNDERTAKE_LABORATORYName = "三相";
                //判断出是试验完成的id
                 //for (int i = 0; i < deleteId.Length; i++)
                 //{
