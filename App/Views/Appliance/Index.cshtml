@@ -22,7 +22,7 @@
 <br style="clear:both;" />
 
 <input type="button" onclick="seng()" value="查询" />
-<div class="bigdiv" style=" width: 854px;">
+<div class="bigdiv" style="width: 854px;">
 
     <div class="editor-label">
         @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
@@ -121,10 +121,12 @@
         @Html.EditorFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
         @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
     </div>
-    <br style="clear:both;" />
-    <input type="hidden" id="ORDER_TASK_INFORMATIONID" />
-    <table id="ApplianceDate" singleSelect="true"></table>
+   
 </div>
+
+<br style="clear:both;" />
+<input type="hidden" id="ORDER_TASK_INFORMATIONID" />
+<table id="ApplianceDate" singleSelect="true"></table>
 
 <script type="text/javascript">
 
@@ -213,7 +215,7 @@
                  text: '复制新增',
                  iconCls: 'icon-add',
                  handler: function () {
-                     return flexiCreate();
+                     return  ;
                  }
              }, {
                  text: '删除',
@@ -226,21 +228,21 @@
                    text: '打印器具条形码',
                    iconCls: 'icon-add',
                    handler: function () {
-                       return flexiSave();
+                       return ;
                    }
                },
                {
                    text: '委托单签名',
                    iconCls: 'icon-add',
                    handler: function () {
-                       return flexiSave();
+                       return  ;
                    }
                },
                {
                    text: '打印委托单',
                    iconCls: 'icon-add',
                    handler: function () {
-                       return flexiSave();
+                       return ;
                    }
                },
                {
@@ -290,16 +292,17 @@
            , { field: 'FACTORY_NUM', title: '出厂编号', width: 65, editor: 'text' }
            , { field: 'ATTACHMENT', title: '附件', width: 135, editor: 'text' }
            , { field: 'MAKE_ORGANIZATION', title: '制造单位', width: 65, editor: 'text' }
-           , {
-               field: 'UNDERTAKE_LABORATORYID', title: '承接实验室', width: 135, editor: {
-                   type: 'combobox',
-                   options: {
-                       multiple: true,
-                       data: shiyanshiArray,
-                       panelHeight: 'auto'
-                   }
-               }
-           }
+              , {
+                  field: 'UNDERTAKE_LABORATORYID', title: '承接实验室', width: 135, editor: {
+                      type: 'combobox',
+                      options: {
+                          multiple: true,
+                          data: [{ value: '电能', text: '电能' }, { value: '指示仪表', text: '指示仪表' },
+                              { value: '数字仪表', text: '数字仪表' }, { value: '互感器仪表', text: '互感器仪表' }],
+                          panelHeight: 'auto'
+                      }
+                  }
+              }
            , {
                field: 'APPLIANCE_RECIVE', title: '器具接收', width: 65, editor: {
                    type: 'combobox', options: { data: [{ value: '是', text: '是' }, { value: '否', text: '否' }], panelHeight: 'auto' }
