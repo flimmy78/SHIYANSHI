@@ -276,7 +276,7 @@ namespace Langben.App.Controllers
         /// <param name="entity"></param>
         /// <returns></returns>  
         /// 
-        [System.Web.Http.HttpPut]
+        [HttpPut]
         public Common.ClientResult.Result EditField([FromBody]PREPARE_SCHEME entity)
         {
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
