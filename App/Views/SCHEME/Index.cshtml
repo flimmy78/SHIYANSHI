@@ -45,7 +45,8 @@
             sortName: 'ID',
             sortOrder: 'desc',
             idField: 'ID',
-            queryParams: GetQuery(),
+            queryParams: { search: GetQuery() },//默认查询条件
+            
             toolbar: [
                 {
                     text: '添加',
