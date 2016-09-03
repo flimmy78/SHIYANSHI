@@ -60,7 +60,10 @@
     <Compile Include="APPLIANCE_DETAIL_INFORMATIONBLL.cs" />
     <Compile Include="Shiyanshi\APPLIANCE_DETAIL_INFORMATIONBLL.cs" />
     <Compile Include="Shiyanshi\APPLIANCE_LABORATORYBLL.cs" />
+    <Compile Include="Shiyanshi\FILE_UPLOADERBLL.cs" />
     <Compile Include="Shiyanshi\PREPARE_SCHEMEBLL.cs" />
+    <Compile Include="Shiyanshi\VJIANDINGRENWUBLL.cs" />
+    <Compile Include="Shiyanshi\VSHENHEBLL.cs" />
     <Compile Include="SysAnnouncementBLL.cs" />
     <Compile Include="SysDepartmentBLL.cs" />
     <Compile Include="SysDocumentBLL.cs" />

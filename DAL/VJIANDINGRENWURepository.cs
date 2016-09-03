@@ -8,7 +8,7 @@ namespace Langben.DAL
     /// <summary>
     /// 检定任务
     /// </summary>
-    public class VJIANDINGRENWURepository : BaseRepository<VJIANDINGRENWU>, IDisposable
+    public partial class VJIANDINGRENWURepository : BaseRepository<VJIANDINGRENWU>, IDisposable
     {
         /// <summary>
         /// 查询的数据

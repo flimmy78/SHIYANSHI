@@ -72,4 +72,19 @@ namespace Common
         /// </summary>
         报告已发放 = 1120
     }
+
+    /// <summary>
+    /// 报告类型
+    /// </summary>
+    public enum PACKAGETYPE
+    {
+        /// <summary>
+        /// 报告通过上传点击上传按钮时记录
+        /// </summary>
+        上传=1011,
+        /// <summary>
+        /// 报告通过系统生成的
+        /// </summary>
+        生成=1022
+    }
 }

@@ -97,7 +97,7 @@ namespace Langben.App.Controllers
         {
             PREPARE_SCHEME pre = new PREPARE_SCHEME();
             pre.REPORTNUMBER = REPORTNUMBER;//证书编号
-            pre.PACKAGETYPE = "上传";
+            pre.PACKAGETYPE =Common.PACKAGETYPE.上传.ToString();
             string msg = string.Empty;
             if (Request.Files.Count > 0)//前端获取文件选择控件值
             {
@@ -165,9 +165,11 @@ namespace Langben.App.Controllers
                 uplo.ID = Result.GetNewId();
                 uplo.CREATETIME = DateTime.Now;//创建时间
                 uplo.CREATEPERSON = GetCurrentPerson();//创建人
+                
                 Create = m_BLL2.Create(ref validationErrors, uplo);//上传信息写入附件表中
                 if (Create)
                 {
+
                     Create = m_BLL3.EditField(ref validationErrors, pre);
                 }
 
@@ -177,7 +179,8 @@ namespace Langben.App.Controllers
                 uplo.ID = file.ID;
                 uplo.UPDATETIME = DateTime.Now;//修改时间
                 uplo.UPDATEPERSON = GetCurrentPerson();//修改人
-                Edit = m_BLL2.Edit(ref validationErrors, uplo);//上传信息修改附件表中
+                
+                Edit = m_BLL2.EditField(ref validationErrors, uplo);//上传信息修改附件表中
                 if (Edit)
                 {
                     Edit = m_BLL3.EditField(ref validationErrors, pre);
@@ -228,7 +231,7 @@ namespace Langben.App.Controllers
             Common.Account account = GetCurrentAccount();
             search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.已分配.GetHashCode() + "*" + Common.ORDER_STATUS.已领取.GetHashCode() + "*" + Common.ORDER_STATUS.试验完成.GetHashCode() + "*" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已返还.GetHashCode() + "";
             search += "^NAME&" + account.UNDERTAKE_LABORATORYName;
-            List<VJIANDINGRENWU> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
+            List<VJIANDINGRENWU> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
             {
                 total = total,

@@ -40,12 +40,13 @@ namespace Langben.App.Controllers
             return View();
         }
         /// <summary>
-        /// 预览审核
+        /// 下载审核
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
         public ActionResult XiaZaiShenHe(string id)
         {
+            string[] IDD = id.Split('*');
             ViewBag.Id = id;
             return View();
         }
@@ -64,7 +65,8 @@ namespace Langben.App.Controllers
         {
 
             int total = 0;
-            List<VSHENHE> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
+            search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.审核驳回.GetHashCode() + "*" + Common.REPORTSTATUS.待审核.GetHashCode() + "*" + Common.REPORTSTATUS.待批准.GetHashCode() + "";
+            List<VSHENHE> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
             {
                 total = total,
@@ -95,6 +97,7 @@ namespace Langben.App.Controllers
                     CONCLUSION = s.CONCLUSION
                     ,
                     ISAGGREY = s.ISAGGREY,
+
                     PACKAGETYPE = s.PACKAGETYPE
 
                 }
@@ -105,15 +108,17 @@ namespace Langben.App.Controllers
 
 
         IBLL.IVSHENHEBLL m_BLL;
+        IBLL.IFILE_UPLOADERBLL m_BLL2;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VSHENHEController()
-            : this(new VSHENHEBLL()) { }
+            : this(new VSHENHEBLL(),new FILE_UPLOADERBLL()) { }
 
-        public VSHENHEController(VSHENHEBLL bll)
+        public VSHENHEController(VSHENHEBLL bll, FILE_UPLOADERBLL bll2)
         {
             m_BLL = bll;
+            m_BLL2 = bll2;
         }
 
     }
