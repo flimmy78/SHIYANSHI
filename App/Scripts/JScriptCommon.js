@@ -1,7 +1,29 @@
 ﻿var shiyanshiArray = new Array;
-shiyanshiArray = [{ value: '电能', text: '电能' }, { value: '指示仪表', text: '指示仪表' },
-                           { value: '数字仪表', text: '数字仪表' }, { value: '互感器仪表', text: '互感器仪表' }];
- 
+shiyanshiArray = [
+    { value: '电能', text: '电能' }, 
+    { value: '数表三相', text: '数表三相' },
+    { value: '数表单相', text: '数表单相' },
+    { value: '指示仪表', text: '指示仪表' },
+    { value: '直流仪器', text: '直流仪器' }, 
+    { value: '互感器', text: '互感器' }];
+//下拉框绑定实验室
+function bindShiyanshi(id) {
+    if (shiyanshiArray == null || shiyanshiArray.length == 0) {
+        return;
+    }
+    else {
+        $(id).empty();
+    }
+    $.each(shiyanshiArray, function (i, item) {
+        if (item == null) {
+            return;
+        }
+        $("<option></option>")
+                .val(item["value"])
+                .text(item["text"])
+                .appendTo($(id));
+    });
+}
 
 function returnParent(value) {//获取子窗体返回值
     var parent = window.dialogArguments; //获取父页面
