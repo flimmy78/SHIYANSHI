@@ -47,6 +47,7 @@ namespace Langben.App.Controllers
         public ActionResult XiaZaiShenHe(string id)
         {
             string[] IDD = id.Split('*');
+            m_BLL2.GetByRefPREPARE_SCHEMEID(IDD[0]);
             ViewBag.Id = id;
             return View();
         }
