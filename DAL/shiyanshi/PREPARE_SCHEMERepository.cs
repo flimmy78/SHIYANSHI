@@ -16,7 +16,7 @@ namespace Langben.DAL
         /// 查找编号最大值
         /// </summary>
         /// <returns>编号最大值</returns>
-        public decimal? GetSERIALNUMBERmax(SysEntities db,string time)
+        public decimal? GetSERIALNUMBERmax(SysEntities db, string time)
         {
             return db.PREPARE_SCHEME.Where(s => s.YEARS == time).Select(s => s.SERIALNUMBER).Max();
         }
@@ -30,7 +30,7 @@ namespace Langben.DAL
             //数据库设置级联关系，自动删除子表的内容   
             IQueryable<PREPARE_SCHEME> collection = from f in db.PREPARE_SCHEME
                                                     where f.ID == entity.ID
-                                                                  select f;
+                                                    select f;
 
             //db.APPLIANCE_DETAIL_INFORMATION.Attach(entity);
             //db.Entry(entity).State = System.Data.Entity.EntityState.Modified;
@@ -77,7 +77,8 @@ namespace Langben.DAL
                 deleteItem.REPORTSTATUS = entity.REPORTSTATUS == null ? deleteItem.REPORTSTATUS : entity.REPORTSTATUS;
                 deleteItem.SERIALNUMBER = entity.SERIALNUMBER == null ? deleteItem.SERIALNUMBER : entity.SERIALNUMBER;
                 deleteItem.YEARS = entity.YEARS == null ? deleteItem.YEARS : entity.YEARS;
-
+                deleteItem.PACKAGETYPE = entity.PACKAGETYPE == null ? deleteItem.PACKAGETYPE : entity.PACKAGETYPE;
+                deleteItem.REPORTSTATUSZI = entity.REPORTSTATUSZI == null ? deleteItem.REPORTSTATUSZI : entity.REPORTSTATUSZI;
             }
         }
     }

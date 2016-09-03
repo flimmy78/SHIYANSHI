@@ -64,6 +64,7 @@
     <Compile Include="Shiyanshi\PREPARE_SCHEMEBLL.cs" />
     <Compile Include="Shiyanshi\VJIANDINGRENWUBLL.cs" />
     <Compile Include="Shiyanshi\VSHENHEBLL.cs" />
+    <Compile Include="Shiyanshi\VSHENPIBLL.cs" />
     <Compile Include="SysAnnouncementBLL.cs" />
     <Compile Include="SysDepartmentBLL.cs" />
     <Compile Include="SysDocumentBLL.cs" />

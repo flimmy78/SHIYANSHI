@@ -1,57 +1,83 @@
 ﻿
 @{
-    Layout = "~/Views/Shared/Edit.cshtml";
+    Layout = "~/Views/Shared/AppCreate.cshtml";
 }
-@using (Html.BeginForm("", "api/PREPARE_SCHEMEApi/Put"))
+@using (Html.BeginForm("", "api/PREPARE_SCHEMEApi/SheIsPi"))
 {
-<fieldset>
-   <div>
-       <div class="input_search">
-           <div class="input_search-label">
-               原始记录：
-           </div>
-           <div class="input_search-field">
-               <a id="yuanshi"></a>
-           </div>
-       </div><br />
-       <div class="input_search">
-           <div class="input_search-label">
-               证书：
-           </div>
-           <div class="input_search-field">
-               <a id="zhenshu"></a>
-           </div>
-       </div><br />
-       <div class="input_search">
-           <div class="input_search-label">
-               结论：
-           </div>
-           <div class="input_search-field">
-               <label id="jielu"></label>
-           </div>
-       </div><br />
-   </div>
-    <div>
-        <div class="input_search">
-            <div class="input_search-label">
-                填写审核意见：
+    <fieldset>
+        <div>
+            <div class="input_search">
+                <div class="input_search-label">
+                    原始记录：
+                </div>
+                <div class="input_search-field">
+                    <a id="yuanshi" href="@ViewBag.FULLPATH2"></a>
+                </div>
+            </div><br />
+            <div class="input_search">
+                <div class="input_search-label">
+                    证书：
+                </div>
+                <div class="input_search-field">
+                    <a id="zhenshu" href="@ViewBag.FULLPATH"></a>
+                </div>
+            </div><br />
+            <div class="input_search">
+                <div class="input_search-label">
+                    结论：
+                </div>
+                <div class="input_search-field">
+                    <label id="jielu">@ViewBag.CONCLUSION</label>
+                </div>
+            </div><br />
+        </div>
+        @if (ViewBag.HEIFSP == "H")
+        {
+
+            <div>
+                <div class="input_search">
+                    <div class="input_search-label">
+                        填写审核意见：
+                    </div>
+                    <div class="input_search-field">
+                        <textarea name="AUDITOPINION" style="width:200px;height:80px;">这里写内容</textarea>
+                    </div>
+                </div><br />
+                <input type="hidden" name="ID" value="@ViewBag.PREPARE_SCHEME_ID" />
+                <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
+                <input type="hidden" name="SHPI" value="@ViewBag.HEIFSP" />
+                <input type="hidden" name="ISAGGREY" value="" id="ISAGGREY" />
+                <input type="submit" value="同意送批准" onclick="patongyi(this)" />
+                <input type="submit" value="不同意" onclick="patongyi(this)" />
             </div>
-            <div class="input_search-field">
-                <textarea name="AUDITOPINION" style="width:200px;height:80px;">这里写内容</textarea>
+        }
+        else if (ViewBag.HEIFSP == "P")
+        {
+            <div>
+                <div class="input_search">
+                    <div class="input_search-label">
+                        填写审批意见：
+                    </div>
+                    <div class="input_search-field">
+                        <textarea name="APPROVAL" style="width:200px;height:80px;">这里写内容</textarea>
+                    </div>
+                </div><br />
+                <input type="hidden" name="ID" value="@ViewBag.PREPARE_SCHEME_ID" />
+                <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
+                <input type="hidden" name="SHPI" value="@ViewBag.HEIFSP" />
+                <input type="hidden" name="ISAGGREY" value="" id="ISAGGREY2" />
+                <input type="submit" value="同意" onclick="patongyi(this)" />
+                <input type="submit" value="不同意" onclick="patongyi(this)" />
             </div>
-        </div><br />
-        <input type="hidden" name="ID" value="@ViewBag.Id"/>
-        <input type="hidden" name="ISAGGREY" value="" id="ISAGGREY"/>
-        <input type="submit" value="同意送批准" onclick="patongyi(this)"/>
-        <input type="submit" value="不同意" onclick="patongyi(this)"/>
-    </div>
-</fieldset>
+        }
+    </fieldset>
 }
 <script type="text/javascript">
-    $(function () {
+    @*$(function () {
         $.ajax({
-            url: "/api/FILE_UPLOADERApi/Get/" + "@ViewBag.Id",
+            url: "/api/FILE_UPLOADERApi/Get/" + "@ViewBag.FILE_UPLOADER_ID",
             type: "Get",
+            dataType: "xml",
             // async: false,
             success: function (res) {
                 if (res != null) {
@@ -61,14 +87,78 @@
                 }
             }
         })
-    })
+    })*@
     function patongyi(arr) {
         var zhi = $(arr).val();
-        if (zhi == "同意送批准") {
-            $("#ISAGGREY").val("同意");
+        if ("@ViewBag.HEIFSP"=="H") {
+            if (zhi == "同意送批准") {
+                $("#ISAGGREY").val("同意");
+            }
+            else if (zhi == "不同意") {
+                $("#ISAGGREY").val("不同意");
+            }
         }
-        else if (zhi=="不同意") {
-            $("#ISAGGREY").val("不同意");
+        else if ("@ViewBag.HEIFSP" == "P") {
+            if (zhi == "同意") {
+                $("#ISAGGREY2").val("同意");
+            }
+            else if (zhi == "不同意") {
+                $("#ISAGGREY2").val("不同意");
+            }
         }
+       
     }
+</script>
+<script type="text/javascript">
+    function ajaxFrom(form, url) {
+
+        $.ajax({
+            url: url,
+            type: "Post",
+            data: $(form).serialize(),
+            dataType: "json",
+
+            success: function (data) {
+                if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                else if (data.Code == 1) {
+                    $.messager.alert('操作提示', "成功！", 'info');
+                    return false;
+                }
+                else {
+                    if ($.messager) {
+                        $.messager.defaults.ok = '继续';
+                        $.messager.defaults.cancel = '返回';
+
+                        $.messager.confirm('操作提示', data.Message, function (r) {
+                            if (!r) {
+                                window.location.href = 'javascript:history.go(-1)';
+                            }
+                        });
+                    }
+                }
+
+
+            }
+        });
+
+    }
+
+    $(function () {
+        $('.easyui-combobox').combobox({
+            width: 243,
+            onSelect: function (record) {
+                var strs = record.text.split("—");
+                $(this).combobox('setValue', strs[0]);
+            }
+        });
+        $("form").submit(function (form) {
+            if (form.result) {
+                ajaxFrom(this, this.action);
+            }
+            return false;
+        });
+        //按钮样式
+        $('.a2').mouseover(function () { this.style.color = "#ae1121"; }).mouseout(function () { this.style.color = "#333"; });
+
+    })
 </script>

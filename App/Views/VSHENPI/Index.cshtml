@@ -78,11 +78,11 @@
 					, { field: 'CONCLUSION', title: '@Html.DisplayNameFor(model => model.CONCLUSION)', width: 77 }
                     , {
                         field: 'aa', title: '操作', width: 86, formatter: function (value, row, index) {
-                            if (row.PREPARE_SCHEMEID != null) {
-                                var html = "<a href='/VSHENPI/XiaZaiShenPi/" + row.ID + "'>下载审批</a>";
+                            if (row.PACKAGETYPE == "上传") {
+                                var html = "<a href='/VSHENHE/XiaZaiShenHe/" + row.ID + "^P'>下载审批</a>";
                             }
-                            else {
-                                var html = "<a href='/VSHENPI/YuLanShenPi/" + row.ID + "'>预览审批</a>";
+                            else if (row.PACKAGETYPE == "生成") {
+                                var html = "<a href='/VSHENHE/XiaZaiShenHe/" + row.ID + "^P'>预览审批</a>";
                             }
                             return html;
                         }

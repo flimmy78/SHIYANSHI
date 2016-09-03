@@ -26,8 +26,10 @@ namespace Langben.DAL
         public string QUALIFICATIONS { get; set; }
         public string CONCLUSION_EXPLAIN { get; set; }
         public string CONCLUSION { get; set; }
-        public string UNDERTAKE_LABORATORYID { get; set; }
         public string APPROVALISAGGREY { get; set; }
-        public string PREPARE_SCHEMEID { get; set; }
+        public string PACKAGETYPE { get; set; }
+        public string REPORTSTATUSZI { get; set; }
+        public string REPORTSTATUS { get; set; }
+        public string UNDERTAKE_LABORATORYID { get; set; }
     }
 }

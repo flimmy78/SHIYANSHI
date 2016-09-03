@@ -254,6 +254,7 @@
     <Compile Include="shiyanshi\PREPARE_SCHEMERepository.cs" />
     <Compile Include="shiyanshi\VJIANDINGRENWURepository.cs" />
     <Compile Include="shiyanshi\VSHENHERepository.cs" />
+    <Compile Include="shiyanshi\VSHENPIRepository.cs" />
     <Compile Include="SysAnnouncement.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

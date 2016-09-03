@@ -120,6 +120,7 @@
     <Compile Include="Shiyanshi\IPREPARE_SCHEMEBLL.cs" />
     <Compile Include="Shiyanshi\IVJIANDINGRENWUBLL.cs" />
     <Compile Include="Shiyanshi\IVSHENHEBLL.cs" />
+    <Compile Include="Shiyanshi\IVSHENPIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

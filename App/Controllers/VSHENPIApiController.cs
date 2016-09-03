@@ -60,8 +60,6 @@ namespace Langben.App.Controllers
                     UNDERTAKE_LABORATORYID = s.UNDERTAKE_LABORATORYID
                     ,
                     APPROVALISAGGREY = s.APPROVALISAGGREY
-                    ,
-                    PREPARE_SCHEMEID = s.PREPARE_SCHEMEID
 
 
                 })
