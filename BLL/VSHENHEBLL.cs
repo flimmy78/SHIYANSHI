@@ -11,7 +11,7 @@ namespace Langben.BLL
     /// <summary>
     /// 审核 
     /// </summary>
-    public class VSHENHEBLL :  IBLL.IVSHENHEBLL, IDisposable
+    public partial class VSHENHEBLL :  IBLL.IVSHENHEBLL, IDisposable
     {
         /// <summary>
         /// 私有的数据访问上下文

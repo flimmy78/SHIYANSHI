@@ -1296,26 +1296,22 @@
           <Property Name="ORDER_NUMBER" Type="varchar2" MaxLength="200" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“TENGFEI.VRUKU”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
-        <EntityType Name="VRUKU">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
-          <Property Name="REPORTNUMBER" Type="varchar2" MaxLength="200" />
-          <Property Name="ORDER_NUMBER" Type="varchar2" MaxLength="200" />
-          <Property Name="APPLIANCE_NAME" Type="varchar2" MaxLength="200" />
-          <Property Name="VERSION" Type="varchar2" MaxLength="200" />
-          <Property Name="FACTORY_NUM" Type="varchar2" MaxLength="200" />
-          <Property Name="CERTIFICATE_ENTERPRISE" Type="varchar2" MaxLength="200" />
-          <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="varchar2" MaxLength="4000" />
-          <Property Name="NAME" Type="varchar2" MaxLength="200" />
-          <Property Name="ORDER_STATUS" Type="varchar2" MaxLength="200" />
-          <Property Name="STORAGEINSTRUCTIONS" Type="varchar2" MaxLength="4000" />
-          <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
-          <Property Name="APPROVALDATE" Type="date" />
-          <Property Name="STORAGEINSTRUCTI_STATU" Type="varchar2" MaxLength="200" />
-        </EntityType>
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VRUKU”中的列“ID”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VRUKU”中的列“REPORTNUMBER”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VRUKU”中的列“ORDER_NUMBER”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VRUKU”中的列“APPLIANCE_NAME”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VRUKU”中的列“VERSION”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VRUKU”中的列“FACTORY_NUM”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VRUKU”中的列“CERTIFICATE_ENTERPRISE”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VRUKU”中的列“CUSTOMER_SPECIFIC_REQUIREMENTS”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VRUKU”中的列“NAME”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VRUKU”中的列“ORDER_STATUS”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VRUKU”中的列“STORAGEINSTRUCTIONS”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VRUKU”中的列“UNDERTAKE_LABORATORYID”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VRUKU”中的列“APPROVALDATE”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VRUKU”中的列“STORAGEINSTRUCTI_STATU”。
+警告 6013: 表/视图“TENGFEI.VRUKU”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+        <EntityType Name="VRUKU" />-->
         <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VSHENHE”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VSHENHE">
@@ -1336,29 +1332,27 @@
           <Property Name="CONCLUSION" Type="varchar2" MaxLength="200" />
           <Property Name="ISAGGREY" Type="varchar2" MaxLength="200" />
           <Property Name="PACKAGETYPE" Type="nvarchar2" MaxLength="200" />
+          <Property Name="REPORTSTATUSZI" Type="varchar2" MaxLength="200" />
+          <Property Name="REPORTSTATUS" Type="varchar2" MaxLength="200" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“TENGFEI.VSHENPI”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
-        <EntityType Name="VSHENPI">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
-          <Property Name="REPORTNUMBER" Type="varchar2" MaxLength="200" />
-          <Property Name="ORDER_NUMBER" Type="varchar2" MaxLength="200" />
-          <Property Name="APPLIANCE_NAME" Type="varchar2" MaxLength="200" />
-          <Property Name="VERSION" Type="varchar2" MaxLength="200" />
-          <Property Name="FACTORY_NUM" Type="varchar2" MaxLength="200" />
-          <Property Name="CERTIFICATE_ENTERPRISE" Type="varchar2" MaxLength="200" />
-          <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="varchar2" MaxLength="4000" />
-          <Property Name="CERTIFICATE_CATEGORY" Type="varchar2" MaxLength="200" />
-          <Property Name="QUALIFICATIONS" Type="varchar2" MaxLength="12" />
-          <Property Name="CONCLUSION_EXPLAIN" Type="varchar2" MaxLength="4000" />
-          <Property Name="CONCLUSION" Type="varchar2" MaxLength="200" />
-          <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
-          <Property Name="APPROVALISAGGREY" Type="varchar2" MaxLength="200" />
-          <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" />
-        </EntityType>
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VSHENPI”中的列“ID”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VSHENPI”中的列“REPORTNUMBER”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VSHENPI”中的列“ORDER_NUMBER”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VSHENPI”中的列“APPLIANCE_NAME”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VSHENPI”中的列“VERSION”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VSHENPI”中的列“FACTORY_NUM”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VSHENPI”中的列“CERTIFICATE_ENTERPRISE”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VSHENPI”中的列“CUSTOMER_SPECIFIC_REQUIREMENTS”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VSHENPI”中的列“CERTIFICATE_CATEGORY”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VSHENPI”中的列“QUALIFICATIONS”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VSHENPI”中的列“CONCLUSION_EXPLAIN”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VSHENPI”中的列“CONCLUSION”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VSHENPI”中的列“UNDERTAKE_LABORATORYID”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VSHENPI”中的列“APPROVALISAGGREY”。
+警告 6005: 目标实体框架版本目前不支持数据类型“undefined”；已排除表“TENGFEI.VSHENPI”中的列“PREPARE_SCHEMEID”。
+警告 6013: 表/视图“TENGFEI.VSHENPI”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+        <EntityType Name="VSHENPI" />-->
         <Association Name="FK_AC_VOLTA_REFERENCE_OVERALL_">
           <End Role="OVERALL_TABLE" Type="Self.OVERALL_TABLE" Multiplicity="0..1" />
           <End Role="AC_VOLTAGE_CURRENT" Type="Self.AC_VOLTAGE_CURRENT" Multiplicity="*" />
@@ -2215,24 +2209,6 @@ FROM "TENGFEI"."VQIJULINGQU1" "VQIJULINGQU1"</DefiningQuery>
 "VQIJULINGQU2"."ORDER_NUMBER" AS "ORDER_NUMBER"
 FROM "TENGFEI"."VQIJULINGQU2" "VQIJULINGQU2"</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="VRUKU" EntityType="Self.VRUKU" store:Type="Views" store:Schema="TENGFEI">
-            <DefiningQuery>SELECT 
-"VRUKU"."ID" AS "ID", 
-"VRUKU"."REPORTNUMBER" AS "REPORTNUMBER", 
-"VRUKU"."ORDER_NUMBER" AS "ORDER_NUMBER", 
-"VRUKU"."APPLIANCE_NAME" AS "APPLIANCE_NAME", 
-"VRUKU"."VERSION" AS "VERSION", 
-"VRUKU"."FACTORY_NUM" AS "FACTORY_NUM", 
-"VRUKU"."CERTIFICATE_ENTERPRISE" AS "CERTIFICATE_ENTERPRISE", 
-"VRUKU"."CUSTOMER_SPECIFIC_REQUIREMENTS" AS "CUSTOMER_SPECIFIC_REQUIREMENTS", 
-"VRUKU"."NAME" AS "NAME", 
-"VRUKU"."ORDER_STATUS" AS "ORDER_STATUS", 
-"VRUKU"."STORAGEINSTRUCTIONS" AS "STORAGEINSTRUCTIONS", 
-"VRUKU"."UNDERTAKE_LABORATORYID" AS "UNDERTAKE_LABORATORYID", 
-"VRUKU"."APPROVALDATE" AS "APPROVALDATE", 
-"VRUKU"."STORAGEINSTRUCTI_STATU" AS "STORAGEINSTRUCTI_STATU"
-FROM "TENGFEI"."VRUKU" "VRUKU"</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="VSHENHE" EntityType="Self.VSHENHE" store:Type="Views" store:Schema="TENGFEI">
             <DefiningQuery>SELECT 
 "VSHENHE"."ID" AS "ID", 
@@ -2248,27 +2224,10 @@ FROM "TENGFEI"."VRUKU" "VRUKU"</DefiningQuery>
 "VSHENHE"."CONCLUSION_EXPLAIN" AS "CONCLUSION_EXPLAIN", 
 "VSHENHE"."CONCLUSION" AS "CONCLUSION", 
 "VSHENHE"."ISAGGREY" AS "ISAGGREY", 
-"VSHENHE"."PACKAGETYPE" AS "PACKAGETYPE"
+"VSHENHE"."PACKAGETYPE" AS "PACKAGETYPE", 
+"VSHENHE"."REPORTSTATUSZI" AS "REPORTSTATUSZI", 
+"VSHENHE"."REPORTSTATUS" AS "REPORTSTATUS"
 FROM "TENGFEI"."VSHENHE" "VSHENHE"</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="VSHENPI" EntityType="Self.VSHENPI" store:Type="Views" store:Schema="TENGFEI">
-            <DefiningQuery>SELECT 
-"VSHENPI"."ID" AS "ID", 
-"VSHENPI"."REPORTNUMBER" AS "REPORTNUMBER", 
-"VSHENPI"."ORDER_NUMBER" AS "ORDER_NUMBER", 
-"VSHENPI"."APPLIANCE_NAME" AS "APPLIANCE_NAME", 
-"VSHENPI"."VERSION" AS "VERSION", 
-"VSHENPI"."FACTORY_NUM" AS "FACTORY_NUM", 
-"VSHENPI"."CERTIFICATE_ENTERPRISE" AS "CERTIFICATE_ENTERPRISE", 
-"VSHENPI"."CUSTOMER_SPECIFIC_REQUIREMENTS" AS "CUSTOMER_SPECIFIC_REQUIREMENTS", 
-"VSHENPI"."CERTIFICATE_CATEGORY" AS "CERTIFICATE_CATEGORY", 
-"VSHENPI"."QUALIFICATIONS" AS "QUALIFICATIONS", 
-"VSHENPI"."CONCLUSION_EXPLAIN" AS "CONCLUSION_EXPLAIN", 
-"VSHENPI"."CONCLUSION" AS "CONCLUSION", 
-"VSHENPI"."UNDERTAKE_LABORATORYID" AS "UNDERTAKE_LABORATORYID", 
-"VSHENPI"."APPROVALISAGGREY" AS "APPROVALISAGGREY", 
-"VSHENPI"."PREPARE_SCHEMEID" AS "PREPARE_SCHEMEID"
-FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_AC_VOLTA_REFERENCE_OVERALL_" Association="Self.FK_AC_VOLTA_REFERENCE_OVERALL_">
             <End Role="OVERALL_TABLE" EntitySet="OVERALL_TABLE" />
@@ -4170,6 +4129,8 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="CONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ISAGGREY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="PACKAGETYPE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="REPORTSTATUSZI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="REPORTSTATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VSHENPI">
           <Key>
@@ -6123,52 +6084,13 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VRUKU">
-            <EntityTypeMapping TypeName="Model.VRUKU">
-              <MappingFragment StoreEntitySet="VRUKU">
-                <ScalarProperty Name="STORAGEINSTRUCTI_STATU" ColumnName="STORAGEINSTRUCTI_STATU" />
-                <ScalarProperty Name="APPROVALDATE" ColumnName="APPROVALDATE" />
-                <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
-                <ScalarProperty Name="STORAGEINSTRUCTIONS" ColumnName="STORAGEINSTRUCTIONS" />
-                <ScalarProperty Name="ORDER_STATUS" ColumnName="ORDER_STATUS" />
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
-                <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
-                <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
-                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
-                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
-                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
-                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
-                <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VSHENHE">
             <EntityTypeMapping TypeName="Model.VSHENHE">
               <MappingFragment StoreEntitySet="VSHENHE">
+                <ScalarProperty Name="REPORTSTATUS" ColumnName="REPORTSTATUS" />
+                <ScalarProperty Name="REPORTSTATUSZI" ColumnName="REPORTSTATUSZI" />
                 <ScalarProperty Name="PACKAGETYPE" ColumnName="PACKAGETYPE" />
                 <ScalarProperty Name="ISAGGREY" ColumnName="ISAGGREY" />
-                <ScalarProperty Name="CONCLUSION" ColumnName="CONCLUSION" />
-                <ScalarProperty Name="CONCLUSION_EXPLAIN" ColumnName="CONCLUSION_EXPLAIN" />
-                <ScalarProperty Name="QUALIFICATIONS" ColumnName="QUALIFICATIONS" />
-                <ScalarProperty Name="CERTIFICATE_CATEGORY" ColumnName="CERTIFICATE_CATEGORY" />
-                <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
-                <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
-                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
-                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
-                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
-                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
-                <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VSHENPI">
-            <EntityTypeMapping TypeName="Model.VSHENPI">
-              <MappingFragment StoreEntitySet="VSHENPI">
-                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
-                <ScalarProperty Name="APPROVALISAGGREY" ColumnName="APPROVALISAGGREY" />
-                <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
                 <ScalarProperty Name="CONCLUSION" ColumnName="CONCLUSION" />
                 <ScalarProperty Name="CONCLUSION_EXPLAIN" ColumnName="CONCLUSION_EXPLAIN" />
                 <ScalarProperty Name="QUALIFICATIONS" ColumnName="QUALIFICATIONS" />
