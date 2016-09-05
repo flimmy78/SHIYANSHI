@@ -40,13 +40,28 @@ namespace Langben.App.Controllers
             return View();
         }
         /// <summary>
-        /// 预览审核
+        /// 下载审核
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
         public ActionResult XiaZaiShenHe(string id)
         {
-            ViewBag.Id = id;
+            string APPLIANCE_DETAIL_INFORMATIONID = string.Empty;
+            string[] IDD = id.Split('^');
+            FILE_UPLOADER file = m_BLL2.GetPREPARE_SCHEMEID(IDD[0]);
+            IList<APPLIANCE_LABORATORY> appliance = m_BLL3.GetByRefPREPARE_SCHEMEID(IDD[0]);
+            foreach (var item in appliance)
+            {
+                APPLIANCE_DETAIL_INFORMATIONID = item.APPLIANCE_DETAIL_INFORMATIONID;
+            }
+
+            ViewBag.HEIFSP = IDD[1];//判断是审核的下载预览还是审批的下载预览
+            ViewBag.FILE_UPLOADER_ID = IDD[0];//附件的id
+            ViewBag.PREPARE_SCHEME_ID = file.PREPARE_SCHEMEID;//预备方案的id
+            ViewBag.APPLIANCE_DETAIL_INFORMATIONID = APPLIANCE_DETAIL_INFORMATIONID;//器具明细的id
+            ViewBag.FULLPATH = "http://" + file.FULLPATH;//证书地址
+            ViewBag.FULLPATH2 = "http://" + file.FULLPATH2;//原始记录地址
+            ViewBag.CONCLUSION = file.CONCLUSION;//结论
             return View();
         }
         /// <summary>
@@ -64,7 +79,8 @@ namespace Langben.App.Controllers
         {
 
             int total = 0;
-            List<VSHENHE> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
+            search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.审核驳回.GetHashCode() + "*" + Common.REPORTSTATUS.待审核.GetHashCode() + "*" + Common.REPORTSTATUS.待批准.GetHashCode() + "";
+            List<VSHENHE> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
             {
                 total = total,
@@ -95,7 +111,8 @@ namespace Langben.App.Controllers
                     CONCLUSION = s.CONCLUSION
                     ,
                     ISAGGREY = s.ISAGGREY,
-                    PREPARE_SCHEMEID = s.PREPARE_SCHEMEID
+
+                    PACKAGETYPE = s.PACKAGETYPE
 
                 }
 
@@ -105,15 +122,19 @@ namespace Langben.App.Controllers
 
 
         IBLL.IVSHENHEBLL m_BLL;
+        IBLL.IFILE_UPLOADERBLL m_BLL2;
+        IBLL.IAPPLIANCE_LABORATORYBLL m_BLL3;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VSHENHEController()
-            : this(new VSHENHEBLL()) { }
+            : this(new VSHENHEBLL(), new FILE_UPLOADERBLL(), new APPLIANCE_LABORATORYBLL()) { }
 
-        public VSHENHEController(VSHENHEBLL bll)
+        public VSHENHEController(VSHENHEBLL bll, FILE_UPLOADERBLL bll2, APPLIANCE_LABORATORYBLL bll3)
         {
             m_BLL = bll;
+            m_BLL2 = bll2;
+            m_BLL3 = bll3;
         }
 
     }

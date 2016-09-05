@@ -22,13 +22,13 @@
 <br style="clear:both;" />
 
 <input type="button" onclick="seng()" value="查询" />
-<div class="bigdiv">
+<div class="bigdiv" style="width: 854px;">
 
     <div class="editor-label">
         @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
     </div>
     <div class="editor-field">
-        @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "请选择", new { id = "ACCEPT_ORGNIZATION_String" })
+        @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "请选择")
     </div>
     <div class="editor-label">
         @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
@@ -121,10 +121,12 @@
         @Html.EditorFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
         @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
     </div>
-    <br style="clear:both;" />
-    <input type="hidden" id="ORDER_TASK_INFORMATIONID" />
-    <table id="ApplianceDate" singleSelect="true"></table>
+
 </div>
+
+<br style="clear:both;" />
+<input type="hidden" id="ORDER_TASK_INFORMATIONID" />
+<table id="ApplianceDate" singleSelect="true"></table>
 
 <script type="text/javascript">
 
@@ -138,7 +140,42 @@
 
     }
     $(function () {
-
+        var editIndex = undefined;
+        function endEditing() {
+            if (editIndex == undefined) { return true }
+            if ($('#ApplianceDate').datagrid('validateRow', editIndex)) {
+                $('#ApplianceDate').datagrid('endEdit', editIndex);
+                editIndex = undefined;
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function append() {
+            if (endEditing()) {
+                $('#ApplianceDate').datagrid('appendRow', { status: 'P' });
+                editIndex = $('#ApplianceDate').datagrid('getRows').length - 1;
+                $('#ApplianceDate').datagrid('selectRow', editIndex)
+                        .datagrid('beginEdit', editIndex);
+            }
+        }
+        function onClickCell(index, field) {
+            if (editIndex != index) {
+                if (endEditing()) {
+                    $('#ApplianceDate').datagrid('selectRow', index)
+                            .datagrid('beginEdit', index);
+                    var ed = $('#ApplianceDate').datagrid('getEditor', { index: index, field: field });
+                    if (ed) {
+                        ($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
+                    }
+                    editIndex = index;
+                } else {
+                    setTimeout(function () {
+                        $('#ApplianceDate').datagrid('selectRow', editIndex);
+                    }, 0);
+                }
+            }
+        }
         //删除
         function flexiDelete() {
             $('#ApplianceDate').edatagrid('destroyRow');
@@ -147,9 +184,46 @@
         function flexiInsert() {
             $('#ApplianceDate').edatagrid('addRow');
         }
+        //复制新增
+        function flexiInsertCopy() {
+
+            debugger;
+            //获取选中行
+            var row = $('#ApplianceDate').datagrid('getSelected');
+            // 获取当前行索引
+            var rowIndex = $('#ApplianceDate').datagrid('getRowIndex', row);
+            if (row) {
+
+                if ($('#ApplianceDate').datagrid('validateRow', rowIndex)) {
+                    //结束器具的编辑状态
+                    $('#ApplianceDate').edatagrid('saveRow');
+                    //增加一行
+                    $('#ApplianceDate').datagrid('appendRow', {
+                        APPLIANCE_NAME: row.APPLIANCE_NAME
+                        , VERSION: row.VERSION
+                        , NUM: row.NUM
+                        , APPEARANCE_STATUS: row.APPEARANCE_STATUS
+                        , FORMAT: row.FORMAT
+                        , FACTORY_NUM: row.FACTORY_NUM
+                        , ATTACHMENT: row.ATTACHMENT
+                        , MAKE_ORGANIZATION: row.MAKE_ORGANIZATION
+                        , UNDERTAKE_LABORATORYID: row.UNDERTAKE_LABORATORYID
+                        , APPLIANCE_RECIVE: row.APPLIANCE_RECIVE
+                        , REMARKS: row.REMARKS
+
+                    });
+                }
+
+
+
+            }
+            else {
+                alert('请先选择一行')
+            }
+        }
         //委托单(包含器具信息)保存
         function flexiSave() {
-            //结束器具的编辑状态        
+            //结束器具的编辑状态
             $('#ApplianceDate').edatagrid('saveRow');
             //获取所有器具
             var qiju = $('#ApplianceDate').edatagrid('getRows');
@@ -157,6 +231,7 @@
             var entity = new Object();
             entity.APPLIANCE_DETAIL_INFORMATION = qiju;
             entity.ID = $("#ORDER_TASK_INFORMATIONID").val();
+
             entity.ACCEPT_ORGNIZATION = $("#ACCEPT_ORGNIZATION option:selected").val();
             entity.INSPECTION_ENTERPRISE = $("#INSPECTION_ENTERPRISE").val();
             entity.INSPECTION_ENTERPRISE_ADDRESS = $("#INSPECTION_ENTERPRISE_ADDRESS").val();
@@ -171,7 +246,7 @@
             entity.CONTACT_PHONE2 = $("#CONTACT_PHONE2").val();
             entity.FAX2 = $("#FAX2").val();
             entity.CUSTOMER_SPECIFIC_REQUIREMENTS = $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val();
-            debugger;
+
             //将委托单信息发送到服务器
             $.ajax({
                 url: "/ORDER_TASK_INFORMATION/Save",
@@ -202,6 +277,7 @@
         }
 
         $('#ApplianceDate').edatagrid({
+
             toolbar: [
              {
                  text: '新增',
@@ -213,7 +289,7 @@
                  text: '复制新增',
                  iconCls: 'icon-add',
                  handler: function () {
-                     return flexiCreate();
+                     return flexiInsertCopy();
                  }
              }, {
                  text: '删除',
@@ -226,21 +302,21 @@
                    text: '打印器具条形码',
                    iconCls: 'icon-add',
                    handler: function () {
-                       return flexiSave();
+                       return;
                    }
                },
                {
                    text: '委托单签名',
                    iconCls: 'icon-add',
                    handler: function () {
-                       return flexiSave();
+                       return;
                    }
                },
                {
                    text: '打印委托单',
                    iconCls: 'icon-add',
                    handler: function () {
-                       return flexiSave();
+                       return;
                    }
                },
                {
@@ -290,17 +366,17 @@
            , { field: 'FACTORY_NUM', title: '出厂编号', width: 65, editor: 'text' }
            , { field: 'ATTACHMENT', title: '附件', width: 135, editor: 'text' }
            , { field: 'MAKE_ORGANIZATION', title: '制造单位', width: 65, editor: 'text' }
-           , {
-               field: 'UNDERTAKE_LABORATORYID', title: '承接实验室', width: 135, editor: {
-                   type: 'combobox',
-                   options: {
-                       multiple: true,
-                       data: [{ value: '电能', text: '电能' }, { value: '指示仪表', text: '指示仪表' },
-                           { value: '数字仪表', text: '数字仪表' }, { value: '互感器仪表', text: '互感器仪表' }],
-                       panelHeight: 'auto'
-                   }
-               }
-           }
+              , {
+                  field: 'UNDERTAKE_LABORATORYID', title: '承接实验室', width: 135, editor: {
+                      type: 'combobox',
+                      options: {
+                          multiple: true,
+                          data: [{ value: '电能', text: '电能' }, { value: '指示仪表', text: '指示仪表' },
+                              { value: '数字仪表', text: '数字仪表' }, { value: '互感器仪表', text: '互感器仪表' }, { value: '数表三相', text: '数表三相' }],
+                          panelHeight: 'auto'
+                      }
+                  }
+              }
            , {
                field: 'APPLIANCE_RECIVE', title: '器具接收', width: 65, editor: {
                    type: 'combobox', options: { data: [{ value: '是', text: '是' }, { value: '否', text: '否' }], panelHeight: 'auto' }

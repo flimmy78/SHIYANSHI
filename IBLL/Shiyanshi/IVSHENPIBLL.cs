@@ -9,10 +9,10 @@ using System.ServiceModel;
 namespace Langben.IBLL
 {
     /// <summary>
-    /// 审核 接口
+    /// 审批 接口
     /// </summary>
-    [ServiceContract(Namespace = "www.langben.com")]
-    public partial interface IVSHENHEBLL
+
+    public partial interface IVSHENPIBLL
     {
         /// <summary>
         /// 查询的数据
@@ -26,20 +26,8 @@ namespace Langben.IBLL
         /// <param name="total">结果集的总数</param>
         /// <returns>结果集</returns>
         [OperationContract]
-        List<VSHENHE> GetByParam(string id, int page, int rows, string order, string sort, string search, ref int total);
-        /// <summary>
-        /// 获取所有
-        /// </summary>
-        /// <returns></returns>
-        [OperationContract]
-        System.Collections.Generic.List<VSHENHE> GetAll();
-        /// <summary>
-        /// 根据主键，查看详细信息
-        /// </summary>
-        /// <param name="id">根据主键</param>
-        /// <returns></returns>
-        [OperationContract]
-        VSHENHE GetById(string id);    
+        List<VSHENPI> GetByParamX(string id, int page, int rows, string order, string sort, string search, ref int total);
+    
  
     }
 }

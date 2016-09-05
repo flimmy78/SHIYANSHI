@@ -35,7 +35,7 @@ namespace Langben.DAL
 
 			[ScaffoldColumn(true)]
 			[Display(Name = "器具明细信息", Order = 3)]
-			public object APPLIANCE_DETAIL_INFORMATIOID { get; set; }
+			public object APPLIANCE_DETAIL_INFORMATIONID { get; set; }
 
 			[ScaffoldColumn(true)]
 			[Display(Name = "预备方案", Order = 4)]

@@ -21,8 +21,15 @@ namespace Langben.IBLL
         /// <returns></returns>
         List<FILE_UPLOADER> GetByRefPREPARE_SCHEMEID(string id);
 
-        
-    
+        /// <summary>
+        /// 编辑一个对象
+        /// </summary>
+        /// <param name="validationErrors">返回的错误信息</param>
+        /// <param name="entity">一个对象</param>
+        /// <returns></returns>
+        [OperationContract]
+        bool EditField(ref Common.ValidationErrors validationErrors, FILE_UPLOADER entity);
+
     }
 }
 

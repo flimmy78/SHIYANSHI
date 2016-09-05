@@ -8,7 +8,7 @@ namespace Langben.DAL
     /// <summary>
     /// 审批
     /// </summary>
-    public class VSHENPIRepository : BaseRepository<VSHENPI>, IDisposable
+    public partial class VSHENPIRepository : BaseRepository<VSHENPI>, IDisposable
     {
         /// <summary>
         /// 查询的数据

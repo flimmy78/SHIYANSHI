@@ -28,7 +28,7 @@ namespace Langben.DAL
             foreach (var deleteItem in collection)
             {
                 deleteItem.UNDERTAKE_LABORATORYID = entity.UNDERTAKE_LABORATORYID == null ? deleteItem.UNDERTAKE_LABORATORYID : entity.UNDERTAKE_LABORATORYID;
-                deleteItem.APPLIANCE_DETAIL_INFORMATIOID = entity.APPLIANCE_DETAIL_INFORMATIOID == null ? deleteItem.APPLIANCE_DETAIL_INFORMATIOID : entity.APPLIANCE_DETAIL_INFORMATIOID;
+                deleteItem.APPLIANCE_DETAIL_INFORMATIONID = entity.APPLIANCE_DETAIL_INFORMATIONID == null ? deleteItem.APPLIANCE_DETAIL_INFORMATIONID : entity.APPLIANCE_DETAIL_INFORMATIONID;
                 deleteItem.PREPARE_SCHEMEID = entity.PREPARE_SCHEMEID == null ? deleteItem.PREPARE_SCHEMEID : entity.PREPARE_SCHEMEID;
                 deleteItem.RECEIVEPERSON = entity.RECEIVEPERSON == null ? deleteItem.RECEIVEPERSON : entity.RECEIVEPERSON;
                 deleteItem.RECEIVETIME = entity.RECEIVETIME == null ? deleteItem.RECEIVETIME : entity.RECEIVETIME;

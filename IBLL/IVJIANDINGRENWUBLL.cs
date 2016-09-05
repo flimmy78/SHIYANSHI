@@ -12,7 +12,7 @@ namespace Langben.IBLL
     /// 检定任务 接口
     /// </summary>
     [ServiceContract(Namespace = "www.langben.com")]
-    public interface IVJIANDINGRENWUBLL
+    public partial interface IVJIANDINGRENWUBLL
     {
         /// <summary>
         /// 查询的数据

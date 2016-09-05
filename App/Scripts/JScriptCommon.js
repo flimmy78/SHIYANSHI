@@ -1,4 +1,31 @@
-﻿function returnParent(value) {//获取子窗体返回值
+﻿var shiyanshiArray = new Array;
+shiyanshiArray = [
+    { value: '电能', text: '电能' }, 
+    { value: '数表三相', text: '数表三相' },
+    { value: '数表单相', text: '数表单相' },
+    { value: '指示仪表', text: '指示仪表' },
+    { value: '直流仪器', text: '直流仪器' }, 
+    { value: '互感器', text: '互感器' }];
+//下拉框绑定实验室
+function bindShiyanshi(id) {
+    if (shiyanshiArray == null || shiyanshiArray.length == 0) {
+        return;
+    }
+    else {
+        $(id).empty();
+    }
+    $.each(shiyanshiArray, function (i, item) {
+        if (item == null) {
+            return;
+        }
+        $("<option></option>")
+                .val(item["value"])
+                .text(item["text"])
+                .appendTo($(id));
+    });
+}
+
+function returnParent(value) {//获取子窗体返回值
     var parent = window.dialogArguments; //获取父页面
     //parent.location.reload(); //刷新父页面
     if (parent != null && parent != "undefined") {
@@ -7,7 +34,7 @@
     }
     return;
 }
- function isNumber(id) {
+function isNumber(id) {
 
     if (isNaN(Number(id.value))) {
 
@@ -38,7 +65,7 @@ function bindDropDownList(id, parentid) {
             });
         });
     }
-} 
+}
 
 function deleteTable(table, hidden) { //删除table和隐藏的值
     var tableId = document.getElementById(table); //获取表格
@@ -52,7 +79,7 @@ function deleteTable(table, hidden) { //删除table和隐藏的值
         hiddenValue.value = hiddenValue.value.replace(table, ""); //为隐藏控件赋值
     }
 }
-function showModalMany(me, url, dialogWidth,callback) { //弹出窗体，多选   
+function showModalMany(me, url, dialogWidth, callback) { //弹出窗体，多选   
     if (dialogWidth == null || dialogWidth == "undefined" || dialogWidth == "") {
         dialogWidth = 968;
     }
@@ -61,7 +88,7 @@ function showModalMany(me, url, dialogWidth,callback) { //弹出窗体，多选
     if (reValue == null || reValue == "undefined" || reValue == "") {
         return; //如果返回值为空，就返回
     }
-	
+
     var index = reValue.split("^"); //分割符 ^ 的位置
     if (index[0] == null || index[0] == "undefined" || index[0].length < 1) {
         return;
@@ -72,23 +99,21 @@ function showModalMany(me, url, dialogWidth,callback) { //弹出窗体，多选
     var h = "";
     for (var i = 0; i < hid.length - 1; i++) {
         if (hid[i] != "undefined" && hid[i] != "" && view[i + 1] != "undefined" && view[i + 1] != "") {
-            
-			var tableId = document.getElementById(hid[i] + "&" + view[i + 1]); //获取表格
-			if(tableId==null)
-			{
-			h += "^" + hid[i] + "&" + view[i + 1];
-            content += '<table  id="' + hid[i] + "&" + view[i + 1] + '" class="deleteStyle"><tr><td><img src="../../../Images/deleteimge.png" title="点击删除"  alt="删除" onclick=" deleteTable(' + "'" + hid[i] + "&" + view[i + 1] + "'," + "'" + me + "'" + ');" /></td><td>' + view[i + 1] + '</td></tr></table>';
-			}
+
+            var tableId = document.getElementById(hid[i] + "&" + view[i + 1]); //获取表格
+            if (tableId == null) {
+                h += "^" + hid[i] + "&" + view[i + 1];
+                content += '<table  id="' + hid[i] + "&" + view[i + 1] + '" class="deleteStyle"><tr><td><img src="../../../Images/deleteimge.png" title="点击删除"  alt="删除" onclick=" deleteTable(' + "'" + hid[i] + "&" + view[i + 1] + "'," + "'" + me + "'" + ');" /></td><td>' + view[i + 1] + '</td></tr></table>';
+            }
         }
     }
     var hidden = document.getElementById(me); //获取隐藏的控件
     hidden.value += h; //为隐藏控件赋值
     var c = document.getElementById("check" + me);
     c.innerHTML += content;
-	if(callback!=null)
-	{
-		callback()
-	}
+    if (callback != null) {
+        callback()
+    }
 }
 
 function showTreeOnlyEdit(me, url) { //弹出窗体 ,单选
@@ -206,7 +231,7 @@ function manyTreeChecked(node, checked, hidControl, treeId) {
         var nodeChildren = $('#' + treeId).tree("getChildren", node.target);
         if (nodeChildren != null) {
             for (var i = 0; i < nodeChildren.length; i++) {
-                treeChecked(nodeChildren[i].id,treeId,"tree-checkbox1");
+                treeChecked(nodeChildren[i].id, treeId, "tree-checkbox1");
                 hidArr.push(nodeChildren[i].id);
             }
         }
@@ -268,13 +293,13 @@ function treeChecked(node, treeId, className) {
     }
 }
 
- 
+
 function dateConvert(value) {
     var reg = new RegExp('/', 'g');
     var d = eval('new ' + value.replace(reg, ''));
     return new Date(d).format('yyyy-MM-dd')
 }
- 
+
 $(function () {
     //时间格式化
     Date.prototype.format = function (format) {

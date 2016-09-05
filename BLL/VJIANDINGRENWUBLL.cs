@@ -11,7 +11,7 @@ namespace Langben.BLL
     /// <summary>
     /// 检定任务 
     /// </summary>
-    public class VJIANDINGRENWUBLL :  IBLL.IVJIANDINGRENWUBLL, IDisposable
+    public partial class VJIANDINGRENWUBLL :  IBLL.IVJIANDINGRENWUBLL, IDisposable
     {
         /// <summary>
         /// 私有的数据访问上下文

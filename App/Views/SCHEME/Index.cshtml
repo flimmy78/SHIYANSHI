@@ -1,249 +1,282 @@
 ﻿
-@model Langben.DAL.SCHEME 
+@model Langben.DAL.SCHEME
 @{ Layout = "~/Views/Shared/Index.cshtml"; }
-@using Common 
+@using Common
 @using Models
 <script src="~/Scripts/JScriptIndex.js"></script>
 <div id="divQuery">
-    
-    <div class='input_search' style="padding-top:10px;">
-        <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
-            查 询
-        </a>
+
+
+    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+    <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+            <table>
+                <tr>
+                    <td> 标准量传部：</td>
+                    <td>                      
+                        <select  name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID" style="width:200px;" onchange="flexiQuery()">
+                            <option value="电能" selected="selected">电能</option>
+                            <option value="数表三相">数表三相</option>
+                            <option value="数表单相">数表单相</option>
+                            <option value="指示仪表">指示仪表</option>
+                            <option value="直流仪器">直流仪器</option>
+                            <option value="互感器">互感器</option>
+                        </select>
+                    </td>
+
+
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
- <br style="clear: both;" />
+<br style="clear: both;" />
 
 <script type="text/javascript" language="javascript">
-        $(function () {
+    $(function () {               
+        $('#flexigridData').datagrid({
+            //title: '方案', //列表的标题
+            iconCls: 'icon-site',
+            width: 'auto',
+            height: 'auto',
+            //nowrap: false,
+            striped: true,
+            collapsible: true,
+            url: '/api/SCHEMEApi/PostData', //获取数据的url
+            sortName: 'ID',
+            sortOrder: 'desc',
+            idField: 'ID',
+            queryParams: { search: GetQuery() },//默认查询条件                    
+            toolbar: [
+                {
+                    text: '添加',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        return flexiCreate();
+                    }
+                },
+             {
+                 text: '编辑',
+                 iconCls: 'icon-edit',
+                 handler: function () {
+                     return flexiModify();
+                 }
+             },
+             {
+                 text: '复制',
+                 iconCls: 'icon-copy',
+                 handler: function () {
+                     return flexiCopy();
+                 }
+             },
+             {
+                 text: '停用',
+                 iconCls: 'icon-stop',
+                 handler: function () {
+                     return flexiStop();
+                 }
+             },
+             {
+                 text: '发布',
+                 iconCls: 'icon-fabu',
+                 handler: function () {
+                     return flexiFabu();
+                 }
+             }],
+            columns: [[
+               
+                {
+                    field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', align: 'center',
+                    formatter: function (value, row, index) {
+                        var html = "<a href='/SysException/Details/" + row.Id + "'>" + value + "</a>";
+                        return html;
+                    }}
+                , { field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width:150,align: 'center' }
+                , {
+                    field: 'PUBLISHTIME', title: '@Html.DisplayNameFor(model => model.PUBLISHTIME)', width:250,align: 'center'
+                , formatter: formatDatebox
+                  }
+                @*, { field: 'REPORT_CATEGORY', title: '@Html.DisplayNameFor(model => model.REPORT_CATEGORY)', width: 51 }*@
+                @*, { field: 'CERTIFICATE_CATEGORY', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 51 }*@
+                , { field: 'STATUS', title: '@Html.DisplayNameFor(model => model.STATUS)', width:140,align: 'center' }
+                , { field: 'ISSTOP', title: '@Html.DisplayNameFor(model => model.ISSTOP)', width:140,align: 'center' }
+                , { field: 'ISPUBLISH', title: '@Html.DisplayNameFor(model => model.ISPUBLISH)', width:140,align: 'center' }                
+                @*, { field: 'COPYID', title: '@Html.DisplayNameFor(model => model.COPYID)', width: 51 }
+                , { field: 'PUBLISHPERSON', title: '@Html.DisplayNameFor(model => model.PUBLISHPERSON)', width: 51 }
+                , { field: 'ISPUBLISHTIME', title: '@Html.DisplayNameFor(model => model.ISPUBLISHTIME)', width: 51 }
+                , { field: 'ISPUBLISHPERSON', title: '@Html.DisplayNameFor(model => model.ISPUBLISHPERSON)', width: 51 }
+                , {
+                    field: 'CREATETIME', title: '@Html.DisplayNameFor(model => model.CREATETIME)', width: 51
+                , formatter: formatDatebox
+                }
+                , { field: 'CREATEPERSON', title: '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 51 }
+                , {
+                    field: 'UPDATETIME', title: '@Html.DisplayNameFor(model => model.UPDATETIME)', width: 51
+                , formatter: formatDatebox
+                }
+                , { field: 'UPDATEPERSON', title: '@Html.DisplayNameFor(model => model.UPDATEPERSON)', width: 51 }*@
+            ]],
+            pagination: true,
+            rownumbers: true
 
-            $('#flexigridData').datagrid({
-                title: '方案', //列表的标题
-                iconCls: 'icon-site',
-                width: 'auto',
-                height: 'auto',
-                //nowrap: false,
-                striped: true,
-                collapsible: true,
-                url: '/api/SCHEMEApi/PostData', //获取数据的url
-                sortName: 'ID',
-                sortOrder: 'desc',
-                idField: 'ID',
+        });
 
-                toolbar: [
-                 
-                     {
-                        text: '详细',
-                        iconCls: 'icon-search',
-                        handler: function () {
-                            return getView();
-                        }
-                    }, {
-                        text: '创建',
-                        iconCls: 'icon-add',
-                        handler: function () {
-                            return flexiCreate();
-                        }
-                    },  {
-                        text: '删除',
-                        iconCls: 'icon-remove',
-                        handler: function () {
-                            return flexiDelete();
-                        }
-                    }, {
-                        text: '修改',
-                        iconCls: 'icon-edit',
-                        handler: function () {
-                            return flexiModify();
-                        }
-                    }, {
-                        text: '导出',
-                        iconCls: 'icon-excel',
-                        handler: function () {
-                            return flexiExport();
-                        }
-                    } ],
-                columns: [[
-                   
-                    
-					{ field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', width: 51 }
-					,{ field: 'REPORT_CATEGORY', title:  '@Html.DisplayNameFor(model => model.REPORT_CATEGORY)', width: 51 }
-					,{ field: 'CERTIFICATE_CATEGORY', title:  '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 51 }
-					,{ field: 'STATUS', title:  '@Html.DisplayNameFor(model => model.STATUS)', width: 51 }
-					,{ field: 'ISSTOP', title:  '@Html.DisplayNameFor(model => model.ISSTOP)', width: 51 }
-					,{ field: 'ISPUBLISH', title:  '@Html.DisplayNameFor(model => model.ISPUBLISH)', width: 51 }
-					,{ field: 'COPYID', title:  '@Html.DisplayNameFor(model => model.COPYID)', width: 51 }
-					,{ field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width: 51 }
-					,{ field: 'PUBLISHTIME', title:  '@Html.DisplayNameFor(model => model.PUBLISHTIME)', width: 51
-                    , formatter: formatDatebox
-}
-					,{ field: 'PUBLISHPERSON', title:  '@Html.DisplayNameFor(model => model.PUBLISHPERSON)', width: 51 }
-					,{ field: 'ISPUBLISHTIME', title:  '@Html.DisplayNameFor(model => model.ISPUBLISHTIME)', width: 51 }
-					,{ field: 'ISPUBLISHPERSON', title:  '@Html.DisplayNameFor(model => model.ISPUBLISHPERSON)', width: 51 }
-					,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 51
-                    , formatter: formatDatebox
-}
-					,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 51 }
-					,{ field: 'UPDATETIME', title:  '@Html.DisplayNameFor(model => model.UPDATETIME)', width: 51
-                    , formatter: formatDatebox
-}
-					,{ field: 'UPDATEPERSON', title:  '@Html.DisplayNameFor(model => model.UPDATEPERSON)', width: 51 }
-                ]],
-                pagination: true,
-                rownumbers: true
+        var parent = window.dialogArguments; //获取父页面
+        if (parent == "undefined" || parent == null) {
+            //    不是在iframe中打开的
+        } else {
+            //隐藏所有的按钮和分隔符
+            $(".l-btn.l-btn-plain").hide();
+            $(".datagrid-btn-separator").hide();
+            //添加选择按钮
+            $('#flexigridData').datagrid("addToolbarItem", [{ "text": "选择", "iconCls": "icon-ok", handler: function () { flexiSelect(); } }]);
+        }
+    });
+
+    //“查询”按钮，弹出查询框
+    function flexiQuery() {        
+        //执行查询
+        $('#flexigridData').datagrid('load', { search: GetQuery() });
+    };
+   //将查询条件按照分隔符拼接成字符串
+    function GetQuery() {
+        var search = "";
+        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
+            if (this.id)
+                search = search + this.id + "&" + this.value + "^";
+            else if (this.name)
+                search = search + this.name + "&" + this.value + "^";
+        });
+        return search;
+    }
+    //“导出”按钮     在6.0版本中修改
+    function flexiExport() {
+
+        //将查询条件按照分隔符拼接成字符串
+        var search = "";
+        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
+            search = search + this.id + "&" + this.value + "^";
+        });
+
+        var p = $('#flexigridData').datagrid('options').columns[0];
+        var field = [];//所有的列名
+        var title = [];//所有的标题名称
+        $(p).each(function () {
+            field.push(this.field);
+            title.push(this.title);
+        });
+
+        $.post("api/SCHEMEApi/PostExport",
+            {
+                title: title.join(","),
+                field: field.join(","),
+                sortName: $('#flexigridData').datagrid('options').sortName,
+                sortOrder: $('#flexigridData').datagrid('options').sortOrder,
+                search: search
+            }, function (res) {
+                if (res.Code == 1) {
+                    window.location.href = res.Message;
+                }
+                else $.messager.alert('操作提示', res.Message, 'info');
 
             });
+    };
+    //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
+    function flexiSelect() {
 
-             var parent = window.dialogArguments; //获取父页面
-            if (parent == "undefined" || parent == null) {
-                //    不是在iframe中打开的
-            } else {
-                //隐藏所有的按钮和分隔符
-                $(".l-btn.l-btn-plain").hide();
-                $(".datagrid-btn-separator").hide();
-                //添加选择按钮
-                $('#flexigridData').datagrid("addToolbarItem", [{ "text": "选择", "iconCls": "icon-ok", handler: function () { flexiSelect(); } }]);
+        var rows = $('#flexigridData').datagrid('getSelections');
+        if (rows.length == 0) {
+            $.messager.alert('操作提示', '请选择数据!', 'warning');
+            return false;
+        }
+
+        var arr = [];
+        for (var i = 0; i < rows.length; i++) {
+            arr.push(rows[i].ID);
+        }
+        arr.push("^");
+        for (var i = 0; i < rows.length; i++) {
+            arr.push(rows[i].NAME);
+        }
+        //主键列和显示列之间用 ^ 分割   每一项用 , 分割
+        if (arr.length > 0) {//一条数据和多于一条
+            returnParent(arr.join("&")); //每一项用 & 分割
+        }
+    }
+    //导航到查看详细的按钮
+    function getView() {
+
+        var arr = $('#flexigridData').datagrid('getSelections');
+
+        if (arr.length == 1) {
+            window.location.href = "../SCHEME/Details/" + arr[0].ID;
+
+        } else {
+            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
+        }
+        return false;
+    }
+    //导航到创建的按钮
+    function flexiCreate() {
+
+        window.location.href = "../SCHEME/Create";
+        return false;
+    }
+    //导航到修改的按钮
+    function flexiModify() {
+
+        var arr = $('#flexigridData').datagrid('getSelections');
+
+        if (arr.length == 1) {
+            window.location.href = "../SCHEME/Edit/" + arr[0].ID;
+
+        } else {
+            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
+        }
+        return false;
+
+    };
+    //删除的按钮
+    function flexiDelete() {
+
+        var rows = $('#flexigridData').datagrid('getSelections');
+        if (rows.length == 0) {
+            $.messager.alert('操作提示', '请选择数据!', 'warning');
+            return false;
+        }
+
+        var arr = [];
+        for (var i = 0; i < rows.length; i++) {
+            arr.push(rows[i].ID);
+        }
+
+        $.messager.confirm('操作提示', "确认删除这 " + arr.length + " 项吗？", function (r) {
+            if (r) {
+                $.ajax({
+                    url: "api/SCHEMEApi/Delete?query=" + arr.join(","),
+                    type: "DELETE",
+                    success: function (res) {
+                        if (res.Code == 1) {
+                            //移除删除的数据
+
+                            $.messager.alert('操作提示', res.Message, 'info');
+                            $("#flexigridData").datagrid("reload");
+                            $("#flexigridData").datagrid("clearSelections");
+                        }
+                        else {
+                            $.messager.alert('操作提示', res.Message, 'info');
+                        }
+
+                    }
+                })
             }
         });
 
-        //“查询”按钮，弹出查询框
-        function flexiQuery() {
+    };
 
-            //将查询条件按照分隔符拼接成字符串
-            var search = "";
-            $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
-                if (this.id)
-                    search = search + this.id + "&" + this.value + "^";
-                else
-                    search = search + this.name + "&" + this.value + "^";
-            });
-            //执行查询
-            $('#flexigridData').datagrid('load', { search: search });
-        };
-        //“导出”按钮     在6.0版本中修改
-        function flexiExport() {
-
-            //将查询条件按照分隔符拼接成字符串
-            var search = "";
-            $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
-                search = search + this.id + "&" + this.value + "^";
-            });
-          
-            var p = $('#flexigridData').datagrid('options').columns[0];
-            var field = [];//所有的列名
-            var title = [];//所有的标题名称
-            $(p).each(function () {
-                field.push(this.field);
-                title.push(this.title);              
-            });
-           
-            $.post("api/SCHEMEApi/PostExport",
-                {
-                    title: title.join(","),
-                    field: field.join(","),
-                    sortName: $('#flexigridData').datagrid('options').sortName,
-                    sortOrder: $('#flexigridData').datagrid('options').sortOrder,
-                    search: search
-                }, function (res) {
-                    if (res.Code == 1) {
-                        window.location.href = res.Message;
-                    }
-                    else $.messager.alert('操作提示', res.Message, 'info');
-
-                });
-        };
-        //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
-        function flexiSelect() {
-
-            var rows = $('#flexigridData').datagrid('getSelections');
-            if (rows.length == 0) {
-                $.messager.alert('操作提示', '请选择数据!', 'warning');
-                return false;
-            }
-
-            var arr = [];
-            for (var i = 0; i < rows.length; i++) {
-                arr.push(rows[i].ID);
-            }
-            arr.push("^");
-            for (var i = 0; i < rows.length; i++) {
-                arr.push(rows[i].NAME);
-            }
-            //主键列和显示列之间用 ^ 分割   每一项用 , 分割
-            if (arr.length > 0) {//一条数据和多于一条
-                returnParent(arr.join("&")); //每一项用 & 分割
-            }
-        }
-        //导航到查看详细的按钮
-        function getView() {
-
-            var arr = $('#flexigridData').datagrid('getSelections');
-
-            if (arr.length == 1) {
-                window.location.href = "../SCHEME/Details/" + arr[0].ID;
-               
-            } else {
-                $.messager.alert('操作提示', '请选择一条数据!', 'warning');
-            }
-            return false;
-        }
-        //导航到创建的按钮
-        function flexiCreate() {
-
-            window.location.href = "../SCHEME/Create";
-            return false;
-        }
-        //导航到修改的按钮
-        function flexiModify() {
-
-            var arr = $('#flexigridData').datagrid('getSelections');
-
-            if (arr.length == 1) {
-                window.location.href = "../SCHEME/Edit/" + arr[0].ID;
-
-            } else {
-                $.messager.alert('操作提示', '请选择一条数据!', 'warning');
-            }
-            return false;
-
-        };
-        //删除的按钮
-        function flexiDelete() {
-
-            var rows = $('#flexigridData').datagrid('getSelections');
-            if (rows.length == 0) {
-                $.messager.alert('操作提示', '请选择数据!', 'warning');
-                return false;
-            }
-
-            var arr = [];
-            for (var i = 0; i < rows.length; i++) {
-                arr.push(rows[i].ID);
-            }
-
-            $.messager.confirm('操作提示', "确认删除这 " + arr.length + " 项吗？", function (r) {
-                if (r) {
-                    $.ajax({
-                        url: "api/SCHEMEApi/Delete?query=" + arr.join(","),
-                        type: "DELETE",
-                        success: function (res) {
-                            if (res.Code == 1) {
-                                //移除删除的数据
-
-                                $.messager.alert('操作提示', res.Message, 'info');
-                                $("#flexigridData").datagrid("reload");
-                                $("#flexigridData").datagrid("clearSelections");
-                            }
-                            else {
-                                $.messager.alert('操作提示', res.Message, 'info');
-                            }
-
-                        }
-                    })
-                }
-            });
-
-        };
-
+    $(document).ready(function () {
+        //flexiQuery();
+        bindShiyanshi("#UNDERTAKE_LABORATORYID");
+       
+    });
 </script>
 

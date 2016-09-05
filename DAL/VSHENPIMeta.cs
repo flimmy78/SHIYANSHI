@@ -58,8 +58,14 @@ namespace Langben.DAL
         [Display(Name = "同意不同意判断待批还已批", Order = 14)]
         public object APPROVALISAGGREY { get; set; }
 
-        [Display(Name = "预备方案id", Order = 13)]
-        public object PREPARE_SCHEMEID { get; set; }
+        [Display(Name = "方案类型", Order = 15)]
+        public object PACKAGETYPE { get; set; }
+
+        [Display(Name = "报告状态值", Order = 16)]
+        public object REPORTSTATUSZI { get; set; }
+
+        [Display(Name = "报告状态", Order = 17)]
+        public object REPORTSTATUS { get; set; }
     }
 
 

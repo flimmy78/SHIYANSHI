@@ -64,32 +64,7 @@
             <div class="editor-field">
                 @Html.DropDownListFor(model => model.Sex,Models.SysFieldModels.GetSysField("SysPerson","Sex"),"请选择")
             </div>      
-            <div class="editor-label">
-                <a class="anUnderLine" onclick="showModalOnly('SysDepartmentId','../../SysDepartment');">
-                    @Html.LabelFor(model => model.SysDepartmentId) 
-                </a>：
-            </div>
-            <div class="editor-field">
-                <div id="checkSysDepartmentId">
-                        @if(Model!=null)
-                        {
-                        if (null != Model.SysDepartmentId)                      
-                        { 
-                    <table id="@Model.SysDepartmentId"
-                        class="deleteStyle">
-                        <tr>
-                            <td>
-                                <img alt="删除"  title="点击删除" onclick="deleteTable('@Model.SysDepartmentId ','SysDepartmentId');" src="../../../Images/deleteimge.png" />
-                            </td>
-                            <td>
-                                @Model.SysDepartment.Name
-                            </td>
-                        </tr>
-                    </table>
-                    }} 
-                </div>
-                @Html.HiddenFor(model => model.SysDepartmentId)
-            </div>     
+              
             <div class="editor-label">
                 @Html.LabelFor(model => model.Position)：
             </div>
@@ -112,23 +87,20 @@
                 @Html.ValidationMessageFor(model => model.PhoneNumber)
             </div>        
             <div class="editor-label">
-                @Html.LabelFor(model => model.Province)：
+                <label for="Province">实验室</label>
             </div>
             <div class="editor-field">
-                @Html.DropDownListFor(model => model.Province,Models.SysFieldModels.GetSysField("SysPerson","Province"),"请选择")
-            </div>        
-            <div class="editor-label">
-                @Html.LabelFor(model => model.City)：
+                <select id="Province" name="Province">
+                    <option value="数表三相">数表三相</option>
+                    <option value="数表单相">数表单相</option>
+                    <option value="电能">电能</option>
+                    <option value="指示仪表">指示仪表</option>
+                    <option value="直流仪器">直流仪器</option>
+                    <option value="互感器">互感器</option>
+                </select>
+
             </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(model => model.City,Models.SysFieldModels.GetSysField("SysPerson","City",Model.Province),"请选择")
-            </div>        
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Village)：
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(model => model.Village,Models.SysFieldModels.GetSysField("SysPerson","Village",Model.City),"请选择")
-            </div>     
+            
             <div class="editor-label">
                 @Html.LabelFor(model => model.Address)：
             </div>
@@ -169,46 +141,6 @@
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Res/webuploader/css/webuploader.css")" />
 <link rel="stylesheet" type="text/css" href="@Url.Content("~/Res/webuploader/images/style.css")" />
     }
-    <script type="text/javascript">
-        
-        $(function () {
-            var pic= $("#HDpic").val();
-            if (pic=='') {
-                $("#showPic").attr("src","/Images/noPic.jpg")
-            }else
-            {
-                $("#showPic").attr("src", pic);//显示头像图片
-            }
-            $("#Province").change(function () { getCity("#City"); });
-
-            
-            $("#City").change(function () { getVillage("#Village"); });
-
-
-        });
-        
-        function getCity(City) {
-            $(City).empty();
-            $("<option></option>")
-                    .val("")
-                    .text("请选择")
-                    .appendTo($(City));
-            bindDropDownList(City, "#Province");
-            $(City).change();
-        }
-
-        function getVillage(Village) {
-            $(Village).empty();
-            $("<option></option>")
-                    .val("")
-                    .text("请选择")
-                    .appendTo($(Village));
-            bindDropDownList(Village, "#City");
-            $(Village).change();
-        }
-
-
-    </script>
-
+    
 
 

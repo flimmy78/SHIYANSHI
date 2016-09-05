@@ -64,7 +64,8 @@ namespace Langben.App.Controllers
         {
 
             int total = 0;
-            List<VSHENPI> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
+            search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.批准驳回.GetHashCode() + "*" + Common.REPORTSTATUS.待批准.GetHashCode() + "*" + Common.REPORTSTATUS.已批准.GetHashCode() + "";
+            List<VSHENPI> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);            
             return Json(new datagrid
             {
                 total = total,
@@ -98,7 +99,7 @@ namespace Langben.App.Controllers
                     ,
                     APPROVALISAGGREY = s.APPROVALISAGGREY
                     ,
-                    PREPARE_SCHEMEID = s.PREPARE_SCHEMEID
+                    PACKAGETYPE = s.PACKAGETYPE
 
                 }
 

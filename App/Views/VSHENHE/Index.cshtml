@@ -71,11 +71,12 @@
 					, { field: 'ISAGGREY', title: '@Html.DisplayNameFor(model => model.ISAGGREY)', width: 86 }
                     , {
                         field: 'aa', title: '操作', width: 86, formatter: function (value, row, index) {
-                            if (row.PREPARE_SCHEMEID!=null) {
-                                var html = "<a href='/VSHENHE/XiaZaiShenHe/" + row.ID + "'>下载审核</a>";
+             
+                            if (row.PACKAGETYPE =="上传") {
+                                var html = "<a href='/VSHENHE/XiaZaiShenHe/" + row.ID + "^H'>下载审核</a>";
                             }
-                            else {
-                                var html = "<a href='/VSHENHE/YuLanShenHe/" + row.ID + "'>预览审核</a>";
+                            else if (row.PACKAGETYPE == "生成") {
+                                var html = "<a href='/VSHENHE/YuLanShenHe/" + row.ID + "^H'>预览审核</a>";
                             }
                             return html;
                         }

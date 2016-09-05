@@ -39,6 +39,7 @@ namespace Langben.BLL
                     scheme.SERIALNUMBER = 1;
                 }
                 scheme.YEARS = time;
+                scheme.ID = id;
                 seria = EditField(ref validationErrors, scheme);
 
             }

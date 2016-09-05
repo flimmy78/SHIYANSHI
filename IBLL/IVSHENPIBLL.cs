@@ -12,7 +12,7 @@ namespace Langben.IBLL
     /// 审批 接口
     /// </summary>
     [ServiceContract(Namespace = "www.langben.com")]
-    public interface IVSHENPIBLL
+    public partial interface IVSHENPIBLL
     {
         /// <summary>
         /// 查询的数据

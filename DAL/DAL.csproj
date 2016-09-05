@@ -250,7 +250,11 @@
     <Compile Include="shiyanshi\APPLIANCE_DETAIL_INFORMATIONMeta.cs" />
     <Compile Include="shiyanshi\APPLIANCE_DETAIL_INFORMATIONRepository.cs" />
     <Compile Include="shiyanshi\APPLIANCE_LABORATORYRepository.cs" />
+    <Compile Include="shiyanshi\FILE_UPLOADERRepository.cs" />
     <Compile Include="shiyanshi\PREPARE_SCHEMERepository.cs" />
+    <Compile Include="shiyanshi\VJIANDINGRENWURepository.cs" />
+    <Compile Include="shiyanshi\VSHENHERepository.cs" />
+    <Compile Include="shiyanshi\VSHENPIRepository.cs" />
     <Compile Include="SysAnnouncement.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

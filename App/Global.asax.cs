@@ -11,6 +11,14 @@ namespace App
 { 
     public class MvcApplication : System.Web.HttpApplication
     {
+        /// <summary>
+        /// 解决BaseApiController中的HttpContext.Current.Session为null问题
+        /// </summary>
+        public override void Init()
+        {
+            this.PostAuthenticateRequest += (sender, e) => HttpContext.Current.SetSessionStateBehavior(System.Web.SessionState.SessionStateBehavior.Required);
+            base.Init();
+        }
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
