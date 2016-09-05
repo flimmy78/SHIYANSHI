@@ -126,8 +126,8 @@
         <AssociationConnector Association="Model.SysDocumentSysPerson" />
         <AssociationConnector Association="Model.SysMenuSysOperation" />
         <AssociationConnector Association="Model.SysRoleSysPerson" />
-        <EntityTypeShape EntityType="Model.VRUKU" Width="1.5" PointX="12.375" PointY="23.75" />
         <EntityTypeShape EntityType="Model.VSHENPI" Width="1.5" PointX="18.375" PointY="25.75" />
+        <EntityTypeShape EntityType="Model.VRUKU" Width="1.5" PointX="25.375" PointY="21.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

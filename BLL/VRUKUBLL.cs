@@ -11,7 +11,7 @@ namespace Langben.BLL
     /// <summary>
     /// 入库 
     /// </summary>
-    public class VRUKUBLL :  IBLL.IVRUKUBLL, IDisposable
+    public partial class VRUKUBLL :  IBLL.IVRUKUBLL, IDisposable
     {
         /// <summary>
         /// 私有的数据访问上下文

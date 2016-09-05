@@ -38,14 +38,17 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult XuanZheFangAn(string id)
         {
+            Common.Account account = GetCurrentAccount();
             string Id = string.Empty;
             string APPLIANCE_LABORATORYID = string.Empty;
             List<APPLIANCE_LABORATORY> list = m_BLL4.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(id);
             foreach (var item in list)
             {
-                Id = item.PREPARE_SCHEMEID;
-                APPLIANCE_LABORATORYID = item.ID;
-
+                if (account.UNDERTAKE_LABORATORYName==item.UNDERTAKE_LABORATORYID)
+                {
+                    Id = item.PREPARE_SCHEMEID;
+                    APPLIANCE_LABORATORYID = item.ID;
+                }
             }
             ViewBag.Id = Id;
             ViewBag.APPLIANCE_LABORATORYID = APPLIANCE_LABORATORYID;
