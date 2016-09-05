@@ -219,6 +219,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="html\test.html" />
+    <Content Include="html\交流电压%28电流%29-相对误差-三相.html" />
+    <Content Include="html\交流电压（电流）-相对误差-两相.html" />
+    <Content Include="html\直流电流输出-相对误差.html" />
+    <Content Include="html\频率输出-频率测量-相对误差.html" />
     <Content Include="Images\anquantuichu.gif" />
     <Content Include="Images\bangzhu.gif" />
     <Content Include="Images\beijing.gif" />

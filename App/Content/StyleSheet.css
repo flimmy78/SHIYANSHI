@@ -327,5 +327,5 @@ textarea {
   background: linear-gradient(to bottom,#ffffff 0,#F2F2F2 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#F2F2F2,GradientType=0); font-weight:normal}
-.tbl th, .tbl td{border:1px dotted #ccc; padding-left:3px; padding-right:3px}
+.tbl th, .tbl td{border:1px dotted #ccc; padding:3px;}
 .input-width{width:80px; text-align:right}
