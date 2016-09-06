@@ -5,53 +5,7 @@
 
 <fieldset>
     <legend>
-        <label>报告上传</label>
-    </legend>
-    <div>
-        <form id="form1" method="post" enctype="multipart/form-data" action="BaoGaoShangChuan">
-            <div class="input_search">
-                <div class="input_search-label">
-                    证书编号：
-                </div>
-                <div class="input_search-field">
-                    <label>@ViewBag.REPORTNUMBER</label>
-                    <input type="hidden" name="REPORTNUMBER" value="@ViewBag.REPORTNUMBER" />
-                </div>
-            </div>
-            <div class="input_search">
-                <div class="input_search-label">
-                    上传原始记录：
-                </div>
-                <div class="input_search-field">
-                    <input name="name" type="file" id="file" /><br />
-                    <label>@ViewBag.NAME2</label>
-                </div>
-            </div>
-            <div class="input_search">
-                <div class="input_search-label">
-                    上传证书：
-                </div>
-                <div class="input_search-field">
-                    <input name="name2" type="file" id="file2" />
-                </div><br />
-                <label>@ViewBag.NAME</label>
-            </div>
-            <div class="input_search">
-                <div class="input_search-label">
-                    结论：
-                </div>
-                <div class="input_search-field">
-                    <div class="input_search-label">
-                        合格： <input type="radio" name="CONCLUSION" value="合格" id="CONCLUSION1" />
-                        不合格： <input type="radio" name="CONCLUSION" value="不合格" id="CONCLUSION2" />
-                    </div>
-                    <div class="input_search-label">
-                        
-                    </div>
-                </div>
-            </div><br />
-            <input type="hidden" name="PREPARE_SCHEMEID" value="@ViewBag.Id" />
-            <input type="hidden" name="ID" value="@ViewBag.FILE_UPLOADERID" id="hiddenID" />
+        <label>
             <input id="Submit1" type="submit" value="上传" onclick="javascript:
         if ($('#file').val() != '' && $('#file2').val() != '')
         {
@@ -68,8 +22,79 @@
         };
   " />
             <input type="button" value="发送审核" onclick="songwangshenghe()" />
+        </label>
+    </legend>
+    <div>
+        <form id="form1" method="post" enctype="multipart/form-data" action="BaoGaoShangChuan">
+            <div class="input_search">
+                <div class="input_search-label">
+                    证书编号：
+                </div>
+                <div class="input_search-field">
+                    <label>@ViewBag.REPORTNUMBER</label>
+                    <input type="hidden" name="REPORTNUMBER" value="@ViewBag.REPORTNUMBER" />
+                </div>
+            </div>
+            <br style="clear:both" />
+            <div class="input_search">
+                <div class="input_search-label">
+                    原始记录：
+                </div>
+                <div class="input_search-field">
+                    <input name="name" type="file" id="file" /><br />
+
+                </div>
+            </div>
+            <div class="input_search">
+                <div class="input_search-label">
+
+                </div>
+                <div class="input_search-field">
+
+                    <label>@ViewBag.NAME2</label>
+                </div>
+            </div>
+
+            <div class="input_search">
+                <div class="input_search-label">
+                    上传证书：
+                </div>
+                <div class="input_search-field">
+                    <input name="name2" type="file" id="file2" />
+                </div>
+            </div>
+            <div class="input_search">
+                <div class="input_search-label">
+
+                </div>
+                <div class="input_search-field">
+                    <label>@ViewBag.NAME</label>
+                </div>
+
+            </div>
+            <br style="clear:both" />
+            <div class="input_search-label">
+                结论：
+            </div>
+
+            <div class="editor-field">
+
+
+
+                合格 <input type="radio" name="CONCLUSION" value="合格" id="CONCLUSION1" />不合格  <input type="radio" name="CONCLUSION" value="不合格" id="CONCLUSION2" />
+            </div>
+
+
+
+
+
+            <input type="hidden" name="PREPARE_SCHEMEID" value="@ViewBag.Id" />
+            <input type="hidden" name="ID" value="@ViewBag.FILE_UPLOADERID" id="hiddenID" />
+
         </form>
     </div>
+    <br style="clear:both" /><br style="clear:both" /><br style="clear:both" />
+    <br style="clear:both" />
 </fieldset>
 
 <script type="text/javascript">
