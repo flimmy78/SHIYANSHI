@@ -22,7 +22,7 @@ h2 {
 
 input {
     font: normal 12px/20px "微软雅黑";
-    color: #444;
+    color: #444; border:1px solid #D4D4D4; height:22px
 }
 
 .mbx {
@@ -329,3 +329,4 @@ textarea {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#F2F2F2,GradientType=0); font-weight:normal}
 .tbl th, .tbl td{border:1px dotted #ccc; padding:3px;}
 .input-width{width:80px; text-align:right}
+.my-textbox{border:1px solid #D4D4D4}
