@@ -69,7 +69,108 @@
                     </tr>
                 </thead>
 
-                <tbody id="tbody_1"></tbody>
+                <tbody id="tbody_1">
+                    <tr>
+                        <td>
+                            <input class="easyui-textbox input-width" value="45.000"><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value=\"Hz\">Hz</option>
+                                <option value=\"KHz\">KHz</option>
+                                <option value=\"MHz\">MHz</option>
+                                <option value=\"GHz\">GHz</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input class="easyui-textbox input-width" value=""><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value=\"Hz\">Hz</option>
+                                <option value=\"KHz\">KHz</option>
+                                <option value=\"MHz\">MHz</option>
+                                <option value=\"GHz\">GHz</option>
+                            </select>
+                        </td>
+                        <td><input class="easyui-textbox " style="width:98%"></td>
+                        <td><input class="easyui-textbox " style="width:98%"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="easyui-textbox input-width" value="50.000"><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value=\"Hz\">Hz</option>
+                                <option value=\"KHz\">KHz</option>
+                                <option value=\"MHz\">MHz</option>
+                                <option value=\"GHz\">GHz</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input class="easyui-textbox input-width" value=""><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value=\"Hz\">Hz</option>
+                                <option value=\"KHz\">KHz</option>
+                                <option value=\"MHz\">MHz</option>
+                                <option value=\"GHz\">GHz</option>
+                            </select>
+                        </td>
+                        <td><input class="easyui-textbox " style="width:98%"></td>
+                        <td><input class="easyui-textbox " style="width:98%"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="easyui-textbox input-width" value="55.000"><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value=\"Hz\">Hz</option>
+                                <option value=\"KHz\">KHz</option>
+                                <option value=\"MHz\">MHz</option>
+                                <option value=\"GHz\">GHz</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input class="easyui-textbox input-width" value=""><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value=\"Hz\">Hz</option>
+                                <option value=\"KHz\">KHz</option>
+                                <option value=\"MHz\">MHz</option>
+                                <option value=\"GHz\">GHz</option>
+                            </select>
+                        </td>
+                        <td><input class="easyui-textbox " style="width:98%"></td>
+                        <td><input class="easyui-textbox " style="width:98%"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="easyui-textbox input-width" value="60.000"><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value=\"Hz\">Hz</option>
+                                <option value=\"KHz\">KHz</option>
+                                <option value=\"MHz\">MHz</option>
+                                <option value=\"GHz\">GHz</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input class="easyui-textbox input-width" value=""><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value=\"Hz\">Hz</option>
+                                <option value=\"KHz\">KHz</option>
+                                <option value=\"MHz\">MHz</option>
+                                <option value=\"GHz\">GHz</option>
+                            </select>
+                        </td>
+                        <td><input class="easyui-textbox " style="width:98%"></td>
+                        <td><input class="easyui-textbox " style="width:98%"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="easyui-textbox input-width" value="65.000"><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value=\"Hz\">Hz</option>
+                                <option value=\"KHz\">KHz</option>
+                                <option value=\"MHz\">MHz</option>
+                                <option value=\"GHz\">GHz</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input class="easyui-textbox input-width" value=""><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value=\"Hz\">Hz</option>
+                                <option value=\"KHz\">KHz</option>
+                                <option value=\"MHz\">MHz</option>
+                                <option value=\"GHz\">GHz</option>
+                            </select>
+                        </td>
+                        <td><input class="easyui-textbox " style="width:98%"></td>
+                        <td><input class="easyui-textbox " style="width:98%"></td>
+                    </tr>
+                </tbody>
                 <tfoot>
                     <tr>
                         <td colspan="7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addRow()">增加量程</a></td>
@@ -118,10 +219,10 @@
             "<option value=\"GHz\">GHz</option>" +
             "</select>";
             var rowTmp = "<tr rowindex=\"" + rowIdx + "\">" +
-                        "<td align=\"right\">" + selectHTML + "</td>" +
-                        "<td align=\"right\">" + selectHTML + "</td>" +
-                        "<td align=\"right\"><input class=\"easyui-textbox \" style=\"width:98%\"></td>" +
-                        "<td align=\"right\"><input class=\"easyui-textbox \" style=\"width:98%\"></td> " +
+                        "<td >" + selectHTML + "</td>" +
+                        "<td >" + selectHTML + "</td>" +
+                        "<td ><input class=\"easyui-textbox \" style=\"width:98%\"></td>" +
+                        "<td ><input class=\"easyui-textbox \" style=\"width:98%\"></td> " +
                       "</tr>";
             $("#tbody_1").append(rowTmp);
         }
