@@ -7,7 +7,8 @@
 {
     <fieldset>
         <legend>
-            <label>报告证书类别</label>
+            <label>报告证书类别</label><input type="button" value="报告上传" class="a2 f2" onclick="shangchuan()" />
+            <input type="submit" value="建立方案" class="a2 f2" />
             <input class="a2 f2" type="button" onclick="BackList('VJIANDINGRENWU')" value="返回" />
         </legend>
         <div>
@@ -18,6 +19,9 @@
                 <div class="input_search-field">
                     @Html.DropDownList("REPORT_CATEGORY", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "REPORT_CATEGORY"), "请选择", new { id = "REPORT_CATEGORY_String" })
                 </div>
+            </div>
+            <br style="clear:both" />
+            <div class="input_search">
                 <div class="input_search-label">
                     证书类别:
                 </div>
@@ -25,50 +29,50 @@
                     @*onchange="zhengshuxuanzhe()*@
                     @Html.DropDownList("CERTIFICATE_CATEGORY", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "CERTIFICATE_CATEGORY"), "请选择", new { id = "CERTIFICATE_CATEGORY_String" })
                 </div>
-            </div>
 
-            <div class="input_search" id="cnas" style="display:none">
+            </div>
+            <br style="clear:both" />
+
+            <div id="cnas" style="display:none">
                 <div class="input_search-label">
                     CNAS:
                 </div>
-                <div class="input_search-field">
+
+                <div class="editor-field">
                     Yes: <input type="radio" id="cnasyes" name="CNAS" onclick="zizhiget(this)" value="Yes" atps="cnasyes" />
                     No: <input type="radio" id="cnasno" name="CNAS" onclick="zizhiget(this)" value="No" atps="cnasno" />
                 </div>
+            </div>
+                
+                <div class="" id="jianding" style="display:none">
+                    <div class="input_search-label">
+                        检定授权:
+                    </div>
+                    <div class="editor-field">
+                        Yes: <input type="radio" id="jiandingyes" name="CERTIFICATION_AUTHORITY" onclick="zizhiget(this)" value="Yes" atps="jiandingyes" />
+                        No: <input type="radio" id="jiandingno" name="CERTIFICATION_AUTHORITY" onclick="zizhiget(this)" value="No" atps="jiandingno" />
+                    </div>
+                </div><br style="clear:both" />
+                <div class="input_search" id="kongzhi" style="display:none">
+                    <div class="input_search-label">
+                        控制编号:
+                    </div>
+                    <div class="input_search-field">
+                        @Html.DropDownList("CONTROL_NUMBER", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "CONTROL_NUMBER"), "请选择", new { id = "CONTROL_NUMBER_String" })
+                    </div>
+                </div><br style="clear:both" />
+                <div class="input_search">
+                    <div class="input_search-label">
+                        资质:
+                    </div>
+                    <div class="input_search-field">
+                        <select id="QUALIFICATIONS" name="QUALIFICATIONS">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                </div>
 
             </div>
-            <div class="input_search" id="jianding" style="display:none">
-                <div class="input_search-label">
-                    检定授权:
-                </div>
-                <div class="input_search-field">
-                    Yes: <input type="radio" id="jiandingyes" name="CERTIFICATION_AUTHORITY" onclick="zizhiget(this)" value="Yes" atps="jiandingyes" />
-                    No: <input type="radio" id="jiandingno" name="CERTIFICATION_AUTHORITY" onclick="zizhiget(this)" value="No" atps="jiandingno" />
-                </div>
-            </div>
-            <div class="input_search" id="kongzhi" style="display:none">
-                <div class="input_search-label">
-                    控制编号:
-                </div>
-                <div class="input_search-field">
-                    @Html.DropDownList("CONTROL_NUMBER", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "CONTROL_NUMBER"), "请选择", new { id = "CONTROL_NUMBER_String" })
-                </div>
-            </div>
-            <div class="input_search">
-                <div class="input_search-label">
-                    资质:
-                </div>
-                <div class="input_search-field">
-                    <select id="QUALIFICATIONS" name="QUALIFICATIONS">
-                        <option value="">请选择</option>
-                    </select>
-                </div>
-            </div><br />
-            <div class="input_search">
-                <input type="button" value="报告上传" onclick="shangchuan()" />
-                <input type="submit" value="建立方案" />
-            </div>
-        </div>
         <input type="hidden" value="" id="ACCEPT_ORGNIZATION_HIDDEN" />
         <input type="hidden" name="APPLIANCE_LABORATORYID" id="APPLIANCE_LABORATORYID_String" value="@ViewBag.APPLIANCE_LABORATORYID" />
         <input type="hidden" name="ID" id="ID_String" value="@ViewBag.Id" />
@@ -98,7 +102,7 @@
                 else if (data.Code == 1) {
                     var id = "@ViewBag.Id";
                     var di = data.Id;
-                    window.location.href = "/VJIANDINGRENWU/BaoGaoShangChuan/" + di+ "|@ViewBag.APPLIANCE_DETAIL_INFORMATIONID";
+                    window.location.href = "/VJIANDINGRENWU/BaoGaoShangChuan/" + di + "|@ViewBag.APPLIANCE_DETAIL_INFORMATIONID";
                     return false;
                 }
                 else {
