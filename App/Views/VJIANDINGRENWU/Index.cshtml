@@ -291,7 +291,7 @@
                        text: '器具信息修改',
                        iconCls: 'icon-search',
                        handler: function () {
-                          // return getView();
+                           // return getView();
                        }
                    },
                     {
@@ -324,6 +324,7 @@
                     , { field: 'FACTORY_NUM', title: '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 64 }
                     , { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 64 }
                     , { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 64 }
+                    , { field: 'APPLIANCE_PROGRESS', title: '@Html.DisplayNameFor(model => model.APPLIANCE_PROGRESS)', width: 64 }
                     , { field: 'ORDER_STATUS', title: '@Html.DisplayNameFor(model => model.ORDER_STATUS)', width: 64 }
                     , {
                         field: 'CREATETIME', title: '@Html.DisplayNameFor(model => model.CREATETIME)', width: 64, formatter: function (value, row, index) {
@@ -332,7 +333,7 @@
                             }
                         }
                     }
-                    , { field: 'APPLIANCE_PROGRESS', title: '@Html.DisplayNameFor(model => model.APPLIANCE_PROGRESS)', width: 64 }
+
                     , { field: 'OVERDUE', title: '@Html.DisplayNameFor(model => model.OVERDUE)', width: 64 }
                     , { field: 'STATE', title: '@Html.DisplayNameFor(model => model.STATE)', width: 64 }
                     , { field: 'REPORTSTATUS', title: '@Html.DisplayNameFor(model => model.REPORTSTATUS)', width: 64 }
@@ -412,13 +413,15 @@
     function panduanlingqu() {
         var arr = $('#flexigridData').datagrid('getSelections');
         if (arr.length == 1) {
-            if (arr[0].ORDER_STATUS == null && arr[0].APPLIANCE_PROGRESS == null) {
+            if (arr[0].ORDER_STATUS == null) {
                 $.messager.alert('操作提示', '请选择已领取的数据!', 'warning');
                 return false;
 
             }
             else {
-                return true;
+                if (arr[0].ORDER_STATUS=="@Common.ORDER_STATUS.已领取.ToString()") {
+                    return true;
+                }               
             }
         }
         else {
@@ -454,7 +457,7 @@
                                 yinlingqu = "第" + i + 1 + "行,"
                                 id2 += arr[i].ID + ",";
                             } else if (arr[i].ORDER_STATUS == "试验完成") {
-                                id += arr[i].ID +"*"+ ",";
+                                id += arr[i].ID + "*" + ",";
                             }
                             else {
                                 id += arr[i].ID + ",";

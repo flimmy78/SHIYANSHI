@@ -63,6 +63,7 @@
     <Compile Include="Shiyanshi\FILE_UPLOADERBLL.cs" />
     <Compile Include="Shiyanshi\PREPARE_SCHEMEBLL.cs" />
     <Compile Include="Shiyanshi\VJIANDINGRENWUBLL.cs" />
+    <Compile Include="Shiyanshi\VRUKUBLL.cs" />
     <Compile Include="Shiyanshi\VSHENHEBLL.cs" />
     <Compile Include="Shiyanshi\VSHENPIBLL.cs" />
     <Compile Include="SysAnnouncementBLL.cs" />

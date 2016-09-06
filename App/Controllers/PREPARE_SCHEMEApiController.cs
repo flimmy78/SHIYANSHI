@@ -352,7 +352,6 @@ namespace Langben.App.Controllers
                         appliance.ID = entity.APPLIANCE_DETAIL_INFORMATIONID;
                         appliance.ORDER_STATUS = Common.ORDER_STATUS.试验完成.ToString();
                         appliance.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.试验完成.GetHashCode().ToString();
-
                     }
                 }
                 else if (entity.SHPI == "P")
@@ -366,6 +365,13 @@ namespace Langben.App.Controllers
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.已批准.ToString();
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.已批准.GetHashCode().ToString();
+                        //判断器具是否满足入库条件
+                        if (ISAPPLIANCE(entity.APPLIANCE_DETAIL_INFORMATIONID))
+                        {
+                            appliance.ID = entity.APPLIANCE_DETAIL_INFORMATIONID;
+                            appliance.ORDER_STATUS = Common.ORDER_STATUS.待入库.ToString();
+                            appliance.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.待入库.GetHashCode().ToString();
+                        }
                     }
                 }
 
@@ -375,7 +381,6 @@ namespace Langben.App.Controllers
                 {
                     HE = m_BLL3.EditField(ref validationErrors, appliance) && m_BLL.EditField(ref validationErrors, entity);//器具明细修改
                 }
-
 
                 if (HE)
                 {
@@ -446,6 +451,34 @@ namespace Langben.App.Controllers
                 }
             }
             return result;
+        }
+
+        /// <summary>
+        /// 判断器具是否满足入库条件
+        /// </summary>
+        /// <param name="id">器具明细表id</param>
+        /// <returns>满足：true；不满足：false</returns>
+        public bool ISAPPLIANCE(string id)
+        {
+            bool JG = false;
+            List<APPLIANCE_LABORATORY> list = m_BLL2.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(id);
+            if (list.Count==1)
+            {
+                foreach (var item in list)
+                {
+                   PREPARE_SCHEME prepare= m_BLL.GetById(item.PREPARE_SCHEMEID);
+                    if (prepare.REPORTSTATUS==Common.REPORTSTATUS.待批准.ToString())//判断当前报告是否满足条件
+                    {
+                        JG = true;
+                    }
+                    else
+                    {
+                        JG = false;
+                        return JG;
+                    }
+                }
+            }
+            return JG;
         }
 
         IBLL.IPREPARE_SCHEMEBLL m_BLL;

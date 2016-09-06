@@ -43,9 +43,34 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public JsonResult GetData(string id, int page, int rows, string order, string sort, string search)
         {
+            string STORAGEINSTRUCTI_STATU = string.Empty;
+            Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
+            foreach (var item in queryDic)
+            {
+                if (item.Key == "STORAGEINSTRUCTI_STATU")
+                {
+                    STORAGEINSTRUCTI_STATU= item.Value; 
+                }                              
+            }
 
-            int total = 0;
-            List<VRUKU> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
+            if (STORAGEINSTRUCTI_STATU == "待入库" || search == null)
+            {
+                if (search!=null)
+                {
+                    int end = search.LastIndexOf("^STORAGEINSTRUCTI_STATU&");
+                    search = search.Substring(0, end)+"^";
+                }
+                search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.待入库.GetHashCode() + "^";
+                search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.批准驳回.GetHashCode() + "*" + Common.REPORTSTATUS.已批准.GetHashCode() + "*" + Common.REPORTSTATUS.待批准.GetHashCode() + "*" + Common.REPORTSTATUS.报告已打印.GetHashCode() + "*" + Common.REPORTSTATUS.报告已发放.GetHashCode() + "";
+            }
+            else if (STORAGEINSTRUCTI_STATU == "已入库")
+            {
+                int end = search.LastIndexOf("^STORAGEINSTRUCTI_STATU&");
+                search = search.Substring(0,end);
+                search += "^EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "";
+            }
+            int total = 0;          
+            List<VRUKU> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
             {
                 total = total,

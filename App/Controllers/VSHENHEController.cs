@@ -46,21 +46,32 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult XiaZaiShenHe(string id)
         {
+            Common.Account account = GetCurrentAccount();
             string APPLIANCE_DETAIL_INFORMATIONID = string.Empty;
             string[] IDD = id.Split('^');
             FILE_UPLOADER file = m_BLL2.GetPREPARE_SCHEMEID(IDD[0]);
             IList<APPLIANCE_LABORATORY> appliance = m_BLL3.GetByRefPREPARE_SCHEMEID(IDD[0]);
             foreach (var item in appliance)
             {
-                APPLIANCE_DETAIL_INFORMATIONID = item.APPLIANCE_DETAIL_INFORMATIONID;
+                if (account.UNDERTAKE_LABORATORYName == item.UNDERTAKE_LABORATORYID)
+                {
+                    APPLIANCE_DETAIL_INFORMATIONID = item.APPLIANCE_DETAIL_INFORMATIONID;
+                }
             }
 
             ViewBag.HEIFSP = IDD[1];//判断是审核的下载预览还是审批的下载预览
             ViewBag.FILE_UPLOADER_ID = IDD[0];//附件的id
             ViewBag.PREPARE_SCHEME_ID = file.PREPARE_SCHEMEID;//预备方案的id
             ViewBag.APPLIANCE_DETAIL_INFORMATIONID = APPLIANCE_DETAIL_INFORMATIONID;//器具明细的id
-            ViewBag.FULLPATH = "http://" + file.FULLPATH;//证书地址
-            ViewBag.FULLPATH2 = "http://" + file.FULLPATH2;//原始记录地址
+            int end = file.FULLPATH.LastIndexOf("\\up");
+            string dizhi= file.FULLPATH.Substring(end);
+            int end2 = file.FULLPATH2.LastIndexOf("\\up");
+            string dizhi2 = file.FULLPATH2.Substring(end);
+            ViewBag.FULLPATH = dizhi;//证书地址
+            ViewBag.FULLPATH2 = dizhi2;//原始记录地址
+
+            ViewBag.NAME = file.NAME;//证书名字
+            ViewBag.NAME2 = file.NAME;//原始记录
             ViewBag.CONCLUSION = file.CONCLUSION;//结论
             return View();
         }

@@ -11,7 +11,6 @@ namespace Langben.IBLL
     /// <summary>
     /// 入库 接口
     /// </summary>
-    [ServiceContract(Namespace = "www.langben.com")]
     public partial interface IVRUKUBLL
     {
         /// <summary>
@@ -26,20 +25,8 @@ namespace Langben.IBLL
         /// <param name="total">结果集的总数</param>
         /// <returns>结果集</returns>
         [OperationContract]
-        List<VRUKU> GetByParam(string id, int page, int rows, string order, string sort, string search, ref int total);
-        /// <summary>
-        /// 获取所有
-        /// </summary>
-        /// <returns></returns>
-        [OperationContract]
-        System.Collections.Generic.List<VRUKU> GetAll();
-        /// <summary>
-        /// 根据主键，查看详细信息
-        /// </summary>
-        /// <param name="id">根据主键</param>
-        /// <returns></returns>
-        [OperationContract]
-        VRUKU GetById(string id);    
+        List<VRUKU> GetByParamX(string id, int page, int rows, string order, string sort, string search, ref int total);
+         
  
     }
 }

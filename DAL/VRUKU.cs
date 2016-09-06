@@ -28,5 +28,8 @@ namespace Langben.DAL
         public string UNDERTAKE_LABORATORYID { get; set; }
         public Nullable<System.DateTime> APPROVALDATE { get; set; }
         public string STORAGEINSTRUCTI_STATU { get; set; }
+        public string REPORTSTATUS { get; set; }
+        public string REPORTSTATUSZI { get; set; }
+        public string EQUIPMENT_STATUS_VALUUMN { get; set; }
     }
 }

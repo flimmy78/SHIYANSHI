@@ -253,6 +253,7 @@
     <Compile Include="shiyanshi\FILE_UPLOADERRepository.cs" />
     <Compile Include="shiyanshi\PREPARE_SCHEMERepository.cs" />
     <Compile Include="shiyanshi\VJIANDINGRENWURepository.cs" />
+    <Compile Include="shiyanshi\VRUKURepository.cs" />
     <Compile Include="shiyanshi\VSHENHERepository.cs" />
     <Compile Include="shiyanshi\VSHENPIRepository.cs" />
     <Compile Include="SysAnnouncement.cs">
