@@ -9,9 +9,9 @@ namespace Langben.App.Models
     { 
         public ORDER_TASK_INFORMATIONShow()
         {
-             
+             APPLIANCE_DETAIL_INFORMATIONShows = new List<APPLIANCE_DETAIL_INFORMATIONShow>();
         }
-
+      public  List<APPLIANCE_DETAIL_INFORMATIONShow> APPLIANCE_DETAIL_INFORMATIONShows { get; set; }
         public string ID { get; set; }
         public string ORDER_NUMBER { get; set; }
         public string ACCEPT_ORGNIZATION { get; set; }
