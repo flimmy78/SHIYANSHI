@@ -68,7 +68,7 @@
         $(function () {
 
             $('#flexigridData').datagrid({
-                title: '委托单信息', //列表的标题
+                title: '委托单列表', //列表的标题
                 iconCls: 'icon-site',
                 width: 'auto',
                 height: 'auto',
@@ -81,65 +81,27 @@
                 idField: 'ID',
 
                 toolbar: [
-                 
+
                      {
-                        text: '详细',
+                        text: '器具登记',
                         iconCls: 'icon-search',
                         handler: function () {
                             return getView();
                         }
-                    }, {
-                        text: '创建',
-                        iconCls: 'icon-add',
-                        handler: function () {
-                            return flexiCreate();
-                        }
-                    },  {
-                        text: '删除',
-                        iconCls: 'icon-remove',
-                        handler: function () {
-                            return flexiDelete();
-                        }
-                    }, {
-                        text: '修改',
-                        iconCls: 'icon-edit',
-                        handler: function () {
-                            return flexiModify();
-                        }
-                    }, {
-                        text: '导出',
-                        iconCls: 'icon-excel',
-                        handler: function () {
-                            return flexiExport();
-                        }
-                    } ],
+                    }  ],
                 columns: [[
-                   
-                    
-					{ field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 40 }
-					,{ field: 'ACCEPT_ORGNIZATION', title:  '@Html.DisplayNameFor(model => model.ACCEPT_ORGNIZATION)', width: 40 }
-					,{ field: 'INSPECTION_ENTERPRISE', title:  '@Html.DisplayNameFor(model => model.INSPECTION_ENTERPRISE)', width: 40 }
-					,{ field: 'INSPECTION_ENTERPRISE_ADDRESS', title:  '@Html.DisplayNameFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)', width: 40 }
-					,{ field: 'INSPECTION_ENTERPRISE_POST', title:  '@Html.DisplayNameFor(model => model.INSPECTION_ENTERPRISE_POST)', width: 40 }
-					,{ field: 'CONTACTS', title:  '@Html.DisplayNameFor(model => model.CONTACTS)', width: 40 }
-					,{ field: 'CONTACT_PHONE', title:  '@Html.DisplayNameFor(model => model.CONTACT_PHONE)', width: 40 }
-					,{ field: 'FAX', title:  '@Html.DisplayNameFor(model => model.FAX)', width: 40 }
-					,{ field: 'CERTIFICATE_ENTERPRISE', title:  '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 40 }
-					,{ field: 'CERTIFICATE_ENTERPRISE_ADDRESS', title:  '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)', width: 40 }
-					,{ field: 'CERTIFICATE_ENTERPRISE_POST', title:  '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE_POST)', width: 40 }
-					,{ field: 'CONTACTS2', title:  '@Html.DisplayNameFor(model => model.CONTACTS2)', width: 40 }
-					,{ field: 'CONTACT_PHONE2', title:  '@Html.DisplayNameFor(model => model.CONTACT_PHONE2)', width: 40 }
-					,{ field: 'FAX2', title:  '@Html.DisplayNameFor(model => model.FAX2)', width: 40 }
-					,{ field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title:  '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 40 }
-					,{ field: 'ORDER_STATUS', title:  '@Html.DisplayNameFor(model => model.ORDER_STATUS)', width: 40 }
-					,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 40
+
+
+					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 220 }
+					, { field: 'ACCEPT_ORGNIZATION', title: '@Html.DisplayNameFor(model => model.ACCEPT_ORGNIZATION)', width: 220 }
+					,{ field: 'INSPECTION_ENTERPRISE', title:  '@Html.DisplayNameFor(model => model.INSPECTION_ENTERPRISE)', width: 140 }
+					 ,{ field: 'CERTIFICATE_ENTERPRISE', title:  '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 140 }
+				 ,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 140
                     , formatter: formatDatebox
 }
-					,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 40 }
-					,{ field: 'UPDATETIME', title:  '@Html.DisplayNameFor(model => model.UPDATETIME)', width: 40
-                    , formatter: formatDatebox
-}
-					,{ field: 'UPDATEPERSON', title:  '@Html.DisplayNameFor(model => model.UPDATEPERSON)', width: 40 }
+					,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 140 }
+					 	,{ field: 'ORDER_STATUS', title:  '@Html.DisplayNameFor(model => model.ORDER_STATUS )', width: 40 }
+
                 ]],
                 pagination: true,
                 rownumbers: true
@@ -180,15 +142,15 @@
             $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
                 search = search + this.id + "&" + this.value + "^";
             });
-          
+
             var p = $('#flexigridData').datagrid('options').columns[0];
             var field = [];//所有的列名
             var title = [];//所有的标题名称
             $(p).each(function () {
                 field.push(this.field);
-                title.push(this.title);              
+                title.push(this.title);
             });
-           
+
             $.post("api/ORDER_TASK_INFORMATIONApi/PostExport",
                 {
                     title: title.join(","),
@@ -233,7 +195,7 @@
 
             if (arr.length == 1) {
                 window.location.href = "../ORDER_TASK_INFORMATION/Details/" + arr[0].ID;
-               
+
             } else {
                 $.messager.alert('操作提示', '请选择一条数据!', 'warning');
             }
