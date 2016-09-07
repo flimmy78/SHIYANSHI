@@ -74,7 +74,7 @@ namespace Langben.App.Controllers
                     ,
                     END_PLAN_DATE = s.END_PLAN_DATE
                     ,
-                    ORDER_TASK_INFORMATIONID = s.ORDER_TASK_INFORMATIONID
+                    ORDER_TASK_INFORMATION = s.ORDER_TASK_INFORMATION
                     ,
                     CREATETIME = s.CREATETIME
                     ,
