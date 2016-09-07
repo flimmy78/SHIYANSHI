@@ -114,19 +114,25 @@
         @Html.EditorFor(model => model.FAX2)
         @Html.ValidationMessageFor(model => model.FAX2)
     </div>
+    <br style="clear:both;" />
     <div class="editor-label">
         @Html.LabelFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)：
     </div>
     <div class="editor-field">
-        @Html.EditorFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
+        @Html.TextAreaFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
         @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
     </div>
 
 </div>
 
 <br style="clear:both;" />
+<br style="clear:both;" />
+<br style="clear:both;" />
+<br style="clear:both;" />
+<br style="clear:both;" />
 <input type="hidden" id="ORDER_TASK_INFORMATIONID" />
 <table id="ApplianceDate" singleSelect="true"></table>
+<br style="clear:both;" />
 <script type="text/javascript">
     //数据验证
     function ifshuju(entity) {
@@ -341,7 +347,7 @@
         }
         //新增
         function flexiInsert() {
-            $('#ApplianceDate').edatagrid('addRow');
+            $('#ApplianceDate').edatagrid('addRow', { "NUM": "1" });
             //$('#ApplianceDate').edatagrid('appendRow', { "NUM": "1" });
         }
         //复制新增
