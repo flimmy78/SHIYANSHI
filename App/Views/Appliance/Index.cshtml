@@ -22,7 +22,7 @@
 <br style="clear:both;" />
 
 <input type="button" onclick="seng()" value="查询" />
-<div class="bigdiv" style="width: 854px;">
+<div class="bigdiv" style="width: 854px;" id="order">
 
     <div class="editor-label">
         @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
@@ -114,30 +114,195 @@
         @Html.EditorFor(model => model.FAX2)
         @Html.ValidationMessageFor(model => model.FAX2)
     </div>
+    <br style="clear:both;" />
     <div class="editor-label">
         @Html.LabelFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)：
     </div>
     <div class="editor-field">
-        @Html.EditorFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
+        @Html.TextAreaFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
         @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
     </div>
 
 </div>
 
 <br style="clear:both;" />
+<br style="clear:both;" />
+<br style="clear:both;" />
+<br style="clear:both;" />
+<br style="clear:both;" />
 <input type="hidden" id="ORDER_TASK_INFORMATIONID" />
 <table id="ApplianceDate" singleSelect="true"></table>
-
+<br style="clear:both;" />
 <script type="text/javascript">
+    //数据验证
+    function ifshuju(entity) {
+        var zhi = "";
 
+        if (isNull(entity.CERTIFICATE_ENTERPRISE)) {
+            zhi += "证书单位不能为空！<br>";
+        }
+        if (isNull(entity.CERTIFICATE_ENTERPRISE_ADDRESS)) {
+            zhi += "证书单位地址不能为空！<br>";
+        }
+        if (isNull(entity.CONTACTS2)) {
+            zhi += "联系人2不能为空！<br>";
+        }
+        if (isNull(entity.CONTACT_PHONE2)) {
+            zhi += "联系电话2不能为空！<br>";
+            if (checkPhone(entity.CONTACT_PHONE2)) {
+                zhi += "联系电话2格式不对！<br>";
+            }
+        }
+        if (entity.APPLIANCE_DETAIL_INFORMATION.length > 1) {
+            for (var i = 0; i < entity.APPLIANCE_DETAIL_INFORMATION.length; i++) {
+                if (entity.APPLIANCE_DETAIL_INFORMATION[i].APPLIANCE_NAME == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].VERSION == "undefined"
+                    || entity.APPLIANCE_DETAIL_INFORMATION[i].NUM == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].APPEARANCE_STATUS == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID == "undefined") {
+                    zhi += "器具数据有误！<br>";
+                    break;
+                }
+                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].APPLIANCE_NAME)) {
+                    zhi += "器具名称不能为空！<br>";
+                }
+                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].VERSION)) {
+                    zhi += "型号不能为空！<br>";
+                }
+                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
+                    zhi += "数量不能为空！<br>";
+                    if (isInteger(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
+                        zhi += "数量必须为数字整型！<br>";
+                    }
+                }
+                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].APPEARANCE_STATUS)) {
+                    zhi += "外观状态不能为空！<br>";
+                }
+                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID)) {
+                    zhi += "实验室不能为空！<br>";
+                }
+            }
+        }
+        else {
+            zhi += "器具数据不能为空！<br>";
+        }
+
+        if (zhi != null) {
+            $.messager.alert('操作提示', "" + zhi + "", 'info');
+            return false;
+        }
+        else {
+            return false;
+            //return true;
+        }
+
+    }
+    /*
+用途：检查输入字符串是否为空或者全部都是空格
+输入：str
+返回：
+如果全是空返回true,否则返回false
+*/
+    function isNull(str) {
+        if (str == "") return true;
+        var regu = "^[ ]+$";
+        var re = new RegExp(regu);
+        return re.test(str);
+    }
+    /*
+   用途：检查输入的电话号码格式是否正确
+   输入：
+   strPhone：字符串
+   返回：
+   如果通过验证返回true,否则返回false
+   */
+    function checkPhone(strPhone) {
+        var phoneRegWithArea = /^[0][1-9]{2,3}-[0-9]{5,10}$/;
+        var phoneRegNoArea = /^[1-9]{1}[0-9]{5,8}$/;
+        //var prompt = "您输入的电话号码不正确!"
+        if (strPhone.length > 9) {
+            if (phoneRegWithArea.test(strPhone)) {
+                return true;
+            } else {
+                //alert( prompt );
+                return false;
+            }
+        } else {
+            if (phoneRegNoArea.test(strPhone)) {
+                return true;
+            } else {
+                //alert(prompt);
+                return false;
+            }
+
+        }
+    }
+    /*
+用途：检查输入对象的值是否符合整数格式
+输入：str 输入的字符串
+返回：如果通过验证返回true,否则返回false
+*/
+    function isInteger(str) {
+        var regu = /^[-]{0,1}[0-9]{1,}$/;
+        return regu.test(str);
+    }
+</script>
+<script type="text/javascript">
 
     //查询
     function seng() {
-        //器具信息绑定
-        var search = "";
-        search = "BAR_CODE_NUM" + "@@" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "@@" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "@@" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "@@" + $("#APPLIANCE_NAME").val() + "^"
-        $('#ApplianceDate').edatagrid({ url: '/api/APPLIANCE_DETAIL_INFORMATIONApi/PostDataByID/' + search });
+        var search = "BAR_CODE_NUM" + "@@" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "@@" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "@@" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "@@" + $("#APPLIANCE_NAME").val() + "^";
+        $.ajax({
+            //url: "/api/ORDER_TASK_INFORMATIONApi/Get" + $("#ORDER_TASK_INFORMATIONID").val(),
+            url: '/api/APPLIANCE_DETAIL_INFORMATIONApi/PostDataByID/' + search,
+            type: "Post",
+            // async: false,
+            success: function (data) {
+                alert(data);
+                alert(data.BAR_CODE_NUM);
+            }
+        })
 
+        // 在第二行的位置插入一个新行
+        //index：要插入的行索引，如果该索引值未定义，则追加新行。
+        //row：行数据。
+        $('#dg').datagrid('insertRow', {
+            index: 1,  // 索引从0开始
+            row: {
+                APPLIANCE_NAME: '新名称',
+                age: 30,
+                note: '新消息'
+            }
+        });
+        ////器具信息绑定
+        //var search = "";
+        //search = "BAR_CODE_NUM" + "@@" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "@@" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "@@" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "@@" + $("#APPLIANCE_NAME").val() + "^";
+        //$('#ApplianceDate').edatagrid({ url: '/api/APPLIANCE_DETAIL_INFORMATIONApi/PostDataByID/' + search });
+
+    }
+
+    function s() {
+        var id = $("#ORDER_TASK_INFORMATIONID").val()
+        alert(id)
+        $.ajax({
+            //url: "/api/ORDER_TASK_INFORMATIONApi/Get" + $("#ORDER_TASK_INFORMATIONID").val(),
+            url: "/api/ORDER_TASK_INFORMATIONApi/Get/" + id,
+            type: "Post",
+            // async: false,
+            success: function (res) {
+                $("#ACCEPT_ORGNIZATION option:selected").val(res.ACCEPT_ORGNIZATION);//受理单位
+                $("#INSPECTION_ENTERPRISE").val(res.INSPECTION_ENTERPRISE);//送检单位
+                $("#INSPECTION_ENTERPRISE_ADDRESS").val(res.INSPECTION_ENTERPRISE_ADDRESS);//送检单位地址
+                $("#INSPECTION_ENTERPRISE_POST").val(res.INSPECTION_ENTERPRISE_POST);//送检单位邮政编码
+                $("#CONTACTS").val(res.CONTACTS);//联系人
+                $("#CONTACT_PHONE").val(res.CONTACT_PHONE);//联系电话
+                $("#FAX").val(res.FAX);//传真
+                $("#CERTIFICATE_ENTERPRISE").val(res.CERTIFICATE_ENTERPRISE);//证书单位
+                $("#CERTIFICATE_ENTERPRISE_ADDRESS").val(res.CERTIFICATE_ENTERPRISE_ADDRESS);//证书单位地址
+                $("#CERTIFICATE_ENTERPRISE_POST").val(res.CERTIFICATE_ENTERPRISE_POST);//证书单位邮政编码
+                $("#CONTACTS2").val(res.CONTACTS2);//联系人2
+                $("#CONTACT_PHONE2").val(res.CONTACT_PHONE2);//联系电话2
+                $("#FAX2").val(res.FAX2);//传真2
+                $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val(res.CUSTOMER_SPECIFIC_REQUIREMENTS);//客户特殊要求
+            }
+        })
     }
     $(function () {
         var editIndex = undefined;
@@ -182,7 +347,14 @@
         }
         //新增
         function flexiInsert() {
-            $('#ApplianceDate').edatagrid('addRow');
+            $('#ApplianceDate').edatagrid('addRow', {
+                
+                row: {
+                    "NUM": "1",
+                    "APPEARANCE_STATUS":"良好"
+                }
+            });
+         
         }
         //复制新增
         function flexiInsertCopy() {
@@ -221,59 +393,69 @@
                 alert('请先选择一行')
             }
         }
-        //委托单(包含器具信息)保存
+        //委托单(包含器具信息)发送
         function flexiSave() {
-            //结束器具的编辑状态
-            $('#ApplianceDate').edatagrid('saveRow');
-            //获取所有器具
-            var qiju = $('#ApplianceDate').edatagrid('getRows');
-            //实例化一个委托单对象
-            var entity = new Object();
-            entity.APPLIANCE_DETAIL_INFORMATION = qiju;
-            entity.ID = $("#ORDER_TASK_INFORMATIONID").val();
+            $.messager.confirm('操作提示', "确认发送吗？", function (r) {
+                if (r) {
+                    //结束器具的编辑状态
+                    $('#ApplianceDate').edatagrid('saveRow');
+                    //获取所有器具
+                    var qiju = $('#ApplianceDate').edatagrid('getRows');
+                    //实例化一个委托单对象
+                    var entity = new Object();
+                    entity.APPLIANCE_DETAIL_INFORMATION = qiju;
+                    entity.ID = $("#ORDER_TASK_INFORMATIONID").val();
 
-            entity.ACCEPT_ORGNIZATION = $("#ACCEPT_ORGNIZATION option:selected").val();
-            entity.INSPECTION_ENTERPRISE = $("#INSPECTION_ENTERPRISE").val();
-            entity.INSPECTION_ENTERPRISE_ADDRESS = $("#INSPECTION_ENTERPRISE_ADDRESS").val();
-            entity.INSPECTION_ENTERPRISE_POST = $("#INSPECTION_ENTERPRISE_POST").val();
-            entity.CONTACTS = $("#CONTACTS").val();
-            entity.CONTACT_PHONE = $("#CONTACT_PHONE").val();
-            entity.FAX = $("#FAX").val();
-            entity.CERTIFICATE_ENTERPRISE = $("#CERTIFICATE_ENTERPRISE").val();
-            entity.CERTIFICATE_ENTERPRISE_ADDRESS = $("#CERTIFICATE_ENTERPRISE_ADDRESS").val();
-            entity.CERTIFICATE_ENTERPRISE_POST = $("#CERTIFICATE_ENTERPRISE_POST").val();
-            entity.CONTACTS2 = $("#CONTACTS2").val();
-            entity.CONTACT_PHONE2 = $("#CONTACT_PHONE2").val();
-            entity.FAX2 = $("#FAX2").val();
-            entity.CUSTOMER_SPECIFIC_REQUIREMENTS = $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val();
-
-            //将委托单信息发送到服务器
-            $.ajax({
-                url: "/ORDER_TASK_INFORMATION/Save",
-                type: "Post",
-                dataType: "json",
-                data: {
-                    entity: entity
-                },
-                success: function (data) {
-                    if (data.Code == 0) {
-                        $.messager.alert('操作提示', "保存成功", 'info');
-                    }
-                    else {
-                        $("#ORDER_TASK_INFORMATIONID").val(data.Id);//记录该委托单的id，如果为空，表示为新增，否则为修改
-                        if ($.messager) {
-                            $.messager.defaults.ok = '继续';
-                            $.messager.defaults.cancel = '返回';
-
-                            $.messager.confirm('操作提示', data.Message, function (r) {
-                                if (!r) {
-                                    window.location.href = 'javascript:history.go(-1)';
+                    entity.ACCEPT_ORGNIZATION = $("#ACCEPT_ORGNIZATION option:selected").val();//受理单位
+                    entity.INSPECTION_ENTERPRISE = $("#INSPECTION_ENTERPRISE").val();//送检单位
+                    entity.INSPECTION_ENTERPRISE_ADDRESS = $("#INSPECTION_ENTERPRISE_ADDRESS").val();//送检单位地址
+                    entity.INSPECTION_ENTERPRISE_POST = $("#INSPECTION_ENTERPRISE_POST").val();//送检单位邮政编码
+                    entity.CONTACTS = $("#CONTACTS").val();//联系人
+                    entity.CONTACT_PHONE = $("#CONTACT_PHONE").val();//联系电话
+                    entity.FAX = $("#FAX").val();//传真
+                    entity.CERTIFICATE_ENTERPRISE = $("#CERTIFICATE_ENTERPRISE").val();//证书单位
+                    entity.CERTIFICATE_ENTERPRISE_ADDRESS = $("#CERTIFICATE_ENTERPRISE_ADDRESS").val();//证书单位地址
+                    entity.CERTIFICATE_ENTERPRISE_POST = $("#CERTIFICATE_ENTERPRISE_POST").val();//证书单位邮政编码
+                    entity.CONTACTS2 = $("#CONTACTS2").val();//联系人2
+                    entity.CONTACT_PHONE2 = $("#CONTACT_PHONE2").val();//联系电话2
+                    entity.FAX2 = $("#FAX2").val();//传真2
+                    entity.CUSTOMER_SPECIFIC_REQUIREMENTS = $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val();//客户特殊要求
+                    if (ifshuju(entity)) {
+                        //将委托单信息发送到服务器
+                        $.ajax({
+                            url: "/ORDER_TASK_INFORMATION/Save",
+                            type: "Post",
+                            dataType: "json",
+                            data: {
+                                entity: entity
+                            },
+                            success: function (data) {
+                                if (data.Code == 1) {
+                                    $("#order input[type='text']").each(function () {
+                                        $(this).val("");
+                                    });
+                                    $("#ACCEPT_ORGNIZATION").val("");
+                                    $("#ApplianceDate").edatagrid("loadData", [])
+                                    $.messager.alert('操作提示', "发送实验室成功", 'info');
                                 }
-                            });
-                        }
+                                else {
+                                    $("#ORDER_TASK_INFORMATIONID").val(data.Id);//记录该委托单的id，如果为空，表示为新增，否则为修改
+                                    if ($.messager) {
+                                        $.messager.defaults.ok = '继续';
+                                        $.messager.defaults.cancel = '返回';
+
+                                        $.messager.confirm('操作提示', data.Message, function (r) {
+                                            if (!r) {
+                                                window.location.href = 'javascript:history.go(-1)';
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        });
                     }
                 }
-            });
+            })
         }
 
         $('#ApplianceDate').edatagrid({
@@ -327,44 +509,45 @@
                    }
                }
             ],
-            columns: [[{
-                field: 'ID', title: '选中', width: 35, formatter:
-                  function (value, row, index) {
-                      return '<input id=\"' + row.ID + '\" type=\"checkbox\">';
-                  }
-            }, {
-                field: 'APPLIANCE_NAME', title: '器具名称', width: 135, editor: {
-                    type: 'validatebox', options: {
-                        precision: 1,
-                        required: true,
-                        missingMessage: '必填'
-                    }
-                }
-            }, {
-                field: 'VERSION', title: '型号', width: 65, editor: {
-                    type: 'validatebox', options: {
-                        required: true,
-                        missingMessage: '必填'
-                    }
-                }
-            }, {
-                field: 'NUM', title: '数量', width: 35, editor: {
-                    type: 'validatebox', options: {
-                        required: true,
-                        missingMessage: '必填'
-                    }
-                }
-            }, {
-                field: 'APPEARANCE_STATUS', title: '外观状态', width: 65, editor: {
+            columns: [[
+       { field: 'ORDER_TASK_INFORMATIONID', title: 'ORDER_TASK_INFORMATIONID', width: 64, hidden: true }
+       , {
+           field: 'APPLIANCE_NAME', title: '器具名称', width: 135, editor: {
+               type: 'validatebox', options: {
+                   precision: 1,
+                   required: true,
+                   missingMessage: '必填'
+               }
+           }
+       }, {
+           field: 'VERSION', title: '型号', width: 65, editor: {
+               type: 'validatebox', options: {
+                   required: true,
+                   missingMessage: '必填'
+               }
+           }
+       }, { field: 'FORMAT', title: '规格', width: 65, editor: 'text' },
+       { field: 'FACTORY_NUM', title: '出厂编号', width: 65, editor: 'text' },
+       {
+           field: 'NUM', title: '数量', width: 35
+                , editor: {
                     type: 'validatebox', options: {
                         required: true,
                         missingMessage: '必填'
                     }
                 }
-            }
-           , { field: 'FORMAT', title: '规格', width: 65, editor: 'text' }
-           , { field: 'FACTORY_NUM', title: '出厂编号', width: 65, editor: 'text' }
-           , { field: 'ATTACHMENT', title: '附件', width: 135, editor: 'text' }
+
+       }, { field: 'ATTACHMENT', title: '附件', width: 135, editor: 'text' }
+           , {
+           field: 'APPEARANCE_STATUS', title: '外观状态', width: 65, editor: {
+               type: 'validatebox', options: {
+                   required: true,
+                   missingMessage: '必填'
+               }
+           }
+       }
+
+
            , { field: 'MAKE_ORGANIZATION', title: '制造单位', width: 65, editor: 'text' }
               , {
                   field: 'UNDERTAKE_LABORATORYID', title: '承接实验室', width: 135, editor: {
@@ -372,7 +555,7 @@
                       options: {
                           multiple: true,
                           data: [{ value: '电能', text: '电能' }, { value: '指示仪表', text: '指示仪表' },
-                              { value: '数字仪表', text: '数字仪表' }, { value: '互感器仪表', text: '互感器仪表' }, { value: '数表三相', text: '数表三相' }],
+                              { value: '数字仪表', text: '数字仪表' }, { value: '互感器', text: '互感器' }, { value: '数表三相', text: '数表三相' }],
                           panelHeight: 'auto'
                       }
                   }
@@ -392,7 +575,7 @@
 
 </script>
 @*百度模式输入显示下拉框*@
-<link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+@*<link href="~/Content/jquery-ui.min.css" rel="stylesheet" />*@
 <script src="~/Scripts/jquery-ui.min.js"></script>
 <script type="text/javascript">
     //输入显示下拉框

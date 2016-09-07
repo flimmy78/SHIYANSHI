@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    //器具状态
+    /// <summary>
+    /// 器具状态
+    /// </summary>
     public enum ORDER_STATUS
     {
         /// <summary>
@@ -40,7 +42,9 @@ namespace Common
 
     }
 
-    //报告状态
+    /// <summary>
+    /// 报告状态
+    /// </summary>
     public enum REPORTSTATUS
     {
         /// <summary>

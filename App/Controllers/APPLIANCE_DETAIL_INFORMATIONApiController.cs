@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
- 
+
 using System.Text;
 using System.EnterpriseServices;
 using System.Configuration;
@@ -33,10 +33,19 @@ namespace Langben.App.Controllers
             if (!string.IsNullOrWhiteSpace(id))
             {
 
-                id = id.Replace("@","&");
+                id = id.Replace("@", "&");
             }
             int total = 0;
-            List<APPLIANCE_DETAIL_INFORMATION> queryData = m_BLL.GetByParam(null, 1, 1, "ID", "DESC", id, ref total);
+            string UNDERTAKE_LABORATORYID = string.Empty;
+            List<APPLIANCE_DETAIL_INFORMATION> queryData = m_BLL.GetByParam(null, 1, 1, "DESC", "ID", id, ref total);
+            foreach (var item in queryData)
+            {
+                List<APPLIANCE_LABORATORY> list = m_BLL2.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item.ID);
+                foreach (var item2 in list)
+                {
+                    UNDERTAKE_LABORATORYID += item2.UNDERTAKE_LABORATORYID + ",";
+                }
+            }
             var data = new Common.ClientResult.DataResult
             {
                 total = total,
@@ -65,7 +74,7 @@ namespace Langben.App.Controllers
                     ,
                     END_PLAN_DATE = s.END_PLAN_DATE
                     ,
-                    ORDER_TASK_INFORMATIONID = s.ORDER_TASK_INFORMATIONIDOld
+                    ORDER_TASK_INFORMATIONID = s.ORDER_TASK_INFORMATIONID
                     ,
                     CREATETIME = s.CREATETIME
                     ,
@@ -87,10 +96,12 @@ namespace Langben.App.Controllers
                     ,
                     STORAGEINSTRUCTIONS = s.STORAGEINSTRUCTIONS
                     ,
-                    STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU
+                    STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU,
+                    VERSION = s.VERSION,
 
-
+                    UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID
                 })
+
             };
             return data;
         }
@@ -157,7 +168,7 @@ namespace Langben.App.Controllers
             };
             return data;
         }
-       
+
         /// <summary>
         /// 根据ID获取数据模型
         /// </summary>
@@ -168,7 +179,7 @@ namespace Langben.App.Controllers
             APPLIANCE_DETAIL_INFORMATION item = m_BLL.GetById(id);
             return item;
         }
- 
+
         /// <summary>
         /// 创建
         /// </summary>
@@ -177,27 +188,27 @@ namespace Langben.App.Controllers
         /// 
         [HttpPost]
         public Common.ClientResult.Result Post([FromBody]APPLIANCE_DETAIL_INFORMATION entity)
-        {           
+        {
 
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
             {
                 string currentPerson = GetCurrentPerson();
-               entity.CREATETIME = DateTime.Now;
+                entity.CREATETIME = DateTime.Now;
                 entity.CREATEPERSON = currentPerson;
-              
-                entity.ID = Result.GetNewId();   
+
+                entity.ID = Result.GetNewId();
                 string returnValue = string.Empty;
                 if (m_BLL.Create(ref validationErrors, entity))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed  + "，器具明细信息的信息的Id为" + entity.ID,"器具明细信息"
+                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，器具明细信息的信息的Id为" + entity.ID, "器具明细信息"
                         );//写入日志 
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.InsertSucceed;
                     return result; //提示创建成功
                 }
                 else
-                { 
+                {
                     if (validationErrors != null && validationErrors.Count > 0)
                     {
                         validationErrors.All(a =>
@@ -206,7 +217,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，器具明细信息的信息，" + returnValue,"器具明细信息"
+                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，器具明细信息的信息，" + returnValue, "器具明细信息"
                         );//写入日志                      
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.InsertFail + returnValue;
@@ -240,7 +251,7 @@ namespace Langben.App.Controllers
                 string returnValue = string.Empty;
                 if (m_BLL.Edit(ref validationErrors, entity))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息信息的Id为" + entity.ID,"器具明细信息"
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息信息的Id为" + entity.ID, "器具明细信息"
                         );//写入日志                   
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.UpdateSucceed;
@@ -299,7 +310,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId)+ "," + returnValue, "消息"
+                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId) + "," + returnValue, "消息"
                         );//删除失败，写入日志
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.DeleteFail + returnValue;
@@ -308,20 +319,22 @@ namespace Langben.App.Controllers
             return result;
         }
 
-       
+
 
         IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL m_BLL;
+        IBLL.IAPPLIANCE_LABORATORYBLL m_BLL2;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public APPLIANCE_DETAIL_INFORMATIONApiController()
-            : this(new APPLIANCE_DETAIL_INFORMATIONBLL()) { }
+            : this(new APPLIANCE_DETAIL_INFORMATIONBLL(), new APPLIANCE_LABORATORYBLL()) { }
 
-        public APPLIANCE_DETAIL_INFORMATIONApiController(APPLIANCE_DETAIL_INFORMATIONBLL bll)
+        public APPLIANCE_DETAIL_INFORMATIONApiController(APPLIANCE_DETAIL_INFORMATIONBLL bll, APPLIANCE_LABORATORYBLL bll2)
         {
             m_BLL = bll;
+            m_BLL2 = bll2;
         }
-        
+
     }
 }
 
