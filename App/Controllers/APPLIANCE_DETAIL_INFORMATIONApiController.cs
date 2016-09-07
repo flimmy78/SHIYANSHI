@@ -49,7 +49,7 @@ namespace Langben.App.Controllers
             var data = new Common.ClientResult.DataResult
             {
                 total = total,
-                rows = queryData.Select(s => new
+                rows = queryData.Select(s => new APPLIANCE_DETAIL_INFORMATIONShow
                 {
                     ID = s.ID
                     ,
@@ -57,7 +57,7 @@ namespace Langben.App.Controllers
                     ,
                     APPLIANCE_NAME = s.APPLIANCE_NAME
                     ,
-                    MODEL = s.VERSION,
+                    //VERSION = s.VERSION,
                     FORMAT = s.FORMAT
                     ,
                     FACTORY_NUM = s.FACTORY_NUM
@@ -74,7 +74,49 @@ namespace Langben.App.Controllers
                     ,
                     END_PLAN_DATE = s.END_PLAN_DATE
                     ,
-                    ORDER_TASK_INFORMATION = s.ORDER_TASK_INFORMATION
+                    ORDER_TASK_INFORMATION =new ORDER_TASK_INFORMATIONShow() {
+                        ID = s.ORDER_TASK_INFORMATION.ID
+                    ,
+                        ORDER_NUMBER = s.ORDER_TASK_INFORMATION.ORDER_NUMBER
+                    ,
+                        ACCEPT_ORGNIZATION = s.ORDER_TASK_INFORMATION.ACCEPT_ORGNIZATION
+                    ,
+                        INSPECTION_ENTERPRISE = s.ORDER_TASK_INFORMATION.INSPECTION_ENTERPRISE
+                    ,
+                        INSPECTION_ENTERPRISE_ADDRESS = s.ORDER_TASK_INFORMATION.INSPECTION_ENTERPRISE_ADDRESS
+                    ,
+                        INSPECTION_ENTERPRISE_POST = s.ORDER_TASK_INFORMATION.INSPECTION_ENTERPRISE_POST
+                    //,
+                    //    CONTACTS = s..ORDER_TASK_INFORMATIONCONTACTS
+                    //,
+                    //    CONTACT_PHONE = s..ORDER_TASK_INFORMATIONCONTACT_PHONE
+                    //,
+                    //    FAX = s..ORDER_TASK_INFORMATIONFAX
+                    //,
+                    //    CERTIFICATE_ENTERPRISE = s.CERTIFICATE_ENTERPRISE
+                    //,
+                    //    CERTIFICATE_ENTERPRISE_ADDRESS = s.CERTIFICATE_ENTERPRISE_ADDRESS
+                    //,
+                    //    CERTIFICATE_ENTERPRISE_POST = s.CERTIFICATE_ENTERPRISE_POST
+                    //,
+                    //    CONTACTS2 = s.CONTACTS2
+                    //,
+                    //    CONTACT_PHONE2 = s.CONTACT_PHONE2
+                    //,
+                    //    FAX2 = s.FAX2
+                    //,
+                    //    CUSTOMER_SPECIFIC_REQUIREMENTS = s.CUSTOMER_SPECIFIC_REQUIREMENTS
+                    //,
+                    //    ORDER_STATUS = s.ORDER_STATUS
+                    //,
+                    //    CREATETIME = s.CREATETIME
+                    //,
+                    //    CREATEPERSON = s.CREATEPERSON
+                    //,
+                    //    UPDATETIME = s.UPDATETIME
+                    //,
+                    //    UPDATEPERSON = s.UPDATEPERSON
+                    } 
                     ,
                     CREATETIME = s.CREATETIME
                     ,
@@ -99,7 +141,7 @@ namespace Langben.App.Controllers
                     STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU,
                     VERSION = s.VERSION,
 
-                    UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID
+                    UNDERTAKE_LABORATORYIDString = s.UNDERTAKE_LABORATORYID
                 })
 
             };
