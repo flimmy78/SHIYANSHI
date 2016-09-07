@@ -294,8 +294,11 @@
             //url: "/api/ORDER_TASK_INFORMATIONApi/Get" + $("#ORDER_TASK_INFORMATIONID").val(),
             url: "/api/ORDER_TASK_INFORMATIONApi/Get/" + id,
             type: "Get",
+            //dataType: "xml",
             // async: false,
             success: function (res) {
+                alert(res);
+                alert(res.ACCEPT_ORGNIZATION);
                 $("#ACCEPT_ORGNIZATION option:selected").val(res.ACCEPT_ORGNIZATION);//受理单位
                 $("#INSPECTION_ENTERPRISE").val(res.INSPECTION_ENTERPRISE);//送检单位
                 $("#INSPECTION_ENTERPRISE_ADDRESS").val(res.INSPECTION_ENTERPRISE_ADDRESS);//送检单位地址
