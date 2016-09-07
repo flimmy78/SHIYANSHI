@@ -81,6 +81,7 @@ namespace Langben.App.Controllers
                     entity.CREATETIME = DateTime.Now;
                     entity.CREATEPERSON = currentPerson;
                     entity.ID = Result.GetNewId();
+                    entity.ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString();
                     foreach (var item in entity.APPLIANCE_DETAIL_INFORMATION)
                     {
                         item.ID = Result.GetNewId();
