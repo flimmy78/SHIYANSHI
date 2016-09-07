@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
+//using System.Web.Mvc;
 using System.Text;
 using System.EnterpriseServices;
 using System.Configuration;
@@ -65,7 +65,7 @@ namespace Langben.App.Controllers
         /// 根据ID获取数据模型
         /// </summary>
         /// <param name="id">编号</param>
-        /// <returns></returns>
+        [HttpPost]
         public ORDER_TASK_INFORMATION Get(string id)
         {
             ORDER_TASK_INFORMATION item = m_BLL.GetById(id);

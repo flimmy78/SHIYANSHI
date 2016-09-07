@@ -63,7 +63,7 @@ namespace Langben.App.Controllers
             return View();
         }
         /// <summary>
-        /// 保存-如果已经存在，判断状态，
+        /// 保存发送-如果已经存在，判断状态，
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
@@ -73,22 +73,22 @@ namespace Langben.App.Controllers
 
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             //如果是查询出来的委托单，又增加了一个器具，点击了发送实验室，怎么处理？
-         //   if (entity != null && ModelState.IsValid)
+            //   if (entity != null && ModelState.IsValid)
             {
                 string currentPerson = GetCurrentPerson();
                 if (string.IsNullOrWhiteSpace(entity.ID))
-                { 
+                {
                     entity.CREATETIME = DateTime.Now;
                     entity.CREATEPERSON = currentPerson;
                     entity.ID = Result.GetNewId();
                     foreach (var item in entity.APPLIANCE_DETAIL_INFORMATION)
                     {
-                        item.ID= Result.GetNewId();
+                        item.ID = Result.GetNewId();
                         item.CREATETIME = DateTime.Now;
                         item.CREATEPERSON = currentPerson;
                         item.ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString();
                         item.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已分配.GetHashCode().ToString();
-                        if(string.IsNullOrWhiteSpace (item.UNDERTAKE_LABORATORYID))
+                        if (string.IsNullOrWhiteSpace(item.UNDERTAKE_LABORATORYID))
                         {
                             LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，委托单信息的信息，实验室为空", "委托单信息"
                           );//写入日志                      
@@ -100,10 +100,10 @@ namespace Langben.App.Controllers
                         {
                             foreach (var it in item.UNDERTAKE_LABORATORYID.Split(','))
                             {
-                                item.APPLIANCE_LABORATORY.Add(new APPLIANCE_LABORATORY() { ID= Result.GetNewId(), UNDERTAKE_LABORATORYID=it  });
+                                item.APPLIANCE_LABORATORY.Add(new APPLIANCE_LABORATORY() { ID = Result.GetNewId(), UNDERTAKE_LABORATORYID = it });
                             }
                         }
-                      
+
                     }
 
                     string returnValue = string.Empty;
@@ -145,6 +145,7 @@ namespace Langben.App.Controllers
             return Json(result);
 
         }
+
         public ActionResult Createto(string id)
         {
 
