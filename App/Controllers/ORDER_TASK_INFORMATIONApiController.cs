@@ -65,7 +65,7 @@ namespace Langben.App.Controllers
         /// 根据ID获取数据模型
         /// </summary>
         /// <param name="id">编号</param>
-        [HttpPost]
+        [HttpGet]
         public ORDER_TASK_INFORMATION Get(string id)
         {
             ORDER_TASK_INFORMATION item = m_BLL.GetById(id);
