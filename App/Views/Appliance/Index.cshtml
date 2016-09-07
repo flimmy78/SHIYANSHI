@@ -248,29 +248,40 @@
 
     //查询
     function seng() {
+        var row = null;
         var search = "BAR_CODE_NUM" + "@@" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "@@" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "@@" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "@@" + $("#APPLIANCE_NAME").val() + "^";
         $.ajax({
-            //url: "/api/ORDER_TASK_INFORMATIONApi/Get" + $("#ORDER_TASK_INFORMATIONID").val(),
             url: '/api/APPLIANCE_DETAIL_INFORMATIONApi/PostDataByID/' + search,
             type: "Post",
             // async: false,
             success: function (data) {
-                alert(data);
-                alert(data.BAR_CODE_NUM);
+                row = data;
             }
         })
-
+        //结束器具的编辑状态
+        $('#ApplianceDate').edatagrid('saveRow');
         // 在第二行的位置插入一个新行
         //index：要插入的行索引，如果该索引值未定义，则追加新行。
-        //row：行数据。
-        $('#dg').datagrid('insertRow', {
-            index: 1,  // 索引从0开始
-            row: {
-                APPLIANCE_NAME: '新名称',
-                age: 30,
-                note: '新消息'
-            }
+        //row：行数据。                alert(data.rows[0].APPLIANCE_NAME);
+ 
+        $('#ApplianceDate').edatagrid('appendRow', {
+           
+                APPLIANCE_NAME: row.rows[0].APPLIANCE_NAME,
+                VERSION: row.rows[0].VERSION,
+                FORMAT: row.rows[0].FORMAT,
+                FACTORY_NUM: row.rows[0].FACTORY_NUM,
+                NUM: row.rows[0].NUM,
+                ATTACHMENT: row.rows[0].ATTACHMENT,
+                APPEARANCE_STATUS: row.rows[0].APPEARANCE_STATUS,
+                MAKE_ORGANIZATION: row.rows[0].MAKE_ORGANIZATION,
+                UNDERTAKE_LABORATORYID: row.rows[0].UNDERTAKE_LABORATORYID,
+                APPLIANCE_RECIVE: row.rows[0].APPLIANCE_RECIVE,
+                REMARKS: row.rows[0].REMARKS,          
         });
+        var leng=$('#ApplianceDate').edatagrid('getSelections');
+        if (leng.length< 1) {
+            order(row.rows[0].ORDER_TASK_INFORMATIONID);
+        }
         ////器具信息绑定
         //var search = "";
         //search = "BAR_CODE_NUM" + "@@" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "@@" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "@@" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "@@" + $("#APPLIANCE_NAME").val() + "^";
@@ -278,13 +289,11 @@
 
     }
 
-    function s() {
-        var id = $("#ORDER_TASK_INFORMATIONID").val()
-        alert(id)
+    function order(id) {
         $.ajax({
             //url: "/api/ORDER_TASK_INFORMATIONApi/Get" + $("#ORDER_TASK_INFORMATIONID").val(),
             url: "/api/ORDER_TASK_INFORMATIONApi/Get/" + id,
-            type: "Post",
+            type: "Get",
             // async: false,
             success: function (res) {
                 $("#ACCEPT_ORGNIZATION option:selected").val(res.ACCEPT_ORGNIZATION);//受理单位
@@ -352,8 +361,6 @@
         }
         //复制新增
         function flexiInsertCopy() {
-
-            debugger;
             //获取选中行
             var row = $('#ApplianceDate').datagrid('getSelected');
             // 获取当前行索引
@@ -379,9 +386,6 @@
 
                     });
                 }
-
-
-
             }
             else {
                 alert('请先选择一行')
