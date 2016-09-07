@@ -5,135 +5,81 @@
 }
 @using Common
 @using Models
- 
 @section CurentPlace {
- 
-      创建  
- 
- }
-@using (Html.BeginForm("", "api/SCHEMEApi/Post"))
-{
-    <fieldset>
-        <legend>
-            <input class="a2 f2" type="submit" value="创建" />
-            <input class="a2 f2" type="button" onclick="BackList('SCHEME')" value="返回" />
-        </legend>
-        <div class="bigdiv">
-                 
-            <div class="editor-label">
-                @Html.LabelFor(model => model.NAME)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.NAME)
-                @Html.ValidationMessageFor(model => model.NAME)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.REPORT_CATEGORY)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.REPORT_CATEGORY)
-                @Html.ValidationMessageFor(model => model.REPORT_CATEGORY)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CERTIFICATE_CATEGORY)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CERTIFICATE_CATEGORY)
-                @Html.ValidationMessageFor(model => model.CERTIFICATE_CATEGORY)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.STATUS)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.STATUS)
-                @Html.ValidationMessageFor(model => model.STATUS)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ISSTOP)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.ISSTOP)
-                @Html.ValidationMessageFor(model => model.ISSTOP)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ISPUBLISH)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.ISPUBLISH)
-                @Html.ValidationMessageFor(model => model.ISPUBLISH)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.COPYID)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.COPYID)
-                @Html.ValidationMessageFor(model => model.COPYID)
-            </div>
-        <div class="editor-label">
-            <a class="anUnderLine" onclick="showModalOnly('UNDERTAKE_LABORATORYID','../../UNDERTAKE_LABORATORY');">
-                @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID) 
-            </a>：
+
+    创建
+
+}
+
+    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+            <table>
+                <tr>
+                    <td> 实验室：</td>
+                    <td>
+                        <select name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID" style="width:200px;">
+                            <option value="电能" selected="selected">电能11</option>
+                            <option value="数表三相">数表三相</option>
+                            <option value="数表单相">数表单相</option>
+                            <option value="指示仪表">指示仪表</option>
+                            <option value="直流仪器">直流仪器</option>
+                            <option value="互感器">互感器</option>
+                        </select>
+                    </td>
+
+
+                    <td> 方案模板名称：</td>
+                    <td>
+                        <input type="text" id="txtName" class="easyui-textbox" style="" />
+                    </td>
+                    <td>
+                        <a href="javascript:Save()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" style=" margin-left 10px; margin-right:10px">提交方案模板</a>
+                        <a href="../SCHEME/Index" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-back'" style=" margin-left 10px; margin-right:10px">返回</a>
+
+                    </td>
+                </tr>
+            </table>
         </div>
-        <div class="editor-field">
-            <div id="checkUNDERTAKE_LABORATORYID">            
+    </div>
+
+    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+        <div class="easyui-layout" data-options="fit:true">
+
+            <div data-options="region:'west',collapsible:false,split:false" title="树选择" style="width: 300px;">
+                <ul id="tt" class="easyui-tree" data-options="url:'/Res/tree_data1.js',method:'get',animate:true,checkbox:true"></ul>
             </div>
-            @Html.HiddenFor(model => model.UNDERTAKE_LABORATORYID)
-        </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.PUBLISHTIME)：
+
+
+            <div data-options="region:'center',split:false" title=" 右侧" style="position:relative">
+
+                <iframe id="mainframe" name="mainframe" frameborder="0" src=""></iframe>
             </div>
-            <div class="editor-field">
-                @Html.TextBox("PUBLISHTIME", ((Model != null && Model.PUBLISHTIME != null) ? Model.PUBLISHTIME.ToString().AsDateTime().ToString("yyyy-MM-dd") : ""), new { style = "width: 244px;", @class="easyui-datebox" })
-                @Html.ValidationMessageFor(model => model.PUBLISHTIME)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.PUBLISHPERSON)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.PUBLISHPERSON)
-                @Html.ValidationMessageFor(model => model.PUBLISHPERSON)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ISPUBLISHTIME)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.ISPUBLISHTIME)
-                @Html.ValidationMessageFor(model => model.ISPUBLISHTIME)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ISPUBLISHPERSON)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.ISPUBLISHPERSON)
-                @Html.ValidationMessageFor(model => model.ISPUBLISHPERSON)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CREATEPERSON)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CREATEPERSON)
-                @Html.ValidationMessageFor(model => model.CREATEPERSON)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.UPDATEPERSON)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.UPDATEPERSON)
-                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
-            </div>
+
         </div>
-    </fieldset>
-} 
+    </div>
 
 
-    
-    <script type="text/javascript">
 
-        $(function () {
-            
-        });
-              
 
-    </script>
+<script type="text/javascript">
+
+    $(function () {
+
+    });
+    $(document).ready(function () {       
+        bindShiyanshi("#UNDERTAKE_LABORATORYID");
+        //$('#UNDERTAKE_LABORATORYID').combobox({
+        //    onChange: function (n, o) {               
+        //    }
+        //});
+
+    });
+    //保存
+    function Save()
+    {
+        var UNDERTAKE_LABORATORYID =$("#UNDERTAKE_LABORATORYID")
+        alert("保存成功");
+    }
+</script>
 
 
