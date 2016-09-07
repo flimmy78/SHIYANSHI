@@ -154,6 +154,7 @@
                     $.messager.alert('操作提示', "保存成功！", 'info');
                     $("#flexigridData").datagrid("reload");
                     $("#flexigridData").datagrid("clearSelections");
+                    $('#w').dialog('close');
                 }
                 else {
                     $.messager.alert('操作提示', "保存失败！", 'info');
@@ -209,6 +210,7 @@
                         $.messager.alert('操作提示', "保存成功！", 'info');
                         $("#flexigridData").datagrid("reload");
                         $("#flexigridData").datagrid("clearSelections");
+                        $('#d').dialog('close');
                     }
                     else {
                         $.messager.alert('操作提示', "保存失败！", 'info');
@@ -338,8 +340,8 @@
                     , { field: 'STATE', title: '@Html.DisplayNameFor(model => model.STATE)', width: 64 }
                     , { field: 'REPORTSTATUS', title: '@Html.DisplayNameFor(model => model.REPORTSTATUS)', width: 64 }
                     , { field: 'APPROVAL', title: '@Html.DisplayNameFor(model => model.APPROVAL)', width: 64 }
-                    , { field: 'INSPECTION_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.INSPECTION_ENTERPRISE)', width: 64 }
-                    , { field: 'ISOVERDUE', title: '@Html.DisplayNameFor(model => model.ISOVERDUE)', width: 64 }
+                    @*, { field: 'INSPECTION_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.INSPECTION_ENTERPRISE)', width: 64 }
+                    , { field: 'ISOVERDUE', title: '@Html.DisplayNameFor(model => model.ISOVERDUE)', width: 64 }*@
             ]],
             pagination: true,
             rownumbers: true
