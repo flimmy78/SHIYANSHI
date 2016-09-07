@@ -356,8 +356,14 @@
         }
         //新增
         function flexiInsert() {
-            $('#ApplianceDate').edatagrid('addRow', { "NUM": "1" });
-            //$('#ApplianceDate').edatagrid('appendRow', { "NUM": "1" });
+            $('#ApplianceDate').edatagrid('addRow', {
+                
+                row: {
+                    "NUM": "1",
+                    "APPEARANCE_STATUS":"良好"
+                }
+            });
+         
         }
         //复制新增
         function flexiInsertCopy() {
@@ -573,7 +579,7 @@
 
 </script>
 @*百度模式输入显示下拉框*@
-<link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+@*<link href="~/Content/jquery-ui.min.css" rel="stylesheet" />*@
 <script src="~/Scripts/jquery-ui.min.js"></script>
 <script type="text/javascript">
     //输入显示下拉框
