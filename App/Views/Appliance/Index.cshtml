@@ -253,41 +253,41 @@
         var row = null;
         var search = "BAR_CODE_NUM" + "@@" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "@@" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "@@" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "@@" + $("#APPLIANCE_NAME").val() + "^";
         $.ajax({
-            url: '/api/APPLIANCE_DETAIL_INFORMATIONApi/PostDataByID/' + search,
+            url: '/api/ORDER_TASK_INFORMATIONApi/PostDataByID/' + search,
             type: "Post",
             // async: false,
-            success: function (data) {
+            success: function (row) {
                 //结束器具的编辑状态
                 $('#ApplianceDate').edatagrid('saveRow');
                 $('#ApplianceDate').edatagrid('appendRow', {
-                    APPLIANCE_NAME: data.rows[0].APPLIANCE_NAME,
-                    VERSION: data.rows[0].VERSION,
-                    FORMAT: data.rows[0].FORMAT,
-                    FACTORY_NUM: data.rows[0].FACTORY_NUM,
-                    NUM: data.rows[0].NUM,
-                    ATTACHMENT: data.rows[0].ATTACHMENT,
-                    APPEARANCE_STATUS: data.rows[0].APPEARANCE_STATUS,
-                    MAKE_ORGANIZATION: data.rows[0].MAKE_ORGANIZATION,
-                    UNDERTAKE_LABORATORYID: data.rows[0].UNDERTAKE_LABORATORYID,
-                    APPLIANCE_RECIVE: data.rows[0].APPLIANCE_RECIVE,
-                    REMARKS: data.rows[0].REMARKS,
+                    APPLIANCE_NAME: row.APPLIANCE_DETAIL_INFORMATIONShows[0].APPLIANCE_NAME,
+                    VERSION: row.APPLIANCE_DETAIL_INFORMATIONShows[0].VERSION,
+                    FORMAT: row.APPLIANCE_DETAIL_INFORMATIONShows[0].FORMAT,
+                    FACTORY_NUM: row.APPLIANCE_DETAIL_INFORMATIONShows[0].FACTORY_NUM,
+                    NUM: row.APPLIANCE_DETAIL_INFORMATIONShows[0].NUM,
+                    ATTACHMENT: row.APPLIANCE_DETAIL_INFORMATIONShows[0].ATTACHMENT,
+                    APPEARANCE_STATUS: row.APPLIANCE_DETAIL_INFORMATIONShows[0].APPEARANCE_STATUS,
+                    MAKE_ORGANIZATION: row.APPLIANCE_DETAIL_INFORMATIONShows[0].MAKE_ORGANIZATION,
+                    UNDERTAKE_LABORATORYID: row.APPLIANCE_DETAIL_INFORMATIONShows[0].UNDERTAKE_LABORATORYIDString,
+                    APPLIANCE_RECIVE: row.APPLIANCE_DETAIL_INFORMATIONShows[0].APPLIANCE_RECIVE,
+                    REMARKS: row.APPLIANCE_DETAIL_INFORMATIONShows[0].REMARKS,
                 });
-                var leng = $('#ApplianceDate').edatagrid('getSelections');
-                if (leng.length < 1) {
-                    $("#ACCEPT_ORGNIZATION option:selected").val(data.rows[0].ORDER_TASK_INFORMATION.ACCEPT_ORGNIZATION);//受理单位
-                    $("#INSPECTION_ENTERPRISE").val(data.rows[0].ORDER_TASK_INFORMATION.INSPECTION_ENTERPRISE);//送检单位
-                    $("#INSPECTION_ENTERPRISE_ADDRESS").val(data.rows[0].ORDER_TASK_INFORMATION.INSPECTION_ENTERPRISE_ADDRESS);//送检单位地址
-                    $("#INSPECTION_ENTERPRISE_POST").val(data.rows[0].ORDER_TASK_INFORMATION.INSPECTION_ENTERPRISE_POST);//送检单位邮政编码
-                    $("#CONTACTS").val(data.rows[0].ORDER_TASK_INFORMATION.CONTACTS);//联系人
-                    $("#CONTACT_PHONE").val(data.rows[0].ORDER_TASK_INFORMATION.CONTACT_PHONE);//联系电话
-                    $("#FAX").val(data.rows[0].ORDER_TASK_INFORMATION.FAX);//传真
-                    $("#CERTIFICATE_ENTERPRISE").val(data.rows[0].ORDER_TASK_INFORMATION.CERTIFICATE_ENTERPRISE);//证书单位
-                    $("#CERTIFICATE_ENTERPRISE_ADDRESS").val(data.rows[0].ORDER_TASK_INFORMATION.CERTIFICATE_ENTERPRISE_ADDRESS);//证书单位地址
-                    $("#CERTIFICATE_ENTERPRISE_POST").val(data.rows[0].ORDER_TASK_INFORMATION.CERTIFICATE_ENTERPRISE_POST);//证书单位邮政编码
-                    $("#CONTACTS2").val(data.rows[0].ORDER_TASK_INFORMATION.CONTACTS2);//联系人2
-                    $("#CONTACT_PHONE2").val(data.rows[0].ORDER_TASK_INFORMATION.CONTACT_PHONE2);//联系电话2
-                    $("#FAX2").val(data.rows[0].ORDER_TASK_INFORMATION.FAX2);//传真2
-                    $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val(data.rows[0].ORDER_TASK_INFORMATION.CUSTOMER_SPECIFIC_REQUIREMENTS);//客户特殊要求
+                var leng = $('#ApplianceDate').edatagrid('getRows');
+                if (leng.length <= 1) {
+                    $("#ACCEPT_ORGNIZATION").val(row.ACCEPT_ORGNIZATION);//受理单位
+                    $("#INSPECTION_ENTERPRISE").val(row.INSPECTION_ENTERPRISE);//送检单位
+                    $("#INSPECTION_ENTERPRISE_ADDRESS").val(row.INSPECTION_ENTERPRISE_ADDRESS);//送检单位地址
+                    $("#INSPECTION_ENTERPRISE_POST").val(row.INSPECTION_ENTERPRISE_POST);//送检单位邮政编码
+                    $("#CONTACTS").val(row.CONTACTS);//联系人
+                    $("#CONTACT_PHONE").val(row.CONTACT_PHONE);//联系电话
+                    $("#FAX").val(row.FAX);//传真
+                    $("#CERTIFICATE_ENTERPRISE").val(row.CERTIFICATE_ENTERPRISE);//证书单位
+                    $("#CERTIFICATE_ENTERPRISE_ADDRESS").val(row.CERTIFICATE_ENTERPRISE_ADDRESS);//证书单位地址
+                    $("#CERTIFICATE_ENTERPRISE_POST").val(row.CERTIFICATE_ENTERPRISE_POST);//证书单位邮政编码
+                    $("#CONTACTS2").val(row.CONTACTS2);//联系人2
+                    $("#CONTACT_PHONE2").val(row.CONTACT_PHONE2);//联系电话2
+                    $("#FAX2").val(row.FAX2);//传真2
+                    $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val(row.CUSTOMER_SPECIFIC_REQUIREMENTS);//客户特殊要求
                 }
             }
         })     

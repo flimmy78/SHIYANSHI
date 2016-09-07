@@ -6,12 +6,12 @@ using System.Web;
 namespace Langben.App.Models
 {
     public partial class ORDER_TASK_INFORMATIONShow
-    { 
+    {
         public ORDER_TASK_INFORMATIONShow()
         {
-             APPLIANCE_DETAIL_INFORMATIONShows = new List<APPLIANCE_DETAIL_INFORMATIONShow>();
+            APPLIANCE_DETAIL_INFORMATIONShows = new List<APPLIANCE_DETAIL_INFORMATIONShow>();
         }
-      public  List<APPLIANCE_DETAIL_INFORMATIONShow> APPLIANCE_DETAIL_INFORMATIONShows { get; set; }
+        public List<APPLIANCE_DETAIL_INFORMATIONShow> APPLIANCE_DETAIL_INFORMATIONShows { get; set; }
         public string ID { get; set; }
         public string ORDER_NUMBER { get; set; }
         public string ACCEPT_ORGNIZATION { get; set; }
@@ -33,6 +33,6 @@ namespace Langben.App.Models
         public string CREATEPERSON { get; set; }
         public Nullable<System.DateTime> UPDATETIME { get; set; }
         public string UPDATEPERSON { get; set; }
- 
+
     }
 }
