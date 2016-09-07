@@ -93,8 +93,18 @@ namespace Langben.IBLL
         /// <param name="entity">一个对象</param>
         /// <returns></returns>
         [OperationContract]
-        bool Edit(ref Common.ValidationErrors validationErrors, SCHEME entity); 
-    
+        bool Edit(ref Common.ValidationErrors validationErrors, SCHEME entity);
+
+        /// <summary>
+        ///  修改方案集合
+        /// </summary>
+        /// <param name="validationErrors">返回的错误信息</param>
+        /// <param name="entitys">方案集合</param>
+        /// <returns></returns>
+        [OperationContract]
+        bool EditCollection(ref ValidationErrors validationErrors, IQueryable<SCHEME> entitys);
+
+
     }
 }
 
