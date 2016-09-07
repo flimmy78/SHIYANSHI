@@ -249,11 +249,21 @@
     //查询
     function seng() {
         var search = "BAR_CODE_NUM" + "@@" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "@@" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "@@" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "@@" + $("#APPLIANCE_NAME").val() + "^";
+        $.ajax({
+            //url: "/api/ORDER_TASK_INFORMATIONApi/Get" + $("#ORDER_TASK_INFORMATIONID").val(),
+            url: '/api/APPLIANCE_DETAIL_INFORMATIONApi/PostDataByID/' + search,
+            type: "Post",
+            // async: false,
+            success: function (data) {
+                alert(data);
+                alert(data.BAR_CODE_NUM);
+            }
+        })
+
         // 在第二行的位置插入一个新行
         //index：要插入的行索引，如果该索引值未定义，则追加新行。
         //row：行数据。
         $('#dg').datagrid('insertRow', {
-            url: '/api/APPLIANCE_DETAIL_INFORMATIONApi/PostDataByID/' + search,
             index: 1,  // 索引从0开始
             row: {
                 APPLIANCE_NAME: '新名称',
@@ -261,10 +271,10 @@
                 note: '新消息'
             }
         });
-        //器具信息绑定
-        var search = "";
-        search = "BAR_CODE_NUM" + "@@" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "@@" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "@@" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "@@" + $("#APPLIANCE_NAME").val() + "^";
-        $('#ApplianceDate').edatagrid({ url: '/api/APPLIANCE_DETAIL_INFORMATIONApi/PostDataByID/' + search });
+        ////器具信息绑定
+        //var search = "";
+        //search = "BAR_CODE_NUM" + "@@" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "@@" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "@@" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "@@" + $("#APPLIANCE_NAME").val() + "^";
+        //$('#ApplianceDate').edatagrid({ url: '/api/APPLIANCE_DETAIL_INFORMATIONApi/PostDataByID/' + search });
 
     }
 
@@ -510,7 +520,9 @@
                    missingMessage: '必填'
                }
            }
-       }, {
+       }, { field: 'FORMAT', title: '规格', width: 65, editor: 'text' },
+       { field: 'FACTORY_NUM', title: '出厂编号', width: 65, editor: 'text' },
+       {
            field: 'NUM', title: '数量', width: 35
                 , editor: {
                     type: 'validatebox', options: {
@@ -519,7 +531,8 @@
                     }
                 }
 
-       }, {
+       }, { field: 'ATTACHMENT', title: '附件', width: 135, editor: 'text' }
+           , {
            field: 'APPEARANCE_STATUS', title: '外观状态', width: 65, editor: {
                type: 'validatebox', options: {
                    required: true,
@@ -527,9 +540,8 @@
                }
            }
        }
-           , { field: 'FORMAT', title: '规格', width: 65, editor: 'text' }
-           , { field: 'FACTORY_NUM', title: '出厂编号', width: 65, editor: 'text' }
-           , { field: 'ATTACHMENT', title: '附件', width: 135, editor: 'text' }
+
+
            , { field: 'MAKE_ORGANIZATION', title: '制造单位', width: 65, editor: 'text' }
               , {
                   field: 'UNDERTAKE_LABORATORYID', title: '承接实验室', width: 135, editor: {
