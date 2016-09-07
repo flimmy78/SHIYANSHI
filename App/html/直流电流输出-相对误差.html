@@ -29,7 +29,7 @@
                 <tr>
 
                     <td>
-                       <!-- <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a> -->
+                        <!-- <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a> -->
                         <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="CreateTable()">保存检测项</a>
                         <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="">重置检测项</a>
                     </td>
@@ -63,74 +63,8 @@
                         </th>
                     </tr>
                 </thead>
+
                 <tbody id="tbody_1"></tbody>
-                <tbody id="tbody_1">
-  <tr rowindex="1">
-    <td rowspan="2" align="right"><input class="easyui-textbox input-width" value="2">
-      <select class="easyui-combobox1" name="state_11_1" id="state_1_1" onchange="changeValue(this)" style="width:50px; height:25px">
-        <option value="MV">MV</option>
-        <option value="KV">KV</option>
-        <option value="V">V</option>
-        <option value="mV">mV</option>
-        <option value="μv">μv</option>
-      </select></td>
-    <td rowspan="2" align="right"><input class="easyui-textbox input-width"></td>
-    <td align="right"><input class="easyui-textbox input-width" value="">
-      <select class="easyui-combobox1" name="state" style="width:50px; height:25px">
-        <option value="MV">MV</option>
-        <option value="KV">KV</option>
-        <option value="V">V</option>
-        <option value="mV">mV</option>
-        <option value="μv">μv</option>
-      </select></td>
-    <td align="right"><input class="easyui-textbox input-width" value="">
-      <select class="easyui-combobox1" name="state" style="width:50px; height:25px">
-        <option value="MV">MV</option>
-        <option value="KV">KV</option>
-        <option value="V">V</option>
-        <option value="mV">mV</option>
-        <option value="μv">μv</option>
-      </select></td>
-    <td align="right"><input class="easyui-textbox input-width" value="">
-      <select class="easyui-combobox1" name="state2" style="width:50px; height:25px">
-        <option value="MV">MV</option>
-        <option value="KV">KV</option>
-        <option value="V">V</option>
-        <option value="mV">mV</option>
-        <option value="μv">μv</option>
-      </select></td>
-    <td align="right"><input class="easyui-textbox input-width"></td>
-    <td align="right"><input class="easyui-textbox input-width"></td>
-  </tr>
-  <tr rowindex="2">
-    <td align="right"><input class="easyui-textbox input-width" value="">
-      <select class="easyui-combobox1" name="state" style="width:50px; height:25px">
-        <option value="MV">MV</option>
-        <option value="KV">KV</option>
-        <option value="V">V</option>
-        <option value="mV">mV</option>
-        <option value="μv">μv</option>
-      </select></td>
-    <td align="right"><input class="easyui-textbox input-width" value="">
-      <select class="easyui-combobox1" name="state" style="width:50px; height:25px">
-        <option value="MV">MV</option>
-        <option value="KV">KV</option>
-        <option value="V">V</option>
-        <option value="mV">mV</option>
-        <option value="μv">μv</option>
-      </select></td>
-    <td align="right"><input class="easyui-textbox input-width" value="">
-      <select class="easyui-combobox1" name="state3" style="width:50px; height:25px">
-        <option value="MV">MV</option>
-        <option value="KV">KV</option>
-        <option value="V">V</option>
-        <option value="mV">mV</option>
-        <option value="μv">μv</option>
-      </select></td>
-    <td align="right"><input class="easyui-textbox input-width"></td>
-    <td align="right"><input class="easyui-textbox input-width"></td>
-  </tr>
-</tbody>
                 <tfoot>
                     <tr>
                         <td colspan="7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open'); set('1')">增加量程</a></td>
@@ -176,24 +110,33 @@
          }
          }]" style="width:400px;height:200px;padding:10px">
         <table>
-                <tr>
-                    <td width="80" align="right">量程值：</td>
-                    <td><input type="text" id="txtNumber" name="txtNumber" class="easyui-textbox required digits" style="width:200px" /></td>
-                </tr>
-                <tr>
-                    <td align="right">检测点数：</td>
-                    <td><input type="text" id="txtPoint" name="txtPoint" class="easyui-textbox required digits" style="width:200px" /></td>
-                </tr>
-                <tr>
-                    <td align="right">小数点位数：</td>
-                    <td><input type="text" id="txtPointLen" name="txtPointLen" class="easyui-textbox required digits" style="width:200px" /></td>
-                </tr>
-      </table>
+            <tr>
+                <td width="80" align="right">量程值：</td>
+                <td><input type="text" id="txtNumber" name="txtNumber" class="easyui-textbox required digits" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">检测点数：</td>
+                <td><input type="text" id="txtPoint" name="txtPoint" class="easyui-textbox required digits" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">小数点位数：</td>
+                <td><input type="text" id="txtPointLen" name="txtPointLen" class="easyui-textbox required digits" style="width:200px" /></td>
+            </tr>
+        </table>
     </div>
     <!--/增加量程弹层-->
 
     <script type="text/javascript" language="javascript">
-     
+        var changeHTML = "onchange=\"changeValue(this)\"";
+        //
+        var dlselectHTML = "<select class=\"easyui-combobox1\" style=\"width:50px; height:25px\">" +
+                            "<option value=\"A\">A</option> " +
+                            "<option value=\"KA\">KA</option>" +
+                            "<option value=\"mA\">mA</option>  " +
+                            "<option value=\"μA\">μA</option>" +
+                            "<option value=\"nA\">nA</option> " +
+                            "<option value=\"pA\">pA</option> " +
+                            "</select>";
         //共有的通道数量
         var tableIdx = 1;
         //创建通道
@@ -212,8 +155,8 @@
 
 
         };
-		
-		//增加量程
+
+        //增加量程
         function set(idx) {
             $("#rowindex").val(idx);
             // alert($("#rowindex").val());
@@ -221,39 +164,50 @@
         function CreateRow() {
             var idx = $("#rowindex").val();
             var rowspanIdx = $("#txtPoint").val();     //检测点数
-            var txtNumber = $("#txtNumber").val(); //量程
+            txtNumber = $("#txtNumber").val(); //量程
             var standardValue = "";
             var htmlString = [];
             var rowLength = $("#tbody_" + idx + " tr").length;
             for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
                 rowLength++;
                 htmlString.push("<tr rowindex='" + rowLength + "'>");
-                if (rowidx == 0)
-                    htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"right\"><input class=\"easyui-textbox input-width\" value='" + txtNumber + "' /><select class=\"easyui-combobox1\" name=\"state_" + tableIdx + rowLength + "_" + rowLength + "\" id=\"state_" + tableIdx + "_" + rowLength + "\" onchange=\"changeValue(this)\" style=\"width:50px; height:25px\" ><option value=\"MV\">MV</option><option value=\"KV\">KV</option><option value=\"V\">V</option><option value=\"mV\">mV</option><option value=\"μv\">μv</option></select></td>");
+                if (rowidx == 0) {
+                    htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"right\"><input class=\"easyui-textbox input-width\" value='" + txtNumber + "' />" + $(dlselectHTML).attr("onchange", "changeValue(this)").attr("name", "state_" + tableIdx + "_" + rowLength + "").attr("id", "state_" + tableIdx + "_" + rowLength + "")[0].outerHTML + "</td>");
+                    htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"right\"><input class=\"easyui-textbox input-width\" value=''  /></td>");
+                }
 
-                for (var td1 = 0; td1 < 3; td1++) {
+                for (var td1 = 0; td1 < 2; td1++) {
                     if (td1 == 0)//标准值这列
                         if (rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10)
                             standardValue = calculate(rowspanIdx)[rowidx];
                         else
                             standardValue = "";
-                    htmlString.push("<td align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' /><select class=\"easyui-combobox1\" name=\"state\" style=\"width:50px; height:25px\"><option value=\"MV\">MV</option><option value=\"KV\">KV</option><option value=\"V\">V</option><option value=\"mV\">mV</option><option value=\"μv\">μv</option></select></td>");
+                    var changerHTML = "onblur='changeBZ(this)'";
+                    if (td1 == 1) {
+                        changeHTML = "";
+                        standardValue = "";
+                    }
+                    htmlString.push("<td  align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' " + changerHTML + "/>" + dlselectHTML + "</td>");
+                    //else
+                    //  htmlString.push("<td  align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' />" + dlselectHTML + "</td>");
                 }
                 for (var td2 = 0; td2 < 2; td2++) {
+
                     htmlString.push("<td align=\"right\"><input  class=\"easyui-textbox input-width\" /></td>");
                 }
                 htmlString.push("<td><input  class=\"easyui-textbox input-width\" /></td>");
                 htmlString.push("</tr>");
             }
-            htmlString = htmlString.join("");           
+            htmlString = htmlString.join("");
             var tagRow = $("#tbody_" + idx).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
         }
-
+        var txtNumber = "";
+        var pointLen = "";
         ///计算标准值
         function calculate(point) {
-            var txtNumber = $("#txtNumber").val(); //量程
-            var pointLen = $("#txtPointLen").val(); //小数点位数
+            pointLen = $("#txtPointLen").val(); //小数点位数
+            txtNumber = $("#txtNumber").val(); //量程
             var arry = new Array();
             if (point == 3) {
                 //输入的检测点是3的时候，按照量程*100%，量程*60%，量程*10%作为默认标准值显示
@@ -285,7 +239,7 @@
             return arry;
         }
 
-        //优化保留两位小数 zhanghui
+        //优化保留两位小数 zh
         Number.prototype.toFixed = function toFixed(s) {
             var IsFuShu = false;//判断是否是负数，负数单独处理
             var je = 0;
@@ -334,16 +288,37 @@
             //})
             var bIdx = 0;
             var t = $("#" + obj.id + " option:selected").text();
-            $("#tongdao_" + idx + " tr:gt(" + (parseInt(rowIndex)) + "):lt(" + (parseInt(rowspanCount))+ ") td select").each(function (eIdx) {
-                if (bIdx <= eIdx)
-                    {
+            $("#tongdao_" + idx + " tr:gt(" + (parseInt(rowIndex)) + "):lt(" + (parseInt(rowspanCount)) + ") td select").each(function (eIdx) {
+                if (bIdx <= eIdx) {
                     $(this).children("option[selected='selected']").removeAttr("selected");
-                    $(this).children("option[value='"+t+"']").attr("selected", true);
+                    $(this).children("option[value='" + t + "']").attr("selected", true);
                     bIdx++;
                 }
             });
-         
+
+        }
+
+        ///计算标准值
+        var changeBZ = function (obj) {
+            //获取电阻值
+            var dzz = $(obj).parent().parent().parent().find("tr:eq(0)").find("td:eq(1)").find("input").val();
+            //获取读数值
+            var dsz = "";
+            var idx = "";
+            if ($(obj).parent().parent().find('td').eq(0).attr("rowspan") == undefined) {
+                dsz = $(obj).parent().parent().find("td:eq(1)").find("input").val();
+                idx = 2;
+            }
+            else {
+                dsz = $(obj).parent().parent().find("td:eq(3)").find("input").val();
+                idx = 4;
+            }
+            if (dzz == "")
+                $(obj).parent().parent().find('td').eq(idx).find('input').val(parseFloat(dsz).toFixed(pointLen));
+            else
+                $(obj).parent().parent().find('td').eq(idx).find('input').val((parseFloat(dsz) / parseFloat(dzz)).toFixed(pointLen));
         }
     </script>
 </body>
+
 </html>

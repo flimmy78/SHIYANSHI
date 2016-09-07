@@ -278,8 +278,8 @@ namespace Langben.App.Controllers
                     ,
                     EQUIPMENT_STATUS_VALUUMN = s.EQUIPMENT_STATUS_VALUUMN
                     ,
-                    NAME = s.NAME
-
+                    NAME = s.NAME,
+                    VERSION=s.VERSION
                 }
 
                     )
