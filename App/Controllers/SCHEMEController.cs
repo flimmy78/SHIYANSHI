@@ -123,7 +123,8 @@ namespace Langben.App.Controllers
                 result.Code = Common.ClientCode.Fail;
                 result.Message = Suggestion.InsertFail + returnValue;
                 return Json(result); //提示插入失败
-            }           
+            }   
+                 
         }
 
         /// <summary>
@@ -137,65 +138,72 @@ namespace Langben.App.Controllers
         public ActionResult UpdateSave(string ID,string NAME, string UNDERTAKE_LABORATORYID, string RULEIDs)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
-            SCHEME entity = m_BLL.GetById(ID);
+            if (ID != null && ID.Trim() != "")
+            {
+                SCHEME entity = m_BLL.GetById(ID);
 
 
-            if (entity != null && ModelState.IsValid)
-            {   //数据校验
+                if (entity != null && ModelState.IsValid)
+                {   //数据校验
 
-                string currentPerson = GetCurrentPerson();
-                entity.UPDATEPERSON = currentPerson;
-                entity.UPDATETIME = DateTime.Now;
-                entity.NAME = NAME;
-                entity.UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID;
+                    string currentPerson = GetCurrentPerson();
+                    entity.UPDATEPERSON = currentPerson;
+                    entity.UPDATETIME = DateTime.Now;
+                    entity.NAME = NAME;
+                    entity.UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID;
 
-                //if (RULEIDs != null && RULEIDs.Trim() != "")
-                //{
-                //    string[] RULEIDList = RULEIDs.Split(',');
-                //    foreach (string ruleID in RULEIDList)
-                //    {
-                //        if (ruleID != null && ruleID.Trim() != "")
-                //        {
-                //            SCHEME_RULE item = new SCHEME_RULE();
-                //            item.CREATEPERSON = currentPerson;
-                //            item.CREATETIME = entity.CREATETIME;
-                //            item.RULEID = ruleID;
-                //            item.SCHEMEID = entity.ID;
-                //            item.ID = Result.GetNewId();
-                //            entity.SCHEME_RULE.Add(item);
-                //        }
-                //    }
-                //}             
+                    //if (RULEIDs != null && RULEIDs.Trim() != "")
+                    //{
+                    //    string[] RULEIDList = RULEIDs.Split(',');
+                    //    foreach (string ruleID in RULEIDList)
+                    //    {
+                    //        if (ruleID != null && ruleID.Trim() != "")
+                    //        {
+                    //            SCHEME_RULE item = new SCHEME_RULE();
+                    //            item.CREATEPERSON = currentPerson;
+                    //            item.CREATETIME = entity.CREATETIME;
+                    //            item.RULEID = ruleID;
+                    //            item.SCHEMEID = entity.ID;
+                    //            item.ID = Result.GetNewId();
+                    //            entity.SCHEME_RULE.Add(item);
+                    //        }
+                    //    }
+                    //}             
 
-                string returnValue = string.Empty;
-                if (m_BLL.Edit(ref validationErrors, entity))
-                {
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，方案信息的Id为" + entity.ID, "方案"
-                        );//写入日志                   
-                    result.Code = Common.ClientCode.Succeed;
-                    result.Message = Suggestion.UpdateSucceed;
-                    return Json(result); //提示更新成功 
-                }
-                else
-                {
-                    if (validationErrors != null && validationErrors.Count > 0)
+                    string returnValue = string.Empty;
+                    if (m_BLL.Edit(ref validationErrors, entity))
                     {
-                        validationErrors.All(a =>
-                        {
-                            returnValue += a.ErrorMessage;
-                            return true;
-                        });
+                        LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，方案信息的Id为" + entity.ID, "方案"
+                            );//写入日志                   
+                        result.Code = Common.ClientCode.Succeed;
+                        result.Message = Suggestion.UpdateSucceed;
+                        return Json(result); //提示更新成功 
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，方案信息的Id为" + entity.ID + "," + returnValue, "方案"
-                        );//写入日志   
-                    result.Code = Common.ClientCode.Fail;
-                    result.Message = Suggestion.UpdateFail + returnValue;
-                    return Json(result); //提示更新失败
+                    else
+                    {
+                        if (validationErrors != null && validationErrors.Count > 0)
+                        {
+                            validationErrors.All(a =>
+                            {
+                                returnValue += a.ErrorMessage;
+                                return true;
+                            });
+                        }
+                        LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，方案信息的Id为" + entity.ID + "," + returnValue, "方案"
+                            );//写入日志   
+                        result.Code = Common.ClientCode.Fail;
+                        result.Message = Suggestion.UpdateFail + returnValue;
+                        return Json(result); //提示更新失败
+                    }
                 }
+                result.Code = Common.ClientCode.FindNull;
+                result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";
+                return Json(result); //提示输入的数据的格式不对   
             }
-            result.Code = Common.ClientCode.FindNull;
-            result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";
-            return Json(result); //提示输入的数据的格式不对   
+            else
+            {
+                return CreateSave(NAME, UNDERTAKE_LABORATORYID, RULEIDs);
+            }
         }
 
         // DELETE api/<controller>/5
@@ -237,7 +245,7 @@ namespace Langben.App.Controllers
                         result.Message = Suggestion.DeleteFail + returnValue;
                     }
                 }
-                else if (Op == "停用")
+                else if (Op == "停用" || Op=="启用")
                 {
                     List<SCHEME> list = new List<SCHEME>();
                     foreach (string id in deleteId)
@@ -246,7 +254,7 @@ namespace Langben.App.Controllers
                         string currentPerson = GetCurrentPerson();
                         entity.UPDATEPERSON = currentPerson;
                         entity.UPDATETIME = DateTime.Now;
-                        entity.ISSTOP = "停用";
+                        entity.ISSTOP = Op;
                         list.Add(entity);
                     }                    
                     if (m_BLL.EditCollection(ref validationErrors, list.AsQueryable<SCHEME>()))
@@ -268,7 +276,7 @@ namespace Langben.App.Controllers
             return Json(result);
         }
         /// <summary>
-        /// 创建
+        /// 停用
         /// </summary>
         /// <param name="NAME">方案名称</param>       
         /// <param name="UNDERTAKE_LABORATORYID">实验室编号</param>
@@ -325,10 +333,14 @@ namespace Langben.App.Controllers
         /// <param name="id">主键</param>
         /// <returns></returns> 
         [SupportFilter] 
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string id,string op)
         {
             ViewBag.Id = id;
             SCHEME entity = m_BLL.GetById(id);
+            if (op != null && op == "复制")
+            {
+                entity.ID = "";
+            }
             return View(entity);
         }
         IBLL.ISCHEMEBLL m_BLL;
