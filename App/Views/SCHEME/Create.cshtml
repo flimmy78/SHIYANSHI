@@ -12,6 +12,14 @@
 }
 
     <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        @if (@ViewBag.UNDERTAKE_LABORATORYID != null)
+        {
+            <input type="hidden" id="hideUNDERTAKE_LABORATORYID" value="@ViewBag.UNDERTAKE_LABORATORYID" />
+        }
+        else
+        {
+            <input type="hidden" id="hideUNDERTAKE_LABORATORYID" value=""/>
+        }
         <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
             <table>
                 <tr>
@@ -68,6 +76,7 @@
     });
     $(document).ready(function () {       
         bindShiyanshi("#UNDERTAKE_LABORATORYID");
+        $("#UNDERTAKE_LABORATORYID").val($("#hideUNDERTAKE_LABORATORYID").val()).change();
         //$('#UNDERTAKE_LABORATORYID').combobox({
         //    onChange: function (n, o) {               
         //    }

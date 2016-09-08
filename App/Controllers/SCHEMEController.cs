@@ -57,8 +57,9 @@ namespace Langben.App.Controllers
         /// <param name="id">主键</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult Create()
-        {            
+        public ActionResult Create(string UNDERTAKE_LABORATORYID)
+        {
+            ViewBag.UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID;
             return View();
         }
 
