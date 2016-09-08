@@ -35,26 +35,14 @@
         var FACTORY_NUM = rec.name.split(',')[1];
         var VERSION = rec.name.split(',')[2];
         var APPLIANCE_NAME = rec.name.split(',')[3];
-        //getCity($("#BAR_CODE_NUM"));
-        //$("<option></option>")
-        //           .val(BAR_CODE_NUM)
-        //           .text(BAR_CODE_NUM)
-        //           .appendTo($("#BAR_CODE_NUM"));
-        getCity($("#FACTORY_NUM"));
-        $("<option></option>")
-                   .val(FACTORY_NUM)
-                   .text(FACTORY_NUM)
-                   .appendTo($("#FACTORY_NUM"));
-        getCity($("#VERSION"));
-        $("<option></option>")
-                   .val(VERSION)
-                   .text(VERSION)
-                   .appendTo($("#VERSION"));
-        getCity($("#APPLIANCE_NAME"));
-        $("<option></option>")
-                   .val(APPLIANCE_NAME)
-                   .text(APPLIANCE_NAME)
-                   .appendTo($("#APPLIANCE_NAME"));
+        $('#FACTORY_NUM').combobox('clear');
+        $('#FACTORY_NUM').combobox('setValue', FACTORY_NUM);
+        $('#VERSION').combobox('clear');
+        $('#VERSION').combobox('setValue', VERSION);
+        $('#BAR_CODE_NUM').combobox('clear');
+        $('#BAR_CODE_NUM').combobox('setValue', VERSION);
+        $('#APPLIANCE_NAME').combobox('clear');
+        $('#APPLIANCE_NAME').combobox('setValue', VERSION);
     }
     //条形码
     var BAR_CODE_NUM = function (param, success, error) {
@@ -186,13 +174,12 @@
     };
 </script>
 <div>
-    条形码：@*<input id="BAR_CODE_NUM" name="BAR_CODE_NUM" class="easyui-combobox" style="width:250px;" data-options="loader:BAR_CODE_NUM,mode:'remote',valueField:'id',textField:'name',onSelect:function(rec){
-
-        }" />*@
+    条形码：<input id="BAR_CODE_NUM" name="BAR_CODE_NUM" class="easyui-combobox" style="width:250px;" data-options="loader:BAR_CODE_NUM,mode:'remote',valueField:'id',textField:'name',onSelect:function(rec){
+               fuzhi(rec)
+        }" />
     出厂编号：<input id="FACTORY_NUM" name="FACTORY_NUM" class="easyui-combobox" style="width:250px;" data-options="loader:FACTORY_NUM,mode:'remote',valueField:'id',textField:'name',onSelect:function(rec){fuzhi(rec)}" />
-    @*出厂编号：<input id="FACTORY_NUM" name="FACTORY_NUM" class="easyui-combobox" style="width:250px;" data-options="loader:FACTORY_NUM,mode:'remote',valueField:'id',textField:'name',onSelect:function(rec){$('#BAR_CODE_NUM').val(rec.name.split(',')[0]);$('#FACTORY_NUM').val(rec.name.split(',')[1]);$('#VERSION').val(rec.name.split(',')[2]);$('#APPLIANCE_NAME').val(rec.name.split(',')[3])}" />*@
-    型号：<input id="VERSION" name="VERSION" class="easyui-combobox" style="width:250px;" data-options="loader:VERSION,mode:'remote',valueField:'id',textField:'name',onSelect:function(rec){$('#BAR_CODE_NUM').val(rec.name.split(',')[0]);$('#FACTORY_NUM').val(rec.name.split(',')[1]);$('#VERSION').val(rec.name.split(',')[2]);$('#APPLIANCE_NAME').val(rec.name.split(',')[3])}" />
-    器具名称：<input id="APPLIANCE_NAME" name="APPLIANCE_NAME" class="easyui-combobox" style="width:250px;" data-options="loader:APPLIANCE_NAME,mode:'remote',valueField:'id',textField:'name',onSelect:function(rec){$('#BAR_CODE_NUM').val(rec.name.split(',')[0]);$('#FACTORY_NUM').val(rec.name.split(',')[1]);$('#VERSION').val(rec.name.split(',')[2]);$('#APPLIANCE_NAME').val(rec.name.split(',')[3])}" />
+    型号：<input id="VERSION" name="VERSION" class="easyui-combobox" style="width:250px;" data-options="loader:VERSION,mode:'remote',valueField:'id',textField:'name',onSelect:function(rec){fuzhi(rec)}" />
+    器具名称：<input id="APPLIANCE_NAME" name="APPLIANCE_NAME" class="easyui-combobox" style="width:250px;" data-options="loader:APPLIANCE_NAME,mode:'remote',valueField:'id',textField:'name',onSelect:function(rec){fuzhi(rec)}" />
 </div>
 <br style="clear:both;" />
 <br style="clear:both;" />
