@@ -8,24 +8,193 @@
 @*表格*@
 <script src="~/Scripts/jquery.edatagrid.js"></script>
 <style type="text/css">
-
-    body{height:2000px}
-</style><style type="text/css">
+    body {
+        height: 2000px;
+    }
+</style>
+<style type="text/css">
     td {
         height: 25px;
     }
-</style> 
+</style>
 @section HeadContent {
 
     创建
 
 }
+<script type="text/javascript">
+    function getCity(City) {
+        $(City).empty();
+        $("<option></option>")
+                .val("")
+                .text("请选择")
+                .appendTo($(City));
+    }
+    function fuzhi(rec) {
+        var BAR_CODE_NUM = rec.name.split(',')[0];
+        var FACTORY_NUM = rec.name.split(',')[1];
+        var VERSION = rec.name.split(',')[2];
+        var APPLIANCE_NAME = rec.name.split(',')[3];
+        //getCity($("#BAR_CODE_NUM"));
+        //$("<option></option>")
+        //           .val(BAR_CODE_NUM)
+        //           .text(BAR_CODE_NUM)
+        //           .appendTo($("#BAR_CODE_NUM"));
+        getCity($("#FACTORY_NUM"));
+        $("<option></option>")
+                   .val(FACTORY_NUM)
+                   .text(FACTORY_NUM)
+                   .appendTo($("#FACTORY_NUM"));
+        getCity($("#VERSION"));
+        $("<option></option>")
+                   .val(VERSION)
+                   .text(VERSION)
+                   .appendTo($("#VERSION"));
+        getCity($("#APPLIANCE_NAME"));
+        $("<option></option>")
+                   .val(APPLIANCE_NAME)
+                   .text(APPLIANCE_NAME)
+                   .appendTo($("#APPLIANCE_NAME"));
+    }
+    //条形码
+    var BAR_CODE_NUM = function (param, success, error) {
+        //获取输入的值
+        var q = param.q || "";
+        //此处q的length代表输入多少个字符后开始查询
+        if (q.length <= 0) return false;
+        $.ajax({
+            url: "../Appliance/SearchAutoComplete/BAR_CODE_NUM",
+            type: "post",
+            data: {
+                //传值，还是JSON数据
+                term: q
+            },
+            //重要，如果写jsonp会报转换错误，此处不写都可以
+            dataType: "json",
+            success: function (data) {
+                //关键步骤，遍历一个MAP对象
+                var items = $.map(data, function (item) {
+                    return {
+                        id: item.label,
+                        name: item.label
+                    };
+                });
+                //执行loader的success方法
+                success(items);
+            },
+            //异常处理
+            error: function (xml, text, msg) {
+                error.apply(this, arguments);
+            }
+        });
+    };
+    //出厂编号
+    var FACTORY_NUM = function (param, success, error) {
+        //获取输入的值
+        var q = param.q || "";
+        //此处q的length代表输入多少个字符后开始查询
+        if (q.length <= 0) return false;
+        $.ajax({
+            url: "../Appliance/SearchAutoComplete/FACTORY_NUM",
+            type: "post",
+            data: {
+                //传值，还是JSON数据
+                term: q
+            },
+            //重要，如果写jsonp会报转换错误，此处不写都可以
+            dataType: "json",
+            success: function (data) {
+                //关键步骤，遍历一个MAP对象
+                var items = $.map(data, function (item) {
+                    return {
+                        id: item.label,
+                        name: item.label
+                    };
+                });
+                //执行loader的success方法
+                success(items);
+            },
+            //异常处理
+            error: function (xml, text, msg) {
+                error.apply(this, arguments);
+            }
+        });
+    };
+    //型号
+    var VERSION = function (param, success, error) {
+        //获取输入的值
+        var q = param.q || "";
+        //此处q的length代表输入多少个字符后开始查询
+        if (q.length <= 0) return false;
+        $.ajax({
+            url: "../Appliance/SearchAutoComplete/VERSION",
+            type: "post",
+            data: {
+                //传值，还是JSON数据
+                term: q
+            },
+            //重要，如果写jsonp会报转换错误，此处不写都可以
+            dataType: "json",
+            success: function (data) {
+                //关键步骤，遍历一个MAP对象
+                var items = $.map(data, function (item) {
+                    return {
+                        id: item.label,
+                        name: item.label
+                    };
+                });
+                //执行loader的success方法
+                success(items);
+            },
+            //异常处理
+            error: function (xml, text, msg) {
+                error.apply(this, arguments);
+            }
+        });
+    };
+    //器具名称
+    var APPLIANCE_NAME = function (param, success, error) {
+        //获取输入的值
+        var q = param.q || "";
+        //此处q的length代表输入多少个字符后开始查询
+        if (q.length <= 0) return false;
+        $.ajax({
+            url: "../Appliance/SearchAutoComplete/APPLIANCE_NAME",
+            type: "post",
+            data: {
+                //传值，还是JSON数据
+                term: q
+            },
+            //重要，如果写jsonp会报转换错误，此处不写都可以
+            dataType: "json",
+            success: function (data) {
+                //关键步骤，遍历一个MAP对象
+                var items = $.map(data, function (item) {
+                    return {
+                        id: item.label,
+                        name: item.label
+                    };
+                });
+                //执行loader的success方法
+                success(items);
+            },
+            //异常处理
+            error: function (xml, text, msg) {
+                error.apply(this, arguments);
+            }
+        });
+    };
+</script>
 <div>
-    条形码：@Html.Editor("BAR_CODE_NUM")
-    出厂编号：@Html.Editor("FACTORY_NUM")
-    型号：@Html.Editor("VERSION")
-    器具名称：@Html.Editor("APPLIANCE_NAME")
+    条形码：@*<input id="BAR_CODE_NUM" name="BAR_CODE_NUM" class="easyui-combobox" style="width:250px;" data-options="loader:BAR_CODE_NUM,mode:'remote',valueField:'id',textField:'name',onSelect:function(rec){
+
+        }" />*@
+    出厂编号：<input id="FACTORY_NUM" name="FACTORY_NUM" class="easyui-combobox" style="width:250px;" data-options="loader:FACTORY_NUM,mode:'remote',valueField:'id',textField:'name',onSelect:function(rec){fuzhi(rec)}" />
+    @*出厂编号：<input id="FACTORY_NUM" name="FACTORY_NUM" class="easyui-combobox" style="width:250px;" data-options="loader:FACTORY_NUM,mode:'remote',valueField:'id',textField:'name',onSelect:function(rec){$('#BAR_CODE_NUM').val(rec.name.split(',')[0]);$('#FACTORY_NUM').val(rec.name.split(',')[1]);$('#VERSION').val(rec.name.split(',')[2]);$('#APPLIANCE_NAME').val(rec.name.split(',')[3])}" />*@
+    型号：<input id="VERSION" name="VERSION" class="easyui-combobox" style="width:250px;" data-options="loader:VERSION,mode:'remote',valueField:'id',textField:'name',onSelect:function(rec){$('#BAR_CODE_NUM').val(rec.name.split(',')[0]);$('#FACTORY_NUM').val(rec.name.split(',')[1]);$('#VERSION').val(rec.name.split(',')[2]);$('#APPLIANCE_NAME').val(rec.name.split(',')[3])}" />
+    器具名称：<input id="APPLIANCE_NAME" name="APPLIANCE_NAME" class="easyui-combobox" style="width:250px;" data-options="loader:APPLIANCE_NAME,mode:'remote',valueField:'id',textField:'name',onSelect:function(rec){$('#BAR_CODE_NUM').val(rec.name.split(',')[0]);$('#FACTORY_NUM').val(rec.name.split(',')[1]);$('#VERSION').val(rec.name.split(',')[2]);$('#APPLIANCE_NAME').val(rec.name.split(',')[3])}" />
 </div>
+<br style="clear:both;" />
 <br style="clear:both;" />
 
 <input type="button" onclick="seng()" value="查询" />
@@ -295,7 +464,7 @@
                     $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val(row.CUSTOMER_SPECIFIC_REQUIREMENTS);//客户特殊要求
                 }
             }
-        })     
+        })
     }
     $(function () {
         var editIndex = undefined;
@@ -341,13 +510,13 @@
         //新增
         function flexiInsert() {
             $('#ApplianceDate').edatagrid('addRow', {
-                
+
                 row: {
                     "NUM": "1",
-                    "APPEARANCE_STATUS":"良好"
+                    "APPEARANCE_STATUS": "良好"
                 }
             });
-         
+
         }
         //复制新增
         function flexiInsertCopy() {
@@ -527,13 +696,13 @@
 
        }, { field: 'ATTACHMENT', title: '附件', width: 135, editor: 'text' }
            , {
-           field: 'APPEARANCE_STATUS', title: '外观状态', width: 65, editor: {
-               type: 'validatebox', options: {
-                   required: true,
-                   missingMessage: '必填'
+               field: 'APPEARANCE_STATUS', title: '外观状态', width: 65, editor: {
+                   type: 'validatebox', options: {
+                       required: true,
+                       missingMessage: '必填'
+                   }
                }
            }
-       }
 
 
            , { field: 'MAKE_ORGANIZATION', title: '制造单位', width: 65, editor: 'text' }
@@ -563,42 +732,42 @@
 
 </script>
 @*百度模式输入显示下拉框*@
-<link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-ui.min.js"></script>
+@*<link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-ui.min.js"></script>*@
 <script type="text/javascript">
     //输入显示下拉框
     //出厂编号
-    $("#FACTORY_NUM").ajaxStop();
-    $("#FACTORY_NUM").autocomplete({
-        source: "../Appliance/SearchAutoComplete/FACTORY_NUM",
-        minLength: 1,//键入的字数
-        select: function (event, ui) {
-            $("#BAR_CODE_NUM").val(ui.item.BAR_CODE_NUM);//条形码
-            $("#VERSION").val(ui.item.VERSION);//型号
-            $("#APPLIANCE_NAME").val(ui.item.APPLIANCE_NAME);//器具名称
-        }
-    });
-    //型号
-    $("#VERSION").ajaxStop();
-    $("#VERSION").autocomplete({
-        source: "../Appliance/SearchAutoComplete/VERSION",
-        minLength: 1,//键入的字数
-        select: function (event, ui) {
-            $("#BAR_CODE_NUM").val(ui.item.BAR_CODE_NUM);//条形码
-            $("#FACTORY_NUM").val(ui.item.FACTORY_NUM);//出厂编号
-            $("#APPLIANCE_NAME").val(ui.item.APPLIANCE_NAME);//器具名称
-        }
-    });
-    //器具名称
-    $("#APPLIANCE_NAME").ajaxStop();
-    $("#APPLIANCE_NAME").autocomplete({
-        source: "../Appliance/SearchAutoComplete/APPLIANCE_NAME",
-        minLength: 1,//键入的字数
-        select: function (event, ui) {
-            $("#BAR_CODE_NUM").val(ui.item.BAR_CODE_NUM);//条形码
-            $("#VERSION").val(ui.item.VERSION);//型号
-            $("#FACTORY_NUM").val(ui.item.FACTORY_NUM);//出厂编号
-        }
-    });
+    //$("#FACTORY_NUM").ajaxStop();
+    //$("#FACTORY_NUM").autocomplete({
+    //    source: "../Appliance/SearchAutoComplete/FACTORY_NUM",
+    //    minLength: 1,//键入的字数
+    //    select: function (event, ui) {
+    //        $("#BAR_CODE_NUM").val(ui.item.BAR_CODE_NUM);//条形码
+    //        $("#VERSION").val(ui.item.VERSION);//型号
+    //        $("#APPLIANCE_NAME").val(ui.item.APPLIANCE_NAME);//器具名称
+    //    }
+    //});
+    ////型号
+    //$("#VERSION").ajaxStop();
+    //$("#VERSION").autocomplete({
+    //    source: "../Appliance/SearchAutoComplete/VERSION",
+    //    minLength: 1,//键入的字数
+    //    select: function (event, ui) {
+    //        $("#BAR_CODE_NUM").val(ui.item.BAR_CODE_NUM);//条形码
+    //        $("#FACTORY_NUM").val(ui.item.FACTORY_NUM);//出厂编号
+    //        $("#APPLIANCE_NAME").val(ui.item.APPLIANCE_NAME);//器具名称
+    //    }
+    //});
+    ////器具名称
+    //$("#APPLIANCE_NAME").ajaxStop();
+    //$("#APPLIANCE_NAME").autocomplete({
+    //    source: "../Appliance/SearchAutoComplete/APPLIANCE_NAME",
+    //    minLength: 1,//键入的字数
+    //    select: function (event, ui) {
+    //        $("#BAR_CODE_NUM").val(ui.item.BAR_CODE_NUM);//条形码
+    //        $("#VERSION").val(ui.item.VERSION);//型号
+    //        $("#FACTORY_NUM").val(ui.item.FACTORY_NUM);//出厂编号
+    //    }
+    //});
 </script>
 
