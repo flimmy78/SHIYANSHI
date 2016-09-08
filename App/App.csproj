@@ -134,7 +134,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="HTML\" />
     <Folder Include="Res\webuploader\" />
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +186,8 @@
     <Compile Include="HtmlHelper\RadioButtonListHelper.cs" />
     <Compile Include="Models\ApplianceModel.cs" />
     <Compile Include="Models\BaseException.cs" />
+    <Compile Include="Models\APPLIANCE_DETAIL_INFORMATIONShow.cs" />
+    <Compile Include="Models\ORDER_TASK_INFORMATIONShow.cs" />
     <Compile Include="Models\EmptyClass.cs" />
     <Compile Include="Models\SysDepartmentTreeModel.cs" />
     <Compile Include="Models\SysFieldTreeModel.cs" />

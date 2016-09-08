@@ -20,6 +20,89 @@ namespace Langben.App.Controllers
     public class ORDER_TASK_INFORMATIONApiController : BaseApiController
     {
         /// <summary>
+        /// 器具登记查询功能
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ORDER_TASK_INFORMATIONShow PostDataByID(string id)
+        {
+
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+
+                id = id.Replace("@", "&");
+            }
+            int total = 0;
+            string UNDERTAKE_LABORATORYID = string.Empty;
+            List<APPLIANCE_DETAIL_INFORMATION> queryData = m_BLL2.GetByParam(null, 1, 1, "DESC", "ID", id, ref total);
+            foreach (var item in queryData)
+            {
+                List<APPLIANCE_LABORATORY> list = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item.ID);
+                foreach (var item2 in list)
+                {
+                    UNDERTAKE_LABORATORYID += item2.UNDERTAKE_LABORATORYID + ",";
+                }
+            }
+            return queryData.Select(s => new ORDER_TASK_INFORMATIONShow()
+            {
+                APPLIANCE_DETAIL_INFORMATIONShows = new List<Models.APPLIANCE_DETAIL_INFORMATIONShow>() { new APPLIANCE_DETAIL_INFORMATIONShow() {
+                    ID =s.ID,
+                    BAR_CODE_NUM =s.BAR_CODE_NUM,
+                    APPLIANCE_NAME =s.APPLIANCE_NAME,
+                    VERSION =s.VERSION,
+                    FORMAT =s.FORMAT,
+                    FACTORY_NUM =s.FACTORY_NUM,
+                    NUM =s.NUM,
+                    ATTACHMENT =s.ATTACHMENT,
+                    APPEARANCE_STATUS =s.APPEARANCE_STATUS,
+                    MAKE_ORGANIZATION =s.MAKE_ORGANIZATION,
+                    REMARKS =s.REMARKS,
+                    END_PLAN_DATE =s.END_PLAN_DATE,
+                    ORDER_TASK_INFORMATIONID =s.ORDER_TASK_INFORMATIONID,
+                    CREATETIME =s.CREATETIME,
+                    CREATEPERSON =s.CREATEPERSON,
+                    UPDATETIME =s.UPDATETIME,
+                    UPDATEPERSON =s.UPDATEPERSON,
+                    APPLIANCE_RECIVE =s.APPLIANCE_RECIVE,
+                    APPLIANCE_PROGRESS =s.APPLIANCE_PROGRESS,
+                    ORDER_STATUS =s.ORDER_STATUS,
+                    ISOVERDUE =s.ISOVERDUE,
+                    OVERDUE =s.OVERDUE,
+                    STORAGEINSTRUCTIONS =s.STORAGEINSTRUCTIONS,
+                    STORAGEINSTRUCTI_STATU =s.STORAGEINSTRUCTI_STATU,
+                    EQUIPMENT_STATUS_VALUUMN =s.EQUIPMENT_STATUS_VALUUMN,
+                    RETURN_INSTRUCTIONS =s.RETURN_INSTRUCTIONS,
+                    UNDERTAKE_LABORATORYIDString =UNDERTAKE_LABORATORYID
+    } },
+                ID = s.ORDER_TASK_INFORMATION.ID,
+                ORDER_NUMBER = s.ORDER_TASK_INFORMATION.ORDER_NUMBER,
+                ACCEPT_ORGNIZATION = s.ORDER_TASK_INFORMATION.ACCEPT_ORGNIZATION,
+                INSPECTION_ENTERPRISE = s.ORDER_TASK_INFORMATION.INSPECTION_ENTERPRISE,
+                INSPECTION_ENTERPRISE_ADDRESS = s.ORDER_TASK_INFORMATION.INSPECTION_ENTERPRISE_ADDRESS,
+                INSPECTION_ENTERPRISE_POST = s.ORDER_TASK_INFORMATION.INSPECTION_ENTERPRISE_POST,
+                CONTACTS = s.ORDER_TASK_INFORMATION.CONTACTS,
+                CONTACT_PHONE = s.ORDER_TASK_INFORMATION.CONTACT_PHONE,
+                FAX = s.ORDER_TASK_INFORMATION.FAX,
+                CERTIFICATE_ENTERPRISE = s.ORDER_TASK_INFORMATION.CERTIFICATE_ENTERPRISE,
+                CERTIFICATE_ENTERPRISE_ADDRESS = s.ORDER_TASK_INFORMATION.CERTIFICATE_ENTERPRISE_ADDRESS,
+                CERTIFICATE_ENTERPRISE_POST = s.ORDER_TASK_INFORMATION.CERTIFICATE_ENTERPRISE_POST,
+                CONTACTS2 = s.ORDER_TASK_INFORMATION.CONTACTS2,
+                CONTACT_PHONE2 = s.ORDER_TASK_INFORMATION.CONTACT_PHONE2,
+                FAX2 = s.ORDER_TASK_INFORMATION.FAX2,
+                CUSTOMER_SPECIFIC_REQUIREMENTS = s.ORDER_TASK_INFORMATION.CUSTOMER_SPECIFIC_REQUIREMENTS,
+                ORDER_STATUS = s.ORDER_TASK_INFORMATION.ORDER_STATUS,
+                CREATETIME = s.ORDER_TASK_INFORMATION.CREATETIME,
+                CREATEPERSON = s.ORDER_TASK_INFORMATION.CREATEPERSON,
+                UPDATETIME = s.ORDER_TASK_INFORMATION.UPDATETIME,
+                UPDATEPERSON = s.ORDER_TASK_INFORMATION.UPDATEPERSON,
+            }).FirstOrDefault();
+
+        }
+
+
+
+        /// <summary>
         /// 异步加载数据
         /// </summary>
         /// <param name="getParam"></param>
@@ -34,27 +117,47 @@ namespace Langben.App.Controllers
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID
-					,ORDER_NUMBER = s.ORDER_NUMBER
-					,ACCEPT_ORGNIZATION = s.ACCEPT_ORGNIZATION
-					,INSPECTION_ENTERPRISE = s.INSPECTION_ENTERPRISE
-					,INSPECTION_ENTERPRISE_ADDRESS = s.INSPECTION_ENTERPRISE_ADDRESS
-					,INSPECTION_ENTERPRISE_POST = s.INSPECTION_ENTERPRISE_POST
-					,CONTACTS = s.CONTACTS
-					,CONTACT_PHONE = s.CONTACT_PHONE
-					,FAX = s.FAX
-					,CERTIFICATE_ENTERPRISE = s.CERTIFICATE_ENTERPRISE
-					,CERTIFICATE_ENTERPRISE_ADDRESS = s.CERTIFICATE_ENTERPRISE_ADDRESS
-					,CERTIFICATE_ENTERPRISE_POST = s.CERTIFICATE_ENTERPRISE_POST
-					,CONTACTS2 = s.CONTACTS2
-					,CONTACT_PHONE2 = s.CONTACT_PHONE2
-					,FAX2 = s.FAX2
-					,CUSTOMER_SPECIFIC_REQUIREMENTS = s.CUSTOMER_SPECIFIC_REQUIREMENTS
-					,ORDER_STATUS = s.ORDER_STATUS
-					,CREATETIME = s.CREATETIME
-					,CREATEPERSON = s.CREATEPERSON
-					,UPDATETIME = s.UPDATETIME
-					,UPDATEPERSON = s.UPDATEPERSON
-					
+                    ,
+                    ORDER_NUMBER = s.ORDER_NUMBER
+                    ,
+                    ACCEPT_ORGNIZATION = s.ACCEPT_ORGNIZATION
+                    ,
+                    INSPECTION_ENTERPRISE = s.INSPECTION_ENTERPRISE
+                    ,
+                    INSPECTION_ENTERPRISE_ADDRESS = s.INSPECTION_ENTERPRISE_ADDRESS
+                    ,
+                    INSPECTION_ENTERPRISE_POST = s.INSPECTION_ENTERPRISE_POST
+                    ,
+                    CONTACTS = s.CONTACTS
+                    ,
+                    CONTACT_PHONE = s.CONTACT_PHONE
+                    ,
+                    FAX = s.FAX
+                    ,
+                    CERTIFICATE_ENTERPRISE = s.CERTIFICATE_ENTERPRISE
+                    ,
+                    CERTIFICATE_ENTERPRISE_ADDRESS = s.CERTIFICATE_ENTERPRISE_ADDRESS
+                    ,
+                    CERTIFICATE_ENTERPRISE_POST = s.CERTIFICATE_ENTERPRISE_POST
+                    ,
+                    CONTACTS2 = s.CONTACTS2
+                    ,
+                    CONTACT_PHONE2 = s.CONTACT_PHONE2
+                    ,
+                    FAX2 = s.FAX2
+                    ,
+                    CUSTOMER_SPECIFIC_REQUIREMENTS = s.CUSTOMER_SPECIFIC_REQUIREMENTS
+                    ,
+                    ORDER_STATUS = s.ORDER_STATUS
+                    ,
+                    CREATETIME = s.CREATETIME
+                    ,
+                    CREATEPERSON = s.CREATEPERSON
+                    ,
+                    UPDATETIME = s.UPDATETIME
+                    ,
+                    UPDATEPERSON = s.UPDATEPERSON
+
 
                 })
             };
@@ -71,27 +174,27 @@ namespace Langben.App.Controllers
             ORDER_TASK_INFORMATION item = m_BLL.GetById(id);
             return item;
         }
- 
+
         /// <summary>
         /// 创建
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
         public Common.ClientResult.Result Post([FromBody]ORDER_TASK_INFORMATION entity)
-        {           
+        {
 
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             if (entity != null && ModelState.IsValid)
             {
                 string currentPerson = GetCurrentPerson();
-               entity.CREATETIME = DateTime.Now;
+                entity.CREATETIME = DateTime.Now;
                 entity.CREATEPERSON = currentPerson;
-              
-                entity.ID = Result.GetNewId();   
+
+                entity.ID = Result.GetNewId();
                 string returnValue = string.Empty;
                 if (m_BLL.Create(ref validationErrors, entity))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed  + "，委托单信息的信息的Id为" + entity.ID,"委托单信息"
+                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，委托单信息的信息的Id为" + entity.ID, "委托单信息"
                         );//写入日志 
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.InsertSucceed;
@@ -99,7 +202,7 @@ namespace Langben.App.Controllers
                     return result; //提示创建成功
                 }
                 else
-                { 
+                {
                     if (validationErrors != null && validationErrors.Count > 0)
                     {
                         validationErrors.All(a =>
@@ -108,7 +211,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，委托单信息的信息，" + returnValue,"委托单信息"
+                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，委托单信息的信息，" + returnValue, "委托单信息"
                         );//写入日志                      
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.InsertFail + returnValue;
@@ -140,7 +243,7 @@ namespace Langben.App.Controllers
                 string returnValue = string.Empty;
                 if (m_BLL.Edit(ref validationErrors, entity))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，委托单信息信息的Id为" + entity.ID,"委托单信息"
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，委托单信息信息的Id为" + entity.ID, "委托单信息"
                         );//写入日志                   
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.UpdateSucceed;
@@ -199,7 +302,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId)+ "," + returnValue, "消息"
+                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId) + "," + returnValue, "消息"
                         );//删除失败，写入日志
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.DeleteFail + returnValue;
@@ -209,17 +312,20 @@ namespace Langben.App.Controllers
         }
 
         IBLL.IORDER_TASK_INFORMATIONBLL m_BLL;
-
+        IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL m_BLL2;
+        IBLL.IAPPLIANCE_LABORATORYBLL m_BLL3;
         ValidationErrors validationErrors = new ValidationErrors();
 
         public ORDER_TASK_INFORMATIONApiController()
-            : this(new ORDER_TASK_INFORMATIONBLL()) { }
+            : this(new ORDER_TASK_INFORMATIONBLL(), new APPLIANCE_DETAIL_INFORMATIONBLL(), new APPLIANCE_LABORATORYBLL()) { }
 
-        public ORDER_TASK_INFORMATIONApiController(ORDER_TASK_INFORMATIONBLL bll)
+        public ORDER_TASK_INFORMATIONApiController(ORDER_TASK_INFORMATIONBLL bll, APPLIANCE_DETAIL_INFORMATIONBLL bll2, APPLIANCE_LABORATORYBLL bll3)
         {
             m_BLL = bll;
+            m_BLL2 = bll2;
+            m_BLL3 = bll3;
         }
-        
+
     }
 }
 

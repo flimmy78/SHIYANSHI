@@ -25,87 +25,129 @@ namespace Langben.App.Controllers
         /// <param name="getParam"></param>
         /// <returns></returns>
         /// 
+        #region
+        //[HttpPost]
+        //public Common.ClientResult.DataResult PostDataByID(string id)
+        //{
 
-        [HttpPost]
-        public Common.ClientResult.DataResult PostDataByID(string id)
-        {
+        //    if (!string.IsNullOrWhiteSpace(id))
+        //    {
 
-            if (!string.IsNullOrWhiteSpace(id))
-            {
+        //        id = id.Replace("@", "&");
+        //    }
+        //    int total = 0;
+        //    string UNDERTAKE_LABORATORYID = string.Empty;
+        //    List<APPLIANCE_DETAIL_INFORMATION> queryData = m_BLL.GetByParam(null, 1, 1, "DESC", "ID", id, ref total);
+        //    foreach (var item in queryData)
+        //    {
+        //        List<APPLIANCE_LABORATORY> list = m_BLL2.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item.ID);
+        //        foreach (var item2 in list)
+        //        {
+        //            UNDERTAKE_LABORATORYID += item2.UNDERTAKE_LABORATORYID + ",";
+        //        }
+        //    }
+        //    var data = new Common.ClientResult.DataResult
+        //    {
+        //        total = total,
+        //        rows = queryData.Select(s => new APPLIANCE_DETAIL_INFORMATIONShow
+        //        {
+        //            ID = s.ID
+        //            ,
+        //            BAR_CODE_NUM = s.BAR_CODE_NUM
+        //            ,
+        //            APPLIANCE_NAME = s.APPLIANCE_NAME
+        //            ,
+        //            //VERSION = s.VERSION,
+        //            FORMAT = s.FORMAT
+        //            ,
+        //            FACTORY_NUM = s.FACTORY_NUM
+        //            ,
+        //            NUM = s.NUM
+        //            ,
+        //            ATTACHMENT = s.ATTACHMENT
+        //            ,
+        //            APPEARANCE_STATUS = s.APPEARANCE_STATUS
+        //            ,
+        //            MAKE_ORGANIZATION = s.MAKE_ORGANIZATION
+        //            ,
+        //            REMARKS = s.REMARKS
+        //            ,
+        //            END_PLAN_DATE = s.END_PLAN_DATE
+        //            ,
+        //            ORDER_TASK_INFORMATION =new ORDER_TASK_INFORMATIONShow() {
+        //                ID = s.ORDER_TASK_INFORMATION.ID
+        //            ,
+        //                ORDER_NUMBER = s.ORDER_TASK_INFORMATION.ORDER_NUMBER
+        //            ,
+        //                ACCEPT_ORGNIZATION = s.ORDER_TASK_INFORMATION.ACCEPT_ORGNIZATION
+        //            ,
+        //                INSPECTION_ENTERPRISE = s.ORDER_TASK_INFORMATION.INSPECTION_ENTERPRISE
+        //            ,
+        //                INSPECTION_ENTERPRISE_ADDRESS = s.ORDER_TASK_INFORMATION.INSPECTION_ENTERPRISE_ADDRESS
+        //            ,
+        //                INSPECTION_ENTERPRISE_POST = s.ORDER_TASK_INFORMATION.INSPECTION_ENTERPRISE_POST
+        //            ,
+        //                CONTACTS = s.ORDER_TASK_INFORMATION.CONTACTS
+        //            ,
+        //                CONTACT_PHONE = s.ORDER_TASK_INFORMATION.CONTACT_PHONE
+        //            ,
+        //                FAX = s.ORDER_TASK_INFORMATION.FAX
+        //            ,
+        //                CERTIFICATE_ENTERPRISE = s.ORDER_TASK_INFORMATION.CERTIFICATE_ENTERPRISE
+        //            ,
+        //                CERTIFICATE_ENTERPRISE_ADDRESS = s.ORDER_TASK_INFORMATION.CERTIFICATE_ENTERPRISE_ADDRESS
+        //            ,
+        //                CERTIFICATE_ENTERPRISE_POST = s.ORDER_TASK_INFORMATION.CERTIFICATE_ENTERPRISE_POST
+        //            ,
+        //                CONTACTS2 = s.ORDER_TASK_INFORMATION.CONTACTS2
+        //            ,
+        //                CONTACT_PHONE2 = s.ORDER_TASK_INFORMATION.CONTACT_PHONE2
+        //            ,
+        //                FAX2 = s.ORDER_TASK_INFORMATION.FAX2
+        //            ,
+        //                CUSTOMER_SPECIFIC_REQUIREMENTS = s.ORDER_TASK_INFORMATION.CUSTOMER_SPECIFIC_REQUIREMENTS
+        //            ,
+        //                ORDER_STATUS = s.ORDER_TASK_INFORMATION.ORDER_STATUS
+        //            ,
+        //                CREATETIME = s.ORDER_TASK_INFORMATION.CREATETIME
+        //            ,
+        //                CREATEPERSON = s.ORDER_TASK_INFORMATION.CREATEPERSON
+        //            ,
+        //                UPDATETIME = s.ORDER_TASK_INFORMATION.UPDATETIME
+        //            ,
+        //                UPDATEPERSON = s.ORDER_TASK_INFORMATION.UPDATEPERSON
+        //            }
+        //            ,
+        //            CREATETIME = s.CREATETIME
+        //            ,
+        //            CREATEPERSON = s.CREATEPERSON
+        //            ,
+        //            UPDATETIME = s.UPDATETIME
+        //            ,
+        //            UPDATEPERSON = s.UPDATEPERSON
+        //            ,
+        //            APPLIANCE_RECIVE = s.APPLIANCE_RECIVE
+        //            ,
+        //            APPLIANCE_PROGRESS = s.APPLIANCE_PROGRESS
+        //            ,
+        //            ORDER_STATUS = s.ORDER_STATUS
+        //            ,
+        //            ISOVERDUE = s.ISOVERDUE
+        //            ,
+        //            OVERDUE = s.OVERDUE
+        //            ,
+        //            STORAGEINSTRUCTIONS = s.STORAGEINSTRUCTIONS
+        //            ,
+        //            STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU,
+        //            VERSION = s.VERSION,
 
-                id = id.Replace("@", "&");
-            }
-            int total = 0;
-            string UNDERTAKE_LABORATORYID = string.Empty;
-            List<APPLIANCE_DETAIL_INFORMATION> queryData = m_BLL.GetByParam(null, 1, 1, "DESC", "ID", id, ref total);
-            foreach (var item in queryData)
-            {
-                List<APPLIANCE_LABORATORY> list = m_BLL2.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item.ID);
-                foreach (var item2 in list)
-                {
-                    UNDERTAKE_LABORATORYID += item2.UNDERTAKE_LABORATORYID + ",";
-                }
-            }
-            var data = new Common.ClientResult.DataResult
-            {
-                total = total,
-                rows = queryData.Select(s => new
-                {
-                    ID = s.ID
-                    ,
-                    BAR_CODE_NUM = s.BAR_CODE_NUM
-                    ,
-                    APPLIANCE_NAME = s.APPLIANCE_NAME
-                    ,
-                    MODEL = s.VERSION,
-                    FORMAT = s.FORMAT
-                    ,
-                    FACTORY_NUM = s.FACTORY_NUM
-                    ,
-                    NUM = s.NUM
-                    ,
-                    ATTACHMENT = s.ATTACHMENT
-                    ,
-                    APPEARANCE_STATUS = s.APPEARANCE_STATUS
-                    ,
-                    MAKE_ORGANIZATION = s.MAKE_ORGANIZATION
-                    ,
-                    REMARKS = s.REMARKS
-                    ,
-                    END_PLAN_DATE = s.END_PLAN_DATE
-                    ,
-                    ORDER_TASK_INFORMATIONID = s.ORDER_TASK_INFORMATIONID
-                    ,
-                    CREATETIME = s.CREATETIME
-                    ,
-                    CREATEPERSON = s.CREATEPERSON
-                    ,
-                    UPDATETIME = s.UPDATETIME
-                    ,
-                    UPDATEPERSON = s.UPDATEPERSON
-                    ,
-                    APPLIANCE_RECIVE = s.APPLIANCE_RECIVE
-                    ,
-                    APPLIANCE_PROGRESS = s.APPLIANCE_PROGRESS
-                    ,
-                    ORDER_STATUS = s.ORDER_STATUS
-                    ,
-                    ISOVERDUE = s.ISOVERDUE
-                    ,
-                    OVERDUE = s.OVERDUE
-                    ,
-                    STORAGEINSTRUCTIONS = s.STORAGEINSTRUCTIONS
-                    ,
-                    STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU,
-                    VERSION = s.VERSION,
+        //            UNDERTAKE_LABORATORYIDString = UNDERTAKE_LABORATORYID
+        //        })
 
-                    UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID
-                })
-
-            };
-            return data;
-        }
-
+        //    };
+        //    return data;
+        //}
+        #endregion
         [HttpPost]
         public Common.ClientResult.DataResult PostData([FromBody]GetDataParam getParam)
         {

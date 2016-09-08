@@ -8,8 +8,13 @@
 @*表格*@
 <script src="~/Scripts/jquery.edatagrid.js"></script>
 <style type="text/css">
+
     body{height:2000px}
-</style>
+</style><style type="text/css">
+    td {
+        height: 25px;
+    }
+</style> 
 @section HeadContent {
 
     创建
@@ -253,70 +258,44 @@
         var row = null;
         var search = "BAR_CODE_NUM" + "@@" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "@@" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "@@" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "@@" + $("#APPLIANCE_NAME").val() + "^";
         $.ajax({
-            url: '/api/APPLIANCE_DETAIL_INFORMATIONApi/PostDataByID/' + search,
+            url: '/api/ORDER_TASK_INFORMATIONApi/PostDataByID/' + search,
             type: "Post",
             // async: false,
-            success: function (data) {
-                row = data;
+            success: function (row) {
+                //结束器具的编辑状态
+                $('#ApplianceDate').edatagrid('saveRow');
+                $('#ApplianceDate').edatagrid('appendRow', {
+                    APPLIANCE_NAME: row.APPLIANCE_DETAIL_INFORMATIONShows[0].APPLIANCE_NAME,
+                    VERSION: row.APPLIANCE_DETAIL_INFORMATIONShows[0].VERSION,
+                    FORMAT: row.APPLIANCE_DETAIL_INFORMATIONShows[0].FORMAT,
+                    FACTORY_NUM: row.APPLIANCE_DETAIL_INFORMATIONShows[0].FACTORY_NUM,
+                    NUM: row.APPLIANCE_DETAIL_INFORMATIONShows[0].NUM,
+                    ATTACHMENT: row.APPLIANCE_DETAIL_INFORMATIONShows[0].ATTACHMENT,
+                    APPEARANCE_STATUS: row.APPLIANCE_DETAIL_INFORMATIONShows[0].APPEARANCE_STATUS,
+                    MAKE_ORGANIZATION: row.APPLIANCE_DETAIL_INFORMATIONShows[0].MAKE_ORGANIZATION,
+                    UNDERTAKE_LABORATORYID: row.APPLIANCE_DETAIL_INFORMATIONShows[0].UNDERTAKE_LABORATORYIDString,
+                    APPLIANCE_RECIVE: row.APPLIANCE_DETAIL_INFORMATIONShows[0].APPLIANCE_RECIVE,
+                    REMARKS: row.APPLIANCE_DETAIL_INFORMATIONShows[0].REMARKS,
+                });
+                var leng = $('#ApplianceDate').edatagrid('getRows');
+                if (leng.length <= 1) {
+                    $("#ACCEPT_ORGNIZATION").val(row.ACCEPT_ORGNIZATION);//受理单位
+                    $("#INSPECTION_ENTERPRISE").val(row.INSPECTION_ENTERPRISE);//送检单位
+                    $("#INSPECTION_ENTERPRISE_ADDRESS").val(row.INSPECTION_ENTERPRISE_ADDRESS);//送检单位地址
+                    $("#INSPECTION_ENTERPRISE_POST").val(row.INSPECTION_ENTERPRISE_POST);//送检单位邮政编码
+                    $("#CONTACTS").val(row.CONTACTS);//联系人
+                    $("#CONTACT_PHONE").val(row.CONTACT_PHONE);//联系电话
+                    $("#FAX").val(row.FAX);//传真
+                    $("#CERTIFICATE_ENTERPRISE").val(row.CERTIFICATE_ENTERPRISE);//证书单位
+                    $("#CERTIFICATE_ENTERPRISE_ADDRESS").val(row.CERTIFICATE_ENTERPRISE_ADDRESS);//证书单位地址
+                    $("#CERTIFICATE_ENTERPRISE_POST").val(row.CERTIFICATE_ENTERPRISE_POST);//证书单位邮政编码
+                    $("#CONTACTS2").val(row.CONTACTS2);//联系人2
+                    $("#CONTACT_PHONE2").val(row.CONTACT_PHONE2);//联系电话2
+                    $("#FAX2").val(row.FAX2);//传真2
+                    $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val(row.CUSTOMER_SPECIFIC_REQUIREMENTS);//客户特殊要求
+                }
             }
-        })
-        //结束器具的编辑状态
-        $('#ApplianceDate').edatagrid('saveRow');
-        // 在第二行的位置插入一个新行
-        //index：要插入的行索引，如果该索引值未定义，则追加新行。
-        //row：行数据。                alert(data.rows[0].APPLIANCE_NAME);
- 
-        $('#ApplianceDate').edatagrid('appendRow', {
-           
-                APPLIANCE_NAME: row.rows[0].APPLIANCE_NAME,
-                VERSION: row.rows[0].VERSION,
-                FORMAT: row.rows[0].FORMAT,
-                FACTORY_NUM: row.rows[0].FACTORY_NUM,
-                NUM: row.rows[0].NUM,
-                ATTACHMENT: row.rows[0].ATTACHMENT,
-                APPEARANCE_STATUS: row.rows[0].APPEARANCE_STATUS,
-                MAKE_ORGANIZATION: row.rows[0].MAKE_ORGANIZATION,
-                UNDERTAKE_LABORATORYID: row.rows[0].UNDERTAKE_LABORATORYID,
-                APPLIANCE_RECIVE: row.rows[0].APPLIANCE_RECIVE,
-                REMARKS: row.rows[0].REMARKS,          
-        });
-        var leng=$('#ApplianceDate').edatagrid('getSelections');
-        if (leng.length< 1) {
-            order(row.rows[0].ORDER_TASK_INFORMATIONID);
-        }
-        ////器具信息绑定
-        //var search = "";
-        //search = "BAR_CODE_NUM" + "@@" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "@@" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "@@" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "@@" + $("#APPLIANCE_NAME").val() + "^";
-        //$('#ApplianceDate').edatagrid({ url: '/api/APPLIANCE_DETAIL_INFORMATIONApi/PostDataByID/' + search });
-
-    }
-
-    function order(id) {
-        $.ajax({
-            //url: "/api/ORDER_TASK_INFORMATIONApi/Get" + $("#ORDER_TASK_INFORMATIONID").val(),
-            url: "/api/ORDER_TASK_INFORMATIONApi/Get/" + id,
-            type: "Get",
-            //dataType: "xml",
-            // async: false,
-            success: function (res) {
-                alert(res);
-                alert(res.ACCEPT_ORGNIZATION);
-                $("#ACCEPT_ORGNIZATION option:selected").val(res.ACCEPT_ORGNIZATION);//受理单位
-                $("#INSPECTION_ENTERPRISE").val(res.INSPECTION_ENTERPRISE);//送检单位
-                $("#INSPECTION_ENTERPRISE_ADDRESS").val(res.INSPECTION_ENTERPRISE_ADDRESS);//送检单位地址
-                $("#INSPECTION_ENTERPRISE_POST").val(res.INSPECTION_ENTERPRISE_POST);//送检单位邮政编码
-                $("#CONTACTS").val(res.CONTACTS);//联系人
-                $("#CONTACT_PHONE").val(res.CONTACT_PHONE);//联系电话
-                $("#FAX").val(res.FAX);//传真
-                $("#CERTIFICATE_ENTERPRISE").val(res.CERTIFICATE_ENTERPRISE);//证书单位
-                $("#CERTIFICATE_ENTERPRISE_ADDRESS").val(res.CERTIFICATE_ENTERPRISE_ADDRESS);//证书单位地址
-                $("#CERTIFICATE_ENTERPRISE_POST").val(res.CERTIFICATE_ENTERPRISE_POST);//证书单位邮政编码
-                $("#CONTACTS2").val(res.CONTACTS2);//联系人2
-                $("#CONTACT_PHONE2").val(res.CONTACT_PHONE2);//联系电话2
-                $("#FAX2").val(res.FAX2);//传真2
-                $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val(res.CUSTOMER_SPECIFIC_REQUIREMENTS);//客户特殊要求
-            }
-        })
+        })     
     }
     $(function () {
         var editIndex = undefined;
@@ -584,8 +563,8 @@
 
 </script>
 @*百度模式输入显示下拉框*@
-@*<link href="~/Content/jquery-ui.min.css" rel="stylesheet" />*@
-@*<script src="~/Scripts/jquery-ui.min.js"></script>*@
+<link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui.min.js"></script>
 <script type="text/javascript">
     //输入显示下拉框
     //出厂编号

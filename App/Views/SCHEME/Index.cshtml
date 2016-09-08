@@ -72,34 +72,52 @@
                  text: '停用',
                  iconCls: 'icon-stop',
                  handler: function () {
-                     return flexiStop();
+                     return flexiMultOp("停用");
                  }
              },
              {
-                 text: '发布',
+                 text: '启用',
                  iconCls: 'icon-fabu',
                  handler: function () {
-                     return flexiFabu();
+                     return flexiMultOp("启用");
                  }
-             }],
+             },
+            ],
             columns: [[
                
                 {
                     field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', align: 'center',
                     formatter: function (value, row, index) {
-                        var html = "<a href='/SysException/Details/" + row.Id + "'>" + value + "</a>";
+                        var html = "<a href='/SCHEME/Edit/" + row.ID + "'>" + value + "</a>";
                         return html;
                     }}
                 , { field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width:150,align: 'center' }
-                , {
+                @*, {
                     field: 'PUBLISHTIME', title: '@Html.DisplayNameFor(model => model.PUBLISHTIME)', width:250,align: 'center'
                 , formatter: formatDatebox
-                  }
+                  }*@
                 @*, { field: 'REPORT_CATEGORY', title: '@Html.DisplayNameFor(model => model.REPORT_CATEGORY)', width: 51 }*@
                 @*, { field: 'CERTIFICATE_CATEGORY', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 51 }*@
                 , { field: 'STATUS', title: '@Html.DisplayNameFor(model => model.STATUS)', width:140,align: 'center' }
-                , { field: 'ISSTOP', title: '@Html.DisplayNameFor(model => model.ISSTOP)', width:140,align: 'center' }
-                , { field: 'ISPUBLISH', title: '@Html.DisplayNameFor(model => model.ISPUBLISH)', width:140,align: 'center' }                
+                @*, {
+                    field: 'ISSTOP', title: '@Html.DisplayNameFor(model => model.ISSTOP)', width: 140, align: 'center',*@
+                    , { field: 'ISSTOP', title: '操作', width:140,align: 'center' ,
+                    formatter: function (value, row, index) {
+                        if(value=="启用")
+                        {
+                            var html = "<a href='javascript:void(0)' onclick='javascript:UpdateIsStop(" +'"'+ row.ID+'"'+ ',"停用"'+"); '> 停用 </a>";
+                            html += "&nbsp;&nbsp;<a disabled='true' href='javascript:void(0)' style='color:gray; text-decoration:none'> 启用 </a>";
+                            return html;
+                        }
+                        else
+                        {
+                            var html = "<a disabled='true' href='javascript:void(0)' style='color:gray; text-decoration:none'> 停用 </a>";
+                            html += "&nbsp;&nbsp;<a  href='javascript:void(0)' onclick='javascript:UpdateIsStop(" +'"'+ row.ID +'"'+ ',"启用"'+"); '>  启用 </a>";
+                            return html;
+                        }
+                        
+                    }}
+                @*, { field: 'ISPUBLISH', title: '@Html.DisplayNameFor(model => model.ISPUBLISH)', width:140,align: 'center' }*@                
                 @*, { field: 'COPYID', title: '@Html.DisplayNameFor(model => model.COPYID)', width: 51 }
                 , { field: 'PUBLISHPERSON', title: '@Html.DisplayNameFor(model => model.PUBLISHPERSON)', width: 51 }
                 , { field: 'ISPUBLISHTIME', title: '@Html.DisplayNameFor(model => model.ISPUBLISHTIME)', width: 51 }
@@ -218,7 +236,7 @@
     //导航到创建的按钮
     function flexiCreate() {
 
-        window.location.href = "../SCHEME/Create";
+        window.location.href = "../SCHEME/Create?UNDERTAKE_LABORATORYID=" + $("#UNDERTAKE_LABORATORYID").val();
         return false;
     }
     //导航到修改的按钮
@@ -235,9 +253,22 @@
         return false;
 
     };
-    //删除的按钮
-    function flexiDelete() {
+    //复制
+    function flexiCopy()
+    {
+        var arr = $('#flexigridData').datagrid('getSelections');
 
+        if (arr.length == 1) {
+            window.location.href = "../SCHEME/Edit?id=" + arr[0].ID+"&op=复制";
+
+        } else {
+            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
+        }
+        return false;
+    }
+    //批量删除、停用
+    function flexiMultOp(Op) {
+       
         var rows = $('#flexigridData').datagrid('getSelections');
         if (rows.length == 0) {
             $.messager.alert('操作提示', '请选择数据!', 'warning');
@@ -249,30 +280,85 @@
             arr.push(rows[i].ID);
         }
 
-        $.messager.confirm('操作提示', "确认删除这 " + arr.length + " 项吗？", function (r) {
+        $.messager.confirm('操作提示', "确认"+Op+"这 " + arr.length + " 项吗？", function (r) {
             if (r) {
+                //$.ajax({
+                //    url: "api/SCHEMEApi/MultOp?query=" + arr.join(",")+"&Op="+Op,
+                //    type: "DELETE",
+                //    success: function (res) {
+                //        if (res.Code == 1) {
+                //            //移除删除的数据
+
+                //            $.messager.alert('操作提示', res.Message, 'info');
+                //            $("#flexigridData").datagrid("reload");
+                //            $("#flexigridData").datagrid("clearSelections");
+                //        }
+                //        else {
+                //            $.messager.alert('操作提示', res.Message, 'info');
+                //        }
+
+                //    }
+                //})
+                //获取空对象用于保存添加的信息
                 $.ajax({
-                    url: "api/SCHEMEApi/Delete?query=" + arr.join(","),
-                    type: "DELETE",
-                    success: function (res) {
-                        if (res.Code == 1) {
-                            //移除删除的数据
+                    type: 'post', //使用post方法访问后台
+                    dataType: "json", //返回json格式的数据
+                    url: '/SCHEME/MultOp', //要访问的后台地址
+                    contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
+                    data: "query=" + arr.join(",")+"&Op="+Op, //要发送的数据
+                    beforeSend: function () {
+                        //InitAlertJS();
+                    },
+                    complete: function () {
+                    }, //AJAX请求完成时隐藏loading提示
 
-                            $.messager.alert('操作提示', res.Message, 'info');
-                            $("#flexigridData").datagrid("reload");
-                            $("#flexigridData").datagrid("clearSelections");
+                    success: function (res) {//msg为返回的数据，在这里做数据绑定
+                        if (res.Code == "1") {
+                            flexiQuery();
                         }
-                        else {
-                            $.messager.alert('操作提示', res.Message, 'info');
-                        }
+                        $.messager.alert('操作提示', res.Message, 'info');
 
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
                     }
-                })
+                });
             }
         });
 
-    };
+    }; 
+    //启用停用
+    function UpdateIsStop(ID,ISSTOP)
+    {
+        $.messager.confirm('操作提示', "确认" + ISSTOP + "吗？", function (r) {
+            if (r) {;
+                //获取空对象用于保存添加的信息
+                $.ajax({
+                    type: 'post', //使用post方法访问后台
+                    dataType: "json", //返回json格式的数据
+                    url: '/SCHEME/UpdateIsStop', //要访问的后台地址
+                    contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
+                    data: 'ID=' + ID + '&ISSTOP=' + ISSTOP, //要发送的数据
+                    beforeSend: function () {
+                        //InitAlertJS();
+                    },
+                    complete: function () {
+                    }, //AJAX请求完成时隐藏loading提示
 
+                    success: function (res) {//msg为返回的数据，在这里做数据绑定
+                        if (res.Code == "1") {
+                            flexiQuery();
+                        }
+                        $.messager.alert('操作提示', res.Message, 'info');
+
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
+                    }
+                });
+            }
+        });
+    }
     $(document).ready(function () {
         //flexiQuery();
         bindShiyanshi("#UNDERTAKE_LABORATORYID");

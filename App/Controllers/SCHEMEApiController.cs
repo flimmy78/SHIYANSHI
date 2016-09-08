@@ -169,7 +169,7 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="collection"></param>
         /// <returns></returns>  
-        public Common.ClientResult.Result Delete(string query)
+        public Common.ClientResult.Result MultOp(string query,string Op)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
 
@@ -177,33 +177,78 @@ namespace Langben.App.Controllers
             string[] deleteId = query.GetString().Split(',');
             if (deleteId != null && deleteId.Length > 0)
             {
-                if (m_BLL.DeleteCollection(ref validationErrors, deleteId))
+                if (Op == "删除")
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.DeleteSucceed + "，信息的Id为" + string.Join(",", deleteId), "消息"
-                        );//删除成功，写入日志
-                    result.Code = Common.ClientCode.Succeed;
-                    result.Message = Suggestion.DeleteSucceed;
-                }
-                else
-                {
-                    if (validationErrors != null && validationErrors.Count > 0)
+                    if (m_BLL.DeleteCollection(ref validationErrors, deleteId))
                     {
-                        validationErrors.All(a =>
-                        {
-                            returnValue += a.ErrorMessage;
-                            return true;
-                        });
+                        LogClassModels.WriteServiceLog(Suggestion.DeleteSucceed + "，方案的Id为" + string.Join(",", deleteId), "消息"
+                            );//删除成功，写入日志
+                        result.Code = Common.ClientCode.Succeed;
+                        result.Message = Suggestion.DeleteSucceed;
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId)+ "," + returnValue, "消息"
-                        );//删除失败，写入日志
-                    result.Code = Common.ClientCode.Fail;
-                    result.Message = Suggestion.DeleteFail + returnValue;
+                    else
+                    {
+                        if (validationErrors != null && validationErrors.Count > 0)
+                        {
+                            validationErrors.All(a =>
+                            {
+                                returnValue += a.ErrorMessage;
+                                return true;
+                            });
+                        }
+                        LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，方案的Id为" + string.Join(",", deleteId) + "," + returnValue, "消息"
+                            );//删除失败，写入日志
+                        result.Code = Common.ClientCode.Fail;
+                        result.Message = Suggestion.DeleteFail + returnValue;
+                    }
+                }
+                else if(Op=="停用")
+                {
+                    List<SCHEME> list = new List<SCHEME>();
+                    foreach(string id in deleteId)
+                    {                        
+                        SCHEME entity = m_BLL.GetById(id);
+                        string currentPerson = GetCurrentPerson();
+                        entity.UPDATEPERSON = currentPerson;
+                        entity.UPDATETIME = DateTime.Now;
+                        entity.ISSTOP = "停用";
+                        list.Add(entity);
+                    }
+                    if(m_BLL.EditCollection(ref validationErrors, (IQueryable<SCHEME>)list))
+                    {
+                        LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，方案的Id为" + string.Join(",", deleteId), "消息");//修改成功，写入日志
+                                    
+                        result.Code = Common.ClientCode.Succeed;
+                        result.Message = Suggestion.UpdateSucceed;
+                        return result; //提示更新成功 
+                    }
+                    else
+                    {
+                        LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，方案的Id为" + string.Join(",", deleteId) + "," + returnValue, "消息");//删除失败，写入日志
+                        result.Code = Common.ClientCode.Fail;
+                        result.Message = Suggestion.UpdateFail + returnValue;
+                    }
                 }
             }
             return result;
         }
+        /// <summary>
+        /// 创建
+        /// </summary>
+        /// <param name="NAME">方案名称</param>       
+        /// <param name="UNDERTAKE_LABORATORYID">实验室编号</param>
+        /// <param name="RULEIDs">检查项编号多个,分割例如（1,2)</param>
+        /// <returns></returns>
+        public Common.ClientResult.Result Create(string NAME,string UNDERTAKE_LABORATORYID,string RULEIDs)
+        {
+            Common.ClientResult.Result result = new Common.ClientResult.Result();
+            result.Code = Common.ClientCode.Succeed;
+            result.Message = Suggestion.InsertSucceed;
+            return result;
+        }
 
-        IBLL.ISCHEMEBLL m_BLL;
+
+            IBLL.ISCHEMEBLL m_BLL;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
