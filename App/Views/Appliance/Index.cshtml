@@ -23,91 +23,65 @@
 
 }
 <script type="text/javascript">
-    function getCity(City) {
-        $(City).empty();
-        $("<option></option>")
-                .val("")
-                .text("请选择")
-                .appendTo($(City));
-    }
-    function fuzhi(rec) {
-        var BAR_CODE_NUM = rec.name.split(',')[0];
-        var FACTORY_NUM = rec.name.split(',')[1];
-        var VERSION = rec.name.split(',')[2];
-        var APPLIANCE_NAME = rec.name.split(',')[3];
-        $('#FACTORY_NUM').combobox('clear');
-        $('#FACTORY_NUM').combobox('setValue', FACTORY_NUM);
-        $('#VERSION').combobox('clear');
-        $('#VERSION').combobox('setValue', VERSION);
-        $('#BAR_CODE_NUM').combobox('clear');
-        $('#BAR_CODE_NUM').combobox('setValue', BAR_CODE_NUM);
-        $('#APPLIANCE_NAME').combobox('clear');
-        $('#APPLIANCE_NAME').combobox('setValue', APPLIANCE_NAME);
-    }
-    //条形码
-    var BAR_CODE_NUM = function (param, success, error) {
-        //获取输入的值
-        var q = param.q || "";
-        //此处q的length代表输入多少个字符后开始查询
-        if (q.length <= 0) return false;
-        $.ajax({
-            url: "../Appliance/SearchAutoComplete/BAR_CODE_NUM",
-            type: "post",
-            data: {
-                //传值，还是JSON数据
-                term: q
-            },
-            //重要，如果写jsonp会报转换错误，此处不写都可以
-            dataType: "json",
-            success: function (data) {
-                //关键步骤，遍历一个MAP对象
-                var items = $.map(data, function (item) {
-                    return {
-                        id: item.label,
-                        name: item.label
-                    };
+    $(function () {
+
+        //出厂编号
+        $('#FACTORY_NUM').combobox({
+            mode: 'remote',
+            loader: function (param, success, error) {
+                //获取输入的值
+                var q = param.q || "";
+                //此处q的length代表输入多少个字符后开始查询
+                if (q.length <= 0) return false;
+                $.ajax({
+                    url: "../Appliance/SearchAutoComplete/FACTORY_NUM",
+                    type: "post",
+                    data: {
+                        //传值，还是JSON数据
+                        term: q
+                    },
+                    //重要，如果写jsonp会报转换错误，此处不写都可以
+                    dataType: "json",
+                    success: function (data) {
+                        //关键步骤，遍历一个MAP对象
+                        var items = $.map(data, function (item) {
+                          
+                            return {
+                                id: item.value
+                                ,
+                                name: item.value
+                                ,
+                                show: item.label
+                            };
+                        });
+                        //执行loader的success方法
+                        success(items);
+                    },
+                    //异常处理
+                    error: function (xml, text, msg) {
+                        error.apply(this, arguments);
+                    }
                 });
-                //执行loader的success方法
-                success(items);
             },
-            //异常处理
-            error: function (xml, text, msg) {
-                error.apply(this, arguments);
+            valueField: 'id',
+            textField: 'name',
+            onSelect: function (rec) {
+                var VERSION = rec.show.split(',')[2];
+                var APPLIANCE_NAME = rec.show.split(',')[3]; 
+                $('#VERSION').combobox('clear');
+                $('#VERSION').combobox('setValue', VERSION);
+                $('#APPLIANCE_NAME').combobox('clear');
+                $('#APPLIANCE_NAME').combobox('setValue', APPLIANCE_NAME);
+            },
+            formatter: function (row) {
+                return row.show;
             }
         });
-    };
-    //出厂编号
-    var FACTORY_NUM = function (param, success, error) {
-        //获取输入的值
-        var q = param.q || "";
-        //此处q的length代表输入多少个字符后开始查询
-        if (q.length <= 0) return false;
-        $.ajax({
-            url: "../Appliance/SearchAutoComplete/FACTORY_NUM",
-            type: "post",
-            data: {
-                //传值，还是JSON数据
-                term: q
-            },
-            //重要，如果写jsonp会报转换错误，此处不写都可以
-            dataType: "json",
-            success: function (data) {
-                //关键步骤，遍历一个MAP对象
-                var items = $.map(data, function (item) {
-                    return {
-                        id: item.label,
-                        name: item.label
-                    };
-                });
-                //执行loader的success方法
-                success(items);
-            },
-            //异常处理
-            error: function (xml, text, msg) {
-                error.apply(this, arguments);
-            }
-        });
-    };
+      
+    })
+     
+
+
     //型号
     var VERSION = function (param, success, error) {
         //获取输入的值
@@ -127,8 +101,11 @@
                 //关键步骤，遍历一个MAP对象
                 var items = $.map(data, function (item) {
                     return {
-                        id: item.label,
-                        name: item.label
+                        id: item.value
+                        ,
+                        name: item.value
+                        ,
+                        show: item.label
                     };
                 });
                 //执行loader的success方法
@@ -159,8 +136,11 @@
                 //关键步骤，遍历一个MAP对象
                 var items = $.map(data, function (item) {
                     return {
-                        id: item.label,
-                        name: item.label
+                        id: item.value
+                        ,
+                        name: item.value
+                        ,
+                        show: item.label
                     };
                 });
                 //执行loader的success方法
@@ -174,10 +154,8 @@
     };
 </script>
 <div>
-    条形码：<input id="BAR_CODE_NUM" name="BAR_CODE_NUM" class="easyui-combobox" style="width:250px;" data-options="loader:BAR_CODE_NUM,mode:'remote',valueField:'id',textField:'name',onSelect:function(rec){
-               fuzhi(rec)
-        }" />
-    出厂编号：<input id="FACTORY_NUM" name="FACTORY_NUM" class="easyui-combobox" style="width:250px;" data-options="loader:FACTORY_NUM,mode:'remote',valueField:'id',textField:'name',onSelect:function(rec){fuzhi(rec)}" />
+    条形码：<input id="BAR_CODE_NUM" name="BAR_CODE_NUM" style="width:250px;" />
+    出厂编号：<input id="FACTORY_NUM" name="FACTORY_NUM" style="width:250px;" />
     型号：<input id="VERSION" name="VERSION" class="easyui-combobox" style="width:250px;" data-options="loader:VERSION,mode:'remote',valueField:'id',textField:'name',onSelect:function(rec){fuzhi(rec)}" />
     器具名称：<input id="APPLIANCE_NAME" name="APPLIANCE_NAME" class="easyui-combobox" style="width:250px;" data-options="loader:APPLIANCE_NAME,mode:'remote',valueField:'id',textField:'name',onSelect:function(rec){fuzhi(rec)}" />
 </div>
