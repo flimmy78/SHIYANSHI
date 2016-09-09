@@ -99,7 +99,8 @@ namespace Langben.App.Controllers
                     ,
                     APPROVALISAGGREY = s.APPROVALISAGGREY
                     ,
-                    PACKAGETYPE = s.PACKAGETYPE
+                    PACKAGETYPE = s.PACKAGETYPE,
+                    FILECONCLUSION=s.FILECONCLUSION
 
                 }
 

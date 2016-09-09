@@ -70,7 +70,6 @@
         <EntityTypeShape EntityType="Model.VJIANDINGRENWU" Width="1.5" PointX="16.75" PointY="16.75" />
         <EntityTypeShape EntityType="Model.VQIJULINGQU1" Width="1.5" PointX="16.75" PointY="5.75" />
         <EntityTypeShape EntityType="Model.VQIJULINGQU2" Width="1.5" PointX="12.75" PointY="19.75" />
-        <EntityTypeShape EntityType="Model.VSHENHE" Width="1.5" PointX="22.75" PointY="21.75" />
         <AssociationConnector Association="Model.FK_AC_VOLTA_REFERENCE_OVERALL_" />
         <AssociationConnector Association="Model.FK_ACTIVE_P_REFERENCE_OVERALL_" />
         <AssociationConnector Association="Model.FK_MAXIMUM__REFERENCE_METERIN2" />
@@ -126,8 +125,9 @@
         <AssociationConnector Association="Model.SysDocumentSysPerson" />
         <AssociationConnector Association="Model.SysMenuSysOperation" />
         <AssociationConnector Association="Model.SysRoleSysPerson" />
-        <EntityTypeShape EntityType="Model.VSHENPI" Width="1.5" PointX="18.375" PointY="25.75" />
         <EntityTypeShape EntityType="Model.VRUKU" Width="1.5" PointX="25.375" PointY="21.75" />
+        <EntityTypeShape EntityType="Model.VSHENHE" Width="1.5" PointX="22.375" PointY="21.75" />
+        <EntityTypeShape EntityType="Model.VSHENPI" Width="1.5" PointX="18.375" PointY="25.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

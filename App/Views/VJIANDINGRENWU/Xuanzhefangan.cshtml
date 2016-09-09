@@ -134,48 +134,108 @@
     </fieldset>
 }
 <script type="text/javascript">
+    //报告上传非空判断
+    function baogaoif(arr) {
+        var zhi = "";
+        if (isNull(arr.REPORT_CATEGORY)) {
+            zhi += "报告类别不能为空！<br>";
+        }
+        if (isNull(arr.CERTIFICATE_CATEGORY)) {
+            zhi += "证书类别不能为空！<br>";
+        }
+        else {
+            if (arr.CERTIFICATE_CATEGORY == "检定") {
+                if (isNull(arr.CERTIFICATION_AUTHORITY)) {
+                    zhi += "检定授权不能为空！<br>";
+                }
+            }
+            else if (arr.CERTIFICATE_CATEGORY == "校准") {
+                if (isNull(arr.CNAS)) {
+                    zhi += "CNAS不能为空！<br>";
+                }
+                else {
+                    if (arr.CNAS == "Yes") {
+                        if (isNull(arr.CONTROL_NUMBER)) {
+                            zhi += "控制编号不能为空！<br>";
+                        }
+                    }
+                }
+            }
+        }
+        if (isNull(arr.CNAS)) {
+            zhi += "报告类别不能为空！<br>";
+            if (true) {
+
+            }
+        }
+        if (isNull(arr.REPORT_CATEGORY)) {
+            zhi += "报告类别不能为空！<br>";
+        }
+        if (zhi != "") {
+            $.messager.alert('操作提示', zhi, 'info');
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    }
+    /*
+用途：检查输入字符串是否为空或者全部都是空格
+输入：str
+返回：
+如果全是空返回true,否则返回false
+*/
+    function isNull(str) {
+        if (str == "") return true;
+        var regu = "^[ ]+$";
+        var re = new RegExp(regu);
+        return re.test(str);
+    }
     //报告上传
     function shangchuan() {
         var arr = {
-            REPORT_CATEGORY: $("#REPORT_CATEGORY_String").val(),
-            CERTIFICATE_CATEGORY: $("#CERTIFICATE_CATEGORY_String").val(),
-            CNAS: $("input[name='CNAS']:checked").val(),
-            CERTIFICATION_AUTHORITY: $("input[name='CERTIFICATION_AUTHORITY']:checked").val(),
-            CONTROL_NUMBER: $("#CONTROL_NUMBER_String").val(),
-            QUALIFICATIONS: $("#QUALIFICATIONS").val(),
-            APPLIANCE_LABORATORYID: $("#APPLIANCE_LABORATORYID_String").val(),
+            REPORT_CATEGORY: $("#REPORT_CATEGORY").val(),//报告类别
+            CERTIFICATE_CATEGORY: $("#CERTIFICATE_CATEGORY").val(),//证书类别
+            CNAS: $("input[name='CNAS']:checked").val(),//CNAS
+            CERTIFICATION_AUTHORITY: $("input[name='CERTIFICATION_AUTHORITY']:checked").val(),//检定授权
+            CONTROL_NUMBER: $("#CONTROL_NUMBER").val(),//控制编号
+            QUALIFICATIONS: $("#QUALIFICATIONS").val(),//资质
+            APPLIANCE_LABORATORYID: $("#APPLIANCE_LABORATORYID").val(),
             ID: $("#ID_String").val()
         }
-        $.ajax({
-            url: "/api/PREPARE_SCHEMEApi/Post",
-            type: "Post",
-            data: arr,
-            dataType: "json",
+        if (baogaoif(arr)) {
+            $.ajax({
+                url: "/api/PREPARE_SCHEMEApi/Post",
+                type: "Post",
+                data: arr,
+                dataType: "json",
 
-            success: function (data) {
-                if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
-                else if (data.Code == 1) {
-                    var id = "@ViewBag.Id";
-                    var di = data.Id;
-                    window.location.href = "/VJIANDINGRENWU/BaoGaoShangChuan/" + di + "|@ViewBag.APPLIANCE_DETAIL_INFORMATIONID";
-                    return false;
-                }
-                else {
-                    if ($.messager) {
-                        $.messager.defaults.ok = '继续';
-                        $.messager.defaults.cancel = '返回';
-
-                        $.messager.confirm('操作提示', data.Message, function (r) {
-                            if (!r) {
-                                window.location.href = 'javascript:history.go(-1)';
-                            }
-                        });
+                success: function (data) {
+                    if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                    else if (data.Code == 1) {
+                        var id = "@ViewBag.Id";
+                        var di = data.Id;
+                        window.location.href = "/VJIANDINGRENWU/BaoGaoShangChuan/" + di + "|@ViewBag.APPLIANCE_DETAIL_INFORMATIONID";
+                        return false;
                     }
+                    else {
+                        if ($.messager) {
+                            $.messager.defaults.ok = '继续';
+                            $.messager.defaults.cancel = '返回';
+
+                            $.messager.confirm('操作提示', data.Message, function (r) {
+                                if (!r) {
+                                    window.location.href = 'javascript:history.go(-1)';
+                                }
+                            });
+                        }
+                    }
+
+
                 }
-
-
-            }
-        })
+            })
+        }
     }
 
     //重新绑定资质
@@ -200,8 +260,9 @@
                                .appendTo($("#QUALIFICATIONS"));
                 }
                 break;
-            case "cnasyno":
+            case "cnasno":
                 $("#kongzhi").hide();
+                $('#CONTROL_NUMBER').val("");
                 if (zhi2 == "华北电力科学研究院有限责任公司") {
                     getCity($("#QUALIFICATIONS"));
                     $("<option></option>")
@@ -327,13 +388,14 @@
             }
         }
         //选择证书
-        $("#CERTIFICATE_CATEGORY_String").change(function () {
-            var option = $("#CERTIFICATE_CATEGORY_String option:selected");
+        $("#CERTIFICATE_CATEGORY").change(function () {
+            var option = $("#CERTIFICATE_CATEGORY option:selected");
             var b = option.text();
             $("#cnasyes,#cnasno,#jiandingno,#jiandingyes").removeAttr("checked");
             if (b == "检定") {
                 $("#cnas").hide();
                 $("#jianding").show();
+                $("#kongzhi").hide();
             }
             else if (b == "校准") {
                 $("#cnas").show();
