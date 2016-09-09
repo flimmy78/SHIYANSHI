@@ -16,9 +16,37 @@
                 <div class="input_search-label">
                     报告类别:
                 </div>
-                <div class="input_search-field">
-                    @Html.DropDownList("REPORT_CATEGORY", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "REPORT_CATEGORY"), "请选择", new { id = "REPORT_CATEGORY" })
-                </div>
+                @if (ViewBag.SYS == Common.LABORATORYNAME.互感器.ToString())
+                {
+                    <div class="input_search-field">
+                        @Html.DropDownList("REPORT_CATEGORY", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "REPORT_CATEGORY_HUGANQI"), "请选择", new { id = "REPORT_CATEGORY" })
+                    </div>
+                }
+                else if (ViewBag.SYS == Common.LABORATORYNAME.指示仪表.ToString())
+                {
+                    <div class="input_search-field">
+                        @Html.DropDownList("REPORT_CATEGORY", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "REPORT_CATEGORY_ZHISHIYIBIAO"), "请选择", new { id = "REPORT_CATEGORY" })
+                    </div>
+                }
+                else if (ViewBag.SYS == Common.LABORATORYNAME.数表三相.ToString() || ViewBag.SYS == Common.LABORATORYNAME.数表单相.ToString())
+                {
+                    <div class="input_search-field">
+                        @Html.DropDownList("REPORT_CATEGORY", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "REPORT_CATEGORY_SHUZI"), "请选择", new { id = "REPORT_CATEGORY" })
+                    </div>
+                }
+                else if (ViewBag.SYS == Common.LABORATORYNAME.直流仪器.ToString())
+                {
+                    <div class="input_search-field">
+                        @Html.DropDownList("REPORT_CATEGORY", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "REPORT_CATEGORY_ZHILIU"), "请选择", new { id = "REPORT_CATEGORY" })
+                    </div>
+                }
+                else if (ViewBag.SYS == Common.LABORATORYNAME.电能.ToString())
+                {
+                    <div class="input_search-field">
+                        @Html.DropDownList("REPORT_CATEGORY", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "REPORT_CATEGORY_DIANNENG"), "请选择", new { id = "REPORT_CATEGORY" })
+                    </div>
+                }
+
             </div>
             <br style="clear:both" />
             <div class="input_search">
@@ -43,36 +71,63 @@
                     No: <input type="radio" id="cnasno" name="CNAS" onclick="zizhiget(this)" value="No" atps="cnasno" />
                 </div>
             </div>
-                
-                <div class="" id="jianding" style="display:none">
-                    <div class="input_search-label">
-                        检定授权:
-                    </div>
-                    <div class="editor-field">
-                        Yes: <input type="radio" id="jiandingyes" name="CERTIFICATION_AUTHORITY" onclick="zizhiget(this)" value="Yes" atps="jiandingyes" />
-                        No: <input type="radio" id="jiandingno" name="CERTIFICATION_AUTHORITY" onclick="zizhiget(this)" value="No" atps="jiandingno" />
-                    </div>
-                </div><br style="clear:both" />
-                <div class="input_search" id="kongzhi" style="display:none">
-                    <div class="input_search-label">
-                        控制编号:
-                    </div>
-                    <div class="input_search-field">
-                        @Html.DropDownList("CONTROL_NUMBER", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "CONTROL_NUMBER"), "请选择", new { id = "CONTROL_NUMBER_String" })
-                    </div>
-                </div><br style="clear:both" />
-                <div class="input_search">
-                    <div class="input_search-label">
-                        资质:
-                    </div>
-                    <div class="input_search-field">
-                        <select id="QUALIFICATIONS" name="QUALIFICATIONS">
-                            <option value="">请选择</option>
-                        </select>
-                    </div>
-                </div>
 
+            <div class="" id="jianding" style="display:none">
+                <div class="input_search-label">
+                    检定授权:
+                </div>
+                <div class="editor-field">
+                    Yes: <input type="radio" id="jiandingyes" name="CERTIFICATION_AUTHORITY" onclick="zizhiget(this)" value="Yes" atps="jiandingyes" />
+                    No: <input type="radio" id="jiandingno" name="CERTIFICATION_AUTHORITY" onclick="zizhiget(this)" value="No" atps="jiandingno" />
+                </div>
+            </div><br style="clear:both" />
+            <div class="input_search" id="kongzhi" style="display:none">
+                <div class="input_search-label">
+                    控制编号:
+                </div>
+                @if (ViewBag.SYS == Common.LABORATORYNAME.互感器.ToString())
+                {
+                    <div class="input_search-field">
+                        @Html.DropDownList("CONTROL_NUMBER", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "CONTROL_NUMBER_HUGANQI"), "请选择", new { id = "CONTROL_NUMBER" })
+                    </div>
+                }
+                else if (ViewBag.SYS == Common.LABORATORYNAME.电能.ToString())
+                {
+                    <div class="input_search-field">
+                        @Html.DropDownList("CONTROL_NUMBER", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "CONTROL_NUMBER_DIANNENG"), "请选择", new { id = "CONTROL_NUMBER" })
+                    </div>
+                }
+                else if (ViewBag.SYS == Common.LABORATORYNAME.指示仪表.ToString())
+                {
+                    <div class="input_search-field">
+                        @Html.DropDownList("CONTROL_NUMBER", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "CONTROL_NUMBER_ZHISHIYIBIAO"), "请选择", new { id = "CONTROL_NUMBER" })
+                    </div>
+                }
+                else if (ViewBag.SYS == Common.LABORATORYNAME.数表三相.ToString() || ViewBag.SYS == Common.LABORATORYNAME.数表单相.ToString())
+                {
+                    <div class="input_search-field">
+                        @Html.DropDownList("CONTROL_NUMBER", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "CONTROL_NUMBER_SHUZI"), "请选择", new { id = "CONTROL_NUMBER" })
+                    </div>
+                }
+                else if (ViewBag.SYS == Common.LABORATORYNAME.直流仪器.ToString())
+                {
+                    <div class="input_search-field">
+                        @Html.DropDownList("CONTROL_NUMBER", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "CONTROL_NUMBER_ZHILIU"), "请选择", new { id = "CONTROL_NUMBER" })
+                    </div>
+                }
+            </div><br style="clear:both" />
+            <div class="input_search">
+                <div class="input_search-label">
+                    资质:
+                </div>
+                <div class="input_search-field">
+                    <select id="QUALIFICATIONS" name="QUALIFICATIONS">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
             </div>
+
+        </div>
         <input type="hidden" value="" id="ACCEPT_ORGNIZATION_HIDDEN" />
         <input type="hidden" name="APPLIANCE_LABORATORYID" id="APPLIANCE_LABORATORYID_String" value="@ViewBag.APPLIANCE_LABORATORYID" />
         <input type="hidden" name="ID" id="ID_String" value="@ViewBag.Id" />
@@ -146,6 +201,7 @@
                 }
                 break;
             case "cnasyno":
+                $("#kongzhi").hide();
                 if (zhi2 == "华北电力科学研究院有限责任公司") {
                     getCity($("#QUALIFICATIONS"));
                     $("<option></option>")
@@ -223,20 +279,18 @@
         })
         if ("@ViewBag.SBL" != "") {
             var a = "@ViewBag.SBL";
-            //var arr = new Array();
-            //var arr2 = new Array();
             var b = a.split(',');
             for (var i = 0; i < b.length; i++) {
                 var c = b[i].split('*');
                 switch (c[0]) {
                     case "REPORT_CATEGORY":
-                        $("#REPORT_CATEGORY_String").val(c[1]);//报告类别
+                        $("#REPORT_CATEGORY").val(c[1]);//报告类别
                         break;
                     case "CONTROL_NUMBER":
-                        $("#CONTROL_NUMBER_String").val(c[1]);//控制编号
+                        $("#CONTROL_NUMBER").val(c[1]);//控制编号
                         break;
                     case "CERTIFICATE_CATEGORY":
-                        $("#CERTIFICATE_CATEGORY_String").val(c[1]);//证书类别
+                        $("#CERTIFICATE_CATEGORY").val(c[1]);//证书类别
                         if (c[1] == "检定") {
                             $("#jianding").show();
                             var ja = b[5].split('*')[1];

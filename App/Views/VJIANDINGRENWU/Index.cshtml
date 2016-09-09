@@ -423,7 +423,11 @@
             else {
                 if (arr[0].ORDER_STATUS=="@Common.ORDER_STATUS.已领取.ToString()") {
                     return true;
-                }               
+                }
+                else {
+                    $.messager.alert('操作提示', '请选择已领取数据!', 'warning');
+                    return false;
+                }
             }
         }
         else {

@@ -66,7 +66,7 @@ namespace Common
         /// <summary>
         /// 批准同意时
         /// </summary>
-        已批准 = 1072,        
+        已批准 = 1072,
         /// <summary>
         /// 报告打印环节
         /// </summary>
@@ -85,10 +85,23 @@ namespace Common
         /// <summary>
         /// 报告通过上传点击上传按钮时记录
         /// </summary>
-        上传=1011,
+        上传 = 1011,
         /// <summary>
         /// 报告通过系统生成的
         /// </summary>
-        生成=1022
+        生成 = 1022
     }
+    /// <summary>
+    /// 实验室
+    /// </summary>
+    public enum LABORATORYNAME
+    {
+        数表三相 = 60001,
+        数表单相 = 60002,
+        电能 = 60003,
+        指示仪表 = 60004,
+        直流仪器 = 60005,
+        互感器 = 60006
+    }
+
 }

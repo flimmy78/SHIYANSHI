@@ -12,6 +12,7 @@ using System.Configuration;
 using Models;
 using System.Web;
 using System.Web.Script.Serialization;
+using Langben.App.Models;
 
 namespace Langben.App.Controllers
 {
@@ -39,12 +40,13 @@ namespace Langben.App.Controllers
         public ActionResult XuanZheFangAn(string id)
         {
             Common.Account account = GetCurrentAccount();
-            string Id = string.Empty;
-            string APPLIANCE_LABORATORYID = string.Empty;
-            List<APPLIANCE_LABORATORY> list = m_BLL4.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(id);
-            foreach (var item in list)
+            string Id = string.Empty;//预备方案表ID
+            string APPLIANCE_LABORATORYID = string.Empty;//器具明细信息_承接实验室ID
+            APPLIANCE_DETAIL_INFORMATION appl = m_BLL5.GetById(id);
+            ICollection<APPLIANCE_LABORATORY> ory= appl.APPLIANCE_LABORATORY;
+            foreach (var item in ory)
             {
-                if (account.UNDERTAKE_LABORATORYName==item.UNDERTAKE_LABORATORYID)
+                if (account.UNDERTAKE_LABORATORYName == item.UNDERTAKE_LABORATORYID)
                 {
                     Id = item.PREPARE_SCHEMEID;
                     APPLIANCE_LABORATORYID = item.ID;
@@ -52,7 +54,7 @@ namespace Langben.App.Controllers
             }
             ViewBag.Id = Id;
             ViewBag.APPLIANCE_LABORATORYID = APPLIANCE_LABORATORYID;
-            ViewBag.APPLIANCE_DETAIL_INFORMATIONID = id;
+            ViewBag.APPLIANCE_DETAIL_INFORMATIONID = id;//器具明细表id
             string erchizi = string.Empty;
             if (!string.IsNullOrEmpty(Id))
             {
@@ -66,7 +68,7 @@ namespace Langben.App.Controllers
                 erchizi += "CNAS*" + prepare.CNAS;
                 ViewBag.SBL = erchizi;
             }
-
+            ViewBag.SYS = account.UNDERTAKE_LABORATORYName;
             return View();
         }
         /// <summary>
@@ -279,7 +281,7 @@ namespace Langben.App.Controllers
                     EQUIPMENT_STATUS_VALUUMN = s.EQUIPMENT_STATUS_VALUUMN
                     ,
                     NAME = s.NAME,
-                    VERSION=s.VERSION
+                    VERSION = s.VERSION
                 }
 
                     )
@@ -292,18 +294,19 @@ namespace Langben.App.Controllers
         IBLL.IFILE_UPLOADERBLL m_BLL2;
         IBLL.IPREPARE_SCHEMEBLL m_BLL3;
         IBLL.IAPPLIANCE_LABORATORYBLL m_BLL4;
-
+        IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL m_BLL5;
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VJIANDINGRENWUController()
-            : this(new VJIANDINGRENWUBLL(), new FILE_UPLOADERBLL(), new PREPARE_SCHEMEBLL(), new APPLIANCE_LABORATORYBLL()) { }
+            : this(new VJIANDINGRENWUBLL(), new FILE_UPLOADERBLL(), new PREPARE_SCHEMEBLL(), new APPLIANCE_LABORATORYBLL(), new APPLIANCE_DETAIL_INFORMATIONBLL()) { }
 
-        public VJIANDINGRENWUController(VJIANDINGRENWUBLL bll, FILE_UPLOADERBLL bll2, PREPARE_SCHEMEBLL bll3, APPLIANCE_LABORATORYBLL bll4)
+        public VJIANDINGRENWUController(VJIANDINGRENWUBLL bll, FILE_UPLOADERBLL bll2, PREPARE_SCHEMEBLL bll3, APPLIANCE_LABORATORYBLL bll4, APPLIANCE_DETAIL_INFORMATIONBLL bll5)
         {
             m_BLL = bll;
             m_BLL2 = bll2;
             m_BLL3 = bll3;
             m_BLL4 = bll4;
+            m_BLL5 = bll5;
         }
 
     }
