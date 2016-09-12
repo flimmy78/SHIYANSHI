@@ -42,6 +42,9 @@
     </div>
 
     <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+        <div class="mt10">
+            <span >交流电压测量：</span><input class="my-textbox" /> Hz
+        </div>
         <div class="mt10" id="tongdao">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_dy_1">
                 <thead>
@@ -453,7 +456,7 @@
 
                 for (var td1 = 0; td1 < 10; td1++) {
 
-                    if ((rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 1) && td1 < 6)
+                    if ((rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10) && td1 < 6)
                         standardValue = calculate(rowspanIdx)[rowidx];
                     else
                         standardValue = "";
