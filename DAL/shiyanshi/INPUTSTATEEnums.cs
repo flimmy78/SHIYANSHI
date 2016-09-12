@@ -12,7 +12,7 @@ namespace Langben.DAL.shiyanshi
     public enum INPUTSTATEEnums
     {       
         /// <summary>
-        /// 合格不合格
+        /// 合格不合格  
         /// </summary>
         HGBHG = 0,
         /// <summary>
