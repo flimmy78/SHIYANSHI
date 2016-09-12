@@ -2,61 +2,64 @@
 @{ Layout = "~/Views/Shared/Index.cshtml"; }
 @using Common
 @using Models
+<script src="~/Scripts/datagrid-detailview.js"></script>
 <div id="divQuery">
-     
-            <div class="input_search">
-            <div class="input_search-label">
-                    @Html.LabelFor(model => model.ORDER_NUMBER):
-             </div>
-                <div class="input_search-field">
-                    <input type='text' id='ORDER_NUMBER'/>
-               </div>
-            </div> 
-            <div class="input_search">
-            <div class="input_search-label">
-                    @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE):
-             </div>
-                <div class="input_search-field">
-                    <input type='text' id='CERTIFICATE_ENTERPRISE'/>
-               </div>
-            </div>
-            <div class="input_search">
-             <div class="input_search-label">
-                    @Html.LabelFor(model => model.CREATEPERSON):
-                </div>
-                <div class="input_search-field">
-                    @Html.DropDownList("CREATEPERSONDDL_String", Models.SysFieldModels.GetSysField("VQIJULINGQU1","CREATEPERSON"),"请选择",new { id = "CREATEPERSONDDL_String" })
-                </div>
-            </div> 
-            <div class="input_search">
-            <div class="input_search-label">
-                    @Html.LabelFor(model => model.CREATETIME):
-             </div>
-                <div class="input_search-field">
-                    <input type='text' id='CREATETIME'/>
-               </div>
-            </div>
-            <div class="input_search">
-             <div class="input_search-label">
-                    @Html.LabelFor(model => model.REPORTCREATEPERSON):
-                </div>
-                <div class="input_search-field">
-                    @Html.DropDownList("REPORTCREATEPERSONDDL_String", Models.SysFieldModels.GetSysField("VQIJULINGQU1","REPORTCREATEPERSON"),"请选择",new { id = "REPORTCREATEPERSONDDL_String" })
-                </div>
-            </div>
+
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.ORDER_NUMBER):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='ORDER_NUMBER' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='CERTIFICATE_ENTERPRISE' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.APPLIANCECOLLECTIONSATE):
+        </div>
+        <div class="input_search-field">
+            @Html.DropDownList("APPLIANCECOLLECTIONSATE", Models.SysFieldModels.GetSysField("VQIJULINGQU1", "CREATEPERSON"), "请选择", new { id = "APPLIANCECOLLECTIONSATE" })
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.CREATETIME):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='CREATETIME' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.REPORTTORECEVESTATE):
+        </div>
+        <div class="input_search-field">
+            @Html.DropDownList("REPORTTORECEVESTATE", Models.SysFieldModels.GetSysField("VQIJULINGQU1", "REPORTCREATEPERSON"), "请选择", new { id = "REPORTTORECEVESTATE" })
+        </div>
+    </div>
     <div class='input_search' style="padding-top:10px;">
         <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
             查 询
         </a>
     </div>
 </div>
- <br style="clear: both;" />
+<br style="clear: both;" />
 
 <script type="text/javascript" language="javascript">
     $(function () {
-
+        //$(window).resize(function () {
+        //    $('#flexigridData').datagrid('resize');
+        //});
         $('#flexigridData').datagrid({
-            title: '器具领取1', //列表的标题
+            title: '器具报告领取', //列表的标题
             iconCls: 'icon-site',
             width: 'auto',
             height: 'auto',
@@ -76,21 +79,56 @@
                      handler: function () {
                          return getView();
                      }
-                 } ],
+                 }],
             columns: [[
-
-                
-					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 259 }
-					,{ field: 'ORDER_NUMBER', title:  '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 259 }
-					,{ field: 'CERTIFICATE_ENTERPRISE', title:  '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 259 }
-					,{ field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title:  '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 259 }
-					,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 259 }
-					,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 259 }
-					,{ field: 'REPORTCREATEPERSON', title:  '@Html.DisplayNameFor(model => model.REPORTCREATEPERSON)', width: 259 }
-                ]],
+					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', hidden: true, width: 259 }
+					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 259 }//委托单号
+					, { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 259 }//证书单位
+					, { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 259 }//客户特殊要求
+                    , {
+                        field: 'aa', title: '操作记录', width: 86, formatter: function (value, row, index) {
+                            return html = "<a href=''>详情</a>";
+                        }
+                    }
+            ]],
             pagination: true,
-            rownumbers: true
-
+            rownumbers: true,
+            view: detailview,
+            detailFormatter: function (index, row) {
+                return '<div style="padding:2px"><table class="ddv"></table></div>';
+            },
+            onExpandRow: function (index, row) {
+                var ddv = $(this).datagrid('getRowDetail', index).find('table.ddv');           
+                ddv.datagrid({
+                    url: '../VQIJULINGQU2/PostDataByID/' + row.ID,
+                    fitColumns: true,
+                    singleSelect: true,
+                    rownumbers: true,
+                    loadMsg: '',
+                    height: 'auto',
+                    columns: [[
+                       { field: 'ID', title: '器具明细表id', width: 111 }
+					, { field: 'APPLIANCE_NAME', title: '器具名称', width: 111 }
+					, { field: 'VERSION', title: '型号', width: 111 }
+					, { field: 'FACTORY_NUM', title: '出厂编号', width: 111 }
+					, { field: 'NUM', title: '数量', width: 111 }
+					, { field: 'ATTACHMENT', title: '附件', width: 111 }
+					, { field: 'NAME', title: '承接实验室', width: 111 }
+					, { field: 'APPLIANCE_RECIVE', title: '器具接收', width: 111 }
+					, { field: 'REPORTNUMBER', title: '证书编号', width: 111 }
+					, { field: 'REMARKS', title: '备注', width: 111 }
+                    ]],
+                    onResize: function () {
+                        $('#flexigridData').datagrid('fixDetailRowHeight', index);
+                    },
+                    onLoadSuccess: function () {
+                        setTimeout(function () {
+                            $('#flexigridData').datagrid('fixDetailRowHeight', index);
+                        }, 0);
+                    }
+                });
+                $('#flexigridData').datagrid('fixDetailRowHeight', index);
+            }
         });
 
         var parent = window.dialogArguments; //获取父页面
@@ -119,7 +157,7 @@
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
- 
+
     //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
     function flexiSelect() {
 
@@ -155,7 +193,7 @@
         }
         return false;
     }
- 
+
 
 </script>
 

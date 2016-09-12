@@ -46,8 +46,8 @@ namespace Langben.DAL
 			[Display(Name = "备注", Order = 10)]
 			public object REMARKS { get; set; }
 
-			[Display(Name = "委托单号", Order = 11)]
-			public object ORDER_NUMBER { get; set; }
+			[Display(Name = "委托单id", Order = 11)]
+			public object ORDER_TASK_INFORMATIONID { get; set; }
 
 
     }

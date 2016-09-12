@@ -53,7 +53,7 @@ namespace Langben.App.Controllers
                     ,
                     REMARKS = s.REMARKS
                     ,
-                    ORDER_NUMBER = s.ORDER_NUMBER
+                    ORDER_TASK_INFORMATIONID = s.ORDER_TASK_INFORMATIONID
 
 
                 })
