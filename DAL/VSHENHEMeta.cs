@@ -63,6 +63,9 @@ namespace Langben.DAL
 
         [Display(Name = "报告状态", Order = 16)]
         public object REPORTSTATUS { get; set; }
+
+        [Display(Name = "上传报告结论", Order = 17)]
+        public object FILECONCLUSION { get; set; }
     }
 
 

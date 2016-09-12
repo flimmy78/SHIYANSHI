@@ -396,7 +396,9 @@
             zhi += "联系人2不能为空！<br>";
         }
         if (isNull(entity.CONTACT_PHONE2)) {
-            zhi += "联系电话2不能为空！<br>";
+            zhi += "联系电话2不能为空！<br>";         
+        }
+        else {
             if (checkPhone(entity.CONTACT_PHONE2)) {
                 zhi += "联系电话2格式不对！<br>";
             }
@@ -415,7 +417,9 @@
                     zhi += "型号不能为空！<br>";
                 }
                 if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
-                    zhi += "数量不能为空！<br>";
+                    zhi += "数量不能为空！<br>";                  
+                }
+                else {
                     if (isInteger(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
                         zhi += "数量必须为数字整型！<br>";
                     }

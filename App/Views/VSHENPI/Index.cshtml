@@ -75,7 +75,16 @@
 					, { field: 'CERTIFICATE_CATEGORY', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 77 }
 					, { field: 'QUALIFICATIONS', title: '@Html.DisplayNameFor(model => model.QUALIFICATIONS)', width: 77 }
 					, { field: 'CONCLUSION_EXPLAIN', title: '@Html.DisplayNameFor(model => model.CONCLUSION_EXPLAIN)', width: 77 }
-					, { field: 'CONCLUSION', title: '@Html.DisplayNameFor(model => model.CONCLUSION)', width: 77 }
+					, {
+					    field: 'CONCLUSION', title: '@Html.DisplayNameFor(model => model.CONCLUSION)', width: 86, formatter: function (value, row, index) {
+					        if (row.PACKAGETYPE == "上传") {
+					            return row.FILECONCLUSION;
+					        }
+					        else {
+					            return row.CONCLUSION;
+					        }
+					    }
+					}
                     , {
                         field: 'aa', title: '操作', width: 86, formatter: function (value, row, index) {
                             if (row.PACKAGETYPE == "上传") {

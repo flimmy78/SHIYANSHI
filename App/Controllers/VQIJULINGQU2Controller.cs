@@ -71,14 +71,64 @@ namespace Langben.App.Controllers
                     ,
                     REMARKS = s.REMARKS
                     ,
-                    ORDER_NUMBER = s.ORDER_NUMBER
+                    ORDER_TASK_INFORMATIONID = s.ORDER_TASK_INFORMATIONID
 
                 }
 
                     )
             });
         }
+        /// <summary>
+        /// 异步加载数据
+        /// </summary>
+        /// <param name="page">页码</param>
+        /// <param name="rows">每页显示的行数</param>
+        /// <param name="order">升序asc（默认）还是降序desc</param>
+        /// <param name="sort">排序字段</param>
+        /// <param name="search">查询条件</param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult PostDataByID(string id)
+        {
+            if (!string.IsNullOrWhiteSpace(id))
+            {
 
+                id = "ORDER_TASK_INFORMATIONID&" + id;
+            }
+            int total = 0;
+            List<VQIJULINGQU2> queryData = m_BLL.GetByParam(id, 1, 100, "DESC", "ID", id, ref total);
+            return Json(new datagrid
+            {
+                total = total,
+                rows = queryData.Select(s => new
+                {
+                    ID = s.ID
+                    ,
+                    APPLIANCE_NAME = s.APPLIANCE_NAME
+                    ,
+                    VERSION = s.VERSION
+                    ,
+                    FACTORY_NUM = s.FACTORY_NUM
+                    ,
+                    NUM = s.NUM
+                    ,
+                    ATTACHMENT = s.ATTACHMENT
+                    ,
+                    NAME = s.NAME
+                    ,
+                    APPLIANCE_RECIVE = s.APPLIANCE_RECIVE
+                    ,
+                    REPORTNUMBER = s.REPORTNUMBER
+                    ,
+                    REMARKS = s.REMARKS
+                    ,
+                    ORDER_TASK_INFORMATIONID = s.ORDER_TASK_INFORMATIONID
+
+                }
+
+                    )
+            });
+        }
 
         IBLL.IVQIJULINGQU2BLL m_BLL;
 

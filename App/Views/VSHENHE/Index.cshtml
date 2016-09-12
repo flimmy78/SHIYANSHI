@@ -67,8 +67,17 @@
 					,{ field: 'CERTIFICATE_CATEGORY', title:  '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 86 }
 					,{ field: 'QUALIFICATIONS', title:  '@Html.DisplayNameFor(model => model.QUALIFICATIONS)', width: 86 }
 					,{ field: 'CONCLUSION_EXPLAIN', title:  '@Html.DisplayNameFor(model => model.CONCLUSION_EXPLAIN)', width: 86 }
-					,{ field: 'CONCLUSION', title:  '@Html.DisplayNameFor(model => model.CONCLUSION)', width: 86 }
-					, { field: 'ISAGGREY', title: '@Html.DisplayNameFor(model => model.ISAGGREY)', width: 86 }
+					, {
+					    field: 'CONCLUSION', title: '@Html.DisplayNameFor(model => model.CONCLUSION)', width: 86, formatter: function (value, row, index) {
+					        if (row.PACKAGETYPE == "上传") {
+					            return row.FILECONCLUSION;
+					        }
+					        else {
+					            return row.CONCLUSION;
+					        }
+					    }
+					}
+					, {field: 'ISAGGREY', title: '@Html.DisplayNameFor(model => model.ISAGGREY)', width: 86}
                     , {
                         field: 'aa', title: '操作', width: 86, formatter: function (value, row, index) {
              
