@@ -26,10 +26,10 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult Index()
         {
-        
+
             return View();
         }
-           
+
         /// <summary>
         /// 异步加载数据
         /// </summary>
@@ -43,6 +43,7 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public JsonResult GetData(string id, int page, int rows, string order, string sort, string search)
         {
+            //search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.已分配.GetHashCode() + "*" + Common.ORDER_STATUS.已领取.GetHashCode() + "*" + Common.ORDER_STATUS.试验完成.GetHashCode() + "*" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已返还.GetHashCode() + "";
 
             int total = 0;
             List<VQIJULINGQU1> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
@@ -52,14 +53,17 @@ namespace Langben.App.Controllers
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID
-					,ORDER_NUMBER = s.ORDER_NUMBER
-					,CERTIFICATE_ENTERPRISE = s.CERTIFICATE_ENTERPRISE
-					,CUSTOMER_SPECIFIC_REQUIREMENTS = s.CUSTOMER_SPECIFIC_REQUIREMENTS
-					,
+                    ,
+                    ORDER_NUMBER = s.ORDER_NUMBER
+                    ,
+                    CERTIFICATE_ENTERPRISE = s.CERTIFICATE_ENTERPRISE
+                    ,
+                    CUSTOMER_SPECIFIC_REQUIREMENTS = s.CUSTOMER_SPECIFIC_REQUIREMENTS
+                    ,
                     APPLIANCECOLLECTIONSATE = s.APPLIANCECOLLECTIONSATE
                     ,
                     CREATETIME = s.CREATETIME
-					,
+                    ,
                     REPORTTORECEVESTATE = s.REPORTTORECEVESTATE
 
                 }
@@ -80,7 +84,7 @@ namespace Langben.App.Controllers
         {
             m_BLL = bll;
         }
-      
+
     }
 }
 

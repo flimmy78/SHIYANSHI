@@ -1296,6 +1296,8 @@
           <Property Name="REPORTNUMBER" Type="varchar2" MaxLength="200" />
           <Property Name="REMARKS" Type="varchar2" MaxLength="4000" />
           <Property Name="ORDER_TASK_INFORMATIONID" Type="varchar2" MaxLength="36" />
+          <Property Name="APPLIANCECOLLECTIONSATE" Type="varchar2" MaxLength="200" />
+          <Property Name="REPORTTORECEVESTATE" Type="varchar2" MaxLength="200" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VRUKU”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -2223,7 +2225,9 @@ FROM "TENGFEI"."VQIJULINGQU1" "VQIJULINGQU1"</DefiningQuery>
 "VQIJULINGQU2"."APPLIANCE_RECIVE" AS "APPLIANCE_RECIVE", 
 "VQIJULINGQU2"."REPORTNUMBER" AS "REPORTNUMBER", 
 "VQIJULINGQU2"."REMARKS" AS "REMARKS", 
-"VQIJULINGQU2"."ORDER_TASK_INFORMATIONID" AS "ORDER_TASK_INFORMATIONID"
+"VQIJULINGQU2"."ORDER_TASK_INFORMATIONID" AS "ORDER_TASK_INFORMATIONID", 
+"VQIJULINGQU2"."APPLIANCECOLLECTIONSATE" AS "APPLIANCECOLLECTIONSATE", 
+"VQIJULINGQU2"."REPORTTORECEVESTATE" AS "REPORTTORECEVESTATE"
 FROM "TENGFEI"."VQIJULINGQU2" "VQIJULINGQU2"</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VRUKU" EntityType="Self.VRUKU" store:Type="Views" store:Schema="TENGFEI">
@@ -4865,6 +4869,8 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="REPORTNUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="REMARKS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="ORDER_TASK_INFORMATIONID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="APPLIANCECOLLECTIONSATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="REPORTTORECEVESTATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -6277,6 +6283,8 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="VQIJULINGQU2">
             <EntityTypeMapping TypeName="Model.VQIJULINGQU2">
               <MappingFragment StoreEntitySet="VQIJULINGQU2">
+                <ScalarProperty Name="REPORTTORECEVESTATE" ColumnName="REPORTTORECEVESTATE" />
+                <ScalarProperty Name="APPLIANCECOLLECTIONSATE" ColumnName="APPLIANCECOLLECTIONSATE" />
                 <ScalarProperty Name="ORDER_TASK_INFORMATIONID" ColumnName="ORDER_TASK_INFORMATIONID" />
                 <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
                 <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
