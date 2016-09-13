@@ -72,6 +72,10 @@ namespace Langben.App.Controllers
                     REMARKS = s.REMARKS
                     ,
                     ORDER_TASK_INFORMATIONID = s.ORDER_TASK_INFORMATIONID
+                    ,
+                    APPLIANCECOLLECTIONSATE=s.APPLIANCECOLLECTIONSATE
+                    ,
+                    REPORTTORECEVESTATE=s.REPORTTORECEVESTATE
 
                 }
 

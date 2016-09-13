@@ -38,7 +38,7 @@ namespace Common
         /// <summary>
         /// 器具领取环节
         /// </summary>
-        器具已返还 = 1043,
+        器具已领取 = 1043,
 
     }
 
@@ -74,7 +74,7 @@ namespace Common
         /// <summary>
         /// 报告领取环节
         /// </summary>
-        报告已发放 = 1120
+        报告已领取 = 1120
     }
 
     /// <summary>
