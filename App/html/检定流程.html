@@ -1,0 +1,124 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>检定</title>
+    <link id="easyuiTheme" href="Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="Res/easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="Res/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="Content/default.css" rel="stylesheet" />
+    <link href="Content/StyleSheet.css" rel="stylesheet" />
+
+
+    <script src="Scripts/jquery.min.js"></script>
+    <script src="Scripts/JScriptCommon.js"></script>
+    <script src="Res/easyui/jquery.easyui.min.js"></script>
+    <script src="Res/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="Scripts/jquery.validate.js"></script>
+    <script src="Scripts/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body class="easyui-layout">
+    <input type="hidden" id="rowindex" value="1" />
+    
+
+<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+  <div class="mt10">
+       外观检查：<input type="radio" name="op" value="01"><span>合格</span> <input name="op" type="radio" value="02"><span>不合格</span>
+    </div>
+        <div class="mt10" id="tongdao">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl " id="tongdao_1" data-options="singleSelect:true,fitColumns:true,striped:true">
+                <thead>
+                   <tr>
+                        <th align="center" colspan="4">
+                          检定项目 
+                        </th>
+                    </tr>
+                    <tr>
+                        <th  align="center" width="25%">检定项目</th>
+                        <th  align="center" width="25%">首次检定</th>
+                        <th  align="center" width="25%"> 周期检定 </th>
+                        <th  align="center"> 备注 - 单相 </th>
+                        
+                    </tr>
+                   
+                </thead>
+                 
+                <tbody >
+                  <tr>
+                    <td align="center">外观检查</td>
+                    <td align="center">+</td>
+                    <td align="center">+</td>
+                    <td align="center">合格</td>
+                  </tr>
+                  <tr>
+                    <td align="center">直流电流输出</td>
+                    <td align="center">+</td>
+                    <td align="center">+</td>
+                    <td align="center">合格</td>
+                  </tr>
+                  <tr>
+                    <td align="center">短期稳定度的测试</td>
+                    <td align="center">+</td>
+                    <td align="center">-</td>
+                    <td align="center"><input name="" type="text" style="width:100%" placeholder="请输入误差值"></td>
+                  </tr>
+                  <tr>
+                    <td align="center">线性误差</td>
+                    <td align="center">+</td>
+                    <td align="center">-</td>
+                    <td align="center">合格</td>
+                  </tr>
+                  <tr>
+                    <td align="center">负载调整率</td>
+                    <td align="center">+</td>
+                    <td align="center">-</td>
+                    <td align="center">合格</td>
+                  </tr>
+                  <tr>
+                    <td align="center">分辨力</td>
+                    <td align="center">+</td>
+                    <td align="center">-</td>
+                    <td align="center">合格</td>
+                  </tr>
+                  <tr>
+                    <td align="center">电源调整率</td>
+                    <td align="center">+</td>
+                    <td align="center">-</td>
+                    <td align="center">合格</td>
+                  </tr>
+                  <tr>
+                    <td align="center">纹波和噪声电压</td>
+                    <td align="center">+</td>
+                    <td align="center">-</td>
+                    <td align="center">合格</td>
+                  </tr>
+                  <tr>
+                    <td align="center">共模干扰抑制能力</td>
+                    <td align="center">+</td>
+                    <td align="center">-</td>
+                    <td align="center">合格</td>
+                  </tr>
+ 
+</tbody>
+               
+            </table>
+
+
+
+        </div>
+
+        <div class="mt10">
+            <i class="tips icon-tip"></i> 注：符号“+”表示必须检定，“-”表示可不检定。
+  </div>
+
+
+    </div>
+
+   
+    
+</body>
+</html>

@@ -123,7 +123,8 @@ namespace Langben.App.Controllers
                     ,
                     ISAGGREY = s.ISAGGREY,
 
-                    PACKAGETYPE = s.PACKAGETYPE
+                    PACKAGETYPE = s.PACKAGETYPE,
+                    FILECONCLUSION=s.FILECONCLUSION
 
                 }
 

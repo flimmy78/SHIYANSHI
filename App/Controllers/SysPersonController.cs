@@ -147,6 +147,10 @@ namespace Langben.App.Controllers
               
                 entity.Id = Result.GetNewId();   
                 string returnValue = string.Empty;
+                //谢承忠添加
+                //登入时做了加密检验
+                entity.Password = EncryptAndDecrypte.EncryptString(entity.Password);
+                entity.SurePassword = EncryptAndDecrypte.EncryptString(entity.SurePassword);
                 if (m_BLL.Create(ref validationErrors, entity))
                 {
                     LogClassModels.WriteServiceLog(Suggestion.InsertSucceed  + "，人员的信息的Id为" + entity.Id,"人员"
@@ -204,7 +208,10 @@ namespace Langben.App.Controllers
                 string currentPerson = GetCurrentPerson();                 
                 entity.UpdateTime = DateTime.Now;
                 entity.UpdatePerson = currentPerson;
-                           
+                //谢承忠添加
+                //登入时做了加密检验
+                entity.Password = EncryptAndDecrypte.EncryptString(entity.Password);
+                entity.SurePassword = EncryptAndDecrypte.EncryptString(entity.SurePassword);
                 string returnValue = string.Empty;   
                 if (m_BLL.Edit(ref validationErrors, entity))
                 {

@@ -12,6 +12,7 @@ using System.Configuration;
 using Models;
 using System.Web;
 using System.Web.Script.Serialization;
+using Langben.App.Models;
 
 namespace Langben.App.Controllers
 {
@@ -39,12 +40,13 @@ namespace Langben.App.Controllers
         public ActionResult XuanZheFangAn(string id)
         {
             Common.Account account = GetCurrentAccount();
-            string Id = string.Empty;
-            string APPLIANCE_LABORATORYID = string.Empty;
-            List<APPLIANCE_LABORATORY> list = m_BLL4.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(id);
-            foreach (var item in list)
+            string Id = string.Empty;//预备方案表ID
+            string APPLIANCE_LABORATORYID = string.Empty;//器具明细信息_承接实验室ID
+            APPLIANCE_DETAIL_INFORMATION appl = m_BLL5.GetById(id);
+            ICollection<APPLIANCE_LABORATORY> ory = appl.APPLIANCE_LABORATORY;
+            foreach (var item in ory)
             {
-                if (account.UNDERTAKE_LABORATORYName==item.UNDERTAKE_LABORATORYID)
+                if (account.UNDERTAKE_LABORATORYName == item.UNDERTAKE_LABORATORYID)
                 {
                     Id = item.PREPARE_SCHEMEID;
                     APPLIANCE_LABORATORYID = item.ID;
@@ -52,7 +54,7 @@ namespace Langben.App.Controllers
             }
             ViewBag.Id = Id;
             ViewBag.APPLIANCE_LABORATORYID = APPLIANCE_LABORATORYID;
-            ViewBag.APPLIANCE_DETAIL_INFORMATIONID = id;
+            ViewBag.APPLIANCE_DETAIL_INFORMATIONID = id;//器具明细表id
             string erchizi = string.Empty;
             if (!string.IsNullOrEmpty(Id))
             {
@@ -66,7 +68,7 @@ namespace Langben.App.Controllers
                 erchizi += "CNAS*" + prepare.CNAS;
                 ViewBag.SBL = erchizi;
             }
-
+            ViewBag.SYS = account.UNDERTAKE_LABORATORYName;
             return View();
         }
         /// <summary>
@@ -77,13 +79,12 @@ namespace Langben.App.Controllers
         public ActionResult BaoGaoShangChuan(string id)
         {
             string[] bs = id.Split('|');
-            ViewBag.Id = bs[0];
+            ViewBag.PREPARE_SCHEMEID = bs[0];
             List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(bs[0]);
             foreach (var item in list)
             {
                 ViewBag.NAME2 = item.NAME2;
                 ViewBag.NAME = item.NAME;
-                ViewBag.ID = item.ID;
                 ViewBag.CONCLUSION = item.CONCLUSION;
                 ViewBag.FILE_UPLOADERID = item.ID;
                 ViewBag.PREPARE_SCHEMEID = item.PREPARE_SCHEMEID;
@@ -170,14 +171,11 @@ namespace Langben.App.Controllers
                 uplo.ID = Result.GetNewId();
                 uplo.CREATETIME = DateTime.Now;//创建时间
                 uplo.CREATEPERSON = GetCurrentPerson();//创建人
-
                 Create = m_BLL2.Create(ref validationErrors, uplo);//上传信息写入附件表中
                 if (Create)
                 {
-
                     Create = m_BLL3.EditField(ref validationErrors, pre);
                 }
-
             }
             else
             {
@@ -188,8 +186,8 @@ namespace Langben.App.Controllers
                 Edit = m_BLL2.EditField(ref validationErrors, uplo);//上传信息修改附件表中
                 if (Edit)
                 {
-                    FILE_UPLOADER file_uplo = m_BLL2.GetById(uplo.ID);//取预备方案id
-                    pre.ID = file_uplo.PREPARE_SCHEMEID;
+                    //FILE_UPLOADER file_uplo = m_BLL2.GetById(uplo.ID);//取预备方案id
+                   // pre.ID = file_uplo.PREPARE_SCHEMEID;
                     Edit = m_BLL3.EditField(ref validationErrors, pre);
                 }
 
@@ -198,15 +196,33 @@ namespace Langben.App.Controllers
             ViewBag.FILE_UPLOADERID = uplo.ID;
             if (Create)
             {
-                ViewBag.Create = Create;
+                ViewBag.Create = "True";
+                ViewBag.Edit = "";
+                ViewBag.NAME2 = uplo.NAME2;//原始记录名称
+                ViewBag.NAME = uplo.NAME;//证书名称
             }
-            else if (Edit)
+            else
             {
-                ViewBag.Edit = Edit;
+                ViewBag.Create = "False";
+                ViewBag.Edit = "";
+                ViewBag.NAME2 = file.NAME2;//原始记录名称
+                ViewBag.NAME = file.NAME;//证书名称
             }
-            ViewBag.REPORTNUMBER = REPORTNUMBER;//证书编号
-            ViewBag.NAME2 = uplo.NAME2;//原始记录名称
-            ViewBag.NAME = uplo.NAME;//证书名称
+            if (Edit)
+            {
+                ViewBag.Edit = "True";
+                ViewBag.Create = "";
+                ViewBag.NAME2 = uplo.NAME2;//原始记录名称
+                ViewBag.NAME = uplo.NAME;//证书名称
+            }
+            else
+            {
+                ViewBag.Edit = "False";
+                ViewBag.Create = "";
+                ViewBag.NAME2 = file.NAME2;//原始记录名称
+                ViewBag.NAME = file.NAME;//证书名称
+            };
+            ViewBag.REPORTNUMBER = REPORTNUMBER;//证书编号          
             ViewBag.CONCLUSION = uplo.CONCLUSION;//结论
             ViewBag.PREPARE_SCHEMEID = pre.ID;//预备方案id
             return View();
@@ -279,7 +295,7 @@ namespace Langben.App.Controllers
                     EQUIPMENT_STATUS_VALUUMN = s.EQUIPMENT_STATUS_VALUUMN
                     ,
                     NAME = s.NAME,
-                    VERSION=s.VERSION
+                    VERSION = s.VERSION
                 }
 
                     )
@@ -292,18 +308,19 @@ namespace Langben.App.Controllers
         IBLL.IFILE_UPLOADERBLL m_BLL2;
         IBLL.IPREPARE_SCHEMEBLL m_BLL3;
         IBLL.IAPPLIANCE_LABORATORYBLL m_BLL4;
-
+        IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL m_BLL5;
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VJIANDINGRENWUController()
-            : this(new VJIANDINGRENWUBLL(), new FILE_UPLOADERBLL(), new PREPARE_SCHEMEBLL(), new APPLIANCE_LABORATORYBLL()) { }
+            : this(new VJIANDINGRENWUBLL(), new FILE_UPLOADERBLL(), new PREPARE_SCHEMEBLL(), new APPLIANCE_LABORATORYBLL(), new APPLIANCE_DETAIL_INFORMATIONBLL()) { }
 
-        public VJIANDINGRENWUController(VJIANDINGRENWUBLL bll, FILE_UPLOADERBLL bll2, PREPARE_SCHEMEBLL bll3, APPLIANCE_LABORATORYBLL bll4)
+        public VJIANDINGRENWUController(VJIANDINGRENWUBLL bll, FILE_UPLOADERBLL bll2, PREPARE_SCHEMEBLL bll3, APPLIANCE_LABORATORYBLL bll4, APPLIANCE_DETAIL_INFORMATIONBLL bll5)
         {
             m_BLL = bll;
             m_BLL2 = bll2;
             m_BLL3 = bll3;
             m_BLL4 = bll4;
+            m_BLL5 = bll5;
         }
 
     }

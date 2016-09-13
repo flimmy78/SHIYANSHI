@@ -30,5 +30,6 @@ namespace Langben.DAL
         public string PACKAGETYPE { get; set; }
         public string REPORTSTATUSZI { get; set; }
         public string REPORTSTATUS { get; set; }
+        public string FILECONCLUSION { get; set; }
     }
 }
