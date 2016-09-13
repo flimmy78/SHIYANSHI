@@ -18,8 +18,8 @@ namespace Langben.DAL
         public string ORDER_NUMBER { get; set; }
         public string CERTIFICATE_ENTERPRISE { get; set; }
         public string CUSTOMER_SPECIFIC_REQUIREMENTS { get; set; }
-        public string CREATEPERSON { get; set; }
         public Nullable<System.DateTime> CREATETIME { get; set; }
-        public string REPORTCREATEPERSON { get; set; }
+        public string APPLIANCECOLLECTIONSATE { get; set; }
+        public string REPORTTORECEVESTATE { get; set; }
     }
 }

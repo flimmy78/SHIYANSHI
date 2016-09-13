@@ -24,6 +24,6 @@ namespace Langben.DAL
         public string APPLIANCE_RECIVE { get; set; }
         public string REPORTNUMBER { get; set; }
         public string REMARKS { get; set; }
-        public string ORDER_NUMBER { get; set; }
+        public string ORDER_TASK_INFORMATIONID { get; set; }
     }
 }

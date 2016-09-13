@@ -26,7 +26,6 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult Index()
         {
-        
             return View();
         }
          /// <summary>
