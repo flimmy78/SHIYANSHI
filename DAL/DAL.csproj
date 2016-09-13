@@ -250,8 +250,9 @@
     <Compile Include="shiyanshi\APPLIANCE_DETAIL_INFORMATIONMeta.cs" />
     <Compile Include="shiyanshi\APPLIANCE_DETAIL_INFORMATIONRepository.cs" />
     <Compile Include="shiyanshi\APPLIANCE_LABORATORYRepository.cs" />
+    <Compile Include="shiyanshi\CommDic.cs" />
     <Compile Include="shiyanshi\FILE_UPLOADERRepository.cs" />
-    <Compile Include="shiyanshi\INPUTSTATEEnums.cs" />
+    <Compile Include="shiyanshi\CommEnums.cs" />
     <Compile Include="shiyanshi\PREPARE_SCHEMERepository.cs" />
     <Compile Include="shiyanshi\VJIANDINGRENWURepository.cs" />
     <Compile Include="shiyanshi\VRUKURepository.cs" />
