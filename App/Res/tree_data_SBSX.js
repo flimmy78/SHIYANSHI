@@ -13,7 +13,8 @@
         "id": "38-1987_2",
         "text": "直流电流输出",
         "attributes": {
-            "InputState": "ZLDLSC"
+            "InputState": "ZLDLSC",            
+            "url": "/SCHEME_RULE/ZLDLSC?RuleID=38-1987_2&InputState=ZLDLSC"
         }
     },
     {

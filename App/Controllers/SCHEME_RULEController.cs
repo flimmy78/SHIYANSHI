@@ -62,7 +62,17 @@ namespace Langben.App.Controllers
             
             return View();
         }
-
+        /// <summary>
+        /// 直流电流输出
+        /// </summary>
+        /// <param name="id">主键</param>
+        /// <returns></returns> 
+        [SupportFilter]
+        public ActionResult ZLDLSC(string id)
+        {
+            ViewBag.Id = id;
+            return View();
+        }
         /// <summary>
         /// 首次编辑
         /// </summary>

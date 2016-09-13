@@ -54,7 +54,7 @@
         <div class="easyui-layout" data-options="fit:true">
 
             <div data-options="region:'west',collapsible:false,split:false" title="树选择" style="width: 300px;">
-                <ul id="tt" class="easyui-tree" data-options="url:'/Res/tree_data1.js',method:'get',animate:true,checkbox:true"></ul>
+                <ul id="tt" class="easyui-tree" data-options="url:'/Res/tree_data_SBSX.js',method:'get',animate:true,checkbox:true"></ul>
             </div>
 
 
@@ -76,13 +76,50 @@
     });
     $(document).ready(function () {       
         bindShiyanshi("#UNDERTAKE_LABORATORYID");
-        $("#UNDERTAKE_LABORATORYID").val($("#hideUNDERTAKE_LABORATORYID").val()).change();
-        //$('#UNDERTAKE_LABORATORYID').combobox({
-        //    onChange: function (n, o) {               
-        //    }
-        //});
+        if ($("#hideUNDERTAKE_LABORATORYID").val() != "") {
+            $("#UNDERTAKE_LABORATORYID").val($("#hideUNDERTAKE_LABORATORYID").val()).change();
+        }
+        $('#UNDERTAKE_LABORATORYID').combobox({
+            onChange: function (n, o) {
+                ChangeTree(n);
+            }
+        });
+        $('#tt').tree({
+            onClick: function (node) {                
+                if ($('#tt').tree('isLeaf', node.target)) {
+                    alert(node.text);
+                    debugger;
+                    if (node.attributes != null && node.attributes.url != null && node.attributes.url.trim() != "") {
+                        $('#mainframe').attr('src', node.attributes.url);
+                    }                  
+                   
+                }
+
+            }
+        });
 
     });
+    //实验室调整变更树内容
+    function ChangeTree(UNDERTAKE_LABORATORYID)
+    {        
+        //debugger;
+        //if(UNDERTAKE_LABORATORYID=="数表三相")
+        //{
+        //    $("#tt").attr("data-options", "url:'/Res/tree_data1.js',method:'get',animate:true,checkbox:true");
+        //}    
+        // data.push({ "url": "/Res/tree_data_SBSX.js"});
+        // $('#tt').tree('load');       
+        
+    }
+    function reload() {
+        var node = $('#tt').tree('getSelected');
+        if (node) {
+            $('#tt').tree('reload', node.target);
+        } else {
+            $('#tt').tree('reload');
+        }
+    }
+
     //数据验证
     function CheckData()
     {

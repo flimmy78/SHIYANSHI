@@ -814,6 +814,7 @@
     <Content Include="Views\ManageTemplate\Index.cshtml" />
     <Content Include="Views\ManageTemplate\Add.cshtml" />
     <Content Include="Views\ManageTemplate\Test.cshtml" />
+    <Content Include="Views\SCHEME_RULE\ZLDLSC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
