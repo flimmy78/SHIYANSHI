@@ -12,25 +12,16 @@ namespace Langben.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class SCHEME_RULE
+    public partial class PROJECTTEMPLET
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SCHEME_RULE()
-        {
-            this.PROJECTTEMPLET = new HashSet<PROJECTTEMPLET>();
-        }
-    
         public string ID { get; set; }
-        public string RULEID { get; set; }
-        public string SCHEMEID { get; set; }
+        public string SCHEME_RULEID { get; set; }
+        public string HTMLVALUE { get; set; }
         public Nullable<System.DateTime> CREATETIME { get; set; }
         public string CREATEPERSON { get; set; }
         public Nullable<System.DateTime> UPDATETIME { get; set; }
         public string UPDATEPERSON { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PROJECTTEMPLET> PROJECTTEMPLET { get; set; }
-        public virtual RULE RULE { get; set; }
-        public virtual SCHEME SCHEME { get; set; }
+        public virtual SCHEME_RULE SCHEME_RULE { get; set; }
     }
 }
