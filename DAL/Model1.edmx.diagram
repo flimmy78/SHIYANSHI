@@ -126,8 +126,8 @@
         <EntityTypeShape EntityType="Model.VRUKU" Width="1.5" PointX="25.375" PointY="21.75" />
         <EntityTypeShape EntityType="Model.VSHENHE" Width="1.5" PointX="22.375" PointY="21.75" />
         <EntityTypeShape EntityType="Model.VSHENPI" Width="1.5" PointX="18.375" PointY="25.75" />
-        <EntityTypeShape EntityType="Model.VQIJULINGQU1" Width="1.5" PointX="10.375" PointY="17.75" />
         <EntityTypeShape EntityType="Model.VQIJULINGQU2" Width="1.5" PointX="12.375" PointY="19.75" />
+        <EntityTypeShape EntityType="Model.VQIJULINGQU1" Width="1.5" PointX="5.375" PointY="21.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

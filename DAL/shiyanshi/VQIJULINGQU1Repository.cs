@@ -19,24 +19,34 @@ namespace Langben.DAL
         /// <param name="search">查询条件</param>
         /// <param name="listQuery">额外的参数</param>
         /// <returns></returns>      
-        public IQueryable<VQIJULINGQU1> GetData(SysEntities db, string order, string sort, string search, params object[] listQuery)
+        public IQueryable<VQIJULINGQU1> GetDataX(SysEntities db, string order, string sort, string search, params object[] listQuery)
         {
             string where = string.Empty;
             int flagWhere = 0;
-
+            string REPORTSTATUSZI = string.Empty;
+            string EQUIPMENT_STATUS_VALUUMN = string.Empty;
             Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
             if (queryDic != null && queryDic.Count > 0)
             {
                 foreach (var item in queryDic)
                 {
+                    //if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "REPORTSTATUSZI")
+                    //{
+                    //    REPORTSTATUSZI = item.Value;
+                    //    continue;
+                    //}
+                    //if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "EQUIPMENT_STATUS_VALUUMN")
+                    //{
+                    //    EQUIPMENT_STATUS_VALUUMN = item.Value;
+                    //    continue;
+                    //}
                     if (flagWhere != 0)
                     {
                         where += " and ";
                     }
                     flagWhere++;
+
                   
-                    
-                    
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Time)) + "] >=  CAST('" + item.Value + "' as   System.DateTime)";
@@ -71,37 +81,26 @@ namespace Langben.DAL
                     where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
                 }
             }
+            //string[] REPORTSTATUSZIarr = null;
+            //if (!string.IsNullOrEmpty(REPORTSTATUSZI))
+            //{
+            //    REPORTSTATUSZIarr = REPORTSTATUSZI.Split('*');
+            //}
+            //string[] EQUIPMENT_STATUS_VALUUMNarr = null;
+            //if (!string.IsNullOrEmpty(EQUIPMENT_STATUS_VALUUMN))
+            //{
+            //    EQUIPMENT_STATUS_VALUUMNarr = EQUIPMENT_STATUS_VALUUMN.Split('*');
+            //}
             return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext 
                      .CreateObjectSet<VQIJULINGQU1>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
+                     //.OrderBy("it.[UPDATETIME] " + "desc")
+                     //.Where(w => REPORTSTATUSZIarr.Contains(w.REPORTSTATUSZI))
+                     //.Where(w => EQUIPMENT_STATUS_VALUUMNarr.Contains(w.EQUIPMENT_STATUS_VALUUMN))
                      .AsQueryable(); 
 
         }
-        /// <summary>
-        /// 通过主键id，获取器具领取1---查看详细，首次编辑
-        /// </summary>
-        /// <param name="id">主键</param>
-        /// <returns>器具领取1</returns>
-        public VQIJULINGQU1 GetById(string id)
-        {
-            using (SysEntities db = new SysEntities())
-            {
-                return GetById(db, id);
-            }                   
-        }
-        /// <summary>
-        /// 通过主键id，获取器具领取1---查看详细，首次编辑
-        /// </summary>
-        /// <param name="id">主键</param>
-        /// <returns>器具领取1</returns>
-        public VQIJULINGQU1 GetById(SysEntities db, string id)
-        { 
-                 return db.VQIJULINGQU1.SingleOrDefault(s => s.ID == id); 
-        }
- 
-        public void Dispose()
-        {            
-        }
+       
     }
 }
 

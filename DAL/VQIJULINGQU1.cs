@@ -21,5 +21,7 @@ namespace Langben.DAL
         public Nullable<System.DateTime> CREATETIME { get; set; }
         public string APPLIANCECOLLECTIONSATE { get; set; }
         public string REPORTTORECEVESTATE { get; set; }
+        public string EQUIPMENT_STATUS_VALUUMN { get; set; }
+        public string REPORTSTATUSZI { get; set; }
     }
 }
