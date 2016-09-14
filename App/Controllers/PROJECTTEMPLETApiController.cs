@@ -15,9 +15,9 @@ using Langben.App.Models;
 namespace Langben.App.Controllers
 {
     /// <summary>
-    /// 方案_规程
+    /// 检定项目模板
     /// </summary>
-    public class SCHEME_RULEApiController : BaseApiController
+    public class PROJECTTEMPLETApiController : BaseApiController
     {
         /// <summary>
         /// 异步加载数据
@@ -27,16 +27,15 @@ namespace Langben.App.Controllers
         public Common.ClientResult.DataResult PostData([FromBody]GetDataParam getParam)
         {
             int total = 0;
-            List<SCHEME_RULE> queryData = m_BLL.GetByParam(null, getParam.page, getParam.rows, getParam.order, getParam.sort, getParam.search, ref total);
+            List<PROJECTTEMPLET> queryData = m_BLL.GetByParam(null, getParam.page, getParam.rows, getParam.order, getParam.sort, getParam.search, ref total);
             var data = new Common.ClientResult.DataResult
             {
                 total = total,
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID
-					,RULEID =   s.RULEIDOld
-					,SCHEMEID =   s.SCHEMEIDOld
-					 
+					,SCHEME_RULEID =   s.SCHEME_RULEIDOld
+					,HTMLVALUE = s.HTMLVALUE
 					,CREATETIME = s.CREATETIME
 					,CREATEPERSON = s.CREATEPERSON
 					,UPDATETIME = s.UPDATETIME
@@ -53,9 +52,9 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="id">编号</param>
         /// <returns></returns>
-        public SCHEME_RULE Get(string id)
+        public PROJECTTEMPLET Get(string id)
         {
-            SCHEME_RULE item = m_BLL.GetById(id);
+            PROJECTTEMPLET item = m_BLL.GetById(id);
             return item;
         }
  
@@ -64,21 +63,21 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
-        public Common.ClientResult.Result Post([FromBody]SCHEME_RULE entity)
+        public Common.ClientResult.Result Post([FromBody]PROJECTTEMPLET entity)
         {           
 
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
             {
-                string currentPerson = GetCurrentPerson();
-               entity.CREATETIME = DateTime.Now;
-                entity.CREATEPERSON = currentPerson;
+                //string currentPerson = GetCurrentPerson();
+                //entity.CreateTime = DateTime.Now;
+                //entity.CreatePerson = currentPerson;
               
                 entity.ID = Result.GetNewId();   
                 string returnValue = string.Empty;
                 if (m_BLL.Create(ref validationErrors, entity))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed  + "，方案_规程的信息的Id为" + entity.ID,"方案_规程"
+                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed  + "，检定项目模板的信息的Id为" + entity.ID,"检定项目模板"
                         );//写入日志 
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.InsertSucceed;
@@ -94,7 +93,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，方案_规程的信息，" + returnValue,"方案_规程"
+                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，检定项目模板的信息，" + returnValue,"检定项目模板"
                         );//写入日志                      
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.InsertFail + returnValue;
@@ -113,20 +112,20 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>  
-        public Common.ClientResult.Result Put([FromBody]SCHEME_RULE entity)
+        public Common.ClientResult.Result Put([FromBody]PROJECTTEMPLET entity)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
             {   //数据校验
 
-                string currentPerson = GetCurrentPerson();
-                entity.UPDATETIME = DateTime.Now;
-                entity.UPDATEPERSON = currentPerson;
+                //string currentPerson = GetCurrentPerson();
+                //entity.UpdateTime = DateTime.Now;
+                //entity.UpdatePerson = currentPerson;
 
                 string returnValue = string.Empty;
                 if (m_BLL.Edit(ref validationErrors, entity))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，方案_规程信息的Id为" + entity.ID,"方案_规程"
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，检定项目模板信息的Id为" + entity.ID,"检定项目模板"
                         );//写入日志                   
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.UpdateSucceed;
@@ -142,7 +141,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，方案_规程信息的Id为" + entity.ID + "," + returnValue, "方案_规程"
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，检定项目模板信息的Id为" + entity.ID + "," + returnValue, "检定项目模板"
                         );//写入日志   
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.UpdateFail + returnValue;
@@ -194,14 +193,14 @@ namespace Langben.App.Controllers
             return result;
         }
 
-        IBLL.ISCHEME_RULEBLL m_BLL;
+        IBLL.IPROJECTTEMPLETBLL m_BLL;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
-        public SCHEME_RULEApiController()
-            : this(new SCHEME_RULEBLL()) { }
+        public PROJECTTEMPLETApiController()
+            : this(new PROJECTTEMPLETBLL()) { }
 
-        public SCHEME_RULEApiController(SCHEME_RULEBLL bll)
+        public PROJECTTEMPLETApiController(PROJECTTEMPLETBLL bll)
         {
             m_BLL = bll;
         }

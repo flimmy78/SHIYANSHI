@@ -155,6 +155,8 @@
     <Compile Include="Controllers\ExceptionController.cs" />
     <Compile Include="Controllers\FileUploaderController.cs" />
     <Compile Include="Controllers\HomeRightController.cs" />
+    <Compile Include="Controllers\PROJECTTEMPLETApiController.cs" />
+    <Compile Include="Controllers\PROJECTTEMPLETController.cs" />
     <Compile Include="Controllers\SysAnnouncementController.cs" />
     <Compile Include="Controllers\SysDepartmentController.cs" />
     <Compile Include="Controllers\SysDepartmentTreeController.cs" />
@@ -816,6 +818,10 @@
     <Content Include="Views\ManageTemplate\Add.cshtml" />
     <Content Include="Views\ManageTemplate\Test.cshtml" />
     <Content Include="Views\SCHEME_RULE\ZLDLSC.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\Create.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\Details.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\Edit.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
