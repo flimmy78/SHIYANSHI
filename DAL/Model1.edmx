@@ -623,7 +623,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
-          <Property Name="SCHEME_RULEID" Type="varchar2" MaxLength="36" />
+          <Property Name="RULEID" Type="varchar2" MaxLength="36" />
+          <Property Name="SCHEMEID" Type="varchar2" MaxLength="36" />
           <Property Name="HTMLVALUE" Type="clob" />
           <Property Name="CREATETIME" Type="date" />
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
@@ -1721,15 +1722,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PROJECTT_REFERENCE_SCHEME_R">
-          <End Role="SCHEME_RULE" Type="Self.SCHEME_RULE" Multiplicity="0..1" />
+        <Association Name="FK_PROJECTT_REFERENCE_RULE">
+          <End Role="RULE" Type="Self.RULE" Multiplicity="0..1" />
           <End Role="PROJECTTEMPLET" Type="Self.PROJECTTEMPLET" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="SCHEME_RULE">
+            <Principal Role="RULE">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="PROJECTTEMPLET">
-              <PropertyRef Name="SCHEME_RULEID" />
+              <PropertyRef Name="RULEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROJECTT_REFERENCE_SCHEME">
+          <End Role="SCHEME" Type="Self.SCHEME" Multiplicity="0..1" />
+          <End Role="PROJECTTEMPLET" Type="Self.PROJECTTEMPLET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCHEME">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROJECTTEMPLET">
+              <PropertyRef Name="SCHEMEID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2434,8 +2447,12 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
             <End Role="PREPARE_SCHEME" EntitySet="PREPARE_SCHEME" />
             <End Role="PRINTREPORT" EntitySet="PRINTREPORT" />
           </AssociationSet>
-          <AssociationSet Name="FK_PROJECTT_REFERENCE_SCHEME_R" Association="Self.FK_PROJECTT_REFERENCE_SCHEME_R">
-            <End Role="SCHEME_RULE" EntitySet="SCHEME_RULE" />
+          <AssociationSet Name="FK_PROJECTT_REFERENCE_RULE" Association="Self.FK_PROJECTT_REFERENCE_RULE">
+            <End Role="RULE" EntitySet="RULE" />
+            <End Role="PROJECTTEMPLET" EntitySet="PROJECTTEMPLET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROJECTT_REFERENCE_SCHEME" Association="Self.FK_PROJECTT_REFERENCE_SCHEME">
+            <End Role="SCHEME" EntitySet="SCHEME" />
             <End Role="PROJECTTEMPLET" EntitySet="PROJECTTEMPLET" />
           </AssociationSet>
           <AssociationSet Name="FK_QUALIFIED_UN" Association="Self.FK_QUALIFIED_UN">
@@ -2749,8 +2766,12 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
             <End Role="PREPARE_SCHEME" EntitySet="PREPARE_SCHEME" />
             <End Role="REPORTCOLLECTION" EntitySet="REPORTCOLLECTION" />
           </AssociationSet>
-          <AssociationSet Name="FK_PROJECTT_REFERENCE_SCHEME_R" Association="Model.FK_PROJECTT_REFERENCE_SCHEME_R">
-            <End Role="SCHEME_RULE" EntitySet="SCHEME_RULE" />
+          <AssociationSet Name="FK_PROJECTT_REFERENCE_RULE" Association="Model.FK_PROJECTT_REFERENCE_RULE">
+            <End Role="RULE" EntitySet="RULE" />
+            <End Role="PROJECTTEMPLET" EntitySet="PROJECTTEMPLET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROJECTT_REFERENCE_SCHEME" Association="Model.FK_PROJECTT_REFERENCE_SCHEME">
+            <End Role="SCHEME" EntitySet="SCHEME" />
             <End Role="PROJECTTEMPLET" EntitySet="PROJECTTEMPLET" />
           </AssociationSet>
           <AssociationSet Name="FK_ONE_PHAS_REFERENCE_RULE2" Association="Model.FK_ONE_PHAS_REFERENCE_RULE2">
@@ -3527,13 +3548,15 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="SCHEME_RULEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="RULEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="HTMLVALUE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CREATETIME" Type="DateTime" />
           <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="SCHEME_RULE" Relationship="Model.FK_PROJECTT_REFERENCE_SCHEME_R" FromRole="PROJECTTEMPLET" ToRole="SCHEME_RULE" />
+          <NavigationProperty Name="RULE" Relationship="Model.FK_PROJECTT_REFERENCE_RULE" FromRole="PROJECTTEMPLET" ToRole="RULE" />
+          <NavigationProperty Name="SCHEME" Relationship="Model.FK_PROJECTT_REFERENCE_SCHEME" FromRole="PROJECTTEMPLET" ToRole="SCHEME" />
         </EntityType>
         <EntityType Name="QUALIFIED_UNQUALIFIED_TEST_ITE">
           <Key>
@@ -3584,6 +3607,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PROJECTTEMPLET" Relationship="Model.FK_PROJECTT_REFERENCE_RULE" FromRole="RULE" ToRole="PROJECTTEMPLET" />
           <NavigationProperty Name="UNCERTAINTY" Relationship="Model.FK_ONE_PHAS_REFERENCE_RULE2" FromRole="RULE" ToRole="UNCERTAINTY" />
           <NavigationProperty Name="RULE1" Relationship="Model.FK_RULE_REFERENCE_RULE" FromRole="RULE" ToRole="RULE1" />
           <NavigationProperty Name="RULE2" Relationship="Model.FK_RULE_REFERENCE_RULE" FromRole="RULE1" ToRole="RULE" />
@@ -3615,6 +3639,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PREPARE_SCHEME" Relationship="Model.FK_PREPARE__REFERENCE_SCHEME" FromRole="SCHEME" ToRole="PREPARE_SCHEME" />
+          <NavigationProperty Name="PROJECTTEMPLET" Relationship="Model.FK_PROJECTT_REFERENCE_SCHEME" FromRole="SCHEME" ToRole="PROJECTTEMPLET" />
           <NavigationProperty Name="SCHEME_RULE" Relationship="Model.FK_SCHEME_R_REFERENCE_SCHEME" FromRole="SCHEME" ToRole="SCHEME_RULE" />
           <NavigationProperty Name="UNDERTAKE_LABORATORY" Relationship="Model.FK_SCHEME_REFERENCE_UNDERTAK" FromRole="SCHEME" ToRole="UNDERTAKE_LABORATORY" />
         </EntityType>
@@ -3629,7 +3654,6 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PROJECTTEMPLET" Relationship="Model.FK_PROJECTT_REFERENCE_SCHEME_R" FromRole="SCHEME_RULE" ToRole="PROJECTTEMPLET" />
           <NavigationProperty Name="RULE" Relationship="Model.FK_SCHEME_R_REFERENCE_RULE" FromRole="SCHEME_RULE" ToRole="RULE" />
           <NavigationProperty Name="SCHEME" Relationship="Model.FK_SCHEME_R_REFERENCE_SCHEME" FromRole="SCHEME_RULE" ToRole="SCHEME" />
         </EntityType>
@@ -4628,15 +4652,27 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PROJECTT_REFERENCE_SCHEME_R">
-          <End Type="Model.SCHEME_RULE" Role="SCHEME_RULE" Multiplicity="0..1" />
+        <Association Name="FK_PROJECTT_REFERENCE_RULE">
+          <End Type="Model.RULE" Role="RULE" Multiplicity="0..1" />
           <End Type="Model.PROJECTTEMPLET" Role="PROJECTTEMPLET" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="SCHEME_RULE">
+            <Principal Role="RULE">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="PROJECTTEMPLET">
-              <PropertyRef Name="SCHEME_RULEID" />
+              <PropertyRef Name="RULEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROJECTT_REFERENCE_SCHEME">
+          <End Type="Model.SCHEME" Role="SCHEME" Multiplicity="0..1" />
+          <End Type="Model.PROJECTTEMPLET" Role="PROJECTTEMPLET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SCHEME">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROJECTTEMPLET">
+              <PropertyRef Name="SCHEMEID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5583,7 +5619,8 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
                 <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
                 <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
                 <ScalarProperty Name="HTMLVALUE" ColumnName="HTMLVALUE" />
-                <ScalarProperty Name="SCHEME_RULEID" ColumnName="SCHEME_RULEID" />
+                <ScalarProperty Name="SCHEMEID" ColumnName="SCHEMEID" />
+                <ScalarProperty Name="RULEID" ColumnName="RULEID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

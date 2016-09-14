@@ -14,12 +14,6 @@ namespace Langben.DAL
     
     public partial class SCHEME_RULE
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SCHEME_RULE()
-        {
-            this.PROJECTTEMPLET = new HashSet<PROJECTTEMPLET>();
-        }
-    
         public string ID { get; set; }
         public string RULEID { get; set; }
         public string SCHEMEID { get; set; }
@@ -28,8 +22,6 @@ namespace Langben.DAL
         public Nullable<System.DateTime> UPDATETIME { get; set; }
         public string UPDATEPERSON { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PROJECTTEMPLET> PROJECTTEMPLET { get; set; }
         public virtual RULE RULE { get; set; }
         public virtual SCHEME SCHEME { get; set; }
     }
