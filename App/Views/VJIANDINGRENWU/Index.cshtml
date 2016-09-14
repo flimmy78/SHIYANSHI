@@ -458,18 +458,12 @@
                 if (r) {
                     var yinlingqu = null;
                     for (var i = 0; i < arr.length; i++) {
-                        if (arr[i].ORDER_STATUS == "已分配" || arr[i].ORDER_STATUS == "已领取" || arr[i].ORDER_STATUS == "试验完成") {
-                            if (arr[i].ORDER_STATUS == "已领取") {
-                                yinlingqu = "第" + i + 1 + "行,"
-                                id2 += arr[i].ID + ",";
-                            } else if (arr[i].ORDER_STATUS == "试验完成") {
-                                id += arr[i].ID + "*" + ",";
-                            }
-                            else {
-                                id += arr[i].ID + ",";
-                            }
+                        if (arr[i].ORDER_STATUS == "已分配") {                     
+                            id += arr[i].ID + ",";
                         }
+                        else if (true) {
 
+                        }
                         else {
                             $.messager.alert('操作提示', '请选择正确数据!', 'warning');
                             return false;

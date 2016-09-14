@@ -581,7 +581,11 @@
         }
         //删除
         function flexiDelete() {
-            $('#ApplianceDate').edatagrid('destroyRow');
+            $.messager.confirm('操作提示', "确认删除吗？", function (r) {
+                if (r) {
+                    $('#ApplianceDate').edatagrid('destroyRow');
+                }
+            })
         }
         //新增
         function flexiInsert() {
