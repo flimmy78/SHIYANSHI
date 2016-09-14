@@ -19,30 +19,56 @@
         <div class="bigdiv">
             @Html.HiddenFor(model => model.ID )       
             <div class="editor-label">
-                <a class="anUnderLine" onclick="showModalOnly('SCHEME_RULEID','../../SCHEME_RULE');">
-                    @Html.LabelFor(model => model.SCHEME_RULEID) 
+                <a class="anUnderLine" onclick="showModalOnly('RULEID','../../RULE');">
+                    @Html.LabelFor(model => model.RULEID) 
                 </a>：
             </div>
             <div class="editor-field">
-                <div id="checkSCHEME_RULEID">
+                <div id="checkRULEID">
                         @if(Model!=null)
                         {
-                        if (null != Model.SCHEME_RULEID)                      
+                        if (null != Model.RULEID)                      
                         { 
-                    <table id="@Model.SCHEME_RULEID"
+                    <table id="@Model.RULEID"
                         class="deleteStyle">
                         <tr>
                             <td>
-                                <img alt="删除"  title="点击删除" onclick="deleteTable('@Model.SCHEME_RULEID ','SCHEME_RULEID');" src="../../../Images/deleteimge.png" />
+                                <img alt="删除"  title="点击删除" onclick="deleteTable('@Model.RULEID ','RULEID');" src="../../../Images/deleteimge.png" />
                             </td>
                             <td>
-                                @Model.SCHEME_RULE.RULEID
+                                @Model.RULE.NAMEOTHER
                             </td>
                         </tr>
                     </table>
                     }} 
                 </div>
-                @Html.HiddenFor(model => model.SCHEME_RULEID)
+                @Html.HiddenFor(model => model.RULEID)
+            </div>      
+            <div class="editor-label">
+                <a class="anUnderLine" onclick="showModalOnly('SCHEMEID','../../SCHEME');">
+                    @Html.LabelFor(model => model.SCHEMEID) 
+                </a>：
+            </div>
+            <div class="editor-field">
+                <div id="checkSCHEMEID">
+                        @if(Model!=null)
+                        {
+                        if (null != Model.SCHEMEID)                      
+                        { 
+                    <table id="@Model.SCHEMEID"
+                        class="deleteStyle">
+                        <tr>
+                            <td>
+                                <img alt="删除"  title="点击删除" onclick="deleteTable('@Model.SCHEMEID ','SCHEMEID');" src="../../../Images/deleteimge.png" />
+                            </td>
+                            <td>
+                                @Model.SCHEME.NAME
+                            </td>
+                        </tr>
+                    </table>
+                    }} 
+                </div>
+                @Html.HiddenFor(model => model.SCHEMEID)
             </div>     
             <div class="editor-label">
                 @Html.LabelFor(model => model.HTMLVALUE)：

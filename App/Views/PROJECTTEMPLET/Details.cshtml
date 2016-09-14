@@ -15,12 +15,21 @@
         <div class="bigdiv">
                     
                 <div class="display-label">
-                      @Html.LabelFor(model => model.SCHEME_RULEID) :
+                      @Html.LabelFor(model => model.RULEID) :
                 </div>
                 <div class="display-field">
-                    @if (Model.SCHEME_RULE != null)
+                    @if (Model.RULE != null)
                        {
-                    @Model.SCHEME_RULE.RULEID
+                    @Model.RULE.NAMEOTHER
+                    } 
+                </div>        
+                <div class="display-label">
+                      @Html.LabelFor(model => model.SCHEMEID) :
+                </div>
+                <div class="display-field">
+                    @if (Model.SCHEME != null)
+                       {
+                    @Model.SCHEME.NAME
                     } 
                 </div>      
                 <div class="display-label">

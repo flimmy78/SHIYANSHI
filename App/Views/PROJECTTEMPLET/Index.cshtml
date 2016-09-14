@@ -66,16 +66,17 @@
                 columns: [[
                    
                     
-					{ field: 'SCHEME_RULEID', title: '@Html.DisplayNameFor(model => model.SCHEME_RULEID)', width: 155 }
-					,{ field: 'HTMLVALUE', title:  '@Html.DisplayNameFor(model => model.HTMLVALUE)', width: 155 }
-					,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 155
+					{ field: 'RULEID', title: '@Html.DisplayNameFor(model => model.RULEID)', width: 129 }
+					,{ field: 'SCHEMEID', title: '@Html.DisplayNameFor(model => model.SCHEMEIDOld)', width: 129 }
+					,{ field: 'HTMLVALUE', title:  '@Html.DisplayNameFor(model => model.HTMLVALUE)', width: 129 }
+					,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 129
                     , formatter: formatDatebox
 }
-					,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 155 }
-					,{ field: 'UPDATETIME', title:  '@Html.DisplayNameFor(model => model.UPDATETIME)', width: 155
+					,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 129 }
+					,{ field: 'UPDATETIME', title:  '@Html.DisplayNameFor(model => model.UPDATETIME)', width: 129
                     , formatter: formatDatebox
 }
-					,{ field: 'UPDATEPERSON', title:  '@Html.DisplayNameFor(model => model.UPDATEPERSON)', width: 155 }
+					,{ field: 'UPDATEPERSON', title:  '@Html.DisplayNameFor(model => model.UPDATEPERSON)', width: 129 }
                 ]],
                 pagination: true,
                 rownumbers: true
@@ -155,7 +156,7 @@
             }
             arr.push("^");
             for (var i = 0; i < rows.length; i++) {
-                arr.push(rows[i].SCHEME_RULEID);
+                arr.push(rows[i].RULEID);
             }
             //主键列和显示列之间用 ^ 分割   每一项用 , 分割
             if (arr.length > 0) {//一条数据和多于一条

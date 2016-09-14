@@ -34,7 +34,8 @@ namespace Langben.App.Controllers
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID
-					,SCHEME_RULEID =   s.SCHEME_RULEIDOld
+					,RULEID =   s.RULEIDOld
+					,SCHEMEID =   s.SCHEMEIDOld
 					,HTMLVALUE = s.HTMLVALUE
 					,CREATETIME = s.CREATETIME
 					,CREATEPERSON = s.CREATEPERSON

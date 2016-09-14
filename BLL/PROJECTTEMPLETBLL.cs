@@ -64,9 +64,14 @@ namespace Langben.BLL
                 
                     foreach (var item in queryData)
                     {
-                        if (item.SCHEME_RULEID != null && item.SCHEME_RULE != null)
+                        if (item.RULEID != null && item.RULE != null)
                         { 
-                                item.SCHEME_RULEIDOld = item.SCHEME_RULE.RULEID.GetString();//                            
+                                item.RULEIDOld = item.RULE.NAMEOTHER.GetString();//                            
+                        }                  
+
+                        if (item.SCHEMEID != null && item.SCHEME != null)
+                        { 
+                                item.SCHEMEIDOld = item.SCHEME.NAME.GetString();//                            
                         }                  
 
                     }
@@ -289,13 +294,23 @@ namespace Langben.BLL
 
 
         /// <summary>
-        /// 根据SCHEME_RULEIDId，获取所有检定项目模板数据
+        /// 根据RULEIDId，获取所有检定项目模板数据
         /// </summary>
         /// <param name="id">外键的主键</param>
         /// <returns></returns>
-        public List<PROJECTTEMPLET> GetByRefSCHEME_RULEID(string id)
+        public List<PROJECTTEMPLET> GetByRefRULEID(string id)
         {
-            return repository.GetByRefSCHEME_RULEID(db, id).ToList();                      
+            return repository.GetByRefRULEID(db, id).ToList();                      
+        }
+
+        /// <summary>
+        /// 根据SCHEMEIDId，获取所有检定项目模板数据
+        /// </summary>
+        /// <param name="id">外键的主键</param>
+        /// <returns></returns>
+        public List<PROJECTTEMPLET> GetByRefSCHEMEID(string id)
+        {
+            return repository.GetByRefSCHEMEID(db, id).ToList();                      
         }
 
         public void Dispose()

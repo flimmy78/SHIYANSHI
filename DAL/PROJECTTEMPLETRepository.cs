@@ -36,9 +36,14 @@ namespace Langben.DAL
                     flagWhere++;
                     
                     
-                    if (queryDic.ContainsKey("SCHEME_RULEID") && !string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Value == "noway" && item.Key == "SCHEME_RULEID")
+                    if (queryDic.ContainsKey("RULEID") && !string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Value == "noway" && item.Key == "RULEID")
                     {//查询一对多关系的列名
-                        where += "it.SCHEME_RULEID is null";
+                        where += "it.RULEID is null";
+                        continue;
+                    }
+                    if (queryDic.ContainsKey("SCHEMEID") && !string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Value == "noway" && item.Key == "SCHEMEID")
+                    {//查询一对多关系的列名
+                        where += "it.SCHEMEID is null";
                         continue;
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
@@ -148,14 +153,27 @@ namespace Langben.DAL
         }
 
         /// <summary>
-        /// 根据SCHEME_RULEID，获取所有检定项目模板数据
+        /// 根据RULEID，获取所有检定项目模板数据
         /// </summary>
         /// <param name="id">外键的主键</param>
         /// <returns></returns>
-        public IQueryable<PROJECTTEMPLET> GetByRefSCHEME_RULEID(SysEntities db, string id)
+        public IQueryable<PROJECTTEMPLET> GetByRefRULEID(SysEntities db, string id)
         {
             return from c in db.PROJECTTEMPLET
-                        where c.SCHEME_RULEID == id
+                        where c.RULEID == id
+                        select c;
+                      
+        }
+
+        /// <summary>
+        /// 根据SCHEMEID，获取所有检定项目模板数据
+        /// </summary>
+        /// <param name="id">外键的主键</param>
+        /// <returns></returns>
+        public IQueryable<PROJECTTEMPLET> GetByRefSCHEMEID(SysEntities db, string id)
+        {
+            return from c in db.PROJECTTEMPLET
+                        where c.SCHEMEID == id
                         select c;
                       
         }

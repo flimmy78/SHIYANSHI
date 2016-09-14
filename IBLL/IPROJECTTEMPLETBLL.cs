@@ -48,11 +48,18 @@ namespace Langben.IBLL
         System.Collections.Generic.List<PROJECTTEMPLET> GetAll();
         
         /// <summary>
-        /// 根据SCHEME_RULEIDId，获取所有检定项目模板数据
+        /// 根据RULEIDId，获取所有检定项目模板数据
         /// </summary>
         /// <param name="id">外键的主键</param>
         /// <returns></returns>
-        List<PROJECTTEMPLET> GetByRefSCHEME_RULEID(string id);
+        List<PROJECTTEMPLET> GetByRefRULEID(string id);
+
+        /// <summary>
+        /// 根据SCHEMEIDId，获取所有检定项目模板数据
+        /// </summary>
+        /// <param name="id">外键的主键</param>
+        /// <returns></returns>
+        List<PROJECTTEMPLET> GetByRefSCHEMEID(string id);
 
         
         /// <summary>

@@ -21,14 +21,24 @@
         <div class="bigdiv">
             
         <div class="editor-label">
-            <a class="anUnderLine" onclick="showModalOnly('SCHEME_RULEID','../../SCHEME_RULE');">
-                @Html.LabelFor(model => model.SCHEME_RULEID) 
+            <a class="anUnderLine" onclick="showModalOnly('RULEID','../../RULE');">
+                @Html.LabelFor(model => model.RULEID) 
             </a>：
         </div>
         <div class="editor-field">
-            <div id="checkSCHEME_RULEID">            
+            <div id="checkRULEID">            
             </div>
-            @Html.HiddenFor(model => model.SCHEME_RULEID)
+            @Html.HiddenFor(model => model.RULEID)
+        </div>
+        <div class="editor-label">
+            <a class="anUnderLine" onclick="showModalOnly('SCHEMEID','../../SCHEME');">
+                @Html.LabelFor(model => model.SCHEMEID) 
+            </a>：
+        </div>
+        <div class="editor-field">
+            <div id="checkSCHEMEID">            
+            </div>
+            @Html.HiddenFor(model => model.SCHEMEID)
         </div>     
             <div class="editor-label">
                 @Html.LabelFor(model => model.HTMLVALUE)：
