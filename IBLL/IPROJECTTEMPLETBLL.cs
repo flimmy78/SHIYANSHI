@@ -100,8 +100,16 @@ namespace Langben.IBLL
         /// <param name="entity">一个对象</param>
         /// <returns></returns>
         [OperationContract]
-        bool Edit(ref Common.ValidationErrors validationErrors, PROJECTTEMPLET entity); 
-    
+        bool Edit(ref Common.ValidationErrors validationErrors, PROJECTTEMPLET entity);
+        /// <summary>
+        /// 根据检查项及方案获取检定项目模板
+        /// </summary>
+        /// <param name="RULEID"></param>
+        /// <param name="SCHEMEID"></param>
+        /// <returns></returns>
+        [OperationContract]
+        DAL.PROJECTTEMPLET GetModelByRULEID_SCHEMEID(string RULEID, string SCHEMEID);
+
     }
 }
 

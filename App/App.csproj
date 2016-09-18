@@ -817,7 +817,7 @@
     <Content Include="Views\ManageTemplate\Index.cshtml" />
     <Content Include="Views\ManageTemplate\Add.cshtml" />
     <Content Include="Views\ManageTemplate\Test.cshtml" />
-    <Content Include="Views\SCHEME_RULE\ZLDLSC.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\ZLDLSC.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\Create.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\Details.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\Edit.cshtml" />

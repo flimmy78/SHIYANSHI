@@ -103,7 +103,7 @@
                                 $.messager.alert('操作提示', '请先提交方案模板', 'warning');
                             }
                             else {
-                                $('#mainframe').attr('src', node.attributes.url + "&ID=" + ID);
+                                $('#mainframe').attr('src', node.attributes.url + "&SCHEMEID=" + ID);
                             }
                         }
                     }                  
@@ -185,8 +185,7 @@
                 if (RULEIDs != '') RULEIDs += ',';
                 RULEIDs += node.id;
             }
-        }
-        debugger;
+        }        
         var ID = $("#hideID").val();
         var url='/SCHEME/CreateSave';
         var data='NAME=' + NAME + "&UNDERTAKE_LABORATORYID=" + UNDERTAKE_LABORATORYID + "&RULEIDs=" + RULEIDs;        

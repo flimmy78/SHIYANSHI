@@ -17,15 +17,17 @@
 
                 <td>
                     <!-- <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a> -->
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="CreateTable()">保存检测项</a>
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="Save()">保存检测项</a>
                     <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="">重置检测项</a>
                 </td>
             </tr>
         </table>
     </div>
 </div>
-
-<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+<input type="hidden" id="hideID" value="@ViewData["ID"]"/><!--主键-->
+<input type="hidden" id="hideRULEID" value="@ViewData["RULEID"]"/><!--检测项-->
+<input type="hidden" id="hideSCHEMEID" value="@ViewData["SCHEMEID"]"/><!--方案编号-->
+<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;" id="divHtml">    
     <div class="mt10" id="tongdao">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_1">
             <thead>
@@ -123,7 +125,17 @@
                             "<option value=\"μA\">μA</option>" +
                             "<option value=\"nA\">nA</option> " +
                             "<option value=\"pA\">pA</option> " +
-                            "</select>";
+                            "</select>";   						
+						
+    		
+
+        var dyselectHTML = "<select class=\"easyui-combobox1\" style=\"width:50px; height:25px\">" +
+                        "<option value=\"V\">V</option> " +
+                        "<option value=\"MV\">MV</option>" +
+                        "<option value=\"KV\">KV</option>  " +
+                        "<option value=\"mV\">mV</option>" +
+                        "<option value=\"μV\">μV</option> " +                       
+                        "</select>";
         //共有的通道数量
         var tableIdx = 1;
         //创建通道
@@ -149,7 +161,7 @@
             // alert($("#rowindex").val());
         }
         function CreateRow() {
-            var idx = $("#rowindex").val();
+            var idx = $("#rowindex").val();//第几个量程
             var rowspanIdx = $("#txtPoint").val();     //检测点数
             txtNumber = $("#txtNumber").val(); //量程
             var standardValue = "";
@@ -159,35 +171,59 @@
                 rowLength++;
                 htmlString.push("<tr rowindex='" + rowLength + "'>");
                 if (rowidx == 0) {
-                    htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"right\"><input class=\"easyui-textbox input-width\" value='" + txtNumber + "' />" + $(dlselectHTML).attr("onchange", "changeValue(this)").attr("name", "state_" + tableIdx + "_" + rowLength + "").attr("id", "state_" + tableIdx + "_" + rowLength + "")[0].outerHTML + "</td>");
-                    htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"right\"><input class=\"easyui-textbox input-width\" value=''  /></td>");
+                    htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"right\"><input class=\"easyui-textbox input-width\" value='" + txtNumber + "' id='RANGE_" + tableIdx + "' name='RANGE'/>" + $(dlselectHTML).attr("onchange", "changeValue(this)").attr("name", "RANGE_UNIT").attr("id", "RANGE_UNIT_" + tableIdx + "")[0].outerHTML + "</td>");
+                    htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"right\"><input class=\"easyui-textbox input-width\" value='' id='RESISTANCE_" + tableIdx + "' name='RESISTANCE' /></td>");
                 }
 
-                for (var td1 = 0; td1 < 2; td1++) {
-                    if (td1 == 0)//标准值这列
-                        if (rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10)
-                            standardValue = calculate(rowspanIdx)[rowidx];
-                        else
-                            standardValue = "";
-                    var changerHTML = "onblur='changeBZ(this)'";
-                    if (td1 == 1) {
-                        changeHTML = "";
-                        standardValue = "";
-                    }
-                    htmlString.push("<td  align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' " + changerHTML + "/>" + dlselectHTML + "</td>");
-                    //else
-                    //  htmlString.push("<td  align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' />" + dlselectHTML + "</td>");
-                }
-                for (var td2 = 0; td2 < 2; td2++) {
+                //for (var td1 = 0; td1 < 2; td1++) {
+                //    if (td1 == 0)//标准值这列
+                //        if (rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10)
+                //            standardValue = calculate(rowspanIdx)[rowidx];
+                //        else
+                //            standardValue = "";
+                //    var changerHTML = "onblur='changeBZ(this)'";
+                //    if (td1 == 1) {
+                //        changeHTML = "";
+                //        standardValue = "";
+                //    }
+                //    htmlString.push("<td  align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' " + changerHTML + " id='OUTPUT_VALUE_" + tableIdx + "_" + rowspanIdx + " name='OUTPUT_VALUE'/>" + $(dlselectHTML).attr("onchange", "changeValue(this)").attr("name", "OUTPUT_VALUE_UNIT").attr("id", "OUTPUT_VALUE_UNIT_" + tableIdx + "_"+rowspanIdx+")[0].outerHTML + "</td>");
+                //    //else
+                //    //  htmlString.push("<td  align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' />" + dlselectHTML + "</td>");
+                //}
 
-                    htmlString.push("<td align=\"right\"><input  class=\"easyui-textbox input-width\" /></td>");
-                }
-                htmlString.push("<td><input  class=\"easyui-textbox input-width\" /></td>");
+                //标准值               
+                 if (rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10)
+                    standardValue = calculate(rowspanIdx)[rowidx];
+                 else
+                    standardValue = "";
+                 var changerHTML = "onblur='changeBZ(this)'";                 
+                 htmlString.push("<td  align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' " + changerHTML + " id='OUTPUT_VALUE_" + tableIdx + "_" + rowspanIdx + "' name='OUTPUT_VALUE'/>" + $(dlselectHTML).attr("onchange", "changeValue(this)").attr("name", "OUTPUT_VALUE_UNIT").attr("id", "OUTPUT_VALUE_UNIT_" + tableIdx + "_"+rowspanIdx+"")[0].outerHTML + "</td>");
+
+                 //读数值
+                 standardValue=""
+                 htmlString.push("<td  align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' " + changerHTML + " id='READ_VALUE_" + tableIdx + "_" + rowspanIdx + "' name='READ_VALUE'/>" + $(dyselectHTML).attr("onchange", "changeValue(this)").attr("name", "READ_VALUE_UNIT").attr("id", "READ_VALUE_UNIT_" + tableIdx + "_"+rowspanIdx+"")[0].outerHTML + "</td>");
+
+                 //输出实际值
+                 standardValue = ""
+                 htmlString.push("<td  align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' " + changerHTML + " id='ACTUAL_OUTPUT_VALUE_" + tableIdx + "_" + rowspanIdx + "' name='ACTUAL_OUTPUT_VALUE'/>" + $(dlselectHTML).attr("onchange", "changeValue(this)").attr("name", "ACTUAL_OUTPUT_VALUE_UNIT").attr("id", "ACTUAL_OUTPUT_VALUE_UNIT_" + tableIdx + "_" + rowspanIdx + "")[0].outerHTML + "</td>");
+
+                //相对误差                 
+                 htmlString.push("<td align=\"right\"><input  class=\"easyui-textbox input-width\" id='RELATIVE_ERROR_" + tableIdx + "_" + rowspanIdx + "' name='RELATIVE_ERROR'/></td>");
+
+                //校准结果的不确定度                 
+                 htmlString.push("<td><input  class=\"easyui-textbox input-width\" id='UNCERTAINTY_DEGREE_" + tableIdx + "_" + rowspanIdx + "' name='UNCERTAINTY_DEGREE'/></td>");
+
+                //for (var td2 = 0; td2 < 2; td2++) {
+
+                //    htmlString.push("<td align=\"right\"><input  class=\"easyui-textbox input-width\" /></td>");
+                //}
+                //htmlString.push("<td><input  class=\"easyui-textbox input-width\" /></td>");
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
             var tagRow = $("#tbody_" + idx).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
+            $('#dlg').window('close');
         }
         var txtNumber = "";
         var pointLen = "";
@@ -304,6 +340,105 @@
                 $(obj).parent().parent().find('td').eq(idx).find('input').val(parseFloat(dsz).toFixed(pointLen));
             else
                 $(obj).parent().parent().find('td').eq(idx).find('input').val((parseFloat(dsz) / parseFloat(dzz)).toFixed(pointLen));
+        }
+        //数据验证
+        function CheckData()
+        {
+            return true;
+        }
+        //清空不需要保存的数据
+        function ClearNotSaveData()
+        {
+            //读数值
+            $("input[name=READ_VALUE]").each(function (a, b) {
+                $(b).val("");
+            });
+            $("input[textboxname=READ_VALUE]").each(function (a, b) {
+                $(b).value = "";
+                $(b).each(function (a1, b1) {
+                    $(b1).value = "";
+                });
+            });
+           
+            $("select[name=READ_VALUE_UNIT]").each(function (a, b) {
+                $(b).val("");
+            });
+            //输出实际值
+            //$("input[name=ACTUAL_OUTPUT_VALUE]").each(function (a, b) {
+            //    $(b).val("");
+            //});
+            $("input[textboxname=ACTUAL_OUTPUT_VALUE]").each(function (a, b) {
+                $(b).value = "";
+            });
+            $("select[name=ACTUAL_OUTPUT_VALUE_UNIT]").each(function (a, b) {
+                $(b).val("");
+            });
+            //相对误差
+            //$("input[name=RELATIVE_ERROR]").each(function (a, b) {
+            //    $(b).val("");
+            //});
+            $("input[textboxname=RELATIVE_ERROR]").each(function (a, b) {
+                $(b).value = "";
+            });
+            //不确定度
+            //$("input[name=UNCERTAINTY_DEGREE]").each(function (a, b) {
+            //    $(b).val("");
+            //});
+            $("input[textboxname=UNCERTAINTY_DEGREE]").each(function (a, b) {
+                $(b).value = "";
+            });           
+        }
+        //保存
+        function Save()
+        {
+            if (!CheckData()) {
+                return;
+            }
+            ClearNotSaveData();
+            var OldID = $("#hideID").val();
+            var RULEID = $("#hideRULEID").val();            
+            var SCHEMEID = $("#hideSCHEMEID").val();
+            var HTMLVALUE = encodeURI($("#divHtml").html());
+            //var HTMLVALUE = "";
+            var url = '/PROJECTTEMPLET/CreateSave';
+            //var data = 'OldID=' + OldID + '&RULEID=' + RULEID + "&SCHEMEID=" + SCHEMEID + "&HTMLVALUE=" + HTMLVALUE;
+            //data: {'uuids': uuids },
+            debugger;
+            //获取空对象用于保存添加的信息
+            $.ajax({
+                type: 'post', //使用post方法访问后台
+                dataType: "json", //返回json格式的数据
+                //url: '/SCHEME/CreateSave', //要访问的后台地址
+                url: url,
+                contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
+                //data: 'NAME=' + NAME + "&UNDERTAKE_LABORATORYID=" + UNDERTAKE_LABORATORYID + "&RULEIDs=" + RULEIDs, //要发送的数据
+                //data: data,
+                data:{'OldID':OldID,'RULEID':RULEID,'SCHEMEID':SCHEMEID,'HTMLVALUE':HTMLVALUE},
+                beforeSend: function () {
+                    //InitAlertJS();
+                },
+                complete: function () {
+                }, //AJAX请求完成时隐藏loading提示
+
+                success: function (res) {//msg为返回的数据，在这里做数据绑定               
+                    if (res.Code == 1) {
+                        if ($("#hideID").val().trim() == "") {
+                            $("#hideID").val(res.Message);
+                        }
+                        $.messager.alert('操作提示', "操作成功！", 'info');
+                    }
+                    else {
+                        $.messager.alert('操作提示', res.Message, 'info');
+                    }
+                    if ($("#hideID").val() != "") {
+                        $("#UNDERTAKE_LABORATORYID").attr("disabled", "disabled");
+                    }
+
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
+                }
+            });
         }
 </script>
 
