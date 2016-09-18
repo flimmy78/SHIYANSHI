@@ -55,6 +55,7 @@ namespace Langben.App.Controllers
             ViewBag.Id = Id;
             ViewBag.APPLIANCE_LABORATORYID = APPLIANCE_LABORATORYID;
             ViewBag.APPLIANCE_DETAIL_INFORMATIONID = id;//器具明细表id
+            
             string erchizi = string.Empty;
             if (!string.IsNullOrEmpty(Id))
             {
@@ -67,6 +68,7 @@ namespace Langben.App.Controllers
                 erchizi += "CERTIFICATION_AUTHORITY*" + prepare.CERTIFICATION_AUTHORITY + ",";
                 erchizi += "CNAS*" + prepare.CNAS;
                 ViewBag.SBL = erchizi;
+                ViewBag.REPORTSTATUS = prepare.REPORTSTATUS;//报告状态（前段判断是否能修改）
             }
             ViewBag.SYS = account.UNDERTAKE_LABORATORYName;
             return View();
@@ -80,8 +82,10 @@ namespace Langben.App.Controllers
         {
             string[] bs = id.Split('|');
             ViewBag.PREPARE_SCHEMEID = bs[0];
-            List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(bs[0]);
-            foreach (var item in list)
+            PREPARE_SCHEME prepare = m_BLL3.GetById(bs[0]);
+           // List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(bs[0]);
+            
+            foreach (var item in prepare.FILE_UPLOADER)
             {
                 ViewBag.NAME2 = item.NAME2;
                 ViewBag.NAME = item.NAME;
@@ -89,6 +93,7 @@ namespace Langben.App.Controllers
                 ViewBag.FILE_UPLOADERID = item.ID;
                 ViewBag.PREPARE_SCHEMEID = item.PREPARE_SCHEMEID;
             }
+            ViewBag.REPORTSTATUS = prepare.REPORTSTATUS;
             ViewBag.REPORTNUMBER = m_BLL3.GetSerialNumber(bs[0]);
             ViewBag.APPLIANCE_DETAIL_INFORMATIONID = bs[1];//器具明细id
             return View();

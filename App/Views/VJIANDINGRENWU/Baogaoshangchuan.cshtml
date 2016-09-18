@@ -24,7 +24,7 @@
             return false;
         };
   " />
-                <input type="button" value="发送审核" onclick="songwangshenghe()" />
+                <input id="fashongid" type="button" value="发送审核" onclick="songwangshenghe()" />
             </label>
             <br style="clear:both" />
             <div class="input_search">
@@ -101,6 +101,13 @@
 
 <script type="text/javascript">
     $(function () {
+        //输入框的禁用
+        if ("@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.审核驳回.ToString()" || "@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.批准驳回.ToString()" || "@ViewBag.REPORTSTATUS" == "") {
+            return true;
+        }
+        else {
+            $("#Submit1,#fashongid").attr("disabled", true)
+        }      
         if ("@ViewBag.CONCLUSION" != "") {
             @*$("input[type=radio]").attr("checked", "@ViewBag.CONCLUSION");*@
             if ("@ViewBag.CONCLUSION" == "合格") {

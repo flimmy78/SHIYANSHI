@@ -160,7 +160,7 @@ namespace Langben.App.Controllers
                 {
                     //修改
                     entity.ID = putid;
-                    if (m_BLL.Edit(ref validationErrors, entity) && m_BLL.UPTSerialNumber(entity.ID))
+                    if (m_BLL.EditField(ref validationErrors, entity) && m_BLL.UPTSerialNumber(entity.ID))
                     {
                         LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，预备方案信息的Id为" + entity.ID, "预备方案"
                             );//写入日志                   
