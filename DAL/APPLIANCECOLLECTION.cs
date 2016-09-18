@@ -22,6 +22,7 @@ namespace Langben.DAL
         public string UPDATEPERSON { get; set; }
         public string APPLIANCE_DETAIL_INFORMATIONID { get; set; }
         public string APPLIANCECOLLECTIONSATE { get; set; }
+        public string LABORATORY { get; set; }
     
         public virtual APPLIANCE_DETAIL_INFORMATION APPLIANCE_DETAIL_INFORMATION { get; set; }
     }

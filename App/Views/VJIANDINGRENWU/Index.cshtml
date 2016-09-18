@@ -421,7 +421,7 @@
 
             }
             else {
-                if (arr[0].ORDER_STATUS=="@Common.ORDER_STATUS.已领取.ToString()") {
+                if (arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()") {
                     return true;
                 }
                 else {
@@ -453,53 +453,70 @@
         var arr = $('#flexigridData').datagrid('getSelections');
         if (arr.length >= 1) {
             var id = "";
-            var id2 = "";
+            var APPLIANCECOLLECTIONSATE = "";
+            var is = false;
             $.messager.confirm('操作提示', "确认领取这 " + arr.length + " 项吗？", function (r) {
                 if (r) {
-                    var yinlingqu = null;
                     for (var i = 0; i < arr.length; i++) {
-                        if (arr[i].ORDER_STATUS == "已分配") {                     
+                        if (arr[i].ORDER_STATUS == "已分配") {
                             id += arr[i].ID + ",";
+                            APPLIANCECOLLECTIONSATE += arr[i].ORDER_STATUS + ",";
+                            is = true;
                         }
-                        else if (true) {
-
+                        else if (islingqu(arr[i].ID) && arr[i].ORDER_STATUS=="@Common.ORDER_STATUS.试验完成.ToString()") {
+                            is = true;
                         }
                         else {
                             $.messager.alert('操作提示', '请选择正确数据!', 'warning');
                             return false;
                         }
                     }
-                    if (yinlingqu != null) {
-                        $.messager.confirm('操作提示', "" + yinlingqu + "已领取确认重复领取吗？", function (r) {
-                            if (r) {
-                                id += id2;
-                            }
-                            else {
-                                return false;
+                    if (is) {
+                        var arr2 = {
+                            APPLIANCE_DETAIL_INFORMATIONID: id,
+                            APPLIANCECOLLECTIONSATE: APPLIANCECOLLECTIONSATE,
+                        }
+                        $.ajax({                          
+                            url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/LINGQU",
+                            type: "Post",
+                            data:arr2,
+                            // async: false,
+                            success: function (res) {
+                                if (res.Code == 1) {
+                                    $.messager.alert('操作提示', "领取成功！", 'info');
+                                    $("#flexigridData").datagrid("reload");
+                                    $("#flexigridData").datagrid("clearSelections");
+                                }
+                                else {
+                                    $.messager.alert('操作提示', "领取失败！", 'info');
+                                }
                             }
                         })
                     }
-                    $.ajax({
-                        url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/Put/" + id,
-                        type: "Put",
-                        // async: false,
-                        success: function (res) {
-                            if (res.Code == 1) {
-                                $.messager.alert('操作提示', "领取成功！", 'info');
-                                $("#flexigridData").datagrid("reload");
-                                $("#flexigridData").datagrid("clearSelections");
-                            }
-                            else {
-                                $.messager.alert('操作提示', "领取失败！", 'info');
-                            }
-                        }
-                    })
+
                 }
             })
         }
         else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
         }
+    }
+
+    //判断当前登入人是否已经领取过
+    function islingqu(id) {
+        $.ajax({
+            url: "/api/APPLIANCECOLLECTIONApi/GetID_NAME/" + id,
+            type: "Get",
+            // async: false,
+            success: function (res) {
+                if (res == true) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        })
     }
     //选择方案
     function xuanzhefanan() {
