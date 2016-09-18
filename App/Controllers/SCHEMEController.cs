@@ -105,7 +105,8 @@ namespace Langben.App.Controllers
                 LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，方案的信息的Id为" + entity.ID, "方案"
                     );//写入日志 
                 result.Code = Common.ClientCode.Succeed;
-                result.Message = Suggestion.InsertSucceed;
+                //result.Message = Suggestion.InsertSucceed;
+                result.Message = entity.ID;
                 return Json(result); //提示创建成功
             }
             else
