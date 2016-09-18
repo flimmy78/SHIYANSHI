@@ -14,7 +14,6 @@
         "text": "直流电流输出",
         "attributes": {
             "InputState": "ZLDLSC",            
-            "urlGD": "/SCHEME_RULE/ZLDLSC?RuleID=38-1987_2&InputState=ZLDLSC",
             "url": "/SCHEME_RULE/ZLDLSC?RuleID=38-1987_2&InputState=ZLDLSC"
         }
     },

@@ -34,26 +34,26 @@ namespace Langben.DAL
 			[Display(Name = "方案", Order = 3)]
 			public object SCHEMEID { get; set; }
 
-			[ScaffoldColumn(true)]
-			[Display(Name = "HTMLVALUE", Order = 4)]
-			public object HTMLVALUE { get; set; }
+			//[ScaffoldColumn(true)]
+			//[Display(Name = "HTMLVALUE", Order = 4)]
+			//public object HTMLVALUE { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "创建时间", Order = 5)]
+			[Display(Name = "创建时间", Order = 4)]
 			[DataType(System.ComponentModel.DataAnnotations.DataType.DateTime,ErrorMessage="时间格式不正确")]
 			public DateTime? CREATETIME { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "创建人", Order = 6)]
+			[Display(Name = "创建人", Order = 5)]
 			public object CREATEPERSON { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "修改时间", Order = 7)]
+			[Display(Name = "修改时间", Order = 6)]
 			[DataType(System.ComponentModel.DataAnnotations.DataType.DateTime,ErrorMessage="时间格式不正确")]
 			public DateTime? UPDATETIME { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "修改人", Order = 8)]
+			[Display(Name = "修改人", Order = 7)]
 			public object UPDATEPERSON { get; set; }
 
 
