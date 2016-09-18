@@ -12,6 +12,7 @@
 }
 
     <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        <input type="hidden" id="hideID" value="" />
         @if (@ViewBag.UNDERTAKE_LABORATORYID != null)
         {
             <input type="hidden" id="hideUNDERTAKE_LABORATORYID" value="@ViewBag.UNDERTAKE_LABORATORYID" />
@@ -87,8 +88,7 @@
         $('#tt').tree({
             onClick: function (node) {                
                 if ($('#tt').tree('isLeaf', node.target)) {
-                    alert(node.text);
-                    debugger;
+                    alert(node.text);                   
                     if (node.attributes != null && node.attributes.url != null && node.attributes.url.trim() != "") {
                         $('#mainframe').attr('src', node.attributes.url);
                     }                  
@@ -101,23 +101,22 @@
     });
     //实验室调整变更树内容
     function ChangeTree(UNDERTAKE_LABORATORYID)
-    {        
-        //debugger;
-        //if(UNDERTAKE_LABORATORYID=="数表三相")
-        //{
-        //    $("#tt").attr("data-options", "url:'/Res/tree_data1.js',method:'get',animate:true,checkbox:true");
-        //}    
-        // data.push({ "url": "/Res/tree_data_SBSX.js"});
-        // $('#tt').tree('load');       
-        
-    }
-    function reload() {
-        var node = $('#tt').tree('getSelected');
-        if (node) {
-            $('#tt').tree('reload', node.target);
-        } else {
-            $('#tt').tree('reload');
+    {
+        var url = "/Res/tree_data1.js";
+        if (UNDERTAKE_LABORATORYID == "数表三相")
+        {
+            url = "/Res/tree_data_SBSX.js";
         }
+        //$('#tt').tree({
+        //    url: url,
+        //    loadFilter: function (data) {
+        //        return data;
+        //    }
+        //});
+        $('#tt').tree({
+            url: url
+        });
+        
     }
 
     //数据验证
@@ -134,7 +133,9 @@
         if (nodes.length > 0)
         {
             for (var i = 0; i < nodes.length; i++) {
-                if (nodes[i].children == undefined) { //是否是最末节点
+                //if (nodes[i].children == undefined) { //是否是最末节点
+                if ($('#tt').tree('isLeaf', node[i].target))
+                {                   
                     IsHaveData = true;
                     break;
 
@@ -149,6 +150,22 @@
         
         return true;
 
+    }
+    //重新加载树URL
+    function LoadTreeUrl(ID)
+    {
+        var nodes = $('#tt').tree();//检测项是否选择
+        var IsHaveData = false;
+        if (nodes.length > 0) {
+            for (var i = 0; i < nodes.length; i++) {
+                if ($('#tt').tree('isLeaf', node[i].target))
+                {
+                    if (node.attributes != null && node.attributes.urlGD != null && node.attributes.urlGD.trim() != "" && node.attributes.url != null && node.attributes.url.trim()!="") {
+                        node.attributes.url = node.attributes.url + "&ID=" + ID;
+                    }
+                }
+            }
+        }
     }
     //保存
     function Save()
@@ -167,22 +184,7 @@
                 if (RULEIDs != '') RULEIDs += ',';
                 RULEIDs += nodes[i].id;
             }
-        }       
-
-    //    $.post("api/SCHEMEApi/Post",
-    //{
-    //    NAME: NAME,
-    //    STATUS: "未使用",
-    //    ISSTOP: "停用",
-    //    UNDERTAKE_LABORATORYID:UNDERTAKE_LABORATORYID        
-    //}, function (res) {
-    //    if (res.Code == 1) {
-    //        window.location.href = res.Message;
-    //    }
-    //    else $.messager.alert('操作提示', res.Message, 'info');
-
-        //});
-
+        }
         //获取空对象用于保存添加的信息
         $.ajax({
             type: 'post', //使用post方法访问后台
@@ -197,8 +199,14 @@
             }, //AJAX请求完成时隐藏loading提示
 
             success: function (res) {//msg为返回的数据，在这里做数据绑定
-               
-                $.messager.alert('操作提示', res.Message, 'info');
+                if (res.Code == 1) {
+                    $("#hideID").val(res.messager);
+                    LoadTreeUrl(res.messager);
+                    $.messager.alert('操作提示', "操作成功！", 'info');
+                }
+                else {
+                    $.messager.alert('操作提示', res.Message, 'info');
+                }
                
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
