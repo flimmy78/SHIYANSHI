@@ -17,7 +17,6 @@ namespace Langben.DAL
         public string ID { get; set; }
         public string RULEID { get; set; }
         public string SCHEMEID { get; set; }
-        public string HTMLVALUE { get; set; }
         public Nullable<System.DateTime> CREATETIME { get; set; }
         public string CREATEPERSON { get; set; }
         public Nullable<System.DateTime> UPDATETIME { get; set; }

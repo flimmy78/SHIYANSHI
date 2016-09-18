@@ -46,6 +46,7 @@
     <Compile Include="Framework\ISysFieldHander.cs" />
     <Compile Include="Framework\ISysMenuSysRoleSysOperationBLL.cs" />
     <Compile Include="IFileUploaderBLL.cs" />
+    <Compile Include="IPROJECTTEMPLETBLL.cs" />
     <Compile Include="ISysAnnouncementBLL.cs" />
     <Compile Include="ISysDepartmentBLL.cs" />
     <Compile Include="ISysDocumentBLL.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Shiyanshi\IFILE_UPLOADERBLL.cs" />
     <Compile Include="Shiyanshi\IPREPARE_SCHEMEBLL.cs" />
     <Compile Include="Shiyanshi\IVJIANDINGRENWUBLL.cs" />
+    <Compile Include="Shiyanshi\IVQIJULINGQU1BLL.cs" />
     <Compile Include="Shiyanshi\IVRUKUBLL.cs" />
     <Compile Include="Shiyanshi\IVSHENHEBLL.cs" />
     <Compile Include="Shiyanshi\IVSHENPIBLL.cs" />

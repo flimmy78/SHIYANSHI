@@ -71,10 +71,10 @@
             toolbar: [
 
                  {
-                     text: '详细',
+                     text: '签名',
                      iconCls: 'icon-search',
                      handler: function () {
-                         return getView();
+                         //return getView();
                      }
                  }],
             columns: [[
@@ -116,12 +116,14 @@
 					}
                     , {
                         field: 'APPLIANCECOLLECTIONSATE', title: '器具领取', width: 111, formatter: function (value, row, index) {
-                            if (row.APPLIANCECOLLECTIONSATE!=null) {
-                                return "<input type='checkbox' checked='checked' />";
-                            }
-                            else {
-                                return "<input type='checkbox'/>";
-                            }
+                            if (row.APPLIANCE_RECIVE=="是") {
+                                if (row.APPLIANCECOLLECTIONSATE != null) {
+                                    return "<input type='checkbox' checked='checked' />";
+                                }
+                                else {
+                                    return "<input type='checkbox'/>";
+                                }
+                            }                            
                         }
                     }
                      , {

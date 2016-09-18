@@ -7,6 +7,24 @@ using System.Threading.Tasks;
 namespace Common
 {
     /// <summary>
+    /// 委托单状态
+    /// </summary>
+    public enum ORDER_STATUS_INFORMATION
+    {
+        /// <summary>
+        /// 器具登记分配好实验室后
+        /// </summary>
+        已分配=4001,
+        /// <summary>
+        /// 退回功能选择退回到器具登记
+        /// </summary>
+        有退回=4002,
+        /// <summary>
+        /// 器具和报告都领取后
+        /// </summary>
+        已归档=4003
+    }
+    /// <summary>
     /// 器具状态
     /// </summary>
     public enum ORDER_STATUS

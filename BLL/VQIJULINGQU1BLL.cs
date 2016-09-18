@@ -11,7 +11,7 @@ namespace Langben.BLL
     /// <summary>
     /// 器具领取1 
     /// </summary>
-    public class VQIJULINGQU1BLL :  IBLL.IVQIJULINGQU1BLL, IDisposable
+    public partial class VQIJULINGQU1BLL :  IBLL.IVQIJULINGQU1BLL, IDisposable
     {
         /// <summary>
         /// 私有的数据访问上下文

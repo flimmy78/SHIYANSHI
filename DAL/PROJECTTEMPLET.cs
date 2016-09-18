@@ -12,16 +12,18 @@ namespace Langben.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class VQIJULINGQU1
+    public partial class PROJECTTEMPLET
     {
         public string ID { get; set; }
-        public string ORDER_NUMBER { get; set; }
-        public string CERTIFICATE_ENTERPRISE { get; set; }
-        public string CUSTOMER_SPECIFIC_REQUIREMENTS { get; set; }
+        public string RULEID { get; set; }
+        public string SCHEMEID { get; set; }
+        public string HTMLVALUE { get; set; }
         public Nullable<System.DateTime> CREATETIME { get; set; }
-        public string APPLIANCECOLLECTIONSATE { get; set; }
-        public string REPORTTORECEVESTATE { get; set; }
-        public string EQUIPMENT_STATUS_VALUUMN { get; set; }
-        public string REPORTSTATUSZI { get; set; }
+        public string CREATEPERSON { get; set; }
+        public Nullable<System.DateTime> UPDATETIME { get; set; }
+        public string UPDATEPERSON { get; set; }
+    
+        public virtual RULE RULE { get; set; }
+        public virtual SCHEME SCHEME { get; set; }
     }
 }

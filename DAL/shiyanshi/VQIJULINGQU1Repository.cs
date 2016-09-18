@@ -6,9 +6,9 @@ using Common;
 namespace Langben.DAL
 {
     /// <summary>
-    /// 检定任务
+    /// 器具领取1
     /// </summary>
-    public partial class VJIANDINGRENWURepository : BaseRepository<VJIANDINGRENWU>, IDisposable
+    public partial class VQIJULINGQU1Repository : BaseRepository<VQIJULINGQU1>, IDisposable
     {
         /// <summary>
         /// 查询的数据
@@ -19,30 +19,33 @@ namespace Langben.DAL
         /// <param name="search">查询条件</param>
         /// <param name="listQuery">额外的参数</param>
         /// <returns></returns>      
-        public IQueryable<VJIANDINGRENWU> GetDataX(SysEntities db, string order, string sort, string search, params object[] listQuery)
+        public IQueryable<VQIJULINGQU1> GetDataX(SysEntities db, string order, string sort, string search, params object[] listQuery)
         {
             string where = string.Empty;
             int flagWhere = 0;
+            string REPORTSTATUSZI = string.Empty;
             string EQUIPMENT_STATUS_VALUUMN = string.Empty;
             Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
             if (queryDic != null && queryDic.Count > 0)
             {
                 foreach (var item in queryDic)
                 {
-                    if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "EQUIPMENT_STATUS_VALUUMN")
-                    {
-                        EQUIPMENT_STATUS_VALUUMN = item.Value;
-                        //if (where.IndexOf(" and ") > 0)
-                        //{
-                        //    where = where.Remove(where.LastIndexOf(" and "));
-                        //}
-                        continue;
-                    }
+                    //if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "REPORTSTATUSZI")
+                    //{
+                    //    REPORTSTATUSZI = item.Value;
+                    //    continue;
+                    //}
+                    //if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "EQUIPMENT_STATUS_VALUUMN")
+                    //{
+                    //    EQUIPMENT_STATUS_VALUUMN = item.Value;
+                    //    continue;
+                    //}
                     if (flagWhere != 0)
                     {
                         where += " and ";
                     }
                     flagWhere++;
+
                   
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
                     {
@@ -64,7 +67,7 @@ namespace Langben.DAL
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(End_Int)) + "] <= " + item.Value.GetInt();
                         continue;
                     }
-
+     
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(DDL_Int)) //精确查询数值
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(DDL_Int)) + "] =" + item.Value;
@@ -75,27 +78,29 @@ namespace Langben.DAL
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(DDL_String)) + "] = '" + item.Value + "'";
                         continue;
                     }
-                    if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key != "EQUIPMENT_STATUS_VALUUMN")
-                    {
-                        where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
-                    }
-
+                    where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
                 }
             }
-            string[] EQUIPMENT_STATUS_VALUUMNarr = null;
-            if (!string.IsNullOrEmpty(EQUIPMENT_STATUS_VALUUMN))
-            {
-                EQUIPMENT_STATUS_VALUUMNarr = EQUIPMENT_STATUS_VALUUMN.Split('*');
-            }
-            return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
-                    .CreateObjectSet<VJIANDINGRENWU>().Where(string.IsNullOrEmpty(where) ? "true" : where)
+            //string[] REPORTSTATUSZIarr = null;
+            //if (!string.IsNullOrEmpty(REPORTSTATUSZI))
+            //{
+            //    REPORTSTATUSZIarr = REPORTSTATUSZI.Split('*');
+            //}
+            //string[] EQUIPMENT_STATUS_VALUUMNarr = null;
+            //if (!string.IsNullOrEmpty(EQUIPMENT_STATUS_VALUUMN))
+            //{
+            //    EQUIPMENT_STATUS_VALUUMNarr = EQUIPMENT_STATUS_VALUUMN.Split('*');
+            //}
+            return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext 
+                     .CreateObjectSet<VQIJULINGQU1>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                     .OrderBy("it.[CREATETIME] " + "desc")
-                     .Where(w => EQUIPMENT_STATUS_VALUUMNarr.Contains(w.EQUIPMENT_STATUS_VALUUMN))
-                     .AsQueryable();
+                     //.OrderBy("it.[UPDATETIME] " + "desc")
+                     //.Where(w => REPORTSTATUSZIarr.Contains(w.REPORTSTATUSZI))
+                     //.Where(w => EQUIPMENT_STATUS_VALUUMNarr.Contains(w.EQUIPMENT_STATUS_VALUUMN))
+                     .AsQueryable(); 
 
         }
-   
+       
     }
 }
 

@@ -53,6 +53,7 @@ namespace Langben.DAL
         public virtual DbSet<PHASE> PHASE { get; set; }
         public virtual DbSet<PREPARE_SCHEME> PREPARE_SCHEME { get; set; }
         public virtual DbSet<PRINTREPORT> PRINTREPORT { get; set; }
+        public virtual DbSet<PROJECTTEMPLET> PROJECTTEMPLET { get; set; }
         public virtual DbSet<QUALIFIED_UNQUALIFIED_TEST_ITE> QUALIFIED_UNQUALIFIED_TEST_ITE { get; set; }
         public virtual DbSet<REPORTCOLLECTION> REPORTCOLLECTION { get; set; }
         public virtual DbSet<RULE> RULE { get; set; }
@@ -88,10 +89,10 @@ namespace Langben.DAL
         public virtual DbSet<UNDERTAKE_LABORATORY> UNDERTAKE_LABORATORY { get; set; }
         public virtual DbSet<VBAOGAODAYIN> VBAOGAODAYIN { get; set; }
         public virtual DbSet<VJIANDINGRENWU> VJIANDINGRENWU { get; set; }
+        public virtual DbSet<VQIJULINGQU1> VQIJULINGQU1 { get; set; }
+        public virtual DbSet<VQIJULINGQU2> VQIJULINGQU2 { get; set; }
         public virtual DbSet<VRUKU> VRUKU { get; set; }
         public virtual DbSet<VSHENHE> VSHENHE { get; set; }
         public virtual DbSet<VSHENPI> VSHENPI { get; set; }
-        public virtual DbSet<VQIJULINGQU1> VQIJULINGQU1 { get; set; }
-        public virtual DbSet<VQIJULINGQU2> VQIJULINGQU2 { get; set; }
     }
 }
