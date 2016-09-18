@@ -399,11 +399,11 @@
             zhi += "联系电话2不能为空！<br>";         
         }
         else {
-            if (checkPhone(entity.CONTACT_PHONE2)) {
+            if (!checkPhone(entity.CONTACT_PHONE2)) {
                 zhi += "联系电话2格式不对！<br>";
             }
         }
-        if (entity.APPLIANCE_DETAIL_INFORMATION.length > 1) {
+        if (entity.APPLIANCE_DETAIL_INFORMATION.length >= 1) {
             for (var i = 0; i < entity.APPLIANCE_DETAIL_INFORMATION.length; i++) {
                 if (entity.APPLIANCE_DETAIL_INFORMATION[i].APPLIANCE_NAME == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].VERSION == "undefined"
                     || entity.APPLIANCE_DETAIL_INFORMATION[i].NUM == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].APPEARANCE_STATUS == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID == "undefined") {
@@ -420,7 +420,7 @@
                     zhi += "数量不能为空！<br>";                  
                 }
                 else {
-                    if (isInteger(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
+                    if (!isNumber(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
                         zhi += "数量必须为数字整型！<br>";
                     }
                 }
@@ -436,13 +436,13 @@
             zhi += "器具数据不能为空！<br>";
         }
 
-        if (zhi != null) {
+        if (zhi != "") {
             $.messager.alert('操作提示', "" + zhi + "", 'info');
             return false;
         }
         else {
-            return false;
-            //return true;
+            //return false;
+            return true;
         }
 
     }
@@ -486,15 +486,24 @@
 
         }
     }
+
     /*
-用途：检查输入对象的值是否符合整数格式
-输入：str 输入的字符串
-返回：如果通过验证返回true,否则返回false
+用途：检查输入字符串是否符合正整数格式
+输入：
+s：字符串
+返回：
+如果通过验证返回true,否则返回false
 */
-    function isInteger(str) {
-        var regu = /^[-]{0,1}[0-9]{1,}$/;
-        return regu.test(str);
+    function isNumber(s) {
+        var regu = "^[0-9]+$";
+        var re = new RegExp(regu);
+        if (s.search(re) != -1) {
+            return true;
+        } else {
+            return false;
+        }
     }
+
 </script>
 <script type="text/javascript">
 

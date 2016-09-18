@@ -123,6 +123,7 @@
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="APPLIANCE_DETAIL_INFORMATIONID" Type="varchar2" MaxLength="36" />
           <Property Name="APPLIANCECOLLECTIONSATE" Type="varchar2" MaxLength="200" />
+          <Property Name="LABORATORY" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="COMPANY">
           <Key>
@@ -3015,6 +3016,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="APPLIANCE_DETAIL_INFORMATIONID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="APPLIANCECOLLECTIONSATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="APPLIANCE_DETAIL_INFORMATION" Relationship="Model.FK_APPLIANC_REFERENCE_APPLIANC" FromRole="APPLIANCECOLLECTION" ToRole="APPLIANCE_DETAIL_INFORMATION" />
+          <Property Name="LABORATORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="COMPANY">
           <Key>
@@ -5092,6 +5094,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="APPLIANCECOLLECTION">
             <EntityTypeMapping TypeName="Model.APPLIANCECOLLECTION">
               <MappingFragment StoreEntitySet="APPLIANCECOLLECTION">
+                <ScalarProperty Name="LABORATORY" ColumnName="LABORATORY" />
                 <ScalarProperty Name="APPLIANCECOLLECTIONSATE" ColumnName="APPLIANCECOLLECTIONSATE" />
                 <ScalarProperty Name="APPLIANCE_DETAIL_INFORMATIONID" ColumnName="APPLIANCE_DETAIL_INFORMATIONID" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />

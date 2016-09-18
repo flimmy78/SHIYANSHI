@@ -28,19 +28,26 @@ namespace Langben.App.Controllers
         /// <param name="entity"></param>
         /// <returns></returns>  
         /// 
-        [System.Web.Http.HttpPut]
-        public Common.ClientResult.Result Put(string id)
+        [HttpPost]
+        public Common.ClientResult.Result LINGQU(APPLIANCECOLLECTION app)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             string returnValue = string.Empty;
-            id = id.TrimEnd(',');
-            string[] deleteId = id.Split(',');
+            string id = app.APPLIANCE_DETAIL_INFORMATIONID.TrimEnd(',');
+            string APPLIANCECOLLECTIONSATE = app.APPLIANCECOLLECTIONSATE.TrimEnd(',');
+            Dictionary<string, string> dicti = new Dictionary<string, string>();
+            string[] deleteId = id.Split(',');//截取id
+            string[] deleteAPPLIANCECOLLECTIONSATE = APPLIANCECOLLECTIONSATE.Split(',');//截取器具状态         
             if (deleteId != null && deleteId.Length > 0)
             {
                 Common.Account account = GetCurrentAccount();
+                for (int i = 0; i < deleteId.Length; i++)
+                {
+                    dicti.Add(deleteId[i], deleteAPPLIANCECOLLECTIONSATE[i]);
+                }
                 //Common.Account account = new Account();
                 //account.UNDERTAKE_LABORATORYName = "三相";
-               //判断出是试验完成的id
+                //判断出是试验完成的id
                 //for (int i = 0; i < deleteId.Length; i++)
                 //{
                 //    deleteId[i]= deleteId[i].Substring(0,deleteId[i].Length - 1);
@@ -51,29 +58,55 @@ namespace Langben.App.Controllers
                 //    }
                 //}
                 //数据校验
-                if ( m_BLL.EditCollection(ref validationErrors, deleteId, account.UNDERTAKE_LABORATORYName))
+
+                //添加领取信息
+                APPLIANCECOLLECTION appliance = new APPLIANCECOLLECTION();
+                bool isEdit = false;
+                foreach (var item in dicti)
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息信息的Id为" + string.Join(",", deleteId), "器具明细信息"
-                        );//写入日志                   
-                    result.Code = Common.ClientCode.Succeed;
-                    result.Message = Suggestion.UpdateSucceed;
-                    return result; //提示更新成功 
-                }
-                else
-                {
-                    if (validationErrors != null && validationErrors.Count > 0)
+                    appliance.ID = Result.GetNewId();
+                    appliance.APPLIANCE_DETAIL_INFORMATIONID = item.Key;
+                    appliance.CREATEPERSON = account.Name;
+                    appliance.LABORATORY = account.UNDERTAKE_LABORATORYName;
+                    appliance.CREATETIME = new DateTime();
+                    appliance.APPLIANCECOLLECTIONSATE = item.Value;
+                    if (!m_BLL2.Create(ref validationErrors, appliance))
                     {
-                        validationErrors.All(a =>
-                        {
-                            returnValue += a.ErrorMessage;
-                            return true;
-                        });
+                        break;
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具明细信息信息的Id为" + string.Join(",", deleteId) + "," + returnValue, "器具明细信息"
-                        );//写入日志   
-                    result.Code = Common.ClientCode.Fail;
-                    result.Message = Suggestion.UpdateFail + returnValue;
-                    return result; //提示更新失败
+                    else
+                    {
+                        isEdit = true;
+                    }
+
+                }
+                //判断器具领取信息是否添加成功
+                if (isEdit)
+                {
+                    if (m_BLL.EditCollection(ref validationErrors, deleteId, account.UNDERTAKE_LABORATORYName))
+                    {
+                        LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息信息的Id为" + string.Join(",", deleteId), "器具明细信息"
+                            );//写入日志                   
+                        result.Code = Common.ClientCode.Succeed;
+                        result.Message = Suggestion.UpdateSucceed;
+                        return result; //提示更新成功 
+                    }
+                    else
+                    {
+                        if (validationErrors != null && validationErrors.Count > 0)
+                        {
+                            validationErrors.All(a =>
+                            {
+                                returnValue += a.ErrorMessage;
+                                return true;
+                            });
+                        }
+                        LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具明细信息信息的Id为" + string.Join(",", deleteId) + "," + returnValue, "器具明细信息"
+                            );//写入日志   
+                        result.Code = Common.ClientCode.Fail;
+                        result.Message = Suggestion.UpdateFail + returnValue;
+                        return result; //提示更新失败
+                    }
                 }
             }
             result.Code = Common.ClientCode.FindNull;
@@ -193,17 +226,19 @@ namespace Langben.App.Controllers
             }
             return ACCEPT_ORGNIZATION;
         }
-      
+
         IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL m_BLL;
+        IBLL.IAPPLIANCECOLLECTIONBLL m_BLL2;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VAPPLIANCE_DETAIL_INFORMATIONApiController()
-            : this(new APPLIANCE_DETAIL_INFORMATIONBLL()) { }
+            : this(new APPLIANCE_DETAIL_INFORMATIONBLL(), new APPLIANCECOLLECTIONBLL()) { }
 
-        public VAPPLIANCE_DETAIL_INFORMATIONApiController(APPLIANCE_DETAIL_INFORMATIONBLL bll)
+        public VAPPLIANCE_DETAIL_INFORMATIONApiController(APPLIANCE_DETAIL_INFORMATIONBLL bll, APPLIANCECOLLECTIONBLL bll2)
         {
             m_BLL = bll;
+            m_BLL2 = bll2;
         }
 
     }
