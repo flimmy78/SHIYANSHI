@@ -19,7 +19,7 @@ namespace Langben.DAL
         {
             //数据库设置级联关系，自动删除子表的内容   
             IQueryable<APPLIANCE_LABORATORY> collection = from f in db.APPLIANCE_LABORATORY
-                                                          where f.ID == entity.ID
+                                                          where f.ID == entity.ID&&f.UNDERTAKE_LABORATORYID==entity.UNDERTAKE_LABORATORYID
                                                                   select f;
 
             //db.APPLIANCE_DETAIL_INFORMATION.Attach(entity);

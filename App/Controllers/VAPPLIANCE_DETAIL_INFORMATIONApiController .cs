@@ -45,19 +45,6 @@ namespace Langben.App.Controllers
                 {
                     dicti.Add(deleteId[i], deleteAPPLIANCECOLLECTIONSATE[i]);
                 }
-                //Common.Account account = new Account();
-                //account.UNDERTAKE_LABORATORYName = "三相";
-                //判断出是试验完成的id
-                //for (int i = 0; i < deleteId.Length; i++)
-                //{
-                //    deleteId[i]= deleteId[i].Substring(0,deleteId[i].Length - 1);
-                //    string ids= deleteId[i].Substring(deleteId[i].Length - 1);
-                //    if (ids=="*")
-                //    {
-
-                //    }
-                //}
-                //数据校验
 
                 //添加领取信息
                 APPLIANCECOLLECTION appliance = new APPLIANCECOLLECTION();
@@ -113,7 +100,127 @@ namespace Langben.App.Controllers
             result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";
             return result; //提示输入的数据的格式不对         
         }
+        /// <summary>
+        /// 查询器具为几个实验室（退回功能）
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>  
+        /// 
+        [System.Web.Http.HttpPut]
+        public bool SENDBACK(string id)
+        {
+            bool tuihui = false;
+            if (!string.IsNullOrEmpty(id))
+            {
+                Common.Account account = GetCurrentAccount();
+                List<APPLIANCE_LABORATORY> list = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(id);
+                if (list.Count > 1)
+                {
+                    int a = 0;
+                    foreach (var item in list)
+                    {
+                        if (item.APPLIANCE_DETAIL_INFORMATION.ORDER_STATUS == Common.ORDER_STATUS.已分配.ToString())
+                        {
+                            a++;
+                        }
+                       else if (item.APPLIANCE_DETAIL_INFORMATION.ORDER_STATUS == Common.ORDER_STATUS.已领取.ToString() &&item.PREPARE_SCHEME==null?true: item.PREPARE_SCHEME.REPORTSTATUS == null&&item.APPLIANCE_DETAIL_INFORMATION.APPLIANCE_PROGRESS==account.UNDERTAKE_LABORATORYName)
+                        {
+                            a++;
+                        }
+                    }
+                    if (a >=2)
+                    {
+                        tuihui = true;
+                    }
+                    else
+                    {
+                        tuihui = false;
+                    }
+                }
+                else
+                {
+                    foreach (var item in list)
+                    {
+                        if (item.APPLIANCE_DETAIL_INFORMATION.ORDER_STATUS == Common.ORDER_STATUS.已领取.ToString() || item.APPLIANCE_DETAIL_INFORMATION.ORDER_STATUS == Common.ORDER_STATUS.已分配.ToString() && item.PREPARE_SCHEME.REPORTSTATUS == null)
+                        {
+                            tuihui = true;
+                        }
+                        else
+                        {
+                            tuihui = false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                tuihui = false;
+            }
+            return tuihui;
+        }
+        /// <summary>
+        /// 退回保存
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>  
+        /// 
+        [HttpPost]
+        public Common.ClientResult.Result EditSENDBACK([FromBody]APPLIANCE_DETAIL_INFORMATION entity)
+        {
+            Common.ClientResult.Result result = new Common.ClientResult.Result();
+            if (entity != null && ModelState.IsValid)
+            {   //数据校验
 
+                string currentPerson = GetCurrentPerson();
+                entity.UPDATETIME = DateTime.Now;
+                entity.UPDATEPERSON = currentPerson;
+
+                string returnValue = string.Empty;
+                //通过前端传过来的值来判断枚举中属于什么值给器具状态值赋值
+                if (!string.IsNullOrEmpty(entity.ORDER_STATUS))
+                {
+                    if (Enum.IsDefined(typeof(Common.ORDER_STATUS), entity.ORDER_STATUS))
+                    {
+                        entity.EQUIPMENT_STATUS_VALUUMN = Enum.Parse(typeof(Common.ORDER_STATUS), entity.ORDER_STATUS).GetHashCode().ToString();
+                    }
+                }
+                //退回
+                if (entity.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())
+                {
+                    //获取委托单id
+                    APPLIANCE_DETAIL_INFORMATION appl = m_BLL.GetById(entity.ID);
+                    appl.ORDER_TASK_INFORMATION.ORDER_STATUS = Common.ORDER_STATUS_INFORMATION.有退回.ToString();
+                    m_BLL4.EditField(ref validationErrors, appl.ORDER_TASK_INFORMATION);
+                }
+                if (m_BLL.EditField(ref validationErrors, entity))
+                {
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息信息的Id为" + entity.ID, "器具明细信息"
+                        );//写入日志                   
+                    result.Code = Common.ClientCode.Succeed;
+                    result.Message = Suggestion.UpdateSucceed;
+                    return result; //提示更新成功 
+                }
+                else
+                {
+                    if (validationErrors != null && validationErrors.Count > 0)
+                    {
+                        validationErrors.All(a =>
+                        {
+                            returnValue += a.ErrorMessage;
+                            return true;
+                        });
+                    }
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具明细信息信息的Id为" + entity.ID + "," + returnValue, "器具明细信息"
+                        );//写入日志   
+                    result.Code = Common.ClientCode.Fail;
+                    result.Message = Suggestion.UpdateFail + returnValue;
+                    return result; //提示更新失败
+                }
+            }
+            result.Code = Common.ClientCode.FindNull;
+            result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";
+            return result; //提示输入的数据的格式不对                 
+        }
         /// <summary>
         /// 编辑集合（入库功能）
         /// </summary>
@@ -229,16 +336,20 @@ namespace Langben.App.Controllers
 
         IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL m_BLL;
         IBLL.IAPPLIANCECOLLECTIONBLL m_BLL2;
+        IBLL.IAPPLIANCE_LABORATORYBLL m_BLL3;
+        IBLL.IORDER_TASK_INFORMATIONBLL m_BLL4;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VAPPLIANCE_DETAIL_INFORMATIONApiController()
-            : this(new APPLIANCE_DETAIL_INFORMATIONBLL(), new APPLIANCECOLLECTIONBLL()) { }
+            : this(new APPLIANCE_DETAIL_INFORMATIONBLL(), new APPLIANCECOLLECTIONBLL(), new APPLIANCE_LABORATORYBLL(), new ORDER_TASK_INFORMATIONBLL()) { }
 
-        public VAPPLIANCE_DETAIL_INFORMATIONApiController(APPLIANCE_DETAIL_INFORMATIONBLL bll, APPLIANCECOLLECTIONBLL bll2)
+        public VAPPLIANCE_DETAIL_INFORMATIONApiController(APPLIANCE_DETAIL_INFORMATIONBLL bll, APPLIANCECOLLECTIONBLL bll2, APPLIANCE_LABORATORYBLL bll3, ORDER_TASK_INFORMATIONBLL bll4)
         {
             m_BLL = bll;
             m_BLL2 = bll2;
+            m_BLL3 = bll3;
+            m_BLL4 = bll4;
         }
 
     }

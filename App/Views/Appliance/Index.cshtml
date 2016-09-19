@@ -385,7 +385,9 @@
     //数据验证
     function ifshuju(entity) {
         var zhi = "";
-
+        if (isNull(entity.ACCEPT_ORGNIZATION)) {
+            zhi += "受理单位不能为空！<br>";
+        }
         if (isNull(entity.CERTIFICATE_ENTERPRISE)) {
             zhi += "证书单位不能为空！<br>";
         }
@@ -401,6 +403,31 @@
         else {
             if (!checkPhone(entity.CONTACT_PHONE2)) {
                 zhi += "联系电话2格式不对！<br>";
+            }
+        }
+        if (!isNull(entity.CONTACT_PHONE)) {
+            if (!checkPhone(entity.CONTACT_PHONE)) {
+                zhi += "联系电话格式不对！<br>";
+            }
+        }
+        if (!isNull(entity.INSPECTION_ENTERPRISE_POST)) {
+            if (!isPOST(entity.INSPECTION_ENTERPRISE_POST)) {
+                zhi += "送检单位邮政编码格式不对！<br>";
+            }
+        }
+        if (!isNull(entity.CERTIFICATE_ENTERPRISE_POST)) {
+            if (!isPOST(entity.CERTIFICATE_ENTERPRISE_POST)) {
+                zhi += "证书单位邮政编码格式不对！<br>";
+            }
+        }
+        if (!isNull(entity.FAX)) {
+            if (!isFAX(entity.FAX)) {
+                zhi += "传真格式不对！<br>";
+            }
+        }
+        if (!isNull(entity.FAX2)) {
+            if (!isFAX(entity.FAX2)) {
+                zhi += "传真2格式不对！<br>";
             }
         }
         if (entity.APPLIANCE_DETAIL_INFORMATION.length >= 1) {
@@ -459,6 +486,28 @@
         return re.test(str);
     }
     /*
+用途：检查输入字符串是否满足邮政编码格式
+输入：str
+返回：
+如果全是空返回true,否则返回false
+*/
+    function isPOST(str) {
+        var regu = /^[1-9][0-9]{5}$/;
+        //var re = new RegExp(regu);
+        return regu.test(str);
+    }
+    /*
+用途：检查输入字符串是否满足传真格式
+输入：str
+返回：
+如果全是空返回true,否则返回false
+*/
+    function isFAX(str) {
+        var regu = /^[+]{0,1}(\d){1,3}[ ]?([-]?((\d)|[ ]){1,12})+$/;
+        //var re = new RegExp(regu);
+        return regu.test(str);
+    }
+    /*
    用途：检查输入的电话号码格式是否正确
    输入：
    strPhone：字符串
@@ -466,10 +515,10 @@
    如果通过验证返回true,否则返回false
    */
     function checkPhone(strPhone) {
-        var phoneRegWithArea = /^[0][1-9]{2,3}-[0-9]{5,10}$/;
-        var phoneRegNoArea = /^[1-9]{1}[0-9]{5,8}$/;
+        var phoneRegWithArea = /^[1][3][0-9]{9}$/;
+        var phoneRegNoArea = /^0\d{2,3}-?\d{7,8}$/;
         //var prompt = "您输入的电话号码不正确!"
-        if (strPhone.length > 9) {
+        if (strPhone.length ==11) {
             if (phoneRegWithArea.test(strPhone)) {
                 return true;
             } else {
@@ -680,7 +729,8 @@ s：字符串
                                     $("#order input[type='text']").each(function () {
                                         $(this).val("");
                                     });
-                                    $("#ACCEPT_ORGNIZATION").val("");
+                                    $("#ACCEPT_ORGNIZATION").val(""); 
+                                    $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val("");
                                     $("#ApplianceDate").edatagrid("loadData", [])
                                     $.messager.alert('操作提示', "发送实验室成功", 'info');
                                 }
