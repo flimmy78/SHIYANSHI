@@ -317,48 +317,25 @@
             return returnNum;
         }
         //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-        function changeValue(obj) {
-            //var idx = obj.id.split('_')[1];
-            //var rowspanCount = $(obj).parent().parent().find('td').eq(0).attr("rowspan");
-            //var rowIndex = $(obj).parent().parent().eq(0).attr("rowindex");
-
-            ////$("#tongdao_" + idx + " tr:gt(" + (parseInt(rowIndex) - 1) + ") td select").each(function (i) {
-            ////    if (i <= parseInt(rowspanCount))
-            ////    {
-            ////        if ($(this).attr("id") != obj.id)
-            ////            $(this).find("option").each(function () {
-            ////                if ($(this).text() == $("#" + obj.id + " option:selected").text()) {
-            ////                    $(this).attr("selected", "selected");
-            ////                }
-            ////            });
-            ////    }
-            ////})
-            //var bIdx = 0;
-            //var t = $("#" + obj.id + " option:selected").text();
-            //$("#tongdao_" + idx + " tr:gt(" + (parseInt(rowIndex)) + "):lt(" + (parseInt(rowspanCount)) + ") td select").each(function (eIdx) {
-            //    if (bIdx <= eIdx) {
-            //        $(this).children("option[selected='selected']").removeAttr("selected");
-            //        $(this).children("option[value='" + t + "']").attr("selected", true);
-            //        bIdx++;
-            //    }
-            //});           
-            var RANGE_UNIT_val = obj.value;           
-            var id = obj.id.replace("RANGE_UNIT", "") + "_";
+        function changeValue(obj) {            
+            var RANGE_UNIT_val = obj.value; //量程单位          
+            var id = obj.id.replace("RANGE_UNIT", "") + "_";//_表编号_量程编号_
             //输出示值
-            $("select[name=OUTPUT_VALUE_UNIT]").each(function (a, b) {
-                if (b.id.indexOf(id) >= 0) {
-                    b.value = RANGE_UNIT_val;
-                }
+            changeUnit(id, RANGE_UNIT_val, "OUTPUT_VALUE_UNIT");
 
-            });
+            //输出实际值            
+            changeUnit(id, RANGE_UNIT_val, "ACTUAL_OUTPUT_VALUE_UNIT");
 
+        }
+        //联动单位
+        function changeUnit(id,val,selectName)
+        {
             //输出实际值
-            $("select[name=ACTUAL_OUTPUT_VALUE_UNIT]").each(function (a, b) {
+            $("select[name="+selectName+"]").each(function (a, b) {
                 if (b.id.indexOf(id) >= 0) {
-                    b.value = RANGE_UNIT_val;
+                    b.value = val;
                 }
             });
-
         }
 
         ///计算标准值
