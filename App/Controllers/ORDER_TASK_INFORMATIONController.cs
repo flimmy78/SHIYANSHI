@@ -81,7 +81,7 @@ namespace Langben.App.Controllers
                     entity.CREATETIME = DateTime.Now;
                     entity.CREATEPERSON = currentPerson;
                     entity.ID = Result.GetNewId();
-                    entity.ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString();
+                    entity.ORDER_STATUS = Common.ORDER_STATUS_INFORMATION.已分配.ToString();
                     foreach (var item in entity.APPLIANCE_DETAIL_INFORMATION)
                     {
                         item.ID = Result.GetNewId();
@@ -99,7 +99,8 @@ namespace Langben.App.Controllers
                         }
                         else
                         {
-                            foreach (var it in item.UNDERTAKE_LABORATORYID.Split(','))
+
+                            foreach (var it in item.UNDERTAKE_LABORATORYID.TrimEnd(',').Split(','))
                             {
                                 item.APPLIANCE_LABORATORY.Add(new APPLIANCE_LABORATORY() { ID = Result.GetNewId(), UNDERTAKE_LABORATORYID = it });
                             }

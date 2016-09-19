@@ -181,6 +181,20 @@ namespace Langben.App.Controllers
                 {
                     Create = m_BLL3.EditField(ref validationErrors, pre);
                 }
+                if (Create)
+                {
+                    ViewBag.Create = "True";
+                    ViewBag.Edit = "";
+                    ViewBag.NAME2 = uplo.NAME2;//原始记录名称
+                    ViewBag.NAME = uplo.NAME;//证书名称
+                }
+                else
+                {
+                    ViewBag.Create = "False";
+                    ViewBag.Edit = "";
+                    ViewBag.NAME2 = file.NAME2;//原始记录名称
+                    ViewBag.NAME = file.NAME;//证书名称
+                }
             }
             else
             {
@@ -195,38 +209,26 @@ namespace Langben.App.Controllers
                    // pre.ID = file_uplo.PREPARE_SCHEMEID;
                     Edit = m_BLL3.EditField(ref validationErrors, pre);
                 }
+                if (Edit)
+                {
+                    ViewBag.Edit = "True";
+                    ViewBag.Create = "";
+                    ViewBag.NAME2 = uplo.NAME2;//原始记录名称
+                    ViewBag.NAME = uplo.NAME;//证书名称
+                }
+                else
+                {
+                    ViewBag.Edit = "False";
+                    ViewBag.Create = "";
+                    ViewBag.NAME2 = file.NAME2;//原始记录名称
+                    ViewBag.NAME = file.NAME;//证书名称
+                };
 
             }
             //返回执行结果是新增还是修改并给出结论
             ViewBag.FILE_UPLOADERID = uplo.ID;
-            if (Create)
-            {
-                ViewBag.Create = "True";
-                ViewBag.Edit = "";
-                ViewBag.NAME2 = uplo.NAME2;//原始记录名称
-                ViewBag.NAME = uplo.NAME;//证书名称
-            }
-            else
-            {
-                ViewBag.Create = "False";
-                ViewBag.Edit = "";
-                ViewBag.NAME2 = file.NAME2;//原始记录名称
-                ViewBag.NAME = file.NAME;//证书名称
-            }
-            if (Edit)
-            {
-                ViewBag.Edit = "True";
-                ViewBag.Create = "";
-                ViewBag.NAME2 = uplo.NAME2;//原始记录名称
-                ViewBag.NAME = uplo.NAME;//证书名称
-            }
-            else
-            {
-                ViewBag.Edit = "False";
-                ViewBag.Create = "";
-                ViewBag.NAME2 = file.NAME2;//原始记录名称
-                ViewBag.NAME = file.NAME;//证书名称
-            };
+
+            ViewBag.REPORTSTATUS = null;
             ViewBag.REPORTNUMBER = REPORTNUMBER;//证书编号          
             ViewBag.CONCLUSION = uplo.CONCLUSION;//结论
             ViewBag.PREPARE_SCHEMEID = pre.ID;//预备方案id

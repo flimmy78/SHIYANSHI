@@ -142,6 +142,7 @@ namespace Langben.App.Controllers
         [System.Web.Http.HttpPost]
         public Common.ClientResult.Result Post([FromBody]PREPARE_SCHEME entity)
         {
+            Common.Account account = GetCurrentAccount();
             string putid = entity.ID;
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             if (entity != null && ModelState.IsValid)
@@ -150,12 +151,12 @@ namespace Langben.App.Controllers
                 entity.CREATETIME = DateTime.Now;
                 entity.CREATEPERSON = currentPerson;
                 //修改证书编号
-
                 entity.ID = Result.GetNewId();
                 string returnValue = string.Empty;
                 APPLIANCE_LABORATORY app = new APPLIANCE_LABORATORY();
                 app.ID = entity.APPLIANCE_LABORATORYID;
                 app.PREPARE_SCHEMEID = entity.ID;
+                app.UNDERTAKE_LABORATORYID = account.UNDERTAKE_LABORATORYName;
                 if (!string.IsNullOrEmpty(putid))//判断是否为第二次进入
                 {
                     //修改
