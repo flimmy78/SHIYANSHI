@@ -26,7 +26,7 @@
                 <tr>
                     <td> 实验室：</td>
                     <td>
-                        <select name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID" style="width:200px;">
+                        <select name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID" style="width:200px;" >
                             <option value="电能" selected="selected">电能</option>
                             <option value="数表三相">数表三相</option>
                             <option value="数表单相">数表单相</option>
@@ -55,7 +55,7 @@
         <div class="easyui-layout" data-options="fit:true">
 
             <div data-options="region:'west',collapsible:false,split:false" title="树选择" style="width: 300px;">
-                <ul id="tt" class="easyui-tree" data-options="url:'/Res/tree_data_SBSX.js',method:'get',animate:true,checkbox:true"></ul>
+                <ul id="tt" class="easyui-tree" data-options="url:'',method:'get',animate:true,checkbox:true"></ul>
             </div>
 
 
@@ -118,6 +118,7 @@
     function ChangeTree(UNDERTAKE_LABORATORYID)
     {       
         var url = "/Res/tree_data1.js";
+        //var url = "";
         if (UNDERTAKE_LABORATORYID == "数表三相")
         {
             url = "/Res/tree_data_SBSX.js";
