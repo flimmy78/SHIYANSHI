@@ -43,7 +43,7 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public JsonResult GetData(string id, int page, int rows, string order, string sort, string search)
         {
-            search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "^"+ "REPORTSTATUSZI&" + Common.REPORTSTATUS.已批准.GetHashCode() + "";
+            search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "^"+ "REPORTSTATUSZI&" + Common.REPORTSTATUS.报告已打印.GetHashCode() + "";
            // search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.已批准.GetHashCode() +  "";
             int total = 0;
             List<VQIJULINGQU1> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);

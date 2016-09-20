@@ -90,6 +90,7 @@ namespace Langben.DAL
             {
                 deleteItem.ORDER_STATUS =Common.ORDER_STATUS.器具已入库.ToString();
                 deleteItem.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.器具已入库.GetHashCode().ToString();
+                deleteItem.STORAGEINSTRUCTI_STATU = Common.ORDER_STATUS.器具已入库.ToString();
             }
         }
         /// <summary>
