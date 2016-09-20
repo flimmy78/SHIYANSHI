@@ -350,6 +350,8 @@ namespace Langben.App.Controllers
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.待批准.ToString();
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.待批准.GetHashCode().ToString();
+                        entity.AUDITTIME = new DateTime();//审核时间
+                        entity.AUDITTEPERSON = currentPerson;
                         appliance.ID = entity.APPLIANCE_DETAIL_INFORMATIONID;
                         appliance.ORDER_STATUS = Common.ORDER_STATUS.试验完成.ToString();
                         appliance.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.试验完成.GetHashCode().ToString();
@@ -366,6 +368,8 @@ namespace Langben.App.Controllers
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.已批准.ToString();
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.已批准.GetHashCode().ToString();
+                        entity.APPROVALDATE = new DateTime();
+                        entity.APPROVALEPERSON = currentPerson;
                         //判断器具是否满足入库条件
                         if (ISAPPLIANCE(entity.APPLIANCE_DETAIL_INFORMATIONID))
                         {
@@ -378,7 +382,7 @@ namespace Langben.App.Controllers
 
                 string returnValue = string.Empty;
                 bool HE = false;
-                if (!string.IsNullOrEmpty(appliance.ORDER_STATUS))
+                if (!string.IsNullOrEmpty(appliance.ORDER_STATUS)|| !string.IsNullOrEmpty(entity.REPORTSTATUS))
                 {
                     HE = m_BLL3.EditField(ref validationErrors, appliance) && m_BLL.EditField(ref validationErrors, entity);//器具明细修改
                 }
