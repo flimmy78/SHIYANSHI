@@ -147,6 +147,7 @@
     <Compile Include="Codes\CommonFunc.cs" />
     <Compile Include="Codes\LogClassModels.cs" />
     <Compile Include="Codes\SupportFilter.cs" />
+    <Compile Include="Codes\COMPANYModels .cs" />
     <Compile Include="Codes\SysFieldModels.cs" />
     <Compile Include="Codes\Utils.cs" />
     <Compile Include="Controllers\ManageTemplateController.cs" />

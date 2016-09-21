@@ -52,6 +52,7 @@
     <Compile Include="Framework\HomeBLL.cs" />
     <Compile Include="Framework\NetSendMail.cs" />
     <Compile Include="Framework\SysAnnouncementBLL.cs" />
+    <Compile Include="Framework\SysCOMPANY.cs" />
     <Compile Include="Framework\SysFieldHander.cs" />
     <Compile Include="Framework\SysMenuBLL.cs" />
     <Compile Include="Framework\SysMenuSysRoleSysOperationBLL.cs" />

@@ -282,8 +282,9 @@
         @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
     </div>
     <div class="editor-field">
-        @Html.EditorFor(model => model.INSPECTION_ENTERPRISE)
-        @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE)
+        @*@Html.EditorFor(model => model.INSPECTION_ENTERPRISE)
+        @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE)*@
+        @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY("送检"), "请选择", new { @class="easyui-combobox" })
     </div>
     <div class="editor-label">
         @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)：
@@ -324,8 +325,9 @@
         @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
     </div>
     <div class="editor-field">
-        @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE)
-        @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE)
+        @*@Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE)
+        @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE)*@
+        @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY("证书"), "请选择", new { @class = "easyui-combobox" })
     </div>
     <div class="editor-label">
         @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
