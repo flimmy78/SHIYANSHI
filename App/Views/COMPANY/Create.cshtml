@@ -73,19 +73,18 @@
             @Html.HiddenFor(model => model.PARENTID)
         </div>     
             <div class="editor-label">
-                @Html.LabelFor(model => model.CREATEPERSON)：
+                @Html.LabelFor(model => model.CATEGORY)：
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.CREATEPERSON)
-                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+                @Html.DropDownList("CATEGORY", Models.SysFieldModels.GetSysField("COMPANY", "CATEGORY"), "请选择")
             </div>     
-            <div class="editor-label">
+            @*<div class="editor-label">
                 @Html.LabelFor(model => model.UPDATEPERSON)：
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.UPDATEPERSON)
                 @Html.ValidationMessageFor(model => model.UPDATEPERSON)
-            </div>
+            </div>*@
         </div>
     </fieldset>
 } 

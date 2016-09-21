@@ -141,6 +141,7 @@
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="CATEGORY" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="CROSS_COS">
           <Key>
@@ -3041,6 +3042,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="COMPANY1" Relationship="Model.FK_COMPANY_REFERENCE_COMPANY" FromRole="COMPANY" ToRole="COMPANY1" />
           <NavigationProperty Name="COMPANY2" Relationship="Model.FK_COMPANY_REFERENCE_COMPANY" FromRole="COMPANY1" ToRole="COMPANY" />
+          <Property Name="CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CROSS_COS">
           <Key>
@@ -5117,6 +5119,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="COMPANY">
             <EntityTypeMapping TypeName="Model.COMPANY">
               <MappingFragment StoreEntitySet="COMPANY">
+                <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
                 <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
