@@ -641,11 +641,9 @@ s：字符串
         }
         //删除
         function flexiDelete() {
-            $.messager.confirm('操作提示', "确认删除吗？", function (r) {
-                if (r) {
+         
                     $('#ApplianceDate').edatagrid('destroyRow');
-                }
-            })
+             
         }
         //新增
         function flexiInsert() {
