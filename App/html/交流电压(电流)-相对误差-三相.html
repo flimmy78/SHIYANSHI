@@ -7,20 +7,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width" />
     <title>交流电压(电流)-相对误差-三相</title>
-    <link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
-    <link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
-    <link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
-    <link href="/Content/default.css" rel="stylesheet" />
-    <link href="/Content/StyleSheet.css" rel="stylesheet" />
+    <link id="easyuiTheme" href="Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="Res/easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="Res/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="Content/default.css" rel="stylesheet" />
+    <link href="Content/StyleSheet.css" rel="stylesheet" />
 
 
-    <script src="/Scripts/jquery.min.js"></script>
-    <script src="/Scripts/JScriptCommon.js"></script>
-    <script src="/Res/easyui/jquery.easyui.min.js"></script>
-    <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="Scripts/jquery.min.js"></script>
+    <script src="Scripts/JScriptCommon.js"></script>
+    <script src="Res/easyui/jquery.easyui.min.js"></script>
+    <script src="Res/easyui/locale/easyui-lang-zh_CN.js"></script>
 
-   <script src="/Scripts/jquery.validate.js"></script>
-    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="Scripts/jquery.validate.js"></script>
+    <script src="Scripts/jquery.validate.unobtrusive.min.js"></script>
 
 
 
@@ -42,9 +42,6 @@
     </div>
 
     <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
-        <div class="mt10">
-            <span >交流电压测量：</span><input class="my-textbox" /> Hz
-        </div>
         <div class="mt10" id="tongdao">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_dy_1">
                 <thead>
@@ -167,10 +164,12 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody id="tbody_1"></tbody>
+                <tbody id="tbody_1">
+                  
+                </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="11"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open'); set('1')">增加量程</a></td>
+                        <td colspan="8"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open'); set('1')">增加量程</a></td>
 
                     </tr>
                 </tfoot>
@@ -281,7 +280,9 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody id="tbody_1"></tbody>
+                <tbody id="tbody_1">
+                  
+                </tbody>
                 <tfoot>
                     <tr>
                         <td colspan="8"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open'); set('1')">增加量程</a></td>
@@ -343,8 +344,8 @@
 
     <script type="text/javascript" language="javascript">
         var showTalbleId = "tongdao_dy";
-
-        if (1 == 1) {
+       
+        if (1 == 1) {   
             $("#tongdao_dy_1").show();
             $("#tongdao_dl_1").remove();
 
@@ -380,54 +381,54 @@
                               "<option value=\"I20\">I<sub>20</sub></option>" +
                             "</select>";
             if (showTalbleId == "tongdao_dy")
-                selectHTML = voltageHtml;
+                selectHTML=  voltageHtml;
             else
-                selectHTML = electricHtml;
+                selectHTML=  electricHtml;
 
             tableIdx++;
             var tfoot = " <tfoot>"
-                + "<tr><td colspan='11'><a href='javascript:void(0)' class='easyui-linkbutton' data-options=\"plain:true,iconCls:'icon-add'\" onclick=\"$('#dlg').dialog('open');set('" + tableIdx + "')\">增加量程</a></td></tr> </tfoot>";
+                + "<tr><td colspan='7'><a href='javascript:void(0)' class='easyui-linkbutton' data-options=\"plain:true,iconCls:'icon-add'\" onclick=\"$('#dlg').dialog('open');set('" + tableIdx + "')\">增加量程</a></td></tr> </tfoot>";
             var table = "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"tbl\" id='" + showTalbleId + "_" + tableIdx + "'>" +
-                        "<thead>" +
-                            "<tr>" +
-                                "<th rowspan=\"2\" align=\"center\" width=\"140\">量程</th>" +
-                                "<th colspan=\"3\" align=\"center\" width=\"140\"> 显示值</th>" +
-                                "<th colspan=\"3\" align=\"center\" width=\"140\">标准值</th>" +
-                                "<th colspan=\"3\" align=\"center\" width=\"140\">相对误差</th> " +
+                        "<thead>"+
+                            "<tr>"+
+                                "<th rowspan=\"2\" align=\"center\" width=\"140\">量程</th>"+   
+                                "<th colspan=\"3\" align=\"center\" width=\"140\"> 显示值</th>"+
+                                "<th colspan=\"3\" align=\"center\" width=\"140\">标准值</th>"+
+                                "<th colspan=\"3\" align=\"center\" width=\"140\">相对误差</th> "+
                                 "<th align=\"center\">校准结果的不确定度</th>" +
-                           " </tr>" +
-                            "<tr>" +
-                                "<th align=\"center\" class=\"f14\">" + selectHTML + "</th>" +
-                                 "<th align=\"center\" class=\"f14\">" + selectHTML + "</th>" +
-                                  "<th align=\"center\" class=\"f14\">" +
-                                   selectHTML +
-                                "</th>" +
-                                "<th align=\"center\" class=\"f14\">" +
-                                   selectHTML +
-                                "</th>" +
-                                 "<th align=\"center\" class=\"f14\">" +
-                                   selectHTML +
-                                "</th>" +
-                                 "<th align=\"center\" class=\"f14\">" +
-                                   selectHTML +
-                                "</th>" +
-                                  "<th align=\"center\" class=\"f14\">" +
-                                   selectHTML +
-                                "</th>" +
-                                  "<th align=\"center\" class=\"f14\">" +
-                                   selectHTML +
-                                "</th>" +
-                                 "<th align=\"center\" class=\"f14\">" +
-                                   selectHTML +
-                                "</th>" +
-                               " <th align=\"center\"> " +
-                                    "U(K = <select class=\"easyui-combobox\" name=\"state\" style=\";\"> " +
-                                        "<option value=\"\">2 </option>" +
-                                        "<option value=\"\">3</option>" +
-                                        "<option value=\"\">√3</option>  " +
-                                    " </select>) " +
-                                    "</th> " +
-                                    " </tr>" +
+                           " </tr>"+
+                            "<tr>"+
+                                "<th align=\"center\" class=\"f14\">" + selectHTML + "</th>" +    
+                                 "<th align=\"center\" class=\"f14\">"+selectHTML+ "</th>"+
+                                  "<th align=\"center\" class=\"f14\">"+
+                                   selectHTML+ 
+                                "</th>"+
+                                "<th align=\"center\" class=\"f14\">"+
+                                   selectHTML+ 
+                                "</th>"+
+                                 "<th align=\"center\" class=\"f14\">"+
+                                   selectHTML+ 
+                                "</th>"+
+                                 "<th align=\"center\" class=\"f14\">"+
+                                   selectHTML+ 
+                                "</th>"+
+                                  "<th align=\"center\" class=\"f14\">"+
+                                   selectHTML+ 
+                                "</th>"+
+                                  "<th align=\"center\" class=\"f14\">"+
+                                   selectHTML+ 
+                                "</th>"+
+                                 "<th align=\"center\" class=\"f14\">"+
+                                   selectHTML+ 
+                                "</th>"+
+                               " <th align=\"center\"> "+
+                                    "U(K = <select class=\"easyui-combobox\" name=\"state\" style=\";\"> "+
+                                        "<option value=\"\">2 </option>"+
+                                        "<option value=\"\">3</option>"+
+                                        "<option value=\"\">√3</option>  "+
+                                    " </select>) "+
+                                    "</th> "+
+                                    " </tr>"+
                         "</thead><tbody id='tbody_" + tableIdx + "'></tbody>"
              + tfoot
                    + " </table>";
@@ -453,14 +454,21 @@
                 htmlString.push("<tr rowindex='" + rowLength + "'>");
                 if (rowidx == 0)
                     htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"right\"><input class=\"easyui-textbox input-width\" value='" + txtNumber + "' /><select class=\"easyui-combobox1\" name=\"state_" + tableIdx + rowLength + "_" + rowLength + "\" id=\"state_" + tableIdx + "_" + rowLength + "\" onchange=\"changeValue(this)\" style=\"width:50px; height:25px\" ><option value=\"MV\">MV</option><option value=\"KV\">KV</option><option value=\"V\">V</option><option value=\"mV\">mV</option><option value=\"μv\">μv</option></select></td>");
-
-                for (var td1 = 0; td1 < 10; td1++) {
-
-                    if ((rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10) && td1 < 6)
-                        standardValue = calculate(rowspanIdx)[rowidx];
+                  
+                if ((rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10))
+                    standardValue = calculate(rowspanIdx)[rowidx];
+                for (var td1 = 0; td1 < 10; td1++) {   
+                    if (td1<6)
+                    {
+                        htmlString.push("<td align=\"right\"><input class=\"easyui-textbox input-width\" value='" + (standardValue == "" ? "" : standardValue.ShowData) + "' style=\"width:100%\" onblur='resetValue(this)'/></td>"); 
+                    }
+                    else if (td1 > 5 && td1 < 9)
+                    {
+                        htmlString.push("<td align=\"right\"><input class=\"easyui-textbox input-width\" value='" + (standardValue == "" ? "" : standardValue.XiangDuiWuCha) + "' style=\"width:100%\" onblur='resetValue(this)'/></td>");
+                    }
                     else
-                        standardValue = "";
-                    htmlString.push("<td align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' style=\"width:100%\"/></td>");
+                        htmlString.push("<td align=\"right\"><input class=\"easyui-textbox input-width\" value='' style=\"width:100%\"/></td>");
+                    
                 }
 
                 htmlString.push("</tr>");
@@ -470,48 +478,131 @@
 
 
             htmlString = htmlString.join("");
-
-            var tagRow = $("#tbody_" + idx).append(htmlString);
-
-            //$.parser.parse(tagRow); //渲染easyui组件
+            //var tr = '<tr><td rowspan="3" align="right"><input   class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input id="txtName3" class="easyui-textbox input-width"  /></td><td align="right"><input id="txtName6" class="easyui-textbox input-width"  /></td><td><input id="txtName9" class="easyui-textbox input-width"  /></td></tr><tr><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /></td><td align="right"><input class="easyui-textbox input-width"  /></td><td><input id="txtName10" class="easyui-textbox input-width"  /></td></tr><tr><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input id="txtName2" class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input id="txtName5" class="easyui-textbox input-width"  /></td><td align="right"><input id="txtName8" class="easyui-textbox input-width"  /></td><td><input id="txtName11" class="easyui-textbox input-width"  /></td></tr>';
+            var tagRow = $("#tbody_" + idx).append(htmlString);  
+            $.parser.parse(tagRow);
+            console.log((htmlString));
+            
         }
 
         ///计算标准值
+        function resetValue(obj) {
+        //重新计算当前行
+            var showData = $(obj).parent().parent().find('td').eq(1).find('input').val();
+            var biaoZhunData = $(obj).parent().parent().find('td').eq(4).find('input').val();
+            var xiangDuiWuCha = (showData == "" || biaoZhunData == "") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+            $(obj).parent().parent().find('td').eq(7).find('input').val(xiangDuiWuCha);
+
+            var showData = $(obj).parent().parent().find('td').eq(2).find('input').val();
+            var biaoZhunData = $(obj).parent().parent().find('td').eq(5).find('input').val();
+            var xiangDuiWuCha = (showData == "" || biaoZhunData == "") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+            $(obj).parent().parent().find('td').eq(8).find('input').val(xiangDuiWuCha);
+
+            var showData = $(obj).parent().parent().find('td').eq(3).find('input').val();
+            var biaoZhunData = $(obj).parent().parent().find('td').eq(6).find('input').val();
+            var xiangDuiWuCha = (showData == "" || biaoZhunData == "") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+            $(obj).parent().parent().find('td').eq(9).find('input').val(xiangDuiWuCha);
+        }
+        var pointLen = 2;
+        ///计算标准值
         function calculate(point) {
             var txtNumber = $("#txtNumber").val(); //量程
-            var pointLen = $("#txtPointLen").val(); //小数点位数
+            pointLen = $("#txtPointLen").val(); //小数点位数
             var arry = new Array();
+            var showData = (txtNumber * 1).toFixed(pointLen);
+            var biaoZhunData = (txtNumber * 1).toFixed(pointLen);
+            var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData*100).toFixed(pointLen);
             if (point == 3) {
                 //输入的检测点是3的时候，按照量程*100%，量程*60%，量程*10%作为默认标准值显示
-                arry.push((txtNumber * 1).toFixed(pointLen));
-                arry.push((txtNumber * 0.6).toFixed(pointLen));
-                arry.push((txtNumber * 0.1).toFixed(pointLen));
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.6).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.6).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.1).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.1).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });   
             }
             if (point == 5) {
                 //输入的检测点是5的时候，按照量程*100%，量程*80%，量程*60%，量程*40%，量程*20%作为默认标准值显示
-                arry.push((txtNumber * 1).toFixed(pointLen));
-                arry.push((txtNumber * 0.8).toFixed(pointLen));
-                arry.push((txtNumber * 0.6).toFixed(pointLen));
-                arry.push((txtNumber * 0.4).toFixed(pointLen));
-                arry.push((txtNumber * 0.2).toFixed(pointLen));
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+                
+                showData = (txtNumber * 0.8).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.8).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.6).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.6).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+
+                showData = (txtNumber * 0.4).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.4).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.2).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.2).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
             }
             if (point == 10) {
                 //输入的检测点是10的时候，按照量程*100%，量程*90%，量程*80%，量程*70%，量程*60%，量程*50%，量程*40%，量程*30%，量程*20%，量程*10%，作为默认标准值显示
-                arry.push((txtNumber * 1).toFixed(pointLen));
-                arry.push((txtNumber * 0.9).toFixed(pointLen));
-                arry.push((txtNumber * 0.8).toFixed(pointLen));
-                arry.push((txtNumber * 0.7).toFixed(pointLen));
-                arry.push((txtNumber * 0.6).toFixed(pointLen));
-                arry.push((txtNumber * 0.5).toFixed(pointLen));
-                arry.push((txtNumber * 0.4).toFixed(pointLen));
-                arry.push((txtNumber * 0.3).toFixed(pointLen));
-                arry.push((txtNumber * 0.2).toFixed(pointLen));
-                arry.push((txtNumber * 0.1).toFixed(pointLen));
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+                showData = (txtNumber * 0.9).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.9).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.8).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.8).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.7).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.7).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.6).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.6).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.5).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.5).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.4).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.4).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.3).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.3).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.2).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.2).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.1).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.1).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
             }
             return arry;
         }
 
-        //优化保留两位小数 zh
+        //优化保留两位小数 zhanghui
         Number.prototype.toFixed = function toFixed(s) {
             var IsFuShu = false;//判断是否是负数，负数单独处理
             var je = 0;
