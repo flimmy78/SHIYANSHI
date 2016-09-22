@@ -37,7 +37,11 @@ namespace Langben.DAL
         [Display(Name = "报告领取状态", Order = 7)]
         public object REPORTTORECEVESTATE { get; set; }
 
+        [Display(Name = "器具状态值", Order = 8)]
+        public object EQUIPMENT_STATUS_VALUUMN { get; set; }
 
+        [Display(Name = "报告状态值", Order = 9)]
+        public object REPORTSTATUSZI { get; set; }
     }
 
 

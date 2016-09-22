@@ -23,8 +23,6 @@ namespace Langben.DAL
         public string APPLIANCE_LABORATORYID { get; set; }
         [Display(Name = "器具明细ID")]
         public string APPLIANCE_DETAIL_INFORMATIONID { get; set; }
-        [Display(Name = "判断值")]
-        public string SHPI { get; set; }
         #endregion
 
     }

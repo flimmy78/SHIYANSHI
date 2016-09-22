@@ -25,6 +25,7 @@ namespace Langben.DAL
         public string CREATEPERSON { get; set; }
         public Nullable<System.DateTime> UPDATETIME { get; set; }
         public string UPDATEPERSON { get; set; }
+        public string REMARK { get; set; }
     
         public virtual PREPARE_SCHEME PREPARE_SCHEME { get; set; }
     }

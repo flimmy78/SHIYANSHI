@@ -24,7 +24,7 @@
             return false;
         };
   " />
-                <input type="button" value="发送审核" onclick="songwangshenghe()" />
+                <input id="fashongid" type="button" value="发送审核" onclick="songwangshenghe()" />
             </label>
             <br style="clear:both" />
             <div class="input_search">
@@ -101,6 +101,13 @@
 
 <script type="text/javascript">
     $(function () {
+        //输入框的禁用
+        if ("@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.审核驳回.ToString()" || "@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.批准驳回.ToString()" || "@ViewBag.REPORTSTATUS" == "") {
+            //return true;
+        }
+        else {
+            $("#Submit1,#fashongid").attr("disabled", true)
+        }      
         if ("@ViewBag.CONCLUSION" != "") {
             @*$("input[type=radio]").attr("checked", "@ViewBag.CONCLUSION");*@
             if ("@ViewBag.CONCLUSION" == "合格") {
@@ -131,19 +138,27 @@
             REPORTSTATUS: "@Common.REPORTSTATUS.待审核",
             REPORTSTATUSZI: "@Common.REPORTSTATUS.待审核.GetHashCode()"
         }
-        $.ajax({
-            url: "/api/PREPARE_SCHEMEApi/EditField",
-            type: "Put",
-            data: arr,
-            // async: false,
-            success: function (res) {
-                if (res.Code == 1) {
-                    $.messager.alert('操作提示', "发送审核成功！", 'info');
+        if ("@ViewBag.NAME2"!="") {
+            $.ajax({
+                url: "/api/PREPARE_SCHEMEApi/EditField",
+                type: "Put",
+                data: arr,
+                // async: false,
+                success: function (res) {
+                    if (res.Code == 1) {
+                        $("#Submit1,#fashongid").attr("disabled", true);
+                        $.messager.alert('操作提示', "发送审核成功！", 'info');                        
+                    }
+                    else {
+                        $.messager.alert('操作提示', "发送审核失败！", 'info');
+                    }
                 }
-                else {
-                    $.messager.alert('操作提示', "发送审核失败！", 'info');
-                }
-            }
-        })
+            })
+            return true;
+        }
+        else {
+            $.messager.alert('操作提示', "请先上传文件！", 'info');
+            return false;
+        }
     }
 </script>

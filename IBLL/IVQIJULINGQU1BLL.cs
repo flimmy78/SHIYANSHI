@@ -12,7 +12,7 @@ namespace Langben.IBLL
     /// 器具领取1 接口
     /// </summary>
     [ServiceContract(Namespace = "www.langben.com")]
-    public interface IVQIJULINGQU1BLL
+    public partial interface IVQIJULINGQU1BLL
     {
         /// <summary>
         /// 查询的数据

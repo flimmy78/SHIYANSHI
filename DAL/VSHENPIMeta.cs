@@ -69,6 +69,9 @@ namespace Langben.DAL
 
         [Display(Name = "上传报告结论", Order = 18)]
         public object FILECONCLUSION { get; set; }
+
+        [Display(Name = "审核时间", Order = 19)]
+        public object AUDITTIME { get; set; }
     }
 
 

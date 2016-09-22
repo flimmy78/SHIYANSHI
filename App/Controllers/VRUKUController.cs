@@ -53,7 +53,7 @@ namespace Langben.App.Controllers
                 }                              
             }
 
-            if (STORAGEINSTRUCTI_STATU == "待入库" || search == null)
+            if (STORAGEINSTRUCTI_STATU == Common.ORDER_STATUS.待入库.ToString()|| search == null)
             {
                 if (search!=null)
                 {
@@ -61,9 +61,9 @@ namespace Langben.App.Controllers
                     search = search.Substring(0, end)+"^";
                 }
                 search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.待入库.GetHashCode() + "^";
-                search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.批准驳回.GetHashCode() + "*" + Common.REPORTSTATUS.已批准.GetHashCode() + "*" + Common.REPORTSTATUS.待批准.GetHashCode() + "*" + Common.REPORTSTATUS.报告已打印.GetHashCode() + "*" + Common.REPORTSTATUS.报告已发放.GetHashCode() + "";
+                search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.批准驳回.GetHashCode() + "*" + Common.REPORTSTATUS.已批准.GetHashCode() + "*" + Common.REPORTSTATUS.待批准.GetHashCode() + "*" + Common.REPORTSTATUS.报告已打印.GetHashCode() + "*" + Common.REPORTSTATUS.报告已领取.GetHashCode() + "";
             }
-            else if (STORAGEINSTRUCTI_STATU == "已入库")
+            else if (STORAGEINSTRUCTI_STATU == Common.ORDER_STATUS.器具已入库.ToString())
             {
                 int end = search.LastIndexOf("^STORAGEINSTRUCTI_STATU&");
                 search = search.Substring(0,end);

@@ -17,7 +17,7 @@
             @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("UNDERTAKE_LABORATORYIDDDL_String", Models.SysFieldModels.GetSysField("VSHENPI", "UNDERTAKE_LABORATORYID"), "请选择", new { id = "UNDERTAKE_LABORATORYIDDDL_String" })
+            @Html.DropDownList("UNDERTAKE_LABORATORYID", Models.SysFieldModels.GetSysField("UNDERTAKE_LABORATORY", "NAME"), "请选择", new { id = "UNDERTAKE_LABORATORYID" })
         </div>
     </div>
     <div class="input_search">
@@ -25,7 +25,7 @@
             @Html.LabelFor(model => model.APPROVALISAGGREY):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("APPROVALISAGGREYDDL_String", Models.SysFieldModels.GetSysField("VSHENPI", "APPROVALISAGGREY"), "请选择", new { id = "APPROVALISAGGREYDDL_String" })
+            @Html.DropDownList("REPORTSTATUS", Models.SysFieldModels.GetSysField("VSHENPI", "APPROVALISAGGREY"), "请选择", new { id = "REPORTSTATUS" })
         </div>
     </div>
     <div class='input_search' style="padding-top:10px;">
@@ -40,7 +40,7 @@
     $(function () {
 
         $('#flexigridData').datagrid({
-            title: '审批', //列表的标题
+            title: '器具证书信息', //列表的标题
             iconCls: 'icon-site',
             width: 'auto',
             height: 'auto',
@@ -52,19 +52,19 @@
             sortOrder: 'desc',
             idField: 'ID',
 
-            toolbar: [
+            //toolbar: [
 
-                 {
-                     text: '详细',
-                     iconCls: 'icon-search',
-                     handler: function () {
-                         return getView();
-                     }
-                 }],
+            //     {
+            //         text: '详细',
+            //         iconCls: 'icon-search',
+            //         handler: function () {
+            //             return getView();
+            //         }
+            //     }],
             columns: [[
 
 
-					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 77 }
+					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 77, hidden: true }
 					, { field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 77 }
 					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 77 }
 					, { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 77 }

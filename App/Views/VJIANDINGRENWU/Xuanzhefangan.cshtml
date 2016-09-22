@@ -11,7 +11,7 @@
             <input type="submit" value="建立方案" class="a2 f2" />
             <input class="a2 f2" type="button" onclick="BackList('VJIANDINGRENWU')" value="返回" />
         </legend>
-        <div>
+        <div id="xuanzhefangandiv">
             <div class="input_search">
                 <div class="input_search-label">
                     报告类别:
@@ -129,7 +129,7 @@
 
         </div>
         <input type="hidden" value="" id="ACCEPT_ORGNIZATION_HIDDEN" />
-        <input type="hidden" name="APPLIANCE_LABORATORYID" id="APPLIANCE_LABORATORYID_String" value="@ViewBag.APPLIANCE_LABORATORYID" />
+        <input type="hidden" name="APPLIANCE_LABORATORYID" id="APPLIANCE_LABORATORYID" value="@ViewBag.APPLIANCE_LABORATORYID" />
         <input type="hidden" name="ID" id="ID_String" value="@ViewBag.Id" />
     </fieldset>
 }
@@ -327,6 +327,17 @@
 </script>
 <script type='text/javascript'>
     $(function () {
+        //输入框的禁用
+        if ("@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.审核驳回.ToString()" || "@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.批准驳回.ToString()" || "@ViewBag.REPORTSTATUS" == "") {
+            return true;
+        }
+        else {
+            $('#xuanzhefangandiv').find(":text,:selected,select,:radio,textarea,:checked,:password").each(function () {
+                $(this).attr("disabled",true);
+            });
+        }
+    })
+    $(function () {
         //查询受理单位
         $.ajax({
             url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/GetGetByAPPLIANCE_DETAIL_INFORMATIONId/" + "@ViewBag.APPLIANCE_DETAIL_INFORMATIONID",
@@ -406,6 +417,7 @@
                 $("#jianding").hide();
             }
         });
+
 
 
         function ajaxFrom(form, url) {

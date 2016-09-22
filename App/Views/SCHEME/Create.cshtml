@@ -12,6 +12,7 @@
 }
 
     <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        <input type="hidden" id="hideID" value="" />
         @if (@ViewBag.UNDERTAKE_LABORATORYID != null)
         {
             <input type="hidden" id="hideUNDERTAKE_LABORATORYID" value="@ViewBag.UNDERTAKE_LABORATORYID" />
@@ -25,7 +26,7 @@
                 <tr>
                     <td> 实验室：</td>
                     <td>
-                        <select name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID" style="width:200px;">
+                        <select name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID" style="width:200px;" >
                             <option value="电能" selected="selected">电能</option>
                             <option value="数表三相">数表三相</option>
                             <option value="数表单相">数表单相</option>
@@ -54,7 +55,7 @@
         <div class="easyui-layout" data-options="fit:true">
 
             <div data-options="region:'west',collapsible:false,split:false" title="树选择" style="width: 300px;">
-                <ul id="tt" class="easyui-tree" data-options="url:'/Res/tree_data1.js',method:'get',animate:true,checkbox:true"></ul>
+                <ul id="tt" class="easyui-tree" data-options="url:'',method:'get',animate:true,checkbox:true"></ul>
             </div>
 
 
@@ -76,13 +77,63 @@
     });
     $(document).ready(function () {       
         bindShiyanshi("#UNDERTAKE_LABORATORYID");
-        $("#UNDERTAKE_LABORATORYID").val($("#hideUNDERTAKE_LABORATORYID").val()).change();
-        //$('#UNDERTAKE_LABORATORYID').combobox({
-        //    onChange: function (n, o) {               
-        //    }
-        //});
+        if ($("#hideUNDERTAKE_LABORATORYID").val() != "") {
+            $("#UNDERTAKE_LABORATORYID").val($("#hideUNDERTAKE_LABORATORYID").val()).change();
+            ChangeTree($("#hideUNDERTAKE_LABORATORYID").val());
+        }
+        $('#UNDERTAKE_LABORATORYID').combobox({
+            onChange: function (n, o) {
+                ChangeTree(n);
+            }
+        });
+        $('#tt').tree({
+            onClick: function (node) {
+                debugger;
+                var ID = $("#hideID").val();
+                if ($('#tt').tree('isLeaf', node.target)) {                              
+                    if (node.attributes != null && node.attributes.url != null && node.attributes.url.trim() != "") {                        
+                        if ($('#tt').tree('isLeaf', node.target))
+                        {
+                            if (node.checked == false) {
+
+                                $.messager.alert('操作提示', '未勾选【'+node.text+'】检测项无法设置具体内容！', 'warning');
+                            }
+                            else if(ID.trim()=="")
+                            {
+                                $.messager.alert('操作提示', '请先提交方案模板', 'warning');
+                            }
+                            else {
+                                $('#mainframe').attr('src', node.attributes.url + "&SCHEMEID=" + ID);
+                            }
+                        }
+                    }                  
+                   
+                }
+
+            }
+        });
 
     });
+    //实验室调整变更树内容
+    function ChangeTree(UNDERTAKE_LABORATORYID)
+    {       
+        var url = "/Res/tree_data1.js";
+        //var url = "";
+        if (UNDERTAKE_LABORATORYID == "数表三相")
+        {
+            url = "/Res/tree_data_SBSX.js";
+        }
+        //$('#tt').tree({
+        //    url: url,
+        //    loadFilter: function (data) {
+        //        return data;
+        //    }
+        //});
+        $('#tt').tree({
+            url: url
+        });
+        
+    }    
     //数据验证
     function CheckData()
     {
@@ -97,7 +148,9 @@
         if (nodes.length > 0)
         {
             for (var i = 0; i < nodes.length; i++) {
-                if (nodes[i].children == undefined) { //是否是最末节点
+                //if (nodes[i].children == undefined) { //是否是最末节点
+                if ($('#tt').tree('isLeaf', nodes[i].target))
+                {                   
                     IsHaveData = true;
                     break;
 
@@ -126,42 +179,50 @@
         var nodes = $('#tt').tree('getChecked');
         var RULEIDs = '';
         for (var i = 0; i < nodes.length; i++) {
-            if (nodes[i].children == undefined) { //是否是最末节点
+            var node=nodes[i];            
+            if ($('#tt').tree('isLeaf', node.target))
+            {
                 if (RULEIDs != '') RULEIDs += ',';
-                RULEIDs += nodes[i].id;
+                RULEIDs += node.id;
             }
-        }       
-
-    //    $.post("api/SCHEMEApi/Post",
-    //{
-    //    NAME: NAME,
-    //    STATUS: "未使用",
-    //    ISSTOP: "停用",
-    //    UNDERTAKE_LABORATORYID:UNDERTAKE_LABORATORYID        
-    //}, function (res) {
-    //    if (res.Code == 1) {
-    //        window.location.href = res.Message;
-    //    }
-    //    else $.messager.alert('操作提示', res.Message, 'info');
-
-        //});
-
+        }        
+        var ID = $("#hideID").val();
+        var url='/SCHEME/CreateSave';
+        var data='NAME=' + NAME + "&UNDERTAKE_LABORATORYID=" + UNDERTAKE_LABORATORYID + "&RULEIDs=" + RULEIDs;        
+        if(ID.trim()!="")
+        {
+            url = "/SCHEME/UpdateSave";
+            data = 'ID=' + ID + '&NAME=' + NAME + "&UNDERTAKE_LABORATORYID=" + UNDERTAKE_LABORATORYID + "&RULEIDs=" + RULEIDs;
+        }
         //获取空对象用于保存添加的信息
         $.ajax({
             type: 'post', //使用post方法访问后台
             dataType: "json", //返回json格式的数据
-            url: '/SCHEME/CreateSave', //要访问的后台地址
+            //url: '/SCHEME/CreateSave', //要访问的后台地址
+            url:url,
             contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
-            data: 'NAME=' + NAME + "&UNDERTAKE_LABORATORYID=" + UNDERTAKE_LABORATORYID + "&RULEIDs=" + RULEIDs, //要发送的数据
+            //data: 'NAME=' + NAME + "&UNDERTAKE_LABORATORYID=" + UNDERTAKE_LABORATORYID + "&RULEIDs=" + RULEIDs, //要发送的数据
+            data:data,
             beforeSend: function () {
                 //InitAlertJS();
             },
             complete: function () {
             }, //AJAX请求完成时隐藏loading提示
 
-            success: function (res) {//msg为返回的数据，在这里做数据绑定
-               
-                $.messager.alert('操作提示', res.Message, 'info');
+            success: function (res) {//msg为返回的数据，在这里做数据绑定               
+                if (res.Code == 1) {
+                    if ($("#hideID").val().trim() == "") {
+                        $("#hideID").val(res.Message);
+                    }                   
+                    $.messager.alert('操作提示', "操作成功！", 'info');
+                }
+                else {
+                    $.messager.alert('操作提示', res.Message, 'info');
+                }
+                if ($("#hideID").val()!="")
+                {
+                    $("#UNDERTAKE_LABORATORYID").attr("disabled", "disabled");                   
+                }
                
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {

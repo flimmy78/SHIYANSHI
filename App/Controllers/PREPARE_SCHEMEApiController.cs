@@ -142,6 +142,7 @@ namespace Langben.App.Controllers
         [System.Web.Http.HttpPost]
         public Common.ClientResult.Result Post([FromBody]PREPARE_SCHEME entity)
         {
+            Common.Account account = GetCurrentAccount();
             string putid = entity.ID;
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             if (entity != null && ModelState.IsValid)
@@ -150,17 +151,17 @@ namespace Langben.App.Controllers
                 entity.CREATETIME = DateTime.Now;
                 entity.CREATEPERSON = currentPerson;
                 //修改证书编号
-
                 entity.ID = Result.GetNewId();
                 string returnValue = string.Empty;
                 APPLIANCE_LABORATORY app = new APPLIANCE_LABORATORY();
                 app.ID = entity.APPLIANCE_LABORATORYID;
                 app.PREPARE_SCHEMEID = entity.ID;
+                app.UNDERTAKE_LABORATORYID = account.UNDERTAKE_LABORATORYName;
                 if (!string.IsNullOrEmpty(putid))//判断是否为第二次进入
                 {
                     //修改
                     entity.ID = putid;
-                    if (m_BLL.Edit(ref validationErrors, entity) && m_BLL.UPTSerialNumber(entity.ID))
+                    if (m_BLL.EditField(ref validationErrors, entity) && m_BLL.UPTSerialNumber(entity.ID))
                     {
                         LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，预备方案信息的Id为" + entity.ID, "预备方案"
                             );//写入日志                   
@@ -349,6 +350,8 @@ namespace Langben.App.Controllers
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.待批准.ToString();
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.待批准.GetHashCode().ToString();
+                        entity.AUDITTIME = new DateTime();//审核时间
+                        entity.AUDITTEPERSON = currentPerson;
                         appliance.ID = entity.APPLIANCE_DETAIL_INFORMATIONID;
                         appliance.ORDER_STATUS = Common.ORDER_STATUS.试验完成.ToString();
                         appliance.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.试验完成.GetHashCode().ToString();
@@ -365,6 +368,8 @@ namespace Langben.App.Controllers
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.已批准.ToString();
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.已批准.GetHashCode().ToString();
+                        entity.APPROVALDATE = new DateTime();
+                        entity.APPROVALEPERSON = currentPerson;
                         //判断器具是否满足入库条件
                         if (ISAPPLIANCE(entity.APPLIANCE_DETAIL_INFORMATIONID))
                         {
@@ -377,7 +382,7 @@ namespace Langben.App.Controllers
 
                 string returnValue = string.Empty;
                 bool HE = false;
-                if (!string.IsNullOrEmpty(appliance.ORDER_STATUS))
+                if (!string.IsNullOrEmpty(appliance.ORDER_STATUS)|| !string.IsNullOrEmpty(entity.REPORTSTATUS))
                 {
                     HE = m_BLL3.EditField(ref validationErrors, appliance) && m_BLL.EditField(ref validationErrors, entity);//器具明细修改
                 }

@@ -8,7 +8,7 @@ namespace Langben.DAL
     /// <summary>
     /// 器具领取1
     /// </summary>
-    public class VQIJULINGQU1Repository : BaseRepository<VQIJULINGQU1>, IDisposable
+    public partial class VQIJULINGQU1Repository : BaseRepository<VQIJULINGQU1>, IDisposable
     {
         /// <summary>
         /// 查询的数据

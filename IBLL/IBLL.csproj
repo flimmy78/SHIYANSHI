@@ -43,9 +43,11 @@
     <Compile Include="Framework\IAccountBLL.cs" />
     <Compile Include="Framework\IHomeBLL.cs" />
     <Compile Include="Framework\ISysAnnouncementBLL.cs" />
+    <Compile Include="Framework\ICOMPANYHander.cs" />
     <Compile Include="Framework\ISysFieldHander.cs" />
     <Compile Include="Framework\ISysMenuSysRoleSysOperationBLL.cs" />
     <Compile Include="IFileUploaderBLL.cs" />
+    <Compile Include="IPROJECTTEMPLETBLL.cs" />
     <Compile Include="ISysAnnouncementBLL.cs" />
     <Compile Include="ISysDepartmentBLL.cs" />
     <Compile Include="ISysDocumentBLL.cs" />
@@ -114,11 +116,14 @@
     <Compile Include="IVBAOGAODAYINBLL.cs" />
     <Compile Include="IVQIJULINGQU2BLL.cs" />
     <Compile Include="IVQIJULINGQU1BLL.cs" />
+    <Compile Include="Shiyanshi\IAPPLIANCECOLLECTIONBLL.cs" />
     <Compile Include="Shiyanshi\IAPPLIANCE_DETAIL_INFORMATIONBLL.cs" />
     <Compile Include="Shiyanshi\IAPPLIANCE_LABORATORYBLL.cs" />
     <Compile Include="Shiyanshi\IFILE_UPLOADERBLL.cs" />
+    <Compile Include="Shiyanshi\IORDER_TASK_INFORMATIONBLL.cs" />
     <Compile Include="Shiyanshi\IPREPARE_SCHEMEBLL.cs" />
     <Compile Include="Shiyanshi\IVJIANDINGRENWUBLL.cs" />
+    <Compile Include="Shiyanshi\IVQIJULINGQU1BLL.cs" />
     <Compile Include="Shiyanshi\IVRUKUBLL.cs" />
     <Compile Include="Shiyanshi\IVSHENHEBLL.cs" />
     <Compile Include="Shiyanshi\IVSHENPIBLL.cs" />

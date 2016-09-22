@@ -1,0 +1,121 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+
+@{
+    Layout = "~/Views/Shared/Edit.cshtml";
+}
+@using Common
+@using Models
+ @section CurentPlace {
+    修改  
+}
+
+@using (Html.BeginForm("", "api/PROJECTTEMPLETApi/Put"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="修改" />
+            <input class="a2 f2" type="button" onclick="BackList('PROJECTTEMPLET')" value="返回列表" />
+        </legend>
+        <div class="bigdiv">
+            @Html.HiddenFor(model => model.ID )       
+            <div class="editor-label">
+                <a class="anUnderLine" onclick="showModalOnly('RULEID','../../RULE');">
+                    @Html.LabelFor(model => model.RULEID) 
+                </a>：
+            </div>
+            <div class="editor-field">
+                <div id="checkRULEID">
+                        @if(Model!=null)
+                        {
+                        if (null != Model.RULEID)                      
+                        { 
+                    <table id="@Model.RULEID"
+                        class="deleteStyle">
+                        <tr>
+                            <td>
+                                <img alt="删除"  title="点击删除" onclick="deleteTable('@Model.RULEID ','RULEID');" src="../../../Images/deleteimge.png" />
+                            </td>
+                            <td>
+                                @Model.RULE.NAMEOTHER
+                            </td>
+                        </tr>
+                    </table>
+                    }} 
+                </div>
+                @Html.HiddenFor(model => model.RULEID)
+            </div>      
+            <div class="editor-label">
+                <a class="anUnderLine" onclick="showModalOnly('SCHEMEID','../../SCHEME');">
+                    @Html.LabelFor(model => model.SCHEMEID) 
+                </a>：
+            </div>
+            <div class="editor-field">
+                <div id="checkSCHEMEID">
+                        @if(Model!=null)
+                        {
+                        if (null != Model.SCHEMEID)                      
+                        { 
+                    <table id="@Model.SCHEMEID"
+                        class="deleteStyle">
+                        <tr>
+                            <td>
+                                <img alt="删除"  title="点击删除" onclick="deleteTable('@Model.SCHEMEID ','SCHEMEID');" src="../../../Images/deleteimge.png" />
+                            </td>
+                            <td>
+                                @Model.SCHEME.NAME
+                            </td>
+                        </tr>
+                    </table>
+                    }} 
+                </div>
+                @Html.HiddenFor(model => model.SCHEMEID)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.HTMLVALUE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.HTMLVALUE)
+                @Html.ValidationMessageFor(model => model.HTMLVALUE)
+            </div>@Html.HiddenFor(model => model.CREATETIME )      
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>
+        </div>
+    </fieldset>
+}
+
+
+
+    <script type="text/javascript">
+
+        $(function () {
+            
+
+            // 获取待编辑内容并显示
+            var id = '@ViewBag.Id';
+            $.ajax({
+                url: "/api/PROJECTTEMPLETApi/" + id,
+                type: "POST",
+                // async: false,
+                success: function (res) {
+                    $("#ID").val(res.ID);$("#HTMLVALUE").val(res.HTMLVALUE);$("#CREATETIME").val(res.CREATETIME);$("#CREATEPERSON").val(res.CREATEPERSON);$("#UPDATEPERSON").val(res.UPDATEPERSON);
+                }
+            })
+        });
+        
+
+    </script>
+
+
+

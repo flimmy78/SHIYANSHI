@@ -56,6 +56,7 @@ namespace Langben.App.Controllers
                 if (account.UNDERTAKE_LABORATORYName == item.UNDERTAKE_LABORATORYID)
                 {
                     APPLIANCE_DETAIL_INFORMATIONID = item.APPLIANCE_DETAIL_INFORMATIONID;
+                    ViewBag.REPORTSTATUS = item.PREPARE_SCHEME.REPORTSTATUS;//报告状态用来判断是否启用
                 }
             }
 
@@ -68,8 +69,7 @@ namespace Langben.App.Controllers
             int end2 = file.FULLPATH2.LastIndexOf("\\up");
             string dizhi2 = file.FULLPATH2.Substring(end);
             ViewBag.FULLPATH = dizhi;//证书地址
-            ViewBag.FULLPATH2 = dizhi2;//原始记录地址
-
+            ViewBag.FULLPATH2 = dizhi2;//原始记录地址          
             ViewBag.NAME = file.NAME;//证书名字
             ViewBag.NAME2 = file.NAME;//原始记录
             ViewBag.CONCLUSION = file.CONCLUSION;//结论

@@ -17,6 +17,7 @@ namespace Langben.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public RULE()
         {
+            this.PROJECTTEMPLET = new HashSet<PROJECTTEMPLET>();
             this.UNCERTAINTY = new HashSet<UNCERTAINTY>();
             this.RULE1 = new HashSet<RULE>();
             this.SCHEME_RULE = new HashSet<SCHEME_RULE>();
@@ -40,6 +41,8 @@ namespace Langben.DAL
         public Nullable<System.DateTime> UPDATETIME { get; set; }
         public string UPDATEPERSON { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PROJECTTEMPLET> PROJECTTEMPLET { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UNCERTAINTY> UNCERTAINTY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

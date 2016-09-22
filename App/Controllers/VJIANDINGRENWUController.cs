@@ -55,6 +55,7 @@ namespace Langben.App.Controllers
             ViewBag.Id = Id;
             ViewBag.APPLIANCE_LABORATORYID = APPLIANCE_LABORATORYID;
             ViewBag.APPLIANCE_DETAIL_INFORMATIONID = id;//器具明细表id
+            
             string erchizi = string.Empty;
             if (!string.IsNullOrEmpty(Id))
             {
@@ -67,6 +68,7 @@ namespace Langben.App.Controllers
                 erchizi += "CERTIFICATION_AUTHORITY*" + prepare.CERTIFICATION_AUTHORITY + ",";
                 erchizi += "CNAS*" + prepare.CNAS;
                 ViewBag.SBL = erchizi;
+                ViewBag.REPORTSTATUS = prepare.REPORTSTATUS;//报告状态（前段判断是否能修改）
             }
             ViewBag.SYS = account.UNDERTAKE_LABORATORYName;
             return View();
@@ -80,8 +82,10 @@ namespace Langben.App.Controllers
         {
             string[] bs = id.Split('|');
             ViewBag.PREPARE_SCHEMEID = bs[0];
-            List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(bs[0]);
-            foreach (var item in list)
+            PREPARE_SCHEME prepare = m_BLL3.GetById(bs[0]);
+           // List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(bs[0]);
+            
+            foreach (var item in prepare.FILE_UPLOADER)
             {
                 ViewBag.NAME2 = item.NAME2;
                 ViewBag.NAME = item.NAME;
@@ -89,6 +93,7 @@ namespace Langben.App.Controllers
                 ViewBag.FILE_UPLOADERID = item.ID;
                 ViewBag.PREPARE_SCHEMEID = item.PREPARE_SCHEMEID;
             }
+            ViewBag.REPORTSTATUS = prepare.REPORTSTATUS;
             ViewBag.REPORTNUMBER = m_BLL3.GetSerialNumber(bs[0]);
             ViewBag.APPLIANCE_DETAIL_INFORMATIONID = bs[1];//器具明细id
             return View();
@@ -176,6 +181,20 @@ namespace Langben.App.Controllers
                 {
                     Create = m_BLL3.EditField(ref validationErrors, pre);
                 }
+                if (Create)
+                {
+                    ViewBag.Create = "True";
+                    ViewBag.Edit = "";
+                    ViewBag.NAME2 = uplo.NAME2;//原始记录名称
+                    ViewBag.NAME = uplo.NAME;//证书名称
+                }
+                else
+                {
+                    ViewBag.Create = "False";
+                    ViewBag.Edit = "";
+                    ViewBag.NAME2 = file.NAME2;//原始记录名称
+                    ViewBag.NAME = file.NAME;//证书名称
+                }
             }
             else
             {
@@ -190,38 +209,26 @@ namespace Langben.App.Controllers
                    // pre.ID = file_uplo.PREPARE_SCHEMEID;
                     Edit = m_BLL3.EditField(ref validationErrors, pre);
                 }
+                if (Edit)
+                {
+                    ViewBag.Edit = "True";
+                    ViewBag.Create = "";
+                    ViewBag.NAME2 = uplo.NAME2;//原始记录名称
+                    ViewBag.NAME = uplo.NAME;//证书名称
+                }
+                else
+                {
+                    ViewBag.Edit = "False";
+                    ViewBag.Create = "";
+                    ViewBag.NAME2 = file.NAME2;//原始记录名称
+                    ViewBag.NAME = file.NAME;//证书名称
+                };
 
             }
             //返回执行结果是新增还是修改并给出结论
             ViewBag.FILE_UPLOADERID = uplo.ID;
-            if (Create)
-            {
-                ViewBag.Create = "True";
-                ViewBag.Edit = "";
-                ViewBag.NAME2 = uplo.NAME2;//原始记录名称
-                ViewBag.NAME = uplo.NAME;//证书名称
-            }
-            else
-            {
-                ViewBag.Create = "False";
-                ViewBag.Edit = "";
-                ViewBag.NAME2 = file.NAME2;//原始记录名称
-                ViewBag.NAME = file.NAME;//证书名称
-            }
-            if (Edit)
-            {
-                ViewBag.Edit = "True";
-                ViewBag.Create = "";
-                ViewBag.NAME2 = uplo.NAME2;//原始记录名称
-                ViewBag.NAME = uplo.NAME;//证书名称
-            }
-            else
-            {
-                ViewBag.Edit = "False";
-                ViewBag.Create = "";
-                ViewBag.NAME2 = file.NAME2;//原始记录名称
-                ViewBag.NAME = file.NAME;//证书名称
-            };
+
+            ViewBag.REPORTSTATUS = null;
             ViewBag.REPORTNUMBER = REPORTNUMBER;//证书编号          
             ViewBag.CONCLUSION = uplo.CONCLUSION;//结论
             ViewBag.PREPARE_SCHEMEID = pre.ID;//预备方案id
@@ -253,7 +260,7 @@ namespace Langben.App.Controllers
 
             int total = 0;
             Common.Account account = GetCurrentAccount();
-            search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.已分配.GetHashCode() + "*" + Common.ORDER_STATUS.已领取.GetHashCode() + "*" + Common.ORDER_STATUS.试验完成.GetHashCode() + "*" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已返还.GetHashCode() + "";
+            search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.已分配.GetHashCode() + "*" + Common.ORDER_STATUS.已领取.GetHashCode() + "*" + Common.ORDER_STATUS.试验完成.GetHashCode() + "*" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已领取.GetHashCode() + "";
             search += "^NAME&" + account.UNDERTAKE_LABORATORYName;
             List<VJIANDINGRENWU> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid

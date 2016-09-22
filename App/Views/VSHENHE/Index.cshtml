@@ -17,7 +17,7 @@
                     @Html.LabelFor(model => model.ISAGGREY):
                 </div>
                 <div class="input_search-field">
-                    @Html.DropDownList("ISAGGREYDDL_String", Models.SysFieldModels.GetSysField("VSHENHE","ISAGGREY"),"请选择",new { id = "ISAGGREYDDL_String" })
+                    @Html.DropDownList("REPORTSTATUS", Models.SysFieldModels.GetSysField("VSHENHE","ISAGGREY"),"请选择",new { id = "REPORTSTATUS" })
                 </div>
             </div>
     <div class='input_search' style="padding-top:10px;">
@@ -32,7 +32,7 @@
     $(function () {
 
         $('#flexigridData').datagrid({
-            title: '审核', //列表的标题
+            title: '器具证书信息', //列表的标题
             iconCls: 'icon-site',
             width: 'auto',
             height: 'auto',
@@ -44,19 +44,19 @@
             sortOrder: 'desc',
             idField: 'ID',
 
-            toolbar: [
+            //toolbar: [
 
-                 {
-                     text: '详细',
-                     iconCls: 'icon-search',
-                     handler: function () {
-                         return getView();
-                     }
-                 } ],
+            //     {
+            //         text: '详细',
+            //         iconCls: 'icon-search',
+            //         handler: function () {
+            //             return getView();
+            //         }
+            //     } ],
             columns: [[
 
                 
-					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 86 }
+					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 86, hidden: true }
 					,{ field: 'REPORTNUMBER', title:  '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 86 }
 					,{ field: 'ORDER_NUMBER', title:  '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 86 }
 					,{ field: 'APPLIANCE_NAME', title:  '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 86 }

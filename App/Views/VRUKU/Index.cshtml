@@ -25,7 +25,7 @@
             @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("UNDERTAKE_LABORATORYIDDDL_String", Models.SysFieldModels.GetSysField("VRUKU", "UNDERTAKE_LABORATORYID"), "请选择", new { id = "UNDERTAKE_LABORATORYIDDDL_String" })
+            @Html.DropDownList("UNDERTAKE_LABORATORYID", Models.SysFieldModels.GetSysField("UNDERTAKE_LABORATORY", "NAME"), "请选择", new { id = "UNDERTAKE_LABORATORYID" })
         </div>
     </div>
     <div class="input_search">
@@ -54,7 +54,9 @@
 
 <script type="text/javascript" language="javascript">
     $(function () {
-
+        //添加日期控件
+        $("#APPROVALDATE").datebox({ "required": false });//true为必填项
+        //************************
         $('#flexigridData').datagrid({
             title: '器具信息', //列表的标题
             iconCls: 'icon-site',
@@ -86,9 +88,7 @@
                     }
             ],
             columns: [[
-
-
-					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 77 }
+					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 77, hidden: true }
 					, { field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 77 }
 					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 77 }
 					, { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 77 }
@@ -99,7 +99,7 @@
 					, { field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', width: 77 }
 					, { field: 'ORDER_STATUS', title: '@Html.DisplayNameFor(model => model.ORDER_STATUS)', width: 77 }
 					, { field: 'STORAGEINSTRUCTIONS', title: '@Html.DisplayNameFor(model => model.STORAGEINSTRUCTIONS)', width: 77 }
-
+                    , { field: 'STORAGEINSTRUCTI_STATU', title: '@Html.DisplayNameFor(model => model.STORAGEINSTRUCTI_STATU)', width: 77, hidden: true }
             ]],
             pagination: true,
             rownumbers: true
@@ -168,8 +168,15 @@
             var arr = [];
             for (var i = 0; i < rows.length; i++) {
                 arr.push(rows[i].ID);
-            }
-
+                if (rows[i].STORAGEINSTRUCTI_STATU!="@Common.ORDER_STATUS.器具已入库.ToString()") {
+                    
+                }
+                else {
+                    $.messager.alert('操作提示', "选择的数据有误！", 'info');
+                    return false;
+                }
+            } 
+           
             $.messager.confirm('操作提示', "确认入库这 " + arr.length + " 项吗？", function (r) {
                 if (r) {
                     $.ajax({
@@ -178,19 +185,18 @@
                         success: function (res) {
                             if (res.Code == 1) {
                                 //移除删除的数据
-
-                                $.messager.alert('操作提示', res.Message, 'info');
+                                $.messager.alert('操作提示', "入库成功！", 'info');
                                 $("#flexigridData").datagrid("reload");
                                 $("#flexigridData").datagrid("clearSelections");
                             }
                             else {
-                                $.messager.alert('操作提示', res.Message, 'info');
+                                $.messager.alert('操作提示', "入库失败！", 'info');
                             }
 
                         }
                     })
                 }
-            });     
+            });
     };
 
 </script>

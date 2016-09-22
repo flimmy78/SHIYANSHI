@@ -10,6 +10,6 @@ namespace Langben.IBLL
         List<SysField> GetSysField(string table, string colum, string parentMyTexts);
         List<SysField> GetSysFieldByParent(string id, string parentid, string value);
         List<SysField> GetSysFieldByParentId(string id);
-    }
+    }   
 }
 

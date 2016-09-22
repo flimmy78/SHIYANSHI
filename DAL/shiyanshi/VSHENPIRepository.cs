@@ -38,6 +38,10 @@ namespace Langben.DAL
                     if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "REPORTSTATUSZI")
                     {
                         REPORTSTATUSZI = item.Value;
+                        if (where.IndexOf(" and ") > 1)
+                        {
+                            where = where.Substring(0, where.IndexOf(" and "));
+                        }
                         continue;
                     }
 
@@ -72,7 +76,13 @@ namespace Langben.DAL
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(DDL_String)) + "] = '" + item.Value + "'";
                         continue;
                     }
-                    where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
+                    if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key != "REPORTSTATUSZI")
+                    {
+                        where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
+                        flagWhere++;
+                        continue;
+                    }
+                   
                 }
             }
             string[] REPORTSTATUSZIarr = null;
@@ -83,7 +93,7 @@ namespace Langben.DAL
             return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext 
                      .CreateObjectSet<VSHENPI>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                     //.OrderBy("it.[UPDATETIME] " + "desc")
+                     .OrderBy("it.[AUDITTIME] " + "asc")
                      .Where(w => REPORTSTATUSZIarr.Contains(w.REPORTSTATUSZI))
                      .AsQueryable(); 
 

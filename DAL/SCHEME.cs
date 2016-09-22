@@ -18,6 +18,7 @@ namespace Langben.DAL
         public SCHEME()
         {
             this.PREPARE_SCHEME = new HashSet<PREPARE_SCHEME>();
+            this.PROJECTTEMPLET = new HashSet<PROJECTTEMPLET>();
             this.SCHEME_RULE = new HashSet<SCHEME_RULE>();
         }
     
@@ -41,6 +42,8 @@ namespace Langben.DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PREPARE_SCHEME> PREPARE_SCHEME { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PROJECTTEMPLET> PROJECTTEMPLET { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SCHEME_RULE> SCHEME_RULE { get; set; }
         public virtual UNDERTAKE_LABORATORY UNDERTAKE_LABORATORY { get; set; }

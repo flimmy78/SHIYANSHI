@@ -81,23 +81,23 @@ namespace Langben.App.Controllers
             entity.STATUS = "未使用";
             entity.ISSTOP = "停用";
             entity.NAME = NAME;
-            //if (RULEIDs != null && RULEIDs.Trim() != "")
-            //{
-            //    string[] RULEIDList = RULEIDs.Split(',');
-            //    foreach (string ruleID in RULEIDList)
-            //    {
-            //        if (ruleID != null && ruleID.Trim() != "")
-            //        {
-            //            SCHEME_RULE item = new SCHEME_RULE();
-            //            item.CREATEPERSON = currentPerson;
-            //            item.CREATETIME = entity.CREATETIME;
-            //            item.RULEID = ruleID;
-            //            item.SCHEMEID = entity.ID;
-            //            item.ID = Result.GetNewId();
-            //            entity.SCHEME_RULE.Add(item);
-            //        }
-            //    }
-            //}
+            if (RULEIDs != null && RULEIDs.Trim() != "")
+            {
+                string[] RULEIDList = RULEIDs.Split(',');
+                foreach (string ruleID in RULEIDList)
+                {
+                    if (ruleID != null && ruleID.Trim() != "")
+                    {
+                        SCHEME_RULE item = new SCHEME_RULE();
+                        item.CREATEPERSON = currentPerson;
+                        item.CREATETIME = entity.CREATETIME;
+                        item.RULEID = ruleID;
+                        item.SCHEMEID = entity.ID;
+                        item.ID = Result.GetNewId();
+                        entity.SCHEME_RULE.Add(item);
+                    }
+                }
+            }
 
             string returnValue = string.Empty;
             if (m_BLL.Create(ref validationErrors, entity))
@@ -105,7 +105,8 @@ namespace Langben.App.Controllers
                 LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，方案的信息的Id为" + entity.ID, "方案"
                     );//写入日志 
                 result.Code = Common.ClientCode.Succeed;
-                result.Message = Suggestion.InsertSucceed;
+                //result.Message = Suggestion.InsertSucceed;
+                result.Message = entity.ID;
                 return Json(result); //提示创建成功
             }
             else
@@ -128,7 +129,7 @@ namespace Langben.App.Controllers
         }
 
         /// <summary>
-        /// 创建
+        /// 修改
         /// </summary>
         /// <param name="ID">方案编号</param>
         /// <param name="NAME">方案名称</param>       
@@ -152,23 +153,36 @@ namespace Langben.App.Controllers
                     entity.NAME = NAME;
                     entity.UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID;
 
-                    //if (RULEIDs != null && RULEIDs.Trim() != "")
-                    //{
-                    //    string[] RULEIDList = RULEIDs.Split(',');
-                    //    foreach (string ruleID in RULEIDList)
-                    //    {
-                    //        if (ruleID != null && ruleID.Trim() != "")
-                    //        {
-                    //            SCHEME_RULE item = new SCHEME_RULE();
-                    //            item.CREATEPERSON = currentPerson;
-                    //            item.CREATETIME = entity.CREATETIME;
-                    //            item.RULEID = ruleID;
-                    //            item.SCHEMEID = entity.ID;
-                    //            item.ID = Result.GetNewId();
-                    //            entity.SCHEME_RULE.Add(item);
-                    //        }
-                    //    }
-                    //}             
+                    if(entity.SCHEME_RULE!=null && entity.SCHEME_RULE.Count>0)
+                    {
+                        SCHEME_RULEBLL rBll = new SCHEME_RULEBLL();
+                        string[] rIDs = new string[entity.SCHEME_RULE.Count];
+                        int i = 0;
+                        foreach(SCHEME_RULE r in entity.SCHEME_RULE.ToList())
+                        {
+                            rIDs[i] = r.ID;
+                            i++;
+                        }
+                        rBll.DeleteCollection(ref validationErrors, rIDs);
+                    }                    
+                    
+                    if (RULEIDs != null && RULEIDs.Trim() != "")
+                    {
+                        string[] RULEIDList = RULEIDs.Split(',');
+                        foreach (string ruleID in RULEIDList)
+                        {
+                            if (ruleID != null && ruleID.Trim() != "")
+                            {
+                                SCHEME_RULE item = new SCHEME_RULE();
+                                item.CREATEPERSON = currentPerson;
+                                item.CREATETIME = entity.CREATETIME;
+                                item.RULEID = ruleID;
+                                item.SCHEMEID = entity.ID;
+                                item.ID = Result.GetNewId();
+                                entity.SCHEME_RULE.Add(item);
+                            }
+                        }
+                    }
 
                     string returnValue = string.Empty;
                     if (m_BLL.Edit(ref validationErrors, entity))

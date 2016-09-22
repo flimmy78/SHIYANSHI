@@ -26,7 +26,7 @@
             @Html.LabelFor(model => model.APPLIANCECOLLECTIONSATE):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("APPLIANCECOLLECTIONSATE", Models.SysFieldModels.GetSysField("VQIJULINGQU1", "CREATEPERSON"), "请选择", new { id = "APPLIANCECOLLECTIONSATE" })
+            @Html.DropDownList("APPLIANCECOLLECTIONSATE", Models.SysFieldModels.GetSysField("VQIJULINGQU1", "APPLIANCECOLLECTIONSATE"), "请选择", new { id = "APPLIANCECOLLECTIONSATE" })
         </div>
     </div>
     <div class="input_search">
@@ -42,7 +42,7 @@
             @Html.LabelFor(model => model.REPORTTORECEVESTATE):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("REPORTTORECEVESTATE", Models.SysFieldModels.GetSysField("VQIJULINGQU1", "REPORTCREATEPERSON"), "请选择", new { id = "REPORTTORECEVESTATE" })
+            @Html.DropDownList("REPORTTORECEVESTATE", Models.SysFieldModels.GetSysField("VQIJULINGQU1", "REPORTTORECEVESTATE"), "请选择", new { id = "REPORTTORECEVESTATE" })
         </div>
     </div>
     <div class='input_search' style="padding-top:10px;">
@@ -55,9 +55,6 @@
 
 <script type="text/javascript" language="javascript">
     $(function () {
-        //$(window).resize(function () {
-        //    $('#flexigridData').datagrid('resize');
-        //});
         $('#flexigridData').datagrid({
             title: '器具报告领取', //列表的标题
             iconCls: 'icon-site',
@@ -74,10 +71,10 @@
             toolbar: [
 
                  {
-                     text: '详细',
+                     text: '签名',
                      iconCls: 'icon-search',
                      handler: function () {
-                         return getView();
+                         //return getView();
                      }
                  }],
             columns: [[
@@ -98,7 +95,7 @@
                 return '<div style="padding:2px"><table class="ddv"></table></div>';
             },
             onExpandRow: function (index, row) {
-                var ddv = $(this).datagrid('getRowDetail', index).find('table.ddv');           
+                var ddv = $(this).datagrid('getRowDetail', index).find('table.ddv');
                 ddv.datagrid({
                     url: '../VQIJULINGQU2/PostDataByID/' + row.ID,
                     fitColumns: true,
@@ -107,15 +104,39 @@
                     loadMsg: '',
                     height: 'auto',
                     columns: [[
-                       { field: 'ID', title: '器具明细表id', width: 111 }
+                       { field: 'ID', title: '器具明细表id', width: 111, hidden: true }
 					, { field: 'APPLIANCE_NAME', title: '器具名称', width: 111 }
 					, { field: 'VERSION', title: '型号', width: 111 }
 					, { field: 'FACTORY_NUM', title: '出厂编号', width: 111 }
 					, { field: 'NUM', title: '数量', width: 111 }
 					, { field: 'ATTACHMENT', title: '附件', width: 111 }
 					, { field: 'NAME', title: '承接实验室', width: 111 }
-					, { field: 'APPLIANCE_RECIVE', title: '器具接收', width: 111 }
-					, { field: 'REPORTNUMBER', title: '证书编号', width: 111 }
+					, {
+					    field: 'APPLIANCE_RECIVE', title: '器具接收', width: 111
+					}
+                    , {
+                        field: 'APPLIANCECOLLECTIONSATE', title: '器具领取', width: 111, formatter: function (value, row, index) {
+                            if (row.APPLIANCE_RECIVE=="是") {
+                                if (row.APPLIANCECOLLECTIONSATE != null) {
+                                    return "<input type='checkbox' checked='checked' />";
+                                }
+                                else {
+                                    return "<input type='checkbox'/>";
+                                }
+                            }                            
+                        }
+                    }
+                     , {
+                         field: 'REPORTTORECEVESTATE', title: '报告领取', width: 111, formatter: function (value, row, index) {
+                             if (row.REPORTTORECEVESTATE != null) {
+                                 return "<input type='checkbox' checked='checked'/><label>" + row.REPORTNUMBER + "</label>";
+                             }
+                             else {
+                                 return "<input type='checkbox'/><label>" + row.REPORTNUMBER + "</label>";
+                             }
+                             
+                         }
+                     }
 					, { field: 'REMARKS', title: '备注', width: 111 }
                     ]],
                     onResize: function () {
@@ -149,10 +170,32 @@
         //将查询条件按照分隔符拼接成字符串
         var search = "";
         $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
-            if (this.id)
-                search = search + this.id + "&" + this.value + "^";
-            else
+            if (this.id) {
+                if (this.id == "APPLIANCECOLLECTIONSATE") {
+                    if (this.value == "待领取") {
+                        this.value = "";
+                        search = search + this.id + "&" + this.value + "^";
+                    }
+                    else if (this.value == "已领取") {
+                        search = search + this.id + "&" + this.value + "^";
+                    }
+                }
+                else if (this.id == "REPORTTORECEVESTATE") {
+                    if (this.value == "待领取") {
+                        this.value = "";
+                        search = search + this.id + "&" + this.value + "^";
+                    }
+                    else if (this.value == "已领取") {
+                        search = search + this.id + "&" + this.value + "^";
+                    }
+                }
+                else {
+                    search = search + this.id + "&" + this.value + "^";
+                }
+            }
+            else {
                 search = search + this.name + "&" + this.value + "^";
+            }
         });
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
@@ -196,4 +239,3 @@
 
 
 </script>
-

@@ -36,7 +36,7 @@ namespace Langben.App.Controllers
                     ID = s.ID
 					,RULEID =   s.RULEIDOld
 					,SCHEMEID =   s.SCHEMEIDOld
-					,HTMLVALUE = s.HTMLVALUE
+					 
 					,CREATETIME = s.CREATETIME
 					,CREATEPERSON = s.CREATEPERSON
 					,UPDATETIME = s.UPDATETIME

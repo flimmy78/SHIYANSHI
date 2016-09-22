@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 11g                           */
-/* Created on:     2016/8/31 22:19:45                           */
+/* Created on:     2016/9/14 18:32:25                           */
 /*==============================================================*/
 
 
@@ -84,6 +84,9 @@ alter table PREPARE_SCHEME
 
 alter table PRINTREPORT
    drop constraint FK_PRINTREP_REFERENCE_PREPARE_;
+
+alter table PROJECTTEMPLET
+   drop constraint FK_PROJECTT_REFERENCE_SCHEME_R;
 
 alter table QUALIFIED_UNQUALIFIED_TEST_ITE
    drop constraint FK_QUALIFIED_UN;
@@ -199,6 +202,8 @@ drop table PHASE cascade constraints;
 drop table PREPARE_SCHEME cascade constraints;
 
 drop table PRINTREPORT cascade constraints;
+
+drop table PROJECTTEMPLET cascade constraints;
 
 drop table QUALIFIED_UNQUALIFIED_TEST_ITE cascade constraints;
 
@@ -333,6 +338,7 @@ create table APPLIANCECOLLECTION
    UPDATETIME           DATE,
    UPDATEPERSON         VARCHAR2(200),
    APPLIANCE_DETAIL_INFORMATIONID VARCHAR2(36),
+   APPLIANCECOLLECTIONSATE VARCHAR2(200),
    constraint PK_APPLIANCECOLLECTION primary key (ID)
 );
 
@@ -416,8 +422,16 @@ create table APPLIANCE_LABORATORY
 (
    ID                   VARCHAR2(36)         not null,
    UNDERTAKE_LABORATORYID VARCHAR2(36),
-   APPLIANCE_DETAIL_INFORMATIOID VARCHAR2(36),
+   APPLIANCE_DETAIL_INFORMATIONID VARCHAR2(36),
    PREPARE_SCHEMEID     VARCHAR2(36),
+   RECEIVEPERSON        VARCHAR2(200),
+   RECEIVETIME          DATE,
+   BACKPERSON           VARCHAR2(200),
+   BACKTIME             DATE,
+   DISTRIBUTIONPERSON   VARCHAR2(200),
+   DISTRIBUTIONTIME     DATE,
+   CREATEPERSON         VARCHAR2(200),
+   CREATETIME           DATE,
    constraint PK_APPLIANCE_LABORATORY primary key (ID)
 );
 
@@ -1073,7 +1087,11 @@ create table PREPARE_SCHEME
    PRINTSTATUS          VARCHAR2(200),
    ISBACK               VARCHAR2(200),
    REPORTNUMBER         VARCHAR2(200),
+   REPORTSTATUSZI       VARCHAR2(200),
    REPORTSTATUS         VARCHAR2(200),
+   SERIALNUMBER         INT,
+   YEARS                VARCHAR2(200),
+   PACKAGETYPE          VARCHAR2(200),
    constraint PK_PREPARE_SCHEME primary key (ID)
 );
 
@@ -1108,6 +1126,21 @@ create table PRINTREPORT
    UPDATEPERSON         VARCHAR2(200),
    PREPARE_SCHEMEID     VARCHAR2(36),
    constraint PK_PRINTREPORT primary key (ID)
+);
+
+/*==============================================================*/
+/* Table: PROJECTTEMPLET                                        */
+/*==============================================================*/
+create table PROJECTTEMPLET 
+(
+   ID                   VARCHAR2(36)         not null,
+   SCHEME_RULEID        VARCHAR2(36),
+   HTMLVALUE            CLOB,
+   CREATETIME           DATE,
+   CREATEPERSON         VARCHAR2(200),
+   UPDATETIME           DATE,
+   UPDATEPERSON         VARCHAR2(200),
+   constraint PK_PROJECTTEMPLET primary key (ID)
 );
 
 /*==============================================================*/
@@ -1150,6 +1183,7 @@ create table REPORTCOLLECTION
    UPDATETIME           DATE,
    UPDATEPERSON         VARCHAR2(200),
    PREPARE_SCHEMEID     VARCHAR2(36),
+   REPORTTORECEVESTATE  VARCHAR2(200),
    constraint PK_REPORTCOLLECTION primary key (ID)
 );
 
@@ -1188,14 +1222,9 @@ create table SCHEME
    REPORT_CATEGORY      VARCHAR2(200),
    CERTIFICATE_CATEGORY VARCHAR2(200),
    STATUS               VARCHAR2(200),
-   ISSTOP               VARCHAR2(200),
    ISPUBLISH            VARCHAR2(200),
    COPYID               VARCHAR2(36),
    UNDERTAKE_LABORATORYID VARCHAR2(36),
-   PUBLISHTIME          DATE,
-   PUBLISHPERSON        VARCHAR2(200),
-   ISPUBLISHTIME        VARCHAR2(200),
-   ISPUBLISHPERSON      VARCHAR2(200),
    CREATETIME           DATE,
    CREATEPERSON         VARCHAR2(200),
    UPDATETIME           DATE,
@@ -1204,13 +1233,7 @@ create table SCHEME
 );
 
 comment on column SCHEME.STATUS is
-'已使用，未使用';
-
-comment on column SCHEME.ISSTOP is
-'停用，启用';
-
-comment on column SCHEME.ISPUBLISH is
-'已发布，未发布';
+'未使用、已使用';
 
 /*==============================================================*/
 /* Table: SCHEME_RULE                                           */
@@ -1220,7 +1243,6 @@ create table SCHEME_RULE
    ID                   VARCHAR2(36)         not null,
    RULEID               VARCHAR2(36),
    SCHEMEID             VARCHAR2(36),
-   HTMLVALUE            CLOB,
    CREATETIME           DATE,
    CREATEPERSON         VARCHAR2(200),
    UPDATETIME           DATE,
@@ -1546,9 +1568,6 @@ create table UNDERTAKE_LABORATORY
    constraint PK_UNDERTAKE_LABORATORY primary key (ID)
 );
 
-comment on table UNDERTAKE_LABORATORY is
-'承接实验室主键和名称一样';
-
 /*==============================================================*/
 /* View: VBAOGAODAYIN                                           */
 /*==============================================================*/
@@ -1656,23 +1675,27 @@ select b.ID, --器具明细id
   d.APPROVAL,                      --审核审批不通过原因
   a.INSPECTION_ENTERPRISE,         --送检单位
   b.ISOVERDUE,                      --是否超期
-c.UNDERTAKE_LABORATORYID,--实验室
-b.EQUIPMENT_STATUS_VALUUMN--状态值
+u.NAME,--实验室
+b.EQUIPMENT_STATUS_VALUUMN,--状态值
+b.UPDATETIME--器具明细表修改时间
 
-from APPLIANCE_DETAIL_INFORMATION  b
---器具明细
-LEFT join ORDER_TASK_INFORMATION a
---委托单
+
+from APPLIANCE_DETAIL_INFORMATION  b--器具明细
+
+LEFT join ORDER_TASK_INFORMATION a--委托单
 on a.id=b.ORDER_TASK_INFORMATIONID
-LEFT join APPLIANCE_LABORATORY c
---器具明细信息_承接实验室
-on b.id=c.APPLIANCE_DETAIL_INFORMATIOID
-LEFT join PREPARE_SCHEME d
---预备方案
+
+LEFT join APPLIANCE_LABORATORY c--器具明细信息_承接实验室
+on b.id=c.APPLIANCE_DETAIL_INFORMATIONID
+
+LEFT join PREPARE_SCHEME d--预备方案
 on c.PREPARE_SCHEMEID=d.id
-LEFT join FILE_UPLOADER e
---附件
-on d.id=c.PREPARE_SCHEMEID
+
+LEFT join UNDERTAKE_LABORATORY u--承接实验室
+on c.UNDERTAKE_LABORATORYID=u.id
+
+LEFT join FILE_UPLOADER e--附件
+on d.id=e.PREPARE_SCHEMEID
 with read only;
 
 comment on column VJIANDINGRENWU.ORDER_NUMBER is
@@ -1708,20 +1731,20 @@ a.ID,
 a.ORDER_NUMBER, --委托单号
 a.CERTIFICATE_ENTERPRISE,--证书单位
 a.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
-c.CREATEPERSON,--领取者,根据判断是否存在领取者来取器具领取状态
 a.CREATETIME,--登记时间（送检时间段）
-f.CREATEPERSON as REPORTCREATEPERSON--领取者,根据判断是否存在领取者来取报告领取状态
+c.APPLIANCECOLLECTIONSATE,--器具领取状态
+f.REPORTTORECEVESTATE--报告领取状态
 
-from ORDER_TASK_INFORMATION a
-LEFT join APPLIANCE_DETAIL_INFORMATION b
+from ORDER_TASK_INFORMATION a--委托单
+LEFT join APPLIANCE_DETAIL_INFORMATION b--器具明细
 on a.id=b.ORDER_TASK_INFORMATIONID
-LEFT join APPLIANCECOLLECTION c
+LEFT join APPLIANCECOLLECTION c--器具领取
 on b.id=c.APPLIANCE_DETAIL_INFORMATIONID
-left join APPLIANCE_LABORATORY d
-on b.id=d.APPLIANCE_DETAIL_INFORMATIOID
-left join PREPARE_SCHEME e
+left join APPLIANCE_LABORATORY d--器具明细信息_承接实验室
+on b.id=d.APPLIANCE_DETAIL_INFORMATIONID
+left join PREPARE_SCHEME e--预备方案
 on d.PREPARE_SCHEMEID=e.id
-left join REPORTCOLLECTION f
+left join REPORTCOLLECTION f--报告领取
 on f.PREPARE_SCHEMEID=e.id
 with read only;
 
@@ -1731,20 +1754,14 @@ comment on column VQIJULINGQU1.ORDER_NUMBER is
 comment on column VQIJULINGQU1.CERTIFICATE_ENTERPRISE is
 'Research';
 
-comment on column VQIJULINGQU1.CREATEPERSON is
-'ResearchDropDown';
-
 comment on column VQIJULINGQU1.CREATETIME is
 'Research';
-
-comment on column VQIJULINGQU1.REPORTCREATEPERSON is
-'ResearchDropDown';
 
 /*==============================================================*/
 /* View: VQIJULINGQU2                                           */
 /*==============================================================*/
-create or replace view VQIJULINGQU2(ID, APPLIANCE_NAME, VERSION, FACTORY_NUM, NUM, ATTACHMENT, NAME, APPLIANCE_RECIVE, REPORTNUMBER, REMARKS, ORDER_NUMBER) as
-select a.ID,
+create or replace view VQIJULINGQU2(ID, APPLIANCE_NAME, VERSION, FACTORY_NUM, NUM, ATTACHMENT, NAME, APPLIANCE_RECIVE, REPORTNUMBER, REMARKS, ORDER_TASK_INFORMATIONID, APPLIANCECOLLECTIONSATE, REPORTTORECEVESTATE) as
+select b.ID,
   b.APPLIANCE_NAME, --器具名称
   b.VERSION,               --型号
   b.FACTORY_NUM,         --出厂编号
@@ -1754,23 +1771,29 @@ select a.ID,
   b.APPLIANCE_RECIVE,--器具接收
   d.REPORTNUMBER,--证书编号
   b.REMARKS,             --备注
-  a.ORDER_NUMBER--委托单号
+  b.ORDER_TASK_INFORMATIONID,--委托单id
+  g.APPLIANCECOLLECTIONSATE,--器具领取状态
+f.REPORTTORECEVESTATE--报告领取状态
   
-from ORDER_TASK_INFORMATION a
-LEFT join APPLIANCE_DETAIL_INFORMATION b
+from APPLIANCE_DETAIL_INFORMATION b--器具明细
+LEFT join  ORDER_TASK_INFORMATION a--委托单
 on a.id=b.ORDER_TASK_INFORMATIONID
-LEFT join APPLIANCE_LABORATORY c
-on b.id=c.APPLIANCE_DETAIL_INFORMATIOID
-LEFT join PREPARE_SCHEME d
+LEFT join APPLIANCECOLLECTION g--器具领取
+on b.id=g.APPLIANCE_DETAIL_INFORMATIONID
+LEFT join APPLIANCE_LABORATORY c--器具明细信息_承接实验室
+on b.id=c.APPLIANCE_DETAIL_INFORMATIONID
+LEFT join PREPARE_SCHEME d--预备方案
 on c.PREPARE_SCHEMEID=d.id
-left join UNDERTAKE_LABORATORY e
+left join UNDERTAKE_LABORATORY e--实验室表
 on c.UNDERTAKE_LABORATORYID=e.id
+left join REPORTCOLLECTION f--报告领取
+on f.PREPARE_SCHEMEID=e.id
 with read only;
 
 /*==============================================================*/
 /* View: VRUKU                                                  */
 /*==============================================================*/
-create or replace view VRUKU(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, NAME, ORDER_STATUS, STORAGEINSTRUCTIONS, UNDERTAKE_LABORATORYID, APPROVALDATE, STORAGEINSTRUCTI_STATU) as
+create or replace view VRUKU(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, NAME, ORDER_STATUS, STORAGEINSTRUCTIONS, UNDERTAKE_LABORATORYID, APPROVALDATE, STORAGEINSTRUCTI_STATU, REPORTSTATUS, REPORTSTATUSZI, "b.EQUIPMENT_STATUS_VALUUMNfrom") as
 select b.ID,
   d.REPORTNUMBER,             --报告编号
   a.ORDER_NUMBER,                  --委托单号
@@ -1784,12 +1807,15 @@ select b.ID,
   b.STORAGEINSTRUCTIONS,           --入库说明
   c.UNDERTAKE_LABORATORYID,        --实验室
   d.APPROVALDATE,                  --批准日期
-  b.STORAGEINSTRUCTI_STATU         --入库状态
+  b.STORAGEINSTRUCTI_STATU,         --入库状态
+  d.REPORTSTATUS,--报告状态
+  d.REPORTSTATUSZI,--报告状态值
+  b.EQUIPMENT_STATUS_VALUUMN--器具状态值
 from APPLIANCE_DETAIL_INFORMATION b
 LEFT join  ORDER_TASK_INFORMATION a
 on a.id=b.ORDER_TASK_INFORMATIONID
 LEFT join APPLIANCE_LABORATORY c
-on b.id=c.APPLIANCE_DETAIL_INFORMATIOID
+on b.id=c.APPLIANCE_DETAIL_INFORMATIONID
 LEFT join PREPARE_SCHEME d
 on c.PREPARE_SCHEMEID=d.id
 left join UNDERTAKE_LABORATORY e
@@ -1814,65 +1840,70 @@ comment on column VRUKU.STORAGEINSTRUCTI_STATU is
 /*==============================================================*/
 /* View: VSHENHE                                                */
 /*==============================================================*/
-create or replace view VSHENHE(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, ISAGGREY, PREPARE_SCHEMEID) as
-select b.ID,
-  d.REPORTNUMBER,             --报告编号
-  a.ORDER_NUMBER,                  --委托单号
-  b.APPLIANCE_NAME,                --器具名称
-  b.VERSION,                         --型号
-  b.FACTORY_NUM,                   --出厂编号
-  a.CERTIFICATE_ENTERPRISE,        --证书单位
-  a.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
-  d.CERTIFICATE_CATEGORY,          --证书类别
+create or replace view VSHENHE(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, ISAGGREY, PACKAGETYPE, REPORTSTATUSZI, REPORTSTATUS, FILECONCLUSION) as
+select a.ID,
+  a.REPORTNUMBER,             --报告编号
+  d.ORDER_NUMBER,                  --委托单号
+  c.APPLIANCE_NAME,                --器具名称
+  c.VERSION,                         --型号
+  c.FACTORY_NUM,                   --出厂编号
+  d.CERTIFICATE_ENTERPRISE,        --证书单位
+  d.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
+  a.CERTIFICATE_CATEGORY,          --证书类别
   CASE
-    when d.QUALIFICATIONS     ='本单位获北京市质量技术监督局专项计量授权，证书编号：（京）法计（2012）006号'
-    and d.CERTIFICATE_CATEGORY='检定'
-    and a.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    when a.QUALIFICATIONS     ='本单位获北京市质量技术监督局专项计量授权，证书编号：（京）法计（2012）006号'
+    and a.CERTIFICATE_CATEGORY='检定'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
     THEN '北京授权检定'
-    WHEN d.qualifications     ='/'
-    and d.CERTIFICATE_CATEGORY='检定'
-    and a.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    WHEN a.qualifications     ='/'
+    and a.CERTIFICATE_CATEGORY='检定'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
     THEN '检定'
-    WHEN d.qualifications     ='本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394'
-    and d.CERTIFICATE_CATEGORY='校准'
-    and a.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    WHEN a.qualifications     ='本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394'
+    and a.CERTIFICATE_CATEGORY='校准'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
     THEN 'CNAS校准'
-    WHEN d.qualifications     ='/'
-    and d.CERTIFICATE_CATEGORY='校准'
-    and a.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    WHEN a.qualifications     ='/'
+    and a.CERTIFICATE_CATEGORY='校准'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
     THEN '校准'
-    WHEN d.qualifications     ='本单位获河北市质量技术监督局专项计量授权，证书编号：（冀）法计（2014）D033号'
-    and d.CERTIFICATE_CATEGORY='检定'
-    and a.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
+    WHEN a.qualifications     ='本单位获河北市质量技术监督局专项计量授权，证书编号：（冀）法计（2014）D033号'
+    and a.CERTIFICATE_CATEGORY='检定'
+    and d.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
     THEN '河北授权检定'
-    WHEN d.qualifications     ='/'
-    and d.CERTIFICATE_CATEGORY='检定'
-    and a.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    WHEN a.qualifications     ='/'
+    and a.CERTIFICATE_CATEGORY='检定'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
     THEN '检定'
-    WHEN d.qualifications     ='本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394'
-    and d.CERTIFICATE_CATEGORY='校准'
-    and a.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
+    WHEN a.qualifications     ='本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394'
+    and a.CERTIFICATE_CATEGORY='校准'
+    and d.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
     THEN 'CNAS校准'
-    WHEN d.qualifications     ='/'
-    and d.CERTIFICATE_CATEGORY='校准'
-    and a.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
+    WHEN a.qualifications     ='/'
+    and a.CERTIFICATE_CATEGORY='校准'
+    and d.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
     THEN '校准'
     ELSE ''
   end as qualifications, --资质授权
-  d.CONCLUSION_EXPLAIN,  --总结论说明
-  d.CONCLUSION,           --总结论
-  d.ISAGGREY,--审核同意
-e.PREPARE_SCHEMEID --附件中的预备方案id
-  
-from APPLIANCE_DETAIL_INFORMATION b
-LEFT join  ORDER_TASK_INFORMATION a
-on a.id=b.ORDER_TASK_INFORMATIONID
-LEFT join APPLIANCE_LABORATORY c
-on b.id=c.APPLIANCE_DETAIL_INFORMATIOID
-LEFT join PREPARE_SCHEME d
-on c.PREPARE_SCHEMEID=d.id
-left join FILE_UPLOADER e
-on d.id=e.PREPARE_SCHEMEID
+  a.CONCLUSION_EXPLAIN,  --总结论说明
+  a.CONCLUSION,           --总结论
+  a.ISAGGREY,--审核同意
+  a.PACKAGETYPE,--报告类型
+  a.REPORTSTATUSZI,--报告状态值
+  a.REPORTSTATUS,--报告状态
+  e.CONCLUSION as FILECONCLUSION--上传报告结论
+
+from PREPARE_SCHEME a--预备方案表
+left join  APPLIANCE_LABORATORY b--器具明细信息_承接实验室表
+on a.id=b.PREPARE_SCHEMEID
+LEFT join  APPLIANCE_DETAIL_INFORMATION c--器具明细表
+on c.id=b.APPLIANCE_DETAIL_INFORMATIONID
+LEFT join  ORDER_TASK_INFORMATION d--委托单表
+on d.id=c.ORDER_TASK_INFORMATIONID
+left join FILE_UPLOADER e--附件表
+on a.id=e.PREPARE_SCHEMEID
+
+
 with read only;
 
 comment on column VSHENHE.ORDER_NUMBER is
@@ -1884,74 +1915,78 @@ comment on column VSHENHE.ISAGGREY is
 /*==============================================================*/
 /* View: VSHENPI                                                */
 /*==============================================================*/
-create or replace view VSHENPI(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, UNDERTAKE_LABORATORYID, APPROVALISAGGREY, PREPARE_SCHEMEID) as
-select b.ID,
-  d.REPORTNUMBER,             --报告编号
-  a.ORDER_NUMBER,                  --委托单号
-  b.APPLIANCE_NAME,                --器具名称
-  b.VERSION,                         --型号
-  b.FACTORY_NUM,                   --出厂编号
-  a.CERTIFICATE_ENTERPRISE,        --证书单位
-  a.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
-  d.CERTIFICATE_CATEGORY,          --证书类别
+create or replace view VSHENPI(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, APPROVALISAGGREY, PACKAGETYPE, REPORTSTATUSZI, REPORTSTATUS, UNDERTAKE_LABORATORYID, FILECONCLUSION) as
+select a.ID,
+  a.REPORTNUMBER,             --报告编号
+  d.ORDER_NUMBER,                  --委托单号
+  c.APPLIANCE_NAME,                --器具名称
+  c.VERSION,                         --型号
+  c.FACTORY_NUM,                   --出厂编号
+  d.CERTIFICATE_ENTERPRISE,        --证书单位
+  d.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
+  a.CERTIFICATE_CATEGORY,          --证书类别
   CASE
-    when d.QUALIFICATIONS     ='本单位获北京市质量技术监督局专项计量授权，证书编号：（京）法计（2012）006号'
-    and d.CERTIFICATE_CATEGORY='检定'
-    and a.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    when a.QUALIFICATIONS     ='本单位获北京市质量技术监督局专项计量授权，证书编号：（京）法计（2012）006号'
+    and a.CERTIFICATE_CATEGORY='检定'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
     THEN '北京授权检定'
-    WHEN d.qualifications     ='/'
-    and d.CERTIFICATE_CATEGORY='检定'
-    and a.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    WHEN a.qualifications     ='/'
+    and a.CERTIFICATE_CATEGORY='检定'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
     THEN '检定'
-    WHEN d.qualifications     ='本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394'
-    and d.CERTIFICATE_CATEGORY='校准'
-    and a.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    WHEN a.qualifications     ='本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394'
+    and a.CERTIFICATE_CATEGORY='校准'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
     THEN 'CNAS校准'
-    WHEN d.qualifications     ='/'
-    and d.CERTIFICATE_CATEGORY='校准'
-    and a.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    WHEN a.qualifications     ='/'
+    and a.CERTIFICATE_CATEGORY='校准'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
     THEN '校准'
-    WHEN d.qualifications     ='本单位获河北市质量技术监督局专项计量授权，证书编号：（冀）法计（2014）D033号'
-    and d.CERTIFICATE_CATEGORY='检定'
-    and a.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
+    WHEN a.qualifications     ='本单位获河北市质量技术监督局专项计量授权，证书编号：（冀）法计（2014）D033号'
+    and a.CERTIFICATE_CATEGORY='检定'
+    and d.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
     THEN '河北授权检定'
-    WHEN d.qualifications     ='/'
-    and d.CERTIFICATE_CATEGORY='检定'
-    and a.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    WHEN a.qualifications     ='/'
+    and a.CERTIFICATE_CATEGORY='检定'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
     THEN '检定'
-    WHEN d.qualifications     ='本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394'
-    and d.CERTIFICATE_CATEGORY='校准'
-    and a.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
+    WHEN a.qualifications     ='本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394'
+    and a.CERTIFICATE_CATEGORY='校准'
+    and d.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
     THEN 'CNAS校准'
-    WHEN d.qualifications     ='/'
-    and d.CERTIFICATE_CATEGORY='校准'
-    and a.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
+    WHEN a.qualifications     ='/'
+    and a.CERTIFICATE_CATEGORY='校准'
+    and d.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
     THEN '校准'
     ELSE ''
-  end as qualifications,   --资质授权
-  d.CONCLUSION_EXPLAIN,    --总结论说明
-  d.CONCLUSION,            --总结论
-  c.UNDERTAKE_LABORATORYID,--实验室
-  d.APPROVALISAGGREY ,      --同意不同意判断待批还已批
-e.PREPARE_SCHEMEID --附件中的预备方案id
-from APPLIANCE_DETAIL_INFORMATION b 
-LEFT join ORDER_TASK_INFORMATION a
-on a.id=b.ORDER_TASK_INFORMATIONID
-LEFT join APPLIANCE_LABORATORY c
-on b.id=c.APPLIANCE_DETAIL_INFORMATIOID
-LEFT join PREPARE_SCHEME d
-on c.PREPARE_SCHEMEID=d.id
-left join FILE_UPLOADER e
-on d.id=e.PREPARE_SCHEMEID
+  end as qualifications, --资质授权
+  a.CONCLUSION_EXPLAIN,  --总结论说明
+  a.CONCLUSION,           --总结论
+  a.APPROVALISAGGREY,--审批同意
+  a.PACKAGETYPE,--报告类型
+  a.REPORTSTATUSZI,--报告状态值
+  a.REPORTSTATUS,--报告状态
+  b.UNDERTAKE_LABORATORYID,--实验室
+e.CONCLUSION as FILECONCLUSION--上传报告结论
+
+from PREPARE_SCHEME a--预备方案表
+left join  APPLIANCE_LABORATORY b--器具明细信息_承接实验室表
+on a.id=b.PREPARE_SCHEMEID
+LEFT join  APPLIANCE_DETAIL_INFORMATION c--器具明细表
+on c.id=b.APPLIANCE_DETAIL_INFORMATIONID
+LEFT join  ORDER_TASK_INFORMATION d--委托单表
+on d.id=c.ORDER_TASK_INFORMATIONID
+left join FILE_UPLOADER e--附件表
+on a.id=e.PREPARE_SCHEMEID
 with read only;
 
 comment on column VSHENPI.ORDER_NUMBER is
 'Research';
 
-comment on column VSHENPI.UNDERTAKE_LABORATORYID is
+comment on column VSHENPI.APPROVALISAGGREY is
 'ResearchDropDown';
 
-comment on column VSHENPI.APPROVALISAGGREY is
+comment on column VSHENPI.PACKAGETYPE is
 'ResearchDropDown';
 
 alter table ACTIVE_POWER
@@ -1983,7 +2018,7 @@ alter table APPLIANCE_LABORATORY
       references UNDERTAKE_LABORATORY (ID);
 
 alter table APPLIANCE_LABORATORY
-   add constraint FK_APPLIANC_REFERENCE_APPLIAN2 foreign key (APPLIANCE_DETAIL_INFORMATIOID)
+   add constraint FK_APPLIANC_REFERENCE_APPLIAN2 foreign key (APPLIANCE_DETAIL_INFORMATIONID)
       references APPLIANCE_DETAIL_INFORMATION (ID);
 
 alter table COMPANY
@@ -2061,6 +2096,10 @@ alter table PREPARE_SCHEME
 alter table PRINTREPORT
    add constraint FK_PRINTREP_REFERENCE_PREPARE_ foreign key (PREPARE_SCHEMEID)
       references PREPARE_SCHEME (ID);
+
+alter table PROJECTTEMPLET
+   add constraint FK_PROJECTT_REFERENCE_SCHEME_R foreign key (SCHEME_RULEID)
+      references SCHEME_RULE (ID);
 
 alter table QUALIFIED_UNQUALIFIED_TEST_ITE
    add constraint FK_QUALIFIED_UN foreign key (PREPARE_SCHEMEID)
