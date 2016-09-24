@@ -260,6 +260,7 @@
     <Compile Include="shiyanshi\FILE_UPLOADERRepository.cs" />
     <Compile Include="shiyanshi\CommEnums.cs" />
     <Compile Include="shiyanshi\ORDER_TASK_INFORMATIONRepository.cs" />
+    <Compile Include="shiyanshi\PREPARE_SCHEMEMeta.cs" />
     <Compile Include="shiyanshi\PREPARE_SCHEMERepository.cs" />
     <Compile Include="shiyanshi\VJIANDINGRENWURepository.cs" />
     <Compile Include="shiyanshi\VQIJULINGQU1Repository.cs" />

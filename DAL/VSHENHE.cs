@@ -31,5 +31,6 @@ namespace Langben.DAL
         public string REPORTSTATUSZI { get; set; }
         public string REPORTSTATUS { get; set; }
         public string FILECONCLUSION { get; set; }
+        public Nullable<System.DateTime> UPDATETIME { get; set; }
     }
 }

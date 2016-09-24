@@ -141,6 +141,7 @@
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="CATEGORY" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="CROSS_COS">
           <Key>
@@ -643,6 +644,7 @@
           <Property Name="RULENAME" Type="varchar2" MaxLength="200" />
           <Property Name="RULENJOINAME" Type="varchar2" MaxLength="2000" />
           <Property Name="HTMLVALUE" Type="clob" />
+          <Property Name="REMARK" Type="varchar2" MaxLength="4000" />
           <Property Name="CREATETIME" Type="date" />
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="UPDATETIME" Type="date" />
@@ -1361,6 +1363,7 @@
           <Property Name="REPORTSTATUSZI" Type="varchar2" MaxLength="200" />
           <Property Name="REPORTSTATUS" Type="varchar2" MaxLength="200" />
           <Property Name="FILECONCLUSION" Type="varchar2" MaxLength="200" />
+          <Property Name="UPDATETIME" Type="date" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VSHENPI”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -1386,6 +1389,7 @@
           <Property Name="REPORTSTATUS" Type="varchar2" MaxLength="200" />
           <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
           <Property Name="FILECONCLUSION" Type="varchar2" MaxLength="200" />
+          <Property Name="AUDITTIME" Type="date" />
         </EntityType>
         <Association Name="FK_AC_VOLTA_REFERENCE_OVERALL_">
           <End Role="OVERALL_TABLE" Type="Self.OVERALL_TABLE" Multiplicity="0..1" />
@@ -2311,7 +2315,8 @@ FROM "TENGFEI"."VRUKU" "VRUKU"</DefiningQuery>
 "VSHENHE"."PACKAGETYPE" AS "PACKAGETYPE", 
 "VSHENHE"."REPORTSTATUSZI" AS "REPORTSTATUSZI", 
 "VSHENHE"."REPORTSTATUS" AS "REPORTSTATUS", 
-"VSHENHE"."FILECONCLUSION" AS "FILECONCLUSION"
+"VSHENHE"."FILECONCLUSION" AS "FILECONCLUSION", 
+"VSHENHE"."UPDATETIME" AS "UPDATETIME"
 FROM "TENGFEI"."VSHENHE" "VSHENHE"</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VSHENPI" EntityType="Self.VSHENPI" store:Type="Views" store:Schema="TENGFEI">
@@ -2333,7 +2338,8 @@ FROM "TENGFEI"."VSHENHE" "VSHENHE"</DefiningQuery>
 "VSHENPI"."REPORTSTATUSZI" AS "REPORTSTATUSZI", 
 "VSHENPI"."REPORTSTATUS" AS "REPORTSTATUS", 
 "VSHENPI"."UNDERTAKE_LABORATORYID" AS "UNDERTAKE_LABORATORYID", 
-"VSHENPI"."FILECONCLUSION" AS "FILECONCLUSION"
+"VSHENPI"."FILECONCLUSION" AS "FILECONCLUSION", 
+"VSHENPI"."AUDITTIME" AS "AUDITTIME"
 FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_AC_VOLTA_REFERENCE_OVERALL_" Association="Self.FK_AC_VOLTA_REFERENCE_OVERALL_">
@@ -3036,6 +3042,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="COMPANY1" Relationship="Model.FK_COMPANY_REFERENCE_COMPANY" FromRole="COMPANY" ToRole="COMPANY1" />
           <NavigationProperty Name="COMPANY2" Relationship="Model.FK_COMPANY_REFERENCE_COMPANY" FromRole="COMPANY1" ToRole="COMPANY" />
+          <Property Name="CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CROSS_COS">
           <Key>
@@ -3576,6 +3583,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PREPARE_SCHEME" Relationship="Model.FK_QUALIFIED_UN" FromRole="QUALIFIED_UNQUALIFIED_TEST_ITE" ToRole="PREPARE_SCHEME" />
+          <Property Name="REMARK" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="REPORTCOLLECTION">
           <Key>
@@ -4306,6 +4314,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="REPORTSTATUSZI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="REPORTSTATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FILECONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATETIME" Type="DateTime" />
         </EntityType>
         <EntityType Name="VSHENPI">
           <Key>
@@ -4329,6 +4338,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="REPORTSTATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="FILECONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AUDITTIME" Type="DateTime" />
         </EntityType>
         <Association Name="FK_AC_VOLTA_REFERENCE_OVERALL_">
           <End Type="Model.OVERALL_TABLE" Role="OVERALL_TABLE" Multiplicity="0..1" />
@@ -5109,6 +5119,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="COMPANY">
             <EntityTypeMapping TypeName="Model.COMPANY">
               <MappingFragment StoreEntitySet="COMPANY">
+                <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
                 <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
@@ -5631,6 +5642,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="QUALIFIED_UNQUALIFIED_TEST_ITE">
             <EntityTypeMapping TypeName="Model.QUALIFIED_UNQUALIFIED_TEST_ITE">
               <MappingFragment StoreEntitySet="QUALIFIED_UNQUALIFIED_TEST_ITE">
+                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
                 <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
@@ -6333,6 +6345,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="VSHENHE">
             <EntityTypeMapping TypeName="Model.VSHENHE">
               <MappingFragment StoreEntitySet="VSHENHE">
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
                 <ScalarProperty Name="FILECONCLUSION" ColumnName="FILECONCLUSION" />
                 <ScalarProperty Name="REPORTSTATUS" ColumnName="REPORTSTATUS" />
                 <ScalarProperty Name="REPORTSTATUSZI" ColumnName="REPORTSTATUSZI" />
@@ -6356,6 +6369,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="VSHENPI">
             <EntityTypeMapping TypeName="Model.VSHENPI">
               <MappingFragment StoreEntitySet="VSHENPI">
+                <ScalarProperty Name="AUDITTIME" ColumnName="AUDITTIME" />
                 <ScalarProperty Name="FILECONCLUSION" ColumnName="FILECONCLUSION" />
                 <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
                 <ScalarProperty Name="REPORTSTATUS" ColumnName="REPORTSTATUS" />

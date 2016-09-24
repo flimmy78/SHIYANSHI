@@ -66,6 +66,9 @@ namespace Langben.DAL
 
         [Display(Name = "上传报告结论", Order = 17)]
         public object FILECONCLUSION { get; set; }
+
+        [Display(Name = "修改时间", Order = 18)]
+        public object UPDATETIME { get; set; }
     }
 
 

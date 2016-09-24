@@ -33,11 +33,16 @@ namespace Langben.DAL
                     {
                         where += " and ";
                     }
-                    flagWhere++;
+
 
                     if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "REPORTSTATUSZI")
                     {
                         REPORTSTATUSZI = item.Value;
+                        if (where.IndexOf(" and ") > 1)
+                        {
+                            where = where.Substring(0, where.IndexOf(" and "));
+                        }
+
                         continue;
                     }
 
@@ -61,7 +66,7 @@ namespace Langben.DAL
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(End_Int)) + "] <= " + item.Value.GetInt();
                         continue;
                     }
-     
+
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(DDL_Int)) //精确查询数值
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(DDL_Int)) + "] =" + item.Value;
@@ -72,7 +77,13 @@ namespace Langben.DAL
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(DDL_String)) + "] = '" + item.Value + "'";
                         continue;
                     }
-                    where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
+                    if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key != "REPORTSTATUSZI")
+                    {
+                        where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
+                        flagWhere++;
+                        continue;
+                    }
+
                 }
             }
             string[] REPORTSTATUSZIarr = null;
@@ -80,15 +91,15 @@ namespace Langben.DAL
             {
                 REPORTSTATUSZIarr = REPORTSTATUSZI.Split('*');
             }
-            return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext 
+            return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
                      .CreateObjectSet<VSHENHE>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                     //.OrderBy("it.[UPDATETIME] " + "desc")
+                     .OrderBy("it.[UPDATETIME] " + "asc")
                      .Where(w => REPORTSTATUSZIarr.Contains(w.REPORTSTATUSZI))
-                     .AsQueryable(); 
+                     .AsQueryable();
 
         }
-        
+
     }
 }
 

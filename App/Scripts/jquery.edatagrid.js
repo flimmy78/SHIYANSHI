@@ -1,4 +1,4 @@
-/**
+﻿/**
  * edatagrid - jQuery EasyUI
  * 
  * Licensed under the GPL:
@@ -476,8 +476,8 @@
 				msg:'No record is selected.'
 			},
 			confirm:{
-				title:'Confirm',
-				msg:'Are you sure you want to delete?'
+				title:'确认',
+				msg: '确认删除吗?'
 			}
 		},
 		poster: function(url, data, success, error){
