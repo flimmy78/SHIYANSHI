@@ -115,28 +115,10 @@
     </table>
 </div>
 <!--/增加量程弹层-->
-
+<script src="/Scripts/JScript-JianCeXiang-Common.js"></script>
 <script type="text/javascript" language="javascript">
-        var changeHTML = "onchange=\"changeValue(this)\"";
-        //
-        var dlselectHTML = "<select class=\"my-combox\" style=\"width:50px; height:25px\">" +
-                            "<option value=\"A\">A</option> " +
-                            "<option value=\"KA\">KA</option>" +
-                            "<option value=\"mA\">mA</option>  " +
-                            "<option value=\"μA\">μA</option>" +
-                            "<option value=\"nA\">nA</option> " +
-                            "<option value=\"pA\">pA</option> " +
-                            "</select>";   						
-						
-    		
-
-        var dyselectHTML = "<select class=\"my-combox\" style=\"width:50px; height:25px\">" +
-                        "<option value=\"V\">V</option> " +
-                        "<option value=\"MV\">MV</option>" +
-                        "<option value=\"KV\">KV</option>  " +
-                        "<option value=\"mV\">mV</option>" +
-                        "<option value=\"μV\">μV</option> " +                       
-                        "</select>";
+    var RuleID = $("#hideRULEID").val();//检测项目ID
+    var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
         //共有的通道数量
         var tableIdx = 1;
         //创建通道
@@ -184,29 +166,21 @@
             for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
                 rowLength++;
                 htmlString.push("<tr rowindex='" + rowLength + "'>");
-                if (rowidx == 0) {
-                    //htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"right\"><input class=\"easyui-textbox input-width\" value='" + txtNumber + "' id='RANGE_" + tableIdx + "' name='RANGE'/>" + $(dlselectHTML).attr("onchange", "changeValue(this)").attr("name", "RANGE_UNIT").attr("id", "RANGE_UNIT_" + tableIdx + "")[0].outerHTML + "</td>");
-                    //htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"right\"><input class=\"easyui-textbox input-width\" value='' id='RESISTANCE_" + tableIdx + "' name='RESISTANCE' /></td>");
-                    htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"right\"><input class=\"my-textbox input-width\" value='" + txtNumber + "' id='RANGE_" + tableIdx + "_" + idx + "' name='RANGE'/>" + $(dlselectHTML).attr("onchange", "changeValue(this)").attr("name", "RANGE_UNIT").attr("id", "RANGE_UNIT_" + tableIdx + "_" + idx + "")[0].outerHTML + "</td>");
-                    htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"right\"><input class=\"my-textbox input-width\" value='' id='RESISTANCE_" + tableIdx + "_" + idx + "' name='RESISTANCE' /></td>");
 
-                }
+                var rowspan;
+                var name;
+                var id;
+                var txtVal;
+                var ddlhtml;
+                var ddlVal;
 
-                //for (var td1 = 0; td1 < 2; td1++) {
-                //    if (td1 == 0)//标准值这列
-                //        if (rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10)
-                //            standardValue = calculate(rowspanIdx)[rowidx];
-                //        else
-                //            standardValue = "";
-                //    var changerHTML = "onblur='changeBZ(this)'";
-                //    if (td1 == 1) {
-                //        changeHTML = "";
-                //        standardValue = "";
-                //    }
-                //    htmlString.push("<td  align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' " + changerHTML + " id='OUTPUT_VALUE_" + tableIdx + "_" + rowspanIdx + " name='OUTPUT_VALUE'/>" + $(dlselectHTML).attr("onchange", "changeValue(this)").attr("name", "OUTPUT_VALUE_UNIT").attr("id", "OUTPUT_VALUE_UNIT_" + tableIdx + "_"+rowspanIdx+")[0].outerHTML + "</td>");
-                //    //else
-                //    //  htmlString.push("<td  align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' />" + dlselectHTML + "</td>");
-                //}
+                if (rowidx == 0) {                                                          
+
+                    //量程
+                    htmlString.push(SetTDHtml(RuleAttribute, rowspanIdx, "RANGE", tableIdx + "_" + idx, txtNumber));
+                    //选用电阻阻值                   
+                   htmlString.push(SetTDHtml(RuleAttribute, rowspanIdx, "RESISTANCE", tableIdx + "_" + idx, ""));
+                }                
 
                 //输出示值              
                  if (rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10)
@@ -214,34 +188,21 @@
                  else
                     standardValue = "";
                  //var changerHTML = "onblur='changeBZ(this)'";
-                 var changerHTML = "onblur=''";
-                 //htmlString.push("<td  align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' " + changerHTML + " id='OUTPUT_VALUE_" + tableIdx + "_" + rowspanIdx + "' name='OUTPUT_VALUE'/>" + $(dlselectHTML).attr("onchange", "changeValue(this)").attr("name", "OUTPUT_VALUE_UNIT").attr("id", "OUTPUT_VALUE_UNIT_" + tableIdx + "_"+rowspanIdx+"")[0].outerHTML + "</td>");
-                 htmlString.push("<td  align=\"right\"><input class=\"my-textbox input-width\" value='" + standardValue + "' " + changerHTML + " id='OUTPUT_VALUE_" + tableIdx + "_" + idx + "_" + rowidx + "' name='OUTPUT_VALUE'/>" + $(dlselectHTML).attr("onchange", "changeValue(this)").attr("name", "OUTPUT_VALUE_UNIT").attr("id", "OUTPUT_VALUE_UNIT_" + tableIdx + "_" + idx + "_" + rowidx + "")[0].outerHTML + "</td>");
-
-                 //读数值
+                 var changerHTML = "onblur=''";                 
+                //输出示值                  
+                htmlString.push(SetTDHtml(RuleAttribute, 1, "OUTPUT_VALUE", tableIdx + "_" + idx + "_" + rowidx, standardValue));
+                //读数值
                  standardValue=""
-                 //htmlString.push("<td  align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' " + changerHTML + " id='READ_VALUE_" + tableIdx + "_" + rowspanIdx + "' name='READ_VALUE'/>" + $(dyselectHTML).attr("onchange", "changeValue(this)").attr("name", "READ_VALUE_UNIT").attr("id", "READ_VALUE_UNIT_" + tableIdx + "_"+rowspanIdx+"")[0].outerHTML + "</td>");
-                 htmlString.push("<td  align=\"right\"><input class=\"my-textbox input-width\" value='" + standardValue + "' " + changerHTML + " id='READ_VALUE_" + tableIdx + "_" + idx + "_" + rowidx + "' name='READ_VALUE'/>" + $(dyselectHTML).attr("onchange", "changeValue(this)").attr("name", "READ_VALUE_UNIT").attr("id", "READ_VALUE_UNIT_" + tableIdx + "_" + idx + "_" + rowidx + "")[0].outerHTML + "</td>");
-
+                 htmlString.push(SetTDHtml(RuleAttribute, 1, "READ_VALUE", tableIdx + "_" + idx + "_" + rowidx, ""));
                  //输出实际值
                  standardValue = ""
-                 //htmlString.push("<td  align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' " + changerHTML + " id='ACTUAL_OUTPUT_VALUE_" + tableIdx + "_" + rowspanIdx + "' name='ACTUAL_OUTPUT_VALUE'/>" + $(dlselectHTML).attr("onchange", "changeValue(this)").attr("name", "ACTUAL_OUTPUT_VALUE_UNIT").attr("id", "ACTUAL_OUTPUT_VALUE_UNIT_" + tableIdx + "_" + rowspanIdx + "")[0].outerHTML + "</td>");
-                 htmlString.push("<td  align=\"right\"><input class=\"my-textbox input-width\" value='" + standardValue + "' " + changerHTML + " id='ACTUAL_OUTPUT_VALUE_" + tableIdx + "_" + idx + "_" + rowidx + "' name='ACTUAL_OUTPUT_VALUE'/>" + $(dlselectHTML).attr("onchange", "changeValue(this)").attr("name", "ACTUAL_OUTPUT_VALUE_UNIT").attr("id", "ACTUAL_OUTPUT_VALUE_UNIT_" + tableIdx + "_" + idx + "_" + rowidx + "")[0].outerHTML + "</td>");
-
+                 htmlString.push(SetTDHtml(RuleAttribute, 1, "ACTUAL_OUTPUT_VALUE", tableIdx + "_" + idx + "_" + rowidx, ""));
 
                 //相对误差                 
-                 //htmlString.push("<td align=\"right\"><input  class=\"easyui-textbox input-width\" id='RELATIVE_ERROR_" + tableIdx + "_" + rowspanIdx + "' name='RELATIVE_ERROR'/></td>");
-                 htmlString.push("<td align=\"right\"><input  class=\"my-textbox input-width\" id='RELATIVE_ERROR_" + tableIdx + "_" + idx + "_" + rowidx + "' name='RELATIVE_ERROR'/></td>");
+                htmlString.push(SetTDHtml(RuleAttribute, 1, "RELATIVE_ERROR", tableIdx + "_" + idx + "_" + rowidx, ""));
 
                 //校准结果的不确定度                 
-                 //htmlString.push("<td><input  class=\"easyui-textbox input-width\" id='UNCERTAINTY_DEGREE_" + tableIdx + "_" + rowspanIdx + "' name='UNCERTAINTY_DEGREE'/></td>");
-                 htmlString.push("<td><input  class=\"my-textbox input-width\" id='UNCERTAINTY_DEGREE_" + tableIdx + "_" + idx + "_" + rowidx + "' name='UNCERTAINTY_DEGREE'/></td>");
-
-                //for (var td2 = 0; td2 < 2; td2++) {
-
-                //    htmlString.push("<td align=\"right\"><input  class=\"easyui-textbox input-width\" /></td>");
-                //}
-                //htmlString.push("<td><input  class=\"easyui-textbox input-width\" /></td>");
+                htmlString.push(SetTDHtml(RuleAttribute, 1, "UNCERTAINTY_DEGREE", tableIdx + "_" + idx + "_" + rowidx, ""));
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
@@ -316,28 +277,11 @@
                 returnNum = '-' + returnNum;
             return returnNum;
         }
-        //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-        function changeValue(obj) {            
-            var RANGE_UNIT_val = obj.value; //量程单位          
-            var id = obj.id.replace("RANGE_UNIT", "") + "_";//_表编号_量程编号_
-            //输出示值
-            changeUnit(id, RANGE_UNIT_val, "OUTPUT_VALUE_UNIT");
-
-            //输出实际值            
-            changeUnit(id, RANGE_UNIT_val, "ACTUAL_OUTPUT_VALUE_UNIT");
-
-        }
-        //联动单位
-        function changeUnit(id,val,selectName)
+        //离开事件，用于计算
+        function blurValue(obj)
         {
-            //输出实际值
-            $("select[name="+selectName+"]").each(function (a, b) {
-                if (b.id.indexOf(id) >= 0) {
-                    b.value = val;
-                }
-            });
-        }
 
+        }
         ///计算标准值
         var changeBZ = function (obj) {
             //获取电阻值
@@ -363,48 +307,19 @@
         {
             return true;
         }
-        //清空不需要保存的数据
-        function ClearNotSaveData()
-        {
-            //读数值
-            $("input[name=READ_VALUE]").each(function (a, b) {
-                $(b).val("");
-            });         
-            //$("select[name=READ_VALUE_UNIT]").each(function (a, b) {
-            //    $(b).val("");
-            //});
-            //输出实际值
-            $("input[name=ACTUAL_OUTPUT_VALUE]").each(function (a, b) {
-                $(b).val("");
-            });            
-            //$("select[name=ACTUAL_OUTPUT_VALUE_UNIT]").each(function (a, b) {
-            //    $(b).val("");
-            //});
-            //相对误差
-            $("input[name=RELATIVE_ERROR]").each(function (a, b) {
-                $(b).val("");
-            });            
-            //不确定度
-            $("input[name=UNCERTAINTY_DEGREE]").each(function (a, b) {
-                $(b).val("");
-            });
-            //注            
-            $("#REMARK").val("");
-            //结论
-            $("#CONCLUSION").val("");
-        }
+
         //保存
         function Save()
         {
             if (!CheckData()) {
                 return;
             }
-            ClearNotSaveData();
+            //ClearNotSaveData();//保存方案前需清空不需要数据
+            ClearBuBaoCunShuJu(RuleAttribute);
             var OldID = $("#hideID").val();
             var RULEID = $("#hideRULEID").val();            
             var SCHEMEID = $("#hideSCHEMEID").val();
-            var HTMLVALUE = encodeURI($("#divHtml").html());
-            //var HTMLVALUE = "";
+            var HTMLVALUE = encodeURI($("#divHtml").html());            
             var url = '/PROJECTTEMPLET/CreateSave';
             //var data = 'OldID=' + OldID + '&RULEID=' + RULEID + "&SCHEMEID=" + SCHEMEID + "&HTMLVALUE=" + HTMLVALUE;
             //data: {'uuids': uuids },
