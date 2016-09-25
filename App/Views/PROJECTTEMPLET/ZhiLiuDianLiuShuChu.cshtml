@@ -225,7 +225,7 @@
                 id = obj.id.replace(obj.name, "") + "_";
                 $("input[name=READ_VALUE]").each(function (a, b) {//读数值 
                     if (b.id.indexOf(id) >= 0 && b.value.trim() != "") {
-                        var hhID = b.id.replace("READ_VALUE", "");//行号
+                        var hhID = b.id.replace(b.name, "");//行号
                         var shijizhiID = "#ACTUAL_OUTPUT_VALUE" + hhID;//输出实际值ID                        
                         $(shijizhiID).val(CalculateShiJiZhi(obj.value.trim(), b.value.trim()));
                     }
@@ -234,10 +234,10 @@
             else if(obj.name=="READ_VALUE")//读数值
             {               
                 var DZID = obj.id.replace(obj.name, "");
-                DZID = DZID.substr(0, obj.id.lastIndexOf("_"));
+                DZID = DZID.substr(0, DZID.lastIndexOf("_"));
                 var hhID = obj.id.replace(obj.name, "");//行号
                 var shijizhiID = "#ACTUAL_OUTPUT_VALUE" + hhID;//输出实际值ID 
-                var DianZuID = "#READ_VALUE" + DZID;//电阻ID  
+                var DianZuID = "#RESISTANCE" + DZID;//电阻ID  
                 $(shijizhiID).val(CalculateShiJiZhi($(DianZuID).val(), obj.value.trim()));
             }
         }
