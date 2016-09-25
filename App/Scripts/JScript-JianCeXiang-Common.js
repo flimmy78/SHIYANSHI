@@ -47,7 +47,7 @@ RuleAttributeArray = [
                 BuBaoCunShuJu: 'READ_VALUE,ACTUAL_OUTPUT_VALUE,RELATIVE_ERROR,UNCERTAINTY_DEGREE,REMARK,CONCLUSION',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',OUTPUT_VALUE,ACTUAL_OUTPUT_VALUE,'
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
             }]
     }
 ];
@@ -136,8 +136,9 @@ function GetDanWeiDDLHtml(RuleAttribute,ddlName, DanWeiCode) {
     }
     var ddlArray = AttributeValue.split(';');
     var ddlNameNew = "(" + ddlName + ")"
+    ddlNameNew = ddlNameNew.toUpperCase();
     $.each(ddlArray, function (i, item) {
-        if (item == null || item.trim() == "" || item.indexOf(ddlNameNew) < 0 || item.split('|').length<2) {
+        if (item == null || item.trim() == "" || item.toUpperCase().indexOf(ddlNameNew) < 0 || item.split('|').length<2) {
             return true;
         }
         var dw = item.split('|')[0];
@@ -293,6 +294,31 @@ Number.prototype.toFixed = function toFixed(s) {
     if (IsFuShu)
         returnNum = '-' + returnNum;
     return returnNum;
+}
+//显示隐藏添加通道按钮
+function ShowOrHideDuoTongDao(RuleAttribute)
+{
+    if(RuleAttribute==null)
+    {
+        $("#btnDuoTongDao").hide();        
+    }
+    else
+    {
+        var AttributeValue = GetAttributeValue(RuleAttribute, "DuoTongDao");
+        if(AttributeValue!=null && AttributeValue.trim().toUpperCase()=="SHOW")
+        {
+            $("#btnDuoTongDao").show();           
+        }
+        else
+        {
+            $("#btnDuoTongDao").hide();           
+        }
+    }
+}
+//按钮初始化（显示、隐藏）
+function BtnInit(RuleAttribute)
+{
+    ShowOrHideDuoTongDao(RuleAttribute);
 }
 //---------------------------------
 

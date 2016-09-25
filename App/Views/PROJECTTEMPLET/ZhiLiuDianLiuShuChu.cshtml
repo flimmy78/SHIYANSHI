@@ -16,7 +16,7 @@
             <tr>
 
                 <td>
-                    <!-- <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a> -->
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()" id="btnDuoTongDao">增加通道</a>
                     <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="Save()">保存检测项</a>
                     <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="Reset()">重置检测项</a>
                 </td>
@@ -119,6 +119,7 @@
 <script type="text/javascript" language="javascript">
     var RuleID = $("#hideRULEID").val();//检测项目ID
     var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
+    BtnInit(RuleAttribute);
         //共有的通道数量
         var tableIdx = 1;
         //创建通道
