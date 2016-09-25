@@ -78,7 +78,12 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
     {
         return;
     }
-    var id = obj.id.replace(obj.name, "") + "_";//_表编号_量程编号_     
+    var id = obj.id.replace(obj.name, "");
+    if (id.split('_').length <= 2)
+    {
+        id = + "_";//_表编号_量程编号_
+    }
+    
     var ddlArray = LianDongDanWeiDDLAttribute.split(';');
     $.each(ddlArray, function (i, item) {
         var biangeng="("+obj.name+")|";
