@@ -119,6 +119,7 @@
 <script type="text/javascript" language="javascript">
     var RuleID = $("#hideRULEID").val();//检测项目ID
     var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
+    debugger;
     BtnInit(RuleAttribute);
         //共有的通道数量
         var tableIdx = 1;
@@ -210,7 +211,50 @@
         //离开事件，用于计算
         function blurValue(obj)
         {
+            
+            LianDongShiJiZhi(obj);
+        }
+    //联动标准值
+    //输出实际值计算：【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值；【选用电阻阻值】没有数值时，输出实际值=读数值
+        function LianDongShiJiZhi(obj)
+        {
 
+            if (obj.name == "RESISTANCE" && obj.value.trim() != "")//选用电阻阻值变更
+            {
+                
+                id = obj.id.replace(obj.name, "") + "_";
+                $("input[name=READ_VALUE]").each(function (a, b) {//读数值 
+                    if (b.id.indexOf(id) >= 0 && b.value.trim() != "") {
+                        var hhID = b.id.replace("READ_VALUE", "");//行号
+                        var shijizhiID = "#ACTUAL_OUTPUT_VALUE" + hhID;//输出实际值ID                        
+                        $(shijizhiID).val(CalculateShiJiZhi(obj.value.trim(), b.value.trim()));
+                    }
+                });           
+            }
+            else if(obj.name=="READ_VALUE")//读数值
+            {               
+                var DZID = obj.id.replace(obj.name, "");
+                DZID = DZID.substr(0, obj.id.lastIndexOf("_"));
+                var hhID = obj.id.replace(obj.name, "");//行号
+                var shijizhiID = "#ACTUAL_OUTPUT_VALUE" + hhID;//输出实际值ID 
+                var DianZuID = "#READ_VALUE" + DZID;//电阻ID  
+                $(shijizhiID).val(CalculateShiJiZhi($(DianZuID).val(), obj.value.trim()));
+            }
+        }
+        //计算输出实际值
+        function CalculateShiJiZhi(DianZu,DuShuZhi)
+        {
+            if (DianZu == "" || DuShuZhi == "") {//【选用电阻阻值】没有数值时，输出实际值=读数值
+                return DuShuZhi;
+            }
+            else if (DianZu.trim() == "0") {
+                return "";
+            }
+            else//【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值
+            {
+                var value = parseFloat(DuShuZhi.trim()) / parseFloat(DianZu.trim());
+                return value;
+            }            
         }
         ///计算标准值
         var changeBZ = function (obj) {

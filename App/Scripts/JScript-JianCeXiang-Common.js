@@ -73,7 +73,7 @@ function GetRuleAttributeByRuleID(RuleID) {
 //检测项单位联动下拉框联动
 //obj:下拉框控件
 //LianDongDanWeiDDLAttribute:检测项单位联动下拉框联动控件信息
-function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
+function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {    
     if (obj == null || LianDongDanWeiDDLAttribute == null || LianDongDanWeiDDLAttribute.trim() == "")
     {
         return;
@@ -175,7 +175,7 @@ function SetTDHtml(RuleAttribute, rowspan, name, id, rowidx, txtVal) {
         txtVal = CalculateForAddLianCheng(RuleAttribute, rowidx, name);
     }
     var htmlString = [];
-    id = name + "_" + id;
+    //id = name + "_" + id;
     htmlString.push("<td rowspan='" + rowspan + "' align=\"right\"> ");
     htmlString.push("<input class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='blurValue(this)'/>");
     if (ddlHtml != null && ddlHtml.trim() != "") {        
