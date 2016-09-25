@@ -63,14 +63,14 @@ namespace Langben.App.Controllers
             return View();
         }
         /// <summary>
-        /// 创建
+        /// 保存
         /// </summary>
         /// <param name="OldID">原编号</param>
         /// <param name="RULEID">规程编号</param>
         /// <param name="SCHEMEID">方案编号</param>
         /// <param name="HTMLVALUE">html</param>
         /// <returns></returns>
-        public ActionResult CreateSave(string OldID, string RULEID, string SCHEMEID,string HTMLVALUE)
+        public ActionResult Save(string OldID, string RULEID, string SCHEMEID,string HTMLVALUE)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             PROJECTTEMPLET entity = new PROJECTTEMPLET();

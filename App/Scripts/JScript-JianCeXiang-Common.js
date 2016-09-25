@@ -51,7 +51,8 @@ RuleAttributeArray = [
             }]
     }
 ];
-
+var RuleID = $("#hideRULEID").val();//检测项目ID
+var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
 //根据检测项ID获取控制信息
 //RuleID:检测项目ID
 function GetRuleAttributeByRuleID(RuleID) {
@@ -117,12 +118,12 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
 //RuleAttribute:检测项属性
 //ddlName:检查项中的属性控件名称
 //DanWeiCode:单位代码（如果有值直接取，RuleAttribute、ddlName失效)
-function GetDanWeiDDLHtml(RuleAttribute,ddlName, DanWeiCode) {
+function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
     var Result = null;
 
     if (DanWeiCode != null && DanWeiCode.trim() != "") {//如果有有单位代码直接取，RuleAttribute、ddlName失效
         $.each(DanWeiDDLHtmlArray, function (i, item) {
-            if (item == null || item.Code != Code) {
+            if (item == null || item.Code != DanWeiCode) {
                 return true;
             }
             Result = item.Value;
@@ -135,7 +136,7 @@ function GetDanWeiDDLHtml(RuleAttribute,ddlName, DanWeiCode) {
     {
         return "";
     }
-    var AttributeValue = GetAttributeValue(RuleAttribute, "DanWeiHtmlDDL");
+    var AttributeValue = GetAttributeValue("DanWeiHtmlDDL");
     if (AttributeValue == null || AttributeValue.trim()=="") {
         return "";
     }
@@ -160,26 +161,25 @@ function GetDanWeiDDLHtml(RuleAttribute,ddlName, DanWeiCode) {
 
 //设置TD的html
 //RuleAttribute:检测项目属性
-//rowspan合并单元格行数
+//rowspan合并单元格行数SetTDHtml
 //name(控件名称),
 //id(控件id不包含name部分),
 //rowidx:行号
 //txtVal(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
-function SetTDHtml(RuleAttribute, rowspan, name, id, rowidx, txtVal) {
+function SetTDHtml(rowspan, name, id, rowidx, txtVal) {
     //debugger;
     var ddlName = name + "_UNIT";//下拉框名
     var ddlId = ddlName + "_" + id;//下拉框ID
     var id = name + "_" + id;//输入框id
-    var ddlHtml = GetDanWeiDDLHtml(RuleAttribute, ddlName, null);//单位下拉框html
+    var ddlHtml = GetDanWeiDDLHtml(ddlName, null);//单位下拉框html
     if ((txtVal == null || txtVal.trim() == "") && rowidx!=null) {
-        txtVal = CalculateForAddLianCheng(RuleAttribute, rowidx, name);
+        txtVal = CalculateForAddLianCheng(rowidx, name);
     }
-    var htmlString = [];
-    //id = name + "_" + id;
+    var htmlString = [];   
     htmlString.push("<td rowspan='" + rowspan + "' align=\"right\"> ");
     htmlString.push("<input class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='blurValue(this)'/>");
     if (ddlHtml != null && ddlHtml.trim() != "") {        
-        var AttributeValue = GetAttributeValue(RuleAttribute, "LianDongDanWeiDDL");
+        var AttributeValue = GetAttributeValue("LianDongDanWeiDDL");
         htmlString.push($(ddlHtml).attr("onchange", "LianDongDanWeiDDL(this,'" + AttributeValue + "')").attr("name", ddlName).attr("id", ddlId)[0].outerHTML);
     }
     htmlString.push("</td>");
@@ -188,7 +188,9 @@ function SetTDHtml(RuleAttribute, rowspan, name, id, rowidx, txtVal) {
 
 }
 //根据属性名获取属性值
-function GetAttributeValue(RuleAttribute,Name)
+//RuleAttribute：检查项属性对象
+//Name:属性名称
+function GetAttributeValue(Name)
 {
     if(RuleAttribute==null || Name==null || Name.trim()=="" ||
        RuleAttribute.Attributes == null || RuleAttribute.Attributes[0] == null || RuleAttribute.Attributes[0][Name] == null
@@ -200,9 +202,9 @@ function GetAttributeValue(RuleAttribute,Name)
     return RuleAttribute.Attributes[0][Name].trim();
 }
 //清空不需要保存的数据
-function ClearBuBaoCunShuJu(RuleAttribute) {
+function ClearBuBaoCunShuJu() {
  
-    var AttributeValue = GetAttributeValue(RuleAttribute, "BuBaoCunShuJu");
+    var AttributeValue = GetAttributeValue("BuBaoCunShuJu");
     if (AttributeValue != null && AttributeValue.trim()!="") {
         var BuBaoCunShuJuAttribute = AttributeValue.split(',');
         $.each(BuBaoCunShuJuAttribute, function (i, item) {
@@ -219,12 +221,12 @@ function ClearBuBaoCunShuJu(RuleAttribute) {
 
 //添加量程时自动根据行号计算赋值数据
 //RuleAttribute:检测项目属性，Rowidx：行号，objName:控件名称
-function CalculateForAddLianCheng(RuleAttribute, Rowidx,objName) {
+function CalculateForAddLianCheng(Rowidx,objName) {
     if (RuleAttribute == null || Rowidx == null)
     {
         return "";
     }
-    var AttributeValue = GetAttributeValue(RuleAttribute, "CalculateForAddLianCheng");
+    var AttributeValue = GetAttributeValue("CalculateForAddLianCheng");
     if (AttributeValue == null || AttributeValue.trim() == "")
     {
         return "";
@@ -301,7 +303,7 @@ Number.prototype.toFixed = function toFixed(s) {
     return returnNum;
 }
 //显示隐藏添加通道按钮
-function ShowOrHideDuoTongDao(RuleAttribute)
+function ShowOrHideDuoTongDao()
 {
     if(RuleAttribute==null)
     {
@@ -309,7 +311,7 @@ function ShowOrHideDuoTongDao(RuleAttribute)
     }
     else
     {
-        var AttributeValue = GetAttributeValue(RuleAttribute, "DuoTongDao");
+        var AttributeValue = GetAttributeValue("DuoTongDao");
         if(AttributeValue!=null && AttributeValue.trim().toUpperCase()=="SHOW")
         {
             $("#btnDuoTongDao").show();           
@@ -321,9 +323,58 @@ function ShowOrHideDuoTongDao(RuleAttribute)
     }
 }
 //按钮初始化（显示、隐藏）
-function BtnInit(RuleAttribute)
+function BtnInit()
 {
-    ShowOrHideDuoTongDao(RuleAttribute);
+    ShowOrHideDuoTongDao();
+}
+//数据验证
+function CheckData() {
+    return true;
+}
+//保存
+function Save() {
+    if (!CheckData()) {
+        return;
+    }
+    //保存方案前需清空不需要数据
+    ClearBuBaoCunShuJu();
+    var OldID = $("#hideID").val();
+    var RULEID = $("#hideRULEID").val();
+    var SCHEMEID = $("#hideSCHEMEID").val();
+    var HTMLVALUE = encodeURI($("#divHtml").html());    
+    debugger;
+    //获取空对象用于保存添加的信息
+    $.ajax({
+        type: 'post', //使用post方法访问后台
+        dataType: "json", //返回json格式的数据
+        url: '/PROJECTTEMPLET/Save', //要访问的后台地址      
+        contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式        
+        data: { 'OldID': OldID, 'RULEID': RULEID, 'SCHEMEID': SCHEMEID, 'HTMLVALUE': HTMLVALUE },
+        beforeSend: function () {
+            //InitAlertJS();
+        },
+        complete: function () {
+        }, //AJAX请求完成时隐藏loading提示
+
+        success: function (res) {//msg为返回的数据，在这里做数据绑定               
+            if (res.Code == 1) {
+                if ($("#hideID").val().trim() == "") {
+                    $("#hideID").val(res.Message);
+                }
+                $.messager.alert('操作提示', "操作成功！", 'info');
+            }
+            else {
+                $.messager.alert('操作提示', res.Message, 'info');
+            }
+            if ($("#hideID").val() != "") {
+                $("#UNDERTAKE_LABORATORYID").attr("disabled", "disabled");
+            }
+
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
+        }
+    });
 }
 //---------------------------------
 

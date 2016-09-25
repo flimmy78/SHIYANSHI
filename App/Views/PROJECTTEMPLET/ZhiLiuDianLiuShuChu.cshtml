@@ -117,8 +117,8 @@
 <!--/增加量程弹层-->
 <script src="/Scripts/JScript-JianCeXiang-Common.js"></script>
 <script type="text/javascript" language="javascript">
-    var RuleID = $("#hideRULEID").val();//检测项目ID
-    var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
+    //var RuleID = $("#hideRULEID").val();//检测项目ID
+    //var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
     debugger;
     BtnInit(RuleAttribute);
         //共有的通道数量
@@ -180,24 +180,24 @@
                 if (rowidx == 0) {                                                          
 
                     //量程
-                    htmlString.push(SetTDHtml(RuleAttribute, rowspanIdx, "RANGE", lianChengID, null,txtNumber));
+                    htmlString.push(SetTDHtml(rowspanIdx, "RANGE", lianChengID, null,txtNumber));
                     //选用电阻阻值                   
-                    htmlString.push(SetTDHtml(RuleAttribute, rowspanIdx, "RESISTANCE", lianChengID, null,""));
+                    htmlString.push(SetTDHtml(rowspanIdx, "RESISTANCE", lianChengID, null,""));
                 }                
 
                 //输出示值              
                  
                 var changerHTML = "onblur=''";                
                 //输出示值                  
-                htmlString.push(SetTDHtml(RuleAttribute, 1, "OUTPUT_VALUE", HangHaoID, rowidx,""));
+                htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx,""));
                 //读数值                
-                 htmlString.push(SetTDHtml(RuleAttribute, 1, "READ_VALUE", HangHaoID, rowidx,""));
+                 htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx,""));
                  //输出实际值                 
-                 htmlString.push(SetTDHtml(RuleAttribute, 1, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx,""));
+                 htmlString.push(SetTDHtml(1, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx,""));
                 //相对误差                 
-                 htmlString.push(SetTDHtml(RuleAttribute, 1, "RELATIVE_ERROR", HangHaoID, rowidx,""));
+                 htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx,""));
                 //校准结果的不确定度                 
-                 htmlString.push(SetTDHtml(RuleAttribute, 1, "UNCERTAINTY_DEGREE", HangHaoID, rowidx,""));
+                 htmlString.push(SetTDHtml( 1, "UNCERTAINTY_DEGREE", HangHaoID, rowidx,""));
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
@@ -205,13 +205,12 @@
             $.parser.parse(tagRow);//渲染easyui组建
             $('#dlg').window('close');
         }
-        var txtNumber = "";
-        var pointLen = "";
+        //var txtNumber = "";
+        //var pointLen = "";
         
         //离开事件，用于计算
         function blurValue(obj)
-        {
-            
+        {            
             LianDongShiJiZhi(obj);
         }
     //联动标准值
@@ -255,85 +254,9 @@
                 var value = parseFloat(DuShuZhi.trim()) / parseFloat(DianZu.trim());
                 return value;
             }            
-        }
-        ///计算标准值
-        var changeBZ = function (obj) {
-            //获取电阻值
-            var dzz = $(obj).parent().parent().parent().find("tr:eq(0)").find("td:eq(1)").find("input").val();
-            //获取读数值
-            var dsz = "";
-            var idx = "";
-            if ($(obj).parent().parent().find('td').eq(0).attr("rowspan") == undefined) {
-                dsz = $(obj).parent().parent().find("td:eq(1)").find("input").val();
-                idx = 2;
-            }
-            else {
-                dsz = $(obj).parent().parent().find("td:eq(3)").find("input").val();
-                idx = 4;
-            }
-            if (dzz == "")
-                $(obj).parent().parent().find('td').eq(idx).find('input').val(parseFloat(dsz).toFixed(pointLen));
-            else
-                $(obj).parent().parent().find('td').eq(idx).find('input').val((parseFloat(dsz) / parseFloat(dzz)).toFixed(pointLen));
-        }
-        //数据验证
-        function CheckData()
-        {
-            return true;
-        }
+        }       
 
-        //保存
-        function Save()
-        {
-            if (!CheckData()) {
-                return;
-            }
-            //ClearNotSaveData();//保存方案前需清空不需要数据
-            ClearBuBaoCunShuJu(RuleAttribute);
-            var OldID = $("#hideID").val();
-            var RULEID = $("#hideRULEID").val();            
-            var SCHEMEID = $("#hideSCHEMEID").val();
-            var HTMLVALUE = encodeURI($("#divHtml").html());            
-            var url = '/PROJECTTEMPLET/CreateSave';
-            //var data = 'OldID=' + OldID + '&RULEID=' + RULEID + "&SCHEMEID=" + SCHEMEID + "&HTMLVALUE=" + HTMLVALUE;
-            //data: {'uuids': uuids },
-            debugger;
-            //获取空对象用于保存添加的信息
-            $.ajax({
-                type: 'post', //使用post方法访问后台
-                dataType: "json", //返回json格式的数据
-                //url: '/SCHEME/CreateSave', //要访问的后台地址
-                url: url,
-                contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
-                //data: 'NAME=' + NAME + "&UNDERTAKE_LABORATORYID=" + UNDERTAKE_LABORATORYID + "&RULEIDs=" + RULEIDs, //要发送的数据
-                //data: data,
-                data:{'OldID':OldID,'RULEID':RULEID,'SCHEMEID':SCHEMEID,'HTMLVALUE':HTMLVALUE},
-                beforeSend: function () {
-                    //InitAlertJS();
-                },
-                complete: function () {
-                }, //AJAX请求完成时隐藏loading提示
 
-                success: function (res) {//msg为返回的数据，在这里做数据绑定               
-                    if (res.Code == 1) {
-                        if ($("#hideID").val().trim() == "") {
-                            $("#hideID").val(res.Message);
-                        }
-                        $.messager.alert('操作提示', "操作成功！", 'info');
-                    }
-                    else {
-                        $.messager.alert('操作提示', res.Message, 'info');
-                    }
-                    if ($("#hideID").val() != "") {
-                        $("#UNDERTAKE_LABORATORYID").attr("disabled", "disabled");
-                    }
-
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
-                }
-            });
-        }
 </script>
 
 
