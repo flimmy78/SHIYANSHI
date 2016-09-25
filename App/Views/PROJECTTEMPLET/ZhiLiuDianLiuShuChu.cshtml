@@ -1,0 +1,295 @@
+﻿@model Langben.DAL.SCHEME_RULE
+
+@{
+    Layout = "~/Views/Shared/Edit.cshtml";
+}
+@using Common
+@using Models
+@section CurentPlace {
+    修改
+}
+
+
+<div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+    <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+        <table>
+            <tr>
+
+                <td>
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()" id="btnDuoTongDao">增加通道</a>
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="Save()">保存检测项</a>
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="Reset()">重置检测项</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<input type="hidden" id="hideID" value="@ViewData["ID"]"/><!--主键-->
+<input type="hidden" id="hideRULEID" value="@ViewData["RULEID"]"/><!--检测项-->
+<input type="hidden" id="hideSCHEMEID" value="@ViewData["SCHEMEID"]"/><!--方案编号-->
+<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;" id="divHtml">    
+    <input type="hidden" id="rowindex" value="0" />
+    <div class="mt10" id="tongdao">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_1">
+            <thead>
+                <tr>
+                    <th rowspan="2" align="center" width="140">量程</th>
+                    <th rowspan="2" align="center" width="140">选用电阻阻值（Ω）</th>
+                    <th rowspan="2" align="center"> 输出示值 </th>
+                    <th rowspan="2" align="center"> 读数值 </th>
+                    <th rowspan="2" align="center"> 输出实际值 </th>
+                    <th rowspan="2" align="center">相对误差</th>
+                    <th align="center">校准结果的不确定度</th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        U(K = <select class="my-combox" name="state" style="width:30px;" id="KVALUE">
+                            <option value="">2 </option>
+                            <option value="">3</option>
+                            <option value="">√3</option>
+
+
+                        </select>)
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody id="tbody_1"></tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open'); set('1')">增加量程</a></td>
+
+                </tr>
+            </tfoot>
+        </table>
+
+
+
+    </div>
+
+    <div class="mt10">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
+
+            <tr>
+                <th width="40">注：</th>
+                <td colspan="6"><input class="my-textbox input-width" name="REMARK" data-options="multiline:true" style="height:30px; width:95%" id="REMARK"></td>
+            </tr>
+            <tr>
+                <th width="40">结论：</th>
+                <td colspan="6"><input class="my-textbox input-width" name="CONCLUSION" data-options="multiline:true" style="height:30px; width:95%" id="CONCLUSION"></td>
+            </tr>
+
+
+        </table>
+    </div>
+
+
+</div>
+
+<!--增加量程弹层-->
+<div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return CreateRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+    <table>
+        <tr>
+            <td width="80" align="right">量程值：</td>
+            <td><input type="text" id="txtNumber" name="txtNumber" class="easyui-textbox required digits" style="width:200px" /></td>
+        </tr>
+        <tr>
+            <td align="right">检测点数：</td>
+            <td><input type="text" id="txtPoint" name="txtPoint" class="easyui-textbox required digits" style="width:200px" /></td>
+        </tr>
+        <tr>
+            <td align="right">小数点位数：</td>
+            <td><input type="text" id="txtPointLen" name="txtPointLen" class="easyui-textbox required digits" style="width:200px" /></td>
+        </tr>
+    </table>
+</div>
+<!--/增加量程弹层-->
+<script src="/Scripts/JScript-JianCeXiang-Common.js"></script>
+<script type="text/javascript" language="javascript">
+    var RuleID = $("#hideRULEID").val();//检测项目ID
+    var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
+    BtnInit(RuleAttribute);
+        //共有的通道数量
+        var tableIdx = 1;
+        //创建通道
+        function CreateTable() {
+            tableIdx++;
+            var tfoot = " <tfoot>"
+                + "<tr><td colspan='7'><a href='javascript:void(0)' class='easyui-linkbutton' data-options=\"plain:true,iconCls:'icon-add'\" onclick=\"$('#dlg').dialog('open');set('" + tableIdx + "')\">增加量程</a></td></tr> </tfoot>";
+            var table = "<table width='100%' border='0' cellspacing='0' cellpadding='0' class='tbl mt10' id='tongdao_" + tableIdx + "'>"
+                + "<thead><tr><th rowspan='2' align='center' width='140'>量程</th><th rowspan='2' align='center' width='140'>选用电阻阻值（Ω）</th><th rowspan='2' align='center'> 输出示值 </th><th rowspan='2' align='center'> 读数值 </th><th rowspan='2' align='center'> 输出实际值 </th><th rowspan='2' align='center'>相对误差</th><th align='center'>校准结果的不确定度</th></tr><tr><th align='center'>U(K = <select class='easyui-combobox' name='state' style='width:30px;'><option value=''>2 </option><option value=''>3</option><option value=''>√3</option></select>)</th></tr></thead>"
+                + "<tbody id='tbody_" + tableIdx + "'></tbody>"
+                + tfoot
+                + "</table>";
+
+            var tagobj = $(table).appendTo($('#tongdao'));
+            $.parser.parse(tagobj);
+
+
+        };
+        //增加量程
+        function set(idx) {
+            //$("#rowindex").val(idx);
+            // alert($("#rowindex").val());
+        }
+        //重置
+        function Reset()
+        {
+            //表格清空
+            $("#tbody_1").html("");
+            //注            
+            $("#REMARK").val("");
+            //结论
+            $("#CONCLUSION").val("");
+        }
+        function CreateRow() {
+                                 
+            var idx = parseInt($("#rowindex").val());//第几个量程
+            idx = idx + 1;
+            $("#rowindex").val(idx);
+
+            var rowspanIdx = $("#txtPoint").val();     //检测点数
+            txtNumber = $("#txtNumber").val(); //量程
+            var standardValue = "";
+            var htmlString = [];
+            var rowLength = $("#tbody_" + idx + " tr").length;
+            var lianChengID = tableIdx + "_" + idx;//（量程ID）第几个通道_第几个量程
+            for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
+                rowLength++;
+                htmlString.push("<tr rowindex='" + rowLength + "'>");
+
+                var rowspan;
+                var name;
+                var id;
+                var txtVal;
+                var ddlhtml;
+                var ddlVal;
+                var HangHaoID = lianChengID + "_" + rowidx;//（行号ID)量程ID_第几行
+                if (rowidx == 0) {                                                          
+
+                    //量程
+                    htmlString.push(SetTDHtml(RuleAttribute, rowspanIdx, "RANGE", lianChengID, null,txtNumber));
+                    //选用电阻阻值                   
+                    htmlString.push(SetTDHtml(RuleAttribute, rowspanIdx, "RESISTANCE", lianChengID, null,""));
+                }                
+
+                //输出示值              
+                 
+                var changerHTML = "onblur=''";                
+                //输出示值                  
+                htmlString.push(SetTDHtml(RuleAttribute, 1, "OUTPUT_VALUE", HangHaoID, rowidx,""));
+                //读数值                
+                 htmlString.push(SetTDHtml(RuleAttribute, 1, "READ_VALUE", HangHaoID, rowidx,""));
+                 //输出实际值                 
+                 htmlString.push(SetTDHtml(RuleAttribute, 1, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx,""));
+                //相对误差                 
+                 htmlString.push(SetTDHtml(RuleAttribute, 1, "RELATIVE_ERROR", HangHaoID, rowidx,""));
+                //校准结果的不确定度                 
+                 htmlString.push(SetTDHtml(RuleAttribute, 1, "UNCERTAINTY_DEGREE", HangHaoID, rowidx,""));
+                htmlString.push("</tr>");
+            }
+            htmlString = htmlString.join("");
+            var tagRow = $("#tbody_" + tableIdx).append(htmlString);
+            $.parser.parse(tagRow);//渲染easyui组建
+            $('#dlg').window('close');
+        }
+        var txtNumber = "";
+        var pointLen = "";
+        
+        //离开事件，用于计算
+        function blurValue(obj)
+        {
+
+        }
+        ///计算标准值
+        var changeBZ = function (obj) {
+            //获取电阻值
+            var dzz = $(obj).parent().parent().parent().find("tr:eq(0)").find("td:eq(1)").find("input").val();
+            //获取读数值
+            var dsz = "";
+            var idx = "";
+            if ($(obj).parent().parent().find('td').eq(0).attr("rowspan") == undefined) {
+                dsz = $(obj).parent().parent().find("td:eq(1)").find("input").val();
+                idx = 2;
+            }
+            else {
+                dsz = $(obj).parent().parent().find("td:eq(3)").find("input").val();
+                idx = 4;
+            }
+            if (dzz == "")
+                $(obj).parent().parent().find('td').eq(idx).find('input').val(parseFloat(dsz).toFixed(pointLen));
+            else
+                $(obj).parent().parent().find('td').eq(idx).find('input').val((parseFloat(dsz) / parseFloat(dzz)).toFixed(pointLen));
+        }
+        //数据验证
+        function CheckData()
+        {
+            return true;
+        }
+
+        //保存
+        function Save()
+        {
+            if (!CheckData()) {
+                return;
+            }
+            //ClearNotSaveData();//保存方案前需清空不需要数据
+            ClearBuBaoCunShuJu(RuleAttribute);
+            var OldID = $("#hideID").val();
+            var RULEID = $("#hideRULEID").val();            
+            var SCHEMEID = $("#hideSCHEMEID").val();
+            var HTMLVALUE = encodeURI($("#divHtml").html());            
+            var url = '/PROJECTTEMPLET/CreateSave';
+            //var data = 'OldID=' + OldID + '&RULEID=' + RULEID + "&SCHEMEID=" + SCHEMEID + "&HTMLVALUE=" + HTMLVALUE;
+            //data: {'uuids': uuids },
+            debugger;
+            //获取空对象用于保存添加的信息
+            $.ajax({
+                type: 'post', //使用post方法访问后台
+                dataType: "json", //返回json格式的数据
+                //url: '/SCHEME/CreateSave', //要访问的后台地址
+                url: url,
+                contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
+                //data: 'NAME=' + NAME + "&UNDERTAKE_LABORATORYID=" + UNDERTAKE_LABORATORYID + "&RULEIDs=" + RULEIDs, //要发送的数据
+                //data: data,
+                data:{'OldID':OldID,'RULEID':RULEID,'SCHEMEID':SCHEMEID,'HTMLVALUE':HTMLVALUE},
+                beforeSend: function () {
+                    //InitAlertJS();
+                },
+                complete: function () {
+                }, //AJAX请求完成时隐藏loading提示
+
+                success: function (res) {//msg为返回的数据，在这里做数据绑定               
+                    if (res.Code == 1) {
+                        if ($("#hideID").val().trim() == "") {
+                            $("#hideID").val(res.Message);
+                        }
+                        $.messager.alert('操作提示', "操作成功！", 'info');
+                    }
+                    else {
+                        $.messager.alert('操作提示', res.Message, 'info');
+                    }
+                    if ($("#hideID").val() != "") {
+                        $("#UNDERTAKE_LABORATORYID").attr("disabled", "disabled");
+                    }
+
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
+                }
+            });
+        }
+</script>
+
+

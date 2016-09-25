@@ -44,10 +44,11 @@ namespace Langben.App.Controllers
         /// <param name="id">主键</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult ZLDLSC(string ID,string RULEID, string SCHEMEID)
+        public ActionResult ZhiLiuDianLiuShuChu(string ID,string RULEID, string SCHEMEID,string LianDongDDL)
         {
             ViewBag.Id = ID;
             ViewData["ID"] = ID;
+            
             if(ID==null || ID.Trim()=="")
             {
                 DAL.PROJECTTEMPLET model= m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
