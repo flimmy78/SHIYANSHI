@@ -72,11 +72,11 @@
 
             <tr>
                 <th width="40">注：</th>
-                <td colspan="6"><input class="my-textbox input-width" name="" data-options="multiline:true" style="height:30px; width:95%" id="REMARK"></td>
+                <td colspan="6"><input class="my-textbox input-width" name="REMARK" data-options="multiline:true" style="height:30px; width:95%" id="REMARK"></td>
             </tr>
             <tr>
                 <th width="40">结论：</th>
-                <td colspan="6"><input class="my-textbox input-width" name="" data-options="multiline:true" style="height:30px; width:95%" id="CONCLUSION"></td>
+                <td colspan="6"><input class="my-textbox input-width" name="CONCLUSION" data-options="multiline:true" style="height:30px; width:95%" id="CONCLUSION"></td>
             </tr>
 
 
@@ -163,6 +163,7 @@
             var standardValue = "";
             var htmlString = [];
             var rowLength = $("#tbody_" + idx + " tr").length;
+            var lianChengID = tableIdx + "_" + idx;//（量程ID）第几个通道_第几个量程
             for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
                 rowLength++;
                 htmlString.push("<tr rowindex='" + rowLength + "'>");
@@ -173,36 +174,28 @@
                 var txtVal;
                 var ddlhtml;
                 var ddlVal;
-
+                var HangHaoID = lianChengID + "_" + rowidx;//（行号ID)量程ID_第几行
                 if (rowidx == 0) {                                                          
 
                     //量程
-                    htmlString.push(SetTDHtml(RuleAttribute, rowspanIdx, "RANGE", tableIdx + "_" + idx, txtNumber));
+                    htmlString.push(SetTDHtml(RuleAttribute, rowspanIdx, "RANGE", lianChengID, null,txtNumber));
                     //选用电阻阻值                   
-                   htmlString.push(SetTDHtml(RuleAttribute, rowspanIdx, "RESISTANCE", tableIdx + "_" + idx, ""));
+                    htmlString.push(SetTDHtml(RuleAttribute, rowspanIdx, "RESISTANCE", lianChengID, null,""));
                 }                
 
                 //输出示值              
-                 if (rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10)
-                    standardValue = calculate(rowspanIdx)[rowidx];
-                 else
-                    standardValue = "";
-                 //var changerHTML = "onblur='changeBZ(this)'";
-                 var changerHTML = "onblur=''";                 
+                 
+                var changerHTML = "onblur=''";                
                 //输出示值                  
-                htmlString.push(SetTDHtml(RuleAttribute, 1, "OUTPUT_VALUE", tableIdx + "_" + idx + "_" + rowidx, standardValue));
-                //读数值
-                 standardValue=""
-                 htmlString.push(SetTDHtml(RuleAttribute, 1, "READ_VALUE", tableIdx + "_" + idx + "_" + rowidx, ""));
-                 //输出实际值
-                 standardValue = ""
-                 htmlString.push(SetTDHtml(RuleAttribute, 1, "ACTUAL_OUTPUT_VALUE", tableIdx + "_" + idx + "_" + rowidx, ""));
-
+                htmlString.push(SetTDHtml(RuleAttribute, 1, "OUTPUT_VALUE", HangHaoID, rowidx,""));
+                //读数值                
+                 htmlString.push(SetTDHtml(RuleAttribute, 1, "READ_VALUE", HangHaoID, rowidx,""));
+                 //输出实际值                 
+                 htmlString.push(SetTDHtml(RuleAttribute, 1, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx,""));
                 //相对误差                 
-                htmlString.push(SetTDHtml(RuleAttribute, 1, "RELATIVE_ERROR", tableIdx + "_" + idx + "_" + rowidx, ""));
-
+                 htmlString.push(SetTDHtml(RuleAttribute, 1, "RELATIVE_ERROR", HangHaoID, rowidx,""));
                 //校准结果的不确定度                 
-                htmlString.push(SetTDHtml(RuleAttribute, 1, "UNCERTAINTY_DEGREE", tableIdx + "_" + idx + "_" + rowidx, ""));
+                 htmlString.push(SetTDHtml(RuleAttribute, 1, "UNCERTAINTY_DEGREE", HangHaoID, rowidx,""));
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
@@ -212,71 +205,7 @@
         }
         var txtNumber = "";
         var pointLen = "";
-        ///计算标准值
-        function calculate(point) {
-            pointLen = $("#txtPointLen").val(); //小数点位数
-            txtNumber = $("#txtNumber").val(); //量程
-            var arry = new Array();
-            if (point == 3) {
-                //输入的检测点是3的时候，按照量程*100%，量程*60%，量程*10%作为默认标准值显示
-                arry.push((txtNumber * 1).toFixed(pointLen));
-                arry.push((txtNumber * 0.6).toFixed(pointLen));
-                arry.push((txtNumber * 0.1).toFixed(pointLen));
-            }
-            if (point == 5) {
-                //输入的检测点是5的时候，按照量程*100%，量程*80%，量程*60%，量程*40%，量程*20%作为默认标准值显示
-                arry.push((txtNumber * 1).toFixed(pointLen));
-                arry.push((txtNumber * 0.8).toFixed(pointLen));
-                arry.push((txtNumber * 0.6).toFixed(pointLen));
-                arry.push((txtNumber * 0.4).toFixed(pointLen));
-                arry.push((txtNumber * 0.2).toFixed(pointLen));
-            }
-            if (point == 10) {
-                //输入的检测点是10的时候，按照量程*100%，量程*90%，量程*80%，量程*70%，量程*60%，量程*50%，量程*40%，量程*30%，量程*20%，量程*10%，作为默认标准值显示
-                arry.push((txtNumber * 1).toFixed(pointLen));
-                arry.push((txtNumber * 0.9).toFixed(pointLen));
-                arry.push((txtNumber * 0.8).toFixed(pointLen));
-                arry.push((txtNumber * 0.7).toFixed(pointLen));
-                arry.push((txtNumber * 0.6).toFixed(pointLen));
-                arry.push((txtNumber * 0.5).toFixed(pointLen));
-                arry.push((txtNumber * 0.4).toFixed(pointLen));
-                arry.push((txtNumber * 0.3).toFixed(pointLen));
-                arry.push((txtNumber * 0.2).toFixed(pointLen));
-                arry.push((txtNumber * 0.1).toFixed(pointLen));
-            }
-            return arry;
-        }
-
-        //优化保留两位小数 zh
-        Number.prototype.toFixed = function toFixed(s) {
-            var IsFuShu = false;//判断是否是负数，负数单独处理
-            var je = 0;
-            if (this.toString().indexOf('-') >= 0) {
-                IsFuShu = true;
-                je = this.toString().replace('-', '');
-            } else je = this;
-            changenum = (parseInt(je * Math.pow(10, s) + 0.5) / Math.pow(10, s)).toString();
-            //}
-
-            index = changenum.indexOf(".");
-            if (index < 0 && s > 0) {
-                changenum = changenum + ".";
-                for (i = 0; i < s; i++) {
-                    changenum = changenum + "0";
-                }
-
-            } else {
-                index = changenum.length - index;
-                for (i = 0; i < (s - index) + 1; i++) {
-                    changenum = changenum + "0";
-                }
-
-            }
-            var returnNum = changenum.toString();
-            if (IsFuShu)
-                returnNum = '-' + returnNum;
-            return returnNum;
-        }
+        
         //离开事件，用于计算
         function blurValue(obj)
         {

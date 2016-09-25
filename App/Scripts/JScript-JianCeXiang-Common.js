@@ -38,13 +38,16 @@ RuleAttributeArray = [
                 DuoTongDao: 'hidden',
                 //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: '(RANGE_UNIT)|OUTPUT_VALUE_UNIT,ACTUAL_OUTPUT_VALUE_UNIT',
+                LianDongDanWeiDDL: '(RANGE_UNIT)|OUTPUT_VALUE_UNIT,ACTUAL_OUTPUT_VALUE_UNIT;(OUTPUT_VALUE_UNIT)|ACTUAL_OUTPUT_VALUE_UNIT',
                 //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
                 DanWeiHtmlDDL: 'DianLiu|(RANGE_UNIT),(OUTPUT_VALUE_UNIT),(ACTUAL_OUTPUT_VALUE_UNIT);DianYa|(READ_VALUE_UNIT)',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
-                BuBaoCunShuJu: 'READ_VALUE,ACTUAL_OUTPUT_VALUE,RELATIVE_ERROR,UNCERTAINTY_DEGREE,REMARK,CONCLUSION'
+                BuBaoCunShuJu: 'READ_VALUE,ACTUAL_OUTPUT_VALUE,RELATIVE_ERROR,UNCERTAINTY_DEGREE,REMARK,CONCLUSION',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,ACTUAL_OUTPUT_VALUE,'
             }]
     }
 ];
@@ -75,8 +78,7 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
     {
         return;
     }
-    var id = obj.id.replace(obj.name, "") + "_";//_表编号_量程编号_  
-    debugger
+    var id = obj.id.replace(obj.name, "") + "_";//_表编号_量程编号_     
     var ddlArray = LianDongDanWeiDDLAttribute.split(';');
     $.each(ddlArray, function (i, item) {
         var biangeng="("+obj.name+")|";
@@ -124,13 +126,15 @@ function GetDanWeiDDLHtml(RuleAttribute,ddlName, DanWeiCode) {
         return Result;
     }
 
-    if (RuleAttribute == null || RuleAttribute.RuleID == null || RuleAttribute.RuleID.trim() == ""
-    || RuleAttribute.Attributes == null || RuleAttribute.Attributes[0] == null
-    || RuleAttribute.Attributes[0].DanWeiHtmlDDL == null || RuleAttribute.Attributes[0].DanWeiHtmlDDL.trim() == ""
-    || ddlName == null || ddlName.trim() == "") {
-        return null;
+    if (ddlName == null || ddlName.trim() == "")
+    {
+        return "";
     }
-    var ddlArray = RuleAttribute.Attributes[0].DanWeiHtmlDDL.split(';');
+    var AttributeValue = GetAttributeValue(RuleAttribute, "DanWeiHtmlDDL");
+    if (AttributeValue == null || AttributeValue.trim()=="") {
+        return "";
+    }
+    var ddlArray = AttributeValue.split(';');
     var ddlNameNew = "(" + ddlName + ")"
     $.each(ddlArray, function (i, item) {
         if (item == null || item.trim() == "" || item.indexOf(ddlNameNew) < 0 || item.split('|').length<2) {
@@ -153,51 +157,142 @@ function GetDanWeiDDLHtml(RuleAttribute,ddlName, DanWeiCode) {
 //rowspan合并单元格行数
 //name(控件名称),
 //id(控件id不包含name部分),
-//txtVal(文本框值)
-function SetTDHtml(RuleAttribute,rowspan, name, id, txtVal) {
+//rowidx:行号
+//txtVal(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
+function SetTDHtml(RuleAttribute, rowspan, name, id, rowidx, txtVal) {
     //debugger;
     var ddlName = name + "_UNIT";//下拉框名
     var ddlId = ddlName + "_" + id;//下拉框ID
     var id = name + "_" + id;//输入框id
-    var ddlHtml = GetDanWeiDDLHtml(RuleAttribute,ddlName,null);//单位下拉框html
-
+    var ddlHtml = GetDanWeiDDLHtml(RuleAttribute, ddlName, null);//单位下拉框html
+    if ((txtVal == null || txtVal.trim() == "") && rowidx!=null) {
+        txtVal = CalculateForAddLianCheng(RuleAttribute, rowidx, name);
+    }
     var htmlString = [];
     id = name + "_" + id;
     htmlString.push("<td rowspan='" + rowspan + "' align=\"right\"> ");
     htmlString.push("<input class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='blurValue(this)'/>");
-    if (ddlHtml != null && ddlHtml.trim() != "") {
-        var LianDongDanWeiDDLAttribute = null;
-        if (RuleAttribute.Attributes != null
-            && RuleAttribute.Attributes[0] != null && RuleAttribute.Attributes[0].LianDongDanWeiDDL != null
-            && RuleAttribute.Attributes[0].LianDongDanWeiDDL.trim() != "") {
-            LianDongDanWeiDDLAttribute = RuleAttribute.Attributes[0].LianDongDanWeiDDL;
-        }
-        htmlString.push($(ddlHtml).attr("onchange", "LianDongDanWeiDDL(this,'" + LianDongDanWeiDDLAttribute + "')").attr("name", ddlName).attr("id", ddlId)[0].outerHTML);
+    if (ddlHtml != null && ddlHtml.trim() != "") {        
+        var AttributeValue = GetAttributeValue(RuleAttribute, "LianDongDanWeiDDL");
+        htmlString.push($(ddlHtml).attr("onchange", "LianDongDanWeiDDL(this,'" + AttributeValue + "')").attr("name", ddlName).attr("id", ddlId)[0].outerHTML);
     }
     htmlString.push("</td>");
     return htmlString.join("");
 
 
 }
-
+//根据属性名获取属性值
+function GetAttributeValue(RuleAttribute,Name)
+{
+    if(RuleAttribute==null || Name==null || Name.trim()=="" ||
+       RuleAttribute.Attributes == null || RuleAttribute.Attributes[0] == null || RuleAttribute.Attributes[0][Name] == null
+       || RuleAttribute.Attributes[0][Name].trim() == ""
+        )
+    {
+        return "";
+    }
+    return RuleAttribute.Attributes[0][Name].trim();
+}
 //清空不需要保存的数据
 function ClearBuBaoCunShuJu(RuleAttribute) {
-    
-    if (RuleAttribute.Attributes != null
-            && RuleAttribute.Attributes[0] != null && RuleAttribute.Attributes[0].BuBaoCunShuJu != null
-            && RuleAttribute.Attributes[0].BuBaoCunShuJu.trim() != "") {
-        
-        var BuBaoCunShuJuAttribute = RuleAttribute.Attributes[0].BuBaoCunShuJu.split(',');
+ 
+    var AttributeValue = GetAttributeValue(RuleAttribute, "BuBaoCunShuJu");
+    if (AttributeValue != null && AttributeValue.trim()!="") {
+        var BuBaoCunShuJuAttribute = AttributeValue.split(',');
         $.each(BuBaoCunShuJuAttribute, function (i, item) {
-            if (item == null || item.trim()=="") {
+            if (item == null || item.trim() == "") {
                 return true;
             }
-            $("input[name="+item+"]").each(function (a, b) {
+            $("input[name=" + item + "]").each(function (a, b) {
                 $(b).val("");
-            });            
+            });
         });
     }
 
+}
+
+//添加量程时自动根据行号计算赋值数据
+//RuleAttribute:检测项目属性，Rowidx：行号，objName:控件名称
+function CalculateForAddLianCheng(RuleAttribute, Rowidx,objName) {
+    if (RuleAttribute == null || Rowidx == null)
+    {
+        return "";
+    }
+    var AttributeValue = GetAttributeValue(RuleAttribute, "CalculateForAddLianCheng");
+    if (AttributeValue == null || AttributeValue.trim() == "")
+    {
+        return "";
+    }
+    if (AttributeValue.indexOf(objName) < 0)
+    {
+        return "";
+    }
+    var number = $("#txtNumber").val(); //量程
+    var point = $("#txtPoint").val();     //检测点数   
+    var pointLen = $("#txtPointLen").val(); //小数点位数
+    var arry = new Array();
+    if (point == 3) {
+        //输入的检测点是3的时候，按照量程*100%，量程*60%，量程*10%作为默认标准值显示
+        arry.push((number * 1).toFixed(pointLen));
+        arry.push((number * 0.6).toFixed(pointLen));
+        arry.push((number * 0.1).toFixed(pointLen));
+    }
+    if (point == 5) {
+        //输入的检测点是5的时候，按照量程*100%，量程*80%，量程*60%，量程*40%，量程*20%作为默认标准值显示
+        arry.push((number * 1).toFixed(pointLen));
+        arry.push((number * 0.8).toFixed(pointLen));
+        arry.push((number * 0.6).toFixed(pointLen));
+        arry.push((number * 0.4).toFixed(pointLen));
+        arry.push((number * 0.2).toFixed(pointLen));
+    }
+    if (point == 10) {
+        //输入的检测点是10的时候，按照量程*100%，量程*90%，量程*80%，量程*70%，量程*60%，量程*50%，量程*40%，量程*30%，量程*20%，量程*10%，作为默认标准值显示
+        arry.push((number * 1).toFixed(pointLen));
+        arry.push((number * 0.9).toFixed(pointLen));
+        arry.push((number * 0.8).toFixed(pointLen));
+        arry.push((number * 0.7).toFixed(pointLen));
+        arry.push((number * 0.6).toFixed(pointLen));
+        arry.push((number * 0.5).toFixed(pointLen));
+        arry.push((number * 0.4).toFixed(pointLen));
+        arry.push((number * 0.3).toFixed(pointLen));
+        arry.push((number * 0.2).toFixed(pointLen));
+        arry.push((number * 0.1).toFixed(pointLen));
+    }
+    if (arry != null && arry.length > Rowidx)
+    {
+        return arry[Rowidx];
+    }
+    return "";
+}
+
+//优化保留两位小数 zh
+Number.prototype.toFixed = function toFixed(s) {
+    var IsFuShu = false;//判断是否是负数，负数单独处理
+    var je = 0;
+    if (this.toString().indexOf('-') >= 0) {
+        IsFuShu = true;
+        je = this.toString().replace('-', '');
+    } else je = this;
+    changenum = (parseInt(je * Math.pow(10, s) + 0.5) / Math.pow(10, s)).toString();   
+
+    index = changenum.indexOf(".");
+    if (index < 0 && s > 0) {
+        changenum = changenum + ".";
+        for (i = 0; i < s; i++) {
+            changenum = changenum + "0";
+        }
+
+    } else {
+        index = changenum.length - index;
+        for (i = 0; i < (s - index) + 1; i++) {
+            changenum = changenum + "0";
+        }
+
+    }
+    var returnNum = changenum.toString();
+    if (IsFuShu)
+        returnNum = '-' + returnNum;
+    return returnNum;
 }
 //---------------------------------
 
