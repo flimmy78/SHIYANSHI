@@ -57,14 +57,13 @@
                 }
             });
             $("form").submit(function (form) {
+                debugger;
                 if (form.result) {
                     ajaxFrom(this, this.action);
                 }
                 return false;
             });
-            //按钮样式
-            $('.a2').mouseover(function () { this.style.color = "#ae1121"; }).mouseout(function () { this.style.color = "#333"; });
-
+        
         });
     </script>
 </head>
