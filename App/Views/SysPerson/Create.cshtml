@@ -13,7 +13,7 @@
 }
 <fieldset>
     <legend>
-        <input class="a2 f2" type="submit" value="创建" onclick="javascript: var Password = $('#Password').val(); if (Password.length >= 6) { return true; } else { $.messager.alert('操作提示', '请输入6位以上的密码！', 'info'); return false;}"/>
+        <input class="a2 f2" type="submit" value="创建" />
         <input class="a2 f2" type="button" onclick="BackList('SysPerson')" value="返回" />
     </legend>
     <div class="bigdiv">
@@ -61,23 +61,7 @@
         <div class="editor-field">
             @Html.DropDownListFor(model => model.Sex, Models.SysFieldModels.GetSysField("SysPerson", "Sex"))
         </div>
-        <div class="editor-label">
-            <a class="anUnderLine" onclick="showModalOnly('SysDepartmentId','../../SysDepartment');">
-                @Html.LabelFor(model => model.SysDepartmentId)
-            </a>：
-        </div>
-        <div class="editor-field">
-            <div id="checkSysDepartmentId">
-            </div>
-            @Html.HiddenFor(model => model.SysDepartmentId)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Position)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Position)
-            @Html.ValidationMessageFor(model => model.Position)
-        </div>
+       <br style="clear:both;" />
         <div class="editor-label">
             @Html.LabelFor(model => model.MobilePhoneNumber)：
         </div>
@@ -106,24 +90,7 @@
             </select>
 
         </div>
-        @*<div class="editor-label">
-                @Html.LabelFor(model => model.Province)：
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(model => model.Province, Models.SysFieldModels.GetSysField("SysPerson", "Province"), "请选择")
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.City)：
-            </div>
-            <div class="editor-field">
-                <select id="City" name="City"></select>
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Village)：
-            </div>
-            <div class="editor-field">
-                <select id="Village" name="Village"></select>
-            </div>*@
+     
         <div class="editor-label">
             @Html.LabelFor(model => model.Address)：
         </div>
