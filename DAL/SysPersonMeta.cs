@@ -62,7 +62,7 @@ namespace Langben.DAL
 
         [ScaffoldColumn(true)]
         [Display(Name = "性别", Order = 6)]
-        [StringLength(200, ErrorMessage = "长度不可超过200")]
+       
         public object Sex { get; set; }
 
         [ScaffoldColumn(true)]

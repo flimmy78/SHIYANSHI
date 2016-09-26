@@ -49,27 +49,27 @@
                     <div class="carousel-inner">
                         <div class="item column-bg-div active">
                             <div class="col-lg-4 column-div">
-                                <a class="verify-ctrl btn " href="/Home">
+                                <a class="verify-ctrl btn " href="/Home?id=Appliance">
                                     <img src="/images/columnht.png" class="img-circle verify-ctrl-bgcolor1" alt="">
                                     <p class="column-p">器具登记</p>
                                 </a>
                             </div>
                             <div class="col-lg-4 column-div">
-                                <a class="verify-ctrl btn " href="/Home">
+                                <a class="verify-ctrl btn " href="/Home?id=VQIJULINGQU1">
                                     <img src="/images/columnjm.png" class="img-circle verify-ctrl-bgcolor2" alt="">
-                                    <p class="column-p">器具/报告领取</p>
+                                    <p class="column-p">器具报告领取</p>
                                 </a>
                             </div>
                             <div class="col-lg-4 column-div">
-                                <a class="verify-ctrl btn " href="/Home">
+                                <a class="verify-ctrl btn " href="/Home?id=VRUKU">
                                     <img src="/images/column-dx.png" class="img-circle verify-ctrl-bgcolor1" alt="">
-                                    <p class="column-p">收发管理</p>
+                                    <p class="column-p">器具入库</p>
                                 </a>
                             </div>
                             <div class="col-lg-4 column-div">
-                                <a class="verify-ctrl btn " href="/Homesheng'qi'l">
+                                <a class="verify-ctrl btn " href="/Home?id=VJIANDINGRENWU">
                                     <img src="/images/columnhd.png" class="img-circle verify-ctrl-bgcolor3" alt="">
-                                    <p class="column-p">实验室管理</p>
+                                    <p class="column-p">检定任务</p>
                                 </a>
                             </div>
                             <div class="col-lg-4 column-div no">
@@ -134,10 +134,7 @@
             $(this).css('background-color', 'rgba(255,255,255,0.8)');
             $('img:eq(1)', this).css('display', 'none');
         });
-        //退出按钮悬停
-        $('.user-footer').mouseover(function () {
-            $(this).children('a').children('img').attr('src', 'images/icon-signOuthover.png')
-        })
+       
         $('.user-footer').mouseout(function () {
             $(this).children('a').children('img').attr('src', 'images/icon-signOut.png')
         })

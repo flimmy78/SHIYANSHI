@@ -16,8 +16,16 @@ namespace Langben.App.Controllers
         //
         // GET: /Home/
 
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                RedirectToAction("Index", "Account");
+            }
+            else
+            {
+                  ViewData["id"] = id;
+            }
             Account account = GetCurrentAccount();
             if (account == null)
             {  

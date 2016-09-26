@@ -9,7 +9,7 @@
     @Styles.Render("~/Content/css")
     @*@Styles.Render("~/Content")*@
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/easyui")  
+    @Scripts.Render("~/bundles/easyui")
     <script type="text/javascript">
 
         function addTab(subtitle, url, icon, closable, id) {
@@ -143,7 +143,7 @@
         }
 
 
-     
+
     </script>
     <script type="text/javascript">
 
@@ -151,7 +151,21 @@
         $(function () {
 
             tabCloseEven();
-            addTab("我的工作台", "/HomeRight", "tu1112", false);
+            if ('Appliance' == '@ViewData["id"]') {
+                addTab("器具登记", "/@ViewData["id"]", "tu1112", false);
+            }
+            else if ('VQIJULINGQU1' == '@ViewData["id"]') {
+                addTab("器具报告领取", "/@ViewData["id"]", "tu1112", false);
+            }
+            else if ('VRUKU' == '@ViewData["id"]') {
+                addTab("器具入库", "/@ViewData["id"]", "tu1112", false);
+            }
+            else if ('VJIANDINGRENWU' == '@ViewData["id"]') {
+                addTab("检定任务", "/@ViewData["id"]", "tu1112", false);
+            }
+            else {//退出
+                location.href = '/Account/LogOff';
+            }
             $('ul li a').click(function () {
                 var tabTitle = $(this).text();
                 var url = $(this).attr("rel"); //获取地址
@@ -432,7 +446,7 @@
 
 
 
-      
+
 
         .user {
             color: #464646;
@@ -482,7 +496,7 @@
         </div>
 
         <div class="user">
-           
+
             <div class="uset">
                 <a href="#" class="ChangePassword">修改密码</a>
             </div>
@@ -498,11 +512,11 @@
     <div region="west" hide="true" split="true" title="导航菜单" style="width: 180px;" id="west">
         <div id="leftAccordion" class="easyui-accordion" fit="true" border="false">
             @{
-                if (ViewData["Menu"]!=null)
+                if (ViewData["Menu"] != null)
                 {
                     @Html.Raw(ViewData["Menu"].ToString())
                 }
-             }
+            }
         </div>
     </div>
     <div id="mainPanle" region="center" style="background: #eee; overflow-y: hidden;">
@@ -511,7 +525,7 @@
     </div>
     <div region="south" split="true" style="height: 29px;">
         <div style="padding: 0px; margin-left: 50%;">
-            技术支持 
+            技术支持
         </div>
     </div>
     <div id="mm" class="easyui-menu" style="width: 150px;">

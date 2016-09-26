@@ -128,38 +128,4 @@
 @section HeadContent{
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Res/webuploader/css/webuploader.css")" />
 }
-<script type="text/javascript">
-
-    $(function () {
-
-        getCity("#City");
-        $("#Province").change(function () { getCity("#City"); });
-
-        getVillage("#Village");
-        $("#City").change(function () { getVillage("#Village"); });
-
-
-    });
-
-    function getCity(City) {
-        $(City).empty();
-        $("<option></option>")
-                .val("")
-                .text("请选择")
-                .appendTo($(City));
-        bindDropDownList(City, "#Province");
-        $(City).change();
-    }
-
-    function getVillage(Village) {
-        $(Village).empty();
-        $("<option></option>")
-                .val("")
-                .text("请选择")
-                .appendTo($(Village));
-        bindDropDownList(Village, "#City");
-        $(Village).change();
-    }
-</script>
-
-
+ 
