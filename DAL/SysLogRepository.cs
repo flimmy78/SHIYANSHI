@@ -23,13 +23,26 @@ namespace Langben.DAL
         {
             string where = string.Empty;
             int flagWhere = 0;
-            string Start_Time = string.Empty;
-            string End_Time = string.Empty;
+            DateTime? startTime = null;
+            DateTime? endTime = null;
             Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
             if (queryDic != null && queryDic.Count > 0)
             {
                 foreach (var item in queryDic)
                 {
+                    //oracle数据库使用linq对时间段查询
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
+                    {
+                        startTime = Convert.ToDateTime(item.Value);
+                        continue;
+                    }
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(End_Time)) //结束时间+1
+                    {
+                        endTime = Convert.ToDateTime(item.Value).AddDays(1);
+                        continue;
+                    }
+
+
                     if (flagWhere != 0)
                     {
                         where += " and ";
@@ -37,20 +50,7 @@ namespace Langben.DAL
                     flagWhere++;
 
 
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
-                    {
-                        //where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Time)) + "] >=  CAST('" + item.Value + "' as   System.DateTime)";
-                        where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Time)) + "] >=  CAST('" + Convert.ToDateTime(item.Value).ToString("yyyy-MM-dd HH:mm:ss") + "'as   System.DateTime)";
-                        Start_Time = item.Value;
-                        continue;
-                    }
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(End_Time)) //结束时间+1
-                    {
-                        //where += "it.[" + item.Key.Remove(item.Key.IndexOf(End_Time)) + "] <  CAST('" + Convert.ToDateTime(item.Value).AddDays(1)+ "' as   System.DateTime)";
-                        where += "it.[" + item.Key.Remove(item.Key.IndexOf(End_Time)) + "] <  CAST('" + Convert.ToDateTime(item.Value).AddDays(1).ToString("yyyy-MM-dd HH:mm:ss") + "'as  System.DateTime)";
-                        End_Time = Convert.ToDateTime(item.Value).AddDays(1).ToString("yyyy-MM-dd HH:mm:ss");
-                        continue;
-                    }
+                
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Int)) //开始数值
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Int)) + "] >= " + item.Value.GetInt();
@@ -75,22 +75,20 @@ namespace Langben.DAL
                     where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
                 }
             }
-            if (!string.IsNullOrWhiteSpace(Start_Time) || !string.IsNullOrWhiteSpace(End_Time))
-            {
-                return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
-                  .CreateObjectSet<SysLog>()                 
-                  .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                  .Where(m => Convert.ToDateTime(Start_Time) >= m.CreateTime && Convert.ToDateTime(End_Time) < m.CreateTime)
-                  .AsQueryable();
-            }
-            else
-            {
-                return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
+            var data = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
                                     .CreateObjectSet<SysLog>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                                     .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
                                     .AsQueryable();
-            }
 
+            if (null != startTime)
+            {
+                data = data.Where(m => startTime <= m.CreateTime);
+            }
+            if (null != endTime)
+            {
+                data = data.Where(m => endTime > m.CreateTime);
+            }
+            return data; ;
 
         }
         /// <summary>
