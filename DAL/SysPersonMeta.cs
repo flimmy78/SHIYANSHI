@@ -55,7 +55,7 @@ namespace Langben.DAL
         [ScaffoldColumn(true)]
         [Display(Name = "确认密码", Order = 5)]
         [Required(ErrorMessage = "请填写")]
-        [StringLength(200, ErrorMessage = "长度不可超过200")]
+        [StringLength(100, ErrorMessage = "{0} 必须至少包含 {2} 个字符。", MinimumLength = 6)]
         [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "两次密码不一致")]
         public object SurePassword { get; set; }
