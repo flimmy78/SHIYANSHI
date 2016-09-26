@@ -23,7 +23,8 @@ namespace Langben.DAL
         {
             string where = string.Empty;
             int flagWhere = 0;
-
+            string Start_Time = string.Empty;
+            string End_Time = string.Empty;
             Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
             if (queryDic != null && queryDic.Count > 0)
             {
@@ -34,16 +35,20 @@ namespace Langben.DAL
                         where += " and ";
                     }
                     flagWhere++;
-                    
-                    
+
+
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
                     {
-                        where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Time)) + "] >=  CAST('" + item.Value + "' as   System.DateTime)";
+                        //where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Time)) + "] >=  CAST('" + item.Value + "' as   System.DateTime)";
+                        where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Time)) + "] >=  CAST('" + Convert.ToDateTime(item.Value).ToString("yyyy-MM-dd HH:mm:ss") + "'as   System.DateTime)";
+                        Start_Time = item.Value;
                         continue;
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(End_Time)) //结束时间+1
                     {
-                        where += "it.[" + item.Key.Remove(item.Key.IndexOf(End_Time)) + "] <  CAST('" + Convert.ToDateTime(item.Value).AddDays(1) + "' as   System.DateTime)";
+                        //where += "it.[" + item.Key.Remove(item.Key.IndexOf(End_Time)) + "] <  CAST('" + Convert.ToDateTime(item.Value).AddDays(1)+ "' as   System.DateTime)";
+                        where += "it.[" + item.Key.Remove(item.Key.IndexOf(End_Time)) + "] <  CAST('" + Convert.ToDateTime(item.Value).AddDays(1).ToString("yyyy-MM-dd HH:mm:ss") + "'as  System.DateTime)";
+                        End_Time = Convert.ToDateTime(item.Value).AddDays(1).ToString("yyyy-MM-dd HH:mm:ss");
                         continue;
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Int)) //开始数值
@@ -56,7 +61,7 @@ namespace Langben.DAL
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(End_Int)) + "] <= " + item.Value.GetInt();
                         continue;
                     }
-     
+
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(DDL_Int)) //精确查询数值
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(DDL_Int)) + "] =" + item.Value;
@@ -70,10 +75,22 @@ namespace Langben.DAL
                     where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
                 }
             }
-            return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext 
-                     .CreateObjectSet<SysLog>().Where(string.IsNullOrEmpty(where) ? "true" : where)
-                     .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                     .AsQueryable(); 
+            if (!string.IsNullOrWhiteSpace(Start_Time) || !string.IsNullOrWhiteSpace(End_Time))
+            {
+                return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
+                  .CreateObjectSet<SysLog>()                 
+                  .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
+                  .Where(m => Convert.ToDateTime(Start_Time) >= m.CreateTime && Convert.ToDateTime(End_Time) < m.CreateTime)
+                  .AsQueryable();
+            }
+            else
+            {
+                return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
+                                    .CreateObjectSet<SysLog>().Where(string.IsNullOrEmpty(where) ? "true" : where)
+                                    .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
+                                    .AsQueryable();
+            }
+
 
         }
         /// <summary>
@@ -86,7 +103,7 @@ namespace Langben.DAL
             using (SysEntities db = new SysEntities())
             {
                 return GetById(db, id);
-            }                   
+            }
         }
         /// <summary>
         /// 通过主键id，获取日志---查看详细，首次编辑
@@ -94,9 +111,9 @@ namespace Langben.DAL
         /// <param name="id">主键</param>
         /// <returns>日志</returns>
         public SysLog GetById(SysEntities db, string id)
-        { 
+        {
             return db.SysLog.SingleOrDefault(s => s.Id == id);
-        
+
         }
         /// <summary>
         /// 确定删除一个对象，调用Save方法
@@ -111,7 +128,7 @@ namespace Langben.DAL
                 return Save(db);
             }
         }
- 
+
         /// <summary>
         /// 删除一个日志
         /// </summary>
@@ -121,7 +138,7 @@ namespace Langben.DAL
         {
             SysLog deleteItem = GetById(db, id);
             if (deleteItem != null)
-            { 
+            {
                 db.SysLog.Remove(deleteItem);
             }
         }
@@ -134,8 +151,8 @@ namespace Langben.DAL
         {
             //数据库设置级联关系，自动删除子表的内容   
             IQueryable<SysLog> collection = from f in db.SysLog
-                    where deleteCollection.Contains(f.Id)
-                    select f;
+                                            where deleteCollection.Contains(f.Id)
+                                            select f;
             foreach (var deleteItem in collection)
             {
                 db.SysLog.Remove(deleteItem);
@@ -143,7 +160,7 @@ namespace Langben.DAL
         }
 
         public void Dispose()
-        {          
+        {
         }
     }
 }
