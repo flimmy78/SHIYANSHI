@@ -641,7 +641,16 @@ s：字符串
         }
         //删除
         function flexiDelete() {
-         
+            //var rows = $('#ApplianceDate').datagrid("getSelections");
+            //var copyRows = [];
+            //for (var j = 0; j < rows.length; j++) {
+            //    copyRows.push(rows[j]);
+            //}
+            //for (var i = 0; i < copyRows.length; i++) {
+            //    var index = $('#ApplianceDate').datagrid('getRowIndex', copyRows[i]);
+            //    $('#ApplianceDate').datagrid('deleteRow', index);
+            //    //$('#ApplianceDate').datagrid('destroyRow', index);
+            //}
                     $('#ApplianceDate').edatagrid('destroyRow');
              
         }
@@ -702,13 +711,15 @@ s：字符串
                     entity.ID = $("#ORDER_TASK_INFORMATIONID").val();
 
                     entity.ACCEPT_ORGNIZATION = $("#ACCEPT_ORGNIZATION option:selected").val();//受理单位
-                    entity.INSPECTION_ENTERPRISE = $("#INSPECTION_ENTERPRISE").val();//送检单位
+                    //entity.INSPECTION_ENTERPRISE = $("#INSPECTION_ENTERPRISE option:selected").val();//送检单位
+                    entity.INSPECTION_ENTERPRISE = $('#INSPECTION_ENTERPRISE').combobox('getValue');//送检单位
                     entity.INSPECTION_ENTERPRISE_ADDRESS = $("#INSPECTION_ENTERPRISE_ADDRESS").val();//送检单位地址
                     entity.INSPECTION_ENTERPRISE_POST = $("#INSPECTION_ENTERPRISE_POST").val();//送检单位邮政编码
                     entity.CONTACTS = $("#CONTACTS").val();//联系人
                     entity.CONTACT_PHONE = $("#CONTACT_PHONE").val();//联系电话
                     entity.FAX = $("#FAX").val();//传真
-                    entity.CERTIFICATE_ENTERPRISE = $("#CERTIFICATE_ENTERPRISE").val();//证书单位
+                    //entity.CERTIFICATE_ENTERPRISE = $("#CERTIFICATE_ENTERPRISE option:selected").val();//证书单位$('#com').combobox('getValue')
+                    entity.CERTIFICATE_ENTERPRISE = $('#CERTIFICATE_ENTERPRISE').combobox('getValue');//证书单位
                     entity.CERTIFICATE_ENTERPRISE_ADDRESS = $("#CERTIFICATE_ENTERPRISE_ADDRESS").val();//证书单位地址
                     entity.CERTIFICATE_ENTERPRISE_POST = $("#CERTIFICATE_ENTERPRISE_POST").val();//证书单位邮政编码
                     entity.CONTACTS2 = $("#CONTACTS2").val();//联系人2
@@ -755,7 +766,7 @@ s：字符串
         }
 
         $('#ApplianceDate').edatagrid({
-
+            singleSelect: false,
             toolbar: [
              {
                  text: '新增',
