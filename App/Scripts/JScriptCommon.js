@@ -1,11 +1,30 @@
 ﻿var shiyanshiArray = new Array;
 shiyanshiArray = [
-    { value: '电能', text: '电能' }, 
-    { value: '数表三相', text: '数表三相' },
-    { value: '数表单相', text: '数表单相' },
-    { value: '指示仪表', text: '指示仪表' },
-    { value: '直流仪器', text: '直流仪器' }, 
-    { value: '互感器', text: '互感器' }];
+    { value: '电能', text: '电能',treeUrl:'/Res/tree_data1.js' }, 
+    { value: '数表三相', text: '数表三相', treeUrl: '/Res/tree_data_SBSX.js' },
+    { value: '数表单相', text: '数表单相', treeUrl: '/Res/tree_data1.js' },
+    { value: '指示仪表', text: '指示仪表', treeUrl: '/Res/tree_data1.js' },
+    { value: '直流仪器', text: '直流仪器', treeUrl: '/Res/tree_data1.js' },
+    { value: '互感器', text: '互感器', treeUrl: '/Res/tree_data1.js' }];
+//获取某实验室属性
+//ShiyanshiID：实验室编号
+//ShuXing：属性名称
+function ShiYanShiShuXing(ShiYanShiID,ShuXing)
+{  
+    var Result = null;
+    if (ShiYanShiID == null || ShiYanShiID.trim() == "" || ShuXing == null || ShuXing.trim() == "") {
+        return null;
+    }
+    $.each(shiyanshiArray, function (i, item) {
+        if (item == null || item["value"] != ShiYanShiID) {
+            return true;
+        }
+        Result = item[ShuXing];
+        return false;
+
+    });
+    return Result;
+}
 //下拉框绑定实验室
 function bindShiyanshi(id) {
     if (shiyanshiArray == null || shiyanshiArray.length == 0) {
