@@ -23,7 +23,7 @@
                     <div id="uploader-demo">
                         <!--用来存放item-->
                         <div id="fileList" style="display:none;" class="uploader-list"></div>
-                        <div id="filePicker">上传头像</div>
+                        <div id="filePicker">上传签字</div>
                     </div>
                 </div>
             </div>
@@ -65,13 +65,8 @@
                 @Html.DropDownListFor(model => model.Sex,Models.SysFieldModels.GetSysField("SysPerson","Sex"),"请选择")
             </div>      
               
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Position)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Position)
-                @Html.ValidationMessageFor(model => model.Position)
-            </div>     
+            <br style="clear:both;" />
+             
             <div class="editor-label">
                 @Html.LabelFor(model => model.MobilePhoneNumber)：
             </div>

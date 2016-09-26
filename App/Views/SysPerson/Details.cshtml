@@ -19,7 +19,7 @@
                     <div id="uploader-demo">
                         <!--用来存放item-->
                         <div id="fileList" style="display:none;" class="uploader-list"></div>
-                        <div id="filePicker">上传头像</div>
+                        <div id="filePicker">上传签字</div>
                     </div>
                 </div>
             </div>
@@ -42,21 +42,7 @@
                 <div class="display-field">
                     @Html.DisplayFor(model => model.Sex) 
                 </div>        
-                <div class="display-label">
-                      @Html.LabelFor(model => model.SysDepartmentId) :
-                </div>
-                <div class="display-field">
-                    @if (Model.SysDepartment != null)
-                       {
-                    @Model.SysDepartment.Name
-                    } 
-                </div>      
-                <div class="display-label">
-                      @Html.LabelFor(model => model.Position) :
-                </div>
-                <div class="display-field">
-                    @Html.DisplayFor(model => model.Position) 
-                </div>      
+                
                 <div class="display-label">
                       @Html.LabelFor(model => model.MobilePhoneNumber) :
                 </div>
@@ -70,23 +56,12 @@
                     @Html.DisplayFor(model => model.PhoneNumber) 
                 </div>      
                 <div class="display-label">
-                      @Html.LabelFor(model => model.Province) :
+                    <label for="Province">实验室：</label>
                 </div>
                 <div class="display-field">
                     @Html.DisplayFor(model => model.Province) 
                 </div>      
-                <div class="display-label">
-                      @Html.LabelFor(model => model.City) :
-                </div>
-                <div class="display-field">
-                    @Html.DisplayFor(model => model.City) 
-                </div>      
-                <div class="display-label">
-                      @Html.LabelFor(model => model.Village) :
-                </div>
-                <div class="display-field">
-                    @Html.DisplayFor(model => model.Village) 
-                </div>      
+                
                 <div class="display-label">
                       @Html.LabelFor(model => model.Address) :
                 </div>
