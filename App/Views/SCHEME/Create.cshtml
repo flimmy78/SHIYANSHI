@@ -21,7 +21,7 @@
         {
             <input type="hidden" id="hideUNDERTAKE_LABORATORYID" value=""/>
         }
-        <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+        <div class="" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
             <table>
                 <tr>
                     <td> 实验室：</td>
@@ -117,18 +117,12 @@
     //实验室调整变更树内容
     function ChangeTree(UNDERTAKE_LABORATORYID)
     {       
-        var url = "/Res/tree_data1.js";
-        //var url = "";
-        if (UNDERTAKE_LABORATORYID == "数表三相")
+        //var url = "/Res/tree_data1.js";
+        var url = ShiYanShiShuXing(UNDERTAKE_LABORATORYID,"treeUrl");
+        if (url == null || url.trim() == "")
         {
-            url = "/Res/tree_data_SBSX.js";
-        }
-        //$('#tt').tree({
-        //    url: url,
-        //    loadFilter: function (data) {
-        //        return data;
-        //    }
-        //});
+            url = "/Res/tree_data1.js";
+        }        
         $('#tt').tree({
             url: url
         });
