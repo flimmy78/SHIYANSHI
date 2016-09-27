@@ -60,7 +60,8 @@
             },
             valueField: 'id',
             textField: 'name',
-            onSelect: function (rec) {               
+            onSelect: function (rec) {
+                debugger;
                 var BAR_CODE_NUM = rec.show.split(',')[0];
                 var FACTORY_NUM = rec.show.split(',')[1];
                 var VERSION = rec.show.split(',')[2];

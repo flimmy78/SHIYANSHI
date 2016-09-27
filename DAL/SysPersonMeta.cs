@@ -83,7 +83,7 @@ namespace Langben.DAL
         [ScaffoldColumn(true)]
         [Display(Name = "办公电话", Order = 10)]
         [StringLength(200, ErrorMessage = "长度不可超过200")]
-        [DataType(System.ComponentModel.DataAnnotations.DataType.PhoneNumber, ErrorMessage = "号码格式不正确")]
+        
         public object PhoneNumber { get; set; }
 
         [ScaffoldColumn(true)]
