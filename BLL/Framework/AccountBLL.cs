@@ -26,9 +26,9 @@ namespace Langben.BLL
             using (SysEntities db = new SysEntities())
             {
                 var persond = (from p in db.SysPerson
-                               
-                               
-                              select p).ToList() ;
+
+
+                               select p).ToList();
                 var person = (from p in db.SysPerson
                               where p.Name == userName
                               && p.Password == password
@@ -36,16 +36,25 @@ namespace Langben.BLL
                               select p).FirstOrDefault();
                 if (person != null)
                 {//登录成功
-                    person.LastLogonTime = person.LogonTime;
-                    person.LastLogonIP = person.LogonIP;
-                    person.LogonNum++;
-                    person.LogonTime = DateTime.Now;
-                    person.LogonIP = Common.IP.GetIP();
-                    db.SaveChanges();
+                    //person.LastLogonTime = person.LogonTime;
+                    //person.LastLogonIP = person.LogonIP;
+                    //if (person.LogonNum == null)
+                    //{
+                    //    person.LogonNum = 1;
+                    //}
+                    //else
+                    //{
+                    //    person.LogonNum++;
+                    //}
+
+                    //person.LogonTime = DateTime.Now;
+                    //person.LogonIP = Common.IP.GetIP();
+                    //db.SaveChanges();
                     return person;
                 }
 
-            } return null;
+            }
+            return null;
         }
         /// <summary>
         /// 修改密码
@@ -60,8 +69,8 @@ namespace Langben.BLL
             {
                 try
                 {
-                 string   oldPasswordEncryptString = EncryptAndDecrypte.EncryptString(oldPassword);
-                string    newPasswordEncryptString = EncryptAndDecrypte.EncryptString(newPassword);
+                    string oldPasswordEncryptString = EncryptAndDecrypte.EncryptString(oldPassword);
+                    string newPasswordEncryptString = EncryptAndDecrypte.EncryptString(newPassword);
 
                     using (SysEntities db = new SysEntities())
                     {
@@ -69,7 +78,7 @@ namespace Langben.BLL
                         person.Password = newPasswordEncryptString;
                         person.SurePassword = newPasswordEncryptString;
                         if (!string.IsNullOrWhiteSpace(person.EmailAddress))
-                        { 
+                        {
                             NetSendMail.MailSendChangePassword(db, person.EmailAddress, personName, newPassword);
                             //发送通知的邮件
 

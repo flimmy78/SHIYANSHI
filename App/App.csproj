@@ -499,6 +499,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\JScript-JianCeXiang-Common.js" />
     <Content Include="Scripts\JScriptCommon.js" />
     <Content Include="Scripts\JScriptIndex.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -823,11 +824,12 @@
     <Content Include="Views\ManageTemplate\Index.cshtml" />
     <Content Include="Views\ManageTemplate\Add.cshtml" />
     <Content Include="Views\ManageTemplate\Test.cshtml" />
-    <Content Include="Views\PROJECTTEMPLET\ZLDLSC.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuShuChu.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\Create.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\Details.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\Edit.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\Index.cshtml" />
+    <Content Include="Views\Shared\FangAnIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

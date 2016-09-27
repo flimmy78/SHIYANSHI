@@ -16,8 +16,16 @@ namespace Langben.App.Controllers
         //
         // GET: /Home/
 
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                RedirectToAction("Index", "Account");
+            }
+            else
+            {
+                  ViewData["id"] = id;
+            }
             Account account = GetCurrentAccount();
             if (account == null)
             {  
@@ -27,7 +35,9 @@ namespace Langben.App.Controllers
             {
 
                 //IHomeBLL home = new HomeBLL();
-                ViewData["Menu"] = App.Codes.MenuCaching.GetMenu(ref account); //home.GetMenuByAccount(ref account);// 获取菜单
+                var menus = App.Codes.MenuCaching.GetMenu(ref account).Replace("selected:true", "selected:false"); //home.GetMenuByAccount(ref account);// 获取菜单
+       
+                ViewData["Menu"]  = menus;
                 Utils.WriteCookie("account", account, 7);
             }
 

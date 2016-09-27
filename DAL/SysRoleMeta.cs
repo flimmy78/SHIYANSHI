@@ -24,8 +24,8 @@ namespace Langben.DAL
 			[ScaffoldColumn(false)]
 			[Display(Name = "主键", Order = 1)]
 			public object Id { get; set; }
-
-			[ScaffoldColumn(true)]
+        [Required(ErrorMessage = "请填写")]
+        [ScaffoldColumn(true)]
 			[Display(Name = "名称", Order = 2)]
 			[StringLength(200, ErrorMessage = "长度不可超过200")]
 			public object Name { get; set; }

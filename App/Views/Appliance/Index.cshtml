@@ -17,72 +17,9 @@
         height: 25px;
     }
 </style>
-@section HeadContent {
-
-    创建
-
-}
 <script type="text/javascript">
     $(function () {
-        //条形码
-        $('#BAR_CODE_NUM').combobox({
-            mode: 'remote',
-            loader: function (param, success, error) {
-                //获取输入的值
-                var q = param.q || "";
-                //此处q的length代表输入多少个字符后开始查询
-                if (q.length <= 0) return false;
-                $.ajax({
-                    url: "../Appliance/SearchAutoComplete/BAR_CODE_NUM",
-                    type: "post",
-                    data: {
-                        //传值，还是JSON数据
-                        term: q
-                    },
-                    //重要，如果写jsonp会报转换错误，此处不写都可以
-                    dataType: "json",
-                    success: function (data) {
-                        //关键步骤，遍历一个MAP对象
-                        var items = $.map(data, function (item) {
-
-                            return {
-                                id: item.value
-                                ,
-                                name: item.value
-                                ,
-                                show: item.label
-                            };
-                        });
-                        //执行loader的success方法
-                        success(items);
-                    },
-                    //异常处理
-                    error: function (xml, text, msg) {
-                        error.apply(this, arguments);
-                    }
-                });
-            },
-            valueField: 'id',
-            textField: 'name',
-            onSelect: function (rec) {
-                seng();
-                //var BAR_CODE_NUM = rec.show.split(',')[0];
-                var FACTORY_NUM = rec.show.split(',')[1];
-                var VERSION = rec.show.split(',')[2];
-                var APPLIANCE_NAME = rec.show.split(',')[3];
-                //$('#BAR_CODE_NUM').combobox('clear');
-                //$('#BAR_CODE_NUM').combobox('setValue', BAR_CODE_NUM);
-                $('#FACTORY_NUM').combobox('clear');
-                $('#FACTORY_NUM').combobox('setValue', FACTORY_NUM);
-                $('#VERSION').combobox('clear');
-                $('#VERSION').combobox('setValue', VERSION);
-                $('#APPLIANCE_NAME').combobox('clear');
-                $('#APPLIANCE_NAME').combobox('setValue', APPLIANCE_NAME);
-            },
-            formatter: function (row) {
-                return row.show;
-            }
-        });       
+        
         //出厂编号
         $('#FACTORY_NUM').combobox({
             mode: 'remote',
@@ -124,13 +61,12 @@
             valueField: 'id',
             textField: 'name',
             onSelect: function (rec) {
-                seng();
+                debugger;
                 var BAR_CODE_NUM = rec.show.split(',')[0];
-                //var FACTORY_NUM = rec.show.split(',')[1];
+                var FACTORY_NUM = rec.show.split(',')[1];
                 var VERSION = rec.show.split(',')[2];
                 var APPLIANCE_NAME = rec.show.split(',')[3];
-                $('#BAR_CODE_NUM').combobox('clear');
-                $('#BAR_CODE_NUM').combobox('setValue', BAR_CODE_NUM);
+                $('#BAR_CODE_NUM').val(BAR_CODE_NUM);
                 //$('#FACTORY_NUM').combobox('clear');
                 //$('#FACTORY_NUM').combobox('setValue', FACTORY_NUM);
                 $('#VERSION').combobox('clear');
@@ -138,9 +74,10 @@
                 $('#APPLIANCE_NAME').combobox('clear');
                 $('#APPLIANCE_NAME').combobox('setValue', APPLIANCE_NAME);
             },
-            formatter: function (row) {
+            formatter: function (row) {              
                 return row.show;
             }
+
         });
         //型号
         $('#VERSION').combobox({
@@ -182,14 +119,12 @@
             },
             valueField: 'id',
             textField: 'name',
-            onSelect: function (rec) {
-                seng();
+            onSelect: function (rec) {              
                 var BAR_CODE_NUM = rec.show.split(',')[0];
                 var FACTORY_NUM = rec.show.split(',')[1];
-                //var VERSION = rec.show.split(',')[2];
+                var VERSION = rec.show.split(',')[2];
                 var APPLIANCE_NAME = rec.show.split(',')[3];
-                $('#BAR_CODE_NUM').combobox('clear');
-                $('#BAR_CODE_NUM').combobox('setValue', BAR_CODE_NUM);
+                $('#BAR_CODE_NUM').val(BAR_CODE_NUM);
                 $('#FACTORY_NUM').combobox('clear');
                 $('#FACTORY_NUM').combobox('setValue', FACTORY_NUM);
                 //$('#VERSION').combobox('clear');
@@ -241,20 +176,18 @@
             },
             valueField: 'id',
             textField: 'name',
-            onSelect: function (rec) {
-                seng();
+            onSelect: function (rec) {              
                 var BAR_CODE_NUM = rec.show.split(',')[0];
                 var FACTORY_NUM = rec.show.split(',')[1];
                 var VERSION = rec.show.split(',')[2];
-                //var APPLIANCE_NAME = rec.show.split(',')[3];
-                $('#BAR_CODE_NUM').combobox('clear');
-                $('#BAR_CODE_NUM').combobox('setValue', BAR_CODE_NUM);
+                var APPLIANCE_NAME = rec.show.split(',')[3];
+                $('#BAR_CODE_NUM').val(BAR_CODE_NUM);
                 $('#FACTORY_NUM').combobox('clear');
                 $('#FACTORY_NUM').combobox('setValue', FACTORY_NUM);
                 $('#VERSION').combobox('clear');
                 $('#VERSION').combobox('setValue', VERSION);
                 //$('#APPLIANCE_NAME').combobox('clear');
-                //$('#APPLIANCE_NAME').combobox('setValue', APPLIANCE_NAME);
+                //$('#APPLIANCE_NAME').combobox('setValue', APPLIANCE_NAME);               
             },
             formatter: function (row) {
                 return row.show;
@@ -267,6 +200,9 @@
     出厂编号：<input id="FACTORY_NUM" name="FACTORY_NUM" style="width:250px;" />
     型号：<input id="VERSION" name="VERSION" style="width:250px;" />
     器具名称：<input id="APPLIANCE_NAME" name="APPLIANCE_NAME" style="width:250px;" />
+    <a href="#" onclick="seng()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
+        查 询
+    </a>
 </div>
 <br style="clear:both;" />
 <br style="clear:both;" />
@@ -557,11 +493,10 @@ s：字符串
 
 </script>
 <script type="text/javascript">
-
     //查询
     function seng() {
         var row = null;
-        var search = "BAR_CODE_NUM" + "@@" + $("#BAR_CODE_NUM").val() + "^" + "FACTORY_NUM" + "@@" + $("#FACTORY_NUM").val() + "^" + "VERSION" + "@@" + $("#VERSION").val() + "^" + "APPLIANCE_NAME" + "@@" + $("#APPLIANCE_NAME").val() + "^";
+        var search = "BAR_CODE_NUM" + "@@" + $('#BAR_CODE_NUM').val()+ "^" + "FACTORY_NUM" + "@@" + $('#FACTORY_NUM').combobox('getText') + "^" + "VERSION" + "@@" + $('#VERSION').combobox('getText') + "^" + "APPLIANCE_NAME" + "@@" + $('#APPLIANCE_NAME').combobox('getText') + "^";
         $.ajax({
             url: '/api/ORDER_TASK_INFORMATIONApi/PostDataByID/' + search,
             type: "Post",
@@ -585,13 +520,13 @@ s：字符串
                 var leng = $('#ApplianceDate').edatagrid('getRows');
                 if (leng.length <= 1) {
                     $("#ACCEPT_ORGNIZATION").val(row.ACCEPT_ORGNIZATION);//受理单位
-                    $("#INSPECTION_ENTERPRISE").val(row.INSPECTION_ENTERPRISE);//送检单位
+                    $("#INSPECTION_ENTERPRISE").combobox('select',row.INSPECTION_ENTERPRISE);//送检单位
                     $("#INSPECTION_ENTERPRISE_ADDRESS").val(row.INSPECTION_ENTERPRISE_ADDRESS);//送检单位地址
                     $("#INSPECTION_ENTERPRISE_POST").val(row.INSPECTION_ENTERPRISE_POST);//送检单位邮政编码
                     $("#CONTACTS").val(row.CONTACTS);//联系人
                     $("#CONTACT_PHONE").val(row.CONTACT_PHONE);//联系电话
                     $("#FAX").val(row.FAX);//传真
-                    $("#CERTIFICATE_ENTERPRISE").val(row.CERTIFICATE_ENTERPRISE);//证书单位
+                    $("#CERTIFICATE_ENTERPRISE").combobox('select', row.CERTIFICATE_ENTERPRISE);//证书单位
                     $("#CERTIFICATE_ENTERPRISE_ADDRESS").val(row.CERTIFICATE_ENTERPRISE_ADDRESS);//证书单位地址
                     $("#CERTIFICATE_ENTERPRISE_POST").val(row.CERTIFICATE_ENTERPRISE_POST);//证书单位邮政编码
                     $("#CONTACTS2").val(row.CONTACTS2);//联系人2
@@ -641,9 +576,18 @@ s：字符串
         }
         //删除
         function flexiDelete() {
-         
+            //var rows = $('#ApplianceDate').datagrid("getSelections");
+            //var copyRows = [];
+            //for (var j = 0; j < rows.length; j++) {
+            //    copyRows.push(rows[j]);
+            //}
+            //for (var i = 0; i < copyRows.length; i++) {
+            //    var index = $('#ApplianceDate').datagrid('getRowIndex', copyRows[i]);
+            //    $('#ApplianceDate').datagrid('deleteRow', index);
+            //    //$('#ApplianceDate').datagrid('destroyRow', index);
+            //}
                     $('#ApplianceDate').edatagrid('destroyRow');
-             
+
         }
         //新增
         function flexiInsert() {
@@ -685,7 +629,7 @@ s：字符串
                 }
             }
             else {
-                alert('请先选择一行')
+                $.messager.alert('操作提示', "请先选择一行！", 'info');
             }
         }
         //委托单(包含器具信息)发送
@@ -702,13 +646,13 @@ s：字符串
                     entity.ID = $("#ORDER_TASK_INFORMATIONID").val();
 
                     entity.ACCEPT_ORGNIZATION = $("#ACCEPT_ORGNIZATION option:selected").val();//受理单位
-                    entity.INSPECTION_ENTERPRISE = $("#INSPECTION_ENTERPRISE").val();//送检单位
+                    entity.INSPECTION_ENTERPRISE = $('#INSPECTION_ENTERPRISE').combobox('getText');//送检单位$('#com').combobox('getText')
                     entity.INSPECTION_ENTERPRISE_ADDRESS = $("#INSPECTION_ENTERPRISE_ADDRESS").val();//送检单位地址
                     entity.INSPECTION_ENTERPRISE_POST = $("#INSPECTION_ENTERPRISE_POST").val();//送检单位邮政编码
                     entity.CONTACTS = $("#CONTACTS").val();//联系人
                     entity.CONTACT_PHONE = $("#CONTACT_PHONE").val();//联系电话
                     entity.FAX = $("#FAX").val();//传真
-                    entity.CERTIFICATE_ENTERPRISE = $("#CERTIFICATE_ENTERPRISE").val();//证书单位
+                    entity.CERTIFICATE_ENTERPRISE = $('#CERTIFICATE_ENTERPRISE').combobox('getText');//证书单位$('#com').combobox('getText')
                     entity.CERTIFICATE_ENTERPRISE_ADDRESS = $("#CERTIFICATE_ENTERPRISE_ADDRESS").val();//证书单位地址
                     entity.CERTIFICATE_ENTERPRISE_POST = $("#CERTIFICATE_ENTERPRISE_POST").val();//证书单位邮政编码
                     entity.CONTACTS2 = $("#CONTACTS2").val();//联系人2
@@ -729,7 +673,7 @@ s：字符串
                                     $("#order input[type='text']").each(function () {
                                         $(this).val("");
                                     });
-                                    $("#ACCEPT_ORGNIZATION").val(""); 
+                                    $("#ACCEPT_ORGNIZATION").val("");
                                     $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val("");
                                     $("#ApplianceDate").edatagrid("loadData", [])
                                     $.messager.alert('操作提示', "发送实验室成功", 'info');
@@ -755,7 +699,7 @@ s：字符串
         }
 
         $('#ApplianceDate').edatagrid({
-
+            singleSelect: false,
             toolbar: [
              {
                  text: '新增',
@@ -850,8 +794,8 @@ s：字符串
                       type: 'combobox',
                       options: {
                           multiple: true,
-                          data: [{ value: '电能', text: '电能' }, { value: '指示仪表', text: '指示仪表' },
-                              { value: '数字仪表', text: '数字仪表' }, { value: '互感器', text: '互感器' }, { value: '数表三相', text: '数表三相' }],
+                          data: [{ value: '@Common.LABORATORYNAME.电能.ToString()', text: '@Common.LABORATORYNAME.电能.ToString()' }, { value: '@Common.LABORATORYNAME.指示仪表.ToString()', text: '@Common.LABORATORYNAME.指示仪表.ToString()' },
+                              { value: '@Common.LABORATORYNAME.数表单相.ToString()', text: '@Common.LABORATORYNAME.数表单相.ToString()' }, { value: '@Common.LABORATORYNAME.互感器.ToString()', text: '@Common.LABORATORYNAME.互感器.ToString()' }, { value: '@Common.LABORATORYNAME.数表三相.ToString()', text: '@Common.LABORATORYNAME.数表三相.ToString()' },{ value: '@Common.LABORATORYNAME.直流仪器.ToString()', text: '@Common.LABORATORYNAME.直流仪器.ToString()' }],
                           panelHeight: 'auto'
                       }
                   }
