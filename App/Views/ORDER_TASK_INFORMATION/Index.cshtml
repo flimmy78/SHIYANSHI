@@ -27,7 +27,7 @@
                     @Html.LabelFor(model => model.INSPECTION_ENTERPRISE):
                 </div>
                 <div class="input_search-field">
-                    @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY("送检"), "请选择", new { @class = "easyui-combobox" })
+                    @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY("送检"), "请选择", new { @class = "easyui-combobox",id= "INSPECTION_ENTERPRISE" })
                 </div>
             </div>
             <div class="input_search">
@@ -35,7 +35,7 @@
                     @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE):
                 </div>
                 <div class="input_search-field">
-                   @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY("证书"), "请选择", new { @class = "easyui-combobox" })
+                   @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY("证书"), "请选择", new { @class = "easyui-combobox",id = "CERTIFICATE_ENTERPRISE" })
                 </div>
             </div>
             <div class="input_search">
@@ -43,7 +43,7 @@
                     @Html.LabelFor(model => model.ORDER_STATUS):
                 </div>
                 <div class="input_search-field">
-                    @Html.DropDownList("ORDER_STATUSDDL", Models.SysFieldModels.GetSysField("ORDER_TASK_INFORMATION","ORDER_STATUS"),"请选择",new { id = "ORDER_STATUSDDL" })
+                    @Html.DropDownList("ORDER_STATUS", Models.SysFieldModels.GetSysField("ORDER_TASK_INFORMATION","ORDER_STATUS"),"请选择",new { id = "ORDER_STATUS" })
                 </div>
             </div> 
             <div class='input_search'>
@@ -125,13 +125,13 @@
 
             //将查询条件按照分隔符拼接成字符串
             var search = "";
-            $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
-                if (this.id)
-                    search = search + this.id + "&" + this.value + "^";
-                else
-                    search = search + this.name + "&" + this.value + "^";
-            });
-            //执行查询
+            search += "ORDER_NUMBER&" + $("#ORDER_NUMBER").val()+"^";
+            search += "ACCEPT_ORGNIZATION&" + $("#ACCEPT_ORGNIZATION option:selected").val() + "^";
+            search += "INSPECTION_ENTERPRISE&" + $('#INSPECTION_ENTERPRISE').combobox('getText') + "^";
+            search += "CERTIFICATE_ENTERPRISE&" + $('#CERTIFICATE_ENTERPRISE').combobox('getText') + "^";
+            search += "ORDER_STATUS&" + $("#ORDER_STATUS option:selected").val() + "^";
+            search += "CREATETIMEStart_Time&" + $("#CREATETIMEStart_Time").val() + "^";
+            search += "CREATETIMEEnd_Time&" + $("#CREATETIMEEnd_Time").val() + "^";
             $('#flexigridData').datagrid('load', { search: search });
         };
         //“导出”按钮     在6.0版本中修改
