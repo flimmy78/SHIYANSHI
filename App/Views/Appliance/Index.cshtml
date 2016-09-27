@@ -68,8 +68,8 @@
                 var VERSION = rec.show.split(',')[2];
                 var APPLIANCE_NAME = rec.show.split(',')[3];
                 $('#BAR_CODE_NUM').val(BAR_CODE_NUM);
-                $('#FACTORY_NUM').combobox('clear');
-                $('#FACTORY_NUM').combobox('setValue', FACTORY_NUM);
+                //$('#FACTORY_NUM').combobox('clear');
+                //$('#FACTORY_NUM').combobox('setValue', FACTORY_NUM);
                 $('#VERSION').combobox('clear');
                 $('#VERSION').combobox('setValue', VERSION);
                 $('#APPLIANCE_NAME').combobox('clear');
@@ -128,8 +128,8 @@
                 $('#BAR_CODE_NUM').val(BAR_CODE_NUM);
                 $('#FACTORY_NUM').combobox('clear');
                 $('#FACTORY_NUM').combobox('setValue', FACTORY_NUM);
-                $('#VERSION').combobox('clear');
-                $('#VERSION').combobox('setValue', VERSION);
+                //$('#VERSION').combobox('clear');
+                //$('#VERSION').combobox('setValue', VERSION);
                 $('#APPLIANCE_NAME').combobox('clear');
                 $('#APPLIANCE_NAME').combobox('setValue', APPLIANCE_NAME);
             },
@@ -187,8 +187,8 @@
                 $('#FACTORY_NUM').combobox('setValue', FACTORY_NUM);
                 $('#VERSION').combobox('clear');
                 $('#VERSION').combobox('setValue', VERSION);
-                $('#APPLIANCE_NAME').combobox('clear');
-                $('#APPLIANCE_NAME').combobox('setValue', APPLIANCE_NAME);               
+                //$('#APPLIANCE_NAME').combobox('clear');
+                //$('#APPLIANCE_NAME').combobox('setValue', APPLIANCE_NAME);               
             },
             formatter: function (row) {
                 return row.show;
@@ -629,7 +629,7 @@ s：字符串
                 }
             }
             else {
-                alert('请先选择一行')
+                $.messager.alert('操作提示', "请先选择一行！", 'info');
             }
         }
         //委托单(包含器具信息)发送
