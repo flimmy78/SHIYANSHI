@@ -79,7 +79,7 @@ namespace Langben.DAL
                      .CreateObjectSet<APPLIANCE_DETAIL_INFORMATION>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
                      .AsQueryable();       
-            var dfads = db.APPLIANCE_DETAIL_INFORMATION.Count();
+             
             return data;
 
         }
