@@ -40,9 +40,9 @@
                     success: function (data) {
                         //关键步骤，遍历一个MAP对象
                         var items = $.map(data, function (item) {
-
+                         
                             return {
-                                id: item.value
+                                id: item.id
                                 ,
                                 name: item.value
                                 ,
@@ -54,6 +54,7 @@
                     },
                     //异常处理
                     error: function (xml, text, msg) {
+                        debugger;
                         error.apply(this, arguments);
                     }
                 });
@@ -61,7 +62,7 @@
             valueField: 'id',
             textField: 'name',
             onSelect: function (rec) {
-                debugger;
+               
                 var BAR_CODE_NUM = rec.show.split(',')[0];
                 var FACTORY_NUM = rec.show.split(',')[1];
                 var VERSION = rec.show.split(',')[2];
@@ -101,7 +102,7 @@
                         var items = $.map(data, function (item) {
 
                             return {
-                                id: item.value
+                                id: item.id
                                 ,
                                 name: item.value
                                 ,
@@ -158,7 +159,7 @@
                         var items = $.map(data, function (item) {
 
                             return {
-                                id: item.value
+                                id: item.id
                                 ,
                                 name: item.value
                                 ,
@@ -194,18 +195,17 @@
             }
         });
     })
-</script>
+</script><br style="clear:both;" />
 <div>
-    条形码：<input id="BAR_CODE_NUM" name="BAR_CODE_NUM" style="width:250px;" />
-    出厂编号：<input id="FACTORY_NUM" name="FACTORY_NUM" style="width:250px;" />
-    型号：<input id="VERSION" name="VERSION" style="width:250px;" />
-    器具名称：<input id="APPLIANCE_NAME" name="APPLIANCE_NAME" style="width:250px;" />
+    条形码：<input id="BAR_CODE_NUM" name="BAR_CODE_NUM" style="width:90px;" />
+    出厂编号：<input id="FACTORY_NUM" name="FACTORY_NUM" style="width:200px;" />
+    型号：<input id="VERSION" name="VERSION" style="width:150px;" />
+    器具名称：<input id="APPLIANCE_NAME" name="APPLIANCE_NAME" style="width:150px;" />
     <a href="#" onclick="seng()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
         查 询
     </a>
 </div>
-<br style="clear:both;" />
-<br style="clear:both;" />
+ <br style="clear:both;" />
 <div class="bigdiv" style="width: 854px;" id="order">
 
     <div class="editor-label">

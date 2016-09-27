@@ -61,11 +61,7 @@ namespace Langben.BLL
                             stringBuilder.Append(",");
                             stringBuilder.Append(@"@label@:@" + item.BAR_CODE_NUM + "," + item.FACTORY_NUM + "," + item.VERSION + "," + item.APPLIANCE_NAME + "@");
                             stringBuilder.Append(",");
-                            stringBuilder.Append(@"@VERSION@:@" + item.VERSION + "@");
-                            stringBuilder.Append(",");
-                            stringBuilder.Append(@"@FACTORY_NUM@:@" + item.FACTORY_NUM + "@");
-                            stringBuilder.Append(",");
-                            stringBuilder.Append(@"@APPLIANCE_NAME@:@" + item.APPLIANCE_NAME + "@}");
+                            stringBuilder.Append(@"@id@:@" + item.ID + "@}");
                         }
                         else
                         {
@@ -90,11 +86,8 @@ namespace Langben.BLL
                             stringBuilder.Append(",");
                             stringBuilder.Append(@"@label@:@" + item.BAR_CODE_NUM + "," + item.FACTORY_NUM + "," + item.VERSION + "," + item.APPLIANCE_NAME + "@");
                             stringBuilder.Append(",");
-                            stringBuilder.Append(@"@VERSION@:@" + item.VERSION + "@");
-                            stringBuilder.Append(",");
-                            stringBuilder.Append(@"@FACTORY_NUM@:@" + item.FACTORY_NUM + "@");
-                            stringBuilder.Append(",");
-                            stringBuilder.Append(@"@APPLIANCE_NAME@:@" + item.APPLIANCE_NAME + "@}");
+                        
+                            stringBuilder.Append(@"@id@:@" + item.ID + "@}");
                         }
                     }
                 }
