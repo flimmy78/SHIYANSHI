@@ -114,7 +114,7 @@ input {
 }
 
 .input_search-label {
-    width: 80px;
+    width: 90px;
     float: left;
     text-align: right;
     margin: 13px 0 9px;
@@ -294,7 +294,7 @@ textarea {
 .search_lable {
     float: left;
     margin-left: 0px;
-    width: 80px;
+    width: 90px;
     text-align: right;
 }
 
@@ -303,7 +303,7 @@ textarea {
 }
 
 .searchButton {
-    width: 60px;
+    width: 70px;
     height: 22px;
     cursor: pointer;
     padding: 0 10 0 5;
