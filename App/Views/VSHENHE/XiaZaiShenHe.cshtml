@@ -71,9 +71,14 @@
                 <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
                     <input type="hidden" name="SHPI" value="@ViewBag.HEIFSP" />
                     <input type="hidden" name="ISAGGREY" value="" id="ISAGGREY" />
-
-                    <input type="submit" value="同意送批准" onclick="patongyi(this)" disabled="disabled" />
-                    <input type="submit" value="不同意" onclick="patongyi(this)" disabled="disabled" />
+                    <div class="display-label">
+                        <label>  </label>
+                    </div>
+                    <div class="display-field">
+                        <input type="submit" value="同意送批准" onclick="patongyi(this)" disabled="disabled" />
+                        <input type="submit" value="不同意" onclick="patongyi(this)" disabled="disabled" />
+                    </div>
+                   
 
             }
             else if (ViewBag.HEIFSP == "P")
@@ -92,9 +97,14 @@
                     <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
                     <input type="hidden" name="SHPI" value="@ViewBag.HEIFSP" />
                     <input type="hidden" name="ISAGGREY" value="" id="ISAGGREY2" />
-                    <input type="submit" value="同意" onclick="patongyi(this)" disabled="disabled" />
-                    <input type="submit" value="不同意" onclick="patongyi(this)" disabled="disabled" />
-
+                  
+                    <div class="display-label">
+                        <label>  </label>
+                    </div>
+                    <div class="display-field">
+                        <input type="submit" value="同意" onclick="patongyi(this)" disabled="disabled" />
+                        <input type="submit" value="不同意" onclick="patongyi(this)" disabled="disabled" />
+                    </div>
             }
 
 

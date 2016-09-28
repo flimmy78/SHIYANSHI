@@ -18,6 +18,8 @@
         </legend>
         <div class="bigdiv">
             @Html.HiddenFor(model => model.ID )      
+            @Html.HiddenFor(model => model.CREATEPERSON )
+            @Html.HiddenFor(model => model.CREATETIME)
             <div class="editor-label">
                 @Html.LabelFor(model => model.COMPANYNAME)：
             </div>
@@ -25,41 +27,7 @@
                 @Html.EditorFor(model => model.COMPANYNAME)
                 @Html.ValidationMessageFor(model => model.COMPANYNAME)
             </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.COMPANYADDRES)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.COMPANYADDRES)
-                @Html.ValidationMessageFor(model => model.COMPANYADDRES)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.POSTCODE)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.POSTCODE)
-                @Html.ValidationMessageFor(model => model.POSTCODE)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CONTACTS)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CONTACTS)
-                @Html.ValidationMessageFor(model => model.CONTACTS)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CONTACTSNUMBER)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CONTACTSNUMBER)
-                @Html.ValidationMessageFor(model => model.CONTACTSNUMBER)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.FAX)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.FAX)
-                @Html.ValidationMessageFor(model => model.FAX)
-            </div>       
+                 
             <div class="editor-label">
                 <a class="anUnderLine" onclick="showModalOnly('PARENTID','../../COMPANY');">
                     @Html.LabelFor(model => model.PARENTID) 
@@ -85,20 +53,8 @@
                      }} 
                 </div>
                 @Html.HiddenFor(model => model.PARENTID)
-            </div>@Html.HiddenFor(model => model.CREATETIME )      
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CATEGORY)：
-            </div>
-            <div class="editor-field">
-                @Html.DropDownList("CATEGORY", Models.SysFieldModels.GetSysField("COMPANY", "CATEGORY"), "请选择")
-            </div>     
-            @*<div class="editor-label">
-                @Html.LabelFor(model => model.UPDATEPERSON)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.UPDATEPERSON)
-                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
-            </div>*@
+            </div> 
+             
         </div>
     </fieldset>
 }
@@ -117,7 +73,9 @@
                 type: "Get",
                 // async: false,
                 success: function (res) {
-                    $("#ID").val(res.ID); $("#COMPANYNAME").val(res.COMPANYNAME); $("#COMPANYADDRES").val(res.COMPANYADDRES); $("#POSTCODE").val(res.POSTCODE); $("#CONTACTS").val(res.CONTACTS); $("#CONTACTSNUMBER").val(res.CONTACTSNUMBER); $("#FAX").val(res.FAX); $("#CREATETIME").val(res.CREATETIME); $("#CATEGORY").val(res.CATEGORY); //$("#UPDATEPERSON").val(res.UPDATEPERSON);
+                    $("#ID").val(res.ID); $("#COMPANYNAME").val(res.COMPANYNAME);
+                    $("#CREATEPERSON").val(res.CREATEPERSON);
+                    $("#CREATETIME").val(res.CREATETIME); 
                 }
             })
         });
