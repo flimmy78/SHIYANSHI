@@ -37,7 +37,7 @@ namespace Langben.DAL
         public object INSPECTION_ENTERPRISE_ADDRESS { get; set; }
 
         [ScaffoldColumn(true)]
-        [Display(Name = "送检单位邮政编", Order = 6)]
+        [Display(Name = "送检单位邮编", Order = 6)]
         public object INSPECTION_ENTERPRISE_POST { get; set; }
 
         [ScaffoldColumn(true)]
@@ -61,7 +61,7 @@ namespace Langben.DAL
         public object CERTIFICATE_ENTERPRISE_ADDRESS { get; set; }
 
         [ScaffoldColumn(true)]
-        [Display(Name = "证书单位邮政编", Order = 12)]
+        [Display(Name = "证书单位邮编", Order = 12)]
         public object CERTIFICATE_ENTERPRISE_POST { get; set; }
 
         [ScaffoldColumn(true)]

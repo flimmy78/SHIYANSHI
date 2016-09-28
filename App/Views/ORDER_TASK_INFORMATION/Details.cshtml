@@ -556,8 +556,7 @@ s：字符串
                         REMARKS: row.APPLIANCE_DETAIL_INFORMATIONShows[i].REMARKS,
                     });
                 }              
-                var leng = $('#ApplianceDate').edatagrid('getRows');
-                if (leng.length <= 1) {
+
                     $("#ACCEPT_ORGNIZATION").val(row.ACCEPT_ORGNIZATION);//受理单位
                     $("#INSPECTION_ENTERPRISE").combobox('select', row.INSPECTION_ENTERPRISE);//送检单位
                     $("#INSPECTION_ENTERPRISE_ADDRESS").val(row.INSPECTION_ENTERPRISE_ADDRESS);//送检单位地址
@@ -572,7 +571,7 @@ s：字符串
                     $("#CONTACT_PHONE2").val(row.CONTACT_PHONE2);//联系电话2
                     $("#FAX2").val(row.FAX2);//传真2
                     $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val(row.CUSTOMER_SPECIFIC_REQUIREMENTS);//客户特殊要求
-                }
+                
             }
         })
     }

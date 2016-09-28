@@ -261,7 +261,7 @@
         @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY("证书"), "请选择", new { @class = "easyui-combobox" })
     </div>
     <div class="editor-label">
-        @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
+        <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
     </div>
     <div class="editor-field">
         @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
@@ -275,14 +275,14 @@
         @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_POST)
     </div>
     <div class="editor-label">
-        @Html.LabelFor(model => model.CONTACTS2)：
+        <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACTS2)：
     </div>
     <div class="editor-field">
         @Html.EditorFor(model => model.CONTACTS2)
         @Html.ValidationMessageFor(model => model.CONTACTS2)
     </div>
     <div class="editor-label">
-        @Html.LabelFor(model => model.CONTACT_PHONE2)：
+        <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACT_PHONE2)：
     </div>
     <div class="editor-field">
         @Html.EditorFor(model => model.CONTACT_PHONE2)
@@ -477,14 +477,14 @@ s：字符串
 如果通过验证返回true,否则返回false
 */
     function isNumber(s) {
-        var regu = "^[0-9]+$";
-        var re = new RegExp(regu);
-        if (s.search(re) != -1) {
+        var regu = /^[0-9]*[1-9][0-9]*$/;
+        if (regu.test(s)) {
             return true;
         } else {
             return false;
         }
     }
+
 
 </script>
 <script type="text/javascript">
@@ -532,7 +532,9 @@ s：字符串
             }
         })
     }
-    $(function () {      
+    $(function () {
+        
+        
         //删除
         function flexiDelete() {
             //var rows = $('#ApplianceDate').datagrid("getSelections");
@@ -629,26 +631,13 @@ s：字符串
                             },
                             success: function (data) {
                                 if (data.Code == 1) {
-                                    $("#order input[type='text']").each(function () {
-                                        $(this).val("");
+                                                                    
+                                    $.messager.alert('操作提示', "发送实验室成功！", 'info', function () {                                     
+                                            window.location.href = '';  
                                     });
-                                    $("#ACCEPT_ORGNIZATION").val("");
-                                    $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val("");
-                                    $("#ApplianceDate").edatagrid("loadData", [])
-                                    $.messager.alert('操作提示', "发送实验室成功", 'info');
                                 }
-                                else {
-                                    $("#ORDER_TASK_INFORMATIONID").val(data.Id);//记录该委托单的id，如果为空，表示为新增，否则为修改
-                                    if ($.messager) {
-                                        $.messager.defaults.ok = '继续';
-                                        $.messager.defaults.cancel = '返回';
-
-                                        $.messager.confirm('操作提示', data.Message, function (r) {
-                                            if (!r) {
-                                                window.location.href = 'javascript:history.go(-1)';
-                                            }
-                                        });
-                                    }
+                                else {                                 
+                                    $.messager.alert('操作提示', "发送实验室失败！", 'error');
                                 }
                             }
                         });

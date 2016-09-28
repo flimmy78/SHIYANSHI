@@ -32,6 +32,7 @@
 @using (Html.BeginForm("", "api/PREPARE_SCHEMEApi/SheIsPi"))
 {
     <fieldset>
+        <input class="a2 f2" type="button" onclick="fanhui()" value="返回" />
         <div class="bigdiv" id="shenghediv">
             <div class="display-label">
                 <label> 原始记录：</label>
@@ -113,21 +114,15 @@
     </fieldset>
 }
 <script type="text/javascript">
-    @*$(function () {
-        $.ajax({
-            url: "/api/FILE_UPLOADERApi/Get/" + "@ViewBag.FILE_UPLOADER_ID",
-            type: "Get",
-            dataType: "xml",
-            // async: false,
-            success: function (res) {
-                if (res != null) {
-                    $("#yuanshi").arrt("href", "" + res.FULLPATH2 + "");
-                    $("#zhenshu").arrt("href", "" + res.FULLPATH + "");
-                    $("#jielu").html(res.CONCLUSION);
-                }
-            }
-        })
-    })*@
+    function fanhui() {
+        if ('@ViewBag.HEIFSP' == 'P')
+        {
+            window.location.href = '/VSHENPI/Index';
+        }
+        else if ('@ViewBag.HEIFSP' == 'H') {
+            window.location.href = '/VSHENHE/Index';
+        }
+    }
     function patongyi(arr) {
         var zhi = $(arr).val();
         if ("@ViewBag.HEIFSP" == "H") {
