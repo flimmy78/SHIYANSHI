@@ -217,8 +217,6 @@
         @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
     </div>
     <div class="editor-field">
-        @*@Html.EditorFor(model => model.INSPECTION_ENTERPRISE)
-        @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE)*@
         @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY("送检"), "请选择", new { @class="easyui-combobox" })
     </div>
     <div class="editor-label">
@@ -257,11 +255,9 @@
         @Html.ValidationMessageFor(model => model.FAX)
     </div>
     <div class="editor-label">
-        @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
+       <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
     </div>
     <div class="editor-field">
-        @*@Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE)
-        @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE)*@
         @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY("证书"), "请选择", new { @class = "easyui-combobox" })
     </div>
     <div class="editor-label">
@@ -536,43 +532,7 @@ s：字符串
             }
         })
     }
-    $(function () {
-        var editIndex = undefined;
-        function endEditing() {
-            if (editIndex == undefined) { return true }
-            if ($('#ApplianceDate').datagrid('validateRow', editIndex)) {
-                $('#ApplianceDate').datagrid('endEdit', editIndex);
-                editIndex = undefined;
-                return true;
-            } else {
-                return false;
-            }
-        }
-        function append() {
-            if (endEditing()) {
-                $('#ApplianceDate').datagrid('appendRow', { status: 'P' });
-                editIndex = $('#ApplianceDate').datagrid('getRows').length - 1;
-                $('#ApplianceDate').datagrid('selectRow', editIndex)
-                        .datagrid('beginEdit', editIndex);
-            }
-        }
-        function onClickCell(index, field) {
-            if (editIndex != index) {
-                if (endEditing()) {
-                    $('#ApplianceDate').datagrid('selectRow', index)
-                            .datagrid('beginEdit', index);
-                    var ed = $('#ApplianceDate').datagrid('getEditor', { index: index, field: field });
-                    if (ed) {
-                        ($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
-                    }
-                    editIndex = index;
-                } else {
-                    setTimeout(function () {
-                        $('#ApplianceDate').datagrid('selectRow', editIndex);
-                    }, 0);
-                }
-            }
-        }
+    $(function () {      
         //删除
         function flexiDelete() {
             //var rows = $('#ApplianceDate').datagrid("getSelections");
