@@ -37,19 +37,19 @@ namespace Langben.DAL
         public object INSPECTION_ENTERPRISE_ADDRESS { get; set; }
 
         [ScaffoldColumn(true)]
-        [Display(Name = "送检单位邮政编码", Order = 6)]
+        [Display(Name = "送检单位邮政编", Order = 6)]
         public object INSPECTION_ENTERPRISE_POST { get; set; }
 
         [ScaffoldColumn(true)]
-        [Display(Name = "联系人", Order = 7)]
+        [Display(Name = "送检单位联系人", Order = 7)]
         public object CONTACTS { get; set; }
 
         [ScaffoldColumn(true)]
-        [Display(Name = "联系电话", Order = 8)]
+        [Display(Name = "送检单位电话", Order = 8)]
         public object CONTACT_PHONE { get; set; }
 
         [ScaffoldColumn(true)]
-        [Display(Name = "传真", Order = 9)]
+        [Display(Name = "送检单位传真", Order = 9)]
         public object FAX { get; set; }
 
         [ScaffoldColumn(true)]
@@ -61,19 +61,19 @@ namespace Langben.DAL
         public object CERTIFICATE_ENTERPRISE_ADDRESS { get; set; }
 
         [ScaffoldColumn(true)]
-        [Display(Name = "证书单位邮政编码", Order = 12)]
+        [Display(Name = "证书单位邮政编", Order = 12)]
         public object CERTIFICATE_ENTERPRISE_POST { get; set; }
 
         [ScaffoldColumn(true)]
-        [Display(Name = "联系人2", Order = 13)]
+        [Display(Name = "证书单位联系人", Order = 13)]
         public object CONTACTS2 { get; set; }
 
         [ScaffoldColumn(true)]
-        [Display(Name = "联系电话2", Order = 14)]
+        [Display(Name = "证书单位电话", Order = 14)]
         public object CONTACT_PHONE2 { get; set; }
 
         [ScaffoldColumn(true)]
-        [Display(Name = "传真2", Order = 15)]
+        [Display(Name = "证书单位传真", Order = 15)]
         public object FAX2 { get; set; }
 
         [ScaffoldColumn(true)]
