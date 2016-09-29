@@ -24,25 +24,25 @@
         </table>
     </div>
 </div>
-@if (ViewBag.ID != null)
+@if (ViewData["ID"] != null)
 {
-    <input type="hidden" id="hideID" value="@ViewBag.ID"/><!--主键-->
+    <input type="hidden" id="hideID" value="@ViewData["ID"]"/><!--主键-->
 }
 else
 {
     <input type="hidden" id="hideID" value="" /><!--主键-->
 }
-@if (ViewBag.RULEID != null)
+@if (ViewData["RULEID"] != null)
 {
-    <input type="hidden" id="hideRULEID" value="@ViewBag.RULEID"/><!--检测项-->
+    <input type="hidden" id="hideRULEID" value="@ViewData["RULEID"]"/><!--检测项-->
 }
 else
 {
     <input type="hidden" id="hideRULEID" value="" /><!--检测项-->
 }
-@if (ViewBag.SCHEMEID != null)
+@if (ViewData["SCHEMEID"] != null)
 {
-    <input type="hidden" id="hideSCHEMEID" value="@ViewBag.SCHEMEID"/><!--方案编号-->
+    <input type="hidden" id="hideSCHEMEID" value="@ViewData["SCHEMEID"]"/><!--方案编号-->
 }
 else
 {

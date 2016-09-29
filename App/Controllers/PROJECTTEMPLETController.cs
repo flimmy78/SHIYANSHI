@@ -53,24 +53,21 @@ namespace Langben.App.Controllers
         /// <summary>
         /// 直流电流输出
         /// </summary>
-        /// <param name="id">主键</param>
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns> 
-        public ActionResult ZhiLiuDianLiuShuChu(string ID, string RULEID, string SCHEMEID)
+        [SupportFilter]
+        public ActionResult ZhiLiuDianLiuShuChu(string RULEID, string SCHEMEID)
         {
-            ViewData["ID"] = ID;
-
-            if (ID == null || ID.Trim() == "")
+            DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
+            if (entity != null)
             {
-                DAL.PROJECTTEMPLET model = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
-                if (model != null)
-                {
-                    ViewBag.Id = model.ID;
-                    ViewData["ID"] = model.ID;
-                }
+                ViewData["ID"] = entity.ID;
             }
+
             ViewData["RULEID"] = RULEID;
             ViewData["SCHEMEID"] = SCHEMEID;
-            return View();
+            return View(entity);
         }
         /// <summary>
         /// 保存
