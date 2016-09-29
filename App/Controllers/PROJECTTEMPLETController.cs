@@ -44,23 +44,17 @@ namespace Langben.App.Controllers
         /// <param name="id">主键</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult ZhiLiuDianLiuShuChu(string ID,string RULEID, string SCHEMEID,string LianDongDDL)
+        public ActionResult ZhiLiuDianLiuShuChu(string RULEID, string SCHEMEID)
         {
-            ViewBag.Id = ID;
-            ViewData["ID"] = ID;
-            
-            if(ID==null || ID.Trim()=="")
-            {
-                DAL.PROJECTTEMPLET model= m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
-                if(model!=null)
-                {
-                    ViewBag.Id = model.ID;
-                    ViewData["ID"] = model.ID;
-                }
-            }
-            ViewData["RULEID"] = RULEID;
-            ViewData["SCHEMEID"] = SCHEMEID;
-            return View();
+           DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
+           if(entity != null)
+           {
+               ViewBag.ID = entity.ID;                    
+           }
+
+            ViewBag.RULEID = RULEID;
+            ViewBag.SCHEMEID = SCHEMEID;
+            return View(entity);
         }
         /// <summary>
         /// 保存

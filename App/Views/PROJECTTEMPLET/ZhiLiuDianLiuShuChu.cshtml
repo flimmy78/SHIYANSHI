@@ -1,4 +1,4 @@
-﻿@model Langben.DAL.SCHEME_RULE
+﻿@model Langben.DAL.PROJECTTEMPLET
 
 @{
     Layout = "~/Views/Shared/Edit.cshtml";
@@ -24,10 +24,40 @@
         </table>
     </div>
 </div>
-<input type="hidden" id="hideID" value="@ViewData["ID"]"/><!--主键-->
-<input type="hidden" id="hideRULEID" value="@ViewData["RULEID"]"/><!--检测项-->
-<input type="hidden" id="hideSCHEMEID" value="@ViewData["SCHEMEID"]"/><!--方案编号-->
-<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;" id="divHtml">    
+@if (ViewBag.ID != null)
+{
+    <input type="hidden" id="hideID" value="@ViewBag.ID"/><!--主键-->
+}
+else
+{
+    <input type="hidden" id="hideID" value="" /><!--主键-->
+}
+@if (ViewBag.RULEID != null)
+{
+    <input type="hidden" id="hideRULEID" value="@ViewBag.RULEID"/><!--检测项-->
+}
+else
+{
+    <input type="hidden" id="hideRULEID" value="" /><!--检测项-->
+}
+@if (ViewBag.SCHEMEID != null)
+{
+    <input type="hidden" id="hideSCHEMEID" value="@ViewBag.SCHEMEID"/><!--方案编号-->
+}
+else
+{
+    <input type="hidden" id="hideSCHEMEID" value="" /><!--方案编号-->
+}
+@if (Model != null && Model.HTMLVALUE != null && Model.HTMLVALUE.Trim() != "")
+{
+    <input type="hidden" id="hideHTMLVALUE" value="@Model.HTMLVALUE" />
+}
+else
+{
+    <input type="hidden" id="hideHTMLVALUE" value="" />
+}
+<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;" id="divHtml">  
+   
     <input type="hidden" id="rowindex" value="0" />
     <div class="mt10" id="tongdao">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_1">
@@ -119,7 +149,13 @@
 <script type="text/javascript" language="javascript">
     //var RuleID = $("#hideRULEID").val();//检测项目ID
     //var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
-    debugger;
+    $(document).ready(function () {
+        var hideHtml = $("#hideHTMLVALUE").val();
+        if (hideHtml.trim() != "") {
+            $("#divHtml").html("");
+            $("#divHtml").append(hideHtml);
+        }
+    });    
     BtnInit(RuleAttribute);
         //共有的通道数量
         var tableIdx = 1;
@@ -139,6 +175,9 @@
 
 
         };
+        function set(idx) {
+            //$("#rowindex").val(idx);            
+        }
         //重置
         function Reset()
         {

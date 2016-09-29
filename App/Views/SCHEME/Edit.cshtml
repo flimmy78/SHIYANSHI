@@ -149,21 +149,6 @@ else
                 RULEIDs += nodes[i].id;
             }
         }
-
-    //    $.post("api/SCHEMEApi/Post",
-    //{
-    //    NAME: NAME,
-    //    STATUS: "未使用",
-    //    ISSTOP: "停用",
-    //    UNDERTAKE_LABORATORYID:UNDERTAKE_LABORATORYID
-    //}, function (res) {
-    //    if (res.Code == 1) {
-    //        window.location.href = res.Message;
-    //    }
-    //    else $.messager.alert('操作提示', res.Message, 'info');
-
-        //});
-
         //获取空对象用于保存添加的信息
         $.ajax({
             type: 'post', //使用post方法访问后台
