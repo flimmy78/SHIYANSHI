@@ -70,7 +70,7 @@
                 </div>
                 <input type="hidden" name="ID" value="@ViewBag.PREPARE_SCHEME_ID" />
                 <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
-                    <input type="hidden" name="SHPI" value="@ViewBag.HEIFSP" />
+                <input type="hidden" name="SHPI" value="@ViewBag.HEIFSP" />
                     <input type="hidden" name="ISAGGREY" value="" id="ISAGGREY" />
                     <div class="display-label">
                         <label>  </label>
@@ -79,7 +79,7 @@
                         <input type="submit" value="同意送批准" onclick="patongyi(this)" disabled="disabled" />
                         <input type="submit" value="不同意" onclick="patongyi(this)" disabled="disabled" />
                     </div>
-                   
+
 
             }
             else if (ViewBag.HEIFSP == "P")
@@ -91,14 +91,14 @@
                     </label>
                 </div>
                 <div class="textarea-box">
-                    <textarea name="APPROVAL" style="height:80px;">这里写内容</textarea>
+                    <textarea name="APPROVAL" style="height:80px;"></textarea>
                 </div>
 
                 <input type="hidden" name="ID" value="@ViewBag.PREPARE_SCHEME_ID" />
-                    <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
+                <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
                     <input type="hidden" name="SHPI" value="@ViewBag.HEIFSP" />
                     <input type="hidden" name="ISAGGREY" value="" id="ISAGGREY2" />
-                  
+
                     <div class="display-label">
                         <label>  </label>
                     </div>
@@ -115,8 +115,7 @@
 }
 <script type="text/javascript">
     function fanhui() {
-        if ('@ViewBag.HEIFSP' == 'P')
-        {
+        if ('@ViewBag.HEIFSP' == 'P') {
             window.location.href = '/VSHENPI/Index';
         }
         else if ('@ViewBag.HEIFSP' == 'H') {

@@ -5,7 +5,7 @@ namespace Langben.IBLL
 {
     public interface ICOMPANYHander
     {
-        List<COMPANY> GetCOMPANY(string CATEGORY);
+        List<COMPANY> GetCOMPANY();
     }
 }
 

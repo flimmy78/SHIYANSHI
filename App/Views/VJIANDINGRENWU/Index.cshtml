@@ -41,7 +41,7 @@
             @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE):
         </div>
         <div class="input_search-field">
-            <input type='text' id='CERTIFICATE_ENTERPRISE' />
+            @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
         </div>
     </div>
     <div class="input_search">
@@ -49,7 +49,7 @@
             @Html.LabelFor(model => model.ORDER_STATUS):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("ORDER_STATUSDDL_String", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "ORDER_STATUS"), "请选择", new { id = "ORDER_STATUSDDL_String" })
+            @Html.DropDownList("ORDER_STATUS", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "ORDER_STATUS"), "请选择", new { id = "ORDER_STATUS" })
         </div>
     </div>
     <div class="input_search">
@@ -57,7 +57,7 @@
             @Html.LabelFor(model => model.INSPECTION_ENTERPRISE):
         </div>
         <div class="input_search-field">
-            <input type='text' id='INSPECTION_ENTERPRISE' />
+            @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
         </div>
     </div>
     <div class="input_search">
@@ -65,7 +65,7 @@
             @Html.LabelFor(model => model.ISOVERDUE):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("ISOVERDUEDDL_String", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "ISOVERDUE"), "请选择", new { id = "ISOVERDUEDDL_String" })
+            @Html.DropDownList("ISOVERDUE", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "ISOVERDUE"), "请选择", new { id = "ISOVERDUE" })
         </div>
     </div>
     <div class='input_search' style="padding-top:10px;">
@@ -79,7 +79,7 @@
 <div id="w" class="easyui-dialog" title="超期原因" data-options="iconCls:'icon-save'" style="width:700px;height:400px;padding:5px;">
     <div class="easyui-layout" data-options="fit:true">
         <input type="hidden" id="chaoqiid" value="" />
-        <textarea name="OVERDUE" style="width:100%;height:100%;" id="OVERDUE">这里写内容</textarea>
+        <textarea name="OVERDUE" style="width:100%;height:100%;" id="OVERDUE"></textarea>
         <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
             <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="chaoqibaocun()" style="width:80px">Ok</a>
             <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:$('#w').dialog('close')" style="width:80px">Cancel</a>
@@ -91,7 +91,7 @@
         <input type="hidden" id="tuihuiid" value="" />
         <input type="radio" name="tuihuiaa" value="1" />实验室分错
         <input type="radio" name="tuihuiaa" value="2" />器具不能检测
-        <textarea name="STORAGEINSTRUCTIONS" style="width:100%;height:100%;" id="STORAGEINSTRUCTIONS">这里写内容</textarea>
+        <textarea name="STORAGEINSTRUCTIONS" style="width:100%;height:100%;" id="STORAGEINSTRUCTIONS"></textarea>
         <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
             <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="tuihuibaocun()" style="width:80px">OK</a>
             <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:$('#d').dialog('close')" style="width:80px">Cancel</a>
@@ -109,7 +109,7 @@
     function chaoqi() {
         var arr = $('#flexigridData').datagrid('getSelections');
         if (arr.length == 1) {
-            if (arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.试验完成.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.待入库.ToString()"||arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.器具已入库.ToString()" ||arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.器具已领取.ToString()" ) {
+            if (arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.试验完成.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.待入库.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.器具已入库.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.器具已领取.ToString()") {
                 if (arr[0].CREATETIME != null) {
                     var datea = dateConvert(arr[0].CREATETIME);
                     var tame = formatterDate(new Date());
@@ -157,7 +157,7 @@
                     $('#w').dialog('close');
                 }
                 else {
-                    $.messager.alert('操作提示', "追加超期失败！", 'info');
+                    $.messager.alert('操作提示', "追加超期失败！", 'error');
                 }
             }
         })
@@ -180,7 +180,7 @@
                         $.messager.alert('操作提示', "退回数据有误！", 'info');
                     }
                 }
-            })                     
+            })
         }
         else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
@@ -225,7 +225,7 @@
                         $('#d').dialog('close');
                     }
                     else {
-                        $.messager.alert('操作提示', "退回失败！", 'info');
+                        $.messager.alert('操作提示', "退回失败！", 'error');
                     }
                 }
             })
@@ -270,7 +270,7 @@
             url: '../VJIANDINGRENWU/GetData', //获取数据的url
             sortName: 'EQUIPMENT_STATUS_VALUUMN',
             sortOrder: 'asc',
-            idField: 'ID',
+            idField: 'ISRECEIVE',
             rowStyler: function (value, row, index) {
                 if (row.ORDER_STATUS == "已分配" || row.ORDER_STATUS == "已领取" || row.ORDER_STATUS == "试验中") {
                     if (row.CREATETIME != null) {
@@ -332,28 +332,28 @@
             ],
             columns: [[
                     { field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 64, hidden: true }
-                    , { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 64 }
-                    , { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 64 }
-                    , { field: 'VERSION', title: '@Html.DisplayNameFor(model => model.VERSION)', width: 64 }
-                    , { field: 'FACTORY_NUM', title: '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 64 }
-                    , { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 64 }
-                    , { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 64 }
-                    , { field: 'APPLIANCE_PROGRESS', title: '@Html.DisplayNameFor(model => model.APPLIANCE_PROGRESS)', width: 64 }
-                    , { field: 'ORDER_STATUS', title: '@Html.DisplayNameFor(model => model.ORDER_STATUS)', width: 64 }
+                    , { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 100 }
+                    , { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', align: 'center', width: 100 }
+                    , { field: 'VERSION', title: '@Html.DisplayNameFor(model => model.VERSION)', align: 'center', width: 90 }
+                    , { field: 'FACTORY_NUM', title: '@Html.DisplayNameFor(model => model.FACTORY_NUM)', align: 'center', width: 100 }
+                    , { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', align: 'center', width: 100 }
+                    , { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', align: 'center', width: 100 }
+                    , { field: 'APPLIANCE_PROGRESS', title: '@Html.DisplayNameFor(model => model.APPLIANCE_PROGRESS)', align: 'center', width: 100 }
+                    , { field: 'ORDER_STATUS', title: '@Html.DisplayNameFor(model => model.ORDER_STATUS)', align: 'center', width: 100 }
                     , {
-                        field: 'CREATETIME', title: '@Html.DisplayNameFor(model => model.CREATETIME)', width: 64, formatter: function (value, row, index) {
+                        field: 'CREATETIME', title: '@Html.DisplayNameFor(model => model.CREATETIME)', align: 'center', width: 90, formatter: function (value, row, index) {
                             if (value) {
                                 return dateConvert(value);
                             }
                         }
                     }
 
-                    , { field: 'OVERDUE', title: '@Html.DisplayNameFor(model => model.OVERDUE)', width: 64 }
-                    , { field: 'STATE', title: '@Html.DisplayNameFor(model => model.STATE)', width: 64 }
-                    , { field: 'REPORTSTATUS', title: '@Html.DisplayNameFor(model => model.REPORTSTATUS)', width: 64 }
-                    , { field: 'APPROVAL', title: '@Html.DisplayNameFor(model => model.APPROVAL)', width: 64 }
-                    @*, { field: 'INSPECTION_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.INSPECTION_ENTERPRISE)', width: 64 }
-                    , { field: 'ISOVERDUE', title: '@Html.DisplayNameFor(model => model.ISOVERDUE)', width: 64 }*@
+                    , { field: 'OVERDUE', title: '@Html.DisplayNameFor(model => model.OVERDUE)', align: 'center', width: 100 }
+                    , { field: 'STATE', title: '@Html.DisplayNameFor(model => model.STATE)', align: 'center', width: 100 }
+                    , { field: 'REPORTSTATUS', title: '@Html.DisplayNameFor(model => model.REPORTSTATUS)', align: 'center', width: 100 }
+                    , { field: 'APPROVAL', title: '@Html.DisplayNameFor(model => model.APPROVAL)', align: 'center', width: 100 }
+                    , { field: 'INSPECTION_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.INSPECTION_ENTERPRISE)', width: 64 }
+                    @*, { field: 'ISRECEIVE', title: '@Html.DisplayNameFor(model => model.ISRECEIVE)', width: 64, hidden: true }*@
             ]],
             pagination: true,
             rownumbers: true
@@ -379,7 +379,17 @@
         var search = "";
         $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
             if (this.id)
-                search = search + this.id + "&" + this.value + "^";
+                if (this.id == "ISOVERDUE") {
+                    if (this.value == "否") {
+                        search = search + this.id + "&^";
+                    }
+                    else {
+                        search = search + this.id + "&" + this.value + "^";
+                    }
+                }
+                else {
+                    search = search + this.id + "&" + this.value + "^";
+                }
             else
                 search = search + this.name + "&" + this.value + "^";
         });
@@ -467,31 +477,42 @@
             var id = "";
             var APPLIANCECOLLECTIONSATE = "";
             var is = false;
+            var res2 = false;
             $.messager.confirm('操作提示', "确认领取这 " + arr.length + " 项吗？", function (r) {
                 if (r) {
                     for (var i = 0; i < arr.length; i++) {
-                        if (arr[i].ORDER_STATUS == "已分配") {
+                        $.ajax({
+                            url: "/api/APPLIANCE_LABORATORYApi/GetISRECEIVE/" + arr[i].ID,
+                            type: "Get",
+                            // async: false,
+                            success: function (res) {
+                                if (res == true) {
+                                    res2 = res;
+                                }
+                                else {
+                                    return false;
+                                }
+                            }
+                        })
+                        if (res2) {
                             id += arr[i].ID + ",";
                             APPLIANCECOLLECTIONSATE += arr[i].ORDER_STATUS + ",";
                             is = true;
                         }
-                        else if (islingqu(arr[i].ID) && arr[i].ORDER_STATUS=="@Common.ORDER_STATUS.试验完成.ToString()") {
-                            is = true;
-                        }
                         else {
-                            $.messager.alert('操作提示', '请选择正确数据!', 'warning');
+                            $.messager.alert('操作提示', '不能领取，请选择正确数据!', 'warning');
                             return false;
                         }
+                        
                     }
                     if (is) {
                         var arr2 = {
                             APPLIANCE_DETAIL_INFORMATIONID: id,
-                            APPLIANCECOLLECTIONSATE: APPLIANCECOLLECTIONSATE,
                         }
-                        $.ajax({                          
-                            url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/LINGQU",
+                        $.ajax({
+                            url: "/api/APPLIANCE_LABORATORYApi/LINGQU",
                             type: "Post",
-                            data:arr2,
+                            data: arr2,
                             // async: false,
                             success: function (res) {
                                 if (res.Code == 1) {
@@ -500,7 +521,7 @@
                                     $("#flexigridData").datagrid("clearSelections");
                                 }
                                 else {
-                                    $.messager.alert('操作提示', "领取失败！", 'info');
+                                    $.messager.alert('操作提示', "领取失败！", 'error');
                                 }
                             }
                         })
@@ -512,23 +533,6 @@
         else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
         }
-    }
-
-    //判断当前登入人是否已经领取过
-    function islingqu(id) {
-        $.ajax({
-            url: "/api/APPLIANCECOLLECTIONApi/GetID_NAME/" + id,
-            type: "Get",
-            // async: false,
-            success: function (res) {
-                if (res == true) {
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            }
-        })
     }
     //选择方案
     function xuanzhefanan() {

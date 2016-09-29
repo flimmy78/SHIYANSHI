@@ -161,15 +161,9 @@
                     }
                 }
             }
-        }
-        if (isNull(arr.CNAS)) {
-            zhi += "报告类别不能为空！<br>";
-            if (true) {
-
-            }
-        }
-        if (isNull(arr.REPORT_CATEGORY)) {
-            zhi += "报告类别不能为空！<br>";
+        }      
+        if (isNull(arr.QUALIFICATIONS)) {
+            zhi += "资质不能为空！<br>";
         }
         if (zhi != "") {
             $.messager.alert('操作提示', zhi, 'info');

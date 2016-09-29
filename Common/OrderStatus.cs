@@ -96,7 +96,7 @@ namespace Common
     }
 
     /// <summary>
-    /// 报告类型
+    /// 报告是上传还是系统生成
     /// </summary>
     public enum PACKAGETYPE
     {
@@ -107,7 +107,12 @@ namespace Common
         /// <summary>
         /// 报告通过系统生成的
         /// </summary>
-        生成 = 1022
+        生成 = 1022,
+        /// <summary>
+        /// 上传成功后附件表状态为已上传
+        /// </summary>
+        已上传=1033
+
     }
     /// <summary>
     /// 实验室
@@ -122,4 +127,12 @@ namespace Common
         互感器 = 60006
     }
 
+    /// <summary>
+    /// 是否领取
+    /// </summary>
+    public enum ISRECEIVE
+    {
+        是=1050,
+        否=1060
+    }
 }

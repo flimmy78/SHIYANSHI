@@ -24,6 +24,8 @@ namespace Langben.DAL
             string where = string.Empty;
             int flagWhere = 0;
             string EQUIPMENT_STATUS_VALUUMN = string.Empty;
+            string NAME = string.Empty;
+            string ISRECEIVE = string.Empty;
             Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
             if (queryDic != null && queryDic.Count > 0)
             {
@@ -32,10 +34,11 @@ namespace Langben.DAL
                     if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "EQUIPMENT_STATUS_VALUUMN")
                     {
                         EQUIPMENT_STATUS_VALUUMN = item.Value;
-                        //if (where.IndexOf(" and ") > 0)
-                        //{
-                        //    where = where.Remove(where.LastIndexOf(" and "));
-                        //}
+                        continue;
+                    }
+                    if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "NAME")
+                    {
+                        NAME = item.Value;
                         continue;
                     }
                     if (flagWhere != 0)
@@ -43,7 +46,7 @@ namespace Langben.DAL
                         where += " and ";
                     }
                     flagWhere++;
-                  
+
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Time)) + "] >=  CAST('" + item.Value + "' as   System.DateTime)";
@@ -91,11 +94,11 @@ namespace Langben.DAL
                     .CreateObjectSet<VJIANDINGRENWU>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
                      .OrderBy("it.[CREATETIME] " + "desc")
-                     .Where(w => EQUIPMENT_STATUS_VALUUMNarr.Contains(w.EQUIPMENT_STATUS_VALUUMN))
+                     .Where(w => EQUIPMENT_STATUS_VALUUMNarr.Contains(w.EQUIPMENT_STATUS_VALUUMN) && w.NAME == NAME)
                      .AsQueryable();
 
         }
-   
+
     }
 }
 

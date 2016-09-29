@@ -40,13 +40,10 @@ namespace Langben.DAL
         public string UPDATEPERSON { get; set; }
         public string APPLIANCE_RECIVE { get; set; }
         public string APPLIANCE_PROGRESS { get; set; }
-        public string ORDER_STATUS { get; set; }
         public string ISOVERDUE { get; set; }
         public string OVERDUE { get; set; }
         public string STORAGEINSTRUCTIONS { get; set; }
         public string STORAGEINSTRUCTI_STATU { get; set; }
-        public string EQUIPMENT_STATUS_VALUUMN { get; set; }
-        public string RETURN_INSTRUCTIONS { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<APPLIANCE_LABORATORY> APPLIANCE_LABORATORY { get; set; }

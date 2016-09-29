@@ -13,15 +13,30 @@ namespace Langben.IBLL
     /// </summary>
     public partial interface IAPPLIANCE_LABORATORYBLL
     {
-       /// <summary>
-       /// 修改（公用）
-       /// </summary>
-       /// <param name="validationErrors"></param>
-       /// <param name="entity"></param>
-       /// <returns></returns>
+        /// <summary>
+        /// 修改（公用）
+        /// </summary>
+        /// <param name="validationErrors"></param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         [OperationContract]
-        bool EditField(ref Common.ValidationErrors validationErrors, APPLIANCE_LABORATORY entity); 
-    
+        bool EditField(ref Common.ValidationErrors validationErrors, APPLIANCE_LABORATORY entity);
+        /// <summary>
+        /// 修改（领取）
+        /// </summary>
+        /// <param name="validationErrors"></param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool EditCollection(ref Common.ValidationErrors validationErrors, string[] deleteCollection, string shiyanshi);
+        /// <summary>
+        /// 修改（入库）
+        /// </summary>
+        /// <param name="validationErrors"></param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool EditSTORAGEINSTRUCTI_STATU(ref Common.ValidationErrors validationErrors, string[] deleteCollection);
     }
 }
 

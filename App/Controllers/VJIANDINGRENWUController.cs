@@ -176,6 +176,7 @@ namespace Langben.App.Controllers
                 uplo.ID = Result.GetNewId();
                 uplo.CREATETIME = DateTime.Now;//创建时间
                 uplo.CREATEPERSON = GetCurrentPerson();//创建人
+                uplo.STATE = Common.PACKAGETYPE.已上传.ToString();
                 Create = m_BLL2.Create(ref validationErrors, uplo);//上传信息写入附件表中
                 if (Create)
                 {
@@ -302,14 +303,13 @@ namespace Langben.App.Controllers
                     EQUIPMENT_STATUS_VALUUMN = s.EQUIPMENT_STATUS_VALUUMN
                     ,
                     NAME = s.NAME,
-                    VERSION = s.VERSION
+                    VERSION = s.VERSION,
+                    ISRECEIVE=s.ISRECEIVE
                 }
 
                     )
             });
         }
-
-
 
         IBLL.IVJIANDINGRENWUBLL m_BLL;
         IBLL.IFILE_UPLOADERBLL m_BLL2;

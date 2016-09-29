@@ -11,15 +11,10 @@ namespace  Models
         /// 谢承忠添加（器具登记页面单位绑定）
         /// </summary>
         /// <returns></returns>
-        public static SelectList GetCOMPANY(string CATEGORY)
+        public static SelectList GetCOMPANY()
         {
-            if (string.IsNullOrWhiteSpace(CATEGORY))
-            {
-                List<SelectList> sl = new List<SelectList>();
-                return new SelectList(sl);
-            }
             ICOMPANYHander compay = new SysCOMPANY();
-            return new SelectList(compay.GetCOMPANY(CATEGORY), "COMPANYNAME", "COMPANYNAME");
+            return new SelectList(compay.GetCOMPANY(), "COMPANYNAME", "COMPANYNAME");
 
         }
     }

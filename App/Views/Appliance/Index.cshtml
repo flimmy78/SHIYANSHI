@@ -19,7 +19,7 @@
 </style>
 <script type="text/javascript">
     $(function () {
-        
+
         //出厂编号
         $('#FACTORY_NUM').combobox({
             mode: 'remote',
@@ -40,7 +40,7 @@
                     success: function (data) {
                         //关键步骤，遍历一个MAP对象
                         var items = $.map(data, function (item) {
-                         
+
                             return {
                                 id: item.id
                                 ,
@@ -53,7 +53,7 @@
                         success(items);
                     },
                     //异常处理
-                    error: function (xml, text, msg) {                    
+                    error: function (xml, text, msg) {
                         error.apply(this, arguments);
                     }
                 });
@@ -61,7 +61,7 @@
             valueField: 'id',
             textField: 'name',
             onSelect: function (rec) {
-               
+
                 var BAR_CODE_NUM = rec.show.split(',')[0];
                 var FACTORY_NUM = rec.show.split(',')[1];
                 var VERSION = rec.show.split(',')[2];
@@ -74,7 +74,7 @@
                 $('#APPLIANCE_NAME').combobox('clear');
                 $('#APPLIANCE_NAME').combobox('setValue', APPLIANCE_NAME);
             },
-            formatter: function (row) {              
+            formatter: function (row) {
                 return row.show;
             }
 
@@ -119,7 +119,7 @@
             },
             valueField: 'id',
             textField: 'name',
-            onSelect: function (rec) {              
+            onSelect: function (rec) {
                 var BAR_CODE_NUM = rec.show.split(',')[0];
                 var FACTORY_NUM = rec.show.split(',')[1];
                 var VERSION = rec.show.split(',')[2];
@@ -135,7 +135,7 @@
             formatter: function (row) {
                 return row.show;
             }
-        });      
+        });
         //器具名称
         $('#APPLIANCE_NAME').combobox({
             mode: 'remote',
@@ -176,7 +176,7 @@
             },
             valueField: 'id',
             textField: 'name',
-            onSelect: function (rec) {              
+            onSelect: function (rec) {
                 var BAR_CODE_NUM = rec.show.split(',')[0];
                 var FACTORY_NUM = rec.show.split(',')[1];
                 var VERSION = rec.show.split(',')[2];
@@ -187,7 +187,7 @@
                 $('#VERSION').combobox('clear');
                 $('#VERSION').combobox('setValue', VERSION);
                 //$('#APPLIANCE_NAME').combobox('clear');
-                //$('#APPLIANCE_NAME').combobox('setValue', APPLIANCE_NAME);               
+                //$('#APPLIANCE_NAME').combobox('setValue', APPLIANCE_NAME);
             },
             formatter: function (row) {
                 return row.show;
@@ -204,7 +204,7 @@
         查 询
     </a>
 </div>
- <br style="clear:both;" />
+<br style="clear:both;" />
 <div class="bigdiv" style="width: 902px;" id="order">
 
     <div class="editor-label">
@@ -217,7 +217,7 @@
         @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
     </div>
     <div class="editor-field">
-        @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY("送检"), "请选择", new { @class="easyui-combobox" })
+        @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
     </div>
     <div class="editor-label">
         @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)：
@@ -255,10 +255,10 @@
         @Html.ValidationMessageFor(model => model.FAX)
     </div>
     <div class="editor-label">
-       <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
+        <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
     </div>
     <div class="editor-field">
-        @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY("证书"), "请选择", new { @class = "easyui-combobox" })
+        @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
     </div>
     <div class="editor-label">
         <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
@@ -331,7 +331,7 @@
             zhi += "联系人2不能为空！<br>";
         }
         if (isNull(entity.CONTACT_PHONE2)) {
-            zhi += "联系电话2不能为空！<br>";         
+            zhi += "联系电话2不能为空！<br>";
         }
         else {
             if (!checkPhone(entity.CONTACT_PHONE2)) {
@@ -377,7 +377,7 @@
                     zhi += "型号不能为空！<br>";
                 }
                 if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
-                    zhi += "数量不能为空！<br>";                  
+                    zhi += "数量不能为空！<br>";
                 }
                 else {
                     if (!isNumber(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
@@ -389,6 +389,21 @@
                 }
                 if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID)) {
                     zhi += "实验室不能为空！<br>";
+                }
+                else {
+                    var a = entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID;
+                    var b = a.split(',');
+                    if (b.length > 2) {
+                        zhi += "实验室不能超过2个！<br>";
+                    }
+                    else {
+                        var s = "@Common.LABORATORYNAME.互感器.ToString(),@Common.LABORATORYNAME.指示仪表.ToString(),@Common.LABORATORYNAME.数表三相.ToString(),@Common.LABORATORYNAME.数表单相.ToString(),@Common.LABORATORYNAME.电能.ToString(),@Common.LABORATORYNAME.直流仪器.ToString()";
+                        for (var i = 0; i < b.length; i++) {
+                            if (s.indexOf(b[i]) == -1) {
+                                zhi += "实验室名错误！<br>";
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -451,7 +466,7 @@
         var phoneRegWithArea = /^[1][3][0-9]{9}$/;
         var phoneRegNoArea = /^0\d{2,3}-?\d{7,8}$/;
         //var prompt = "您输入的电话号码不正确!"
-        if (strPhone.length ==11) {
+        if (strPhone.length == 11) {
             if (phoneRegWithArea.test(strPhone)) {
                 return true;
             } else {
@@ -491,7 +506,7 @@ s：字符串
     //查询
     function seng() {
         var row = null;
-        var search = "BAR_CODE_NUM" + "@@" + $('#BAR_CODE_NUM').val()+ "^" + "FACTORY_NUM" + "@@" + $('#FACTORY_NUM').combobox('getText') + "^" + "VERSION" + "@@" + $('#VERSION').combobox('getText') + "^" + "APPLIANCE_NAME" + "@@" + $('#APPLIANCE_NAME').combobox('getText') + "^";
+        var search = "BAR_CODE_NUM" + "@@" + $('#BAR_CODE_NUM').val() + "^" + "FACTORY_NUM" + "@@" + $('#FACTORY_NUM').combobox('getText') + "^" + "VERSION" + "@@" + $('#VERSION').combobox('getText') + "^" + "APPLIANCE_NAME" + "@@" + $('#APPLIANCE_NAME').combobox('getText') + "^";
         $.ajax({
             url: '/api/ORDER_TASK_INFORMATIONApi/PostDataByID/' + search,
             type: "Post",
@@ -515,7 +530,7 @@ s：字符串
                 var leng = $('#ApplianceDate').edatagrid('getRows');
                 if (leng.length <= 1) {
                     $("#ACCEPT_ORGNIZATION").val(row.ACCEPT_ORGNIZATION);//受理单位
-                    $("#INSPECTION_ENTERPRISE").combobox('select',row.INSPECTION_ENTERPRISE);//送检单位
+                    $("#INSPECTION_ENTERPRISE").combobox('select', row.INSPECTION_ENTERPRISE);//送检单位
                     $("#INSPECTION_ENTERPRISE_ADDRESS").val(row.INSPECTION_ENTERPRISE_ADDRESS);//送检单位地址
                     $("#INSPECTION_ENTERPRISE_POST").val(row.INSPECTION_ENTERPRISE_POST);//送检单位邮政编码
                     $("#CONTACTS").val(row.CONTACTS);//联系人
@@ -533,8 +548,8 @@ s：字符串
         })
     }
     $(function () {
-        
-        
+
+
         //删除
         function flexiDelete() {
             //var rows = $('#ApplianceDate').datagrid("getSelections");
@@ -547,7 +562,7 @@ s：字符串
             //    $('#ApplianceDate').datagrid('deleteRow', index);
             //    //$('#ApplianceDate').datagrid('destroyRow', index);
             //}
-                    $('#ApplianceDate').edatagrid('destroyRow');
+            $('#ApplianceDate').edatagrid('destroyRow');
 
         }
         //新增
@@ -631,12 +646,12 @@ s：字符串
                             },
                             success: function (data) {
                                 if (data.Code == 1) {
-                                                                    
-                                    $.messager.alert('操作提示', "发送实验室成功！", 'info', function () {                                     
-                                            window.location.href = '';  
+
+                                    $.messager.alert('操作提示', "发送实验室成功！", 'info', function () {
+                                        window.location.href = '';
                                     });
                                 }
-                                else {                                 
+                                else {
                                     $.messager.alert('操作提示', "发送实验室失败！", 'error');
                                 }
                             }
@@ -743,7 +758,7 @@ s：字符串
                       options: {
                           multiple: true,
                           data: [{ value: '@Common.LABORATORYNAME.电能.ToString()', text: '@Common.LABORATORYNAME.电能.ToString()' }, { value: '@Common.LABORATORYNAME.指示仪表.ToString()', text: '@Common.LABORATORYNAME.指示仪表.ToString()' },
-                              { value: '@Common.LABORATORYNAME.数表单相.ToString()', text: '@Common.LABORATORYNAME.数表单相.ToString()' }, { value: '@Common.LABORATORYNAME.互感器.ToString()', text: '@Common.LABORATORYNAME.互感器.ToString()' }, { value: '@Common.LABORATORYNAME.数表三相.ToString()', text: '@Common.LABORATORYNAME.数表三相.ToString()' },{ value: '@Common.LABORATORYNAME.直流仪器.ToString()', text: '@Common.LABORATORYNAME.直流仪器.ToString()' }],
+                              { value: '@Common.LABORATORYNAME.数表单相.ToString()', text: '@Common.LABORATORYNAME.数表单相.ToString()' }, { value: '@Common.LABORATORYNAME.互感器.ToString()', text: '@Common.LABORATORYNAME.互感器.ToString()' }, { value: '@Common.LABORATORYNAME.数表三相.ToString()', text: '@Common.LABORATORYNAME.数表三相.ToString()' }, { value: '@Common.LABORATORYNAME.直流仪器.ToString()', text: '@Common.LABORATORYNAME.直流仪器.ToString()' }],
                           panelHeight: 'auto'
                       }
                   }

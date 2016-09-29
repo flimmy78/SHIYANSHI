@@ -66,13 +66,10 @@ namespace Langben.App.Controllers
                     UPDATEPERSON =s.UPDATEPERSON,
                     APPLIANCE_RECIVE =s.APPLIANCE_RECIVE,
                     APPLIANCE_PROGRESS =s.APPLIANCE_PROGRESS,
-                    ORDER_STATUS =s.ORDER_STATUS,
                     ISOVERDUE =s.ISOVERDUE,
                     OVERDUE =s.OVERDUE,
                     STORAGEINSTRUCTIONS =s.STORAGEINSTRUCTIONS,
                     STORAGEINSTRUCTI_STATU =s.STORAGEINSTRUCTI_STATU,
-                    EQUIPMENT_STATUS_VALUUMN =s.EQUIPMENT_STATUS_VALUUMN,
-                    RETURN_INSTRUCTIONS =s.RETURN_INSTRUCTIONS,
                     UNDERTAKE_LABORATORYIDString =UNDERTAKE_LABORATORYID
     } },
                 ID = s.ORDER_TASK_INFORMATION.ID,
@@ -141,13 +138,10 @@ namespace Langben.App.Controllers
                     UPDATEPERSON = s.UPDATEPERSON,
                     APPLIANCE_RECIVE = s.APPLIANCE_RECIVE,
                     APPLIANCE_PROGRESS = s.APPLIANCE_PROGRESS,
-                    ORDER_STATUS = s.ORDER_STATUS,
                     ISOVERDUE = s.ISOVERDUE,
                     OVERDUE = s.OVERDUE,
                     STORAGEINSTRUCTIONS = s.STORAGEINSTRUCTIONS,
                     STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU,
-                    EQUIPMENT_STATUS_VALUUMN = s.EQUIPMENT_STATUS_VALUUMN,
-                    RETURN_INSTRUCTIONS = s.RETURN_INSTRUCTIONS,
                     UNDERTAKE_LABORATORYIDString = UNDERTAKE_LABORATORYID
                 });
             }

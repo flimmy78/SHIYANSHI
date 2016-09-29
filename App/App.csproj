@@ -188,6 +188,7 @@
     <Compile Include="HtmlHelper\Easyui.cs" />
     <Compile Include="HtmlHelper\RadioButtonListHelper.cs" />
     <Compile Include="Models\ApplianceModel.cs" />
+    <Compile Include="Models\APPLIANCE_LABORATORYShow .cs" />
     <Compile Include="Models\BaseException.cs" />
     <Compile Include="Models\APPLIANCE_DETAIL_INFORMATIONShow.cs" />
     <Compile Include="Models\ORDER_TASK_INFORMATIONShow.cs" />
