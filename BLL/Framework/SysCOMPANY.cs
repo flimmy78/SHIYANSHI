@@ -15,11 +15,11 @@ namespace Langben.BLL
         /// <param name="table">表名</param>
         /// <param name="colum">列明</param>
         /// <returns></returns>
-        public List<COMPANY> GetCOMPANY(string CATEGORY)
+        public List<COMPANY> GetCOMPANY()
         {
 
             return (from m in db.COMPANY
-                    where m.CATEGORY == CATEGORY
+                    //where m.CATEGORY == CATEGORY
                     // orderby m.Sort
                     select m).ToList();
 

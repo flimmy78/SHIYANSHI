@@ -104,10 +104,6 @@ namespace Langben.DAL
         public object APPLIANCE_PROGRESS { get; set; }
 
         [ScaffoldColumn(true)]
-        [Display(Name = "状态", Order = 20)]
-        public object ORDER_STATUS { get; set; }
-
-        [ScaffoldColumn(true)]
         [Display(Name = "是否超期", Order = 21)]
         public object ISOVERDUE { get; set; }
 
@@ -123,13 +119,7 @@ namespace Langben.DAL
         [Display(Name = "入库状态", Order = 24)]
         public object STORAGEINSTRUCTI_STATU { get; set; }
 
-        [ScaffoldColumn(true)]
-        [Display(Name = "器具状态值", Order = 25)]
-        public object EQUIPMENT_STATUS_VALUUMN { get; set; }
 
-        [ScaffoldColumn(true)]
-        [Display(Name = "退回说明", Order = 26)]
-        public object RETURN_INSTRUCTIONS { get; set; }
     }
 }
 

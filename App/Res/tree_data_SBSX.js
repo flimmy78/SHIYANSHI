@@ -16,6 +16,13 @@
             "InputState": "ZhiLiuDianLiuShuChu",
             "url": "/PROJECTTEMPLET/ZhiLiuDianLiuShuChu?RULEID=38-1987_2&InputState=ZhiLiuDianLiuShuChu"
         }
+    }, {
+        "id": "38-1987_2",
+        "text": "直流电压（电流）测量-非正负极性-相对误差",
+        "attributes": {
+            "InputState": "ZhiLiuDianLiuShuChu",
+            "url": "/PROJECTTEMPLET/ZhiLiuDianLiuDianYaFeiZhengFu?RULEID=38-1987_2&InputState=ZhiLiuDianLiuShuChu"
+        }
     },
     {
         "id": "38-1987_3",

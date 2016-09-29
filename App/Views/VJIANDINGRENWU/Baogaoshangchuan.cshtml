@@ -4,7 +4,7 @@
 }
 
 <fieldset>
-
+    <input class="a2 f2" type="button" onclick="javascript: window.location.href = '/VJIANDINGRENWU/Index';" value="返回" />
     <div>
         <form id="form1" method="post" enctype="multipart/form-data" action="BaoGaoShangChuan">
 
@@ -24,8 +24,8 @@
             return false;
         };
   " />
-                <input id="fashongid" type="button" value="发送审核" onclick="songwangshenghe()" />
             </label>
+            <label><input id="fashongid" type="button" value="发送审核" onclick="songwangshenghe()" /></label>
             <br style="clear:both" />
             <div class="input_search">
                 <div class="input_search-label">
@@ -121,14 +121,14 @@
             $.messager.alert('操作提示', "上传成功！", 'info');
         }
         else if ("@ViewBag.Create" == "False") {
-            $.messager.alert('操作提示', "上传失败！", 'info');
+            $.messager.alert('操作提示', "上传失败！", 'error');
             $("#hiddenID").val(null);
         }
         if ("@ViewBag.Edit" == "True") {
             $.messager.alert('操作提示', "上传修改成功！", 'info');
         }
         else if ("@ViewBag.Edit" == "False") {
-            $.messager.alert('操作提示', "上传修改失败！", 'info');
+            $.messager.alert('操作提示', "上传修改失败！", 'error');
         }
     })
     //发送审核
@@ -150,7 +150,7 @@
                         $.messager.alert('操作提示', "发送审核成功！", 'info');                        
                     }
                     else {
-                        $.messager.alert('操作提示', "发送审核失败！", 'info');
+                        $.messager.alert('操作提示', "发送审核失败！", 'error');
                     }
                 }
             })

@@ -58,18 +58,6 @@ namespace Langben.App.Controllers
             return item;
         }
         /// <summary>
-        /// 根据器具明细id，领取人，实验室获取数据模型
-        /// </summary>
-        /// <param name="id">编号</param>
-        /// <returns></returns>
-        [HttpGet]
-        public bool GetID_NAME(string id)
-        {
-            Common.Account account = GetCurrentAccount();
-            bool item = m_BLL.GetByRefAPPLIANCE_DETAIL_INFORMATIONID_NAME(id,account.Name,account.UNDERTAKE_LABORATORYName);
-            return item;
-        }
-        /// <summary>
         /// 创建
         /// </summary>
         /// <param name="entity">实体对象</param>

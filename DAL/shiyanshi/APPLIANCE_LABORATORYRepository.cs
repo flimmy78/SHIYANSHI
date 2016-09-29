@@ -19,7 +19,7 @@ namespace Langben.DAL
         {
             //数据库设置级联关系，自动删除子表的内容   
             IQueryable<APPLIANCE_LABORATORY> collection = from f in db.APPLIANCE_LABORATORY
-                                                          where f.ID == entity.ID&&f.UNDERTAKE_LABORATORYID==entity.UNDERTAKE_LABORATORYID
+                                                          where f.ID == entity.ID
                                                                   select f;
 
             //db.APPLIANCE_DETAIL_INFORMATION.Attach(entity);
@@ -37,7 +37,48 @@ namespace Langben.DAL
                 deleteItem.DISTRIBUTIONPERSON = entity.DISTRIBUTIONPERSON == null ? deleteItem.DISTRIBUTIONPERSON : entity.DISTRIBUTIONPERSON;
                 deleteItem.DISTRIBUTIONTIME = entity.DISTRIBUTIONTIME == null ? deleteItem.DISTRIBUTIONTIME : entity.DISTRIBUTIONTIME;
                 deleteItem.CREATEPERSON = entity.CREATEPERSON == null ? deleteItem.CREATEPERSON : entity.CREATEPERSON;
-                deleteItem.CREATETIME = entity.CREATETIME == null ? deleteItem.CREATETIME : entity.CREATETIME;
+                deleteItem.ORDER_STATUS = entity.ORDER_STATUS == null ? deleteItem.ORDER_STATUS : entity.ORDER_STATUS;
+                deleteItem.EQUIPMENT_STATUS_VALUUMN = entity.EQUIPMENT_STATUS_VALUUMN == null ? deleteItem.EQUIPMENT_STATUS_VALUUMN : entity.EQUIPMENT_STATUS_VALUUMN;
+                deleteItem.RETURN_INSTRUCTIONS = entity.RETURN_INSTRUCTIONS == null ? deleteItem.RETURN_INSTRUCTIONS : entity.RETURN_INSTRUCTIONS;
+                deleteItem.ISRECEIVE = entity.ISRECEIVE == null ? deleteItem.ISRECEIVE : entity.ISRECEIVE;
+            }
+        }
+
+        /// <summary>
+        /// 领取功能
+        /// </summary>
+        /// <param name="db">实体数据</param>
+        /// <param name="editCollection">主键的集合</param>
+        /// <param name="shiyanshi">什么实验室领取的，传实验室名</param>
+        public void EditCollection(SysEntities db, string[] editCollection, string shiyanshi)
+        {
+            //数据库设置级联关系，自动删除子表的内容   
+            IQueryable<APPLIANCE_LABORATORY> collection = from f in db.APPLIANCE_LABORATORY
+                                                                  where editCollection.Contains(f.APPLIANCE_DETAIL_INFORMATIONID)&&f.UNDERTAKE_LABORATORYID== shiyanshi
+                                                                  select f;
+            foreach (var deleteItem in collection)
+            {
+                deleteItem.ORDER_STATUS = Common.ORDER_STATUS.已领取.ToString();
+                deleteItem.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已领取.GetHashCode().ToString();
+                deleteItem.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+            }
+        }
+        /// <summary>
+        /// 入库
+        /// </summary>
+        /// <param name="db">实体数据</param>
+        /// <param name="editCollection">主键的集合</param>
+        /// <param name="shiyanshi">什么实验室领取的，传实验室名</param>
+        public void EditSTORAGEINSTRUCTI_STATU(SysEntities db, string[] editCollection)
+        {
+            //数据库设置级联关系，自动删除子表的内容   
+            IQueryable<APPLIANCE_LABORATORY> collection = from f in db.APPLIANCE_LABORATORY
+                                                          where editCollection.Contains(f.APPLIANCE_DETAIL_INFORMATIONID)
+                                                          select f;
+            foreach (var deleteItem in collection)
+            {
+                deleteItem.ORDER_STATUS = Common.ORDER_STATUS.器具已入库.ToString();
+                deleteItem.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.器具已入库.GetHashCode().ToString();
             }
         }
     }

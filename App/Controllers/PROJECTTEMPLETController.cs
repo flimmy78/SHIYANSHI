@@ -18,24 +18,36 @@ namespace Langben.App.Controllers
     /// </summary>
     public class PROJECTTEMPLETController : BaseController
     {
-
         /// <summary>
-        /// 列表
+        /// 直流电压（电流）测量-非正负极性-相对误差
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="RULEID"></param>
+        /// <param name="SCHEMEID"></param>
         /// <returns></returns>
-        [SupportFilter]
-        public ActionResult Index()
+        public ActionResult ZhiLiuDianLiuDianYaFeiZhengFu(string id, string RULEID, string SCHEMEID)
         {
-        
-            return View();
-        }
-         /// <summary>
-        /// 列表
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult IndexSef()
-        {
-
+           
+            if (string.IsNullOrWhiteSpace(id))
+            { 
+                //id为空，则为新增
+                DAL.PROJECTTEMPLET model = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
+                if (model != null)
+                {
+                    ViewData["ID"] = model.ID;
+                }
+                else
+                {//这种情况，应该重新登陆试试了
+                    RedirectToAction("Account");
+                }
+            }
+            else
+            {
+                //已有id，则为修改
+                ViewData["ID"] = id;
+            }
+            ViewData["RULEID"] = RULEID;
+            ViewData["SCHEMEID"] = SCHEMEID;
             return View();
         }
         /// <summary>
@@ -43,18 +55,22 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="id">主键</param>
         /// <returns></returns> 
-        [SupportFilter]
-        public ActionResult ZhiLiuDianLiuShuChu(string RULEID, string SCHEMEID)
+        public ActionResult ZhiLiuDianLiuShuChu(string ID, string RULEID, string SCHEMEID)
         {
-           DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
-           if(entity != null)
-           {
-               ViewBag.ID = entity.ID;                    
-           }
+            ViewData["ID"] = ID;
 
-            ViewBag.RULEID = RULEID;
-            ViewBag.SCHEMEID = SCHEMEID;
-            return View(entity);
+            if (ID == null || ID.Trim() == "")
+            {
+                DAL.PROJECTTEMPLET model = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
+                if (model != null)
+                {
+                    ViewBag.Id = model.ID;
+                    ViewData["ID"] = model.ID;
+                }
+            }
+            ViewData["RULEID"] = RULEID;
+            ViewData["SCHEMEID"] = SCHEMEID;
+            return View();
         }
         /// <summary>
         /// 保存
@@ -64,7 +80,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案编号</param>
         /// <param name="HTMLVALUE">html</param>
         /// <returns></returns>
-        public ActionResult Save(string OldID, string RULEID, string SCHEMEID,string HTMLVALUE)
+        public ActionResult Save(string OldID, string RULEID, string SCHEMEID, string HTMLVALUE)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             PROJECTTEMPLET entity = new PROJECTTEMPLET();
@@ -75,7 +91,7 @@ namespace Langben.App.Controllers
             entity.ID = Result.GetNewId();
             entity.SCHEMEID = SCHEMEID;
             entity.HTMLVALUE = Server.UrlDecode(HTMLVALUE);//解码
-           
+
             if (OldID != null && OldID.Trim() != "")
             {
                 m_BLL.Delete(ref validationErrors, OldID);
@@ -109,41 +125,7 @@ namespace Langben.App.Controllers
             }
 
         }
-        /// <summary>
-        /// 查看详细
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [SupportFilter]  
-        public ActionResult Details(string id)
-        {
-            ViewBag.Id = id;
-            return View();
 
-        }
- 
-        /// <summary>
-        /// 首次创建
-        /// </summary>
-        /// <returns></returns>
-        [SupportFilter]
-        public ActionResult Create(string id)
-        { 
-            
-            return View();
-        }
-
-        /// <summary>
-        /// 首次编辑
-        /// </summary>
-        /// <param name="id">主键</param>
-        /// <returns></returns> 
-        [SupportFilter] 
-        public ActionResult Edit(string id)
-        {
-            ViewBag.Id = id;
-            return View();
-        }
         IBLL.IPROJECTTEMPLETBLL m_BLL;
         ValidationErrors validationErrors = new ValidationErrors();
         public PROJECTTEMPLETController()
@@ -153,7 +135,7 @@ namespace Langben.App.Controllers
         {
             m_BLL = bll;
         }
-        
+
     }
 }
 

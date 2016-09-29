@@ -49,7 +49,6 @@ namespace Langben.App.Controllers
         {
             ViewBag.Id = id;
             return View();
-
         }
 
         /// <summary>
@@ -87,8 +86,6 @@ namespace Langben.App.Controllers
                         item.ID = Result.GetNewId();
                         item.CREATETIME = DateTime.Now;
                         item.CREATEPERSON = currentPerson;
-                        item.ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString();
-                        item.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已分配.GetHashCode().ToString();
                         if (string.IsNullOrWhiteSpace(item.UNDERTAKE_LABORATORYID))
                         {
                             LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，委托单信息的信息，实验室为空", "委托单信息"
@@ -99,10 +96,21 @@ namespace Langben.App.Controllers
                         }
                         else
                         {
-
+                            //器具明细信息_承接实验室表添加数据
                             foreach (var it in item.UNDERTAKE_LABORATORYID.TrimEnd(',').Split(','))
                             {
-                                item.APPLIANCE_LABORATORY.Add(new APPLIANCE_LABORATORY() { ID = Result.GetNewId(), UNDERTAKE_LABORATORYID = it });
+                                item.APPLIANCE_LABORATORY.Add(new APPLIANCE_LABORATORY()
+                                {
+                                    ID = Result.GetNewId(),
+                                    UNDERTAKE_LABORATORYID = it,
+                                    ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString(),
+                                    EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已分配.GetHashCode().ToString(),
+                                    DISTRIBUTIONPERSON = currentPerson,
+                                    DISTRIBUTIONTIME = new DateTime(),
+                                    CREATEPERSON = currentPerson,
+                                    CREATETIME = new DateTime(),
+                                    ISRECEIVE = Common.ISRECEIVE.是.ToString()
+                                });
                             }
                         }
 

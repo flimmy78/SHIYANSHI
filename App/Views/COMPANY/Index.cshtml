@@ -13,13 +13,7 @@
                     treeField: 'COMPANYNAME',
                     rownumbers: true,
                     toolbar: [
-                    {
-                        text: '详细',
-                        iconCls: 'icon-search',
-                        handler: function () {
-                            return getView();
-                        }
-                    }, {
+                     {
                         text: '创建',
                         iconCls: 'icon-add',
                         handler: function () {
@@ -37,22 +31,18 @@
                         handler: function () {
                             return flexiModify();
                         }
-                   
+
                     }],
-                  
-                    columns: [[ 
-                    	{ field: 'COMPANYNAME', title: '@Html.DisplayNameFor(model => model.COMPANYNAME)', width: 115 }
-                        
-					,{ field: 'POSTCODE', title:  '@Html.DisplayNameFor(model => model.POSTCODE)', width: 77 }
-					,{ field: 'CONTACTS', title:  '@Html.DisplayNameFor(model => model.CONTACTS)', width: 77 }
-					,{ field: 'CONTACTSNUMBER', title:  '@Html.DisplayNameFor(model => model.CONTACTSNUMBER)', width: 77 }
-					,{ field: 'FAX', title:  '@Html.DisplayNameFor(model => model.FAX)', width: 77 }
-					,{ field: 'PARENTID', title:  '@Html.DisplayNameFor(model => model.PARENTID)', width: 77 }
-					
+
+                    columns: [[
+                    	{ field: 'COMPANYNAME', title: '@Html.DisplayNameFor(model => model.COMPANYNAME)', width: 315 }
+
+					, { field: 'CREATEPERSON', title: '@Html.DisplayNameFor(model => model.CREATEPERSON )', width: 177 }
+			 
 				    ]]
                      ,
                     onBeforeLoad: function (row, param) {
-                       
+
                         if (row) {
                             $(this).treegrid('options').url = '../COMPANY/GetAllMetadata/' + row.ID;
                         } else {
@@ -60,7 +50,7 @@
                         }
                     }
                 });
-          
+
             var parent = window.dialogArguments; //获取父页面
             if (parent == "undefined" || parent == null) {
                 //    不是在iframe中打开的
@@ -81,7 +71,7 @@
             }
             var arr = new Array(0);
             arr.push(node.ID);
-            arr.push("^"); //主键列和显示列的分割符 ^ 
+            arr.push("^"); //主键列和显示列的分割符 ^
             arr.push(node.COMPANYNAME);
             //主键列和显示列之间用 ^ 分割   每一项用 , 分割
             if (arr.length == 3) {//一条数据和多于一条
@@ -96,7 +86,7 @@
 
             if (arr) {
                 window.location.href = "../COMPANY/Details/" + arr.ID;
-               
+
             } else {
                 $.messager.alert('操作提示', '请选择一条数据!', 'warning');
             }
@@ -115,7 +105,7 @@
 
             if (arr) {
                 window.location.href = "../COMPANY/Edit/" + arr.ID;
-               
+
             } else {
                 $.messager.alert('操作提示', '请选择一条数据!', 'warning');
             }
@@ -123,7 +113,7 @@
         };
         //删除的按钮
         function flexiDelete() {
-          
+
             var node = $('#flexigridData').treegrid('getSelected');
             if (!node) {
                 $.messager.alert('操作提示', '请选择数据!', 'warning');
@@ -134,7 +124,7 @@
                         $.post("../COMPANY/Delete", { query: node.ID }, function (res) {
                             if (res == "OK") {
                                 remove();
-                                $.messager.alert('操作提示', '删除成功!', 'info');                  
+                                $.messager.alert('操作提示', '删除成功!', 'info');
                             }
                             else {
                                 if (res == "") {
@@ -143,15 +133,15 @@
                                 else {
                                     $.messager.alert('操作提示', res, 'info');
                                 }
-                            }             
-                        }); 
+                            }
+                        });
                     }
                 });
-            }                  
+            }
             return false;
-        };                
-       
-       
+        };
+
+
         function remove() {
             var node = $('#flexigridData').treegrid('getSelected');
             if (node) {

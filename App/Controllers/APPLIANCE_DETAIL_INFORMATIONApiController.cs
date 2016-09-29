@@ -195,8 +195,6 @@ namespace Langben.App.Controllers
                     ,
                     APPLIANCE_PROGRESS = s.APPLIANCE_PROGRESS
                     ,
-                    ORDER_STATUS = s.ORDER_STATUS
-                    ,
                     ISOVERDUE = s.ISOVERDUE
                     ,
                     OVERDUE = s.OVERDUE
