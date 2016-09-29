@@ -40,9 +40,9 @@
                     success: function (data) {
                         //关键步骤，遍历一个MAP对象
                         var items = $.map(data, function (item) {
-
+                         
                             return {
-                                id: item.value
+                                id: item.id
                                 ,
                                 name: item.value
                                 ,
@@ -53,7 +53,7 @@
                         success(items);
                     },
                     //异常处理
-                    error: function (xml, text, msg) {
+                    error: function (xml, text, msg) {                    
                         error.apply(this, arguments);
                     }
                 });
@@ -61,7 +61,7 @@
             valueField: 'id',
             textField: 'name',
             onSelect: function (rec) {
-                debugger;
+               
                 var BAR_CODE_NUM = rec.show.split(',')[0];
                 var FACTORY_NUM = rec.show.split(',')[1];
                 var VERSION = rec.show.split(',')[2];
@@ -101,7 +101,7 @@
                         var items = $.map(data, function (item) {
 
                             return {
-                                id: item.value
+                                id: item.id
                                 ,
                                 name: item.value
                                 ,
@@ -158,7 +158,7 @@
                         var items = $.map(data, function (item) {
 
                             return {
-                                id: item.value
+                                id: item.id
                                 ,
                                 name: item.value
                                 ,
@@ -194,19 +194,18 @@
             }
         });
     })
-</script>
+</script><br style="clear:both;" />
 <div>
-    条形码：<input id="BAR_CODE_NUM" name="BAR_CODE_NUM" style="width:250px;" />
-    出厂编号：<input id="FACTORY_NUM" name="FACTORY_NUM" style="width:250px;" />
-    型号：<input id="VERSION" name="VERSION" style="width:250px;" />
-    器具名称：<input id="APPLIANCE_NAME" name="APPLIANCE_NAME" style="width:250px;" />
+    条形码：<input id="BAR_CODE_NUM" name="BAR_CODE_NUM" style="width:90px;" />
+    出厂编号：<input id="FACTORY_NUM" name="FACTORY_NUM" style="width:200px;" />
+    型号：<input id="VERSION" name="VERSION" style="width:150px;" />
+    器具名称：<input id="APPLIANCE_NAME" name="APPLIANCE_NAME" style="width:150px;" />
     <a href="#" onclick="seng()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
         查 询
     </a>
 </div>
-<br style="clear:both;" />
-<br style="clear:both;" />
-<div class="bigdiv" style="width: 854px;" id="order">
+ <br style="clear:both;" />
+<div class="bigdiv" style="width: 902px;" id="order">
 
     <div class="editor-label">
         @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
@@ -218,8 +217,6 @@
         @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
     </div>
     <div class="editor-field">
-        @*@Html.EditorFor(model => model.INSPECTION_ENTERPRISE)
-        @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE)*@
         @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY("送检"), "请选择", new { @class="easyui-combobox" })
     </div>
     <div class="editor-label">
@@ -258,15 +255,13 @@
         @Html.ValidationMessageFor(model => model.FAX)
     </div>
     <div class="editor-label">
-        @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
+       <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
     </div>
     <div class="editor-field">
-        @*@Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE)
-        @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE)*@
         @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY("证书"), "请选择", new { @class = "easyui-combobox" })
     </div>
     <div class="editor-label">
-        @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
+        <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
     </div>
     <div class="editor-field">
         @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
@@ -280,14 +275,14 @@
         @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_POST)
     </div>
     <div class="editor-label">
-        @Html.LabelFor(model => model.CONTACTS2)：
+        <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACTS2)：
     </div>
     <div class="editor-field">
         @Html.EditorFor(model => model.CONTACTS2)
         @Html.ValidationMessageFor(model => model.CONTACTS2)
     </div>
     <div class="editor-label">
-        @Html.LabelFor(model => model.CONTACT_PHONE2)：
+        <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACT_PHONE2)：
     </div>
     <div class="editor-field">
         @Html.EditorFor(model => model.CONTACT_PHONE2)
@@ -482,14 +477,14 @@ s：字符串
 如果通过验证返回true,否则返回false
 */
     function isNumber(s) {
-        var regu = "^[0-9]+$";
-        var re = new RegExp(regu);
-        if (s.search(re) != -1) {
+        var regu = /^[0-9]*[1-9][0-9]*$/;
+        if (regu.test(s)) {
             return true;
         } else {
             return false;
         }
     }
+
 
 </script>
 <script type="text/javascript">
@@ -538,42 +533,8 @@ s：字符串
         })
     }
     $(function () {
-        var editIndex = undefined;
-        function endEditing() {
-            if (editIndex == undefined) { return true }
-            if ($('#ApplianceDate').datagrid('validateRow', editIndex)) {
-                $('#ApplianceDate').datagrid('endEdit', editIndex);
-                editIndex = undefined;
-                return true;
-            } else {
-                return false;
-            }
-        }
-        function append() {
-            if (endEditing()) {
-                $('#ApplianceDate').datagrid('appendRow', { status: 'P' });
-                editIndex = $('#ApplianceDate').datagrid('getRows').length - 1;
-                $('#ApplianceDate').datagrid('selectRow', editIndex)
-                        .datagrid('beginEdit', editIndex);
-            }
-        }
-        function onClickCell(index, field) {
-            if (editIndex != index) {
-                if (endEditing()) {
-                    $('#ApplianceDate').datagrid('selectRow', index)
-                            .datagrid('beginEdit', index);
-                    var ed = $('#ApplianceDate').datagrid('getEditor', { index: index, field: field });
-                    if (ed) {
-                        ($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
-                    }
-                    editIndex = index;
-                } else {
-                    setTimeout(function () {
-                        $('#ApplianceDate').datagrid('selectRow', editIndex);
-                    }, 0);
-                }
-            }
-        }
+        
+        
         //删除
         function flexiDelete() {
             //var rows = $('#ApplianceDate').datagrid("getSelections");
@@ -670,26 +631,13 @@ s：字符串
                             },
                             success: function (data) {
                                 if (data.Code == 1) {
-                                    $("#order input[type='text']").each(function () {
-                                        $(this).val("");
+                                                                    
+                                    $.messager.alert('操作提示', "发送实验室成功！", 'info', function () {                                     
+                                            window.location.href = '';  
                                     });
-                                    $("#ACCEPT_ORGNIZATION").val("");
-                                    $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val("");
-                                    $("#ApplianceDate").edatagrid("loadData", [])
-                                    $.messager.alert('操作提示', "发送实验室成功", 'info');
                                 }
-                                else {
-                                    $("#ORDER_TASK_INFORMATIONID").val(data.Id);//记录该委托单的id，如果为空，表示为新增，否则为修改
-                                    if ($.messager) {
-                                        $.messager.defaults.ok = '继续';
-                                        $.messager.defaults.cancel = '返回';
-
-                                        $.messager.confirm('操作提示', data.Message, function (r) {
-                                            if (!r) {
-                                                window.location.href = 'javascript:history.go(-1)';
-                                            }
-                                        });
-                                    }
+                                else {                                 
+                                    $.messager.alert('操作提示', "发送实验室失败！", 'error');
                                 }
                             }
                         });

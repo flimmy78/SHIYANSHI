@@ -826,11 +826,8 @@
     <Content Include="Views\ManageTemplate\Add.cshtml" />
     <Content Include="Views\ManageTemplate\Test.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuShuChu.cshtml" />
-    <Content Include="Views\PROJECTTEMPLET\Create.cshtml" />
-    <Content Include="Views\PROJECTTEMPLET\Details.cshtml" />
-    <Content Include="Views\PROJECTTEMPLET\Edit.cshtml" />
-    <Content Include="Views\PROJECTTEMPLET\Index.cshtml" />
     <Content Include="Views\Shared\FangAnIndex.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaFeiZhengFu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

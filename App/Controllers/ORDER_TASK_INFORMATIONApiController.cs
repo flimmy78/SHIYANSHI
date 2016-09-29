@@ -101,7 +101,79 @@ namespace Langben.App.Controllers
         }
 
 
-
+        /// <summary>
+        /// 器具登记查询功能
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ORDER_TASK_INFORMATIONShow PostID(string id)
+        {
+            var data = new ORDER_TASK_INFORMATIONShow();
+            string UNDERTAKE_LABORATORYID = string.Empty;
+            ORDER_TASK_INFORMATION queryData = m_BLL.GetById(id);
+            foreach (var s in queryData.APPLIANCE_DETAIL_INFORMATION)
+            {
+                List<APPLIANCE_LABORATORY> list = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(s.ID);
+                foreach (var item2 in list)
+                {
+                    UNDERTAKE_LABORATORYID += item2.UNDERTAKE_LABORATORYID + ",";
+                }
+                s.UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID;
+                data.APPLIANCE_DETAIL_INFORMATIONShows.Add(new Models.APPLIANCE_DETAIL_INFORMATIONShow()
+                {
+                    ID = s.ID,
+                    BAR_CODE_NUM = s.BAR_CODE_NUM,
+                    APPLIANCE_NAME = s.APPLIANCE_NAME,
+                    VERSION = s.VERSION,
+                    FORMAT = s.FORMAT,
+                    FACTORY_NUM = s.FACTORY_NUM,
+                    NUM = s.NUM,
+                    ATTACHMENT = s.ATTACHMENT,
+                    APPEARANCE_STATUS = s.APPEARANCE_STATUS,
+                    MAKE_ORGANIZATION = s.MAKE_ORGANIZATION,
+                    REMARKS = s.REMARKS,
+                    END_PLAN_DATE = s.END_PLAN_DATE,
+                    ORDER_TASK_INFORMATIONID = s.ORDER_TASK_INFORMATIONID,
+                    CREATETIME = s.CREATETIME,
+                    CREATEPERSON = s.CREATEPERSON,
+                    UPDATETIME = s.UPDATETIME,
+                    UPDATEPERSON = s.UPDATEPERSON,
+                    APPLIANCE_RECIVE = s.APPLIANCE_RECIVE,
+                    APPLIANCE_PROGRESS = s.APPLIANCE_PROGRESS,
+                    ORDER_STATUS = s.ORDER_STATUS,
+                    ISOVERDUE = s.ISOVERDUE,
+                    OVERDUE = s.OVERDUE,
+                    STORAGEINSTRUCTIONS = s.STORAGEINSTRUCTIONS,
+                    STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU,
+                    EQUIPMENT_STATUS_VALUUMN = s.EQUIPMENT_STATUS_VALUUMN,
+                    RETURN_INSTRUCTIONS = s.RETURN_INSTRUCTIONS,
+                    UNDERTAKE_LABORATORYIDString = UNDERTAKE_LABORATORYID
+                });
+            }
+            data.ID = queryData.ID;
+            data.ORDER_NUMBER = queryData.ORDER_NUMBER;
+            data.ACCEPT_ORGNIZATION = queryData.ACCEPT_ORGNIZATION;
+            data.INSPECTION_ENTERPRISE = queryData.INSPECTION_ENTERPRISE;
+            data.INSPECTION_ENTERPRISE_ADDRESS = queryData.INSPECTION_ENTERPRISE_ADDRESS;
+            data.INSPECTION_ENTERPRISE_POST = queryData.INSPECTION_ENTERPRISE_POST;
+            data.CONTACTS = queryData.CONTACTS;
+            data.CONTACT_PHONE = queryData.CONTACT_PHONE;
+            data.FAX = queryData.FAX;
+            data.CERTIFICATE_ENTERPRISE = queryData.CERTIFICATE_ENTERPRISE;
+            data.CERTIFICATE_ENTERPRISE_ADDRESS = queryData.CERTIFICATE_ENTERPRISE_ADDRESS;
+            data.CERTIFICATE_ENTERPRISE_POST = queryData.CERTIFICATE_ENTERPRISE_POST;
+            data.CONTACTS2 = queryData.CONTACTS2;
+            data.CONTACT_PHONE2 = queryData.CONTACT_PHONE2;
+            data.FAX2 = queryData.FAX2;
+            data.CUSTOMER_SPECIFIC_REQUIREMENTS = queryData.CUSTOMER_SPECIFIC_REQUIREMENTS;
+            data.ORDER_STATUS = queryData.ORDER_STATUS;
+            data.CREATETIME = queryData.CREATETIME;
+            data.CREATEPERSON = queryData.CREATEPERSON;
+            data.UPDATETIME = queryData.UPDATETIME;
+            data.UPDATEPERSON = queryData.UPDATEPERSON;
+            return data;
+        }
         /// <summary>
         /// 异步加载数据
         /// </summary>
@@ -317,7 +389,7 @@ namespace Langben.App.Controllers
         ValidationErrors validationErrors = new ValidationErrors();
 
         public ORDER_TASK_INFORMATIONApiController()
-            : this(new ORDER_TASK_INFORMATIONBLL(), new APPLIANCE_DETAIL_INFORMATIONBLL(), new APPLIANCE_LABORATORYBLL()) { }
+                    : this(new ORDER_TASK_INFORMATIONBLL(), new APPLIANCE_DETAIL_INFORMATIONBLL(), new APPLIANCE_LABORATORYBLL()) { }
 
         public ORDER_TASK_INFORMATIONApiController(ORDER_TASK_INFORMATIONBLL bll, APPLIANCE_DETAIL_INFORMATIONBLL bll2, APPLIANCE_LABORATORYBLL bll3)
         {

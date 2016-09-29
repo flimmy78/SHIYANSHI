@@ -2,94 +2,127 @@
 @{
     Layout = "~/Views/Shared/AppCreate.cshtml";
 }
+
+<style type="text/css">
+    .textarea-box textarea {
+        color: #333;
+    }
+
+    .display-label {
+        width: 120px;
+        height: 24px;
+        float: left;
+        text-align: right;
+        margin: 11px 0;
+        line-height: 24px;
+    }
+
+    .display-field {
+        height: 24px;
+        float: left;
+        margin: 11px 0 11px 6px;
+        color: #333;
+        width: 290px;
+        text-align: left;
+        display: inline;
+        line-height: 24px;
+    }
+</style>
+
 @using (Html.BeginForm("", "api/PREPARE_SCHEMEApi/SheIsPi"))
 {
     <fieldset>
-        <div id="shenghediv">
-            <div>
-                <div class="input_search">
-                    <div class="input_search-label">
-                        原始记录：
-                    </div>
-                    <div class="input_search-field">
-                        <a id="yuanshi" href="@ViewBag.FULLPATH2"> @ViewBag.NAME2</a>
-                    </div>
-                </div><br />
-                <div class="input_search">
-                    <div class="input_search-label">
-                        证书：
-                    </div>
-                    <div class="input_search-field">
-                        <a id="zhenshu" href="@ViewBag.FULLPATH">@ViewBag.NAME</a>
-                    </div>
-                </div><br />
-                <div class="input_search">
-                    <div class="input_search-label">
-                        结论：
-                    </div>
-                    <div class="input_search-field">
-                        <label id="jielu">@ViewBag.CONCLUSION</label>
-                    </div>
-                </div><br />
+        <input class="a2 f2" type="button" onclick="fanhui()" value="返回" />
+        <div class="bigdiv" id="shenghediv">
+            <div class="display-label">
+                <label> 原始记录：</label>
             </div>
+            <div class="display-field">
+                <a id="yuanshi" href="@ViewBag.FULLPATH2"> @ViewBag.NAME2</a>
+            </div>
+
+            <br style="clear:both;" />
+            <div class="display-label">
+                <label>  证书：</label>
+            </div>
+            <div class="display-field">
+                <a id="zhenshu" href="@ViewBag.FULLPATH">@ViewBag.NAME</a>
+            </div>
+
+            <br style="clear:both;" />
+            <div class="display-label">
+                <label>    结论：</label>
+            </div>
+            <div class="display-field">
+                @ViewBag.CONCLUSION
+            </div>
+
+            <br style="clear:both;" />
+
+
             @if (ViewBag.HEIFSP == "H")
             {
-
-                <div>
-                    <div class="input_search">
-                        <div class="input_search-label">
-                            填写审核意见：
-                        </div>
-                        <div class="input_search-field">
-                            <textarea name="AUDITOPINION" style="width:200px;height:80px;">这里写内容</textarea>
-                        </div>
-                    </div><br />
-                    <input type="hidden" name="ID" value="@ViewBag.PREPARE_SCHEME_ID" />
-                    <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
+                <div class="display-label">
+                    <label>     审核意见：</label>
+                </div>
+                <div class="textarea-box">
+                    <textarea name="AUDITOPINION"></textarea>
+                </div>
+                <input type="hidden" name="ID" value="@ViewBag.PREPARE_SCHEME_ID" />
+                <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
                     <input type="hidden" name="SHPI" value="@ViewBag.HEIFSP" />
                     <input type="hidden" name="ISAGGREY" value="" id="ISAGGREY" />
-                    <input type="submit" value="同意送批准" onclick="patongyi(this)" disabled="disabled" />
-                    <input type="submit" value="不同意" onclick="patongyi(this)" disabled="disabled" />
-                </div>
+                    <div class="display-label">
+                        <label>  </label>
+                    </div>
+                    <div class="display-field">
+                        <input type="submit" value="同意送批准" onclick="patongyi(this)" disabled="disabled" />
+                        <input type="submit" value="不同意" onclick="patongyi(this)" disabled="disabled" />
+                    </div>
+                   
+
             }
             else if (ViewBag.HEIFSP == "P")
             {
-                <div>
-                    <div class="input_search">
-                        <div class="input_search-label">
-                            填写审批意见：
-                        </div>
-                        <div class="input_search-field">
-                            <textarea name="APPROVAL" style="width:200px;height:80px;">这里写内容</textarea>
-                        </div>
-                    </div><br />
-                    <input type="hidden" name="ID" value="@ViewBag.PREPARE_SCHEME_ID" />
+
+                <div class="display-label">
+                    <label>
+                        审批意见：
+                    </label>
+                </div>
+                <div class="textarea-box">
+                    <textarea name="APPROVAL" style="height:80px;">这里写内容</textarea>
+                </div>
+
+                <input type="hidden" name="ID" value="@ViewBag.PREPARE_SCHEME_ID" />
                     <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
                     <input type="hidden" name="SHPI" value="@ViewBag.HEIFSP" />
                     <input type="hidden" name="ISAGGREY" value="" id="ISAGGREY2" />
-                    <input type="submit" value="同意" onclick="patongyi(this)" disabled="disabled" />
-                    <input type="submit" value="不同意" onclick="patongyi(this)" disabled="disabled" />
-                </div>
+                  
+                    <div class="display-label">
+                        <label>  </label>
+                    </div>
+                    <div class="display-field">
+                        <input type="submit" value="同意" onclick="patongyi(this)" disabled="disabled" />
+                        <input type="submit" value="不同意" onclick="patongyi(this)" disabled="disabled" />
+                    </div>
             }
+
+
         </div>
+
     </fieldset>
 }
 <script type="text/javascript">
-    @*$(function () {
-        $.ajax({
-            url: "/api/FILE_UPLOADERApi/Get/" + "@ViewBag.FILE_UPLOADER_ID",
-            type: "Get",
-            dataType: "xml",
-            // async: false,
-            success: function (res) {
-                if (res != null) {
-                    $("#yuanshi").arrt("href", "" + res.FULLPATH2 + "");
-                    $("#zhenshu").arrt("href", "" + res.FULLPATH + "");
-                    $("#jielu").html(res.CONCLUSION);
-                }
-            }
-        })
-    })*@
+    function fanhui() {
+        if ('@ViewBag.HEIFSP' == 'P')
+        {
+            window.location.href = '/VSHENPI/Index';
+        }
+        else if ('@ViewBag.HEIFSP' == 'H') {
+            window.location.href = '/VSHENHE/Index';
+        }
+    }
     function patongyi(arr) {
         var zhi = $(arr).val();
         if ("@ViewBag.HEIFSP" == "H") {

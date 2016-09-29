@@ -22,7 +22,7 @@ namespace Langben.DAL
         [ScaffoldColumn(false)]
         [Display(Name = "主键", Order = 1)]
         public object ID { get; set; }
-
+        [Required(ErrorMessage = "请填写")]
         [ScaffoldColumn(true)]
         [Display(Name = "单位名称", Order = 2)]
         public object COMPANYNAME { get; set; }
