@@ -143,7 +143,7 @@ else
         var tfoot = " <tfoot>"
             + "<tr><td colspan='7'><a href='javascript:void(0)' class='easyui-linkbutton' data-options=\"plain:true,iconCls:'icon-add'\" onclick=\"$('#dlg').dialog('open');set('" + tableIdx + "')\">增加量程</a></td></tr> </tfoot>";
         var table = "<table width='100%' border='0' cellspacing='0' cellpadding='0' class='tbl mt10' id='tongdao_" + tableIdx + "'>"
-            + "<thead><tr><th rowspan='2' align='center' width='140'>量程</th><th rowspan='2' align='center' width='140'>选用电阻阻值（Ω）</th><th rowspan='2' align='center'> 输出示值 </th><th rowspan='2' align='center'> 读数值 </th><th rowspan='2' align='center'> 输出实际值 </th><th rowspan='2' align='center'>相对误差</th><th align='center'>校准结果的不确定度</th></tr><tr><th align='center'>U(K = <select class='easyui-combobox' name='state' style='width:30px;'><option value=''>2 </option><option value=''>3</option><option value=''>√3</option></select>)</th></tr></thead>"
+            + "<thead><tr><th  align='center' width='140'>量程</th><th  align='center' width='140'>标准值</th><th width='140' align='center'>显示值<br><select class='my-combobox' name='state' style=''<option value='AL'>&nbsp;&nbsp; </option><option value='AK'>CH1</option><option value='AZ'>CH2</option><option value='AR'>CH3</option><option value='CA'>CH4</option></select></th><th width='140' align='center'>相对误差</th><th align='center'>校准结果的不确定度<br>U(K=<select class='my-combobox' name='state' style=''><option value='2'>2 </option><option value='3'>3</option><option value='√3'>√3</option></select> ) </th></tr></thead>"
             + "<tbody id='tbody_" + tableIdx + "'></tbody>"
             + tfoot
             + "</table>";
