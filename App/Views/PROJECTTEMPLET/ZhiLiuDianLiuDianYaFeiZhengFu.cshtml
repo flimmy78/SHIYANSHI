@@ -43,7 +43,7 @@ else
                     <th align="center" width="140">标准值</th>
                     <th align="center" width="140">
                         显示值<br>
-                        <select class="my-combobox" name="sssss" id="sssss" style="width:100px;" onchange="changeValue(this)">
+                        <select class="my-combobox" name="sssss" id="sssss" style="width:100px;">
                             <option value="AL">&nbsp;&nbsp; </option>
                             <option value="AK">CH1</option>
                             <option value="AZ">CH2</option>
@@ -167,7 +167,7 @@ else
     }
     //增加量程
     function CreateRow() {
-
+        debugger;
         var idx = parseInt($("#rowindex").val());//第几个量程
         idx = idx + 1;
         $("#rowindex").val(idx);
@@ -194,18 +194,18 @@ else
                 //量程
                 htmlString.push(SetTDHtml(rowspanIdx, "RANGE", lianChengID, null, txtNumber));
                 //选用电阻阻值
-                htmlString.push(SetTDHtml(rowspanIdx, "RESISTANCE", lianChengID, null, ""));
+                //htmlString.push(SetTDHtml(rowspanIdx, "RESISTANCE", lianChengID, null, ""));
             }
 
             //输出示值
 
             var changerHTML = "onblur=''";
-            //输出示值
+            //标准值
             htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, ""));
-            //读数值
+            //显示值
             htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, ""));
             //输出实际值
-            htmlString.push(SetTDHtml(1, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx, ""));
+           // htmlString.push(SetTDHtml(1, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx, ""));
             //相对误差
             htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, ""));
             //校准结果的不确定度
@@ -223,7 +223,8 @@ else
         LianDongShiJiZhi(obj);
     }
     //联动标准值
-    //输出实际值计算：【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值；【选用电阻阻值】没有数值时，输出实际值=读数值
+    //输出实际值计算：【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值；
+    //【选用电阻阻值】没有数值时，输出实际值=读数值
     function LianDongShiJiZhi(obj) {
 
         if (obj.name == "RESISTANCE" && obj.value.trim() != "")//选用电阻阻值变更

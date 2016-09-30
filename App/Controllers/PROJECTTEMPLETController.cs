@@ -24,9 +24,13 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult ZhiLiuDianLiuDianYaFeiZhengFu(string RULEID = "", string SCHEMEID = "")
+        public ActionResult ZhiLiuDianLiuDianYaFeiZhengFu(string RULEID = "315-1983", string SCHEMEID = "2")
         {
-            DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
+            if (string.IsNullOrWhiteSpace(RULEID)||string.IsNullOrWhiteSpace(SCHEMEID))
+            {
+                return View();
+            }
+            DAL.PROJECTTEMPLET entity = null;// m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
             if (entity != null)
             {
                 ViewBag.ID = entity.ID;
@@ -49,6 +53,10 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult ZhiLiuDianLiuShuChu(string RULEID = "", string SCHEMEID = "")
         {
+            //if (string.IsNullOrWhiteSpace(RULEID) || string.IsNullOrWhiteSpace(SCHEMEID))
+            //{
+            //    return View();
+            //}
             DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
             if (entity != null)
             {
