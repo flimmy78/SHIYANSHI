@@ -7,17 +7,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width" />
     <title>直流电压（电流）测量-非正负极性-相对误差</title>
-    <link id="easyuiTheme" href="Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
-    <link href="Res/easyui/themes/default/easyui.css" rel="stylesheet" />
-    <link href="Res/easyui/themes/icon.css" rel="stylesheet" />
-    <link href="Content/default.css" rel="stylesheet" />
-    <link href="Content/StyleSheet.css" rel="stylesheet" />
+    <link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="/Content/default.css" rel="stylesheet" />
+    <link href="/Content/StyleSheet.css" rel="stylesheet" />
 
 
-    <script src="Scripts/jquery.min.js"></script>
-    <script src="Scripts/JScriptCommon.js"></script>
-    <script src="Res/easyui/jquery.easyui.min.js"></script>
-    <script src="Res/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/Scripts/jquery.min.js"></script>
+    <script src="/Scripts/JScriptCommon.js"></script>
+    <script src="/Res/easyui/jquery.easyui.min.js"></script>
+    <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
 
 
 
@@ -47,25 +47,24 @@
                         <th align="center" width="140">量程</th>
                         <th align="center" width="140">标准值</th>
                         <th align="center" width="140">
-                            显示值<br>                             <select class="my-combobox" name="sssss" id="sssss" style="width:100px;" onchange="changeValue(this)">
+                            显示值<br>
+                            <select class="my-combobox" name="sssss" id="sssss" style="width:100px;" onchange="changeValue(this)">
                                 <option value="AL">&nbsp;&nbsp; </option>
                                 <option value="AK">CH1</option>
                                 <option value="AZ">CH2</option>
                                 <option value="AR">CH3</option>
                                 <option value="CA">CH4</option>
-
-
                             </select>
                         </th>
                         <th align="center" width="140">相对误差</th>
-                      <th align="center">校准结果的不确定度<br>
+                        <th align="center">
+                            校准结果的不确定度<br>
                             U(K = <select class="my-combobox" name="state" style="width:30px;">
                                 <option value="2">2 </option>
                                 <option value="3">3</option>
                                 <option value="√3">√3</option>
-
-
-                            </select>)                        </th>
+                            </select>)
+                        </th>
                     </tr>
                 </thead>
                 <tbody id="tbody_1"></tbody>
@@ -131,7 +130,7 @@
     <!--/增加量程弹层-->
 
     <script type="text/javascript" language="javascript">
-     
+
         //共有的通道数量
         var tableIdx = 1;
         //创建通道
@@ -186,7 +185,7 @@
 
 
             htmlString = htmlString.join("");
-           
+
             var tagRow = $("#tbody_" + idx).append(htmlString);
 
             //$.parser.parse(tagRow);
@@ -265,15 +264,14 @@
 
             var bIdx = 0;
             var t = $("#" + obj.id + " option:selected").text();
-            $("#tongdao_" + idx + " tr:gt(" + (parseInt(rowIndex)) + "):lt(" + (parseInt(rowspanCount))+ ") td select").each(function (eIdx) {
-                if (bIdx <= eIdx)
-                    {
+            $("#tongdao_" + idx + " tr:gt(" + (parseInt(rowIndex)) + "):lt(" + (parseInt(rowspanCount)) + ") td select").each(function (eIdx) {
+                if (bIdx <= eIdx) {
                     $(this).children("option[selected='selected']").removeAttr("selected");
-                    $(this).children("option[value='"+t+"']").attr("selected", true);
+                    $(this).children("option[value='" + t + "']").attr("selected", true);
                     bIdx++;
                 }
             });
-         
+
         }
     </script>
 </body>
