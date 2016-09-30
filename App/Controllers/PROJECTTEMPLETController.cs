@@ -24,11 +24,11 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult ZhiLiuDianLiuDianYaFeiZhengFu(string RULEID = "315-1983", string SCHEMEID = "2")
+        public ActionResult ZhiLiuDianLiuDianYaFeiZhengFu(string RULEID, string SCHEMEID)
         {
             if (string.IsNullOrWhiteSpace(RULEID)||string.IsNullOrWhiteSpace(SCHEMEID))
             {
-                return View();
+                return View();//跳转到列表页面
             }
             DAL.PROJECTTEMPLET entity = null;// m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
             if (entity != null)

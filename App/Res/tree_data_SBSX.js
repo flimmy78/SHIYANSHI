@@ -21,7 +21,7 @@
         "text": "直流电压（电流）测量-非正负极性-相对误差",
         "attributes": {
             "InputState": "ZhiLiuDianLiuDianYaFeiZhengFu",
-            "url": "/PROJECTTEMPLET/ZhiLiuDianLiuDianYaFeiZhengFu?RULEID=315-1983&InputState=ZhiLiuDianLiuDianYaFeiZhengFu"
+            "url": "/PROJECTTEMPLET/ZhiLiuDianLiuDianYaFeiZhengFu?RULEID=315-1983"
         }
     },
     {
