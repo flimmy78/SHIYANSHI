@@ -1,4 +1,5 @@
-﻿debugger;
+﻿
+
 $(document).ready(function () {
     debugger;
     bindShiyanshi("#UNDERTAKE_LABORATORYID");
