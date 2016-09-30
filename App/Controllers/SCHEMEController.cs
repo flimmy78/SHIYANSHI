@@ -53,23 +53,69 @@ namespace Langben.App.Controllers
         /// <summary>
         /// 首次编辑
         /// </summary>
-        /// <param name="id">主键</param>
+        /// <param name="ID">方案ID</param>
+        /// <param name="UNDERTAKE_LABORATORYID">实验室ID</param>
+        /// <param name="OP">操作</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult Create(string UNDERTAKE_LABORATORYID)
+        public ActionResult Create(string ID, string UNDERTAKE_LABORATORYID, string OP)
         {
-            ViewBag.UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID;
-            return View();
+            ViewBag.UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID;//实验室ID           
+            ViewBag.OP = OP;//操作方式
+            SCHEME entity = null;
+            if (ID != null && ID.Trim() != "")
+            {
+                entity = m_BLL.GetById(ID);
+            }
+            if(entity==null)
+            {
+                ViewBag.ID = "";
+            }
+            else
+            {
+                ViewBag.UNDERTAKE_LABORATORYID = entity.UNDERTAKE_LABORATORYID;
+                IBLL.ISCHEME_RULEBLL mr_BLL = new SCHEME_RULEBLL();
+                ViewBag.RuleIDs = mr_BLL.GetRuleIDsBySCHEMEID(ID);
+               
+            }
+            if (OP != null && OP == "复制")
+            {
+                entity.ID = "";
+                ViewBag.ID = "";
+                entity.COPYID = ID;
+            }
+            return View(entity);           
         }
-
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="ID">方案编号</param>
+        /// <param name="NAME">方案名称</param>       
+        /// <param name="UNDERTAKE_LABORATORYID">实验室编号</param>
+        /// <param name="RULEIDs">检查项编号多个,分割例如（1,2)</param>
+        /// <param name="OP">操作</param>
+        /// <param name="COPYID">复制方案ID</param>
+        /// <returns></returns>
+        public ActionResult Save(string ID, string NAME, string UNDERTAKE_LABORATORYID, string RULEIDs,string OP,string COPYID)
+        {
+            if(ID==null || ID.Trim()=="")
+            {
+                return CreateSave(NAME, UNDERTAKE_LABORATORYID, RULEIDs, COPYID);
+            }
+            else
+            {
+                return UpdateSave(ID, NAME, UNDERTAKE_LABORATORYID, RULEIDs);
+            }
+        }
         /// <summary>
         /// 创建
         /// </summary>
         /// <param name="NAME">方案名称</param>       
         /// <param name="UNDERTAKE_LABORATORYID">实验室编号</param>
         /// <param name="RULEIDs">检查项编号多个,分割例如（1,2)</param>
+        /// <param name="COPYID">复制方案ID</param>
         /// <returns></returns>
-        public ActionResult CreateSave(string NAME, string UNDERTAKE_LABORATORYID, string RULEIDs)
+        public ActionResult CreateSave(string NAME, string UNDERTAKE_LABORATORYID, string RULEIDs,string COPYID)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             SCHEME entity = new SCHEME();
@@ -81,6 +127,7 @@ namespace Langben.App.Controllers
             entity.STATUS = "未使用";
             entity.ISSTOP = "停用";
             entity.NAME = NAME;
+            entity.COPYID = COPYID;
             if (RULEIDs != null && RULEIDs.Trim() != "")
             {
                 string[] RULEIDList = RULEIDs.Split(',');
@@ -134,7 +181,7 @@ namespace Langben.App.Controllers
         /// <param name="ID">方案编号</param>
         /// <param name="NAME">方案名称</param>       
         /// <param name="UNDERTAKE_LABORATORYID">实验室编号</param>
-        /// <param name="RULEIDs">检查项编号多个,分割例如（1,2)</param>
+        /// <param name="RULEIDs">检查项编号多个,分割例如（1,2)</param>       
         /// <returns></returns>
         public ActionResult UpdateSave(string ID,string NAME, string UNDERTAKE_LABORATORYID, string RULEIDs)
         {
@@ -216,7 +263,10 @@ namespace Langben.App.Controllers
             }
             else
             {
-                return CreateSave(NAME, UNDERTAKE_LABORATORYID, RULEIDs);
+                //return CreateSave(NAME, UNDERTAKE_LABORATORYID, RULEIDs);
+                result.Code = Common.ClientCode.FindNull;
+                result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";
+                return Json(result); //提示输入的数据的格式不对   
             }
         }
 

@@ -502,6 +502,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\JScript-JianCeXiang-Common.js" />
+    <Content Include="Scripts\JScript-FangAn-Common.js" />
     <Content Include="Scripts\JScriptCommon.js" />
     <Content Include="Scripts\JScriptIndex.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />

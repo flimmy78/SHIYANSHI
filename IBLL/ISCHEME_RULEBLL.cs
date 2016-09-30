@@ -100,8 +100,25 @@ namespace Langben.IBLL
         /// <param name="entity">一个对象</param>
         /// <returns></returns>
         [OperationContract]
-        bool Edit(ref Common.ValidationErrors validationErrors, SCHEME_RULE entity); 
-    
+        bool Edit(ref Common.ValidationErrors validationErrors, SCHEME_RULE entity);
+
+        /// <summary>
+        /// 根据方案ID获取检查项
+        /// </summary>        
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <returns></returns>
+        [OperationContract]
+        List<DAL.SCHEME_RULE> GetModelBySCHEMEID(string SCHEMEID);
+
+        /// <summary>
+        /// 根据方案ID获取检查项ID（多个用,1,2,分割）
+        /// </summary>        
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <returns></returns>
+        [OperationContract]
+        string GetRuleIDsBySCHEMEID(string SCHEMEID);
+
+
     }
 }
 
