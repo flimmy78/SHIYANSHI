@@ -337,26 +337,49 @@ namespace Langben.App.Controllers
                 entity.UPDATETIME = DateTime.Now;
                 entity.UPDATEPERSON = currentPerson;
                 List<APPLIANCE_LABORATORY> APPlist = m_BLL2.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(entity.APPLIANCE_DETAIL_INFORMATIONID);
-                APPLIANCE_LABORATORY appliance = new APPLIANCE_LABORATORY();//器具明细信息_承接实验室
+
+                APPLIANCE_LABORATORY appliance = new APPLIANCE_LABORATORY();//器具明细信息_承接实验室1
+                APPLIANCE_LABORATORY appliance2 = new APPLIANCE_LABORATORY();//器具明细信息_承接实验室2
+                if (APPlist.Count > 1)
+                {
+                    appliance = APPlist[0];
+                    appliance2 = APPlist[1];
+                }
+                else
+                {
+                    appliance = APPlist[0];
+                }
+
                 if (entity.SHPI == "H")
                 {
                     if (entity.ISAGGREY == "不同意")
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.审核驳回.ToString();
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.审核驳回.GetHashCode().ToString();
-                        foreach (var item in APPlist)
+                        if (APPlist.Count > 1)
                         {
-                            if (item.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName)
+                            if (appliance.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName)
                             {
-                                appliance.ID = item.ID;
                                 appliance.ISRECEIVE = Common.ISRECEIVE.是.ToString();
+                                m_BLL2.EditField(ref validationErrors, appliance);
+                                appliance2.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                                m_BLL2.EditField(ref validationErrors, appliance2);
                             }
-                            else
+                            else if (appliance2.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName)
                             {
-                                appliance.ID = item.ID;
+                                appliance2.ISRECEIVE = Common.ISRECEIVE.是.ToString();
+                                m_BLL2.EditField(ref validationErrors, appliance2);
                                 appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                                m_BLL2.EditField(ref validationErrors, appliance);
                             }
-                            m_BLL2.EditField(ref validationErrors, appliance);
+                        }
+                        else
+                        {
+                            if (appliance.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName)
+                            {
+                                appliance.ISRECEIVE = Common.ISRECEIVE.是.ToString();
+                                m_BLL2.EditField(ref validationErrors, appliance);
+                            }
                         }
                     }
                     else if (entity.ISAGGREY == "同意")
@@ -365,21 +388,35 @@ namespace Langben.App.Controllers
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.待批准.GetHashCode().ToString();
                         entity.AUDITTIME = new DateTime();//审核时间
                         entity.AUDITTEPERSON = currentPerson;
-                        foreach (var item in APPlist)
+
+                        if (APPlist.Count > 1)
                         {
-                            if (item.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName)
+                            if (appliance.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName)
                             {
                                 appliance.ORDER_STATUS = Common.ORDER_STATUS.试验完成.ToString();
                                 appliance.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.试验完成.GetHashCode().ToString();
-                                appliance.ID = item.ID;
                                 appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                                m_BLL2.EditField(ref validationErrors, appliance);
+                                appliance2.ISRECEIVE = Common.ISRECEIVE.是.ToString();
+                                m_BLL2.EditField(ref validationErrors, appliance2);
                             }
-                            else
+                            else if (appliance2.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName)
                             {
-                                appliance.ID = item.ID;
+                                appliance2.ORDER_STATUS = Common.ORDER_STATUS.试验完成.ToString();
+                                appliance2.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.试验完成.GetHashCode().ToString();
+                                appliance2.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                                m_BLL2.EditField(ref validationErrors, appliance2);
                                 appliance.ISRECEIVE = Common.ISRECEIVE.是.ToString();
+                                m_BLL2.EditField(ref validationErrors, appliance);
                             }
-                            m_BLL2.EditField(ref validationErrors, appliance);
+                        }
+                        else
+                        {
+                            if (appliance.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName)
+                            {
+                                appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                                m_BLL2.EditField(ref validationErrors, appliance);
+                            }
                         }
                     }
                 }
@@ -392,70 +429,70 @@ namespace Langben.App.Controllers
                         int i = APPlist.Count;
                         if (i > 1)
                         {
-                           
-                            foreach (var item in APPlist)
+
+                            appliance.PREPARE_SCHEMEID = appliance.PREPARE_SCHEMEID == null ? "" : appliance.PREPARE_SCHEMEID;
+                            appliance2.PREPARE_SCHEMEID = appliance2.PREPARE_SCHEMEID == null ? "" : appliance2.PREPARE_SCHEMEID;
+                            if (appliance.PREPARE_SCHEMEID == entity.ID)
                             {
-                                if (item.PREPARE_SCHEMEID==null)
+                                if (appliance2.ORDER_STATUS == Common.ORDER_STATUS.已分配.ToString())
                                 {
-
+                                    appliance.ISRECEIVE = Common.ISRECEIVE.是.ToString();
+                                    appliance2.ISRECEIVE = Common.ISRECEIVE.否.ToString();
                                 }
-                                item.PREPARE_SCHEMEID = item.PREPARE_SCHEMEID == null ? "" : item.PREPARE_SCHEMEID;
-                                if (item.PREPARE_SCHEMEID == entity.ID)
+                                else if (appliance2.ORDER_STATUS == Common.ORDER_STATUS.已领取.ToString())
                                 {
-                                    if (APPlist[0].ORDER_STATUS == Common.ORDER_STATUS.已分配.ToString())
-                                    {
-                                        appliance.ISRECEIVE = Common.ISRECEIVE.是.ToString();
-                                    }
-                                    else if (APPlist[0].ORDER_STATUS == Common.ORDER_STATUS.已领取.ToString())
-                                    {
-                                        appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
-                                    }
-                                    else if (APPlist[0].PREPARE_SCHEME.REPORTSTATUS == Common.REPORTSTATUS.待批准.ToString())
-                                    {
-                                        appliance.ISRECEIVE = Common.ISRECEIVE.是.ToString();
-                                    }
-                                    else if (APPlist[0].PREPARE_SCHEME.REPORTSTATUS == Common.REPORTSTATUS.已批准.ToString())
-                                    {
-                                        appliance.ISRECEIVE = Common.ISRECEIVE.是.ToString();
-                                    }
-                                    else if (APPlist[0].PREPARE_SCHEME.REPORTSTATUS == Common.REPORTSTATUS.批准驳回.ToString())
-                                    {
-                                        appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
-                                    }
-                                    appliance.ID = item.ID;
                                     appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                                    appliance2.ISRECEIVE = Common.ISRECEIVE.是.ToString();
                                 }
-                                else
+                                else if (appliance2.PREPARE_SCHEME.REPORTSTATUS == Common.REPORTSTATUS.待批准.ToString())
                                 {
-                                    if (item.ORDER_STATUS == Common.ORDER_STATUS.已分配.ToString())
-                                    {
-                                        appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
-                                    }
-                                    if (item.ORDER_STATUS == Common.ORDER_STATUS.已分配.ToString())
-                                    {
-                                        appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
-                                    }
-                                    else if (item.ORDER_STATUS == Common.ORDER_STATUS.已领取.ToString())
-                                    {
-                                        appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
-                                    }
-                                    else if (item.PREPARE_SCHEME.REPORTSTATUS == Common.REPORTSTATUS.待批准.ToString())
-                                    {
-                                        appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
-                                    }
-                                    else if (item.PREPARE_SCHEME.REPORTSTATUS == Common.REPORTSTATUS.已批准.ToString())
-                                    {
-                                        appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
-                                    }
-                                    else if (item.PREPARE_SCHEME.REPORTSTATUS == Common.REPORTSTATUS.批准驳回.ToString())
-                                    {
-                                        appliance.ISRECEIVE = Common.ISRECEIVE.是.ToString();
-                                    }
-                                    appliance.ID = item.ID;
-
+                                    appliance.ISRECEIVE = Common.ISRECEIVE.是.ToString();
+                                    appliance2.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                                }
+                                else if (appliance2.PREPARE_SCHEME.REPORTSTATUS == Common.REPORTSTATUS.已批准.ToString())
+                                {
+                                    appliance.ISRECEIVE = Common.ISRECEIVE.是.ToString();
+                                    appliance2.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                                }
+                                else if (appliance2.PREPARE_SCHEME.REPORTSTATUS == Common.REPORTSTATUS.批准驳回.ToString())
+                                {
+                                    appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                                    appliance2.ISRECEIVE = Common.ISRECEIVE.是.ToString();
                                 }
                                 m_BLL2.EditField(ref validationErrors, appliance);
+                                m_BLL2.EditField(ref validationErrors, appliance2);
                             }
+                            else if (appliance2.PREPARE_SCHEMEID == entity.ID)
+                            {
+                                if (appliance.ORDER_STATUS == Common.ORDER_STATUS.已分配.ToString())
+                                {
+                                    appliance2.ISRECEIVE = Common.ISRECEIVE.是.ToString();
+                                    appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                                }
+                                else if (appliance.ORDER_STATUS == Common.ORDER_STATUS.已领取.ToString())
+                                {
+                                    appliance2.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                                    appliance.ISRECEIVE = Common.ISRECEIVE.是.ToString();
+                                }
+                                else if (appliance.PREPARE_SCHEME.REPORTSTATUS == Common.REPORTSTATUS.待批准.ToString())
+                                {
+                                    appliance2.ISRECEIVE = Common.ISRECEIVE.是.ToString();
+                                    appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                                }
+                                else if (appliance.PREPARE_SCHEME.REPORTSTATUS == Common.REPORTSTATUS.已批准.ToString())
+                                {
+                                    appliance2.ISRECEIVE = Common.ISRECEIVE.是.ToString();
+                                    appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                                }
+                                else if (appliance.PREPARE_SCHEME.REPORTSTATUS == Common.REPORTSTATUS.批准驳回.ToString())
+                                {
+                                    appliance2.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                                    appliance.ISRECEIVE = Common.ISRECEIVE.是.ToString();
+                                }
+                                m_BLL2.EditField(ref validationErrors, appliance);
+                                m_BLL2.EditField(ref validationErrors, appliance2);
+                            }   
+                                                          
                         }
                         else
                         {
@@ -473,23 +510,37 @@ namespace Langben.App.Controllers
                         //判断器具是否满足入库条件
                         if (ISAPPLIANCE(entity.APPLIANCE_DETAIL_INFORMATIONID))
                         {
-                            foreach (var item in APPlist)
+                            if (APPlist.Count>1)
                             {
-                                item.PREPARE_SCHEMEID = item.PREPARE_SCHEMEID == null ? "" : item.PREPARE_SCHEMEID;
-                                if (item.PREPARE_SCHEMEID == entity.ID)
+                                appliance.PREPARE_SCHEMEID = appliance.PREPARE_SCHEMEID == null ? "" : appliance.PREPARE_SCHEMEID;
+                                appliance2.PREPARE_SCHEMEID = appliance2.PREPARE_SCHEMEID == null ? "" : appliance2.PREPARE_SCHEMEID;
+                                if (appliance.PREPARE_SCHEMEID == entity.ID)
                                 {
                                     appliance.ORDER_STATUS = Common.ORDER_STATUS.待入库.ToString();
                                     appliance.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.待入库.GetHashCode().ToString();
-                                    appliance.ID = item.ID;
                                     appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                                    m_BLL2.EditField(ref validationErrors, appliance);
+                                    appliance2.ISRECEIVE = Common.ISRECEIVE.是.ToString();
+                                    m_BLL2.EditField(ref validationErrors, appliance2);
                                 }
-                                else
+                                else if (appliance2.PREPARE_SCHEMEID == entity.ID)
                                 {
-                                    appliance.ID = item.ID;
+                                    appliance2.ORDER_STATUS = Common.ORDER_STATUS.待入库.ToString();
+                                    appliance2.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.待入库.GetHashCode().ToString();
+                                    appliance2.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                                    m_BLL2.EditField(ref validationErrors, appliance2);
                                     appliance.ISRECEIVE = Common.ISRECEIVE.是.ToString();
+                                    m_BLL2.EditField(ref validationErrors, appliance);
                                 }
+                            }
+                            else
+                            {
+                                appliance.ORDER_STATUS = Common.ORDER_STATUS.待入库.ToString();
+                                appliance.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.待入库.GetHashCode().ToString();
+                                appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
                                 m_BLL2.EditField(ref validationErrors, appliance);
                             }
+                              
                         }
                     }
                 }

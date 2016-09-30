@@ -79,7 +79,7 @@ namespace Langben.App.Controllers
             ViewBag.FULLPATH = dizhi;//证书地址
             ViewBag.FULLPATH2 = dizhi2;//原始记录地址          
             ViewBag.NAME = file.NAME;//证书名字
-            ViewBag.NAME2 = file.NAME;//原始记录
+            ViewBag.NAME2 = file.NAME2;//原始记录
             ViewBag.CONCLUSION = file.CONCLUSION;//结论
             return View();
         }
