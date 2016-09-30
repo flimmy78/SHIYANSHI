@@ -75,23 +75,6 @@ namespace Langben.DAL
 
         }
         /// <summary>
-        /// 领取功能（添加所在实验室）
-        /// </summary>
-        /// <param name="db">实体数据</param>
-        /// <param name="editCollection">主键的集合</param>
-        /// <param name="shiyanshi">什么实验室领取的，传实验室名</param>
-        public void EditCollection(SysEntities db, string[] editCollection, string shiyanshi)
-        {
-            //数据库设置级联关系，自动删除子表的内容   
-            IQueryable<APPLIANCE_DETAIL_INFORMATION> collection = from f in db.APPLIANCE_DETAIL_INFORMATION
-                                                                  where editCollection.Contains(f.ID)
-                                                          select f;
-            foreach (var deleteItem in collection)
-            {
-                deleteItem.APPLIANCE_PROGRESS = shiyanshi;
-            }
-        }
-        /// <summary>
         /// 根据ORDER_TASK_INFORMATIONID，获取所有器具明细信息数据
         /// </summary>
         /// <param name="id">外键的主键</param>

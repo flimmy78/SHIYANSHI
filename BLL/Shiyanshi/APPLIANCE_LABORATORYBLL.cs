@@ -35,42 +35,7 @@ namespace Langben.BLL
             return false;
         }
 
-        /// <summary>
-        /// 领取功能
-        /// </summary>
-        /// <param name="validationErrors">返回的错误信息</param>
-        /// <param name="deleteCollection">器具明细信息的集合</param>
-        /// <param name="shiyanshi">什么实验室领取的，传实验室名</param>
-        /// <returns></returns>    
-        public bool EditCollection(ref ValidationErrors validationErrors, string[] deleteCollection, string shiyanshi)
-        {
-            try
-            {
-                if (deleteCollection != null)
-                {
-                    using (TransactionScope transactionScope = new TransactionScope())
-                    {
-                        repository.EditCollection(db, deleteCollection, shiyanshi);
-                        if (deleteCollection.Length == repository.Save(db))
-                        {
-                            transactionScope.Complete();
-                            return true;
-                        }
-                        else
-                        {
-                            Transaction.Current.Rollback();
-                        }
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                validationErrors.Add(ex.Message);
-                ExceptionsHander.WriteExceptions(ex);
-            }
-            return false;
-        }
+        
         /// <summary>
         /// 入库
         /// </summary>

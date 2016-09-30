@@ -22,14 +22,6 @@ namespace Langben.IBLL
         [OperationContract]
         bool EditField(ref Common.ValidationErrors validationErrors, APPLIANCE_LABORATORY entity);
         /// <summary>
-        /// 修改（领取）
-        /// </summary>
-        /// <param name="validationErrors"></param>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        [OperationContract]
-        bool EditCollection(ref Common.ValidationErrors validationErrors, string[] deleteCollection, string shiyanshi);
-        /// <summary>
         /// 修改（入库）
         /// </summary>
         /// <param name="validationErrors"></param>

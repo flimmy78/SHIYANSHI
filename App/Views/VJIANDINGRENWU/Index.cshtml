@@ -481,52 +481,27 @@
             $.messager.confirm('操作提示', "确认领取这 " + arr.length + " 项吗？", function (r) {
                 if (r) {
                     for (var i = 0; i < arr.length; i++) {
-                        $.ajax({
-                            url: "/api/APPLIANCE_LABORATORYApi/GetISRECEIVE/" + arr[i].ID,
-                            type: "Get",
-                            // async: false,
-                            success: function (res) {
-                                if (res == true) {
-                                    res2 = true;
-                                }
-                                else {
-                                    return false;
-                                }
-                            }
-                        })
-                        if (res2) {
-                            id += arr[i].ID + ",";
-                            APPLIANCECOLLECTIONSATE += arr[i].ORDER_STATUS + ",";
-                            is = true;
-                        }
-                        else {
-                            $.messager.alert('操作提示', '不能领取，请选择正确数据!', 'warning');
-                            return false;
-                        }
-                        
+                        id += arr[i].ID + ",";
                     }
-                    if (is) {
-                        var arr2 = {
-                            APPLIANCE_DETAIL_INFORMATIONID: id,
-                        }
-                        $.ajax({
-                            url: "/api/APPLIANCE_LABORATORYApi/LINGQU",
-                            type: "Post",
-                            data: arr2,
-                            // async: false,
-                            success: function (res) {
-                                if (res.Code == 1) {
-                                    $.messager.alert('操作提示', "领取成功！", 'info');
-                                    $("#flexigridData").datagrid("reload");
-                                    $("#flexigridData").datagrid("clearSelections");
-                                }
-                                else {
-                                    $.messager.alert('操作提示', "领取失败！", 'error');
-                                }
-                            }
-                        })
+                    var arr2 = {
+                        APPLIANCE_DETAIL_INFORMATIONID: id,
                     }
-
+                    $.ajax({
+                        url: "/api/APPLIANCE_LABORATORYApi/LINGQU",
+                        type: "Post",
+                        data: arr2,
+                        // async: false,
+                        success: function (res) {
+                            if (res.Code == 1) {
+                                $.messager.alert('操作提示', "领取成功！", 'info');
+                                $("#flexigridData").datagrid("reload");
+                                $("#flexigridData").datagrid("clearSelections");
+                            }
+                            else {
+                                $.messager.alert('操作提示', "领取失败！", 'error');
+                            }
+                        }
+                    })
                 }
             })
         }

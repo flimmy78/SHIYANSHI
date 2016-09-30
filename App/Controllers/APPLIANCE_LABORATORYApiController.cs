@@ -237,33 +237,87 @@ namespace Langben.App.Controllers
             if (deleteId != null && deleteId.Length > 0)
             {
                 Common.Account account = GetCurrentAccount();
-
-                //判断器具领取信息是否添加成功
-                if (m_BLL.EditCollection(ref validationErrors, deleteId, account.UNDERTAKE_LABORATORYName) && m_BLL2.EditCollection(ref validationErrors, deleteId, account.UNDERTAKE_LABORATORYName))
+                bool qu = false;
+                foreach (var item in deleteId)
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息信息的Id为" + string.Join(",", deleteId), "器具明细信息");//写入日志                   
-                    result.Code = Common.ClientCode.Succeed;
-                    result.Message = Suggestion.UpdateSucceed;
-                    return result; //提示更新成功 
-                }
-                else
-                {
-                    if (validationErrors != null && validationErrors.Count > 0)
+                    if (GetISRECEIVE(item))
                     {
-                        validationErrors.All(a =>
-                        {
-                            returnValue += a.ErrorMessage;
-                            return true;
-                        });
+                        qu = true;
+
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具明细信息信息的Id为" + string.Join(",", deleteId) + "," + returnValue, "器具明细信息");//写入日志   
-                    result.Code = Common.ClientCode.Fail;
-                    result.Message = Suggestion.UpdateFail + returnValue;
-                    return result; //提示更新失败
+                    else
+                    {
+                        qu = false;
+                        break;
+                    }
+                }
+                if (qu)
+                {
+                    foreach (var item2 in deleteId)//修改器具状态
+                    {
+                        APPLIANCE_DETAIL_INFORMATION appion = new APPLIANCE_DETAIL_INFORMATION();
+                        List<APPLIANCE_LABORATORY> listry = m_BLL.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item2);
+                        foreach (var item3 in listry)
+                        {
+                            APPLIANCE_LABORATORY app = new APPLIANCE_LABORATORY();
+
+                            if (item3.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName)
+                            {
+                                app.ORDER_STATUS = Common.ORDER_STATUS.已领取.ToString();
+                                app.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已领取.GetHashCode().ToString();
+                            }
+                            app.ID = item3.ID;
+
+                            app.ISRECEIVE = Common.ISRECEIVE.否.ToString();                           
+                            if (m_BLL.EditField(ref validationErrors, app))
+                            {
+                                LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息_承接实验室的Id为" + appion.ID, "器具领取状态修改");//写入日志                   
+                                result.Code = Common.ClientCode.Succeed;
+                                result.Message = Suggestion.UpdateSucceed;
+                            }
+                            else
+                            {
+                                if (validationErrors != null && validationErrors.Count > 0)
+                                {
+                                    validationErrors.All(a =>
+                                    {
+                                        returnValue += a.ErrorMessage;
+                                        return true;
+                                    });
+                                }
+                                LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具明细信息_承接实验室的Id为" + appion.ID + "," + returnValue, "器具领取状态修改");//写入日志   
+                                result.Code = Common.ClientCode.Fail;
+                                result.Message = Suggestion.UpdateFail + returnValue;
+                                return result; //提示更新失败
+                            }
+
+                        }
+                        appion.ID = item2;
+                        appion.APPLIANCE_PROGRESS = account.UNDERTAKE_LABORATORYName;
+                        if (m_BLL2.EditField(ref validationErrors, appion))
+                        {
+                            LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息信息的Id为" + appion.ID, "器具领取所在实验室修改");//写入日志                   
+                            result.Code = Common.ClientCode.Succeed;
+                            result.Message = Suggestion.UpdateSucceed;
+                        }
+                        else
+                        {
+                            if (validationErrors != null && validationErrors.Count > 0)
+                            {
+                                validationErrors.All(a =>
+                                {
+                                    returnValue += a.ErrorMessage;
+                                    return true;
+                                });
+                            }
+                            LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具明细信息信息的Id为" + appion.ID + "," + returnValue, "器具领取所在实验室修改");//写入日志   
+                            result.Code = Common.ClientCode.Fail;
+                            result.Message = Suggestion.UpdateFail + returnValue;
+                            return result; //提示更新失败
+                        }
+                    }                                    
                 }
             }
-            result.Code = Common.ClientCode.FindNull;
-            result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";
             return result; //提示输入的数据的格式不对         
         }
 
@@ -357,7 +411,7 @@ namespace Langben.App.Controllers
                 foreach (var item in listappory)
                 {
                     //数据校验
-                    if (m_BLL.EditSTORAGEINSTRUCTI_STATU(ref validationErrors, deleteId)&&m_BLL2.EditSTORAGEINSTRUCTI_STATU(ref validationErrors, deleteId))
+                    if (m_BLL.EditSTORAGEINSTRUCTI_STATU(ref validationErrors, deleteId) && m_BLL2.EditSTORAGEINSTRUCTI_STATU(ref validationErrors, deleteId))
                     {
                         LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息信息的Id为" + string.Join(",", deleteId), "器具明细信息"
                             );//写入日志                   

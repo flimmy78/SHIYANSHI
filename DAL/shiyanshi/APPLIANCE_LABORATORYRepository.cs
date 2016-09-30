@@ -42,27 +42,7 @@ namespace Langben.DAL
                 deleteItem.RETURN_INSTRUCTIONS = entity.RETURN_INSTRUCTIONS == null ? deleteItem.RETURN_INSTRUCTIONS : entity.RETURN_INSTRUCTIONS;
                 deleteItem.ISRECEIVE = entity.ISRECEIVE == null ? deleteItem.ISRECEIVE : entity.ISRECEIVE;
             }
-        }
-
-        /// <summary>
-        /// 领取功能
-        /// </summary>
-        /// <param name="db">实体数据</param>
-        /// <param name="editCollection">主键的集合</param>
-        /// <param name="shiyanshi">什么实验室领取的，传实验室名</param>
-        public void EditCollection(SysEntities db, string[] editCollection, string shiyanshi)
-        {
-            //数据库设置级联关系，自动删除子表的内容   
-            IQueryable<APPLIANCE_LABORATORY> collection = from f in db.APPLIANCE_LABORATORY
-                                                                  where editCollection.Contains(f.APPLIANCE_DETAIL_INFORMATIONID)&&f.UNDERTAKE_LABORATORYID== shiyanshi
-                                                                  select f;
-            foreach (var deleteItem in collection)
-            {
-                deleteItem.ORDER_STATUS = Common.ORDER_STATUS.已领取.ToString();
-                deleteItem.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已领取.GetHashCode().ToString();
-                deleteItem.ISRECEIVE = Common.ISRECEIVE.否.ToString();
-            }
-        }
+        }        
         /// <summary>
         /// 入库
         /// </summary>
