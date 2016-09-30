@@ -5,16 +5,11 @@
 }
 @using Common
 @using Models
-@section CurentPlace {
-    修改
-}
-
 
 <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
     <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
         <table>
             <tr>
-
                 <td>
                     <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()" id="btnDuoTongDao" style="display:none">增加通道</a>
                     <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="Save()">保存检测项</a>
@@ -51,31 +46,26 @@ else
                     <th rowspan="2" align="center"> 输出实际值 </th>
                     <th rowspan="2" align="center">相对误差</th>
                     <th align="center">校准结果的不确定度</th>
-                </tr>
-                <tr>
                     <th align="center">
-                        U(K = <select class="my-combox" name="state" style="width:30px;" id="KVALUE">
-                            <option value="">2 </option>
-                            <option value="">3</option>
-                            <option value="">√3</option>
-
-
+                        校准结果的不确定度<br>
+                        U(K = <select class="my-combobox" name="state" style="width:30px;">
+                            <option value="2">2 </option>
+                            <option value="3">3</option>
+                            <option value="√3">√3</option>
                         </select>)
                     </th>
-                </tr>
             </thead>
 
             <tbody id="tbody_1"></tbody>
+
             <tfoot>
                 <tr>
-                    <td colspan="7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open'); set('1')">增加量程</a></td>
-
+                    <td colspan="7">
+                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="$('#dlg').dialog('open'); set('1')">增加量程</a>
+                    </td>
                 </tr>
             </tfoot>
         </table>
-
-
-
     </div>
 
     <div class="mt10">
@@ -83,18 +73,19 @@ else
 
             <tr>
                 <th width="40">注：</th>
-                <td colspan="6"><input class="my-textbox input-width" name="REMARK" data-options="multiline:true" style="height:30px; width:95%" id="REMARK"></td>
+                <td colspan="6">
+                    <input class="my-textbox input-width" name="REMARK" data-options="multiline:true" style="height:30px; width:95%" id="REMARK">
+                </td>
             </tr>
             <tr>
                 <th width="40">结论：</th>
-                <td colspan="6"><input class="my-textbox input-width" name="CONCLUSION" data-options="multiline:true" style="height:30px; width:95%" id="CONCLUSION"></td>
+                <td colspan="6">
+                    <input class="my-textbox input-width" name="CONCLUSION" data-options="multiline:true" style="height:30px; width:95%" id="CONCLUSION">
+                </td>
             </tr>
-
 
         </table>
     </div>
-
-
 </div>
 
 <!--增加量程弹层-->
