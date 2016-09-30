@@ -10,7 +10,7 @@ using System.Globalization;
 namespace Langben.BLL
 {
     /// <summary>
-    /// 预备方案 
+    /// 预备方案  
     /// </summary>
     public partial class PREPARE_SCHEMEBLL : IBLL.IPREPARE_SCHEMEBLL, IDisposable
     {
