@@ -24,30 +24,11 @@
         </table>
     </div>
 </div>
-@if (ViewData["ID"] != null)
-{
-    <input type="hidden" id="hideID" value="@ViewData["ID"]"/><!--主键-->
-}
-else
-{
-    <input type="hidden" id="hideID" value="" /><!--主键-->
-}
-@if (ViewData["RULEID"] != null)
-{
-    <input type="hidden" id="hideRULEID" value="@ViewData["RULEID"]"/><!--检测项-->
-}
-else
-{
-    <input type="hidden" id="hideRULEID" value="" /><!--检测项-->
-}
-@if (ViewData["SCHEMEID"] != null)
-{
-    <input type="hidden" id="hideSCHEMEID" value="@ViewData["SCHEMEID"]"/><!--方案编号-->
-}
-else
-{
-    <input type="hidden" id="hideSCHEMEID" value="" /><!--方案编号-->
-}
+
+<input type="hidden" id="hideID" value="@ViewBag.ID" /><!--主键-->
+<input type="hidden" id="hideRULEID" value="@ViewBag.RULEID" /><!--检测项-->
+<input type="hidden" id="hideSCHEMEID" value="@ViewBag.SCHEMEID" /><!--方案编号-->
+
 @if (Model != null && Model.HTMLVALUE != null && Model.HTMLVALUE.Trim() != "")
 {
     <input type="hidden" id="hideHTMLVALUE" value="@Model.HTMLVALUE" />
@@ -56,8 +37,8 @@ else
 {
     <input type="hidden" id="hideHTMLVALUE" value="" />
 }
-<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;" id="divHtml">  
-   
+<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;" id="divHtml">
+
     <input type="hidden" id="rowindex" value="0" />
     <div class="mt10" id="tongdao">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_1">
@@ -155,139 +136,135 @@ else
             $("#divHtml").html("");
             $("#divHtml").append(hideHtml);
         }
-    });    
+    });
     BtnInit(RuleAttribute);
-        //共有的通道数量
-        var tableIdx = 1;
-        //创建通道
-        function CreateTable() {
-            tableIdx++;
-            var tfoot = " <tfoot>"
-                + "<tr><td colspan='7'><a href='javascript:void(0)' class='easyui-linkbutton' data-options=\"plain:true,iconCls:'icon-add'\" onclick=\"$('#dlg').dialog('open');set('" + tableIdx + "')\">增加量程</a></td></tr> </tfoot>";
-            var table = "<table width='100%' border='0' cellspacing='0' cellpadding='0' class='tbl mt10' id='tongdao_" + tableIdx + "'>"
-                + "<thead><tr><th rowspan='2' align='center' width='140'>量程</th><th rowspan='2' align='center' width='140'>选用电阻阻值（Ω）</th><th rowspan='2' align='center'> 输出示值 </th><th rowspan='2' align='center'> 读数值 </th><th rowspan='2' align='center'> 输出实际值 </th><th rowspan='2' align='center'>相对误差</th><th align='center'>校准结果的不确定度</th></tr><tr><th align='center'>U(K = <select class='easyui-combobox' name='state' style='width:30px;'><option value=''>2 </option><option value=''>3</option><option value=''>√3</option></select>)</th></tr></thead>"
-                + "<tbody id='tbody_" + tableIdx + "'></tbody>"
-                + tfoot
-                + "</table>";
+    //共有的通道数量
+    var tableIdx = 1;
+    //创建通道
+    function CreateTable() {
+        tableIdx++;
+        var tfoot = " <tfoot>"
+            + "<tr><td colspan='7'><a href='javascript:void(0)' class='easyui-linkbutton' data-options=\"plain:true,iconCls:'icon-add'\" onclick=\"$('#dlg').dialog('open');set('" + tableIdx + "')\">增加量程</a></td></tr> </tfoot>";
+        var table = "<table width='100%' border='0' cellspacing='0' cellpadding='0' class='tbl mt10' id='tongdao_" + tableIdx + "'>"
+            + "<thead><tr><th rowspan='2' align='center' width='140'>量程</th><th rowspan='2' align='center' width='140'>选用电阻阻值（Ω）</th><th rowspan='2' align='center'> 输出示值 </th><th rowspan='2' align='center'> 读数值 </th><th rowspan='2' align='center'> 输出实际值 </th><th rowspan='2' align='center'>相对误差</th><th align='center'>校准结果的不确定度</th></tr><tr><th align='center'>U(K = <select class='easyui-combobox' name='state' style='width:30px;'><option value=''>2 </option><option value=''>3</option><option value=''>√3</option></select>)</th></tr></thead>"
+            + "<tbody id='tbody_" + tableIdx + "'></tbody>"
+            + tfoot
+            + "</table>";
 
-            var tagobj = $(table).appendTo($('#tongdao'));
-            $.parser.parse(tagobj);
+        var tagobj = $(table).appendTo($('#tongdao'));
+        $.parser.parse(tagobj);
 
 
-        };
-        function set(idx) {
-            //$("#rowindex").val(idx);            
-        }
-        //重置
-        function Reset()
-        {
-            //表格清空
-            $("#tbody_1").html("");
-            //注            
-            $("#REMARK").val("");
-            //结论
-            $("#CONCLUSION").val("");
-        }
-        //增加量程
-        function CreateRow() {
-                                 
-            var idx = parseInt($("#rowindex").val());//第几个量程
-            idx = idx + 1;
-            $("#rowindex").val(idx);
+    };
+    function set(idx) {
+        //$("#rowindex").val(idx);
+    }
+    //重置
+    function Reset() {
+        //表格清空
+        $("#tbody_1").html("");
+        //注
+        $("#REMARK").val("");
+        //结论
+        $("#CONCLUSION").val("");
+    }
+    //增加量程
+    function CreateRow() {
 
-            var rowspanIdx = $("#txtPoint").val();     //检测点数
-            txtNumber = $("#txtNumber").val(); //量程
-            var standardValue = "";
-            var htmlString = [];
-            var rowLength = $("#tbody_" + idx + " tr").length;
-            var lianChengID = tableIdx + "_" + idx;//（量程ID）第几个通道_第几个量程
-            for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
-                rowLength++;
-                htmlString.push("<tr rowindex='" + rowLength + "'>");
+        var idx = parseInt($("#rowindex").val());//第几个量程
+        idx = idx + 1;
+        $("#rowindex").val(idx);
 
-                var rowspan;
-                var name;
-                var id;
-                var txtVal;
-                var ddlhtml;
-                var ddlVal;
-                var HangHaoID = lianChengID + "_" + rowidx;//（行号ID)量程ID_第几行
-                if (rowidx == 0) {                                                          
+        var rowspanIdx = $("#txtPoint").val();     //检测点数
+        txtNumber = $("#txtNumber").val(); //量程
+        var standardValue = "";
+        var htmlString = [];
+        var rowLength = $("#tbody_" + idx + " tr").length;
+        var lianChengID = tableIdx + "_" + idx;//（量程ID）第几个通道_第几个量程
+        for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
+            rowLength++;
+            htmlString.push("<tr rowindex='" + rowLength + "'>");
 
-                    //量程
-                    htmlString.push(SetTDHtml(rowspanIdx, "RANGE", lianChengID, null,txtNumber));
-                    //选用电阻阻值                   
-                    htmlString.push(SetTDHtml(rowspanIdx, "RESISTANCE", lianChengID, null,""));
-                }                
+            var rowspan;
+            var name;
+            var id;
+            var txtVal;
+            var ddlhtml;
+            var ddlVal;
+            var HangHaoID = lianChengID + "_" + rowidx;//（行号ID)量程ID_第几行
+            if (rowidx == 0) {
 
-                //输出示值              
-                 
-                var changerHTML = "onblur=''";                
-                //输出示值                  
-                htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx,""));
-                //读数值                
-                 htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx,""));
-                 //输出实际值                 
-                 htmlString.push(SetTDHtml(1, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx,""));
-                //相对误差                 
-                 htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx,""));
-                //校准结果的不确定度                 
-                 htmlString.push(SetTDHtml( 1, "UNCERTAINTY_DEGREE", HangHaoID, rowidx,""));
-                htmlString.push("</tr>");
+                //量程
+                htmlString.push(SetTDHtml(rowspanIdx, "RANGE", lianChengID, null, txtNumber));
+                //选用电阻阻值
+                htmlString.push(SetTDHtml(rowspanIdx, "RESISTANCE", lianChengID, null, ""));
             }
-            htmlString = htmlString.join("");
-            var tagRow = $("#tbody_" + tableIdx).append(htmlString);
-            $.parser.parse(tagRow);//渲染easyui组建
-            $('#dlg').window('close');
+
+            //输出示值
+
+            var changerHTML = "onblur=''";
+            //输出示值
+            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, ""));
+            //读数值
+            htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, ""));
+            //输出实际值
+            htmlString.push(SetTDHtml(1, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx, ""));
+            //相对误差
+            htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, ""));
+            //校准结果的不确定度
+            htmlString.push(SetTDHtml(1, "UNCERTAINTY_DEGREE", HangHaoID, rowidx, ""));
+            htmlString.push("</tr>");
         }
-        
-        //离开事件，用于计算
-        function blurValue(obj)
-        {            
-            LianDongShiJiZhi(obj);
-        }
+        htmlString = htmlString.join("");
+        var tagRow = $("#tbody_" + tableIdx).append(htmlString);
+        $.parser.parse(tagRow);//渲染easyui组建
+        $('#dlg').window('close');
+    }
+
+    //离开事件，用于计算
+    function blurValue(obj) {
+        LianDongShiJiZhi(obj);
+    }
     //联动标准值
     //输出实际值计算：【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值；【选用电阻阻值】没有数值时，输出实际值=读数值
-        function LianDongShiJiZhi(obj)
+    function LianDongShiJiZhi(obj) {
+
+        if (obj.name == "RESISTANCE" && obj.value.trim() != "")//选用电阻阻值变更
         {
 
-            if (obj.name == "RESISTANCE" && obj.value.trim() != "")//选用电阻阻值变更
-            {
-                
-                id = obj.id.replace(obj.name, "") + "_";
-                $("input[name=READ_VALUE]").each(function (a, b) {//读数值 
-                    if (b.id.indexOf(id) >= 0 && b.value.trim() != "") {
-                        var hhID = b.id.replace(b.name, "");//行号
-                        var shijizhiID = "#ACTUAL_OUTPUT_VALUE" + hhID;//输出实际值ID                        
-                        $(shijizhiID).val(CalculateShiJiZhi(obj.value.trim(), b.value.trim()));
-                    }
-                });           
-            }
-            else if(obj.name=="READ_VALUE")//读数值
-            {               
-                var DZID = obj.id.replace(obj.name, "");
-                DZID = DZID.substr(0, DZID.lastIndexOf("_"));
-                var hhID = obj.id.replace(obj.name, "");//行号
-                var shijizhiID = "#ACTUAL_OUTPUT_VALUE" + hhID;//输出实际值ID 
-                var DianZuID = "#RESISTANCE" + DZID;//电阻ID  
-                $(shijizhiID).val(CalculateShiJiZhi($(DianZuID).val(), obj.value.trim()));
-            }
+            id = obj.id.replace(obj.name, "") + "_";
+            $("input[name=READ_VALUE]").each(function (a, b) {//读数值
+                if (b.id.indexOf(id) >= 0 && b.value.trim() != "") {
+                    var hhID = b.id.replace(b.name, "");//行号
+                    var shijizhiID = "#ACTUAL_OUTPUT_VALUE" + hhID;//输出实际值ID
+                    $(shijizhiID).val(CalculateShiJiZhi(obj.value.trim(), b.value.trim()));
+                }
+            });
         }
-        //计算输出实际值
-        function CalculateShiJiZhi(DianZu,DuShuZhi)
+        else if (obj.name == "READ_VALUE")//读数值
         {
-            if (DianZu == "" || DuShuZhi == "") {//【选用电阻阻值】没有数值时，输出实际值=读数值
-                return DuShuZhi;
-            }
-            else if (DianZu.trim() == "0") {
-                return "";
-            }
-            else//【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值
-            {
-                var value = parseFloat(DuShuZhi.trim()) / parseFloat(DianZu.trim());
-                return value;
-            }            
-        }       
+            var DZID = obj.id.replace(obj.name, "");
+            DZID = DZID.substr(0, DZID.lastIndexOf("_"));
+            var hhID = obj.id.replace(obj.name, "");//行号
+            var shijizhiID = "#ACTUAL_OUTPUT_VALUE" + hhID;//输出实际值ID
+            var DianZuID = "#RESISTANCE" + DZID;//电阻ID
+            $(shijizhiID).val(CalculateShiJiZhi($(DianZuID).val(), obj.value.trim()));
+        }
+    }
+    //计算输出实际值
+    function CalculateShiJiZhi(DianZu, DuShuZhi) {
+        if (DianZu == "" || DuShuZhi == "") {//【选用电阻阻值】没有数值时，输出实际值=读数值
+            return DuShuZhi;
+        }
+        else if (DianZu.trim() == "0") {
+            return "";
+        }
+        else//【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值
+        {
+            var value = parseFloat(DuShuZhi.trim()) / parseFloat(DianZu.trim());
+            return value;
+        }
+    }
 
 
 </script>

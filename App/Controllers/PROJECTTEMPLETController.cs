@@ -57,16 +57,20 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult ZhiLiuDianLiuShuChu(string RULEID, string SCHEMEID)
+        public ActionResult ZhiLiuDianLiuShuChu(string RULEID = "", string SCHEMEID = "")
         {
             DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
             if (entity != null)
             {
-                ViewData["ID"] = entity.ID;
+                ViewBag.ID = entity.ID;
+            }
+            else
+            {
+                ViewBag.ID = string.Empty;
             }
 
-            ViewData["RULEID"] = RULEID;
-            ViewData["SCHEMEID"] = SCHEMEID;
+            ViewBag.RULEID = RULEID;
+            ViewBag.SCHEMEID = SCHEMEID;
             return View(entity);
         }
         /// <summary>
