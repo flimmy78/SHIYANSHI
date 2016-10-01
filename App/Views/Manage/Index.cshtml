@@ -72,13 +72,13 @@
                                     <p class="column-p">检定任务</p>
                                 </a>
                             </div>
-                            <div class="col-lg-4 column-div no">
+                            <div class="col-lg-4 column-div " >
                                 <a class="verify-ctrl btn disabled">
                                     <img src="/images/column-ys.png" class="img-circle verify-ctrl-bgcolor5" alt="">
                                     <p class="column-p">审批管理</p>
                                 </a>
                             </div>
-                            <div class="col-lg-4 column-div no">
+                            <div class="col-lg-4 column-div     ">
                                 <a class="verify-ctrl btn disabled">
                                     <img src="/images/columnsj.png" class="img-circle verify-ctrl-bgcolor3" alt="">
                                     <p class="column-p">数据分析</p>
@@ -86,7 +86,7 @@
                             </div>
                         </div>
                         <div class="item column-bg-div">
-                            <div class="col-lg-4 column-div no">
+                            <div class="col-lg-4 column-div ">
                                 <a class="verify-ctrl btn disabled">
                                     <img src="/images/columnvip.png" class="img-circle verify-ctrl-bgcolor4" alt="">
                                     <p class="column-p">系统管理</p>
@@ -129,10 +129,18 @@
                 $(this).css('background-color', 'rgba(255,255,255,1)');
                 $('img:eq(1)', this).css('display', 'inherit');
             }
+            if ($(this).children('a').hasClass('disabled')) {
+                $(this).addClass('no');
+                
+            }
         });
         $('.column-div').mouseout(function () {
             $(this).css('background-color', 'rgba(255,255,255,0.8)');
             $('img:eq(1)', this).css('display', 'none');
+            if ($(this).children('a').hasClass('disabled')) {
+                $(this).removeClass('no');
+                
+            }
         });
        
         $('.user-footer').mouseout(function () {
