@@ -11,15 +11,40 @@
 
 }
 
-    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
-        <input type="hidden" id="hideID" value="" />
-        @if (@ViewBag.UNDERTAKE_LABORATORYID != null)
+    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">        
+        @if (ViewBag.UNDERTAKE_LABORATORYID != null)
         {
             <input type="hidden" id="hideUNDERTAKE_LABORATORYID" value="@ViewBag.UNDERTAKE_LABORATORYID" />
         }
         else
         {
             <input type="hidden" id="hideUNDERTAKE_LABORATORYID" value=""/>
+        }       
+        @if (ViewBag.OP != null)
+        {
+            <input type="hidden" id="hideOP" value="@ViewBag.OP" />
+        }
+        else
+        {
+            <input type="hidden" id="hideOP" value="" />
+        }
+        @if (ViewBag.RuleIDs != null)
+        {
+            <input type="hidden" id="hideRuleIDs" value="@ViewBag.RuleIDs" />
+        }
+        else
+        {
+            <input type="hidden" id="hideRuleIDs" value="" />
+        }
+        @if (Model != null)
+        {
+            <input type="hidden" id="hideID" value="@Model.ID" />
+            <input type="hidden" id="hideCOPYID" value="@Model.COPYID" />
+        }
+        else
+        {
+            <input type="hidden" id="hideID" value="" />
+            <input type="hidden" id="hideCOPYID" value="" />
         }
         <div class="" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
             <table>
@@ -38,8 +63,16 @@
 
 
                     <td> 方案模板名称：</td>
-                    <td>
-                        <input type="text" id="NAME" class="easyui-textbox" style="" />
+                    <td>                        
+                        @if (Model != null)
+                        {
+                            <input type="text" id="NAME" class="easyui-textbox" style="" value="@Model.NAME" />
+                        }
+                        else
+                        {
+                            <input type="text" id="NAME" class="easyui-textbox" style="" value="" />
+                        }
+
                     </td>
                     <td>
                         <a href="javascript:Save()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" style=" margin-left 10px; margin-right:10px">提交方案模板</a>
@@ -69,13 +102,9 @@
 
 
 
-
+<script src="/Scripts/JScript-ShangAn-Common.js"></script>
 <script type="text/javascript">
-
-    $(function () {
-
-    });
-    $(document).ready(function () {       
+    $(document).ready(function () {        
         bindShiyanshi("#UNDERTAKE_LABORATORYID");
         if ($("#hideUNDERTAKE_LABORATORYID").val() != "") {
             $("#UNDERTAKE_LABORATORYID").val($("#hideUNDERTAKE_LABORATORYID").val()).change();
@@ -86,52 +115,72 @@
                 ChangeTree(n);
             }
         });
+        TreeLoad();
+    });
+
+    //加载树
+    function TreeLoad() {       
         $('#tt').tree({
             onClick: function (node) {
-                debugger;
                 var ID = $("#hideID").val();
-                if ($('#tt').tree('isLeaf', node.target)) {                              
-                    if (node.attributes != null && node.attributes.url != null && node.attributes.url.trim() != "") {                        
-                        if ($('#tt').tree('isLeaf', node.target))
-                        {
+                if ($('#tt').tree('isLeaf', node.target)) {
+                    if (node.attributes != null && node.attributes.url != null && node.attributes.url.trim() != "") {
+                        if ($('#tt').tree('isLeaf', node.target)) {
                             if (node.checked == false) {
-
-                                $.messager.alert('操作提示', '未勾选【'+node.text+'】检测项无法设置具体内容！', 'warning');
+                                $.messager.alert('操作提示', '未勾选【' + node.text + '】检测项无法设置具体内容！', 'warning');
                             }
-                            else if(ID.trim()=="")
-                            {
+                            else if (ID.trim() == "") {
                                 $.messager.alert('操作提示', '请先提交方案模板', 'warning');
                             }
                             else {
                                 $('#mainframe').attr('src', node.attributes.url + "&SCHEMEID=" + ID);
                             }
                         }
-                    }                  
-                   
+                    }
                 }
-
-            }
+            },
+            onLoadSuccess: function (node, data) {
+                CheckBoxInit(data);
+            }            
         });
-
-    });
+    }
+    //多选框是否选中初始化
+    function CheckBoxInit(data)
+    {
+        if (data) {
+            $('#tt').tree('expandAll');
+            var RuleIDs = $("#hideRuleIDs").val();
+            if (data != null && data.id != null && data.id != 'undefined' && data.id.trim() != "" && (RuleIDs.indexOf(',' + data.id + ',') >= 0)) {
+                $('#tt').tree('check', data.target);
+            }
+            if (data != null && data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    CheckBoxInit(data[i]);
+                }
+            }
+            if (data != null && data.children != null && data.children != 'undefined' && data.children.length > 0) {
+                for (var i = 0; i < data.children.length; i++) {
+                    CheckBoxInit(data.children[i]);
+                }
+            }
+        }
+        
+    }
     //实验室调整变更树内容
-    function ChangeTree(UNDERTAKE_LABORATORYID)
-    {       
-        //var url = "/Res/tree_data1.js";
-        var url = ShiYanShiShuXing(UNDERTAKE_LABORATORYID,"treeUrl");
-        if (url == null || url.trim() == "")
-        {
+    //ShiYanShiID:实验室ID
+    function ChangeTree(ShiYanShiID) {        
+        var url = ShiYanShiShuXing(ShiYanShiID, "treeUrl");
+        if (url == null || url.trim() == "") {
             url = "/Res/tree_data1.js";
-        }        
+        }
         $('#tt').tree({
             url: url
         });
-        
-    }    
+
+    }
     //数据验证
-    function CheckData()
-    {
-        
+    function CheckData() {
+
         var NAME = $("#NAME").val();//方案名称   
         if ($.trim(NAME) == "") {
             $.messager.alert('操作提示', '请填写方案名称!', 'warning');
@@ -139,35 +188,83 @@
         }
         var nodes = $('#tt').tree('getChecked');//检测项是否选择
         var IsHaveData = false;
-        if (nodes.length > 0)
-        {
+        if (nodes.length > 0) {
             for (var i = 0; i < nodes.length; i++) {
-                //if (nodes[i].children == undefined) { //是否是最末节点
-                if ($('#tt').tree('isLeaf', nodes[i].target))
-                {                   
+                if ($('#tt').tree('isLeaf', nodes[i].target))//是否是最末节点
+                {
                     IsHaveData = true;
                     break;
-
                 }
             }
         }
-        if (!IsHaveData)
-        {
+        if (!IsHaveData) {
             $.messager.alert('操作提示', '请选择检测项!', 'warning');
             return false;
-        }      
-        
+        }
         return true;
-
     }
     //保存
-    function Save()
+    function Save() {
+        if (!CheckData()) {
+            return;
+        }
+        var UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID").val();//实验室
+        var NAME = $("#NAME").val();//方案名称           
+        var nodes = $('#tt').tree('getChecked');
+        var RULEIDs = '';
+        for (var i = 0; i < nodes.length; i++) {
+            var node = nodes[i];
+            if ($('#tt').tree('isLeaf', node.target)) {
+                if (RULEIDs != '') RULEIDs += ',';
+                RULEIDs += node.id;
+            }
+        }
+        var ID = $("#hideID").val();
+        var OP = $("#hideOP").val();//操作
+        var COPYID = $("#hideCOPYID").val();//复制方案ID
+        //获取空对象用于保存添加的信息
+        $.ajax({
+            type: 'post', //使用post方法访问后台
+            dataType: "json", //返回json格式的数据       
+            url: '/SCHEME/Save',//要访问的后台地址
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式       
+            data: { 'ID': ID, 'NAME': NAME, 'UNDERTAKE_LABORATORYID': UNDERTAKE_LABORATORYID, 'RULEIDs': RULEIDs, 'OP': OP, 'COPYID': COPYID },//要发送的数据
+            beforeSend: function () {
+                //InitAlertJS();
+            },
+            complete: function () {
+            }, //AJAX请求完成时隐藏loading提示
+
+            success: function (res) {//msg为返回的数据，在这里做数据绑定               
+                if (res.Code == 1) {
+                    if ($("#hideID").val().trim() == "") {
+                        $("#hideID").val(res.Message);
+                    }
+                    $.messager.alert('操作提示', "操作成功！", 'info');
+                }
+                else {
+                    $.messager.alert('操作提示', res.Message, 'info');
+                }
+                if ($("#hideID").val() != "") {
+                    $("#UNDERTAKE_LABORATORYID").attr("disabled", "disabled");
+                }
+
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
+            }
+        });
+    }
+
+   
+
+    //保存
+    function Save1()
     {
         if (!CheckData())
         {
             return;
-        }
-        
+        }        
         var UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID").val();//实验室
         var NAME = $("#NAME").val();//方案名称           
         var nodes = $('#tt').tree('getChecked');
@@ -181,7 +278,7 @@
             }
         }        
         var ID = $("#hideID").val();
-        var url='/SCHEME/CreateSave';
+        var url='/SCHEME/Save';
         var data='NAME=' + NAME + "&UNDERTAKE_LABORATORYID=" + UNDERTAKE_LABORATORYID + "&RULEIDs=" + RULEIDs;        
         if(ID.trim()!="")
         {

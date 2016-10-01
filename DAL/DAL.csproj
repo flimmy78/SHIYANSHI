@@ -252,7 +252,6 @@
     </Compile>
     <Compile Include="SCHEME_RULEMeta.cs" />
     <Compile Include="SCHEME_RULERepository.cs" />
-    <Compile Include="shiyanshi\APPLIANCECOLLECTIONRepository.cs" />
     <Compile Include="shiyanshi\APPLIANCE_DETAIL_INFORMATIONMeta.cs" />
     <Compile Include="shiyanshi\APPLIANCE_DETAIL_INFORMATIONRepository.cs" />
     <Compile Include="shiyanshi\APPLIANCE_LABORATORYRepository.cs" />

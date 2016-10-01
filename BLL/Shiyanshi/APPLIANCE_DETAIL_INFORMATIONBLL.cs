@@ -96,42 +96,7 @@ namespace Langben.BLL
             stringBuilder.Append("]");
             return stringBuilder.ToString().Replace('@', '"');
         }
-        /// <summary>
-        /// 修改器具明细信息集合
-        /// </summary>
-        /// <param name="validationErrors">返回的错误信息</param>
-        /// <param name="deleteCollection">器具明细信息的集合</param>
-        /// <param name="shiyanshi">什么实验室领取的，传实验室名</param>
-        /// <returns></returns>    
-        public bool EditCollection(ref ValidationErrors validationErrors, string[] deleteCollection, string shiyanshi)
-        {
-            try
-            {
-                if (deleteCollection != null)
-                {
-                    using (TransactionScope transactionScope = new TransactionScope())
-                    {
-                        repository.EditCollection(db, deleteCollection, shiyanshi);
-                        if (deleteCollection.Length == repository.Save(db))
-                        {
-                            transactionScope.Complete();
-                            return true;
-                        }
-                        else
-                        {
-                            Transaction.Current.Rollback();
-                        }
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                validationErrors.Add(ex.Message);
-                ExceptionsHander.WriteExceptions(ex);
-            }
-            return false;
-        }
+       
 
         /// <summary>
         /// 修改器具明细信息集合（入库）
@@ -189,6 +154,8 @@ namespace Langben.BLL
             }
             return false;
         }
+     
+
         /// <summary>
         /// 通过器具明细表中的主键id查找委托单表中的受理单位
         /// </summary>

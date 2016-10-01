@@ -9,7 +9,7 @@ namespace Langben.App.Models
     {
           public APPLIANCE_DETAIL_INFORMATIONShow()
         {
-             
+            APPLIANCE_LABORATORYShow = new APPLIANCE_LABORATORYShow();
         }
 
         public string ID { get; set; }
@@ -38,8 +38,9 @@ namespace Langben.App.Models
         public string STORAGEINSTRUCTI_STATU { get; set; }
         public string EQUIPMENT_STATUS_VALUUMN { get; set; }
         public string RETURN_INSTRUCTIONS { get; set; }
-         public string UNDERTAKE_LABORATORYIDString { get; set; }
+        public string UNDERTAKE_LABORATORYIDString { get; set; }
 
-      //  public virtual ORDER_TASK_INFORMATIONShow ORDER_TASK_INFORMATION { get; set; }
+        public APPLIANCE_LABORATORYShow APPLIANCE_LABORATORYShow { get; set; }
+        //  public virtual ORDER_TASK_INFORMATIONShow ORDER_TASK_INFORMATION { get; set; }
     }
 }

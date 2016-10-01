@@ -20,57 +20,56 @@ namespace Langben.App.Controllers
     {
         /// <summary>
         /// 直流电压（电流）测量-非正负极性-相对误差
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="RULEID"></param>
-        /// <param name="SCHEMEID"></param>
+        /// </summary> 
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult ZhiLiuDianLiuDianYaFeiZhengFu(string id, string RULEID, string SCHEMEID)
+        public ActionResult ZhiLiuDianLiuDianYaFeiZhengFu(string RULEID, string SCHEMEID)
         {
-           
-            if (string.IsNullOrWhiteSpace(id))
-            { 
-                //id为空，则为新增
-                DAL.PROJECTTEMPLET model = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
-                if (model != null)
-                {
-                    ViewData["ID"] = model.ID;
-                }
-                else
-                {//这种情况，应该重新登陆试试了
-                    RedirectToAction("Account");
-                }
+            if (string.IsNullOrWhiteSpace(RULEID)||string.IsNullOrWhiteSpace(SCHEMEID))
+            {
+                return View();//跳转到列表页面
+            }
+            DAL.PROJECTTEMPLET entity = null;// m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
+            if (entity != null)
+            {
+                ViewBag.ID = entity.ID;
             }
             else
             {
-                //已有id，则为修改
-                ViewData["ID"] = id;
+                ViewBag.ID = string.Empty;
             }
-            ViewData["RULEID"] = RULEID;
-            ViewData["SCHEMEID"] = SCHEMEID;
-            return View();
+
+            ViewBag.RULEID = RULEID;
+            ViewBag.SCHEMEID = SCHEMEID;
+            return View(entity);
         }
         /// <summary>
         /// 直流电流输出
         /// </summary>
-        /// <param name="id">主键</param>
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns> 
-        public ActionResult ZhiLiuDianLiuShuChu(string ID, string RULEID, string SCHEMEID)
+        [SupportFilter]
+        public ActionResult ZhiLiuDianLiuShuChu(string RULEID = "", string SCHEMEID = "")
         {
-            ViewData["ID"] = ID;
-
-            if (ID == null || ID.Trim() == "")
+            //if (string.IsNullOrWhiteSpace(RULEID) || string.IsNullOrWhiteSpace(SCHEMEID))
+            //{
+            //    return View();
+            //}
+            DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
+            if (entity != null)
             {
-                DAL.PROJECTTEMPLET model = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
-                if (model != null)
-                {
-                    ViewBag.Id = model.ID;
-                    ViewData["ID"] = model.ID;
-                }
+                ViewBag.ID = entity.ID;
             }
-            ViewData["RULEID"] = RULEID;
-            ViewData["SCHEMEID"] = SCHEMEID;
-            return View();
+            else
+            {
+                ViewBag.ID = string.Empty;
+            }
+
+            ViewBag.RULEID = RULEID;
+            ViewBag.SCHEMEID = SCHEMEID;
+            return View(entity);
         }
         /// <summary>
         /// 保存

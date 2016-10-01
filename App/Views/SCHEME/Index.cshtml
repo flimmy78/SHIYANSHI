@@ -88,7 +88,7 @@
                 {
                     field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', align: 'center',
                     formatter: function (value, row, index) {
-                        var html = "<a href='/SCHEME/Edit/" + row.ID + "'>" + value + "</a>";
+                        var html = "<a href='/SCHEME/Create?ID=" + row.ID + "&OP='修改'>" + value + "</a>";
                         return html;
                     }}
                 , { field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width:150,align: 'center' }

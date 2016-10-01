@@ -188,6 +188,7 @@
     <Compile Include="HtmlHelper\Easyui.cs" />
     <Compile Include="HtmlHelper\RadioButtonListHelper.cs" />
     <Compile Include="Models\ApplianceModel.cs" />
+    <Compile Include="Models\APPLIANCE_LABORATORYShow .cs" />
     <Compile Include="Models\BaseException.cs" />
     <Compile Include="Models\APPLIANCE_DETAIL_INFORMATIONShow.cs" />
     <Compile Include="Models\ORDER_TASK_INFORMATIONShow.cs" />
@@ -502,6 +503,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\JScript-JianCeXiang-Common.js" />
+    <Content Include="Scripts\JScript-FangAn-Common.js" />
     <Content Include="Scripts\JScriptCommon.js" />
     <Content Include="Scripts\JScriptIndex.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />

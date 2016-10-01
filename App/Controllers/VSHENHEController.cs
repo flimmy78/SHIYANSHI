@@ -53,7 +53,15 @@ namespace Langben.App.Controllers
             IList<APPLIANCE_LABORATORY> appliance = m_BLL3.GetByRefPREPARE_SCHEMEID(IDD[0]);
             foreach (var item in appliance)
             {
-                if (account.UNDERTAKE_LABORATORYName == item.UNDERTAKE_LABORATORYID)
+                if (IDD[1] == "H")
+                {
+                    if (account.UNDERTAKE_LABORATORYName == item.UNDERTAKE_LABORATORYID)
+                    {
+                        APPLIANCE_DETAIL_INFORMATIONID = item.APPLIANCE_DETAIL_INFORMATIONID;
+                        ViewBag.REPORTSTATUS = item.PREPARE_SCHEME.REPORTSTATUS;//报告状态用来判断是否启用
+                    }
+                }
+                else
                 {
                     APPLIANCE_DETAIL_INFORMATIONID = item.APPLIANCE_DETAIL_INFORMATIONID;
                     ViewBag.REPORTSTATUS = item.PREPARE_SCHEME.REPORTSTATUS;//报告状态用来判断是否启用
@@ -65,13 +73,13 @@ namespace Langben.App.Controllers
             ViewBag.PREPARE_SCHEME_ID = file.PREPARE_SCHEMEID;//预备方案的id
             ViewBag.APPLIANCE_DETAIL_INFORMATIONID = APPLIANCE_DETAIL_INFORMATIONID;//器具明细的id
             int end = file.FULLPATH.LastIndexOf("\\up");
-            string dizhi= file.FULLPATH.Substring(end);
+            string dizhi = file.FULLPATH.Substring(end);
             int end2 = file.FULLPATH2.LastIndexOf("\\up");
             string dizhi2 = file.FULLPATH2.Substring(end);
             ViewBag.FULLPATH = dizhi;//证书地址
             ViewBag.FULLPATH2 = dizhi2;//原始记录地址          
             ViewBag.NAME = file.NAME;//证书名字
-            ViewBag.NAME2 = file.NAME;//原始记录
+            ViewBag.NAME2 = file.NAME2;//原始记录
             ViewBag.CONCLUSION = file.CONCLUSION;//结论
             return View();
         }
@@ -88,9 +96,11 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public JsonResult GetData(string id, int page, int rows, string order, string sort, string search)
         {
-
+            Common.Account account = GetCurrentAccount();
             int total = 0;
+            search += "UNDERTAKE_LABORATORYID&" + account.UNDERTAKE_LABORATORYName + "^";
             search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.审核驳回.GetHashCode() + "*" + Common.REPORTSTATUS.待审核.GetHashCode() + "*" + Common.REPORTSTATUS.待批准.GetHashCode() + "";
+
             List<VSHENHE> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
             {
@@ -124,7 +134,7 @@ namespace Langben.App.Controllers
                     ISAGGREY = s.ISAGGREY,
 
                     PACKAGETYPE = s.PACKAGETYPE,
-                    FILECONCLUSION=s.FILECONCLUSION
+                    FILECONCLUSION = s.FILECONCLUSION
 
                 }
 

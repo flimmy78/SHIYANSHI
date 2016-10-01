@@ -10,27 +10,6 @@ namespace Langben.DAL
     /// </summary>
     public partial class APPLIANCE_DETAIL_INFORMATIONRepository
     {
-
-        /// <summary>
-        /// 修改对象集合
-        /// </summary>
-        /// <param name="db">实体数据</param>
-        /// <param name="editCollection">主键的集合</param>
-        /// <param name="shiyanshi">什么实验室领取的，传实验室名</param>
-        public void EditCollection(SysEntities db, string[] editCollection, string shiyanshi)
-        {
-            //数据库设置级联关系，自动删除子表的内容   
-            IQueryable<APPLIANCE_DETAIL_INFORMATION> collection = from f in db.APPLIANCE_DETAIL_INFORMATION
-                                                                  where editCollection.Contains(f.ID)
-                                                                  select f;
-            foreach (var deleteItem in collection)
-            {
-                deleteItem.ORDER_STATUS = Common.ORDER_STATUS.已领取.ToString();
-                deleteItem.APPLIANCE_PROGRESS = shiyanshi;
-                deleteItem.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已领取.GetHashCode().ToString();
-            }
-        }
-
         /// <summary>
         /// 修改对象(公用)
         /// </summary>
@@ -42,10 +21,6 @@ namespace Langben.DAL
             IQueryable<APPLIANCE_DETAIL_INFORMATION> collection = from f in db.APPLIANCE_DETAIL_INFORMATION
                                                                   where f.ID == entity.ID
                                                                   select f;
-
-            //db.APPLIANCE_DETAIL_INFORMATION.Attach(entity);
-            //db.Entry(entity).State = System.Data.Entity.EntityState.Modified;
-            //int i = db.SaveChanges();
             foreach (var deleteItem in collection)
             {
                 deleteItem.BAR_CODE_NUM = entity.BAR_CODE_NUM==null? deleteItem.BAR_CODE_NUM: entity.BAR_CODE_NUM;
@@ -66,12 +41,10 @@ namespace Langben.DAL
                 deleteItem.UPDATEPERSON = entity.UPDATEPERSON == null ? deleteItem.UPDATEPERSON : entity.UPDATEPERSON;
                 deleteItem.APPLIANCE_RECIVE = entity.APPLIANCE_RECIVE == null ? deleteItem.APPLIANCE_RECIVE : entity.APPLIANCE_RECIVE;
                 deleteItem.APPLIANCE_PROGRESS = entity.APPLIANCE_PROGRESS == null ? deleteItem.APPLIANCE_PROGRESS : entity.APPLIANCE_PROGRESS;
-                deleteItem.ORDER_STATUS = entity.ORDER_STATUS == null ? deleteItem.ORDER_STATUS : entity.ORDER_STATUS;
                 deleteItem.ISOVERDUE = entity.ISOVERDUE == null ? deleteItem.ISOVERDUE : entity.ISOVERDUE;
                 deleteItem.OVERDUE = entity.OVERDUE == null ? deleteItem.OVERDUE : entity.OVERDUE;
                 deleteItem.STORAGEINSTRUCTIONS = entity.STORAGEINSTRUCTIONS == null ? deleteItem.STORAGEINSTRUCTIONS : entity.STORAGEINSTRUCTIONS;
                 deleteItem.STORAGEINSTRUCTI_STATU = entity.STORAGEINSTRUCTI_STATU == null ? deleteItem.STORAGEINSTRUCTI_STATU : entity.STORAGEINSTRUCTI_STATU;
-                deleteItem.EQUIPMENT_STATUS_VALUUMN = entity.EQUIPMENT_STATUS_VALUUMN == null ? deleteItem.EQUIPMENT_STATUS_VALUUMN : entity.EQUIPMENT_STATUS_VALUUMN;
             }
         }
 
@@ -87,9 +60,7 @@ namespace Langben.DAL
                                                                   where editCollection.Contains(f.ID)
                                                                   select f;
             foreach (var deleteItem in collection)
-            {
-                deleteItem.ORDER_STATUS =Common.ORDER_STATUS.器具已入库.ToString();
-                deleteItem.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.器具已入库.GetHashCode().ToString();
+            {             
                 deleteItem.STORAGEINSTRUCTI_STATU = Common.ORDER_STATUS.器具已入库.ToString();
             }
         }
