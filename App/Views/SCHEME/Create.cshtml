@@ -150,7 +150,7 @@
         if (data) {
             $('#tt').tree('expandAll');
             var RuleIDs = $("#hideRuleIDs").val();
-            if (data != null && data.id != null && data.id != 'undefined' && data.id.trim() != "" && (RuleIDs.indexOf(',' + data.id + ',') >= 0)) {
+            if (data != null && data.id != null && data.id != 'undefined'  && (RuleIDs.indexOf(',' + data.id + ',') >= 0)) {
                 $('#tt').tree('check', data.target);
             }
             if (data != null && data.length > 0) {

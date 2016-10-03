@@ -51,7 +51,7 @@ RuleAttributeArray = [
             }]
     },
     {
-        RuleID: 'JJG 315-1983',//检测项编号
+        RuleID: '315-1983',//检测项编号
         Remark: '直流电压测量-非正负极性-相对误差-单相-多通道',//检测项说明
         Attributes:
             [{
@@ -101,9 +101,9 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
         return;
     }
     var id = obj.id.replace(obj.name, "");
-    if (id.split('_').length <= 2)
+    if (id.split('_').length <= 3)
     {
-        id = + "_";//_表编号_量程编号_
+        id = id + "_";//_表编号_量程编号_
     }
     
     var ddlArray = LianDongDanWeiDDLAttribute.split(';');
@@ -326,6 +326,7 @@ Number.prototype.toFixed = function toFixed(s) {
 //显示隐藏添加通道按钮
 function ShowOrHideDuoTongDao()
 {
+    debugger;
     if(RuleAttribute==null)
     {
         $("#btnDuoTongDao").hide();        
