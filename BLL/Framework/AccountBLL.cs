@@ -25,10 +25,7 @@ namespace Langben.BLL
             //获取用户信息,请确定web.config中的连接字符串正确
             using (SysEntities db = new SysEntities())
             {
-                var persond = (from p in db.SysPerson
-
-
-                               select p).ToList();
+                
                 var person = (from p in db.SysPerson
                               where p.Name == userName
                               && p.Password == password
