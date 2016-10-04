@@ -52,7 +52,7 @@
                     <td> 实验室：</td>
                     <td>
                         <select name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID" style="width:200px;" >
-                            <option value="电能" selected="selected">电能</option>
+                            <option value="电能">电能</option>
                             <option value="数表三相">数表三相</option>
                             <option value="数表单相">数表单相</option>
                             <option value="指示仪表">指示仪表</option>
@@ -112,6 +112,8 @@
         }
         $('#UNDERTAKE_LABORATORYID').combobox({
             onChange: function (n, o) {
+                debugger;
+                $("#hideUNDERTAKE_LABORATORYID").val(n);
                 ChangeTree(n);
             }
         });
@@ -208,7 +210,9 @@
         if (!CheckData()) {
             return;
         }
-        var UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID").val();//实验室
+        debugger;
+        //var UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID").val();//实验室
+        var UNDERTAKE_LABORATORYID = $("#hideUNDERTAKE_LABORATORYID").val();//没明白取下拉框的选中数据取不到
         var NAME = $("#NAME").val();//方案名称           
         var nodes = $('#tt').tree('getChecked');
         var RULEIDs = '';

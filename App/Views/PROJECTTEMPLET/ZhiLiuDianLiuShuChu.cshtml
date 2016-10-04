@@ -11,7 +11,7 @@
         <table>
             <tr>
                 <td>
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()" id="btnDuoTongDao" style="display:none">增加通道</a>
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTongDao()" id="btnDuoTongDao" style="display:none">增加通道</a>
                     <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="Save()">保存检测项</a>
                     <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="Reset()">重置检测项</a>
                 </td>
@@ -44,8 +44,7 @@ else
                     <th rowspan="2" align="center"> 输出示值 </th>
                     <th rowspan="2" align="center"> 读数值 </th>
                     <th rowspan="2" align="center"> 输出实际值 </th>
-                    <th rowspan="2" align="center">相对误差</th>
-                    <th align="center">校准结果的不确定度</th>
+                    <th rowspan="2" align="center">相对误差</th>                   
                     <th align="center">
                         校准结果的不确定度<br>
                         U(K = <select class="my-combobox" name="state" style="width:30px;">
@@ -125,80 +124,12 @@ else
 <script type="text/javascript" language="javascript">
     //var RuleID = $("#hideRULEID").val();//检测项目ID
     //var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
-    var $tongdao_moban
-    $(document).ready(function () {
-        var hideHtml = $("#hideHTMLVALUE").val();
-        if (hideHtml.trim() != "") {
-            $("#divHtml").html("");
-            $("#divHtml").append(hideHtml);
-        }
-        
-        $tongdao_moban = $("#tongdao_moban");
-        if(hideHtml.trim()=="")
-        {
-            CreateTable();
-        }
-        
-    });
-    BtnInit(RuleAttribute);
-    //共有的通道数量
-    //var tableIdx = 0;
-    //创建通道
-    function CreateTable() {
-        var tableIdx = $("#hideDangQianTongDao").val();
-        tableIdx++;
-        //var tfoot = " <tfoot>"
-        //    + "<tr><td colspan='7'><a href='javascript:void(0)' class='easyui-linkbutton' data-options=\"plain:true,iconCls:'icon-add'\" onclick=\"$('#dlg').dialog('open');set('" + tableIdx + "')\">增加量程</a></td></tr> </tfoot>";
-        //var table = "<table width='100%' border='0' cellspacing='0' cellpadding='0' class='tbl mt10' id='tongdao_" + tableIdx + "'>"
-        //    + "<thead><tr><th rowspan='2' align='center' width='140'>量程</th><th rowspan='2' align='center' width='140'>选用电阻阻值（Ω）</th><th rowspan='2' align='center'> 输出示值 </th><th rowspan='2' align='center'> 读数值 </th><th rowspan='2' align='center'> 输出实际值 </th><th rowspan='2' align='center'>相对误差</th><th align='center'>校准结果的不确定度</th></tr><tr><th align='center'>U(K = <select class='easyui-combobox' name='state' style='width:30px;'><option value=''>2 </option><option value=''>3</option><option value=''>√3</option></select>)</th></tr></thead>"
-        //    + "<tbody id='tbody_" + tableIdx + "'></tbody>"
-        //    + tfoot
-        //    + "</table>";
-        //var tagobj = $(table).appendTo($('#tongdao'));
-        //$.parser.parse(tagobj);
-        var $tongdao = $tongdao_moban.clone().appendTo($('#tongdao'));
-        $tongdao.addClass('clone');
-        $tongdao.css('display', '');
-        $tongdao.attr('id', 'tongdao_' + tableIdx);
-        $tongdao.find("#tbody_moban").attr('id', 'tbody_' + tableIdx);
-        var tbIdx = tableIdx;
-        $tongdao.find('#btnAddLiangCheng').attr("onclick", "$('#dlg').dialog('open');set(" + tbIdx + ");");
-        $("#hideDangQianTongDao").val(tableIdx);
-        $("#hideTongDaoShuLiang").val(tableIdx);
-
-
-    };
-    function set(tbodyIndex) {
-        //$("#rowindex").val(idx);
-        $("#hideDangQianTongDao").val(tbodyIndex);
-        
-        
-    }
-    //重置
-    function Reset() {
-        //表格清空
-        //$("#tbody_1").html("");
-        debugger;
-        var hideTongDaoShuLiang = $("#hideTongDaoShuLiang").val();//通道数量
-        for (var i = 1; i <= hideTongDaoShuLiang; i++)
-        {
-            var tongdao = "#tongdao_" + i;
-            $(tongdao).html("");
-        }
-        $("#hideTongDaoShuLiang").val("0");
-        CreateTable();
-        //注
-        $("#REMARK").val("");
-        //结论
-        $("#CONCLUSION").val("");
-    }
+    // $Tongdao_moban//模板   
+ 
     //增加量程
     function CreateRow() {
         debugger
-        var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
-        //var idx = parseInt($("#rowindex").val());//第几个量程
-        //idx = idx + 1;
-        //$("#rowindex").val(idx);
+        var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道        
         var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量  
         LiangChengShuLiang++;
         var rowspanIdx = $("#txtPoint").val();     //检测点数

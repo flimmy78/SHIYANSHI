@@ -38,32 +38,54 @@ RuleAttributeArray = [
                 DuoTongDao: 'hidden',
                 //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: '(RANGE_UNIT)|OUTPUT_VALUE_UNIT,ACTUAL_OUTPUT_VALUE_UNIT;(OUTPUT_VALUE_UNIT)|ACTUAL_OUTPUT_VALUE_UNIT',
+                LianDongDanWeiDDL: '(RANGE_UNIT)|OUTPUT_VALUE_UNIT,ACTUAL_OUTPUT_VALUE_UNIT,UNCERTAINTY_DEGREE_UNIT;(OUTPUT_VALUE_UNIT)|ACTUAL_OUTPUT_VALUE_UNIT',
                 //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
-                DanWeiHtmlDDL: 'DianLiu|(RANGE_UNIT),(OUTPUT_VALUE_UNIT),(ACTUAL_OUTPUT_VALUE_UNIT);DianYa|(READ_VALUE_UNIT)',
+                DanWeiHtmlDDL: 'DianLiu|(RANGE_UNIT),(OUTPUT_VALUE_UNIT),(ACTUAL_OUTPUT_VALUE_UNIT),(UNCERTAINTY_DEGREE_UNIT);DianYa|(READ_VALUE_UNIT)',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: 'READ_VALUE,ACTUAL_OUTPUT_VALUE,RELATIVE_ERROR,UNCERTAINTY_DEGREE,REMARK,CONCLUSION',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',OUTPUT_VALUE,'
             }]
+    }
+    ,
+    {
+        RuleID: '315-1983_2_1',//检测项编号
+        Remark: '直流电压测量-正负极性-相对误差-单相',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '(RANGE_UNIT)|OUTPUT_VALUE_UNIT,READ_VALUE_UNIT,UNCERTAINTY_DEGREE_UNIT',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianYa|(RANGE_UNIT),(OUTPUT_VALUE_UNIT),(READ_VALUE_UNIT),(UNCERTAINTY_DEGREE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
     },
     {
-        RuleID: '315-1983',//检测项编号
-        Remark: '直流电压测量-非正负极性-相对误差-单相-多通道',//检测项说明
+        RuleID: '315-1983_2_2',//检测项编号
+        Remark: '直流电压测量-正负极性-相对误差-多通道',//检测项说明
         Attributes:
             [{
                 //添加通道按钮是否显示(show:显示，hidden:不显示)
                 DuoTongDao: 'show',
                 //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: '(RANGE_UNIT)|OUTPUT_VALUE_UNIT,READ_VALUE_UNIT',
+                LianDongDanWeiDDL: '(RANGE_UNIT)|OUTPUT_VALUE_UNIT,READ_VALUE_UNIT,UNCERTAINTY_DEGREE_UNIT',
                 //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
-                DanWeiHtmlDDL: 'DianYa|(RANGE_UNIT),(OUTPUT_VALUE_UNIT),(READ_VALUE_UNIT);',
+                DanWeiHtmlDDL: 'DianYa|(RANGE_UNIT),(OUTPUT_VALUE_UNIT),(READ_VALUE_UNIT),(UNCERTAINTY_DEGREE_UNIT);',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
@@ -74,6 +96,56 @@ RuleAttributeArray = [
 ];
 var RuleID = $("#hideRULEID").val();//检测项目ID
 var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
+var $Tongdao_moban//模板
+$(document).ready(function () {
+
+    var hideHtml = $("#hideHTMLVALUE").val();
+    if (hideHtml.trim() != "") {
+        $("#divHtml").html("");
+        $("#divHtml").append(hideHtml);
+    }
+    $Tongdao_moban = $("#tongdao_moban");
+    if (hideHtml.trim() == "") {
+        CreateTable();
+    }
+    BtnInit(RuleAttribute);
+});
+
+//创建通道
+function CreateTongDao() {
+    var tableIdx = $("#hideDangQianTongDao").val();//当前通道
+    tableIdx++;
+    var $tongdao = $Tongdao_moban.clone().appendTo($('#tongdao'));
+    $tongdao.addClass('clone');
+    $tongdao.css('display', '');
+    $tongdao.attr('id', 'tongdao_' + tableIdx);
+    $tongdao.find("#tbody_moban").attr('id', 'tbody_' + tableIdx);
+    var tbIdx = tableIdx;
+    $tongdao.find('#btnAddLiangCheng').attr("onclick", "$('#dlg').dialog('open');set(" + tbIdx + ");");
+    $("#hideDangQianTongDao").val(tableIdx);
+    $("#hideTongDaoShuLiang").val(tableIdx);
+
+};
+//设置当前操作通道
+function set(tbodyIndex) {
+    $("#hideDangQianTongDao").val(tbodyIndex);
+}
+//重置
+function Reset() {
+    //表格清空
+    var hideTongDaoShuLiang = $("#hideTongDaoShuLiang").val();//通道数量
+    for (var i = 1; i <= hideTongDaoShuLiang; i++) {
+        var tongdao = "#tongdao_" + i;
+        $(tongdao).html("");
+    }
+    $("#hideTongDaoShuLiang").val("0");
+    CreateTongDao();
+    //注
+    $("#REMARK").val("");
+    //结论
+    $("#CONCLUSION").val("");
+}
+
 //根据检测项ID获取控制信息
 //RuleID:检测项目ID
 function GetRuleAttributeByRuleID(RuleID) {
