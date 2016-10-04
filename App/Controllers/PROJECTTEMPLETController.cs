@@ -25,24 +25,8 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
         public ActionResult ZhiLiuDianLiuDianYaFeiZhengFu(string RULEID, string SCHEMEID)
-        {
-            if (string.IsNullOrWhiteSpace(RULEID)||string.IsNullOrWhiteSpace(SCHEMEID))
-            {
-                return View();//跳转到列表页面
-            }
-            DAL.PROJECTTEMPLET entity = null;// m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
-            if (entity != null)
-            {
-                ViewBag.ID = entity.ID;
-            }
-            else
-            {
-                ViewBag.ID = string.Empty;
-            }
-
-            ViewBag.RULEID = RULEID;
-            ViewBag.SCHEMEID = SCHEMEID;
-            return View(entity);
+        {            
+            return Detail(RULEID, SCHEMEID);
         }
         /// <summary>
         /// 直流电流输出
@@ -52,11 +36,11 @@ namespace Langben.App.Controllers
         /// <returns></returns> 
         [SupportFilter]
         public ActionResult ZhiLiuDianLiuShuChu(string RULEID = "", string SCHEMEID = "")
+        {           
+            return Detail(RULEID, SCHEMEID);
+        }
+        public ActionResult Detail(string RULEID = "", string SCHEMEID = "")
         {
-            //if (string.IsNullOrWhiteSpace(RULEID) || string.IsNullOrWhiteSpace(SCHEMEID))
-            //{
-            //    return View();
-            //}
             DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
             if (entity != null)
             {
