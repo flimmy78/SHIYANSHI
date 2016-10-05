@@ -4,14 +4,14 @@ body {
     padding: 0;
     font: normal 12px/20px ;
 }
-input[type="checkbox"] {vertical-align:middle;
-}
+input[type="checkbox"],input[type="radio"] {vertical-align:bottom;}
 .p5 {padding:5px}
 .p10 {padding:10px}
 .p15 {padding:15px}
 .space10{ font-size:1px; height:10px;}
 .space15{ font-size:1px; height:15px;}
 .space20{ font-size:1px; height:20px;}
+.bgF7{ background:#f7f7f7}
 .mt10{ margin-top:10px}
 .fl{ float:left}
 .fr{ float:right}
@@ -329,7 +329,8 @@ textarea {
   background: linear-gradient(to bottom,#ffffff 0,#F2F2F2 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#F2F2F2,GradientType=0); font-weight:normal}
-.tbl th, .tbl td{border:1px dotted #ccc; padding:3px;}
+.tbl th, .tbl td{border:1px dotted #ccc; padding:3px;height:25px}
 .input-width{width:80px; text-align:right}
 .tips{ display:inline-block; vertical-align: bottom; width:16px; height:16px; }
-.my-textbox, .my-combobox{border:1px solid #D4D4D4; height:24px}
+.my-textbox, .my-combobox{border:1px solid #D4D4D4; height:22px}
+.my-combobox{ height:26px}
