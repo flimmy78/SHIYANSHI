@@ -94,5 +94,6 @@ namespace Langben.DAL
         public virtual DbSet<VRUKU> VRUKU { get; set; }
         public virtual DbSet<VSHENHE> VSHENHE { get; set; }
         public virtual DbSet<VSHENPI> VSHENPI { get; set; }
+        public virtual DbSet<VTEST_ITE> VTEST_ITE { get; set; }
     }
 }
