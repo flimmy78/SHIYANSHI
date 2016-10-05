@@ -74,7 +74,50 @@ namespace Langben.App.Controllers
             ViewBag.Id = id;
             return View();
         }
-     
+        /// <summary>
+        /// 非表格首次编辑
+        /// </summary>
+        /// <param name="ITEID">预备方案检测项ID</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <param name="RULEID">检测项ID</param>      
+        /// <param name="INPUTSTATE">录入格式</param>
+        /// <returns></returns> 
+        [SupportFilter]
+        public ActionResult FeiBiaoGe(string ITEID = "",string PREPARE_SCHEMEID="",string RULEID="",string INPUTSTATE="HGBHG")
+        {
+            QUALIFIED_UNQUALIFIED_TEST_ITE entity = null;
+            ViewBag.ID = "";
+            ViewBag.INPUTSTATE = INPUTSTATE;                      
+            if (ITEID != null && ITEID.Trim()!="")
+            {
+                entity = m_BLL.GetById(ITEID);
+                ViewBag.ID = entity.ID;                
+            }
+            if(entity==null)
+            {
+                entity = new QUALIFIED_UNQUALIFIED_TEST_ITE();
+                entity.PREPARE_SCHEMEID = PREPARE_SCHEMEID;
+                entity.RULEID = RULEID;
+                Langben.IBLL.IRULEBLL rBLL = new RULEBLL();
+                DAL.RULE rEntity = rBLL.GetById(RULEID);
+                if (rEntity != null)
+                {
+                    entity.RULENAME = rEntity.NAME;
+                    entity.RULENJOINAME = rEntity.NAMEOTHER;
+                }
+            }
+            return View(entity);
+        }
+        IBLL.IQUALIFIED_UNQUALIFIED_TEST_ITEBLL m_BLL;
+        ValidationErrors validationErrors = new ValidationErrors();
+        public QUALIFIED_UNQUALIFIED_TEST_ITEController()
+                    : this(new QUALIFIED_UNQUALIFIED_TEST_ITEBLL()) { }
+
+        public QUALIFIED_UNQUALIFIED_TEST_ITEController(QUALIFIED_UNQUALIFIED_TEST_ITEBLL bll)
+        {
+            m_BLL = bll;
+        }
+
     }
 }
 

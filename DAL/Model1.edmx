@@ -716,6 +716,7 @@
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="SORT" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="SysAnnouncement">
           <Key>
@@ -1393,6 +1394,28 @@
           <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
           <Property Name="FILECONCLUSION" Type="varchar2" MaxLength="200" />
           <Property Name="AUDITTIME" Type="date" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“TENGFEI.VTEST_ITE”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="VTEST_ITE">
+          <Key>
+            <PropertyRef Name="ROW_FLAG" />
+          </Key>
+          <Property Name="ROW_FLAG" Type="varchar2" MaxLength="73" Nullable="false" />
+          <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" Nullable="false" />
+          <Property Name="SCHEMEID" Type="varchar2" MaxLength="36" />
+          <Property Name="RULEID" Type="varchar2" MaxLength="36" />
+          <Property Name="INPUTSTATE" Type="varchar2" MaxLength="200" />
+          <Property Name="NAMEOTHER" Type="varchar2" MaxLength="200" />
+          <Property Name="NAME" Type="varchar2" MaxLength="200" />
+          <Property Name="SCHEME_MENU" Type="varchar2" MaxLength="200" />
+          <Property Name="ID" Type="varchar2" MaxLength="36" />
+          <Property Name="CONCLUSION" Type="varchar2" MaxLength="4000" />
+          <Property Name="HTMLVALUE" Type="clob" />
+          <Property Name="REMARK" Type="varchar2" MaxLength="4000" />
+          <Property Name="ISCOMPLETE" Type="varchar2" MaxLength="4" />
+          <Property Name="SCHEME_RULEID" Type="varchar2" MaxLength="36" />
+          <Property Name="SORT" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <Association Name="FK_AC_VOLTA_REFERENCE_OVERALL_">
           <End Role="OVERALL_TABLE" Type="Self.OVERALL_TABLE" Multiplicity="0..1" />
@@ -2347,6 +2370,25 @@ FROM "TENGFEI"."VSHENHE" "VSHENHE"</DefiningQuery>
 "VSHENPI"."AUDITTIME" AS "AUDITTIME"
 FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VTEST_ITE" EntityType="Self.VTEST_ITE" store:Type="Views" store:Schema="TENGFEI">
+            <DefiningQuery>SELECT 
+"VTEST_ITE"."ROW_FLAG" AS "ROW_FLAG", 
+"VTEST_ITE"."PREPARE_SCHEMEID" AS "PREPARE_SCHEMEID", 
+"VTEST_ITE"."SCHEMEID" AS "SCHEMEID", 
+"VTEST_ITE"."RULEID" AS "RULEID", 
+"VTEST_ITE"."INPUTSTATE" AS "INPUTSTATE", 
+"VTEST_ITE"."NAMEOTHER" AS "NAMEOTHER", 
+"VTEST_ITE"."NAME" AS "NAME", 
+"VTEST_ITE"."SCHEME_MENU" AS "SCHEME_MENU", 
+"VTEST_ITE"."ID" AS "ID", 
+"VTEST_ITE"."CONCLUSION" AS "CONCLUSION", 
+"VTEST_ITE"."HTMLVALUE" AS "HTMLVALUE", 
+"VTEST_ITE"."REMARK" AS "REMARK", 
+"VTEST_ITE"."ISCOMPLETE" AS "ISCOMPLETE", 
+"VTEST_ITE"."SCHEME_RULEID" AS "SCHEME_RULEID", 
+"VTEST_ITE"."SORT" AS "SORT"
+FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_AC_VOLTA_REFERENCE_OVERALL_" Association="Self.FK_AC_VOLTA_REFERENCE_OVERALL_">
             <End Role="OVERALL_TABLE" EntitySet="OVERALL_TABLE" />
             <End Role="AC_VOLTAGE_CURRENT" EntitySet="AC_VOLTAGE_CURRENT" />
@@ -2898,6 +2940,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
             <End Role="SysPerson" EntitySet="SysPerson" />
             <End Role="SysRole" EntitySet="SysRole" />
           </AssociationSet>
+          <EntitySet Name="VTEST_ITE" EntityType="Model.VTEST_ITE" />
         </EntityContainer>
         <EntityType Name="AC_VOLTAGE_CURRENT">
           <Key>
@@ -3672,6 +3715,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="RULE" Relationship="Model.FK_SCHEME_R_REFERENCE_RULE" FromRole="SCHEME_RULE" ToRole="RULE" />
           <NavigationProperty Name="SCHEME" Relationship="Model.FK_SCHEME_R_REFERENCE_SCHEME" FromRole="SCHEME_RULE" ToRole="SCHEME" />
+          <Property Name="SORT" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="SysAnnouncement">
           <Key>
@@ -4992,6 +5036,26 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <End Type="Model.SysPerson" Role="SysPerson" Multiplicity="*" />
           <End Type="Model.SysRole" Role="SysRole" Multiplicity="*" />
         </Association>
+        <EntityType Name="VTEST_ITE">
+          <Key>
+            <PropertyRef Name="ROW_FLAG" />
+          </Key>
+          <Property Name="ROW_FLAG" Type="String" MaxLength="73" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PREPARE_SCHEMEID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="RULEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="INPUTSTATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NAMEOTHER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SCHEME_MENU" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="CONCLUSION" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="HTMLVALUE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="REMARK" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="ISCOMPLETE" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="SCHEME_RULEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="SORT" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5726,6 +5790,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           <EntitySetMapping Name="SCHEME_RULE">
             <EntityTypeMapping TypeName="Model.SCHEME_RULE">
               <MappingFragment StoreEntitySet="SCHEME_RULE">
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
                 <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
@@ -6442,6 +6507,27 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
               <ScalarProperty Name="Id" ColumnName="SysPersonId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="VTEST_ITE">
+            <EntityTypeMapping TypeName="Model.VTEST_ITE">
+              <MappingFragment StoreEntitySet="VTEST_ITE">
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="SCHEME_RULEID" ColumnName="SCHEME_RULEID" />
+                <ScalarProperty Name="ISCOMPLETE" ColumnName="ISCOMPLETE" />
+                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+                <ScalarProperty Name="HTMLVALUE" ColumnName="HTMLVALUE" />
+                <ScalarProperty Name="CONCLUSION" ColumnName="CONCLUSION" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SCHEME_MENU" ColumnName="SCHEME_MENU" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="NAMEOTHER" ColumnName="NAMEOTHER" />
+                <ScalarProperty Name="INPUTSTATE" ColumnName="INPUTSTATE" />
+                <ScalarProperty Name="RULEID" ColumnName="RULEID" />
+                <ScalarProperty Name="SCHEMEID" ColumnName="SCHEMEID" />
+                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
+                <ScalarProperty Name="ROW_FLAG" ColumnName="ROW_FLAG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

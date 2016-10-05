@@ -1,0 +1,54 @@
+﻿@model Langben.DAL.QUALIFIED_UNQUALIFIED_TEST_ITE
+
+@{
+    Layout = "~/Views/Shared/Edit.cshtml";
+}
+@using Common
+@using Models
+@section CurentPlace {
+    修改
+}
+
+<table width="100%">
+    <tr>
+        <td>@Model.RULENJOINAME</td>
+        <td class="tr">
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:reset('')">重置</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:save('')">保存</a>
+        </td>
+    </tr>
+</table>
+<div id="mt10">
+    <input type="hidden" id="hideID" value="@ViewBag.ID" />
+    <input type="hidden" id="hidePREPARE_SCHEMEID" value="@Model.PREPARE_SCHEMEID" />
+    <input type="hidden" id="hideRULEID" value="@Model.RULEID" />
+    <input type="hidden" id="hideRULENAME" value="@Model.RULENAME" />
+    <input type="hidden" id="hideRULENJOINAME" value="@Model.RULENJOINAME" />
+    <table class="tbl " width="100%">
+        <tr>
+            <td class="tc" width="100" style="background:#FCFCFC">注：</td>
+            <td><input type="text" name="REMARK" id="REMARK" class="my-textbox" value="@Model.REMARK"  /></td>
+        </tr>
+        <tr>
+            <td class="tc" width="100" style="background:#FCFCFC">结论：</td>
+            <td>
+                @if (ViewBag.INPUTSTATE == "HGBHG")
+                {
+                    if (Model != null && Model.CONCLUSION == "不合格")
+                    {
+                        <input type="radio" name="radCONCLUSION" id="radCONCLUSION_HG" value="合格"><span>合格</span> <input name="radCONCLUSION" id="radCONCLUSION_BHG" type="radio" value="不合格" checked="checked"><span>不合格</span>
+                    }
+                    else
+                    { 
+                        <input type="radio" name="radCONCLUSION" value="合格" id="radCONCLUSION_HG"  checked="checked"><span>合格</span> <input name="radCONCLUSION" id="radCONCLUSION_BHG" type="radio" value="不合格"><span>不合格</span>
+                    }
+                }
+                else
+                {
+                    <input type="text" name="txtCONCLUSION" id="txtCONCLUSION" class="my-textbox" value="@Model.CONCLUSION"  />
+                }
+            </td>
+        </tr>       
+    </table>
+
+</div>

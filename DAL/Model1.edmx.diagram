@@ -131,6 +131,7 @@
         <AssociationConnector Association="Model.SysDocumentSysPerson" />
         <AssociationConnector Association="Model.SysMenuSysOperation" />
         <AssociationConnector Association="Model.SysRoleSysPerson" />
+        <EntityTypeShape EntityType="Model.VTEST_ITE" Width="1.5" PointX="27.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -126,6 +126,7 @@
     <Compile Include="Shiyanshi\IVRUKUBLL.cs" />
     <Compile Include="Shiyanshi\IVSHENHEBLL.cs" />
     <Compile Include="Shiyanshi\IVSHENPIBLL.cs" />
+    <Compile Include="Shiyanshi\IVTEST_ITEBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

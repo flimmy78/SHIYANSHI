@@ -131,17 +131,20 @@ namespace Langben.App.Controllers
             if (RULEIDs != null && RULEIDs.Trim() != "")
             {
                 string[] RULEIDList = RULEIDs.Split(',');
+                int i = 1;
                 foreach (string ruleID in RULEIDList)
                 {
                     if (ruleID != null && ruleID.Trim() != "")
                     {
                         SCHEME_RULE item = new SCHEME_RULE();
-                        item.CREATEPERSON = currentPerson;
-                        item.CREATETIME = entity.CREATETIME;
+                        item.CREATEPERSON = currentPerson;                        
+                        item.CREATETIME = DateTime.Now;
                         item.RULEID = ruleID;
                         item.SCHEMEID = entity.ID;
                         item.ID = Result.GetNewId();
+                        item.SORT = i;
                         entity.SCHEME_RULE.Add(item);
+                        i++;
                     }
                 }
             }
@@ -215,6 +218,7 @@ namespace Langben.App.Controllers
                     
                     if (RULEIDs != null && RULEIDs.Trim() != "")
                     {
+                        int i = 1;
                         string[] RULEIDList = RULEIDs.Split(',');
                         foreach (string ruleID in RULEIDList)
                         {
@@ -222,11 +226,13 @@ namespace Langben.App.Controllers
                             {
                                 SCHEME_RULE item = new SCHEME_RULE();
                                 item.CREATEPERSON = currentPerson;
-                                item.CREATETIME = entity.CREATETIME;
+                                item.CREATETIME = DateTime.Now;
                                 item.RULEID = ruleID;
                                 item.SCHEMEID = entity.ID;
                                 item.ID = Result.GetNewId();
+                                item.SORT = i;
                                 entity.SCHEME_RULE.Add(item);
+                                i++;
                             }
                         }
                     }
