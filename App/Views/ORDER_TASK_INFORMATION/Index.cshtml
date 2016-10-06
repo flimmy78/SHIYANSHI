@@ -27,7 +27,7 @@
                     @Html.LabelFor(model => model.INSPECTION_ENTERPRISE):
                 </div>
                 <div class="input_search-field">
-                    @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY("送检"), "请选择", new { @class = "easyui-combobox",id= "INSPECTION_ENTERPRISE" })
+                    @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox",id= "INSPECTION_ENTERPRISE" })
                 </div>
             </div>
             <div class="input_search">
@@ -35,7 +35,7 @@
                     @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE):
                 </div>
                 <div class="input_search-field">
-                   @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY("证书"), "请选择", new { @class = "easyui-combobox",id = "CERTIFICATE_ENTERPRISE" })
+                   @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox",id = "CERTIFICATE_ENTERPRISE" })
                 </div>
             </div>
             <div class="input_search">
@@ -83,16 +83,16 @@
                 toolbar: [
 
                      {
-                        text: '器具登记',
+                         text: '签名委托单查看',
                         iconCls: 'icon-search',
                         handler: function () {
-                            return getView();
+                            //return getView();
                         }
                     }  ],
                 columns: [[
-
-
-					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 220 }
+					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 220, formatter: function (value, row, index) {             						   
+					    return "<a href='../ORDER_TASK_INFORMATION/Details/" + row.ID + "'>" + row.ID + "</a>";
+					}}
 					, { field: 'ACCEPT_ORGNIZATION', title: '@Html.DisplayNameFor(model => model.ACCEPT_ORGNIZATION)', width: 220 }
 					,{ field: 'INSPECTION_ENTERPRISE', title:  '@Html.DisplayNameFor(model => model.INSPECTION_ENTERPRISE)', width: 140 }
 					 ,{ field: 'CERTIFICATE_ENTERPRISE', title:  '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 140 }

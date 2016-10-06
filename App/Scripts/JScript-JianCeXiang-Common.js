@@ -431,7 +431,7 @@ function Save() {
         return;
     }
     //保存方案前需清空不需要数据
-    ClearBuBaoCunShuJu();
+    //ClearBuBaoCunShuJu();
     var OldID = $("#hideID").val();
     var RULEID = $("#hideRULEID").val();
     var SCHEMEID = $("#hideSCHEMEID").val();

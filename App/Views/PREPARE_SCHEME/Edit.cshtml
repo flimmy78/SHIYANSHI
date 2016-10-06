@@ -39,8 +39,8 @@
             {
                 <tr>
                     <td>@i</td>
-                    <td><input type="hidden" id="hideName" value="@item.NAME" /><a href="javascript:SetIframeSrc('@item.ID','@item.PREPARE_SCHEMEID','@item.RULEID','@item.INPUTSTATE','@item.SCHEME_MENU')">@item.NAMEOTHER</a></td>
-                    <td>@item.ISCOMPLETE</td>
+                    <td><input type="hidden" id="hideName" value="@item.NAME" /><a href="javascript:SetIframeSrc('@item.PREPARE_SCHEMEID','@item.RULEID','@item.INPUTSTATE','@item.SCHEME_MENU')">@item.NAMEOTHER</a></td>
+                    <td id="@item.RULEID">@item.ISCOMPLETE</td>
                 </tr>
                 i = i + 1;
             }
@@ -84,8 +84,12 @@
     <iframe id="mainframe" name="mainframe" frameborder="0" src=""></iframe>
 </div>
 <script type="text/javascript" language="javascript">
-    //切换检测项
-    function SetIframeSrc(ID, PREPARE_SCHEMEID, RULEID, INPUTSTATE,SCHEME_MENU)
+    //切换检测项   
+    //PREPARE_SCHEMEID:预备方案ID
+    //RULEID:检测项目ID
+    //INPUTSTATE:录入格式   
+    //SCHEME_MENU:菜单地址
+    function SetIframeSrc(PREPARE_SCHEMEID, RULEID, INPUTSTATE,SCHEME_MENU)
     {
         debugger;
         if (SCHEME_MENU == null || SCHEME_MENU.trim()=="")
@@ -95,9 +99,8 @@
         else
         {
             url = SCHEME_MENU;
-        }
-        url = url + "?ITEID=" + ID;
-        url = url + "&PREPARE_SCHEMEID=" + PREPARE_SCHEMEID;
+        }        
+        url = url + "?PREPARE_SCHEMEID=" + PREPARE_SCHEMEID;
         url = url + "&RULEID=" + RULEID;           
         url = url + "&INPUTSTATE=" + INPUTSTATE;
         $('#mainframe').attr('src', url);

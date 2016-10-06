@@ -34,19 +34,20 @@ namespace Langben.IBLL
         [OperationContract]
         System.Collections.Generic.List<VTEST_ITE> GetAll();
         /// <summary>
-        /// 根据主键，查看详细信息
+        /// 通过预备方案ID,检测项ID，获取预备方案检测项信息---查看详细，首次编辑
         /// </summary>
-        /// <param name="id">根据主键</param>
-        /// <returns></returns>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <param name="RULEID">检测项ID</param>
+        /// <returns>预备方案检测项信息</returns>
         [OperationContract]
-        VTEST_ITE GetById(string id);
+        VTEST_ITE GetById(string PREPARE_SCHEMEID = "", string RULEID = "");
         /// <summary>
         /// 根据预备方案ID获取检测项信息
         /// </summary>
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns>
         [OperationContract]
-        List<VTEST_ITE> GetByPREPARE_SCHEMEID(string PREPARE_SCHEMEID);
+        List<VTEST_ITE> GetByPREPARE_SCHEMEID(string PREPARE_SCHEMEID="");
     }
         
 }

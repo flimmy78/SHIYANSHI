@@ -650,6 +650,7 @@
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="SORT" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="REPORTCOLLECTION">
           <Key>
@@ -1399,6 +1400,7 @@
 警告 6002: 表/视图“TENGFEI.VTEST_ITE”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VTEST_ITE">
           <Key>
+            
             <PropertyRef Name="ROW_FLAG" />
           </Key>
           <Property Name="ROW_FLAG" Type="varchar2" MaxLength="73" Nullable="false" />
@@ -3633,6 +3635,7 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PREPARE_SCHEME" Relationship="Model.FK_QUALIFIED_UN" FromRole="QUALIFIED_UNQUALIFIED_TEST_ITE" ToRole="PREPARE_SCHEME" />
+          <Property Name="SORT" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="REPORTCOLLECTION">
           <Key>
@@ -5715,6 +5718,7 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <EntitySetMapping Name="QUALIFIED_UNQUALIFIED_TEST_ITE">
             <EntityTypeMapping TypeName="Model.QUALIFIED_UNQUALIFIED_TEST_ITE">
               <MappingFragment StoreEntitySet="QUALIFIED_UNQUALIFIED_TEST_ITE">
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
                 <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
