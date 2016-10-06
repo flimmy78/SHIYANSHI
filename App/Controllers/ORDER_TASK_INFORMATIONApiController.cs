@@ -38,6 +38,7 @@ namespace Langben.App.Controllers
             List<APPLIANCE_DETAIL_INFORMATION> queryData = m_BLL2.GetByParam(null, 1, 1, "DESC", "ID", id, ref total);
             foreach (var item in queryData)
             {
+                UNDERTAKE_LABORATORYID = null;
                 List<APPLIANCE_LABORATORY> list = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item.ID);
                 foreach (var item2 in list)
                 {
@@ -108,15 +109,20 @@ namespace Langben.App.Controllers
         {
             var data = new ORDER_TASK_INFORMATIONShow();
             string UNDERTAKE_LABORATORYID = string.Empty;
+            string ORDER_STATUS = string.Empty;
             ORDER_TASK_INFORMATION queryData = m_BLL.GetById(id);
             foreach (var s in queryData.APPLIANCE_DETAIL_INFORMATION)
             {
+                UNDERTAKE_LABORATORYID = null;
+                ORDER_STATUS = null;
                 List<APPLIANCE_LABORATORY> list = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(s.ID);
                 foreach (var item2 in list)
                 {
                     UNDERTAKE_LABORATORYID += item2.UNDERTAKE_LABORATORYID + ",";
+                    ORDER_STATUS += item2.ORDER_STATUS + ",";
                 }
                 s.UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID;
+
                 data.APPLIANCE_DETAIL_INFORMATIONShows.Add(new Models.APPLIANCE_DETAIL_INFORMATIONShow()
                 {
                     ID = s.ID,
@@ -142,7 +148,8 @@ namespace Langben.App.Controllers
                     OVERDUE = s.OVERDUE,
                     STORAGEINSTRUCTIONS = s.STORAGEINSTRUCTIONS,
                     STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU,
-                    UNDERTAKE_LABORATORYIDString = UNDERTAKE_LABORATORYID
+                    UNDERTAKE_LABORATORYIDString = UNDERTAKE_LABORATORYID,
+                    ORDER_STATUS = ORDER_STATUS
                 });
             }
             data.ID = queryData.ID;
@@ -337,6 +344,103 @@ namespace Langben.App.Controllers
             return result; //提示输入的数据的格式不对         
         }
 
+        // PUT api/<controller>/5
+        /// <summary>
+        /// 修改（我的工作发送功能）
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>  
+        public Common.ClientResult.Result PutUpdate([FromBody]ORDER_TASK_INFORMATION entity)
+        {
+            Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
+            {
+                string currentPerson = GetCurrentPerson();
+                if (string.IsNullOrWhiteSpace(entity.ID))
+                {
+                    entity.CREATETIME = DateTime.Now;
+                    entity.CREATEPERSON = currentPerson;
+                    entity.ID = Result.GetNewId();
+                    entity.ORDER_STATUS = Common.ORDER_STATUS_INFORMATION.已分配.ToString();
+                    foreach (var item in entity.APPLIANCE_DETAIL_INFORMATION)
+                    {
+                        item.CREATETIME = DateTime.Now;
+                        item.CREATEPERSON = currentPerson;
+                        if (string.IsNullOrWhiteSpace(item.UNDERTAKE_LABORATORYID))
+                        {
+                            LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，委托单信息的信息，实验室为空", "委托单信息"
+                          );//写入日志                      
+                            result.Code = Common.ClientCode.Fail;
+                            result.Message = "实验室不能为空";
+                            return result; //提示插入失败
+                        }
+                        else
+                        {
+
+                            //器具明细信息_承接实验室表添加数据
+                            List<APPLIANCE_LABORATORY> appory = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item.ID);
+                            foreach (var it in item.UNDERTAKE_LABORATORYID.TrimEnd(',').Split(','))
+                            {
+                                foreach (var item2 in appory)
+                                {
+                                    if (item2.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())
+                                    {
+                                        item.APPLIANCE_LABORATORY.Add(new APPLIANCE_LABORATORY()
+                                        {
+                                            ID = item2.ID,
+                                            UNDERTAKE_LABORATORYID = it,
+                                            ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString(),
+                                            EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已分配.GetHashCode().ToString(),
+                                            DISTRIBUTIONPERSON = currentPerson,
+                                            DISTRIBUTIONTIME = new DateTime(),
+                                            CREATEPERSON = currentPerson,
+                                            CREATETIME = new DateTime(),
+                                            ISRECEIVE = Common.ISRECEIVE.是.ToString()
+                                        });
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    string returnValue = string.Empty;
+                    if (m_BLL.Edit(ref validationErrors, entity))
+                    {
+                        LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，委托单信息的信息的Id为" + entity.ID, "委托单信息"
+                            );//写入日志 
+                        result.Code = Common.ClientCode.Succeed;
+                        result.Message = Suggestion.InsertSucceed;
+                        result.Id = entity.ID;
+                        return result; //提示创建成功
+                    }
+                    else
+                    {
+                        if (validationErrors != null && validationErrors.Count > 0)
+                        {
+                            validationErrors.All(a =>
+                            {
+                                returnValue += a.ErrorMessage;
+                                return true;
+                            });
+                        }
+                        LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，委托单信息的信息，" + returnValue, "委托单信息"
+                            );//写入日志                      
+                        result.Code = Common.ClientCode.Fail;
+                        result.Message = Suggestion.InsertFail + returnValue;
+                        return result; //提示插入失败
+                    }
+                }
+                else
+                {
+
+                }
+            }
+
+            result.Code = Common.ClientCode.FindNull;
+            result.Message = Suggestion.InsertFail + "，请核对输入的数据的格式"; //提示输入的数据的格式不对 
+
+            return result;
+        }
         // DELETE api/<controller>/5
         /// <summary>
         /// 删除

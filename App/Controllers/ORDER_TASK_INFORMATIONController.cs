@@ -71,8 +71,6 @@ namespace Langben.App.Controllers
         {
 
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
-            //如果是查询出来的委托单，又增加了一个器具，点击了发送实验室，怎么处理？
-            //   if (entity != null && ModelState.IsValid)
             {
                 string currentPerson = GetCurrentPerson();
                 if (string.IsNullOrWhiteSpace(entity.ID))
