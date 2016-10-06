@@ -24,23 +24,25 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult ZhiLiuDianLiuDianYaFeiZhengFu(string RULEID, string SCHEMEID)
+        public ActionResult ZhiLiuDianLiuDianYaFeiZhengFu(string RULEID="", string SCHEMEID="",string PREPARE_SCHEMEID="")
         {            
-            return Detail(RULEID, SCHEMEID);
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
         /// 直流电流输出
         /// </summary>
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult ZhiLiuDianLiuShuChu(string RULEID = "", string SCHEMEID = "")
+        public ActionResult ZhiLiuDianLiuShuChu(string RULEID = "", string SCHEMEID = "",string PREPARE_SCHEMEID="")
         {           
-            return Detail(RULEID, SCHEMEID);
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
-        public ActionResult Detail(string RULEID = "", string SCHEMEID = "")
+        public ActionResult Detail(string RULEID = "", string SCHEMEID = "",string PREPARE_SCHEMEID="")
         {
+            ViewBag.ITEID = "";
             DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
             if (entity != null)
             {
@@ -50,7 +52,19 @@ namespace Langben.App.Controllers
             {
                 ViewBag.ID = string.Empty;
             }
+            if(PREPARE_SCHEMEID!=null && PREPARE_SCHEMEID.Trim()!="")
+            {
+                QUALIFIED_UNQUALIFIED_TEST_ITE qEntity = null;
+                IBLL.IQUALIFIED_UNQUALIFIED_TEST_ITEBLL qBLL = new QUALIFIED_UNQUALIFIED_TEST_ITEBLL();
+                qEntity = qBLL.GetByPREPARE_SCHEMEID_RULEID(PREPARE_SCHEMEID, RULEID);
+                if(qEntity!=null)
+                {
+                    entity.HTMLVALUE = qEntity.HTMLVALUE;
+                    ViewBag.ITEID = qEntity.ID;
 
+                }                
+            }
+            ViewBag.PREPARE_SCHEMEID = PREPARE_SCHEMEID;
             ViewBag.RULEID = RULEID;
             ViewBag.SCHEMEID = SCHEMEID;
             return View(entity);

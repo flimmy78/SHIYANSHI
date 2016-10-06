@@ -98,7 +98,7 @@ var RuleID = $("#hideRULEID").val();//检测项目ID
 var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
 var $Tongdao_moban//模板
 $(document).ready(function () {
-
+    
     var hideHtml = $("#hideHTMLVALUE").val();
     if (hideHtml.trim() != "") {
         $("#divHtml").html("");
@@ -106,7 +106,7 @@ $(document).ready(function () {
     }
     $Tongdao_moban = $("#tongdao_moban");
     if (hideHtml.trim() == "") {
-        CreateTable();
+        CreateTongDao();
     }
     BtnInit(RuleAttribute);
 });
@@ -120,8 +120,9 @@ function CreateTongDao() {
     $tongdao.css('display', '');
     $tongdao.attr('id', 'tongdao_' + tableIdx);
     $tongdao.find("#tbody_moban").attr('id', 'tbody_' + tableIdx);
-    var tbIdx = tableIdx;
-    $tongdao.find('#btnAddLiangCheng').attr("onclick", "$('#dlg').dialog('open');set(" + tbIdx + ");");
+    $tongdao.find("#K_moban").attr('id', 'K_' + tableIdx);
+    //var tbIdx = tableIdx;
+    $tongdao.find('#btnAddLiangCheng').attr("onclick", "$('#dlg').dialog('open');set(" + tableIdx + ");");
     $("#hideDangQianTongDao").val(tableIdx);
     $("#hideTongDaoShuLiang").val(tableIdx);
 
@@ -260,7 +261,7 @@ function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
 //rowidx:行号
 //txtVal(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
 function SetTDHtml(rowspan, name, id, rowidx, txtVal) {
-    //debugger;
+   
     var ddlName = name + "_UNIT";//下拉框名
     var ddlId = ddlName + "_" + id;//下拉框ID
     var id = name + "_" + id;//输入框id
@@ -270,7 +271,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal) {
     }
     var htmlString = [];   
     htmlString.push("<td rowspan='" + rowspan + "' align=\"right\"> ");
-    htmlString.push("<input class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='blurValue(this)'/>");
+    htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='blurValue(this)'/>");
     if (ddlHtml != null && ddlHtml.trim() != "") {        
         var AttributeValue = GetAttributeValue("LianDongDanWeiDDL");
         htmlString.push($(ddlHtml).attr("onchange", "LianDongDanWeiDDL(this,'" + AttributeValue + "')").attr("name", ddlName).attr("id", ddlId)[0].outerHTML);
@@ -397,8 +398,7 @@ Number.prototype.toFixed = function toFixed(s) {
 }
 //显示隐藏添加通道按钮
 function ShowOrHideDuoTongDao()
-{
-    debugger;
+{    
     if(RuleAttribute==null)
     {
         $("#btnDuoTongDao").hide();        
@@ -420,23 +420,100 @@ function ShowOrHideDuoTongDao()
 function BtnInit()
 {
     ShowOrHideDuoTongDao();
+    var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();
+    if(PREPARE_SCHEMEID.trim()!="")//数据录入
+    {
+        $("#btnDuoTongDao").hide();
+        //$("#btnSave").hide();
+        $("#btnReset").hide();
+        $("#btnAddLiangCheng").hide();
+        //$("#btnSave_ITE").show();
+        $("#btnReset_ITE").show();
+    }
+    else//方案设置
+    {
+        //$("#btnSave").show();
+        $("#btnReset").show();
+        //$("#btnSave_ITE").hide();
+        $("#btnReset_ITE").hide();
+    }
 }
 //数据验证
 function CheckData() {
     return true;
 }
-//保存
-function Save() {
+
+function Save()
+{
     if (!CheckData()) {
         return;
     }
+    var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();//预备方案ID
+    if(PREPARE_SCHEMEID.trim()!="")//数据录入
+    {
+        Save_ShuJuLuRu();
+    }
+    else//方案设置
+    {
+        Save_FangAn();
+    }
+}
+//保存数据录入
+function Save_ShuJuLuRu()
+{
+    SetAllControlHtml();
+    var ID = $("#hideITEID").val();//预备方案检查项ID
+    var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();//预备方案ID
+    var RULEID = $("#hideRULEID").val();//检测项ID   
+    var CONCLUSION = $("#CONCLUSION").val();//结论    
+    var REMARK = $("#REMARK").val();//备注  
+    var HTMLVALUE = encodeURI($("#divHtml").html());
+
+    //获取空对象用于保存添加的信息
+    $.ajax({
+        type: 'post', //使用post方法访问后台
+        dataType: "json", //返回json格式的数据
+        url: '/QUALIFIED_UNQUALIFIED_TEST_ITE/Save', //要访问的后台地址      
+        contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式        
+        data: { 'ID': ID, 'PREPARE_SCHEMEID': PREPARE_SCHEMEID, 'RULEID': RULEID, 'CONCLUSION': CONCLUSION, 'REMARK': REMARK, 'HTMLVALUE': HTMLVALUE },
+        beforeSend: function () {
+            //InitAlertJS();
+        },
+        complete: function () {
+        }, //AJAX请求完成时隐藏loading提示
+
+        success: function (res) {//msg为返回的数据，在这里做数据绑定               
+            if (res.Code == 1) {               
+                 $("#hideITEID").val(res.Message);               
+                var tdID = '#' + RULEID
+                $(tdID, parent.document).html('已做');//修改检测项状态
+                $.messager.alert('操作提示', "操作成功！", 'info');
+            }
+            else {
+                $.messager.alert('操作提示', res.Message, 'info');
+            }
+
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
+        }
+    });
+}
+
+//保存方案设置
+function Save_FangAn() {
+    SetAllControlHtml();
+    //if (!CheckData()) {
+    //    return;
+    //}
     //保存方案前需清空不需要数据
     //ClearBuBaoCunShuJu();
     var OldID = $("#hideID").val();
     var RULEID = $("#hideRULEID").val();
-    var SCHEMEID = $("#hideSCHEMEID").val();
-    var HTMLVALUE = encodeURI($("#divHtml").html());    
-    debugger;
+    var SCHEMEID = $("#hideSCHEMEID").val();   
+    var HTMLVALUE = encodeURI($("#divHtml").html());
+
+   
     //获取空对象用于保存添加的信息
     $.ajax({
         type: 'post', //使用post方法访问后台
@@ -468,6 +545,42 @@ function Save() {
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
         }
+    });
+}
+//由于html无法获取value，重新给outerHTML赋值
+function SetAllControlHtml()
+{
+    $("input[type='text']").each(function () {
+        if (this.id != "")
+        {
+            var id = "#" + this.id;
+            var outerHTML = this.outerHTML;
+            var startIndex = outerHTML.indexOf(" value=");
+            if (startIndex < 0)//没有初始化value
+            {
+                outerHTML = outerHTML.replace('>',' value="'+this.value+'" >')
+            }
+            else//初始化过value
+            {
+                var endIndex = outerHTML.indexOf('"', outerHTML.indexOf('"', startIndex) + 1);
+                var length = endIndex - startIndex;
+                var str = outerHTML.substring(startIndex, endIndex);
+                outerHTML = outerHTML.replace(str, ' value="' + this.value + '" ')
+            }            
+            $(id).prop('outerHTML', outerHTML);
+        }      
+        
+    });
+    $("select").each(function () {        
+        if (this.id != "") {
+            var id = "#" + this.id;
+            var outerHTML = this.outerHTML;
+            outerHTML = outerHTML.replace(' selected="selected"', ' ')
+            var oldValue = 'value="' + this.value + '"';            
+            outerHTML = outerHTML.replace(' value="' + this.value + '"', ' value="' + this.value + '" selected="selected" ');
+            $(id).prop('outerHTML', outerHTML);
+        }
+        
     });
 }
 //---------------------------------

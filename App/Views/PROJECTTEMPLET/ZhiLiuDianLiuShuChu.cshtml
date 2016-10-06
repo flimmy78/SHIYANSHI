@@ -12,8 +12,11 @@
             <tr>
                 <td>
                     <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTongDao()" id="btnDuoTongDao" style="display:none">增加通道</a>
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="Save()">保存检测项</a>
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="Reset()">重置检测项</a>
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnSave" onclick="Save()">保存检测项</a>
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnReset" onclick="Reset()">重置检测项</a>
+
+                    @*<a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnSave_ITE" onclick="Save_ITE()">保存检测项</a>*@
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnReset_ITE" onclick="Reset_ITE()">重置检测项</a>
                 </td>
             </tr>
         </table>
@@ -23,6 +26,8 @@
 <input type="hidden" id="hideID" value="@ViewBag.ID" /><!--主键-->
 <input type="hidden" id="hideRULEID" value="@ViewBag.RULEID" /><!--检测项-->
 <input type="hidden" id="hideSCHEMEID" value="@ViewBag.SCHEMEID" /><!--方案编号-->
+<input type="hidden" id="hidePREPARE_SCHEMEID" value="@ViewBag.PREPARE_SCHEMEID" /><!--预备方案ID-->
+<input type="hidden" id="hideITEID" value="@ViewBag.ITEID" /><!--预备方案检测项ID-->
 
 @if (Model != null && Model.HTMLVALUE != null && Model.HTMLVALUE.Trim() != "")
 {
@@ -47,7 +52,7 @@ else
                     <th rowspan="2" align="center">相对误差</th>                   
                     <th align="center">
                         校准结果的不确定度<br>
-                        U(K = <select class="my-combobox" name="state" style="width:30px;">
+                        U(K = <select class="my-combobox" id="K_moban"name="K" style="width:30px;">
                             <option value="2">2 </option>
                             <option value="3">3</option>
                             <option value="√3">√3</option>
@@ -74,13 +79,13 @@ else
             <tr>
                 <th width="40">注：</th>
                 <td colspan="6">
-                    <input class="my-textbox input-width" name="REMARK" data-options="multiline:true" style="height:30px; width:95%" id="REMARK">
+                    <input type="text" class="my-textbox input-width" name="REMARK" data-options="multiline:true" style="height:30px; width:95%" id="REMARK">
                 </td>
             </tr>
             <tr>
                 <th width="40">结论：</th>
                 <td colspan="6">
-                    <input class="my-textbox input-width" name="CONCLUSION" data-options="multiline:true" style="height:30px; width:95%" id="CONCLUSION">
+                    <input type="text" class="my-textbox input-width" name="CONCLUSION" data-options="multiline:true" style="height:30px; width:95%" id="CONCLUSION">
                 </td>
             </tr>
 
