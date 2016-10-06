@@ -4,14 +4,14 @@ body {
     padding: 0;
     font: normal 12px/20px ;
 }
-input[type="checkbox"] {vertical-align:middle;
-}
+input[type="checkbox"],input[type="radio"] {vertical-align:bottom;}
 .p5 {padding:5px}
 .p10 {padding:10px}
 .p15 {padding:15px}
 .space10{ font-size:1px; height:10px;}
 .space15{ font-size:1px; height:15px;}
 .space20{ font-size:1px; height:20px;}
+.bgF7{ background:#f7f7f7}
 .mt10{ margin-top:10px}
 .fl{ float:left}
 .fr{ float:right}
@@ -24,10 +24,12 @@ h2 {
 }
 
 input {
-    font: normal 12px/20px "微软雅黑";
+    font: normal 12px/20px ;
     color: #444; border:1px solid #D4D4D4; height:22px 
 }
-
+.textbox{-moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;}
 .mbx {
     height: 23px;
     font-weight: bold;
@@ -37,7 +39,7 @@ input {
     margin: 4px;
     background: url(../Images/direction.gif) 0 center no-repeat;
 }
-
+.clearfix{ clear:both; height:0; line-height:0}
 .a2 {
     width: 90px;
     height: 23px;
@@ -161,8 +163,9 @@ input {
 /* Styles for editor and display helpers
 ----------------------------------------------------------*/
 
+.editor-form{ width:335px; float:left}
 .editor-label {
-    width: 144px;
+    width: 120px;
     height: 24px;
     float: left;
     text-align: right;
@@ -174,15 +177,14 @@ input {
     .editor-label span {
         width: 10px;
         height: 5px;
-        float: left;
-        display: inline-block;
+        
         color: Red;
         display: inline;
     }
 
     .editor-label label {
         width: 120px;
-        margin-top: 5px;
+        margin-top: 5px; color:#666
     }
 
 .editor-field {
@@ -194,12 +196,12 @@ input {
 }
 
     .editor-field select {
-        font-family: 微软雅黑;
-        height: 23px;
+        font-size:12px;
+        height: 26px;
         width: 242px;
-        border: 1px solid #CCC;
+        border: 1px solid #D4D4D4;
         float: left;
-        margin-top: 3px;
+        margin-top: 2px;
         _margin-left: 5px;
         display: inline;
     }
@@ -209,12 +211,9 @@ input {
     padding-bottom: 32px;
 }
 
-.text-box {
-    font-family: 微软雅黑;
-    height: 19px;
-    width: 240px;
-    border: 1px solid #CCC;
-    margin-top: 5px;
+.text-box {   
+    width: 240px;  
+    margin-top: 2px;border:1px solid #D4D4D4; height:22px; font-size:12px
 }
 
 .textarea-box {
@@ -252,8 +251,8 @@ textarea {
     color: #444;
     height: 106px;
     width: 667px;
-    border: 1px solid #CCC;
-    margin: 11px 0 11px 6px;
+    border: 1px solid #d4d4d4;
+    margin: 0px 0 11px 6px;
 }
 
 /* select
@@ -284,7 +283,8 @@ textarea {
     border: 1px solid #ff0000;
     background-color: #ffeeee;
 }
-
+.search-box{border:1px solid #D4D4D4; padding:5px}
+.search-box  label{ line-height:26px}
 .search {
     float: left;
     margin-bottom: 5px;
@@ -329,7 +329,8 @@ textarea {
   background: linear-gradient(to bottom,#ffffff 0,#F2F2F2 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#F2F2F2,GradientType=0); font-weight:normal}
-.tbl th, .tbl td{border:1px dotted #ccc; padding:3px;}
+.tbl th, .tbl td{border:1px dotted #ccc; padding:3px;height:25px}
 .input-width{width:80px; text-align:right}
 .tips{ display:inline-block; vertical-align: bottom; width:16px; height:16px; }
-.my-textbox, .my-combobox{border:1px solid #D4D4D4; height:24px}
+.my-textbox, .my-combobox{border:1px solid #D4D4D4; height:22px}
+.my-combobox{ height:26px}
