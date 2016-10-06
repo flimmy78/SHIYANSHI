@@ -38,6 +38,7 @@ namespace Langben.App.Controllers
             List<APPLIANCE_DETAIL_INFORMATION> queryData = m_BLL2.GetByParam(null, 1, 1, "DESC", "ID", id, ref total);
             foreach (var item in queryData)
             {
+                UNDERTAKE_LABORATORYID = null;
                 List<APPLIANCE_LABORATORY> list = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item.ID);
                 foreach (var item2 in list)
                 {
@@ -112,6 +113,8 @@ namespace Langben.App.Controllers
             ORDER_TASK_INFORMATION queryData = m_BLL.GetById(id);
             foreach (var s in queryData.APPLIANCE_DETAIL_INFORMATION)
             {
+                UNDERTAKE_LABORATORYID = null;
+                ORDER_STATUS = null;
                 List<APPLIANCE_LABORATORY> list = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(s.ID);
                 foreach (var item2 in list)
                 {

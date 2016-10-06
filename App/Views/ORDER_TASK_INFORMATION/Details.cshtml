@@ -5,7 +5,7 @@
 }
 @using Common
 @section CurentPlace {
-    详细
+    
 }
 <script type="text/javascript">
     //数据验证
@@ -181,124 +181,172 @@ s：字符串
 
 </script>
 <script src="~/Scripts/jquery.edatagrid.js"></script>
-<fieldset>
-    <legend>
-        <input class="a2 f2" type="button" onclick="window.location.href = 'javascript:history.go(-1)';" value="返回" />
-    </legend>
-    <div class="bigdiv">
-        <br style="clear:both;" />
-        <br style="clear:both;" />
-        <div class="bigdiv" style="width: 854px;" id="order">
+<style type="text/css">
+    body {
+        height: auto;
+        font-size: 12px;
+    }
 
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
+    td {
+        height: 25px;
+    }
+
+    .editor-field {
+        width: 200px;
+        height: 24px;
+        float: left;
+        margin: 11px 0 11px 6px;
+        display: inline;
+    }
+
+        .editor-field .text-box {
+            width: 180px;
+        }
+
+        .editor-field .easyui-combobox {
+            width: 180px;
+        }
+</style>
+        <input class="a2 f2" type="button" onclick="window.location.href = 'javascript:history.go(-1)';" value="返回" />
+
+    <div class="easyui-layout">
+        <div class="bigdiv" style="width: auto" id="order">
+            <div class="editor-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "请选择", new { @class = "easyui-combobox" })
+                </div>
             </div>
-            <div class="editor-field">
-                @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "请选择")
+            <div class="editor-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
+                </div>
             </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
+            <div class="editor-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+                    @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+                </div>
             </div>
-            <div class="editor-field">
-                @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
+
+            <div class="editor-form">
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_POST)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_POST)
+                    @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_POST)
+                </div>
             </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)：
+            <div class="editor-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.CONTACTS)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.CONTACTS)
+                    @Html.ValidationMessageFor(model => model.CONTACTS)
+                </div>
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
-                @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+            <div class="editor-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.CONTACT_PHONE)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.CONTACT_PHONE)
+                    @Html.ValidationMessageFor(model => model.CONTACT_PHONE)
+                </div>
             </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_POST)：
+            <div class="editor-form">
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.FAX)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.FAX)
+                    @Html.ValidationMessageFor(model => model.FAX)
+                </div>
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_POST)
-                @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_POST)
+            <div class="editor-form">
+                <div class="editor-label">
+                    <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
+                </div>
             </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CONTACTS)：
+            <div class="editor-form">
+                <div class="editor-label">
+                    <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
+                    @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
+                </div>
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CONTACTS)
-                @Html.ValidationMessageFor(model => model.CONTACTS)
+            <div class="editor-form">
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_POST)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_POST)
+                    @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_POST)
+                </div>
             </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CONTACT_PHONE)：
+            <div class="editor-form">
+                <div class="editor-label">
+                    <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACTS2)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.CONTACTS2)
+                    @Html.ValidationMessageFor(model => model.CONTACTS2)
+                </div>
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CONTACT_PHONE)
-                @Html.ValidationMessageFor(model => model.CONTACT_PHONE)
+            <div class="editor-form">
+                <div class="editor-label">
+                    <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACT_PHONE2)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.CONTACT_PHONE2)
+                    @Html.ValidationMessageFor(model => model.CONTACT_PHONE2)
+                </div>
             </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.FAX)：
+            <div class="editor-form">
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.FAX2)：
+                </div>
+
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.FAX2)
+                    @Html.ValidationMessageFor(model => model.FAX2)
+                </div>
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.FAX)
-                @Html.ValidationMessageFor(model => model.FAX)
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
-            </div>
-            <div class="editor-field">
-                @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
-                @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_POST)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_POST)
-                @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_POST)
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CONTACTS2)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CONTACTS2)
-                @Html.ValidationMessageFor(model => model.CONTACTS2)
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CONTACT_PHONE2)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CONTACT_PHONE2)
-                @Html.ValidationMessageFor(model => model.CONTACT_PHONE2)
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.FAX2)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.FAX2)
-                @Html.ValidationMessageFor(model => model.FAX2)
-            </div>
-            <br style="clear:both;" />
+            <div class="clearfix"></div>
             <div class="editor-label">
                 @Html.LabelFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)：
             </div>
-            <div class="editor-field">
+            <div class="editor-field" style="height:auto">
                 @Html.TextAreaFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
                 @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
             </div>
-
         </div>
-
-        <br style="clear:both;" />
-        <br style="clear:both;" />
-        <br style="clear:both;" />
-        <br style="clear:both;" />
-        <br style="clear:both;" />
+        <div style="clear:both;"></div>
         <input type="hidden" id="ORDER_TASK_INFORMATIONID" />
-        <table id="ApplianceDate" singleSelect="true"></table>
-        <br style="clear:both;" />
+        <div class="p5 mt10">
+            <table id="ApplianceDate" singleselect="true"></table>
+        </div>
     </div>
-</fieldset>
+
 <script type="text/javascript">
     function flexiSave() {
         $.messager.confirm('操作提示', "确认发送吗？", function (r) {
@@ -307,6 +355,19 @@ s：字符串
                 $('#ApplianceDate').edatagrid('saveRow');
                 //获取所有器具
                 var qiju = $('#ApplianceDate').edatagrid('getRows');
+                for (var i = 0; i < qiju.length; i++) {
+                    var a = qiju[i].ORDER_STATUS.split(',');
+                    var b = true;
+                    for (var k = 0; k < a.length; k++) {
+                        if (a[k] == "@Common.ORDER_STATUS.已退回.ToString()") {
+                            b = false;
+                            continue;
+                        }
+                    }
+                    if (!b) {
+                        qiju.remove(i);
+                    }
+                }
                 //实例化一个委托单对象
                 var entity = new Object();
                 entity.APPLIANCE_DETAIL_INFORMATION = qiju;
@@ -397,6 +458,7 @@ s：字符串
             }
         })
     }
+
     $(function () {
         $('#ApplianceDate').edatagrid({
             singleSelect: false,
@@ -460,8 +522,6 @@ s：字符串
                    }
                }
            }
-
-
            , { field: 'MAKE_ORGANIZATION', title: '制造单位', width: 65, editor: 'text' }
               , {
                   field: 'UNDERTAKE_LABORATORYID', title: '承接实验室', width: 135, editor: {
@@ -476,8 +536,10 @@ s：字符串
               }
            , {
                field: 'APPLIANCE_RECIVE', title: '器具接收', width: 65, editor: {
-                   type: 'combobox', options: { data: [{ value: '是', text: '是' }, { value: '否', text: '否' }], panelHeight: 'auto', disabled:true}
-                       }
+                   type: 'combobox', options: {
+                       data: [{ value: '是', text: '是' }, { value: '否', text: '否' }], panelHeight: 'auto'
+                   }
+               }
            }
            , {
                field: 'REMARKS', title: '备注', width: 135, function (value, row, index) {
