@@ -17,9 +17,9 @@
             <tr>
 
                 <td align="right">
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-back'" onclick="CreateTable()">返回</a>
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="CreateTable()">保存</a>
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="CreateTable()">送审核</a>
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-back'" onclick="">返回</a>
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="Save()">保存</a>
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="">送审核</a>
                 </td>
             </tr>
         </table>
@@ -48,7 +48,7 @@
         <tr>
             <td style="background:#FCFCFC">总结论：</td>
             <td colspan="2" align="left">
-                <select class="my-combobox">
+                <select class="my-combobox" id="CONCLUSION">
                     @if (Model != null && Model.prepare_scheme.CONCLUSION == "不合格")
                     {
                         <option value="yes">合格</option>
@@ -65,12 +65,12 @@
         </tr>
         <tr>
             <td style="background:#FCFCFC">结论说明：</td>
-            <td colspan="2" align="left"><textarea rows="1" style="width:97%; height:26px">@Model.prepare_scheme.CONCLUSION_EXPLAIN</textarea></td>
+            <td colspan="2" align="left"><textarea rows="1" style="width:97%; height:26px" id="CONCLUSION_EXPLAIN">@Model.prepare_scheme.CONCLUSION_EXPLAIN</textarea></td>
 
         </tr>
         <tr>
             <td style="background:#FCFCFC">有效期：</td>
-            <td colspan="2" align="left"><input type="text" class="my-textbox" value="@Model.prepare_scheme.VALIDITY_PERIOD" /> 年</td>
+            <td colspan="2" align="left"><input type="text" class="my-textbox" value="@Model.prepare_scheme.VALIDITY_PERIOD" id="VALIDITY_PERIOD" onClick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })"/> 年</td>
 
         </tr>
         <tr>
@@ -103,8 +103,48 @@
         url = url + "&RULEID=" + RULEID;           
         url = url + "&INPUTSTATE=" + INPUTSTATE;
         $('#mainframe').attr('src', url);
-
        
+    }
+    //数据验证
+    function CheckData() {
+        return true;
+    }
+    //保存
+    function Save() {
+        if (!CheckData()) {
+            return;
+        }
+        var ID = $("#hideID").val();//预备方案检查项ID
+        var CONCLUSION = $("#CONCLUSION").val();//总结论
+        var CONCLUSION_EXPLAIN = $("#CONCLUSION_EXPLAIN").val();//结论说明          
+        var VALIDITY_PERIOD = $("#VALIDITY_PERIOD").val();//有效期
+        
+        //获取空对象用于保存添加的信息
+        $.ajax({
+            type: 'post', //使用post方法访问后台
+            dataType: "json", //返回json格式的数据
+            url: '/PREPARE_SCHEME/Save', //要访问的后台地址      
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式        
+            data: { 'ID': ID, 'CONCLUSION': CONCLUSION, 'CONCLUSION_EXPLAIN': CONCLUSION_EXPLAIN, 'VALIDITY_PERIOD': VALIDITY_PERIOD },
+            beforeSend: function () {
+                //InitAlertJS();
+            },
+            complete: function () {
+            }, //AJAX请求完成时隐藏loading提示
+
+            success: function (res) {//msg为返回的数据，在这里做数据绑定               
+                if (res.Code == 1) {                   
+                    $.messager.alert('操作提示', "操作成功！", 'info');
+                }
+                else {
+                    $.messager.alert('操作提示', res.Message, 'info');
+                }
+
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
+            }
+        });
     }
 </script>
 
