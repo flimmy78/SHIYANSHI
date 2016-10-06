@@ -76,15 +76,17 @@ namespace Langben.DAL
 
         }
         /// <summary>
-        /// 通过主键id，获取预备方案检测项信息---查看详细，首次编辑
+        /// 通过预备方案ID,检测项ID，获取预备方案检测项信息---查看详细，首次编辑
         /// </summary>
-        /// <param name="id">主键</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <param name="RULEID">检测项ID</param>
         /// <returns>预备方案检测项信息</returns>
-        public VTEST_ITE GetById(string id)
+        public VTEST_ITE GetById(string PREPARE_SCHEMEID="",string RULEID="")
         {
             using (SysEntities db = new SysEntities())
             {
-                return GetById(db, id);
+                string ROW_FLAG = PREPARE_SCHEMEID + "|" + RULEID;
+                return GetById(db, ROW_FLAG);
             }                   
         }
         /// <summary>
@@ -92,9 +94,9 @@ namespace Langben.DAL
         /// </summary>
         /// <param name="id">主键</param>
         /// <returns>预备方案检测项信息</returns>
-        public VTEST_ITE GetById(SysEntities db, string id)
+        public VTEST_ITE GetById(SysEntities db, string ROW_FLAG)
         { 
-                 return db.VTEST_ITE.SingleOrDefault(s => s.ID == id); 
+                 return db.VTEST_ITE.SingleOrDefault(s => s.ROW_FLAG == ROW_FLAG); 
         }
  
         public void Dispose()

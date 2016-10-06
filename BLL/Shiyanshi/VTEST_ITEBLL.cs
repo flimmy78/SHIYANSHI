@@ -54,14 +54,7 @@ namespace Langben.BLL
                 sb = sb.Remove(sb.ToString().Length - 1, 1);
             }
             List<DAL.VTEST_ITE> list = repository.GetData(db, "asc", "SORT", sb.ToString()).ToList();
-            return list;
-            //db.VTEST_ITE
-            //var dt = (from f in db.VTEST_ITE
-            //          where f.SCHEMEID == "1610041126146630519c6f9724683"
-            //          select f).OrderBy(x => x.SCHEME_RULEID);
-            //List<VTEST_ITE> list = dt.ToList<VTEST_ITE>();
-            //IQueryable<VTEST_ITE> d = dt.Distinct();
-            //return list;
+            return list;            
 
         }
         /// <summary>
@@ -104,13 +97,14 @@ namespace Langben.BLL
         }
 
         /// <summary>
-        /// 根据主键，查看详细信息
+        /// 通过预备方案ID,检测项ID，获取预备方案检测项信息---查看详细，首次编辑
         /// </summary>
-        /// <param name="id">根据主键</param>
-        /// <returns></returns>        
-        public VTEST_ITE GetById(string id)
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <param name="RULEID">检测项ID</param>
+        /// <returns>预备方案检测项信息</returns>       
+        public VTEST_ITE GetById(string PREPARE_SCHEMEID = "", string RULEID = "")
         {           
-            return repository.GetById(id);
+            return repository.GetById(PREPARE_SCHEMEID, RULEID);
         }
         public void Dispose()
         {

@@ -11,8 +11,8 @@
             <tr>
                 <td>@Model.RULENJOINAME</td>
                 <td class="tr">
-                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="javascript:reset('')">重置</a>
-                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="javascript:save('')">保存</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="javascript: Save()">保存检测项</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="javascript:Reset()">重置检测项</a>
                 </td>
             </tr>
         </table>
@@ -22,9 +22,8 @@
     <div id="mt10">
         <input type="hidden" id="hideID" value="@ViewBag.ID" />
         <input type="hidden" id="hidePREPARE_SCHEMEID" value="@Model.PREPARE_SCHEMEID" />
-        <input type="hidden" id="hideRULEID" value="@Model.RULEID" />
-        <input type="hidden" id="hideRULENAME" value="@Model.RULENAME" />
-        <input type="hidden" id="hideRULENJOINAME" value="@Model.RULENJOINAME" />
+        <input type="hidden" id="hideRULEID" value="@Model.RULEID" />    
+        <input type="hidden" id="hideINPUTSTATE" value="@ViewBag.INPUTSTATE" />        
         <table class="tbl " width="100%">
             <tr>
                 <td class="tc" width="100" style="background:#FCFCFC">注：</td>
@@ -54,3 +53,74 @@
 
     </div>
     </div>
+<script type="text/javascript" language="javascript">
+    //重置
+    function Reset()
+    {        
+        var INPUTSTATE = $("#hideINPUTSTATE").val();//录入格式
+        if (INPUTSTATE == "HGBHG") {           
+            $("input[type=radio][name=radCONCLUSION][value='合格']").prop("checked", 'checked');            
+        }
+        else {
+           $("#txtCONCLUSION").val("");//结论
+        }
+        $("#REMARK").val("");
+    }
+    //数据验证
+    function CheckData()
+    {
+        return true;
+    }
+    //保存
+    function Save() {
+        if (!CheckData()) {
+            return;
+        }        
+        var ID = $("#hideID").val();//预备方案检查项ID
+        var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();//预备方案ID
+        var RULEID = $("#hideRULEID").val();//检测项ID   
+        var CONCLUSION = "";//结论
+        var INPUTSTATE = $("#hideINPUTSTATE").val();//录入格式
+        if (INPUTSTATE == "HGBHG")
+        {
+            CONCLUSION = $("input[name='radCONCLUSION']:checked").val();
+        }
+        else
+        {
+            CONCLUSION = $("#txtCONCLUSION").val();//结论
+        }        
+        var REMARK = $("#REMARK").val();//备注       
+        
+        //获取空对象用于保存添加的信息
+        $.ajax({
+            type: 'post', //使用post方法访问后台
+            dataType: "json", //返回json格式的数据
+            url: '/QUALIFIED_UNQUALIFIED_TEST_ITE/Save', //要访问的后台地址      
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式        
+            data: { 'ID': ID, 'PREPARE_SCHEMEID': PREPARE_SCHEMEID, 'RULEID': RULEID, 'CONCLUSION': CONCLUSION, 'REMARK': REMARK },
+            beforeSend: function () {
+                //InitAlertJS();
+            },
+            complete: function () {
+            }, //AJAX请求完成时隐藏loading提示
+
+            success: function (res) {//msg为返回的数据，在这里做数据绑定               
+                if (res.Code == 1) {
+                    if ($("#hideID").val().trim() == "") {
+                        $("#hideID").val(res.Message);
+                    }                    
+                    var tdID = '#'+RULEID
+                    $(tdID, parent.document).html('已做');//修改检测项状态
+                    $.messager.alert('操作提示', "操作成功！", 'info');
+                }
+                else {
+                    $.messager.alert('操作提示', res.Message, 'info');
+                }  
+
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
+            }
+        });
+    }
+</script>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Transactions;
 using Langben.DAL;
 using Common;
+using Langben.DAL.shiyanshi;
 
 namespace Langben.BLL
 {
@@ -35,6 +36,35 @@ namespace Langben.BLL
         public QUALIFIED_UNQUALIFIED_TEST_ITEBLL(SysEntities entities)
         {
             db = entities;
+        }
+        /// <summary>
+        /// 根据预备方案ID获取检测项信息
+        /// </summary>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <param name="RULEID">检测项ID</param>
+        /// <returns></returns>
+        public QUALIFIED_UNQUALIFIED_TEST_ITE GetByPREPARE_SCHEMEID_RULEID(string PREPARE_SCHEMEID = "", string RULEID = "")
+        {
+            StringBuilder sb = new StringBuilder();
+            if (PREPARE_SCHEMEID != null && PREPARE_SCHEMEID.Trim() != "")
+            {
+                sb.AppendFormat("PREPARE_SCHEMEID{0}&{1}^", ArgEnums.DDL_String, PREPARE_SCHEMEID);
+            }
+            if(RULEID!=null && RULEID.Trim()!="")
+            {
+                sb.AppendFormat("RULEID{0}&{1}^", ArgEnums.DDL_String, RULEID);
+            }
+            if (sb.ToString().Trim() != "")
+            {
+                sb = sb.Remove(sb.ToString().Length - 1, 1);
+            }
+            List<DAL.QUALIFIED_UNQUALIFIED_TEST_ITE> list = repository.GetData(db, "asc", "SORT", sb.ToString()).ToList();
+            if(list!=null && list.Count>0)
+            {
+                return list[0];
+            }
+            return null;
+
         }
         /// <summary>
         /// 查询的数据
