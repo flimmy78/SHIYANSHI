@@ -56,6 +56,10 @@ namespace Langben.DAL
 			[Display(Name = "修改人", Order = 7)]
 			public object UPDATEPERSON { get; set; }
 
+            [ScaffoldColumn(true)]
+            [Display(Name = "排序", Order = 8)]
+            public object SORT { get; set; }
+
 
     }
 }

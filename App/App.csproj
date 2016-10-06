@@ -123,6 +123,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
     </Reference>
+    <Reference Include="Webdiyer.MvcPager">
+      <HintPath>..\packages\Webdiyer.MvcPager.3.0.1.1\lib\Webdiyer.MvcPager.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -196,6 +199,7 @@
     <Compile Include="Models\SysDepartmentTreeModel.cs" />
     <Compile Include="Models\SysFieldTreeModel.cs" />
     <Compile Include="Models\SysMenuTreeModel.cs" />
+    <Compile Include="Models\VTEST_ITE_YuBei.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +237,7 @@
     <Content Include="html\变送器-电流电压-引用误差.html" />
     <Content Include="html\变送器-相位-引用误差.html" />
     <Content Include="html\变送器-频率-引用误差.html" />
+    <Content Include="html\检定实验数据录入form.html" />
     <Content Include="html\检定实验数据录入.html" />
     <Content Include="html\检定流程.html" />
     <Content Include="html\直流电压（电流）测量-非正负极性-相对误差.html" />
@@ -503,7 +508,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\JScript-JianCeXiang-Common.js" />
-    <Content Include="Scripts\JScript-FangAn-Common.js" />
     <Content Include="Scripts\JScriptCommon.js" />
     <Content Include="Scripts\JScriptIndex.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -831,6 +835,7 @@
     <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuShuChu.cshtml" />
     <Content Include="Views\Shared\FangAnIndex.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaFeiZhengFu.cshtml" />
+    <Content Include="Views\QUALIFIED_UNQUALIFIED_TEST_ITE\FeiBiaoGe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

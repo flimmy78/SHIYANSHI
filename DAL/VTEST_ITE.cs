@@ -12,22 +12,22 @@ namespace Langben.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class QUALIFIED_UNQUALIFIED_TEST_ITE
+    public partial class VTEST_ITE
     {
+        public string ROW_FLAG { get; set; }
+        public string PREPARE_SCHEMEID { get; set; }
+        public string SCHEMEID { get; set; }
+        public string RULEID { get; set; }
+        public string INPUTSTATE { get; set; }
+        public string NAMEOTHER { get; set; }
+        public string NAME { get; set; }
+        public string SCHEME_MENU { get; set; }
         public string ID { get; set; }
         public string CONCLUSION { get; set; }
-        public string PREPARE_SCHEMEID { get; set; }
-        public string RULEID { get; set; }
-        public string RULENAME { get; set; }
-        public string RULENJOINAME { get; set; }
         public string HTMLVALUE { get; set; }
         public string REMARK { get; set; }
-        public Nullable<System.DateTime> CREATETIME { get; set; }
-        public string CREATEPERSON { get; set; }
-        public Nullable<System.DateTime> UPDATETIME { get; set; }
-        public string UPDATEPERSON { get; set; }
+        public string ISCOMPLETE { get; set; }
+        public string SCHEME_RULEID { get; set; }
         public Nullable<decimal> SORT { get; set; }
-    
-        public virtual PREPARE_SCHEME PREPARE_SCHEME { get; set; }
     }
 }

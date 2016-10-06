@@ -46,7 +46,7 @@ namespace Langben.IBLL
         /// <returns></returns>
         [OperationContract]
         System.Collections.Generic.List<QUALIFIED_UNQUALIFIED_TEST_ITE> GetAll();
-        
+
         /// <summary>
         /// 根据PREPARE_SCHEMEIDId，获取所有合格不合格检定项目数据
         /// </summary>
@@ -54,14 +54,14 @@ namespace Langben.IBLL
         /// <returns></returns>
         List<QUALIFIED_UNQUALIFIED_TEST_ITE> GetByRefPREPARE_SCHEMEID(string id);
 
-        
+
         /// <summary>
         /// 根据主键，查看详细信息
         /// </summary>
         /// <param name="id">根据主键</param>
         /// <returns></returns>
         [OperationContract]
-        QUALIFIED_UNQUALIFIED_TEST_ITE GetById(string id);    
+        QUALIFIED_UNQUALIFIED_TEST_ITE GetById(string id);
         /// <summary>
         /// 创建一个对象
         /// </summary>
@@ -69,7 +69,7 @@ namespace Langben.IBLL
         /// <param name="entity">一个对象</param>
         /// <returns></returns>
         [OperationContract]
-         bool Create(ref Common.ValidationErrors validationErrors, QUALIFIED_UNQUALIFIED_TEST_ITE entity); 
+        bool Create(ref Common.ValidationErrors validationErrors, QUALIFIED_UNQUALIFIED_TEST_ITE entity);
         /// <summary>
         /// 删除一个对象
         /// </summary>
@@ -93,8 +93,16 @@ namespace Langben.IBLL
         /// <param name="entity">一个对象</param>
         /// <returns></returns>
         [OperationContract]
-        bool Edit(ref Common.ValidationErrors validationErrors, QUALIFIED_UNQUALIFIED_TEST_ITE entity); 
-    
+        bool Edit(ref Common.ValidationErrors validationErrors, QUALIFIED_UNQUALIFIED_TEST_ITE entity);
+
+        /// <summary>
+        /// 根据预备方案ID获取检测项信息
+        /// </summary>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <param name="RULEID">检测项ID</param>
+        /// <returns></returns>
+        QUALIFIED_UNQUALIFIED_TEST_ITE GetByPREPARE_SCHEMEID_RULEID(string PREPARE_SCHEMEID = "", string RULEID = "");
     }
+        
 }
 
