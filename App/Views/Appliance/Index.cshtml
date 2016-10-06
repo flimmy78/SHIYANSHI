@@ -14,9 +14,17 @@
     td {
         height: 25px;
     }
-
-    
-        
+    .editor-field {
+        width: 200px;
+        height: 24px;
+        float: left;
+        margin: 11px 0 11px 6px;
+        display: inline;
+    }
+    .editor-field .text-box { width:180px    }
+        .editor-field .easyui-combobox {
+            width: 180px;
+        }
     
     
 </style>
@@ -215,104 +223,138 @@
 </div>
     </div>
     <br style="clear:both;" />
-    <div class="bigdiv" style="width: 902px;" id="order">
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
+    <div class="bigdiv" style="width: auto" id="order">
+        <div class="editor-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "请选择", new { @class = "easyui-combobox" })
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "请选择", new { @class = "easyui-combobox" })
+        <div class="editor-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
+            </div>
         </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
+        <div class="editor-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+                @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
+       
+        <div class="editor-form">
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_POST)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_POST)
+                @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_POST)
+            </div>
         </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)：
+        <div class="editor-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CONTACTS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACTS)
+                @Html.ValidationMessageFor(model => model.CONTACTS)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
-            @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+        <div class="editor-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CONTACT_PHONE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACT_PHONE)
+                @Html.ValidationMessageFor(model => model.CONTACT_PHONE)
+            </div>
         </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_POST)：
+        <div class="editor-form">
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FAX)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FAX)
+                @Html.ValidationMessageFor(model => model.FAX)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_POST)
-            @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_POST)
+        <div class="editor-form">
+            <div class="editor-label">
+                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
+            </div>
         </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CONTACTS)：
+        <div class="editor-form">
+            <div class="editor-label">
+                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
+                @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CONTACTS)
-            @Html.ValidationMessageFor(model => model.CONTACTS)
+        <div class="editor-form">
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_POST)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_POST)
+                @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_POST)
+            </div>
         </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CONTACT_PHONE)：
+        <div class="editor-form">
+            <div class="editor-label">
+                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACTS2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACTS2)
+                @Html.ValidationMessageFor(model => model.CONTACTS2)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CONTACT_PHONE)
-            @Html.ValidationMessageFor(model => model.CONTACT_PHONE)
+        <div class="editor-form">
+            <div class="editor-label">
+                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACT_PHONE2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACT_PHONE2)
+                @Html.ValidationMessageFor(model => model.CONTACT_PHONE2)
+            </div>
         </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FAX)：
+        <div class="editor-form">
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FAX2)：
+            </div>
+      
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FAX2)
+                @Html.ValidationMessageFor(model => model.FAX2)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FAX)
-            @Html.ValidationMessageFor(model => model.FAX)
+        <div class="clearfix"></div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)：
+            </div>
+            <div class="editor-field" style="height:auto">
+                @Html.TextAreaFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
+                @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
+            </div>
+       
+      
         </div>
-        <div class="editor-label">
-            <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
-        </div>
-        <div class="editor-label">
-            <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
-            @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_POST)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_POST)
-            @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_POST)
-        </div>
-        <div class="editor-label">
-            <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACTS2)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CONTACTS2)
-            @Html.ValidationMessageFor(model => model.CONTACTS2)
-        </div>
-        <div class="editor-label">
-            <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACT_PHONE2)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CONTACT_PHONE2)
-            @Html.ValidationMessageFor(model => model.CONTACT_PHONE2)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FAX2)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FAX2)
-            @Html.ValidationMessageFor(model => model.FAX2)
-        </div>
-        <br style="clear:both;" />
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)：
-        </div>
-        <div class="editor-field" style="height:auto">
-            @Html.TextAreaFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
-            @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
-        </div>
-    </div>
     <div style="clear:both;"></div>
     <input type="hidden" id="ORDER_TASK_INFORMATIONID" />
     <div class="p5 mt10">

@@ -39,7 +39,7 @@ input {
     margin: 4px;
     background: url(../Images/direction.gif) 0 center no-repeat;
 }
-
+.clearfix{ clear:both; height:0; line-height:0}
 .a2 {
     width: 90px;
     height: 23px;
@@ -163,8 +163,9 @@ input {
 /* Styles for editor and display helpers
 ----------------------------------------------------------*/
 
+.editor-form{ width:335px; float:left}
 .editor-label {
-    width: 144px;
+    width: 120px;
     height: 24px;
     float: left;
     text-align: right;
