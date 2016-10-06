@@ -24,10 +24,12 @@ h2 {
 }
 
 input {
-    font: normal 12px/20px "微软雅黑";
+    font: normal 12px/20px ;
     color: #444; border:1px solid #D4D4D4; height:22px 
 }
-
+.textbox{-moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;}
 .mbx {
     height: 23px;
     font-weight: bold;
@@ -174,15 +176,14 @@ input {
     .editor-label span {
         width: 10px;
         height: 5px;
-        float: left;
-        display: inline-block;
+        
         color: Red;
         display: inline;
     }
 
     .editor-label label {
         width: 120px;
-        margin-top: 5px;
+        margin-top: 5px; color:#666
     }
 
 .editor-field {
@@ -194,12 +195,12 @@ input {
 }
 
     .editor-field select {
-        font-family: 微软雅黑;
-        height: 23px;
+        font-size:12px;
+        height: 26px;
         width: 242px;
-        border: 1px solid #CCC;
+        border: 1px solid #D4D4D4;
         float: left;
-        margin-top: 3px;
+        margin-top: 2px;
         _margin-left: 5px;
         display: inline;
     }
@@ -209,12 +210,9 @@ input {
     padding-bottom: 32px;
 }
 
-.text-box {
-    font-family: 微软雅黑;
-    height: 19px;
-    width: 240px;
-    border: 1px solid #CCC;
-    margin-top: 5px;
+.text-box {   
+    width: 240px;  
+    margin-top: 2px;border:1px solid #D4D4D4; height:22px; font-size:12px
 }
 
 .textarea-box {
@@ -252,8 +250,8 @@ textarea {
     color: #444;
     height: 106px;
     width: 667px;
-    border: 1px solid #CCC;
-    margin: 11px 0 11px 6px;
+    border: 1px solid #d4d4d4;
+    margin: 0px 0 11px 6px;
 }
 
 /* select
@@ -284,7 +282,8 @@ textarea {
     border: 1px solid #ff0000;
     background-color: #ffeeee;
 }
-
+.search-box{border:1px solid #D4D4D4; padding:5px}
+.search-box  label{ line-height:26px}
 .search {
     float: left;
     margin-bottom: 5px;
