@@ -2,7 +2,7 @@
 @{ Layout = "~/Views/Shared/Index.cshtml"; }
 @using Common
 @using Models
-<div id="divQuery">
+<div id="divQuery p5 ">
     <input type="hidden" name="UNDERTAKE_LABORATORYID" value="" />
     <div class="input_search">
         <div class="input_search-label">
@@ -49,7 +49,7 @@
             @Html.LabelFor(model => model.ORDER_STATUS):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("ORDER_STATUS", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "ORDER_STATUS"), "请选择", new { id = "ORDER_STATUS" })
+            @Html.DropDownList("ORDER_STATUS", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "ORDER_STATUS"), "请选择", new { id = "ORDER_STATUS", @class = "easyui-combobox" })
         </div>
     </div>
     <div class="input_search">
@@ -65,10 +65,10 @@
             @Html.LabelFor(model => model.ISOVERDUE):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("ISOVERDUE", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "ISOVERDUE"), "请选择", new { id = "ISOVERDUE" })
+            @Html.DropDownList("ISOVERDUE", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "ISOVERDUE"), "请选择", new { id = "ISOVERDUE", @class = "easyui-combobox" })
         </div>
     </div>
-    <div class='input_search' style="padding-top:10px;">
+    <div class='input_search input_search-btn'>
         <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
             查 询
         </a>
@@ -266,6 +266,7 @@
             height: 'auto',
             //nowrap: false,
             striped: true,
+           // fit:true,
             collapsible: true,
             url: '../VJIANDINGRENWU/GetData', //获取数据的url
             sortName: 'EQUIPMENT_STATUS_VALUUMN',

@@ -107,7 +107,7 @@ input {
 #divQuery {
     width: auto;
     height: auto;
-    clear: both;
+    clear: both; font-size:12px
 }
 
 .input_search {
@@ -126,7 +126,7 @@ input {
 }
 
     .input_search-label label {
-        margin-top: 5px;
+        margin-top: 5px;font-size:12px
     }
 
 .input_search-field {
@@ -149,16 +149,16 @@ input {
 .input_search-field-time input {
         width: 85px;
     }
-.input_search-field select {
-    font-family: 微软雅黑;
-    height: 23px;
+.input_search-field select {   
+    height: 26px;
     width: 210px;
-    border: 1px solid #CCC;
+    border: 1px solid #d4d4d4;
     float: left;
     margin-top: 3px;
     _margin-left: 5px;
     display: inline;
 }
+.input_search-btn{ padding-left:10px; padding-top:14px}
 
 /* Styles for editor and display helpers
 ----------------------------------------------------------*/
