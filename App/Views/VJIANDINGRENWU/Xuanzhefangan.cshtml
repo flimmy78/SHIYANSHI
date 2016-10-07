@@ -7,9 +7,7 @@
 {
     <fieldset>
         <legend>
-            <label>报告证书类别</label><input type="button" value="报告上传" class="a2 f2" onclick="shangchuan()" />
-            <input type="submit" value="建立方案" class="a2 f2" />
-            <input class="a2 f2" type="button" onclick="BackList('VJIANDINGRENWU')" value="返回" />
+            <label>报告证书类别</label>
         </legend>
         <div id="xuanzhefangandiv">
             <div class="input_search">
@@ -48,7 +46,7 @@
                 }
 
             </div>
-            <br style="clear:both" />
+            <div class="clearfix"></div>
             <div class="input_search">
                 <div class="input_search-label">
                     证书类别:
@@ -59,7 +57,7 @@
                 </div>
 
             </div>
-            <br style="clear:both" />
+            <div class="clearfix"></div>
 
             <div id="cnas" style="display:none">
                 <div class="input_search-label">
@@ -80,7 +78,8 @@
                     Yes: <input type="radio" id="jiandingyes" name="CERTIFICATION_AUTHORITY" onclick="zizhiget(this)" value="Yes" atps="jiandingyes" />
                     No: <input type="radio" id="jiandingno" name="CERTIFICATION_AUTHORITY" onclick="zizhiget(this)" value="No" atps="jiandingno" />
                 </div>
-            </div><br style="clear:both" />
+            </div>
+            <div class="clearfix"></div>
             <div class="input_search" id="kongzhi" style="display:none">
                 <div class="input_search-label">
                     控制编号:
@@ -115,7 +114,8 @@
                         @Html.DropDownList("CONTROL_NUMBER", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "CONTROL_NUMBER_ZHILIU"), "请选择", new { id = "CONTROL_NUMBER" })
                     </div>
                 }
-            </div><br style="clear:both" />
+            </div>
+            <div class="clearfix"></div>
             <div class="input_search">
                 <div class="input_search-label">
                     资质:
@@ -127,7 +127,19 @@
                 </div>
             </div>
 
-        </div>
+            <div class="clearfix"></div>
+            <div class="input_search">
+                <div class="input_search-label">
+                    
+                </div>
+                <div class="input_search-field">
+                    <a class="easyui-linkbutton" onclick="shangchuan()">报告上传</a>
+                    <input type="submit" class="easyui-linkbutton" value="建立方案" style="width:auto; padding:0 8px; line-height:25px; " />
+                    <a class="easyui-linkbutton" onclick="BackList('VJIANDINGRENWU')">返回</a>
+                </div>
+            </div>
+                </div>
+            
         <input type="hidden" value="" id="ACCEPT_ORGNIZATION_HIDDEN" />
         <input type="hidden" name="APPLIANCE_LABORATORYID" id="APPLIANCE_LABORATORYID" value="@ViewBag.APPLIANCE_LABORATORYID" />
         <input type="hidden" name="ID" id="ID_String" value="@ViewBag.Id" />

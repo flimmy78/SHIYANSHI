@@ -2,7 +2,7 @@
 body {
     margin: 0;
     padding: 0;
-    font: normal 12px/20px ;
+    font-size:  12px; 
 }
 input[type="checkbox"],input[type="radio"] {vertical-align:bottom;}
 .p5 {padding:5px}
@@ -27,6 +27,7 @@ input {
     font: normal 12px/20px ;
     color: #444; border:1px solid #D4D4D4; height:22px 
 }
+    input[type="submit"] {height:25px    }
 .textbox{-moz-border-radius: 0;
     -webkit-border-radius: 0;
     border-radius: 0;}
@@ -111,7 +112,7 @@ input {
 }
 
 .input_search {
-    height: 34px;
+    height: 40px;
     float: left;
 }
 
@@ -122,7 +123,7 @@ input {
     margin: 13px 0 9px;
     _margin: 13px 0 9px;
     line-height: 24px;
-    display: inline;
+    display: inline;font-size:12px
 }
 
     .input_search-label label {
@@ -229,14 +230,14 @@ input {
 /* FORM LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
 fieldset {
-    width: 902px;
-    margin-left: 4px;
+    width: auto;
+    margin-left: 5px;
     padding: 1em;
-    border: 1px solid #CCC;
+    border: 1px solid #d4d4d4; border-left:none; border-right:none; border-bottom:none  
 }
 
 legend {
-    padding: 2px 8px 8px 12px;
+    padding: 2px 8px 8px 12px; font-family:'Microsoft yahei'; font-size:14px 
 }
 
 input[type="password"] {
@@ -247,7 +248,7 @@ input[type="password"] {
 }
 
 textarea {
-    font: normal 12px/20px "微软雅黑";
+    font: normal 12px/20px ;
     color: #444;
     height: 106px;
     width: 667px;
