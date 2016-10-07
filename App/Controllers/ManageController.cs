@@ -24,11 +24,38 @@ namespace Langben.App.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+            Account account = GetCurrentAccount();
+            var data = App.Codes.MenuCaching.GetMenu(ref account); //home.GetMenuByAccount(ref account);// 获取菜单
+            ViewBag.PersonName = account.PersonName;
+            if (!data.Contains("Appliance"))
+            {
+                ViewBag.Appliance = "disabled";
+            }
+            if (!data.Contains("VQIJULINGQU1"))
+            {
+                ViewBag.VQIJULINGQU1 = "disabled";
+            }
+            if (!data.Contains("VRUKU"))
+            {
+                ViewBag.VRUKU = "disabled";
+            }
+            if (!data.Contains("VJIANDINGRENWU"))
+            {
+                ViewBag.VJIANDINGRENWU = "disabled";
+            }
+            if (!data.Contains("VSHENPI"))
+            {
+                ViewBag.VSHENPI = "disabled";
+            }
+            if (!data.Contains("SysPerson"))
+            {
+                ViewBag.SysPerson = "disabled";
 
+            }
             return View();
 
         }
     }
-         
+
 }
 

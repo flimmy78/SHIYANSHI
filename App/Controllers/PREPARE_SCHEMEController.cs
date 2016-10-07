@@ -94,6 +94,74 @@ namespace Langben.App.Controllers
             }
             return View(result);
         }
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <param name="ID">预备方案编号</param>
+        /// <param name="CONCLUSION">总结论</param>
+        /// <param name="CONCLUSION_EXPLAIN">结论说明</param>
+        /// <param name="VALIDITY_PERIOD">有效期</param>
+        /// <returns></returns>
+        public ActionResult Save(string ID, string CONCLUSION, string CONCLUSION_EXPLAIN, string VALIDITY_PERIOD)
+        {
+            Common.ClientResult.Result result = new Common.ClientResult.Result();
+            PREPARE_SCHEME entity = m_BLL.GetById(ID);
+            if (entity != null)
+            {
+                entity.CONCLUSION = CONCLUSION;
+                entity.CONCLUSION_EXPLAIN = CONCLUSION_EXPLAIN;
+                try
+                {
+                    entity.VALIDITY_PERIOD = Convert.ToDateTime(VALIDITY_PERIOD);
+                }
+                catch
+                {
+                    result.Code = Common.ClientCode.Fail;
+                    result.Message = Suggestion.UpdateFail + "有效期格式错误";
+                    return Json(result); //提示插入失败
+                }
+                string currentPerson = GetCurrentPerson();
+                entity.UPDATETIME = DateTime.Now;
+                entity.UPDATEPERSON = currentPerson;
+
+                string returnValue = string.Empty;
+                if (m_BLL.Edit(ref validationErrors, entity))
+                {
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，检定项目模板的Id为" + entity.ID, "检定项目模板"
+                        );//写入日志 
+                    result.Code = Common.ClientCode.Succeed;
+                    //result.Message = Suggestion.UpdateSucceed;
+                    result.Message = entity.ID;
+                    return Json(result); //提示创建成功
+                }
+                else
+                {
+                    if (validationErrors != null && validationErrors.Count > 0)
+                    {
+                        validationErrors.All(a =>
+                        {
+                            returnValue += a.ErrorMessage;
+                            return true;
+                        });
+                    }
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，检定项目模板，" + returnValue, "检定项目模板"
+                        );//写入日志                      
+                    result.Code = Common.ClientCode.Fail;
+                    result.Message = Suggestion.UpdateFail + returnValue;
+                    return Json(result); //提示插入失败
+                }
+
+            }
+            else
+            {
+                result.Code = Common.ClientCode.Fail;
+                result.Message = Suggestion.UpdateFail + "未找到预备方案ID为【"+ID+"】的数据";
+                return Json(result); //提示插入失败
+            }           
+
+            
+
+        }
         IBLL.IPREPARE_SCHEMEBLL m_BLL;
         ValidationErrors validationErrors = new ValidationErrors();
         public PREPARE_SCHEMEController()

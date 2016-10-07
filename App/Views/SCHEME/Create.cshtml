@@ -112,7 +112,7 @@
         }
         $('#UNDERTAKE_LABORATORYID').combobox({
             onChange: function (n, o) {
-                debugger;
+                
                 $("#hideUNDERTAKE_LABORATORYID").val(n);
                 ChangeTree(n);
             }
@@ -210,7 +210,7 @@
         if (!CheckData()) {
             return;
         }
-        debugger;
+        
         //var UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID").val();//实验室
         var UNDERTAKE_LABORATORYID = $("#hideUNDERTAKE_LABORATORYID").val();//没明白取下拉框的选中数据取不到
         var NAME = $("#NAME").val();//方案名称           
@@ -258,73 +258,7 @@
                 $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
             }
         });
-    }
-
-   
-
-    //保存
-    function Save1()
-    {
-        if (!CheckData())
-        {
-            return;
-        }        
-        var UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID").val();//实验室
-        var NAME = $("#NAME").val();//方案名称           
-        var nodes = $('#tt').tree('getChecked');
-        var RULEIDs = '';
-        for (var i = 0; i < nodes.length; i++) {
-            var node=nodes[i];            
-            if ($('#tt').tree('isLeaf', node.target))
-            {
-                if (RULEIDs != '') RULEIDs += ',';
-                RULEIDs += node.id;
-            }
-        }        
-        var ID = $("#hideID").val();
-        var url='/SCHEME/Save';
-        var data='NAME=' + NAME + "&UNDERTAKE_LABORATORYID=" + UNDERTAKE_LABORATORYID + "&RULEIDs=" + RULEIDs;        
-        if(ID.trim()!="")
-        {
-            url = "/SCHEME/UpdateSave";
-            data = 'ID=' + ID + '&NAME=' + NAME + "&UNDERTAKE_LABORATORYID=" + UNDERTAKE_LABORATORYID + "&RULEIDs=" + RULEIDs;
-        }
-        //获取空对象用于保存添加的信息
-        $.ajax({
-            type: 'post', //使用post方法访问后台
-            dataType: "json", //返回json格式的数据
-            //url: '/SCHEME/CreateSave', //要访问的后台地址
-            url:url,
-            contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
-            //data: 'NAME=' + NAME + "&UNDERTAKE_LABORATORYID=" + UNDERTAKE_LABORATORYID + "&RULEIDs=" + RULEIDs, //要发送的数据
-            data:data,
-            beforeSend: function () {
-                //InitAlertJS();
-            },
-            complete: function () {
-            }, //AJAX请求完成时隐藏loading提示
-
-            success: function (res) {//msg为返回的数据，在这里做数据绑定               
-                if (res.Code == 1) {
-                    if ($("#hideID").val().trim() == "") {
-                        $("#hideID").val(res.Message);
-                    }                   
-                    $.messager.alert('操作提示', "操作成功！", 'info');
-                }
-                else {
-                    $.messager.alert('操作提示', res.Message, 'info');
-                }
-                if ($("#hideID").val()!="")
-                {
-                    $("#UNDERTAKE_LABORATORYID").attr("disabled", "disabled");                   
-                }
-               
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
-            }
-        });  
-    }
+    } 
 </script>
 
 

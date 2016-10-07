@@ -105,7 +105,9 @@ namespace Langben.DAL
         [Display(Name = "联系地址", Order = 14)]
         [StringLength(200, ErrorMessage = "长度不可超过200")]
         public object Address { get; set; }
-        [RegularExpression("^/w+（[-+.]/w+）*＠/w+（[-.]/w+）*/./w+（[-.]/w+）*￥",ErrorMessage = "邮箱格式不正确")]
+        [RegularExpression(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "邮箱格式不正确")]
+
+        //[RegularExpression("^/w+（[-+.]/w+）*＠/w+（[-.]/w+）*/./w+（[-.]/w+）*￥",ErrorMessage = "邮箱格式不正确")]
         [ScaffoldColumn(true)]
         [Display(Name = "邮箱", Order = 15)]
         [StringLength(200, ErrorMessage = "长度不可超过200")]
