@@ -33,20 +33,20 @@ namespace Langben.App.Controllers
             }
             if (!data.Contains("VQIJULINGQU1"))
             {
-                ViewBag.disabled = "disabled";
+                ViewBag.VQIJULINGQU1 = "disabled";
             }
             if (!data.Contains("VRUKU"))
             {
-                ViewBag.disabled = "disabled";
+                ViewBag.VRUKU = "disabled";
             }
             if (!data.Contains("VJIANDINGRENWU"))
             {
-                ViewBag.disabled = "disabled";
+                ViewBag.VJIANDINGRENWU = "disabled";
             }
             
             if (!data.Contains("SysPerson"))
             {
-                ViewBag.disabled = "disabled";
+                ViewBag.SysPerson = "disabled";
 
             }
             return View();
