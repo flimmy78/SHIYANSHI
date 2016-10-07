@@ -43,7 +43,10 @@ namespace Langben.App.Controllers
             {
                 ViewBag.VJIANDINGRENWU = "disabled";
             }
-            
+            if (!data.Contains("VSHENPI"))
+            {
+                ViewBag.VSHENPI = "disabled";
+            }
             if (!data.Contains("SysPerson"))
             {
                 ViewBag.SysPerson = "disabled";
