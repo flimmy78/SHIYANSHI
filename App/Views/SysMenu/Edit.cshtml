@@ -36,7 +36,7 @@
                                class="deleteStyle">
                             <tr>
                                 <td>
-                                    <img alt="删除" title="点击删除" src="../../../Images/deleteimge.png" onclick="deleteTable('@Model.ParentId ','ParentId');" />
+                                    <img alt="删除" title="点击删除" src="../../../Images/deleteimge.png" onclick="deleteTable('@Model.ParentId','ParentId');" />
                                 </td>
                                 <td>
                                     @Model.SysMenu2.Name
@@ -180,6 +180,7 @@
                 $("#SysOperationId").val(newSysOperationId + (newSysOperationId.length > 0 ? "^" : "") + row.Id + "&" + row.Name);
             },
             onUnselect: function (row) {
+                debugger;
                 //var val = $(this).combobox('getValues');
                 var newSysOperationId = $("#SysOperationId").val();
                 var delVal = row.Id + "&" + row.Name;
