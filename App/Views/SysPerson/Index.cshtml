@@ -52,7 +52,33 @@
             sortOrder: 'desc',
             idField: 'Id',
 
+            toolbar: [
+                            {
+                                text: '详细',
+                                iconCls: 'icon-search',
+                                handler: function () {
+                                    return getView();
+                                }
+                            }, {
+                                text: '创建',
+                                iconCls: 'icon-add',
+                                handler: function () {
+                                    return flexiCreate();
+                                }
+                            }, {
+                                text: '删除',
+                                iconCls: 'icon-remove',
+                                handler: function () {
+                                    return flexiDelete();
+                                }
+                            }, {
+                                text: '修改',
+                                iconCls: 'icon-edit',
+                                handler: function () {
+                                    return flexiModify();
+                                }
 
+                            }],
             columns: [[
 
 
@@ -86,24 +112,7 @@
         var parent = window.dialogArguments; //获取父页面
         //异步获取按钮
         if (parent == "undefined" || parent == null) {
-            //首先获取iframe标签的id值
-
-            var iframeid = window.parent.$('#tabs').tabs('getSelected').find('iframe').attr("id");
-
-            //然后关闭AJAX相应的缓存
-            $.ajaxSetup({
-                cache: false
-            });
-
-            //获取按钮值
-            $.getJSON("../Home/GetToolbar", { id: iframeid }, function (data) {
-                if (data == null) {
-                    return;
-                }
-                $('#flexigridData').datagrid("addToolbarItem", data);
-
-            });
-
+            
         } else {
             //添加选择按钮
             $('#flexigridData').datagrid("addToolbarItem", [{ "text": "选择", "iconCls": "icon-ok", handler: function () { flexiSelect(); } }]);
