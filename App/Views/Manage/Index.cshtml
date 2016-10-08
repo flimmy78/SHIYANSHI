@@ -27,13 +27,14 @@
                         <p>
                     </li>
                     <li class="dropdown user user-menu system-ctrl-photo pull-right">
-                        <a href="#" class="verify-ctrl dropdown-toggle system-ctrl-photo-a" data-toggle="dropdown"> <img src="/images/user1-160x160.jpg" class="img-circle system-ctrl-photo-img" alt="用户头像"> <span class="system-ctrl-photo-span-t ">刘腾飞</span> <span class="system-ctrl-photo-span-b ">系统管理员</span> </a>
+                        <a href="#" class="verify-ctrl dropdown-toggle system-ctrl-photo-a" data-toggle="dropdown"> <img src="/images/user1-160x160.jpg" class="img-circle system-ctrl-photo-img" alt="用户头像"> 
+                        <span class="system-ctrl-photo-span-t ">@ViewBag.PersonName</span> <span class="system-ctrl-photo-span-b ">欢迎您</span> </a>
                         <ul class="dropdown-menu system-ctrl-dropdown-menu">
                             <!-- User image -->
                             <li class="user-header text-center">
                                 <img src="/images/user1-160x160.jpg" class="img-circle" alt="User Image">
-                                <p>普华</p>
-                                <p>系统管理员</p>
+                                <p>@ViewBag.PersonName </p>
+                                
                             </li>
                             <!-- Menu Body -->
                             <!-- Menu Footer-->
@@ -49,33 +50,33 @@
                     <div class="carousel-inner">
                         <div class="item column-bg-div active">
                             <div class="col-lg-4 column-div">
-                                <a class="verify-ctrl btn " href="/Home?id=Appliance">
+                                <a class="verify-ctrl btn @ViewBag.Appliance" href="/Home?id=Appliance">
                                     <img src="/images/columnht.png" class="img-circle verify-ctrl-bgcolor1" alt="">
                                     <p class="column-p">器具登记</p>
                                 </a>
                             </div>
                             <div class="col-lg-4 column-div">
-                                <a class="verify-ctrl btn " href="/Home?id=VQIJULINGQU1">
+                                <a class="verify-ctrl btn @ViewBag.VQIJULINGQU1" href="/Home?id=VQIJULINGQU1">
                                     <img src="/images/columnjm.png" class="img-circle verify-ctrl-bgcolor2" alt="">
                                     <p class="column-p">器具报告领取</p>
                                 </a>
                             </div>
                             <div class="col-lg-4 column-div">
-                                <a class="verify-ctrl btn " href="/Home?id=VRUKU">
+                                <a class="verify-ctrl btn @ViewBag.VRUKU" href="/Home?id=VRUKU">
                                     <img src="/images/column-dx.png" class="img-circle verify-ctrl-bgcolor1" alt="">
                                     <p class="column-p">器具入库</p>
                                 </a>
                             </div>
                             <div class="col-lg-4 column-div">
-                                <a class="verify-ctrl btn " href="/Home?id=VJIANDINGRENWU">
+                                <a class="verify-ctrl btn @ViewBag.VJIANDINGRENWU" href="/Home?id=VJIANDINGRENWU">
                                     <img src="/images/columnhd.png" class="img-circle verify-ctrl-bgcolor3" alt="">
                                     <p class="column-p">检定任务</p>
                                 </a>
                             </div>
                             <div class="col-lg-4 column-div " >
-                                <a class="verify-ctrl btn disabled">
+                                <a class="verify-ctrl btn  @ViewBag.VSHENPI" href="/Home?id=VSHENPI">
                                     <img src="/images/column-ys.png" class="img-circle verify-ctrl-bgcolor5" alt="">
-                                    <p class="column-p">审批管理</p>
+                                    <p class="column-p">报告批准</p>
                                 </a>
                             </div>
                             <div class="col-lg-4 column-div     ">
@@ -87,7 +88,7 @@
                         </div>
                         <div class="item column-bg-div">
                             <div class="col-lg-4 column-div ">
-                                <a class="verify-ctrl btn disabled">
+                                <a class="verify-ctrl btn @ViewBag.SysPerson" href="/Home?id=SysPerson">
                                     <img src="/images/columnvip.png" class="img-circle verify-ctrl-bgcolor4" alt="">
                                     <p class="column-p">系统管理</p>
                                 </a>
@@ -101,16 +102,17 @@
 
                     </div>
                     <!-- 轮播（Carousel）导航 -->
-                    <a class="carousel-control left" href="#myCarousel"
-                       data-slide="prev"><img src="/images/left-ctrl.png" alt=""></a> <a class="carousel-control right" href="#myCarousel"
-                                                                                        data-slide="next"><img src="/images/right-ctrl.png" alt=""></a>
+                    <a class="carousel-control left" href="#myCarousel"   data-slide="prev"><img src="/images/left-ctrl.png" alt=""></a> 
+                    <a class="carousel-control right" href="#myCarousel"  data-slide="next"><img src="/images/right-ctrl.png" alt=""></a>
                 </div>
             </div>
-            <div class="col-lg-4 col-lg-offset-4 system-ctrl-foot">
-                <p class="text-center"> 国网冀北电力公司版权所有 </p>
-                <p class="text-center">Powered by  © 2016</p>
+
+            <div class="col-lg-8 col-lg-offset-2 text-center"><br /><a href="/Home" class="btn btn-warning btn-lg">进入系统</a> </div>
+                <div class="col-lg-4 col-lg-offset-4 system-ctrl-foot">
+                    <p class="text-center"> 国网冀北电力公司版权所有 </p>
+                    <p class="text-center">Powered by  © 2016</p>
+                </div>
             </div>
-        </div>
     </div>
 
     <script type="text/javascript">

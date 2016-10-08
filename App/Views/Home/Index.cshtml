@@ -7,7 +7,7 @@
     <title>实验室管理信息系统</title>
     <link id="easyuiTheme" href="@Url.Content("~/Res/easyui/themes/default/easyui.css")" rel="stylesheet" type="text/css" />
     @Styles.Render("~/Content/css")
-    @*@Styles.Render("~/Content")*@
+   
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/easyui")
     <script type="text/javascript">
@@ -162,10 +162,13 @@
             }
             else if ('VJIANDINGRENWU' == '@ViewData["id"]') {
                 addTab("检定任务", "/@ViewData["id"]", "tu1112", false);
+            } else if ('VSHENPI' == '@ViewData["id"]') {
+                addTab("报告批准", "/@ViewData["id"]", "tu1112", false);
             }
-            else {//退出
-                location.href = '/Account/LogOff';
+            else if ('SysPerson' == '@ViewData["id"]') {
+                addTab("人员管理", "/@ViewData["id"]", "tu1112", false);
             }
+          
             $('ul li a').click(function () {
                 var tabTitle = $(this).text();
                 var url = $(this).attr("rel"); //获取地址
