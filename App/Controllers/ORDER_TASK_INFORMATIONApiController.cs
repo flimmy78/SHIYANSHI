@@ -350,6 +350,7 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>  
+        [HttpPut]
         public Common.ClientResult.Result PutUpdate([FromBody]ORDER_TASK_INFORMATION entity)
         {
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();

@@ -67,6 +67,8 @@ namespace Langben.App.Controllers
             result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";
             return result; //提示输入的数据的格式不对                 
         }
+
+       
         /// <summary>
         /// 查找委托单中的受理单位
         /// </summary>

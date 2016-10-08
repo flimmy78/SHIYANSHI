@@ -166,12 +166,7 @@
     function tuihui() {
         var arr = $('#flexigridData').datagrid('getSelections');
         if (arr.length == 1) {
-            $.ajax({
-                url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/SENDBACK/" + arr[0].ID,
-                type: "Put",
-                // async: false,
-                success: function (res) {
-                    if (res == true) {
+                    if (arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已分配.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()") {
                         $("#d").dialog('open');
                         $("#tuihuiid").val(arr[0].ID);
                         return true;
@@ -179,8 +174,6 @@
                     else {
                         $.messager.alert('操作提示', "退回数据有误！", 'info');
                     }
-                }
-            })
         }
         else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
@@ -206,6 +199,9 @@
             is = true;
         }
         if (is) {
+            //实例化一个委托单对象
+            var entity = new Object();
+            entity.ID
             var arr = {
                 ID: $("#tuihuiid").val(),
                 STORAGEINSTRUCTIONS: STORAGEINSTRUCTIONS,
@@ -213,7 +209,7 @@
                 ORDER_STATUS: ORDER_STATUS
             }
             $.ajax({
-                url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/EditSENDBACK",
+                url: "/api/APPLIANCE_LABORATORYApi/EditSENDBACK",
                 type: "Post",
                 data: arr,
                 // async: false,
