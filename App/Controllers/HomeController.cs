@@ -18,14 +18,9 @@ namespace Langben.App.Controllers
 
         public ActionResult Index(string id)
         {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                RedirectToAction("Index", "Account");
-            }
-            else
-            {
+             
                   ViewData["id"] = id;
-            }
+         
             Account account = GetCurrentAccount();
             if (account == null)
             {  
