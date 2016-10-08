@@ -356,11 +356,11 @@ namespace Langben.App.Controllers
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             {
                 string currentPerson = GetCurrentPerson();
-                if (string.IsNullOrWhiteSpace(entity.ID))
+                if (!string.IsNullOrEmpty(entity.ID))
                 {
                     entity.CREATETIME = DateTime.Now;
                     entity.CREATEPERSON = currentPerson;
-                    entity.ID = Result.GetNewId();
+                    // entity.ID = Result.GetNewId();
                     entity.ORDER_STATUS = Common.ORDER_STATUS_INFORMATION.已分配.ToString();
                     foreach (var item in entity.APPLIANCE_DETAIL_INFORMATION)
                     {
@@ -379,9 +379,11 @@ namespace Langben.App.Controllers
 
                             //器具明细信息_承接实验室表添加数据
                             List<APPLIANCE_LABORATORY> appory = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item.ID);
-                            foreach (var it in item.UNDERTAKE_LABORATORYID.TrimEnd(',').Split(','))
+                            bool a = false;
+
+                            foreach (var item2 in appory)
                             {
-                                foreach (var item2 in appory)
+                                foreach (var it in item.UNDERTAKE_LABORATORYID.TrimEnd(',').Split(','))
                                 {
                                     if (item2.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())
                                     {
@@ -397,15 +399,57 @@ namespace Langben.App.Controllers
                                             CREATETIME = new DateTime(),
                                             ISRECEIVE = Common.ISRECEIVE.是.ToString()
                                         });
+                                        a = true;
                                         break;
                                     }
+                                }
+                                if (a)
+                                {
+                                    break;
                                 }
                             }
                         }
                     }
 
                     string returnValue = string.Empty;
-                    if (m_BLL.Edit(ref validationErrors, entity))
+                    foreach (var item in entity.APPLIANCE_DETAIL_INFORMATION)
+                    {
+                        if (m_BLL2.EditField(ref validationErrors, item))
+                        {
+                            LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，器具明细信息的Id为" + item.ID, "委托单信息"
+                                                      );//写入日志 
+                            result.Code = Common.ClientCode.Succeed;
+                            result.Message = Suggestion.UpdateSucceed;
+                        }
+                        else
+                        {
+                            LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，器具明细信息的Id为" + item.ID, "委托单信息"
+                                                      );//写入日志 
+                            result.Code = Common.ClientCode.Fail;
+                            result.Message = Suggestion.UpdateFail;
+                            return result;
+                        }
+                        foreach (var item2 in item.APPLIANCE_LABORATORY)
+                        {
+                            if (m_BLL3.EditField(ref validationErrors, item2))
+                            {
+                                LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，器具明细信息_承接实验室的Id为" + item2.ID, "委托单信息"
+                           );//写入日志 
+                                result.Code = Common.ClientCode.Succeed;
+                                result.Message = Suggestion.UpdateSucceed;                             
+                            }
+                            else
+                            {
+                                LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，器具明细信息_承接实验室的Id为" + item2.ID, "委托单信息"
+                                                          );//写入日志 
+                                result.Code = Common.ClientCode.Fail;
+                                result.Message = Suggestion.UpdateFail;
+                                return result;
+                            }
+                        }
+                    }
+                   
+                    if (m_BLL.EditField(ref validationErrors, entity))
                     {
                         LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，委托单信息的信息的Id为" + entity.ID, "委托单信息"
                             );//写入日志 

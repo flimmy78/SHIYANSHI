@@ -369,8 +369,7 @@ s：字符串
                 var entity = new Object();
                 entity.APPLIANCE_DETAIL_INFORMATION = qiju;
                 entity.ID = $("#ORDER_TASK_INFORMATIONID").val();
-
-                entity.ACCEPT_ORGNIZATION = $("#ACCEPT_ORGNIZATION option:selected").val();//受理单位
+                entity.ACCEPT_ORGNIZATION = $('#ACCEPT_ORGNIZATION').combobox('getText');//受理单位
                 entity.INSPECTION_ENTERPRISE = $('#INSPECTION_ENTERPRISE').combobox('getText');//送检单位$('#com').combobox('getText')
                 entity.INSPECTION_ENTERPRISE_ADDRESS = $("#INSPECTION_ENTERPRISE_ADDRESS").val();//送检单位地址
                 entity.INSPECTION_ENTERPRISE_POST = $("#INSPECTION_ENTERPRISE_POST").val();//送检单位邮政编码
@@ -390,14 +389,11 @@ s：字符串
                         url: "/api/ORDER_TASK_INFORMATIONApi/PutUpdate",
                         type: "Put",
                         dataType: "json",
-                        data: {
-                            entity: entity
-                        },
+                        data:entity,
                         success: function (data) {
                             if (data.Code == 1) {
-
                                 $.messager.alert('操作提示', "发送实验室成功！", 'info', function () {
-                                    window.location.href = '';
+                                    window.location.href = 'javascript:history.go(-1)';
                                 });
                             }
                             else {
@@ -437,7 +433,7 @@ s：字符串
                         ID: row.APPLIANCE_DETAIL_INFORMATIONShows[i].ID
                     });
                 }
-                $("#ACCEPT_ORGNIZATION").val(row.ACCEPT_ORGNIZATION);//受理单位
+                $("#ACCEPT_ORGNIZATION").combobox('select', row.ACCEPT_ORGNIZATION);//受理单位
                 $("#INSPECTION_ENTERPRISE").combobox('select', row.INSPECTION_ENTERPRISE);//送检单位
                 $("#INSPECTION_ENTERPRISE_ADDRESS").val(row.INSPECTION_ENTERPRISE_ADDRESS);//送检单位地址
                 $("#INSPECTION_ENTERPRISE_POST").val(row.INSPECTION_ENTERPRISE_POST);//送检单位邮政编码
