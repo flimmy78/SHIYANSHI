@@ -166,14 +166,14 @@
     function tuihui() {
         var arr = $('#flexigridData').datagrid('getSelections');
         if (arr.length == 1) {
-                    if (arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已分配.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()") {
-                        $("#d").dialog('open');
-                        $("#tuihuiid").val(arr[0].ID);
-                        return true;
-                    }
-                    else {
-                        $.messager.alert('操作提示', "退回数据有误！", 'info');
-                    }
+            if (arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已分配.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()") {
+                $("#d").dialog('open');
+                $("#tuihuiid").val(arr[0].ID);
+                return true;
+            }
+            else {
+                $.messager.alert('操作提示', "退回数据有误！", 'info');
+            }
         }
         else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
@@ -189,29 +189,28 @@
         var ORDER_STATUS = null;
         var is = false;
         if (tuihu == "1") {
-            STORAGEINSTRUCTIONS = $("#STORAGEINSTRUCTIONS").val();
+            RETURN_INSTRUCTIONS = $("#STORAGEINSTRUCTIONS").val();
             ORDER_STATUS = "@Common.ORDER_STATUS.已退回.ToString()";
             is = true;
         }
         else if (tuihu == "2") {
-            RETURN_INSTRUCTIONS = $("#STORAGEINSTRUCTIONS").val();
+            STORAGEINSTRUCTIONS = $("#STORAGEINSTRUCTIONS").val();
             ORDER_STATUS = "@Common.ORDER_STATUS.待入库.ToString()";
             is = true;
         }
         if (is) {
             //实例化一个委托单对象
             var entity = new Object();
-            entity.ID
-            var arr = {
-                ID: $("#tuihuiid").val(),
-                STORAGEINSTRUCTIONS: STORAGEINSTRUCTIONS,
-                RETURN_INSTRUCTIONS: RETURN_INSTRUCTIONS,
-                ORDER_STATUS: ORDER_STATUS
-            }
+            var arr = { ID: $("#tuihuiid").val() };
+            entity.APPLIANCE_DETAIL_INFORMATION = arr,
+            entity.RETURN_INSTRUCTIONS = RETURN_INSTRUCTIONS,
+            entity.APPLIANCE_DETAIL_INFORMATION.STORAGEINSTRUCTIONS = STORAGEINSTRUCTIONS,
+            entity.ORDER_STATUS = ORDER_STATUS
+
             $.ajax({
                 url: "/api/APPLIANCE_LABORATORYApi/EditSENDBACK",
                 type: "Post",
-                data: arr,
+                data: entity,
                 // async: false,
                 success: function (res) {
                     if (res.Code == 1) {
@@ -262,7 +261,7 @@
             height: 'auto',
             //nowrap: false,
             striped: true,
-           // fit:true,
+            // fit:true,
             collapsible: true,
             url: '../VJIANDINGRENWU/GetData', //获取数据的url
             sortName: 'EQUIPMENT_STATUS_VALUUMN',
