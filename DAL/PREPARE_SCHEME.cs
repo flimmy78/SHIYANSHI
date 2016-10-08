@@ -11,8 +11,7 @@ namespace Langben.DAL
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class PREPARE_SCHEME
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -42,7 +41,6 @@ namespace Langben.DAL
         public Nullable<System.DateTime> CALIBRATION_DATE { get; set; }
         public string CONCLUSION { get; set; }
         public string CONCLUSION_EXPLAIN { get; set; }
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> VALIDITY_PERIOD { get; set; }
         public string CALIBRATION_INSTRUCTIONS { get; set; }
         public string ACCURACY_GRADE { get; set; }
@@ -70,6 +68,7 @@ namespace Langben.DAL
         public Nullable<decimal> SERIALNUMBER { get; set; }
         public string YEARS { get; set; }
         public string PACKAGETYPE { get; set; }
+        public string OTHER { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<APPLIANCE_LABORATORY> APPLIANCE_LABORATORY { get; set; }

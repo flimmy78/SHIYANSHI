@@ -210,6 +210,10 @@ namespace Langben.DAL
         [ScaffoldColumn(true)]
         [Display(Name = "报告状态值", Order = 42)]
         public object REPORTSTATUSZI { get; set; }
+
+        [ScaffoldColumn(true)]
+        [Display(Name = "其他", Order = 43)]
+        public object OTHER { get; set; }
     }
 }
 

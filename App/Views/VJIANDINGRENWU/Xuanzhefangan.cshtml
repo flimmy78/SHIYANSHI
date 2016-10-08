@@ -134,7 +134,7 @@
                 </div>
                 <div class="input_search-field">
                     <a class="easyui-linkbutton" onclick="shangchuan()">报告上传</a>
-                    <input type="submit" class="easyui-linkbutton" value="建立方案" style="width:auto; padding:0 8px; line-height:25px; " />
+                    <a class="easyui-linkbutton" onclick="fangan()">建立方案</a>
                     <a class="easyui-linkbutton" onclick="BackList('VJIANDINGRENWU')">返回</a>
                 </div>
             </div>
@@ -237,13 +237,51 @@
                             });
                         }
                     }
-
-
                 }
             })
         }
     }
-
+    //建立方案
+    function fangan() {
+        var arr = {
+            REPORT_CATEGORY: $("#REPORT_CATEGORY").val(),//报告类别
+            CERTIFICATE_CATEGORY: $("#CERTIFICATE_CATEGORY").val(),//证书类别
+            CNAS: $("input[name='CNAS']:checked").val(),//CNAS
+            CERTIFICATION_AUTHORITY: $("input[name='CERTIFICATION_AUTHORITY']:checked").val(),//检定授权
+            CONTROL_NUMBER: $("#CONTROL_NUMBER").val(),//控制编号
+            QUALIFICATIONS: $("#QUALIFICATIONS").val(),//资质
+            APPLIANCE_LABORATORYID: $("#APPLIANCE_LABORATORYID").val(),
+            ID: $("#ID_String").val()
+        }
+        if (baogaoif(arr)) {
+            $.ajax({
+                url: "/api/PREPARE_SCHEMEApi/Post",
+                type: "Post",
+                data: arr,
+                dataType: "json",
+                success: function (data) {
+                    if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                    else if (data.Code == 1) {
+                        var id = "@ViewBag.Id";
+                        var di = data.Id;
+                        window.location.href = "/VJIANDINGRENWU/JianLiFangAn/" + di + "|@ViewBag.APPLIANCE_DETAIL_INFORMATIONID";
+                        return false;
+                    }
+                    else {
+                        if ($.messager) {
+                            $.messager.defaults.ok = '继续';
+                            $.messager.defaults.cancel = '返回';
+                            $.messager.confirm('操作提示', data.Message, function (r) {
+                                if (!r) {
+                                    window.location.href = 'javascript:history.go(-1)';
+                                }
+                            });
+                        }
+                    }
+                }
+            })
+        }
+    }
     //重新绑定资质
     function zizhiget(arr) {
         var zhi = $(arr).attr("atps");

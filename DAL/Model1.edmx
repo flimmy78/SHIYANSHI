@@ -608,6 +608,7 @@
           <Property Name="SERIALNUMBER" Type="number" Precision="38" Scale="0" />
           <Property Name="YEARS" Type="nvarchar2" MaxLength="200" />
           <Property Name="PACKAGETYPE" Type="nvarchar2" MaxLength="200" />
+          <Property Name="OTHER" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="PRINTREPORT">
           <Key>
@@ -3589,6 +3590,7 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <NavigationProperty Name="QUALIFIED_UNQUALIFIED_TEST_ITE" Relationship="Model.FK_QUALIFIED_UN" FromRole="PREPARE_SCHEME" ToRole="QUALIFIED_UNQUALIFIED_TEST_ITE" />
           <NavigationProperty Name="REPORTCOLLECTION" Relationship="Model.FK_REPORTCO_REFERENCE_PREPARE_" FromRole="PREPARE_SCHEME" ToRole="REPORTCOLLECTION" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.METERING_STANDARD_DEVICEPREPAR" FromRole="PREPARE_SCHEME" ToRole="METERING_STANDARD_DEVICE" />
+          <Property Name="OTHER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PRINTREPORT">
           <Key>
@@ -5642,6 +5644,7 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <EntitySetMapping Name="PREPARE_SCHEME">
             <EntityTypeMapping TypeName="Model.PREPARE_SCHEME">
               <MappingFragment StoreEntitySet="PREPARE_SCHEME">
+                <ScalarProperty Name="OTHER" ColumnName="OTHER" />
                 <ScalarProperty Name="PACKAGETYPE" ColumnName="PACKAGETYPE" />
                 <ScalarProperty Name="YEARS" ColumnName="YEARS" />
                 <ScalarProperty Name="SERIALNUMBER" ColumnName="SERIALNUMBER" />

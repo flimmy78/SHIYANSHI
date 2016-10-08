@@ -149,6 +149,7 @@
     <Compile Include="Codes\BaseApiController.cs" />
     <Compile Include="Codes\BaseController.cs" />
     <Compile Include="Codes\CommonFunc.cs" />
+    <Compile Include="Codes\SysPersonModels.cs" />
     <Compile Include="Codes\LogClassModels.cs" />
     <Compile Include="Codes\SupportFilter.cs" />
     <Compile Include="Codes\COMPANYModels .cs" />
@@ -195,6 +196,7 @@
     <Compile Include="Models\APPLIANCE_LABORATORYShow .cs" />
     <Compile Include="Models\BaseException.cs" />
     <Compile Include="Models\APPLIANCE_DETAIL_INFORMATIONShow.cs" />
+    <Compile Include="Models\PREPARE_SCHEMEShow.cs" />
     <Compile Include="Models\ORDER_TASK_INFORMATIONShow.cs" />
     <Compile Include="Models\EmptyClass.cs" />
     <Compile Include="Models\SysDepartmentTreeModel.cs" />

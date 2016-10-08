@@ -14,6 +14,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using Langben.App.Models;
 
+
 namespace Langben.App.Controllers
 {
     /// <summary>
@@ -55,7 +56,7 @@ namespace Langben.App.Controllers
             ViewBag.Id = Id;
             ViewBag.APPLIANCE_LABORATORYID = APPLIANCE_LABORATORYID;
             ViewBag.APPLIANCE_DETAIL_INFORMATIONID = id;//器具明细表id
-            
+
             string erchizi = string.Empty;
             if (!string.IsNullOrEmpty(Id))
             {
@@ -83,8 +84,8 @@ namespace Langben.App.Controllers
             string[] bs = id.Split('|');
             ViewBag.PREPARE_SCHEMEID = bs[0];
             PREPARE_SCHEME prepare = m_BLL3.GetById(bs[0]);
-           // List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(bs[0]);
-            
+            // List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(bs[0]);
+
             foreach (var item in prepare.FILE_UPLOADER)
             {
                 ViewBag.NAME2 = item.NAME2;
@@ -207,7 +208,7 @@ namespace Langben.App.Controllers
                 if (Edit)
                 {
                     //FILE_UPLOADER file_uplo = m_BLL2.GetById(uplo.ID);//取预备方案id
-                   // pre.ID = file_uplo.PREPARE_SCHEMEID;
+                    // pre.ID = file_uplo.PREPARE_SCHEMEID;
                     Edit = m_BLL3.EditField(ref validationErrors, pre);
                 }
                 if (Edit)
@@ -242,8 +243,33 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult JianLiFangAn(string id)
         {
-            ViewBag.Id = id;
-            return View();
+            id = "161008163205467348401f1aec5a1|161008162529892766577f2f96359";
+            Common.Account account = GetCurrentAccount();
+            string[] bs = id.Split('|');
+            string PREPARE_SCHEMEID = bs[0];//预备方案id
+            string APPLIANCE_DETAIL_INFORMATIONID = bs[1];//器具明细id
+            APPLIANCE_DETAIL_INFORMATION appion = m_BLL5.GetById(APPLIANCE_DETAIL_INFORMATIONID);//器具明细表
+            PREPARE_SCHEME prme = m_BLL3.GetById(PREPARE_SCHEMEID);//预备方案表
+            PREPARE_SCHEMEShow prepShow = new PREPARE_SCHEMEShow();//预备方案类
+            prepShow.REPORTNUMBER = m_BLL3.GetSerialNumber(PREPARE_SCHEMEID);//报告编号
+            prepShow.APPLIANCE_DETAIL_INFORMATIONShows.APPLIANCE_NAME = appion.APPLIANCE_NAME;//器具名称
+            prepShow.APPLIANCE_DETAIL_INFORMATIONShows.VERSION = appion.VERSION;//器具型号
+            prepShow.APPLIANCE_DETAIL_INFORMATIONShows.FORMAT = appion.FORMAT;//器具规格
+            prepShow.APPLIANCE_DETAIL_INFORMATIONShows.FACTORY_NUM = appion.FACTORY_NUM;//出厂编号
+            prepShow.ACCURACY_GRADE = prme.ACCURACY_GRADE;//准确度等级
+            prepShow.RATED_FREQUENCY = prme.RATED_FREQUENCY;//额定频率
+            prepShow.PULSE_CONSTANT = prme.PULSE_CONSTANT;//脉冲常数
+            prepShow.APPLIANCE_DETAIL_INFORMATIONShows.MAKE_ORGANIZATION = appion.MAKE_ORGANIZATION;//制造单位
+            prepShow.TEMPERATURE = prme.TEMPERATURE;//环境温度
+            prepShow.HUMIDITY = prme.HUMIDITY;//相对湿度
+            prepShow.CHECK_PLACE = prme.CHECK_PLACE;//检定/校准地点
+            prepShow.CALIBRATION_DATE = prme.CALIBRATION_DATE;//检定/校准日期
+            prepShow.DETECTERID = prme.DETECTERID;//核验员
+            prepShow.OTHER = prme.OTHER;//其他 
+            ViewBag.CERTIFICATE_CATEGORY = prme.CERTIFICATE_CATEGORY;//证书类别
+            ViewBag.UNDERTAKE_LABORATORY_NAME = account.UNDERTAKE_LABORATORYName;//实验室
+            //return Json(prepShow);
+            return View(prepShow);
         }
         /// <summary>
         /// 异步加载数据
@@ -304,7 +330,7 @@ namespace Langben.App.Controllers
                     ,
                     NAME = s.NAME,
                     VERSION = s.VERSION,
-                    ISRECEIVE=s.ISRECEIVE
+                    ISRECEIVE = s.ISRECEIVE
                 }
 
                     )
