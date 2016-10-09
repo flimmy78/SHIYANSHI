@@ -1,0 +1,93 @@
+﻿
+@model Langben.DAL.SCHEME
+@{ Layout = "~/Views/Shared/FangAnIndex.cshtml"; }
+@using Common
+@using Models
+<script src="~/Scripts/JScriptIndex.js"></script>
+ 
+<br style="clear: both;" />
+
+<script type="text/javascript" language="javascript">
+    $(function () {               
+        $('#flexigridData').datagrid({
+            //title: '方案', //列表的标题
+            iconCls: 'icon-site',
+            width: 'auto',
+            height: 'auto',
+            //nowrap: false,
+            striped: true,
+            collapsible: true,
+            url: '/api/SCHEMEApi/PostData', //获取数据的url
+            sortName: 'ID',
+            sortOrder: 'desc',
+            idField: 'ID',
+            queryParams: { search: GetQuery() },//默认查询条件                    
+             
+            columns: [[
+               
+                {
+                    field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', align: 'center'
+                   }
+                , { field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width:150,align: 'center' }
+                @*, {
+                    field: 'PUBLISHTIME', title: '@Html.DisplayNameFor(model => model.PUBLISHTIME)', width:250,align: 'center'
+                , formatter: formatDatebox
+                  }*@
+                @*, { field: 'REPORT_CATEGORY', title: '@Html.DisplayNameFor(model => model.REPORT_CATEGORY)', width: 51 }*@
+                @*, { field: 'CERTIFICATE_CATEGORY', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 51 }*@
+                , { field: 'STATUS', title: '@Html.DisplayNameFor(model => model.STATUS)', width:140,align: 'center' }
+                
+            ]],
+            pagination: true,
+            rownumbers: true
+
+        });
+
+        var parent = window.dialogArguments; //获取父页面
+        if (parent == "undefined" || parent == null) {
+            //    不是在iframe中打开的
+        } else {
+            //隐藏所有的按钮和分隔符
+            $(".l-btn.l-btn-plain").hide();
+            $(".datagrid-btn-separator").hide();
+            //添加选择按钮
+            $('#flexigridData').datagrid("addToolbarItem", [{ "text": "选择", "iconCls": "icon-ok", handler: function () { flexiSelect(); } }]);
+        }
+    });
+
+    //“查询”按钮，弹出查询框
+    function flexiQuery() {        
+        //执行查询
+        $('#flexigridData').datagrid('load', { search: GetQuery() });
+    };
+   //将查询条件按照分隔符拼接成字符串
+    function GetQuery() {
+        var search = "UNDERTAKE_LABORATORYID&@ViewBag.shiyanshi^ISSTOP&启用";
+       
+        return search;
+    }
+   
+    //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
+    function flexiSelect() {
+
+        var rows = $('#flexigridData').datagrid('getSelections');
+        if (rows.length == 0) {
+            $.messager.alert('操作提示', '请选择数据!', 'warning');
+            return false;
+        }
+
+        var arr = [];
+        for (var i = 0; i < rows.length; i++) {
+            arr.push(rows[i].ID);
+        }
+        arr.push("^");
+        for (var i = 0; i < rows.length; i++) {
+            arr.push(rows[i].NAME);
+        }
+        //主键列和显示列之间用 ^ 分割   每一项用 , 分割
+        if (arr.length > 0) {//一条数据和多于一条
+            returnParent(arr.join("&")); //每一项用 & 分割
+        }
+    } 
+</script>
+

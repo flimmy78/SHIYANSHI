@@ -24,13 +24,20 @@
         <div class="clearfix"></div>
         <div class="input_search">
             <div class="input_search-label">
-                选择方案模板：
+                <a class="anUnderLine" onclick="showModalOnly('SCHEMEID', '../../SCHEME/Selected');">
+                    选择方案模板
+                </a>：
             </div>
             <div class="input_search-field">
-                <label>指示仪表-xxx1</label>
-                <input type="button" value="选择" style="width:auto" />
+                <div id="checkSCHEMEID">
+                </div>
+                @Html.HiddenFor(model => model.SCHEMEID)
             </div>
         </div>
+        
+        
+
+
         <div class="clearfix"></div>
         <b>被检器具主要参数</b>
         <div class="clearfix"></div>
@@ -216,11 +223,11 @@
         //添加日期控件
         $("#CALIBRATION_DATE").datebox({ "required": true });//true为必填项
         //核验员数据加载
-        $("#DETECTERID").combobox('select', @Model.DETECTERID);
+        $("#DETECTERID").combobox('select', '@Model.DETECTERID');
         //************************
         $('#w').window('close')
 
-        if ("@ViewBag.UNDERTAKE_LABORATORY_NAME"=="@Common.LABORATORYNAME.电能.ToString()") {
+        if ("@ViewBag.UNDERTAKE_LABORATORY_NAME" == "@Common.LABORATORYNAME.电能.ToString()") {
             //标准装置绑定
             $('#biaozhuizhuangzi').datagrid({
                 title: '标准装置', //列表的标题
@@ -257,7 +264,7 @@
                 ]],
             })
         }
-       
+
         //标准器绑定
         $('#biaozhuiqi').datagrid({
             title: '标准器', //列表的标题
@@ -293,7 +300,7 @@
 					, { field: 'ORDER_NUMBER', title: '测量范围', width: 64 }
             ]],
         })
-       
+
     });
     //标准器的选择
     function biaozhunqi() {

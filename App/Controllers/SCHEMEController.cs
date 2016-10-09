@@ -28,13 +28,14 @@ namespace Langben.App.Controllers
         {
             return View();
         }
-         /// <summary>
+        /// <summary>
         /// 列表
         /// </summary>
         /// <returns></returns>
-        public ActionResult IndexSef()
+        public ActionResult Selected()
         {
-
+            var data = GetCurrentAccount();
+            ViewBag.shiyanshi = data.UNDERTAKE_LABORATORYName;
             return View();
         }
 
@@ -43,7 +44,7 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [SupportFilter]  
+        [SupportFilter]
         public ActionResult Details(string id)
         {
             ViewBag.Id = id;
@@ -67,7 +68,7 @@ namespace Langben.App.Controllers
             {
                 entity = m_BLL.GetById(ID);
             }
-            if(entity==null)
+            if (entity == null)
             {
                 ViewBag.ID = "";
             }
@@ -76,7 +77,7 @@ namespace Langben.App.Controllers
                 ViewBag.UNDERTAKE_LABORATORYID = entity.UNDERTAKE_LABORATORYID;
                 IBLL.ISCHEME_RULEBLL mr_BLL = new SCHEME_RULEBLL();
                 ViewBag.RuleIDs = mr_BLL.GetRuleIDsBySCHEMEID(ID);
-               
+
             }
             if (OP != null && OP == "复制")
             {
@@ -84,7 +85,7 @@ namespace Langben.App.Controllers
                 ViewBag.ID = "";
                 entity.COPYID = ID;
             }
-            return View(entity);           
+            return View(entity);
         }
         /// <summary>
         /// 修改
@@ -96,9 +97,9 @@ namespace Langben.App.Controllers
         /// <param name="OP">操作</param>
         /// <param name="COPYID">复制方案ID</param>
         /// <returns></returns>
-        public ActionResult Save(string ID, string NAME, string UNDERTAKE_LABORATORYID, string RULEIDs,string OP,string COPYID)
+        public ActionResult Save(string ID, string NAME, string UNDERTAKE_LABORATORYID, string RULEIDs, string OP, string COPYID)
         {
-            if(ID==null || ID.Trim()=="")
+            if (ID == null || ID.Trim() == "")
             {
                 return CreateSave(NAME, UNDERTAKE_LABORATORYID, RULEIDs, COPYID);
             }
@@ -115,7 +116,7 @@ namespace Langben.App.Controllers
         /// <param name="RULEIDs">检查项编号多个,分割例如（1,2)</param>
         /// <param name="COPYID">复制方案ID</param>
         /// <returns></returns>
-        public ActionResult CreateSave(string NAME, string UNDERTAKE_LABORATORYID, string RULEIDs,string COPYID)
+        public ActionResult CreateSave(string NAME, string UNDERTAKE_LABORATORYID, string RULEIDs, string COPYID)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             SCHEME entity = new SCHEME();
@@ -137,7 +138,7 @@ namespace Langben.App.Controllers
                     if (ruleID != null && ruleID.Trim() != "")
                     {
                         SCHEME_RULE item = new SCHEME_RULE();
-                        item.CREATEPERSON = currentPerson;                        
+                        item.CREATEPERSON = currentPerson;
                         item.CREATETIME = DateTime.Now;
                         item.RULEID = ruleID;
                         item.SCHEMEID = entity.ID;
@@ -174,8 +175,8 @@ namespace Langben.App.Controllers
                 result.Code = Common.ClientCode.Fail;
                 result.Message = Suggestion.InsertFail + returnValue;
                 return Json(result); //提示插入失败
-            }   
-                 
+            }
+
         }
 
         /// <summary>
@@ -186,7 +187,7 @@ namespace Langben.App.Controllers
         /// <param name="UNDERTAKE_LABORATORYID">实验室编号</param>
         /// <param name="RULEIDs">检查项编号多个,分割例如（1,2)</param>       
         /// <returns></returns>
-        public ActionResult UpdateSave(string ID,string NAME, string UNDERTAKE_LABORATORYID, string RULEIDs)
+        public ActionResult UpdateSave(string ID, string NAME, string UNDERTAKE_LABORATORYID, string RULEIDs)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (ID != null && ID.Trim() != "")
@@ -203,19 +204,19 @@ namespace Langben.App.Controllers
                     entity.NAME = NAME;
                     entity.UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID;
 
-                    if(entity.SCHEME_RULE!=null && entity.SCHEME_RULE.Count>0)
+                    if (entity.SCHEME_RULE != null && entity.SCHEME_RULE.Count > 0)
                     {
                         SCHEME_RULEBLL rBll = new SCHEME_RULEBLL();
                         string[] rIDs = new string[entity.SCHEME_RULE.Count];
                         int i = 0;
-                        foreach(SCHEME_RULE r in entity.SCHEME_RULE.ToList())
+                        foreach (SCHEME_RULE r in entity.SCHEME_RULE.ToList())
                         {
                             rIDs[i] = r.ID;
                             i++;
                         }
                         rBll.DeleteCollection(ref validationErrors, rIDs);
-                    }                    
-                    
+                    }
+
                     if (RULEIDs != null && RULEIDs.Trim() != "")
                     {
                         int i = 1;
@@ -315,7 +316,7 @@ namespace Langben.App.Controllers
                         result.Message = Suggestion.DeleteFail + returnValue;
                     }
                 }
-                else if (Op == "停用" || Op=="启用")
+                else if (Op == "停用" || Op == "启用")
                 {
                     List<SCHEME> list = new List<SCHEME>();
                     foreach (string id in deleteId)
@@ -326,7 +327,7 @@ namespace Langben.App.Controllers
                         entity.UPDATETIME = DateTime.Now;
                         entity.ISSTOP = Op;
                         list.Add(entity);
-                    }                    
+                    }
                     if (m_BLL.EditCollection(ref validationErrors, list.AsQueryable<SCHEME>()))
                     {
                         LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，方案的Id为" + string.Join(",", deleteId), "消息");//修改成功，写入日志
@@ -352,11 +353,11 @@ namespace Langben.App.Controllers
         /// <param name="UNDERTAKE_LABORATORYID">实验室编号</param>
         /// <param name="RULEIDs">检查项编号多个,分割例如（1,2)</param>
         /// <returns></returns>
-        public ActionResult UpdateIsStop(string ID,string ISSTOP)
+        public ActionResult UpdateIsStop(string ID, string ISSTOP)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
-            SCHEME entity = m_BLL.GetById(ID);            
-           
+            SCHEME entity = m_BLL.GetById(ID);
+
 
             if (entity != null && ModelState.IsValid)
             {   //数据校验
@@ -402,8 +403,8 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="id">主键</param>
         /// <returns></returns> 
-        [SupportFilter] 
-        public ActionResult Edit(string id,string op)
+        [SupportFilter]
+        public ActionResult Edit(string id, string op)
         {
             ViewBag.Id = id;
             SCHEME entity = m_BLL.GetById(id);
@@ -422,7 +423,7 @@ namespace Langben.App.Controllers
         {
             m_BLL = bll;
         }
-        
+
     }
 }
 
