@@ -133,8 +133,8 @@
                     
                 </div>
                 <div class="input_search-field">
-                    <a class="easyui-linkbutton" onclick="shangchuan()">报告上传</a>
-                    <a class="easyui-linkbutton" onclick="fangan()">建立方案</a>
+                    <a class="easyui-linkbutton" onclick="shangchuan()" id="sc">报告上传</a>
+                    <a class="easyui-linkbutton" onclick="fangan()" id="jl">建立方案</a>
                     <a class="easyui-linkbutton" onclick="BackList('VJIANDINGRENWU')">返回</a>
                 </div>
             </div>
@@ -380,6 +380,13 @@
                 $(this).attr("disabled",true);
             });
         }
+        //判断什么按钮可用
+        if ("@ViewBag.PACKAGETYPE"=="@Common.PACKAGETYPE.上传.ToString()") {
+            $("#jl").attr("disabled", true);
+        }
+        else if ("@ViewBag.PACKAGETYPE" == "@Common.PACKAGETYPE.生成.ToString()") {
+            $("#sc").attr("disabled", true);
+        } 
     })
     $(function () {
         //查询受理单位
