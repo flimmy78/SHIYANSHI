@@ -70,8 +70,9 @@ namespace Langben.App.Controllers
                 erchizi += "CNAS*" + prepare.CNAS;
                 ViewBag.SBL = erchizi;
                 ViewBag.REPORTSTATUS = prepare.REPORTSTATUS;//报告状态（前段判断是否能修改）
+                ViewBag.PACKAGETYPE = prepare.PACKAGETYPE;//判断报告类型是上传还是系统生成，用来判断启用上传报告还是建立方案
             }
-            ViewBag.SYS = account.UNDERTAKE_LABORATORYName;
+            ViewBag.SYS = account.UNDERTAKE_LABORATORYName;//实验室
             return View();
         }
         /// <summary>
@@ -243,12 +244,13 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult JianLiFangAn(string id)
         {
-            id = "161008163205467348401f1aec5a1|161008162529892766577f2f96359";
+            //id = "161008163205467348401f1aec5a1|161008162529892766577f2f96359";
             Common.Account account = GetCurrentAccount();
             string[] bs = id.Split('|');
             string PREPARE_SCHEMEID = bs[0];//预备方案id
             string APPLIANCE_DETAIL_INFORMATIONID = bs[1];//器具明细id
             APPLIANCE_DETAIL_INFORMATION appion = m_BLL5.GetById(APPLIANCE_DETAIL_INFORMATIONID);//器具明细表
+            List<METERING_STANDARD_DEVICE> mete = m_BLL3.GetRefMETERING_STANDARD_DEVICE(PREPARE_SCHEMEID);//标准装置/计量标准器信息表
             PREPARE_SCHEME prme = m_BLL3.GetById(PREPARE_SCHEMEID);//预备方案表
             PREPARE_SCHEMEShow prepShow = new PREPARE_SCHEMEShow();//预备方案类
             prepShow.REPORTNUMBER = m_BLL3.GetSerialNumber(PREPARE_SCHEMEID);//报告编号
@@ -266,9 +268,56 @@ namespace Langben.App.Controllers
             prepShow.CALIBRATION_DATE = prme.CALIBRATION_DATE;//检定/校准日期
             prepShow.DETECTERID = prme.DETECTERID;//核验员
             prepShow.OTHER = prme.OTHER;//其他 
+            prepShow.ID = prme.ID;//id
+            #region 标准装置/计量标准器相关数据
+            prepShow.METERING_STANDARD_DEVICEShow = mete.Select(m => new METERING_STANDARD_DEVICEShow
+            {
+                ID = m.ID,
+                NAME = m.NAME,
+                TEST_RANGE = m.TEST_RANGE,
+                FACTORY_NUM = m.FACTORY_NUM,
+                CATEGORY = m.CATEGORY,
+                STATUS = m.STATUS,
+                UNDERTAKE_LABORATORYID = m.UNDERTAKE_LABORATORYID,
+                CREATETIME = m.CREATETIME,
+                CREATEPERSON = m.CREATEPERSON,
+                UPDATETIME = m.UPDATETIME,
+                UPDATEPERSON = m.UPDATEPERSON,
+                METERING_STANDARD_DEVICE_CHECKShow = m.METERING_STANDARD_DEVICE_CHECK.Select(s => new METERING_STANDARD_DEVICE_CHECKShow
+                {
+                    ID = s.ID,
+                    CERTIFICATE_NUM = s.CERTIFICATE_NUM,
+                    CHECK_DATE = s.CHECK_DATE,
+                    VALID_TO = s.VALID_TO,
+                    METERING_STANDARD_DEVICEID = s.METERING_STANDARD_DEVICEID,
+                    CREATETIME = s.CREATETIME,
+                    CREATEPERSON = s.CREATEPERSON,
+                    UPDATETIME = s.UPDATETIME,
+                    UPDATEPERSON = s.UPDATEPERSON
+                }).ToList(),
+                ALLOWABLE_ERRORShow = m.ALLOWABLE_ERROR.Select(e => new ALLOWABLE_ERRORShow
+                {
+                    ID = e.ID,
+                    VALUE = e.VALUE,
+                    UNIT = e.UNIT,
+                    METERING_STANDARD_DEVICEID = e.METERING_STANDARD_DEVICEID,
+                    CREATETIME = e.CREATETIME,
+                    CREATEPERSON = e.CREATEPERSON,
+                    UPDATETIME = e.UPDATETIME,
+                    UPDATEPERSON = e.UPDATEPERSON
+                }).ToList()
+            }).ToList();
+            #endregion
             ViewBag.CERTIFICATE_CATEGORY = prme.CERTIFICATE_CATEGORY;//证书类别
             ViewBag.UNDERTAKE_LABORATORY_NAME = account.UNDERTAKE_LABORATORYName;//实验室
-            //return Json(prepShow);
+            foreach (var item in prme.APPLIANCE_LABORATORY)
+            {
+                if (item.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName)
+                {
+                    ViewBag.ORDER_STATUS = item.ORDER_STATUS;//器具状态
+                }
+            }
+            ViewBag.ACCEPT_ORGNIZATION = appion.ORDER_TASK_INFORMATION.ACCEPT_ORGNIZATION;//受理单位
             return View(prepShow);
         }
         /// <summary>
@@ -342,6 +391,7 @@ namespace Langben.App.Controllers
         IBLL.IPREPARE_SCHEMEBLL m_BLL3;
         IBLL.IAPPLIANCE_LABORATORYBLL m_BLL4;
         IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL m_BLL5;
+
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VJIANDINGRENWUController()

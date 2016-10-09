@@ -34,6 +34,13 @@ namespace Langben.IBLL
         /// <returns></returns>
         [OperationContract]
         bool EditField(ref Common.ValidationErrors validationErrors, PREPARE_SCHEME entity);
+        /// <summary>
+        /// 获取在该表一条数据中，出现的所有外键实体
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [OperationContract]
+        List<METERING_STANDARD_DEVICE> GetRefMETERING_STANDARD_DEVICE(string id);
     }
 }
 

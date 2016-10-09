@@ -10,8 +10,10 @@ namespace Langben.App.Models
         public PREPARE_SCHEMEShow()
         {
             APPLIANCE_DETAIL_INFORMATIONShows = new APPLIANCE_DETAIL_INFORMATIONShow();
+            METERING_STANDARD_DEVICEShow = new List<METERING_STANDARD_DEVICEShow>();
         }
         public APPLIANCE_DETAIL_INFORMATIONShow APPLIANCE_DETAIL_INFORMATIONShows { get; set; }
+        public List<METERING_STANDARD_DEVICEShow> METERING_STANDARD_DEVICEShow { get; set; }
         public string ID { get; set; }
         public string REPORT_CATEGORY { get; set; }
         public string CERTIFICATE_CATEGORY { get; set; }
