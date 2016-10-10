@@ -2,6 +2,9 @@
 --delete from PROJECTTEMPLET where 1=1
 --delete from SCHEME where 1=1
 --delete from RULE where 1=1
+--delete from QUALIFIED_UNQUALIFIED_TEST_ITE where 1=1
+--update PREPARE_SCHEME set SCHEMEID='16100702025723755353249195bcb' where 1=1
+
 
 --JJG 315-1983 直流数字电压表试行检定规程
 Insert into RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('38-1987','JJG(航天) 38-1987 直流标准电流源检定规程','JJG(航天) 38-1987 直流标准电流源检定规程',null,1,'否',null,'数表三相',null,null,null,null,null,null);
