@@ -288,6 +288,10 @@
         arr.RATED_FREQUENCY = $("#RATED_FREQUENCY").val();//额定频率
         arr.OTHER = $("#OTHER").val();//其他
         arr.ID = "@Model.ID";
+        if (arr.SCHEMEID=='') {
+            $.messager.alert('操作提示', "请选择方案模板！", 'error');
+            return;
+        }
         if (ifshuju(arr)) {
             $.ajax({
                 url: "/api/PREPARE_SCHEMEApi/EditField",

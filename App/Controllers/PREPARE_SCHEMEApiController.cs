@@ -147,12 +147,12 @@ namespace Langben.App.Controllers
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             if (entity != null && ModelState.IsValid)
             {
-                if (string.IsNullOrWhiteSpace(entity.SCHEMEID))
-                {
-                    result.Code = Common.ClientCode.FindNull;
-                    result.Message = Suggestion.InsertFail + "，请选择方案模板"; //提示输入的数据的格式不对 
-                    return result;
-                }
+                //if (entity.ID != null && string.IsNullOrWhiteSpace(entity.SCHEMEID))
+                //{
+                //    result.Code = Common.ClientCode.FindNull;
+                //    result.Message = Suggestion.InsertFail + "，请选择方案模板"; //提示输入的数据的格式不对 
+                //    return result;
+                //}
                 string currentPerson = GetCurrentPerson();
                 entity.CREATETIME = DateTime.Now;
                 entity.CREATEPERSON = currentPerson;
@@ -430,7 +430,7 @@ namespace Langben.App.Controllers
                     if (entity.APPROVALISAGGREY == "不同意")
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.批准驳回.ToString();
-                        entity.REPORTSTATUSZI = Common.REPORTSTATUS.批准驳回.GetHashCode().ToString();                      
+                        entity.REPORTSTATUSZI = Common.REPORTSTATUS.批准驳回.GetHashCode().ToString();
                         int i = APPlist.Count;
                         if (i > 1)
                         {
