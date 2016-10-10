@@ -147,6 +147,12 @@ namespace Langben.App.Controllers
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             if (entity != null && ModelState.IsValid)
             {
+                if (string.IsNullOrWhiteSpace(entity.SCHEMEID))
+                {
+                    result.Code = Common.ClientCode.FindNull;
+                    result.Message = Suggestion.InsertFail + "，请选择方案模板"; //提示输入的数据的格式不对 
+                    return result;
+                }
                 string currentPerson = GetCurrentPerson();
                 entity.CREATETIME = DateTime.Now;
                 entity.CREATEPERSON = currentPerson;
@@ -491,8 +497,8 @@ namespace Langben.App.Controllers
                                 }
                                 m_BLL2.EditField(ref validationErrors, appliance);
                                 m_BLL2.EditField(ref validationErrors, appliance2);
-                            }   
-                                                          
+                            }
+
                         }
                         else
                         {
@@ -510,7 +516,7 @@ namespace Langben.App.Controllers
                         //判断器具是否满足入库条件
                         if (ISAPPLIANCE(entity.APPLIANCE_DETAIL_INFORMATIONID))
                         {
-                            if (APPlist.Count>1)
+                            if (APPlist.Count > 1)
                             {
                                 appliance.PREPARE_SCHEMEID = appliance.PREPARE_SCHEMEID == null ? "" : appliance.PREPARE_SCHEMEID;
                                 appliance2.PREPARE_SCHEMEID = appliance2.PREPARE_SCHEMEID == null ? "" : appliance2.PREPARE_SCHEMEID;
@@ -540,7 +546,7 @@ namespace Langben.App.Controllers
                                 appliance.ISRECEIVE = Common.ISRECEIVE.否.ToString();
                                 m_BLL2.EditField(ref validationErrors, appliance);
                             }
-                              
+
                         }
                     }
                 }
