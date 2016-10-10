@@ -238,13 +238,7 @@
     <Content Include="html\test.html" />
     <Content Include="html\交流电压%28电流%29-相对误差-三相.html" />
     <Content Include="html\交流电压（电流）-相对误差-两相.html" />
-    <Content Include="html\变送器-功率-引用误差.html" />
-    <Content Include="html\变送器-有功（无功）功率-引用误差.html" />
-    <Content Include="html\变送器-电流电压-引用误差.html" />
-    <Content Include="html\变送器-相位-引用误差.html" />
-    <Content Include="html\变送器-频率-引用误差.html" />
     <Content Include="html\检定实验数据录入form.html" />
-    <Content Include="html\检定实验数据录入.html" />
     <Content Include="html\检定流程.html" />
     <Content Include="html\直流电压（电流）测量-非正负极性-相对误差.html" />
     <Content Include="html\直流电流输出-相对误差.html" />
