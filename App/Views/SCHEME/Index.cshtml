@@ -236,16 +236,15 @@
     //导航到创建的按钮
     function flexiCreate() {
 
-        window.location.href = "../SCHEME/Create?UNDERTAKE_LABORATORYID=" + $("#UNDERTAKE_LABORATORYID").val();
+        window.location.href = "../SCHEME/Create?OP=创建&UNDERTAKE_LABORATORYID=" + $("#UNDERTAKE_LABORATORYID").val();
         return false;
     }
     //导航到修改的按钮
     function flexiModify() {
 
-        var arr = $('#flexigridData').datagrid('getSelections');
-
+        var arr = $('#flexigridData').datagrid('getSelections');        
         if (arr.length == 1) {
-            window.location.href = "../SCHEME/Edit/" + arr[0].ID;
+            window.location.href = "../SCHEME/Create?id=" + arr[0].ID + "&OP=修改&UNDERTAKE_LABORATORYID=" + $("#UNDERTAKE_LABORATORYID").val();
 
         } else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
@@ -259,7 +258,7 @@
         var arr = $('#flexigridData').datagrid('getSelections');
 
         if (arr.length == 1) {
-            window.location.href = "../SCHEME/Edit?id=" + arr[0].ID+"&op=复制";
+            window.location.href = "../SCHEME/Create?id=" + arr[0].ID + "&OP=复制&UNDERTAKE_LABORATORYID=" + $("#UNDERTAKE_LABORATORYID").val();
 
         } else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');

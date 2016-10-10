@@ -55,7 +55,7 @@ namespace Langben.DAL
         [Display(Name = "实验室", Order = 13)]
         public object UNDERTAKE_LABORATORYID { get; set; }
 
-        [Display(Name = "批准状态", Order = 14)]
+        [Display(Name = "批准结论", Order = 14)]
         public object APPROVALISAGGREY { get; set; }
 
         [Display(Name = "方案类型", Order = 15)]
@@ -64,7 +64,7 @@ namespace Langben.DAL
         [Display(Name = "报告状态值", Order = 16)]
         public object REPORTSTATUSZI { get; set; }
 
-        [Display(Name = "报告状态", Order = 17)]
+        [Display(Name = "批准状态", Order = 17)]
         public object REPORTSTATUS { get; set; }
 
         [Display(Name = "上传报告结论", Order = 18)]

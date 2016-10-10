@@ -56,7 +56,24 @@ namespace Langben.DAL.shiyanshi
         /// <summary>
         /// 直流电流输出
         /// </summary>
-        ZLDLSC = 2
+        ZhiLiuDianLiuShuChu = 2
 
+    }
+
+    /// <summary>
+    /// 证书类别
+    /// </summary>
+    public enum  ZhengShuLeiBieEnums
+    {
+        检定=0,
+        校准=1
+    }
+    /// <summary>
+    /// 是否是CNAS
+    /// </summary>
+    public enum ShiFouCNAS
+    {
+        No = 0,
+        Yes = 1
     }
 }

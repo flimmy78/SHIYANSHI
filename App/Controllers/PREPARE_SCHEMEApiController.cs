@@ -394,7 +394,6 @@ namespace Langben.App.Controllers
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.待批准.GetHashCode().ToString();
                         entity.AUDITTIME = new DateTime();//审核时间
                         entity.AUDITTEPERSON = currentPerson;
-
                         if (APPlist.Count > 1)
                         {
                             if (appliance.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName)
@@ -428,14 +427,13 @@ namespace Langben.App.Controllers
                 }
                 else if (entity.SHPI == "P")
                 {
-                    if (entity.ISAGGREY == "不同意")
+                    if (entity.APPROVALISAGGREY == "不同意")
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.批准驳回.ToString();
-                        entity.REPORTSTATUSZI = Common.REPORTSTATUS.批准驳回.GetHashCode().ToString();
+                        entity.REPORTSTATUSZI = Common.REPORTSTATUS.批准驳回.GetHashCode().ToString();                      
                         int i = APPlist.Count;
                         if (i > 1)
                         {
-
                             appliance.PREPARE_SCHEMEID = appliance.PREPARE_SCHEMEID == null ? "" : appliance.PREPARE_SCHEMEID;
                             appliance2.PREPARE_SCHEMEID = appliance2.PREPARE_SCHEMEID == null ? "" : appliance2.PREPARE_SCHEMEID;
                             if (appliance.PREPARE_SCHEMEID == entity.ID)
@@ -507,7 +505,7 @@ namespace Langben.App.Controllers
                         }
 
                     }
-                    else if (entity.ISAGGREY == "同意")
+                    else if (entity.APPROVALISAGGREY == "同意")
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.已批准.ToString();
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.已批准.GetHashCode().ToString();
