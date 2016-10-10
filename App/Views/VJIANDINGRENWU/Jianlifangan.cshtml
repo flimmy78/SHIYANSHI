@@ -24,13 +24,36 @@
         <div class="clearfix"></div>
         <div class="input_search">
             <div class="input_search-label">
-                选择方案模板：
+                <a class="anUnderLine" onclick="showModalOnly('SCHEMEID', '../../SCHEME/Selected');">
+                    选择方案模板
+                </a>：
             </div>
             <div class="input_search-field">
-                <label>指示仪表-xxx1</label>
-                <input type="button" value="选择" style="width:auto" />
+                <div id="checkSCHEMEID">
+                </div>
+                @Html.HiddenFor(model => model.SCHEMEID)
             </div>
         </div>
+        <div id="checkSysDepartmentId">
+            @if (Model != null)
+            {
+                if (null != Model.SCHEMEID)
+                {
+                    <table id="@Model.SCHEMEID"
+                           class="deleteStyle">
+                        <tr>
+                            <td>
+                                <img alt="删除" title="点击删除" onclick="deleteTable('@Model.SCHEMEID ','SCHEMEID');" src="../../../Images/deleteimge.png" />
+                            </td>
+                            <td>
+                                @Model.SCHEMENAME
+                            </td>
+                        </tr>
+                    </table>
+                }
+            }
+        </div>
+        @Html.HiddenFor(model => model.SCHEMEID)
         <div class="clearfix"></div>
         <b>被检器具主要参数</b>
         <div class="clearfix"></div>
@@ -252,6 +275,7 @@
     //保存下一步
     function baochun() {
         var arr = new Object();
+        arr.SCHEMEID = $("#SCHEMEID").val();//其他
         arr.REPORTNUMBER = $("#REPORTNUMBER").val();//报告编号
         arr.ACCURACY_GRADE = $("#ACCURACY_GRADE").val();//准确度等级
         arr.PULSE_CONSTANT = $("#PULSE_CONSTANT").val();//脉冲常数
@@ -272,8 +296,7 @@
                 data: arr,
                 success: function (data) {
                     if (data.Code == 1) {
-                        $.messager.alert('操作提示', "保存下一步成功！", 'info', function () {
-                        });
+                        window.location.href = "/PREPARE_SCHEME/Edit?ID=" + data.Id;///PREPARE_SCHEME/Edit?ID=1609301400577124277db6c732e23
                     }
                     else {
                         $.messager.alert('操作提示', "保存下一步失败！", 'error');

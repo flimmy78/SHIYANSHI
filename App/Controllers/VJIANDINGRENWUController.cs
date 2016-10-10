@@ -253,6 +253,12 @@ namespace Langben.App.Controllers
             List<METERING_STANDARD_DEVICE> mete = m_BLL3.GetRefMETERING_STANDARD_DEVICE(PREPARE_SCHEMEID);//标准装置/计量标准器信息表
             PREPARE_SCHEME prme = m_BLL3.GetById(PREPARE_SCHEMEID);//预备方案表
             PREPARE_SCHEMEShow prepShow = new PREPARE_SCHEMEShow();//预备方案类
+            if (prme != null && prme.SCHEME != null)
+            {
+                //为什么获取不到SCHEME这个对象
+                prepShow.SCHEMENAME = prme.SCHEME.NAME;//  选择方案模板
+            }
+
             prepShow.REPORTNUMBER = m_BLL3.GetSerialNumber(PREPARE_SCHEMEID);//报告编号
             prepShow.APPLIANCE_DETAIL_INFORMATIONShows.APPLIANCE_NAME = appion.APPLIANCE_NAME;//器具名称
             prepShow.APPLIANCE_DETAIL_INFORMATIONShows.VERSION = appion.VERSION;//器具型号

@@ -106,7 +106,7 @@ namespace Langben.DAL
         /// <returns>预备方案</returns>
         public PREPARE_SCHEME GetById(SysEntities db, string id)
         { 
-                 return db.PREPARE_SCHEME.SingleOrDefault(s => s.ID == id); 
+                 return db.PREPARE_SCHEME.Include("SCHEME").SingleOrDefault(s => s.ID == id); 
         }
  
         /// <summary>
