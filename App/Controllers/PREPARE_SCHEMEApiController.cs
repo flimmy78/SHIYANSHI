@@ -430,7 +430,7 @@ namespace Langben.App.Controllers
                     if (entity.APPROVALISAGGREY == "不同意")
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.批准驳回.ToString();
-                        entity.REPORTSTATUSZI = Common.REPORTSTATUS.批准驳回.GetHashCode().ToString();
+                        entity.REPORTSTATUSZI = Common.REPORTSTATUS.批准驳回.GetHashCode().ToString();                      
                         int i = APPlist.Count;
                         if (i > 1)
                         {
