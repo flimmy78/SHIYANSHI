@@ -1,0 +1,6927 @@
+--------------------------------------------------------
+--  File created - 星期一-十月-10-2016   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table ACTIVE_POWER
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."ACTIVE_POWER" 
+   (	"ID" VARCHAR2(36), 
+	"RATED_CONDITION" VARCHAR2(200), 
+	"POWER_FACTOR" VARCHAR2(200), 
+	"POWER_FACTOR_UNIT" VARCHAR2(200), 
+	"DISPLAY_VALUE" VARCHAR2(200), 
+	"DISPLAY_VALUE_UNIT" VARCHAR2(200), 
+	"STANDARD_VALUE" VARCHAR2(200), 
+	"STANDARD_VALUE_UNIT" VARCHAR2(200), 
+	"REFERENCE_ERROR" VARCHAR2(200), 
+	"REFERENCE_ERROR_UNIT" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE_UNIT" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"OVERALL_TABLEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."ACTIVE_POWER"."REFERENCE_ERROR_UNIT" IS '%';
+ 
+   COMMENT ON TABLE "TENGFEI"."ACTIVE_POWER"  IS '数表三相
+JJG 780-92 交流数字功率表检定规程
+';
+--------------------------------------------------------
+--  DDL for Table AC_VOLTAGE_CURRENT
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."AC_VOLTAGE_CURRENT" 
+   (	"ID" VARCHAR2(36), 
+	"RANGE" VARCHAR2(200), 
+	"RANGE_UNIT" VARCHAR2(200), 
+	"DISPLAY_VALUE" VARCHAR2(200), 
+	"DISPLAY_VALUE_UNIT" VARCHAR2(200), 
+	"STANDARD_VALUE" VARCHAR2(200), 
+	"STANDARD_VALUE_UNIT" VARCHAR2(200), 
+	"REFERENCE_ERROR" VARCHAR2(200), 
+	"REFERENCE_ERROR_UNIT" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE_UNIT" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"OVERALL_TABLEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."AC_VOLTAGE_CURRENT"."REFERENCE_ERROR_UNIT" IS '%';
+ 
+   COMMENT ON TABLE "TENGFEI"."AC_VOLTAGE_CURRENT"  IS '数表三相
+JJG 410-94 精密交流电压校准源检定规程-交流电压输出的两列三列
+JJG(航天) 51-1999 交流标准电流源检定规程-三相交流电流输出的两列三列
+JJG(航天)34-1999 交流数字电压表检定规程-三相交流电压测量的两列三列
+JJG（航天）35-1999 交流数字电流表检定规程-交流电流测量（50Hz）的两列三列
+';
+--------------------------------------------------------
+--  DDL for Table ALLOWABLE_ERROR
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."ALLOWABLE_ERROR" 
+   (	"ID" VARCHAR2(36), 
+	"VALUE" VARCHAR2(200), 
+	"UNIT" VARCHAR2(200), 
+	"METERING_STANDARD_DEVICEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON TABLE "TENGFEI"."ALLOWABLE_ERROR"  IS '标准装置/标准器不确定度、准确度等级、最大允许误差信息';
+--------------------------------------------------------
+--  DDL for Table APPLIANCECOLLECTION
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."APPLIANCECOLLECTION" 
+   (	"ID" VARCHAR2(36), 
+	"GETNUMBER" NUMBER, 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200), 
+	"APPLIANCE_DETAIL_INFORMATIONID" VARCHAR2(36), 
+	"APPLIANCECOLLECTIONSATE" VARCHAR2(200), 
+	"LABORATORY" VARCHAR2(200)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table APPLIANCE_DETAIL_INFORMATION
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."APPLIANCE_DETAIL_INFORMATION" 
+   (	"ID" VARCHAR2(36), 
+	"BAR_CODE_NUM" VARCHAR2(200), 
+	"APPLIANCE_NAME" VARCHAR2(200), 
+	"VERSION" VARCHAR2(200), 
+	"FORMAT" VARCHAR2(200), 
+	"FACTORY_NUM" VARCHAR2(200), 
+	"NUM" NUMBER, 
+	"ATTACHMENT" VARCHAR2(200), 
+	"APPEARANCE_STATUS" VARCHAR2(200), 
+	"MAKE_ORGANIZATION" VARCHAR2(200), 
+	"REMARKS" VARCHAR2(4000), 
+	"END_PLAN_DATE" DATE, 
+	"ORDER_TASK_INFORMATIONID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200), 
+	"APPLIANCE_RECIVE" VARCHAR2(200), 
+	"APPLIANCE_PROGRESS" VARCHAR2(200), 
+	"ISOVERDUE" VARCHAR2(200), 
+	"OVERDUE" VARCHAR2(200), 
+	"STORAGEINSTRUCTIONS" VARCHAR2(4000), 
+	"STORAGEINSTRUCTI_STATU" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."APPLIANCE_DETAIL_INFORMATION"."BAR_CODE_NUM" IS '0开头，后7位有效数字Research';
+ 
+   COMMENT ON COLUMN "TENGFEI"."APPLIANCE_DETAIL_INFORMATION"."APPLIANCE_NAME" IS 'Research';
+ 
+   COMMENT ON COLUMN "TENGFEI"."APPLIANCE_DETAIL_INFORMATION"."VERSION" IS 'Research';
+ 
+   COMMENT ON COLUMN "TENGFEI"."APPLIANCE_DETAIL_INFORMATION"."FACTORY_NUM" IS 'Research';
+ 
+   COMMENT ON COLUMN "TENGFEI"."APPLIANCE_DETAIL_INFORMATION"."NUM" IS '默认1';
+ 
+   COMMENT ON COLUMN "TENGFEI"."APPLIANCE_DETAIL_INFORMATION"."APPEARANCE_STATUS" IS '默认良好';
+ 
+   COMMENT ON COLUMN "TENGFEI"."APPLIANCE_DETAIL_INFORMATION"."MAKE_ORGANIZATION" IS 'DropDown文本框输入,写入制造单位,自动模糊匹配5个合适的单位;如果没有,新增保存.';
+ 
+   COMMENT ON COLUMN "TENGFEI"."APPLIANCE_DETAIL_INFORMATION"."END_PLAN_DATE" IS '从登记时间开始算，如果天数超过14天，那么设备超期，如果超过11天则预警';
+ 
+   COMMENT ON COLUMN "TENGFEI"."APPLIANCE_DETAIL_INFORMATION"."APPLIANCE_RECIVE" IS 'DropDown';
+ 
+   COMMENT ON COLUMN "TENGFEI"."APPLIANCE_DETAIL_INFORMATION"."ISOVERDUE" IS '是、否DropDownResearch';
+ 
+   COMMENT ON COLUMN "TENGFEI"."APPLIANCE_DETAIL_INFORMATION"."STORAGEINSTRUCTI_STATU" IS 'DropDown';
+--------------------------------------------------------
+--  DDL for Table APPLIANCE_LABORATORY
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."APPLIANCE_LABORATORY" 
+   (	"ID" VARCHAR2(36), 
+	"UNDERTAKE_LABORATORYID" VARCHAR2(36), 
+	"APPLIANCE_DETAIL_INFORMATIONID" VARCHAR2(36), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"RECEIVEPERSON" VARCHAR2(200), 
+	"RECEIVETIME" DATE, 
+	"BACKPERSON" NVARCHAR2(200), 
+	"BACKTIME" DATE, 
+	"DISTRIBUTIONPERSON" NVARCHAR2(200), 
+	"DISTRIBUTIONTIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"CREATETIME" DATE, 
+	"ORDER_STATUS" VARCHAR2(200), 
+	"EQUIPMENT_STATUS_VALUUMN" NVARCHAR2(200), 
+	"RETURN_INSTRUCTIONS" NVARCHAR2(200), 
+	"ISRECEIVE" NVARCHAR2(200)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table COMPANY
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."COMPANY" 
+   (	"ID" VARCHAR2(36), 
+	"COMPANYNAME" VARCHAR2(200), 
+	"COMPANYADDRES" VARCHAR2(200), 
+	"POSTCODE" VARCHAR2(200), 
+	"CONTACTS" VARCHAR2(200), 
+	"CONTACTSNUMBER" VARCHAR2(200), 
+	"FAX" VARCHAR2(200), 
+	"PARENTID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200), 
+	"CATEGORY" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."COMPANY"."ID" IS '标识';
+--------------------------------------------------------
+--  DDL for Table CROSS_COS
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."CROSS_COS" 
+   (	"ID" VARCHAR2(36), 
+	"COS" VARCHAR2(200), 
+	"TEST_POINT" VARCHAR2(200), 
+	"TEST_POINT_UNIT" VARCHAR2(200), 
+	"STANDARD_VALUE" VARCHAR2(200), 
+	"STANDARD_VALUE_UNIT" VARCHAR2(200), 
+	"DISPLAY_VALUE" VARCHAR2(200), 
+	"DISPLAY_VALUE_UNIT" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"CROSS_HEADID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON TABLE "TENGFEI"."CROSS_COS"  IS '国家电网公司交流采样测量装置校验规范
+有功功率和cos有关';
+--------------------------------------------------------
+--  DDL for Table CROSS_FREQUENCY_POWER_FACTOR
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."CROSS_FREQUENCY_POWER_FACTOR" 
+   (	"ID" VARCHAR2(36), 
+	"TEST_POINT" VARCHAR2(200), 
+	"TEST_POINT_UNIT" VARCHAR2(200), 
+	"STANDARD_VALUE" VARCHAR2(200), 
+	"STANDARD_VALUE_UNIT" VARCHAR2(200), 
+	"DISPLAY_VALUE" VARCHAR2(200), 
+	"DISPLAY_VALUE_UNIT" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE" VARCHAR2(200), 
+	"CROSS_HEADID" VARCHAR2(36), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON TABLE "TENGFEI"."CROSS_FREQUENCY_POWER_FACTOR"  IS '国家电网公司交流采样测量装置校验规范';
+--------------------------------------------------------
+--  DDL for Table CROSS_HEAD
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."CROSS_HEAD" 
+   (	"ID" VARCHAR2(36), 
+	"TYPE" VARCHAR2(200), 
+	"VALUE" VARCHAR2(200), 
+	"VALUE_UNIT" VARCHAR2(200), 
+	"GRADE_VALUE" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON TABLE "TENGFEI"."CROSS_HEAD"  IS '国家电网公司交流采样测量装置校验规范';
+--------------------------------------------------------
+--  DDL for Table CROSS_SIN
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."CROSS_SIN" 
+   (	"ID" VARCHAR2(36), 
+	"SIN" VARCHAR2(200), 
+	"TEST_POINT" VARCHAR2(200), 
+	"TEST_POINT_UNIT" VARCHAR2(200), 
+	"STANDARD_VALUE" VARCHAR2(200), 
+	"STANDARD_VALUE_UNIT" VARCHAR2(200), 
+	"DISPLAY_VALUE" VARCHAR2(200), 
+	"DISPLAY_VALUE_UNIT" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE" VARCHAR2(200), 
+	"CROSS_HEADID" VARCHAR2(36), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON TABLE "TENGFEI"."CROSS_SIN"  IS '国家电网公司交流采样测量装置校验规范
+无功功率和sin有关';
+--------------------------------------------------------
+--  DDL for Table CROSS_VOLTAGE_CURRENT
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."CROSS_VOLTAGE_CURRENT" 
+   (	"ID" VARCHAR2(36), 
+	"TEST_POINT" VARCHAR2(200), 
+	"TEST_POINT_UNIT" VARCHAR2(200), 
+	"STANDARD_VALUE_A" VARCHAR2(200), 
+	"STANDARD_VALUE_A_UNIT" VARCHAR2(200), 
+	"STANDARD_VALUE_B" VARCHAR2(200), 
+	"STANDARD_VALUE_B_UNIT" VARCHAR2(200), 
+	"STANDARD_VALUE_C" VARCHAR2(200), 
+	"STANDARD_VALUE_C_UNIT" VARCHAR2(200), 
+	"DISPLAY_A_VALUE" VARCHAR2(200), 
+	"DISPLAY_VALUE_A_UNIT" VARCHAR2(200), 
+	"DISPLAY_B_VALUE" VARCHAR2(200), 
+	"DISPLAY_VALUE_B_UNIT" VARCHAR2(200), 
+	"DISPLAY_C_VALUE" VARCHAR2(200), 
+	"DISPLAY_VALUE_C_UNIT" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"CROSS_HEADID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON TABLE "TENGFEI"."CROSS_VOLTAGE_CURRENT"  IS '国家电网公司交流采样测量装置校验规范';
+--------------------------------------------------------
+--  DDL for Table DC_CURRENT_OUTPUT
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."DC_CURRENT_OUTPUT" 
+   (	"ID" VARCHAR2(36), 
+	"RANGE" NUMBER, 
+	"RANGE_UNIT" VARCHAR2(200), 
+	"RESISTANCE" VARCHAR2(200), 
+	"RESISTANCE_UNIT" VARCHAR2(200), 
+	"OUTPUT_VALUE" VARCHAR2(200), 
+	"OUTPUT_VALUE_UNIT" VARCHAR2(200), 
+	"READ_VALUE" VARCHAR2(200), 
+	"READ_VALUE_UNIT" VARCHAR2(200), 
+	"ACTUAL_OUTPUT_VALUE" VARCHAR2(200), 
+	"ACTUAL_OUTPUT_VALUE_UNIT" VARCHAR2(200), 
+	"RELATIVE_ERROR" VARCHAR2(200), 
+	"RELATIVE_ERROR_UNIT" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE_UNIT" VARCHAR2(200), 
+	"INDEX1" VARCHAR2(200), 
+	"INDEX2" VARCHAR2(200), 
+	"STANDARD_RESISTANCE_INDEX" VARCHAR2(200), 
+	"RESOLUTION" VARCHAR2(200), 
+	"REFERENCE_RANGE" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"OVERALL_TABLEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."DC_CURRENT_OUTPUT"."RELATIVE_ERROR_UNIT" IS '%';
+ 
+   COMMENT ON TABLE "TENGFEI"."DC_CURRENT_OUTPUT"  IS '数表三相
+JJG(航天) 38-1987 直流标准电流源检定规程-直流电流输出';
+--------------------------------------------------------
+--  DDL for Table DC_VOLTAGE_CURRENT_MEASURE
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE" 
+   (	"ID" VARCHAR2(36), 
+	"RANGE" VARCHAR2(200), 
+	"RANGE_UNIT" VARCHAR2(200), 
+	"STANDARD_VALUE" VARCHAR2(200), 
+	"STANDARD_VALUE_UNIT" VARCHAR2(200), 
+	"DISPLAY_VALUE_POSITIVE" VARCHAR2(200), 
+	"DISPLAY_VALUE_POSITIVE_UNIT" VARCHAR2(200), 
+	"DISPLAY_VALUE_NEGATIVE" VARCHAR2(200), 
+	"DISPLAY_VALUE_NEGATIVE_UNIT" VARCHAR2(200), 
+	"RELATIVE_ERROR_POSITIVE" VARCHAR2(200), 
+	"RELATIVE_ERROR_POSITIVE_UNIT" VARCHAR2(200), 
+	"RELATIVE_ERROR_NEGATIVE" VARCHAR2(200), 
+	"RELATIVE_ERROR_NEGATIVE_UNIT" VARCHAR2(200), 
+	"KVALUE" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE_UNIT" VARCHAR2(200), 
+	"INDEX1" VARCHAR2(200), 
+	"INDEX2" VARCHAR2(200), 
+	"INDEX2_UNIT" VARCHAR2(200), 
+	"RESOLUTION" VARCHAR2(200), 
+	"STATUS" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"OVERALL_TABLEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE"."RELATIVE_ERROR_POSITIVE_UNIT" IS '%';
+ 
+   COMMENT ON COLUMN "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE"."RELATIVE_ERROR_NEGATIVE_UNIT" IS '%';
+ 
+   COMMENT ON COLUMN "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE"."KVALUE" IS '例如：K=2、k=3';
+ 
+   COMMENT ON COLUMN "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE"."STATUS" IS '区分不同表格';
+ 
+   COMMENT ON TABLE "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE"  IS '数表三相
+JJG 315-1983 直流数字电压表检定规程（试行）-单相-直流电压测量
+JJG 598-1989 直流数字电流表检定规程（试行）-单相-直流电流测量';
+--------------------------------------------------------
+--  DDL for Table DC_VOLTAGE_CURRENT_MEASURE_CH
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE_CH" 
+   (	"ID" VARCHAR2(36), 
+	"RANGE" VARCHAR2(200), 
+	"RANGE_UNIT" VARCHAR2(200), 
+	"STANDARD_VALUE" VARCHAR2(200), 
+	"STANDARD_VALUE_UNIT" VARCHAR2(200), 
+	"DISPLAY_VALUE_POSITIVE" VARCHAR2(200), 
+	"DISPLAY_VALUE_POSITIVE_UNIT" VARCHAR2(200), 
+	"DISPLAY_VALUE_NEGATIVE" VARCHAR2(200), 
+	"DISPLAY_VALUE_NEGATIVE_UNIT" VARCHAR2(200), 
+	"RELATIVE_ERROR_POSITIVE" VARCHAR2(200), 
+	"RELATIVE_ERROR_POSITIVE_UNIT" VARCHAR2(200), 
+	"RELATIVE_ERROR_NEGATIVE" VARCHAR2(200), 
+	"RELATIVE_ERROR_NEGATIVE_UNIT" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE_UNIT" VARCHAR2(200), 
+	"INDEX1" VARCHAR2(200), 
+	"INDEX2" VARCHAR2(200), 
+	"INDEX2_UNIT" VARCHAR2(200), 
+	"RESOLUTION" VARCHAR2(200), 
+	"STATUS" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"OVERALL_TABLEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE_CH"."RELATIVE_ERROR_POSITIVE_UNIT" IS '%';
+ 
+   COMMENT ON COLUMN "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE_CH"."RELATIVE_ERROR_NEGATIVE_UNIT" IS '%';
+ 
+   COMMENT ON COLUMN "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE_CH"."STATUS" IS '区分不同表格';
+ 
+   COMMENT ON TABLE "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE_CH"  IS '数表三相
+JJG 315-1983 直流数字电压表检定规程（试行）-单相-直流电压测量多通道CH0-CH16';
+--------------------------------------------------------
+--  DDL for Table DC_VOLTAGE_MEASURE_NO_INDEX
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."DC_VOLTAGE_MEASURE_NO_INDEX" 
+   (	"ID" VARCHAR2(36), 
+	"RANGE" VARCHAR2(200), 
+	"RANGE_UNIT" VARCHAR2(200), 
+	"DISPLAY_VALUE" VARCHAR2(200), 
+	"DISPLAY_VALUE_UNIT" VARCHAR2(200), 
+	"STANDARD_VALUE" VARCHAR2(200), 
+	"STANDARD_VALUE_UNIT" VARCHAR2(200), 
+	"RELATIVE_ERROR" VARCHAR2(200), 
+	"RELATIVE_ERROR_UNIT" VARCHAR2(200), 
+	"KVALUE" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE_UNIT" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"OVERALL_TABLEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."DC_VOLTAGE_MEASURE_NO_INDEX"."DISPLAY_VALUE" IS '多列';
+ 
+   COMMENT ON COLUMN "TENGFEI"."DC_VOLTAGE_MEASURE_NO_INDEX"."STANDARD_VALUE" IS '多列';
+ 
+   COMMENT ON COLUMN "TENGFEI"."DC_VOLTAGE_MEASURE_NO_INDEX"."RELATIVE_ERROR" IS '多列';
+ 
+   COMMENT ON COLUMN "TENGFEI"."DC_VOLTAGE_MEASURE_NO_INDEX"."RELATIVE_ERROR_UNIT" IS '% ';
+ 
+   COMMENT ON COLUMN "TENGFEI"."DC_VOLTAGE_MEASURE_NO_INDEX"."KVALUE" IS '例如：K=2、k=3';
+ 
+   COMMENT ON TABLE "TENGFEI"."DC_VOLTAGE_MEASURE_NO_INDEX"  IS '数表三相，适用于多相位多通道
+JJG 315-1983 直流数字电压表检定规程（试行）-三相-直流电压测量
+JJG 598-1989 直流数字电流表检定规程（试行）-三相-直流电流测量';
+--------------------------------------------------------
+--  DDL for Table DC_VOLTAGE_OUTPUT
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."DC_VOLTAGE_OUTPUT" 
+   (	"ID" VARCHAR2(36), 
+	"RANGE" VARCHAR2(200), 
+	"RANGE_UNIT" VARCHAR2(200), 
+	"OUTPUT_VALUE" VARCHAR2(200), 
+	"OUTPUT_VALUE_UNIT" VARCHAR2(200), 
+	"ACTUAL_OUTPUT_VALUE" VARCHAR2(200), 
+	"ACTUAL_OUTPUT_VALUE_UNIT" VARCHAR2(200), 
+	"RELATIVE_ERROR" VARCHAR2(200), 
+	"RELATIVE_ERROR_UNIT" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE_UNIT" VARCHAR2(200), 
+	"INDEX1" VARCHAR2(200), 
+	"INDEX2" VARCHAR2(200), 
+	"RESOLUTION" VARCHAR2(200), 
+	"REFERENCE_RANGE" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"OVERALL_TABLEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."DC_VOLTAGE_OUTPUT"."RELATIVE_ERROR_UNIT" IS '%';
+ 
+   COMMENT ON TABLE "TENGFEI"."DC_VOLTAGE_OUTPUT"  IS '数表三相
+JJG 445-1986 直流标准电压源检定规程';
+--------------------------------------------------------
+--  DDL for Table ERROR_LIMIT
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."ERROR_LIMIT" 
+   (	"ID" VARCHAR2(36), 
+	"ACCURACY_GRADE" VARCHAR2(200), 
+	"LIMIT_VALUE" VARCHAR2(200), 
+	"CATEGORY" VARCHAR2(200), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."ERROR_LIMIT"."CATEGORY" IS '相位非相位';
+--------------------------------------------------------
+--  DDL for Table FILE_UPLOADER
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."FILE_UPLOADER" 
+   (	"ID" VARCHAR2(36), 
+	"NAME" VARCHAR2(200), 
+	"PATH" VARCHAR2(200), 
+	"FULLPATH" VARCHAR2(200), 
+	"SUFFIX" VARCHAR2(200), 
+	"SIZE" NUMBER, 
+	"REMARK" VARCHAR2(200), 
+	"NAME2" VARCHAR2(200), 
+	"PATH2" VARCHAR2(200), 
+	"FULLPATH2" VARCHAR2(200), 
+	"SUFFIX2" VARCHAR2(200), 
+	"SIZE2" NUMBER, 
+	"REMARK2" VARCHAR2(200), 
+	"STATE2" VARCHAR2(200), 
+	"STATE" VARCHAR2(200), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"CONCLUSION" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."FILE_UPLOADER"."CONCLUSION" IS 'RadioButton';
+--------------------------------------------------------
+--  DDL for Table FREQUENCY
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."FREQUENCY" 
+   (	"ID" VARCHAR2(36), 
+	"DISPLAY_VALUE" VARCHAR2(200), 
+	"DISPLAY_VALUE_UNIT" VARCHAR2(200), 
+	"STANDARD_VALUE" VARCHAR2(200), 
+	"STANDARD_VALUE_UNIT" VARCHAR2(200), 
+	"RELATIVE_ERROR" VARCHAR2(200), 
+	"RELATIVE_ERROR_UNIT" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE_UNIT" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"OVERALL_TABLEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."FREQUENCY"."RELATIVE_ERROR_UNIT" IS '%';
+ 
+   COMMENT ON TABLE "TENGFEI"."FREQUENCY"  IS '数表三相
+规程名称：JJG 603-2006 频率表检定规程 ';
+--------------------------------------------------------
+--  DDL for Table FileUploader
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."FileUploader" 
+   (	"Id" NVARCHAR2(36), 
+	"Name" NVARCHAR2(200), 
+	"Path" NVARCHAR2(200), 
+	"FullPath" VARCHAR2(500), 
+	"Suffix" NVARCHAR2(200), 
+	"Size" NUMBER(*,0), 
+	"Remark" NVARCHAR2(1000), 
+	"State" NVARCHAR2(200), 
+	"CreateTime" DATE, 
+	"CreatePerson" NVARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."FileUploader"."Name" IS 'Research';
+ 
+   COMMENT ON COLUMN "TENGFEI"."FileUploader"."CreateTime" IS 'Research';
+--------------------------------------------------------
+--  DDL for Table METERING_STANDARD_DEVICE
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."METERING_STANDARD_DEVICE" 
+   (	"ID" VARCHAR2(36), 
+	"NAME" VARCHAR2(200), 
+	"TEST_RANGE" VARCHAR2(200), 
+	"FACTORY_NUM" VARCHAR2(200), 
+	"CATEGORY" VARCHAR2(200), 
+	"STATUS" VARCHAR2(200), 
+	"UNDERTAKE_LABORATORYID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."METERING_STANDARD_DEVICE"."STATUS" IS '修改后标识为历史数据，以往数据作废';
+--------------------------------------------------------
+--  DDL for Table METERING_STANDARD_DEVICEPREPAR
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."METERING_STANDARD_DEVICEPREPAR" 
+   (	"PREPARE_SCHEME" VARCHAR2(36), 
+	"METERING_STANDARD_DEVICEID" VARCHAR2(36)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table METERING_STANDARD_DEVICE_CHECK
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."METERING_STANDARD_DEVICE_CHECK" 
+   (	"ID" VARCHAR2(200), 
+	"CERTIFICATE_NUM" VARCHAR2(200), 
+	"CHECK_DATE" DATE, 
+	"VALID_TO" DATE, 
+	"METERING_STANDARD_DEVICEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table ORDER_TASK_INFORMATION
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."ORDER_TASK_INFORMATION" 
+   (	"ID" VARCHAR2(36), 
+	"ORDER_NUMBER" VARCHAR2(200), 
+	"ACCEPT_ORGNIZATION" VARCHAR2(200), 
+	"INSPECTION_ENTERPRISE" VARCHAR2(200), 
+	"INSPECTION_ENTERPRISE_ADDRESS" VARCHAR2(200), 
+	"INSPECTION_ENTERPRISE_POST" VARCHAR2(200), 
+	"CONTACTS" VARCHAR2(200), 
+	"CONTACT_PHONE" VARCHAR2(200), 
+	"FAX" VARCHAR2(200), 
+	"CERTIFICATE_ENTERPRISE" VARCHAR2(200), 
+	"CERTIFICATE_ENTERPRISE_ADDRESS" VARCHAR2(200), 
+	"CERTIFICATE_ENTERPRISE_POST" VARCHAR2(200), 
+	"CONTACTS2" VARCHAR2(200), 
+	"CONTACT_PHONE2" VARCHAR2(200), 
+	"FAX2" VARCHAR2(200), 
+	"CUSTOMER_SPECIFIC_REQUIREMENTS" VARCHAR2(4000), 
+	"ORDER_STATUS" VARCHAR2(200), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."ORDER_TASK_INFORMATION"."ORDER_NUMBER" IS 'Research';
+ 
+   COMMENT ON COLUMN "TENGFEI"."ORDER_TASK_INFORMATION"."ACCEPT_ORGNIZATION" IS 'ResearchDropDown计量中心只出检定，检定授权分是否，若为是资质为冀；若为否，则/（国网授权）；电科院出检定或者校准，检定授权分是否，若为是,资质为京，若为否，则为/（国网授权）；校准CNAS若为是则为cnas资质，若为否则为/';
+ 
+   COMMENT ON COLUMN "TENGFEI"."ORDER_TASK_INFORMATION"."INSPECTION_ENTERPRISE" IS 'ResearchDropDown';
+ 
+   COMMENT ON COLUMN "TENGFEI"."ORDER_TASK_INFORMATION"."CERTIFICATE_ENTERPRISE" IS 'DropDownResearch';
+ 
+   COMMENT ON COLUMN "TENGFEI"."ORDER_TASK_INFORMATION"."ORDER_STATUS" IS '已分配、已归档DropDownResearch';
+ 
+   COMMENT ON COLUMN "TENGFEI"."ORDER_TASK_INFORMATION"."CREATETIME" IS 'Research';
+--------------------------------------------------------
+--  DDL for Table OVERALL_TABLE
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."OVERALL_TABLE" 
+   (	"ID" VARCHAR2(36), 
+	"NAME" VARCHAR2(200), 
+	"KVALUE" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."OVERALL_TABLE"."KVALUE" IS '例如：K=2、k=3';
+ 
+   COMMENT ON TABLE "TENGFEI"."OVERALL_TABLE"  IS '表通道信息';
+--------------------------------------------------------
+--  DDL for Table PHASE
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."PHASE" 
+   (	"ID" VARCHAR2(36), 
+	"NAME" VARCHAR2(200), 
+	"PHASE_UNIT" VARCHAR2(200), 
+	"DISPLAY_VALUE" VARCHAR2(200), 
+	"DISPLAY_VALUE_UNIT" VARCHAR2(200), 
+	"STANDARD_VALUE" VARCHAR2(200), 
+	"STANDARD_VALUE_UNIT" VARCHAR2(200), 
+	"ABSOLUTE_ERROR" VARCHAR2(200), 
+	"ABSOLUTE_ERROR_UNIT" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE" VARCHAR2(200), 
+	"UNCERTAINTY_DEGREE_UNIT" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"OVERALL_TABLEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."PHASE"."ABSOLUTE_ERROR_UNIT" IS '%';
+ 
+   COMMENT ON TABLE "TENGFEI"."PHASE"  IS '数表三相
+规程名称：JJG 440-2008 工频单相相位表检定规程';
+--------------------------------------------------------
+--  DDL for Table PREPARE_SCHEME
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."PREPARE_SCHEME" 
+   (	"ID" VARCHAR2(36), 
+	"REPORT_CATEGORY" VARCHAR2(200), 
+	"CERTIFICATE_CATEGORY" VARCHAR2(200), 
+	"CNAS" VARCHAR2(200), 
+	"CONTROL_NUMBER" VARCHAR2(200), 
+	"CERTIFICATION_AUTHORITY" VARCHAR2(200), 
+	"QUALIFICATIONS" VARCHAR2(200), 
+	"TEMPERATURE" VARCHAR2(200), 
+	"HUMIDITY" VARCHAR2(200), 
+	"CHECK_PLACE" VARCHAR2(200), 
+	"CHECKERID" VARCHAR2(36), 
+	"DETECTERID" VARCHAR2(36), 
+	"APPROVALID" VARCHAR2(36), 
+	"CALIBRATION_DATE" DATE, 
+	"CONCLUSION" VARCHAR2(200), 
+	"CONCLUSION_EXPLAIN" VARCHAR2(4000), 
+	"VALIDITY_PERIOD" DATE, 
+	"CALIBRATION_INSTRUCTIONS" VARCHAR2(4000), 
+	"ACCURACY_GRADE" VARCHAR2(200), 
+	"RATED_FREQUENCY" VARCHAR2(200), 
+	"PULSE_CONSTANT" VARCHAR2(200), 
+	"EXTERNAL_RESITANCE_VALUE" VARCHAR2(200), 
+	"SCHEMEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200), 
+	"AUDITOPINION" VARCHAR2(4000), 
+	"AUDITTIME" DATE, 
+	"AUDITTEPERSON" VARCHAR2(200), 
+	"ISAGGREY" VARCHAR2(200), 
+	"APPROVAL" VARCHAR2(4000), 
+	"APPROVALDATE" DATE, 
+	"APPROVALEPERSON" VARCHAR2(200), 
+	"APPROVALISAGGREY" VARCHAR2(200), 
+	"PRINTSTATUS" VARCHAR2(200), 
+	"ISBACK" VARCHAR2(200), 
+	"REPORTNUMBER" VARCHAR2(200), 
+	"REPORTSTATUS" VARCHAR2(200), 
+	"REPORTSTATUSZI" VARCHAR2(200), 
+	"SERIALNUMBER" NUMBER(*,0), 
+	"YEARS" NVARCHAR2(200), 
+	"PACKAGETYPE" NVARCHAR2(200), 
+	"OTHER" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."PREPARE_SCHEME"."REPORT_CATEGORY" IS 'DropDown';
+ 
+   COMMENT ON COLUMN "TENGFEI"."PREPARE_SCHEME"."CERTIFICATE_CATEGORY" IS 'DropDown';
+ 
+   COMMENT ON COLUMN "TENGFEI"."PREPARE_SCHEME"."QUALIFICATIONS" IS 'DropDown';
+ 
+   COMMENT ON COLUMN "TENGFEI"."PREPARE_SCHEME"."CHECK_PLACE" IS 'DropDown';
+ 
+   COMMENT ON COLUMN "TENGFEI"."PREPARE_SCHEME"."CONCLUSION" IS 'DropDown';
+ 
+   COMMENT ON COLUMN "TENGFEI"."PREPARE_SCHEME"."PRINTSTATUS" IS 'DropDown';
+--------------------------------------------------------
+--  DDL for Table PRINTREPORT
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."PRINTREPORT" 
+   (	"ID" VARCHAR2(36), 
+	"GETNUMBER" NUMBER, 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table PROJECTTEMPLET
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."PROJECTTEMPLET" 
+   (	"ID" VARCHAR2(36), 
+	"RULEID" VARCHAR2(36), 
+	"SCHEMEID" VARCHAR2(36), 
+	"HTMLVALUE" CLOB, 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table QUALIFIED_UNQUALIFIED_TEST_ITE
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."QUALIFIED_UNQUALIFIED_TEST_ITE" 
+   (	"ID" VARCHAR2(36), 
+	"CONCLUSION" VARCHAR2(4000), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"RULEID" VARCHAR2(36), 
+	"RULENAME" VARCHAR2(200), 
+	"RULENJOINAME" VARCHAR2(2000), 
+	"HTMLVALUE" CLOB, 
+	"REMARK" VARCHAR2(4000), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200), 
+	"SORT" NUMBER
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."QUALIFIED_UNQUALIFIED_TEST_ITE"."RULENAME" IS '检定项目原始名称';
+ 
+   COMMENT ON COLUMN "TENGFEI"."QUALIFIED_UNQUALIFIED_TEST_ITE"."RULENJOINAME" IS '表格展示一行';
+ 
+   COMMENT ON TABLE "TENGFEI"."QUALIFIED_UNQUALIFIED_TEST_ITE"  IS '报告对应的检定项目及其项目结论';
+--------------------------------------------------------
+--  DDL for Table REPORTCOLLECTION
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."REPORTCOLLECTION" 
+   (	"ID" VARCHAR2(36), 
+	"GETNUMBER" NUMBER, 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"REPORTTORECEVESTATE" VARCHAR2(200)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table RULE
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."RULE" 
+   (	"ID" VARCHAR2(36), 
+	"NAMEOTHER" VARCHAR2(200), 
+	"NAME" VARCHAR2(200), 
+	"SCHEME_MENU" VARCHAR2(200), 
+	"SORT" NUMBER, 
+	"IS_UNCERTAINTY" VARCHAR2(200), 
+	"UNCERTAINTY_MENU" VARCHAR2(200), 
+	"UNDERTAKE_LABORATORYID" VARCHAR2(36), 
+	"INPUTSTATE" VARCHAR2(200), 
+	"PARENTID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."RULE"."ID" IS '标识';
+--------------------------------------------------------
+--  DDL for Table SCHEME
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SCHEME" 
+   (	"ID" VARCHAR2(36), 
+	"NAME" VARCHAR2(200), 
+	"REPORT_CATEGORY" VARCHAR2(200), 
+	"CERTIFICATE_CATEGORY" VARCHAR2(200), 
+	"STATUS" VARCHAR2(200), 
+	"ISSTOP" VARCHAR2(200), 
+	"ISPUBLISH" VARCHAR2(200), 
+	"COPYID" VARCHAR2(36), 
+	"UNDERTAKE_LABORATORYID" VARCHAR2(36), 
+	"PUBLISHTIME" DATE, 
+	"PUBLISHPERSON" VARCHAR2(200), 
+	"ISPUBLISHTIME" VARCHAR2(200), 
+	"ISPUBLISHPERSON" VARCHAR2(200), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."SCHEME"."STATUS" IS '已使用，未使用';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SCHEME"."ISSTOP" IS '停用，启用';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SCHEME"."ISPUBLISH" IS '已发布，未发布';
+--------------------------------------------------------
+--  DDL for Table SCHEME_RULE
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SCHEME_RULE" 
+   (	"ID" VARCHAR2(36), 
+	"RULEID" VARCHAR2(36), 
+	"SCHEMEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200), 
+	"SORT" NUMBER DEFAULT NULL
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."SCHEME_RULE"."RULEID" IS '标识';
+--------------------------------------------------------
+--  DDL for Table SysAnnouncement
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysAnnouncement" 
+   (	"Id" NVARCHAR2(36), 
+	"Title" NVARCHAR2(100), 
+	"Message" NVARCHAR2(1000), 
+	"State" NVARCHAR2(200), 
+	"CreateTime" DATE, 
+	"CreatePerson" NVARCHAR2(200)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table SysDepartment
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysDepartment" 
+   (	"Id" NVARCHAR2(36), 
+	"Name" NVARCHAR2(200), 
+	"ParentId" NVARCHAR2(36), 
+	"Address" NVARCHAR2(200), 
+	"Sort" NUMBER(*,0), 
+	"Remark" NVARCHAR2(1000), 
+	"CreateTime" DATE, 
+	"CreatePerson" NVARCHAR2(200), 
+	"UpdateTime" DATE, 
+	"UpdatePerson" NVARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."SysDepartment"."Name" IS 'Research';
+--------------------------------------------------------
+--  DDL for Table SysDocument
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysDocument" 
+   (	"Id" NVARCHAR2(36), 
+	"Name" NVARCHAR2(200), 
+	"Path" NVARCHAR2(200), 
+	"FullPath" VARCHAR2(500), 
+	"Suffix" NVARCHAR2(200), 
+	"Size" NUMBER(*,0), 
+	"Remark" NVARCHAR2(1000), 
+	"Download" NUMBER(*,0), 
+	"CreateTime" DATE, 
+	"CreatePerson" NVARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."SysDocument"."Name" IS 'Research';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysDocument"."CreateTime" IS 'Research';
+--------------------------------------------------------
+--  DDL for Table SysDocumentSysDepartment
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysDocumentSysDepartment" 
+   (	"SysDepartmentId" NVARCHAR2(36), 
+	"Sys_Id" NVARCHAR2(36)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table SysDocumentSysPerson
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysDocumentSysPerson" 
+   (	"SysPersonId" NVARCHAR2(36), 
+	"SysSysDocumentId_Id" NVARCHAR2(36)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table SysDocumentTalk
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysDocumentTalk" 
+   (	"Id" NVARCHAR2(36), 
+	"Content" NVARCHAR2(500), 
+	"SysDocumentId" NVARCHAR2(36), 
+	"Bad" NUMBER(*,0), 
+	"Good" NUMBER(*,0), 
+	"CreateTime" DATE, 
+	"CreatePerson" NVARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."SysDocumentTalk"."Content" IS 'Research';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysDocumentTalk"."CreateTime" IS 'Research';
+--------------------------------------------------------
+--  DDL for Table SysEmail
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysEmail" 
+   (	"Id" NVARCHAR2(36), 
+	"SysMailId" NVARCHAR2(36), 
+	"Subject" NVARCHAR2(200), 
+	"Content" NVARCHAR2(1000), 
+	"Reply_email" NVARCHAR2(200), 
+	"Mail_type" NVARCHAR2(200), 
+	"Remark" NVARCHAR2(1000), 
+	"State" NVARCHAR2(200), 
+	"ReadTime" DATE, 
+	"CreateTime" DATE, 
+	"CreatePerson" NVARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."SysEmail"."ReadTime" IS 'Research';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysEmail"."CreateTime" IS 'Research';
+--------------------------------------------------------
+--  DDL for Table SysEmailTemp
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysEmailTemp" 
+   (	"Id" NVARCHAR2(36), 
+	"Mail_name" NVARCHAR2(200), 
+	"Subject" NVARCHAR2(200), 
+	"Content" NVARCHAR2(1000), 
+	"Reply_email" NVARCHAR2(200), 
+	"IsDefault" NVARCHAR2(200), 
+	"Mail_type" NVARCHAR2(200), 
+	"Remark" NVARCHAR2(1000), 
+	"State" NVARCHAR2(200), 
+	"CreateTime" DATE, 
+	"CreatePerson" NVARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."SysEmailTemp"."IsDefault" IS 'RadioButton';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysEmailTemp"."CreateTime" IS 'Research';
+--------------------------------------------------------
+--  DDL for Table SysException
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysException" 
+   (	"Id" NVARCHAR2(36), 
+	"LeiXing" NVARCHAR2(200), 
+	"Message" NVARCHAR2(1000), 
+	"Result" NVARCHAR2(200), 
+	"Remark" NVARCHAR2(1000), 
+	"State" NVARCHAR2(200), 
+	"CreateTime" DATE, 
+	"CreatePerson" NVARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."SysException"."Message" IS 'Research';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysException"."CreateTime" IS 'Research';
+--------------------------------------------------------
+--  DDL for Table SysField
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysField" 
+   (	"Id" NVARCHAR2(36), 
+	"MyTexts" NVARCHAR2(200), 
+	"ParentId" NVARCHAR2(36), 
+	"MyTables" NVARCHAR2(200), 
+	"MyColums" NVARCHAR2(200), 
+	"Sort" NUMBER(*,0), 
+	"Remark" NVARCHAR2(1000), 
+	"CreateTime" DATE, 
+	"CreatePerson" NVARCHAR2(200), 
+	"UpdateTime" DATE, 
+	"UpdatePerson" NVARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."SysField"."MyTexts" IS 'Research';
+--------------------------------------------------------
+--  DDL for Table SysLog
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysLog" 
+   (	"Id" NVARCHAR2(36), 
+	"PersonId" NVARCHAR2(36), 
+	"Message" NVARCHAR2(1000), 
+	"Result" NVARCHAR2(200), 
+	"MenuId" NVARCHAR2(36), 
+	"Ip" NVARCHAR2(200), 
+	"Remark" NVARCHAR2(1000), 
+	"State" NVARCHAR2(200), 
+	"CreateTime" DATE, 
+	"CreatePerson" NVARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."SysLog"."Message" IS 'Research';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysLog"."Ip" IS 'Research';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysLog"."State" IS 'ResearchDropDown';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysLog"."CreateTime" IS 'Research';
+--------------------------------------------------------
+--  DDL for Table SysMenu
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysMenu" 
+   (	"Id" NVARCHAR2(36), 
+	"Name" NVARCHAR2(200), 
+	"ParentId" NVARCHAR2(36), 
+	"Url" NVARCHAR2(200), 
+	"Iconic" NVARCHAR2(200), 
+	"Sort" NUMBER(*,0), 
+	"Remark" NVARCHAR2(1000), 
+	"State" NVARCHAR2(200), 
+	"CreatePerson" NVARCHAR2(200), 
+	"CreateTime" DATE, 
+	"UpdateTime" DATE, 
+	"UpdatePerson" NVARCHAR2(200), 
+	"IsLeaf" NVARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."SysMenu"."Name" IS 'Research';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysMenu"."State" IS 'RadioButtonResearch';
+ 
+   COMMENT ON TABLE "TENGFEI"."SysMenu"  IS '导航栏';
+--------------------------------------------------------
+--  DDL for Table SysMenuSysOperation
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysMenuSysOperation" 
+   (	"SysMenuId" NVARCHAR2(36), 
+	"SysOperationId" NVARCHAR2(36)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table SysMenuSysRoleSysOperation
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysMenuSysRoleSysOperation" 
+   (	"Id" NVARCHAR2(36), 
+	"SysMenuId" NVARCHAR2(36), 
+	"SysOperationId" NVARCHAR2(36), 
+	"SysRoleId" NVARCHAR2(36)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table SysMessage
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysMessage" 
+   (	"Id" NVARCHAR2(36), 
+	"Content" NVARCHAR2(400), 
+	"SysMessageTempId" NVARCHAR2(36), 
+	"MessageType" NVARCHAR2(200), 
+	"Remark" NVARCHAR2(1000), 
+	"State" NVARCHAR2(200), 
+	"ReadTime" DATE, 
+	"CreateTime" DATE, 
+	"CreatePerson" NVARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."SysMessage"."ReadTime" IS 'Research';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysMessage"."CreateTime" IS 'Research';
+--------------------------------------------------------
+--  DDL for Table SysMessageTemp
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysMessageTemp" 
+   (	"Id" NVARCHAR2(36), 
+	"MessageName" NVARCHAR2(200), 
+	"Content" NVARCHAR2(400), 
+	"IsDefault" NVARCHAR2(200), 
+	"MessageType" NVARCHAR2(200), 
+	"Remark" NVARCHAR2(1000), 
+	"State" NVARCHAR2(200), 
+	"CreateTime" DATE, 
+	"CreatePerson" NVARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."SysMessageTemp"."IsDefault" IS 'RadioButton';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysMessageTemp"."CreateTime" IS 'Research';
+--------------------------------------------------------
+--  DDL for Table SysNotice
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysNotice" 
+   (	"Id" NVARCHAR2(36), 
+	"Message" NVARCHAR2(1000), 
+	"LostTime" DATE, 
+	"PersonId" NVARCHAR2(36), 
+	"Remark" NVARCHAR2(1000), 
+	"State" NVARCHAR2(200), 
+	"CreateTime" DATE, 
+	"CreatePerson" NVARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."SysNotice"."LostTime" IS 'Research';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysNotice"."CreateTime" IS 'Research';
+--------------------------------------------------------
+--  DDL for Table SysOperation
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysOperation" 
+   (	"Id" NVARCHAR2(36), 
+	"Name" NVARCHAR2(200), 
+	"Function" NVARCHAR2(200), 
+	"Iconic" NVARCHAR2(200), 
+	"Sort" NUMBER(*,0), 
+	"Remark" NVARCHAR2(1000), 
+	"State" NVARCHAR2(200), 
+	"CreateTime" DATE, 
+	"CreatePerson" NVARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."SysOperation"."Iconic" IS 'Equal';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysOperation"."State" IS 'ResearchDropDown';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysOperation"."CreateTime" IS 'Research';
+ 
+   COMMENT ON TABLE "TENGFEI"."SysOperation"  IS '操作';
+--------------------------------------------------------
+--  DDL for Table SysPerson
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysPerson" 
+   (	"Id" NVARCHAR2(36), 
+	"Name" NVARCHAR2(200), 
+	"MyName" NVARCHAR2(200), 
+	"Password" NVARCHAR2(200), 
+	"SurePassword" NVARCHAR2(200), 
+	"Sex" NVARCHAR2(200), 
+	"SysDepartmentId" NVARCHAR2(36), 
+	"Position" NVARCHAR2(200), 
+	"MobilePhoneNumber" NVARCHAR2(200), 
+	"PhoneNumber" NVARCHAR2(200), 
+	"Province" NVARCHAR2(200), 
+	"City" NVARCHAR2(200), 
+	"Village" NVARCHAR2(200), 
+	"Address" NVARCHAR2(200), 
+	"EmailAddress" NVARCHAR2(200), 
+	"Remark" NVARCHAR2(1000), 
+	"State" NVARCHAR2(200), 
+	"CreateTime" DATE, 
+	"CreatePerson" NVARCHAR2(200), 
+	"UpdateTime" DATE, 
+	"LogonNum" NUMBER(*,0), 
+	"LogonTime" DATE, 
+	"LogonIP" NVARCHAR2(200), 
+	"LastLogonTime" DATE, 
+	"LastLogonIP" NVARCHAR2(200), 
+	"PageStyle" NVARCHAR2(200), 
+	"UpdatePerson" NVARCHAR2(200), 
+	"Version" TIMESTAMP (6), 
+	"HDpic" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."SysPerson"."Name" IS 'Research';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysPerson"."MyName" IS 'Research';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysPerson"."Sex" IS 'DropDown';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysPerson"."Province" IS 'DropDown';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysPerson"."City" IS 'ProvinceCascade';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysPerson"."Village" IS 'CityCascade';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysPerson"."State" IS 'RadioButtonResearch';
+ 
+   COMMENT ON COLUMN "TENGFEI"."SysPerson"."PageStyle" IS 'Display';
+--------------------------------------------------------
+--  DDL for Table SysRole
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysRole" 
+   (	"Id" NVARCHAR2(36), 
+	"Name" NVARCHAR2(200), 
+	"Description" NVARCHAR2(1000), 
+	"CreateTime" DATE, 
+	"CreatePerson" NVARCHAR2(200), 
+	"UpdateTime" DATE, 
+	"UpdatePerson" NVARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."SysRole"."Name" IS 'Research';
+--------------------------------------------------------
+--  DDL for Table SysRoleSysPerson
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."SysRoleSysPerson" 
+   (	"SysPersonId" NVARCHAR2(36), 
+	"SysRoleId" NVARCHAR2(36)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table THREE_PHASE_UNCERTAINTY
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."THREE_PHASE_UNCERTAINTY" 
+   (	"ID" VARCHAR2(36), 
+	"DIGIT" NUMBER, 
+	"DEGREE1" NUMBER, 
+	"DEGREE2" NUMBER, 
+	"DEGREE3" NUMBER, 
+	"RULEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON TABLE "TENGFEI"."THREE_PHASE_UNCERTAINTY"  IS '参考三相数表不确定评定';
+--------------------------------------------------------
+--  DDL for Table TRANSMITER_SIN
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."TRANSMITER_SIN" 
+   (	"ID" VARCHAR2(36), 
+	"TEST_QUANTITY" VARCHAR2(200), 
+	"GRADE" VARCHAR2(200), 
+	"TEST_POINT" VARCHAR2(200), 
+	"TEST_POINT_UNIT" VARCHAR2(200), 
+	"SIN" VARCHAR2(200), 
+	"SIN_UNIT" VARCHAR2(200), 
+	"TWO_INPUT_STANDARD_VALUE" VARCHAR2(200), 
+	"TWO_INPUT_STANDARD_VALUE_UNIT" VARCHAR2(200), 
+	"STANDARD_OUTPUT_VALUE" VARCHAR2(200), 
+	"STANDARD_OUTPUT_VALUE_UNIT" VARCHAR2(200), 
+	"ACTUAL_OUTPUT_VALUE" VARCHAR2(200), 
+	"ACTUAL_OUTPUT_VALUE_UNIT" VARCHAR2(200), 
+	"REFERENCE_ERROR" VARCHAR2(200), 
+	"REFERENCE_ERROR_UNIT" VARCHAR2(200), 
+	"TRANSMITTER_HEADID" VARCHAR2(36), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."TRANSMITER_SIN"."REFERENCE_ERROR_UNIT" IS '% ';
+ 
+   COMMENT ON TABLE "TENGFEI"."TRANSMITER_SIN"  IS 'JJG126-1995 交流电量变换为直流电量电工测量变送器
+无功功率是sin';
+--------------------------------------------------------
+--  DDL for Table TRANSMITTER_COS
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."TRANSMITTER_COS" 
+   (	"ID" VARCHAR2(36), 
+	"TEST_QUANTITY" VARCHAR2(200), 
+	"GRADE" VARCHAR2(200), 
+	"TEST_POINT" VARCHAR2(200), 
+	"TEST_POINT_UNIT" VARCHAR2(200), 
+	"COS" VARCHAR2(200), 
+	"COS_UNIT" VARCHAR2(200), 
+	"TWO_INPUT_STANDARD_VALUES" VARCHAR2(200), 
+	"TWO_INPUT_STANDARD_VALUES_UNIT" VARCHAR2(200), 
+	"STANDARD_OUTPUT_VALUE" VARCHAR2(200), 
+	"STANDARD_OUTPUT_VALUE_UNIT" VARCHAR2(200), 
+	"ACTUAL_OUTPUT_VALUE" VARCHAR2(200), 
+	"ACTUAL_OUTPUT_VALUE_UNIT" VARCHAR2(200), 
+	"REFERENCE_ERROR" VARCHAR2(200), 
+	"REFERENCE_ERROR_UNIT" VARCHAR2(200), 
+	"TRANSMITTER_HEADID" VARCHAR2(36), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."TRANSMITTER_COS"."REFERENCE_ERROR_UNIT" IS '% ';
+ 
+   COMMENT ON TABLE "TENGFEI"."TRANSMITTER_COS"  IS 'JJG126-1995 交流电量变换为直流电量电工测量变送器
+电压，电流，有功功率都是cos
+';
+--------------------------------------------------------
+--  DDL for Table TRANSMITTER_FREQUENCY_PHASE
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."TRANSMITTER_FREQUENCY_PHASE" 
+   (	"ID" VARCHAR2(36), 
+	"TEST_QUANTITY" VARCHAR2(200), 
+	"GRADE" VARCHAR2(200), 
+	"TEST_POINT" VARCHAR2(200), 
+	"TEST_POINT_UNIT" VARCHAR2(200), 
+	"TWO_INPUT_STANDARD_VALUES" VARCHAR2(200), 
+	"TWO_INPUT_STANDARD_VALUES_UNIT" VARCHAR2(200), 
+	"STANDARD_OUTPUT_VALUE" VARCHAR2(200), 
+	"STANDARD_OUTPUT_VALUE_UNIT" VARCHAR2(200), 
+	"ACTUAL_OUTPUT_VALUE" VARCHAR2(200), 
+	"ACTUAL_OUTPUT_VALUE_UNIT" VARCHAR2(200), 
+	"REFERENCE_ERROR" VARCHAR2(200), 
+	"REFERENCE_ERROR_UNIT" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"TRANSMITTER_HEADID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."TRANSMITTER_FREQUENCY_PHASE"."REFERENCE_ERROR_UNIT" IS '% ';
+ 
+   COMMENT ON TABLE "TENGFEI"."TRANSMITTER_FREQUENCY_PHASE"  IS 'JJG126-1995 交流电量变换为直流电量电工测量变送器';
+--------------------------------------------------------
+--  DDL for Table TRANSMITTER_HEAD
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."TRANSMITTER_HEAD" 
+   (	"ID" VARCHAR2(36), 
+	"类型" VARCHAR2(200), 
+	"变送器输入开始" VARCHAR2(200), 
+	"变送器输入开始单位" VARCHAR2(200), 
+	"变送器输入结束" VARCHAR2(200), 
+	"变送器输入结束单位" VARCHAR2(200), 
+	"通道" VARCHAR2(200), 
+	"Un" VARCHAR2(200), 
+	"Un单位" VARCHAR2(200), 
+	"In" VARCHAR2(200), 
+	"In单位" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON TABLE "TENGFEI"."TRANSMITTER_HEAD"  IS 'JJG126-1995 交流电量变换为直流电量电工测量变送器';
+--------------------------------------------------------
+--  DDL for Table TRANSMITTER_POWER_FACTOR
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."TRANSMITTER_POWER_FACTOR" 
+   (	"ID" VARCHAR2(36), 
+	"TEST_QUANTITY" VARCHAR2(200), 
+	"GRADE" VARCHAR2(200), 
+	"TEST_POINT" VARCHAR2(200), 
+	"TEST_POINT_UNIT" VARCHAR2(200), 
+	"U" VARCHAR2(200), 
+	"U_UNIT" VARCHAR2(200), 
+	"A" VARCHAR2(200), 
+	"A_UNIT" VARCHAR2(200), 
+	"TWO_INPUT_STANDARD_VALUES" VARCHAR2(200), 
+	"TWO_INPUT_STANDARD_VALUES_UNIT" VARCHAR2(200), 
+	"STANDARD_OUTPUT_VALUE" VARCHAR2(200), 
+	"STANDARD_OUTPUT_VALUE_UNIT" VARCHAR2(200), 
+	"ACTUAL_OUTPUT_VALUE" VARCHAR2(200), 
+	"ACTUAL_OUTPUT_VALUE_UNIT" VARCHAR2(200), 
+	"REFERENCE_ERROR" VARCHAR2(200), 
+	"REFERENCE_ERROR_UNIT" VARCHAR2(200), 
+	"TRANSMITTER_HEADID" VARCHAR2(36), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."TRANSMITTER_POWER_FACTOR"."REFERENCE_ERROR_UNIT" IS '% ';
+ 
+   COMMENT ON TABLE "TENGFEI"."TRANSMITTER_POWER_FACTOR"  IS 'JJG126-1995 交流电量变换为直流电量电工测量变送器';
+--------------------------------------------------------
+--  DDL for Table TRANSMITTER_RANGE
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."TRANSMITTER_RANGE" 
+   (	"ID" VARCHAR2(36), 
+	"TEST_QUANTITY" VARCHAR2(200), 
+	"INPUT_START" VARCHAR2(200), 
+	"INPUT_START_UNIT" VARCHAR2(200), 
+	"INPUT_END" VARCHAR2(200), 
+	"INPUT_END_UNIT" VARCHAR2(200), 
+	"OUTPUT_START" VARCHAR2(200), 
+	"OUTPUT_START_UNIT" VARCHAR2(200), 
+	"OUTPUT_END" VARCHAR2(200), 
+	"OUTPUT_END_UNIT" VARCHAR2(200), 
+	"SORT" VARCHAR2(200), 
+	"PREPARE_SCHEMEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON TABLE "TENGFEI"."TRANSMITTER_RANGE"  IS 'JJG126-1995 交流电量变换为直流电量电工测量变送器 
+测试量多条
+';
+--------------------------------------------------------
+--  DDL for Table UNCERTAINTY
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."UNCERTAINTY" 
+   (	"ID" VARCHAR2(36), 
+	"RANGE" NUMBER, 
+	"RANGE_UNIT" VARCHAR2(200), 
+	"KPI_1" NUMBER, 
+	"KPI_1_UNIT" VARCHAR2(200), 
+	"KPI_2" NUMBER, 
+	"KPI_2_UNIT" VARCHAR2(200), 
+	"RULEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON TABLE "TENGFEI"."UNCERTAINTY"  IS '参考表检定不确定度5720A计算和源检定不确定度参考-8508A(新) 计算';
+--------------------------------------------------------
+--  DDL for Table UNCERTAINTY2_HZ
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."UNCERTAINTY2_HZ" 
+   (	"ID" VARCHAR2(36), 
+	"RANGE" VARCHAR2(200), 
+	"RANGE_UNIT" VARCHAR2(200), 
+	"MIN_FREQUENCY" VARCHAR2(200), 
+	"MIN_FREQUENCY_UNIT" VARCHAR2(200), 
+	"MAX_FREQUENCY" VARCHAR2(200), 
+	"MAX_FREQUENCY_UNIT" VARCHAR2(200), 
+	"INDEX1" VARCHAR2(200), 
+	"INDEX1_UNIT" VARCHAR2(200), 
+	"INDEX2" VARCHAR2(200), 
+	"INDEX2_UNIT" VARCHAR2(200), 
+	"RULEID" VARCHAR2(36), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."UNCERTAINTY2_HZ"."RULEID" IS '标识';
+ 
+   COMMENT ON TABLE "TENGFEI"."UNCERTAINTY2_HZ"  IS '参考表检定不确定度5720A计算-交流';
+--------------------------------------------------------
+--  DDL for Table UNCERTAINTYPARAMETERMANAGEMENT
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."UNCERTAINTYPARAMETERMANAGEMENT" 
+   (	"ID" VARCHAR2(36), 
+	"SOURCEOFERROR" VARCHAR2(200), 
+	"LIMIT_VALUE" NUMBER, 
+	"ERRORDISTRIBUTION" VARCHAR2(200), 
+	"k" VARCHAR2(200), 
+	"UNCERTAINTYDEGREE" NUMBER, 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"RULEID" VARCHAR2(36)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "TENGFEI"."UNCERTAINTYPARAMETERMANAGEMENT"."SOURCEOFERROR" IS 'DropDown';
+ 
+   COMMENT ON COLUMN "TENGFEI"."UNCERTAINTYPARAMETERMANAGEMENT"."ERRORDISTRIBUTION" IS 'DropDown';
+ 
+   COMMENT ON COLUMN "TENGFEI"."UNCERTAINTYPARAMETERMANAGEMENT"."k" IS 'DropDown';
+--------------------------------------------------------
+--  DDL for Table UNDERTAKE_LABORATORY
+--------------------------------------------------------
+
+  CREATE TABLE "TENGFEI"."UNDERTAKE_LABORATORY" 
+   (	"ID" VARCHAR2(36), 
+	"NAME" VARCHAR2(200), 
+	"CREATETIME" DATE, 
+	"CREATEPERSON" VARCHAR2(200), 
+	"UPDATETIME" DATE, 
+	"UPDATEPERSON" VARCHAR2(200)
+   ) ;
+ 
+
+   COMMENT ON TABLE "TENGFEI"."UNDERTAKE_LABORATORY"  IS '承接实验室主键和名称一样';
+
+---------------------------------------------------
+--   DATA FOR TABLE ACTIVE_POWER
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.ACTIVE_POWER
+
+---------------------------------------------------
+--   END DATA FOR TABLE ACTIVE_POWER
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE AC_VOLTAGE_CURRENT
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.AC_VOLTAGE_CURRENT
+
+---------------------------------------------------
+--   END DATA FOR TABLE AC_VOLTAGE_CURRENT
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE ALLOWABLE_ERROR
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.ALLOWABLE_ERROR
+
+---------------------------------------------------
+--   END DATA FOR TABLE ALLOWABLE_ERROR
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE APPLIANCECOLLECTION
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.APPLIANCECOLLECTION
+
+---------------------------------------------------
+--   END DATA FOR TABLE APPLIANCECOLLECTION
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE APPLIANCE_DETAIL_INFORMATION
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.APPLIANCE_DETAIL_INFORMATION
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('1609301008039213903683c4533bd',null,'电表','D-123','AAA','ABC123',1,'aaaa','良好','hahahah','11111',null,'16093010080392139033fdc397ab1',to_timestamp('30-9月 -16 10.08.03.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,'是','数表三相',null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('1609301008039213903751b37a0ab',null,'电表2','D-123','BBB','ABC123',1,'bbb','良好','hehehehe','11111',null,'16093010080392139033fdc397ab1',to_timestamp('30-9月 -16 10.08.03.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,'是','数表三相',null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('1610081238168658042c4ac33433b',null,'测试器具S3D008','S3D-008','S3D008','201608',10,'电源','良好','制造单位003','备注008',null,'16100812381686580428a2535283c',to_timestamp('08-10月-16 12.38.16.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,'否','电能',null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('161008162529892766577f2f96359',null,'开发有用','D-009','S3D009','201608',10,'电源','良好','制造单位003','备注009',null,'1610081625298771544e028f36800',to_timestamp('08-10月-16 04.25.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三',null,null,'否','数表三相',null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('161007105819033956010b678e2bc',null,'测试器具D002','D-002','A002','201601',1,'无','良好','制造单位002','备注002',null,'16100710581903395608d5ab8de78',to_timestamp('07-10月-16 10.58.19.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,'是','电能',null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('16100710581903395605a20a66129',null,'测试器具D001','D-001','A001','201601',1,'电源','良好','制造单位001','备注001',null,'16100710581903395608d5ab8de78',to_timestamp('07-10月-16 10.58.19.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,'是','电能',null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('16100710411239720287e3447dd56',null,'测试器具S3001','L-001','A001','201601',1,'电源','良好','制造单位001','备注001',null,'1610071041123972028306932ee0e',to_timestamp('07-10月-16 10.41.12.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,'是',null,null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('161007105238907661010eef68dde',null,'测试器具S3005','L-005','A005','201605',1,'电源','良好','制造单位005','备注005',null,'16100710523890766101bb1da71d8',to_timestamp('07-10月-16 10.52.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,'否','数表三相',null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('1610071058190339560ae288dc0eb',null,'测试器具D003','D-003','A003','201601',1,'无','良好','制造单位003','备注003',null,'16100710581903395608d5ab8de78',to_timestamp('07-10月-16 10.58.19.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,'否',null,null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('1610071059476996564b6297cc63f',null,'测试器具Q001','Q-002','A002','201601',1,'无','良好','制造单位002','备注001',null,'16100710594769965647a52ee44b7',to_timestamp('07-10月-16 10.59.47.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,'是',null,null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('1610081207393881028f6b463b42f',null,'测试器具Q006','Q-006','Q006','201606',10,'电源','良好','制造单位002','备注006',null,'1610081207393881028c2c3bdba62',to_timestamp('08-10月-16 12.07.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,'是',null,null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('1610071052389076610ff7f5d23fe',null,'测试器具S3003','L-003','A003','201603',1,'电源','良好','制造单位003','备注003',null,'16100710523890766101bb1da71d8',to_timestamp('07-10月-16 10.52.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,'是','数表三相',null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('1610071104184587456b67c4ae5ff',null,'测试器具S3D002','S3D-002','S3D002','201602',1,'电源','良好','制造单位002','备注002',null,'1610071104184587456fff6ecfffc',to_timestamp('07-10月-16 11.04.18.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,'是','电能',null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('1610071104184587456c100e6c503',null,'测试器具S3D001','S3D-001','S3D001','201601',1,'无','良好','制造单位001','备注001',null,'1610071104184587456fff6ecfffc',to_timestamp('07-10月-16 11.04.18.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,'是','数表三相',null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('1610071104184587456c3541cbb92',null,'测试器具S3D003','S3D-003','S3D003','201603',10,'电源','良好','制造单位003','备注003',null,'1610071104184587456fff6ecfffc',to_timestamp('07-10月-16 11.04.18.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,'否','数表三相',null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('1610071109025473898b9b279cd17',null,'测试器具S3D005','S3D-005','S3D005','201605',1,'电源','良好','制造单位002','备注005',null,'161007110902547389894c5f69d90',to_timestamp('08-10月-16 11.39.01.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三',null,null,'是',null,null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('161008131109202665568c226b7bf',null,'测试器具D009','D-009','S3D009','201608',10,'电源','良好','制造单位003','备注009',null,'1610081311092026655b1e16ab40e',to_timestamp('08-10月-16 01.11.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,'否',null,null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('161007104009812429558b0e52553',null,'测试器具S3002','L-002','A002','201602',2,'电源','良好','制造单位002','备注002',null,'1610071040098124295c46f4e94a0',to_timestamp('07-10月-16 10.40.09.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,'否','数表三相',null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('16100710400981242958e0a12b530',null,'测试器具S3001','L-001','A001','201601',1,'电源','良好','制造单位001','备注001',null,'1610071040098124295c46f4e94a0',to_timestamp('07-10月-16 10.40.09.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,'是',null,null,null,null,null);
+Insert into TENGFEI.APPLIANCE_DETAIL_INFORMATION (ID,BAR_CODE_NUM,APPLIANCE_NAME,VERSION,FORMAT,FACTORY_NUM,NUM,ATTACHMENT,APPEARANCE_STATUS,MAKE_ORGANIZATION,REMARKS,END_PLAN_DATE,ORDER_TASK_INFORMATIONID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,APPLIANCE_RECIVE,APPLIANCE_PROGRESS,ISOVERDUE,OVERDUE,STORAGEINSTRUCTIONS,STORAGEINSTRUCTI_STATU) values ('1610071052389076610d08900b6ce',null,'测试器具S3004','L-004','A004','201604',1,'电源','良好','制造单位004','备注004',null,'16100710523890766101bb1da71d8',to_timestamp('07-10月-16 10.52.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,'是',null,null,null,null,null);
+
+---------------------------------------------------
+--   END DATA FOR TABLE APPLIANCE_DETAIL_INFORMATION
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE APPLIANCE_LABORATORY
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.APPLIANCE_LABORATORY
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('16100812381686580429d13932671','电能','1610081238168658042c4ac33433b','16100812432401201265d23f6010b',null,null,null,null,'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'试验完成','1040',null,'否');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('16093010080392139030c88b809d5','电能','1609301008039213903683c4533bd',null,null,null,null,null,'Admin',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已分配','1010',null,'是');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('1609301008039213903c13cb5a852','数表三相','1609301008039213903751b37a0ab','1609301656314257304dc82b59740',null,null,null,null,'Admin',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'待入库','1041',null,'否');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('1610081238168658042adc3639a3d','数表三相','1610081238168658042c4ac33433b',null,null,null,null,null,'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已分配','1010',null,'是');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('1609301008039213903f0471ba008','数表三相','1609301008039213903683c4533bd','1609301400577124277db6c732e23',null,null,null,null,'Admin',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'试验完成','1040',null,'否');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('1610081625298927665c32d89614c','数表三相','161008162529892766577f2f96359','161008163205467348401f1aec5a1',null,null,null,null,'测试数表三',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已领取','1020',null,'否');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('161007105819033956046da977cb4','电能','16100710581903395605a20a66129','16100812415778341700f2e5b0621',null,null,null,null,'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'试验完成','1040',null,'否');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('16100710581903395606a2076e4dc',null,'16100710581903395605a20a66129',null,null,null,null,null,'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已分配','1010',null,'是');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('1610071058190339560f815d2c25b','电能','1610071058190339560ae288dc0eb',null,null,null,'测试电能',to_timestamp('08-10月-16 12.59.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'待入库','1041',null,'是');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('16100710411239720286ca02be939','数表三相','16100710411239720287e3447dd56',null,null,null,null,null,'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已分配','1010',null,'是');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('161007105819033956011cfd1decf','电能','161007105819033956010b678e2bc','161008124026720265384329863f8',null,null,null,null,'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已领取','1020',null,'是');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('16100710594769965644f4a333a1f','数表单相','1610071059476996564b6297cc63f',null,null,null,null,null,'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已分配','1010',null,'是');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('1610071059476996564a06d20e0be',null,'1610071059476996564b6297cc63f',null,null,null,null,null,'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已分配','1010',null,'是');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('1610081207393881028127e049b2f','指示仪表','1610081207393881028f6b463b42f',null,null,null,null,null,'Admin',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已分配','1010',null,'是');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('16100812073938810284b105cf395','数表单相','1610081207393881028f6b463b42f',null,null,null,null,null,'Admin',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已分配','1010',null,'是');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('16100710523890766103bcd743620','数表三相','1610071052389076610ff7f5d23fe','16100711341518741395e3e4156b6',null,null,null,null,'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'待入库','1041',null,'否');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('1610071052389076610e0194daaef','数表三相','1610071052389076610d08900b6ce',null,null,null,'测试数表三',to_timestamp('08-10月-16 12.15.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已退回','1015',null,'是');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('161007110418458745631a4af50d8','数表三相','1610071104184587456c3541cbb92','16100812362971422075bda6713a9',null,null,null,null,'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已领取','1020',null,'否');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('161007110418458745634a292181d','电能','1610071104184587456b67c4ae5ff',null,null,null,'测试电能',to_timestamp('08-10月-16 01.04.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已退回','1015',null,'否');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('16100711041845874568f4a867187','电能','1610071104184587456c3541cbb92',null,null,null,null,null,'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已分配','1010',null,'否');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('1610071104184587456a95c4e6a41','数表三相','1610071104184587456c100e6c503',null,null,null,null,null,'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已领取','1020',null,'否');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('1610071104184587456c27ffd6f32','数表三相','1610071104184587456b67c4ae5ff','161007234131711800940ab485f00',null,null,null,null,'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'试验完成','1040',null,'否');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('1610071104184587456e33fb46a3b','电能','1610071104184587456c100e6c503',null,null,null,null,null,'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已分配','1010',null,'否');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('16100711090254738980e623ee4e5','数表三相','1610071109025473898b9b279cd17',null,null,null,'测试数表三',to_timestamp('08-10月-16 12.15.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'待入库','1041','分错了','是');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('16100711090254738989d81904e23','电能','1610071109025473898b9b279cd17',null,null,null,'测试电能',to_timestamp('08-10月-16 12.58.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已退回','1015',null,'是');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('16100813110920266559af2b633b2','电能','161008131109202665568c226b7bf',null,null,null,'测试电能',to_timestamp('08-10月-16 01.11.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'待入库','1041',null,'是');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('1610071040098124295a0fec97e37','数表三相','16100710400981242958e0a12b530',null,null,null,null,null,'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已分配','1010',null,'是');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('1610071040098124295d080bb50bb','数表三相','161007104009812429558b0e52553','16100711252905031918c2190ab81',null,null,null,null,'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已领取','1020',null,'是');
+Insert into TENGFEI.APPLIANCE_LABORATORY (ID,UNDERTAKE_LABORATORYID,APPLIANCE_DETAIL_INFORMATIONID,PREPARE_SCHEMEID,RECEIVEPERSON,RECEIVETIME,BACKPERSON,BACKTIME,DISTRIBUTIONPERSON,DISTRIBUTIONTIME,CREATEPERSON,CREATETIME,ORDER_STATUS,EQUIPMENT_STATUS_VALUUMN,RETURN_INSTRUCTIONS,ISRECEIVE) values ('16100710523890766103214718407','数表三相','161007105238907661010eef68dde','1610081336342459192c2b386a3ca',null,null,null,null,'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'已领取','1020',null,'否');
+
+---------------------------------------------------
+--   END DATA FOR TABLE APPLIANCE_LABORATORY
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE COMPANY
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.COMPANY
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1609211100331746388767fa06fc3','你好','北京','100000','李四','12345678998','85220',null,to_timestamp('21-9月 -16 11.00.33.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,'送检');
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1609281000572544773c9a2827b37','测试0928单位03',null,null,null,null,null,'160928095957576264521249e5160',to_timestamp('28-9月 -16 10.00.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,'送检');
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('160928100105911646582c9d5edb6','测试0928单位04',null,null,null,null,null,'160928095957576264521249e5160',to_timestamp('28-9月 -16 10.01.05.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,'证书');
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('160906154818934765345754d1f64','测试单位A','测试单位地址A','100000','张三','12390123456','010-112345678',null,to_timestamp('06-9月 -16 03.48.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('16090615501475366577fab470c98','测试单位B','测试单位地址B','100000','李四','12390123457','010-112345678',null,to_timestamp('06-9月 -16 03.50.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('06-9月 -16 03.54.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('16092810003864315720bdfe3e6cd','测试0928单位01',null,null,null,null,null,'160928095957576264521249e5160',to_timestamp('28-9月 -16 10.00.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1609281000480347471f5cfeca1fe','测试0928单位02',null,null,null,null,null,'160928095957576264521249e5160',to_timestamp('28-9月 -16 10.00.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('16090211162935758705a75c662e5','唐山分公司',null,null,null,null,null,null,null,null,to_timestamp('06-9月 -16 03.49.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('16091209395881248303e7270a5bf','azh单位','地址',null,null,null,null,'16090211162935758705a75c662e5',to_timestamp('12-9月 -16 09.39.58.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('16091209414701976309ad18a027d','azh子单位',null,null,null,null,null,'16090211162935758705a75c662e5',to_timestamp('12-9月 -16 09.41.47.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,'azh',null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1609260825414097596afb839aea4','测试单位92601','测试单位92601','100000','李四','12390123456','010-112345678',null,to_timestamp('26-9月 -16 08.25.41.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null,to_timestamp('26-9月 -16 08.27.15.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin','送检');
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('160926084133021695559495bdd57','测试证书单位92601','测试证书单位92601','100000','张三','12390123457','010-112345678',null,to_timestamp('26-9月 -16 08.41.33.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,'证书');
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('16092608414891433601702ec5dd6','测试证书单位92601','测试证书单位92601','100000','张三','12390123457','010-112345678',null,to_timestamp('26-9月 -16 08.41.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,'证书');
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('160928095957576264521249e5160','测试0928单位上级',null,null,null,null,null,null,to_timestamp('28-9月 -16 09.59.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('16100621073457134705c5bce8688','测试上级单位01',null,null,null,null,null,null,to_timestamp('06-10月-16 09.07.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1610062107444313816184fdabaab','测试上级单位02',null,null,null,null,null,null,to_timestamp('06-10月-16 09.07.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('16100621075122899714e9edcfbc2','测试上级单位03',null,null,null,null,null,null,to_timestamp('06-10月-16 09.07.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1610062108419531171a9b0085391','测试单位001',null,null,null,null,null,'16100621073457134705c5bce8688',to_timestamp('06-10月-16 09.08.41.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('16100621084945391434793c35836','测试单位002',null,null,null,null,null,'16100621073457134705c5bce8688',to_timestamp('06-10月-16 09.08.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1610062108595018571729e62d25d','测试单位003',null,null,null,null,null,'16100621073457134705c5bce8688',to_timestamp('06-10月-16 09.08.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('161006210906299453869fa2a8870','测试单位004',null,null,null,null,null,'16100621073457134705c5bce8688',to_timestamp('06-10月-16 09.09.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('16100621091170628119a0ffdb167','测试单位005',null,null,null,null,null,'16100621073457134705c5bce8688',to_timestamp('06-10月-16 09.09.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1610062109165036645811f885e44','测试单位006',null,null,null,null,null,'16100621073457134705c5bce8688',to_timestamp('06-10月-16 09.09.16.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1610062109218011018bf592a5274','测试单位007',null,null,null,null,null,'16100621073457134705c5bce8688',to_timestamp('06-10月-16 09.09.21.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1610062109264578781ffaaaa5e21','测试单位008',null,null,null,null,null,'16100621073457134705c5bce8688',to_timestamp('06-10月-16 09.09.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1610062109312864823394445c1ea','测试单位009',null,null,null,null,null,'16100621073457134705c5bce8688',to_timestamp('06-10月-16 09.09.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1610062109456630479bc32a8b934','测试单位010',null,null,null,null,null,'1610062107444313816184fdabaab',to_timestamp('06-10月-16 09.09.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1610062109533201079d18b6f2c1f','测试单位011',null,null,null,null,null,'1610062107444313816184fdabaab',to_timestamp('06-10月-16 09.09.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('161006211004790074677f386818e','测试单位020',null,null,null,null,null,'16100621075122899714e9edcfbc2',to_timestamp('06-10月-16 09.10.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1610062123504894791d12c17eb6a','测试单位101',null,null,null,null,null,null,to_timestamp('06-10月-16 09.23.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1610062123589590938012d251b03','测试单位102',null,null,null,null,null,null,to_timestamp('06-10月-16 09.23.58.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('16100621240350648657feadd7236','测试单位103',null,null,null,null,null,null,to_timestamp('06-10月-16 09.24.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('16100621240961647433d4b592a91','测试单位104',null,null,null,null,null,null,to_timestamp('06-10月-16 09.24.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1610062124144451143235aee898e','测试单位105',null,null,null,null,null,null,to_timestamp('06-10月-16 09.24.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1610062124185705500b8b2072516','测试单位106',null,null,null,null,null,null,to_timestamp('06-10月-16 09.24.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1610062124227272458f74c8a4b4a','测试单位107',null,null,null,null,null,null,to_timestamp('06-10月-16 09.24.22.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1610062124273839867cc35783ede','测试单位108',null,null,null,null,null,null,to_timestamp('06-10月-16 09.24.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1610062124318375861a5eb792806','测试单位109',null,null,null,null,null,null,to_timestamp('06-10月-16 09.24.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('16092609221557214973f0fa6432c','测试证书单位92602','测试证书单位92602','100000','李四','12390123456','010-112345678',null,to_timestamp('26-9月 -16 09.22.15.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,'证书');
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1609281127429129574ba32f6e540','test1231',null,null,null,null,null,'160928095957576264521249e5160',to_timestamp('28-9月 -16 11.27.42.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null);
+Insert into TENGFEI.COMPANY (ID,COMPANYNAME,COMPANYADDRES,POSTCODE,CONTACTS,CONTACTSNUMBER,FAX,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,CATEGORY) values ('1609281131532738069f8b42fb079','test',null,null,null,null,null,'160928095957576264521249e5160',to_timestamp('28-9月 -16 11.31.53.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('28-9月 -16 11.32.26.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+
+---------------------------------------------------
+--   END DATA FOR TABLE COMPANY
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE CROSS_COS
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.CROSS_COS
+
+---------------------------------------------------
+--   END DATA FOR TABLE CROSS_COS
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE CROSS_FREQUENCY_POWER_FACTOR
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.CROSS_FREQUENCY_POWER_FACTOR
+
+---------------------------------------------------
+--   END DATA FOR TABLE CROSS_FREQUENCY_POWER_FACTOR
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE CROSS_HEAD
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.CROSS_HEAD
+
+---------------------------------------------------
+--   END DATA FOR TABLE CROSS_HEAD
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE CROSS_SIN
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.CROSS_SIN
+
+---------------------------------------------------
+--   END DATA FOR TABLE CROSS_SIN
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE CROSS_VOLTAGE_CURRENT
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.CROSS_VOLTAGE_CURRENT
+
+---------------------------------------------------
+--   END DATA FOR TABLE CROSS_VOLTAGE_CURRENT
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE DC_CURRENT_OUTPUT
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.DC_CURRENT_OUTPUT
+
+---------------------------------------------------
+--   END DATA FOR TABLE DC_CURRENT_OUTPUT
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE DC_VOLTAGE_CURRENT_MEASURE
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.DC_VOLTAGE_CURRENT_MEASURE
+
+---------------------------------------------------
+--   END DATA FOR TABLE DC_VOLTAGE_CURRENT_MEASURE
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE DC_VOLTAGE_CURRENT_MEASURE_CH
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.DC_VOLTAGE_CURRENT_MEASURE_CH
+
+---------------------------------------------------
+--   END DATA FOR TABLE DC_VOLTAGE_CURRENT_MEASURE_CH
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE DC_VOLTAGE_MEASURE_NO_INDEX
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.DC_VOLTAGE_MEASURE_NO_INDEX
+
+---------------------------------------------------
+--   END DATA FOR TABLE DC_VOLTAGE_MEASURE_NO_INDEX
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE DC_VOLTAGE_OUTPUT
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.DC_VOLTAGE_OUTPUT
+
+---------------------------------------------------
+--   END DATA FOR TABLE DC_VOLTAGE_OUTPUT
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE ERROR_LIMIT
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.ERROR_LIMIT
+
+---------------------------------------------------
+--   END DATA FOR TABLE ERROR_LIMIT
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE FILE_UPLOADER
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.FILE_UPLOADER
+Insert into TENGFEI.FILE_UPLOADER (ID,NAME,PATH,FULLPATH,SUFFIX,SIZE,REMARK,NAME2,PATH2,FULLPATH2,SUFFIX2,SIZE2,REMARK2,STATE2,STATE,CREATETIME,CREATEPERSON,CONCLUSION,PREPARE_SCHEMEID,UPDATETIME,UPDATEPERSON) values ('16093014013744956627983e94f14','方案样表 - 20160905.xlsx','20160930140134_2371.xlsx','D:\shiyanshi\App\up\TheReport\20160930\20160930140134_2371.xlsx','xlsx',587216,null,'不确定度-数表三（变送器补充完毕）梳理完毕.xlsx','20160930140134_1808.xlsx','D:\shiyanshi\App\up\TheReport\20160930\20160930140134_1808.xlsx','xlsx',102862,null,null,'已上传',to_timestamp('30-9月 -16 02.01.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx','合格','1609301400577124277db6c732e23',null,null);
+Insert into TENGFEI.FILE_UPLOADER (ID,NAME,PATH,FULLPATH,SUFFIX,SIZE,REMARK,NAME2,PATH2,FULLPATH2,SUFFIX2,SIZE2,REMARK2,STATE2,STATE,CREATETIME,CREATEPERSON,CONCLUSION,PREPARE_SCHEMEID,UPDATETIME,UPDATEPERSON) values ('16100812433560790481038cd0465','测试-20160925-器具登记.xlsx','20161008124335_6069.xlsx','D:\codes\SHIYANSHI\App\up\TheReport\20161008\20161008124335_6069.xlsx','xlsx',169564,null,'测试-20160925-基础设置.xlsx','20161008124335_6047.xlsx','D:\codes\SHIYANSHI\App\up\TheReport\20161008\20161008124335_6047.xlsx','xlsx',1171159,null,null,'已上传',to_timestamp('08-10月-16 12.43.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能','合格','16100812432401201265d23f6010b',null,null);
+Insert into TENGFEI.FILE_UPLOADER (ID,NAME,PATH,FULLPATH,SUFFIX,SIZE,REMARK,NAME2,PATH2,FULLPATH2,SUFFIX2,SIZE2,REMARK2,STATE2,STATE,CREATETIME,CREATEPERSON,CONCLUSION,PREPARE_SCHEMEID,UPDATETIME,UPDATEPERSON) values ('160930165710420905796b7d43cad','误差限.xlsx','20160930165708_8851.xlsx','D:\shiyanshi\App\up\TheReport\20160930\20160930165708_8851.xlsx','xlsx',11862,null,'原始记录和报告的格式2016-04-15.xls','20160930165708_8741.xls','D:\shiyanshi\App\up\TheReport\20160930\20160930165708_8741.xls','xls',1221120,null,null,'已上传',to_timestamp('30-9月 -16 04.57.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx','合格','1609301656314257304dc82b59740',null,null);
+Insert into TENGFEI.FILE_UPLOADER (ID,NAME,PATH,FULLPATH,SUFFIX,SIZE,REMARK,NAME2,PATH2,FULLPATH2,SUFFIX2,SIZE2,REMARK2,STATE2,STATE,CREATETIME,CREATEPERSON,CONCLUSION,PREPARE_SCHEMEID,UPDATETIME,UPDATEPERSON) values ('1610081236404061414a5bf1856f0','测试-20160925-器具登记.xlsx','20161008123640_4049.xlsx','D:\codes\SHIYANSHI\App\up\TheReport\20161008\20161008123640_4049.xlsx','xlsx',169564,null,'测试-20160925-基础设置.xlsx','20161008123640_4029.xlsx','D:\codes\SHIYANSHI\App\up\TheReport\20161008\20161008123640_4029.xlsx','xlsx',1171159,null,null,'已上传',to_timestamp('08-10月-16 12.36.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三','合格','16100812362971422075bda6713a9',null,null);
+Insert into TENGFEI.FILE_UPLOADER (ID,NAME,PATH,FULLPATH,SUFFIX,SIZE,REMARK,NAME2,PATH2,FULLPATH2,SUFFIX2,SIZE2,REMARK2,STATE2,STATE,CREATETIME,CREATEPERSON,CONCLUSION,PREPARE_SCHEMEID,UPDATETIME,UPDATEPERSON) values ('1610081227393900736fa17806488','测试-20160925-器具登记.xlsx','20161008122739_3900.xlsx','D:\codes\SHIYANSHI\App\up\TheReport\20161008\20161008122739_3900.xlsx','xlsx',169564,null,'测试-20160925-基础设置.xlsx','20161008122739_3879.xlsx','D:\codes\SHIYANSHI\App\up\TheReport\20161008\20161008122739_3879.xlsx','xlsx',1171159,null,null,'已上传',to_timestamp('08-10月-16 12.27.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三','合格','161007234131711800940ab485f00',null,null);
+Insert into TENGFEI.FILE_UPLOADER (ID,NAME,PATH,FULLPATH,SUFFIX,SIZE,REMARK,NAME2,PATH2,FULLPATH2,SUFFIX2,SIZE2,REMARK2,STATE2,STATE,CREATETIME,CREATEPERSON,CONCLUSION,PREPARE_SCHEMEID,UPDATETIME,UPDATEPERSON) values ('16100812403749312175d8c6671aa','测试-20160925-器具登记.xlsx','20161008124037_4931.xlsx','D:\codes\SHIYANSHI\App\up\TheReport\20161008\20161008124037_4931.xlsx','xlsx',169564,null,'测试-20160925-基础设置.xlsx','20161008124037_4909.xlsx','D:\codes\SHIYANSHI\App\up\TheReport\20161008\20161008124037_4909.xlsx','xlsx',1171159,null,null,'已上传',to_timestamp('08-10月-16 12.40.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能','合格','161008124026720265384329863f8',null,null);
+Insert into TENGFEI.FILE_UPLOADER (ID,NAME,PATH,FULLPATH,SUFFIX,SIZE,REMARK,NAME2,PATH2,FULLPATH2,SUFFIX2,SIZE2,REMARK2,STATE2,STATE,CREATETIME,CREATEPERSON,CONCLUSION,PREPARE_SCHEMEID,UPDATETIME,UPDATEPERSON) values ('16100812420833992204df47cc4da','测试-20160925-器具登记.xlsx','20161008124208_3399.xlsx','D:\codes\SHIYANSHI\App\up\TheReport\20161008\20161008124208_3399.xlsx','xlsx',169564,null,'测试-20160925-基础设置.xlsx','20161008124208_3379.xlsx','D:\codes\SHIYANSHI\App\up\TheReport\20161008\20161008124208_3379.xlsx','xlsx',1171159,null,null,'已上传',to_timestamp('08-10月-16 12.42.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能','合格','16100812415778341700f2e5b0621',null,null);
+Insert into TENGFEI.FILE_UPLOADER (ID,NAME,PATH,FULLPATH,SUFFIX,SIZE,REMARK,NAME2,PATH2,FULLPATH2,SUFFIX2,SIZE2,REMARK2,STATE2,STATE,CREATETIME,CREATEPERSON,CONCLUSION,PREPARE_SCHEMEID,UPDATETIME,UPDATEPERSON) values ('16100711294276668669d1d9cd81a','测试-20160925-器具登记.xlsx','20161007112942_7666.xlsx','D:\codes\SHIYANSHI\App\up\TheReport\20161007\20161007112942_7666.xlsx','xlsx',169564,null,'测试-20160925-基础设置.xlsx','20161007112942_7041.xlsx','D:\codes\SHIYANSHI\App\up\TheReport\20161007\20161007112942_7041.xlsx','xlsx',1171159,null,null,'已上传',to_timestamp('07-10月-16 11.29.42.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员','合格','16100711252905031918c2190ab81',null,null);
+Insert into TENGFEI.FILE_UPLOADER (ID,NAME,PATH,FULLPATH,SUFFIX,SIZE,REMARK,NAME2,PATH2,FULLPATH2,SUFFIX2,SIZE2,REMARK2,STATE2,STATE,CREATETIME,CREATEPERSON,CONCLUSION,PREPARE_SCHEMEID,UPDATETIME,UPDATEPERSON) values ('1610071134447687132781b5d651f','测试-20160925-器具登记.xlsx','20161008122246_6814.xlsx','D:\codes\SHIYANSHI\App\up\TheReport\20161008\20161008122246_6814.xlsx','xlsx',169564,null,'测试-20160925-基础设置.xlsx','20161008122246_6563.xlsx','D:\codes\SHIYANSHI\App\up\TheReport\20161008\20161008122246_6563.xlsx','xlsx',1171159,null,null,'已上传',to_timestamp('07-10月-16 11.34.44.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员','不合格','16100711341518741395e3e4156b6',to_timestamp('08-10月-16 12.22.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+
+---------------------------------------------------
+--   END DATA FOR TABLE FILE_UPLOADER
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE FREQUENCY
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.FREQUENCY
+
+---------------------------------------------------
+--   END DATA FOR TABLE FREQUENCY
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE FileUploader
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."FileUploader"
+
+---------------------------------------------------
+--   END DATA FOR TABLE FileUploader
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE METERING_STANDARD_DEVICE
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.METERING_STANDARD_DEVICE
+
+---------------------------------------------------
+--   END DATA FOR TABLE METERING_STANDARD_DEVICE
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE METERING_STANDARD_DEVICEPREPAR
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.METERING_STANDARD_DEVICEPREPAR
+
+---------------------------------------------------
+--   END DATA FOR TABLE METERING_STANDARD_DEVICEPREPAR
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE METERING_STANDARD_DEVICE_CHECK
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.METERING_STANDARD_DEVICE_CHECK
+
+---------------------------------------------------
+--   END DATA FOR TABLE METERING_STANDARD_DEVICE_CHECK
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE ORDER_TASK_INFORMATION
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.ORDER_TASK_INFORMATION
+Insert into TENGFEI.ORDER_TASK_INFORMATION (ID,ORDER_NUMBER,ACCEPT_ORGNIZATION,INSPECTION_ENTERPRISE,INSPECTION_ENTERPRISE_ADDRESS,INSPECTION_ENTERPRISE_POST,CONTACTS,CONTACT_PHONE,FAX,CERTIFICATE_ENTERPRISE,CERTIFICATE_ENTERPRISE_ADDRESS,CERTIFICATE_ENTERPRISE_POST,CONTACTS2,CONTACT_PHONE2,FAX2,CUSTOMER_SPECIFIC_REQUIREMENTS,ORDER_STATUS,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('16100710581903395608d5ab8de78',null,'华北电力科学研究院有限责任公司','测试单位003','送检单位地址','100000','送检单位联系人','010-12345678','010-12345678','测试单位003','证书单位地址','100000','证书单位联系人','010-12345678','010-12345678','客户特殊要求','已分配',to_timestamp('07-10月-16 10.58.19.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null);
+Insert into TENGFEI.ORDER_TASK_INFORMATION (ID,ORDER_NUMBER,ACCEPT_ORGNIZATION,INSPECTION_ENTERPRISE,INSPECTION_ENTERPRISE_ADDRESS,INSPECTION_ENTERPRISE_POST,CONTACTS,CONTACT_PHONE,FAX,CERTIFICATE_ENTERPRISE,CERTIFICATE_ENTERPRISE_ADDRESS,CERTIFICATE_ENTERPRISE_POST,CONTACTS2,CONTACT_PHONE2,FAX2,CUSTOMER_SPECIFIC_REQUIREMENTS,ORDER_STATUS,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('1610081311092026655b1e16ab40e',null,'华北电力科学研究院有限责任公司','测试单位008','送检单位地址','100000','送检单位联系人','010-12345678','010-12345678','测试单位008','证书单位地址','100000','证书单位联系人','010-12345678','010-12345678','客户特殊要求','已分配',to_timestamp('08-10月-16 01.11.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null);
+Insert into TENGFEI.ORDER_TASK_INFORMATION (ID,ORDER_NUMBER,ACCEPT_ORGNIZATION,INSPECTION_ENTERPRISE,INSPECTION_ENTERPRISE_ADDRESS,INSPECTION_ENTERPRISE_POST,CONTACTS,CONTACT_PHONE,FAX,CERTIFICATE_ENTERPRISE,CERTIFICATE_ENTERPRISE_ADDRESS,CERTIFICATE_ENTERPRISE_POST,CONTACTS2,CONTACT_PHONE2,FAX2,CUSTOMER_SPECIFIC_REQUIREMENTS,ORDER_STATUS,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('16093010080392139033fdc397ab1',null,'华北电力科学研究院有限责任公司','test','北京','100000','张三','13125056785','010-12345678','test1231','唐山','100000','李四','13125056785','010-12345678','全检','已分配',to_timestamp('30-9月 -16 10.08.03.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI.ORDER_TASK_INFORMATION (ID,ORDER_NUMBER,ACCEPT_ORGNIZATION,INSPECTION_ENTERPRISE,INSPECTION_ENTERPRISE_ADDRESS,INSPECTION_ENTERPRISE_POST,CONTACTS,CONTACT_PHONE,FAX,CERTIFICATE_ENTERPRISE,CERTIFICATE_ENTERPRISE_ADDRESS,CERTIFICATE_ENTERPRISE_POST,CONTACTS2,CONTACT_PHONE2,FAX2,CUSTOMER_SPECIFIC_REQUIREMENTS,ORDER_STATUS,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('16100812381686580428a2535283c',null,'华北电力科学研究院有限责任公司','测试单位008','送检单位地址','100000','送检单位联系人','010-12345678','010-12345678','测试单位008','证书单位地址','100000','证书单位联系人','010-12345678','010-12345678','客户特殊要求','已分配',to_timestamp('08-10月-16 12.38.16.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null);
+Insert into TENGFEI.ORDER_TASK_INFORMATION (ID,ORDER_NUMBER,ACCEPT_ORGNIZATION,INSPECTION_ENTERPRISE,INSPECTION_ENTERPRISE_ADDRESS,INSPECTION_ENTERPRISE_POST,CONTACTS,CONTACT_PHONE,FAX,CERTIFICATE_ENTERPRISE,CERTIFICATE_ENTERPRISE_ADDRESS,CERTIFICATE_ENTERPRISE_POST,CONTACTS2,CONTACT_PHONE2,FAX2,CUSTOMER_SPECIFIC_REQUIREMENTS,ORDER_STATUS,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('1610081625298771544e028f36800',null,'华北电力科学研究院有限责任公司','测试单位008','送检单位地址','100000','送检单位联系人','010-12345678','010-12345678','测试单位008','证书单位地址','100000','证书单位联系人','010-12345678','010-12345678','客户特殊要求','已分配',to_timestamp('08-10月-16 04.25.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三',null,null);
+Insert into TENGFEI.ORDER_TASK_INFORMATION (ID,ORDER_NUMBER,ACCEPT_ORGNIZATION,INSPECTION_ENTERPRISE,INSPECTION_ENTERPRISE_ADDRESS,INSPECTION_ENTERPRISE_POST,CONTACTS,CONTACT_PHONE,FAX,CERTIFICATE_ENTERPRISE,CERTIFICATE_ENTERPRISE_ADDRESS,CERTIFICATE_ENTERPRISE_POST,CONTACTS2,CONTACT_PHONE2,FAX2,CUSTOMER_SPECIFIC_REQUIREMENTS,ORDER_STATUS,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('1610071041123972028306932ee0e',null,'华北电力科学研究院有限责任公司','测试单位001','送检单位地址','100000','送检单位联系人','010-12345678','010-12345678','测试单位001','证书单位地址','100000','证书单位联系人','010-12345678','010-12345678','客户特殊要求','已分配',to_timestamp('07-10月-16 10.41.12.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null);
+Insert into TENGFEI.ORDER_TASK_INFORMATION (ID,ORDER_NUMBER,ACCEPT_ORGNIZATION,INSPECTION_ENTERPRISE,INSPECTION_ENTERPRISE_ADDRESS,INSPECTION_ENTERPRISE_POST,CONTACTS,CONTACT_PHONE,FAX,CERTIFICATE_ENTERPRISE,CERTIFICATE_ENTERPRISE_ADDRESS,CERTIFICATE_ENTERPRISE_POST,CONTACTS2,CONTACT_PHONE2,FAX2,CUSTOMER_SPECIFIC_REQUIREMENTS,ORDER_STATUS,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('1610081207393881028c2c3bdba62',null,'冀北电力有限公司计量中心','测试单位007','送检单位地址','100000','送检单位联系人','010-12345678','010-12345678','测试单位007','证书单位地址','100000','证书单位联系人','010-12345678','010-12345678','客户特殊要求','已分配',to_timestamp('08-10月-16 12.07.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI.ORDER_TASK_INFORMATION (ID,ORDER_NUMBER,ACCEPT_ORGNIZATION,INSPECTION_ENTERPRISE,INSPECTION_ENTERPRISE_ADDRESS,INSPECTION_ENTERPRISE_POST,CONTACTS,CONTACT_PHONE,FAX,CERTIFICATE_ENTERPRISE,CERTIFICATE_ENTERPRISE_ADDRESS,CERTIFICATE_ENTERPRISE_POST,CONTACTS2,CONTACT_PHONE2,FAX2,CUSTOMER_SPECIFIC_REQUIREMENTS,ORDER_STATUS,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('16100710594769965647a52ee44b7',null,'华北电力科学研究院有限责任公司','测试单位004','送检单位地址','100000','送检单位联系人','010-12345678','010-12345678','测试单位004','证书单位地址','100000','证书单位联系人','010-12345678','010-12345678','客户特殊要求','已分配',to_timestamp('07-10月-16 10.59.47.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null);
+Insert into TENGFEI.ORDER_TASK_INFORMATION (ID,ORDER_NUMBER,ACCEPT_ORGNIZATION,INSPECTION_ENTERPRISE,INSPECTION_ENTERPRISE_ADDRESS,INSPECTION_ENTERPRISE_POST,CONTACTS,CONTACT_PHONE,FAX,CERTIFICATE_ENTERPRISE,CERTIFICATE_ENTERPRISE_ADDRESS,CERTIFICATE_ENTERPRISE_POST,CONTACTS2,CONTACT_PHONE2,FAX2,CUSTOMER_SPECIFIC_REQUIREMENTS,ORDER_STATUS,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('1610071104184587456fff6ecfffc',null,'华北电力科学研究院有限责任公司','测试单位006','送检单位地址','100000','送检单位联系人','010-12345678','010-12345678','测试单位006','证书单位地址','100000','证书单位联系人','010-12345678','010-12345678','客户特殊要求','有退回',to_timestamp('07-10月-16 11.04.18.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null);
+Insert into TENGFEI.ORDER_TASK_INFORMATION (ID,ORDER_NUMBER,ACCEPT_ORGNIZATION,INSPECTION_ENTERPRISE,INSPECTION_ENTERPRISE_ADDRESS,INSPECTION_ENTERPRISE_POST,CONTACTS,CONTACT_PHONE,FAX,CERTIFICATE_ENTERPRISE,CERTIFICATE_ENTERPRISE_ADDRESS,CERTIFICATE_ENTERPRISE_POST,CONTACTS2,CONTACT_PHONE2,FAX2,CUSTOMER_SPECIFIC_REQUIREMENTS,ORDER_STATUS,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('161007110902547389894c5f69d90',null,'冀北电力有限公司计量中心','测试单位005','送检单位地址','100000','送检单位联系人','010-12345678','010-12345678','测试单位005','证书单位地址','100000','证书单位联系人','010-12345678','010-12345678','客户特殊要求','有退回',to_timestamp('08-10月-16 11.38.58.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三',null,null);
+Insert into TENGFEI.ORDER_TASK_INFORMATION (ID,ORDER_NUMBER,ACCEPT_ORGNIZATION,INSPECTION_ENTERPRISE,INSPECTION_ENTERPRISE_ADDRESS,INSPECTION_ENTERPRISE_POST,CONTACTS,CONTACT_PHONE,FAX,CERTIFICATE_ENTERPRISE,CERTIFICATE_ENTERPRISE_ADDRESS,CERTIFICATE_ENTERPRISE_POST,CONTACTS2,CONTACT_PHONE2,FAX2,CUSTOMER_SPECIFIC_REQUIREMENTS,ORDER_STATUS,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('1610071040098124295c46f4e94a0',null,'华北电力科学研究院有限责任公司','测试单位001','送检单位地址','100000','送检单位联系人','010-12345678','010-12345678','测试单位001','证书单位地址','100000','证书单位联系人','010-12345678','010-12345678','客户特殊要求','已分配',to_timestamp('07-10月-16 10.40.09.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null);
+Insert into TENGFEI.ORDER_TASK_INFORMATION (ID,ORDER_NUMBER,ACCEPT_ORGNIZATION,INSPECTION_ENTERPRISE,INSPECTION_ENTERPRISE_ADDRESS,INSPECTION_ENTERPRISE_POST,CONTACTS,CONTACT_PHONE,FAX,CERTIFICATE_ENTERPRISE,CERTIFICATE_ENTERPRISE_ADDRESS,CERTIFICATE_ENTERPRISE_POST,CONTACTS2,CONTACT_PHONE2,FAX2,CUSTOMER_SPECIFIC_REQUIREMENTS,ORDER_STATUS,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('16100710523890766101bb1da71d8',null,'华北电力科学研究院有限责任公司','测试单位002','送检单位地址','100000','送检单位联系人','010-12345678','010-12345678','测试单位002','证书单位地址','100000','证书单位联系人','010-12345678','010-12345678','客户特殊要求','有退回',to_timestamp('07-10月-16 10.52.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发',null,null);
+
+---------------------------------------------------
+--   END DATA FOR TABLE ORDER_TASK_INFORMATION
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE OVERALL_TABLE
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.OVERALL_TABLE
+
+---------------------------------------------------
+--   END DATA FOR TABLE OVERALL_TABLE
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE PHASE
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.PHASE
+
+---------------------------------------------------
+--   END DATA FOR TABLE PHASE
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE PREPARE_SCHEME
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.PREPARE_SCHEME
+Insert into TENGFEI.PREPARE_SCHEME (ID,REPORT_CATEGORY,CERTIFICATE_CATEGORY,CNAS,CONTROL_NUMBER,CERTIFICATION_AUTHORITY,QUALIFICATIONS,TEMPERATURE,HUMIDITY,CHECK_PLACE,CHECKERID,DETECTERID,APPROVALID,CALIBRATION_DATE,CONCLUSION,CONCLUSION_EXPLAIN,VALIDITY_PERIOD,CALIBRATION_INSTRUCTIONS,ACCURACY_GRADE,RATED_FREQUENCY,PULSE_CONSTANT,EXTERNAL_RESITANCE_VALUE,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,AUDITOPINION,AUDITTIME,AUDITTEPERSON,ISAGGREY,APPROVAL,APPROVALDATE,APPROVALEPERSON,APPROVALISAGGREY,PRINTSTATUS,ISBACK,REPORTNUMBER,REPORTSTATUS,REPORTSTATUSZI,SERIALNUMBER,YEARS,PACKAGETYPE,OTHER) values ('1609301400577124277db6c732e23','标源','检定',null,null,'Yes','本单位获北京市质量技术监督局专项计量授权，证书编号：（京）法计（2012）006号',null,null,null,null,null,null,null,'yes','发士大夫',to_timestamp('13-10月-16 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null,null,null,'16100702025723755353249195bcb',to_timestamp('06-10月-16 09.58.07.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('07-10月-16 01.56.05.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin','好',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'cssh','同意','通过',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'cssp',null,null,null,'DC/标源-001-2016','已批准','1072',1,'2016','上传',null);
+Insert into TENGFEI.PREPARE_SCHEME (ID,REPORT_CATEGORY,CERTIFICATE_CATEGORY,CNAS,CONTROL_NUMBER,CERTIFICATION_AUTHORITY,QUALIFICATIONS,TEMPERATURE,HUMIDITY,CHECK_PLACE,CHECKERID,DETECTERID,APPROVALID,CALIBRATION_DATE,CONCLUSION,CONCLUSION_EXPLAIN,VALIDITY_PERIOD,CALIBRATION_INSTRUCTIONS,ACCURACY_GRADE,RATED_FREQUENCY,PULSE_CONSTANT,EXTERNAL_RESITANCE_VALUE,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,AUDITOPINION,AUDITTIME,AUDITTEPERSON,ISAGGREY,APPROVAL,APPROVALDATE,APPROVALEPERSON,APPROVALISAGGREY,PRINTSTATUS,ISBACK,REPORTNUMBER,REPORTSTATUS,REPORTSTATUSZI,SERIALNUMBER,YEARS,PACKAGETYPE,OTHER) values ('16100812432401201265d23f6010b','标表','校准','No',null,null,'/',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,to_timestamp('08-10月-16 12.43.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能',to_timestamp('08-10月-16 12.47.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试报告批准',null,to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能','同意',null,to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试报告批准',null,null,null,'DC/标表-010-2016','已批准','1072',10,'2016','上传',null);
+Insert into TENGFEI.PREPARE_SCHEME (ID,REPORT_CATEGORY,CERTIFICATE_CATEGORY,CNAS,CONTROL_NUMBER,CERTIFICATION_AUTHORITY,QUALIFICATIONS,TEMPERATURE,HUMIDITY,CHECK_PLACE,CHECKERID,DETECTERID,APPROVALID,CALIBRATION_DATE,CONCLUSION,CONCLUSION_EXPLAIN,VALIDITY_PERIOD,CALIBRATION_INSTRUCTIONS,ACCURACY_GRADE,RATED_FREQUENCY,PULSE_CONSTANT,EXTERNAL_RESITANCE_VALUE,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,AUDITOPINION,AUDITTIME,AUDITTEPERSON,ISAGGREY,APPROVAL,APPROVALDATE,APPROVALEPERSON,APPROVALISAGGREY,PRINTSTATUS,ISBACK,REPORTNUMBER,REPORTSTATUS,REPORTSTATUSZI,SERIALNUMBER,YEARS,PACKAGETYPE,OTHER) values ('16100812362971422075bda6713a9','交采','校准','No',null,null,'/',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,to_timestamp('08-10月-16 12.36.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三',to_timestamp('08-10月-16 12.36.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三',null,null,null,null,null,null,null,null,null,null,'DC/交采-007-2016','待审核','1060',7,'2016','上传',null);
+Insert into TENGFEI.PREPARE_SCHEME (ID,REPORT_CATEGORY,CERTIFICATE_CATEGORY,CNAS,CONTROL_NUMBER,CERTIFICATION_AUTHORITY,QUALIFICATIONS,TEMPERATURE,HUMIDITY,CHECK_PLACE,CHECKERID,DETECTERID,APPROVALID,CALIBRATION_DATE,CONCLUSION,CONCLUSION_EXPLAIN,VALIDITY_PERIOD,CALIBRATION_INSTRUCTIONS,ACCURACY_GRADE,RATED_FREQUENCY,PULSE_CONSTANT,EXTERNAL_RESITANCE_VALUE,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,AUDITOPINION,AUDITTIME,AUDITTEPERSON,ISAGGREY,APPROVAL,APPROVALDATE,APPROVALEPERSON,APPROVALISAGGREY,PRINTSTATUS,ISBACK,REPORTNUMBER,REPORTSTATUS,REPORTSTATUSZI,SERIALNUMBER,YEARS,PACKAGETYPE,OTHER) values ('1609301656314257304dc82b59740','交采','校准','Yes','DC-仪表-08（1）',null,'本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,'16100702025723755353249195bcb',to_timestamp('30-9月 -16 04.56.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx',to_timestamp('30-9月 -16 05.08.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssp','可以',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'cssh','同意','通过',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'cssp',null,null,null,'DC/交采-002-2016','已批准','1072',2,'2016','上传',null);
+Insert into TENGFEI.PREPARE_SCHEME (ID,REPORT_CATEGORY,CERTIFICATE_CATEGORY,CNAS,CONTROL_NUMBER,CERTIFICATION_AUTHORITY,QUALIFICATIONS,TEMPERATURE,HUMIDITY,CHECK_PLACE,CHECKERID,DETECTERID,APPROVALID,CALIBRATION_DATE,CONCLUSION,CONCLUSION_EXPLAIN,VALIDITY_PERIOD,CALIBRATION_INSTRUCTIONS,ACCURACY_GRADE,RATED_FREQUENCY,PULSE_CONSTANT,EXTERNAL_RESITANCE_VALUE,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,AUDITOPINION,AUDITTIME,AUDITTEPERSON,ISAGGREY,APPROVAL,APPROVALDATE,APPROVALEPERSON,APPROVALISAGGREY,PRINTSTATUS,ISBACK,REPORTNUMBER,REPORTSTATUS,REPORTSTATUSZI,SERIALNUMBER,YEARS,PACKAGETYPE,OTHER) values ('161007112524971762157431a269c',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,to_timestamp('07-10月-16 11.25.24.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,3,'2016',null,null);
+Insert into TENGFEI.PREPARE_SCHEME (ID,REPORT_CATEGORY,CERTIFICATE_CATEGORY,CNAS,CONTROL_NUMBER,CERTIFICATION_AUTHORITY,QUALIFICATIONS,TEMPERATURE,HUMIDITY,CHECK_PLACE,CHECKERID,DETECTERID,APPROVALID,CALIBRATION_DATE,CONCLUSION,CONCLUSION_EXPLAIN,VALIDITY_PERIOD,CALIBRATION_INSTRUCTIONS,ACCURACY_GRADE,RATED_FREQUENCY,PULSE_CONSTANT,EXTERNAL_RESITANCE_VALUE,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,AUDITOPINION,AUDITTIME,AUDITTEPERSON,ISAGGREY,APPROVAL,APPROVALDATE,APPROVALEPERSON,APPROVALISAGGREY,PRINTSTATUS,ISBACK,REPORTNUMBER,REPORTSTATUS,REPORTSTATUSZI,SERIALNUMBER,YEARS,PACKAGETYPE,OTHER) values ('16100711252905031918c2190ab81','数表','校准','Yes','DC-仪表-08（1）',null,'本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,to_timestamp('08-10月-16 12.21.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三',to_timestamp('08-10月-16 12.49.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试报告批准','同意',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三','不同意',null,null,null,null,null,null,'DC/数表-004-2016','批准驳回','1071',4,'2016','上传',null);
+Insert into TENGFEI.PREPARE_SCHEME (ID,REPORT_CATEGORY,CERTIFICATE_CATEGORY,CNAS,CONTROL_NUMBER,CERTIFICATION_AUTHORITY,QUALIFICATIONS,TEMPERATURE,HUMIDITY,CHECK_PLACE,CHECKERID,DETECTERID,APPROVALID,CALIBRATION_DATE,CONCLUSION,CONCLUSION_EXPLAIN,VALIDITY_PERIOD,CALIBRATION_INSTRUCTIONS,ACCURACY_GRADE,RATED_FREQUENCY,PULSE_CONSTANT,EXTERNAL_RESITANCE_VALUE,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,AUDITOPINION,AUDITTIME,AUDITTEPERSON,ISAGGREY,APPROVAL,APPROVALDATE,APPROVALEPERSON,APPROVALISAGGREY,PRINTSTATUS,ISBACK,REPORTNUMBER,REPORTSTATUS,REPORTSTATUSZI,SERIALNUMBER,YEARS,PACKAGETYPE,OTHER) values ('1610081336342459192c2b386a3ca','标源','检定',null,null,'No','/',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,to_timestamp('08-10月-16 01.36.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,11,'2016',null,null);
+Insert into TENGFEI.PREPARE_SCHEME (ID,REPORT_CATEGORY,CERTIFICATE_CATEGORY,CNAS,CONTROL_NUMBER,CERTIFICATION_AUTHORITY,QUALIFICATIONS,TEMPERATURE,HUMIDITY,CHECK_PLACE,CHECKERID,DETECTERID,APPROVALID,CALIBRATION_DATE,CONCLUSION,CONCLUSION_EXPLAIN,VALIDITY_PERIOD,CALIBRATION_INSTRUCTIONS,ACCURACY_GRADE,RATED_FREQUENCY,PULSE_CONSTANT,EXTERNAL_RESITANCE_VALUE,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,AUDITOPINION,AUDITTIME,AUDITTEPERSON,ISAGGREY,APPROVAL,APPROVALDATE,APPROVALEPERSON,APPROVALISAGGREY,PRINTSTATUS,ISBACK,REPORTNUMBER,REPORTSTATUS,REPORTSTATUSZI,SERIALNUMBER,YEARS,PACKAGETYPE,OTHER) values ('1610081632054673484c023ff2aa2','标源','检定',null,null,'Yes','本单位获北京市质量技术监督局专项计量授权，证书编号：（京）法计（2012）006号',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,to_timestamp('08-10月-16 04.32.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,12,'2016',null,null);
+Insert into TENGFEI.PREPARE_SCHEME (ID,REPORT_CATEGORY,CERTIFICATE_CATEGORY,CNAS,CONTROL_NUMBER,CERTIFICATION_AUTHORITY,QUALIFICATIONS,TEMPERATURE,HUMIDITY,CHECK_PLACE,CHECKERID,DETECTERID,APPROVALID,CALIBRATION_DATE,CONCLUSION,CONCLUSION_EXPLAIN,VALIDITY_PERIOD,CALIBRATION_INSTRUCTIONS,ACCURACY_GRADE,RATED_FREQUENCY,PULSE_CONSTANT,EXTERNAL_RESITANCE_VALUE,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,AUDITOPINION,AUDITTIME,AUDITTEPERSON,ISAGGREY,APPROVAL,APPROVALDATE,APPROVALEPERSON,APPROVALISAGGREY,PRINTSTATUS,ISBACK,REPORTNUMBER,REPORTSTATUS,REPORTSTATUSZI,SERIALNUMBER,YEARS,PACKAGETYPE,OTHER) values ('161008163205467348401f1aec5a1','标源','校准','Yes','DC-仪表-08（1）','Yes','本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394','2','3','电研大厦A座712',null,'普华',null,to_timestamp('10-10月-16 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null,null,'1',null,null,null,null,to_timestamp('10-10月-16 09.03.27.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('10-10月-16 12.24.44.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,null,'DC/标源-012-2016',null,null,12,'2016',null,null);
+Insert into TENGFEI.PREPARE_SCHEME (ID,REPORT_CATEGORY,CERTIFICATE_CATEGORY,CNAS,CONTROL_NUMBER,CERTIFICATION_AUTHORITY,QUALIFICATIONS,TEMPERATURE,HUMIDITY,CHECK_PLACE,CHECKERID,DETECTERID,APPROVALID,CALIBRATION_DATE,CONCLUSION,CONCLUSION_EXPLAIN,VALIDITY_PERIOD,CALIBRATION_INSTRUCTIONS,ACCURACY_GRADE,RATED_FREQUENCY,PULSE_CONSTANT,EXTERNAL_RESITANCE_VALUE,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,AUDITOPINION,AUDITTIME,AUDITTEPERSON,ISAGGREY,APPROVAL,APPROVALDATE,APPROVALEPERSON,APPROVALISAGGREY,PRINTSTATUS,ISBACK,REPORTNUMBER,REPORTSTATUS,REPORTSTATUSZI,SERIALNUMBER,YEARS,PACKAGETYPE,OTHER) values ('16100812415778341700f2e5b0621','能置','校准','Yes','DC-电能-01（1）',null,'本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,to_timestamp('08-10月-16 12.41.57.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能',to_timestamp('08-10月-16 12.52.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试报告批准',null,to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能','同意',null,to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试报告批准',null,null,null,'DC/能置-009-2016','已批准','1072',9,'2016','上传',null);
+Insert into TENGFEI.PREPARE_SCHEME (ID,REPORT_CATEGORY,CERTIFICATE_CATEGORY,CNAS,CONTROL_NUMBER,CERTIFICATION_AUTHORITY,QUALIFICATIONS,TEMPERATURE,HUMIDITY,CHECK_PLACE,CHECKERID,DETECTERID,APPROVALID,CALIBRATION_DATE,CONCLUSION,CONCLUSION_EXPLAIN,VALIDITY_PERIOD,CALIBRATION_INSTRUCTIONS,ACCURACY_GRADE,RATED_FREQUENCY,PULSE_CONSTANT,EXTERNAL_RESITANCE_VALUE,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,AUDITOPINION,AUDITTIME,AUDITTEPERSON,ISAGGREY,APPROVAL,APPROVALDATE,APPROVALEPERSON,APPROVALISAGGREY,PRINTSTATUS,ISBACK,REPORTNUMBER,REPORTSTATUS,REPORTSTATUSZI,SERIALNUMBER,YEARS,PACKAGETYPE,OTHER) values ('161008124026720265384329863f8','电表','检定',null,null,'Yes','本单位获北京市质量技术监督局专项计量授权，证书编号：（京）法计（2012）006号',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,to_timestamp('08-10月-16 12.40.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能',to_timestamp('08-10月-16 12.44.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能',null,null,null,'不同意',null,null,null,null,null,null,'DC/电表-008-2016','审核驳回','1065',8,'2016','上传',null);
+Insert into TENGFEI.PREPARE_SCHEME (ID,REPORT_CATEGORY,CERTIFICATE_CATEGORY,CNAS,CONTROL_NUMBER,CERTIFICATION_AUTHORITY,QUALIFICATIONS,TEMPERATURE,HUMIDITY,CHECK_PLACE,CHECKERID,DETECTERID,APPROVALID,CALIBRATION_DATE,CONCLUSION,CONCLUSION_EXPLAIN,VALIDITY_PERIOD,CALIBRATION_INSTRUCTIONS,ACCURACY_GRADE,RATED_FREQUENCY,PULSE_CONSTANT,EXTERNAL_RESITANCE_VALUE,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,AUDITOPINION,AUDITTIME,AUDITTEPERSON,ISAGGREY,APPROVAL,APPROVALDATE,APPROVALEPERSON,APPROVALISAGGREY,PRINTSTATUS,ISBACK,REPORTNUMBER,REPORTSTATUS,REPORTSTATUSZI,SERIALNUMBER,YEARS,PACKAGETYPE,OTHER) values ('161007234131711800940ab485f00','变送','检定',null,null,'No','/',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,to_timestamp('08-10月-16 12.27.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三',to_timestamp('08-10月-16 12.49.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试报告批准','同意',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三','同意',null,to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试报告批准',null,null,null,'DC/变送-006-2016','已批准','1072',6,'2016','上传',null);
+Insert into TENGFEI.PREPARE_SCHEME (ID,REPORT_CATEGORY,CERTIFICATE_CATEGORY,CNAS,CONTROL_NUMBER,CERTIFICATION_AUTHORITY,QUALIFICATIONS,TEMPERATURE,HUMIDITY,CHECK_PLACE,CHECKERID,DETECTERID,APPROVALID,CALIBRATION_DATE,CONCLUSION,CONCLUSION_EXPLAIN,VALIDITY_PERIOD,CALIBRATION_INSTRUCTIONS,ACCURACY_GRADE,RATED_FREQUENCY,PULSE_CONSTANT,EXTERNAL_RESITANCE_VALUE,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,AUDITOPINION,AUDITTIME,AUDITTEPERSON,ISAGGREY,APPROVAL,APPROVALDATE,APPROVALEPERSON,APPROVALISAGGREY,PRINTSTATUS,ISBACK,REPORTNUMBER,REPORTSTATUS,REPORTSTATUSZI,SERIALNUMBER,YEARS,PACKAGETYPE,OTHER) values ('16100711341518741395e3e4156b6','数表','检定',null,null,'Yes','本单位获北京市质量技术监督局专项计量授权，证书编号：（京）法计（2012）006号',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,to_timestamp('08-10月-16 12.22.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三',to_timestamp('08-10月-16 12.49.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试报告批准','同意',to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三','同意',null,to_timestamp('01-1月 -01 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试报告批准',null,null,null,'DC/数表-005-2016','已批准','1072',5,'2016','上传',null);
+
+---------------------------------------------------
+--   END DATA FOR TABLE PREPARE_SCHEME
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE PRINTREPORT
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.PRINTREPORT
+
+---------------------------------------------------
+--   END DATA FOR TABLE PRINTREPORT
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE PROJECTTEMPLET
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.PROJECTTEMPLET
+Insert into TENGFEI.PROJECTTEMPLET (ID,RULEID,SCHEMEID,HTMLVALUE,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('16100702042302628327e6b441009','315-1983_2_1','16100702025723755353249195bcb',(CLOB),to_timestamp('07-10月-16 02.04.23.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI.PROJECTTEMPLET (ID,RULEID,SCHEMEID,HTMLVALUE,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('1610070203387176646cbb15f1075','38-1987_2','16100702025723755353249195bcb',(CLOB),to_timestamp('07-10月-16 02.03.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI.PROJECTTEMPLET (ID,RULEID,SCHEMEID,HTMLVALUE,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('16100702045969486560d04fa6514','315-1983_2_2','16100702025723755353249195bcb',(CLOB),to_timestamp('07-10月-16 02.04.59.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+
+---------------------------------------------------
+--   END DATA FOR TABLE PROJECTTEMPLET
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE QUALIFIED_UNQUALIFIED_TEST_ITE
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.QUALIFIED_UNQUALIFIED_TEST_ITE
+
+---------------------------------------------------
+--   END DATA FOR TABLE QUALIFIED_UNQUALIFIED_TEST_ITE
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE REPORTCOLLECTION
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.REPORTCOLLECTION
+
+---------------------------------------------------
+--   END DATA FOR TABLE REPORTCOLLECTION
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE RULE
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.RULE
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('38-1987_2','直流电流输出','直流电流输出 ','/PROJECTTEMPLET/ZhiLiuDianLiuShuChu',2,'是',null,'数表三相','ZhiLiuDianLiuShuChu','38-1987',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('38-1987_3','短期稳定度的测试','短期稳定度的测试',null,3,'否',null,'数表三相','WBK','38-1987',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('38-1987_4','线性误差','线性误差 ',null,4,'否',null,'数表三相','HGBHG','38-1987',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('38-1987','JJG(航天) 38-1987 直流标准电流源检定规程','JJG(航天) 38-1987 直流标准电流源检定规程',null,1,'否',null,'数表三相',null,null,null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('38-1987_1','外观检查','外观检查',null,1,'否',null,'数表三相','HGBHG','38-1987',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('38-1987_5','负载调整率','负载调整率 ',null,5,'否',null,'数表三相','HGBHG','38-1987',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('38-1987_6','分辨力','分辨力 ',null,6,'否',null,'数表三相','HGBHG','38-1987',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('38-1987_7','电源调整率','电源调整率 ',null,7,'否',null,'数表三相','HGBHG','38-1987',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('38-1987_8','纹波和噪声电压','纹波和噪声电压 ',null,8,'否',null,'数表三相','HGBHG','38-1987',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('38-1987_9','共模干扰抑制能力','共模干扰抑制能力 ',null,9,'否',null,'数表三相','HGBHG','38-1987',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('315-1983','JJG 315-1983 直流数字电压表试行检定规程','JJG 315-1983 直流数字电压表试行检定规程 ',null,2,'否',null,'数表三相',null,null,null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('315-1983_1','外观检查','外观检查 ',null,1,'否',null,'数表三相','HGBHG','315-1983',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('315-1983_2','直流电压测量','直流电压测量 ',null,2,'否',null,'数表三相',null,'315-1983',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('315-1983_2_1','非正负极性-相对误差-单相','直流电流输出 ','/PROJECTTEMPLET/ZhiLiuDianLiuDianYaFeiZhengFu',1,'是',null,'数表三相','ZhiLiuDianLiuDianYaFeiZhengFu','315-1983_2',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('315-1983_2_2','非正负极性-相对误差-多通道','直流电流输出 ','/PROJECTTEMPLET/ZhiLiuDianLiuDianYaFeiZhengFu',2,'是',null,'数表三相','ZhiLiuDianLiuDianYaFeiZhengFu','315-1983_2',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('315-1983_3','稳定误差','稳定误差 ',null,3,'否',null,'数表三相','WBK','315-1983',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('315-1983_4','线性误差','线性误差 ',null,4,'否',null,'数表三相','HGBHG','315-1983',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('315-1983_5','显示能力','显示能力 ',null,5,'否',null,'数表三相','HGBHG','315-1983',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('315-1983_6','分辨力','分辨力 ',null,6,'否',null,'数表三相','HGBHG','315-1983',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('315-1983_7','温度系数','温度系数 ',null,7,'否',null,'数表三相','HGBHG','315-1983',null,null,null,null);
+Insert into TENGFEI.RULE (ID,NAMEOTHER,NAME,SCHEME_MENU,SORT,IS_UNCERTAINTY,UNCERTAINTY_MENU,UNDERTAKE_LABORATORYID,INPUTSTATE,PARENTID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('315-1983_8','电源电压变化的影响','电源电压变化的影响 ',null,8,'否',null,'数表三相','HGBHG','315-1983',null,null,null,null);
+
+---------------------------------------------------
+--   END DATA FOR TABLE RULE
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SCHEME
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.SCHEME
+Insert into TENGFEI.SCHEME (ID,NAME,REPORT_CATEGORY,CERTIFICATE_CATEGORY,STATUS,ISSTOP,ISPUBLISH,COPYID,UNDERTAKE_LABORATORYID,PUBLISHTIME,PUBLISHPERSON,ISPUBLISHTIME,ISPUBLISHPERSON,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('16100702025723755353249195bcb','数表三相方案1',null,null,'未使用','启用',null,null,'数表三相',null,null,null,null,to_timestamp('07-10月-16 02.02.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('09-10月-16 11.39.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+
+---------------------------------------------------
+--   END DATA FOR TABLE SCHEME
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SCHEME_RULE
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.SCHEME_RULE
+Insert into TENGFEI.SCHEME_RULE (ID,RULEID,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,SORT) values ('16100702025723755355ba4a53112','315-1983_2_1','16100702025723755353249195bcb',to_timestamp('07-10月-16 02.02.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,10);
+Insert into TENGFEI.SCHEME_RULE (ID,RULEID,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,SORT) values ('16100702025723755355fc4144e5c','38-1987_6','16100702025723755353249195bcb',to_timestamp('07-10月-16 02.02.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,6);
+Insert into TENGFEI.SCHEME_RULE (ID,RULEID,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,SORT) values ('161007020257237553560b58ce5b1','315-1983_2_2','16100702025723755353249195bcb',to_timestamp('07-10月-16 02.02.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,11);
+Insert into TENGFEI.SCHEME_RULE (ID,RULEID,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,SORT) values ('161007020257237553581965386e0','38-1987_5','16100702025723755353249195bcb',to_timestamp('07-10月-16 02.02.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,5);
+Insert into TENGFEI.SCHEME_RULE (ID,RULEID,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,SORT) values ('1610070202572375535a6a0d7994a','38-1987_3','16100702025723755353249195bcb',to_timestamp('07-10月-16 02.02.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,3);
+Insert into TENGFEI.SCHEME_RULE (ID,RULEID,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,SORT) values ('1610070202572375535bae8d9f2ee','38-1987_1','16100702025723755353249195bcb',to_timestamp('07-10月-16 02.02.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,1);
+Insert into TENGFEI.SCHEME_RULE (ID,RULEID,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,SORT) values ('1610070202572375535f3f79be338','38-1987_7','16100702025723755353249195bcb',to_timestamp('07-10月-16 02.02.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,7);
+Insert into TENGFEI.SCHEME_RULE (ID,RULEID,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,SORT) values ('1610070202572375535072239485b','38-1987_2','16100702025723755353249195bcb',to_timestamp('07-10月-16 02.02.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,2);
+Insert into TENGFEI.SCHEME_RULE (ID,RULEID,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,SORT) values ('16100702025723755350a678d0df1','38-1987_9','16100702025723755353249195bcb',to_timestamp('07-10月-16 02.02.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,9);
+Insert into TENGFEI.SCHEME_RULE (ID,RULEID,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,SORT) values ('161007020257237553558fa664358','38-1987_8','16100702025723755353249195bcb',to_timestamp('07-10月-16 02.02.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,8);
+Insert into TENGFEI.SCHEME_RULE (ID,RULEID,SCHEMEID,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON,SORT) values ('16100702025723755355081719687','38-1987_4','16100702025723755353249195bcb',to_timestamp('07-10月-16 02.02.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,4);
+
+---------------------------------------------------
+--   END DATA FOR TABLE SCHEME_RULE
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysAnnouncement
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysAnnouncement"
+Insert into TENGFEI."SysAnnouncement" ("Id","Title","Message","State","CreateTime","CreatePerson") values ('1408231959411063352ca07edc847','新系统开通公告','<p><br />
+尊敬的各位朋友：<br />
+&nbsp;&nbsp;&nbsp; 为了给广大客户更好的提供服务，新系统已开通，以全新的面貌为您服务。<br />
+&nbsp;&nbsp;&nbsp; 如您遇到任何问题，请咨询我们的QQ<span style="color:#B22222">350020527</span>，我们将竭诚为您提供更优质的服务。</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 普华讯光（北京）科技有限公司<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2016年8月6日</p>
+','开启',null,null);
+Insert into TENGFEI."SysAnnouncement" ("Id","Title","Message","State","CreateTime","CreatePerson") values ('1609141143143438785d7b8efeafb','我问问',null,'开启',to_timestamp('14-9月 -16 11.43.14.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysAnnouncement
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysDepartment
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysDepartment"
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16091210593561895228a3d74df7a','出纳','1307311605187265267d33f281235',null,null,null,to_timestamp('12-9月 -16 10.59.35.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('12-9月 -16 11.00.37.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160913165828242746173a5e5bcf6','市场部',null,null,null,null,to_timestamp('13-9月 -16 04.58.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609141036207932797b6b7454894','呃呃呃','1609141033337546391f94cdcea8a',null,null,null,to_timestamp('14-9月 -16 10.36.20.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609121059443263178f3ed505e3b','会计','1307311605187265267d33f281235',null,null,null,to_timestamp('12-9月 -16 10.59.44.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('12-9月 -16 11.01.22.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16091409274406196118a974b6182','i8',null,null,null,null,to_timestamp('14-9月 -16 09.27.44.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609140927458764839ff4840cd82','i83',null,null,null,null,to_timestamp('14-9月 -16 09.27.45.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('14-9月 -16 10.45.10.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609140927484420121bca46fe608','i8',null,null,null,null,to_timestamp('14-9月 -16 09.27.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609141033337546391f94cdcea8a','12','1307311605187265267d33f281237',null,null,null,to_timestamp('14-9月 -16 10.33.33.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16092610473561977668b3cb599ad','we',null,'we',null,'ew',to_timestamp('26-9月 -16 10.47.35.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1307311605187265267d33f281234','市场部',null,'北京市朝阳区',111,null,null,null,null,null);
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1307311605187265267d33f281235','财务部2',null,'北京市海淀区',222,null,null,null,to_timestamp('14-9月 -16 09.31.33.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1307311605187265267d33f281236','人力部11',null,'北京市朝阳区',333,null,null,null,to_timestamp('14-9月 -16 10.38.29.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1307311605187265267d33f281237','规划','1307311605187265267d33f281236','北京市朝阳区',111,null,null,null,null,null);
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1307311605187265267d33f281238','招聘','1307311605187265267d33f281236','北京市朝阳区',222,null,null,null,null,null);
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609121101539465294b7d2b212b8','开发部',null,null,null,null,to_timestamp('12-9月 -16 11.01.53.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16092514425496024508959092a1f','实验室',null,'冀北1',100,null,to_timestamp('25-9月 -16 02.42.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('25-9月 -16 03.06.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160913165435378335778b8838c5e','市场部',null,null,null,null,to_timestamp('13-9月 -16 04.54.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysDepartment" ("Id","Name","ParentId","Address","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609131655048208725e166fa7e91','市场部',null,null,null,null,to_timestamp('13-9月 -16 04.55.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysDepartment
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysDocument
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysDocument"
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysDocument
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysDocumentSysDepartment
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysDocumentSysDepartment"
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysDocumentSysDepartment
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysDocumentSysPerson
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysDocumentSysPerson"
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysDocumentSysPerson
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysDocumentTalk
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysDocumentTalk"
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysDocumentTalk
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysEmail
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysEmail"
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysEmail
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysEmailTemp
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysEmailTemp"
+Insert into TENGFEI."SysEmailTemp" ("Id","Mail_name","Subject","Content","Reply_email","IsDefault","Mail_type","Remark","State","CreateTime","CreatePerson") values ('14090515150232976744f80d07a79','修改密码发送的邮件通知','修改密码成功','	{{用户名}}，你好：<br />  恭喜你，修改密码成功，新密码为：{{密码}}<br />  谢谢。','clark@langben.com','是',null,null,null,null,null);
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysEmailTemp
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysException
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysException"
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1608271732380612561fab0783078','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.FILE_UPLOADERBLL.Create(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\FILE_UPLOADERBLL.cs:行号 105',null,to_timestamp('27-8月 -16 05.32.38.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1608281740203929624a2de5b61a2','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.FILE_UPLOADERBLL.Create(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\FILE_UPLOADERBLL.cs:行号 105',null,to_timestamp('28-8月 -16 05.40.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16082910024705748686a4d982ebc','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.FILE_UPLOADERBLL.Create(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\FILE_UPLOADERBLL.cs:行号 105',null,to_timestamp('29-8月 -16 10.02.46.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16082910281311101077770a163be','异常',null,null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.FILE_UPLOADERBLL.Create(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\FILE_UPLOADERBLL.cs:行号 105',null,to_timestamp('29-8月 -16 10.28.13.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1608291032061453496e972ba7622','异常',null,null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.FILE_UPLOADERBLL.Create(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\FILE_UPLOADERBLL.cs:行号 105',null,to_timestamp('29-8月 -16 10.32.06.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160817141800387441249994e5929','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, SysEntities db, PREPARE_SCHEME entity) 位置 D:\shiyanshi\BLL\PREPARE_SCHEMEBLL.cs:行号 366
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, PREPARE_SCHEME entity) 位置 D:\shiyanshi\BLL\PREPARE_SCHEMEBLL.cs:行号 388',null,to_timestamp('17-8月 -16 02.18.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1608191420516294234f4f0b902f3','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysMenuBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\shiyanshi\BLL\Framework\SysMenuBLL.cs:行号 65',null,to_timestamp('19-8月 -16 02.20.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160827110255277620912edbd2389','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, SysEntities db, PREPARE_SCHEME entity) 位置 D:\codes\SHIYANSHI\BLL\PREPARE_SCHEMEBLL.cs:行号 366
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, PREPARE_SCHEME entity) 位置 D:\codes\SHIYANSHI\BLL\PREPARE_SCHEMEBLL.cs:行号 388',null,to_timestamp('27-8月 -16 11.02.55.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1608291138095082585bb9aca0f9b','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.FILE_UPLOADERBLL.Create(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\FILE_UPLOADERBLL.cs:行号 105',null,to_timestamp('29-8月 -16 11.38.09.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16082911411630741956da60fd6eb','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.FILE_UPLOADERBLL.Create(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\FILE_UPLOADERBLL.cs:行号 105',null,to_timestamp('29-8月 -16 11.41.16.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16081610332807359680a23338be9','异常',null,null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysFieldBLL.Create(ValidationErrors& validationErrors, SysField entity) 位置 D:\shiyanshi\BLL\SysFieldBLL.cs:行号 105',null,to_timestamp('16-8月 -16 10.33.28.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160816103847317491430bb5e06c4','异常',null,null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysFieldBLL.Create(ValidationErrors& validationErrors, SysField entity) 位置 D:\shiyanshi\BLL\SysFieldBLL.cs:行号 105',null,to_timestamp('16-8月 -16 10.38.47.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1608171416190596242e404121370','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, SysEntities db, PREPARE_SCHEME entity) 位置 D:\shiyanshi\BLL\PREPARE_SCHEMEBLL.cs:行号 366
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, PREPARE_SCHEME entity) 位置 D:\shiyanshi\BLL\PREPARE_SCHEMEBLL.cs:行号 388',null,to_timestamp('17-8月 -16 02.16.19.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1608191542372822340eda205d568','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, SysEntities db, PREPARE_SCHEME entity) 位置 D:\codes\SHIYANSHI\BLL\PREPARE_SCHEMEBLL.cs:行号 366
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, PREPARE_SCHEME entity) 位置 D:\codes\SHIYANSHI\BLL\PREPARE_SCHEMEBLL.cs:行号 388',null,to_timestamp('19-8月 -16 03.42.36.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1608161044025902104c49ce24cd3','异常',null,null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysFieldBLL.Create(ValidationErrors& validationErrors, SysField entity) 位置 D:\shiyanshi\BLL\SysFieldBLL.cs:行号 105',null,to_timestamp('16-8月 -16 10.44.02.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16081912473172947463979025894','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysMenuBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\Framework\SysMenuBLL.cs:行号 65',null,to_timestamp('19-8月 -16 12.47.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1608191418399770181a0fd359856','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysMenuBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\shiyanshi\BLL\Framework\SysMenuBLL.cs:行号 65',null,to_timestamp('19-8月 -16 02.18.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160819141851427898499d865b814','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysMenuBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\shiyanshi\BLL\Framework\SysMenuBLL.cs:行号 65',null,to_timestamp('19-8月 -16 02.18.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160822142139689232436914705b0','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, SysEntities db, PREPARE_SCHEME entity) 位置 D:\codes\SHIYANSHI\BLL\PREPARE_SCHEMEBLL.cs:行号 366
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, PREPARE_SCHEME entity) 位置 D:\codes\SHIYANSHI\BLL\PREPARE_SCHEMEBLL.cs:行号 388',null,to_timestamp('22-8月 -16 02.21.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160823105252035737789d9d6141f','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, SysEntities db, PREPARE_SCHEME entity) 位置 D:\codes\SHIYANSHI\BLL\PREPARE_SCHEMEBLL.cs:行号 366
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, PREPARE_SCHEME entity) 位置 D:\codes\SHIYANSHI\BLL\PREPARE_SCHEMEBLL.cs:行号 388',null,to_timestamp('23-8月 -16 10.52.50.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1608231052520337845c8b36dfeb7','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, SysEntities db, PREPARE_SCHEME entity) 位置 D:\codes\SHIYANSHI\BLL\PREPARE_SCHEMEBLL.cs:行号 366
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, PREPARE_SCHEME entity) 位置 D:\codes\SHIYANSHI\BLL\PREPARE_SCHEMEBLL.cs:行号 388',null,to_timestamp('23-8月 -16 10.52.50.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1608231052520279249d5ad971768','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, SysEntities db, PREPARE_SCHEME entity) 位置 D:\codes\SHIYANSHI\BLL\PREPARE_SCHEMEBLL.cs:行号 366
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, PREPARE_SCHEME entity) 位置 D:\codes\SHIYANSHI\BLL\PREPARE_SCHEMEBLL.cs:行号 388',null,to_timestamp('23-8月 -16 10.52.50.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16082616121552381256bc12160b7','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.FILE_UPLOADERBLL.Create(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\FILE_UPLOADERBLL.cs:行号 105',null,to_timestamp('26-8月 -16 04.12.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16090315143772591871129b0d106','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.Edit(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\FILE_UPLOADERBLL.cs:行号 264',null,to_timestamp('03-9月 -16 03.14.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609031538179303189abd7b50ced','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('03-9月 -16 03.38.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160904005759381425089e2ba3ddc','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('04-9月 -16 12.57.59.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609040111162427130c9f86dff8f','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('04-9月 -16 01.11.16.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16090401202613005390fae31bbe6','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('04-9月 -16 01.20.26.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16090401324318708184a7738dfcc','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 D:\shiyanshi\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('04-9月 -16 01.32.43.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16090403151485160739cc5f5564e','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('04-9月 -16 03.15.14.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609051046430189559d79a4d94cf','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\shiyanshi\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('05-9月 -16 10.46.43.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609051424355785401f5b87468b0','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\shiyanshi\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('05-9月 -16 02.24.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160905142815583081796fb250f14','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\shiyanshi\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('05-9月 -16 02.28.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609051428407481105d485d2b130','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\shiyanshi\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('05-9月 -16 02.28.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609021311459982523fbf08a83e5','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('02-9月 -16 01.11.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609021322375467093b8b59617e1','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('02-9月 -16 01.22.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609021334437078938e96674f787','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('02-9月 -16 01.34.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609051045352272903282c82ebc1','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\shiyanshi\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('05-9月 -16 10.45.34.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609051045352292435542b9d4c57','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\shiyanshi\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('05-9月 -16 10.45.34.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1608291606044759288582f52d779','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.FILE_UPLOADERBLL.Create(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\FILE_UPLOADERBLL.cs:行号 105',null,to_timestamp('29-8月 -16 04.06.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160901085716156946126161524fb','异常',null,null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('01-9月 -16 08.57.16.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609012036286145895be70c0b27c','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, SysEntities db, PREPARE_SCHEME entity) 位置 D:\shiyanshi\BLL\PREPARE_SCHEMEBLL.cs:行号 366
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, PREPARE_SCHEME entity) 位置 D:\shiyanshi\BLL\PREPARE_SCHEMEBLL.cs:行号 388',null,to_timestamp('01-9月 -16 08.36.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16090514260043140770ec083558f','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\shiyanshi\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('05-9月 -16 02.26.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609051710327682002f177b728bd','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db)
+   在 Langben.DAL.BaseRepository`1.Create(T entity)
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 D:\shiyanshi\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('05-9月 -16 05.10.32.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1608291159476302767190be2f8a6','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.FILE_UPLOADERBLL.Create(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\FILE_UPLOADERBLL.cs:行号 105',null,to_timestamp('29-8月 -16 11.59.47.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16090401440185213511ea06a03f8','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('04-9月 -16 01.44.01.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160904014954289466685b358448b','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('04-9月 -16 01.49.54.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609061123409248861d3cad980f9','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\shiyanshi\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('06-9月 -16 11.23.40.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160906114120131370711e4f3d854','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\shiyanshi\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('06-9月 -16 11.41.20.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160902132524357763214ca2bf431','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.FILE_UPLOADERBLL.Create(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\FILE_UPLOADERBLL.cs:行号 105',null,to_timestamp('02-9月 -16 01.25.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16090315365063493066b14472904','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('03-9月 -16 03.36.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160903154302299737916e418f8ea','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 D:\shiyanshi\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('03-9月 -16 03.43.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160903154302774214439162e58ae','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 D:\shiyanshi\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('03-9月 -16 03.43.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609040103280268549cd236d590b','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('04-9月 -16 01.03.28.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609010901156934169f71f163426','异常',null,null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('01-9月 -16 09.01.15.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160901090207721651590fea95fbe','异常',null,null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('01-9月 -16 09.02.07.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160902130641433753958b0f80b59','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('02-9月 -16 01.06.41.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16090213180526140907ebdaa30e0','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.Edit(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\FILE_UPLOADERBLL.cs:行号 264',null,to_timestamp('02-9月 -16 01.18.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609031507275959140ae989acdfe','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.Edit(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\FILE_UPLOADERBLL.cs:行号 264',null,to_timestamp('03-9月 -16 03.07.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1608291142158216369e808720689','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.FILE_UPLOADERBLL.Create(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\FILE_UPLOADERBLL.cs:行号 105',null,to_timestamp('29-8月 -16 11.42.15.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609012049465770347cbf6fb1cd7','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, SysEntities db, PREPARE_SCHEME entity) 位置 D:\shiyanshi\BLL\PREPARE_SCHEMEBLL.cs:行号 366
+   在 Langben.BLL.PREPARE_SCHEMEBLL.Edit(ValidationErrors& validationErrors, PREPARE_SCHEME entity) 位置 D:\shiyanshi\BLL\PREPARE_SCHEMEBLL.cs:行号 388',null,to_timestamp('01-9月 -16 08.49.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609021358504298628a9d77dc372','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('02-9月 -16 01.58.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609031508197636670450c31020e','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.Edit(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\FILE_UPLOADERBLL.cs:行号 264',null,to_timestamp('03-9月 -16 03.08.19.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160903151006504735310a154db8b','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.Edit(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\FILE_UPLOADERBLL.cs:行号 264',null,to_timestamp('03-9月 -16 03.10.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609091623051337086e4c7da893a','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('09-9月 -16 04.23.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609091623542574724b2cd13587c','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('09-9月 -16 04.23.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16091410114569366936f8bdc1879','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysDepartmentBLL.Create(ValidationErrors& validationErrors, SysEntities db, SysDepartment entity) 位置 D:\shiyanshi\BLL\SysDepartmentBLL.cs:行号 125
+   在 Langben.BLL.SysDepartmentBLL.Create(ValidationErrors& validationErrors, SysDepartment entity) 位置 D:\shiyanshi\BLL\SysDepartmentBLL.cs:行号 147',null,to_timestamp('14-9月 -16 10.11.45.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160914103736342079179d6118090','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysDepartmentBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\shiyanshi\BLL\SysDepartmentBLL.cs:行号 246',null,to_timestamp('14-9月 -16 10.37.36.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609141052268557657ec31acf874','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysDepartmentBLL.Create(ValidationErrors& validationErrors, SysEntities db, SysDepartment entity) 位置 D:\shiyanshi\BLL\SysDepartmentBLL.cs:行号 125
+   在 Langben.BLL.SysDepartmentBLL.Create(ValidationErrors& validationErrors, SysDepartment entity) 位置 D:\shiyanshi\BLL\SysDepartmentBLL.cs:行号 147',null,to_timestamp('14-9月 -16 10.52.26.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16090723332185086584aafa87a6e','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('07-9月 -16 11.33.21.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609072335111200907a0b013d5a0','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('07-9月 -16 11.35.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609081137317828830f31b2b54cd','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysPersonBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\shiyanshi\BLL\SysPersonBLL.cs:行号 276',null,to_timestamp('08-9月 -16 11.37.31.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609091605121294019e939dcd777','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('09-9月 -16 04.05.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16090916052757633288cf81934b6','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('09-9月 -16 04.05.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16090811380665856570ab1b4802f','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysRoleBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\shiyanshi\BLL\SysRoleBLL.cs:行号 241',null,to_timestamp('08-9月 -16 11.38.06.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609081138281867992d862eb9dbd','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysRoleBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\shiyanshi\BLL\SysRoleBLL.cs:行号 241',null,to_timestamp('08-9月 -16 11.38.28.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609081434381370707d964312ca7','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('08-9月 -16 02.34.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609081451180846469936f552d61','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('08-9月 -16 02.51.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609091607340260998f9af8a6f59','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('09-9月 -16 04.07.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609091643405452680625e13bf5c','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('09-9月 -16 04.43.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609131520349205395d47382c222','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 D:\shiyanshi\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('13-9月 -16 03.20.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609131520349244459a8b5f184e3','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 D:\shiyanshi\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('13-9月 -16 03.20.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16091315203492639914d492f4463','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 D:\shiyanshi\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('13-9月 -16 03.20.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160913152049598837513b1436982','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 D:\shiyanshi\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('13-9月 -16 03.20.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16091315210402614938fba28ae48','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 D:\shiyanshi\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('13-9月 -16 03.21.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16090814041793631836f6ebcfad2','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('08-9月 -16 02.04.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609081405175951861b7bc2a05de','异常',null,null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysPersonBLL.Create(ValidationErrors& validationErrors, SysEntities db, SysPerson entity) 位置 D:\shiyanshi\BLL\SysPersonBLL.cs:行号 155
+   在 Langben.BLL.SysPersonBLL.Create(ValidationErrors& validationErrors, SysPerson entity) 位置 D:\shiyanshi\BLL\SysPersonBLL.cs:行号 177',null,to_timestamp('08-9月 -16 02.05.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16090814052944394698a4d52253f','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('08-9月 -16 02.05.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609081409571724301653143c874','异常',null,null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysPersonBLL.Create(ValidationErrors& validationErrors, SysEntities db, SysPerson entity) 位置 D:\shiyanshi\BLL\SysPersonBLL.cs:行号 155
+   在 Langben.BLL.SysPersonBLL.Create(ValidationErrors& validationErrors, SysPerson entity) 位置 D:\shiyanshi\BLL\SysPersonBLL.cs:行号 177',null,to_timestamp('08-9月 -16 02.09.57.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609081450190530833ac57baf80e','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('08-9月 -16 02.50.19.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609131521159689907b256855253','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 D:\shiyanshi\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('13-9月 -16 03.21.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609072330412019186330975fb4c','异常',null,null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('07-9月 -16 11.30.41.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16090723310543593396bac17cbf9','异常',null,null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('07-9月 -16 11.31.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160907233138727680733af12480a','异常',null,null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('07-9月 -16 11.31.38.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609131521496753631e652b21fae','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 D:\shiyanshi\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('13-9月 -16 03.21.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160914094435652562564bd9197ff','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysDepartmentBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\shiyanshi\BLL\SysDepartmentBLL.cs:行号 246',null,to_timestamp('14-9月 -16 09.44.35.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609140945106040999f476891cb7','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysDepartmentBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\shiyanshi\BLL\SysDepartmentBLL.cs:行号 246',null,to_timestamp('14-9月 -16 09.45.10.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609080031176525294be0d4329f8','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('08-9月 -16 12.31.17.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16090916333454848757fb51db6ba','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.FILE_UPLOADERBLL.EditField(ValidationErrors& validationErrors, FILE_UPLOADER entity) 位置 D:\shiyanshi\BLL\Shiyanshi\FILE_UPLOADERBLL.cs:行号 28',null,to_timestamp('09-9月 -16 04.33.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609131523239651165bdcff9f760','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 D:\shiyanshi\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('13-9月 -16 03.23.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609140945249132431819881bf20','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysDepartmentBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\shiyanshi\BLL\SysDepartmentBLL.cs:行号 246',null,to_timestamp('14-9月 -16 09.45.24.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609140946105058141edeb0c8863','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysDepartmentBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\shiyanshi\BLL\SysDepartmentBLL.cs:行号 246',null,to_timestamp('14-9月 -16 09.46.10.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609211055491116685a85b1e98f6','异常',null,null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysRoleBLL.Create(ValidationErrors& validationErrors, SysEntities db, SysRole entity) 位置 D:\codes\SHIYANSHI\BLL\SysRoleBLL.cs:行号 120
+   在 Langben.BLL.SysRoleBLL.Create(ValidationErrors& validationErrors, SysRole entity) 位置 D:\codes\SHIYANSHI\BLL\SysRoleBLL.cs:行号 142',null,to_timestamp('21-9月 -16 10.55.49.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609240930271944566f4663f2baf','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('24-9月 -16 09.30.26.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609251547560093470e1bdef9006','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('25-9月 -16 03.47.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16093021104323299011c8dbdc7d7','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysLogBLL.Create(ValidationErrors& validationErrors, SysLog entity) 位置 D:\codes\SHIYANSHI\BLL\SysLogBLL.cs:行号 96',null,to_timestamp('30-9月 -16 09.10.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('161003231834256791867bd1eea65','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('03-10月-16 11.18.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160918155056195311143507be03c','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('18-9月 -16 03.50.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609201540177312280e50236868a','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysFieldBLL.Create(ValidationErrors& validationErrors, SysField entity) 位置 D:\shiyanshi\BLL\SysFieldBLL.cs:行号 105',null,to_timestamp('20-9月 -16 03.40.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609302101395409088cff6222b7a','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysRoleBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\SysRoleBLL.cs:行号 241',null,to_timestamp('30-9月 -16 09.01.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16093021014852768268720c03c8c','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysRoleBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\SysRoleBLL.cs:行号 241',null,to_timestamp('30-9月 -16 09.01.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('161004015801773206506ce85fd95','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('04-10月-16 01.58.01.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160914170123919663571ae5573d5','异常',null,null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysDepartmentBLL.Create(ValidationErrors& validationErrors, SysEntities db, SysDepartment entity) 位置 D:\shiyanshi\BLL\SysDepartmentBLL.cs:行号 125
+   在 Langben.BLL.SysDepartmentBLL.Create(ValidationErrors& validationErrors, SysDepartment entity) 位置 D:\shiyanshi\BLL\SysDepartmentBLL.cs:行号 147',null,to_timestamp('14-9月 -16 05.01.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609141714156875795aa859a7e34','异常',null,null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysDepartmentBLL.Create(ValidationErrors& validationErrors, SysEntities db, SysDepartment entity) 位置 D:\shiyanshi\BLL\SysDepartmentBLL.cs:行号 125
+   在 Langben.BLL.SysDepartmentBLL.Create(ValidationErrors& validationErrors, SysDepartment entity) 位置 D:\shiyanshi\BLL\SysDepartmentBLL.cs:行号 147',null,to_timestamp('14-9月 -16 05.14.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16091900104186045062beb5324ac','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('19-9月 -16 12.10.41.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609191748291159028546df25159','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SCHEMEBLL.Edit(ValidationErrors& validationErrors, SCHEME entity) 位置 D:\shiyanshi\BLL\SCHEMEBLL.cs:行号 264',null,to_timestamp('19-9月 -16 05.48.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16091921471324279761490ecfd65','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 D:\codes\SHIYANSHI\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('19-9月 -16 09.47.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16091822180069760136b4d645ac7','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.PROJECTTEMPLETBLL.Create(ValidationErrors& validationErrors, PROJECTTEMPLET entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\PROJECTTEMPLETBLL.cs:行号 110',null,to_timestamp('18-9月 -16 10.18.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16092111474819075024f19b70ccb','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 D:\codes\SHIYANSHI\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('21-9月 -16 11.47.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16092111480131539658ff86317f3','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 D:\codes\SHIYANSHI\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('21-9月 -16 11.48.01.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16093010073118884602aee5fc7f6','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Create(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\shiyanshi\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 96',null,to_timestamp('30-9月 -16 10.07.31.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160930205219015959762d9a3a4c7','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysLogBLL.Create(ValidationErrors& validationErrors, SysLog entity) 位置 D:\codes\SHIYANSHI\BLL\SysLogBLL.cs:行号 96',null,to_timestamp('30-9月 -16 08.52.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609302100402088261eb69383b7b','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysMenuBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\Framework\SysMenuBLL.cs:行号 65',null,to_timestamp('30-9月 -16 09.00.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610041002130020036d95ed2b3a6','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('04-10月-16 10.02.12.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610041029207100513b0f906f37b','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('04-10月-16 10.29.20.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16100410292799881904226085ff0','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('04-10月-16 10.29.27.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16100410292950831838953c1fd85','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('04-10月-16 10.29.29.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609181400081393205b45139a19c','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.APPLIANCECOLLECTIONBLL.Create(ValidationErrors& validationErrors, APPLIANCECOLLECTION entity) 位置 D:\shiyanshi\BLL\APPLIANCECOLLECTIONBLL.cs:行号 105',null,to_timestamp('18-9月 -16 02.00.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160918145906679372546bd003712','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('18-9月 -16 02.59.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609182343300068730327e9d3105','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.PROJECTTEMPLETBLL.Create(ValidationErrors& validationErrors, PROJECTTEMPLET entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\PROJECTTEMPLETBLL.cs:行号 110',null,to_timestamp('18-9月 -16 11.43.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160919141502235572412d907edbf','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SCHEMEBLL.Edit(ValidationErrors& validationErrors, SCHEME entity) 位置 D:\codes\SHIYANSHI\BLL\SCHEMEBLL.cs:行号 264',null,to_timestamp('19-9月 -16 02.15.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609191415435920007b36986c9a8','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SCHEMEBLL.Edit(ValidationErrors& validationErrors, SCHEME entity) 位置 D:\codes\SHIYANSHI\BLL\SCHEMEBLL.cs:行号 264',null,to_timestamp('19-9月 -16 02.15.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16091922330485939812f2280fcbd','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('19-9月 -16 10.33.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16092015140267649555e69e6456b','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 D:\shiyanshi\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('20-9月 -16 03.14.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16092618201445636527cc7c9f8b3','异常',null,null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysRoleBLL.Create(ValidationErrors& validationErrors, SysEntities db, SysRole entity) 位置 D:\codes\SHIYANSHI\BLL\SysRoleBLL.cs:行号 120
+   在 Langben.BLL.SysRoleBLL.Create(ValidationErrors& validationErrors, SysRole entity) 位置 D:\codes\SHIYANSHI\BLL\SysRoleBLL.cs:行号 142',null,to_timestamp('26-9月 -16 06.20.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16093020560388677282617f87091','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysLogBLL.Create(ValidationErrors& validationErrors, SysLog entity) 位置 D:\codes\SHIYANSHI\BLL\SysLogBLL.cs:行号 96',null,to_timestamp('30-9月 -16 08.56.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610032318238628875871db104fa','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('03-10月-16 11.18.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609181551438197089835a2ecf68','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('18-9月 -16 03.51.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('160918233644693476730e1b6727b','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('18-9月 -16 11.36.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609182359282176724b81c61973b','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.PROJECTTEMPLETBLL.Create(ValidationErrors& validationErrors, PROJECTTEMPLET entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\PROJECTTEMPLETBLL.cs:行号 110',null,to_timestamp('18-9月 -16 11.59.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609190020352980073e0a888c21a','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('19-9月 -16 12.20.35.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1609191617088373302e4d2916cf0','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.PROJECTTEMPLETRepository.Delete(String id) 位置 F:\Projects\国家电网实验室项目\Code\DAL\PROJECTTEMPLETRepository.cs:行号 121
+   在 Langben.BLL.PROJECTTEMPLETBLL.Delete(ValidationErrors& validationErrors, String id) 位置 F:\Projects\国家电网实验室项目\Code\BLL\PROJECTTEMPLETBLL.cs:行号 172',null,to_timestamp('19-9月 -16 04.17.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16100714175123674949b53393e29','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysMenuBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\Framework\SysMenuBLL.cs:行号 65',null,to_timestamp('07-10月-16 02.17.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610071548150934713d90d81661f','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysMenuBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\Framework\SysMenuBLL.cs:行号 65',null,to_timestamp('07-10月-16 03.48.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610071549171941313a3217c54ac','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysMenuBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\Framework\SysMenuBLL.cs:行号 65',null,to_timestamp('07-10月-16 03.49.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('161007154949744139868a5c814a1','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysMenuBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\Framework\SysMenuBLL.cs:行号 65',null,to_timestamp('07-10月-16 03.49.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610071634064381896f27058605a','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Edit(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\shiyanshi\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 255',null,to_timestamp('07-10月-16 04.34.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610071607305741811aeb7765875','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysRoleBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\SysRoleBLL.cs:行号 241',null,to_timestamp('07-10月-16 04.07.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('161007161419380699157ad60aa57','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Edit(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\shiyanshi\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 255',null,to_timestamp('07-10月-16 04.14.19.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16100719452020925331359224c03','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 D:\codes\SHIYANSHI\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('07-10月-16 07.45.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610071945357557078d9003fc11e','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 D:\codes\SHIYANSHI\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('07-10月-16 07.45.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16100720070748641033dee42c043','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysPersonBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\SysPersonBLL.cs:行号 276',null,to_timestamp('07-10月-16 08.07.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610041119426665985d806b5f1b1','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('04-10月-16 11.19.42.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610071350517811954de64676d2e','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysRoleBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\SysRoleBLL.cs:行号 241',null,to_timestamp('07-10月-16 01.50.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('161007194605799405955e08d7f65','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 D:\codes\SHIYANSHI\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('07-10月-16 07.46.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610072135226022971c77c836710','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysOperationBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\SysOperationBLL.cs:行号 246',null,to_timestamp('07-10月-16 09.35.22.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16100721365856923853b41b760c8','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysMenuBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\Framework\SysMenuBLL.cs:行号 65',null,to_timestamp('07-10月-16 09.36.58.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16100721393704842215e7a157cbc','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysMenuBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\Framework\SysMenuBLL.cs:行号 65',null,to_timestamp('07-10月-16 09.39.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610072145493281010249b5cbb43','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysMenuBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\Framework\SysMenuBLL.cs:行号 65',null,to_timestamp('07-10月-16 09.45.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16100810400787299616b2bdc0ae9','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Edit(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\shiyanshi\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 255',null,to_timestamp('08-10月-16 10.40.07.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610081119165907333b7e2c4c65c','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 D:\shiyanshi\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 D:\shiyanshi\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('08-10月-16 11.19.16.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610081253459126236c2f24055f4','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Edit(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 255',null,to_timestamp('08-10月-16 12.53.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16100623503095163070a94339cf2','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.PROJECTTEMPLETBLL.Create(ValidationErrors& validationErrors, PROJECTTEMPLET entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\PROJECTTEMPLETBLL.cs:行号 110',null,to_timestamp('06-10月-16 11.50.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610070043213132562c6ff2769a3','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SysExceptionBLL.Create(ValidationErrors& validationErrors, SysException entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SysExceptionBLL.cs:行号 96',null,to_timestamp('07-10月-16 12.43.21.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610071410171760753aeb5dc2f05','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysPersonBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\SysPersonBLL.cs:行号 276',null,to_timestamp('07-10月-16 02.10.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16100714130967877290adac267bb','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysRoleBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\SysRoleBLL.cs:行号 241',null,to_timestamp('07-10月-16 02.13.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610071416202117134cc6e361eb6','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysMenuBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\Framework\SysMenuBLL.cs:行号 65',null,to_timestamp('07-10月-16 02.16.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('161004110704422955668d787c238','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.SCHEMEBLL.Create(ValidationErrors& validationErrors, SCHEME entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\SCHEMEBLL.cs:行号 105',null,to_timestamp('04-10月-16 11.07.04.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16100622563919365525817036b86','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.DAL.BaseRepository`1.Create(T entity) 位置 F:\Projects\国家电网实验室项目\Code\DAL\Framework\BaseRepository.cs:行号 78
+   在 Langben.BLL.PROJECTTEMPLETBLL.Create(ValidationErrors& validationErrors, PROJECTTEMPLET entity) 位置 F:\Projects\国家电网实验室项目\Code\BLL\PROJECTTEMPLETBLL.cs:行号 110',null,to_timestamp('06-10月-16 10.56.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16100713395820929218dfe75dbcc','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysRoleBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\SysRoleBLL.cs:行号 241',null,to_timestamp('07-10月-16 01.39.58.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610071340061635884f6596bae26','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysRoleBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\SysRoleBLL.cs:行号 241',null,to_timestamp('07-10月-16 01.40.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16100713411810839368aee58ea25','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysRoleBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\SysRoleBLL.cs:行号 241',null,to_timestamp('07-10月-16 01.41.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('161007134314270724828f969e8b7','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysRoleBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\SysRoleBLL.cs:行号 241',null,to_timestamp('07-10月-16 01.43.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610071346290351302f67ee8a85d','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysRoleBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\SysRoleBLL.cs:行号 241',null,to_timestamp('07-10月-16 01.46.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610071402058586418897d48f5d8','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysMenuBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\Framework\SysMenuBLL.cs:行号 65',null,to_timestamp('07-10月-16 02.02.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16100714021067165184d93cabe7a','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysMenuBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\Framework\SysMenuBLL.cs:行号 65',null,to_timestamp('07-10月-16 02.02.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610071406093341061f53d6cf4c1','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysMenuBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\Framework\SysMenuBLL.cs:行号 65',null,to_timestamp('07-10月-16 02.06.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610071417291093642d5b98839c5','异常','An error occurred while updating the entries. See the inner exception for details.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.SysMenuBLL.DeleteCollection(ValidationErrors& validationErrors, String[] deleteCollection) 位置 D:\codes\SHIYANSHI\BLL\Framework\SysMenuBLL.cs:行号 65',null,to_timestamp('07-10月-16 02.17.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16100812570684776698680193842','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Edit(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 255',null,to_timestamp('08-10月-16 12.57.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610081257461812852a9a6bec67b','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Edit(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 255',null,to_timestamp('08-10月-16 12.57.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610081259465037687e880971720','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Edit(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 255',null,to_timestamp('08-10月-16 12.59.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610081300089140196ca5f385cc0','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Edit(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 255',null,to_timestamp('08-10月-16 01.00.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16100813002027798248792142f03','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Edit(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 255',null,to_timestamp('08-10月-16 01.00.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('16100813040746291756d3342e1cd','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Edit(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 255',null,to_timestamp('08-10月-16 01.04.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610081305558299945b64ae536fd','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Edit(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 255',null,to_timestamp('08-10月-16 01.05.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610081300315697143e3015e4fac','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Edit(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 255',null,to_timestamp('08-10月-16 01.00.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysException" ("Id","LeiXing","Message","Result","Remark","State","CreateTime","CreatePerson") values ('1610081300408783840fdbf4e6807','异常','Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'   在 System.Data.Entity.Internal.InternalContext.SaveChanges()
+   在 System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   在 System.Data.Entity.DbContext.SaveChanges()
+   在 Langben.DAL.BaseRepository`1.Save(SysEntities db) 位置 D:\codes\SHIYANSHI\DAL\Framework\BaseRepository.cs:行号 126
+   在 Langben.BLL.ORDER_TASK_INFORMATIONBLL.Edit(ValidationErrors& validationErrors, ORDER_TASK_INFORMATION entity) 位置 D:\codes\SHIYANSHI\BLL\ORDER_TASK_INFORMATIONBLL.cs:行号 255',null,to_timestamp('08-10月-16 01.00.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null);
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysException
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysField
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysField"
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16100916584848129754165bbc678','计量中心309电能实验室',null,'JianLiFangAn','CHECK_PLACE2',1010,'检定/校准地点',to_timestamp('09-10月-16 04.58.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1610091659104708271a0af01988c','计量中心310电能实验室',null,'JianLiFangAn','CHECK_PLACE2',1010,'检定/校准地点',to_timestamp('09-10月-16 04.59.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('161009165939219130368372f21e2','电研大厦A座712',null,'JianLiFangAn','CHECK_PLACE',1010,'检定/校准地点',to_timestamp('09-10月-16 04.59.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('161009170001931170132be0a04f4','电研大厦A座713',null,'JianLiFangAn','CHECK_PLACE',1020,'检定/校准地点',to_timestamp('09-10月-16 05.00.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16100917001697781154ec28118e6','电研大厦A座709',null,'JianLiFangAn','CHECK_PLACE',1030,'检定/校准地点',to_timestamp('09-10月-16 05.00.16.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1610091700373691978721ebdb68b','电研大厦A座711',null,'JianLiFangAn','CHECK_PLACE',1040,'检定/校准地点',to_timestamp('09-10月-16 05.00.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1610091700543351822ef22ec3995','电研大厦A座715',null,'JianLiFangAn','CHECK_PLACE',1050,'检定/校准地点',to_timestamp('09-10月-16 05.00.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609091036234830975cc7611a685','DC-互感器-07（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_HUGANQI',5005,'控制编号',to_timestamp('09-9月 -16 10.36.23.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16082210253902439006e4db42907','华北电力科学研究院有限责任公司',null,'Appliance','ACCEPT_ORGNIZATION',100,'受理单位',to_timestamp('22-8月 -16 10.25.39.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16081610262829552450ef7a612dd','1',null,'2','3',4,'5',to_timestamp('16-8月 -16 10.26.28.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160816105556546220345f769c92e','检定',null,'VJIANDINGRENWU','CERTIFICATE_CATEGORY',200,'证书类别',to_timestamp('16-8月 -16 10.55.56.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16082211173893520562864caeeb1','已领取',null,'VJIANDINGRENWU','ORDER_STATUS',100,'实验室检定器具状态',to_timestamp('22-8月 -16 11.17.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1608221132232904526a2f6a5963d','已批准',null,'VSHENPI','APPROVALISAGGREY',100,'审批，通过同意不同意判断待批还已批',to_timestamp('22-8月 -16 11.32.23.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16082211324954048403e524ac72f','待批准',null,'VSHENPI','APPROVALISAGGREY',200,'审批，通过同意不同意判断待批还已批',to_timestamp('22-8月 -16 11.32.49.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16082211400906224383c34de0f78','待入库',null,'VRUKU','STORAGEINSTRUCTI_STATU',100,'入库状态',to_timestamp('22-8月 -16 11.48.24.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160822114836064133868945e8cbe','器具已入库',null,'VRUKU','STORAGEINSTRUCTI_STATU',100,'入库状态',to_timestamp('22-8月 -16 11.48.36.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160822115158436162454428ce651','待打印',null,'VBAOGAODAYIN','PRINTSTATUS',100,'打印状态',to_timestamp('22-8月 -16 11.51.58.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1608221152116280752c8e9846c94','已打印',null,'VBAOGAODAYIN','PRINTSTATUS',200,'打印状态',to_timestamp('22-8月 -16 11.52.11.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160909094633715049291f42d1bbb','标源',null,'VJIANDINGRENWU','REPORT_CATEGORY_SHUZI',202,' 报告类别',to_timestamp('09-9月 -16 09.46.33.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609090947004171406be2eb64263','继保',null,'VJIANDINGRENWU','REPORT_CATEGORY_SHUZI',203,' 报告类别',to_timestamp('09-9月 -16 09.47.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609090947180579465c7069b6274','变送',null,'VJIANDINGRENWU','REPORT_CATEGORY_SHUZI',204,' 报告类别',to_timestamp('09-9月 -16 09.47.18.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16090909473297998955c1f8f4358','交采',null,'VJIANDINGRENWU','REPORT_CATEGORY_SHUZI',205,' 报告类别',to_timestamp('09-9月 -16 09.47.32.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609090947470327246d0144e9248','仪置',null,'VJIANDINGRENWU','REPORT_CATEGORY_SHUZI',206,' 报告类别',to_timestamp('09-9月 -16 09.47.47.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160909094851231130268884de3ab','标表',null,'VJIANDINGRENWU','REPORT_CATEGORY_DIANNENG',301,' 报告类别',to_timestamp('09-9月 -16 09.48.51.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609090949064476032760f1bf0a9','能置',null,'VJIANDINGRENWU','REPORT_CATEGORY_DIANNENG',302,' 报告类别',to_timestamp('09-9月 -16 09.49.06.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609090949213227599301496f08d','电表',null,'VJIANDINGRENWU','REPORT_CATEGORY_DIANNENG',303,' 报告类别',to_timestamp('09-9月 -16 09.49.21.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160909095001934040800cb467b95','阻箱',null,'VJIANDINGRENWU','REPORT_CATEGORY_ZHILIU',401,' 报告类别',to_timestamp('09-9月 -16 09.50.01.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609090950231131082e5f640e6a7','电桥',null,'VJIANDINGRENWU','REPORT_CATEGORY_ZHILIU',402,' 报告类别',to_timestamp('09-9月 -16 09.50.23.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16090909503626335925408c236f4','阻标',null,'VJIANDINGRENWU','REPORT_CATEGORY_ZHILIU',403,' 报告类别',to_timestamp('09-9月 -16 09.50.36.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160909095058063534704770682f8','高阻',null,'VJIANDINGRENWU','REPORT_CATEGORY_ZHILIU',404,' 报告类别',to_timestamp('09-9月 -16 09.50.58.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160909095118308534830e5b23255','阻仪',null,'VJIANDINGRENWU','REPORT_CATEGORY_ZHILIU',405,' 报告类别',to_timestamp('09-9月 -16 09.51.18.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609090952020745795bde9a0057a','互仪',null,'VJIANDINGRENWU','REPORT_CATEGORY_HUGANQI',501,' 报告类别',to_timestamp('09-9月 -16 09.52.02.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16090910292172304682ba60a20bc','DC-仪表-08（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_SHUZI',1001,null,to_timestamp('09-9月 -16 10.29.21.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609091029387466159f1d38db5af','DC-仪表-09（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_SHUZI',1002,null,to_timestamp('09-9月 -16 10.29.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160909103019121726840c9e41d2f','DC-电能-01（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_DIANNENG',2001,null,to_timestamp('09-9月 -16 10.30.19.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609091030522624087efefe96fdc','DC-电能-02（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_DIANNENG',2002,'控制编号',to_timestamp('09-9月 -16 10.30.52.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160909103117977426173fc4d37b3','DC-电能-03（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_DIANNENG',2003,'控制编号',to_timestamp('09-9月 -16 10.31.17.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609091032114138144d3fe0cfc94','DC-仪表-01（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_ZHISHIYIBIAO',3001,'控制编号',to_timestamp('09-9月 -16 10.32.11.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609091032299783993a18fd71fb7','DC-仪表-02（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_ZHISHIYIBIAO',3002,'控制编号',to_timestamp('09-9月 -16 10.32.29.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609091032357440829911ad1bd15','DC-仪表-03（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_ZHISHIYIBIAO',3003,'控制编号',to_timestamp('09-9月 -16 10.32.35.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609091032428379061659fb3cfd1','DC-仪表-04（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_ZHISHIYIBIAO',3004,'控制编号',to_timestamp('09-9月 -16 10.32.42.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16090910325025985679dff648d52','DC-仪表-05（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_ZHISHIYIBIAO',3005,'控制编号',to_timestamp('09-9月 -16 10.32.50.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160909103255697428713fe102da5','DC-仪表-06（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_ZHISHIYIBIAO',3006,'控制编号',to_timestamp('09-9月 -16 10.32.55.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16090910330208810308fce63a4dd','DC-仪表-07（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_ZHISHIYIBIAO',3007,'控制编号',to_timestamp('09-9月 -16 10.33.02.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160909103418267352546d8ca2a7c','DC-仪表-11（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_ZHILIU',4002,'控制编号',to_timestamp('09-9月 -16 10.34.18.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160909103428653082312a7ed2ba5','DC-仪表-12（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_ZHILIU',4003,'控制编号',to_timestamp('09-9月 -16 10.34.28.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609091034348940693b40b0580e7','DC-仪表-13（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_ZHILIU',4004,'控制编号',to_timestamp('09-9月 -16 10.34.34.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16090910344360069694a52df8ff2','DC-仪表-14（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_ZHILIU',4005,'控制编号',to_timestamp('09-9月 -16 10.34.43.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1307311105187265267d33f281df3','是',null,'SysEmailTemp','IsDefault',111,null,null,null,null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1307311105187265267d33f281df4','否',null,'SysEmailTemp','IsDefault',222,null,null,null,null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1307311605187265267d33f281d99','展开',null,'SysMenu','State',111,null,null,null,null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1307311605187265267d33f281999','折叠',null,'SysMenu','State',222,null,null,null,null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1307311605187265267d33f281df3','开启',null,'SysPerson','State',111,null,null,null,null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1307311605187265267d33f281df4','关闭',null,'SysPerson','State',222,null,null,null,null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('13112209551672144939a6262d8e5','男',null,'SysPerson','Sex',111,'SysPerson男',null,'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1311220955257836593c4a4bbea87','女',null,'SysPerson','Sex',111,'SysPerson女',null,'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1311220956161414228ccc2b579f8','北京市',null,'SysPerson','Province',111,'SysPerson+Province+北京市',null,'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1311220956340783488723f958e59','上海市',null,'SysPerson','Province',222,'SysPerson+Province+上海市',null,'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1311220957265297953ba74f034d3','海淀区','1311220956161414228ccc2b579f8','SysPerson','City',111,'SysPerson+City+海淀区',null,'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1311220957429042713f2c8c544c5','东城区','1311220956161414228ccc2b579f8','SysPerson','City',111,'SysPerson+City+东城区',null,'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1311220958318400832b4af840c44','中关村','1311220957265297953ba74f034d3','SysPerson','Village',111,'SysPerson+Village+中关村',null,'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1608161045252254068de8a17c7dc','仪表',null,'VJIANDINGRENWU','REPORT_CATEGORY_ZHISHIYIBIAO',200,'报告类别',to_timestamp('16-8月 -16 10.45.25.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('09-9月 -16 09.43.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160816105259267190626f1ce6597','数表',null,'VJIANDINGRENWU','REPORT_CATEGORY_SHUZI',210,'报告类别',to_timestamp('16-8月 -16 10.52.59.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('09-9月 -16 09.44.24.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1608161056170546446c9b0799e87','校准',null,'VJIANDINGRENWU','CERTIFICATE_CATEGORY',201,'证书类别',to_timestamp('16-8月 -16 10.56.17.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16082210464030817309f7f145210','冀北电力有限公司计量中心',null,'Appliance','ACCEPT_ORGNIZATION',200,'受理单位',to_timestamp('22-8月 -16 10.46.40.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1608221119029394078dfe020b51f','实验中',null,'VJIANDINGRENWU','ORDER_STATUS',200,'实验室检定器具状态',to_timestamp('22-8月 -16 11.19.02.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('22-8月 -16 11.22.07.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1608221119375374160bc0ebc4cf1','实验完成',null,'VJIANDINGRENWU','ORDER_STATUS',400,'实验室检定器具状态',to_timestamp('22-8月 -16 11.19.37.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160822111956972732674aadf00e1','已分配',null,'VJIANDINGRENWU','ORDER_STATUS',500,'实验室检定器具状态',to_timestamp('22-8月 -16 11.19.56.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16082211235977990763918c752cd','是',null,'VJIANDINGRENWU','ISOVERDUE',100,'实验室检定是否超期',to_timestamp('22-8月 -16 11.23.59.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1608221124090742098adabf9208c','否',null,'VJIANDINGRENWU','ISOVERDUE',200,'实验室检定是否超期',to_timestamp('22-8月 -16 11.24.09.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1608221129498460840d7bd4a5c8c','待审核',null,'VSHENHE','ISAGGREY',100,'审核，通过审核结论来判断审核状态',to_timestamp('22-8月 -16 11.29.49.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160822113004624971813b25744ec','审核驳回',null,'VSHENHE','ISAGGREY',200,'审核，通过审核结论来判断审核状态',to_timestamp('22-8月 -16 11.30.04.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609211058293308606a05ef56dea','送检',null,'COMPANY','CATEGORY',100,'单位类别',to_timestamp('21-9月 -16 10.58.29.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16092110584940126027697b11ce3','证书',null,'COMPANY','CATEGORY',200,'单位类别',to_timestamp('21-9月 -16 10.58.49.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16092710533640417111dcaa16322','已归档',null,'ORDER_TASK_INFORMATION','ORDER_STATUS',1003,'委托单状态',to_timestamp('27-9月 -16 10.53.36.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160909103412407934433bd1e86af','DC-仪表-10（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_ZHILIU',4001,'控制编号',to_timestamp('09-9月 -16 10.34.12.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160909103539487996662a59e05bc','DC-互感器-01（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_HUGANQI',5001,'控制编号',to_timestamp('09-9月 -16 10.35.39.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16090910354775372058b83437510','DC-互感器-02（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_HUGANQI',5002,'控制编号',to_timestamp('09-9月 -16 10.35.47.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16090910355620132814f361328e2','DC-互感器-03（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_HUGANQI',5003,'控制编号',to_timestamp('09-9月 -16 10.35.56.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609091036103110846ea1d7f21c4','DC-互感器-04（1）',null,'VJIANDINGRENWU','CONTROL_NUMBER_HUGANQI',5004,'控制编号',to_timestamp('09-9月 -16 10.36.10.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609131003438134075b77c651469','待领取',null,'VQIJULINGQU1','APPLIANCECOLLECTIONSATE',1001,'器具领取状态',to_timestamp('13-9月 -16 10.03.43.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609131004009698054fc4e434fb2','已领取',null,'VQIJULINGQU1','APPLIANCECOLLECTIONSATE',1002,'器具领取状态',to_timestamp('13-9月 -16 10.04.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609131004371922790100459511f','待领取',null,'VQIJULINGQU1','REPORTTORECEVESTATE',1001,'报告领取状态',to_timestamp('13-9月 -16 10.04.37.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160913100448208033777ca7bcd84','已领取',null,'VQIJULINGQU1','REPORTTORECEVESTATE',1002,'报告领取状态',to_timestamp('13-9月 -16 10.04.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609201544307336392963d065a4e','待批准',null,'VSHENHE','ISAGGREY',300,'审核',to_timestamp('20-9月 -16 03.44.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16092015505339361496ea7450b89','指示仪表',null,'UNDERTAKE_LABORATORY','NAME',200,'实验室',to_timestamp('20-9月 -16 03.50.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16092015510944064120cde1055c3','直流仪器',null,'UNDERTAKE_LABORATORY','NAME',300,'实验室',to_timestamp('20-9月 -16 03.51.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16092015514580036261082a1c75b','数表三相',null,'UNDERTAKE_LABORATORY','NAME',500,'实验室',to_timestamp('20-9月 -16 03.51.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609201513158759299639b894a10','批准驳回',null,'VSHENPI','APPROVALISAGGREY',300,'审批',to_timestamp('20-9月 -16 03.13.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609271053026853585c2d18169df','已分配',null,'ORDER_TASK_INFORMATION','ORDER_STATUS',1001,'委托单状态',to_timestamp('27-9月 -16 10.53.02.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('160920155029626155527ce7d8d69','电能',null,'UNDERTAKE_LABORATORY','NAME',100,'实验室',to_timestamp('20-9月 -16 03.50.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609201551588473625df258a3bd8','数表单相',null,'UNDERTAKE_LABORATORY','NAME',600,'实验室',to_timestamp('20-9月 -16 03.51.58.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+Insert into TENGFEI."SysField" ("Id","MyTexts","ParentId","MyTables","MyColums","Sort","Remark","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1609271053230134168d50045b555','有退回',null,'ORDER_TASK_INFORMATION','ORDER_STATUS',1002,'委托单状态',to_timestamp('27-9月 -16 10.53.23.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null);
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysField
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysLog
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysLog"
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090616293299070298053618d40',null,'创建成功，委托单信息的信息的Id为1609061629329203877966a3403c1',null,'委托单信息','223.20.200.42',null,null,to_timestamp('06-9月 -16 04.29.32.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090616313729625736922f104d4',null,'修改成功，器具明细信息信息的Id为1609051133218586400b121562430',null,'器具明细信息','223.20.200.42',null,null,to_timestamp('06-9月 -16 04.31.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160906163355691219966da21011b',null,'修改成功，器具明细信息信息的Id为1609061629329203877c8854d25d2',null,'器具明细信息','223.20.200.42',null,null,to_timestamp('06-9月 -16 04.33.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160906163618252358113508a457b',null,'创建成功，预备方案的信息的Id为16090616361394555215fc3ed5418',null,'预备方案','223.20.200.42',null,null,to_timestamp('06-9月 -16 04.36.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090616373102566039e31f5a4b0',null,'修改成功，预备方案信息的Id为16090616361394555215fc3ed5418',null,'预备方案','223.20.200.42',null,null,to_timestamp('06-9月 -16 04.37.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609061644237788141b536486bd5',null,'修改成功，预备方案信息的Id为16090616361394555215fc3ed5418',null,'预备方案','223.20.200.42',null,null,to_timestamp('06-9月 -16 04.44.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160906164827322345546b31cc0e8',null,'修改成功，器具明细信息信息的Id为1609061629329203877c8854d25d2',null,'器具明细信息','223.20.200.42',null,null,to_timestamp('06-9月 -16 04.48.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609061654547531152969c2323d9',null,'修改成功，预备方案信息的Id为1609051445447063743ad7b32a5ec',null,'预备方案','::1',null,null,to_timestamp('06-9月 -16 04.54.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160906170847985184280522f1b67',null,'修改成功，预备方案信息的Id为1609051445447063743ad7b32a5ec',null,'预备方案','::1',null,null,to_timestamp('06-9月 -16 05.08.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160907151959016145116811f8149',null,'修改成功，菜单信息的Id为1608191356215411265712c6a6eb6',null,'菜单','::1',null,null,to_timestamp('07-9月 -16 03.19.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090715551835225686631052b7f',null,'修改成功，菜单信息的Id为16081914163689923757d9ee6d9b8',null,'菜单','::1',null,null,to_timestamp('07-9月 -16 03.55.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609072333233893395530990207f',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('07-9月 -16 11.33.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090723401747547585a1b21e47f',null,'创建成功，方案的信息的Id为1609072340139924895d27e697456',null,'方案','::1',null,null,to_timestamp('07-9月 -16 11.40.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160907234346452423596eb1d7759',null,'创建成功，方案的信息的Id为1609072343448992750be6044b4e5',null,'方案','::1',null,null,to_timestamp('07-9月 -16 11.43.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090800044796773397db057e5dc',null,'创建失败，方案的信息，',null,'方案','::1',null,null,to_timestamp('08-9月 -16 12.04.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090800053415606279764d5b20e',null,'创建失败，方案的信息，',null,'方案','::1',null,null,to_timestamp('08-9月 -16 12.05.34.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908005919494550901d43e54f5',null,'修改成功，方案信息的Id为16090800332954196133de6fff655',null,'方案','::1',null,null,to_timestamp('08-9月 -16 12.59.19.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908010212286437448b2db194f',null,'修改成功，方案信息的Id为16090800050885607834f49989924',null,'方案','::1',null,null,to_timestamp('08-9月 -16 01.02.12.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609080103394400049c37298414a',null,'修改成功，方案信息的Id为1609080004443801465afaca01307',null,'方案','::1',null,null,to_timestamp('08-9月 -16 01.03.39.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609080110155626375a6b2897440',null,'修改成功，方案信息的Id为16090800332954196133de6fff655',null,'方案','::1',null,null,to_timestamp('08-9月 -16 01.10.15.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908011024568026401993dff6f',null,'修改成功，方案信息的Id为16090800332954196133de6fff655',null,'方案','::1',null,null,to_timestamp('08-9月 -16 01.10.24.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609080626150365027f30301c518',null,'修改成功，方案的Id为16090800332954196133de6fff655',null,'消息','::1',null,null,to_timestamp('08-9月 -16 06.26.15.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609080626306521016837f17f5e5',null,'修改成功，方案信息的Id为16090800332954196133de6fff655',null,'方案','::1',null,null,to_timestamp('08-9月 -16 06.26.30.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609080627092082593b902cec76c',null,'修改成功，方案信息的Id为16090800332954196133de6fff655',null,'方案','::1',null,null,to_timestamp('08-9月 -16 06.27.09.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090806271817138604dc4ef3b00',null,'修改成功，方案信息的Id为16090800050885607834f49989924',null,'方案','::1',null,null,to_timestamp('08-9月 -16 06.27.18.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609080722343715749a55e01d128',null,'修改成功，方案信息的Id为16090800332954196133de6fff655',null,'方案','::1',null,null,to_timestamp('08-9月 -16 07.22.34.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609080726454483656056d340f97',null,'修改成功，方案信息的Id为16090800332954196133de6fff655',null,'方案','::1',null,null,to_timestamp('08-9月 -16 07.26.45.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908073240537636174144605e5',null,'创建成功，方案的信息的Id为1609080732384251617b2084f08bb',null,'方案','::1',null,null,to_timestamp('08-9月 -16 07.32.40.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609080733312017614315f68a529',null,'修改成功，方案的Id为16090800332954196133de6fff655',null,'消息','::1',null,null,to_timestamp('08-9月 -16 07.33.31.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609080734012105345e1c0d7af45',null,'修改成功，方案的Id为16090800332954196133de6fff655,16090800050885607834f49989924,1609080004443801465afaca01307,1609072347111884881089b15080b',null,'消息','::1',null,null,to_timestamp('08-9月 -16 07.34.01.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609080755173778586b03feb8cd8',null,'创建成功，方案的信息的Id为16090807550612123947b37db6c71',null,'方案','::1',null,null,to_timestamp('08-9月 -16 07.55.17.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908075539863949204a6ac4752',null,'创建成功，方案的信息的Id为16090807553777668119db641cedb',null,'方案','::1',null,null,to_timestamp('08-9月 -16 07.55.39.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090807555793422203493b67631',null,'修改成功，方案信息的Id为16090807553777668119db641cedb',null,'方案','::1',null,null,to_timestamp('08-9月 -16 07.55.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908075602484838293bdab9d83',null,'修改成功，方案信息的Id为16090807553777668119db641cedb',null,'方案','::1',null,null,to_timestamp('08-9月 -16 07.56.02.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609080756339039221092fb29e50',null,'修改成功，方案信息的Id为16090807553777668119db641cedb',null,'方案','::1',null,null,to_timestamp('08-9月 -16 07.56.33.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908075657961388297b21659a8',null,'修改成功，方案信息的Id为16090800332954196133de6fff655',null,'方案','::1',null,null,to_timestamp('08-9月 -16 07.56.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908075758095984191f297f7b6',null,'创建成功，方案的信息的Id为160908075755250003213e0c7e879',null,'方案','::1',null,null,to_timestamp('08-9月 -16 07.57.58.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090216180268062517b29d0e3b5',null,'创建成功，预备方案的信息的Id为160902161735768080089f22de6ef',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 04.18.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021732598692807d9c4272cfc',null,'创建成功，预备方案的信息的Id为160902173258315510183aa0cc9c0',null,'预备方案','211.144.0.1',null,null,to_timestamp('02-9月 -16 05.32.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090614450776587123735306703',null,'修改成功，预备方案信息的Id为1609031549177846276bc95b5a32b',null,'预备方案','::1',null,null,to_timestamp('06-9月 -16 02.45.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609061540272377459a5f41ec875',null,'创建成功，委托单信息的信息的Id为1609061540259808722b8b4fd2adc',null,'委托单信息','::1',null,null,to_timestamp('06-9月 -16 03.40.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609061545193599478a2b1cc2625',null,'创建成功，委托单信息的信息的Id为16090615451824116085452aac655',null,'委托单信息','::1',null,null,to_timestamp('06-9月 -16 03.45.19.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090615463972584996922ec9422',null,'创建成功，委托单信息的信息的Id为16090615463943464134d9c29142c',null,'委托单信息','::1',null,null,to_timestamp('06-9月 -16 03.46.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160906154819571508599ba70202c',null,'创建成功，单位的信息的Id为160906154818934765345754d1f64',null,'单位','223.20.200.42',null,null,to_timestamp('06-9月 -16 03.48.19.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090615491945857374d391e0bfa',null,'修改成功，单位信息的Id为16090211162935758705a75c662e5',null,'单位','223.20.200.42',null,null,to_timestamp('06-9月 -16 03.49.19.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609061550147614785cb51286c03',null,'创建成功，单位的信息的Id为16090615501475366577fab470c98',null,'单位','223.20.200.42',null,null,to_timestamp('06-9月 -16 03.50.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090616385638245352f5c73269e',null,'修改成功，预备方案信息的Id为16090616361394555215fc3ed5418',null,'预备方案','223.20.200.42',null,null,to_timestamp('06-9月 -16 04.38.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090616453327074038d61fc1964',null,'修改失败，预备方案信息的Id为16090616361394555215fc3ed5418,',null,'预备方案','223.20.200.42',null,null,to_timestamp('06-9月 -16 04.45.33.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160906164540473165385c58810dd',null,'修改失败，预备方案信息的Id为16090616361394555215fc3ed5418,',null,'预备方案','223.20.200.42',null,null,to_timestamp('06-9月 -16 04.45.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609072331058733372f3e97c56f1',null,'创建失败，方案的信息，Validation failed for one or more entities. See ''EntityValidationErrors'' property for more details.',null,'方案','::1',null,null,to_timestamp('07-9月 -16 11.31.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609072331063736939a56bc419ef',null,'创建失败，方案的信息，Validation failed for one or more entities. See ''EntityValidationErrors'' property for more details.',null,'方案','::1',null,null,to_timestamp('07-9月 -16 11.31.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609072347155107872cae54568a6',null,'创建成功，方案的信息的Id为1609072347111884881089b15080b',null,'方案','::1',null,null,to_timestamp('07-9月 -16 11.47.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908003216230211411e7e69f01',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('08-9月 -16 12.32.16.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090800334091993079ddeec3871',null,'创建成功，方案的信息的Id为16090800332954196133de6fff655',null,'方案','::1',null,null,to_timestamp('08-9月 -16 12.33.40.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908062700595018189ed94c082',null,'修改成功，方案的Id为16090800332954196133de6fff655,16090800050885607834f49989924,1609080004443801465afaca01307,1609072347111884881089b15080b',null,'消息','::1',null,null,to_timestamp('08-9月 -16 06.27.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090807581597758249f22ee376b',null,'修改成功，方案信息的Id为160908075755250003213e0c7e879',null,'方案','::1',null,null,to_timestamp('08-9月 -16 07.58.15.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908075824920072693e29906ba',null,'修改成功，方案的Id为160908075755250003213e0c7e879',null,'消息','::1',null,null,to_timestamp('08-9月 -16 07.58.24.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609080759333735983152f80156f',null,'修改成功，方案信息的Id为16090807550612123947b37db6c71',null,'方案','::1',null,null,to_timestamp('08-9月 -16 07.59.33.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609080759370102854bfa87db519',null,'修改成功，方案信息的Id为16090807550612123947b37db6c71',null,'方案','::1',null,null,to_timestamp('08-9月 -16 07.59.37.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609080801444232881deddf8093e',null,'修改成功，方案信息的Id为16090807550612123947b37db6c71',null,'方案','::1',null,null,to_timestamp('08-9月 -16 08.01.44.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609080802367425286c78e73dec0',null,'修改成功，方案的Id为16090800332954196133de6fff655',null,'消息','::1',null,null,to_timestamp('08-9月 -16 08.02.36.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609080804239562587118be58ae6',null,'修改成功，方案的Id为16090807550612123947b37db6c71',null,'消息','::1',null,null,to_timestamp('08-9月 -16 08.04.23.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908080430181783178132059db',null,'修改成功，方案的Id为16090807550612123947b37db6c71,16090800050885607834f49989924',null,'消息','::1',null,null,to_timestamp('08-9月 -16 08.04.30.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090808043923673456d212f4d8d',null,'修改成功，方案的Id为16090807550612123947b37db6c71,1609080004443801465afaca01307,1609072347111884881089b15080b,16090800050885607834f49989924',null,'消息','::1',null,null,to_timestamp('08-9月 -16 08.04.39.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609080804446005792ca166c63ae',null,'修改成功，方案的Id为16090807550612123947b37db6c71,1609080004443801465afaca01307,1609072347111884881089b15080b,16090800050885607834f49989924',null,'消息','::1',null,null,to_timestamp('08-9月 -16 08.04.44.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090808251024118016bf8876223',null,'修改成功，方案信息的Id为16090800050885607834f49989924',null,'方案','::1',null,null,to_timestamp('08-9月 -16 08.25.10.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908082510730595231c6abb7b6',null,'修改成功，方案信息的Id为16090800050885607834f49989924',null,'方案','::1',null,null,to_timestamp('08-9月 -16 08.25.10.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081022051987749e8cce9efb0',null,'修改成功，器具明细信息信息的Id为1609061612518682769ac2479d57b',null,'器具明细信息','111.203.3.1',null,null,to_timestamp('08-9月 -16 10.22.05.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090810261085480062d8eb15784',null,'创建成功，人员的信息的Id为160908102608759317686e097a014',null,'人员','::1',null,null,to_timestamp('08-9月 -16 10.26.10.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021554503659946dfd4b2c9ba',null,'创建成功，委托单信息的信息的Id为16090215543473637644ce3ca1aa9',null,'委托单信息','::1',null,null,to_timestamp('02-9月 -16 03.54.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021655021407519963bd5aff8',null,'修改成功，预备方案信息的Id为1609021624546773609bed07d2f34',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 04.55.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090216565610307610e8847bc4b',null,'修改成功，预备方案信息的Id为1609021624546773609bed07d2f34',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 04.56.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090216570947640456cd84dc217',null,'修改成功，预备方案信息的Id为1609021647325632623ef0f665337',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 04.57.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090315023487943282e43af0844',null,'创建成功，委托单信息的信息的Id为160903150233035662692a8acf687',null,'委托单信息','::1',null,null,to_timestamp('03-9月 -16 03.02.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160903150411203713799798a1d39',null,'创建成功，预备方案的信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('03-9月 -16 03.04.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090400574181821156bedd40353',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 12.57.41.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609040132424597646a02e9c2178',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 01.32.42.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160904013243249581214294cfa07',null,'修改失败，预备方案信息的Id为1609031504095630321aef46c3c50,The underlying provider failed on Open.',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 01.32.43.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609040135080752837b1f363c291',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 01.35.08.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609040135168432750a7e5302da7',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 01.35.16.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160904023946090006596dbc881f7',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 02.39.46.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609040243424978964b1d19d37a4',null,'修改失败，预备方案信息的Id为1609031504095630321aef46c3c50,',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 02.43.42.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609040244516803462073ac97cd0',null,'修改失败，预备方案信息的Id为1609031504095630321aef46c3c50,',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 02.44.51.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609040248106080057b3159d4e5b',null,'修改失败，预备方案信息的Id为1609031504095630321aef46c3c50,',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 02.48.10.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090402490410353151f38c7ca8c',null,'修改失败，预备方案信息的Id为1609031504095630321aef46c3c50,',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 02.49.04.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160904025100482011143d31b797d',null,'修改失败，预备方案信息的Id为1609031504095630321aef46c3c50,',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 02.51.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609040254029451158b8cb30da02',null,'修改失败，预备方案信息的Id为1609031504095630321aef46c3c50,',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 02.54.02.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609040315340476569df4af39423',null,'修改成功，预备方案信息的Id为1609031549177846276bc95b5a32b',null,'预备方案','221.218.10.46',null,null,to_timestamp('04-9月 -16 03.15.34.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160905104535662853951c8a99a93',null,'创建失败，委托单信息的信息，An error occurred while updating the entries. See the inner exception for details.',null,'委托单信息','223.20.200.42',null,null,to_timestamp('05-9月 -16 10.45.35.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090510453613455171d0f29ce0c',null,'创建失败，委托单信息的信息，An error occurred while updating the entries. See the inner exception for details.',null,'委托单信息','223.20.200.42',null,null,to_timestamp('05-9月 -16 10.45.36.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090510464302579219c4177270b',null,'创建失败，委托单信息的信息，An error occurred while updating the entries. See the inner exception for details.',null,'委托单信息','223.20.200.42',null,null,to_timestamp('05-9月 -16 10.46.43.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160905113322733648071810d68fa',null,'创建成功，委托单信息的信息的Id为16090511332185864009447d76d1a',null,'委托单信息','::1',null,null,to_timestamp('05-9月 -16 11.33.22.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609051358052412090afd8852224',null,'修改成功，器具明细信息信息的Id为16090511332185864004e8cf0cf4e',null,'器具明细信息','::1',null,null,to_timestamp('05-9月 -16 01.58.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609051358431118480971463728b',null,'创建成功，预备方案的信息的Id为16090513583856194230d62470c8a',null,'预备方案','::1',null,null,to_timestamp('05-9月 -16 01.58.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090514243599066536b69b7a424',null,'创建失败，委托单信息的信息，An error occurred while updating the entries. See the inner exception for details.',null,'委托单信息','223.20.200.42',null,null,to_timestamp('05-9月 -16 02.24.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609051426004470333ef8de8acb9',null,'创建失败，委托单信息的信息，An error occurred while updating the entries. See the inner exception for details.',null,'委托单信息','223.20.200.42',null,null,to_timestamp('05-9月 -16 02.26.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090514281561628613e1b483b41',null,'创建失败，委托单信息的信息，An error occurred while updating the entries. See the inner exception for details.',null,'委托单信息','223.20.200.42',null,null,to_timestamp('05-9月 -16 02.28.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090514284075299353b88d75775',null,'创建失败，委托单信息的信息，An error occurred while updating the entries. See the inner exception for details.',null,'委托单信息','223.20.200.42',null,null,to_timestamp('05-9月 -16 02.28.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090514295432320138a1bb3bac8',null,'创建成功，委托单信息的信息的Id为160905142954284137386ca696a8e',null,'委托单信息','223.20.200.42',null,null,to_timestamp('05-9月 -16 02.29.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090514403653926771d723b3578',null,'创建成功，委托单信息的信息的Id为1609051440310361267d0bc0759bc',null,'委托单信息','223.20.200.42',null,null,to_timestamp('05-9月 -16 02.40.36.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609051445464544883968f6de63d',null,'创建成功，预备方案的信息的Id为1609051445447063743ad7b32a5ec',null,'预备方案','223.20.200.42',null,null,to_timestamp('05-9月 -16 02.45.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090215120099845167048768e70',null,'创建成功，委托单信息的信息的Id为1609021511592640643e4757febba',null,'委托单信息','::1',null,null,to_timestamp('02-9月 -16 03.12.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021517434167763ff701443b4',null,'修改成功，器具明细信息信息的Id为160902151159264064345811800ce',null,'器具明细信息','::1',null,null,to_timestamp('02-9月 -16 03.17.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021556278256406adf9ccc976',null,'创建成功，委托单信息的信息的Id为1609021556248980605a9e49412d7',null,'委托单信息','::1',null,null,to_timestamp('02-9月 -16 03.56.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021606109146422a15bc2b640',null,'创建成功，预备方案的信息的Id为1609021606060551734dc95506033',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 04.06.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021607365204423726267e276',null,'修改成功，器具明细信息信息的Id为1609021511592640643d67908d43f',null,'器具明细信息','::1',null,null,to_timestamp('02-9月 -16 04.07.36.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021616188475083bb2b5e5cd5',null,'创建成功，委托单信息的信息的Id为1609021616172068532ad8d0b6ad2',null,'委托单信息','::1',null,null,to_timestamp('02-9月 -16 04.16.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021616447873397146ecded9b',null,'修改成功，器具明细信息信息的Id为1609021616172068532213b7e7337',null,'器具明细信息','::1',null,null,to_timestamp('02-9月 -16 04.16.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021620148077978e10ad5c600',null,'创建成功，委托单信息的信息的Id为16090216201358903400ecb75f191',null,'委托单信息','::1',null,null,to_timestamp('02-9月 -16 04.20.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021620282480028f3b0122fe9',null,'修改成功，器具明细信息信息的Id为1609021620135890340acf9ccb04b',null,'器具明细信息','::1',null,null,to_timestamp('02-9月 -16 04.20.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021624592157455406c164d2d',null,'创建成功，预备方案的信息的Id为1609021624546773609bed07d2f34',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 04.24.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021628274328719cdb5a47c81',null,'修改成功，预备方案信息的Id为1609021624546773609bed07d2f34',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 04.28.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021636191924027e14d237b59',null,'修改成功，预备方案信息的Id为1609021624546773609bed07d2f34',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 04.36.19.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021638348529697dd64411eee',null,'修改成功，预备方案信息的Id为1609021624546773609bed07d2f34',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 04.38.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021639158018522e428b28fe9',null,'修改成功，预备方案信息的Id为1609021624546773609bed07d2f34',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 04.39.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090216430732347856387a30d0c',null,'修改成功，预备方案信息的Id为1609021624546773609bed07d2f34',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 04.43.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021647597817776acaf03a531',null,'修改成功，预备方案信息的Id为1609021624546773609bed07d2f34',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 04.47.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090216494215001231b16b6a5c6',null,'修改成功，预备方案信息的Id为1609021624546773609bed07d2f34',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 04.49.42.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021651047317341f22ad91bd8',null,'修改成功，预备方案信息的Id为1609021624546773609bed07d2f34',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 04.51.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021658245673241f81656b797',null,'修改成功，预备方案信息的Id为1609021606060551734dc95506033',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 04.58.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090216593523149267e9b56a1a2',null,'修改成功，预备方案信息的Id为1609021606060551734dc95506033',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 04.59.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609021701530836371f27e2544c3',null,'修改成功，预备方案信息的Id为1609021606060551734dc95506033',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 05.01.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090217021260983556f6f08fe65',null,'修改成功，预备方案信息的Id为1609021701269253395798c78aea1',null,'预备方案','::1',null,null,to_timestamp('02-9月 -16 05.02.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090315053205358810c25cdb769',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('03-9月 -16 03.05.32.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160903150553137403035ed95f506',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('03-9月 -16 03.05.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090315064686562525670b5f626',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('03-9月 -16 03.06.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160903150711103265387d69ca5f6',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('03-9月 -16 03.07.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090315080812711150249b0e914',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('03-9月 -16 03.08.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609031509110692178d69fcfc599',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('03-9月 -16 03.09.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609031536206211538e83efcd477',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('03-9月 -16 03.36.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090315480916400211f089c3df2',null,'创建成功，委托单信息的信息的Id为160903154741679343794d90a0894',null,'委托单信息','::1',null,null,to_timestamp('03-9月 -16 03.48.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609040128105304457c691ffac8c',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 01.28.10.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160904012843283423128126a594d',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 01.28.43.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160904014609141093996a090fbff',null,'修改成功，预备方案信息的Id为',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 01.46.09.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609040149169412252b8d3d272e5',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 01.49.16.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160904015525598470018b72f02d7',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 01.55.25.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090403140095326193f4cf606b9',null,'修改成功，预备方案信息的Id为1609031549177846276bc95b5a32b',null,'预备方案','221.218.10.46',null,null,to_timestamp('04-9月 -16 03.14.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090403142670327415387d40866',null,'修改成功，预备方案信息的Id为1609031549177846276bc95b5a32b',null,'预备方案','221.218.10.46',null,null,to_timestamp('04-9月 -16 03.14.26.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609031503468439531a4225aedfc',null,'修改成功，器具明细信息信息的Id为16090315023303566265b2455e008',null,'器具明细信息','::1',null,null,to_timestamp('03-9月 -16 03.03.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609031543025280393f57b505e97',null,'修改失败，预备方案信息的Id为1609031504095630321aef46c3c50,已中止事务。',null,'预备方案','::1',null,null,to_timestamp('03-9月 -16 03.43.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090315431167735737b9d74c78d',null,'修改失败，预备方案信息的Id为1609031504095630321aef46c3c50,The underlying provider failed on Open.',null,'预备方案','::1',null,null,to_timestamp('03-9月 -16 03.43.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090315440737204512ceb29e421',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('03-9月 -16 03.44.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160903154845707977187c4a6763b',null,'修改成功，器具明细信息信息的Id为160903154741679343720087af049',null,'器具明细信息','::1',null,null,to_timestamp('03-9月 -16 03.48.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090315492372599537a82c3b8fa',null,'创建成功，预备方案的信息的Id为1609031549177846276bc95b5a32b',null,'预备方案','::1',null,null,to_timestamp('03-9月 -16 03.49.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160904010248247556727efad85e5',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 01.02.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090401104338640339cb4127656',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 01.10.43.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090401195327981470a649d58df',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 01.19.53.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090401224572229497dac2cc2fd',null,'修改成功，预备方案信息的Id为',null,'预备方案','::1',null,null,to_timestamp('04-9月 -16 01.22.45.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160904163603146786358e52f193b',null,'创建成功，委托单信息的信息的Id为160904163600192571326fec55da2',null,'委托单信息','223.20.200.42',null,null,to_timestamp('04-9月 -16 04.36.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090418250527885398ab45368ac',null,'创建成功，委托单信息的信息的Id为160904182504773951797d20577f6',null,'委托单信息','221.218.209.20',null,null,to_timestamp('04-9月 -16 06.25.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609051400329401485c1cc7cf85c',null,'修改成功，预备方案信息的Id为16090513583856194230d62470c8a',null,'预备方案','::1',null,null,to_timestamp('05-9月 -16 02.00.32.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609051443220143717b6b7aa5462',null,'修改成功，器具明细信息信息的Id为1609051440310361267cce992d16f',null,'器具明细信息','223.20.200.42',null,null,to_timestamp('05-9月 -16 02.43.22.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609051446319796739bf292fcb86',null,'修改成功，预备方案信息的Id为1609051445447063743ad7b32a5ec',null,'预备方案','223.20.200.42',null,null,to_timestamp('05-9月 -16 02.46.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090516213698846470f8bba9c98',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('05-9月 -16 04.21.36.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090516281208491720ffcfd5ea8',null,'修改成功，器具明细信息信息的Id为16090315023303566265b2455e008',null,'器具明细信息','::1',null,null,to_timestamp('05-9月 -16 04.28.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090517103303383015f00eaabeb',null,'修改失败，器具明细信息信息的Id为16090315023303566265b2455e008,未将对象引用设置到对象的实例。',null,'器具明细信息','::1',null,null,to_timestamp('05-9月 -16 05.10.33.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609051712120701404f147e47fad',null,'修改成功，器具明细信息信息的Id为16090315023303566265b2455e008',null,'器具明细信息','::1',null,null,to_timestamp('05-9月 -16 05.12.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609061123495101230142432580b',null,'创建失败，委托单信息的信息，An error occurred while updating the entries. See the inner exception for details.',null,'委托单信息','::1',null,null,to_timestamp('06-9月 -16 11.23.49.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160906114121886543217e79b71dd',null,'创建失败，委托单信息的信息，An error occurred while updating the entries. See the inner exception for details.',null,'委托单信息','::1',null,null,to_timestamp('06-9月 -16 11.41.21.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609061355557959175c58b605476',null,'创建成功，委托单信息的信息的Id为16090613553820546741b901a616c',null,'委托单信息','::1',null,null,to_timestamp('06-9月 -16 01.55.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609061444468452730a4a50820f4',null,'修改成功，器具明细信息信息的Id为16090511332185864002126bc5724',null,'器具明细信息','::1',null,null,to_timestamp('06-9月 -16 02.44.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609061542552645051c3f5da7553',null,'创建成功，委托单信息的信息的Id为160906154253250078861a943910e',null,'委托单信息','::1',null,null,to_timestamp('06-9月 -16 03.42.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160906154725364348927db253ee6',null,'修改成功，单位信息的Id为16090211162935758705a75c662e5',null,'单位','223.20.200.42',null,null,to_timestamp('06-9月 -16 03.47.25.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160906155437603602559e188475d',null,'修改成功，单位信息的Id为16090615501475366577fab470c98',null,'单位','223.20.200.42',null,null,to_timestamp('06-9月 -16 03.54.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090615582535177970b32f3a2ca',null,'创建成功，委托单信息的信息的Id为160906155823111170620303f3ff5',null,'委托单信息','::1',null,null,to_timestamp('06-9月 -16 03.58.25.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609061601560740517417b8c252c',null,'创建成功，委托单信息的信息的Id为16090616015556969624f63cde335',null,'委托单信息','::1',null,null,to_timestamp('06-9月 -16 04.01.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609061605166227422e6532180cd',null,'创建成功，委托单信息的信息的Id为1609061605103503021dc46d9a660',null,'委托单信息','::1',null,null,to_timestamp('06-9月 -16 04.05.16.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609061605173262393e7a8f08d3c',null,'创建成功，委托单信息的信息的Id为1609061605167528331b2aeb62ea0',null,'委托单信息','::1',null,null,to_timestamp('06-9月 -16 04.05.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609061607586884381777ce29ca2',null,'创建成功，委托单信息的信息的Id为1609061607555492136ab1c54a38d',null,'委托单信息','::1',null,null,to_timestamp('06-9月 -16 04.07.58.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090616091337504823794b11ddb',null,'创建成功，委托单信息的信息的Id为160906160913216938981bff1b129',null,'委托单信息','::1',null,null,to_timestamp('06-9月 -16 04.09.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090616125605984414d2a4fb2fe',null,'创建成功，委托单信息的信息的Id为1609061612518653471a3c7b895f6',null,'委托单信息','111.203.3.1',null,null,to_timestamp('06-9月 -16 04.12.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609061628470492335aad9148eea',null,'修改成功，预备方案信息的Id为1609051445447063743ad7b32a5ec',null,'预备方案','::1',null,null,to_timestamp('06-9月 -16 04.28.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609121054046609314690ac34c11',null,'修改成功，器具明细信息信息的Id为160905142954284137320d5485669',null,'器具明细信息','113.139.19.143',null,null,to_timestamp('12-9月 -16 10.54.04.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091210540495488808c1fa6287f',null,'修改成功，器具明细信息信息的Id为160905142954284137320d5485669',null,'器具明细信息','113.139.19.143',null,null,to_timestamp('12-9月 -16 10.54.04.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609121059510609514bae5d1db7e',null,'创建成功，部门的信息的Id为16091210594823271784b28d0beab',null,'部门','113.139.19.143',null,null,to_timestamp('12-9月 -16 10.59.51.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091211000953334049a6266631e',null,'删除成功，信息的Id为160912105922572552813a41ed871',null,'消息','113.139.19.143',null,null,to_timestamp('12-9月 -16 11.00.09.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609121100183364128992e99f089',null,'删除成功，信息的Id为160912105931494770486b72edc63',null,'消息','113.139.19.143',null,null,to_timestamp('12-9月 -16 11.00.18.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160912110036797082656ff2f5649',null,'修改成功，部门信息的Id为16091210593561895228a3d74df7a',null,'部门','113.139.19.143',null,null,to_timestamp('12-9月 -16 11.00.36.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091211003725022506159694f19',null,'修改成功，部门信息的Id为16091210593561895228a3d74df7a',null,'部门','113.139.19.143',null,null,to_timestamp('12-9月 -16 11.00.37.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160912110037278546471f1242564',null,'修改成功，部门信息的Id为16091210593561895228a3d74df7a',null,'部门','113.139.19.143',null,null,to_timestamp('12-9月 -16 11.00.37.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609121101240635460aa49a43c7f',null,'修改成功，部门信息的Id为1609121059443263178f3ed505e3b',null,'部门','113.139.19.143',null,null,to_timestamp('12-9月 -16 11.01.24.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609121101539514124e87d9f8bd9',null,'创建成功，部门的信息的Id为1609121101539465294b7d2b212b8',null,'部门','113.139.19.143',null,null,to_timestamp('12-9月 -16 11.01.53.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160912110203483028493c6df9fe6',null,'创建成功，部门的信息的Id为1609121102012231760326f0d34b6',null,'部门','113.139.19.143',null,null,to_timestamp('12-9月 -16 11.02.03.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091211022458930764135e35bdd',null,'创建成功，部门的信息的Id为16091211022456684584c7b36eb43',null,'部门','113.139.19.143',null,null,to_timestamp('12-9月 -16 11.02.24.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609121102337107516c32435a2a0',null,'创建成功，部门的信息的Id为1609121102326638364a7cf391a8a',null,'部门','113.139.19.143',null,null,to_timestamp('12-9月 -16 11.02.33.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160912111547797884039e491c5c8',null,'修改成功，器具明细信息信息的Id为1609051440310361267cce992d16f',null,'器具明细信息','111.203.3.1',null,null,to_timestamp('12-9月 -16 11.15.47.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091211324413769125abb8e5d4d',null,'修改失败，预备方案信息的Id为16090811290037150634233bd493d,',null,'预备方案','111.203.3.1',null,null,to_timestamp('12-9月 -16 11.32.44.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091211325568696287efa65fed4',null,'修改失败，预备方案信息的Id为16090811290037150634233bd493d,',null,'预备方案','111.203.3.1',null,null,to_timestamp('12-9月 -16 11.32.55.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091211325628561867ec72d047d',null,'修改失败，预备方案信息的Id为16090811290037150634233bd493d,',null,'预备方案','111.203.3.1',null,null,to_timestamp('12-9月 -16 11.32.56.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609121133542194838c2b2bd3deb',null,'修改成功，预备方案信息的Id为16090513583856194230d62470c8a',null,'预备方案','111.203.3.1',null,null,to_timestamp('12-9月 -16 11.33.54.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091211342481636183fa247de09',null,'修改失败，预备方案信息的Id为16090616361394555215fc3ed5418,',null,'预备方案','111.203.3.1',null,null,to_timestamp('12-9月 -16 11.34.24.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091213591731322681399aaa906',null,'修改成功，角色信息的Id为16091209264898430321126af2cdc',null,'角色','111.203.3.1',null,null,to_timestamp('12-9月 -16 01.59.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091214044515003403672337361',null,'修改成功，器具明细信息信息的Id为1609051429542841373fbf643486f',null,'器具明细信息','111.203.3.1',null,null,to_timestamp('12-9月 -16 02.04.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609121406305915828c2f9c1172b',null,'修改成功，器具明细信息信息的Id为16090418250477590499d363c07a6',null,'器具明细信息','111.203.3.1',null,null,to_timestamp('12-9月 -16 02.06.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160912142027446959017ea18117d',null,'修改失败，预备方案信息的Id为16090616361394555215fc3ed5418,',null,'预备方案','111.203.3.1',null,null,to_timestamp('12-9月 -16 02.20.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091214342810423904049653047',null,'修改成功，器具明细信息信息的Id为1609061612518682769ac2479d57b',null,'器具明细信息','111.203.3.1',null,null,to_timestamp('12-9月 -16 02.34.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160912144816442686629f3832d5f',null,'创建成功，方案的信息的Id为1609121448145471060ee6420da4b',null,'方案','111.203.3.1',null,null,to_timestamp('12-9月 -16 02.48.16.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609121448396574452c83dd4e7b8',null,'修改成功，方案信息的Id为1609121448145471060ee6420da4b',null,'方案','111.203.3.1',null,null,to_timestamp('12-9月 -16 02.48.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609121450131571292740fbe7b83',null,'创建成功，方案的信息的Id为1609121450128358278b86ada7217',null,'方案','111.203.3.1',null,null,to_timestamp('12-9月 -16 02.50.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609121454373479378843c317a8d',null,'创建成功，方案的信息的Id为1609121454363898932a6918d01c5',null,'方案','111.203.3.1',null,null,to_timestamp('12-9月 -16 02.54.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609121455157888670863a3288ce',null,'修改成功，方案信息的Id为1609121454363898932a6918d01c5',null,'方案','111.203.3.1',null,null,to_timestamp('12-9月 -16 02.55.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091214560376141223caa7d8d43',null,'修改成功，方案信息的Id为1609121454363898932a6918d01c5',null,'方案','111.203.3.1',null,null,to_timestamp('12-9月 -16 02.56.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609131538005075635392721c4ed',null,'修改成功，预备方案信息的Id为1609031549177846276bc95b5a32b',null,'预备方案','113.139.24.170',null,null,to_timestamp('13-9月 -16 03.38.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160913153808934644947bc560f2a',null,'修改成功，预备方案信息的Id为1609031549177846276bc95b5a32b',null,'预备方案','113.139.24.170',null,null,to_timestamp('13-9月 -16 03.38.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091315381373561059f077fc11c',null,'修改成功，预备方案信息的Id为1609031549177846276bc95b5a32b',null,'预备方案','113.139.24.170',null,null,to_timestamp('13-9月 -16 03.38.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091316543722899277a77b0560a',null,'创建成功，部门的信息的Id为160913165435378335778b8838c5e',null,'部门','113.139.24.170',null,null,to_timestamp('13-9月 -16 04.54.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609131658282525121f94c6bf42f',null,'创建成功，部门的信息的Id为160913165828242746173a5e5bcf6',null,'部门','113.139.24.170',null,null,to_timestamp('13-9月 -16 04.58.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091410333388159712e33799310',null,'创建成功，部门的信息的Id为1609141033337546391f94cdcea8a',null,'部门','113.139.24.170',null,null,to_timestamp('14-9月 -16 10.33.33.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609141034413461017719d7f55cb',null,'创建成功，部门的信息的Id为160914103441337312384a7d1b166',null,'部门','113.139.24.170',null,null,to_timestamp('14-9月 -16 10.34.41.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091410371783941554803e5758a',null,'删除成功，信息的Id为160914103441337312384a7d1b166',null,'消息','113.139.24.170',null,null,to_timestamp('14-9月 -16 10.37.17.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160914105226870414765c1f6a8cf',null,'创建失败，部门的信息，An error occurred while updating the entries. See the inner exception for details.',null,'部门','113.139.24.170',null,null,to_timestamp('14-9月 -16 10.52.26.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091411224087756993de0a82af5',null,'创建成功，人员的信息的Id为16091411224062170071917f4aca0',null,'人员','113.139.24.170',null,null,to_timestamp('14-9月 -16 11.22.40.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609141431388275789da5df20ef9',null,'修改成功，预备方案信息的Id为16090513583856194230d62470c8a',null,'预备方案','113.139.24.170',null,null,to_timestamp('14-9月 -16 02.31.38.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160914143139287557519f19df01e',null,'修改成功，预备方案信息的Id为16090513583856194230d62470c8a',null,'预备方案','113.139.24.170',null,null,to_timestamp('14-9月 -16 02.31.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091414313937642810bc4acac7b',null,'修改失败，预备方案信息的Id为16090513583856194230d62470c8a,',null,'预备方案','113.139.24.170',null,null,to_timestamp('14-9月 -16 02.31.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609141431394125623f4c9d01cef',null,'修改失败，预备方案信息的Id为16090513583856194230d62470c8a,',null,'预备方案','113.139.24.170',null,null,to_timestamp('14-9月 -16 02.31.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609141431396020227200138caf6',null,'修改成功，预备方案信息的Id为16090513583856194230d62470c8a',null,'预备方案','113.139.24.170',null,null,to_timestamp('14-9月 -16 02.31.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091414313968503373ea386ce17',null,'修改成功，预备方案信息的Id为16090513583856194230d62470c8a',null,'预备方案','113.139.24.170',null,null,to_timestamp('14-9月 -16 02.31.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160914143139769021359a7299097',null,'修改成功，预备方案信息的Id为16090513583856194230d62470c8a',null,'预备方案','113.139.24.170',null,null,to_timestamp('14-9月 -16 02.31.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091414314028075979925a49db4',null,'修改失败，预备方案信息的Id为16090513583856194230d62470c8a,',null,'预备方案','113.139.24.170',null,null,to_timestamp('14-9月 -16 02.31.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160914143241761636142ed5b86ae',null,'修改成功，预备方案信息的Id为16090513583856194230d62470c8a',null,'预备方案','113.139.24.170',null,null,to_timestamp('14-9月 -16 02.32.41.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609141702025959533f19e8057d5',null,'创建失败，部门的信息，Validation failed for one or more entities. See ''EntityValidationErrors'' property for more details.',null,'部门','113.132.254.215',null,null,to_timestamp('14-9月 -16 05.02.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160918130747261170016f10900a1',null,'创建成功，委托单信息的信息的Id为1609181307436586199c52b9501dc',null,'委托单信息','::1',null,null,to_timestamp('18-9月 -16 01.07.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181401136367722d7796968c2',null,'修改成功，器具明细信息信息的Id为1609181307436586199fff646175d',null,'器具明细信息','::1',null,null,to_timestamp('18-9月 -16 02.01.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091816120886941933333abe967',null,'创建成功，方案的信息的Id为1609181612070669361346b29f2d2',null,'方案','::1',null,null,to_timestamp('18-9月 -16 04.12.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181612159403157fb5ba424ba',null,'修改成功，方案信息的Id为1609181612070669361346b29f2d2',null,'方案','::1',null,null,to_timestamp('18-9月 -16 04.12.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181613039298873f81786cff9',null,'修改成功，方案信息的Id为1609181612070669361346b29f2d2',null,'方案','::1',null,null,to_timestamp('18-9月 -16 04.13.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181623588901435eb734a38f4',null,'创建成功，方案的信息的Id为160918162357059269600951d2d70',null,'方案','::1',null,null,to_timestamp('18-9月 -16 04.23.58.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160918162407053979182d00d9d58',null,'修改成功，方案信息的Id为160918162357059269600951d2d70',null,'方案','::1',null,null,to_timestamp('18-9月 -16 04.24.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091816263725649024cdbf7406e',null,'修改成功，方案信息的Id为160918162357059269600951d2d70',null,'方案','::1',null,null,to_timestamp('18-9月 -16 04.26.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160918162657006723266089ead03',null,'修改成功，方案信息的Id为160918162357059269600951d2d70',null,'方案','::1',null,null,to_timestamp('18-9月 -16 04.26.57.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181650451057842868c14d9f0',null,'创建成功，方案的信息的Id为16091816503867382972aa2cef2e0',null,'方案','::1',null,null,to_timestamp('18-9月 -16 04.50.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181658236347637bfbf870ae1',null,'创建成功，方案的信息的Id为16091816582188309981dace6759c',null,'方案','::1',null,null,to_timestamp('18-9月 -16 04.58.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181711096192082250f721e9e',null,'创建成功，方案的信息的Id为160918171108073374754097336df',null,'方案','::1',null,null,to_timestamp('18-9月 -16 05.11.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181721460222046c9b4844f32',null,'创建成功，方案的信息的Id为1609181721414661681466be5159f',null,'方案','::1',null,null,to_timestamp('18-9月 -16 05.21.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181935405921934f79f32ccb5',null,'创建成功，预备方案的信息的Id为16091819353920020609312f15405',null,'预备方案','::1',null,null,to_timestamp('18-9月 -16 07.35.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181954002036245943c11fcd0',null,'修改成功，预备方案信息的Id为16090616361394555215fc3ed5418',null,'预备方案','::1',null,null,to_timestamp('18-9月 -16 07.54.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091819561525223445de7f90aab',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','::1',null,null,to_timestamp('18-9月 -16 07.56.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609182000479992551f944366251',null,'修改成功，预备方案信息的Id为16090513583856194230d62470c8a',null,'预备方案','::1',null,null,to_timestamp('18-9月 -16 08.00.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091820081841305435d4ff00c4b',null,'修改成功，预备方案信息的Id为1609031504095630321aef46c3c50',null,'预备方案','::1',null,null,to_timestamp('18-9月 -16 08.08.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609182110510789927c6856250d2',null,'创建成功，方案的信息的Id为16091821104215900199da46e63c1',null,'方案','::1',null,null,to_timestamp('18-9月 -16 09.10.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090810274647049600cd4ce374c',null,'修改成功，角色信息的Id为16090810271940531101c43e0a56a',null,'角色','::1',null,null,to_timestamp('08-9月 -16 10.27.46.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908112633687471977158caef8',null,'修改成功，人员信息的Id为160908102608759317686e097a014',null,'人员','::1',null,null,to_timestamp('08-9月 -16 11.26.33.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081138371121365d7abdfb21e',null,'修改成功，角色信息的Id为16090810271940531101c43e0a56a',null,'角色','::1',null,null,to_timestamp('08-9月 -16 11.38.37.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908113846349654135b8cdbb3c',null,'删除成功，信息的Id为160908102608759317686e097a014',null,'消息','::1',null,null,to_timestamp('08-9月 -16 11.38.46.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081141282742481abc6849df4',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 11.41.28.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090811415825586817ab8e636eb',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 11.41.58.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090813072884856620b80c4ff64',null,'修改成功，方案信息的Id为16090807550612123947b37db6c71',null,'方案','::1',null,null,to_timestamp('08-9月 -16 01.07.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090813094097770143e427db096',null,'创建成功，方案的信息的Id为1609081309400309621cd914ee4cf',null,'方案','::1',null,null,to_timestamp('08-9月 -16 01.09.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081340442677777445d6bd9bb',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 01.40.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081403544256499bccf174a24',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 02.03.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090814042340820814bed89f02c',null,'修改成功，预备方案信息的Id为16090813383014446356a4849bb8e',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 02.04.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090814051346481778f7832a623',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 02.05.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081405183317176cdb391ef4c',null,'创建失败，人员的信息，Validation failed for one or more entities. See ''EntityValidationErrors'' property for more details.',null,'人员','::1',null,null,to_timestamp('08-9月 -16 02.05.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908140825377460327f825f859',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 02.08.25.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090814480292676257eb4a633d7',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 02.48.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081449270647589aca0bc3f27',null,'修改成功，预备方案信息的Id为1609031549177846276bc95b5a32b',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 02.49.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081450082499341ae1cfed5ec',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 02.50.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090814502367923752b8e23a913',null,'修改成功，预备方案信息的Id为16090813383014446356a4849bb8e',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 02.50.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090914531256388669ae7583ae0',null,'修改成功，预备方案信息的Id为1609051445447063743ad7b32a5ec',null,'预备方案','::1',null,null,to_timestamp('09-9月 -16 02.53.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090915164498781087c789edf4f',null,'修改成功，预备方案信息的Id为1609051445447063743ad7b32a5ec',null,'预备方案','::1',null,null,to_timestamp('09-9月 -16 03.16.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160909162201097387329414778ce',null,'修改成功，预备方案信息的Id为1609051445447063743ad7b32a5ec',null,'预备方案','::1',null,null,to_timestamp('09-9月 -16 04.22.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609121101393238976a0ed516646',null,'删除成功，信息的Id为16091210594823271784b28d0beab',null,'消息','113.139.19.143',null,null,to_timestamp('12-9月 -16 11.01.39.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091214033017449880a5ff263d4',null,'修改成功，器具明细信息信息的Id为1609051429542841373fb7fcb4fe2',null,'器具明细信息','111.203.3.1',null,null,to_timestamp('12-9月 -16 02.03.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160912153806580941072c5529c35',null,'修改成功，菜单信息的Id为1608191349513153481556dbb61e8',null,'菜单','113.132.249.188',null,null,to_timestamp('12-9月 -16 03.38.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160913092145108474987f6c7e79f',null,'修改成功，菜单信息的Id为1608191349513153481556dbb61e8',null,'菜单','113.139.24.170',null,null,to_timestamp('13-9月 -16 09.21.45.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160913100344532139613640a9dc9',null,'创建成功，数据字典的信息的Id为1609131003438134075b77c651469',null,'数据字典','::1',null,null,to_timestamp('13-9月 -16 10.03.44.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091310040200112173431f2fdd2',null,'创建成功，数据字典的信息的Id为1609131004009698054fc4e434fb2',null,'数据字典','::1',null,null,to_timestamp('13-9月 -16 10.04.02.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091310043797359649d1e744ece',null,'创建成功，数据字典的信息的Id为1609131004371922790100459511f',null,'数据字典','::1',null,null,to_timestamp('13-9月 -16 10.04.37.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609131004500610612ce28cdde5a',null,'创建成功，数据字典的信息的Id为160913100448208033777ca7bcd84',null,'数据字典','::1',null,null,to_timestamp('13-9月 -16 10.04.50.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609131614237701085463c388aa3',null,'修改成功，预备方案信息的Id为1609031549177846276bc95b5a32b',null,'预备方案','111.203.3.1',null,null,to_timestamp('13-9月 -16 04.14.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160913161522272354950d314524a',null,'修改成功，预备方案信息的Id为1609031549177846276bc95b5a32b',null,'预备方案','111.203.3.1',null,null,to_timestamp('13-9月 -16 04.15.22.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609140927407825383a1fc3e8bc5',null,'创建成功，部门的信息的Id为160914092737961140956242298d7',null,'部门','113.139.24.170',null,null,to_timestamp('14-9月 -16 09.27.40.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091409274407075054c86749007',null,'创建成功，部门的信息的Id为16091409274406196118a974b6182',null,'部门','113.139.24.170',null,null,to_timestamp('14-9月 -16 09.27.44.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609140927458823435229f4bc9f7',null,'创建成功，部门的信息的Id为1609140927458764839ff4840cd82',null,'部门','113.139.24.170',null,null,to_timestamp('14-9月 -16 09.27.45.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160914092749166649372f7b36f53',null,'创建成功，部门的信息的Id为1609140927484420121bca46fe608',null,'部门','113.139.24.170',null,null,to_timestamp('14-9月 -16 09.27.49.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908112858937857500512ae75b',null,'创建成功，预备方案的信息的Id为1609081128483017069f71de3ae50',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 11.28.58.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908112859852931721b550de8e',null,'创建成功，预备方案的信息的Id为16090811285981191459d1584ae34',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 11.28.59.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081128599281299fc2383565b',null,'创建成功，预备方案的信息的Id为1609081128598900425111c7c65f5',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 11.28.59.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090811290013126270b38ed329e',null,'创建成功，预备方案的信息的Id为1609081129001039179ed93dca56a',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 11.29.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081129001996247ae470f861f',null,'创建成功，预备方案的信息的Id为160908112900161537301bb5121d6',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 11.29.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081129003998277adc26aadee',null,'创建成功，预备方案的信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 11.29.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090811290899683757eb08407d2',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 11.29.08.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090811293204362095640e3927f',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 11.29.32.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908112932915724702136475db',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 11.29.32.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081351151142669ca8ba7c59a',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 01.51.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081358083440015a259f9e1f9',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 01.58.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081358383451535a28d4c8fa2',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 01.58.38.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090814000239330272ff9893b35',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 02.00.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090814095732053532792d57812',null,'创建失败，人员的信息，Validation failed for one or more entities. See ''EntityValidationErrors'' property for more details.',null,'人员','::1',null,null,to_timestamp('08-9月 -16 02.09.57.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908141125667911930cbd30121',null,'创建成功，人员的信息的Id为16090814111142032093d494478de',null,'人员','::1',null,null,to_timestamp('08-9月 -16 02.11.25.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908141302660568569d9d63405',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 02.13.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090814134168257476410cabe12',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 02.13.41.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091029219127800cc7f33c285',null,'创建成功，数据字典的信息的Id为16090910292172304682ba60a20bc',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.29.21.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091029392039238e4c30c8c3c',null,'创建成功，数据字典的信息的Id为1609091029387466159f1d38db5af',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.29.39.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090910301922119069d87760b8a',null,'创建成功，数据字典的信息的Id为160909103019121726840c9e41d2f',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.30.19.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091030546374192bcd4c363de',null,'创建成功，数据字典的信息的Id为1609091030522624087efefe96fdc',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.30.54.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091031181024846aefb6ff287',null,'创建成功，数据字典的信息的Id为160909103117977426173fc4d37b3',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.31.18.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091032123513889526099ffe1',null,'创建成功，数据字典的信息的Id为1609091032114138144d3fe0cfc94',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.32.12.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091032301502924391b32708d',null,'创建成功，数据字典的信息的Id为1609091032299783993a18fd71fb7',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.32.30.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091032358222100692519a098',null,'创建成功，数据字典的信息的Id为1609091032357440829911ad1bd15',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.32.35.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091032451192363371038fc1e',null,'创建成功，数据字典的信息的Id为1609091032428379061659fb3cfd1',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.32.45.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091032503380348642ecf2567',null,'创建成功，数据字典的信息的Id为16090910325025985679dff648d52',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.32.50.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091032571349299e42b6e0cc1',null,'创建成功，数据字典的信息的Id为160909103255697428713fe102da5',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.32.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091033061270012b1f22a9ce7',null,'创建成功，数据字典的信息的Id为16090910330208810308fce63a4dd',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.33.06.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090916330529847247f41df4474',null,'修改成功，预备方案信息的Id为1609051445447063743ad7b32a5ec',null,'预备方案','::1',null,null,to_timestamp('09-9月 -16 04.33.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609131655048296619b3b856b9a8',null,'创建成功，部门的信息的Id为1609131655048208725e166fa7e91',null,'部门','113.139.24.170',null,null,to_timestamp('13-9月 -16 04.55.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609131714375797719302de269c4',null,'修改成功，预备方案信息的Id为1609031549177846276bc95b5a32b',null,'预备方案','111.203.3.1',null,null,to_timestamp('13-9月 -16 05.14.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160913171758071845502221133ff',null,'修改成功，预备方案信息的Id为1609031549177846276bc95b5a32b',null,'预备方案','111.203.3.1',null,null,to_timestamp('13-9月 -16 05.17.58.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609131718182034779fa664e8772',null,'修改成功，预备方案信息的Id为1609031549177846276bc95b5a32b',null,'预备方案','111.203.3.1',null,null,to_timestamp('13-9月 -16 05.18.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609131723492396267fb6a86aee7',null,'修改失败，预备方案信息的Id为16090513583856194230d62470c8a,',null,'预备方案','111.203.3.1',null,null,to_timestamp('13-9月 -16 05.23.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081350159489091eaeb16edb9',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 01.50.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090814130460528265c4fb10655',null,'修改成功，角色信息的Id为16090810271940531101c43e0a56a',null,'角色','::1',null,null,to_timestamp('08-9月 -16 02.13.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081514125729721ffd865937e',null,'修改失败，预备方案信息的Id为16090811290037150634233bd493d,',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 03.14.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090915070958921121f8105a0a7',null,'修改成功，预备方案信息的Id为1609051445447063743ad7b32a5ec',null,'预备方案','::1',null,null,to_timestamp('09-9月 -16 03.07.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090917151943341817cf1878422',null,'修改成功，预备方案信息的Id为1609051445447063743ad7b32a5ec',null,'预备方案','::1',null,null,to_timestamp('09-9月 -16 05.15.19.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091733285229954a5a281b209',null,'修改成功，预备方案信息的Id为1609051445447063743ad7b32a5ec',null,'预备方案','::1',null,null,to_timestamp('09-9月 -16 05.33.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091744317550278535e1ed255',null,'修改成功，预备方案信息的Id为1609051445447063743ad7b32a5ec',null,'预备方案','::1',null,null,to_timestamp('09-9月 -16 05.44.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090917463939741866dca65f98e',null,'修改成功，预备方案信息的Id为1609051445447063743ad7b32a5ec',null,'预备方案','::1',null,null,to_timestamp('09-9月 -16 05.46.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091209240935512686ee9b90ddb',null,'创建成功，人员的信息的Id为1609120924086558812eb41353873',null,'人员','111.203.3.1',null,null,to_timestamp('12-9月 -16 09.24.09.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609121432143188284b97162c39a',null,'修改失败，预备方案信息的Id为1609031504095630321aef46c3c50,',null,'预备方案','111.203.3.1',null,null,to_timestamp('12-9月 -16 02.32.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609140929514506417b296bcae82',null,'删除成功，信息的Id为160914092737961140956242298d7',null,'消息','113.139.24.170',null,null,to_timestamp('14-9月 -16 09.29.51.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609140931343979541403c7fb1c9',null,'修改成功，部门信息的Id为1307311605187265267d33f281235',null,'部门','113.139.24.170',null,null,to_timestamp('14-9月 -16 09.31.34.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091409443413687939c36a32ac2',null,'删除成功，信息的Id为16091211022456684584c7b36eb43',null,'消息','113.139.24.170',null,null,to_timestamp('14-9月 -16 09.44.34.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609140944357277607831e8c764c',null,'删除失败，信息的Id为1307311605187265267d33f281236,An error occurred while updating the entries. See the inner exception for details.',null,'消息','113.139.24.170',null,null,to_timestamp('14-9月 -16 09.44.35.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091409450188013214de03ef635',null,'删除成功，信息的Id为1609121102012231760326f0d34b6',null,'消息','113.139.24.170',null,null,to_timestamp('14-9月 -16 09.45.01.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091409451060898293610ca7c40',null,'删除失败，信息的Id为1307311605187265267d33f281235,An error occurred while updating the entries. See the inner exception for details.',null,'消息','113.139.24.170',null,null,to_timestamp('14-9月 -16 09.45.10.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160914094524931798553045fc2d3',null,'删除失败，信息的Id为1307311605187265267d33f281235,An error occurred while updating the entries. See the inner exception for details.',null,'消息','113.139.24.170',null,null,to_timestamp('14-9月 -16 09.45.24.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609140946105351121ad933bbdb8',null,'删除失败，信息的Id为1307311605187265267d33f281235,An error occurred while updating the entries. See the inner exception for details.',null,'消息','113.139.24.170',null,null,to_timestamp('14-9月 -16 09.46.10.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160914094652500590792cea2bf0a',null,'删除成功，信息的Id为1609121102326638364a7cf391a8a',null,'消息','113.139.24.170',null,null,to_timestamp('14-9月 -16 09.46.52.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091410114574738235ae34799fa',null,'创建失败，部门的信息，An error occurred while updating the entries. See the inner exception for details.',null,'部门','113.139.24.170',null,null,to_timestamp('14-9月 -16 10.11.45.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160914103621322596999ed07689b',null,'创建成功，部门的信息的Id为1609141036207932797b6b7454894',null,'部门','113.139.24.170',null,null,to_timestamp('14-9月 -16 10.36.21.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160914103736347938777c38f40df',null,'删除失败，信息的Id为1307311605187265267d33f281236,An error occurred while updating the entries. See the inner exception for details.',null,'消息','113.139.24.170',null,null,to_timestamp('14-9月 -16 10.37.36.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609141038159793433fa6ab13488',null,'修改成功，部门信息的Id为1307311605187265267d33f281236',null,'部门','113.139.24.170',null,null,to_timestamp('14-9月 -16 10.38.15.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609141038249269525bdea2595f6',null,'修改成功，部门信息的Id为1307311605187265267d33f281236',null,'部门','113.139.24.170',null,null,to_timestamp('14-9月 -16 10.38.24.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609141038278313609a1c13688d3',null,'修改成功，部门信息的Id为1307311605187265267d33f281236',null,'部门','113.139.24.170',null,null,to_timestamp('14-9月 -16 10.38.27.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091410382963221131648a39a55',null,'修改成功，部门信息的Id为1307311605187265267d33f281236',null,'部门','113.139.24.170',null,null,to_timestamp('14-9月 -16 10.38.29.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160914104512399630169c79fff41',null,'修改成功，部门信息的Id为1609140927458764839ff4840cd82',null,'部门','113.139.24.170',null,null,to_timestamp('14-9月 -16 10.45.12.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091411363798393239d0da154b7',null,'删除成功，信息的Id为16091411224062170071917f4aca0',null,'消息','113.139.24.170',null,null,to_timestamp('14-9月 -16 11.36.37.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091414033255189090314df7bb4',null,'创建成功，人员的信息的Id为1609141403317061553e343c95dc9',null,'人员','113.139.24.170',null,null,to_timestamp('14-9月 -16 02.03.32.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091414035194619032421c2f62d',null,'创建成功，人员的信息的Id为16091414034979083410554218c24',null,'人员','113.139.24.170',null,null,to_timestamp('14-9月 -16 02.03.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091414100563143777ab41ef05c',null,'修改成功，人员信息的Id为16091414034979083410554218c24',null,'人员','113.139.24.170',null,null,to_timestamp('14-9月 -16 02.10.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609141142461914303ac64f2d228',null,'修改成功，公告管理信息的Id为1408231959411063352ca07edc847',null,'公告管理','113.139.24.170',null,null,to_timestamp('14-9月 -16 11.42.46.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160914114314382942535d63759c7',null,'创建成功，公告管理的信息的Id为1609141143143438785d7b8efeafb',null,'公告管理','113.139.24.170',null,null,to_timestamp('14-9月 -16 11.43.14.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609141410190948453a40267e6db',null,'修改成功，人员信息的Id为1609141403317061553e343c95dc9',null,'人员','113.139.24.170',null,null,to_timestamp('14-9月 -16 02.10.19.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609141410342516773fe78891111',null,'修改成功，人员信息的Id为16091414034979083410554218c24',null,'人员','113.139.24.170',null,null,to_timestamp('14-9月 -16 02.10.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609141416151300009c5e4e77ddf',null,'创建成功，人员的信息的Id为160914141611435523177af49171b',null,'人员','113.139.24.170',null,null,to_timestamp('14-9月 -16 02.16.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091414313480496359789f330bc',null,'修改失败，预备方案信息的Id为16090513583856194230d62470c8a,',null,'预备方案','113.139.24.170',null,null,to_timestamp('14-9月 -16 02.31.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091417141618466899de92cef5a',null,'创建失败，部门的信息，Validation failed for one or more entities. See ''EntityValidationErrors'' property for more details.',null,'部门','113.132.254.215',null,null,to_timestamp('14-9月 -16 05.14.16.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091814234493178850258941c8a',null,'创建成功，方案的信息的Id为1609181423441817934b48a8fca21',null,'方案','::1',null,null,to_timestamp('18-9月 -16 02.23.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091814261278252508f80bf1fbe',null,'创建成功，方案的信息的Id为1609181426126731639a0ea1b9cfd',null,'方案','::1',null,null,to_timestamp('18-9月 -16 02.26.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160918142621189799009e738e1b5',null,'创建成功，方案的信息的Id为16091814262108028876ff3a09abf',null,'方案','::1',null,null,to_timestamp('18-9月 -16 02.26.21.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181446009767560f7c430a3e6',null,'创建成功，方案的信息的Id为16091814460088293426c62538e16',null,'方案','::1',null,null,to_timestamp('18-9月 -16 02.46.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091814461496683489ab442979f',null,'创建成功，方案的信息的Id为16091814461487303864fa677f4e6',null,'方案','::1',null,null,to_timestamp('18-9月 -16 02.46.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181447532169885f57912d550',null,'创建成功，方案的信息的Id为16091814475229497728bf48ff9ed',null,'方案','::1',null,null,to_timestamp('18-9月 -16 02.47.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181448181127014d33bcd987d',null,'创建成功，方案的信息的Id为1609181448180188395b7cce05a5e',null,'方案','::1',null,null,to_timestamp('18-9月 -16 02.48.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160918145129664005004e86e6af9',null,'创建成功，方案的信息的Id为1609181451277264819cd3bd9e93d',null,'方案','::1',null,null,to_timestamp('18-9月 -16 02.51.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160918145244869328388c38917a8',null,'创建成功，方案的信息的Id为1609181452447130402807d4ac388',null,'方案','::1',null,null,to_timestamp('18-9月 -16 02.52.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181453278894395bf254864f0',null,'创建成功，方案的信息的Id为160918145327686255779820f6199',null,'方案','::1',null,null,to_timestamp('18-9月 -16 02.53.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181458497653562a27823cdcf',null,'创建成功，方案的信息的Id为1609181458492809733f379e7a770',null,'方案','::1',null,null,to_timestamp('18-9月 -16 02.58.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160918145906632565021c2d930e7',null,'创建成功，方案的信息的Id为16091814590442934246a9c7f4a66',null,'方案','::1',null,null,to_timestamp('18-9月 -16 02.59.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181459066481910827bd7fe57',null,'创建成功，方案的信息的Id为160918145905695063934d1101375',null,'方案','::1',null,null,to_timestamp('18-9月 -16 02.59.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091814590689784137b867792d4',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('18-9月 -16 02.59.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160918145921576553211fdf6c221',null,'创建成功，方案的信息的Id为160918145918982768299e7c599da',null,'方案','::1',null,null,to_timestamp('18-9月 -16 02.59.21.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091814594429073415a75e4eaa7',null,'创建成功，方案的信息的Id为16091814594416573026b1bfc772e',null,'方案','::1',null,null,to_timestamp('18-9月 -16 02.59.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091815305908507637a438a9e63',null,'创建成功，方案的信息的Id为1609181530575693117290df4341b',null,'方案','::1',null,null,to_timestamp('18-9月 -16 03.30.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181533157640363ce8f9c4e7f',null,'创建成功，方案的信息的Id为1609181533156546660c7c30801e9',null,'方案','::1',null,null,to_timestamp('18-9月 -16 03.33.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181533378628486dbac0eff76',null,'创建成功，方案的信息的Id为16091815333758160952410a6aeed',null,'方案','::1',null,null,to_timestamp('18-9月 -16 03.33.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091815505639842072efba994f6',null,'创建失败，方案的信息，类型“Langben.DAL.SCHEME_RULE”的关联元数据类型包含以下未知属性或字段: HTMLVALUE。请确保这些成员的名称与主类型上的属性的名称匹配。',null,'方案','::1',null,null,to_timestamp('18-9月 -16 03.50.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091815514392905972adbc66234',null,'创建失败，方案的信息，类型“Langben.DAL.SCHEME_RULE”的关联元数据类型包含以下未知属性或字段: HTMLVALUE。请确保这些成员的名称与主类型上的属性的名称匹配。',null,'方案','::1',null,null,to_timestamp('18-9月 -16 03.51.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160918160547715491944a3312a44',null,'创建成功，方案的信息的Id为1609181605341423127c8951e98b1',null,'方案','::1',null,null,to_timestamp('18-9月 -16 04.05.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181606010025711b95d2594ec',null,'修改成功，方案信息的Id为1609181605341423127c8951e98b1',null,'方案','::1',null,null,to_timestamp('18-9月 -16 04.06.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091816070079228908764527870',null,'修改成功，方案信息的Id为1609181605341423127c8951e98b1',null,'方案','::1',null,null,to_timestamp('18-9月 -16 04.07.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181609052324703dc2e35e0fa',null,'创建成功，方案的信息的Id为1609181609020237521bd4c137f54',null,'方案','::1',null,null,to_timestamp('18-9月 -16 04.09.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181653262704656ba9c9bf18c',null,'修改成功，方案信息的Id为16091816503867382972aa2cef2e0',null,'方案','::1',null,null,to_timestamp('18-9月 -16 04.53.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609181654331552169a4f1ac0a94',null,'创建成功，方案的信息的Id为1609181654315671628ff15efeb53',null,'方案','::1',null,null,to_timestamp('18-9月 -16 04.54.33.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160918170521101425811899e903a',null,'创建成功，方案的信息的Id为16091817051824802595940810a42',null,'方案','::1',null,null,to_timestamp('18-9月 -16 05.05.21.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081137344457671afb2251dd4',null,'删除失败，信息的Id为160908102608759317686e097a014,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('08-9月 -16 11.37.34.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090811380689473102bb4cf0d62',null,'删除失败，信息的Id为16090810271940531101c43e0a56a,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('08-9月 -16 11.38.06.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090811382834491009a6dc2f55e',null,'删除失败，信息的Id为16090810271940531101c43e0a56a,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('08-9月 -16 11.38.28.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090909433899454592f34f567cc',null,'修改成功，数据字典信息的Id为1608161045252254068de8a17c7dc',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 09.43.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609090944294477230f123270903',null,'修改成功，数据字典信息的Id为160816105259267190626f1ce6597',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 09.44.29.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090909463860572684bdbb2970b',null,'创建成功，数据字典的信息的Id为160909094633715049291f42d1bbb',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 09.46.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090909470072965952b137a0f1e',null,'创建成功，数据字典的信息的Id为1609090947004171406be2eb64263',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 09.47.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090909471813612497a7d586fd8',null,'创建成功，数据字典的信息的Id为1609090947180579465c7069b6274',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 09.47.18.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609090947330424905194a90206f',null,'创建成功，数据字典的信息的Id为16090909473297998955c1f8f4358',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 09.47.33.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090909474707965080288857eab',null,'创建成功，数据字典的信息的Id为1609090947470327246d0144e9248',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 09.47.47.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609090948512936810bdee845f1f',null,'创建成功，数据字典的信息的Id为160909094851231130268884de3ab',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 09.48.51.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160909094906510155516037951c6',null,'创建成功，数据字典的信息的Id为1609090949064476032760f1bf0a9',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 09.49.06.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609090949214009342a50bf68f39',null,'创建成功，数据字典的信息的Id为1609090949213227599301496f08d',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 09.49.21.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609090950041841207cf4ee84425',null,'创建成功，数据字典的信息的Id为160909095001934040800cb467b95',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 09.50.04.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090909502348035535baacbb810',null,'创建成功，数据字典的信息的Id为1609090950231131082e5f640e6a7',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 09.50.23.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609090950388571908e6c83e0256',null,'创建成功，数据字典的信息的Id为16090909503626335925408c236f4',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 09.50.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160909095059532299486946340a1',null,'创建成功，数据字典的信息的Id为160909095058063534704770682f8',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 09.50.59.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160909095119339793297956046e2',null,'创建成功，数据字典的信息的Id为160909095118308534830e5b23255',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 09.51.19.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609090952021527524704eda281f',null,'创建成功，数据字典的信息的Id为1609090952020745795bde9a0057a',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 09.52.02.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091517275499467f404d78117',null,'修改成功，预备方案信息的Id为1609051445447063743ad7b32a5ec',null,'预备方案','::1',null,null,to_timestamp('09-9月 -16 03.17.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091555160713065745ceaf603',null,'修改成功，预备方案信息的Id为1609051445447063743ad7b32a5ec',null,'预备方案','::1',null,null,to_timestamp('09-9月 -16 03.55.16.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160912092649392522062c41990fd',null,'创建成功，角色的信息的Id为16091209264898430321126af2cdc',null,'角色','111.203.3.1',null,null,to_timestamp('12-9月 -16 09.26.49.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091209275143201361bacf7d8a1',null,'删除成功，信息的Id为,1608191358228190950aa767add41,16081914002675292042aa9b17ddd,16081914011452419777e5f6fe314,1608191402183421645a13946c5cc,16081914132048085249676d6f017,160819141422014916817e22ae673',null,'消息','111.203.3.1',null,null,to_timestamp('12-9月 -16 09.27.51.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609120929415436636895840b64b',null,'修改成功，人员信息的Id为1609120924086558812eb41353873',null,'人员','111.203.3.1',null,null,to_timestamp('12-9月 -16 09.29.41.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609120931391204440ed40a8281b',null,'修改成功，人员信息的Id为1609120924086558812eb41353873',null,'人员','111.203.3.1',null,null,to_timestamp('12-9月 -16 09.31.39.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609120932212099508a8119d2b42',null,'修改成功，人员信息的Id为1609120924086558812eb41353873',null,'人员','111.203.3.1',null,null,to_timestamp('12-9月 -16 09.32.21.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160912094000409224086037251e7',null,'创建成功，单位的信息的Id为16091209395881248303e7270a5bf',null,'单位','111.203.3.1',null,null,to_timestamp('12-9月 -16 09.40.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609120941513353584852b6a7baf',null,'创建成功，单位的信息的Id为16091209414701976309ad18a027d',null,'单位','111.203.3.1',null,null,to_timestamp('12-9月 -16 09.41.51.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091210592366341502affa8f65b',null,'创建成功，部门的信息的Id为160912105922572552813a41ed871',null,'部门','113.139.19.143',null,null,to_timestamp('12-9月 -16 10.59.23.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609121059316656754b0c4344184',null,'创建成功，部门的信息的Id为160912105931494770486b72edc63',null,'部门','113.139.19.143',null,null,to_timestamp('12-9月 -16 10.59.31.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609121059356257884555ab87687',null,'创建成功，部门的信息的Id为16091210593561895228a3d74df7a',null,'部门','113.139.19.143',null,null,to_timestamp('12-9月 -16 10.59.35.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160912105944332177443f1f177b1',null,'创建成功，部门的信息的Id为1609121059443263178f3ed505e3b',null,'部门','113.139.19.143',null,null,to_timestamp('12-9月 -16 10.59.44.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081027200347664b3a179e5d6',null,'创建成功，角色的信息的Id为16090810271940531101c43e0a56a',null,'角色','::1',null,null,to_timestamp('08-9月 -16 10.27.20.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090810481666477302502fe80c5',null,'修改成功，人员信息的Id为160908102608759317686e097a014',null,'人员','::1',null,null,to_timestamp('08-9月 -16 10.48.16.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081053417990109e11970a054',null,'修改成功，人员信息的Id为160908102608759317686e097a014',null,'人员','::1',null,null,to_timestamp('08-9月 -16 10.53.41.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081054379236929faf5a6d54c',null,'修改成功，角色信息的Id为16090810271940531101c43e0a56a',null,'角色','::1',null,null,to_timestamp('08-9月 -16 10.54.37.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090811400088936422c24a71961',null,'创建成功，人员的信息的Id为16090811395995367278ed7276934',null,'人员','::1',null,null,to_timestamp('08-9月 -16 11.40.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090811423728080411cc822de8c',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 11.42.37.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081234469518077bcd808c992',null,'修改成功，人员信息的Id为16090811395995367278ed7276934',null,'人员','::1',null,null,to_timestamp('08-9月 -16 12.34.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908130753713048070a9552d2d',null,'创建成功，方案的信息的Id为16090813075075506942fd2e82cf5',null,'方案','::1',null,null,to_timestamp('08-9月 -16 01.07.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081308062224026066e4c9c39',null,'修改成功，方案信息的Id为16090813075075506942fd2e82cf5',null,'方案','::1',null,null,to_timestamp('08-9月 -16 01.08.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081308107336845b76bc41df5',null,'修改成功，方案信息的Id为16090813075075506942fd2e82cf5',null,'方案','::1',null,null,to_timestamp('08-9月 -16 01.08.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908130825978355972dbd3e93a',null,'修改成功，方案的Id为16090813075075506942fd2e82cf5,16090807550612123947b37db6c71',null,'消息','::1',null,null,to_timestamp('08-9月 -16 01.08.25.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081308353450129cc2941ec25',null,'修改成功，方案的Id为16090813075075506942fd2e82cf5,16090807550612123947b37db6c71,16090800050885607834f49989924,1609080004443801465afaca01307,1609072347111884881089b15080b',null,'消息','::1',null,null,to_timestamp('08-9月 -16 01.08.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160908130853385782648795da2a0',null,'创建成功，方案的信息的Id为160908130853280629651e02b6d2b',null,'方案','::1',null,null,to_timestamp('08-9月 -16 01.08.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081309172718382a308cc8efd',null,'修改成功，方案的Id为160908130853280629651e02b6d2b,16090813075075506942fd2e82cf5,16090807550612123947b37db6c71,1609080004443801465afaca01307,16090800050885607834f49989924,1609072347111884881089b15080b',null,'消息','::1',null,null,to_timestamp('08-9月 -16 01.09.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081310229184219846fea74b4',null,'修改成功，方案信息的Id为1609081309400309621cd914ee4cf',null,'方案','::1',null,null,to_timestamp('08-9月 -16 01.10.22.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081310278758355fa78f729f4',null,'修改成功，方案信息的Id为16090807553777668119db641cedb',null,'方案','::1',null,null,to_timestamp('08-9月 -16 01.10.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090814031296797303260a0d69a',null,'删除成功，信息的Id为16090811395995367278ed7276934',null,'消息','::1',null,null,to_timestamp('08-9月 -16 02.03.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090814334804042059852057d70',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 02.33.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090814340593563895fdd7b50dc',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 02.34.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081436458011525c2a0572986',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 02.36.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081451049034767a1a84b2ec5',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 02.51.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081451480701733aa77c34dc5',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 02.51.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081504096093895261601465b',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 03.04.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609081513507401025d942c246a3',null,'修改成功，预备方案信息的Id为16090811290037150634233bd493d',null,'预备方案','111.203.3.1',null,null,to_timestamp('08-9月 -16 03.13.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16090910341257981399b3c6630f3',null,'创建成功，数据字典的信息的Id为160909103412407934433bd1e86af',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.34.12.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091034201111497a9d5d73b1d',null,'创建成功，数据字典的信息的Id为160909103418267352546d8ca2a7c',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.34.20.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091034294031501f5269567d5',null,'创建成功，数据字典的信息的Id为160909103428653082312a7ed2ba5',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.34.29.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091034349722290584beb44cc',null,'创建成功，数据字典的信息的Id为1609091034348940693b40b0580e7',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.34.34.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091034481320267730453220a',null,'创建成功，数据字典的信息的Id为16090910344360069694a52df8ff2',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.34.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160909103542159902597a1caaad0',null,'创建成功，数据字典的信息的Id为160909103539487996662a59e05bc',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.35.42.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091035478475074ba2f46be96',null,'创建成功，数据字典的信息的Id为16090910354775372058b83437510',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.35.47.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091035566701343fd50bef7e5',null,'创建成功，数据字典的信息的Id为16090910355620132814f361328e2',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.35.56.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091036121861672a59c470e75',null,'创建成功，数据字典的信息的Id为1609091036103110846ea1d7f21c4',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.36.12.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609091036267331653c174639860',null,'创建成功，数据字典的信息的Id为1609091036234830975cc7611a685',null,'数据字典','::1',null,null,to_timestamp('09-9月 -16 10.36.26.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609252036153906253f24567d3ee',null,'创建成功，检定项目模板的Id为1609252036120949303a84c765ea4',null,'检定项目模板','::1',null,null,to_timestamp('25-9月 -16 08.36.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609252042478398479c025c57bcc',null,'创建成功，方案的信息的Id为160925204245181026084339c0944',null,'方案','::1',null,null,to_timestamp('25-9月 -16 08.42.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609260825420814198d61e50e178',null,'创建成功，单位的信息的Id为1609260825414097596afb839aea4',null,'单位','::1',null,null,to_timestamp('26-9月 -16 08.25.42.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160926082717893074026ff6702e2',null,'修改成功，单位信息的Id为1609260825414097596afb839aea4',null,'单位','::1',null,null,to_timestamp('26-9月 -16 08.27.17.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092608414814829723f3db46a70',null,'创建成功，单位的信息的Id为160926084133021695559495bdd57',null,'单位','::1',null,null,to_timestamp('26-9月 -16 08.41.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609260841489609246a266269ba8',null,'创建成功，单位的信息的Id为16092608414891433601702ec5dd6',null,'单位','::1',null,null,to_timestamp('26-9月 -16 08.41.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092609221849433944ef0b6fe8a',null,'创建成功，单位的信息的Id为16092609221557214973f0fa6432c',null,'单位','::1',null,null,to_timestamp('26-9月 -16 09.22.18.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092610395712491667987a1af8d',null,'创建成功，人员的信息的Id为160926103956191543388006ac234',null,'人员','::1',null,null,to_timestamp('26-9月 -16 10.39.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609261041157852216f9a0f96d9b',null,'创建成功，人员的信息的Id为160926104113505757326a99995c0',null,'人员','::1',null,null,to_timestamp('26-9月 -16 10.41.15.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609261047392368024a93a497fd3',null,'创建成功，部门的信息的Id为16092610473561977668b3cb599ad',null,'部门','::1',null,null,to_timestamp('26-9月 -16 10.47.39.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609261207310229591a9068133d9',null,'创建成功，人员的信息的Id为16092612073012981487081e05c22',null,'人员','::1',null,null,to_timestamp('26-9月 -16 12.07.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609261208380293058c5e89c9ca1',null,'创建成功，人员的信息的Id为1609261208374051781cce8231009',null,'人员','::1',null,null,to_timestamp('26-9月 -16 12.08.38.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609261208461381277529ba56885',null,'创建成功，人员的信息的Id为16092612084545402480c14a9c0dd',null,'人员','::1',null,null,to_timestamp('26-9月 -16 12.08.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160926120911191082870cfb54000',null,'创建成功，人员的信息的Id为1609261209033210527117f0e2060',null,'人员','::1',null,null,to_timestamp('26-9月 -16 12.09.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609261209263688470206aa2f588',null,'创建成功，人员的信息的Id为160926120923113874873e3916fb2',null,'人员','::1',null,null,to_timestamp('26-9月 -16 12.09.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609261226137887620d2e8918316',null,'创建成功，人员的信息的Id为1609261226094961778030d4bbb00',null,'人员','::1',null,null,to_timestamp('26-9月 -16 12.26.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609261333536831695b896bb515e',null,'修改成功，菜单信息的Id为1307311605187265267d33f281da4',null,'菜单','::1',null,null,to_timestamp('26-9月 -16 01.33.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609261413481154413affb8680bd',null,'创建成功，委托单信息的信息的Id为1609261413448650930493914b9f9',null,'委托单信息','::1',null,null,to_timestamp('26-9月 -16 02.13.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609261427067057536269920beeb',null,'创建成功，委托单信息的信息的Id为16092614270395512311137da5ccd',null,'委托单信息','::1',null,null,to_timestamp('26-9月 -16 02.27.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609261507228255585b83df342eb',null,'创建成功，人员的信息的Id为1609261507221066976ead1614f33',null,'人员','::1',null,null,to_timestamp('26-9月 -16 03.07.22.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160926150900601533926e67abd99',null,'创建成功，人员的信息的Id为1609261509005233997fc98d1dfa8',null,'人员','::1',null,null,to_timestamp('26-9月 -16 03.09.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092615134515457340516808b90',null,'创建成功，角色的信息的Id为16092615134474794327cd2685faf',null,'角色','::1',null,null,to_timestamp('26-9月 -16 03.13.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160926151427224240876dcf28688',null,'删除成功，信息的Id为,1608191358228190950aa767add41,16081914002675292042aa9b17ddd,16081914011452419777e5f6fe314,1608191402183421645a13946c5cc',null,'消息','::1',null,null,to_timestamp('26-9月 -16 03.14.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160926151926805185240481a7d38',null,'创建成功，角色的信息的Id为1609261519267114240584e05063a',null,'角色','::1',null,null,to_timestamp('26-9月 -16 03.19.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092615194814950162a7cb8240b',null,'删除成功，信息的Id为,1608191358228190950aa767add41,16081914002675292042aa9b17ddd',null,'消息','::1',null,null,to_timestamp('26-9月 -16 03.19.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609261520089260764854b9d25cf',null,'修改成功，角色信息的Id为1609261519267114240584e05063a',null,'角色','::1',null,null,to_timestamp('26-9月 -16 03.20.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160926181710846257609aa89c2d2',null,'创建成功，角色的信息的Id为1609261817066866686947f415827',null,'角色','::1',null,null,to_timestamp('26-9月 -16 06.17.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609261820162221953df2967cba6',null,'创建失败，角色的信息，Validation failed for one or more entities. See ''EntityValidationErrors'' property for more details.',null,'角色','::1',null,null,to_timestamp('26-9月 -16 06.20.16.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092620084138089862ce70fab5b',null,'修改成功，角色信息的Id为1609261519267114240584e05063a',null,'角色','::1',null,null,to_timestamp('26-9月 -16 08.08.41.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092620085692975603748948275',null,'修改成功，角色信息的Id为16092615134474794327cd2685faf',null,'角色','::1',null,null,to_timestamp('26-9月 -16 08.08.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092622133020905349a6852b5a2',null,'创建成功，方案的信息的Id为1609262213278273463081bf8b689',null,'方案','::1',null,null,to_timestamp('26-9月 -16 10.13.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609271013478669008d2cbf0a9b3',null,'创建成功，委托单信息的信息的Id为1609271013398660530c50cb374c7',null,'委托单信息','::1',null,null,to_timestamp('27-9月 -16 10.13.47.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160927104409499864386cb6a97c9',null,'删除成功，信息的Id为160926103956191543388006ac234',null,'消息','::1',null,null,to_timestamp('27-9月 -16 10.44.09.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092710462788776092953092574',null,'修改成功，器具明细信息信息的Id为16092710133986605306309fd1e20',null,'器具明细信息','::1',null,null,to_timestamp('27-9月 -16 10.46.27.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092710530463848843575258b5c',null,'创建成功，数据字典的信息的Id为1609271053026853585c2d18169df',null,'数据字典','::1',null,null,to_timestamp('27-9月 -16 10.53.04.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160927105323575983026cf261e04',null,'创建成功，数据字典的信息的Id为1609271053230134168d50045b555',null,'数据字典','::1',null,null,to_timestamp('27-9月 -16 10.53.23.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609182113331558038a7e4d1fa1d',null,'创建成功，方案的信息的Id为160918211329721012377b2078667',null,'方案','::1',null,null,to_timestamp('18-9月 -16 09.13.33.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091821154364463884783b4b581',null,'创建成功，方案的信息的Id为16091821154093744284323960015',null,'方案','::1',null,null,to_timestamp('18-9月 -16 09.15.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609182201086448207d83c71dae2',null,'创建成功，方案的信息的Id为16091822010034780679bb9a48b45',null,'方案','::1',null,null,to_timestamp('18-9月 -16 10.01.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091823083260959817834343abf',null,'创建成功，方案的信息的Id为16091823082423693324d8f824e79',null,'方案','::1',null,null,to_timestamp('18-9月 -16 11.08.32.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160918233214985985909bffedc7e',null,'创建成功，检定项目模板的Id为1609182332129242899876a3c5956',null,'检定项目模板','::1',null,null,to_timestamp('18-9月 -16 11.32.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609182343321714079d25480f3d3',null,'创建失败，检定项目模板，An error occurred while updating the entries. See the inner exception for details.',null,'检定项目模板','::1',null,null,to_timestamp('18-9月 -16 11.43.32.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609190003085160846be940115f4',null,'创建成功，检定项目模板的Id为160919000306984999636915d0032',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 12.03.08.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091900111124134802c2a2a8342',null,'创建成功，方案的信息的Id为160919001107128429199172dfda6',null,'方案','::1',null,null,to_timestamp('19-9月 -16 12.11.11.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609190012330922464fab48d886a',null,'创建成功，检定项目模板的Id为16091900123105163290f4a1905af',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 12.12.33.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091913120962399686e741c4092',null,'创建成功，委托单信息的信息的Id为1609191311534401313fd8fbaca2d',null,'委托单信息','::1',null,null,to_timestamp('19-9月 -16 01.12.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160919141502578483817a8c5f58e',null,'修改失败，方案信息的Id为16091823082423693324d8f824e79,An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('19-9月 -16 02.15.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091914154512344867fbe2d80e9',null,'修改失败，方案信息的Id为1609181721414661681466be5159f,An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('19-9月 -16 02.15.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091916284002536589de54d8ec5',null,'创建成功，检定项目模板的Id为1609191628396831560f6df30bb6b',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 04.28.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091916314290063236aa0a0586f',null,'修改成功，器具明细信息信息的Id为1609191521503517641204819fda3',null,'器具明细信息','::1',null,null,to_timestamp('19-9月 -16 04.31.42.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091916331386030885e42109bfe',null,'创建成功，方案的信息的Id为160919163311762529814d804f1bf',null,'方案','::1',null,null,to_timestamp('19-9月 -16 04.33.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160919163801858392213198b7f0b',null,'修改成功，器具明细信息信息的Id为1609191521503517641204819fda3',null,'器具明细信息','::1',null,null,to_timestamp('19-9月 -16 04.38.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609191650171134847d93a3dbd54',null,'创建成功，方案的信息的Id为16091916501282217317a1eceafd9',null,'方案','::1',null,null,to_timestamp('19-9月 -16 04.50.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609191650528896559b70108c75e',null,'创建成功，检定项目模板的Id为160919165052007858747b5763630',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 04.50.52.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609191653073536304cabf11dacb',null,'创建成功，方案的信息的Id为1609191653057843206f30cc49199',null,'方案','::1',null,null,to_timestamp('19-9月 -16 04.53.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609191653445184732f033861e4e',null,'创建成功，检定项目模板的Id为160919165343609462341c526c331',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 04.53.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609191705585521750e570f0dddd',null,'创建成功，预备方案的信息的Id为1609191705502352979d9d3199d8a',null,'预备方案','::1',null,null,to_timestamp('19-9月 -16 05.05.58.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160919210130438795744f79a14dd',null,'创建成功，方案的信息的Id为160919210126093086176ccb5b5b5',null,'方案','::1',null,null,to_timestamp('19-9月 -16 09.01.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091921024231130901b74b43bb2',null,'创建成功，检定项目模板的Id为16091921024008404245fc2e28142',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 09.02.42.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091921262654245901897558c17',null,'创建成功，方案的信息的Id为16091921262480022286f1d56fdaa',null,'方案','::1',null,null,to_timestamp('19-9月 -16 09.26.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192233117585280202ee41863',null,'创建成功，方案的信息的Id为16091922330655828290f506a8270',null,'方案','::1',null,null,to_timestamp('19-9月 -16 10.33.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192233139209281d79c04e331',null,'创建成功，方案的信息的Id为16091922331280666380265e609a6',null,'方案','::1',null,null,to_timestamp('19-9月 -16 10.33.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192311435273742afbf67953a',null,'创建成功，方案的信息的Id为1609192311417326779c35898d8e1',null,'方案','::1',null,null,to_timestamp('19-9月 -16 11.11.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091923143085634613aece58eb2',null,'创建成功，方案的信息的Id为16091923142934292590a5dc6aee2',null,'方案','::1',null,null,to_timestamp('19-9月 -16 11.14.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091923162080013797628d59496',null,'创建成功，方案的信息的Id为1609192316190728979699627f3fc',null,'方案','::1',null,null,to_timestamp('19-9月 -16 11.16.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160920151423582997206b27377f8',null,'创建成功，数据字典的信息的Id为1609201514190360405c84cebe0ff',null,'数据字典','::1',null,null,to_timestamp('20-9月 -16 03.14.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609201550303918426596626cef9',null,'创建成功，数据字典的信息的Id为160920155029626155527ce7d8d69',null,'数据字典','::1',null,null,to_timestamp('20-9月 -16 03.50.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092015505642495037512394c49',null,'创建成功，数据字典的信息的Id为16092015505339361496ea7450b89',null,'数据字典','::1',null,null,to_timestamp('20-9月 -16 03.50.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092015510950319319e3175a8d0',null,'创建成功，数据字典的信息的Id为16092015510944064120cde1055c3',null,'数据字典','::1',null,null,to_timestamp('20-9月 -16 03.51.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092015512839394897eda4b44ee',null,'创建成功，数据字典的信息的Id为1609201551279720675519b9ac6be',null,'数据字典','::1',null,null,to_timestamp('20-9月 -16 03.51.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160920155146456674585ad9f697d',null,'创建成功，数据字典的信息的Id为16092015514580036261082a1c75b',null,'数据字典','::1',null,null,to_timestamp('20-9月 -16 03.51.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091822302592150478e04808092',null,'创建成功，方案的信息的Id为1609182230190140865fc2dc98301',null,'方案','::1',null,null,to_timestamp('18-9月 -16 10.30.25.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091823090352663065dc51214e2',null,'创建成功，检定项目模板的Id为1609182309028531457f5d5495e3b',null,'检定项目模板','::1',null,null,to_timestamp('18-9月 -16 11.09.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160918231012482005046cbf432df',null,'创建成功，检定项目模板的Id为16091823101110987943e3df0747f',null,'检定项目模板','::1',null,null,to_timestamp('18-9月 -16 11.10.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091823364608250190660a427fc',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('18-9月 -16 11.36.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609182359283697780541acb6258',null,'创建失败，检定项目模板，An error occurred while updating the entries. See the inner exception for details.',null,'检定项目模板','::1',null,null,to_timestamp('18-9月 -16 11.59.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609182359354889992cc23cd9a50',null,'创建成功，方案的信息的Id为16091823593243065807c0988443e',null,'方案','::1',null,null,to_timestamp('18-9月 -16 11.59.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160919000029334295535a46e8ba5',null,'创建成功，检定项目模板的Id为1609190000266223255ecad29486d',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 12.00.29.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609190020330954454a8e379fe2d',null,'创建成功，方案的信息的Id为1609190020223608285c4fe591f1d',null,'方案','::1',null,null,to_timestamp('19-9月 -16 12.20.33.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091900203590443803f8175dd93',null,'创建成功，检定项目模板的Id为16091900200310935976970a91057',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 12.20.35.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609191416182126503c49c6ed05b',null,'创建成功，委托单信息的信息的Id为1609191416144912271ba857dae68',null,'委托单信息','::1',null,null,to_timestamp('19-9月 -16 02.16.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091914174241723276ff819bd2e',null,'创建成功，委托单信息的信息的Id为16091914173741020982fe19997d9',null,'委托单信息','::1',null,null,to_timestamp('19-9月 -16 02.17.42.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609191426059507744c2bff73ec2',null,'创建成功，委托单信息的信息的Id为1609191426019504522517beba8ee',null,'委托单信息','::1',null,null,to_timestamp('19-9月 -16 02.26.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091915215293321951fd237697c',null,'创建成功，委托单信息的信息的Id为1609191521503507612c52a9fae3b',null,'委托单信息','::1',null,null,to_timestamp('19-9月 -16 03.21.52.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091916132618816013be2e10da4',null,'创建成功，检定项目模板的Id为16091916132442636269c2be40c11',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 04.13.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091916170877476040a7389ea76',null,'创建成功，检定项目模板的Id为16091916154929643607178c0b437',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 04.17.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091916170914325316937ae5cc1',null,'创建成功，检定项目模板的Id为1609191617087214844710a375d19',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 04.17.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160919161710101765480939e7c41',null,'创建成功，检定项目模板的Id为16091916160393650183c7aafe638',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 04.17.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091916275310961114e2eda3ce1',null,'创建成功，方案的信息的Id为1609191627512914977052d4ff635',null,'方案','::1',null,null,to_timestamp('19-9月 -16 04.27.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160919174437420344485d0d15d37',null,'创建成功，检定项目模板的Id为160919174436154692242721c8583',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 05.44.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609191752148558655f4c4c26125',null,'修改成功，预备方案信息的Id为16091917362497792141ac3c4507d',null,'预备方案','::1',null,null,to_timestamp('19-9月 -16 05.52.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160919183603460799010d5de768e',null,'修改成功，预备方案信息的Id为16091917362497792141ac3c4507d',null,'预备方案','::1',null,null,to_timestamp('19-9月 -16 06.36.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091918484936845285644ab0f3d',null,'修改成功，预备方案信息的Id为16091917362497792141ac3c4507d',null,'预备方案','::1',null,null,to_timestamp('19-9月 -16 06.48.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609191849335236530b802e1f364',null,'修改成功，预备方案信息的Id为16091917362497792141ac3c4507d',null,'预备方案','::1',null,null,to_timestamp('19-9月 -16 06.49.33.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192106006878489ca87a3457a',null,'创建成功，方案的信息的Id为1609192105591371579dffa28f44e',null,'方案','::1',null,null,to_timestamp('19-9月 -16 09.06.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091921102472008861d9226a555',null,'创建成功，方案的信息的Id为16091921102306161169185873ad4',null,'方案','::1',null,null,to_timestamp('19-9月 -16 09.10.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192113003202660f864d92833',null,'创建成功，方案的信息的Id为1609192112580631371a8483c0039',null,'方案','::1',null,null,to_timestamp('19-9月 -16 09.13.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192137123678606c9ffaf0605',null,'创建成功，方案的信息的Id为1609192137090563486879a7540b6',null,'方案','::1',null,null,to_timestamp('19-9月 -16 09.37.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091921485716830928203908666',null,'创建成功，方案的信息的Id为16091921485543096551ebd9a6508',null,'方案','::1',null,null,to_timestamp('19-9月 -16 09.48.57.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160919215014505587707618ce166',null,'创建成功，检定项目模板的Id为1609192150127505694b081730c96',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 09.50.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192150347800976bc4863a3ed',null,'创建成功，检定项目模板的Id为16091921503286064240974d21823',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 09.50.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160919215049426181273399d6b92',null,'创建成功，检定项目模板的Id为160919215044135659913dc29e167',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 09.50.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192150492123772ec8455e1be',null,'创建成功，方案的信息的Id为16091921504894038783aaa895e36',null,'方案','::1',null,null,to_timestamp('19-9月 -16 09.50.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091922005520531030d7a2b4de1',null,'创建成功，方案的信息的Id为1609192200542191117b5d753d353',null,'方案','::1',null,null,to_timestamp('19-9月 -16 10.00.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091922330567048881ab1cab7da',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('19-9月 -16 10.33.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091922341158375550a1e4dea5b',null,'创建成功，方案的信息的Id为1609192234093407495e9f18e3e0a',null,'方案','::1',null,null,to_timestamp('19-9月 -16 10.34.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091922345192754111c1357f0f0',null,'创建成功，检定项目模板的Id为16091922344932854183670dbafb1',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 10.34.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160919223508986277534461f78e4',null,'创建成功，检定项目模板的Id为1609192235041867073934815cc10',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 10.35.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192236342329826ecc295f34c',null,'创建成功，检定项目模板的Id为160919223632088180171f0f33580',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 10.36.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192236565643571ba5ec7e13d',null,'创建成功，检定项目模板的Id为16091922365627653849f3a633898',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 10.36.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192237026121262810a85443b',null,'修改成功，方案信息的Id为1609192234093407495e9f18e3e0a',null,'方案','::1',null,null,to_timestamp('19-9月 -16 10.37.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192237107080815d75d0e3dec',null,'修改成功，方案信息的Id为1609192234093407495e9f18e3e0a',null,'方案','::1',null,null,to_timestamp('19-9月 -16 10.37.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192238263081931f32be6e8f7',null,'创建成功，检定项目模板的Id为1609192238259757917b70ddee4a9',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 10.38.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192238504507152669f3369ab',null,'创建成功，检定项目模板的Id为1609192238501609935096f719262',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 10.38.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160919223904011757142ae3745cd',null,'创建成功，检定项目模板的Id为16091922390312445521885c05208',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 10.39.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091922401950575564432059d1f',null,'创建成功，检定项目模板的Id为1609192240133589223a59cb8c501',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 10.40.19.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192339151394458cca1dd2047',null,'创建成功，方案的信息的Id为1609192339120326129ce985e2a61',null,'方案','::1',null,null,to_timestamp('19-9月 -16 11.39.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609201119346301913a038031072',null,'修改成功，预备方案信息的Id为16091917362497792141ac3c4507d',null,'预备方案','::1',null,null,to_timestamp('20-9月 -16 11.19.34.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609201544309367513db9948365d',null,'创建成功，数据字典的信息的Id为1609201544307336392963d065a4e',null,'数据字典','::1',null,null,to_timestamp('20-9月 -16 03.44.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160920155159956804326b3c5cbbf',null,'创建成功，数据字典的信息的Id为1609201551588473625df258a3bd8',null,'数据字典','::1',null,null,to_timestamp('20-9月 -16 03.51.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609201557314868659cd3b5ed1af',null,'修改失败，预备方案信息的Id为16091917362497792141ac3c4507d,',null,'预备方案','::1',null,null,to_timestamp('20-9月 -16 03.57.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160920160357872974357c13a5c2b',null,'修改成功，预备方案信息的Id为16091917362497792141ac3c4507d',null,'预备方案','::1',null,null,to_timestamp('20-9月 -16 04.03.57.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609201806085292680fa58b8be26',null,'修改成功，预备方案信息的Id为16091917362497792141ac3c4507d',null,'预备方案','::1',null,null,to_timestamp('20-9月 -16 06.06.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609211055493620337faf345c12d',null,'创建失败，角色的信息，Validation failed for one or more entities. See ''EntityValidationErrors'' property for more details.',null,'角色','::1',null,null,to_timestamp('21-9月 -16 10.55.49.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609211100364599673f011762ff3',null,'创建成功，单位的信息的Id为1609211100331746388767fa06fc3',null,'单位','::1',null,null,to_timestamp('21-9月 -16 11.00.36.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160924093015389465160708c0000',null,'创建成功，方案的信息的Id为160924093005111142482c75ea0b9',null,'方案','::1',null,null,to_timestamp('24-9月 -16 09.30.15.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609240930282486783aba9465c75',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('24-9月 -16 09.30.28.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609240933560445627240d1ea19b',null,'创建成功，方案的信息的Id为1609240933526447887527e4ebaaf',null,'方案','::1',null,null,to_timestamp('24-9月 -16 09.33.56.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092415025065856535b2edacd9c',null,'创建成功，方案的信息的Id为160924150248643853776fff6b65a',null,'方案','::1',null,null,to_timestamp('24-9月 -16 03.02.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160924152551570931055f672a486',null,'创建成功，方案的信息的Id为16092415254857653325ebb4bdc65',null,'方案','::1',null,null,to_timestamp('24-9月 -16 03.25.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609241536321361783548a1b20ae',null,'创建成功，方案的信息的Id为1609241536293870727a3cf7205e4',null,'方案','::1',null,null,to_timestamp('24-9月 -16 03.36.32.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160924163801985981274682b3629',null,'创建成功，方案的信息的Id为1609241637593758913fd354467b9',null,'方案','::1',null,null,to_timestamp('24-9月 -16 04.38.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092417094746413826e49e56c24',null,'创建成功，方案的信息的Id为160924170944696685245d62a4406',null,'方案','::1',null,null,to_timestamp('24-9月 -16 05.09.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609241712144817614a4fbc36835',null,'创建成功，方案的信息的Id为1609241712099933151a7f9cea587',null,'方案','::1',null,null,to_timestamp('24-9月 -16 05.12.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092421044744383371aacc6053b',null,'创建成功，方案的信息的Id为160924210445463355717025da10a',null,'方案','::1',null,null,to_timestamp('24-9月 -16 09.04.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609242125071082036260f598986',null,'创建成功，方案的信息的Id为16092421250648627514b7d67f3a8',null,'方案','::1',null,null,to_timestamp('24-9月 -16 09.25.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609242128359567711685aa81b58',null,'创建成功，方案的信息的Id为16092421283223595558f469f3658',null,'方案','::1',null,null,to_timestamp('24-9月 -16 09.28.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160924234800523621419b31523e8',null,'创建成功，方案的信息的Id为1609242347588837192201dc93924',null,'方案','::1',null,null,to_timestamp('24-9月 -16 11.48.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609242355103737756217fddee20',null,'创建成功，方案的信息的Id为1609242355073495145a737f0d938',null,'方案','::1',null,null,to_timestamp('24-9月 -16 11.55.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609250021515914981272a2382f0',null,'创建成功，方案的信息的Id为16092500215136093387a9c8ab2ce',null,'方案','::1',null,null,to_timestamp('25-9月 -16 12.21.51.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609250952321524444dc5bd30873',null,'创建成功，方案的信息的Id为160925095230152418367354423f1',null,'方案','::1',null,null,to_timestamp('25-9月 -16 09.52.32.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092514503859107114e39242415',null,'修改成功，人员信息的Id为1609251445221789465836ee9d5e9',null,'人员','::1',null,null,to_timestamp('25-9月 -16 02.50.38.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092515054038983275b752ddafe',null,'创建成功，方案的信息的Id为1609251505398314341516a47228b',null,'方案','::1',null,null,to_timestamp('25-9月 -16 03.05.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609251506182702100aeaddbca1c',null,'修改成功，部门信息的Id为16092514425496024508959092a1f',null,'部门','::1',null,null,to_timestamp('25-9月 -16 03.06.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609182117086328575d813f10f08',null,'创建成功，方案的信息的Id为1609182117059112004151fbac53d',null,'方案','::1',null,null,to_timestamp('18-9月 -16 09.17.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091821184245042597d4a87febf',null,'创建成功，方案的信息的Id为16091821183990417126016ed4b7b',null,'方案','::1',null,null,to_timestamp('18-9月 -16 09.18.42.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160919163354635135532667ff92b',null,'创建成功，检定项目模板的Id为1609191633543091387a5e47ed778',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 04.33.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609191638291094723f3db374c98',null,'创建成功，预备方案的信息的Id为16091916382699609504262c5a8fc',null,'预备方案','::1',null,null,to_timestamp('19-9月 -16 04.38.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609191746155692732df505269f1',null,'创建成功，方案的信息的Id为1609191746136785794dbfd9ee708',null,'方案','::1',null,null,to_timestamp('19-9月 -16 05.46.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091917474829496055631233874',null,'修改成功，方案信息的Id为1609191746136785794dbfd9ee708',null,'方案','::1',null,null,to_timestamp('19-9月 -16 05.47.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609191758019049852001012374e',null,'修改成功，预备方案信息的Id为16091917362497792141ac3c4507d',null,'预备方案','::1',null,null,to_timestamp('19-9月 -16 05.58.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091923232964460527df416dbc5',null,'创建成功，方案的信息的Id为1609192323281805118a297913653',null,'方案','::1',null,null,to_timestamp('19-9月 -16 11.23.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092015401812189655e5b681db6',null,'创建失败，数据字典的信息，An error occurred while updating the entries. See the inner exception for details.',null,'数据字典','::1',null,null,to_timestamp('20-9月 -16 03.40.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092209425008124688f7efe85ed',null,'删除成功，信息的Id为160914141611435523177af49171b,16091414034979083410554218c24',null,'消息','::1',null,null,to_timestamp('22-9月 -16 09.42.50.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092514310111284521bed5ebefe',null,'创建成功，部门的信息的Id为1609251431009562382e258b8b361',null,'部门','::1',null,null,to_timestamp('25-9月 -16 02.31.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160925143150211496463d2dd6e7a',null,'修改成功，部门信息的Id为1609251431009562382e258b8b361',null,'部门','::1',null,null,to_timestamp('25-9月 -16 02.31.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609251431503208377740426bf8f',null,'修改成功，部门信息的Id为1609251431009562382e258b8b361',null,'部门','::1',null,null,to_timestamp('25-9月 -16 02.31.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160925143211104287594cc7bd082',null,'修改成功，部门信息的Id为1609251431009562382e258b8b361',null,'部门','::1',null,null,to_timestamp('25-9月 -16 02.32.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609251432595625391d5435cc8a0',null,'删除成功，信息的Id为1609251431009562382e258b8b361',null,'消息','::1',null,null,to_timestamp('25-9月 -16 02.32.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160925144255132481228e4bce102',null,'创建成功，部门的信息的Id为16092514425496024508959092a1f',null,'部门','::1',null,null,to_timestamp('25-9月 -16 02.42.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609251445246168836cf9e38babf',null,'创建成功，人员的信息的Id为1609251445221789465836ee9d5e9',null,'人员','::1',null,null,to_timestamp('25-9月 -16 02.45.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609251457106794311caaa7c136f',null,'修改成功，人员信息的Id为1609251445221789465836ee9d5e9',null,'人员','::1',null,null,to_timestamp('25-9月 -16 02.57.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609251513527252048d1460a3b59',null,'修改成功，角色信息的Id为16091209264898430321126af2cdc',null,'角色','::1',null,null,to_timestamp('25-9月 -16 03.13.52.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092515205032178447a6504411d',null,'创建成功，方案的信息的Id为1609251520468712279d40dde83b5',null,'方案','::1',null,null,to_timestamp('25-9月 -16 03.20.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609251521358241236d58d0fa51b',null,'创建成功，检定项目模板的Id为1609251521339917662992b69476e',null,'检定项目模板','::1',null,null,to_timestamp('25-9月 -16 03.21.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092515220290130108342118fb1',null,'创建成功，检定项目模板的Id为160925152201836512348bf3fe52f',null,'检定项目模板','::1',null,null,to_timestamp('25-9月 -16 03.22.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092515233774603081812f72914',null,'创建成功，检定项目模板的Id为1609251523365812037303fbc7c53',null,'检定项目模板','::1',null,null,to_timestamp('25-9月 -16 03.23.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160925153020375265060c3704470',null,'创建成功，通知中心的信息的Id为160925153016812387296e4e259a0',null,'通知中心','::1',null,null,to_timestamp('25-9月 -16 03.30.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160925153020922196262508f8463',null,'创建成功，通知中心的信息的Id为160925153020875653356d9488d5c',null,'通知中心','::1',null,null,to_timestamp('25-9月 -16 03.30.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160925153439851221978d0a1bf82',null,'修改成功，通知中心信息的Id为160925153016812387296e4e259a0',null,'通知中心','::1',null,null,to_timestamp('25-9月 -16 03.34.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160925153535709460311369818e3',null,'创建成功，方案的信息的Id为1609251535354732869c51ab6bf50',null,'方案','::1',null,null,to_timestamp('25-9月 -16 03.35.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160925153554900297571fee5b623',null,'修改成功，通知中心信息的Id为160925153020875653356d9488d5c',null,'通知中心','::1',null,null,to_timestamp('25-9月 -16 03.35.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160925154756787902000bdf817dd',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('25-9月 -16 03.47.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609251547578356450a8066107b9',null,'创建成功，方案的信息的Id为16092515475765251630bf0fb64d5',null,'方案','::1',null,null,to_timestamp('25-9月 -16 03.47.57.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092515480487364782ec2e9130b',null,'修改成功，方案信息的Id为16092515475765251630bf0fb64d5',null,'方案','::1',null,null,to_timestamp('25-9月 -16 03.48.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160925155931190657763adb3964c',null,'创建成功，方案的信息的Id为1609251559309074499806efd5a50',null,'方案','::1',null,null,to_timestamp('25-9月 -16 03.59.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092516144378812414980dae40f',null,'创建成功，方案的信息的Id为1609251614435069248c4951de5e4',null,'方案','::1',null,null,to_timestamp('25-9月 -16 04.14.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609251639188998702b8925eab70',null,'创建成功，方案的信息的Id为16092516391869873010e47b9ce43',null,'方案','::1',null,null,to_timestamp('25-9月 -16 04.39.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160925173633686688682c1930604',null,'创建成功，人员的信息的Id为1609251736285768019b624c2edd7',null,'人员','::1',null,null,to_timestamp('25-9月 -16 05.36.33.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160925175710009926407cda2a5fe',null,'创建成功，方案的信息的Id为16092517570873903849e6e331be5',null,'方案','::1',null,null,to_timestamp('25-9月 -16 05.57.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609251803115812736c84de4510d',null,'创建成功，方案的信息的Id为1609251803113250921bb4031cb30',null,'方案','::1',null,null,to_timestamp('25-9月 -16 06.03.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609182155020957020be8ce69646',null,'创建成功，方案的信息的Id为16091821545600111920020723459',null,'方案','::1',null,null,to_timestamp('18-9月 -16 09.55.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091822372736397535816005252',null,'创建成功，方案的信息的Id为1609182237241835671a8e64a9e05',null,'方案','::1',null,null,to_timestamp('18-9月 -16 10.37.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609182336252907480a8b020f3a4',null,'创建成功，方案的信息的Id为1609182336213637616b7365ecc2c',null,'方案','::1',null,null,to_timestamp('18-9月 -16 11.36.25.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609190010411749773d03fa27cb5',null,'创建成功，检定项目模板的Id为16091900103939469830454e2eec6',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 12.10.41.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609190010424486316ce38129f79',null,'创建成功，检定项目模板的Id为16091900101600938158d21f2a2ba',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 12.10.42.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609190011586868743b88bb0b530',null,'创建成功，检定项目模板的Id为1609190011578672098f6605e4998',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 12.11.58.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091900145398811098efbbb9d7e',null,'创建成功，检定项目模板的Id为160919001453345659308aa08eb55',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 12.14.53.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091900211210458529819741367',null,'创建成功，检定项目模板的Id为1609190021110018032c29ba592ef',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 12.21.12.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160919141434925989972a684f8af',null,'修改成功，方案信息的Id为16091823082423693324d8f824e79',null,'方案','::1',null,null,to_timestamp('19-9月 -16 02.14.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160919141446176893058445c9315',null,'修改成功，方案信息的Id为16091823082423693324d8f824e79',null,'方案','::1',null,null,to_timestamp('19-9月 -16 02.14.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160919161156123515167ec398a3a',null,'创建成功，方案的信息的Id为1609191611479785339a40ba60863',null,'方案','::1',null,null,to_timestamp('19-9月 -16 04.11.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160919173631749489987fcad3b43',null,'创建成功，预备方案的信息的Id为16091917362497792141ac3c4507d',null,'预备方案','::1',null,null,to_timestamp('19-9月 -16 05.36.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091917420312576184d44952ba4',null,'创建成功，方案的信息的Id为160919174202469502699ae82ce6e',null,'方案','::1',null,null,to_timestamp('19-9月 -16 05.42.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609191747348104261745070bd8f',null,'创建成功，检定项目模板的Id为1609191747331229096ac46f93c5c',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 05.47.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609191748292877943a9cc5a43a8',null,'修改失败，方案信息的Id为1609191746136785794dbfd9ee708,An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('19-9月 -16 05.48.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160919202547897970566a098a348',null,'创建成功，方案的信息的Id为160919202544766486514b7446c47',null,'方案','::1',null,null,to_timestamp('19-9月 -16 08.25.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091920271870662543cf568c582',null,'创建成功，检定项目模板的Id为1609192027167066012c2bf283100',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 08.27.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091921222709464574fb44528a8',null,'创建成功，方案的信息的Id为16091921222466966912b5d21395c',null,'方案','::1',null,null,to_timestamp('19-9月 -16 09.22.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192129253917927404b856c3c',null,'创建成功，方案的信息的Id为16091921292325652053fc2bdcb24',null,'方案','::1',null,null,to_timestamp('19-9月 -16 09.29.25.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091921471354922287f4f2cd4b8',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('19-9月 -16 09.47.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192217138096290bfad0e61e8',null,'创建成功，检定项目模板的Id为160919221712004205248fde7ce2f',null,'检定项目模板','::1',null,null,to_timestamp('19-9月 -16 10.17.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091923180267092696fecfff970',null,'创建成功，方案的信息的Id为16091923180105824556280f4b2f3',null,'方案','::1',null,null,to_timestamp('19-9月 -16 11.18.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609201117380662256867de3d8ff',null,'修改成功，预备方案信息的Id为16091917362497792141ac3c4507d',null,'预备方案','::1',null,null,to_timestamp('20-9月 -16 11.17.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160920181732004266467039d012b',null,'创建成功，方案的信息的Id为16092018172922299760f56988e89',null,'方案','::1',null,null,to_timestamp('20-9月 -16 06.17.32.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092111474884723391faa9cf401',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('21-9月 -16 11.47.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609211148013827394bd73bb782d',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('21-9月 -16 11.48.01.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092414432312734135d2efd70a2',null,'创建成功，方案的信息的Id为16092414432033928867c4c5b0b71',null,'方案','::1',null,null,to_timestamp('24-9月 -16 02.43.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092414455022951276edac60d0d',null,'创建成功，方案的信息的Id为1609241445483100646309a020787',null,'方案','::1',null,null,to_timestamp('24-9月 -16 02.45.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609241730277326310c6d8130e76',null,'创建成功，方案的信息的Id为1609241730255490348325d81c170',null,'方案','::1',null,null,to_timestamp('24-9月 -16 05.30.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609241740513887751a968075add',null,'创建成功，方案的信息的Id为1609241740473665845df21298aeb',null,'方案','::1',null,null,to_timestamp('24-9月 -16 05.40.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609250100132501483d7e8328271',null,'创建成功，检定项目模板的Id为1609250100120141298fb75f36d2f',null,'检定项目模板','::1',null,null,to_timestamp('25-9月 -16 01.00.13.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609251419588679131bf8063f9ca',null,'创建成功，数据字典的信息的Id为1609251419554456756ab46fa0abb',null,'数据字典','::1',null,null,to_timestamp('25-9月 -16 02.19.58.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092514203905966511245c7ae61',null,'修改成功，数据字典信息的Id为1609251419554456756ab46fa0abb',null,'数据字典','::1',null,null,to_timestamp('25-9月 -16 02.20.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609251420434507538ffc47b3549',null,'修改成功，数据字典信息的Id为1609251419554456756ab46fa0abb',null,'数据字典','::1',null,null,to_timestamp('25-9月 -16 02.20.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160925142105203115060c83b2f6c',null,'删除成功，信息的Id为1609251419554456756ab46fa0abb',null,'消息','::1',null,null,to_timestamp('25-9月 -16 02.21.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609182157596379921dc3601a089',null,'创建成功，方案的信息的Id为16091821575361431280bba49674c',null,'方案','::1',null,null,to_timestamp('18-9月 -16 09.57.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091822093835498857a3d3e65d1',null,'创建成功，方案的信息的Id为16091822093279141986868ec4020',null,'方案','::1',null,null,to_timestamp('18-9月 -16 10.09.38.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091822180294119374f450fceb0',null,'创建失败，检定项目模板，An error occurred while updating the entries. See the inner exception for details.',null,'检定项目模板','::1',null,null,to_timestamp('18-9月 -16 10.18.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160918221829635783100ae0cba5a',null,'创建成功，检定项目模板的Id为1609182218266852214209de52682',null,'检定项目模板','::1',null,null,to_timestamp('18-9月 -16 10.18.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609182222569060252df827d95c3',null,'创建成功，方案的信息的Id为1609182222519908467ad5fdc8748',null,'方案','::1',null,null,to_timestamp('18-9月 -16 10.22.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091822253283700323559c2683a',null,'创建成功，方案的信息的Id为16091822252824646020d0c55b767',null,'方案','::1',null,null,to_timestamp('18-9月 -16 10.25.32.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091823221482642044f8770e7f2',null,'创建成功，方案的信息的Id为1609182322090112803a90b2ac268',null,'方案','::1',null,null,to_timestamp('18-9月 -16 11.22.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091823231598151983c04fae49c',null,'创建成功，检定项目模板的Id为1609182323152759996e4177f3d07',null,'检定项目模板','::1',null,null,to_timestamp('18-9月 -16 11.23.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609182323413820571fda5391a75',null,'创建成功，检定项目模板的Id为1609182323407185318616dcefa43',null,'检定项目模板','::1',null,null,to_timestamp('18-9月 -16 11.23.41.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609182324359764145e99a8a27a1',null,'创建成功，检定项目模板的Id为16091823243255785327a72bb6dfa',null,'检定项目模板','::1',null,null,to_timestamp('18-9月 -16 11.24.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091823260267970373eb214f307',null,'创建成功，方案的信息的Id为1609182325580263926e594369e26',null,'方案','::1',null,null,to_timestamp('18-9月 -16 11.26.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16091823312114552568a40ff0db5',null,'创建成功，方案的信息的Id为1609182331140108413cea4b189cc',null,'方案','::1',null,null,to_timestamp('18-9月 -16 11.31.21.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609191807040250166a8daf8dc60',null,'修改成功，预备方案信息的Id为16091917362497792141ac3c4507d',null,'预备方案','::1',null,null,to_timestamp('19-9月 -16 06.07.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609191830316690664c4995d92fe',null,'修改成功，预备方案信息的Id为16091917362497792141ac3c4507d',null,'预备方案','::1',null,null,to_timestamp('19-9月 -16 06.30.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609191841206092256b9083c0609',null,'修改成功，预备方案信息的Id为16091917362497792141ac3c4507d',null,'预备方案','::1',null,null,to_timestamp('19-9月 -16 06.41.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609192139533517629fce3659fea',null,'创建成功，方案的信息的Id为160919213950167342141da1ac492',null,'方案','::1',null,null,to_timestamp('19-9月 -16 09.39.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092110583048569213839612b77',null,'创建成功，数据字典的信息的Id为1609211058293308606a05ef56dea',null,'数据字典','::1',null,null,to_timestamp('21-9月 -16 10.58.30.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609211058495233516d910ed6163',null,'创建成功，数据字典的信息的Id为16092110584940126027697b11ce3',null,'数据字典','::1',null,null,to_timestamp('21-9月 -16 10.58.49.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609241652224902112af6d4237ac',null,'创建成功，方案的信息的Id为1609241652202396127a485a2c1f3',null,'方案','::1',null,null,to_timestamp('24-9月 -16 04.52.22.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609250017483965554fd8b3f815c',null,'创建成功，方案的信息的Id为160925001747622753482bc8e88a2',null,'方案','::1',null,null,to_timestamp('25-9月 -16 12.17.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092500384726954721aab8faa07',null,'创建成功，方案的信息的Id为16092500384522534525e69c8557b',null,'方案','::1',null,null,to_timestamp('25-9月 -16 12.38.47.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092500444419485450a7cbc2697',null,'创建成功，检定项目模板的Id为16092500444249328422adfc417a5',null,'检定项目模板','::1',null,null,to_timestamp('25-9月 -16 12.44.44.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160925005605583896431c03ce7df',null,'创建成功，方案的信息的Id为16092500560523440667c92d1ac16',null,'方案','::1',null,null,to_timestamp('25-9月 -16 12.56.05.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092515034405842055ffa6efa5e',null,'删除成功，信息的Id为1609141403317061553e343c95dc9',null,'消息','::1',null,null,to_timestamp('25-9月 -16 03.03.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609251535552323273d654f1bd79',null,'修改成功，方案信息的Id为1609251535354732869c51ab6bf50',null,'方案','::1',null,null,to_timestamp('25-9月 -16 03.35.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609251535560658165d5b4644fa3',null,'修改成功，方案信息的Id为1609251535354732869c51ab6bf50',null,'方案','::1',null,null,to_timestamp('25-9月 -16 03.35.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609251538566419903998f2ce309',null,'删除成功，信息的Id为160925153016812387296e4e259a0',null,'消息','::1',null,null,to_timestamp('25-9月 -16 03.38.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609251652340993112c8b47a9bc8',null,'创建成功，方案的信息的Id为160925165233044563633ed09ddad',null,'方案','::1',null,null,to_timestamp('25-9月 -16 04.52.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160925175203737540863a1179ed4',null,'创建成功，方案的信息的Id为16092517520338328961a952485e0',null,'方案','::1',null,null,to_timestamp('25-9月 -16 05.52.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092518174465649541e81081ec9',null,'创建成功，方案的信息的Id为16092518174447736811dc6af47de',null,'方案','::1',null,null,to_timestamp('25-9月 -16 06.17.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609251953366087439ce6a3a4923',null,'创建成功，方案的信息的Id为1609251953342220482c02cc079c7',null,'方案','::1',null,null,to_timestamp('25-9月 -16 07.53.36.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092520111264581083441edcc8d',null,'创建成功，方案的信息的Id为1609252011119192951a358461d31',null,'方案','::1',null,null,to_timestamp('25-9月 -16 08.11.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092520234478370081287dacee1',null,'创建成功，检定项目模板的Id为16092520234085590789f5c972e5d',null,'检定项目模板','::1',null,null,to_timestamp('25-9月 -16 08.23.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092520254668026428bab0b6bda',null,'创建成功，检定项目模板的Id为1609252025456725487da47dae378',null,'检定项目模板','::1',null,null,to_timestamp('25-9月 -16 08.25.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092520352734453338aaf23c120',null,'创建成功，检定项目模板的Id为1609252035248317494e18b6ec36d',null,'检定项目模板','::1',null,null,to_timestamp('25-9月 -16 08.35.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609252035364590091bfbd5d9aa9',null,'创建成功，检定项目模板的Id为1609252035341433666af21593574',null,'检定项目模板','::1',null,null,to_timestamp('25-9月 -16 08.35.36.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609252035449290269033d174be0',null,'创建成功，检定项目模板的Id为1609252035431227440c050f9f879',null,'检定项目模板','::1',null,null,to_timestamp('25-9月 -16 08.35.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100400023880736187ca6461e7d',null,'创建成功，检定项目模板的Id为1610040002378106546c731827a92',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 12.02.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041110370420819e69847d71d',null,'创建成功，方案的信息的Id为16100411103681091821727a4f98a',null,'方案','::1',null,null,to_timestamp('04-10月-16 11.10.37.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041111033708328af19e328b0',null,'创建成功，方案的信息的Id为161004111101388440650d520b88f',null,'方案','::1',null,null,to_timestamp('04-10月-16 11.11.03.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041111276176766eb130cd1df',null,'创建成功，检定项目模板的Id为1610041111243912016d3736f4a21',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 11.11.27.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161004111519995742277e8a57e13',null,'创建成功，方案的信息的Id为161004111519695896279e48ea6f1',null,'方案','::1',null,null,to_timestamp('04-10月-16 11.15.19.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041117005223343cf582d8a70',null,'创建成功，方案的信息的Id为161004111659756054634b752957f',null,'方案','::1',null,null,to_timestamp('04-10月-16 11.17.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161004111723960230305dce1447e',null,'创建成功，方案的信息的Id为1610041117237700785d7a708035b',null,'方案','::1',null,null,to_timestamp('04-10月-16 11.17.23.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100411194282470898e0d3a92aa',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('04-10月-16 11.19.42.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161004112151536665735c669f526',null,'创建成功，方案的信息的Id为1610041121498484652fbfac5d4bd',null,'方案','::1',null,null,to_timestamp('04-10月-16 11.21.51.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100411220463622593c71901681',null,'修改成功，方案信息的Id为1610041121498484652fbfac5d4bd',null,'方案','::1',null,null,to_timestamp('04-10月-16 11.22.04.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161004112628388816760c20e0f01',null,'修改成功，方案信息的Id为1610041126146630519c6f9724683',null,'方案','::1',null,null,to_timestamp('04-10月-16 11.26.28.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041126552220558a676b20ac7',null,'创建成功，检定项目模板的Id为16100411265368044755d40bba7bb',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 11.26.55.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041127302644981233a469a15',null,'创建成功，检定项目模板的Id为16100411272987422197bb14374ba',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 11.27.30.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041128117665436e9d56e2457',null,'创建成功，检定项目模板的Id为16100411281137426699d2cbc2ab4',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 11.28.11.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041133164978386a260ff5886',null,'创建成功，检定项目模板的Id为1610041133101667812dce1132f93',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 11.33.16.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041134214988594e691b71f27',null,'创建成功，检定项目模板的Id为161004113420195856825a22a7a3c',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 11.34.21.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161004113602639050820786180f6',null,'创建成功，检定项目模板的Id为1610041135492259570dfad52a07c',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 11.36.02.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041141222620278fd09d3dd79',null,'创建成功，检定项目模板的Id为161004114120773971715ab805f66',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 11.41.22.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041153331148175e3131d30de',null,'创建成功，检定项目模板的Id为16100411532828130216f93da6f83',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 11.53.33.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041157154076734536584a169',null,'创建成功，检定项目模板的Id为1610041157132011081bc41be010f',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 11.57.15.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null);
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041159059621403d070b88546',null,'创建成功，检定项目模板的Id为161004115903970663838d52ae3bd',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 11.59.05.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100411593260330560d5c63e88f',null,'创建成功，检定项目模板的Id为16100411591789559518e1fb976e3',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 11.59.32.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161004121047518625945f8e615b7',null,'创建成功，检定项目模板的Id为161004121045826404890848656bd',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 12.10.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100415055034738164f1e0f7bcb',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('04-10月-16 03.05.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100415101014104497fa2f68538',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('04-10月-16 03.10.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041514375377779a3eb01bbc6',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('04-10月-16 03.14.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100520415667538427d3a1e2063',null,'修改成功，方案信息的Id为1610041126146630519c6f9724683',null,'方案','::1',null,null,to_timestamp('05-10月-16 08.41.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610052042087264298809646b9c8',null,'修改成功，方案信息的Id为1610041126146630519c6f9724683',null,'方案','::1',null,null,to_timestamp('05-10月-16 08.42.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161005210242220080561d905d1a6',null,'修改成功，方案信息的Id为1610041126146630519c6f9724683',null,'方案','::1',null,null,to_timestamp('05-10月-16 09.02.42.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610052128441666878436a454492',null,'修改成功，方案信息的Id为1610041126146630519c6f9724683',null,'方案','::1',null,null,to_timestamp('05-10月-16 09.28.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610052140475056133701e1960df',null,'修改成功，方案信息的Id为1610041126146630519c6f9724683',null,'方案','::1',null,null,to_timestamp('05-10月-16 09.40.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100521420815615542885a104c2',null,'修改成功，方案信息的Id为1610041126146630519c6f9724683',null,'方案','::1',null,null,to_timestamp('05-10月-16 09.42.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100609565564972051eda31c359',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('06-10月-16 09.56.55.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100609573129362011da22b61f3',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('06-10月-16 09.57.31.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610060958074536317e45199de6b',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('06-10月-16 09.58.07.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610061103478300208f1158def2e',null,'创建成功，预备方案检测项的Id为1610061103381298434a24eb6bc1f',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 11.03.47.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610061116186301796cc7579241f',null,'创建成功，预备方案检测项的Id为1610061116081443110a3052ae576',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 11.16.18.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609272026548450324aa5cde4d4d',null,'修改成功，器具明细信息信息的Id为16092710133986605306309fd1e20',null,'器具明细信息','::1',null,null,to_timestamp('27-9月 -16 08.26.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609272101557260283908b0ba328',null,'创建成功，预备方案的信息的Id为1609272101547724620baa0b3b6e0',null,'预备方案','::1',null,null,to_timestamp('27-9月 -16 09.01.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160927210212446208417d14f82a7',null,'修改成功，预备方案信息的Id为1609272101547724620baa0b3b6e0',null,'预备方案','::1',null,null,to_timestamp('27-9月 -16 09.02.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160927210245778300941e09a2202',null,'修改成功，预备方案信息的Id为1609272058311239050a43459fb89',null,'预备方案','::1',null,null,to_timestamp('27-9月 -16 09.02.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281132275541160731e4eaf7a',null,'修改成功，单位信息的Id为1609281131532738069f8b42fb079',null,'单位','::1',null,null,to_timestamp('28-9月 -16 11.32.27.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281513183974143a87d710b55',null,'修改成功，预备方案信息的Id为1609272101547724620baa0b3b6e0',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 03.13.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281514101625450a166317e3f',null,'修改成功，预备方案信息的Id为1609272101547724620baa0b3b6e0',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 03.14.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281515386801380aef9f55de7',null,'修改成功，预备方案信息的Id为1609272101547724620baa0b3b6e0',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 03.15.38.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160928151658790758731747c6d19',null,'修改成功，预备方案信息的Id为1609272101547724620baa0b3b6e0',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 03.16.58.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281517492914596bc91e8c31e',null,'修改成功，预备方案信息的Id为1609272101547724620baa0b3b6e0',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 03.17.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093000032534636689a275cd90e',null,'创建成功，方案的信息的Id为160930000322458315819f54efed8',null,'方案','::1',null,null,to_timestamp('30-9月 -16 12.03.25.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609300010002581689e14ba59027',null,'修改成功，方案信息的Id为1609300009345593932783768d7aa',null,'方案','::1',null,null,to_timestamp('30-9月 -16 12.10.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930001029902354480cfb6cddb',null,'修改成功，方案信息的Id为1609300009345593932783768d7aa',null,'方案','::1',null,null,to_timestamp('30-9月 -16 12.10.29.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930001056765579816ae2eb0d2',null,'修改成功，方案信息的Id为160930000322458315819f54efed8',null,'方案','::1',null,null,to_timestamp('30-9月 -16 12.10.56.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930113554793025107533afa08',null,'修改失败，器具明细信息信息的Id为1609301008039213903683c4533bd,',null,'器具明细信息','::1',null,null,to_timestamp('30-9月 -16 11.35.54.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301401507427524f6898fe5e7',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 02.01.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609302053405252959106541c726',null,'删除成功，信息的Id为140922145246539504969e3105325',null,'消息','::1',null,null,to_timestamp('30-9月 -16 08.53.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930205402121274238de967c0c',null,'删除成功，信息的Id为14092213562939634331abbbe7395',null,'消息','::1',null,null,to_timestamp('30-9月 -16 08.54.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609302054188656146031b9697b3',null,'删除成功，信息的Id为140922135507916683068629c5d43',null,'消息','::1',null,null,to_timestamp('30-9月 -16 08.54.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093020544303102010c1c8e94c7',null,'删除成功，信息的Id为14092214142483385492f3a6614c2',null,'消息','::1',null,null,to_timestamp('30-9月 -16 08.54.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609302055003099927929382b41a',null,'删除成功，信息的Id为1409221355486530130826b670994',null,'消息','::1',null,null,to_timestamp('30-9月 -16 08.55.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930205511988554049e4b0955a',null,'删除成功，信息的Id为1409221354139895985a030594898',null,'消息','::1',null,null,to_timestamp('30-9月 -16 08.55.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161004003415213063481ce7d4304',null,'创建成功，方案的信息的Id为161004003415018924669e839b969',null,'方案','::1',null,null,to_timestamp('04-10月-16 12.34.15.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610040106572961013e193cec539',null,'创建成功，方案的信息的Id为1610040106569188316fd816c0de0',null,'方案','::1',null,null,to_timestamp('04-10月-16 01.06.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161004014607334823533980832f2',null,'创建成功，方案的信息的Id为1610040146071496738a1f80da40b',null,'方案','::1',null,null,to_timestamp('04-10月-16 01.46.07.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610040158054148369e007720291',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('04-10月-16 01.58.05.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041124229351808c35d5953be',null,'创建成功，方案的信息的Id为1610041124227750671fbfdc1e12c',null,'方案','::1',null,null,to_timestamp('04-10月-16 11.24.22.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041126149272405c28036f121',null,'创建成功，方案的信息的Id为1610041126146630519c6f9724683',null,'方案','::1',null,null,to_timestamp('04-10月-16 11.26.14.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161006112149375265264e5748209',null,'创建成功，预备方案检测项的Id为161006112146263254254e716640b',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 11.21.49.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161006112310021185915983e6c28',null,'创建成功，预备方案检测项的Id为16100611230950017264a36f19042',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 11.23.10.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100611233769433610b0f5e2ea5',null,'创建成功，预备方案检测项的Id为16100611233347925841592900147',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 11.23.37.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610061124329422314a350292d67',null,'创建成功，预备方案检测项的Id为1610061124326375214821caac2a9',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 11.24.32.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100611412328363707415ae4985',null,'创建成功，预备方案检测项的Id为16100611412091089738544f9df3f',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 11.41.23.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610061142498394246c2b5e8d9b7',null,'创建成功，预备方案检测项的Id为1610061142466430255998d9b89a6',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 11.42.49.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161006153024340962266748d5396',null,'创建成功，预备方案检测项的Id为1610061530228178807d8feebec31',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 03.30.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100615305954896161924fd408a',null,'创建成功，预备方案检测项的Id为161006153056531817587c9f95618',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 03.30.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610061532206821359083a2d7f7b',null,'创建成功，预备方案检测项的Id为161006153121388132728c51797e0',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 03.32.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092712304915133543f8951e828',null,'创建成功，角色的信息的Id为16092712304483715443e58a02036',null,'角色','::1',null,null,to_timestamp('27-9月 -16 12.30.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609271231084049566eab9335678',null,'修改成功，角色信息的Id为16092712304483715443e58a02036',null,'角色','::1',null,null,to_timestamp('27-9月 -16 12.31.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092720355126139025b99458a44',null,'修改成功，器具明细信息信息的Id为1609272033125101500cc5945730c',null,'器具明细信息','::1',null,null,to_timestamp('27-9月 -16 08.35.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092720402247802454f6c9e2629',null,'创建成功，预备方案的信息的Id为160927204016539603699072d2072',null,'预备方案','::1',null,null,to_timestamp('27-9月 -16 08.40.22.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609272058314833562f49778455e',null,'创建成功，预备方案的信息的Id为1609272058311239050a43459fb89',null,'预备方案','::1',null,null,to_timestamp('27-9月 -16 08.58.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092816384240580270b1f5d5960',null,'创建成功，委托单信息的信息的Id为160928163837364125224ecf12013',null,'委托单信息','::1',null,null,to_timestamp('28-9月 -16 04.38.42.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160928163930003330682e50ddd83',null,'创建成功，委托单信息的信息的Id为160928163927006012457071f4a92',null,'委托单信息','::1',null,null,to_timestamp('28-9月 -16 04.39.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160928164153528254881a41a9987',null,'创建成功，委托单信息的信息的Id为16092816415214080144527598341',null,'委托单信息','::1',null,null,to_timestamp('28-9月 -16 04.41.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092919483168101816524ed38d4',null,'修改成功，预备方案信息的Id为1609272101547724620baa0b3b6e0',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 07.48.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160929194951862775957308dff72',null,'修改成功，预备方案信息的Id为1609291943121479533937b43634c',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 07.49.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609291950297125180e2c0300555',null,'修改成功，预备方案信息的Id为1609291943121479533937b43634c',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 07.50.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609291950413774159ece7400e1c',null,'修改成功，预备方案信息的Id为1609291943121479533937b43634c',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 07.50.41.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160929224610919086582464e197c',null,'创建成功，方案的信息的Id为1609292246065509308d57517d87d',null,'方案','::1',null,null,to_timestamp('29-9月 -16 10.46.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609300014235268969bf3bf29553',null,'创建成功，检定项目模板的Id为16093000142167757835663325923',null,'检定项目模板','::1',null,null,to_timestamp('30-9月 -16 12.14.23.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609300014509761084e1df487963',null,'修改成功，方案信息的Id为160930000322458315819f54efed8',null,'方案','::1',null,null,to_timestamp('30-9月 -16 12.14.50.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930100732563859178273c4103',null,'创建失败，委托单信息的信息，An error occurred while updating the entries. See the inner exception for details.',null,'委托单信息','::1',null,null,to_timestamp('30-9月 -16 10.07.32.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301008086880619172a691c28',null,'创建成功，委托单信息的信息的Id为16093010080392139033fdc397ab1',null,'委托单信息','::1',null,null,to_timestamp('30-9月 -16 10.08.08.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301108248641951b22dadf862',null,'创建成功，检定项目模板的Id为16093011082255179063161219e35',null,'检定项目模板','::1',null,null,to_timestamp('30-9月 -16 11.08.24.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093011082734812754c729a4d84',null,'修改成功，器具明细信息信息的Id为1609301008039213903683c4533bd',null,'器具明细信息','::1',null,null,to_timestamp('30-9月 -16 11.08.27.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301113005488676eef5f32d07',null,'修改成功，器具明细信息信息的Id为1609301008039213903683c4533bd',null,'器具明细信息','::1',null,null,to_timestamp('30-9月 -16 11.13.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'csdl');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301409255587994124237c007',null,'创建成功，人员的信息的Id为16093014092428789466a2810fdd6',null,'人员','::1',null,null,to_timestamp('30-9月 -16 02.09.25.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093014095426222485b4f48f3cb',null,'创建成功，人员的信息的Id为1609301409541996736030d2bc435',null,'人员','::1',null,null,to_timestamp('30-9月 -16 02.09.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093014104576268991180f29f9c',null,'创建成功，人员的信息的Id为1609301410451532617f11e8607a6',null,'人员','::1',null,null,to_timestamp('30-9月 -16 02.10.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301411403591716fc9f57c2ef',null,'创建成功，角色的信息的Id为16093014113842163965344074d88',null,'角色','::1',null,null,to_timestamp('30-9月 -16 02.11.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301412014843773e46e88a2a3',null,'创建成功，角色的信息的Id为16093014120104682324367e77d6f',null,'角色','::1',null,null,to_timestamp('30-9月 -16 02.12.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301412273752343518da7f7d3',null,'创建成功，角色的信息的Id为16093014122640642007f1b957f5b',null,'角色','::1',null,null,to_timestamp('30-9月 -16 02.12.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610052132349238628f7d259c822',null,'修改成功，方案信息的Id为1610041126146630519c6f9724683',null,'方案','::1',null,null,to_timestamp('05-10月-16 09.32.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100521382050568107ce1fdc6b1',null,'修改成功，方案信息的Id为1610041126146630519c6f9724683',null,'方案','::1',null,null,to_timestamp('05-10月-16 09.38.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610061140285036968af0a42fa4a',null,'创建成功，预备方案检测项的Id为1610061140271155932d2fc10c583',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 11.40.28.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610061537371222428cbfc3caa4f',null,'创建成功，预备方案检测项的Id为161006153733294525596b6252c32',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 03.37.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100615374452851773b43d3eccb',null,'创建成功，预备方案检测项的Id为16100615374179656161eb10d6a2a',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 03.37.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610061539216575128ea340490a8',null,'创建成功，预备方案检测项的Id为1610061538582547966258c81b604',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 03.39.21.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610061548578444595f2a6a9a981',null,'创建成功，预备方案检测项的Id为161006154852403597347648c1d57',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 03.48.57.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100615553010670872a5e96170d',null,'创建成功，预备方案检测项的Id为161006155420721430499f7127d04',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 03.55.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100615554288278090a5e7dafc6',null,'创建成功，预备方案检测项的Id为1610061555385667173fad1a3fc37',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 03.55.42.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610061602041070469a1ae28c824',null,'创建成功，检定项目模板的Id为1610061602027010523f294bdad9a',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 04.02.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100616025154066156bcd5f4334',null,'创建成功，检定项目模板的Id为1610061602426743625445361bbc3',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 04.02.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609272041109519354f2cc6b97ee',null,'修改成功，预备方案信息的Id为160927204016539603699072d2072',null,'预备方案','::1',null,null,to_timestamp('27-9月 -16 08.41.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609272043448429481cd74754f07',null,'修改成功，预备方案信息的Id为160927204016539603699072d2072',null,'预备方案','::1',null,null,to_timestamp('27-9月 -16 08.43.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092811274382216861df23f5944',null,'创建成功，单位的信息的Id为1609281127429129574ba32f6e540',null,'单位','::1',null,null,to_timestamp('28-9月 -16 11.27.43.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281131535442915cccebb6a5d',null,'创建成功，单位的信息的Id为1609281131532738069f8b42fb079',null,'单位','::1',null,null,to_timestamp('28-9月 -16 11.31.53.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281133510572136e36db5d46a',null,'创建成功，预备方案的信息的Id为16092811334552537681d3ce36c4b',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.33.51.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160928113637669004313f2bea6af',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.37.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281136505606583faff554aa0',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.50.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092811365112355856342396164',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.51.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281136514513771abc5e350e8',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.51.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092811365188892489c9532e61e',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.51.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281136522327092e6b85d062b',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.52.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281136526077631f7b5c73234',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.52.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160928113653061269516ba153771',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.53.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160928113653404713075e1c090a0',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.53.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160928113653779749494dd581b14',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.53.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281136541082476e38e230fb8',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.54.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092811365446761221e4cedb558',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.54.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092811365493612221f192ff969',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.54.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092811365529554102e39a937ad',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.55.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281136556237644e062686317',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.55.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160928113656295995817c946437a',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.56.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281136567960566c81ec001ec',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.56.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281136575148987b81105b3ce',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.57.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160928113658139597852798da376',null,'修改成功，预备方案信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.36.58.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092811424737509551909366ade',null,'创建成功，委托单信息的信息的Id为16092811424626524643888bfa33b',null,'委托单信息','::1',null,null,to_timestamp('28-9月 -16 11.42.47.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160928150329576042123b346ca17',null,'修改成功，预备方案信息的Id为1609272101547724620baa0b3b6e0',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 03.03.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281504253064405af64e3eb7c',null,'修改成功，预备方案信息的Id为1609272101547724620baa0b3b6e0',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 03.04.25.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092919424483213485dea92307e',null,'修改成功，器具明细信息信息的Id为16092919171502516251b6d3f9bff',null,'器具明细信息','::1',null,null,to_timestamp('29-9月 -16 07.42.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609291943317123901e633f92245',null,'创建成功，预备方案的信息的Id为1609291943121479533937b43634c',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 07.43.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609291944136352469679b66717f',null,'修改成功，预备方案信息的Id为1609291943121479533937b43634c',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 07.44.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609291944187487264c2c52c6840',null,'修改成功，预备方案信息的Id为1609291943121479533937b43634c',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 07.44.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609291951289197931f310263f4b',null,'修改成功，预备方案信息的Id为1609291943121479533937b43634c',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 07.51.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092919522069067408455d2ec25',null,'修改成功，预备方案信息的Id为1609291943121479533937b43634c',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 07.52.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092920035639271618646a18cee',null,'修改成功，预备方案信息的Id为1609291943121479533937b43634c',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 08.03.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609292004081801603458d323c5e',null,'修改成功，预备方案信息的Id为1609291943121479533937b43634c',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 08.04.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609292004290241299385ecb8d6c',null,'修改成功，预备方案信息的Id为1609291943121479533937b43634c',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 08.04.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160929200759186209398a297a0af',null,'修改成功，预备方案信息的Id为1609291943121479533937b43634c',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 08.07.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092920273380471548e25b96b62',null,'修改成功，预备方案信息的Id为1609291943121479533937b43634c',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 08.27.33.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609292027435891319b780431ae6',null,'修改成功，预备方案信息的Id为1609291943121479533937b43634c',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 08.27.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160929202809882606724ef694628',null,'修改成功，预备方案信息的Id为1609291943121479533937b43634c',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 08.28.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160929204941492082711e9816cbe',null,'修改成功，预备方案信息的Id为1609291943121479533937b43634c',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 08.49.41.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609300009380429050d03952e786',null,'创建成功，方案的信息的Id为1609300009345593932783768d7aa',null,'方案','::1',null,null,to_timestamp('30-9月 -16 12.09.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301013333979678ed6b0e5b33',null,'创建成功，人员的信息的Id为16093010133324256095b90fbebde',null,'人员','::1',null,null,to_timestamp('30-9月 -16 10.13.33.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093010153291823055a7f1d38cf',null,'创建成功，角色的信息的Id为160930101532605726856cbadcc53',null,'角色','::1',null,null,to_timestamp('30-9月 -16 10.15.32.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093010155408912574818dea520',null,'创建成功，角色的信息的Id为1609301015539953521352a053cf0',null,'角色','::1',null,null,to_timestamp('30-9月 -16 10.15.54.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930101634042620607fd812037',null,'删除成功，信息的Id为,1608191358228190950aa767add41,16081914002675292042aa9b17ddd',null,'消息','::1',null,null,to_timestamp('30-9月 -16 10.16.34.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301017364276544e26c94a84d',null,'删除成功，信息的Id为,1608191358228190950aa767add41,16081914002675292042aa9b17ddd',null,'消息','::1',null,null,to_timestamp('30-9月 -16 10.17.36.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930113010596829785e7ec40fc',null,'修改失败，器具明细信息信息的Id为1609301008039213903683c4533bd,',null,'器具明细信息','::1',null,null,to_timestamp('30-9月 -16 11.30.10.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301134061202536e66dceb255',null,'修改失败，器具明细信息信息的Id为1609301008039213903683c4533bd,',null,'器具明细信息','::1',null,null,to_timestamp('30-9月 -16 11.34.06.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093014184831736882c8582b89a',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('30-9月 -16 02.18.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301418485048749a7a0764149',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('30-9月 -16 02.18.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301418486298782ebeac0458f',null,'修改成功，器具明细信息信息的Id为1609301008039213903683c4533bd',null,'器具领取所在实验室修改','::1',null,null,to_timestamp('30-9月 -16 02.18.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301421356478634b36962c4e2',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 02.21.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301421415800247c6e10b1f44',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 02.21.41.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301422246053228cfad40b0d0',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 02.22.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssh');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930142656891265406fdfbef59',null,'创建成功，人员的信息的Id为160930142656797466150aa369753',null,'人员','::1',null,null,to_timestamp('30-9月 -16 02.26.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093014472052894432266e24e67',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 02.47.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssp');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930144916812851027d23b2226',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 02.49.16.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301449238407696a556b17d8f',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 02.49.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301450153639035814c3dcb13',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 02.50.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssh');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301651235816155e2929cd479',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 04.51.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssp');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093016531834636155dd214c4a1',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('30-9月 -16 04.53.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093016531859638202cff307efb',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('30-9月 -16 04.53.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093016531897139268679c9ade4',null,'修改成功，器具明细信息信息的Id为1609301008039213903683c4533bd',null,'器具领取所在实验室修改','::1',null,null,to_timestamp('30-9月 -16 04.53.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301653345670496abc0c7793b',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 04.53.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301653466432730dd41186dcd',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 04.53.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301654375473829533cd9b692',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 04.54.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssh');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301704485533098683e8a8e5c',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 05.04.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssp');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093017120263432168fae6ec919',null,'修改成功，预备方案信息的Id为1609301656314257304dc82b59740',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 05.12.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssp');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609302100405496390ca9bc5c59f',null,'删除失败，信息的Id为1608191342404587427b03ac55ba5,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('30-9月 -16 09.00.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093021013969538778a133d4441',null,'删除失败，信息的Id为16092712304483715443e58a02036,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('30-9月 -16 09.01.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093021014864846558a1dfddbd0',null,'删除失败，信息的Id为1609261817066866686947f415827,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('30-9月 -16 09.01.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609271106119906486563807781b',null,'修改成功，器具明细信息信息的Id为1609261413448650930de7b429af3',null,'器具明细信息','::1',null,null,to_timestamp('27-9月 -16 11.06.11.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609272033158230433d0888eb34f',null,'创建成功，委托单信息的信息的Id为1609272033125101500bd58282ecb',null,'委托单信息','::1',null,null,to_timestamp('27-9月 -16 08.33.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092720512700389447a7d95e719',null,'修改成功，器具明细信息信息的Id为1609261413448650930d131a73f1b',null,'器具明细信息','::1',null,null,to_timestamp('27-9月 -16 08.51.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609272103017014809fa152c7a7c',null,'修改成功，预备方案信息的Id为1609272058311239050a43459fb89',null,'预备方案','::1',null,null,to_timestamp('27-9月 -16 09.03.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609272110137769667896de13b65',null,'创建成功，预备方案的信息的Id为16092721101280777672a0cd6ef3d',null,'预备方案','::1',null,null,to_timestamp('27-9月 -16 09.10.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092810175968596268e99f1d0c3',null,'创建成功，委托单信息的信息的Id为16092810174499690396945eeea56',null,'委托单信息','::1',null,null,to_timestamp('28-9月 -16 10.17.59.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160928101923804240545a6e5d211',null,'创建成功，委托单信息的信息的Id为1609281019235073382b295c6bd15',null,'委托单信息','::1',null,null,to_timestamp('28-9月 -16 10.19.23.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160928102138761616539053faec7',null,'创建成功，委托单信息的信息的Id为1609281021383551889c91d0b6563',null,'委托单信息','::1',null,null,to_timestamp('28-9月 -16 10.21.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281023387742706f9b1632537',null,'创建成功，委托单信息的信息的Id为160928102338446070636afb1f28a',null,'委托单信息','::1',null,null,to_timestamp('28-9月 -16 10.23.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281133141314229325d71a479',null,'修改成功，器具明细信息信息的Id为1609281023384460706b52cf1f5a6',null,'器具明细信息','::1',null,null,to_timestamp('28-9月 -16 11.33.14.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281133223354142e3cb66a0fb',null,'修改成功，器具明细信息信息的Id为1609281017450124951b387d591df',null,'器具明细信息','::1',null,null,to_timestamp('28-9月 -16 11.33.22.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281133297584195ed63984f38',null,'修改成功，器具明细信息信息的Id为160928101745012495107cdbae250',null,'器具明细信息','::1',null,null,to_timestamp('28-9月 -16 11.33.29.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160928113406340430640c6f261b1',null,'修改成功，预备方案信息的Id为16092811334552537681d3ce36c4b',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.34.06.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281135479918513d0f79f0510',null,'创建成功，预备方案的信息的Id为16092811354461615148e2afd2ae5',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 11.35.47.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092811390124017848ca8d1dc1a',null,'修改成功，器具明细信息信息的Id为1609281017450124951b387d591df',null,'器具明细信息','::1',null,null,to_timestamp('28-9月 -16 11.39.01.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'电能实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160928150217305071469c94b9390',null,'修改成功，预备方案信息的Id为1609272101547724620baa0b3b6e0',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 03.02.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092921250542711460960c3cb6e',null,'创建成功，方案的信息的Id为16092921245603031572639e1e951',null,'方案','::1',null,null,to_timestamp('29-9月 -16 09.25.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609292125093255273dc00162e24',null,'创建成功，方案的信息的Id为16092921250830953882677bd472a',null,'方案','::1',null,null,to_timestamp('29-9月 -16 09.25.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609292126294826464cab594f2f3',null,'创建成功，方案的信息的Id为160929212602155575859b4ff7414',null,'方案','::1',null,null,to_timestamp('29-9月 -16 09.26.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160929213447370833117bb6dc5f8',null,'创建成功，方案的信息的Id为16092921344385272986d2ba7ba22',null,'方案','::1',null,null,to_timestamp('29-9月 -16 09.34.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609292136199064323a57a5016b3',null,'创建成功，方案的信息的Id为1609292136097108715e293789077',null,'方案','::1',null,null,to_timestamp('29-9月 -16 09.36.19.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092921363947529065dde99e971',null,'修改成功，方案信息的Id为1609292136097108715e293789077',null,'方案','::1',null,null,to_timestamp('29-9月 -16 09.36.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609292137138493125805a53b035',null,'创建成功，方案的信息的Id为1609292137090975084ac5c2a46c1',null,'方案','::1',null,null,to_timestamp('29-9月 -16 09.37.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930133402901508542e0112943',null,'修改失败，器具明细信息信息的Id为1609301008039213903683c4533bd,',null,'器具明细信息','::1',null,null,to_timestamp('30-9月 -16 01.34.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093014174261417445c41a69740',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 02.17.42.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssh');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301419084441430fb49114042',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 02.19.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930141915810729450aae84de5',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 02.19.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093014200209823681a682d0354',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 02.20.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssh');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930142758266755450f1b6d56f',null,'创建成功，角色的信息的Id为160930142756938631880581c7dd6',null,'角色','::1',null,null,to_timestamp('30-9月 -16 02.27.58.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301428402358996ab881933c2',null,'删除成功，信息的Id为,1608191349513153481556dbb61e8,16081913533564460749dc9ddce10,1608191356215411265712c6a6eb6,160819140421791166551bb14064b,1608191404571488364aba42741f9,16081914062796767649eb3fc2292,1608191406590543692084183b077,160819140857596716475bac74030,1608191411454365613ea3bd77b57,16081914132048085249676d6f017,160819141422014916817e22ae673,16081914144101220138a7468240f,1608191415010703589320d279564',null,'消息','::1',null,null,to_timestamp('30-9月 -16 02.28.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930165716194152585632cb9c5',null,'修改成功，预备方案信息的Id为1609301656314257304dc82b59740',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 04.57.16.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301657531366214329e0fe1d9',null,'修改成功，预备方案信息的Id为1609301656314257304dc82b59740',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 04.57.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssh');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609302057053816743a0592df31a',null,'修改成功，菜单信息的Id为1307311605187265267d33f281da4',null,'菜单','::1',null,null,to_timestamp('30-9月 -16 08.57.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609302057106927681d0228abb90',null,'修改成功，菜单信息的Id为1307311605187265267d33f281da4',null,'菜单','::1',null,null,to_timestamp('30-9月 -16 08.57.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609271611500689453e448439c41',null,'修改成功，方案的Id为1609251614435069248c4951de5e4',null,'消息','::1',null,null,to_timestamp('27-9月 -16 04.11.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281505544726591b61798e496',null,'修改成功，预备方案信息的Id为1609272101547724620baa0b3b6e0',null,'预备方案','::1',null,null,to_timestamp('28-9月 -16 03.05.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093000443497942967839ebe378',null,'创建成功，检定项目模板的Id为160930004432035282430758928d6',null,'检定项目模板','::1',null,null,to_timestamp('30-9月 -16 12.44.34.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930101311671175391e19eb3ad',null,'创建成功，人员的信息的Id为1609301013091063609785a44755a',null,'人员','::1',null,null,to_timestamp('30-9月 -16 10.13.11.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093013571029624991e79d02841',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('30-9月 -16 01.57.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301357107785946bc79a119cb',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('30-9月 -16 01.57.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093013571772753070d3da12158',null,'修改成功，器具明细信息信息的Id为1609301008039213903683c4533bd',null,'器具领取所在实验室修改','::1',null,null,to_timestamp('30-9月 -16 01.57.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093014010350507063c41ee050e',null,'创建成功，预备方案的信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 02.01.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301505017073487dd98339aaf',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 03.05.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssp');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609302056244695680cd8493258b',null,'删除成功，信息的Id为1307311605187265267d33f281da5',null,'消息','::1',null,null,to_timestamp('30-9月 -16 08.56.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093020580758995810673f3e88d',null,'修改成功，菜单信息的Id为1608191349513153481556dbb61e8',null,'菜单','::1',null,null,to_timestamp('30-9月 -16 08.58.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930211203139304419169dff9f',null,'删除成功，信息的Id为1311011720196053073ccff5a1c7c',null,'消息','::1',null,null,to_timestamp('30-9月 -16 09.12.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609302115305200462535c326c5f',null,'创建成功，人员的信息的Id为1609302115257697485319027a0dc',null,'人员','::1',null,null,to_timestamp('30-9月 -16 09.15.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610032210317773092af4b8bcf18',null,'创建成功，方案的信息的Id为1610032210209288518372e22562d',null,'方案','::1',null,null,to_timestamp('03-10月-16 10.10.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100322104027022193c60070d80',null,'创建成功，方案的信息的Id为1610032210399492569072ec64841',null,'方案','::1',null,null,to_timestamp('03-10月-16 10.10.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100322231714566260599fcc1b3',null,'创建成功，方案的信息的Id为16100322231692850659c0aa844ec',null,'方案','::1',null,null,to_timestamp('03-10月-16 10.23.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100323182427219589337ff7f5a',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('03-10月-16 11.18.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610032318343619070d176be1a34',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('03-10月-16 11.18.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610032318480358116abf67048ec',null,'创建成功，方案的信息的Id为1610032318465587638e1eef4e28a',null,'方案','::1',null,null,to_timestamp('03-10月-16 11.18.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610032327423534451268d6ed28b',null,'创建成功，方案的信息的Id为1610032327389859147d7964e96ae',null,'方案','::1',null,null,to_timestamp('03-10月-16 11.27.42.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161003233445745160534b014b679',null,'创建成功，方案的信息的Id为16100323344453423277a5880d3e9',null,'方案','::1',null,null,to_timestamp('03-10月-16 11.34.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610032338120188555382f887d2e',null,'创建成功，方案的信息的Id为1610032338115385126de95d4fa37',null,'方案','::1',null,null,to_timestamp('03-10月-16 11.38.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100323545366960570001742529',null,'创建成功，检定项目模板的Id为161003235449250401834045ec2be',null,'检定项目模板','::1',null,null,to_timestamp('03-10月-16 11.54.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610040002041416420a800f97e41',null,'创建成功，方案的信息的Id为16100400020079224941e3fe29697',null,'方案','::1',null,null,to_timestamp('04-10月-16 12.02.04.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100400094935484009fffa7af3a',null,'创建成功，方案的信息的Id为1610040009465718654f107be0a32',null,'方案','::1',null,null,to_timestamp('04-10月-16 12.09.49.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100400185656796201874277319',null,'创建成功，方案的信息的Id为161004001855919370916e9e136b0',null,'方案','::1',null,null,to_timestamp('04-10月-16 12.18.56.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610040111560997101fd818b1c7f',null,'创建成功，检定项目模板的Id为1610040111543024298aa30ad02cc',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 01.11.56.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100401131736860272ad99c1385',null,'创建成功，检定项目模板的Id为16100401131648797936f61dea0a2',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 01.13.17.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161004011949674641485dec55745',null,'创建成功，方案的信息的Id为1610040119493824326deab622ad3',null,'方案','::1',null,null,to_timestamp('04-10月-16 01.19.49.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100401202152525520017227127',null,'创建成功，检定项目模板的Id为1610040120185641527480070d972',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 01.20.21.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610040121173875252fcb24c7170',null,'创建成功，方案的信息的Id为161004012116621982172549a80d2',null,'方案','::1',null,null,to_timestamp('04-10月-16 01.21.17.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610040122056273099352d86c346',null,'创建成功，检定项目模板的Id为1610040122033066618d55ad66424',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 01.22.05.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610040123127255750b36b73d3c3',null,'创建成功，方案的信息的Id为1610040123123463076053aa176d1',null,'方案','::1',null,null,to_timestamp('04-10月-16 01.23.12.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100401312088990524f8a14fb3c',null,'创建成功，方案的信息的Id为1610040131160190053a2a88b3f22',null,'方案','::1',null,null,to_timestamp('04-10月-16 01.31.20.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610040132004285977131e071a22',null,'创建成功，检定项目模板的Id为161004013159074287075b210cb5f',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 01.32.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610040148222377625400ca25e4c',null,'创建成功，检定项目模板的Id为1610040148209495998dd35bb2797',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 01.48.22.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161004100845067228900281012a7',null,'创建成功，方案的信息的Id为1610041008444677011b008ff9b9b',null,'方案','::1',null,null,to_timestamp('04-10月-16 10.08.45.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609271053364510954531ac25739',null,'创建成功，数据字典的信息的Id为16092710533640417111dcaa16322',null,'数据字典','::1',null,null,to_timestamp('27-9月 -16 10.53.36.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092721033617385279ebaedc91d',null,'修改成功，器具明细信息信息的Id为16092614134486509306f1ed1302d',null,'器具明细信息','::1',null,null,to_timestamp('27-9月 -16 09.03.36.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160928095959045208121649016df',null,'创建成功，单位的信息的Id为160928095957576264521249e5160',null,'单位','::1',null,null,to_timestamp('28-9月 -16 09.59.59.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092810004020582840a07b96141',null,'创建成功，单位的信息的Id为16092810003864315720bdfe3e6cd',null,'单位','::1',null,null,to_timestamp('28-9月 -16 10.00.40.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092810004928511115be652e728',null,'创建成功，单位的信息的Id为1609281000480347471f5cfeca1fe',null,'单位','::1',null,null,to_timestamp('28-9月 -16 10.00.49.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160928100059036089373b33d1ddc',null,'创建成功，单位的信息的Id为1609281000572544773c9a2827b37',null,'单位','::1',null,null,to_timestamp('28-9月 -16 10.00.59.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16092810010727148769784125887',null,'创建成功，单位的信息的Id为160928100105911646582c9d5edb6',null,'单位','::1',null,null,to_timestamp('28-9月 -16 10.01.07.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160928114521359849854db4266c0',null,'修改成功，器具明细信息信息的Id为160928114246265246437063064be',null,'器具明细信息','::1',null,null,to_timestamp('28-9月 -16 11.45.21.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609281145351269804045d40794c',null,'修改成功，器具明细信息信息的Id为16092811424626524646579553a4c',null,'器具明细信息','::1',null,null,to_timestamp('28-9月 -16 11.45.35.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609291917202585505e4217b1658',null,'创建成功，委托单信息的信息的Id为16092919171502516251bc9e517e2',null,'委托单信息','::1',null,null,to_timestamp('29-9月 -16 07.17.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609292000090480625b31f5a935c',null,'修改成功，预备方案信息的Id为1609291943121479533937b43634c',null,'预备方案','::1',null,null,to_timestamp('29-9月 -16 08.00.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093011075438586067ee8aa3a3e',null,'创建成功，检定项目模板的Id为1609301107524137019fedd5bea9e',null,'检定项目模板','::1',null,null,to_timestamp('30-9月 -16 11.07.54.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301119541513646cb700f88e0',null,'修改成功，器具明细信息信息的Id为1609301008039213903683c4533bd',null,'器具明细信息','::1',null,null,to_timestamp('30-9月 -16 11.19.54.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301412591098318a755c2173f',null,'删除成功，信息的Id为,16081914011452419777e5f6fe314,1608191402183421645a13946c5cc',null,'消息','::1',null,null,to_timestamp('30-9月 -16 02.12.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930141336214055207ea11af2b',null,'删除成功，信息的Id为,16081914011452419777e5f6fe314,1608191402183421645a13946c5cc',null,'消息','::1',null,null,to_timestamp('30-9月 -16 02.13.36.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301413519390159f2f5b117d2',null,'删除成功，信息的Id为,1608191403006629468a2301f6206,16081914035251344912f2acc3fee',null,'消息','::1',null,null,to_timestamp('30-9月 -16 02.13.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301508255664774305f94b098',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 03.08.25.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301508389476176e805dce875',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 03.08.38.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301509207748088ce08bfef04',null,'修改成功，预备方案信息的Id为1609301400577124277db6c732e23',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 03.09.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssh');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1609301656048214259bce99918e1',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('30-9月 -16 04.56.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('160930165605165178910ecaa92ad',null,'修改成功，器具明细信息信息的Id为1609301008039213903751b37a0ab',null,'器具领取所在实验室修改','::1',null,null,to_timestamp('30-9月 -16 04.56.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16093016563671598700d0f0949e5',null,'创建成功，预备方案的信息的Id为1609301656314257304dc82b59740',null,'预备方案','::1',null,null,to_timestamp('30-9月 -16 04.56.36.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610040110238115396f51b1c5a45',null,'创建成功，检定项目模板的Id为1610040110174800268455f3315aa',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 01.10.23.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610040111499153154ab39a88e0b',null,'修改成功，方案信息的Id为161004003415018924669e839b969',null,'方案','::1',null,null,to_timestamp('04-10月-16 01.11.49.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100401421167372338d765657d3',null,'创建成功，方案的信息的Id为161004014211345128214c53817b1',null,'方案','::1',null,null,to_timestamp('04-10月-16 01.42.11.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041002133372407f827f7a64b',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('04-10月-16 10.02.13.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161004100221141191094e87aa05e',null,'创建成功，方案的信息的Id为16100410021935959036fdb90949e',null,'方案','::1',null,null,to_timestamp('04-10月-16 10.02.21.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100410115955457351570698289',null,'创建成功，方案的信息的Id为1610041011593384191e17d4009e0',null,'方案','::1',null,null,to_timestamp('04-10月-16 10.11.59.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041029251990213e4be804ed8',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('04-10月-16 10.29.25.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100410292814892476c3f95d2ae',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('04-10月-16 10.29.28.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100410292962239701c4bb9bf82',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('04-10月-16 10.29.29.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610041107069585718e464eb33e2',null,'创建失败，方案的信息，An error occurred while updating the entries. See the inner exception for details.',null,'方案','::1',null,null,to_timestamp('04-10月-16 11.07.06.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161004110842202118609bb272f54',null,'创建成功，方案的信息的Id为161004110840062356400bd00f734',null,'方案','::1',null,null,to_timestamp('04-10月-16 11.08.42.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100411090651464404237275422',null,'创建成功，检定项目模板的Id为1610041109029663988976144f14e',null,'检定项目模板','::1',null,null,to_timestamp('04-10月-16 11.09.06.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100713585752391309d5b9eb220',null,'删除成功，信息的Id为,1307311605187265267d33f281da4,1307311605187265267d33f281da0,1307311605187265267d33f281da3,1307311605187265267d33f281d11,1307311605187265267d33f281da1,1307311605187265267d33f281da9,1307311605187265267d33f281da8,1307311605187265267d33f281da8^13101815543634748843f1d3c904c,1307311605187265267d33f281da8^131018155411503738459acd560d4,1307311605187265267d33f281da8^1310181134390713796477e27c097,1307311605187265267d33f281da8^1310181554235506134d5697ad13c',null,'消息','::1',null,null,to_timestamp('07-10月-16 01.58.57.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100714020592151886526a8e89c',null,'删除失败，信息的Id为1608191339530672154beaad57c90,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.02.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071402107029077ddefb75bfe',null,'删除失败，信息的Id为1608191342404587427b03ac55ba5,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.02.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071402289864378722cb0393e',null,'修改成功，菜单信息的Id为1608191342404587427b03ac55ba5',null,'菜单','::1',null,null,to_timestamp('07-10月-16 02.02.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071406093962608b815de5292',null,'删除失败，信息的Id为1608191342404587427b03ac55ba5,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.06.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071407189661865b3fd22b93f',null,'修改成功，角色信息的Id为16100620335551365628974e01056',null,'角色','::1',null,null,to_timestamp('07-10月-16 02.07.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100714074379690705784511f0b',null,'删除成功，信息的Id为16100620335551365628974e01056',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.07.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071408077717055ee42e03392',null,'修改成功，角色信息的Id为1610071338309969218c88f506d50',null,'角色','::1',null,null,to_timestamp('07-10月-16 02.08.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007141250677095223e2129df8',null,'删除成功，信息的Id为,16081914062796767649eb3fc2292',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.12.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071413023967501ce668ae832',null,'修改成功，角色信息的Id为160930142756938631880581c7dd6',null,'角色','::1',null,null,to_timestamp('07-10月-16 02.13.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071413097256537f505538f88',null,'删除失败，信息的Id为160930142756938631880581c7dd6,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.13.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007141320914350400a06cd9d9',null,'删除成功，信息的Id为',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.13.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071413270715893199ff48451',null,'删除成功，信息的Id为160930142756938631880581c7dd6',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.13.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071416101790687a561edfe7e',null,'修改成功，菜单信息的Id为1608191339530672154beaad57c90',null,'菜单','::1',null,null,to_timestamp('07-10月-16 02.16.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071416202895156e23cbfa969',null,'删除失败，信息的Id为1608191339530672154beaad57c90,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.16.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100714164243266527f96c80f24',null,'修改成功，菜单信息的Id为1608191339530672154beaad57c90',null,'菜单','::1',null,null,to_timestamp('07-10月-16 02.16.42.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071417132639259ba86b7c110',null,'修改成功，菜单信息的Id为1608191342404587427b03ac55ba5',null,'菜单','::1',null,null,to_timestamp('07-10月-16 02.17.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007141729172168758a2a6134e',null,'删除失败，信息的Id为1608191342404587427b03ac55ba5,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.17.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071417392198171325ffd1b37',null,'修改成功，菜单信息的Id为1608191342404587427b03ac55ba5',null,'菜单','::1',null,null,to_timestamp('07-10月-16 02.17.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071417512995133280d01ce22',null,'删除失败，信息的Id为1608191342404587427b03ac55ba5,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.17.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100714181480201384601f54b44',null,'修改成功，菜单信息的Id为1608191342404587427b03ac55ba5',null,'菜单','::1',null,null,to_timestamp('07-10月-16 02.18.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071442515237858fc8a6fd47d',null,'修改成功，角色信息的Id为16093014122640642007f1b957f5b',null,'角色','::1',null,null,to_timestamp('07-10月-16 02.42.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071443074782409b23bd9426a',null,'删除成功，信息的Id为',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.43.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071443199486948b3fd3a1630',null,'删除成功，信息的Id为16093014122640642007f1b957f5b',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.43.19.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071444032186868bab8dc4b5c',null,'修改成功，角色信息的Id为16093014120104682324367e77d6f',null,'角色','::1',null,null,to_timestamp('07-10月-16 02.44.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100714442576804649dc4afd1f5',null,'删除成功，信息的Id为',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.44.25.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007144436159873048f223249a',null,'删除成功，信息的Id为16093014120104682324367e77d6f',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.44.36.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071445156793574887c8a03bf',null,'修改成功，角色信息的Id为16093014113842163965344074d88',null,'角色','::1',null,null,to_timestamp('07-10月-16 02.45.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071445368066064f45bced6fd',null,'删除成功，信息的Id为',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.45.36.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071445524488900e92b3d7c2c',null,'删除成功，信息的Id为16093014113842163965344074d88',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.45.52.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100620262902176097fc85a9849',null,'修改成功，人员信息的Id为16100620223968906945486fbaf4b',null,'人员','::1',null,null,to_timestamp('06-10月-16 08.26.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062026414760767ed456488c7',null,'修改成功，人员信息的Id为161006202442920910602651a284b',null,'人员','::1',null,null,to_timestamp('06-10月-16 08.26.41.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062026530243836aae75f19a5',null,'修改成功，人员信息的Id为16100620250938804046a6b559728',null,'人员','::1',null,null,to_timestamp('06-10月-16 08.26.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100620335640437711d0440db8c',null,'创建成功，角色的信息的Id为16100620335551365628974e01056',null,'角色','::1',null,null,to_timestamp('06-10月-16 08.33.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062036383906657b061e767b1',null,'修改成功，角色信息的Id为16100620335551365628974e01056',null,'角色','::1',null,null,to_timestamp('06-10月-16 08.36.38.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100620370533068285a91c8513e',null,'修改成功，人员信息的Id为161006202442920910602651a284b',null,'人员','::1',null,null,to_timestamp('06-10月-16 08.37.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062037289425456d11967fc7b',null,'修改成功，角色信息的Id为16100620335551365628974e01056',null,'角色','::1',null,null,to_timestamp('06-10月-16 08.37.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062038049620289a3cc4ae2a3',null,'创建成功，角色的信息的Id为1610062038048682574d5651a9b77',null,'角色','::1',null,null,to_timestamp('06-10月-16 08.38.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062038261674035a8d3305e3f',null,'删除成功，信息的Id为,1608191358228190950aa767add41,16081914002675292042aa9b17ddd,16081914011452419777e5f6fe314,1608191402183421645a13946c5cc',null,'消息','::1',null,null,to_timestamp('06-10月-16 08.38.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062040294246501b298517c86',null,'创建成功，角色的信息的Id为1610062040263458406b8e87a02a4',null,'角色','::1',null,null,to_timestamp('06-10月-16 08.40.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062041025687789a89e22e687',null,'删除成功，信息的Id为,1608191358228190950aa767add41,16081914002675292042aa9b17ddd,16081914011452419777e5f6fe314,1608191402183421645a13946c5cc',null,'消息','::1',null,null,to_timestamp('06-10月-16 08.41.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062345449191037a1ef3aa531',null,'创建成功，方案的信息的Id为1610062345445148129e8d22ff557',null,'方案','::1',null,null,to_timestamp('06-10月-16 11.45.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062358540823137b4527a0e23',null,'创建成功，检定项目模板的Id为16100623585335377789e96fce39d',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 11.58.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100700300871273896e36f08cd0',null,'创建成功，检定项目模板的Id为16100700300683340327db2bda529',null,'检定项目模板','127.0.0.1',null,null,to_timestamp('07-10月-16 12.30.08.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610070036492313160e481b2ff37',null,'创建成功，检定项目模板的Id为16100700364573068466c0fe46bfc',null,'检定项目模板','127.0.0.1',null,null,to_timestamp('07-10月-16 12.36.49.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610070053263941916f8ef67debb',null,'创建成功，检定项目模板的Id为1610070053248438120b12108befd',null,'检定项目模板','127.0.0.1',null,null,to_timestamp('07-10月-16 12.53.26.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610070205039278712985bf8c57a',null,'创建成功，检定项目模板的Id为16100702045969486560d04fa6514',null,'检定项目模板','::1',null,null,to_timestamp('07-10月-16 02.05.03.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071040134690722497504394e',null,'创建成功，委托单信息的信息的Id为1610071040098124295c46f4e94a0',null,'委托单信息','::1',null,null,to_timestamp('07-10月-16 10.40.13.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100711090275053649ef3afd3a4',null,'创建成功，委托单信息的信息的Id为161007110902547389894c5f69d90',null,'委托单信息','::1',null,null,to_timestamp('07-10月-16 11.09.02.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071116206038583cf9dee48fb',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('07-10月-16 11.16.20.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071116214320670d5312d8bfc',null,'修改成功，器具明细信息信息的Id为161007104009812429558b0e52553',null,'器具领取所在实验室修改','::1',null,null,to_timestamp('07-10月-16 11.16.21.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071116296985607a72899153a',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('07-10月-16 11.16.29.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007111629979559922db429c28',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('07-10月-16 11.16.29.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071116301048663548b96b78e',null,'修改成功，器具明细信息信息的Id为1610071104184587456b67c4ae5ff',null,'器具领取所在实验室修改','::1',null,null,to_timestamp('07-10月-16 11.16.30.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007111638293241768146d0969',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('07-10月-16 11.16.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100711163840261634dddeda729',null,'修改成功，器具明细信息信息的Id为1610071052389076610ff7f5d23fe',null,'器具领取所在实验室修改','::1',null,null,to_timestamp('07-10月-16 11.16.38.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100711292807677710dcd4163b7',null,'修改成功，预备方案信息的Id为16100711252905031918c2190ab81',null,'预备方案','::1',null,null,to_timestamp('07-10月-16 11.29.28.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007112948378019411f225bd02',null,'修改成功，预备方案信息的Id为16100711252905031918c2190ab81',null,'预备方案','::1',null,null,to_timestamp('07-10月-16 11.29.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071346579759017fe5f0926b0',null,'删除成功，信息的Id为',null,'消息','::1',null,null,to_timestamp('07-10月-16 01.46.57.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007134706758144875d5d32dee',null,'删除成功，信息的Id为1610062042490172434d04804604e',null,'消息','::1',null,null,to_timestamp('07-10月-16 01.47.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007140938016006232fbb861f6',null,'创建成功，人员的信息的Id为1610071409366717700c460aabdd3',null,'人员','::1',null,null,to_timestamp('07-10月-16 02.09.38.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071447477896054177a20c8dd',null,'修改成功，角色信息的Id为1609301015539953521352a053cf0',null,'角色','::1',null,null,to_timestamp('07-10月-16 02.47.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100714480832302642ad87a267a',null,'删除成功，信息的Id为1609301015539953521352a053cf0',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.48.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007144854702956721356dde5a',null,'修改成功，角色信息的Id为160930101532605726856cbadcc53',null,'角色','::1',null,null,to_timestamp('07-10月-16 02.48.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071450458550949e3c4405b5f',null,'删除成功，信息的Id为16092712304483715443e58a02036',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.50.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071450569187301e535fdf898',null,'修改成功，角色信息的Id为1609261817066866686947f415827',null,'角色','::1',null,null,to_timestamp('07-10月-16 02.50.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071451112329085cb77685098',null,'删除成功，信息的Id为1609261817066866686947f415827',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.51.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062035564486881e413536670',null,'删除成功，信息的Id为,1608191403006629468a2301f6206,16081914035251344912f2acc3fee',null,'消息','::1',null,null,to_timestamp('06-10月-16 08.35.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100620414858930071d3eb84255',null,'删除成功，信息的Id为,1608191358228190950aa767add41,16081914002675292042aa9b17ddd,16081914011452419777e5f6fe314,1608191402183421645a13946c5cc,16081914163689923757d9ee6d9b8,1608191417005021630d1c1e08752,16081914174687381253046482799',null,'消息','::1',null,null,to_timestamp('06-10月-16 08.41.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161006204224077427738dbf0a370',null,'删除成功，信息的Id为,1608191358228190950aa767add41,16081914002675292042aa9b17ddd,16081914011452419777e5f6fe314,1608191402183421645a13946c5cc,16081914163689923757d9ee6d9b8,1608191417005021630d1c1e08752,16081914174687381253046482799',null,'消息','::1',null,null,to_timestamp('06-10月-16 08.42.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062042497829911b20b6ad334',null,'创建成功，角色的信息的Id为1610062042490172434d04804604e',null,'角色','::1',null,null,to_timestamp('06-10月-16 08.42.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062107375087794dc7c4de3f1',null,'创建成功，单位的信息的Id为16100621073457134705c5bce8688',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.07.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062107461037722a9115be4bb',null,'创建成功，单位的信息的Id为1610062107444313816184fdabaab',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.07.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062107512758604c7867a2c90',null,'创建成功，单位的信息的Id为16100621075122899714e9edcfbc2',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.07.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062121550077801ba4db02f62',null,'创建成功，检定项目模板的Id为16100621215390698606e20e78c3c',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 09.21.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161006212353302576180a02a237f',null,'创建成功，单位的信息的Id为1610062123504894791d12c17eb6a',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.23.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062123590063314ea0072309d',null,'创建成功，单位的信息的Id为1610062123589590938012d251b03',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.23.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100621240522571522cddccaebb',null,'创建成功，单位的信息的Id为16100621240350648657feadd7236',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.24.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062124102572740962a1c92f3',null,'创建成功，单位的信息的Id为16100621240961647433d4b592a91',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.24.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161006212414492028437748a3a58',null,'创建成功，单位的信息的Id为1610062124144451143235aee898e',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.24.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062124186022215c8b4f6d28a',null,'创建成功，单位的信息的Id为1610062124185705500b8b2072516',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.24.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062124232120111cbb96884df',null,'创建成功，单位的信息的Id为1610062124227272458f74c8a4b4a',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.24.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062124274310006019689374e',null,'创建成功，单位的信息的Id为1610062124273839867cc35783ede',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.24.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062124322910724c99e44ce8e',null,'创建成功，单位的信息的Id为1610062124318375861a5eb792806',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.24.32.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062148063244129f728ae3426',null,'创建成功，检定项目模板的Id为161006214805530672637236e8aaf',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 09.48.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161006220019912447245fde3e494',null,'创建成功，检定项目模板的Id为16100622000971630882ca5ef99c4',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 10.00.19.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062218075999498b364a36ee3',null,'创建成功，方案的信息的Id为161006221806920472042ebaf4215',null,'方案','::1',null,null,to_timestamp('06-10月-16 10.18.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062219001731558b37aa034d2',null,'创建成功，检定项目模板的Id为16100622185474667680abff9d533',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 10.19.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100622200163342627519ec1195',null,'创建成功，方案的信息的Id为16100622200149266805283e3e18f',null,'方案','::1',null,null,to_timestamp('06-10月-16 10.20.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062220213626340a2030354bc',null,'创建成功，检定项目模板的Id为1610062220196916247a652d8f7dd',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 10.20.21.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161006222105466921505eab02437',null,'创建成功，检定项目模板的Id为161006222104857914304a5124025',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 10.21.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062223037462448887757b12a',null,'创建成功，方案的信息的Id为1610062223035501027eb12ccef1f',null,'方案','::1',null,null,to_timestamp('06-10月-16 10.23.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062226483440315728059516c',null,'创建成功，方案的信息的Id为16100622264625455639819d76634',null,'方案','::1',null,null,to_timestamp('06-10月-16 10.26.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062227217240733fc105da601',null,'创建成功，检定项目模板的Id为16100622272124672939babae4711',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 10.27.21.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100622303576655805b942a0dd7',null,'创建成功，检定项目模板的Id为16100622303465677101a09c36007',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 10.30.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100622323199600399b3eae0402',null,'创建成功，方案的信息的Id为1610062232317568355ffdf022835',null,'方案','::1',null,null,to_timestamp('06-10月-16 10.32.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062233455901246b3dc05a55d',null,'创建成功，检定项目模板的Id为161006223343047321068721195fa',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 10.33.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062234263414805680bb8e8c8',null,'创建成功，检定项目模板的Id为1610062234256870167261a6150fb',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 10.34.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062327453276819261484c391',null,'创建成功，方案的信息的Id为161006232745109526523730d0a3c',null,'方案','::1',null,null,to_timestamp('06-10月-16 11.27.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062328352950041c296ccf8fe',null,'创建成功，检定项目模板的Id为1610062328335327538e29c9aaac7',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 11.28.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062330261927968f053f32029',null,'创建成功，检定项目模板的Id为1610062330216830825504a170687',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 11.30.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100622121282677668c5aeb94e6',null,'创建成功，检定项目模板的Id为1610062212096993462736a32dd33',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 10.12.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100622130085956865252b96cfb',null,'创建成功，检定项目模板的Id为16100622125977991869bc4b473af',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 10.13.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100623581508260586a3c0ee4a5',null,'创建成功，方案的信息的Id为16100623581154998339312002eae',null,'方案','::1',null,null,to_timestamp('06-10月-16 11.58.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100700153913290356f0649c39c',null,'创建成功，预备方案检测项的Id为161007001535234135768f83cd073',null,'预备方案检测项','::1',null,null,to_timestamp('07-10月-16 12.15.39.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100700465130682935db3d22237',null,'创建成功，检定项目模板的Id为1610070046472514305e2d34b59fa',null,'检定项目模板','127.0.0.1',null,null,to_timestamp('07-10月-16 12.46.51.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100700474776379527af6885214',null,'创建成功，检定项目模板的Id为1610070047449275563d0c4898e99',null,'检定项目模板','127.0.0.1',null,null,to_timestamp('07-10月-16 12.47.47.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100701084451474014ba220a0a5',null,'创建成功，检定项目模板的Id为161007010841967798859988bf932',null,'检定项目模板','127.0.0.1',null,null,to_timestamp('07-10月-16 01.08.44.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007011043925313276062ccc06',null,'创建成功，方案的信息的Id为161007011042631394904e357b00e',null,'方案','127.0.0.1',null,null,to_timestamp('07-10月-16 01.10.43.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007014433022162838d7162364',null,'修改成功，检定项目模板的Id为1609301400577124277db6c732e23',null,'检定项目模板','::1',null,null,to_timestamp('07-10月-16 01.44.33.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100701454856564380781508526',null,'修改成功，检定项目模板的Id为1609301400577124277db6c732e23',null,'检定项目模板','::1',null,null,to_timestamp('07-10月-16 01.45.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100701560753374947eeccd02a5',null,'修改成功，检定项目模板的Id为1609301400577124277db6c732e23',null,'检定项目模板','::1',null,null,to_timestamp('07-10月-16 01.56.07.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007020339554273178a3aa623e',null,'创建成功，检定项目模板的Id为1610070203387176646cbb15f1075',null,'检定项目模板','::1',null,null,to_timestamp('07-10月-16 02.03.39.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007020424371239625c271b8d0',null,'创建成功，检定项目模板的Id为16100702042302628327e6b441009',null,'检定项目模板','::1',null,null,to_timestamp('07-10月-16 02.04.24.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007113416406296350524289bb',null,'创建成功，预备方案的信息的Id为16100711341518741395e3e4156b6',null,'预备方案','::1',null,null,to_timestamp('07-10月-16 11.34.16.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071350401960842952a7d19a6',null,'删除成功，信息的Id为',null,'消息','::1',null,null,to_timestamp('07-10月-16 01.50.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100713505187460306d9042c30f',null,'删除失败，信息的Id为1610062040263458406b8e87a02a4,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 01.50.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071351069231102232648b739',null,'修改成功，角色信息的Id为1610062040263458406b8e87a02a4',null,'角色','::1',null,null,to_timestamp('07-10月-16 01.51.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071351158927811b6f5cf2d6b',null,'删除成功，信息的Id为1610062040263458406b8e87a02a4',null,'消息','::1',null,null,to_timestamp('07-10月-16 01.51.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071351551809631d9bc6ebbd7',null,'删除成功，信息的Id为',null,'消息','::1',null,null,to_timestamp('07-10月-16 01.51.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100713521837067231d1a1667e0',null,'修改成功，角色信息的Id为1610062038048682574d5651a9b77',null,'角色','::1',null,null,to_timestamp('07-10月-16 01.52.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007140734827205415c9aadfa1',null,'删除成功，信息的Id为',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.07.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007141017285798976781439eb',null,'删除失败，信息的Id为16093014092428789466a2810fdd6,1609302115257697485319027a0dc,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.10.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071448020564277f85197ba28',null,'删除成功，信息的Id为',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.48.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007144909813647699d6aabe95',null,'删除成功，信息的Id为',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.49.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071449247683254cebdbe91a2',null,'删除成功，信息的Id为160930101532605726856cbadcc53',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.49.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071450142114092af3fc3ace4',null,'修改成功，角色信息的Id为16092712304483715443e58a02036',null,'角色','::1',null,null,to_timestamp('07-10月-16 02.50.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100714524055474090ec9ebe336',null,'修改成功，角色信息的Id为1609261519267114240584e05063a',null,'角色','::1',null,null,to_timestamp('07-10月-16 02.52.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007145255619112549003f9198',null,'删除成功，信息的Id为',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.52.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100714530247894704759613cb6',null,'删除成功，信息的Id为1609261519267114240584e05063a',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.53.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100714532787227251051dd3077',null,'修改成功，角色信息的Id为16092615134474794327cd2685faf',null,'角色','::1',null,null,to_timestamp('07-10月-16 02.53.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071453400766948df928ec276',null,'删除成功，信息的Id为',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.53.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007145348874830367819f430d',null,'删除成功，信息的Id为16092615134474794327cd2685faf',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.53.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100714540143867398f919ec50a',null,'修改成功，角色信息的Id为16091209264898430321126af2cdc',null,'角色','::1',null,null,to_timestamp('07-10月-16 02.54.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100714542512834965c1049ac11',null,'删除成功，信息的Id为',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.54.25.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100620211392925833ba7155afc',null,'创建成功，人员的信息的Id为1610062021054752353f08c9dbd54',null,'人员','::1',null,null,to_timestamp('06-10月-16 08.21.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161006202134322386380862a8d7e',null,'创建成功，人员的信息的Id为1610062021246647720baf0427d12',null,'人员','::1',null,null,to_timestamp('06-10月-16 08.21.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161006202154480770429e03cf2d1',null,'创建成功，人员的信息的Id为1610062021446826041a7cfe8f94e',null,'人员','::1',null,null,to_timestamp('06-10月-16 08.21.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100620220176349299e9876574a',null,'创建成功，人员的信息的Id为1610062021575433018d5dae9ff52',null,'人员','::1',null,null,to_timestamp('06-10月-16 08.22.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062022313916581e1fe1dac62',null,'创建成功，人员的信息的Id为161006202230219312274f90e0e9e',null,'人员','::1',null,null,to_timestamp('06-10月-16 08.22.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062022402519620a4fd2fa4fd',null,'创建成功，人员的信息的Id为16100620223968906945486fbaf4b',null,'人员','::1',null,null,to_timestamp('06-10月-16 08.22.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062043238494056310d25f396',null,'删除成功，信息的Id为,1608191349513153481556dbb61e8,16081913533564460749dc9ddce10,1608191356215411265712c6a6eb6,160819140421791166551bb14064b,1608191404571488364aba42741f9,16081914062796767649eb3fc2292,1608191406590543692084183b077,160819140857596716475bac74030,1608191411454365613ea3bd77b57,160819141815560386373e145af6f',null,'消息','::1',null,null,to_timestamp('06-10月-16 08.43.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062044448250591f53a09c5f7',null,'修改成功，人员信息的Id为16100620250938804046a6b559728',null,'人员','::1',null,null,to_timestamp('06-10月-16 08.44.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062045446438300665e217592',null,'修改成功，人员信息的Id为16100620250938804046a6b559728',null,'人员','::1',null,null,to_timestamp('06-10月-16 08.45.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100620460581827136f79b98457',null,'修改成功，人员信息的Id为161006202442920910602651a284b',null,'人员','::1',null,null,to_timestamp('06-10月-16 08.46.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062046246689077930c7a7692',null,'修改成功，人员信息的Id为16100620223968906945486fbaf4b',null,'人员','::1',null,null,to_timestamp('06-10月-16 08.46.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161006204647796557835dbf7e350',null,'修改成功，人员信息的Id为1610062021054752353f08c9dbd54',null,'人员','::1',null,null,to_timestamp('06-10月-16 08.46.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062108432504878a7f472b36b',null,'创建成功，单位的信息的Id为1610062108419531171a9b0085391',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.08.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062108536422052b98bcc423e',null,'创建成功，单位的信息的Id为16100621084945391434793c35836',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.08.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161006210901111742718b5a26838',null,'创建成功，单位的信息的Id为1610062108595018571729e62d25d',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.09.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062109063463346d9d1fa4113',null,'创建成功，单位的信息的Id为161006210906299453869fa2a8870',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.09.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062109118004183c1230854ce',null,'创建成功，单位的信息的Id为16100621091170628119a0ffdb167',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.09.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062109148156246968e318de6',null,'创建成功，检定项目模板的Id为161006210906697577177f05eeb49',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 09.09.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062109166599729b8a34f3492',null,'创建成功，单位的信息的Id为1610062109165036645811f885e44',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.09.16.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062109218324870afb09c1142',null,'创建成功，单位的信息的Id为1610062109218011018bf592a5274',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.09.21.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100621092650472652ca9b8595d',null,'创建成功，单位的信息的Id为1610062109264578781ffaaaa5e21',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.09.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062109313337403e7ff74d9ec',null,'创建成功，单位的信息的Id为1610062109312864823394445c1ea',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.09.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100621094574114410aa1d5be12',null,'创建成功，单位的信息的Id为1610062109456630479bc32a8b934',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.09.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062109533516820430ef534a6',null,'创建成功，单位的信息的Id为1610062109533201079d18b6f2c1f',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.09.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100621100482155969f82755178',null,'创建成功，单位的信息的Id为161006211004790074677f386818e',null,'单位','::1',null,null,to_timestamp('06-10月-16 09.10.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062237509800299147e5ef57a',null,'创建成功，检定项目模板的Id为1610062237498162036efee9946d2',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 10.37.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100622390399605951672c07530',null,'创建成功，方案的信息的Id为1610062239038169327e207e23d05',null,'方案','::1',null,null,to_timestamp('06-10月-16 10.39.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161006225748557052278d4077d4f',null,'创建成功，方案的信息的Id为1610062257481657748d532c8835e',null,'方案','::1',null,null,to_timestamp('06-10月-16 10.57.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100622582843010982f29ca7c05',null,'创建成功，检定项目模板的Id为1610062258273973784fb3df5cb14',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 10.58.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100623001124303483decc1a046',null,'创建成功，方案的信息的Id为16100623000799672339b7fba15c1',null,'方案','::1',null,null,to_timestamp('06-10月-16 11.00.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161006230101224678285f1d7f9ec',null,'修改成功，方案信息的Id为16100623000799672339b7fba15c1',null,'方案','::1',null,null,to_timestamp('06-10月-16 11.01.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062323462538840103bc78185',null,'创建成功，方案的信息的Id为16100623234392621170773cd896a',null,'方案','::1',null,null,to_timestamp('06-10月-16 11.23.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100623371203505780c1a14fe03',null,'创建成功，方案的信息的Id为16100623370899189336b6b97cb4e',null,'方案','::1',null,null,to_timestamp('06-10月-16 11.37.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100623374632542719f595e48c7',null,'创建成功，检定项目模板的Id为161006233745639942386e3491143',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 11.37.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100623403288340987d851cb073',null,'创建成功，预备方案检测项的Id为1610062340298722727455f016b20',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 11.40.32.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100616044262476271ee735ce73',null,'创建成功，检定项目模板的Id为1610061604412377789d68a117b44',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 04.04.42.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100616393320378698282b0e3a1',null,'创建成功，预备方案检测项的Id为1610061639295926220c030182bc3',null,'预备方案检测项','::1',null,null,to_timestamp('06-10月-16 04.39.33.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100621443769048824a5ae5755a',null,'创建成功，检定项目模板的Id为1610062144357394847914f4de209',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 09.44.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062225125475760e760581fa4',null,'创建成功，方案的信息的Id为16100622251232942069e6bc3387b',null,'方案','::1',null,null,to_timestamp('06-10月-16 10.25.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062256454300828f53f226e4e',null,'创建失败，检定项目模板，An error occurred while updating the entries. See the inner exception for details.',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 10.56.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062342482235240e265300d86',null,'创建成功，检定项目模板的Id为161006234244163644235987b17c4',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 11.42.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100623503289903160301cefbcb',null,'创建失败，检定项目模板，An error occurred while updating the entries. See the inner exception for details.',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 11.50.32.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610070000230491844ee25ab2949',null,'创建成功，预备方案检测项的Id为16100700002224861599b006dbf65',null,'预备方案检测项','::1',null,null,to_timestamp('07-10月-16 12.00.23.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610070011448393169c9fc7d0f61',null,'创建成功，预备方案检测项的Id为161007001140565266968652359ec',null,'预备方案检测项','::1',null,null,to_timestamp('07-10月-16 12.11.44.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100700170781629365de52058bd',null,'创建成功，方案的信息的Id为1610070017075761184a67b30565e',null,'方案','127.0.0.1',null,null,to_timestamp('07-10月-16 12.17.07.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610070019133180051e3d118b091',null,'创建成功，方案的信息的Id为16100700191198005048bd8de586c',null,'方案','127.0.0.1',null,null,to_timestamp('07-10月-16 12.19.13.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610070030429477450a8414650d5',null,'创建成功，检定项目模板的Id为1610070030397959393eac77c8f2d',null,'检定项目模板','127.0.0.1',null,null,to_timestamp('07-10月-16 12.30.42.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610070030533191131700349a8a0',null,'创建成功，检定项目模板的Id为161007003052539556332d8a1c18d',null,'检定项目模板','127.0.0.1',null,null,to_timestamp('07-10月-16 12.30.53.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610070031052210640fa2924b278',null,'创建成功，检定项目模板的Id为1610070031036209274d7ef2143f3',null,'检定项目模板','127.0.0.1',null,null,to_timestamp('07-10月-16 12.31.05.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100700315897842789594a0e367',null,'创建成功，检定项目模板的Id为1610070031583574508b32320b14e',null,'检定项目模板','127.0.0.1',null,null,to_timestamp('07-10月-16 12.31.58.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007003407533494753c322889a',null,'创建成功，方案的信息的Id为1610070034071802424154135da7a',null,'方案','127.0.0.1',null,null,to_timestamp('07-10月-16 12.34.07.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100700432207878538a46bfd63c',null,'创建成功，检定项目模板的Id为161007004258505688962582b5c04',null,'检定项目模板','127.0.0.1',null,null,to_timestamp('07-10月-16 12.43.22.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610070055229875737b16482dae0',null,'创建成功，检定项目模板的Id为161007005521470799300b141c221',null,'检定项目模板','127.0.0.1',null,null,to_timestamp('07-10月-16 12.55.22.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100701112565824668bb6e5b97e',null,'创建成功，检定项目模板的Id为1610070111231344561f3cc7cb445',null,'检定项目模板','127.0.0.1',null,null,to_timestamp('07-10月-16 01.11.25.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007020301461552273dd31422e',null,'创建成功，方案的信息的Id为16100702025723755353249195bcb',null,'方案','::1',null,null,to_timestamp('07-10月-16 02.03.01.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100710411253816155d9ff472d6',null,'创建成功，委托单信息的信息的Id为1610071041123972028306932ee0e',null,'委托单信息','::1',null,null,to_timestamp('07-10月-16 10.41.12.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007105239767103078e2cdb56e',null,'创建成功，委托单信息的信息的Id为16100710523890766101bb1da71d8',null,'委托单信息','::1',null,null,to_timestamp('07-10月-16 10.52.39.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007105821878345669ed9486be',null,'创建成功，委托单信息的信息的Id为16100710581903395608d5ab8de78',null,'委托单信息','::1',null,null,to_timestamp('07-10月-16 10.58.21.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100710594879382395502bc3b46',null,'创建成功，委托单信息的信息的Id为16100710594769965647a52ee44b7',null,'委托单信息','::1',null,null,to_timestamp('07-10月-16 10.59.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100711041881815021fb384f4c3',null,'创建成功，委托单信息的信息的Id为1610071104184587456fff6ecfffc',null,'委托单信息','::1',null,null,to_timestamp('07-10月-16 11.04.18.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071134328455665e61b28612e',null,'修改成功，预备方案信息的Id为16100711341518741395e3e4156b6',null,'预备方案','::1',null,null,to_timestamp('07-10月-16 11.34.32.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071134485190826753a2a107f',null,'修改成功，预备方案信息的Id为16100711341518741395e3e4156b6',null,'预备方案','::1',null,null,to_timestamp('07-10月-16 11.34.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007133832059543737e7e476bd',null,'创建成功，角色的信息的Id为1610071338309969218c88f506d50',null,'角色','::1',null,null,to_timestamp('07-10月-16 01.38.32.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007133944098671634deaa1622',null,'删除成功，信息的Id为,1307311605187265267d33f281da4,1307311605187265267d33f281d12,1307311605187265267d33f281da0,1307311605187265267d33f281da3,1307311605187265267d33f281d11,1307311605187265267d33f281da1,1307311605187265267d33f281da9,1307311605187265267d33f281da8,1310181133541969540a9ad916764',null,'消息','::1',null,null,to_timestamp('07-10月-16 01.39.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071339588968613ebd308434c',null,'删除失败，信息的Id为1610062042490172434d04804604e,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 01.39.58.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071340062413851241a4bf086',null,'删除失败，信息的Id为1610062042490172434d04804604e,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 01.40.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062022595509387840b4b6522',null,'删除成功，信息的Id为161006202230219312274f90e0e9e',null,'消息','::1',null,null,to_timestamp('06-10月-16 08.22.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100620234197716572da3d8b3f9',null,'删除成功，信息的Id为1610062021575433018d5dae9ff52',null,'消息','::1',null,null,to_timestamp('06-10月-16 08.23.41.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062023527909215d36699e38c',null,'删除成功，信息的Id为1610062021446826041a7cfe8f94e',null,'消息','::1',null,null,to_timestamp('06-10月-16 08.23.52.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062024019481443fdd57dbc48',null,'删除成功，信息的Id为1610062021246647720baf0427d12',null,'消息','::1',null,null,to_timestamp('06-10月-16 08.24.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062024441087241a3cd2fbe09',null,'创建成功，人员的信息的Id为161006202442920910602651a284b',null,'人员','::1',null,null,to_timestamp('06-10月-16 08.24.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062025109197752f461d68a60',null,'创建成功，人员的信息的Id为16100620250938804046a6b559728',null,'人员','::1',null,null,to_timestamp('06-10月-16 08.25.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161006220424278258077f2c8fba3',null,'创建成功，检定项目模板的Id为1610062202062193751ffd065edcc',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 10.04.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610062204299015509b5be1a5697',null,'创建成功，检定项目模板的Id为1610062204292296552a5a63d5f54',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 10.04.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161006220934761763505f69ed5d3',null,'创建成功，检定项目模板的Id为16100622093028814663485cac55d',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 10.09.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100623022899571143dc2649c78',null,'创建成功，检定项目模板的Id为1610062302286654732f7e8ce9627',null,'检定项目模板','::1',null,null,to_timestamp('06-10月-16 11.02.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007000230131813251135a9c50',null,'创建成功，预备方案检测项的Id为16100700022149201493c2ab44213',null,'预备方案检测项','::1',null,null,to_timestamp('07-10月-16 12.02.30.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610070104146092608deb3dfb141',null,'创建成功，检定项目模板的Id为16100701041157639045edb76da27',null,'检定项目模板','127.0.0.1',null,null,to_timestamp('07-10月-16 01.04.14.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610070148405853972eeaad5f513',null,'修改成功，检定项目模板的Id为1609301400577124277db6c732e23',null,'检定项目模板','::1',null,null,to_timestamp('07-10月-16 01.48.40.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071125287690435a9b7ee7e0e',null,'创建成功，预备方案的信息的Id为161007112524971762157431a269c',null,'预备方案','::1',null,null,to_timestamp('07-10月-16 11.25.28.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071125292847207e388165e21',null,'创建成功，预备方案的信息的Id为16100711252905031918c2190ab81',null,'预备方案','::1',null,null,to_timestamp('07-10月-16 11.25.29.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'数表三实验员');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071341111079887b23b6ca761',null,'修改成功，角色信息的Id为1610062042490172434d04804604e',null,'角色','::1',null,null,to_timestamp('07-10月-16 01.41.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100713411815527402ad10d1d99',null,'删除失败，信息的Id为1610062042490172434d04804604e,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 01.41.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100713431434889318a79c54d06',null,'删除失败，信息的Id为1610062042490172434d04804604e,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 01.43.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100713445226556131797737bd1',null,'修改成功，角色信息的Id为1610071338309969218c88f506d50',null,'角色','::1',null,null,to_timestamp('07-10月-16 01.44.52.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071345431555953b394d4b4fe',null,'删除成功，信息的Id为,1307311605187265267d33f281da4,1307311605187265267d33f281da3,1307311605187265267d33f281d11,1307311605187265267d33f281da1,1307311605187265267d33f281da9,1307311605187265267d33f281da8',null,'消息','::1',null,null,to_timestamp('07-10月-16 01.45.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100713455640700084a0f070cd0',null,'删除成功，信息的Id为,1307311605187265267d33f281da4,1307311605187265267d33f281da3,1307311605187265267d33f281d11,1307311605187265267d33f281da1,1307311605187265267d33f281da9,1307311605187265267d33f281da8,1307311605187265267d33f281da8^13101815543634748843f1d3c904c,1307311605187265267d33f281da8^131018155411503738459acd560d4,1307311605187265267d33f281da8^1310181134390713796477e27c097,1307311605187265267d33f281da8^1310181554235506134d5697ad13c',null,'消息','::1',null,null,to_timestamp('07-10月-16 01.45.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071346190187445e817b01481',null,'删除成功，信息的Id为,160819140421791166551bb14064b,1608191404571488364aba42741f9,16081914062796767649eb3fc2292,1608191406590543692084183b077,160819140857596716475bac74030,1608191411454365613ea3bd77b57',null,'消息','::1',null,null,to_timestamp('07-10月-16 01.46.19.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100713462908201151f084c383d',null,'删除失败，信息的Id为1610062042490172434d04804604e,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 01.46.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100713522607457094776c17da6',null,'删除成功，信息的Id为1610062038048682574d5651a9b77',null,'消息','::1',null,null,to_timestamp('07-10月-16 01.52.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071353554123636873512036a',null,'修改成功，角色信息的Id为1610071338309969218c88f506d50',null,'角色','::1',null,null,to_timestamp('07-10月-16 01.53.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081634084897558fa6f343882',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 04.34.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610092314298962857e302d949b6',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 11.14.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610092341523474449d1360072c5',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 11.41.52.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161009235147517787626b3e635ec',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 11.51.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100923544076428827d26c3ebcf',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 11.54.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610092355379069047004e413102',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 11.55.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610092357366493961493f9a9406',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 11.57.36.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161009235948278044647b4fb0aeb',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 11.59.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16101000091315760948169106e69',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('10-10月-16 12.09.13.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610100009233622986825a0a8891',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('10-10月-16 12.09.23.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161010000956054690149563599f9',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('10-10月-16 12.09.56.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16101000100481863218f164abf04',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('10-10月-16 12.10.04.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16101000104811639353a3974dd6b',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('10-10月-16 12.10.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16101000110238415243518886595',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('10-10月-16 12.11.02.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610100012279458815f7789e95b9',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('10-10月-16 12.12.27.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16101000123901135602ab4273d48',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('10-10月-16 12.12.39.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610100024283665013f7dcc3609f',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('10-10月-16 12.24.28.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610100024459814788f206fa664b',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('10-10月-16 12.24.45.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610100025482535656816b4401ca',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('10-10月-16 12.25.48.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16101008512677774737269eb1b4f',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('10-10月-16 08.51.26.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610100857463833270f36922e0a8',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('10-10月-16 08.57.46.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16101009032992878552aa1a1eb85',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('10-10月-16 09.03.29.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007160323488395148ee475ac0',null,'修改成功，菜单信息的Id为160819141422014916817e22ae673',null,'菜单','::1',null,null,to_timestamp('07-10月-16 04.03.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071605032330599cfb6c96b07',null,'修改成功，菜单信息的Id为16081914144101220138a7468240f',null,'菜单','::1',null,null,to_timestamp('07-10月-16 04.05.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100716052264168274982bc1ddf',null,'修改成功，菜单信息的Id为1608191415010703589320d279564',null,'菜单','::1',null,null,to_timestamp('07-10月-16 04.05.22.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007214540780499761fee71cd8',null,'修改成功，菜单信息的Id为1608191342404587427b03ac55ba5',null,'菜单','::1',null,null,to_timestamp('07-10月-16 09.45.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610072146591980071906d86f5ca',null,'修改成功，菜单信息的Id为1608191342404587427b03ac55ba5',null,'菜单','::1',null,null,to_timestamp('07-10月-16 09.46.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081200266577928e3f30d3027',null,'修改成功，菜单信息的Id为16081913533564460749dc9ddce10',null,'菜单','::1',null,null,to_timestamp('08-10月-16 12.00.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008120056313828328689c96f6',null,'修改成功，菜单信息的Id为16081913533564460749dc9ddce10',null,'菜单','::1',null,null,to_timestamp('08-10月-16 12.00.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812011740938842ed43c48ce',null,'修改成功，菜单信息的Id为16081913533564460749dc9ddce10',null,'菜单','::1',null,null,to_timestamp('08-10月-16 12.01.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008120134304547561bbc81f40',null,'修改成功，菜单信息的Id为1608191356215411265712c6a6eb6',null,'菜单','::1',null,null,to_timestamp('08-10月-16 12.01.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081202112856457f411a452ee',null,'修改成功，菜单信息的Id为16081914163689923757d9ee6d9b8',null,'菜单','::1',null,null,to_timestamp('08-10月-16 12.02.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812023232086451355678180',null,'修改成功，菜单信息的Id为1608191417005021630d1c1e08752',null,'菜单','::1',null,null,to_timestamp('08-10月-16 12.02.32.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812030119004857e651dd58a',null,'修改成功，菜单信息的Id为16081914174687381253046482799',null,'菜单','::1',null,null,to_timestamp('08-10月-16 12.03.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081203181080466867854ddbf',null,'修改成功，菜单信息的Id为160819141815560386373e145af6f',null,'菜单','::1',null,null,to_timestamp('08-10月-16 12.03.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008121528760088271ea40eb0e',null,'修改成功，器具退回的Id为1610071052389076610e0194daaef',null,'器具明细信息','::1',null,null,to_timestamp('08-10月-16 12.15.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812154009801709ea4c19ac5',null,'修改成功，器具退回待入库的Id为16100711090254738980e623ee4e5',null,'器具明细信息','::1',null,null,to_timestamp('08-10月-16 12.15.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081221060463289b5c80c3baa',null,'修改成功，预备方案信息的Id为16100711252905031918c2190ab81',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.21.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008122202918155766b86c3040',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('08-10月-16 12.22.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812220299744068613c03b72',null,'修改成功，器具明细信息信息的Id为1610071052389076610ff7f5d23fe',null,'器具领取所在实验室修改','::1',null,null,to_timestamp('08-10月-16 12.22.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081222380793008a5103909f1',null,'修改成功，预备方案信息的Id为16100711341518741395e3e4156b6',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.22.38.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812225383433113ed552ab62',null,'修改成功，预备方案信息的Id为16100711341518741395e3e4156b6',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.22.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008124324893661785dbecc828',null,'创建成功，预备方案的信息的Id为16100812432401201265d23f6010b',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.43.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008124338030858430735ce127',null,'修改成功，预备方案信息的Id为16100812432401201265d23f6010b',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.43.38.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812441102973975a4ac8d95f',null,'修改成功，预备方案信息的Id为161008124026720265384329863f8',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.44.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812451585610484496a83292',null,'修改成功，预备方案信息的Id为16100812432401201265d23f6010b',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.45.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008124712691020302480ebc4a',null,'修改成功，预备方案信息的Id为16100812432401201265d23f6010b',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.47.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试报告批准');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081311501319886df4dc21905',null,'修改成功，器具退回待入库的Id为16100813110920266559af2b633b2',null,'器具明细信息','::1',null,null,to_timestamp('08-10月-16 01.11.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610092230332868623fae7050491',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 10.30.33.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610092337307476225db980545f2',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 11.37.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610092339043085299bb65b50db7',null,'修改成功，方案信息的Id为16100702025723755353249195bcb',null,'方案','::1',null,null,to_timestamp('09-10月-16 11.39.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100714565570687829153f7303c',null,'删除成功，信息的Id为,1307311605187265267d33f281da4,1307311605187265267d33f281d12,1307311605187265267d33f281da0,1307311605187265267d33f281da3,1307311605187265267d33f281d11,1307311605187265267d33f281da1,1307311605187265267d33f281da9,1307311605187265267d33f281da8,1307311605187265267d33f281da8^13101815543634748843f1d3c904c,1307311605187265267d33f281da8^131018155411503738459acd560d4,1307311605187265267d33f281da8^1310181134390713796477e27c097,1307311605187265267d33f281da8^1310181554235506134d5697ad13c',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.56.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071457107244197d4e441be12',null,'删除成功，信息的Id为,1307311605187265267d33f281da4,1307311605187265267d33f281d12,1307311605187265267d33f281da0,1307311605187265267d33f281da3,1307311605187265267d33f281d11,1307311605187265267d33f281da1,1307311605187265267d33f281da9,1307311605187265267d33f281da8,1307311605187265267d33f281da8^13101815543634748843f1d3c904c,1307311605187265267d33f281da8^131018155411503738459acd560d4,1307311605187265267d33f281da8^1310181134390713796477e27c097,1307311605187265267d33f281da8^1310181554235506134d5697ad13c,1310181133541969540a9ad916764',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.57.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100714574750957824221d1d679',null,'修改成功，角色信息的Id为1610071338309969218c88f506d50',null,'角色','::1',null,null,to_timestamp('07-10月-16 02.57.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071459449123219d7baa00f92',null,'删除成功，信息的Id为16091209264898430321126af2cdc',null,'消息','::1',null,null,to_timestamp('07-10月-16 02.59.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071501103904542205801558a',null,'修改成功，角色信息的Id为16090810271940531101c43e0a56a',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.01.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100715011917237734e83a79241',null,'删除成功，信息的Id为16090810271940531101c43e0a56a',null,'消息','::1',null,null,to_timestamp('07-10月-16 03.01.19.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071503392980660f6c369739b',null,'创建成功，角色的信息的Id为161007150338828921412135c5da2',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.03.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007150400909724868e6244b34',null,'删除成功，信息的Id为,1608191358228190950aa767add41,16081914002675292042aa9b17ddd',null,'消息','::1',null,null,to_timestamp('07-10月-16 03.04.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100715124661718352f809944a7',null,'创建成功，角色的信息的Id为161007151246523099749f5125912',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.12.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007151311635142801348cc6d4',null,'删除成功，信息的Id为,1608191403006629468a2301f6206,16081914035251344912f2acc3fee',null,'消息','::1',null,null,to_timestamp('07-10月-16 03.13.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071519526321228a6bb6711eb',null,'修改成功，角色信息的Id为1610071338309969218c88f506d50',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.19.52.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007152656922862307d9b35f4d',null,'删除成功，信息的Id为,1608191349513153481556dbb61e8,16081913533564460749dc9ddce10,1608191356215411265712c6a6eb6',null,'消息','::1',null,null,to_timestamp('07-10月-16 03.26.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071528239165933c84f66e88b',null,'删除成功，信息的Id为,160819140421791166551bb14064b,1608191404571488364aba42741f9',null,'消息','::1',null,null,to_timestamp('07-10月-16 03.28.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007152954660455244b886fb6c',null,'创建成功，角色的信息的Id为161007152954597771955a266ced5',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.29.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071530115374093a21a55099f',null,'修改成功，角色信息的Id为1610071528077739220caee6a98c8',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.30.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007153032570892302265c2e63',null,'修改成功，角色信息的Id为1610071523394599164096b43821f',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.30.32.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071530489006466abf00f51cb',null,'修改成功，角色信息的Id为161007150522326310539b09b317d',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.30.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007153102573801385e114b10c',null,'修改成功，角色信息的Id为161007150338828921412135c5da2',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.31.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007153112012595401ea3de30c',null,'修改成功，角色信息的Id为161007151246523099749f5125912',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.31.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100715313951516806d88bdbd0b',null,'删除成功，信息的Id为,160819140857596716475bac74030,1608191411454365613ea3bd77b57',null,'消息','::1',null,null,to_timestamp('07-10月-16 03.31.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007153257398771794902f6505',null,'创建成功，角色的信息的Id为16100715325732030562d1b15924b',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.32.57.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100715342392348956d0620afe3',null,'创建成功，角色的信息的Id为1610071534238139002a8fc000b9e',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.34.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100715400424099553b23260425',null,'修改成功，角色信息的Id为1610071534238139002a8fc000b9e',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.40.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071541058256626177564b7ea',null,'修改成功，角色信息的Id为1610071534238139002a8fc000b9e',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.41.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100715421822775091d85eee5f1',null,'创建成功，角色的信息的Id为161007154215977179594c9a3af7f',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.42.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100715423777645854c6e3f5ce5',null,'删除成功，信息的Id为,1608191415341245284ca3639d530,160819141815560386373e145af6f',null,'消息','::1',null,null,to_timestamp('07-10月-16 03.42.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071528086493533fca146c26b',null,'创建成功，角色的信息的Id为1610071528077739220caee6a98c8',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.28.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100715481545322200ff2114e75',null,'删除失败，信息的Id为160819141422014916817e22ae673,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 03.48.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071556382885654b9b3e16705',null,'创建成功，菜单的信息的Id为161007155633944342443e1c0bf29',null,'菜单','::1',null,null,to_timestamp('07-10月-16 03.56.38.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071558293003487efe155c386',null,'创建成功，菜单的信息的Id为16100715582787832006e380ba92b',null,'菜单','::1',null,null,to_timestamp('07-10月-16 03.58.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071559265096273a1d7feff08',null,'创建成功，菜单的信息的Id为1610071559218996837438d52a339',null,'菜单','::1',null,null,to_timestamp('07-10月-16 03.59.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100716001203001753fbe5af0a9',null,'创建成功，菜单的信息的Id为1610071600073889246e2ebc4b06d',null,'菜单','::1',null,null,to_timestamp('07-10月-16 04.00.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071600539096903da205ef4ba',null,'创建成功，菜单的信息的Id为1610071600511904197e5e6a56f60',null,'菜单','::1',null,null,to_timestamp('07-10月-16 04.00.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100716013733598308d5c39bf26',null,'创建成功，菜单的信息的Id为1610071601301633414058cfb6df7',null,'菜单','::1',null,null,to_timestamp('07-10月-16 04.01.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100716124754267228191039117',null,'修改成功，角色信息的Id为1610071545331856300470932463a',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.12.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071614510165007be1da1e60f',null,'删除成功，信息的Id为,16081914132048085249676d6f017,160819141422014916817e22ae673,16081914144101220138a7468240f,1608191415010703589320d279564',null,'消息','::1',null,null,to_timestamp('07-10月-16 04.14.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071615215037709d32aa57161',null,'删除成功，信息的Id为,161007155633944342443e1c0bf29,16100715582787832006e380ba92b,1610071559218996837438d52a339,1610071600073889246e2ebc4b06d,1610071600511904197e5e6a56f60,1610071601301633414058cfb6df7',null,'消息','::1',null,null,to_timestamp('07-10月-16 04.15.21.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071620123268946ba92746163',null,'删除成功，信息的Id为1609302115257697485319027a0dc',null,'消息','::1',null,null,to_timestamp('07-10月-16 04.20.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071634073018012f1bcea3078',null,'创建失败，委托单信息的信息，Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'委托单信息','::1',null,null,to_timestamp('07-10月-16 04.34.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'cssx');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100716480999826508ccb66df77',null,'修改成功，角色信息的Id为16100715325732030562d1b15924b',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.48.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007164834625544078669bfd8e',null,'修改成功，角色信息的Id为161007152954597771955a266ced5',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.48.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007164930022073812cfe555d8',null,'修改成功，角色信息的Id为1610071528077739220caee6a98c8',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.49.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100716500239868851e01d3b7fc',null,'修改成功，角色信息的Id为1610071534238139002a8fc000b9e',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.50.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007165459681867825a0392181',null,'修改成功，角色信息的Id为161007150522326310539b09b317d',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.54.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071655244034074419ddde278',null,'修改成功，角色信息的Id为1610071545331856300470932463a',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.55.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071655500781433e41facc68e',null,'修改成功，角色信息的Id为16100716143571765621684bd063e',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.55.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100720070774407273ac30d926a',null,'删除失败，信息的Id为1610071409366717700c460aabdd3,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 08.07.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610072047486264870df9ce3ed49',null,'修改成功，菜单信息的Id为16081914035251344912f2acc3fee',null,'菜单','::1',null,null,to_timestamp('07-10月-16 08.47.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610072135229427669ec75081920',null,'删除失败，信息的Id为13101815543634748843f1d3c904c,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 09.35.22.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610072136586650289266325afa3',null,'删除失败，信息的Id为1608191342404587427b03ac55ba5,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 09.36.58.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007213910615248210eec15b7c',null,'修改成功，菜单信息的Id为1608191342404587427b03ac55ba5',null,'菜单','::1',null,null,to_timestamp('07-10月-16 09.39.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100721393716974498d89301cd1',null,'删除失败，信息的Id为1608191342404587427b03ac55ba5,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 09.39.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610072348391723557093a344a5f',null,'修改成功，预备方案信息的Id为161007234131711800940ab485f00',null,'预备方案','::1',null,null,to_timestamp('07-10月-16 11.48.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081028149020008253018c179',null,'修改成功，器具退回的Id为16100711090254738980e623ee4e5',null,'器具明细信息','::1',null,null,to_timestamp('08-10月-16 10.28.14.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008104008207370101cca373e2',null,'创建失败，委托单信息的信息，Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'委托单信息','::1',null,null,to_timestamp('08-10月-16 10.40.08.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081203353762808792aea4ea9',null,'删除成功，信息的Id为1608191339530672154beaad57c90',null,'消息','::1',null,null,to_timestamp('08-10月-16 12.03.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081210083155764aa8fdaf9a6',null,'修改成功，人员信息的Id为1610071409366717700c460aabdd3',null,'人员','::1',null,null,to_timestamp('08-10月-16 12.10.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812172459826476fb81c7860',null,'修改成功，预备方案信息的Id为16100711252905031918c2190ab81',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.17.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008121739282581488c84b5309',null,'修改成功，预备方案信息的Id为16100711341518741395e3e4156b6',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.17.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081227271212008b13c320ec0',null,'修改成功，预备方案信息的Id为161007234131711800940ab485f00',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.27.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008122742270499125bf7f3b03',null,'修改成功，预备方案信息的Id为161007234131711800940ab485f00',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.27.42.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008123238304406234a29746e1',null,'修改成功，预备方案信息的Id为16100711341518741395e3e4156b6',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.32.38.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081233006765507c7fa45420d',null,'修改成功，预备方案信息的Id为161007234131711800940ab485f00',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.33.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081234558920177d3db2fa967',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('08-10月-16 12.34.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081234559593815406e7c5cf3',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('08-10月-16 12.34.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812345632924296f90d47767',null,'修改成功，器具明细信息信息的Id为1610071104184587456b67c4ae5ff',null,'器具领取所在实验室修改','::1',null,null,to_timestamp('08-10月-16 12.34.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081235448389088f2df16e421',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('08-10月-16 12.35.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008123544981691116acd4f654',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('08-10月-16 12.35.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812354509976381828df5137',null,'修改成功，器具明细信息信息的Id为1610071104184587456c100e6c503',null,'器具领取所在实验室修改','::1',null,null,to_timestamp('08-10月-16 12.35.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081236126743687a924fe717f',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('08-10月-16 12.36.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008123612801939508b5d7c98a',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('08-10月-16 12.36.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081236129087482c233888be6',null,'修改成功，器具明细信息信息的Id为1610071104184587456c3541cbb92',null,'器具领取所在实验室修改','::1',null,null,to_timestamp('08-10月-16 12.36.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812363144192641608a49e1d',null,'创建成功，预备方案的信息的Id为16100812362971422075bda6713a9',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.36.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812364506466283b941f2503',null,'修改成功，预备方案信息的Id为16100812362971422075bda6713a9',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.36.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081238171387150d5c7cbd9eb',null,'创建成功，委托单信息的信息的Id为16100812381686580428a2535283c',null,'委托单信息','::1',null,null,to_timestamp('08-10月-16 12.38.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081249160911652769150558b',null,'修改成功，预备方案信息的Id为161007234131711800940ab485f00',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.49.16.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试报告批准');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008124931654230900dba23223',null,'修改成功，预备方案信息的Id为16100711252905031918c2190ab81',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.49.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试报告批准');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008124939806709287a09cf9b7',null,'修改成功，预备方案信息的Id为16100711341518741395e3e4156b6',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.49.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试报告批准');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008125346134551614fef49576',null,'创建失败，委托单信息的信息，Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'委托单信息','::1',null,null,to_timestamp('08-10月-16 12.53.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008125708269785723043855c9',null,'创建失败，委托单信息的信息，Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'委托单信息','::1',null,null,to_timestamp('08-10月-16 12.57.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008125746246979551f5fa5716',null,'创建失败，委托单信息的信息，Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'委托单信息','::1',null,null,to_timestamp('08-10月-16 12.57.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081258524845401a82cf67e2e',null,'修改成功，器具退回的Id为16100711090254738989d81904e23',null,'器具明细信息','::1',null,null,to_timestamp('08-10月-16 12.58.52.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812590449471067ef15fda68',null,'修改成功，器具退回待入库的Id为1610071058190339560f815d2c25b',null,'器具明细信息','::1',null,null,to_timestamp('08-10月-16 12.59.04.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081259465502246d6d183e4fe',null,'创建失败，委托单信息的信息，Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'委托单信息','::1',null,null,to_timestamp('08-10月-16 12.59.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100715042533386466059c42032',null,'修改成功，角色信息的Id为161007150338828921412135c5da2',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.04.25.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100715052540476165345384c83',null,'创建成功，角色的信息的Id为161007150522326310539b09b317d',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.05.25.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007150540640792280553cddc6',null,'删除成功，信息的Id为,16081914011452419777e5f6fe314,1608191402183421645a13946c5cc',null,'消息','::1',null,null,to_timestamp('07-10月-16 03.05.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100715233958526208f96e50a18',null,'创建成功，角色的信息的Id为1610071523394599164096b43821f',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.23.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007152416026345289b04f7e07',null,'修改成功，角色信息的Id为161007150338828921412135c5da2',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.24.16.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071524294229026fe4ae4afcd',null,'修改成功，角色信息的Id为1610071338309969218c88f506d50',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.24.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100715244139296524aa0748e86',null,'修改成功，角色信息的Id为161007150522326310539b09b317d',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.24.41.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100715250728634421663576f66',null,'修改成功，角色信息的Id为161007151246523099749f5125912',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.25.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071525206627976223324dcd5',null,'修改成功，角色信息的Id为1610071523394599164096b43821f',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.25.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100715255410381299d0281cb05',null,'修改成功，菜单信息的Id为1608191403006629468a2301f6206',null,'菜单','::1',null,null,to_timestamp('07-10月-16 03.25.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007153548229110318b9293f43',null,'删除成功，信息的Id为,1608191415341245284ca3639d530,16081914163689923757d9ee6d9b8,1608191417005021630d1c1e08752,16081914174687381253046482799',null,'消息','::1',null,null,to_timestamp('07-10月-16 03.35.48.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071545337485191b095b82565',null,'创建成功，角色的信息的Id为1610071545331856300470932463a',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.45.33.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071545477966219d7076d271c',null,'删除成功，信息的Id为,16081914132048085249676d6f017,160819141422014916817e22ae673,16081914144101220138a7468240f,1608191415010703589320d279564',null,'消息','::1',null,null,to_timestamp('07-10月-16 03.45.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071548425494929a86b4f863c',null,'删除成功，信息的Id为,16081914132048085249676d6f017',null,'消息','::1',null,null,to_timestamp('07-10月-16 03.48.42.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071549172410220d0e9052e0a',null,'删除失败，信息的Id为1608191339530672154beaad57c90,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 03.49.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100715494977539108c4581d9c2',null,'删除失败，信息的Id为160819141422014916817e22ae673,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 03.49.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071606379149976c997f375d7',null,'修改成功，角色信息的Id为1610071545331856300470932463a',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.06.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071607177659071cd44726d16',null,'修改成功，角色信息的Id为1307311605187265267d33f281da6',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.07.17.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100716073072453964376e1ad80',null,'删除失败，信息的Id为1307311605187265267d33f281da6,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 04.07.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100716081034610953a42e9ce97',null,'删除成功，信息的Id为,1307311605187265267d33f281da9',null,'消息','::1',null,null,to_timestamp('07-10月-16 04.08.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100716081361562706bf46bd856',null,'删除成功，信息的Id为',null,'消息','::1',null,null,to_timestamp('07-10月-16 04.08.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071608266139225486fcfd391',null,'删除成功，信息的Id为1307311605187265267d33f281da6',null,'消息','::1',null,null,to_timestamp('07-10月-16 04.08.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100716091186519021fd2b621c1',null,'修改成功，人员信息的Id为16100620250938804046a6b559728',null,'人员','::1',null,null,to_timestamp('07-10月-16 04.09.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071614319786096467059c6e2',null,'创建失败，委托单信息的信息，Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'委托单信息','::1',null,null,to_timestamp('07-10月-16 04.14.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'csdj');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100716143595240210eea4a788e',null,'创建成功，角色的信息的Id为16100716143571765621684bd063e',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.14.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007162612302628343d6582253',null,'修改成功，人员信息的Id为16100620223968906945486fbaf4b',null,'人员','::1',null,null,to_timestamp('07-10月-16 04.26.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071626332723785159785bd3c',null,'修改成功，人员信息的Id为1610062021054752353f08c9dbd54',null,'人员','::1',null,null,to_timestamp('07-10月-16 04.26.33.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071646525619857b2dc186a1d',null,'修改成功，角色信息的Id为161007150338828921412135c5da2',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.46.52.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071647289422573352185b766',null,'修改成功，角色信息的Id为161007150522326310539b09b317d',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.47.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071652036429866eca1ccf28d',null,'修改成功，角色信息的Id为161007154215977179594c9a3af7f',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.52.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007165329027312440e745ea9b',null,'修改成功，角色信息的Id为1610071523394599164096b43821f',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.53.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007165413567907813bc75a4ea',null,'修改成功，角色信息的Id为161007151246523099749f5125912',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.54.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071654398361009a612cec786',null,'修改成功，角色信息的Id为161007150522326310539b09b317d',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.54.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071543088737615312a542965',null,'修改成功，角色信息的Id为161007154215977179594c9a3af7f',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.43.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071543208594029bae83eebcb',null,'修改成功，角色信息的Id为1610071534238139002a8fc000b9e',null,'角色','::1',null,null,to_timestamp('07-10月-16 03.43.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007214549436465133e7177fd0',null,'删除失败，信息的Id为1608191342404587427b03ac55ba5,An error occurred while updating the entries. See the inner exception for details.',null,'消息','::1',null,null,to_timestamp('07-10月-16 09.45.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610072152033883617e75862e7b2',null,'修改成功，菜单信息的Id为1608191342404587427b03ac55ba5',null,'菜单','::1',null,null,to_timestamp('07-10月-16 09.52.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610072341339172670f02080790d',null,'创建成功，预备方案的信息的Id为161007234131711800940ab485f00',null,'预备方案','::1',null,null,to_timestamp('07-10月-16 11.41.33.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008001354861694377b3362365',null,'修改成功，预备方案信息的Id为161007234131711800940ab485f00',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.13.54.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812404339365933ffbba640b',null,'修改成功，预备方案信息的Id为161008124026720265384329863f8',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.40.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081304075220057007ecd0cc7',null,'创建失败，委托单信息的信息，Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'委托单信息','::1',null,null,to_timestamp('08-10月-16 01.04.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008130447354396660ebbdc5e2',null,'修改成功，器具退回的Id为161007110418458745634a292181d',null,'器具明细信息','::1',null,null,to_timestamp('08-10月-16 01.04.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081305559318688f1a31b6976',null,'创建失败，委托单信息的信息，Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'委托单信息','::1',null,null,to_timestamp('08-10月-16 01.05.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100813111418629096282bc7b55',null,'创建成功，委托单信息的信息的Id为1610081311092026655b1e16ab40e',null,'委托单信息','::1',null,null,to_timestamp('08-10月-16 01.11.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100813363503819200724da61d1',null,'创建成功，预备方案的信息的Id为1610081336342459192c2b386a3ca',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 01.36.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081625318615386fea85884b1',null,'创建成功，委托单信息的信息的Id为1610081625298771544e028f36800',null,'委托单信息','::1',null,null,to_timestamp('08-10月-16 04.25.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081631075928590510800e6a2',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('08-10月-16 04.31.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081631085303159ec2698dc6c',null,'修改成功，器具明细信息信息的Id为161008162529892766577f2f96359',null,'器具领取所在实验室修改','::1',null,null,to_timestamp('08-10月-16 04.31.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081632082798858bda33f2bee',null,'创建成功，预备方案的信息的Id为1610081632054673484c023ff2aa2',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 04.32.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008163208311123293ea9d3138',null,'创建成功，预备方案的信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 04.32.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081634085768664d5d92d8950',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 04.34.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081638084086953db71e54cb0',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 04.38.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161009100851242422072f2aa0e4c',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 10.08.51.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161009165849417974384bf282730',null,'创建成功，数据字典的信息的Id为16100916584848129754165bbc678',null,'数据字典','::1',null,null,to_timestamp('09-10月-16 04.58.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610091659106299545e7b99337e3',null,'创建成功，数据字典的信息的Id为1610091659104708271a0af01988c',null,'数据字典','::1',null,null,to_timestamp('09-10月-16 04.59.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610091659407472098a5cdea4cb6',null,'创建成功，数据字典的信息的Id为161009165939219130368372f21e2',null,'数据字典','::1',null,null,to_timestamp('09-10月-16 04.59.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610091700020292423b1496e45c1',null,'创建成功，数据字典的信息的Id为161009170001931170132be0a04f4',null,'数据字典','::1',null,null,to_timestamp('09-10月-16 05.00.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100917002096062971ac8caa3aa',null,'创建成功，数据字典的信息的Id为16100917001697781154ec28118e6',null,'数据字典','::1',null,null,to_timestamp('09-10月-16 05.00.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161009170037529328809a6cf2a1b',null,'创建成功，数据字典的信息的Id为1610091700373691978721ebdb68b',null,'数据字典','::1',null,null,to_timestamp('09-10月-16 05.00.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100917005567717979cbb715e67',null,'创建成功，数据字典的信息的Id为1610091700543351822ef22ec3995',null,'数据字典','::1',null,null,to_timestamp('09-10月-16 05.00.55.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610091702202393486a39c267a1c',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 05.02.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610091714004210868db1b1a414c',null,'修改成功，预备方案信息的Id为',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 05.14.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161009171419356780993b55f7992',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 05.14.19.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100917192025856629e10169932',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 05.19.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100917195930059730535618185',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 05.19.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100917500005658764784c0fa14',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 05.50.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100922092252704212187f570ea',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 10.09.22.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071533151815869d455d3db64',null,'删除成功，信息的Id为,16081914062796767649eb3fc2292,1608191406590543692084183b077',null,'消息','::1',null,null,to_timestamp('07-10月-16 03.33.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071551433901880190b96eeee',null,'修改成功，菜单信息的Id为160819141422014916817e22ae673',null,'菜单','::1',null,null,to_timestamp('07-10月-16 03.51.43.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100715521687844724f9bc318b3',null,'修改成功，菜单信息的Id为16081914144101220138a7468240f',null,'菜单','::1',null,null,to_timestamp('07-10月-16 03.52.16.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071553417310774cb699b4e33',null,'修改成功，菜单信息的Id为16081914144101220138a7468240f',null,'菜单','::1',null,null,to_timestamp('07-10月-16 03.53.41.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610071554495039991becfb889c2',null,'修改成功，菜单信息的Id为1608191415010703589320d279564',null,'菜单','::1',null,null,to_timestamp('07-10月-16 03.54.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161007161547834731404583874ad',null,'修改成功，角色信息的Id为16100716143571765621684bd063e',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.15.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100716162085386616672627728',null,'修改成功，角色信息的Id为1610071545331856300470932463a',null,'角色','::1',null,null,to_timestamp('07-10月-16 04.16.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008114025817712159f8716596',null,'创建成功，委托单信息的信息的Id为161007110902547389894c5f69d90',null,'委托单信息','::1',null,null,to_timestamp('08-10月-16 11.40.25.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812074023339579be986be57',null,'创建成功，委托单信息的信息的Id为1610081207393881028c2c3bdba62',null,'委托单信息','::1',null,null,to_timestamp('08-10月-16 12.07.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812393687898439e1f4e7781',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('08-10月-16 12.39.36.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812393704081473b0fca289e',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('08-10月-16 12.39.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812393727708120e44303e3d',null,'修改成功，器具明细信息信息的Id为1610081238168658042c4ac33433b',null,'器具领取所在实验室修改','::1',null,null,to_timestamp('08-10月-16 12.39.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008124006111906317e9987d73',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('08-10月-16 12.40.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081240062256632b5e95c2806',null,'修改成功，器具明细信息信息的Id为161007105819033956010b678e2bc',null,'器具领取所在实验室修改','::1',null,null,to_timestamp('08-10月-16 12.40.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081240273425959ac95a9d8ed',null,'创建成功，预备方案的信息的Id为161008124026720265384329863f8',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.40.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008124112284183112a31aa36b',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('08-10月-16 12.41.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812411238728024107a42a4a',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('08-10月-16 12.41.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812411250194049dfebc7961',null,'修改成功，器具明细信息信息的Id为16100710581903395605a20a66129',null,'器具领取所在实验室修改','::1',null,null,to_timestamp('08-10月-16 12.41.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100812420029081690950b951bc',null,'创建成功，预备方案的信息的Id为16100812415778341700f2e5b0621',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.42.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008124212125338261f1350731',null,'修改成功，预备方案信息的Id为16100812415778341700f2e5b0621',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.42.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081251120413117f68bca0cb8',null,'修改成功，预备方案信息的Id为16100812415778341700f2e5b0621',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.51.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试电能');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081252162677488b78a716d77',null,'修改成功，预备方案信息的Id为16100812415778341700f2e5b0621',null,'预备方案','::1',null,null,to_timestamp('08-10月-16 12.52.16.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试报告批准');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081300089626319b1152be36d',null,'创建失败，委托单信息的信息，Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'委托单信息','::1',null,null,to_timestamp('08-10月-16 01.00.08.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081300203345600eb4af9228d',null,'创建失败，委托单信息的信息，Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'委托单信息','::1',null,null,to_timestamp('08-10月-16 01.00.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610081300318027971e0eeae84d8',null,'创建失败，委托单信息的信息，Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'委托单信息','::1',null,null,to_timestamp('08-10月-16 01.00.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161008130040933129648aac090a0',null,'创建失败，委托单信息的信息，Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.',null,'委托单信息','::1',null,null,to_timestamp('08-10月-16 01.00.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试收发');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100813361256171861f6e6e2d6f',null,'修改成功，器具明细信息_承接实验室的Id为',null,'器具领取状态修改','::1',null,null,to_timestamp('08-10月-16 01.36.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('16100813361285367834af0ed4c74',null,'修改成功，器具明细信息信息的Id为161007105238907661010eef68dde',null,'器具领取所在实验室修改','::1',null,null,to_timestamp('08-10月-16 01.36.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610091637490409685157e552c95',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 04.37.49.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('1610091638454575125c860cfbef2',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 04.38.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'测试数表三');
+Insert into TENGFEI."SysLog" ("Id","PersonId","Message","Result","MenuId","Ip","Remark","State","CreateTime","CreatePerson") values ('161009231336664658733ccd371e0',null,'修改成功，预备方案信息的Id为161008163205467348401f1aec5a1',null,'预备方案','::1',null,null,to_timestamp('09-10月-16 11.13.36.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysLog
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysMenu
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysMenu"
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('161007155633944342443e1c0bf29','证书类别统计分析','16081914132048085249676d6f017',null,'tu1718',40,'10071003','展开','Admin',to_timestamp('07-10月-16 03.56.33.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('16081914002675292042aa9b17ddd','检定任务','1608191358228190950aa767add41','VJIANDINGRENWU','tu0604',10,'10011000','折叠','Admin',to_timestamp('19-8月 -16 02.00.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('19-8月 -16 04.54.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1608191403006629468a2301f6206','报告批准',null,null,'tu0224',40,'1003','折叠','Admin',to_timestamp('19-8月 -16 02.03.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('07-10月-16 03.25.50.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin','叶子');
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('16081914035251344912f2acc3fee','报告批准','1608191403006629468a2301f6206','VSHENPI','tu0604',10,'10031000','折叠','Admin',to_timestamp('19-8月 -16 02.03.52.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('07-10月-16 08.47.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1608191404571488364aba42741f9','入库','160819140421791166551bb14064b','VRUKU','tu0604',10,'10041000','折叠','Admin',to_timestamp('19-8月 -16 02.04.57.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('19-8月 -16 04.55.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1608191411454365613ea3bd77b57','领取','160819140857596716475bac74030',null,'tu0604',10,'10061000','折叠','Admin',to_timestamp('19-8月 -16 02.11.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('19-8月 -16 04.56.53.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('16081914132048085249676d6f017','数据分析',null,null,'tu1305',90,'1007','折叠','Admin',to_timestamp('19-8月 -16 02.13.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('19-8月 -16 04.35.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin','叶子');
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('160819141422014916817e22ae673','报告信息查询','16081914132048085249676d6f017',null,'tu1009',10,'10071000','折叠','Admin',to_timestamp('19-8月 -16 02.14.22.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('07-10月-16 04.03.21.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('16081914163689923757d9ee6d9b8','方案管理','1608191415341245284ca3639d530','SCHEME','tu0604',10,'10081000','折叠','Admin',to_timestamp('19-8月 -16 02.16.36.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('08-10月-16 12.02.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1608191417005021630d1c1e08752','计量标准管理','1608191415341245284ca3639d530',null,'tu0604',20,'10081001','折叠','Admin',to_timestamp('19-8月 -16 02.17.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('08-10月-16 12.02.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1608191349513153481556dbb61e8','器具登记',null,null,'tu2005',10,'1000','展开','Admin',to_timestamp('19-8月 -16 01.49.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('30-9月 -16 08.57.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin','叶子');
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('16081913533564460749dc9ddce10','器具登记','1608191349513153481556dbb61e8','Appliance','tu0604',10,'10001000','展开','Admin',to_timestamp('19-8月 -16 01.53.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('08-10月-16 12.01.12.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1608191356215411265712c6a6eb6','我的工作','1608191349513153481556dbb61e8','ORDER_TASK_INFORMATION','tu0604',20,'10001001','展开','Admin',to_timestamp('19-8月 -16 01.56.21.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('08-10月-16 12.01.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1608191358228190950aa767add41','实验室检定',null,null,'tu0413',20,'1001','折叠','Admin',to_timestamp('19-8月 -16 01.58.22.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('19-8月 -16 03.01.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin','叶子');
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1608191402183421645a13946c5cc','审核','16081914011452419777e5f6fe314','VSHENHE','tu0604',10,'10021000','折叠','Admin',to_timestamp('19-8月 -16 02.02.18.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('19-8月 -16 04.53.31.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('160819140421791166551bb14064b','器具入库',null,null,'tu1209',60,'1004','折叠','Admin',to_timestamp('19-8月 -16 02.04.21.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('19-8月 -16 03.20.57.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin','叶子');
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('16081914062796767649eb3fc2292','报告打印',null,null,'tu1318',70,'1005','折叠','Admin',to_timestamp('19-8月 -16 02.06.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('19-8月 -16 03.21.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin','叶子');
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1608191406590543692084183b077','打印','16081914062796767649eb3fc2292','VBAOGAODAYIN','tu0604',10,'10051000','折叠','Admin',to_timestamp('19-8月 -16 02.06.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('19-8月 -16 04.55.52.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('160819140857596716475bac74030','器具报告领取',null,null,'tu0719',80,'1006','折叠','Admin',to_timestamp('19-8月 -16 02.08.57.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('19-8月 -16 03.22.21.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin','叶子');
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('16081914144101220138a7468240f','工作信息查询','16081914132048085249676d6f017',null,'tu1009',20,'10071001','折叠','Admin',to_timestamp('19-8月 -16 02.14.41.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('07-10月-16 04.05.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1608191415010703589320d279564','工作时长查询','16081914132048085249676d6f017',null,'tu1009',30,'10071002','折叠','Admin',to_timestamp('19-8月 -16 02.15.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('07-10月-16 04.05.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1608191415341245284ca3639d530','辅助功能',null,null,'tu1203',100,'1008','折叠','Admin',to_timestamp('19-8月 -16 02.15.34.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('19-8月 -16 03.24.01.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin','叶子');
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('16081914174687381253046482799','校准结果不确定度参数管理','1608191415341245284ca3639d530',null,'tu0604',30,'10081002','折叠','Admin',to_timestamp('19-8月 -16 02.17.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('08-10月-16 12.02.58.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('160819141815560386373e145af6f','单位维护','1608191415341245284ca3639d530','COMPANY','tu0604',40,'10081003','折叠','Admin',to_timestamp('19-8月 -16 02.18.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('08-10月-16 12.03.16.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1307311605187265267d33f281da4','系统设置',null,null,'tu2011',1000,'1009','折叠',null,null,to_timestamp('30-9月 -16 08.57.06.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin','叶子');
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('16100715582787832006e380ba92b','实验室工作量统计分析','16081914132048085249676d6f017',null,'tu1718',50,'10071004','展开','Admin',to_timestamp('07-10月-16 03.58.27.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1307311605187265267d33f281da3','基础设置','1307311605187265267d33f281da4',null,'tu0504',10,'10091000','展开',null,null,to_timestamp('19-8月 -16 03.15.44.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin','叶子');
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1307311605187265267d33f281d11','异常捕获','1307311605187265267d33f281da3','SysException','tu1101',666,'100910001001','展开',null,null,null,'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1307311605187265267d33f281d12','菜单管理','1307311605187265267d33f281da4','SysMenu','tu0701',444,'10091002','展开',null,null,null,'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1307311605187265267d33f281da0','角色管理','1307311605187265267d33f281da4','SysRole','tu0525',666,'10091004','展开',null,null,null,'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1307311605187265267d33f281da1','日志管理','1307311605187265267d33f281da3','SysLog','tu1001',10,'100910001000','展开',null,null,to_timestamp('19-8月 -16 03.17.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1307311605187265267d33f281da8','人员管理','1307311605187265267d33f281da4','SysPerson','tu0625',333,'10091001','展开',null,null,null,'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1307311605187265267d33f281da9','数据字典','1307311605187265267d33f281da3','SysField','tu0704',777,'100910001002','展开',null,null,null,'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1608191342404587427b03ac55ba5','测试2',null,null,'tu0702',null,'1010','展开','Admin',to_timestamp('19-8月 -16 01.42.40.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('07-10月-16 09.51.58.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1310181133541969540a9ad916764','操作管理','1307311605187265267d33f281da4','SysOperation','tu0901',555,'10091003','展开','Admin',null,null,'Admin',null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1610071559218996837438d52a339','报告类别统计分析','16081914132048085249676d6f017',null,'tu1718',60,'10071005','展开','Admin',to_timestamp('07-10月-16 03.59.21.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1610071600511904197e5e6a56f60','人员工作量统计分析','16081914132048085249676d6f017',null,'tu1718',80,'10071007','展开','Admin',to_timestamp('07-10月-16 04.00.51.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1610071601301633414058cfb6df7','不合格统计分析','16081914132048085249676d6f017',null,'tu1718',90,'10071008','展开','Admin',to_timestamp('07-10月-16 04.01.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null);
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('16081914011452419777e5f6fe314','实验室审核',null,null,'tu1416',30,'1002','折叠','Admin',to_timestamp('19-8月 -16 02.01.14.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),to_timestamp('19-8月 -16 03.20.21.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin','叶子');
+Insert into TENGFEI."SysMenu" ("Id","Name","ParentId","Url","Iconic","Sort","Remark","State","CreatePerson","CreateTime","UpdateTime","UpdatePerson","IsLeaf") values ('1610071600073889246e2ebc4b06d','所属单位工作量统计分析','16081914132048085249676d6f017',null,'tu1718',70,'10071006','展开','Admin',to_timestamp('07-10月-16 04.00.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null);
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysMenu
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysMenuSysOperation
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysMenuSysOperation"
+Insert into TENGFEI."SysMenuSysOperation" ("SysMenuId","SysOperationId") values ('1307311605187265267d33f281da8','1310181134390713796477e27c097');
+Insert into TENGFEI."SysMenuSysOperation" ("SysMenuId","SysOperationId") values ('1307311605187265267d33f281da8','131018155411503738459acd560d4');
+Insert into TENGFEI."SysMenuSysOperation" ("SysMenuId","SysOperationId") values ('1307311605187265267d33f281da8','1310181554235506134d5697ad13c');
+Insert into TENGFEI."SysMenuSysOperation" ("SysMenuId","SysOperationId") values ('1307311605187265267d33f281da8','13101815543634748843f1d3c904c');
+Insert into TENGFEI."SysMenuSysOperation" ("SysMenuId","SysOperationId") values ('1608191342404587427b03ac55ba5','1310181134390713796477e27c097');
+Insert into TENGFEI."SysMenuSysOperation" ("SysMenuId","SysOperationId") values ('1608191342404587427b03ac55ba5','131018155411503738459acd560d4');
+Insert into TENGFEI."SysMenuSysOperation" ("SysMenuId","SysOperationId") values ('1608191342404587427b03ac55ba5','1310181554235506134d5697ad13c');
+Insert into TENGFEI."SysMenuSysOperation" ("SysMenuId","SysOperationId") values ('1608191342404587427b03ac55ba5','13101815543634748843f1d3c904c');
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysMenuSysOperation
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysMenuSysRoleSysOperation
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysMenuSysRoleSysOperation"
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('161007150540562946184f06e0e6a','16081914011452419777e5f6fe314',null,'161007150522326310539b09b317d');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071513115573393037bec0fa0','1608191403006629468a2301f6206',null,'161007151246523099749f5125912');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('16100715131155733935a7287b189','16081914035251344912f2acc3fee',null,'161007151246523099749f5125912');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071457098336771d484d62ad4','1307311605187265267d33f281da4',null,'1610071338309969218c88f506d50');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('16100714570984899104858b105cf','1307311605187265267d33f281da3',null,'1610071338309969218c88f506d50');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('16100714570984899106524065b5e','1307311605187265267d33f281d11',null,'1610071338309969218c88f506d50');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071457098645980741c779cff','1307311605187265267d33f281d12',null,'1610071338309969218c88f506d50');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071457098645980953ae178fd','1307311605187265267d33f281da0',null,'1610071338309969218c88f506d50');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('16100714570986459809d24def922','1307311605187265267d33f281da1',null,'1610071338309969218c88f506d50');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('16100714570988022774276cd0e72','1307311605187265267d33f281da8',null,'1610071338309969218c88f506d50');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071457098802277eb462ebd78','1307311605187265267d33f281da9',null,'1610071338309969218c88f506d50');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('161007145709895856525ffaf0067','1310181133541969540a9ad916764',null,'1610071338309969218c88f506d50');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071457098958565735ef261b7','1307311605187265267d33f281da8','13101815543634748843f1d3c904c','1610071338309969218c88f506d50');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('161007145709911481418b8dfbe32','1307311605187265267d33f281da8','131018155411503738459acd560d4','1610071338309969218c88f506d50');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('16100714570991148144ad4cdd3a8','1307311605187265267d33f281da8','1310181554235506134d5697ad13c','1610071338309969218c88f506d50');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071457099114814e9827cb1c7','1307311605187265267d33f281da8','1310181134390713796477e27c097','1610071338309969218c88f506d50');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071504008315804799e71eaf7','1608191358228190950aa767add41',null,'161007150338828921412135c5da2');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071504008315804e2af5da77d','16081914002675292042aa9b17ddd',null,'161007150338828921412135c5da2');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('161007150540562946124d018ac50','1608191402183421645a13946c5cc',null,'161007150522326310539b09b317d');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071614507976408756d1dee8f','16081914132048085249676d6f017',null,'1610071545331856300470932463a');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071614507976408ba289c0437','160819141422014916817e22ae673',null,'1610071545331856300470932463a');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071614507976408eb32e08ee0','1608191415010703589320d279564',null,'1610071545331856300470932463a');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071614507976408f1f1b8d252','16081914144101220138a7468240f',null,'1610071545331856300470932463a');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('161007152656782345300c6da0cfc','16081913533564460749dc9ddce10',null,'1610071523394599164096b43821f');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('16100716152126969572a63a06448','16100715582787832006e380ba92b',null,'16100716143571765621684bd063e');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('16100716152126969577c3ceb243b','1610071559218996837438d52a339',null,'16100716143571765621684bd063e');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071615212696957942e942054','161007155633944342443e1c0bf29',null,'16100716143571765621684bd063e');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('161007161521284999846c7af62fd','1610071600511904197e5e6a56f60',null,'16100716143571765621684bd063e');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('161007161521284999899e046861b','1610071601301633414058cfb6df7',null,'16100716143571765621684bd063e');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('16100715265678234530b1f3fa6f5','1608191356215411265712c6a6eb6',null,'1610071523394599164096b43821f');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('161007152656782345323d3db5eaf','1608191349513153481556dbb61e8',null,'1610071523394599164096b43821f');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071528236818717cc21486ada','160819140421791166551bb14064b',null,'1610071528077739220caee6a98c8');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071528236818717f2e89ffe4c','1608191404571488364aba42741f9',null,'1610071528077739220caee6a98c8');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('16100715313942150915b976ac2e2','160819140857596716475bac74030',null,'161007152954597771955a266ced5');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('16100715313942150915bf050a7ba','1608191411454365613ea3bd77b57',null,'161007152954597771955a266ced5');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('16100715331494752329545822e0e','16081914062796767649eb3fc2292',null,'16100715325732030562d1b15924b');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('161007153314947523298518a5086','1608191406590543692084183b077',null,'16100715325732030562d1b15924b');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('16100715423765135827f3672b14a','1608191415341245284ca3639d530',null,'161007154215977179594c9a3af7f');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071542376513582ce1408c645','160819141815560386373e145af6f',null,'161007154215977179594c9a3af7f');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('16100716152126969570ad1f878a3','16081914132048085249676d6f017',null,'16100716143571765621684bd063e');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071615212849998d575b2a3e2','1610071600073889246e2ebc4b06d',null,'16100716143571765621684bd063e');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071535480884729e247ae4536','1608191415341245284ca3639d530',null,'1610071534238139002a8fc000b9e');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071535480884729fa18369007','16081914163689923757d9ee6d9b8',null,'1610071534238139002a8fc000b9e');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071535480884729fc4e253a52','1608191417005021630d1c1e08752',null,'1610071534238139002a8fc000b9e');
+Insert into TENGFEI."SysMenuSysRoleSysOperation" ("Id","SysMenuId","SysOperationId","SysRoleId") values ('1610071535481041175174159207f','16081914174687381253046482799',null,'1610071534238139002a8fc000b9e');
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysMenuSysRoleSysOperation
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysMessage
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysMessage"
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysMessage
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysMessageTemp
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysMessageTemp"
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysMessageTemp
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysNotice
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysNotice"
+Insert into TENGFEI."SysNotice" ("Id","Message","LostTime","PersonId","Remark","State","CreateTime","CreatePerson") values ('160925153020875653356d9488d5c','asdfdsfdsafasd',to_timestamp('26-9月 -16 12.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null,'asdfsdfsdsfadsff',null,to_timestamp('25-9月 -16 03.30.20.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysNotice
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysOperation
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysOperation"
+Insert into TENGFEI."SysOperation" ("Id","Name","Function","Iconic","Sort","Remark","State","CreateTime","CreatePerson") values ('1310181134390713796477e27c097','创建','flexiCreate','icon-add',222,null,null,null,'Admin');
+Insert into TENGFEI."SysOperation" ("Id","Name","Function","Iconic","Sort","Remark","State","CreateTime","CreatePerson") values ('131018155411503738459acd560d4','修改','flexiModify','icon-edit',444,null,null,null,'Admin');
+Insert into TENGFEI."SysOperation" ("Id","Name","Function","Iconic","Sort","Remark","State","CreateTime","CreatePerson") values ('1310181554235506134d5697ad13c','删除','flexiDelete','icon-remove',333,null,null,null,'Admin');
+Insert into TENGFEI."SysOperation" ("Id","Name","Function","Iconic","Sort","Remark","State","CreateTime","CreatePerson") values ('13101815543634748843f1d3c904c','详细','getView','icon-details',111,null,null,null,'Admin');
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysOperation
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysPerson
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysPerson"
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('160926104113505757326a99995c0','Appliance#','Appliance#','oe1rWggkmtxd+y0uVt91Cg==','oe1rWggkmtxd+y0uVt91Cg==','女',null,null,null,'s','数表三相',null,null,'s',null,'s',null,to_timestamp('26-9月 -16 10.41.13.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1609261208374051781cce8231009','13718111111','13718111111','pwqzQP15OojutrIJbnRFcQ==','pwqzQP15OojutrIJbnRFcQ==','女',null,null,null,null,'数表三相',null,null,null,null,null,null,to_timestamp('26-9月 -16 12.08.37.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('16092612084545402480c14a9c0dd','13718111111','13718111111','pwqzQP15OojutrIJbnRFcQ==','pwqzQP15OojutrIJbnRFcQ==','女',null,null,null,null,'数表三相',null,null,null,null,null,null,to_timestamp('26-9月 -16 12.08.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1609261209033210527117f0e2060','13718111111','13718111111','pwqzQP15OojutrIJbnRFcQ==','pwqzQP15OojutrIJbnRFcQ==','女',null,null,null,null,'数表三相',null,null,null,null,null,null,to_timestamp('26-9月 -16 12.09.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('160926120923113874873e3916fb2','13718111111','13718111111','pwqzQP15OojutrIJbnRFcQ==','pwqzQP15OojutrIJbnRFcQ==','女',null,null,null,null,'数表三相',null,null,null,null,null,null,to_timestamp('26-9月 -16 12.09.22.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1609261507221066976ead1614f33','数表三实验员','数表三实验员','8nMmN/pfIBY=','8nMmN/pfIBY=','女',null,null,'13311111111','12345678901','数表三相',null,null,'冀北',null,'asdadfa','开启',to_timestamp('26-9月 -16 03.07.22.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1610062021054752353f08c9dbd54','测试电能','测试电能','8nMmN/pfIBY=','8nMmN/pfIBY=','女',null,null,'13911111111',null,'电能',null,null,null,null,null,'开启',to_timestamp('06-10月-16 08.21.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('07-10月-16 04.26.32.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null,null,null,null,'Admin',null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('16100620223968906945486fbaf4b','测试数表三','测试数表三','8nMmN/pfIBY=','8nMmN/pfIBY=','女',null,null,'13911111112',null,'数表三相',null,null,null,null,null,'开启',to_timestamp('06-10月-16 08.22.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('07-10月-16 04.26.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null,null,null,null,'Admin',null,'/up/image/20161006/20161006202157_3717.png');
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('161006202442920910602651a284b','测试报告批准','测试报告批准','8nMmN/pfIBY=','8nMmN/pfIBY=','男',null,null,'13911111113',null,null,null,null,null,null,null,'开启',to_timestamp('06-10月-16 08.24.42.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('06-10月-16 08.46.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null,null,null,null,'Admin',null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1609301013091063609785a44755a','csdl','开发测试','Svix/Y2crH0=','Svix/Y2crH0=','男',null,null,null,null,'电能',null,null,null,null,null,'开启',to_timestamp('30-9月 -16 10.13.09.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1609021123417054258619894ab99','dsfdfsds','dsfdfsds','dsfdfsds','dsfdfsds','女',null,null,null,null,'北京市',null,null,null,null,null,null,to_timestamp('02-9月 -16 11.23.41.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('16090814111142032093d494478de','zcx','123','MUaFxpz/7tQ=','MUaFxpz/7tQ=','女',null,null,null,null,'电能',null,null,null,null,null,'开启',to_timestamp('08-9月 -16 02.11.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,to_timestamp('08-9月 -16 02.19.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'::1',null,null,null,null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('16093010133324256095b90fbebde','cssx','开发测试','Svix/Y2crH0=','Svix/Y2crH0=','男',null,null,null,null,'数表三相',null,null,null,null,null,'开启',to_timestamp('30-9月 -16 10.13.33.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('16100620250938804046a6b559728','测试收发','测试收发','8nMmN/pfIBY=','8nMmN/pfIBY=','男',null,null,'13911111114',null,null,null,null,null,null,null,'开启',to_timestamp('06-10月-16 08.25.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('07-10月-16 04.09.11.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null,null,null,null,'Admin',null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1311061516356389621569df3e24e','Admin','普华','8nMmN/pfIBY=','8nMmN/pfIBY=',null,null,null,null,null,'数表三相',null,null,null,'350020527@qq.com',null,'开启',null,'Admin',to_timestamp('02-9月 -16 11.18.53.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null,to_timestamp('09-10月-16 02.10.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'113.132.249.113',to_timestamp('01-10月-16 07.07.33.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'36.62.17.51',null,'Admin',null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1311061516356389621569df3e222','WangXiaoxia','王晓霞','8nMmN/pfIBY=','8nMmN/pfIBY=',null,null,null,null,null,null,null,null,null,null,null,'开启',null,'Admin',null,2,null,'127.0.0.1',null,null,'default',null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1311061516356389621569df3e333','QuXiaolin','曲晓林','8nMmN/pfIBY=','8nMmN/pfIBY=',null,null,null,null,null,null,null,null,null,null,null,'开启',null,'Admin',null,2,null,'127.0.0.1',null,null,'default',null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1311061516356389621569df3e444','SongFulai','宋福来','8nMmN/pfIBY=','8nMmN/pfIBY=',null,null,null,null,null,null,null,null,null,null,null,'开启',null,'Admin',null,2,null,'127.0.0.1',null,null,'default',null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1311061516356389621569df3e555','LiuXiao','刘潇','8nMmN/pfIBY=','8nMmN/pfIBY=',null,null,null,null,null,null,null,null,null,null,null,'开启',null,'Admin',to_timestamp('19-8月 -16 02.01.52.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null,null,null,null,'Admin',null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1311061516356389621569df3e666','XuQi','许琦','8nMmN/pfIBY=','8nMmN/pfIBY=',null,'1307311605187265267d33f281234',null,null,null,null,null,null,null,null,null,'开启',null,'Admin',to_timestamp('23-8月 -16 10.35.09.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null,null,null,null,'Admin',null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1609120924086558812eb41353873','安女士','azh','8nMmN/pfIBY=','8nMmN/pfIBY=','女',null,null,null,null,'电能',null,null,null,null,null,'开启',to_timestamp('12-9月 -16 09.24.08.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('12-9月 -16 09.32.18.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null,to_timestamp('12-9月 -16 03.39.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'111.203.3.1',to_timestamp('12-9月 -16 03.38.52.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'111.203.3.1',null,'Admin',null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('160902112305396732297a14a599c','dsfdfsd','dsfdfsd','dsfdfsd','dsfdfsd','女',null,null,null,null,null,null,null,null,null,null,null,to_timestamp('02-9月 -16 11.23.05.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1609251736285768019b624c2edd7','liutengfei','liutengfei','N0tccm4XTyktYCofNmo33A==','N0tccm4XTyktYCofNmo33A==','男',null,null,'liutengfeishouji','liutengfeibangongdianhua','数表单相',null,null,'liutengfei','liutengfei@2323.ff.vvv','ds','开启',to_timestamp('25-9月 -16 05.36.28.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,'/up/image/20160925/20160925173627_0922.jpg');
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1609251445221789465836ee9d5e9','实验室测试A','实验室测试A','SIAscxa1VoembQT7M6Usv2jdZXDkU39nUluGWuF6YkA=','SIAscxa1VoembQT7M6Usv2jdZXDkU39nUluGWuF6YkA=','女',null,'实验员','12345678901','12345678901','数表三相',null,null,'冀北1','asd@163.com','aaaaaa','开启',to_timestamp('25-9月 -16 02.45.22.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('25-9月 -16 02.57.10.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null,null,null,null,'Admin',null,'/up/image/20160925/20160925145703_2720.png');
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('16092612073012981487081e05c22','13718111111','13718111111','pwqzQP15OojutrIJbnRFcQ==','pwqzQP15OojutrIJbnRFcQ==','女',null,null,null,null,'数表三相',null,null,null,null,null,null,to_timestamp('26-9月 -16 12.07.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('16093014092428789466a2810fdd6','cssh','开发测试','Svix/Y2crH0=','Svix/Y2crH0=','女',null,null,null,null,'数表三相',null,null,null,null,null,'开启',to_timestamp('30-9月 -16 02.09.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1609261226094961778030d4bbb00','dsfdfsd','dsfdfsd','aj1wD1zvq8U=','aj1wD1zvq8U=','女',null,null,null,null,'数表三相',null,null,null,null,null,null,to_timestamp('26-9月 -16 12.26.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,'/up/image/20160926/20160926122552_9427.jpg');
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1609261509005233997fc98d1dfa8','电能实验员','电能实验员','8nMmN/pfIBY=','8nMmN/pfIBY=','男',null,null,'13311111111','12345678901','电能',null,null,'冀北',null,'asdadfa','开启',to_timestamp('26-9月 -16 03.09.00.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1609301409541996736030d2bc435','cssh2','开发测试','Svix/Y2crH0=','Svix/Y2crH0=','女',null,null,null,null,'电能',null,null,null,null,null,'开启',to_timestamp('30-9月 -16 02.09.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1609301410451532617f11e8607a6','cssp','开发测试','Svix/Y2crH0=','Svix/Y2crH0=','男',null,null,null,null,'互感器',null,null,null,null,null,'开启',to_timestamp('30-9月 -16 02.10.45.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('160930142656797466150aa369753','csdj','开发测试','Svix/Y2crH0=','Svix/Y2crH0=','女',null,null,null,null,'直流仪器',null,null,null,null,null,'开启',to_timestamp('30-9月 -16 02.26.56.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',null,null,null,null,null,null,null,null,null,null);
+Insert into TENGFEI."SysPerson" ("Id","Name","MyName","Password","SurePassword","Sex","SysDepartmentId","Position","MobilePhoneNumber","PhoneNumber","Province","City","Village","Address","EmailAddress","Remark","State","CreateTime","CreatePerson","UpdateTime","LogonNum","LogonTime","LogonIP","LastLogonTime","LastLogonIP","PageStyle","UpdatePerson","Version","HDpic") values ('1610071409366717700c460aabdd3','测试系统管理','测试系统管理','8nMmN/pfIBY=','8nMmN/pfIBY=','女',null,null,'13911111115',null,null,null,null,null,null,null,'开启',to_timestamp('07-10月-16 02.09.36.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('08-10月-16 12.10.05.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null,null,null,null,'Admin',null,null);
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysPerson
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysRole
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysRole"
+Insert into TENGFEI."SysRole" ("Id","Name","Description","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('161007150522326310539b09b317d','实验室审核人员','权限：实验室审核',to_timestamp('07-10月-16 03.05.22.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('07-10月-16 04.54.59.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysRole" ("Id","Name","Description","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('161007151246523099749f5125912','报告批准人员','权限：报告批准',to_timestamp('07-10月-16 03.12.46.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('07-10月-16 04.54.13.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysRole" ("Id","Name","Description","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('161007150338828921412135c5da2','实验室检定人员','权限：实验室检定',to_timestamp('07-10月-16 03.03.38.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('07-10月-16 04.46.52.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysRole" ("Id","Name","Description","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1610071528077739220caee6a98c8','器具入库管理员','权限：器具入库',to_timestamp('07-10月-16 03.28.07.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('07-10月-16 04.49.29.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysRole" ("Id","Name","Description","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1610071534238139002a8fc000b9e','实验辅助功能管理员','权限：辅助功能-方案管理、计量标准管理、校准结果不确定度参数管理',to_timestamp('07-10月-16 03.34.23.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('07-10月-16 04.50.02.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysRole" ("Id","Name","Description","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('161007152954597771955a266ced5','器具报告领取管理员','权限：器具报告领取',to_timestamp('07-10月-16 03.29.54.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('07-10月-16 04.48.33.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysRole" ("Id","Name","Description","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16100715325732030562d1b15924b','报告打印管理员','权限：报告打印',to_timestamp('07-10月-16 03.32.57.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('07-10月-16 04.48.09.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysRole" ("Id","Name","Description","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('161007154215977179594c9a3af7f','单位统计辅助功能管理员','权限：辅助功能-单位维护',to_timestamp('07-10月-16 03.42.15.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('07-10月-16 04.52.03.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysRole" ("Id","Name","Description","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1610071523394599164096b43821f','器具登记管理员','权限：器具登记',to_timestamp('07-10月-16 03.23.39.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('07-10月-16 04.53.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysRole" ("Id","Name","Description","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1610071545331856300470932463a','数据分析查询员','权限：数据分析-报告信息查询、工作信息查询、工作时长查询',to_timestamp('07-10月-16 03.45.33.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('07-10月-16 04.55.24.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysRole" ("Id","Name","Description","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('16100716143571765621684bd063e','数据分析统计分析员','权限-证书类别统计分析员、实验室工作量统计分析、报告类别统计分析、所属单位工作量统计分析、人员工作量统计分析',to_timestamp('07-10月-16 04.14.35.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('07-10月-16 04.55.47.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+Insert into TENGFEI."SysRole" ("Id","Name","Description","CreateTime","CreatePerson","UpdateTime","UpdatePerson") values ('1610071338309969218c88f506d50','系统管理员','权限：人员管理、基础设置、角色管理、菜单管理、操作管理',to_timestamp('07-10月-16 01.38.30.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin',to_timestamp('07-10月-16 03.24.26.000000000 下午','DD-MON-RR HH.MI.SS.FF AM'),'Admin');
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysRole
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE SysRoleSysPerson
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI."SysRoleSysPerson"
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('1311061516356389621569df3e24e','1610071338309969218c88f506d50');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('1311061516356389621569df3e24e','161007150338828921412135c5da2');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('1311061516356389621569df3e24e','161007150522326310539b09b317d');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('1311061516356389621569df3e24e','161007151246523099749f5125912');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('1311061516356389621569df3e24e','1610071523394599164096b43821f');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('1311061516356389621569df3e24e','1610071528077739220caee6a98c8');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('1311061516356389621569df3e24e','161007152954597771955a266ced5');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('1311061516356389621569df3e24e','16100715325732030562d1b15924b');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('1311061516356389621569df3e24e','1610071534238139002a8fc000b9e');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('1311061516356389621569df3e24e','161007154215977179594c9a3af7f');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('1311061516356389621569df3e24e','1610071545331856300470932463a');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('1311061516356389621569df3e24e','16100716143571765621684bd063e');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('1610062021054752353f08c9dbd54','161007150338828921412135c5da2');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('1610062021054752353f08c9dbd54','161007150522326310539b09b317d');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('1610062021054752353f08c9dbd54','1610071534238139002a8fc000b9e');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('1610062021054752353f08c9dbd54','1610071545331856300470932463a');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('16100620223968906945486fbaf4b','161007150338828921412135c5da2');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('16100620223968906945486fbaf4b','161007150522326310539b09b317d');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('16100620223968906945486fbaf4b','1610071534238139002a8fc000b9e');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('16100620223968906945486fbaf4b','1610071545331856300470932463a');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('161006202442920910602651a284b','161007151246523099749f5125912');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('161006202442920910602651a284b','16100716143571765621684bd063e');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('16100620250938804046a6b559728','1610071523394599164096b43821f');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('16100620250938804046a6b559728','1610071528077739220caee6a98c8');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('16100620250938804046a6b559728','161007152954597771955a266ced5');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('16100620250938804046a6b559728','16100715325732030562d1b15924b');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('16100620250938804046a6b559728','161007154215977179594c9a3af7f');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('16100620250938804046a6b559728','1610071545331856300470932463a');
+Insert into TENGFEI."SysRoleSysPerson" ("SysPersonId","SysRoleId") values ('1610071409366717700c460aabdd3','1610071338309969218c88f506d50');
+
+---------------------------------------------------
+--   END DATA FOR TABLE SysRoleSysPerson
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE THREE_PHASE_UNCERTAINTY
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.THREE_PHASE_UNCERTAINTY
+
+---------------------------------------------------
+--   END DATA FOR TABLE THREE_PHASE_UNCERTAINTY
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE TRANSMITER_SIN
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.TRANSMITER_SIN
+
+---------------------------------------------------
+--   END DATA FOR TABLE TRANSMITER_SIN
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE TRANSMITTER_COS
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.TRANSMITTER_COS
+
+---------------------------------------------------
+--   END DATA FOR TABLE TRANSMITTER_COS
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE TRANSMITTER_FREQUENCY_PHASE
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.TRANSMITTER_FREQUENCY_PHASE
+
+---------------------------------------------------
+--   END DATA FOR TABLE TRANSMITTER_FREQUENCY_PHASE
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE TRANSMITTER_HEAD
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.TRANSMITTER_HEAD
+
+---------------------------------------------------
+--   END DATA FOR TABLE TRANSMITTER_HEAD
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE TRANSMITTER_POWER_FACTOR
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.TRANSMITTER_POWER_FACTOR
+
+---------------------------------------------------
+--   END DATA FOR TABLE TRANSMITTER_POWER_FACTOR
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE TRANSMITTER_RANGE
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.TRANSMITTER_RANGE
+
+---------------------------------------------------
+--   END DATA FOR TABLE TRANSMITTER_RANGE
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE UNCERTAINTY
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.UNCERTAINTY
+
+---------------------------------------------------
+--   END DATA FOR TABLE UNCERTAINTY
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE UNCERTAINTY2_HZ
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.UNCERTAINTY2_HZ
+
+---------------------------------------------------
+--   END DATA FOR TABLE UNCERTAINTY2_HZ
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE UNCERTAINTYPARAMETERMANAGEMENT
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.UNCERTAINTYPARAMETERMANAGEMENT
+
+---------------------------------------------------
+--   END DATA FOR TABLE UNCERTAINTYPARAMETERMANAGEMENT
+---------------------------------------------------
+
+
+---------------------------------------------------
+--   DATA FOR TABLE UNDERTAKE_LABORATORY
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into TENGFEI.UNDERTAKE_LABORATORY
+Insert into TENGFEI.UNDERTAKE_LABORATORY (ID,NAME,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('电能','电能',to_timestamp('03-9月 -16 08.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null);
+Insert into TENGFEI.UNDERTAKE_LABORATORY (ID,NAME,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('数表三相','数表三相',to_timestamp('03-9月 -16 08.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null);
+Insert into TENGFEI.UNDERTAKE_LABORATORY (ID,NAME,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('数表单相','数表单相',to_timestamp('03-9月 -16 08.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null);
+Insert into TENGFEI.UNDERTAKE_LABORATORY (ID,NAME,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('指示仪表','指示仪表',to_timestamp('03-9月 -16 08.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null);
+Insert into TENGFEI.UNDERTAKE_LABORATORY (ID,NAME,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('直流仪器','直流仪器',to_timestamp('03-9月 -16 08.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null);
+Insert into TENGFEI.UNDERTAKE_LABORATORY (ID,NAME,CREATETIME,CREATEPERSON,UPDATETIME,UPDATEPERSON) values ('互感器','互感器',to_timestamp('03-9月 -16 08.00.00.000000000 上午','DD-MON-RR HH.MI.SS.FF AM'),null,null,null);
+
+---------------------------------------------------
+--   END DATA FOR TABLE UNDERTAKE_LABORATORY
+---------------------------------------------------
+
+--------------------------------------------------------
+--  Constraints for Table CROSS_COS
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."CROSS_COS" ADD CONSTRAINT "PK_CROSS_COS" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."CROSS_COS" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table PRINTREPORT
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."PRINTREPORT" ADD CONSTRAINT "PK_PRINTREPORT" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."PRINTREPORT" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DC_VOLTAGE_OUTPUT
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."DC_VOLTAGE_OUTPUT" ADD CONSTRAINT "PK_DC_VOLTAGE_OUTPUT" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."DC_VOLTAGE_OUTPUT" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table METERING_STANDARD_DEVICE
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."METERING_STANDARD_DEVICE" ADD CONSTRAINT "PK_METERING_STANDARD_DEVICE" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."METERING_STANDARD_DEVICE" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DC_VOLTAGE_CURRENT_MEASURE
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE" ADD CONSTRAINT "PK_DC_VOLTAGE_CURRENT_MEASURE" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DC_VOLTAGE_MEASURE_NO_INDEX
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."DC_VOLTAGE_MEASURE_NO_INDEX" ADD CONSTRAINT "PK_DC_VOLTAGE_MEASURE_NO_INDEX" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."DC_VOLTAGE_MEASURE_NO_INDEX" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysAnnouncement
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysAnnouncement" ADD CONSTRAINT "PK_SYSANNOUNCEMENT" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysAnnouncement" MODIFY ("Id" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table PREPARE_SCHEME
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."PREPARE_SCHEME" ADD CONSTRAINT "PK_PREPARE_SCHEME" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."PREPARE_SCHEME" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table PHASE
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."PHASE" ADD CONSTRAINT "PK_PHASE" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."PHASE" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table PROJECTTEMPLET
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."PROJECTTEMPLET" ADD CONSTRAINT "PK_PROJECTTEMPLET" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."PROJECTTEMPLET" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table ERROR_LIMIT
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."ERROR_LIMIT" ADD CONSTRAINT "PK_ERROR_LIMIT" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."ERROR_LIMIT" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DC_VOLTAGE_CURRENT_MEASURE_CH
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE_CH" ADD CONSTRAINT "PK_DC_VOLTAGE_CURRENT_MEASURE_" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE_CH" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysField
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysField" ADD CONSTRAINT "PK_SYSFIELD" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysField" MODIFY ("Id" NOT NULL ENABLE);
+ 
+  ALTER TABLE "TENGFEI"."SysField" MODIFY ("MyTexts" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table TRANSMITTER_HEAD
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."TRANSMITTER_HEAD" ADD CONSTRAINT "PK_TRANSMITTER_HEAD" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."TRANSMITTER_HEAD" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table ACTIVE_POWER
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."ACTIVE_POWER" ADD CONSTRAINT "PK_ACTIVE_POWER" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."ACTIVE_POWER" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table APPLIANCE_LABORATORY
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."APPLIANCE_LABORATORY" ADD CONSTRAINT "PK_APPLIANCE_LABORATORY" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."APPLIANCE_LABORATORY" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table CROSS_HEAD
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."CROSS_HEAD" ADD CONSTRAINT "PK_CROSS_HEAD" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."CROSS_HEAD" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysMenu
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysMenu" ADD CONSTRAINT "PK_SYSMENU" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysMenu" MODIFY ("Id" NOT NULL ENABLE);
+ 
+  ALTER TABLE "TENGFEI"."SysMenu" MODIFY ("Name" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table ORDER_TASK_INFORMATION
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."ORDER_TASK_INFORMATION" ADD CONSTRAINT "PK_ORDER_TASK_INFORMATION" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."ORDER_TASK_INFORMATION" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysLog
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysLog" ADD CONSTRAINT "PK_SYSLOG" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysLog" MODIFY ("Id" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysRoleSysPerson
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysRoleSysPerson" ADD CONSTRAINT "PK_SYSROLESYSPERSON" PRIMARY KEY ("SysPersonId", "SysRoleId") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysRoleSysPerson" MODIFY ("SysPersonId" NOT NULL ENABLE);
+ 
+  ALTER TABLE "TENGFEI"."SysRoleSysPerson" MODIFY ("SysRoleId" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table METERING_STANDARD_DEVICEPREPAR
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."METERING_STANDARD_DEVICEPREPAR" ADD CONSTRAINT "PK_METERING_STANDARD_DEVICEPRE" PRIMARY KEY ("PREPARE_SCHEME", "METERING_STANDARD_DEVICEID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."METERING_STANDARD_DEVICEPREPAR" MODIFY ("PREPARE_SCHEME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "TENGFEI"."METERING_STANDARD_DEVICEPREPAR" MODIFY ("METERING_STANDARD_DEVICEID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysMessageTemp
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysMessageTemp" ADD CONSTRAINT "PK_mail_info" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysMessageTemp" MODIFY ("Id" NOT NULL ENABLE);
+ 
+  ALTER TABLE "TENGFEI"."SysMessageTemp" MODIFY ("MessageName" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysDocument
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysDocument" ADD CONSTRAINT "PK_SYSDOCUMENT" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysDocument" MODIFY ("Id" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table AC_VOLTAGE_CURRENT
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."AC_VOLTAGE_CURRENT" ADD CONSTRAINT "PK_AC_VOLTAGE_CURRENT" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."AC_VOLTAGE_CURRENT" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysDepartment
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysDepartment" ADD CONSTRAINT "PK_SYSDEPARTMENT" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysDepartment" MODIFY ("Id" NOT NULL ENABLE);
+ 
+  ALTER TABLE "TENGFEI"."SysDepartment" MODIFY ("Name" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table TRANSMITTER_RANGE
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."TRANSMITTER_RANGE" ADD CONSTRAINT "PK_TRANSMITTER_RANGE" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."TRANSMITTER_RANGE" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table COMPANY
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."COMPANY" ADD CONSTRAINT "PK_COMPANY" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."COMPANY" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysEmailTemp
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysEmailTemp" ADD CONSTRAINT "PK_mail_info2" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysEmailTemp" MODIFY ("Id" NOT NULL ENABLE);
+ 
+  ALTER TABLE "TENGFEI"."SysEmailTemp" MODIFY ("Mail_name" NOT NULL ENABLE);
+ 
+  ALTER TABLE "TENGFEI"."SysEmailTemp" MODIFY ("Subject" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table CROSS_SIN
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."CROSS_SIN" ADD CONSTRAINT "PK_CROSS_SIN" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."CROSS_SIN" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysNotice
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysNotice" ADD CONSTRAINT "PK_SYSNOTICE" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysNotice" MODIFY ("Id" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysException
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysException" ADD CONSTRAINT "PK_SYSEXCEPTION" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysException" MODIFY ("Id" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table FREQUENCY
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."FREQUENCY" ADD CONSTRAINT "PK_FREQUENCY" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."FREQUENCY" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysPerson
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysPerson" ADD CONSTRAINT "PK_SYSPERSON" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysPerson" MODIFY ("Id" NOT NULL ENABLE);
+ 
+  ALTER TABLE "TENGFEI"."SysPerson" MODIFY ("Name" NOT NULL ENABLE);
+ 
+  ALTER TABLE "TENGFEI"."SysPerson" MODIFY ("Password" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table TRANSMITTER_FREQUENCY_PHASE
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."TRANSMITTER_FREQUENCY_PHASE" ADD CONSTRAINT "PK_TRANSMITTER_FREQUENCY_PHASE" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."TRANSMITTER_FREQUENCY_PHASE" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table ALLOWABLE_ERROR
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."ALLOWABLE_ERROR" ADD CONSTRAINT "PK_ALLOWABLE_ERROR" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."ALLOWABLE_ERROR" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table FileUploader
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."FileUploader" ADD CONSTRAINT "PK_FILEUPLOADER" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."FileUploader" MODIFY ("Id" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SCHEME_RULE
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SCHEME_RULE" ADD CONSTRAINT "PK_SCHEME_RULE" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SCHEME_RULE" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table DC_CURRENT_OUTPUT
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."DC_CURRENT_OUTPUT" ADD CONSTRAINT "PK_DC_CURRENT_OUTPUT" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."DC_CURRENT_OUTPUT" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table METERING_STANDARD_DEVICE_CHECK
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."METERING_STANDARD_DEVICE_CHECK" ADD CONSTRAINT "PK_METERING_STANDARD_DEVICE_C2" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."METERING_STANDARD_DEVICE_CHECK" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table APPLIANCE_DETAIL_INFORMATION
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."APPLIANCE_DETAIL_INFORMATION" ADD CONSTRAINT "PK_APPLIANCE_DETAIL_INFORMATIO" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."APPLIANCE_DETAIL_INFORMATION" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table UNCERTAINTY2_HZ
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."UNCERTAINTY2_HZ" ADD CONSTRAINT "PK_UNCERTAINTY2_HZ" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."UNCERTAINTY2_HZ" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysMenuSysOperation
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysMenuSysOperation" ADD CONSTRAINT "PK_SYSMENUSYSOPERATION" PRIMARY KEY ("SysMenuId", "SysOperationId") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysMenuSysOperation" MODIFY ("SysMenuId" NOT NULL ENABLE);
+ 
+  ALTER TABLE "TENGFEI"."SysMenuSysOperation" MODIFY ("SysOperationId" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table UNCERTAINTY
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."UNCERTAINTY" ADD CONSTRAINT "PK_UNCERTAINTY" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."UNCERTAINTY" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table CROSS_VOLTAGE_CURRENT
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."CROSS_VOLTAGE_CURRENT" ADD CONSTRAINT "PK_CROSS_VOLTAGE_CURRENT" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."CROSS_VOLTAGE_CURRENT" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table TRANSMITER_SIN
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."TRANSMITER_SIN" ADD CONSTRAINT "PK_TRANSMITER_SIN" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."TRANSMITER_SIN" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table TRANSMITTER_POWER_FACTOR
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."TRANSMITTER_POWER_FACTOR" ADD CONSTRAINT "PK_TRANSMITTER_POWER_FACTOR" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."TRANSMITTER_POWER_FACTOR" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SCHEME
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SCHEME" ADD CONSTRAINT "PK_SCHEME" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SCHEME" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table THREE_PHASE_UNCERTAINTY
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."THREE_PHASE_UNCERTAINTY" ADD CONSTRAINT "PK_THREE_PHASE_UNCERTAINTY" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."THREE_PHASE_UNCERTAINTY" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table FILE_UPLOADER
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."FILE_UPLOADER" ADD CONSTRAINT "PK_FILE_UPLOADER" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."FILE_UPLOADER" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table APPLIANCECOLLECTION
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."APPLIANCECOLLECTION" ADD CONSTRAINT "PK_APPLIANCECOLLECTION" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."APPLIANCECOLLECTION" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table UNDERTAKE_LABORATORY
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."UNDERTAKE_LABORATORY" ADD CONSTRAINT "PK_UNDERTAKE_LABORATORY" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."UNDERTAKE_LABORATORY" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysMessage
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysMessage" ADD CONSTRAINT "PK_SYSMESSAGE" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysMessage" MODIFY ("Id" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table QUALIFIED_UNQUALIFIED_TEST_ITE
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."QUALIFIED_UNQUALIFIED_TEST_ITE" ADD CONSTRAINT "PK_QUALIFIED_UNQUALIFIED_TEST_" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."QUALIFIED_UNQUALIFIED_TEST_ITE" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysEmail
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysEmail" ADD CONSTRAINT "PK_SYSEMAIL" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysEmail" MODIFY ("Id" NOT NULL ENABLE);
+ 
+  ALTER TABLE "TENGFEI"."SysEmail" MODIFY ("Subject" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysDocumentSysPerson
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysDocumentSysPerson" ADD CONSTRAINT "PK_SYSDOCUMENTSYSPERSON" PRIMARY KEY ("SysPersonId", "SysSysDocumentId_Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysDocumentSysPerson" MODIFY ("SysPersonId" NOT NULL ENABLE);
+ 
+  ALTER TABLE "TENGFEI"."SysDocumentSysPerson" MODIFY ("SysSysDocumentId_Id" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table REPORTCOLLECTION
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."REPORTCOLLECTION" ADD CONSTRAINT "PK_REPORTCOLLECTION" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."REPORTCOLLECTION" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysRole
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysRole" ADD CONSTRAINT "PK_SYSROLE" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysRole" MODIFY ("Id" NOT NULL ENABLE);
+ 
+  ALTER TABLE "TENGFEI"."SysRole" MODIFY ("Name" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table RULE
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."RULE" ADD CONSTRAINT "PK_RULE" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."RULE" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysOperation
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysOperation" ADD CONSTRAINT "PK_SYSOPERATION" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysOperation" MODIFY ("Id" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysDocumentSysDepartment
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysDocumentSysDepartment" ADD CONSTRAINT "PK_SYSDOCUMENTSYSDEPARTMENT" PRIMARY KEY ("SysDepartmentId", "Sys_Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysDocumentSysDepartment" MODIFY ("SysDepartmentId" NOT NULL ENABLE);
+ 
+  ALTER TABLE "TENGFEI"."SysDocumentSysDepartment" MODIFY ("Sys_Id" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysDocumentTalk
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysDocumentTalk" ADD CONSTRAINT "PK_SYSDOCUMENTTALK" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysDocumentTalk" MODIFY ("Id" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SysMenuSysRoleSysOperation
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysMenuSysRoleSysOperation" ADD CONSTRAINT "PK_SYSMENUSYSROLESYSOPERATION" PRIMARY KEY ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysMenuSysRoleSysOperation" MODIFY ("Id" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table CROSS_FREQUENCY_POWER_FACTOR
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."CROSS_FREQUENCY_POWER_FACTOR" ADD CONSTRAINT "PK_CROSS_FREQUENCY_POWER_FACTO" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."CROSS_FREQUENCY_POWER_FACTOR" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table UNCERTAINTYPARAMETERMANAGEMENT
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."UNCERTAINTYPARAMETERMANAGEMENT" ADD CONSTRAINT "PK_UNCERTAINTYPARAMETERMANAGEM" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."UNCERTAINTYPARAMETERMANAGEMENT" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table TRANSMITTER_COS
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."TRANSMITTER_COS" ADD CONSTRAINT "PK_TRANSMITTER_COS" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."TRANSMITTER_COS" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table OVERALL_TABLE
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."OVERALL_TABLE" ADD CONSTRAINT "PK_OVERALL_TABLE" PRIMARY KEY ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."OVERALL_TABLE" MODIFY ("ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  DDL for Index PK_SYSDOCUMENTSYSPERSON
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSDOCUMENTSYSPERSON" ON "TENGFEI"."SysDocumentSysPerson" ("SysPersonId", "SysSysDocumentId_Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSDOCUMENT
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSDOCUMENT" ON "TENGFEI"."SysDocument" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_DC_VOLTAGE_MEASURE_NO_INDEX
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_DC_VOLTAGE_MEASURE_NO_INDEX" ON "TENGFEI"."DC_VOLTAGE_MEASURE_NO_INDEX" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_ERROR_LIMIT
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_ERROR_LIMIT" ON "TENGFEI"."ERROR_LIMIT" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_FILEUPLOADER
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_FILEUPLOADER" ON "TENGFEI"."FileUploader" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SCHEME_RULE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SCHEME_RULE" ON "TENGFEI"."SCHEME_RULE" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_DC_VOLTAGE_CURRENT_MEASURE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_DC_VOLTAGE_CURRENT_MEASURE" ON "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_ALLOWABLE_ERROR
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_ALLOWABLE_ERROR" ON "TENGFEI"."ALLOWABLE_ERROR" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSANNOUNCEMENT
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSANNOUNCEMENT" ON "TENGFEI"."SysAnnouncement" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_TRANSMITTER_RANGE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_TRANSMITTER_RANGE" ON "TENGFEI"."TRANSMITTER_RANGE" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSOPERATION
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSOPERATION" ON "TENGFEI"."SysOperation" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_DC_VOLTAGE_OUTPUT
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_DC_VOLTAGE_OUTPUT" ON "TENGFEI"."DC_VOLTAGE_OUTPUT" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_UNDERTAKE_LABORATORY
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_UNDERTAKE_LABORATORY" ON "TENGFEI"."UNDERTAKE_LABORATORY" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_COMPANY
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_COMPANY" ON "TENGFEI"."COMPANY" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSDOCUMENTSYSDEPARTMENT
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSDOCUMENTSYSDEPARTMENT" ON "TENGFEI"."SysDocumentSysDepartment" ("SysDepartmentId", "Sys_Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_mail_info2
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_mail_info2" ON "TENGFEI"."SysEmailTemp" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_FREQUENCY
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_FREQUENCY" ON "TENGFEI"."FREQUENCY" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSROLE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSROLE" ON "TENGFEI"."SysRole" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSMENU
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSMENU" ON "TENGFEI"."SysMenu" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSFIELD
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSFIELD" ON "TENGFEI"."SysField" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_CROSS_HEAD
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_CROSS_HEAD" ON "TENGFEI"."CROSS_HEAD" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_TRANSMITER_SIN
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_TRANSMITER_SIN" ON "TENGFEI"."TRANSMITER_SIN" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_AC_VOLTAGE_CURRENT
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_AC_VOLTAGE_CURRENT" ON "TENGFEI"."AC_VOLTAGE_CURRENT" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_APPLIANCE_LABORATORY
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_APPLIANCE_LABORATORY" ON "TENGFEI"."APPLIANCE_LABORATORY" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSDEPARTMENT
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSDEPARTMENT" ON "TENGFEI"."SysDepartment" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSEMAIL
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSEMAIL" ON "TENGFEI"."SysEmail" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_CROSS_SIN
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_CROSS_SIN" ON "TENGFEI"."CROSS_SIN" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_FILE_UPLOADER
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_FILE_UPLOADER" ON "TENGFEI"."FILE_UPLOADER" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_UNCERTAINTYPARAMETERMANAGEM
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_UNCERTAINTYPARAMETERMANAGEM" ON "TENGFEI"."UNCERTAINTYPARAMETERMANAGEMENT" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_APPLIANCECOLLECTION
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_APPLIANCECOLLECTION" ON "TENGFEI"."APPLIANCECOLLECTION" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_TRANSMITTER_FREQUENCY_PHASE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_TRANSMITTER_FREQUENCY_PHASE" ON "TENGFEI"."TRANSMITTER_FREQUENCY_PHASE" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSNOTICE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSNOTICE" ON "TENGFEI"."SysNotice" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSROLESYSPERSON
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSROLESYSPERSON" ON "TENGFEI"."SysRoleSysPerson" ("SysPersonId", "SysRoleId") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_CROSS_VOLTAGE_CURRENT
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_CROSS_VOLTAGE_CURRENT" ON "TENGFEI"."CROSS_VOLTAGE_CURRENT" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index Index_1
+--------------------------------------------------------
+
+  CREATE INDEX "TENGFEI"."Index_1" ON "TENGFEI"."SysField" ("MyTables", "MyColums") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_CROSS_FREQUENCY_POWER_FACTO
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_CROSS_FREQUENCY_POWER_FACTO" ON "TENGFEI"."CROSS_FREQUENCY_POWER_FACTOR" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_METERING_STANDARD_DEVICEPRE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_METERING_STANDARD_DEVICEPRE" ON "TENGFEI"."METERING_STANDARD_DEVICEPREPAR" ("PREPARE_SCHEME", "METERING_STANDARD_DEVICEID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_CROSS_COS
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_CROSS_COS" ON "TENGFEI"."CROSS_COS" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_METERING_STANDARD_DEVICE_C2
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_METERING_STANDARD_DEVICE_C2" ON "TENGFEI"."METERING_STANDARD_DEVICE_CHECK" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSEXCEPTION
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSEXCEPTION" ON "TENGFEI"."SysException" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSMENUSYSOPERATION
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSMENUSYSOPERATION" ON "TENGFEI"."SysMenuSysOperation" ("SysMenuId", "SysOperationId") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_TRANSMITTER_HEAD
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_TRANSMITTER_HEAD" ON "TENGFEI"."TRANSMITTER_HEAD" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_PHASE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_PHASE" ON "TENGFEI"."PHASE" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSPERSON
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSPERSON" ON "TENGFEI"."SysPerson" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_OVERALL_TABLE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_OVERALL_TABLE" ON "TENGFEI"."OVERALL_TABLE" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_ORDER_TASK_INFORMATION
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_ORDER_TASK_INFORMATION" ON "TENGFEI"."ORDER_TASK_INFORMATION" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_PREPARE_SCHEME
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_PREPARE_SCHEME" ON "TENGFEI"."PREPARE_SCHEME" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_RULE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_RULE" ON "TENGFEI"."RULE" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_UNCERTAINTY2_HZ
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_UNCERTAINTY2_HZ" ON "TENGFEI"."UNCERTAINTY2_HZ" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_PRINTREPORT
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_PRINTREPORT" ON "TENGFEI"."PRINTREPORT" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_mail_info
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_mail_info" ON "TENGFEI"."SysMessageTemp" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index Index_2
+--------------------------------------------------------
+
+  CREATE INDEX "TENGFEI"."Index_2" ON "TENGFEI"."SysPerson" ("Name") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_TRANSMITTER_COS
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_TRANSMITTER_COS" ON "TENGFEI"."TRANSMITTER_COS" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_METERING_STANDARD_DEVICE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_METERING_STANDARD_DEVICE" ON "TENGFEI"."METERING_STANDARD_DEVICE" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSMESSAGE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSMESSAGE" ON "TENGFEI"."SysMessage" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSDOCUMENTTALK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSDOCUMENTTALK" ON "TENGFEI"."SysDocumentTalk" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_DC_VOLTAGE_CURRENT_MEASURE_
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_DC_VOLTAGE_CURRENT_MEASURE_" ON "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE_CH" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSMENUSYSROLESYSOPERATION
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSMENUSYSROLESYSOPERATION" ON "TENGFEI"."SysMenuSysRoleSysOperation" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SYSLOG
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SYSLOG" ON "TENGFEI"."SysLog" ("Id") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_PROJECTTEMPLET
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_PROJECTTEMPLET" ON "TENGFEI"."PROJECTTEMPLET" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_TRANSMITTER_POWER_FACTOR
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_TRANSMITTER_POWER_FACTOR" ON "TENGFEI"."TRANSMITTER_POWER_FACTOR" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_QUALIFIED_UNQUALIFIED_TEST_
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_QUALIFIED_UNQUALIFIED_TEST_" ON "TENGFEI"."QUALIFIED_UNQUALIFIED_TEST_ITE" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_APPLIANCE_DETAIL_INFORMATIO
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_APPLIANCE_DETAIL_INFORMATIO" ON "TENGFEI"."APPLIANCE_DETAIL_INFORMATION" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_THREE_PHASE_UNCERTAINTY
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_THREE_PHASE_UNCERTAINTY" ON "TENGFEI"."THREE_PHASE_UNCERTAINTY" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_ACTIVE_POWER
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_ACTIVE_POWER" ON "TENGFEI"."ACTIVE_POWER" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_REPORTCOLLECTION
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_REPORTCOLLECTION" ON "TENGFEI"."REPORTCOLLECTION" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_DC_CURRENT_OUTPUT
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_DC_CURRENT_OUTPUT" ON "TENGFEI"."DC_CURRENT_OUTPUT" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SCHEME
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_SCHEME" ON "TENGFEI"."SCHEME" ("ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_UNCERTAINTY
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TENGFEI"."PK_UNCERTAINTY" ON "TENGFEI"."UNCERTAINTY" ("ID") 
+  ;
+--------------------------------------------------------
+--  Ref Constraints for Table ACTIVE_POWER
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."ACTIVE_POWER" ADD CONSTRAINT "FK_ACTIVE_P_REFERENCE_OVERALL_" FOREIGN KEY ("OVERALL_TABLEID")
+	  REFERENCES "TENGFEI"."OVERALL_TABLE" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table AC_VOLTAGE_CURRENT
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."AC_VOLTAGE_CURRENT" ADD CONSTRAINT "FK_AC_VOLTA_REFERENCE_OVERALL_" FOREIGN KEY ("OVERALL_TABLEID")
+	  REFERENCES "TENGFEI"."OVERALL_TABLE" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table ALLOWABLE_ERROR
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."ALLOWABLE_ERROR" ADD CONSTRAINT "FK_MAXIMUM__REFERENCE_METERIN2" FOREIGN KEY ("METERING_STANDARD_DEVICEID")
+	  REFERENCES "TENGFEI"."METERING_STANDARD_DEVICE" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table APPLIANCECOLLECTION
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."APPLIANCECOLLECTION" ADD CONSTRAINT "FK_APPLIANC_REFERENCE_APPLIANC" FOREIGN KEY ("APPLIANCE_DETAIL_INFORMATIONID")
+	  REFERENCES "TENGFEI"."APPLIANCE_DETAIL_INFORMATION" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table APPLIANCE_DETAIL_INFORMATION
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."APPLIANCE_DETAIL_INFORMATION" ADD CONSTRAINT "FK_APPLIANC_REFERENCE_ORDER_TA" FOREIGN KEY ("ORDER_TASK_INFORMATIONID")
+	  REFERENCES "TENGFEI"."ORDER_TASK_INFORMATION" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table APPLIANCE_LABORATORY
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."APPLIANCE_LABORATORY" ADD CONSTRAINT "FK_APPLIANC_REFERENCE_APPLIAN2" FOREIGN KEY ("APPLIANCE_DETAIL_INFORMATIONID")
+	  REFERENCES "TENGFEI"."APPLIANCE_DETAIL_INFORMATION" ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."APPLIANCE_LABORATORY" ADD CONSTRAINT "FK_APPLIANC_REFERENCE_PREPARE_" FOREIGN KEY ("PREPARE_SCHEMEID")
+	  REFERENCES "TENGFEI"."PREPARE_SCHEME" ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."APPLIANCE_LABORATORY" ADD CONSTRAINT "FK_APPLIANC_REFERENCE_UNDERTAK" FOREIGN KEY ("UNDERTAKE_LABORATORYID")
+	  REFERENCES "TENGFEI"."UNDERTAKE_LABORATORY" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table COMPANY
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."COMPANY" ADD CONSTRAINT "FK_COMPANY_REFERENCE_COMPANY" FOREIGN KEY ("PARENTID")
+	  REFERENCES "TENGFEI"."COMPANY" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table CROSS_COS
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."CROSS_COS" ADD CONSTRAINT "FK_CROSS_CO_REFERENCE_CROSS_HE" FOREIGN KEY ("CROSS_HEADID")
+	  REFERENCES "TENGFEI"."CROSS_HEAD" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table CROSS_FREQUENCY_POWER_FACTOR
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."CROSS_FREQUENCY_POWER_FACTOR" ADD CONSTRAINT "FK_CROSS_FR_REFERENCE_CROSS_HE" FOREIGN KEY ("CROSS_HEADID")
+	  REFERENCES "TENGFEI"."CROSS_HEAD" ("ID") ENABLE;
+
+--------------------------------------------------------
+--  Ref Constraints for Table CROSS_SIN
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."CROSS_SIN" ADD CONSTRAINT "FK_CROSS_SI_REFERENCE_CROSS_HE" FOREIGN KEY ("CROSS_HEADID")
+	  REFERENCES "TENGFEI"."CROSS_HEAD" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table CROSS_VOLTAGE_CURRENT
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."CROSS_VOLTAGE_CURRENT" ADD CONSTRAINT "FK_CROSS_VO_REFERENCE_CROSS_HE" FOREIGN KEY ("CROSS_HEADID")
+	  REFERENCES "TENGFEI"."CROSS_HEAD" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table DC_CURRENT_OUTPUT
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."DC_CURRENT_OUTPUT" ADD CONSTRAINT "FK_DC_CURRE_REFERENCE_OVERALL_" FOREIGN KEY ("OVERALL_TABLEID")
+	  REFERENCES "TENGFEI"."OVERALL_TABLE" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table DC_VOLTAGE_CURRENT_MEASURE
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE" ADD CONSTRAINT "FK_DC_VOLTA_REFERENCE_OVERALL3" FOREIGN KEY ("OVERALL_TABLEID")
+	  REFERENCES "TENGFEI"."OVERALL_TABLE" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table DC_VOLTAGE_CURRENT_MEASURE_CH
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."DC_VOLTAGE_CURRENT_MEASURE_CH" ADD CONSTRAINT "FK_DC_VOLTA_REFERENCE_OVERALL_" FOREIGN KEY ("OVERALL_TABLEID")
+	  REFERENCES "TENGFEI"."OVERALL_TABLE" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table DC_VOLTAGE_MEASURE_NO_INDEX
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."DC_VOLTAGE_MEASURE_NO_INDEX" ADD CONSTRAINT "FK_DC_VOLTA_REFERENCE_OVERALL4" FOREIGN KEY ("OVERALL_TABLEID")
+	  REFERENCES "TENGFEI"."OVERALL_TABLE" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table DC_VOLTAGE_OUTPUT
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."DC_VOLTAGE_OUTPUT" ADD CONSTRAINT "FK_DC_VOLTA_REFERENCE_OVERALL2" FOREIGN KEY ("OVERALL_TABLEID")
+	  REFERENCES "TENGFEI"."OVERALL_TABLE" ("ID") ENABLE;
+
+--------------------------------------------------------
+--  Ref Constraints for Table FILE_UPLOADER
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."FILE_UPLOADER" ADD CONSTRAINT "FK_FILE_UPL_REFERENCE_PREPARE_" FOREIGN KEY ("PREPARE_SCHEMEID")
+	  REFERENCES "TENGFEI"."PREPARE_SCHEME" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table FREQUENCY
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."FREQUENCY" ADD CONSTRAINT "FK_FREQUENC_REFERENCE_OVERALL_" FOREIGN KEY ("OVERALL_TABLEID")
+	  REFERENCES "TENGFEI"."OVERALL_TABLE" ("ID") ENABLE;
+
+--------------------------------------------------------
+--  Ref Constraints for Table METERING_STANDARD_DEVICE
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."METERING_STANDARD_DEVICE" ADD CONSTRAINT "FK_METERING_REFERENCE_UNDERTAK" FOREIGN KEY ("UNDERTAKE_LABORATORYID")
+	  REFERENCES "TENGFEI"."UNDERTAKE_LABORATORY" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table METERING_STANDARD_DEVICEPREPAR
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."METERING_STANDARD_DEVICEPREPAR" ADD CONSTRAINT "FK_METERING_REFERENCE_METERIN3" FOREIGN KEY ("METERING_STANDARD_DEVICEID")
+	  REFERENCES "TENGFEI"."METERING_STANDARD_DEVICE" ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."METERING_STANDARD_DEVICEPREPAR" ADD CONSTRAINT "FK_PREPARE_SCHEME_REF" FOREIGN KEY ("PREPARE_SCHEME")
+	  REFERENCES "TENGFEI"."PREPARE_SCHEME" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table METERING_STANDARD_DEVICE_CHECK
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."METERING_STANDARD_DEVICE_CHECK" ADD CONSTRAINT "FK_METERING_REFERENCE_METERIN2" FOREIGN KEY ("METERING_STANDARD_DEVICEID")
+	  REFERENCES "TENGFEI"."METERING_STANDARD_DEVICE" ("ID") ENABLE;
+
+
+--------------------------------------------------------
+--  Ref Constraints for Table PHASE
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."PHASE" ADD CONSTRAINT "FK_PHASE_REFERENCE_OVERALL_" FOREIGN KEY ("OVERALL_TABLEID")
+	  REFERENCES "TENGFEI"."OVERALL_TABLE" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table PREPARE_SCHEME
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."PREPARE_SCHEME" ADD CONSTRAINT "FK_PREPARE__REFERENCE_SCHEME" FOREIGN KEY ("SCHEMEID")
+	  REFERENCES "TENGFEI"."SCHEME" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table PRINTREPORT
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."PRINTREPORT" ADD CONSTRAINT "FK_PRINTREP_REFERENCE_PREPARE_" FOREIGN KEY ("PREPARE_SCHEMEID")
+	  REFERENCES "TENGFEI"."PREPARE_SCHEME" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table PROJECTTEMPLET
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."PROJECTTEMPLET" ADD CONSTRAINT "FK_PROJECTT_REFERENCE_RULE" FOREIGN KEY ("RULEID")
+	  REFERENCES "TENGFEI"."RULE" ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."PROJECTTEMPLET" ADD CONSTRAINT "FK_PROJECTT_REFERENCE_SCHEME" FOREIGN KEY ("SCHEMEID")
+	  REFERENCES "TENGFEI"."SCHEME" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table QUALIFIED_UNQUALIFIED_TEST_ITE
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."QUALIFIED_UNQUALIFIED_TEST_ITE" ADD CONSTRAINT "FK_QUALIFIED_UN" FOREIGN KEY ("PREPARE_SCHEMEID")
+	  REFERENCES "TENGFEI"."PREPARE_SCHEME" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table REPORTCOLLECTION
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."REPORTCOLLECTION" ADD CONSTRAINT "FK_REPORTCO_REFERENCE_PREPARE_" FOREIGN KEY ("PREPARE_SCHEMEID")
+	  REFERENCES "TENGFEI"."PREPARE_SCHEME" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table RULE
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."RULE" ADD CONSTRAINT "FK_RULE_REFERENCE_RULE" FOREIGN KEY ("PARENTID")
+	  REFERENCES "TENGFEI"."RULE" ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."RULE" ADD CONSTRAINT "FK_RULE_REFERENCE_UNDERTAK" FOREIGN KEY ("UNDERTAKE_LABORATORYID")
+	  REFERENCES "TENGFEI"."UNDERTAKE_LABORATORY" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SCHEME
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SCHEME" ADD CONSTRAINT "FK_SCHEME_REFERENCE_UNDERTAK" FOREIGN KEY ("UNDERTAKE_LABORATORYID")
+	  REFERENCES "TENGFEI"."UNDERTAKE_LABORATORY" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SCHEME_RULE
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SCHEME_RULE" ADD CONSTRAINT "FK_SCHEME_R_REFERENCE_RULE" FOREIGN KEY ("RULEID")
+	  REFERENCES "TENGFEI"."RULE" ("ID") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SCHEME_RULE" ADD CONSTRAINT "FK_SCHEME_R_REFERENCE_SCHEME" FOREIGN KEY ("SCHEMEID")
+	  REFERENCES "TENGFEI"."SCHEME" ("ID") ENABLE;
+
+--------------------------------------------------------
+--  Ref Constraints for Table SysDepartment
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysDepartment" ADD CONSTRAINT "FK_SYSDEPAR_REFERENCE_SYSDEPAR" FOREIGN KEY ("ParentId")
+	  REFERENCES "TENGFEI"."SysDepartment" ("Id") ENABLE;
+
+--------------------------------------------------------
+--  Ref Constraints for Table SysDocumentSysDepartment
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysDocumentSysDepartment" ADD CONSTRAINT "FK_SYSDOCUM_RE2" FOREIGN KEY ("Sys_Id")
+	  REFERENCES "TENGFEI"."SysDocument" ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysDocumentSysDepartment" ADD CONSTRAINT "FK_SYSDOCUM_REFERENCE_SYSDEPAR" FOREIGN KEY ("SysDepartmentId")
+	  REFERENCES "TENGFEI"."SysDepartment" ("Id") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SysDocumentSysPerson
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysDocumentSysPerson" ADD CONSTRAINT "FK_SYSDOCUM_RE3" FOREIGN KEY ("SysSysDocumentId_Id")
+	  REFERENCES "TENGFEI"."SysDocument" ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysDocumentSysPerson" ADD CONSTRAINT "FK_SYSDOCUM_REFERENCE_SYSPERSO" FOREIGN KEY ("SysPersonId")
+	  REFERENCES "TENGFEI"."SysPerson" ("Id") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SysDocumentTalk
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysDocumentTalk" ADD CONSTRAINT "FK_SYSDOCUM_REFERENCE_SYSDOCUM" FOREIGN KEY ("SysDocumentId")
+	  REFERENCES "TENGFEI"."SysDocument" ("Id") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SysEmail
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysEmail" ADD CONSTRAINT "FK_SYSEMAIL_REFERENCE_SYSEMAIL" FOREIGN KEY ("SysMailId")
+	  REFERENCES "TENGFEI"."SysEmailTemp" ("Id") ENABLE;
+
+
+--------------------------------------------------------
+--  Ref Constraints for Table SysField
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysField" ADD CONSTRAINT "FK_SYSFIELD_REFERENCE_SYSFIELD" FOREIGN KEY ("ParentId")
+	  REFERENCES "TENGFEI"."SysField" ("Id") ENABLE;
+
+--------------------------------------------------------
+--  Ref Constraints for Table SysMenu
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysMenu" ADD CONSTRAINT "FK_SYSMENU_REFERENCE_SYSMENU" FOREIGN KEY ("ParentId")
+	  REFERENCES "TENGFEI"."SysMenu" ("Id") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SysMenuSysOperation
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysMenuSysOperation" ADD CONSTRAINT "FK_SYSMENUS_REFERENCE_SYSMENU" FOREIGN KEY ("SysMenuId")
+	  REFERENCES "TENGFEI"."SysMenu" ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysMenuSysOperation" ADD CONSTRAINT "FK_SYSMENUS_REFERENCE_SYSOPERA" FOREIGN KEY ("SysOperationId")
+	  REFERENCES "TENGFEI"."SysOperation" ("Id") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SysMenuSysRoleSysOperation
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysMenuSysRoleSysOperation" ADD CONSTRAINT "FK_SYSMENUS_RE2" FOREIGN KEY ("SysOperationId")
+	  REFERENCES "TENGFEI"."SysOperation" ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysMenuSysRoleSysOperation" ADD CONSTRAINT "FK_SYSMENUS_REFERENCE_SYSMENU2" FOREIGN KEY ("SysMenuId")
+	  REFERENCES "TENGFEI"."SysMenu" ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysMenuSysRoleSysOperation" ADD CONSTRAINT "FK_SYSMENUS_REFERENCE_SYSROLE" FOREIGN KEY ("SysRoleId")
+	  REFERENCES "TENGFEI"."SysRole" ("Id") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SysMessage
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysMessage" ADD CONSTRAINT "FK_SYSMESSA_REFERENCE_SYSMESSA" FOREIGN KEY ("SysMessageTempId")
+	  REFERENCES "TENGFEI"."SysMessageTemp" ("Id") ENABLE;
+
+
+
+--------------------------------------------------------
+--  Ref Constraints for Table SysPerson
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysPerson" ADD CONSTRAINT "FK_SYSPERSO_REFERENCE_SYSDEPAR" FOREIGN KEY ("SysDepartmentId")
+	  REFERENCES "TENGFEI"."SysDepartment" ("Id") ENABLE;
+
+--------------------------------------------------------
+--  Ref Constraints for Table SysRoleSysPerson
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."SysRoleSysPerson" ADD CONSTRAINT "FK_SYSROLES_REFERENCE_SYSPERSO" FOREIGN KEY ("SysPersonId")
+	  REFERENCES "TENGFEI"."SysPerson" ("Id") ENABLE;
+ 
+  ALTER TABLE "TENGFEI"."SysRoleSysPerson" ADD CONSTRAINT "FK_SYSROLES_REFERENCE_SYSROLE" FOREIGN KEY ("SysRoleId")
+	  REFERENCES "TENGFEI"."SysRole" ("Id") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table THREE_PHASE_UNCERTAINTY
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."THREE_PHASE_UNCERTAINTY" ADD CONSTRAINT "FK_THREE_PH_REFERENCE_RULE" FOREIGN KEY ("RULEID")
+	  REFERENCES "TENGFEI"."RULE" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table TRANSMITER_SIN
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."TRANSMITER_SIN" ADD CONSTRAINT "FK_TRANSMIT_REFERENCE_TRANSMIT" FOREIGN KEY ("TRANSMITTER_HEADID")
+	  REFERENCES "TENGFEI"."TRANSMITTER_HEAD" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table TRANSMITTER_COS
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."TRANSMITTER_COS" ADD CONSTRAINT "FK_TRANSMIT_REFERENCE_TRANSMI3" FOREIGN KEY ("TRANSMITTER_HEADID")
+	  REFERENCES "TENGFEI"."TRANSMITTER_HEAD" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table TRANSMITTER_FREQUENCY_PHASE
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."TRANSMITTER_FREQUENCY_PHASE" ADD CONSTRAINT "FK_TRANSMIT_REFERENCE_TRANSMI2" FOREIGN KEY ("TRANSMITTER_HEADID")
+	  REFERENCES "TENGFEI"."TRANSMITTER_HEAD" ("ID") ENABLE;
+
+--------------------------------------------------------
+--  Ref Constraints for Table TRANSMITTER_POWER_FACTOR
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."TRANSMITTER_POWER_FACTOR" ADD CONSTRAINT "FK_TRANSMIT_REFERENCE_TRANSMI4" FOREIGN KEY ("TRANSMITTER_HEADID")
+	  REFERENCES "TENGFEI"."TRANSMITTER_HEAD" ("ID") ENABLE;
+
+--------------------------------------------------------
+--  Ref Constraints for Table UNCERTAINTY
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."UNCERTAINTY" ADD CONSTRAINT "FK_ONE_PHAS_REFERENCE_RULE2" FOREIGN KEY ("RULEID")
+	  REFERENCES "TENGFEI"."RULE" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table UNCERTAINTY2_HZ
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."UNCERTAINTY2_HZ" ADD CONSTRAINT "FK_UNCERTAI_REFERENCE_RULE2" FOREIGN KEY ("RULEID")
+	  REFERENCES "TENGFEI"."RULE" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table UNCERTAINTYPARAMETERMANAGEMENT
+--------------------------------------------------------
+
+  ALTER TABLE "TENGFEI"."UNCERTAINTYPARAMETERMANAGEMENT" ADD CONSTRAINT "FK_UNCERTAI_REFERENCE_RULE" FOREIGN KEY ("RULEID")
+	  REFERENCES "TENGFEI"."RULE" ("ID") ENABLE;
+
+--------------------------------------------------------
+--  DDL for View VBAOGAODAYIN
+--------------------------------------------------------
+
+  CREATE OR REPLACE VIEW "TENGFEI"."VBAOGAODAYIN" ("ID", "REPORTNUMBER", "ORDER_NUMBER", "APPLIANCE_NAME", "VERSION", "FACTORY_NUM", "CERTIFICATE_ENTERPRISE", "CUSTOMER_SPECIFIC_REQUIREMENTS", "CERTIFICATE_CATEGORY", "QUALIFICATIONS", "CONCLUSION_EXPLAIN", "CONCLUSION", "UNDERTAKE_LABORATORYID", "APPROVALDATE", "BAR_CODE_NUM", "PRINTSTATUS") AS 
+  select d.ID,
+  d.REPORTNUMBER,             --报告编号
+  a.ORDER_NUMBER,                  --委托单号
+  b.APPLIANCE_NAME,                --器具名称
+  b.VERSION,                         --型号
+  b.FACTORY_NUM,                   --出厂编号
+  a.CERTIFICATE_ENTERPRISE,        --证书单位
+  a.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
+  d.CERTIFICATE_CATEGORY,          --证书类别
+  CASE
+    when d.QUALIFICATIONS     ='本单位获北京市质量技术监督局专项计量授权，证书编号：（京）法计（2012）006号'
+    and d.CERTIFICATE_CATEGORY='检定'
+    and a.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    THEN '北京授权检定'
+    WHEN d.qualifications     ='/'
+    and d.CERTIFICATE_CATEGORY='检定'
+    and a.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    THEN '检定'
+    WHEN d.qualifications     ='本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394'
+    and d.CERTIFICATE_CATEGORY='校准'
+    and a.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    THEN 'CNAS校准'
+    WHEN d.qualifications     ='/'
+    and d.CERTIFICATE_CATEGORY='校准'
+    and a.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    THEN '校准'
+    WHEN d.qualifications     ='本单位获河北市质量技术监督局专项计量授权，证书编号：（冀）法计（2014）D033号'
+    and d.CERTIFICATE_CATEGORY='检定'
+    and a.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
+    THEN '河北授权检定'
+    WHEN d.qualifications     ='/'
+    and d.CERTIFICATE_CATEGORY='检定'
+    and a.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    THEN '检定'
+    WHEN d.qualifications     ='本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394'
+    and d.CERTIFICATE_CATEGORY='校准'
+    and a.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
+    THEN 'CNAS校准'
+    WHEN d.qualifications     ='/'
+    and d.CERTIFICATE_CATEGORY='校准'
+    and a.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
+    THEN '校准'
+    ELSE ''
+  end as qualifications,    --资质授权
+  d.CONCLUSION_EXPLAIN,     --总结论说明
+  d.CONCLUSION,             --总结论
+  c.UNDERTAKE_LABORATORYID, --实验室
+  d.APPROVALDATE,           --批准日期
+  b.BAR_CODE_NUM,           --条形码
+  d.PRINTSTATUS             --打印状态
+from PREPARE_SCHEME d
+LEFT join APPLIANCE_LABORATORY c
+on c.PREPARE_SCHEMEID=d.id
+LEFT join APPLIANCE_DETAIL_INFORMATION b
+on b.id=c.APPLIANCE_DETAIL_INFORMATIOID
+LEFT join ORDER_TASK_INFORMATION a 
+on a.id=b.ORDER_TASK_INFORMATIONID
+with read only;
+--------------------------------------------------------
+--  DDL for View VJIANDINGRENWU
+--------------------------------------------------------
+
+  CREATE OR REPLACE VIEW "TENGFEI"."VJIANDINGRENWU" ("ID", "ORDER_NUMBER", "APPLIANCE_NAME", "VERSION", "FACTORY_NUM", "CERTIFICATE_ENTERPRISE", "CUSTOMER_SPECIFIC_REQUIREMENTS", "ORDER_STATUS", "CREATETIME", "APPLIANCE_PROGRESS", "OVERDUE", "STATE", "REPORTSTATUS", "APPROVAL", "INSPECTION_ENTERPRISE", "ISOVERDUE", "NAME", "EQUIPMENT_STATUS_VALUUMN", "UPDATETIME", "ISRECEIVE") AS 
+  select b.ID, --器具明细id
+  a.ORDER_NUMBER,             --委托单号
+  b.APPLIANCE_NAME,                --器具名称
+  b.VERSION,                         --型号
+  b.FACTORY_NUM,                   --出厂编号
+  a.CERTIFICATE_ENTERPRISE,        --证书单位
+  a.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
+  c.ORDER_STATUS,                  --器具状态
+  a.CREATETIME,                  --送检时间
+  b.APPLIANCE_PROGRESS,            --器具进度
+  b.OVERDUE,                       --超期原因
+  e.STATE,                         --上传状态
+  d.REPORTSTATUS,                  --报告状态
+  d.APPROVAL,                      --审核审批不通过原因
+  a.INSPECTION_ENTERPRISE,         --送检单位
+  b.ISOVERDUE,                      --是否超期
+u.NAME,--实验室
+c.EQUIPMENT_STATUS_VALUUMN,--状态值
+b.UPDATETIME,--器具明细表修改时间
+c.ISRECEIVE--是否领取
+
+
+from APPLIANCE_DETAIL_INFORMATION  b--器具明细
+
+LEFT join ORDER_TASK_INFORMATION a--委托单
+on a.id=b.ORDER_TASK_INFORMATIONID
+
+LEFT join APPLIANCE_LABORATORY c--器具明细信息_承接实验室
+on b.id=c.APPLIANCE_DETAIL_INFORMATIONID
+
+LEFT join PREPARE_SCHEME d--预备方案
+on c.PREPARE_SCHEMEID=d.id
+
+LEFT join UNDERTAKE_LABORATORY u--承接实验室
+on c.UNDERTAKE_LABORATORYID=u.id
+
+LEFT join FILE_UPLOADER e--附件
+on d.id=e.PREPARE_SCHEMEID
+  WITH READ ONLY;
+--------------------------------------------------------
+--  DDL for View VQIJULINGQU1
+--------------------------------------------------------
+
+  CREATE OR REPLACE VIEW "TENGFEI"."VQIJULINGQU1" ("ID", "ORDER_NUMBER", "CERTIFICATE_ENTERPRISE", "CUSTOMER_SPECIFIC_REQUIREMENTS", "CREATETIME", "APPLIANCECOLLECTIONSATE", "REPORTTORECEVESTATE", "EQUIPMENT_STATUS_VALUUMN", "REPORTSTATUSZI") AS 
+  select
+a.ID,
+a.ORDER_NUMBER, --委托单号
+a.CERTIFICATE_ENTERPRISE,--证书单位
+a.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
+a.CREATETIME,--登记时间（送检时间段）
+c.APPLIANCECOLLECTIONSATE,--器具领取状态
+f.REPORTTORECEVESTATE,--报告领取状态
+d.EQUIPMENT_STATUS_VALUUMN,--器具状态值
+e.REPORTSTATUSZI--报告状态值
+
+
+from ORDER_TASK_INFORMATION a--委托单
+LEFT join APPLIANCE_DETAIL_INFORMATION b--器具明细
+on a.id=b.ORDER_TASK_INFORMATIONID
+LEFT join APPLIANCECOLLECTION c--器具领取
+on b.id=c.APPLIANCE_DETAIL_INFORMATIONID
+left join APPLIANCE_LABORATORY d--器具明细信息_承接实验室
+on b.id=d.APPLIANCE_DETAIL_INFORMATIONID
+left join PREPARE_SCHEME e--预备方案
+on d.PREPARE_SCHEMEID=e.id
+left join REPORTCOLLECTION f--报告领取
+on f.PREPARE_SCHEMEID=e.id
+  WITH READ ONLY;
+--------------------------------------------------------
+--  DDL for View VQIJULINGQU2
+--------------------------------------------------------
+
+  CREATE OR REPLACE VIEW "TENGFEI"."VQIJULINGQU2" ("ID", "APPLIANCE_NAME", "VERSION", "FACTORY_NUM", "NUM", "ATTACHMENT", "NAME", "APPLIANCE_RECIVE", "REPORTNUMBER", "REMARKS", "ORDER_TASK_INFORMATIONID", "APPLIANCECOLLECTIONSATE", "REPORTTORECEVESTATE") AS 
+  select b.ID,
+  b.APPLIANCE_NAME, --器具名称
+  b.VERSION,               --型号
+  b.FACTORY_NUM,         --出厂编号
+  b.NUM,                 --数量
+  b.ATTACHMENT,          --附件
+  e.NAME,                --承接实验室
+  b.APPLIANCE_RECIVE,--器具接收
+  d.REPORTNUMBER,--证书编号
+  b.REMARKS,             --备注
+  b.ORDER_TASK_INFORMATIONID,--委托单id
+  g.APPLIANCECOLLECTIONSATE,--器具领取状态
+f.REPORTTORECEVESTATE--报告领取状态
+  
+from APPLIANCE_DETAIL_INFORMATION b--器具明细
+LEFT join  ORDER_TASK_INFORMATION a--委托单
+on a.id=b.ORDER_TASK_INFORMATIONID
+LEFT join APPLIANCECOLLECTION g--器具领取
+on b.id=g.APPLIANCE_DETAIL_INFORMATIONID
+LEFT join APPLIANCE_LABORATORY c--器具明细信息_承接实验室
+on b.id=c.APPLIANCE_DETAIL_INFORMATIONID
+LEFT join PREPARE_SCHEME d--预备方案
+on c.PREPARE_SCHEMEID=d.id
+left join UNDERTAKE_LABORATORY e--实验室表
+on c.UNDERTAKE_LABORATORYID=e.id
+left join REPORTCOLLECTION f--报告领取
+on f.PREPARE_SCHEMEID=e.id
+  WITH READ ONLY;
+--------------------------------------------------------
+--  DDL for View VRUKU
+--------------------------------------------------------
+
+  CREATE OR REPLACE VIEW "TENGFEI"."VRUKU" ("ID", "REPORTNUMBER", "ORDER_NUMBER", "APPLIANCE_NAME", "VERSION", "FACTORY_NUM", "CERTIFICATE_ENTERPRISE", "CUSTOMER_SPECIFIC_REQUIREMENTS", "NAME", "ORDER_STATUS", "STORAGEINSTRUCTIONS", "UNDERTAKE_LABORATORYID", "APPROVALDATE", "STORAGEINSTRUCTI_STATU", "REPORTSTATUS", "REPORTSTATUSZI", "EQUIPMENT_STATUS_VALUUMN") AS 
+  select b.ID,
+  d.REPORTNUMBER,             --报告编号
+  a.ORDER_NUMBER,                  --委托单号
+  b.APPLIANCE_NAME,                --器具名称
+  b.VERSION,                         --型号
+  b.FACTORY_NUM,                   --出厂编号
+  a.CERTIFICATE_ENTERPRISE,        --证书单位
+  a.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
+  e.NAME,                          --器具所在实验室
+  c.ORDER_STATUS,                  --器具状态
+  b.STORAGEINSTRUCTIONS,           --入库说明
+  c.UNDERTAKE_LABORATORYID,        --实验室
+  d.APPROVALDATE,                  --批准日期
+  b.STORAGEINSTRUCTI_STATU,         --入库状态
+  d.REPORTSTATUS,--报告状态
+  d.REPORTSTATUSZI,--报告状态值
+  c.EQUIPMENT_STATUS_VALUUMN--器具状态值
+  
+from APPLIANCE_DETAIL_INFORMATION b
+LEFT join  ORDER_TASK_INFORMATION a
+on a.id=b.ORDER_TASK_INFORMATIONID
+LEFT join APPLIANCE_LABORATORY c
+on b.id=c.APPLIANCE_DETAIL_INFORMATIONID
+LEFT join PREPARE_SCHEME d
+on c.PREPARE_SCHEMEID=d.id
+left join UNDERTAKE_LABORATORY e
+on c.UNDERTAKE_LABORATORYID=e.id
+  WITH READ ONLY;
+--------------------------------------------------------
+--  DDL for View VSHENHE
+--------------------------------------------------------
+
+  CREATE OR REPLACE VIEW "TENGFEI"."VSHENHE" ("ID", "REPORTNUMBER", "ORDER_NUMBER", "APPLIANCE_NAME", "VERSION", "FACTORY_NUM", "CERTIFICATE_ENTERPRISE", "CUSTOMER_SPECIFIC_REQUIREMENTS", "CERTIFICATE_CATEGORY", "QUALIFICATIONS", "CONCLUSION_EXPLAIN", "CONCLUSION", "ISAGGREY", "PACKAGETYPE", "REPORTSTATUSZI", "REPORTSTATUS", "FILECONCLUSION", "UPDATETIME", "UNDERTAKE_LABORATORYID") AS 
+  select a.ID,
+  a.REPORTNUMBER,             --报告编号
+  d.ORDER_NUMBER,                  --委托单号
+  c.APPLIANCE_NAME,                --器具名称
+  c.VERSION,                         --型号
+  c.FACTORY_NUM,                   --出厂编号
+  d.CERTIFICATE_ENTERPRISE,        --证书单位
+  d.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
+  a.CERTIFICATE_CATEGORY,          --证书类别
+  CASE
+    when a.QUALIFICATIONS     ='本单位获北京市质量技术监督局专项计量授权，证书编号：（京）法计（2012）006号'
+    and a.CERTIFICATE_CATEGORY='检定'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    THEN '北京授权检定'
+    WHEN a.qualifications     ='/'
+    and a.CERTIFICATE_CATEGORY='检定'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    THEN '检定'
+    WHEN a.qualifications     ='本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394'
+    and a.CERTIFICATE_CATEGORY='校准'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    THEN 'CNAS校准'
+    WHEN a.qualifications     ='/'
+    and a.CERTIFICATE_CATEGORY='校准'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    THEN '校准'
+    WHEN a.qualifications     ='本单位获河北市质量技术监督局专项计量授权，证书编号：（冀）法计（2014）D033号'
+    and a.CERTIFICATE_CATEGORY='检定'
+    and d.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
+    THEN '河北授权检定'
+    WHEN a.qualifications     ='/'
+    and a.CERTIFICATE_CATEGORY='检定'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    THEN '检定'
+    WHEN a.qualifications     ='本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394'
+    and a.CERTIFICATE_CATEGORY='校准'
+    and d.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
+    THEN 'CNAS校准'
+    WHEN a.qualifications     ='/'
+    and a.CERTIFICATE_CATEGORY='校准'
+    and d.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
+    THEN '校准'
+    ELSE ''
+  end as qualifications, --资质授权
+  a.CONCLUSION_EXPLAIN,  --总结论说明
+  a.CONCLUSION,           --总结论
+  a.ISAGGREY,--审核同意
+  a.PACKAGETYPE,--报告类型
+  a.REPORTSTATUSZI,--报告状态值
+  a.REPORTSTATUS,--报告状态
+  e.CONCLUSION as FILECONCLUSION,--上传报告结论
+  a.UPDATETIME,--修改时间
+  b.UNDERTAKE_LABORATORYID--实验室id
+
+from PREPARE_SCHEME a--预备方案表
+left join  APPLIANCE_LABORATORY b--器具明细信息_承接实验室表
+on a.id=b.PREPARE_SCHEMEID
+LEFT join  APPLIANCE_DETAIL_INFORMATION c--器具明细表
+on c.id=b.APPLIANCE_DETAIL_INFORMATIONID
+LEFT join  ORDER_TASK_INFORMATION d--委托单表
+on d.id=c.ORDER_TASK_INFORMATIONID
+left join FILE_UPLOADER e--附件表
+on a.id=e.PREPARE_SCHEMEID
+  WITH READ ONLY;
+--------------------------------------------------------
+--  DDL for View VSHENPI
+--------------------------------------------------------
+
+  CREATE OR REPLACE VIEW "TENGFEI"."VSHENPI" ("ID", "REPORTNUMBER", "ORDER_NUMBER", "APPLIANCE_NAME", "VERSION", "FACTORY_NUM", "CERTIFICATE_ENTERPRISE", "CUSTOMER_SPECIFIC_REQUIREMENTS", "CERTIFICATE_CATEGORY", "QUALIFICATIONS", "CONCLUSION_EXPLAIN", "CONCLUSION", "APPROVALISAGGREY", "PACKAGETYPE", "REPORTSTATUSZI", "REPORTSTATUS", "UNDERTAKE_LABORATORYID", "FILECONCLUSION", "AUDITTIME") AS 
+  select a.ID,
+  a.REPORTNUMBER,             --报告编号
+  d.ORDER_NUMBER,                  --委托单号
+  c.APPLIANCE_NAME,                --器具名称
+  c.VERSION,                         --型号
+  c.FACTORY_NUM,                   --出厂编号
+  d.CERTIFICATE_ENTERPRISE,        --证书单位
+  d.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
+  a.CERTIFICATE_CATEGORY,          --证书类别
+  CASE
+    when a.QUALIFICATIONS     ='本单位获北京市质量技术监督局专项计量授权，证书编号：（京）法计（2012）006号'
+    and a.CERTIFICATE_CATEGORY='检定'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    THEN '北京授权检定'
+    WHEN a.qualifications     ='/'
+    and a.CERTIFICATE_CATEGORY='检定'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    THEN '检定'
+    WHEN a.qualifications     ='本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394'
+    and a.CERTIFICATE_CATEGORY='校准'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    THEN 'CNAS校准'
+    WHEN a.qualifications     ='/'
+    and a.CERTIFICATE_CATEGORY='校准'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    THEN '校准'
+    WHEN a.qualifications     ='本单位获河北市质量技术监督局专项计量授权，证书编号：（冀）法计（2014）D033号'
+    and a.CERTIFICATE_CATEGORY='检定'
+    and d.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
+    THEN '河北授权检定'
+    WHEN a.qualifications     ='/'
+    and a.CERTIFICATE_CATEGORY='检定'
+    and d.ACCEPT_ORGNIZATION  ='华北电力科学研究院有限责任公司'
+    THEN '检定'
+    WHEN a.qualifications     ='本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394'
+    and a.CERTIFICATE_CATEGORY='校准'
+    and d.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
+    THEN 'CNAS校准'
+    WHEN a.qualifications     ='/'
+    and a.CERTIFICATE_CATEGORY='校准'
+    and d.ACCEPT_ORGNIZATION  ='冀北电力有限公司计量中心'
+    THEN '校准'
+    ELSE ''
+  end as qualifications, --资质授权
+  a.CONCLUSION_EXPLAIN,  --总结论说明
+  a.CONCLUSION,           --总结论
+  a.APPROVALISAGGREY,--审批同意
+  a.PACKAGETYPE,--报告类型
+  a.REPORTSTATUSZI,--报告状态值
+  a.REPORTSTATUS,--报告状态
+  b.UNDERTAKE_LABORATORYID,--实验室
+e.CONCLUSION as FILECONCLUSION,--上传报告结论
+a.AUDITTIME--审核时间
+
+from PREPARE_SCHEME a--预备方案表
+left join  APPLIANCE_LABORATORY b--器具明细信息_承接实验室表
+on a.id=b.PREPARE_SCHEMEID
+LEFT join  APPLIANCE_DETAIL_INFORMATION c--器具明细表
+on c.id=b.APPLIANCE_DETAIL_INFORMATIONID
+LEFT join  ORDER_TASK_INFORMATION d--委托单表
+on d.id=c.ORDER_TASK_INFORMATIONID
+left join FILE_UPLOADER e--附件表
+on a.id=e.PREPARE_SCHEMEID
+  WITH READ ONLY;
+--------------------------------------------------------
+--  DDL for View VTEST_ITE
+--------------------------------------------------------
+
+  CREATE OR REPLACE VIEW "TENGFEI"."VTEST_ITE" ("ROW_FLAG", "PREPARE_SCHEMEID", "SCHEMEID", "RULEID", "INPUTSTATE", "NAMEOTHER", "NAME", "SCHEME_MENU", "ID", "CONCLUSION", "HTMLVALUE", "REMARK", "ISCOMPLETE", "SCHEME_RULEID", "SORT") AS 
+  select P.ID ||'|' ||  R.ID as ROW_FLAG,P.ID as PREPARE_SCHEMEID,P.SCHEMEID as SCHEMEID, R.ID as RULEID,R.INPUTSTATE,R.NAMEOTHER,R.NAME,R.SCHEME_MENU
+,Q.ID,Q.CONCLUSION,Q.HTMLVALUE,Q.REMARK,NVL2(Q.ID,'已做','未做') as ISComplete ,S.ID as SCHEME_RULEID ,S.SORT 
+from 
+PREPARE_SCHEME P left join SCHEME_RULE S on P.SCHEMEID=S.SCHEMEID 
+left join RULE R on S.RULEID=R.ID
+left join QUALIFIED_UNQUALIFIED_TEST_ITE Q on P.ID=Q.PREPARE_SCHEMEID
+and S.RULEID=Q.RULEID
+where P.SCHEMEID=S.SCHEMEID;

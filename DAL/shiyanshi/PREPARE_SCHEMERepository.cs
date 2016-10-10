@@ -37,7 +37,7 @@ namespace Langben.DAL
             //int i = db.SaveChanges();
             foreach (var deleteItem in collection)
             {
-                entity.SCHEMEID = "";
+               
                 deleteItem.REPORT_CATEGORY = entity.REPORT_CATEGORY == null ? deleteItem.REPORT_CATEGORY : entity.REPORT_CATEGORY;
                 deleteItem.CERTIFICATE_CATEGORY = entity.CERTIFICATE_CATEGORY == null ? deleteItem.CERTIFICATE_CATEGORY : entity.CERTIFICATE_CATEGORY;
                 deleteItem.CNAS = entity.CNAS == null ? deleteItem.CNAS : entity.CNAS;

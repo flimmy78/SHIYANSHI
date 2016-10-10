@@ -257,6 +257,7 @@ namespace Langben.App.Controllers
             {
                 //为什么获取不到SCHEME这个对象
                 prepShow.SCHEMENAME = prme.SCHEME.NAME;//  选择方案模板
+                prepShow.SCHEMEID = prme.SCHEME.ID;//  选择方案模板
             }
 
             prepShow.REPORTNUMBER = m_BLL3.GetSerialNumber(PREPARE_SCHEMEID);//报告编号
