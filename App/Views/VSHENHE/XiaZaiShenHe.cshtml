@@ -97,7 +97,7 @@
                 <input type="hidden" name="ID" value="@ViewBag.PREPARE_SCHEME_ID" />
                 <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
                     <input type="hidden" name="SHPI" value="@ViewBag.HEIFSP" />
-                    <input type="hidden" name="ISAGGREY" value="" id="ISAGGREY2" />
+                    <input type="hidden" name="APPROVALISAGGREY" value="" id="APPROVALISAGGREY" />
 
                     <div class="display-label">
                         <label>  </label>
@@ -134,10 +134,10 @@
         }
         else if ("@ViewBag.HEIFSP" == "P") {
             if (zhi == "同意") {
-                $("#ISAGGREY2").val("同意");
+                $("#APPROVALISAGGREY").val("同意");
             }
             else if (zhi == "不同意") {
-                $("#ISAGGREY2").val("不同意");
+                $("#APPROVALISAGGREY").val("不同意");
             }
         }
 

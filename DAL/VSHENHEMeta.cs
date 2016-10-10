@@ -61,7 +61,7 @@ namespace Langben.DAL
         [Display(Name = "报告状态值", Order = 15)]
         public object REPORTSTATUSZI { get; set; }
 
-        [Display(Name = "报告状态", Order = 16)]
+        [Display(Name = "审核状态", Order = 16)]
         public object REPORTSTATUS { get; set; }
 
         [Display(Name = "上传报告结论", Order = 17)]

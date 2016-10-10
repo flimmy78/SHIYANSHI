@@ -134,7 +134,8 @@ namespace Langben.App.Controllers
                     ISAGGREY = s.ISAGGREY,
 
                     PACKAGETYPE = s.PACKAGETYPE,
-                    FILECONCLUSION = s.FILECONCLUSION
+                    FILECONCLUSION = s.FILECONCLUSION,
+                    REPORTSTATUS = s.REPORTSTATUS
 
                 }
 

@@ -30,7 +30,6 @@
 
 <script type="text/javascript" language="javascript">
     $(function () {
-
         $('#flexigridData').datagrid({
             title: '器具证书信息', //列表的标题
             iconCls: 'icon-site',
@@ -43,19 +42,7 @@
             sortName: 'ID',
             sortOrder: 'desc',
             idField: 'ID',
-
-            //toolbar: [
-
-            //     {
-            //         text: '详细',
-            //         iconCls: 'icon-search',
-            //         handler: function () {
-            //             return getView();
-            //         }
-            //     } ],
             columns: [[
-
-                
 					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 86, hidden: true }
 					,{ field: 'REPORTNUMBER', title:  '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 86 }
 					,{ field: 'ORDER_NUMBER', title:  '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 86 }
@@ -69,7 +56,7 @@
 					,{ field: 'CONCLUSION_EXPLAIN', title:  '@Html.DisplayNameFor(model => model.CONCLUSION_EXPLAIN)', width: 86 }
 					, {
 					    field: 'CONCLUSION', title: '@Html.DisplayNameFor(model => model.CONCLUSION)', width: 86, formatter: function (value, row, index) {
-					        if (row.PACKAGETYPE == "上传") {
+					        if (row.PACKAGETYPE == "@Common.PACKAGETYPE.上传.ToString()") {
 					            return row.FILECONCLUSION;
 					        }
 					        else {
@@ -77,14 +64,15 @@
 					        }
 					    }
 					}
+                    , { field: 'REPORTSTATUS', title: '@Html.DisplayNameFor(model => model.REPORTSTATUS)', width: 86 }
 					, {field: 'ISAGGREY', title: '@Html.DisplayNameFor(model => model.ISAGGREY)', width: 86}
                     , {
                         field: 'aa', title: '操作', width: 86, formatter: function (value, row, index) {
              
-                            if (row.PACKAGETYPE =="上传") {
+                            if (row.PACKAGETYPE =="@Common.PACKAGETYPE.上传.ToString()") {
                                 var html = "<a href='/VSHENHE/XiaZaiShenHe/" + row.ID + "^H'>下载审核</a>";
                             }
-                            else if (row.PACKAGETYPE == "生成") {
+                            else if (row.PACKAGETYPE == "@Common.PACKAGETYPE.生成.ToString()") {
                                 var html = "<a href='/VSHENHE/YuLanShenHe/" + row.ID + "^H'>预览审核</a>";
                             }
                             return html;
@@ -122,43 +110,5 @@
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
- 
-    //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
-    function flexiSelect() {
-
-        var rows = $('#flexigridData').datagrid('getSelections');
-        if (rows.length == 0) {
-            $.messager.alert('操作提示', '请选择数据!', 'warning');
-            return false;
-        }
-
-        var arr = [];
-        for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].ID);
-        }
-        arr.push("^");
-        for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].REPORTNUMBER);
-        }
-        //主键列和显示列之间用 ^ 分割   每一项用 , 分割
-        if (arr.length > 0) {//一条数据和多于一条
-            returnParent(arr.join("&")); //每一项用 & 分割
-        }
-    }
-    //导航到查看详细的按钮
-    function getView() {
-
-        var arr = $('#flexigridData').datagrid('getSelections');
-
-        if (arr.length == 1) {
-            window.location.href = "../VSHENHE/Details/" + arr[0].ID;
-
-        } else {
-            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
-        }
-        return false;
-    }
- 
-
 </script>
 
