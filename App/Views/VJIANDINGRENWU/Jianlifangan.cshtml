@@ -346,9 +346,6 @@
 </script>
 <script type="text/javascript">
     $(function () {
-
-
-
         if ("@ViewBag.UNDERTAKE_LABORATORY_NAME" == "@Common.LABORATORYNAME.电能.ToString()") {
             //标准装置绑定
             $('#biaozhuizhuangzi').datagrid({
@@ -382,44 +379,42 @@
                         , { field: 'A', title: '操作', width: 64 }
                 ]],
             })
-        }
-
-        //标准器绑定
-        $('#biaozhuiqi').datagrid({
-            title: '标准器', //列表的标题
-            iconCls: 'icon-site',
-            width: 'auto',
-            height: 'auto',
-            //nowrap: false,
-            striped: true,
-            collapsible: true,
-            //url: '../VJIANDINGRENWU/GetData', //获取数据的url
-            sortName: 'ID',
-            sortOrder: 'desc',
-            idField: 'ID',
-            toolbar: [
-                 {
-                     text: '+',
-                     iconCls: 'icon-search',
-                     handler: function () {
-                         return biaozhunqi();
-                     }
-                 },
-                  {
-                      text: '删除',
-                      iconCls: 'icon-search',
-                      handler: function () {
-                          return lingqu();
+            //标准器绑定
+            $('#biaozhuiqi').datagrid({
+                title: '标准器', //列表的标题
+                iconCls: 'icon-site',
+                width: 'auto',
+                height: 'auto',
+                //nowrap: false,
+                striped: true,
+                collapsible: true,
+                //url: '../VJIANDINGRENWU/GetData', //获取数据的url
+                sortName: 'ID',
+                sortOrder: 'desc',
+                idField: 'ID',
+                toolbar: [
+                     {
+                         text: '+',
+                         iconCls: 'icon-search',
+                         handler: function () {
+                             return biaozhunqi();
+                         }
+                     },
+                      {
+                          text: '删除',
+                          iconCls: 'icon-search',
+                          handler: function () {
+                              return lingqu();
+                          }
                       }
-                  }
-            ],
-            columns: [[
+                ],
+                columns: [[
 
-                    { field: 'ID', title: '名称', width: 64 }
-					, { field: 'ORDER_NUMBER', title: '测量范围', width: 64 }
-            ]],
-        })
-
+                        { field: 'ID', title: '名称', width: 64 }
+                        , { field: 'ORDER_NUMBER', title: '测量范围', width: 64 }
+                ]],
+            })
+        }
     });
     //标准器的选择
     function biaozhunqi() {
@@ -451,37 +446,6 @@
         $('#w').window('open');
         $("#tanchuandivzhuangzi").hide();
     }
-    //标准装置选择
-    function biaozhunzhuangzi() {
-        $('#w').window('close')
-        //标准器弹窗页面添加
-        $('#zhuangzitianjia').datagrid({
-            title: '计量标准装置列表', //列表的标题
-            iconCls: 'icon-site',
-            width: 'auto',
-            height: 'auto',
-            //nowrap: false,
-            striped: true,
-            collapsible: true,
-            //url: '../VJIANDINGRENWU/GetData', //获取数据的url
-            sortName: 'ID',
-            sortOrder: 'desc',
-            idField: 'ID',
-            columns: [[
-                 { field: 'ID', title: '名称', width: 64 }
-                , { field: 'ORDER_NUMBER', title: '测量范围', width: 64 }
-                , { field: 'ORDER_NUMBER', title: '不确定度/准确度等级/最大允许误差', width: 64 }
-                , { field: 'ORDER_NUMBER', title: '计量标准证书编号', width: 64 }
-                , { field: 'ORDER_NUMBER', title: '有效期至', width: 64 }
-            ]],
-        })
-        $("#tanchuandivzhuangzi").show();
-        $('#w').window('open', {
-            collapsible: false,
-            minimizable: false,
-            maximizable: false
-        });
-        $("#tanchuandivqi").hide();
-    }
+   
 </script>
 
