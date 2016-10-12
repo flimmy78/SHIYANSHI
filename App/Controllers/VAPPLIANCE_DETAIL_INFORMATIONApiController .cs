@@ -68,7 +68,91 @@ namespace Langben.App.Controllers
             return result; //提示输入的数据的格式不对                 
         }
 
-       
+        /// <summary>
+        /// 入库
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>  
+        /// 
+        [HttpPost]
+        public Common.ClientResult.Result PutSTORAGEINSTRUCTI_STATU(string id)
+        {
+            Common.ClientResult.Result result = new Common.ClientResult.Result();
+            if (id != null && ModelState.IsValid)
+            {   //数据校验
+                APPLIANCE_DETAIL_INFORMATION app = null;
+                APPLIANCE_LABORATORY appry = null;
+                foreach (var item in id.TrimEnd(',').Split(','))
+                {
+                    app = new APPLIANCE_DETAIL_INFORMATION();
+                    appry = new APPLIANCE_LABORATORY();
+                    app.UPDATEPERSON = GetCurrentPerson();
+                    app.UPDATETIME = new DateTime();
+                    app.ID = item;
+                    app.STORAGEINSTRUCTI_STATU = Common.ORDER_STATUS.器具已入库.ToString();//入库状态
+                    //器具明细信息_承接实验室表修改器具状态
+                    List<APPLIANCE_LABORATORY> list = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item);
+                    appry.ORDER_STATUS = Common.ORDER_STATUS.器具已入库.ToString();//器具状态
+                    foreach (var ps in list)
+                    {
+                        string returnValue = string.Empty;
+                        appry.ID = ps.ID;
+                        if (m_BLL3.EditField(ref validationErrors, appry))
+                        {
+                            LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息_承接实验室的Id为" + appry.ID, "器具明细信息_承接实验室信息"
+                                );//写入日志                   
+                            result.Code = Common.ClientCode.Succeed;
+                            result.Message = Suggestion.UpdateSucceed;
+                        }
+                        else
+                        {
+                            if (validationErrors != null && validationErrors.Count > 0)
+                            {
+                                validationErrors.All(a =>
+                                {
+                                    returnValue += a.ErrorMessage;
+                                    return true;
+                                });
+                            }
+                            LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具明细信息_承接实验室的Id为" + app.ID + "," + returnValue, "器具明细信息_承接实验室信息"
+                                );//写入日志   
+                            result.Code = Common.ClientCode.Fail;
+                            result.Message = Suggestion.UpdateFail + returnValue;
+                            return result; //提示更新失败
+                        }
+                    }
+                    //器具明细信息表的入库状态修改
+                    string returnValue2 = string.Empty;
+                    if (m_BLL.EditField(ref validationErrors, app))
+                    {
+                        LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息信息的Id为" + app.ID, "器具明细信息"
+                            );//写入日志                   
+                        result.Code = Common.ClientCode.Succeed;
+                        result.Message = Suggestion.UpdateSucceed;
+                        continue;
+                    }
+                    else
+                    {
+                        if (validationErrors != null && validationErrors.Count > 0)
+                        {
+                            validationErrors.All(a =>
+                            {
+                                returnValue2 += a.ErrorMessage;
+                                return true;
+                            });
+                        }
+                        LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具明细信息信息的Id为" + app.ID + "," + returnValue2, "器具明细信息"
+                            );//写入日志   
+                        result.Code = Common.ClientCode.Fail;
+                        result.Message = Suggestion.UpdateFail + returnValue2;
+                        return result; //提示更新失败
+                    }
+                }
+            }
+            result.Code = Common.ClientCode.FindNull;
+            result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";
+            return result; //提示输入的数据的格式不对                 
+        }
         /// <summary>
         /// 查找委托单中的受理单位
         /// </summary>
