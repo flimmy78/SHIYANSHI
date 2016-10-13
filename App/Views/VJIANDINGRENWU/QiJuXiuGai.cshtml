@@ -173,7 +173,7 @@
 
 <script type="text/javascript">
     $(function () {
-        
+
         $('#ApplianceDate').edatagrid({
             singleSelect: false,
             toolbar: [
@@ -223,11 +223,25 @@
                }
            }
        }
-           , { field: 'MAKE_ORGANIZATION', title: '制造单位', width: 65, editor: 'text' }
+     , {
+         field: 'MAKE_ORGANIZATION', title: '制造单位', width: 130, editor: {
+             type: 'combobox',
+             options: {
+                 valueField: 'value',
+                 textField: 'text',
+                 method: 'get',
+                 url: '/Appliance/Getdate',
+                 required: false
+             }
+         }
+     }
            , { field: 'UNDERTAKE_LABORATORYID', title: '承接实验室', width: 135 }
            , { field: 'REMARKS', title: '备注', width: 65, editor: 'text' }
            , { field: 'ORDER_STATUS', title: '状态', width: 135 }
             ]]
+        });
+        $.ajaxSetup({
+            cache: false
         });
         seng();
     });

@@ -118,6 +118,7 @@
     <Compile Include="IVQIJULINGQU1BLL.cs" />
     <Compile Include="Shiyanshi\IAPPLIANCE_DETAIL_INFORMATIONBLL.cs" />
     <Compile Include="Shiyanshi\IAPPLIANCE_LABORATORYBLL.cs" />
+    <Compile Include="Shiyanshi\ICOMPANYBLL.cs" />
     <Compile Include="Shiyanshi\IFILE_UPLOADERBLL.cs" />
     <Compile Include="Shiyanshi\IORDER_TASK_INFORMATIONBLL.cs" />
     <Compile Include="Shiyanshi\IPREPARE_SCHEMEBLL.cs" />
