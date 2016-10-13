@@ -1,0 +1,515 @@
+﻿@model Langben.DAL.ORDER_TASK_INFORMATION
+@{
+    Layout = "~/Views/Shared/AppCreate.cshtml";
+}
+@using Common
+@using Models
+@*表格*@
+<script src="~/Scripts/jquery.edatagrid.js"></script>
+<style type="text/css">
+    body {
+        height: auto;
+        font-size: 12px;
+    }
+
+    td {
+        height: 25px;
+    }
+
+    .editor-field {
+        width: 200px;
+        height: 24px;
+        float: left;
+        margin: 11px 0 11px 6px;
+        display: inline;
+    }
+
+        .editor-field .text-box {
+            width: 180px;
+        }
+
+        .editor-field .easyui-combobox {
+            width: 180px;
+        }
+</style>
+<div class="easyui-layout">
+    <input class="a2 f2" type="button" onclick="javascript: window.location.href = '/VJIANDINGRENWU/Index';" value="返回" />
+    <div class="bigdiv" style="width: auto" id="order">
+        <div class="editor-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "请选择", new { @class = "easyui-combobox" })
+            </div>
+        </div>
+        <div class="editor-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
+            </div>
+        </div>
+        <div class="editor-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+                @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+            </div>
+        </div>
+
+        <div class="editor-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_POST)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_POST)
+                @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_POST)
+            </div>
+        </div>
+        <div class="editor-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CONTACTS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACTS)
+                @Html.ValidationMessageFor(model => model.CONTACTS)
+            </div>
+        </div>
+        <div class="editor-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CONTACT_PHONE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACT_PHONE)
+                @Html.ValidationMessageFor(model => model.CONTACT_PHONE)
+            </div>
+        </div>
+        <div class="editor-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FAX)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FAX)
+                @Html.ValidationMessageFor(model => model.FAX)
+            </div>
+        </div>
+        <div class="editor-form">
+            <div class="editor-label">
+                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
+            </div>
+        </div>
+        <div class="editor-form">
+            <div class="editor-label">
+                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
+                @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
+            </div>
+        </div>
+        <div class="editor-form">
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_POST)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_POST)
+                @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_POST)
+            </div>
+        </div>
+        <div class="editor-form">
+            <div class="editor-label">
+                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACTS2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACTS2)
+                @Html.ValidationMessageFor(model => model.CONTACTS2)
+            </div>
+        </div>
+        <div class="editor-form">
+            <div class="editor-label">
+                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACT_PHONE2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACT_PHONE2)
+                @Html.ValidationMessageFor(model => model.CONTACT_PHONE2)
+            </div>
+        </div>
+        <div class="editor-form">
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FAX2)：
+            </div>
+
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FAX2)
+                @Html.ValidationMessageFor(model => model.FAX2)
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)：
+        </div>
+        <div class="editor-field" style="height:auto">
+            @Html.TextAreaFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
+            @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
+        </div>
+
+
+    </div>
+    <div style="clear:both;"></div>
+    <input type="hidden" id="ORDER_TASK_INFORMATIONID" />
+    <div class="p5 mt10">
+        <table id="ApplianceDate" singleselect="true"></table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        
+        $('#ApplianceDate').edatagrid({
+            singleSelect: false,
+            toolbar: [
+             {
+                 text: '保存',
+                 iconCls: 'icon-add',
+                 handler: function () {
+                     return flexiInsert();
+                 }
+             }
+            ],
+            columns: [[
+       { field: 'ID', title: 'ID', width: 64, hidden: true }
+       , {
+           field: 'APPLIANCE_NAME', title: '器具名称', width: 135, editor: {
+               type: 'validatebox', options: {
+                   precision: 1,
+                   required: true,
+                   missingMessage: '必填'
+               }
+           }
+       }
+       , {
+           field: 'VERSION', title: '型号', width: 65, editor: {
+               type: 'validatebox', options: {
+                   required: true,
+                   missingMessage: '必填'
+               }
+           }
+       }
+       , { field: 'FORMAT', title: '规格', width: 65, editor: 'text' },
+       { field: 'FACTORY_NUM', title: '出厂编号', width: 65, editor: 'text' }
+       , {
+           field: 'NUM', title: '数量', width: 35, editor: {
+               type: 'validatebox', options: {
+                   required: true,
+                   missingMessage: '必填'
+               }
+           }
+       }
+       , { field: 'ATTACHMENT', title: '附件', width: 135, editor: 'text' }
+       , {
+           field: 'APPEARANCE_STATUS', title: '外观状态', width: 65, editor: {
+               type: 'validatebox', options: {
+                   required: true,
+                   missingMessage: '必填'
+               }
+           }
+       }
+           , { field: 'MAKE_ORGANIZATION', title: '制造单位', width: 65, editor: 'text' }
+           , { field: 'UNDERTAKE_LABORATORYID', title: '承接实验室', width: 135 }
+           , { field: 'REMARKS', title: '备注', width: 65, editor: 'text' }
+           , { field: 'ORDER_STATUS', title: '状态', width: 135 }
+            ]]
+        });
+        seng();
+    });
+    //数据加载
+    function seng() {
+        var row = null;
+        $.ajax({
+            url: '/api/VAPPLIANCE_DETAIL_INFORMATIONApi/UpdateDataByID/' + "@ViewBag.ID",
+            type: "Post",
+            // async: false,
+            success: function (row) {
+                //结束器具的编辑状态
+                $('#ApplianceDate').edatagrid('saveRow');
+                $('#ApplianceDate').edatagrid('appendRow', {
+                    ID: row.APPLIANCE_DETAIL_INFORMATIONShows[0].ID,//器具明细id
+                    APPLIANCE_NAME: row.APPLIANCE_DETAIL_INFORMATIONShows[0].APPLIANCE_NAME,//器具名称
+                    VERSION: row.APPLIANCE_DETAIL_INFORMATIONShows[0].VERSION,//型号
+                    FORMAT: row.APPLIANCE_DETAIL_INFORMATIONShows[0].FORMAT,//规格
+                    FACTORY_NUM: row.APPLIANCE_DETAIL_INFORMATIONShows[0].FACTORY_NUM,//出厂编号
+                    NUM: row.APPLIANCE_DETAIL_INFORMATIONShows[0].NUM,//数量
+                    ATTACHMENT: row.APPLIANCE_DETAIL_INFORMATIONShows[0].ATTACHMENT,//附件
+                    APPEARANCE_STATUS: row.APPLIANCE_DETAIL_INFORMATIONShows[0].APPEARANCE_STATUS,//外观状态
+                    MAKE_ORGANIZATION: row.APPLIANCE_DETAIL_INFORMATIONShows[0].MAKE_ORGANIZATION,//制造单位
+                    UNDERTAKE_LABORATORYID: row.APPLIANCE_DETAIL_INFORMATIONShows[0].UNDERTAKE_LABORATORYIDString,//实验室
+                    REMARKS: row.APPLIANCE_DETAIL_INFORMATIONShows[0].REMARKS,//备注
+                    ORDER_STATUS: row.APPLIANCE_DETAIL_INFORMATIONShows[0].ORDER_STATUS,//状态
+                });
+                $("#ACCEPT_ORGNIZATION").combobox('select', row.ACCEPT_ORGNIZATION);//受理单位
+                $("#INSPECTION_ENTERPRISE").combobox('select', row.INSPECTION_ENTERPRISE);//送检单位
+                $("#INSPECTION_ENTERPRISE_ADDRESS").val(row.INSPECTION_ENTERPRISE_ADDRESS);//送检单位地址
+                $("#INSPECTION_ENTERPRISE_POST").val(row.INSPECTION_ENTERPRISE_POST);//送检单位邮政编码
+                $("#CONTACTS").val(row.CONTACTS);//联系人
+                $("#CONTACT_PHONE").val(row.CONTACT_PHONE);//联系电话
+                $("#FAX").val(row.FAX);//传真
+                $("#CERTIFICATE_ENTERPRISE").combobox('select', row.CERTIFICATE_ENTERPRISE);//证书单位
+                $("#CERTIFICATE_ENTERPRISE_ADDRESS").val(row.CERTIFICATE_ENTERPRISE_ADDRESS);//证书单位地址
+                $("#CERTIFICATE_ENTERPRISE_POST").val(row.CERTIFICATE_ENTERPRISE_POST);//证书单位邮政编码
+                $("#CONTACTS2").val(row.CONTACTS2);//联系人2
+                $("#CONTACT_PHONE2").val(row.CONTACT_PHONE2);//联系电话2
+                $("#FAX2").val(row.FAX2);//传真2
+                $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val(row.CUSTOMER_SPECIFIC_REQUIREMENTS);//客户特殊要求
+                $("#ORDER_TASK_INFORMATIONID").val(row.ID);//委托单id
+            }
+        })
+    }
+    //保存
+    function flexiInsert() {
+        //结束器具的编辑状态
+        $('#ApplianceDate').edatagrid('saveRow');
+        //获取所有器具
+        var qiju = $('#ApplianceDate').edatagrid('getRows');
+        //实例化一个委托单对象
+        var entity = new Object();
+        entity.APPLIANCE_DETAIL_INFORMATION = qiju;
+        entity.ID = $("#ORDER_TASK_INFORMATIONID").val();
+
+        entity.ACCEPT_ORGNIZATION = $('#ACCEPT_ORGNIZATION').combobox('getText'); //受理单位
+        entity.INSPECTION_ENTERPRISE = $('#INSPECTION_ENTERPRISE').combobox('getText');//送检单位
+        entity.INSPECTION_ENTERPRISE_ADDRESS = $("#INSPECTION_ENTERPRISE_ADDRESS").val();//送检单位地址
+        entity.INSPECTION_ENTERPRISE_POST = $("#INSPECTION_ENTERPRISE_POST").val();//送检单位邮政编码
+        entity.CONTACTS = $("#CONTACTS").val();//联系人
+        entity.CONTACT_PHONE = $("#CONTACT_PHONE").val();//联系电话
+        entity.FAX = $("#FAX").val();//传真
+        entity.CERTIFICATE_ENTERPRISE = $('#CERTIFICATE_ENTERPRISE').combobox('getText');//证书单位
+        entity.CERTIFICATE_ENTERPRISE_ADDRESS = $("#CERTIFICATE_ENTERPRISE_ADDRESS").val();//证书单位地址
+        entity.CERTIFICATE_ENTERPRISE_POST = $("#CERTIFICATE_ENTERPRISE_POST").val();//证书单位邮政编码
+        entity.CONTACTS2 = $("#CONTACTS2").val();//联系人2
+        entity.CONTACT_PHONE2 = $("#CONTACT_PHONE2").val();//联系电话2
+        entity.FAX2 = $("#FAX2").val();//传真2
+        entity.CUSTOMER_SPECIFIC_REQUIREMENTS = $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val();//客户特殊要求
+        if (ifshuju(entity)) {
+            //将委托单信息发送到服务器
+            $.ajax({
+                url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/PutUpdate",
+                type: "Put",
+                dataType: "json",
+                data: entity,
+                success: function (data) {
+                    if (data.Code == 1) {
+                        if ($.messager) {
+                            $.messager.defaults.ok = '继续';
+                            $.messager.defaults.cancel = '返回';
+                            $.messager.confirm('操作提示', "修改成功!", function (r) {
+                                if (!r) {
+                                    window.location.href = 'javascript:history.go(-1)';
+                                }
+                            });
+                        }
+                    }
+                    else {
+                        $.messager.alert('操作提示', "修改失败！", 'error');
+                    }
+                }
+            });
+        }
+    }
+</script>
+<script type="text/javascript">
+    //数据验证
+    function ifshuju(entity) {
+        var zhi = "";
+        if (isNull(entity.ACCEPT_ORGNIZATION)) {
+            zhi += "受理单位不能为空！<br>";
+        }
+        if (isNull(entity.CERTIFICATE_ENTERPRISE)) {
+            zhi += "证书单位不能为空！<br>";
+        }
+        if (isNull(entity.CERTIFICATE_ENTERPRISE_ADDRESS)) {
+            zhi += "证书单位地址不能为空！<br>";
+        }
+        if (isNull(entity.CONTACTS2)) {
+            zhi += "证书单位联系人不能为空！<br>";
+        }
+        if (isNull(entity.CONTACT_PHONE2)) {
+            zhi += "证书单位电话不能为空！<br>";
+        }
+        else {
+            if (!checkPhone(entity.CONTACT_PHONE2)) {
+                zhi += "证书单位电话格式不对！<br>";
+            }
+        }
+        if (!isNull(entity.CONTACT_PHONE)) {
+            if (!checkPhone(entity.CONTACT_PHONE)) {
+                zhi += "送检单位电话格式不对！<br>";
+            }
+        }
+        if (!isNull(entity.INSPECTION_ENTERPRISE_POST)) {
+            if (!isPOST(entity.INSPECTION_ENTERPRISE_POST)) {
+                zhi += "送检单位邮编格式不对！<br>";
+            }
+        }
+        if (!isNull(entity.CERTIFICATE_ENTERPRISE_POST)) {
+            if (!isPOST(entity.CERTIFICATE_ENTERPRISE_POST)) {
+                zhi += "证书单位邮编格式不对！<br>";
+            }
+        }
+        if (!isNull(entity.FAX)) {
+            if (!isFAX(entity.FAX)) {
+                zhi += "送检单位传真格式不对！<br>";
+            }
+        }
+        if (!isNull(entity.FAX2)) {
+            if (!isFAX(entity.FAX2)) {
+                zhi += "证书单位传真格式不对！<br>";
+            }
+        }
+        if (entity.APPLIANCE_DETAIL_INFORMATION.length >= 1) {
+            for (var i = 0; i < entity.APPLIANCE_DETAIL_INFORMATION.length; i++) {
+                if (entity.APPLIANCE_DETAIL_INFORMATION[i].APPLIANCE_NAME == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].VERSION == "undefined"
+                    || entity.APPLIANCE_DETAIL_INFORMATION[i].NUM == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].APPEARANCE_STATUS == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID == "undefined") {
+                    zhi += "器具数据有误！<br>";
+                    break;
+                }
+                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].APPLIANCE_NAME)) {
+                    zhi += "器具名称不能为空！<br>";
+                }
+                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].VERSION)) {
+                    zhi += "型号不能为空！<br>";
+                }
+                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
+                    zhi += "数量不能为空！<br>";
+                }
+                else {
+                    if (!isNumber(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
+                        zhi += "数量必须为数字整型！<br>";
+                    }
+                }
+                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].APPEARANCE_STATUS)) {
+                    zhi += "外观状态不能为空！<br>";
+                }
+                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID)) {
+                    zhi += "实验室不能为空！<br>";
+                }
+                else {
+                    var a = entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID;
+                    var b = a.split(',');
+                    if (b.length > 2) {
+                        zhi += "实验室不能超过2个！<br>";
+                    }
+                    else {
+                        var s = "@Common.LABORATORYNAME.互感器.ToString(),@Common.LABORATORYNAME.指示仪表.ToString(),@Common.LABORATORYNAME.数表三相.ToString(),@Common.LABORATORYNAME.数表单相.ToString(),@Common.LABORATORYNAME.电能.ToString(),@Common.LABORATORYNAME.直流仪器.ToString()";
+                        for (var i = 0; i < b.length; i++) {
+                            if (s.indexOf(b[i]) == -1) {
+                                zhi += "实验室名错误！<br>";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            zhi += "器具数据不能为空！<br>";
+        }
+
+        if (zhi != "") {
+            $.messager.alert('操作提示', "" + zhi + "", 'info');
+            return false;
+        }
+        else {
+            //return false;
+            return true;
+        }
+
+    }
+    /*
+用途：检查输入字符串是否为空或者全部都是空格
+输入：str
+返回：
+如果全是空返回true,否则返回false
+*/
+    function isNull(str) {
+        if (str == "") return true;
+        var regu = "^[ ]+$";
+        var re = new RegExp(regu);
+        return re.test(str);
+    }
+    /*
+用途：检查输入字符串是否满足邮政编码格式
+输入：str
+返回：
+如果全是空返回true,否则返回false
+*/
+    function isPOST(str) {
+        var regu = /^[1-9][0-9]{5}$/;
+        //var re = new RegExp(regu);
+        return regu.test(str);
+    }
+    /*
+用途：检查输入字符串是否满足传真格式
+输入：str
+返回：
+如果全是空返回true,否则返回false
+*/
+    function isFAX(str) {
+        var regu = /^[+]{0,1}(\d){1,3}[ ]?([-]?((\d)|[ ]){1,12})+$/;
+        //var re = new RegExp(regu);
+        return regu.test(str);
+    }
+    /*
+   用途：检查输入的电话号码格式是否正确
+   输入：
+   strPhone：字符串
+   返回：
+   如果通过验证返回true,否则返回false
+   */
+    function checkPhone(strPhone) {
+        var phoneRegWithArea = /^[1][3][0-9]{9}$/;
+        var phoneRegNoArea = /^0\d{2,3}-?\d{7,8}$/;
+        //var prompt = "您输入的电话号码不正确!"
+        if (strPhone.length == 11) {
+            if (phoneRegWithArea.test(strPhone)) {
+                return true;
+            } else {
+                //alert( prompt );
+                return false;
+            }
+        } else {
+            if (phoneRegNoArea.test(strPhone)) {
+                return true;
+            } else {
+                //alert(prompt);
+                return false;
+            }
+
+        }
+    }
+
+    /*
+用途：检查输入字符串是否符合正整数格式
+输入：
+s：字符串
+返回：
+如果通过验证返回true,否则返回false
+*/
+    function isNumber(s) {
+        var regu = /^[0-9]*[1-9][0-9]*$/;
+        if (regu.test(s)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+</script>

@@ -327,6 +327,18 @@ namespace Langben.App.Controllers
             ViewBag.ACCEPT_ORGNIZATION = appion.ORDER_TASK_INFORMATION.ACCEPT_ORGNIZATION;//受理单位
             return View(prepShow);
         }
+
+        /// <summary>
+        /// 器具修改
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [SupportFilter]
+        public ActionResult QiJuXiuGai(string id)
+        {
+            ViewBag.ID = id;
+            return View();
+        }
         /// <summary>
         /// 异步加载数据
         /// </summary>

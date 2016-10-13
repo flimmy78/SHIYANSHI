@@ -837,6 +837,7 @@
     <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaFeiZhengFu.cshtml" />
     <Content Include="Views\QUALIFIED_UNQUALIFIED_TEST_ITE\FeiBiaoGe.cshtml" />
     <Content Include="Views\SCHEME\Selected.cshtml" />
+    <Content Include="Views\VJIANDINGRENWU\QiJuXiuGai.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

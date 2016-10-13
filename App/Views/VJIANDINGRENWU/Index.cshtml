@@ -282,7 +282,6 @@
                 }
             },
             toolbar: [
-
                  {
                      text: '领取',
                      iconCls: 'icon-search',
@@ -301,7 +300,7 @@
                        text: '器具信息修改',
                        iconCls: 'icon-search',
                        handler: function () {
-                           // return getView();
+                           return UpdateView();
                        }
                    },
                     {
@@ -343,7 +342,6 @@
                             }
                         }
                     }
-
                     , { field: 'OVERDUE', title: '@Html.DisplayNameFor(model => model.OVERDUE)', align: 'center', width: 100 }
                     , { field: 'STATE', title: '@Html.DisplayNameFor(model => model.STATE)', align: 'center', width: 100 }
                     , { field: 'REPORTSTATUS', title: '@Html.DisplayNameFor(model => model.REPORTSTATUS)', align: 'center', width: 100 }
@@ -505,6 +503,7 @@
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
         }
     }
+
     //选择方案
     function xuanzhefanan() {
         if (panduanlingqu()) {
@@ -513,4 +512,14 @@
         }
     }
 
+    //器具修改
+    function UpdateView() {
+        var arr = $('#flexigridData').datagrid('getSelections');
+        if (arr.length >= 1) {
+            window.location.href = "../VJIANDINGRENWU/QiJuXiuGai/" + arr[0].ID;
+        }
+        else {
+            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
+        }
+    }
 </script>
