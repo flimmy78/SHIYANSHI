@@ -166,13 +166,12 @@
             return false;
         }
             var arr = [];
-            for (var i = 0; i < rows.length; i++) {
-                arr.push(rows[i].ID);
+            for (var i = 0; i < rows.length; i++) {              
                 if (rows[i].STORAGEINSTRUCTI_STATU!="@Common.ORDER_STATUS.器具已入库.ToString()") {
-                    
+                    arr.push(rows[i].ID);
                 }
                 else {
-                    $.messager.alert('操作提示', "选择的数据有误！", 'info');
+                    $.messager.alert('操作提示', "器具已入库不能重复入库！", 'info');
                     return false;
                 }
             } 
@@ -181,7 +180,7 @@
                 if (r) {
                     $.ajax({
                         url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/PutSTORAGEINSTRUCTI_STATU/" + arr.join(","),
-                        type: "put",
+                        type: "Post",
                         success: function (res) {
                             if (res.Code == 1) {
                                 //移除删除的数据

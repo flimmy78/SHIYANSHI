@@ -89,15 +89,26 @@ namespace Langben.App.Controllers
         {
             return new ContentResult() { Content = m_BLL.SearchAutoComplete(id, term) };
         }
+
+        /// <summary>
+        /// 制造单位下拉框数据绑定
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Getdate()
+        {
+            return new ContentResult() { Content = m_BLL2.Getdate() };
+        }
         IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL m_BLL;
+        IBLL.ICOMPANYBLL m_BLL2;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
-        public ApplianceController(): this(new APPLIANCE_DETAIL_INFORMATIONBLL()) { }
+        public ApplianceController(): this(new APPLIANCE_DETAIL_INFORMATIONBLL(),new COMPANYBLL()) { }
 
-        public ApplianceController(APPLIANCE_DETAIL_INFORMATIONBLL bll)
+        public ApplianceController(APPLIANCE_DETAIL_INFORMATIONBLL bll,COMPANYBLL bll2)
         {
             m_BLL = bll;
+            m_BLL2 = bll2;
         }
 
     }

@@ -541,7 +541,18 @@ s：字符串
                    }
                }
            }
-           , { field: 'MAKE_ORGANIZATION', title: '制造单位', width: 65, editor: 'text' }
+               , {
+                   field: 'MAKE_ORGANIZATION', title: '制造单位', width: 130, editor: {
+                       type: 'combobox',
+                       options: {
+                           valueField: 'value',
+                           textField: 'text',
+                           method: 'get',
+                           url: '/Appliance/Getdate',
+                           required: true
+                       }
+                   }
+               }
               , {
                   field: 'UNDERTAKE_LABORATORYID', title: '承接实验室', width: 135, editor: {
                       type: 'combobox',

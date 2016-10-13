@@ -9,11 +9,14 @@
 <script src="~/Scripts/jquery.edatagrid.js"></script>
 <style type="text/css">
     body {
-        height: auto; font-size:12px
+        height: auto;
+        font-size: 12px;
     }
+
     td {
         height: 25px;
     }
+
     .editor-field {
         width: 200px;
         height: 24px;
@@ -21,12 +24,14 @@
         margin: 11px 0 11px 6px;
         display: inline;
     }
-    .editor-field .text-box { width:180px    }
+
+        .editor-field .text-box {
+            width: 180px;
+        }
+
         .editor-field .easyui-combobox {
             width: 180px;
         }
-    
-    
 </style>
 
 <script type="text/javascript">
@@ -212,15 +217,18 @@
         <div class="search-box">
             <label>条形码：</label><input id="BAR_CODE_NUM" name="BAR_CODE_NUM" style="width:90px;" />
             <label>
-                出厂编号：</label><input id="FACTORY_NUM" name="FACTORY_NUM" style="width:200px;" />
+                出厂编号：
+            </label><input id="FACTORY_NUM" name="FACTORY_NUM" style="width:200px;" />
             <label>
-                型号：</label><input id="VERSION" name="VERSION" style="width:150px;" />
+                型号：
+            </label><input id="VERSION" name="VERSION" style="width:150px;" />
             <label>
-                器具名称：</label><input id="APPLIANCE_NAME" name="APPLIANCE_NAME" style="width:150px;" />
-                <a href="#" onclick="seng()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
-                    查 询
-                </a>
-</div>
+                器具名称：
+            </label><input id="APPLIANCE_NAME" name="APPLIANCE_NAME" style="width:150px;" />
+            <a href="#" onclick="seng()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
+                查 询
+            </a>
+        </div>
     </div>
     <br style="clear:both;" />
     <div class="bigdiv" style="width: auto" id="order">
@@ -249,7 +257,7 @@
                 @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
             </div>
         </div>
-       
+
         <div class="editor-form">
 
             <div class="editor-label">
@@ -338,30 +346,30 @@
             <div class="editor-label">
                 @Html.LabelFor(model => model.FAX2)：
             </div>
-      
+
             <div class="editor-field">
                 @Html.EditorFor(model => model.FAX2)
                 @Html.ValidationMessageFor(model => model.FAX2)
             </div>
         </div>
         <div class="clearfix"></div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)：
-            </div>
-            <div class="editor-field" style="height:auto">
-                @Html.TextAreaFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
-                @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
-            </div>
-       
-      
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)：
         </div>
+        <div class="editor-field" style="height:auto">
+            @Html.TextAreaFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
+            @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
+        </div>
+
+
+    </div>
     <div style="clear:both;"></div>
     <input type="hidden" id="ORDER_TASK_INFORMATIONID" />
     <div class="p5 mt10">
         <table id="ApplianceDate" singleselect="true"></table>
     </div>
 </div>
-    <script type="text/javascript">
+<script type="text/javascript">
     //数据验证
     function ifshuju(entity) {
         var zhi = "";
@@ -548,8 +556,8 @@ s：字符串
     }
 
 
-    </script>
-    <script type="text/javascript">
+</script>
+<script type="text/javascript">
     //查询
     function seng() {
         var row = null;
@@ -762,7 +770,7 @@ s：字符串
             columns: [[
        { field: 'ORDER_TASK_INFORMATIONID', title: 'ORDER_TASK_INFORMATIONID', width: 64, hidden: true }
        , {
-           field: 'APPLIANCE_NAME', title: '器具名称', width: 135, editor: {
+           field: 'APPLIANCE_NAME', title: '器具名称', width: 150, editor: {
                type: 'validatebox', options: {
                    precision: 1,
                    required: true,
@@ -770,16 +778,16 @@ s：字符串
                }
            }
        }, {
-           field: 'VERSION', title: '型号', width: 65, editor: {
+           field: 'VERSION', title: '型号', width: 100, editor: {
                type: 'validatebox', options: {
                    required: true,
                    missingMessage: '必填'
                }
            }
-       }, { field: 'FORMAT', title: '规格', width: 65, editor: 'text' },
-       { field: 'FACTORY_NUM', title: '出厂编号', width: 65, editor: 'text' },
+       }, { field: 'FORMAT', title: '规格', width:100, editor: 'text' },
+       { field: 'FACTORY_NUM', title: '出厂编号', width: 120, editor: 'text' },
        {
-           field: 'NUM', title: '数量', width: 35
+           field: 'NUM', title: '数量', width: 65
                 , editor: {
                     type: 'validatebox', options: {
                         required: true,
@@ -787,9 +795,9 @@ s：字符串
                     }
                 }
 
-       }, { field: 'ATTACHMENT', title: '附件', width: 135, editor: 'text' }
+       }, { field: 'ATTACHMENT', title: '附件', width: 150, editor: 'text' }
            , {
-               field: 'APPEARANCE_STATUS', title: '外观状态', width: 65, editor: {
+               field: 'APPEARANCE_STATUS', title: '外观状态', width: 100, editor: {
                    type: 'validatebox', options: {
                        required: true,
                        missingMessage: '必填'
@@ -798,9 +806,20 @@ s：字符串
            }
 
 
-           , { field: 'MAKE_ORGANIZATION', title: '制造单位', width: 65, editor: 'text' }
+           , {
+               field: 'MAKE_ORGANIZATION', title: '制造单位', width:130, editor: {
+                   type: 'combobox',
+                   options: {
+                       valueField: 'value',
+                       textField: 'text',
+                       method: 'get',
+                       url: '../Appliance/Getdate',
+                       required: true
+                   }
+               }
+           }
               , {
-                  field: 'UNDERTAKE_LABORATORYID', title: '承接实验室', width: 135, editor: {
+                  field: 'UNDERTAKE_LABORATORYID', title: '承接实验室', width: 150, editor: {
                       type: 'combobox',
                       options: {
                           multiple: true,
@@ -815,13 +834,11 @@ s：字符串
                    type: 'combobox', options: { data: [{ value: '是', text: '是' }, { value: '否', text: '否' }], panelHeight: 'auto' }
                }
            }
-           , { field: 'REMARKS', title: '备注', width: 135, editor: 'text' }
+           , { field: 'REMARKS', title: '备注', width: 170, editor: 'text' }
             ]]
 
         });
 
     });
-    //
-
-    </script>
+</script>
 
