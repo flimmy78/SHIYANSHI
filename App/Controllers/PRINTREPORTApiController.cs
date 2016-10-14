@@ -34,13 +34,19 @@ namespace Langben.App.Controllers
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID
-					,GETNUMBER = s.GETNUMBER
-					,CREATETIME = s.CREATETIME
-					,CREATEPERSON = s.CREATEPERSON
-					,UPDATETIME = s.UPDATETIME
-					,UPDATEPERSON = s.UPDATEPERSON
-					,PREPARE_SCHEMEID =   s.PREPARE_SCHEMEIDOld
-					
+                    ,
+                    GETNUMBER = s.GETNUMBER
+                    ,
+                    CREATETIME = s.CREATETIME
+                    ,
+                    CREATEPERSON = s.CREATEPERSON
+                    ,
+                    UPDATETIME = s.UPDATETIME
+                    ,
+                    UPDATEPERSON = s.UPDATEPERSON
+                    ,
+                    PREPARE_SCHEMEID = s.PREPARE_SCHEMEIDOld
+
 
                 })
             };
@@ -57,34 +63,38 @@ namespace Langben.App.Controllers
             PRINTREPORT item = m_BLL.GetById(id);
             return item;
         }
- 
+
         /// <summary>
         /// 创建
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
         public Common.ClientResult.Result Post([FromBody]PRINTREPORT entity)
-        {           
+        {
 
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
             {
                 string currentPerson = GetCurrentPerson();
-               entity.CREATETIME = DateTime.Now;
-                entity.CREATEPERSON = currentPerson;
-              
-                entity.ID = Result.GetNewId();   
+                entity.CREATETIME = DateTime.Now;//打印时间
+                entity.CREATEPERSON = currentPerson;//打印者
+
+                entity.ID = Result.GetNewId();
                 string returnValue = string.Empty;
-                if (m_BLL.Create(ref validationErrors, entity))
-                {
-                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed  + "，打印报告的信息的Id为" + entity.ID,"打印报告"
+                //预备方案数据
+                PREPARE_SCHEME prep = new PREPARE_SCHEME();
+                prep.ID = entity.PREPARE_SCHEMEID;
+                prep.PRINTSTATUS = Common.REPORTSTATUS.报告已打印.ToString();
+                if (m_BLL.Create(ref validationErrors, entity)&& m_BLL2.EditField(ref validationErrors, prep))//修改预备方案数据
+                {                   
+                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，打印报告的信息的Id为" + entity.ID, "打印报告"
                         );//写入日志 
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.InsertSucceed;
                     return result; //提示创建成功
                 }
                 else
-                { 
+                {
                     if (validationErrors != null && validationErrors.Count > 0)
                     {
                         validationErrors.All(a =>
@@ -93,7 +103,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，打印报告的信息，" + returnValue,"打印报告"
+                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，打印报告的信息，" + returnValue, "打印报告"
                         );//写入日志                      
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.InsertFail + returnValue;
@@ -125,7 +135,7 @@ namespace Langben.App.Controllers
                 string returnValue = string.Empty;
                 if (m_BLL.Edit(ref validationErrors, entity))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，打印报告信息的Id为" + entity.ID,"打印报告"
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，打印报告信息的Id为" + entity.ID, "打印报告"
                         );//写入日志                   
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.UpdateSucceed;
@@ -184,7 +194,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId)+ "," + returnValue, "消息"
+                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId) + "," + returnValue, "消息"
                         );//删除失败，写入日志
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.DeleteFail + returnValue;
@@ -194,17 +204,19 @@ namespace Langben.App.Controllers
         }
 
         IBLL.IPRINTREPORTBLL m_BLL;
+        IBLL.IPREPARE_SCHEMEBLL m_BLL2;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public PRINTREPORTApiController()
-            : this(new PRINTREPORTBLL()) { }
+            : this(new PRINTREPORTBLL(),new PREPARE_SCHEMEBLL()) { }
 
-        public PRINTREPORTApiController(PRINTREPORTBLL bll)
+        public PRINTREPORTApiController(PRINTREPORTBLL bll, PREPARE_SCHEMEBLL bll2)
         {
             m_BLL = bll;
+            m_BLL2 = bll2;
         }
-        
+
     }
 }
 

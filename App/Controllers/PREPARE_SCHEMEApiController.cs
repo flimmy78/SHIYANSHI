@@ -358,10 +358,13 @@ namespace Langben.App.Controllers
 
                 if (entity.SHPI == "H")
                 {
+                    entity.AUDITTIME = new DateTime();//审核时间
+                    entity.AUDITTEPERSON = currentPerson;
                     if (entity.ISAGGREY == "不同意")
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.审核驳回.ToString();
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.审核驳回.GetHashCode().ToString();
+                        
                         if (APPlist.Count > 1)
                         {
                             if (appliance.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName)
@@ -392,8 +395,7 @@ namespace Langben.App.Controllers
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.待批准.ToString();
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.待批准.GetHashCode().ToString();
-                        entity.AUDITTIME = new DateTime();//审核时间
-                        entity.AUDITTEPERSON = currentPerson;
+                      
                         if (APPlist.Count > 1)
                         {
                             if (appliance.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName)
@@ -427,6 +429,8 @@ namespace Langben.App.Controllers
                 }
                 else if (entity.SHPI == "P")
                 {
+                    entity.APPROVALDATE = new DateTime();
+                    entity.APPROVALEPERSON = currentPerson;
                     if (entity.APPROVALISAGGREY == "不同意")
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.批准驳回.ToString();
@@ -508,9 +512,7 @@ namespace Langben.App.Controllers
                     else if (entity.APPROVALISAGGREY == "同意")
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.已批准.ToString();
-                        entity.REPORTSTATUSZI = Common.REPORTSTATUS.已批准.GetHashCode().ToString();
-                        entity.APPROVALDATE = new DateTime();
-                        entity.APPROVALEPERSON = currentPerson;
+                        entity.REPORTSTATUSZI = Common.REPORTSTATUS.已批准.GetHashCode().ToString();            
                         //判断器具是否满足入库条件
                         if (ISAPPLIANCE(entity.APPLIANCE_DETAIL_INFORMATIONID))
                         {

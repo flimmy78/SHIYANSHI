@@ -1257,6 +1257,10 @@
           <Property Name="APPROVALDATE" Type="date" />
           <Property Name="BAR_CODE_NUM" Type="varchar2" MaxLength="200" />
           <Property Name="PRINTSTATUS" Type="varchar2" MaxLength="200" />
+          <Property Name="REPORTSTATUS" Type="varchar2" MaxLength="200" />
+          <Property Name="REPORTSTATUSZI" Type="varchar2" MaxLength="200" />
+          <Property Name="PACKAGETYPE" Type="nvarchar2" MaxLength="200" />
+          <Property Name="FILECONCLUSION" Type="varchar2" MaxLength="200" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VJIANDINGRENWU”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -2249,7 +2253,11 @@
 "VBAOGAODAYIN"."UNDERTAKE_LABORATORYID" AS "UNDERTAKE_LABORATORYID", 
 "VBAOGAODAYIN"."APPROVALDATE" AS "APPROVALDATE", 
 "VBAOGAODAYIN"."BAR_CODE_NUM" AS "BAR_CODE_NUM", 
-"VBAOGAODAYIN"."PRINTSTATUS" AS "PRINTSTATUS"
+"VBAOGAODAYIN"."PRINTSTATUS" AS "PRINTSTATUS", 
+"VBAOGAODAYIN"."REPORTSTATUS" AS "REPORTSTATUS", 
+"VBAOGAODAYIN"."REPORTSTATUSZI" AS "REPORTSTATUSZI", 
+"VBAOGAODAYIN"."PACKAGETYPE" AS "PACKAGETYPE", 
+"VBAOGAODAYIN"."FILECONCLUSION" AS "FILECONCLUSION"
 FROM "TENGFEI"."VBAOGAODAYIN" "VBAOGAODAYIN"</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VJIANDINGRENWU" EntityType="Self.VJIANDINGRENWU" store:Type="Views" store:Schema="TENGFEI">
@@ -2708,7 +2716,6 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <EntitySet Name="UNCERTAINTY2_HZ" EntityType="Model.UNCERTAINTY2_HZ" />
           <EntitySet Name="UNCERTAINTYPARAMETERMANAGEMENT" EntityType="Model.UNCERTAINTYPARAMETERMANAGEMENT" />
           <EntitySet Name="UNDERTAKE_LABORATORY" EntityType="Model.UNDERTAKE_LABORATORY" />
-          <EntitySet Name="VBAOGAODAYIN" EntityType="Model.VBAOGAODAYIN" />
           <EntitySet Name="VJIANDINGRENWU" EntityType="Model.VJIANDINGRENWU" />
           <EntitySet Name="VQIJULINGQU1" EntityType="Model.VQIJULINGQU1" />
           <EntitySet Name="VQIJULINGQU2" EntityType="Model.VQIJULINGQU2" />
@@ -2944,6 +2951,7 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
             <End Role="SysRole" EntitySet="SysRole" />
           </AssociationSet>
           <EntitySet Name="VTEST_ITE" EntityType="Model.VTEST_ITE" />
+          <EntitySet Name="VBAOGAODAYIN" EntityType="Model.VBAOGAODAYIN" />
         </EntityContainer>
         <EntityType Name="AC_VOLTAGE_CURRENT">
           <Key>
@@ -4249,27 +4257,6 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <NavigationProperty Name="RULE" Relationship="Model.FK_RULE_REFERENCE_UNDERTAK" FromRole="UNDERTAKE_LABORATORY" ToRole="RULE" />
           <NavigationProperty Name="SCHEME" Relationship="Model.FK_SCHEME_REFERENCE_UNDERTAK" FromRole="UNDERTAKE_LABORATORY" ToRole="SCHEME" />
         </EntityType>
-        <EntityType Name="VBAOGAODAYIN">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="REPORTNUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="ORDER_NUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CERTIFICATE_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="CERTIFICATE_CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="QUALIFICATIONS" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="CONCLUSION_EXPLAIN" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="CONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="APPROVALDATE" Type="DateTime" />
-          <Property Name="BAR_CODE_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="PRINTSTATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="VJIANDINGRENWU">
           <Key>
             <PropertyRef Name="ID" />
@@ -5060,6 +5047,31 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <Property Name="ISCOMPLETE" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="SCHEME_RULEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="SORT" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="VBAOGAODAYIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="REPORTNUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ORDER_NUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CERTIFICATE_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="CERTIFICATE_CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="QUALIFICATIONS" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CONCLUSION_EXPLAIN" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="CONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="APPROVALDATE" Type="DateTime" />
+          <Property Name="BAR_CODE_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PRINTSTATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="REPORTSTATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="REPORTSTATUSZI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PACKAGETYPE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FILECONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -6319,28 +6331,6 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VBAOGAODAYIN">
-            <EntityTypeMapping TypeName="Model.VBAOGAODAYIN">
-              <MappingFragment StoreEntitySet="VBAOGAODAYIN">
-                <ScalarProperty Name="PRINTSTATUS" ColumnName="PRINTSTATUS" />
-                <ScalarProperty Name="BAR_CODE_NUM" ColumnName="BAR_CODE_NUM" />
-                <ScalarProperty Name="APPROVALDATE" ColumnName="APPROVALDATE" />
-                <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
-                <ScalarProperty Name="CONCLUSION" ColumnName="CONCLUSION" />
-                <ScalarProperty Name="CONCLUSION_EXPLAIN" ColumnName="CONCLUSION_EXPLAIN" />
-                <ScalarProperty Name="QUALIFICATIONS" ColumnName="QUALIFICATIONS" />
-                <ScalarProperty Name="CERTIFICATE_CATEGORY" ColumnName="CERTIFICATE_CATEGORY" />
-                <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
-                <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
-                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
-                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
-                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
-                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
-                <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VJIANDINGRENWU">
             <EntityTypeMapping TypeName="Model.VJIANDINGRENWU">
               <MappingFragment StoreEntitySet="VJIANDINGRENWU">
@@ -6532,6 +6522,32 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
                 <ScalarProperty Name="SCHEMEID" ColumnName="SCHEMEID" />
                 <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
                 <ScalarProperty Name="ROW_FLAG" ColumnName="ROW_FLAG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VBAOGAODAYIN">
+            <EntityTypeMapping TypeName="Model.VBAOGAODAYIN">
+              <MappingFragment StoreEntitySet="VBAOGAODAYIN">
+                <ScalarProperty Name="FILECONCLUSION" ColumnName="FILECONCLUSION" />
+                <ScalarProperty Name="PACKAGETYPE" ColumnName="PACKAGETYPE" />
+                <ScalarProperty Name="REPORTSTATUSZI" ColumnName="REPORTSTATUSZI" />
+                <ScalarProperty Name="REPORTSTATUS" ColumnName="REPORTSTATUS" />
+                <ScalarProperty Name="PRINTSTATUS" ColumnName="PRINTSTATUS" />
+                <ScalarProperty Name="BAR_CODE_NUM" ColumnName="BAR_CODE_NUM" />
+                <ScalarProperty Name="APPROVALDATE" ColumnName="APPROVALDATE" />
+                <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
+                <ScalarProperty Name="CONCLUSION" ColumnName="CONCLUSION" />
+                <ScalarProperty Name="CONCLUSION_EXPLAIN" ColumnName="CONCLUSION_EXPLAIN" />
+                <ScalarProperty Name="QUALIFICATIONS" ColumnName="QUALIFICATIONS" />
+                <ScalarProperty Name="CERTIFICATE_CATEGORY" ColumnName="CERTIFICATE_CATEGORY" />
+                <ScalarProperty Name="CUSTOMER_SPECIFIC_REQUIREMENTS" ColumnName="CUSTOMER_SPECIFIC_REQUIREMENTS" />
+                <ScalarProperty Name="CERTIFICATE_ENTERPRISE" ColumnName="CERTIFICATE_ENTERPRISE" />
+                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
+                <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
+                <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

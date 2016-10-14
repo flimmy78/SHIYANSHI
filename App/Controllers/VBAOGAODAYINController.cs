@@ -54,7 +54,8 @@ namespace Langben.App.Controllers
         {
 
             int total = 0;
-            List<VBAOGAODAYIN> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
+            search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.已批准.GetHashCode() +"";
+            List<VBAOGAODAYIN> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
             {
                 total = total,
@@ -91,6 +92,10 @@ namespace Langben.App.Controllers
                     BAR_CODE_NUM = s.BAR_CODE_NUM
                     ,
                     PRINTSTATUS = s.PRINTSTATUS
+                    ,
+                    PACKAGETYPE=s.PACKAGETYPE
+                    ,
+                    FILECONCLUSION=s.FILECONCLUSION
 
                 }
 

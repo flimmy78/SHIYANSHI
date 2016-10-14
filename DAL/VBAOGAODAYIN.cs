@@ -30,5 +30,9 @@ namespace Langben.DAL
         public Nullable<System.DateTime> APPROVALDATE { get; set; }
         public string BAR_CODE_NUM { get; set; }
         public string PRINTSTATUS { get; set; }
+        public string REPORTSTATUS { get; set; }
+        public string REPORTSTATUSZI { get; set; }
+        public string PACKAGETYPE { get; set; }
+        public string FILECONCLUSION { get; set; }
     }
 }
