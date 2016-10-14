@@ -1,0 +1,383 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>变送器-有功（无功）功率-引用误差</title>
+    <link id="easyuiTheme" href="Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="Res/easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="Res/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="Content/default.css" rel="stylesheet" />
+    <link href="Content/StyleSheet.css" rel="stylesheet" />
+    <script src="Scripts/jquery.min.js"></script>
+    <script src="Scripts/JScriptCommon.js"></script>
+    <script src="Res/easyui/jquery.easyui.min.js"></script>
+    <script src="Res/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="Scripts/jquery.validate.js"></script>
+    <script src="Scripts/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body class="easyui-layout">
+    <input type="hidden" id="rowindex" value="1" />
+    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+            <table>
+                <tr>
+                    <td><a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="CreateTable()">保存检测项</a> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="">重置检测项</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+        <div class="mt10" id="tongdao">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_1">
+                <tr>
+                    <td colspan="9">
+                        通道：
+                        <select class="my-combobox" name="" id="">
+                            <option value="">1</option>
+                            <option value="">2</option>
+                            <option value="">3</option>
+                            <option value="">4</option>
+                        </select>
+                        &nbsp;&nbsp;&nbsp;&nbsp;有功功率
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="9">
+                        <div class="fl" style="margin-right:20px">
+                            输入范围：(
+                            <input name="" type="text" class="my-textbox tc" value="0" style="width:30px">
+                            -
+                            <input name="" type="text" class="my-textbox tc" value="5" style="width:30px">
+                            )W
+                        </div>
+                        <div class="fl" style="margin-right:20px">
+                            输出范围：(
+                            <input name="" type="text" class="my-textbox tc" value="4" style="width:30px">
+                            -
+                            <input name="" type="text" class="my-textbox tc" value="20" style="width:30px">
+                            )W
+                        </div>
+                        <div class="fl" style="margin-right:20px">
+                            U<sub>n</sub> =
+                            <input name="" type="text" class="my-textbox tc" value="57.7" style="width:40px">
+                            <select class="my-combobox" name="" id="">
+                                <option value="V">V</option>
+                                <option value="MV">MV</option>
+                                <option value="KV">KV</option>
+                                <option value="mV">mV</option>
+                                <option value="μV">μV</option>
+                            </select>
+                        </div>
+                        <div class="fl" style="margin-right:20px">
+                            I<sub>n</sub> =
+                            <input name="" type="text" class="my-textbox tc" value="5" style="width:40px">
+                            <select class="my-combobox" name="" id="">
+                                <option value="A">A</option>
+                                <option value="KA">KA</option>
+                                <option value="mA">mA</option>
+                                <option value="μA">μA</option>
+                                <option value="nA">nA</option>
+                                <option value="pA">pA</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th align="center" width="100">测试量</th>
+                    <th align="center" width="100"> 等级</th>
+                    <th align="center" width="120"> 测量点</th>
+                    <th align="center" width="100">cos φ</th>
+                    <th align="center" width="100">
+                        二次输入标准值<br>
+                        (W)
+                    </th>
+                    <th align="center" width="100">
+                        标准输出值<br>
+                        <select class="my-combobox" name="" id="">
+                            <option value="MA">MA</option>
+                            <option value="pA">V</option>
+                        </select>
+                    </th>
+                    <th align="center" width="100">
+                        实际输出值<br>
+                        <select class="my-combobox" name="" id="">
+                            <option value="MA">MA</option>
+                            <option value="pA">V</option>
+                        </select>
+                    </th>
+                    <th align="center" width="100">
+                        引用误差<br>
+                        (%)
+                    </th>
+                    <th align="center">
+                        校准结果的不确定度<br>
+                        U(K =
+                        <select class="my-combobox" name="state" style="width:30px;">
+                            <option value="">2 </option>
+                            <option value="">3</option>
+                            <option value="">√3</option>
+                        </select>
+                        )
+                    </th>
+                </tr>
+                <tr>
+                    <td align="center" width="100">P</td>
+                    <td align="center" width="100">
+                        <input name="" type="text" class="my-textbox tr" value="1.0" style="width:70px" onblur="JS1(this)" tableid="tongdao_1">
+                        级
+                    </td>
+                    <td colspan="7" style="padding:0">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="subtbl">
+                            <tr>
+                                <td align="center" width="120">
+                                    <input name="" type="text" class="my-textbox tr" value="100%" style="width:70px">
+                                    I<sub>n</sub>
+                                </td>
+                                <td width="100" rowspan="6" align="center">1.0</td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
+                            </tr>
+                            <tr>
+                                <td align="center" width="120">
+                                    <input name="" type="text" class="my-textbox tr" value="80%" style="width:70px">
+                                    I<sub>n</sub>
+                                </td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
+                            </tr>
+                            <tr>
+                                <td align="center" width="120">
+                                    <input name="" type="text" class="my-textbox tr" value="60%" style="width:70px">
+                                    I<sub>n</sub>
+                                </td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
+                            </tr>
+                            <tr>
+                                <td align="center" width="120">
+                                    <input name="" type="text" class="my-textbox tr" value="40%" style="width:70px">
+                                    I<sub>n</sub>
+                                </td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
+                            </tr>
+                            <tr>
+                                <td align="center" width="120">
+                                    <input name="" type="text" class="my-textbox tr" value="20%" style="width:70px">
+                                    I<sub>n</sub>
+                                </td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
+                            </tr>
+                            <tr>
+                                <td align="center" width="120">
+                                    <input name="" type="text" class="my-textbox tr" value="0%" style="width:70px">
+                                    I<sub>n</sub>
+                                </td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
+                            </tr>
+                        </table>
+                        <div class="p5 bgF7"><a href="javascript:;" class="easyui-linkbutton" index="1" data-options="plain:true,iconCls:'icon-add'" onclick="CreateRow(this)">增加空行</a></div>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="subtbl">
+                            <tr>
+                                <td align="center" width="120">
+                                    <input name="" type="text" class="my-textbox tr" value="100%" style="width:70px">
+                                    I<sub>n</sub>
+                                </td>
+                                <td width="100" rowspan="2" align="center">0.5 L</td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
+                            </tr>
+                            <tr>
+                                <td width="120" align="center">
+                                    <input name="" type="text" class="my-textbox tr" value="0%" style="width:70px">
+                                    I<sub>n</sub>
+                                </td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
+                            </tr>
+                        </table>
+                        <div class="p5 bgF7"><a href="javascript:;" class="easyui-linkbutton" index="2" data-options="plain:true,iconCls:'icon-add'" onclick="CreateRow(this)">增加空行</a></div>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="subtbl">
+                            <tr>
+                                <td align="center" width="120">
+                                    <input name="" type="text" class="my-textbox tr" value="100%" style="width:70px">
+                                    I<sub>n</sub>
+                                </td>
+                                <td width="100" rowspan="2" align="center">0.5 C</td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
+                            </tr>
+                            <tr>
+                                <td width="120" align="center">
+                                    <input name="" type="text" class="my-textbox tr" value="0%" style="width:70px">
+                                    I<sub>n</sub>
+                                </td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
+                            </tr>
+                        </table>
+                        <div class="p5 bgF7"><a href="javascript:;" class="easyui-linkbutton" index="3" data-options="plain:true,iconCls:'icon-add'" onclick="CreateRow(this)">增加空行</a></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!--备注 -->
+        <div class="mt10">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
+                <tr>
+                    <th width="40">注：</th>
+                    <td colspan="6"><input class="easyui-textbox input-width" name="" data-options="multiline:true" style="height:30px; width:95%"></td>
+                </tr>
+                <tr>
+                    <th width="40">结论：</th>
+                    <td colspan="6"><input class="easyui-textbox input-width" name="" data-options="multiline:true" style="height:30px; width:95%"></td>
+                </tr>
+            </table>
+        </div>
+        <!--/备注 -->
+    </div>
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $(".subtbl").each(function () {
+                //$(this).children("td:not(:first)").attr('onblur', 'JS(this)');
+                $('tr td:not(:first)', this).find('input').attr('onblur', 'JS(this)');
+                $('tr td:not(:first)', this).attr('tableId', "tongdao_" + tabbleIdx);
+            })
+        });
+        var tabbleIdx = 1;
+        function CreateTable() {
+            tabbleIdx++;
+            ///此处为了简单,clonetable,然后将table中的值清空
+            var tmpTable = $("#tongdao_1").clone();
+            $(tmpTable).attr("id", "tongdao_" + tabbleIdx);
+            $("table tr", tmpTable).each(function () {
+                $(this).children("tr td:not(:first)").attr('tableId', "tongdao_" + tabbleIdx);
+                $(this).children("tr td:not(:first)").find('input').val('');
+            })
+            $("#tongdao").append(tmpTable);
+        }
+
+
+        //行数
+        var rowIdx = 0;
+
+        var CreateRow = function (obj) {
+            var idx = $(obj).attr("index");
+            var trNew = $(obj).parent().siblings('table').eq(idx - 1).find('tr:last').clone();
+            $(trNew).each(function () {
+                $(this).children("td:not(:first)").find('input').val('');
+            })
+            var rowspan = $(obj).parent().siblings('table').eq(idx - 1).find('tr td:eq(1)').attr('rowspan');
+            $(obj).parent().siblings('table').eq(idx - 1).find('tr td:eq(1)').attr('rowspan', rowspan + 1);
+            $(obj).parent().siblings('table').eq(idx - 1).append(trNew);
+        }
+
+        var JS = function (obj) {
+            var idx = 4;
+            if ($(obj).parent().parent().children('td:eq(1)').attr("rowspan") == undefined) {
+                idx = 3;
+            }
+            //引用误差=Round(（实际输出值-标准输出值）/（输出范围的最大值-输出范围的最小值）*100/等级,1)*等级
+            var Actualvalue = $(obj).parent().parent().children("td:eq(" + idx + ")").find('input').val(); //获取实际输出值
+            var Standardvalue = $(obj).parent().parent().children("td:eq(" + (idx - 1) + ")").find('input').val(); //获取标准输出值
+            var MaxValue = $("#" + $(obj).parent().attr("tableid") + " tr:eq(1) div:eq(1)").find('input')[1].value;
+            var MinValue = $("#" + $(obj).parent().attr("tableid") + " tr:eq(1) div:eq(1)").find('input')[0].value;
+            var level = $("#" + $(obj).parent().attr("tableid") + " tr:eq(3) td:eq(1)").find('input')[0].value;
+            var levels = level.toString().split('.');
+            length = levels[1].length;
+            var WuChaVlaue = parseFloat(((((Actualvalue - Standardvalue) / (MaxValue - MinValue) * 100 / level) ).toFixed(length))* level).toFixed(length + 1);
+            idx = 5;
+            if ($(obj).parent().parent().children('td:eq(1)').attr("rowspan") == undefined)
+                idx = 4;
+            $(obj).parent().parent().children("td:eq(" + idx + ")").find('input').val(WuChaVlaue);
+        }
+
+        var length = 0;
+        var JS1 = function (obj) {
+            var tableid = $(obj).attr("tableid");
+            var level = $(obj).val();
+            var levels = level.toString().split('.');
+            length = levels[1].length;
+            var MaxValue = $("#" + tableid + " tr:eq(1) div:eq(1)").find('input')[1].value;
+            var MinValue = $("#" + tableid + " tr:eq(1) div:eq(1)").find('input')[0].value;
+            var tdidx = 4;
+            $("#tongdao_1 .subtbl tr").each(function (idx) {
+                if (idx != 0) {
+                    tdidx = 3;
+                }
+                var Actualvalue = $(this).children("td:eq(" + tdidx + ")").find('input').val(); //获取实际输出值
+                var Standardvalue = $(this).children("td:eq(" + (tdidx - 1) + ")").find('input').val(); //获取标准输出值
+                var WuChaVlaue = parseFloat(((((Actualvalue - Standardvalue) / (MaxValue - MinValue) * 100 / level)).toFixed(length)) * level).toFixed(length + 1);
+                $(this).children("td:eq(" + (idx == 0 ? 5 : 4) + ")").find('input').val(WuChaVlaue);
+            });
+
+        }
+        //优化保留两位小数 zh
+        Number.prototype.toFixed = function toFixed(s) {
+            var IsFuShu = false;//判断是否是负数，负数单独处理
+            var je = 0;
+            if (this.toString().indexOf('-') >= 0) {
+                IsFuShu = true;
+                je = this.toString().replace('-', '');
+            } else je = this;
+            changenum = (parseInt(je * Math.pow(10, s) + 0.5) / Math.pow(10, s)).toString();
+            //}
+
+            index = changenum.indexOf(".");
+            if (index < 0 && s > 0) {
+                changenum = changenum + ".";
+                for (i = 0; i < s; i++) {
+                    changenum = changenum + "0";
+                }
+
+            } else {
+                index = changenum.length - index;
+                for (i = 0; i < (s - index) + 1; i++) {
+                    changenum = changenum + "0";
+                }
+
+            }
+            var returnNum = changenum.toString();
+            if (IsFuShu)
+                returnNum = '-' + returnNum;
+            return returnNum;
+        }
+
+    </script>
+</body>
+</html>
