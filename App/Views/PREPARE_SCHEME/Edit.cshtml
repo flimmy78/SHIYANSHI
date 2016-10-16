@@ -74,7 +74,7 @@
 
         </tr>
         <tr>
-            <td colspan="3"><a href="javascript:void(0)" class="easyui-linkbutton">原始记录</a>  <a href="javascript:void(0)" class="easyui-linkbutton">报 告</a></td>
+            <td colspan="3"><a href="javascript:ExportOriginalRecord();" class="easyui-linkbutton">原始记录</a>  <a href="javascript:void(0)" class="easyui-linkbutton">报 告</a></td>
         </tr>
     </table>
 </div>
@@ -135,6 +135,38 @@
             success: function (res) {//msg为返回的数据，在这里做数据绑定               
                 if (res.Code == 1) {                   
                     $.messager.alert('操作提示', "操作成功！", 'info');
+                }
+                else {
+                    $.messager.alert('操作提示', res.Message, 'info');
+                }
+
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
+            }
+        });
+    }
+    //导出原始记录
+    function ExportOriginalRecord() {
+        var ID = $("#hideID").val();//预备方案ID       
+
+        //获取空对象用于保存添加的信息
+        $.ajax({
+            type: 'post', //使用post方法访问后台
+            dataType: "json", //返回json格式的数据
+            url: '/PREPARE_SCHEME/ExportOriginalRecord', //要访问的后台地址      
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式        
+            data: { 'ID': ID },
+            beforeSend: function () {
+                //InitAlertJS();
+            },
+            complete: function () {
+            }, //AJAX请求完成时隐藏loading提示
+
+            success: function (res) {//msg为返回的数据，在这里做数据绑定               
+                if (res.Code == 1) {
+                    $.messager.alert('操作提示', "操作成功！", 'info');
+                    window.location.href = res.Message;
                 }
                 else {
                     $.messager.alert('操作提示', res.Message, 'info');

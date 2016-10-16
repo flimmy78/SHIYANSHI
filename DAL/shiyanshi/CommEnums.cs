@@ -76,4 +76,13 @@ namespace Langben.DAL.shiyanshi
         No = 0,
         Yes = 1
     }
+    /// <summary>
+    /// 规则标识
+    /// </summary>
+    public enum RuleFlag
+    {
+        开始 = 0,
+        中间 = 1,
+        结束=2
+    }
 }
