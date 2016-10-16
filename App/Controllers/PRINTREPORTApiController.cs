@@ -28,7 +28,7 @@ namespace Langben.App.Controllers
         {
             int total = 0;
             getParam.id = id;//刘腾飞
-            List<PRINTREPORT> queryData = m_BLL.GetByParam(null, getParam.page, getParam.rows, getParam.order, getParam.sort, getParam.search, ref total);
+            List<PRINTREPORT> queryData = m_BLL.GetByParam(id, getParam.page, getParam.rows, getParam.order, getParam.sort, getParam.search, ref total);
             var data = new Common.ClientResult.DataResult
             {
                 total = total,

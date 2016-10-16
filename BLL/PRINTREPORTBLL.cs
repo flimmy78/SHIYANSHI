@@ -49,7 +49,7 @@ namespace Langben.BLL
         /// <returns>结果集</returns>
         public List<PRINTREPORT> GetByParam(string id, int page, int rows, string order, string sort, string search, ref int total)
         {
-            IQueryable<PRINTREPORT> queryData = repository.GetData(db, order, sort, search);
+            IQueryable<PRINTREPORT> queryData = repository.GetData(db, order, sort, search).Where(w=>w.PREPARE_SCHEMEID==id).AsQueryable();//刘腾飞
             total = queryData.Count();
             if (total > 0)
             {
