@@ -104,9 +104,9 @@ namespace Langben.App.Controllers
                                     ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString(),
                                     EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已分配.GetHashCode().ToString(),
                                     DISTRIBUTIONPERSON = currentPerson,
-                                    DISTRIBUTIONTIME = new DateTime(),
+                                    DISTRIBUTIONTIME = DateTime.Now,
                                     CREATEPERSON = currentPerson,
-                                    CREATETIME = new DateTime(),
+                                    CREATETIME = DateTime.Now,
                                     ISRECEIVE = Common.ISRECEIVE.是.ToString()
                                 });
                             }

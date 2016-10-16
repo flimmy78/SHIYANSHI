@@ -87,7 +87,7 @@ namespace Langben.App.Controllers
                     app = new APPLIANCE_DETAIL_INFORMATION();
                     appry = new APPLIANCE_LABORATORY();
                     app.UPDATEPERSON = GetCurrentPerson();
-                    app.UPDATETIME = new DateTime();
+                    app.UPDATETIME = DateTime.Now;
                     app.ID = item;
                     app.STORAGEINSTRUCTI_STATU = Common.ORDER_STATUS.器具已入库.ToString();//入库状态
                     //器具明细信息_承接实验室表修改器具状态

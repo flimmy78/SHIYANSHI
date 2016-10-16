@@ -358,7 +358,7 @@ namespace Langben.App.Controllers
 
                 if (entity.SHPI == "H")
                 {
-                    entity.AUDITTIME = new DateTime();//审核时间
+                    entity.AUDITTIME = DateTime.Now;//审核时间
                     entity.AUDITTEPERSON = currentPerson;
                     if (entity.ISAGGREY == "不同意")
                     {
@@ -429,7 +429,7 @@ namespace Langben.App.Controllers
                 }
                 else if (entity.SHPI == "P")
                 {
-                    entity.APPROVALDATE = new DateTime();
+                    entity.APPROVALDATE = DateTime.Now;
                     entity.APPROVALEPERSON = currentPerson;
                     if (entity.APPROVALISAGGREY == "不同意")
                     {
