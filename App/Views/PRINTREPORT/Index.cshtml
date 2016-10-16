@@ -4,78 +4,31 @@
 @using Common 
 @using Models
 <script src="~/Scripts/JScriptIndex.js"></script>
-<div id="divQuery">
-    
-    <div class='input_search' style="padding-top:10px;">
-        <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
-            查 询
-        </a>
-    </div>
-</div>
- <br style="clear: both;" />
-
+ 
 <script type="text/javascript" language="javascript">
         $(function () {
 
             $('#flexigridData').datagrid({
-                title: '打印报告', //列表的标题
+                title: '打印报告记录', //列表的标题
                 iconCls: 'icon-site',
                 width: 'auto',
                 height: 'auto',
                 //nowrap: false,
                 striped: true,
                 collapsible: true,
-                url: '/api/PRINTREPORTApi/PostData', //获取数据的url
+                url: '/api/PRINTREPORTApi/PostData/@ViewBag.ID', //获取数据的url
                 sortName: 'ID',
                 sortOrder: 'desc',
                 idField: 'ID',
-
-                toolbar: [
                  
-                     {
-                        text: '详细',
-                        iconCls: 'icon-search',
-                        handler: function () {
-                            return getView();
-                        }
-                    }, {
-                        text: '创建',
-                        iconCls: 'icon-add',
-                        handler: function () {
-                            return flexiCreate();
-                        }
-                    },  {
-                        text: '删除',
-                        iconCls: 'icon-remove',
-                        handler: function () {
-                            return flexiDelete();
-                        }
-                    }, {
-                        text: '修改',
-                        iconCls: 'icon-edit',
-                        handler: function () {
-                            return flexiModify();
-                        }
-                    }, {
-                        text: '导出',
-                        iconCls: 'icon-excel',
-                        handler: function () {
-                            return flexiExport();
-                        }
-                    } ],
                 columns: [[
                    
                     
-					{ field: 'GETNUMBER', title: '@Html.DisplayNameFor(model => model.GETNUMBER)', width: 155 }
-					,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 155
+					 { field: 'CREATETIME', title:  '打印时间', width: 155
                     , formatter: formatDatebox
 }
-					,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 155 }
-					,{ field: 'UPDATETIME', title:  '@Html.DisplayNameFor(model => model.UPDATETIME)', width: 155
-                    , formatter: formatDatebox
-}
-					,{ field: 'UPDATEPERSON', title:  '@Html.DisplayNameFor(model => model.UPDATEPERSON)', width: 155 }
-					,{ field: 'PREPARE_SCHEMEID', title: '@Html.DisplayNameFor(model => model.PREPARE_SCHEMEIDOld)', width: 155 }
+					,{ field: 'CREATEPERSON', title:  '打印者', width: 155 }
+				 ,{ field: 'PREPARE_SCHEMEID', title: '@Html.DisplayNameFor(model => model.PREPARE_SCHEMEIDOld)', width: 155 }
                 ]],
                 pagination: true,
                 rownumbers: true

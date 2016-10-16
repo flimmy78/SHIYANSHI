@@ -76,8 +76,10 @@
     </div>
 </div>
 <br style="clear: both;" />
-
+<div id="myWindow">
+</div>
 <script type="text/javascript" language="javascript">
+ 
     $(function () {
 
         $('#flexigridData').datagrid({
@@ -143,7 +145,7 @@
 					}
                     , {
                         field: 'aa', title: '打印记录', width: 86, formatter: function (value, row, index) {
-                            var html = "<a href='/VBAOGAODAYIN/Details/" + row.ID + "'>详情</a>";
+                            var html = "<a onclick='showMyWindow(\""+row.ID+"\");'href='#'>详情</a>";
                             return html;
                         }
                     }
@@ -164,7 +166,26 @@
             $('#flexigridData').datagrid("addToolbarItem", [{ "text": "选择", "iconCls": "icon-ok", handler: function () { flexiSelect(); } }]);
         }
     });
+    function showMyWindow(href) {
 
+        $('#myWindow').window({
+            title: '详情',
+            width: 600,
+            height: 450,
+            content: '<iframe scrolling="yes" frameborder="0"  src="\PRINTREPORT/Index/' + href + '" style="width:100%;height:98%;"></iframe>',
+            //        href: href === undefined ? null : href,
+            modal: true,
+            minimizable: false ,
+            maximizable: false,
+            shadow: false,
+            cache: false,
+            closed: false,
+            collapsible: false,
+            resizable: false,
+            loadingMessage: '正在加载数据，请稍等片刻......'
+        });
+
+    }
     //“查询”按钮，弹出查询框
     function flexiQuery() {
         //将查询条件按照分隔符拼接成字符串

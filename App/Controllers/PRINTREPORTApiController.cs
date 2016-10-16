@@ -24,9 +24,10 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="getParam"></param>
         /// <returns></returns>
-        public Common.ClientResult.DataResult PostData([FromBody]GetDataParam getParam)
+        public Common.ClientResult.DataResult PostData(string id,[FromBody]GetDataParam getParam)
         {
             int total = 0;
+            getParam.id = id;//刘腾飞
             List<PRINTREPORT> queryData = m_BLL.GetByParam(null, getParam.page, getParam.rows, getParam.order, getParam.sort, getParam.search, ref total);
             var data = new Common.ClientResult.DataResult
             {
