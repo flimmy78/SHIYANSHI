@@ -38,6 +38,10 @@ namespace Common
         public class OrderTaskGong : Result
         {
             public string Id { get; set; }
+            /// <summary>
+            /// 预留变量
+            /// </summary>
+            public string IS { get; set; }
         }
     }
 }

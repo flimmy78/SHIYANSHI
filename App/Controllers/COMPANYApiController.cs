@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
+//using System.Web.Mvc;
 using System.Text;
 using System.EnterpriseServices;
 using System.Configuration;
@@ -34,18 +34,29 @@ namespace Langben.App.Controllers
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID
-					,COMPANYNAME = s.COMPANYNAME
-					,COMPANYADDRES = s.COMPANYADDRES
-					,POSTCODE = s.POSTCODE
-					,CONTACTS = s.CONTACTS
-					,CONTACTSNUMBER = s.CONTACTSNUMBER
-					,FAX = s.FAX
-					,PARENTID = s.PARENTID
-					,CREATETIME = s.CREATETIME
-					,CREATEPERSON = s.CREATEPERSON
-					,UPDATETIME = s.UPDATETIME
-					,UPDATEPERSON = s.UPDATEPERSON
-					
+                    ,
+                    COMPANYNAME = s.COMPANYNAME
+                    ,
+                    COMPANYADDRES = s.COMPANYADDRES
+                    ,
+                    POSTCODE = s.POSTCODE
+                    ,
+                    CONTACTS = s.CONTACTS
+                    ,
+                    CONTACTSNUMBER = s.CONTACTSNUMBER
+                    ,
+                    FAX = s.FAX
+                    ,
+                    PARENTID = s.PARENTID
+                    ,
+                    CREATETIME = s.CREATETIME
+                    ,
+                    CREATEPERSON = s.CREATEPERSON
+                    ,
+                    UPDATETIME = s.UPDATETIME
+                    ,
+                    UPDATEPERSON = s.UPDATEPERSON
+
 
                 })
             };
@@ -62,34 +73,34 @@ namespace Langben.App.Controllers
             COMPANY item = m_BLL.GetById(id);
             return item;
         }
- 
+
         /// <summary>
         /// 创建
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
         public Common.ClientResult.Result Post([FromBody]COMPANY entity)
-        {           
+        {
 
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
             {
                 string currentPerson = GetCurrentPerson();
-               entity.CREATETIME = DateTime.Now;
+                entity.CREATETIME = DateTime.Now;
                 entity.CREATEPERSON = currentPerson;
-              
-                entity.ID = Result.GetNewId();   
+
+                entity.ID = Result.GetNewId();
                 string returnValue = string.Empty;
                 if (m_BLL.Create(ref validationErrors, entity))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed  + "，单位的信息的Id为" + entity.ID,"单位"
+                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，单位的信息的Id为" + entity.ID, "单位"
                         );//写入日志 
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.InsertSucceed;
                     return result; //提示创建成功
                 }
                 else
-                { 
+                {
                     if (validationErrors != null && validationErrors.Count > 0)
                     {
                         validationErrors.All(a =>
@@ -98,7 +109,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，单位的信息，" + returnValue,"单位"
+                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，单位的信息，" + returnValue, "单位"
                         );//写入日志                      
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.InsertFail + returnValue;
@@ -130,7 +141,7 @@ namespace Langben.App.Controllers
                 string returnValue = string.Empty;
                 if (m_BLL.Edit(ref validationErrors, entity))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，单位信息的Id为" + entity.ID,"单位"
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，单位信息的Id为" + entity.ID, "单位"
                         );//写入日志                   
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.UpdateSucceed;
@@ -163,15 +174,25 @@ namespace Langben.App.Controllers
         /// 删除
         /// </summary>
         /// <param name="collection"></param>
-        /// <returns></returns>  
-        public Common.ClientResult.Result Delete(string query)
+        [HttpPost]
+        public Common.ClientResult.Result Delete(string id)
         {
-            Common.ClientResult.Result result = new Common.ClientResult.Result();
+            Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
 
             string returnValue = string.Empty;
-            string[] deleteId = query.GetString().Split(',');
+            string[] deleteId = id.GetString().Split(',');
             if (deleteId != null && deleteId.Length > 0)
             {
+                COMPANY com = m_BLL.GetById(deleteId[0]);//查询单位数据
+                if (!ISUNIT(com.COMPANYNAME))//判断单位是否已经使用
+                {
+                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId) + "," + returnValue, "消息;以被使用不能删除！"
+                       );//删除失败，写入日志
+                    result.Code = Common.ClientCode.Fail;
+                    result.Message = Suggestion.DeleteFail + returnValue;
+                    result.IS = "有";
+                    return result;
+                }
                 if (m_BLL.DeleteCollection(ref validationErrors, deleteId))
                 {
                     LogClassModels.WriteServiceLog(Suggestion.DeleteSucceed + "，信息的Id为" + string.Join(",", deleteId), "消息"
@@ -189,7 +210,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId)+ "," + returnValue, "消息"
+                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId) + "," + returnValue, "消息"
                         );//删除失败，写入日志
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.DeleteFail + returnValue;
@@ -198,18 +219,48 @@ namespace Langben.App.Controllers
             return result;
         }
 
+        /// <summary>
+        /// 判断是否可以删除
+        /// </summary>
+        /// <param name="COMPANYNAME"></param>
+        /// <returns></returns>
+        public bool ISUNIT(string COMPANYNAME)
+        {
+            List<ORDER_TASK_INFORMATION> order = m_BLL2.GetAll();
+            List<APPLIANCE_DETAIL_INFORMATION> APPLIANCE = m_BLL3.GetAll();
+            foreach (var item in order)
+            {
+                if (item.INSPECTION_ENTERPRISE == COMPANYNAME || item.CERTIFICATE_ENTERPRISE == COMPANYNAME)
+                {
+                    return false;
+                }
+            }
+            foreach (var item in APPLIANCE)
+            {
+                if (item.MAKE_ORGANIZATION == COMPANYNAME)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         IBLL.ICOMPANYBLL m_BLL;
+        IBLL.IORDER_TASK_INFORMATIONBLL m_BLL2;
+        IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL m_BLL3;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public COMPANYApiController()
-            : this(new COMPANYBLL()) { }
+            : this(new COMPANYBLL(), new ORDER_TASK_INFORMATIONBLL(), new APPLIANCE_DETAIL_INFORMATIONBLL()) { }
 
-        public COMPANYApiController(COMPANYBLL bll)
+        public COMPANYApiController(COMPANYBLL bll, ORDER_TASK_INFORMATIONBLL bll2, APPLIANCE_DETAIL_INFORMATIONBLL bll3)
         {
             m_BLL = bll;
+            m_BLL2 = bll2;
+            m_BLL3 = bll3;
         }
-       
+
     }
 }
 
