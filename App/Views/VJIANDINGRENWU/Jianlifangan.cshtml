@@ -4,57 +4,66 @@
 }
 
 <fieldset>
-    <input class="a2 f2" type="button" onclick="javascript: window.location.href = '/VJIANDINGRENWU/Index';" value="返回" />
+    
     <div class="input_search">
         <div class="input_search-label">
             证书编号：
         </div>
         <div class="input_search-field">
             @if (Model.REPORTNUMBER != null)
-            {
-                <label>
-                    @Model.REPORTNUMBER
-                </label>
-            }
+{
+    <p class="static">
+        @Model.REPORTNUMBER
+    </p>
+}
             <input type="hidden" name="REPORTNUMBER" value="@Model.REPORTNUMBER" id="REPORTNUMBER" />
         </div>
     </div>
+    <div class="clearfix"></div>
     <div style="width:800px">
         <b>试验方案制定</b>
         <div class="clearfix"></div>
         <div class="input_search">
             <div class="input_search-label">
-                <a class="anUnderLine" onclick="showModalOnly('SCHEMEID', '../../SCHEME/Selected');">
-                    选择方案模板
-                </a>：
+               
+                    选择方案模板   ：
             </div>
-            <div class="input_search-field">
-                <div id="checkSCHEMEID">
-                </div>
-                @Html.HiddenFor(model => model.SCHEMEID)
+            <div class="input_search-field" style="width:400px">
+                <table>
+                    <tr>
+                        <td width="100"><a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="showModalOnly('SCHEMEID', '../../SCHEME/Selected');">选择模版</a>
+<span id="checkSCHEMEID">
+</span>
+@Html.HiddenFor(model => model.SCHEMEID)</td>
+                        <td><div id="checkSCHEMEID" style="display:inline">
+    @if (Model != null)
+    {
+        if (null != Model.SCHEMEID)
+        {
+            <table id="@Model.SCHEMEID"
+                   class="deleteStyle">
+                <tr>
+
+                    <td>
+                        @Model.SCHEMENAME
+                    </td>
+                    <td>
+                        <img alt="删除" title="点击删除" onclick="deleteTable('@Model.SCHEMEID ','SCHEMEID');" src="../../../Images/deleteimge.png" />
+                    </td>
+                </tr>
+            </table>
+        }
+    }
+</div></td>
+                    </tr>
+                </table>
+                
+               
             </div>
         </div>
-        <div id="checkSCHEMEID">
-            @if (Model != null)
-            {
-                if (null != Model.SCHEMEID)
-                {
-                    <table id="@Model.SCHEMEID"
-                           class="deleteStyle">
-                        <tr>
-                            <td>
-                                <img alt="删除" title="点击删除" onclick="deleteTable('@Model.SCHEMEID ','SCHEMEID');" src="../../../Images/deleteimge.png" />
-                            </td>
-                            <td>
-                                @Model.SCHEMENAME
-                            </td>
-                        </tr>
-                    </table>
-                }
-            }
-        </div>
+        
         @Html.HiddenFor(model => model.SCHEMEID)
-        <div class="clearfix"></div>
+        <div class="clearfix"></div><br />
         @if (ViewBag.CERTIFICATE_CATEGORY == "检定")
         {
             <b>被检器具主要参数</b>
@@ -162,8 +171,10 @@
                 <div class="input_search-field">
                     <input type="text" name="EXTERNAL_RESITANCE_VALUE" id="EXTERNAL_RESITANCE_VALUE" />
                 </div>
-            </div><div class="clearfix"></div>*@
-        <b>其他信息</b><br style="clear:both;" />
+            </div>*@
+            <div class="clearfix mt10"></div><br />
+        <b>其他信息</b>
+        <div class="clearfix"></div>
         <div class="input_search">
             <div class="input_search-label">
                 环境温度：
@@ -256,8 +267,17 @@
         @*弹窗*@
 
         @*************************@
-        <input type="button" value="下一步" />
-        <input type="button" onclick="baochun()" value="保存下一步" />
+        <div class="input_search">
+            <div class="input_search-label">
+
+            </div>
+            <div class="input_search-field">
+                <a class="easyui-linkbutton"  onclick="javascript: window.location.href = '/VJIANDINGRENWU/Index';" >返回</a>
+                <a   class="easyui-linkbutton" />下一步</a>
+                <a  class="easyui-linkbutton" onclick="baochun()"  />保存下一步</a>
+            </div>
+        </div>
+        
     </div>
 </fieldset>
 <script type="text/javascript">

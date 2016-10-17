@@ -40,7 +40,7 @@ input {
     margin: 4px;
     background: url(../Images/direction.gif) 0 center no-repeat;
 }
-.clearfix{ clear:both; height:0; line-height:0}
+.clearfix{ clear:both; height:0; line-height:0; width:100%}
 .a2 {
     width: 90px;
     height: 23px;
@@ -136,8 +136,8 @@ input {
     margin: 11px 0 11px 6px;
     display: inline;
 }
-
-    .input_search-field input {
+.input_search-field .static{ padding:0; line-height:26px; margin:0}
+ .input_search-field input {
         width: 196px;
     }
 
@@ -307,7 +307,7 @@ textarea {
     width: 70px;
     height: 22px;
     cursor: pointer;
-    padding: 0 10 0 5;
+    padding: 0 10px 0 5px;
     margin-left: 15px;
     float: left;
     display: inline;
