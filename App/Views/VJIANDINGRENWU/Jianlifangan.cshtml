@@ -55,7 +55,15 @@
         </div>
         @Html.HiddenFor(model => model.SCHEMEID)
         <div class="clearfix"></div>
-        <b>被检器具主要参数</b>
+        @if (ViewBag.CERTIFICATE_CATEGORY == "检定")
+        {
+            <b>被检器具主要参数</b>
+        }
+        else if (ViewBag.CERTIFICATE_CATEGORY == "校准")
+        {
+            <b>被校器具主要参数</b>
+        }
+
         <div class="clearfix"></div>
         <div class="input_search">
             <div class="input_search-label">

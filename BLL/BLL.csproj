@@ -69,6 +69,7 @@
     <Compile Include="Shiyanshi\PROJECTTEMPLETBLL.cs" />
     <Compile Include="Shiyanshi\SCHEME_RULEBLL.cs" />
     <Compile Include="Shiyanshi\SysPersonBLL.cs" />
+    <Compile Include="Shiyanshi\VBAOGAODAYINBLL.cs" />
     <Compile Include="Shiyanshi\VJIANDINGRENWUBLL.cs" />
     <Compile Include="Shiyanshi\VQIJULINGQU1BLL.cs" />
     <Compile Include="Shiyanshi\VRUKUBLL.cs" />

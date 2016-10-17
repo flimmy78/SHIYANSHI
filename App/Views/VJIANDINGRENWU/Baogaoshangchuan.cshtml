@@ -4,7 +4,7 @@
 }
 
 <fieldset>
-    <input class="a2 f2" type="button" onclick="javascript: window.location.href = '/VJIANDINGRENWU/Index';" value="返回" />
+
     <div>
         <form id="form1" method="post" enctype="multipart/form-data" action="BaoGaoShangChuan">
 
@@ -26,6 +26,9 @@
   " />
             </label>
             <label><input id="fashongid" type="button" value="发送审核" onclick="songwangshenghe()" /></label>
+            <label>
+                <input type="button" onclick="javascript: window.location.href = '/VJIANDINGRENWU/Index';" value="返回" />
+            </label>
             <br style="clear:both" />
             <div class="input_search">
                 <div class="input_search-label">
@@ -107,7 +110,7 @@
         }
         else {
             $("#Submit1,#fashongid").attr("disabled", true)
-        }      
+        }
         if ("@ViewBag.CONCLUSION" != "") {
             @*$("input[type=radio]").attr("checked", "@ViewBag.CONCLUSION");*@
             if ("@ViewBag.CONCLUSION" == "合格") {
@@ -138,7 +141,7 @@
             REPORTSTATUS: "@Common.REPORTSTATUS.待审核",
             REPORTSTATUSZI: "@Common.REPORTSTATUS.待审核.GetHashCode()"
         }
-        if ("@ViewBag.NAME2"!="") {
+        if ("@ViewBag.NAME2" != "") {
             $.ajax({
                 url: "/api/PREPARE_SCHEMEApi/EditField",
                 type: "Put",
@@ -147,7 +150,7 @@
                 success: function (res) {
                     if (res.Code == 1) {
                         $("#Submit1,#fashongid").attr("disabled", true);
-                        $.messager.alert('操作提示', "发送审核成功！", 'info');                        
+                        $.messager.alert('操作提示', "发送审核成功！", 'info');
                     }
                     else {
                         $.messager.alert('操作提示', "发送审核失败！", 'error');

@@ -87,7 +87,6 @@ namespace Langben.DAL
         public virtual DbSet<UNCERTAINTY2_HZ> UNCERTAINTY2_HZ { get; set; }
         public virtual DbSet<UNCERTAINTYPARAMETERMANAGEMENT> UNCERTAINTYPARAMETERMANAGEMENT { get; set; }
         public virtual DbSet<UNDERTAKE_LABORATORY> UNDERTAKE_LABORATORY { get; set; }
-        public virtual DbSet<VBAOGAODAYIN> VBAOGAODAYIN { get; set; }
         public virtual DbSet<VJIANDINGRENWU> VJIANDINGRENWU { get; set; }
         public virtual DbSet<VQIJULINGQU1> VQIJULINGQU1 { get; set; }
         public virtual DbSet<VQIJULINGQU2> VQIJULINGQU2 { get; set; }
@@ -95,5 +94,6 @@ namespace Langben.DAL
         public virtual DbSet<VSHENHE> VSHENHE { get; set; }
         public virtual DbSet<VSHENPI> VSHENPI { get; set; }
         public virtual DbSet<VTEST_ITE> VTEST_ITE { get; set; }
+        public virtual DbSet<VBAOGAODAYIN> VBAOGAODAYIN { get; set; }
     }
 }

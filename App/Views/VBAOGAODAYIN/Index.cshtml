@@ -32,7 +32,7 @@
             @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE):
         </div>
         <div class="input_search-field">
-            <input type='text' id='CERTIFICATE_ENTERPRISE' />
+            @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
         </div>
     </div>
     <div class="input_search">
@@ -40,15 +40,17 @@
             @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("UNDERTAKE_LABORATORYIDDDL_String", Models.SysFieldModels.GetSysField("VBAOGAODAYIN", "UNDERTAKE_LABORATORYID"), "请选择", new { id = "UNDERTAKE_LABORATORYIDDDL_String" })
+            @Html.DropDownList("UNDERTAKE_LABORATORYID", Models.SysFieldModels.GetSysField("UNDERTAKE_LABORATORY", "NAME"), "请选择", new { id = "UNDERTAKE_LABORATORYID" })
         </div>
     </div>
     <div class="input_search">
         <div class="input_search-label">
             @Html.LabelFor(model => model.APPROVALDATE):
         </div>
-        <div class="input_search-field">
-            <input type='text' id='APPROVALDATE' />
+        <div class='input_search-field-time'>
+            <input type="text" id="APPROVALDATEStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'APPROVALDATEStart_Time\');}' })" />
+            <span>到</span>
+            <input type="text" id="APPROVALDATEEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'APPROVALDATEEnd_Time\');}' })" />
         </div>
     </div>
     <div class="input_search">
@@ -64,7 +66,7 @@
             @Html.LabelFor(model => model.PRINTSTATUS):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("PRINTSTATUSDDL_String", Models.SysFieldModels.GetSysField("VBAOGAODAYIN", "PRINTSTATUS"), "请选择", new { id = "PRINTSTATUSDDL_String" })
+            @Html.DropDownList("PRINTSTATUSDDL", Models.SysFieldModels.GetSysField("VBAOGAODAYIN", "PRINTSTATUS"), "请选择", new { id = "PRINTSTATUSDDL" })
         </div>
     </div>
     <div class='input_search' style="padding-top:10px;">
@@ -74,8 +76,10 @@
     </div>
 </div>
 <br style="clear: both;" />
-
+<div id="myWindow">
+</div>
 <script type="text/javascript" language="javascript">
+ 
     $(function () {
 
         $('#flexigridData').datagrid({
@@ -87,8 +91,8 @@
             striped: true,
             collapsible: true,
             url: '../VBAOGAODAYIN/GetData', //获取数据的url
-            sortName: '^m_Sort^',
-            sortOrder: 'desc',
+            sortName: 'APPROVALDATE',
+            sortOrder: 'asc',
             idField: 'ID',
 
             toolbar: [
@@ -109,10 +113,8 @@
                     }
             ],
             columns: [[
-
-
-					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 64 }
-					, { field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 64 }
+					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 164, hidden: true }
+					, { field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 164 }
 					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 64 }
 					, { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 64 }
 					, { field: 'VERSION', title: '@Html.DisplayNameFor(model => model.VERSION)', width: 64 }
@@ -121,11 +123,29 @@
 					, { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 64 }
 					, { field: 'CERTIFICATE_CATEGORY', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 64 }
 					, { field: 'QUALIFICATIONS', title: '@Html.DisplayNameFor(model => model.QUALIFICATIONS)', width: 64 }
-					, { field: 'CONCLUSION_EXPLAIN', title: '@Html.DisplayNameFor(model => model.CONCLUSION_EXPLAIN)', width: 64 }
-					, { field: 'CONCLUSION', title: '@Html.DisplayNameFor(model => model.CONCLUSION)', width: 64 }
+					, {
+					    field: 'CONCLUSION_EXPLAIN', title: '@Html.DisplayNameFor(model => model.CONCLUSION_EXPLAIN)', width: 64, formatter: function (value, row, index) {
+					        if (row.PACKAGETYPE != "@Common.PACKAGETYPE.上传.ToString()") {
+					            return row.CONCLUSION_EXPLAIN;
+					        }
+					        else {
+					            return null;
+					        }
+					    }
+					}
+					, {
+					    field: 'CONCLUSION', title: '@Html.DisplayNameFor(model => model.CONCLUSION)', width: 64, formatter: function (value, row, index) {
+					        if (row.PACKAGETYPE == "@Common.PACKAGETYPE.上传.ToString()") {
+					            return row.FILECONCLUSION;
+					        }
+					        else {
+					            return row.CONCLUSION;
+					        }
+					    }
+					}
                     , {
                         field: 'aa', title: '打印记录', width: 86, formatter: function (value, row, index) {
-                            var html = "<a href='/VBAOGAODAYIN/Details/" + row.ID + "'>详情</a>";
+                            var html = "<a onclick='showMyWindow(\""+row.ID+"\");'href='#'>详情</a>";
                             return html;
                         }
                     }
@@ -146,80 +166,70 @@
             $('#flexigridData').datagrid("addToolbarItem", [{ "text": "选择", "iconCls": "icon-ok", handler: function () { flexiSelect(); } }]);
         }
     });
+    function showMyWindow(href) {
 
+        $('#myWindow').window({
+            title: '详情',
+            width: 600,
+            height: 450,
+            content: '<iframe scrolling="yes" frameborder="0"  src="/PRINTREPORT/Index/' + href + '" style="width:100%;height:98%;"></iframe>',
+            //        href: href === undefined ? null : href,
+            modal: true,
+            minimizable: false ,
+            maximizable: false,
+            shadow: false,
+            cache: false,
+            closed: false,
+            collapsible: false,
+            resizable: false,
+            loadingMessage: '正在加载数据，请稍等片刻......'
+        });
+
+    }
     //“查询”按钮，弹出查询框
     function flexiQuery() {
-
         //将查询条件按照分隔符拼接成字符串
         var search = "";
-        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
-            if (this.id)
-                search = search + this.id + "&" + this.value + "^";
-            else
-                search = search + this.name + "&" + this.value + "^";
-        });
+        search += "REPORTNUMBER&" + $("#REPORTNUMBER").val() + "^";
+        search += "ORDER_NUMBER&" + $("#ORDER_NUMBER").val() + "^";
+        search += "FACTORY_NUM&" + $("#FACTORY_NUM").val() + "^";
+        search += "CERTIFICATE_ENTERPRISE&" + $('#CERTIFICATE_ENTERPRISE').combobox('getText') + "^";
+        search += "UNDERTAKE_LABORATORYID&" + $("#UNDERTAKE_LABORATORYID option:selected").val() + "^";
+        search += "APPROVALDATEStart_Time&" + $("#APPROVALDATEStart_Time").val() + "^";
+        search += "APPROVALDATEEnd_Time&" + $("#APPROVALDATEEnd_Time").val() + "^";
+        search += "BAR_CODE_NUM&" + $("#BAR_CODE_NUM").val() + "^";
+        search += "PRINTSTATUSDDL&" + $("#PRINTSTATUSDDL option:selected").val() + "^";
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
 
-    //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
-    function flexiSelect() {
-
-        var rows = $('#flexigridData').datagrid('getSelections');
-        if (rows.length == 0) {
-            $.messager.alert('操作提示', '请选择数据!', 'warning');
-            return false;
-        }
-
-        var arr = [];
-        for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].ID);
-        }
-        arr.push("^");
-        for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].REPORTNUMBER);
-        }
-        //主键列和显示列之间用 ^ 分割   每一项用 , 分割
-        if (arr.length > 0) {//一条数据和多于一条
-            returnParent(arr.join("&")); //每一项用 & 分割
-        }
-    }
-    //导航到查看详细的按钮
-    function getView() {
-
-        var arr = $('#flexigridData').datagrid('getSelections');
-
-        if (arr.length == 1) {
-            window.location.href = "../VBAOGAODAYIN/Details/" + arr[0].ID;
-
-        } else {
-            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
-        }
-        return false;
-    }
     //打印
     function daying() {
-        var arr={
-            PREPARE_SCHEMEID:"@ViewBag.Id",
-            CREATEPERSON:"登入者"
-        }
-        $.ajax({
-            //url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/Put/" + is,
-            type: "Put",
-            data: arr,
-            // async: false,
-            success: function (res) {
-                if (res.Code == 1) {
-                    $.messager.alert('操作提示', res.Message, 'info');
-                    $("#flexigridData").datagrid("reload");
-                    $("#flexigridData").datagrid("clearSelections");
+        var arr = $('#flexigridData').datagrid('getSelections');
+        if (arr.length >= 1) {
+            var entity = new Object();
+            entity.PREPARE_SCHEMEID = arr[0].ID;
+            $.ajax({
+                url: "/api/PRINTREPORTApi/Post",
+                type: "Post",
+                data: entity,
+                // async: false,
+                success: function (res) {
+                    if (res.Code == 1) {
+                        $.messager.alert('操作提示', "打印成功！", 'info');
+                        $("#flexigridData").datagrid("reload");
+                        $("#flexigridData").datagrid("clearSelections");
+                    }
+                    else {
+                        $.messager.alert('操作提示', "打印失败！", 'info');
+                    }
                 }
-                else {
-                    $.messager.alert('操作提示', res.Message, 'info');
-                }
-            }
-        })
-    }
+            })
 
+        }
+        else {
+            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
+        }
+    }
 </script>
 

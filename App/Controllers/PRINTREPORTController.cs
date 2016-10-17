@@ -24,8 +24,9 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
+            ViewBag.ID = id;
         
             return View();
         }

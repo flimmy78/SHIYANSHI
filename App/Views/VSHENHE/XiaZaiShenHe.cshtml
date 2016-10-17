@@ -32,7 +32,7 @@
 @using (Html.BeginForm("", "api/PREPARE_SCHEMEApi/SheIsPi"))
 {
     <fieldset>
-        <input class="a2 f2" type="button" onclick="fanhui()" value="返回" />
+        
         <div class="bigdiv" id="shenghediv">
             <div class="display-label">
                 <label> 原始记录：</label>
@@ -78,6 +78,7 @@
                     <div class="display-field">
                         <input type="submit" value="同意送批准" onclick="patongyi(this)" disabled="disabled" />
                         <input type="submit" value="不同意" onclick="patongyi(this)" disabled="disabled" />
+                        <input type="button" onclick="fanhui()" value="返回" />
                     </div>
 
 
@@ -105,6 +106,7 @@
                     <div class="display-field">
                         <input type="submit" value="同意" onclick="patongyi(this)" disabled="disabled" />
                         <input type="submit" value="不同意" onclick="patongyi(this)" disabled="disabled" />
+                        <input type="button" onclick="fanhui()" value="返回" />
                     </div>
             }
 
@@ -168,7 +170,9 @@
                     $('#shenghediv').find(":submit").each(function () {
                         $(this).attr("disabled", true);
                     });
-                    $.messager.alert('操作提示', "发送成功！", 'info');
+                    $.messager.alert('操作提示', "发送成功！", 'info', function () {
+                        fanhui();
+                    });
                     return false;
                 }
                 else {
@@ -178,7 +182,7 @@
 
                         $.messager.confirm('操作提示', "发送失败！", function (r) {
                             if (!r) {
-                                window.location.href = 'javascript:history.go(-1)';
+                                fanhui();
                             }
                         });
                     }

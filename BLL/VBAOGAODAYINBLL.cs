@@ -11,7 +11,7 @@ namespace Langben.BLL
     /// <summary>
     /// 报告打印 
     /// </summary>
-    public class VBAOGAODAYINBLL :  IBLL.IVBAOGAODAYINBLL, IDisposable
+    public partial class VBAOGAODAYINBLL :  IBLL.IVBAOGAODAYINBLL, IDisposable
     {
         /// <summary>
         /// 私有的数据访问上下文
