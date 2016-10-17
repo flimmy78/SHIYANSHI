@@ -52,7 +52,8 @@
     </div>
 </div>
 <br style="clear: both;" />
-
+<input type="hidden" id="baogaoid" value=""/>
+<input type="hidden" id="qijuid" value="" />
 <script type="text/javascript" language="javascript">
     $(function () {
         $('#flexigridData').datagrid({
@@ -74,7 +75,7 @@
                      text: '签名',
                      iconCls: 'icon-search',
                      handler: function () {
-                         //return getView();
+                         return getView();
                      }
                  }],
             columns: [[
@@ -116,25 +117,25 @@
 					}
                     , {
                         field: 'APPLIANCECOLLECTIONSATE', title: '器具领取', width: 111, formatter: function (value, row, index) {
-                            if (row.APPLIANCE_RECIVE=="是") {
+                            if (row.APPLIANCE_RECIVE == "是") {
                                 if (row.APPLIANCECOLLECTIONSATE != null) {
-                                    return "<input type='checkbox' checked='checked' />";
+                                    return "<input id='qiju' type='checkbox' name='qiju' value='" + row.ID + "' checked='checked' />";
                                 }
                                 else {
-                                    return "<input type='checkbox'/>";
+                                    return "<input id='qiju' type='checkbox' name='qiju' value='" + row.ID + "'/>";
                                 }
-                            }                            
+                            }
                         }
                     }
                      , {
                          field: 'REPORTTORECEVESTATE', title: '报告领取', width: 111, formatter: function (value, row, index) {
                              if (row.REPORTTORECEVESTATE != null) {
-                                 return "<input type='checkbox' checked='checked'/><label>" + row.REPORTNUMBER + "</label>";
+                                 return "<input id='baogao' type='checkbox' name='baogao' value='" + row.PREPARE_SCHEMEID + "' checked='checked'/><label>" + row.REPORTNUMBER + "</label>";
                              }
                              else {
-                                 return "<input type='checkbox'/><label>" + row.REPORTNUMBER + "</label>";
+                                 return "<input id='baogao' type='checkbox' name='baogao' value='" + row.PREPARE_SCHEMEID + "'/><label>" + row.REPORTNUMBER + "</label>";
                              }
-                             
+
                          }
                      }
 					, { field: 'REMARKS', title: '备注', width: 111 }
@@ -143,9 +144,25 @@
                         $('#flexigridData').datagrid('fixDetailRowHeight', index);
                     },
                     onLoadSuccess: function () {
-                        setTimeout(function () {
-                            $('#flexigridData').datagrid('fixDetailRowHeight', index);
-                        }, 0);
+                        setTimeout(function () { $('#flexigridData').datagrid('fixDetailRowHeight', index); }, 0);
+                        $("input[name='qiju']").unbind().bind("click", function () {
+                            var checkrows = $("input[name='qiju']:checked").length;
+                            var items = $("input[name='qiju']:checked");
+                            var result = "";
+                            $.each(items, function (index, item) {
+                                result = result + "|" + item.value;
+                            });
+                            $("#qijuid").val(result);
+                        });
+                        $("input[name='baogao']").unbind().bind("click", function () {
+                            var checkrows = $("input[name='baogao']:checked").length;
+                            var items = $("input[name='baogao']:checked");
+                            var result = "";
+                            $.each(items, function (index, item) {
+                                result = result + "|" + item.value;
+                            });
+                            $("#baogaoid").val(result);
+                        });
                     }
                 });
                 $('#flexigridData').datagrid('fixDetailRowHeight', index);
@@ -201,35 +218,14 @@
         $('#flexigridData').datagrid('load', { search: search });
     };
 
-    //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
-    function flexiSelect() {
 
-        var rows = $('#flexigridData').datagrid('getSelections');
-        if (rows.length == 0) {
-            $.messager.alert('操作提示', '请选择数据!', 'warning');
-            return false;
-        }
-
-        var arr = [];
-        for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].ID);
-        }
-        arr.push("^");
-        for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].ORDER_NUMBER);
-        }
-        //主键列和显示列之间用 ^ 分割   每一项用 , 分割
-        if (arr.length > 0) {//一条数据和多于一条
-            returnParent(arr.join("&")); //每一项用 & 分割
-        }
-    }
     //导航到查看详细的按钮
     function getView() {
 
         var arr = $('#flexigridData').datagrid('getSelections');
-
+        var selRows = $('#flexigridData').datagrid('getChecked');
         if (arr.length == 1) {
-            window.location.href = "../VQIJULINGQU1/Details/" + arr[0].ID;
+            //window.location.href = "../VQIJULINGQU1/Details/" + arr[0].ID;
 
         } else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');

@@ -93,6 +93,7 @@ namespace Langben.App.Controllers
                     //器具明细信息_承接实验室表修改器具状态
                     List<APPLIANCE_LABORATORY> list = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item);
                     appry.ORDER_STATUS = Common.ORDER_STATUS.器具已入库.ToString();//器具状态
+                    appry.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.器具已入库.GetHashCode().ToString();//器具状态值
                     foreach (var ps in list)
                     {
                         string returnValue = string.Empty;

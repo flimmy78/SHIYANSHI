@@ -127,6 +127,8 @@ namespace Langben.App.Controllers
                     REMARKS = s.REMARKS
                     ,
                     ORDER_TASK_INFORMATIONID = s.ORDER_TASK_INFORMATIONID
+                    ,
+                    PREPARE_SCHEMEID=s.PREPARE_SCHEMEID
 
                 }
 
