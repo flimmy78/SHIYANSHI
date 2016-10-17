@@ -127,6 +127,7 @@
     <Compile Include="Shiyanshi\IVJIANDINGRENWUBLL.cs" />
     <Compile Include="Shiyanshi\IVQIJULINGQU1BLL.cs" />
     <Compile Include="Shiyanshi\IVRUKUBLL.cs" />
+    <Compile Include="Shiyanshi\IVRULEBLL.cs" />
     <Compile Include="Shiyanshi\IVSHENHEBLL.cs" />
     <Compile Include="Shiyanshi\IVSHENPIBLL.cs" />
     <Compile Include="Shiyanshi\IVTEST_ITEBLL.cs" />

@@ -178,7 +178,8 @@ namespace Langben.App.Controllers
             PREPARE_SCHEME entity = m_BLL.GetById(ID);
             string saveFileName = "";
             if (entity != null)
-            {
+            {              
+                int RowIndex = 0;
                 string templatePath = "../Template/原始记录-检定.xls";
                 string sheetName = "原始记录封皮及数据";
                 if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString())
@@ -226,6 +227,29 @@ namespace Langben.App.Controllers
                         }
                     }
                 }
+
+                #region 检定所依据技术文件（代号、名称）
+                IVRULEBLL rBll = new VRULEBLL();
+                //List<RULE> rList = rBll.GetFirstModelBySCHEMEID(entity.SCHEMEID);
+                List<VRULE> rList = rBll.GetBySCHEMEID(entity.SCHEMEID);                
+                if (rList != null && rList.Count > 0)
+                {                                                     
+                    IRow OldRow = sheet.GetRow(16);//获取源格式行
+                    if (rList.Count > 1)
+                    {
+                        int RowCount = rList.Count - 1;
+                        RowIndex++;
+                        InsertRow(sheet, 17, RowCount, OldRow);
+                    }
+                    RowIndex = 16;
+                    foreach (VRULE rEntity in rList)
+                    {
+                        sheet.GetRow(RowIndex).GetCell(2).SetCellValue(rEntity.NAME);
+                        RowIndex++;
+                    }
+                }
+                #endregion 
+
                 saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";
                 string saveFileNamePath = System.Web.HttpContext.Current.Server.MapPath(saveFileName);
                 sheet.ForceFormulaRecalculation = true;
@@ -242,8 +266,70 @@ namespace Langben.App.Controllers
             result.Code = Common.ClientCode.Fail;
             result.Message = Suggestion.UpdateFail + "未找到预备方案ID为【" + ID + "】的数据";
             return Json(result); //提示插入失败
-        }
-        IBLL.IPREPARE_SCHEMEBLL m_BLL;
+        }      
+        /// <summary>
+        /// 插入行
+        /// </summary>
+        /// <param name="Sheet">指定操作的Sheet</param>
+        /// <param name="StartIndex">指定在第几行指入（插入行的位置）</param>
+        /// <param name="RowCount">指定要插入多少行</param>
+        /// <param name="OldRow">源单元格格式的行</param>
+        private void InsertRow(ISheet Sheet, int StartIndex, int RowCount, IRow OldRow)
+        {
+            #region 批量移动行
+            Sheet.ShiftRows(
+                StartIndex,                     //--开始行
+                Sheet.LastRowNum,               //--结束行
+                RowCount,                       //--移动大小(行数)--往下移动
+                true,                           //是否复制行高
+                false//,                        //是否重置行高
+                     //true                     //是否移动批注
+            );
+            #endregion
+
+            #region 对批量移动后空出的空行插，创建相应的行，并以插入行的上一行为格式源(即：插入行-1的那一行)
+            for (int i = StartIndex; i < RowCount + StartIndex - 1; i++)
+            {
+                IRow targetRow = null;
+                ICell sourceCell = null;
+                ICell targetCell = null;
+
+                targetRow = Sheet.CreateRow(i + 1);
+
+                for (int m = OldRow.FirstCellNum; m < OldRow.LastCellNum; m++)
+                {
+                    sourceCell = OldRow.GetCell(m);
+                    if (sourceCell == null)
+                        continue;
+                    targetCell = targetRow.CreateCell(m);
+
+                    //targetCell..Encoding = sourceCell.Encoding;
+                    targetCell.CellStyle = sourceCell.CellStyle;
+                    targetCell.SetCellType(sourceCell.CellType);
+                }
+                //CopyRow(sourceRow, targetRow);
+                //Util.CopyRow(sheet, sourceRow, targetRow);
+            }
+
+            IRow firstTargetRow = Sheet.GetRow(StartIndex);
+            ICell firstSourceCell = null;
+            ICell firstTargetCell = null;
+
+            for (int m = OldRow.FirstCellNum; m < OldRow.LastCellNum; m++)
+            {
+                firstSourceCell = OldRow.GetCell(m);
+                if (firstSourceCell == null)
+                    continue;
+                firstTargetCell = firstTargetRow.CreateCell(m);
+
+                //firstTargetCell.Encoding = firstSourceCell.Encoding;
+                firstTargetCell.CellStyle = firstSourceCell.CellStyle;
+                firstTargetCell.SetCellType(firstSourceCell.CellType);
+            }
+            #endregion
+        }
+
+IBLL.IPREPARE_SCHEMEBLL m_BLL;
         ValidationErrors validationErrors = new ValidationErrors();
         public PREPARE_SCHEMEController()
                     : this(new PREPARE_SCHEMEBLL()) { }
