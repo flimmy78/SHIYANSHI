@@ -54,6 +54,9 @@ namespace Langben.DAL
 
         [Display(Name = "报告领取状态", Order = 13)]
         public object REPORTTORECEVESTATE { get; set; }
+
+        [Display(Name = "预备方案id", Order = 14)]
+        public object PREPARE_SCHEMEID { get; set; }
     }
 
 
