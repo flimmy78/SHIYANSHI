@@ -11,6 +11,11 @@ using Langben.DAL;
 using Langben.BLL;
 using Langben.App.Models;
 using Webdiyer.WebControls.Mvc;
+using System.IO;
+using Langben.IBLL;
+using NPOI.HSSF.UserModel;
+using Langben.DAL.shiyanshi;
+using NPOI.SS.UserModel;
 
 namespace Langben.App.Controllers
 {
@@ -161,6 +166,82 @@ namespace Langben.App.Controllers
 
             
 
+        }
+        /// <summary>
+        /// 导出Excel
+        /// </summary>
+        /// <param name="ID">预备方案ID</param>
+        /// <returns></returns>
+        public ActionResult ExportOriginalRecord(string ID)
+        {
+            Common.ClientResult.Result result = new Common.ClientResult.Result();
+            PREPARE_SCHEME entity = m_BLL.GetById(ID);
+            string saveFileName = "";
+            if (entity != null)
+            {
+                string templatePath = "../Template/原始记录-检定.xls";
+                string sheetName = "原始记录封皮及数据";
+                if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString())
+                {
+                    templatePath = "../Template/原始记录-校准.xls";
+                }
+
+                HSSFWorkbook _book = new HSSFWorkbook();
+                string xlsPath = System.Web.HttpContext.Current.Server.MapPath(templatePath);
+
+                FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
+                IWorkbook hssfworkbook = new HSSFWorkbook(file);
+                ISheet sheet = hssfworkbook.GetSheet(sheetName);              
+                //单元格从0开始
+                //准确度等级
+                sheet.GetRow(11).GetCell(7).SetCellValue(entity.ACCURACY_GRADE);
+                //额定频率
+                sheet.GetRow(11).GetCell(23).SetCellValue(entity.RATED_FREQUENCY);
+                //脉冲常数
+                sheet.GetRow(12).GetCell(7).SetCellValue(entity.PULSE_CONSTANT);               
+
+                if (entity.APPLIANCE_LABORATORY != null && entity.APPLIANCE_LABORATORY.Count > 0)
+                {
+                    IAPPLIANCE_DETAIL_INFORMATIONBLL infBll = new APPLIANCE_DETAIL_INFORMATIONBLL();
+                    APPLIANCE_DETAIL_INFORMATION infEntity = infBll.GetById(entity.APPLIANCE_LABORATORY.FirstOrDefault().APPLIANCE_DETAIL_INFORMATIONID);
+                    if (infEntity != null)
+                    {
+                        //器具名称
+                        sheet.GetRow(9).GetCell(7).SetCellValue(infEntity.APPLIANCE_NAME);
+                        //器具型号
+                        sheet.GetRow(9).GetCell(23).SetCellValue(infEntity.VERSION);
+                        //器具规格
+                        sheet.GetRow(10).GetCell(7).SetCellValue(infEntity.FORMAT);
+                        //出厂编号
+                        sheet.GetRow(10).GetCell(23).SetCellValue(infEntity.FACTORY_NUM);
+                        //生产厂家
+                        sheet.GetRow(13).GetCell(7).SetCellValue(infEntity.MAKE_ORGANIZATION);
+
+                        IORDER_TASK_INFORMATIONBLL taskBll = new ORDER_TASK_INFORMATIONBLL();
+                        ORDER_TASK_INFORMATION taskEntity = taskBll.GetById(infEntity.ORDER_TASK_INFORMATIONID);
+                        if (taskEntity != null)
+                        {
+                            //委托单位                            
+                            sheet.GetRow(6).GetCell(5).SetCellValue(taskEntity.INSPECTION_ENTERPRISE);
+                        }
+                    }
+                }
+                saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";
+                string saveFileNamePath = System.Web.HttpContext.Current.Server.MapPath(saveFileName);
+                sheet.ForceFormulaRecalculation = true;
+                using (FileStream fileWrite = new FileStream(saveFileNamePath, FileMode.Create))
+                {
+                    hssfworkbook.Write(fileWrite);
+                }
+                //一般只用写这一个就OK了，他会遍历并释放所有资源，但当前版本有问题所以只释放sheet              
+
+                result.Code = Common.ClientCode.Succeed;
+                result.Message = saveFileName;
+                return Json(result); //提示插入失败
+            }
+            result.Code = Common.ClientCode.Fail;
+            result.Message = Suggestion.UpdateFail + "未找到预备方案ID为【" + ID + "】的数据";
+            return Json(result); //提示插入失败
         }
         IBLL.IPREPARE_SCHEMEBLL m_BLL;
         ValidationErrors validationErrors = new ValidationErrors();
