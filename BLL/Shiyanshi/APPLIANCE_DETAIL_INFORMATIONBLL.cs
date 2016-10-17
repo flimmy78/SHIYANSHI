@@ -29,7 +29,7 @@ namespace Langben.BLL
             using (SysEntities db = new SysEntities())
             {
 
-                var queryData = repository.GetData(db, "DESC", "CREATETIME", search);//调用GetData方法从数据库中获取到相关数据      
+                var queryData = repository.GetData(db, "asc", "CREATETIME", search);//调用GetData方法从数据库中获取到相关数据      
                 if (queryData != null)
                 {
                     queryData = queryData.Take(2).Distinct();//5表示显示5行
