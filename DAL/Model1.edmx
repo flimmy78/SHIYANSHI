@@ -1351,6 +1351,28 @@
           <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="nvarchar2" MaxLength="200" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6002: 表/视图“TENGFEI.VRULE”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="VRULE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
+          <Property Name="NAMEOTHER" Type="varchar2" MaxLength="200" />
+          <Property Name="NAME" Type="varchar2" MaxLength="200" />
+          <Property Name="SCHEME_MENU" Type="varchar2" MaxLength="200" />
+          <Property Name="SORT" Type="number" Precision="38" Scale="0" />
+          <Property Name="IS_UNCERTAINTY" Type="varchar2" MaxLength="200" />
+          <Property Name="UNCERTAINTY_MENU" Type="varchar2" MaxLength="200" />
+          <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
+          <Property Name="INPUTSTATE" Type="varchar2" MaxLength="200" />
+          <Property Name="PARENTID" Type="varchar2" MaxLength="36" />
+          <Property Name="CREATETIME" Type="date" />
+          <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="UPDATETIME" Type="date" />
+          <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="SCHEMEID" Type="varchar2" MaxLength="36" />
+        </EntityType>
+        <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VSHENHE”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VSHENHE">
           <Key>
@@ -2337,6 +2359,25 @@ FROM "TENGFEI"."VQIJULINGQU2" "VQIJULINGQU2"</DefiningQuery>
 "VRUKU"."EQUIPMENT_STATUS_VALUUMN" AS "EQUIPMENT_STATUS_VALUUMN"
 FROM "TENGFEI"."VRUKU" "VRUKU"</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VRULE" EntityType="Self.VRULE" store:Type="Views" store:Schema="TENGFEI">
+            <DefiningQuery>SELECT 
+"VRULE"."ID" AS "ID", 
+"VRULE"."NAMEOTHER" AS "NAMEOTHER", 
+"VRULE"."NAME" AS "NAME", 
+"VRULE"."SCHEME_MENU" AS "SCHEME_MENU", 
+"VRULE"."SORT" AS "SORT", 
+"VRULE"."IS_UNCERTAINTY" AS "IS_UNCERTAINTY", 
+"VRULE"."UNCERTAINTY_MENU" AS "UNCERTAINTY_MENU", 
+"VRULE"."UNDERTAKE_LABORATORYID" AS "UNDERTAKE_LABORATORYID", 
+"VRULE"."INPUTSTATE" AS "INPUTSTATE", 
+"VRULE"."PARENTID" AS "PARENTID", 
+"VRULE"."CREATETIME" AS "CREATETIME", 
+"VRULE"."CREATEPERSON" AS "CREATEPERSON", 
+"VRULE"."UPDATETIME" AS "UPDATETIME", 
+"VRULE"."UPDATEPERSON" AS "UPDATEPERSON", 
+"VRULE"."SCHEMEID" AS "SCHEMEID"
+FROM "TENGFEI"."VRULE" "VRULE"</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VSHENHE" EntityType="Self.VSHENHE" store:Type="Views" store:Schema="TENGFEI">
             <DefiningQuery>SELECT 
 "VSHENHE"."ID" AS "ID", 
@@ -2954,6 +2995,7 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           </AssociationSet>
           <EntitySet Name="VTEST_ITE" EntityType="Model.VTEST_ITE" />
           <EntitySet Name="VBAOGAODAYIN" EntityType="Model.VBAOGAODAYIN" />
+          <EntitySet Name="VRULE" EntityType="Model.VRULE" />
         </EntityContainer>
         <EntityType Name="AC_VOLTAGE_CURRENT">
           <Key>
@@ -5076,6 +5118,26 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <Property Name="PACKAGETYPE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="FILECONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="VRULE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="NAMEOTHER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SCHEME_MENU" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SORT" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="IS_UNCERTAINTY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UNCERTAINTY_MENU" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="INPUTSTATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PARENTID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="CREATETIME" Type="DateTime" />
+          <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATETIME" Type="DateTime" />
+          <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6551,6 +6613,27 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
                 <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
                 <ScalarProperty Name="ORDER_NUMBER" ColumnName="ORDER_NUMBER" />
                 <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VRULE">
+            <EntityTypeMapping TypeName="Model.VRULE">
+              <MappingFragment StoreEntitySet="VRULE">
+                <ScalarProperty Name="SCHEMEID" ColumnName="SCHEMEID" />
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="PARENTID" ColumnName="PARENTID" />
+                <ScalarProperty Name="INPUTSTATE" ColumnName="INPUTSTATE" />
+                <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
+                <ScalarProperty Name="UNCERTAINTY_MENU" ColumnName="UNCERTAINTY_MENU" />
+                <ScalarProperty Name="IS_UNCERTAINTY" ColumnName="IS_UNCERTAINTY" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="SCHEME_MENU" ColumnName="SCHEME_MENU" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="NAMEOTHER" ColumnName="NAMEOTHER" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

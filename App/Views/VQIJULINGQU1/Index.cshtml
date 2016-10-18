@@ -219,12 +219,11 @@
     };
 
 
-    //导航到查看详细的按钮
+    //签名
     function getView() {
-
-        var arr = $('#flexigridData').datagrid('getSelections');
-        var selRows = $('#flexigridData').datagrid('getChecked');
-        if (arr.length == 1) {
+        var baogao = $("#baogaoid").val();
+        var qiju = $("#qijuid").val();
+        if (baogao == null && qiju == null || baogao == "" && qiju == "") {
             //window.location.href = "../VQIJULINGQU1/Details/" + arr[0].ID;
 
         } else {

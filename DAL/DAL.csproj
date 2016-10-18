@@ -266,10 +266,12 @@
     <Compile Include="shiyanshi\VJIANDINGRENWURepository.cs" />
     <Compile Include="shiyanshi\VQIJULINGQU1Repository.cs" />
     <Compile Include="shiyanshi\VRUKURepository.cs" />
+    <Compile Include="shiyanshi\VRULERepository.cs" />
     <Compile Include="shiyanshi\VSHENHERepository.cs" />
     <Compile Include="shiyanshi\VSHENPIRepository.cs" />
     <Compile Include="shiyanshi\VTEST_ITEMeta.cs" />
     <Compile Include="shiyanshi\VTEST_ITERepository.cs" />
+    <Compile Include="shiyanshi\VRULEMeta.cs" />
     <Compile Include="SysAnnouncement.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -435,6 +437,9 @@
     </Compile>
     <Compile Include="VRUKUMeta.cs" />
     <Compile Include="VRUKURepository.cs" />
+    <Compile Include="VRULE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="VSHENHE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

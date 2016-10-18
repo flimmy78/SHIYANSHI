@@ -72,17 +72,71 @@ namespace Langben.App.Controllers
             return item;
         }
 
+        // PUT api/<controller>/5
+        /// <summary>
+        /// 报告，器具领取
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>  
+        public Common.ClientResult.Result Put(string baogaoid,string qijuid)
+        {
+            Common.ClientResult.Result result = new Common.ClientResult.Result();
+            if (baogaoid != null|| qijuid != null && ModelState.IsValid)
+            {   //数据校验
+
+                APPLIANCECOLLECTION app = new APPLIANCECOLLECTION();//器具领取
+                REPORTCOLLECTION rep = new REPORTCOLLECTION();//报告领取
+                string currentPerson = GetCurrentPerson();
+                app.CREATETIME = DateTime.Now;//领取时间
+                app.CREATEPERSON = currentPerson;//领取者
+                rep.CREATETIME = DateTime.Now;//领取时间
+                rep.CREATEPERSON = currentPerson;//领取者
+                string returnValue = string.Empty;
+                if (m_BLL2.Create(ref validationErrors, app))
+                {
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，报告领取信息的Id为" + app.ID, "报告领取"
+                        );//写入日志                   
+                    result.Code = Common.ClientCode.Succeed;
+                    result.Message = Suggestion.UpdateSucceed;
+                    return result; //提示更新成功 
+                }
+                else
+                {
+                    if (validationErrors != null && validationErrors.Count > 0)
+                    {
+                        validationErrors.All(a =>
+                        {
+                            returnValue += a.ErrorMessage;
+                            return true;
+                        });
+                    }
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，报告领取信息的Id为" + app.ID + "," + returnValue, "报告领取"
+                        );//写入日志   
+                    result.Code = Common.ClientCode.Fail;
+                    result.Message = Suggestion.UpdateFail + returnValue;
+                    return result; //提示更新失败
+                }
+            }
+            result.Code = Common.ClientCode.FindNull;
+            result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";
+            return result; //提示输入的数据的格式不对         
+        }
 
         IBLL.IVQIJULINGQU2BLL m_BLL;
+        IBLL.IAPPLIANCECOLLECTIONBLL m_BLL2;
+        IBLL.IREPORTCOLLECTIONBLL m_BLL3;
+
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VQIJULINGQU2ApiController()
-            : this(new VQIJULINGQU2BLL()) { }
+            : this(new VQIJULINGQU2BLL(),new APPLIANCECOLLECTIONBLL(),new REPORTCOLLECTIONBLL()) { }
 
-        public VQIJULINGQU2ApiController(VQIJULINGQU2BLL bll)
+        public VQIJULINGQU2ApiController(VQIJULINGQU2BLL bll, APPLIANCECOLLECTIONBLL bll2, REPORTCOLLECTIONBLL bll3)
         {
             m_BLL = bll;
+            m_BLL2 = bll2;
+            m_BLL3 = bll3;
         }
 
     }
