@@ -18,7 +18,7 @@
             @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE):
         </div>
         <div class="input_search-field">
-            <input type='text' id='CERTIFICATE_ENTERPRISE' />
+            @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(),"请选择", new { @class = "easyui-combobox" })
         </div>
     </div>
     <div class="input_search">
@@ -26,15 +26,17 @@
             @Html.LabelFor(model => model.APPLIANCECOLLECTIONSATE):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("APPLIANCECOLLECTIONSATE", Models.SysFieldModels.GetSysField("VQIJULINGQU1", "APPLIANCECOLLECTIONSATE"), "请选择", new { id = "APPLIANCECOLLECTIONSATE" })
+            @Html.DropDownList("APPLIANCECOLLECTIONSATE", Models.SysFieldModels.GetSysField("VQIJULINGQU1", "APPLIANCECOLLECTIONSATE"), "请选择", new { id = "APPLIANCECOLLECTIONSATE", @class = "easyui-combobox" })
         </div>
     </div>
     <div class="input_search">
         <div class="input_search-label">
             @Html.LabelFor(model => model.CREATETIME):
         </div>
-        <div class="input_search-field">
-            <input type='text' id='CREATETIME' />
+        <div class='input_search-field-time'>
+            <input type="text" id="CREATETIMEStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'CREATETIMEStart_Time\');}' })" />
+            <span>到</span>
+            <input type="text" id="CREATETIMEEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'CREATETIMEEnd_Time\');}' })" />
         </div>
     </div>
     <div class="input_search">
@@ -42,7 +44,7 @@
             @Html.LabelFor(model => model.REPORTTORECEVESTATE):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("REPORTTORECEVESTATE", Models.SysFieldModels.GetSysField("VQIJULINGQU1", "REPORTTORECEVESTATE"), "请选择", new { id = "REPORTTORECEVESTATE" })
+            @Html.DropDownList("REPORTTORECEVESTATE", Models.SysFieldModels.GetSysField("VQIJULINGQU1", "REPORTTORECEVESTATE"), "请选择", new { id = "REPORTTORECEVESTATE", @class = "easyui-combobox"  })
         </div>
     </div>
     <div class='input_search' style="padding-top:10px;">
@@ -111,7 +113,7 @@
 					, { field: 'FACTORY_NUM', title: '出厂编号', width: 111 }
 					, { field: 'NUM', title: '数量', width: 111 }
 					, { field: 'ATTACHMENT', title: '附件', width: 111 }
-					, { field: 'NAME', title: '承接实验室', width: 111 }
+					, { field: 'UNDERTAKE_LABORATORYID', title: '承接实验室', width: 111 }
 					, {
 					    field: 'APPLIANCE_RECIVE', title: '器具接收', width: 111
 					}
@@ -119,7 +121,7 @@
                         field: 'APPLIANCECOLLECTIONSATE', title: '器具领取', width: 111, formatter: function (value, row, index) {
                             if (row.APPLIANCE_RECIVE == "是") {
                                 if (row.APPLIANCECOLLECTIONSATE != null) {
-                                    return "<input id='qiju' type='checkbox' name='qiju' value='" + row.ID + "' checked='checked' />";
+                                    return "<input id='qiju' type='checkbox' name='qiju' value='" + row.ID + "' checked='checked' disabled='disabled'/>";
                                 }
                                 else {
                                     return "<input id='qiju' type='checkbox' name='qiju' value='" + row.ID + "'/>";
@@ -130,7 +132,7 @@
                      , {
                          field: 'REPORTTORECEVESTATE', title: '报告领取', width: 111, formatter: function (value, row, index) {
                              if (row.REPORTTORECEVESTATE != null) {
-                                 return "<input id='baogao' type='checkbox' name='baogao' value='" + row.PREPARE_SCHEMEID + "' checked='checked'/><label>" + row.REPORTNUMBER + "</label>";
+                                 return "<input id='baogao' type='checkbox' name='baogao' value='" + row.PREPARE_SCHEMEID + "' checked='checked' disabled='disabled'/><label>" + row.REPORTNUMBER + "</label>";
                              }
                              else {
                                  return "<input id='baogao' type='checkbox' name='baogao' value='" + row.PREPARE_SCHEMEID + "'/><label>" + row.REPORTNUMBER + "</label>";
@@ -183,37 +185,25 @@
 
     //“查询”按钮，弹出查询框
     function flexiQuery() {
-
         //将查询条件按照分隔符拼接成字符串
         var search = "";
-        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
-            if (this.id) {
-                if (this.id == "APPLIANCECOLLECTIONSATE") {
-                    if (this.value == "待领取") {
-                        this.value = "";
-                        search = search + this.id + "&" + this.value + "^";
-                    }
-                    else if (this.value == "已领取") {
-                        search = search + this.id + "&" + this.value + "^";
-                    }
-                }
-                else if (this.id == "REPORTTORECEVESTATE") {
-                    if (this.value == "待领取") {
-                        this.value = "";
-                        search = search + this.id + "&" + this.value + "^";
-                    }
-                    else if (this.value == "已领取") {
-                        search = search + this.id + "&" + this.value + "^";
-                    }
-                }
-                else {
-                    search = search + this.id + "&" + this.value + "^";
-                }
-            }
-            else {
-                search = search + this.name + "&" + this.value + "^";
-            }
-        });
+        search += "ORDER_NUMBER&" + $("#ORDER_NUMBER").val() + "^";
+        search += "CERTIFICATE_ENTERPRISE&" + $('#CERTIFICATE_ENTERPRISE').combobox('getText') + "^";
+        if ($('#APPLIANCECOLLECTIONSATE').combobox('getText') == "待领取") {
+            search += "APPLIANCECOLLECTIONSATE&" + "@Common.ORDER_STATUS.器具已入库.ToString()" + "^";
+        }
+        else if ($('#APPLIANCECOLLECTIONSATE').combobox('getText') == "已领取") {
+            search += "APPLIANCECOLLECTIONSATE&" + "@Common.ORDER_STATUS.器具已领取.ToString()" + "^";
+        }
+        search += "CREATETIMEStart_Time&" + $("#CREATETIMEStart_Time").val() + "^";
+        search += "CREATETIMEEnd_Time&" + $("#CREATETIMEEnd_Time").val() + "^";
+        if ($('#REPORTTORECEVESTATE').combobox('getText') == "待领取") {
+          search += "REPORTTORECEVESTATE&" + "@Common.REPORTSTATUS.报告已打印.ToString()" + "^";
+        }
+        else if ($('#REPORTTORECEVESTATE').combobox('getText') == "已领取") {
+            search += "REPORTTORECEVESTATE&" + "@Common.REPORTSTATUS.报告已领取.ToString()" + "^";
+        }
+
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
@@ -223,8 +213,22 @@
     function getView() {
         var baogao = $("#baogaoid").val();
         var qiju = $("#qijuid").val();
-        if (baogao == null && qiju == null || baogao == "" && qiju == "") {
-            //window.location.href = "../VQIJULINGQU1/Details/" + arr[0].ID;
+        if (baogao != null && qiju != null || baogao != "" && qiju != "") {
+            $.ajax({
+                url: "/api/VQIJULINGQU2Api/Put?baogaoid=" + baogao + "&qijuid="+qiju+"",
+                type: "Put",
+                //data: arr,
+                success: function (res) {
+                    if (res.Code == 1) {
+                        $.messager.alert('操作提示', "领取成功！", 'info');
+                        $("#flexigridData").datagrid("reload");
+                        $("#flexigridData").datagrid("clearSelections");
+                    }
+                    else {
+                        $.messager.alert('操作提示', "领取失败！", 'error');
+                    }
+                }
+            })
 
         } else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');

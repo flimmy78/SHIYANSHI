@@ -63,7 +63,7 @@ namespace Langben.App.Controllers
                     ,
                     ATTACHMENT = s.ATTACHMENT
                     ,
-                    NAME = s.NAME
+                    UNDERTAKE_LABORATORYID = s.UNDERTAKE_LABORATORYID
                     ,
                     APPLIANCE_RECIVE = s.APPLIANCE_RECIVE
                     ,
@@ -118,7 +118,7 @@ namespace Langben.App.Controllers
                     ,
                     ATTACHMENT = s.ATTACHMENT
                     ,
-                    NAME = s.NAME
+                    UNDERTAKE_LABORATORYID = s.UNDERTAKE_LABORATORYID
                     ,
                     APPLIANCE_RECIVE = s.APPLIANCE_RECIVE
                     ,
@@ -129,6 +129,10 @@ namespace Langben.App.Controllers
                     ORDER_TASK_INFORMATIONID = s.ORDER_TASK_INFORMATIONID
                     ,
                     PREPARE_SCHEMEID=s.PREPARE_SCHEMEID
+                    ,
+                    APPLIANCECOLLECTIONSATE=s.APPLIANCECOLLECTIONSATE
+                    ,
+                    REPORTTORECEVESTATE=s.REPORTTORECEVESTATE
 
                 }
 

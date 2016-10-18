@@ -1317,7 +1317,7 @@
           <Property Name="FACTORY_NUM" Type="varchar2" MaxLength="200" />
           <Property Name="NUM" Type="number" Precision="38" Scale="0" />
           <Property Name="ATTACHMENT" Type="varchar2" MaxLength="200" />
-          <Property Name="NAME" Type="varchar2" MaxLength="200" />
+          <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
           <Property Name="APPLIANCE_RECIVE" Type="varchar2" MaxLength="200" />
           <Property Name="REPORTNUMBER" Type="varchar2" MaxLength="200" />
           <Property Name="REMARKS" Type="varchar2" MaxLength="4000" />
@@ -2328,7 +2328,7 @@ FROM "TENGFEI"."VQIJULINGQU1" "VQIJULINGQU1"</DefiningQuery>
 "VQIJULINGQU2"."FACTORY_NUM" AS "FACTORY_NUM", 
 "VQIJULINGQU2"."NUM" AS "NUM", 
 "VQIJULINGQU2"."ATTACHMENT" AS "ATTACHMENT", 
-"VQIJULINGQU2"."NAME" AS "NAME", 
+"VQIJULINGQU2"."UNDERTAKE_LABORATORYID" AS "UNDERTAKE_LABORATORYID", 
 "VQIJULINGQU2"."APPLIANCE_RECIVE" AS "APPLIANCE_RECIVE", 
 "VQIJULINGQU2"."REPORTNUMBER" AS "REPORTNUMBER", 
 "VQIJULINGQU2"."REMARKS" AS "REMARKS", 
@@ -2761,7 +2761,6 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <EntitySet Name="UNDERTAKE_LABORATORY" EntityType="Model.UNDERTAKE_LABORATORY" />
           <EntitySet Name="VJIANDINGRENWU" EntityType="Model.VJIANDINGRENWU" />
           <EntitySet Name="VQIJULINGQU1" EntityType="Model.VQIJULINGQU1" />
-          <EntitySet Name="VQIJULINGQU2" EntityType="Model.VQIJULINGQU2" />
           <EntitySet Name="VRUKU" EntityType="Model.VRUKU" />
           <EntitySet Name="VSHENHE" EntityType="Model.VSHENHE" />
           <EntitySet Name="VSHENPI" EntityType="Model.VSHENPI" />
@@ -2996,6 +2995,7 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <EntitySet Name="VTEST_ITE" EntityType="Model.VTEST_ITE" />
           <EntitySet Name="VBAOGAODAYIN" EntityType="Model.VBAOGAODAYIN" />
           <EntitySet Name="VRULE" EntityType="Model.VRULE" />
+          <EntitySet Name="VQIJULINGQU2" EntityType="Model.VQIJULINGQU2" />
         </EntityContainer>
         <EntityType Name="AC_VOLTAGE_CURRENT">
           <Key>
@@ -4340,25 +4340,6 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="REPORTSTATUSZI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="VQIJULINGQU2">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="NUM" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="ATTACHMENT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="APPLIANCE_RECIVE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="REPORTNUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="REMARKS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="ORDER_TASK_INFORMATIONID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="APPLIANCECOLLECTIONSATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="REPORTTORECEVESTATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="PREPARE_SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="VRUKU">
           <Key>
             <PropertyRef Name="ID" />
@@ -5137,6 +5118,25 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VQIJULINGQU2">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="VERSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NUM" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ATTACHMENT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="APPLIANCE_RECIVE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="REPORTNUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="REMARKS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="ORDER_TASK_INFORMATIONID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="APPLIANCECOLLECTIONSATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="REPORTTORECEVESTATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PREPARE_SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -6437,26 +6437,6 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VQIJULINGQU2">
-            <EntityTypeMapping TypeName="Model.VQIJULINGQU2">
-              <MappingFragment StoreEntitySet="VQIJULINGQU2">
-                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
-                <ScalarProperty Name="REPORTTORECEVESTATE" ColumnName="REPORTTORECEVESTATE" />
-                <ScalarProperty Name="APPLIANCECOLLECTIONSATE" ColumnName="APPLIANCECOLLECTIONSATE" />
-                <ScalarProperty Name="ORDER_TASK_INFORMATIONID" ColumnName="ORDER_TASK_INFORMATIONID" />
-                <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
-                <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
-                <ScalarProperty Name="APPLIANCE_RECIVE" ColumnName="APPLIANCE_RECIVE" />
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
-                <ScalarProperty Name="ATTACHMENT" ColumnName="ATTACHMENT" />
-                <ScalarProperty Name="NUM" ColumnName="NUM" />
-                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
-                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
-                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VRUKU">
             <EntityTypeMapping TypeName="Model.VRUKU">
               <MappingFragment StoreEntitySet="VRUKU">
@@ -6634,6 +6614,26 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
                 <ScalarProperty Name="SCHEME_MENU" ColumnName="SCHEME_MENU" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="NAMEOTHER" ColumnName="NAMEOTHER" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VQIJULINGQU2">
+            <EntityTypeMapping TypeName="Model.VQIJULINGQU2">
+              <MappingFragment StoreEntitySet="VQIJULINGQU2">
+                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
+                <ScalarProperty Name="REPORTTORECEVESTATE" ColumnName="REPORTTORECEVESTATE" />
+                <ScalarProperty Name="APPLIANCECOLLECTIONSATE" ColumnName="APPLIANCECOLLECTIONSATE" />
+                <ScalarProperty Name="ORDER_TASK_INFORMATIONID" ColumnName="ORDER_TASK_INFORMATIONID" />
+                <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+                <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
+                <ScalarProperty Name="APPLIANCE_RECIVE" ColumnName="APPLIANCE_RECIVE" />
+                <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
+                <ScalarProperty Name="ATTACHMENT" ColumnName="ATTACHMENT" />
+                <ScalarProperty Name="NUM" ColumnName="NUM" />
+                <ScalarProperty Name="FACTORY_NUM" ColumnName="FACTORY_NUM" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

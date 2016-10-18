@@ -20,7 +20,7 @@ namespace Langben.DAL
         public string FACTORY_NUM { get; set; }
         public Nullable<decimal> NUM { get; set; }
         public string ATTACHMENT { get; set; }
-        public string NAME { get; set; }
+        public string UNDERTAKE_LABORATORYID { get; set; }
         public string APPLIANCE_RECIVE { get; set; }
         public string REPORTNUMBER { get; set; }
         public string REMARKS { get; set; }

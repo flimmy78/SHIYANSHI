@@ -35,7 +35,7 @@ namespace Langben.DAL
         public object ATTACHMENT { get; set; }
 
         [Display(Name = "承接实验室", Order = 7)]
-        public object NAME { get; set; }
+        public object UNDERTAKE_LABORATORYID { get; set; }
 
         [Display(Name = "器具接收", Order = 8)]
         public object APPLIANCE_RECIVE { get; set; }

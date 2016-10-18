@@ -45,7 +45,7 @@ namespace Langben.App.Controllers
                     ,
                     ATTACHMENT = s.ATTACHMENT
                     ,
-                    NAME = s.NAME
+                    UNDERTAKE_LABORATORYID = s.UNDERTAKE_LABORATORYID
                     ,
                     APPLIANCE_RECIVE = s.APPLIANCE_RECIVE
                     ,
@@ -78,65 +78,119 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>  
-        public Common.ClientResult.Result Put(string baogaoid,string qijuid)
+        [System.Web.Http.HttpPut]
+        public Common.ClientResult.Result Put(string baogaoid, string qijuid)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
-            if (baogaoid != null|| qijuid != null && ModelState.IsValid)
-            {   //数据校验
-
-                APPLIANCECOLLECTION app = new APPLIANCECOLLECTION();//器具领取
-                REPORTCOLLECTION rep = new REPORTCOLLECTION();//报告领取
+            if (baogaoid != null || qijuid != null && ModelState.IsValid)
+            {   //数据校验          
                 string currentPerson = GetCurrentPerson();
-                app.CREATETIME = DateTime.Now;//领取时间
-                app.CREATEPERSON = currentPerson;//领取者
-                rep.CREATETIME = DateTime.Now;//领取时间
-                rep.CREATEPERSON = currentPerson;//领取者
                 string returnValue = string.Empty;
-                if (m_BLL2.Create(ref validationErrors, app))
+                foreach (var item in baogaoid.Split('|'))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，报告领取信息的Id为" + app.ID, "报告领取"
-                        );//写入日志                   
-                    result.Code = Common.ClientCode.Succeed;
-                    result.Message = Suggestion.UpdateSucceed;
-                    return result; //提示更新成功 
-                }
-                else
-                {
-                    if (validationErrors != null && validationErrors.Count > 0)
+                    REPORTCOLLECTION rep = new REPORTCOLLECTION();//报告领取
+                    PREPARE_SCHEME prep = new PREPARE_SCHEME();//预备方案
+                    if (!string.IsNullOrEmpty(item))
                     {
-                        validationErrors.All(a =>
+                        rep.CREATETIME = DateTime.Now;//领取时间
+                        rep.CREATEPERSON = currentPerson;//领取者
+                        rep.ID = Result.GetNewId();//主键id
+                        rep.PREPARE_SCHEMEID = item;//预备方案id
+                        rep.REPORTTORECEVESTATE = Common.REPORTSTATUS.报告已领取.ToString();//报告领取状态
+                        prep.ID = item;
+                        prep.REPORTSTATUS = Common.REPORTSTATUS.报告已领取.ToString();//报告领取状态
+                        prep.REPORTSTATUSZI = Common.REPORTSTATUS.报告已领取.GetHashCode().ToString();//报告领取状态
+                        if (m_BLL3.Create(ref validationErrors, rep) && m_BLL5.EditField(ref validationErrors, prep))
                         {
-                            returnValue += a.ErrorMessage;
-                            return true;
-                        });
+                            LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，报告领取信息的Id为" + rep.ID, "报告领取");//写入日志        
+                            result.Code = Common.ClientCode.Succeed;
+                            result.Message = Suggestion.InsertSucceed;
+                        }
+                        else
+                        {
+                            if (validationErrors != null && validationErrors.Count > 0)
+                            {
+                                validationErrors.All(a =>
+                                {
+                                    returnValue += a.ErrorMessage;
+                                    return true;
+                                });
+                            }
+                            LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，报告领取信息的Id为" + rep.ID + "," + returnValue, "报告领取");//写入日志
+                            result.Code = Common.ClientCode.Fail;
+                            result.Message = Suggestion.InsertFail + returnValue;
+                            return result; //提示创建失败
+                        }
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，报告领取信息的Id为" + app.ID + "," + returnValue, "报告领取"
-                        );//写入日志   
-                    result.Code = Common.ClientCode.Fail;
-                    result.Message = Suggestion.UpdateFail + returnValue;
-                    return result; //提示更新失败
                 }
+                foreach (var item in qijuid.Split('|'))
+                {
+                    APPLIANCECOLLECTION app = new APPLIANCECOLLECTION();//器具领取
+                    APPLIANCE_LABORATORY appry = new APPLIANCE_LABORATORY();//器具明细信息_承接实验室
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        app.CREATETIME = DateTime.Now;//领取时间
+                        app.CREATEPERSON = currentPerson;//领取者
+                        app.ID = Result.GetNewId();//主键id
+                        app.APPLIANCE_DETAIL_INFORMATIONID = item;//器具明细id
+                        app.APPLIANCECOLLECTIONSATE = Common.ORDER_STATUS.器具已领取.ToString();//器具领取状态
+                        List<APPLIANCE_LABORATORY> list = m_BLL4.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item);
+                        foreach (var item2 in list)
+                        {
+                            appry.ID = item2.ID;
+                            appry.ORDER_STATUS = Common.ORDER_STATUS.器具已领取.ToString();
+                            appry.EQUIPMENT_STATUS_VALUUMN= Common.ORDER_STATUS.器具已领取.GetHashCode().ToString();
+                            m_BLL4.EditField(ref validationErrors, appry);
+                        }
+                        if (m_BLL2.Create(ref validationErrors, app) )
+                        {
+                            LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具领取信息的Id为" + app.ID, "器具领取");//写入日志       
+                            result.Code = Common.ClientCode.Succeed;
+                            result.Message = Suggestion.InsertSucceed;
+                        }
+                        else
+                        {
+                            if (validationErrors != null && validationErrors.Count > 0)
+                            {
+                                validationErrors.All(a =>
+                                {
+                                    returnValue += a.ErrorMessage;
+                                    return true;
+                                });
+                            }
+                            LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具领取信息的Id为" + app.ID + "," + returnValue, "器具领取"
+                                );//写入日志   
+                            result.Code = Common.ClientCode.Fail;
+                            result.Message = Suggestion.InsertFail + returnValue;
+                            return result; //提示创建失败
+                        }
+                    }
+                }
+                return result;
             }
             result.Code = Common.ClientCode.FindNull;
-            result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";
+            result.Message = Suggestion.InsertFail + "请核对输入的数据的格式";
             return result; //提示输入的数据的格式不对         
         }
 
         IBLL.IVQIJULINGQU2BLL m_BLL;
         IBLL.IAPPLIANCECOLLECTIONBLL m_BLL2;
         IBLL.IREPORTCOLLECTIONBLL m_BLL3;
-
+        IBLL.IAPPLIANCE_LABORATORYBLL m_BLL4;
+        IBLL.IPREPARE_SCHEMEBLL m_BLL5;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VQIJULINGQU2ApiController()
-            : this(new VQIJULINGQU2BLL(),new APPLIANCECOLLECTIONBLL(),new REPORTCOLLECTIONBLL()) { }
+            : this(new VQIJULINGQU2BLL(), new APPLIANCECOLLECTIONBLL(), new REPORTCOLLECTIONBLL(), new APPLIANCE_LABORATORYBLL(), new PREPARE_SCHEMEBLL()) { }
 
-        public VQIJULINGQU2ApiController(VQIJULINGQU2BLL bll, APPLIANCECOLLECTIONBLL bll2, REPORTCOLLECTIONBLL bll3)
+        public VQIJULINGQU2ApiController(VQIJULINGQU2BLL bll, APPLIANCECOLLECTIONBLL bll2, REPORTCOLLECTIONBLL bll3, APPLIANCE_LABORATORYBLL bll4, PREPARE_SCHEMEBLL bll5)
         {
             m_BLL = bll;
             m_BLL2 = bll2;
             m_BLL3 = bll3;
+            m_BLL4 = bll4;
+            m_BLL5 = bll5;
         }
 
     }
