@@ -111,8 +111,9 @@ namespace Langben.App.Controllers
         /// <param name="CONCLUSION">结论</param>
         /// <param name="REMARK">注</param>
         /// <param name="HTMLVALUE"></param>
+        /// <param name="INPUTSTATE">录入格式</param>
         /// <returns></returns>
-        public ActionResult Save(string ID="", string PREPARE_SCHEMEID="", string RULEID="",string CONCLUSION="",string REMARK="",string HTMLVALUE="")
+        public ActionResult Save(string ID="", string PREPARE_SCHEMEID="", string RULEID="",string CONCLUSION="",string REMARK="",string HTMLVALUE="",string INPUTSTATE="")
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             QUALIFIED_UNQUALIFIED_TEST_ITE entity = new QUALIFIED_UNQUALIFIED_TEST_ITE();
@@ -125,6 +126,8 @@ namespace Langben.App.Controllers
             entity.HTMLVALUE = Server.UrlDecode(HTMLVALUE);//解码
             entity.CONCLUSION = CONCLUSION;
             entity.REMARK = REMARK;
+            entity.INPUTSTATE = INPUTSTATE;
+                        
             IBLL.IVTEST_ITEBLL vBLL = new BLL.VTEST_ITEBLL();
             DAL.VTEST_ITE vEntity = vBLL.GetById(PREPARE_SCHEMEID, RULEID);
             if(vEntity!=null)
@@ -132,6 +135,7 @@ namespace Langben.App.Controllers
                 entity.RULENAME = vEntity.NAME;
                 entity.RULENJOINAME = vEntity.NAMEOTHER;
                 entity.SORT = vEntity.SORT;
+                entity.INPUTSTATE = vEntity.INPUTSTATE;
             }
 
             if (ID != null && ID.Trim() != "")

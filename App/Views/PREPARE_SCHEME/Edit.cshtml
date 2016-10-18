@@ -51,13 +51,13 @@
                 <select class="my-combobox" id="CONCLUSION">
                     @if (Model != null && Model.prepare_scheme.CONCLUSION == "不合格")
                     {
-                        <option value="yes">合格</option>
-                        <option value="no" check="true">不合格</option>
+                        <option value="合格">合格</option>
+                        <option value="不合格" check="true">不合格</option>
                     }
                     else
                     {
-                        <option value="yes" check="true">合格</option>
-                        <option value="no">不合格</option>
+                        <option value="合格" check="true">合格</option>
+                        <option value="不合格">不合格</option>
                     }
                 </select>
             </td>

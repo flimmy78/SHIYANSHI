@@ -249,6 +249,118 @@ namespace Langben.App.Controllers
                     }
                 }
                 #endregion 
+                //温度
+                RowIndex++;
+                sheet.GetRow(RowIndex).GetCell(5).SetCellValue(entity.TEMPERATURE);
+                //相对湿度
+                sheet.GetRow(RowIndex).GetCell(18).SetCellValue(entity.HUMIDITY);
+
+                RowIndex = RowIndex + 2;
+                //检定地点
+                sheet.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CHECK_PLACE);
+
+                RowIndex++ ;
+                //检定员
+                sheet.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CHECKERID);
+                //核验员
+                sheet.GetRow(RowIndex).GetCell(23).SetCellValue(entity.DETECTERID);
+                RowIndex++;
+                //检定日期
+                if (entity.CALIBRATION_DATE.HasValue)
+                {
+                    sheet.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CALIBRATION_DATE.Value.ToString("yyyy年MM月dd日"));
+                }
+                //有效期
+                if (entity.VALIDITY_PERIOD.HasValue)
+                {
+                    sheet.GetRow(RowIndex).GetCell(23).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
+                }
+                RowIndex=RowIndex+2;
+                //检定结论          
+                sheet.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CONCLUSION);
+                RowIndex++;
+                //检定说明  
+                if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
+                {
+                    sheet.GetRow(RowIndex).GetCell(5).SetCellValue("/");
+                }
+                else
+                {
+                    sheet.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CONCLUSION_EXPLAIN);
+                }
+                #region 暂时没有数据，不做
+                //检定所使用的计量标准装置
+                //检定所使用的主要计量器具
+                //比对和匝比试验使用的中间试品
+                #endregion
+                #region 检测项目
+                //RowIndex = RowIndex+2;
+                RowIndex = 56;//正式需要修改改为动态的
+                if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE!=null && 
+                    entity.QUALIFIED_UNQUALIFIED_TEST_ITE.Count>0)
+                {
+                    int i = 1;
+                    int BTIndex = 55;
+                    int ZLDLSCTBTIndex = 50;
+                    IRow BTTemplate = sheet.GetRow(BTIndex);//规程标题获取源格式行
+                    IRow ZLDLSCTBTemplate = sheet.GetRow(ZLDLSCTBTIndex);//直流电流输出表格表头获取源格式行
+                    int ZLDLSCTZIndex = 53;
+                    IRow ZLDLSCTZTemplate = sheet.GetRow(ZLDLSCTZIndex);//直流电流表格注获取源格式行
+                    int ZLDLSCTJLIndex = 54;
+                    IRow ZLDLSCTJLTemplate = sheet.GetRow(ZLDLSCTJLIndex);//直流电流表格结论获取源格式行
+                    foreach (QUALIFIED_UNQUALIFIED_TEST_ITE iEntity in entity.QUALIFIED_UNQUALIFIED_TEST_ITE)
+                    {
+                        
+                        InsertRow(sheet, RowIndex, 1, BTTemplate);
+
+                        string celStr = i.ToString() + "、";
+
+                        if (iEntity.RULENAME != null && iEntity.RULENAME.Trim()!="")
+                        {
+                            celStr = celStr + iEntity.RULENAME.Trim() + "：";
+                        }
+                        if(iEntity.CONCLUSION!=null && iEntity.CONCLUSION.Trim()!="")
+                        {
+                            celStr = celStr + iEntity.CONCLUSION.Trim() ;
+                        }
+                        sheet.GetRow(RowIndex).GetCell(0).SetCellValue(celStr);
+                        if(iEntity.INPUTSTATE == InputStateEnums.ZhiLiuDianLiuShuChu.ToString())
+                        {
+                            RowIndex++;
+                            InsertRow(sheet, RowIndex, 1, ZLDLSCTBTemplate);
+                            RowIndex++;
+                            InsertRow(sheet, RowIndex, 1, ZLDLSCTZTemplate);
+                            if (iEntity.REMARK != null)
+                            {
+                                sheet.GetRow(RowIndex).GetCell(0).SetCellValue("注：" + iEntity.REMARK );
+                            }
+                            else
+                            {
+                                sheet.GetRow(RowIndex).GetCell(0).SetCellValue("注：" );
+                            }
+                            RowIndex++;
+                            InsertRow(sheet, RowIndex, 1, ZLDLSCTJLTemplate);
+                            if(iEntity.CONCLUSION!=null)
+                            {
+                                sheet.GetRow(RowIndex).GetCell(0).SetCellValue("结论：" + iEntity.CONCLUSION);
+                            }
+                            else
+                            {
+                                sheet.GetRow(RowIndex).GetCell(0).SetCellValue("结论：");
+                            }
+                           
+
+                        }
+                        RowIndex=RowIndex+2;
+                        i++;
+                        
+                    }
+                }
+                #endregion 
+
+
+
+
 
                 saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";
                 string saveFileNamePath = System.Web.HttpContext.Current.Server.MapPath(saveFileName);
@@ -309,6 +421,7 @@ namespace Langben.App.Controllers
                 }
                 //CopyRow(sourceRow, targetRow);
                 //Util.CopyRow(sheet, sourceRow, targetRow);
+                //OldRow.CopyRowTo(StartIndex);               
             }
 
             IRow firstTargetRow = Sheet.GetRow(StartIndex);

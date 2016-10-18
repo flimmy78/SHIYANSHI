@@ -75,6 +75,10 @@ namespace Langben.DAL
         [Display(Name = "排序", Order = 13)]
         public object SORT { get; set; }
 
+        [ScaffoldColumn(true)]
+        [Display(Name = "录入格式", Order = 14)]
+        public object INPUTSTATE { get; set; }
+
     }
 }
  

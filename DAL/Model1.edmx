@@ -652,6 +652,7 @@
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="SORT" Type="number" Precision="38" Scale="0" />
+          <Property Name="INPUTSTATE" Type="varchar2" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="REPORTCOLLECTION">
           <Key>
@@ -3690,6 +3691,7 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PREPARE_SCHEME" Relationship="Model.FK_QUALIFIED_UN" FromRole="QUALIFIED_UNQUALIFIED_TEST_ITE" ToRole="PREPARE_SCHEME" />
           <Property Name="SORT" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="INPUTSTATE" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="REPORTCOLLECTION">
           <Key>
@@ -5798,6 +5800,7 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <EntitySetMapping Name="QUALIFIED_UNQUALIFIED_TEST_ITE">
             <EntityTypeMapping TypeName="Model.QUALIFIED_UNQUALIFIED_TEST_ITE">
               <MappingFragment StoreEntitySet="QUALIFIED_UNQUALIFIED_TEST_ITE">
+                <ScalarProperty Name="INPUTSTATE" ColumnName="INPUTSTATE" />
                 <ScalarProperty Name="SORT" ColumnName="SORT" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />

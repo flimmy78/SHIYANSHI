@@ -97,7 +97,7 @@
             dataType: "json", //返回json格式的数据
             url: '/QUALIFIED_UNQUALIFIED_TEST_ITE/Save', //要访问的后台地址      
             contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式        
-            data: { 'ID': ID, 'PREPARE_SCHEMEID': PREPARE_SCHEMEID, 'RULEID': RULEID, 'CONCLUSION': CONCLUSION, 'REMARK': REMARK },
+            data: { 'ID': ID, 'PREPARE_SCHEMEID': PREPARE_SCHEMEID, 'RULEID': RULEID, 'CONCLUSION': CONCLUSION, 'REMARK': REMARK, 'INPUTSTATE': INPUTSTATE },
             beforeSend: function () {
                 //InitAlertJS();
             },
