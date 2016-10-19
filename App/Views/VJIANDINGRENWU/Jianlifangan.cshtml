@@ -81,7 +81,7 @@
             <div class="input_search-field">
                 <input type="text" readonly="readonly" value="@Model.APPLIANCE_DETAIL_INFORMATIONShows.APPLIANCE_NAME" disabled="disabled" />
             </div>
-        </div><br />
+        </div>
         <div class="input_search">
             <div class="input_search-label">
                 <span style="color:#F00">*</span>器具型号：
@@ -89,7 +89,7 @@
             <div class="input_search-field">
                 <input type="text" readonly="readonly" value="@Model.APPLIANCE_DETAIL_INFORMATIONShows.VERSION" disabled="disabled" />
             </div>
-        </div><br />
+        </div>
         <div class="input_search">
             <div class="input_search-label">
                 器具规格：
@@ -97,7 +97,7 @@
             <div class="input_search-field">
                 <input type="text" readonly="readonly" value="@Model.APPLIANCE_DETAIL_INFORMATIONShows.FORMAT" disabled="disabled" />
             </div>
-        </div><br />
+        </div>
         <div class="input_search">
             <div class="input_search-label">
                 <span style="color:#F00">*</span>出厂编号：
@@ -105,7 +105,7 @@
             <div class="input_search-field">
                 <input type="text" readonly="readonly" value="@Model.APPLIANCE_DETAIL_INFORMATIONShows.FACTORY_NUM" disabled="disabled" />
             </div>
-        </div><br />
+        </div>
         <div class="input_search">
             <div class="input_search-label">
                 <span style="color:#F00">*</span>准确度等级：
@@ -123,7 +123,7 @@
                 </div>
             }
 
-        </div><br />
+        </div>
         <div class="input_search">
             <div class="input_search-label">
                 <span style="color:#F00">*</span>制造单位：
@@ -131,7 +131,7 @@
             <div class="input_search-field">
                 <input type="text" readonly="readonly" value="@Model.APPLIANCE_DETAIL_INFORMATIONShows.MAKE_ORGANIZATION" disabled="disabled" />
             </div>
-        </div><br />
+        </div>
         @if (ViewBag.UNDERTAKE_LABORATORY_NAME == Common.LABORATORYNAME.电能.ToString())
         {
             <div class="input_search" id="diannengmaicong">
@@ -141,7 +141,7 @@
                 <div class="input_search-field">
                     <input type="text" name="PULSE_CONSTANT" id="PULSE_CONSTANT" value="@Model.ACCURACY_GRADE" />
                 </div>
-            </div><br />
+            </div>
         }
         @if (ViewBag.UNDERTAKE_LABORATORY_NAME == Common.LABORATORYNAME.电能.ToString() || ViewBag.UNDERTAKE_LABORATORY_NAME == Common.LABORATORYNAME.互感器.ToString())
         {
@@ -162,7 +162,7 @@
                     </div>
                 }
 
-            </div><br />
+            </div>
         }
         @*<div class="input_search" id="huganqiwaijie">
                 <div class="input_search-label">
@@ -172,7 +172,7 @@
                     <input type="text" name="EXTERNAL_RESITANCE_VALUE" id="EXTERNAL_RESITANCE_VALUE" />
                 </div>
             </div>*@
-            <div class="clearfix mt10"></div><br />
+            <div class="clearfix mt10"></div>
         <b>其他信息</b>
         <div class="clearfix"></div>
         <div class="input_search">
@@ -182,7 +182,7 @@
             <div class="input_search-field">
                 <input type="text" value="@Model.TEMPERATURE" id="TEMPERATURE" />℃
             </div>
-        </div><br />
+        </div>
         <div class="input_search">
             <div class="input_search-label">
                 相对湿度：
@@ -217,7 +217,7 @@
                 </div>
             }
 
-        </div><br />
+        </div>
         <div class="input_search">
             @*检定日期*@
             @if (ViewBag.CERTIFICATE_CATEGORY == "检定")
@@ -235,7 +235,7 @@
             <div class="input_search-field">
                 <input type="text" id="CALIBRATION_DATE" value="@Model.CALIBRATION_DATE" />
             </div>
-        </div><br />
+        </div>
         <div class="input_search">
             <div class="input_search-label">
                 <span style='color:#F00'>*</span>核验员：
@@ -261,7 +261,7 @@
                 </div>
             }
 
-        </div><br />
+        </div>
         <table id="biaozhuizhuangzi"></table><br style="clear:both;" />
         <table id="biaozhuiqi"></table><br style="clear:both;" />
         @*弹窗*@

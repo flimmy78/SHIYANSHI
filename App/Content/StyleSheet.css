@@ -110,7 +110,7 @@ input {
     height: auto;
     clear: both; font-size:12px
 }
-.search-form{ width:335px; float:left}
+.search-form{ width:430px; float:left}
 
 
 .input_search {
@@ -133,7 +133,7 @@ input {
     }
 
 .input_search-field {
-    width: 210px;
+    width: 220px;
     float: left;
     margin: 11px 0 11px 6px;
     display: inline;
