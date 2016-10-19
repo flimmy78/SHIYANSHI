@@ -27,100 +27,100 @@
                 </div>
             </div>
         </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)：
+        <div class="search-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Name)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.MyName)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.MyName)
-            @Html.ValidationMessageFor(model => model.MyName)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Password)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Password)
-            @Html.ValidationMessageFor(model => model.Password)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SurePassword)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.SurePassword)
-            @Html.ValidationMessageFor(model => model.SurePassword)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Sex)：
-        </div>
-        <div class="editor-field">
-            @Html.DropDownListFor(model => model.Sex, Models.SysFieldModels.GetSysField("SysPerson", "Sex"))
-        </div>
-       <br style="clear:both;" />
-        <div class="editor-label">
-            @Html.LabelFor(model => model.MobilePhoneNumber)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.MobilePhoneNumber)
-            @Html.ValidationMessageFor(model => model.MobilePhoneNumber)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PhoneNumber)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PhoneNumber)
-            @Html.ValidationMessageFor(model => model.PhoneNumber)
-        </div>
-        <div class="editor-label">
-            <label for="Province">实验室</label>
-        </div>
-        <div class="editor-field">
-            <select id="Province" name="Province">
-                <option value="">请选择</option>
-                <option value="数表三相">数表三相</option>
-                <option value="数表单相">数表单相</option>
-                <option value="电能">电能</option>
-                <option value="指示仪表">指示仪表</option>
-                <option value="直流仪器">直流仪器</option>
-                <option value="互感器">互感器</option>
-            </select>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MyName)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.MyName)
+                @Html.ValidationMessageFor(model => model.MyName)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Password)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SurePassword)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.SurePassword)
+                @Html.ValidationMessageFor(model => model.SurePassword)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Sex)：
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.Sex, Models.SysFieldModels.GetSysField("SysPerson", "Sex"))
+            </div>
+            <br style="clear:both;" />
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MobilePhoneNumber)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.MobilePhoneNumber)
+                @Html.ValidationMessageFor(model => model.MobilePhoneNumber)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PhoneNumber)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.PhoneNumber)
+                @Html.ValidationMessageFor(model => model.PhoneNumber)
+            </div>
+            <div class="editor-label">
+                <label for="Province">实验室</label>
+            </div>
+            <div class="editor-field">
+                <select id="Province" name="Province">
+                    <option value="">请选择</option>
+                    <option value="数表三相">数表三相</option>
+                    <option value="数表单相">数表单相</option>
+                    <option value="电能">电能</option>
+                    <option value="指示仪表">指示仪表</option>
+                    <option value="直流仪器">直流仪器</option>
+                    <option value="互感器">互感器</option>
+                </select>
+            </div>
 
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Address)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Address)
+                @Html.ValidationMessageFor(model => model.Address)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.EmailAddress)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.EmailAddress)
+                @Html.ValidationMessageFor(model => model.EmailAddress)
+            </div><div class="editor-label">
+                @Html.LabelFor(model => model.State)：
+            </div>
+            <div class="editor-field">
+                @Html.RadioButtonListFor(model => model.State, Models.SysFieldModels.GetSysField("SysPerson", "State"), false)
+            </div>
+            <br style="clear: both;" />
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Remark)：
+            </div>
+            <div class="textarea-box">
+                @Html.TextAreaFor(model => model.Remark)
+                @Html.ValidationMessageFor(model => model.Remark)
+            </div>
         </div>
-     
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Address)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Address)
-            @Html.ValidationMessageFor(model => model.Address)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.EmailAddress)：
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.EmailAddress)
-            @Html.ValidationMessageFor(model => model.EmailAddress)
-        </div><div class="editor-label">
-            @Html.LabelFor(model => model.State)：
-        </div>
-        <div class="editor-field">
-            @Html.RadioButtonListFor(model => model.State, Models.SysFieldModels.GetSysField("SysPerson", "State"), false)
-        </div>
-        <br style="clear: both;" />
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Remark)：
-        </div>
-        <div class="textarea-box">
-            @Html.TextAreaFor(model => model.Remark)
-            @Html.ValidationMessageFor(model => model.Remark)
-        </div>
-
-    </div>
     @Html.HiddenFor(model => model.HDpic)
     <input type="hidden" id="fileUrl" value="HDpic" />
     <script type="text/javascript" src="@Url.Content("~/Res/webuploader/js/webuploader.nolog.min.js")"></script>
