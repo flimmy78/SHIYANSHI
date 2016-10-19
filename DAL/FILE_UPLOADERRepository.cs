@@ -110,7 +110,7 @@ namespace Langben.DAL
         /// <returns>附件</returns>
         public FILE_UPLOADER GetPREPARE_SCHEMEID(SysEntities db, string id)
         {
-            return db.FILE_UPLOADER.SingleOrDefault(s => s.PREPARE_SCHEMEID== id);
+            return db.FILE_UPLOADER.FirstOrDefault(s => s.PREPARE_SCHEMEID== id);
 
         }
         /// <summary>

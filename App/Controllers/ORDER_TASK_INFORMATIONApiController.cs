@@ -71,7 +71,7 @@ namespace Langben.App.Controllers
                     OVERDUE =s.OVERDUE,
                     STORAGEINSTRUCTIONS =s.STORAGEINSTRUCTIONS,
                     STORAGEINSTRUCTI_STATU =s.STORAGEINSTRUCTI_STATU,
-                    UNDERTAKE_LABORATORYIDString =UNDERTAKE_LABORATORYID
+                    UNDERTAKE_LABORATORYIDString =UNDERTAKE_LABORATORYID.TrimEnd(',')
     } },
                 ID = s.ORDER_TASK_INFORMATION.ID,
                 ORDER_NUMBER = s.ORDER_TASK_INFORMATION.ORDER_NUMBER,
@@ -148,7 +148,7 @@ namespace Langben.App.Controllers
                     OVERDUE = s.OVERDUE,
                     STORAGEINSTRUCTIONS = s.STORAGEINSTRUCTIONS,
                     STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU,
-                    UNDERTAKE_LABORATORYIDString = UNDERTAKE_LABORATORYID,
+                    UNDERTAKE_LABORATORYIDString = UNDERTAKE_LABORATORYID.TrimEnd(','),
                     ORDER_STATUS = ORDER_STATUS
                 });
             }

@@ -94,8 +94,7 @@ namespace Langben.DAL
             var data = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
                      .CreateObjectSet<VQIJULINGQU1>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                      .Where(w => EQUIPMENT_STATUS_VALUUMNarr.Contains(w.EQUIPMENT_STATUS_VALUUMN))
-                       .Where(w => REPORTSTATUSZIarr.Contains(w.REPORTSTATUSZI))
+                      .Where(w => EQUIPMENT_STATUS_VALUUMNarr.Contains(w.EQUIPMENT_STATUS_VALUUMN)|| REPORTSTATUSZIarr.Contains(w.REPORTSTATUSZI))
                      .AsQueryable();
             if (null != startTime)
             {
