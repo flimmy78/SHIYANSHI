@@ -24,6 +24,7 @@ namespace Langben.DAL
             string where = string.Empty;
             int flagWhere = 0;
             string REPORTSTATUSZI = string.Empty;
+            string UNDERTAKE_LABORATORYID = string.Empty;
             Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
             if (queryDic != null && queryDic.Count > 0)
             {
@@ -32,16 +33,17 @@ namespace Langben.DAL
                     if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "REPORTSTATUSZI")
                     {
                         REPORTSTATUSZI = item.Value;
-                        if (where.IndexOf(" and ") > 1)
-                        {
-                            where = where.Substring(0, where.IndexOf(" and "));
-                        }
+                        continue;
+                    }
+                    if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "UNDERTAKE_LABORATORYID")
+                    {
+                        UNDERTAKE_LABORATORYID = item.Value;
                         continue;
                     }
                     if (flagWhere != 0)
                     {
                         where += " and ";
-                    }
+                    }          
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Time)) + "] >=  CAST('" + item.Value + "' as   System.DateTime)";
@@ -92,6 +94,7 @@ namespace Langben.DAL
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
                      .OrderBy("it.[UPDATETIME] " + "asc")
                      .Where(w => REPORTSTATUSZIarr.Contains(w.REPORTSTATUSZI))
+                     .Where(w=>w.UNDERTAKE_LABORATORYID==UNDERTAKE_LABORATORYID)
                      .AsQueryable();
 
         }
