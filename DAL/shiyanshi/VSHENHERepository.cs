@@ -29,12 +29,6 @@ namespace Langben.DAL
             {
                 foreach (var item in queryDic)
                 {
-                    if (flagWhere != 0)
-                    {
-                        where += " and ";
-                    }
-
-
                     if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "REPORTSTATUSZI")
                     {
                         REPORTSTATUSZI = item.Value;
@@ -42,10 +36,12 @@ namespace Langben.DAL
                         {
                             where = where.Substring(0, where.IndexOf(" and "));
                         }
-
                         continue;
                     }
-
+                    if (flagWhere != 0)
+                    {
+                        where += " and ";
+                    }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Time)) + "] >=  CAST('" + item.Value + "' as   System.DateTime)";
