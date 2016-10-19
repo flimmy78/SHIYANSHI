@@ -204,9 +204,24 @@ namespace Langben.App.Controllers
                 //准确度等级
                 sheet.GetRow(11).GetCell(7).SetCellValue(entity.ACCURACY_GRADE);
                 //额定频率
-                sheet.GetRow(11).GetCell(23).SetCellValue(entity.RATED_FREQUENCY);
+                if (entity.RATED_FREQUENCY == null || entity.RATED_FREQUENCY.Trim()=="")
+                {
+                    sheet.GetRow(11).GetCell(19).SetCellValue("");
+                    sheet.GetRow(11).GetCell(23).SetCellValue("");
+                }
+                else
+                {
+                    sheet.GetRow(11).GetCell(23).SetCellValue(entity.RATED_FREQUENCY);
+                }
                 //脉冲常数
-                sheet.GetRow(12).GetCell(7).SetCellValue(entity.PULSE_CONSTANT);
+                if (entity.PULSE_CONSTANT == null || entity.PULSE_CONSTANT.Trim() == "")
+                {
+                    HideRow(sheet, 12, 1);
+                }
+                else
+                {
+                    sheet.GetRow(12).GetCell(7).SetCellValue(entity.PULSE_CONSTANT);
+                }
 
                 if (entity.APPLIANCE_LABORATORY != null && entity.APPLIANCE_LABORATORY.Count > 0)
                 {
@@ -298,18 +313,26 @@ namespace Langben.App.Controllers
                 }
                 #region 暂时没有数据，不做
                 //检定所使用的计量标准装置
+                //HideRow(sheet, RowIndex, 6);
                 RowIndex = RowIndex + 6;
+
+
+
                 //检定所使用的主要计量器具
+                //HideRow(sheet, RowIndex, 6);
                 RowIndex = RowIndex + 6;
                 //比对和匝比试验使用的中间试品
+                //HideRow(sheet, RowIndex, 6);
                 RowIndex = RowIndex + 6;
                 //空白
                 RowIndex = RowIndex + 8;
                 #endregion
                 #region 检测项目
+                
                 //RowIndex = RowIndex+2;
                 //直流电流输出模板
                 RowIndex++;
+                int JCXRowIndex = RowIndex;
                 int BTTemplateIndex = RowIndex ;//规程标题获取源格式行
                 RowIndex = RowIndex + 2;
                 int ZLDLSCTBTTemplateIndex = RowIndex;//直流电流输出表格表头获取源格式行
@@ -324,26 +347,13 @@ namespace Langben.App.Controllers
                 int JWTemplateIndex = RowIndex;//结尾模板源格式行 
 
                 RowIndex++;
-
-                //RowIndex = RowIndex+6;//正式需要修改改为动态的
-                //RowIndex = RowIndex + 1;
-                //int BTTemplateIndex = RowIndex + 25;//规程标题获取源格式行
-                //int ZLDLSCTBTTemplateIndex = BTTemplateIndex + 2;////直流电流输出表格表头获取源格式行
-                //int ZLDLSCTZTemplateIndex = ZLDLSCTBTTemplateIndex + 2;////直流电流表格注获取源格式行
-                //int ZLDLSCTJLTemplateIndex = ZLDLSCTZTemplateIndex + 1;//直流电流表格结论获取源格式行
+                
 
                 if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE != null &&
                     entity.QUALIFIED_UNQUALIFIED_TEST_ITE.Count > 0)
                 {
-                    int i = 1;
-                    //int BTTemplateIndex = RowIndex+25;//规程标题获取源格式行
-                    //int ZLDLSCTBTTemplateIndex = BTTemplateIndex+2;////直流电流输出表格表头获取源格式行
-                    //IRow BTTemplate = sheet.GetRow(BTIndex);//规程标题获取源格式行
-                    //IRow ZLDLSCTBTemplate = sheet.GetRow(ZLDLSCTBTIndex);//直流电流输出表格表头获取源格式行
-                    //int ZLDLSCTZTemplateIndex = ZLDLSCTBTTemplateIndex+2;////直流电流表格注获取源格式行
-                    //IRow ZLDLSCTZTemplate = sheet.GetRow(ZLDLSCTZIndex);//直流电流表格注获取源格式行
-                    //int ZLDLSCTJLTemplateIndex = ZLDLSCTZTemplateIndex+1;//直流电流表格结论获取源格式行
-                    //IRow ZLDLSCTJLTemplate = sheet.GetRow(ZLDLSCTJLIndex);//直流电流表格结论获取源格式行
+                    entity.QUALIFIED_UNQUALIFIED_TEST_ITE = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.OrderBy(p=>p.SORT).ToList();
+                    int i = 1;                   
                     foreach (QUALIFIED_UNQUALIFIED_TEST_ITE iEntity in entity.QUALIFIED_UNQUALIFIED_TEST_ITE)
                     {
 
@@ -373,30 +383,20 @@ namespace Langben.App.Controllers
                             //iEntity.HTMLVALUE
 
                             #region 解析html
-                            Lexer lexer_Input = new Lexer(iEntity.HTMLVALUE);
+                            Lexer lexer_Input = new Lexer(iEntity.HTMLVALUE);//必须定义多个，否则第二个获取不到数据
                             Parser parser_Input = new Parser(lexer_Input);
                             Lexer lexer_Option = new Lexer(iEntity.HTMLVALUE);
                             Parser parser_Option = new Parser(lexer_Option);
                             //NodeFilter filter = new NodeClassFilter(typeof(Winista.Text.HtmlParser.Tags.Div));
                             NodeFilter filter_Input = new TagNameFilter("input");
-                            NodeFilter filter_Option = new TagNameFilter("OPTION");
-                            //NodeFilter filter_Option = new NodeClassFilter(typeof(Winista.Text.HtmlParser.Tags.OptionTag));
+                            NodeFilter filter_Option = new TagNameFilter("OPTION");                          
 
-                            
-
-                            //NodeList nodeList = parser.Parse(null);
+                           
                             NodeList nodeList_Input = parser_Input.Parse(filter_Input);
                             NodeList nodeList_Option = parser_Option.Parse(filter_Option);
 
                             RowIndex=paserData(nodeList_Input, nodeList_Option, sheet, RowIndex, ZLDLSCTNRTemplateIndex);
-                            RowIndex++;
-                            //if (nodeList.Count >0)
-                            //{
-                            //    for (int j = 0; j < nodeList.Count; j++)
-                            //    {
-                            //        RowIndex = paserData(nodeList[j], sheet,RowIndex, ZLDLSCTNRTemplateIndex, null);
-                            //    }
-                            //}
+                            RowIndex++;                            
                             #endregion
 
 
@@ -434,14 +434,22 @@ namespace Langben.App.Controllers
                 }
                 #endregion
 
-                              
+                //结尾             
                 CopyRow(sheet, RowIndex, JWTemplateIndex, 1,true);
+                HideRow(sheet, JCXRowIndex, 8);
+                //页眉
+                if (entity.CONTROL_NUMBER != null && entity.CONTROL_NUMBER.Trim() != "")
+                {
+                    sheet.Header.Left = "                " + entity.CONTROL_NUMBER;
+                }
+                //页脚
+                if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString() && entity.CNAS== ShiFouCNAS.Yes.ToString() && entity.CONTROL_NUMBER!=null && entity.CONTROL_NUMBER.Trim()!="")
+                {
+                    sheet.Footer.Left = entity.CONTROL_NUMBER;
+                }
 
 
-
-
-
-                saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";
+                    saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";
                 string saveFileNamePath = System.Web.HttpContext.Current.Server.MapPath(saveFileName);
                 sheet.ForceFormulaRecalculation = true;
                 using (FileStream fileWrite = new FileStream(saveFileNamePath, FileMode.Create))
@@ -465,6 +473,21 @@ namespace Langben.App.Controllers
             if (node == null)
                 return null;
             return node is ITag ? node as ITag : null;
+        }
+        /// <summary>
+        /// 隐藏行
+        /// </summary>
+        /// <param name="sheet"></param>
+        /// <param name="startRowIndex">开始行号</param>
+        /// <param name="rowCount">行数</param>
+        private void HideRow(ISheet sheet, int startRowIndex,int rowCount)
+        {
+            for (int i = 0; i < rowCount; i++)
+            {
+                IRow sourceRow = sheet.GetRow(startRowIndex);
+                sourceRow.Height = 0;
+                startRowIndex++;
+            }
         }
         /// <summary>
         /// 设置行号，同时插入行
@@ -586,113 +609,6 @@ namespace Langben.App.Controllers
             return rowIndex;
 
         }
-        /// <summary>
-        /// 解析html
-        /// </summary>
-        /// <param name="node">节点</param>
-        /// <param name="sheet"></param>
-        /// <param name="startRowIndex">插入开始行号</param>
-        /// <param name="sourceRowIndex">模板行号</param>
-        /// <param name="id"></param>
-        private int paserData(INode node, ISheet sheet, int startRowIndex, int sourceRowIndex,string id)
-        {
-            int RowIndex = startRowIndex;
-            ITag tag = getTag(node);
-            bool IsNewRow = false;
-            //if (tag != null && !tag.IsEndTag() && !start.Contains(tag.StartPosition) 
-            //    && tag.GetAttribute("ID")!=null && tag.GetAttribute("name") !=null 
-            //    //&& (tag.GetAttribute("$<TAGNAME>$")== "INPUT" || tag.GetAttribute("$<TAGNAME>$")== "select")
-            //    //&& tag.GetAttribute("name").ToString().Trim()!="K"
-            //    )
-            //{
-
-                if (tag != null && !tag.IsEndTag() && !start.Contains(tag.StartPosition)
-               //&& tag.GetAttribute("$<TAGNAME>$") != "select"
-               && ((tag.GetAttribute("ID") != null && tag.GetAttribute("name") != null && tag.GetAttribute("$<TAGNAME>$") == "input")
-               || (tag.GetAttribute("$<TAGNAME>$")== "option" && ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"]!=null &&
-               ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"].ToString()!= "K"
-               && tag.GetAttribute("SELECTED") == "selected"))              
-               )
-            {
-                //object oId = tag.GetAttribute("ID");
-                //object oName = tag.GetAttribute("name");
-                //object oClass = tag.GetAttribute("class");
-                //this.txtResult.Text += tag.TagName + ":\r\nID:" + oId + " Name:" + oName + " Class:" + oClass + " StartPosition:" + tag.StartPosition.ToString() + "\r\n";
-                object oId = "";
-                object oName = "";
-
-                object oValue = null;
-
-
-                if (tag.GetAttribute("$<TAGNAME>$") == "input")
-                {
-                    oId = tag.GetAttribute("ID");
-                    oName = tag.GetAttribute("name");
-                    oValue= tag.GetAttribute("VALUE");
-                }
-                else 
-                {
-                    oId = ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["ID"];
-                    oName = ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"];
-                    //if(oName.ToString()!="K" && tag.GetAttribute("SELECTED") == "selected")
-                    //{
-                        oValue = tag.GetAttribute("VALUE");
-                        //return;
-                    //}
-                    
-                }
-                oId = oId.ToString().Trim().Replace(oName.ToString().Trim(), "");
-                if (id==null || id.Trim()=="" || 
-                  (id!= oId.ToString() && !(id.Split('_').Length==2 &&
-                  oId.ToString().Split('_').Length==3)))                    
-                {
-                    RowIndex++;
-                    CopyRow(sheet, RowIndex, sourceRowIndex, 1, true);
-                    IsNewRow = true;
-                }
-                else
-                {
-                    IsNewRow = false;
-                }
-                try
-                {
-                    //string value = "";
-                    //if(tag.GetAttribute("$<TAGNAME>$") == "INPUT")
-                    //{
-                    //    value = ((Winista.Text.HtmlParser.Tags.InputTag)(node)).GetText();
-                    //}
-                    //else
-                    //{
-                    //    value = ((Winista.Text.HtmlParser.Tags.SelectTag)(node)).GetText();
-                    //}                    
-                    if (oValue != null)
-                    {
-                        ZhiLiuDianLiuShuChuEnum colIndex = (ZhiLiuDianLiuShuChuEnum)Enum.Parse(typeof(ZhiLiuDianLiuShuChuEnum), oName.ToString().Trim());
-                        sheet.GetRow(RowIndex).GetCell((int)colIndex).SetCellValue(oValue.ToString());
-                    }
-                }
-                catch(Exception ex)
-                {
-
-                }
-                id = oId.ToString();
-
-                start.Add(tag.StartPosition);
-            }
-            //子节点 
-            if (node.Children != null && node.Children.Count > 0)
-            {
-                paserData(node.FirstChild, sheet, RowIndex, sourceRowIndex, id);
-            }
-            //兄弟节点 
-            INode siblingNode = node.NextSibling;
-            while (siblingNode != null)
-            {
-                paserData(siblingNode, sheet, RowIndex, sourceRowIndex, id);
-                siblingNode = siblingNode.NextSibling;
-            }
-            return RowIndex;
-        }        
         #endregion 
 
         /// <summary>
@@ -778,71 +694,6 @@ namespace Langben.App.Controllers
                 #endregion
             }
         }
-    
-
-    /// <summary>
-    /// 插入行
-    /// </summary>
-    /// <param name="Sheet">指定操作的Sheet</param>
-    /// <param name="StartIndex">指定在第几行指入（插入行的位置）</param>
-    /// <param name="RowCount">指定要插入多少行</param>
-    /// <param name="OldRow">源单元格格式的行</param>
-    private void InsertRow(ISheet Sheet, int StartIndex, int RowCount, IRow OldRow)
-        {
-            #region 批量移动行
-            Sheet.ShiftRows(
-                StartIndex,                     //--开始行
-                Sheet.LastRowNum,               //--结束行
-                RowCount,                       //--移动大小(行数)--往下移动
-                true,                           //是否复制行高
-                false//,                        //是否重置行高
-                     //true                     //是否移动批注
-            );
-            #endregion
-
-            #region 对批量移动后空出的空行插，创建相应的行，并以插入行的上一行为格式源(即：插入行-1的那一行)
-            for (int i = StartIndex; i < RowCount + StartIndex - 1; i++)
-            {
-                IRow targetRow = null;
-                ICell sourceCell = null;
-                ICell targetCell = null;
-
-                targetRow = Sheet.CreateRow(i + 1);
-
-                for (int m = OldRow.FirstCellNum; m < OldRow.LastCellNum; m++)
-                {
-                    sourceCell = OldRow.GetCell(m);
-                    if (sourceCell == null)
-                        continue;
-                    targetCell = targetRow.CreateCell(m);
-
-                    //targetCell..Encoding = sourceCell.Encoding;
-                    targetCell.CellStyle = sourceCell.CellStyle;
-                    targetCell.SetCellType(sourceCell.CellType);
-                }
-                //CopyRow(sourceRow, targetRow);
-                //Util.CopyRow(sheet, sourceRow, targetRow);
-                //OldRow.CopyRowTo(StartIndex);               
-            }
-
-            IRow firstTargetRow = Sheet.GetRow(StartIndex);
-            ICell firstSourceCell = null;
-            ICell firstTargetCell = null;
-
-            for (int m = OldRow.FirstCellNum; m < OldRow.LastCellNum; m++)
-            {
-                firstSourceCell = OldRow.GetCell(m);
-                if (firstSourceCell == null)
-                    continue;
-                firstTargetCell = firstTargetRow.CreateCell(m);
-
-                //firstTargetCell.Encoding = firstSourceCell.Encoding;
-                firstTargetCell.CellStyle = firstSourceCell.CellStyle;
-                firstTargetCell.SetCellType(firstSourceCell.CellType);
-            }
-            #endregion
-        }
-
 IBLL.IPREPARE_SCHEMEBLL m_BLL;
         ValidationErrors validationErrors = new ValidationErrors();
         public PREPARE_SCHEMEController()
