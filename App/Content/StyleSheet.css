@@ -110,6 +110,8 @@ input {
     height: auto;
     clear: both; font-size:12px
 }
+.search-form{ width:335px; float:left}
+
 
 .input_search {
     height: 40px;
