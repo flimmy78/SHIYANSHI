@@ -16,6 +16,8 @@ using Langben.IBLL;
 using NPOI.HSSF.UserModel;
 using Langben.DAL.shiyanshi;
 using NPOI.SS.UserModel;
+using NPOI.SS.Util;
+using Antlr.Runtime;
 
 namespace Langben.App.Controllers
 {
@@ -32,10 +34,10 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult Index()
         {
-        
+
             return View();
         }
-         /// <summary>
+        /// <summary>
         /// 列表
         /// </summary>
         /// <returns></returns>
@@ -50,22 +52,22 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [SupportFilter]  
+        [SupportFilter]
         public ActionResult Details(string id)
         {
             ViewBag.Id = id;
             return View();
 
         }
- 
+
         /// <summary>
         /// 首次创建
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
         public ActionResult Create(string id)
-        { 
-            
+        {
+
             return View();
         }
 
@@ -75,8 +77,8 @@ namespace Langben.App.Controllers
         /// <param name="id">预备方案主键</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns> 
-        [SupportFilter] 
-        public ActionResult Edit(string ID="")
+        [SupportFilter]
+        public ActionResult Edit(string ID = "")
         {
             Langben.App.Models.VTEST_ITE_YuBei result = new Models.VTEST_ITE_YuBei();
             ViewBag.ID = ID;
@@ -89,8 +91,8 @@ namespace Langben.App.Controllers
                 ViewBag.ID = entity.ID;
                 ViewBag.SCHEMEID = entity.SCHEMEID;
                 IBLL.IVTEST_ITEBLL vBLL = new VTEST_ITEBLL();
-                vList= vBLL.GetByPREPARE_SCHEMEID(entity.ID);
-                result.vtest_ite = new PagedList<VTEST_ITE>(vList,1,int.MaxValue);
+                vList = vBLL.GetByPREPARE_SCHEMEID(entity.ID);
+                result.vtest_ite = new PagedList<VTEST_ITE>(vList, 1, int.MaxValue);
             }
             else
             {
@@ -160,11 +162,11 @@ namespace Langben.App.Controllers
             else
             {
                 result.Code = Common.ClientCode.Fail;
-                result.Message = Suggestion.UpdateFail + "未找到预备方案ID为【"+ID+"】的数据";
+                result.Message = Suggestion.UpdateFail + "未找到预备方案ID为【" + ID + "】的数据";
                 return Json(result); //提示插入失败
-            }           
+            }
 
-            
+
 
         }
         /// <summary>
@@ -178,7 +180,7 @@ namespace Langben.App.Controllers
             PREPARE_SCHEME entity = m_BLL.GetById(ID);
             string saveFileName = "";
             if (entity != null)
-            {              
+            {
                 int RowIndex = 0;
                 string templatePath = "../Template/原始记录-检定.xls";
                 string sheetName = "原始记录封皮及数据";
@@ -192,14 +194,14 @@ namespace Langben.App.Controllers
 
                 FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
                 IWorkbook hssfworkbook = new HSSFWorkbook(file);
-                ISheet sheet = hssfworkbook.GetSheet(sheetName);              
+                ISheet sheet = hssfworkbook.GetSheet(sheetName);
                 //单元格从0开始
                 //准确度等级
                 sheet.GetRow(11).GetCell(7).SetCellValue(entity.ACCURACY_GRADE);
                 //额定频率
                 sheet.GetRow(11).GetCell(23).SetCellValue(entity.RATED_FREQUENCY);
                 //脉冲常数
-                sheet.GetRow(12).GetCell(7).SetCellValue(entity.PULSE_CONSTANT);               
+                sheet.GetRow(12).GetCell(7).SetCellValue(entity.PULSE_CONSTANT);
 
                 if (entity.APPLIANCE_LABORATORY != null && entity.APPLIANCE_LABORATORY.Count > 0)
                 {
@@ -231,15 +233,16 @@ namespace Langben.App.Controllers
                 #region 检定所依据技术文件（代号、名称）
                 IVRULEBLL rBll = new VRULEBLL();
                 //List<RULE> rList = rBll.GetFirstModelBySCHEMEID(entity.SCHEMEID);
-                List<VRULE> rList = rBll.GetBySCHEMEID(entity.SCHEMEID);                
+                List<VRULE> rList = rBll.GetBySCHEMEID(entity.SCHEMEID);
                 if (rList != null && rList.Count > 0)
-                {                                                     
-                    IRow OldRow = sheet.GetRow(16);//获取源格式行
+                {
+                    IRow GCTemplateRow = sheet.GetRow(16);//获取源格式行
+                    int GCTemplateIndex = 16;//规程模板行号
                     if (rList.Count > 1)
                     {
-                        int RowCount = rList.Count - 1;
-                        RowIndex++;
-                        InsertRow(sheet, 17, RowCount, OldRow);
+                        int RowCount = rList.Count - 1;                        
+                        //InsertRow(sheet, 17, RowCount, GCTemplateRow);
+                        CopyRow(sheet, GCTemplateIndex+1, GCTemplateIndex, RowCount,false);
                     }
                     RowIndex = 16;
                     foreach (VRULE rEntity in rList)
@@ -259,7 +262,7 @@ namespace Langben.App.Controllers
                 //检定地点
                 sheet.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CHECK_PLACE);
 
-                RowIndex++ ;
+                RowIndex++;
                 //检定员
                 sheet.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CHECKERID);
                 //核验员
@@ -275,7 +278,7 @@ namespace Langben.App.Controllers
                 {
                     sheet.GetRow(RowIndex).GetCell(23).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
                 }
-                RowIndex=RowIndex+2;
+                RowIndex = RowIndex + 2;
                 //检定结论          
                 sheet.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CONCLUSION);
                 RowIndex++;
@@ -290,57 +293,96 @@ namespace Langben.App.Controllers
                 }
                 #region 暂时没有数据，不做
                 //检定所使用的计量标准装置
+                RowIndex = RowIndex + 6;
                 //检定所使用的主要计量器具
+                RowIndex = RowIndex + 6;
                 //比对和匝比试验使用的中间试品
+                RowIndex = RowIndex + 6;
+                //空白
+                RowIndex = RowIndex + 8;
                 #endregion
                 #region 检测项目
                 //RowIndex = RowIndex+2;
-                RowIndex = 56;//正式需要修改改为动态的
-                if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE!=null && 
-                    entity.QUALIFIED_UNQUALIFIED_TEST_ITE.Count>0)
+                //直流电流输出模板
+                RowIndex++;
+                int BTTemplateIndex = RowIndex ;//规程标题获取源格式行
+                RowIndex = RowIndex + 2;
+                int ZLDLSCTBTTemplateIndex = RowIndex;//直流电流输出表格表头获取源格式行
+                RowIndex = RowIndex + 2;
+                int ZLDLSCTZTemplateIndex = RowIndex;//直流电流表格注获取源格式行
+                RowIndex++;
+                int ZLDLSCTJLTemplateIndex = RowIndex;//直流电流表格结论获取源格式行
+                //结尾
+                RowIndex = RowIndex + 2;
+                int JWTemplateIndex = RowIndex;//结尾模板源格式行 
+
+                RowIndex++;
+
+                //RowIndex = RowIndex+6;//正式需要修改改为动态的
+                //RowIndex = RowIndex + 1;
+                //int BTTemplateIndex = RowIndex + 25;//规程标题获取源格式行
+                //int ZLDLSCTBTTemplateIndex = BTTemplateIndex + 2;////直流电流输出表格表头获取源格式行
+                //int ZLDLSCTZTemplateIndex = ZLDLSCTBTTemplateIndex + 2;////直流电流表格注获取源格式行
+                //int ZLDLSCTJLTemplateIndex = ZLDLSCTZTemplateIndex + 1;//直流电流表格结论获取源格式行
+
+                if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE != null &&
+                    entity.QUALIFIED_UNQUALIFIED_TEST_ITE.Count > 0)
                 {
                     int i = 1;
-                    int BTIndex = 55;
-                    int ZLDLSCTBTIndex = 50;
-                    IRow BTTemplate = sheet.GetRow(BTIndex);//规程标题获取源格式行
-                    IRow ZLDLSCTBTemplate = sheet.GetRow(ZLDLSCTBTIndex);//直流电流输出表格表头获取源格式行
-                    int ZLDLSCTZIndex = 53;
-                    IRow ZLDLSCTZTemplate = sheet.GetRow(ZLDLSCTZIndex);//直流电流表格注获取源格式行
-                    int ZLDLSCTJLIndex = 54;
-                    IRow ZLDLSCTJLTemplate = sheet.GetRow(ZLDLSCTJLIndex);//直流电流表格结论获取源格式行
+                    //int BTTemplateIndex = RowIndex+25;//规程标题获取源格式行
+                    //int ZLDLSCTBTTemplateIndex = BTTemplateIndex+2;////直流电流输出表格表头获取源格式行
+                    //IRow BTTemplate = sheet.GetRow(BTIndex);//规程标题获取源格式行
+                    //IRow ZLDLSCTBTemplate = sheet.GetRow(ZLDLSCTBTIndex);//直流电流输出表格表头获取源格式行
+                    //int ZLDLSCTZTemplateIndex = ZLDLSCTBTTemplateIndex+2;////直流电流表格注获取源格式行
+                    //IRow ZLDLSCTZTemplate = sheet.GetRow(ZLDLSCTZIndex);//直流电流表格注获取源格式行
+                    //int ZLDLSCTJLTemplateIndex = ZLDLSCTZTemplateIndex+1;//直流电流表格结论获取源格式行
+                    //IRow ZLDLSCTJLTemplate = sheet.GetRow(ZLDLSCTJLIndex);//直流电流表格结论获取源格式行
                     foreach (QUALIFIED_UNQUALIFIED_TEST_ITE iEntity in entity.QUALIFIED_UNQUALIFIED_TEST_ITE)
                     {
-                        
-                        InsertRow(sheet, RowIndex, 1, BTTemplate);
 
+                        //InsertRow(sheet, RowIndex, 1, BTTemplate);
+                        CopyRow(sheet, RowIndex, BTTemplateIndex, 1, true);
                         string celStr = i.ToString() + "、";
 
-                        if (iEntity.RULENAME != null && iEntity.RULENAME.Trim()!="")
+                        if (iEntity.RULENAME != null && iEntity.RULENAME.Trim() != "")
                         {
                             celStr = celStr + iEntity.RULENAME.Trim() + "：";
                         }
-                        if(iEntity.CONCLUSION!=null && iEntity.CONCLUSION.Trim()!="")
+                        if (iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
                         {
-                            celStr = celStr + iEntity.CONCLUSION.Trim() ;
+                            celStr = celStr + iEntity.CONCLUSION.Trim();
                         }
                         sheet.GetRow(RowIndex).GetCell(0).SetCellValue(celStr);
-                        if(iEntity.INPUTSTATE == InputStateEnums.ZhiLiuDianLiuShuChu.ToString())
+                        if (iEntity.INPUTSTATE == InputStateEnums.ZhiLiuDianLiuShuChu.ToString())
                         {
                             RowIndex++;
-                            InsertRow(sheet, RowIndex, 1, ZLDLSCTBTemplate);
+                            //InsertRow(sheet, RowIndex, 1, ZLDLSCTBTemplate);
+                            //sheet.CopyRow(ZLDLSCTBTIndex, RowIndex);
+                            CopyRow(sheet, RowIndex, ZLDLSCTBTTemplateIndex, 1,true);
+                            
                             RowIndex++;
-                            InsertRow(sheet, RowIndex, 1, ZLDLSCTZTemplate);
+
+                            //Parser parser = new Parser(new Winista.Text.HtmlParser.Lex.Lexer("HtmlString"));
+                            //iEntity.HTMLVALUE
+
+
+                            //InsertRow(sheet, RowIndex, 1, ZLDLSCTZTemplate);
+                            //sheet.CopyRow(ZLDLSCTZIndex, RowIndex);
+                            CopyRow(sheet, RowIndex, ZLDLSCTZTemplateIndex, 1, true);
                             if (iEntity.REMARK != null)
                             {
-                                sheet.GetRow(RowIndex).GetCell(0).SetCellValue("注：" + iEntity.REMARK );
+
+                                sheet.GetRow(RowIndex).GetCell(0).SetCellValue("注：" + iEntity.REMARK);
                             }
                             else
                             {
-                                sheet.GetRow(RowIndex).GetCell(0).SetCellValue("注：" );
+                                sheet.GetRow(RowIndex).GetCell(0).SetCellValue("注：");
                             }
                             RowIndex++;
-                            InsertRow(sheet, RowIndex, 1, ZLDLSCTJLTemplate);
-                            if(iEntity.CONCLUSION!=null)
+                            //InsertRow(sheet, RowIndex, 1, ZLDLSCTJLTemplate);
+                            //sheet.CopyRow(ZLDLSCTJLIndex, RowIndex);
+                            CopyRow(sheet, RowIndex, ZLDLSCTJLTemplateIndex, 1, true);
+                            if (iEntity.CONCLUSION != null)
                             {
                                 sheet.GetRow(RowIndex).GetCell(0).SetCellValue("结论：" + iEntity.CONCLUSION);
                             }
@@ -348,15 +390,18 @@ namespace Langben.App.Controllers
                             {
                                 sheet.GetRow(RowIndex).GetCell(0).SetCellValue("结论：");
                             }
-                           
+
 
                         }
-                        RowIndex=RowIndex+2;
+                        RowIndex = RowIndex + 2;
                         i++;
-                        
+
                     }
                 }
-                #endregion 
+                #endregion
+
+                              
+                CopyRow(sheet, RowIndex, JWTemplateIndex, 1,true);
 
 
 
@@ -378,15 +423,100 @@ namespace Langben.App.Controllers
             result.Code = Common.ClientCode.Fail;
             result.Message = Suggestion.UpdateFail + "未找到预备方案ID为【" + ID + "】的数据";
             return Json(result); //提示插入失败
-        }      
+        }
         /// <summary>
-        /// 插入行
+        /// 复制行格式并插入指定行数
         /// </summary>
-        /// <param name="Sheet">指定操作的Sheet</param>
-        /// <param name="StartIndex">指定在第几行指入（插入行的位置）</param>
-        /// <param name="RowCount">指定要插入多少行</param>
-        /// <param name="OldRow">源单元格格式的行</param>
-        private void InsertRow(ISheet Sheet, int StartIndex, int RowCount, IRow OldRow)
+        /// <param name="sheet">当前sheet</param>
+        /// <param name="startRowIndex">起始行位置</param>
+        /// <param name="sourceRowIndex">模板行位置</param>
+        /// <param name="insertCount">插入行数</param>
+        /// <param name="IsCopyContent">是否复制内容</param>
+        private void CopyRow(ISheet sheet, int startRowIndex, int sourceRowIndex, int insertCount, bool IsCopyContent = false)
+        {
+            IRow sourceRow = sheet.GetRow(sourceRowIndex);
+            int sourceCellCount = sourceRow.Cells.Count;
+
+            //1. 批量移动行,清空插入区域
+            sheet.ShiftRows(startRowIndex, //开始行
+                             sheet.LastRowNum, //结束行
+                             insertCount, //插入行总数
+                             true,        //是否复制行高
+                             false        //是否重置行高
+                             );
+
+            int startMergeCell = -1; //记录每行的合并单元格起始位置
+            for (int i = startRowIndex; i < startRowIndex + insertCount; i++)
+            {
+                IRow targetRow = null;
+                ICell sourceCell = null;
+                ICell targetCell = null;
+
+                targetRow = sheet.CreateRow(i);
+                targetRow.Height = sourceRow.Height;//复制行高
+
+                for (int m = sourceRow.FirstCellNum; m < sourceRow.LastCellNum; m++)
+                {
+                    sourceCell = sourceRow.GetCell(m);
+                    if (sourceCell == null)
+                        continue;
+                    targetCell = targetRow.CreateCell(m);
+                    targetCell.CellStyle = sourceCell.CellStyle;//赋值单元格格式
+                    targetCell.SetCellType(sourceCell.CellType);
+
+                    //以下为复制模板行的单元格合并格式
+                    if (sourceCell.IsMergedCell)
+                    {
+                        if (startMergeCell <= 0)
+                            startMergeCell = m;
+                        else if (startMergeCell > 0 && sourceCellCount == m + 1)
+                        {
+                            sheet.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, m));
+                            startMergeCell = -1;
+                        }
+                    }
+                    else
+                    {
+                        if (startMergeCell >= 0)
+                        {
+                            sheet.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, m - 1));
+                            startMergeCell = -1;
+                        }
+                    }
+                }
+                if (IsCopyContent)
+                {
+                    sheet.CopyRow(sourceRowIndex, targetRow.RowNum);
+                }
+            }
+            if (IsCopyContent)
+            {
+                #region 移除
+                int StartIndex = startRowIndex + insertCount;
+                int EndIndex = StartIndex + insertCount;
+                for (int i = StartIndex; i <= EndIndex; i++)
+                {
+                    IRow row = sheet.GetRow(i);
+                    if (row == null)
+                    {
+                        continue;
+                    }
+                    sheet.RemoveRow(row);
+                }
+
+                #endregion
+            }
+        }
+    
+
+    /// <summary>
+    /// 插入行
+    /// </summary>
+    /// <param name="Sheet">指定操作的Sheet</param>
+    /// <param name="StartIndex">指定在第几行指入（插入行的位置）</param>
+    /// <param name="RowCount">指定要插入多少行</param>
+    /// <param name="OldRow">源单元格格式的行</param>
+    private void InsertRow(ISheet Sheet, int StartIndex, int RowCount, IRow OldRow)
         {
             #region 批量移动行
             Sheet.ShiftRows(
