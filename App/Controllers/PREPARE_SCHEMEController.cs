@@ -17,7 +17,11 @@ using NPOI.HSSF.UserModel;
 using Langben.DAL.shiyanshi;
 using NPOI.SS.UserModel;
 using NPOI.SS.Util;
-using Antlr.Runtime;
+using Winista.Text.HtmlParser;
+using Winista.Text.HtmlParser.Lex;
+using Winista.Text.HtmlParser.Util;
+using Winista.Text.HtmlParser.Tags;
+using Winista.Text.HtmlParser.Filters;
 
 namespace Langben.App.Controllers
 {
@@ -26,6 +30,7 @@ namespace Langben.App.Controllers
     /// </summary>
     public class PREPARE_SCHEMEController : BaseController
     {
+        IList<int> start = new List<int>();
 
         /// <summary>
         /// 列表
@@ -308,7 +313,9 @@ namespace Langben.App.Controllers
                 int BTTemplateIndex = RowIndex ;//规程标题获取源格式行
                 RowIndex = RowIndex + 2;
                 int ZLDLSCTBTTemplateIndex = RowIndex;//直流电流输出表格表头获取源格式行
-                RowIndex = RowIndex + 2;
+                RowIndex++;
+                int ZLDLSCTNRTemplateIndex = RowIndex;//直流电流输出表格内容获取源格式行
+                RowIndex ++;
                 int ZLDLSCTZTemplateIndex = RowIndex;//直流电流表格注获取源格式行
                 RowIndex++;
                 int ZLDLSCTJLTemplateIndex = RowIndex;//直流电流表格结论获取源格式行
@@ -360,10 +367,37 @@ namespace Langben.App.Controllers
                             //sheet.CopyRow(ZLDLSCTBTIndex, RowIndex);
                             CopyRow(sheet, RowIndex, ZLDLSCTBTTemplateIndex, 1,true);
                             
-                            RowIndex++;
+                            //RowIndex++;
 
-                            //Parser parser = new Parser(new Winista.Text.HtmlParser.Lex.Lexer("HtmlString"));
+                            //Winista.Text.HtmlParser.Parser parser = new Winista.Text.HtmlParser.Parser(new Winista.Text.HtmlParser.Lex.Lexer("HtmlString"));
                             //iEntity.HTMLVALUE
+
+                            #region 解析html
+                            Lexer lexer_Input = new Lexer(iEntity.HTMLVALUE);
+                            Parser parser_Input = new Parser(lexer_Input);
+                            Lexer lexer_Option = new Lexer(iEntity.HTMLVALUE);
+                            Parser parser_Option = new Parser(lexer_Option);
+                            //NodeFilter filter = new NodeClassFilter(typeof(Winista.Text.HtmlParser.Tags.Div));
+                            NodeFilter filter_Input = new TagNameFilter("input");
+                            NodeFilter filter_Option = new TagNameFilter("OPTION");
+                            //NodeFilter filter_Option = new NodeClassFilter(typeof(Winista.Text.HtmlParser.Tags.OptionTag));
+
+                            
+
+                            //NodeList nodeList = parser.Parse(null);
+                            NodeList nodeList_Input = parser_Input.Parse(filter_Input);
+                            NodeList nodeList_Option = parser_Option.Parse(filter_Option);
+
+                            RowIndex=paserData(nodeList_Input, nodeList_Option, sheet, RowIndex, ZLDLSCTNRTemplateIndex);
+                            RowIndex++;
+                            //if (nodeList.Count >0)
+                            //{
+                            //    for (int j = 0; j < nodeList.Count; j++)
+                            //    {
+                            //        RowIndex = paserData(nodeList[j], sheet,RowIndex, ZLDLSCTNRTemplateIndex, null);
+                            //    }
+                            //}
+                            #endregion
 
 
                             //InsertRow(sheet, RowIndex, 1, ZLDLSCTZTemplate);
@@ -424,6 +458,243 @@ namespace Langben.App.Controllers
             result.Message = Suggestion.UpdateFail + "未找到预备方案ID为【" + ID + "】的数据";
             return Json(result); //提示插入失败
         }
+
+        #region 解析html
+        private ITag getTag(INode node)
+        {
+            if (node == null)
+                return null;
+            return node is ITag ? node as ITag : null;
+        }
+        /// <summary>
+        /// 设置行号，同时插入行
+        /// </summary>
+        /// <param name="nodeList"></param>
+        /// <returns></returns>
+        private Dictionary<string,int> SetRowIndex(NodeList nodeList, ISheet sheet, int startRowIndex, int sourceRowIndex,out int rowIndex)
+        {            
+            Dictionary<string, int> dic = new Dictionary<string, int>();
+
+            if (nodeList.Count > 0)
+            {
+                object Id = string.Empty;
+                object Name = string.Empty;
+                for (int j = 0; j < nodeList.Count; j++)
+                {
+                    ITag tag = getTag(nodeList[j]);
+                    Id = tag.GetAttribute("ID");
+                    Name = tag.GetAttribute("name");
+                    if(Id!=null && Id.ToString().Trim()!="" && Name!=null && Name.ToString().Trim()!="")
+                    {
+                        Id = Id.ToString().Trim().Replace(Name.ToString().Trim(), "");
+                        if(Id.ToString()!="" && Id.ToString().Split('_').Length>=4  && !dic.ContainsKey(Id.ToString()))
+                        {
+                            startRowIndex++;
+                            dic.Add(Id.ToString(), startRowIndex);
+                            CopyRow(sheet, startRowIndex, sourceRowIndex, 1, true);
+                            
+                        }
+                    }
+                }                
+            }
+            rowIndex = startRowIndex;
+            return dic;         
+        }
+        /// <summary>
+        /// 解析html，然后行号
+        /// </summary>
+        /// <param name="nodeList_Input">文本框</param>
+        /// <param name="nodeList_Option">下拉框</param>
+        /// <param name="sheet"></param>
+        /// <param name="startRowIndex">复制开始行号</param>
+        /// <param name="sourceRowIndex">复制源行号</param>
+        /// <returns></returns>
+        private int paserData(NodeList nodeList_Input, NodeList nodeList_Option, ISheet sheet, int startRowIndex, int sourceRowIndex)
+        {
+            int rowIndex = startRowIndex;
+            Dictionary<string, int> dic = SetRowIndex(nodeList_Input, sheet, startRowIndex, sourceRowIndex,out rowIndex);
+            if (dic != null && dic.Count > 0)
+            {
+                object Id = string.Empty;
+                object Name = string.Empty;
+                object Value = string.Empty;
+
+                #region 输出文本框内容
+                for (int j = 0; j < nodeList_Input.Count; j++)
+                {
+                    ITag tag = getTag(nodeList_Input[j]);
+                    Id = tag.GetAttribute("ID");
+                    Name = tag.GetAttribute("name");
+                    Value = tag.GetAttribute("VALUE");
+                    if (Id != null && Id.ToString().Trim() != "" && Name != null && Name.ToString().Trim() != "")
+                    {
+                        Id = Id.ToString().Trim().Replace(Name.ToString().Trim(), "");
+                        if (!dic.ContainsKey(Id.ToString()) && dic.ContainsKey(Id.ToString() + "_0"))
+                        {
+                            Id = Id.ToString() + "_0";
+                        }
+                        if (dic.ContainsKey(Id.ToString()))
+                        {
+                            try
+                            {
+                                ZhiLiuDianLiuShuChuEnum colIndex = (ZhiLiuDianLiuShuChuEnum)Enum.Parse(typeof(ZhiLiuDianLiuShuChuEnum), Name.ToString().Trim());
+                                sheet.GetRow(dic[Id.ToString()]).GetCell((int)colIndex).SetCellValue(Value.ToString());
+                            }
+                            catch (Exception ex)
+                            { }
+                        }
+
+                    }
+                }
+                #endregion 
+
+                #region 输出下拉框内容
+                for (int j = 0; j < nodeList_Option.Count; j++)
+                {
+                    ITag tag = getTag(nodeList_Option[j]);
+
+                    if ((((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"] != null &&
+               ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"].ToString() != "K"
+               && tag.GetAttribute("SELECTED") == "selected"))
+                    {
+                        Id = ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["ID"];
+                        Name = ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"];
+                        Value = tag.GetAttribute("VALUE");
+                        if (Id != null && Id.ToString().Trim() != "" && Name != null && Name.ToString().Trim() != "")
+                        {
+                            Id = Id.ToString().Trim().Replace(Name.ToString().Trim(), "");
+                            if(!dic.ContainsKey(Id.ToString()) && dic.ContainsKey(Id.ToString() + "_0"))
+                            {
+                                Id = Id.ToString() + "_0";
+                            }
+                            if (dic.ContainsKey(Id.ToString()))
+                            {
+                                try
+                                {
+                                    ZhiLiuDianLiuShuChuEnum colIndex = (ZhiLiuDianLiuShuChuEnum)Enum.Parse(typeof(ZhiLiuDianLiuShuChuEnum), Name.ToString().Trim());
+                                    sheet.GetRow(dic[Id.ToString()]).GetCell((int)colIndex).SetCellValue(Value.ToString());
+                                }
+                                catch (Exception ex)
+                                { }
+                            }
+                        }
+                    }
+                }
+                #endregion 
+
+            }
+            return rowIndex;
+
+        }
+        /// <summary>
+        /// 解析html
+        /// </summary>
+        /// <param name="node">节点</param>
+        /// <param name="sheet"></param>
+        /// <param name="startRowIndex">插入开始行号</param>
+        /// <param name="sourceRowIndex">模板行号</param>
+        /// <param name="id"></param>
+        private int paserData(INode node, ISheet sheet, int startRowIndex, int sourceRowIndex,string id)
+        {
+            int RowIndex = startRowIndex;
+            ITag tag = getTag(node);
+            bool IsNewRow = false;
+            //if (tag != null && !tag.IsEndTag() && !start.Contains(tag.StartPosition) 
+            //    && tag.GetAttribute("ID")!=null && tag.GetAttribute("name") !=null 
+            //    //&& (tag.GetAttribute("$<TAGNAME>$")== "INPUT" || tag.GetAttribute("$<TAGNAME>$")== "select")
+            //    //&& tag.GetAttribute("name").ToString().Trim()!="K"
+            //    )
+            //{
+
+                if (tag != null && !tag.IsEndTag() && !start.Contains(tag.StartPosition)
+               //&& tag.GetAttribute("$<TAGNAME>$") != "select"
+               && ((tag.GetAttribute("ID") != null && tag.GetAttribute("name") != null && tag.GetAttribute("$<TAGNAME>$") == "input")
+               || (tag.GetAttribute("$<TAGNAME>$")== "option" && ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"]!=null &&
+               ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"].ToString()!= "K"
+               && tag.GetAttribute("SELECTED") == "selected"))              
+               )
+            {
+                //object oId = tag.GetAttribute("ID");
+                //object oName = tag.GetAttribute("name");
+                //object oClass = tag.GetAttribute("class");
+                //this.txtResult.Text += tag.TagName + ":\r\nID:" + oId + " Name:" + oName + " Class:" + oClass + " StartPosition:" + tag.StartPosition.ToString() + "\r\n";
+                object oId = "";
+                object oName = "";
+
+                object oValue = null;
+
+
+                if (tag.GetAttribute("$<TAGNAME>$") == "input")
+                {
+                    oId = tag.GetAttribute("ID");
+                    oName = tag.GetAttribute("name");
+                    oValue= tag.GetAttribute("VALUE");
+                }
+                else 
+                {
+                    oId = ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["ID"];
+                    oName = ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"];
+                    //if(oName.ToString()!="K" && tag.GetAttribute("SELECTED") == "selected")
+                    //{
+                        oValue = tag.GetAttribute("VALUE");
+                        //return;
+                    //}
+                    
+                }
+                oId = oId.ToString().Trim().Replace(oName.ToString().Trim(), "");
+                if (id==null || id.Trim()=="" || 
+                  (id!= oId.ToString() && !(id.Split('_').Length==2 &&
+                  oId.ToString().Split('_').Length==3)))                    
+                {
+                    RowIndex++;
+                    CopyRow(sheet, RowIndex, sourceRowIndex, 1, true);
+                    IsNewRow = true;
+                }
+                else
+                {
+                    IsNewRow = false;
+                }
+                try
+                {
+                    //string value = "";
+                    //if(tag.GetAttribute("$<TAGNAME>$") == "INPUT")
+                    //{
+                    //    value = ((Winista.Text.HtmlParser.Tags.InputTag)(node)).GetText();
+                    //}
+                    //else
+                    //{
+                    //    value = ((Winista.Text.HtmlParser.Tags.SelectTag)(node)).GetText();
+                    //}                    
+                    if (oValue != null)
+                    {
+                        ZhiLiuDianLiuShuChuEnum colIndex = (ZhiLiuDianLiuShuChuEnum)Enum.Parse(typeof(ZhiLiuDianLiuShuChuEnum), oName.ToString().Trim());
+                        sheet.GetRow(RowIndex).GetCell((int)colIndex).SetCellValue(oValue.ToString());
+                    }
+                }
+                catch(Exception ex)
+                {
+
+                }
+                id = oId.ToString();
+
+                start.Add(tag.StartPosition);
+            }
+            //子节点 
+            if (node.Children != null && node.Children.Count > 0)
+            {
+                paserData(node.FirstChild, sheet, RowIndex, sourceRowIndex, id);
+            }
+            //兄弟节点 
+            INode siblingNode = node.NextSibling;
+            while (siblingNode != null)
+            {
+                paserData(siblingNode, sheet, RowIndex, sourceRowIndex, id);
+                siblingNode = siblingNode.NextSibling;
+            }
+            return RowIndex;
+        }        
+        #endregion 
+
         /// <summary>
         /// 复制行格式并插入指定行数
         /// </summary>
