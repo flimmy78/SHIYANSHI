@@ -135,7 +135,8 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Winista.HtmlParser">
+    <Reference Include="Winista.HtmlParser, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Winista.HtmlParser.dll</HintPath>
     </Reference>
   </ItemGroup>
