@@ -24,7 +24,7 @@ namespace Langben.DAL
 			public object ID { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "方案名称", Order = 2)]
+			[Display(Name = "名称", Order = 2)]
 			public object NAME { get; set; }
 
 			[ScaffoldColumn(true)]
@@ -52,7 +52,7 @@ namespace Langben.DAL
 			public object COPYID { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "承接实验室", Order = 9)]
+			[Display(Name = "实验室", Order = 9)]
 			public object UNDERTAKE_LABORATORYID { get; set; }
 
 			[ScaffoldColumn(true)]

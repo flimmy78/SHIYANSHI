@@ -85,4 +85,60 @@ namespace Langben.DAL.shiyanshi
         中间 = 1,
         结束=2
     }
+    /// <summary>
+    /// 直流电流输出单元格位置设置
+    /// </summary>
+    public enum ZhiLiuDianLiuShuChuEnum
+    {
+        /// <summary>
+        /// 量程
+        /// </summary>
+        RANGE = 0,
+        /// <summary>
+        /// 量程单位
+        /// </summary>
+        RANGE_UNIT = 2,
+        /// <summary>
+        /// 选用电阻阻值
+        /// </summary>
+        RESISTANCE = 3,
+        /// <summary>
+        /// 输出示值
+        /// </summary>
+        OUTPUT_VALUE = 7,
+        /// <summary>
+        /// 输出示值单位
+        /// </summary>
+        OUTPUT_VALUE_UNIT = 11,
+        /// <summary>
+        /// 读数值
+        /// </summary>
+        READ_VALUE = 12,
+        /// <summary>
+        /// 读数值单位
+        /// </summary>
+        READ_VALUE_UNIT = 16,
+        /// <summary>
+        /// 输出实际值
+        /// </summary>
+        ACTUAL_OUTPUT_VALUE = 17,
+        /// <summary>
+        /// 输出实际值单位
+        /// </summary>
+        ACTUAL_OUTPUT_VALUE_UNIT = 21,
+        /// <summary>
+        /// 相对误差
+        /// </summary>
+        RELATIVE_ERROR = 23,
+        /// <summary>
+        /// 校准结果的不确定度U(k=2)
+        /// </summary>
+        UNCERTAINTY_DEGREE = 26,
+        /// <summary>
+        /// 校准结果的不确定度U(k=2)单位
+        /// </summary>
+        UNCERTAINTY_DEGREE_UNIT = 30          
+                  
+    }
+
 }
