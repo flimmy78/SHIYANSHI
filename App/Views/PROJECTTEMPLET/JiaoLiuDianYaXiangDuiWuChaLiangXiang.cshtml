@@ -259,22 +259,25 @@ else
             if (rowidx == 0) {
                 //量程
                 htmlString.push(SetTDHtml(rowspanIdx, "RANGE", lianChengID, null, txtNumber));
-            }      
-            //显示值
-            htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, ""));
-            //显示值2
-            htmlString.push(SetTDHtml(1, "READ_VALUE2", HangHaoID, rowidx, ""));
+                //显示值
+                htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, ""));
+                //显示值2
+                htmlString.push(SetTDHtml(1, "READ_VALUE2", HangHaoID, rowidx, ""));
 
-            //标准值
-            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, ""));
-            //标准值2
-            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE2", HangHaoID, rowidx, ""));
-            //相对误差
-            htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, ""));
-            //相对误差2
-            htmlString.push(SetTDHtml(1, "RELATIVE_ERROR2", HangHaoID, rowidx, ""));
-            //校准结果的不确定度
-            htmlString.push(SetTDHtml(1, "UNCERTAINTY_DEGREE", HangHaoID, rowidx, ""));
+                //标准值
+                htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, ""));
+                //标准值2
+                htmlString.push(SetTDHtml(1, "OUTPUT_VALUE2", HangHaoID, rowidx, ""));
+                //相对误差
+                htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, ""));
+                //相对误差2
+                htmlString.push(SetTDHtml(1, "RELATIVE_ERROR2", HangHaoID, rowidx, ""));
+                //校准结果的不确定度
+                htmlString.push(SetTDHtml(1, "UNCERTAINTY_DEGREE", HangHaoID, rowidx, ""));
+
+
+            }
+
             //输出示值
 
             var changerHTML = "onblur=''";
