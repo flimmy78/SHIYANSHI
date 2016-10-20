@@ -1,0 +1,299 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>直流电压（电流）测量-正负极性-相对误差（多通道）</title>
+    <link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="/Content/default.css" rel="stylesheet" />
+    <link href="/Content/StyleSheet.css" rel="stylesheet" />
+
+
+    <script src="/Scripts/jquery.min.js"></script>
+    <script src="/Scripts/JScriptCommon.js"></script>
+    <script src="/Res/easyui/jquery.easyui.min.js"></script>
+    <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
+
+
+
+
+</head>
+<body class="easyui-layout">
+    <input type="hidden" id="rowindex" value="1" />
+    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+            <table>
+                <tr>
+
+                    <td>
+                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a>
+                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="CreateTable()">保存检测项</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+        <div class="mt10" id="tongdao">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_1">
+                <thead>
+                    <tr>
+                        <th rowspan="2" align="center" width="140">量程</th>
+                        <th rowspan="2" align="center" width="140">标准值</th>
+                        <th colspan="2" align="center">
+                            显示值                             <select class="my-combobox" name="sssss" id="sssss" onchange="changeValue(this)">
+                                <option value="AL">&nbsp;&nbsp; </option>
+                                <option value="AK">CH1</option>
+                                <option value="AZ">CH2</option>
+                                <option value="AR">CH3</option>
+                                <option value="CA">CH4</option>
+
+
+                            </select>
+                        </th>
+                        <th colspan="2" align="center">相对误差</th>
+                        <th align="center">校准结果的不确定度</th>
+                    </tr>
+                    <tr>
+                        <th align="center" class="f14"><b>+</b></th>
+                        <th align="center" class="f14"><b>-</b></th>
+                        <th align="center" class="f14"><b>+</b></th>
+                        <th align="center" class="f14"><b>-</b></th>
+                        <th align="center">
+                            U(K = <select class="my-combobox" name="state">
+                                <option value="AL">2 </option>
+                                <option value="AK">3</option>
+                                <option value="AZ">4</option>
+
+
+                            </select>)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_1"></tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open'); set('1')">增加量程</a></td>
+
+                    </tr>
+                </tfoot>
+            </table>
+
+
+
+        </div>
+
+        <div class="mt10">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
+
+                <tr>
+                    <th width="40">注：</th>
+                    <td colspan="6"><input class="my-textbox input-width" name="" data-options="multiline:true" style="height:30px; width:95%"></td>
+                </tr>
+                <tr>
+                    <th width="40">结论：</th>
+                    <td colspan="6"><input class="my-textbox input-width" name="" data-options="multiline:true" style="height:30px; width:95%"></td>
+                </tr>
+
+
+            </table>
+        </div>
+
+
+    </div>
+
+    <!--增加量程弹层-->
+    <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return CreateRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+        <table>
+            <tr>
+                <td width="80" align="right">量程值：</td>
+                <td><input type="text" id="txtNumber" class="my-textbox " style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">检测点数：</td>
+                <td><input type="text" id="txtPoint" class="my-textbox " style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">小数点位数：</td>
+                <td><input type="text" id="txtPointLen" class="my-textbox " style="width:200px" /></td>
+            </tr>
+        </table>
+    </div>
+    <!--/增加量程弹层-->
+
+    <script type="text/javascript" language="javascript">
+
+        //共有的通道数量
+        var tableIdx = 1;
+        //创建通道
+        function CreateTable() {
+            tableIdx++;
+            var tfoot = " <tfoot>"
+                + "<tr><td colspan='7'><a href='javascript:void(0)' class='easyui-linkbutton' data-options=\"plain:true,iconCls:'icon-add'\" onclick=\"$('#dlg').dialog('open');set('" + tableIdx + "')\">增加量程</a></td></tr> </tfoot>";
+            var table = "<table width='100%' border='0' cellspacing='0' cellpadding='0' class='tbl mt10' id='tongdao_" + tableIdx + "'>"
+                + "<thead><tr><th rowspan='2' align='center' width='140'>量程</th><th rowspan='2' align='center' width='140'>标准值</th> <th colspan='2' align='center'>显示值 <select class='my-combobox' name='state'><option value='AL'>&nbsp;&nbsp; </option><option value='AK'>CH1</option><option value='AZ'>CH2</option><option value='AR'>CH3</option><option value='CA'>CH4</option></select></th><th colspan='2' align='center'>相对误差</th><th align='center'>校准结果的不确定度</th></tr><tr><th align='center'>+</th><th align='center'>-</th><th align='center'>+</th><th align='center'>-</th><th align='center'>U(K=<select class='my-combobox' name='state' ><option value='AL'>2 </option><option value='AK'>3</option><option value='AZ'>4</option></select>)</th></tr></thead>"
+                + "<tbody id='tbody_" + tableIdx + "'></tbody>"
+                + tfoot
+                + "</table>";
+
+            var tagobj = $(table).appendTo($('#tongdao'));
+            $.parser.parse(tagobj);
+
+
+        };
+        function set(idx) {
+            $("#rowindex").val(idx);
+            // alert($("#rowindex").val());
+        }
+        function CreateRow() {
+            var idx = $("#rowindex").val();
+            var rowspanIdx = $("#txtPoint").val();     //检测点数
+            var txtNumber = $("#txtNumber").val(); //量程
+            var standardValue = "";
+            var htmlString = [];
+            var rowLength = $("#tbody_" + idx + " tr").length;
+            for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
+                rowLength++;
+                htmlString.push("<tr rowindex='" + rowLength + "'>");
+                if (rowidx == 0)
+                    htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"center\"><input class=\"my-textbox input-width\" value='" + txtNumber + "' /><select class=\"my-combobox\" name=\"state_" + tableIdx + rowLength + "_" + rowLength + "\" id=\"state_" + tableIdx + "_" + rowLength + "\" onchange=\"changeValue(this)\" style=\"width:50px; height:25px\" ><option value=\"MV\">MV</option><option value=\"KV\">KV</option><option value=\"V\">V</option><option value=\"mV\">mV</option><option value=\"μv\">μv</option></select></td>");
+
+                for (var td1 = 0; td1 < 3; td1++) {
+                    if (td1 == 0)//标准值这列
+                        if (rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10)
+                            standardValue = calculate(rowspanIdx)[rowidx];
+                        else
+                            standardValue = "";
+                    htmlString.push("<td align=\"center\"><input class=\"my-textbox input-width\" value='" + standardValue + "' /><select class=\"my-combobox\" name=\"state\" style=\"width:50px; height:25px\"><option value=\"MV\">MV</option><option value=\"KV\">KV</option><option value=\"V\">V</option><option value=\"mV\">mV</option><option value=\"μv\">μv</option></select></td>");
+                }
+                for (var td2 = 0; td2 < 2; td2++) {
+                    htmlString.push("<td align=\"center\"><input  class=\"my-textbox input-width\" /></td>");
+                }
+                htmlString.push("<td align=\"center\"><input  class=\"my-textbox input-width\" /></td>");
+                htmlString.push("</tr>");
+
+            }
+
+
+
+            htmlString = htmlString.join("");
+
+            var tagRow = $("#tbody_" + idx).append(htmlString);
+
+            $.parser.parse(tagRow);
+        }
+
+        ///计算标准值
+        function calculate(point) {
+            var txtNumber = $("#txtNumber").val(); //量程
+            var pointLen = $("#txtPointLen").val(); //小数点位数
+            var arry = new Array();
+            if (point == 3) {
+                //输入的检测点是3的时候，按照量程*100%，量程*60%，量程*10%作为默认标准值显示
+                arry.push((txtNumber * 1).toFixed(pointLen));
+                arry.push((txtNumber * 0.6).toFixed(pointLen));
+                arry.push((txtNumber * 0.1).toFixed(pointLen));
+            }
+            if (point == 5) {
+                //输入的检测点是5的时候，按照量程*100%，量程*80%，量程*60%，量程*40%，量程*20%作为默认标准值显示
+                arry.push((txtNumber * 1).toFixed(pointLen));
+                arry.push((txtNumber * 0.8).toFixed(pointLen));
+                arry.push((txtNumber * 0.6).toFixed(pointLen));
+                arry.push((txtNumber * 0.4).toFixed(pointLen));
+                arry.push((txtNumber * 0.2).toFixed(pointLen));
+            }
+            if (point == 10) {
+                //输入的检测点是10的时候，按照量程*100%，量程*90%，量程*80%，量程*70%，量程*60%，量程*50%，量程*40%，量程*30%，量程*20%，量程*10%，作为默认标准值显示
+                arry.push((txtNumber * 1).toFixed(pointLen));
+                arry.push((txtNumber * 0.9).toFixed(pointLen));
+                arry.push((txtNumber * 0.8).toFixed(pointLen));
+                arry.push((txtNumber * 0.7).toFixed(pointLen));
+                arry.push((txtNumber * 0.6).toFixed(pointLen));
+                arry.push((txtNumber * 0.5).toFixed(pointLen));
+                arry.push((txtNumber * 0.4).toFixed(pointLen));
+                arry.push((txtNumber * 0.3).toFixed(pointLen));
+                arry.push((txtNumber * 0.2).toFixed(pointLen));
+                arry.push((txtNumber * 0.1).toFixed(pointLen));
+            }
+            return arry;
+        }
+
+        //优化保留两位小数 zhanghui
+        Number.prototype.toFixed = function toFixed(s) {
+            var IsFuShu = false;//判断是否是负数，负数单独处理
+            var je = 0;
+            if (this.toString().indexOf('-') >= 0) {
+                IsFuShu = true;
+                je = this.toString().replace('-', '');
+            } else je = this;
+            changenum = (parseInt(je * Math.pow(10, s) + 0.5) / Math.pow(10, s)).toString();
+            //}
+
+            index = changenum.indexOf(".");
+            if (index < 0 && s > 0) {
+                changenum = changenum + ".";
+                for (i = 0; i < s; i++) {
+                    changenum = changenum + "0";
+                }
+
+            } else {
+                index = changenum.length - index;
+                for (i = 0; i < (s - index) + 1; i++) {
+                    changenum = changenum + "0";
+                }
+
+            }
+            var returnNum = changenum.toString();
+            if (IsFuShu)
+                returnNum = '-' + returnNum;
+            return returnNum;
+        }
+
+        function changeValue(obj) {
+            var idx = obj.id.split('_')[1];
+            var rowspanCount = $(obj).parent().parent().find('td').eq(0).attr("rowspan");
+            var rowIndex = $(obj).parent().parent().eq(0).attr("rowindex");
+
+            //$("#tongdao_" + idx + " tr:gt(" + (parseInt(rowIndex) - 1) + ") td select").each(function (i) {
+            //    if (i <= parseInt(rowspanCount))
+            //    {
+            //        if ($(this).attr("id") != obj.id)
+            //            $(this).find("option").each(function () {
+            //                if ($(this).text() == $("#" + obj.id + " option:selected").text()) {
+            //                    $(this).attr("selected", "selected");
+            //                }
+            //            });
+            //    }
+            //})
+            var bIdx = 0;
+            var t = $("#" + obj.id + " option:selected").text();
+            $("#tongdao_" + idx + " tr:gt(" + (parseInt(rowIndex)) + "):lt(" + (parseInt(rowspanCount)) + ") td select").each(function (eIdx) {
+                if (bIdx <= eIdx) {
+                    $(this).children("option[selected='selected']").removeAttr("selected");
+                    $(this).children("option[value='" + t + "']").attr("selected", true);
+                    bIdx++;
+                }
+            });
+
+        }
+    </script>
+</body>
+
+</html>
