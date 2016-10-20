@@ -217,6 +217,83 @@
     ]
 },
 {
+    "id": "51-1999",
+    "text": "JJG(航天)51-1999 交流标准电流源检定规程",
+    "children": [
+    {
+        "id": "51-1999_1",
+        "text": "外观检查",
+        "attributes": {
+            "InputState": "HGBHG"
+        }
+    },
+    {
+        "id": "51-1999_2",
+        "text": "交流电流输出",
+        "children": [
+       {
+           "id": "51-1999_2_1",
+           "text": "相对误差-两相",
+           "attributes": {
+               "InputState": "",
+               "url": "/PROJECTTEMPLET/?RULEID=51-1999_2_1"
+           }
+       },
+       {
+           "id": "51-1999_2_2",
+           "text": "相对误差-三相",
+           "attributes": {
+               "InputState": "",
+               "url": "/PROJECTTEMPLET/?RULEID=51-1999_2_2"
+           }
+       }
+        ]
+    },
+       {
+           "id": "51-1999_3",
+           "text": "工作正常性检查",
+           "attributes": {
+               "InputState": "HGBHG"
+           }
+       }
+       , {
+           "id": "51-1999_4",
+           "text": "电流稳定性",
+           "attributes": {
+               "InputState": "WBK"
+           }
+       }
+       , {
+           "id": "51-1999_5",
+           "text": "电流最高分辨率",
+           "attributes": {
+               "InputState": "HGBHG"
+           }
+       }
+       , {
+           "id": "51-1999_6",
+           "text": "频率示值误差",
+           "attributes": {
+               "InputState": "HGBHG"
+           }
+       }
+       , {
+           "id": "51-1999_7",
+           "text": "负载调整率",
+           "attributes": {
+               "InputState": "HGBHG"
+           }
+       }
+	   , {
+	       "id": "51-1999_8",
+	       "text": "波形失真度",
+	       "attributes": {
+	           "InputState": "HGBHG"
+	       }
+	   }
+    ]
+},
+{
     "id": "34-1999",
     "text": "JJG(航天)34-1999 交流数字电压表检定规程",
     "children": [
@@ -282,6 +359,78 @@
        , {
            "id": "34-1999_5",
            "text": "稳定性",
+           "attributes": {
+               "InputState": "HGBHG"
+           }
+       }
+    ]
+},
+{
+    "id": "35-1999",
+    "text": "JJG(航天)35-1999 交流数字电流表检定规程",
+    "children": [
+    {
+        "id": "35-1999_1",
+        "text": "外观检查",
+        "attributes": {
+            "InputState": "HGBHG"
+        }
+    },
+    {
+        "id": "35-1999_2",
+        "text": "交流电流测量",
+        "children": [
+		{
+		    "id": "35-1999_2_1",
+		    "text": "相对误差-两相",
+		    "attributes": {
+		        "InputState": "",
+		        "url": ""
+		    }
+		},
+       {
+           "id": "35-1999_2_2",
+           "text": "相对误差-两相-多通道",
+           "attributes": {
+               "InputState": "",
+               "url": "/PROJECTTEMPLET/JiaoLiuDianYaXiangDuiWuChaLiangXiang?RULEID=35-1999_2_2"
+           }
+       },
+       {
+           "id": "35-1999_2_3",
+           "text": "相对误差-三相",
+           "attributes": {
+               "InputState": "",
+               "url": ""
+           }
+       },
+	   {
+	       "id": "35-1999_2_4",
+	       "text": "相对误差-三相-多通道",
+	       "attributes": {
+	           "InputState": "",
+	           "url": "/PROJECTTEMPLET/JiaoLiuDianYaXiangDuiWuChaSanXiang?RULEID=35-1999_2_4"
+	       }
+	   }
+        ]
+    },
+       {
+           "id": "35-1999_3",
+           "text": "工作正常性",
+           "attributes": {
+               "InputState": "HGBHG"
+           }
+       }
+       , {
+           "id": "35-1999_4",
+           "text": "电流稳定性",
+           "attributes": {
+               "InputState": "HGBHG"
+           }
+       }
+       , {
+           "id": "35-1999_5",
+           "text": "电流最高分辨力",
            "attributes": {
                "InputState": "HGBHG"
            }
