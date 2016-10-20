@@ -49,7 +49,7 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult JiaoLiuDianYaXiangDuiWuChaLiangXiang(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaLiangXiang(string RULEID = "315-1983_2_21", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
