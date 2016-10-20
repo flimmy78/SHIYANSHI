@@ -847,6 +847,7 @@
     <Content Include="Views\SCHEME\Selected.cshtml" />
     <Content Include="Views\VJIANDINGRENWU\QiJuXiuGai.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\JiaoLiuDianYaXiangDuiWuChaLiangXiang.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\JiaoLiuDianYaXiangDuiWuChaSanXiang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

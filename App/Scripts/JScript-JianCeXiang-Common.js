@@ -71,7 +71,8 @@ RuleAttributeArray = [
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',OUTPUT_VALUE,'
             }]
-    },
+    }
+    ,
     {
         RuleID: '315-1983_2_2',//检测项编号
         Remark: '直流电压测量-正负极性-相对误差-多通道',//检测项说明
@@ -94,33 +95,55 @@ RuleAttributeArray = [
             }]
     }
     ,
-      {
-          RuleID: '315-1983_2_21',//检测项编号
-          Remark: '交流电压（电流）-相对误差-两相',//检测项说明
-          Attributes:
-              [{
-                  //添加通道按钮是否显示(show:显示，hidden:不显示)
-                  DuoTongDao: 'show',
-                  //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
-                  //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                  LianDongDanWeiDDL: '',
-                  //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
-                  //DianLiu:电流单位；DianYa:电压单位   
-                  //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
-                  DanWeiHtmlDDL: 'DianYa|(RANGE_UNIT);',
-                  //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
-                  BuBaoCunShuJu: '',
-                  //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
-                  //OUTPUT_VALUE：输出示值
-                  CalculateForAddLianCheng: ',OUTPUT_VALUE,'
-              }]
-      }
+    {
+        RuleID: '34-1999_2_2',//检测项编号
+        Remark: '交流电压（电流）-相对误差-两相',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'show',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianYa|(RANGE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+    ,
+    {
+        RuleID: '34-1999_2_4',//检测项编号
+        Remark: '交流电压(电流)-相对误差-三相',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'show',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianYa|(RANGE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
 ];
 var RuleID = $("#hideRULEID").val();//检测项目ID
 var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
 var $Tongdao_moban//模板
 $(document).ready(function () {
-    
+
     var hideHtml = $("#hideHTMLVALUE").val();
     if (hideHtml.trim() != "") {
         $("#divHtml").html("");
@@ -173,7 +196,7 @@ function Reset() {
 //RuleID:检测项目ID
 function GetRuleAttributeByRuleID(RuleID) {
     var Result = null;
-    if (RuleID == null || RuleID.trim() == "" ) {
+    if (RuleID == null || RuleID.trim() == "") {
         return null;
     }
     $.each(RuleAttributeArray, function (i, item) {
@@ -190,29 +213,25 @@ function GetRuleAttributeByRuleID(RuleID) {
 //检测项单位联动下拉框联动
 //obj:下拉框控件
 //LianDongDanWeiDDLAttribute:检测项单位联动下拉框联动控件信息
-function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {    
-    if (obj == null || LianDongDanWeiDDLAttribute == null || LianDongDanWeiDDLAttribute.trim() == "")
-    {
+function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
+    if (obj == null || LianDongDanWeiDDLAttribute == null || LianDongDanWeiDDLAttribute.trim() == "") {
         return;
     }
     var id = obj.id.replace(obj.name, "");
-    if (id.split('_').length <= 3)
-    {
+    if (id.split('_').length <= 3) {
         id = id + "_";//_表编号_量程编号_
     }
-    
+
     var ddlArray = LianDongDanWeiDDLAttribute.split(';');
     $.each(ddlArray, function (i, item) {
-        var biangeng="("+obj.name+")|";
-        if(item==null || item.trim()=="" || item.indexOf(biangeng)<0 )
-        {
+        var biangeng = "(" + obj.name + ")|";
+        if (item == null || item.trim() == "" || item.indexOf(biangeng) < 0) {
             return true;
         }
-        var liandongs=item.replace(biangeng, "").split(',');
-        if(liandongs==null || liandongs.length<=0)
-        {
+        var liandongs = item.replace(biangeng, "").split(',');
+        if (liandongs == null || liandongs.length <= 0) {
             return true;
-        }        
+        }
         $.each(liandongs, function (i, item_LianDong) {
             if (item_LianDong == null || item_LianDong.trim() == "") {
                 return true;
@@ -224,8 +243,8 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
             });
 
         });
-       
-    }); 
+
+    });
 
 }
 
@@ -248,19 +267,18 @@ function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
         return Result;
     }
 
-    if (ddlName == null || ddlName.trim() == "")
-    {
+    if (ddlName == null || ddlName.trim() == "") {
         return "";
     }
     var AttributeValue = GetAttributeValue("DanWeiHtmlDDL");
-    if (AttributeValue == null || AttributeValue.trim()=="") {
+    if (AttributeValue == null || AttributeValue.trim() == "") {
         return "";
     }
     var ddlArray = AttributeValue.split(';');
     var ddlNameNew = "(" + ddlName + ")"
     ddlNameNew = ddlNameNew.toUpperCase();
     $.each(ddlArray, function (i, item) {
-        if (item == null || item.trim() == "" || item.toUpperCase().indexOf(ddlNameNew) < 0 || item.split('|').length<2) {
+        if (item == null || item.trim() == "" || item.toUpperCase().indexOf(ddlNameNew) < 0 || item.split('|').length < 2) {
             return true;
         }
         var dw = item.split('|')[0];
@@ -272,7 +290,7 @@ function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
             return false;
         });
     });
-    return Result;   
+    return Result;
 }
 
 //设置TD的html
@@ -283,18 +301,18 @@ function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
 //rowidx:行号
 //txtVal(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
 function SetTDHtml(rowspan, name, id, rowidx, txtVal) {
-   
+
     var ddlName = name + "_UNIT";//下拉框名
     var ddlId = ddlName + "_" + id;//下拉框ID
     var id = name + "_" + id;//输入框id
     var ddlHtml = GetDanWeiDDLHtml(ddlName, null);//单位下拉框html
-    if ((txtVal == null || txtVal.trim() == "") && rowidx!=null) {
+    if ((txtVal == null || txtVal.trim() == "") && rowidx != null) {
         txtVal = CalculateForAddLianCheng(rowidx, name);
     }
-    var htmlString = [];   
+    var htmlString = [];
     htmlString.push("<td rowspan='" + rowspan + "' align=\"right\"> ");
     htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='blurValue(this)'/>");
-    if (ddlHtml != null && ddlHtml.trim() != "") {        
+    if (ddlHtml != null && ddlHtml.trim() != "") {
         var AttributeValue = GetAttributeValue("LianDongDanWeiDDL");
         htmlString.push($(ddlHtml).attr("onchange", "LianDongDanWeiDDL(this,'" + AttributeValue + "')").attr("name", ddlName).attr("id", ddlId)[0].outerHTML);
     }
@@ -306,22 +324,20 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal) {
 //根据属性名获取属性值
 //RuleAttribute：检查项属性对象
 //Name:属性名称
-function GetAttributeValue(Name)
-{
-    if(RuleAttribute==null || Name==null || Name.trim()=="" ||
+function GetAttributeValue(Name) {
+    if (RuleAttribute == null || Name == null || Name.trim() == "" ||
        RuleAttribute.Attributes == null || RuleAttribute.Attributes[0] == null || RuleAttribute.Attributes[0][Name] == null
        || RuleAttribute.Attributes[0][Name].trim() == ""
-        )
-    {
+        ) {
         return "";
     }
     return RuleAttribute.Attributes[0][Name].trim();
 }
 //清空不需要保存的数据
 function ClearBuBaoCunShuJu() {
- 
+
     var AttributeValue = GetAttributeValue("BuBaoCunShuJu");
-    if (AttributeValue != null && AttributeValue.trim()!="") {
+    if (AttributeValue != null && AttributeValue.trim() != "") {
         var BuBaoCunShuJuAttribute = AttributeValue.split(',');
         $.each(BuBaoCunShuJuAttribute, function (i, item) {
             if (item == null || item.trim() == "") {
@@ -337,18 +353,15 @@ function ClearBuBaoCunShuJu() {
 
 //添加量程时自动根据行号计算赋值数据
 //RuleAttribute:检测项目属性，Rowidx：行号，objName:控件名称
-function CalculateForAddLianCheng(Rowidx,objName) {
-    if (RuleAttribute == null || Rowidx == null)
-    {
+function CalculateForAddLianCheng(Rowidx, objName) {
+    if (RuleAttribute == null || Rowidx == null) {
         return "";
     }
     var AttributeValue = GetAttributeValue("CalculateForAddLianCheng");
-    if (AttributeValue == null || AttributeValue.trim() == "")
-    {
+    if (AttributeValue == null || AttributeValue.trim() == "") {
         return "";
     }
-    if (AttributeValue.indexOf(objName) < 0)
-    {
+    if (AttributeValue.indexOf(objName) < 0) {
         return "";
     }
     var number = $("#txtNumber").val(); //量程
@@ -382,8 +395,7 @@ function CalculateForAddLianCheng(Rowidx,objName) {
         arry.push((number * 0.2).toFixed(pointLen));
         arry.push((number * 0.1).toFixed(pointLen));
     }
-    if (arry != null && arry.length > Rowidx)
-    {
+    if (arry != null && arry.length > Rowidx) {
         return arry[Rowidx];
     }
     return "";
@@ -397,7 +409,7 @@ Number.prototype.toFixed = function toFixed(s) {
         IsFuShu = true;
         je = this.toString().replace('-', '');
     } else je = this;
-    changenum = (parseInt(je * Math.pow(10, s) + 0.5) / Math.pow(10, s)).toString();   
+    changenum = (parseInt(je * Math.pow(10, s) + 0.5) / Math.pow(10, s)).toString();
 
     index = changenum.indexOf(".");
     if (index < 0 && s > 0) {
@@ -419,31 +431,25 @@ Number.prototype.toFixed = function toFixed(s) {
     return returnNum;
 }
 //显示隐藏添加通道按钮
-function ShowOrHideDuoTongDao()
-{    
-    if(RuleAttribute==null)
-    {
-        $("#btnDuoTongDao").hide();        
+function ShowOrHideDuoTongDao() {
+    if (RuleAttribute == null) {
+        $("#btnDuoTongDao").hide();
     }
-    else
-    {
+    else {
         var AttributeValue = GetAttributeValue("DuoTongDao");
-        if(AttributeValue!=null && AttributeValue.trim().toUpperCase()=="SHOW")
-        {
-            $("#btnDuoTongDao").show();           
+        if (AttributeValue != null && AttributeValue.trim().toUpperCase() == "SHOW") {
+            $("#btnDuoTongDao").show();
         }
-        else
-        {
-            $("#btnDuoTongDao").hide();           
+        else {
+            $("#btnDuoTongDao").hide();
         }
     }
 }
 //按钮初始化（显示、隐藏）
-function BtnInit()
-{
+function BtnInit() {
     ShowOrHideDuoTongDao();
     var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();
-    if(PREPARE_SCHEMEID.trim()!="")//数据录入
+    if (PREPARE_SCHEMEID.trim() != "")//数据录入
     {
         $("#btnDuoTongDao").hide();
         //$("#btnSave").hide();
@@ -465,13 +471,12 @@ function CheckData() {
     return true;
 }
 
-function Save()
-{
+function Save() {
     if (!CheckData()) {
         return;
     }
     var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();//预备方案ID
-    if(PREPARE_SCHEMEID.trim()!="")//数据录入
+    if (PREPARE_SCHEMEID.trim() != "")//数据录入
     {
         Save_ShuJuLuRu();
     }
@@ -481,8 +486,7 @@ function Save()
     }
 }
 //保存数据录入
-function Save_ShuJuLuRu()
-{
+function Save_ShuJuLuRu() {
     SetAllControlHtml();
     var ID = $("#hideITEID").val();//预备方案检查项ID
     var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();//预备方案ID
@@ -505,8 +509,8 @@ function Save_ShuJuLuRu()
         }, //AJAX请求完成时隐藏loading提示
 
         success: function (res) {//msg为返回的数据，在这里做数据绑定               
-            if (res.Code == 1) {               
-                 $("#hideITEID").val(res.Message);               
+            if (res.Code == 1) {
+                $("#hideITEID").val(res.Message);
                 var tdID = '#' + RULEID
                 $(tdID, parent.document).html('已做');//修改检测项状态
                 $.messager.alert('操作提示', "操作成功！", 'info');
@@ -532,10 +536,10 @@ function Save_FangAn() {
     //ClearBuBaoCunShuJu();
     var OldID = $("#hideID").val();
     var RULEID = $("#hideRULEID").val();
-    var SCHEMEID = $("#hideSCHEMEID").val();   
+    var SCHEMEID = $("#hideSCHEMEID").val();
     var HTMLVALUE = encodeURI($("#divHtml").html());
 
-   
+
     //获取空对象用于保存添加的信息
     $.ajax({
         type: 'post', //使用post方法访问后台
@@ -570,17 +574,15 @@ function Save_FangAn() {
     });
 }
 //由于html无法获取value，重新给outerHTML赋值
-function SetAllControlHtml()
-{
+function SetAllControlHtml() {
     $("input[type='text']").each(function () {
-        if (this.id != "")
-        {
+        if (this.id != "") {
             var id = "#" + this.id;
             var outerHTML = this.outerHTML;
             var startIndex = outerHTML.indexOf(" value=");
             if (startIndex < 0)//没有初始化value
             {
-                outerHTML = outerHTML.replace('>',' value="'+this.value+'" >')
+                outerHTML = outerHTML.replace('>', ' value="' + this.value + '" >')
             }
             else//初始化过value
             {
@@ -588,21 +590,21 @@ function SetAllControlHtml()
                 var length = endIndex - startIndex;
                 var str = outerHTML.substring(startIndex, endIndex);
                 outerHTML = outerHTML.replace(str, ' value="' + this.value + '" ')
-            }            
+            }
             $(id).prop('outerHTML', outerHTML);
-        }      
-        
+        }
+
     });
-    $("select").each(function () {        
+    $("select").each(function () {
         if (this.id != "") {
             var id = "#" + this.id;
             var outerHTML = this.outerHTML;
             outerHTML = outerHTML.replace(' selected="selected"', ' ')
-            var oldValue = 'value="' + this.value + '"';            
+            var oldValue = 'value="' + this.value + '"';
             outerHTML = outerHTML.replace(' value="' + this.value + '"', ' value="' + this.value + '" selected="selected" ');
             $(id).prop('outerHTML', outerHTML);
         }
-        
+
     });
 }
 //---------------------------------

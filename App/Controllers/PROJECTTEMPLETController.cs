@@ -49,11 +49,23 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult JiaoLiuDianYaXiangDuiWuChaLiangXiang(string RULEID = "315-1983_2_21", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaLiangXiang(string RULEID = "34-1999_2_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
+        /// <summary>
+        /// 交流电压(电流)-相对误差-三相
+        /// </summary>
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <returns></returns> 
+        [SupportFilter]
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaSanXiang(string RULEID = "34-1999_2_4", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
 
         public ActionResult Detail(string RULEID = "", string SCHEMEID = "",string PREPARE_SCHEMEID="")
         {
