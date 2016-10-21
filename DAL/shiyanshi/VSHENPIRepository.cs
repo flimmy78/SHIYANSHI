@@ -27,23 +27,19 @@ namespace Langben.DAL
             Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
             if (queryDic != null && queryDic.Count > 0)
             {
+
                 foreach (var item in queryDic)
                 {
+                    if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "REPORTSTATUSZI")
+                    {
+                        REPORTSTATUSZI = item.Value;
+                        continue;
+                    }
                     if (flagWhere != 0)
                     {
                         where += " and ";
                     }
                     flagWhere++;
-
-                    if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "REPORTSTATUSZI")
-                    {
-                        REPORTSTATUSZI = item.Value;
-                        if (where.IndexOf(" and ") > 1)
-                        {
-                            where = where.Substring(0, where.IndexOf(" and "));
-                        }
-                        continue;
-                    }
 
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
                     {
@@ -79,7 +75,6 @@ namespace Langben.DAL
                     if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key != "REPORTSTATUSZI")
                     {
                         where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
-                        flagWhere++;
                         continue;
                     }
                    
@@ -93,7 +88,7 @@ namespace Langben.DAL
             return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext 
                      .CreateObjectSet<VSHENPI>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                     .OrderBy("it.[AUDITTIME] " + "asc")
+                    // .OrderBy("it.[AUDITTIME] " + "asc")
                      .Where(w => REPORTSTATUSZIarr.Contains(w.REPORTSTATUSZI))
                      .AsQueryable(); 
 

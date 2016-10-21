@@ -371,6 +371,13 @@
 </script>
 <script type='text/javascript'>
     $(function () {
+        //判断什么按钮可用
+        if ("@ViewBag.PACKAGETYPE" == "@Common.PACKAGETYPE.上传.ToString()") {
+            $("#jl").linkbutton("disable");
+        }
+        else if ("@ViewBag.PACKAGETYPE" == "@Common.PACKAGETYPE.生成.ToString()") {
+            $("#sc").linkbutton("disable");
+        }
         //输入框的禁用
         if ("@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.审核驳回.ToString()" || "@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.批准驳回.ToString()" || "@ViewBag.REPORTSTATUS" == "") {
             return true;
@@ -380,13 +387,7 @@
                 $(this).attr("disabled",true);
             });
         }
-        //判断什么按钮可用
-        if ("@ViewBag.PACKAGETYPE"=="@Common.PACKAGETYPE.上传.ToString()") {
-            $("#jl").attr("disabled", true);
-        }
-        else if ("@ViewBag.PACKAGETYPE" == "@Common.PACKAGETYPE.生成.ToString()") {
-            $("#sc").attr("disabled", true);
-        } 
+
     })
     $(function () {
         //查询受理单位

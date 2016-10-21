@@ -32,7 +32,6 @@ namespace Langben.App.Models
         public Nullable<System.DateTime> CREATETIME { get; set; }
         public string CREATEPERSON { get; set; }
         public Nullable<System.DateTime> UPDATETIME { get; set; }
-        public string UPDATEPERSON { get; set; }
-        
+        public string UPDATEPERSON { get; set; }       
     }
 }

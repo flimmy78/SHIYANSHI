@@ -110,16 +110,22 @@ namespace Langben.App.Controllers
             var data = new ORDER_TASK_INFORMATIONShow();
             string UNDERTAKE_LABORATORYID = string.Empty;
             string ORDER_STATUS = string.Empty;
+            string ORDER_STATUS_NAME = string.Empty;
             ORDER_TASK_INFORMATION queryData = m_BLL.GetById(id);
             foreach (var s in queryData.APPLIANCE_DETAIL_INFORMATION)
             {
                 UNDERTAKE_LABORATORYID = null;
                 ORDER_STATUS = null;
+                ORDER_STATUS_NAME = null;
                 List<APPLIANCE_LABORATORY> list = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(s.ID);
                 foreach (var item2 in list)
                 {
                     UNDERTAKE_LABORATORYID += item2.UNDERTAKE_LABORATORYID + ",";
                     ORDER_STATUS += item2.ORDER_STATUS + ",";
+                    if (item2.ORDER_STATUS==Common.ORDER_STATUS.已退回.ToString())
+                    {
+                        ORDER_STATUS_NAME = item2.UNDERTAKE_LABORATORYID + item2.ORDER_STATUS;
+                    }
                 }
                 s.UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID;
 
@@ -149,7 +155,8 @@ namespace Langben.App.Controllers
                     STORAGEINSTRUCTIONS = s.STORAGEINSTRUCTIONS,
                     STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU,
                     UNDERTAKE_LABORATORYIDString = UNDERTAKE_LABORATORYID.TrimEnd(','),
-                    ORDER_STATUS = ORDER_STATUS
+                    ORDER_STATUS = ORDER_STATUS,
+                    ORDER_STATUS_NAME= ORDER_STATUS_NAME
                 });
             }
             data.ID = queryData.ID;
@@ -172,7 +179,7 @@ namespace Langben.App.Controllers
             data.CREATETIME = queryData.CREATETIME;
             data.CREATEPERSON = queryData.CREATEPERSON;
             data.UPDATETIME = queryData.UPDATETIME;
-            data.UPDATEPERSON = queryData.UPDATEPERSON;
+            data.UPDATEPERSON = queryData.UPDATEPERSON;          
             return data;
         }
         /// <summary>

@@ -127,6 +127,7 @@ namespace Langben.App.Controllers
                 {
                     APPLIANCECOLLECTION app = new APPLIANCECOLLECTION();//器具领取
                     APPLIANCE_LABORATORY appry = new APPLIANCE_LABORATORY();//器具明细信息_承接实验室
+                    APPLIANCE_DETAIL_INFORMATION appion = new APPLIANCE_DETAIL_INFORMATION();//器具明细
                     if (!string.IsNullOrEmpty(item))
                     {
                         app.CREATETIME = DateTime.Now;//领取时间
@@ -134,13 +135,28 @@ namespace Langben.App.Controllers
                         app.ID = Result.GetNewId();//主键id
                         app.APPLIANCE_DETAIL_INFORMATIONID = item;//器具明细id
                         app.APPLIANCECOLLECTIONSATE = Common.ORDER_STATUS.器具已领取.ToString();//器具领取状态
+                        appion.APPLIANCE_PROGRESS = null;//所在实验室
+                        appion.ID = item;//id
+                        if (!m_BLL6.EditField(ref validationErrors, appion))//修改器具所在实验室数据
+                        {
+                            LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息的Id为" + appion.ID, "器具领取");//写入日志       
+                            result.Code = Common.ClientCode.Succeed;
+                            result.Message = Suggestion.UpdateFail;
+                            return result;
+                        }
                         List<APPLIANCE_LABORATORY> list = m_BLL4.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item);
                         foreach (var item2 in list)
                         {
                             appry.ID = item2.ID;
                             appry.ORDER_STATUS = Common.ORDER_STATUS.器具已领取.ToString();
-                            appry.EQUIPMENT_STATUS_VALUUMN= Common.ORDER_STATUS.器具已领取.GetHashCode().ToString();
-                            m_BLL4.EditField(ref validationErrors, appry);
+                            appry.EQUIPMENT_STATUS_VALUUMN= Common.ORDER_STATUS.器具已领取.GetHashCode().ToString();                          
+                            if (!m_BLL4.EditField(ref validationErrors, appry))
+                            {
+                                LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息_承接实验室的Id为" + appry.ID, "器具领取");//写入日志  
+                                result.Code = Common.ClientCode.Succeed;
+                                result.Message = Suggestion.UpdateFail;
+                                return result;
+                            }
                         }
                         if (m_BLL2.Create(ref validationErrors, app) )
                         {
@@ -178,19 +194,21 @@ namespace Langben.App.Controllers
         IBLL.IREPORTCOLLECTIONBLL m_BLL3;
         IBLL.IAPPLIANCE_LABORATORYBLL m_BLL4;
         IBLL.IPREPARE_SCHEMEBLL m_BLL5;
+        IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL m_BLL6;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VQIJULINGQU2ApiController()
-            : this(new VQIJULINGQU2BLL(), new APPLIANCECOLLECTIONBLL(), new REPORTCOLLECTIONBLL(), new APPLIANCE_LABORATORYBLL(), new PREPARE_SCHEMEBLL()) { }
+            : this(new VQIJULINGQU2BLL(), new APPLIANCECOLLECTIONBLL(), new REPORTCOLLECTIONBLL(), new APPLIANCE_LABORATORYBLL(), new PREPARE_SCHEMEBLL(),new APPLIANCE_DETAIL_INFORMATIONBLL()) { }
 
-        public VQIJULINGQU2ApiController(VQIJULINGQU2BLL bll, APPLIANCECOLLECTIONBLL bll2, REPORTCOLLECTIONBLL bll3, APPLIANCE_LABORATORYBLL bll4, PREPARE_SCHEMEBLL bll5)
+        public VQIJULINGQU2ApiController(VQIJULINGQU2BLL bll, APPLIANCECOLLECTIONBLL bll2, REPORTCOLLECTIONBLL bll3, APPLIANCE_LABORATORYBLL bll4, PREPARE_SCHEMEBLL bll5,APPLIANCE_DETAIL_INFORMATIONBLL bll6)
         {
             m_BLL = bll;
             m_BLL2 = bll2;
             m_BLL3 = bll3;
             m_BLL4 = bll4;
             m_BLL5 = bll5;
+            m_BLL6 = bll6;
         }
 
     }

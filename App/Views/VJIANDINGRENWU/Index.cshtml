@@ -328,26 +328,27 @@
             columns: [[
                     { field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 64, hidden: true }
                     , { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 100 }
+                    , { field: 'ISRECEIVE', title: '是否可以领取', align: 'center', width: 80 }
                     , { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', align: 'center', width: 100 }
                     , { field: 'VERSION', title: '@Html.DisplayNameFor(model => model.VERSION)', align: 'center', width: 90 }
                     , { field: 'FACTORY_NUM', title: '@Html.DisplayNameFor(model => model.FACTORY_NUM)', align: 'center', width: 100 }
                     , { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', align: 'center', width: 100 }
-                    , { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', align: 'center', width: 100 }
-                    , { field: 'APPLIANCE_PROGRESS', title: '@Html.DisplayNameFor(model => model.APPLIANCE_PROGRESS)', align: 'center', width: 100 }
-                    , { field: 'ORDER_STATUS', title: '@Html.DisplayNameFor(model => model.ORDER_STATUS)', align: 'center', width: 100 }
+                    , { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', align: 'center', width: 200 }
+                    , { field: 'APPLIANCE_PROGRESS', title: '@Html.DisplayNameFor(model => model.APPLIANCE_PROGRESS)', align: 'center', width: 70 }
+                    , { field: 'ORDER_STATUS', title: '@Html.DisplayNameFor(model => model.ORDER_STATUS)', align: 'center', width: 70 }
                     , {
-                        field: 'CREATETIME', title: '@Html.DisplayNameFor(model => model.CREATETIME)', align: 'center', width: 90, formatter: function (value, row, index) {
+                        field: 'CREATETIME', title: '@Html.DisplayNameFor(model => model.CREATETIME)', align: 'center', width: 80, formatter: function (value, row, index) {
                             if (value) {
                                 return dateConvert(value);
                             }
                         }
                     }
                     , { field: 'OVERDUE', title: '@Html.DisplayNameFor(model => model.OVERDUE)', align: 'center', width: 100 }
-                    , { field: 'STATE', title: '@Html.DisplayNameFor(model => model.STATE)', align: 'center', width: 100 }
-                    , { field: 'REPORTSTATUS', title: '@Html.DisplayNameFor(model => model.REPORTSTATUS)', align: 'center', width: 100 }
-                    , { field: 'APPROVAL', title: '@Html.DisplayNameFor(model => model.APPROVAL)', align: 'center', width: 100 }
+                    , { field: 'STATE', title: '@Html.DisplayNameFor(model => model.STATE)', align: 'center', width: 60 }
+                    , { field: 'REPORTSTATUS', title: '@Html.DisplayNameFor(model => model.REPORTSTATUS)', align: 'center', width: 70 }
+                    , { field: 'APPROVAL', title: '@Html.DisplayNameFor(model => model.APPROVAL)', align: 'center', width: 200 }
                     , { field: 'INSPECTION_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.INSPECTION_ENTERPRISE)', width: 64 }
-                    @*, { field: 'ISRECEIVE', title: '@Html.DisplayNameFor(model => model.ISRECEIVE)', width: 64, hidden: true }*@
+                    
             ]],
             pagination: true,
             rownumbers: true
@@ -371,61 +372,22 @@
     function flexiQuery() {
         //将查询条件按照分隔符拼接成字符串
         var search = "";
-        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
-            if (this.id)
-                if (this.id == "ISOVERDUE") {
-                    if (this.value == "否") {
-                        search = search + this.id + "&^";
-                    }
-                    else {
-                        search = search + this.id + "&" + this.value + "^";
-                    }
-                }
-                else {
-                    search = search + this.id + "&" + this.value + "^";
-                }
-            else
-                search = search + this.name + "&" + this.value + "^";
-        });
+        search += "ORDER_NUMBER&" + $("#ORDER_NUMBER").val() + "^";
+        search += "APPLIANCE_NAME&" + $("#APPLIANCE_NAME").val() + "^";
+        search += "VERSION&" + $("#VERSION").val() + "^"; 
+        search += "FACTORY_NUM&" + $("#FACTORY_NUM").val() + "^";
+        search += "CERTIFICATE_ENTERPRISE&" + $('#CERTIFICATE_ENTERPRISE').combobox('getText') + "^";
+        search += "ORDER_STATUS&" + $('#ORDER_STATUS').combobox('getText') + "^"; 
+        search += "INSPECTION_ENTERPRISE&" + $('#INSPECTION_ENTERPRISE').combobox('getText') + "^";
+        if ($('#ISOVERDUE').combobox('getText')=="是") {
+            search += "ISOVERDUE&" + $('#ISOVERDUE').combobox('getText') + "^";
+        }
+        else {
+            search += "ISOVERDUE&" + "" + "^";
+        }
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
-
-    //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
-    function flexiSelect() {
-
-        var rows = $('#flexigridData').datagrid('getSelections');
-        if (rows.length == 0) {
-            $.messager.alert('操作提示', '请选择数据!', 'warning');
-            return false;
-        }
-
-        var arr = [];
-        for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].ID);
-        }
-        arr.push("^");
-        for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].ORDER_NUMBER);
-        }
-        //主键列和显示列之间用 ^ 分割   每一项用 , 分割
-        if (arr.length > 0) {//一条数据和多于一条
-            returnParent(arr.join("&")); //每一项用 & 分割
-        }
-    }
-    //导航到查看详细的按钮
-    function getView() {
-
-        var arr = $('#flexigridData').datagrid('getSelections');
-
-        if (arr.length == 1) {
-            window.location.href = "../VJIANDINGRENWU/Details/" + arr[0].ID;
-
-        } else {
-            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
-        }
-        return false;
-    }
 
     //判断是否为领取的器具
     function panduanlingqu() {
