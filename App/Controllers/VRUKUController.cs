@@ -49,16 +49,16 @@ namespace Langben.App.Controllers
             {
                 if (item.Key == "STORAGEINSTRUCTI_STATU")
                 {
-                    STORAGEINSTRUCTI_STATU= item.Value; 
-                }                              
+                    STORAGEINSTRUCTI_STATU = item.Value;
+                }
             }
 
-            if (STORAGEINSTRUCTI_STATU == Common.ORDER_STATUS.待入库.ToString()|| search == null)
+            if (STORAGEINSTRUCTI_STATU == Common.ORDER_STATUS.待入库.ToString() || search == null)
             {
-                if (search!=null)
+                if (search != null)
                 {
                     int end = search.LastIndexOf("^STORAGEINSTRUCTI_STATU&");
-                    search = search.Substring(0, end)+"^";
+                    search = search.Substring(0, end) + "^";
                 }
                 search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.待入库.GetHashCode() + "^";
                 search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.批准驳回.GetHashCode() + "*" + Common.REPORTSTATUS.已批准.GetHashCode() + "*" + Common.REPORTSTATUS.待批准.GetHashCode() + "*" + Common.REPORTSTATUS.报告已打印.GetHashCode() + "*" + Common.REPORTSTATUS.报告已领取.GetHashCode() + "";
@@ -66,10 +66,14 @@ namespace Langben.App.Controllers
             else if (STORAGEINSTRUCTI_STATU == Common.ORDER_STATUS.器具已入库.ToString())
             {
                 int end = search.LastIndexOf("^STORAGEINSTRUCTI_STATU&");
-                search = search.Substring(0,end);
+                search = search.Substring(0, end);
                 search += "^EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "";
             }
-            int total = 0;          
+            else
+            {
+                search += "^EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.待入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "";
+            }
+            int total = 0;
             List<VRUKU> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
             {

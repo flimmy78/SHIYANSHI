@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width" />
-    <title>方案模板管理</title>
+    <title>直流电压（电流）测量-正负极性-相对误差（多通道）</title>
     <link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
     <link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
     <link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
@@ -47,7 +47,7 @@
                         <th rowspan="2" align="center" width="140">量程</th>
                         <th rowspan="2" align="center" width="140">标准值</th>
                         <th colspan="2" align="center">
-                            显示值                             <select class="easyui-combobox1" name="sssss" id="sssss" style="width:100px;" onchange="changeValue(this)">
+                            显示值                             <select class="my-combobox" name="sssss" id="sssss" onchange="changeValue(this)">
                                 <option value="AL">&nbsp;&nbsp; </option>
                                 <option value="AK">CH1</option>
                                 <option value="AZ">CH2</option>
@@ -66,7 +66,7 @@
                         <th align="center" class="f14"><b>+</b></th>
                         <th align="center" class="f14"><b>-</b></th>
                         <th align="center">
-                            U(K = <select class="easyui-combobox" name="state" style="width:30px;">
+                            U(K = <select class="my-combobox" name="state">
                                 <option value="AL">2 </option>
                                 <option value="AK">3</option>
                                 <option value="AZ">4</option>
@@ -94,11 +94,11 @@
 
                 <tr>
                     <th width="40">注：</th>
-                    <td colspan="6"><input class="easyui-textbox input-width" name="" data-options="multiline:true" style="height:30px; width:95%"></td>
+                    <td colspan="6"><input class="my-textbox input-width" name="" data-options="multiline:true" style="height:30px; width:95%"></td>
                 </tr>
                 <tr>
                     <th width="40">结论：</th>
-                    <td colspan="6"><input class="easyui-textbox input-width" name="" data-options="multiline:true" style="height:30px; width:95%"></td>
+                    <td colspan="6"><input class="my-textbox input-width" name="" data-options="multiline:true" style="height:30px; width:95%"></td>
                 </tr>
 
 
@@ -124,22 +124,22 @@
         <table>
             <tr>
                 <td width="80" align="right">量程值：</td>
-                <td><input type="text" id="txtNumber" class="easyui-textbox input-width" style="width:200px" /></td>
+                <td><input type="text" id="txtNumber" class="my-textbox " style="width:200px" /></td>
             </tr>
             <tr>
                 <td align="right">检测点数：</td>
-                <td><input type="text" id="txtPoint" class="easyui-textbox input-width" style="width:200px" /></td>
+                <td><input type="text" id="txtPoint" class="my-textbox " style="width:200px" /></td>
             </tr>
             <tr>
                 <td align="right">小数点位数：</td>
-                <td><input type="text" id="txtPointLen" class="easyui-textbox input-width" style="width:200px" /></td>
+                <td><input type="text" id="txtPointLen" class="my-textbox " style="width:200px" /></td>
             </tr>
         </table>
     </div>
     <!--/增加量程弹层-->
 
     <script type="text/javascript" language="javascript">
-     
+
         //共有的通道数量
         var tableIdx = 1;
         //创建通道
@@ -148,7 +148,7 @@
             var tfoot = " <tfoot>"
                 + "<tr><td colspan='7'><a href='javascript:void(0)' class='easyui-linkbutton' data-options=\"plain:true,iconCls:'icon-add'\" onclick=\"$('#dlg').dialog('open');set('" + tableIdx + "')\">增加量程</a></td></tr> </tfoot>";
             var table = "<table width='100%' border='0' cellspacing='0' cellpadding='0' class='tbl mt10' id='tongdao_" + tableIdx + "'>"
-                + "<thead><tr><th rowspan='2' align='center' width='140'>量程</th><th rowspan='2' align='center' width='140'>标准值</th> <th colspan='2' align='center'>显示值 <select class='easyui-combobox' name='state' style='width:100px;'><option value='AL'>&nbsp;&nbsp; </option><option value='AK'>CH1</option><option value='AZ'>CH2</option><option value='AR'>CH3</option><option value='CA'>CH4</option></select></th><th colspan='2' align='center'>相对误差</th><th align='center'>校准结果的不确定度</th></tr><tr><th align='center'>+</th><th align='center'>-</th><th align='center'>+</th><th align='center'>-</th><th align='center'>U(K=<select class='easyui-combobox' name='state' style='width:30px;'><option value='AL'>2 </option><option value='AK'>3</option><option value='AZ'>4</option></select>)</th></tr></thead>"
+                + "<thead><tr><th rowspan='2' align='center' width='140'>量程</th><th rowspan='2' align='center' width='140'>标准值</th> <th colspan='2' align='center'>显示值 <select class='my-combobox' name='state'><option value='AL'>&nbsp;&nbsp; </option><option value='AK'>CH1</option><option value='AZ'>CH2</option><option value='AR'>CH3</option><option value='CA'>CH4</option></select></th><th colspan='2' align='center'>相对误差</th><th align='center'>校准结果的不确定度</th></tr><tr><th align='center'>+</th><th align='center'>-</th><th align='center'>+</th><th align='center'>-</th><th align='center'>U(K=<select class='my-combobox' name='state' ><option value='AL'>2 </option><option value='AK'>3</option><option value='AZ'>4</option></select>)</th></tr></thead>"
                 + "<tbody id='tbody_" + tableIdx + "'></tbody>"
                 + tfoot
                 + "</table>";
@@ -173,7 +173,7 @@
                 rowLength++;
                 htmlString.push("<tr rowindex='" + rowLength + "'>");
                 if (rowidx == 0)
-                    htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"right\"><input class=\"easyui-textbox input-width\" value='" + txtNumber + "' /><select class=\"easyui-combobox1\" name=\"state_" + tableIdx + rowLength + "_" + rowLength + "\" id=\"state_" + tableIdx + "_" + rowLength + "\" onchange=\"changeValue(this)\" style=\"width:50px; height:25px\" ><option value=\"MV\">MV</option><option value=\"KV\">KV</option><option value=\"V\">V</option><option value=\"mV\">mV</option><option value=\"μv\">μv</option></select></td>");
+                    htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"center\"><input class=\"my-textbox input-width\" value='" + txtNumber + "' /><select class=\"my-combobox\" name=\"state_" + tableIdx + rowLength + "_" + rowLength + "\" id=\"state_" + tableIdx + "_" + rowLength + "\" onchange=\"changeValue(this)\" style=\"width:50px; height:25px\" ><option value=\"MV\">MV</option><option value=\"KV\">KV</option><option value=\"V\">V</option><option value=\"mV\">mV</option><option value=\"μv\">μv</option></select></td>");
 
                 for (var td1 = 0; td1 < 3; td1++) {
                     if (td1 == 0)//标准值这列
@@ -181,12 +181,12 @@
                             standardValue = calculate(rowspanIdx)[rowidx];
                         else
                             standardValue = "";
-                    htmlString.push("<td align=\"right\"><input class=\"easyui-textbox input-width\" value='" + standardValue + "' /><select class=\"easyui-combobox1\" name=\"state\" style=\"width:50px; height:25px\"><option value=\"MV\">MV</option><option value=\"KV\">KV</option><option value=\"V\">V</option><option value=\"mV\">mV</option><option value=\"μv\">μv</option></select></td>");
+                    htmlString.push("<td align=\"center\"><input class=\"my-textbox input-width\" value='" + standardValue + "' /><select class=\"my-combobox\" name=\"state\" style=\"width:50px; height:25px\"><option value=\"MV\">MV</option><option value=\"KV\">KV</option><option value=\"V\">V</option><option value=\"mV\">mV</option><option value=\"μv\">μv</option></select></td>");
                 }
                 for (var td2 = 0; td2 < 2; td2++) {
-                    htmlString.push("<td align=\"right\"><input  class=\"easyui-textbox input-width\" /></td>");
+                    htmlString.push("<td align=\"center\"><input  class=\"my-textbox input-width\" /></td>");
                 }
-                htmlString.push("<td><input  class=\"easyui-textbox input-width\" /></td>");
+                htmlString.push("<td align=\"center\"><input  class=\"my-textbox input-width\" /></td>");
                 htmlString.push("</tr>");
 
             }
@@ -194,7 +194,7 @@
 
 
             htmlString = htmlString.join("");
-            //var tr = '<tr><td rowspan="3" align="right"><input   class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input id="txtName3" class="easyui-textbox input-width"  /></td><td align="right"><input id="txtName6" class="easyui-textbox input-width"  /></td><td><input id="txtName9" class="easyui-textbox input-width"  /></td></tr><tr><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /></td><td align="right"><input class="easyui-textbox input-width"  /></td><td><input id="txtName10" class="easyui-textbox input-width"  /></td></tr><tr><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input id="txtName2" class="easyui-textbox input-width"  /><select class="easyui-combobox" name="state" style="width:50px; height:25px"><option value="">MV</option><option value="">KV</option><option value="">V</option><option value="">mV</option><option value="">μv</option></select></td><td align="right"><input id="txtName5" class="easyui-textbox input-width"  /></td><td align="right"><input id="txtName8" class="easyui-textbox input-width"  /></td><td><input id="txtName11" class="easyui-textbox input-width"  /></td></tr>';
+
             var tagRow = $("#tbody_" + idx).append(htmlString);
 
             $.parser.parse(tagRow);
@@ -284,16 +284,16 @@
             //})
             var bIdx = 0;
             var t = $("#" + obj.id + " option:selected").text();
-            $("#tongdao_" + idx + " tr:gt(" + (parseInt(rowIndex)) + "):lt(" + (parseInt(rowspanCount))+ ") td select").each(function (eIdx) {
-                if (bIdx <= eIdx)
-                    {
+            $("#tongdao_" + idx + " tr:gt(" + (parseInt(rowIndex)) + "):lt(" + (parseInt(rowspanCount)) + ") td select").each(function (eIdx) {
+                if (bIdx <= eIdx) {
                     $(this).children("option[selected='selected']").removeAttr("selected");
-                    $(this).children("option[value='"+t+"']").attr("selected", true);
+                    $(this).children("option[value='" + t + "']").attr("selected", true);
                     bIdx++;
                 }
             });
-         
+
         }
     </script>
 </body>
+
 </html>

@@ -49,9 +49,10 @@ namespace Langben.App.Controllers
             Common.Account account = GetCurrentAccount();
             string APPLIANCE_DETAIL_INFORMATIONID = string.Empty;
             string[] IDD = id.Split('^');
+            PREPARE_SCHEME pr = m_BLL4.GetById(IDD[0]);
             FILE_UPLOADER file = m_BLL2.GetPREPARE_SCHEMEID(IDD[0]);
-            IList<APPLIANCE_LABORATORY> appliance = m_BLL3.GetByRefPREPARE_SCHEMEID(IDD[0]);
-            foreach (var item in appliance)
+            //IList<APPLIANCE_LABORATORY> appliance = m_BLL3.GetByRefPREPARE_SCHEMEID(IDD[0]);
+            foreach (var item in pr.APPLIANCE_LABORATORY)
             {
                 if (IDD[1] == "H")
                 {
@@ -81,6 +82,8 @@ namespace Langben.App.Controllers
             ViewBag.NAME = file.NAME;//证书名字
             ViewBag.NAME2 = file.NAME2;//原始记录
             ViewBag.CONCLUSION = file.CONCLUSION;//结论
+            ViewBag.AUDITOPINION = pr.AUDITOPINION;//审核意见
+            ViewBag.APPROVAL = pr.APPROVAL;//审批意见
             return View();
         }
         /// <summary>
@@ -147,17 +150,19 @@ namespace Langben.App.Controllers
         IBLL.IVSHENHEBLL m_BLL;
         IBLL.IFILE_UPLOADERBLL m_BLL2;
         IBLL.IAPPLIANCE_LABORATORYBLL m_BLL3;
+        IBLL.IPREPARE_SCHEMEBLL m_BLL4;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VSHENHEController()
-            : this(new VSHENHEBLL(), new FILE_UPLOADERBLL(), new APPLIANCE_LABORATORYBLL()) { }
+            : this(new VSHENHEBLL(), new FILE_UPLOADERBLL(), new APPLIANCE_LABORATORYBLL(), new PREPARE_SCHEMEBLL()) { }
 
-        public VSHENHEController(VSHENHEBLL bll, FILE_UPLOADERBLL bll2, APPLIANCE_LABORATORYBLL bll3)
+        public VSHENHEController(VSHENHEBLL bll, FILE_UPLOADERBLL bll2, APPLIANCE_LABORATORYBLL bll3, PREPARE_SCHEMEBLL bll4)
         {
             m_BLL = bll;
             m_BLL2 = bll2;
             m_BLL3 = bll3;
+            m_BLL4 = bll4;
         }
 
     }

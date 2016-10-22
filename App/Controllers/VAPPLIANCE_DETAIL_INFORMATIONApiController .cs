@@ -90,6 +90,7 @@ namespace Langben.App.Controllers
                     app.UPDATETIME = DateTime.Now;
                     app.ID = item;
                     app.STORAGEINSTRUCTI_STATU = Common.ORDER_STATUS.器具已入库.ToString();//入库状态
+                    app.APPLIANCE_PROGRESS = "库房";//记录器具所在位置
                     //器具明细信息_承接实验室表修改器具状态
                     List<APPLIANCE_LABORATORY> list = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item);
                     appry.ORDER_STATUS = Common.ORDER_STATUS.器具已入库.ToString();//器具状态
@@ -149,6 +150,7 @@ namespace Langben.App.Controllers
                         return result; //提示更新失败
                     }
                 }
+                return result;
             }
             result.Code = Common.ClientCode.FindNull;
             result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";

@@ -25,15 +25,13 @@ namespace Langben.DAL
             int flagWhere = 0;
             string EQUIPMENT_STATUS_VALUUMN = string.Empty;
             string REPORTSTATUSZI = string.Empty;
+            DateTime? startTime = null;
+            DateTime? endTime = null;
             Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
             if (queryDic != null && queryDic.Count > 0)
             {
                 foreach (var item in queryDic)
                 {
-                    if (flagWhere != 0)
-                    {
-                        where += " and ";
-                    }                 
                     if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "EQUIPMENT_STATUS_VALUUMN")
                     {
                         EQUIPMENT_STATUS_VALUUMN = item.Value;
@@ -44,17 +42,24 @@ namespace Langben.DAL
                         REPORTSTATUSZI = item.Value;
                         continue;
                     }
-                    flagWhere++;
+                    //oracle数据库使用linq对时间段查询
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
                     {
-                        where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Time)) + "] >=  CAST('" + item.Value + "' as   System.DateTime)";
+                        startTime = Convert.ToDateTime(item.Value);
                         continue;
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(End_Time)) //结束时间+1
                     {
-                        where += "it.[" + item.Key.Remove(item.Key.IndexOf(End_Time)) + "] <  CAST('" + Convert.ToDateTime(item.Value).AddDays(1) + "' as   System.DateTime)";
+                        endTime = Convert.ToDateTime(item.Value).AddDays(1);
                         continue;
                     }
+                    if (flagWhere != 0)
+                    {
+                        where += " and ";
+                    }
+
+                    flagWhere++;
+
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Int)) //开始数值
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Int)) + "] >= " + item.Value.GetInt();
@@ -89,23 +94,42 @@ namespace Langben.DAL
             {
                 REPORTSTATUSZIarr = REPORTSTATUSZI.Split('*');
             }
-            if (REPORTSTATUSZIarr==null)
+            if (REPORTSTATUSZIarr == null)
             {
-                return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
-                     .CreateObjectSet<VRUKU>().Where(string.IsNullOrEmpty(where) ? "true" : where)
-                     .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                     //.OrderBy("it.[UPDATETIME] " + "desc")
-                     .Where(w => EQUIPMENT_STATUS_VALUUMNarr.Contains(w.EQUIPMENT_STATUS_VALUUMN))
-                     .AsQueryable();
+                var data = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
+                       .CreateObjectSet<VRUKU>().Where(string.IsNullOrEmpty(where) ? "true" : where)
+                       .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
+                       //.OrderBy("it.[UPDATETIME] " + "desc")
+                       .Where(w => EQUIPMENT_STATUS_VALUUMNarr.Contains(w.EQUIPMENT_STATUS_VALUUMN))
+                       .AsQueryable();
+                if (null != startTime)
+                {
+                    data = data.Where(m => startTime >= m.APPROVALDATE);
+                }
+                if (null != endTime)
+                {
+                    data = data.Where(m => endTime <= m.APPROVALDATE);
+                }
+                return data;
             }
-            return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
-                     .CreateObjectSet<VRUKU>().Where(string.IsNullOrEmpty(where) ? "true" : where)
-                     .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                     //.OrderBy("it.[UPDATETIME] " + "desc")
-                     .Where(w => EQUIPMENT_STATUS_VALUUMNarr.Contains(w.EQUIPMENT_STATUS_VALUUMN))
-                      .Where(w => REPORTSTATUSZIarr.Contains(w.REPORTSTATUSZI))
-                     .AsQueryable();
-
+            else
+            {
+                var data = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
+                                     .CreateObjectSet<VRUKU>().Where(string.IsNullOrEmpty(where) ? "true" : where)
+                                     .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
+                                     //.OrderBy("it.[UPDATETIME] " + "desc")
+                                     .Where(w => EQUIPMENT_STATUS_VALUUMNarr.Contains(w.EQUIPMENT_STATUS_VALUUMN)|| REPORTSTATUSZIarr.Contains(w.REPORTSTATUSZI))
+                                     .AsQueryable();
+                if (null != startTime)
+                {
+                    data = data.Where(m => startTime >= m.APPROVALDATE);
+                }
+                if (null != endTime)
+                {
+                    data = data.Where(m => endTime <= m.APPROVALDATE);
+                }
+                return data;
+            }           
         }
 
     }

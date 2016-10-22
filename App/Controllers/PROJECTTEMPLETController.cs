@@ -40,6 +40,46 @@ namespace Langben.App.Controllers
         {           
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
+
+        /// <summary>
+        /// 交流电压（电流）-相对误差-两相
+        /// </summary>
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <returns></returns> 
+        [SupportFilter]
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaLiangXiang(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+
+        /// <summary>
+        /// 交流电压(电流)-相对误差-三相
+        /// </summary>
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <returns></returns> 
+        [SupportFilter]
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaSanXiang(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+
+        /// <summary>
+        /// 频率输出-频率测量-相对误差
+        /// </summary>
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <returns></returns> 
+        [SupportFilter]
+        public ActionResult PingLuShuChuCheLinagXiangDuiWuCha(string RULEID = "34-1999_2_41", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+
         public ActionResult Detail(string RULEID = "", string SCHEMEID = "",string PREPARE_SCHEMEID="")
         {
             ViewBag.ITEID = "";
