@@ -239,6 +239,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="html\变送器-功率-引用误差.html" />
     <Content Include="html\直流电压（电流）测量-正负极性-相对误差（多通道）.html" />
     <Content Include="html\交流电压%28电流%29-相对误差-三相.html" />
     <Content Include="html\交流电压（电流）-相对误差-两相.html" />
