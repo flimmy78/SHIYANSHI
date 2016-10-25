@@ -66,7 +66,7 @@
                     <label>     审核意见：</label>
                 </div>
                 <div class="textarea-box">
-                    <textarea name="AUDITOPINION"></textarea>
+                    <textarea name="AUDITOPINION">@ViewBag.AUDITOPINION</textarea>
                 </div>
                 <input type="hidden" name="ID" value="@ViewBag.PREPARE_SCHEME_ID" />
                 <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
@@ -92,7 +92,7 @@
                     </label>
                 </div>
                 <div class="textarea-box">
-                    <textarea name="APPROVAL" style="height:80px;"></textarea>
+                    <textarea name="APPROVAL" style="height:80px;">@ViewBag.APPROVAL</textarea>
                 </div>
 
                 <input type="hidden" name="ID" value="@ViewBag.PREPARE_SCHEME_ID" />

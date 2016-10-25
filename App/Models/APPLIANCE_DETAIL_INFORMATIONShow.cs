@@ -39,6 +39,7 @@ namespace Langben.App.Models
         public string RETURN_INSTRUCTIONS { get; set; }
         public string UNDERTAKE_LABORATORYIDString { get; set; }
         public APPLIANCE_LABORATORYShow APPLIANCE_LABORATORYShow { get; set; }
+        public string ORDER_STATUS_NAME { get; set; }//记入退回实验室
         //  public virtual ORDER_TASK_INFORMATIONShow ORDER_TASK_INFORMATION { get; set; }
     }
 }

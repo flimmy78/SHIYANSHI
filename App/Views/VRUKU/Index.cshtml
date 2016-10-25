@@ -17,7 +17,7 @@
             @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE):
         </div>
         <div class="input_search-field">
-            <input type='text' id='CERTIFICATE_ENTERPRISE' />
+           @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
         </div>
     </div>
     <div class="input_search">
@@ -32,8 +32,10 @@
         <div class="input_search-label">
             @Html.LabelFor(model => model.APPROVALDATE):
         </div>
-        <div class="input_search-field">
-            <input type='text' id='APPROVALDATE' />
+        <div class='input_search-field-time'>
+            <input type="text" id="APPROVALDATEStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'APPROVALDATEStart_Time\');}' })" />
+            <span>到</span>
+            <input type="text" id="APPROVALDATEEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'APPROVALDATEEnd_Time\');}' })" />
         </div>
     </div>
     <div class="input_search">
@@ -66,7 +68,7 @@
             striped: true,
             collapsible: true,
             url: '../VRUKU/GetData', //获取数据的url
-            sortName: 'ID',
+            sortName: 'APPROVALDATE',
             sortOrder: 'desc',
             idField: 'ID',
 
@@ -123,12 +125,12 @@
 
         //将查询条件按照分隔符拼接成字符串
         var search = "";
-        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
-            if (this.id)
-                search = search + this.id + "&" + this.value + "^";
-            else
-                search = search + this.name + "&" + this.value + "^";
-        });
+        search += "ORDER_NUMBER&" + $("#ORDER_NUMBER").val() + "^";
+        search += "CERTIFICATE_ENTERPRISE&" + $('#CERTIFICATE_ENTERPRISE').combobox('getValue') + "^";
+        search += "UNDERTAKE_LABORATORYID&" + $("#UNDERTAKE_LABORATORYID option:selected").val() + "^";
+        search += "APPROVALDATEStart_Time&" + $("#APPROVALDATEStart_Time").val() + "^";
+        search += "APPROVALDATEEnd_Time&" + $("#APPROVALDATEEnd_Time").val() + "^";
+        search += "STORAGEINSTRUCTI_STATU&" + $("#STORAGEINSTRUCTI_STATU option:selected").val() + "^";
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
