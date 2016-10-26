@@ -401,8 +401,7 @@ s：字符串
                 entity.CONTACT_PHONE2 = $("#CONTACT_PHONE2").val();//联系电话2
                 entity.FAX2 = $("#FAX2").val();//传真2
                 entity.CUSTOMER_SPECIFIC_REQUIREMENTS = $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val();//客户特殊要求
-                if (ifshuju(entity)) {
-                    if (false) {                  
+                if (ifshuju(entity)) {               
                     //将委托单信息发送到服务器
                     $.ajax({
                         url: "/api/ORDER_TASK_INFORMATIONApi/PutUpdate",
@@ -420,7 +419,6 @@ s：字符串
                             }
                         }
                     });
-                    }
                 }
             }
         })

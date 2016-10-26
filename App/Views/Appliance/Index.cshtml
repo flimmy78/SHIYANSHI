@@ -688,7 +688,6 @@ s：字符串
                     entity.FAX2 = $("#FAX2").val();//传真2
                     entity.CUSTOMER_SPECIFIC_REQUIREMENTS = $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val();//客户特殊要求
                     if (ifshuju(entity)) {
-                        if (false) {
                             //将委托单信息发送到服务器
                             $.ajax({
                                 url: "/ORDER_TASK_INFORMATION/Save",
@@ -708,8 +707,7 @@ s：字符串
                                         $.messager.alert('操作提示', "发送实验室失败！", 'error');
                                     }
                                 }
-                            });
-                        }
+                            });                       
                     }
                 }
             })
