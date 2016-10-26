@@ -237,7 +237,7 @@
                 @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
             </div>
             <div class="editor-field">
-                @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "请选择", new { @class = "easyui-combobox" })
+                @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "华北电力科学研究院有限责任公司", new { @class = "easyui-combobox" })
             </div>
         </div>
         <div class="editor-form">
@@ -495,7 +495,7 @@
 如果全是空返回true,否则返回false
 */
     function isPOST(str) {
-        var regu = /^[a-zA-Z0-9 ]{3,12}$/;
+        var regu = /[1-9]\d{5}(?!\d)/;
         //var re = new RegExp(regu);
         return regu.test(str);
     }
@@ -506,7 +506,7 @@
 如果全是空返回true,否则返回false
 */
     function isFAX(str) {
-        var regu = /^[+]{0,1}(\d){1,3}[ ]?([-]?((\d)|[ ]){1,12})+$/;
+        var regu = /(^(\d{3,4}-)?\d{7,8})$|^((1[0-9][0-9]\d{8}$))/;
         //var re = new RegExp(regu);
         return regu.test(str);
     }
@@ -603,8 +603,6 @@ s：字符串
         })
     }
     $(function () {
-
-
         //删除
         function flexiDelete() {
             //var rows = $('#ApplianceDate').datagrid("getSelections");
@@ -689,27 +687,29 @@ s：字符串
                     entity.CONTACT_PHONE2 = $("#CONTACT_PHONE2").val();//联系电话2
                     entity.FAX2 = $("#FAX2").val();//传真2
                     entity.CUSTOMER_SPECIFIC_REQUIREMENTS = $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val();//客户特殊要求
-                    if (ifshuju(entity)) {            
-                        //将委托单信息发送到服务器
-                        $.ajax({
-                            url: "/ORDER_TASK_INFORMATION/Save",
-                            type: "Post",
-                            dataType: "json",
-                            data: {
-                                entity: entity
-                            },
-                            success: function (data) {
-                                if (data.Code == 1) {
+                    if (ifshuju(entity)) {
+                        if (false) {
+                            //将委托单信息发送到服务器
+                            $.ajax({
+                                url: "/ORDER_TASK_INFORMATION/Save",
+                                type: "Post",
+                                dataType: "json",
+                                data: {
+                                    entity: entity
+                                },
+                                success: function (data) {
+                                    if (data.Code == 1) {
 
-                                    $.messager.alert('操作提示', "发送实验室成功！", 'info', function () {
-                                        window.location.href = '';
-                                    });
+                                        $.messager.alert('操作提示', "发送实验室成功！", 'info', function () {
+                                            window.location.href = '';
+                                        });
+                                    }
+                                    else {
+                                        $.messager.alert('操作提示', "发送实验室失败！", 'error');
+                                    }
                                 }
-                                else {
-                                    $.messager.alert('操作提示', "发送实验室失败！", 'error');
-                                }
-                            }
-                        });
+                            });
+                        }
                     }
                 }
             })
@@ -824,7 +824,9 @@ s：字符串
                           multiple: true,
                           data: [{ value: '@Common.LABORATORYNAME.电能.ToString()', text: '@Common.LABORATORYNAME.电能.ToString()' }, { value: '@Common.LABORATORYNAME.指示仪表.ToString()', text: '@Common.LABORATORYNAME.指示仪表.ToString()' },
                               { value: '@Common.LABORATORYNAME.数表单相.ToString()', text: '@Common.LABORATORYNAME.数表单相.ToString()' }, { value: '@Common.LABORATORYNAME.互感器.ToString()', text: '@Common.LABORATORYNAME.互感器.ToString()' }, { value: '@Common.LABORATORYNAME.数表三相.ToString()', text: '@Common.LABORATORYNAME.数表三相.ToString()' }, { value: '@Common.LABORATORYNAME.直流仪器.ToString()', text: '@Common.LABORATORYNAME.直流仪器.ToString()' }],
-                          panelHeight: 'auto'
+                          panelHeight: 'auto',
+                          required: true,
+                          missingMessage: '必填'
                       }
                   }
               }
