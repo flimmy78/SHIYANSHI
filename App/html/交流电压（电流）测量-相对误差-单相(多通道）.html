@@ -13,16 +13,12 @@
     <link href="/Content/default.css" rel="stylesheet" />
     <link href="/Content/StyleSheet.css" rel="stylesheet" />
 
-
     <script src="/Scripts/jquery.min.js"></script>
     <script src="/Scripts/JScriptCommon.js"></script>
     <script src="/Res/easyui/jquery.easyui.min.js"></script>
     <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
-
     <script src="/Scripts/jquery.validate.js"></script>
     <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
-
-
 
 </head>
 <body class="easyui-layout">
@@ -34,7 +30,7 @@
 
                     <td>
                         <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a>
-                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="CreateTable()">保存检测项</a>
+                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" >保存检测项</a>
                     </td>
                 </tr>
             </table>
@@ -46,114 +42,13 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_dy_1">
                 <thead>
                     <tr>
-                        <th rowspan="2" align="center" width="140">量程</th>
-
-                        <th colspan="3" align="center" width="140"> 显示值</th>
-                        <th colspan="3" align="center" width="140">标准值</th>
-                        <th colspan="3" align="center" width="140">相对误差</th>
-                        <th align="center">校准结果的不确定度</th>
-                    </tr>
-                    <tr>
-                        <th align="center" class="f14">
-                            <select class="my-combobox" name="" style="">
-                                <option value="">UAB </option>
-                                <option value="">UBC</option>
-                                <option value="">U1</option>
-                                <option value="">U2</option>
-                                <option value="">UA</option>
-                                <option value="">UB</option>
-                                <option value="">UC</option>
-                            </select>
-                        </th>
-                        <th align="center" class="f14">
-                            <select class="my-combobox" name="" style="">
-                                <option value="">UAB </option>
-                                <option value="">UBC</option>
-                                <option value="">U1</option>
-                                <option value="">U2</option>
-                                <option value="">UA</option>
-                                <option value="">UB</option>
-                                <option value="">UC</option>
-                            </select>
-                        </th>
-                        <th align="center" class="f14">
-                            <select class="my-combobox" name="" style="">
-                                <option value="">UAB </option>
-                                <option value="">UBC</option>
-                                <option value="">U1</option>
-                                <option value="">U2</option>
-                                <option value="">UA</option>
-                                <option value="">UB</option>
-                                <option value="">UC</option>
-                            </select>
-                        </th>
-                        <th align="center" class="f14">
-                            <select class="my-combobox" name="" style="">
-                                <option value="">UAB </option>
-                                <option value="">UBC</option>
-                                <option value="">U1</option>
-                                <option value="">U2</option>
-                                <option value="">UA</option>
-                                <option value="">UB</option>
-                                <option value="">UC</option>
-                            </select>
-                        </th>
-                        <th align="center" class="f14">
-                            <select class="my-combobox" name="" style="">
-                                <option value="">UAB </option>
-                                <option value="">UBC</option>
-                                <option value="">U1</option>
-                                <option value="">U2</option>
-                                <option value="">UA</option>
-                                <option value="">UB</option>
-                                <option value="">UC</option>
-                            </select>
-                        </th>
-                        <th align="center" class="f14">
-                            <select class="my-combobox" name="" style="">
-                                <option value="">UAB </option>
-                                <option value="">UBC</option>
-                                <option value="">U1</option>
-                                <option value="">U2</option>
-                                <option value="">UA</option>
-                                <option value="">UB</option>
-                                <option value="">UC</option>
-                            </select>
-                        </th>
-                        <th align="center" class="f14">
-                            <select class="my-combobox" name="" style="">
-                                <option value="">UAB </option>
-                                <option value="">UBC</option>
-                                <option value="">U1</option>
-                                <option value="">U2</option>
-                                <option value="">UA</option>
-                                <option value="">UB</option>
-                                <option value="">UC</option>
-                            </select>
-                        </th>
-                        <th align="center" class="f14">
-                            <select class="my-combobox" name="" style="">
-                                <option value="">UAB </option>
-                                <option value="">UBC</option>
-                                <option value="">U1</option>
-                                <option value="">U2</option>
-                                <option value="">UA</option>
-                                <option value="">UB</option>
-                                <option value="">UC</option>
-                            </select>
-                        </th>
-                        <th align="center" class="f14">
-                            <select class="my-combobox" name="" style="">
-                                <option value="">UAB </option>
-                                <option value="">UBC</option>
-                                <option value="">U1</option>
-                                <option value="">U2</option>
-                                <option value="">UA</option>
-                                <option value="">UB</option>
-                                <option value="">UC</option>
-                            </select>
-                        </th>
+                        <th align="center" width="140">量程</th>
+                        <th width="140" align="center"> 显示值</th>
+                        <th width="140" align="center">赫兹(Hz)</th>
+                        <th width="140" align="center">标准值</th>
+                        <th width="140" align="center">相对误差</th>
                         <th align="center">
+                            校准结果的不确定度<br>
                             U(K = <select class="my-combobox" name="state">
                                 <option value="">2 </option>
                                 <option value="">3</option>
@@ -164,91 +59,88 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody id="tbody_1"></tbody>
+                <tbody id="tbody_1">
+                    <!--示例，可删 -->
+                    <!--/示例，可删 -->
+                </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="11"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open'); set('1')">增加量程</a></td>
+                        <td colspan="8"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open'); set('1')">增加量程</a></td>
 
                     </tr>
                 </tfoot>
             </table>
 
-            <br>
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_dl_1">
+            
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_dl_1">
                 <thead>
                     <tr>
                         <th rowspan="2" align="center" width="140">量程</th>
 
-                        <th colspan="3" align="center" width="140"> 显示值</th>
-                        <th colspan="3" align="center" width="140">标准值</th>
-                        <th colspan="3" align="center" width="140">相对误差</th>
+                        <th colspan="2" align="center" width="140"> 显示值</th>
+                        <th colspan="2" align="center" width="140">标准值</th>
+                        <th colspan="2" align="center" width="140">相对误差</th>
                         <th align="center">校准结果的不确定度</th>
                     </tr>
                     <tr>
                         <th align="center" class="f14">
                             <select class="my-combobox" name="" style="">
-                                <option value="">IA </option>
-                                <option value="">IB</option>
-                                <option value="">IC</option>
+                                <option value="">I1 </option>
+                                <option value="">I2</option>
+                                <option value="">I0</option>
+                                <option value="">I20</option>
+
                             </select>
                         </th>
                         <th align="center" class="f14">
                             <select class="my-combobox" name="" style="">
-                                <option value="">IA </option>
-                                <option value="">IB</option>
-                                <option value="">IC</option>
+                                <option value="">I1 </option>
+                                <option value="">I2</option>
+                                <option value="">I0</option>
+                                <option value="">I20</option>
+
+                            </select>
+                        </th>
+                        
+                        <th align="center" class="f14">
+                            <select class="my-combobox" name="" style="">
+                                <option value="">I1 </option>
+                                <option value="">I2</option>
+                                <option value="">I0</option>
+                                <option value="">I20</option>
+
                             </select>
                         </th>
                         <th align="center" class="f14">
                             <select class="my-combobox" name="" style="">
-                                <option value="">IA </option>
-                                <option value="">IB</option>
-                                <option value="">IC</option>
+                                <option value="">I1 </option>
+                                <option value="">I2</option>
+                                <option value="">I0</option>
+                                <option value="">I20</option>
+
                             </select>
                         </th>
+                      
                         <th align="center" class="f14">
                             <select class="my-combobox" name="" style="">
-                                <option value="">IA </option>
-                                <option value="">IB</option>
-                                <option value="">IC</option>
-                            </select>
-                        </th>
-                        <th align="center" class="f14">
-                            <select class="my-combobox" name="" style="">
-                                <option value="">IA </option>
-                                <option value="">IB</option>
-                                <option value="">IC</option>
-                            </select>
-                        </th>
-                        <th align="center" class="f14">
-                            <select class="my-combobox" name="" style="">
-                                <option value="">IA </option>
-                                <option value="">IB</option>
-                                <option value="">IC</option>
-                            </select>
-                        </th>
-                        <th align="center" class="f14">
-                            <select class="my-combobox" name="" style="">
-                                <option value="">IA </option>
-                                <option value="">IB</option>
-                                <option value="">IC</option>
+                                <option value="">I1 </option>
+                                <option value="">I2</option>
+                                <option value="">I0</option>
+                                <option value="">I20</option>
+
                             </select>
                         </th>
 
                         <th align="center" class="f14">
                             <select class="my-combobox" name="" style="">
-                                <option value="">IA </option>
-                                <option value="">IB</option>
-                                <option value="">IC</option>
+                                <option value="">I1 </option>
+                                <option value="">I2</option>
+                                <option value="">I0</option>
+                                <option value="">I20</option>
+
                             </select>
                         </th>
-                        <th align="center" class="f14">
-                            <select class="my-combobox" name="" style="">
-                                <option value="">IA </option>
-                                <option value="">IB</option>
-                                <option value="">IC</option>
-                            </select>
-                        </th>
+                       
                         <th align="center">
                             U(K = <select class="my-combobox" name="state" style=";">
                                 <option value="">2 </option>
@@ -260,7 +152,9 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody id="tbody_1"></tbody>
+                <tbody id="tbody_1">
+                 
+                </tbody>
                 <tfoot>
                     <tr>
                         <td colspan="8"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open'); set('1')">增加量程</a></td>
@@ -276,7 +170,7 @@
 
                 <tr>
                     <th width="40">注：</th>
-                    <td colspan="6"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:30px; width:95%" value="显示值、标准值的单位与量程单位一致。"></td>
+                    <td colspan="6"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:30px; width:95%" value=""></td>
                 </tr>
                 <tr>
                     <th width="40">结论：</th>
@@ -306,21 +200,23 @@
         <table>
             <tr>
                 <td width="80" align="right">量程值：</td>
-                <td><input type="text" id="txtNumber" class="easyui-textbox  required digits" style="width:200px" /></td>
+                <td><input type="text" id="txtNumber" class="my-textbox  required digits" style="width:200px" /></td>
             </tr>
             <tr>
                 <td align="right">检测点数：</td>
-                <td><input type="text" id="txtPoint" class="easyui-textbox  required digits" style="width:200px" /></td>
+                <td><input type="text" id="txtPoint" class="my-textbox  required digits" style="width:200px" /></td>
             </tr>
             <tr>
                 <td align="right">小数点位数：</td>
-                <td><input type="text" id="txtPointLen" class="easyui-textbox  required digits" style="width:200px" /></td>
+                <td><input type="text" id="txtPointLen" class="my-textbox  required digits" style="width:200px" /></td>
             </tr>
         </table>
     </div>
     <!--/增加量程弹层-->
 
     <script type="text/javascript" language="javascript">
+      
+
         var showTalbleId = "tongdao_dy";
 
         if (1 == 1) {
@@ -365,51 +261,28 @@
 
             tableIdx++;
             var tfoot = " <tfoot>"
-                + "<tr><td colspan='7'><a href='javascript:void(0)' class='easyui-linkbutton' data-options=\"plain:true,iconCls:'icon-add'\" onclick=\"$('#dlg').dialog('open');set('" + tableIdx + "')\">增加量程</a></td></tr> </tfoot>";
+                + "<tr><td colspan='6'><a href='javascript:void(0)' class='easyui-linkbutton' data-options=\"plain:true,iconCls:'icon-add'\" onclick=\"$('#dlg').dialog('open');set('" + tableIdx + "')\">增加量程</a></td></tr> </tfoot>";
             var table = "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"tbl mt10\" id='" + showTalbleId + "_" + tableIdx + "'>" +
                         "<thead>" +
                             "<tr>" +
-                                "<th rowspan=\"2\" align=\"center\" width=\"140\">量程</th>" +
-                                "<th colspan=\"3\" align=\"center\" width=\"140\"> 显示值</th>" +
-                                "<th colspan=\"3\" align=\"center\" width=\"140\">标准值</th>" +
-                                "<th colspan=\"3\" align=\"center\" width=\"140\">相对误差</th> " +
-                                "<th align=\"center\">校准结果的不确定度</th>" +
-                           " </tr>" +
-                            "<tr>" +
-                                "<th align=\"center\" class=\"f14\">" + selectHTML + "</th>" +
-                                 "<th align=\"center\" class=\"f14\">" + selectHTML + "</th>" +
-                                  "<th align=\"center\" class=\"f14\">" +
-                                   selectHTML +
-                                "</th>" +
-                                "<th align=\"center\" class=\"f14\">" +
-                                   selectHTML +
-                                "</th>" +
-                                 "<th align=\"center\" class=\"f14\">" +
-                                   selectHTML +
-                                "</th>" +
-                                 "<th align=\"center\" class=\"f14\">" +
-                                   selectHTML +
-                                "</th>" +
-                                  "<th align=\"center\" class=\"f14\">" +
-                                   selectHTML +
-                                "</th>" +
-                                  "<th align=\"center\" class=\"f14\">" +
-                                   selectHTML +
-                                "</th>" +
-                                 "<th align=\"center\" class=\"f14\">" +
-                                   selectHTML +
-                                "</th>" +
-                               " <th align=\"center\"> " +
-                                    "U(K = <select class=\"my-combobox\" name=\"state\" > " +
+                                "<th align=\"center\" width=\"140\">量程</th>" +
+                                "<th align=\"center\" width=\"140\"> 显示值</th>" +
+								"<th align=\"center\" width=\"140\"> 赫兹(Hz)</th>" +
+                                "<th  align=\"center\" width=\"140\">标准值</th>" +
+                                "<th  align=\"center\" width=\"140\">相对误差</th> " +
+                                "<th align=\"center\">校准结果的不确定度<br>"+
+								"U(K = <select class=\"my-combobox\" name=\"state\" style=\";\"> " +
                                         "<option value=\"\">2 </option>" +
                                         "<option value=\"\">3</option>" +
                                         "<option value=\"\">√3</option>  " +
                                     " </select>) " +
-                                    "</th> " +
-                                    " </tr>" +
+								"</th>" +
+                           " </tr>" +
+                           
                         "</thead><tbody id='tbody_" + tableIdx + "'></tbody>"
              + tfoot
                    + " </table>";
+            console.log(table);
             var tagobj = $(table).appendTo($('#tongdao'));
             $.parser.parse(tagobj);
 
@@ -419,30 +292,34 @@
             $("#rowindex").val(idx);
             // alert($("#rowindex").val());
         }
+  
+
         function CreateRow() {
+            var changeHTML = "onchange=\"changeValue(this)\"";
+            var selectTemp = "<select class=\"my-combobox\" name=\"state_\"><option value=\"MV\">MV</option><option value=\"KV\">KV</option><option value=\"V\">V</option><option value=\"mV\">mV</option><option value=\"μv\">μv</option></select>";
             var idx = $("#rowindex").val();
             var rowspanIdx = $("#txtPoint").val();     //检测点数
             var txtNumber = $("#txtNumber").val(); //量程
-            var standardValue = "";
+            var standardValue ="";
             var htmlString = [];
             var rowLength = $("#tbody_" + idx + " tr").length;
             for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
                 rowLength++;
                 htmlString.push("<tr rowindex='" + rowLength + "'>");
                 if (rowidx == 0)
-                    htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"right\"><input class=\"my-textbox input-width\" value='" + txtNumber + "' /><select class=\"my-combobox\" name=\"state_" + tableIdx + rowLength + "_" + rowLength + "\" id=\"state_" + tableIdx + "_" + rowLength + "\" onchange=\"changeValue(this)\" style=\"width:50px; height:25px\" ><option value=\"MV\">MV</option><option value=\"KV\">KV</option><option value=\"V\">V</option><option value=\"mV\">mV</option><option value=\"μv\">μv</option></select></td>");
-
+                    htmlString.push("<td rowspan='" + rowspanIdx + "' align=\"center\"><input class=\"my-textbox input-width\" value='" + txtNumber + "' /><select class=\"my-combobox\" name=\"state_" + idx + "_" + rowLength + "\" id=\"state_" + idx + "_" + rowLength + "\" onchange=\"changeValue(this)\"  > <option value=\"MV\">MV</option><option value=\"KV\">KV</option><option value=\"V\">V</option><option value=\"mV\">mV</option><option value=\"μv\">μv</option></select></td>");
                 if ((rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10))
                     standardValue = calculate(rowspanIdx)[rowidx];
-                for (var td1 = 0; td1 < 10; td1++) {
-                    if (td1 < 6) {
-                        htmlString.push("<td align=\"right\"><input class=\"my-textbox input-width\" value='" + (standardValue == "" ? "" : standardValue.ShowData) + "' style=\"width:100%\" onblur='resetValue(this)'/></td>");
-                    }
-                    else if (td1 > 5 && td1 < 9) {
-                        htmlString.push("<td align=\"right\"><input class=\"my-textbox input-width\" value='" + (standardValue == "" ? "" : standardValue.XiangDuiWuCha) + "' style=\"width:100%\" onblur='resetValue(this)'/></td>");
-                    }
-                    else
-                        htmlString.push("<td align=\"right\"><input class=\"my-textbox input-width\" value='' style=\"width:100%\"/></td>");
+
+                for (var td1 = 0; td1 < 5; td1++) {
+                    if(td1==0 )
+                        htmlString.push("<td align=\"center\"><input class=\"my-textbox input-width\" value='" + (standardValue == "" ? "" : standardValue.ShowData) + "' onblur='resetValue(this)'/>" + selectTemp + "</td>");
+                    else if (td1 == 1 || td1 == 3)
+                        htmlString.push("<td align=\"center\"><input class=\"my-textbox input-width\" value='" + (td1 == 3 ? (standardValue == "" ? "" : standardValue.XiangDuiWuCha) : "") + "' style=\"width:100%\"/></td>");
+                    if (td1 == 2 || td1==4)
+                        htmlString.push("<td align=\"center\"><input class=\"my-textbox input-width\" value='" + (td1==2?(standardValue == "" ? "" : standardValue.BiaoZhunData):"") + "'  onblur='resetValue(this)'/>" + selectTemp + "</td>");
+                   
+
 
                 }
 
@@ -453,58 +330,37 @@
 
 
             htmlString = htmlString.join("");
-
+            
             var tagRow = $("#tbody_" + idx).append(htmlString);
+
             $.parser.parse(tagRow);
-            console.log((htmlString));
-
         }
-
         ///计算标准值
         function resetValue(obj) {
             //重新计算当前行
-            var rowspan = $(obj).parent().parent().find('td').eq(0).attr("rowspan");
-
-            var cellIdx = 7;
-            if (rowspan != undefined) {
+            var rowindex = $(obj).parent().parent().attr("rowindex");
+            var iidex = 1;
+            if (rowindex == 1) {
                 var showData = $(obj).parent().parent().find('td').eq(1).find('input').val();
-                var biaoZhunData = $(obj).parent().parent().find('td').eq(4).find('input').val();
-                var xiangDuiWuCha = (showData == "" || biaoZhunData == "") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                $(obj).parent().parent().find('td').eq(7).find('input').val(xiangDuiWuCha);
-
-                var showData = $(obj).parent().parent().find('td').eq(2).find('input').val();
-                var biaoZhunData = $(obj).parent().parent().find('td').eq(5).find('input').val();
-                var xiangDuiWuCha = (showData == "" || biaoZhunData == "") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                $(obj).parent().parent().find('td').eq(8).find('input').val(xiangDuiWuCha);
-
-                var showData = $(obj).parent().parent().find('td').eq(3).find('input').val();
-                var biaoZhunData = $(obj).parent().parent().find('td').eq(6).find('input').val();
-                var xiangDuiWuCha = (showData == "" || biaoZhunData == "") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                $(obj).parent().parent().find('td').eq(9).find('input').val(xiangDuiWuCha);
+                var biaoZhunData = $(obj).parent().parent().find('td').eq(3).find('input').val();
+                var xiangDuiWuCha = (showData == "" || biaoZhunData == "")?"":((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                $(obj).parent().parent().find('td').eq(4).find('input').val(xiangDuiWuCha);
             }
             else {
                 var showData = $(obj).parent().parent().find('td').eq(0).find('input').val();
-                var biaoZhunData = $(obj).parent().parent().find('td').eq(3).find('input').val();
+                var biaoZhunData = $(obj).parent().parent().find('td').eq(2).find('input').val();
                 var xiangDuiWuCha = (showData == "" || biaoZhunData == "") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                $(obj).parent().parent().find('td').eq(6).find('input').val(xiangDuiWuCha);
-
-                var showData = $(obj).parent().parent().find('td').eq(1).find('input').val();
-                var biaoZhunData = $(obj).parent().parent().find('td').eq(4).find('input').val();
-                var xiangDuiWuCha = (showData == "" || biaoZhunData == "") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                $(obj).parent().parent().find('td').eq(7).find('input').val(xiangDuiWuCha);
-
-                var showData = $(obj).parent().parent().find('td').eq(2).find('input').val();
-                var biaoZhunData = $(obj).parent().parent().find('td').eq(5).find('input').val();
-                var xiangDuiWuCha = (showData == "" || biaoZhunData == "") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                $(obj).parent().parent().find('td').eq(8).find('input').val(xiangDuiWuCha);
+                $(obj).parent().parent().find('td').eq(3).find('input').val(xiangDuiWuCha);
             }
+          
 
+           
         }
         var pointLen = 2;
         ///计算标准值
         function calculate(point) {
             var txtNumber = $("#txtNumber").val(); //量程
-            pointLen = $("#txtPointLen").val(); //小数点位数
+             pointLen = $("#txtPointLen").val(); //小数点位数
             var arry = new Array();
             var showData = (txtNumber * 1).toFixed(pointLen);
             var biaoZhunData = (txtNumber * 1).toFixed(pointLen);
@@ -596,6 +452,7 @@
                 xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
                 arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
             }
+
             return arry;
         }
 
@@ -634,21 +491,10 @@
             var idx = obj.id.split('_')[1];
             var rowspanCount = $(obj).parent().parent().find('td').eq(0).attr("rowspan");
             var rowIndex = $(obj).parent().parent().eq(0).attr("rowindex");
-
-            //$("#tongdao_" + idx + " tr:gt(" + (parseInt(rowIndex) - 1) + ") td select").each(function (i) {
-            //    if (i <= parseInt(rowspanCount))
-            //    {
-            //        if ($(this).attr("id") != obj.id)
-            //            $(this).find("option").each(function () {
-            //                if ($(this).text() == $("#" + obj.id + " option:selected").text()) {
-            //                    $(this).attr("selected", "selected");
-            //                }
-            //            });
-            //    }
-            //})
+            
             var bIdx = 0;
             var t = $("#" + obj.id + " option:selected").text();
-            $("#tongdao_" + idx + " tr:gt(" + (parseInt(rowIndex)) + "):lt(" + (parseInt(rowspanCount)) + ") td select").each(function (eIdx) {
+            $("#" + showTalbleId+"_" + idx + " tr:gt(" + (parseInt(rowIndex) - 1) + "):lt(" + (parseInt(rowspanCount)) + ") td select").each(function (eIdx) {
                 if (bIdx <= eIdx) {
                     $(this).children("option[selected='selected']").removeAttr("selected");
                     $(this).children("option[value='" + t + "']").attr("selected", true);
@@ -657,10 +503,7 @@
             });
 
         }
+
     </script>
 </body>
-
-
-
 </html>
-
