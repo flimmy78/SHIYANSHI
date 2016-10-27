@@ -420,32 +420,32 @@
         }
         if (entity.APPLIANCE_DETAIL_INFORMATION.length >= 1) {
             for (var i = 0; i < entity.APPLIANCE_DETAIL_INFORMATION.length; i++) {
-                if (entity.APPLIANCE_DETAIL_INFORMATION[i].APPLIANCE_NAME == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].VERSION == "undefined"
-                    || entity.APPLIANCE_DETAIL_INFORMATION[i].NUM == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].APPEARANCE_STATUS == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID == "undefined") {
-                    zhi += "器具数据有误！<br>";
-                    break;
-                }
-                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].APPLIANCE_NAME)) {
-                    zhi += "器具名称不能为空！<br>";
-                }
-                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].VERSION)) {
-                    zhi += "型号不能为空！<br>";
-                }
-                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
-                    zhi += "数量不能为空！<br>";
-                }
-                else {
-                    if (!isNumber(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
-                        zhi += "数量必须为数字整型！<br>";
-                    }
-                }
-                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].APPEARANCE_STATUS)) {
-                    zhi += "外观状态不能为空！<br>";
-                }
-                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID)) {
-                    zhi += "实验室不能为空！<br>";
-                }
-                else {
+                //if (entity.APPLIANCE_DETAIL_INFORMATION[i].APPLIANCE_NAME == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].VERSION == "undefined"
+                //    || entity.APPLIANCE_DETAIL_INFORMATION[i].NUM == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].APPEARANCE_STATUS == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID == "undefined") {
+                //    zhi += "器具数据有误！<br>";
+                //    break;
+                //}
+                //if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].APPLIANCE_NAME)) {
+                //    zhi += "器具名称不能为空！<br>";
+                //}
+                //if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].VERSION)) {
+                //    zhi += "型号不能为空！<br>";
+                //}
+                //if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
+                //    zhi += "数量不能为空！<br>";
+                //}
+                //else {
+                //    if (!isNumber(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
+                //        zhi += "数量必须为数字整型！<br>";
+                //    }
+                //}
+                //if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].APPEARANCE_STATUS)) {
+                //    zhi += "外观状态不能为空！<br>";
+                //}
+                //if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID)) {
+                //    zhi += "实验室不能为空！<br>";
+                //}
+                //else {
                     var a = entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID;
                     var b = a.split(',');
                     if (b.length > 2) {
@@ -459,7 +459,7 @@
                             }
                         }
                     }
-                }
+                //}
             }
         }
         else {
