@@ -66,6 +66,7 @@ namespace Langben.DAL.shiyanshi
                 item.DataRowIndx = 49;
                 item.RemarkRowIndx = 50;
                 item.TitleRowIndx = 48;
+                item.TitleRowCount = 1;
                 if (!result.ContainsKey(item.InpputState.ToString()))
                 {
                     result.Add(item.InpputState.ToString(), item);
@@ -98,6 +99,15 @@ namespace Langben.DAL.shiyanshi
         {
             get { return _TitleRowIndex; }
             set { _TitleRowIndex = value; }
+        }
+        private int _TitleRowCount = 1;
+        /// <summary>
+        /// 标头行数
+        /// </summary>
+        public int TitleRowCount
+        {
+            get { return _TitleRowCount; }
+            set { _TitleRowCount = value; }
         }
         private int _DataRowIndx = -1;
         /// <summary>
