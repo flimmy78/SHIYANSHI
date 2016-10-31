@@ -87,7 +87,7 @@
 					, { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 259 }//客户特殊要求
                     , {
                         field: 'aa', title: '操作记录', width: 86, formatter: function (value, row, index) {
-                            return html = "<a href=''>详情</a>";
+                            return html = "<a onclick='showMyWindow(\"" + row.ID + "\");'href='#'>详情</a>";
                         }
                     }
             ]],
@@ -236,5 +236,25 @@
         return false;
     }
 
+    //详情
+    function showMyWindow(href) {
 
+        $('#myWindow').window({
+            title: '详情',
+            width: 600,
+            height: 450,
+            content: '<iframe scrolling="yes" frameborder="0"  src="/PRINTREPORT/Index/' + href + '" style="width:100%;height:98%;"></iframe>',
+            //        href: href === undefined ? null : href,
+            modal: true,
+            minimizable: false,
+            maximizable: false,
+            shadow: false,
+            cache: false,
+            closed: false,
+            collapsible: false,
+            resizable: false,
+            loadingMessage: '正在加载数据，请稍等片刻......'
+        });
+
+    }
 </script>
