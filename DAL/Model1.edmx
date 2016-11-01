@@ -126,6 +126,7 @@
           <Property Name="APPLIANCE_DETAIL_INFORMATIONID" Type="varchar2" MaxLength="36" />
           <Property Name="APPLIANCECOLLECTIONSATE" Type="varchar2" MaxLength="200" />
           <Property Name="LABORATORY" Type="varchar2" MaxLength="200" />
+          <Property Name="RECEIVEINS" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="COMPANY">
           <Key>
@@ -667,6 +668,7 @@
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" />
           <Property Name="REPORTTORECEVESTATE" Type="varchar2" MaxLength="200" />
+          <Property Name="RECEIVEREPORT" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="RULE">
           <Key>
@@ -3132,6 +3134,7 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <Property Name="APPLIANCECOLLECTIONSATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="LABORATORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="APPLIANCE_DETAIL_INFORMATION" Relationship="Model.FK_APPLIANC_REFERENCE_APPLIANC" FromRole="APPLIANCECOLLECTION" ToRole="APPLIANCE_DETAIL_INFORMATION" />
+          <Property Name="RECEIVEINS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="COMPANY">
           <Key>
@@ -3710,6 +3713,7 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <Property Name="PREPARE_SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="REPORTTORECEVESTATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PREPARE_SCHEME" Relationship="Model.FK_REPORTCO_REFERENCE_PREPARE_" FromRole="REPORTCOLLECTION" ToRole="PREPARE_SCHEME" />
+          <Property Name="RECEIVEREPORT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="RULE">
           <Key>
@@ -5267,6 +5271,7 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <EntitySetMapping Name="APPLIANCECOLLECTION">
             <EntityTypeMapping TypeName="Model.APPLIANCECOLLECTION">
               <MappingFragment StoreEntitySet="APPLIANCECOLLECTION">
+                <ScalarProperty Name="RECEIVEINS" ColumnName="RECEIVEINS" />
                 <ScalarProperty Name="LABORATORY" ColumnName="LABORATORY" />
                 <ScalarProperty Name="APPLIANCECOLLECTIONSATE" ColumnName="APPLIANCECOLLECTIONSATE" />
                 <ScalarProperty Name="APPLIANCE_DETAIL_INFORMATIONID" ColumnName="APPLIANCE_DETAIL_INFORMATIONID" />
@@ -5826,6 +5831,7 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <EntitySetMapping Name="REPORTCOLLECTION">
             <EntityTypeMapping TypeName="Model.REPORTCOLLECTION">
               <MappingFragment StoreEntitySet="REPORTCOLLECTION">
+                <ScalarProperty Name="RECEIVEREPORT" ColumnName="RECEIVEREPORT" />
                 <ScalarProperty Name="REPORTTORECEVESTATE" ColumnName="REPORTTORECEVESTATE" />
                 <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
