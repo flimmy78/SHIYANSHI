@@ -127,27 +127,27 @@ namespace Langben.DAL.shiyanshi
     [XmlRoot("TableTemplate")]
     public class TableTemplate
     {
-        private InputStateEnums _InpputState = InputStateEnums.ZhiLiuDianLiuShuChu;
-        /// <summary>
-        /// 输入格式
-        /// </summary>
-        public InputStateEnums InpputState
-        {
-            get
-            {
-                _InpputState = InputStateEnums.ZhiLiuDianLiuShuChu;
-                try
-                {
-                    _InpputState = (InputStateEnums)Enum.Parse(typeof(InputStateEnums), InpputStateStr);
-                }
-                catch
-                {
+        //private InputStateEnums _InpputState = InputStateEnums.ZhiLiuDianLiuShuChu;
+        ///// <summary>
+        ///// 输入格式
+        ///// </summary>
+        //public InputStateEnums InpputState
+        //{
+        //    get
+        //    {
+        //        _InpputState = InputStateEnums.ZhiLiuDianLiuShuChu;
+        //        try
+        //        {
+        //            _InpputState = (InputStateEnums)Enum.Parse(typeof(InputStateEnums), InpputStateStr);
+        //        }
+        //        catch
+        //        {
 
-                    _InpputState = InputStateEnums.ZhiLiuDianLiuShuChu;
-                }
-                return _InpputState;
-            }          
-        }
+        //            _InpputState = InputStateEnums.ZhiLiuDianLiuShuChu;
+        //        }
+        //        return _InpputState;
+        //    }          
+        //}
         /// <summary>
         /// 输入格式字符串
         /// </summary>
