@@ -96,7 +96,17 @@ namespace Langben.App.Controllers
                 ViewBag.PREPARE_SCHEMEID = item.PREPARE_SCHEMEID;
             }
             ViewBag.REPORTSTATUS = prepare.REPORTSTATUS;
-            ViewBag.REPORTNUMBER = m_BLL3.GetSerialNumber(bs[0]);
+            foreach (var item in prepare.APPLIANCE_LABORATORY)
+            {
+                if (item.RECYCLING != null)
+                {
+                    ViewBag.REPORTNUMBER = item.RECYCLING;
+                }
+                else
+                {
+                    ViewBag.REPORTNUMBER = m_BLL3.GetSerialNumber(bs[0]);
+                }
+            }
             ViewBag.APPLIANCE_DETAIL_INFORMATIONID = bs[1];//器具明细id
             return View();
         }
@@ -259,8 +269,17 @@ namespace Langben.App.Controllers
                 prepShow.SCHEMENAME = prme.SCHEME.NAME;//  选择方案模板
                 prepShow.SCHEMEID = prme.SCHEME.ID;//  选择方案模板
             }
-
-            prepShow.REPORTNUMBER = m_BLL3.GetSerialNumber(PREPARE_SCHEMEID);//报告编号
+            foreach (var item in prme.APPLIANCE_LABORATORY)
+            {
+                if (item.RECYCLING != null)
+                {
+                    prepShow.REPORTNUMBER = item.RECYCLING;
+                }
+                else
+                {
+                    prepShow.REPORTNUMBER = m_BLL3.GetSerialNumber(PREPARE_SCHEMEID);//报告编号
+                }
+            }      
             prepShow.APPLIANCE_DETAIL_INFORMATIONShows.APPLIANCE_NAME = appion.APPLIANCE_NAME;//器具名称
             prepShow.APPLIANCE_DETAIL_INFORMATIONShows.VERSION = appion.VERSION;//器具型号
             prepShow.APPLIANCE_DETAIL_INFORMATIONShows.FORMAT = appion.FORMAT;//器具规格
@@ -404,7 +423,7 @@ namespace Langben.App.Controllers
                     )
             });
         }
-  
+
         IBLL.IVJIANDINGRENWUBLL m_BLL;
         IBLL.IFILE_UPLOADERBLL m_BLL2;
         IBLL.IPREPARE_SCHEMEBLL m_BLL3;

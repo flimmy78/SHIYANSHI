@@ -514,6 +514,7 @@
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.edatagrid.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Xml\TableTemplate.xml" />
     <None Include="Properties\PublishProfiles\shiyanshi.pubxml" />
     <Content Include="Res\tree_data1.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

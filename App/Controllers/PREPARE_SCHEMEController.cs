@@ -777,9 +777,11 @@ namespace Langben.App.Controllers
 
                         #region 检测项目表格
                         RowIndex++;
-                        if (CommDic.TableTemplateDic.ContainsKey(iEntity.INPUTSTATE))
+                        CommDic comm = new CommDic();
+                        Dictionary < string, TableTemplateExt > TableTemplateDic = comm.TableTemplateDic();                                             
+                        if (TableTemplateDic!=null && TableTemplateDic.ContainsKey(iEntity.INPUTSTATE))
                         {
-                            TableTemplate temp = CommDic.TableTemplateDic[iEntity.INPUTSTATE];
+                            TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];
                             //表格表头
                             //CopyRow(sheet_Source,sheet_Destination,temp.TitleRowIndx,RowIndex, 1, true);                            
                             //RowIndex++;
@@ -791,7 +793,7 @@ namespace Langben.App.Controllers
                             //表格注
                             if (iEntity.REMARK != null && iEntity.REMARK.Trim()!="")
                             {
-                                CopyRow(sheet_Source, sheet_Destination, temp.RemarkRowIndx, RowIndex, 1, true);
+                                CopyRow(sheet_Source, sheet_Destination, temp.RemarkRowIndex, RowIndex, 1, true);
                                 sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue("注：" + iEntity.REMARK);
                                 RowIndex++;
                             }
@@ -799,7 +801,7 @@ namespace Langben.App.Controllers
                             //表格结论
                             if (iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim()!="")
                             {
-                                CopyRow(sheet_Source, sheet_Destination, temp.ConclusionRowIndx, RowIndex, 1, true);
+                                CopyRow(sheet_Source, sheet_Destination, temp.ConclusionRowIndex, RowIndex, 1, true);
                                 sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue("结论：" + iEntity.CONCLUSION);
                                 RowIndex++;
                             }
@@ -1066,7 +1068,7 @@ namespace Langben.App.Controllers
         /// <param name="rowIndex_Destination">目标开始行号</param>
         /// <param name="temp">模板行号单元对象</param>
         /// <returns></returns>
-        private int paserData(string html, ISheet sheet_Source, ISheet sheet_Destination,int rowIndex_Destination, TableTemplate temp)
+        private int paserData(string html, ISheet sheet_Source, ISheet sheet_Destination,int rowIndex_Destination, TableTemplateExt temp)
         {
             #region 将hmtl转换程文本框及下拉框对象
             Lexer lexer_Input = new Lexer(html);//必须定义多个，否则第二个获取不到数据
@@ -1196,19 +1198,19 @@ namespace Langben.App.Controllers
         /// <param name="OptionDic">下拉框</param>
         /// <returns></returns>
         private int paserData(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination,
-            TableTemplate temp, Dictionary<int, List<string>> headerDic,
+            TableTemplateExt temp, Dictionary<int, List<string>> headerDic,
             Dictionary<int, NodeList> InputDic, Dictionary<int, NodeList> OptionDic)
         {
             int rowIndex = rowIndex_Destination;
             foreach (int key in headerDic.Keys)
             {
 
-                CopyRow(sheet_Source, sheet_Destination, temp.TitleRowIndx, rowIndex_Destination, 1, true);
+                CopyRow(sheet_Source, sheet_Destination, temp.TitleRowIndex, rowIndex_Destination, 1, true);
                 rowIndex_Destination++;
                 if(InputDic.ContainsKey(key))
                 { 
                 NodeList nodeList_Input = InputDic[key];                
-                Dictionary<string, int> dic = SetRowIndex(nodeList_Input, sheet_Source, sheet_Destination, temp.DataRowIndx, rowIndex_Destination, out rowIndex);
+                Dictionary<string, int> dic = SetRowIndex(nodeList_Input, sheet_Source, sheet_Destination, temp.DataRowIndex, rowIndex_Destination, out rowIndex);
                 rowIndex_Destination = rowIndex;
 
                     if (dic != null && dic.Count > 0)

@@ -18,7 +18,7 @@
             @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(),"请选择", new { @class = "easyui-combobox" })
+            @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
         </div>
     </div>
     <div class="input_search">
@@ -44,7 +44,7 @@
             @Html.LabelFor(model => model.REPORTTORECEVESTATE):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("REPORTTORECEVESTATE", Models.SysFieldModels.GetSysField("VQIJULINGQU1", "REPORTTORECEVESTATE"), "请选择", new { id = "REPORTTORECEVESTATE", @class = "easyui-combobox"  })
+            @Html.DropDownList("REPORTTORECEVESTATE", Models.SysFieldModels.GetSysField("VQIJULINGQU1", "REPORTTORECEVESTATE"), "请选择", new { id = "REPORTTORECEVESTATE", @class = "easyui-combobox" })
         </div>
     </div>
     <div class='input_search' style="padding-top:10px;">
@@ -54,8 +54,9 @@
     </div>
 </div>
 <br style="clear: both;" />
-<input type="hidden" id="baogaoid" value=""/>
+<input type="hidden" id="baogaoid" value="" />
 <input type="hidden" id="qijuid" value="" />
+<input type="hidden" id="huishou" value="" />
 <script type="text/javascript" language="javascript">
     $(function () {
         $('#flexigridData').datagrid({
@@ -72,14 +73,21 @@
             idField: 'ID',
 
             toolbar: [
-
                  {
                      text: '签名',
                      iconCls: 'icon-search',
                      handler: function () {
                          return getView();
                      }
-                 }],
+                 },
+                    {
+                        text: '报告回收',
+                        iconCls: 'icon-search',
+                        handler: function () {
+                            return baogaohuishou();
+                        }
+                    }
+            ],
             columns: [[
 					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', hidden: true, width: 259 }
 					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 259 }//委托单号
@@ -139,6 +147,16 @@
                              }
 
                          }
+                     }, {
+                         field: 'a', title: '报告回收', width: 111, formatter: function (value, row, index) {
+                             if (row.REPORTSTATUS == "@Common.REPORTSTATUS.报告已回收.ToString()") {                            
+                                 return "<input type='radio' name='huishou' value='" + row.PREPARE_SCHEMEID + "' checked='checked' disabled='disabled'/>";
+                             }
+                             else {
+                                 return "<input type='radio' name='huishou' value='" + row.PREPARE_SCHEMEID + "'/>";
+                             }
+                             
+                         }
                      }
 					, { field: 'REMARKS', title: '备注', width: 111 }
                     ]],
@@ -164,6 +182,15 @@
                                 result = result + "|" + item.value;
                             });
                             $("#baogaoid").val(result);
+                        });
+                        $("input[name='huishou']").unbind().bind("click", function () {
+                            var checkrows = $("input[name='huishou']:checked").length;
+                            var items = $("input[name='huishou']:checked");
+                            var result = "";
+                            $.each(items, function (index, item) {
+                                result =  item.value;
+                            });
+                            $("#huishou").val(result);
                         });
                     }
                 });
@@ -198,7 +225,7 @@
         search += "CREATETIMEStart_Time&" + $("#CREATETIMEStart_Time").val() + "^";
         search += "CREATETIMEEnd_Time&" + $("#CREATETIMEEnd_Time").val() + "^";
         if ($('#REPORTTORECEVESTATE').combobox('getText') == "待领取") {
-          search += "REPORTTORECEVESTATE&" + "@Common.REPORTSTATUS.报告已打印.ToString()" + "^";
+            search += "REPORTTORECEVESTATE&" + "@Common.REPORTSTATUS.报告已打印.ToString()" + "^";
         }
         else if ($('#REPORTTORECEVESTATE').combobox('getText') == "已领取") {
             search += "REPORTTORECEVESTATE&" + "@Common.REPORTSTATUS.报告已领取.ToString()" + "^";
@@ -215,7 +242,7 @@
         var qiju = $("#qijuid").val();
         if (baogao != null && qiju != null || baogao != "" && qiju != "") {
             $.ajax({
-                url: "/api/VQIJULINGQU2Api/Put?baogaoid=" + baogao + "&qijuid="+qiju+"",
+                url: "/api/VQIJULINGQU2Api/Put?baogaoid=" + baogao + "&qijuid=" + qiju + "",
                 type: "Put",
                 //data: arr,
                 success: function (res) {
@@ -236,6 +263,31 @@
         return false;
     }
 
+    //报告回收
+    function baogaohuishou() {
+        var huishou = $("#huishou").val();
+        if (huishou != null|| huishou != "" ) {
+            $.ajax({
+                url: "/api/VQIJULINGQU2Api/BaoGaoHuiShou/"+huishou,
+                type: "Put",
+                //data: arr,
+                success: function (res) {
+                    if (res.Code == 1) {
+                        $.messager.alert('操作提示', "回收成功！", 'info',function () {
+                            window.location.href = '/Appliance/Index/' + res.Id;
+                        });
+                    }
+                    else {
+                        $.messager.alert('操作提示', "回收失败！", 'error');
+                    }
+                }
+            })
+
+        } else {
+            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
+        }
+        return false;
+    }
     //详情
     function showMyWindow(href) {
 

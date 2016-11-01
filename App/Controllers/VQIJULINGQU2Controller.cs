@@ -76,7 +76,8 @@ namespace Langben.App.Controllers
                     APPLIANCECOLLECTIONSATE=s.APPLIANCECOLLECTIONSATE
                     ,
                     REPORTTORECEVESTATE=s.REPORTTORECEVESTATE
-
+                    ,
+                    REPORTSTATUS=s.REPORTSTATUS
                 }
 
                     )
@@ -133,7 +134,8 @@ namespace Langben.App.Controllers
                     APPLIANCECOLLECTIONSATE=s.APPLIANCECOLLECTIONSATE
                     ,
                     REPORTTORECEVESTATE=s.REPORTTORECEVESTATE
-
+                     ,
+                    REPORTSTATUS = s.REPORTSTATUS
                 }
 
                     )

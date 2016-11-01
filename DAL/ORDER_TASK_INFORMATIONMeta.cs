@@ -11,6 +11,8 @@ namespace Langben.DAL
 
         #region 自定义属性，即由数据实体扩展的实体
         public bool isNewRecord { get; set; }
+        [Display(Name = "回收编号")]
+        public string RECYCLING { get; set; }
         #endregion
 
     }
