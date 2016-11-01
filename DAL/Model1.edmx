@@ -111,6 +111,7 @@
           <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="nvarchar2" MaxLength="200" />
           <Property Name="RETURN_INSTRUCTIONS" Type="nvarchar2" MaxLength="200" />
           <Property Name="ISRECEIVE" Type="nvarchar2" MaxLength="200" />
+          <Property Name="RECYCLING" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="APPLIANCECOLLECTION">
           <Key>
@@ -652,7 +653,7 @@
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="SORT" Type="number" Precision="38" Scale="0" />
-          <Property Name="INPUTSTATE" Type="varchar2" MaxLength="200" Nullable="false" />
+          <Property Name="INPUTSTATE" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="REPORTCOLLECTION">
           <Key>
@@ -1326,6 +1327,7 @@
           <Property Name="APPLIANCECOLLECTIONSATE" Type="varchar2" MaxLength="200" />
           <Property Name="REPORTTORECEVESTATE" Type="varchar2" MaxLength="200" />
           <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" />
+          <Property Name="REPORTSTATUS" Type="varchar2" MaxLength="200" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VRUKU”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -2336,7 +2338,8 @@ FROM "TENGFEI"."VQIJULINGQU1" "VQIJULINGQU1"</DefiningQuery>
 "VQIJULINGQU2"."ORDER_TASK_INFORMATIONID" AS "ORDER_TASK_INFORMATIONID", 
 "VQIJULINGQU2"."APPLIANCECOLLECTIONSATE" AS "APPLIANCECOLLECTIONSATE", 
 "VQIJULINGQU2"."REPORTTORECEVESTATE" AS "REPORTTORECEVESTATE", 
-"VQIJULINGQU2"."PREPARE_SCHEMEID" AS "PREPARE_SCHEMEID"
+"VQIJULINGQU2"."PREPARE_SCHEMEID" AS "PREPARE_SCHEMEID", 
+"VQIJULINGQU2"."REPORTSTATUS" AS "REPORTSTATUS"
 FROM "TENGFEI"."VQIJULINGQU2" "VQIJULINGQU2"</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VRUKU" EntityType="Self.VRUKU" store:Type="Views" store:Schema="TENGFEI">
@@ -3113,6 +3116,7 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <NavigationProperty Name="APPLIANCE_DETAIL_INFORMATION" Relationship="Model.FK_APPLIANC_REFERENCE_APPLIAN2" FromRole="APPLIANCE_LABORATORY" ToRole="APPLIANCE_DETAIL_INFORMATION" />
           <NavigationProperty Name="PREPARE_SCHEME" Relationship="Model.FK_APPLIANC_REFERENCE_PREPARE_" FromRole="APPLIANCE_LABORATORY" ToRole="PREPARE_SCHEME" />
           <NavigationProperty Name="UNDERTAKE_LABORATORY" Relationship="Model.FK_APPLIANC_REFERENCE_UNDERTAK" FromRole="APPLIANCE_LABORATORY" ToRole="UNDERTAKE_LABORATORY" />
+          <Property Name="RECYCLING" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="APPLIANCECOLLECTION">
           <Key>
@@ -5139,6 +5143,7 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <Property Name="APPLIANCECOLLECTIONSATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="REPORTTORECEVESTATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="PREPARE_SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="REPORTSTATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -5239,6 +5244,7 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <EntitySetMapping Name="APPLIANCE_LABORATORY">
             <EntityTypeMapping TypeName="Model.APPLIANCE_LABORATORY">
               <MappingFragment StoreEntitySet="APPLIANCE_LABORATORY">
+                <ScalarProperty Name="RECYCLING" ColumnName="RECYCLING" />
                 <ScalarProperty Name="ISRECEIVE" ColumnName="ISRECEIVE" />
                 <ScalarProperty Name="RETURN_INSTRUCTIONS" ColumnName="RETURN_INSTRUCTIONS" />
                 <ScalarProperty Name="EQUIPMENT_STATUS_VALUUMN" ColumnName="EQUIPMENT_STATUS_VALUUMN" />
@@ -6624,6 +6630,7 @@ FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           <EntitySetMapping Name="VQIJULINGQU2">
             <EntityTypeMapping TypeName="Model.VQIJULINGQU2">
               <MappingFragment StoreEntitySet="VQIJULINGQU2">
+                <ScalarProperty Name="REPORTSTATUS" ColumnName="REPORTSTATUS" />
                 <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
                 <ScalarProperty Name="REPORTTORECEVESTATE" ColumnName="REPORTTORECEVESTATE" />
                 <ScalarProperty Name="APPLIANCECOLLECTIONSATE" ColumnName="APPLIANCECOLLECTIONSATE" />

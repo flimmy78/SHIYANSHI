@@ -15,7 +15,6 @@ namespace Langben.DAL
         public string ORDER_TASK_INFORMATIONIDOld { get; set; }
         [Display(Name = "委托单")]
         public string UNDERTAKE_LABORATORYID { get; set; }
-
         #endregion
 
     }

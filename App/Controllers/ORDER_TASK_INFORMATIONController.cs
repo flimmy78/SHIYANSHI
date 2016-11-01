@@ -84,34 +84,24 @@ namespace Langben.App.Controllers
                         item.ID = Result.GetNewId();
                         item.CREATETIME = DateTime.Now;
                         item.CREATEPERSON = currentPerson;
-                        if (string.IsNullOrWhiteSpace(item.UNDERTAKE_LABORATORYID))
-                        {
-                            LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，委托单信息的信息，实验室为空", "委托单信息"
-                          );//写入日志                      
-                            result.Code = Common.ClientCode.Fail;
-                            result.Message = "实验室不能为空";
-                            return Json(result); //提示插入失败
-                        }
-                        else
-                        {
-                            //器具明细信息_承接实验室表添加数据
-                            foreach (var it in item.UNDERTAKE_LABORATORYID.TrimEnd(',').Split(','))
-                            {
-                                item.APPLIANCE_LABORATORY.Add(new APPLIANCE_LABORATORY()
-                                {
-                                    ID = Result.GetNewId(),
-                                    UNDERTAKE_LABORATORYID = it,
-                                    ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString(),
-                                    EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已分配.GetHashCode().ToString(),
-                                    DISTRIBUTIONPERSON = currentPerson,
-                                    DISTRIBUTIONTIME = DateTime.Now,
-                                    CREATEPERSON = currentPerson,
-                                    CREATETIME = DateTime.Now,
-                                    ISRECEIVE = Common.ISRECEIVE.是.ToString()
-                                });
-                            }
-                        }
 
+                        //器具明细信息_承接实验室表添加数据
+                        foreach (var it in item.UNDERTAKE_LABORATORYID.TrimEnd(',').Split(','))
+                        {
+                            item.APPLIANCE_LABORATORY.Add(new APPLIANCE_LABORATORY()
+                            {
+                                ID = Result.GetNewId(),
+                                UNDERTAKE_LABORATORYID = it,
+                                ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString(),
+                                EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已分配.GetHashCode().ToString(),
+                                DISTRIBUTIONPERSON = currentPerson,
+                                DISTRIBUTIONTIME = DateTime.Now,
+                                CREATEPERSON = currentPerson,
+                                CREATETIME = DateTime.Now,
+                                ISRECEIVE = Common.ISRECEIVE.是.ToString(),
+                                RECYCLING = entity.RECYCLING
+                            });
+                        }
                     }
 
                     string returnValue = string.Empty;
