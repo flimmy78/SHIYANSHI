@@ -10,10 +10,7 @@
 }
 
     <fieldset>
-        <legend>
-            <input class="a2 f2" type="submit" value="修改" />
-            <input class="a2 f2" type="button" onclick="BackList('SysRole')" value="返回列表" />
-        </legend>
+     
         <div class="bigdiv">
             @Html.HiddenFor(model => model.Id )      
             <div class="editor-label">
@@ -57,11 +54,12 @@
                 <table id="@item81"
                     class="deleteStyle">
                     <tr>
-                        <td>
-                            <img  alt="删除" title="点击删除" onclick="deleteTable('@item81','SysPersonId');"  src="../../../Images/deleteimge.png" />
-                        </td>
+                      
                         <td>
                             @item8.Name
+                        </td>
+                        <td>
+                            <img alt="删除" title="点击删除" onclick="deleteTable('@item81','SysPersonId');" src="../../../Images/deleteimge.png" />
                         </td>
                     </tr>
                 </table>
@@ -70,6 +68,18 @@
                 <input type="hidden" value="@ids8" name="SysPersonId" id="SysPersonId" />
             </div>
         </div>
+
+            <div class="clearfix"></div>
+
+            <div class="editor-label">
+
+            </div>
+            <div class="editor-field">
+
+                <input class="a2 f2" type="submit" value="修改" />
+                <input class="a2 f2" type="button" onclick="BackList('SysRole')" value="返回列表" />
+
+            </div>
         </div>
     </fieldset>
 
