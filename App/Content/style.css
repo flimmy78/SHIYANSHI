@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 body{
@@ -11,7 +11,7 @@ body{
     width: 100%;
 }
 .bg1{
-    background: url(../images/bg2.jpg) no-repeat center center fixed;
+    background: url(../images/bg2.jpg) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
