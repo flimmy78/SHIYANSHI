@@ -30,6 +30,7 @@ namespace Langben.DAL
         public string EQUIPMENT_STATUS_VALUUMN { get; set; }
         public string RETURN_INSTRUCTIONS { get; set; }
         public string ISRECEIVE { get; set; }
+        public string RECYCLING { get; set; }
     
         public virtual APPLIANCE_DETAIL_INFORMATION APPLIANCE_DETAIL_INFORMATION { get; set; }
         public virtual PREPARE_SCHEME PREPARE_SCHEME { get; set; }

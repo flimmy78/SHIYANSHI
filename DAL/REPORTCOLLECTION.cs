@@ -22,6 +22,7 @@ namespace Langben.DAL
         public string UPDATEPERSON { get; set; }
         public string PREPARE_SCHEMEID { get; set; }
         public string REPORTTORECEVESTATE { get; set; }
+        public string RECEIVEREPORT { get; set; }
     
         public virtual PREPARE_SCHEME PREPARE_SCHEME { get; set; }
     }

@@ -53,6 +53,10 @@ namespace Langben.DAL
         [ScaffoldColumn(true)]
         [Display(Name = "实验室", Order = 8)]
         public object LABORATORY { get; set; }
+
+        [ScaffoldColumn(true)]
+        [Display(Name = "领取单", Order = 9)]
+        public object RECEIVEINS { get; set; }
     }
 }
 
