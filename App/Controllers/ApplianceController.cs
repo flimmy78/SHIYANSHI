@@ -24,12 +24,17 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-        
+            PREPARE_SCHEME ps = m_BLL5.GetById(id);
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                ViewBag.REPORTNUMBER = ps.REPORTNUMBER;
+            }
+
             return View();
         }
-         /// <summary>
+        /// <summary>
         /// 列表
         /// </summary>
         /// <returns></returns>
@@ -44,22 +49,22 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [SupportFilter]  
+        [SupportFilter]
         public ActionResult Details(string id)
         {
             ViewBag.Id = id;
             return View();
 
         }
- 
+
         /// <summary>
         /// 首次创建
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
         public ActionResult Create(string id)
-        { 
-            
+        {
+
             return View();
         }
         [SupportFilter]
@@ -73,7 +78,7 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="id">主键</param>
         /// <returns></returns> 
-        [SupportFilter] 
+        [SupportFilter]
         public ActionResult Edit(string id)
         {
             ViewBag.Id = id;
@@ -100,15 +105,17 @@ namespace Langben.App.Controllers
         }
         IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL m_BLL;
         IBLL.ICOMPANYBLL m_BLL2;
+        IBLL.IPREPARE_SCHEMEBLL m_BLL5;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
-        public ApplianceController(): this(new APPLIANCE_DETAIL_INFORMATIONBLL(),new COMPANYBLL()) { }
+        public ApplianceController() : this(new APPLIANCE_DETAIL_INFORMATIONBLL(), new COMPANYBLL(), new PREPARE_SCHEMEBLL()) { }
 
-        public ApplianceController(APPLIANCE_DETAIL_INFORMATIONBLL bll,COMPANYBLL bll2)
+        public ApplianceController(APPLIANCE_DETAIL_INFORMATIONBLL bll, COMPANYBLL bll2, PREPARE_SCHEMEBLL bll5)
         {
             m_BLL = bll;
             m_BLL2 = bll2;
+            m_BLL5 = bll5;
         }
 
     }

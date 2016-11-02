@@ -46,7 +46,7 @@
                 //此处q的length代表输入多少个字符后开始查询
                 if (q.length <= 0) return false;
                 $.ajax({
-                    url: "../Appliance/SearchAutoComplete/FACTORY_NUM",
+                    url: "/Appliance/SearchAutoComplete/FACTORY_NUM",
                     type: "post",
                     data: {
                         //传值，还是JSON数据
@@ -105,7 +105,7 @@
                 //此处q的length代表输入多少个字符后开始查询
                 if (q.length <= 0) return false;
                 $.ajax({
-                    url: "../Appliance/SearchAutoComplete/VERSION",
+                    url: "/Appliance/SearchAutoComplete/VERSION",
                     type: "post",
                     data: {
                         //传值，还是JSON数据
@@ -162,7 +162,7 @@
                 //此处q的length代表输入多少个字符后开始查询
                 if (q.length <= 0) return false;
                 $.ajax({
-                    url: "../Appliance/SearchAutoComplete/APPLIANCE_NAME",
+                    url: "/Appliance/SearchAutoComplete/APPLIANCE_NAME",
                     type: "post",
                     data: {
                         //传值，还是JSON数据
@@ -237,7 +237,7 @@
                 @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
             </div>
             <div class="editor-field">
-                @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "华北电力科学研究院有限责任公司", new { @class = "easyui-combobox" })
+                @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), new { @class = "easyui-combobox" })
             </div>
         </div>
         <div class="editor-form">
@@ -365,6 +365,7 @@
     </div>
     <div style="clear:both;"></div>
     <input type="hidden" id="ORDER_TASK_INFORMATIONID" />
+    <input type="hidden" id="RECYCLING" value="@ViewBag.REPORTNUMBER" />
     <div class="p5 mt10">
         <table id="ApplianceDate" singleselect="true"></table>
     </div>
@@ -640,6 +641,7 @@ s：字符串
             //实例化一个委托单对象
             var entity = new Object();
             entity.APPLIANCE_DETAIL_INFORMATION = qiju;
+            entity.RECYCLING = $("#RECYCLING").val();
             entity.ID = $("#ORDER_TASK_INFORMATIONID").val();
             entity.ACCEPT_ORGNIZATION = $('#ACCEPT_ORGNIZATION').combobox('getValue'); //受理单位
             entity.INSPECTION_ENTERPRISE = $('#INSPECTION_ENTERPRISE').combobox('getValue');//送检单位$('#com').combobox('getText')
@@ -668,9 +670,8 @@ s：字符串
                             },
                             success: function (data) {
                                 if (data.Code == 1) {
-
-                                    $.messager.alert('操作提示', "发送实验室成功！", 'info', function () {
-                                        window.location.href = '';
+                                    $.messager.alert('操作提示', "发送实验室成功！", 'info', function () {                                        
+                                            window.location.href = '/Appliance/Index';                                                                   
                                     });
                                 }
                                 else {
@@ -810,4 +811,3 @@ s：字符串
 
     });
 </script>
-

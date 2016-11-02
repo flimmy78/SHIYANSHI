@@ -28,5 +28,6 @@ namespace Langben.DAL
         public string APPLIANCECOLLECTIONSATE { get; set; }
         public string REPORTTORECEVESTATE { get; set; }
         public string PREPARE_SCHEMEID { get; set; }
+        public string REPORTSTATUS { get; set; }
     }
 }

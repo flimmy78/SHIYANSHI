@@ -59,44 +59,15 @@
         }
         if (entity.APPLIANCE_DETAIL_INFORMATION.length >= 1) {
             for (var i = 0; i < entity.APPLIANCE_DETAIL_INFORMATION.length; i++) {
-                if (entity.APPLIANCE_DETAIL_INFORMATION[i].APPLIANCE_NAME == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].VERSION == "undefined"
-                    || entity.APPLIANCE_DETAIL_INFORMATION[i].NUM == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].APPEARANCE_STATUS == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID == "undefined") {
-                    zhi += "器具数据有误！<br>";
-                    break;
-                }
-                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].APPLIANCE_NAME)) {
-                    zhi += "器具名称不能为空！<br>";
-                }
-                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].VERSION)) {
-                    zhi += "型号不能为空！<br>";
-                }
-                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
-                    zhi += "数量不能为空！<br>";
+                var a = entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID;
+                var b = a.split(',');
+                if (b.length > 2) {
+                    zhi += "实验室不能超过2个！<br>";
                 }
                 else {
-                    if (!isNumber(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
-                        zhi += "数量必须为数字整型！<br>";
-                    }
-                }
-                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].APPEARANCE_STATUS)) {
-                    zhi += "外观状态不能为空！<br>";
-                }
-                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID)) {
-                    zhi += "实验室不能为空！<br>";
-                }
-                else {
-                    var a = entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID;
-                    var b = a.split(',');
-                    if (b.length > 2) {
-                        zhi += "实验室不能超过2个！<br>";
-                    }
-                    else {
-                        var s = "@Common.LABORATORYNAME.互感器.ToString(),@Common.LABORATORYNAME.指示仪表.ToString(),@Common.LABORATORYNAME.数表三相.ToString(),@Common.LABORATORYNAME.数表单相.ToString(),@Common.LABORATORYNAME.电能.ToString(),@Common.LABORATORYNAME.直流仪器.ToString()";
-                        for (var i = 0; i < b.length; i++) {
-                            if (s.indexOf(b[i]) == -1) {
-                                zhi += "实验室名错误！<br>";
-                            }
-                        }
+                    var b = a.replace(/互感器/g, "").replace(/指示仪表/g, "").replace(/数表三相/g, "").replace(/电能/g, "").replace(/直流仪器/g, "").replace(/,/g, "");
+                    if (b != "") {
+                        zhi += "实验室名错误！<br>";
                     }
                 }
             }
@@ -401,7 +372,7 @@ s：字符串
                 entity.CONTACT_PHONE2 = $("#CONTACT_PHONE2").val();//联系电话2
                 entity.FAX2 = $("#FAX2").val();//传真2
                 entity.CUSTOMER_SPECIFIC_REQUIREMENTS = $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val();//客户特殊要求
-                if (ifshuju(entity)) {               
+                if (ifshuju(entity)) {
                     //将委托单信息发送到服务器
                     $.ajax({
                         url: "/api/ORDER_TASK_INFORMATIONApi/PutUpdate",
@@ -449,7 +420,7 @@ s：字符串
                         REMARKS: row.APPLIANCE_DETAIL_INFORMATIONShows[i].REMARKS,
                         ORDER_STATUS: row.APPLIANCE_DETAIL_INFORMATIONShows[i].ORDER_STATUS,
                         ID: row.APPLIANCE_DETAIL_INFORMATIONShows[i].ID,
-                        ORDER_STATUS_NAME:row.APPLIANCE_DETAIL_INFORMATIONShows[i].ORDER_STATUS_NAME
+                        ORDER_STATUS_NAME: row.APPLIANCE_DETAIL_INFORMATIONShows[i].ORDER_STATUS_NAME
                     });
                 }
                 $("#ACCEPT_ORGNIZATION").combobox('select', row.ACCEPT_ORGNIZATION);//受理单位

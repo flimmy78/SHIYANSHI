@@ -6,52 +6,54 @@ using System.ComponentModel.DataAnnotations;
 namespace Langben.DAL
 {
     [MetadataType(typeof(REPORTCOLLECTIONMetadata))]//使用REPORTCOLLECTIONMetadata对REPORTCOLLECTION进行数据验证
-    public partial class REPORTCOLLECTION 
+    public partial class REPORTCOLLECTION
     {
-      
+
         #region 自定义属性，即由数据实体扩展的实体
-        
+
         [Display(Name = "预备方案")]
         public string PREPARE_SCHEMEIDOld { get; set; }
-        
+
         #endregion
 
     }
     public partial class REPORTCOLLECTIONMetadata
     {
-			[ScaffoldColumn(false)]
-			[Display(Name = "主键", Order = 1)]
-			public object ID { get; set; }
+        [ScaffoldColumn(false)]
+        [Display(Name = "主键", Order = 1)]
+        public object ID { get; set; }
 
-			[ScaffoldColumn(true)]
-			[Display(Name = "次数", Order = 2)]
-			[Range(0,2147483646, ErrorMessage="数值超出范围")]
-			public int? GETNUMBER { get; set; }
+        [ScaffoldColumn(true)]
+        [Display(Name = "次数", Order = 2)]
+        [Range(0, 2147483646, ErrorMessage = "数值超出范围")]
+        public int? GETNUMBER { get; set; }
 
-			[ScaffoldColumn(true)]
-			[Display(Name = "领取时间", Order = 3)]
-			[DataType(System.ComponentModel.DataAnnotations.DataType.DateTime,ErrorMessage="时间格式不正确")]
-			public DateTime? CREATETIME { get; set; }
+        [ScaffoldColumn(true)]
+        [Display(Name = "领取时间", Order = 3)]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.DateTime, ErrorMessage = "时间格式不正确")]
+        public DateTime? CREATETIME { get; set; }
 
-			[ScaffoldColumn(true)]
-			[Display(Name = "领取者", Order = 4)]
-			public object CREATEPERSON { get; set; }
+        [ScaffoldColumn(true)]
+        [Display(Name = "领取者", Order = 4)]
+        public object CREATEPERSON { get; set; }
 
-			[ScaffoldColumn(true)]
-			[Display(Name = "修改时间", Order = 5)]
-			[DataType(System.ComponentModel.DataAnnotations.DataType.DateTime,ErrorMessage="时间格式不正确")]
-			public DateTime? UPDATETIME { get; set; }
+        [ScaffoldColumn(true)]
+        [Display(Name = "修改时间", Order = 5)]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.DateTime, ErrorMessage = "时间格式不正确")]
+        public DateTime? UPDATETIME { get; set; }
 
-			[ScaffoldColumn(true)]
-			[Display(Name = "修改人", Order = 6)]
-			public object UPDATEPERSON { get; set; }
+        [ScaffoldColumn(true)]
+        [Display(Name = "修改人", Order = 6)]
+        public object UPDATEPERSON { get; set; }
 
-			[ScaffoldColumn(true)]
-			[Display(Name = "预备方案", Order = 7)]
-			public object PREPARE_SCHEMEID { get; set; }
+        [ScaffoldColumn(true)]
+        [Display(Name = "预备方案", Order = 7)]
+        public object PREPARE_SCHEMEID { get; set; }
 
-
+        [ScaffoldColumn(true)]
+        [Display(Name = "领取单", Order = 8)]
+        public object RECEIVEREPORT { get; set; }
     }
 }
- 
+
 

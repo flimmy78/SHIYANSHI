@@ -93,6 +93,9 @@ namespace Langben.DAL
         [Display(Name = "状态", Order = 16)]
         public object ORDER_STATUS { get; set; }
 
+        [ScaffoldColumn(true)]
+        [Display(Name = "回收编号", Order = 17)]
+        public object RECYCLING { get; set; }
     }
 }
 

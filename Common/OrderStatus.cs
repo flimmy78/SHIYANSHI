@@ -92,7 +92,11 @@ namespace Common
         /// <summary>
         /// 报告领取环节
         /// </summary>
-        报告已领取 = 1120
+        报告已领取 = 1120,
+        /// <summary>
+        /// 报告回收环节
+        /// </summary>
+        报告已回收=1130
     }
 
     /// <summary>

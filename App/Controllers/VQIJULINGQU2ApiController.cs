@@ -149,7 +149,7 @@ namespace Langben.App.Controllers
                         {
                             appry.ID = item2.ID;
                             appry.ORDER_STATUS = Common.ORDER_STATUS.器具已领取.ToString();
-                            appry.EQUIPMENT_STATUS_VALUUMN= Common.ORDER_STATUS.器具已领取.GetHashCode().ToString();                          
+                            appry.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.器具已领取.GetHashCode().ToString();
                             if (!m_BLL4.EditField(ref validationErrors, appry))
                             {
                                 LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息_承接实验室的Id为" + appry.ID, "器具领取");//写入日志  
@@ -158,7 +158,7 @@ namespace Langben.App.Controllers
                                 return result;
                             }
                         }
-                        if (m_BLL2.Create(ref validationErrors, app) )
+                        if (m_BLL2.Create(ref validationErrors, app))
                         {
                             LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具领取信息的Id为" + app.ID, "器具领取");//写入日志       
                             result.Code = Common.ClientCode.Succeed;
@@ -189,6 +189,52 @@ namespace Langben.App.Controllers
             return result; //提示输入的数据的格式不对         
         }
 
+        // PUT api/<controller>/5
+        /// <summary>
+        ///报告回收
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>  
+        [System.Web.Http.HttpPut]
+        public Common.ClientResult.Result BaoGaoHuiShou(string id)
+        {
+            Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
+            if (id != null && ModelState.IsValid)
+            {   //数据校验          
+                string currentPerson = GetCurrentPerson();
+                string returnValue = string.Empty;
+                PREPARE_SCHEME prep = new PREPARE_SCHEME();//预备方案
+                prep.ID = id;
+                prep.REPORTSTATUS = Common.REPORTSTATUS.报告已回收.ToString();//报告回收状态
+                prep.REPORTSTATUSZI = Common.REPORTSTATUS.报告已回收.GetHashCode().ToString();//报告回收状态
+                if (m_BLL5.EditField(ref validationErrors, prep))
+                {
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，报告回收信息的Id为" + prep.ID, "报告回收");//写入日志        
+                    result.Code = Common.ClientCode.Succeed;
+                    result.Message = Suggestion.InsertSucceed;
+                    result.Id = prep.ID;
+                    return result;
+                }
+                else
+                {
+                    if (validationErrors != null && validationErrors.Count > 0)
+                    {
+                        validationErrors.All(a =>
+                        {
+                            returnValue += a.ErrorMessage;
+                            return true;
+                        });
+                    }
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，报告回收信息的Id为" + prep.ID + "," + returnValue, "报告回收");//写入日志
+                    result.Code = Common.ClientCode.Fail;
+                    result.Message = Suggestion.InsertFail + returnValue;
+                    return result; //提示创建失败
+                }             
+            }
+            result.Code = Common.ClientCode.FindNull;
+            result.Message = Suggestion.InsertFail + "请核对输入的数据的格式";
+            return result; //提示输入的数据的格式不对         
+        }
         IBLL.IVQIJULINGQU2BLL m_BLL;
         IBLL.IAPPLIANCECOLLECTIONBLL m_BLL2;
         IBLL.IREPORTCOLLECTIONBLL m_BLL3;
@@ -199,9 +245,9 @@ namespace Langben.App.Controllers
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VQIJULINGQU2ApiController()
-            : this(new VQIJULINGQU2BLL(), new APPLIANCECOLLECTIONBLL(), new REPORTCOLLECTIONBLL(), new APPLIANCE_LABORATORYBLL(), new PREPARE_SCHEMEBLL(),new APPLIANCE_DETAIL_INFORMATIONBLL()) { }
+            : this(new VQIJULINGQU2BLL(), new APPLIANCECOLLECTIONBLL(), new REPORTCOLLECTIONBLL(), new APPLIANCE_LABORATORYBLL(), new PREPARE_SCHEMEBLL(), new APPLIANCE_DETAIL_INFORMATIONBLL()) { }
 
-        public VQIJULINGQU2ApiController(VQIJULINGQU2BLL bll, APPLIANCECOLLECTIONBLL bll2, REPORTCOLLECTIONBLL bll3, APPLIANCE_LABORATORYBLL bll4, PREPARE_SCHEMEBLL bll5,APPLIANCE_DETAIL_INFORMATIONBLL bll6)
+        public VQIJULINGQU2ApiController(VQIJULINGQU2BLL bll, APPLIANCECOLLECTIONBLL bll2, REPORTCOLLECTIONBLL bll3, APPLIANCE_LABORATORYBLL bll4, PREPARE_SCHEMEBLL bll5, APPLIANCE_DETAIL_INFORMATIONBLL bll6)
         {
             m_BLL = bll;
             m_BLL2 = bll2;
