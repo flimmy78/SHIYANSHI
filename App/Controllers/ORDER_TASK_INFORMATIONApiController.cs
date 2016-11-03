@@ -122,7 +122,7 @@ namespace Langben.App.Controllers
                 {
                     UNDERTAKE_LABORATORYID += item2.UNDERTAKE_LABORATORYID + ",";
                     ORDER_STATUS += item2.ORDER_STATUS + ",";
-                    if (item2.ORDER_STATUS==Common.ORDER_STATUS.已退回.ToString())
+                    if (item2.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())
                     {
                         ORDER_STATUS_NAME = item2.UNDERTAKE_LABORATORYID + item2.ORDER_STATUS;
                     }
@@ -156,7 +156,7 @@ namespace Langben.App.Controllers
                     STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU,
                     UNDERTAKE_LABORATORYIDString = UNDERTAKE_LABORATORYID.TrimEnd(','),
                     ORDER_STATUS = ORDER_STATUS,
-                    ORDER_STATUS_NAME= ORDER_STATUS_NAME
+                    ORDER_STATUS_NAME = ORDER_STATUS_NAME
                 });
             }
             data.ID = queryData.ID;
@@ -179,7 +179,7 @@ namespace Langben.App.Controllers
             data.CREATETIME = queryData.CREATETIME;
             data.CREATEPERSON = queryData.CREATEPERSON;
             data.UPDATETIME = queryData.UPDATETIME;
-            data.UPDATEPERSON = queryData.UPDATEPERSON;          
+            data.UPDATEPERSON = queryData.UPDATEPERSON;
             return data;
         }
         /// <summary>
@@ -373,47 +373,34 @@ namespace Langben.App.Controllers
                     {
                         item.CREATETIME = DateTime.Now;
                         item.CREATEPERSON = currentPerson;
-                        if (string.IsNullOrWhiteSpace(item.UNDERTAKE_LABORATORYID))
+                        //器具明细信息_承接实验室表添加数据
+                        List<APPLIANCE_LABORATORY> appory = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item.ID);
+                        bool a = false;
+                        foreach (var item2 in appory)
                         {
-                            LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，委托单信息的信息，实验室为空", "委托单信息"
-                          );//写入日志                      
-                            result.Code = Common.ClientCode.Fail;
-                            result.Message = "实验室不能为空";
-                            return result; //提示插入失败
-                        }
-                        else
-                        {
-
-                            //器具明细信息_承接实验室表添加数据
-                            List<APPLIANCE_LABORATORY> appory = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item.ID);
-                            bool a = false;
-
-                            foreach (var item2 in appory)
+                            foreach (var it in item.UNDERTAKE_LABORATORYID.TrimEnd(',').Split(','))
                             {
-                                foreach (var it in item.UNDERTAKE_LABORATORYID.TrimEnd(',').Split(','))
+                                if (item2.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())
                                 {
-                                    if (item2.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())
+                                    item.APPLIANCE_LABORATORY.Add(new APPLIANCE_LABORATORY()
                                     {
-                                        item.APPLIANCE_LABORATORY.Add(new APPLIANCE_LABORATORY()
-                                        {
-                                            ID = item2.ID,
-                                            UNDERTAKE_LABORATORYID = it,
-                                            ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString(),
-                                            EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已分配.GetHashCode().ToString(),
-                                            DISTRIBUTIONPERSON = currentPerson,
-                                            DISTRIBUTIONTIME = DateTime.Now,
-                                            CREATEPERSON = currentPerson,
-                                            CREATETIME = DateTime.Now,
-                                            ISRECEIVE = Common.ISRECEIVE.是.ToString()
-                                        });
-                                        a = true;
-                                        break;
-                                    }
-                                }
-                                if (a)
-                                {
+                                        ID = item2.ID,
+                                        UNDERTAKE_LABORATORYID = it,
+                                        ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString(),
+                                        EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已分配.GetHashCode().ToString(),
+                                        DISTRIBUTIONPERSON = currentPerson,
+                                        DISTRIBUTIONTIME = DateTime.Now,
+                                        CREATEPERSON = currentPerson,
+                                        CREATETIME = DateTime.Now,
+                                        ISRECEIVE = Common.ISRECEIVE.是.ToString()
+                                    });
+                                    a = true;
                                     break;
                                 }
+                            }
+                            if (a)
+                            {
+                                break;
                             }
                         }
                     }
@@ -443,7 +430,7 @@ namespace Langben.App.Controllers
                                 LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，器具明细信息_承接实验室的Id为" + item2.ID, "委托单信息"
                            );//写入日志 
                                 result.Code = Common.ClientCode.Succeed;
-                                result.Message = Suggestion.UpdateSucceed;                             
+                                result.Message = Suggestion.UpdateSucceed;
                             }
                             else
                             {
@@ -455,7 +442,7 @@ namespace Langben.App.Controllers
                             }
                         }
                     }
-                   
+
                     if (m_BLL.EditField(ref validationErrors, entity))
                     {
                         LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，委托单信息的信息的Id为" + entity.ID, "委托单信息"
