@@ -172,6 +172,7 @@
     <Compile Include="VBAOGAODAYINBLL.cs" />
     <Compile Include="VQIJULINGQU2BLL.cs" />
     <Compile Include="VQIJULINGQU1BLL.cs" />
+    <Compile Include="VXIANGQINGBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

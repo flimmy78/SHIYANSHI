@@ -143,6 +143,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Res\webuploader\" />
+    <Folder Include="Views\VXIANGQING\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -190,6 +191,8 @@
     <Compile Include="Controllers\VAPPLIANCE_DETAIL_INFORMATIONApiController .cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ApplianceController.cs" />
+    <Compile Include="Controllers\VXIANGQINGApiController.cs" />
+    <Compile Include="Controllers\VXIANGQINGController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

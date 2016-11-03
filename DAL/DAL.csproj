@@ -454,6 +454,8 @@
     <Compile Include="VXIANGQING.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="VXIANGQINGMeta.cs" />
+    <Compile Include="VXIANGQINGRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
