@@ -143,7 +143,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Res\webuploader\" />
-    <Folder Include="Views\VXIANGQING\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -859,6 +858,7 @@
     <Content Include="Views\PROJECTTEMPLET\JiaoLiuDianYaXiangDuiWuChaLiangXiang.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\JiaoLiuDianYaXiangDuiWuChaSanXiang.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\PingLuShuChuCheLinagXiangDuiWuCha.cshtml" />
+    <Content Include="Views\VXIANGQING\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

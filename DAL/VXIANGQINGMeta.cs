@@ -28,8 +28,8 @@ namespace Langben.DAL
 			[Display(Name = "器具名称", Order = 4)]
 			public object APPLIANCE_NAME { get; set; }
 
-			[Display(Name = "报告编号", Order = 5)]
-			public object REPORTNUMBER { get; set; }
+			//[Display(Name = "报告编号", Order = 5)]
+			//public object REPORTNUMBER { get; set; }
 
 			[Display(Name = "器具领取状态", Order = 6)]
 			public object STATE { get; set; }
