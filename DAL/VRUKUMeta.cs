@@ -40,7 +40,7 @@ namespace Langben.DAL
         [Display(Name = "客户特殊要求", Order = 8)]
         public object CUSTOMER_SPECIFIC_REQUIREMENTS { get; set; }
 
-        [Display(Name = "器具所在实验室", Order = 9)]
+        [Display(Name = "器具所在位置", Order = 9)]
         public object NAME { get; set; }
 
         [Display(Name = "器具状态", Order = 10)]

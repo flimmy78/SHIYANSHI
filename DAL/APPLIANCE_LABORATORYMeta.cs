@@ -20,6 +20,8 @@ namespace Langben.DAL
         [Display(Name = "预备方案")]
         public string PREPARE_SCHEMEIDOld { get; set; }
 
+        [Display(Name = "入库说明")]
+        public object STORAGEINSTRUCTIONS { get; set; }
         #endregion
 
     }

@@ -100,7 +100,7 @@ namespace Langben.App.Controllers
 
 
         /// <summary>
-        /// 器具登记查询功能
+        /// 我的工作查询
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -120,11 +120,11 @@ namespace Langben.App.Controllers
                 List<APPLIANCE_LABORATORY> list = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(s.ID);
                 foreach (var item2 in list)
                 {
-                    UNDERTAKE_LABORATORYID += item2.UNDERTAKE_LABORATORYID + ",";
                     ORDER_STATUS += item2.ORDER_STATUS + ",";
                     if (item2.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())
                     {
                         ORDER_STATUS_NAME = item2.UNDERTAKE_LABORATORYID + item2.ORDER_STATUS;
+                        UNDERTAKE_LABORATORYID = item2.UNDERTAKE_LABORATORYID;
                     }
                 }
                 s.UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID;
@@ -369,42 +369,94 @@ namespace Langben.App.Controllers
                     entity.CREATEPERSON = currentPerson;
                     // entity.ID = Result.GetNewId();
                     entity.ORDER_STATUS = Common.ORDER_STATUS_INFORMATION.已分配.ToString();
-                    foreach (var item in entity.APPLIANCE_DETAIL_INFORMATION)
+                    APPLIANCE_LABORATORY ary = new APPLIANCE_LABORATORY();
+                    APPLIANCE_LABORATORY ary2 = new APPLIANCE_LABORATORY();
+                    foreach (var item in entity.APPLIANCE_DETAIL_INFORMATION)//器具信息
                     {
                         item.CREATETIME = DateTime.Now;
                         item.CREATEPERSON = currentPerson;
+                        ary = null;
+                        ary2 = null;
                         //器具明细信息_承接实验室表添加数据
                         List<APPLIANCE_LABORATORY> appory = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item.ID);
-                        bool a = false;
-                        foreach (var item2 in appory)
+                        if (appory.Count>=2)
                         {
-                            foreach (var it in item.UNDERTAKE_LABORATORYID.TrimEnd(',').Split(','))
+                            ary = appory[0];
+                            ary2 = appory[1];
+                        }
+                        else
+                        {
+                            ary = appory[0];
+                        }
+                        if (appory.Count >= 2)
+                        {
+                            string ISRECEIVE = string.Empty;
+                            if (ary.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())
                             {
-                                if (item2.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())
+                                if (ary2.ORDER_STATUS==Common.ORDER_STATUS.已领取.ToString())
                                 {
-                                    item.APPLIANCE_LABORATORY.Add(new APPLIANCE_LABORATORY()
-                                    {
-                                        ID = item2.ID,
-                                        UNDERTAKE_LABORATORYID = it,
-                                        ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString(),
-                                        EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已分配.GetHashCode().ToString(),
-                                        DISTRIBUTIONPERSON = currentPerson,
-                                        DISTRIBUTIONTIME = DateTime.Now,
-                                        CREATEPERSON = currentPerson,
-                                        CREATETIME = DateTime.Now,
-                                        ISRECEIVE = Common.ISRECEIVE.是.ToString()
-                                    });
-                                    a = true;
-                                    break;
+                                    ISRECEIVE = Common.ISRECEIVE.否.ToString();
                                 }
+                                else
+                                {
+                                    ISRECEIVE = Common.ISRECEIVE.是.ToString();
+                                }
+                                item.APPLIANCE_LABORATORY.Add(new APPLIANCE_LABORATORY()
+                                {
+                                    ID = ary.ID,
+                                    UNDERTAKE_LABORATORYID = item.UNDERTAKE_LABORATORYID,
+                                    ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString(),
+                                    EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已分配.GetHashCode().ToString(),
+                                    DISTRIBUTIONPERSON = currentPerson,
+                                    DISTRIBUTIONTIME = DateTime.Now,
+                                    CREATEPERSON = currentPerson,
+                                    CREATETIME = DateTime.Now,
+                                    ISRECEIVE = ISRECEIVE
+                                });                             
                             }
-                            if (a)
+                            else if (ary2.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())
                             {
-                                break;
+                                if (ary.ORDER_STATUS == Common.ORDER_STATUS.已领取.ToString())
+                                {
+                                    ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                                }
+                                else
+                                {
+                                    ISRECEIVE = Common.ISRECEIVE.是.ToString();
+                                }
+                                item.APPLIANCE_LABORATORY.Add(new APPLIANCE_LABORATORY()
+                                {
+                                    ID = ary2.ID,
+                                    UNDERTAKE_LABORATORYID = item.UNDERTAKE_LABORATORYID,
+                                    ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString(),
+                                    EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已分配.GetHashCode().ToString(),
+                                    DISTRIBUTIONPERSON = currentPerson,
+                                    DISTRIBUTIONTIME = DateTime.Now,
+                                    CREATEPERSON = currentPerson,
+                                    CREATETIME = DateTime.Now,
+                                    ISRECEIVE = ISRECEIVE
+                                });
                             }
                         }
+                        else
+                        {
+                            if (ary.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())
+                            {
+                                item.APPLIANCE_LABORATORY.Add(new APPLIANCE_LABORATORY()
+                                {
+                                    ID = ary.ID,
+                                    UNDERTAKE_LABORATORYID = item.UNDERTAKE_LABORATORYID,
+                                    ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString(),
+                                    EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已分配.GetHashCode().ToString(),
+                                    DISTRIBUTIONPERSON = currentPerson,
+                                    DISTRIBUTIONTIME = DateTime.Now,
+                                    CREATEPERSON = currentPerson,
+                                    CREATETIME = DateTime.Now,
+                                    ISRECEIVE = Common.ISRECEIVE.是.ToString()
+                                });
+                            }
+                        }               
                     }
-
                     string returnValue = string.Empty;
                     foreach (var item in entity.APPLIANCE_DETAIL_INFORMATION)
                     {
