@@ -125,14 +125,14 @@ namespace Langben.App.Controllers
                         var pathErWeiMa = path + item.ID + ".png";
                         System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate);
 
-                        Bitmap bmp = new Bitmap(fs);
-                        Graphics g = Graphics.FromImage(bmp);
-                        String str = item.APPLIANCE_NAME;
-                        Font font = new Font("宋体", 8);
-                        SolidBrush sbrush = new SolidBrush(Color.Black);
-                        g.DrawString(str, font, sbrush, new PointF(10, 10));
+                        //Bitmap bmp = new Bitmap(fs);
+                        //Graphics g = Graphics.FromImage(bmp);
+                        //String str = item.APPLIANCE_NAME;
+                        //Font font = new Font("宋体", 8);
+                        //SolidBrush sbrush = new SolidBrush(Color.Black);
+                        //g.DrawString(str, font, sbrush, new PointF(10, 10));
                        
-                        bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                        //bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
 
                         System.IO.BinaryWriter w = new System.IO.BinaryWriter(fs);
                         w.Write(ms.ToArray());
