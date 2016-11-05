@@ -39,8 +39,12 @@ namespace Langben.App.Controllers
             byte[] byt = Convert.FromBase64String(s);
             Stream stream = new MemoryStream(byt);
 
+            Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
 
-            return View();
+            result.Code = Common.ClientCode.Succeed;
+            result.Message = Suggestion.InsertSucceed;
+      
+            return Json(result); //提示创建成功
         }
         /// <summary>
         /// 列表
@@ -92,7 +96,7 @@ namespace Langben.App.Controllers
                     entity.CREATETIME = DateTime.Now;
                     entity.CREATEPERSON = currentPerson;
                     entity.ID = Result.GetNewId();
-                    entity.ORDER_STATUS = Common.ORDER_STATUS_INFORMATION.已分配.ToString();
+                    entity.ORDER_STATUS = Common.ORDER_STATUS_INFORMATION.保存.ToString();
                     var ms = new System.IO.MemoryStream();
                     string path = Server.MapPath("~/up/ErWeiMa/");
                     foreach (var item in entity.APPLIANCE_DETAIL_INFORMATION)
@@ -139,8 +143,8 @@ namespace Langben.App.Controllers
                             {
                                 ID = Result.GetNewId(),
                                 UNDERTAKE_LABORATORYID = it,
-                                ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString(),
-                                EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已分配.GetHashCode().ToString(),
+                                ORDER_STATUS = Common.ORDER_STATUS.保存.ToString(),
+                                EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.保存.GetHashCode().ToString(),
                                 DISTRIBUTIONPERSON = currentPerson,
                                 DISTRIBUTIONTIME = DateTime.Now,
                                 CREATEPERSON = currentPerson,

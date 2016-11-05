@@ -5,33 +5,6 @@
     Layout = "~/Views/Shared/QianZi.cshtml";
 }
 @using Common
-<style type="text/css">
-    .style1 {
-        font-size: xx-large;
-        font-family: 宋体, Arial, Helvetica, sans-serif;
-        color: #FF3399;
-    }
-
-    .style2 {
-        font-size: 16px;
-        font-family: 宋体, Arial, Helvetica, sans-serif;
-        color: #FF3399;
-    }
-
-    .style3 {
-        font-size: 12px;
-        font-family: 宋体, Arial, Helvetica, sans-serif;
-        color: #000000;
-    }
-
-    .style4 {
-        font-size: 12px;
-        font-family: 宋体, Arial, Helvetica, sans-serif;
-        color: #FF0000;
-    }
-</style>
-
-
 <script src="~/Scripts/jquery.edatagrid.js"></script>
 <style type="text/css">
     body {
@@ -205,29 +178,7 @@
 
         $('#ApplianceDate').edatagrid({
             singleSelect: false,
-            toolbar: [
-               {
-                   text: '打印器具条形码',
-                   iconCls: 'icon-add',
-                   handler: function () {
-                       return;
-                   }
-               },
-               {
-                   text: '打印委托单',
-                   iconCls: 'icon-add',
-                   handler: function () {
-                       return;
-                   }
-               },
-               {
-                   text: '发送实验室',
-                   iconCls: 'icon-add',
-                   handler: function () {
-                       return flexiSave();
-                   }
-               }
-            ],
+            
             columns: [[
        { field: 'ID', title: 'id', width: 64, hidden: true }
        , {
@@ -303,7 +254,7 @@
            , {
                field: 'REMARKS', title: '备注', width: 135, editor: 'textbox'
            }
-          , { field: 'ORDER_STATUS_NAME', title: '退回状态', width: 135 }
+         
             ]]
         });
         $.ajax({
@@ -351,6 +302,34 @@
     });
 </script>
 
+
+
+<style type="text/css">
+    .style1 {
+        font-size: xx-large;
+        font-family: 宋体, Arial, Helvetica, sans-serif;
+        color: #FF3399;
+    }
+
+    .style2 {
+        font-size: 16px;
+        font-family: 宋体, Arial, Helvetica, sans-serif;
+        color: #FF3399;
+    }
+
+    .style3 {
+        font-size: 12px;
+        font-family: 宋体, Arial, Helvetica, sans-serif;
+        color: #000000;
+    }
+
+    .style4 {
+        font-size: 12px;
+        font-family: 宋体, Arial, Helvetica, sans-serif;
+        color: #FF0000;
+    }
+</style>
+
 <table border="0" align="center" cellpadding="3" cellspacing="0">
     <tr class="style7">
         <td width="30%" vAlign="center" height="217" align="right">
@@ -369,7 +348,8 @@
 </table>
 <input id="Button3" type="button" value="重新签字" onclick="return Button3_onclick()" />
 
-<input id="Button14" type="button" value="签字后，打印委托单" onclick="return Button14_onclick()" />
+<input id="Button14" type="button" value="签字后，打印委托单，同时发送实验室" onclick="return Button14_onclick()" />
+
 <script language="javascript" type="text/javascript">
 
  var obj;
@@ -383,9 +363,11 @@ window.onload = function(){
                   obj = document.getElementById("HWPenSign");
                   obj.HWSetBkColor(0xE0F8E0);
 		  obj.HWSetCtlFrame(2, 0x000000);
-		  obj.HWSetSeparatorLine(lineNum , 0x000000);
+		  obj.HWSetSeparatorLine(lineNum, 0x000000);
+    //初始化代码
 		  var res;
 		  res = obj.HWInitialize();
+		 
                 }
 
 
@@ -394,7 +376,10 @@ function Button3_onclick() {
    obj.HWClearPenSign();
 }
 
+function tiaoxingma() {
+    window.location.href = "/ORDER_TASK_INFORMATION/ErWeiMa/@ViewBag.Id";
 
+}
 
 function Button14_onclick() {
    var stream;
@@ -402,7 +387,8 @@ function Button14_onclick() {
     //正式发布的时候要去掉注释
    //if (stream=='') {
    //   alert("请签字！");
-   //}
+    //}
+
    $.ajax({
        url: "/ORDER_TASK_INFORMATION/QianZi/@ViewBag.Id",
        type: "Put",
@@ -410,12 +396,12 @@ function Button14_onclick() {
        data: { s: stream },
        success: function (data) {
            if (data.Code == 1) {
-
-                 //  window.location.href = 'javascript:history.go(-1)';
-
+               window.print();//打印
+               alert("签字成功，并成功发送实验室");
+               window.location.href = "/ORDER_TASK_INFORMATION/ErWeiMa/@ViewBag.Id";
            }
            else {
-              // $.messager.alert('操作提示', "发送实验室失败！", 'error');
+               alert("签字保存失败");
            }
        }
    });
