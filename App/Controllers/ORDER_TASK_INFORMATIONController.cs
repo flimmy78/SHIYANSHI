@@ -52,16 +52,7 @@ namespace Langben.App.Controllers
 
             return View();
         }
-        /// <summary>
-        /// 列表
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult IndexSef()
-        {
-
-            return View();
-        }
-
+     
         /// <summary>
         /// 查看详细
         /// </summary>

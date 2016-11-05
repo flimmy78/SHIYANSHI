@@ -871,6 +871,7 @@
     <Content Include="Views\VXIANGQING\Index.cshtml" />
     <Content Include="Views\ORDER_TASK_INFORMATION\Show.cshtml" />
     <Content Include="Views\ORDER_TASK_INFORMATION\ErWeiMa.cshtml" />
+    <Content Include="Views\Shared\QianZi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
