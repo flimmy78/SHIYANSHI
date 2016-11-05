@@ -1,8 +1,8 @@
-﻿@model Langben.DAL.RULE 
+﻿@model Langben.DAL.RULE
 @{ Layout = "~/Views/Shared/Index.cshtml"; }
 @using Common @using Models
-  
-    <script type="text/javascript">
+
+<script type="text/javascript">
         $(function () {
 
                 $('#flexigridData').treegrid({
@@ -37,12 +37,13 @@
                         handler: function () {
                             return flexiModify();
                         }
-                   
+
                     }],
-                  
-                    columns: [[ 
-                    	{ field: 'NAMEOTHER', title: '@Html.DisplayNameFor(model => model.NAMEOTHER)', width: 115 }
-                        
+
+                    columns: [[
+                    	{ field: 'NAMEOTHER', title: '@Html.DisplayNameFor(model => model.NAMEOTHER)', width: 315 }
+                    ,{ field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', width: 315 }
+
 					,{ field: 'SCHEME_MENU', title:  '@Html.DisplayNameFor(model => model.SCHEME_MENU)', width: 64 }
 					,{ field: 'SORT', title:  '@Html.DisplayNameFor(model => model.SORT)', width: 64 }
 					,{ field: 'IS_UNCERTAINTY', title:  '@Html.DisplayNameFor(model => model.IS_UNCERTAINTY)', width: 64 }
@@ -50,20 +51,11 @@
 					,{ field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width: 64}
 					,{ field: 'INPUTSTATE', title:  '@Html.DisplayNameFor(model => model.INPUTSTATE)', width: 64 }
 					,{ field: 'PARENTID', title:  '@Html.DisplayNameFor(model => model.PARENTID)', width: 64 }
-					,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 64
-                    , formatter: formatDatebox
-                    } 
-}
-					,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 64 }
-					,{ field: 'UPDATETIME', title:  '@Html.DisplayNameFor(model => model.UPDATETIME)', width: 64
-                    , formatter: formatDatebox
-                    } 
-}
-					,{ field: 'UPDATEPERSON', title:  '@Html.DisplayNameFor(model => model.UPDATEPERSON)', width: 64 }
+					 
 				    ]]
                      ,
                     onBeforeLoad: function (row, param) {
-                       
+
                         if (row) {
                             $(this).treegrid('options').url = '../RULE/GetAllMetadata/' + row.ID;
                         } else {
@@ -71,7 +63,7 @@
                         }
                     }
                 });
-          
+
             var parent = window.dialogArguments; //获取父页面
             if (parent == "undefined" || parent == null) {
                 //    不是在iframe中打开的
@@ -92,7 +84,7 @@
             }
             var arr = new Array(0);
             arr.push(node.ID);
-            arr.push("^"); //主键列和显示列的分割符 ^ 
+            arr.push("^"); //主键列和显示列的分割符 ^
             arr.push(node.NAMEOTHER);
             //主键列和显示列之间用 ^ 分割   每一项用 , 分割
             if (arr.length == 3) {//一条数据和多于一条
@@ -107,7 +99,7 @@
 
             if (arr) {
                 window.location.href = "../RULE/Details/" + arr.ID;
-               
+
             } else {
                 $.messager.alert('操作提示', '请选择一条数据!', 'warning');
             }
@@ -126,7 +118,7 @@
 
             if (arr) {
                 window.location.href = "../RULE/Edit/" + arr.ID;
-               
+
             } else {
                 $.messager.alert('操作提示', '请选择一条数据!', 'warning');
             }
@@ -134,7 +126,7 @@
         };
         //删除的按钮
         function flexiDelete() {
-          
+
             var node = $('#flexigridData').treegrid('getSelected');
             if (!node) {
                 $.messager.alert('操作提示', '请选择数据!', 'warning');
@@ -142,10 +134,10 @@
             } else {
                 $.messager.confirm('操作提示', "确认删除这1项吗？", function (r) {
                     if (r) {
-                        $.post("../RULE/Delete", { query: node.ID }, function (res) {
+                        $.post("../api/RULEApi/Delete/1", { query: node.ID }, function (res) {
                             if (res == "OK") {
                                 remove();
-                                $.messager.alert('操作提示', '删除成功!', 'info');                  
+                                $.messager.alert('操作提示', '删除成功!', 'info');
                             }
                             else {
                                 if (res == "") {
@@ -154,21 +146,21 @@
                                 else {
                                     $.messager.alert('操作提示', res, 'info');
                                 }
-                            }             
-                        }); 
+                            }
+                        });
                     }
                 });
-            }                  
+            }
             return false;
-        };                
-       
-       
+        };
+
+
         function remove() {
             var node = $('#flexigridData').treegrid('getSelected');
             if (node) {
                 $('#flexigridData').treegrid('remove', node.ID);
             }
         }
-    </script>
- 
+</script>
+
 

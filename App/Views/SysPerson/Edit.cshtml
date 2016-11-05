@@ -10,10 +10,7 @@
 }
 
     <fieldset>
-        <legend>
-            <input class="a2 f2" type="submit" value="修改" />
-            <input class="a2 f2" type="button" onclick="BackList('SysPerson')" value="返回列表" />
-        </legend>
+       
         <div class="bigdiv">
        
 
@@ -30,102 +27,136 @@
 
 
             @Html.HiddenFor(model => model.Id )      
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Name)：
+            <div class="search-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Name)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+                </div>
+            <div class="search-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.MyName)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.MyName)
+                    @Html.ValidationMessageFor(model => model.MyName)
+                </div>
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.MyName)：
+            <div class="search-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Password)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Password)
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.MyName)
-                @Html.ValidationMessageFor(model => model.MyName)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Password)：
+            <div class="search-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.SurePassword)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SurePassword)
+                    @Html.ValidationMessageFor(model => model.SurePassword)
+                </div>
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Password)
-                @Html.ValidationMessageFor(model => model.Password)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.SurePassword)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.SurePassword)
-                @Html.ValidationMessageFor(model => model.SurePassword)
-            </div>        
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Sex)：
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(model => model.Sex,Models.SysFieldModels.GetSysField("SysPerson","Sex"),"请选择")
-            </div>      
-              
-            <br style="clear:both;" />
-             
-            <div class="editor-label">
-                @Html.LabelFor(model => model.MobilePhoneNumber)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.MobilePhoneNumber)
-                @Html.ValidationMessageFor(model => model.MobilePhoneNumber)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.PhoneNumber)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.PhoneNumber)
-                @Html.ValidationMessageFor(model => model.PhoneNumber)
-            </div>        
-            <div class="editor-label">
-                <label for="Province">实验室</label>
-            </div>
-            <div class="editor-field">
-                <select id="Province" name="Province">
-                    <option value="">请选择</option>
-                    <option value="数表三相">数表三相</option>
-                    <option value="数表单相">数表单相</option>
-                    <option value="电能">电能</option>
-                    <option value="指示仪表">指示仪表</option>
-                    <option value="直流仪器">直流仪器</option>
-                    <option value="互感器">互感器</option>
-                </select>
+            <div class="search-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Sex)：
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.Sex, Models.SysFieldModels.GetSysField("SysPerson", "Sex"), "请选择")
+                </div>
 
             </div>
-            
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Address)：
+            <div class="search-form">
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.MobilePhoneNumber)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.MobilePhoneNumber)
+                    @Html.ValidationMessageFor(model => model.MobilePhoneNumber)
+                </div>
             </div>
+            <div class="search-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PhoneNumber)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.PhoneNumber)
+                    @Html.ValidationMessageFor(model => model.PhoneNumber)
+                </div>
+            </div>
+            <div class="search-form">
+                <div class="editor-label">
+                    <label for="Province">实验室</label>
+                </div>
+                <div class="editor-field">
+                    <select id="Province" name="Province">
+                        <option value="">请选择</option>
+                        <option value="数表三相">数表三相</option>
+                        <option value="数表单相">数表单相</option>
+                        <option value="电能">电能</option>
+                        <option value="指示仪表">指示仪表</option>
+                        <option value="直流仪器">直流仪器</option>
+                        <option value="互感器">互感器</option>
+                    </select>
+                </div>
+            </div>
+            <div class="search-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Address)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Address)
+                    @Html.ValidationMessageFor(model => model.Address)
+                </div>
+            </div>
+            <div class="search-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.EmailAddress)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.EmailAddress)
+                    @Html.ValidationMessageFor(model => model.EmailAddress)
+                </div>
+            </div>
+            <div class="search-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.State)：
+                </div>
+                <div class="editor-field">
+                    @Html.RadioButtonListFor(model => model.State, Models.SysFieldModels.GetSysField("SysPerson", "State"), false)
+                </div>
+            </div>
+            <div class="search-form" style="width:800px">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Remark)：
+                </div>
+                <div class="textarea-box">
+                    @Html.TextAreaFor(model => model.Remark)
+                    @Html.ValidationMessageFor(model => model.Remark)
+                </div>
+                </div>
+                @Html.HiddenFor(model => model.CreateTime) @Html.HiddenFor(model => model.CreatePerson)
+            </div>
+
+
+        <div class="clearfix"></div>
+        <div class="search-form">
+            <div class="editor-label"></div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.Address)
-                @Html.ValidationMessageFor(model => model.Address)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.EmailAddress)：
+                
+                    <input class="a2 f2" type="submit" value="修改" />
+                    <input class="a2 f2" type="button" onclick="BackList('SysPerson')" value="返回列表" />
+                
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.EmailAddress)
-                @Html.ValidationMessageFor(model => model.EmailAddress)
-            </div><div class="editor-label">
-    @Html.LabelFor(model => model.State)：
-</div>
-<div class="editor-field">
-    @Html.RadioButtonListFor(model => model.State, Models.SysFieldModels.GetSysField("SysPerson", "State"), false)
-</div>
-            <br style="clear: both;" />
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Remark)：
-            </div>
-            <div class="textarea-box">
-                @Html.TextAreaFor(model => model.Remark) 
-                @Html.ValidationMessageFor(model => model.Remark) 
-            </div>        
-           @Html.HiddenFor(model => model.CreateTime ) @Html.HiddenFor(model => model.CreatePerson )      
-            </div>
+        </div>
+
         @Html.HiddenFor(model => model.HDpic)
         <input type="hidden" id="OldPic" name="OldPic" value="@(ViewBag.OldPic)"/>
         <input type="hidden" id="fileUrl" value="HDpic" />

@@ -65,7 +65,7 @@
                     zhi += "实验室不能超过2个！<br>";
                 }
                 else {
-                    var b = a.replace(/互感器/g, "").replace(/指示仪表/g, "").replace(/数表三相/g, "").replace(/电能/g, "").replace(/直流仪器/g, "").replace(/,/g, "");
+                    var b = a.replace(/互感器/g, "").replace(/指示仪表/g, "").replace(/数表三相/g, "").replace(/电能/g, "").replace(/直流仪器/g, "").replace(/数表单相/g, "").replace(/,/g, "");
                     if (b != "") {
                         zhi += "实验室名错误！<br>";
                     }
@@ -334,46 +334,43 @@ s：字符串
 
 <script type="text/javascript">
     function flexiSave() {
-        $.messager.confirm('操作提示', "确认发送吗？", function (r) {
-            if (r) {
-                //结束器具的编辑状态
-                $('#ApplianceDate').edatagrid('saveRow');
-                //获取所有器具
-                var qiju = $('#ApplianceDate').edatagrid('getRows');
-                for (var i = 0; i < qiju.length; i++) {
-                    var a = qiju[i].ORDER_STATUS.split(',');
-                    var b = true;
-                    for (var k = 0; k < a.length; k++) {
-                        if (a[k] == "@Common.ORDER_STATUS.已退回.ToString()") {
-                            b = false;
-                            continue;
-                        }
-                    }
-                    if (b) {
-                        qiju.splice(i);
-                        //delete qiju[i];
-                    }
-                }
-                //实例化一个委托单对象
-                var entity = new Object();
-                entity.APPLIANCE_DETAIL_INFORMATION = qiju;
-                entity.ID = $("#ORDER_TASK_INFORMATIONID").val();
-                entity.ACCEPT_ORGNIZATION = $('#ACCEPT_ORGNIZATION').combobox('getValue');//受理单位
-                entity.INSPECTION_ENTERPRISE = $('#INSPECTION_ENTERPRISE').combobox('getValue');//送检单位$('#com').combobox('getText')
-                entity.INSPECTION_ENTERPRISE_ADDRESS = $("#INSPECTION_ENTERPRISE_ADDRESS").val();//送检单位地址
-                entity.INSPECTION_ENTERPRISE_POST = $("#INSPECTION_ENTERPRISE_POST").val();//送检单位邮政编码
-                entity.CONTACTS = $("#CONTACTS").val();//联系人
-                entity.CONTACT_PHONE = $("#CONTACT_PHONE").val();//联系电话
-                entity.FAX = $("#FAX").val();//传真
-                entity.CERTIFICATE_ENTERPRISE = $('#CERTIFICATE_ENTERPRISE').combobox('getValue');//证书单位$('#com').combobox('getText')
-                entity.CERTIFICATE_ENTERPRISE_ADDRESS = $("#CERTIFICATE_ENTERPRISE_ADDRESS").val();//证书单位地址
-                entity.CERTIFICATE_ENTERPRISE_POST = $("#CERTIFICATE_ENTERPRISE_POST").val();//证书单位邮政编码
-                entity.CONTACTS2 = $("#CONTACTS2").val();//联系人2
-                entity.CONTACT_PHONE2 = $("#CONTACT_PHONE2").val();//联系电话2
-                entity.FAX2 = $("#FAX2").val();//传真2
-                entity.CUSTOMER_SPECIFIC_REQUIREMENTS = $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val();//客户特殊要求
-                if (ifshuju(entity)) {
-                    //将委托单信息发送到服务器
+        //结束器具的编辑状态
+        $('#ApplianceDate').edatagrid('saveRow');
+        //获取所有器具
+        var qiju = $('#ApplianceDate').edatagrid('getRows');
+        for (var i = 0; i < qiju.length; i++) {
+            var a = qiju[i].ORDER_STATUS;
+            var b = true;
+            if (a.indexOf("已退回") >= 0) {
+                b = false;
+            }
+            if (b) {
+                qiju.splice(i);
+                //delete qiju[i];
+            }
+        }
+        //实例化一个委托单对象
+        var entity = new Object();
+        entity.APPLIANCE_DETAIL_INFORMATION = qiju;
+        entity.ID = $("#ORDER_TASK_INFORMATIONID").val();
+        entity.ACCEPT_ORGNIZATION = $('#ACCEPT_ORGNIZATION').combobox('getValue');//受理单位
+        entity.INSPECTION_ENTERPRISE = $('#INSPECTION_ENTERPRISE').combobox('getValue');//送检单位$('#com').combobox('getText')
+        entity.INSPECTION_ENTERPRISE_ADDRESS = $("#INSPECTION_ENTERPRISE_ADDRESS").val();//送检单位地址
+        entity.INSPECTION_ENTERPRISE_POST = $("#INSPECTION_ENTERPRISE_POST").val();//送检单位邮政编码
+        entity.CONTACTS = $("#CONTACTS").val();//联系人
+        entity.CONTACT_PHONE = $("#CONTACT_PHONE").val();//联系电话
+        entity.FAX = $("#FAX").val();//传真
+        entity.CERTIFICATE_ENTERPRISE = $('#CERTIFICATE_ENTERPRISE').combobox('getValue');//证书单位$('#com').combobox('getText')
+        entity.CERTIFICATE_ENTERPRISE_ADDRESS = $("#CERTIFICATE_ENTERPRISE_ADDRESS").val();//证书单位地址
+        entity.CERTIFICATE_ENTERPRISE_POST = $("#CERTIFICATE_ENTERPRISE_POST").val();//证书单位邮政编码
+        entity.CONTACTS2 = $("#CONTACTS2").val();//联系人2
+        entity.CONTACT_PHONE2 = $("#CONTACT_PHONE2").val();//联系电话2
+        entity.FAX2 = $("#FAX2").val();//传真2
+        entity.CUSTOMER_SPECIFIC_REQUIREMENTS = $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val();//客户特殊要求
+        if (ifshuju(entity)) {
+            //将委托单信息发送到服务器
+            $.messager.confirm('操作提示', "确认发送吗？", function (r) {
+                if (r) {
                     $.ajax({
                         url: "/api/ORDER_TASK_INFORMATIONApi/PutUpdate",
                         type: "Put",
@@ -391,8 +388,8 @@ s：字符串
                         }
                     });
                 }
-            }
-        })
+            })
+        }
     }
 </script>
 <script type="text/javascript">
@@ -547,7 +544,7 @@ s：字符串
                   field: 'UNDERTAKE_LABORATORYID', title: '承接实验室', width: 135, editor: {
                       type: 'combobox',
                       options: {
-                          multiple: true,
+                          multiple: false,
                           data: [{ value: '@Common.LABORATORYNAME.电能.ToString()', text: '@Common.LABORATORYNAME.电能.ToString()' }, { value: '@Common.LABORATORYNAME.指示仪表.ToString()', text: '@Common.LABORATORYNAME.指示仪表.ToString()' },
                               { value: '@Common.LABORATORYNAME.数表单相.ToString()', text: '@Common.LABORATORYNAME.数表单相.ToString()' }, { value: '@Common.LABORATORYNAME.互感器.ToString()', text: '@Common.LABORATORYNAME.互感器.ToString()' }, { value: '@Common.LABORATORYNAME.数表三相.ToString()', text: '@Common.LABORATORYNAME.数表三相.ToString()' }, { value: '@Common.LABORATORYNAME.直流仪器.ToString()', text: '@Common.LABORATORYNAME.直流仪器.ToString()' }],
                           panelHeight: 'auto',

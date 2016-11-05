@@ -7,11 +7,9 @@
  @section CurentPlace {
     详细  
 }
- 
+
     <fieldset>
-        <legend>
-            <input class="a2 f2" type="button" onclick="window.location.href = 'javascript:history.go(-1)';" value="返回" />
-        </legend>
+       
         <div class="bigdiv">
             <div style="float:right; width:379px;height:184px;">
                 <img id="showPic" src="~/Images/noPic.jpg" width="149" height="175" />
@@ -23,77 +21,107 @@
                     </div>
                 </div>
             </div>
+            <div class="search-form">
                 <div class="display-label">
-                      @Html.LabelFor(model => model.Name) :
+                    @Html.LabelFor(model => model.Name) :
                 </div>
                 <div class="display-field">
-                    @Html.DisplayFor(model => model.Name) 
-                </div>      
+                    @Html.DisplayFor(model => model.Name)
+                </div>
+                </div>
+            <div class="search-form">
                 <div class="display-label">
-                      @Html.LabelFor(model => model.MyName) :
+                    @Html.LabelFor(model => model.MyName) :
                 </div>
                 <div class="display-field">
-                    @Html.DisplayFor(model => model.MyName) 
-                </div>      
-                
+                    @Html.DisplayFor(model => model.MyName)
+                </div>
+            </div>
+            <div class="search-form">
                 <div class="display-label">
-                      @Html.LabelFor(model => model.Sex) :
+                    @Html.LabelFor(model => model.Sex) :
                 </div>
                 <div class="display-field">
-                    @Html.DisplayFor(model => model.Sex) 
-                </div>        
-                
+                    @Html.DisplayFor(model => model.Sex)
+                </div>
+            </div>
+            <div class="search-form">
                 <div class="display-label">
-                      @Html.LabelFor(model => model.MobilePhoneNumber) :
+                    @Html.LabelFor(model => model.MobilePhoneNumber) :
                 </div>
                 <div class="display-field">
-                    @Html.DisplayFor(model => model.MobilePhoneNumber) 
-                </div>      
+                    @Html.DisplayFor(model => model.MobilePhoneNumber)
+                </div>
+            </div>
+            <div class="search-form">
                 <div class="display-label">
-                      @Html.LabelFor(model => model.PhoneNumber) :
+                    @Html.LabelFor(model => model.PhoneNumber) :
                 </div>
                 <div class="display-field">
-                    @Html.DisplayFor(model => model.PhoneNumber) 
-                </div>      
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </div>
+            </div>
+            <div class="search-form">
                 <div class="display-label">
                     <label for="Province">实验室：</label>
                 </div>
                 <div class="display-field">
-                    @Html.DisplayFor(model => model.Province) 
-                </div>      
-                
+                    @Html.DisplayFor(model => model.Province)
+                </div>
+            </div>
+            <div class="search-form">
                 <div class="display-label">
-                      @Html.LabelFor(model => model.Address) :
+                    @Html.LabelFor(model => model.Address) :
                 </div>
                 <div class="display-field">
-                    @Html.DisplayFor(model => model.Address) 
-                </div>      
+                    @Html.DisplayFor(model => model.Address)
+                </div>
+            </div>
+            <div class="search-form">
                 <div class="display-label">
-                      @Html.LabelFor(model => model.EmailAddress) :
+                    @Html.LabelFor(model => model.EmailAddress) :
                 </div>
                 <div class="display-field">
-                    @Html.DisplayFor(model => model.EmailAddress) 
-                </div><div class="display-label">
-    @Html.LabelFor(model => model.State) :
-</div>
-<div class="display-field">
-    @Html.DisplayFor(model => model.State)
-</div>
-<div class="display-label">
-    @Html.LabelFor(model => model.CreateTime) :
-</div>
-<div class="display-field">
-    @Html.DisplayFor(model => model.CreateTime)
-</div>
-
-                <br style="clear: both;" />
+                    @Html.DisplayFor(model => model.EmailAddress)
+                </div>
+            </div>
+            <div class="search-form">
                 <div class="display-label">
-                    @Html.LabelFor(model => model.Remark) :
+                    @Html.LabelFor(model => model.State) :
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.State)
+                </div>
+            </div>
+            <div class="search-form">
+                <div class="display-label">
+                    @Html.LabelFor(model => model.CreateTime) :
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.CreateTime)
+                </div>
+            </div>
+           </div>
+                <br style="clear: both;" />                
+               
+            <div class="search-form" style="width:800px">
+                <div class="editor-label">
+                   @Html.LabelFor(model => model.Remark) :
                 </div>
                 <div class="textarea-box">
-                    @Html.TextAreaFor(model => model.Remark, new {  @readonly=true})                   
-                </div>      
-               
-    </fieldset>
+                    @Html.TextAreaFor(model => model.Remark, new { @readonly = true })
+                </div>
+            </div>
+
+        <div class="search-form">
+            <div class="editor-label"></div>
+            <div class="editor-field">
+                <input class="a2 f2" type="button" onclick="window.location.href = 'javascript:history.go(-1)';" value="返回" />
+            </div>
+        </div>
+</fieldset>
 
 
+@section HeadContent{
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Res/webuploader/css/webuploader.css")" />
+}
