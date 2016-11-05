@@ -22,7 +22,7 @@ namespace Langben.DAL
         public string FACTORY_NUM { get; set; }
         public string CERTIFICATE_ENTERPRISE { get; set; }
         public string CUSTOMER_SPECIFIC_REQUIREMENTS { get; set; }
-        public string NAME { get; set; }
+        public string APPLIANCE_PROGRESS { get; set; }
         public string ORDER_STATUS { get; set; }
         public string STORAGEINSTRUCTIONS { get; set; }
         public string UNDERTAKE_LABORATORYID { get; set; }

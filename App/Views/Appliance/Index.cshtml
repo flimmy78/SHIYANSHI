@@ -421,15 +421,42 @@
         }
         if (entity.APPLIANCE_DETAIL_INFORMATION.length >= 1) {
             for (var i = 0; i < entity.APPLIANCE_DETAIL_INFORMATION.length; i++) {
-                var a = entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID;
-                var b = a.split(',');
-                if (b.length > 2) {
-                    zhi += "实验室不能超过2个！<br>";
+                if (entity.APPLIANCE_DETAIL_INFORMATION[i].APPLIANCE_NAME == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].VERSION == "undefined"
+                   || entity.APPLIANCE_DETAIL_INFORMATION[i].NUM == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].APPEARANCE_STATUS == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID == "undefined") {
+                    zhi += "器具数据有误！<br>";
+                    break;
+                }
+                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].APPLIANCE_NAME)) {
+                    zhi += "器具名称不能为空！<br>";
+                }
+                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].VERSION)) {
+                    zhi += "型号不能为空！<br>";
+                }
+                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
+                    zhi += "数量不能为空！<br>";
                 }
                 else {
-                    var b = a.replace(/互感器/g, "").replace(/指示仪表/g, "").replace(/数表三相/g, "").replace(/电能/g, "").replace(/直流仪器/g, "").replace(/数表单相/g, "").replace(/,/g, "");
-                    if (b != "") {
-                        zhi += "实验室名错误！<br>";
+                    if (!isNumber(entity.APPLIANCE_DETAIL_INFORMATION[i].NUM)) {
+                        zhi += "数量必须为数字整型！<br>";
+                    }
+                }
+                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].APPEARANCE_STATUS)) {
+                    zhi += "外观状态不能为空！<br>";
+                }
+                if (isNull(entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID)) {
+                    zhi += "实验室不能为空！<br>";
+                }
+                else {
+                    var a = entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID;
+                    var b = a.split(',');
+                    if (b.length > 2) {
+                        zhi += "实验室不能超过2个！<br>";
+                    }
+                    else {
+                        var b = a.replace(/互感器/g, "").replace(/指示仪表/g, "").replace(/数表三相/g, "").replace(/电能/g, "").replace(/直流仪器/g, "").replace(/数表单相/g, "").replace(/,/g, "");
+                        if (b != "") {
+                            zhi += "实验室名错误！<br>";
+                        }
                     }
                 }
             }
@@ -670,8 +697,10 @@ s：字符串
                             },
                             success: function (data) {
                                 if (data.Code == 1) {
-                                    $.messager.alert('操作提示', "发送实验室成功！", 'info', function () {                                        
-                                            window.location.href = '/Appliance/Index';                                                                   
+                                    $.messager.alert('操作提示', "发送实验室成功！", 'info', function () {
+
+                                        window.open('/ORDER_TASK_INFORMATION/Show/' + data.ID);
+                                        window.location.href = '/Appliance/Index';
                                     });
                                 }
                                 else {
@@ -706,34 +735,15 @@ s：字符串
                      return flexiDelete();
                  }
              },
-               {
-                   text: '打印器具条形码',
-                   iconCls: 'icon-add',
-                   handler: function () {
-                       return;
-                   }
-               },
+
                {
                    text: '委托单签名',
-                   iconCls: 'icon-add',
-                   handler: function () {
-                       return;
-                   }
-               },
-               {
-                   text: '打印委托单',
-                   iconCls: 'icon-add',
-                   handler: function () {
-                       return;
-                   }
-               },
-               {
-                   text: '发送实验室',
                    iconCls: 'icon-add',
                    handler: function () {
                        return flexiSave();
                    }
                }
+
             ],
             columns: [[
        { field: 'ORDER_TASK_INFORMATIONID', title: 'ORDER_TASK_INFORMATIONID', width: 64, hidden: true }
@@ -775,16 +785,7 @@ s：字符串
 
 
            , {
-               field: 'MAKE_ORGANIZATION', title: '制造单位', width: 130, editor: {
-                   type: 'combobox',
-                   options: {
-                       valueField: 'value',
-                       textField: 'text',
-                       method: 'get',
-                       url: '../Appliance/Getdate',
-                       required: true
-                   }
-               }
+               field: 'MAKE_ORGANIZATION', title: '制造单位', width: 130, editor: 'text'
            }
               , {
                   field: 'UNDERTAKE_LABORATORYID', title: '承接实验室', width: 150, editor: {

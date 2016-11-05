@@ -26,12 +26,11 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult Index(string id)
         {
-            PREPARE_SCHEME ps = m_BLL5.GetById(id);
             if (!string.IsNullOrWhiteSpace(id))
             {
+                PREPARE_SCHEME ps = m_BLL5.GetById(id);
                 ViewBag.REPORTNUMBER = ps.REPORTNUMBER;
             }
-
             return View();
         }
         /// <summary>

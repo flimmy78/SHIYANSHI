@@ -24,9 +24,9 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-        
+            ViewBag.Id = id;
             return View();
         }
            
@@ -45,7 +45,8 @@ namespace Langben.App.Controllers
         {
 
             int total = 0;
-            List<VXIANGQING> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
+
+            List<VXIANGQING> queryData = m_BLL.GetByParam(id, page, 999, order, sort, search, ref total);
             return Json(new datagrid
             {
                 total = total,
