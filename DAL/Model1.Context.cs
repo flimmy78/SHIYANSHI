@@ -89,7 +89,6 @@ namespace Langben.DAL
         public virtual DbSet<UNDERTAKE_LABORATORY> UNDERTAKE_LABORATORY { get; set; }
         public virtual DbSet<VJIANDINGRENWU> VJIANDINGRENWU { get; set; }
         public virtual DbSet<VQIJULINGQU1> VQIJULINGQU1 { get; set; }
-        public virtual DbSet<VRUKU> VRUKU { get; set; }
         public virtual DbSet<VSHENHE> VSHENHE { get; set; }
         public virtual DbSet<VSHENPI> VSHENPI { get; set; }
         public virtual DbSet<VTEST_ITE> VTEST_ITE { get; set; }
@@ -97,5 +96,6 @@ namespace Langben.DAL
         public virtual DbSet<VRULE> VRULE { get; set; }
         public virtual DbSet<VQIJULINGQU2> VQIJULINGQU2 { get; set; }
         public virtual DbSet<VXIANGQING> VXIANGQING { get; set; }
+        public virtual DbSet<VRUKU> VRUKU { get; set; }
     }
 }
