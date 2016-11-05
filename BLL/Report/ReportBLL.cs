@@ -26,59 +26,19 @@ namespace Langben.Report
     /// </summary>
     public class ReportBLL
     {
-
         /// <summary>
-        /// 导出模板信息设置（根据输入格式设置）
+        /// 获取所有报告配置信息
         /// </summary>
         /// <returns></returns>
-        public Dictionary<string, TableTemplateExt> GetTableTemplateDic()
-        {
-            Dictionary<string, TableTemplateExt> result = new Dictionary<string, TableTemplateExt>();
-            TableTemplates temp = null;
+        public TableTemplates GetTableTemplates()
+        {            
+            TableTemplates result = null;
             if (ReportStatic.TableTemplateXml != null && ReportStatic.TableTemplateXml.Trim() != "")
             {
-                temp = TableTemplates.XmlCovertObj(ReportStatic.TableTemplateXml);
-            }
-            if (temp != null && temp.TableTemplateList != null && temp.TableTemplateList.Count > 0)
-            {
-                TableTemplateExt tExt = null;
-                foreach (TableTemplate t in temp.TableTemplateList)
-                {
-                    tExt = new TableTemplateExt();
-                    tExt.Cells = t.Cells;
-                    tExt.ConclusionRowIndex = t.ConclusionRowIndex-1;
-                    tExt.DataRowIndex = t.DataRowIndex-1;
-                    //tExt.InpputState = t.InpputState;
-                    tExt.InpputStateStr = t.InpputStateStr;
-                    tExt.Remark = t.Remark;
-                    tExt.RemarkRowIndex = t.RemarkRowIndex-1;
-                    tExt.TitleRowCount = t.TitleRowCount-1;
-                    tExt.TitleRowIndex = t.TitleRowIndex-1;
-                    if (!result.ContainsKey(tExt.InpputStateStr))
-                    {
-                        Dictionary<string, string> CellList = null;
-                        if (tExt.Cells != null && tExt.Cells.Count > 0)
-                        {
-                            CellList = new Dictionary<string, string>();
-                            foreach (Cell c in tExt.Cells)
-                            {
-                                if (!CellList.ContainsKey(c.Code))
-                                {
-
-                                    CellList.Add(c.Code, (c.ColIndex-1).ToString()+"_"+c.ColCount.ToString());
-                                }
-                            }
-                            tExt.CellList = CellList;
-                        }
-                        result.Add(t.InpputStateStr, tExt);
-                    }
-                }
+                result = TableTemplates.XmlCovertObj(ReportStatic.TableTemplateXml);
             }
             return result;
-
         }
-
-
         /// <summary>
         /// 导出Excel
         /// </summary>
@@ -394,7 +354,10 @@ namespace Langben.Report
             if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE != null &&
                 entity.QUALIFIED_UNQUALIFIED_TEST_ITE.Count > 0)
             {
-                Dictionary<string, TableTemplateExt> TableTemplateDic = GetTableTemplateDic();
+                //Dictionary<string, TableTemplateExt> TableTemplateDic = GetTableTemplateDic();
+
+                TableTemplates allTableTemplates = GetTableTemplates();
+
 
                 entity.QUALIFIED_UNQUALIFIED_TEST_ITE = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.OrderBy(p => p.SORT).ToList();
                 int i = 1;
@@ -416,10 +379,13 @@ namespace Langben.Report
                     #endregion
 
                     #region 检测项目表格
-                    RowIndex++;                    
-                    if (TableTemplateDic != null && TableTemplateDic.ContainsKey(iEntity.INPUTSTATE))
+                    RowIndex++;
+                    //if (TableTemplateDic != null && TableTemplateDic.ContainsKey(iEntity.RULEID))
+                    //{
+                    //    TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
+                    if (allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
-                        TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
+                        TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
 
                         //解析html表格数据                           
                         RowIndex = paserData(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp);
@@ -809,7 +775,7 @@ namespace Langben.Report
         /// <param name="rowIndex_Destination">目标开始行号</param>
         /// <param name="temp">模板行号单元对象</param>
         /// <returns></returns>
-        private int paserData(string html, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplateExt temp)
+        private int paserData(string html, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp)
         {
             #region 将hmtl转换程文本框及下拉框对象
             Lexer lexer_Input = new Lexer(html);//必须定义多个，否则第二个获取不到数据
@@ -860,7 +826,7 @@ namespace Langben.Report
         /// <param name="OptionDic">下拉框</param>
         /// <returns></returns>
         private int paserData(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination,
-            TableTemplateExt temp, Dictionary<int, List<string>> headerDic,
+            TableTemplate temp, Dictionary<int, List<string>> headerDic,
             Dictionary<int, NodeList> InputDic, Dictionary<int, NodeList> OptionDic)
         {
             int rowIndex = rowIndex_Destination;
@@ -870,8 +836,11 @@ namespace Langben.Report
             {
                 //startIndex = rowIndex_Destination;//一个通道开始行                
                 //画表头
-                CopyRow(sheet_Source, sheet_Destination, temp.TitleRowIndex, rowIndex_Destination, 1, true,headerDic[key]);
-                rowIndex_Destination++;
+                for (int i = 0; i < temp.TableTitleRowCount; i++)
+                {
+                    CopyRow(sheet_Source, sheet_Destination, temp.TableTitleRowIndex+i, rowIndex_Destination, 1, true, headerDic[key]);
+                    rowIndex_Destination++;
+                }
                 if (InputDic.ContainsKey(key))
                 {
                     NodeList nodeList_Input = InputDic[key];
@@ -921,11 +890,17 @@ namespace Langben.Report
                                 {
                                     try
                                     {
-                                        if (temp.CellList != null && temp.CellList.ContainsKey(Name.ToString()))
+                                        //if (temp.CellList != null && temp.CellList.ContainsKey(Name.ToString()))
+                                        //{
+                                        if (temp.Cells != null && temp.Cells.Count>0 && temp.Cells.FirstOrDefault(p=>p.Code==Name.ToString().Trim())!=null)
                                         {
-                                            string  val = temp.CellList[Name.ToString()];
-                                            int cellIndex = Convert.ToInt32(val.Split('_')[0]);
-                                            int cellCount= Convert.ToInt32(val.Split('_')[1]);
+                                            //string  val = temp.CellList[Name.ToString()];
+                                            //string val = temp.Cells.FirstOrDefault(p => p.Code == Name.ToString().Trim()).ColIndex;
+                                            Cell c = temp.Cells.FirstOrDefault(p => p.Code == Name.ToString().Trim());
+                                            //int cellIndex = Convert.ToInt32(val.Split('_')[0]);
+                                            //int cellCount= Convert.ToInt32(val.Split('_')[1]);
+                                            int cellIndex = c.ColIndex;
+                                            int cellCount = c.ColCount;
                                             if (MergedRowCount > 1)
                                             {
                                                 sheet_Destination.AddMergedRegion(new CellRangeAddress(dic[Id.ToString()], dic[Id.ToString()] + MergedRowCount-1, cellIndex, cellIndex+cellCount-1));
@@ -980,11 +955,16 @@ namespace Langben.Report
                                     {
                                         try
                                         {
-                                            if (temp.CellList != null && temp.CellList.ContainsKey(Name.ToString()))
+                                            //if (temp.CellList != null && temp.CellList.ContainsKey(Name.ToString()))
+                                            //{
+                                            if (temp.Cells != null && temp.Cells.Count > 0 && temp.Cells.FirstOrDefault(p => p.Code == Name.ToString().Trim()) != null)
                                             {
-                                                string val = temp.CellList[Name.ToString()];
-                                                int cellIndex = Convert.ToInt32(val.Split('_')[0]);
-                                                int cellCount = Convert.ToInt32(val.Split('_')[1]);
+                                                //string val = temp.CellList[Name.ToString()];
+                                                //int cellIndex = Convert.ToInt32(val.Split('_')[0]);
+                                                //int cellCount = Convert.ToInt32(val.Split('_')[1]);
+                                                Cell c = temp.Cells.FirstOrDefault(p => p.Code == Name.ToString().Trim());                                               
+                                                int cellIndex = c.ColIndex;
+                                                int cellCount = c.ColCount;
                                                 if (MergedRowCount > 1)
                                                 {
                                                     sheet_Destination.AddMergedRegion(new CellRangeAddress(dic[Id.ToString()], dic[Id.ToString()] + MergedRowCount-1, cellIndex, cellIndex+cellCount-1));
