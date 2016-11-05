@@ -7,24 +7,17 @@
 			<!--二级标题，有就配置，没有该节点可不配置-->
 			<!--<SecondTitleList>-->
 			<!--二级标题每行信息，每行一个-->
-			<!--<RowInfo>-->
+			<!--<SecondTitle>-->
 			<!--二级标题行号-->
 			<!--<RowIndex>18</RowIndex>-->
 			<!--二级标题改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
 			<!--<CellIndexs>4,5</CellIndexs>-->
-			<!--</RowInfo>-->
+			<!--</SecondTitle>-->
 			<!--</SecondTitleList>-->
 			<!--表头模板开始行号-->
-			<!--表格表头，有就配置，没有该节点可不配置-->
-			<TableTitleList>
-				<!--表格表头每行信息，每行一个-->
-				<RowInfo>
-					<!--表格表头行号-->
-					<RowIndex>4</RowIndex>
-					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
-					<CellIndexs>49</CellIndexs>
-				</RowInfo>
-			</TableTitleList>
+			<TableTitleRowIndex>4</TableTitleRowIndex>
+			<!--表头行数-->
+			<TableTitleRowCount>1</TableTitleRowCount>
 			<!--数据模板开始行号-->
 			<DataRowIndex>5</DataRowIndex>
 			<!--备注模板行号-->
@@ -164,23 +157,17 @@
 			<!--二级标题，有就配置，没有该节点可不配置-->
 			<SecondTitleList>
 				<!--二级标题每行信息，每行一个-->
-				<RowInfo>
+				<SecondTitle>
 					<!--二级标题行号-->
 					<RowIndex>283</RowIndex>
 					<!--二级标题改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
 					<!--<CellIndexs>4,5</CellIndexs>-->
-				</RowInfo>
+				</SecondTitle>
 			</SecondTitleList>
-			<!--表格表头，有就配置，没有该节点可不配置-->
-			<TableTitleList>
-				<!--表格表头每行信息，每行一个-->
-				<RowInfo>
-					<!--表格表头行号-->
-					<RowIndex>284</RowIndex>
-					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
-					<CellIndexs>21,47</CellIndexs>
-				</RowInfo>
-			</TableTitleList>
+			<!--表头模板开始行号-->
+			<TableTitleRowIndex>284</TableTitleRowIndex>
+			<!--表头行数-->
+			<TableTitleRowCount>1</TableTitleRowCount>
 			<!--数据模板开始行号-->
 			<DataRowIndex>285</DataRowIndex>
 			<!--备注模板行号-->
@@ -290,23 +277,17 @@
 			<!--二级标题，有就配置，没有该节点可不配置-->
 			<SecondTitleList>
 				<!--二级标题每行信息，每行一个-->
-				<RowInfo>
+				<SecondTitle>
 					<!--二级标题行号-->
 					<RowIndex>276</RowIndex>
 					<!--二级标题改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
 					<!--<CellIndexs>4,5</CellIndexs>-->
-				</RowInfo>
+				</SecondTitle>
 			</SecondTitleList>
-			<!--表格表头，有就配置，没有该节点可不配置-->
-			<TableTitleList>
-				<!--表格表头每行信息，每行一个-->
-				<RowInfo>
-					<!--表格表头行号-->
-					<RowIndex>277</RowIndex>
-					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
-					<CellIndexs>21,47</CellIndexs>
-				</RowInfo>
-			</TableTitleList>
+			<!--表头模板开始行号-->
+			<TableTitleRowIndex>277</TableTitleRowIndex>
+			<!--表头行数-->
+			<TableTitleRowCount>1</TableTitleRowCount>
 			<!--数据模板开始行号-->
 			<DataRowIndex>278</DataRowIndex>
 			<!--备注模板行号-->
