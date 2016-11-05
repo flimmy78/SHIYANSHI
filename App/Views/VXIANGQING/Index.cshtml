@@ -14,24 +14,26 @@
             //nowrap: false,
             striped: true,
             collapsible: true,
-            url: '../VXIANGQING/GetData', //获取数据的url
+            url: '/VXIANGQING/GetData/@ViewBag.Id', //获取数据的url
             sortName: 'CREATETIME',
             sortOrder: 'desc',
             idField: 'ID',
-
-           
             columns: [[
-
-                
 					@*{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 155 }*@
-					{ field: 'DD', title:  '@Html.DisplayNameFor(model => model.DD)', width: 155 }
-					,{ field: 'ORDER_TASK_INFORMATIONID', title:  '@Html.DisplayNameFor(model => model.ORDER_TASK_INFORMATIONID)', width: 155 }
-					,{ field: 'APPLIANCE_NAME', title:  '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 155 }
-					,{ field: 'STATE', title:  '@Html.DisplayNameFor(model => model.STATE)', width: 155 }
-					,{ field: 'RECEIVEINS', title:  '@Html.DisplayNameFor(model => model.RECEIVEINS)', width: 155 }
-					,{ field: 'CREATEPERSON', title:  '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 155 }
-					,{ field: 'CREATETIME', title:  '@Html.DisplayNameFor(model => model.CREATETIME)', width: 155 }
-                ]],
+					{ field: 'DD', title: '@Html.DisplayNameFor(model => model.DD)', width: 155, hidden: true }
+					, { field: 'ORDER_TASK_INFORMATIONID', title: '@Html.DisplayNameFor(model => model.ORDER_TASK_INFORMATIONID)', width: 155, hidden: true }
+					, { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 155 }
+					, { field: 'STATE', title: '@Html.DisplayNameFor(model => model.STATE)', width: 155 }
+					, { field: 'RECEIVEINS', title: '@Html.DisplayNameFor(model => model.RECEIVEINS)', width: 155 }
+					, { field: 'CREATEPERSON', title: '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 155 }
+					, {
+					    field: 'CREATETIME', title: '@Html.DisplayNameFor(model => model.CREATETIME)', width: 155, formatter: function (value, row, index) {
+					        if (value) {
+					            return dateConvert(value);
+					        }
+					    }
+					}
+            ]],
             pagination: true,
             rownumbers: true
 
