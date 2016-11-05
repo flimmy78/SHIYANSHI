@@ -23,7 +23,11 @@ namespace Langben.App.Controllers
     /// </summary>
     public class ORDER_TASK_INFORMATIONController : BaseController
     {
-
+        public ActionResult ErWeiMa(string id)
+        {
+            ViewBag.Id = id;
+            return View();
+        }
         public ActionResult Show(string id)
         {
             ViewBag.Id = id;

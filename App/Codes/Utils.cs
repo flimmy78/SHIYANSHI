@@ -16,41 +16,7 @@ using System.Drawing.Imaging;
 
 namespace Models
 {
-    /// <summary>  
-    /// 含有QR码的描述类和包装编码和渲染  
-    /// </summary>  
-    public class QRCodeHelper
-    { 
- 
-        /// <summary>  
-        /// 获取二维码  
-        /// </summary>  
-        /// <param name="strContent">待编码的字符</param>  
-        /// <param name="ms">输出流</param>  
-        ///<returns>True if the encoding succeeded, false if the content is empty or too large to fit in a QR code</returns>  
-        public static bool GetQRCode(string strContent, MemoryStream ms)
-        {
-            ErrorCorrectionLevel Ecl = ErrorCorrectionLevel.M; //误差校正水平   
-            string Content = strContent;//待编码内容  
-            QuietZoneModules QuietZones = QuietZoneModules.Two;  //空白区域   
-            int ModuleSize = 12;//大小  
-            var encoder = new QrEncoder(Ecl);
-            QrCode qr;
-            if (encoder.TryEncode(Content, out qr))//对内容进行编码，并保存生成的矩阵  
-            {
-                Renderer r = new Renderer(ModuleSize);
-                r.QuietZoneModules = QuietZones;
-                r.WriteToStream(qr.Matrix, ms, ImageFormat.Png);
-              
-            }
-            else
-            {
-                return false;
-            }
-            return true;
-        }
-
-    }
+    
     public abstract class Utils
     {
 

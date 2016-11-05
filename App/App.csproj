@@ -870,6 +870,7 @@
     <Content Include="Views\PROJECTTEMPLET\PingLuShuChuCheLinagXiangDuiWuCha.cshtml" />
     <Content Include="Views\VXIANGQING\Index.cshtml" />
     <Content Include="Views\ORDER_TASK_INFORMATION\Show.cshtml" />
+    <Content Include="Views\ORDER_TASK_INFORMATION\ErWeiMa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

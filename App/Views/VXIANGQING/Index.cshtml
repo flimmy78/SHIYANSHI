@@ -2,15 +2,6 @@
 @{ Layout = "~/Views/Shared/Index.cshtml"; }
 @using Common
 @using Models
-<div id="divQuery">
-    
-    <div class='input_search' style="padding-top:10px;">
-        <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
-            查 询
-        </a>
-    </div>
-</div>
- <br style="clear: both;" />
 
 <script type="text/javascript" language="javascript">
     $(function () {
@@ -28,20 +19,12 @@
             sortOrder: 'desc',
             idField: 'ID',
 
-            toolbar: [
-
-                 {
-                     text: '详细',
-                     iconCls: 'icon-search',
-                     handler: function () {
-                         return getView();
-                     }
-                 } ],
+           
             columns: [[
 
                 
 					@*{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 155 }*@
-					,{ field: 'DD', title:  '@Html.DisplayNameFor(model => model.DD)', width: 155 }
+					{ field: 'DD', title:  '@Html.DisplayNameFor(model => model.DD)', width: 155 }
 					,{ field: 'ORDER_TASK_INFORMATIONID', title:  '@Html.DisplayNameFor(model => model.ORDER_TASK_INFORMATIONID)', width: 155 }
 					,{ field: 'APPLIANCE_NAME', title:  '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 155 }
 					,{ field: 'STATE', title:  '@Html.DisplayNameFor(model => model.STATE)', width: 155 }
@@ -66,20 +49,6 @@
         }
     });
 
-    //“查询”按钮，弹出查询框
-    function flexiQuery() {
-
-        //将查询条件按照分隔符拼接成字符串
-        var search = "";
-        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
-            if (this.id)
-                search = search + this.id + "&" + this.value + "^";
-            else
-                search = search + this.name + "&" + this.value + "^";
-        });
-        //执行查询
-        $('#flexigridData').datagrid('load', { search: search });
-    };
 
 </script>
 
