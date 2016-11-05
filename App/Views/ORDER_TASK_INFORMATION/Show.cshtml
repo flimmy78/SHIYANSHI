@@ -1,0 +1,609 @@
+﻿@model Langben.DAL.ORDER_TASK_INFORMATION
+ 
+@{ 
+    ViewBag.Title = "签字";
+    Layout = "~/Views/Shared/Details.cshtml";
+}
+@using Common
+<style type="text/css">
+    .style1 {
+        font-size: xx-large;
+        font-family: 宋体, Arial, Helvetica, sans-serif;
+        color: #FF3399;
+    }
+
+    .style2 {
+        font-size: 16px;
+        font-family: 宋体, Arial, Helvetica, sans-serif;
+        color: #FF3399;
+    }
+
+    .style3 {
+        font-size: 12px;
+        font-family: 宋体, Arial, Helvetica, sans-serif;
+        color: #000000;
+    }
+
+    .style4 {
+        font-size: 12px;
+        font-family: 宋体, Arial, Helvetica, sans-serif;
+        color: #FF0000;
+    }
+</style>
+
+<script language="javascript" type="text/javascript">
+
+ var obj;
+ penwidth = 3;
+ width = 700;
+ height = 385;
+ linespace = 55;
+ lineNum = height / linespace;
+
+window.onload = function(){
+                  obj = document.getElementById("HWPenSign");
+                  obj.HWSetBkColor(0xE0F8E0);
+		  obj.HWSetCtlFrame(2, 0x000000);
+		  obj.HWSetSeparatorLine(lineNum , 0x000000);
+		  var res;
+		  res = obj.HWInitialize();
+                }
+
+ 
+
+function Button3_onclick() {
+   obj.HWClearPenSign();
+}
+
+ 
+
+function Button14_onclick() {
+   var stream;
+   stream = obj.HWGetBase64Stream(3);
+   if (stream=='') {
+       $.messager.alert('操作提示', "请签字！", 'error');
+   }
+   $.ajax({
+       url: "/ORDER_TASK_INFORMATION/QianZi/@ViewBag.Id",
+       type: "Put",
+       dataType: "json",
+       data: { s: stream },
+       success: function (data) {
+           if (data.Code == 1) {
+               
+                   window.location.href = 'javascript:history.go(-1)';
+             
+           }
+           else {
+               $.messager.alert('操作提示', "发送实验室失败！", 'error');
+           }
+       }
+   });
+
+}
+ 
+</script>
+ <script type="text/javascript">
+     
+
+    $(function () {
+        
+        $('#ApplianceDate').edatagrid({
+            singleSelect: false,
+            toolbar: [
+               {
+                   text: '打印器具条形码',
+                   iconCls: 'icon-add',
+                   handler: function () {
+                       return;
+                   }
+               },
+               {
+                   text: '打印委托单',
+                   iconCls: 'icon-add',
+                   handler: function () {
+                       return;
+                   }
+               },
+               {
+                   text: '发送实验室',
+                   iconCls: 'icon-add',
+                   handler: function () {
+                       return flexiSave();
+                   }
+               }
+            ],
+            columns: [[
+       { field: 'ID', title: 'id', width: 64, hidden: true }
+       , {
+           field: 'APPLIANCE_NAME', title: '器具名称', width: 135, editor: {
+               type: 'validatebox', options: {
+                   precision: 1,
+                   required: true,
+                   missingMessage: '必填'
+               }
+           }
+       }, {
+           field: 'VERSION', title: '型号', width: 65, editor: {
+               type: 'validatebox', options: {
+                   required: true,
+                   missingMessage: '必填'
+               }
+           }
+       }, { field: 'FORMAT', title: '规格', width: 65, editor: 'text' },
+       { field: 'FACTORY_NUM', title: '出厂编号', width: 65, editor: 'text' },
+       {
+           field: 'NUM', title: '数量', width: 35
+                , editor: {
+                    type: 'validatebox', options: {
+                        required: true,
+                        missingMessage: '必填'
+                    }
+                }
+
+       }, { field: 'ATTACHMENT', title: '附件', width: 135, editor: 'text' }
+           , {
+               field: 'APPEARANCE_STATUS', title: '外观状态', width: 65, editor: {
+                   type: 'validatebox', options: {
+                       required: true,
+                       missingMessage: '必填'
+                   }
+               }
+           }
+               , {
+                   field: 'MAKE_ORGANIZATION', title: '制造单位', width: 130, editor: {
+                       type: 'combobox',
+                       options: {
+                           valueField: 'value',
+                           textField: 'text',
+                           method: 'get',
+                           url: '/Appliance/Getdate',
+                           required: true
+                       }
+                   }
+               }
+              , {
+                  field: 'UNDERTAKE_LABORATORYID', title: '承接实验室', width: 135, editor: {
+                      type: 'combobox',
+                      options: {
+                          multiple: false,
+                          data: [{ value: '@Common.LABORATORYNAME.电能.ToString()', text: '@Common.LABORATORYNAME.电能.ToString()' }, { value: '@Common.LABORATORYNAME.指示仪表.ToString()', text: '@Common.LABORATORYNAME.指示仪表.ToString()' },
+                              { value: '@Common.LABORATORYNAME.数表单相.ToString()', text: '@Common.LABORATORYNAME.数表单相.ToString()' }, { value: '@Common.LABORATORYNAME.互感器.ToString()', text: '@Common.LABORATORYNAME.互感器.ToString()' }, { value: '@Common.LABORATORYNAME.数表三相.ToString()', text: '@Common.LABORATORYNAME.数表三相.ToString()' }, { value: '@Common.LABORATORYNAME.直流仪器.ToString()', text: '@Common.LABORATORYNAME.直流仪器.ToString()' }],
+                          panelHeight: 'auto',
+                          required: true,
+                          missingMessage: '必填'
+                      }
+                  }
+              }
+           , {
+               field: 'APPLIANCE_RECIVE', title: '器具接收', width: 65,
+               editor: {
+                   type: 'combobox', options: {
+                       data: [{ value: '是', text: '是' }, { value: '否', text: '否' }], panelHeight: 'auto', formatter: function (value, row, index) {
+                           //$(this).combobox('disable');
+                       }
+                   }
+               }
+           }
+           , {
+               field: 'REMARKS', title: '备注', width: 135, editor: 'textbox'
+           }
+          , { field: 'ORDER_STATUS_NAME', title: '退回状态', width: 135 }
+            ]]
+        });
+        //$("#ApplianceDate").edatagrid('addEditor', [ //添加cardNo列editor
+        //{
+        //    field: 'REMARKS', editor: 'text'
+        //}])
+        seng();
+
+    });
+</script>
+
+<table width="90%" border="0" align="center" cellpadding="3" cellspacing="0">
+    <tr class="style7">
+        <td width="30%" vAlign="center" height="217" align="right">
+            <P>
+                签字区域：
+            </P>
+        </td>
+        <td align="left">
+            <object id="HWPenSign"
+                    name="HWPenSign"
+                    classid="clsid:E8F5278C-0C72-4561-8F7E-CCBC3E48C2E3"
+                    width="700"
+                    height="385"></object>
+        </td>
+    </tr>
+</table> 
+<input id="Button3" type="button" value="重新签名" onclick="return Button3_onclick()" />
+     签名图像:
+          &nbsp;&nbsp;<input id="Button14" type="button" value="Base64Stream" onclick="return Button14_onclick()" />
+
+@section CurentPlace {
+ 
+}
+<script type="text/javascript">
+    //数据验证
+    function ifshuju(entity) {
+        var zhi = "";
+        if (isNull(entity.ACCEPT_ORGNIZATION)) {
+            zhi += "受理单位不能为空！<br>";
+        }
+        if (isNull(entity.CERTIFICATE_ENTERPRISE)) {
+            zhi += "证书单位不能为空！<br>";
+        }
+        if (isNull(entity.CERTIFICATE_ENTERPRISE_ADDRESS)) {
+            zhi += "证书单位地址不能为空！<br>";
+        }
+        if (isNull(entity.CONTACTS2)) {
+            zhi += "联系人2不能为空！<br>";
+        }
+        if (isNull(entity.CONTACT_PHONE2)) {
+            zhi += "联系电话2不能为空！<br>";
+        }
+        else {
+            if (!checkPhone(entity.CONTACT_PHONE2)) {
+                zhi += "联系电话2格式不对！<br>";
+            }
+        }
+        if (!isNull(entity.CONTACT_PHONE)) {
+            if (!checkPhone(entity.CONTACT_PHONE)) {
+                zhi += "联系电话格式不对！<br>";
+            }
+        }
+        if (!isNull(entity.INSPECTION_ENTERPRISE_POST)) {
+            if (!isPOST(entity.INSPECTION_ENTERPRISE_POST)) {
+                zhi += "送检单位邮政编码格式不对！<br>";
+            }
+        }
+        if (!isNull(entity.CERTIFICATE_ENTERPRISE_POST)) {
+            if (!isPOST(entity.CERTIFICATE_ENTERPRISE_POST)) {
+                zhi += "证书单位邮政编码格式不对！<br>";
+            }
+        }
+        if (!isNull(entity.FAX)) {
+            if (!isFAX(entity.FAX)) {
+                zhi += "传真格式不对！<br>";
+            }
+        }
+        if (!isNull(entity.FAX2)) {
+            if (!isFAX(entity.FAX2)) {
+                zhi += "传真2格式不对！<br>";
+            }
+        }
+        if (entity.APPLIANCE_DETAIL_INFORMATION.length >= 1) {
+            for (var i = 0; i < entity.APPLIANCE_DETAIL_INFORMATION.length; i++) {
+                var a = entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID;
+                var b = a.split(',');
+                if (b.length > 2) {
+                    zhi += "实验室不能超过2个！<br>";
+                }
+                else {
+                    var b = a.replace(/互感器/g, "").replace(/指示仪表/g, "").replace(/数表三相/g, "").replace(/电能/g, "").replace(/直流仪器/g, "").replace(/数表单相/g, "").replace(/,/g, "");
+                    if (b != "") {
+                        zhi += "实验室名错误！<br>";
+                    }
+                }
+            }
+        }
+        else {
+            zhi += "器具数据不能为空！<br>";
+        }
+
+        if (zhi != "") {
+            $.messager.alert('操作提示', "" + zhi + "", 'info');
+            return false;
+        }
+        else {
+            //return false;
+            return true;
+        }
+
+    }
+    /*
+  用途：检查输入字符串是否为空或者全部都是空格
+  输入：str
+  返回：
+  如果全是空返回true,否则返回false
+  */
+    function isNull(str) {
+        if (str == "") return true;
+        var regu = "^[ ]+$";
+        var re = new RegExp(regu);
+        return re.test(str);
+    }
+    /*
+用途：检查输入字符串是否满足邮政编码格式
+输入：str
+返回：
+如果全是空返回true,否则返回false
+*/
+    function isPOST(str) {
+        var regu = /[1-9]\d{5}(?!\d)/;
+        //var re = new RegExp(regu);
+        return regu.test(str);
+    }
+    /*
+用途：检查输入字符串是否满足传真格式
+输入：str
+返回：
+如果全是空返回true,否则返回false
+*/
+    function isFAX(str) {
+        var regu = /(^(\d{3,4}-)?\d{7,8})$|^((1[0-9][0-9]\d{8}$))/;
+        //var re = new RegExp(regu);
+        return regu.test(str);
+    }
+    /*
+   用途：检查输入的电话号码格式是否正确
+   输入：
+   strPhone：字符串
+   返回：
+   如果通过验证返回true,否则返回false
+   */
+    function checkPhone(strPhone) {
+        var phoneRegWithArea = /^1(3|4|7|5|8)([0-9]{9})/;
+        var phoneRegNoArea = /^0[0-9]{2,3}-[0-9]{8}/;
+        //var prompt = "您输入的电话号码不正确!"
+        if (strPhone.length == 11) {
+            if (phoneRegWithArea.test(strPhone)) {
+                return true;
+            } else {
+                //alert( prompt );
+                return false;
+            }
+        } else {
+            if (phoneRegNoArea.test(strPhone)) {
+                return true;
+            } else {
+                //alert(prompt);
+                return false;
+            }
+
+        }
+    }
+
+    /*
+用途：检查输入字符串是否符合正整数格式
+输入：
+s：字符串
+返回：
+如果通过验证返回true,否则返回false
+*/
+    function isNumber(s) {
+        var regu = /^[0-9]*[1-9][0-9]*$/;
+        if (regu.test(s)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+</script>
+<script src="~/Scripts/jquery.edatagrid.js"></script>
+<style type="text/css">
+    body {
+        height: auto;
+        font-size: 12px;
+    }
+
+    td {
+        height: 25px;
+    }
+
+    .editor-field {
+        width: 200px;
+        height: 24px;
+        float: left;
+        margin: 11px 0 11px 6px;
+        display: inline;
+    }
+
+        .editor-field .text-box {
+            width: 180px;
+        }
+
+        .editor-field .easyui-combobox {
+            width: 180px;
+        }
+</style>
+
+<div class="easyui-layout">
+    <div class="bigdiv" style="width: auto" id="order">
+        <div class="editor-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "华北电力科学研究院有限责任公司", new { @class = "easyui-combobox" })
+            </div>
+        </div>
+        <div class="editor-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
+            </div>
+        </div>
+        <div class="editor-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+                @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+            </div>
+        </div>
+
+        <div class="editor-form">
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_POST)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_POST)
+                @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_POST)
+            </div>
+        </div>
+        <div class="editor-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CONTACTS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACTS)
+                @Html.ValidationMessageFor(model => model.CONTACTS)
+            </div>
+        </div>
+        <div class="editor-form">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CONTACT_PHONE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACT_PHONE)
+                @Html.ValidationMessageFor(model => model.CONTACT_PHONE)
+            </div>
+        </div>
+        <div class="editor-form">
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FAX)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FAX)
+                @Html.ValidationMessageFor(model => model.FAX)
+            </div>
+        </div>
+        <div class="editor-form">
+            <div class="editor-label">
+                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
+            </div>
+        </div>
+        <div class="editor-form">
+            <div class="editor-label">
+                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
+                @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
+            </div>
+        </div>
+        <div class="editor-form">
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_POST)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_POST)
+                @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_POST)
+            </div>
+        </div>
+        <div class="editor-form">
+            <div class="editor-label">
+                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACTS2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACTS2)
+                @Html.ValidationMessageFor(model => model.CONTACTS2)
+            </div>
+        </div>
+        <div class="editor-form">
+            <div class="editor-label">
+                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACT_PHONE2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CONTACT_PHONE2)
+                @Html.ValidationMessageFor(model => model.CONTACT_PHONE2)
+            </div>
+        </div>
+        <div class="editor-form">
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FAX2)：
+            </div>
+
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FAX2)
+                @Html.ValidationMessageFor(model => model.FAX2)
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)：
+        </div>
+        <div class="editor-field" style="height:auto">
+            @Html.TextAreaFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
+            @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
+        </div>
+    </div>
+    <div style="clear:both;"></div>
+    <input type="hidden" id="ORDER_TASK_INFORMATIONID" />
+    <div class="p5 mt10">
+        <table id="ApplianceDate" singleselect="true"></table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function flexiSave() {
+        //结束器具的编辑状态
+        $('#ApplianceDate').edatagrid('saveRow');
+        //获取所有器具
+        var qiju = $('#ApplianceDate').edatagrid('getRows');
+        for (var i = 0; i < qiju.length; i++) {
+            var a = qiju[i].ORDER_STATUS;
+            var b = true;
+            if (a.indexOf("已退回") >= 0) {
+                b = false;
+            }
+            if (b) {
+                qiju.splice(i);
+                //delete qiju[i];
+            }
+        }
+        //实例化一个委托单对象
+        var entity = new Object();
+        entity.APPLIANCE_DETAIL_INFORMATION = qiju;
+        entity.ID = $("#ORDER_TASK_INFORMATIONID").val();
+        entity.ACCEPT_ORGNIZATION = $('#ACCEPT_ORGNIZATION').combobox('getValue');//受理单位
+        entity.INSPECTION_ENTERPRISE = $('#INSPECTION_ENTERPRISE').combobox('getValue');//送检单位$('#com').combobox('getText')
+        entity.INSPECTION_ENTERPRISE_ADDRESS = $("#INSPECTION_ENTERPRISE_ADDRESS").val();//送检单位地址
+        entity.INSPECTION_ENTERPRISE_POST = $("#INSPECTION_ENTERPRISE_POST").val();//送检单位邮政编码
+        entity.CONTACTS = $("#CONTACTS").val();//联系人
+        entity.CONTACT_PHONE = $("#CONTACT_PHONE").val();//联系电话
+        entity.FAX = $("#FAX").val();//传真
+        entity.CERTIFICATE_ENTERPRISE = $('#CERTIFICATE_ENTERPRISE').combobox('getValue');//证书单位$('#com').combobox('getText')
+        entity.CERTIFICATE_ENTERPRISE_ADDRESS = $("#CERTIFICATE_ENTERPRISE_ADDRESS").val();//证书单位地址
+        entity.CERTIFICATE_ENTERPRISE_POST = $("#CERTIFICATE_ENTERPRISE_POST").val();//证书单位邮政编码
+        entity.CONTACTS2 = $("#CONTACTS2").val();//联系人2
+        entity.CONTACT_PHONE2 = $("#CONTACT_PHONE2").val();//联系电话2
+        entity.FAX2 = $("#FAX2").val();//传真2
+        entity.CUSTOMER_SPECIFIC_REQUIREMENTS = $("#CUSTOMER_SPECIFIC_REQUIREMENTS").val();//客户特殊要求
+        if (ifshuju(entity)) {
+            //将委托单信息发送到服务器
+            $.messager.confirm('操作提示', "确认发送吗？", function (r) {
+                if (r) {
+                    $.ajax({
+                        url: "/api/ORDER_TASK_INFORMATIONApi/PutUpdate",
+                        type: "Put",
+                        dataType: "json",
+                        data: entity,
+                        success: function (data) {
+                            if (data.Code == 1) {
+                                $.messager.alert('操作提示', "发送实验室成功！", 'info', function () {
+                                    window.location.href = 'javascript:history.go(-1)';
+                                });
+                            }
+                            else {
+                                $.messager.alert('操作提示', "发送实验室失败！", 'error');
+                            }
+                        }
+                    });
+                }
+            })
+        }
+    }
+</script>

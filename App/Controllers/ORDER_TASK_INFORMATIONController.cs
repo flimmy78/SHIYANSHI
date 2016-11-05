@@ -10,6 +10,11 @@ using Common;
 using Langben.DAL;
 using Langben.BLL;
 using Langben.App.Models;
+using System.IO;
+using System.Drawing;
+using Gma.QrCodeNet.Encoding;
+using Gma.QrCodeNet.Encoding.Windows.Controls;
+using System.Drawing.Imaging;
 
 namespace Langben.App.Controllers
 {
@@ -19,6 +24,20 @@ namespace Langben.App.Controllers
     public class ORDER_TASK_INFORMATIONController : BaseController
     {
 
+        public ActionResult Show(string id)
+        {
+            ViewBag.Id = id;
+            return View();
+        }
+        [HttpPut]
+        public ActionResult QianZi(string id, string s)
+        {
+            byte[] byt = Convert.FromBase64String(s);
+            Stream stream = new MemoryStream(byt);
+
+
+            return View();
+        }
         /// <summary>
         /// 列表
         /// </summary>
@@ -79,12 +98,45 @@ namespace Langben.App.Controllers
                     entity.CREATEPERSON = currentPerson;
                     entity.ID = Result.GetNewId();
                     entity.ORDER_STATUS = Common.ORDER_STATUS_INFORMATION.已分配.ToString();
+                    var ms = new System.IO.MemoryStream();
+                    string path = Server.MapPath("~/up/ErWeiMa/");
                     foreach (var item in entity.APPLIANCE_DETAIL_INFORMATION)
                     {
                         item.ID = Result.GetNewId();
                         item.CREATETIME = DateTime.Now;
                         item.CREATEPERSON = currentPerson;
+                        //二维码生成
+                        ErrorCorrectionLevel Ecl = ErrorCorrectionLevel.M; //误差校正水平   
+                        string Content = item.ID;//待编码内容  
+                        QuietZoneModules QuietZones = QuietZoneModules.Two;  //空白区域   
+                        int ModuleSize = 12;//大小  
+                        var encoder = new QrEncoder(Ecl);
+                        QrCode qr;
+                        if (encoder.TryEncode(Content, out qr))//对内容进行编码，并保存生成的矩阵  
+                        {
+                            Renderer r = new Renderer(ModuleSize);
+                            r.QuietZoneModules = QuietZones;
+                            r.WriteToStream(qr.Matrix, ms, ImageFormat.Png);
 
+                        }
+                        
+                       
+                        //QRCodeHelper.GetQRCode(item.ID, ms);
+                        var pathErWeiMa = path + item.ID + ".png";
+                        System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate);
+
+                        Bitmap bmp = new Bitmap(fs);
+                        Graphics g = Graphics.FromImage(bmp);
+                        String str = item.APPLIANCE_NAME;
+                        Font font = new Font("宋体", 8);
+                        SolidBrush sbrush = new SolidBrush(Color.Black);
+                        g.DrawString(str, font, sbrush, new PointF(10, 10));
+                       
+                        bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+                        System.IO.BinaryWriter w = new System.IO.BinaryWriter(fs);
+                        w.Write(ms.ToArray());
+                        fs.Close();
                         //器具明细信息_承接实验室表添加数据
                         foreach (var it in item.UNDERTAKE_LABORATORYID.TrimEnd(',').Split(','))
                         {
@@ -103,6 +155,7 @@ namespace Langben.App.Controllers
                             });
                         }
                     }
+                    ms.Close();
 
                     string returnValue = string.Empty;
                     if (m_BLL.Create(ref validationErrors, entity))

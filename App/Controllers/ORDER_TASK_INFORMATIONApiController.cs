@@ -124,12 +124,13 @@ namespace Langben.App.Controllers
                     if (item2.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())
                     {
                         ORDER_STATUS_NAME = item2.UNDERTAKE_LABORATORYID + item2.ORDER_STATUS;
-                        UNDERTAKE_LABORATORYID = item2.UNDERTAKE_LABORATORYID;
+                      
                     }
+                    UNDERTAKE_LABORATORYID = item2.UNDERTAKE_LABORATORYID;
+                   
                 }
                 s.UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID;
-
-                data.APPLIANCE_DETAIL_INFORMATIONShows.Add(new Models.APPLIANCE_DETAIL_INFORMATIONShow()
+                var show = new Models.APPLIANCE_DETAIL_INFORMATIONShow()
                 {
                     ID = s.ID,
                     BAR_CODE_NUM = s.BAR_CODE_NUM,
@@ -157,7 +158,8 @@ namespace Langben.App.Controllers
                     UNDERTAKE_LABORATORYIDString = UNDERTAKE_LABORATORYID.TrimEnd(','),
                     ORDER_STATUS = ORDER_STATUS,
                     ORDER_STATUS_NAME = ORDER_STATUS_NAME
-                });
+                };
+                data.APPLIANCE_DETAIL_INFORMATIONShows.Add(show);
             }
             data.ID = queryData.ID;
             data.ORDER_NUMBER = queryData.ORDER_NUMBER;
@@ -379,7 +381,7 @@ namespace Langben.App.Controllers
                         ary2 = null;
                         //器具明细信息_承接实验室表添加数据
                         List<APPLIANCE_LABORATORY> appory = m_BLL3.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item.ID);
-                        if (appory.Count>=2)
+                        if (appory.Count >= 2)
                         {
                             ary = appory[0];
                             ary2 = appory[1];
@@ -393,7 +395,7 @@ namespace Langben.App.Controllers
                             string ISRECEIVE = string.Empty;
                             if (ary.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())
                             {
-                                if (ary2.ORDER_STATUS==Common.ORDER_STATUS.已领取.ToString())
+                                if (ary2.ORDER_STATUS == Common.ORDER_STATUS.已领取.ToString())
                                 {
                                     ISRECEIVE = Common.ISRECEIVE.否.ToString();
                                 }
@@ -412,7 +414,7 @@ namespace Langben.App.Controllers
                                     CREATEPERSON = currentPerson,
                                     CREATETIME = DateTime.Now,
                                     ISRECEIVE = ISRECEIVE
-                                });                             
+                                });
                             }
                             else if (ary2.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())
                             {
@@ -455,7 +457,7 @@ namespace Langben.App.Controllers
                                     ISRECEIVE = Common.ISRECEIVE.是.ToString()
                                 });
                             }
-                        }               
+                        }
                     }
                     string returnValue = string.Empty;
                     foreach (var item in entity.APPLIANCE_DETAIL_INFORMATION)

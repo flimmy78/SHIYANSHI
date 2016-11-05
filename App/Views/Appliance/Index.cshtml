@@ -671,7 +671,9 @@ s：字符串
                             success: function (data) {
                                 if (data.Code == 1) {
                                     $.messager.alert('操作提示', "发送实验室成功！", 'info', function () {                                        
-                                            window.location.href = '/Appliance/Index';                                                                   
+                                       
+                                        window.open('/ORDER_TASK_INFORMATION/Show/'+data.ID);
+                                        window.location.href = '/Appliance/Index';
                                     });
                                 }
                                 else {
@@ -706,34 +708,15 @@ s：字符串
                      return flexiDelete();
                  }
              },
-               {
-                   text: '打印器具条形码',
-                   iconCls: 'icon-add',
-                   handler: function () {
-                       return;
-                   }
-               },
+              
                {
                    text: '委托单签名',
-                   iconCls: 'icon-add',
-                   handler: function () {
-                       return;
-                   }
-               },
-               {
-                   text: '打印委托单',
-                   iconCls: 'icon-add',
-                   handler: function () {
-                       return;
-                   }
-               },
-               {
-                   text: '发送实验室',
                    iconCls: 'icon-add',
                    handler: function () {
                        return flexiSave();
                    }
                }
+               
             ],
             columns: [[
        { field: 'ORDER_TASK_INFORMATIONID', title: 'ORDER_TASK_INFORMATIONID', width: 64, hidden: true }

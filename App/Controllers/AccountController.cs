@@ -24,12 +24,12 @@ namespace Langben.App.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-         
+           
             return View(); //开发的时候，只需要注释此行代码
 #if DEBUG
             //Debug 测试时使用
             AccountBLL accountBLL = new BLL.AccountBLL();
-            
+
             SysPerson person = accountBLL.ValidateUser("Admin", EncryptAndDecrypte.EncryptString("123456"));
             if (person != null)
             {//登录成功
@@ -139,7 +139,7 @@ namespace Langben.App.Controllers
 
                 if (null != (accountBLL.ValidateUser(currentPerson, EncryptAndDecrypte.EncryptString(model.OldPassword))))
                 {
-                    if (accountBLL.ChangePassword(currentPerson, model.OldPassword,  model.NewPassword))
+                    if (accountBLL.ChangePassword(currentPerson, model.OldPassword, model.NewPassword))
                     {
                         ModelState.AddModelError("", "修改密码成功");
                         return View();
