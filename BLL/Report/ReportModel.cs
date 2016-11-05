@@ -8,19 +8,7 @@ namespace Langben.Report
 {
     /// <summary>
     /// 表格模板位置
-    /// </summary>
-    public class TableTemplateExt : TableTemplate
-    {
-        Dictionary<string, string> _CellList = null;
-        /// <summary>
-        /// 单元格信息
-        /// </summary>
-        public Dictionary<string, string> CellList
-        {
-            get { return _CellList; }
-            set { _CellList = value; }
-        }
-    }
+    /// </summary>  
     [XmlRoot("TableTemplates")]
     public class TableTemplates : ObjConvert<TableTemplates>
     {
@@ -45,31 +33,58 @@ namespace Langben.Report
         /// <summary>
         /// 输入格式字符串
         /// </summary>
-        [XmlElement("InpputState")]
-        public string InpputStateStr
+        [XmlElement("RuleID")]
+        public string RuleID
         {
             get;
             set;
         }
-        private int _TitleRowIndex = 0;
         /// <summary>
-        /// 标头模板行号
+        /// 是否有二级标题
         /// </summary>
-        [XmlElement("TitleRowIndex")]
-        public int TitleRowIndex
+        public bool IsHaveSecondTitle
         {
-            get { return _TitleRowIndex; }
-            set { _TitleRowIndex = value; }
+            get
+            {
+                if(SecondTitleList!=null && SecondTitleList.Count>0 && SecondTitleList.Count(p=>p.RowIndex>=0)>0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
-        private int _TitleRowCount = 1;
+        //private int _SecondTitleRowIndex = -1;
+        ///// <summary>
+        ///// 二级标题开始行号,如果有二级标题填具体开始行号，如果没有填-1
+        ///// </summary>
+        //[XmlElement("SecondTitleRowIndex")]
+        //public int SecondTitleRowIndex
+        //{
+        //    get { return _SecondTitleRowIndex; }
+        //    set { _SecondTitleRowIndex = value; }
+        //}
+        private int _TableTitleRowIndex = 0;
         /// <summary>
-        /// 标头行数
+        /// 表头模板行号
         /// </summary>
-        [XmlElement("TitleRowCount")]
-        public int TitleRowCount
+        [XmlElement("TableTitleRowIndex")]
+        public int TableTitleRowIndex
         {
-            get { return _TitleRowCount; }
-            set { _TitleRowCount = value; }
+            get { return _TableTitleRowIndex-1; }
+            set { _TableTitleRowIndex = value; }
+        }
+        private int _TableTitleRowCount = 1;
+        /// <summary>
+        /// 表头行数
+        /// </summary>
+        [XmlElement("TableTitleRowCount")]
+        public int TableTitleRowCount
+        {
+            get { return _TableTitleRowCount; }
+            set { _TableTitleRowCount = value; }
         }
         private int _DataRowIndx = -1;
         /// <summary>
@@ -78,7 +93,7 @@ namespace Langben.Report
         [XmlElement("DataRowIndex")]
         public int DataRowIndex
         {
-            get { return _DataRowIndx; }
+            get { return _DataRowIndx-1; }
             set { _DataRowIndx = value; }
 
         }
@@ -89,7 +104,7 @@ namespace Langben.Report
         [XmlElement("RemarkRowIndex")]
         public int RemarkRowIndex
         {
-            get { return _RemarkRowIndx; }
+            get { return _RemarkRowIndx-1; }
             set { _RemarkRowIndx = value; }
         }
         private int _ConclusionRowIndx = -1;
@@ -99,7 +114,7 @@ namespace Langben.Report
         [XmlElement("ConclusionRowIndex")]
         public int ConclusionRowIndex
         {
-            get { return _ConclusionRowIndx; }
+            get { return _ConclusionRowIndx-1; }
             set { _ConclusionRowIndx = value; }
         }
 
@@ -121,6 +136,76 @@ namespace Langben.Report
         {
             get;
             set;
+        }
+        /// <summary>
+        /// 二级标题，有就配置，没有该节点可不配置
+        /// </summary>
+        [XmlArray("SecondTitleList")]
+        [XmlArrayItem("SecondTitle")]
+        public List<SecondTitle> SecondTitleList
+        {
+            get;
+            set;
+        }
+    }
+    /// <summary>
+    /// 二级标题每行信息，每行一个
+    /// </summary>
+    [XmlRoot("SecondTitle")]
+    public class SecondTitle
+    {      
+       
+        private int _RowIndex = -1;
+        /// <summary>
+        /// 二级标题行号
+        /// </summary>
+        [XmlElement("RowIndex")]
+        public int RowIndex
+        {
+            get { return _RowIndex-1; }
+            set { _RowIndex = value; }
+        }
+        /// <summary>
+        /// 二级标题改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填
+        /// </summary>
+        [XmlElement("CellIndexs")]
+        public string CellIndexs
+        {
+            get;
+            set;
+        }
+        List<int> _CellIndexList = null;
+        /// <summary>
+        /// 二级标题改行动态数据的单元给列号
+        /// </summary>
+        public List<int> CellIndexList
+        {
+            get
+            {
+                if (CellIndexs != null && CellIndexs.Trim()!="")
+                {
+                    foreach(string s in CellIndexs.Trim().Split(','))
+                    {
+                        if(s!=null && s.Trim()!="")
+                        {
+                            int index = -1;
+                            if(Int32.TryParse(s.Trim(),out index))
+                            {
+                                if(_CellIndexList==null)
+                                {
+                                    _CellIndexList = new List<int>();
+                                }
+                                if(!_CellIndexList.Contains(index))
+                                {
+                                    _CellIndexList.Add(index);
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+                return _CellIndexList;
+            }
         }
     }
     [XmlRoot("Cell")]
@@ -151,7 +236,7 @@ namespace Langben.Report
         [XmlElement("ColIndex")]
         public int ColIndex
         {
-            get { return _ColIndex; }
+            get { return _ColIndex-1; }
             set { _ColIndex = value; }
         }
         private int _ColCount = 1;
@@ -161,7 +246,7 @@ namespace Langben.Report
         [XmlElement("ColCount")]
         public int ColCount
         {
-            get { return _ColCount; }
+            get { return _ColCount-1; }
             set { _ColCount = value; }
         }
     }
