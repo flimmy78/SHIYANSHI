@@ -18,6 +18,11 @@ namespace Langben.App.Controllers
     /// </summary>
     public class RULEController : BaseController
     {
+        public ActionResult Get(string id)
+        {
+            RULE item = m_BLL.GetById(id);
+            return Json(item, JsonRequestBehavior.AllowGet);
+        }
 
         /// <summary>
         /// 列表
@@ -26,10 +31,10 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult Index()
         {
-        
+
             return View();
         }
-         /// <summary>
+        /// <summary>
         /// 列表
         /// </summary>
         /// <returns></returns>
@@ -44,22 +49,22 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [SupportFilter]  
+        [SupportFilter]
         public ActionResult Details(string id)
         {
             ViewBag.Id = id;
             return View();
 
         }
- 
+
         /// <summary>
         /// 首次创建
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
         public ActionResult Create(string id)
-        { 
-            
+        {
+
             return View();
         }
 
@@ -68,7 +73,7 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="id">主键</param>
         /// <returns></returns> 
-        [SupportFilter] 
+        [SupportFilter]
         public ActionResult Edit(string id)
         {
             ViewBag.Id = id;
@@ -83,7 +88,7 @@ namespace Langben.App.Controllers
         {
             m_BLL = bll;
         }
-        
+
         /// <summary>
         /// 获取树形列表的数据
         /// </summary>
@@ -100,22 +105,36 @@ namespace Langben.App.Controllers
                     rows = rows.Select(s =>
                         new
                         {
-                          ID = s.ID
-					,NAMEOTHER = s.NAMEOTHER
-					,NAME = s.NAME
-					,SCHEME_MENU = s.SCHEME_MENU
-					,SORT = s.SORT
-					,IS_UNCERTAINTY = s.IS_UNCERTAINTY
-					,UNCERTAINTY_MENU = s.UNCERTAINTY_MENU
-					,UNDERTAKE_LABORATORYID =   s.UNDERTAKE_LABORATORYID//自连接的表要注意，等号两边可能需要换位
-					,INPUTSTATE = s.INPUTSTATE
-					,_parentId =   s.PARENTID
-					,state = s.RULE1.Any(a => a.PARENTID == s.ID) ? "closed" : null
-					,CREATETIME = s.CREATETIME
-					,CREATEPERSON = s.CREATEPERSON
-					,UPDATETIME = s.UPDATETIME
-					,UPDATEPERSON = s.UPDATEPERSON
-					
+                            ID = s.ID
+                    ,
+                            NAMEOTHER = s.NAMEOTHER
+                    ,
+                            NAME = s.NAME
+                    ,
+                            SCHEME_MENU = s.SCHEME_MENU
+                    ,
+                            SORT = s.SORT
+                    ,
+                            IS_UNCERTAINTY = s.IS_UNCERTAINTY
+                    ,
+                            UNCERTAINTY_MENU = s.UNCERTAINTY_MENU
+                    ,
+                            UNDERTAKE_LABORATORYID = s.UNDERTAKE_LABORATORYID//自连接的表要注意，等号两边可能需要换位
+                    ,
+                            INPUTSTATE = s.INPUTSTATE
+                    ,
+                            _parentId = s.PARENTID
+                    ,
+                            state = s.RULE1.Any(a => a.PARENTID == s.ID) ? "closed" : null
+                    ,
+                            CREATETIME = s.CREATETIME
+                    ,
+                            CREATEPERSON = s.CREATEPERSON
+                    ,
+                            UPDATETIME = s.UPDATETIME
+                    ,
+                            UPDATEPERSON = s.UPDATEPERSON
+
                         }
                         ).OrderBy(o => o.ID)
                 });

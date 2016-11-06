@@ -30,12 +30,12 @@ namespace Langben.App.Models
                 foreach (var item in listTree)
                 {
                     SystemTree myTree = new SystemTree() { id = item.ID.GetString(), text = item.NAME.GetString() };
-                    //if (string.IsNullOrWhiteSpace(item.Status))
-                    //    myTree.@checked = false;
-                    //else
-                    //    myTree.@checked = true;
-                        //if (!string.IsNullOrWhiteSpace(item.Iconic))
-                    //    myTree.iconCls = item.Iconic;//开启图标
+                    
+                    if (!string.IsNullOrWhiteSpace(item.INPUTSTATE))
+                        myTree.inputState = item.INPUTSTATE;//
+                    if (!string.IsNullOrWhiteSpace(item.SCHEME_MENU))
+                        myTree.url = "/PROJECTTEMPLET/" + item.SCHEME_MENU;//
+
                     myChildren.Add(myTree);
                     if (Bind(entitys, item.ID, ref myTree.children))//递归调用
                     {

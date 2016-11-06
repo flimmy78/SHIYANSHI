@@ -14,8 +14,8 @@
                     <td> 标准量传部：</td>
                     <td>                      
                         <select  name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID" style="width:200px;" onchange="flexiQuery();" class="my-combox" >
-                            <option value="电能" selected="selected">电能1</option>
-                            <option value="数表三相">数表三相</option>
+                           
+                            <option value="数表三相">数表三相</option><option value="电能" selected="selected">电能1</option>
                             <option value="数表单相">数表单相</option>
                             <option value="指示仪表">指示仪表</option>
                             <option value="直流仪器">直流仪器</option>
@@ -32,7 +32,8 @@
 <br style="clear: both;" />
 
 <script type="text/javascript" language="javascript">
-    $(function () {               
+    $(function () {
+        bindShiyanshi("#UNDERTAKE_LABORATORYID");
         $('#flexigridData').datagrid({
             //title: '方案', //列表的标题
             iconCls: 'icon-site',
@@ -358,16 +359,6 @@
             }
         });
     }
-    $(document).ready(function () {
-        //flexiQuery();
-        bindShiyanshi("#UNDERTAKE_LABORATORYID");
-
-        //$('#UNDERTAKE_LABORATORYID').combobox({
-        //    onChange: function (n, o) {
-        //        flexiQuery();
-        //    }
-        //});
-       
-    });
+  
 </script>
 

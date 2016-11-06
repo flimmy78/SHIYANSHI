@@ -42,7 +42,8 @@ namespace Langben.App.Controllers
                 {
                     tree.Bind(trees, parentId, ref listSystemTree);
                 }
-            }           
+            }
+            var d = Json(listSystemTree, JsonRequestBehavior.AllowGet);
             return Json(listSystemTree, JsonRequestBehavior.AllowGet);
         }
     }

@@ -1,7 +1,7 @@
 ﻿var shiyanshiArray = new Array;
 shiyanshiArray = [
-    { value: '电能', text: '电能',treeUrl:'/Res/tree_data1.js' }, 
-    { value: '数表三相', text: '数表三相', treeUrl: '/Res/tree_data_SBSX.js' },
+  
+    { value: '数表三相', text: '数表三相', treeUrl: '/Res/tree_data_SBSX.js' },  { value: '电能', text: '电能',treeUrl:'/Res/tree_data1.js' }, 
     { value: '数表单相', text: '数表单相', treeUrl: '/Res/tree_data1.js' },
     { value: '指示仪表', text: '指示仪表', treeUrl: '/Res/tree_data1.js' },
     { value: '直流仪器', text: '直流仪器', treeUrl: '/Res/tree_data1.js' },

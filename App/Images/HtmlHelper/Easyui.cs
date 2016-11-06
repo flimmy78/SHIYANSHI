@@ -45,7 +45,11 @@ namespace Models
         /// <summary>
         /// 图标
         /// </summary>
-        public string iconCls;
+        public string inputState;
+        /// <summary>
+        /// 图标
+        /// </summary>
+        public string url;
         /// <summary>
         /// 是否被选中，checked为C#关键字，所以前面加@
         /// </summary>
