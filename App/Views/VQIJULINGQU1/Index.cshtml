@@ -62,8 +62,8 @@
 <script type="text/javascript" language="javascript">
     $(function () {
         $('#flexigridData').datagrid({
-            title: '器具报告领取', //列表的标题
-            iconCls: 'icon-site',
+            //title: '器具报告领取', //列表的标题
+            //iconCls: 'icon-site',
             width: 'auto',
             height: 'auto',
             //nowrap: false,
@@ -77,14 +77,14 @@
             toolbar: [
                  {
                      text: '签名',
-                     iconCls: 'icon-search',
+                     iconCls: 'icon-edit',
                      handler: function () {
                          return getView();
                      }
                  },
                     {
                         text: '报告回收',
-                        iconCls: 'icon-search',
+                        iconCls: 'icon-daoru',
                         handler: function () {
                             return baogaohuishou();
                         }
