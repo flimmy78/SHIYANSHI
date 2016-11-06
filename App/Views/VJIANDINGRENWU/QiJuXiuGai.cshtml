@@ -33,7 +33,7 @@
         }
 </style>
 <div class="easyui-layout">
-    <input class="a2 f2" type="button" onclick="javascript: window.location.href = '/VJIANDINGRENWU/Index';" value="返回" />
+   
     <div class="bigdiv" style="width: auto" id="order">
         <div class="editor-form">
             <div class="editor-label">
@@ -164,12 +164,14 @@
 
 
     </div>
-    <div style="clear:both;"></div>
-    <input type="hidden" id="ORDER_TASK_INFORMATIONID" />
-    <div class="p5 mt10">
-        <table id="ApplianceDate" singleselect="true"></table>
+
+    <div class="form-foot"><a class="easyui-linkbutton" onclick="javascript: window.location.href = '/VJIANDINGRENWU/Index';">返回</a></div>
+        <div style="clear:both;"></div>
+        <input type="hidden" id="ORDER_TASK_INFORMATIONID" />
+        <div class="p5 mt10">
+            <table id="ApplianceDate" singleselect="true"></table>
+        </div>
     </div>
-</div>
 
 <script type="text/javascript">
     $(function () {
@@ -179,7 +181,7 @@
             toolbar: [
              {
                  text: '保存',
-                 iconCls: 'icon-add',
+                 iconCls: 'icon-save',
                  handler: function () {
                      return flexiInsert();
                  }
