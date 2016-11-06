@@ -253,8 +253,8 @@ else
             var HangHaoID = lianChengID + "_" + rowidx;//（行号ID)量程ID_第几行
             if (rowidx == 0) {
                 //需要合并的列
-                        }
-       
+            }
+
 
             var changerHTML = "onblur=''";
 
@@ -265,7 +265,7 @@ else
             htmlString.push(SetTDHtml(1, "Show_VALUE", HangHaoID, rowidx, "", "<sup>。</sup>"));
             //标准值
             htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, "", "<sup>。</sup>"));
-                 //绝对误差
+            //绝对误差
             htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, "", "<sup>。</sup>"));
             //校准结果的不确定度
             htmlString.push(SetTDHtml(1, "UNCERTAINTY_DEGREE", HangHaoID, rowidx, ""));
