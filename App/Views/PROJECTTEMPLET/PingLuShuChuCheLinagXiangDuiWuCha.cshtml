@@ -46,10 +46,10 @@ else
     <div class="mt10" id="tongdao">
         <div>
             <input class="my-textbox tc" value="A" style="width:30px"> 相：<input class="my-textbox tc" value="57.7" style="width:60px"> <select class="my-combobox" name="" id="" >
-                <option value="">Hz</option>
-                <option value="">KHz</option>
-                <option value="">MHz</option>
-                <option value="">GHz</option>
+                <option value="Hz">Hz</option>
+                <option value="KHz">KHz</option>
+                <option value="MHz">MHz</option>
+                <option value="GHz">GHz</option>
 
             </select>
         </div>
@@ -65,9 +65,9 @@ else
                 <tr>
                     <th align="center">
                         U(K = <select class="my-combobox" name="state" >
-                            <option value="">2 </option>
-                            <option value="">3</option>
-                            <option value="">√3</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="√3">√3</option>
 
 
                         </select>)
@@ -81,7 +81,9 @@ else
 
             <tfoot>
                 <tr>
-                    <td colspan="4"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addRow()">增加空行</a></td>
+                    <td colspan="4">
+                        <input type="hidden" id="hideLiangChengShuLiang" value="0" />
+                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
                 </tr>
             </tfoot>
         </table>
@@ -112,76 +114,107 @@ else
 <!--/增加量程弹层-->
 <script src="/Scripts/JScript-JianCeXiang-Common.js"></script>
 <script type="text/javascript" language="javascript">
-    //行数
-    var rowIdx = 0;
-    $(document).ready(function () {
-        addRow();
-    })
-    var addRow = function () {
-        rowIdx++;
-        var selectHTML = "<input class=\"my-textbox input-width\" value=\"\" onblur=\"JS(this)\">" +
-        "<select class=\"my-combobox\" name=\"\" id=\"\"    onchange=\"changeValue(this)\">" +
-        "<option value=\"Hz\">Hz</option>" +
-        "<option value=\"KHz\">KHz</option>" +
-        "<option value=\"MHz\">MHz</option> " +
-        "<option value=\"GHz\">GHz</option>" +
-        "</select>";
-        var rowTmp = "<tr rowindex=\"" + rowIdx + "\">" +
-                    "<td align=\"center\">" + selectHTML + "</td>" +
-                    "<td align=\"center\">" + selectHTML + "</td>" +
-                    "<td align=\"center\"><input class=\"my-textbox \" style=\"width:98%\"></td>" +
-                    "<td align=\"center\"><input class=\"my-textbox \" style=\"width:98%\"></td> " +
-                  "</tr>";
-        $("#tbody_1").append(rowTmp);
-    }
+    //增加量程
+    function CreateRow() {
+        var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+        var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
+        LiangChengShuLiang++;
+        var rowspanIdx = $("#txtPoint").val();     //检测点数
+        txtNumber = $("#txtNumber").val(); //量程
+        var standardValue = "";
+        var htmlString = [];
+        var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;
 
-    var JS = function (obj) {
-        //（显示值-标准值）/标准值*100%
-        var xsValue = $(obj).parent().parent().find("td:eq(0)").find("input").val();
-        var bzValue = $(obj).parent().parent().find("td:eq(1)").find("input").val();
-        if (xsValue != "" && bzValue != "")
-            $(obj).parent().parent().find("td:eq(2)").find("input").val((((parseFloat(xsValue) - parseFloat(bzValue)) / parseFloat(bzValue)).toFixed(2) * 100).toFixed(2));
-    }
+        var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//（量程ID）第几个通道_第几个量程
+        for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
+            rowLength++;
+            htmlString.push("<tr rowindex='" + rowLength + "'>");
 
-    //优化保留两位小数 zh
-    Number.prototype.toFixed = function toFixed(s) {
-        var IsFuShu = false;//判断是否是负数，负数单独处理
-        var je = 0;
-        if (this.toString().indexOf('-') >= 0) {
-            IsFuShu = true;
-            je = this.toString().replace('-', '');
-        } else je = this;
-        changenum = (parseInt(je * Math.pow(10, s) + 0.5) / Math.pow(10, s)).toString();
-        //}
-
-        index = changenum.indexOf(".");
-        if (index < 0 && s > 0) {
-            changenum = changenum + ".";
-            for (i = 0; i < s; i++) {
-                changenum = changenum + "0";
+            var rowspan;
+            var name;
+            var id;
+            var txtVal;
+            var ddlhtml;
+            var ddlVal;
+            var HangHaoID = lianChengID + "_" + rowidx;//（行号ID)量程ID_第几行
+            if (rowidx == 0) {
+                //需要合并的列
+                //量程
+                htmlString.push(SetTDHtml(rowspanIdx, "RANGE", lianChengID, null, txtNumber));
+                //选用电阻阻值
+                htmlString.push(SetTDHtml(rowspanIdx, "RESISTANCE", lianChengID, null, ""));
             }
 
-        } else {
-            index = changenum.length - index;
-            for (i = 0; i < (s - index) + 1; i++) {
-                changenum = changenum + "0";
-            }
+            //输出示值
 
+            var changerHTML = "onblur=''";
+            //输出示值
+            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, ""));
+            //读数值
+            htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, ""));
+            //输出实际值
+            htmlString.push(SetTDHtml(1, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx, ""));
+            //相对误差
+            htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, ""));
+            //校准结果的不确定度
+            htmlString.push(SetTDHtml(1, "UNCERTAINTY_DEGREE", HangHaoID, rowidx, ""));
+            htmlString.push("</tr>");
         }
-        var returnNum = changenum.toString();
-        if (IsFuShu)
-            returnNum = '-' + returnNum;
-        return returnNum;
+        htmlString = htmlString.join("");
+        //var tagRow = $("#tbody_" + tableIdx).append(htmlString);
+
+        var tagRow = $("#tbody_" + hideDangQianTongDao).append(htmlString);
+        $.parser.parse(tagRow);//渲染easyui组建
+        $('#dlg').window('close');
+        $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang)
     }
 
-    function changeValue(obj) {
-        var selectText = $(obj).parent().find("select option:selected").text();
-        $(obj).parent().parent().find("td:eq(1) select").each(function (eIdx) {
-            $(this).children("option[selected='selected']").removeAttr("selected");
-            $(this).children("option[value='" + selectText + "']").attr("selected", true);
-        });
-
+    //离开事件，用于计算
+    function blurValue(obj) {
+        LianDongShiJiZhi(obj);
     }
+    //联动标准值
+    //输出实际值计算：【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值；【选用电阻阻值】没有数值时，输出实际值=读数值
+    function LianDongShiJiZhi(obj) {
+
+        if (obj.name == "RESISTANCE" && obj.value.trim() != "")//选用电阻阻值变更
+        {
+
+            id = obj.id.replace(obj.name, "") + "_";
+            $("input[name=READ_VALUE]").each(function (a, b) {//读数值
+                if (b.id.indexOf(id) >= 0 && b.value.trim() != "") {
+                    var hhID = b.id.replace(b.name, "");//行号
+                    var shijizhiID = "#ACTUAL_OUTPUT_VALUE" + hhID;//输出实际值ID
+                    $(shijizhiID).val(CalculateShiJiZhi(obj.value.trim(), b.value.trim()));
+                }
+            });
+        }
+        else if (obj.name == "READ_VALUE")//读数值
+        {
+            var DZID = obj.id.replace(obj.name, "");
+            DZID = DZID.substr(0, DZID.lastIndexOf("_"));
+            var hhID = obj.id.replace(obj.name, "");//行号
+            var shijizhiID = "#ACTUAL_OUTPUT_VALUE" + hhID;//输出实际值ID
+            var DianZuID = "#RESISTANCE" + DZID;//电阻ID
+            $(shijizhiID).val(CalculateShiJiZhi($(DianZuID).val(), obj.value.trim()));
+        }
+    }
+    //计算输出实际值
+    function CalculateShiJiZhi(DianZu, DuShuZhi) {
+        if (DianZu == "" || DuShuZhi == "") {//【选用电阻阻值】没有数值时，输出实际值=读数值
+            return DuShuZhi;
+        }
+        else if (DianZu.trim() == "0") {
+            return "";
+        }
+        else//【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值
+        {
+            var value = parseFloat(DuShuZhi.trim()) / parseFloat(DianZu.trim());
+            return value;
+        }
+    }
+
+
 </script>
 
 

@@ -42,7 +42,7 @@ else
 
     @*<input type="hidden" id="rowindex" value="0" />*@
     <div class="mt10" id="tongdao">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_moban" style="display:none">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_moban_" style="display:none">
             <thead>
                 <tr>
                     <td colspan="9">
@@ -344,6 +344,17 @@ else
         $.parser.parse(tagRow);//渲染easyui组建
         $('#dlg').window('close');
         $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang)
+    }
+
+    var CreateRow = function (obj) {
+        var idx = $(obj).attr("index");
+        var trNew = $(obj).parent().siblings('table').eq(idx - 1).find('tr:last').clone();
+        $(trNew).each(function () {
+            $(this).children("td:not(:first)").find('input').val('');
+        })
+        var rowspan = $(obj).parent().siblings('table').eq(idx - 1).find('tr td:eq(1)').attr('rowspan');
+        $(obj).parent().siblings('table').eq(idx - 1).find('tr td:eq(1)').attr('rowspan', rowspan + 1);
+        $(obj).parent().siblings('table').eq(idx - 1).append(trNew);
     }
 
     //离开事件，用于计算
