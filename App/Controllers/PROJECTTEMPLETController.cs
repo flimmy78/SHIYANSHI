@@ -35,7 +35,7 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaLiangLie(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaLiangLie(string RULEID = "JJG440-2008_3_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
@@ -45,7 +45,7 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaSanLie(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaSanLie(string RULEID = "JJG440-2008_3_3", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
@@ -56,7 +56,7 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaYiLie(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaYiLie(string RULEID = "JJG440-2008_3_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
@@ -67,7 +67,7 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult ZhiLiuDianLiuDianYaFeiZhengFu(string RULEID="", string SCHEMEID="",string PREPARE_SCHEMEID="")
+        public ActionResult ZhiLiuDianLiuDianYaFeiZhengFu(string RULEID= "315-1983_2_1", string SCHEMEID="",string PREPARE_SCHEMEID="")
         {            
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
@@ -78,7 +78,7 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult ZhiLiuDianLiuDianYaZhengFu(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult ZhiLiuDianLiuDianYaZhengFu(string RULEID = "315-1983_2_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
@@ -91,7 +91,7 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult ZhiLiuDianLiuShuChu(string RULEID = "", string SCHEMEID = "",string PREPARE_SCHEMEID="")
+        public ActionResult ZhiLiuDianLiuShuChu(string RULEID = "38-1987_2", string SCHEMEID = "",string PREPARE_SCHEMEID="")
         {           
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
@@ -104,7 +104,7 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult JiaoLiuDianYaXiangDuiWuChaLiangXiang(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaLiangXiang(string RULEID = "35-1999_2_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
@@ -117,7 +117,7 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult JiaoLiuDianYaXiangDuiWuChaSanXiang(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaSanXiang(string RULEID = "35-1999_2_4", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
