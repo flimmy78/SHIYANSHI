@@ -437,4 +437,76 @@
        }
     ]
 }
+, {
+    "id": "JJG440-2008",
+    "text": "JJG 440-2008 工频单相相位表检定规程",
+    "children": [
+    {
+        "id": "35-1999_1",
+        "text": "外观检查",
+        "attributes": {
+            "InputState": "HGBHG"
+        }
+    },
+    {
+        "id": "35-1999_2",
+        "text": "交流电流测量",
+        "children": [
+		{
+		    "id": "35-1999_2_1",
+		    "text": "相对误差-两相",
+		    "attributes": {
+		        "InputState": "",
+		        "url": ""
+		    }
+		},
+       {
+           "id": "JJG440-2008_1",
+           "text": "工频单相相位输出（测量）-绝对误差-一列",
+           "attributes": {
+               "InputState": "",
+               "url": "/PROJECTTEMPLET/GongPinDanXiangXiangWeiShuChuJueDuiWuChaYiLie?RULEID=JJG440-2008_1"
+           }
+       },
+       {
+           "id": "35-1999_2_3",
+           "text": "相对误差-三相",
+           "attributes": {
+               "InputState": "",
+               "url": ""
+           }
+       },
+	   {
+	       "id": "35-1999_2_4",
+	       "text": "相对误差-三相-多通道",
+	       "attributes": {
+	           "InputState": "",
+	           "url": "/PROJECTTEMPLET/JiaoLiuDianYaXiangDuiWuChaSanXiang?RULEID=35-1999_2_4"
+	       }
+	   }
+        ]
+    },
+       {
+           "id": "35-1999_3",
+           "text": "工作正常性",
+           "attributes": {
+               "InputState": "HGBHG"
+           }
+       }
+       , {
+           "id": "35-1999_4",
+           "text": "电流稳定性",
+           "attributes": {
+               "InputState": "HGBHG"
+           }
+       }
+       , {
+           "id": "35-1999_5",
+           "text": "电流最高分辨力",
+           "attributes": {
+               "InputState": "HGBHG"
+           }
+       }
+    ]
+}
 ]
