@@ -53,7 +53,7 @@ else
 
             </select>
         </div>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_moban" style="display:">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_moban" style="display:none">
             <thead>
                 <tr>
                     <th rowspan="2" align="center" width="150">显示值</th>
@@ -241,21 +241,16 @@ else
             var HangHaoID = lianChengID + "_" + rowidx;//（行号ID)量程ID_第几行
             if (rowidx == 0) {
                 //需要合并的列
-                //量程
-                htmlString.push(SetTDHtml(rowspanIdx, "RANGE", lianChengID, null, ""));
-                //选用电阻阻值
-                htmlString.push(SetTDHtml(rowspanIdx, "RESISTANCE", lianChengID, null, ""));
+                htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, ""));
             }
 
             //输出示值
 
             var changerHTML = "onblur=''";
-            //输出示值
+            //显示值
             htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, ""));
-            //读数值
+            //标准值
             htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, ""));
-            //输出实际值
-            htmlString.push(SetTDHtml(1, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx, ""));
             //相对误差
             htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, ""));
             //校准结果的不确定度
