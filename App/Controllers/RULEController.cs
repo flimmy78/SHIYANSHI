@@ -107,7 +107,7 @@ namespace Langben.App.Controllers
 					,SORT = s.SORT
 					,IS_UNCERTAINTY = s.IS_UNCERTAINTY
 					,UNCERTAINTY_MENU = s.UNCERTAINTY_MENU
-					,UNDERTAKE_LABORATORYIDOld =   s.UNDERTAKE_LABORATORYID//自连接的表要注意，等号两边可能需要换位
+					,UNDERTAKE_LABORATORYID =   s.UNDERTAKE_LABORATORYID//自连接的表要注意，等号两边可能需要换位
 					,INPUTSTATE = s.INPUTSTATE
 					,_parentId =   s.PARENTID
 					,state = s.RULE1.Any(a => a.PARENTID == s.ID) ? "closed" : null
