@@ -5,7 +5,7 @@
 }
 @using Common
 @section CurentPlace {
-    <input class="a2 f2" type="button" onclick="window.location.href = 'javascript:history.go(-1)';" value="返回" />
+    
 
 }
 <script type="text/javascript">
@@ -352,6 +352,8 @@ s：字符串
             @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
         </div>
     </div>
+
+    <div class="form-foot"><a class="easyui-linkbutton"  onclick="window.location.href = 'javascript:history.go(-1)';" " >返回</a></div>
     <div style="clear:both;"></div>
     <input type="hidden" id="ORDER_TASK_INFORMATIONID" />
     <div class="p5 mt10">
@@ -498,21 +500,21 @@ s：字符串
             toolbar: [
                {
                    text: '打印器具条形码',
-                   iconCls: 'icon-add',
+                   iconCls: 'icon-print',
                    handler: function () {
                        return;
                    }
                },
                {
                    text: '打印委托单',
-                   iconCls: 'icon-add',
+                   iconCls: 'icon-print',
                    handler: function () {
                        return;
                    }
                },
                {
                    text: '发送实验室',
-                   iconCls: 'icon-add',
+                   iconCls: 'icon-ok',
                    handler: function () {
                        return flexiSave();
                    }
