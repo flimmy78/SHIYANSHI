@@ -1433,9 +1433,10 @@
 警告 6002: 表/视图“TENGFEI.VTEST_ITE”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VTEST_ITE">
           <Key>
+            <PropertyRef Name="ROW_FLAG" />
             <PropertyRef Name="PREPARE_SCHEMEID" />
           </Key>
-          <Property Name="ROW_FLAG" Type="varchar2" MaxLength="73" />
+          <Property Name="ROW_FLAG" Type="varchar2" MaxLength="73" Nullable="false" />
           <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="SCHEMEID" Type="varchar2" MaxLength="36" />
           <Property Name="RULEID" Type="varchar2" MaxLength="36" />
@@ -4515,9 +4516,10 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
         </EntityType>
         <EntityType Name="VTEST_ITE">
           <Key>
+            <PropertyRef Name="ROW_FLAG" />
             <PropertyRef Name="PREPARE_SCHEMEID" />
           </Key>
-          <Property Name="ROW_FLAG" Type="String" MaxLength="73" FixedLength="false" Unicode="false" />
+          <Property Name="ROW_FLAG" Type="String" MaxLength="73" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PREPARE_SCHEMEID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="RULEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
