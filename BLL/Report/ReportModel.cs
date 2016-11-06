@@ -45,6 +45,10 @@ namespace Langben.Report
         {
             get
             {
+                if(_SubscriptLastCount<0)
+                {
+                    return 0;
+                }
                 return _SubscriptLastCount;
             }
             set
