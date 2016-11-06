@@ -407,7 +407,7 @@
            "text": "相对误差-三相",
            "attributes": {
                "InputState": "",
-               "url": "/PROJECTTEMPLET/BianSongQiDianLiuDianYa?RULEID=35-1999_2_3"
+               "url": "/PROJECTTEMPLET/PingLuShuChuCheLinagXiangDuiWuCha?RULEID=35-1999_2_3"
            }
        },
 	   {
