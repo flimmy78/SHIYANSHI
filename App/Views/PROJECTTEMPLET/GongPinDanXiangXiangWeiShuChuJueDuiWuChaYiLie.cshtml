@@ -41,21 +41,121 @@ else
 
     @*<input type="hidden" id="rowindex" value="0" />*@
     <div class="mt10" id="tongdao">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_moban" style="display:none" >
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_moban" style="display:none">
             <thead>
                 <tr>
-                    <th rowspan="2" align="center" width="140">量程</th>
-                    <th rowspan="2" align="center" width="140">选用电阻阻值（Ω）</th>
-                    <th rowspan="2" align="center"> 输出示值 </th>
-                    <th rowspan="2" align="center"> 读数值 </th>
-                    <th rowspan="2" align="center"> 输出实际值 </th>
-                    <th rowspan="2" align="center">相对误差</th>
+                    <td colspan="5">
+                        <div class="fl" style="margin-right:20px; ">
+                            <input name="" type="text" class="my-textbox tc" value="100" style="width:40px">
+                            <select class="my-combobox" name="" id="">
+                                <option value="V">V</option>
+                                <option value="MV">MV</option>
+                                <option value="KV">KV</option>
+                                <option value="mV">mV</option>
+                                <option value="μV">μV</option>
+                            </select>
+                            /
+                            <input name="" type="text" class="my-textbox tc" value="5" style="width:40px">
+                            <select class="my-combobox" name="" id="">
+                                <option value="A">A</option>
+                                <option value="KA">KA</option>
+                                <option value="mA">mA</option>
+                                <option value="μA">μA</option>
+                                <option value="nA">nA</option>
+                                <option value="pA">pA</option>
+                            </select>，
+                            <input name="" type="text" class="my-textbox tc" value="50" style="width:50px">
+                            <select class="my-combobox" name="" id="">
+                                <option value="Hz">Hz</option>
+                                <option value="kHz">kHz</option>
+                                <option value="mHz">MHz</option>
+                                <option value="gHz">GHz</option>
+
+                            </select>
+
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th rowspan="2" align="center" width="140">相位</th>
+
+                    <th align="center" width="150"> 显示值</th>
+                    <th align="center" width="150">标准值</th>
+                    <th align="center" width="150">绝对误差</th>
+                    <th align="center">校准结果的不确定度</th>
+                </tr>
+                <tr>
+                    <th align="center" class="f14">
+                        <select class="my-combobox" name="" style="">
+                            <option value="">U1</option>
+                            <option value="">U2</option>
+                            <option value="">UA</option>
+                            <option value="">UB</option>
+                            <option value="">UC</option>
+                            <option value="">UAB </option>
+                            <option value="">UBC</option>
+
+                        </select> -
+                        <select class="my-combobox" name="select" style="">
+                            <option value="I1">I1</option>
+                            <option value="I2">I2</option>
+                            <option value="IA">IA </option>
+                            <option value="IB">IB</option>
+                            <option value="IC">IC</option>
+
+                        </select>
+                    </th>
+
+                    <th align="center" class="f14">
+                        <select class="my-combobox" name="" style="">
+                            <option value="">U1</option>
+                            <option value="">U2</option>
+                            <option value="">UA</option>
+                            <option value="">UB</option>
+                            <option value="">UC</option>
+                            <option value="">UAB </option>
+                            <option value="">UBC</option>
+
+                        </select> -
+                        <select class="my-combobox" name="select" style="">
+                            <option value="I1">I1</option>
+                            <option value="I2">I2</option>
+                            <option value="IA">IA </option>
+                            <option value="IB">IB</option>
+                            <option value="IC">IC</option>
+
+                        </select>
+                    </th>
+
+                    <th align="center" class="f14">
+                        <select class="my-combobox" name="" style="">
+                            <option value="">U1</option>
+                            <option value="">U2</option>
+                            <option value="">UA</option>
+                            <option value="">UB</option>
+                            <option value="">UC</option>
+                            <option value="">UAB </option>
+                            <option value="">UBC</option>
+
+                        </select> -
+                        <select class="my-combobox" name="select" style="">
+                            <option value="I1">I1</option>
+                            <option value="I2">I2</option>
+                            <option value="IA">IA </option>
+                            <option value="IB">IB</option>
+                            <option value="IC">IC</option>
+
+                        </select>
+                    </th>
+
                     <th align="center">
-                        校准结果的不确定度<br>
-                        U(K = <select class="my-combobox" id="K_moban" name="K" style="width:30px;">
-                            <option value="2">2 </option>
-                            <option value="3">3</option>
-                            <option value="√3">√3</option>
+                        U(K = <select class="my-combobox" name="state" style=";">
+                            <option value="">2 </option>
+                            <option value="">3</option>
+                            <option value="">√3</option>
+
+
                         </select>)
                     </th>
                 </tr>
@@ -67,7 +167,7 @@ else
                 <tr>
                     <td colspan="7">
                         <input type="hidden" id="hideLiangChengShuLiang" value="0" />
-                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng" >增加量程</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加相位</a>
                     </td>
                 </tr>
             </tfoot>
@@ -92,10 +192,9 @@ else
 
         </table>
     </div>
-    <input type="hidden" id="hideDangQianTongDao" value="0"/>    
-    <input type="hidden" id="hideTongDaoShuLiang" value="0" />    
+    <input type="hidden" id="hideDangQianTongDao" value="0" />
+    <input type="hidden" id="hideTongDaoShuLiang" value="0" />
 </div>
-
 <!--增加量程弹层-->
 <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
 					text:'确定',
@@ -110,40 +209,36 @@ else
          }
          }]" style="width:400px;height:200px;padding:10px">
     <table>
-        <tr>
-            <td width="80" align="right">量程值：</td>
-            <td><input type="text" id="txtNumber" name="txtNumber" class="easyui-textbox required digits" style="width:200px" /></td>
-        </tr>
+
         <tr>
             <td align="right">检测点数：</td>
-            <td><input type="text" id="txtPoint" name="txtPoint" class="easyui-textbox required digits" style="width:200px" /></td>
+            <td><input type="text" id="txtPoint" class="easyui-textbox  required digits" style="width:200px" /></td>
         </tr>
         <tr>
             <td align="right">小数点位数：</td>
-            <td><input type="text" id="txtPointLen" name="txtPointLen" class="easyui-textbox required digits" style="width:200px" /></td>
-        </tr>       
+            <td><input type="text" id="txtPointLen" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
+        </tr>
     </table>
-   
 </div>
 <!--/增加量程弹层-->
 <script src="/Scripts/JScript-JianCeXiang-Common.js"></script>
 <script type="text/javascript" language="javascript">
     //var RuleID = $("#hideRULEID").val();//检测项目ID
     //var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
-    // $Tongdao_moban//模板   
- 
+    // $Tongdao_moban//模板
+
     //增加量程
     function CreateRow() {
         debugger
-        var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道        
-        var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量  
+        var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+        var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
         LiangChengShuLiang++;
         var rowspanIdx = $("#txtPoint").val();     //检测点数
         txtNumber = $("#txtNumber").val(); //量程
         var standardValue = "";
         var htmlString = [];
         var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;
-             
+
         var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//（量程ID）第几个通道_第几个量程
         for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
             rowLength++;
@@ -158,30 +253,27 @@ else
             var HangHaoID = lianChengID + "_" + rowidx;//（行号ID)量程ID_第几行
             if (rowidx == 0) {
                 //需要合并的列
-                //量程
-                htmlString.push(SetTDHtml(rowspanIdx, "RANGE", lianChengID, null, txtNumber));
-                //选用电阻阻值
-                htmlString.push(SetTDHtml(rowspanIdx, "RESISTANCE", lianChengID, null, ""));
-            }
-
-            //输出示值
+                        }
+       
 
             var changerHTML = "onblur=''";
-            //输出示值
-            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, ""));
-            //读数值
-            htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, ""));
-            //输出实际值
-            htmlString.push(SetTDHtml(1, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx, ""));
-            //相对误差
-            htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, ""));
+
+            //相位
+            htmlString.push(SetTDHtml(1, "Show_VALUE", HangHaoID, rowidx, "", "<sup>。</sup>"));
+
+            //显示值
+            htmlString.push(SetTDHtml(1, "Show_VALUE", HangHaoID, rowidx, "", "<sup>。</sup>"));
+            //标准值
+            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, "", "<sup>。</sup>"));
+                 //绝对误差
+            htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, "", "<sup>。</sup>"));
             //校准结果的不确定度
             htmlString.push(SetTDHtml(1, "UNCERTAINTY_DEGREE", HangHaoID, rowidx, ""));
             htmlString.push("</tr>");
         }
         htmlString = htmlString.join("");
         //var tagRow = $("#tbody_" + tableIdx).append(htmlString);
-        
+
         var tagRow = $("#tbody_" + hideDangQianTongDao).append(htmlString);
         $.parser.parse(tagRow);//渲染easyui组建
         $('#dlg').window('close');
