@@ -17,7 +17,7 @@ namespace Langben.Report
         /// </summary>
         [XmlArray("SpecialCharacterList")]
         [XmlArrayItem("SpecialCharacter")]
-        public List<TableTemplate> TableTemplateList
+        public List<SpecialCharacter> SpecialCharacterList
         {
             get;
             set;

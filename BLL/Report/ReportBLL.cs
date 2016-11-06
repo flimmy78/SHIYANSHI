@@ -27,6 +27,19 @@ namespace Langben.Report
     public class ReportBLL
     {
         /// <summary>
+        /// 获取特殊字符配置信息
+        /// </summary>
+        /// <returns></returns>
+        public SpecialCharacters GetSpecialCharacters()
+        {
+            SpecialCharacters result = null;
+            if (ReportStatic.SpecialCharacterXml != null && ReportStatic.SpecialCharacterXml.Trim() != "")
+            {
+                result = SpecialCharacters.XmlCovertObj(ReportStatic.SpecialCharacterXml);
+            }
+            return result;
+        }
+        /// <summary>
         /// 获取所有报告配置信息
         /// </summary>
         /// <returns></returns>
@@ -357,6 +370,7 @@ namespace Langben.Report
                 //Dictionary<string, TableTemplateExt> TableTemplateDic = GetTableTemplateDic();
 
                 TableTemplates allTableTemplates = GetTableTemplates();
+                SpecialCharacters allSpecialCharacters = GetSpecialCharacters();
 
 
                 entity.QUALIFIED_UNQUALIFIED_TEST_ITE = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.OrderBy(p => p.SORT).ToList();
@@ -385,8 +399,7 @@ namespace Langben.Report
                     //    TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
                     if (allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
-                        TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
-
+                        TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);                        
                         //解析html表格数据                           
                         RowIndex = paserData(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp);
                         
@@ -458,7 +471,8 @@ namespace Langben.Report
         /// <param name="IsCopyContent">是否拷贝内容</param>
         /// <param name="DongTaiShuJuList">需要替换的动态数据</param>
         /// <param name="rowInfoList">需要替换的动态数据位置</param>
-        private void CopyRow(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, int insertCount, bool IsCopyContent = false,List<string> DongTaiShuJuList=null, List<RowInfo> rowInfoList =null)
+        /// <param name="allSpecialCharacters">特殊字符配置信息</param>
+        private void CopyRow(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, int insertCount, bool IsCopyContent = false,List<string> DongTaiShuJuList=null, List<RowInfo> rowInfoList =null, SpecialCharacters allSpecialCharacters = null)
         {
             IRow row_Source = sheet_Source.GetRow(rowIndex_Source);
             int sourceCellCount = row_Source.Cells.Count;
@@ -506,7 +520,7 @@ namespace Langben.Report
                             sheet_Destination.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, endMergeCell));
                             if (IsCopyContent)
                             {                                
-                                string value = GetHaveDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell]);
+                                string value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell]);
                                 targetRow.Cells[startMergeCell].SetCellValue(value);                                
                             }
                         }
@@ -518,7 +532,7 @@ namespace Langben.Report
                             sheet_Destination.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, m - 1));
                             if (IsCopyContent)
                             {                               
-                                string value = GetHaveDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell]);
+                                string value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell]);
 
                                 targetRow.Cells[startMergeCell].SetCellValue(value);
 
@@ -529,7 +543,7 @@ namespace Langben.Report
                         {
                             if (IsCopyContent)
                             {                               
-                                string value = GetHaveDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m]);
+                                string value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m]);
                                 targetRow.Cells[m].SetCellValue(value);
 
                             }
@@ -539,14 +553,14 @@ namespace Langben.Report
             }
         }  
         /// <summary>
-        /// 判断是否有动数据
+        /// 获取单元格数据及动态数据组合
         /// </summary>
         /// <param name="DongTaiShuJuList">动态数据值</param>
         /// <param name="rowInfoList">动态数据位置</param>
         /// <param name="sourceCell">单元格</param>
         /// <returns></returns>
-        private string GetHaveDongTaiShuJu(List<string> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, ICell sourceCell=null)
-        {
+        private string GetDongTaiShuJu(List<string> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, ICell sourceCell=null)
+        {            
             if (sourceCell == null)
             {
                 return "";
@@ -688,9 +702,10 @@ namespace Langben.Report
         /// <param name="rowIndex_Source">源行号</param>
         /// <param name="rowIndex_Destination">目标开始行号</param>
         /// <param name="rowIndex">最大行号</param>
+        /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <returns></returns>
-        private Dictionary<string, int> SetRowIndex(NodeList nodeList, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, out int rowIndex)
-        {
+        private Dictionary<string, int> SetRowIndex(NodeList nodeList, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, out int rowIndex, SpecialCharacters allSpecialCharacters = null)
+        {            
             Dictionary<string, int> dic = new Dictionary<string, int>();
 
             if (nodeList.Count > 0)
@@ -846,8 +861,9 @@ namespace Langben.Report
         /// <param name="sheet_Destination">目标sheet</param>
         /// <param name="rowIndex_Destination">目标开始行号</param>
         /// <param name="temp">模板行号单元对象</param>
+        /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <returns></returns>
-        private int paserData(string html, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp)
+        private int paserData(string html, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, SpecialCharacters allSpecialCharacters=null)
         {
             #region 将hmtl转换程文本框及下拉框对象
             Lexer lexer_Input = new Lexer(html);//必须定义多个，否则第二个获取不到数据
@@ -884,7 +900,7 @@ namespace Langben.Report
             #endregion
 
             #endregion            
-            int rowIndex = paserData(sheet_Source, sheet_Destination, rowIndex_Destination, temp, TableTitleDic, InputDic, OptionDic, SecondTitleDic);
+            int rowIndex = paserData(sheet_Source, sheet_Destination, rowIndex_Destination, temp, TableTitleDic, InputDic, OptionDic, SecondTitleDic, allSpecialCharacters);
             return rowIndex;
 
         }
@@ -899,10 +915,11 @@ namespace Langben.Report
         /// <param name="InputDic">文本框</param>
         /// <param name="OptionDic">下拉框</param>
         /// <param name="SecondTitleDic">二级标题</param>
+        /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <returns></returns>
         private int paserData(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination,
             TableTemplate temp, Dictionary<int, List<string>> TableTitleDic,
-            Dictionary<int, NodeList> InputDic, Dictionary<int, NodeList> OptionDic, Dictionary<int, List<string>> SecondTitleDic)
+            Dictionary<int, NodeList> InputDic, Dictionary<int, NodeList> OptionDic, Dictionary<int, List<string>> SecondTitleDic, SpecialCharacters allSpecialCharacters=null)
         {
             int rowIndex = rowIndex_Destination;
             //二级标题
@@ -912,7 +929,7 @@ namespace Langben.Report
                 {
                     if (t.RowIndex >= 0)
                     {
-                        CopyRow(sheet_Source, sheet_Destination, t.RowIndex, rowIndex_Destination, 1, true, null, temp.SecondTitleList);
+                        CopyRow(sheet_Source, sheet_Destination, t.RowIndex, rowIndex_Destination, 1, true, null, temp.SecondTitleList, allSpecialCharacters);
                         rowIndex_Destination++;
                     }
                 }
@@ -926,7 +943,7 @@ namespace Langben.Report
                     {
                         if (t.RowIndex >= 0)
                         {
-                            CopyRow(sheet_Source, sheet_Destination, t.RowIndex, rowIndex_Destination, 1, true, TableTitleDic[key],temp.TableTitleList);
+                            CopyRow(sheet_Source, sheet_Destination, t.RowIndex, rowIndex_Destination, 1, true, TableTitleDic[key],temp.TableTitleList, allSpecialCharacters);
                             rowIndex_Destination++;
                         }
                     }
