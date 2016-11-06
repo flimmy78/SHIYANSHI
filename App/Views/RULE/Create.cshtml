@@ -18,6 +18,16 @@
         <div class="bigdiv">
             <div class="search-form">
                 <div class="editor-label">
+                    @Html.LabelFor(model => model.ID)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.ID)
+                    @Html.ValidationMessageFor(model => model.ID)
+                </div>
+            </div>
+
+            <div class="search-form">
+                <div class="editor-label">
                     @Html.LabelFor(model => model.NAMEOTHER)：
                 </div>
                 <div class="editor-field">

@@ -204,8 +204,9 @@ RuleAttributeArray = [
                 CalculateForAddLianCheng: ',OUTPUT_VALUE,'
             }]
     }
-, {
-    RuleID: 'JJG440-2008_1',//检测项编号
+    ,
+    {
+        RuleID: 'JJG440-2008_3_1',//检测项编号
     Remark: '工频单相相位输出（测量）-绝对误差-一列',//检测项说明
     Attributes:
     [{
@@ -224,7 +225,52 @@ RuleAttributeArray = [
         //OUTPUT_VALUE：输出示值
         CalculateForAddLianCheng: ''
     }]
-}
+    }
+    ,
+    {
+        RuleID: 'JJG440-2008_3_2',//检测项编号
+        Remark: '工频单相相位输出（测量）-绝对误差-两列',//检测项说明
+        Attributes:
+        [{
+            //添加通道按钮是否显示(show:显示，hidden:不显示)
+            DuoTongDao: 'hidden',
+            //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+            //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+            LianDongDanWeiDDL: '',
+            //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+            //DianLiu:电流单位；DianYa:电压单位   
+            //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+            DanWeiHtmlDDL: '',
+            //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+            BuBaoCunShuJu: '',
+            //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+            //OUTPUT_VALUE：输出示值
+            CalculateForAddLianCheng: ''
+        }]
+    }
+    ,
+    {
+        RuleID: 'JJG440-2008_3_3',//检测项编号
+        Remark: '工频单相相位输出（测量）-绝对误差-三列 (多通道）',//检测项说明
+        Attributes:
+        [{
+            //添加通道按钮是否显示(show:显示，hidden:不显示)
+            DuoTongDao: 'hidden',
+            //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+            //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+            LianDongDanWeiDDL: '',
+            //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+            //DianLiu:电流单位；DianYa:电压单位   
+            //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+            DanWeiHtmlDDL: '',
+            //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+            BuBaoCunShuJu: '',
+            //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+            //OUTPUT_VALUE：输出示值
+            CalculateForAddLianCheng: ''
+        }]
+    }
+
 ];
 var RuleID = $("#hideRULEID").val();//检测项目ID
 var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
@@ -388,7 +434,7 @@ function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
 //rowidx:行号
 //txtVal(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
 //unit在输入框后面的单位
-function SetTDHtml(rowspan, name, id, rowidx, txtVal,unit) {
+function SetTDHtml(rowspan, name, id, rowidx, txtVal, unit) {
 
     var ddlName = name + "_UNIT";//下拉框名
     var ddlId = ddlName + "_" + id;//下拉框ID
