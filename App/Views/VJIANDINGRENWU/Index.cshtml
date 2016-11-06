@@ -86,17 +86,19 @@
         </div>
     </div>
 </div>
-<div id="d" class="easyui-dialog" title="退回" data-options="iconCls:'icon-save'" style="width:700px;height:400px;padding:5px;">
+<div id="d" class="easyui-dialog" title="退回" data-options="iconCls:''" style="width:600px;height:400px;padding:5px;">
     <div class="easyui-layout" data-options="fit:true">
         <input type="hidden" id="tuihuiid" value="" />
-        <input type="radio" name="tuihuiaa" value="1" />实验室分错
-        <input type="radio" name="tuihuiaa" value="2" />器具不能检测
-        <textarea name="STORAGEINSTRUCTIONS" style="width:100%;height:100%;" id="STORAGEINSTRUCTIONS"></textarea>
-        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
-            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="tuihuibaocun()" style="width:80px">OK</a>
-            <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:$('#d').dialog('close')" style="width:80px">Cancel</a>
-        </div>
-    </div>
+        <label><input type="radio" name="tuihuiaa" value="1" />实验室分错</label>
+        <label>
+            <input type="radio" name="tuihuiaa" value="2" />器具不能检测
+        </label>
+            <textarea name="STORAGEINSTRUCTIONS" style="width:560px;height:260px;" id="STORAGEINSTRUCTIONS" placeholder="请填写退回原因"></textarea>
+            <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="tuihuibaocun()" style="width:80px">确定</a>
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:$('#d').dialog('close')" style="width:80px">取消</a>
+            </div>
+</div>
 </div>
 @*************************@
 <br style="clear: both;" />
@@ -284,7 +286,7 @@
             toolbar: [
                  {
                      text: '领取',
-                     iconCls: 'icon-search',
+                     iconCls: 'icon-ok',
                      handler: function () {
                          return lingqu();
                      }
@@ -298,28 +300,28 @@
                   },
                    {
                        text: '器具信息修改',
-                       iconCls: 'icon-search',
+                       iconCls: 'icon-edit',
                        handler: function () {
                            return UpdateView();
                        }
                    },
                     {
                         text: '追加超期原因',
-                        iconCls: 'icon-search',
+                        iconCls: 'icon-add',
                         handler: function () {
                             return chaoqi();
                         }
                     },
             {
                 text: '退回',
-                iconCls: 'icon-search',
+                iconCls: 'icon-back',
                 handler: function () {
                     return tuihui();
                 }
             },
              {
                  text: '查看原始记录',
-                 iconCls: 'icon-search',
+                 iconCls: 'icon-detail',
                  handler: function () {
                      //return getView();
                  }

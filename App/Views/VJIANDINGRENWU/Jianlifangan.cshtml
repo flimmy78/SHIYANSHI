@@ -21,7 +21,7 @@
     </div>
     <div class="clearfix"></div>
     <div style="width:800px">
-        <b>试验方案制定</b>
+        <h4 class="b-title">试验方案制定</h4>
         <div class="clearfix"></div>
         <div class="input_search">
             <div class="input_search-label">
@@ -65,11 +65,11 @@
         @Html.HiddenFor(model => model.SCHEMEID)
         <div class="clearfix"></div><br />
         @if (ViewBag.CERTIFICATE_CATEGORY == "检定")
-        {
-            <b>被检器具主要参数</b>
-        }
-        else if (ViewBag.CERTIFICATE_CATEGORY == "校准")
-        {
+{
+    <h4 class="b-title">被检器具主要参数</h4>
+}
+else if (ViewBag.CERTIFICATE_CATEGORY == "校准")
+{
             <b>被校器具主要参数</b>
         }
 
@@ -173,7 +173,7 @@
                 </div>
             </div>*@
             <div class="clearfix mt10"></div>
-        <b>其他信息</b>
+        <h4 class="b-title">其他信息</h4>
         <div class="clearfix"></div>
         <div class="input_search">
             <div class="input_search-label">
