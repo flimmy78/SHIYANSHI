@@ -1,0 +1,279 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>频率输出-频率测量-相对误差</title>
+    <link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="/Content/default.css" rel="stylesheet" />
+    <link href="/Content/StyleSheet.css" rel="stylesheet" />
+
+
+    <script src="/Scripts/jquery.min.js"></script>
+    <script src="/Scripts/JScriptCommon.js"></script>
+    <script src="/Res/easyui/jquery.easyui.min.js"></script>
+    <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body class="easyui-layout">
+    <input type="hidden" id="rowindex" value="1" />
+    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+            <table>
+                <tr>
+
+                    <td>
+                        <!-- <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a> -->
+                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="CreateTable()">保存检测项</a>
+                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="">重置检测项</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+        <div class="mt10" id="tongdao">
+            <div>
+                <input class="easyui-textbox " value="A" style="width:30px"> 相：<input class="easyui-textbox " value="57.7" style="width:60px"> <select class="easyui-combobox1" name="" id="" style=" height:25px">
+                    <option value="">Hz</option>
+                    <option value="">KHz</option>
+                    <option value="">MHz</option>
+                    <option value="">GHz</option>
+
+                </select>
+            </div>
+            <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_1">
+                <thead>
+                    <tr>
+                        <th rowspan="2" align="center" width="150">显示值</th>
+                        <th rowspan="2" align="center" width="150">标准值</th>
+
+                        <th rowspan="2" align="center" width="150">相对误差</th>
+                        <th align="center" width="150">校准结果的不确定度</th>
+                    </tr>
+                    <tr>
+                        <th align="center">
+                            U(K = <select class="easyui-combobox" name="state" style="">
+                                <option value="">2 </option>
+                                <option value="">3</option>
+                                <option value="">√3</option>
+                            </select>)
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody id="tbody_1">
+                    <tr rowindex="1">
+                        <td>
+                            <input class="my-textbox input-width" value="45.000" onblur="JS(this)"><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value="Hz">Hz</option>
+                                <option value="KHz">KHz</option>
+                                <option value="MHz">MHz</option>
+                                <option value="GHz">GHz</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input class="my-textbox input-width" value="45.000" onblur="JS(this)"><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value="Hz">Hz</option>
+                                <option value="KHz">KHz</option>
+                                <option value="MHz">MHz</option>
+                                <option value="GHz">GHz</option>
+                            </select>
+                        </td>
+                        <td><input class="my-textbox " style="width:98%"></td>
+                        <td><input class="my-textbox " style="width:98%"></td>
+                    </tr>
+                    <tr rowindex="2">
+                        <td>
+                            <input class="my-textbox input-width" value="50.000" onblur="JS(this)"><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value="Hz">Hz</option>
+                                <option value="KHz">KHz</option>
+                                <option value="MHz">MHz</option>
+                                <option value="GHz">GHz</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input class="my-textbox input-width" value="50.000" onblur="JS(this)"><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value="Hz">Hz</option>
+                                <option value="KHz">KHz</option>
+                                <option value="MHz">MHz</option>
+                                <option value="GHz">GHz</option>
+                            </select>
+                        </td>
+                        <td><input class="my-textbox " style="width:98%"></td>
+                        <td><input class="my-textbox " style="width:98%"></td>
+                    </tr>
+                    <tr rowindex="3">
+                        <td>
+                            <input class="my-textbox input-width" value="55.000" onblur="JS(this)"><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value="Hz">Hz</option>
+                                <option value="KHz">KHz</option>
+                                <option value="MHz">MHz</option>
+                                <option value="GHz">GHz</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input class="my-textbox input-width" value="55.000" onblur="JS(this)"><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value="Hz">Hz</option>
+                                <option value="KHz">KHz</option>
+                                <option value="MHz">MHz</option>
+                                <option value="GHz">GHz</option>
+                            </select>
+                        </td>
+                        <td><input class="my-textbox " style="width:98%"></td>
+                        <td><input class="my-textbox " style="width:98%"></td>
+                    </tr>
+                    <tr rowindex="4">
+                        <td>
+                            <input class="my-textbox input-width" value="60.000" onblur="JS(this)"><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value="Hz">Hz</option>
+                                <option value="KHz">KHz</option>
+                                <option value="MHz">MHz</option>
+                                <option value="GHz">GHz</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input class="my-textbox input-width" value="60.000" onblur="JS(this)"><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value="Hz">Hz</option>
+                                <option value="KHz">KHz</option>
+                                <option value="MHz">MHz</option>
+                                <option value="GHz">GHz</option>
+                            </select>
+                        </td>
+                        <td><input class="my-textbox " style="width:98%"></td>
+                        <td><input class="my-textbox " style="width:98%"></td>
+                    </tr>
+                    <tr rowindex="5">
+                        <td>
+                            <input class="my-textbox input-width" value="65.000" onblur="JS(this)"><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value="Hz">Hz</option>
+                                <option value="KHz">KHz</option>
+                                <option value="MHz">MHz</option>
+                                <option value="GHz">GHz</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input class="my-textbox input-width" value="65.000" onblur="JS(this)"><select class="easyui-combobox1" name="" id="" style=" height:25px">
+                                <option value="Hz">Hz</option>
+                                <option value="KHz">KHz</option>
+                                <option value="MHz">MHz</option>
+                                <option value="GHz">GHz</option>
+                            </select>
+                        </td>
+                        <td><input class="my-textbox " style="width:98%" ></td>
+                        <td><input class="my-textbox " style="width:98%"></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addRow()">增加空行</a></td>
+
+                    </tr>
+                </tfoot>
+            </table>
+
+
+
+        </div>
+
+        <div class="mt10">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
+
+                <tr>
+                    <th width="40">注：</th>
+                    <td colspan="6"><input class="easyui-textbox input-width" name="" data-options="multiline:true" style="height:30px; width:95%"></td>
+                </tr>
+                <tr>
+                    <th width="40">结论：</th>
+                    <td colspan="6"><input class="easyui-textbox input-width" name="" data-options="multiline:true" style="height:30px; width:95%"></td>
+                </tr>
+
+
+            </table>
+        </div>
+
+
+    </div>
+
+
+    <script type="text/javascript" language="javascript">
+        //行数
+        var rowIdx = 5;
+        $(document).ready(function () {
+            //addRow();
+        })
+        var addRow = function () {
+            rowIdx++;
+            var selectHTML = "<input class=\"my-textbox input-width\" value=\"\" onblur=\"JS(this)\">" +
+            "<select class=\"easyui-combobox1\" name=\"\" id=\"\"  style=\" height:25px\"  onchange=\"changeValue(this)\">" +
+            "<option value=\"Hz\">Hz</option>" +
+            "<option value=\"KHz\">KHz</option>" +
+            "<option value=\"MHz\">MHz</option> " +
+            "<option value=\"GHz\">GHz</option>" +
+            "</select>";
+            var rowTmp = "<tr rowindex=\"" + rowIdx + "\">" +
+                        "<td >" + selectHTML + "</td>" +
+                        "<td >" + selectHTML + "</td>" +
+                        "<td ><input class=\"my-textbox \" style=\"width:98%\"></td>" +
+                        "<td ><input class=\"my-textbox \" style=\"width:98%\"></td> " +
+                      "</tr>";
+            $("#tbody_1").append(rowTmp);
+        }
+
+        var JS = function (obj) {
+            //（显示值-标准值）/标准值*100%
+            var xsValue = $(obj).parent().parent().find("td:eq(0)").find("input").val();
+            var bzValue = $(obj).parent().parent().find("td:eq(1)").find("input").val();
+            if (xsValue != "" && bzValue != "")
+                $(obj).parent().parent().find("td:eq(2)").find("input").val((((parseFloat(xsValue) - parseFloat(bzValue)) / parseFloat(bzValue)).toFixed(2) * 100).toFixed(2));
+        }
+
+        //优化保留两位小数 zh
+        Number.prototype.toFixed = function toFixed(s) {
+            var IsFuShu = false;//判断是否是负数，负数单独处理
+            var je = 0;
+            if (this.toString().indexOf('-') >= 0) {
+                IsFuShu = true;
+                je = this.toString().replace('-', '');
+            } else je = this;
+            changenum = (parseInt(je * Math.pow(10, s) + 0.5) / Math.pow(10, s)).toString();
+            //}
+
+            index = changenum.indexOf(".");
+            if (index < 0 && s > 0) {
+                changenum = changenum + ".";
+                for (i = 0; i < s; i++) {
+                    changenum = changenum + "0";
+                }
+
+            } else {
+                index = changenum.length - index;
+                for (i = 0; i < (s - index) + 1; i++) {
+                    changenum = changenum + "0";
+                }
+
+            }
+            var returnNum = changenum.toString();
+            if (IsFuShu)
+                returnNum = '-' + returnNum;
+            return returnNum;
+        }
+
+        function changeValue(obj) {
+            var selectText = $(obj).parent().find("select option:selected").text();
+            $(obj).parent().parent().find("td:eq(1) select").each(function (eIdx) {
+                $(this).children("option[selected='selected']").removeAttr("selected");
+                $(this).children("option[value='" + selectText + "']").attr("selected", true);
+            });
+
+        }
+    </script>
+</body>
+</html>

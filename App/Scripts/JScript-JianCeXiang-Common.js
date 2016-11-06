@@ -5,7 +5,7 @@ DanWeiDDLHtmlArray = [
     {
         Code: 'DianLiu',
         Remark: '电流单位',
-        Value: "<select class=\"my-combox\" style=\"width:50px; height:25px\">" +
+        Value: "<select class=\"my-combox\" style=\"width:50px; \">" +
                 "<option value=\"A\">A</option> " +
                  "<option value=\"KA\">KA</option>" +
                  "<option value=\"mA\">mA</option>  " +
@@ -17,7 +17,7 @@ DanWeiDDLHtmlArray = [
         {
             Code: 'DianYa',
             Remark: '电压单位',
-            Value: "<select class=\"my-combox\" style=\"width:50px; height:25px\">" +
+            Value: "<select class=\"my-combox\" style=\"width:50px; \">" +
                     "<option value=\"V\">V</option> " +
                     "<option value=\"MV\">MV</option>" +
                     "<option value=\"KV\">KV</option>  " +
@@ -303,7 +303,7 @@ $(document).ready(function () {
         $("#divHtml").html("");
         $("#divHtml").append(hideHtml);
     }
-    $Tongdao_moban = $("#tongdao_moban");
+    $Tongdao_moban = $("#tongdao_1");
     if (hideHtml.trim() == "") {
         CreateTongDao();
     }
