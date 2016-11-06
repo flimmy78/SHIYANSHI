@@ -303,7 +303,7 @@ $(document).ready(function () {
         $("#divHtml").html("");
         $("#divHtml").append(hideHtml);
     }
-    $Tongdao_moban = $("#tongdao_1");
+    $Tongdao_moban = $("#tongdao_moban");
     if (hideHtml.trim() == "") {
         CreateTongDao();
     }
@@ -335,7 +335,7 @@ function Reset() {
     //表格清空
     var hideTongDaoShuLiang = $("#hideTongDaoShuLiang").val();//通道数量
     for (var i = 1; i <= hideTongDaoShuLiang; i++) {
-        var tongdao = "#tongdao_" + i;
+        var tongdao = "#tongdao_moban_" + i;
         $(tongdao).html("");
     }
     $("#hideTongDaoShuLiang").val("0");
