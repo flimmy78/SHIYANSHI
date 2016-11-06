@@ -7,6 +7,53 @@ using System.Xml.Serialization;
 namespace Langben.Report
 {
     /// <summary>
+    /// 特殊字符列表
+    /// </summary>  
+    [XmlRoot("SpecialCharacters")]
+    public class SpecialCharacters : ObjConvert<SpecialCharacters>
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        [XmlArray("SpecialCharacterList")]
+        [XmlArrayItem("SpecialCharacter")]
+        public List<TableTemplate> TableTemplateList
+        {
+            get;
+            set;
+        }
+    }
+    /// <summary>
+    /// 特殊字符
+    /// </summary>
+    [XmlRoot("SpecialCharacter")]
+    public class SpecialCharacter
+    {
+        /// <summary>
+        /// 特殊字符
+        /// </summary>
+        public string Code
+        {
+            get;
+            set;
+        }
+        private int _SubscriptLastCount = -1;
+        /// <summary>
+        /// 下标最后几个字符
+        /// </summary>
+        public int SubscriptLastCount
+        {
+            get
+            {
+                return _SubscriptLastCount;
+            }
+            set
+            {
+                _SubscriptLastCount = value;
+            }
+        }
+    }
+    /// <summary>
     /// 表格模板位置
     /// </summary>  
     [XmlRoot("TableTemplates")]
