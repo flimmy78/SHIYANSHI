@@ -22,10 +22,10 @@
     </div>
     <div class="input_search">
         <div class="input_search-label">
-            @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID):
+            @Html.LabelFor(model => model.APPLIANCE_PROGRESS):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("UNDERTAKE_LABORATORYID", Models.SysFieldModels.GetSysField("UNDERTAKE_LABORATORY", "NAME"), "请选择", new { id = "UNDERTAKE_LABORATORYID" })
+            @Html.DropDownList("APPLIANCE_PROGRESS", Models.SysFieldModels.GetSysField("UNDERTAKE_LABORATORY", "NAME"), "请选择", new { id = "APPLIANCE_PROGRESS" })
         </div>
     </div>
     <div class="input_search">
@@ -98,7 +98,7 @@
 					, { field: 'FACTORY_NUM', title: '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 77 }
 					, { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 77 }
 					, { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 77 }
-					, { field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', width: 77 }
+					, { field: 'APPLIANCE_PROGRESS', title: '@Html.DisplayNameFor(model => model.APPLIANCE_PROGRESS)', width: 77 }
 					, { field: 'ORDER_STATUS', title: '@Html.DisplayNameFor(model => model.ORDER_STATUS)', width: 77 }
 					, { field: 'STORAGEINSTRUCTIONS', title: '@Html.DisplayNameFor(model => model.STORAGEINSTRUCTIONS)', width: 77 }
                     , { field: 'STORAGEINSTRUCTI_STATU', title: '@Html.DisplayNameFor(model => model.STORAGEINSTRUCTI_STATU)', width: 77, hidden: true }
@@ -127,7 +127,7 @@
         var search = "";
         search += "ORDER_NUMBER&" + $("#ORDER_NUMBER").val() + "^";
         search += "CERTIFICATE_ENTERPRISE&" + $('#CERTIFICATE_ENTERPRISE').combobox('getValue') + "^";
-        search += "UNDERTAKE_LABORATORYID&" + $("#UNDERTAKE_LABORATORYID option:selected").val() + "^";
+        search += "APPLIANCE_PROGRESS&" + $("#APPLIANCE_PROGRESS option:selected").val() + "^";
         search += "APPROVALDATEStart_Time&" + $("#APPROVALDATEStart_Time").val() + "^";
         search += "APPROVALDATEEnd_Time&" + $("#APPROVALDATEEnd_Time").val() + "^";
         search += "STORAGEINSTRUCTI_STATU&" + $("#STORAGEINSTRUCTI_STATU option:selected").val() + "^";

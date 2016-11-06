@@ -19,6 +19,38 @@ namespace Langben.App.Controllers
     public class PROJECTTEMPLETController : BaseController
     {
         /// <summary>
+        /// 工频单相相位输出（测量）-绝对误差-两列
+        /// </summary> 
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <returns></returns>
+        public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaLiangLie(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        /// 工频单相相位输出（测量）-绝对误差-三列 (多通道）
+        /// </summary> 
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <returns></returns>
+        public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaSanLie(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+
+        /// <summary>
+        /// 工频单相相位输出（测量）-绝对误差-一列
+        /// </summary> 
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <returns></returns>
+        public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaYiLie(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+
+        /// <summary>
         /// 直流电压（电流）测量-非正负极性-相对误差
         /// </summary> 
         /// <param name="RULEID">检测项目ID</param>

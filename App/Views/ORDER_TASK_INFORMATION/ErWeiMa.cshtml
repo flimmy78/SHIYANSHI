@@ -1,0 +1,16 @@
+﻿@model List<Langben.DAL.APPLIANCE_DETAIL_INFORMATION>
+@{
+    ViewBag.Title = "二维码";
+    Layout = "~/Views/Shared/Details.cshtml";
+}
+@using Common
+@section CurentPlace {
+    @foreach (var item in Model)
+    {
+        var url = "~/ErWeiMa/" + item.ID + ".png";
+        < img src="@url"  />
+    }
+
+    <input class="a2 f2" type="button" onclick="window.location.href = '';" value="打印二维码" />
+
+}

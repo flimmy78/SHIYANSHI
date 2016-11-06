@@ -12,23 +12,31 @@ namespace Common
     public enum ORDER_STATUS_INFORMATION
     {
         /// <summary>
+        /// 器具登记第一次 
+        /// </summary>
+        保存 = 4000,
+        /// <summary>
         /// 器具登记分配好实验室后
         /// </summary>
-        已分配=4001,
+        已分配 = 4001,
         /// <summary>
         /// 退回功能选择退回到器具登记
         /// </summary>
-        有退回=4002,
+        有退回 = 4002,
         /// <summary>
         /// 器具和报告都领取后
         /// </summary>
-        已归档=4003
+        已归档 = 4003
     }
     /// <summary>
     /// 器具状态
     /// </summary>
     public enum ORDER_STATUS
     {
+        /// <summary>
+        /// 器具登记第一次 
+        /// </summary>
+        保存 = 1000,
         /// <summary>
         /// 器具登记完成时
         /// </summary>
@@ -96,7 +104,7 @@ namespace Common
         /// <summary>
         /// 报告回收环节
         /// </summary>
-        报告已回收=1130
+        报告已回收 = 1130
     }
 
     /// <summary>
@@ -115,7 +123,7 @@ namespace Common
         /// <summary>
         /// 上传成功后附件表状态为已上传
         /// </summary>
-        已上传=1033
+        已上传 = 1033
 
     }
     /// <summary>
@@ -132,11 +140,11 @@ namespace Common
     }
 
     /// <summary>
-    /// 是否领取
+    /// 是否可以领取
     /// </summary>
     public enum ISRECEIVE
     {
-        是=1050,
-        否=1060
+        是 = 1050,
+        否 = 1060
     }
 }

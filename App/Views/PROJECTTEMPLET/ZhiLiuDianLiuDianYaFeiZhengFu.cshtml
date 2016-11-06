@@ -50,14 +50,14 @@ else
                     <th align="center" width="140">
                         显示值<br>
                         <select class="my-combobox" name="sssss" id="sssss" style="width:100px;">
-                            <option value="AL">&nbsp;&nbsp; </option>
-                            <option value="AK">CH1</option>
-                            <option value="AZ">CH2</option>
-                            <option value="AR">CH3</option>
-                            <option value="CA">CH4</option>
+                            <option value="">&nbsp;&nbsp; </option>
+                            <option value="CH1">CH1</option>
+                            <option value="CH2">CH2</option>
+                            <option value="CH3">CH3</option>
+                            <option value="CH4">CH4</option>
                         </select>
                     </th>
-                    <th align="center" >相对误差</th>
+                    <th align="center">相对误差</th>
                     <th align="center">
                         校准结果的不确定度<br>
                         U(K = <select class="my-combobox" id="K_moban" name="K" style="width:30px;">
@@ -65,7 +65,8 @@ else
                             <option value="3">3</option>
                             <option value="√3">√3</option>
                         </select>)
-                    </th>              
+                    </th>
+                </tr>
             </thead>
 
             <tbody id="tbody_moban"></tbody>
@@ -100,7 +101,7 @@ else
         </table>
     </div>
     <input type="hidden" id="hideDangQianTongDao" value="0" />
-    <input type="hidden" id="hideTongDaoShuLiang" value="0" />  
+    <input type="hidden" id="hideTongDaoShuLiang" value="0" />
 </div>
 
 <!--增加量程弹层-->
@@ -136,12 +137,12 @@ else
 <script type="text/javascript" language="javascript">
     //var RuleID = $("#hideRULEID").val();//检测项目ID
     //var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
-    //var $Tongdao_moban//模板   
+    //var $Tongdao_moban//模板
 
     //增加量程
     function CreateRow() {
-        var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道        
-        var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量  
+        var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+        var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
         LiangChengShuLiang++;
         var rowspanIdx = $("#txtPoint").val();     //检测点数
         txtNumber = $("#txtNumber").val(); //量程
@@ -176,7 +177,7 @@ else
             //显示值
             htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, ""));
             //输出实际值
-           // htmlString.push(SetTDHtml(1, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx, ""));
+            // htmlString.push(SetTDHtml(1, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx, ""));
             //相对误差
             htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, ""));
             //校准结果的不确定度
@@ -192,7 +193,7 @@ else
 
     //离开事件，用于计算
     function blurValue(obj) {
-       
+
     }
 
 </script>

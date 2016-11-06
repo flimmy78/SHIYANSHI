@@ -49,15 +49,16 @@ else
                     <th rowspan="2" align="center"> 输出示值 </th>
                     <th rowspan="2" align="center"> 读数值 </th>
                     <th rowspan="2" align="center"> 输出实际值 </th>
-                    <th rowspan="2" align="center">相对误差</th>                   
+                    <th rowspan="2" align="center">相对误差</th>
                     <th align="center">
                         校准结果的不确定度<br>
-                        U(K = <select class="my-combobox" id="K_moban"name="K" style="width:30px;">
+                        U(K = <select class="my-combobox" id="K_moban" name="K" style="width:30px;">
                             <option value="2">2 </option>
                             <option value="3">3</option>
                             <option value="√3">√3</option>
                         </select>)
                     </th>
+                </tr>
             </thead>
 
             <tbody id="tbody_moban"></tbody>
@@ -156,7 +157,7 @@ else
             var ddlVal;
             var HangHaoID = lianChengID + "_" + rowidx;//（行号ID)量程ID_第几行
             if (rowidx == 0) {
-
+                //需要合并的列
                 //量程
                 htmlString.push(SetTDHtml(rowspanIdx, "RANGE", lianChengID, null, txtNumber));
                 //选用电阻阻值

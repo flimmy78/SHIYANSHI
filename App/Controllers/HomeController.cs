@@ -31,7 +31,7 @@ namespace Langben.App.Controllers
 
                 //IHomeBLL home = new HomeBLL();
                 var menus = App.Codes.MenuCaching.GetMenu(ref account).Replace("selected:true", "selected:false"); //home.GetMenuByAccount(ref account);// 获取菜单
-       
+                ViewBag.PersonName = account.PersonName;
                 ViewData["Menu"]  = menus;
                 Utils.WriteCookie("account", account, 7);
             }

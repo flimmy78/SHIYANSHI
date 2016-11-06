@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
- 
+
 using System.Text;
 using System.Runtime.Serialization.Formatters.Binary;
 
 using System.IO;
- 
+
 using System.Text.RegularExpressions;
 using Common;
+using Gma.QrCodeNet.Encoding;
+using Gma.QrCodeNet.Encoding.Windows.Controls;
+using System.Drawing.Imaging;
 
 namespace Models
 {
+    
     public abstract class Utils
     {
 

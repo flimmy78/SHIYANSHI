@@ -72,6 +72,7 @@ namespace Langben.App.Controllers
             else
             {
                 search += "^EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.待入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "";
+                search += "^REPORTSTATUSZI&" + Common.REPORTSTATUS.批准驳回.GetHashCode() + "*" + Common.REPORTSTATUS.已批准.GetHashCode() + "*" + Common.REPORTSTATUS.待批准.GetHashCode() + "*" + Common.REPORTSTATUS.报告已打印.GetHashCode() + "*" + Common.REPORTSTATUS.报告已领取.GetHashCode() + "";
             }
             int total = 0;
             List<VRUKU> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
@@ -96,13 +97,11 @@ namespace Langben.App.Controllers
                     ,
                     CUSTOMER_SPECIFIC_REQUIREMENTS = s.CUSTOMER_SPECIFIC_REQUIREMENTS
                     ,
-                    NAME = s.NAME
+                    APPLIANCE_PROGRESS = s.APPLIANCE_PROGRESS
                     ,
                     ORDER_STATUS = s.ORDER_STATUS
                     ,
                     STORAGEINSTRUCTIONS = s.STORAGEINSTRUCTIONS
-                    ,
-                    UNDERTAKE_LABORATORYID = s.UNDERTAKE_LABORATORYID
                     ,
                     APPROVALDATE = s.APPROVALDATE
                     ,

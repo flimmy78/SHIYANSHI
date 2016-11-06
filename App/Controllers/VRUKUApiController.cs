@@ -49,13 +49,11 @@ namespace Langben.App.Controllers
                     ,
                     CUSTOMER_SPECIFIC_REQUIREMENTS = s.CUSTOMER_SPECIFIC_REQUIREMENTS
                     ,
-                    NAME = s.NAME
+                    APPLIANCE_PROGRESS = s.APPLIANCE_PROGRESS
                     ,
                     ORDER_STATUS = s.ORDER_STATUS
                     ,
                     STORAGEINSTRUCTIONS = s.STORAGEINSTRUCTIONS
-                    ,
-                    UNDERTAKE_LABORATORYID = s.UNDERTAKE_LABORATORYID
                     ,
                     APPROVALDATE = s.APPROVALDATE
                     ,

@@ -40,6 +40,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Gma.QrCodeNet.Encoding, Version=0.0.1.29147, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QrCodeNet.0.3\lib\Gma.QrCodeNet.Encoding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
@@ -143,6 +147,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Res\webuploader\" />
+    <Folder Include="up\ErWeiMa\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -190,12 +195,14 @@
     <Compile Include="Controllers\VAPPLIANCE_DETAIL_INFORMATIONApiController .cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ApplianceController.cs" />
+    <Compile Include="Controllers\VXIANGQINGApiController.cs" />
+    <Compile Include="Controllers\VXIANGQINGController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HtmlHelper\CheckBoxListHelper.cs" />
-    <Compile Include="HtmlHelper\Easyui.cs" />
-    <Compile Include="HtmlHelper\RadioButtonListHelper.cs" />
+    <Compile Include="Images\HtmlHelper\CheckBoxListHelper.cs" />
+    <Compile Include="Images\HtmlHelper\Easyui.cs" />
+    <Compile Include="Images\HtmlHelper\RadioButtonListHelper.cs" />
     <Compile Include="Models\ApplianceModel.cs" />
     <Compile Include="Models\APPLIANCE_LABORATORYShow .cs" />
     <Compile Include="Models\BaseException.cs" />
@@ -241,13 +248,13 @@
     <Content Include="Content\Site.css" />
     <Content Include="html\交流电压（电流）测量-相对误差-单相%28多通道）.html" />
     <Content Include="html\变送器-功率-引用误差.html" />
-    <Content Include="html\工频单相相位输出（测量）-绝对误差-一列.html" />
-    <Content Include="html\工频单相相位输出（测量）-绝对误差-三列 %28多通道）.html" />
-    <Content Include="html\工频单相相位输出（测量）-绝对误差-两列.html" />
+    <Content Include="html\工频单相相位输出（测量）-绝对误差-一列（已做）.html" />
+    <Content Include="html\工频单相相位输出（测量）-绝对误差-三列 %28多通道）（已做）.html" />
+    <Content Include="html\工频单相相位输出（测量）-绝对误差-两列（已做）.html" />
     <Content Include="html\有功功率输出（测量）-引用误差.html" />
-    <Content Include="html\直流电压（电流）测量-正负极性-相对误差（多通道）.html" />
-    <Content Include="html\交流电压%28电流%29-相对误差-三相.html" />
-    <Content Include="html\交流电压（电流）-相对误差-两相.html" />
+    <Content Include="html\直流电压（电流）测量-正负极性-相对误差（多通道）（已做）.html" />
+    <Content Include="html\交流电压%28电流%29-相对误差-三相（已做）.html" />
+    <Content Include="html\交流电压（电流）-相对误差-两相（已做）.html" />
     <Content Include="html\变送器-有功（无功）功率-引用误差.html" />
     <Content Include="html\变送器-电流电压-引用误差.html" />
     <Content Include="html\变送器-相位-引用误差.html" />
@@ -255,8 +262,8 @@
     <Content Include="html\检定实验数据录入form.html" />
     <Content Include="html\检定流程.html" />
     <Content Include="html\直流电压（电流）测量-非正负极性-相对误差.html" />
-    <Content Include="html\直流电流输出-相对误差.html" />
-    <Content Include="html\频率输出-频率测量-相对误差.html" />
+    <Content Include="html\直流电流输出-相对误差（已做）.html" />
+    <Content Include="html\频率输出-频率测量-相对误差（已做）.html" />
     <Content Include="Images\anquantuichu.gif" />
     <Content Include="Images\bangzhu.gif" />
     <Content Include="Images\beijing.gif" />
@@ -510,13 +517,18 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Scripts\datagrid-detailview.js" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.1.custom.min.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.edatagrid.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\nugetexample.js" />
     <Content Include="Xml\TableTemplate.xml" />
     <None Include="Properties\PublishProfiles\shiyanshi.pubxml" />
     <Content Include="Res\tree_data1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -856,6 +868,13 @@
     <Content Include="Views\PROJECTTEMPLET\JiaoLiuDianYaXiangDuiWuChaLiangXiang.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\JiaoLiuDianYaXiangDuiWuChaSanXiang.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\PingLuShuChuCheLinagXiangDuiWuCha.cshtml" />
+    <Content Include="Views\VXIANGQING\Index.cshtml" />
+    <Content Include="Views\ORDER_TASK_INFORMATION\Show.cshtml" />
+    <Content Include="Views\ORDER_TASK_INFORMATION\ErWeiMa.cshtml" />
+    <Content Include="Views\Shared\QianZi.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\GongPinDanXiangXiangWeiShuChuJueDuiWuChaYiLie.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\GongPinDanXiangXiangWeiShuChuJueDuiWuChaSanLie.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\GongPinDanXiangXiangWeiShuChuJueDuiWuChaLiangLie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

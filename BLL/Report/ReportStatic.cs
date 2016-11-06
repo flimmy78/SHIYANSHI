@@ -32,6 +32,25 @@ namespace Langben.Report
             }
         }
         /// <summary>
+        /// 特殊字符xml内容
+        /// </summary>
+        public static string SpecialCharacterXml
+        {
+            get
+            {
+                string url = string.Empty;
+                if (ConfigurationManager.AppSettings["SpecialCharacterXmlPath"] != null && ConfigurationManager.AppSettings["SpecialCharacterXmlPath"].Trim() != "")
+                {
+                    url = ConfigurationManager.AppSettings["SpecialCharacterXmlPath"].Trim();
+                }
+                else
+                {
+                    url = "../ Xml / SpecialCharacter.xml";
+                }
+                return Common.DirFile.ReadFile(url);
+            }
+        }
+        /// <summary>
         /// 原始记录校准模板文件绝对路径
         /// </summary>
         public static string YuanShiJiLuXiaoZhunPath
