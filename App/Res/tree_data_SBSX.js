@@ -1,4 +1,5 @@
-﻿[{
+﻿[
+{
     "id": "38-1987",
     "text": "JJG(航天) 38-1987 直流标准电流源检定规程",
     "children": [
@@ -55,20 +56,21 @@
     {
         "id": "38-1987_8",
         "text": "纹波和噪声电压",
-       "attributes": {
-           "InputState": "HGBHG"
-       }
+        "attributes": {
+            "InputState": "HGBHG"
+        }
 
     },
    {
-      "id": "38-1987_9",
-      "text": "共模干扰抑制能力",
-      "attributes": {
-          "InputState": "HGBHG"
-     }
-    }
+       "id": "38-1987_9",
+       "text": "共模干扰抑制能力",
+       "attributes": {
+           "InputState": "HGBHG"
+       }
+   }
     ]
-},
+}
+,
 {
     "id": "315-1983",
     "text": "JJG 315-1983 直流数字电压表试行检定规程",
@@ -134,18 +136,19 @@
            "id": "315-1983_7",
            "text": "温度系数",
            "attributes": {
-            "InputState": "HGBHG"
+               "InputState": "HGBHG"
            }
        }
       , {
           "id": "315-1983_8",
           "text": "电源电压变化的影响",
           "attributes": {
-          "InputState": "HGBHG"
-           }
-        }
+              "InputState": "HGBHG"
+          }
+      }
     ]
-},
+}
+,
 {
     "id": "410-94",
     "text": "JJG 410-94 精密交流电压校准源检定规程",
@@ -215,7 +218,8 @@
            }
        }
     ]
-},
+}
+,
 {
     "id": "51-1999",
     "text": "JJG(航天)51-1999 交流标准电流源检定规程",
@@ -292,7 +296,8 @@
 	       }
 	   }
     ]
-},
+}
+,
 {
     "id": "34-1999",
     "text": "JJG(航天)34-1999 交流数字电压表检定规程",
@@ -364,7 +369,8 @@
            }
        }
     ]
-},
+}
+,
 {
     "id": "35-1999",
     "text": "JJG(航天)35-1999 交流数字电流表检定规程",
@@ -437,76 +443,84 @@
        }
     ]
 }
-, {
+,
+{
     "id": "JJG440-2008",
     "text": "JJG 440-2008 工频单相相位表检定规程",
     "children": [
     {
-        "id": "35-1999_1",
+        "id": "JJG440-2008_1",
         "text": "外观检查",
         "attributes": {
             "InputState": "HGBHG"
         }
     },
     {
-        "id": "35-1999_2",
-        "text": "交流电流测量",
+        "id": "JJG440-2008_2",
+        "text": "工频耐压",
+        "attributes": {
+            "InputState": "HGBHG"
+        }
+    },
+    {
+        "id": "JJG440-2008_3",
+        "text": "基本误差和升降变差",
         "children": [
-		{
-		    "id": "35-1999_2_1",
-		    "text": "相对误差-两相",
-		    "attributes": {
-		        "InputState": "",
-		        "url": ""
-		    }
-		},
        {
-           "id": "JJG440-2008_1",
+           "id": "JJG440-2008_3_1",
            "text": "工频单相相位输出（测量）-绝对误差-一列",
            "attributes": {
-               "InputState": "",
-               "url": "/PROJECTTEMPLET/GongPinDanXiangXiangWeiShuChuJueDuiWuChaYiLie?RULEID=JJG440-2008_1"
+               "InputState": "GongPinDanXiangXiangWeiShuChuJueDuiWuChaYiLie",
+               "url": "/PROJECTTEMPLET/GongPinDanXiangXiangWeiShuChuJueDuiWuChaYiLie?RULEID=JJG440-2008_3_1"
            }
        },
        {
-           "id": "35-1999_2_3",
-           "text": "相对误差-三相",
+           "id": "JJG440-2008_3_2",
+           "text": "工频单相相位输出（测量）-绝对误差-两列",
            "attributes": {
-               "InputState": "",
-               "url": ""
+               "InputState": "GongPinDanXiangXiangWeiShuChuJueDuiWuChaLiangLie",
+               "url": "/PROJECTTEMPLET/GongPinDanXiangXiangWeiShuChuJueDuiWuChaLiangLie?RULEID=JJG440-2008_3_2"
            }
        },
-	   {
-	       "id": "35-1999_2_4",
-	       "text": "相对误差-三相-多通道",
-	       "attributes": {
-	           "InputState": "",
-	           "url": "/PROJECTTEMPLET/JiaoLiuDianYaXiangDuiWuChaSanXiang?RULEID=35-1999_2_4"
-	       }
-	   }
+       {
+           "id": "JJG440-2008_3_3",
+           "text": "工频单相相位输出（测量）-绝对误差-三列 (多通道）",
+           "attributes": {
+               "InputState": "GongPinDanXiangXiangWeiShuChuJueDuiWuChaSanLie",
+               "url": "/PROJECTTEMPLET/GongPinDanXiangXiangWeiShuChuJueDuiWuChaSanLie?RULEID=JJG440-2008_3_3"
+           }
+       }
         ]
     },
-       {
-           "id": "35-1999_3",
-           "text": "工作正常性",
-           "attributes": {
-               "InputState": "HGBHG"
-           }
-       }
-       , {
-           "id": "35-1999_4",
-           "text": "电流稳定性",
-           "attributes": {
-               "InputState": "HGBHG"
-           }
-       }
-       , {
-           "id": "35-1999_5",
-           "text": "电流最高分辨力",
-           "attributes": {
-               "InputState": "HGBHG"
-           }
-       }
+    {
+        "id": "JJG440-2008_4",
+        "text": "工作位置改变影响",
+        "attributes": {
+            "InputState": "HGBHG"
+        }
+    },
+    {
+        "id": "JJG440-2008_5",
+        "text": "频率影响",
+        "attributes": {
+            "InputState": "HGBHG"
+        }
+    },
+    {
+        "id": "JJG440-2008_6",
+        "text": "端钮极性",
+        "attributes": {
+            "InputState": "HGBHG"
+        }
+    },
+    {
+        "id": "JJG440-2008_7",
+        "text": "绝缘电阻",
+        "attributes": {
+            "InputState": "HGBHG"
+        }
+    }
     ]
 }
 ]
+
