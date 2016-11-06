@@ -818,7 +818,7 @@ namespace Langben.Report
                         if (Id.ToString() != "" && Id.ToString().Split('_').Length >= 4 && !dic.ContainsKey(Id.ToString()))
                         {
                             dic.Add(Id.ToString(), rowIndex_Destination);
-                            CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, false);
+                            CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true);
                             rowIndex_Destination++;
 
                         }
@@ -1101,9 +1101,14 @@ namespace Langben.Report
                                             int cellCount = c.ColCount;
                                             if (MergedRowCount > 1)
                                             {
-                                                sheet_Destination.AddMergedRegion(new CellRangeAddress(dic[Id.ToString()], dic[Id.ToString()] + MergedRowCount - 1, cellIndex, cellIndex + cellCount - 1));                                               
-                                            }
-                                            sheet_Destination.GetRow(dic[Id.ToString()]).GetCell((int)cellIndex).SetCellValue(Value.ToString());
+                                                sheet_Destination.AddMergedRegion(new CellRangeAddress(dic[Id.ToString()], dic[Id.ToString()] + MergedRowCount - 1, cellIndex, cellIndex + cellCount - 1));
+                                                for (int i = dic[Id.ToString()]; i < (dic[Id.ToString()] + MergedRowCount); i++)
+                                                {
+                                                    sheet_Destination.GetRow(i).GetCell(cellIndex).SetCellValue("");
+                                                }
+                                            }                                           
+                                            
+                                            sheet_Destination.GetRow(dic[Id.ToString()]).GetCell(cellIndex).SetCellValue(Value.ToString());
                                         }
                                     }
                                     catch (Exception ex)
@@ -1161,9 +1166,13 @@ namespace Langben.Report
                                                 int cellCount = c.ColCount;
                                                 if (MergedRowCount > 1)
                                                 {
-                                                    sheet_Destination.AddMergedRegion(new CellRangeAddress(dic[Id.ToString()], dic[Id.ToString()] + MergedRowCount - 1, cellIndex, cellIndex + cellCount - 1));                                                    
+                                                    sheet_Destination.AddMergedRegion(new CellRangeAddress(dic[Id.ToString()], dic[Id.ToString()] + MergedRowCount - 1, cellIndex, cellIndex + cellCount - 1));
+                                                    for (int i = dic[Id.ToString()]; i < (dic[Id.ToString()] + MergedRowCount); i++)
+                                                    {
+                                                        sheet_Destination.GetRow(i).GetCell(cellIndex).SetCellValue("");
+                                                    }
                                                 }                                                
-                                                sheet_Destination.GetRow(dic[Id.ToString()]).GetCell((int)cellIndex).SetCellValue(Value.ToString());
+                                                sheet_Destination.GetRow(dic[Id.ToString()]).GetCell(cellIndex).SetCellValue(Value.ToString());
                                             }
                                         }
                                         catch (Exception ex)

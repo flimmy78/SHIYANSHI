@@ -19,6 +19,17 @@ namespace Langben.App.Controllers
     public class PROJECTTEMPLETController : BaseController
     {
         /// <summary>
+        /// 变送器-电流电压-引用误差
+        /// </summary> 
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <returns></returns>
+        public ActionResult BianSongQiDianLiuDianYa(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+
+        /// <summary>
         /// 工频单相相位输出（测量）-绝对误差-两列
         /// </summary> 
         /// <param name="RULEID">检测项目ID</param>
@@ -60,6 +71,18 @@ namespace Langben.App.Controllers
         {            
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
+
+        /// <summary>
+        /// 直流电压（电流）测量-正负极性-相对误差（多通道）
+        /// </summary> 
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <returns></returns>
+        public ActionResult ZhiLiuDianLiuDianYaZhengFu(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+
         /// <summary>
         /// 直流电流输出
         /// </summary>
@@ -95,6 +118,19 @@ namespace Langben.App.Controllers
         /// <returns></returns> 
         [SupportFilter]
         public ActionResult JiaoLiuDianYaXiangDuiWuChaSanXiang(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+
+        /// <summary>
+        /// 交流电压（电流）测量-相对误差-单相(多通道）
+        /// </summary>
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <returns></returns> 
+        [SupportFilter]
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaDanxiang(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }

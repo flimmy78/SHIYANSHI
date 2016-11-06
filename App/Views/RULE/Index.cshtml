@@ -13,13 +13,7 @@
                     treeField: 'NAMEOTHER',
                     rownumbers: true,
                     toolbar: [
-                    {
-                        text: '详细',
-                        iconCls: 'icon-search',
-                        handler: function () {
-                            return getView();
-                        }
-                    }, {
+                     {
                         text: '创建',
                         iconCls: 'icon-add',
                         handler: function () {
@@ -41,7 +35,8 @@
                     }],
 
                     columns: [[
-                    	{ field: 'NAMEOTHER', title: '@Html.DisplayNameFor(model => model.NAMEOTHER)', width: 315 }
+                    	{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 215 }
+                   , { field: 'NAMEOTHER', title: '@Html.DisplayNameFor(model => model.NAMEOTHER)', width: 315 }
                     ,{ field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', width: 315 }
 
 					,{ field: 'SCHEME_MENU', title:  '@Html.DisplayNameFor(model => model.SCHEME_MENU)', width: 64 }
@@ -50,7 +45,7 @@
 					,{ field: 'UNCERTAINTY_MENU', title:  '@Html.DisplayNameFor(model => model.UNCERTAINTY_MENU)', width: 64 }
 					,{ field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width: 64}
 					,{ field: 'INPUTSTATE', title:  '@Html.DisplayNameFor(model => model.INPUTSTATE)', width: 64 }
-					,{ field: 'PARENTID', title:  '@Html.DisplayNameFor(model => model.PARENTID)', width: 64 }
+					, { field: '_parentId', title: '@Html.DisplayNameFor(model => model.PARENTID)', width: 64 }
 					 
 				    ]]
                      ,
@@ -134,8 +129,8 @@
             } else {
                 $.messager.confirm('操作提示', "确认删除这1项吗？", function (r) {
                     if (r) {
-                        $.post("../api/RULEApi/Delete/1", { query: node.ID }, function (res) {
-                            if (res == "OK") {
+                        $.post("../api/RULEApi/Delete/" + node.ID,  function (res) {
+                            if (res.Code == "1") {
                                 remove();
                                 $.messager.alert('操作提示', '删除成功!', 'info');
                             }

@@ -71,6 +71,14 @@
       <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.1.2400\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.12.1.2400\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -261,7 +269,7 @@
     <Content Include="html\变送器-频率-引用误差.html" />
     <Content Include="html\检定实验数据录入form.html" />
     <Content Include="html\检定流程.html" />
-    <Content Include="html\直流电压（电流）测量-非正负极性-相对误差.html" />
+    <Content Include="html\直流电压（电流）测量-非正负极性-相对误差（已做）.html" />
     <Content Include="html\直流电流输出-相对误差（已做）.html" />
     <Content Include="html\频率输出-频率测量-相对误差（已做）.html" />
     <Content Include="Images\anquantuichu.gif" />
@@ -875,6 +883,9 @@
     <Content Include="Views\PROJECTTEMPLET\GongPinDanXiangXiangWeiShuChuJueDuiWuChaYiLie.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\GongPinDanXiangXiangWeiShuChuJueDuiWuChaSanLie.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\GongPinDanXiangXiangWeiShuChuJueDuiWuChaLiangLie.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\JiaoLiuDianYaXiangDuiWuChaDanxiang.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaZhengFu.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BianSongQiDianLiuDianYa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

@@ -34,20 +34,33 @@ namespace Langben.App.Controllers
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID
-					,NAMEOTHER = s.NAMEOTHER
-					,NAME = s.NAME
-					,SCHEME_MENU = s.SCHEME_MENU
-					,SORT = s.SORT
-					,IS_UNCERTAINTY = s.IS_UNCERTAINTY
-					,UNCERTAINTY_MENU = s.UNCERTAINTY_MENU
-					,UNDERTAKE_LABORATORYID =   s.UNDERTAKE_LABORATORYIDOld
-					,INPUTSTATE = s.INPUTSTATE
-					,PARENTID = s.PARENTID
-					,CREATETIME = s.CREATETIME
-					,CREATEPERSON = s.CREATEPERSON
-					,UPDATETIME = s.UPDATETIME
-					,UPDATEPERSON = s.UPDATEPERSON
-					
+                    ,
+                    NAMEOTHER = s.NAMEOTHER
+                    ,
+                    NAME = s.NAME
+                    ,
+                    SCHEME_MENU = s.SCHEME_MENU
+                    ,
+                    SORT = s.SORT
+                    ,
+                    IS_UNCERTAINTY = s.IS_UNCERTAINTY
+                    ,
+                    UNCERTAINTY_MENU = s.UNCERTAINTY_MENU
+                    ,
+                    UNDERTAKE_LABORATORYID = s.UNDERTAKE_LABORATORYIDOld
+                    ,
+                    INPUTSTATE = s.INPUTSTATE
+                    ,
+                    PARENTID = s.PARENTID
+                    ,
+                    CREATETIME = s.CREATETIME
+                    ,
+                    CREATEPERSON = s.CREATEPERSON
+                    ,
+                    UPDATETIME = s.UPDATETIME
+                    ,
+                    UPDATEPERSON = s.UPDATEPERSON
+
 
                 })
             };
@@ -64,34 +77,38 @@ namespace Langben.App.Controllers
             RULE item = m_BLL.GetById(id);
             return item;
         }
- 
+
         /// <summary>
         /// 创建
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
         public Common.ClientResult.Result Post([FromBody]RULE entity)
-        {           
+        {
 
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
             {
                 string currentPerson = GetCurrentPerson();
-               entity.CREATETIME = DateTime.Now;
+                entity.CREATETIME = DateTime.Now;
                 entity.CREATEPERSON = currentPerson;
-              
-                entity.ID = Result.GetNewId();   
+                if (string.IsNullOrWhiteSpace(entity.ID))
+                {
+                    entity.ID = Result.GetNewId();
+
+                }
+
                 string returnValue = string.Empty;
                 if (m_BLL.Create(ref validationErrors, entity))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed  + "，规程表的信息的Id为" + entity.ID,"规程表"
+                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，规程表的信息的Id为" + entity.ID, "规程表"
                         );//写入日志 
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.InsertSucceed;
                     return result; //提示创建成功
                 }
                 else
-                { 
+                {
                     if (validationErrors != null && validationErrors.Count > 0)
                     {
                         validationErrors.All(a =>
@@ -100,7 +117,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，规程表的信息，" + returnValue,"规程表"
+                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，规程表的信息，" + returnValue, "规程表"
                         );//写入日志                      
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.InsertFail + returnValue;
@@ -132,7 +149,7 @@ namespace Langben.App.Controllers
                 string returnValue = string.Empty;
                 if (m_BLL.Edit(ref validationErrors, entity))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，规程表信息的Id为" + entity.ID,"规程表"
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，规程表信息的Id为" + entity.ID, "规程表"
                         );//写入日志                   
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.UpdateSucceed;
@@ -166,12 +183,14 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="collection"></param>
         /// <returns></returns>  
-        public Common.ClientResult.Result Delete(string query)
+        /// 
+        [System.Web.Http.HttpPost]
+        public Common.ClientResult.Result Delete(string id)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
 
             string returnValue = string.Empty;
-            string[] deleteId = query.GetString().Split(',');
+            string[] deleteId = id.GetString().Split(',');
             if (deleteId != null && deleteId.Length > 0)
             {
                 if (m_BLL.DeleteCollection(ref validationErrors, deleteId))
@@ -191,7 +210,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId)+ "," + returnValue, "消息"
+                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId) + "," + returnValue, "消息"
                         );//删除失败，写入日志
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.DeleteFail + returnValue;
