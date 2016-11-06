@@ -269,7 +269,7 @@
     <Content Include="html\变送器-频率-引用误差.html" />
     <Content Include="html\检定实验数据录入form.html" />
     <Content Include="html\检定流程.html" />
-    <Content Include="html\直流电压（电流）测量-非正负极性-相对误差.html" />
+    <Content Include="html\直流电压（电流）测量-非正负极性-相对误差（已做）.html" />
     <Content Include="html\直流电流输出-相对误差（已做）.html" />
     <Content Include="html\频率输出-频率测量-相对误差（已做）.html" />
     <Content Include="Images\anquantuichu.gif" />
@@ -883,6 +883,9 @@
     <Content Include="Views\PROJECTTEMPLET\GongPinDanXiangXiangWeiShuChuJueDuiWuChaYiLie.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\GongPinDanXiangXiangWeiShuChuJueDuiWuChaSanLie.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\GongPinDanXiangXiangWeiShuChuJueDuiWuChaLiangLie.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\JiaoLiuDianYaXiangDuiWuChaDanxiang.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaZhengFu.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BianSongQiDianLiuDianYa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

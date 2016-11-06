@@ -1,7 +1,7 @@
 ﻿@model Langben.DAL.PROJECTTEMPLET
 
 @{
-    @ViewBag.title= "交流电压（电流）-相对误差-两相（已做）";
+    @ViewBag.title= "交流电压（电流）测量-相对误差-单相(多通道）";
     Layout = "~/Views/Shared/Edit.cshtml";
 }
 @using Common
@@ -56,103 +56,52 @@ else
                 <tr>
                     <th align="center" class="f14">
                         <select class="my-combobox" name="" style="">
-                            <option value="UAB">UAB</option>
-                            <option value="UBC">UBC</option>
-                            <option value="U1">U1</option>
-                            <option value="U2">U2</option>
-                            <option value="UA">UA</option>
-                            <option value="UB">UB</option>
-                            <option value="UC">UC</option>
+                            <option value="I1">I1</option>
+                            <option value="I2">I2</option>
+                            <option value="I0">I0</option>
+                            <option value="I20">I20</option>
                         </select>
                     </th>
                     <th align="center" class="f14">
                         <select class="my-combobox" name="" style="">
-                            <option value="UAB">UAB</option>
-                            <option value="UBC">UBC</option>
-                            <option value="U1">U1</option>
-                            <option value="U2">U2</option>
-                            <option value="UA">UA</option>
-                            <option value="UB">UB</option>
-                            <option value="UC">UC</option>
-                        </select>
-                    </th>
-                    <!--<th align="center" class="f14">
-            <select class="my-combobox" name="" style="">
-                <option value="">UAB </option>
-                <option value="">UBC</option>
-                <option value="">U1</option>
-                <option value="">U2</option>
-                <option value="">UA</option>
-                <option value="">UB</option>
-                <option value="">UC</option>
-            </select>
-        </th>-->
-                    <th align="center" class="f14">
-                        <select class="my-combobox" name="" style="">
-                            <option value="UAB">UAB</option>
-                            <option value="UBC">UBC</option>
-                            <option value="U1">U1</option>
-                            <option value="U2">U2</option>
-                            <option value="UA">UA</option>
-                            <option value="UB">UB</option>
-                            <option value="UC">UC</option>
+                            <option value="I1">I1</option>
+                            <option value="I2">I2</option>
+                            <option value="I0">I0</option>
+                            <option value="I20">I20</option>
                         </select>
                     </th>
                     <th align="center" class="f14">
                         <select class="my-combobox" name="" style="">
-                            <option value="UAB">UAB</option>
-                            <option value="UBC">UBC</option>
-                            <option value="U1">U1</option>
-                            <option value="U2">U2</option>
-                            <option value="UA">UA</option>
-                            <option value="UB">UB</option>
-                            <option value="UC">UC</option>
-                        </select>
-                    </th>
-                    <!--<th align="center" class="f14">
-            <select class="my-combobox" name="" style="">
-                <option value="">UAB </option>
-                <option value="">UBC</option>
-                <option value="">U1</option>
-                <option value="">U2</option>
-                <option value="">UA</option>
-                <option value="">UB</option>
-                <option value="">UC</option>
-            </select>
-        </th>-->
-                    <th align="center" class="f14">
-                        <select class="my-combobox" name="" style="">
-                            <option value="UAB">UAB</option>
-                            <option value="UBC">UBC</option>
-                            <option value="U1">U1</option>
-                            <option value="U2">U2</option>
-                            <option value="UA">UA</option>
-                            <option value="UB">UB</option>
-                            <option value="UC">UC</option>
+                            <option value="I1">I1</option>
+                            <option value="I2">I2</option>
+                            <option value="I0">I0</option>
+                            <option value="I20">I20</option>
                         </select>
                     </th>
                     <th align="center" class="f14">
                         <select class="my-combobox" name="" style="">
-                            <option value="UAB">UAB</option>
-                            <option value="UBC">UBC</option>
-                            <option value="U1">U1</option>
-                            <option value="U2">U2</option>
-                            <option value="UA">UA</option>
-                            <option value="UB">UB</option>
-                            <option value="UC">UC</option>
+                            <option value="I1">I1</option>
+                            <option value="I2">I2</option>
+                            <option value="I0">I0</option>
+                            <option value="I20">I20</option>
                         </select>
                     </th>
-                    <!--<th align="center" class="f14">
-            <select class="my-combobox" name="" style="">
-                <option value="">UAB </option>
-                <option value="">UBC</option>
-                <option value="">U1</option>
-                <option value="">U2</option>
-                <option value="">UA</option>
-                <option value="">UB</option>
-                <option value="">UC</option>
-            </select>
-        </th>-->
+                    <th align="center" class="f14">
+                        <select class="my-combobox" name="" style="">
+                            <option value="I1">I1</option>
+                            <option value="I2">I2</option>
+                            <option value="I0">I0</option>
+                            <option value="I20">I20</option>
+                        </select>
+                    </th>
+                    <th align="center" class="f14">
+                        <select class="my-combobox" name="" style="">
+                            <option value="I1">I1</option>
+                            <option value="I2">I2</option>
+                            <option value="I0">I0</option>
+                            <option value="I20">I20</option>
+                        </select>
+                    </th>
                     <th align="center">
                         U(K = <select class="my-combobox" name="state" style="width:30px;">
                             <option value="2">2</option>
@@ -263,17 +212,13 @@ else
             }
             //显示值
             htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, ""));
-            //显示值2
-            htmlString.push(SetTDHtml(1, "READ_VALUE2", HangHaoID, rowidx, ""));
 
             //标准值
             htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, ""));
-            //标准值2
-            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE2", HangHaoID, rowidx, ""));
+
             //相对误差
             htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, ""));
-            //相对误差2
-            htmlString.push(SetTDHtml(1, "RELATIVE_ERROR2", HangHaoID, rowidx, ""));
+
             //校准结果的不确定度
             htmlString.push(SetTDHtml(1, "UNCERTAINTY_DEGREE", HangHaoID, rowidx, ""));
             //输出示值
