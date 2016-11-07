@@ -1,7 +1,7 @@
 <TableTemplates>
 	<TableTemplateList>
 		<TableTemplate>
-			<!--输入格式程博牛逼-->
+			<!--输入格式-->
 			<RuleID>38-1987_2</RuleID>
 			<!--二级标题开始行号,如果有二级标题填具体开始行号，如果没有填-1-->
 			<!--二级标题，有就配置，没有该节点可不配置-->
