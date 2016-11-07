@@ -156,6 +156,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Res\webuploader\" />
     <Folder Include="up\ErWeiMa\" />
+    <Folder Include="up\QianZi\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -888,6 +889,10 @@
     <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaZhengFu.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\BianSongQiDianLiuDianYa.cshtml" />
     <Content Include="Views\RULETree\GetTree.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BianSongQiGongLu.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BianSongQiPinLu.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BianSongQiXiangWei.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BianSongQiYouGongWuGong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

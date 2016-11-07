@@ -19,6 +19,47 @@ namespace Langben.App.Controllers
     public class PROJECTTEMPLETController : BaseController
     {
         /// <summary>
+        /// 变送器-有功（无功）功率-引用误差
+        /// </summary> 
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <returns></returns>
+        public ActionResult BianSongQiYouGongWuGong(string RULEID = "JJG126-1995_5", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        /// 变送器-相位-引用误差
+        /// </summary> 
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <returns></returns>
+        public ActionResult BianSongQiXiangWei(string RULEID = "JJG126-1995_4", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        /// 变送器-频率-引用误差
+        /// </summary> 
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <returns></returns>
+        public ActionResult BianSongQiPinLu(string RULEID = "JJG126-1995_3", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        /// 变送器-功率-引用误差
+        /// </summary> 
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <returns></returns>
+        public ActionResult BianSongQiGongLu(string RULEID = "JJG126-1995_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+
+        /// <summary>
         /// 变送器-电流电压-引用误差
         /// </summary> 
         /// <param name="RULEID">检测项目ID</param>

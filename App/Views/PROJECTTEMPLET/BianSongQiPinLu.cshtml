@@ -1,7 +1,7 @@
 ﻿@model Langben.DAL.PROJECTTEMPLET
 
 @{
-    ViewBag.title = " 变送器-电流电压-引用误差";
+    ViewBag.title= " 直流电流输出-相对误差（已做）";
     Layout = "~/Views/Shared/Edit.cshtml";
 }
 @using Common
@@ -42,7 +42,7 @@ else
 
     @*<input type="hidden" id="rowindex" value="0" />*@
     <div class="mt10" id="tongdao">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_moban" style="display:none">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_moban" style="display:none" >
             <thead>
                 <tr>
                     <td colspan="9">
@@ -53,23 +53,21 @@ else
                             <option value="3">3</option>
                             <option value="4">4</option>
                         </select>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span>电流</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span>频率</span>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="9">
                         <div class="fl" style="margin-right:20px">
                             输入范围：(
-                            <input name="" type="text" class="my-textbox tc" value="0" style="width:30px">
+                            <input name="" type="text" class="my-textbox tc" value="49.5" style="width:30px">
                             -
-                            <input name="" type="text" class="my-textbox tc" value="5" style="width:30px">
+                            <input name="" type="text" class="my-textbox tc" value="50.5" style="width:30px">
                             ) <select class="my-combobox" name="" id="">
-                                <option value="A">A</option>
-                                <option value="KA">KA</option>
-                                <option value="mA">mA</option>
-                                <option value="μA">μA</option>
-                                <option value="nA">nA</option>
-                                <option value="pA">pA</option>
+                                <option value="">Hz</option>
+                                <option value="">KHz</option>
+                                <option value="">MHz</option>
+                                <option value="">GHz</option>
                             </select>
                         </div>
                         <div class="fl" style="margin-right:20px">
@@ -82,7 +80,7 @@ else
                                 <option value="V">V</option>
                             </select>
                         </div>
-                        <div class="fl" style="margin-right:20px;display:none">
+                        <div class="fl" style="margin-right:20px">
                             U<sub>n</sub> =
                             <input name="" type="text" class="my-textbox tc" value="100" style="width:40px">
                             <select class="my-combobox" name="" id="">
@@ -93,7 +91,7 @@ else
                                 <option value="μV">μV</option>
                             </select>
                         </div>
-                        <div class="fl" style="margin-right:20px; ">
+                        <div class="fl" style="margin-right:20px; display:none">
                             I<sub>n</sub> =
                             <input name="" type="text" class="my-textbox tc" value="5" style="width:40px">
                             <select class="my-combobox" name="" id="">
@@ -114,7 +112,7 @@ else
 
                     <th align="center" width="100">
                         二次输入标准值<br>
-                        (<span>A</span>)
+                        (W)
                     </th>
                     <th align="center" width="100">
                         标准输出值<br>
@@ -137,7 +135,7 @@ else
                     <th align="center">
                         校准结果的不确定度<br>
                         U(K =
-                        <select class="my-combobox" name="state">
+                        <select class="my-combobox" name="state" style="width:30px;">
                             <option value="">2 </option>
                             <option value="">3</option>
                             <option value="">√3</option>
@@ -145,98 +143,99 @@ else
                         )
                     </th>
                 </tr>
-        
-            </thead>
-          
-            <tbody id="tbody_moban">
                 <tr>
-                    <td align="center" width="100">I</td>
+                    <td align="center" width="100">f</td>
                     <td align="center" width="100">
-                        <input name="" type="text" class="my-textbox tr" value="0.0" style="width:70px" onblur="JS1(this)" tableid="tongdao_1">
+                        <input name="" type="text" class="my-textbox tr" value="1.0" style="width:70px" onblur="JS1(this)" tableid="tongdao_1">
                         级
                     </td>
                     <td colspan="7" style="padding:0">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="subtbl">
                             <tr>
                                 <td align="center" width="120">
-                                    <input name="" type="text" class="my-textbox tr" value="100%" style="width:70px">
-                                    <span>I<sub>n</sub></span>
+                                    <input name="" type="text" class="my-textbox tr" value="" style="width:70px">
+                                    Hz
                                 </td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="5.000" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="20.000" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
                             </tr>
                             <tr>
                                 <td align="center" width="120">
-                                    <input name="" type="text" class="my-textbox tr" value="80%" style="width:70px">
-                                    <span>I<sub>n</sub></span>
+                                    <input name="" type="text" class="my-textbox tr" value="" style="width:70px">
+                                    Hz
                                 </td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="4.000" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="16.800" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
                             </tr>
                             <tr>
                                 <td align="center" width="120">
-                                    <input name="" type="text" class="my-textbox tr" value="60%" style="width:70px">
-                                    <span>I<sub>n</sub></span>
+                                    <input name="" type="text" class="my-textbox tr" value="" style="width:70px">
+                                    Hz
                                 </td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="3.000" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="13.600" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
                             </tr>
                             <tr>
                                 <td align="center" width="120">
-                                    <input name="" type="text" class="my-textbox tr" value="40%" style="width:70px">
-                                    <span>I<sub>n</sub></span>
+                                    <input name="" type="text" class="my-textbox tr" value="" style="width:70px">
+                                    Hz
                                 </td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="2.000" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="10.400" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
                             </tr>
                             <tr>
                                 <td align="center" width="120">
-                                    <input name="" type="text" class="my-textbox tr" value="20%" style="width:70px">
-                                    <span>I<sub>n</sub></span>
+                                    <input name="" type="text" class="my-textbox tr" value="" style="width:70px">
+                                    Hz
                                 </td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="1.000" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="7.200" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
                             </tr>
                             <tr>
                                 <td align="center" width="120">
-                                    <input name="" type="text" class="my-textbox tr" value="0%" style="width:70px">
-                                    <span>I<sub>n</sub></span>
+                                    <input name="" type="text" class="my-textbox tr" value="" style="width:70px">
+                                    Hz
                                 </td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="0.000" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="4.000" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
                                 <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
                             </tr>
-
+                            <tr>
+                                <td align="center" width="120">
+                                    <input name="" type="text" class="my-textbox tr" value="" style="width:70px">
+                                    Hz
+                                </td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
+                            </tr>
                         </table>
+                        <div class="p5 bgF7"><input type="hidden" id="hideLiangChengShuLiang" value="0" /><a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" index="1" onclick="CreateRow(this)">增加空行</a></div>
                     </td>
                 </tr>
-                
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="7">
-                        <input type="hidden" id="hideLiangChengShuLiang" value="0" />
-                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
-                    </td>
-                </tr>
-            </tfoot>
+            </thead>
+
+            <tbody id="tbody_moban"></tbody>
+
         </table>
     </div>
 
@@ -258,36 +257,28 @@ else
 
         </table>
     </div>
-    <input type="hidden" id="hideDangQianTongDao" value="0" />
-    <input type="hidden" id="hideTongDaoShuLiang" value="0" />
-    <input type="hidden" id="txtPoint" value="1" />
-    <input type="hidden" id="txtNumber" value="1" />
+    <input type="hidden" id="hideDangQianTongDao" value="0"/>    
+    <input type="hidden" id="hideTongDaoShuLiang" value="0" />    
 </div>
 
 <script src="/Scripts/JScript-JianCeXiang-Common.js"></script>
 <script type="text/javascript" language="javascript">
     //var RuleID = $("#hideRULEID").val();//检测项目ID
     //var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
-    // $Tongdao_moban//模板
-    //设置当前操作通道
-    function set(tbodyIndex) {
-
-        CreateRow();
-        $("#hideDangQianTongDao").val(tbodyIndex);
-
-    }
+    // $Tongdao_moban//模板   
+ 
     //增加量程
     function CreateRow() {
-
-        var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
-        var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
+        debugger
+        var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道        
+        var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量  
         LiangChengShuLiang++;
         var rowspanIdx = $("#txtPoint").val();     //检测点数
         txtNumber = $("#txtNumber").val(); //量程
         var standardValue = "";
         var htmlString = [];
         var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;
-
+             
         var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//（量程ID）第几个通道_第几个量程
         for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
             rowLength++;
@@ -302,20 +293,22 @@ else
             var HangHaoID = lianChengID + "_" + rowidx;//（行号ID)量程ID_第几行
             if (rowidx == 0) {
                 //需要合并的列
-             }
+                //量程
+                htmlString.push(SetTDHtml(rowspanIdx, "RANGE", lianChengID, null, txtNumber));
+                //选用电阻阻值
+                htmlString.push(SetTDHtml(rowspanIdx, "RESISTANCE", lianChengID, null, ""));
+            }
 
             //输出示值
 
             var changerHTML = "onblur=''";
-            //测量点
-            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, "", "<span>I<sub>n</sub></span>"));
-            //二次输入标准值
+            //输出示值
+            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, ""));
+            //读数值
             htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, ""));
-            //标准输出值
+            //输出实际值
             htmlString.push(SetTDHtml(1, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx, ""));
-            //实际输出值
-            htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, ""));
-            //引用误差
+            //相对误差
             htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, ""));
             //校准结果的不确定度
             htmlString.push(SetTDHtml(1, "UNCERTAINTY_DEGREE", HangHaoID, rowidx, ""));
@@ -323,10 +316,10 @@ else
         }
         htmlString = htmlString.join("");
         //var tagRow = $("#tbody_" + tableIdx).append(htmlString);
-
-        var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find(".subtbl").append(htmlString);
+        
+        var tagRow = $("#tbody_" + hideDangQianTongDao).append(htmlString);
         $.parser.parse(tagRow);//渲染easyui组建
-        //$('#dlg').window('close');
+        $('#dlg').window('close');
         $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang)
     }
 

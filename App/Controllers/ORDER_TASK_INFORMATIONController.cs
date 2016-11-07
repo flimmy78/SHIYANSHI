@@ -34,16 +34,34 @@ namespace Langben.App.Controllers
             return View();
         }
         [HttpPut]
-        public ActionResult QianZi(string id, string s)
+        public ActionResult QianZi(string id, string PICTURE, string HTMLVALUE)
         {
-            byte[] byt = Convert.FromBase64String(s);
-            Stream stream = new MemoryStream(byt);
+            byte[] byt = Convert.FromBase64String(PICTURE);
+            MemoryStream stream = new MemoryStream(byt);
+            string path = Server.MapPath("~/up/QianZi/");
+            var pathErWeiMa = path + id + ".png";
+            System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate);
+
+            //成和园
+            System.IO.BinaryWriter w = new System.IO.BinaryWriter(fs);
+            w.Write(stream.ToArray());
+
+            fs.Close();
+            stream.Close();
 
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
+            SIGN sign = new SIGN();
+            sign.PICTURE = PICTURE;
+            sign.HTMLVALUE = HTMLVALUE;
+            string currentPerson = GetCurrentPerson();
+            sign.CREATETIME = DateTime.Now;
+            sign.CREATEPERSON = currentPerson;
+            sign.ID = Result.GetNewId();
 
+            m_BLL.EditSTATUS(ref validationErrors, id, sign);
             result.Code = Common.ClientCode.Succeed;
             result.Message = Suggestion.InsertSucceed;
-      
+
             return Json(result); //提示创建成功
         }
         /// <summary>
@@ -56,7 +74,7 @@ namespace Langben.App.Controllers
 
             return View();
         }
-     
+
         /// <summary>
         /// 查看详细
         /// </summary>
@@ -93,11 +111,20 @@ namespace Langben.App.Controllers
                 string currentPerson = GetCurrentPerson();
                 if (string.IsNullOrWhiteSpace(entity.ID))
                 {
+                    string ORDER_NUMBER = m_BLL.GetORDER_NUMBER(ref validationErrors);
+                    var order = ORDER_NUMBER.Split('*');// DC2016001 * 1 * 2016
+                    entity.ORDER_STATUS = Common.ORDER_STATUS_INFORMATION.保存.ToString();
+                    var ms = new System.IO.MemoryStream();
                     entity.CREATETIME = DateTime.Now;
                     entity.CREATEPERSON = currentPerson;
                     entity.ID = Result.GetNewId();
+
+                    entity.ORDER_NUMBER = order[0].ToString();
+                    entity.ORSERIALNUMBER = Convert.ToDecimal(order[1]);
+                    entity.ORYEARS = order[2].ToString();
+
                     entity.ORDER_STATUS = Common.ORDER_STATUS_INFORMATION.保存.ToString();
-                    var ms = new System.IO.MemoryStream();
+
                     string path = Server.MapPath("~/up/ErWeiMa/");
                     foreach (var item in entity.APPLIANCE_DETAIL_INFORMATION)
                     {
@@ -118,20 +145,12 @@ namespace Langben.App.Controllers
                             r.WriteToStream(qr.Matrix, ms, ImageFormat.Png);
 
                         }
-                        
-                       
+
+
                         //QRCodeHelper.GetQRCode(item.ID, ms);
                         var pathErWeiMa = path + item.ID + ".png";
                         System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate);
 
-                        //Bitmap bmp = new Bitmap(fs);
-                        //Graphics g = Graphics.FromImage(bmp);
-                        //String str = item.APPLIANCE_NAME;
-                        //Font font = new Font("宋体", 8);
-                        //SolidBrush sbrush = new SolidBrush(Color.Black);
-                        //g.DrawString(str, font, sbrush, new PointF(10, 10));
-                       
-                        //bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
 
                         System.IO.BinaryWriter w = new System.IO.BinaryWriter(fs);
                         w.Write(ms.ToArray());

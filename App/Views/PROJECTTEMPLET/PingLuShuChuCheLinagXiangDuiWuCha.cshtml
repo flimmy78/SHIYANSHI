@@ -53,7 +53,7 @@ else
 
             </select>
         </div>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_moban_" >
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10"  id="tongdao_moban" style="display:none">
             <thead>
                 <tr>
                     <th rowspan="2" align="center" width="150">显示值</th>
@@ -106,7 +106,7 @@ else
                         </select>
                     </td>
                     <td align="center">
-                        <input class="my-textbox input-width" value="50.000" onblur="JS(this)"><select class="emy-combobox" name="" id="">
+                        <input class="my-textbox input-width" value="50.000" onblur="JS(this)"><select class="my-combobox" name="" id="">
                             <option value="Hz">Hz</option>
                             <option value="KHz">KHz</option>
                             <option value="MHz">MHz</option>
@@ -181,8 +181,8 @@ else
             <tfoot>
                 <tr>
                     <td colspan="4">
-                        <input type="hidden" id="hideLiangChengShuLiang" value="5" />
-                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="CreateRow()" data-options="plain:true,iconCls:'icon-add'" id="btnAddKongHang">增加空行</a>
+                        <input type="hidden" id="hideLiangChengShuLiang" value="0" />
+                        <a href="javascript:void(0)" class="easyui-linkbutton"   data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
                 </tr>
             </tfoot>
         </table>
@@ -215,9 +215,16 @@ else
  
 <script src="/Scripts/JScript-JianCeXiang-Common.js"></script>
 <script type="text/javascript" language="javascript">
+    //设置当前操作通道
+    function set(tbodyIndex) {
+     
+        CreateRow();
+        $("#hideDangQianTongDao").val(tbodyIndex);
+
+    }
     //增加量程
     function CreateRow() {
-        //debugger;
+     
         var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
         var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
         LiangChengShuLiang++;
@@ -241,16 +248,16 @@ else
             var HangHaoID = lianChengID + "_" + rowidx;//（行号ID)量程ID_第几行
             if (rowidx == 0) {
                 //需要合并的列
-                htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, ""));
+
             }
 
             //输出示值
 
             var changerHTML = "onblur=''";
             //显示值
-            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, ""));
+            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, "","<select class='my-combobox' name='' id=''><option value='Hz'>Hz</option><option value='KHz'>KHz</option><option value='MHz'>MHz</option><option value='GHz'>GHz</option></select>"));
             //标准值
-            htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, ""));
+            htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, "", "<select class='my-combobox' name='' id=''><option value='Hz'>Hz</option><option value='KHz'>KHz</option><option value='MHz'>MHz</option><option value='GHz'>GHz</option></select>"));
             //相对误差
             htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, ""));
             //校准结果的不确定度
@@ -260,7 +267,7 @@ else
         htmlString = htmlString.join("");
         //var tagRow = $("#tbody_" + tableIdx).append(htmlString);
 
-        var tagRow = $("#tbody_" + hideDangQianTongDao).append(htmlString);
+        var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
         $.parser.parse(tagRow);//渲染easyui组建
        // $('#dlg').window('close');
         $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang)

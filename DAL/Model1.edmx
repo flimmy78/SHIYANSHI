@@ -527,6 +527,8 @@
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="ORSERIALNUMBER" Type="number" Precision="38" Scale="0" />
+          <Property Name="ORYEARS" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="OVERALL_TABLE">
           <Key>
@@ -723,6 +725,19 @@
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="SORT" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="SIGN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
+          <Property Name="PICTURE" Type="clob" />
+          <Property Name="ORDER_TASK_INFORMATIONID" Type="varchar2" MaxLength="36" />
+          <Property Name="HTMLVALUE" Type="clob" />
+          <Property Name="CREATETIME" Type="date" />
+          <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="UPDATETIME" Type="date" />
+          <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="SysAnnouncement">
           <Key>
@@ -1332,6 +1347,7 @@
           <Property Name="REPORTSTATUS" Type="varchar2" MaxLength="200" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VRUKU”中的列“UNDERTAKE_LABORATORYID”。
 警告 6002: 表/视图“TENGFEI.VRUKU”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VRUKU">
           <Key>
@@ -1348,7 +1364,6 @@
           <Property Name="APPLIANCE_PROGRESS" Type="varchar2" MaxLength="200" />
           <Property Name="ORDER_STATUS" Type="varchar2" MaxLength="200" />
           <Property Name="STORAGEINSTRUCTIONS" Type="varchar2" MaxLength="4000" />
-          <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
           <Property Name="APPROVALDATE" Type="date" />
           <Property Name="STORAGEINSTRUCTI_STATU" Type="varchar2" MaxLength="200" />
           <Property Name="REPORTSTATUS" Type="varchar2" MaxLength="200" />
@@ -1433,9 +1448,10 @@
 警告 6002: 表/视图“TENGFEI.VTEST_ITE”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VTEST_ITE">
           <Key>
-            <PropertyRef Name="ROW_FLAG" />
             <PropertyRef Name="PREPARE_SCHEMEID" />
+            <PropertyRef Name="ROW_FLAG" />
           </Key>
+          <Property Name="RID" Type="number" Precision="38" Scale="0" />
           <Property Name="ROW_FLAG" Type="varchar2" MaxLength="73" Nullable="false" />
           <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="SCHEMEID" Type="varchar2" MaxLength="36" />
@@ -1912,6 +1928,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SIGN_REFERENCE_ORDER_TA">
+          <End Role="ORDER_TASK_INFORMATION" Type="Self.ORDER_TASK_INFORMATION" Multiplicity="0..1" />
+          <End Role="SIGN" Type="Self.SIGN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDER_TASK_INFORMATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SIGN">
+              <PropertyRef Name="ORDER_TASK_INFORMATIONID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SYSDEPAR_REFERENCE_SYSDEPAR">
           <End Role="SysDepartment" Type="Self.SysDepartment" Multiplicity="0..1" />
           <End Role="SysDepartment1" Type="Self.SysDepartment" Multiplicity="*" />
@@ -2248,6 +2276,7 @@
           <EntitySet Name="RULE" EntityType="Self.RULE" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="SCHEME" EntityType="Self.SCHEME" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="SCHEME_RULE" EntityType="Self.SCHEME_RULE" Schema="TENGFEI" store:Type="Tables" />
+          <EntitySet Name="SIGN" EntityType="Self.SIGN" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="SysAnnouncement" EntityType="Self.SysAnnouncement" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="SysDepartment" EntityType="Self.SysDepartment" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="SysDocument" EntityType="Self.SysDocument" Schema="TENGFEI" store:Type="Tables" />
@@ -2373,7 +2402,6 @@ FROM "TENGFEI"."VQIJULINGQU2" "VQIJULINGQU2"</DefiningQuery>
 "VRUKU"."APPLIANCE_PROGRESS" AS "APPLIANCE_PROGRESS", 
 "VRUKU"."ORDER_STATUS" AS "ORDER_STATUS", 
 "VRUKU"."STORAGEINSTRUCTIONS" AS "STORAGEINSTRUCTIONS", 
-"VRUKU"."UNDERTAKE_LABORATORYID" AS "UNDERTAKE_LABORATORYID", 
 "VRUKU"."APPROVALDATE" AS "APPROVALDATE", 
 "VRUKU"."STORAGEINSTRUCTI_STATU" AS "STORAGEINSTRUCTI_STATU", 
 "VRUKU"."REPORTSTATUS" AS "REPORTSTATUS", 
@@ -2448,6 +2476,7 @@ FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VTEST_ITE" EntityType="Self.VTEST_ITE" store:Type="Views" store:Schema="TENGFEI">
             <DefiningQuery>SELECT 
+"VTEST_ITE"."RID" AS "RID", 
 "VTEST_ITE"."ROW_FLAG" AS "ROW_FLAG", 
 "VTEST_ITE"."PREPARE_SCHEMEID" AS "PREPARE_SCHEMEID", 
 "VTEST_ITE"."SCHEMEID" AS "SCHEMEID", 
@@ -2625,6 +2654,10 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
             <End Role="UNDERTAKE_LABORATORY" EntitySet="UNDERTAKE_LABORATORY" />
             <End Role="SCHEME" EntitySet="SCHEME" />
           </AssociationSet>
+          <AssociationSet Name="FK_SIGN_REFERENCE_ORDER_TA" Association="Self.FK_SIGN_REFERENCE_ORDER_TA">
+            <End Role="ORDER_TASK_INFORMATION" EntitySet="ORDER_TASK_INFORMATION" />
+            <End Role="SIGN" EntitySet="SIGN" />
+          </AssociationSet>
           <AssociationSet Name="FK_SYSDEPAR_REFERENCE_SYSDEPAR" Association="Self.FK_SYSDEPAR_REFERENCE_SYSDEPAR">
             <End Role="SysDepartment" EntitySet="SysDepartment" />
             <End Role="SysDepartment1" EntitySet="SysDepartment" />
@@ -2765,6 +2798,7 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <EntitySet Name="RULE" EntityType="Model.RULE" />
           <EntitySet Name="SCHEME" EntityType="Model.SCHEME" />
           <EntitySet Name="SCHEME_RULE" EntityType="Model.SCHEME_RULE" />
+          <EntitySet Name="SIGN" EntityType="Model.SIGN" />
           <EntitySet Name="SysAnnouncement" EntityType="Model.SysAnnouncement" />
           <EntitySet Name="SysDepartment" EntityType="Model.SysDepartment" />
           <EntitySet Name="SysDocument" EntityType="Model.SysDocument" />
@@ -2890,6 +2924,10 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <AssociationSet Name="FK_METERING_REFERENCE_UNDERTAK" Association="Model.FK_METERING_REFERENCE_UNDERTAK">
             <End Role="UNDERTAKE_LABORATORY" EntitySet="UNDERTAKE_LABORATORY" />
             <End Role="METERING_STANDARD_DEVICE" EntitySet="METERING_STANDARD_DEVICE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIGN_REFERENCE_ORDER_TA" Association="Model.FK_SIGN_REFERENCE_ORDER_TA">
+            <End Role="ORDER_TASK_INFORMATION" EntitySet="ORDER_TASK_INFORMATION" />
+            <End Role="SIGN" EntitySet="SIGN" />
           </AssociationSet>
           <AssociationSet Name="FK_PHASE_REFERENCE_OVERALL_" Association="Model.FK_PHASE_REFERENCE_OVERALL_">
             <End Role="OVERALL_TABLE" EntitySet="OVERALL_TABLE" />
@@ -3578,7 +3616,10 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ORSERIALNUMBER" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ORYEARS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="APPLIANCE_DETAIL_INFORMATION" Relationship="Model.FK_APPLIANC_REFERENCE_ORDER_TA" FromRole="ORDER_TASK_INFORMATION" ToRole="APPLIANCE_DETAIL_INFORMATION" />
+          <NavigationProperty Name="SIGN" Relationship="Model.FK_SIGN_REFERENCE_ORDER_TA" FromRole="ORDER_TASK_INFORMATION" ToRole="SIGN" />
         </EntityType>
         <EntityType Name="OVERALL_TABLE">
           <Key>
@@ -3812,6 +3853,20 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <Property Name="SORT" Type="Decimal" Precision="38" Scale="0" />
           <NavigationProperty Name="RULE" Relationship="Model.FK_SCHEME_R_REFERENCE_RULE" FromRole="SCHEME_RULE" ToRole="RULE" />
           <NavigationProperty Name="SCHEME" Relationship="Model.FK_SCHEME_R_REFERENCE_SCHEME" FromRole="SCHEME_RULE" ToRole="SCHEME" />
+        </EntityType>
+        <EntityType Name="SIGN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="PICTURE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ORDER_TASK_INFORMATIONID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="HTMLVALUE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CREATETIME" Type="DateTime" />
+          <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATETIME" Type="DateTime" />
+          <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ORDER_TASK_INFORMATION" Relationship="Model.FK_SIGN_REFERENCE_ORDER_TA" FromRole="SIGN" ToRole="ORDER_TASK_INFORMATION" />
         </EntityType>
         <EntityType Name="SysAnnouncement">
           <Key>
@@ -4439,7 +4494,6 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <Property Name="APPLIANCE_PROGRESS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ORDER_STATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="STORAGEINSTRUCTIONS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="APPROVALDATE" Type="DateTime" />
           <Property Name="STORAGEINSTRUCTI_STATU" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="REPORTSTATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -4516,9 +4570,10 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
         </EntityType>
         <EntityType Name="VTEST_ITE">
           <Key>
-            <PropertyRef Name="ROW_FLAG" />
             <PropertyRef Name="PREPARE_SCHEMEID" />
+            <PropertyRef Name="ROW_FLAG" />
           </Key>
+          <Property Name="RID" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="ROW_FLAG" Type="String" MaxLength="73" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PREPARE_SCHEMEID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
@@ -4809,6 +4864,18 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
             </Principal>
             <Dependent Role="METERING_STANDARD_DEVICE">
               <PropertyRef Name="UNDERTAKE_LABORATORYID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIGN_REFERENCE_ORDER_TA">
+          <End Type="Model.ORDER_TASK_INFORMATION" Role="ORDER_TASK_INFORMATION" Multiplicity="0..1" />
+          <End Type="Model.SIGN" Role="SIGN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDER_TASK_INFORMATION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SIGN">
+              <PropertyRef Name="ORDER_TASK_INFORMATIONID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5713,6 +5780,8 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <EntitySetMapping Name="ORDER_TASK_INFORMATION">
             <EntityTypeMapping TypeName="Model.ORDER_TASK_INFORMATION">
               <MappingFragment StoreEntitySet="ORDER_TASK_INFORMATION">
+                <ScalarProperty Name="ORYEARS" ColumnName="ORYEARS" />
+                <ScalarProperty Name="ORSERIALNUMBER" ColumnName="ORSERIALNUMBER" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
                 <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
@@ -5939,6 +6008,20 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
                 <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
                 <ScalarProperty Name="SCHEMEID" ColumnName="SCHEMEID" />
                 <ScalarProperty Name="RULEID" ColumnName="RULEID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SIGN">
+            <EntityTypeMapping TypeName="Model.SIGN">
+              <MappingFragment StoreEntitySet="SIGN">
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="HTMLVALUE" ColumnName="HTMLVALUE" />
+                <ScalarProperty Name="ORDER_TASK_INFORMATIONID" ColumnName="ORDER_TASK_INFORMATIONID" />
+                <ScalarProperty Name="PICTURE" ColumnName="PICTURE" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -6550,7 +6633,6 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
                 <ScalarProperty Name="REPORTSTATUS" ColumnName="REPORTSTATUS" />
                 <ScalarProperty Name="STORAGEINSTRUCTI_STATU" ColumnName="STORAGEINSTRUCTI_STATU" />
                 <ScalarProperty Name="APPROVALDATE" ColumnName="APPROVALDATE" />
-                <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
                 <ScalarProperty Name="STORAGEINSTRUCTIONS" ColumnName="STORAGEINSTRUCTIONS" />
                 <ScalarProperty Name="ORDER_STATUS" ColumnName="ORDER_STATUS" />
                 <ScalarProperty Name="APPLIANCE_PROGRESS" ColumnName="APPLIANCE_PROGRESS" />
@@ -6654,6 +6736,7 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
                 <ScalarProperty Name="SCHEMEID" ColumnName="SCHEMEID" />
                 <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
                 <ScalarProperty Name="ROW_FLAG" ColumnName="ROW_FLAG" />
+                <ScalarProperty Name="RID" ColumnName="RID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

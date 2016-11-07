@@ -59,6 +59,7 @@ namespace Langben.DAL
         public virtual DbSet<RULE> RULE { get; set; }
         public virtual DbSet<SCHEME> SCHEME { get; set; }
         public virtual DbSet<SCHEME_RULE> SCHEME_RULE { get; set; }
+        public virtual DbSet<SIGN> SIGN { get; set; }
         public virtual DbSet<SysAnnouncement> SysAnnouncement { get; set; }
         public virtual DbSet<SysDepartment> SysDepartment { get; set; }
         public virtual DbSet<SysDocument> SysDocument { get; set; }
