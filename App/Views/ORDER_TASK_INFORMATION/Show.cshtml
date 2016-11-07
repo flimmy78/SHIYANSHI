@@ -24,20 +24,20 @@
         display: inline;
     }
 
-        .editor-field .text-box {
-            width: 99%;
-            border: none;
-        }
+    .bigdiv  .text-box {
+        width: 99%;
+        border: none;
+    }
 
-        .editor-field .my-combobox {
-            width: auto;
-            border: none;
-        }
+    .bigdiv  .my-combobox {
+        width: auto;
+        border: none;
+    }
 
-        .editor-field textarea {
-            width: 96%;
-            border: none;
-        }
+    .bigdiv  textarea {
+        width: 96%;
+        border: none;
+    }
 
     .my-btn {
         cursor: pointer;
@@ -57,129 +57,93 @@
 </style>
 <div class="easyui-layout">
     <div class="bigdiv" style="width: auto" id="order">
-        <div class="editor-form">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
-            </div>
-            <div class="editor-field">
-                @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "华北电力科学研究院有限责任公司", new { @class = "my-combobox" })
-            </div>
-        </div>
-        <div class="editor-form">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
-            </div>
-            <div class="editor-field">
-                @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "my-combobox" })
-            </div>
-        </div>
-        <div class="editor-form">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
-                @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
-            </div>
-        </div>
-        <div class="editor-form">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_POST)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_POST)
+        <table border="0" cellspacing="0" cellpadding="0" class="tbl " width="100%">
+            <tr>
+                <th width="120" align="right">@Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：</th>
+                <td> @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "华北电力科学研究院有限责任公司", new { @class = "my-combobox" })</td>
+                <th width="120" align="right">@Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：</th>
+                <td>@Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "my-combobox" })</td>
+            </tr>
+            <tr>
+                <th align="right">@Html.LabelFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)： </th>
+                <td>
+                    @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+                    @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
+                </td>
+                <th align="right"> @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_POST)：</th>
+                <td>
+                    @Html.EditorFor(model => model.INSPECTION_ENTERPRISE_POST)
                 @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_POST)
-            </div>
-        </div>
-        <div class="editor-form">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CONTACTS)：
-            </div>
-            <div class="editor-field">
+            </td>
+        </tr>
+        <tr>
+            <th align="right">@Html.LabelFor(model => model.CONTACTS)：</th>
+            <td>
                 @Html.EditorFor(model => model.CONTACTS)
                 @Html.ValidationMessageFor(model => model.CONTACTS)
-            </div>
-        </div>
-        <div class="editor-form">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CONTACT_PHONE)：
-            </div>
-            <div class="editor-field">
+            </td>
+            <th align="right">@Html.LabelFor(model => model.CONTACT_PHONE)：</th>
+            <td>
                 @Html.EditorFor(model => model.CONTACT_PHONE)
-                @Html.ValidationMessageFor(model => model.CONTACT_PHONE)
-            </div>
-        </div>
-        <div class="editor-form">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.FAX)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.FAX)
-                @Html.ValidationMessageFor(model => model.FAX)
-            </div>
-        </div>
-        <div class="editor-form">
-            <div class="editor-label">
-                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
-            </div>
-            <div class="editor-field">
-                @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "my-combobox" })
-            </div>
-        </div>
-        <div class="editor-form">
-            <div class="editor-label">
-                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
-                @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
-            </div>
-        </div>
-        <div class="editor-form">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_POST)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_POST)
-                @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_POST)
-            </div>
-        </div>
-        <div class="editor-form">
-            <div class="editor-label">
-                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACTS2)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CONTACTS2)
-                @Html.ValidationMessageFor(model => model.CONTACTS2)
-            </div>
-        </div>
-        <div class="editor-form">
-            <div class="editor-label">
-                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACT_PHONE2)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CONTACT_PHONE2)
-                @Html.ValidationMessageFor(model => model.CONTACT_PHONE2)
-            </div>
-        </div>
-        <div class="editor-form">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.FAX2)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.FAX2)
-                @Html.ValidationMessageFor(model => model.FAX2)
-            </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)：
-        </div>
-        <div class="editor-field" style="height:auto; width:550px">
+            @Html.ValidationMessageFor(model => model.CONTACT_PHONE)
+        </td>
+    </tr>
+    <tr>
+        <th align="right">@Html.LabelFor(model => model.FAX)：</th>
+        <td>
+            @Html.EditorFor(model => model.FAX)
+            @Html.ValidationMessageFor(model => model.FAX)
+        </td>
+        <th align="right">@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：</th>
+        <td>@Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "my-combobox" })</td>
+    </tr>
+    <tr>
+        <th align="right">@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：</th>
+        <td>
+            @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
+        @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
+    </td>
+    <th align="right">@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_POST)：</th>
+    <td>
+        @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_POST)
+    @Html.ValidationMessageFor(model => model.CERTIFICATE_ENTERPRISE_POST)
+    </td>
+    </tr>
+    <tr>
+        <th align="right">@Html.LabelFor(model => model.CONTACTS2)：</th>
+        <td>
+            @Html.EditorFor(model => model.CONTACTS2)
+        @Html.ValidationMessageFor(model => model.CONTACTS2)
+    </td>
+    <th align="right">@Html.LabelFor(model => model.CONTACT_PHONE2)： </th>
+    <td>
+        @Html.EditorFor(model => model.CONTACT_PHONE2)
+    @Html.ValidationMessageFor(model => model.CONTACT_PHONE2)
+    </td>
+    </tr>
+    <tr>
+        <th align="right"> @Html.LabelFor(model => model.FAX2)：</th>
+        <td>
+            @Html.EditorFor(model => model.FAX2)
+        @Html.ValidationMessageFor(model => model.FAX2)
+    </td>
+    <th></th>
+    <td></td>
+    </tr>
+    <tr>
+        <th align="right">@Html.LabelFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)：</th>
+        <td colspan="3">
             @Html.TextAreaFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
             @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
-        </div>
-    </div>
+        </td>
+
+    </tr>
+    </table>
+
+
+
+</div>
+
     <div style="clear:both;"></div>
     <input type="hidden" id="ORDER_TASK_INFORMATIONID" />
     <div class="p5 mt10">
