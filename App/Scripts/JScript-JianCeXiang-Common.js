@@ -343,13 +343,14 @@ function CreateTongDao() {
     $tongdao.find("#tbody_moban").attr('id', 'tbody_' + tableIdx);
     $tongdao.find("#K_moban").attr('id', 'K_' + tableIdx);
     //var tbIdx = tableIdx;
-    $tongdao.find('#btnAddLiangCheng').attr("onclick", "$('#dlg').dialog('open');set(" + tableIdx + ");");
+    $tongdao.find('#btnAddLiangCheng').attr("onclick", "set(" + tableIdx + ");");
     $("#hideDangQianTongDao").val(tableIdx);
     $("#hideTongDaoShuLiang").val(tableIdx);
 
 };
 //设置当前操作通道
 function set(tbodyIndex) {
+    $('#dlg').dialog('open');
     $("#hideDangQianTongDao").val(tbodyIndex);
 }
 //重置

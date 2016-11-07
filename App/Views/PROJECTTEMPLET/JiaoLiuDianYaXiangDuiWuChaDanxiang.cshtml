@@ -229,7 +229,7 @@ else
              htmlString.push("</tr>");
         }
         htmlString = htmlString.join("");
-        var tagRow = $("#tbody_" + hideDangQianTongDao).append(htmlString);
+        var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
         $.parser.parse(tagRow);//渲染easyui组建
         $('#dlg').window('close');
         $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang)
