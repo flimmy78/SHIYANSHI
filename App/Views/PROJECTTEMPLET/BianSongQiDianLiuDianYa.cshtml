@@ -221,13 +221,19 @@ else
                             </tr>
 
                         </table>
-                        <div class="p5 bgF7"><input type="hidden" id="hideLiangChengShuLiang" value="0" /><a href="javascript:;" index="1" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateRow(this)">增加空行</a></div>
+                        @*<div class="p5 bgF7"><input type="hidden" id="hideLiangChengShuLiang" value="0" /><a href="javascript:;" index="1" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateRow(this)">增加空行</a></div>*@
                     </td>
                 </tr>
             </thead>
 
             <tbody id="tbody_moban"></tbody>
-
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <input type="hidden" id="hideLiangChengShuLiang" value="0" />
+                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng"onclick="CreateRow(this)">增加空行</a>
+                </tr>
+            </tfoot>
         </table>
     </div>
 
