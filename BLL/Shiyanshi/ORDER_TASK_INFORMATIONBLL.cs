@@ -52,15 +52,15 @@ namespace Langben.BLL
             return false;
         }
 
-       /// <summary>
-       /// 获取委托单号
-       /// </summary>
-       /// <param name="validationErrors"></param>
-       /// <returns>委托单号*编号*年份</returns>
+        /// <summary>
+        /// 获取委托单号
+        /// </summary>
+        /// <param name="validationErrors"></param>
+        /// <returns>委托单号*编号*年份</returns>
         public string GetORDER_NUMBER(ref ValidationErrors validationErrors)
         {
             String time = DateTime.Now.ToString("yyyy", DateTimeFormatInfo.InvariantInfo);//当前年
-            string seria = string.Empty ;
+            string seria = string.Empty;
             decimal? ORSERIALNUMBER = 0;
             string ORSERIALNUMBER2 = string.Empty;
             string ORYEARS = string.Empty;
@@ -74,26 +74,13 @@ namespace Langben.BLL
             {
                 ORSERIALNUMBER = 1;
             }
-            if (ORSERIALNUMBER<=9)
-            {
-                ORSERIALNUMBER2 = ORSERIALNUMBER.ToString().PadLeft(3, '0');
-            }
-            else if (ORSERIALNUMBER > 9&& ORSERIALNUMBER <= 99)
-            {
-                ORSERIALNUMBER2 = ORSERIALNUMBER.ToString().PadLeft(2, '0');
-            }
-            else if (ORSERIALNUMBER > 99 && ORSERIALNUMBER <= 999)
-            {
-                ORSERIALNUMBER2 = ORSERIALNUMBER.ToString().PadLeft(1, '0');
-            }
-            else
-            {
-                ORSERIALNUMBER2 = ORSERIALNUMBER.ToString();
-            }
+
+            ORSERIALNUMBER2 = ORSERIALNUMBER.ToString().PadLeft(4, '0');
+
             ORDER_NUMBER = "DC" + time + ORSERIALNUMBER2 + "";
             seria = ORDER_NUMBER + "*" + ORSERIALNUMBER.ToString() + "*" + time;
             return seria;
-        }     
+        }
     }
 }
 
