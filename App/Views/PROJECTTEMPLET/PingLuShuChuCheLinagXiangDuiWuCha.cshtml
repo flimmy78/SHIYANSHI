@@ -106,7 +106,7 @@ else
                         </select>
                     </td>
                     <td align="center">
-                        <input class="my-textbox input-width" value="50.000" onblur="JS(this)"><select class="emy-combobox" name="" id="">
+                        <input class="my-textbox input-width" value="50.000" onblur="JS(this)"><select class="my-combobox" name="" id="">
                             <option value="Hz">Hz</option>
                             <option value="KHz">KHz</option>
                             <option value="MHz">MHz</option>
@@ -248,16 +248,16 @@ else
             var HangHaoID = lianChengID + "_" + rowidx;//（行号ID)量程ID_第几行
             if (rowidx == 0) {
                 //需要合并的列
-                htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, ""));
+
             }
 
             //输出示值
 
             var changerHTML = "onblur=''";
             //显示值
-            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, ""));
+            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, "","<select class='my-combobox' name='' id=''><option value='Hz'>Hz</option><option value='KHz'>KHz</option><option value='MHz'>MHz</option><option value='GHz'>GHz</option></select>"));
             //标准值
-            htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, ""));
+            htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, "", "<select class='my-combobox' name='' id=''><option value='Hz'>Hz</option><option value='KHz'>KHz</option><option value='MHz'>MHz</option><option value='GHz'>GHz</option></select>"));
             //相对误差
             htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, ""));
             //校准结果的不确定度
