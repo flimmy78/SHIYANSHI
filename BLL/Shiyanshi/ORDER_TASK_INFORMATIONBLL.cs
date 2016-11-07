@@ -57,9 +57,8 @@ namespace Langben.BLL
         /// </summary>
         /// <param name="id">预备方案的主键</param>
         /// <returns>证书编号</returns>
-        public bool UPORDER_NUMBER(string id)
+        public bool UPORDER_NUMBER(ref ValidationErrors validationErrors, string id)
         {
-            ValidationErrors validationErrors = new ValidationErrors();
             String time = DateTime.Now.ToString("yyyy", DateTimeFormatInfo.InvariantInfo);//当前年
             ORDER_TASK_INFORMATION prepare = repository.GetById(id);//调用方法取数据
             decimal? ser = prepare.ORSERIALNUMBER;
@@ -89,7 +88,7 @@ namespace Langben.BLL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public string GetORDER_NUMBER(string id)
+        public string GetORDER_NUMBER(ref ValidationErrors validationErrors, string id)
         {
             String time = DateTime.Now.ToString("yyyy", DateTimeFormatInfo.InvariantInfo);//当前年
             ORDER_TASK_INFORMATION prepare = repository.GetById(id);//调用方法取数据
