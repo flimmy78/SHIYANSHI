@@ -181,10 +181,13 @@
             var id = '@ViewBag.Id';
             $.ajax({
                 url: "/api/RULEApi/Get/" + id,
-              
+                type: "GET",
+                dataType: "json",
+                
+
                 // async: false,
                 success: function (res) {
-                //    $("#ID").val(res.ID);$("#NAMEOTHER").val(res.NAMEOTHER);$("#NAME").val(res.NAME);$("#SCHEME_MENU").val(res.SCHEME_MENU);$("#SORT").val(res.SORT);$("#IS_UNCERTAINTY").val(res.IS_UNCERTAINTY);$("#UNCERTAINTY_MENU").val(res.UNCERTAINTY_MENU);$("#INPUTSTATE").val(res.INPUTSTATE);$("#CREATETIME").val(res.CREATETIME);$("#CREATEPERSON").val(res.CREATEPERSON);$("#UPDATEPERSON").val(res.UPDATEPERSON);
+                    $("#ID").val(res.ID);$("#NAMEOTHER").val(res.NAMEOTHER);$("#NAME").val(res.NAME);$("#SCHEME_MENU").val(res.SCHEME_MENU);$("#SORT").val(res.SORT);$("#IS_UNCERTAINTY").val(res.IS_UNCERTAINTY);$("#UNCERTAINTY_MENU").val(res.UNCERTAINTY_MENU);$("#INPUTSTATE").val(res.INPUTSTATE);$("#CREATETIME").val(res.CREATETIME);$("#CREATEPERSON").val(res.CREATEPERSON);$("#UPDATEPERSON").val(res.UPDATEPERSON);
                 }
             })
         });
