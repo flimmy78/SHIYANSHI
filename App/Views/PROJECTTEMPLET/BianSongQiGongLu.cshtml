@@ -1,7 +1,7 @@
 ﻿@model Langben.DAL.PROJECTTEMPLET
 
 @{
-    ViewBag.title= " 直流电流输出-相对误差（已做）";
+    ViewBag.title = " 直流电流输出-相对误差（已做）";
     Layout = "~/Views/Shared/Edit.cshtml";
 }
 @using Common
@@ -42,7 +42,7 @@ else
 
     @*<input type="hidden" id="rowindex" value="0" />*@
     <div class="mt10" id="tongdao">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_moban" style="display:none" >
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_moban" style="display:none">
             <thead>
                 <tr>
                     <td colspan="9">
@@ -136,93 +136,94 @@ else
                         </select>
                         )
                     </th>
-                </tr>              
+                </tr>
             </thead>
 
-            <tbody id="tbody_moban">
-            <tr>
-    <td align="center" width="100">cosφ</td>
-    <td align="center" width="100">
-        <input name="" type="text" class="my-textbox tr" value="0.0" style="width:70px" onblur="JS1(this)" tableid="tongdao_1">
-        级
-    </td>
-    <td colspan="7" style="padding:0">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="subtbl">
-            <tr>
-                <td align="center" width="120">
-                    <input name="" type="text" class="my-textbox tr" value="0.5" style="width:70px">
-                    <span>L</span>
-                </td>
-                <td width="120" align="center">
-                    <input name="" type="text" class="my-textbox tr" value="60" style="width:70px">
-                    <span>°</span>
-                </td>
-                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
-            </tr>
-            <tr>
-                <td align="center" width="120">
-                    <input name="" type="text" class="my-textbox tr" value="0.8" style="width:70px">
-                    <span>L</span>
-                </td>
-                <td width="120" align="center">
-                    <input name="" type="text" class="my-textbox tr" value="30" style="width:70px">
-                    <span>°</span>
-                </td>
-                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
-            </tr>
-            <tr>
-                <td align="center" width="120">
-                    <input name="" type="text" class="my-textbox tr" value="1.0" style="width:70px">
-                    <span>&nbsp;</span>
-                </td>
-                <td width="120" align="center">
-                    <input name="" type="text" class="my-textbox tr" value="0" style="width:70px">
-                    <span>°</span>
-                </td>
-                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
-            </tr>
-            <tr>
-                <td align="center" width="120">
-                    <input name="" type="text" class="my-textbox tr" value="0.8" style="width:70px">
-                    <span>C</span>
-                </td>
-                <td width="120" align="center">
-                    <input name="" type="text" class="my-textbox tr" value="330" style="width:70px">
-                    <span>°</span>
-                </td>
-                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
-            </tr>
-            <tr>
-                <td align="center" width="120">
-                    <input name="" type="text" class="my-textbox tr" value="0.5" style="width:70px">
-                    <span>C</span>
-                </td>
-                <td width="120" align="center">
-                    <input name="" type="text" class="my-textbox tr" value="360" style="width:70px">
-                    <span>°</span>
-                </td>
-                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
-            </tr>
+            <tbody id="tbody_moban_1">
+                <tr>
+                    <td align="center" width="100">cosφ</td>
+                    <td align="center" width="100">
+                        <input name="" type="text" class="my-textbox tr" value="0.0" style="width:70px" onblur="JS1(this)" tableid="tongdao_1">
+                        级
+                    </td>
+                    <td colspan="7" style="padding:0">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="subtbl">
+                            <tbody id="tbody_moban">
+                                <tr>
+                                    <td align="center" width="120">
+                                        <input name="" type="text" class="my-textbox tr" value="0.5" style="width:70px">
+                                        <span>L</span>
+                                    </td>
+                                    <td width="120" align="center">
+                                        <input name="" type="text" class="my-textbox tr" value="60" style="width:70px">
+                                        <span>°</span>
+                                    </td>
+                                    <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                    <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                    <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                    <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
+                                </tr>
+                                <tr>
+                                    <td align="center" width="120">
+                                        <input name="" type="text" class="my-textbox tr" value="0.8" style="width:70px">
+                                        <span>L</span>
+                                    </td>
+                                    <td width="120" align="center">
+                                        <input name="" type="text" class="my-textbox tr" value="30" style="width:70px">
+                                        <span>°</span>
+                                    </td>
+                                    <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                    <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                    <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                    <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
+                                </tr>
+                                <tr>
+                                    <td align="center" width="120">
+                                        <input name="" type="text" class="my-textbox tr" value="1.0" style="width:70px">
+                                        <span>&nbsp;</span>
+                                    </td>
+                                    <td width="120" align="center">
+                                        <input name="" type="text" class="my-textbox tr" value="0" style="width:70px">
+                                        <span>°</span>
+                                    </td>
+                                    <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                    <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                    <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                    <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
+                                </tr>
+                                <tr>
+                                    <td align="center" width="120">
+                                        <input name="" type="text" class="my-textbox tr" value="0.8" style="width:70px">
+                                        <span>C</span>
+                                    </td>
+                                    <td width="120" align="center">
+                                        <input name="" type="text" class="my-textbox tr" value="330" style="width:70px">
+                                        <span>°</span>
+                                    </td>
+                                    <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                    <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                    <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                    <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
+                                </tr>
+                                <tr>
+                                    <td align="center" width="120">
+                                        <input name="" type="text" class="my-textbox tr" value="0.5" style="width:70px">
+                                        <span>C</span>
+                                    </td>
+                                    <td width="120" align="center">
+                                        <input name="" type="text" class="my-textbox tr" value="360" style="width:70px">
+                                        <span>°</span>
+                                    </td>
+                                    <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                    <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                    <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
+                                    <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
+                                </tr>
 
-
-        </table>
-    </td>
-</tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
             </tbody>
             <tfoot>
                 <tr>
@@ -253,17 +254,17 @@ else
 
         </table>
     </div>
-    <input type="hidden" id="hideDangQianTongDao" value="0"/>    
-    <input type="hidden" id="hideTongDaoShuLiang" value="0" />  
+    <input type="hidden" id="hideDangQianTongDao" value="0" />
+    <input type="hidden" id="hideTongDaoShuLiang" value="0" />
     <input type="hidden" id="txtPoint" value="1" />
-    <input type="hidden" id="txtNumber" value="1" />  
+    <input type="hidden" id="txtNumber" value="1" />
 </div>
 
 <script src="/Scripts/JScript-JianCeXiang-Common.js"></script>
 <script type="text/javascript" language="javascript">
     //var RuleID = $("#hideRULEID").val();//检测项目ID
     //var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
-    // $Tongdao_moban//模板   
+    // $Tongdao_moban//模板
     //设置当前操作通道
     function set(tbodyIndex) {
 
@@ -305,7 +306,7 @@ else
             //测量点
             htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, "", "<span>C</span>"));
             //二次输入标准值
-            htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx,"", "<span>°</span>"));
+            htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, "", "<span>°</span>"));
             //标准输出值
             htmlString.push(SetTDHtml(1, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx, ""));
             //实际输出值
