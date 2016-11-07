@@ -660,6 +660,6 @@
 			<Code>UCB</Code>
 			<!--下标后几位，如果没有填-1-->
 			<SubscriptLastCount>2</SubscriptLastCount>
-		</SpecialCharacter>			
+		</SpecialCharacter>
 	</SpecialCharacterList>
 </SpecialCharacters>
