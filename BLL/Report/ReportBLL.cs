@@ -571,6 +571,7 @@ namespace Langben.Report
         /// <param name="DongTaiShuJuList">动态数据值</param>
         /// <param name="rowInfoList">动态数据位置</param>
         /// <param name="sourceCell">单元格</param>
+        /// <param name="targetCell">目标单元格</param>
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <returns></returns>
         private HSSFRichTextString GetDongTaiShuJu(List<string> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, ICell sourceCell = null, ICell targetCell = null, SpecialCharacters allSpecialCharacters = null)
@@ -579,7 +580,7 @@ namespace Langben.Report
             if (targetCell != null && targetCell.Sheet != null && targetCell.Sheet.Workbook != null)
             {
                 workbook = (HSSFWorkbook)targetCell.Sheet.Workbook;
-            }
+            }           
             HSSFRichTextString result = null;
             if (sourceCell == null)
             {
@@ -603,7 +604,7 @@ namespace Langben.Report
                     result = new HSSFRichTextString(value);
                     if (DongTaiShuJuList[0] != null && speStartIndex>=0)
                     {
-                        if (DongTaiShuJuList[0].Trim() != "" && allSpecialCharacters != null && allSpecialCharacters.SpecialCharacterList != null &&
+                        if (workbook != null && DongTaiShuJuList[0].Trim() != "" && allSpecialCharacters != null && allSpecialCharacters.SpecialCharacterList != null &&
                             allSpecialCharacters.SpecialCharacterList.Count > 0 &&
                             allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == DongTaiShuJuList[0].Trim().ToUpper()) != null)
                         {
@@ -614,7 +615,15 @@ namespace Langben.Report
                             normalFont.IsItalic = true;
                             normalFont.FontName = "宋体";
                             int startIndex = speStartIndex;
+                            if (startIndex < 0)
+                            {
+                                startIndex = 0;
+                            }
                             int endIndex = speStartIndex + spec.Code.Trim().Length - spec.SubscriptLastCount;
+                            if (endIndex < 0)
+                            {
+                                endIndex = 0;
+                            }
                             result.ApplyFont(startIndex, endIndex, normalFont);
                             #endregion
 
@@ -633,7 +642,15 @@ namespace Langben.Report
                                 //subscript.Color = HSSFColor.Red.Index;
                                 //HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
                                 startIndex = speStartIndex +spec.Code.Trim().Length- spec.SubscriptLastCount;
+                                if (startIndex < 0)
+                                {
+                                    startIndex = 0;
+                                }
                                 endIndex = speStartIndex + spec.Code.Trim().Length;
+                                if (endIndex < 0)
+                                {
+                                    endIndex = 0;
+                                }
                                 result.ApplyFont(startIndex, endIndex, subscript);                                
                             }
                             #endregion 
@@ -646,7 +663,77 @@ namespace Langben.Report
             }
             return new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
         }
+        /// <summary>
+        /// 设置下标\斜体\宋体
+        /// </summary>
+        /// <param name="workbook">工作文件</param>
+        /// <param name="allSpecialCharacters">特殊字符配置信息</param>
+        /// <param name="value">特殊字符</param>
+        /// <returns></returns>
+        private HSSFRichTextString SetSub(HSSFWorkbook workbook=null, SpecialCharacters allSpecialCharacters = null, string value = "")
+        {
+            if(value==null)
+            {
+                value = ""; 
+            }
+            //HSSFWorkbook workbook = null;
+            //if (targetCell != null && targetCell.Sheet != null && targetCell.Sheet.Workbook != null)
+            //{
+            //    workbook = (HSSFWorkbook)targetCell.Sheet.Workbook;
+            //}
+            HSSFRichTextString result = new HSSFRichTextString(value.Trim());
 
+            if (workbook != null && value != null && value.Trim() != ""
+                && allSpecialCharacters != null && allSpecialCharacters.SpecialCharacterList != null &&
+                allSpecialCharacters.SpecialCharacterList.Count > 0 &&
+                allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == value.Trim().ToUpper()) != null)
+            {
+                SpecialCharacter spec = allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == value.Trim().ToUpper());
+                #region 将字符设置成斜体
+
+                HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                normalFont.IsItalic = true;
+                normalFont.FontName = "宋体";
+                int startIndex = 0 ;
+                int endIndex =  spec.Code.Trim().Length-1;
+                if(endIndex<0)
+                {
+                    endIndex = 0;
+                }
+                result.ApplyFont(startIndex, endIndex, normalFont);
+                #endregion
+
+                #region 设置下标
+                if (spec.SubscriptLastCount > 0)
+                {
+                    //result = new HSSFRichTextString(value);
+                    // superscript = (HSSFFont)workbook.CreateFont();
+                    //superscript.TypeOffset = FontSuperScript.Super;//上标
+                    //superscript.Color = HSSFColor.RED.index;
+
+                    HSSFFont subscript = (HSSFFont)workbook.CreateFont();
+                    subscript.TypeOffset = FontSuperScript.Sub; //下标  
+                    subscript.IsItalic = true;
+                    subscript.FontName = "宋体";
+                    //subscript.Color = HSSFColor.Red.Index;
+                    //HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                    startIndex = spec.Code.Trim().Length - spec.SubscriptLastCount;
+                    if (startIndex < 0)
+                    {
+                        startIndex = 0;
+                    }
+                    endIndex =  spec.Code.Trim().Length;
+                    if (endIndex < 0)
+                    {
+                        endIndex = 0;
+                    }
+                    result.ApplyFont(startIndex, endIndex, subscript);
+                }
+                #endregion                 
+            }
+            return result;
+
+        }
         /// <summary>
         /// 获取单元格数据及动态数据组合
         /// </summary>
@@ -1106,9 +1193,12 @@ namespace Langben.Report
                                                 {
                                                     sheet_Destination.GetRow(i).GetCell(cellIndex).SetCellValue("");
                                                 }
-                                            }                                           
-                                            
-                                            sheet_Destination.GetRow(dic[Id.ToString()]).GetCell(cellIndex).SetCellValue(Value.ToString());
+                                            }
+
+                                            //sheet_Destination.GetRow(dic[Id.ToString()]).GetCell(cellIndex).SetCellValue(Value.ToString());
+                                            HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, Value.ToString());
+                                            sheet_Destination.GetRow(dic[Id.ToString()]).GetCell(cellIndex).SetCellValue(value);
+
                                         }
                                     }
                                     catch (Exception ex)
@@ -1171,8 +1261,11 @@ namespace Langben.Report
                                                     {
                                                         sheet_Destination.GetRow(i).GetCell(cellIndex).SetCellValue("");
                                                     }
-                                                }                                                
-                                                sheet_Destination.GetRow(dic[Id.ToString()]).GetCell(cellIndex).SetCellValue(Value.ToString());
+                                                }
+                                                //sheet_Destination.GetRow(dic[Id.ToString()]).GetCell(cellIndex).SetCellValue(Value.ToString());
+                                                HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, Value.ToString());
+                                                sheet_Destination.GetRow(dic[Id.ToString()]).GetCell(cellIndex).SetCellValue(value);
+
                                             }
                                         }
                                         catch (Exception ex)
