@@ -1,6 +1,6 @@
 ﻿@model Langben.DAL.ORDER_TASK_INFORMATION
- 
-@{ 
+
+@{
     ViewBag.Title = "签字";
     Layout = "~/Views/Shared/QianZi.cshtml";
 }
@@ -25,14 +25,36 @@
     }
 
         .editor-field .text-box {
-            width: 180px;
+            width: 99%;
+            border: none;
         }
 
-        .editor-field .easyui-combobox {
-            width: 180px;
+        .editor-field .my-combobox {
+            width: auto;
+            border: none;
+        }
+
+        .editor-field textarea {
+            width: 96%;
+            border: none;
+        }
+
+    .my-btn {
+        cursor: pointer;
+        font-size: 14px;
+        background: #006F69;
+        color: #fff;
+        padding: 0 15px;
+        border: none;
+        border-radius: 4px;
+        height: 38px;
+        font-family: 'Microsoft YaHei';
+    }
+
+        .my-btn:hover {
+            background: #08B2AA;
         }
 </style>
-
 <div class="easyui-layout">
     <div class="bigdiv" style="width: auto" id="order">
         <div class="editor-form">
@@ -40,7 +62,7 @@
                 @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
             </div>
             <div class="editor-field">
-                @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "华北电力科学研究院有限责任公司", new { @class = "easyui-combobox" })
+                @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "华北电力科学研究院有限责任公司", new { @class = "my-combobox" })
             </div>
         </div>
         <div class="editor-form">
@@ -48,7 +70,7 @@
                 @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
             </div>
             <div class="editor-field">
-                @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
+                @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "my-combobox" })
             </div>
         </div>
         <div class="editor-form">
@@ -60,9 +82,7 @@
                 @Html.ValidationMessageFor(model => model.INSPECTION_ENTERPRISE_ADDRESS)
             </div>
         </div>
-
         <div class="editor-form">
-
             <div class="editor-label">
                 @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_POST)：
             </div>
@@ -90,7 +110,6 @@
             </div>
         </div>
         <div class="editor-form">
-
             <div class="editor-label">
                 @Html.LabelFor(model => model.FAX)：
             </div>
@@ -104,7 +123,7 @@
                 <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE)：
             </div>
             <div class="editor-field">
-                @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
+                @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "my-combobox" })
             </div>
         </div>
         <div class="editor-form">
@@ -117,7 +136,6 @@
             </div>
         </div>
         <div class="editor-form">
-
             <div class="editor-label">
                 @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_POST)：
             </div>
@@ -145,11 +163,9 @@
             </div>
         </div>
         <div class="editor-form">
-
             <div class="editor-label">
                 @Html.LabelFor(model => model.FAX2)：
             </div>
-
             <div class="editor-field">
                 @Html.EditorFor(model => model.FAX2)
                 @Html.ValidationMessageFor(model => model.FAX2)
@@ -159,7 +175,7 @@
         <div class="editor-label">
             @Html.LabelFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)：
         </div>
-        <div class="editor-field" style="height:auto">
+        <div class="editor-field" style="height:auto; width:550px">
             @Html.TextAreaFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
             @Html.ValidationMessageFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)
         </div>
@@ -169,8 +185,182 @@
     <div class="p5 mt10">
         <table id="ApplianceDate" singleselect="true"></table>
     </div>
-</div>
 
+    <!--data list-->
+    <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" width="100%">
+        <tr>
+            <th width="20%">器具名称</th>
+            <th width="15%">型号</th>
+            <th width="15%">规格</th>
+            <th width="15%">出厂编号</th>
+            <th width="10%">数量</th>
+            <th>附件</th>
+        </tr>
+        <tr>
+            <td class="tc">445455656565</td>
+            <td class="tc">445455656565</td>
+            <td class="tc">445455656565</td>
+            <td class="tc">4456565</td>
+            <td class="tc">4465</td>
+            <td class="tc">无</td>
+        </tr>
+        <tr>
+            <th>外观状态</th>
+            <th>制造单位</th>
+            <th>承接实验室</th>
+            <th>器具接收</th>
+            <th colspan="2">备注</th>
+
+        </tr>
+        <tr>
+            <td class="tc">良好</td>
+            <td class="tc">廊坊公司</td>
+            <td class="tc">数表三相</td>
+            <td class="tc">否</td>
+            <td colspan="2" class="tc">4465</td>
+
+        </tr>
+    </table>
+    <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" width="100%">
+        <tr>
+            <th width="20%">器具名称</th>
+            <th width="15%">型号</th>
+            <th width="15%">规格</th>
+            <th width="15%">出厂编号</th>
+            <th width="10%">数量</th>
+            <th>附件</th>
+        </tr>
+        <tr>
+            <td class="tc">445455656565</td>
+            <td class="tc">445455656565</td>
+            <td class="tc">445455656565</td>
+            <td class="tc">4456565</td>
+            <td class="tc">4465</td>
+            <td class="tc">无</td>
+        </tr>
+        <tr>
+            <th>外观状态</th>
+            <th>制造单位</th>
+            <th>承接实验室</th>
+            <th>器具接收</th>
+            <th colspan="2">备注</th>
+
+        </tr>
+        <tr>
+            <td class="tc">良好</td>
+            <td class="tc">廊坊公司</td>
+            <td class="tc">数表三相</td>
+            <td class="tc">否</td>
+            <td colspan="2" class="tc">4465</td>
+
+        </tr>
+    </table>
+    <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" width="100%">
+        <tr>
+            <th width="20%">器具名称</th>
+            <th width="15%">型号</th>
+            <th width="15%">规格</th>
+            <th width="15%">出厂编号</th>
+            <th width="10%">数量</th>
+            <th>附件</th>
+        </tr>
+        <tr>
+            <td class="tc">445455656565</td>
+            <td class="tc">445455656565</td>
+            <td class="tc">445455656565</td>
+            <td class="tc">4456565</td>
+            <td class="tc">4465</td>
+            <td class="tc">无</td>
+        </tr>
+        <tr>
+            <th>外观状态</th>
+            <th>制造单位</th>
+            <th>承接实验室</th>
+            <th>器具接收</th>
+            <th colspan="2">备注</th>
+
+        </tr>
+        <tr>
+            <td class="tc">良好</td>
+            <td class="tc">廊坊公司</td>
+            <td class="tc">数表三相</td>
+            <td class="tc">否</td>
+            <td colspan="2" class="tc">4465</td>
+
+        </tr>
+    </table>
+    <!--/data list-->
+    <!--data list2-->
+    <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" width="100%">
+        <tr>
+            <th width="80">器具名称</th>
+            <td width="180">5495495</td>
+            <th width="80">型号</th>
+            <td width="180">5495495</td>
+            <th width="80">规格</th>
+            <td>5495495</td>
+
+        </tr>
+        <tr>
+            <th>出厂编号</th>
+            <td>5495495</td>
+            <th>数量</th>
+            <td>5495495</td>
+            <th>附件</th>
+            <td>5495495</td>
+        </tr>
+        <tr>
+            <th>外观状态</th>
+            <td>5495495</td>
+            <th>制造单位</th>
+            <td>5495495</td>
+            <th>承接实验室</th>
+            <td>5495495</td>
+        </tr>
+        <tr>
+            <th ">器具接收</th>
+            <td>5495495</td>
+            <th>备注</th>
+            <td colspan="3">5495495</td>
+
+        </tr>
+    </table>
+    <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" width="100%">
+        <tr>
+            <th width="80">器具名称</th>
+            <td width="180">5495495</td>
+            <th width="80">型号</th>
+            <td width="180">5495495</td>
+            <th width="80">规格</th>
+            <td>5495495</td>
+
+        </tr>
+        <tr>
+            <th>出厂编号</th>
+            <td>5495495</td>
+            <th>数量</th>
+            <td>5495495</td>
+            <th>附件</th>
+            <td>5495495</td>
+        </tr>
+        <tr>
+            <th>外观状态</th>
+            <td>5495495</td>
+            <th>制造单位</th>
+            <td>5495495</td>
+            <th>承接实验室</th>
+            <td>5495495</td>
+        </tr>
+        <tr>
+            <th ">器具接收</th>
+            <td>5495495</td>
+            <th>备注</th>
+            <td colspan="3">5495495</td>
+
+        </tr>
+    </table>
+    <!--/data list2-->
+</div>
 
 <script type="text/javascript">
 
@@ -178,7 +368,7 @@
 
         $('#ApplianceDate').edatagrid({
             singleSelect: false,
-            
+
             columns: [[
        { field: 'ID', title: 'id', width: 64, hidden: true }
        , {
@@ -254,7 +444,7 @@
            , {
                field: 'REMARKS', title: '备注', width: 135, editor: 'textbox'
            }
-         
+
             ]]
         });
         $.ajax({
@@ -303,53 +493,19 @@
 </script>
 
 
-
-<style type="text/css">
-    .style1 {
-        font-size: xx-large;
-        font-family: 宋体, Arial, Helvetica, sans-serif;
-        color: #FF3399;
-    }
-
-    .style2 {
-        font-size: 16px;
-        font-family: 宋体, Arial, Helvetica, sans-serif;
-        color: #FF3399;
-    }
-
-    .style3 {
-        font-size: 12px;
-        font-family: 宋体, Arial, Helvetica, sans-serif;
-        color: #000000;
-    }
-
-    .style4 {
-        font-size: 12px;
-        font-family: 宋体, Arial, Helvetica, sans-serif;
-        color: #FF0000;
-    }
-</style>
-
-<table border="0" align="center" cellpadding="3" cellspacing="0">
-    <tr class="style7">
-        <td width="30%" vAlign="center" height="217" align="right">
-            <P>
-                签字区域：
-            </P>
-        </td>
-        <td align="left">
-            <object id="HWPenSign"
-                    name="HWPenSign"
-                    classid="clsid:E8F5278C-0C72-4561-8F7E-CCBC3E48C2E3"
-                    width="700"
-                    height="385"></object>
-        </td>
-    </tr>
-</table>
-<input id="Button3" type="button" value="重新签字" onclick="return Button3_onclick()" />
-
-<input id="Button14" type="button" value="签字后，打印委托单，同时发送实验室" onclick="return Button14_onclick()" />
-
+<div style="position:relative; height:385px" class="mt10 tc">
+    <span style="display:block; height:40px; width:100px; position:absolute; z-index:1;top:5px; left:5px"> 签字区域</span>
+    <object id="HWPenSign"
+            name="HWPenSign"
+            classid="clsid:E8F5278C-0C72-4561-8F7E-CCBC3E48C2E3"
+            width="700"
+            height="385"></object>
+</div>
+<div class="tr mt10">
+    <input id="Button3" type="button" value="重新签字" class="my-btn" onclick="return Button3_onclick()" />
+    <input id="Button14" type="button" value="签字后，打印委托单，同时发送实验室" class="my-btn" onclick="return Button14_onclick()" />
+</div>
+<br />
 <script language="javascript" type="text/javascript">
 
  var obj;
@@ -367,7 +523,7 @@ window.onload = function(){
     //初始化代码
 		  var res;
 		  res = obj.HWInitialize();
-		 
+
                 }
 
 
@@ -393,11 +549,11 @@ function Button14_onclick() {
        url: "/ORDER_TASK_INFORMATION/QianZi/@ViewBag.Id",
        type: "Put",
        dataType: "json",
-       data: { PICTURE: stream, HTMLVALUE: encodeURI($("#order").html()) },
+       data: { s: stream },
        success: function (data) {
            if (data.Code == 1) {
                window.print();//打印
-               //alert("签字成功，并成功发送实验室");
+               alert("签字成功，并成功发送实验室");
                window.location.href = "/ORDER_TASK_INFORMATION/ErWeiMa/@ViewBag.Id";
            }
            else {
