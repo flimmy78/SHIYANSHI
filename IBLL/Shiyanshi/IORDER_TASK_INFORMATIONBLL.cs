@@ -25,21 +25,13 @@ namespace Langben.IBLL
         [OperationContract]
         bool EditSTATUS(ref ValidationErrors validationErrors, string id, SIGN sign);
         /// <summary>
-        /// 修改编号
-        /// </summary>
-        /// <param name="validationErrors"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [OperationContract]
-        bool UPORDER_NUMBER(ref ValidationErrors validationErrors, string id);
-        /// <summary>
         /// 获取委托单号
         /// </summary>
         /// <param name="validationErrors"></param>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>委托单号*编号*年份</returns>
         [OperationContract]
-        string GetORDER_NUMBER(ref ValidationErrors validationErrors, string id);
+        string GetORDER_NUMBER(ref ValidationErrors validationErrors);
     }
 
 
