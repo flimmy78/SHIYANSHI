@@ -47,7 +47,7 @@ else
                 <tr>
                     <td colspan="9">
                         通道：
-                        <select class="my-combobox" name="" id="">
+                        <select class="my-combobox" name="" id="BianSongQiTongDao">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -145,10 +145,10 @@ else
                         )
                     </th>
                 </tr>
-        
+
             </thead>
-          
-            <tbody id="tbody_moban">
+
+            <tbody id="tbody_moban_1">
                 <tr>
                     <td align="center" width="100">I</td>
                     <td align="center" width="100">
@@ -157,82 +157,31 @@ else
                     </td>
                     <td colspan="7" style="padding:0">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="subtbl">
-                            <tr>
-                                <td align="center" width="120">
-                                    <input name="" type="text" class="my-textbox tr" value="100%" style="width:70px">
-                                    <span>I<sub>n</sub></span>
-                                </td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="5.000" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="20.000" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
-                            </tr>
-                            <tr>
-                                <td align="center" width="120">
-                                    <input name="" type="text" class="my-textbox tr" value="80%" style="width:70px">
-                                    <span>I<sub>n</sub></span>
-                                </td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="4.000" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="16.800" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
-                            </tr>
-                            <tr>
-                                <td align="center" width="120">
-                                    <input name="" type="text" class="my-textbox tr" value="60%" style="width:70px">
-                                    <span>I<sub>n</sub></span>
-                                </td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="3.000" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="13.600" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
-                            </tr>
-                            <tr>
-                                <td align="center" width="120">
-                                    <input name="" type="text" class="my-textbox tr" value="40%" style="width:70px">
-                                    <span>I<sub>n</sub></span>
-                                </td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="2.000" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="10.400" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
-                            </tr>
-                            <tr>
-                                <td align="center" width="120">
-                                    <input name="" type="text" class="my-textbox tr" value="20%" style="width:70px">
-                                    <span>I<sub>n</sub></span>
-                                </td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="1.000" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="7.200" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
-                            </tr>
-                            <tr>
-                                <td align="center" width="120">
-                                    <input name="" type="text" class="my-textbox tr" value="0%" style="width:70px">
-                                    <span>I<sub>n</sub></span>
-                                </td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="0.000" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="4.000" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                                <td width="100"><input name="" type="text" class="my-textbox tr" value="" style="width:99%"></td>
-                                <td><input name="" type="text" class="my-textbox tr" value="" style="width:100%"></td>
-                            </tr>
 
+                            <tbody id="tbody_moban">
+                                <tr rowindex="1">
+                                    <td rowspan="1" align="right" width="120"> <input class="my-textbox input-width" value="" id="OUTPUT_VALUE_1_1_0" name="OUTPUT_VALUE" onblur="blurValue(this)" type="text"><span>I<sub>n</sub></span></td>
+                                    <td rowspan="1" align="right"  width="100"> <input class="my-textbox input-width" value="" id="READ_VALUE_1_1_0" name="READ_VALUE" onblur="blurValue(this)" type="text"></td>
+                                    <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="ACTUAL_OUTPUT_VALUE_1_1_0" name="ACTUAL_OUTPUT_VALUE" onblur="blurValue(this)" type="text"></td>
+                                    <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_0" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
+                                    <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="RELATIVE_ERROR_1_1_0" name="RELATIVE_ERROR" onblur="blurValue(this)" type="text"></td>
+                                    <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTY_DEGREE_1_1_0" name="UNCERTAINTY_DEGREE" onblur="blurValue(this)" type="text"></td>
+                                </tr>
+                                <tr rowindex="2"><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="OUTPUT_VALUE_1_2_0" name="OUTPUT_VALUE" onblur="blurValue(this)" type="text"><span>I<sub>n</sub></span></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READ_VALUE_1_2_0" name="READ_VALUE" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="ACTUAL_OUTPUT_VALUE_1_2_0" name="ACTUAL_OUTPUT_VALUE" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_2_0" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVE_ERROR_1_2_0" name="RELATIVE_ERROR" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTY_DEGREE_1_2_0" name="UNCERTAINTY_DEGREE" onblur="blurValue(this)" type="text"></td></tr>
+                                <tr rowindex="3"><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="OUTPUT_VALUE_1_3_0" name="OUTPUT_VALUE" onblur="blurValue(this)" type="text"><span>I<sub>n</sub></span></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READ_VALUE_1_3_0" name="READ_VALUE" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="ACTUAL_OUTPUT_VALUE_1_3_0" name="ACTUAL_OUTPUT_VALUE" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_3_0" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVE_ERROR_1_3_0" name="RELATIVE_ERROR" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTY_DEGREE_1_3_0" name="UNCERTAINTY_DEGREE" onblur="blurValue(this)" type="text"></td></tr>
+                                <tr rowindex="4"><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="OUTPUT_VALUE_1_4_0" name="OUTPUT_VALUE" onblur="blurValue(this)" type="text"><span>I<sub>n</sub></span></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READ_VALUE_1_4_0" name="READ_VALUE" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="ACTUAL_OUTPUT_VALUE_1_4_0" name="ACTUAL_OUTPUT_VALUE" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_4_0" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVE_ERROR_1_4_0" name="RELATIVE_ERROR" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTY_DEGREE_1_4_0" name="UNCERTAINTY_DEGREE" onblur="blurValue(this)" type="text"></td></tr>
+                                <tr rowindex="5"><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="OUTPUT_VALUE_1_5_0" name="OUTPUT_VALUE" onblur="blurValue(this)" type="text"><span>I<sub>n</sub></span></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READ_VALUE_1_5_0" name="READ_VALUE" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="ACTUAL_OUTPUT_VALUE_1_5_0" name="ACTUAL_OUTPUT_VALUE" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_5_0" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVE_ERROR_1_5_0" name="RELATIVE_ERROR" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTY_DEGREE_1_5_0" name="UNCERTAINTY_DEGREE" onblur="blurValue(this)" type="text"></td></tr>
+                                <tr rowindex="6"><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="OUTPUT_VALUE_1_6_0" name="OUTPUT_VALUE" onblur="blurValue(this)" type="text"><span>I<sub>n</sub></span></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READ_VALUE_1_6_0" name="READ_VALUE" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="ACTUAL_OUTPUT_VALUE_1_6_0" name="ACTUAL_OUTPUT_VALUE" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_6_0" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVE_ERROR_1_6_0" name="RELATIVE_ERROR" onblur="blurValue(this)" type="text"></td><td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTY_DEGREE_1_6_0" name="UNCERTAINTY_DEGREE" onblur="blurValue(this)" type="text"></td></tr>
+                            </tbody>
                         </table>
                     </td>
                 </tr>
-                
+
             </tbody>
             <tfoot>
                 <tr>
                     <td colspan="7">
-                        <input type="hidden" id="hideLiangChengShuLiang" value="0" />
+                        <input type="hidden" id="hideLiangChengShuLiang" value="6" />
                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
                     </td>
                 </tr>
@@ -302,7 +251,7 @@ else
             var HangHaoID = lianChengID + "_" + rowidx;//（行号ID)量程ID_第几行
             if (rowidx == 0) {
                 //需要合并的列
-             }
+            }
 
             //输出示值
 
@@ -314,7 +263,7 @@ else
             //标准输出值
             htmlString.push(SetTDHtml(1, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx, ""));
             //实际输出值
-            htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, ""));
+            htmlString.push(SetTDHtml(1, "SHIJISHUCHUZHI", HangHaoID, rowidx, ""));
             //引用误差
             htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, ""));
             //校准结果的不确定度
@@ -324,7 +273,7 @@ else
         htmlString = htmlString.join("");
         //var tagRow = $("#tbody_" + tableIdx).append(htmlString);
 
-        var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find(".subtbl").append(htmlString);
+        var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
         $.parser.parse(tagRow);//渲染easyui组建
         //$('#dlg').window('close');
         $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang)
