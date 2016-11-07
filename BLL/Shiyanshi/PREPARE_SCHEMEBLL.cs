@@ -56,21 +56,10 @@ namespace Langben.BLL
             String time = DateTime.Now.ToString("yyyy", DateTimeFormatInfo.InvariantInfo);//当前年
             PREPARE_SCHEME prepare = repository.GetById(id);//调用方法取数据
             string REPORTNUMBER = string.Empty;//证书编号
-            if (prepare.SERIALNUMBER!=null)
+            if (prepare.SERIALNUMBER != null)
             {
                 string SERIALNUMBER = prepare.SERIALNUMBER.ToString();
-                if (SERIALNUMBER.Length<2)
-                {
-                    SERIALNUMBER = SERIALNUMBER.PadLeft(3, '0');
-                }
-               else if (SERIALNUMBER.Length >=2&&SERIALNUMBER.Length <3)
-                {
-                    SERIALNUMBER = SERIALNUMBER.PadLeft(2, '0');
-                }
-                else if (SERIALNUMBER.Length >= 3 && SERIALNUMBER.Length < 4)
-                {
-                    SERIALNUMBER = SERIALNUMBER.PadLeft(1, '0');
-                }
+                SERIALNUMBER = SERIALNUMBER.PadLeft(4, '0');
                 REPORTNUMBER = "DC/" + prepare.REPORT_CATEGORY + "-" + SERIALNUMBER + "-" + time;
             }
             return REPORTNUMBER;
