@@ -14,6 +14,7 @@ namespace Langben.DAL
     
     public partial class VTEST_ITE
     {
+        public Nullable<decimal> RID { get; set; }
         public string ROW_FLAG { get; set; }
         public string PREPARE_SCHEMEID { get; set; }
         public string SCHEMEID { get; set; }

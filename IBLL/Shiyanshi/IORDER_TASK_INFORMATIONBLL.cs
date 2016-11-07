@@ -13,7 +13,7 @@ namespace Langben.IBLL
     /// </summary>
     public partial interface IORDER_TASK_INFORMATIONBLL
     {
-        
+
         /// <summary>
         /// 编辑一个对象
         /// </summary>
@@ -21,8 +21,11 @@ namespace Langben.IBLL
         /// <param name="entity">一个对象</param>
         /// <returns></returns>
         [OperationContract]
-        bool EditField(ref Common.ValidationErrors validationErrors, ORDER_TASK_INFORMATION entity); 
-    
+        bool EditField(ref Common.ValidationErrors validationErrors, ORDER_TASK_INFORMATION entity);
+        [OperationContract]
+        bool EditSTATUS(ref ValidationErrors validationErrors, string id, SIGN sign);
     }
+
+
 }
 

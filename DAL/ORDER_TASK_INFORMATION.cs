@@ -18,6 +18,7 @@ namespace Langben.DAL
         public ORDER_TASK_INFORMATION()
         {
             this.APPLIANCE_DETAIL_INFORMATION = new HashSet<APPLIANCE_DETAIL_INFORMATION>();
+            this.SIGN = new HashSet<SIGN>();
         }
     
         public string ID { get; set; }
@@ -41,8 +42,12 @@ namespace Langben.DAL
         public string CREATEPERSON { get; set; }
         public Nullable<System.DateTime> UPDATETIME { get; set; }
         public string UPDATEPERSON { get; set; }
+        public Nullable<decimal> ORSERIALNUMBER { get; set; }
+        public string ORYEARS { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<APPLIANCE_DETAIL_INFORMATION> APPLIANCE_DETAIL_INFORMATION { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SIGN> SIGN { get; set; }
     }
 }

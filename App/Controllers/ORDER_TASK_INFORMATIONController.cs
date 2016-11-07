@@ -40,7 +40,14 @@ namespace Langben.App.Controllers
             Stream stream = new MemoryStream(byt);
 
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
-
+            SIGN sign = new SIGN();
+            sign.PICTURE = s;
+            sign.HTMLVALUE = "";
+            string currentPerson = GetCurrentPerson();
+            sign.CREATETIME = DateTime.Now;
+            sign.CREATEPERSON = currentPerson;
+            sign.ID = Result.GetNewId();
+            m_BLL.EditSTATUS(ref validationErrors, id, sign);
             result.Code = Common.ClientCode.Succeed;
             result.Message = Suggestion.InsertSucceed;
       

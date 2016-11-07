@@ -47,14 +47,13 @@ namespace Langben.DAL
                 deleteItem.ORDER_STATUS = entity.ORDER_STATUS == null ? deleteItem.ORDER_STATUS : entity.ORDER_STATUS;
             }
         }
-        public void EditSTATUS(SysEntities db, string id, ORDER_TASK_INFORMATION entity)
+        public void EditSTATUS(SysEntities db, string id, SIGN sign)
         {
             ORDER_TASK_INFORMATION task = (from f in db.ORDER_TASK_INFORMATION
                                            where f.ID == id
                                            select f).FirstOrDefault();
             task.ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString();
-
-
+            task.SIGN.Add(sign);
             foreach (var item in task.APPLIANCE_DETAIL_INFORMATION)
             {
                 item.APPEARANCE_STATUS = Common.ORDER_STATUS.已分配.ToString();
