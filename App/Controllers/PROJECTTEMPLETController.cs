@@ -76,8 +76,9 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult BianSongQiDianLiuDianYa(string RULEID = "JJG126-1995_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult BianSongQiDianLiuDianYa(string id = "电流",string RULEID = "JJG126-1995_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
+            ViewBag.DianLiuDianYa = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
