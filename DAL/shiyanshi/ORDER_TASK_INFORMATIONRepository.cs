@@ -11,6 +11,14 @@ namespace Langben.DAL
     public partial class ORDER_TASK_INFORMATIONRepository : BaseRepository<ORDER_TASK_INFORMATION>, IDisposable
     {
         /// <summary>
+        /// 查找编号最大值
+        /// </summary>
+        /// <returns>编号最大值</returns>
+        public decimal? GetORSERIALNUMBERmax(SysEntities db, string time)
+        {
+            return db.ORDER_TASK_INFORMATION.Where(s => s.ORYEARS == time).Select(s => s.ORSERIALNUMBER).Max();
+        }
+        /// <summary>
         /// 修改对象(公用)
         /// </summary>
         /// <param name="db">实体数据</param>
