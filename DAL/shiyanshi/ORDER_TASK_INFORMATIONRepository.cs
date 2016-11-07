@@ -20,7 +20,7 @@ namespace Langben.DAL
             //数据库设置级联关系，自动删除子表的内容   
             IQueryable<ORDER_TASK_INFORMATION> collection = from f in db.ORDER_TASK_INFORMATION
                                                             where f.ID == entity.ID
-                                                                  select f;
+                                                            select f;
 
             foreach (var deleteItem in collection)
             {
@@ -45,6 +45,19 @@ namespace Langben.DAL
                 deleteItem.ORDER_STATUS = entity.ORDER_STATUS == null ? deleteItem.ORDER_STATUS : entity.ORDER_STATUS;
                 deleteItem.CUSTOMER_SPECIFIC_REQUIREMENTS = entity.CUSTOMER_SPECIFIC_REQUIREMENTS == null ? deleteItem.CUSTOMER_SPECIFIC_REQUIREMENTS : entity.CUSTOMER_SPECIFIC_REQUIREMENTS;
                 deleteItem.ORDER_STATUS = entity.ORDER_STATUS == null ? deleteItem.ORDER_STATUS : entity.ORDER_STATUS;
+            }
+        }
+        public void EditSTATUS(SysEntities db, string id, ORDER_TASK_INFORMATION entity)
+        {
+            ORDER_TASK_INFORMATION task = (from f in db.ORDER_TASK_INFORMATION
+                                           where f.ID == id
+                                           select f).FirstOrDefault();
+            task.ORDER_STATUS = Common.ORDER_STATUS.已分配.ToString();
+
+
+            foreach (var item in task.APPLIANCE_DETAIL_INFORMATION)
+            {
+                item.APPEARANCE_STATUS = Common.ORDER_STATUS.已分配.ToString();
             }
         }
 

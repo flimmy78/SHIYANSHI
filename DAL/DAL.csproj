@@ -270,6 +270,9 @@
     <Compile Include="shiyanshi\VTEST_ITEMeta.cs" />
     <Compile Include="shiyanshi\VTEST_ITERepository.cs" />
     <Compile Include="shiyanshi\VRULEMeta.cs" />
+    <Compile Include="SIGN.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="SysAnnouncement.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
