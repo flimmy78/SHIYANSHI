@@ -30,8 +30,8 @@ DanWeiDDLHtmlArray = [
 var RuleAttributeArray = new Array;
 RuleAttributeArray = [
     {
-        RuleID: '38-1987_2',//检测项编号
-        Remark: 'JJG(航天) 38-1987 直流标准电流源检定规程,直流电流输出',//检测项说明
+        RuleID: '38-1987_2_1',//检测项编号
+        Remark: '直流电流输出-相对误差',//检测项说明
         Attributes:
             [{
                 //添加通道按钮是否显示(show:显示，hidden:不显示)
@@ -53,7 +53,29 @@ RuleAttributeArray = [
     ,
     {
         RuleID: '315-1983_2_1',//检测项编号
-        Remark: '直流电压测量-正负极性-相对误差-单相',//检测项说明
+        Remark: '直流电压（电流）测量-非正负极性-相对误差（已做）',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '(RANGE_UNIT)|OUTPUT_VALUE_UNIT,READ_VALUE_UNIT,UNCERTAINTY_DEGREE_UNIT',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianYa|(RANGE_UNIT),(OUTPUT_VALUE_UNIT),(READ_VALUE_UNIT),(UNCERTAINTY_DEGREE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+    ,
+    {
+        RuleID: '315-1983_2_1',//检测项编号
+        Remark: '直流电压测量-非正负极性-相对误差（单相）',//检测项说明
         Attributes:
             [{
                 //添加通道按钮是否显示(show:显示，hidden:不显示)
@@ -75,7 +97,7 @@ RuleAttributeArray = [
     ,
     {
         RuleID: '315-1983_2_2',//检测项编号
-        Remark: '直流电压测量-正负极性-相对误差-多通道',//检测项说明
+        Remark: '直流电压测量-非正负极性-相对误差（多通道）',//检测项说明
         Attributes:
             [{
                 //添加通道按钮是否显示(show:显示，hidden:不显示)
@@ -96,12 +118,166 @@ RuleAttributeArray = [
     }
     ,
     {
-        RuleID: '34-1999_2_2',//检测项编号
-        Remark: '交流电压-相对误差-两相-多通道',//检测项说明
+        RuleID: '598-1989_2_3',//检测项编号
+        Remark: '直流电流测量-非正负极性-相对误差（单相）',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '(RANGE_UNIT)|OUTPUT_VALUE_UNIT,READ_VALUE_UNIT,UNCERTAINTY_DEGREE_UNIT',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianYa|(RANGE_UNIT),(OUTPUT_VALUE_UNIT),(READ_VALUE_UNIT),(UNCERTAINTY_DEGREE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+    ,
+    {
+        RuleID: '598-1989_2_4',//检测项编号
+        Remark: '直流电流测量-非正负极性-相对误差（多通道）',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '(RANGE_UNIT)|OUTPUT_VALUE_UNIT,READ_VALUE_UNIT,UNCERTAINTY_DEGREE_UNIT',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianYa|(RANGE_UNIT),(OUTPUT_VALUE_UNIT),(READ_VALUE_UNIT),(UNCERTAINTY_DEGREE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+    ,
+    {
+        RuleID: '445-1986_2_1',//检测项编号
+        Remark: '直流电压输出-非正负极性-相对误差',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '(RANGE_UNIT)|OUTPUT_VALUE_UNIT,READ_VALUE_UNIT,UNCERTAINTY_DEGREE_UNIT',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianYa|(RANGE_UNIT),(OUTPUT_VALUE_UNIT),(READ_VALUE_UNIT),(UNCERTAINTY_DEGREE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+    ,
+    {
+        RuleID: '315-1983_2_3',//检测项编号
+        Remark: '直流电压测量-正负极性-相对误差（单相）',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '(RANGE_UNIT)|OUTPUT_VALUE_UNIT,READ_VALUE_UNIT,UNCERTAINTY_DEGREE_UNIT',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianYa|(RANGE_UNIT),(OUTPUT_VALUE_UNIT),(READ_VALUE_UNIT),(UNCERTAINTY_DEGREE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+        ,
+    {
+        RuleID: '315-1983_2_4',//检测项编号
+        Remark: '直流电压测量-正负极性-相对误差（多通道）',//检测项说明
         Attributes:
             [{
                 //添加通道按钮是否显示(show:显示，hidden:不显示)
                 DuoTongDao: 'show',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '(RANGE_UNIT)|OUTPUT_VALUE_UNIT,READ_VALUE_UNIT,UNCERTAINTY_DEGREE_UNIT',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianYa|(RANGE_UNIT),(OUTPUT_VALUE_UNIT),(READ_VALUE_UNIT),(UNCERTAINTY_DEGREE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+        ,
+    {
+        RuleID: '598-1989_2_1',//检测项编号
+        Remark: '直流电流测量-正负极性-相对误差（单相）',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '(RANGE_UNIT)|OUTPUT_VALUE_UNIT,READ_VALUE_UNIT,UNCERTAINTY_DEGREE_UNIT',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianYa|(RANGE_UNIT),(OUTPUT_VALUE_UNIT),(READ_VALUE_UNIT),(UNCERTAINTY_DEGREE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+        ,
+    {
+        RuleID: '598-1989_2_2',//检测项编号
+        Remark: '直流电流测量-正负极性-相对误差（多通道）',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'show',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '(RANGE_UNIT)|OUTPUT_VALUE_UNIT,READ_VALUE_UNIT,UNCERTAINTY_DEGREE_UNIT',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianYa|(RANGE_UNIT),(OUTPUT_VALUE_UNIT),(READ_VALUE_UNIT),(UNCERTAINTY_DEGREE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+    ,
+    {
+        RuleID: '603-2006_3_2_1',//检测项编号
+        Remark: '频率输出-相对误差',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'hidden',
                 //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
@@ -116,14 +292,14 @@ RuleAttributeArray = [
                 CalculateForAddLianCheng: ',OUTPUT_VALUE,'
             }]
     }
-    ,
+        ,
     {
-        RuleID: '34-1999_2_4',//检测项编号
-        Remark: '交流电压-相对误差-三相-多通道',//检测项说明
+        RuleID: '603-2006_3_1_1',//检测项编号
+        Remark: '频率测量-相对误差',//检测项说明
         Attributes:
             [{
                 //添加通道按钮是否显示(show:显示，hidden:不显示)
-                DuoTongDao: 'show',
+                DuoTongDao: 'hidden',
                 //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
@@ -138,10 +314,10 @@ RuleAttributeArray = [
                 CalculateForAddLianCheng: ',OUTPUT_VALUE,'
             }]
     }
-    ,
+     ,
     {
-        RuleID: '34-1999_2_41',//检测项编号
-        Remark: '频率输出-频率测量-相对误差',//检测项说明
+        RuleID: '410-1994_6_1',//检测项编号
+        Remark: '交流电压输出-电压误差-两相',//检测项说明
         Attributes:
             [{
                 //添加通道按钮是否显示(show:显示，hidden:不显示)
@@ -162,8 +338,30 @@ RuleAttributeArray = [
     }
     ,
     {
-        RuleID: '35-1999_2_2',//检测项编号
-        Remark: '交流电流-相对误差-两相-多通道',//检测项说明
+        RuleID: '34-1999_3_3',//检测项编号
+        Remark: '交流电压测量-交流电压测量-两相',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianLiu|(RANGE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+      ,
+    {
+        RuleID: '34-1999_3_4',//检测项编号
+        Remark: '交流电压测量-相对误差-两相-多通道',//检测项说明
         Attributes:
             [{
                 //添加通道按钮是否显示(show:显示，hidden:不显示)
@@ -182,10 +380,274 @@ RuleAttributeArray = [
                 CalculateForAddLianCheng: ',OUTPUT_VALUE,'
             }]
     }
+      ,
+    {
+        RuleID: '35-1999_3_3',//检测项编号
+        Remark: '交流电流测量-相对误差-两相',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianLiu|(RANGE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+      ,
+    {
+        RuleID: '35-1999_3_4',//检测项编号
+        Remark: '交流电流测量-相对误差-两相-多通道',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'show',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianLiu|(RANGE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+      ,
+    {
+        RuleID: '51-1999_3_1',//检测项编号
+        Remark: '交流电流输出-相对误差-两相',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianLiu|(RANGE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
     ,
     {
-        RuleID: '35-1999_2_4',//检测项编号
-        Remark: '交流电流-相对误差-三相-多通道',//检测项说明
+        RuleID: '410-1994_6_2',//检测项编号
+        Remark: '交流电压输出-相对误差-三相',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianLiu|(RANGE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+        ,
+    {
+        RuleID: '34-1999_3_5',//检测项编号
+        Remark: '交流电压测量-相对误差-三相',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianLiu|(RANGE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+        ,
+    {
+        RuleID: '34-1999_3_6',//检测项编号
+        Remark: '交流电压测量-相对误差-三相-多通道',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'show',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianLiu|(RANGE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+        ,
+    {
+        RuleID: '35-1999_3_5',//检测项编号
+        Remark: '交流电流测量-相对误差-三相',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianLiu|(RANGE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+        ,
+    {
+        RuleID: '51-1999_3_2',//检测项编号
+        Remark: '交流电流输出-相对误差-三相',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianLiu|(RANGE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+        ,
+    {
+        RuleID: '35-1999_3_6',//检测项编号
+        Remark: '交流电流测量-相对误差-三相-多通道',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'show',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianLiu|(RANGE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+     ,
+    {
+        RuleID: '34-1999_3_1',//检测项编号
+        Remark: '交流电压测量-相对误差-单相',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianLiu|(RANGE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+     ,
+    {
+        RuleID: '34-1999_3_2',//检测项编号
+        Remark: '交流电压测量-相对误差-单相(多通道）',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'show',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianLiu|(RANGE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+     ,
+    {
+        RuleID: '35-1999_3_1',//检测项编号
+        Remark: '交流电流测量-相对误差-单相',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: 'DianLiu|(RANGE_UNIT);',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+            }]
+    }
+     ,
+    {
+        RuleID: '35-1999_3_2',//检测项编号
+        Remark: '交流电流测量-相对误差-单相(多通道）',//检测项说明
         Attributes:
             [{
                 //添加通道按钮是否显示(show:显示，hidden:不显示)
