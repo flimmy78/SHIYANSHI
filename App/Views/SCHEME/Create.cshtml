@@ -126,7 +126,7 @@
             onClick: function (node) {
                 var ID = $("#hideID").val();
                 if ($('#tt').tree('isLeaf', node.target)) {
-                    if (node.attributes != null && node.attributes.url != null && node.attributes.url.trim() != "") {
+                    if (node != null && node.url != null && node.url.trim() != "") {
                         if ($('#tt').tree('isLeaf', node.target)) {
                             if (node.checked == false) {
                                 $.messager.alert('操作提示', '未勾选【' + node.text + '】检测项无法设置具体内容！', 'warning');
@@ -135,7 +135,7 @@
                                 $.messager.alert('操作提示', '请先提交方案模板', 'warning');
                             }
                             else {
-                                $('#mainframe').attr('src', node.attributes.url + "&SCHEMEID=" + ID);
+                                $('#mainframe').attr('src', node.url + "&SCHEMEID=" + ID);
                             }
                         }
                     }
