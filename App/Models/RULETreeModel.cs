@@ -19,17 +19,19 @@ namespace Langben.App.Models
             if (null != myPARENTID)
                 listTree = from o in entitys
                            where o.PARENTID == myPARENTID
+                           orderby o.SORT
                            select o;//叶子节点            
             else
                 listTree = from o in entitys
                            where o.PARENTID == null
+                           orderby o.SORT
                            select o;//根目录
 
             if (listTree != null && listTree.Any())
             {//填充数据
                 foreach (var item in listTree)
                 {
-                    SystemTree myTree = new SystemTree() { id = item.ID.GetString(), text = item.NAME.GetString() };
+                    SystemTree myTree = new SystemTree() { id = item.ID.GetString(), text = item.NAMEOTHER.GetString() };
                     
                     if (!string.IsNullOrWhiteSpace(item.INPUTSTATE))
                         myTree.inputState = item.INPUTSTATE;//
