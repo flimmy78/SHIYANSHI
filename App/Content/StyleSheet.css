@@ -250,10 +250,10 @@ input[type="password"] {
 }
 
 textarea {
-    font: normal 12px/20px ;
+    font-size :  12px ;
     color: #444;
     height: 106px;
-    width: 667px;
+    width: 600px;
     border: 1px solid #d4d4d4;
     margin: 0px 0 11px 6px;
 }
@@ -340,3 +340,5 @@ textarea {
 
 .b-title{ font-size:12px; font-weight:bold; border-bottom:1px solid #ccc; clear:both; padding:5px; margin:10px 0;}
 .form-foot{ padding-left:100px; margin:10px 0; clear:both}
+
+.datagrid-row-selected a{ color:#fff}
