@@ -888,6 +888,10 @@
     <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaZhengFu.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\BianSongQiDianLiuDianYa.cshtml" />
     <Content Include="Views\RULETree\GetTree.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BianSongQiGongLu.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BianSongQiPinLu.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BianSongQiXiangWei.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BianSongQiYouGongWuGong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
