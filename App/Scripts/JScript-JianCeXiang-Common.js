@@ -272,12 +272,34 @@ RuleAttributeArray = [
     }
     ,
     {
-        RuleID: '35-1999_2_3',//检测项编号
-        Remark: '变送器-电流电压-引用误差',//检测项说明
+        RuleID: '126-1995_2_2_1',//检测项编号
+        Remark: '变送器-电压-引用误差',//检测项说明
         Attributes:
         [{
             //添加通道按钮是否显示(show:显示，hidden:不显示)
-            DuoTongDao: 'hidden',
+            DuoTongDao: 'show',
+            //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+            //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+            LianDongDanWeiDDL: '',
+            //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+            //DianLiu:电流单位；DianYa:电压单位   
+            //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+            DanWeiHtmlDDL: '',
+            //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+            BuBaoCunShuJu: '',
+            //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+            //OUTPUT_VALUE：输出示值
+            CalculateForAddLianCheng: ''
+        }]
+    }
+        ,
+    {
+        RuleID: '126-1995_2_3_1',//检测项编号
+        Remark: '变送器-电流-引用误差',//检测项说明
+        Attributes:
+        [{
+            //添加通道按钮是否显示(show:显示，hidden:不显示)
+            DuoTongDao: 'show',
             //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
             //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
             LianDongDanWeiDDL: '',
@@ -294,34 +316,12 @@ RuleAttributeArray = [
     }
     ,
     {
-        RuleID: 'JJG126-1995_1',//检测项编号
-        Remark: '变送器-电流电压-引用误差',//检测项说明
-        Attributes:
-            [{
-                //添加通道按钮是否显示(show:显示，hidden:不显示)
-                DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
-                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
-                //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
-                DanWeiHtmlDDL: '',
-                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
-                BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
-                //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ''
-            }]
-    }
-    ,
-    {
-        RuleID: 'JJG126-1995_2',//检测项编号
+        RuleID: '126-1995_2_6_1',//检测项编号
         Remark: '变送器-功率-引用误差',//检测项说明
         Attributes:
             [{
                 //添加通道按钮是否显示(show:显示，hidden:不显示)
-                DuoTongDao: 'hidden',
+                DuoTongDao: 'show',
                 //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
@@ -338,12 +338,12 @@ RuleAttributeArray = [
     }
     ,
     {
-        RuleID: 'JJG126-1995_3',//检测项编号
+        RuleID: '126-1995_2_1_1',//检测项编号
         Remark: '变送器-频率-引用误差',//检测项说明
         Attributes:
             [{
                 //添加通道按钮是否显示(show:显示，hidden:不显示)
-                DuoTongDao: 'hidden',
+                DuoTongDao: 'show',
                 //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
@@ -360,12 +360,34 @@ RuleAttributeArray = [
     }
      ,
     {
-        RuleID: 'JJG126-1995_4',//检测项编号
-        Remark: '变送器-有功（无功）功率-引用误差',//检测项说明
+        RuleID: '126-1995_2_4_1',//检测项编号
+        Remark: '变送器-有功功率-引用误差',//检测项说明
         Attributes:
             [{
                 //添加通道按钮是否显示(show:显示，hidden:不显示)
-                DuoTongDao: 'hidden',
+                DuoTongDao: 'show',
+                //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
+                DanWeiHtmlDDL: '',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: ''
+            }]
+    }
+      ,
+    {
+        RuleID: '126-1995_2_5_1',//检测项编号
+        Remark: '变送器-无功功率-引用误差',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示(show:显示，hidden:不显示)
+                DuoTongDao: 'show',
                 //检测项单位联动下拉框联动((变更项名称1)|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2)
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',

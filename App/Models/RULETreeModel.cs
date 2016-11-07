@@ -36,7 +36,7 @@ namespace Langben.App.Models
                     if (!string.IsNullOrWhiteSpace(item.INPUTSTATE))
                         myTree.inputState = item.INPUTSTATE;//
                     if (!string.IsNullOrWhiteSpace(item.SCHEME_MENU))
-                        myTree.url = "/PROJECTTEMPLET/" + item.SCHEME_MENU;//
+                        myTree.url = "/PROJECTTEMPLET/" + item.SCHEME_MENU+ "?RULEID="+item.ID;//
 
                     myChildren.Add(myTree);
                     if (Bind(entitys, item.ID, ref myTree.children))//递归调用
