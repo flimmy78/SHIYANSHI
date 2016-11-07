@@ -156,6 +156,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Res\webuploader\" />
     <Folder Include="up\ErWeiMa\" />
+    <Folder Include="up\QianZi\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
