@@ -53,7 +53,7 @@ else
                             <option value="3">3</option>
                             <option value="4">4</option>
                         </select>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span>电流</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span>@ViewBag.DianLiuDianYa</span>
                     </td>
                 </tr>
                 <tr>
@@ -150,7 +150,19 @@ else
 
             <tbody id="tbody_moban_1">
                 <tr>
-                    <td align="center" width="100">I</td>
+                    <td align="center" width="100">
+                        @if (ViewBag.DianLiuDianYa == "电压")
+                        {
+                            <span name="U">U</span>
+                        }else if (ViewBag.DianLiuDianYa == "电流")
+                        {
+                        <span name="I">I</span>
+
+
+                        }else{
+                        <span name="UI">@ViewBag.DianLiuDianYa</span>
+                        }
+                    </td>
                     <td align="center" width="100">
                         <input name="DengJi" type="text" class="my-textbox tr" value="0.0" style="width:70px" onblur="JS1(this)" tableid="tongdao_1">
                         级

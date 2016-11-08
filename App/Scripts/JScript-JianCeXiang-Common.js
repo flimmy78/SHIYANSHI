@@ -5,7 +5,7 @@ DanWeiDDLHtmlArray = [
     {
         Code: 'DianLiu',
         Remark: '电流单位',
-        Value: "<select class=\"my-combox\" style=\"width:50px; \">" +
+        Value: "<select class=\"my-combox\" name=\"DianLiu\" style=\"width:50px; \">" +
                 "<option value=\"A\">A</option> " +
                  "<option value=\"KA\">KA</option>" +
                  "<option value=\"mA\">mA</option>  " +
@@ -17,7 +17,7 @@ DanWeiDDLHtmlArray = [
         {
             Code: 'DianYa',
             Remark: '电压单位',
-            Value: "<select class=\"my-combox\" style=\"width:50px; \">" +
+            Value: "<select class=\"my-combox\" name=\"DianYa\" style=\"width:50px; \">" +
                     "<option value=\"V\">V</option> " +
                     "<option value=\"MV\">MV</option>" +
                     "<option value=\"KV\">KV</option>  " +
@@ -27,9 +27,9 @@ DanWeiDDLHtmlArray = [
         }
         ,
         {
-            Code: 'DianLiu2',
-            Remark: '电流单位2',
-            Value: "<select class=\"my-combox\" style=\"width:50px; \">" +
+            Code: 'DianLiuKA',
+            Remark: '电流单位KA开头',
+            Value: "<select class=\"my-combox\" name=\"DianLiuKA\" style=\"width:50px; \">" +
                     "<option value=\"KA\">KA</option> " +
                     "<option value=\"A\">A</option>" +
                     "<option value=\"mA\">mA</option>  " +
@@ -38,11 +38,21 @@ DanWeiDDLHtmlArray = [
                     "<option value=\"pA\">pA</option> " +
                    "</select>"
         }
+            ,
+        {
+            Code: 'LC',
+            Remark: 'LC空格',
+            Value: "<select class=\"my-combox\" name=\"LC\" style=\"width:50px; \">" +
+                    "<option value=\"L\">L</option> " +
+                    "<option value=\" \"> </option>" +
+                    "<option value=\"C\">C</option>  " +
+                    "</select>"
+        }
         ,
         {
-            Code: 'TongDao1',
-            Remark: '通道范围1',
-            Value: "<select class=\"my-combox\" style=\"width:50px; \">" +
+            Code: 'TongDaoU0',
+            Remark: '通道范围U0开头',
+            Value: "<select class=\"my-combox\" name=\"TongDaoU0\" style=\"width:50px; \">" +
                     "<option value=\"U0\">U0</option> " +
                     "<option value=\"U1\">U1</option>" +
                     "<option value=\"U2\">U2</option>  " +
@@ -64,13 +74,7 @@ DanWeiDDLHtmlArray = [
                     "<option value=\"U18\">U18</option> " +
                     "<option value=\"U19\">U19</option> " +
                     "<option value=\"U20\">U20</option> " +
-                   "</select>"
-        }
-             ,
-        {
-            Code: 'TongDao2',
-            Remark: '通道范围2',
-            Value: "<select class=\"my-combox\" style=\"width:50px; \">" +
+
                     "<option value=\"CH0\">CH0</option> " +
                     "<option value=\"CH1\">CH1</option>" +
                     "<option value=\"CH2\">CH2</option>  " +
@@ -88,59 +92,221 @@ DanWeiDDLHtmlArray = [
                     "<option value=\"CH14\">CH14</option> " +
                     "<option value=\"CH15\">CH15</option> " +
                     "<option value=\"CH16\">CH16</option> " +
-                    "</select>"
-        }
-                ,
-        {
-            Code: 'TongDao3',
-            Remark: '通道范围3',
-            Value: "<select class=\"my-combox\" style=\"width:50px; \">" +
-                    "<option value=\"UA1\">UA1</option> " +
+
+                     "<option value=\"UA1\">UA1</option> " +
                     "<option value=\"UA2\">UA2</option>" +
                     "<option value=\"UA3\">UA3</option>  " +
                     "<option value=\"UA4\">UA4</option>" +
                     "<option value=\"UA5\">UA5</option> " +
-                    "<option value=\"UA6\">UA6</option> " +               
-                    "</select>"
-        }
-                   ,
-        {
-            Code: 'TongDao4',
-            Remark: '通道范围4',
-            Value: "<select class=\"my-combox\" style=\"width:50px; \">" +
-                    "<option value=\"UB1\">UB1</option> " +
+                    "<option value=\"UA6\">UA6</option> " +
+
+                     "<option value=\"UB1\">UB1</option> " +
                     "<option value=\"UB2\">UB2</option>" +
                     "<option value=\"UB3\">UB3</option>  " +
                     "<option value=\"UB4\">UB4</option>" +
                     "<option value=\"UB5\">UB5</option> " +
                     "<option value=\"UB6\">UB6</option> " +
-                    "</select>"
-        }
-                        ,
-        {
-            Code: 'TongDao5',
-            Remark: '通道范围5',
-            Value: "<select class=\"my-combox\" style=\"width:50px; \">" +
-                    "<option value=\"UC1\">UC1</option> " +
+
+                     "<option value=\"UC1\">UC1</option> " +
                     "<option value=\"UC2\">UC2</option>" +
                     "<option value=\"UC3\">UB3</option>  " +
                     "<option value=\"UC4\">UC4</option>" +
                     "<option value=\"UC5\">UC5</option> " +
                     "<option value=\"UC6\">UC6</option> " +
-                    "</select>"
-        }
-                           ,
-        {
-            Code: 'TongDao6',
-            Remark: '通道范围6',
-            Value: "<select class=\"my-combox\" style=\"width:50px; \">" +
-                    "<option value=\"U01\">U01</option> " +
+
+                     "<option value=\"U01\">U01</option> " +
                     "<option value=\"U02\">U02</option>" +
                     "<option value=\"U03\">U03</option>  " +
                     "<option value=\"U04\">U04</option>" +
                     "<option value=\"U05\">U05</option> " +
                     "<option value=\"U06\">U06</option> " +
-                    "</select>"
+                   "</select>"
+        }
+
+           ,
+        {
+            Code: 'TongDaoU0UA',
+            Remark: '通道范围U0UA开头',
+            Value: "<select class=\"my-combox\" name=\"TongDaoU0UA\" style=\"width:50px; \">" +
+                    "<option value=\"U0\">U0</option> " +
+                    "<option value=\"U1\">U1</option>" +
+                    "<option value=\"U2\">U2</option>  " +
+                    "<option value=\"U3\">U3</option>" +
+                    "<option value=\"U4\">U4</option> " +
+                    "<option value=\"U5\">U5</option> " +
+                    "<option value=\"U6\">U6</option> " +
+                    "<option value=\"U7\">U7</option> " +
+                    "<option value=\"U8\">U8</option> " +
+                    "<option value=\"U9\">U9</option> " +
+                    "<option value=\"U10\">U10</option> " +
+                    "<option value=\"U11\">U11</option> " +
+                    "<option value=\"U12\">U12</option> " +
+                    "<option value=\"U13\">U13</option> " +
+                    "<option value=\"U14\">U14</option> " +
+                    "<option value=\"U15\">U15</option> " +
+                    "<option value=\"U16\">U16</option> " +
+                    "<option value=\"U17\">U17</option> " +
+                    "<option value=\"U18\">U18</option> " +
+                    "<option value=\"U19\">U19</option> " +
+                    "<option value=\"U20\">U20</option> " +
+
+                    "<option value=\"CH0\">CH0</option> " +
+                    "<option value=\"CH1\">CH1</option>" +
+                    "<option value=\"CH2\">CH2</option>  " +
+                    "<option value=\"CH3\">CH3</option>" +
+                    "<option value=\"CH4\">CH4</option> " +
+                    "<option value=\"CH5\">CH5</option> " +
+                    "<option value=\"CH6\">CH6</option> " +
+                    "<option value=\"CH7\">CH7</option> " +
+                    "<option value=\"CH8\">CH8</option> " +
+                    "<option value=\"CH9\">CH9</option> " +
+                    "<option value=\"CH10\">CH10</option> " +
+                    "<option value=\"CH11\">CH11</option> " +
+                    "<option value=\"CH12\">CH12</option> " +
+                    "<option value=\"CH13\">CH13</option> " +
+                    "<option value=\"CH14\">CH14</option> " +
+                    "<option value=\"CH15\">CH15</option> " +
+                    "<option value=\"CH16\">CH16</option> " +
+
+                     "<option value=\"UA1\">UA1</option> " +
+                    "<option value=\"UA2\">UA2</option>" +
+                    "<option value=\"UA3\">UA3</option>  " +
+                    "<option value=\"UA4\">UA4</option>" +
+                    "<option value=\"UA5\">UA5</option> " +
+                    "<option value=\"UA6\">UA6</option> " +
+
+                     "<option value=\"UB1\">UB1</option> " +
+                    "<option value=\"UB2\">UB2</option>" +
+                    "<option value=\"UB3\">UB3</option>  " +
+                    "<option value=\"UB4\">UB4</option>" +
+                    "<option value=\"UB5\">UB5</option> " +
+                    "<option value=\"UB6\">UB6</option> " +
+
+                     "<option value=\"UC1\">UC1</option> " +
+                    "<option value=\"UC2\">UC2</option>" +
+                    "<option value=\"UC3\">UB3</option>  " +
+                    "<option value=\"UC4\">UC4</option>" +
+                    "<option value=\"UC5\">UC5</option> " +
+                    "<option value=\"UC6\">UC6</option> " +
+
+                     "<option value=\"U01\">U01</option> " +
+                    "<option value=\"U02\">U02</option>" +
+                    "<option value=\"U03\">U03</option>  " +
+                    "<option value=\"U04\">U04</option>" +
+                    "<option value=\"U05\">U05</option> " +
+                    "<option value=\"U06\">U06</option> " +
+
+                     "<option value=\"UA\">UA</option> " +
+                    "<option value=\"UB\">UB</option>" +
+                    "<option value=\"UC\">UC</option>  " +
+                    "<option value=\"Ua\">Ua</option>" +
+                    "<option value=\"Ub\">Ub</option> " +
+                    "<option value=\"Uc\">Uc</option> " +
+                   "</select>"
+        }
+          ,
+        {
+            Code: 'TongDaoI0',
+            Remark: '通道范围I0开头',
+            Value: "<select class=\"my-combox\" name=\"TongDaoI0\" style=\"width:50px; \">" +
+                    "<option value=\"I0\">I0</option> " +
+                    "<option value=\"I1\">I1</option>" +
+                    "<option value=\"I2\">I2</option>  " +
+                    "<option value=\"I3\">I3</option>" +
+                    "<option value=\"I4\">I4</option> " +
+                    "<option value=\"I5\">I5</option> " +
+                    "<option value=\"I6\">I6</option> " +
+                    "<option value=\"I7\">I7</option> " +
+                    "<option value=\"I8\">I8</option> " +
+                    "<option value=\"I9\">I9</option> " +
+                    "<option value=\"I10\">I10</option> " +
+                    "<option value=\"I11\">I11</option> " +
+                    "<option value=\"I12\">I12</option> " +
+                    "<option value=\"I13\">I13</option> " +
+                    "<option value=\"I14\">I14</option> " +
+                    "<option value=\"I15\">I15</option> " +
+                    "<option value=\"I16\">I16</option> " +
+                    "<option value=\"I17\">I17</option> " +
+                    "<option value=\"I18\">I18</option> " +
+                    "<option value=\"I19\">I19</option> " +
+                    "<option value=\"I20\">I20</option> " +
+
+                    "<option value=\"CH0\">CH0</option> " +
+                    "<option value=\"CH1\">CH1</option>" +
+                    "<option value=\"CH2\">CH2</option>  " +
+                    "<option value=\"CH3\">CH3</option>" +
+                    "<option value=\"CH4\">CH4</option> " +
+                    "<option value=\"CH5\">CH5</option> " +
+                    "<option value=\"CH6\">CH6</option> " +
+                    "<option value=\"CH7\">CH7</option> " +
+                    "<option value=\"CH8\">CH8</option> " +
+                    "<option value=\"CH9\">CH9</option> " +
+                    "<option value=\"CH10\">CH10</option> " +
+                    "<option value=\"CH11\">CH11</option> " +
+                    "<option value=\"CH12\">CH12</option> " +
+                    "<option value=\"CH13\">CH13</option> " +
+                    "<option value=\"CH14\">CH14</option> " +
+                    "<option value=\"CH15\">CH15</option> " +
+                    "<option value=\"CH16\">CH16</option> " +
+
+                     "<option value=\"IA1\">IA1</option> " +
+                    "<option value=\"IA2\">IA2</option>" +
+                    "<option value=\"IA3\">IA3</option>  " +
+                    "<option value=\"IA4\">IA4</option>" +
+                    "<option value=\"IA5\">IA5</option> " +
+                    "<option value=\"IA6\">IA6</option> " +
+
+                     "<option value=\"IB1\">IB1</option> " +
+                    "<option value=\"IB2\">IB2</option>" +
+                    "<option value=\"IB3\">IB3</option>  " +
+                    "<option value=\"IB4\">IB4</option>" +
+                    "<option value=\"IB5\">IB5</option> " +
+                    "<option value=\"IB6\">IB6</option> " +
+
+                     "<option value=\"IC1\">IC1</option> " +
+                    "<option value=\"IC2\">IC2</option>" +
+                    "<option value=\"IC3\">IB3</option>  " +
+                    "<option value=\"IC4\">IC4</option>" +
+                    "<option value=\"IC5\">IC5</option> " +
+                    "<option value=\"IC6\">IC6</option> " +
+
+                     "<option value=\"I01\">I01</option> " +
+                    "<option value=\"I02\">I02</option>" +
+                    "<option value=\"I03\">I03</option>  " +
+                    "<option value=\"I04\">I04</option>" +
+                    "<option value=\"I05\">I05</option> " +
+                    "<option value=\"I06\">I06</option> " +
+                   "</select>"
+        }
+            ,
+        {
+            Code: 'TongDaoUAB',
+            Remark: '通道范围UAB开头',
+            Value: "<select class=\"my-combox\" name=\"TongDaoUAB\" style=\"width:50px; \">" +
+                    "<option value=\"UAB\">UAB</option> " +
+                    "<option value=\"UBC\">UBC</option>" +
+                    "<option value=\"U1\">U1</option>  " +
+                    "<option value=\"U2\">U2</option>" +
+                   "</select>"
+        }
+              ,
+        {
+            Code: 'TongDaoI1',
+            Remark: '通道范围I1开头',
+            Value: "<select class=\"my-combox\" name=\"TongDaoI1\" style=\"width:50px; \">" +
+                    "<option value=\"I1\">I1</option> " +
+                    "<option value=\"I2\">I2</option>" +
+                   "</select>"
+        }
+               ,
+        {
+            Code: 'TongDaoUA',
+            Remark: '通道范围UA开头',
+            Value: "<select class=\"my-combox\" name=\"TongDaoUA\" style=\"width:50px; \">" +
+                    "<option value=\"UA\">UA</option> " +
+                    "<option value=\"UB\">UB</option>" +
+                    "<option value=\"UC\">UC</option>  " +
+                   "</select>"
         }
 ]
 
@@ -996,7 +1162,7 @@ RuleAttributeArray = [
                 //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
-                DanWeiHtmlDDL: '',
+                DanWeiHtmlDDL: 'LC|(OUTPUT_VALUE)',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
@@ -1298,7 +1464,7 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
 //DanWeiCode:单位代码（如果有值直接取，RuleAttribute、ddlName失效)
 function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
     var Result = null;
-
+  
     if (DanWeiCode != null && DanWeiCode.trim() != "") {//如果有有单位代码直接取，RuleAttribute、ddlName失效
         $.each(DanWeiDDLHtmlArray, function (i, item) {
             if (item == null || item.Code != DanWeiCode) {
@@ -1349,6 +1515,8 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, unit) {
     var ddlName = name + "_UNIT";//下拉框名
     var ddlId = ddlName + "_" + id;//下拉框ID
     var id = name + "_" + id;//输入框id
+
+    debugger;
     var ddlHtml = GetDanWeiDDLHtml(ddlName, null);//单位下拉框html
     if ((txtVal == null || txtVal.trim() == "") && rowidx != null) {
         txtVal = CalculateForAddLianCheng(rowidx, name);
