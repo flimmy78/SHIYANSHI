@@ -894,6 +894,7 @@
     <Content Include="Views\PROJECTTEMPLET\BianSongQiXiangWei.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\BianSongQiYouGongWuGong.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\YouGongGongLvShuChuYinYongWuCha.cshtml" />
+    <Content Include="Views\Shared\Temple.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
