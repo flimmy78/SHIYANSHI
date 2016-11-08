@@ -1352,7 +1352,7 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
 //DanWeiCode:单位代码（如果有值直接取，RuleAttribute、ddlName失效)
 function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
     var Result = null;
-
+  
     if (DanWeiCode != null && DanWeiCode.trim() != "") {//如果有有单位代码直接取，RuleAttribute、ddlName失效
         $.each(DanWeiDDLHtmlArray, function (i, item) {
             if (item == null || item.Code != DanWeiCode) {
@@ -1403,6 +1403,8 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, unit) {
     var ddlName = name + "_UNIT";//下拉框名
     var ddlId = ddlName + "_" + id;//下拉框ID
     var id = name + "_" + id;//输入框id
+
+    debugger;
     var ddlHtml = GetDanWeiDDLHtml(ddlName, null);//单位下拉框html
     if ((txtVal == null || txtVal.trim() == "") && rowidx != null) {
         txtVal = CalculateForAddLianCheng(rowidx, name);
