@@ -11,6 +11,7 @@
         <td colspan="9">
             通道：
             <select class="my-combobox" name="" id="BianSongQiTongDao">
+                <option value=""></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -27,28 +28,10 @@
                 -
                 <input name="" type="text" class="my-textbox tc" value="5" style="width:30px">
                 )
-                @if (ViewBag.DianLiuDianYa == "电流")
-                {
-                    <select class="my-combobox" name="dianliu" id="dianliu">
-                        <option value="A">A</option>
-                        <option value="KA">KA</option>
-                        <option value="mA">mA</option>
-                        <option value="μA">μA</option>
-                        <option value="nA">nA</option>
-                        <option value="pA">pA</option>
-                    </select>
-                }
-                else if (ViewBag.DianLiuDianYa == "电压")
-                {
-                    <select class="my-combobox" name="dianya" id="dianya">
-                        <option value="V">V</option>
-                        <option value="MV">MV</option>
-                        <option value="KV">KV</option>
-                        <option value="mV">mV</option>
-                        <option value="μV">μV</option>
-                    </select>
-                }
-
+                <select class="my-combobox" name="" id="mAV">
+                    <option value="MA">mA</option>
+                    <option value="pA">V</option>
+                </select>
             </div>
 
             <div class="fl" style="margin-right:20px">
@@ -57,77 +40,26 @@
                 -
                 <input name="" type="text" class="my-textbox tc" value="20" style="width:30px">
                 )
-                @if (ViewBag.DianLiuDianYa == "电流")
-                {
-                    <select class="my-combobox" name="dianliu" id="dianliu">
-                        <option value="A">A</option>
-                        <option value="KA">KA</option>
-                        <option value="mA">mA</option>
-                        <option value="μA">μA</option>
-                        <option value="nA">nA</option>
-                        <option value="pA">pA</option>
-                    </select>
-                }
-                else if (ViewBag.DianLiuDianYa == "电压")
-                {
-                    <select class="my-combobox" name="dianya" id="dianya">
-                        <option value="V">V</option>
-                        <option value="MV">MV</option>
-                        <option value="KV">KV</option>
-                        <option value="mV">mV</option>
-                        <option value="μV">μV</option>
-                    </select>
-                }
+                <select class="my-combobox" name="" id="mAV">
+                    <option value="MA">mA</option>
+                    <option value="pA">V</option>
+                </select>
             </div>
             <div class="fl" style="margin-right:20px;display:none">
                 @((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub> =
                 <input name="" type="text" class="my-textbox tc" value="100" style="width:40px">
-                @if (ViewBag.DianLiuDianYa == "电流")
-                {
-                    <select class="my-combobox" name="dianliu" id="dianliu">
-                        <option value="A">A</option>
-                        <option value="KA">KA</option>
-                        <option value="mA">mA</option>
-                        <option value="μA">μA</option>
-                        <option value="nA">nA</option>
-                        <option value="pA">pA</option>
-                    </select>
-                }
-                else if (ViewBag.DianLiuDianYa == "电压")
-                {
-                    <select class="my-combobox" name="dianya" id="dianya">
-                        <option value="V">V</option>
-                        <option value="MV">MV</option>
-                        <option value="KV">KV</option>
-                        <option value="mV">mV</option>
-                        <option value="μV">μV</option>
-                    </select>
-                }
+                <select class="my-combobox" name="" id="mAV">
+                    <option value="MA">mA</option>
+                    <option value="pA">V</option>
+                </select>
             </div>
             <div class="fl" style="margin-right:20px; ">
                 @((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub> =
                 <input name="" type="text" class="my-textbox tc" value="5" style="width:40px">
-                @if (ViewBag.DianLiuDianYa == "电流")
-                {
-                    <select class="my-combobox" name="dianliu" id="dianliu">
-                        <option value="A">A</option>
-                        <option value="KA">KA</option>
-                        <option value="mA">mA</option>
-                        <option value="μA">μA</option>
-                        <option value="nA">nA</option>
-                        <option value="pA">pA</option>
-                    </select>
-                }
-                else if (ViewBag.DianLiuDianYa == "电压")
-                {
-                    <select class="my-combobox" name="dianya" id="dianya">
-                        <option value="V">V</option>
-                        <option value="MV">MV</option>
-                        <option value="KV">KV</option>
-                        <option value="mV">mV</option>
-                        <option value="μV">μV</option>
-                    </select>
-                }
+                <select class="my-combobox" name="" id="mAV">
+                    <option value="MA">mA</option>
+                    <option value="pA">V</option>
+                </select>
             </div>
         </td>
     </tr>
@@ -138,19 +70,19 @@
 
         <th align="center" width="100">
             二次输入标准值<br>
-            (<span>A</span>)
+            (<span>@((ViewBag.DianLiuDianYa == "电流") ? "A" : "V")</span>)
         </th>
         <th align="center" width="100">
             标准输出值<br>
-            <select class="my-combobox" name="" id="">
-                <option value="MA">MA</option>
+            <select class="my-combobox" name="" id="mAV">
+                <option value="MA">mA</option>
                 <option value="pA">V</option>
             </select>
         </th>
         <th align="center" width="100">
             实际输出值<br>
-            <select class="my-combobox" name="" id="">
-                <option value="MA">MA</option>
+            <select class="my-combobox" name="" id="mAV">
+                <option value="MA">mA</option>
                 <option value="pA">V</option>
             </select>
         </th>
