@@ -1682,6 +1682,7 @@ function ShowOrHideDuoTongDao() {
 function BtnInit() {
     ShowOrHideDuoTongDao();
     var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();
+   
     if (PREPARE_SCHEMEID.trim() != "")//数据录入
     {
         $("#btnDuoTongDao").hide();
@@ -1693,6 +1694,7 @@ function BtnInit() {
     }
     else//方案设置
     {
+       
         //$("#btnSave").show();
         $("#btnReset").show();
         //$("#btnSave_ITE").hide();
