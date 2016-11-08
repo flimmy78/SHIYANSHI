@@ -1357,6 +1357,7 @@ RuleAttributeArray = [
             }]
     }
 ];
+ 
 var RuleID = $("#hideRULEID").val();//检测项目ID
 var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
 var $Tongdao_moban//模板
@@ -1390,11 +1391,7 @@ function CreateTongDao() {
     $("#hideTongDaoShuLiang").val(tableIdx);
 
 };
-//设置当前操作通道
-function set(tbodyIndex) {
-    $('#dlg').dialog('open');
-    $("#hideDangQianTongDao").val(tbodyIndex);
-}
+ 
 //重置
 function Reset() {
     //表格清空
@@ -1525,8 +1522,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, unit) {
     var ddlName = name;// + "_UNIT";//下拉框名
     var ddlId = ddlName + "_" + id;//下拉框ID
     var id = name + "_" + id;//输入框id
-
-    debugger;
+     
     var ddlHtml = GetDanWeiDDLHtml(ddlName, null);//单位下拉框html
     if ((txtVal == null || txtVal.trim() == "") && rowidx != null) {
         txtVal = CalculateForAddLianCheng(rowidx, name);
@@ -1657,6 +1653,7 @@ Number.prototype.toFixed = function toFixed(s) {
 }
 //显示隐藏添加通道按钮
 function ShowOrHideDuoTongDao() {
+
     if (RuleAttribute == null) {
         $("#btnDuoTongDao").hide();
     }

@@ -65,7 +65,6 @@
         });
     </script>
 
-    <script src="/Scripts/JScript-JianCeXiang-Common.js"></script>
 </head>
 <body class="easyui-layout">
     <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
@@ -134,7 +133,13 @@
         <!--增加量程弹层-->
         @RenderSection("TanKuang", false)
         <!--/增加量程弹层-->
+        <!--增加量程弹层-->
+        @RenderSection("JS", false)
+        <!--/增加量程弹层-->
 
     </div>
+
+    <script src="/Scripts/JScript-JianCeXiang-Common.js"></script>
 </body>
+
 </html>
