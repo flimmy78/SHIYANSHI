@@ -28,10 +28,27 @@
                 -
                 <input name="" type="text" class="my-textbox tc" value="5" style="width:30px">
                 )
-                <select class="my-combobox" name="" id="mAV">
-                    <option value="MA">mA</option>
-                    <option value="pA">V</option>
-                </select>
+                @if (ViewBag.DianLiuDianYa == "电流")
+                {
+                    <select class="my-combobox" name="dianliu" id="dianliu">
+                        <option value="A">A</option>
+                        <option value="KA">KA</option>
+                        <option value="mA">mA</option>
+                        <option value="μA">μA</option>
+                        <option value="nA">nA</option>
+                        <option value="pA">pA</option>
+                    </select>
+                }
+                else if (ViewBag.DianLiuDianYa == "电压")
+                {
+                    <select class="my-combobox" name="dianya" id="dianya">
+                        <option value="V">V</option>
+                        <option value="MV">MV</option>
+                        <option value="KV">KV</option>
+                        <option value="mV">mV</option>
+                        <option value="μV">μV</option>
+                    </select>
+                }
             </div>
 
             <div class="fl" style="margin-right:20px">
@@ -45,21 +62,31 @@
                     <option value="pA">V</option>
                 </select>
             </div>
-            <div class="fl" style="margin-right:20px;display:none">
-                @((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub> =
-                <input name="" type="text" class="my-textbox tc" value="100" style="width:40px">
-                <select class="my-combobox" name="" id="mAV">
-                    <option value="MA">mA</option>
-                    <option value="pA">V</option>
-                </select>
-            </div>
+            
             <div class="fl" style="margin-right:20px; ">
                 @((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub> =
                 <input name="" type="text" class="my-textbox tc" value="5" style="width:40px">
-                <select class="my-combobox" name="" id="mAV">
-                    <option value="MA">mA</option>
-                    <option value="pA">V</option>
-                </select>
+                @if (ViewBag.DianLiuDianYa == "电流")
+                {
+                    <select class="my-combobox" name="dianliu" id="dianliu">
+                        <option value="A">A</option>
+                        <option value="KA">KA</option>
+                        <option value="mA">mA</option>
+                        <option value="μA">μA</option>
+                        <option value="nA">nA</option>
+                        <option value="pA">pA</option>
+                    </select>
+                }
+                else if (ViewBag.DianLiuDianYa == "电压")
+                {
+                    <select class="my-combobox" name="dianya" id="dianya">
+                        <option value="V">V</option>
+                        <option value="MV">MV</option>
+                        <option value="KV">KV</option>
+                        <option value="mV">mV</option>
+                        <option value="μV">μV</option>
+                    </select>
+                }
             </div>
         </td>
     </tr>
