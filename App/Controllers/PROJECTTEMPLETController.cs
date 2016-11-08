@@ -65,7 +65,7 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult BianSongQiGongLu(string RULEID = "JJG126-1995_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult BianSongQiGongLu(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
