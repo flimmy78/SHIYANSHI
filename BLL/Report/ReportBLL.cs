@@ -60,7 +60,687 @@ namespace Langben.Report
             return result;
         }
         /// <summary>
-        /// 导出Excel
+        /// 导出报告Excel
+        /// </summary>
+        /// <param name="ID">预备方案ID</param>
+        /// <returns></returns>
+        public bool ExportReport(string ID, out string Message)
+        {
+            IBLL.IPREPARE_SCHEMEBLL m_BLL = new PREPARE_SCHEMEBLL();
+            PREPARE_SCHEME entity = m_BLL.GetById(ID);
+            string saveFileName = "";
+            if (entity != null)
+            {
+                string xlsPath = ReportStatic.BaoGaoJianDingPath;
+                if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString())
+                {
+                    xlsPath = ReportStatic.BaoGaoXiaoZhunPath;
+                }
+                HSSFWorkbook _book = new HSSFWorkbook();
+                FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
+                IWorkbook hssfworkbook = new HSSFWorkbook(file);
+
+                //设置封皮
+                if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString())
+                {
+                    SetFengPi_BaoGaoXiaoZhun(hssfworkbook, entity);
+                }
+                else
+                {
+                    SetFengPi_BaoGaoJianDing(hssfworkbook, entity);
+                }
+
+                //设置数据
+                SetShuJu(hssfworkbook, entity, ExportType.Report);
+
+                saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";
+                string saveFileNamePath = System.Web.HttpContext.Current.Server.MapPath(saveFileName);
+                using (FileStream fileWrite = new FileStream(saveFileNamePath, FileMode.Create))
+                {
+                    hssfworkbook.Write(fileWrite);
+                }
+
+                Message = saveFileName;
+                return true;
+            }
+            Message = "未找到预备方案ID为【" + ID + "】的数据";
+            return false;
+        }
+        /// <summary>
+        /// 设置校准报告封皮信息
+        /// </summary>
+        /// <param name="hssfworkbook"></param>
+        /// <param name="entity"></param>
+        private void SetFengPi_BaoGaoXiaoZhun(IWorkbook hssfworkbook, PREPARE_SCHEME entity)
+        {
+            if (entity.CNAS == ShiFouCNAS.No.ToString())
+            {
+                return ;//待修改成Word
+            }
+            string sheetName_Destination = "封皮";                      
+            ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
+            #region 封皮
+            //单元格从0开始
+            //证书编号
+            sheet_Destination.GetRow(12).GetCell(9).SetCellValue(entity.REPORTNUMBER);
+            if (entity.APPLIANCE_LABORATORY != null && entity.APPLIANCE_LABORATORY.Count > 0)
+            {
+                IAPPLIANCE_DETAIL_INFORMATIONBLL infBll = new APPLIANCE_DETAIL_INFORMATIONBLL();
+                APPLIANCE_DETAIL_INFORMATION infEntity = infBll.GetById(entity.APPLIANCE_LABORATORY.FirstOrDefault().APPLIANCE_DETAIL_INFORMATIONID);
+                if (infEntity != null)
+                {
+                    //器具名称
+                    if (infEntity.APPLIANCE_NAME != null && infEntity.APPLIANCE_NAME.Trim() != "")
+                    {
+                        sheet_Destination.GetRow(17).GetCell(7).SetCellValue(infEntity.APPLIANCE_NAME);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(17).GetCell(7).SetCellValue("/");
+                    }
+                    //型 号/规 格(有型号显示型号，没有显示规格)
+                    if (infEntity.VERSION != null && infEntity.VERSION.Trim() != "")//器具型号
+                    {
+                        sheet_Destination.GetRow(19).GetCell(7).SetCellValue(infEntity.VERSION);
+                    }
+                    else if (infEntity.APPLIANCE_NAME != null && infEntity.APPLIANCE_NAME.Trim() != "")//计量器具名称
+                    {
+                        sheet_Destination.GetRow(19).GetCell(7).SetCellValue(infEntity.APPLIANCE_NAME);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(19).GetCell(7).SetCellValue("/");
+                    }
+
+                    //出厂编号
+                    if (infEntity.FACTORY_NUM != null && infEntity.FACTORY_NUM.Trim() != "")
+                    {
+                        sheet_Destination.GetRow(21).GetCell(7).SetCellValue(infEntity.FACTORY_NUM);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(21).GetCell(7).SetCellValue("/");
+                    }
+                    //生产厂家/制 造 单 位
+                    if (infEntity.MAKE_ORGANIZATION != null && infEntity.MAKE_ORGANIZATION.Trim() != "")
+                    {
+                        sheet_Destination.GetRow(23).GetCell(7).SetCellValue(infEntity.MAKE_ORGANIZATION);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(23).GetCell(7).SetCellValue("/");
+                    }
+                    IORDER_TASK_INFORMATIONBLL taskBll = new ORDER_TASK_INFORMATIONBLL();
+                    ORDER_TASK_INFORMATION taskEntity = taskBll.GetById(infEntity.ORDER_TASK_INFORMATIONID);
+                    if (taskEntity != null)
+                    {
+                       
+                        //委托单位 /送 检 单 位       
+                        if (taskEntity.INSPECTION_ENTERPRISE != null && taskEntity.INSPECTION_ENTERPRISE.Trim() != "")
+                        {
+                            sheet_Destination.GetRow(15).GetCell(7).SetCellValue(taskEntity.INSPECTION_ENTERPRISE);
+                        }
+                        else
+                        {
+                            sheet_Destination.GetRow(15).GetCell(7).SetCellValue("/");
+                        }
+                    }
+                }
+            }
+
+            
+
+            //批 准 人
+            if (entity.APPROVALID == null || entity.APPROVALID.Trim() == "")
+            {
+                sheet_Destination.GetRow(33).GetCell(13).SetCellValue("/");
+            }
+            else
+            {
+                sheet_Destination.GetRow(33).GetCell(13).SetCellValue(entity.APPROVALID);
+            }
+            //核验员
+            if (entity.DETECTERID != null && entity.DETECTERID.Trim() != "")
+            {
+                sheet_Destination.GetRow(35).GetCell(13).SetCellValue(entity.DETECTERID);
+            }
+            else
+            {
+                sheet_Destination.GetRow(35).GetCell(13).SetCellValue("/");
+            }
+            //检定员\校 准 员
+            if (entity.CHECKERID != null && entity.CHECKERID.Trim() != "")
+            {
+                sheet_Destination.GetRow(37).GetCell(13).SetCellValue(entity.CHECKERID);
+            }
+            else
+            {
+                sheet_Destination.GetRow(37).GetCell(13).SetCellValue("/");
+            }
+            //检定日期\校 准 日 期
+            if (entity.CALIBRATION_DATE.HasValue)
+            {
+                sheet_Destination.GetRow(42).GetCell(9).SetCellValue(entity.CALIBRATION_DATE.Value.ToString("yyyy年MM月dd日"));
+            }
+            else
+            {
+                sheet_Destination.GetRow(42).GetCell(9).SetCellValue("/");
+            }            
+            #region 暂时没有数据，不做
+            ////检定所使用的计量标准装置
+            ////HideRow(sheet, RowIndex, 6);
+            //RowIndex = RowIndex + 6;
+
+
+
+            ////检定所使用的主要计量器具
+            ////HideRow(sheet, RowIndex, 6);
+            //RowIndex = RowIndex + 6;
+            ////比对和匝比试验使用的中间试品
+            ////HideRow(sheet, RowIndex, 6);
+            //RowIndex = RowIndex + 6;
+            ////空白
+            //RowIndex = RowIndex + 8;
+            #endregion
+            #endregion
+
+            sheet_Destination.ForceFormulaRecalculation = true;
+        }
+        /// <summary>
+        /// 设置检定报告通知书封皮信息
+        /// </summary>
+        /// <param name="hssfworkbook"></param>
+        /// <param name="entity"></param>
+        private void SetFengPi_BaoGaoJianDing_TongZhiShu(IWorkbook hssfworkbook, PREPARE_SCHEME entity)
+        {
+            string sheetName_Destination = "通知书封皮";            
+            ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
+            #region 封皮
+            //单元格从0开始
+            //证书编号
+            sheet_Destination.GetRow(12).GetCell(9).SetCellValue(entity.REPORTNUMBER);
+            if (entity.APPLIANCE_LABORATORY != null && entity.APPLIANCE_LABORATORY.Count > 0)
+            {
+                IAPPLIANCE_DETAIL_INFORMATIONBLL infBll = new APPLIANCE_DETAIL_INFORMATIONBLL();
+                APPLIANCE_DETAIL_INFORMATION infEntity = infBll.GetById(entity.APPLIANCE_LABORATORY.FirstOrDefault().APPLIANCE_DETAIL_INFORMATIONID);
+                if (infEntity != null)
+                {
+                    //器具名称
+                    if (infEntity.APPLIANCE_NAME != null && infEntity.APPLIANCE_NAME.Trim() != "")
+                    {
+                        sheet_Destination.GetRow(17).GetCell(7).SetCellValue(infEntity.APPLIANCE_NAME);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(17).GetCell(7).SetCellValue("/");
+                    }
+                    //型 号/规 格(有型号显示型号，没有显示规格)
+                    if (infEntity.VERSION != null && infEntity.VERSION.Trim() != "")//器具型号
+                    {
+                        sheet_Destination.GetRow(19).GetCell(7).SetCellValue(infEntity.VERSION);
+                    }
+                    else if (infEntity.APPLIANCE_NAME != null && infEntity.APPLIANCE_NAME.Trim() != "")//计量器具名称
+                    {
+                        sheet_Destination.GetRow(19).GetCell(7).SetCellValue(infEntity.APPLIANCE_NAME);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(19).GetCell(7).SetCellValue("/");
+                    }
+
+                    //出厂编号
+                    if (infEntity.FACTORY_NUM != null && infEntity.FACTORY_NUM.Trim() != "")
+                    {
+                        sheet_Destination.GetRow(21).GetCell(7).SetCellValue(infEntity.FACTORY_NUM);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(21).GetCell(7).SetCellValue("/");
+                    }
+                    //生产厂家/制 造 单 位
+                    if (infEntity.MAKE_ORGANIZATION != null && infEntity.MAKE_ORGANIZATION.Trim() != "")
+                    {
+                        sheet_Destination.GetRow(23).GetCell(7).SetCellValue(infEntity.MAKE_ORGANIZATION);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(23).GetCell(7).SetCellValue("/");
+                    }
+                    IORDER_TASK_INFORMATIONBLL taskBll = new ORDER_TASK_INFORMATIONBLL();
+                    ORDER_TASK_INFORMATION taskEntity = taskBll.GetById(infEntity.ORDER_TASK_INFORMATIONID);
+                    if (taskEntity != null)
+                    {
+                        //证书单位
+                        if (taskEntity.CERTIFICATE_ENTERPRISE != null && taskEntity.CERTIFICATE_ENTERPRISE.Trim() != "")
+                        {
+                            sheet_Destination.GetRow(3).GetCell(0).SetCellValue(taskEntity.CERTIFICATE_ENTERPRISE);
+                        }
+                        //委托单位 /送 检 单 位       
+                        if (taskEntity.INSPECTION_ENTERPRISE != null && taskEntity.INSPECTION_ENTERPRISE.Trim() != "")
+                        {
+                            sheet_Destination.GetRow(15).GetCell(7).SetCellValue(taskEntity.INSPECTION_ENTERPRISE);
+                        }
+                        else
+                        {
+                            sheet_Destination.GetRow(15).GetCell(7).SetCellValue("/");
+                        }
+                    }
+                }
+            }
+
+            #region 检 定 依 据 当规程2个以上时，该处没有“检定依据”隐藏该行，该位置直接显示“检定结论”
+            //检定所依据技术文件（代号、名称）
+            IVRULEBLL rBll = new VRULEBLL();
+            List<VRULE> rList = rBll.GetBySCHEMEID(entity.SCHEMEID);
+            if (rList != null && rList.Count == 1)//一个规程
+            {
+                sheet_Destination.GetRow(25).GetCell(7).SetCellValue(rList[0].NAME);
+            }
+            else
+            {
+                HideRow(sheet_Destination, 25, 1);
+            }
+            #endregion
+
+            //检定结论   
+            if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
+            {
+                sheet_Destination.GetRow(27).GetCell(7).SetCellValue("/");
+            }
+            else
+            {
+                sheet_Destination.GetRow(27).GetCell(7).SetCellValue(entity.CONCLUSION);
+            }
+
+            //批 准 人
+            if (entity.APPROVALID == null || entity.APPROVALID.Trim() == "")
+            {
+                sheet_Destination.GetRow(33).GetCell(13).SetCellValue("/");
+            }
+            else
+            {
+                sheet_Destination.GetRow(33).GetCell(13).SetCellValue(entity.APPROVALID);
+            }
+            //核验员
+            if (entity.DETECTERID != null && entity.DETECTERID.Trim() != "")
+            {
+                sheet_Destination.GetRow(35).GetCell(13).SetCellValue(entity.DETECTERID);
+            }
+            else
+            {
+                sheet_Destination.GetRow(35).GetCell(13).SetCellValue("/");
+            }
+            //检定员
+            if (entity.CHECKERID != null && entity.CHECKERID.Trim() != "")
+            {
+                sheet_Destination.GetRow(37).GetCell(13).SetCellValue(entity.CHECKERID);
+            }
+            else
+            {
+                sheet_Destination.GetRow(37).GetCell(13).SetCellValue("/");
+            }
+            //检定日期
+            if (entity.CALIBRATION_DATE.HasValue)
+            {
+                sheet_Destination.GetRow(42).GetCell(9).SetCellValue(entity.CALIBRATION_DATE.Value.ToString("yyyy年MM月dd日"));
+            }
+            else
+            {
+                sheet_Destination.GetRow(42).GetCell(9).SetCellValue("/");
+            }
+            //有效期
+            //if (entity.VALIDITY_PERIOD.HasValue)
+            //{
+            //    sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
+            //}
+            //else
+            //{
+            //    sheet_Destination.GetRow(43).GetCell(9).SetCellValue("/");
+            //}
+            #region 暂时没有数据，不做
+            ////检定所使用的计量标准装置
+            ////HideRow(sheet, RowIndex, 6);
+            //RowIndex = RowIndex + 6;
+
+
+
+            ////检定所使用的主要计量器具
+            ////HideRow(sheet, RowIndex, 6);
+            //RowIndex = RowIndex + 6;
+            ////比对和匝比试验使用的中间试品
+            ////HideRow(sheet, RowIndex, 6);
+            //RowIndex = RowIndex + 6;
+            ////空白
+            //RowIndex = RowIndex + 8;
+            #endregion
+            #endregion
+
+            sheet_Destination.ForceFormulaRecalculation = true;
+        }
+        /// <summary>
+        /// 设置报告第二页信息
+        /// </summary>
+        /// <param name="hssfworkbook"></param>
+        /// <param name="entity"></param>
+        private void SetSecond_BaoGao(IWorkbook hssfworkbook, PREPARE_SCHEME entity)
+        {         
+
+            string sheetName_Destination = "第二页";
+            ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
+            #region 第二页
+            //单元格从0开始
+            //资质说明
+            //sheet_Destination.GetRow(3).GetCell(2).SetCellValue(entity.REPORTNUMBER);
+
+            //温度
+            if (entity.TEMPERATURE != null && entity.TEMPERATURE.Trim() != "")
+            {
+                sheet_Destination.GetRow(5).GetCell(6).SetCellValue(entity.TEMPERATURE);
+            }
+            else
+            {
+                sheet_Destination.GetRow(5).GetCell(5).SetCellValue("/");
+            }
+            //相对湿度
+            if (entity.HUMIDITY != null && entity.HUMIDITY.Trim() != "")
+            {
+                sheet_Destination.GetRow(5).GetCell(20).SetCellValue(entity.HUMIDITY);
+            }
+            else
+            {
+                sheet_Destination.GetRow(5).GetCell(20).SetCellValue("/");
+            }
+           
+            //检定地点
+            if (entity.CHECK_PLACE != null && entity.CHECK_PLACE.Trim() != "")
+            {
+                sheet_Destination.GetRow(6).GetCell(6).SetCellValue(entity.CHECK_PLACE);
+            }
+            else
+            {
+                sheet_Destination.GetRow(6).GetCell(6).SetCellValue("/");
+            }
+            //其他
+            if(entity.OTHER!=null && entity.OTHER.Trim()!="")
+            {
+                sheet_Destination.GetRow(6).GetCell(20).SetCellValue(entity.OTHER);
+            }
+            else
+            {
+                sheet_Destination.GetRow(6).GetCell(20).SetCellValue("/");
+            }
+            #region 检 定 依 据 多个时:顺序显示，一行一个，仅一个时：“依据的技术文件”部分不显示，直接显示下边
+            //检定所依据技术文件（代号、名称）
+            IVRULEBLL rBll = new VRULEBLL();
+            List<VRULE> rList = rBll.GetBySCHEMEID(entity.SCHEMEID);
+            if (rList != null && rList.Count > 1)//两个以上规程
+            {
+                //sheet_Destination.GetRow(25).GetCell(7).SetCellValue(rList[0].NAME);
+                IRow GCTemplateRow = sheet_Destination.GetRow(3);//获取源格式行
+                int GCTemplateIndex = 3;//规程模板行号
+                //CopyRow(sheet_Destination, GCTemplateIndex + 1, GCTemplateIndex, RowCount, false);
+                //GCTemplateIndex = GCTemplateIndex + rList.Count - 1;
+            }
+            else
+            {
+                HideRow(sheet_Destination, 7, 2);
+            }
+            #endregion
+
+            //检定结论   
+            if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
+            {
+                sheet_Destination.GetRow(27).GetCell(7).SetCellValue("/");
+            }
+            else
+            {
+                sheet_Destination.GetRow(27).GetCell(7).SetCellValue(entity.CONCLUSION);
+            }
+
+            //批 准 人
+            if (entity.APPROVALID == null || entity.APPROVALID.Trim() == "")
+            {
+                sheet_Destination.GetRow(33).GetCell(13).SetCellValue("/");
+            }
+            else
+            {
+                sheet_Destination.GetRow(33).GetCell(13).SetCellValue(entity.APPROVALID);
+            }
+            //核验员
+            if (entity.DETECTERID != null && entity.DETECTERID.Trim() != "")
+            {
+                sheet_Destination.GetRow(35).GetCell(13).SetCellValue(entity.DETECTERID);
+            }
+            else
+            {
+                sheet_Destination.GetRow(35).GetCell(13).SetCellValue("/");
+            }
+            //检定员
+            if (entity.CHECKERID != null && entity.CHECKERID.Trim() != "")
+            {
+                sheet_Destination.GetRow(37).GetCell(13).SetCellValue(entity.CHECKERID);
+            }
+            else
+            {
+                sheet_Destination.GetRow(37).GetCell(13).SetCellValue("/");
+            }
+            //检定日期
+            if (entity.CALIBRATION_DATE.HasValue)
+            {
+                sheet_Destination.GetRow(42).GetCell(9).SetCellValue(entity.CALIBRATION_DATE.Value.ToString("yyyy年MM月dd日"));
+            }
+            else
+            {
+                sheet_Destination.GetRow(42).GetCell(9).SetCellValue("/");
+            }
+            //有效期
+            if (entity.VALIDITY_PERIOD.HasValue)
+            {
+                sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
+            }
+            else
+            {
+                sheet_Destination.GetRow(43).GetCell(9).SetCellValue("/");
+            }
+            #region 暂时没有数据，不做
+            ////检定所使用的计量标准装置
+            ////HideRow(sheet, RowIndex, 6);
+            //RowIndex = RowIndex + 6;
+
+
+
+            ////检定所使用的主要计量器具
+            ////HideRow(sheet, RowIndex, 6);
+            //RowIndex = RowIndex + 6;
+            ////比对和匝比试验使用的中间试品
+            ////HideRow(sheet, RowIndex, 6);
+            //RowIndex = RowIndex + 6;
+            ////空白
+            //RowIndex = RowIndex + 8;
+            #endregion
+            #endregion
+
+            sheet_Destination.ForceFormulaRecalculation = true;
+        }
+        /// <summary>
+        /// 设置检定报告封皮信息
+        /// </summary>
+        /// <param name="hssfworkbook"></param>
+        /// <param name="entity"></param>
+        private void SetFengPi_BaoGaoJianDing(IWorkbook hssfworkbook, PREPARE_SCHEME entity)
+        {
+            if (entity.CONCLUSION == "不合格")//不合格只有通知书封皮
+            {
+                SetFengPi_BaoGaoJianDing_TongZhiShu(hssfworkbook, entity);
+                return;
+            }            
+
+            string sheetName_Destination = "封皮";                     
+            ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);           
+            #region 封皮
+            //单元格从0开始
+            //证书编号
+            sheet_Destination.GetRow(12).GetCell(9).SetCellValue(entity.REPORTNUMBER);
+            if (entity.APPLIANCE_LABORATORY != null && entity.APPLIANCE_LABORATORY.Count > 0)
+            {
+                IAPPLIANCE_DETAIL_INFORMATIONBLL infBll = new APPLIANCE_DETAIL_INFORMATIONBLL();
+                APPLIANCE_DETAIL_INFORMATION infEntity = infBll.GetById(entity.APPLIANCE_LABORATORY.FirstOrDefault().APPLIANCE_DETAIL_INFORMATIONID);
+                if (infEntity != null)
+                {
+                    //器具名称
+                    if (infEntity.APPLIANCE_NAME != null && infEntity.APPLIANCE_NAME.Trim() != "")
+                    {
+                        sheet_Destination.GetRow(17).GetCell(7).SetCellValue(infEntity.APPLIANCE_NAME);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(17).GetCell(7).SetCellValue("/");
+                    }
+                    //型 号/规 格(有型号显示型号，没有显示规格)
+                    if (infEntity.VERSION != null && infEntity.VERSION.Trim() != "")//器具型号
+                    {
+                        sheet_Destination.GetRow(19).GetCell(7).SetCellValue(infEntity.VERSION);
+                    }
+                    else if(infEntity.APPLIANCE_NAME != null && infEntity.APPLIANCE_NAME.Trim() != "")//计量器具名称
+                    {
+                        sheet_Destination.GetRow(19).GetCell(7).SetCellValue(infEntity.APPLIANCE_NAME);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(19).GetCell(7).SetCellValue("/");
+                    }                    
+                   
+                    //出厂编号
+                    if (infEntity.FACTORY_NUM != null && infEntity.FACTORY_NUM.Trim() != "")
+                    {
+                        sheet_Destination.GetRow(21).GetCell(7).SetCellValue(infEntity.FACTORY_NUM);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(21).GetCell(7).SetCellValue("/");
+                    }
+                    //生产厂家/制 造 单 位
+                    if (infEntity.MAKE_ORGANIZATION != null && infEntity.MAKE_ORGANIZATION.Trim() != "")
+                    {
+                        sheet_Destination.GetRow(23).GetCell(7).SetCellValue(infEntity.MAKE_ORGANIZATION);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(23).GetCell(7).SetCellValue("/");
+                    }
+                    IORDER_TASK_INFORMATIONBLL taskBll = new ORDER_TASK_INFORMATIONBLL();
+                    ORDER_TASK_INFORMATION taskEntity = taskBll.GetById(infEntity.ORDER_TASK_INFORMATIONID);
+                    if (taskEntity != null)
+                    {
+                        //证书单位
+                        if (taskEntity.CERTIFICATE_ENTERPRISE != null && taskEntity.CERTIFICATE_ENTERPRISE.Trim()!="")
+                        {
+                            sheet_Destination.GetRow(3).GetCell(0).SetCellValue(taskEntity.CERTIFICATE_ENTERPRISE);
+                        }
+                        //委托单位 /送 检 单 位       
+                        if (taskEntity.INSPECTION_ENTERPRISE != null && taskEntity.INSPECTION_ENTERPRISE.Trim() != "")
+                        {
+                            sheet_Destination.GetRow(15).GetCell(7).SetCellValue(taskEntity.INSPECTION_ENTERPRISE);
+                        }
+                        else
+                        {
+                            sheet_Destination.GetRow(15).GetCell(7).SetCellValue("/");
+                        }
+                    }
+                }
+            }
+
+            #region 检 定 依 据 当规程2个以上时，该处没有“检定依据”隐藏该行，该位置直接显示“检定结论”
+            //检定所依据技术文件（代号、名称）
+            IVRULEBLL rBll = new VRULEBLL();
+            List<VRULE> rList = rBll.GetBySCHEMEID(entity.SCHEMEID);
+            if (rList != null && rList.Count == 1)//一个规程
+            {
+                sheet_Destination.GetRow(25).GetCell(7).SetCellValue(rList[0].NAME);                
+            }
+            else
+            {
+                HideRow(sheet_Destination, 25, 1);
+            }
+            #endregion
+
+            //检定结论   
+            if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
+            {
+                sheet_Destination.GetRow(27).GetCell(7).SetCellValue("/");
+            }
+            else
+            {
+                sheet_Destination.GetRow(27).GetCell(7).SetCellValue(entity.CONCLUSION);
+            }
+
+            //批 准 人
+            if (entity.APPROVALID == null || entity.APPROVALID.Trim() == "")
+            {
+                sheet_Destination.GetRow(33).GetCell(13).SetCellValue("/");
+            }
+            else
+            {
+                sheet_Destination.GetRow(33).GetCell(13).SetCellValue(entity.APPROVALID);
+            }
+            //核验员
+            if (entity.DETECTERID != null && entity.DETECTERID.Trim() != "")
+            {
+                sheet_Destination.GetRow(35).GetCell(13).SetCellValue(entity.DETECTERID);
+            }
+            else
+            {
+                sheet_Destination.GetRow(35).GetCell(13).SetCellValue("/");
+            }
+            //检定员
+            if (entity.CHECKERID != null && entity.CHECKERID.Trim() != "")
+            {
+                sheet_Destination.GetRow(37).GetCell(13).SetCellValue(entity.CHECKERID);
+            }
+            else
+            {
+                sheet_Destination.GetRow(37).GetCell(13).SetCellValue("/");
+            }           
+            //检定日期
+            if (entity.CALIBRATION_DATE.HasValue)
+            {
+                sheet_Destination.GetRow(42).GetCell(9).SetCellValue(entity.CALIBRATION_DATE.Value.ToString("yyyy年MM月dd日"));
+            }
+            else
+            {
+                sheet_Destination.GetRow(42).GetCell(9).SetCellValue("/");
+            }
+            //有效期
+            if (entity.VALIDITY_PERIOD.HasValue)
+            {
+                sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
+            }
+            else
+            {
+                sheet_Destination.GetRow(43).GetCell(9).SetCellValue("/");
+            }            
+            #region 暂时没有数据，不做
+            ////检定所使用的计量标准装置
+            ////HideRow(sheet, RowIndex, 6);
+            //RowIndex = RowIndex + 6;
+
+
+
+            ////检定所使用的主要计量器具
+            ////HideRow(sheet, RowIndex, 6);
+            //RowIndex = RowIndex + 6;
+            ////比对和匝比试验使用的中间试品
+            ////HideRow(sheet, RowIndex, 6);
+            //RowIndex = RowIndex + 6;
+            ////空白
+            //RowIndex = RowIndex + 8;
+            #endregion
+            #endregion
+           
+            sheet_Destination.ForceFormulaRecalculation = true;
+        }
+        /// <summary>
+        /// 导出原始记录Excel
         /// </summary>
         /// <param name="ID">预备方案ID</param>
         /// <returns></returns>
@@ -84,7 +764,7 @@ namespace Langben.Report
                 SetFengPi(hssfworkbook, entity);
 
                 //设置数据
-                SetShuJu(hssfworkbook, entity);
+                SetShuJu(hssfworkbook, entity, ExportType.OriginalRecord);
 
                 saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";
                 string saveFileNamePath = System.Web.HttpContext.Current.Server.MapPath(saveFileName);
@@ -106,8 +786,8 @@ namespace Langben.Report
         /// <param name="entity"></param>
         private void SetFengPi(IWorkbook hssfworkbook, PREPARE_SCHEME entity)
         {
-            string sheetName_Source = "原始记录封皮模板";
-            string sheetName_Destination = "原始记录封皮";
+            string sheetName_Source = "封皮模板";
+            string sheetName_Destination = "封皮";
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
             int RowIndex = 0;
@@ -356,19 +1036,29 @@ namespace Langben.Report
         /// 设置数据信息
         /// </summary>
         /// <param name="hssfworkbook">工作文件</param>
-        private void SetShuJu(IWorkbook hssfworkbook, PREPARE_SCHEME entity)
+        /// <param name="entity">预备方案对象</param>
+        /// <param name="type">导出类型</param>
+        private void SetShuJu(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type= ExportType.OriginalRecord)
         {
             int RowIndex = 1;
             int JWTemplateIndex = 0;//规程标题获取源格式行   
             int ruleTitleTemplateIndex = 1;//检测项目名称
 
-            string sheetName_Source = "原始记录数据模板";
-            string sheetName_Destination = "原始记录数据";
-            string sheetName_ZiFuSource = "字符显示样式";
+            string sheetName_Source = "数据模板";
+            //if(type == ExportType.Report)
+            //{
+            //    sheetName_Source = "检定证书数据模板";
+            //    if (entity.CNAS == ShiFouCNAS.Yes.ToString())
+            //    {
+            //        sheetName_Source = "检定证书数据模板";
+            //    }
+            //}
+            string sheetName_Destination = "数据";
+            //string sheetName_ZiFuSource = "字符显示样式";
 
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
-            ISheet sheet_ZiFuSource = hssfworkbook.GetSheet(sheetName_ZiFuSource);
+            //ISheet sheet_ZiFuSource = hssfworkbook.GetSheet(sheetName_ZiFuSource);
 
             #region 检测项目            
             if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE != null &&
@@ -376,7 +1066,7 @@ namespace Langben.Report
             {
                 //Dictionary<string, TableTemplateExt> TableTemplateDic = GetTableTemplateDic();
 
-                TableTemplates allTableTemplates = GetTableTemplates();
+                TableTemplates allTableTemplates = GetTableTemplates();                
                 SpecialCharacters allSpecialCharacters = GetSpecialCharacters();
 
 
