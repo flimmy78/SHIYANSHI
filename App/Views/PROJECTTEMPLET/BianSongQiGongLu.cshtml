@@ -149,8 +149,6 @@ else
                     <td colspan="7" style="padding:0">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="subtbl">
                             <tbody id="tbody_moban">
-
-
                                 <tr rowindex="1">
                                     <td rowspan="1" align="right" width="120">
                                         <input class="my-textbox input-width" value="0.5" id="OUTPUT_VALUE_1_1_0" name="OUTPUT_VALUE" onblur="blurValue(this)" type="text"><span>C</span>
@@ -286,7 +284,7 @@ else
 
             var changerHTML = "onblur=''";
             //测量点
-            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, "", "<span>C</span>"));
+            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, ""));
             //二次输入标准值
             htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, "", "<span>°</span>"));
             //标准输出值
