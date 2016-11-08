@@ -179,7 +179,7 @@
             @((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")
         </td>
         <td align="center" width="100">
-            <input name="DengJi" type="text" class="my-textbox tr" value="0.0" style="width:70px" onblur="JS1(this)" tableid="tongdao_1">
+            <input name="DengJi" type="text" class="my-textbox tr" value="0.0" style="width:70px" onblur="JS1(this)" id="DengJi_1_1_1">
             级
         </td>
         <td colspan="7" style="padding:0">
@@ -187,52 +187,52 @@
                 <tbody id="tbody_moban">
                     <!--插入行的位置-->
                     <tr rowindex="1">
-                        <td rowspan="1" align="right" width="120"> <input class="my-textbox input-width" value="100%" id="OUTPUT_VALUE_1_1_0" name="OUTPUT_VALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="5.000" id="READ_VALUE_1_1_0" name="READ_VALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="20.000" id="ACTUAL_OUTPUT_VALUE_1_1_0" name="ACTUAL_OUTPUT_VALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_0" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="RELATIVE_ERROR_1_1_0" name="RELATIVE_ERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTY_DEGREE_1_1_0" name="UNCERTAINTY_DEGREE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right" width="120"> <input class="my-textbox input-width" value="100%" id="OUTPUTVALUE_1_1_1" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
+                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="5.000" id="READVALUE_1_1_1" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="20.000" id="ACTUALVALUE_1_1_1" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_1" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_1" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="2">
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="80%" id="OUTPUT_VALUE_1_2_0" name="OUTPUT_VALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="4.000" id="READ_VALUE_1_2_0" name="READ_VALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="16.800" id="ACTUAL_OUTPUT_VALUE_1_2_0" name="ACTUAL_OUTPUT_VALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_2_0" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVE_ERROR_1_2_0" name="RELATIVE_ERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTY_DEGREE_1_2_0" name="UNCERTAINTY_DEGREE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="80%" id="OUTPUTVALUE_1_1_2" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="4.000" id="READVALUE_1_1_2" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="16.800" id="ACTUALVALUE_1_1_2" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_2" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_2" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_2" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="3">
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="60%" id="OUTPUT_VALUE_1_3_0" name="OUTPUT_VALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="3.000" id="READ_VALUE_1_3_0" name="READ_VALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="13.600" id="ACTUAL_OUTPUT_VALUE_1_3_0" name="ACTUAL_OUTPUT_VALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_3_0" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVE_ERROR_1_3_0" name="RELATIVE_ERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTY_DEGREE_1_3_0" name="UNCERTAINTY_DEGREE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="60%" id="OUTPUTVALUE_1_1_3" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="3.000" id="READVALUE_1_1_3" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="13.600" id="ACTUALVALUE_1_1_3" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_3" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_3" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_3" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="4">
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="40%" id="OUTPUT_VALUE_1_4_0" name="OUTPUT_VALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="2.000" id="READ_VALUE_1_4_0" name="READ_VALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="10.400" id="ACTUAL_OUTPUT_VALUE_1_4_0" name="ACTUAL_OUTPUT_VALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_4_0" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVE_ERROR_1_4_0" name="RELATIVE_ERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTY_DEGREE_1_4_0" name="UNCERTAINTY_DEGREE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="40%" id="OUTPUTVALUE_1_1_4" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="2.000" id="READVALUE_1_1_4" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="10.400" id="ACTUALVALUE_1_1_4" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_4" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_4" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_4" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="5">
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="20%" id="OUTPUT_VALUE_1_5_0" name="OUTPUT_VALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="1.000" id="READ_VALUE_1_5_0" name="READ_VALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="7.200" id="ACTUAL_OUTPUT_VALUE_1_5_0" name="ACTUAL_OUTPUT_VALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_5_0" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVE_ERROR_1_5_0" name="RELATIVE_ERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTY_DEGREE_1_5_0" name="UNCERTAINTY_DEGREE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="20%" id="OUTPUTVALUE_1_1_5" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="1.000" id="READVALUE_1_1_5" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="7.200" id="ACTUALVALUE_1_1_5" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_5" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_5" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_5" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="6">
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="0%" id="OUTPUT_VALUE_1_6_0" name="OUTPUT_VALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="0.000" id="READ_VALUE_1_6_0" name="READ_VALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="4.000" id="ACTUAL_OUTPUT_VALUE_1_6_0" name="ACTUAL_OUTPUT_VALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_6_0" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVE_ERROR_1_6_0" name="RELATIVE_ERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTY_DEGREE_1_6_0" name="UNCERTAINTY_DEGREE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="0%" id="OUTPUTVALUE_1_1_6" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="0.000" id="READVALUE_1_1_6" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="4.000" id="ACTUALVALUE_1_1_6" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_6" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_6" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_6" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                 </tbody>
             </table>
@@ -244,7 +244,7 @@
     <!--表尾-->
     <tr>
         <td colspan="7">
-            <input type="hidden" id="hideLiangChengShuLiang" value="6" /> <!--默认已经有几行-->
+            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
             <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
 
         </td>
@@ -261,19 +261,19 @@
             $("#hideDangQianTongDao").val(tbodyIndex);
 
         }
-        //增加量程
+        //增加行
         function CreateRow() {
 
             var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
             var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
             LiangChengShuLiang++;
             var rowspanIdx = $("#txtPoint").val();     //检测点数
-            txtNumber = $("#txtNumber").val(); //量程
+            txtNumber = $("#txtNumber").val(); //小数点位数
             var standardValue = "";
             var htmlString = [];
-            var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;
+            var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
 
-            var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//（量程ID）第几个通道_第几个量程
+            var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
             for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
                 rowLength++;
                 htmlString.push("<tr rowindex='" + rowLength + "'>");
@@ -284,24 +284,24 @@
                 var unit = "<span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span>";//在输入框后面的单位
 
 
-                var HangHaoID = lianChengID + "_" + rowidx;//（行号ID)量程ID_第几行
+                var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
                 if (rowidx == 0) {
                     //需要合并的列
                 }
                 //需要合并的列
                 var changerHTML = "onblur=''";
                 //测量点 需要下拉框
-                htmlString.push(SetTDHtml(rowspan, "OUTPUT_VALUE", HangHaoID, rowidx, txtVal, unit));
+                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120", unit));
                 //二次输入标准值
-                htmlString.push(SetTDHtml(rowspan, "READ_VALUE", HangHaoID, rowidx, txtVal));
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100"));
                 //标准输出值
-                htmlString.push(SetTDHtml(rowspan, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx, txtVal));
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100"));
                 //实际输出值
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal));
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "classstyle100"));
                 //引用误差
-                htmlString.push(SetTDHtml(rowspan, "RELATIVE_ERROR", HangHaoID, rowidx, txtVal));
-                //校准结果的不确定度
-                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTY_DEGREE", HangHaoID, rowidx, txtVal));
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "classstyle100"));
+                //校准结果的不确定度 U(K =
+                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, txtVal, "classstyle"));
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
@@ -309,7 +309,7 @@
             var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
             //$('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
-            $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang)
+            $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang)
         }
 
         //离开事件，用于计算
@@ -324,20 +324,20 @@
             {
 
                 id = obj.id.replace(obj.name, "") + "_";
-                $("input[name=READ_VALUE]").each(function (a, b) {//读数值
+                $("input[name=READVALUE]").each(function (a, b) {//读数值
                     if (b.id.indexOf(id) >= 0 && b.value.trim() != "") {
                         var hhID = b.id.replace(b.name, "");//行号
-                        var shijizhiID = "#ACTUAL_OUTPUT_VALUE" + hhID;//输出实际值ID
+                        var shijizhiID = "#ACTUALVALUE" + hhID;//输出实际值ID
                         $(shijizhiID).val(CalculateShiJiZhi(obj.value.trim(), b.value.trim()));
                     }
                 });
             }
-            else if (obj.name == "READ_VALUE")//读数值
+            else if (obj.name == "READVALUE")//读数值
             {
                 var DZID = obj.id.replace(obj.name, "");
                 DZID = DZID.substr(0, DZID.lastIndexOf("_"));
                 var hhID = obj.id.replace(obj.name, "");//行号
-                var shijizhiID = "#ACTUAL_OUTPUT_VALUE" + hhID;//输出实际值ID
+                var shijizhiID = "#ACTUALVALUE" + hhID;//输出实际值ID
                 var DianZuID = "#RESISTANCE" + DZID;//电阻ID
                 $(shijizhiID).val(CalculateShiJiZhi($(DianZuID).val(), obj.value.trim()));
             }
@@ -364,6 +364,8 @@
 }
 @section TanKuang {
     <!--弹框的位置-->
+    <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
+    <input type="hidden" id="txtNumber" value="1" /><!--小数点位数-->
 
 }
 
