@@ -1400,7 +1400,7 @@ function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
 //unit在输入框后面的单位
 function SetTDHtml(rowspan, name, id, rowidx, txtVal, unit) {
 
-    var ddlName = name + "_UNIT";//下拉框名
+    var ddlName = name;// + "_UNIT";//下拉框名
     var ddlId = ddlName + "_" + id;//下拉框ID
     var id = name + "_" + id;//输入框id
 
@@ -1414,7 +1414,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, unit) {
     htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='blurValue(this)'/>");
     if (ddlHtml != null && ddlHtml.trim() != "") {
         var AttributeValue = GetAttributeValue("LianDongDanWeiDDL");
-        htmlString.push($(ddlHtml).attr("onchange", "LianDongDanWeiDDL(this,'" + AttributeValue + "')").attr("name", ddlName).attr("id", ddlId)[0].outerHTML);
+        htmlString.push($(ddlHtml).attr("onchange", "LianDongDanWeiDDL(this,'" + AttributeValue + "')").attr("name", ddlName + "_UNIT").attr("id", ddlId)[0].outerHTML);
     }
     if (unit) {
         htmlString.push(unit);
