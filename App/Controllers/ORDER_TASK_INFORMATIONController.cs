@@ -94,19 +94,20 @@ namespace Langben.App.Controllers
         [HttpPut]
         public ActionResult QianZi(string id, string PICTURE, string HTMLVALUE)
         {
-            byte[] byt = Convert.FromBase64String(PICTURE);
-            MemoryStream stream = new MemoryStream(byt);
-            string path = Server.MapPath("~/up/QianZi/");
-            var pathErWeiMa = path + id + ".png";
-            System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate);
+            if (!string.IsNullOrWhiteSpace(PICTURE))
+            {
+                byte[] byt = Convert.FromBase64String(PICTURE);
+                MemoryStream stream = new MemoryStream(byt);
+                string path = Server.MapPath("~/up/QianZi/");
+                var pathErWeiMa = path + id + ".png";
+                System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate);
 
-            //成和园
-            System.IO.BinaryWriter w = new System.IO.BinaryWriter(fs);
-            w.Write(stream.ToArray());
+                System.IO.BinaryWriter w = new System.IO.BinaryWriter(fs);
+                w.Write(stream.ToArray());
 
-            fs.Close();
-            stream.Close();
-
+                fs.Close();
+                stream.Close();
+            }     
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             SIGN sign = new SIGN();
             sign.PICTURE = PICTURE;
