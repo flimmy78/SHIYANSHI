@@ -77,13 +77,14 @@ else
                             <input name="" type="text" class="my-textbox tc" value="4" style="width:30px">
                             -
                             <input name="" type="text" class="my-textbox tc" value="20" style="width:30px">
-                            ) <select class="my-combobox" name="" id="">
+                            ) 
+                            <select class="my-combobox" name="" id="">
                                 <option value="mA">mA</option>
                                 <option value="V">V</option>
                             </select>
                         </div>
                         <div class="fl" style="margin-right:20px;display:none">
-                            U<sub>n</sub> =
+                            @(ViewBag.DianLiuDianYa == "电流")?"I":"U"<sub>n</sub> =
                             <input name="" type="text" class="my-textbox tc" value="100" style="width:40px">
                             <select class="my-combobox" name="" id="">
                                 <option value="V">V</option>
@@ -151,17 +152,8 @@ else
             <tbody id="tbody_moban_1">
                 <tr>
                     <td align="center" width="100">
-                        @if (ViewBag.DianLiuDianYa == "电压")
-                        {
-                            <span name="U">U</span>
-                        }else if (ViewBag.DianLiuDianYa == "电流")
-                        {
-                        <span name="I">I</span>
-
-
-                        }else{
-                        <span name="UI">@ViewBag.DianLiuDianYa</span>
-                        }
+                        @(ViewBag.DianLiuDianYa == "电流")?"I":"U"
+                        
                     </td>
                     <td align="center" width="100">
                         <input name="DengJi" type="text" class="my-textbox tr" value="0.0" style="width:70px" onblur="JS1(this)" tableid="tongdao_1">
