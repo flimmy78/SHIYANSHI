@@ -28,12 +28,7 @@
                 -
                 <input name="" type="text" class="my-textbox tc" value="50.5" style="width:30px">
                 )
-                <select class="my-combobox" name="" id="">
-                    <option value="">Hz</option>
-                    <option value="">KHz</option>
-                    <option value="">MHz</option>
-                    <option value="">GHz</option>
-                </select>
+                <select class="my-combobox" name="" id=""><option value="Hz">Hz</option><option value="KHz">KHz</option><option value="MHz">MHz</option><option value="GHz">GHz</option></select>
             </div>
 
             <div class="fl" style="margin-right:20px">
@@ -69,7 +64,7 @@
 
         <th align="center" width="100">
             二次输入标准值<br>
-            (W)
+            (Hz)
         </th>
         <th align="center" width="100">
             标准输出值<br>
@@ -118,49 +113,49 @@
                 <tbody id="tbody_moban">
                     <!--插入行的位置-->
                     <tr rowindex="1">
-                        <td rowspan="1" align="right" width="120"> <input class="my-textbox input-width" value="100%" id="OUTPUTVALUE_1_1_1" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="5.000" id="READVALUE_1_1_1" name="READVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="20.000" id="ACTUALVALUE_1_1_1" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right" width="120"> <input class="my-textbox input-width" value="" id="OUTPUTVALUE_1_1_1" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><select class="my-combobox" name="" id=""><option value="Hz">Hz</option><option value="KHz">KHz</option><option value="MHz">MHz</option><option value="GHz">GHz</option></select></td>
+                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="READVALUE_1_1_1" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_1_1_1" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_1" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_1" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="2">
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="80%" id="OUTPUTVALUE_1_1_2" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="4.000" id="READVALUE_1_1_2" name="READVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="16.800" id="ACTUALVALUE_1_1_2" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="OUTPUTVALUE_1_1_2" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><select class="my-combobox" name="" id=""><option value="Hz">Hz</option><option value="KHz">KHz</option><option value="MHz">MHz</option><option value="GHz">GHz</option></select></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READVALUE_1_1_2" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_1_1_2" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_2" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_2" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_2" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="3">
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="60%" id="OUTPUTVALUE_1_1_3" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="3.000" id="READVALUE_1_1_3" name="READVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="13.600" id="ACTUALVALUE_1_1_3" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="OUTPUTVALUE_1_1_3" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><select class="my-combobox" name="" id=""><option value="Hz">Hz</option><option value="KHz">KHz</option><option value="MHz">MHz</option><option value="GHz">GHz</option></select></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READVALUE_1_1_3" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_1_1_3" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_3" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_3" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_3" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="4">
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="40%" id="OUTPUTVALUE_1_1_4" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="2.000" id="READVALUE_1_1_4" name="READVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="10.400" id="ACTUALVALUE_1_1_4" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="OUTPUTVALUE_1_1_4" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><select class="my-combobox" name="" id=""><option value="Hz">Hz</option><option value="KHz">KHz</option><option value="MHz">MHz</option><option value="GHz">GHz</option></select></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READVALUE_1_1_4" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_1_1_4" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_4" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_4" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_4" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="5">
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="20%" id="OUTPUTVALUE_1_1_5" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="1.000" id="READVALUE_1_1_5" name="READVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="7.200" id="ACTUALVALUE_1_1_5" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="OUTPUTVALUE_1_1_5" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><select class="my-combobox" name="" id=""><option value="Hz">Hz</option><option value="KHz">KHz</option><option value="MHz">MHz</option><option value="GHz">GHz</option></select></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READVALUE_1_1_5" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_1_1_5" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_5" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_5" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_5" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="6">
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="0%" id="OUTPUTVALUE_1_1_6" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="0.000" id="READVALUE_1_1_6" name="READVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="4.000" id="ACTUALVALUE_1_1_6" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="OUTPUTVALUE_1_1_6" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><select class="my-combobox" name="" id=""><option value="Hz">Hz</option><option value="KHz">KHz</option><option value="MHz">MHz</option><option value="GHz">GHz</option></select></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READVALUE_1_1_6" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_1_1_6" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_6" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_6" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_6" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
@@ -212,7 +207,7 @@
                 var rowspan = 1; //合并单元格行数
 
                 var txtVal = "";//(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
-                var unit = "<span>@((ViewBag.DianLiuDianYa == "电流") ? "I" : "U")<sub>n</sub></span>";//在输入框后面的单位
+                var unit ='<select class="my-combobox" name="" id=""><option value="Hz">Hz</option><option value="KHz">KHz</option><option value="MHz">MHz</option><option value="GHz">GHz</option></select>';//在输入框后面的单位
 
 
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
