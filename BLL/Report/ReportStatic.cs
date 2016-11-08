@@ -91,5 +91,47 @@ namespace Langben.Report
                 return path;
             }
         }
+
+        /// <summary>
+        /// 检定证书模板文件绝对路径
+        /// </summary>
+        public static string BaoGaoJianDingPath
+        {
+            get
+            {
+                string path = string.Empty;
+                if (ConfigurationManager.AppSettings["BaoGaoJianDingPath"] != null && ConfigurationManager.AppSettings["BaoGaoJianDingPath"].Trim() != "")
+                {
+                    path = ConfigurationManager.AppSettings["BaoGaoJianDingPath"].Trim();
+                }
+                else
+                {
+                    path = "../Template/检定证书.xls";
+                }
+                path = System.Web.HttpContext.Current.Server.MapPath(path);
+                return path;
+            }
+        }
+
+        /// <summary>
+        /// 检定证书模板文件绝对路径
+        /// </summary>
+        public static string BaoGaoXiaoZhunPath
+        {
+            get
+            {
+                string path = string.Empty;
+                if (ConfigurationManager.AppSettings["BaoGaoXiaoZhunPath"] != null && ConfigurationManager.AppSettings["BaoGaoXiaoZhunPath"].Trim() != "")
+                {
+                    path = ConfigurationManager.AppSettings["BaoGaoXiaoZhunPath"].Trim();
+                }
+                else
+                {
+                    path = "../Template/校准证书.xls";
+                }
+                path = System.Web.HttpContext.Current.Server.MapPath(path);
+                return path;
+            }
+        }
     }
 }

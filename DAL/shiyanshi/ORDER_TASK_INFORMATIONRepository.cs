@@ -64,7 +64,12 @@ namespace Langben.DAL
             task.SIGN.Add(sign);
             foreach (var item in task.APPLIANCE_DETAIL_INFORMATION)
             {
-                item.APPEARANCE_STATUS = Common.ORDER_STATUS.已分配.ToString();
+                foreach (var it in item.APPLIANCE_LABORATORY)
+                {
+                    it.ORDER_STATUS= Common.ORDER_STATUS.已分配.ToString();
+                    it.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.已分配.GetHashCode().ToString();
+                }
+               
             }
         }
 

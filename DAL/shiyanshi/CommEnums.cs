@@ -140,5 +140,19 @@ namespace Langben.DAL.shiyanshi
         UNCERTAINTY_DEGREE_UNIT = 30          
                   
     }
+    /// <summary>
+    /// 导出类型
+    /// </summary>
+    public enum ExportType
+    {
+        /// <summary>
+        /// 原始记录
+        /// </summary>
+        OriginalRecord = 0,
+        /// <summary>
+        /// 报告
+        /// </summary>
+        Report = 1
+    }
 
 }
