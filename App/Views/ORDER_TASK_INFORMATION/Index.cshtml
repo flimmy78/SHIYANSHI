@@ -90,8 +90,10 @@
                         }
                     }  ],
                 columns: [[
-					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 220, formatter: function (value, row, index) {             						   
-					    return "<a href='../ORDER_TASK_INFORMATION/Details/" + row.ID + "'>" + row.ID + "</a>";
+                    { field: 'ID', title: '@Html.DisplayNameFor(model => model.ACCEPT_ORGNIZATION)', width: 220, hidden: true },
+					{
+					    field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 220, formatter: function (value, row, index) {
+					        return "<a href='../ORDER_TASK_INFORMATION/Details/" + row.ID + "'>" + row.ORDER_NUMBER + "</a>";
 					}}
 					, { field: 'ACCEPT_ORGNIZATION', title: '@Html.DisplayNameFor(model => model.ACCEPT_ORGNIZATION)', width: 220 }
 					,{ field: 'INSPECTION_ENTERPRISE', title:  '@Html.DisplayNameFor(model => model.INSPECTION_ENTERPRISE)', width: 140 }
