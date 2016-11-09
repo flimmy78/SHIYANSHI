@@ -9,20 +9,14 @@
     @Scripts.Render("~/bundles/easyui")
 
     @RenderSection("HeadContent", false)
-
-    <script type='text/javascript'>
-
-
-        $(function () {
-
-        });
-    </script>
+ 
     <style type="text/css">
         .classstyle {
         }
 
         .classstyle100 {
             width: 100px;
+          
         }
 
         .classstyle120 {
@@ -43,7 +37,6 @@
                         <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTongDao()" id="btnDuoTongDao" style="display:none">增加通道</a>
                         <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnSave" onclick="Save()">保存检测项</a>
                         <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnReset" onclick="Reset()">重置检测项</a>
-                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnReset_ITE" onclick="Reset_ITE()">重置检测项</a>
                     </td>
                 </tr>
             </table>

@@ -10,7 +10,7 @@
     <tr>
         <td colspan="95">
             <div class="fl" style="margin-right:20px">
-                <input name="" type="text" class="my-textbox tc" value="100" style="width:40px">
+                <input name="dianya" id="dianya_1_1_1" type="text" class="my-textbox tc" value="100" style="width:40px">
                 <select class="my-combobox" name="" id="">
                     <option value="V">V</option>
                     <option value="MV">MV</option>
@@ -19,7 +19,7 @@
                     <option value="μV">μV</option>
                 </select>
                 /
-                <input name="" type="text" class="my-textbox tc" value="5" style="width:40px">
+                <input name="dianliu" id="dianliu_1_1_1" type="text" class="my-textbox tc" value="5" style="width:40px">
                 <select class="my-combobox" name="" id="">
                     <option value="A">A</option>
                     <option value="KA">KA</option>
@@ -28,7 +28,7 @@
                     <option value="nA">nA</option>
                     <option value="pA">pA</option>
                 </select>，
-                <input name="" type="text" class="my-textbox tc" value="50" style="width:50px">
+                <input name="dianHz" id="dianHz_1_1_1" type="text" class="my-textbox tc" value="50" style="width:50px">
                 <select class="my-combobox" name="" id="">
                     <option value="Hz">Hz</option>
                     <option value="kHz">kHz</option>
@@ -49,7 +49,7 @@
     </tr>
     <tr>
         <th align="center" class="f14">
-            <select class="my-combobox" name="">
+            <select class="my-combobox" name="MYDIANYA1" id="MYDIANYA1_1_1_1">
                 <option value="">U1</option>
                 <option value="">U2</option>
                 <option value="">UA</option>
@@ -59,7 +59,7 @@
                 <option value="">UBC</option>
 
             </select><span>-</span>
-            <select class="my-combobox" name="select">
+            <select class="my-combobox" name="MYDIANYA2" id="MYDIANYA2_1_1_1">
                 <option value="I1">I1</option>
                 <option value="I2">I2</option>
                 <option value="IA">IA </option>
@@ -67,55 +67,8 @@
                 <option value="IC">IC</option>
             </select>
         </th>
-        @if (ViewBag.canshu >= 2)
-            {
-
-            <th align="center" class="f14">
-                <select class="my-combobox" name="">
-                    <option value="">U1</option>
-                    <option value="">U2</option>
-                    <option value="">UA</option>
-                    <option value="">UB</option>
-                    <option value="">UC</option>
-                    <option value="">UAB </option>
-                    <option value="">UBC</option>
-
-                </select><span>-</span>
-                <select class="my-combobox" name="select">
-                    <option value="I1">I1</option>
-                    <option value="I2">I2</option>
-                    <option value="IA">IA </option>
-                    <option value="IB">IB</option>
-                    <option value="IC">IC</option>
-                </select>
-            </th>
-        }
-        @if (ViewBag.canshu >= 3)
-        {
-            <th align="center" class="f14">
-                <select class="my-combobox" name="">
-                    <option value="">U1</option>
-                    <option value="">U2</option>
-                    <option value="">UA</option>
-                    <option value="">UB</option>
-                    <option value="">UC</option>
-                    <option value="">UAB </option>
-                    <option value="">UBC</option>
-                </select>
-                <span>-</span>
-                <select class="my-combobox" name="select">
-                    <option value="I1">I1</option>
-                    <option value="I2">I2</option>
-                    <option value="IA">IA </option>
-                    <option value="IB">IB</option>
-                    <option value="IC">IC</option>
-                </select>
-            </th>
-        }
-
-
         <th align="center" class="f14">
-            <select class="my-combobox" name="">
+            <select class="my-combobox" name="MYDIANYA3" id="MYDIANYA3_1_1_1">
                 <option value="">U1</option>
                 <option value="">U2</option>
                 <option value="">UA</option>
@@ -125,63 +78,16 @@
                 <option value="">UBC</option>
 
             </select><span>-</span>
-            <select class="my-combobox" name="select">
+            <select class="my-combobox" name="MYDIANYA4" id="MYDIANYA4_1_1_1">
                 <option value="I1">I1</option>
                 <option value="I2">I2</option>
                 <option value="IA">IA </option>
                 <option value="IB">IB</option>
                 <option value="IC">IC</option>
-
             </select>
-       
         </th>
-        @if (ViewBag.canshu >= 2)
-            {
-
-            <th align="center" class="f14">
-                <select class="my-combobox" name="">
-                    <option value="">U1</option>
-                    <option value="">U2</option>
-                    <option value="">UA</option>
-                    <option value="">UB</option>
-                    <option value="">UC</option>
-                    <option value="">UAB </option>
-                    <option value="">UBC</option>
-
-                </select><span>-</span>
-                <select class="my-combobox" name="select">
-                    <option value="I1">I1</option>
-                    <option value="I2">I2</option>
-                    <option value="IA">IA </option>
-                    <option value="IB">IB</option>
-                    <option value="IC">IC</option>
-                </select>
-            </th>
-        }
-        @if (ViewBag.canshu >= 3)
-        {
-            <th align="center" class="f14">
-                <select class="my-combobox" name="">
-                    <option value="">U1</option>
-                    <option value="">U2</option>
-                    <option value="">UA</option>
-                    <option value="">UB</option>
-                    <option value="">UC</option>
-                    <option value="">UAB </option>
-                    <option value="">UBC</option>
-                </select>
-                <span>-</span>
-                <select class="my-combobox" name="select">
-                    <option value="I1">I1</option>
-                    <option value="I2">I2</option>
-                    <option value="IA">IA </option>
-                    <option value="IB">IB</option>
-                    <option value="IC">IC</option>
-                </select>
-            </th>
-        }
         <th align="center" class="f14">
-            <select class="my-combobox" name="">
+            <select class="my-combobox" name="MYDIANYA5" id="MYDIANYA5_1_1_1">
                 <option value="">U1</option>
                 <option value="">U2</option>
                 <option value="">UA</option>
@@ -191,21 +97,21 @@
                 <option value="">UBC</option>
 
             </select><span>-</span>
-            <select class="my-combobox" name="select">
+            <select class="my-combobox" name="MYDIANYA6" id="MYDIANYA6_1_1_1">
                 <option value="I1">I1</option>
                 <option value="I2">I2</option>
                 <option value="IA">IA </option>
                 <option value="IB">IB</option>
                 <option value="IC">IC</option>
-
             </select>
-           
         </th>
+
+
+
         @if (ViewBag.canshu >= 2)
             {
-
             <th align="center" class="f14">
-                <select class="my-combobox" name="">
+                <select class="my-combobox" name="MYDIANYA7" id="MYDIANYA7_1_1_1">
                     <option value="">U1</option>
                     <option value="">U2</option>
                     <option value="">UA</option>
@@ -215,7 +121,7 @@
                     <option value="">UBC</option>
 
                 </select><span>-</span>
-                <select class="my-combobox" name="select">
+                <select class="my-combobox" name="MYDIANYA8" id="MYDIANYA8_1_1_1">
                     <option value="I1">I1</option>
                     <option value="I2">I2</option>
                     <option value="IA">IA </option>
@@ -223,11 +129,8 @@
                     <option value="IC">IC</option>
                 </select>
             </th>
-        }
-        @if (ViewBag.canshu >= 3)
-        {
             <th align="center" class="f14">
-                <select class="my-combobox" name="">
+                <select class="my-combobox" name="MYDIANYA9" id="MYDIANYA9_1_1_1">
                     <option value="">U1</option>
                     <option value="">U2</option>
                     <option value="">UA</option>
@@ -235,9 +138,9 @@
                     <option value="">UC</option>
                     <option value="">UAB </option>
                     <option value="">UBC</option>
-                </select>
-                <span>-</span>
-                <select class="my-combobox" name="select">
+
+                </select><span>-</span>
+                <select class="my-combobox" name="MYDIANYA0" id="MYDIANYA0_1_1_1">
                     <option value="I1">I1</option>
                     <option value="I2">I2</option>
                     <option value="IA">IA </option>
@@ -245,16 +148,89 @@
                     <option value="IC">IC</option>
                 </select>
             </th>
+            <th align="center" class="f14">
+                <select class="my-combobox" name="MYDIANYA11" id="MYDIANYA11_1_1_1">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+
+                </select><span>-</span>
+                <select class="my-combobox" name="MYDIANYA12" id="MYDIANYA12_1_1_1">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
+            </th>
+
         }
-        <th align="center">
-            U(K = <select class="my-combobox" name="state">
-                <option value="">2 </option>
-                <option value="">3</option>
-                <option value="">√3</option>
 
+        @if (ViewBag.canshu >= 3)
+            {
+            <th align="center" class="f14">
+                <select class="my-combobox" name="MYDIANYA13" id="MYDIANYA13_1_1_1">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
 
-            </select>)
-        </th>
+                </select><span>-</span>
+                <select class="my-combobox" name="MYDIANYA14" id="MYDIANYA14_1_1_1">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
+            </th>
+            <th align="center" class="f14">
+                <select class="my-combobox" name="MYDIANYA15" id="MYDIANYA15_1_1_1">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+
+                </select><span>-</span>
+                <select class="my-combobox" name="MYDIANYA16" id="MYDIANYA16_1_1_1">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
+            </th>
+            <th align="center" class="f14">
+                <select class="my-combobox" name="MYDIANYA517" id="MYDIANYA17_1_1_1">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+
+                </select><span>-</span>
+                <select class="my-combobox" name="MYDIANYA18" id="MYDIANYA18_1_1_1">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
+            </th>
+
+        }
     </tr>
 </thead>
 

@@ -484,6 +484,8 @@ function SetAllControlHtml() {
 
     });
 }
+function JS1(thi) {
+}
 //---------------------------------
 
 

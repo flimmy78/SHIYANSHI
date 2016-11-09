@@ -84,7 +84,7 @@ namespace Langben.App.Controllers
         }
 
         /// <summary>
-        /// 变送器-电流电压-引用误差
+        /// 变送器-电流电压-引用误差 BianSongQiDianLiuDianYa/电流
         /// </summary> 
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
