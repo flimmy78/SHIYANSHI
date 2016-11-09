@@ -35,17 +35,19 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult BianSongQiYouGongWuGong(string RULEID = "JJG126-1995_5", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult BianSongQiYouGongWuGong(string id = "有功功率", string RULEID = "126-1995_2_4_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
+            ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
+
         /// <summary>
         /// 变送器-相位-引用误差
         /// </summary> 
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult BianSongQiXiangWei(string RULEID = "JJG126-1995_4", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult BianSongQiXiangWei(string RULEID = "126-1995_2_7_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
@@ -70,7 +72,7 @@ namespace Langben.App.Controllers
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
-        /// 变送器-功率-引用误差
+        /// 测试用
         /// </summary> 
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
@@ -87,7 +89,7 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult BianSongQiDianLiuDianYa(string id = "电流", string RULEID = "126-1995_2_2_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult BianSongQiDianLiuDianYa(string id = "电流", string RULEID = "126-1995_2_3_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);

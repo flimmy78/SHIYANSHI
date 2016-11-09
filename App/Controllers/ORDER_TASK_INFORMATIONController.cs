@@ -157,6 +157,15 @@ namespace Langben.App.Controllers
 
                         //QRCodeHelper.GetQRCode(item.ID, ms);
                         var pathErWeiMa = path + item.ID + ".png";
+
+                        //
+                        Graphics g = null;
+                        Font f = new Font("微软雅黑", 16, FontStyle.Bold);
+                        SolidBrush s = new SolidBrush(ColorTranslator.FromHtml("#411464"));
+                        //g = Graphics.FromImage(pathErWeiMa);
+                        //g.DrawString(vnum, f, s, 1, 1);
+                        //
+
                         System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate);
 
 
