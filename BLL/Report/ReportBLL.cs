@@ -49,13 +49,33 @@ namespace Langben.Report
         /// <summary>
         /// 获取所有报告配置信息
         /// </summary>
+        /// <param name="type">报告类型</param>
         /// <returns></returns>
-        public TableTemplates GetTableTemplates()
+        public TableTemplates GetTableTemplates(ExportType type= ExportType.OriginalRecord)
         {
             TableTemplates result = null;
             if (ReportStatic.TableTemplateXml != null && ReportStatic.TableTemplateXml.Trim() != "")
             {
-                result = TableTemplates.XmlCovertObj(ReportStatic.TableTemplateXml);
+                switch(type)
+                {
+                    case ExportType.OriginalRecord:
+                        result = TableTemplates.XmlCovertObj(ReportStatic.TableTemplateXml);
+                        break;
+                    case ExportType.Report_JianDing:
+                        result = TableTemplates.XmlCovertObj(ReportStatic.TableTemplate_JianDingXml);
+                        break;
+                    case ExportType.Report_XiaoZhun:
+                        result = TableTemplates.XmlCovertObj(ReportStatic.TableTemplate_JiaoZhunXml);
+                        break;
+                    case ExportType.Report_XiaoZhun_CNAS:
+                        result = TableTemplates.XmlCovertObj(ReportStatic.TableTemplate_JiaoZhunXml);
+                        break;
+                    default:
+                        result = TableTemplates.XmlCovertObj(ReportStatic.TableTemplateXml);
+                        break;
+
+                }
+                
             }
             return result;
         }
@@ -91,7 +111,8 @@ namespace Langben.Report
                 }
 
                 //设置数据
-                SetShuJu(hssfworkbook, entity, ExportType.Report);
+                ExportType type = GetExportType(entity);
+                SetShuJu(hssfworkbook, entity, type);
 
                 saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";
                 string saveFileNamePath = System.Web.HttpContext.Current.Server.MapPath(saveFileName);
@@ -105,6 +126,31 @@ namespace Langben.Report
             }
             Message = "未找到预备方案ID为【" + ID + "】的数据";
             return false;
+        }
+        /// <summary>
+        /// 获取报告类型
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        private ExportType GetExportType(PREPARE_SCHEME entity)
+        {
+            ExportType result = ExportType.Report_JianDing;
+            if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString())
+            {
+                if(entity.CNAS!=null && entity.CNAS.Trim() == ShiFouCNAS.Yes.ToString())
+                {
+                    result = ExportType.Report_XiaoZhun;
+                }
+                else
+                {
+                    result = ExportType.Report_XiaoZhun_CNAS;
+                }
+            }
+            else
+            {
+                result = ExportType.Report_JianDing;
+            }
+            return result;
         }
         /// <summary>
         /// 设置校准报告封皮信息
@@ -1035,30 +1081,16 @@ namespace Langben.Report
             int RowIndex = 1;
             int JWTemplateIndex = 0;//规程标题获取源格式行   
             int ruleTitleTemplateIndex = 1;//检测项目名称
-
-            string sheetName_Source = "数据模板";
-            //if(type == ExportType.Report)
-            //{
-            //    sheetName_Source = "检定证书数据模板";
-            //    if (entity.CNAS == ShiFouCNAS.Yes.ToString())
-            //    {
-            //        sheetName_Source = "检定证书数据模板";
-            //    }
-            //}
+            string sheetName_Source = "数据模板";            
             string sheetName_Destination = "数据";
-            //string sheetName_ZiFuSource = "字符显示样式";
-
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
-            ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
-            //ISheet sheet_ZiFuSource = hssfworkbook.GetSheet(sheetName_ZiFuSource);
-
+            ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);            
             #region 检测项目            
             if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE != null &&
                 entity.QUALIFIED_UNQUALIFIED_TEST_ITE.Count > 0)
-            {
-                //Dictionary<string, TableTemplateExt> TableTemplateDic = GetTableTemplateDic();
+            {             
 
-                TableTemplates allTableTemplates = GetTableTemplates();                
+                TableTemplates allTableTemplates = GetTableTemplates(type);                
                 SpecialCharacters allSpecialCharacters = GetSpecialCharacters();
 
 

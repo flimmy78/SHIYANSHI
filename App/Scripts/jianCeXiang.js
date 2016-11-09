@@ -29,7 +29,7 @@ function CreateTongDao() {
 
     $tongdao.addClass('clone');
     $tongdao.css('display', '');
-    $tongdao.attr('id', 'tongdao_' + tableIdx);
+    $tongdao.attr('id', 'tongdao_moban_' + tableIdx);
     $tongdao.find("#tbody_moban").attr('id', 'tbody_' + tableIdx);
     $tongdao.find("#K_moban").attr('id', 'K_' + tableIdx);
 
