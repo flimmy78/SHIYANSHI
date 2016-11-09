@@ -186,21 +186,22 @@
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_8" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                 </tbody>
+                <tfoot>
+                    <!--表尾-->
+                    <tr>
+                        <td colspan="7">
+                            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+                            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
+
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </td>
     </tr>
 
 </tbody>
-<tfoot>
-    <!--表尾-->
-    <tr>
-        <td colspan="7">
-            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
-            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
 
-        </td>
-    </tr>
-</tfoot>
 @section JS {
     <script type="text/javascript" language="javascript">
         //一个量程的需要这个方法

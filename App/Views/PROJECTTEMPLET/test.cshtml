@@ -70,7 +70,7 @@
         <th align="center" width="100">测试量</th>
         <th align="center" width="100"> 等级</th>
         <th align="center" width="120"> 测量点</th>
-        <th align="center" width="50">@((ViewBag.canshu == "有功功率") ? "cos" : "sin")φ</th>
+        <th align="center" width="50">cos φ</th>
         <th align="center" width="100">
             二次输入标准值<br>
             (W)
@@ -200,7 +200,7 @@
                         <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_2_1" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_2_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
-
+                   
                     <tr rowindex="2">
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="0%" id="OUTPUTVALUE_1_2_2" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>I<sub>n</sub></span></td>
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READVALUE_1_2_2" name="READVALUE" onblur="blurValue(this)" type="text"></td>
@@ -267,7 +267,7 @@
         //一个量程的需要这个方法
         //重写set方法，只准对增加空白行
         function set(tbodyIndex, thi) {
-
+             
             CreateRow(thi);
             // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
             $("#hideDangQianTongDao").val(tbodyIndex);
@@ -275,7 +275,7 @@
         }
         //增加行
         function CreateRow(thi) {
-
+         
             var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
             var LiangChengShuLiang = $(thi).prev().val();//$("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
             //LiangChengShuLiang++;
@@ -283,7 +283,7 @@
             txtNumber = $("#txtNumber").val(); //小数点位数
             var standardValue = "";
             var htmlString = [];
-            var rowLength =
+            var rowLength =  
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find(".myliangcheng_" + LiangChengShuLiang + " tr").length;//行号
 
             var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
