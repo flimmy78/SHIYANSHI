@@ -23,9 +23,14 @@ namespace Langben.App.Controllers
     /// </summary>
     public class ORDER_TASK_INFORMATIONController : BaseController
     {
-
-        public ActionResult Show(string id)
+        /// <summary>
+        /// 委托单页面
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Show(string id = "1611081523323547325feb23206e5")
         {
+
             ViewBag.Id = id;
             return View();
         }
@@ -38,8 +43,6 @@ namespace Langben.App.Controllers
             foreach (var s in queryData.APPLIANCE_DETAIL_INFORMATION)
             {
                 UNDERTAKE_LABORATORYID = null;
-
-
                 s.UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID;
                 var show = new Models.APPLIANCE_DETAIL_INFORMATIONShow()
                 {
@@ -67,7 +70,6 @@ namespace Langben.App.Controllers
                     STORAGEINSTRUCTIONS = s.STORAGEINSTRUCTIONS,
                     STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU,
                     UNDERTAKE_LABORATORYIDString = UNDERTAKE_LABORATORYID.TrimEnd(','),
-
                 };
                 data.APPLIANCE_DETAIL_INFORMATIONShows.Add(show);
             }
@@ -87,7 +89,6 @@ namespace Langben.App.Controllers
             data.CONTACT_PHONE2 = queryData.CONTACT_PHONE2;
             data.FAX2 = queryData.FAX2;
             data.CUSTOMER_SPECIFIC_REQUIREMENTS = queryData.CUSTOMER_SPECIFIC_REQUIREMENTS;
-
             return View(data);
         }
 
