@@ -7,28 +7,25 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/easyui")
-  
+
     @RenderSection("HeadContent", false)
 
     <script type='text/javascript'>
-       
+
 
         $(function () {
-            
+
         });
     </script>
     <style type="text/css">
         .classstyle {
-            
         }
 
         .classstyle100 {
-       
             width: 100px;
         }
 
         .classstyle120 {
-           
             width: 120px;
         }
     </style>
@@ -67,7 +64,7 @@
     <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;" id="divHtml">
         <input type="hidden" id="hideDangQianTongDao" value="0" /><!--当前通道-->
         <input type="hidden" id="hideTongDaoShuLiang" value="0" /><!--通道数量-->
-       
+
 
 
         <div class="mt10" id="tongdao">
@@ -98,12 +95,10 @@
         <!--增加量程弹层-->
         @RenderSection("TanKuang", false)
         <!--/增加量程弹层-->
-        <!--增加量程弹层-->
-        @RenderSection("JS", false)
-        <!--/增加量程弹层-->
+
 
     </div>
-
+    @RenderSection("JS", false)
     <script src="/Scripts/JScript-JianCeXiang-Common.js"></script>
 </body>
 

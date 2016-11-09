@@ -42,7 +42,7 @@ DanWeiDDLHtmlArray = [
         {
             Code: 'LC',
             Remark: 'LC空格',
-            Value: "<select class=\"my-combox\" name=\"LC\" style=\"width:50px; \">" +
+            Value: "<select class=\"my-combox\" name=\"LC\">" +
                     "<option value=\"L\">L</option> " +
                     "<option value=\" \"> </option>" +
                     "<option value=\"C\">C</option>  " +
@@ -316,6 +316,17 @@ DanWeiDDLHtmlArray = [
                     "<option value=\"UA\">UA</option> " +
                     "<option value=\"UB\">UB</option>" +
                     "<option value=\"UC\">UC</option>  " +
+                   "</select>"
+        }
+               ,
+        {
+            Code: 'HZ',
+            Remark: '赫兹',
+            Value: "<select class=\"my-combox\" name=\"HZ\" >" +
+                    "<option value=\"Hz\">Hz</option> " +
+                    "<option value=\"KHz\">KHz</option>" +
+                    "<option value=\"MHz\">MHz</option>  " +
+                    "<option value=\"GHz\">GHz</option>  " +
                    "</select>"
         }
 ]
@@ -1172,7 +1183,7 @@ RuleAttributeArray = [
                 //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
-                DanWeiHtmlDDL: 'LC|(OUTPUT_VALUE)',
+                DanWeiHtmlDDL: 'LC|(OUTPUTVALUE)',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
@@ -1194,7 +1205,7 @@ RuleAttributeArray = [
                 //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
-                DanWeiHtmlDDL: '',
+                DanWeiHtmlDDL: 'HZ|(OUTPUTVALUE)',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
@@ -1682,6 +1693,7 @@ function ShowOrHideDuoTongDao() {
 function BtnInit() {
     ShowOrHideDuoTongDao();
     var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();
+   
     if (PREPARE_SCHEMEID.trim() != "")//数据录入
     {
         $("#btnDuoTongDao").hide();
@@ -1693,6 +1705,7 @@ function BtnInit() {
     }
     else//方案设置
     {
+       
         //$("#btnSave").show();
         $("#btnReset").show();
         //$("#btnSave_ITE").hide();

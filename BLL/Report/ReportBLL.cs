@@ -430,7 +430,14 @@ namespace Langben.Report
             #region 第二页
             //单元格从0开始
             //资质说明
-            //sheet_Destination.GetRow(3).GetCell(2).SetCellValue(entity.REPORTNUMBER);
+            if (entity.QUALIFICATIONS != null && entity.QUALIFICATIONS.Trim() != "")
+            {
+                sheet_Destination.GetRow(3).GetCell(2).SetCellValue(entity.QUALIFICATIONS);
+            }
+            else
+            {
+                sheet_Destination.GetRow(3).GetCell(2).SetCellValue("/");
+            }
 
             //温度
             if (entity.TEMPERATURE != null && entity.TEMPERATURE.Trim() != "")
@@ -473,75 +480,26 @@ namespace Langben.Report
             //检定所依据技术文件（代号、名称）
             IVRULEBLL rBll = new VRULEBLL();
             List<VRULE> rList = rBll.GetBySCHEMEID(entity.SCHEMEID);
+            int RowIndex = 0;
             if (rList != null && rList.Count > 1)//两个以上规程
             {
-                //sheet_Destination.GetRow(25).GetCell(7).SetCellValue(rList[0].NAME);
-                IRow GCTemplateRow = sheet_Destination.GetRow(3);//获取源格式行
-                int GCTemplateIndex = 3;//规程模板行号
-                //CopyRow(sheet_Destination, GCTemplateIndex + 1, GCTemplateIndex, RowCount, false);
-                //GCTemplateIndex = GCTemplateIndex + rList.Count - 1;
+                
+                IRow GCTemplateRow = sheet_Destination.GetRow(8);//获取源格式行
+                int GCTemplateIndex = 8;//规程模板行号   
+                RowIndex = 8;
+                CopyRow(sheet_Destination, GCTemplateIndex + 1, GCTemplateIndex, rList.Count-1, false);
+                foreach (VRULE r in rList)
+                {
+                    sheet_Destination.GetRow(RowIndex).GetCell(2).SetCellValue(r.NAME);
+                    RowIndex++;
+                }
             }
             else
             {
                 HideRow(sheet_Destination, 7, 2);
+                RowIndex = 9;
             }
             #endregion
-
-            //检定结论   
-            if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
-            {
-                sheet_Destination.GetRow(27).GetCell(7).SetCellValue("/");
-            }
-            else
-            {
-                sheet_Destination.GetRow(27).GetCell(7).SetCellValue(entity.CONCLUSION);
-            }
-
-            //批 准 人
-            if (entity.APPROVALID == null || entity.APPROVALID.Trim() == "")
-            {
-                sheet_Destination.GetRow(33).GetCell(13).SetCellValue("/");
-            }
-            else
-            {
-                sheet_Destination.GetRow(33).GetCell(13).SetCellValue(entity.APPROVALID);
-            }
-            //核验员
-            if (entity.DETECTERID != null && entity.DETECTERID.Trim() != "")
-            {
-                sheet_Destination.GetRow(35).GetCell(13).SetCellValue(entity.DETECTERID);
-            }
-            else
-            {
-                sheet_Destination.GetRow(35).GetCell(13).SetCellValue("/");
-            }
-            //检定员
-            if (entity.CHECKERID != null && entity.CHECKERID.Trim() != "")
-            {
-                sheet_Destination.GetRow(37).GetCell(13).SetCellValue(entity.CHECKERID);
-            }
-            else
-            {
-                sheet_Destination.GetRow(37).GetCell(13).SetCellValue("/");
-            }
-            //检定日期
-            if (entity.CALIBRATION_DATE.HasValue)
-            {
-                sheet_Destination.GetRow(42).GetCell(9).SetCellValue(entity.CALIBRATION_DATE.Value.ToString("yyyy年MM月dd日"));
-            }
-            else
-            {
-                sheet_Destination.GetRow(42).GetCell(9).SetCellValue("/");
-            }
-            //有效期
-            if (entity.VALIDITY_PERIOD.HasValue)
-            {
-                sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
-            }
-            else
-            {
-                sheet_Destination.GetRow(43).GetCell(9).SetCellValue("/");
-            }
             #region 暂时没有数据，不做
             ////检定所使用的计量标准装置
             ////HideRow(sheet, RowIndex, 6);
@@ -558,8 +516,42 @@ namespace Langben.Report
             ////空白
             //RowIndex = RowIndex + 8;
             #endregion
+            #region 校准说明            
+            RowIndex = RowIndex + 2;
+            if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
+            {
+                sheet_Destination.GetRow(RowIndex).GetCell(2).SetCellValue("/");
+            }
+            else
+            {
+                sheet_Destination.GetRow(RowIndex).GetCell(2).SetCellValue(entity.CONCLUSION_EXPLAIN);
+            }
             #endregion
 
+            RowIndex = RowIndex + 8;
+            //检定员\校准员
+            if (entity.CHECKERID != null && entity.CHECKERID.Trim() != "")
+            {
+                sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CHECKERID);
+            }
+            else
+            {
+                sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue("/");
+            }
+            //核验员
+            if (entity.DETECTERID != null && entity.DETECTERID.Trim() != "")
+            {
+                sheet_Destination.GetRow(RowIndex).GetCell(15).SetCellValue(entity.DETECTERID);
+            }
+            else
+            {
+                sheet_Destination.GetRow(RowIndex).GetCell(15).SetCellValue("/");
+            }          
+
+            #endregion
+           
+            //设置页面页脚
+            SetHeaderAndFooter(sheet_Destination, entity);
             sheet_Destination.ForceFormulaRecalculation = true;
         }
         /// <summary>

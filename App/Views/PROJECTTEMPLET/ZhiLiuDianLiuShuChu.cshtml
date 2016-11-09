@@ -132,7 +132,13 @@ else
     //var RuleID = $("#hideRULEID").val();//检测项目ID
     //var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
     // $Tongdao_moban//模板   
- 
+    //设置当前操作通道
+    function set(tbodyIndex) {
+
+        CreateRow();
+        $("#hideDangQianTongDao").val(tbodyIndex);
+
+    }
     //增加量程
     function CreateRow() {
         debugger
