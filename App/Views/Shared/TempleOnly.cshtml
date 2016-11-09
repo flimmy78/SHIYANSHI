@@ -7,64 +7,28 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/easyui")
-    <style type="text/css">
-        .combo {
-            font-family: 微软雅黑,新宋体;
-            height: 24px;
-            width: 210px;
-            border: 1px solid #CCC;
-        }
-    </style>
+
     @RenderSection("HeadContent", false)
 
     <script type='text/javascript'>
-        function ajaxFrom(form, url) {
-
-            $.ajax({
-                url: url,
-                type: "Put",
-                data: $(form).serialize(),
-                dataType: "json",
-                success: function (data) {
-                    if (data.Code = 1) {
-                        if ($.messager) {
-                            $.messager.defaults.ok = '继续';
-                            $.messager.defaults.cancel = '返回';
-
-                            $.messager.confirm('操作提示', data.Message, function (r) {
-                                if (!r) {
-                                    window.location.href = 'javascript:history.go(-1)';
-                                }
-                            });
-                        }
-                    }
-                    else alert(data.Message);
-
-                }
-            });
-        }
 
 
         $(function () {
-            $('.easyui-combobox').combobox({
-                width: 243,
-                onSelect: function (record) {
-                    var strs = record.text.split("—");
-                    $(this).combobox('setValue', strs[0]);
-                }
-            });
-            $("form").submit(function (form) {
-                if (form.result) {
-                    ajaxFrom(this, this.action);
-                }
-                return false;
-            });
-            //按钮样式
-            $('.a2').mouseover(function () { this.style.color = "#ae1121"; }).mouseout(function () { this.style.color = "#333"; });
 
         });
     </script>
+    <style type="text/css">
+        .classstyle {
+        }
 
+        .classstyle100 {
+            width: 100px;
+        }
+
+        .classstyle120 {
+            width: 120px;
+        }
+    </style>
 </head>
 <body class="easyui-layout">
     <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
@@ -100,8 +64,6 @@
     <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;" id="divHtml">
         <input type="hidden" id="hideDangQianTongDao" value="0" /><!--当前通道-->
         <input type="hidden" id="hideTongDaoShuLiang" value="0" /><!--通道数量-->
-        <input type="hidden" id="txtPoint" value="1" /><!--检测点数值-->
-        <input type="hidden" id="txtNumber" value="1" /><!--增加的行数-->
 
 
 
@@ -133,12 +95,10 @@
         <!--增加量程弹层-->
         @RenderSection("TanKuang", false)
         <!--/增加量程弹层-->
-        <!--增加量程弹层-->
-        @RenderSection("JS", false)
-        <!--/增加量程弹层-->
+
 
     </div>
-
+    @RenderSection("JS", false)
     <script src="/Scripts/JScript-JianCeXiang-Common.js"></script>
 </body>
 

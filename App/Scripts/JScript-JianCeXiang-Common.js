@@ -42,7 +42,7 @@ DanWeiDDLHtmlArray = [
         {
             Code: 'LC',
             Remark: 'LC空格',
-            Value: "<select class=\"my-combox\" name=\"LC\" style=\"width:50px; \">" +
+            Value: "<select class=\"my-combox\" name=\"LC\">" +
                     "<option value=\"L\">L</option> " +
                     "<option value=\" \"> </option>" +
                     "<option value=\"C\">C</option>  " +
@@ -316,6 +316,17 @@ DanWeiDDLHtmlArray = [
                     "<option value=\"UA\">UA</option> " +
                     "<option value=\"UB\">UB</option>" +
                     "<option value=\"UC\">UC</option>  " +
+                   "</select>"
+        }
+               ,
+        {
+            Code: 'HZ',
+            Remark: '赫兹',
+            Value: "<select class=\"my-combox\" name=\"HZ\" >" +
+                    "<option value=\"Hz\">Hz</option> " +
+                    "<option value=\"KHz\">KHz</option>" +
+                    "<option value=\"MHz\">MHz</option>  " +
+                    "<option value=\"GHz\">GHz</option>  " +
                    "</select>"
         }
 ]
@@ -1172,7 +1183,7 @@ RuleAttributeArray = [
                 //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
-                DanWeiHtmlDDL: 'LC|(OUTPUT_VALUE)',
+                DanWeiHtmlDDL: 'LC|(OUTPUTVALUE)',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
@@ -1194,7 +1205,7 @@ RuleAttributeArray = [
                 //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
-                DanWeiHtmlDDL: '',
+                DanWeiHtmlDDL: 'HZ|(OUTPUTVALUE)',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
@@ -1357,7 +1368,7 @@ RuleAttributeArray = [
             }]
     }
 ];
- 
+
 var RuleID = $("#hideRULEID").val();//检测项目ID
 var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
 var $Tongdao_moban//模板
@@ -1380,18 +1391,25 @@ function CreateTongDao() {
     var tableIdx = $("#hideDangQianTongDao").val();//当前通道
     tableIdx++;
     var $tongdao = $Tongdao_moban.clone().appendTo($('#tongdao'));
+    
+    var reg = new RegExp("_1_", "g");//g,表示全部替换。
+
+    $tongdao.html($tongdao.html().replace(reg, '_' + tableIdx + '_'));
+
     $tongdao.addClass('clone');
     $tongdao.css('display', '');
     $tongdao.attr('id', 'tongdao_' + tableIdx);
     $tongdao.find("#tbody_moban").attr('id', 'tbody_' + tableIdx);
     $tongdao.find("#K_moban").attr('id', 'K_' + tableIdx);
-    //var tbIdx = tableIdx;
+
     $tongdao.find('#btnAddLiangCheng').attr("onclick", "set(" + tableIdx + ");");
+    $tongdao.find('#btnAddLiangCheng').attr("onclick", "set(" + tableIdx + ");");
+
     $("#hideDangQianTongDao").val(tableIdx);
     $("#hideTongDaoShuLiang").val(tableIdx);
 
 };
- 
+
 //重置
 function Reset() {
     //表格清空
@@ -1471,7 +1489,7 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
 //DanWeiCode:单位代码（如果有值直接取，RuleAttribute、ddlName失效)
 function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
     var Result = null;
-  
+
     if (DanWeiCode != null && DanWeiCode.trim() != "") {//如果有有单位代码直接取，RuleAttribute、ddlName失效
         $.each(DanWeiDDLHtmlArray, function (i, item) {
             if (item == null || item.Code != DanWeiCode) {
@@ -1516,23 +1534,27 @@ function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
 //id(控件id不包含name部分),
 //rowidx:行号
 //txtVal(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
+//classstyle样式类名
 //unit在输入框后面的单位
-function SetTDHtml(rowspan, name, id, rowidx, txtVal, unit) {
+function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit) {
 
-    var ddlName = name;// + "_UNIT";//下拉框名
-    var ddlId = ddlName + "_" + id;//下拉框ID
+    //var ddlName = name;// + "_UNIT";//下拉框名
+    var ddlId = name + "_" + id;//下拉框ID
     var id = name + "_" + id;//输入框id
-     
-    var ddlHtml = GetDanWeiDDLHtml(ddlName, null);//单位下拉框html
+
+    var ddlHtml = GetDanWeiDDLHtml(name, null);//单位下拉框html
     if ((txtVal == null || txtVal.trim() == "") && rowidx != null) {
         txtVal = CalculateForAddLianCheng(rowidx, name);
     }
+    if ((classstyle == null || classstyle.trim() == "")) {
+        classstyle = 'classstyle';
+    }
     var htmlString = [];
-    htmlString.push("<td rowspan='" + rowspan + "' align=\"right\"> ");
+    htmlString.push("<td class='" + classstyle + "' rowspan='" + rowspan + "' align='right' > ");
     htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='blurValue(this)'/>");
     if (ddlHtml != null && ddlHtml.trim() != "") {
         var AttributeValue = GetAttributeValue("LianDongDanWeiDDL");
-        htmlString.push($(ddlHtml).attr("onchange", "LianDongDanWeiDDL(this,'" + AttributeValue + "')").attr("name", ddlName + "_UNIT").attr("id", ddlId)[0].outerHTML);
+        htmlString.push($(ddlHtml).attr("onchange", "LianDongDanWeiDDL(this,'" + AttributeValue + "')").attr("name", name + "_UNIT").attr("id", ddlId)[0].outerHTML);
     }
     if (unit) {
         htmlString.push(unit);
@@ -1671,6 +1693,7 @@ function ShowOrHideDuoTongDao() {
 function BtnInit() {
     ShowOrHideDuoTongDao();
     var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();
+   
     if (PREPARE_SCHEMEID.trim() != "")//数据录入
     {
         $("#btnDuoTongDao").hide();
@@ -1682,6 +1705,7 @@ function BtnInit() {
     }
     else//方案设置
     {
+       
         //$("#btnSave").show();
         $("#btnReset").show();
         //$("#btnSave_ITE").hide();
