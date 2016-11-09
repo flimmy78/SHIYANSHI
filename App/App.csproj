@@ -897,6 +897,7 @@
     <Content Include="Views\PROJECTTEMPLET\YouGongGongLvShuChuYinYongWuCha.cshtml" />
     <Content Include="Views\Shared\TempleOnly.cshtml" />
     <Content Include="Views\Shared\TempleMany.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

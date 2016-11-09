@@ -33,8 +33,8 @@ function CreateTongDao() {
     $tongdao.find("#tbody_moban").attr('id', 'tbody_' + tableIdx);
     $tongdao.find("#K_moban").attr('id', 'K_' + tableIdx);
 
-    $tongdao.find('#btnAddLiangCheng').attr("onclick", "set(" + tableIdx + ");");
-    $tongdao.find('#btnAddLiangCheng').attr("onclick", "set(" + tableIdx + ");");
+    $tongdao.find('#btnAddLiangCheng').attr("onclick", "set(" + tableIdx + ",this);");
+    
 
     $("#hideDangQianTongDao").val(tableIdx);
     $("#hideTongDaoShuLiang").val(tableIdx);
