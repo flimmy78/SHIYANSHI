@@ -8,7 +8,7 @@
 <thead>
     <!--表头-->
     <tr>
-        <td colspan="5">
+        <td colspan="95">
             <div class="fl" style="margin-right:20px">
                 <input name="" type="text" class="my-textbox tc" value="100" style="width:40px">
                 <select class="my-combobox" name="" id="">
@@ -42,9 +42,9 @@
     </tr>
     <tr>
         <th rowspan="2" align="center" width="140">相位</th>
-        <th align="center" width="150"> 显示值</th>
-        <th align="center" width="150">标准值</th>
-        <th align="center" width="150">绝对误差</th>
+        <th align="center" colspan="@ViewBag.canshu"> 显示值</th>
+        <th align="center" colspan="@ViewBag.canshu">标准值</th>
+        <th align="center" colspan="@ViewBag.canshu">绝对误差</th>
         <th align="center">校准结果的不确定度</th>
     </tr>
     <tr>
@@ -58,16 +58,61 @@
                 <option value="">UAB </option>
                 <option value="">UBC</option>
 
-            </select> -
+            </select><span>-</span>
             <select class="my-combobox" name="select">
                 <option value="I1">I1</option>
                 <option value="I2">I2</option>
                 <option value="IA">IA </option>
                 <option value="IB">IB</option>
                 <option value="IC">IC</option>
-
             </select>
         </th>
+        @if (ViewBag.canshu >= 2)
+            {
+
+            <th align="center" class="f14">
+                <select class="my-combobox" name="">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+
+                </select><span>-</span>
+                <select class="my-combobox" name="select">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
+            </th>
+        }
+        @if (ViewBag.canshu >= 3)
+        {
+            <th align="center" class="f14">
+                <select class="my-combobox" name="">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+                </select>
+                <span>-</span>
+                <select class="my-combobox" name="select">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
+            </th>
+        }
+
 
         <th align="center" class="f14">
             <select class="my-combobox" name="">
@@ -79,7 +124,7 @@
                 <option value="">UAB </option>
                 <option value="">UBC</option>
 
-            </select> -
+            </select><span>-</span>
             <select class="my-combobox" name="select">
                 <option value="I1">I1</option>
                 <option value="I2">I2</option>
@@ -88,8 +133,53 @@
                 <option value="IC">IC</option>
 
             </select>
+       
         </th>
+        @if (ViewBag.canshu >= 2)
+            {
 
+            <th align="center" class="f14">
+                <select class="my-combobox" name="">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+
+                </select><span>-</span>
+                <select class="my-combobox" name="select">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
+            </th>
+        }
+        @if (ViewBag.canshu >= 3)
+        {
+            <th align="center" class="f14">
+                <select class="my-combobox" name="">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+                </select>
+                <span>-</span>
+                <select class="my-combobox" name="select">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
+            </th>
+        }
         <th align="center" class="f14">
             <select class="my-combobox" name="">
                 <option value="">U1</option>
@@ -100,7 +190,7 @@
                 <option value="">UAB </option>
                 <option value="">UBC</option>
 
-            </select> -
+            </select><span>-</span>
             <select class="my-combobox" name="select">
                 <option value="I1">I1</option>
                 <option value="I2">I2</option>
@@ -109,8 +199,53 @@
                 <option value="IC">IC</option>
 
             </select>
+           
         </th>
+        @if (ViewBag.canshu >= 2)
+            {
 
+            <th align="center" class="f14">
+                <select class="my-combobox" name="">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+
+                </select><span>-</span>
+                <select class="my-combobox" name="select">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
+            </th>
+        }
+        @if (ViewBag.canshu >= 3)
+        {
+            <th align="center" class="f14">
+                <select class="my-combobox" name="">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+                </select>
+                <span>-</span>
+                <select class="my-combobox" name="select">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
+            </th>
+        }
         <th align="center">
             U(K = <select class="my-combobox" name="state">
                 <option value="">2 </option>
@@ -179,23 +314,42 @@
                 //需要合并的列
                 var changerHTML = "onblur=''";
 
-                //二次输入标准值
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100", unit));
-                //标准输出值
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100", unit));
-                //实际输出值
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "classstyle100", unit));
-                //引用误差
-                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "classstyle100", unit));
+                //相位
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "", unit));
+
+                //显示值
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "", unit));
+                //标准值
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "", unit));
+                //绝对误差
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "", unit));
+
+                @if (ViewBag.canshu >= 2)
+                {
+                    ViewBag.canshu2=@"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHIER', HangHaoID, rowidx, txtVal, '', unit));"+
+                       @"htmlString.push(SetTDHtml(rowspan, 'BIAOZHUNZHIER', HangHaoID, rowidx, txtVal, '', unit));" +
+                       @"htmlString.push(SetTDHtml(rowspan, 'JUEDUIZHIER', HangHaoID, rowidx, txtVal, '', unit));";
+
+                }
+                @if (ViewBag.canshu >= 3)
+                {
+                    ViewBag.canshu3 = @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHISAN', HangHaoID, rowidx, txtVal, '', unit));" +
+                     @"htmlString.push(SetTDHtml(rowspan, 'BIAOZHUNZHISAN', HangHaoID, rowidx, txtVal, '', unit));" +
+                     @"htmlString.push(SetTDHtml(rowspan, 'JUEDUIZHISAN',HangHaoID , rowidx, txtVal, '', unit));";
+                }
+                @Html.Raw(ViewBag.canshu2)
+                @Html.Raw(ViewBag.canshu3)
+
                 //校准结果的不确定度 U(K =
-                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, txtVal, "classstyle"));
+                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, txtVal, ""));
+
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
 
             var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
-           $('#dlg').window('close');//关闭弹出框
+            $('#dlg').window('close');//关闭弹出框
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
 
