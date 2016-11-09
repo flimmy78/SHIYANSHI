@@ -1,49 +1,16 @@
 ﻿@model Langben.DAL.PROJECTTEMPLET
 @{
     Layout = "~/Views/Shared/TempleOnly.cshtml";
-    ViewBag.title = "变送器-有功（无功）功率-引用误差";
+    ViewBag.title = "工频单相相位输出（测量）-绝对误差-一列";
 }
 @using Common
 @using Models
 <thead>
     <!--表头-->
     <tr>
-        <td colspan="9">
-            通道：
-            <select class="my-combobox" name="" id="BianSongQiTongDao">
-                <option value=""></option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
-            &nbsp;&nbsp;&nbsp;&nbsp;<span>@ViewBag.canshu</span>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="9">
+        <td colspan="5">
             <div class="fl" style="margin-right:20px">
-                输入范围：(
-                <input name="" type="text" class="my-textbox tc" value="0" style="width:30px">
-                -
-                <input name="" type="text" class="my-textbox tc" value="5" style="width:30px">
-                )
-            </div>
-            <div class="fl" style="margin-right:20px">
-                输出范围：(
-                <input name="" type="text" class="my-textbox tc" value="4" style="width:30px">
-                -
-                <input name="" type="text" class="my-textbox tc" value="20" style="width:30px">
-                )
-                <select class="my-combobox" name="" id="mAV">
-                    <option value="MA">mA</option>
-                    <option value="pA">V</option>
-                </select>
-            </div>
-
-            <div class="fl" style="margin-right:20px;">
-                U<sub>n</sub> =
-                <input name="" type="text" class="my-textbox tc" value="57.7" style="width:40px">
+                <input name="" type="text" class="my-textbox tc" value="100" style="width:40px">
                 <select class="my-combobox" name="" id="">
                     <option value="V">V</option>
                     <option value="MV">MV</option>
@@ -51,9 +18,7 @@
                     <option value="mV">mV</option>
                     <option value="μV">μV</option>
                 </select>
-            </div>
-            <div class="fl" style="margin-right:20px; ">
-                I<sub>n</sub> =
+                /
                 <input name="" type="text" class="my-textbox tc" value="5" style="width:40px">
                 <select class="my-combobox" name="" id="">
                     <option value="A">A</option>
@@ -62,229 +27,139 @@
                     <option value="μA">μA</option>
                     <option value="nA">nA</option>
                     <option value="pA">pA</option>
+                </select>，
+                <input name="" type="text" class="my-textbox tc" value="50" style="width:50px">
+                <select class="my-combobox" name="" id="">
+                    <option value="Hz">Hz</option>
+                    <option value="kHz">kHz</option>
+                    <option value="mHz">MHz</option>
+                    <option value="gHz">GHz</option>
+
                 </select>
+
             </div>
         </td>
     </tr>
     <tr>
-        <th align="center" width="100">测试量</th>
-        <th align="center" width="100"> 等级</th>
-        <th align="center" width="120"> 测量点</th>
-        <th align="center" width="50">cos φ</th>
-        <th align="center" width="100">
-            二次输入标准值<br>
-            (W)
-        </th>
-        <th align="center" width="100">
-            标准输出值<br>
-            <select class="my-combobox" name="" id="mAV">
-                <option value="MA">mA</option>
-                <option value="pA">V</option>
+        <th rowspan="2" align="center" width="140">相位</th>
+        <th align="center" width="150"> 显示值</th>
+        <th align="center" width="150">标准值</th>
+        <th align="center" width="150">绝对误差</th>
+        <th align="center">校准结果的不确定度</th>
+    </tr>
+    <tr>
+        <th align="center" class="f14">
+            <select class="my-combobox" name="">
+                <option value="">U1</option>
+                <option value="">U2</option>
+                <option value="">UA</option>
+                <option value="">UB</option>
+                <option value="">UC</option>
+                <option value="">UAB </option>
+                <option value="">UBC</option>
+
+            </select> -
+            <select class="my-combobox" name="select">
+                <option value="I1">I1</option>
+                <option value="I2">I2</option>
+                <option value="IA">IA </option>
+                <option value="IB">IB</option>
+                <option value="IC">IC</option>
+
             </select>
         </th>
-        <th align="center" width="100">
-            实际输出值<br>
-            <select class="my-combobox" name="" id="mAV">
-                <option value="MA">mA</option>
-                <option value="pA">V</option>
+
+        <th align="center" class="f14">
+            <select class="my-combobox" name="">
+                <option value="">U1</option>
+                <option value="">U2</option>
+                <option value="">UA</option>
+                <option value="">UB</option>
+                <option value="">UC</option>
+                <option value="">UAB </option>
+                <option value="">UBC</option>
+
+            </select> -
+            <select class="my-combobox" name="select">
+                <option value="I1">I1</option>
+                <option value="I2">I2</option>
+                <option value="IA">IA </option>
+                <option value="IB">IB</option>
+                <option value="IC">IC</option>
+
             </select>
         </th>
-        <th align="center" width="100">
-            引用误差<br>
-            (%)
+
+        <th align="center" class="f14">
+            <select class="my-combobox" name="">
+                <option value="">U1</option>
+                <option value="">U2</option>
+                <option value="">UA</option>
+                <option value="">UB</option>
+                <option value="">UC</option>
+                <option value="">UAB </option>
+                <option value="">UBC</option>
+
+            </select> -
+            <select class="my-combobox" name="select">
+                <option value="I1">I1</option>
+                <option value="I2">I2</option>
+                <option value="IA">IA </option>
+                <option value="IB">IB</option>
+                <option value="IC">IC</option>
+
+            </select>
         </th>
+
         <th align="center">
-            校准结果的不确定度<br>
-            U(K =
-            <select class="my-combobox" name="state">
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="√3">√3</option>
-            </select>
-            )
+            U(K = <select class="my-combobox" name="state">
+                <option value="">2 </option>
+                <option value="">3</option>
+                <option value="">√3</option>
+
+
+            </select>)
         </th>
     </tr>
-
 </thead>
 
-<tbody>
+<tbody id="tbody_moban">
     <!--表体-->
-    <tr>
-        <td align="center" width="100">
-            @((ViewBag.canshu == "有功功率") ? "P" : "Q")
-        </td>
-        <td align="center" width="100">
-            <input name="DengJi" type="text" class="my-textbox tr" value="1.0" style="width:70px" onblur="JS1(this)" id="DengJi_1_1_1">
-            级
-        </td>
-        <td id="tbody_moban" colspan="7" style="padding:0">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="subtbl">
-                <tbody class="myliangcheng_1">
-                    <!--插入行的位置-->
-                    <tr rowindex="1">
-                        <td rowspan="1" align="right" width="120"> <input class="my-textbox input-width" value="100%" id="OUTPUTVALUE_1_1_1" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>I<sub>n</sub></span></td>
-                        <td width="50" rowspan="96" align="center">
-                            1.0
-                        </td>
-
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="READVALUE_1_1_1" name="READVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_1_1_1" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_1" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_1" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
-                    </tr>
-                    <tr rowindex="2">
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="80%" id="OUTPUTVALUE_1_1_2" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>I<sub>n</sub></span></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READVALUE_1_1_2" name="READVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_1_1_2" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_2" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_2" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_2" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
-                    </tr>
-                    <tr rowindex="3">
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="60%" id="OUTPUTVALUE_1_1_3" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>I<sub>n</sub></span></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READVALUE_1_1_3" name="READVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_1_1_3" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_3" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_3" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_3" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
-                    </tr>
-                    <tr rowindex="4">
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="40%" id="OUTPUTVALUE_1_1_4" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>I<sub>n</sub></span></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READVALUE_1_1_4" name="READVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_1_1_4" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_4" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_4" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_4" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
-                    </tr>
-                    <tr rowindex="5">
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="20%" id="OUTPUTVALUE_1_1_5" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>I<sub>n</sub></span></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READVALUE_1_1_5" name="READVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_1_1_5" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_5" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_5" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_5" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
-                    </tr>
-                    <tr rowindex="6">
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="0%" id="OUTPUTVALUE_1_1_6" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>I<sub>n</sub></span></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READVALUE_1_1_6" name="READVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_1_1_6" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_6" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_6" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_6" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <!--表尾-->
-                    <tr>
-                        <td colspan="7">
-                            <input type="hidden" id="hideLiangChengShuLiang" value="1" /> <!--默认量程是0-->
-                            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
-
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="subtbl">
-                <tbody class="myliangcheng_2">
-                    <!--插入行的位置-->
-                    <tr rowindex="1">
-                        <td rowspan="1" align="right" width="120"> <input class="my-textbox input-width" value="100%" id="OUTPUTVALUE_1_2_1" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>I<sub>n</sub></span></td>
-                        <td width="50" rowspan="96" align="center">
-                            0.5L
-                        </td>
-
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="READVALUE_1_2_1" name="READVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_1_2_1" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_2_1" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_2_1" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_2_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
-                    </tr>
-                   
-                    <tr rowindex="2">
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="0%" id="OUTPUTVALUE_1_2_2" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>I<sub>n</sub></span></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READVALUE_1_2_2" name="READVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_1_2_2" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_2_2" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_2_2" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_2_2" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <!--表尾-->
-                    <tr>
-                        <td colspan="7">
-                            <input type="hidden" id="hideLiangChengShuLiang" value="2" /> <!--默认量程是0-->
-                            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
-
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="subtbl">
-                <tbody class="myliangcheng_3">
-                    <!--插入行的位置-->
-                    <tr rowindex="1">
-                        <td rowspan="1" align="right" width="120"> <input class="my-textbox input-width" value="100%" id="OUTPUTVALUE_1_3_1" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>I<sub>n</sub></span></td>
-                        <td width="50" rowspan="96" align="center">
-                            0.5C
-                        </td>
-
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="READVALUE_1_3_1" name="READVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_1_3_1" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_3_1" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right" width="100"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_3_1" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_3_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
-                    </tr>
-
-                    <tr rowindex="2">
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="0%" id="OUTPUTVALUE_1_3_2" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>I<sub>n</sub></span></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="READVALUE_1_3_2" name="READVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_1_3_2" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_3_2" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_3_2" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_3_2" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <!--表尾-->
-                    <tr>
-                        <td colspan="7">
-                            <input type="hidden" id="hideLiangChengShuLiang" value="3" /> <!--默认量程是0-->
-                            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
-
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </td>
-    </tr>
-
+    <!--插入行的位置--> 
 </tbody>
 
+<tfoot>
+    <!--表尾-->
+    <tr>
+        <td colspan="7">
+            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
+
+        </td>
+    </tr>
+</tfoot>
 @section JS {
     <script type="text/javascript" language="javascript">
         //一个量程的需要这个方法
         //重写set方法，只准对增加空白行
-        function set(tbodyIndex, thi) {
+        function set(tbodyIndex) {
              
-            CreateRow(thi);
-            // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
+            $('#dlg').dialog('open');//打开弹出框
+              
             $("#hideDangQianTongDao").val(tbodyIndex);
 
         }
         //增加行
-        function CreateRow(thi) {
-         
+        function CreateRow() {
+             
             var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
-            var LiangChengShuLiang = $(thi).prev().val();//$("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
-            //LiangChengShuLiang++;
+            var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
+            LiangChengShuLiang++;
             var rowspanIdx = $("#txtPoint").val();     //检测点数
             txtNumber = $("#txtNumber").val(); //小数点位数
             var standardValue = "";
             var htmlString = [];
-            var rowLength =  
-            $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find(".myliangcheng_" + LiangChengShuLiang + " tr").length;//行号
+            var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
 
             var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
             for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
@@ -294,7 +169,7 @@
                 var rowspan = 1; //合并单元格行数
 
                 var txtVal = "";//(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
-                var unit = "I<sub>n</sub>";//在输入框后面的单位
+                var unit = "<sup>°</sup>";//在输入框后面的单位
 
 
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
@@ -303,26 +178,25 @@
                 }
                 //需要合并的列
                 var changerHTML = "onblur=''";
-                //测量点 需要下拉框
-                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120", unit));
+
                 //二次输入标准值
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100", unit));
                 //标准输出值
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100", unit));
                 //实际输出值
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "classstyle100", unit));
                 //引用误差
-                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "classstyle100", unit));
                 //校准结果的不确定度 U(K =
                 htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, txtVal, "classstyle"));
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
 
-            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find(".myliangcheng_" + LiangChengShuLiang).append(htmlString);
+            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
-            //$('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
-                         $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find(".myliangcheng_" + LiangChengShuLiang).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+           $('#dlg').window('close');//关闭弹出框
+            $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
 
         //离开事件，用于计算
@@ -377,9 +251,33 @@
 }
 @section TanKuang {
     <!--弹框的位置-->
-    <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
-    <input type="hidden" id="txtNumber" value="1" /><!--小数点位数-->
+   
+     <!--增加量程弹层-->
+<div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return CreateRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+    <table>
 
+        <tr>
+            <td align="right">检测点数：</td>
+            <td><input type="text" id="txtPoint" class="easyui-textbox  required digits" style="width:200px" /></td>
+        </tr>
+        <tr>
+            <td align="right">小数点位数：</td>
+            <td><input type="text" id="txtNumber" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
+        </tr>
+    </table>
+</div>
+<!--/增加量程弹层-->
 }
 
 
