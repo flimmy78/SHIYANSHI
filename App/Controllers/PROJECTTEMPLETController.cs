@@ -55,7 +55,7 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult BianSongQiPinLu(string RULEID = "JJG126-1995_3", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult BianSongQiPinLu(string RULEID = "126-1995_2_1_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
@@ -69,14 +69,14 @@ namespace Langben.App.Controllers
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
-
+         
         /// <summary>
         /// 变送器-电流电压-引用误差
         /// </summary> 
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult BianSongQiDianLiuDianYa(string id = "电流",string RULEID = "JJG126-1995_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult BianSongQiDianLiuDianYa(string id = "电流",string RULEID = "126-1995_2_2_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             ViewBag.DianLiuDianYa = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);

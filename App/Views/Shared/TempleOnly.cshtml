@@ -1,0 +1,109 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head id="MyHead">
+
+    <title>@ViewBag.title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/easyui")
+
+    @RenderSection("HeadContent", false)
+
+    <script type='text/javascript'>
+
+
+        $(function () {
+
+        });
+    </script>
+    <style type="text/css">
+        .classstyle {
+        }
+
+        .classstyle100 {
+            width: 100px;
+        }
+
+        .classstyle120 {
+            width: 120px;
+        }
+         .classstyle140 {
+            width: 140px;
+        }
+    </style>
+    <script src="/Scripts/JScript-JianCeXiang-Common.js"></script>
+</head>
+<body class="easyui-layout">
+    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+            <table>
+                <tr>
+                    <td>
+                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTongDao()" id="btnDuoTongDao" style="display:none">增加通道</a>
+                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnSave" onclick="Save()">保存检测项</a>
+                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnReset" onclick="Reset()">重置检测项</a>
+                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnReset_ITE" onclick="Reset_ITE()">重置检测项</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div><!--顶部按钮-->
+
+    <input type="hidden" id="hideID" value="@ViewBag.ID" /><!--主键-->
+    <input type="hidden" id="hideRULEID" value="@ViewBag.RULEID" /><!--检测项-->
+    <input type="hidden" id="hideSCHEMEID" value="@ViewBag.SCHEMEID" /><!--方案编号-->
+    <input type="hidden" id="hidePREPARE_SCHEMEID" value="@ViewBag.PREPARE_SCHEMEID" /><!--预备方案ID-->
+    <input type="hidden" id="hideITEID" value="@ViewBag.ITEID" /><!--预备方案检测项ID-->
+    <!--加载上次保存的html，如果没有，就为空-->
+    @if (Model != null && Model.HTMLVALUE != null && Model.HTMLVALUE.Trim() != "")
+    {
+        <input type="hidden" id="hideHTMLVALUE" value="@Model.HTMLVALUE" />
+    }
+    else
+    {
+        <input type="hidden" id="hideHTMLVALUE" value="" />
+    }
+
+    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;" id="divHtml">
+        <input type="hidden" id="hideDangQianTongDao" value="0" /><!--当前通道-->
+        <input type="hidden" id="hideTongDaoShuLiang" value="0" /><!--通道数量-->
+
+
+
+        <div class="mt10" id="tongdao">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_moban" style="display:none">
+                @RenderBody()
+            </table>
+        </div>
+
+
+        <div class="mt10">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
+
+                <tr>
+                    <th width="40">注：</th>
+                    <td colspan="6">
+                        <input type="text" class="my-textbox input-width" name="REMARK" data-options="multiline:true" style="height:30px; width:95%" id="REMARK">
+                    </td>
+                </tr>
+                <tr>
+                    <th width="40">结论：</th>
+                    <td colspan="6">
+                        <input type="text" class="my-textbox input-width" name="CONCLUSION" data-options="multiline:true" style="height:30px; width:95%" id="CONCLUSION">
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        <!--增加量程弹层-->
+        @RenderSection("TanKuang", false)
+        <!--/增加量程弹层-->
+
+
+    </div>
+    @RenderSection("JS", false)
+    <script src="/Scripts/jianCeXiang.js"></script>
+</body>
+
+</html>

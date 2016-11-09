@@ -534,6 +534,7 @@
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.edatagrid.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jianCeXiang.js" />
     <Content Include="Scripts\nugetexample.js" />
     <Content Include="Xml\TableTemplate.xml" />
     <None Include="Properties\PublishProfiles\shiyanshi.pubxml" />
@@ -894,6 +895,8 @@
     <Content Include="Views\PROJECTTEMPLET\BianSongQiXiangWei.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\BianSongQiYouGongWuGong.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\YouGongGongLvShuChuYinYongWuCha.cshtml" />
+    <Content Include="Views\Shared\TempleOnly.cshtml" />
+    <Content Include="Views\Shared\TempleMany.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

@@ -23,9 +23,14 @@ namespace Langben.App.Controllers
     /// </summary>
     public class ORDER_TASK_INFORMATIONController : BaseController
     {
-        
-        public ActionResult Show(string id)
+        /// <summary>
+        /// 委托单页面
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Show(string id = "1611081523323547325feb23206e5")
         {
+
             ViewBag.Id = id;
             return View();
         }
@@ -33,13 +38,11 @@ namespace Langben.App.Controllers
         {
             var data = new ORDER_TASK_INFORMATIONShow();
             string UNDERTAKE_LABORATORYID = string.Empty;
-           
+
             ORDER_TASK_INFORMATION queryData = m_BLL.GetById(id);
             foreach (var s in queryData.APPLIANCE_DETAIL_INFORMATION)
             {
                 UNDERTAKE_LABORATORYID = null;
-              
-
                 s.UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID;
                 var show = new Models.APPLIANCE_DETAIL_INFORMATIONShow()
                 {
@@ -67,7 +70,6 @@ namespace Langben.App.Controllers
                     STORAGEINSTRUCTIONS = s.STORAGEINSTRUCTIONS,
                     STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU,
                     UNDERTAKE_LABORATORYIDString = UNDERTAKE_LABORATORYID.TrimEnd(','),
-                    
                 };
                 data.APPLIANCE_DETAIL_INFORMATIONShows.Add(show);
             }
@@ -87,26 +89,26 @@ namespace Langben.App.Controllers
             data.CONTACT_PHONE2 = queryData.CONTACT_PHONE2;
             data.FAX2 = queryData.FAX2;
             data.CUSTOMER_SPECIFIC_REQUIREMENTS = queryData.CUSTOMER_SPECIFIC_REQUIREMENTS;
-      
             return View(data);
         }
 
         [HttpPut]
         public ActionResult QianZi(string id, string PICTURE, string HTMLVALUE)
         {
-            byte[] byt = Convert.FromBase64String(PICTURE);
-            MemoryStream stream = new MemoryStream(byt);
-            string path = Server.MapPath("~/up/QianZi/");
-            var pathErWeiMa = path + id + ".png";
-            System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate);
-
-            //成和园
-            System.IO.BinaryWriter w = new System.IO.BinaryWriter(fs);
-            w.Write(stream.ToArray());
-
-            fs.Close();
-            stream.Close();
-
+            if (!string.IsNullOrWhiteSpace(PICTURE))
+            {
+                string path = Server.MapPath("~/up/QianZi/");
+                var pathErWeiMa = path + id + ".png";
+                using (System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate))
+                {
+                    byte[] byt = Convert.FromBase64String(PICTURE);
+                    MemoryStream stream = new MemoryStream(byt);
+                    System.IO.BinaryWriter w = new System.IO.BinaryWriter(fs);
+                    w.Write(stream.ToArray());
+                    fs.Close();
+                    stream.Close();
+                }
+            }
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             SIGN sign = new SIGN();
             sign.PICTURE = PICTURE;
