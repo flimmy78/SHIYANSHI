@@ -3,14 +3,141 @@
     ViewBag.Title = "二维码";
     Layout = "~/Views/Shared/Details.cshtml";
 }
-@using Common
-@section CurentPlace {
-    @foreach (var item in Model)
-    {
-        var url = "~/ErWeiMa/" + item.ID + ".png";
-        < img src="@url"  />
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
     }
 
-    <input class="a2 f2" type="button" onclick="window.location.href = '';" value="打印二维码" />
+    .tab {
+        width: 1085px;
+        text-align: center;
+        border-collapse: collapse;
+        font-size: 12px;
+    }
 
-}
+        .tab td, .tab1 td {
+            padding: 2px;
+            height: 30px;
+        }
+
+    .title_wtd {
+        width: auto;
+        height: 42px;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 42px;
+        font-size: 12pt;
+    }
+
+        .title_wtd span {
+            float: right;
+            font-size: 12pt;
+        }
+
+    .title_jibei {
+        width: auto;
+        height: 42px;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 42px;
+        font-size: 14pt;
+        font-weight: bold;
+    }
+
+    .tab1 {
+        width: 1085px;
+        min-height: 128px;
+        text-align: center;
+        border-collapse: collapse;
+        font-size: 11px;
+        margin-top: 30px;
+    }
+
+    .beizhu {
+        width: 100%;
+        height: 100px;
+        margin: 10px auto 0;
+        font-size: 9pt;
+    }
+
+        .beizhu .mail {
+            margin-left: 132px;
+        }
+
+        .beizhu .yb {
+            margin-left: 200px;
+        }
+
+    .qianzi {
+        width: 1085px;
+        border: none;
+    }
+</style>
+
+<table class="tab" border="1px" cellpadding="0" cellspacing="0" align="center">
+    <tr>
+        <td width="81" height="32">送检单位</td>
+        <td colspan="2" id="INSPECTION_ENTERPRISE"></td>
+        <td width="81">单位地址</td>
+        <td colspan="2" id="INSPECTION_ENTERPRISE_ADDRESS"></td>
+        <td width="81">邮政编码</td>
+        <td id="INSPECTION_ENTERPRISE_POST"></td>
+    </tr>
+    <tr>
+        <td width="81" height="32">联系人</td>
+        <td colspan="2" id="CONTACTS"></td>
+        <td width="81">联系电话</td>
+        <td colspan="2" id="CONTACT_PHONE"></td>
+        <td width="81">传真</td>
+        <td id="FAX"></td>
+    </tr>
+    <tr>
+        <td width="81" height="32">证书单位名称</td>
+        <td colspan="2" id="CERTIFICATE_ENTERPRISE"></td>
+        <td width="81">单位地址</td>
+        <td colspan="2" id="CERTIFICATE_ENTERPRISE_ADDRESS"></td>
+        <td width="81">邮政编码</td>
+        <td id="CERTIFICATE_ENTERPRISE_POST"></td>
+    </tr>
+    <tr>
+        <td width="81" height="32">联系人</td>
+        <td colspan="2" id="CONTACTS2"></td>
+        <td width="81">联系电话</td>
+        <td colspan="2" id="CONTACT_PHONE2"></td>
+        <td width="81">传真</td>
+        <td id="FAX2"></td>
+    </tr>
+</table>
+@*<table class="tab1" border="1px" cellpadding="0" cellspacing="0" align="center" id="qijuzhi"></table>*@
+<div id="tiaoma"></div>
+
+<input class="a2 f2" type="button" onclick="window.location.href = '';" value="打印二维码" />
+<script language="javascript" type="text/javascript">
+    $.ajax({
+        url: '/api/ORDER_TASK_INFORMATIONApi/PostID/' + '@ViewBag.Id',
+        type: "Post",
+        // async: false,
+        success: function (row) {
+            var html = '';
+            for (var i = 0; i < row.APPLIANCE_DETAIL_INFORMATIONShows.length; i++) {
+                html += '<img src="/up/ErWeiMa/' + row.APPLIANCE_DETAIL_INFORMATIONShows[i].ID + '.png"/>';             
+            }
+            $("#tiaoma").html(html);//器具信息
+            $("#ORDER_NUMBER").text(row.ORDER_NUMBER == null ? "/" : row.ORDER_NUMBER);//委托单号
+            $("#ACCEPT_ORGNIZATION").html(row.ACCEPT_ORGNIZATION == null ? "/" : row.ACCEPT_ORGNIZATION);//受理单位
+            $("#INSPECTION_ENTERPRISE").text(row.INSPECTION_ENTERPRISE == null ? "/" : row.INSPECTION_ENTERPRISE);//送检单位
+            $("#INSPECTION_ENTERPRISE_ADDRESS").text(row.INSPECTION_ENTERPRISE_ADDRESS == null ? "/" : row.INSPECTION_ENTERPRISE_ADDRESS);//送检单位地址
+            $("#INSPECTION_ENTERPRISE_POST").text(row.INSPECTION_ENTERPRISE_POST == null ? "/" : row.INSPECTION_ENTERPRISE_POST);//送检单位邮政编码
+            $("#CONTACTS").text(row.CONTACTS == null ? "/" : row.CONTACTS);//联系人
+            $("#CONTACT_PHONE").text(row.CONTACT_PHONE == null ? "/" : row.CONTACT_PHONE);//联系电话
+            $("#FAX").text(row.FAX == null ? "/" : row.FAX);//传真
+            $("#CERTIFICATE_ENTERPRISE").text(row.CERTIFICATE_ENTERPRISE == null ? "/" : row.CERTIFICATE_ENTERPRISE);//证书单位
+            $("#CERTIFICATE_ENTERPRISE_ADDRESS").text(row.CERTIFICATE_ENTERPRISE_ADDRESS == null ? "/" : row.CERTIFICATE_ENTERPRISE_ADDRESS);//证书单位地址
+            $("#CERTIFICATE_ENTERPRISE_POST").text(row.CERTIFICATE_ENTERPRISE_POST == null ? "/" : row.CERTIFICATE_ENTERPRISE_POST);//证书单位邮政编码
+            $("#CONTACTS2").text(row.CONTACTS2 == null ? "/" : row.CONTACTS2);//联系人2
+            $("#CONTACT_PHONE2").text(row.CONTACT_PHONE2 == null ? "/" : row.CONTACT_PHONE2);//联系电话2
+            $("#FAX2").text(row.FAX2 == null ? "/" : row.FAX2);//传真2
+        }
+    })
+</script>
