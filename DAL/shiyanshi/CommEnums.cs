@@ -150,9 +150,38 @@ namespace Langben.DAL.shiyanshi
         /// </summary>
         OriginalRecord = 0,
         /// <summary>
-        /// 报告
+        /// 检定报告
         /// </summary>
-        Report = 1
-    }
+        Report_JianDing = 1,
+        /// <summary>
+        /// 校准报告(非CNAS)
+        /// </summary>
+        Report_XiaoZhun = 2,
+        /// <summary>
+        /// 校准报告(CNAS)
+        /// </summary>
+        Report_XiaoZhun_CNAS = 3
 
+    }
+    //public enum ExportModel
+    //{
+    //    /// <summary>
+    //    /// 原始记录
+    //    /// </summary>
+    //    OriginalRecord = 0,
+    //    /// <summary>
+    //    /// 检定报告
+    //    /// </summary>
+    //    Report_JianDing = 1,
+    //    /// <summary>
+    //    /// 校准报告(非CNAS)
+    //    /// </summary>
+    //    Report_XiaoZhun = 2,
+    //    /// <summary>
+    //    /// 校准报告(CNAS)
+    //    /// </summary>
+    //    Report_XiaoZhun_CNAS = 3
+
+
+    //}
 }
