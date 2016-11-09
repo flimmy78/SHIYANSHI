@@ -534,6 +534,7 @@
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.edatagrid.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jianCeXiang.js" />
     <Content Include="Scripts\nugetexample.js" />
     <Content Include="Xml\TableTemplate.xml" />
     <None Include="Properties\PublishProfiles\shiyanshi.pubxml" />
