@@ -8,9 +8,9 @@
 <thead>
     <!--表头-->
     <tr>
-        <td colspan="5">
+        <td colspan="95">
             <div class="fl" style="margin-right:20px">
-                <input name="" type="text" class="my-textbox tc" value="100" style="width:40px">
+                <input name="dianya" id="dianya_1_1_1" type="text" class="my-textbox tc" value="100" style="width:40px">
                 <select class="my-combobox" name="" id="">
                     <option value="V">V</option>
                     <option value="MV">MV</option>
@@ -19,7 +19,7 @@
                     <option value="μV">μV</option>
                 </select>
                 /
-                <input name="" type="text" class="my-textbox tc" value="5" style="width:40px">
+                <input name="dianliu" id="dianliu_1_1_1" type="text" class="my-textbox tc" value="5" style="width:40px">
                 <select class="my-combobox" name="" id="">
                     <option value="A">A</option>
                     <option value="KA">KA</option>
@@ -28,7 +28,7 @@
                     <option value="nA">nA</option>
                     <option value="pA">pA</option>
                 </select>，
-                <input name="" type="text" class="my-textbox tc" value="50" style="width:50px">
+                <input name="dianHz" id="dianHz_1_1_1" type="text" class="my-textbox tc" value="50" style="width:50px">
                 <select class="my-combobox" name="" id="">
                     <option value="Hz">Hz</option>
                     <option value="kHz">kHz</option>
@@ -42,14 +42,23 @@
     </tr>
     <tr>
         <th rowspan="2" align="center" width="140">相位</th>
-        <th align="center" width="150"> 显示值</th>
-        <th align="center" width="150">标准值</th>
-        <th align="center" width="150">绝对误差</th>
-        <th align="center">校准结果的不确定度</th>
+        <th align="center" colspan="@ViewBag.canshu"> 显示值</th>
+        <th align="center" colspan="@ViewBag.canshu">标准值</th>
+        <th align="center" colspan="@ViewBag.canshu">绝对误差</th>
+        <th align="center">
+            校准结果的不确定度<br>
+            U(K =
+            <select class="my-combobox" name="mstate456AV" id="mstate456AV_1_1_1">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="√3">√3</option>
+            </select>
+            )
+        </th>
     </tr>
     <tr>
         <th align="center" class="f14">
-            <select class="my-combobox" name="">
+            <select class="my-combobox" name="MYDIANYA1" id="MYDIANYA1_1_1_1">
                 <option value="">U1</option>
                 <option value="">U2</option>
                 <option value="">UA</option>
@@ -58,19 +67,17 @@
                 <option value="">UAB </option>
                 <option value="">UBC</option>
 
-            </select> -
-            <select class="my-combobox" name="select">
+            </select><span>-</span>
+            <select class="my-combobox" name="MYDIANYA2" id="MYDIANYA2_1_1_1">
                 <option value="I1">I1</option>
                 <option value="I2">I2</option>
                 <option value="IA">IA </option>
                 <option value="IB">IB</option>
                 <option value="IC">IC</option>
-
             </select>
         </th>
-
         <th align="center" class="f14">
-            <select class="my-combobox" name="">
+            <select class="my-combobox" name="MYDIANYA3" id="MYDIANYA3_1_1_1">
                 <option value="">U1</option>
                 <option value="">U2</option>
                 <option value="">UA</option>
@@ -79,19 +86,17 @@
                 <option value="">UAB </option>
                 <option value="">UBC</option>
 
-            </select> -
-            <select class="my-combobox" name="select">
+            </select><span>-</span>
+            <select class="my-combobox" name="MYDIANYA4" id="MYDIANYA4_1_1_1">
                 <option value="I1">I1</option>
                 <option value="I2">I2</option>
                 <option value="IA">IA </option>
                 <option value="IB">IB</option>
                 <option value="IC">IC</option>
-
             </select>
         </th>
-
         <th align="center" class="f14">
-            <select class="my-combobox" name="">
+            <select class="my-combobox" name="MYDIANYA5" id="MYDIANYA5_1_1_1">
                 <option value="">U1</option>
                 <option value="">U2</option>
                 <option value="">UA</option>
@@ -100,32 +105,147 @@
                 <option value="">UAB </option>
                 <option value="">UBC</option>
 
-            </select> -
-            <select class="my-combobox" name="select">
+            </select><span>-</span>
+            <select class="my-combobox" name="MYDIANYA6" id="MYDIANYA6_1_1_1">
                 <option value="I1">I1</option>
                 <option value="I2">I2</option>
                 <option value="IA">IA </option>
                 <option value="IB">IB</option>
                 <option value="IC">IC</option>
-
             </select>
         </th>
 
-        <th align="center">
-            U(K = <select class="my-combobox" name="state">
-                <option value="">2 </option>
-                <option value="">3</option>
-                <option value="">√3</option>
 
 
-            </select>)
-        </th>
+        @if (ViewBag.canshu >= 2)
+            {
+            <th align="center" class="f14">
+                <select class="my-combobox" name="MYDIANYA7" id="MYDIANYA7_1_1_1">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+
+                </select><span>-</span>
+                <select class="my-combobox" name="MYDIANYA8" id="MYDIANYA8_1_1_1">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
+            </th>
+            <th align="center" class="f14">
+                <select class="my-combobox" name="MYDIANYA9" id="MYDIANYA9_1_1_1">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+
+                </select><span>-</span>
+                <select class="my-combobox" name="MYDIANYA0" id="MYDIANYA0_1_1_1">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
+            </th>
+            <th align="center" class="f14">
+                <select class="my-combobox" name="MYDIANYA11" id="MYDIANYA11_1_1_1">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+
+                </select><span>-</span>
+                <select class="my-combobox" name="MYDIANYA12" id="MYDIANYA12_1_1_1">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
+            </th>
+
+        }
+
+        @if (ViewBag.canshu >= 3)
+            {
+            <th align="center" class="f14">
+                <select class="my-combobox" name="MYDIANYA13" id="MYDIANYA13_1_1_1">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+
+                </select><span>-</span>
+                <select class="my-combobox" name="MYDIANYA14" id="MYDIANYA14_1_1_1">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
+            </th>
+            <th align="center" class="f14">
+                <select class="my-combobox" name="MYDIANYA15" id="MYDIANYA15_1_1_1">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+
+                </select><span>-</span>
+                <select class="my-combobox" name="MYDIANYA16" id="MYDIANYA16_1_1_1">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
+            </th>
+            <th align="center" class="f14">
+                <select class="my-combobox" name="MYDIANYA517" id="MYDIANYA17_1_1_1">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+
+                </select><span>-</span>
+                <select class="my-combobox" name="MYDIANYA18" id="MYDIANYA18_1_1_1">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
+            </th>
+
+        }
     </tr>
 </thead>
 
 <tbody id="tbody_moban">
     <!--表体-->
-    <!--插入行的位置--> 
+    <!--插入行的位置-->
 </tbody>
 
 <tfoot>
@@ -143,15 +263,16 @@
         //一个量程的需要这个方法
         //重写set方法，只准对增加空白行
         function set(tbodyIndex) {
-             
+
             $('#dlg').dialog('open');//打开弹出框
-              
+
             $("#hideDangQianTongDao").val(tbodyIndex);
 
         }
         //增加行
         function CreateRow() {
-             
+
+            debugger;
             var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
             var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
             LiangChengShuLiang++;
@@ -179,23 +300,42 @@
                 //需要合并的列
                 var changerHTML = "onblur=''";
 
-                //二次输入标准值
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100", unit));
-                //标准输出值
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100", unit));
-                //实际输出值
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "classstyle100", unit));
-                //引用误差
-                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "classstyle100", unit));
+                //相位
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "", unit));
+
+                //显示值
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "", unit));
+                //标准值
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "", unit));
+                //绝对误差
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "", unit));
+
+                @if (ViewBag.canshu >= 2)
+                {
+                    ViewBag.canshu2=@"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHIER', HangHaoID, rowidx, txtVal, '', unit));"+
+                       @"htmlString.push(SetTDHtml(rowspan, 'BIAOZHUNZHIER', HangHaoID, rowidx, txtVal, '', unit));" +
+                       @"htmlString.push(SetTDHtml(rowspan, 'JUEDUIZHIER', HangHaoID, rowidx, txtVal, '', unit));";
+
+                }
+                @if (ViewBag.canshu >= 3)
+                {
+                    ViewBag.canshu3 = @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHISAN', HangHaoID, rowidx, txtVal, '', unit));" +
+                     @"htmlString.push(SetTDHtml(rowspan, 'BIAOZHUNZHISAN', HangHaoID, rowidx, txtVal, '', unit));" +
+                     @"htmlString.push(SetTDHtml(rowspan, 'JUEDUIZHISAN',HangHaoID , rowidx, txtVal, '', unit));";
+                }
+                @Html.Raw(ViewBag.canshu2)
+                @Html.Raw(ViewBag.canshu3)
+
                 //校准结果的不确定度 U(K =
-                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, txtVal, "classstyle"));
+                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, txtVal, ""));
+
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
 
             var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
-           $('#dlg').window('close');//关闭弹出框
+            $('#dlg').window('close');//关闭弹出框
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
 
@@ -251,9 +391,8 @@
 }
 @section TanKuang {
     <!--弹框的位置-->
-   
-     <!--增加量程弹层-->
-<div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+    <!--增加量程弹层-->
+    <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
 					text:'确定',
 					iconCls:'icon-ok',
 					handler:function(){
@@ -265,19 +404,19 @@
                     $('#dlg').window('close');
          }
          }]" style="width:400px;height:200px;padding:10px">
-    <table>
+        <table>
 
-        <tr>
-            <td align="right">检测点数：</td>
-            <td><input type="text" id="txtPoint" class="easyui-textbox  required digits" style="width:200px" /></td>
-        </tr>
-        <tr>
-            <td align="right">小数点位数：</td>
-            <td><input type="text" id="txtNumber" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
-        </tr>
-    </table>
-</div>
-<!--/增加量程弹层-->
+            <tr>
+                <td align="right">检测点数：</td>
+                <td><input type="text" id="txtPoint" class="easyui-textbox  required digits" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">小数点位数：</td>
+                <td><input type="text" id="txtNumber" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
+            </tr>
+        </table>
+    </div>
+    <!--/增加量程弹层-->
 }
 
 

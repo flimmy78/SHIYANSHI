@@ -77,9 +77,9 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult test(string id = "有功功率", string RULEID = "126-1995_2_6_17", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult test(string id = "1", string RULEID = "JJG440-2008_3_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-            ViewBag.canshu = id;
+            ViewBag.canshu = Convert.ToInt32(id);
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
@@ -95,27 +95,7 @@ namespace Langben.App.Controllers
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
-        /// <summary>
-        /// 工频单相相位输出（测量）-绝对误差-两列
-        /// </summary> 
-        /// <param name="RULEID">检测项目ID</param>
-        /// <param name="SCHEMEID">方案ID</param>
-        /// <returns></returns>
-        public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaLiangLie(string RULEID = "JJG440-2008_3_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
-        {
-            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
-        }
-        /// <summary>
-        /// 工频单相相位输出（测量）-绝对误差-三列 (多通道）
-        /// </summary> 
-        /// <param name="RULEID">检测项目ID</param>
-        /// <param name="SCHEMEID">方案ID</param>
-        /// <returns></returns>
-        public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaSanLie(string RULEID = "JJG440-2008_3_3", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
-        {
-            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
-        }
-
+      
         /// <summary>
         /// 工频单相相位输出（测量）-绝对误差-一列
         /// </summary> 
