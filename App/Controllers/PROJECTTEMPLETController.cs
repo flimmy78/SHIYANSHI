@@ -95,7 +95,7 @@ namespace Langben.App.Controllers
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
-      
+
         /// <summary>
         /// 工频单相相位输出（测量）-绝对误差-一列
         /// </summary> 
@@ -197,32 +197,47 @@ namespace Langben.App.Controllers
 
         public ActionResult Detail(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-            // ViewBag.ITEID = "";
-            if (!string.IsNullOrEmpty(SCHEMEID) && !string.IsNullOrEmpty(PREPARE_SCHEMEID))
+            if (!string.IsNullOrWhiteSpace(PREPARE_SCHEMEID))
+            {//预备方案
+                QUALIFIED_UNQUALIFIED_TEST_ITE qEntity = null;
+                IBLL.IQUALIFIED_UNQUALIFIED_TEST_ITEBLL qBLL = new QUALIFIED_UNQUALIFIED_TEST_ITEBLL();
+                qEntity = qBLL.GetByPREPARE_SCHEMEID_RULEID(PREPARE_SCHEMEID, RULEID);
+                if (qEntity != null)
+                {
+                    ViewBag.HTMLVALUE = qEntity.HTMLVALUE;
+                    ViewBag.ITEID = qEntity.ID;
+                }
+                else
+                {
+                    //方案
+                    DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
+                    if (entity != null)
+                    {
+                        ViewBag.ID = entity.ID;
+                        ViewBag.HTMLVALUE = entity.HTMLVALUE;
+                    }
+                    else
+                    {
+                        ViewBag.ID = string.Empty;
+                    }
+
+                }
+            }
+            else
             {
+                //方案
                 DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
                 if (entity != null)
                 {
                     ViewBag.ID = entity.ID;
+                    ViewBag.HTMLVALUE = entity.HTMLVALUE;
                 }
                 else
                 {
                     ViewBag.ID = string.Empty;
                 }
-                if (PREPARE_SCHEMEID != null && PREPARE_SCHEMEID.Trim() != "")
-                {
-                    QUALIFIED_UNQUALIFIED_TEST_ITE qEntity = null;
-                    IBLL.IQUALIFIED_UNQUALIFIED_TEST_ITEBLL qBLL = new QUALIFIED_UNQUALIFIED_TEST_ITEBLL();
-                    qEntity = qBLL.GetByPREPARE_SCHEMEID_RULEID(PREPARE_SCHEMEID, RULEID);
-                    if (qEntity != null)
-                    {
-                        entity.HTMLVALUE = qEntity.HTMLVALUE;
-                        ViewBag.ITEID = qEntity.ID;
-
-                    }
-                }
-                return View(entity);
             }
+
 
             ViewBag.PREPARE_SCHEMEID = PREPARE_SCHEMEID;
             ViewBag.RULEID = RULEID;

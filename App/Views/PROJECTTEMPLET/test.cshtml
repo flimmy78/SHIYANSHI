@@ -7,53 +7,15 @@
 @using Models
 <thead>
     <!--表头-->
-    <tr>
-        <td colspan="95">
-            <div class="fl" style="margin-right:20px">
-                <input name="dianya" id="dianya_1_1_1" type="text" class="my-textbox tc" value="100" style="width:40px">
-                <select class="my-combobox" name="" id="">
-                    <option value="V">V</option>
-                    <option value="MV">MV</option>
-                    <option value="KV">KV</option>
-                    <option value="mV">mV</option>
-                    <option value="μV">μV</option>
-                </select>
-                /
-                <input name="dianliu" id="dianliu_1_1_1" type="text" class="my-textbox tc" value="5" style="width:40px">
-                <select class="my-combobox" name="" id="">
-                    <option value="A">A</option>
-                    <option value="KA">KA</option>
-                    <option value="mA">mA</option>
-                    <option value="μA">μA</option>
-                    <option value="nA">nA</option>
-                    <option value="pA">pA</option>
-                </select>，
-                <input name="dianHz" id="dianHz_1_1_1" type="text" class="my-textbox tc" value="50" style="width:50px">
-                <select class="my-combobox" name="" id="">
-                    <option value="Hz">Hz</option>
-                    <option value="kHz">kHz</option>
-                    <option value="mHz">MHz</option>
-                    <option value="gHz">GHz</option>
-
-                </select>
-
-            </div>
-        </td>
-    </tr>
+ 
     <tr>
         <th rowspan="2" align="center" width="140">相位</th>
         <th align="center" colspan="@ViewBag.canshu"> 显示值</th>
         <th align="center" colspan="@ViewBag.canshu">标准值</th>
         <th align="center" colspan="@ViewBag.canshu">绝对误差</th>
         <th align="center">
-            校准结果的不确定度<br>
-            U(K =
-            <select class="my-combobox" name="mstate456AV" id="mstate456AV_1_1_1">
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="√3">√3</option>
-            </select>
-            )
+            校准结果的不确定度
+
         </th>
     </tr>
     <tr>
@@ -67,14 +29,7 @@
                 <option value="">UAB </option>
                 <option value="">UBC</option>
 
-            </select><span>-</span>
-            <select class="my-combobox" name="MYDIANYA2" id="MYDIANYA2_1_1_1">
-                <option value="I1">I1</option>
-                <option value="I2">I2</option>
-                <option value="IA">IA </option>
-                <option value="IB">IB</option>
-                <option value="IC">IC</option>
-            </select>
+            </select> 
         </th>
         <th align="center" class="f14">
             <select class="my-combobox" name="MYDIANYA3" id="MYDIANYA3_1_1_1">
@@ -86,14 +41,7 @@
                 <option value="">UAB </option>
                 <option value="">UBC</option>
 
-            </select><span>-</span>
-            <select class="my-combobox" name="MYDIANYA4" id="MYDIANYA4_1_1_1">
-                <option value="I1">I1</option>
-                <option value="I2">I2</option>
-                <option value="IA">IA </option>
-                <option value="IB">IB</option>
-                <option value="IC">IC</option>
-            </select>
+            </select> 
         </th>
         <th align="center" class="f14">
             <select class="my-combobox" name="MYDIANYA5" id="MYDIANYA5_1_1_1">
@@ -105,14 +53,7 @@
                 <option value="">UAB </option>
                 <option value="">UBC</option>
 
-            </select><span>-</span>
-            <select class="my-combobox" name="MYDIANYA6" id="MYDIANYA6_1_1_1">
-                <option value="I1">I1</option>
-                <option value="I2">I2</option>
-                <option value="IA">IA </option>
-                <option value="IB">IB</option>
-                <option value="IC">IC</option>
-            </select>
+            </select> 
         </th>
 
 
@@ -129,14 +70,7 @@
                     <option value="">UAB </option>
                     <option value="">UBC</option>
 
-                </select><span>-</span>
-                <select class="my-combobox" name="MYDIANYA8" id="MYDIANYA8_1_1_1">
-                    <option value="I1">I1</option>
-                    <option value="I2">I2</option>
-                    <option value="IA">IA </option>
-                    <option value="IB">IB</option>
-                    <option value="IC">IC</option>
-                </select>
+                </select> 
             </th>
             <th align="center" class="f14">
                 <select class="my-combobox" name="MYDIANYA9" id="MYDIANYA9_1_1_1">
@@ -148,14 +82,7 @@
                     <option value="">UAB </option>
                     <option value="">UBC</option>
 
-                </select><span>-</span>
-                <select class="my-combobox" name="MYDIANYA0" id="MYDIANYA0_1_1_1">
-                    <option value="I1">I1</option>
-                    <option value="I2">I2</option>
-                    <option value="IA">IA </option>
-                    <option value="IB">IB</option>
-                    <option value="IC">IC</option>
-                </select>
+                </select> 
             </th>
             <th align="center" class="f14">
                 <select class="my-combobox" name="MYDIANYA11" id="MYDIANYA11_1_1_1">
@@ -167,14 +94,7 @@
                     <option value="">UAB </option>
                     <option value="">UBC</option>
 
-                </select><span>-</span>
-                <select class="my-combobox" name="MYDIANYA12" id="MYDIANYA12_1_1_1">
-                    <option value="I1">I1</option>
-                    <option value="I2">I2</option>
-                    <option value="IA">IA </option>
-                    <option value="IB">IB</option>
-                    <option value="IC">IC</option>
-                </select>
+                </select> 
             </th>
 
         }
@@ -191,14 +111,7 @@
                     <option value="">UAB </option>
                     <option value="">UBC</option>
 
-                </select><span>-</span>
-                <select class="my-combobox" name="MYDIANYA14" id="MYDIANYA14_1_1_1">
-                    <option value="I1">I1</option>
-                    <option value="I2">I2</option>
-                    <option value="IA">IA </option>
-                    <option value="IB">IB</option>
-                    <option value="IC">IC</option>
-                </select>
+                </select> 
             </th>
             <th align="center" class="f14">
                 <select class="my-combobox" name="MYDIANYA15" id="MYDIANYA15_1_1_1">
@@ -210,14 +123,7 @@
                     <option value="">UAB </option>
                     <option value="">UBC</option>
 
-                </select><span>-</span>
-                <select class="my-combobox" name="MYDIANYA16" id="MYDIANYA16_1_1_1">
-                    <option value="I1">I1</option>
-                    <option value="I2">I2</option>
-                    <option value="IA">IA </option>
-                    <option value="IB">IB</option>
-                    <option value="IC">IC</option>
-                </select>
+                </select> 
             </th>
             <th align="center" class="f14">
                 <select class="my-combobox" name="MYDIANYA517" id="MYDIANYA17_1_1_1">
@@ -229,17 +135,19 @@
                     <option value="">UAB </option>
                     <option value="">UBC</option>
 
-                </select><span>-</span>
-                <select class="my-combobox" name="MYDIANYA18" id="MYDIANYA18_1_1_1">
-                    <option value="I1">I1</option>
-                    <option value="I2">I2</option>
-                    <option value="IA">IA </option>
-                    <option value="IB">IB</option>
-                    <option value="IC">IC</option>
-                </select>
+                </select> 
             </th>
 
         }
+        <th align="center">
+            U(K = <select class="my-combobox" name="MYDIANYA19" id="MYDIANYA19_1_1_1" style="width:30px;">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="√3">√3</option>
+
+
+            </select>)
+        </th>
     </tr>
 </thead>
 
@@ -312,16 +220,12 @@
 
                 @if (ViewBag.canshu >= 2)
                 {
-                    ViewBag.canshu2=@"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHIER', HangHaoID, rowidx, txtVal, '', unit));"+
-                       @"htmlString.push(SetTDHtml(rowspan, 'BIAOZHUNZHIER', HangHaoID, rowidx, txtVal, '', unit));" +
-                       @"htmlString.push(SetTDHtml(rowspan, 'JUEDUIZHIER', HangHaoID, rowidx, txtVal, '', unit));";
+                    ViewBag.canshu2 = @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHIER', HangHaoID, rowidx, txtVal, '', unit));";
 
                 }
                 @if (ViewBag.canshu >= 3)
                 {
-                    ViewBag.canshu3 = @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHISAN', HangHaoID, rowidx, txtVal, '', unit));" +
-                     @"htmlString.push(SetTDHtml(rowspan, 'BIAOZHUNZHISAN', HangHaoID, rowidx, txtVal, '', unit));" +
-                     @"htmlString.push(SetTDHtml(rowspan, 'JUEDUIZHISAN',HangHaoID , rowidx, txtVal, '', unit));";
+                    ViewBag.canshu3 = @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHISAN', HangHaoID, rowidx, txtVal, '', unit));" ;
                 }
                 @Html.Raw(ViewBag.canshu2)
                 @Html.Raw(ViewBag.canshu3)
