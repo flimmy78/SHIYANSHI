@@ -180,12 +180,20 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="ID">预备方案ID</param>
         /// <returns></returns>
-        public ActionResult ExportOriginalRecord(string ID)
+        public ActionResult Export(string ID,string Type)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             ReportBLL reportBll = new ReportBLL();
             string Message = string.Empty;
-            bool IsSuccess = reportBll.ExportOriginalRecord(ID, out Message);
+            bool IsSuccess = false;
+            if (Type == "OriginalRecord")
+            {
+                IsSuccess = reportBll.ExportOriginalRecord(ID, out Message);
+            }
+            else
+            {
+                IsSuccess = reportBll.ExportReport(ID, out Message);
+            }
             if (IsSuccess)
             {
                 result.Code = Common.ClientCode.Succeed;

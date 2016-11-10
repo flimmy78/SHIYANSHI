@@ -13,20 +13,58 @@ namespace Langben.Report
     public class ReportStatic
     {
         /// <summary>
-        /// 报告模板配置文件xml内容
+        /// 原始记录模板配置文件xml内容
         /// </summary>
-        public static string  TableTemplateXml
+        public static string TableTemplateXml
         {
             get
             {
                 string url = string.Empty;
-                if(ConfigurationManager.AppSettings["TableTemplateXmlPath"]!=null && ConfigurationManager.AppSettings["TableTemplateXmlPath"].Trim()!="")
+                if (ConfigurationManager.AppSettings["TableTemplateXmlPath"] != null && ConfigurationManager.AppSettings["TableTemplateXmlPath"].Trim() != "")
                 {
-                    url= ConfigurationManager.AppSettings["TableTemplateXmlPath"].Trim();
+                    url = ConfigurationManager.AppSettings["TableTemplateXmlPath"].Trim();
                 }
                 else
                 {
-                    url= "../ Xml / TableTemplate.xml";
+                    url = "../ Xml / TableTemplate.xml";
+                }
+                return Common.DirFile.ReadFile(url);
+            }
+        }
+        /// <summary>
+        /// 检定报告模板配置文件xml内容
+        /// </summary>
+        public static string TableTemplate_JianDingXml
+        {
+            get
+            {
+                string url = string.Empty;
+                if (ConfigurationManager.AppSettings["TableTemplate_JianDingXmlPath"] != null && ConfigurationManager.AppSettings["TableTemplate_JianDingXmlPath"].Trim() != "")
+                {
+                    url = ConfigurationManager.AppSettings["TableTemplate_JianDingXmlPath"].Trim();
+                }
+                else
+                {
+                    url = "../ Xml /TableTemplate_JianDing.xml";
+                }
+                return Common.DirFile.ReadFile(url);
+            }
+        }
+        /// <summary>
+        /// 校准报告模板配置文件xml内容
+        /// </summary>
+        public static string TableTemplate_JiaoZhunXml
+        {
+            get
+            {
+                string url = string.Empty;
+                if(ConfigurationManager.AppSettings["TableTemplate_JiaoZhunXmlPath"] !=null && ConfigurationManager.AppSettings["TableTemplate_JiaoZhunXmlPath"].Trim()!="")
+                {
+                    url= ConfigurationManager.AppSettings["TableTemplate_JiaoZhunXmlPath"].Trim();
+                }
+                else
+                {
+                    url= "../ Xml /TableTemplate_JiaoZhun.xml";
                 }
                 return Common.DirFile.ReadFile(url);
             }

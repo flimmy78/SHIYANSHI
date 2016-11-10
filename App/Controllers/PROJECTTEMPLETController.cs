@@ -84,7 +84,7 @@ namespace Langben.App.Controllers
         }
 
         /// <summary>
-        /// 变送器-电流电压-引用误差
+        /// 变送器-电流电压-引用误差 BianSongQiDianLiuDianYa/电流
         /// </summary> 
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
@@ -122,8 +122,9 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaYiLie(string RULEID = "JJG440-2008_3_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaYiLie(string id = "1", string RULEID = "JJG440-2008_3_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
+            ViewBag.canshu = Convert.ToInt32(id);
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
@@ -242,7 +243,7 @@ namespace Langben.App.Controllers
                 }
                 return View(entity);
             }
-            
+
             ViewBag.PREPARE_SCHEMEID = PREPARE_SCHEMEID;
             ViewBag.RULEID = RULEID;
             ViewBag.SCHEMEID = SCHEMEID;

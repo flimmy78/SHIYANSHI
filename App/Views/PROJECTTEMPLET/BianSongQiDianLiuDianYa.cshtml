@@ -10,7 +10,7 @@
     <tr>
         <td colspan="9">
             通道：
-            <select class="my-combobox" name="" id="BianSongQiTongDao">
+            <select class="my-combobox" name="BianSongQiTongDao" id="BianSongQiTongDaoD_1_1_1">
                 <option value=""></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -24,13 +24,13 @@
         <td colspan="9">
             <div class="fl" style="margin-right:20px">
                 输入范围：(
-                <input name="" type="text" class="my-textbox tc" value="0" style="width:30px">
+                <input id="shurufanwei_1_1_1"  name="shurufanwei" type="text" class="my-textbox tc" value="0" style="width:30px">
                 -
-                <input name="" type="text" class="my-textbox tc" value="5" style="width:30px">
+                <input  id="shurufanweijian_1_1_1"  name="shurufanweijian" type="text" class="my-textbox tc" value="5" style="width:30px">
                 )
                 @if (ViewBag.canshu == "电流")
                 {
-                    <select class="my-combobox" name="dianliu" id="dianliu">
+                    <select class="my-combobox" name="dianliu" id="dianliu_1_1_1">
                         <option value="A">A</option>
                         <option value="KA">KA</option>
                         <option value="mA">mA</option>
@@ -41,7 +41,7 @@
                 }
                 else if (ViewBag.canshu == "电压")
                 {
-                    <select class="my-combobox" name="dianya" id="dianya">
+                    <select class="my-combobox" name="dianya" id="dianya_1_1_1">
                         <option value="V">V</option>
                         <option value="MV">MV</option>
                         <option value="KV">KV</option>
@@ -53,11 +53,11 @@
 
             <div class="fl" style="margin-right:20px">
                 输出范围：(
-                <input name="" type="text" class="my-textbox tc" value="4" style="width:30px">
+                <input name="dianmyliu" id="dianmyliu_1_1_1" type="text" class="my-textbox tc" value="4" style="width:30px">
                 -
-                <input name="" type="text" class="my-textbox tc" value="20" style="width:30px">
+                <input  name="dianmyya" id="dianmyya_1_1_1" type="text" class="my-textbox tc" value="20" style="width:30px">
                 )
-                <select class="my-combobox" name="" id="mAV">
+                <select class="my-combobox" name="mAV" id="mAV_1_1_1">
                     <option value="MA">mA</option>
                     <option value="pA">V</option>
                 </select>
@@ -65,10 +65,10 @@
             
             <div class="fl" style="margin-right:20px; ">
                 @((ViewBag.canshu == "电流") ? "I" : "U")<sub>n</sub> =
-                <input name="" type="text" class="my-textbox tc" value="5" style="width:40px">
+                <input  name="mAVdianliu" id="mAVdianliu_1_1_1" type="text" class="my-textbox tc" value="5" style="width:40px">
                 @if (ViewBag.canshu == "电流")
                 {
-                    <select class="my-combobox" name="dianliu" id="dianliu">
+                    <select class="my-combobox" name="dianlimyu" id="dianlimyu_1_1_1">
                         <option value="A">A</option>
                         <option value="KA">KA</option>
                         <option value="mA">mA</option>
@@ -79,7 +79,7 @@
                 }
                 else if (ViewBag.canshu == "电压")
                 {
-                    <select class="my-combobox" name="dianya" id="dianya">
+                    <select class="my-combobox" name="dianymya" id="dianymya_1_1_1">
                         <option value="V">V</option>
                         <option value="MV">MV</option>
                         <option value="KV">KV</option>
@@ -101,14 +101,14 @@
         </th>
         <th align="center" width="100">
             标准输出值<br>
-            <select class="my-combobox" name="" id="mAV">
+            <select class="my-combobox" name="m123AV" id="m123AV_1_1_1">
                 <option value="MA">mA</option>
                 <option value="pA">V</option>
             </select>
         </th>
         <th align="center" width="100">
             实际输出值<br>
-            <select class="my-combobox" name="" id="mAV">
+            <select class="my-combobox" name="m456AV" id="m456AV_1_1_1">
                 <option value="MA">mA</option>
                 <option value="pA">V</option>
             </select>
@@ -120,7 +120,7 @@
         <th align="center">
             校准结果的不确定度<br>
             U(K =
-            <select class="my-combobox" name="state">
+            <select class="my-combobox"  name="mstate456AV" id="mstate456AV_1_1_1">
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="√3">√3</option>
@@ -138,7 +138,7 @@
             @((ViewBag.canshu == "电流") ? "I" : "U")
         </td>
         <td align="center" width="100">
-            <input name="DengJi" type="text" class="my-textbox tr" value="0.0" style="width:70px" onblur="JS1(this)" id="DengJi_1_1_1">
+            <input type="text" class="my-textbox tr" value="0.0" style="width:70px" onblur="JS1(this)" name="DengJi" id="DengJi_1_1_1">
             级
         </td>
         <td colspan="7" style="padding:0">
@@ -214,7 +214,9 @@
     <script type="text/javascript" language="javascript">
         //一个量程的需要这个方法
         //重写set方法，只准对增加空白行
-        function set(tbodyIndex) {
+        //tbodyIndex通道
+        //thi 当前位置
+        function set(tbodyIndex,thi) {
 
             CreateRow();
            
@@ -248,6 +250,7 @@
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
                 if (rowidx == 0) {
                     //需要合并的列
+
                 }
                 //需要合并的列
                 var changerHTML = "onblur=''";
