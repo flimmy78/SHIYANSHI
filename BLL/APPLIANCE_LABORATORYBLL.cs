@@ -64,9 +64,9 @@ namespace Langben.BLL
                 
                     foreach (var item in queryData)
                     {
-                        if (item.UNDERTAKE_LABORATORYID != null && item.UNDERTAKE_LABORATORY != null)
+                        if (item.UNDERTAKE_LABORATORYID != null )
                         { 
-                                item.UNDERTAKE_LABORATORYIDOld = item.UNDERTAKE_LABORATORY.NAME.GetString();//                            
+                                item.UNDERTAKE_LABORATORYIDOld = item.UNDERTAKE_LABORATORYID.GetString();//                            
                         }                  
 
                         if (item.APPLIANCE_DETAIL_INFORMATIONID != null && item.APPLIANCE_DETAIL_INFORMATION != null)

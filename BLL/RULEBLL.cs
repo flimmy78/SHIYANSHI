@@ -69,9 +69,9 @@ namespace Langben.BLL
                                 item.PARENTIDOld = item.RULE2.NAMEOTHER.GetString();//                            
                         }                    
 
-                        if (item.UNDERTAKE_LABORATORYID != null && item.UNDERTAKE_LABORATORY != null)
+                        if (item.UNDERTAKE_LABORATORYID != null)
                         { 
-                                item.UNDERTAKE_LABORATORYIDOld = item.UNDERTAKE_LABORATORY.NAME.GetString();//                            
+                                item.UNDERTAKE_LABORATORYIDOld = item.UNDERTAKE_LABORATORYID.GetString();//                            
                         }                  
 
                     }
