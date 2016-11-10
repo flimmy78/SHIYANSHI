@@ -143,7 +143,7 @@ namespace Langben.App.Controllers
                         ErrorCorrectionLevel Ecl = ErrorCorrectionLevel.M; //误差校正水平   
                         string Content = item.ID;//待编码内容  
                         QuietZoneModules QuietZones = QuietZoneModules.Two;  //空白区域   
-                        int ModuleSize = 12;//大小  
+                        int ModuleSize =3;//大小  
                         var encoder = new QrEncoder(Ecl);
                         QrCode qr;
                         if (encoder.TryEncode(Content, out qr))//对内容进行编码，并保存生成的矩阵  
@@ -158,20 +158,38 @@ namespace Langben.App.Controllers
                         //QRCodeHelper.GetQRCode(item.ID, ms);
                         var pathErWeiMa = path + item.ID + ".png";
 
-                        //
+
+
+                        //System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate);
+
+
+                        //System.IO.BinaryWriter w = new System.IO.BinaryWriter(fs);
+
+                        #region 
+                        //System.IO.FileStream fss = new System.IO.FileStream(@"D:\shiyanshi\App\up\模版.png", System.IO.FileMode.OpenOrCreate);
+                        //int filelength = 0;
+                        //filelength = (int)fss.Length; //获得文件长度 
+                        //Byte[] image = new Byte[filelength]; //建立一个字节数组 
+                        //fss.Read(image, 0, filelength); //按字节流读取 
+                        //System.Drawing.Image imag = System.Drawing.Image.FromStream(fss);                      
+                        //CombinImage(fss, ms);
+                        //fss.Close();
+                        System.Drawing.Image Image = System.Drawing.Image.FromStream(ms);
                         Graphics g = null;
-                        Font f = new Font("微软雅黑", 16, FontStyle.Bold);
-                        SolidBrush s = new SolidBrush(ColorTranslator.FromHtml("#411464"));
-                        //g = Graphics.FromImage(pathErWeiMa);
-                        //g.DrawString(vnum, f, s, 1, 1);
-                        //
+                        g = Graphics.FromImage(Image);
+                        g.DrawString("nihao", new Font("宋体", 13),
+                              Brushes.Red, new PointF(100, 100));
 
-                        System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate);
+                        TuPanBaoCun(Image, pathErWeiMa);
+                        //Font f = new Font("微软雅黑", 16, FontStyle.Bold);
+                        //SolidBrush B = new SolidBrush(ColorTranslator.FromHtml("#411464"));
+
+                        #endregion
 
 
-                        System.IO.BinaryWriter w = new System.IO.BinaryWriter(fs);
-                        w.Write(ms.ToArray());
-                        fs.Close();
+
+                        //w.Write(ms.ToArray());
+                        //fs.Close();
                         //器具明细信息_承接实验室表添加数据
                         foreach (var it in item.UNDERTAKE_LABORATORYID.TrimEnd(',').Split(','))
                         {
@@ -230,6 +248,73 @@ namespace Langben.App.Controllers
 
             return Json(result);
 
+        }
+        /// <summary>
+        /// 调用此函数后使此两种图片合并，类似相册，有个
+        /// 背景图，中间贴自己的目标图片
+        /// </summary>
+        /// <param name="sourceImg">粘贴的源图片</param>
+        /// <param name="destImg">粘贴的目标图片</param>
+        public static Image CombinImage(FileStream sourceImg, MemoryStream destImg)
+        {
+            Image imgBack = System.Drawing.Image.FromStream(sourceImg);     //相框图片 
+            Image img = System.Drawing.Image.FromStream(destImg);        //照片图片
+            //从指定的System.Drawing.Image创建新的System.Drawing.Graphics       
+            Graphics g = Graphics.FromImage(imgBack);
+            //g.DrawImage(imgBack, 0, 0, 148, 124);      // g.DrawImage(imgBack, 0, 0, 相框宽, 相框高);
+            g.FillRectangle(System.Drawing.Brushes.Black, -50, -50, (int)212, ((int)203));//相片四周刷一层黑色边框，这里没有，需要调尺寸
+            //g.DrawImage(img, 照片与相框的左边距, 照片与相框的上边距, 照片宽, 照片高);
+            g.DrawImage(img, -50, -50, 212, 203);
+            GC.Collect();
+            string saveImagePath = @"D:\shiyanshi\App\up\sss.png";
+            //save new image to file system.
+            imgBack.Save(saveImagePath, ImageFormat.Png);
+            return imgBack;
+        }
+
+        /// <summary>
+        /// 编码器的函数
+        /// </summary>
+        /// <param name="mimeType"></param>
+        /// <returns></returns>
+        ImageCodecInfo GetEncoderInfo( String mimeType)
+
+        {
+            int j;
+            ImageCodecInfo[] encoders;
+            encoders = ImageCodecInfo.GetImageEncoders();
+            for (j = 0; j < encoders.Length; ++j)
+            {
+                if (encoders[j].MimeType == mimeType)
+                    return encoders[j];
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 图片保存
+        /// </summary>
+        /// <param name="TP"></param>
+        /// <param name="pathErWeiMa"></param>
+        public void TuPanBaoCun(Image TP, string pathErWeiMa)
+        {
+            ImageCodecInfo myImageCodecInfo;
+            //获得JPEG格式的编码器
+            myImageCodecInfo = GetEncoderInfo("image/jpeg");
+
+            //设置图像质量
+            System.Drawing.Imaging.Encoder myEncoder;
+            EncoderParameter myEncoderParameter;
+            EncoderParameters myEncoderParameters;
+            // for the Quality parameter category.
+            myEncoder = System.Drawing.Imaging.Encoder.Quality;
+            // EncoderParameter object in the array.
+            myEncoderParameters = new EncoderParameters(1);
+            //设置质量 数字越大质量越好，但是到了一定程度质量就不会增加了，MSDN上没有给范围，只说是32为非负整数
+            myEncoderParameter = new EncoderParameter(myEncoder, 100L);
+
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            TP.Save(pathErWeiMa, myImageCodecInfo, myEncoderParameters);
         }
 
         public ActionResult Createto(string id)
