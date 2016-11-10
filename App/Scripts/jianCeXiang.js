@@ -29,7 +29,7 @@ function CreateTongDao() {
 
     $tongdao.addClass('clone');
     $tongdao.css('display', '');
-    $tongdao.attr('id', 'tongdao_moban_' + tableIdx);
+    $tongdao.attr('id', 'tongdao_' + tableIdx);
     $tongdao.find("#tbody_moban").attr('id', 'tbody_' + tableIdx);
     $tongdao.find("#K_moban").attr('id', 'K_' + tableIdx);
 
@@ -46,7 +46,7 @@ function Reset() {
     //表格清空
     var hideTongDaoShuLiang = $("#hideTongDaoShuLiang").val();//通道数量
     for (var i = 1; i <= hideTongDaoShuLiang; i++) {
-        var tongdao = "#tongdao_moban_" + i;
+        var tongdao = "#tongdao_" + i;
         $(tongdao).html("");
     }
     $("#hideTongDaoShuLiang").val("0");

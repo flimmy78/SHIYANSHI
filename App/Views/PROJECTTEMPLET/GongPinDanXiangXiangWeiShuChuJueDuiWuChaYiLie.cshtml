@@ -45,7 +45,16 @@
         <th align="center" colspan="@ViewBag.canshu"> 显示值</th>
         <th align="center" colspan="@ViewBag.canshu">标准值</th>
         <th align="center" colspan="@ViewBag.canshu">绝对误差</th>
-        <th align="center">校准结果的不确定度</th>
+        <th align="center">
+            校准结果的不确定度<br>
+            U(K =
+            <select class="my-combobox" name="mstate456AV" id="mstate456AV_1_1_1">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="√3">√3</option>
+            </select>
+            )
+        </th>
     </tr>
     <tr>
         <th align="center" class="f14">
@@ -262,7 +271,8 @@
         }
         //增加行
         function CreateRow() {
-
+        
+            debugger;
             var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
             var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
             LiangChengShuLiang++;
