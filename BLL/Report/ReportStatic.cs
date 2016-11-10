@@ -152,7 +152,7 @@ namespace Langben.Report
         }
 
         /// <summary>
-        /// 检定证书模板文件绝对路径
+        /// 校准非CNAS证书模板文件绝对路径
         /// </summary>
         public static string BaoGaoXiaoZhunPath
         {
@@ -166,6 +166,26 @@ namespace Langben.Report
                 else
                 {
                     path = "../Template/校准证书.xls";
+                }
+                path = System.Web.HttpContext.Current.Server.MapPath(path);
+                return path;
+            }
+        }
+        /// <summary>
+        /// 校准CNAS证书模板文件绝对路径
+        /// </summary>
+        public static string BaoGaoXiaoZhunCNASPath
+        {
+            get
+            {
+                string path = string.Empty;
+                if (ConfigurationManager.AppSettings["BaoGaoXiaoZhunCNASPath"] != null && ConfigurationManager.AppSettings["BaoGaoXiaoZhunCNASPath"].Trim() != "")
+                {
+                    path = ConfigurationManager.AppSettings["BaoGaoXiaoZhunCNASPath"].Trim();
+                }
+                else
+                {
+                    path = "../Template/校准证书-CNAS.xls";
                 }
                 path = System.Web.HttpContext.Current.Server.MapPath(path);
                 return path;

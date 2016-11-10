@@ -148,7 +148,7 @@
 					<!--表格表头行号-->
 					<RowIndex>285</RowIndex>
 					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
-					<CellIndexs>47</CellIndexs>
+					<CellIndexs>21,47</CellIndexs>
 				</RowInfo>
 			</TableTitleList>
 			<!--数据模板开始行号-->
@@ -274,7 +274,7 @@
 					<!--表格表头行号-->
 					<RowIndex>278</RowIndex>
 					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
-					<CellIndexs>47</CellIndexs>
+					<CellIndexs>21,47</CellIndexs>
 				</RowInfo>
 			</TableTitleList>
 			<!--数据模板开始行号-->
