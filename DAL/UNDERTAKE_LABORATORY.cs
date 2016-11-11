@@ -17,9 +17,7 @@ namespace Langben.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UNDERTAKE_LABORATORY()
         {
-            this.APPLIANCE_LABORATORY = new HashSet<APPLIANCE_LABORATORY>();
             this.METERING_STANDARD_DEVICE = new HashSet<METERING_STANDARD_DEVICE>();
-            this.RULE = new HashSet<RULE>();
             this.SCHEME = new HashSet<SCHEME>();
         }
     
@@ -31,11 +29,7 @@ namespace Langben.DAL
         public string UPDATEPERSON { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<APPLIANCE_LABORATORY> APPLIANCE_LABORATORY { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<METERING_STANDARD_DEVICE> METERING_STANDARD_DEVICE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RULE> RULE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SCHEME> SCHEME { get; set; }
     }

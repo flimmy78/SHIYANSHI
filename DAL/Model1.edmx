@@ -1280,6 +1280,7 @@
           <Property Name="REPORTSTATUSZI" Type="varchar2" MaxLength="200" />
           <Property Name="PACKAGETYPE" Type="nvarchar2" MaxLength="200" />
           <Property Name="FILECONCLUSION" Type="varchar2" MaxLength="200" />
+          <Property Name="FULLPATH" Type="varchar2" MaxLength="200" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VJIANDINGRENWU”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -1469,7 +1470,6 @@
           <Property Name="SORT" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VXIANGQING”中的列“REPORTNUMBER”。
 警告 6002: 表/视图“TENGFEI.VXIANGQING”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VXIANGQING">
           <Key>
@@ -1553,18 +1553,6 @@
             </Principal>
             <Dependent Role="APPLIANCE_LABORATORY">
               <PropertyRef Name="PREPARE_SCHEMEID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_APPLIANC_REFERENCE_UNDERTAK">
-          <End Role="UNDERTAKE_LABORATORY" Type="Self.UNDERTAKE_LABORATORY" Multiplicity="0..1" />
-          <End Role="APPLIANCE_LABORATORY" Type="Self.APPLIANCE_LABORATORY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UNDERTAKE_LABORATORY">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="APPLIANCE_LABORATORY">
-              <PropertyRef Name="UNDERTAKE_LABORATORYID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1877,18 +1865,6 @@
             </Principal>
             <Dependent Role="RULE1">
               <PropertyRef Name="PARENTID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RULE_REFERENCE_UNDERTAK">
-          <End Role="UNDERTAKE_LABORATORY" Type="Self.UNDERTAKE_LABORATORY" Multiplicity="0..1" />
-          <End Role="RULE" Type="Self.RULE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UNDERTAKE_LABORATORY">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="RULE">
-              <PropertyRef Name="UNDERTAKE_LABORATORYID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2330,7 +2306,8 @@
 "VBAOGAODAYIN"."REPORTSTATUS" AS "REPORTSTATUS", 
 "VBAOGAODAYIN"."REPORTSTATUSZI" AS "REPORTSTATUSZI", 
 "VBAOGAODAYIN"."PACKAGETYPE" AS "PACKAGETYPE", 
-"VBAOGAODAYIN"."FILECONCLUSION" AS "FILECONCLUSION"
+"VBAOGAODAYIN"."FILECONCLUSION" AS "FILECONCLUSION", 
+"VBAOGAODAYIN"."FULLPATH" AS "FULLPATH"
 FROM "TENGFEI"."VBAOGAODAYIN" "VBAOGAODAYIN"</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VJIANDINGRENWU" EntityType="Self.VJIANDINGRENWU" store:Type="Views" store:Schema="TENGFEI">
@@ -2530,10 +2507,6 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
             <End Role="PREPARE_SCHEME" EntitySet="PREPARE_SCHEME" />
             <End Role="APPLIANCE_LABORATORY" EntitySet="APPLIANCE_LABORATORY" />
           </AssociationSet>
-          <AssociationSet Name="FK_APPLIANC_REFERENCE_UNDERTAK" Association="Self.FK_APPLIANC_REFERENCE_UNDERTAK">
-            <End Role="UNDERTAKE_LABORATORY" EntitySet="UNDERTAKE_LABORATORY" />
-            <End Role="APPLIANCE_LABORATORY" EntitySet="APPLIANCE_LABORATORY" />
-          </AssociationSet>
           <AssociationSet Name="FK_COMPANY_REFERENCE_COMPANY" Association="Self.FK_COMPANY_REFERENCE_COMPANY">
             <End Role="COMPANY" EntitySet="COMPANY" />
             <End Role="COMPANY1" EntitySet="COMPANY" />
@@ -2637,10 +2610,6 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <AssociationSet Name="FK_RULE_REFERENCE_RULE" Association="Self.FK_RULE_REFERENCE_RULE">
             <End Role="RULE" EntitySet="RULE" />
             <End Role="RULE1" EntitySet="RULE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RULE_REFERENCE_UNDERTAK" Association="Self.FK_RULE_REFERENCE_UNDERTAK">
-            <End Role="UNDERTAKE_LABORATORY" EntitySet="UNDERTAKE_LABORATORY" />
-            <End Role="RULE" EntitySet="RULE" />
           </AssociationSet>
           <AssociationSet Name="FK_SCHEME_R_REFERENCE_RULE" Association="Self.FK_SCHEME_R_REFERENCE_RULE">
             <End Role="RULE" EntitySet="RULE" />
@@ -2865,10 +2834,6 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
             <End Role="PREPARE_SCHEME" EntitySet="PREPARE_SCHEME" />
             <End Role="APPLIANCE_LABORATORY" EntitySet="APPLIANCE_LABORATORY" />
           </AssociationSet>
-          <AssociationSet Name="FK_APPLIANC_REFERENCE_UNDERTAK" Association="Model.FK_APPLIANC_REFERENCE_UNDERTAK">
-            <End Role="UNDERTAKE_LABORATORY" EntitySet="UNDERTAKE_LABORATORY" />
-            <End Role="APPLIANCE_LABORATORY" EntitySet="APPLIANCE_LABORATORY" />
-          </AssociationSet>
           <AssociationSet Name="FK_COMPANY_REFERENCE_COMPANY" Association="Model.FK_COMPANY_REFERENCE_COMPANY">
             <End Role="COMPANY" EntitySet="COMPANY" />
             <End Role="COMPANY1" EntitySet="COMPANY" />
@@ -2964,10 +2929,6 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <AssociationSet Name="FK_RULE_REFERENCE_RULE" Association="Model.FK_RULE_REFERENCE_RULE">
             <End Role="RULE" EntitySet="RULE" />
             <End Role="RULE1" EntitySet="RULE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RULE_REFERENCE_UNDERTAK" Association="Model.FK_RULE_REFERENCE_UNDERTAK">
-            <End Role="UNDERTAKE_LABORATORY" EntitySet="UNDERTAKE_LABORATORY" />
-            <End Role="RULE" EntitySet="RULE" />
           </AssociationSet>
           <AssociationSet Name="FK_SCHEME_R_REFERENCE_RULE" Association="Model.FK_SCHEME_R_REFERENCE_RULE">
             <End Role="RULE" EntitySet="RULE" />
@@ -3185,7 +3146,6 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <Property Name="RECYCLING" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="APPLIANCE_DETAIL_INFORMATION" Relationship="Model.FK_APPLIANC_REFERENCE_APPLIAN2" FromRole="APPLIANCE_LABORATORY" ToRole="APPLIANCE_DETAIL_INFORMATION" />
           <NavigationProperty Name="PREPARE_SCHEME" Relationship="Model.FK_APPLIANC_REFERENCE_PREPARE_" FromRole="APPLIANCE_LABORATORY" ToRole="PREPARE_SCHEME" />
-          <NavigationProperty Name="UNDERTAKE_LABORATORY" Relationship="Model.FK_APPLIANC_REFERENCE_UNDERTAK" FromRole="APPLIANCE_LABORATORY" ToRole="UNDERTAKE_LABORATORY" />
         </EntityType>
         <EntityType Name="APPLIANCECOLLECTION">
           <Key>
@@ -3807,7 +3767,6 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <NavigationProperty Name="UNCERTAINTY" Relationship="Model.FK_ONE_PHAS_REFERENCE_RULE2" FromRole="RULE" ToRole="UNCERTAINTY" />
           <NavigationProperty Name="RULE1" Relationship="Model.FK_RULE_REFERENCE_RULE" FromRole="RULE" ToRole="RULE1" />
           <NavigationProperty Name="RULE2" Relationship="Model.FK_RULE_REFERENCE_RULE" FromRole="RULE1" ToRole="RULE" />
-          <NavigationProperty Name="UNDERTAKE_LABORATORY" Relationship="Model.FK_RULE_REFERENCE_UNDERTAK" FromRole="RULE" ToRole="UNDERTAKE_LABORATORY" />
           <NavigationProperty Name="SCHEME_RULE" Relationship="Model.FK_SCHEME_R_REFERENCE_RULE" FromRole="RULE" ToRole="SCHEME_RULE" />
           <NavigationProperty Name="THREE_PHASE_UNCERTAINTY" Relationship="Model.FK_THREE_PH_REFERENCE_RULE" FromRole="RULE" ToRole="THREE_PHASE_UNCERTAINTY" />
           <NavigationProperty Name="UNCERTAINTYPARAMETERMANAGEMENT" Relationship="Model.FK_UNCERTAI_REFERENCE_RULE" FromRole="RULE" ToRole="UNCERTAINTYPARAMETERMANAGEMENT" />
@@ -4390,9 +4349,7 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="APPLIANCE_LABORATORY" Relationship="Model.FK_APPLIANC_REFERENCE_UNDERTAK" FromRole="UNDERTAKE_LABORATORY" ToRole="APPLIANCE_LABORATORY" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.FK_METERING_REFERENCE_UNDERTAK" FromRole="UNDERTAKE_LABORATORY" ToRole="METERING_STANDARD_DEVICE" />
-          <NavigationProperty Name="RULE" Relationship="Model.FK_RULE_REFERENCE_UNDERTAK" FromRole="UNDERTAKE_LABORATORY" ToRole="RULE" />
           <NavigationProperty Name="SCHEME" Relationship="Model.FK_SCHEME_REFERENCE_UNDERTAK" FromRole="UNDERTAKE_LABORATORY" ToRole="SCHEME" />
         </EntityType>
         <EntityType Name="VBAOGAODAYIN">
@@ -4419,6 +4376,7 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <Property Name="REPORTSTATUSZI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="PACKAGETYPE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="FILECONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FULLPATH" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VJIANDINGRENWU">
           <Key>
@@ -4684,18 +4642,6 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
             </Principal>
             <Dependent Role="APPLIANCE_LABORATORY">
               <PropertyRef Name="PREPARE_SCHEMEID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_APPLIANC_REFERENCE_UNDERTAK">
-          <End Type="Model.UNDERTAKE_LABORATORY" Role="UNDERTAKE_LABORATORY" Multiplicity="0..1" />
-          <End Type="Model.APPLIANCE_LABORATORY" Role="APPLIANCE_LABORATORY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UNDERTAKE_LABORATORY">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="APPLIANCE_LABORATORY">
-              <PropertyRef Name="UNDERTAKE_LABORATORYID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4984,18 +4930,6 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
             </Principal>
             <Dependent Role="RULE1">
               <PropertyRef Name="PARENTID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RULE_REFERENCE_UNDERTAK">
-          <End Type="Model.UNDERTAKE_LABORATORY" Role="UNDERTAKE_LABORATORY" Multiplicity="0..1" />
-          <End Type="Model.RULE" Role="RULE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UNDERTAKE_LABORATORY">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="RULE">
-              <PropertyRef Name="UNDERTAKE_LABORATORYID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6540,6 +6474,7 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <EntitySetMapping Name="VBAOGAODAYIN">
             <EntityTypeMapping TypeName="Model.VBAOGAODAYIN">
               <MappingFragment StoreEntitySet="VBAOGAODAYIN">
+                <ScalarProperty Name="FULLPATH" ColumnName="FULLPATH" />
                 <ScalarProperty Name="FILECONCLUSION" ColumnName="FILECONCLUSION" />
                 <ScalarProperty Name="PACKAGETYPE" ColumnName="PACKAGETYPE" />
                 <ScalarProperty Name="REPORTSTATUSZI" ColumnName="REPORTSTATUSZI" />

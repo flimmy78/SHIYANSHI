@@ -35,17 +35,19 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult BianSongQiYouGongWuGong(string RULEID = "JJG126-1995_5", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult BianSongQiYouGongWuGong(string id = "有功功率", string RULEID = "126-1995_2_4_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
+            ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
+
         /// <summary>
         /// 变送器-相位-引用误差
         /// </summary> 
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult BianSongQiXiangWei(string RULEID = "JJG126-1995_4", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult BianSongQiXiangWei(string RULEID = "126-1995_2_7_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
@@ -69,39 +71,30 @@ namespace Langben.App.Controllers
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
-         
         /// <summary>
-        /// 变送器-电流电压-引用误差
+        /// 测试用
         /// </summary> 
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult BianSongQiDianLiuDianYa(string id = "电流",string RULEID = "126-1995_2_2_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult test(string id = "1", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-            ViewBag.DianLiuDianYa = id;
+            ViewBag.canshu = Convert.ToInt32(id);
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
         /// <summary>
-        /// 工频单相相位输出（测量）-绝对误差-两列
+        /// 变送器-电流电压-引用误差 BianSongQiDianLiuDianYa/电流
         /// </summary> 
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaLiangLie(string RULEID = "JJG440-2008_3_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult BianSongQiDianLiuDianYa(string id = "电流", string RULEID = "126-1995_2_3_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
+            ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
-        /// <summary>
-        /// 工频单相相位输出（测量）-绝对误差-三列 (多通道）
-        /// </summary> 
-        /// <param name="RULEID">检测项目ID</param>
-        /// <param name="SCHEMEID">方案ID</param>
-        /// <returns></returns>
-        public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaSanLie(string RULEID = "JJG440-2008_3_3", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
-        {
-            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
-        }
+
 
         /// <summary>
         /// 工频单相相位输出（测量）-绝对误差-一列
@@ -109,8 +102,13 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaYiLie(string RULEID = "JJG440-2008_3_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
-        {
+        public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaYiLie(string id = "1", string ceLiangShuChu = "相位输出", string RULEID = "test", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {   
+            //url中的配置需要加&ceLiangShuChu=相位测量
+            //url中的配置需要加&ceLiangShuChu=相位输出
+        
+            ViewBag.ceLiangShuChu = ceLiangShuChu;
+            ViewBag.canshu = Convert.ToInt32(id);
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
@@ -120,8 +118,8 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult ZhiLiuDianLiuDianYaFeiZhengFu(string RULEID= "315-1983_2_1", string SCHEMEID="",string PREPARE_SCHEMEID="")
-        {            
+        public ActionResult ZhiLiuDianLiuDianYaFeiZhengFu(string RULEID = "315-1983_2_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
@@ -144,8 +142,8 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult ZhiLiuDianLiuShuChu(string RULEID = "38-1987_2", string SCHEMEID = "",string PREPARE_SCHEMEID="")
-        {           
+        public ActionResult ZhiLiuDianLiuShuChu(string RULEID = "38-1987_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
@@ -201,34 +199,54 @@ namespace Langben.App.Controllers
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
-        public ActionResult Detail(string RULEID = "", string SCHEMEID = "",string PREPARE_SCHEMEID="")
+        public ActionResult Detail(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-            ViewBag.ITEID = "";
-            DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
-            if (entity != null)
-            {
-                ViewBag.ID = entity.ID;
-            }
-            else
-            {
-                ViewBag.ID = string.Empty;
-            }
-            if(PREPARE_SCHEMEID!=null && PREPARE_SCHEMEID.Trim()!="")
-            {
+            if (!string.IsNullOrWhiteSpace(PREPARE_SCHEMEID))
+            {//预备方案
                 QUALIFIED_UNQUALIFIED_TEST_ITE qEntity = null;
                 IBLL.IQUALIFIED_UNQUALIFIED_TEST_ITEBLL qBLL = new QUALIFIED_UNQUALIFIED_TEST_ITEBLL();
                 qEntity = qBLL.GetByPREPARE_SCHEMEID_RULEID(PREPARE_SCHEMEID, RULEID);
-                if(qEntity!=null)
+                if (qEntity != null)
                 {
-                    entity.HTMLVALUE = qEntity.HTMLVALUE;
+                    ViewBag.HTMLVALUE = qEntity.HTMLVALUE;
                     ViewBag.ITEID = qEntity.ID;
+                }
+                else
+                {
+                    //方案
+                    DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
+                    if (entity != null)
+                    {
+                        ViewBag.ID = entity.ID;
+                        ViewBag.HTMLVALUE = entity.HTMLVALUE;
+                    }
+                    else
+                    {
+                        ViewBag.ID = string.Empty;
+                    }
 
-                }                
+                }
             }
+            else
+            {
+                //方案
+                DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
+                if (entity != null)
+                {
+                    ViewBag.ID = entity.ID;
+                    ViewBag.HTMLVALUE = entity.HTMLVALUE;
+                }
+                else
+                {
+                    ViewBag.ID = string.Empty;
+                }
+            }
+
+
             ViewBag.PREPARE_SCHEMEID = PREPARE_SCHEMEID;
             ViewBag.RULEID = RULEID;
             ViewBag.SCHEMEID = SCHEMEID;
-            return View(entity);
+            return View();
         }
         /// <summary>
         /// 保存

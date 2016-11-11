@@ -146,13 +146,25 @@ namespace Langben.DAL.shiyanshi
     public enum ExportType
     {
         /// <summary>
-        /// 原始记录
-        /// </summary>
-        OriginalRecord = 0,
+        /// 检定原始记录
+        /// </summary>          
+        OriginalRecord_JianDing = 0,
         /// <summary>
-        /// 报告
+        /// 校准原始记录
+        /// </summary>          
+        OriginalRecord_XiaoZhun = 1,
+        /// <summary>
+        /// 检定报告
         /// </summary>
-        Report = 1
-    }
+        Report_JianDing = 2,
+        /// <summary>
+        /// 校准报告(非CNAS)
+        /// </summary>
+        Report_XiaoZhun = 3,
+        /// <summary>
+        /// 校准报告(CNAS)
+        /// </summary>
+        Report_XiaoZhun_CNAS = 4
 
+    }    
 }

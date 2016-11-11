@@ -54,7 +54,7 @@ namespace Langben.App.Controllers
         {
 
             int total = 0;
-            search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.已批准.GetHashCode() +"";
+            search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.已批准.GetHashCode() + "";
             List<VBAOGAODAYIN> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
             {
@@ -93,9 +93,11 @@ namespace Langben.App.Controllers
                     ,
                     PRINTSTATUS = s.PRINTSTATUS
                     ,
-                    PACKAGETYPE=s.PACKAGETYPE
+                    PACKAGETYPE = s.PACKAGETYPE
                     ,
-                    FILECONCLUSION=s.FILECONCLUSION
+                    FILECONCLUSION = s.FILECONCLUSION
+                    ,
+                    FULLPATH = s.FULLPATH.Substring(s.FULLPATH.LastIndexOf("\\up"))
 
                 }
 

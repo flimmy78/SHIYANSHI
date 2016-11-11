@@ -34,6 +34,5 @@ namespace Langben.DAL
     
         public virtual APPLIANCE_DETAIL_INFORMATION APPLIANCE_DETAIL_INFORMATION { get; set; }
         public virtual PREPARE_SCHEME PREPARE_SCHEME { get; set; }
-        public virtual UNDERTAKE_LABORATORY UNDERTAKE_LABORATORY { get; set; }
     }
 }

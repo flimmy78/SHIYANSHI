@@ -10,13 +10,6 @@
 
     @RenderSection("HeadContent", false)
 
-    <script type='text/javascript'>
-
-
-        $(function () {
-
-        });
-    </script>
     <style type="text/css">
         .classstyle {
         }
@@ -28,7 +21,8 @@
         .classstyle120 {
             width: 120px;
         }
-         .classstyle140 {
+
+        .classstyle140 {
             width: 140px;
         }
     </style>
@@ -43,26 +37,26 @@
                         <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTongDao()" id="btnDuoTongDao" style="display:none">增加通道</a>
                         <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnSave" onclick="Save()">保存检测项</a>
                         <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnReset" onclick="Reset()">重置检测项</a>
-                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnReset_ITE" onclick="Reset_ITE()">重置检测项</a>
                     </td>
                 </tr>
             </table>
         </div>
     </div><!--顶部按钮-->
 
-    <input type="hidden" id="hideID" value="@ViewBag.ID" /><!--主键-->
+    <input type="hidden" id="hideID" value="@ViewBag.ID" /><!--检定项目模板主键-->
     <input type="hidden" id="hideRULEID" value="@ViewBag.RULEID" /><!--检测项-->
     <input type="hidden" id="hideSCHEMEID" value="@ViewBag.SCHEMEID" /><!--方案编号-->
     <input type="hidden" id="hidePREPARE_SCHEMEID" value="@ViewBag.PREPARE_SCHEMEID" /><!--预备方案ID-->
     <input type="hidden" id="hideITEID" value="@ViewBag.ITEID" /><!--预备方案检测项ID-->
     <!--加载上次保存的html，如果没有，就为空-->
-    @if (Model != null && Model.HTMLVALUE != null && Model.HTMLVALUE.Trim() != "")
+    @if (string.IsNullOrWhiteSpace(ViewBag.HTMLVALUE))
     {
-        <input type="hidden" id="hideHTMLVALUE" value="@Model.HTMLVALUE" />
+        <input type="hidden" id="hideHTMLVALUE" value="" />
     }
     else
     {
-        <input type="hidden" id="hideHTMLVALUE" value="" />
+        <input type="hidden" id="hideHTMLVALUE" value="@ViewBag.HTMLVALUE" />
+
     }
 
     <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;" id="divHtml">

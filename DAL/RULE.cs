@@ -48,7 +48,6 @@ namespace Langben.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RULE> RULE1 { get; set; }
         public virtual RULE RULE2 { get; set; }
-        public virtual UNDERTAKE_LABORATORY UNDERTAKE_LABORATORY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SCHEME_RULE> SCHEME_RULE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

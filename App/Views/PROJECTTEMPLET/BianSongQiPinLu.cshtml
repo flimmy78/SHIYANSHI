@@ -10,7 +10,7 @@
     <tr>
         <td colspan="9">
             通道：
-            <select class="my-combobox" name="" id="BianSongQiTongDao">
+            <select class="my-combobox" name="BianSongQiTongDao" id="BianSongQiTongDaoD_1_1_1">
                 <option value=""></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -24,20 +24,20 @@
         <td colspan="9">
             <div class="fl" style="margin-right:20px">
                 输入范围：(
-                <input name="" type="text" class="my-textbox tc" value="" style="width:30px">
+                <input id="shurufanwei_1_1_1"  name="shurufanwei" type="text" class="my-textbox tc" value="" style="width:30px">
                 -
-                <input name="" type="text" class="my-textbox tc" value="" style="width:30px">
+                <input  id="shurufanweijian_1_1_1"  name="shurufanweijian" type="text" class="my-textbox tc" value="" style="width:30px">
                 )
                 <select class="my-combobox" name="" id=""><option value="Hz">Hz</option><option value="KHz">KHz</option><option value="MHz">MHz</option><option value="GHz">GHz</option></select>
             </div>
 
             <div class="fl" style="margin-right:20px">
                 输出范围：(
-                <input name="" type="text" class="my-textbox tc" value="4" style="width:30px">
+                <input  name="dianmyliu" id="dianmyliu_1_1_1"  type="text" class="my-textbox tc" value="4" style="width:30px">
                 -
-                <input name="" type="text" class="my-textbox tc" value="20" style="width:30px">
+                <input  name="dianmyya" id="dianmyya_1_1_1"  type="text" class="my-textbox tc" value="20" style="width:30px">
                 )
-                <select class="my-combobox" name="" id="mAV">
+                <select class="my-combobox"  name="mAV" id="mAV_1_1_1">
                     <option value="MA">mA</option>
                     <option value="pA">V</option>
                 </select>
@@ -45,9 +45,9 @@
 
             <div class="fl" style="margin-right:20px; ">
                 U<sub>n</sub> =
-                <input name="" type="text" class="my-textbox tc" value="" style="width:40px">
+                <input  name="dianym32ya" id="dianym32ya_1_1_1"  type="text" class="my-textbox tc" value="" style="width:40px">
 
-                <select class="my-combobox" name="dianya" id="dianya">
+                <select class="my-combobox"  name="dianymy123a" id="dianymy123a_1_1_1">
                     <option value="V">V</option>
                     <option value="MV">MV</option>
                     <option value="KV">KV</option>
@@ -68,14 +68,14 @@
         </th>
         <th align="center" width="100">
             标准输出值<br>
-            <select class="my-combobox" name="" id="mAV">
+            <select class="my-combobox"  name="m123AV" id="m123AV_1_1_1">
                 <option value="MA">mA</option>
                 <option value="pA">V</option>
             </select>
         </th>
         <th align="center" width="100">
             实际输出值<br>
-            <select class="my-combobox" name="" id="mAV">
+            <select class="my-combobox"  name="m456AV" id="m456AV_1_1_1">
                 <option value="MA">mA</option>
                 <option value="pA">V</option>
             </select>
@@ -87,7 +87,7 @@
         <th align="center">
             校准结果的不确定度<br>
             U(K =
-            <select class="my-combobox" name="state">
+            <select class="my-combobox"  name="mstate456AV" id="mstate456AV_1_1_1">
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="√3">√3</option>
@@ -102,7 +102,7 @@
     <!--表体-->
     <tr>
         <td align="center" width="100">
-           f
+            f
         </td>
         <td align="center" width="100">
             <input name="DengJi" type="text" class="my-textbox tr" value="0.0" style="width:70px" onblur="JS1(this)" id="DengJi_1_1_1">
@@ -169,21 +169,22 @@
                         <td rowspan="1" align="right"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_1_1_7" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                 </tbody>
+                <tfoot>
+                    <!--表尾-->
+                    <tr>
+                        <td colspan="7">
+                            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+                            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
+
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </td>
     </tr>
 
 </tbody>
-<tfoot>
-    <!--表尾-->
-    <tr>
-        <td colspan="7">
-            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
-            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
 
-        </td>
-    </tr>
-</tfoot>
 @section JS {
     <script type="text/javascript" language="javascript">
         //一个量程的需要这个方法
@@ -215,7 +216,7 @@
                 var rowspan = 1; //合并单元格行数
 
                 var txtVal = "";//(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
-                
+
 
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
 
