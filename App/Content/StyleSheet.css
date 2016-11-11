@@ -4,6 +4,7 @@ body {
     padding: 0;
     font-size:  12px; 
 }
+ul,li{ margin:0; padding:0; list-style:none; overflow:hidden}
 input[type="checkbox"],input[type="radio"] {vertical-align:middle; margin-top:-2px; margin-bottom:1px; }
 .p5 {padding:5px}
 .p10 {padding:10px}
@@ -19,6 +20,7 @@ input[type="checkbox"],input[type="radio"] {vertical-align:middle; margin-top:-2
 .tc{ text-align:center}
 .f14{font-size:14px}  
 .f16{font-size:16px}
+.mr10{ margin-right:10px}
 h2 {
     padding-left: 5px;  
 }
@@ -40,12 +42,14 @@ input {
     margin: 4px;
     background: url(../Images/direction.gif) 0 center no-repeat;
 }
-.clearfix{ clear:both; height:0; line-height:0; width:100%}
+.clear { clear:both; display:block
+}
+.clearfix{ clear:both; height:0; line-height:0; width:100%} 
 .a2 {
     width: 90px;
     height: 23px;
     line-height: 23px;
-    _line-height: 21px;
+    _line-height: 21px; 
     background: url('../Images/line_n2.gif') repeat-x;
     border: 1px solid #b8bcbf;
     cursor: pointer;
