@@ -46,8 +46,8 @@
         <th align="center" colspan="@ViewBag.canshu">标准值</th>
         <th align="center" colspan="@ViewBag.canshu">绝对误差</th>
         <th align="center">
-            校准结果的不确定度 
-             
+            校准结果的不确定度
+
         </th>
     </tr>
     <tr>
@@ -274,8 +274,7 @@
         }
         //增加行
         function CreateRow() {
-        
-            debugger;
+
             var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
             var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
             LiangChengShuLiang++;
@@ -286,6 +285,8 @@
             var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
 
             var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
+
+            var temp = 30;
             for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
                 rowLength++;
                 htmlString.push("<tr rowindex='" + rowLength + "'>");
@@ -297,49 +298,69 @@
 
 
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
-                if (rowidx == 0) {
-                    //需要合并的列
+
+                //计算默认值
+                if (rowspanIdx == 6)
+                { temp = 60 }
+                else if (rowspanIdx == 12)
+                { temp = 30 }
+                else
+                    temp = "";
+                txtVal = (rowidx * temp).toFixed(2);
+                @for (int i = 0; i < 3; i++)//一共3列
+                {
+                    for (int c = 0; c < ViewBag.canshu; c++)//组
+                    {
+                        if (i == 0)
+                        {
+                            ViewBag.canshu2 += @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHIER"
++ i + c + "', HangHaoID, rowidx, "
++ ((ViewBag.ceLiangShuChu == "相位输出") ? "txtVal" : "''") + ", '', unit));";
+
+                        }
+                        else if (i == 1)
+                        {
+                            ViewBag.canshu2 += @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHIER"
+            + i + c + "', HangHaoID, rowidx, "
+            + ((ViewBag.ceLiangShuChu == "相位输出") ? "''" : "txtVal") + ", '', unit));";
+
+                        }
+                        else if (i == 2)
+                        {
+                            ViewBag.canshu2 += @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHIER"
+            + i + c + "', HangHaoID, rowidx, '', '', unit));";
+
+                        }
+                    }
+
+ 
                 }
+            
+
+            if (rowidx == 0) {
                 //需要合并的列
-                var changerHTML = "onblur=''";
-
-                //相位
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "", unit));
-
-                //显示值
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "", unit));
-                //标准值
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "", unit));
-                //绝对误差
-                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "", unit));
-
-                @if (ViewBag.canshu >= 2)
-                {
-                    ViewBag.canshu2=@"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHIER', HangHaoID, rowidx, txtVal, '', unit));"+
-                       @"htmlString.push(SetTDHtml(rowspan, 'BIAOZHUNZHIER', HangHaoID, rowidx, txtVal, '', unit));" +
-                       @"htmlString.push(SetTDHtml(rowspan, 'JUEDUIZHIER', HangHaoID, rowidx, txtVal, '', unit));";
-
-                }
-                @if (ViewBag.canshu >= 3)
-                {
-                    ViewBag.canshu3 = @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHISAN', HangHaoID, rowidx, txtVal, '', unit));" +
-                     @"htmlString.push(SetTDHtml(rowspan, 'BIAOZHUNZHISAN', HangHaoID, rowidx, txtVal, '', unit));" +
-                     @"htmlString.push(SetTDHtml(rowspan, 'JUEDUIZHISAN',HangHaoID , rowidx, txtVal, '', unit));";
-                }
-                @Html.Raw(ViewBag.canshu2)
-                @Html.Raw(ViewBag.canshu3)
-
-                //校准结果的不确定度 U(K =
-                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, txtVal, ""));
-
-                htmlString.push("</tr>");
             }
-            htmlString = htmlString.join("");
 
-            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
-            $.parser.parse(tagRow);//渲染easyui组建
-            $('#dlg').window('close');//关闭弹出框
-            $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+            //需要合并的列
+            var changerHTML = "onblur=''";
+
+            //相位
+            htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "", unit));
+
+            //动态计算出的默认值列
+            @Html.Raw(ViewBag.canshu2)
+
+            //校准结果的不确定度 U(K =
+            htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', ""));
+
+            htmlString.push("</tr>");
+        }
+        htmlString = htmlString.join("");
+
+        var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
+        $.parser.parse(tagRow);//渲染easyui组建
+        $('#dlg').window('close');//关闭弹出框
+        $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
 
         //离开事件，用于计算
