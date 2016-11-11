@@ -75,6 +75,9 @@ namespace Langben.DAL
 
         [Display(Name = "上传报告结论", Order = 20)]
         public object FILECONCLUSION { get; set; }
+
+        [Display(Name = "证书全路径", Order = 21)]
+        public object FULLPATH { get; set; }
     }
 
 
