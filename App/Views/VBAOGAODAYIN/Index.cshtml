@@ -108,8 +108,13 @@
             columns: [[
 					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 164, hidden: true }
 					, {
-					    field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 164, formatter: function (value, row, index) {         
-					        return "<a onclick='daying('"+row.ID+"', '"+row.FULLPATH+"')' >" + row.REPORTNUMBER + "</a>";
+					    field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 164, formatter: function (value, row, index) {
+					        
+					        var path = row.FULLPATH;
+					        var dataa = "<a iddata='" + row.ID + "' path='" + path + "' onclick='daying(this)'>" + row.REPORTNUMBER + "</a>";
+					        var reg = new RegExp("!", "g");//g,表示全部替换。
+                             
+					        return dataa.replace(reg, '"');
 					    }
 					}
 					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 64 }
@@ -201,9 +206,12 @@
     };
 
     //打印
-    function daying(id,url) {
-        var arr = $('#flexigridData').datagrid('getSelections');
-        if (arr.length >= 1) {
+    function daying(thi) {
+         debugger
+        var url = $(thi).attr("path");
+        var id = $(thi).attr("iddata");
+        //var arr = $('#flexigridData').datagrid('getSelections');
+        //if (arr.length >= 1) {
             var entity = new Object();
             //entity.PREPARE_SCHEMEID = arr[0].ID;
             entity.PREPARE_SCHEMEID = id;
@@ -214,7 +222,7 @@
                 // async: false,
                 success: function (res) {
                     if (res.Code == 1) {
-                        $.messager.alert('操作提示', "打印成功！", 'info');
+                        //$.messager.alert('操作提示', "打印成功！", 'info');
                         $("#flexigridData").datagrid("reload");
                         $("#flexigridData").datagrid("clearSelections");
                         window.location.href = url;
@@ -225,10 +233,10 @@
                 }
             })
 
-        }
-        else {
-            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
-        }
+        //}
+        //else {
+        //    $.messager.alert('操作提示', '请选择一条数据!', 'warning');
+        //}
     }
 </script>
 
