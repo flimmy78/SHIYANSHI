@@ -468,6 +468,16 @@ s：字符串
         })
     }
 
+    //委托单打印
+    function dayingweituodan() {
+        window.location.href = '/ORDER_TASK_INFORMATION/Show/'+"@ViewBag.Id";
+    }
+
+    //打印条码
+    function dayingtiaoma() {
+        window.location.href = '/ORDER_TASK_INFORMATION/ErWeiMa/' + "@ViewBag.Id";
+    }
+
     $(function () {
         //扩展datagrid:动态添加删除editor
         //$.extend($.fn.edatagrid.methods, {
@@ -502,14 +512,14 @@ s：字符串
                    text: '打印器具条形码',
                    iconCls: 'icon-print',
                    handler: function () {
-                       return;
+                       return dayingtiaoma();
                    }
                },
                {
                    text: '打印委托单',
                    iconCls: 'icon-print',
                    handler: function () {
-                       return;
+                       return dayingweituodan();
                    }
                },
                {

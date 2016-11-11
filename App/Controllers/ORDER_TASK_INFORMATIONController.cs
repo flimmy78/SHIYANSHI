@@ -166,7 +166,8 @@ namespace Langben.App.Controllers
                         //System.IO.BinaryWriter w = new System.IO.BinaryWriter(fs);
 
                         #region 
-                        System.IO.FileStream fss = new System.IO.FileStream(@"D:\shiyanshi\App\up\模版.png", System.IO.FileMode.OpenOrCreate);
+
+                        System.IO.FileStream fss = new System.IO.FileStream(Server.MapPath("~/up/模版.png"), System.IO.FileMode.OpenOrCreate);
                         int filelength = 0;
                         filelength = (int)fss.Length; //获得文件长度 
                         Byte[] image = new Byte[filelength]; //建立一个字节数组 
@@ -335,14 +336,18 @@ namespace Langben.App.Controllers
         }
 
         /// <summary>
-        /// 首次编辑
+        /// 查看委托单
         /// </summary>
         /// <param name="id">主键</param>
         /// <returns></returns> 
         [SupportFilter]
         public ActionResult Edit(string id)
-        {
-            ViewBag.Id = id;
+        {          
+            ORDER_TASK_INFORMATION on = m_BLL.GetById(id);
+            foreach (var item in on.SIGN)
+            {
+                ViewBag.HTML = item.HTMLVALUE;
+            }           
             return View();
         }
         IBLL.IORDER_TASK_INFORMATIONBLL m_BLL;
