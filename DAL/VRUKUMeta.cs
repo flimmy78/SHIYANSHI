@@ -49,8 +49,8 @@ namespace Langben.DAL
         [Display(Name = "入库说明", Order = 11)]
         public object STORAGEINSTRUCTIONS { get; set; }
 
-        [Display(Name = "实验室", Order = 12)]
-        public object UNDERTAKE_LABORATORYID { get; set; }
+        //[Display(Name = "实验室", Order = 12)]
+        //public object UNDERTAKE_LABORATORYID { get; set; }
 
         [Display(Name = "批准日期", Order = 13)]
         public object APPROVALDATE { get; set; }
