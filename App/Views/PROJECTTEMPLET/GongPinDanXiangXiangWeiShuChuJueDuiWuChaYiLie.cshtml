@@ -315,14 +315,14 @@
                         {
                             ViewBag.canshu2 += @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHIER"
 + i + c + "', HangHaoID, rowidx, "
-+ ((ViewBag.ceLiangShuChu == "相位输出") ? "txtVal" : "''") + ", '', unit));";
++ ((ViewBag.ceLiangShuChu == "相位输出") ? "txtVal" : "''") + ", '', unit,'changeValue'));";
 
                         }
                         else if (i == 1)
                         {
                             ViewBag.canshu2 += @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHIER"
             + i + c + "', HangHaoID, rowidx, "
-            + ((ViewBag.ceLiangShuChu == "相位输出") ? "''" : "txtVal") + ", '', unit));";
+            + ((ViewBag.ceLiangShuChu == "相位输出") ? "''" : "txtVal") + ", '', unit,'changeValue'));";
 
                         }
                         else if (i == 2)
@@ -362,10 +362,24 @@
         $('#dlg').window('close');//关闭弹出框
         $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
-
+        function changeValue(obj) {
+            //debugger;
+            //取出当前行
+            //var name = $(obj).attr("name");
+            //var last = name.charAt(id.length - 2)
+            //txtNumber = $("#txtNumber").val(); //小数点位数
+            //var tr = $(obj).parent().parent();
+            //var shwoData = $(tr).find('td').find('input[name="XIANSHIZHIER"]').find('input').val();
+            //var biaoZhunValue = $(tr).find('td').eq(2).find('input').val();
+            //var wuCha = (shwoData - biaoZhunValue).toFixed(txtNumber);
+            ////XIANSHIZHIER
+            //$(tr).find('td').eq(3).find('input').val(wuCha);
+          //  (tr).find('td').eq(1).find('input').val(parseFloat(shwoData).toFixed(txtNumber))
+        }
         //离开事件，用于计算
         function blurValue(obj) {
-            LianDongShiJiZhi(obj);
+            
+         //   LianDongShiJiZhi(obj);
         }
         //联动标准值
         //输出实际值计算：【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值；【选用电阻阻值】没有数值时，输出实际值=读数值
