@@ -109,7 +109,7 @@
 					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 164, hidden: true }
 					, {
 					    field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 164, formatter: function (value, row, index) {
-					        return "<a href='href="@ViewBag.FULLPATH"'onclick="daying(row.ID)" >" + row.REPORTNUMBER + "</a>";
+					        return "<a href="+row.FULLPATH+"' onclick='daying("+row.ID+")' >" + row.REPORTNUMBER + "</a>";
 					    }
 					}
 					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 64 }
