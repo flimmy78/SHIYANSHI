@@ -108,8 +108,8 @@
             columns: [[
 					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 164, hidden: true }
 					, {
-					    field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 164, formatter: function (value, row, index) {
-					        return "<a href="+row.FULLPATH+"' onclick='daying("+row.ID+")' >" + row.REPORTNUMBER + "</a>";
+					    field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 164, formatter: function (value, row, index) {         
+					        return "<a onclick='daying('"+row.ID+"', '"+row.FULLPATH+"')' >" + row.REPORTNUMBER + "</a>";
 					    }
 					}
 					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 64 }
@@ -201,7 +201,7 @@
     };
 
     //打印
-    function daying(id) {
+    function daying(id,url) {
         var arr = $('#flexigridData').datagrid('getSelections');
         if (arr.length >= 1) {
             var entity = new Object();
@@ -217,6 +217,7 @@
                         $.messager.alert('操作提示', "打印成功！", 'info');
                         $("#flexigridData").datagrid("reload");
                         $("#flexigridData").datagrid("clearSelections");
+                        window.location.href = url;
                     }
                     else {
                         $.messager.alert('操作提示', "打印失败！", 'info');

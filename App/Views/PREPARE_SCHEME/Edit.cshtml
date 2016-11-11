@@ -19,7 +19,7 @@
                 <td align="right">
                     <a href="../VJIANDINGRENWU/Index" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-back'" onclick="">返回</a>
                     <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="Save()">保存</a>
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="">送审核</a>
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" onclick="songwangshenghe()">送审核</a>
                 </td>
             </tr>
         </table>
@@ -84,26 +84,26 @@
     <iframe id="mainframe" name="mainframe" frameborder="0" src=""></iframe>
 </div>
 <script type="text/javascript" language="javascript">
-    //切换检测项   
+    //切换检测项
     //PREPARE_SCHEMEID:预备方案ID
     //RULEID:检测项目ID
-    //INPUTSTATE:录入格式   
+    //INPUTSTATE:录入格式
     //SCHEME_MENU:菜单地址
     function SetIframeSrc(PREPARE_SCHEMEID, RULEID, INPUTSTATE,SCHEME_MENU)
-    {        
+    {
         if (SCHEME_MENU == null || SCHEME_MENU.trim()=="")
-        {           
-            url = "/QUALIFIED_UNQUALIFIED_TEST_ITE/FeiBiaoGe";             
+        {
+            url = "/QUALIFIED_UNQUALIFIED_TEST_ITE/FeiBiaoGe";
         }
         else
         {
             url = "../PROJECTTEMPLET/"+SCHEME_MENU;
-        }        
+        }
         url = url + "?PREPARE_SCHEMEID=" + PREPARE_SCHEMEID;
-        url = url + "&RULEID=" + RULEID;           
+        url = url + "&RULEID=" + RULEID;
         url = url + "&INPUTSTATE=" + INPUTSTATE;
         $('#mainframe').attr('src', url);
-       
+
     }
     //数据验证
     function CheckData() {
@@ -116,15 +116,15 @@
         }
         var ID = $("#hideID").val();//预备方案检查项ID
         var CONCLUSION = $("#CONCLUSION").val();//总结论
-        var CONCLUSION_EXPLAIN = $("#CONCLUSION_EXPLAIN").val();//结论说明          
+        var CONCLUSION_EXPLAIN = $("#CONCLUSION_EXPLAIN").val();//结论说明
         var VALIDITY_PERIOD = $("#VALIDITY_PERIOD").val();//有效期
-        
+
         //获取空对象用于保存添加的信息
         $.ajax({
             type: 'post', //使用post方法访问后台
             dataType: "json", //返回json格式的数据
-            url: '/PREPARE_SCHEME/Save', //要访问的后台地址      
-            contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式        
+            url: '/PREPARE_SCHEME/Save', //要访问的后台地址
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
             data: { 'ID': ID, 'CONCLUSION': CONCLUSION, 'CONCLUSION_EXPLAIN': CONCLUSION_EXPLAIN, 'VALIDITY_PERIOD': VALIDITY_PERIOD },
             beforeSend: function () {
                 //InitAlertJS();
@@ -132,8 +132,8 @@
             complete: function () {
             }, //AJAX请求完成时隐藏loading提示
 
-            success: function (res) {//msg为返回的数据，在这里做数据绑定               
-                if (res.Code == 1) {                   
+            success: function (res) {//msg为返回的数据，在这里做数据绑定
+                if (res.Code == 1) {
                     $.messager.alert('操作提示', "操作成功！", 'info');
                 }
                 else {
@@ -149,19 +149,19 @@
     //导出原始记录、报告
     //type:OriginalRecord原始记录，Report:报告
     function Export(type) {
-        var ID = $("#hideID").val();//预备方案ID     
-        //var url= '/PREPARE_SCHEME/ExportOriginalRecord'; //要访问的后台地址     
+        var ID = $("#hideID").val();//预备方案ID
+        //var url= '/PREPARE_SCHEME/ExportOriginalRecord'; //要访问的后台地址
         //if (type == "Report")//打印报告
         //{
         //    url = '/PREPARE_SCHEME/ExportRecord'; //要访问的后台地址
         //}
-       
+
         //获取空对象用于保存添加的信息
         $.ajax({
             type: 'post', //使用post方法访问后台
             dataType: "json", //返回json格式的数据
-            url: '/PREPARE_SCHEME/Export', //要访问的后台地址            
-            contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式        
+            url: '/PREPARE_SCHEME/Export', //要访问的后台地址
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
             data: { 'ID': ID,'Type':type },
             beforeSend: function () {
                 //InitAlertJS();
@@ -169,7 +169,7 @@
             complete: function () {
             }, //AJAX请求完成时隐藏loading提示
 
-            success: function (res) {//msg为返回的数据，在这里做数据绑定               
+            success: function (res) {//msg为返回的数据，在这里做数据绑定
                 if (res.Code == 1) {
                     $.messager.alert('操作提示', "操作成功！", 'info');
                     window.location.href = res.Message;
@@ -183,6 +183,38 @@
                 $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
             }
         });
+    }
+
+    //发送审核
+    function songwangshenghe() {
+        var arr = {
+            ID: "@ViewBag.ID",//预备方案的id
+            REPORTSTATUS: "@Common.REPORTSTATUS.待审核",
+            REPORTSTATUSZI: "@Common.REPORTSTATUS.待审核.GetHashCode()",
+            PACKAGETYPE : "@Common.PACKAGETYPE.生成.ToString()"
+        }
+        if (true) {//判断报告是否生成
+            $.ajax({
+                url: "/api/PREPARE_SCHEMEApi/EditField",
+                type: "Put",
+                data: arr,
+                // async: false,
+                success: function (res) {
+                    if (res.Code == 1) {
+                        $("#Submit1,#fashongid").attr("disabled", true);
+                        $.messager.alert('操作提示', "发送审核成功！", 'info');
+                    }
+                    else {
+                        $.messager.alert('操作提示', "发送审核失败！", 'error');
+                    }
+                }
+            })
+            return true;
+        }
+        else {
+            $.messager.alert('操作提示', "请生成报告！", 'info');
+            return false;
+        }
     }
 </script>
 
