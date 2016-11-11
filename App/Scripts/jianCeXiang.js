@@ -167,8 +167,11 @@ function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
 //txtVal(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
 //classstyle样式类名
 //unit在输入框后面的单位
-function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit) {
+function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValue) {
 
+    if (blurValue == null || blurValue=='') {
+        blurValue='blurValue';
+    }
     var ddlName = name + "_UNIT";//下拉框名
     var ddlId = ddlName + "_" + id;//下拉框ID
     var id = name + "_" + id;//输入框id
@@ -182,7 +185,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit) {
     }
     var htmlString = [];
     htmlString.push("<td class='" + classstyle + "' rowspan='" + rowspan + "' align='right' > ");
-    htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='blurValue(this)'/>");
+    htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='"+blurValue+"(this)'/>");
     if (ddlHtml != null && ddlHtml.trim() != "") {
         var AttributeValue = GetAttributeValue("LianDongDanWeiDDL");
         htmlString.push($(ddlHtml).attr("onchange", "LianDongDanWeiDDL(this,'" + AttributeValue + "')").attr("name", ddlName).attr("id", ddlId)[0].outerHTML);

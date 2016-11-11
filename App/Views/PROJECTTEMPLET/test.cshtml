@@ -1,13 +1,45 @@
 ﻿@model Langben.DAL.PROJECTTEMPLET
 @{
     Layout = "~/Views/Shared/TempleOnly.cshtml";
-    ViewBag.title = "工频单相相位输出（测量）-绝对误差-一列";
+    ViewBag.title = "交流电压（电流）测量-相对误差-单相(多通道）";
 }
 @using Common
 @using Models
 <thead>
     <!--表头-->
- 
+    <tr>
+        <td colspan="95">
+            <div class="fl" style="margin-right:20px">
+                <input name="dianya" id="dianya_1_1_1" type="text" class="my-textbox tc" value="100" style="width:40px">
+                <select class="my-combobox" name="" id="">
+                    <option value="V">V</option>
+                    <option value="MV">MV</option>
+                    <option value="KV">KV</option>
+                    <option value="mV">mV</option>
+                    <option value="μV">μV</option>
+                </select>
+                /
+                <input name="dianliu" id="dianliu_1_1_1" type="text" class="my-textbox tc" value="5" style="width:40px">
+                <select class="my-combobox" name="" id="">
+                    <option value="A">A</option>
+                    <option value="KA">KA</option>
+                    <option value="mA">mA</option>
+                    <option value="μA">μA</option>
+                    <option value="nA">nA</option>
+                    <option value="pA">pA</option>
+                </select>，
+                <input name="dianHz" id="dianHz_1_1_1" type="text" class="my-textbox tc" value="50" style="width:50px">
+                <select class="my-combobox" name="" id="">
+                    <option value="Hz">Hz</option>
+                    <option value="kHz">kHz</option>
+                    <option value="mHz">MHz</option>
+                    <option value="gHz">GHz</option>
+
+                </select>
+
+            </div>
+        </td>
+    </tr>
     <tr>
         <th rowspan="2" align="center" width="140">相位</th>
         <th align="center" colspan="@ViewBag.canshu"> 显示值</th>
@@ -29,7 +61,14 @@
                 <option value="">UAB </option>
                 <option value="">UBC</option>
 
-            </select> 
+            </select><span>-</span>
+            <select class="my-combobox" name="MYDIANYA2" id="MYDIANYA2_1_1_1">
+                <option value="I1">I1</option>
+                <option value="I2">I2</option>
+                <option value="IA">IA </option>
+                <option value="IB">IB</option>
+                <option value="IC">IC</option>
+            </select>
         </th>
         <th align="center" class="f14">
             <select class="my-combobox" name="MYDIANYA3" id="MYDIANYA3_1_1_1">
@@ -41,7 +80,14 @@
                 <option value="">UAB </option>
                 <option value="">UBC</option>
 
-            </select> 
+            </select><span>-</span>
+            <select class="my-combobox" name="MYDIANYA4" id="MYDIANYA4_1_1_1">
+                <option value="I1">I1</option>
+                <option value="I2">I2</option>
+                <option value="IA">IA </option>
+                <option value="IB">IB</option>
+                <option value="IC">IC</option>
+            </select>
         </th>
         <th align="center" class="f14">
             <select class="my-combobox" name="MYDIANYA5" id="MYDIANYA5_1_1_1">
@@ -53,7 +99,14 @@
                 <option value="">UAB </option>
                 <option value="">UBC</option>
 
-            </select> 
+            </select><span>-</span>
+            <select class="my-combobox" name="MYDIANYA6" id="MYDIANYA6_1_1_1">
+                <option value="I1">I1</option>
+                <option value="I2">I2</option>
+                <option value="IA">IA </option>
+                <option value="IB">IB</option>
+                <option value="IC">IC</option>
+            </select>
         </th>
 
 
@@ -70,7 +123,14 @@
                     <option value="">UAB </option>
                     <option value="">UBC</option>
 
-                </select> 
+                </select><span>-</span>
+                <select class="my-combobox" name="MYDIANYA8" id="MYDIANYA8_1_1_1">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
             </th>
             <th align="center" class="f14">
                 <select class="my-combobox" name="MYDIANYA9" id="MYDIANYA9_1_1_1">
@@ -82,7 +142,14 @@
                     <option value="">UAB </option>
                     <option value="">UBC</option>
 
-                </select> 
+                </select><span>-</span>
+                <select class="my-combobox" name="MYDIANYA0" id="MYDIANYA0_1_1_1">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
             </th>
             <th align="center" class="f14">
                 <select class="my-combobox" name="MYDIANYA11" id="MYDIANYA11_1_1_1">
@@ -94,7 +161,14 @@
                     <option value="">UAB </option>
                     <option value="">UBC</option>
 
-                </select> 
+                </select><span>-</span>
+                <select class="my-combobox" name="MYDIANYA12" id="MYDIANYA12_1_1_1">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
             </th>
 
         }
@@ -111,7 +185,14 @@
                     <option value="">UAB </option>
                     <option value="">UBC</option>
 
-                </select> 
+                </select><span>-</span>
+                <select class="my-combobox" name="MYDIANYA14" id="MYDIANYA14_1_1_1">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
             </th>
             <th align="center" class="f14">
                 <select class="my-combobox" name="MYDIANYA15" id="MYDIANYA15_1_1_1">
@@ -123,7 +204,14 @@
                     <option value="">UAB </option>
                     <option value="">UBC</option>
 
-                </select> 
+                </select><span>-</span>
+                <select class="my-combobox" name="MYDIANYA16" id="MYDIANYA16_1_1_1">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
             </th>
             <th align="center" class="f14">
                 <select class="my-combobox" name="MYDIANYA517" id="MYDIANYA17_1_1_1">
@@ -135,7 +223,14 @@
                     <option value="">UAB </option>
                     <option value="">UBC</option>
 
-                </select> 
+                </select><span>-</span>
+                <select class="my-combobox" name="MYDIANYA18" id="MYDIANYA18_1_1_1">
+                    <option value="I1">I1</option>
+                    <option value="I2">I2</option>
+                    <option value="IA">IA </option>
+                    <option value="IB">IB</option>
+                    <option value="IC">IC</option>
+                </select>
             </th>
 
         }
@@ -180,7 +275,6 @@
         //增加行
         function CreateRow() {
 
-            debugger;
             var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
             var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
             LiangChengShuLiang++;
@@ -191,6 +285,8 @@
             var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
 
             var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
+
+            var temp = 30;
             for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
                 rowLength++;
                 htmlString.push("<tr rowindex='" + rowLength + "'>");
@@ -202,50 +298,88 @@
 
 
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
-                if (rowidx == 0) {
-                    //需要合并的列
+
+                //计算默认值
+                if (rowspanIdx == 6)
+                { temp = 60 }
+                else if (rowspanIdx == 12)
+                { temp = 30 }
+                else
+                    temp = "";
+                txtVal = (rowidx * temp).toFixed(2);
+                @for (int i = 0; i < 3; i++)//一共3列
+                {
+                    for (int c = 0; c < ViewBag.canshu; c++)//组
+                    {
+                        if (i == 0)
+                        {
+                            ViewBag.canshu2 += @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHIER"
++ i + c + "', HangHaoID, rowidx, "
++ ((ViewBag.ceLiangShuChu == "相位输出") ? "txtVal" : "''") + ", '', unit,'changeValue'));";
+
+                        }
+                        else if (i == 1)
+                        {
+                            ViewBag.canshu2 += @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHIER"
+            + i + c + "', HangHaoID, rowidx, "
+            + ((ViewBag.ceLiangShuChu == "相位输出") ? "''" : "txtVal") + ", '', unit,'changeValue'));";
+
+                        }
+                        else if (i == 2)
+                        {
+                            ViewBag.canshu2 += @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHIER"
+            + i + c + "', HangHaoID, rowidx, '', '', unit));";
+
+                        }
+                    }
+
+
                 }
+
+
+            if (rowidx == 0) {
                 //需要合并的列
-                var changerHTML = "onblur=''";
-
-                //相位
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "", unit));
-
-                //显示值
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "", unit));
-                //标准值
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "", unit));
-                //绝对误差
-                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "", unit));
-
-                @if (ViewBag.canshu >= 2)
-                {
-                    ViewBag.canshu2 = @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHIER', HangHaoID, rowidx, txtVal, '', unit));";
-
-                }
-                @if (ViewBag.canshu >= 3)
-                {
-                    ViewBag.canshu3 = @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHISAN', HangHaoID, rowidx, txtVal, '', unit));" ;
-                }
-                @Html.Raw(ViewBag.canshu2)
-                @Html.Raw(ViewBag.canshu3)
-
-                //校准结果的不确定度 U(K =
-                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, txtVal, ""));
-
-                htmlString.push("</tr>");
             }
-            htmlString = htmlString.join("");
 
-            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
-            $.parser.parse(tagRow);//渲染easyui组建
-            $('#dlg').window('close');//关闭弹出框
-            $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+            //需要合并的列
+            var changerHTML = "onblur=''";
+
+            //相位
+            htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "", unit));
+
+            //动态计算出的默认值列
+            @Html.Raw(ViewBag.canshu2)
+
+            //校准结果的不确定度 U(K =
+            htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', ""));
+
+            htmlString.push("</tr>");
         }
+        htmlString = htmlString.join("");
 
+        var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
+        $.parser.parse(tagRow);//渲染easyui组建
+        $('#dlg').window('close');//关闭弹出框
+        $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+        }
+        function changeValue(obj) {
+            //debugger;
+            //取出当前行
+            //var name = $(obj).attr("name");
+            //var last = name.charAt(id.length - 2)
+            //txtNumber = $("#txtNumber").val(); //小数点位数
+            //var tr = $(obj).parent().parent();
+            //var shwoData = $(tr).find('td').find('input[name="XIANSHIZHIER"]').find('input').val();
+            //var biaoZhunValue = $(tr).find('td').eq(2).find('input').val();
+            //var wuCha = (shwoData - biaoZhunValue).toFixed(txtNumber);
+            ////XIANSHIZHIER
+            //$(tr).find('td').eq(3).find('input').val(wuCha);
+          //  (tr).find('td').eq(1).find('input').val(parseFloat(shwoData).toFixed(txtNumber))
+        }
         //离开事件，用于计算
         function blurValue(obj) {
-            LianDongShiJiZhi(obj);
+
+         //   LianDongShiJiZhi(obj);
         }
         //联动标准值
         //输出实际值计算：【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值；【选用电阻阻值】没有数值时，输出实际值=读数值
