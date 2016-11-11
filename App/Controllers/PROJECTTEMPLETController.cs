@@ -17,7 +17,18 @@ namespace Langben.App.Controllers
     /// 检定项目模板
     /// </summary>
     public class PROJECTTEMPLETController : BaseController
-    {
+    { 
+        /// <summary>
+       /// 测试用
+       /// </summary> 
+       /// <param name="RULEID">检测项目ID</param>
+       /// <param name="SCHEMEID">方案ID</param>
+       /// <returns></returns>
+        public ActionResult test(string id = "1", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+            ViewBag.canshu = Convert.ToInt32(id);
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
         /// <summary>
         /// 有功功率输出（测量）-引用误差
         /// </summary> 
@@ -71,17 +82,7 @@ namespace Langben.App.Controllers
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
-        /// <summary>
-        /// 测试用
-        /// </summary> 
-        /// <param name="RULEID">检测项目ID</param>
-        /// <param name="SCHEMEID">方案ID</param>
-        /// <returns></returns>
-        public ActionResult test(string id = "1", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
-        {
-            ViewBag.canshu = Convert.ToInt32(id);
-            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
-        }
+
 
         /// <summary>
         /// 变送器-电流电压-引用误差 BianSongQiDianLiuDianYa/电流
@@ -103,10 +104,10 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
         public ActionResult GongPinDanXiangXiangWeiShuChuJueDuiWuChaYiLie(string id = "1", string ceLiangShuChu = "相位输出", string RULEID = "test", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
-        {   
+        {
             //url中的配置需要加&ceLiangShuChu=相位测量
             //url中的配置需要加&ceLiangShuChu=相位输出
-        
+
             ViewBag.ceLiangShuChu = ceLiangShuChu;
             ViewBag.canshu = Convert.ToInt32(id);
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
