@@ -261,6 +261,7 @@
     <Content Include="html\工频单相相位输出（测量）-绝对误差-三列 %28多通道）（已做）.html" />
     <Content Include="html\工频单相相位输出（测量）-绝对误差-两列（已做）.html" />
     <Content Include="html\有功功率输出（测量）-引用误差%28已做%29.html" />
+    <Content Include="html\标准器数据录入.html" />
     <Content Include="html\直流电压（电流）测量-正负极性-相对误差（多通道）（已做）.html" />
     <Content Include="html\交流电压%28电流%29-相对误差-三相（已做）.html" />
     <Content Include="html\交流电压（电流）-相对误差-两相（已做）.html" />
