@@ -1,13 +1,108 @@
 ﻿@model Langben.DAL.ORDER_TASK_INFORMATION
 
 @{
-    Layout = "~/Views/Shared/Edit.cshtml";
+    ViewBag.Title = "签字";
+    Layout = "~/Views/Shared/QianZi.cshtml";
 }
 @using Common
-@using Models
+<script src="~/Scripts/jquery.edatagrid.js"></script>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
+<head>
+    @*<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />*@
+    <title>委托单</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
+        .tab {
+            width: 1085px;
+            text-align: center;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
 
-@ViewBag.HTML
+            .tab td, .tab1 td {
+                padding: 2px;
+                height: 30px;
+            }
 
+        .title_wtd {
+            width: 1085px;
+            height: 42px;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 42px;
+            font-size: 12pt;
+        }
 
+            .title_wtd span {
+                float: right;
+                font-size: 12pt;
+            }
+
+        .title_jibei {
+            width: 1085px;
+            height: 42px;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 42px;
+            font-size: 14pt;
+            font-weight: bold;
+        }
+
+        .tab1 {
+            width: 1085px;
+            min-height: 128px;
+            text-align: center;
+            border-collapse: collapse;
+            font-size: 11px;
+            margin-top: 30px;
+        }
+
+        .beizhu {
+            width: 1085px;
+            height: 100px;
+            margin: 10px auto 0;
+            font-size: 9pt;
+        }
+
+            .beizhu .mail {
+                margin-left: 132px;
+            }
+
+            .beizhu .yb {
+                margin-left: 200px;
+            }
+
+        .qianzi {
+            width: 1085px;
+            border: none;
+        }
+
+        .my-btn {
+            cursor: pointer;
+            font-size: 14px;
+            background: #006F69;
+            color: #fff;
+            padding: 0 15px;
+            border: none;
+            border-radius: 4px;
+            height: 38px;
+            font-family: 'Microsoft YaHei';
+        }
+
+            .my-btn:hover {
+                background: #08B2AA;
+            }
+    </style>
+</head>
+
+<body>
+    <div id="HTMLVALUE">
+        @Html.Raw(ViewBag.HTML)
+    </div>
+</body>
+</html>
