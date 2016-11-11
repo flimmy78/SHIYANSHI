@@ -1044,7 +1044,7 @@ RuleAttributeArray = [
         Attributes:
         [{
             //添加通道按钮是否显示(show:显示，hidden:不显示)
-            DuoTongDao: 'hidden',
+            DuoTongDao: 'show',
             //检测项单位联动下拉框联动:(变更项名称1)|联动相名称1,联动相名称2;(变更项名称2)|联动相名称1,联动相名称2
             //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
             LianDongDanWeiDDL: '',
@@ -1066,7 +1066,7 @@ RuleAttributeArray = [
         Attributes:
         [{
             //添加通道按钮是否显示(show:显示，hidden:不显示)
-            DuoTongDao: 'hidden',
+            DuoTongDao: 'show',
             //检测项单位联动下拉框联动:(变更项名称1)|联动相名称1,联动相名称2;(变更项名称2)|联动相名称1,联动相名称2
             //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
             LianDongDanWeiDDL: '',
