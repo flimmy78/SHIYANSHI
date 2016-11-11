@@ -36,7 +36,7 @@ namespace Langben.App.Models
                     if (!string.IsNullOrWhiteSpace(item.INPUTSTATE))
                         myTree.inputState = item.INPUTSTATE;//
                     if (!string.IsNullOrWhiteSpace(item.SCHEME_MENU)) {
-                        if (item.SCHEME_MENU.Contains("&"))
+                        if (item.SCHEME_MENU.Contains("?"))
                         {
                             myTree.url = "/PROJECTTEMPLET/" + item.SCHEME_MENU + "&RULEID=" + item.ID;//
                         }
