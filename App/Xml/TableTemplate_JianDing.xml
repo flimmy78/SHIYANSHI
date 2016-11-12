@@ -129,6 +129,18 @@
 					<RowIndex>286</RowIndex>
 					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
 					<CellIndexs>29</CellIndexs>
+					<CellList>
+						<Cell>
+							<!--字段代码与模板中设置的字段保持一致-->
+							<Code>sssss</Code>
+							<!--字段名称含义-->
+							<Name>显示值</Name>
+							<!--模板中单元格开始列号-->
+							<ColIndex>29</ColIndex>
+							<!--所占列数-->
+							<ColCount>14</ColCount>
+						</Cell>						
+					</CellList>
 				</RowInfo>
 			</TableTitleList>
 			<!--数据模板开始行号-->
@@ -234,7 +246,21 @@
 					<!--表格表头行号-->
 					<RowIndex>279</RowIndex>
 					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
-					<CellIndexs>29</CellIndexs>-->
+					<CellIndexs>29</CellIndexs>
+					<CellList>
+						<Cell>
+							<!--字段代码与模板中设置的字段保持一致-->
+							<Code>sssss</Code>
+							<!--字段名称含义-->
+							<Name>显示值</Name>
+							<!--模板中单元格开始列号-->
+							<ColIndex>29</ColIndex>
+							<!--所占列数-->
+							<ColCount>14</ColCount>
+						</Cell>
+						
+					</CellList>
+					
 				</RowInfo>
 			</TableTitleList>
 			<!--数据模板开始行号-->

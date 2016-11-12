@@ -23,6 +23,18 @@
 					<RowIndex>5</RowIndex>
 					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
 					<CellIndexs>45</CellIndexs>
+					<CellList>
+						<Cell>
+							<!--字段代码与模板中设置的字段保持一致-->
+							<Code>K</Code>
+							<!--字段名称含义-->
+							<Name>K2</Name>
+							<!--模板中单元格开始列号-->
+							<ColIndex>45</ColIndex>
+							<!--所占列数-->
+							<ColCount>13</ColCount>
+						</Cell>
+					</CellList>
 				</RowInfo>
 			</TableTitleList>
 			<!--数据模板开始行号-->
@@ -149,6 +161,28 @@
 					<RowIndex>285</RowIndex>
 					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
 					<CellIndexs>21,47</CellIndexs>
+					<CellList>
+						<Cell>
+							<!--字段代码与模板中设置的字段保持一致-->
+							<Code>sssss</Code>
+							<!--字段名称含义-->
+							<Name>显示值</Name>
+							<!--模板中单元格开始列号-->
+							<ColIndex>21</ColIndex>
+							<!--所占列数-->
+							<ColCount>13</ColCount>
+						</Cell>
+						<Cell>
+							<!--字段代码与模板中设置的字段保持一致-->
+							<Code>K</Code>
+							<!--字段名称含义-->
+							<Name>K2</Name>
+							<!--模板中单元格开始列号-->
+							<ColIndex>47</ColIndex>
+							<!--所占列数-->
+							<ColCount>11</ColCount>
+						</Cell>
+					</CellList>
 				</RowInfo>
 			</TableTitleList>
 			<!--数据模板开始行号-->
@@ -275,6 +309,28 @@
 					<RowIndex>278</RowIndex>
 					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
 					<CellIndexs>21,47</CellIndexs>
+					<CellList>
+						<Cell>
+							<!--字段代码与模板中设置的字段保持一致-->
+							<Code>sssss</Code>
+							<!--字段名称含义-->
+							<Name>显示值</Name>
+							<!--模板中单元格开始列号-->
+							<ColIndex>21</ColIndex>
+							<!--所占列数-->
+							<ColCount>13</ColCount>
+						</Cell>
+						<Cell>
+							<!--字段代码与模板中设置的字段保持一致-->
+							<Code>K</Code>
+							<!--字段名称含义-->
+							<Name>K2</Name>
+							<!--模板中单元格开始列号-->
+							<ColIndex>47</ColIndex>
+							<!--所占列数-->
+							<ColCount>11</ColCount>
+						</Cell>
+					</CellList>
 				</RowInfo>
 			</TableTitleList>
 			<!--数据模板开始行号-->
