@@ -24,16 +24,16 @@ namespace Langben.DAL
 			public object ID { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "值", Order = 2)]
-			public object VALUE { get; set; }
+			[Display(Name = "准确度等级", Order = 2)]
+			public object THEACCURACYLEVEL { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "单位", Order = 3)]
-			public object UNIT { get; set; }
+			[Display(Name = "不确定度K值", Order = 3)]
+			public object THEUNCERTAINTYVALUEK { get; set; }
 
 			[ScaffoldColumn(true)]
-			[Display(Name = "计量标准", Order = 4)]
-			public object METERING_STANDARD_DEVICEID { get; set; }
+			[Display(Name = "不确定度指数值", Order = 4)]
+			public object THEUNCERTAINTYNDEXL { get; set; }
 
 			[ScaffoldColumn(true)]
 			[Display(Name = "创建时间", Order = 5)]
@@ -53,6 +53,25 @@ namespace Langben.DAL
 			[Display(Name = "修改人", Order = 8)]
 			public object UPDATEPERSON { get; set; }
 
+        [ScaffoldColumn(true)]
+        [Display(Name = "不确定度数值", Order = 9)]
+        public object THEUNCERTAINTYVALUE { get; set; }
+
+        [ScaffoldColumn(true)]
+        [Display(Name = "不确定度", Order = 10)]
+        public object THEUNCERTAINTY { get; set; }
+
+        [ScaffoldColumn(true)]
+        [Display(Name = "最大允许误差数值", Order = 11)]
+        public object MAXVALUE { get; set; }
+
+        [ScaffoldColumn(true)]
+        [Display(Name = "最大允许误差类别", Order = 12)]
+        public object MAXCATEGORIES { get; set; }
+
+        [ScaffoldColumn(true)]
+        [Display(Name = "计量标准器id", Order = 13)]
+        public object METERING_STANDARD_DEVICEID { get; set; }
 
     }
 }

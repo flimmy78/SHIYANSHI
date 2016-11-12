@@ -324,8 +324,8 @@ namespace Langben.App.Controllers
                 ALLOWABLE_ERRORShow = m.ALLOWABLE_ERROR.Select(e => new ALLOWABLE_ERRORShow
                 {
                     ID = e.ID,
-                    VALUE = e.VALUE,
-                    UNIT = e.UNIT,
+                    //VALUE = e.VALUE,
+                    //UNIT = e.UNIT,
                     METERING_STANDARD_DEVICEID = e.METERING_STANDARD_DEVICEID,
                     CREATETIME = e.CREATETIME,
                     CREATEPERSON = e.CREATEPERSON,

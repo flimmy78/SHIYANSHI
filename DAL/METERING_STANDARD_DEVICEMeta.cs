@@ -70,6 +70,13 @@ namespace Langben.DAL
 			[Display(Name = "修改人", Order = 11)]
 			public object UPDATEPERSON { get; set; }
 
+        [ScaffoldColumn(true)]
+        [Display(Name = "型号", Order = 12)]
+        public object XINGHAO { get; set; }
+
+        [ScaffoldColumn(true)]
+        [Display(Name = "上级", Order = 13)]
+        public object THESUPERIOR { get; set; }
 
     }
 }
