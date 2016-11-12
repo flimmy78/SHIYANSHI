@@ -1313,7 +1313,7 @@
           <!--模板中单元格开始列号-->
           <ColIndex>13</ColIndex>
           <!--所占列数-->
-          <ColCount>5</ColCount>
+          <ColCount>7</ColCount>
         </Cell>
         <Cell>
           <!--字段代码与模板中设置的字段保持一致-->
