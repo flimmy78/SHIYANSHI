@@ -292,43 +292,37 @@
         switch (id) {
             case ("three_1"):
                 myArray = new Array()
-                $("#div1").find(":text,:selected,select,textarea").each(function () {
-                    var name = $(this).prop("name");
-                    var value = $(this).val();
-                    if (name != null)
-                        myArray.push([[name], [value]]);
+                $("#div1").find("ul").each(function () {
+                    var THEACCURACYLEVEL = $(this).find("li :input").eq(0).val();
+                    myArray.push({ THEACCURACYLEVEL: THEACCURACYLEVEL });
                 })
                 break
             case ("three_2"):
                 myArray2 = new Array()
-                $("#div2").find(":text,select option:selected").each(function () {
-                    var name = $(this).prop("name");
-                    var value = $(this).val();
-                    if (name != null)
-                        myArray2.push([[name], [value]]);
+                $("#div2").find("ul").each(function () {
+                    var MAXCATEGORIES = $(this).find("li :select option:selected").eq(0).val();
+                    var MAXVALUE = $(this).find("li :input").eq(1).val();
+                    myArray2.push({ MAXCATEGORIES: MAXCATEGORIES, MAXVALUE: MAXVALUE });
                 })
                 break
             case ("three_3"):
                 myArray3 = new Array()
-                $("#div3").find(":text,:selected,select").each(function () {
-                    var name = $(this).prop("name");
-                    var value = $(this).val();
-                    if (name != null)
-                        myArray3.push([[name], [value]]);
+                $("#div3").find("ul").each(function () {
+                    debugger
+                    var THEUNCERTAINTY = $(this).find("li :select option:selected").eq(0).val();
+                    var THEUNCERTAINTYVALUE = $(this).find("li :input").eq(1).val();
+                    var THEUNCERTAINTYNDEXL = $(this).find("li :select option:selected").eq(2).val();
+                    var THEUNCERTAINTYVALUEK = $(this).find("li :select option:selected").eq(3).val();
+                    myArray3.push({ THEUNCERTAINTYVALUEK: THEUNCERTAINTYVALUEK, THEUNCERTAINTYVALUE: THEUNCERTAINTYVALUE, THEUNCERTAINTYNDEXL: THEUNCERTAINTYNDEXL, THEUNCERTAINTYVALUEK: THEUNCERTAINTYVALUEK });
                 })
                 break
             default:
         }
-        $("#div4").find("ul").each(function () {
-            debugger;
-        
+        $("#div4").find("ul").each(function () {   
             var CERTIFICATEUNIT = $(this).find("li :input").eq(0).val();
             var CERTIFICATE_NUM = $(this).find("li :input").eq(1).val();
-
             var VALID_TO = $(this).find("li :input").eq(2).val();
             //校验时间格式是否正确
-
-
             myArray4.push({ CERTIFICATEUNIT: CERTIFICATEUNIT, CERTIFICATE_NUM: CERTIFICATE_NUM, VALID_TO: VALID_TO });
             })
     METERING_STANDARD_DEVICE.NAME = $("#NAME").val();//名称
