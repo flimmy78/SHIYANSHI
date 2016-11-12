@@ -157,8 +157,12 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult JiaoLiuDianYaXiangDuiWuChaLiangXiang(string RULEID = "35-1999_2_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaLiangXiang(string id = "电压输出", string RULEID = "35-1999_2_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
+
+            //电压输出 电压测量 电流测量 电流输出
+            //JiaoLiuDianYaXiangDuiWuChaSanXiang / 电压输出
+            ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
@@ -170,8 +174,10 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult JiaoLiuDianYaXiangDuiWuChaSanXiang(string RULEID = "35-1999_2_4", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaSanXiang(string id = "电压输出", string RULEID = "35-1999_2_4", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
+            //电压输出 电压测量 电流测量 电流输出
+            ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
@@ -183,7 +189,7 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult JiaoLiuDianYaXiangDuiWuChaDanxiang(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaDanxiang(string RULEID = "34-1999_3_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }

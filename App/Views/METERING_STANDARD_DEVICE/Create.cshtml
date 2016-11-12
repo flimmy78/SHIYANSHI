@@ -43,23 +43,26 @@
                             </li>
                             <li class="fl mr10">
                                 类别：
-                                <select class="my-combobox" name="CATEGORY" id="state">
+                                <select class="my-combobox" name="CATEGORY" id="CATEGORY">
                                     <option value="">请选择 </option>
-                                    <option value="1">标准装置 </option>
-                                    <option value="2">标准器</option>
-                                    <option value="3">中间试品</option>
+                                    <option value="标准装置">标准装置 </option>
+                                    <option value="标准器">标准器</option>
+                                    <option value="中间试品">中间试品</option>
                                 </select>
                             </li>
                             <li class="fl mr10">
                                 实验室：
                                 <select class="my-combobox" name="UNDERTAKE_LABORATORYID" id="state">
                                     <option value="">请选择 </option>
-                                    <option value="1">标准装置 </option>
-                                    <option value="2">标准器</option>
-                                    <option value="3">中间试品</option>
+                                    <option value="数表三相">数表三相 </option>
+                                    <option value="数表单相">数表单相</option>
+                                    <option value="电能">电能</option>
+                                    <option value="指示仪表">指示仪表</option>
+                                    <option value="直流仪器">直流仪器</option>
+                                    <option value="互感器">互感器</option>
                                 </select>
                             </li>
-                            <li class="fl mr10" style="display:none" id="choicePre"> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'">选择上一级</a></li>
+                            <li class="fl mr10" @*style="display:none"*@ id="choicePre"> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="showModalOnly('THESUPERIOR', '../../METERING_STANDARD_DEVICE');">选择上一级</a></li>
                         </ul>
                     </div>
                     <hr>
@@ -74,7 +77,7 @@
                         <div class="mt10" id="div1">
                             <ul class="clear mt10">
                                 <li class="fl mr10">
-                                    <input class="my-textbox " value="" name="VALUE" style="width:200px" placeholder="请输入数值">
+                                    <input class="my-textbox " value="" name="THEACCURACYLEVEL" style="width:200px" placeholder="请输入数值">
                                 </li>
                                 <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
                             </ul>
@@ -88,7 +91,7 @@
                         <div class="clear" id="div2">
                             <ul class="clear mt10">
                                 <li class="fl mr10">
-                                    <select class="my-combobox" name="categagry">
+                                    <select class="my-combobox" name="MAXCATEGORIES">
                                         <option value="">请选择类别</option>
                                         <option value="DCV:">DCV:</option>
                                         <option value="ACV:">ACV:</option>
@@ -99,7 +102,7 @@
                                 </li>
                                 <li class="fl mr10">
                                     ±
-                                    <input class="my-textbox " value="" placeholder="填入数据">
+                                    <input class="my-textbox " value="" name="MAXVALUE" placeholder="填入数据">
                                     %
                                 </li>
                                 <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
@@ -113,7 +116,7 @@
                         <div class="clear" id="div3">
                             <ul class="clear mt10">
                                 <li class="fl mr10">
-                                    <select class="my-combobox" name="categagry">
+                                    <select class="my-combobox" name="THEUNCERTAINTY">
                                         <option value="">请选择类别</option>
                                         <option value="DCV:Urel=">DCV:Urel=</option>
                                         <option value="ACV:Urel=">ACV:Urel=</option>
@@ -123,10 +126,10 @@
                                     </select>
                                 </li>
                                 <li class="fl mr10">
-                                    <input class="my-textbox " value="" placeholder="填入数据">
+                                    <input class="my-textbox " value="" name="THEUNCERTAINTYVALUE" placeholder="填入数据">
                                 </li>
                                 <li class="fl mr10">
-                                    <select class="my-combobox" name="categagry">
+                                    <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
                                         <option value="">请选择指数级别</option>
                                         <option value="×10-1">×10-1</option>
                                         <option value="×10-2">×10-2</option>
@@ -137,7 +140,7 @@
                                     </select>
                                 </li>
                                 <li class="fl mr10">
-                                    <select class="my-combobox" name="categagry">
+                                    <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
                                         <option value="">请选择k值</option>
                                         <option value="k=2">k=2</option>
                                         <option value="k=3">k=3</option>
@@ -153,15 +156,15 @@
                         <ul class="clear mt10">
                             <li class="fl mr10">
                                 证书发放单位：
-                                <input class="my-textbox " value="">
+                                <input class="my-textbox " value="" name="CERTIFICATEUNIT">
                             </li>
                             <li class="fl mr10">
                                 证书编号：
-                                <input class="my-textbox " value="">
+                                <input class="my-textbox " value="" name="CERTIFICATE_NUM">
                             </li>
                             <li class="fl mr10">
                                 有效期至：
-                                <input class="my-textbox " value="">
+                                <input class="my-textbox " value="" name="VALID_TO">
                             </li>
                             <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
                         </ul>
