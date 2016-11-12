@@ -1493,7 +1493,6 @@
             var rowspanIdx = $("#txtPoint").val();     //检测点数
             txtNumber = $("#txtNumber").val(); //小数点位数
 
-            var standardValue = "";
             var htmlString = [];
             var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
 
@@ -1506,8 +1505,6 @@
 
                 var rowspan = 1; //合并单元格行数
 
-                if ((rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10))
-                    standardValue = calculate(rowspanIdx)[rowidx];
 
 
                 var txtVal = "";//(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
@@ -1526,26 +1523,14 @@
                 var changerHTML = "onblur=''";
 
                 //电压输出 电压测量  电流输出 电流测量
-                if (hidecanshu == "电压输出" || hidecanshu == "电流输出") {
-                    //有默认值
-                    htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU1', HangHaoID, rowidx, (standardValue == '' ? '' : standardValue.ShowData), 'classstyle100', '', 'resetXianShiZhi'));
-                    htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU2', HangHaoID, rowidx, (standardValue == '' ? '' : standardValue.ShowData), 'classstyle100', '', 'resetXianShiZhi'));
-                    htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU3', HangHaoID, rowidx, (standardValue == '' ? '' : standardValue.ShowData), 'classstyle100', '', 'resetXianShiZhi'));
-                } else {
-                    htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU1', HangHaoID, rowidx, '', 'classstyle100', '', 'resetXianShiZhi'));
-                    htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU2', HangHaoID, rowidx, '', 'classstyle100', '', 'resetXianShiZhi'));
-                    htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU3', HangHaoID, rowidx, '', 'classstyle100', '', 'resetXianShiZhi'));
-                }
-                if (hidecanshu == "电压测量" || hidecanshu == "电流测量") {
-                    //有默认值
-                    htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG1', HangHaoID, rowidx, (standardValue == '' ? '' : standardValue.ShowData), 'classstyle100', '', 'resetValue'));
-                    htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG2', HangHaoID, rowidx, (standardValue == '' ? '' : standardValue.ShowData), 'classstyle100', '', 'resetValue'));
-                    htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG3', HangHaoID, rowidx, (standardValue == '' ? '' : standardValue.ShowData), 'classstyle100', '', 'resetValue'));
-                } else {
-                    htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG1', HangHaoID, rowidx, '', 'classstyle100', '', 'resetValue'));
-                    htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG2', HangHaoID, rowidx, '', 'classstyle100', '', 'resetValue'));
-                    htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG3', HangHaoID, rowidx, '', 'classstyle100', '', 'resetValue'));
-                }
+
+                htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU1', HangHaoID, rowidx, '', 'classstyle100', '', 'resetXianShiZhi'));
+                htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU2', HangHaoID, rowidx, '', 'classstyle100', '', 'resetXianShiZhi'));
+                htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU3', HangHaoID, rowidx, '', 'classstyle100', '', 'resetXianShiZhi'));
+
+                htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG1', HangHaoID, rowidx, '', 'classstyle100', '', 'resetValue'));
+                htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG2', HangHaoID, rowidx, '', 'classstyle100', '', 'resetValue'));
+                htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG3', HangHaoID, rowidx, '', 'classstyle100', '', 'resetValue'));
 
 
 
@@ -1578,7 +1563,7 @@
 
             var newid = "DIANYACELIANG" + id;
             var biaoZhunData = $(obj).parent().parent().find("#" + newid).val();
-            var  showData= $(obj).val();
+            var showData = $(obj).val();
             var xiangDuiWuCha = (showData == "" || biaoZhunData == "" || biaoZhunData == "0") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
             $(obj).parent().parent().find("#RELATIVEERROR" + id).val(xiangDuiWuCha);
         }
@@ -1587,7 +1572,7 @@
             //重新计算当前行
             var name = $(obj).attr("name");
             var id = $(obj).attr("id");
-            id = id.substring(id.indexOf('_')-1);
+            id = id.substring(id.indexOf('_') - 1);
 
             var newid = "DIANYASHUCHU" + id;
             var showData = $(obj).parent().parent().find("#" + newid).val();
@@ -1595,7 +1580,7 @@
             var xiangDuiWuCha = (showData == "" || biaoZhunData == "" || biaoZhunData == "0") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
 
         }
-       
+
         //离开事件，用于计算
         function blurValue(obj) {
 
