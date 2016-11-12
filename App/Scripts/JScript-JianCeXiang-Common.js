@@ -637,7 +637,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',RELATIVEERROR1,RELATIVEERROR2,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -659,7 +659,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',RELATIVEERROR1,RELATIVEERROR2,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -681,7 +681,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',RELATIVEERROR1,RELATIVEERROR2,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -703,7 +703,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',RELATIVEERROR1,RELATIVEERROR2,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -725,7 +725,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',RELATIVEERROR1,RELATIVEERROR2,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -747,7 +747,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',RELATIVEERROR1,RELATIVEERROR2,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -769,7 +769,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',RELATIVEERROR1,RELATIVEERROR2,RELATIVEERROR3,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -791,7 +791,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',RELATIVEERROR1,RELATIVEERROR2,RELATIVEERROR3,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -813,7 +813,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',RELATIVEERROR1,RELATIVEERROR2,RELATIVEERROR3,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -835,7 +835,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',RELATIVEERROR1,RELATIVEERROR2,RELATIVEERROR3,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -857,7 +857,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',RELATIVEERROR1,RELATIVEERROR2,RELATIVEERROR3,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -879,7 +879,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',RELATIVEERROR1,RELATIVEERROR2,RELATIVEERROR3,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -901,7 +901,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',RELATIVEERROR,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -923,7 +923,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',RELATIVEERROR,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -945,7 +945,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',RELATIVEERROR,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -967,7 +967,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',RELATIVEERROR,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
