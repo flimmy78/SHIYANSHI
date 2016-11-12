@@ -27,19 +27,19 @@
                         <ul>
                             <li class="fl mr10">
                                 名称：
-                                <input class="my-textbox " value="" name="NAME">
+                                <input class="my-textbox " value="" name="NAME" id="NAME">
                             </li>
                             <li class="fl mr10">
                                 测量范围：
-                                <input class="my-textbox " value="" name="TEST_RANGE">
+                                <input class="my-textbox " value="" name="TEST_RANGE" id="TEST_RANGE">
                             </li>
                             <li class="fl mr10">
                                 型号：
-                                <input class="my-textbox " value="" name="XINGHAO">
+                                <input class="my-textbox " value="" name="XINGHAO" id="XINGHAO">
                             </li>
                             <li class="fl mr10">
                                 编号：
-                                <input class="my-textbox " value="" name="FACTORY_NUM">
+                                <input class="my-textbox " value="" name="FACTORY_NUM" id="FACTORY_NUM">
                             </li>
                             <li class="fl mr10">
                                 类别：
@@ -52,7 +52,7 @@
                             </li>
                             <li class="fl mr10">
                                 实验室：
-                                <select class="my-combobox" name="UNDERTAKE_LABORATORYID" id="state">
+                                <select class="my-combobox" name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID">
                                     <option value="">请选择 </option>
                                     <option value="数表三相">数表三相 </option>
                                     <option value="数表单相">数表单相</option>
@@ -71,7 +71,7 @@
                     <div id="divtable">
                         <h2 class="f14 mt10"> 不确定度/准确度等级/最大允许误差 </h2>
                         <label>
-                            <input type="radio" name="three" id="three_1" onclick="radio.check()" />
+                            <input type="radio" name="three" id="three_1" onclick="radio.check()" checked="checked" />
                             准确度等级
                         </label>
                         <div class="mt10" id="div1">
@@ -171,14 +171,14 @@
 
                     </div>
                 </div>
-                <div class="mt10"><a href="javascript:alert('')" class="easyui-linkbutton">保存</a> <a href="javascript:;" class="easyui-linkbutton" onclick="">取消</a></div>
+                <div class="mt10"><a href="javascript:;" class="easyui-linkbutton" onclick="baocun()">保存</a> <a href="javascript:;" class="easyui-linkbutton" onclick="">取消</a></div>
             </div>
             <script>
                 $(function () {
                     $("#state").bind('change', function (obj) {
                         (($(this).val() == 1) ? $('#choicePre').show() : $('#choicePre').hide());
 
-                    });0
+                    }); 0
                 })
                 var radio = {
                     check: function () {
@@ -288,10 +288,95 @@
 <script type="text/javascript">
     //保存
     function baocun() {
+        debugger
         var METERING_STANDARD_DEVICE = new Object();//标准装置/计量标准器信息
-        var METERING_STANDARD_DEVICE_CHECK = new Object();//计量标准装置检定/校准信息
-        var ALLOWABLE_ERROR = new Object();//最大允许误差信息
+        var myArray = null;
+        var myArray2 = null;
+        var myArray3 = null;
+        var myArray4 = new Array()
+        //var METERING_STANDARD_DEVICE_CHECK = new Object();//计量标准装置检定/校准信息
+        //var ALLOWABLE_ERROR = new Object();//最大允许误差信息
 
+        var obj = $("input[name='three']:checked");
+        var id = obj.attr("id");
+        switch (id) {
+            case ("three_1"):
+                myArray = new Array()
+                $("#div1").find(":text,:selected,select,textarea").each(function () {
+                    var name = $(this).prop("name");
+                    var value = $(this).val();
+                    if (name != null)
+                        myArray.push([[name], [value]]);
+                })
+                break
+            case ("three_2"):
+                myArray2 = new Array()
+                $("#div2").find(":text,select option:selected").each(function () {
+                    var name = $(this).prop("name");
+                    var value = $(this).val();
+                    if (name != null)
+                        myArray2.push([[name], [value]]);
+                })
+                break
+            case ("three_3"):
+                myArray3 = new Array()
+                $("#div3").find(":text,:selected,select").each(function () {
+                    var name = $(this).prop("name");
+                    var value = $(this).val();
+                    if (name != null)
+                        myArray3.push([[name], [value]]);
+                })
+                break
+            default:
+        }
+        $("#div4").find(":text,:selected,select").each(function () {
+            debugger;
+            var name = $(this).prop("name");
+            var value = $(this).val();
+            if (name != null)
+                myArray4.push([[name], [value]]);
+        })
+        METERING_STANDARD_DEVICE.NAME = $("#NAME").val();//名称
+        METERING_STANDARD_DEVICE.TEST_RANGE = $("#TEST_RANGE").val();//测量范围
+        METERING_STANDARD_DEVICE.XINGHAO = $("#XINGHAO").val();//型号
+        METERING_STANDARD_DEVICE.FACTORY_NUM = $("#FACTORY_NUM").val();//编号
+        METERING_STANDARD_DEVICE.CATEGORY = $("#CATEGORY select option:selected").val();//类别
+        METERING_STANDARD_DEVICE.UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID select option:selected").val();//实验室
+        METERING_STANDARD_DEVICE.THESUPERIOR = $("#THESUPERIOR").val();//上级
+        if (myArray != null)
+            METERING_STANDARD_DEVICE.ALLOWABLE_ERROR = myArray;
+        else if (myArray2 != null)
+            METERING_STANDARD_DEVICE.ALLOWABLE_ERROR = myArray2;
+        else if (myArray3 != null)
+            METERING_STANDARD_DEVICE.ALLOWABLE_ERROR = myArray3;
+        METERING_STANDARD_DEVICE.METERING_STANDARD_DEVICE_CHECK = myArray4;
+        //调用后台方法
+        $.ajax({
+            url: "/api/METERING_STANDARD_DEVICEApi/Post",
+            type: "Post",
+            data: METERING_STANDARD_DEVICE,
+            dataType: "json",
+
+            success: function (data) {
+                if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                else if (data.Code == 1) {
+                    $.messager.alert('操作提示', "新增成功！", 'info');
+                    return false;
+                }
+                else {
+                    if ($.messager) {
+                        $.messager.defaults.ok = '继续';
+                        $.messager.defaults.cancel = '返回';
+
+                        $.messager.confirm('操作提示', "新增失败！", function (r) {
+                            if (!r) {
+                                window.location.href = 'javascript:history.go(-1)';
+                            }
+                        });
+                    }
+                }
+            }
+        })
     }
 
     $(function () {
