@@ -59,9 +59,9 @@
             var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
             var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
             LiangChengShuLiang++;
-            var liangChengZhi = $("#txtLiangCheng").val();     //量程值
-            var rowspanIdx = $("#txtPoint").val();     //检测点数
-            txtNumber = $("#txtNumber").val(); //小数点位数
+            var txtNumber = $("#txtNumber").val();     //量程值
+            var txtPoint = $("#txtPoint").val();     //检测点数
+            txtPointLen = $("#txtPointLen").val(); //小数点位数
 
             var htmlString = [];
             var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
@@ -69,26 +69,12 @@
             var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
 
 
-            //计算默认值的数组
-            var temp = null;
-            var txtVal = "";//默认值
-            if ((rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10)) {
-                temp = calculateDefault(liangChengZhi, txtNumber, rowspanIdx);
-            }
 
-            for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
+            for (var rowidx = 0; rowidx < txtPoint; rowidx++) {
                 rowLength++;
                 htmlString.push("<tr rowindex='" + rowLength + "'>");
 
                 var rowspan = 1; //合并单元格行数
-
-                if ((rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10)) {
-                    if (temp != null) {
-                        txtVal = temp[rowidx].ShowData;
-                    }
-
-                }
-
 
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
 
@@ -97,7 +83,7 @@
                 if (rowidx == 0) {
                     //需要合并的列 //量程
 
-                    htmlString.push(SetTDHtml(rowspanIdx, "READVALUE", HangHaoID, rowidx, liangChengZhi, ""));
+                    htmlString.push(SetTDHtml(txtPoint, "READVALUE", HangHaoID, rowidx, txtNumber, ""));
 
                 }
 
@@ -105,13 +91,14 @@
                 var changerHTML = "onblur=''";
 
                 //显示值 增加下拉框单位V
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100", "", "resetXianShiZhi"));
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, '', "classstyle100", "", "resetXianShiZhi"));
 
                 //赫兹 增加下拉框单位赫兹
                 htmlString.push(SetTDHtml(rowspan, "HZMY", HangHaoID, rowidx, '', "classstyle100"));
 
                 //标准值  增加下拉框单位V
                 htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100", '', "resetBiaoZhunZhi"));
+            
                 //相对误差
                 htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
 
@@ -128,7 +115,7 @@
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
 
-        ///计算显示值
+        //计算显示值
         function resetXianShiZhi(obj) {
             debugger;
             //重新计算当前行
@@ -147,8 +134,9 @@
 
 
         }
-        ///计算标准值
+        //计算标准值
         function resetBiaoZhunZhi(obj) {
+            debugger;
             //重新计算当前行
             var name = $(obj).attr("name");
             var id = $(obj).attr("id");
@@ -232,7 +220,7 @@
         <table>
             <tr>
                 <td width="80" align="right">量程值：</td>
-                <td><input type="text" id="txtLiangCheng" class="my-textbox  required digits" style="width:200px" /></td>
+                <td><input type="text" id="txtNumber" class="my-textbox  required digits" style="width:200px" /></td>
             </tr>
             <tr>
                 <td align="right">检测点数：</td>
@@ -240,7 +228,7 @@
             </tr>
             <tr>
                 <td align="right">小数点位数：</td>
-                <td><input type="text" id="txtNumber" class="my-textbox  required digits" style="width:200px" /></td>
+                <td><input type="text" id="txtPointLen" class="my-textbox  required digits" style="width:200px" /></td>
             </tr>
         </table>
     </div>
