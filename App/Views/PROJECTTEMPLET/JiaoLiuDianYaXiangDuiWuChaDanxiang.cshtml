@@ -10,8 +10,9 @@
     <tr>
         <th align="center" width="140">量程</th>
         <th width="140" align="center">标准值</th>
-        <th width="140" align="center">赫兹(Hz)</th><th width="140" align="center"> 显示值</th>
-      
+        <th width="140" align="center">赫兹(Hz)</th>
+        <th width="140" align="center"> 显示值</th>
+
         <th width="140" align="center">相对误差</th>
         <th align="center">
             校准结果的不确定度<br>
@@ -61,7 +62,7 @@
             LiangChengShuLiang++;
             var txtNumber = $("#txtNumber").val();     //量程值
             var txtPoint = $("#txtPoint").val();     //检测点数
-           var txtPointLen = $("#txtPointLen").val(); //小数点位数
+            var txtPointLen = $("#txtPointLen").val(); //小数点位数
 
             var htmlString = [];
             var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
@@ -117,7 +118,7 @@
 
         //计算显示值
         function resetXianShiZhi(obj) {
-           
+
             //重新计算当前行
             var name = $(obj).attr("name");
             var id = $(obj).attr("id");
@@ -128,16 +129,18 @@
             var biaoZhunData = $(obj).parent().parent().find("#" + newid).val();
             var showData = $(obj).val();
             if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
-              var  txtPointLen = $("#txtPointLen").val(); //小数点位数
-                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(txtPointLen);
-                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(xiangDuiWuCha);
+                var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
+                var data = fomatFloat(xiangDuiWuCha, txtPointLen)
+                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(data);
             }
 
 
         }
         //计算标准值
         function resetBiaoZhunZhi(obj) {
-          
+
             //重新计算当前行
             var name = $(obj).attr("name");
             var id = $(obj).attr("id");
@@ -148,9 +151,11 @@
             var showData = $(obj).parent().parent().find("#" + newid).val();
             var biaoZhunData = $(obj).val();
             if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
-                txtPointLen = $("#txtPointLen").val(); //小数点位数
-                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(txtPointLen);
-                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(xiangDuiWuCha);
+                var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
+                var data = fomatFloat(xiangDuiWuCha, txtPointLen)
+                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(data);
             }
         }
         //离开事件，用于计算
