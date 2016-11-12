@@ -180,7 +180,7 @@
                 $("#SysOperationId").val(newSysOperationId + (newSysOperationId.length > 0 ? "^" : "") + row.Id + "&" + row.Name);
             },
             onUnselect: function (row) {
-                debugger;
+                
                 //var val = $(this).combobox('getValues');
                 var newSysOperationId = $("#SysOperationId").val();
                 var delVal = row.Id + "&" + row.Name;

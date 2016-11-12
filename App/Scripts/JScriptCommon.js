@@ -244,7 +244,7 @@ function BackList(url) {
 }
 function manyTreeChecked(node, checked, hidControl, treeId) {
     var hidArr = $('#' + hidControl).val().split(',');
-    //debugger;
+    //
     //alert(hidArr.join(','));
     if (checked) {
         hidArr.push(node.id);
@@ -257,7 +257,7 @@ function manyTreeChecked(node, checked, hidControl, treeId) {
         }
     }
     else {
-        //debugger;
+        //
         for (var i = 0; i < hidArr.length; i++) {
             if (hidArr[i] == node.id) {
                 hidArr.splice(i, 1);

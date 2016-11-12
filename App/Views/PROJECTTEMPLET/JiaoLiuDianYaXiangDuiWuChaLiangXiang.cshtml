@@ -1017,43 +1017,34 @@
             var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
             LiangChengShuLiang++;
 
-
-            var hidecanshu = $("#hidecanshu").val();     //参数值
-            var rowspanIdx = $("#txtPoint").val();     //检测点数
-            txtNumber = $("#txtNumber").val(); //小数点位数
+            var txtNumber = $("#txtNumber").val();     //量程值
+            var txtPoint = $("#txtPoint").val();     //检测点数
+            
 
             var standardValue = "";
             var htmlString = [];
             var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
 
             var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
-
-            var temp = 30;
-            for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
+             
+            for (var rowidx = 0; rowidx < txtPoint; rowidx++) {
                 rowLength++;
                 htmlString.push("<tr rowindex='" + rowLength + "'>");
 
                 var rowspan = 1; //合并单元格行数
-
-                if ((rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10))
-                    standardValue = calculate(rowspanIdx)[rowidx];
-
-
-                var txtVal = "";//(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
-
-
+ 
+                 
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
 
                 //计算默认值
 
                 if (rowidx == 0) {
                     //需要合并的列 //量程
-
-                    htmlString.push(SetTDHtml(rowspanIdx, "READVALUE", HangHaoID, rowidx, $("#txtLiangCheng").val(), ""));
+                    htmlString.push(SetTDHtml(txtPoint, "READVALUE", HangHaoID, rowidx, txtNumber, ""));
 
                 }
                 var changerHTML = "onblur=''";
-
+                debugger;
                 //电压输出 电压测量  电流输出 电流测量
                 htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU1', HangHaoID, rowidx, '', 'classstyle100', '', 'resetXianShiZhi'));
                 htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU2', HangHaoID, rowidx, '', 'classstyle100', '', 'resetXianShiZhi'));
@@ -1071,7 +1062,7 @@
 
 
                 //校准结果的不确定度 U(K =
-                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, txtVal, "classstyle"));
+                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', "classstyle"));
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
@@ -1091,8 +1082,11 @@
             var newid = "DIANYACELIANG" + id;
             var biaoZhunData = $(obj).parent().parent().find("#" + newid).val();
             var showData = $(obj).val();
-            var xiangDuiWuCha = (showData == "" || biaoZhunData == "" || biaoZhunData == "0") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-            $(obj).parent().parent().find("#RELATIVEERROR" + id).val(xiangDuiWuCha);
+            if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
+            var    txtPointLen = $("#txtPointLen").val(); //小数点位数
+                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(txtPointLen);
+                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(xiangDuiWuCha);
+            }
         }
         ///计算标准值
         function resetValue(obj) {
@@ -1104,7 +1098,11 @@
             var newid = "DIANYASHUCHU" + id;
             var showData = $(obj).parent().parent().find("#" + newid).val();
             var biaoZhunData = $(obj).val();
-            var xiangDuiWuCha = (showData == "" || biaoZhunData == "" || biaoZhunData == "0") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+            if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
+              var  txtPointLen = $("#txtPointLen").val(); //小数点位数
+                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(txtPointLen);
+                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(xiangDuiWuCha);
+            }
 
         }
 
@@ -1177,7 +1175,7 @@
         <table>
             <tr>
                 <td width="80" align="right">量程值：</td>
-                <td><input type="text" id="txtLiangCheng" class="my-textbox  required digits" style="width:200px" /></td>
+                <td><input type="text" id="txtNumber" class="my-textbox  required digits" style="width:200px" /></td>
             </tr>
             <tr>
                 <td align="right">检测点数：</td>
@@ -1185,11 +1183,10 @@
             </tr>
             <tr>
                 <td align="right">小数点位数：</td>
-                <td><input type="text" id="txtNumber" class="my-textbox  required digits" style="width:200px" /></td>
+                <td><input type="text" id="txtPointLen" class="my-textbox  required digits" style="width:200px" /></td>
             </tr>
         </table>
     </div>
     <!--/增加量程弹层-->
 }
-
 

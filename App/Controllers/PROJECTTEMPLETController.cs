@@ -182,7 +182,7 @@ namespace Langben.App.Controllers
         }
 
         /// <summary>
-        /// 交流电压（电流）测量-相对误差-单相(多通道）
+        /// 交流电压（电流）测量-相对误差-单相(多通道）34-1999_3_1
         /// </summary>
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>

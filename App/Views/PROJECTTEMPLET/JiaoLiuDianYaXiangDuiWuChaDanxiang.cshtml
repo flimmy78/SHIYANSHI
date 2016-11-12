@@ -9,9 +9,9 @@
     <!--表头-->
     <tr>
         <th align="center" width="140">量程</th>
-        <th width="140" align="center"> 显示值</th>
-        <th width="140" align="center">赫兹(Hz)</th>
         <th width="140" align="center">标准值</th>
+        <th width="140" align="center">赫兹(Hz)</th><th width="140" align="center"> 显示值</th>
+      
         <th width="140" align="center">相对误差</th>
         <th align="center">
             校准结果的不确定度<br>
@@ -61,7 +61,7 @@
             LiangChengShuLiang++;
             var txtNumber = $("#txtNumber").val();     //量程值
             var txtPoint = $("#txtPoint").val();     //检测点数
-            txtPointLen = $("#txtPointLen").val(); //小数点位数
+           var txtPointLen = $("#txtPointLen").val(); //小数点位数
 
             var htmlString = [];
             var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
@@ -90,15 +90,15 @@
                 //需要合并的列
                 var changerHTML = "onblur=''";
 
-                //显示值 增加下拉框单位V
+                //标准值 增加下拉框单位V
                 htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, '', "classstyle100", "", "resetXianShiZhi"));
 
                 //赫兹 增加下拉框单位赫兹
                 htmlString.push(SetTDHtml(rowspan, "HZMY", HangHaoID, rowidx, '', "classstyle100"));
 
-                //标准值  增加下拉框单位V
+                //显示值 增加下拉框单位V
                 htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100", '', "resetBiaoZhunZhi"));
-            
+
                 //相对误差
                 htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
 
@@ -117,7 +117,7 @@
 
         //计算显示值
         function resetXianShiZhi(obj) {
-            debugger;
+           
             //重新计算当前行
             var name = $(obj).attr("name");
             var id = $(obj).attr("id");
@@ -128,7 +128,8 @@
             var biaoZhunData = $(obj).parent().parent().find("#" + newid).val();
             var showData = $(obj).val();
             if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
-                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+              var  txtPointLen = $("#txtPointLen").val(); //小数点位数
+                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(txtPointLen);
                 $(obj).parent().parent().find("#RELATIVEERROR" + id).val(xiangDuiWuCha);
             }
 
@@ -136,7 +137,7 @@
         }
         //计算标准值
         function resetBiaoZhunZhi(obj) {
-            debugger;
+          
             //重新计算当前行
             var name = $(obj).attr("name");
             var id = $(obj).attr("id");
@@ -147,7 +148,8 @@
             var showData = $(obj).parent().parent().find("#" + newid).val();
             var biaoZhunData = $(obj).val();
             if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
-                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                txtPointLen = $("#txtPointLen").val(); //小数点位数
+                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(txtPointLen);
                 $(obj).parent().parent().find("#RELATIVEERROR" + id).val(xiangDuiWuCha);
             }
         }
