@@ -279,7 +279,6 @@
 <script type="text/javascript">
     //保存
     function baocun() {
-        debugger
         var METERING_STANDARD_DEVICE = new Object();//标准装置/计量标准器信息
         var myArray = null;
         var myArray2 = null;
@@ -302,7 +301,7 @@
                 myArray2 = new Array()
                 $("#div2").find("ul").each(function () {
                     var MAXCATEGORIES = $(this).find("li :selected").eq(0).val();
-                    var MAXVALUE = $(this).find("li :input").eq(0).val();
+                    var MAXVALUE = $(this).find("li :input").eq(1).val();
                     myArray2.push({ MAXCATEGORIES: MAXCATEGORIES, MAXVALUE: MAXVALUE });
                 })
                 break
@@ -311,10 +310,10 @@
                 $("#div3").find("ul").each(function () {
                     debugger
                     var THEUNCERTAINTY = $(this).find("li :selected").eq(0).val();
-                    var THEUNCERTAINTYVALUE = $(this).find("li :input").eq(0).val();
+                    var THEUNCERTAINTYVALUE = $(this).find("li :input").eq(1).val();
                     var THEUNCERTAINTYNDEXL = $(this).find("li :selected").eq(1).val();
                     var THEUNCERTAINTYVALUEK = $(this).find("li :selected").eq(2).val();
-                    myArray3.push({ THEUNCERTAINTYVALUEK: THEUNCERTAINTYVALUEK, THEUNCERTAINTYVALUE: THEUNCERTAINTYVALUE, THEUNCERTAINTYNDEXL: THEUNCERTAINTYNDEXL, THEUNCERTAINTYVALUEK: THEUNCERTAINTYVALUEK });
+                    myArray3.push({ THEUNCERTAINTY: THEUNCERTAINTY, THEUNCERTAINTYVALUE: THEUNCERTAINTYVALUE, THEUNCERTAINTYNDEXL: THEUNCERTAINTYNDEXL, THEUNCERTAINTYVALUEK: THEUNCERTAINTYVALUEK });
                 })
                 break
             default:
@@ -324,15 +323,15 @@
             var CERTIFICATE_NUM = $(this).find("li :input").eq(1).val();
             var VALID_TO = $(this).find("li :input").eq(2).val();
             //校验时间格式是否正确
-            if (CERTIFICATEUNIT != null || CERTIFICATE_NUM != null || VALID_TO != null)
+            if (CERTIFICATEUNIT != "" || CERTIFICATE_NUM != "" || VALID_TO != "")
                 myArray4.push({ CERTIFICATEUNIT: CERTIFICATEUNIT, CERTIFICATE_NUM: CERTIFICATE_NUM, VALID_TO: VALID_TO });
         })
         METERING_STANDARD_DEVICE.NAME = $("#NAME").val();//名称
         METERING_STANDARD_DEVICE.TEST_RANGE = $("#TEST_RANGE").val();//测量范围
         METERING_STANDARD_DEVICE.XINGHAO = $("#XINGHAO").val();//型号
         METERING_STANDARD_DEVICE.FACTORY_NUM = $("#FACTORY_NUM").val();//编号
-        METERING_STANDARD_DEVICE.CATEGORY = $("#CATEGORY select option:selected").val();//类别
-        METERING_STANDARD_DEVICE.UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID select option:selected").val();//实验室
+        METERING_STANDARD_DEVICE.CATEGORY = $("#CATEGORY  option:selected").val();//类别
+        METERING_STANDARD_DEVICE.UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID  option:selected").val();//实验室
         METERING_STANDARD_DEVICE.THESUPERIOR = $("#THESUPERIOR").val();//上级
         if (myArray != null)
             METERING_STANDARD_DEVICE.ALLOWABLE_ERROR = myArray;
@@ -340,37 +339,83 @@
             METERING_STANDARD_DEVICE.ALLOWABLE_ERROR = myArray2;
         else if (myArray3 != null)
             METERING_STANDARD_DEVICE.ALLOWABLE_ERROR = myArray3;
-        debugger
         METERING_STANDARD_DEVICE.METERING_STANDARD_DEVICE_CHECK = myArray4;
         //调用后台方法
-        $.ajax({
-            url: "/api/METERING_STANDARD_DEVICEApi/Post",
-            type: "Post",
-            data: METERING_STANDARD_DEVICE,
-            dataType: "json",
+        if (ifshuju(METERING_STANDARD_DEVICE)) {
+            $.ajax({
+                url: "/api/METERING_STANDARD_DEVICEApi/Post",
+                type: "Post",
+                data: METERING_STANDARD_DEVICE,
+                dataType: "json",
 
-            success: function (data) {
-                if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
-                else if (data.Code == 1) {
-                    $.messager.alert('操作提示', "新增成功！", 'info');
-                    return false;
-                }
-                else {
-                    if ($.messager) {
-                        $.messager.defaults.ok = '继续';
-                        $.messager.defaults.cancel = '返回';
+                success: function (data) {
+                    if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                    else if (data.Code == 1) {
+                        $.messager.alert('操作提示', "新增成功！", 'info');
+                        return false;
+                    }
+                    else {
+                        if ($.messager) {
+                            $.messager.defaults.ok = '继续';
+                            $.messager.defaults.cancel = '返回';
 
-                        $.messager.confirm('操作提示', "新增失败！", function (r) {
-                            if (!r) {
-                                window.location.href = 'javascript:history.go(-1)';
-                            }
-                        });
+                            $.messager.confirm('操作提示', "新增失败！", function (r) {
+                                if (!r) {
+                                    window.location.href = 'javascript:history.go(-1)';
+                                }
+                            });
+                        }
                     }
                 }
-            }
-        })
+            })
+        }
+        
     }
-
+    //数据校验
+    function ifshuju(m) {
+        var zhi = "";
+        if (isNull(m.NAME)) {
+            zhi += "名称不能为空！<br>";
+        }
+        if (isNull(m.TEST_RANGE)) {
+            zhi += "测量范围不能为空！<br>";
+        }
+        if (isNull(m.XINGHAO)) {
+            zhi += "型号不能为空！<br>";
+        }
+        if (isNull(m.FACTORY_NUM)) {
+            zhi += "类别不能为空！<br>";
+        }
+        if (isNull(m.UNDERTAKE_LABORATORYID)) {
+            zhi += "实验室不能为空！<br>";
+        }
+        if (m.ALLOWABLE_ERROR==null) {
+            zhi += "不确定度/准确度等级/最大允许误差不能为空！<br>";
+        }
+        if (m.METERING_STANDARD_DEVICE_CHECK == null) {
+            zhi += "证书信息不能为空！<br>";
+        }
+        if (zhi != "") {
+            $.messager.alert('操作提示', "" + zhi + "", 'info');
+            return false;
+        }
+        else {
+            //return false;
+            return true;
+        }
+    }
+    /*
+用途：检查输入字符串是否为空或者全部都是空格
+输入：str
+返回：
+如果全是空返回true,否则返回false
+*/
+    function isNull(str) {
+        if (str == "") return true;
+        var regu = "^[ ]+$";
+        var re = new RegExp(regu);
+        return re.test(str);
+    }
     $(function () {
 
     });
