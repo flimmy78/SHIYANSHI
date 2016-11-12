@@ -1,7 +1,7 @@
 ﻿@model Langben.DAL.PROJECTTEMPLET
 
 @{
-    ViewBag.title= " 直流电流输出-相对误差（已做）";
+    ViewBag.title = " 直流电流输出-相对误差（已做）";
     Layout = "~/Views/Shared/Edit.cshtml";
 }
 @using Common
@@ -42,7 +42,7 @@ else
 
     @*<input type="hidden" id="rowindex" value="0" />*@
     <div class="mt10" id="tongdao">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_moban" style="display:none" >
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_moban" style="display:none">
             <thead>
                 <tr>
                     <th rowspan="2" align="center" width="140">量程</th>
@@ -53,7 +53,7 @@ else
                     <th rowspan="2" align="center">相对误差</th>
                     <th align="center">
                         校准结果的不确定度<br>
-                        U(K = <select class="my-combobox" id="K_moban" name="K" style="width:30px;">
+                        U(K = <select class="my-combobox" name="K" id="K_1_1_1">
                             <option value="2">2 </option>
                             <option value="3">3</option>
                             <option value="√3">√3</option>
@@ -68,7 +68,7 @@ else
                 <tr>
                     <td colspan="7">
                         <input type="hidden" id="hideLiangChengShuLiang" value="0" />
-                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng" >增加量程</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加量程</a>
                     </td>
                 </tr>
             </tfoot>
@@ -93,8 +93,8 @@ else
 
         </table>
     </div>
-    <input type="hidden" id="hideDangQianTongDao" value="0"/>    
-    <input type="hidden" id="hideTongDaoShuLiang" value="0" />    
+    <input type="hidden" id="hideDangQianTongDao" value="0" />
+    <input type="hidden" id="hideTongDaoShuLiang" value="0" />
 </div>
 
 <!--增加量程弹层-->
@@ -122,16 +122,18 @@ else
         <tr>
             <td align="right">小数点位数：</td>
             <td><input type="text" id="txtPointLen" name="txtPointLen" class="easyui-textbox required digits" style="width:200px" /></td>
-        </tr>       
+        </tr>
     </table>
-   
+
 </div>
 <!--/增加量程弹层-->
 <script src="/Scripts/JScript-JianCeXiang-Common.js"></script>
+
+<script src="~/Scripts/jianCeXiang.js"></script>
 <script type="text/javascript" language="javascript">
     //var RuleID = $("#hideRULEID").val();//检测项目ID
     //var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
-    // $Tongdao_moban//模板   
+    // $Tongdao_moban//模板
     //设置当前操作通道
     function set(tbodyIndex) {
 
@@ -142,15 +144,15 @@ else
     //增加量程
     function CreateRow() {
         debugger
-        var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道        
-        var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量  
+        var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+        var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
         LiangChengShuLiang++;
         var rowspanIdx = $("#txtPoint").val();     //检测点数
         txtNumber = $("#txtNumber").val(); //量程
         var standardValue = "";
         var htmlString = [];
         var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;
-             
+
         var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//（量程ID）第几个通道_第几个量程
         for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
             rowLength++;
@@ -188,7 +190,7 @@ else
         }
         htmlString = htmlString.join("");
         //var tagRow = $("#tbody_" + tableIdx).append(htmlString);
-        
+
         var tagRow =  $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
         $.parser.parse(tagRow);//渲染easyui组建
         $('#dlg').window('close');

@@ -63,6 +63,9 @@ namespace Langben.DAL
 			[Display(Name = "修改人", Order = 9)]
 			public object UPDATEPERSON { get; set; }
 
+        [ScaffoldColumn(true)]
+        [Display(Name = "证书发放单位", Order = 10)]
+        public object CERTIFICATEUNIT { get; set; }
 
     }
 }

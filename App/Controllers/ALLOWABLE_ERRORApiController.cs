@@ -34,14 +34,31 @@ namespace Langben.App.Controllers
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID
-					,VALUE = s.VALUE
-					,UNIT = s.UNIT
-					,METERING_STANDARD_DEVICEID =   s.METERING_STANDARD_DEVICEIDOld
-					,CREATETIME = s.CREATETIME
-					,CREATEPERSON = s.CREATEPERSON
-					,UPDATETIME = s.UPDATETIME
-					,UPDATEPERSON = s.UPDATEPERSON
-					
+                    ,
+                    THEACCURACYLEVEL = s.THEACCURACYLEVEL
+                    ,
+                    THEUNCERTAINTYVALUEK = s.THEUNCERTAINTYVALUEK
+                     ,
+                    THEUNCERTAINTYNDEXL = s.THEUNCERTAINTYNDEXL
+                     ,
+                    THEUNCERTAINTYVALUE = s.THEUNCERTAINTYVALUE
+                     ,
+                    THEUNCERTAINTY = s.THEUNCERTAINTY
+                     ,
+                    MAXVALUE = s.MAXVALUE
+                     ,
+                    MAXCATEGORIES = s.MAXCATEGORIES
+                    ,
+                    METERING_STANDARD_DEVICEID = s.METERING_STANDARD_DEVICEIDOld
+                    ,
+                    CREATETIME = s.CREATETIME
+                    ,
+                    CREATEPERSON = s.CREATEPERSON
+                    ,
+                    UPDATETIME = s.UPDATETIME
+                    ,
+                    UPDATEPERSON = s.UPDATEPERSON
+
 
                 })
             };
@@ -58,34 +75,34 @@ namespace Langben.App.Controllers
             ALLOWABLE_ERROR item = m_BLL.GetById(id);
             return item;
         }
- 
+
         /// <summary>
         /// 创建
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
         public Common.ClientResult.Result Post([FromBody]ALLOWABLE_ERROR entity)
-        {           
+        {
 
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
             {
                 string currentPerson = GetCurrentPerson();
-               entity.CREATETIME = DateTime.Now;
+                entity.CREATETIME = DateTime.Now;
                 entity.CREATEPERSON = currentPerson;
-              
-                entity.ID = Result.GetNewId();   
+
+                entity.ID = Result.GetNewId();
                 string returnValue = string.Empty;
                 if (m_BLL.Create(ref validationErrors, entity))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed  + "，最大允许误差信息的信息的Id为" + entity.ID,"最大允许误差信息"
+                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，最大允许误差信息的信息的Id为" + entity.ID, "最大允许误差信息"
                         );//写入日志 
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.InsertSucceed;
                     return result; //提示创建成功
                 }
                 else
-                { 
+                {
                     if (validationErrors != null && validationErrors.Count > 0)
                     {
                         validationErrors.All(a =>
@@ -94,7 +111,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，最大允许误差信息的信息，" + returnValue,"最大允许误差信息"
+                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，最大允许误差信息的信息，" + returnValue, "最大允许误差信息"
                         );//写入日志                      
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.InsertFail + returnValue;
@@ -126,7 +143,7 @@ namespace Langben.App.Controllers
                 string returnValue = string.Empty;
                 if (m_BLL.Edit(ref validationErrors, entity))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，最大允许误差信息信息的Id为" + entity.ID,"最大允许误差信息"
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，最大允许误差信息信息的Id为" + entity.ID, "最大允许误差信息"
                         );//写入日志                   
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.UpdateSucceed;
@@ -185,7 +202,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId)+ "," + returnValue, "消息"
+                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId) + "," + returnValue, "消息"
                         );//删除失败，写入日志
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.DeleteFail + returnValue;
@@ -205,7 +222,7 @@ namespace Langben.App.Controllers
         {
             m_BLL = bll;
         }
-        
+
     }
 }
 

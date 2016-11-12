@@ -23,6 +23,7 @@ namespace Langben.DAL
         public string CREATEPERSON { get; set; }
         public Nullable<System.DateTime> UPDATETIME { get; set; }
         public string UPDATEPERSON { get; set; }
+        public string CERTIFICATEUNIT { get; set; }
     
         public virtual METERING_STANDARD_DEVICE METERING_STANDARD_DEVICE { get; set; }
     }

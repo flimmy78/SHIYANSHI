@@ -17,17 +17,17 @@ namespace Langben.App.Controllers
     /// 检定项目模板
     /// </summary>
     public class PROJECTTEMPLETController : BaseController
-    { 
+    {
         /// <summary>
-       /// 测试用
-       /// </summary> 
-       /// <param name="RULEID">检测项目ID</param>
-       /// <param name="SCHEMEID">方案ID</param>
-       /// <returns></returns>
+        /// 测试用
+        /// </summary> 
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <returns></returns>
         public ActionResult test(string id = "电压输出", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             //电压输出 电压测量 电流测量 电流输出
-            ViewBag.canshu =  id;
+            ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -157,8 +157,12 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult JiaoLiuDianYaXiangDuiWuChaLiangXiang(string RULEID = "35-1999_2_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaLiangXiang(string id = "电压输出", string RULEID = "410-1994_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
+
+            //电压输出 电压测量 电流测量 电流输出
+            //JiaoLiuDianYaXiangDuiWuChaSanXiang / 电压输出
+            ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
@@ -170,20 +174,22 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult JiaoLiuDianYaXiangDuiWuChaSanXiang(string RULEID = "35-1999_2_4", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaSanXiang(string id = "电压输出", string RULEID = "35-1999_3_6", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
+            //电压输出 电压测量 电流测量 电流输出
+            ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
         /// <summary>
-        /// 交流电压（电流）测量-相对误差-单相(多通道）
+        /// 交流电压（电流）测量-相对误差-单相(多通道）34-1999_3_1
         /// </summary>
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult JiaoLiuDianYaXiangDuiWuChaDanxiang(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaDanxiang(string RULEID = "34-1999_3_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
@@ -231,19 +237,21 @@ namespace Langben.App.Controllers
             }
             else
             {
-                //方案
-                DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
-                if (entity != null)
+                if (!string.IsNullOrWhiteSpace(SCHEMEID))
                 {
-                    ViewBag.ID = entity.ID;
-                    ViewBag.HTMLVALUE = entity.HTMLVALUE;
-                }
-                else
-                {
-                    ViewBag.ID = string.Empty;
+                    //方案
+                    DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
+                    if (entity != null)
+                    {
+                        ViewBag.ID = entity.ID;
+                        ViewBag.HTMLVALUE = entity.HTMLVALUE;
+                    }
+                    else
+                    {
+                        ViewBag.ID = string.Empty;
+                    }
                 }
             }
-
 
             ViewBag.PREPARE_SCHEMEID = PREPARE_SCHEMEID;
             ViewBag.RULEID = RULEID;

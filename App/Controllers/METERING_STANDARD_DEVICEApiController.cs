@@ -77,7 +77,19 @@ namespace Langben.App.Controllers
                entity.CREATETIME = DateTime.Now;
                 entity.CREATEPERSON = currentPerson;
               
-                entity.ID = Result.GetNewId();   
+                entity.ID = Result.GetNewId();
+                foreach (var item in entity.ALLOWABLE_ERROR)
+                {
+                    item.ID= Result.GetNewId();
+                    item.CREATETIME = DateTime.Now;
+                    item.CREATEPERSON = currentPerson;
+                }
+                foreach (var item in entity.METERING_STANDARD_DEVICE_CHECK)
+                {
+                    item.ID = Result.GetNewId();
+                    item.CREATETIME = DateTime.Now;
+                    item.CREATEPERSON = currentPerson;
+                }
                 string returnValue = string.Empty;
                 if (m_BLL.Create(ref validationErrors, entity))
                 {

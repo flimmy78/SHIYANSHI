@@ -273,7 +273,7 @@ else if (ViewBag.CERTIFICATE_CATEGORY == "校准")
             </div>
             <div class="input_search-field">
                 <a class="easyui-linkbutton"  onclick="javascript: window.location.href = '/VJIANDINGRENWU/Index';" >返回</a>
-                <a   class="easyui-linkbutton" >下一步</a>
+                <a   class="easyui-linkbutton" onclick="xiayibu()">下一步</a>
                 <a  class="easyui-linkbutton" onclick="baochun()"  >保存下一步</a>
             </div>
         </div>
@@ -300,6 +300,11 @@ else if (ViewBag.CERTIFICATE_CATEGORY == "校准")
             });
         }
     })
+
+    //下一步
+    function xiayibu() {
+        window.location.href = "/PREPARE_SCHEME/Edit?ID=" + "@Model.ID";
+    }
     //保存下一步
     function baochun() {
         var arr = new Object();

@@ -9,17 +9,18 @@
     <!--表头-->
     <tr>
         <th align="center" width="140">量程</th>
-        <th width="140" align="center"> 显示值</th>
-        <th width="140" align="center">赫兹(Hz)</th>
         <th width="140" align="center">标准值</th>
-        <th width="140" align="center">相对误差</th>
+        <th width="140" align="center">赫兹(Hz)</th>
+        <th width="140" align="center"> 显示值</th>
+
+        <th width="140" align="center">相对误差(%)</th>
         <th align="center">
             校准结果的不确定度<br>
-            U(K = <select class="my-combobox" name="state">
-                <option value="">2 </option>
-                <option value="">3</option>
-                <option value="">√3</option>
-
+            U(K = <select class="my-combobox" name="K" id="K_1_1_1">
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="√3">√3</option>
+</select>
 
             </select>)
         </th>
@@ -59,28 +60,22 @@
             var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
             var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
             LiangChengShuLiang++;
+            var txtNumber = $("#txtNumber").val();     //量程值
+            var txtPoint = $("#txtPoint").val();     //检测点数
+            var txtPointLen = $("#txtPointLen").val(); //小数点位数
 
-            var rowspanIdx = $("#txtPoint").val();     //检测点数
-            txtNumber = $("#txtNumber").val(); //小数点位数
-            var standardValue = "";
             var htmlString = [];
             var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
 
             var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
 
-            var temp = 30;
-            for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
+
+
+            for (var rowidx = 0; rowidx < txtPoint; rowidx++) {
                 rowLength++;
                 htmlString.push("<tr rowindex='" + rowLength + "'>");
 
                 var rowspan = 1; //合并单元格行数
-
-                if ((rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10))
-                    standardValue = calculate(rowspanIdx)[rowidx];
-
-
-                var txtVal = "";//(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
-
 
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
 
@@ -89,27 +84,28 @@
                 if (rowidx == 0) {
                     //需要合并的列 //量程
 
-                    htmlString.push(SetTDHtml(rowspanIdx, "READVALUE", HangHaoID, rowidx, $("#txtLiangCheng").val(), ""));
+                    htmlString.push(SetTDHtml(txtPoint, "READVALUE", HangHaoID, rowidx, txtNumber, ""));
 
                 }
 
                 //需要合并的列
                 var changerHTML = "onblur=''";
 
-                //标准输出值 增加下拉框单位V
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, (standardValue == "" ? "" : standardValue.ShowData), "classstyle100"));
+                //标准值 增加下拉框单位V
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, '', "classstyle100", "", "resetXianShiZhi"));
 
                 //赫兹 增加下拉框单位赫兹
-                htmlString.push(SetTDHtml(rowspan, "HZMY", HangHaoID, rowidx,'', "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "HZMY", HangHaoID, rowidx, '', "classstyle100"));
 
-                //实际输出值  增加下拉框单位V
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100"));
+                //显示值 增加下拉框单位V
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100", '', "resetBiaoZhunZhi"));
+
                 //相对误差
                 htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
 
 
                 //校准结果的不确定度 U(K =
-                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, txtVal, "classstyle"));
+                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', "classstyle"));
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
@@ -119,119 +115,48 @@
             $('#dlg').window('close');//关闭弹出框
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
-        ///计算标准值
-        function calculate(point) {
 
-            var txtNumber = $("#txtLiangCheng").val(); //量程
-            pointLen = $("#txtNumber").val(); //小数点位数
-            var arry = new Array();
-            var showData = (txtNumber * 1).toFixed(pointLen);
-            var biaoZhunData = (txtNumber * 1).toFixed(pointLen);
-            var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-            if (point == 3) {
-                //输入的检测点是3的时候，按照量程*100%，量程*60%，量程*10%作为默认标准值显示
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        //计算显示值
+        function resetXianShiZhi(obj) {
 
-                showData = (txtNumber * 0.6).toFixed(pointLen);
-                biaoZhunData = (txtNumber * 0.6).toFixed(pointLen);
-                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
 
-                showData = (txtNumber * 0.1).toFixed(pointLen);
-                biaoZhunData = (txtNumber * 0.1).toFixed(pointLen);
-                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
-            }
-            if (point == 5) {
-                //输入的检测点是5的时候，按照量程*100%，量程*80%，量程*60%，量程*40%，量程*20%作为默认标准值显示
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+            var newid = "SHIJISHUCHUZHI" + id;//改动的地方，参与计算的列的name值
 
-                showData = (txtNumber * 0.8).toFixed(pointLen);
-                biaoZhunData = (txtNumber * 0.8).toFixed(pointLen);
-                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+            var biaoZhunData = $(obj).parent().parent().find("#" + newid).val();
+            var showData = $(obj).val();
+            if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
+                var txtPointLen = $("#txtPointLen").val(); //小数点位数
 
-                showData = (txtNumber * 0.6).toFixed(pointLen);
-                biaoZhunData = (txtNumber * 0.6).toFixed(pointLen);
-                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
-
-
-                showData = (txtNumber * 0.4).toFixed(pointLen);
-                biaoZhunData = (txtNumber * 0.4).toFixed(pointLen);
-                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
-
-                showData = (txtNumber * 0.2).toFixed(pointLen);
-                biaoZhunData = (txtNumber * 0.2).toFixed(pointLen);
-                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
-            }
-            if (point == 10) {
-                //输入的检测点是10的时候，按照量程*100%，量程*90%，量程*80%，量程*70%，量程*60%，量程*50%，量程*40%，量程*30%，量程*20%，量程*10%，作为默认标准值显示
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
-                showData = (txtNumber * 0.9).toFixed(pointLen);
-                biaoZhunData = (txtNumber * 0.9).toFixed(pointLen);
-                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
-
-                showData = (txtNumber * 0.8).toFixed(pointLen);
-                biaoZhunData = (txtNumber * 0.8).toFixed(pointLen);
-                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
-
-                showData = (txtNumber * 0.7).toFixed(pointLen);
-                biaoZhunData = (txtNumber * 0.7).toFixed(pointLen);
-                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
-
-                showData = (txtNumber * 0.6).toFixed(pointLen);
-                biaoZhunData = (txtNumber * 0.6).toFixed(pointLen);
-                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
-
-                showData = (txtNumber * 0.5).toFixed(pointLen);
-                biaoZhunData = (txtNumber * 0.5).toFixed(pointLen);
-                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
-
-                showData = (txtNumber * 0.4).toFixed(pointLen);
-                biaoZhunData = (txtNumber * 0.4).toFixed(pointLen);
-                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
-
-                showData = (txtNumber * 0.3).toFixed(pointLen);
-                biaoZhunData = (txtNumber * 0.3).toFixed(pointLen);
-                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
-
-                showData = (txtNumber * 0.2).toFixed(pointLen);
-                biaoZhunData = (txtNumber * 0.2).toFixed(pointLen);
-                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
-
-                showData = (txtNumber * 0.1).toFixed(pointLen);
-                biaoZhunData = (txtNumber * 0.1).toFixed(pointLen);
-                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
+                var data = fomatFloat(xiangDuiWuCha, txtPointLen)
+                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(data);
             }
 
-            return arry;
+
         }
+        //计算标准值
+        function resetBiaoZhunZhi(obj) {
 
-        function changeValue(obj) {
-            //debugger;
-            //取出当前行
-            //var name = $(obj).attr("name");
-            //var last = name.charAt(id.length - 2)
-            //txtNumber = $("#txtNumber").val(); //小数点位数
-            //var tr = $(obj).parent().parent();
-            //var shwoData = $(tr).find('td').find('input[name="XIANSHIZHIER"]').find('input').val();
-            //var biaoZhunValue = $(tr).find('td').eq(2).find('input').val();
-            //var wuCha = (shwoData - biaoZhunValue).toFixed(txtNumber);
-            ////XIANSHIZHIER
-            //$(tr).find('td').eq(3).find('input').val(wuCha);
-            //  (tr).find('td').eq(1).find('input').val(parseFloat(shwoData).toFixed(txtNumber))
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+
+            var newid = "ACTUALVALUE" + id;//改动的地方，参与计算的列的name值
+
+            var showData = $(obj).parent().parent().find("#" + newid).val();
+            var biaoZhunData = $(obj).val();
+            if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
+                var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
+                var data = fomatFloat(xiangDuiWuCha, txtPointLen)
+                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(data);
+            }
         }
         //离开事件，用于计算
         function blurValue(obj) {
@@ -302,7 +227,7 @@
         <table>
             <tr>
                 <td width="80" align="right">量程值：</td>
-                <td><input type="text" id="txtLiangCheng" class="my-textbox  required digits" style="width:200px" /></td>
+                <td><input type="text" id="txtNumber" class="my-textbox  required digits" style="width:200px" /></td>
             </tr>
             <tr>
                 <td align="right">检测点数：</td>
@@ -310,7 +235,7 @@
             </tr>
             <tr>
                 <td align="right">小数点位数：</td>
-                <td><input type="text" id="txtNumber" class="my-textbox  required digits" style="width:200px" /></td>
+                <td><input type="text" id="txtPointLen" class="my-textbox  required digits" style="width:200px" /></td>
             </tr>
         </table>
     </div>
