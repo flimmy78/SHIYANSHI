@@ -157,6 +157,7 @@
     <Folder Include="Res\webuploader\" />
     <Folder Include="up\ErWeiMa\" />
     <Folder Include="up\QianZi\" />
+    <Folder Include="up\Report\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -528,6 +529,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Scripts\datagrid-detailview.js" />
+    <Content Include="Xml\TableTemplate_JianDing.xml" />
+    <Content Include="Xml\TableTemplate_JiaoZhun.xml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -537,6 +540,7 @@
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jianCeXiang.js" />
     <Content Include="Scripts\nugetexample.js" />
+    <Content Include="Xml\SpecialCharacter.xml" />
     <Content Include="Xml\TableTemplate.xml" />
     <None Include="Properties\PublishProfiles\shiyanshi.pubxml" />
     <Content Include="Res\tree_data1.js" />
@@ -897,6 +901,17 @@
     <Content Include="Views\Shared\TempleOnly.cshtml" />
     <Content Include="Views\Shared\TempleMany.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\test.cshtml" />
+    <Content Include="Template\Template1.zip" />
+    <Content Include="Template\原始记录-数据模板-数表三相.xls" />
+    <Content Include="Template\原始记录-校准.xls" />
+    <Content Include="Template\原始记录-检定.xls" />
+    <Content Include="Template\校准证书-CNAS.xls" />
+    <Content Include="Template\校准证书-数据模板-数表三相.xls" />
+    <Content Include="Template\校准证书-空.xls" />
+    <Content Include="Template\校准证书.xls" />
+    <Content Include="Template\检定证书-数据模板-数表三相.xls" />
+    <Content Include="Template\检定证书-空.xls" />
+    <Content Include="Template\检定证书.xls" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

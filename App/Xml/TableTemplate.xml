@@ -789,7 +789,7 @@
     </TableTemplate>
     <TableTemplate>
       <!--输入格式-->
-      <RuleID>126-1995_2_1</RuleID>
+      <RuleID>126-1995_2_1_1</RuleID>
       <!--二级标题开始行号,如果有二级标题填具体开始行号，如果没有填-1-->
       <!--二级标题，有就配置，没有该节点可不配置-->
       <SecondTitleList>
@@ -911,7 +911,7 @@
     </TableTemplate>
     <TableTemplate>
       <!--输入格式-->
-      <RuleID>126-1995_2_2</RuleID>
+      <RuleID>126-1995_2_2_1</RuleID>
       <!--二级标题开始行号,如果有二级标题填具体开始行号，如果没有填-1-->
       <!--二级标题，有就配置，没有该节点可不配置-->
       <SecondTitleList>
@@ -1023,7 +1023,7 @@
     </TableTemplate>
     <TableTemplate>
       <!--输入格式-->
-      <RuleID>126-1995_2_3</RuleID>
+      <RuleID>126-1995_2_3_1</RuleID>
       <!--二级标题开始行号,如果有二级标题填具体开始行号，如果没有填-1-->
       <!--二级标题，有就配置，没有该节点可不配置-->
       <SecondTitleList>
@@ -1135,7 +1135,7 @@
     </TableTemplate>
     <TableTemplate>
       <!--输入格式-->
-      <RuleID>126-1995_2_6</RuleID>
+      <RuleID>126-1995_2_6_1</RuleID>
       <!--二级标题开始行号,如果有二级标题填具体开始行号，如果没有填-1-->
       <!--二级标题，有就配置，没有该节点可不配置-->
       <SecondTitleList>
@@ -1257,7 +1257,7 @@
     </TableTemplate>
     <TableTemplate>
       <!--输入格式-->
-      <RuleID>126-1995_2_7</RuleID>
+      <RuleID>126-1995_2_7_1</RuleID>
       <!--二级标题开始行号,如果有二级标题填具体开始行号，如果没有填-1-->
       <!--二级标题，有就配置，没有该节点可不配置-->
       <SecondTitleList>
@@ -1369,7 +1369,7 @@
     </TableTemplate>
     <TableTemplate>
       <!--输入格式-->
-      <RuleID>126-1995_2_4</RuleID>
+      <RuleID>126-1995_2_4_1</RuleID>
       <!--二级标题开始行号,如果有二级标题填具体开始行号，如果没有填-1-->
       <!--二级标题，有就配置，没有该节点可不配置-->
       <SecondTitleList>
@@ -1491,7 +1491,7 @@
     </TableTemplate>
     <TableTemplate>
       <!--输入格式-->
-      <RuleID>126-1995_2_5</RuleID>
+      <RuleID>126-1995_2_5_1</RuleID>
       <!--二级标题开始行号,如果有二级标题填具体开始行号，如果没有填-1-->
       <!--二级标题，有就配置，没有该节点可不配置-->
       <SecondTitleList>
