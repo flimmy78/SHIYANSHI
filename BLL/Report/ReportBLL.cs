@@ -1106,7 +1106,7 @@ namespace Langben.Report
             {
                 sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue("/");
             }
-            RowIndex = RowIndex + 2;
+            //RowIndex = RowIndex + 2;
             if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString())
             {
                 //校准说明   
@@ -1123,7 +1123,8 @@ namespace Langben.Report
             }
             else
             {
-                //检定结论   
+                //检定结论  
+                RowIndex = RowIndex + 2;
                 if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
                 {
                     sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue("/");
