@@ -1044,7 +1044,7 @@
 
                 }
                 var changerHTML = "onblur=''";
-                debugger;
+           
                 //电压输出 电压测量  电流输出 电流测量
                 htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU1', HangHaoID, rowidx, '', 'classstyle100', '', 'resetXianShiZhi'));
                 htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU2', HangHaoID, rowidx, '', 'classstyle100', '', 'resetXianShiZhi'));
@@ -1083,9 +1083,11 @@
             var biaoZhunData = $(obj).parent().parent().find("#" + newid).val();
             var showData = $(obj).val();
             if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
-            var    txtPointLen = $("#txtPointLen").val(); //小数点位数
-                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(txtPointLen);
-                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(xiangDuiWuCha);
+                var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
+                var data = fomatFloat(xiangDuiWuCha, txtPointLen)
+                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(data);
             }
         }
         ///计算标准值
@@ -1099,9 +1101,11 @@
             var showData = $(obj).parent().parent().find("#" + newid).val();
             var biaoZhunData = $(obj).val();
             if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
-              var  txtPointLen = $("#txtPointLen").val(); //小数点位数
-                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(txtPointLen);
-                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(xiangDuiWuCha);
+                var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
+                var data = fomatFloat(xiangDuiWuCha, txtPointLen)
+                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(data);
             }
 
         }

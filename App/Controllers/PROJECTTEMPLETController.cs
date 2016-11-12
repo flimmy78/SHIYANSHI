@@ -174,7 +174,7 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult JiaoLiuDianYaXiangDuiWuChaSanXiang(string id = "电压输出", string RULEID = "35-1999_2_4", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaSanXiang(string id = "电压输出", string RULEID = "35-1999_3_6", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             //电压输出 电压测量 电流测量 电流输出
             ViewBag.canshu = id;
