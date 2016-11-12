@@ -464,115 +464,85 @@ function SetAllControlHtml() {
             }
         }
     });
-    
+
     $("select").not('#tongdao_moban select').each(function () {
         //除了隐藏模板中的下拉框，其他所有的下拉框
-        if (this.id != "") {             
+        if (this.id != "") {
             var checkText = $(this).find("option:selected").text();  //获取Select选择的Text           
             $(this).find("option[value='" + checkText + "']").attr("selected", true);
-        
-           
+
+
         }
 
     });
 }
 function JS1(thi) {
 }
-///计算相对误差
-function calculate(point) {
-
-    var txtNumber = $("#txtLiangCheng").val(); //量程
-    pointLen = $("#txtNumber").val(); //小数点位数
+//计算默认值
+function calculateDefault(txtNumber, pointLen, point) {
+     
     var arry = new Array();
+    if (txtNumber == "" || pointLen == "" || point == "") {
+        return null;
+    }
     var showData = (txtNumber * 1).toFixed(pointLen);
-    var biaoZhunData = (txtNumber * 1).toFixed(pointLen);
-    var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
     if (point == 3) {
         //输入的检测点是3的时候，按照量程*100%，量程*60%，量程*10%作为默认标准值显示
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
 
         showData = (txtNumber * 0.6).toFixed(pointLen);
-        biaoZhunData = (txtNumber * 0.6).toFixed(pointLen);
-        xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
 
         showData = (txtNumber * 0.1).toFixed(pointLen);
-        biaoZhunData = (txtNumber * 0.1).toFixed(pointLen);
-        xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
     }
     if (point == 5) {
         //输入的检测点是5的时候，按照量程*100%，量程*80%，量程*60%，量程*40%，量程*20%作为默认标准值显示
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
 
         showData = (txtNumber * 0.8).toFixed(pointLen);
-        biaoZhunData = (txtNumber * 0.8).toFixed(pointLen);
-        xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
 
         showData = (txtNumber * 0.6).toFixed(pointLen);
-        biaoZhunData = (txtNumber * 0.6).toFixed(pointLen);
-        xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
 
 
         showData = (txtNumber * 0.4).toFixed(pointLen);
-        biaoZhunData = (txtNumber * 0.4).toFixed(pointLen);
-        xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
 
         showData = (txtNumber * 0.2).toFixed(pointLen);
-        biaoZhunData = (txtNumber * 0.2).toFixed(pointLen);
-        xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
     }
     if (point == 10) {
         //输入的检测点是10的时候，按照量程*100%，量程*90%，量程*80%，量程*70%，量程*60%，量程*50%，量程*40%，量程*30%，量程*20%，量程*10%，作为默认标准值显示
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
+
         showData = (txtNumber * 0.9).toFixed(pointLen);
-        biaoZhunData = (txtNumber * 0.9).toFixed(pointLen);
-        xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
 
         showData = (txtNumber * 0.8).toFixed(pointLen);
-        biaoZhunData = (txtNumber * 0.8).toFixed(pointLen);
-        xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
 
         showData = (txtNumber * 0.7).toFixed(pointLen);
-        biaoZhunData = (txtNumber * 0.7).toFixed(pointLen);
-        xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
 
         showData = (txtNumber * 0.6).toFixed(pointLen);
-        biaoZhunData = (txtNumber * 0.6).toFixed(pointLen);
-        xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
 
         showData = (txtNumber * 0.5).toFixed(pointLen);
-        biaoZhunData = (txtNumber * 0.5).toFixed(pointLen);
-        xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
 
         showData = (txtNumber * 0.4).toFixed(pointLen);
-        biaoZhunData = (txtNumber * 0.4).toFixed(pointLen);
-        xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
 
         showData = (txtNumber * 0.3).toFixed(pointLen);
-        biaoZhunData = (txtNumber * 0.3).toFixed(pointLen);
-        xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
 
         showData = (txtNumber * 0.2).toFixed(pointLen);
-        biaoZhunData = (txtNumber * 0.2).toFixed(pointLen);
-        xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
 
         showData = (txtNumber * 0.1).toFixed(pointLen);
-        biaoZhunData = (txtNumber * 0.1).toFixed(pointLen);
-        xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-        arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+        arry.push({ "ShowData": showData });
     }
 
     return arry;

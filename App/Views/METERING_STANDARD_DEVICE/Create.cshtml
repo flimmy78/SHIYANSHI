@@ -13,13 +13,9 @@
 }
 @using (Html.BeginForm("", "api/METERING_STANDARD_DEVICEApi/Post"))
 {
-    <fieldset>
-        <legend>
-            <input class="a2 f2" type="submit" value="创建" />
-            <input class="a2 f2" type="button" onclick="BackList('METERING_STANDARD_DEVICE')" value="返回" />
-        </legend>
-        <body class="easyui-layout">
-            <input type="hidden" id="rowindex" value="1" />
+
+
+    <input type="hidden" id="rowindex" value="1" />
             <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
                 <div class="mt10" id="">
                     <h2 class="f14"> 基本信息 </h2>
@@ -275,16 +271,12 @@
                             $(row).remove();
                         else
                             alert('就剩一行了你还删除呀？');
-                    }
-                }
+                    }                }
 
             </script>
-        </body>
-    </fieldset>
+
+
 }
-
-
-
 <script type="text/javascript">
     //保存
     function baocun() {
@@ -329,14 +321,19 @@
                 break
             default:
         }
-        $("#div4").find(":text,:selected,select").each(function () {
+        $("#div4").find("ul").each(function () {
             debugger;
-            var name = $(this).prop("name");
-            var value = $(this).val();
-            if (name != null)
-                myArray4.push([[name], [value]]);
-        })
-        METERING_STANDARD_DEVICE.NAME = $("#NAME").val();//名称
+        
+            var CERTIFICATEUNIT = $(this).find("li :input").eq(0).val();
+            var CERTIFICATE_NUM = $(this).find("li :input").eq(1).val();
+
+            var VALID_TO = $(this).find("li :input").eq(2).val();
+            //校验时间格式是否正确
+
+
+            myArray4.push({ CERTIFICATEUNIT: CERTIFICATEUNIT, CERTIFICATE_NUM: CERTIFICATE_NUM, VALID_TO: VALID_TO });
+            })
+    METERING_STANDARD_DEVICE.NAME = $("#NAME").val();//名称
         METERING_STANDARD_DEVICE.TEST_RANGE = $("#TEST_RANGE").val();//测量范围
         METERING_STANDARD_DEVICE.XINGHAO = $("#XINGHAO").val();//型号
         METERING_STANDARD_DEVICE.FACTORY_NUM = $("#FACTORY_NUM").val();//编号

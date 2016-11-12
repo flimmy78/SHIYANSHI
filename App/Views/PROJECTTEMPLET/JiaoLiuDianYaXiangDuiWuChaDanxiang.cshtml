@@ -59,27 +59,35 @@
             var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
             var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
             LiangChengShuLiang++;
-
+            var liangChengZhi = $("#txtLiangCheng").val();     //量程值
             var rowspanIdx = $("#txtPoint").val();     //检测点数
             txtNumber = $("#txtNumber").val(); //小数点位数
-            var standardValue = "";
+
             var htmlString = [];
             var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
 
             var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
 
-            var temp = 30;
+
+            //计算默认值的数组
+            var temp = null;
+            var txtVal = "";//默认值
+            if ((rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10)) {
+                temp = calculateDefault(liangChengZhi, txtNumber, rowspanIdx);
+            }
+
             for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
                 rowLength++;
                 htmlString.push("<tr rowindex='" + rowLength + "'>");
 
                 var rowspan = 1; //合并单元格行数
 
-                if ((rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10))
-                    standardValue = calculate(rowspanIdx)[rowidx];
+                if ((rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10)) {
+                    if (temp != null) {
+                        txtVal = temp[rowidx].ShowData;
+                    }
 
-
-                var txtVal = "";//(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
+                }
 
 
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
@@ -89,27 +97,27 @@
                 if (rowidx == 0) {
                     //需要合并的列 //量程
 
-                    htmlString.push(SetTDHtml(rowspanIdx, "READVALUE", HangHaoID, rowidx, $("#txtLiangCheng").val(), ""));
+                    htmlString.push(SetTDHtml(rowspanIdx, "READVALUE", HangHaoID, rowidx, liangChengZhi, ""));
 
                 }
 
                 //需要合并的列
                 var changerHTML = "onblur=''";
 
-                //标准输出值 增加下拉框单位V
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, (standardValue == "" ? "" : standardValue.ShowData), "classstyle100","",""));
+                //显示值 增加下拉框单位V
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100", "", "resetXianShiZhi"));
 
                 //赫兹 增加下拉框单位赫兹
-                htmlString.push(SetTDHtml(rowspan, "HZMY", HangHaoID, rowidx,'', "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "HZMY", HangHaoID, rowidx, '', "classstyle100"));
 
-                //显示值  增加下拉框单位V
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100"));
+                //标准值  增加下拉框单位V
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100", '', "resetBiaoZhunZhi"));
                 //相对误差
                 htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
 
 
                 //校准结果的不确定度 U(K =
-                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, txtVal, "classstyle"));
+                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', "classstyle"));
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
@@ -119,32 +127,41 @@
             $('#dlg').window('close');//关闭弹出框
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
-        
+
         ///计算显示值
         function resetXianShiZhi(obj) {
+            debugger;
             //重新计算当前行
             var name = $(obj).attr("name");
             var id = $(obj).attr("id");
-            id = id.substring(id.indexOf('_') - 1);
+            id = id.substring(id.indexOf('_'));
 
-            var newid = "DIANYACELIANG" + id;
+            var newid = "SHIJISHUCHUZHI" + id;//改动的地方，参与计算的列的name值
+
             var biaoZhunData = $(obj).parent().parent().find("#" + newid).val();
             var showData = $(obj).val();
-            var xiangDuiWuCha = (showData == "" || biaoZhunData == "" || biaoZhunData == "0") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-            $(obj).parent().parent().find("#RELATIVEERROR" + id).val(xiangDuiWuCha);
+            if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
+                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(xiangDuiWuCha);
+            }
+
+
         }
         ///计算标准值
-        function resetValue(obj) {
+        function resetBiaoZhunZhi(obj) {
             //重新计算当前行
             var name = $(obj).attr("name");
             var id = $(obj).attr("id");
-            id = id.substring(id.indexOf('_') - 1);
+            id = id.substring(id.indexOf('_'));
 
-            var newid = "DIANYASHUCHU" + id;
+            var newid = "ACTUALVALUE" + id;//改动的地方，参与计算的列的name值
+
             var showData = $(obj).parent().parent().find("#" + newid).val();
             var biaoZhunData = $(obj).val();
-            var xiangDuiWuCha = (showData == "" || biaoZhunData == "" || biaoZhunData == "0") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
-
+            if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
+                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(xiangDuiWuCha);
+            }
         }
         //离开事件，用于计算
         function blurValue(obj) {
