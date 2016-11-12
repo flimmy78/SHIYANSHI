@@ -33,6 +33,8 @@ namespace Langben.DAL
         public string CREATEPERSON { get; set; }
         public Nullable<System.DateTime> UPDATETIME { get; set; }
         public string UPDATEPERSON { get; set; }
+        public string XINGHAO { get; set; }
+        public string THESUPERIOR { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ALLOWABLE_ERROR> ALLOWABLE_ERROR { get; set; }

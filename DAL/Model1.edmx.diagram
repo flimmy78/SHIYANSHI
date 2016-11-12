@@ -5,79 +5,79 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b73df3eafea7429cb817a185619e7cc0" Name="Diagram1" ZoomLevel="82">
-        <EntityTypeShape EntityType="Model.AC_VOLTAGE_CURRENT" Width="1.5" PointX="3" PointY="34.75" />
-        <EntityTypeShape EntityType="Model.ACTIVE_POWER" Width="1.5" PointX="3" PointY="11.75" />
+        <EntityTypeShape EntityType="Model.AC_VOLTAGE_CURRENT" Width="1.5" PointX="3" PointY="23" />
+        <EntityTypeShape EntityType="Model.ACTIVE_POWER" Width="1.5" PointX="3" PointY="11.875" />
         <EntityTypeShape EntityType="Model.ALLOWABLE_ERROR" Width="1.5" PointX="11" PointY="48.375" />
-        <EntityTypeShape EntityType="Model.APPLIANCE_DETAIL_INFORMATION" Width="1.5" PointX="17" PointY="3.625" />
-        <EntityTypeShape EntityType="Model.APPLIANCE_LABORATORY" Width="1.5" PointX="19.25" PointY="16.25" />
-        <EntityTypeShape EntityType="Model.APPLIANCECOLLECTION" Width="1.5" PointX="19.25" PointY="57" />
-        <EntityTypeShape EntityType="Model.COMPANY" Width="1.5" PointX="10.75" PointY="7.375" />
-        <EntityTypeShape EntityType="Model.CROSS_COS" Width="1.5" PointX="26" PointY="14.125" />
+        <EntityTypeShape EntityType="Model.APPLIANCE_DETAIL_INFORMATION" Width="1.5" PointX="17" PointY="4" />
+        <EntityTypeShape EntityType="Model.APPLIANCE_LABORATORY" Width="1.5" PointX="19.25" PointY="16.625" />
+        <EntityTypeShape EntityType="Model.APPLIANCECOLLECTION" Width="1.5" PointX="19.25" PointY="57.375" />
+        <EntityTypeShape EntityType="Model.COMPANY" Width="1.5" PointX="10.75" PointY="18.375" />
+        <EntityTypeShape EntityType="Model.CROSS_COS" Width="1.5" PointX="26" PointY="15.375" />
         <EntityTypeShape EntityType="Model.CROSS_FREQUENCY_POWER_FACTOR" Width="1.5" PointX="26" PointY="24.75" />
         <EntityTypeShape EntityType="Model.CROSS_HEAD" Width="1.5" PointX="23.75" PointY="17.125" />
-        <EntityTypeShape EntityType="Model.CROSS_SIN" Width="1.5" PointX="26" PointY="9.375" />
-        <EntityTypeShape EntityType="Model.CROSS_VOLTAGE_CURRENT" Width="1.5" PointX="26" PointY="18.75" />
-        <EntityTypeShape EntityType="Model.DC_CURRENT_OUTPUT" Width="1.5" PointX="3" PointY="5" />
-        <EntityTypeShape EntityType="Model.DC_VOLTAGE_CURRENT_MEASURE" Width="1.5" PointX="3" PointY="39.875" />
-        <EntityTypeShape EntityType="Model.DC_VOLTAGE_CURRENT_MEASURE_CH" Width="1.5" PointX="3" PointY="22.75" />
-        <EntityTypeShape EntityType="Model.DC_VOLTAGE_MEASURE_NO_INDEX" Width="1.5" PointX="3" PointY="29.5" />
-        <EntityTypeShape EntityType="Model.DC_VOLTAGE_OUTPUT" Width="1.5" PointX="3" PointY="17" />
-        <EntityTypeShape EntityType="Model.ERROR_LIMIT" Width="1.5" PointX="10.75" PointY="18.375" />
-        <EntityTypeShape EntityType="Model.FILE_UPLOADER" Width="1.5" PointX="16.25" PointY="26.875" />
+        <EntityTypeShape EntityType="Model.CROSS_SIN" Width="1.5" PointX="26" PointY="20.125" />
+        <EntityTypeShape EntityType="Model.CROSS_VOLTAGE_CURRENT" Width="1.5" PointX="26" PointY="9.375" />
+        <EntityTypeShape EntityType="Model.DC_CURRENT_OUTPUT" Width="1.5" PointX="3" PointY="28" />
+        <EntityTypeShape EntityType="Model.DC_VOLTAGE_CURRENT_MEASURE" Width="1.5" PointX="3" PointY="5" />
+        <EntityTypeShape EntityType="Model.DC_VOLTAGE_CURRENT_MEASURE_CH" Width="1.5" PointX="3" PointY="49.75" />
+        <EntityTypeShape EntityType="Model.DC_VOLTAGE_MEASURE_NO_INDEX" Width="1.5" PointX="3" PointY="44.5" />
+        <EntityTypeShape EntityType="Model.DC_VOLTAGE_OUTPUT" Width="1.5" PointX="3" PointY="17.125" />
+        <EntityTypeShape EntityType="Model.ERROR_LIMIT" Width="1.5" PointX="7.75" PointY="11.375" />
+        <EntityTypeShape EntityType="Model.FILE_UPLOADER" Width="1.5" PointX="16.25" PointY="14.25" />
         <EntityTypeShape EntityType="Model.FileUploader" Width="1.5" PointX="26.75" PointY="2.375" />
-        <EntityTypeShape EntityType="Model.FREQUENCY" Width="1.5" PointX="3" PointY="46.75" />
-        <EntityTypeShape EntityType="Model.METERING_STANDARD_DEVICE" Width="1.5" PointX="8.75" PointY="32.5" />
-        <EntityTypeShape EntityType="Model.METERING_STANDARD_DEVICE_CHECK" Width="1.5" PointX="11" PointY="51.875" />
-        <EntityTypeShape EntityType="Model.ORDER_TASK_INFORMATION" Width="1.5" PointX="14.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Model.FREQUENCY" Width="1.5" PointX="3" PointY="34.75" />
+        <EntityTypeShape EntityType="Model.METERING_STANDARD_DEVICE" Width="1.5" PointX="8.75" PointY="32.875" />
+        <EntityTypeShape EntityType="Model.METERING_STANDARD_DEVICE_CHECK" Width="1.5" PointX="11" PointY="52.75" />
+        <EntityTypeShape EntityType="Model.ORDER_TASK_INFORMATION" Width="1.5" PointX="14.75" PointY="4.125" />
         <EntityTypeShape EntityType="Model.OVERALL_TABLE" Width="1.5" PointX="0.75" PointY="28.25" />
-        <EntityTypeShape EntityType="Model.PHASE" Width="1.5" PointX="3" PointY="51.5" />
-        <EntityTypeShape EntityType="Model.PREPARE_SCHEME" Width="1.5" PointX="14" PointY="13.25" />
-        <EntityTypeShape EntityType="Model.PRINTREPORT" Width="1.5" PointX="16.25" PointY="19.125" />
-        <EntityTypeShape EntityType="Model.PROJECTTEMPLET" Width="1.5" PointX="11" PointY="13.75" />
-        <EntityTypeShape EntityType="Model.QUALIFIED_UNQUALIFIED_TEST_ITE" Width="1.5" PointX="16.25" PointY="22.375" />
-        <EntityTypeShape EntityType="Model.REPORTCOLLECTION" Width="1.5" PointX="16.25" PointY="10.375" />
+        <EntityTypeShape EntityType="Model.PHASE" Width="1.5" PointX="3" PointY="39.5" />
+        <EntityTypeShape EntityType="Model.PREPARE_SCHEME" Width="1.5" PointX="14" PointY="13.625" />
+        <EntityTypeShape EntityType="Model.PRINTREPORT" Width="1.5" PointX="16.25" PointY="29.875" />
+        <EntityTypeShape EntityType="Model.PROJECTTEMPLET" Width="1.5" PointX="11" PointY="9.75" />
+        <EntityTypeShape EntityType="Model.QUALIFIED_UNQUALIFIED_TEST_ITE" Width="1.5" PointX="16.25" PointY="25.375" />
+        <EntityTypeShape EntityType="Model.REPORTCOLLECTION" Width="1.5" PointX="16.25" PointY="10.75" />
         <EntityTypeShape EntityType="Model.RULE" Width="1.5" PointX="5.75" PointY="12.625" />
         <EntityTypeShape EntityType="Model.SCHEME" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.SCHEME_RULE" Width="1.5" PointX="8" PointY="13.75" />
-        <EntityTypeShape EntityType="Model.SIGN" Width="1.5" PointX="17" PointY="14.25" />
-        <EntityTypeShape EntityType="Model.SysAnnouncement" Width="1.5" PointX="12.75" PointY="10.375" />
+        <EntityTypeShape EntityType="Model.SCHEME_RULE" Width="1.5" PointX="11" PointY="13.75" />
+        <EntityTypeShape EntityType="Model.SIGN" Width="1.5" PointX="17" PointY="20.625" />
+        <EntityTypeShape EntityType="Model.SysAnnouncement" Width="1.5" PointX="5.75" PointY="19.375" />
         <EntityTypeShape EntityType="Model.SysDepartment" Width="1.5" PointX="17.5" PointY="49.25" />
         <EntityTypeShape EntityType="Model.SysDocument" Width="1.5" PointX="15.25" PointY="49.25" />
         <EntityTypeShape EntityType="Model.SysDocumentTalk" Width="1.5" PointX="17.5" PointY="53.75" />
         <EntityTypeShape EntityType="Model.SysEmail" Width="1.5" PointX="13" PointY="25.625" />
         <EntityTypeShape EntityType="Model.SysEmailTemp" Width="1.5" PointX="10.75" PointY="25.625" />
-        <EntityTypeShape EntityType="Model.SysException" Width="1.5" PointX="10.75" PointY="22.375" />
+        <EntityTypeShape EntityType="Model.SysException" Width="1.5" PointX="23.75" PointY="29.375" />
         <EntityTypeShape EntityType="Model.SysField" Width="1.5" PointX="10.75" PointY="2.375" />
-        <EntityTypeShape EntityType="Model.SysLog" Width="1.5" PointX="23.75" PointY="29.375" />
+        <EntityTypeShape EntityType="Model.SysLog" Width="1.5" PointX="25.75" PointY="29.375" />
         <EntityTypeShape EntityType="Model.SysMenu" Width="1.5" PointX="19.75" PointY="3.75" />
         <EntityTypeShape EntityType="Model.SysMenuSysRoleSysOperation" Width="1.5" PointX="24.25" PointY="4.625" />
-        <EntityTypeShape EntityType="Model.SysMessage" Width="1.5" PointX="21" PointY="10.5" />
-        <EntityTypeShape EntityType="Model.SysMessageTemp" Width="1.5" PointX="18.75" PointY="10.5" />
-        <EntityTypeShape EntityType="Model.SysNotice" Width="1.5" PointX="25.75" PointY="29.375" />
+        <EntityTypeShape EntityType="Model.SysMessage" Width="1.5" PointX="21" PointY="11.5" />
+        <EntityTypeShape EntityType="Model.SysMessageTemp" Width="1.5" PointX="18.75" PointY="11.5" />
+        <EntityTypeShape EntityType="Model.SysNotice" Width="1.5" PointX="27.75" PointY="29.375" />
         <EntityTypeShape EntityType="Model.SysOperation" Width="1.5" PointX="22" PointY="4.25" />
         <EntityTypeShape EntityType="Model.SysPerson" Width="1.5" PointX="19.75" PointY="47.5" />
         <EntityTypeShape EntityType="Model.SysRole" Width="1.5" PointX="22" PointY="49.625" />
-        <EntityTypeShape EntityType="Model.THREE_PHASE_UNCERTAINTY" Width="1.5" PointX="8" PointY="7.125" />
-        <EntityTypeShape EntityType="Model.TRANSMITER_SIN" Width="1.5" PointX="21" PointY="29" />
-        <EntityTypeShape EntityType="Model.TRANSMITTER_COS" Width="1.5" PointX="21" PointY="34.75" />
-        <EntityTypeShape EntityType="Model.TRANSMITTER_FREQUENCY_PHASE" Width="1.5" PointX="21" PointY="23.5" />
+        <EntityTypeShape EntityType="Model.THREE_PHASE_UNCERTAINTY" Width="1.5" PointX="8" PointY="22.5" />
+        <EntityTypeShape EntityType="Model.TRANSMITER_SIN" Width="1.5" PointX="21" PointY="35.5" />
+        <EntityTypeShape EntityType="Model.TRANSMITTER_COS" Width="1.5" PointX="21" PointY="23.5" />
+        <EntityTypeShape EntityType="Model.TRANSMITTER_FREQUENCY_PHASE" Width="1.5" PointX="21" PointY="41.375" />
         <EntityTypeShape EntityType="Model.TRANSMITTER_HEAD" Width="1.5" PointX="18.75" PointY="32.5" />
-        <EntityTypeShape EntityType="Model.TRANSMITTER_POWER_FACTOR" Width="1.5" PointX="21" PointY="40.625" />
-        <EntityTypeShape EntityType="Model.TRANSMITTER_RANGE" Width="1.5" PointX="27.75" PointY="29.375" />
-        <EntityTypeShape EntityType="Model.UNCERTAINTY" Width="1.5" PointX="8" PointY="22.125" />
+        <EntityTypeShape EntityType="Model.TRANSMITTER_POWER_FACTOR" Width="1.5" PointX="21" PointY="29.375" />
+        <EntityTypeShape EntityType="Model.TRANSMITTER_RANGE" Width="1.5" PointX="28.75" PointY="2.375" />
+        <EntityTypeShape EntityType="Model.UNCERTAINTY" Width="1.5" PointX="8" PointY="14.75" />
         <EntityTypeShape EntityType="Model.UNCERTAINTY2_HZ" Width="1.5" PointX="8" PointY="26.25" />
-        <EntityTypeShape EntityType="Model.UNCERTAINTYPARAMETERMANAGEMENT" Width="1.5" PointX="8" PointY="18.125" />
+        <EntityTypeShape EntityType="Model.UNCERTAINTYPARAMETERMANAGEMENT" Width="1.5" PointX="8" PointY="7.125" />
         <EntityTypeShape EntityType="Model.UNDERTAKE_LABORATORY" Width="1.5" PointX="6.5" PointY="3.375" />
-        <EntityTypeShape EntityType="Model.VBAOGAODAYIN" Width="1.5" PointX="28.75" PointY="2.375" />
-        <EntityTypeShape EntityType="Model.VJIANDINGRENWU" Width="1.5" PointX="28.75" PointY="8.375" />
-        <EntityTypeShape EntityType="Model.VQIJULINGQU1" Width="1.5" PointX="10.75" PointY="30.375" />
-        <EntityTypeShape EntityType="Model.VQIJULINGQU2" Width="1.5" PointX="28.75" PointY="14.375" />
-        <EntityTypeShape EntityType="Model.VRUKU" Width="1.5" PointX="12.75" PointY="30.375" />
-        <EntityTypeShape EntityType="Model.VRULE" Width="1.5" PointX="28.75" PointY="19.375" />
+        <EntityTypeShape EntityType="Model.VBAOGAODAYIN" Width="1.5" PointX="28.75" PointY="7.375" />
+        <EntityTypeShape EntityType="Model.VJIANDINGRENWU" Width="1.5" PointX="10.75" PointY="30.375" />
+        <EntityTypeShape EntityType="Model.VQIJULINGQU1" Width="1.5" PointX="28.75" PointY="13.375" />
+        <EntityTypeShape EntityType="Model.VQIJULINGQU2" Width="1.5" PointX="12.75" PointY="30.375" />
+        <EntityTypeShape EntityType="Model.VRUKU" Width="1.5" PointX="28.75" PointY="17.375" />
+        <EntityTypeShape EntityType="Model.VRULE" Width="1.5" PointX="28.75" PointY="22.375" />
         <EntityTypeShape EntityType="Model.VSHENHE" Width="1.5" PointX="5.75" PointY="31.375" />
-        <EntityTypeShape EntityType="Model.VSHENPI" Width="1.5" PointX="29.75" PointY="24.375" />
-        <EntityTypeShape EntityType="Model.VTEST_ITE" Width="1.5" PointX="29.75" PointY="30.375" />
-        <EntityTypeShape EntityType="Model.VXIANGQING" Width="1.5" PointX="30.75" PointY="2.375" />
+        <EntityTypeShape EntityType="Model.VSHENPI" Width="1.5" PointX="29.75" PointY="27.375" />
+        <EntityTypeShape EntityType="Model.VTEST_ITE" Width="1.5" PointX="30.75" PointY="2.375" />
+        <EntityTypeShape EntityType="Model.VXIANGQING" Width="1.5" PointX="30.75" PointY="7.375" />
         <AssociationConnector Association="Model.FK_AC_VOLTA_REFERENCE_OVERALL_" />
         <AssociationConnector Association="Model.FK_ACTIVE_P_REFERENCE_OVERALL_" />
         <AssociationConnector Association="Model.FK_MAXIMUM__REFERENCE_METERIN2" />
