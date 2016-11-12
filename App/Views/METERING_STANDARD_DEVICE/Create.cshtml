@@ -310,6 +310,7 @@
             case ("three_3"):
                 myArray3 = new Array()
                 $("#div3").find("ul").each(function () {
+                    debugger
                     var THEUNCERTAINTY = $(this).find("li :select option:selected").eq(0).val();
                     var THEUNCERTAINTYVALUE = $(this).find("li :input").eq(1).val();
                     var THEUNCERTAINTYNDEXL = $(this).find("li :select option:selected").eq(2).val();
