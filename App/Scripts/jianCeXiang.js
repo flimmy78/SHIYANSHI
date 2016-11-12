@@ -22,7 +22,7 @@ function CreateTongDao() {
     var tableIdx = $("#hideDangQianTongDao").val();//当前通道
     tableIdx++;
     var $tongdao = $Tongdao_moban.clone().appendTo($('#tongdao'));
-    
+
     var reg = new RegExp("_1_", "g");//g,表示全部替换。
 
     $tongdao.html($tongdao.html().replace(reg, '_' + tableIdx + '_'));
@@ -34,7 +34,7 @@ function CreateTongDao() {
     $tongdao.find("#K_moban").attr('id', 'K_' + tableIdx);
 
     $tongdao.find('#btnAddLiangCheng').attr("onclick", "set(" + tableIdx + ",this);");
-    
+
 
     $("#hideDangQianTongDao").val(tableIdx);
     $("#hideTongDaoShuLiang").val(tableIdx);
@@ -169,8 +169,8 @@ function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
 //unit在输入框后面的单位
 function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValue) {
 
-    if (blurValue == null || blurValue=='') {
-        blurValue='blurValue';
+    if (blurValue == null || blurValue == '') {
+        blurValue = 'blurValue';
     }
     var ddlName = name + "_UNIT";//下拉框名
     var ddlId = ddlName + "_" + id;//下拉框ID
@@ -185,7 +185,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     }
     var htmlString = [];
     htmlString.push("<td class='" + classstyle + "' rowspan='" + rowspan + "' align='right' > ");
-    htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='"+blurValue+"(this)'/>");
+    htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='" + blurValue + "(this)'/>");
     if (ddlHtml != null && ddlHtml.trim() != "") {
         var AttributeValue = GetAttributeValue("LianDongDanWeiDDL");
         htmlString.push($(ddlHtml).attr("onchange", "LianDongDanWeiDDL(this,'" + AttributeValue + "')").attr("name", ddlName).attr("id", ddlId)[0].outerHTML);
@@ -327,7 +327,7 @@ function ShowOrHideDuoTongDao() {
 function BtnInit() {
     ShowOrHideDuoTongDao();
     var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();
-   
+
     if (PREPARE_SCHEMEID.trim() != "")//数据录入
     {
         $("#btnDuoTongDao").hide();
@@ -339,7 +339,7 @@ function BtnInit() {
     }
     else//方案设置
     {
-       
+
         //$("#btnSave").show();
         $("#btnReset").show();
         //$("#btnSave_ITE").hide();
@@ -455,34 +455,22 @@ function Save_FangAn() {
 }
 //由于html无法获取value，重新给outerHTML赋值
 function SetAllControlHtml() {
-    $("input[type='text']").each(function () {
+    $("input[type='text']").not('#tongdao_moban :input').each(function () {
+        //除了隐藏模板中的输入框，其他所有的输入框
         if (this.id != "") {
-            var id = "#" + this.id;
-            var outerHTML = this.outerHTML;
-            var startIndex = outerHTML.indexOf(" value=");
-            if (startIndex < 0)//没有初始化value
-            {
-                outerHTML = outerHTML.replace('>', ' value="' + this.value + '" >')
+            if (this.attributes.value != undefined) {
+                this.attributes.value.value = $(this).val();
             }
-            else//初始化过value
-            {
-                var endIndex = outerHTML.indexOf('"', outerHTML.indexOf('"', startIndex) + 1);
-                var length = endIndex - startIndex;
-                var str = outerHTML.substring(startIndex, endIndex);
-                outerHTML = outerHTML.replace(str, ' value="' + this.value + '" ')
-            }
-            $(id).prop('outerHTML', outerHTML);
         }
-
     });
-    $("select").each(function () {
-        if (this.id != "") {
-            var id = "#" + this.id;
-            var outerHTML = this.outerHTML;
-            outerHTML = outerHTML.replace(' selected="selected"', ' ')
-            var oldValue = 'value="' + this.value + '"';
-            outerHTML = outerHTML.replace(' value="' + this.value + '"', ' value="' + this.value + '" selected="selected" ');
-            $(id).prop('outerHTML', outerHTML);
+    
+    $("select").not('#tongdao_moban select').each(function () {
+        //除了隐藏模板中的下拉框，其他所有的下拉框
+        if (this.id != "") {             
+            var checkText = $(this).find("option:selected").text();  //获取Select选择的Text           
+            $(this).find("option[value='" + checkText + "']").attr("selected", true);
+        
+           
         }
 
     });

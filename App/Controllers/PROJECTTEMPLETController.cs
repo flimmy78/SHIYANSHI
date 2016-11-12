@@ -17,17 +17,17 @@ namespace Langben.App.Controllers
     /// 检定项目模板
     /// </summary>
     public class PROJECTTEMPLETController : BaseController
-    { 
+    {
         /// <summary>
-       /// 测试用
-       /// </summary> 
-       /// <param name="RULEID">检测项目ID</param>
-       /// <param name="SCHEMEID">方案ID</param>
-       /// <returns></returns>
+        /// 测试用
+        /// </summary> 
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <returns></returns>
         public ActionResult test(string id = "电压输出", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             //电压输出 电压测量 电流测量 电流输出
-            ViewBag.canshu =  id;
+            ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -231,19 +231,21 @@ namespace Langben.App.Controllers
             }
             else
             {
-                //方案
-                DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
-                if (entity != null)
+                if (!string.IsNullOrWhiteSpace(SCHEMEID))
                 {
-                    ViewBag.ID = entity.ID;
-                    ViewBag.HTMLVALUE = entity.HTMLVALUE;
-                }
-                else
-                {
-                    ViewBag.ID = string.Empty;
+                    //方案
+                    DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
+                    if (entity != null)
+                    {
+                        ViewBag.ID = entity.ID;
+                        ViewBag.HTMLVALUE = entity.HTMLVALUE;
+                    }
+                    else
+                    {
+                        ViewBag.ID = string.Empty;
+                    }
                 }
             }
-
 
             ViewBag.PREPARE_SCHEMEID = PREPARE_SCHEMEID;
             ViewBag.RULEID = RULEID;
