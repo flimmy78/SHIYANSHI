@@ -1,207 +1,1305 @@
 ﻿@model Langben.DAL.PROJECTTEMPLET
-
 @{
-    ViewBag.title= "交流电压（电流）-相对误差-两相（已做）";
-    Layout = "~/Views/Shared/Edit.cshtml";
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "交流电压（电流）-相对误差-两相(多通道）";
 }
 @using Common
 @using Models
+<thead>
+    <!--表头-->
+    <tr>
+        <td colspan="9">
+            <input name="mAVdianliu" id="mAVdianliu_1_1_1" type="text" class="my-textbox tc" value="50" style="width:40px">
+            <select class="my-combobox" name="HZOUTPUTVALUE_UNIT" id="HZOUTPUTVALUE_UNIT_1_1_1"><option value="Hz">Hz</option><option value="KHz">KHz</option><option value="MHz">MHz</option><option value="GHz">GHz</option></select>
 
-<div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
-    <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
-        <table>
-            <tr>
-                <td>
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTongDao()" id="btnDuoTongDao" style="display:none">增加通道</a>
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnSave" onclick="Save()">保存检测项</a>
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnReset" onclick="Reset()">重置检测项</a>
+        </td>
+    </tr>
+    <tr>
+        <th rowspan="2" align="center" width="140">量程</th>
+        <th colspan="2" width="140" align="center"> 显示值</th>
 
-                    @*<a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnSave_ITE" onclick="Save_ITE()">保存检测项</a>*@
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnReset_ITE" onclick="Reset_ITE()">重置检测项</a>
+        <th colspan="2" width="140" align="center">标准值</th>
+        <th colspan="2" width="140" align="center">相对误差</th>
+        <th align="center">校准结果的不确定度</th>
+    </tr>
+    <tr>
+        <th align="center" class="f14">
+            @if (ViewBag.canshu == "电压输出" || ViewBag.canshu == "电压测量")
+            {
+                <select class="my-combobox" name="TMYDIANYA1" id="TMYDIANYA1_1_1_1">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+                </select>
+            }
+            else if (ViewBag.canshu == "电流输出")
+            {
+                <select class="my-combobox" name="my123a" id="my123a_1_1_1">
+                    <option value="A相">A相</option>
+                    <option value="B相">B相</option>
+                    <option value="C相">C相</option>
+                </select>
+            }
+            else if (ViewBag.canshu == "电流测量")
+            {
+                <select class="my-combobox" name="dianymy123a" id="dianymy123a_1_1_1">
 
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
 
-<input type="hidden" id="hideID" value="@ViewBag.ID" /><!--主键-->
-<input type="hidden" id="hideRULEID" value="@ViewBag.RULEID" /><!--检测项-->
-<input type="hidden" id="hideSCHEMEID" value="@ViewBag.SCHEMEID" /><!--方案编号-->
-<input type="hidden" id="hidePREPARE_SCHEMEID" value="@ViewBag.PREPARE_SCHEMEID" /><!--预备方案ID-->
-<input type="hidden" id="hideITEID" value="@ViewBag.ITEID" /><!--预备方案检测项ID-->
 
-@if (Model != null && Model.HTMLVALUE != null && Model.HTMLVALUE.Trim() != "")
-{
-    <input type="hidden" id="hideHTMLVALUE" value="@Model.HTMLVALUE" />
+                    <option value="I0">I0</option>
+
+                    <option value="I1">I1</option>
+
+                    <option value="I2">I2</option>
+
+                    <option value="I3">I3</option>
+
+                    <option value="I4">I4</option>
+
+                    <option value="I5">I5</option>
+
+                    <option value="I6">I6</option>
+
+                    <option value="I7">I7</option>
+
+                    <option value="I8">I8</option>
+
+                    <option value="I9">I9</option>
+
+                    <option value="I10">I10</option>
+
+                    <option value="I11">I11</option>
+
+                    <option value="I12">I12</option>
+
+                    <option value="I13">I13</option>
+
+                    <option value="I14">I14</option>
+
+                    <option value="I15">I15</option>
+
+                    <option value="I16">I16</option>
+
+                    <option value="I17">I17</option>
+
+                    <option value="I18">I18</option>
+
+                    <option value="I19">I19</option>
+
+                    <option value="I20">I20</option>
+
+
+                    <option value="CH0">CH0</option>
+
+                    <option value="CH1">CH1</option>
+
+                    <option value="CH2">CH2</option>
+
+                    <option value="CH3">CH3</option>
+
+                    <option value="CH4">CH4</option>
+
+                    <option value="CH5">CH5</option>
+
+                    <option value="CH6">CH6</option>
+
+                    <option value="CH7">CH7</option>
+
+                    <option value="CH8">CH8</option>
+
+                    <option value="CH9">CH9</option>
+
+                    <option value="CH10">CH10</option>
+
+                    <option value="CH11">CH11</option>
+
+                    <option value="CH12">CH12</option>
+
+                    <option value="CH13">CH13</option>
+
+                    <option value="CH14">CH14</option>
+
+                    <option value="CH15">CH15</option>
+
+                    <option value="CH16">CH16</option>
+
+
+                    <option value="IA1">IA1</option>
+
+                    <option value="IA2">IA2</option>
+
+                    <option value="IA3">IA3</option>
+
+                    <option value="IA4">IA4</option>
+
+                    <option value="IA5">IA5</option>
+
+                    <option value="IA6">IA6</option>
+
+
+                    <option value="IB1">IB1</option>
+
+                    <option value="IB2">IB2</option>
+
+                    <option value="IB3">IB3</option>
+
+                    <option value="IB4">IB4</option>
+
+                    <option value="IB5">IB5</option>
+
+                    <option value="IB6">IB6</option>
+
+
+                    <option value="IC1">IC1</option>
+
+                    <option value="IC2">IC2</option>
+
+                    <option value="IC3">IB3</option>
+
+                    <option value="IC4">IC4</option>
+
+                    <option value="IC5">IC5</option>
+
+                    <option value="IC6">IC6</option>
+
+
+                    <option value="I01">I01</option>
+
+                    <option value="I02">I02</option>
+
+                    <option value="I03">I03</option>
+
+                    <option value="I04">I04</option>
+
+                    <option value="I05">I05</option>
+
+                    <option value="I06">I06</option>
+
+                </select>
+            }
+        </th>
+        <th align="center" class="f14">
+
+            @if (ViewBag.canshu == "电压输出" || ViewBag.canshu == "电压测量")
+            {
+                <select class="my-combobox" name="TMYDIANYA32" id="TMYDIANYA32_1_1_1">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+                </select>
+            }
+            else if (ViewBag.canshu == "电流输出")
+            {
+                <select class="my-combobox" name="my123a2" id="my123a2_1_1_1">
+                    <option value="A相">A相</option>
+                    <option value="B相">B相</option>
+                    <option value="C相">C相</option>
+                </select>
+            }
+            else if (ViewBag.canshu == "电流测量")
+            {
+                <select class="my-combobox" name="dianymy123a2" id="dianymy123a2_1_1_1">
+                    <option value="I0">I0</option>
+
+                    <option value="I1">I1</option>
+
+                    <option value="I2">I2</option>
+
+                    <option value="I3">I3</option>
+
+                    <option value="I4">I4</option>
+
+                    <option value="I5">I5</option>
+
+                    <option value="I6">I6</option>
+
+                    <option value="I7">I7</option>
+
+                    <option value="I8">I8</option>
+
+                    <option value="I9">I9</option>
+
+                    <option value="I10">I10</option>
+
+                    <option value="I11">I11</option>
+
+                    <option value="I12">I12</option>
+
+                    <option value="I13">I13</option>
+
+                    <option value="I14">I14</option>
+
+                    <option value="I15">I15</option>
+
+                    <option value="I16">I16</option>
+
+                    <option value="I17">I17</option>
+
+                    <option value="I18">I18</option>
+
+                    <option value="I19">I19</option>
+
+                    <option value="I20">I20</option>
+
+
+                    <option value="CH0">CH0</option>
+
+                    <option value="CH1">CH1</option>
+
+                    <option value="CH2">CH2</option>
+
+                    <option value="CH3">CH3</option>
+
+                    <option value="CH4">CH4</option>
+
+                    <option value="CH5">CH5</option>
+
+                    <option value="CH6">CH6</option>
+
+                    <option value="CH7">CH7</option>
+
+                    <option value="CH8">CH8</option>
+
+                    <option value="CH9">CH9</option>
+
+                    <option value="CH10">CH10</option>
+
+                    <option value="CH11">CH11</option>
+
+                    <option value="CH12">CH12</option>
+
+                    <option value="CH13">CH13</option>
+
+                    <option value="CH14">CH14</option>
+
+                    <option value="CH15">CH15</option>
+
+                    <option value="CH16">CH16</option>
+
+
+                    <option value="IA1">IA1</option>
+
+                    <option value="IA2">IA2</option>
+
+                    <option value="IA3">IA3</option>
+
+                    <option value="IA4">IA4</option>
+
+                    <option value="IA5">IA5</option>
+
+                    <option value="IA6">IA6</option>
+
+
+                    <option value="IB1">IB1</option>
+
+                    <option value="IB2">IB2</option>
+
+                    <option value="IB3">IB3</option>
+
+                    <option value="IB4">IB4</option>
+
+                    <option value="IB5">IB5</option>
+
+                    <option value="IB6">IB6</option>
+
+
+                    <option value="IC1">IC1</option>
+
+                    <option value="IC2">IC2</option>
+
+                    <option value="IC3">IB3</option>
+
+                    <option value="IC4">IC4</option>
+
+                    <option value="IC5">IC5</option>
+
+                    <option value="IC6">IC6</option>
+
+
+                    <option value="I01">I01</option>
+
+                    <option value="I02">I02</option>
+
+                    <option value="I03">I03</option>
+
+                    <option value="I04">I04</option>
+
+                    <option value="I05">I05</option>
+
+                    <option value="I06">I06</option>
+
+                </select>
+            }
+        </th>
+        <th align="center" class="f14">
+
+            @if (ViewBag.canshu == "电压输出" || ViewBag.canshu == "电压测量")
+            {
+                <select class="my-combobox" name="TMYDIANYA323" id="TMYDIANYA323_1_1_1">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+                </select>
+            }
+            else if (ViewBag.canshu == "电流输出")
+            {
+                <select class="my-combobox" name="my123a23" id="my123a23_1_1_1">
+                    <option value="A相">A相</option>
+                    <option value="B相">B相</option>
+                    <option value="C相">C相</option>
+                </select>
+            }
+            else if (ViewBag.canshu == "电流测量")
+            {
+                <select class="my-combobox" name="dianymy123a23" id="dianymy123a23_1_1_1">
+                    <option value="I0">I0</option>
+
+                    <option value="I1">I1</option>
+
+                    <option value="I2">I2</option>
+
+                    <option value="I3">I3</option>
+
+                    <option value="I4">I4</option>
+
+                    <option value="I5">I5</option>
+
+                    <option value="I6">I6</option>
+
+                    <option value="I7">I7</option>
+
+                    <option value="I8">I8</option>
+
+                    <option value="I9">I9</option>
+
+                    <option value="I10">I10</option>
+
+                    <option value="I11">I11</option>
+
+                    <option value="I12">I12</option>
+
+                    <option value="I13">I13</option>
+
+                    <option value="I14">I14</option>
+
+                    <option value="I15">I15</option>
+
+                    <option value="I16">I16</option>
+
+                    <option value="I17">I17</option>
+
+                    <option value="I18">I18</option>
+
+                    <option value="I19">I19</option>
+
+                    <option value="I20">I20</option>
+
+
+                    <option value="CH0">CH0</option>
+
+                    <option value="CH1">CH1</option>
+
+                    <option value="CH2">CH2</option>
+
+                    <option value="CH3">CH3</option>
+
+                    <option value="CH4">CH4</option>
+
+                    <option value="CH5">CH5</option>
+
+                    <option value="CH6">CH6</option>
+
+                    <option value="CH7">CH7</option>
+
+                    <option value="CH8">CH8</option>
+
+                    <option value="CH9">CH9</option>
+
+                    <option value="CH10">CH10</option>
+
+                    <option value="CH11">CH11</option>
+
+                    <option value="CH12">CH12</option>
+
+                    <option value="CH13">CH13</option>
+
+                    <option value="CH14">CH14</option>
+
+                    <option value="CH15">CH15</option>
+
+                    <option value="CH16">CH16</option>
+
+
+                    <option value="IA1">IA1</option>
+
+                    <option value="IA2">IA2</option>
+
+                    <option value="IA3">IA3</option>
+
+                    <option value="IA4">IA4</option>
+
+                    <option value="IA5">IA5</option>
+
+                    <option value="IA6">IA6</option>
+
+
+                    <option value="IB1">IB1</option>
+
+                    <option value="IB2">IB2</option>
+
+                    <option value="IB3">IB3</option>
+
+                    <option value="IB4">IB4</option>
+
+                    <option value="IB5">IB5</option>
+
+                    <option value="IB6">IB6</option>
+
+
+                    <option value="IC1">IC1</option>
+
+                    <option value="IC2">IC2</option>
+
+                    <option value="IC3">IB3</option>
+
+                    <option value="IC4">IC4</option>
+
+                    <option value="IC5">IC5</option>
+
+                    <option value="IC6">IC6</option>
+
+
+                    <option value="I01">I01</option>
+
+                    <option value="I02">I02</option>
+
+                    <option value="I03">I03</option>
+
+                    <option value="I04">I04</option>
+
+                    <option value="I05">I05</option>
+
+                    <option value="I06">I06</option>
+
+                </select>
+            }
+        </th>
+        <th align="center" class="f14">
+
+            @if (ViewBag.canshu == "电压输出" || ViewBag.canshu == "电压测量")
+            {
+                <select class="my-combobox" name="TMYDIANYA3234" id="TMYDIANYA3234_1_1_1">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+                </select>
+            }
+            else if (ViewBag.canshu == "电流输出")
+            {
+                <select class="my-combobox" name="my123a234" id="my123a234_1_1_1">
+                    <option value="A相">A相</option>
+                    <option value="B相">B相</option>
+                    <option value="C相">C相</option>
+                </select>
+            }
+            else if (ViewBag.canshu == "电流测量")
+            {
+                <select class="my-combobox" name="dianymy123a234" id="dianymy123a234_1_1_1">
+                    <option value="I0">I0</option>
+
+                    <option value="I1">I1</option>
+
+                    <option value="I2">I2</option>
+
+                    <option value="I3">I3</option>
+
+                    <option value="I4">I4</option>
+
+                    <option value="I5">I5</option>
+
+                    <option value="I6">I6</option>
+
+                    <option value="I7">I7</option>
+
+                    <option value="I8">I8</option>
+
+                    <option value="I9">I9</option>
+
+                    <option value="I10">I10</option>
+
+                    <option value="I11">I11</option>
+
+                    <option value="I12">I12</option>
+
+                    <option value="I13">I13</option>
+
+                    <option value="I14">I14</option>
+
+                    <option value="I15">I15</option>
+
+                    <option value="I16">I16</option>
+
+                    <option value="I17">I17</option>
+
+                    <option value="I18">I18</option>
+
+                    <option value="I19">I19</option>
+
+                    <option value="I20">I20</option>
+
+
+                    <option value="CH0">CH0</option>
+
+                    <option value="CH1">CH1</option>
+
+                    <option value="CH2">CH2</option>
+
+                    <option value="CH3">CH3</option>
+
+                    <option value="CH4">CH4</option>
+
+                    <option value="CH5">CH5</option>
+
+                    <option value="CH6">CH6</option>
+
+                    <option value="CH7">CH7</option>
+
+                    <option value="CH8">CH8</option>
+
+                    <option value="CH9">CH9</option>
+
+                    <option value="CH10">CH10</option>
+
+                    <option value="CH11">CH11</option>
+
+                    <option value="CH12">CH12</option>
+
+                    <option value="CH13">CH13</option>
+
+                    <option value="CH14">CH14</option>
+
+                    <option value="CH15">CH15</option>
+
+                    <option value="CH16">CH16</option>
+
+
+                    <option value="IA1">IA1</option>
+
+                    <option value="IA2">IA2</option>
+
+                    <option value="IA3">IA3</option>
+
+                    <option value="IA4">IA4</option>
+
+                    <option value="IA5">IA5</option>
+
+                    <option value="IA6">IA6</option>
+
+
+                    <option value="IB1">IB1</option>
+
+                    <option value="IB2">IB2</option>
+
+                    <option value="IB3">IB3</option>
+
+                    <option value="IB4">IB4</option>
+
+                    <option value="IB5">IB5</option>
+
+                    <option value="IB6">IB6</option>
+
+
+                    <option value="IC1">IC1</option>
+
+                    <option value="IC2">IC2</option>
+
+                    <option value="IC3">IB3</option>
+
+                    <option value="IC4">IC4</option>
+
+                    <option value="IC5">IC5</option>
+
+                    <option value="IC6">IC6</option>
+
+
+                    <option value="I01">I01</option>
+
+                    <option value="I02">I02</option>
+
+                    <option value="I03">I03</option>
+
+                    <option value="I04">I04</option>
+
+                    <option value="I05">I05</option>
+
+                    <option value="I06">I06</option>
+
+                </select>
+            }
+        </th>
+
+        <th align="center" class="f14">
+
+            @if (ViewBag.canshu == "电压输出" || ViewBag.canshu == "电压测量")
+            {
+                <select class="my-combobox" name="TMYDIANYA3235" id="TMYDIANYA3235_1_1_1">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+                </select>
+            }
+            else if (ViewBag.canshu == "电流输出")
+            {
+                <select class="my-combobox" name="my123a235" id="my123a235_1_1_1">
+                    <option value="A相">A相</option>
+                    <option value="B相">B相</option>
+                    <option value="C相">C相</option>
+                </select>
+            }
+            else if (ViewBag.canshu == "电流测量")
+            {
+                <select class="my-combobox" name="dianymy123a235" id="dianymy123a235_1_1_1">
+                    <option value="I0">I0</option>
+
+                    <option value="I1">I1</option>
+
+                    <option value="I2">I2</option>
+
+                    <option value="I3">I3</option>
+
+                    <option value="I4">I4</option>
+
+                    <option value="I5">I5</option>
+
+                    <option value="I6">I6</option>
+
+                    <option value="I7">I7</option>
+
+                    <option value="I8">I8</option>
+
+                    <option value="I9">I9</option>
+
+                    <option value="I10">I10</option>
+
+                    <option value="I11">I11</option>
+
+                    <option value="I12">I12</option>
+
+                    <option value="I13">I13</option>
+
+                    <option value="I14">I14</option>
+
+                    <option value="I15">I15</option>
+
+                    <option value="I16">I16</option>
+
+                    <option value="I17">I17</option>
+
+                    <option value="I18">I18</option>
+
+                    <option value="I19">I19</option>
+
+                    <option value="I20">I20</option>
+
+
+                    <option value="CH0">CH0</option>
+
+                    <option value="CH1">CH1</option>
+
+                    <option value="CH2">CH2</option>
+
+                    <option value="CH3">CH3</option>
+
+                    <option value="CH4">CH4</option>
+
+                    <option value="CH5">CH5</option>
+
+                    <option value="CH6">CH6</option>
+
+                    <option value="CH7">CH7</option>
+
+                    <option value="CH8">CH8</option>
+
+                    <option value="CH9">CH9</option>
+
+                    <option value="CH10">CH10</option>
+
+                    <option value="CH11">CH11</option>
+
+                    <option value="CH12">CH12</option>
+
+                    <option value="CH13">CH13</option>
+
+                    <option value="CH14">CH14</option>
+
+                    <option value="CH15">CH15</option>
+
+                    <option value="CH16">CH16</option>
+
+
+                    <option value="IA1">IA1</option>
+
+                    <option value="IA2">IA2</option>
+
+                    <option value="IA3">IA3</option>
+
+                    <option value="IA4">IA4</option>
+
+                    <option value="IA5">IA5</option>
+
+                    <option value="IA6">IA6</option>
+
+
+                    <option value="IB1">IB1</option>
+
+                    <option value="IB2">IB2</option>
+
+                    <option value="IB3">IB3</option>
+
+                    <option value="IB4">IB4</option>
+
+                    <option value="IB5">IB5</option>
+
+                    <option value="IB6">IB6</option>
+
+
+                    <option value="IC1">IC1</option>
+
+                    <option value="IC2">IC2</option>
+
+                    <option value="IC3">IB3</option>
+
+                    <option value="IC4">IC4</option>
+
+                    <option value="IC5">IC5</option>
+
+                    <option value="IC6">IC6</option>
+
+
+                    <option value="I01">I01</option>
+
+                    <option value="I02">I02</option>
+
+                    <option value="I03">I03</option>
+
+                    <option value="I04">I04</option>
+
+                    <option value="I05">I05</option>
+
+                    <option value="I06">I06</option>
+
+                </select>
+            }
+        </th>
+
+        <th align="center" class="f14">
+
+            @if (ViewBag.canshu == "电压输出" || ViewBag.canshu == "电压测量")
+            {
+                <select class="my-combobox" name="TMYDIANYA3236" id="TMYDIANYA3236_1_1_1">
+                    <option value="">U1</option>
+                    <option value="">U2</option>
+                    <option value="">UA</option>
+                    <option value="">UB</option>
+                    <option value="">UC</option>
+                    <option value="">UAB </option>
+                    <option value="">UBC</option>
+                </select>
+            }
+            else if (ViewBag.canshu == "电流输出")
+            {
+                <select class="my-combobox" name="my123a236" id="my123a236_1_1_1">
+                    <option value="A相">A相</option>
+                    <option value="B相">B相</option>
+                    <option value="C相">C相</option>
+                </select>
+            }
+            else if (ViewBag.canshu == "电流测量")
+            {
+                <select class="my-combobox" name="dianymy123a236" id="dianymy123a236_1_1_1">
+                    <option value="I0">I0</option>
+
+                    <option value="I1">I1</option>
+
+                    <option value="I2">I2</option>
+
+                    <option value="I3">I3</option>
+
+                    <option value="I4">I4</option>
+
+                    <option value="I5">I5</option>
+
+                    <option value="I6">I6</option>
+
+                    <option value="I7">I7</option>
+
+                    <option value="I8">I8</option>
+
+                    <option value="I9">I9</option>
+
+                    <option value="I10">I10</option>
+
+                    <option value="I11">I11</option>
+
+                    <option value="I12">I12</option>
+
+                    <option value="I13">I13</option>
+
+                    <option value="I14">I14</option>
+
+                    <option value="I15">I15</option>
+
+                    <option value="I16">I16</option>
+
+                    <option value="I17">I17</option>
+
+                    <option value="I18">I18</option>
+
+                    <option value="I19">I19</option>
+
+                    <option value="I20">I20</option>
+
+
+                    <option value="CH0">CH0</option>
+
+                    <option value="CH1">CH1</option>
+
+                    <option value="CH2">CH2</option>
+
+                    <option value="CH3">CH3</option>
+
+                    <option value="CH4">CH4</option>
+
+                    <option value="CH5">CH5</option>
+
+                    <option value="CH6">CH6</option>
+
+                    <option value="CH7">CH7</option>
+
+                    <option value="CH8">CH8</option>
+
+                    <option value="CH9">CH9</option>
+
+                    <option value="CH10">CH10</option>
+
+                    <option value="CH11">CH11</option>
+
+                    <option value="CH12">CH12</option>
+
+                    <option value="CH13">CH13</option>
+
+                    <option value="CH14">CH14</option>
+
+                    <option value="CH15">CH15</option>
+
+                    <option value="CH16">CH16</option>
+
+
+                    <option value="IA1">IA1</option>
+
+                    <option value="IA2">IA2</option>
+
+                    <option value="IA3">IA3</option>
+
+                    <option value="IA4">IA4</option>
+
+                    <option value="IA5">IA5</option>
+
+                    <option value="IA6">IA6</option>
+
+
+                    <option value="IB1">IB1</option>
+
+                    <option value="IB2">IB2</option>
+
+                    <option value="IB3">IB3</option>
+
+                    <option value="IB4">IB4</option>
+
+                    <option value="IB5">IB5</option>
+
+                    <option value="IB6">IB6</option>
+
+
+                    <option value="IC1">IC1</option>
+
+                    <option value="IC2">IC2</option>
+
+                    <option value="IC3">IB3</option>
+
+                    <option value="IC4">IC4</option>
+
+                    <option value="IC5">IC5</option>
+
+                    <option value="IC6">IC6</option>
+
+
+                    <option value="I01">I01</option>
+
+                    <option value="I02">I02</option>
+
+                    <option value="I03">I03</option>
+
+                    <option value="I04">I04</option>
+
+                    <option value="I05">I05</option>
+
+                    <option value="I06">I06</option>
+
+                </select>
+            }
+        </th>
+
+        <th align="center">
+            U(K = <select class="my-combobox" name="MYDIANYA19" id="MYDIANYA19_1_1_1" style="width:30px;">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="√3">√3</option>
+
+
+            </select>)
+        </th>
+    </tr>
+</thead>
+
+<tbody id="tbody_moban">
+    <!--表体-->
+    <!--插入行的位置-->
+</tbody>
+
+<tfoot>
+    <!--表尾-->
+    <tr>
+        <td colspan="7">
+            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加量程</a>
+
+        </td>
+    </tr>
+</tfoot>
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        function set(tbodyIndex) {
+
+            $('#dlg').dialog('open');//打开弹出框
+
+            $("#hideDangQianTongDao").val(tbodyIndex);
+
+        }
+        //增加行
+        function CreateRow() {
+
+            var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+            var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
+            LiangChengShuLiang++;
+
+            var rowspanIdx = $("#txtPoint").val();     //检测点数
+            txtNumber = $("#txtNumber").val(); //小数点位数
+            var standardValue = "";
+            var htmlString = [];
+            var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
+
+            var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
+
+            var temp = 30;
+            for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
+                rowLength++;
+                htmlString.push("<tr rowindex='" + rowLength + "'>");
+
+                var rowspan = 1; //合并单元格行数
+
+                if ((rowspanIdx == 3 || rowspanIdx == 5 || rowspanIdx == 10))
+                    standardValue = calculate(rowspanIdx)[rowidx];
+
+
+                var txtVal = "";//(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
+
+
+                var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
+
+                //计算默认值
+
+                if (rowidx == 0) {
+                    //需要合并的列 //量程
+
+                    htmlString.push(SetTDHtml(rowspanIdx, "READVALUE", HangHaoID, rowidx, $("#txtLiangCheng").val(), ""));
+
+                }
+
+                //需要合并的列
+                var changerHTML = "onblur=''";
+
+                @if (ViewBag.canshu.Contains("测量")) {
+                        ViewBag.show22 =
+                            @"htmlString.push(SetTDHtml(rowspan, 'ACTUALVALUE', HangHaoID, rowidx, (standardValue == '' ? '' : standardValue.ShowData), 'classstyle100','','resetValue'));"
+ + "htmlString.push(SetTDHtml(rowspan, 'ACTUALVALUE2', HangHaoID, rowidx, (standardValue == '' ? '' : standardValue.ShowData), 'classstyle100','','resetValue'));";
+
+                    }
+                @Html.Raw(ViewBag.show22);
+                ////显示值 增加下拉框单位V
+                //htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, (standardValue == "" ? "" : standardValue.ShowData), "classstyle100"));
+                ////显示值 增加下拉框单位V
+                //htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE2", HangHaoID, rowidx, (standardValue == "" ? "" : standardValue.ShowData), "classstyle100"));
+
+
+
+                //标准值  增加下拉框单位V
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100", '', 'resetValue'));
+
+                //标准值  增加下拉框单位V
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI2", HangHaoID, rowidx, '', "classstyle100", '', 'resetValue'));
+
+
+                @if (ViewBag.canshu.Contains("输出")) {
+                        ViewBag.show2 = @"htmlString.push(SetTDHtml(rowspan, 'ACTUALVALUE', HangHaoID, rowidx, (standardValue == '' ? '' : standardValue.ShowData), 'classstyle100','','resetValue'));"
+ + "htmlString.push(SetTDHtml(rowspan, 'ACTUALVALUE2', HangHaoID, rowidx, (standardValue == '' ? '' : standardValue.ShowData), 'classstyle100','','resetValue'));";
+
+                    }
+
+            @Html.Raw(ViewBag.show2);
+            //相对误差
+            htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
+
+
+            //相对误差
+            htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR2", HangHaoID, rowidx, '', "classstyle100"));
+
+
+            //校准结果的不确定度 U(K =
+            htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, txtVal, "classstyle"));
+            htmlString.push("</tr>");
+        }
+        htmlString = htmlString.join("");
+
+        var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
+        $.parser.parse(tagRow);//渲染easyui组建
+        $('#dlg').window('close');//关闭弹出框
+        $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+        }
+        ///计算标准值
+        function resetValue(obj) {
+            //重新计算当前行
+           //效果不对
+         debugger;
+            var rowspan = $(obj).parent().parent().find('td').eq(0).attr("rowspan");
+            var iidex = 1;
+            if (rowspan != undefined) {
+                var showData = $(obj).parent().parent().find('td').eq(1).find('input').val();
+                var biaoZhunData = $(obj).parent().parent().find('td').eq(3).find('input').val();
+                var xiangDuiWuCha = (showData == "" || biaoZhunData == "") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                $(obj).parent().parent().find('td').eq(5).find('input').val(xiangDuiWuCha);
+
+                showData = $(obj).parent().parent().find('td').eq(2).find('input').val();
+                biaoZhunData = $(obj).parent().parent().find('td').eq(4).find('input').val();
+                xiangDuiWuCha = (showData == "" || biaoZhunData == "") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                $(obj).parent().parent().find('td').eq(6).find('input').val(xiangDuiWuCha);
+            }
+            else {
+                var showData = $(obj).parent().parent().find('td').eq(0).find('input').val();
+                var biaoZhunData = $(obj).parent().parent().find('td').eq(2).find('input').val();
+                var xiangDuiWuCha = (showData == "" || biaoZhunData == "") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                $(obj).parent().parent().find('td').eq(4).find('input').val(xiangDuiWuCha);
+
+                showData = $(obj).parent().parent().find('td').eq(1).find('input').val();
+                biaoZhunData = $(obj).parent().parent().find('td').eq(3).find('input').val();
+                xiangDuiWuCha = (showData == "" || biaoZhunData == "") ? "" : ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                $(obj).parent().parent().find('td').eq(5).find('input').val(xiangDuiWuCha);
+            }
+
+
+
+        }
+        ///计算标准值
+        function calculate(point) {
+
+            var txtNumber = $("#txtLiangCheng").val(); //量程
+            pointLen = $("#txtNumber").val(); //小数点位数
+            var arry = new Array();
+            var showData = (txtNumber * 1).toFixed(pointLen);
+            var biaoZhunData = (txtNumber * 1).toFixed(pointLen);
+            var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+            if (point == 3) {
+                //输入的检测点是3的时候，按照量程*100%，量程*60%，量程*10%作为默认标准值显示
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.6).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.6).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.1).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.1).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+            }
+            if (point == 5) {
+                //输入的检测点是5的时候，按照量程*100%，量程*80%，量程*60%，量程*40%，量程*20%作为默认标准值显示
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.8).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.8).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.6).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.6).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+
+                showData = (txtNumber * 0.4).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.4).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.2).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.2).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+            }
+            if (point == 10) {
+                //输入的检测点是10的时候，按照量程*100%，量程*90%，量程*80%，量程*70%，量程*60%，量程*50%，量程*40%，量程*30%，量程*20%，量程*10%，作为默认标准值显示
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+                showData = (txtNumber * 0.9).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.9).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.8).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.8).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.7).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.7).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.6).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.6).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.5).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.5).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.4).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.4).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.3).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.3).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.2).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.2).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+
+                showData = (txtNumber * 0.1).toFixed(pointLen);
+                biaoZhunData = (txtNumber * 0.1).toFixed(pointLen);
+                xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100).toFixed(pointLen);
+                arry.push({ "ShowData": showData, "BiaoZhunData": biaoZhunData, "XiangDuiWuCha": xiangDuiWuCha });
+            }
+
+            return arry;
+        }
+
+        function changeValue(obj) {
+            //debugger;
+            //取出当前行
+            //var name = $(obj).attr("name");
+            //var last = name.charAt(id.length - 2)
+            //txtNumber = $("#txtNumber").val(); //小数点位数
+            //var tr = $(obj).parent().parent();
+            //var shwoData = $(tr).find('td').find('input[name="XIANSHIZHIER"]').find('input').val();
+            //var biaoZhunValue = $(tr).find('td').eq(2).find('input').val();
+            //var wuCha = (shwoData - biaoZhunValue).toFixed(txtNumber);
+            ////XIANSHIZHIER
+            //$(tr).find('td').eq(3).find('input').val(wuCha);
+            //  (tr).find('td').eq(1).find('input').val(parseFloat(shwoData).toFixed(txtNumber))
+        }
+        //离开事件，用于计算
+        function blurValue(obj) {
+
+            //   LianDongShiJiZhi(obj);
+        }
+        //联动标准值
+        //输出实际值计算：【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值；【选用电阻阻值】没有数值时，输出实际值=读数值
+        function LianDongShiJiZhi(obj) {
+
+            if (obj.name == "RESISTANCE" && obj.value.trim() != "")//选用电阻阻值变更
+            {
+
+                id = obj.id.replace(obj.name, "") + "_";
+                $("input[name=READVALUE]").each(function (a, b) {//读数值
+                    if (b.id.indexOf(id) >= 0 && b.value.trim() != "") {
+                        var hhID = b.id.replace(b.name, "");//行号
+                        var shijizhiID = "#ACTUALVALUE" + hhID;//输出实际值ID
+                        $(shijizhiID).val(CalculateShiJiZhi(obj.value.trim(), b.value.trim()));
+                    }
+                });
+            }
+            else if (obj.name == "READVALUE")//读数值
+            {
+                var DZID = obj.id.replace(obj.name, "");
+                DZID = DZID.substr(0, DZID.lastIndexOf("_"));
+                var hhID = obj.id.replace(obj.name, "");//行号
+                var shijizhiID = "#ACTUALVALUE" + hhID;//输出实际值ID
+                var DianZuID = "#RESISTANCE" + DZID;//电阻ID
+                $(shijizhiID).val(CalculateShiJiZhi($(DianZuID).val(), obj.value.trim()));
+            }
+        }
+        //计算输出实际值
+        function CalculateShiJiZhi(DianZu, DuShuZhi) {
+            if (DianZu == "" || DuShuZhi == "") {//【选用电阻阻值】没有数值时，输出实际值=读数值
+                return DuShuZhi;
+            }
+            else if (DianZu.trim() == "0") {
+                return "";
+            }
+            else//【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值
+            {
+                var value = parseFloat(DuShuZhi.trim()) / parseFloat(DianZu.trim());
+                return value;
+            }
+        }
+
+
+    </script>
+
+
 }
-else
-{
-    <input type="hidden" id="hideHTMLVALUE" value="" />
-}
-<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;" id="divHtml">
-
-    <input type="hidden" id="rowindex" value="0" />
-    <div class="mt10" id="tongdao">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_moban" style="display:none">
-            <thead>
-                <tr>
-                    <th rowspan="2" align="center" width="140">量程</th>
-
-                    <th colspan="2" align="center" width="140"> 显示值</th>
-                    <th colspan="2" align="center" width="140">标准值</th>
-                    <th colspan="2" align="center" width="140">相对误差</th>
-                    <th align="center">校准结果的不确定度</th>
-                </tr>
-                <tr>
-                    <th align="center" class="f14">
-                        <select class="my-combobox" name="" style="">
-                            <option value="UAB">UAB</option>
-                            <option value="UBC">UBC</option>
-                            <option value="U1">U1</option>
-                            <option value="U2">U2</option>
-                            <option value="UA">UA</option>
-                            <option value="UB">UB</option>
-                            <option value="UC">UC</option>
-                        </select>
-                    </th>
-                    <th align="center" class="f14">
-                        <select class="my-combobox" name="" style="">
-                            <option value="UAB">UAB</option>
-                            <option value="UBC">UBC</option>
-                            <option value="U1">U1</option>
-                            <option value="U2">U2</option>
-                            <option value="UA">UA</option>
-                            <option value="UB">UB</option>
-                            <option value="UC">UC</option>
-                        </select>
-                    </th>
-                    <!--<th align="center" class="f14">
-            <select class="my-combobox" name="" style="">
-                <option value="">UAB </option>
-                <option value="">UBC</option>
-                <option value="">U1</option>
-                <option value="">U2</option>
-                <option value="">UA</option>
-                <option value="">UB</option>
-                <option value="">UC</option>
-            </select>
-        </th>-->
-                    <th align="center" class="f14">
-                        <select class="my-combobox" name="" style="">
-                            <option value="UAB">UAB</option>
-                            <option value="UBC">UBC</option>
-                            <option value="U1">U1</option>
-                            <option value="U2">U2</option>
-                            <option value="UA">UA</option>
-                            <option value="UB">UB</option>
-                            <option value="UC">UC</option>
-                        </select>
-                    </th>
-                    <th align="center" class="f14">
-                        <select class="my-combobox" name="" style="">
-                            <option value="UAB">UAB</option>
-                            <option value="UBC">UBC</option>
-                            <option value="U1">U1</option>
-                            <option value="U2">U2</option>
-                            <option value="UA">UA</option>
-                            <option value="UB">UB</option>
-                            <option value="UC">UC</option>
-                        </select>
-                    </th>
-                    <!--<th align="center" class="f14">
-            <select class="my-combobox" name="" style="">
-                <option value="">UAB </option>
-                <option value="">UBC</option>
-                <option value="">U1</option>
-                <option value="">U2</option>
-                <option value="">UA</option>
-                <option value="">UB</option>
-                <option value="">UC</option>
-            </select>
-        </th>-->
-                    <th align="center" class="f14">
-                        <select class="my-combobox" name="" style="">
-                            <option value="UAB">UAB</option>
-                            <option value="UBC">UBC</option>
-                            <option value="U1">U1</option>
-                            <option value="U2">U2</option>
-                            <option value="UA">UA</option>
-                            <option value="UB">UB</option>
-                            <option value="UC">UC</option>
-                        </select>
-                    </th>
-                    <th align="center" class="f14">
-                        <select class="my-combobox" name="" style="">
-                            <option value="UAB">UAB</option>
-                            <option value="UBC">UBC</option>
-                            <option value="U1">U1</option>
-                            <option value="U2">U2</option>
-                            <option value="UA">UA</option>
-                            <option value="UB">UB</option>
-                            <option value="UC">UC</option>
-                        </select>
-                    </th>
-                    <!--<th align="center" class="f14">
-            <select class="my-combobox" name="" style="">
-                <option value="">UAB </option>
-                <option value="">UBC</option>
-                <option value="">U1</option>
-                <option value="">U2</option>
-                <option value="">UA</option>
-                <option value="">UB</option>
-                <option value="">UC</option>
-            </select>
-        </th>-->
-                    <th align="center">
-                        U(K = <select class="my-combobox" name="state" style="width:30px;">
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="√3">√3</option>
-
-
-                        </select>)
-                    </th>
-                </tr>
-            </thead>
-
-            <tbody id="tbody_moban"></tbody>
-
-            <tfoot>
-                <tr>
-                    <td colspan="7">
-                        <input type="hidden" id="hideLiangChengShuLiang" value="0" />
-                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加量程</a>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-
-    <div class="mt10">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
-
-            <tr>
-                <th width="40">注：</th>
-                <td colspan="6">
-                    <input type="text" class="my-textbox input-width" name="REMARK" data-options="multiline:true" style="height:30px; width:95%" id="REMARK">
-                </td>
-            </tr>
-            <tr>
-                <th width="40">结论：</th>
-                <td colspan="6">
-                    <input type="text" class="my-textbox input-width" name="CONCLUSION" data-options="multiline:true" style="height:30px; width:95%" id="CONCLUSION">
-                </td>
-            </tr>
-
-        </table>
-    </div>
-    <input type="hidden" id="hideDangQianTongDao" value="0" />
-    <input type="hidden" id="hideTongDaoShuLiang" value="0" />
-</div>
-
-<!--增加量程弹层-->
-<div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+@section TanKuang {
+    <!--弹框的位置-->
+    <!--增加量程弹层-->
+    <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
 					text:'确定',
 					iconCls:'icon-ok',
 					handler:function(){
@@ -213,88 +1311,22 @@ else
                     $('#dlg').window('close');
          }
          }]" style="width:400px;height:200px;padding:10px">
-    <table>
-        <tr>
-            <td width="80" align="right">量程值：</td>
-            <td><input type="text" id="txtNumber" name="txtNumber" class="easyui-textbox required digits" style="width:200px" /></td>
-        </tr>
-        <tr>
-            <td align="right">检测点数：</td>
-            <td><input type="text" id="txtPoint" name="txtPoint" class="easyui-textbox required digits" style="width:200px" /></td>
-        </tr>
-        <tr>
-            <td align="right">小数点位数：</td>
-            <td><input type="text" id="txtPointLen" name="txtPointLen" class="easyui-textbox required digits" style="width:200px" /></td>
-        </tr>
-    </table>
-</div>
-<!--/增加量程弹层-->
-<script src="/Scripts/JScript-JianCeXiang-Common.js"></script>
-<script type="text/javascript" language="javascript">
-    //var RuleID = $("#hideRULEID").val();//检测项目ID
-    //var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
-    //var $Tongdao_moban//模板
-
-    //增加量程
-    function CreateRow() {
-        var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
-        var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
-        LiangChengShuLiang++;
-        var rowspanIdx = $("#txtPoint").val();     //检测点数
-        txtNumber = $("#txtNumber").val(); //量程
-        var standardValue = "";
-        var htmlString = [];
-        var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;
-        var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//（量程ID）第几个通道_第几个量程
-        for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
-            rowLength++;
-            htmlString.push("<tr rowindex='" + rowLength + "'>");
-
-            var rowspan;
-            var name;
-            var id;
-            var txtVal;
-            var ddlhtml;
-            var ddlVal;
-            var HangHaoID = lianChengID + "_" + rowidx;//（行号ID)量程ID_第几行
-            if (rowidx == 0) {
-                //量程
-                htmlString.push(SetTDHtml(rowspanIdx, "RANGE", lianChengID, null, txtNumber));             
-            }
-            //显示值
-            htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, ""));
-            //显示值2
-            htmlString.push(SetTDHtml(1, "READ_VALUE2", HangHaoID, rowidx, ""));
-
-            //标准值
-            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, ""));
-            //标准值2
-            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE2", HangHaoID, rowidx, ""));
-            //相对误差
-            htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, ""));
-            //相对误差2
-            htmlString.push(SetTDHtml(1, "RELATIVE_ERROR2", HangHaoID, rowidx, ""));
-            //校准结果的不确定度
-            htmlString.push(SetTDHtml(1, "UNCERTAINTY_DEGREE", HangHaoID, rowidx, ""));
-            //输出示值
-
-            var changerHTML = "onblur=''";
-             //输出实际值
-            // htmlString.push(SetTDHtml(1, "ACTUAL_OUTPUT_VALUE", HangHaoID, rowidx, ""));
-             htmlString.push("</tr>");
-        }
-        htmlString = htmlString.join("");
-        var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
-        $.parser.parse(tagRow);//渲染easyui组建
-        $('#dlg').window('close');
-        $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang)
-    }
-
-    //离开事件，用于计算
-    function blurValue(obj) {
-
-    }
-
-</script>
+        <table>
+            <tr>
+                <td width="80" align="right">量程值：</td>
+                <td><input type="text" id="txtLiangCheng" class="my-textbox  required digits" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">检测点数：</td>
+                <td><input type="text" id="txtPoint" class="my-textbox  required digits" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">小数点位数：</td>
+                <td><input type="text" id="txtNumber" class="my-textbox  required digits" style="width:200px" /></td>
+            </tr>
+        </table>
+    </div>
+    <!--/增加量程弹层-->
+}
 
 
