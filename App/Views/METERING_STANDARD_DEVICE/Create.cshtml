@@ -16,159 +16,159 @@
 
 
     <input type="hidden" id="rowindex" value="1" />
-            <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
-                <div class="mt10" id="">
-                    <h2 class="f14"> 基本信息 </h2>
-                    <div class="clear mt10">
-                        <ul>
-                            <li class="fl mr10">
-                                名称：
-                                <input class="my-textbox " value="" name="NAME" id="NAME">
-                            </li>
-                            <li class="fl mr10">
-                                测量范围：
-                                <input class="my-textbox " value="" name="TEST_RANGE" id="TEST_RANGE">
-                            </li>
-                            <li class="fl mr10">
-                                型号：
-                                <input class="my-textbox " value="" name="XINGHAO" id="XINGHAO">
-                            </li>
-                            <li class="fl mr10">
-                                编号：
-                                <input class="my-textbox " value="" name="FACTORY_NUM" id="FACTORY_NUM">
-                            </li>
-                            <li class="fl mr10">
-                                类别：
-                                <select class="my-combobox" name="CATEGORY" id="CATEGORY">
-                                    <option value="">请选择 </option>
-                                    <option value="标准装置">标准装置 </option>
-                                    <option value="标准器">标准器</option>
-                                    <option value="中间试品">中间试品</option>
-                                </select>
-                            </li>
-                            <li class="fl mr10">
-                                实验室：
-                                <select class="my-combobox" name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID">
-                                    <option value="">请选择 </option>
-                                    <option value="数表三相">数表三相 </option>
-                                    <option value="数表单相">数表单相</option>
-                                    <option value="电能">电能</option>
-                                    <option value="指示仪表">指示仪表</option>
-                                    <option value="直流仪器">直流仪器</option>
-                                    <option value="互感器">互感器</option>
-                                </select>
-                            </li>
-                            <li class="fl mr10" @*style="display:none"*@ id="choicePre"> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="showModalOnly('THESUPERIOR', '../../METERING_STANDARD_DEVICE');">选择上一级</a></li>
-                        </ul>
-                    </div>
-                    <hr>
-                    <div class="clearfix"></div>
-                    <br>
-                    <div id="divtable">
-                        <h2 class="f14 mt10"> 不确定度/准确度等级/最大允许误差 </h2>
-                        <label>
-                            <input type="radio" name="three" id="three_1" onclick="radio.check()" checked="checked" />
-                            准确度等级
-                        </label>
-                        <div class="mt10" id="div1">
-                            <ul class="clear mt10">
-                                <li class="fl mr10">
-                                    <input class="my-textbox " value="" name="THEACCURACYLEVEL" style="width:200px" placeholder="请输入数值">
-                                </li>
-                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
-                            </ul>
-
-                        </div>
-                        <br>
-                        <label>
-                            <input type="radio" name="three" id="three_2" onclick="radio.check()" />
-                            最大允许误差
-                        </label>
-                        <div class="clear" id="div2">
-                            <ul class="clear mt10">
-                                <li class="fl mr10">
-                                    <select class="my-combobox" name="MAXCATEGORIES">
-                                        <option value="">请选择类别</option>
-                                        <option value="DCV:">DCV:</option>
-                                        <option value="ACV:">ACV:</option>
-                                        <option value="DCI:">DCI:</option>
-                                        <option value="ACI:">ACI:</option>
-                                        <option value="DCR:">DCR:</option>
-                                    </select>
-                                </li>
-                                <li class="fl mr10">
-                                    ±
-                                    <input class="my-textbox " value="" name="MAXVALUE" placeholder="填入数据">
-                                    %
-                                </li>
-                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
-                            </ul>
-                        </div>
-                        <br>
-                        <label>
-                            <input type="radio" name="three" id="three_3" onclick="radio.check()" />
-                            不确定度
-                        </label>
-                        <div class="clear" id="div3">
-                            <ul class="clear mt10">
-                                <li class="fl mr10">
-                                    <select class="my-combobox" name="THEUNCERTAINTY">
-                                        <option value="">请选择类别</option>
-                                        <option value="DCV:Urel=">DCV:Urel=</option>
-                                        <option value="ACV:Urel=">ACV:Urel=</option>
-                                        <option value="DCI:Urel=">DCI:Urel=</option>
-                                        <option value="ACI:Urel=">ACI:Urel=</option>
-                                        <option value="DCR:Urel=">DCR:Urel=</option>
-                                    </select>
-                                </li>
-                                <li class="fl mr10">
-                                    <input class="my-textbox " value="" name="THEUNCERTAINTYVALUE" placeholder="填入数据">
-                                </li>
-                                <li class="fl mr10">
-                                    <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
-                                        <option value="">请选择指数级别</option>
-                                        <option value="×10-1">×10-1</option>
-                                        <option value="×10-2">×10-2</option>
-                                        <option value="×10-3">×10-3</option>
-                                        <option value="×10-4">×10-4</option>
-                                        <option value="×10-5=">×10-5=</option>
-                                        <option value="×10-6=">×10-6=</option>
-                                    </select>
-                                </li>
-                                <li class="fl mr10">
-                                    <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
-                                        <option value="">请选择k值</option>
-                                        <option value="k=2">k=2</option>
-                                        <option value="k=3">k=3</option>
-                                    </select>
-                                </li>
-                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <br>
-                    <h2 class="f14 mt10"> 证书信息 </h2>
-                    <div class="mt10" id="div4">
-                        <ul class="clear mt10">
-                            <li class="fl mr10">
-                                证书发放单位：
-                                <input class="my-textbox " value="" name="CERTIFICATEUNIT">
-                            </li>
-                            <li class="fl mr10">
-                                证书编号：
-                                <input class="my-textbox " value="" name="CERTIFICATE_NUM">
-                            </li>
-                            <li class="fl mr10">
-                                有效期至：
-                                <input class="my-textbox " value="" name="VALID_TO">
-                            </li>
-                            <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
-                        </ul>
-
-                    </div>
-                </div>
-                <div class="mt10"><a href="javascript:;" class="easyui-linkbutton" onclick="baocun()">保存</a> <a href="javascript:;" class="easyui-linkbutton" onclick="">取消</a></div>
+    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+        <div class="mt10" id="">
+            <h2 class="f14"> 基本信息 </h2>
+            <div class="clear mt10">
+                <ul>
+                    <li class="fl mr10">
+                        名称：
+                        <input class="my-textbox " value="" name="NAME" id="NAME">
+                    </li>
+                    <li class="fl mr10">
+                        测量范围：
+                        <input class="my-textbox " value="" name="TEST_RANGE" id="TEST_RANGE">
+                    </li>
+                    <li class="fl mr10">
+                        型号：
+                        <input class="my-textbox " value="" name="XINGHAO" id="XINGHAO">
+                    </li>
+                    <li class="fl mr10">
+                        编号：
+                        <input class="my-textbox " value="" name="FACTORY_NUM" id="FACTORY_NUM">
+                    </li>
+                    <li class="fl mr10">
+                        类别：
+                        <select class="my-combobox" name="CATEGORY" id="CATEGORY">
+                            <option value="">请选择 </option>
+                            <option value="标准装置">标准装置 </option>
+                            <option value="标准器">标准器</option>
+                            <option value="中间试品">中间试品</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        实验室：
+                        <select class="my-combobox" name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID">
+                            <option value="">请选择 </option>
+                            <option value="数表三相">数表三相 </option>
+                            <option value="数表单相">数表单相</option>
+                            <option value="电能">电能</option>
+                            <option value="指示仪表">指示仪表</option>
+                            <option value="直流仪器">直流仪器</option>
+                            <option value="互感器">互感器</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10" @*style="display:none"*@ id="choicePre"> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="showModalOnly('THESUPERIOR', '../../METERING_STANDARD_DEVICE');">选择上一级</a></li>
+                </ul>
             </div>
+            <hr>
+            <div class="clearfix"></div>
+            <br>
+            <div id="divtable">
+                <h2 class="f14 mt10"> 不确定度/准确度等级/最大允许误差 </h2>
+                <label>
+                    <input type="radio" name="three" id="three_1" onclick="radio.check()" checked="checked" />
+                    准确度等级
+                </label>
+                <div class="mt10" id="div1">
+                    <ul class="clear mt10">
+                        <li class="fl mr10">
+                            <input class="my-textbox " value="" name="THEACCURACYLEVEL" style="width:200px" placeholder="请输入数值">
+                        </li>
+                        <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                    </ul>
+
+                </div>
+                <br>
+                <label>
+                    <input type="radio" name="three" id="three_2" onclick="radio.check()" />
+                    最大允许误差
+                </label>
+                <div class="clear" id="div2">
+                    <ul class="clear mt10">
+                        <li class="fl mr10">
+                            <select class="my-combobox" name="MAXCATEGORIES">
+                                <option value="">请选择类别</option>
+                                <option value="DCV:">DCV:</option>
+                                <option value="ACV:">ACV:</option>
+                                <option value="DCI:">DCI:</option>
+                                <option value="ACI:">ACI:</option>
+                                <option value="DCR:">DCR:</option>
+                            </select>
+                        </li>
+                        <li class="fl mr10">
+                            ±
+                            <input class="my-textbox " value="" name="MAXVALUE" placeholder="填入数据">
+                            %
+                        </li>
+                        <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                    </ul>
+                </div>
+                <br>
+                <label>
+                    <input type="radio" name="three" id="three_3" onclick="radio.check()" />
+                    不确定度
+                </label>
+                <div class="clear" id="div3">
+                    <ul class="clear mt10">
+                        <li class="fl mr10">
+                            <select class="my-combobox" name="THEUNCERTAINTY">
+                                <option value="">请选择类别</option>
+                                <option value="DCV:Urel=">DCV:Urel=</option>
+                                <option value="ACV:Urel=">ACV:Urel=</option>
+                                <option value="DCI:Urel=">DCI:Urel=</option>
+                                <option value="ACI:Urel=">ACI:Urel=</option>
+                                <option value="DCR:Urel=">DCR:Urel=</option>
+                            </select>
+                        </li>
+                        <li class="fl mr10">
+                            <input class="my-textbox " value="" name="THEUNCERTAINTYVALUE" placeholder="填入数据">
+                        </li>
+                        <li class="fl mr10">
+                            <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
+                                <option value="">请选择指数级别</option>
+                                <option value="×10-1">×10-1</option>
+                                <option value="×10-2">×10-2</option>
+                                <option value="×10-3">×10-3</option>
+                                <option value="×10-4">×10-4</option>
+                                <option value="×10-5=">×10-5=</option>
+                                <option value="×10-6=">×10-6=</option>
+                            </select>
+                        </li>
+                        <li class="fl mr10">
+                            <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
+                                <option value="">请选择k值</option>
+                                <option value="k=2">k=2</option>
+                                <option value="k=3">k=3</option>
+                            </select>
+                        </li>
+                        <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                    </ul>
+                </div>
+            </div>
+            <br>
+            <h2 class="f14 mt10"> 证书信息 </h2>
+            <div class="mt10" id="div4">
+                <ul class="clear mt10">
+                    <li class="fl mr10">
+                        证书发放单位：
+                        <input class="my-textbox " value="" name="CERTIFICATEUNIT">
+                    </li>
+                    <li class="fl mr10">
+                        证书编号：
+                        <input class="my-textbox " value="" name="CERTIFICATE_NUM">
+                    </li>
+                    <li class="fl mr10">
+                        有效期至：
+                        <input class="easyui-datebox" value="" name="VALID_TO">
+                    </li>
+                    <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="mt10"><a href="javascript:;" class="easyui-linkbutton" onclick="baocun()">保存</a> <a href="javascript:;" class="easyui-linkbutton" onclick="">取消</a></div>
+    </div>
             <script>
                 $(function () {
                     $("#state").bind('change', function (obj) {
@@ -250,8 +250,8 @@
                             default:
 
                         }
-                        $("#divtable .easyui-linkbutton").linkbutton("disable");
-                        $(obj).next('div').children(1).find('li a').linkbutton("enable");
+                        //$("#divtable .easyui-linkbutton").linkbutton("disable");
+                        //$(obj).next('div').children(1).find('li a').linkbutton("enable");
                         //$(".mt10").next('div').children(9).find('li a').linkbutton("enable");
                         //$(".mt10").eq(12).find('a').linkbutton("enable");
 
@@ -271,7 +271,8 @@
                             $(row).remove();
                         else
                             alert('就剩一行了你还删除呀？');
-                    }                }
+                    }
+                }
 
             </script>
 
@@ -302,8 +303,8 @@
             case ("three_2"):
                 myArray2 = new Array()
                 $("#div2").find("ul").each(function () {
-                    var MAXCATEGORIES = $(this).find("li :select option:selected").eq(0).val();
-                    var MAXVALUE = $(this).find("li :input").eq(1).val();
+                    var MAXCATEGORIES = $(this).find("li :selected").eq(0).val();
+                    var MAXVALUE = $(this).find("li :input").eq(0).val();
                     myArray2.push({ MAXCATEGORIES: MAXCATEGORIES, MAXVALUE: MAXVALUE });
                 })
                 break
@@ -311,23 +312,24 @@
                 myArray3 = new Array()
                 $("#div3").find("ul").each(function () {
                     debugger
-                    var THEUNCERTAINTY = $(this).find("li :select option:selected").eq(0).val();
-                    var THEUNCERTAINTYVALUE = $(this).find("li :input").eq(1).val();
-                    var THEUNCERTAINTYNDEXL = $(this).find("li :select option:selected").eq(2).val();
-                    var THEUNCERTAINTYVALUEK = $(this).find("li :select option:selected").eq(3).val();
+                    var THEUNCERTAINTY = $(this).find("li :selected").eq(0).val();
+                    var THEUNCERTAINTYVALUE = $(this).find("li :input").eq(0).val();
+                    var THEUNCERTAINTYNDEXL = $(this).find("li :selected").eq(1).val();
+                    var THEUNCERTAINTYVALUEK = $(this).find("li :selected").eq(2).val();
                     myArray3.push({ THEUNCERTAINTYVALUEK: THEUNCERTAINTYVALUEK, THEUNCERTAINTYVALUE: THEUNCERTAINTYVALUE, THEUNCERTAINTYNDEXL: THEUNCERTAINTYNDEXL, THEUNCERTAINTYVALUEK: THEUNCERTAINTYVALUEK });
                 })
                 break
             default:
         }
-        $("#div4").find("ul").each(function () {   
+        $("#div4").find("ul").each(function () {
             var CERTIFICATEUNIT = $(this).find("li :input").eq(0).val();
             var CERTIFICATE_NUM = $(this).find("li :input").eq(1).val();
             var VALID_TO = $(this).find("li :input").eq(2).val();
             //校验时间格式是否正确
-            myArray4.push({ CERTIFICATEUNIT: CERTIFICATEUNIT, CERTIFICATE_NUM: CERTIFICATE_NUM, VALID_TO: VALID_TO });
-            })
-    METERING_STANDARD_DEVICE.NAME = $("#NAME").val();//名称
+            if (CERTIFICATEUNIT != null || CERTIFICATE_NUM != null || VALID_TO != null)
+                myArray4.push({ CERTIFICATEUNIT: CERTIFICATEUNIT, CERTIFICATE_NUM: CERTIFICATE_NUM, VALID_TO: VALID_TO });
+        })
+        METERING_STANDARD_DEVICE.NAME = $("#NAME").val();//名称
         METERING_STANDARD_DEVICE.TEST_RANGE = $("#TEST_RANGE").val();//测量范围
         METERING_STANDARD_DEVICE.XINGHAO = $("#XINGHAO").val();//型号
         METERING_STANDARD_DEVICE.FACTORY_NUM = $("#FACTORY_NUM").val();//编号
@@ -340,6 +342,7 @@
             METERING_STANDARD_DEVICE.ALLOWABLE_ERROR = myArray2;
         else if (myArray3 != null)
             METERING_STANDARD_DEVICE.ALLOWABLE_ERROR = myArray3;
+        debugger
         METERING_STANDARD_DEVICE.METERING_STANDARD_DEVICE_CHECK = myArray4;
         //调用后台方法
         $.ajax({
