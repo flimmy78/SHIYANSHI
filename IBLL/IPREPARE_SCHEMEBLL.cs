@@ -96,11 +96,12 @@ namespace Langben.IBLL
         /// 编辑一个对象
         /// </summary>
         /// <param name="validationErrors">返回的错误信息</param>
-        /// <param name="entity">一个对象</param>
+        /// <param name="entity">一个对象</param>        
         /// <returns></returns>
         [OperationContract]
-        bool Edit(ref Common.ValidationErrors validationErrors, PREPARE_SCHEME entity); 
-    
+        bool Edit(ref Common.ValidationErrors validationErrors, PREPARE_SCHEME entity);
+
+
     }
 }
 
