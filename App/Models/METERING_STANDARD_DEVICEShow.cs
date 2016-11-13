@@ -18,7 +18,9 @@ namespace Langben.App.Models
         public string NAME { get; set; }
         public string TEST_RANGE { get; set; }
         public string FACTORY_NUM { get; set; }
-        public string CATEGORY { get; set; }
+        public string XINGHAO { get; set; }
+        public string THESUPERIOR { get; set; }
+        public string CATEGORY { get; set; }      
         public string STATUS { get; set; }
         public string UNDERTAKE_LABORATORYID { get; set; }
         public Nullable<System.DateTime> CREATETIME { get; set; }
