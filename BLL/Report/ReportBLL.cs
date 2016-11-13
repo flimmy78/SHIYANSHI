@@ -84,8 +84,10 @@ namespace Langben.Report
         /// 导出报告Excel
         /// </summary>
         /// <param name="ID">预备方案ID</param>
+        /// <param name="Message">返回消息</param>
+        /// <param name="CreatePerson">创建人</param>
         /// <returns></returns>
-        public bool ExportReport(string ID, out string Message)
+        public bool ExportReport(string ID, out string Message,string CreatePerson = "",bool IsSavePath=false)
         {
             IBLL.IPREPARE_SCHEMEBLL m_BLL = new PREPARE_SCHEMEBLL();
             PREPARE_SCHEME entity = m_BLL.GetById(ID);
@@ -135,14 +137,34 @@ namespace Langben.Report
                 SetShuJu(hssfworkbook, entity, type);
                 string fileName = SetFileName(type);
                 //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";
-                saveFileName = "../up/Report/" + fileName + ".xls";
+                saveFileName = "~/up/Report/" + fileName + ".xls";
                 string saveFileNamePath = System.Web.HttpContext.Current.Server.MapPath(saveFileName);
                 using (FileStream fileWrite = new FileStream(saveFileNamePath, FileMode.Create))
                 {
                     hssfworkbook.Write(fileWrite);
                 }
+                Message = "../up/Report/" + fileName + ".xls";
+                if (IsSavePath)
+                {
 
-                Message = saveFileName;
+                    FILE_UPLOADERBLL fBll = new FILE_UPLOADERBLL();
+                    FILE_UPLOADER fEntity = new FILE_UPLOADER();                  
+
+                    fEntity.CONCLUSION = entity.CONCLUSION;
+                    fEntity.CREATETIME = DateTime.Now;
+                    fEntity.PATH = saveFileName;
+                    fEntity.FULLPATH = saveFileNamePath;
+                    fEntity.NAME = fileName;
+                    fEntity.SUFFIX = ".xls";
+                    fEntity.PREPARE_SCHEMEID = entity.ID;
+                    fEntity.STATE = "已上传";
+                    fEntity.CREATEPERSON = CreatePerson;
+                    fEntity.ID = Result.GetNewId();
+                    ValidationErrors validationErrors = new ValidationErrors();
+                    fBll.Create(ref validationErrors, fEntity);
+                }
+
+                
                 return true;
             }
             Message = "未找到预备方案ID为【" + ID + "】的数据";
