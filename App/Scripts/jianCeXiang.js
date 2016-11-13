@@ -482,6 +482,83 @@ function SetAllControlHtml() {
 function JS1(thi) {
 }
 
+
+function PointFloat(src, pos) {
+
+    return Math.round(src * Math.pow(10, pos)) / Math.pow(10, pos);
+}
+//保留小数位数 四舍六入奇进偶舍
+function fomatFloat(src, pos) {
+
+    var numArray, resultSymbol = "";
+    if (src < 0) {
+        resultSymbol = "-";
+    }
+    if (pos == "") {
+        pos = new Number(0);
+    }
+    src = src.toString().replace("-", "");
+    if (src.indexOf('.') > 0) {
+        numArray = src.split('.');
+        if (numArray[1].length > pos) {
+            var endStr, isCarry = false;
+            if (numArray[1].length > parseFloat(pos) + 1) {
+                endStr = numArray[1].substring(parseFloat(pos) + 1);
+                for (var i = 0; i < endStr.length; i++) {
+                    if (endStr[i] > 0) {
+                        isCarry = true;
+                        break;
+                    }
+                }
+            }
+            numArray[1] = numArray[1].substring(0, pos + 1);
+            var endChar = numArray[1][pos];
+            var newpoint = new Number("0." + numArray[1].substring(0, pos));
+            if (endChar >= 5 && pos >= 0) {
+                if (endChar > 5) {
+                    if (pos == 0) {
+                        numArray[1] = 1;
+                    }
+                    else {
+                        numArray[1] = parseFloat(newpoint) + parseFloat(Math.pow(0.1, pos));
+                    }
+                }
+                else if (endChar == 5) {
+                    //5后面有有效数字，直接向前进一位
+                    if (isCarry) {
+                        numArray[1] = parseFloat(newpoint) + parseFloat(Math.pow(0.1, pos));
+                        return f.PointFloat(resultSymbol + eval(numArray.join("+")), pos);
+                    }
+                    if (pos == 0) {
+                        if (numArray[0] % 2 != 0) {
+                            numArray[1] = 1;
+                        } else {
+                            numArray[1] = 0;
+                        }
+                        return f.PointFloat(resultSymbol + eval(numArray.join("+")), pos);
+                    }
+                    var preChar = numArray[1][pos - 1];
+                    if (preChar % 2 == 0) {
+                        numArray[1] = newpoint;
+                    }
+                    else {
+                        numArray[1] = parseFloat(newpoint) + parseFloat(Math.pow(0.1, pos));
+                    }
+                }
+                return f.PointFloat(resultSymbol + eval(numArray.join("+")), pos);
+            }
+            else {
+                numArray[1] = newpoint;
+                return f.PointFloat(resultSymbol + eval(numArray.join("+")), pos);
+            }
+        }
+        return src;
+
+    } else {
+        return resultSymbol + src;
+    }
+    return src;
+}
 //---------------------------------
 
 
