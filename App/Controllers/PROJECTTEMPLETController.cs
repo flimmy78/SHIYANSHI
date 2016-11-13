@@ -203,8 +203,11 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult PingLuShuChuCheLinagXiangDuiWuCha(string RULEID = "34-1999_2_41", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult PingLuShuChuCheLinagXiangDuiWuCha(string id= "频率输出", string RULEID = "34-1999_2_41", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
+            ViewBag.canshu = id;
+            //频率输出
+            //频率测量
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
