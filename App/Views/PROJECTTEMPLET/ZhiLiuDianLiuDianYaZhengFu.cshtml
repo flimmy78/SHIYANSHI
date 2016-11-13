@@ -144,11 +144,17 @@ else
 <script src="/Scripts/JScript-JianCeXiang-Common.js"></script>
 
 <script src="~/Scripts/jianCeXiang.js"></script>
-<script type="text/javascript" language="javascript">
+<script type="text/javascript" language="javascript"> 
     //var RuleID = $("#hideRULEID").val();//检测项目ID
     //var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
-    //var $Tongdao_moban//模板
+    // $Tongdao_moban//模板
+    //设置当前操作通道
+    function set(tbodyIndex) {
+        $('#dlg').dialog('open');//打开弹出框
+        //   CreateRow();
+        $("#hideDangQianTongDao").val(tbodyIndex);
 
+    }
     //增加量程
     function CreateRow() {
         var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道

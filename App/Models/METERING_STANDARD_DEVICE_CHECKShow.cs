@@ -12,6 +12,7 @@ namespace Langben.App.Models
 
         }
         public string ID { get; set; }
+        public string CERTIFICATEUNIT { get; set; }        
         public string CERTIFICATE_NUM { get; set; }
         public Nullable<System.DateTime> CHECK_DATE { get; set; }
         public Nullable<System.DateTime> VALID_TO { get; set; }

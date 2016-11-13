@@ -171,154 +171,6 @@
 		</TableTemplate>
 		<TableTemplate>
 			<!--输入格式-->
-			<RuleID>315-1983_2_1</RuleID>
-			<!--二级标题开始行号,如果有二级标题填具体开始行号，如果没有填-1-->
-			<!--二级标题，有就配置，没有该节点可不配置-->
-			<!--<SecondTitleList>-->
-			<!--二级标题每行信息，每行一个-->
-			<!--<RowInfo>-->
-			<!--二级标题行号-->
-			<!--<RowIndex>283</RowIndex>-->
-			<!--二级标题改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
-			<!--<CellIndexs>4,5</CellIndexs>-->
-			<!--</RowInfo>-->
-			<!--</SecondTitleList>-->
-			<!--表格表头，有就配置，没有该节点可不配置-->
-			<TableTitleList>
-				<!--表格表头每行信息，每行一个-->
-				<RowInfo>
-					<!--表格表头行号-->
-					<RowIndex>433</RowIndex>
-					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
-					<CellIndexs>21,47</CellIndexs>
-					<CellList>
-						<Cell>
-							<!--字段代码与模板中设置的字段保持一致-->
-							<Code>sssss</Code>
-							<!--字段名称含义-->
-							<Name>显示值</Name>
-							<!--模板中单元格开始列号-->
-							<ColIndex>21</ColIndex>
-							<!--所占列数-->
-							<ColCount>13</ColCount>
-						</Cell>
-						<Cell>
-							<!--字段代码与模板中设置的字段保持一致-->
-							<Code>K</Code>
-							<!--字段名称含义-->
-							<Name>K2</Name>
-							<!--模板中单元格开始列号-->
-							<ColIndex>47</ColIndex>
-							<!--所占列数-->
-							<ColCount>11</ColCount>
-						</Cell>
-					</CellList>
-				</RowInfo>
-			</TableTitleList>
-			<!--数据模板开始行号-->
-			<DataRowIndex>434</DataRowIndex>
-			<!--备注模板行号-->
-			<RemarkRowIndex>435</RemarkRowIndex>
-			<!--结论模板行号-->
-			<ConclusionRowIndex>436</ConclusionRowIndex>
-			<!--备注-->
-			<Remark>直流电压测量-非正负极性-相对误差-单相</Remark>
-			<!--单元格信息-->
-			<CellList>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>RANGE</Code>
-					<!--字段名称含义-->
-					<Name>量程</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>1</ColIndex>
-					<!--所占列数-->
-					<ColCount>5</ColCount>
-				</Cell>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>RANGE_UNIT</Code>
-					<!--字段名称含义-->
-					<Name>量程单位</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>6</ColIndex>
-					<!--所占列数-->
-					<ColCount>2</ColCount>
-				</Cell>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>OUTPUT_VALUE</Code>
-					<!--字段名称含义-->
-					<Name>标准值</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>8</ColIndex>
-					<!--所占列数-->
-					<ColCount>9</ColCount>
-				</Cell>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>OUTPUT_VALUE_UNIT</Code>
-					<!--字段名称含义-->
-					<Name>标准值单位</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>17</ColIndex>
-					<!--所占列数-->
-					<ColCount>4</ColCount>
-				</Cell>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>READ_VALUE</Code>
-					<!--字段名称含义-->
-					<Name>显示值</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>21</ColIndex>
-					<!--所占列数-->
-					<ColCount>9</ColCount>
-				</Cell>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>READ_VALUE_UNIT</Code>
-					<!--字段名称含义-->
-					<Name>显示值单位</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>30</ColIndex>
-					<!--所占列数-->
-					<ColCount>4</ColCount>
-				</Cell>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>RELATIVE_ERROR</Code>
-					<!--字段名称含义-->
-					<Name>相对误差</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>34</ColIndex>
-					<!--所占列数-->
-					<ColCount>13</ColCount>
-				</Cell>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>UNCERTAINTY_DEGREE</Code>
-					<!--字段名称含义-->
-					<Name>校准结果的不确定度U(k=2)</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>47</ColIndex>
-					<!--所占列数-->
-					<ColCount>9</ColCount>
-				</Cell>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>UNCERTAINTY_DEGREE_UNIT</Code>
-					<!--字段名称含义-->
-					<Name>校准结果的不确定度U(k=2)单位</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>56</ColIndex>
-					<!--所占列数-->
-					<ColCount>2</ColCount>
-				</Cell>
-			</CellList>
-		</TableTemplate>
-		<TableTemplate>
-			<!--输入格式-->
 			<RuleID>315-1983_2_2</RuleID>
 			<!--二级标题开始行号,如果有二级标题填具体开始行号，如果没有填-1-->
 			<!--二级标题，有就配置，没有该节点可不配置-->
@@ -487,6 +339,28 @@
 					<RowIndex>455</RowIndex>
 					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
 					<CellIndexs>21,47</CellIndexs>
+          <CellList>
+            <Cell>
+              <!--字段代码与模板中设置的字段保持一致-->
+              <Code>sssss</Code>
+              <!--字段名称含义-->
+              <Name>通道号</Name>
+              <!--模板中单元格开始列号-->
+              <ColIndex>21</ColIndex>
+              <!--所占列数-->
+              <ColCount>13</ColCount>
+            </Cell>
+            <Cell>
+              <!--字段代码与模板中设置的字段保持一致-->
+              <Code>K</Code>
+              <!--字段名称含义-->
+              <Name>不确定度</Name>
+              <!--模板中单元格开始列号-->
+              <ColIndex>47</ColIndex>
+              <!--所占列数-->
+              <ColCount>11</ColCount>
+            </Cell>
+          </CellList>
 				</RowInfo>
 			</TableTitleList>
 			<!--数据模板开始行号-->
@@ -497,132 +371,6 @@
 			<ConclusionRowIndex>458</ConclusionRowIndex>
 			<!--备注-->
 			<Remark>直流电流测量-非正负极性-相对误差-单相-多通道</Remark>
-			<!--单元格信息-->
-			<CellList>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>RANGE</Code>
-					<!--字段名称含义-->
-					<Name>量程</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>1</ColIndex>
-					<!--所占列数-->
-					<ColCount>5</ColCount>
-				</Cell>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>RANGE_UNIT</Code>
-					<!--字段名称含义-->
-					<Name>量程单位</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>6</ColIndex>
-					<!--所占列数-->
-					<ColCount>2</ColCount>
-				</Cell>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>OUTPUT_VALUE</Code>
-					<!--字段名称含义-->
-					<Name>标准值</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>8</ColIndex>
-					<!--所占列数-->
-					<ColCount>9</ColCount>
-				</Cell>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>OUTPUT_VALUE_UNIT</Code>
-					<!--字段名称含义-->
-					<Name>标准值单位</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>17</ColIndex>
-					<!--所占列数-->
-					<ColCount>4</ColCount>
-				</Cell>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>READ_VALUE</Code>
-					<!--字段名称含义-->
-					<Name>显示值</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>21</ColIndex>
-					<!--所占列数-->
-					<ColCount>9</ColCount>
-				</Cell>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>READ_VALUE_UNIT</Code>
-					<!--字段名称含义-->
-					<Name>显示值单位</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>30</ColIndex>
-					<!--所占列数-->
-					<ColCount>4</ColCount>
-				</Cell>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>RELATIVE_ERROR</Code>
-					<!--字段名称含义-->
-					<Name>相对误差</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>34</ColIndex>
-					<!--所占列数-->
-					<ColCount>13</ColCount>
-				</Cell>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>UNCERTAINTY_DEGREE</Code>
-					<!--字段名称含义-->
-					<Name>校准结果的不确定度U(k=2)</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>47</ColIndex>
-					<!--所占列数-->
-					<ColCount>9</ColCount>
-				</Cell>
-				<Cell>
-					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>UNCERTAINTY_DEGREE_UNIT</Code>
-					<!--字段名称含义-->
-					<Name>校准结果的不确定度U(k=2)单位</Name>
-					<!--模板中单元格开始列号-->
-					<ColIndex>56</ColIndex>
-					<!--所占列数-->
-					<ColCount>2</ColCount>
-				</Cell>
-			</CellList>
-		</TableTemplate>
-		<TableTemplate>
-			<!--输入格式-->
-			<RuleID>315-1983_2_3</RuleID>
-			<!--二级标题开始行号,如果有二级标题填具体开始行号，如果没有填-1-->
-			<!--二级标题，有就配置，没有该节点可不配置-->
-			<!--<SecondTitleList>-->
-			<!--二级标题每行信息，每行一个-->
-			<!--<RowInfo>-->
-			<!--二级标题行号-->
-			<!--<RowIndex>283</RowIndex>-->
-			<!--二级标题改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
-			<!--<CellIndexs>4,5</CellIndexs>-->
-			<!--</RowInfo>-->
-			<!--</SecondTitleList>-->
-			<!--表格表头，有就配置，没有该节点可不配置-->
-			<TableTitleList>
-				<!--表格表头每行信息，每行一个-->
-				<RowInfo>
-					<!--表格表头行号-->
-					<RowIndex>444</RowIndex>
-					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
-					<CellIndexs>21,47</CellIndexs>
-				</RowInfo>
-			</TableTitleList>
-			<!--数据模板开始行号-->
-			<DataRowIndex>445</DataRowIndex>
-			<!--备注模板行号-->
-			<RemarkRowIndex>446</RemarkRowIndex>
-			<!--结论模板行号-->
-			<ConclusionRowIndex>447</ConclusionRowIndex>
-			<!--备注-->
-			<Remark>直流电流测量-非正负极性-相对误差-单相</Remark>
 			<!--单元格信息-->
 			<CellList>
 				<Cell>
@@ -739,6 +487,18 @@
 					<RowIndex>466</RowIndex>
 					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
 					<CellIndexs>47</CellIndexs>
+          <CellList>
+            <Cell>
+              <!--字段代码与模板中设置的字段保持一致-->
+              <Code>K</Code>
+              <!--字段名称含义-->
+              <Name>不确定度</Name>
+              <!--模板中单元格开始列号-->
+              <ColIndex>47</ColIndex>
+              <!--所占列数-->
+              <ColCount>11</ColCount>
+            </Cell>
+          </CellList>
 				</RowInfo>
 			</TableTitleList>
 			<!--数据模板开始行号-->
@@ -848,29 +608,162 @@
 			<RuleID>126-1995_2_1</RuleID>
 			<!--二级标题开始行号,如果有二级标题填具体开始行号，如果没有填-1-->
 			<!--二级标题，有就配置，没有该节点可不配置-->
-			<SecondTitleList>
-				<!--二级标题每行信息，每行一个-->
+			<!--<SecondTitleList>
+				--><!--二级标题每行信息，每行一个--><!--
 				<RowInfo>
-					<!--二级标题行号-->
+					--><!--二级标题行号--><!--
 					<RowIndex>43</RowIndex>
-					<!--二级标题改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
+					--><!--二级标题改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填--><!--
 					<CellIndexs>5</CellIndexs>
 				</RowInfo>
 				<RowInfo>
-					<!--二级标题行号-->
+					--><!--二级标题行号--><!--
 					<RowIndex>44</RowIndex>
-					<!--二级标题改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
+					--><!--二级标题改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填--><!--
 					<CellIndexs>8,13,18,28,33,38,44,48</CellIndexs>
 				</RowInfo>
-			</SecondTitleList>
+			</SecondTitleList>-->
 			<!--表格表头，有就配置，没有该节点可不配置-->
 			<TableTitleList>
 				<!--表格表头每行信息，每行一个-->
 				<RowInfo>
+          <RowIndex>43</RowIndex>
+          <!--二级标题改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
+          <CellIndexs>5</CellIndexs>
+          <CellList>
+            <Cell>
+              <!--字段代码与模板中设置的字段保持一致-->
+              <Code>BianSongQiTongDao</Code>
+              <!--字段名称含义-->
+              <Name>通道号</Name>
+              <!--模板中单元格开始列号-->
+              <ColIndex>5</ColIndex>
+              <!--所占列数-->
+              <ColCount>4</ColCount>
+            </Cell>
+          </CellList>
+          <!--二级标题行号-->
+          <RowIndex>44</RowIndex>
+          <!--二级标题改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
+          <CellIndexs>8,13,18,28,33,38,44,48</CellIndexs>
+          <CellList>
+            <Cell>
+              <!--字段代码与模板中设置的字段保持一致-->
+              <Code>shurufanwei</Code>
+              <!--字段名称含义-->
+              <Name>输入范围</Name>
+              <!--模板中单元格开始列号-->
+              <ColIndex>8</ColIndex>
+              <!--所占列数-->
+              <ColCount>4</ColCount>
+            </Cell>
+            <Cell>
+              <!--字段代码与模板中设置的字段保持一致-->
+              <Code>shurufanweijian</Code>
+              <!--字段名称含义-->
+              <Name>输入范围</Name>
+              <!--模板中单元格开始列号-->
+              <ColIndex>13</ColIndex>
+              <!--所占列数-->
+              <ColCount>4</ColCount>
+            </Cell>
+            <Cell>
+              <!--字段代码与模板中设置的字段保持一致-->
+              <Code>mAVHZ</Code>
+              <!--字段名称含义-->
+              <Name>单位</Name>
+              <!--模板中单元格开始列号-->
+              <ColIndex>18</ColIndex>
+              <!--所占列数-->
+              <ColCount>3</ColCount>
+            </Cell>
+            <Cell>
+              <!--字段代码与模板中设置的字段保持一致-->
+              <Code>dianmyliu</Code>
+              <!--字段名称含义-->
+              <Name>输出范围</Name>
+              <!--模板中单元格开始列号-->
+              <ColIndex>28</ColIndex>
+              <!--所占列数-->
+              <ColCount>4</ColCount>
+            </Cell>
+            <Cell>
+              <!--字段代码与模板中设置的字段保持一致-->
+              <Code>dianmyya</Code>
+              <!--字段名称含义-->
+              <Name>输出范围</Name>
+              <!--模板中单元格开始列号-->
+              <ColIndex>33</ColIndex>
+              <!--所占列数-->
+              <ColCount>4</ColCount>
+            </Cell>
+            <Cell>
+              <!--字段代码与模板中设置的字段保持一致-->
+              <Code>mAV</Code>
+              <!--字段名称含义-->
+              <Name>单位</Name>
+              <!--模板中单元格开始列号-->
+              <ColIndex>38</ColIndex>
+              <!--所占列数-->
+              <ColCount>2</ColCount>
+            </Cell>
+            <Cell>
+              <!--字段代码与模板中设置的字段保持一致-->
+              <Code>dianym32ya</Code>
+              <!--字段名称含义-->
+              <Name>额定条件</Name>
+              <!--模板中单元格开始列号-->
+              <ColIndex>44</ColIndex>
+              <!--所占列数-->
+              <ColCount>4</ColCount>
+            </Cell>
+            <Cell>
+              <!--字段代码与模板中设置的字段保持一致-->
+              <Code>dianymy123a</Code>
+              <!--字段名称含义-->
+              <Name>单位</Name>
+              <!--模板中单元格开始列号-->
+              <ColIndex>48</ColIndex>
+              <!--所占列数-->
+              <ColCount>2</ColCount>
+            </Cell>
+          </CellList>
 					<!--表格表头行号-->
 					<RowIndex>45</RowIndex>
 					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
 					<CellIndexs>29,36,50</CellIndexs>
+          <CellList>
+            <Cell>
+              <!--字段代码与模板中设置的字段保持一致-->
+              <Code>m123AV</Code>
+              <!--字段名称含义-->
+              <Name>标准输出单位</Name>
+              <!--模板中单元格开始列号-->
+              <ColIndex>29</ColIndex>
+              <!--所占列数-->
+              <ColCount>7</ColCount>
+            </Cell>
+            <Cell>
+              <!--字段代码与模板中设置的字段保持一致-->
+              <Code>m456AV</Code>
+              <!--字段名称含义-->
+              <Name>实际输出单位</Name>
+              <!--模板中单元格开始列号-->
+              <ColIndex>36</ColIndex>
+              <!--所占列数-->
+              <ColCount>7</ColCount>
+            </Cell>
+            <Cell>
+              <!--字段代码与模板中设置的字段保持一致-->
+              <Code>K</Code>
+              <!--字段名称含义-->
+              <Name>不确定度</Name>
+              <!--模板中单元格开始列号-->
+              <ColIndex>50</ColIndex>
+              <!--所占列数-->
+              <ColCount>8</ColCount>
+            </Cell>
+          </CellList>
 				</RowInfo>
 			</TableTitleList>
 			<!--数据模板开始行号-->

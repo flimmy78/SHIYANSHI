@@ -136,8 +136,8 @@ else
     // $Tongdao_moban//模板
     //设置当前操作通道
     function set(tbodyIndex) {
-
-        CreateRow();
+        $('#dlg').dialog('open');//打开弹出框
+     //   CreateRow();
         $("#hideDangQianTongDao").val(tbodyIndex);
 
     }

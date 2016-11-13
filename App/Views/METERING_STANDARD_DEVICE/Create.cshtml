@@ -165,7 +165,7 @@
 
             </div>
         </div>
-        <div class="mt10"><a href="javascript:;" class="easyui-linkbutton" onclick="baocun()">保存</a> <a href="javascript:;" class="easyui-linkbutton" onclick="">取消</a></div>
+        <div class="mt10"><a href="javascript:;" class="easyui-linkbutton" onclick="baocun()">保存</a> <a href="javascript:;" class="easyui-linkbutton" onclick="javascript: window.location.href = '/METERING_STANDARD_DEVICE/Index';">返回</a></div>
     </div>
             <script>
                 $(function () {
@@ -284,9 +284,6 @@
         var myArray2 = null;
         var myArray3 = null;
         var myArray4 = new Array()
-        //var METERING_STANDARD_DEVICE_CHECK = new Object();//计量标准装置检定/校准信息
-        //var ALLOWABLE_ERROR = new Object();//最大允许误差信息
-
         var obj = $("input[name='three']:checked");
         var id = obj.attr("id");
         switch (id) {
@@ -308,7 +305,6 @@
             case ("three_3"):
                 myArray3 = new Array()
                 $("#div3").find("ul").each(function () {
-                    debugger
                     var THEUNCERTAINTY = $(this).find("li :selected").eq(0).val();
                     var THEUNCERTAINTYVALUE = $(this).find("li :input").eq(1).val();
                     var THEUNCERTAINTYNDEXL = $(this).find("li :selected").eq(1).val();
@@ -321,7 +317,7 @@
         $("#div4").find("ul").each(function () {
             var CERTIFICATEUNIT = $(this).find("li :input").eq(0).val();
             var CERTIFICATE_NUM = $(this).find("li :input").eq(1).val();
-            var VALID_TO = $(this).find("li :input").eq(2).val();
+            var VALID_TO = $(this).find("li :input").eq(2).datebox('getValue');
             //校验时间格式是否正确
             if (CERTIFICATEUNIT != "" || CERTIFICATE_NUM != "" || VALID_TO != "")
                 myArray4.push({ CERTIFICATEUNIT: CERTIFICATEUNIT, CERTIFICATE_NUM: CERTIFICATE_NUM, VALID_TO: VALID_TO });

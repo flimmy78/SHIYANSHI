@@ -1,328 +1,455 @@
 ﻿@model Langben.DAL.PROJECTTEMPLET
-
 @{
-
-    Layout = "~/Views/Shared/Edit.cshtml"; 
-    ViewBag.title= " 频率输出 - 频率测量 - 相对误差（已做）";
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "频率输出 - 频率测量 - 相对误差";
 }
 @using Common
 @using Models
-
-<div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
-    <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
-        <table>
-            <tr>
-                <td>
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTongDao()" id="btnDuoTongDao" style="display:none">增加通道</a>
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnSave" onclick="Save()">保存检测项</a>
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnReset" onclick="Reset()">重置检测项</a>
-
-                    @*<a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnSave_ITE" onclick="Save_ITE()">保存检测项</a>*@
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnReset_ITE" onclick="Reset_ITE()">重置检测项</a>
-
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
-
-<input type="hidden" id="hideID" value="@ViewBag.ID" /><!--主键-->
-<input type="hidden" id="hideRULEID" value="@ViewBag.RULEID" /><!--检测项-->
-<input type="hidden" id="hideSCHEMEID" value="@ViewBag.SCHEMEID" /><!--方案编号-->
-<input type="hidden" id="hidePREPARE_SCHEMEID" value="@ViewBag.PREPARE_SCHEMEID" /><!--预备方案ID-->
-<input type="hidden" id="hideITEID" value="@ViewBag.ITEID" /><!--预备方案检测项ID-->
-
-@if (Model != null && Model.HTMLVALUE != null && Model.HTMLVALUE.Trim() != "")
-{
-    <input type="hidden" id="hideHTMLVALUE" value="@Model.HTMLVALUE" />
-}
-else
-{
-    <input type="hidden" id="hideHTMLVALUE" value="" />
-}
-<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;" id="divHtml">
-
-    <input type="hidden" id="rowindex" value="0" />
-    <div class="mt10" id="tongdao">
-        <div>
-            <input class="my-textbox tc" value="A" style="width:30px"> 相：<input class="my-textbox tc" value="57.7" style="width:60px"> <select class="my-combobox" name="" id="" >
+<thead>
+    <!--表头-->
+    <tr>
+        <td colspan="9">
+            <input class="my-textbox tc" value="A" style="width:30px" name="AXiang" id="AXiang_1_1_1">
+            相：
+            <input class="my-textbox tc" value="57.7" style="width:60px" name="HZXiang" id="HZXiang_1_1_1">
+            <select class="my-combobox" name="BianSongQiTongDao" id="BianSongQiTongDaoD_1_1_1">
                 <option value="Hz">Hz</option>
                 <option value="KHz">KHz</option>
                 <option value="MHz">MHz</option>
                 <option value="GHz">GHz</option>
 
             </select>
-        </div>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10"  id="tongdao_moban" style="display:none">
-            <thead>
-                <tr>
-                    <th rowspan="2" align="center" width="150">显示值</th>
-                    <th rowspan="2" align="center" width="150">标准值</th>
-
-                    <th rowspan="2" align="center" width="150">相对误差</th>
-                    <th align="center" width="150">校准结果的不确定度</th>
-                </tr>
-                <tr>
-                    <th align="center">
-                        U(K = <select class="my-combobox" name="K" id="K_1_1_1">
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="√3">√3</option>
 
 
-</select>)
-                    </th>
-                </tr>
-            </thead>
+        </td>
+    </tr>
 
-            <tbody id="tbody_1">
-                <tr rowindex="1">
-                    <td align="center">
-                        <input class="my-textbox input-width" value="45.000" onblur="JS(this)"><select class="my-combobox" name="" id="">
-                            <option value="Hz">Hz</option>
-                            <option value="KHz">KHz</option>
-                            <option value="MHz">MHz</option>
-                            <option value="GHz">GHz</option>
-                        </select>
-                    </td>
-                    <td align="center">
-                        <input class="my-textbox input-width" value="45.000" onblur="JS(this)"><select class="my-combobox" name="" id="">
-                            <option value="Hz">Hz</option>
-                            <option value="KHz">KHz</option>
-                            <option value="MHz">MHz</option>
-                            <option value="GHz">GHz</option>
-                        </select>
-                    </td>
-                    <td align="center"><input class="my-textbox " style="width:98%"></td>
-                    <td align="center"><input class="my-textbox " style="width:98%"></td>
-                </tr>
-                <tr rowindex="2">
-                    <td align="center">
-                        <input class="my-textbox input-width" value="50.000" onblur="JS(this)"><select class="my-combobox" name="" id="">
-                            <option value="Hz">Hz</option>
-                            <option value="KHz">KHz</option>
-                            <option value="MHz">MHz</option>
-                            <option value="GHz">GHz</option>
-                        </select>
-                    </td>
-                    <td align="center">
-                        <input class="my-textbox input-width" value="50.000" onblur="JS(this)"><select class="my-combobox" name="" id="">
-                            <option value="Hz">Hz</option>
-                            <option value="KHz">KHz</option>
-                            <option value="MHz">MHz</option>
-                            <option value="GHz">GHz</option>
-                        </select>
-                    </td>
-                    <td align="center"> <input class="my-textbox " style="width:98%"></td>
-                    <td align="center"><input class="my-textbox " style="width:98%"></td>
-                </tr>
-                <tr rowindex="3">
-                    <td align="center">
-                        <input class="my-textbox input-width" value="55.000" onblur="JS(this)"><select class="my-combobox" name="" id="">
-                            <option value="Hz">Hz</option>
-                            <option value="KHz">KHz</option>
-                            <option value="MHz">MHz</option>
-                            <option value="GHz">GHz</option>
-                        </select>
-                    </td>
-                    <td align="center">
-                        <input class="my-textbox input-width" value="55.000" onblur="JS(this)"><select class="my-combobox" name="" id="">
-                            <option value="Hz">Hz</option>
-                            <option value="KHz">KHz</option>
-                            <option value="MHz">MHz</option>
-                            <option value="GHz">GHz</option>
-                        </select>
-                    </td>
-                    <td align="center"><input class="my-textbox " style="width:98%"></td>
-                    <td align="center"><input class="my-textbox " style="width:98%"></td>
-                </tr>
-                <tr rowindex="4">
-                    <td align="center">
-                        <input class="my-textbox input-width" value="60.000" onblur="JS(this)"><select class="my-combobox" name="" id="">
-                            <option value="Hz">Hz</option>
-                            <option value="KHz">KHz</option>
-                            <option value="MHz">MHz</option>
-                            <option value="GHz">GHz</option>
-                        </select>
-                    </td>
-                    <td align="center">
-                        <input class="my-textbox input-width" value="60.000" onblur="JS(this)"><select class="my-combobox" name="" id="">
-                            <option value="Hz">Hz</option>
-                            <option value="KHz">KHz</option>
-                            <option value="MHz">MHz</option>
-                            <option value="GHz">GHz</option>
-                        </select>
-                    </td>
-                    <td align="center"><input class="my-textbox " style="width:98%"></td>
-                    <td align="center"><input class="my-textbox " style="width:98%"></td>
-                </tr>
-                <tr rowindex="5">
-                    <td align="center">
-                        <input class="my-textbox input-width" value="65.000" onblur="JS(this)"><select class="my-combobox" name="" id="">
-                            <option value="Hz">Hz</option>
-                            <option value="KHz">KHz</option>
-                            <option value="MHz">MHz</option>
-                            <option value="GHz">GHz</option>
-                        </select>
-                    </td>
-                    <td align="center">
-                        <input class="my-textbox input-width" value="65.000" onblur="JS(this)"><select class="my-combobox" name="" id="">
-                            <option value="Hz">Hz</option>
-                            <option value="KHz">KHz</option>
-                            <option value="MHz">MHz</option>
-                            <option value="GHz">GHz</option>
-                        </select>
-                    </td>
-                    <td align="center"><input class="my-textbox " style="width:98%"></td>
-                    <td align="center"><input class="my-textbox " style="width:98%"></td>
-                </tr>
-            </tbody>
+    <tr>
+        <th rowspan="2" align="center" width="150">显示值</th>
+        <th rowspan="2" align="center" width="150">标准值</th>
 
-            <tfoot>
-                <tr>
-                    <td colspan="4">
-                        <input type="hidden" id="hideLiangChengShuLiang" value="0" />
-                        <a href="javascript:void(0)" class="easyui-linkbutton"   data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
+        <th rowspan="2" align="center" width="150">相对误差%</th>
+        <th align="center">
+            校准结果的不确定度
+        </th>
 
-    <div class="mt10">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
+    </tr>
+    <tr>
+        <th align="center">
+            U(K = <select class="my-combobox" name="K" id="K_1_1_1">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="√3">√3</option>
+            </select>)
+        </th>
+    </tr>
+</thead>
 
-            <tr>
-                <th width="40">注：</th>
-                <td colspan="6">
-                    <input type="text" class="easyui-textbox " name="REMARK" data-options="multiline:true" style="height:30px; width:95%" id="REMARK">
-                </td>
-            </tr>
-            <tr>
-                <th width="40">结论：</th>
-                <td colspan="6">
-                    <input type="text" class="easyui-textbox " name="CONCLUSION" data-options="multiline:true" style="height:30px; width:95%" id="CONCLUSION">
-                </td>
-            </tr>
+<tbody id="tbody_moban">
+    <!--插入行的位置-->
+    @if (ViewBag.canshu == "频率输出")
+    {
+        <tr rowindex="1">
+            <td width="150" align="right">
+                <input id="OUTPUTVALUE_1_1_1" name="OUTPUTVALUE" class="my-textbox input-width" value="45.000" onblur="blurXianShiZhi(this)">
+                <select class="my-combobox" id="OUTPUTVALUE_UNIT_1_1_1" name="OUTPUTVALUE_UNIT">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td width="150" align="right">
+                <input id="READVALUE_1_1_1" name="READVALUE" class="my-textbox input-width" value="" onblur="blurBiaoZhunZhi(this)">
+                <select id="READVALUE_UNIT_1_1_1" name="READVALUE_UNIT" class="my-combobox">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td width="150" align="right"><input id="ACTUALVALUE_1_1_1" name="ACTUALVALUE" class="my-textbox "></td>
+            <td align="right"><input id="SHIJISHUCHUZHI_1_1_1" name="SHIJISHUCHUZHI" class="my-textbox "></td>
+        </tr>
 
-        </table>
-    </div>
-    <input type="hidden" id="hideDangQianTongDao" value="0" />
-    <input type="hidden" id="hideTongDaoShuLiang" value="0" />
-    <input type="hidden" id="txtPoint" value="1" />
-    <input type="hidden" id="txtNumber" value="1" />
-</div>
-
- 
-<script src="/Scripts/JScript-JianCeXiang-Common.js"></script>
-
-<script src="~/Scripts/jianCeXiang.js"></script>
-<script type="text/javascript" language="javascript">
-    //设置当前操作通道
-    function set(tbodyIndex) {
-     
-        CreateRow();
-        $("#hideDangQianTongDao").val(tbodyIndex);
-
+        <tr rowindex="2">
+            <td align="right">
+                <input id="OUTPUTVALUE_1_1_2" name="OUTPUTVALUE" class="my-textbox input-width" value="50.000" onblur="blurXianShiZhi(this)">
+                <select class="my-combobox" id="OUTPUTVALUE_UNIT_1_1_2" name="OUTPUTVALUE_UNIT">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td align="right">
+                <input id="READVALUE_1_1_2" name="READVALUE" class="my-textbox input-width" value="" onblur="blurBiaoZhunZhi(this)">
+                <select id="READVALUE_UNIT_1_1_2" name="READVALUE_UNIT" class="my-combobox">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td align="right"><input id="ACTUALVALUE_1_1_2" name="ACTUALVALUE" class="my-textbox "></td>
+            <td align="right"><input id="SHIJISHUCHUZHI_1_1_2" name="SHIJISHUCHUZHI" class="my-textbox "></td>
+        </tr>
+        <tr rowindex="3">
+            <td align="right">
+                <input id="OUTPUTVALUE_1_1_3" name="OUTPUTVALUE" class="my-textbox input-width" value="55.000" onblur="blurXianShiZhi(this)">
+                <select class="my-combobox" id="OUTPUTVALUE_UNIT_1_1_3" name="OUTPUTVALUE_UNIT">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td align="right">
+                <input id="READVALUE_1_1_3" name="READVALUE" class="my-textbox input-width" value="" onblur="blurBiaoZhunZhi(this)">
+                <select id="READVALUE_UNIT_1_1_3" name="READVALUE_UNIT" class="my-combobox">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td align="right"><input id="ACTUALVALUE_1_1_3" name="ACTUALVALUE" class="my-textbox "></td>
+            <td align="right"><input id="SHIJISHUCHUZHI_1_1_3" name="SHIJISHUCHUZHI" class="my-textbox "></td>
+        </tr>
+        <tr rowindex="4">
+            <td align="right">
+                <input id="OUTPUTVALUE_1_1_4" name="OUTPUTVALUE" class="my-textbox input-width" value="60.000" onblur="blurXianShiZhi(this)">
+                <select class="my-combobox" id="OUTPUTVALUE_UNIT_1_1_4" name="OUTPUTVALUE_UNIT">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td align="right">
+                <input id="READVALUE_1_1_4" name="READVALUE" class="my-textbox input-width" value="" onblur="blurBiaoZhunZhi(this)">
+                <select id="READVALUE_UNIT_1_1_4" name="READVALUE_UNIT" class="my-combobox">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td align="right"><input id="ACTUALVALUE_1_1_4" name="ACTUALVALUE" class="my-textbox "></td>
+            <td align="right"><input id="SHIJISHUCHUZHI_1_1_4" name="SHIJISHUCHUZHI" class="my-textbox "></td>
+        </tr>
+        <tr rowindex="5">
+            <td align="right">
+                <input id="OUTPUTVALUE_1_1_5" name="OUTPUTVALUE" class="my-textbox input-width" value="65.000" onblur="blurXianShiZhi(this)">
+                <select class="my-combobox" id="OUTPUTVALUE_UNIT_1_1_5" name="OUTPUTVALUE_UNIT">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td align="right">
+                <input id="READVALUE_1_1_5" name="READVALUE" class="my-textbox input-width" value="" onblur="blurBiaoZhunZhi(this)">
+                <select id="READVALUE_UNIT_1_1_5" name="READVALUE_UNIT" class="my-combobox">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td align="right"><input id="ACTUALVALUE_1_1_5" name="ACTUALVALUE" class="my-textbox "></td>
+            <td align="right"><input id="SHIJISHUCHUZHI_1_1_5" name="SHIJISHUCHUZHI" class="my-textbox "></td>
+        </tr>
     }
-    //增加量程
-    function CreateRow() {
-     
-        var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
-        var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
-        LiangChengShuLiang++;
-        var rowspanIdx = $("#txtPoint").val();     //检测点数
-        txtNumber = $("#txtNumber").val(); //量程
-        var standardValue = "";
-        var htmlString = [];
-        var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;
+    else
+    {
 
-        var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//（量程ID）第几个通道_第几个量程
-        for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
-            rowLength++;
-            htmlString.push("<tr rowindex='" + rowLength + "'>");
+        <tr rowindex="1">
+            <td width="150" align="right">
+                <input id="OUTPUTVALUE_1_1_1" name="OUTPUTVALUE" class="my-textbox input-width" value="45.000" onblur="blurXianShiZhi(this)">
+                <select class="my-combobox" id="OUTPUTVALUE_UNIT_1_1_1" name="OUTPUTVALUE_UNIT">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td width="150" align="right">
+                <input id="READVALUE_1_1_1" name="READVALUE" class="my-textbox input-width" value="" onblur="blurBiaoZhunZhi(this)">
+                <select id="READVALUE_UNIT_1_1_1" name="READVALUE_UNIT" class="my-combobox">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td width="150" align="right"><input id="ACTUALVALUE_1_1_1" name="ACTUALVALUE" class="my-textbox "></td>
+            <td align="right"><input id="SHIJISHUCHUZHI_1_1_1" name="SHIJISHUCHUZHI" class="my-textbox "></td>
+        </tr>
 
-            var rowspan;
-            var name;
-            var id;
-            var txtVal;
-            var ddlhtml;
-            var ddlVal;
-            var HangHaoID = lianChengID + "_" + rowidx;//（行号ID)量程ID_第几行
-            if (rowidx == 0) {
+        <tr rowindex="2">
+            <td align="right">
+                <input id="OUTPUTVALUE_1_1_2" name="OUTPUTVALUE" class="my-textbox input-width" value="" onblur="blurXianShiZhi(this)">
+                <select class="my-combobox" id="OUTPUTVALUE_UNIT_1_1_2" name="OUTPUTVALUE_UNIT">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td align="right">
+                <input id="READVALUE_1_1_2" name="READVALUE" class="my-textbox input-width" value="50.000" onblur="blurBiaoZhunZhi(this)">
+                <select id="READVALUE_UNIT_1_1_2" name="READVALUE_UNIT" class="my-combobox">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td align="right"><input id="ACTUALVALUE_1_1_2" name="ACTUALVALUE" class="my-textbox "></td>
+            <td align="right"><input id="SHIJISHUCHUZHI_1_1_2" name="SHIJISHUCHUZHI" class="my-textbox "></td>
+        </tr>
+        <tr rowindex="3">
+            <td align="right">
+                <input id="OUTPUTVALUE_1_1_3" name="OUTPUTVALUE" class="my-textbox input-width" value="" onblur="blurXianShiZhi(this)">
+                <select class="my-combobox" id="OUTPUTVALUE_UNIT_1_1_3" name="OUTPUTVALUE_UNIT">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td align="right">
+                <input id="READVALUE_1_1_3" name="READVALUE" class="my-textbox input-width" value="55.000" onblur="blurBiaoZhunZhi(this)">
+                <select id="READVALUE_UNIT_1_1_3" name="READVALUE_UNIT" class="my-combobox">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td align="right"><input id="ACTUALVALUE_1_1_3" name="ACTUALVALUE" class="my-textbox "></td>
+            <td align="right"><input id="SHIJISHUCHUZHI_1_1_3" name="SHIJISHUCHUZHI" class="my-textbox "></td>
+        </tr>
+        <tr rowindex="4">
+            <td align="right">
+                <input id="OUTPUTVALUE_1_1_4" name="OUTPUTVALUE" class="my-textbox input-width" value="" onblur="blurXianShiZhi(this)">
+                <select class="my-combobox" id="OUTPUTVALUE_UNIT_1_1_4" name="OUTPUTVALUE_UNIT">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td align="right">
+                <input id="READVALUE_1_1_4" name="READVALUE" class="my-textbox input-width" value="60.000" onblur="blurBiaoZhunZhi(this)">
+                <select id="READVALUE_UNIT_1_1_4" name="READVALUE_UNIT" class="my-combobox">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td align="right"><input id="ACTUALVALUE_1_1_4" name="ACTUALVALUE" class="my-textbox "></td>
+            <td align="right"><input id="SHIJISHUCHUZHI_1_1_4" name="SHIJISHUCHUZHI" class="my-textbox "></td>
+        </tr>
+        <tr rowindex="5">
+            <td align="right">
+                <input id="OUTPUTVALUE_1_1_5" name="OUTPUTVALUE" class="my-textbox input-width" value="" onblur="blurXianShiZhi(this)">
+                <select class="my-combobox" id="OUTPUTVALUE_UNIT_1_1_5" name="OUTPUTVALUE_UNIT">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td align="right">
+                <input id="READVALUE_1_1_5" name="READVALUE" class="my-textbox input-width" value="65.000" onblur="blurBiaoZhunZhi(this)">
+                <select id="READVALUE_UNIT_1_1_5" name="READVALUE_UNIT" class="my-combobox">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            </td>
+            <td align="right"><input id="ACTUALVALUE_1_1_5" name="ACTUALVALUE" class="my-textbox "></td>
+            <td align="right"><input id="SHIJISHUCHUZHI_1_1_5" name="SHIJISHUCHUZHI" class="my-textbox "></td>
+        </tr>
+    }
+</tbody>
+<tfoot>
+    <!--表尾-->
+    <tr>
+        <td colspan="7">
+            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
+            <input type="hidden" id="txtPointLen" value="2" />  <!--默认小数点个数-->
+        </td>
+    </tr>
+</tfoot>
+
+
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        function set(tbodyIndex) {
+
+            CreateRow();
+            // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
+            $("#hideDangQianTongDao").val(tbodyIndex);
+
+        }
+        //增加行
+        function CreateRow() {
+
+            var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+            var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
+            LiangChengShuLiang++;
+            var rowspanIdx = $("#txtPoint").val();     //检测点数
+            txtNumber = $("#txtNumber").val(); //小数点位数
+            var standardValue = "";
+            var htmlString = [];
+            var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
+
+            var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
+            for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
+                rowLength++;
+                htmlString.push("<tr rowindex='" + rowLength + "'>");
+
+                var rowspan = 1; //合并单元格行数
+
+                var txtVal = "";//(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
+
+
+                var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
+
+
+                if (rowidx == 0) {
+                    //需要合并的列
+                }
                 //需要合并的列
+                var changerHTML = "onblur=''";
+                //显示值 需要下拉框
+                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "", '', 'blurXianShiZhi'));
+                //标准值
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "", '', 'blurBiaoZhunZhi'));
+                //相对误差
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "", '', ''));
+                //校准结果的不确定度
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "", '', ''));
 
+                htmlString.push("</tr>");
+            }
+            htmlString = htmlString.join("");
+
+            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
+            $.parser.parse(tagRow);//渲染easyui组建
+            //$('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
+            $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+        }
+
+        //离开事件，用于计算 显示值
+        function blurXianShiZhi(obj) {
+            //注意多通道
+            //
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+
+            var newid = "READVALUE" + id;//改动的地方，参与计算的列的name值
+
+            var biaoZhunData = $(obj).parent().parent().find("#" + newid).val();
+            var showData = $(obj).val();
+            if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
+                var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
+                var data = fomatFloat(xiangDuiWuCha, txtPointLen)
+                $(obj).parent().parent().find("#ACTUALVALUE" + id).val(data);
             }
 
-            //输出示值
 
-            var changerHTML = "onblur=''";
-            //显示值
-            htmlString.push(SetTDHtml(1, "OUTPUT_VALUE", HangHaoID, rowidx, "","<select class='my-combobox' name='' id=''><option value='Hz'>Hz</option><option value='KHz'>KHz</option><option value='MHz'>MHz</option><option value='GHz'>GHz</option></select>"));
-            //标准值
-            htmlString.push(SetTDHtml(1, "READ_VALUE", HangHaoID, rowidx, "", "<select class='my-combobox' name='' id=''><option value='Hz'>Hz</option><option value='KHz'>KHz</option><option value='MHz'>MHz</option><option value='GHz'>GHz</option></select>"));
-            //相对误差
-            htmlString.push(SetTDHtml(1, "RELATIVE_ERROR", HangHaoID, rowidx, ""));
-            //校准结果的不确定度
-            htmlString.push(SetTDHtml(1, "UNCERTAINTY_DEGREE", HangHaoID, rowidx, ""));
-            htmlString.push("</tr>");
         }
-        htmlString = htmlString.join("");
-        //var tagRow = $("#tbody_" + tableIdx).append(htmlString);
+        //离开事件，用于计算 标准值
+        function blurBiaoZhunZhi(obj) {
+            //注意多通道
+            //
 
-        var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
-        $.parser.parse(tagRow);//渲染easyui组建
-       // $('#dlg').window('close');
-        $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang)
-    }
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
 
-    //离开事件，用于计算
-    function blurValue(obj) {
-        LianDongShiJiZhi(obj);
-    }
-    //联动标准值
-    //输出实际值计算：【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值；【选用电阻阻值】没有数值时，输出实际值=读数值
-    function LianDongShiJiZhi(obj) {
+            var newid = "OUTPUTVALUE" + id;//改动的地方，参与计算的列的name值
 
-        if (obj.name == "RESISTANCE" && obj.value.trim() != "")//选用电阻阻值变更
-        {
+            var showData = $(obj).parent().parent().find("#" + newid).val();
+            var biaoZhunData = $(obj).val();
+            if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
+                var txtPointLen = $("#txtPointLen").val(); //小数点位数
 
-            id = obj.id.replace(obj.name, "") + "_";
-            $("input[name=READ_VALUE]").each(function (a, b) {//读数值
-                if (b.id.indexOf(id) >= 0 && b.value.trim() != "") {
-                    var hhID = b.id.replace(b.name, "");//行号
-                    var shijizhiID = "#ACTUAL_OUTPUT_VALUE" + hhID;//输出实际值ID
-                    $(shijizhiID).val(CalculateShiJiZhi(obj.value.trim(), b.value.trim()));
-                }
-            });
+                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
+                var data = fomatFloat(xiangDuiWuCha, txtPointLen)
+                $(obj).parent().parent().find("#ACTUALVALUE" + id).val(data);
+            }
         }
-        else if (obj.name == "READ_VALUE")//读数值
-        {
-            var DZID = obj.id.replace(obj.name, "");
-            DZID = DZID.substr(0, DZID.lastIndexOf("_"));
-            var hhID = obj.id.replace(obj.name, "");//行号
-            var shijizhiID = "#ACTUAL_OUTPUT_VALUE" + hhID;//输出实际值ID
-            var DianZuID = "#RESISTANCE" + DZID;//电阻ID
-            $(shijizhiID).val(CalculateShiJiZhi($(DianZuID).val(), obj.value.trim()));
+
+        //离开事件，用于计算
+        function blurValue(obj) {
+
         }
-    }
-    //计算输出实际值
-    function CalculateShiJiZhi(DianZu, DuShuZhi) {
-        if (DianZu == "" || DuShuZhi == "") {//【选用电阻阻值】没有数值时，输出实际值=读数值
-            return DuShuZhi;
+        //联动标准值
+        //输出实际值计算：【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值；【选用电阻阻值】没有数值时，输出实际值=读数值
+        function LianDongShiJiZhi(obj) {
+
+            if (obj.name == "RESISTANCE" && obj.value.trim() != "")//选用电阻阻值变更
+            {
+
+                id = obj.id.replace(obj.name, "") + "_";
+                $("input[name=READVALUE]").each(function (a, b) {//读数值
+                    if (b.id.indexOf(id) >= 0 && b.value.trim() != "") {
+                        var hhID = b.id.replace(b.name, "");//行号
+                        var shijizhiID = "#ACTUALVALUE" + hhID;//输出实际值ID
+                        $(shijizhiID).val(CalculateShiJiZhi(obj.value.trim(), b.value.trim()));
+                    }
+                });
+            }
+            else if (obj.name == "READVALUE")//读数值
+            {
+                var DZID = obj.id.replace(obj.name, "");
+                DZID = DZID.substr(0, DZID.lastIndexOf("_"));
+                var hhID = obj.id.replace(obj.name, "");//行号
+                var shijizhiID = "#ACTUALVALUE" + hhID;//输出实际值ID
+                var DianZuID = "#RESISTANCE" + DZID;//电阻ID
+                $(shijizhiID).val(CalculateShiJiZhi($(DianZuID).val(), obj.value.trim()));
+            }
         }
-        else if (DianZu.trim() == "0") {
-            return "";
+        //计算输出实际值
+        function CalculateShiJiZhi(DianZu, DuShuZhi) {
+            if (DianZu == "" || DuShuZhi == "") {//【选用电阻阻值】没有数值时，输出实际值=读数值
+                return DuShuZhi;
+            }
+            else if (DianZu.trim() == "0") {
+                return "";
+            }
+            else//【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值
+            {
+                var value = parseFloat(DuShuZhi.trim()) / parseFloat(DianZu.trim());
+                return value;
+            }
         }
-        else//【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值
-        {
-            var value = parseFloat(DuShuZhi.trim()) / parseFloat(DianZu.trim());
-            return value;
-        }
-    }
 
 
-</script>
+    </script>
 
 
+}
+@section TanKuang {
+    <!--弹框的位置-->
+    <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
+    <input type="hidden" id="txtNumber" value="1" /><!--小数点位数-->
+
+}
 
 
