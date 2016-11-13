@@ -192,8 +192,7 @@ namespace Langben.App.Controllers
             }
             else
             {
-                string currentPerson = GetCurrentPerson();
-                IsSuccess = reportBll.ExportReport(ID, out Message,currentPerson);
+                IsSuccess = reportBll.ExportReport(ID, out Message);
             }
             if (IsSuccess)
             {

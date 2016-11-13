@@ -72,20 +72,9 @@ namespace Langben.App.Controllers
         public ActionResult Edit(string id)
         {
             ViewBag.Id = id;
-            METERING_STANDARD_DEVICE me= m_BLL.GetById(id);
-            return View(me);
+            return View();
         }
-        IBLL.IMETERING_STANDARD_DEVICEBLL m_BLL;
-
-        ValidationErrors validationErrors = new ValidationErrors();
-
-        public METERING_STANDARD_DEVICEController()
-            : this(new METERING_STANDARD_DEVICEBLL()) { }
-
-        public METERING_STANDARD_DEVICEController(METERING_STANDARD_DEVICEBLL bll)
-        {
-            m_BLL = bll;
-        }
+     
     }
 }
 
