@@ -338,6 +338,7 @@ textarea {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#F2F2F2,GradientType=0); font-weight:normal}
 .tbl th, .tbl td{border:1px dotted #ccc; padding:3px;height:25px}
 .input-width{width:80px; text-align:right}
+.tbl .subtbl{border-collapse:collapse; border:none}
 .tips{ display:inline-block; vertical-align: bottom; width:16px; height:16px; }
 .my-textbox, .my-combobox{border:1px solid #D4D4D4; height:22px}
 .my-combobox{ height:26px}

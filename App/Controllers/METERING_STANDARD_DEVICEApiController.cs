@@ -34,18 +34,28 @@ namespace Langben.App.Controllers
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID
-					,NAME = s.NAME
-					,TEST_RANGE = s.TEST_RANGE
-					,FACTORY_NUM = s.FACTORY_NUM
-					,CATEGORY = s.CATEGORY
-					,STATUS = s.STATUS
-					,UNDERTAKE_LABORATORYID =   s.UNDERTAKE_LABORATORYIDOld
-					,CREATETIME = s.CREATETIME
-					,CREATEPERSON = s.CREATEPERSON
-					,UPDATETIME = s.UPDATETIME
-					,UPDATEPERSON = s.UPDATEPERSON
-					
-
+                    ,
+                    NAME = s.NAME
+                    ,
+                    TEST_RANGE = s.TEST_RANGE
+                    ,
+                    FACTORY_NUM = s.FACTORY_NUM
+                    ,
+                    XINGHAO = s.XINGHAO
+                    ,
+                    CATEGORY = s.CATEGORY
+                    ,
+                    STATUS = s.STATUS
+                    ,
+                    UNDERTAKE_LABORATORYID = s.UNDERTAKE_LABORATORYIDOld
+                    ,
+                    CREATETIME = s.CREATETIME
+                    ,
+                    CREATEPERSON = s.CREATEPERSON
+                    ,
+                    UPDATETIME = s.UPDATETIME
+                    ,
+                    UPDATEPERSON = s.UPDATEPERSON
                 })
             };
             return data;
@@ -61,26 +71,26 @@ namespace Langben.App.Controllers
             METERING_STANDARD_DEVICE item = m_BLL.GetById(id);
             return item;
         }
- 
+
         /// <summary>
         /// 创建
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
         public Common.ClientResult.Result Post([FromBody]METERING_STANDARD_DEVICE entity)
-        {           
+        {
 
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
             {
                 string currentPerson = GetCurrentPerson();
-               entity.CREATETIME = DateTime.Now;
+                entity.CREATETIME = DateTime.Now;
                 entity.CREATEPERSON = currentPerson;
-              
+
                 entity.ID = Result.GetNewId();
                 foreach (var item in entity.ALLOWABLE_ERROR)
                 {
-                    item.ID= Result.GetNewId();
+                    item.ID = Result.GetNewId();
                     item.CREATETIME = DateTime.Now;
                     item.CREATEPERSON = currentPerson;
                 }
@@ -91,16 +101,16 @@ namespace Langben.App.Controllers
                     item.CREATEPERSON = currentPerson;
                 }
                 string returnValue = string.Empty;
-                if (m_BLL.Create(ref validationErrors, entity))
+                if (m_BLL.CreateX(ref validationErrors, entity))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed  + "，标准装置/计量标准器信息的信息的Id为" + entity.ID,"标准装置/计量标准器信息"
+                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，标准装置/计量标准器信息的信息的Id为" + entity.ID, "标准装置/计量标准器信息"
                         );//写入日志 
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.InsertSucceed;
                     return result; //提示创建成功
                 }
                 else
-                { 
+                {
                     if (validationErrors != null && validationErrors.Count > 0)
                     {
                         validationErrors.All(a =>
@@ -109,7 +119,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，标准装置/计量标准器信息的信息，" + returnValue,"标准装置/计量标准器信息"
+                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，标准装置/计量标准器信息的信息，" + returnValue, "标准装置/计量标准器信息"
                         );//写入日志                      
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.InsertFail + returnValue;
@@ -141,7 +151,7 @@ namespace Langben.App.Controllers
                 string returnValue = string.Empty;
                 if (m_BLL.Edit(ref validationErrors, entity))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，标准装置/计量标准器信息信息的Id为" + entity.ID,"标准装置/计量标准器信息"
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，标准装置/计量标准器信息信息的Id为" + entity.ID, "标准装置/计量标准器信息"
                         );//写入日志                   
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.UpdateSucceed;
@@ -200,7 +210,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId)+ "," + returnValue, "消息"
+                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId) + "," + returnValue, "消息"
                         );//删除失败，写入日志
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.DeleteFail + returnValue;
@@ -220,7 +230,7 @@ namespace Langben.App.Controllers
         {
             m_BLL = bll;
         }
-        
+
     }
 }
 

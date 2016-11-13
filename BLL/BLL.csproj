@@ -93,6 +93,7 @@
     <Compile Include="Shiyanshi\APPLIANCE_LABORATORYBLL.cs" />
     <Compile Include="Shiyanshi\COMPANYBLL.cs" />
     <Compile Include="Shiyanshi\FILE_UPLOADERBLL.cs" />
+    <Compile Include="Shiyanshi\METERING_STANDARD_DEVICEBLL.cs" />
     <Compile Include="Shiyanshi\ORDER_TASK_INFORMATIONBLL.cs" />
     <Compile Include="Shiyanshi\PREPARE_SCHEMEBLL.cs" />
     <Compile Include="Shiyanshi\PROJECTTEMPLETBLL.cs" />
