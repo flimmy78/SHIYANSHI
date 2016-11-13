@@ -26,7 +26,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    url = "../ Xml / TableTemplate.xml";
+                    url = "~/ Xml / TableTemplate.xml";
                 }
                 return Common.DirFile.ReadFile(url);
             }
@@ -45,7 +45,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    url = "../ Xml /TableTemplate_JianDing.xml";
+                    url = "~/ Xml /TableTemplate_JianDing.xml";
                 }
                 return Common.DirFile.ReadFile(url);
             }
@@ -64,7 +64,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    url= "../ Xml /TableTemplate_JiaoZhun.xml";
+                    url= "~/ Xml /TableTemplate_JiaoZhun.xml";
                 }
                 return Common.DirFile.ReadFile(url);
             }
@@ -83,7 +83,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    url = "../ Xml / SpecialCharacter.xml";
+                    url = "~/ Xml / SpecialCharacter.xml";
                 }
                 return Common.DirFile.ReadFile(url);
             }
@@ -102,7 +102,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    path = "../Template/原始记录-校准.xls";
+                    path = "~/Template/原始记录-校准.xls";
                 }               
                 path = System.Web.HttpContext.Current.Server.MapPath(path);
                 return path;
@@ -123,7 +123,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    path = "../Template/原始记录-检定.xls";
+                    path = "~/Template/原始记录-检定.xls";
                 }
                 path = System.Web.HttpContext.Current.Server.MapPath(path);
                 return path;
@@ -144,7 +144,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    path = "../Template/检定证书.xls";
+                    path = "~/Template/检定证书.xls";
                 }
                 path = System.Web.HttpContext.Current.Server.MapPath(path);
                 return path;
@@ -165,7 +165,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    path = "../Template/校准证书.xls";
+                    path = "~/Template/校准证书.xls";
                 }
                 path = System.Web.HttpContext.Current.Server.MapPath(path);
                 return path;
@@ -185,7 +185,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    path = "../Template/校准证书-CNAS.xls";
+                    path = "~/Template/校准证书-CNAS.xls";
                 }
                 path = System.Web.HttpContext.Current.Server.MapPath(path);
                 return path;

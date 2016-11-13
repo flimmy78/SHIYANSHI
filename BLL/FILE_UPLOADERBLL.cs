@@ -75,6 +75,38 @@ namespace Langben.BLL
             return queryData.ToList();
         }
         /// <summary>
+        /// 根据预备方案删除删除信息
+        /// </summary>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <param name="Person">操作人</param>
+        public void DeleteByPREPARE_SCHEMEID(string PREPARE_SCHEMEID,string Person)
+        {
+            try
+            {
+                if (PREPARE_SCHEMEID != null && PREPARE_SCHEMEID.Trim() != "")
+                {
+                    string sb = string.Format("PREPARE_SCHEMEID{0}&{1}^", "DDL_String", PREPARE_SCHEMEID);
+                    List<FILE_UPLOADER> list = repository.GetData(db, "desc", "CreateTime", sb.ToString()).ToList();
+                    if (list == null || list.Count > 0)
+                    {
+                        ValidationErrors validationErrors = null;
+                        foreach (FILE_UPLOADER item in list)
+                        {
+                            item.STATE = "已删除";
+                            item.UPDATEPERSON = Person;
+                            item.UPDATETIME = DateTime.Now;
+                            Edit(ref validationErrors, item);
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+
+        }
+        /// <summary>
         /// 查询的数据 /*在6.0版本中 新增*/
         /// </summary>
         /// <param name="id">额外的参数</param>
@@ -102,6 +134,7 @@ namespace Langben.BLL
         {
             try
             {
+                DeleteByPREPARE_SCHEMEID(entity.PREPARE_SCHEMEID,entity.CREATEPERSON);
                 repository.Create(entity);
                 return true;
             }
