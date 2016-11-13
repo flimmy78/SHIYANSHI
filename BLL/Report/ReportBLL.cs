@@ -1197,18 +1197,21 @@ namespace Langben.Report
         /// <param name="type">报告类型</param>
         private void SetZhuangZhi(IWorkbook hssfworkbook,ISheet sheet_Destination, ref int rowIndex_Destination,string PREPARE_SCHEMEID, ExportType type)
         {
+            int rowIndex_Source = 27;
             string sheetName_Source = "封皮模板";
             switch(type)
             {
                 case ExportType.OriginalRecord_JianDing:
                 case ExportType.OriginalRecord_XiaoZhun:
                     sheetName_Source = "封皮模板";
+                    rowIndex_Source = 27;
                     break;
                 case ExportType.Report_JianDing:
+                case ExportType.Report_XiaoZhun:
+                case ExportType.Report_XiaoZhun_CNAS:
                     sheetName_Source = "第二页模板";
+                    rowIndex_Source = 9;
                     break;
-
-
             }            
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
         }
