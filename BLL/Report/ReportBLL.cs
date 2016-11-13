@@ -125,7 +125,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    SetFengPi_BaoGaoXiaoZhun(hssfworkbook, entity);
+                    SetFengPi_BaoGaoXiaoZhun(hssfworkbook, entity,type);
                 }
                 //设置数据
                
@@ -246,9 +246,9 @@ namespace Langben.Report
         /// </summary>
         /// <param name="hssfworkbook"></param>
         /// <param name="entity"></param>
-        private void SetFengPi_BaoGaoXiaoZhun(IWorkbook hssfworkbook, PREPARE_SCHEME entity)
+        private void SetFengPi_BaoGaoXiaoZhun(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type)
         {
-            if (entity.CNAS == ShiFouCNAS.Yes.ToString())
+            if (type == ExportType.Report_XiaoZhun_CNAS)
             {
                 return ;//待修改成Word
             }
@@ -633,7 +633,7 @@ namespace Langben.Report
             else
             {
                 HideRow(sheet_Destination, 7, 2);
-                RowIndex = 10;
+                RowIndex = 9;
             }
             #endregion
             #region 暂时没有数据，不做
@@ -1217,10 +1217,16 @@ namespace Langben.Report
             int RowIndex = 1;
             int JWTemplateIndex = 0;//规程标题获取源格式行   
             int ruleTitleTemplateIndex = 1;//检测项目名称
+            int xiaozhunjijeguoTemplateIndex = 2;//报告校准中的校准结果，存到报告第二行
             string sheetName_Source = "数据模板";            
             string sheetName_Destination = "数据";
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
-            ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);            
+            ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination); 
+            if(type== ExportType.Report_XiaoZhun || type== ExportType.Report_XiaoZhun_CNAS)
+            {
+                CopyRow(sheet_Source, sheet_Destination, xiaozhunjijeguoTemplateIndex, RowIndex, 1, true);
+                RowIndex++;
+            }           
             #region 检测项目            
             if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE != null &&
                 entity.QUALIFIED_UNQUALIFIED_TEST_ITE.Count > 0)
@@ -2303,6 +2309,29 @@ namespace Langben.Report
 
             return rowIndex_Destination;
         }
+        private int MergedRowCount(NodeList nodeList, ITag currentTag, ref Dictionary<string, int> MergedRowInfo)
+        {
+            //Dictionary<int,Dictionary<int,string>>           
+            List<string> IdList = new List<string>();
+            object Id = null;
+            object Name = null;
+            string Ids = "";
+            for (int i = 0; i < nodeList.Count; i++)
+            {
+                INode node = nodeList[i];
+                ITag tag = getTag(node);
+                Id = tag.GetAttribute("ID");
+                Name = tag.GetAttribute("name");
+                if (Id != null && Id.ToString().Trim() != "" && Name != null && Name.ToString().Trim() != "")
+                {
+                    //Ids = Id.ToString().Trim().Replace(Name.ToString().Trim(), "");
+                    //if()
+                    //IdList.Add(Ids);
+
+                }
+            }
+            return 0;
+        }
         /// <summary>
         /// 获取表头信息
         /// </summary>
@@ -2347,12 +2376,12 @@ namespace Langben.Report
         //                for (int j=0;j< headerList.Count;j++)
         //                {
         //                   INode header = headerList[j];
-                                
+
         //                    bool IsEnd = false;
         //                    var headerValue = GetHearderValue(header, out IsEnd);
         //                    IsEnd = false;
         //                    var IsExist = IsExistInputOrSelect(header, out IsEnd);
-                            
+
         //                    if ((headerValue != null && headerValue.Trim()!="") || IsExist)
         //                    {
         //                        hList.Add(headerValue);
