@@ -482,32 +482,14 @@ function SetAllControlHtml() {
 function JS1(thi) {
 }
 
-function fomatFloat(str, pos) {
-    var str, resultSymbol = "";
-    if (str < 0) {
-        resultSymbol = "-";
-    }
-    str = str.toString().replace("-", "");
-    var r = /^([0-9]+\.[0-9]{1}[0|2|4|6|8])5$/g;
-    var r1 = /^([0-9]+\.[0-9]{1}[1|3|5|7|9])5$/g;
-    var r2 = /^([0-9]+\.[0-9]{2})5[0]?[1-9]*/g;
-    if (r.test(str)) {
-        str = str.replace(r, "$1");
-    } else if (r1.test(str)) {
-        str = str.replace(r1, "$16");
-    } else if (r2.test(str)) {
-        str = str.replace(r2, "$16");
-    }
-    str = parseFloat(str).toFixed(pos);
-    return resultSymbol + str;
-}
+
 function PointFloat(src, pos) {
 
     return Math.round(src * Math.pow(10, pos)) / Math.pow(10, pos);
 }
 //保留小数位数 四舍六入奇进偶舍
-function fomatFloatdaaaaaa(src, pos) {
-    
+function fomatFloat(src, pos) {
+
     var numArray, resultSymbol = "";
     if (src < 0) {
         resultSymbol = "-";
@@ -545,7 +527,6 @@ function fomatFloatdaaaaaa(src, pos) {
                     //5后面有有效数字，直接向前进一位
                     if (isCarry) {
                         numArray[1] = parseFloat(newpoint) + parseFloat(Math.pow(0.1, pos));
-
                         return f.PointFloat(resultSymbol + eval(numArray.join("+")), pos);
                     }
                     if (pos == 0) {
