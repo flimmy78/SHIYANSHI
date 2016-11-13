@@ -1187,6 +1187,32 @@ namespace Langben.Report
             SetHeaderAndFooter(sheet_Destination, entity);
             sheet_Destination.ForceFormulaRecalculation = true;
         }
+        /// <summary>
+        /// 设置标准装置/计量标准器信息
+        /// </summary>
+        /// <param name="sheet_Source">源sheet</param>
+        /// <param name="sheet_Destination">目标sheet</param>
+        /// <param name="rowIndex_Destination">目标行号</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <param name="type">报告类型</param>
+        private void SetZhuangZhi(IWorkbook hssfworkbook,ISheet sheet_Destination, ref int rowIndex_Destination,string PREPARE_SCHEMEID, ExportType type)
+        {
+            string sheetName_Source = "封皮模板";
+            switch(type)
+            {
+                case ExportType.OriginalRecord_JianDing:
+                case ExportType.OriginalRecord_XiaoZhun:
+                    sheetName_Source = "封皮模板";
+                    break;
+                case ExportType.Report_JianDing:
+                    sheetName_Source = "第二页模板";
+                    break;
+
+
+            }            
+            ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
+        }
+         
 
         /// <summary>
         /// 设置数据信息
