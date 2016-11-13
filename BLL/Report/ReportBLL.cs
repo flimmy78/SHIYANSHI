@@ -899,7 +899,7 @@ namespace Langben.Report
                 //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";                
                 string fileName = SetFileName(type);              
                 saveFileName = "../up/Report/" + fileName + ".xls";
-
+                
                 string saveFileNamePath = System.Web.HttpContext.Current.Server.MapPath(saveFileName);
                 using (FileStream fileWrite = new FileStream(saveFileNamePath, FileMode.Create))
                 {
@@ -1106,7 +1106,7 @@ namespace Langben.Report
             {
                 sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue("/");
             }
-            RowIndex = RowIndex + 2;
+            //RowIndex = RowIndex + 2;
             if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString())
             {
                 //校准说明   
@@ -1123,7 +1123,8 @@ namespace Langben.Report
             }
             else
             {
-                //检定结论   
+                //检定结论  
+                RowIndex = RowIndex + 2;
                 if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
                 {
                     sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue("/");
@@ -1293,7 +1294,7 @@ namespace Langben.Report
         /// <param name="DongTaiShuJuList">需要替换的动态数据</param>
         /// <param name="rowInfoList">需要替换的动态数据位置</param>
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
-        private void CopyRow(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, int insertCount, bool IsCopyContent = false, List<string> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, SpecialCharacters allSpecialCharacters = null)
+        private void CopyRow(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, int insertCount, bool IsCopyContent = false, Dictionary<string,string> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, SpecialCharacters allSpecialCharacters = null)
         {
             IRow row_Source = sheet_Source.GetRow(rowIndex_Source);
             int sourceCellCount = row_Source.Cells.Count;
@@ -1319,6 +1320,11 @@ namespace Langben.Report
                 for (int m = row_Source.FirstCellNum; m < row_Source.LastCellNum; m++)
                 {
                     sourceCell = row_Source.GetCell(m);
+                    row_Source.Cells[m].SetCellType(CellType.String);
+                    if (m + 1 != row_Source.LastCellNum)
+                    {
+                        row_Source.Cells[m+1].SetCellType(CellType.String);
+                    }
                     if (sourceCell == null)
                         continue;
                     targetCell = targetRow.CreateCell(m);
@@ -1332,7 +1338,8 @@ namespace Langben.Report
                         {
                             startMergeCell = m;
                         }
-                        if (m + 1 == sourceCellCount || sourceCell.CellStyle.BorderRight != BorderStyle.None || row_Source.Cells[m + 1].StringCellValue != "")
+                        
+                        if (m + 1 == sourceCellCount || sourceCell.CellStyle.BorderRight != BorderStyle.None || row_Source.Cells[m + 1].StringCellValue != "" || row_Source.Cells[m+1].IsMergedCell==false)
                         {
                             endMergeCell = m;
                         }
@@ -1351,21 +1358,21 @@ namespace Langben.Report
                     }
                     else
                     {
-                        if (startMergeCell >= 0)
-                        {
-                            sheet_Destination.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, m - 1));
-                            if (IsCopyContent)
-                            {
-                                //string value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell]);
-                                //targetRow.Cells[startMergeCell].SetCellValue(value);
-                                HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell], targetRow.Cells[startMergeCell], allSpecialCharacters);
-                                targetRow.Cells[startMergeCell].SetCellValue(value);
+                        //if (startMergeCell >= 0)
+                        //{
+                        //    sheet_Destination.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, m - 1));
+                        //    if (IsCopyContent)
+                        //    {
+                        //        //string value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell]);
+                        //        //targetRow.Cells[startMergeCell].SetCellValue(value);
+                        //        HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell], targetRow.Cells[startMergeCell], allSpecialCharacters);
+                        //        targetRow.Cells[startMergeCell].SetCellValue(value);
 
-                            }
-                            startMergeCell = -1;
-                        }
-                        else
-                        {
+                        //    }
+                        //    startMergeCell = -1;
+                        //}
+                        //else
+                        //{
                             if (IsCopyContent)
                             {
                                 //string value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m]);
@@ -1373,8 +1380,9 @@ namespace Langben.Report
                                 HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
                                 targetRow.Cells[m].SetCellValue(value);
 
-                                }
-                        }
+                            }
+                            startMergeCell = -1;
+                        //}
                     }
                 }
             }
@@ -1388,8 +1396,9 @@ namespace Langben.Report
         /// <param name="targetCell">目标单元格</param>
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <returns></returns>
-        private HSSFRichTextString GetDongTaiShuJu(List<string> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, ICell sourceCell = null, ICell targetCell = null, SpecialCharacters allSpecialCharacters = null)
+        private HSSFRichTextString GetDongTaiShuJu(Dictionary<string,string> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, ICell sourceCell = null, ICell targetCell = null, SpecialCharacters allSpecialCharacters = null)
         {
+            
             HSSFWorkbook workbook = null;
             if (targetCell != null && targetCell.Sheet != null && targetCell.Sheet.Workbook != null)
             {
@@ -1408,21 +1417,46 @@ namespace Langben.Report
             {
                 return new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
             }
+            string key = "";
             if (rowInfoList.FirstOrDefault(p => p.RowIndex == sourceCell.RowIndex && p.CellIndexs != null && p.CellIndexs.Trim() != "") != null)
             {
-                RowInfo r = rowInfoList.FirstOrDefault(p => p.RowIndex == sourceCell.RowIndex && p.CellIndexs != null && p.CellIndexs.Trim() != "");
+                //RowInfo r = rowInfoList.FirstOrDefault(p => p.RowIndex == sourceCell.RowIndex && p.CellIndexs != null && p.CellIndexs.Trim() != "");
+                RowInfo r = rowInfoList.FirstOrDefault(p => p.RowIndex == sourceCell.RowIndex && p.Cells != null && p.Cells.Count > 0);
+                if(r!=null)
+                {
+                    Cell c = r.Cells.FirstOrDefault(p => p.ColIndex == sourceCell.ColumnIndex);
+                    if(c!=null && DongTaiShuJuList.ContainsKey(c.Code))
+                    {
+                        key = c.Code;
+                    }
+                }
+                
+
                 if (r.CellIndexList.Count(p => p == sourceCell.ColumnIndex) > 0)
                 {
                     int speStartIndex = sourceCell.StringCellValue.IndexOf("{0}");//动态字符位置
-                    string value = string.Format(sourceCell.StringCellValue, DongTaiShuJuList[0]).Trim();
-                    result = new HSSFRichTextString(value);
-                    if (DongTaiShuJuList[0] != null && speStartIndex>=0)
+                    string value = "";
+                    if (key != null && key.Trim() != "")
                     {
-                        if (workbook != null && DongTaiShuJuList[0].Trim() != "" && allSpecialCharacters != null && allSpecialCharacters.SpecialCharacterList != null &&
+                        value = string.Format(sourceCell.StringCellValue, DongTaiShuJuList[key]).Trim();
+                    }
+                    else
+                    {
+                        value = string.Format(sourceCell.StringCellValue, "").Trim();
+                    }
+
+                    result = new HSSFRichTextString(value);
+                    //if (DongTaiShuJuList!= null && DongTaiShuJuList.Count>0 && speStartIndex>=0)
+                    //{
+                    if(key!=null && key.Trim()!="" && speStartIndex>=0)
+                    { 
+                        //string key = DongTaiShuJuList.Keys.FirstOrDefault();
+
+                        if (workbook != null && DongTaiShuJuList[key].Trim() != "" && allSpecialCharacters != null && allSpecialCharacters.SpecialCharacterList != null &&
                             allSpecialCharacters.SpecialCharacterList.Count > 0 &&
-                            allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == DongTaiShuJuList[0].Trim().ToUpper()) != null)
+                            allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == DongTaiShuJuList[key].Trim().ToUpper()) != null)
                         {
-                            SpecialCharacter spec = allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == DongTaiShuJuList[0].Trim().ToUpper());
+                            SpecialCharacter spec = allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == DongTaiShuJuList[key].Trim().ToUpper());
                             #region 将字符设置成斜体
                            
                             HSSFFont normalFont = (HSSFFont)workbook.CreateFont();                            
@@ -1470,7 +1504,7 @@ namespace Langben.Report
                             #endregion 
 
                         }
-                        DongTaiShuJuList.RemoveAt(0);
+                        DongTaiShuJuList.Remove(key);                       
                         return result;                     
                     }
                 }
@@ -1769,7 +1803,7 @@ namespace Langben.Report
         /// <param name="node">节点</param>
         /// <param name="IsEnd">是否结束</param>
         /// <returns></returns>
-        private string GetHearderValue(INode node, out bool IsEnd)
+        private string GetHearderValue(INode node, out bool IsEnd,ref int count,ref string firstValue)
         {
             IsEnd = false;
             string value = "";
@@ -1782,6 +1816,11 @@ namespace Langben.Report
                     value = tag.GetAttribute("VALUE");
                     return value;
                 }
+                if(count==-1 && tag.GetAttribute("$<TAGNAME>$") == "option")
+                {
+                    firstValue= tag.GetAttribute("VALUE");
+                    count++;
+                }
                 //子节点  
                 if (tag.Children != null && tag.Children.Count > 0 && IsEnd == false)
                 {
@@ -1789,7 +1828,7 @@ namespace Langben.Report
                     {
                         if (IsEnd == false)
                         {
-                            value = GetHearderValue(tag.Children[j], out IsEnd);
+                            value = GetHearderValue(tag.Children[j], out IsEnd,ref count,ref firstValue);
                         }
                     }
                 }
@@ -1799,7 +1838,7 @@ namespace Langben.Report
                     INode siblingNode = tag.NextSibling;
                     while (siblingNode != null)
                     {
-                        value = GetHearderValue(siblingNode, out IsEnd);
+                        value = GetHearderValue(siblingNode, out IsEnd, ref count, ref firstValue);
                         siblingNode = siblingNode.NextSibling;
                     }
                 }
@@ -1869,14 +1908,16 @@ namespace Langben.Report
             NodeFilter filter_Input = new TagNameFilter("input");
             NodeFilter filter_Option = new TagNameFilter("OPTION");
             NodeList nodeList_Input = parser_Input.Parse(filter_Input);
-            NodeList nodeList_Option = parser_Option.Parse(filter_Option);
+            NodeList nodeList_Option = parser_Option.Parse(filter_Option);      
 
             Lexer lexer_Thead = new Lexer(html);
             Parser parser_Thead = new Parser(lexer_Thead);
             NodeFilter filter_Thead = new TagNameFilter("thead");
             NodeList nodeList_Thead = parser_Thead.Parse(filter_Thead);
+
             //表头
-            Dictionary<int, List<string>> TableTitleDic = null;
+            //Dictionary<int, List<string>> TableTitleDic = null;
+            Dictionary<int, Dictionary<string, string>> TableTitleDic = null;
             Dictionary<int, NodeList> InputDic = null;
             Dictionary<int, NodeList> OptionDic = null;
             //二级标题
@@ -1900,6 +1941,141 @@ namespace Langben.Report
             return rowIndex;
 
         }
+
+        
+        /// <summary>
+        /// 获取某节点下的数据
+        /// </summary>
+        /// <param name="node">节点</param>       
+        /// <param name="DataDic">返回数据</param>
+        private void GetAllData(INode node,int TongDaoID, ref Dictionary<int, Dictionary<string,string>> DataDic)
+        {
+            //ITag tag = getTag(node);
+            ////if (tag != null && tag.GetAttribute("$<TAGNAME>$")=="input")
+            ////if (tag != null && tag.GetAttribute("ID")!=null && tag.GetAttribute("name")!=null && ((tag.GetAttribute("$<TAGNAME>$") == "option" && tag.GetAttribute("SELECTED") == "selected") || tag.GetAttribute("$<TAGNAME>$") == "input"))
+            ////{             
+
+            //if (TongDaoID <1)
+            //{
+            //    TongDaoID = GetTongDaoID(node);
+            //}
+            ////    string Name = tag.GetAttribute("name");
+            ////    bool IsEnd = false;
+            ////    var value = GetHearderValue(node, out IsEnd);
+            ////   // IsEnd = false;
+            ////   // var IsExist = IsExistInputOrSelect(node, out IsEnd);
+
+            ////    //if ((value != null && value.Trim() != "") || IsExist)
+            ////    if ((value != null && value.Trim() != ""))
+            ////        {
+            ////        if (DataDic == null)
+            ////        {
+            ////            DataDic = new Dictionary<int, Dictionary<string,string>>();
+            ////        }
+            ////        if (!DataDic.ContainsKey(ID))
+            ////        {
+            ////            DataDic.Add(ID, new Dictionary<string, string>());
+
+            ////        }
+            ////        if(!DataDic[ID].ContainsKey(Name))
+            ////        {
+            ////            DataDic[ID].Add(Name, value); ;
+            ////        }
+
+            ////    }
+            ////}
+            //if (tag != null  && (tag.GetAttribute("$<TAGNAME>$") == "select"  || tag.GetAttribute("$<TAGNAME>$") == "input"))
+            //{
+            //    //int ID = GetTongDaoID(node);
+            //    string Name = tag.GetAttribute("name");
+            //    string Value = "";
+
+            //    //输入框
+            //    if (tag.GetAttribute("ID") != null && tag.GetAttribute("name") != null && tag.GetAttribute("$<TAGNAME>$") == "input")
+            //    {
+            //        //ID = GetTongDaoID(node);                    
+            //        Value = tag.GetAttribute("value");                    
+            //    }
+            //    //下拉框
+            //    else if (tag.GetAttribute("$<TAGNAME>$") == "select")
+            //    {                   
+            //        bool IsEnd = false;                   
+            //        Value = GetHearderValue(node, out IsEnd);
+
+            //    }
+            //    if (DataDic == null)
+            //    {
+            //        DataDic = new Dictionary<int, Dictionary<string, string>>();
+            //    }
+            //    if (!DataDic.ContainsKey(TongDaoID))
+            //    {
+            //        DataDic.Add(TongDaoID, new Dictionary<string, string>());
+
+            //    }
+            //    if (!DataDic[TongDaoID].ContainsKey(Name))
+            //    {
+            //        DataDic[TongDaoID].Add(Name, Value); ;
+            //    }               
+
+            //}
+            ////子节点
+            //if (node.Children != null && node.Children.Count > 0 && tag.GetAttribute("$<TAGNAME>$") != "select")
+            //{
+            //    GetAllData(node.FirstChild, TongDaoID,ref DataDic);
+            //}
+            ////兄弟节点
+            //INode siblingNode = node.NextSibling;
+            //while (siblingNode != null)
+            //{
+            //    GetAllData(siblingNode, TongDaoID,ref DataDic);
+            //    siblingNode = siblingNode.NextSibling;
+            //}
+
+            ITag tag = getTag(node);            
+            if (TongDaoID < 1)
+            {
+                TongDaoID = GetTongDaoID(node);
+            }            
+            if (tag != null && tag.GetAttribute("name")!=null && (tag.GetAttribute("$<TAGNAME>$") == "select" || tag.GetAttribute("$<TAGNAME>$") == "input"))
+            {
+                
+                string Name = tag.GetAttribute("name");
+                string Value = "";
+
+                //输入框
+                if (tag.GetAttribute("ID") != null && tag.GetAttribute("name") != null && tag.GetAttribute("$<TAGNAME>$") == "input")
+                {                                       
+                    Value = tag.GetAttribute("value");
+                }
+                //下拉框
+                else if (tag.GetAttribute("$<TAGNAME>$") == "select")
+                {
+                    bool IsEnd = false;
+                    int count = -1;
+                    string firstValue = "";
+                    Value = GetHearderValue(node, out IsEnd,ref count,ref firstValue);
+                    if(Value==null || Value.Trim()=="")
+                    {
+                        Value = firstValue;
+                    }
+
+                }
+                if (DataDic == null)
+                {
+                    DataDic = new Dictionary<int, Dictionary<string, string>>();
+                }
+                if (!DataDic.ContainsKey(TongDaoID))
+                {
+                    DataDic.Add(TongDaoID, new Dictionary<string, string>());
+
+                }
+                if (!DataDic[TongDaoID].ContainsKey(Name))
+                {
+                    DataDic[TongDaoID].Add(Name, Value); ;
+                }
+            }           
+        }
+
         /// <summary>
         /// 设置表格
         /// </summary>
@@ -1914,7 +2090,7 @@ namespace Langben.Report
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <returns></returns>
         private int paserData(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination,
-            TableTemplate temp, Dictionary<int, List<string>> TableTitleDic,
+            TableTemplate temp, Dictionary<int, Dictionary<string,string>> TableTitleDic,
             Dictionary<int, NodeList> InputDic, Dictionary<int, NodeList> OptionDic, Dictionary<int, List<string>> SecondTitleDic, SpecialCharacters allSpecialCharacters=null)
         {
             int rowIndex = rowIndex_Destination;
@@ -2025,65 +2201,68 @@ namespace Langben.Report
                         #endregion
 
                         #region 输出下拉框内容
-                        NodeList nodeList_Option = OptionDic[key];
-                        for (int j = 0; j < nodeList_Option.Count; j++)
+                        if (OptionDic.ContainsKey(key))
                         {
-                            int MergedRowCount = 1;//合并行数
-                            ITag tag = getTag(nodeList_Option[j]);
-                            if (tag != null)
+                            NodeList nodeList_Option = OptionDic[key];
+                            for (int j = 0; j < nodeList_Option.Count; j++)
                             {
-                                ITag parentTag = getTag(tag.Parent.Parent);                               
-                                if (parentTag != null && parentTag.GetAttribute("$<TAGNAME>$") == "td" && parentTag.GetAttribute("ROWSPAN") != null)
+                                int MergedRowCount = 1;//合并行数
+                                ITag tag = getTag(nodeList_Option[j]);
+                                if (tag != null)
                                 {
-                                    MergedRowCount = Convert.ToInt32(parentTag.GetAttribute("ROWSPAN"));
-                                }
-                                else
-                                {
-                                    MergedRowCount = 1;
-                                }
-                            }
-
-                            if ((((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"] != null &&
-                       ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"].ToString() != "K"
-                       && tag.GetAttribute("SELECTED") == "selected"))
-                            {
-                                Id = ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["ID"];
-                                Name = ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"];
-                                Value = tag.GetAttribute("VALUE");
-                                if (Id != null && Id.ToString().Trim() != "" && Name != null && Name.ToString().Trim() != "")
-                                {
-                                    Id = Id.ToString().Trim().Replace(Name.ToString().Trim(), "");
-                                    if (!dic.ContainsKey(Id.ToString()) && dic.ContainsKey(Id.ToString() + "_0"))
+                                    ITag parentTag = getTag(tag.Parent.Parent);
+                                    if (parentTag != null && parentTag.GetAttribute("$<TAGNAME>$") == "td" && parentTag.GetAttribute("ROWSPAN") != null)
                                     {
-                                        Id = Id.ToString() + "_0";
+                                        MergedRowCount = Convert.ToInt32(parentTag.GetAttribute("ROWSPAN"));
                                     }
-                                    if (dic.ContainsKey(Id.ToString()))
+                                    else
                                     {
-                                        try
-                                        {
+                                        MergedRowCount = 1;
+                                    }
+                                }
 
-                                            if (temp.Cells != null && temp.Cells.Count > 0 && temp.Cells.FirstOrDefault(p => p.Code == Name.ToString().Trim()) != null)
+                                if ((((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"] != null &&
+                           ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"].ToString() != "K"
+                           && tag.GetAttribute("SELECTED") == "selected"))
+                                {
+                                    Id = ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["ID"];
+                                    Name = ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"];
+                                    Value = tag.GetAttribute("VALUE");
+                                    if (Id != null && Id.ToString().Trim() != "" && Name != null && Name.ToString().Trim() != "")
+                                    {
+                                        Id = Id.ToString().Trim().Replace(Name.ToString().Trim(), "");
+                                        if (!dic.ContainsKey(Id.ToString()) && dic.ContainsKey(Id.ToString() + "_0"))
+                                        {
+                                            Id = Id.ToString() + "_0";
+                                        }
+                                        if (dic.ContainsKey(Id.ToString()))
+                                        {
+                                            try
                                             {
 
-                                                Cell c = temp.Cells.FirstOrDefault(p => p.Code == Name.ToString().Trim());
-                                                int cellIndex = c.ColIndex;
-                                                int cellCount = c.ColCount;
-                                                if (MergedRowCount > 1)
+                                                if (temp.Cells != null && temp.Cells.Count > 0 && temp.Cells.FirstOrDefault(p => p.Code == Name.ToString().Trim()) != null)
                                                 {
-                                                    sheet_Destination.AddMergedRegion(new CellRangeAddress(dic[Id.ToString()], dic[Id.ToString()] + MergedRowCount - 1, cellIndex, cellIndex + cellCount - 1));
-                                                    for (int i = dic[Id.ToString()]; i < (dic[Id.ToString()] + MergedRowCount); i++)
-                                                    {
-                                                        sheet_Destination.GetRow(i).GetCell(cellIndex).SetCellValue("");
-                                                    }
-                                                }
-                                                //sheet_Destination.GetRow(dic[Id.ToString()]).GetCell(cellIndex).SetCellValue(Value.ToString());
-                                                HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, Value.ToString());
-                                                sheet_Destination.GetRow(dic[Id.ToString()]).GetCell(cellIndex).SetCellValue(value);
 
+                                                    Cell c = temp.Cells.FirstOrDefault(p => p.Code == Name.ToString().Trim());
+                                                    int cellIndex = c.ColIndex;
+                                                    int cellCount = c.ColCount;
+                                                    if (MergedRowCount > 1)
+                                                    {
+                                                        sheet_Destination.AddMergedRegion(new CellRangeAddress(dic[Id.ToString()], dic[Id.ToString()] + MergedRowCount - 1, cellIndex, cellIndex + cellCount - 1));
+                                                        for (int i = dic[Id.ToString()]; i < (dic[Id.ToString()] + MergedRowCount); i++)
+                                                        {
+                                                            sheet_Destination.GetRow(i).GetCell(cellIndex).SetCellValue("");
+                                                        }
+                                                    }
+                                                    //sheet_Destination.GetRow(dic[Id.ToString()]).GetCell(cellIndex).SetCellValue(Value.ToString());
+                                                    HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, Value.ToString());
+                                                    sheet_Destination.GetRow(dic[Id.ToString()]).GetCell(cellIndex).SetCellValue(value);
+
+                                                }
                                             }
-                                        }
-                                        catch (Exception ex)
-                                        {
+                                            catch (Exception ex)
+                                            {
+                                            }
                                         }
                                     }
                                 }
@@ -2100,63 +2279,156 @@ namespace Langben.Report
         /// 获取表头信息
         /// </summary>
         /// <returns></returns>
-        private Dictionary<int, List<string>> GetHeaderDic(NodeList nodeList)
+        //private Dictionary<int, List<string>> GetHeaderDic(NodeList nodeList)
+        //{
+        //    Dictionary<int, List<string>> headerDic = new Dictionary<int, List<string>>();
+        //    #region 表头           
+
+        //    if (nodeList != null && nodeList.Count > 1)
+        //    {
+        //        headerDic = new Dictionary<int, List<string>>();
+        //        for (int i = 1; i < nodeList.Count; i++)
+        //        {
+        //            int key = 0;
+        //            ITag tag = getTag(nodeList[i]);
+        //            //TableHeader[] headerList = ((Winista.Text.HtmlParser.Tags.TableRow)((Winista.Text.HtmlParser.Nodes.AbstractNode)((Winista.Text.HtmlParser.Nodes.AbstractNode)tag).NextSibling).NextSibling).Headers;
+        //            NodeList headerList = ((Winista.Text.HtmlParser.Nodes.AbstractNode)((Winista.Text.HtmlParser.Nodes.AbstractNode)((Winista.Text.HtmlParser.Nodes.AbstractNode)((Winista.Text.HtmlParser.Nodes.AbstractNode)((Winista.Text.HtmlParser.Nodes.AbstractNode)tag).NextSibling).NextSibling).NextSibling).NextSibling).Children;
+        //            if (nodeList[i] != null && nodeList[i].Parent != null)
+        //            {
+        //                ITag tagHeader = getTag(nodeList[i].Parent);
+        //                object obj = tagHeader.GetAttribute("id");
+        //                if (obj != null)
+        //                {
+        //                    string id = obj.ToString().Trim().Split('_')[obj.ToString().Trim().Split('_').Length - 1];
+        //                    try
+        //                    {
+        //                        key = int.Parse(id);
+        //                    }
+        //                    catch (Exception ex)
+        //                    {
+        //                        key = 0;
+        //                    }
+
+        //                }
+        //            }
+        //            //if (headerList != null && headerList.Count() > 0)
+        //            if (headerList != null && headerList.Count > 0)
+        //            {
+        //                List<string> hList = new List<string>();
+        //                //foreach (TableHeader header in headerList)
+        //                for (int j=0;j< headerList.Count;j++)
+        //                {
+        //                   INode header = headerList[j];
+                                
+        //                    bool IsEnd = false;
+        //                    var headerValue = GetHearderValue(header, out IsEnd);
+        //                    IsEnd = false;
+        //                    var IsExist = IsExistInputOrSelect(header, out IsEnd);
+                            
+        //                    if ((headerValue != null && headerValue.Trim()!="") || IsExist)
+        //                    {
+        //                        hList.Add(headerValue);
+        //                    }
+        //                }
+        //                if (!headerDic.ContainsKey(key))
+        //                {                           
+        //                   headerDic.Add(key, hList);                            
+        //                }
+
+        //            }
+        //        }
+        //    }
+        //    #endregion
+        //    return headerDic;
+        //}
+        /// <summary>
+        /// 获取表头信息
+        /// </summary>
+        /// <returns></returns>
+        private Dictionary<int, Dictionary<string, string>> GetHeaderDic(NodeList nodeList)
         {
             Dictionary<int, List<string>> headerDic = new Dictionary<int, List<string>>();
+            Dictionary<int, Dictionary<string, string>> DataDic = new Dictionary<int, Dictionary<string, string>>();
             #region 表头           
 
             if (nodeList != null && nodeList.Count > 1)
             {
                 headerDic = new Dictionary<int, List<string>>();
                 for (int i = 1; i < nodeList.Count; i++)
-                {
-                    int key = 0;
-                    ITag tag = getTag(nodeList[i]);
-                    TableHeader[] headerList = ((Winista.Text.HtmlParser.Tags.TableRow)((Winista.Text.HtmlParser.Nodes.AbstractNode)((Winista.Text.HtmlParser.Nodes.AbstractNode)tag).NextSibling).NextSibling).Headers;
-                    if (nodeList[i] != null && nodeList[i].Parent != null)
+                {                   
+                    ITag tag = getTag(nodeList[i]);                   
+                    //NodeList headerList = null;
+                    INode ParentNode = ((Winista.Text.HtmlParser.Nodes.AbstractNode)tag).Parent;
+                    ITag ParentTag = getTag(ParentNode);
+                    int TongDaoID = 0;
+                    if(ParentNode!=null)
                     {
-                        ITag tagHeader = getTag(nodeList[i].Parent);
-                        object obj = tagHeader.GetAttribute("id");
-                        if (obj != null)
+                        string [] IDs = ParentTag.GetAttribute("ID").Split('_');
+                        if(IDs.Length>1)
                         {
-                            string id = obj.ToString().Trim().Split('_')[obj.ToString().Trim().Split('_').Length - 1];
                             try
                             {
-                                key = int.Parse(id);
+                                TongDaoID = Convert.ToInt32(IDs[IDs.Length - 1]);
                             }
-                            catch (Exception ex)
+                            catch
                             {
-                                key = 0;
+                                TongDaoID = -1;
                             }
-
                         }
                     }
-                    if (headerList != null && headerList.Count() > 0)
+
+                    #region 暂时关闭                   
+                    //string str = ((Winista.Text.HtmlParser.Tags.CompositeTag)((Winista.Text.HtmlParser.Nodes.AbstractNode)tag).Parent).StringText;
+                    //int startIndex = str.IndexOf("<thead>");
+                    //int endIndex= str.IndexOf("</thead>");
+                    //if(startIndex>=0 && endIndex>=0)
+                    //{
+                    //    str = "<table>" + str.Substring(startIndex, endIndex) + "</table>";
+                    //    Lexer lexer_Tr = new Lexer(str);//必须定义多个，否则第二个获取不到数据
+                    //    Parser parser_Tr = new Parser(lexer_Tr);
+                    //    NodeFilter filter_Tr = new TagNameFilter("tr");
+                    //    headerList = parser_Tr.Parse(filter_Tr);
+                    //}
+                    //if (headerList != null && headerList.Count > 0)
+                    //{                        
+                    //    INode header = headerList[0];
+                    //    GetAllData(header, TongDaoID, ref DataDic);
+                    //}
+                    #endregion
+
+                    string html = ((Winista.Text.HtmlParser.Tags.CompositeTag)((Winista.Text.HtmlParser.Nodes.AbstractNode)tag).Parent).StringText;
+                    Lexer lexer_Input = new Lexer(html);//必须定义多个，否则第二个获取不到数据
+                    Parser parser_Input = new Parser(lexer_Input);
+                    Lexer lexer_Option = new Lexer(html);
+                    Parser parser_Option = new Parser(lexer_Option);
+                    NodeFilter filter_Input = new TagNameFilter("input");
+                    NodeFilter filter_Option = new TagNameFilter("select");
+                    NodeList nodeList_Input = parser_Input.Parse(filter_Input);
+                    NodeList nodeList_Option = parser_Option.Parse(filter_Option);
+
+                    if(nodeList_Input!=null && nodeList_Input.Count>0)
                     {
-                        List<string> hList = new List<string>();
-                        foreach (TableHeader header in headerList)
+                        for(int j=0;j<nodeList_Input.Count;j++)
                         {
-                            bool IsEnd = false;
-                            var headerValue = GetHearderValue(header, out IsEnd);
-                            IsEnd = false;
-                            var IsExist = IsExistInputOrSelect(header, out IsEnd);
-                            
-                            if ((headerValue != null && headerValue.Trim()!="") || IsExist)
-                            {
-                                hList.Add(headerValue);
-                            }
+                            INode node = nodeList_Input[j];
+                            GetAllData(node, TongDaoID, ref DataDic);
                         }
-                        if (!headerDic.ContainsKey(key))
-                        {                           
-                           headerDic.Add(key, hList);                            
-                        }
-
                     }
+                    if (nodeList_Option != null && nodeList_Option.Count > 0)
+                    {
+                        for (int jj = 0; jj < nodeList_Option.Count; jj++)
+                        {
+                            INode node = nodeList_Option[jj];
+                            GetAllData(node, TongDaoID, ref DataDic);
+                        }
+                    }
+                    
                 }
             }
             #endregion
-            return headerDic;
-        }
+            return DataDic;
+        }      
+
         /// <summary>
         /// 获取数据信息
         /// </summary>

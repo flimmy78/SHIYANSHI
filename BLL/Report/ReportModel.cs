@@ -256,6 +256,18 @@ namespace Langben.Report
                 return _CellIndexList;
             }
         }
+
+        /// <summary>
+        /// 单元格信息
+        /// </summary>
+        [XmlArray("CellList")]
+        [XmlArrayItem("Cell")]
+        public List<Cell> Cells
+        {
+            get;
+            set;
+        }
+
     }    
     [XmlRoot("Cell")]
     public class Cell

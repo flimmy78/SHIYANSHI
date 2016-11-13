@@ -55,13 +55,18 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
-          <Property Name="VALUE" Type="varchar2" MaxLength="200" />
-          <Property Name="UNIT" Type="varchar2" MaxLength="200" />
+          <Property Name="THEACCURACYLEVEL" Type="varchar2" MaxLength="200" />
+          <Property Name="THEUNCERTAINTYVALUEK" Type="varchar2" MaxLength="200" />
           <Property Name="METERING_STANDARD_DEVICEID" Type="varchar2" MaxLength="36" />
           <Property Name="CREATETIME" Type="date" />
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="THEUNCERTAINTYNDEXL" Type="varchar2" MaxLength="200" />
+          <Property Name="THEUNCERTAINTYVALUE" Type="nvarchar2" MaxLength="200" />
+          <Property Name="THEUNCERTAINTY" Type="nvarchar2" MaxLength="200" />
+          <Property Name="MAXVALUE" Type="nvarchar2" MaxLength="200" />
+          <Property Name="MAXCATEGORIES" Type="nvarchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="APPLIANCE_DETAIL_INFORMATION">
           <Key>
@@ -479,6 +484,8 @@
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="XINGHAO" Type="varchar2" MaxLength="200" />
+          <Property Name="THESUPERIOR" Type="nvarchar2" MaxLength="36" />
         </EntityType>
         <EntityType Name="METERING_STANDARD_DEVICE_CHECK">
           <Key>
@@ -493,6 +500,7 @@
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="CERTIFICATEUNIT" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="METERING_STANDARD_DEVICEPREPAR">
           <Key>
@@ -3083,13 +3091,18 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="VALUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="UNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="THEACCURACYLEVEL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="THEUNCERTAINTYVALUEK" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="METERING_STANDARD_DEVICEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="CREATETIME" Type="DateTime" />
           <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="THEUNCERTAINTYNDEXL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="THEUNCERTAINTYVALUE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="THEUNCERTAINTY" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MAXVALUE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MAXCATEGORIES" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.FK_MAXIMUM__REFERENCE_METERIN2" FromRole="ALLOWABLE_ERROR" ToRole="METERING_STANDARD_DEVICE" />
         </EntityType>
         <EntityType Name="APPLIANCE_DETAIL_INFORMATION">
@@ -3531,6 +3544,8 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="XINGHAO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="THESUPERIOR" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ALLOWABLE_ERROR" Relationship="Model.FK_MAXIMUM__REFERENCE_METERIN2" FromRole="METERING_STANDARD_DEVICE" ToRole="ALLOWABLE_ERROR" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE_CHECK" Relationship="Model.FK_METERING_REFERENCE_METERIN2" FromRole="METERING_STANDARD_DEVICE" ToRole="METERING_STANDARD_DEVICE_CHECK" />
           <NavigationProperty Name="UNDERTAKE_LABORATORY" Relationship="Model.FK_METERING_REFERENCE_UNDERTAK" FromRole="METERING_STANDARD_DEVICE" ToRole="UNDERTAKE_LABORATORY" />
@@ -3549,6 +3564,7 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CERTIFICATEUNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.FK_METERING_REFERENCE_METERIN2" FromRole="METERING_STANDARD_DEVICE_CHECK" ToRole="METERING_STANDARD_DEVICE" />
         </EntityType>
         <EntityType Name="ORDER_TASK_INFORMATION">
@@ -5249,13 +5265,18 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <EntitySetMapping Name="ALLOWABLE_ERROR">
             <EntityTypeMapping TypeName="Model.ALLOWABLE_ERROR">
               <MappingFragment StoreEntitySet="ALLOWABLE_ERROR">
+                <ScalarProperty Name="MAXCATEGORIES" ColumnName="MAXCATEGORIES" />
+                <ScalarProperty Name="MAXVALUE" ColumnName="MAXVALUE" />
+                <ScalarProperty Name="THEUNCERTAINTY" ColumnName="THEUNCERTAINTY" />
+                <ScalarProperty Name="THEUNCERTAINTYVALUE" ColumnName="THEUNCERTAINTYVALUE" />
+                <ScalarProperty Name="THEUNCERTAINTYNDEXL" ColumnName="THEUNCERTAINTYNDEXL" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
                 <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
                 <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
                 <ScalarProperty Name="METERING_STANDARD_DEVICEID" ColumnName="METERING_STANDARD_DEVICEID" />
-                <ScalarProperty Name="UNIT" ColumnName="UNIT" />
-                <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+                <ScalarProperty Name="THEUNCERTAINTYVALUEK" ColumnName="THEUNCERTAINTYVALUEK" />
+                <ScalarProperty Name="THEACCURACYLEVEL" ColumnName="THEACCURACYLEVEL" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -5682,6 +5703,8 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <EntitySetMapping Name="METERING_STANDARD_DEVICE">
             <EntityTypeMapping TypeName="Model.METERING_STANDARD_DEVICE">
               <MappingFragment StoreEntitySet="METERING_STANDARD_DEVICE">
+                <ScalarProperty Name="THESUPERIOR" ColumnName="THESUPERIOR" />
+                <ScalarProperty Name="XINGHAO" ColumnName="XINGHAO" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
                 <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
@@ -5699,6 +5722,7 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <EntitySetMapping Name="METERING_STANDARD_DEVICE_CHECK">
             <EntityTypeMapping TypeName="Model.METERING_STANDARD_DEVICE_CHECK">
               <MappingFragment StoreEntitySet="METERING_STANDARD_DEVICE_CHECK">
+                <ScalarProperty Name="CERTIFICATEUNIT" ColumnName="CERTIFICATEUNIT" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
                 <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />

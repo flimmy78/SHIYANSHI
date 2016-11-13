@@ -143,7 +143,7 @@ namespace Langben.App.Controllers
                         ErrorCorrectionLevel Ecl = ErrorCorrectionLevel.M; //误差校正水平   
                         string Content = item.ID;//待编码内容  
                         QuietZoneModules QuietZones = QuietZoneModules.Two;  //空白区域   
-                        int ModuleSize =3;//大小  
+                        int ModuleSize = 3;//大小  
                         var encoder = new QrEncoder(Ecl);
                         QrCode qr;
                         if (encoder.TryEncode(Content, out qr))//对内容进行编码，并保存生成的矩阵  
@@ -166,21 +166,27 @@ namespace Langben.App.Controllers
                         //System.IO.BinaryWriter w = new System.IO.BinaryWriter(fs);
 
                         #region 
-                        //System.IO.FileStream fss = new System.IO.FileStream(@"D:\shiyanshi\App\up\模版.png", System.IO.FileMode.OpenOrCreate);
-                        //int filelength = 0;
-                        //filelength = (int)fss.Length; //获得文件长度 
-                        //Byte[] image = new Byte[filelength]; //建立一个字节数组 
-                        //fss.Read(image, 0, filelength); //按字节流读取 
-                        //System.Drawing.Image imag = System.Drawing.Image.FromStream(fss);                      
-                        //CombinImage(fss, ms);
-                        //fss.Close();
-                        System.Drawing.Image Image = System.Drawing.Image.FromStream(ms);
-                        Graphics g = null;
-                        g = Graphics.FromImage(Image);
-                        g.DrawString("nihao", new Font("宋体", 13),
-                              Brushes.Red, new PointF(100, 100));
 
-                        TuPanBaoCun(Image, pathErWeiMa);
+                        System.IO.FileStream fss = new System.IO.FileStream(Server.MapPath("~/up/模版.png"), System.IO.FileMode.OpenOrCreate);
+                        int filelength = 0;
+                        filelength = (int)fss.Length; //获得文件长度 
+                        Byte[] image = new Byte[filelength]; //建立一个字节数组 
+                        fss.Read(image, 0, filelength); //按字节流读取 
+                        System.Drawing.Image imag = System.Drawing.Image.FromStream(fss);
+                        //System.Drawing.Image Image = System.Drawing.Image.FromStream(ms);
+                        Graphics g = null;
+                        g = Graphics.FromImage(imag);
+                        string xinghao = item.VERSION;
+                        int y = 0;
+
+                        for (int i = 0; i < xinghao.Length; i++)
+                        {
+                            y = y + 40;
+                            g.DrawString(xinghao[i].ToString(), new Font("宋体", 13), Brushes.Red, new PointF(400, y));//x:值越大越靠右；y：值越小越靠上
+                        }
+                        Image ig = CombinImage(imag, ms);
+                        fss.Close();
+                        TuPanBaoCun(ig, pathErWeiMa);
                         //Font f = new Font("微软雅黑", 16, FontStyle.Bold);
                         //SolidBrush B = new SolidBrush(ColorTranslator.FromHtml("#411464"));
 
@@ -255,20 +261,25 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="sourceImg">粘贴的源图片</param>
         /// <param name="destImg">粘贴的目标图片</param>
-        public static Image CombinImage(FileStream sourceImg, MemoryStream destImg)
+        public static Image CombinImage(Image sourceImg, MemoryStream destImg)
         {
-            Image imgBack = System.Drawing.Image.FromStream(sourceImg);     //相框图片 
+            Image imgBack = sourceImg;     //相框图片 
             Image img = System.Drawing.Image.FromStream(destImg);        //照片图片
             //从指定的System.Drawing.Image创建新的System.Drawing.Graphics       
             Graphics g = Graphics.FromImage(imgBack);
             //g.DrawImage(imgBack, 0, 0, 148, 124);      // g.DrawImage(imgBack, 0, 0, 相框宽, 相框高);
             g.FillRectangle(System.Drawing.Brushes.Black, -50, -50, (int)212, ((int)203));//相片四周刷一层黑色边框，这里没有，需要调尺寸
             //g.DrawImage(img, 照片与相框的左边距, 照片与相框的上边距, 照片宽, 照片高);
-            g.DrawImage(img, -50, -50, 212, 203);
+
+            int x = 400;
+            int y = 10;
+            int w = imgBack.Width - 400;
+            int h = imgBack.Height - 400;
+            g.DrawImage(img, x, y, w, h);
             GC.Collect();
-            string saveImagePath = @"D:\shiyanshi\App\up\sss.png";
-            //save new image to file system.
-            imgBack.Save(saveImagePath, ImageFormat.Png);
+            //string saveImagePath = @"D:\shiyanshi\App\up\sss.png";
+            ////save new image to file system.
+            //imgBack.Save(saveImagePath, ImageFormat.Png);
             return imgBack;
         }
 
@@ -277,7 +288,7 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="mimeType"></param>
         /// <returns></returns>
-        ImageCodecInfo GetEncoderInfo( String mimeType)
+        ImageCodecInfo GetEncoderInfo(String mimeType)
 
         {
             int j;
@@ -296,7 +307,7 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="TP"></param>
         /// <param name="pathErWeiMa"></param>
-        public void TuPanBaoCun(Image TP, string pathErWeiMa)
+        public  void TuPanBaoCun(Image TP, string pathErWeiMa)
         {
             ImageCodecInfo myImageCodecInfo;
             //获得JPEG格式的编码器
@@ -317,6 +328,7 @@ namespace Langben.App.Controllers
             TP.Save(pathErWeiMa, myImageCodecInfo, myEncoderParameters);
         }
 
+
         public ActionResult Createto(string id)
         {
 
@@ -324,14 +336,18 @@ namespace Langben.App.Controllers
         }
 
         /// <summary>
-        /// 首次编辑
+        /// 查看委托单
         /// </summary>
         /// <param name="id">主键</param>
         /// <returns></returns> 
         [SupportFilter]
         public ActionResult Edit(string id)
-        {
-            ViewBag.Id = id;
+        {          
+            ORDER_TASK_INFORMATION on = m_BLL.GetById(id);
+            foreach (var item in on.SIGN)
+            {
+                ViewBag.HTML = item.HTMLVALUE;
+            }           
             return View();
         }
         IBLL.IORDER_TASK_INFORMATIONBLL m_BLL;

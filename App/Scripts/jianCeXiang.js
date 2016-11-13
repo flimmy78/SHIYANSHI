@@ -22,7 +22,7 @@ function CreateTongDao() {
     var tableIdx = $("#hideDangQianTongDao").val();//当前通道
     tableIdx++;
     var $tongdao = $Tongdao_moban.clone().appendTo($('#tongdao'));
-    
+
     var reg = new RegExp("_1_", "g");//g,表示全部替换。
 
     $tongdao.html($tongdao.html().replace(reg, '_' + tableIdx + '_'));
@@ -34,7 +34,7 @@ function CreateTongDao() {
     $tongdao.find("#K_moban").attr('id', 'K_' + tableIdx);
 
     $tongdao.find('#btnAddLiangCheng').attr("onclick", "set(" + tableIdx + ",this);");
-    
+
 
     $("#hideDangQianTongDao").val(tableIdx);
     $("#hideTongDaoShuLiang").val(tableIdx);
@@ -167,10 +167,11 @@ function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
 //txtVal(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
 //classstyle样式类名
 //unit在输入框后面的单位
+//blurValue数表离开输入框之后触发的事件
 function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValue) {
 
-    if (blurValue == null || blurValue=='') {
-        blurValue='blurValue';
+    if (blurValue == null || blurValue == '') {
+        blurValue = 'blurValue';
     }
     var ddlName = name + "_UNIT";//下拉框名
     var ddlId = ddlName + "_" + id;//下拉框ID
@@ -185,7 +186,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     }
     var htmlString = [];
     htmlString.push("<td class='" + classstyle + "' rowspan='" + rowspan + "' align='right' > ");
-    htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='"+blurValue+"(this)'/>");
+    htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='" + blurValue + "(this)'/>");
     if (ddlHtml != null && ddlHtml.trim() != "") {
         var AttributeValue = GetAttributeValue("LianDongDanWeiDDL");
         htmlString.push($(ddlHtml).attr("onchange", "LianDongDanWeiDDL(this,'" + AttributeValue + "')").attr("name", ddlName).attr("id", ddlId)[0].outerHTML);
@@ -244,6 +245,9 @@ function CalculateForAddLianCheng(Rowidx, objName) {
     var number = $("#txtNumber").val(); //量程
     var point = $("#txtPoint").val();     //检测点数   
     var pointLen = $("#txtPointLen").val(); //小数点位数
+    if (number == "" || pointLen == "" || point == "") {
+        return "";
+    }
     var arry = new Array();
     if (point == 3) {
         //输入的检测点是3的时候，按照量程*100%，量程*60%，量程*10%作为默认标准值显示
@@ -327,7 +331,7 @@ function ShowOrHideDuoTongDao() {
 function BtnInit() {
     ShowOrHideDuoTongDao();
     var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();
-   
+
     if (PREPARE_SCHEMEID.trim() != "")//数据录入
     {
         $("#btnDuoTongDao").hide();
@@ -339,7 +343,7 @@ function BtnInit() {
     }
     else//方案设置
     {
-       
+
         //$("#btnSave").show();
         $("#btnReset").show();
         //$("#btnSave_ITE").hide();
@@ -455,39 +459,105 @@ function Save_FangAn() {
 }
 //由于html无法获取value，重新给outerHTML赋值
 function SetAllControlHtml() {
-    $("input[type='text']").each(function () {
+    $("input[type='text']").not('#tongdao_moban :input').each(function () {
+        //除了隐藏模板中的输入框，其他所有的输入框
         if (this.id != "") {
-            var id = "#" + this.id;
-            var outerHTML = this.outerHTML;
-            var startIndex = outerHTML.indexOf(" value=");
-            if (startIndex < 0)//没有初始化value
-            {
-                outerHTML = outerHTML.replace('>', ' value="' + this.value + '" >')
+            if (this.attributes.value != undefined) {
+                this.attributes.value.value = $(this).val();
             }
-            else//初始化过value
-            {
-                var endIndex = outerHTML.indexOf('"', outerHTML.indexOf('"', startIndex) + 1);
-                var length = endIndex - startIndex;
-                var str = outerHTML.substring(startIndex, endIndex);
-                outerHTML = outerHTML.replace(str, ' value="' + this.value + '" ')
-            }
-            $(id).prop('outerHTML', outerHTML);
         }
-
     });
-    $("select").each(function () {
+
+    $("select").not('#tongdao_moban select').each(function () {
+        //除了隐藏模板中的下拉框，其他所有的下拉框
         if (this.id != "") {
-            var id = "#" + this.id;
-            var outerHTML = this.outerHTML;
-            outerHTML = outerHTML.replace(' selected="selected"', ' ')
-            var oldValue = 'value="' + this.value + '"';
-            outerHTML = outerHTML.replace(' value="' + this.value + '"', ' value="' + this.value + '" selected="selected" ');
-            $(id).prop('outerHTML', outerHTML);
+            var checkText = $(this).find("option:selected").text();  //获取Select选择的Text           
+            $(this).find("option[value='" + checkText + "']").attr("selected", true);
+
+
         }
 
     });
 }
 function JS1(thi) {
+}
+
+
+function PointFloat(src, pos) {
+
+    return Math.round(src * Math.pow(10, pos)) / Math.pow(10, pos);
+}
+//保留小数位数 四舍六入奇进偶舍
+function fomatFloat(src, pos) {
+
+    var numArray, resultSymbol = "";
+    if (src < 0) {
+        resultSymbol = "-";
+    }
+    if (pos == "") {
+        pos = new Number(0);
+    }
+    src = src.toString().replace("-", "");
+    if (src.indexOf('.') > 0) {
+        numArray = src.split('.');
+        if (numArray[1].length > pos) {
+            var endStr, isCarry = false;
+            if (numArray[1].length > parseFloat(pos) + 1) {
+                endStr = numArray[1].substring(parseFloat(pos) + 1);
+                for (var i = 0; i < endStr.length; i++) {
+                    if (endStr[i] > 0) {
+                        isCarry = true;
+                        break;
+                    }
+                }
+            }
+            numArray[1] = numArray[1].substring(0, pos + 1);
+            var endChar = numArray[1][pos];
+            var newpoint = new Number("0." + numArray[1].substring(0, pos));
+            if (endChar >= 5 && pos >= 0) {
+                if (endChar > 5) {
+                    if (pos == 0) {
+                        numArray[1] = 1;
+                    }
+                    else {
+                        numArray[1] = parseFloat(newpoint) + parseFloat(Math.pow(0.1, pos));
+                    }
+                }
+                else if (endChar == 5) {
+                    //5后面有有效数字，直接向前进一位
+                    if (isCarry) {
+                        numArray[1] = parseFloat(newpoint) + parseFloat(Math.pow(0.1, pos));
+                        return f.PointFloat(resultSymbol + eval(numArray.join("+")), pos);
+                    }
+                    if (pos == 0) {
+                        if (numArray[0] % 2 != 0) {
+                            numArray[1] = 1;
+                        } else {
+                            numArray[1] = 0;
+                        }
+                        return f.PointFloat(resultSymbol + eval(numArray.join("+")), pos);
+                    }
+                    var preChar = numArray[1][pos - 1];
+                    if (preChar % 2 == 0) {
+                        numArray[1] = newpoint;
+                    }
+                    else {
+                        numArray[1] = parseFloat(newpoint) + parseFloat(Math.pow(0.1, pos));
+                    }
+                }
+                return f.PointFloat(resultSymbol + eval(numArray.join("+")), pos);
+            }
+            else {
+                numArray[1] = newpoint;
+                return f.PointFloat(resultSymbol + eval(numArray.join("+")), pos);
+            }
+        }
+        return src;
+
+    } else {
+        return resultSymbol + src;
+    }
+    return src;
 }
 //---------------------------------
 
