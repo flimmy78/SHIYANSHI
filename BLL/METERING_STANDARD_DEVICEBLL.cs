@@ -321,12 +321,25 @@ namespace Langben.BLL
                            * 增加   原没 现有
                            * 删除   原有 现没
                            */
+
+
             if (entity == null)
             {
                 return false;
             }
-            int count = 1;            
-            
+            int count = 1;
+
+            var data = (from m in db.METERING_STANDARD_DEVICE
+                        where m.ID == entity.ID
+                        select m).FirstOrDefault();//在数据的原始数据
+
+
+            data.NAME = entity.NAME;
+
+
+
+
+
             List<string> addPREPARE_SCHEMEID = new List<string>();
             List<string> deletePREPARE_SCHEMEID = new List<string>();
             DataOfDiffrent.GetDiffrent(entity.PREPARE_SCHEMEID.GetIdSort(), entity.PREPARE_SCHEMEIDOld.GetIdSort(), ref addPREPARE_SCHEMEID, ref deletePREPARE_SCHEMEID);
