@@ -91,7 +91,7 @@ namespace Langben.App.Controllers
                     item.CREATEPERSON = currentPerson;
                 }
                 string returnValue = string.Empty;
-                if (m_BLL.Create(ref validationErrors, entity))
+                if (m_BLL.CreateX(ref validationErrors, entity))
                 {
                     LogClassModels.WriteServiceLog(Suggestion.InsertSucceed  + "，标准装置/计量标准器信息的信息的Id为" + entity.ID,"标准装置/计量标准器信息"
                         );//写入日志 
