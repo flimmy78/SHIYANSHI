@@ -444,10 +444,10 @@ namespace Langben.Report
                     ORDER_TASK_INFORMATION taskEntity = taskBll.GetById(infEntity.ORDER_TASK_INFORMATIONID);
                     if (taskEntity != null)
                     {
-                        //证书单位
-                        if (taskEntity.CERTIFICATE_ENTERPRISE != null && taskEntity.CERTIFICATE_ENTERPRISE.Trim() != "")
+                        //受理单位
+                        if (taskEntity.ACCEPT_ORGNIZATION != null && taskEntity.ACCEPT_ORGNIZATION.Trim() != "")
                         {
-                            sheet_Destination.GetRow(3).GetCell(0).SetCellValue(taskEntity.CERTIFICATE_ENTERPRISE);
+                            sheet_Destination.GetRow(3).GetCell(0).SetCellValue(taskEntity.ACCEPT_ORGNIZATION);
                         }
                         //委托单位 /送 检 单 位       
                         if (taskEntity.INSPECTION_ENTERPRISE != null && taskEntity.INSPECTION_ENTERPRISE.Trim() != "")
@@ -458,6 +458,8 @@ namespace Langben.Report
                         {
                             sheet_Destination.GetRow(15).GetCell(7).SetCellValue("/");
                         }
+                        //受理单位信息
+                        SetShouLiDangWeiXinXi(sheet_Destination, taskEntity.ACCEPT_ORGNIZATION);
                     }
                 }
             }
@@ -760,10 +762,10 @@ namespace Langben.Report
                     ORDER_TASK_INFORMATION taskEntity = taskBll.GetById(infEntity.ORDER_TASK_INFORMATIONID);
                     if (taskEntity != null)
                     {
-                        //证书单位
-                        if (taskEntity.CERTIFICATE_ENTERPRISE != null && taskEntity.CERTIFICATE_ENTERPRISE.Trim()!="")
+                        //受理单位
+                        if (taskEntity.ACCEPT_ORGNIZATION != null && taskEntity.ACCEPT_ORGNIZATION.Trim()!="")
                         {
-                            sheet_Destination.GetRow(3).GetCell(0).SetCellValue(taskEntity.CERTIFICATE_ENTERPRISE);
+                            sheet_Destination.GetRow(3).GetCell(0).SetCellValue(taskEntity.ACCEPT_ORGNIZATION);
                         }
                         //委托单位 /送 检 单 位       
                         if (taskEntity.INSPECTION_ENTERPRISE != null && taskEntity.INSPECTION_ENTERPRISE.Trim() != "")
@@ -774,6 +776,10 @@ namespace Langben.Report
                         {
                             sheet_Destination.GetRow(15).GetCell(7).SetCellValue("/");
                         }
+                        //受理单位信息
+                        SetShouLiDangWeiXinXi(sheet_Destination, taskEntity.ACCEPT_ORGNIZATION);
+                       
+
                     }
                 }
             }
@@ -866,6 +872,40 @@ namespace Langben.Report
             #endregion
            
             sheet_Destination.ForceFormulaRecalculation = true;
+        }
+        /// <summary>
+        /// 受理单位信息
+        /// </summary>
+        /// <param name="sheet_Destination">目标sheet</param>
+        /// <param name="ShouLiDangWei">受理单位名称</param>
+        private void SetShouLiDangWeiXinXi(ISheet sheet_Destination,string ShouLiDangWei)
+        {
+            #region 受理单位信息
+            //地址
+            string dizhi = "地址：北京市西城区复兴门外地藏庵南巷1号";
+            //邮编
+            string youbian = "邮编：100045";
+            //电话
+            string dianhua = "电话：010-88071523";
+            //传真
+            string chuanzhen = "传真：010-88071504";
+            if (ShouLiDangWei != null && ShouLiDangWei.Trim() != "" && ShouLiDangWei.Trim() == "冀北电力有限公司计量中心")
+            {
+                dizhi = "地址：北京市昌平区回龙观镇二拨子村";
+                youbian = "邮编：102208";
+                dianhua = "电话：010-56585812";
+                chuanzhen = "传真：010-56585804";
+
+            }
+            //地址
+            sheet_Destination.GetRow(46).GetCell(2).SetCellValue(dizhi);
+            //邮编
+            sheet_Destination.GetRow(46).GetCell(14).SetCellValue(youbian);
+            //电话
+            sheet_Destination.GetRow(47).GetCell(2).SetCellValue(dianhua);
+            //传真
+            sheet_Destination.GetRow(47).GetCell(14).SetCellValue(chuanzhen);
+            #endregion
         }
         /// <summary>
         /// 导出原始记录Excel
@@ -1417,10 +1457,10 @@ namespace Langben.Report
             {
                 return new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
             }
+            //string value = sourceCell.StringCellValue;
             string key = "";
             if (rowInfoList.FirstOrDefault(p => p.RowIndex == sourceCell.RowIndex && p.CellIndexs != null && p.CellIndexs.Trim() != "") != null)
-            {
-                //RowInfo r = rowInfoList.FirstOrDefault(p => p.RowIndex == sourceCell.RowIndex && p.CellIndexs != null && p.CellIndexs.Trim() != "");
+            {               
                 RowInfo r = rowInfoList.FirstOrDefault(p => p.RowIndex == sourceCell.RowIndex && p.Cells != null && p.Cells.Count > 0);
                 if(r!=null)
                 {
@@ -1429,28 +1469,16 @@ namespace Langben.Report
                     {
                         key = c.Code;
                     }
-                }
-                
+                }          
 
-                if (r.CellIndexList.Count(p => p == sourceCell.ColumnIndex) > 0)
+                if (r!=null && key != null && key.Trim()!="" && r.CellIndexList.Count(p => p == sourceCell.ColumnIndex) > 0)
                 {
                     int speStartIndex = sourceCell.StringCellValue.IndexOf("{0}");//动态字符位置
-                    string value = "";
-                    if (key != null && key.Trim() != "")
-                    {
-                        value = string.Format(sourceCell.StringCellValue, DongTaiShuJuList[key]).Trim();
-                    }
-                    else
-                    {
-                        value = string.Format(sourceCell.StringCellValue, "").Trim();
-                    }
+                    string value = string.Format(sourceCell.StringCellValue, DongTaiShuJuList[key]).Trim();                   
 
-                    result = new HSSFRichTextString(value);
-                    //if (DongTaiShuJuList!= null && DongTaiShuJuList.Count>0 && speStartIndex>=0)
-                    //{
-                    if(key!=null && key.Trim()!="" && speStartIndex>=0)
-                    { 
-                        //string key = DongTaiShuJuList.Keys.FirstOrDefault();
+                    result = new HSSFRichTextString(value);                   
+                    if(speStartIndex>=0)
+                    {     
 
                         if (workbook != null && DongTaiShuJuList[key].Trim() != "" && allSpecialCharacters != null && allSpecialCharacters.SpecialCharacterList != null &&
                             allSpecialCharacters.SpecialCharacterList.Count > 0 &&
