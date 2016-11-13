@@ -24,9 +24,10 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult test(string id = "电压输出", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult test(string id = "频率输出", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-            //电压输出 电压测量 电流测量 电流输出
+
+            //频率输出
             ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
@@ -202,8 +203,11 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult PingLuShuChuCheLinagXiangDuiWuCha(string RULEID = "34-1999_2_41", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult PingLuShuChuCheLinagXiangDuiWuCha(string id= "频率输出", string RULEID = "34-1999_2_41", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
+            ViewBag.canshu = id;
+            //频率输出
+            //频率测量
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
