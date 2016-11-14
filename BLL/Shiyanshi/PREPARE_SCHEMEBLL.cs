@@ -66,12 +66,11 @@ namespace Langben.BLL
             return REPORTNUMBER;
         }
         /// <summary>
-        /// 修改
+        /// 报告生成发送审核
         /// </summary>
         /// <param name="validationErrors"></param>
         /// <param name="entity"></param>
-        /// <returns></returns>
-        public bool EditField(ref ValidationErrors validationErrors, PREPARE_SCHEME entity, string CreatePerson = "")
+        public bool EditField1(ref ValidationErrors validationErrors, PREPARE_SCHEME entity, string CreatePerson = "")
         {
             try
             {
@@ -89,6 +88,28 @@ namespace Langben.BLL
                 {
                     throw new Exception(Message);                                       
                 }
+            }
+            catch (Exception ex)
+            {
+                validationErrors.Add(ex.Message);
+                ExceptionsHander.WriteExceptions(ex);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="validationErrors"></param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public bool EditField(ref ValidationErrors validationErrors, PREPARE_SCHEME entity)
+        {
+            try
+            {
+                repository.EditField(db, entity);
+                repository.Save(db);
+                return true;
             }
             catch (Exception ex)
             {
