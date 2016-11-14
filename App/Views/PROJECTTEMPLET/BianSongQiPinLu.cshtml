@@ -5,6 +5,7 @@
 }
 @using Common
 @using Models
+
 <thead>
     <!--表头-->
     <tr>
@@ -35,7 +36,7 @@
                 输出范围：(
                 <input  onblur="blurShuChuFanWeiZuiXiao(this)"  name="dianmyliu" id="dianmyliu_1_1_1"  type="text" class="my-textbox tc" value="4" style="width:30px">
                 -
-                <input  onblur="blurShuChuFanWeiZuiDa(this)"  name="dianmyya" id="dianmyya_1_1_1"  type="text" class="my-textbox tc" value="20" style="width:30px">
+                <input  onblur="blurShuChuFanWeiZuiDa(this)"  name="dianmyya" id="dianmyya_1_1_11"  type="text" class="my-textbox tc" value="20" style="width:30px">
                 )
                 <select class="my-combobox"  name="mAV" id="mAV_1_1_1">
                     <option value="mA">mA</option>
@@ -193,10 +194,9 @@
                 <tfoot>
                     <!--表尾-->
                     <tr>
-                        <td colspan="7">
+                        <td colspan="6" class="p5 bgF7">
                             <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
                             <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
-
                         </td>
                     </tr>
                 </tfoot>
