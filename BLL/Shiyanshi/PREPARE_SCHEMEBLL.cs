@@ -6,6 +6,7 @@ using System.Transactions;
 using Langben.DAL;
 using Common;
 using System.Globalization;
+using Langben.Report;
 
 namespace Langben.BLL
 {
@@ -70,13 +71,24 @@ namespace Langben.BLL
         /// <param name="validationErrors"></param>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public bool EditField(ref ValidationErrors validationErrors, PREPARE_SCHEME entity)
+        public bool EditField(ref ValidationErrors validationErrors, PREPARE_SCHEME entity, string CreatePerson = "")
         {
             try
             {
-                repository.EditField(db, entity);
-                repository.Save(db);
-                return true;
+                
+                string Message = "";
+                ReportBLL reportBll = new ReportBLL();
+                bool IsSuccess = reportBll.ExportReport(entity.ID, out Message, CreatePerson,true);
+                if (IsSuccess)
+                {
+                    repository.EditField(db, entity);
+                    repository.Save(db);
+                    return true;
+                }
+                else
+                {
+                    throw new Exception(Message);                                       
+                }
             }
             catch (Exception ex)
             {

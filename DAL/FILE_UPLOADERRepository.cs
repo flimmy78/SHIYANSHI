@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Common;
 using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
+
 namespace Langben.DAL
 {
     /// <summary>
@@ -126,7 +129,7 @@ namespace Langben.DAL
                 return Save(db);
             }
         }
- 
+
         /// <summary>
         /// 删除一个附件
         /// </summary>

@@ -84,8 +84,10 @@ namespace Langben.Report
         /// 导出报告Excel
         /// </summary>
         /// <param name="ID">预备方案ID</param>
+        /// <param name="Message">返回消息</param>
+        /// <param name="CreatePerson">创建人</param>
         /// <returns></returns>
-        public bool ExportReport(string ID, out string Message)
+        public bool ExportReport(string ID, out string Message,string CreatePerson = "",bool IsSavePath=false)
         {
             IBLL.IPREPARE_SCHEMEBLL m_BLL = new PREPARE_SCHEMEBLL();
             PREPARE_SCHEME entity = m_BLL.GetById(ID);
@@ -135,14 +137,34 @@ namespace Langben.Report
                 SetShuJu(hssfworkbook, entity, type);
                 string fileName = SetFileName(type);
                 //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";
-                saveFileName = "../up/Report/" + fileName + ".xls";
+                saveFileName = "~/up/Report/" + fileName + ".xls";
                 string saveFileNamePath = System.Web.HttpContext.Current.Server.MapPath(saveFileName);
                 using (FileStream fileWrite = new FileStream(saveFileNamePath, FileMode.Create))
                 {
                     hssfworkbook.Write(fileWrite);
                 }
+                Message = "../up/Report/" + fileName + ".xls";
+                if (IsSavePath)
+                {
 
-                Message = saveFileName;
+                    FILE_UPLOADERBLL fBll = new FILE_UPLOADERBLL();
+                    FILE_UPLOADER fEntity = new FILE_UPLOADER();                  
+
+                    fEntity.CONCLUSION = entity.CONCLUSION;
+                    fEntity.CREATETIME = DateTime.Now;
+                    fEntity.PATH = saveFileName;
+                    fEntity.FULLPATH = saveFileNamePath;
+                    fEntity.NAME = fileName;
+                    fEntity.SUFFIX = ".xls";
+                    fEntity.PREPARE_SCHEMEID = entity.ID;
+                    fEntity.STATE = "已上传";
+                    fEntity.CREATEPERSON = CreatePerson;
+                    fEntity.ID = Result.GetNewId();
+                    ValidationErrors validationErrors = new ValidationErrors();
+                    fBll.Create(ref validationErrors, fEntity);
+                }
+
+                
                 return true;
             }
             Message = "未找到预备方案ID为【" + ID + "】的数据";
@@ -1165,6 +1187,35 @@ namespace Langben.Report
             SetHeaderAndFooter(sheet_Destination, entity);
             sheet_Destination.ForceFormulaRecalculation = true;
         }
+        /// <summary>
+        /// 设置标准装置/计量标准器信息
+        /// </summary>
+        /// <param name="sheet_Source">源sheet</param>
+        /// <param name="sheet_Destination">目标sheet</param>
+        /// <param name="rowIndex_Destination">目标行号</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <param name="type">报告类型</param>
+        private void SetZhuangZhi(IWorkbook hssfworkbook,ISheet sheet_Destination, ref int rowIndex_Destination,string PREPARE_SCHEMEID, ExportType type)
+        {
+            int rowIndex_Source = 27;
+            string sheetName_Source = "封皮模板";
+            switch(type)
+            {
+                case ExportType.OriginalRecord_JianDing:
+                case ExportType.OriginalRecord_XiaoZhun:
+                    sheetName_Source = "封皮模板";
+                    rowIndex_Source = 27;
+                    break;
+                case ExportType.Report_JianDing:
+                case ExportType.Report_XiaoZhun:
+                case ExportType.Report_XiaoZhun_CNAS:
+                    sheetName_Source = "第二页模板";
+                    rowIndex_Source = 9;
+                    break;
+            }            
+            ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
+        }
+         
 
         /// <summary>
         /// 设置数据信息
