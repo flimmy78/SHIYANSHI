@@ -28,12 +28,19 @@ namespace Langben.IBLL
         [OperationContract]
         bool UPTSerialNumber(string id);
         /// <summary>
+        /// 报告生成发送审核
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool EditField1(ref Common.ValidationErrors validationErrors, PREPARE_SCHEME entity, string CreatePerson = "");
+        /// <summary>
         /// 修改
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [OperationContract]
-        bool EditField(ref Common.ValidationErrors validationErrors, PREPARE_SCHEME entity, string CreatePerson = "");
+        bool EditField(ref Common.ValidationErrors validationErrors, PREPARE_SCHEME entity);
         /// <summary>
         /// 获取在该表一条数据中，出现的所有外键实体
         /// </summary>
