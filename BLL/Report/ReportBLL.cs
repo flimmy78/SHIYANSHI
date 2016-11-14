@@ -111,11 +111,11 @@ namespace Langben.Report
                 Entity.FULLPATH = rEntity.FULLPATH;
                 Entity.NAME = rEntity.NAME;
                 Entity.SUFFIX = rEntity.SUFFIX;
+                Entity.STATE = rEntity.STATE;
             }
             if(Entity!=null)
             {
-                Entity.CREATEPERSON = Person;
-                
+                Entity.CREATEPERSON = Person;                
                 fBll.Create(ref validationErrors, Entity);
                 return true;
             }
@@ -192,22 +192,22 @@ namespace Langben.Report
 
                 //FILE_UPLOADERBLL fBll = new FILE_UPLOADERBLL();
                 //FILE_UPLOADER fEntity = new FILE_UPLOADER();                  
-                    
-                    //fEntity.CONCLUSION = entity.CONCLUSION;
-                    //fEntity.CREATETIME = DateTime.Now;
-                    //fEntity.PATH = saveFileName;
-                    //fEntity.FULLPATH = saveFileNamePath;
-                    //fEntity.NAME = fileName;
-                    //fEntity.SUFFIX = ".xls";
-                    //fEntity.PREPARE_SCHEMEID = entity.ID;
-                    //fEntity.STATE = "已上传";
-                    ////fEntity.CREATEPERSON = CreatePerson;
-                    //fEntity.ID = Result.GetNewId();
-                    //ValidationErrors validationErrors = new ValidationErrors();
-                    //fBll.Create(ref validationErrors, fEntity);
+
+                fEntity.CONCLUSION = entity.CONCLUSION;
+                fEntity.CREATETIME = DateTime.Now;
+                fEntity.PATH = saveFileName;
+                fEntity.FULLPATH = saveFileNamePath;
+                fEntity.NAME = fileName;
+                fEntity.SUFFIX = ".xls";
+                fEntity.PREPARE_SCHEMEID = entity.ID;
+                fEntity.STATE = "已上传";
+                //fEntity.CREATEPERSON = CreatePerson;
+                fEntity.ID = Result.GetNewId();
+                //ValidationErrors validationErrors = new ValidationErrors();
+                //fBll.Create(ref validationErrors, fEntity);
                 //}
 
-                
+
                 return true;
             }
             Message = "未找到预备方案ID为【" + ID + "】的数据";
