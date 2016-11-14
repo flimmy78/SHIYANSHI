@@ -282,7 +282,7 @@
         //if (stream=='') {
         //   alert("请签字！");
         //}
-        debugger;
+       
         $.ajax({
             url: "/ORDER_TASK_INFORMATION/QianZi/@ViewBag.Id",
             type: "Put",
@@ -292,7 +292,7 @@
                 if (data.Code == 1) {
                     window.print();//打印
                     alert("签字成功，并成功发送实验室");
-                    window.location.href = "/ORDER_TASK_INFORMATION/ErWeiMa/@ViewBag.Id";
+                    @*window.location.href = "/ORDER_TASK_INFORMATION/ErWeiMa/@ViewBag.Id";*@
                 }
                 else {
                     alert("签字保存失败");
