@@ -283,7 +283,7 @@
         //离开事件，用于计算 输出范围最小
         function blurShuChuFanWeiZuiXiao(obj) {
             //注意多通道
-            $("#tbody_" + $("#hideDangQianTongDao").val()).each(function () {
+            $("#tbody_" + $("#hideDangQianTongDao").val() + " tr").each(function () {
                 console.log($(this).find('td:eq(1)').find('input').val());
                 $(this).find('td:eq(4)').find('input').val(YinYongWuCha($(this).find('td:eq(3)').find('input').val(), $(this).find('td:eq(2)').find('input').val()))
             })
@@ -291,7 +291,7 @@
         //离开事件，用于计算 输出范围最大
         function blurShuChuFanWeiZuiDa(obj) {
             //注意多通道
-            $("#tbody_" + $("#hideDangQianTongDao").val()).each(function () {
+            $("#tbody_" + $("#hideDangQianTongDao").val() + " tr").each(function () {
                 console.log($(this).find('td:eq(1)').find('input').val());
                 $(this).find('td:eq(4)').find('input').val(YinYongWuCha($(this).find('td:eq(3)').find('input').val(), $(this).find('td:eq(2)').find('input').val()))
             })

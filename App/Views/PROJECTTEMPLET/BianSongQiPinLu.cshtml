@@ -204,10 +204,9 @@
         //重写set方法，只准对增加空白行
         function set(tbodyIndex) {
 
- $("#hideDangQianTongDao").val(tbodyIndex);
-        CreateRow();
+
             // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
-          
+            $("#hideDangQianTongDao").val(tbodyIndex); CreateRow();
 
         }
         //增加行
@@ -274,7 +273,7 @@
 
             //console.log($($(obj).parents('table')).find('tr:eq(3)').find('td:eq(2)').html());
             //var table = $($(obj).parents('table')).find('tr:eq(3)').find('td:eq(2)');
-            $("#tbody_" + $("#hideDangQianTongDao").val()).each(function () {
+            $("#tbody_" + $("#hideDangQianTongDao").val() + " tr").each(function () {
                 console.log($(this).find('td:eq(1)').find('input').val());
                 $(this).find('td:eq(2)').find('input').val(BiaoZhunZhi($(this).find('td:eq(1)').find('input').val()))
             })
