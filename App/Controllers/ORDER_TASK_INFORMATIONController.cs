@@ -41,6 +41,7 @@ namespace Langben.App.Controllers
         }
 
         [HttpPut]
+        [ValidateInput(false)]
         public ActionResult QianZi(string id, string PICTURE, string HTMLVALUE)
         {
             if (!string.IsNullOrWhiteSpace(PICTURE))
