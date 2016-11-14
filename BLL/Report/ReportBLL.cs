@@ -1435,15 +1435,21 @@ namespace Langben.Report
         /// <param name="entity">预备方案</param>
         private void SetHeaderAndFooter(ISheet sheet_Destination, PREPARE_SCHEME entity,ExportType type= ExportType.OriginalRecord_JianDing)
         {
+            string REPORTNUMBER = entity.REPORTNUMBER;
             //页眉
             string header = "原始记录编号：";
-            if(type!= ExportType.OriginalRecord_JianDing && type!= ExportType.OriginalRecord_XiaoZhun)
+            if (type != ExportType.OriginalRecord_JianDing && type != ExportType.OriginalRecord_XiaoZhun)
             {
                 header = "证书编号：";
             }
-            if (entity.REPORTNUMBER != null && entity.REPORTNUMBER.Trim() != "")
+            else if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
+            { 
+                int index = entity.REPORTNUMBER.IndexOf("-");
+                REPORTNUMBER = REPORTNUMBER.Split('-')[0] + "原始" + REPORTNUMBER.Substring(index);
+            }           
+            if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
             {
-                sheet_Destination.Header.Left = header + entity.REPORTNUMBER;
+                sheet_Destination.Header.Left = header + REPORTNUMBER;
             }
             else
             {
@@ -1452,7 +1458,10 @@ namespace Langben.Report
             //页脚
             if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString() && entity.CNAS == ShiFouCNAS.Yes.ToString() && entity.REPORTNUMBER != null && entity.REPORTNUMBER.Trim() != "")
             {
-                sheet_Destination.Footer.Left = entity.REPORTNUMBER;
+                if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
+                {
+                    sheet_Destination.Footer.Left = REPORTNUMBER;
+                }
             }
         }
         #region 复制行
