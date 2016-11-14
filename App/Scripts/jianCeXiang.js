@@ -27,7 +27,7 @@ function CreateTongDao() {
 
     $tongdao.html($tongdao.html().replace(reg, '_' + tableIdx + '_'));
 
-    $tongdao.addClass('clone');
+    $tongdao.addClass('clone mt10');
     $tongdao.css('display', '');
     $tongdao.attr('id', 'tongdao_' + tableIdx);
     $tongdao.find("#tbody_moban").attr('id', 'tbody_' + tableIdx);
