@@ -206,7 +206,9 @@
 
 
             // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
-            $("#hideDangQianTongDao").val(tbodyIndex); CreateRow();
+            $("#hideDangQianTongDao").val(tbodyIndex);
+            CreateRow();
+
 
         }
         //增加行
@@ -313,6 +315,7 @@
         }
         function GetValue() {
             var hideDangQianTongDao = GetTongDao();//当前操作第几通道
+            debugger;
             var datas = {
                 inputMinValue: $.trim($("#shurufanwei_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($("#shurufanwei_" + hideDangQianTongDao + "_1_1").val())),
                 inputMaxValue: $.trim($("#shurufanweijian_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($("#shurufanweijian_" + hideDangQianTongDao + "_1_1").val())),
