@@ -186,13 +186,14 @@ namespace Langben.App.Controllers
             ReportBLL reportBll = new ReportBLL();
             string Message = string.Empty;
             bool IsSuccess = false;
+            FILE_UPLOADER fEntity = null;
             if (Type == "OriginalRecord")
-            {
-                IsSuccess = reportBll.ExportOriginalRecord(ID, out Message);
+            {                
+                IsSuccess = reportBll.ExportOriginalRecord(ID, out Message, out fEntity);
             }
             else
             {
-                IsSuccess = reportBll.ExportReport(ID, out Message);
+                IsSuccess = reportBll.ExportReport(ID, out Message, out fEntity);
             }
             if (IsSuccess)
             {
