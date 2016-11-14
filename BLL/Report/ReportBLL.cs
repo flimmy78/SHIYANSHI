@@ -138,32 +138,14 @@ namespace Langben.Report
             if (entity != null)
             {
                 ExportType type = GetExportType(entity, "Report");
-                string xlsPath = GetTemplatePath(type);               
-                //if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString())
-                //{
-                //    if (entity.CNAS == ShiFouCNAS.No.ToString())
-                //    {
-                //        xlsPath = ReportStatic.BaoGaoXiaoZhunPath;
-                //    }
-                //    else
-                //    {
-                //        xlsPath = ReportStatic.BaoGaoXiaoZhunCNASPath;
-                //    }
-                //}                
+                string xlsPath = GetTemplatePath(type);             
+                          
 
                 HSSFWorkbook _book = new HSSFWorkbook();
                 FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
                 IWorkbook hssfworkbook = new HSSFWorkbook(file);
 
-                //设置封皮
-                //if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString())
-                //{
-                //    SetFengPi_BaoGaoXiaoZhun(hssfworkbook, entity);
-                //}
-                //else
-                //{
-                //    SetFengPi_BaoGaoJianDing(hssfworkbook, entity);
-                //}
+                //设置封皮                
                 if(type== ExportType.Report_JianDing)
                 {
                     SetFengPi_BaoGaoJianDing(hssfworkbook, entity);
