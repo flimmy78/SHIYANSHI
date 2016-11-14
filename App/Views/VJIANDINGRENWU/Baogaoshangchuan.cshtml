@@ -8,7 +8,28 @@
     <div>
         <form id="form1" method="post" enctype="multipart/form-data" action="BaoGaoShangChuan">
 
-           
+            <label>
+                @*上传按钮不能提到form外面*@
+                <input id="Submit1" type="submit" value="上传" onclick="javascript:
+        if ($('#file').val() != '' && $('#file2').val() != '')
+        {
+            if ($('input[name=CONCLUSION]:checked').val() == undefined) {
+                $.messager.alert('操作提示', '请选择结论！', 'info');
+                return false;
+            } else {
+                return true;
+            };
+        }
+        else {
+            $.messager.alert('操作提示', '请选择上传文件！', 'info');
+            return false;
+        };
+  " />
+            </label>
+            <label><input id="fashongid" type="button" value="发送审核" onclick="songwangshenghe()" /></label>
+            <label>
+                <input type="button" onclick="javascript: window.location.href = '/VJIANDINGRENWU/Index';" value="返回" />
+            </label>
             <br style="clear:both" />
             <div class="input_search">
                 <div class="input_search-label">
@@ -78,39 +99,8 @@
 
         </form>
     </div>
+    <br style="clear:both" /><br style="clear:both" /><br style="clear:both" />
     <br style="clear:both" />
-    <div class="clearfix"></div>
-    <div class="input_search">
-        <div class="input_search-label">
-        </div>
-        <div class="input_search-field">
-            
-            <a class="easyui-linkbutton" onclick="xiayibu()">下一步</a>
-            <a class="easyui-linkbutton" onclick="baochun()">保存下一步</a>
-
-
-            <label>
-                <input id="Submit1" type="submit" value="上传" class="easyui-linkbutton" onclick="javascript:
-        if ($('#file').val() != '' && $('#file2').val() != '')
-        {
-            if ($('input[name=CONCLUSION]:checked').val() == undefined) {
-                $.messager.alert('操作提示', '请选择结论！', 'info');
-                return false;
-            } else {
-                return true;
-            };
-        }
-        else {
-            $.messager.alert('操作提示', '请选择上传文件！', 'info');
-            return false;
-        };
-  " />
-            </label>
-            @*<label><input id="fashongid" type="button" value="发送审核" onclick="songwangshenghe()" /></label>*@
-            <a class="easyui-linkbutton" id="fashongid" onclick="songwangshenghe()">发送审核</a>
-            <a class="easyui-linkbutton" onclick="javascript: window.location.href = '/VJIANDINGRENWU/Index';">返回</a>
-        </div>
-    </div>
 </fieldset>
 
 <script type="text/javascript">
