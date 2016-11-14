@@ -185,7 +185,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
         classstyle = 'classstyle';
     }
     var htmlString = [];
-    htmlString.push("<td class='" + classstyle + "' rowspan='" + rowspan + "' align='right' > ");
+    htmlString.push("<td class='" + classstyle + "' rowspan='" + rowspan + "' align='center' > ");
     htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='" + blurValue + "(this)'/>");
     if (ddlHtml != null && ddlHtml.trim() != "") {
         var AttributeValue = GetAttributeValue("LianDongDanWeiDDL");

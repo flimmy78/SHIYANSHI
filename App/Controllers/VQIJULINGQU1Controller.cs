@@ -29,7 +29,21 @@ namespace Langben.App.Controllers
 
             return View();
         }
-
+        /// <summary>
+        /// 列表
+        /// </summary>
+        /// <returns></returns>
+        [SupportFilter]
+        public ActionResult Show(string id)
+        {
+            string search = "ID&" + id + "";
+            int total = 0;
+            List<VQIJULINGQU1> queryData = m_BLL.GetByParamX(id, 10, 10, "asc", "ID", search, ref total);
+            string idd = "ORDER_TASK_INFORMATIONID&" + id;
+            List<VQIJULINGQU2> queryData2 = m_BLL2.GetByParam(id, 1, 100, "DESC", "ID", idd, ref total);
+            App.Models.ORDER_TASK_INFORMATIONShow otn = new Models.ORDER_TASK_INFORMATIONShow();
+            return View();
+        }
         /// <summary>
         /// 异步加载数据
         /// </summary>
@@ -43,7 +57,7 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public JsonResult GetData(string id, int page, int rows, string order, string sort, string search)
         {
-            search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.器具已入库.GetHashCode()+"*" + Common.ORDER_STATUS.器具已领取.GetHashCode()+ "^" + "REPORTSTATUSZI&" + Common.REPORTSTATUS.报告已打印.GetHashCode() + "*" + Common.REPORTSTATUS.报告已领取.GetHashCode() + "";
+            search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已领取.GetHashCode() + "^" + "REPORTSTATUSZI&" + Common.REPORTSTATUS.报告已打印.GetHashCode() + "*" + Common.REPORTSTATUS.报告已领取.GetHashCode() + "";
             int total = 0;
             List<VQIJULINGQU1> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
@@ -73,15 +87,17 @@ namespace Langben.App.Controllers
 
 
         IBLL.IVQIJULINGQU1BLL m_BLL;
+        IBLL.IVQIJULINGQU2BLL m_BLL2;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VQIJULINGQU1Controller()
-            : this(new VQIJULINGQU1BLL()) { }
+            : this(new VQIJULINGQU1BLL(), new VQIJULINGQU2BLL()) { }
 
-        public VQIJULINGQU1Controller(VQIJULINGQU1BLL bll)
+        public VQIJULINGQU1Controller(VQIJULINGQU1BLL bll, VQIJULINGQU2BLL bll2)
         {
             m_BLL = bll;
+            m_BLL2 = bll2;
         }
 
     }
