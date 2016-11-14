@@ -217,12 +217,12 @@
         //tbodyIndex通道
         //thi 当前位置
         function set(tbodyIndex,thi) {
-            $("#hideDangQianTongDao").val(tbodyIndex);
 
-            CreateRow();
+           
            
             // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
-           
+            $("#hideDangQianTongDao").val(tbodyIndex); CreateRow();
+
         }
         //增加行
         function CreateRow() {
@@ -283,37 +283,81 @@
         //离开事件，用于计算 输出范围最小
         function blurShuChuFanWeiZuiXiao(obj) {
             //注意多通道
-            //   
+            $("#tbody_" + $("#hideDangQianTongDao").val()).each(function () {
+                console.log($(this).find('td:eq(1)').find('input').val());
+                $(this).find('td:eq(4)').find('input').val(YinYongWuCha($(this).find('td:eq(3)').find('input').val(), $(this).find('td:eq(2)').find('input').val()))
+            })
         }
         //离开事件，用于计算 输出范围最大
         function blurShuChuFanWeiZuiDa(obj) {
             //注意多通道
-            //   
+            $("#tbody_" + $("#hideDangQianTongDao").val()).each(function () {
+                console.log($(this).find('td:eq(1)').find('input').val());
+                $(this).find('td:eq(4)').find('input').val(YinYongWuCha($(this).find('td:eq(3)').find('input').val(), $(this).find('td:eq(2)').find('input').val()))
+            })
         }
         //离开事件，用于计算 实际输出值
         function blurShiJiShuChuZhi(obj) {
             //注意多通道
-            //   
+            $(obj).parents('tr:eq(0)').find('td:eq(4) input').val(YinYongWuCha($(obj).val(), $(obj).parents('tr:eq(0)').find('td:eq(2)').find('input').val()))
         }
         //离开事件，用于计算 标准输出值
         function blurBiaoZhunShuChuZhi(obj) {
             //注意多通道
-            //   
+            $(obj).parents('tr:eq(0)').find('td:eq(4) input').val($(obj).parents('tr:eq(0)').find('td:eq(3)').find('input').val(),YinYongWuCha($(obj).val() ))
         }
         //离开事件，用于计算 二次输入标准值
         function blurErCiShuRuBiaoZhunZhi(obj) {
             //注意多通道
             //   
+            $(obj).parents('tr:eq(0)').find('td:eq(2) input').val(BiaoZhunZhi($(obj).val()))
         }
         //离开事件，用于计算 测量点
         function blurCeLiangDian(obj) {
             //注意多通道
             //   
+            //2.二次输入标准值=额定条件*测量点，默认3位小数
+            var celiangdian=(parseFloat($(obj).val().replace("%",""))/100)
+            $(obj).parents('tr:eq(0)').find('td:eq(1) input').val((celiangdian * parseFloat($("#mAVdianliu_" + GetTongDao() + "_1_1").val())).toFixed(3));
         }
         //离开事件，用于计算
         function blurValue(obj) {
 
         }
+        function GetValue() {
+            var hideDangQianTongDao = GetTongDao();//当前操作第几通道
+            var datas = {
+                inputMinValue: $.trim($("#shurufanwei_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($("#shurufanwei_" + hideDangQianTongDao + "_1_1").val())),
+                inputMaxValue: $.trim($("#shurufanweijian_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($("#shurufanweijian_" + hideDangQianTongDao + "_1_1").val())),
+                outputMinValue: $.trim($("#dianmyliu_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($("#dianmyliu_" + hideDangQianTongDao + "_1_1").val())),
+                outputMaxValue: $.trim($("#dianmyya_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($("#dianmyya_" + hideDangQianTongDao + "_1_1").val()))
+            }
+            return datas;
+        }
+        function GetTongDao() {
+            return $("#hideDangQianTongDao").val();//当前操作第几通道
+        }
+        ///标准值
+        function BiaoZhunZhi(erciBiaoZhun) {
+            //3.标准输出值=二次输入标准值/额定条件*（输出范围的最大值-输出范围的最小值）+输出范围最小值
+            var datas = GetValue();
+            var edingTiaoJian = parseFloat($("#mAVdianliu_" + GetTongDao() + "_1_1").val());
+            if ($.trim(edingTiaoJian) != "" && edingTiaoJian != "0")
+                return parseFloat(erciBiaoZhun) / edingTiaoJian * (datas.outputMaxValue - datas.outputMinValue) + datas.outputMinValue;
+            else
+                return "";
+        }
+        //引用误差
+        function YinYongWuCha(ShijiShuChu, BiaoZhunShuChu) {
+            //4.4.引用误差=Round(（实际输出值-标准输出值）/（输出范围的最大值-输出范围的最小值）*100*修约值,1)/修约值 
+            var datas = GetValue();
+            var level = $("#DengJi_" + $("#hideDangQianTongDao").val() + "_1_1").val()
+            var length = level.split('.')[1].length;
+            if (level == "0.0" || ShijiShuChu == "" || BiaoZhunShuChu == "") return ""
+            else
+                return (((parseFloat(ShijiShuChu) - parseFloat(BiaoZhunShuChu)) / (datas.outputMaxValue - datas.outputMinValue) * 100 / parseFloat(level)) * parseFloat(level)).toFixed(length);
+        }
+
         //联动标准值
         //输出实际值计算：【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值；【选用电阻阻值】没有数值时，输出实际值=读数值
         function LianDongShiJiZhi(obj) {
