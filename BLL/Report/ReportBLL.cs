@@ -81,46 +81,71 @@ namespace Langben.Report
             return result;
         }
         /// <summary>
+        /// 导出原始记录及报告并保存路径
+        /// </summary>
+        /// <param name="ID">预备方案ID</param>
+        /// <param name="Message">返回信息</param>
+        /// <param name="Person">操作人</param>
+        /// <returns></returns>
+        public bool ExportAndSavePath(string ID, out string Message,string Person="")
+        {
+            ValidationErrors validationErrors = new ValidationErrors();
+            //fBll.Create(ref validationErrors, fEntity);       
+            FILE_UPLOADERBLL fBll = new FILE_UPLOADERBLL();
+            FILE_UPLOADER oEntity = null;
+            FILE_UPLOADER rEntity = null;
+            FILE_UPLOADER Entity = null;
+            bool oSuccess = ExportOriginalRecord(ID, out Message,out oEntity);
+            if(oSuccess)
+            {
+                Entity = oEntity;
+            }
+            bool rSuccess = ExportReport(ID, out Message, out rEntity);
+            if (!oSuccess && rSuccess)
+            {
+                Entity = rEntity;
+            }
+            else if(oSuccess && rSuccess)
+            {
+                Entity.PATH = rEntity.PATH;
+                Entity.FULLPATH = rEntity.FULLPATH;
+                Entity.NAME = rEntity.NAME;
+                Entity.SUFFIX = rEntity.SUFFIX;
+                Entity.STATE = rEntity.STATE;
+            }
+            if(Entity!=null)
+            {
+                Entity.CREATEPERSON = Person;                
+                fBll.Create(ref validationErrors, Entity);
+                return true;
+            }
+            return false;          
+            
+        }
+        /// <summary>
         /// 导出报告Excel
         /// </summary>
         /// <param name="ID">预备方案ID</param>
         /// <param name="Message">返回消息</param>
         /// <param name="CreatePerson">创建人</param>
         /// <returns></returns>
-        public bool ExportReport(string ID, out string Message,string CreatePerson = "",bool IsSavePath=false)
+        public bool ExportReport(string ID, out string Message,out FILE_UPLOADER fEntity)
         {
+            fEntity = new FILE_UPLOADER();
             IBLL.IPREPARE_SCHEMEBLL m_BLL = new PREPARE_SCHEMEBLL();
             PREPARE_SCHEME entity = m_BLL.GetById(ID);
             string saveFileName = "";
             if (entity != null)
             {
                 ExportType type = GetExportType(entity, "Report");
-                string xlsPath = GetTemplatePath(type);               
-                //if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString())
-                //{
-                //    if (entity.CNAS == ShiFouCNAS.No.ToString())
-                //    {
-                //        xlsPath = ReportStatic.BaoGaoXiaoZhunPath;
-                //    }
-                //    else
-                //    {
-                //        xlsPath = ReportStatic.BaoGaoXiaoZhunCNASPath;
-                //    }
-                //}                
+                string xlsPath = GetTemplatePath(type);             
+                          
 
                 HSSFWorkbook _book = new HSSFWorkbook();
                 FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
                 IWorkbook hssfworkbook = new HSSFWorkbook(file);
 
-                //设置封皮
-                //if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString())
-                //{
-                //    SetFengPi_BaoGaoXiaoZhun(hssfworkbook, entity);
-                //}
-                //else
-                //{
-                //    SetFengPi_BaoGaoJianDing(hssfworkbook, entity);
-                //}
+                //设置封皮                
                 if(type== ExportType.Report_JianDing)
                 {
                     SetFengPi_BaoGaoJianDing(hssfworkbook, entity);
@@ -144,27 +169,27 @@ namespace Langben.Report
                     hssfworkbook.Write(fileWrite);
                 }
                 Message = "../up/Report/" + fileName + ".xls";
-                if (IsSavePath)
-                {
+                //if (IsSavePath)
+                //{
 
-                    FILE_UPLOADERBLL fBll = new FILE_UPLOADERBLL();
-                    FILE_UPLOADER fEntity = new FILE_UPLOADER();                  
+                //FILE_UPLOADERBLL fBll = new FILE_UPLOADERBLL();
+                //FILE_UPLOADER fEntity = new FILE_UPLOADER();                  
 
-                    fEntity.CONCLUSION = entity.CONCLUSION;
-                    fEntity.CREATETIME = DateTime.Now;
-                    fEntity.PATH = saveFileName;
-                    fEntity.FULLPATH = saveFileNamePath;
-                    fEntity.NAME = fileName;
-                    fEntity.SUFFIX = ".xls";
-                    fEntity.PREPARE_SCHEMEID = entity.ID;
-                    fEntity.STATE = "已上传";
-                    fEntity.CREATEPERSON = CreatePerson;
-                    fEntity.ID = Result.GetNewId();
-                    ValidationErrors validationErrors = new ValidationErrors();
-                    fBll.Create(ref validationErrors, fEntity);
-                }
+                fEntity.CONCLUSION = entity.CONCLUSION;
+                fEntity.CREATETIME = DateTime.Now;
+                fEntity.PATH = saveFileName;
+                fEntity.FULLPATH = saveFileNamePath;
+                fEntity.NAME = fileName;
+                fEntity.SUFFIX = ".xls";
+                fEntity.PREPARE_SCHEMEID = entity.ID;
+                fEntity.STATE = "已上传";
+                //fEntity.CREATEPERSON = CreatePerson;
+                fEntity.ID = Result.GetNewId();
+                //ValidationErrors validationErrors = new ValidationErrors();
+                //fBll.Create(ref validationErrors, fEntity);
+                //}
 
-                
+
                 return true;
             }
             Message = "未找到预备方案ID为【" + ID + "】的数据";
@@ -894,8 +919,9 @@ namespace Langben.Report
         /// </summary>
         /// <param name="ID">预备方案ID</param>
         /// <returns></returns>
-        public bool ExportOriginalRecord(string ID, out string Message)
+        public bool ExportOriginalRecord(string ID, out string Message, out FILE_UPLOADER fEntity)
         {
+            fEntity = new FILE_UPLOADER();
             IBLL.IPREPARE_SCHEMEBLL m_BLL = new PREPARE_SCHEMEBLL();
             PREPARE_SCHEME entity = m_BLL.GetById(ID);
             string saveFileName = "";
@@ -920,15 +946,26 @@ namespace Langben.Report
 
                 //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";                
                 string fileName = SetFileName(type);              
-                saveFileName = "../up/Report/" + fileName + ".xls";
+                saveFileName = "~/up/Report/" + fileName + ".xls";
                 
                 string saveFileNamePath = System.Web.HttpContext.Current.Server.MapPath(saveFileName);
                 using (FileStream fileWrite = new FileStream(saveFileNamePath, FileMode.Create))
                 {
                     hssfworkbook.Write(fileWrite);
-                }
-
-                Message = saveFileName;
+                }                
+                Message = "../up/Report/" + fileName + ".xls";
+                fEntity.CONCLUSION = entity.CONCLUSION;
+                fEntity.CREATETIME = DateTime.Now;
+                fEntity.PATH2 = saveFileName;
+                fEntity.FULLPATH2 = saveFileNamePath;
+                fEntity.NAME2 = fileName;
+                fEntity.SUFFIX2 = ".xls";
+                fEntity.PREPARE_SCHEMEID = entity.ID;
+                fEntity.STATE2 = "已上传";
+                //fEntity.CREATEPERSON = CreatePerson;
+                fEntity.ID = Result.GetNewId();
+                //ValidationErrors validationErrors = new ValidationErrors();
+                //fBll.Create(ref validationErrors, fEntity);                
                 return true;
             }
             Message = "未找到预备方案ID为【" + ID + "】的数据";
@@ -1195,27 +1232,95 @@ namespace Langben.Report
         /// <param name="rowIndex_Destination">目标行号</param>
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <param name="type">报告类型</param>
-        private void SetZhuangZhi(IWorkbook hssfworkbook,ISheet sheet_Destination, ref int rowIndex_Destination,string PREPARE_SCHEMEID, ExportType type)
+        private void SetZhuangZhi(IWorkbook hssfworkbook,ISheet sheet_Destination,int rowIndex_Destination, PREPARE_SCHEME entity, ExportType type)
         {
-            int rowIndex_Source = 27;
+            //int rowIndex = rowIndex_Destination;
+            //标准装置
+            int rowIndex_Source_ZhuangZhi = 27;
+            //计量器具
+            int rowIndex_Source_QiJu = 30;
+            //中间试品
+            int rowIndex_Source_ShiPin = 33;
             string sheetName_Source = "封皮模板";
             switch(type)
             {
                 case ExportType.OriginalRecord_JianDing:
                 case ExportType.OriginalRecord_XiaoZhun:
                     sheetName_Source = "封皮模板";
-                    rowIndex_Source = 27;
+                    rowIndex_Source_ZhuangZhi = 27;
+                    rowIndex_Source_QiJu = 30;
+                    rowIndex_Source_ShiPin = 33;
                     break;
                 case ExportType.Report_JianDing:
                 case ExportType.Report_XiaoZhun:
                 case ExportType.Report_XiaoZhun_CNAS:
                     sheetName_Source = "第二页模板";
-                    rowIndex_Source = 9;
+                    rowIndex_Source_ZhuangZhi = 9;
+                    rowIndex_Source_QiJu = 12;
+                    rowIndex_Source_ShiPin =15;
                     break;
             }            
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
+            IMETERING_STANDARD_DEVICEBLL bll = new METERING_STANDARD_DEVICEBLL();           
+            if (entity.METERING_STANDARD_DEVICE != null)
+            {
+                List<METERING_STANDARD_DEVICE> list = (List<METERING_STANDARD_DEVICE>)entity.METERING_STANDARD_DEVICE;
+                if(list!=null && list.Count>0)
+                {
+                    //标准装置
+                    List<METERING_STANDARD_DEVICE> listZhuanZhi = list.FindAll(p => p.CATEGORY == "标准装置");
+                    if(listZhuanZhi!=null && listZhuanZhi.Count>0)
+                    {
+                        CopyRow(sheet_Source, sheet_Destination, rowIndex_Source_ZhuangZhi, rowIndex_Destination, 1, true);
+                        rowIndex_Source_ZhuangZhi++;
+                        rowIndex_Destination++;
+                        foreach (METERING_STANDARD_DEVICE item in listZhuanZhi)
+                        {
+                            CopyRow(sheet_Source, sheet_Destination, rowIndex_Source_ZhuangZhi, rowIndex_Destination, 1, false);
+                            //名称
+                            sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(item.NAME);
+                            //测量范围
+                            sheet_Destination.GetRow(rowIndex_Destination).GetCell(7).SetCellValue(item.TEST_RANGE);
+                           
+                            #region 不确定度/准确度等级/最大允许误差
+                            //不确定度/准确度等级/最大允许误差
+                            List<ALLOWABLE_ERROR> aList = (List<ALLOWABLE_ERROR>)item.ALLOWABLE_ERROR;
+                           if(aList!=null && aList.Count>0)
+                            {
+                                rowIndex_Source_ZhuangZhi++;
+                                string aValue = "";
+                                foreach (ALLOWABLE_ERROR aItem in aList)
+                                {                                  
+                                    if (aItem.THEACCURACYLEVEL != null && aItem.THEACCURACYLEVEL.Trim() != "")
+                                    {
+                                        aValue += aItem.THEACCURACYLEVEL + "、";
+                                    }
+                                    else if (aItem.MAXCATEGORIES != null && aItem.MAXCATEGORIES.Trim() != "")
+                                    {
+                                        aValue += aItem.MAXCATEGORIES + ":" + aItem.MAXVALUE + "、";
+                                    }
+                                    else if (aItem.THEUNCERTAINTYVALUEK != null && aItem.THEUNCERTAINTYVALUEK.Trim() != "")
+                                    {
+                                        aValue += aItem.THEUNCERTAINTYVALUEK + ":" + aItem.THEUNCERTAINTYNDEXL + " " + aItem.THEUNCERTAINTYVALUE + ":" + aItem.THEUNCERTAINTY + "、";
+                                    }
+                                }
+                                sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(aValue);
+                            }
+                            #endregion 
+                        }
+                    }
+                   
+
+                    //标准器
+                    List<METERING_STANDARD_DEVICE> listQiJu = list.FindAll(p => p.CATEGORY == "标准器");
+                    //中间试品
+                    List<METERING_STANDARD_DEVICE> listShiPin = list.FindAll(p => p.CATEGORY == "中间试品");
+                    
+                }
+            }
+               
         }
-         
+
 
         /// <summary>
         /// 设置数据信息
@@ -1312,15 +1417,21 @@ namespace Langben.Report
         /// <param name="entity">预备方案</param>
         private void SetHeaderAndFooter(ISheet sheet_Destination, PREPARE_SCHEME entity,ExportType type= ExportType.OriginalRecord_JianDing)
         {
+            string REPORTNUMBER = entity.REPORTNUMBER;
             //页眉
             string header = "原始记录编号：";
-            if(type!= ExportType.OriginalRecord_JianDing && type!= ExportType.OriginalRecord_XiaoZhun)
+            if (type != ExportType.OriginalRecord_JianDing && type != ExportType.OriginalRecord_XiaoZhun)
             {
                 header = "证书编号：";
             }
-            if (entity.REPORTNUMBER != null && entity.REPORTNUMBER.Trim() != "")
+            else if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
+            { 
+                int index = entity.REPORTNUMBER.IndexOf("-");
+                REPORTNUMBER = REPORTNUMBER.Split('-')[0] + "原始" + REPORTNUMBER.Substring(index);
+            }           
+            if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
             {
-                sheet_Destination.Header.Left = header + entity.REPORTNUMBER;
+                sheet_Destination.Header.Left = header + REPORTNUMBER;
             }
             else
             {
@@ -1329,7 +1440,10 @@ namespace Langben.Report
             //页脚
             if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString() && entity.CNAS == ShiFouCNAS.Yes.ToString() && entity.REPORTNUMBER != null && entity.REPORTNUMBER.Trim() != "")
             {
-                sheet_Destination.Footer.Left = entity.REPORTNUMBER;
+                if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
+                {
+                    sheet_Destination.Footer.Left = REPORTNUMBER;
+                }
             }
         }
         #region 复制行

@@ -206,11 +206,11 @@
         //一个量程的需要这个方法
         //重写set方法，只准对增加空白行
         function set(tbodyIndex) {
+            $("#hideDangQianTongDao").val(tbodyIndex);
 
             CreateRow();
             // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
-            $("#hideDangQianTongDao").val(tbodyIndex);
-
+          
         }
         //增加行
         function CreateRow() {
@@ -265,7 +265,7 @@
 
         //离开事件，用于计算
         function blurValue(obj) {
-            LianDongShiJiZhi(obj);
+        //    LianDongShiJiZhi(obj);
         }
         //联动标准值
         //输出实际值计算：【选用电阻阻值】有数值时，输出实际值= 读数值 / 选用电阻阻值；【选用电阻阻值】没有数值时，输出实际值=读数值

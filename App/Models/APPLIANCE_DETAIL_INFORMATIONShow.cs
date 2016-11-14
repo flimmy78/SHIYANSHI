@@ -38,6 +38,10 @@ namespace Langben.App.Models
         public string EQUIPMENT_STATUS_VALUUMN { get; set; }
         public string RETURN_INSTRUCTIONS { get; set; }
         public string UNDERTAKE_LABORATORYIDString { get; set; }
+        //器具领取
+        public string APPLIANCECOLLECTIONSATE { get; set; }
+        //报告领取
+        public string REPORTTORECEVESTATE { get; set; }
         public APPLIANCE_LABORATORYShow APPLIANCE_LABORATORYShow { get; set; }
         public string ORDER_STATUS_NAME { get; set; }//记入退回实验室
         //  public virtual ORDER_TASK_INFORMATIONShow ORDER_TASK_INFORMATION { get; set; }
