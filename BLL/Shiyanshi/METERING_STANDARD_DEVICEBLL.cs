@@ -64,6 +64,28 @@ namespace Langben.BLL
             }
             return false;
         }
+
+        /// <summary>
+        /// 编辑一个标准装置/计量标准器信息
+        /// </summary>
+        /// <param name="validationErrors">返回的错误信息</param>
+        /// <param name="entity">一个标准装置/计量标准器信息</param>
+        /// <returns></returns>
+        public bool EditField(ref ValidationErrors validationErrors, METERING_STANDARD_DEVICE entity)
+        {
+            try
+            {
+                repository.EditField(db, entity);
+                repository.Save(db);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                validationErrors.Add(ex.Message);
+                ExceptionsHander.WriteExceptions(ex);
+            }
+            return false;
+        }
     }
 }
 

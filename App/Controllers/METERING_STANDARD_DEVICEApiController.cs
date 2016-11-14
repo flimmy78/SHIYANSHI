@@ -179,6 +179,57 @@ namespace Langben.App.Controllers
             return result; //提示输入的数据的格式不对         
         }
 
+        // PUT api/<controller>/5
+        /// <summary>
+        /// 编辑(标准器编辑功能)
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>  
+        public Common.ClientResult.Result Update([FromBody]METERING_STANDARD_DEVICE entity)
+        {
+            Common.ClientResult.Result result = new Common.ClientResult.Result();
+            if (entity != null && ModelState.IsValid)
+            {   //数据校验
+
+                string currentPerson = GetCurrentPerson();
+                entity.UPDATETIME = DateTime.Now;
+                entity.UPDATEPERSON = currentPerson;
+
+                METERING_STANDARD_DEVICE mce = m_BLL.GetById(entity.ID);
+
+
+
+
+                string returnValue = string.Empty;
+                if (m_BLL.Edit(ref validationErrors, entity))
+                {
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，标准装置/计量标准器信息信息的Id为" + entity.ID, "标准装置/计量标准器信息"
+                        );//写入日志                   
+                    result.Code = Common.ClientCode.Succeed;
+                    result.Message = Suggestion.UpdateSucceed;
+                    return result; //提示更新成功 
+                }
+                else
+                {
+                    if (validationErrors != null && validationErrors.Count > 0)
+                    {
+                        validationErrors.All(a =>
+                        {
+                            returnValue += a.ErrorMessage;
+                            return true;
+                        });
+                    }
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，标准装置/计量标准器信息信息的Id为" + entity.ID + "," + returnValue, "标准装置/计量标准器信息"
+                        );//写入日志   
+                    result.Code = Common.ClientCode.Fail;
+                    result.Message = Suggestion.UpdateFail + returnValue;
+                    return result; //提示更新失败
+                }
+            }
+            result.Code = Common.ClientCode.FindNull;
+            result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";
+            return result; //提示输入的数据的格式不对         
+        }
         // DELETE api/<controller>/5
         /// <summary>
         /// 删除
@@ -220,15 +271,19 @@ namespace Langben.App.Controllers
         }
 
         IBLL.IMETERING_STANDARD_DEVICEBLL m_BLL;
+        IBLL.IALLOWABLE_ERRORBLL m_BLL2;
+        IBLL.IMETERING_STANDARD_DEVICE_CHECKBLL m_BLL3;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public METERING_STANDARD_DEVICEApiController()
-            : this(new METERING_STANDARD_DEVICEBLL()) { }
+            : this(new METERING_STANDARD_DEVICEBLL(), new ALLOWABLE_ERRORBLL(), new METERING_STANDARD_DEVICE_CHECKBLL()) { }
 
-        public METERING_STANDARD_DEVICEApiController(METERING_STANDARD_DEVICEBLL bll)
+        public METERING_STANDARD_DEVICEApiController(METERING_STANDARD_DEVICEBLL bll, ALLOWABLE_ERRORBLL bll2, METERING_STANDARD_DEVICE_CHECKBLL bll3)
         {
             m_BLL = bll;
+            m_BLL2 = bll2;
+            m_BLL3 = bll3;
         }
 
     }

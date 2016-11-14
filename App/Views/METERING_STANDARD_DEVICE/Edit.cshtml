@@ -56,7 +56,7 @@
                     </li>
                     <li class="fl mr10" @*style="display:none"*@ id="choicePre"> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="showModalOnly('THESUPERIOR', '../../METERING_STANDARD_DEVICE');">选择上一级</a></li>
                 </ul>
-                <input type="hidden" id="ID" value="@Model.ID"/>
+                <input type="hidden" id="ID" value="@Model.ID" />
             </div>
             <hr>
             <div class="clearfix"></div>
@@ -88,7 +88,7 @@
                                 <li class="fl mr10">
                                     <input class="my-textbox " value="@item.THEACCURACYLEVEL" id="@item.ID" name="THEACCURACYLEVEL" style="width:200px" placeholder="请输入数值">
                                 </li>
-                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton"  onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this,2.1)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
                             </ul>
                         }
                         else
@@ -97,7 +97,7 @@
                                 <li class="fl mr10">
                                     <input class="my-textbox " value="" name="THEACCURACYLEVEL" style="width:200px" placeholder="请输入数值">
                                 </li>
-                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this,2.1)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
                             </ul>
                             break;
                         }
@@ -128,88 +128,88 @@
                             <ul class="clear mt10">
                                 @if (item.MAXCATEGORIES == "DCV:")
                                 {
-                        <li class="fl mr10">
-                            <select class="my-combobox" name="MAXCATEGORIES">
-                                <option value="">请选择类别</option>
-                                <option selected="selected" value="DCV:">DCV:</option>
-                                <option value="ACV:">ACV:</option>
-                                <option value="DCI:">DCI:</option>
-                                <option value="ACI:">ACI:</option>
-                                <option value="DCR:">DCR:</option>
-                            </select>
-                        </li>
+                                    <li class="fl mr10">
+                                        <select class="my-combobox" name="MAXCATEGORIES">
+                                            <option value="">请选择类别</option>
+                                            <option selected="selected" value="DCV:">DCV:</option>
+                                            <option value="ACV:">ACV:</option>
+                                            <option value="DCI:">DCI:</option>
+                                            <option value="ACI:">ACI:</option>
+                                            <option value="DCR:">DCR:</option>
+                                        </select>
+                                    </li>
                                 }
                                 else if (item.MAXCATEGORIES == "ACV:")
                                 {
-                        <li class="fl mr10">
-                            <select class="my-combobox" name="MAXCATEGORIES">
-                                <option value="">请选择类别</option>
-                                <option value="DCV:">DCV:</option>
-                                <option selected="selected" value="ACV:">ACV:</option>
-                                <option value="DCI:">DCI:</option>
-                                <option value="ACI:">ACI:</option>
-                                <option value="DCR:">DCR:</option>
-                            </select>
-                        </li>
+                                    <li class="fl mr10">
+                                        <select class="my-combobox" name="MAXCATEGORIES">
+                                            <option value="">请选择类别</option>
+                                            <option value="DCV:">DCV:</option>
+                                            <option selected="selected" value="ACV:">ACV:</option>
+                                            <option value="DCI:">DCI:</option>
+                                            <option value="ACI:">ACI:</option>
+                                            <option value="DCR:">DCR:</option>
+                                        </select>
+                                    </li>
                                 }
                                 else if (item.MAXCATEGORIES == "DCI:")
                                 {
-                        <li class="fl mr10">
-                            <select class="my-combobox" name="MAXCATEGORIES">
-                                <option value="">请选择类别</option>
-                                <option value="DCV:">DCV:</option>
-                                <option value="ACV:">ACV:</option>
-                                <option selected="selected" value="DCI:">DCI:</option>
-                                <option value="ACI:">ACI:</option>
-                                <option value="DCR:">DCR:</option>
-                            </select>
-                        </li>
+                                    <li class="fl mr10">
+                                        <select class="my-combobox" name="MAXCATEGORIES">
+                                            <option value="">请选择类别</option>
+                                            <option value="DCV:">DCV:</option>
+                                            <option value="ACV:">ACV:</option>
+                                            <option selected="selected" value="DCI:">DCI:</option>
+                                            <option value="ACI:">ACI:</option>
+                                            <option value="DCR:">DCR:</option>
+                                        </select>
+                                    </li>
                                 }
                                 else if (item.MAXCATEGORIES == "ACI:")
                                 {
-                        <li class="fl mr10">
-                            <select class="my-combobox" name="MAXCATEGORIES">
-                                <option value="">请选择类别</option>
-                                <option value="DCV:">DCV:</option>
-                                <option value="ACV:">ACV:</option>
-                                <option value="DCI:">DCI:</option>
-                                <option selected="selected" value="ACI:">ACI:</option>
-                                <option value="DCR:">DCR:</option>
-                            </select>
-                        </li>
+                                    <li class="fl mr10">
+                                        <select class="my-combobox" name="MAXCATEGORIES">
+                                            <option value="">请选择类别</option>
+                                            <option value="DCV:">DCV:</option>
+                                            <option value="ACV:">ACV:</option>
+                                            <option value="DCI:">DCI:</option>
+                                            <option selected="selected" value="ACI:">ACI:</option>
+                                            <option value="DCR:">DCR:</option>
+                                        </select>
+                                    </li>
                                 }
                                 else if (item.MAXCATEGORIES == "DCR:")
                                 {
-                        <li class="fl mr10">
-                            <select class="my-combobox" name="MAXCATEGORIES">
-                                <option value="">请选择类别</option>
-                                <option value="DCV:">DCV:</option>
-                                <option value="ACV:">ACV:</option>
-                                <option value="DCI:">DCI:</option>
-                                <option value="ACI:">ACI:</option>
-                                <option selected="selected" value="DCR:">DCR:</option>
-                            </select>
-                        </li>
+                                    <li class="fl mr10">
+                                        <select class="my-combobox" name="MAXCATEGORIES">
+                                            <option value="">请选择类别</option>
+                                            <option value="DCV:">DCV:</option>
+                                            <option value="ACV:">ACV:</option>
+                                            <option value="DCI:">DCI:</option>
+                                            <option value="ACI:">ACI:</option>
+                                            <option selected="selected" value="DCR:">DCR:</option>
+                                        </select>
+                                    </li>
                                 }
                                 else
                                 {
-                        <li class="fl mr10">
-                            <select class="my-combobox" name="MAXCATEGORIES">
-                                <option value="">请选择类别</option>
-                                <option value="DCV:">DCV:</option>
-                                <option value="ACV:">ACV:</option>
-                                <option value="DCI:">DCI:</option>
-                                <option value="ACI:">ACI:</option>
-                                <option value="DCR:">DCR:</option>
-                            </select>
-                        </li>
+                                    <li class="fl mr10">
+                                        <select class="my-combobox" name="MAXCATEGORIES">
+                                            <option value="">请选择类别</option>
+                                            <option value="DCV:">DCV:</option>
+                                            <option value="ACV:">ACV:</option>
+                                            <option value="DCI:">DCI:</option>
+                                            <option value="ACI:">ACI:</option>
+                                            <option value="DCR:">DCR:</option>
+                                        </select>
+                                    </li>
                                 }
                                 <li class="fl mr10">
                                     ±
                                     <input class="my-textbox " value="@item.MAXVALUE" name="MAXVALUE" id="@item.ID" placeholder="填入数据">
                                     %
                                 </li>
-                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this,2.2)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
                             </ul>
                         }
                         else
@@ -227,10 +227,10 @@
                                 </li>
                                 <li class="fl mr10">
                                     ±
-                                    <input class="my-textbox " value="@item.MAXVALUE" name="MAXVALUE" placeholder="填入数据">
+                                    <input class="my-textbox " value="" name="MAXVALUE" placeholder="填入数据">
                                     %
                                 </li>
-                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this,2.2)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
                             </ul>
                             break;
                         }
@@ -246,19 +246,19 @@
                             <input type="radio" name="three" id="three_3" onclick="radio.check()" checked="checked" />
                         }
                         else
-                        { 
+                        {
                             <input type="radio" name="three" id="three_3" onclick="radio.check()" />
                             break;
                         }
                     }
-                   
+
                     不确定度
                 </label>
                 <div class="clear" id="div3">
-                    
+
                     @foreach (var item in Model.ALLOWABLE_ERROR)
                     {
-                       
+
                         if (item.THEUNCERTAINTY != null || item.THEUNCERTAINTYVALUE != null || item.THEUNCERTAINTYNDEXL != null || item.THEUNCERTAINTYVALUEK != null)
                         {
                             <ul class="clear mt10">
@@ -471,7 +471,7 @@
                                         </select>
                                     </li>
                                 }
-                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this,2.3)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
                             </ul>
                         }
                         else
@@ -508,7 +508,7 @@
                                         <option value="k=3">k=3</option>
                                     </select>
                                 </li>
-                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this,2.3)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
                             </ul>
                             break;
                         }
@@ -532,10 +532,10 @@
                                 <input class="my-textbox " value="@item.CERTIFICATE_NUM" name="CERTIFICATE_NUM">
                             </li>
                             <li class="fl mr10">
-                                有效期至：
-                                <input class="easyui-datebox" value="@item.VALID_TO" name="VALID_TO">
+                                有效期至（例如2016-12-06）：
+                                <input class="my-textbox" value="@item.VALID_TO" name="VALID_TO">
                             </li>
-                            <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                            <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this,3)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
                         </ul>
                     }
                     else
@@ -550,125 +550,210 @@
                                 <input class="my-textbox " value="" name="CERTIFICATE_NUM">
                             </li>
                             <li class="fl mr10">
-                                有效期至：
-                                <input class="easyui-datebox" value="" name="VALID_TO">
+                                有效期至（例如2016-12-06）：
+                                <input class="my-textbox" value="" name="VALID_TO">
                             </li>
-                            <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                            <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this,3)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
                         </ul>
                         break;
                     }
                 }
-     
 
             </div>
         </div>
         <div class="mt10"><a href="javascript:;" class="easyui-linkbutton" onclick="baocun()">保存</a> <a href="javascript:;" class="easyui-linkbutton" onclick="javascript: window.location.href = '/METERING_STANDARD_DEVICE/Index';">返回</a></div>
     </div>
-    <script>
-        $(function () {
-            $("#state").bind('change', function (obj) {
-                (($(this).val() == 1) ? $('#choicePre').show() : $('#choicePre').hide());
 
-            }); 0
-        })
-        var radio = {
-            check: function () {
-                var obj = $("input[name='three']:checked");
-                var id = obj.attr("id");
-                switch (id) {
-                    case ("three_1"):
-                        var row = $("#div2 ul");
-                        var row2 = $("#div3 ul");
-                        row.each(function () {
-                            if ($("#div2 ul").length > 1)
-                                $(this).remove();
-                            else
-                                $("#div2").find(":text,:selected,select,textarea").each(function () {
-                                    $(this).val("");
-                                    //$(this).combobox('select', "");
-                                })
-                        })
-                        row2.each(function () {
-                            if ($("#div3 ul").length > 1)
-                                $(this).remove();
-                            else
-                                $("#div3").find(":text,:selected,select,textarea").each(function () {
-                                    $(this).val("");
-                                    //$(this).combobox('select', "");
-                                })
-                        })
-                        break
-                    case ("three_2"):
-                        var row = $("#div1 ul");
-                        var row2 = $("#div3 ul");
-                        row.each(function () {
-                            if ($("#div1 ul").length > 1)
-                                $(this).remove();
-                            else
-                                $("#div1").find(":text,:selected,select,textarea").each(function () {
-                                    $(this).val("");
-                                    //$(this).combobox('select', "");
-                                })
-                        })
-                        row2.each(function () {
-                            if ($("#div3 ul").length > 1)
-                                $(this).remove();
-                            else
-                                $("#div3").find(":text,:selected,select,textarea").each(function () {
-                                    $(this).val("");
-                                    //$(this).combobox('select', "");
-                                })
-                        })
-                        break
-                    case ("three_3"):
-                        var row = $("#div2 ul");
-                        var row2 = $("#div1 ul");
-                        row.each(function () {
-                            if ($("#div2 ul").length > 1)
-                                $(this).remove();
-                            else
-                                $("#div2").find(":text,:selected,select,textarea").each(function () {
-                                    $(this).val("");
-                                    //$(this).combobox('select', "");
-                                })
-                        })
-                        row2.each(function () {
-                            if ($("#div1 ul").length > 1)
-                                $(this).remove();
-                            else
-                                $("#div1").find(":text,:selected,select,textarea").each(function () {
-                                    $(this).val("");
-                                    //$(this).combobox('select', "");
-                                })
-                        })
-                        break
-                    default:
+    <ul class="clear mt10" style="display:none" id="html3">
+        <li class="fl mr10">
+            证书发放单位：
+            <input class="my-textbox " value="" name="CERTIFICATEUNIT">
+        </li>
+        <li class="fl mr10">
+            证书编号：
+            <input class="my-textbox " value="" name="CERTIFICATE_NUM">
+        </li>
+        <li class="fl mr10" width="200px">
+            有效期至（例如2016-12-06）：
+            <input class="my-textbox" value="" name="VALID_TO">
+        </li>
+        <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this,3)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+    </ul>
+    <ul class="clear mt10" style="display:none" id="html33">
+        <li class="fl mr10">
+            <select class="my-combobox" name="THEUNCERTAINTY">
+                <option value="">请选择类别</option>
+                <option value="DCV:Urel=">DCV:Urel=</option>
+                <option value="ACV:Urel=">ACV:Urel=</option>
+                <option value="DCI:Urel=">DCI:Urel=</option>
+                <option value="ACI:Urel=">ACI:Urel=</option>
+                <option value="DCR:Urel=">DCR:Urel=</option>
+            </select>
+        </li>
+        <li class="fl mr10">
+            <input class="my-textbox " value="" name="THEUNCERTAINTYVALUE" placeholder="填入数据">
+        </li>
+        <li class="fl mr10">
+            <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
+                <option value="">请选择指数级别</option>
+                <option value="×10-1">×10-1</option>
+                <option value="×10-2">×10-2</option>
+                <option value="×10-3">×10-3</option>
+                <option value="×10-4">×10-4</option>
+                <option value="×10-5=">×10-5=</option>
+                <option value="×10-6=">×10-6=</option>
+            </select>
+        </li>
+        <li class="fl mr10">
+            <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
+                <option value="">请选择k值</option>
+                <option value="k=2">k=2</option>
+                <option value="k=3">k=3</option>
+            </select>
+        </li>
+        <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this,2)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+    </ul>
+        <ul class="clear mt10" style="display:none" id="html2">
+            <li class="fl mr10">
+                <select class="my-combobox" name="MAXCATEGORIES">
+                    <option value="">请选择类别</option>
+                    <option value="DCV:">DCV:</option>
+                    <option value="ACV:">ACV:</option>
+                    <option value="DCI:">DCI:</option>
+                    <option value="ACI:">ACI:</option>
+                    <option value="DCR:">DCR:</option>
+                </select>
+            </li>
+            <li class="fl mr10">
+                ±
+                <input class="my-textbox " value="" name="MAXVALUE" placeholder="填入数据">
+                %
+            </li>
+            <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this,2.2)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+        </ul>
+        <ul class="clear mt10" style="display:none" id="html1">
+            <li class="fl mr10">
+                <input class="my-textbox " value="" name="THEACCURACYLEVEL" style="width:200px" placeholder="请输入数值">
+            </li>
+            <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this,2.1)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+        </ul>
+        <script>
+            $(function () {
+                $("#state").bind('change', function (obj) {
+                    (($(this).val() == 1) ? $('#choicePre').show() : $('#choicePre').hide());
+
+                }); 0
+            })
+            var radio = {
+                check: function () {
+                    var obj = $("input[name='three']:checked");
+                    var id = obj.attr("id");
+                    switch (id) {
+                        case ("three_1"):
+                            var row = $("#div2 ul");
+                            var row2 = $("#div3 ul");
+                            row.each(function () {
+                                if ($("#div2 ul").length > 1)
+                                    $(this).remove();
+                                else
+                                    $("#div2").find(":text,:selected,select,textarea").each(function () {
+                                        $(this).val("");
+                                        //$(this).combobox('select', "");
+                                    })
+                            })
+                            row2.each(function () {
+                                if ($("#div3 ul").length > 1)
+                                    $(this).remove();
+                                else
+                                    $("#div3").find(":text,:selected,select,textarea").each(function () {
+                                        $(this).val("");
+                                        //$(this).combobox('select', "");
+                                    })
+                            })
+                            break
+                        case ("three_2"):
+                            var row = $("#div1 ul");
+                            var row2 = $("#div3 ul");
+                            row.each(function () {
+                                if ($("#div1 ul").length > 1)
+                                    $(this).remove();
+                                else
+                                    $("#div1").find(":text,:selected,select,textarea").each(function () {
+                                        $(this).val("");
+                                        //$(this).combobox('select', "");
+                                    })
+                            })
+                            row2.each(function () {
+                                if ($("#div3 ul").length > 1)
+                                    $(this).remove();
+                                else
+                                    $("#div3").find(":text,:selected,select,textarea").each(function () {
+                                        $(this).val("");
+                                        //$(this).combobox('select', "");
+                                    })
+                            })
+                            break
+                        case ("three_3"):
+                            var row = $("#div2 ul");
+                            var row2 = $("#div1 ul");
+                            row.each(function () {
+                                if ($("#div2 ul").length > 1)
+                                    $(this).remove();
+                                else
+                                    $("#div2").find(":text,:selected,select,textarea").each(function () {
+                                        $(this).val("");
+                                        //$(this).combobox('select', "");
+                                    })
+                            })
+                            row2.each(function () {
+                                if ($("#div1 ul").length > 1)
+                                    $(this).remove();
+                                else
+                                    $("#div1").find(":text,:selected,select,textarea").each(function () {
+                                        $(this).val("");
+                                        //$(this).combobox('select', "");
+                                    })
+                            })
+                            break
+                        default:
+
+                    }
+                    //$("#divtable .easyui-linkbutton").linkbutton("disable");
+                    //$(obj).next('div').children(1).find('li a').linkbutton("enable");
+                    //$(".mt10").next('div').children(9).find('li a').linkbutton("enable");
+                    //$(".mt10").eq(12).find('a').linkbutton("enable");
 
                 }
-                //$("#divtable .easyui-linkbutton").linkbutton("disable");
-                //$(obj).next('div').children(1).find('li a').linkbutton("enable");
-                //$(".mt10").next('div').children(9).find('li a').linkbutton("enable");
-                //$(".mt10").eq(12).find('a').linkbutton("enable");
-
             }
-        }
-        var linkButton = {
-            add: function (obj) {
-                var newRow = " <ul class=\"clear mt10\">" + $(obj).parents('div ul').html() + "</ul>";
-                var parDiv = $(obj).parents('div ul').parent()
-                var newobj = $(parDiv).append(newRow);
-
-                // $.parser.parse();
-            },
-            del: function (obj) {
-                var row = $(obj).parents('div ul');
-                if ($(row).parent().children().length > 1)
-                    $(row).remove();
-                else
-                    alert('就剩一行了你还删除呀？');
+            var linkButton = {
+                add: function (obj, i) {
+                    var newRow = null;
+                    if (i == 3) {
+                        newRow = "<ul class=\"clear mt10\">" + $("#html3").html() + "</ul>";
+                    }
+                    else if (i == 2.1) {
+                        newRow = "<ul class=\"clear mt10\">" + $("#html1").html() + "</ul>";
+                    }
+                    else if (i == 2.2) {
+                        newRow = "<ul class=\"clear mt10\">" + $("#html2").html() + "</ul>";
+                    }
+                    else if (i == 2.3) {
+                        newRow = "<ul class=\"clear mt10\">" + $("#html33").html() + "</ul>";
+                    }
+                    //var newRow = " <ul class=\"clear mt10\">" + $(obj).parents('div ul').html() + "</ul>";
+                    var parDiv = $(obj).parents('div ul').parent()
+                    var newobj = $(parDiv).append(newRow);
+                    // $.parser.parse();
+                },
+                del: function (obj) {
+                    var row = $(obj).parents('div ul');
+                    if ($(row).parent().children().length > 1)
+                        $(row).remove();
+                    else
+                        alert('就剩一行了你还删除呀？');
+                }
             }
-        }
-    </script>
+        </script>
 }
 
 
@@ -694,7 +779,7 @@
                 $("#div1").find("ul").each(function () {
                     var THEACCURACYLEVEL = $(this).find("li :input").eq(0).val();
                     var id = $(this).find("li :input").eq(0).attr("id");
-                    myArray.push({ THEACCURACYLEVEL: THEACCURACYLEVEL,ID:id });
+                    myArray.push({ THEACCURACYLEVEL: THEACCURACYLEVEL, ID: id });
                 })
                 break
             case ("three_2"):
@@ -703,7 +788,7 @@
                     var MAXCATEGORIES = $(this).find("li :selected").eq(0).val();
                     var MAXVALUE = $(this).find("li :input").eq(1).val();
                     var id = $(this).find("li :input").eq(1).attr("id");
-                    myArray2.push({ MAXCATEGORIES: MAXCATEGORIES, MAXVALUE: MAXVALUE ,ID:id});
+                    myArray2.push({ MAXCATEGORIES: MAXCATEGORIES, MAXVALUE: MAXVALUE, ID: id });
                 })
                 break
             case ("three_3"):
@@ -714,7 +799,7 @@
                     var THEUNCERTAINTYNDEXL = $(this).find("li :selected").eq(1).val();
                     var THEUNCERTAINTYVALUEK = $(this).find("li :selected").eq(2).val();
                     var id = $(this).find("li :input").eq(1).attr("id");
-                    myArray3.push({ THEUNCERTAINTY: THEUNCERTAINTY, THEUNCERTAINTYVALUE: THEUNCERTAINTYVALUE, THEUNCERTAINTYNDEXL: THEUNCERTAINTYNDEXL, THEUNCERTAINTYVALUEK: THEUNCERTAINTYVALUEK,ID:id });
+                    myArray3.push({ THEUNCERTAINTY: THEUNCERTAINTY, THEUNCERTAINTYVALUE: THEUNCERTAINTYVALUE, THEUNCERTAINTYNDEXL: THEUNCERTAINTYNDEXL, THEUNCERTAINTYVALUEK: THEUNCERTAINTYVALUEK, ID: id });
                 })
                 break
             default:
@@ -722,11 +807,12 @@
         $("#div4").find("ul").each(function () {
             var CERTIFICATEUNIT = $(this).find("li :input").eq(0).val();
             var CERTIFICATE_NUM = $(this).find("li :input").eq(1).val();
-            var VALID_TO = $(this).find("li :input").eq(2).datebox('getValue');
+            //var VALID_TO = $(this).find("li :input").eq(2).datebox('getValue');
+            var VALID_TO = $(this).find("li :input").eq(2).val();
             var id = $(this).find("li :input").eq(0).attr("id");
             //校验时间格式是否正确
             if (CERTIFICATEUNIT != "" || CERTIFICATE_NUM != "" || VALID_TO != "")
-                myArray4.push({ CERTIFICATEUNIT: CERTIFICATEUNIT, CERTIFICATE_NUM: CERTIFICATE_NUM, VALID_TO: VALID_TO,ID:id });
+                myArray4.push({ CERTIFICATEUNIT: CERTIFICATEUNIT, CERTIFICATE_NUM: CERTIFICATE_NUM, VALID_TO: VALID_TO, ID: id });
         })
         METERING_STANDARD_DEVICE.ID = $("#ID").val();//ID
         METERING_STANDARD_DEVICE.NAME = $("#NAME").val();//名称
@@ -821,6 +907,3 @@
     }
 
 </script>
-
-
-
