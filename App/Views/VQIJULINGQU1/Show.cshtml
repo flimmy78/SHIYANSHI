@@ -1,0 +1,307 @@
+﻿@model Langben.DAL.ORDER_TASK_INFORMATION
+
+@{
+    ViewBag.Title = "签字";
+    Layout = "~/Views/Shared/QianZi.cshtml";
+}
+@using Common
+<script src="~/Scripts/jquery.edatagrid.js"></script>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    @*<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />*@
+    <title>委托单</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .tab {
+            width: 1085px;
+            text-align: center;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+            .tab td, .tab1 td {
+                padding: 2px;
+                height: 30px;
+            }
+
+        .title_wtd {
+            width: 1085px;
+            height: 42px;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 42px;
+            font-size: 12pt;
+        }
+
+            .title_wtd span {
+                float: right;
+                font-size: 12pt;
+            }
+
+        .title_jibei {
+            width: 1085px;
+            height: 42px;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 42px;
+            font-size: 14pt;
+            font-weight: bold;
+        }
+
+        .tab1 {
+            width: 1085px;
+            min-height: 128px;
+            text-align: center;
+            border-collapse: collapse;
+            font-size: 11px;
+            margin-top: 30px;
+        }
+
+        .beizhu {
+            width: 1085px;
+            height: 100px;
+            margin: 10px auto 0;
+            font-size: 9pt;
+        }
+
+            .beizhu .mail {
+                margin-left: 132px;
+            }
+
+            .beizhu .yb {
+                margin-left: 200px;
+            }
+
+        .qianzi {
+            width: 1085px;
+            border: none;
+        }
+        .my-btn {
+            cursor: pointer;
+            font-size: 14px;
+            background: #006F69;
+            color: #fff;
+            padding: 0 15px;
+            border: none;
+            border-radius: 4px;
+            height: 38px;
+            font-family: 'Microsoft YaHei';
+        }
+
+            .my-btn:hover {
+                background: #08B2AA;
+            }
+    </style>
+</head>
+
+<body>
+    <div id="HTMLVALUE">
+        <div class="title_jibei" id="ACCEPT_ORGNIZATION">冀北电力有限公司计量中心</div>
+        <div class="title_wtd"><span>委托单号：<span id="ORDER_NUMBER"></span></span></div>
+        <table class="tab" border="1px" cellpadding="0" cellspacing="0" align="center">
+            <tr>
+                <td width="81" height="32">送检单位</td>
+                <td colspan="2" id="INSPECTION_ENTERPRISE"></td>
+                <td width="81">单位地址</td>
+                <td colspan="2" id="INSPECTION_ENTERPRISE_ADDRESS"></td>
+                <td width="81">邮政编码</td>
+                <td id="INSPECTION_ENTERPRISE_POST"></td>
+            </tr>
+            <tr>
+                <td width="81" height="32">联系人</td>
+                <td colspan="2" id="CONTACTS"></td>
+                <td width="81">联系电话</td>
+                <td colspan="2" id="CONTACT_PHONE"></td>
+                <td width="81">传真</td>
+                <td id="FAX"></td>
+            </tr>
+            <tr>
+                <td width="81" height="32">证书单位名称</td>
+                <td colspan="2" id="CERTIFICATE_ENTERPRISE"></td>
+                <td width="81">单位地址</td>
+                <td colspan="2" id="CERTIFICATE_ENTERPRISE_ADDRESS"></td>
+                <td width="81">邮政编码</td>
+                <td id="CERTIFICATE_ENTERPRISE_POST"></td>
+            </tr>
+            <tr>
+                <td width="81" height="32">联系人</td>
+                <td colspan="2" id="CONTACTS2"></td>
+                <td width="81">联系电话</td>
+                <td colspan="2" id="CONTACT_PHONE2"></td>
+                <td width="81">传真</td>
+                <td id="FAX2"></td>
+            </tr>
+        </table>
+        <table class="tab1" border="1px" cellpadding="0" cellspacing="0" align="center" id="qijuzhi"></table>
+        <table class="qianzi" cellpadding="0" cellspacing="0" align="center">
+            <tr>
+                <td align='right' valign="top">
+                    <div style="font-size:16pt; margin-top:20px">请客户确认上述信息后签字：</div>
+                </td>
+                <td width="700" height="300">
+                    <div style="width:700px; height:300px; background:#eee">
+                        <object id="HWPenSign"
+                                name="HWPenSign"
+                                classid="clsid:E8F5278C-0C72-4561-8F7E-CCBC3E48C2E3"
+                                width="700"
+                                height="330"></object>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+            </tr>
+        </table>
+        <table class="tab1" border="1px" cellpadding="0" cellspacing="0" align="center">
+            <tr>
+                <td colspan="8" height="64px" style="text-align:left;">
+                    客户特殊要求或说明（如有加急要求、保密要求等，请在客户特殊要求中说明）：
+                </td>
+            </tr>
+            <!--<tr>
+                <td colspan="8" height="32" style="text-align:left;">
+                <p>请客户确认上述信息后签字：</p>
+                </td>
+            </tr>-->
+            <!--<tr>
+                <td width="80" height="25">委托人签字：</td>
+                <td width="120" >a</td>
+                <td width="80"  nowrap="nowrap">送检日期：</td>
+                <td align="left" >系统时间</td>
+                <td width="80" nowrap="nowrap">接收人签字：</td>
+                <td width="200" >a</td>
+                <td width="80" >接受日期：</td>
+                <td width="120" >系统时间</td>
+            </tr>-->
+            <tr>
+                <td nowrap=nowrap>注意事项：</td>
+                <td colspan="4" style="text-align:left; ">
+                    1、 本单位检定/校准技术依据优先采用国家计量检定规程、校准规范和经国家实验室认可的校准方法，若有特殊要求请注明。<br />
+                    2、本委托单填写一式两份，第二联盖章后作为器具及证书的提取凭证。如有丢失或损毁，需凭单位证明及提取人身份证办理提取手续。提取时请确认器具是否正常，附件、证书是否齐全，器具一经取走，如出现问题，本单位概不负责。<br />
+                    3、本单位对送检器具的保管期为12个月，逾期不取的器具，视为主动放弃器具所有权，本单位有权进行处理。<br />
+                    4、本外观状态只限于器具外观有无明显损伤。在器具送达实验室进行通电、预热等专业检查后，实验室将对器具工作状态进行最终的判断。
+                </td>
+                <td colspan="3" width="200"><p style=" text-align:left;"=text-align:left;">盖章处：</p></td>
+            </tr>
+        </table>
+        <p class="beizhu" id="tongxundizi">
+
+        </p>
+        <div class="tr mt10">
+            <input id="Button3" type="button" value="重新签字" class="my-btn" onclick="return Button3_onclick()" />
+            <input id="Button14" type="button" value="签字后，打印委托单，同时发送实验室" class="my-btn" onclick="return Button14_onclick()" />
+        </div>
+    </div>
+    <script language="javascript" type="text/javascript">
+
+    var obj;
+    penwidth = 3;
+    width = 700;
+    height = 385;
+    linespace = 55;
+    lineNum = height / linespace;
+
+    window.onload = function () {
+        obj = document.getElementById("HWPenSign");
+        obj.HWSetBkColor(0xE0F8E0);
+        obj.HWSetCtlFrame(2, 0x000000);
+        obj.HWSetSeparatorLine(lineNum, 0x000000);
+        //初始化代码
+        var res;
+        res = obj.HWInitialize();
+
+    }
+
+
+    function Button3_onclick() {
+        obj.HWClearPenSign();
+    }
+
+    function tiaoxingma() {
+        window.location.href = "/ORDER_TASK_INFORMATION/ErWeiMa/@ViewBag.Id";
+
+    }
+    $.ajax({
+        url: '/api/ORDER_TASK_INFORMATIONApi/PostID/' + '@ViewBag.Id',
+        type: "Post",
+        // async: false,
+        success: function (row) {
+            var html = '<tr><td width="40px" height="32">序号</td><td>器具名称</td><td>型号</td><td>出厂编号</td><td width="40px">数量</td><td>附件</td><td width="">外观说明</td><td>承接实验室</td><td>器具接收</td><td>备注</td></tr>';
+            for (var i = 0; i < row.APPLIANCE_DETAIL_INFORMATIONShows.length; i++) {
+                var x = i + 1;
+                var APPLIANCE_NAME = row.APPLIANCE_DETAIL_INFORMATIONShows[i].APPLIANCE_NAME == null ? '/' : row.APPLIANCE_DETAIL_INFORMATIONShows[i].APPLIANCE_NAME;
+                var VERSION = row.APPLIANCE_DETAIL_INFORMATIONShows[i].VERSION == null ? '/' : row.APPLIANCE_DETAIL_INFORMATIONShows[i].VERSION;
+                var FACTORY_NUM = row.APPLIANCE_DETAIL_INFORMATIONShows[i].FACTORY_NUM == null ? '/' : row.APPLIANCE_DETAIL_INFORMATIONShows[i].FACTORY_NUM;
+                var NUM = row.APPLIANCE_DETAIL_INFORMATIONShows[i].NUM == null ? '/' : row.APPLIANCE_DETAIL_INFORMATIONShows[i].NUM;
+                var ATTACHMENT = row.APPLIANCE_DETAIL_INFORMATIONShows[i].ATTACHMENT == null ? '/' : row.APPLIANCE_DETAIL_INFORMATIONShows[i].ATTACHMENT;
+                var APPEARANCE_STATUS = row.APPLIANCE_DETAIL_INFORMATIONShows[i].APPEARANCE_STATUS == null ? '/' : row.APPLIANCE_DETAIL_INFORMATIONShows[i].APPEARANCE_STATUS;
+                var UNDERTAKE_LABORATORYIDString = row.APPLIANCE_DETAIL_INFORMATIONShows[i].UNDERTAKE_LABORATORYIDString == null ? '/' : row.APPLIANCE_DETAIL_INFORMATIONShows[i].UNDERTAKE_LABORATORYIDString;
+                var APPLIANCE_RECIVE = row.APPLIANCE_DETAIL_INFORMATIONShows[i].APPLIANCE_RECIVE == null ? '/' : row.APPLIANCE_DETAIL_INFORMATIONShows[i].APPLIANCE_RECIVE;
+                var REMARKS = row.APPLIANCE_DETAIL_INFORMATIONShows[i].REMARKS == null ? '/' : row.APPLIANCE_DETAIL_INFORMATIONShows[i].REMARKS;
+                html += '<tr><td width="40px" height="32">' + x +
+                    '</td><td>' + APPLIANCE_NAME +
+                    '</td><td width="">' +VERSION +
+                    '</td><td>' + FACTORY_NUM +
+                    '</td><td width="40px">' + NUM +
+                    '</td><td width="">' + ATTACHMENT +
+                    '</td><td width="">' + APPEARANCE_STATUS +
+                    '</td><td>' + UNDERTAKE_LABORATORYIDString +
+                    '</td><td width="">' + APPLIANCE_RECIVE + '</td><td>' + REMARKS + '</td></tr>';
+            }
+            $("#qijuzhi").html(html);//器具信息
+            $("#ORDER_NUMBER").text(row.ORDER_NUMBER == null ? "/" : row.ORDER_NUMBER);//委托单号
+            $("#ACCEPT_ORGNIZATION").html(row.ACCEPT_ORGNIZATION == null ? "/" : row.ACCEPT_ORGNIZATION);//受理单位
+            $("#INSPECTION_ENTERPRISE").text(row.INSPECTION_ENTERPRISE == null ? "/" : row.INSPECTION_ENTERPRISE);//送检单位
+            $("#INSPECTION_ENTERPRISE_ADDRESS").text(row.INSPECTION_ENTERPRISE_ADDRESS == null ? "/" : row.INSPECTION_ENTERPRISE_ADDRESS);//送检单位地址
+            $("#INSPECTION_ENTERPRISE_POST").text(row.INSPECTION_ENTERPRISE_POST == null ? "/" : row.INSPECTION_ENTERPRISE_POST);//送检单位邮政编码
+            $("#CONTACTS").text(row.CONTACTS == null ? "/" : row.CONTACTS);//联系人
+            $("#CONTACT_PHONE").text(row.CONTACT_PHONE == null ? "/" : row.CONTACT_PHONE);//联系电话
+            $("#FAX").text(row.FAX == null ? "/" : row.FAX);//传真
+            $("#CERTIFICATE_ENTERPRISE").text(row.CERTIFICATE_ENTERPRISE == null ? "/" : row.CERTIFICATE_ENTERPRISE);//证书单位
+            $("#CERTIFICATE_ENTERPRISE_ADDRESS").text(row.CERTIFICATE_ENTERPRISE_ADDRESS == null ? "/" : row.CERTIFICATE_ENTERPRISE_ADDRESS);//证书单位地址
+            $("#CERTIFICATE_ENTERPRISE_POST").text(row.CERTIFICATE_ENTERPRISE_POST == null ? "/" : row.CERTIFICATE_ENTERPRISE_POST);//证书单位邮政编码
+            $("#CONTACTS2").text(row.CONTACTS2 == null ? "/" : row.CONTACTS2);//联系人2
+            $("#CONTACT_PHONE2").text(row.CONTACT_PHONE2 == null ? "/" : row.CONTACT_PHONE2);//联系电话2
+            $("#FAX2").text(row.FAX2 == null ? "/" : row.FAX2);//传真2
+            if (row.ACCEPT_ORGNIZATION == "冀北电力有限公司计量中心") {
+                $("#tongxundizi").html('通信地址：北京市昌平区回龙观镇二拨子村<span class="mail">邮编：102208</span><br />联系电话：010-56585812<span class="yb">传真：010-56585804</span><br />');
+            }
+            else if (row.ACCEPT_ORGNIZATION == "华北电力科学研究院有限责任公司") {
+                $("#tongxundizi").html('通信地址：北京复兴门外地藏庵南巷1号<span class="mail">邮编：100045</span><br />联系电话：010-88071523<span class="yb">传真：010-88071504</span><br />');
+            }
+        }
+    })
+    function Button14_onclick() {
+        var stream;
+        stream = obj.HWGetBase64Stream(3);
+        //正式发布的时候要去掉注释
+        //if (stream=='') {
+        //   alert("请签字！");
+        //}
+
+        $.ajax({
+            url: "/ORDER_TASK_INFORMATION/QianZi/@ViewBag.Id",
+            type: "Put",
+            dataType: "json",
+            data: { s: stream, HTMLVALUE:  $("#HTMLVALUE").html() },
+            success: function (data) {
+                if (data.Code == 1) {
+                    window.print();//打印
+                    alert("签字成功，并成功发送实验室");
+                    window.location.href = "/ORDER_TASK_INFORMATION/ErWeiMa/@ViewBag.Id";
+                }
+                else {
+                    alert("签字保存失败");
+                }
+            }
+        });
+
+    }
+
+    </script>
+</body>
+</html>

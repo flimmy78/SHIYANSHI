@@ -912,6 +912,7 @@
     <Content Include="Template\检定证书-数据模板-数表三相.xls" />
     <Content Include="Template\检定证书-空.xls" />
     <Content Include="Template\检定证书.xls" />
+    <Content Include="Views\VQIJULINGQU1\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

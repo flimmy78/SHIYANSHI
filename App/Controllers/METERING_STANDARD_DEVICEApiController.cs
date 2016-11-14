@@ -197,11 +197,22 @@ namespace Langben.App.Controllers
 
                 METERING_STANDARD_DEVICE mce = m_BLL.GetById(entity.ID);
 
+                //List<CAttributeFeature> check = mce.METERING_STANDARD_DEVICE_CHECK.ToList();
+                //check.Sort(SortCompare);
+                foreach (var item in mce.METERING_STANDARD_DEVICE_CHECK)
+                {
+                    foreach (var item2 in entity.METERING_STANDARD_DEVICE_CHECK)
+                    {
+                        if (item.ID == item2.ID)
+                        {
 
+                        }
+                    }
+                }
 
 
                 string returnValue = string.Empty;
-                if (m_BLL.Edit(ref validationErrors, entity))
+                if (m_BLL.EditField(ref validationErrors, entity))
                 {
                     LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，标准装置/计量标准器信息信息的Id为" + entity.ID, "标准装置/计量标准器信息"
                         );//写入日志                   
@@ -230,6 +241,51 @@ namespace Langben.App.Controllers
             result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";
             return result; //提示输入的数据的格式不对         
         }
+        #region
+
+        #region SortCompare()函数，对List<CAttributeFeature>进行排序时作为参数使用
+
+        /// <summary>
+
+        /// 对List<CAttributeFeature>进行排序时作为参数使用
+
+        /// </summary>
+
+        /// <param name="AF1"></param>
+
+        /// <param name="AF2"></param>
+
+        /// <returns></returns>
+
+        public static int SortCompare(CAttributeFeature AF1, CAttributeFeature AF2)
+
+        {
+
+            int res = 0;
+
+            if (AF1.m_dAttributeFeature > AF2.m_dAttributeFeature)
+
+            {
+
+                res = -1;
+
+            }
+
+            else if (AF1.m_dAttributeFeature < AF2.m_dAttributeFeature)
+
+            {
+
+                res = 1;
+
+            }
+
+            return res;
+
+        }
+
+        #endregion
+        #endregion
+
         // DELETE api/<controller>/5
         /// <summary>
         /// 删除
@@ -268,6 +324,34 @@ namespace Langben.App.Controllers
                 }
             }
             return result;
+        }
+
+        /// <summary>
+        /// list排序
+        /// </summary>
+        public class CAttributeFeature
+        {
+            public string m_strAttributeName { get; set; }
+
+            public double m_dAttributeFeature { get; set; }
+
+            public CAttributeFeature(string strName, double dFeature)
+
+            {
+
+                this.m_strAttributeName = strName;
+
+                this.m_dAttributeFeature = dFeature;
+
+            }
+
+            public void FeatureAdd(double dFeature)
+
+            {
+
+                this.m_dAttributeFeature += dFeature;
+
+            }
         }
 
         IBLL.IMETERING_STANDARD_DEVICEBLL m_BLL;

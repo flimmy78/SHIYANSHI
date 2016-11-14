@@ -327,6 +327,7 @@ DanWeiDDLHtmlArray = [
                     "<option value=\"KHz\">KHz</option>" +
                     "<option value=\"MHz\">MHz</option>  " +
                     "<option value=\"GHz\">GHz</option>  " +
+                    "<option value=\"\"></option>  " +
                    "</select>"
         }
 ]
