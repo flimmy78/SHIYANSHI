@@ -78,7 +78,8 @@ namespace Langben.BLL
                 
                 string Message = "";
                 ReportBLL reportBll = new ReportBLL();
-                bool IsSuccess = reportBll.ExportReport(entity.ID, out Message, CreatePerson,true);
+                //bool IsSuccess = reportBll.ExportReport(entity.ID, out Message, CreatePerson,true);
+                bool IsSuccess = reportBll.ExportAndSavePath(entity.ID, out Message, CreatePerson);
                 if (IsSuccess)
                 {
                     repository.EditField(db, entity);
