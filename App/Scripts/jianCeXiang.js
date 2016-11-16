@@ -23,7 +23,7 @@ function CreateTongDao() {
     tableIdx++;
     var $tongdao = $Tongdao_moban.clone().appendTo($('#tongdao'));
 
-    var reg = new RegExp("_1_", "g");//g,表示全部替换。
+    var reg = new RegExp("_t_", "g");//g,表示全部替换。
 
     $tongdao.html($tongdao.html().replace(reg, '_' + tableIdx + '_'));
 
