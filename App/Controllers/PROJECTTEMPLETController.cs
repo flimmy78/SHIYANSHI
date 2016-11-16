@@ -148,10 +148,8 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult ZhiLiuDianLiuShuChu(string id = "直流电流", string RULEID = "38-1987_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult ZhiLiuDianLiuShuChu(string RULEID = "38-1987_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-            //直流电压
-            ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
