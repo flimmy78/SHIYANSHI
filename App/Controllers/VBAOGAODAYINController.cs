@@ -97,7 +97,8 @@ namespace Langben.App.Controllers
                     ,
                     FILECONCLUSION = s.FILECONCLUSION
                     ,
-                    FULLPATH = s.FULLPATH.Substring(s.FULLPATH.LastIndexOf("\\up"))
+                    FULLPATH = (s.FULLPATH==null) ?"":s.FULLPATH.Substring(s.FULLPATH.LastIndexOf("\\up"))
+                
 
                 }
 

@@ -66,7 +66,7 @@
             @Html.LabelFor(model => model.PRINTSTATUS):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("PRINTSTATUSDDL", Models.SysFieldModels.GetSysField("VBAOGAODAYIN", "PRINTSTATUS"), "请选择", new { id = "PRINTSTATUSDDL" })
+            @Html.DropDownList("PRINTSTATUS", Models.SysFieldModels.GetSysField("VBAOGAODAYIN", "PRINTSTATUS"), "请选择", new { id = "PRINTSTATUSDDL" })
         </div>
     </div>
     <div class='input_search' style="padding-top:10px;">
@@ -200,7 +200,7 @@
         search += "APPROVALDATEStart_Time&" + $("#APPROVALDATEStart_Time").val() + "^";
         search += "APPROVALDATEEnd_Time&" + $("#APPROVALDATEEnd_Time").val() + "^";
         search += "BAR_CODE_NUM&" + $("#BAR_CODE_NUM").val() + "^";
-        search += "PRINTSTATUSDDL&" + $("#PRINTSTATUSDDL option:selected").val() + "^";
+        search += "PRINTSTATUS&" + $("#PRINTSTATUS option:selected").val() + "^";
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
