@@ -56,9 +56,9 @@
         </td>
     </tr>
     <tr>
-        <th align="center" width="100">测试量</th>
-        <th align="center" width="100"> 等级</th>
-        <th align="center" width="140"> 测量点</th>
+        <th align="center" width="60">测试量</th>
+        <th align="center" width="60"> 等级</th>
+        <th align="center" width="160"> 测量点</th>
         <th align="center" width="100">
             二次输入标准值<br>
             (Hz)
@@ -96,11 +96,11 @@
 <tbody>
     <!--表体-->
     <tr>
-        <td align="center" width="100">
+        <td align="center" width="60">
             f
         </td>
-        <td align="center" width="100">
-            <input name="DengJi" type="text" class="my-textbox tr" value="0.0" style="width:70px" onblur="Recalculate()" id="DengJi_t_1_1">
+        <td align="center" width="60">
+            <input name="DengJi" type="text" class="my-textbox tr" value="0.0" style="width:40px" onblur="Recalculate()" id="DengJi_t_1_1">
             级
         </td>
         <td colspan="7" style="padding:0">
@@ -108,9 +108,14 @@
                 <tbody id="tbody_moban">
                     <!--插入行的位置-->
                     <tr rowindex="1">
-                        <td rowspan="1" align="center" width="140">
+                        <td rowspan="1" align="center" width="160">
                             <input class="my-textbox input-width" value="" id="OUTPUTVALUE_t_1_1" name="OUTPUTVALUE" onblur="blurCeLiangDian(this)" type="text">
-                            <select class="my-combobox" name="OUTPUTVALUE_UNIT" id="OUTPUTVALUE_UNIT_t_1_1"><option value="Hz">Hz</option><option value="KHz">KHz</option><option value="MHz">MHz</option><option value="GHz">GHz</option></select>
+                            <select class="my-combobox" name="OUTPUTVALUE_UNIT" id="OUTPUTVALUE_UNIT_t_1_1">
+                                <option value="Hz">Hz</option>
+                                <option value="KHz">KHz</option>
+                                <option value="MHz">MHz</option>
+                                <option value="GHz">GHz</option>
+                            </select>
                         </td>
                         <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_1" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"></td>
                         <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_1" name="ACTUALVALUE" onblur="blurBiaoZhunShuChuZhi(this)" type="text"></td>
@@ -355,7 +360,7 @@
             var datas = GetValue();
             var level = datas.level;
             var length = datas.levellength;
-            if (level == "0.0" || ShijiShuChu == "" || BiaoZhunShuChu=="") return ""
+            if (level == "0.0" || ShijiShuChu == "" || BiaoZhunShuChu == "") return ""
             else
                 return (((parseFloat(ShijiShuChu) - parseFloat(BiaoZhunShuChu)) / (datas.outputMaxValue - datas.outputMinValue) * 100 / parseFloat(level)) * parseFloat(level)).toFixed(length);
         }

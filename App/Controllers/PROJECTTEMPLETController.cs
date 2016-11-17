@@ -124,8 +124,10 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult ZhiLiuDianLiuDianYaFeiZhengFu(string RULEID = "315-1983_2_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult ZhiLiuDianLiuDianYaFeiZhengFu(string id = "电压输出", string RULEID = "315-1983_2_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
+            //电压输出
+            ViewBag.canshu =id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
