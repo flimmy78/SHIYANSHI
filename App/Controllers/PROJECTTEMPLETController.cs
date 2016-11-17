@@ -150,7 +150,7 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult ZhiLiuDianLiuShuChu(string RULEID = "38-1987_2_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult ZhiLiuDianLiuShuChu(string RULEID = "445-1986_2_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
