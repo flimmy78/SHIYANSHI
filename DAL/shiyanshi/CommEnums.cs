@@ -166,5 +166,26 @@ namespace Langben.DAL.shiyanshi
         /// </summary>
         Report_XiaoZhun_CNAS = 4
 
-    }    
+    }
+    /// <summary>
+    /// 装置类型
+    /// </summary>
+    public enum CATEGORYType
+    {
+        /// <summary>
+        /// 标准装置
+        /// </summary>          
+        标准装置 = 0,
+        /// <summary>
+        /// 标准器
+        /// </summary>          
+        标准器 = 1,
+        /// <summary>
+        /// 中间试品
+        /// </summary>
+        中间试品 = 2
+        
+
+    }
+
 }

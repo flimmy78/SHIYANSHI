@@ -90,8 +90,20 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
     var ddlArray = LianDongDanWeiDDLAttribute.split(';');
     $.each(ddlArray, function (i, item) {
         var biangeng = "(" + obj.name + ")|";
-        if (item == null || item.trim() == "" || item.indexOf(biangeng) < 0) {
+        //if (item == null || item.trim() == "" || item.indexOf(biangeng) < 0) {
+        //    return true;
+        //}
+
+        if (item == null || item.trim() == "" ) {
             return true;
+        }
+        else
+        {
+            item = item + '_UNIT'
+            if(item.indexOf(biangeng) < 0)
+            {
+                return true;
+            }
         }
         var liandongs = item.replace(biangeng, "").split(',');
         if (liandongs == null || liandongs.length <= 0) {
