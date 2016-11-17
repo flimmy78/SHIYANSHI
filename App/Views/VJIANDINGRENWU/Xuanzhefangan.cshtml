@@ -76,9 +76,10 @@
                 </div>
                 <div class="editor-field" style="padding-top:5px; height:19px">
                     <label>
-                         <input type="radio" id="jiandingyes" name="CERTIFICATION_AUTHORITY" onclick="zizhiget(this)" value="Yes" atps="jiandingyes" /> Yes</label>
+                        <input type="radio" id="jiandingyes" name="CERTIFICATION_AUTHORITY" onclick="zizhiget(this)" value="Yes" atps="jiandingyes" /> Yes
+                    </label>
                     <label>    <input type="radio" id="jiandingno" name="CERTIFICATION_AUTHORITY" onclick="zizhiget(this)" value="No" atps="jiandingno" /> No</label>
-</div>
+                </div>
             </div>
             <div class="clearfix"></div>
             <div class="input_search" id="kongzhi" style="display:none">
@@ -131,7 +132,7 @@
             <div class="clearfix"></div>
             <div class="input_search">
                 <div class="input_search-label">
-                    
+
                 </div>
                 <div class="input_search-field">
                     <a class="easyui-linkbutton" onclick="shangchuan()" id="sc">报告上传</a>
@@ -139,8 +140,8 @@
                     <a class="easyui-linkbutton" onclick="BackList('VJIANDINGRENWU')">返回</a>
                 </div>
             </div>
-                </div>
-            
+        </div>
+
         <input type="hidden" value="" id="ACCEPT_ORGNIZATION_HIDDEN" />
         <input type="hidden" name="APPLIANCE_LABORATORYID" id="APPLIANCE_LABORATORYID" value="@ViewBag.APPLIANCE_LABORATORYID" />
         <input type="hidden" name="ID" id="ID_String" value="@ViewBag.Id" />
@@ -174,7 +175,7 @@
                     }
                 }
             }
-        }      
+        }
         if (isNull(arr.QUALIFICATIONS)) {
             zhi += "资质不能为空！<br>";
         }
@@ -309,7 +310,7 @@
                 $("#kongzhi").hide();
                 $('#CONTROL_NUMBER').val("");
                 if (zhi2 == "华北电力科学研究院有限责任公司") {
-                    getCity($("#QUALIFICATIONS"));
+                   getCity($("#QUALIFICATIONS"));
                     $("<option></option>")
                                .val("/")
                                .text("/")
@@ -385,7 +386,7 @@
         }
         else {
             $('#xuanzhefangandiv').find(":text,:selected,select,:radio,textarea,:checked,:password").each(function () {
-                $(this).attr("disabled",true);
+                $(this).attr("disabled", true);
             });
         }
 

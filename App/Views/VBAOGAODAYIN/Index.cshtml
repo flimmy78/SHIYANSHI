@@ -66,7 +66,7 @@
             @Html.LabelFor(model => model.PRINTSTATUS):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("PRINTSTATUS", Models.SysFieldModels.GetSysField("VBAOGAODAYIN", "PRINTSTATUS"), "请选择", new { id = "PRINTSTATUSDDL" })
+            @Html.DropDownList("PRINTSTATUS", Models.SysFieldModels.GetSysField("VBAOGAODAYIN", "PRINTSTATUS"), "请选择", new { id = "PRINTSTATUS" })
         </div>
     </div>
     <div class='input_search' style="padding-top:10px;">
@@ -195,7 +195,7 @@
         search += "REPORTNUMBER&" + $("#REPORTNUMBER").val() + "^";
         search += "ORDER_NUMBER&" + $("#ORDER_NUMBER").val() + "^";
         search += "FACTORY_NUM&" + $("#FACTORY_NUM").val() + "^";
-        search += "CERTIFICATE_ENTERPRISE&" + $('#CERTIFICATE_ENTERPRISE').combobox('getText') + "^";
+        search += "CERTIFICATE_ENTERPRISE&" + $('#CERTIFICATE_ENTERPRISE').combobox('getValue') + "^";
         search += "UNDERTAKE_LABORATORYID&" + $("#UNDERTAKE_LABORATORYID option:selected").val() + "^";
         search += "APPROVALDATEStart_Time&" + $("#APPROVALDATEStart_Time").val() + "^";
         search += "APPROVALDATEEnd_Time&" + $("#APPROVALDATEEnd_Time").val() + "^";
