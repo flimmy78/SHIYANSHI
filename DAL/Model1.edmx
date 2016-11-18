@@ -1251,6 +1251,37 @@
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="RULEID" Type="varchar2" MaxLength="36" />
         </EntityType>
+        <!--生成过程中发现错误:
+警告 6013: 表/视图“TENGFEI.UNCERTAINTYTABLE”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+        <EntityType Name="UNCERTAINTYTABLE">
+          <Property Name="ID" Type="varchar2" MaxLength="36" />
+          <Property Name="NOTE" Type="varchar2" MaxLength="200" />
+          <Property Name="INDEX2UNIT" Type="varchar2" MaxLength="200" />
+          <Property Name="INDEX2" Type="varchar2" MaxLength="200" />
+          <Property Name="INDEX1UNIT" Type="varchar2" MaxLength="200" />
+          <Property Name="INDEX1" Type="varchar2" MaxLength="200" />
+          <Property Name="ENDUNITFREQUENCY" Type="varchar2" MaxLength="200" />
+          <Property Name="ENDRELATIONSHIPFREQUENCY" Type="varchar2" MaxLength="200" />
+          <Property Name="THERELATIONSHIPFREQUENCY" Type="varchar2" MaxLength="200" />
+          <Property Name="THEUNITFREQUENCY" Type="varchar2" MaxLength="200" />
+          <Property Name="THEFREQUENCY" Type="varchar2" MaxLength="200" />
+          <Property Name="ENDRELATIONSHIP" Type="varchar2" MaxLength="200" />
+          <Property Name="ENDUNIT" Type="varchar2" MaxLength="200" />
+          <Property Name="ENDRANGESCOPE" Type="varchar2" MaxLength="200" />
+          <Property Name="THERELATIONSHIP" Type="varchar2" MaxLength="200" />
+          <Property Name="THEUNIT" Type="varchar2" MaxLength="200" />
+          <Property Name="THERANGESCOPE" Type="varchar2" MaxLength="200" />
+          <Property Name="KVALE" Type="varchar2" MaxLength="200" />
+          <Property Name="THEERRODISTRIBUTION" Type="varchar2" MaxLength="200" />
+          <Property Name="ERRORLIMITUNIT" Type="varchar2" MaxLength="200" />
+          <Property Name="ERRORLIMITS" Type="varchar2" MaxLength="200" />
+          <Property Name="ERRORSOURCES" Type="varchar2" MaxLength="200" />
+          <Property Name="ASSESSMENTITEM" Type="varchar2" MaxLength="200" />
+          <Property Name="CREATETIME" Type="date" />
+          <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="UPDATETIME" Type="date" />
+          <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
+        </EntityType>-->
         <EntityType Name="UNDERTAKE_LABORATORY">
           <Key>
             <PropertyRef Name="ID" />
