@@ -1,0 +1,174 @@
+﻿@model Langben.DAL.UNCERTAINTYTABLE
+
+@{
+    Layout = "~/Views/Shared/Details.cshtml";
+}
+@using Common
+ @section CurentPlace {
+    详细  
+}
+ 
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="button" onclick="window.location.href = 'javascript:history.go(-1)';" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                  
+                <div class="display-label">
+                      @Html.LabelFor(model => model.NOTE) :
+                </div>
+                <div class="display-field" id='NOTE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.INDEX2UNIT) :
+                </div>
+                <div class="display-field" id='INDEX2UNIT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.INDEX2) :
+                </div>
+                <div class="display-field" id='INDEX2'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.INDEX1UNIT) :
+                </div>
+                <div class="display-field" id='INDEX1UNIT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.INDEX1) :
+                </div>
+                <div class="display-field" id='INDEX1'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ENDUNITFREQUENCY) :
+                </div>
+                <div class="display-field" id='ENDUNITFREQUENCY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ENDRELATIONSHIPFREQUENCY) :
+                </div>
+                <div class="display-field" id='ENDRELATIONSHIPFREQUENCY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.THERELATIONSHIPFREQUENCY) :
+                </div>
+                <div class="display-field" id='THERELATIONSHIPFREQUENCY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.THEUNITFREQUENCY) :
+                </div>
+                <div class="display-field" id='THEUNITFREQUENCY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.THEFREQUENCY) :
+                </div>
+                <div class="display-field" id='THEFREQUENCY'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ENDRELATIONSHIP) :
+                </div>
+                <div class="display-field" id='ENDRELATIONSHIP'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ENDUNIT) :
+                </div>
+                <div class="display-field" id='ENDUNIT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ENDRANGESCOPE) :
+                </div>
+                <div class="display-field" id='ENDRANGESCOPE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.THERELATIONSHIP) :
+                </div>
+                <div class="display-field" id='THERELATIONSHIP'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.THEUNIT) :
+                </div>
+                <div class="display-field" id='THEUNIT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.THERANGESCOPE) :
+                </div>
+                <div class="display-field" id='THERANGESCOPE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.KVALE) :
+                </div>
+                <div class="display-field" id='KVALE'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.THEERRODISTRIBUTION) :
+                </div>
+                <div class="display-field" id='THEERRODISTRIBUTION'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ERRORLIMITUNIT) :
+                </div>
+                <div class="display-field" id='ERRORLIMITUNIT'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ERRORLIMITS) :
+                </div>
+                <div class="display-field" id='ERRORLIMITS'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ERRORSOURCES) :
+                </div>
+                <div class="display-field" id='ERRORSOURCES'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.ASSESSMENTITEM) :
+                </div>
+                <div class="display-field" id='ASSESSMENTITEM'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATETIME) :
+                </div>
+                <div class="display-field" id='CREATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.CREATEPERSON) :
+                </div>
+                <div class="display-field" id='CREATEPERSON'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATETIME) :
+                </div>
+                <div class="display-field" id='UPDATETIME'>
+                </div>      
+                <div class="display-label">
+                      @Html.LabelFor(model => model.UPDATEPERSON) :
+                </div>
+                <div class="display-field" id='UPDATEPERSON'>
+                </div>        
+                <div class="display-label">
+                      @Html.LabelFor(model => model.METERING_STANDARD_DEVICEID) :
+                </div>
+                <div class="display-field">
+                    @if (Model.METERING_STANDARD_DEVICE != null)
+                       {
+                    @Model.METERING_STANDARD_DEVICE.NAME
+                    } 
+                </div>
+        </div>
+    </fieldset>
+
+<script type="text/javascript">
+
+    $(function () {
+        // 获取内容并显示
+        var id = '@ViewBag.Id';
+        $.ajax({
+            url: "/api/UNCERTAINTYTABLEApi/" + id,
+            type: "POST",
+            // async: false,
+            success: function (res) {
+		$("#NOTE").html(res.NOTE);$("#INDEX2UNIT").html(res.INDEX2UNIT);$("#INDEX2").html(res.INDEX2);$("#INDEX1UNIT").html(res.INDEX1UNIT);$("#INDEX1").html(res.INDEX1);$("#ENDUNITFREQUENCY").html(res.ENDUNITFREQUENCY);$("#ENDRELATIONSHIPFREQUENCY").html(res.ENDRELATIONSHIPFREQUENCY);$("#THERELATIONSHIPFREQUENCY").html(res.THERELATIONSHIPFREQUENCY);$("#THEUNITFREQUENCY").html(res.THEUNITFREQUENCY);$("#THEFREQUENCY").html(res.THEFREQUENCY);$("#ENDRELATIONSHIP").html(res.ENDRELATIONSHIP);$("#ENDUNIT").html(res.ENDUNIT);$("#ENDRANGESCOPE").html(res.ENDRANGESCOPE);$("#THERELATIONSHIP").html(res.THERELATIONSHIP);$("#THEUNIT").html(res.THEUNIT);$("#THERANGESCOPE").html(res.THERANGESCOPE);$("#KVALE").html(res.KVALE);$("#THEERRODISTRIBUTION").html(res.THEERRODISTRIBUTION);$("#ERRORLIMITUNIT").html(res.ERRORLIMITUNIT);$("#ERRORLIMITS").html(res.ERRORLIMITS);$("#ERRORSOURCES").html(res.ERRORSOURCES);$("#ASSESSMENTITEM").html(res.ASSESSMENTITEM);$("#CREATETIME").html(res.CREATETIME);$("#CREATEPERSON").html(res.CREATEPERSON);$("#UPDATETIME").html(res.UPDATETIME);$("#UPDATEPERSON").html(res.UPDATEPERSON);
+            }
+        })
+    });
+</script>
+

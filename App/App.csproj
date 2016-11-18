@@ -202,6 +202,8 @@
     <Compile Include="Controllers\SysOperationController.cs" />
     <Compile Include="Controllers\SysPersonController.cs" />
     <Compile Include="Controllers\SysRoleController.cs" />
+    <Compile Include="Controllers\UNCERTAINTYTABLEApiController.cs" />
+    <Compile Include="Controllers\UNCERTAINTYTABLEController.cs" />
     <Compile Include="Controllers\VAPPLIANCE_DETAIL_INFORMATIONApiController .cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ApplianceController.cs" />
@@ -913,6 +915,10 @@
     <Content Include="Template\检定证书-空.xls" />
     <Content Include="Template\检定证书.xls" />
     <Content Include="Views\VQIJULINGQU1\Show.cshtml" />
+    <Content Include="Views\UNCERTAINTYTABLE\Create.cshtml" />
+    <Content Include="Views\UNCERTAINTYTABLE\Details.cshtml" />
+    <Content Include="Views\UNCERTAINTYTABLE\Edit.cshtml" />
+    <Content Include="Views\UNCERTAINTYTABLE\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

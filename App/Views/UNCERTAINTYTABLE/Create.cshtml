@@ -1,0 +1,216 @@
+﻿@model Langben.DAL.UNCERTAINTYTABLE
+
+@{
+    Layout = "~/Views/Shared/Create.cshtml";
+}
+@using Common
+@using Models
+ 
+@section CurentPlace {
+ 
+      创建  
+ 
+ }
+@using (Html.BeginForm("", "api/UNCERTAINTYTABLEApi/Post"))
+{
+    <fieldset>
+        <legend>
+            <input class="a2 f2" type="submit" value="创建" />
+            <input class="a2 f2" type="button" onclick="BackList('UNCERTAINTYTABLE')" value="返回" />
+        </legend>
+        <div class="bigdiv">
+                 
+            <div class="editor-label">
+                @Html.LabelFor(model => model.NOTE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.NOTE)
+                @Html.ValidationMessageFor(model => model.NOTE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INDEX2UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INDEX2UNIT)
+                @Html.ValidationMessageFor(model => model.INDEX2UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INDEX2)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INDEX2)
+                @Html.ValidationMessageFor(model => model.INDEX2)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INDEX1UNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INDEX1UNIT)
+                @Html.ValidationMessageFor(model => model.INDEX1UNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INDEX1)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.INDEX1)
+                @Html.ValidationMessageFor(model => model.INDEX1)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ENDUNITFREQUENCY)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ENDUNITFREQUENCY)
+                @Html.ValidationMessageFor(model => model.ENDUNITFREQUENCY)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ENDRELATIONSHIPFREQUENCY)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ENDRELATIONSHIPFREQUENCY)
+                @Html.ValidationMessageFor(model => model.ENDRELATIONSHIPFREQUENCY)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.THERELATIONSHIPFREQUENCY)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.THERELATIONSHIPFREQUENCY)
+                @Html.ValidationMessageFor(model => model.THERELATIONSHIPFREQUENCY)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.THEUNITFREQUENCY)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.THEUNITFREQUENCY)
+                @Html.ValidationMessageFor(model => model.THEUNITFREQUENCY)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.THEFREQUENCY)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.THEFREQUENCY)
+                @Html.ValidationMessageFor(model => model.THEFREQUENCY)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ENDRELATIONSHIP)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ENDRELATIONSHIP)
+                @Html.ValidationMessageFor(model => model.ENDRELATIONSHIP)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ENDUNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ENDUNIT)
+                @Html.ValidationMessageFor(model => model.ENDUNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ENDRANGESCOPE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ENDRANGESCOPE)
+                @Html.ValidationMessageFor(model => model.ENDRANGESCOPE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.THERELATIONSHIP)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.THERELATIONSHIP)
+                @Html.ValidationMessageFor(model => model.THERELATIONSHIP)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.THEUNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.THEUNIT)
+                @Html.ValidationMessageFor(model => model.THEUNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.THERANGESCOPE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.THERANGESCOPE)
+                @Html.ValidationMessageFor(model => model.THERANGESCOPE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.KVALE)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.KVALE)
+                @Html.ValidationMessageFor(model => model.KVALE)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.THEERRODISTRIBUTION)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.THEERRODISTRIBUTION)
+                @Html.ValidationMessageFor(model => model.THEERRODISTRIBUTION)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ERRORLIMITUNIT)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ERRORLIMITUNIT)
+                @Html.ValidationMessageFor(model => model.ERRORLIMITUNIT)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ERRORLIMITS)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ERRORLIMITS)
+                @Html.ValidationMessageFor(model => model.ERRORLIMITS)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ERRORSOURCES)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ERRORSOURCES)
+                @Html.ValidationMessageFor(model => model.ERRORSOURCES)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ASSESSMENTITEM)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ASSESSMENTITEM)
+                @Html.ValidationMessageFor(model => model.ASSESSMENTITEM)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CREATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CREATEPERSON)
+                @Html.ValidationMessageFor(model => model.CREATEPERSON)
+            </div>     
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UPDATEPERSON)：
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UPDATEPERSON)
+                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
+            </div>
+        <div class="editor-label">
+            <a class="anUnderLine" onclick="showModalOnly('METERING_STANDARD_DEVICEID','../../METERING_STANDARD_DEVICE');">
+                @Html.LabelFor(model => model.METERING_STANDARD_DEVICEID) 
+            </a>：
+        </div>
+        <div class="editor-field">
+            <div id="checkMETERING_STANDARD_DEVICEID">            
+            </div>
+            @Html.HiddenFor(model => model.METERING_STANDARD_DEVICEID)
+        </div>
+        </div>
+    </fieldset>
+} 
+
+
+    
+    <script type="text/javascript">
+
+        $(function () {
+            
+        });
+              
+
+    </script>
+
+
