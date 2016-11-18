@@ -697,6 +697,8 @@ namespace Langben.Report
                 RowIndex = 10;
             }
             #endregion
+            RowIndex++;
+            SetZhuangZhis(hssfworkbook, sheet_Destination, ref RowIndex, entity, type);
             #region 暂时没有数据，不做
             ////检定所使用的计量标准装置
             ////HideRow(sheet, RowIndex, 6);
@@ -714,7 +716,7 @@ namespace Langben.Report
             //RowIndex = RowIndex + 8;
             #endregion
             #region 校准说明            
-            RowIndex ++;
+            RowIndex++;
             if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
             {
                 sheet_Destination.GetRow(RowIndex).GetCell(2).SetCellValue("/");
@@ -1257,7 +1259,10 @@ namespace Langben.Report
                 {
                     sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CONCLUSION_EXPLAIN);
                 }
+                RowIndex++;
             }
+            RowIndex++;
+            SetZhuangZhis(hssfworkbook, sheet_Destination,ref RowIndex, entity, type);
             #region 暂时没有数据，不做
             ////检定所使用的计量标准装置
             ////HideRow(sheet, RowIndex, 6);
@@ -1287,7 +1292,7 @@ namespace Langben.Report
         /// <param name="rowIndex_Destination">目标行号</param>
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <param name="type">报告类型</param>
-        private void SetZhuangZhis(IWorkbook hssfworkbook,ISheet sheet_Destination,int rowIndex_Destination, PREPARE_SCHEME entity, ExportType type)
+        private void SetZhuangZhis(IWorkbook hssfworkbook,ISheet sheet_Destination,ref int rowIndex_Destination, PREPARE_SCHEME entity, ExportType type)
         {
             //int rowIndex = rowIndex_Destination;
             //标准装置
@@ -1317,9 +1322,9 @@ namespace Langben.Report
             }            
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
             IMETERING_STANDARD_DEVICEBLL bll = new METERING_STANDARD_DEVICEBLL();           
-            if (entity.METERING_STANDARD_DEVICE != null)
+            if (entity.METERING_STANDARD_DEVICE != null )
             {
-                List<METERING_STANDARD_DEVICE> list = (List<METERING_STANDARD_DEVICE>)entity.METERING_STANDARD_DEVICE;
+                List<METERING_STANDARD_DEVICE> list = entity.METERING_STANDARD_DEVICE.ToList();
                 if(list!=null && list.Count>0)
                 {
                     //标准装置
