@@ -569,10 +569,11 @@ namespace Langben.Report
             {
                 sheet_Destination.GetRow(42).GetCell(9).SetCellValue("/");
             }
-            //有效期
-            //if (entity.VALIDITY_PERIOD.HasValue)
+            ////有效期，通知书不要有效期
+            //if (entity.VALIDITY_PERIOD.HasValue && entity.CALIBRATION_DATE.HasValue)
             //{
-            //    sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
+            //    //sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));                
+            //    sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.CALIBRATION_DATE.Value.AddYears(entity.VALIDITY_PERIOD.Value).ToString("yyyy年MM月dd日"));
             //}
             //else
             //{
@@ -886,14 +887,15 @@ namespace Langben.Report
                 sheet_Destination.GetRow(42).GetCell(9).SetCellValue("/");
             }
             //有效期
-            if (entity.VALIDITY_PERIOD.HasValue)
-            {
-                sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
+            if (entity.VALIDITY_PERIOD.HasValue && entity.CALIBRATION_DATE.HasValue)
+            {                
+                //sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
+                sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.CALIBRATION_DATE.Value.AddYears(entity.VALIDITY_PERIOD.Value).ToString("yyyy年MM月dd日"));
             }
             else
             {
                 sheet_Destination.GetRow(43).GetCell(9).SetCellValue("/");
-            }            
+            }                   
             #region 暂时没有数据，不做
             ////检定所使用的计量标准装置
             ////HideRow(sheet, RowIndex, 6);
@@ -911,7 +913,7 @@ namespace Langben.Report
             //RowIndex = RowIndex + 8;
             #endregion
             #endregion
-           
+
             sheet_Destination.ForceFormulaRecalculation = true;
         }
         /// <summary>
@@ -1159,7 +1161,8 @@ namespace Langben.Report
             //有效期
             if (entity.VALIDITY_PERIOD.HasValue)
             {
-                sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
+                sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString()+"年");
+                //sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
             }
             else
             {

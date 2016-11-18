@@ -97,10 +97,9 @@ namespace Langben.DAL
 
         [ScaffoldColumn(true)]
         [Display(Name = "有效期", Order = 17)]
-        [DataType(System.ComponentModel.DataAnnotations.DataType.DateTime, ErrorMessage = "时间格式不正确")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
+        [Range(0, 2147483646, ErrorMessage = "数值超出范围")]
+        public int? VALIDITY_PERIOD { get; set; }
 
-        public DateTime? VALIDITY_PERIOD { get; set; }
 
         [ScaffoldColumn(true)]
         [Display(Name = "校准说明", Order = 18)]
