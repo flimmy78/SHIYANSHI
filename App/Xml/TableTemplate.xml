@@ -244,7 +244,7 @@
 					<ColIndex>1</ColIndex>
 					<!--所占列数-->
 					<ColCount>5</ColCount>
-					<!--相同值是否需要单元格合并，不填表示需要合并（Y:合并、N:不合并）-->
+					<!--相同值是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）-->
 					<IsMergeSameValue>Y</IsMergeSameValue>
 				</Cell>
 				<Cell>
@@ -782,6 +782,18 @@
 			<CellList>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
+					<Code/>
+					<!--字段名称含义-->
+					<Name>测试量</Name>
+					<!--模板中单元格开始列号-->
+					<ColIndex>1</ColIndex>
+					<!--所占列数-->
+					<ColCount>6</ColCount>
+					<!--相同值是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）-->
+					<IsMergeSameValue>Y</IsMergeSameValue>
+				</Cell>
+				<Cell>
+					<!--字段代码与模板中设置的字段保持一致-->
 					<Code>DengJi</Code>
 					<!--字段名称含义-->
 					<Name>等级</Name>
@@ -789,6 +801,20 @@
 					<ColIndex>7</ColIndex>
 					<!--所占列数-->
 					<ColCount>4</ColCount>
+					<!--相同值是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）-->
+					<IsMergeSameValue>Y</IsMergeSameValue>
+				</Cell>
+				<Cell>
+					<!--字段代码与模板中设置的字段保持一致-->
+					<Code/>
+					<!--字段名称含义-->
+					<Name>等级单位</Name>
+					<!--模板中单元格开始列号-->
+					<ColIndex>11</ColIndex>
+					<!--所占列数-->
+					<ColCount>2</ColCount>
+					<!--相同值是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）-->
+					<IsMergeSameValue>Y</IsMergeSameValue>
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
@@ -1781,6 +1807,8 @@
 					<ColIndex>7</ColIndex>
 					<!--所占列数-->
 					<ColCount>4</ColCount>
+					<!--相同值是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）-->
+					<IsMergeSameValue>Y</IsMergeSameValue>
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
@@ -2022,6 +2050,18 @@
 			<CellList>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
+					<Code/>
+					<!--字段名称含义-->
+					<Name>测试量</Name>
+					<!--模板中单元格开始列号-->
+					<ColIndex>1</ColIndex>
+					<!--所占列数-->
+					<ColCount>6</ColCount>
+					<!--相同值是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）-->
+					<IsMergeSameValue>Y</IsMergeSameValue>
+				</Cell>
+				<Cell>
+					<!--字段代码与模板中设置的字段保持一致-->
 					<Code>DengJi</Code>
 					<!--字段名称含义-->
 					<Name>等级</Name>
@@ -2029,6 +2069,20 @@
 					<ColIndex>7</ColIndex>
 					<!--所占列数-->
 					<ColCount>4</ColCount>
+					<!--相同值是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）-->
+					<IsMergeSameValue>Y</IsMergeSameValue>
+				</Cell>
+				<Cell>
+					<!--字段代码与模板中设置的字段保持一致-->
+					<Code/>
+					<!--字段名称含义-->
+					<Name>等级单位</Name>
+					<!--模板中单元格开始列号-->
+					<ColIndex>11</ColIndex>
+					<!--所占列数-->
+					<ColCount>2</ColCount>
+					<!--相同值是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）-->
+					<IsMergeSameValue>Y</IsMergeSameValue>
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
@@ -2049,6 +2103,8 @@
 					<ColIndex>19</ColIndex>
 					<!--所占列数-->
 					<ColCount>4</ColCount>
+					<!--相同值是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）-->
+					<IsMergeSameValue>Y</IsMergeSameValue>
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
