@@ -285,7 +285,7 @@
             var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
             LiangChengShuLiang++;
             var rowspanIdx = $("#txtPoint").val();     //检测点数
-            txtNumber = $("#txtNumber").val(); //小数点位数
+            txtPointLen = $("#txtPointLen").val(); //小数点位数
             var standardValue = "";
             var htmlString = [];
             var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
@@ -373,14 +373,14 @@
             //取出当前行
             //var name = $(obj).attr("name");
             //var last = name.charAt(id.length - 2)
-            //txtNumber = $("#txtNumber").val(); //小数点位数
+            //txtPointLen = $("#txtPointLen").val(); //小数点位数
             //var tr = $(obj).parent().parent();
             //var shwoData = $(tr).find('td').find('input[name="XIANSHIZHIER"]').find('input').val();
             //var biaoZhunValue = $(tr).find('td').eq(2).find('input').val();
-            //var wuCha = (shwoData - biaoZhunValue).toFixed(txtNumber);
+            //var wuCha = (shwoData - biaoZhunValue).toFixed(txtPointLen);
             ////XIANSHIZHIER
             //$(tr).find('td').eq(3).find('input').val(wuCha);
-          //  (tr).find('td').eq(1).find('input').val(parseFloat(shwoData).toFixed(txtNumber))
+          //  (tr).find('td').eq(1).find('input').val(parseFloat(shwoData).toFixed(txtPointLen))
         }
         //离开事件，用于计算
         function blurValue(obj) {
@@ -417,7 +417,7 @@
             </tr>
             <tr>
                 <td align="right">小数点位数：</td>
-                <td><input type="text" id="txtNumber"  value=""  name="txtNumber" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
+                <td><input type="text" id="txtPointLen"  value=""  name="txtPointLen" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
             </tr>
         </table>
     </div>

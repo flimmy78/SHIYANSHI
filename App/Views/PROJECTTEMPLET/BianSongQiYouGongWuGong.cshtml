@@ -283,7 +283,7 @@
             var LiangChengShuLiang = $(thi).prev().val();//$("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
             //LiangChengShuLiang++;
             var rowspanIdx = $("#txtPoint").val();     //检测点数
-            txtNumber = $("#txtNumber").val(); //小数点位数
+            txtPointLen = $("#txtPointLen").val(); //小数点位数
             var standardValue = "";
             var htmlString = [];
             var rowLength =
@@ -341,7 +341,7 @@
 @section TanKuang {
     <!--弹框的位置-->
     <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
-    <input type="hidden" id="txtNumber" value="1" /><!--小数点位数-->
+    <input type="hidden" id="txtPointLen" value="1" /><!--小数点位数-->
 
 }
 

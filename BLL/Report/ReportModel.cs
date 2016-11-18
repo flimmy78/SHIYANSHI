@@ -310,5 +310,16 @@ namespace Langben.Report
             get { return _ColCount-1; }
             set { _ColCount = value; }
         }
+        private string _IsMergeSameValue = "Y";
+        /// <summary>
+        /// 相同值是否需要单元格合并，不填表示需要合并（Y:合并、N:不合并）
+        /// </summary>
+        [XmlElement("IsMergeSameValue")]
+        public string IsMergeSameValue
+        {
+            get { return _IsMergeSameValue ; }
+            set { _IsMergeSameValue = value; }
+        }
+        
     }
 }

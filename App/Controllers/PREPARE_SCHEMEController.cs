@@ -125,7 +125,7 @@ namespace Langben.App.Controllers
                 entity.CONCLUSION_EXPLAIN = CONCLUSION_EXPLAIN;
                 try
                 {
-                    entity.VALIDITY_PERIOD = Convert.ToDateTime(VALIDITY_PERIOD);
+                    entity.VALIDITY_PERIOD = Convert.ToInt32(VALIDITY_PERIOD);
                 }
                 catch
                 {
