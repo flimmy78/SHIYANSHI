@@ -41,7 +41,7 @@ namespace Langben.DAL
         public Nullable<System.DateTime> CALIBRATION_DATE { get; set; }
         public string CONCLUSION { get; set; }
         public string CONCLUSION_EXPLAIN { get; set; }
-        public Nullable<System.DateTime> VALIDITY_PERIOD { get; set; }
+        public Nullable<int> VALIDITY_PERIOD { get; set; }
         public string CALIBRATION_INSTRUCTIONS { get; set; }
         public string ACCURACY_GRADE { get; set; }
         public string RATED_FREQUENCY { get; set; }

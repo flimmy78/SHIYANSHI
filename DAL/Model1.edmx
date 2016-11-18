@@ -3662,7 +3662,7 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <Property Name="CALIBRATION_DATE" Type="DateTime" />
           <Property Name="CONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CONCLUSION_EXPLAIN" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="VALIDITY_PERIOD" Type="DateTime" />
+          <Property Name="VALIDITY_PERIOD" Type="Int32" />
           <Property Name="CALIBRATION_INSTRUCTIONS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="ACCURACY_GRADE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RATED_FREQUENCY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
