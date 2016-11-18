@@ -71,31 +71,12 @@
             </div>
             <div class="search-form">
                 <div class="editor-label">
-                    <a class="anUnderLine" onclick="showModalOnly('UNDERTAKE_LABORATORYID','../../UNDERTAKE_LABORATORY');">
-                        @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID)
-                    </a>：
+                       @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID)
+                   
                 </div>
                 <div class="editor-field">
-                    <div id="checkUNDERTAKE_LABORATORYID">
-                        @if (Model != null)
-                        {
-                            if (null != Model.UNDERTAKE_LABORATORYID)
-                            {
-                                <table id="@Model.UNDERTAKE_LABORATORYID"
-                                       class="deleteStyle">
-                                    <tr>
-                                        <td>
-                                            <img alt="删除" title="点击删除" onclick="deleteTable('@Model.UNDERTAKE_LABORATORYID ','UNDERTAKE_LABORATORYID');" src="../../../Images/deleteimge.png" />
-                                        </td>
-                                        <td>
-                                            @Model.UNDERTAKE_LABORATORY.NAME
-                                        </td>
-                                    </tr>
-                                </table>
-                            }
-                        }
-                    </div>
-                    @Html.HiddenFor(model => model.UNDERTAKE_LABORATORYID)
+                  
+                    @Html.EditorFor(model => model.UNDERTAKE_LABORATORYID)
                 </div>
             </div>
             <div class="search-form">
@@ -135,17 +116,9 @@
                         }
                     </div>
                     @Html.HiddenFor(model => model.PARENTID)
-                </div>@Html.HiddenFor(model => model.CREATETIME)
+                </div>@Html.HiddenFor(model => model.CREATETIME)@Html.HiddenFor(model => model.CREATEPERSON)
             </div>
-            <div class="search-form">
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.CREATEPERSON)：
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.CREATEPERSON)
-                    @Html.ValidationMessageFor(model => model.CREATEPERSON)
-                </div>
-            </div>
+             
             <div class="search-form">
                 <div class="editor-label">
                     @Html.LabelFor(model => model.UPDATEPERSON)：
@@ -180,7 +153,7 @@
             // 获取待编辑内容并显示
             var id = '@ViewBag.Id';
             $.ajax({
-                url: "/api/RULEApi/Get/" + id,
+                url: "/RULE/Get/" + id,
                 type: "GET",
                 dataType: "json",
                 
