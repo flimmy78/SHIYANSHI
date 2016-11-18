@@ -613,7 +613,7 @@ function xiangDuiWuCha1(obj, source, gold) {
 //第2列的事件
 //source第1列的名称
 function xiangDuiWuCha2(obj, source, gold) {
-
+    
     //重新计算当前行
     var name = $(obj).attr("name");
     var id = $(obj).attr("id");
@@ -632,13 +632,4 @@ function xiangDuiWuCha2(obj, source, gold) {
     }
 }
 
-
-
-
-debugger;
-var dsd = fomatFloat(3.2130003, 2);
-var dsds = fomatFloat(321.305003, 2);
-var d = fomatFloat(321.315003, 2);
-var dsd1 = fomatFloat(3.213, 2);
-var dsds2 = fomatFloat(321.30500, 2);
-var d3 = fomatFloat(321.315, 2);
+ 
