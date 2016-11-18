@@ -68,7 +68,7 @@
                     <!--插入行的位置-->
                     <tr rowindex="1">
                         <td rowspan="95" width="100" align="center">
-                            <input type="text" class="my-textbox tr ZHONGJIANZHI" value="1.0" style="width:44px" name="ZHONGJIANZHI1" id="ZHONGJIANZHI1_t_1_1">
+                            <input type="text" class="my-textbox tr ZHONGJIANZHI" value="1.0" style="width:44px" name="ZHONGJIANZHI" id="ZHONGJIANZHI_t_1_1">
                         </td>
                         <td rowspan="1" align="center" width="100">
                             <input class="my-textbox input-width" value="" id="OUTPUTVALUE_t_1_1" name="OUTPUTVALUE" onblur="blurXianShiZhi(this)" type="text">
@@ -122,7 +122,7 @@
                     <!--插入行的位置-->
                     <tr rowindex="1">
                         <td rowspan="95" width="100" align="center">
-                            <input type="text" class="my-textbox tr ZHONGJIANZHI" value="0.5L" style="width:44px" name="ZHONGJIANZHIL" id="ZHONGJIANZHIL_t_2_1">
+                            <input type="text" class="my-textbox tr ZHONGJIANZHI" value="0.5L" style="width:44px" name="ZHONGJIANZHI" id="ZHONGJIANZHI_t_2_1">
 
                         </td>
                         <td rowspan="1" align="center" width="100">
@@ -153,7 +153,7 @@
                     <!--插入行的位置-->
                     <tr rowindex="1">
                         <td rowspan="95" width="100" align="center">
-                            <input type="text" class="my-textbox tr ZHONGJIANZHI" value="0.5C" style="width:44px" name="ZHONGJIANZHIC" id="ZHONGJIANZHIC_t_3_1">
+                            <input type="text" class="my-textbox tr ZHONGJIANZHI" value="0.5C" style="width:44px" name="ZHONGJIANZHI" id="ZHONGJIANZHI_t_3_1">
 
                         </td>
 
@@ -283,13 +283,7 @@
         //离开事件，用于计算 输入范围最小
         function blurBiaoZhunZhi(obj) {
             //注意多通道
-            //
-            //注意多通道
-            //
-            //注意多通道
-            //
-            //固定值fhzkhz_1_1_1 tongdao_1
-
+            
             var dianliu = $(obj).parent().parent().parent().parent().parent().parent().find("input[name='fhzkhz']").val();
             var dianya = $(obj).parent().parent().parent().parent().parent().parent().find("input[name='chzkhz']").val();
             if (dianliu == null || dianliu == "") {

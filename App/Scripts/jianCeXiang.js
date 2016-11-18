@@ -515,7 +515,6 @@ function PointFloat(src, pos) {
     return Math.round(src * Math.pow(10, pos)) / Math.pow(10, pos);
 }
 
-
 //保留小数位数 四舍六入奇进偶舍
 function fomatFloat(src, pos) {
 
@@ -588,7 +587,58 @@ function fomatFloat(src, pos) {
     }
     return src;
 }
-//---------------------------------
+
+
+//第1列的事件
+//source第2列的名称
+function xiangDuiWuCha1(obj, source, gold) {
+
+    //重新计算当前行
+    var name = $(obj).attr("name");
+    var id = $(obj).attr("id");
+    id = id.substring(id.indexOf('_'));
+
+    var newid = source + id;//改动的地方，参与计算的列的name值
+
+    var biaoZhunData = $(obj).parent().parent().find("#" + newid).val();
+    var showData = $(obj).val();
+    if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
+        var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+        var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
+        var data = fomatFloat(xiangDuiWuCha, txtPointLen)
+        $(obj).parent().parent().find("#" + gold + id).val(data);
+    }
+}
+//第2列的事件
+//source第1列的名称
+function xiangDuiWuCha2(obj, source, gold) {
+
+    //重新计算当前行
+    var name = $(obj).attr("name");
+    var id = $(obj).attr("id");
+    id = id.substring(id.indexOf('_'));
+
+    var newid = source + id;//改动的地方，参与计算的列的name值
+
+    var showData = $(obj).parent().parent().find("#" + newid).val();
+    var biaoZhunData = $(obj).val();
+    if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
+        var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+        var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
+        var data = fomatFloat(xiangDuiWuCha, txtPointLen)
+        $(obj).parent().parent().find("#" + gold + id).val(data);
+    }
+}
 
 
 
+
+debugger;
+var dsd = fomatFloat(3.2130003, 2);
+var dsds = fomatFloat(321.305003, 2);
+var d = fomatFloat(321.315003, 2);
+var dsd1 = fomatFloat(3.213, 2);
+var dsds2 = fomatFloat(321.30500, 2);
+var d3 = fomatFloat(321.315, 2);
