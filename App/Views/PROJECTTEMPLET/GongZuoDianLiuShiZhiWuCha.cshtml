@@ -1,0 +1,175 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "工作电流示值误差-相对误差";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    <tr>
+        <th align="center" width="140">量程</th>
+        <th width="140" align="center">标准值</th>
+        <th width="140" align="center">赫兹(Hz)</th>
+        <th width="140" align="center"> 显示值</th>
+
+        <th width="140" align="center">相对误差(%)</th>
+        <th align="center">
+            校准结果的不确定度<br>
+            U(K = <select class="my-combobox" name="K" id="K_t_1_1">
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="√3">√3</option>
+</select>
+
+            </select>)
+        </th>
+    </tr>
+
+</thead>
+
+<tbody id="tbody_moban">
+    <!--表体-->
+    <!--插入行的位置-->
+</tbody>
+
+<tfoot>
+    <!--表尾-->
+    <tr>
+        <td colspan="7">
+            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加量程</a>
+
+        </td>
+    </tr>
+</tfoot>
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        function set(tbodyIndex) {
+
+            $('#dlg').dialog('open');//打开弹出框
+
+            $("#hideDangQianTongDao").val(tbodyIndex);
+
+        }
+        //增加行
+        function CreateRow() {
+
+            var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+            var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
+            LiangChengShuLiang++;
+            var txtNumber = $("#txtNumber").val();     //量程值
+            var txtPoint = $("#txtPoint").val();     //检测点数
+            var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+            var htmlString = [];
+            var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
+
+            var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
+
+
+
+            for (var rowidx = 0; rowidx < txtPoint; rowidx++) {
+                rowLength++;
+                htmlString.push("<tr rowindex='" + rowLength + "'>");
+
+                var rowspan = 1; //合并单元格行数
+
+                var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
+
+                //计算默认值
+
+                if (rowidx == 0) {
+                    //需要合并的列 //量程
+
+                    htmlString.push(SetTDHtml(txtPoint, "READVALUE", HangHaoID, rowidx, txtNumber, ""));
+
+                }
+
+                //需要合并的列
+                var changerHTML = "onblur=''";
+
+                //标准值 增加下拉框单位V
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, '', "classstyle100", "", "resetXianShiZhi"));
+
+                //赫兹 增加下拉框单位赫兹
+                htmlString.push(SetTDHtml(rowspan, "HZMY", HangHaoID, rowidx, '', "classstyle100"));
+
+                //显示值 增加下拉框单位V
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100", '', "resetBiaoZhunZhi"));
+
+                //相对误差
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
+
+
+                //校准结果的不确定度 U(K =
+                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', "classstyle"));
+                htmlString.push("</tr>");
+            }
+            htmlString = htmlString.join("");
+
+            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
+            $.parser.parse(tagRow);//渲染easyui组建
+            $('#dlg').window('close');//关闭弹出框
+            $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+        }
+
+        //计算显示值
+        function resetXianShiZhi(obj) {            
+            //重新计算当前行
+            xiangDuiWuCha1(obj, "SHIJISHUCHUZHI", "RELATIVEERROR");
+        }
+        //计算标准值
+        function resetBiaoZhunZhi(obj,source,gold) {
+            //重新计算当前行
+            xiangDuiWuCha2(obj, "ACTUALVALUE", "RELATIVEERROR");
+           
+        }
+    
+        //离开事件，用于计算
+        function blurValue(obj) {
+
+            //   LianDongShiJiZhi(obj);
+        }
+        
+
+    </script>
+
+
+}
+@section TanKuang {
+    <!--弹框的位置-->
+    <!--增加量程弹层-->
+    <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return CreateRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+        <table>
+            <tr>
+                <td width="80" align="right">量程值：</td>
+                <td><input type="text" id="txtNumber" name="txtNumber" value=""  class="my-textbox  required digits" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">检测点数：</td>
+                <td><input type="text" id="txtPoint"  name="txtPoint" value=""  class="my-textbox  required digits" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">小数点位数：</td>
+                <td><input type="text" id="txtPointLen"  name="txtPointLen" value="" class="my-textbox  required digits" style="width:200px" /></td>
+            </tr>
+        </table>
+    </div>
+    <!--/增加量程弹层-->
+}
+
+

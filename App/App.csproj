@@ -891,7 +891,7 @@
     <Content Include="Views\ORDER_TASK_INFORMATION\ErWeiMa.cshtml" />
     <Content Include="Views\Shared\QianZi.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\GongPinDanXiangXiangWeiShuChuJueDuiWuChaYiLie.cshtml" />
-    <Content Include="Views\PROJECTTEMPLET\JiaoLiuDianYaXiangDuiWuChaDanxiang.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\JiaoLiuDianLiuShuChuDanxiang.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaZhengFu.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\BianSongQiDianLiuDianYa.cshtml" />
     <Content Include="Views\RULETree\GetTree.cshtml" />
@@ -919,6 +919,11 @@
     <Content Include="Views\UNCERTAINTYTABLE\Details.cshtml" />
     <Content Include="Views\UNCERTAINTYTABLE\Edit.cshtml" />
     <Content Include="Views\UNCERTAINTYTABLE\Index.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\JiaoLiuDianYaXiangDuiWuChaDanxiang.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\DianZuShiZhiWuCha.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\GongZuoDianLiuShiZhiWuCha.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\JueYuanDianZu.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\OMYiXiaWuWuCha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

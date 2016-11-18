@@ -85,10 +85,7 @@
                         @Html.LabelFor(model => model.UNDERTAKE_LABORATORYID)                  ：
                 </div>
                 <div class="editor-field">
-                    <span id="checkUNDERTAKE_LABORATORYID">
-                    </span>
-                    @Html.HiddenFor(model => model.UNDERTAKE_LABORATORYID) <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="showModalOnly('UNDERTAKE_LABORATORYID','../../UNDERTAKE_LABORATORY');">选择</a>
-                </div>
+                    @Html.EditorFor(model => model.UNDERTAKE_LABORATORYID) </div>
             </div>
             <div class="search-form">
                 <div class="editor-label">

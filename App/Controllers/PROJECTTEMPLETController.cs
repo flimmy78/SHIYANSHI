@@ -19,6 +19,80 @@ namespace Langben.App.Controllers
     public class PROJECTTEMPLETController : BaseController
     {
         /// <summary>
+        /// 1000Ω以下-无误差
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult OMYiXiaWuWuCha(string id = "频率输出", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            ViewBag.canshu = id;
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        /// 绝缘电阻-无误差
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult JueYuanDianZu(string id = "频率输出", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            ViewBag.canshu = id;
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        /// 工作电流示值误差-相对误差
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult GongZuoDianLiuShiZhiWuCha(string id = "频率输出", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+             
+            ViewBag.canshu = id;
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        /// 电阻示值误差-相对误差
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult DianZuShiZhiWuCha(string id = "频率输出", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+             
+            ViewBag.canshu = id;
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        /// 交流电流输出-相对误差-单相
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult JiaoLiuDianLiuShuChuDanxiang(string id = "相对误差", string RULEID = "410-1994_6_5", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            //相对误差 410-1994_6_5           
+
+            //绝对误差 410 - 1994_6_6
+            ViewBag.canshu = id;
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /**************上面是单相实验室的********************/
+        /// <summary>
         /// 测试用
         /// </summary> 
         /// <param name="RULEID">检测项目ID</param>

@@ -76,7 +76,7 @@ namespace Langben.App.Controllers
         {
             RULE item = m_BLL.GetById(id);
 
-             
+        
             return item;
         }
 
