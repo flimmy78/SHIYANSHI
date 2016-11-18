@@ -414,6 +414,8 @@
     <Compile Include="UNCERTAINTYTABLE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="UNCERTAINTYTABLEMeta.cs" />
+    <Compile Include="UNCERTAINTYTABLERepository.cs" />
     <Compile Include="UNDERTAKE_LABORATORY.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
