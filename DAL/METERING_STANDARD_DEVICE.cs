@@ -19,6 +19,7 @@ namespace Langben.DAL
         {
             this.ALLOWABLE_ERROR = new HashSet<ALLOWABLE_ERROR>();
             this.METERING_STANDARD_DEVICE_CHECK = new HashSet<METERING_STANDARD_DEVICE_CHECK>();
+            this.UNCERTAINTYTABLE = new HashSet<UNCERTAINTYTABLE>();
             this.PREPARE_SCHEME = new HashSet<PREPARE_SCHEME>();
         }
     
@@ -41,6 +42,8 @@ namespace Langben.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<METERING_STANDARD_DEVICE_CHECK> METERING_STANDARD_DEVICE_CHECK { get; set; }
         public virtual UNDERTAKE_LABORATORY UNDERTAKE_LABORATORY { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UNCERTAINTYTABLE> UNCERTAINTYTABLE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PREPARE_SCHEME> PREPARE_SCHEME { get; set; }
     }

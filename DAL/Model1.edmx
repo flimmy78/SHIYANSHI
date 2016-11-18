@@ -1251,10 +1251,10 @@
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="RULEID" Type="varchar2" MaxLength="36" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6013: 表/视图“TENGFEI.UNCERTAINTYTABLE”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
         <EntityType Name="UNCERTAINTYTABLE">
-          <Property Name="ID" Type="varchar2" MaxLength="36" />
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
           <Property Name="NOTE" Type="varchar2" MaxLength="200" />
           <Property Name="INDEX2UNIT" Type="varchar2" MaxLength="200" />
           <Property Name="INDEX2" Type="varchar2" MaxLength="200" />
@@ -1281,7 +1281,9 @@
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
-        </EntityType>-->
+          <Property Name="METERING_STANDARD_DEVICEID" Type="varchar2" MaxLength="36" />
+          <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
+        </EntityType>
         <EntityType Name="UNDERTAKE_LABORATORY">
           <Key>
             <PropertyRef Name="ID" />
@@ -2231,6 +2233,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UNCERTAI_REFERENCE_METERING">
+          <End Role="METERING_STANDARD_DEVICE" Type="Self.METERING_STANDARD_DEVICE" Multiplicity="0..1" />
+          <End Role="UNCERTAINTYTABLE" Type="Self.UNCERTAINTYTABLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="METERING_STANDARD_DEVICE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UNCERTAINTYTABLE">
+              <PropertyRef Name="METERING_STANDARD_DEVICEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UNCERTAI_REFERENCE_RULE">
           <End Role="RULE" Type="Self.RULE" Multiplicity="0..1" />
           <End Role="UNCERTAINTYPARAMETERMANAGEMENT" Type="Self.UNCERTAINTYPARAMETERMANAGEMENT" Multiplicity="*" />
@@ -2323,6 +2337,7 @@
           <EntitySet Name="UNCERTAINTY" EntityType="Self.UNCERTAINTY" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="UNCERTAINTY2_HZ" EntityType="Self.UNCERTAINTY2_HZ" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="UNCERTAINTYPARAMETERMANAGEMENT" EntityType="Self.UNCERTAINTYPARAMETERMANAGEMENT" Schema="TENGFEI" store:Type="Tables" />
+          <EntitySet Name="UNCERTAINTYTABLE" EntityType="Self.UNCERTAINTYTABLE" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="UNDERTAKE_LABORATORY" EntityType="Self.UNDERTAKE_LABORATORY" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="VBAOGAODAYIN" EntityType="Self.VBAOGAODAYIN" store:Type="Views" store:Schema="TENGFEI">
             <DefiningQuery>SELECT 
@@ -2758,6 +2773,10 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
             <End Role="TRANSMITTER_HEAD" EntitySet="TRANSMITTER_HEAD" />
             <End Role="TRANSMITER_SIN" EntitySet="TRANSMITER_SIN" />
           </AssociationSet>
+          <AssociationSet Name="FK_UNCERTAI_REFERENCE_METERING" Association="Self.FK_UNCERTAI_REFERENCE_METERING">
+            <End Role="METERING_STANDARD_DEVICE" EntitySet="METERING_STANDARD_DEVICE" />
+            <End Role="UNCERTAINTYTABLE" EntitySet="UNCERTAINTYTABLE" />
+          </AssociationSet>
           <AssociationSet Name="FK_UNCERTAI_REFERENCE_RULE" Association="Self.FK_UNCERTAI_REFERENCE_RULE">
             <End Role="RULE" EntitySet="RULE" />
             <End Role="UNCERTAINTYPARAMETERMANAGEMENT" EntitySet="UNCERTAINTYPARAMETERMANAGEMENT" />
@@ -2834,6 +2853,7 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <EntitySet Name="UNCERTAINTY" EntityType="Model.UNCERTAINTY" />
           <EntitySet Name="UNCERTAINTY2_HZ" EntityType="Model.UNCERTAINTY2_HZ" />
           <EntitySet Name="UNCERTAINTYPARAMETERMANAGEMENT" EntityType="Model.UNCERTAINTYPARAMETERMANAGEMENT" />
+          <EntitySet Name="UNCERTAINTYTABLE" EntityType="Model.UNCERTAINTYTABLE" />
           <EntitySet Name="UNDERTAKE_LABORATORY" EntityType="Model.UNDERTAKE_LABORATORY" />
           <EntitySet Name="VBAOGAODAYIN" EntityType="Model.VBAOGAODAYIN" />
           <EntitySet Name="VJIANDINGRENWU" EntityType="Model.VJIANDINGRENWU" />
@@ -2928,6 +2948,10 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <AssociationSet Name="FK_METERING_REFERENCE_UNDERTAK" Association="Model.FK_METERING_REFERENCE_UNDERTAK">
             <End Role="UNDERTAKE_LABORATORY" EntitySet="UNDERTAKE_LABORATORY" />
             <End Role="METERING_STANDARD_DEVICE" EntitySet="METERING_STANDARD_DEVICE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UNCERTAI_REFERENCE_METERING" Association="Model.FK_UNCERTAI_REFERENCE_METERING">
+            <End Role="METERING_STANDARD_DEVICE" EntitySet="METERING_STANDARD_DEVICE" />
+            <End Role="UNCERTAINTYTABLE" EntitySet="UNCERTAINTYTABLE" />
           </AssociationSet>
           <AssociationSet Name="FK_SIGN_REFERENCE_ORDER_TA" Association="Model.FK_SIGN_REFERENCE_ORDER_TA">
             <End Role="ORDER_TASK_INFORMATION" EntitySet="ORDER_TASK_INFORMATION" />
@@ -3580,6 +3604,7 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <NavigationProperty Name="ALLOWABLE_ERROR" Relationship="Model.FK_MAXIMUM__REFERENCE_METERIN2" FromRole="METERING_STANDARD_DEVICE" ToRole="ALLOWABLE_ERROR" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE_CHECK" Relationship="Model.FK_METERING_REFERENCE_METERIN2" FromRole="METERING_STANDARD_DEVICE" ToRole="METERING_STANDARD_DEVICE_CHECK" />
           <NavigationProperty Name="UNDERTAKE_LABORATORY" Relationship="Model.FK_METERING_REFERENCE_UNDERTAK" FromRole="METERING_STANDARD_DEVICE" ToRole="UNDERTAKE_LABORATORY" />
+          <NavigationProperty Name="UNCERTAINTYTABLE" Relationship="Model.FK_UNCERTAI_REFERENCE_METERING" FromRole="METERING_STANDARD_DEVICE" ToRole="UNCERTAINTYTABLE" />
           <NavigationProperty Name="PREPARE_SCHEME" Relationship="Model.METERING_STANDARD_DEVICEPREPAR" FromRole="METERING_STANDARD_DEVICE" ToRole="PREPARE_SCHEME" />
         </EntityType>
         <EntityType Name="METERING_STANDARD_DEVICE_CHECK">
@@ -4386,6 +4411,40 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <Property Name="RULEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="RULE" Relationship="Model.FK_UNCERTAI_REFERENCE_RULE" FromRole="UNCERTAINTYPARAMETERMANAGEMENT" ToRole="RULE" />
         </EntityType>
+        <EntityType Name="UNCERTAINTYTABLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="NOTE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="INDEX2UNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="INDEX2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="INDEX1UNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="INDEX1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ENDUNITFREQUENCY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ENDRELATIONSHIPFREQUENCY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="THERELATIONSHIPFREQUENCY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="THEUNITFREQUENCY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="THEFREQUENCY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ENDRELATIONSHIP" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ENDUNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ENDRANGESCOPE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="THERELATIONSHIP" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="THEUNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="THERANGESCOPE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="KVALE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="THEERRODISTRIBUTION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ERRORLIMITUNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ERRORLIMITS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ERRORSOURCES" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ASSESSMENTITEM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CREATETIME" Type="DateTime" />
+          <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATETIME" Type="DateTime" />
+          <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="METERING_STANDARD_DEVICEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.FK_UNCERTAI_REFERENCE_METERING" FromRole="UNCERTAINTYTABLE" ToRole="METERING_STANDARD_DEVICE" />
+        </EntityType>
         <EntityType Name="UNDERTAKE_LABORATORY">
           <Key>
             <PropertyRef Name="ID" />
@@ -4857,6 +4916,18 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
             </Principal>
             <Dependent Role="METERING_STANDARD_DEVICE">
               <PropertyRef Name="UNDERTAKE_LABORATORYID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UNCERTAI_REFERENCE_METERING">
+          <End Type="Model.METERING_STANDARD_DEVICE" Role="METERING_STANDARD_DEVICE" Multiplicity="0..1" />
+          <End Type="Model.UNCERTAINTYTABLE" Role="UNCERTAINTYTABLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="METERING_STANDARD_DEVICE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UNCERTAINTYTABLE">
+              <PropertyRef Name="METERING_STANDARD_DEVICEID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6511,6 +6582,40 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
                 <ScalarProperty Name="LIMIT_VALUE" ColumnName="LIMIT_VALUE" />
                 <ScalarProperty Name="SOURCEOFERROR" ColumnName="SOURCEOFERROR" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UNCERTAINTYTABLE">
+            <EntityTypeMapping TypeName="Model.UNCERTAINTYTABLE">
+              <MappingFragment StoreEntitySet="UNCERTAINTYTABLE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="METERING_STANDARD_DEVICEID" ColumnName="METERING_STANDARD_DEVICEID" />
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="ASSESSMENTITEM" ColumnName="ASSESSMENTITEM" />
+                <ScalarProperty Name="ERRORSOURCES" ColumnName="ERRORSOURCES" />
+                <ScalarProperty Name="ERRORLIMITS" ColumnName="ERRORLIMITS" />
+                <ScalarProperty Name="ERRORLIMITUNIT" ColumnName="ERRORLIMITUNIT" />
+                <ScalarProperty Name="THEERRODISTRIBUTION" ColumnName="THEERRODISTRIBUTION" />
+                <ScalarProperty Name="KVALE" ColumnName="KVALE" />
+                <ScalarProperty Name="THERANGESCOPE" ColumnName="THERANGESCOPE" />
+                <ScalarProperty Name="THEUNIT" ColumnName="THEUNIT" />
+                <ScalarProperty Name="THERELATIONSHIP" ColumnName="THERELATIONSHIP" />
+                <ScalarProperty Name="ENDRANGESCOPE" ColumnName="ENDRANGESCOPE" />
+                <ScalarProperty Name="ENDUNIT" ColumnName="ENDUNIT" />
+                <ScalarProperty Name="ENDRELATIONSHIP" ColumnName="ENDRELATIONSHIP" />
+                <ScalarProperty Name="THEFREQUENCY" ColumnName="THEFREQUENCY" />
+                <ScalarProperty Name="THEUNITFREQUENCY" ColumnName="THEUNITFREQUENCY" />
+                <ScalarProperty Name="THERELATIONSHIPFREQUENCY" ColumnName="THERELATIONSHIPFREQUENCY" />
+                <ScalarProperty Name="ENDRELATIONSHIPFREQUENCY" ColumnName="ENDRELATIONSHIPFREQUENCY" />
+                <ScalarProperty Name="ENDUNITFREQUENCY" ColumnName="ENDUNITFREQUENCY" />
+                <ScalarProperty Name="INDEX1" ColumnName="INDEX1" />
+                <ScalarProperty Name="INDEX1UNIT" ColumnName="INDEX1UNIT" />
+                <ScalarProperty Name="INDEX2" ColumnName="INDEX2" />
+                <ScalarProperty Name="INDEX2UNIT" ColumnName="INDEX2UNIT" />
+                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -411,6 +411,9 @@
     <Compile Include="UNCERTAINTYPARAMETERMANAGEMENTMeta.cs" />
     <Compile Include="UNCERTAINTYPARAMETERMANAGEMENTRepository.cs" />
     <Compile Include="UNCERTAINTYRepository.cs" />
+    <Compile Include="UNCERTAINTYTABLE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="UNDERTAKE_LABORATORY.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
