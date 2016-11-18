@@ -698,23 +698,8 @@ namespace Langben.Report
             }
             #endregion
             RowIndex++;
-            SetZhuangZhis(hssfworkbook, sheet_Destination, ref RowIndex, entity, type);
-            #region 暂时没有数据，不做
-            ////检定所使用的计量标准装置
-            ////HideRow(sheet, RowIndex, 6);
-            //RowIndex = RowIndex + 6;
-
-
-
-            ////检定所使用的主要计量器具
-            ////HideRow(sheet, RowIndex, 6);
-            //RowIndex = RowIndex + 6;
-            ////比对和匝比试验使用的中间试品
-            ////HideRow(sheet, RowIndex, 6);
-            //RowIndex = RowIndex + 6;
-            ////空白
-            //RowIndex = RowIndex + 8;
-            #endregion
+            //各类装置
+            SetZhuangZhis(hssfworkbook, sheet_Destination, ref RowIndex, entity, type);            
             #region 校准说明            
             RowIndex++;
             if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
@@ -1262,23 +1247,8 @@ namespace Langben.Report
                 RowIndex++;
             }
             RowIndex++;
-            SetZhuangZhis(hssfworkbook, sheet_Destination,ref RowIndex, entity, type);
-            #region 暂时没有数据，不做
-            ////检定所使用的计量标准装置
-            ////HideRow(sheet, RowIndex, 6);
-            //RowIndex = RowIndex + 6;
-
-
-
-            ////检定所使用的主要计量器具
-            ////HideRow(sheet, RowIndex, 6);
-            //RowIndex = RowIndex + 6;
-            ////比对和匝比试验使用的中间试品
-            ////HideRow(sheet, RowIndex, 6);
-            //RowIndex = RowIndex + 6;
-            ////空白
-            //RowIndex = RowIndex + 8;
-            #endregion
+            //各类装置
+            SetZhuangZhis(hssfworkbook, sheet_Destination,ref RowIndex, entity, type);           
             #endregion
             //设置页面页脚
             SetHeaderAndFooter(sheet_Destination, entity);
