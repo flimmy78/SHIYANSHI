@@ -2437,7 +2437,7 @@ namespace Langben.Report
                         #endregion
 
                         #region 合并行
-                        SetMergeRowSameValue(sheet_Destination, startRowIndex, endRowIndex, temp);
+                        SetMergeAndRowSameValue(sheet_Destination, startRowIndex, endRowIndex, temp);
                         #endregion
                     }
                 }
@@ -2451,7 +2451,7 @@ namespace Langben.Report
         /// <param name="rowDic"></param>
         /// <param name="sheet_Destination"></param>
         /// <param name="temp"></param>
-        private void SetMergeRowSameValue(ISheet sheet_Destination, int startRowIndex,int endRowIndex, TableTemplate temp)
+        private void SetMergeAndRowSameValue(ISheet sheet_Destination, int startRowIndex,int endRowIndex, TableTemplate temp)
         {
            
             int startMergeRow = startRowIndex;
@@ -2464,7 +2464,7 @@ namespace Langben.Report
             {
                 foreach (Cell c in temp.Cells)
                 {
-                    if(c.IsMergeSameValue=="N")
+                    if(c.IsMergeSameValue=="N" && c.IsHideRowNull=="N")
                     {
                         continue;
                     }
@@ -2475,7 +2475,18 @@ namespace Langben.Report
                         targetRow_Prev = sheet_Destination.GetRow(i);
                         targetRow_Next = sheet_Destination.GetRow(i + 1);
                         targetCell_Prev = targetRow_Prev.Cells[c.ColIndex];
-                        targetCell_Next= targetRow_Next.Cells[c.ColIndex];
+                        targetCell_Next = targetRow_Next.Cells[c.ColIndex];
+                        if (c.IsHideRowNull == "Y" && sheet_Destination.GetRow(i).GetCell(c.ColIndex).StringCellValue=="")
+                        {
+                            HideRow(sheet_Destination, i, 1);
+                            continue;
+                        }
+                        if(c.IsMergeSameValue=="N")
+                        {
+                            continue;
+                        }
+
+                       
                         if ((targetCell_Prev.StringCellValue==targetCell_Next.StringCellValue || targetCell_Next.StringCellValue=="") && (i+1)<endRowIndex)
                         {
                             endMergeRow = i + 1;

@@ -320,6 +320,17 @@ namespace Langben.Report
             get { return _IsMergeSameValue ; }
             set { _IsMergeSameValue = value; }
         }
+        private string _IsHideRowNull = "N";
+        /// <summary>
+        ///空值是否不展示该行，不填表示不隐藏（Y:隐藏、N:不隐藏）
+        /// </summary>
+        [XmlElement("IsHideRowNull")]
+        public string IsHideRowNull
+        {
+            get { return _IsHideRowNull; }
+            set { _IsHideRowNull = value; }
+        }
         
+
     }
 }
