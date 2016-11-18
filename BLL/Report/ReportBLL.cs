@@ -1232,7 +1232,7 @@ namespace Langben.Report
         /// <param name="rowIndex_Destination">目标行号</param>
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <param name="type">报告类型</param>
-        private void SetZhuangZhi(IWorkbook hssfworkbook,ISheet sheet_Destination,int rowIndex_Destination, PREPARE_SCHEME entity, ExportType type)
+        private void SetZhuangZhis(IWorkbook hssfworkbook,ISheet sheet_Destination,int rowIndex_Destination, PREPARE_SCHEME entity, ExportType type)
         {
             //int rowIndex = rowIndex_Destination;
             //标准装置
@@ -1269,58 +1269,69 @@ namespace Langben.Report
                 {
                     //标准装置
                     List<METERING_STANDARD_DEVICE> listZhuanZhi = list.FindAll(p => p.CATEGORY == "标准装置");
-                    if(listZhuanZhi!=null && listZhuanZhi.Count>0)
-                    {
-                        CopyRow(sheet_Source, sheet_Destination, rowIndex_Source_ZhuangZhi, rowIndex_Destination, 1, true);
-                        rowIndex_Source_ZhuangZhi++;
-                        rowIndex_Destination++;
-                        foreach (METERING_STANDARD_DEVICE item in listZhuanZhi)
-                        {
-                            CopyRow(sheet_Source, sheet_Destination, rowIndex_Source_ZhuangZhi, rowIndex_Destination, 1, false);
-                            //名称
-                            sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(item.NAME);
-                            //测量范围
-                            sheet_Destination.GetRow(rowIndex_Destination).GetCell(7).SetCellValue(item.TEST_RANGE);
-                           
-                            #region 不确定度/准确度等级/最大允许误差
-                            //不确定度/准确度等级/最大允许误差
-                            List<ALLOWABLE_ERROR> aList = (List<ALLOWABLE_ERROR>)item.ALLOWABLE_ERROR;
-                           if(aList!=null && aList.Count>0)
-                            {
-                                rowIndex_Source_ZhuangZhi++;
-                                string aValue = "";
-                                foreach (ALLOWABLE_ERROR aItem in aList)
-                                {                                  
-                                    if (aItem.THEACCURACYLEVEL != null && aItem.THEACCURACYLEVEL.Trim() != "")
-                                    {
-                                        aValue += aItem.THEACCURACYLEVEL + "、";
-                                    }
-                                    else if (aItem.MAXCATEGORIES != null && aItem.MAXCATEGORIES.Trim() != "")
-                                    {
-                                        aValue += aItem.MAXCATEGORIES + ":" + aItem.MAXVALUE + "、";
-                                    }
-                                    else if (aItem.THEUNCERTAINTYVALUEK != null && aItem.THEUNCERTAINTYVALUEK.Trim() != "")
-                                    {
-                                        aValue += aItem.THEUNCERTAINTYVALUEK + ":" + aItem.THEUNCERTAINTYNDEXL + " " + aItem.THEUNCERTAINTYVALUE + ":" + aItem.THEUNCERTAINTY + "、";
-                                    }
-                                }
-                                sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(aValue);
-                            }
-                            #endregion 
-                        }
-                    }
-                   
-
+                    SetZhuangZhi(sheet_Source, sheet_Destination, rowIndex_Source_ZhuangZhi, ref rowIndex_Destination, CATEGORYType.标准装置, listZhuanZhi);
                     //标准器
                     List<METERING_STANDARD_DEVICE> listQiJu = list.FindAll(p => p.CATEGORY == "标准器");
+                    SetZhuangZhi(sheet_Source, sheet_Destination, rowIndex_Source_QiJu, ref rowIndex_Destination, CATEGORYType.标准器, listQiJu);
                     //中间试品
                     List<METERING_STANDARD_DEVICE> listShiPin = list.FindAll(p => p.CATEGORY == "中间试品");
-                    
+                    SetZhuangZhi(sheet_Source, sheet_Destination, rowIndex_Source_ShiPin, ref rowIndex_Destination, CATEGORYType.中间试品, listShiPin);
                 }
             }
                
         }
+        /// <summary>
+        /// 设置标准装置/计量标准器信息
+        /// </summary>
+        /// <param name="sheet_Source">源sheet</param>
+        /// <param name="sheet_Destination">目标sheet</param>
+        /// <param name="rowIndex_Source">源行号</param>
+        /// <param name="rowIndex_Destination">目标行号</param>
+        /// <param name="type">装置类型</param>
+        /// <param name="listZhuanZhi">装置实体</param>
+        private void SetZhuangZhi(ISheet sheet_Source, ISheet sheet_Destination,int rowIndex_Source,ref int  rowIndex_Destination, CATEGORYType type= CATEGORYType.标准装置, List<METERING_STANDARD_DEVICE> listZhuanZhi = null)
+        {
+            if (listZhuanZhi != null && listZhuanZhi.Count > 0)
+            {
+                CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true);
+                rowIndex_Source++;
+                rowIndex_Destination++;
+                foreach (METERING_STANDARD_DEVICE item in listZhuanZhi)
+                {
+                    CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, false);
+                    //名称
+                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(item.NAME);
+                    //测量范围
+                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(7).SetCellValue(item.TEST_RANGE);
 
+                    #region 不确定度/准确度等级/最大允许误差
+                    //不确定度/准确度等级/最大允许误差
+                    List<ALLOWABLE_ERROR> aList = (List<ALLOWABLE_ERROR>)item.ALLOWABLE_ERROR;
+                    if (aList != null && aList.Count > 0)
+                    {
+                        rowIndex_Source++;
+                        string aValue = "";
+                        foreach (ALLOWABLE_ERROR aItem in aList)
+                        {
+                            if (aItem.THEACCURACYLEVEL != null && aItem.THEACCURACYLEVEL.Trim() != "")
+                            {
+                                aValue += aItem.THEACCURACYLEVEL + "、";
+                            }
+                            else if (aItem.MAXCATEGORIES != null && aItem.MAXCATEGORIES.Trim() != "")
+                            {
+                                aValue += aItem.MAXCATEGORIES + ":" + aItem.MAXVALUE + "、";
+                            }
+                            else if (aItem.THEUNCERTAINTYVALUEK != null && aItem.THEUNCERTAINTYVALUEK.Trim() != "")
+                            {
+                                aValue += aItem.THEUNCERTAINTYVALUEK + ":" + aItem.THEUNCERTAINTYNDEXL + " " + aItem.THEUNCERTAINTYVALUE + ":" + aItem.THEUNCERTAINTY + "、";
+                            }
+                        }
+                        sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(aValue);
+                    }
+                    #endregion
+                }
+            }
+        }
 
         /// <summary>
         /// 设置数据信息
