@@ -890,7 +890,7 @@ namespace Langben.Report
             if (entity.VALIDITY_PERIOD.HasValue && entity.CALIBRATION_DATE.HasValue)
             {                
                 //sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
-                sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.CALIBRATION_DATE.Value.AddYears(entity.VALIDITY_PERIOD.Value).ToString("yyyy年MM月dd日"));
+                sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.CALIBRATION_DATE.Value.AddYears((int)entity.VALIDITY_PERIOD.Value).ToString("yyyy年MM月dd日"));
             }
             else
             {
@@ -2098,9 +2098,7 @@ namespace Langben.Report
             //Dictionary<int, List<string>> TableTitleDic = null;
             Dictionary<int, Dictionary<string, string>> TableTitleDic = null;
             Dictionary<int, NodeList> InputDic = null;
-            Dictionary<int, NodeList> OptionDic = null;
-            //二级标题
-            Dictionary<int, List<string>> SecondTitleDic = null;
+            Dictionary<int, NodeList> OptionDic = null;            
 
             //表头 
             TableTitleDic = GetHeaderDic(nodeList_Thead);
@@ -2116,7 +2114,7 @@ namespace Langben.Report
             #endregion
 
             #endregion            
-            int rowIndex = paserData(sheet_Source, sheet_Destination, rowIndex_Destination, temp, TableTitleDic, InputDic, OptionDic, SecondTitleDic, allSpecialCharacters);
+            int rowIndex = paserData(sheet_Source, sheet_Destination, rowIndex_Destination, temp, TableTitleDic, InputDic, OptionDic, allSpecialCharacters);
             return rowIndex;
 
         }
@@ -2264,27 +2262,14 @@ namespace Langben.Report
         /// <param name="temp">模板信息</param>
         /// <param name="TableTitleDic">表头</param>
         /// <param name="InputDic">文本框</param>
-        /// <param name="OptionDic">下拉框</param>
-        /// <param name="SecondTitleDic">二级标题</param>
+        /// <param name="OptionDic">下拉框</param>       
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <returns></returns>
         private int paserData(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination,
             TableTemplate temp, Dictionary<int, Dictionary<string,string>> TableTitleDic,
-            Dictionary<int, NodeList> InputDic, Dictionary<int, NodeList> OptionDic, Dictionary<int, List<string>> SecondTitleDic, SpecialCharacters allSpecialCharacters=null)
+            Dictionary<int, NodeList> InputDic, Dictionary<int, NodeList> OptionDic, SpecialCharacters allSpecialCharacters=null)
         {
-            int rowIndex = rowIndex_Destination;
-            //二级标题
-            if (temp.SecondTitleList != null && temp.SecondTitleList.Count > 0)
-            {
-                foreach (RowInfo t in temp.SecondTitleList)
-                {
-                    if (t.RowIndex >= 0)
-                    {
-                        CopyRow(sheet_Source, sheet_Destination, t.RowIndex, rowIndex_Destination, 1, true, null, temp.SecondTitleList, allSpecialCharacters);
-                        rowIndex_Destination++;
-                    }
-                }
-            }
+            int rowIndex = rowIndex_Destination;           
             foreach (int key in TableTitleDic.Keys)
             {
                 //画表头                            
@@ -2454,6 +2439,10 @@ namespace Langben.Report
 
             return rowIndex_Destination;
         }
+        private void MergeRowSameValue()
+        {
+
+        }
         /// <summary>
         /// 获取表头信息
         /// </summary>
@@ -2498,12 +2487,12 @@ namespace Langben.Report
         //                for (int j=0;j< headerList.Count;j++)
         //                {
         //                   INode header = headerList[j];
-                                
+
         //                    bool IsEnd = false;
         //                    var headerValue = GetHearderValue(header, out IsEnd);
         //                    IsEnd = false;
         //                    var IsExist = IsExistInputOrSelect(header, out IsEnd);
-                            
+
         //                    if ((headerValue != null && headerValue.Trim()!="") || IsExist)
         //                    {
         //                        hList.Add(headerValue);
