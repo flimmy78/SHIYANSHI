@@ -2288,8 +2288,10 @@ namespace Langben.Report
                 if (InputDic.ContainsKey(key))
                 {
                     NodeList nodeList_Input = InputDic[key];
+                    int startRowIndex = rowIndex_Destination;                    
                     Dictionary<string, int> dic = SetRowIndex(nodeList_Input, sheet_Source, sheet_Destination, temp.DataRowIndex, rowIndex_Destination, out rowIndex);
-                    rowIndex_Destination = rowIndex;                  
+                    rowIndex_Destination = rowIndex;
+                    int endRowIndex = rowIndex;
 
                     if (dic != null && dic.Count > 0)
                     {
@@ -2433,15 +2435,169 @@ namespace Langben.Report
                             }
                         }
                         #endregion
+
+                        #region 合并行
+                        SetMergeRowSameValue(sheet_Destination, startRowIndex, endRowIndex, temp);
+                        #endregion
                     }
                 }
             }
 
             return rowIndex_Destination;
         }
-        private void MergeRowSameValue()
+        /// <summary>
+        /// 行合并（相同数据合并）
+        /// </summary>
+        /// <param name="rowDic"></param>
+        /// <param name="sheet_Destination"></param>
+        /// <param name="temp"></param>
+        private void SetMergeRowSameValue(ISheet sheet_Destination, int startRowIndex,int endRowIndex, TableTemplate temp)
         {
+           
+            int startMergeRow = startRowIndex;
+            int endMergeRow = startRowIndex;
+            IRow targetRow_Prev = null;//前一行
+            IRow targetRow_Next = null;//后一行
+            ICell targetCell_Prev = null;//前一个单元格
+            ICell targetCell_Next = null;//后一个单元格            
+            if (temp != null && temp.Cells != null && temp.Cells.Count > 0)
+            {
+                foreach (Cell c in temp.Cells)
+                {
+                    if(c.IsMergeSameValue=="N")
+                    {
+                        continue;
+                    }
+                    startMergeRow = startRowIndex;
+                    endMergeRow = startRowIndex;
+                    for (int i=startRowIndex;i<endRowIndex;i++)
+                    {
+                        targetRow_Prev = sheet_Destination.GetRow(i);
+                        targetRow_Next = sheet_Destination.GetRow(i + 1);
+                        targetCell_Prev = targetRow_Prev.Cells[c.ColIndex];
+                        targetCell_Next= targetRow_Next.Cells[c.ColIndex];
+                        if ((targetCell_Prev.StringCellValue==targetCell_Next.StringCellValue || targetCell_Next.StringCellValue=="") && (i+1)<endRowIndex)
+                        {
+                            endMergeRow = i + 1;
+                        }
+                        else
+                        {
+                            if (startMergeRow < endMergeRow)
+                            {
+                                for (int j = startMergeRow + 1; j <= endMergeRow; j++)
+                                {
+                                    sheet_Destination.GetRow(j).GetCell(c.ColIndex).SetCellValue("");
+                                }
+                                sheet_Destination.AddMergedRegion(new CellRangeAddress(startMergeRow, endMergeRow, c.ColIndex, c.ColIndex + c.ColCount));
+                                
+                            }
+                            startMergeRow = i;
+                        }
+                    }
 
+                }
+            }
+            //for(int i=startRowIndex;i<=endRowIndex;i++)
+            //{
+            //    //if(temp!=null && temp.Cells!=null && temp.Cells.Count>0)
+            //    //{
+            //    //    foreach(Cell c in temp.Cells)
+            //    //    {
+
+            //    //    }
+            //    //}
+
+            //}
+            //IRow row_Source = sheet_Source.GetRow(rowIndex_Source);
+            //int sourceCellCount = row_Source.Cells.Count;
+
+            ////1. 批量移动行,清空插入区域
+            //sheet_Destination.ShiftRows(rowIndex_Destination, //开始行
+            //                 sheet_Destination.LastRowNum, //结束行
+            //                 insertCount, //插入行总数
+            //                 true,        //是否复制行高
+            //                 false        //是否重置行高
+            //                 );
+
+            //int startMergeCell = -1; //记录每行的合并单元格起始位置
+            //int endMergeCell = -1;//记录每行的合并单元结束位置            
+            //for (int i = rowIndex_Destination; i < rowIndex_Destination + insertCount; i++)
+            //{
+            //    IRow targetRow = null;
+            //    ICell sourceCell = null;
+            //    ICell targetCell = null;
+
+            //    targetRow = sheet_Destination.CreateRow(i);
+            //    targetRow.Height = row_Source.Height;//复制行高                
+            //    for (int m = row_Source.FirstCellNum; m < row_Source.LastCellNum; m++)
+            //    {
+            //        sourceCell = row_Source.GetCell(m);
+            //        row_Source.Cells[m].SetCellType(CellType.String);
+            //        if (m + 1 != row_Source.LastCellNum)
+            //        {
+            //            row_Source.Cells[m + 1].SetCellType(CellType.String);
+            //        }
+            //        if (sourceCell == null)
+            //            continue;
+            //        targetCell = targetRow.CreateCell(m);
+            //        targetCell.CellStyle = sourceCell.CellStyle;//赋值单元格格式
+            //        targetCell.SetCellType(sourceCell.CellType);
+
+            //        //以下为复制模板行的单元格合并格式
+            //        if (sourceCell.IsMergedCell)
+            //        {
+            //            if (startMergeCell < 0 || sourceCell.CellStyle.BorderLeft != BorderStyle.None || sourceCell.StringCellValue != "")
+            //            {
+            //                startMergeCell = m;
+            //            }
+
+            //            if (m + 1 == sourceCellCount || sourceCell.CellStyle.BorderRight != BorderStyle.None || row_Source.Cells[m + 1].StringCellValue != "" || row_Source.Cells[m + 1].IsMergedCell == false)
+            //            {
+            //                endMergeCell = m;
+            //            }
+            //            if (startMergeCell < endMergeCell)
+            //            {
+            //                sheet_Destination.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, endMergeCell));
+            //                if (IsCopyContent)
+            //                {
+            //                    //string value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell]);
+            //                    //targetRow.Cells[startMergeCell].SetCellValue(value);
+            //                    HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell], targetRow.Cells[startMergeCell], allSpecialCharacters);
+            //                    targetRow.Cells[startMergeCell].SetCellValue(value);
+
+            //                }
+            //            }
+            //        }
+            //        else
+            //        {
+            //            //if (startMergeCell >= 0)
+            //            //{
+            //            //    sheet_Destination.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, m - 1));
+            //            //    if (IsCopyContent)
+            //            //    {
+            //            //        //string value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell]);
+            //            //        //targetRow.Cells[startMergeCell].SetCellValue(value);
+            //            //        HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell], targetRow.Cells[startMergeCell], allSpecialCharacters);
+            //            //        targetRow.Cells[startMergeCell].SetCellValue(value);
+
+            //            //    }
+            //            //    startMergeCell = -1;
+            //            //}
+            //            //else
+            //            //{
+            //            if (IsCopyContent)
+            //            {
+            //                //string value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m]);
+            //                //targetRow.Cells[m].SetCellValue(value);
+            //                HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
+            //                targetRow.Cells[m].SetCellValue(value);
+
+            //            }
+            //            startMergeCell = -1;
+            //            //}
+            //        }
+            //    }
+            //}
         }
         /// <summary>
         /// 获取表头信息
