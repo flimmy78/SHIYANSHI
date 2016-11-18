@@ -118,48 +118,19 @@
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
 
+       
         //计算显示值
         function resetXianShiZhi(obj) {
-
             //重新计算当前行
-            var name = $(obj).attr("name");
-            var id = $(obj).attr("id");
-            id = id.substring(id.indexOf('_'));
-
-            var newid = "SHIJISHUCHUZHI" + id;//改动的地方，参与计算的列的name值
-
-            var biaoZhunData = $(obj).parent().parent().find("#" + newid).val();
-            var showData = $(obj).val();
-            if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
-                var txtPointLen = $("#txtPointLen").val(); //小数点位数
-
-                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
-                var data = fomatFloat(xiangDuiWuCha, txtPointLen)
-                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(data);
-            }
-
-
+            xiangDuiWuCha1(obj, "SHIJISHUCHUZHI", "#RELATIVEERROR");
         }
         //计算标准值
-        function resetBiaoZhunZhi(obj) {
-
+        function resetBiaoZhunZhi(obj, source, gold) {
             //重新计算当前行
-            var name = $(obj).attr("name");
-            var id = $(obj).attr("id");
-            id = id.substring(id.indexOf('_'));
+            xiangDuiWuCha2(obj, "READVALUE", "#RELATIVEERROR");
 
-            var newid = "READVALUE" + id;//改动的地方，参与计算的列的name值
-
-            var showData = $(obj).parent().parent().find("#" + newid).val();
-            var biaoZhunData = $(obj).val();
-            if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
-                var txtPointLen = $("#txtPointLen").val(); //小数点位数
-
-                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
-                var data = fomatFloat(xiangDuiWuCha, txtPointLen)
-                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(data);
-            }
         }
+
         //离开事件，用于计算
         function blurValue(obj) {
 

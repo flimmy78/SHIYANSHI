@@ -1053,8 +1053,8 @@
                 htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU1', HangHaoID, rowidx, '', 'classstyle100', '', 'resetXianShiZhi'));
                 htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU2', HangHaoID, rowidx, '', 'classstyle100', '', 'resetXianShiZhi'));
 
-                htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG1', HangHaoID, rowidx, '', 'classstyle100', '', 'resetValue'));
-                htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG2', HangHaoID, rowidx, '', 'classstyle100', '', 'resetValue'));
+                htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG1', HangHaoID, rowidx, '', 'classstyle100', '', 'resetBiaoZhunZhi'));
+                htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG2', HangHaoID, rowidx, '', 'classstyle100', '', 'resetBiaoZhunZhi'));
 
 
 
@@ -1076,44 +1076,18 @@
             $('#dlg').window('close');//关闭弹出框
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
-        ///计算显示值
+     
+        //计算显示值
         function resetXianShiZhi(obj) {
             //重新计算当前行
-            var name = $(obj).attr("name");
-            var id = $(obj).attr("id");
-            id = id.substring(id.indexOf('_') - 1);
-
-            var newid = "DIANYACELIANG" + id;
-            var biaoZhunData = $(obj).parent().parent().find("#" + newid).val();
-            var showData = $(obj).val();
-            if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
-                var txtPointLen = $("#txtPointLen").val(); //小数点位数
-
-                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
-                var data = fomatFloat(xiangDuiWuCha, txtPointLen)
-                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(data);
-            }
+            xiangDuiWuCha1(obj, "DIANYACELIANG", "RELATIVEERROR");
         }
-        ///计算标准值
-        function resetValue(obj) {
+        //计算标准值
+        function resetBiaoZhunZhi(obj, source, gold) {
             //重新计算当前行
-            var name = $(obj).attr("name");
-            var id = $(obj).attr("id");
-            id = id.substring(id.indexOf('_') - 1);
-
-            var newid = "DIANYASHUCHU" + id;
-            var showData = $(obj).parent().parent().find("#" + newid).val();
-            var biaoZhunData = $(obj).val();
-            if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
-                var txtPointLen = $("#txtPointLen").val(); //小数点位数
-
-                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
-                var data = fomatFloat(xiangDuiWuCha, txtPointLen)
-                $(obj).parent().parent().find("#RELATIVEERROR" + id).val(data);
-            }
+            xiangDuiWuCha2(obj, "DIANYASHUCHU", "RELATIVEERROR");
 
         }
-
         //离开事件，用于计算
         function blurValue(obj) {
 
