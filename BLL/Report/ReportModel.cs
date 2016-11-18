@@ -310,9 +310,9 @@ namespace Langben.Report
             get { return _ColCount-1; }
             set { _ColCount = value; }
         }
-        private string _IsMergeSameValue = "Y";
+        private string _IsMergeSameValue = "N";
         /// <summary>
-        /// 相同值是否需要单元格合并，不填表示需要合并（Y:合并、N:不合并）
+        /// 相同值是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）
         /// </summary>
         [XmlElement("IsMergeSameValue")]
         public string IsMergeSameValue
