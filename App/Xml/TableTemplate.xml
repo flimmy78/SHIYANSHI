@@ -156,6 +156,8 @@
 					<ColIndex>42</ColIndex>
 					<!--所占列数-->
 					<ColCount>7</ColCount>
+          <!--空值是否不展示改行，不填表示不隐藏（Y:隐藏、N:不隐藏）-->
+					<IsHideRowNull>Y</IsHideRowNull>
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
@@ -245,7 +247,7 @@
 					<!--所占列数-->
 					<ColCount>5</ColCount>
 					<!--相同值是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）-->
-					<IsMergeSameValue>Y</IsMergeSameValue>
+					<!--<IsMergeSameValue>Y</IsMergeSameValue>-->
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
@@ -259,7 +261,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>OUTPUT_VALUE</Code>
+					<Code>READVALUE</Code>
 					<!--字段名称含义-->
 					<Name>标准值</Name>
 					<!--模板中单元格开始列号-->
@@ -269,7 +271,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>OUTPUT_VALUE_UNIT</Code>
+					<Code>READVALUE_UNIT</Code>
 					<!--字段名称含义-->
 					<Name>标准值单位</Name>
 					<!--模板中单元格开始列号-->
@@ -279,7 +281,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>READ_VALUE</Code>
+					<Code>SHIJISHUCHUZHI</Code>
 					<!--字段名称含义-->
 					<Name>显示值</Name>
 					<!--模板中单元格开始列号-->
@@ -289,7 +291,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>READ_VALUE_UNIT</Code>
+					<Code>SHIJISHUCHUZHI_UNIT</Code>
 					<!--字段名称含义-->
 					<Name>显示值单位</Name>
 					<!--模板中单元格开始列号-->
@@ -299,17 +301,19 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>RELATIVE_ERROR</Code>
+					<Code>RELATIVEERROR</Code>
 					<!--字段名称含义-->
 					<Name>相对误差</Name>
 					<!--模板中单元格开始列号-->
 					<ColIndex>34</ColIndex>
 					<!--所占列数-->
 					<ColCount>13</ColCount>
+          <!--空值是否不展示改行，不填表示不隐藏（Y:隐藏、N:不隐藏）-->
+					<IsHideRowNull>Y</IsHideRowNull>
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>UNCERTAINTY_DEGREE</Code>
+					<Code>UNCERTAINTYDEGREE</Code>
 					<!--字段名称含义-->
 					<Name>校准结果的不确定度U(k=2)</Name>
 					<!--模板中单元格开始列号-->
@@ -319,7 +323,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>UNCERTAINTY_DEGREE_UNIT</Code>
+					<Code>UNCERTAINTYDEGREE_UNIT</Code>
 					<!--字段名称含义-->
 					<Name>校准结果的不确定度U(k=2)单位</Name>
 					<!--模板中单元格开始列号-->
@@ -407,7 +411,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>OUTPUT_VALUE</Code>
+					<Code>READVALUE</Code>
 					<!--字段名称含义-->
 					<Name>标准值</Name>
 					<!--模板中单元格开始列号-->
@@ -417,7 +421,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>OUTPUT_VALUE_UNIT</Code>
+					<Code>READVALUE_UNIT</Code>
 					<!--字段名称含义-->
 					<Name>标准值单位</Name>
 					<!--模板中单元格开始列号-->
@@ -427,7 +431,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>READ_VALUE</Code>
+					<Code>SHIJISHUCHUZHI</Code>
 					<!--字段名称含义-->
 					<Name>显示值</Name>
 					<!--模板中单元格开始列号-->
@@ -437,7 +441,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>READ_VALUE_UNIT</Code>
+					<Code>SHIJISHUCHUZHI_UNIT</Code>
 					<!--字段名称含义-->
 					<Name>显示值单位</Name>
 					<!--模板中单元格开始列号-->
@@ -447,17 +451,19 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>RELATIVE_ERROR</Code>
+					<Code>RELATIVEERROR</Code>
 					<!--字段名称含义-->
 					<Name>相对误差</Name>
 					<!--模板中单元格开始列号-->
 					<ColIndex>34</ColIndex>
 					<!--所占列数-->
 					<ColCount>13</ColCount>
+          <!--空值是否不展示改行，不填表示不隐藏（Y:隐藏、N:不隐藏）-->
+					<IsHideRowNull>Y</IsHideRowNull>
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>UNCERTAINTY_DEGREE</Code>
+					<Code>UNCERTAINTYDEGREE</Code>
 					<!--字段名称含义-->
 					<Name>校准结果的不确定度U(k=2)</Name>
 					<!--模板中单元格开始列号-->
@@ -467,7 +473,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>UNCERTAINTY_DEGREE_UNIT</Code>
+					<Code>UNCERTAINTYDEGREE_UNIT</Code>
 					<!--字段名称含义-->
 					<Name>校准结果的不确定度U(k=2)单位</Name>
 					<!--模板中单元格开始列号-->
@@ -545,9 +551,9 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>OUTPUT_VALUE</Code>
+					<Code>READVALUE</Code>
 					<!--字段名称含义-->
-					<Name>标准值</Name>
+					<Name>输出示值</Name>
 					<!--模板中单元格开始列号-->
 					<ColIndex>8</ColIndex>
 					<!--所占列数-->
@@ -555,9 +561,9 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>OUTPUT_VALUE_UNIT</Code>
+					<Code>READVALUE_UNIT</Code>
 					<!--字段名称含义-->
-					<Name>标准值单位</Name>
+					<Name>输出示值单位</Name>
 					<!--模板中单元格开始列号-->
 					<ColIndex>17</ColIndex>
 					<!--所占列数-->
@@ -565,9 +571,9 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>READ_VALUE</Code>
+					<Code>SHIJISHUCHUZHI</Code>
 					<!--字段名称含义-->
-					<Name>显示值</Name>
+					<Name>输出实际值</Name>
 					<!--模板中单元格开始列号-->
 					<ColIndex>21</ColIndex>
 					<!--所占列数-->
@@ -575,9 +581,9 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>READ_VALUE_UNIT</Code>
+					<Code>SHIJISHUCHUZHI_UNIT</Code>
 					<!--字段名称含义-->
-					<Name>显示值单位</Name>
+					<Name>输出实际值单位</Name>
 					<!--模板中单元格开始列号-->
 					<ColIndex>30</ColIndex>
 					<!--所占列数-->
@@ -585,17 +591,19 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>RELATIVE_ERROR</Code>
+					<Code>RELATIVEERROR</Code>
 					<!--字段名称含义-->
 					<Name>相对误差</Name>
 					<!--模板中单元格开始列号-->
 					<ColIndex>34</ColIndex>
 					<!--所占列数-->
 					<ColCount>13</ColCount>
+          <!--空值是否不展示改行，不填表示不隐藏（Y:隐藏、N:不隐藏）-->
+					<IsHideRowNull>Y</IsHideRowNull>
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>UNCERTAINTY_DEGREE</Code>
+					<Code>UNCERTAINTYDEGREE</Code>
 					<!--字段名称含义-->
 					<Name>校准结果的不确定度U(k=2)</Name>
 					<!--模板中单元格开始列号-->
@@ -605,7 +613,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>UNCERTAINTY_DEGREE_UNIT</Code>
+					<Code>UNCERTAINTYDEGREE_UNIT</Code>
 					<!--字段名称含义-->
 					<Name>校准结果的不确定度U(k=2)单位</Name>
 					<!--模板中单元格开始列号-->
@@ -626,24 +634,24 @@
 			<!--表格表头，有就配置，没有该节点可不配置-->
 			<TableTitleList>
 				<!--表格表头每行信息，每行一个-->
-				<RowInfo>
+				<!--<RowInfo>
 					<RowIndex>43</RowIndex>
-					<!--二级标题改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
+					--><!--二级标题改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填--><!--
 					<CellIndexs>5</CellIndexs>
 					<CellList>
 						<Cell>
-							<!--字段代码与模板中设置的字段保持一致-->
+							--><!--字段代码与模板中设置的字段保持一致--><!--
 							<Code>BianSongQiTongDao</Code>
-							<!--字段名称含义-->
+							--><!--字段名称含义--><!--
 							<Name>通道</Name>
-							<!--模板中单元格开始列号-->
+							--><!--模板中单元格开始列号--><!--
 							<ColIndex>5</ColIndex>
-							<!--所占列数-->
+							--><!--所占列数--><!--
 							<ColCount>4</ColCount>
 						</Cell>
 					</CellList>
-					<!--二级标题行号-->
-				</RowInfo>
+					--><!--二级标题行号--><!--
+				</RowInfo>-->
 				<RowInfo>
 					<RowIndex>44</RowIndex>
 					<!--二级标题改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
