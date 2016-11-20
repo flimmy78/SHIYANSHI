@@ -218,6 +218,133 @@
                 </ul>
 
             </div>
+            <label>
+                <input type="radio" name="three" id="wucha_1" onclick="radio.check()" checked="checked" />
+                范围指标
+            </label>
+            <div class="mt10" id="div4">
+                <ul class="clear mt10">
+                    <li class="fl mr10">
+                        评定项：
+                        <select class="my-combobox" name="ASSESSMENTITEM">
+                            <option value="">请选择</option>
+                            <option value="三相四线">三相四线</option>
+                            <option value="三相三线">三相三线</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        量程范围起：
+                        <input class="my-textbox " value="" name="THERANGESCOPE">
+                    </li>
+                    <li class="fl mr10">
+                        起单位：
+                        <select class="my-combobox" name="THEUNIT">
+                            <option value="">请选择</option>
+                            <option value="V">V</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        起关系：
+                        <select class="my-combobox" name="THERELATIONSHIP">
+                            <option value="">请选择</option>
+                            <option value="<"><</option>
+                            <option value=">">></option>
+                            <option value="<="><=</option>
+                            <option value=">=">>=</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        量程范围止：
+                        <input class="my-textbox " value="" name="ENDRANGESCOPE">
+                    </li>
+                    <li class="fl mr10">
+                        止单位：
+                        <select class="my-combobox" name="ENDUNIT">
+                            <option value="">请选择</option>
+                            <option value="V">V</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        止关系：
+                        <select class="my-combobox" name="ENDRELATIONSHIP">
+                            <option value="">请选择</option>
+                            <option value="<"><</option>
+                            <option value=">">></option>
+                            <option value="<="><=</option>
+                            <option value=">=">>=</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        频率范围起：
+                        <input class="my-textbox " value="" name="THEFREQUENCY">
+                    </li>
+                    <li class="fl mr10">
+                        起单位：
+                        <select class="my-combobox" name="THEUNITFREQUENCY">
+                            <option value="">请选择</option>
+                            <option value="V">V</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        频率起关系：
+                        <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
+                            <option value="">请选择</option>
+                            <option value="<"><</option>
+                            <option value=">">></option>
+                            <option value="<="><=</option>
+                            <option value=">=">>=</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        频率范围止：
+                        <input class="my-textbox " value="" name="ENDRELATIONSHIPFREQUENCY">
+                    </li>
+                    <li class="fl mr10">
+                        频率止单位：
+                        <select class="my-combobox" name="ENDUNITFREQUENCY">
+                            <option value="">请选择</option>
+                            <option value="V">V</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        频率止关系：
+                        <select class="my-combobox" name="ENDUNITFREQUENCY">
+                            <option value="">请选择</option>
+                            <option value="<"><</option>
+                            <option value=">">></option>
+                            <option value="<="><=</option>
+                            <option value=">=">>=</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        频率止单位：
+                        <select class="my-combobox" name="ENDUNITFREQUENCY">
+                            <option value="">请选择</option>
+                            <option value="V">V</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        频率止单位：
+                        <select class="my-combobox" name="ENDUNITFREQUENCY">
+                            <option value="">请选择</option>
+                            <option value="V">V</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        频率止单位：
+                        <select class="my-combobox" name="ENDUNITFREQUENCY">
+                            <option value="">请选择</option>
+                            <option value="V">V</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        备注：
+                        <input class="my-textbox" value="" name="NOTE">
+                    </li>
+                    <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                </ul>
+
+            </div>
         </div>
         <div class="mt10"><a href="javascript:;" class="easyui-linkbutton" onclick="baocun()">保存</a> <a href="javascript:;" class="easyui-linkbutton" onclick="">取消</a></div>
     </div>

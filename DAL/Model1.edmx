@@ -1260,8 +1260,9 @@
           <Property Name="INDEX2" Type="varchar2" MaxLength="200" />
           <Property Name="INDEX1UNIT" Type="varchar2" MaxLength="200" />
           <Property Name="INDEX1" Type="varchar2" MaxLength="200" />
-          <Property Name="ENDUNITFREQUENCY" Type="varchar2" MaxLength="200" />
           <Property Name="ENDRELATIONSHIPFREQUENCY" Type="varchar2" MaxLength="200" />
+          <Property Name="ENDUNITFREQUENCY" Type="varchar2" MaxLength="200" />
+          <Property Name="ENDFREQUENCY" Type="varchar2" MaxLength="200" />
           <Property Name="THERELATIONSHIPFREQUENCY" Type="varchar2" MaxLength="200" />
           <Property Name="THEUNITFREQUENCY" Type="varchar2" MaxLength="200" />
           <Property Name="THEFREQUENCY" Type="varchar2" MaxLength="200" />
@@ -4420,8 +4421,9 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <Property Name="INDEX2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="INDEX1UNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="INDEX1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="ENDUNITFREQUENCY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ENDRELATIONSHIPFREQUENCY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ENDUNITFREQUENCY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ENDFREQUENCY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="THERELATIONSHIPFREQUENCY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="THEUNITFREQUENCY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="THEFREQUENCY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -6609,8 +6611,9 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
                 <ScalarProperty Name="THEFREQUENCY" ColumnName="THEFREQUENCY" />
                 <ScalarProperty Name="THEUNITFREQUENCY" ColumnName="THEUNITFREQUENCY" />
                 <ScalarProperty Name="THERELATIONSHIPFREQUENCY" ColumnName="THERELATIONSHIPFREQUENCY" />
-                <ScalarProperty Name="ENDRELATIONSHIPFREQUENCY" ColumnName="ENDRELATIONSHIPFREQUENCY" />
+                <ScalarProperty Name="ENDFREQUENCY" ColumnName="ENDFREQUENCY" />
                 <ScalarProperty Name="ENDUNITFREQUENCY" ColumnName="ENDUNITFREQUENCY" />
+                <ScalarProperty Name="ENDRELATIONSHIPFREQUENCY" ColumnName="ENDRELATIONSHIPFREQUENCY" />
                 <ScalarProperty Name="INDEX1" ColumnName="INDEX1" />
                 <ScalarProperty Name="INDEX1UNIT" ColumnName="INDEX1UNIT" />
                 <ScalarProperty Name="INDEX2" ColumnName="INDEX2" />

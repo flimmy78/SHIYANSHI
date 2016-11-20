@@ -19,8 +19,9 @@ namespace Langben.DAL
         public string INDEX2 { get; set; }
         public string INDEX1UNIT { get; set; }
         public string INDEX1 { get; set; }
-        public string ENDUNITFREQUENCY { get; set; }
         public string ENDRELATIONSHIPFREQUENCY { get; set; }
+        public string ENDUNITFREQUENCY { get; set; }
+        public string ENDFREQUENCY { get; set; }
         public string THERELATIONSHIPFREQUENCY { get; set; }
         public string THEUNITFREQUENCY { get; set; }
         public string THEFREQUENCY { get; set; }
