@@ -79,7 +79,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>RESISTANCE</Code>
+					<Code>OUTPUTVALUE</Code>
 					<!--字段名称含义-->
 					<Name>选用电阻阻值</Name>
 					<!--模板中单元格开始列号-->
@@ -89,7 +89,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>OUTPUT_VALUE</Code>
+					<Code>READVALUE</Code>
 					<!--字段名称含义-->
 					<Name>输出示值</Name>
 					<!--模板中单元格开始列号-->
@@ -99,7 +99,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>OUTPUT_VALUE_UNIT</Code>
+					<Code>READVALUE_UNIT</Code>
 					<!--字段名称含义-->
 					<Name>输出示值单位</Name>
 					<!--模板中单元格开始列号-->
@@ -109,7 +109,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>READ_VALUE</Code>
+					<Code>ACTUALVALUE</Code>
 					<!--字段名称含义-->
 					<Name>读数值</Name>
 					<!--模板中单元格开始列号-->
@@ -119,7 +119,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>READ_VALUE_UNIT</Code>
+					<Code>ACTUALVALUE_UNIT</Code>
 					<!--字段名称含义-->
 					<Name>读数值单位</Name>
 					<!--模板中单元格开始列号-->
@@ -129,7 +129,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>ACTUAL_OUTPUT_VALUE</Code>
+					<Code>SHIJISHUCHUZHI</Code>
 					<!--字段名称含义-->
 					<Name>输出实际值</Name>
 					<!--模板中单元格开始列号-->
@@ -139,7 +139,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>ACTUAL_OUTPUT_VALUE_UNIT</Code>
+					<Code>SHIJISHUCHUZHI_UNIT</Code>
 					<!--字段名称含义-->
 					<Name>输出实际值单位</Name>
 					<!--模板中单元格开始列号-->
@@ -149,7 +149,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>RELATIVE_ERROR</Code>
+					<Code>RELATIVEERROR</Code>
 					<!--字段名称含义-->
 					<Name>相对误差</Name>
 					<!--模板中单元格开始列号-->
@@ -159,7 +159,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>UNCERTAINTY_DEGREE</Code>
+					<Code>UNCERTAINTYDEGREE</Code>
 					<!--字段名称含义-->
 					<Name>校准结果的不确定度U(k=2)</Name>
 					<!--模板中单元格开始列号-->
@@ -169,7 +169,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>UNCERTAINTY_DEGREE_UNIT</Code>
+					<Code>UNCERTAINTYDEGREE_UNIT</Code>
 					<!--字段名称含义-->
 					<Name>校准结果的不确定度U(k=2)单位</Name>
 					<!--模板中单元格开始列号-->
