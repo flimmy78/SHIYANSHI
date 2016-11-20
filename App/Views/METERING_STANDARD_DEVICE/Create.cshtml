@@ -164,6 +164,60 @@
                 </ul>
 
             </div>
+            <h2 class="f14 mt10">不确定参数信息</h2>
+            <label>
+                <input type="radio" name="three" id="wucha_1" onclick="radio.check()" checked="checked" />
+                误差来源
+            </label>
+            <div class="mt10" id="div4">
+                <ul class="clear mt10">
+                    <li class="fl mr10">
+                        评定项：
+                        <select class="my-combobox" name="ASSESSMENTITEM">
+                            <option value="">请选择</option>
+                            <option value="三相四线">三相四线</option>
+                            <option value="三相三线">三相三线</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        误差来源：
+                        <input class="my-textbox " value="" name="ERRORSOURCES">
+                    </li>
+                    <li class="fl mr10">
+                        误差限：
+                        <input class="my-textbox" value="" name="ERRORLIMITS">
+                    </li>
+                    <li class="fl mr10">
+                        误差限单位：
+                        <select class="my-combobox" name="ERRORLIMITUNIT">
+                            <option value="">请选择</option>
+                            <option value="%">%</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        误差分布状况：
+                        <select class="my-combobox" name="THEERRODISTRIBUTION">
+                            <option value="">请选择</option>
+                            <option value="正态分布">正态分布</option>
+                            <option value="矩形分布">矩形分布</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        k：
+                        <select class="my-combobox" name="KVALE">
+                            <option value="">请选择</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        备注：
+                        <input class="my-textbox" value="" name="NOTE">
+                    </li>
+                    <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                </ul>
+
+            </div>
         </div>
         <div class="mt10"><a href="javascript:;" class="easyui-linkbutton" onclick="baocun()">保存</a> <a href="javascript:;" class="easyui-linkbutton" onclick="">取消</a></div>
     </div>
