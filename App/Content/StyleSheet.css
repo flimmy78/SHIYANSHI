@@ -1,349 +1,109 @@
 ﻿
-body {
-    margin: 0;
-    padding: 0;
-    font-size:  12px; 
-}
-ul,li{ margin:0; padding:0; list-style:none; overflow:hidden}
-input[type="checkbox"],input[type="radio"] {vertical-align:middle; margin-top:-2px; margin-bottom:1px; }
-.p5 {padding:5px}
-.p10 {padding:10px}
-.p15 {padding:15px}
-.space10{ font-size:1px; height:10px;}
-.space15{ font-size:1px; height:15px;}
-.space20{ font-size:1px; height:20px;}
-.bgF7{ background:#f7f7f7}
-.mt10{ margin-top:10px}
-.fl{ float:left}
-.fr{ float:right}
-.tr{ text-align:right}
-.tc{ text-align:center}
-.f14{font-size:14px}  
+body{margin: 0; padding: 0; font-size: 12px;}
+ul,li{margin:0; padding:0; list-style:none; overflow:hidden}
+input[type="checkbox"],input[type="radio"]{vertical-align:middle; margin-top:-2px; margin-bottom:1px;}
+.p5{padding:5px}
+.p10{padding:10px}
+.p15{padding:15px}
+.space10{font-size:1px; height:10px;}
+.space15{font-size:1px; height:15px;}
+.space20{font-size:1px; height:20px;}
+.bgF7{background:#f7f7f7}
+.mt10{margin-top:10px}
+.fl{float:left}
+.fr{float:right}
+.tr{text-align:right}
+.tc{text-align:center}
+.f14{font-size:14px}
 .f16{font-size:16px}
-.mr10{ margin-right:10px}
-h2 {
-    padding-left: 5px;  
-}
+.mr10{margin-right:10px}
+h2{padding-left: 5px;}
 
-input {
-    font: normal 12px/20px ;
-    color: #444; border:1px solid #D4D4D4; height:22px 
-}
-    input[type="submit"] {height:25px    }
-.textbox{-moz-border-radius: 0;
-    -webkit-border-radius: 0;
-    border-radius: 0;}
-.mbx {
-    height: 23px;
-    font-weight: bold;
-    color: #9b6835;
-    border-bottom: 1px #999 dotted;
-    padding: 12px 19px 3px 19px;
-    margin: 4px;
-    background: url(../Images/direction.gif) 0 center no-repeat;
-}
-.clear { clear:both; display:block
-}
-.clearfix{ clear:both; height:0; line-height:0; width:100%} 
-.a2 {
-    width: 90px;
-    height: 23px;
-    line-height: 23px;
-    _line-height: 21px; 
-    background: url('../Images/line_n2.gif') repeat-x;
-    border: 1px solid #b8bcbf;
-    cursor: pointer;
-}
-
-.f2 {
-    /*padding: 0 22px;     margin-right: 6px;*/
-    font: bold 12px/23px "微软雅黑";
-    color: #333;
-}
-
-.a3 {
-    width: 78px;
-    height: 28px;
-}
-
-    .a3 span a {
-        font: bold 14px/28px;
-        text-decoration: none;
-        border: 1px solid #720101;
-        display: block;
-        color: #fff;
-        background-color: #830000;
-        text-align: center;
-    }
-
-        .a3 span a:hover {
-            border: 1px solid #710404;
-            background-color: #710404;
-        }
-
-.indexcss a {
-    color: #444;
-    border-bottom: 2px solid #b41826;
-    text-decoration: none;
-}
-
-.datagrid-header-row {
-    font-weight: bold;
-}
+input[type="submit"]{height:25px}
+.textbox{-moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0;}
+.mbx{height: 23px; font-weight: bold; color: #9b6835; border-bottom: 1px #999 dotted; padding: 12px 19px 3px 19px; margin: 4px; background: url(../Images/direction.gif) 0 center no-repeat;}
+.clear{clear:both; display:block}
+.clearfix{clear:both; height:0; line-height:0; width:100%}
+.a2{width: 90px; height: 23px; line-height: 23px; _line-height: 21px; background: url('../Images/line_n2.gif') repeat-x; border: 1px solid #b8bcbf; cursor: pointer;}
+.f2{/*padding: 0 22px; margin-right: 6px;*/ font: bold 12px/23px "微软雅黑"; color: #333;}
+.a3{width: 78px; height: 28px;} .a3 span a{font: bold 14px/28px; text-decoration: none; border: 1px solid #720101; display: block; color: #fff; background-color: #830000; text-align: center;} .a3 span a:hover{border: 1px solid #710404; background-color: #710404;}
+.indexcss a{color: #444; border-bottom: 2px solid #b41826; text-decoration: none;}
+.datagrid-header-row{font-weight: bold;}
 /* Styles for Search
 ----------------------------------------------------------*/
-
-.pagination-info {
-    float: left;
-}
-
-.icon-details {
-    background: url('../Images/view.png') no-repeat;
-}
-
-.icon-site {
-    background: url('../Images/direction.gif') no-repeat;
-}
-
-.icon-excel {
-    background: url('../Images/excelcss.jpg') no-repeat;
-}
-
-#divQuery {
-    width: auto;
-    height: auto;
-    clear: both; font-size:12px
-}
-.search-form{ width:430px; float:left}
-
-
-.input_search {
-    height: 40px;
-    float: left;
-}
-
-.input_search-label {
-    width: 90px;
-    float: left;
-    text-align: right;
-    margin: 13px 0 9px;
-    _margin: 13px 0 9px;
-    line-height: 24px;
-    display: inline;font-size:12px
-}
-
-    .input_search-label label {
-        margin-top: 5px;font-size:12px
-    }
-
-.input_search-field {
-    width: 220px;
-    float: left;
-    margin: 11px 0 11px 6px;
-    display: inline;
-}
-.input_search-field .static{ padding:0; line-height:26px; margin:0}  
- .input_search-field input {
-        width: 196px;
-    }
-
-.input_search-field-time {
-    width: 210px;
-    float: left;
-    margin: 11px 0 11px 6px;
-    display: inline;
-}
-.input_search-field-time input {
-        width: 85px;
-    }
-.input_search-field select {   
-    height: 26px;
-    width: 210px;
-    border: 1px solid #d4d4d4;
-    float: left;
-    margin-top: 3px;
-    _margin-left: 5px;
-    display: inline;
-}
-.input_search-btn{ padding-left:10px; padding-top:14px}
-
+.pagination-info{float: left;}
+.icon-details{background: url('../Images/view.png') no-repeat;}
+.icon-site{background: url('../Images/direction.gif') no-repeat;}
+.icon-excel{background: url('../Images/excelcss.jpg') no-repeat;}
+#divQuery{width: auto; height: auto; clear: both; font-size:12px}
+.search-form{width:430px; float:left}
+.input_search{height: 40px; float: left;}
+.input_search-label{width: 90px; float: left; text-align: right; margin: 13px 0 9px; _margin: 13px 0 9px; line-height: 24px; display: inline;font-size:12px} .input_search-label label{margin-top: 5px;font-size:12px}
+.input_search-field{width: 220px; float: left; margin: 11px 0 11px 6px; display: inline;}
+.input_search-field .static{padding:0; line-height:26px; margin:0} 
+.input_search-field input[type="text"]{width: 196px;}
+.input_search-field-time{width: 210px; float: left; margin: 11px 0 11px 6px; display: inline;}
+.input_search-field-time input{width: 85px;}
+.input_search-field select{height: 26px; width: 210px; border: 1px solid #d4d4d4; float: left; margin-top: 3px; _margin-left: 5px; display: inline;}
+.input_search-btn{padding-left:10px; padding-top:14px}
 /* Styles for editor and display helpers
 ----------------------------------------------------------*/
-
-.editor-form{ width:335px; float:left}
-.editor-label {
-    width: 120px;
-    height: 24px;
-    float: left;
-    text-align: right;
-    margin: 13px 0 9px; 
-    line-height: 24px;
-    display: inline;
-}
-
-    .editor-label span {
-        width: 10px;
-        height: 5px;
-        
-        color: Red;
-        display: inline;
-    }
-
-    .editor-label label {
-        width: 120px;
-        margin-top: 5px; color:#666
-    }
-
-.editor-field {
-    width: 301px;
-    height: 24px;
-    float: left;
-    margin: 11px 0 11px 6px;
-    display: inline;
-}
-
-    .editor-field select {
-        font-size:12px;
-        height: 26px;
-        width: 242px;
-        border: 1px solid #D4D4D4;
-        float: left;
-        margin-top: 2px;
-        _margin-left: 5px;
-        display: inline;
-    }
-
-.bigdiv {
-    width: 100%;
-    padding-bottom: 32px;
-}
-
-.text-box {   
-    width: 240px;  
-    margin-top: 2px;border:1px solid #D4D4D4; height:22px; font-size:12px
-}
-
-.textarea-box {
-}
-
-.anUnderLine {
-    border-bottom: 1px solid #1c49b9;
-    text-decoration: none;
-    color: #1c49b9;
-    cursor: pointer;
-}
-
-/* FORM LAYOUT ELEMENTS   
+.editor-form{width:335px; float:left}
+.editor-label{width: 120px; height: 24px; float: left; text-align: right; margin: 13px 0 9px; line-height: 24px; display: inline;} .editor-label span{width: 10px; height: 5px; color: Red; display: inline;} .editor-label label{width: 120px; margin-top: 5px; color:#666}
+.editor-field{width: 301px; height: 24px; float: left; margin: 11px 0 11px 6px; display: inline;} .editor-field select{font-size:12px; height: 26px; width: 242px; border: 1px solid #D4D4D4; float: left; margin-top: 2px; _margin-left: 5px; display: inline;}
+.bigdiv{width: 100%; padding-bottom: 32px;}
+.text-box{width: 240px; margin-top: 2px;border:1px solid #D4D4D4; height:22px; font-size:12px}
+.textarea-box{}
+.anUnderLine{border-bottom: 1px solid #1c49b9; text-decoration: none; color: #1c49b9; cursor: pointer;}
+/* FORM LAYOUT ELEMENTS
 ----------------------------------------------------------*/
-fieldset {
-    width: auto;
-    margin-left: 5px;
-    padding: 1em;
-    border: 1px solid #d4d4d4; border-left:none; border-right:none; border-bottom:none  
-}
-
-legend {
-    padding: 2px 8px 8px 12px; font-family:'Microsoft yahei'; font-size:14px 
-}
-
-input[type="password"] {
-    font-family: 微软雅黑;
-    height: 19px;
-    width: 240px;
-    border: 1px solid #CCC;
-}
-
-textarea {
-    font-size :  12px ;
-    color: #444;
-    height: 106px;
-    width: 600px;
-    border: 1px solid #d4d4d4;
-    margin: 0px 0 11px 6px;
-}
-
-/* select
-{
-    font-family: 微软雅黑,新宋体;
-    height: 23px;
-    width: 182px;
-    border: 1px solid #CCC;
-	float:left;
-	 margin-top:3px;
-	_margin-left:5px;
-	display:inline;
-}Styles for validation helpers
+fieldset{width: auto; margin-left: 5px; padding: 1em; border: 1px solid #d4d4d4; border-left:none; border-right:none; border-bottom:none}
+legend{padding: 2px 8px 8px 12px; font-family:'Microsoft yahei'; font-size:14px}
+textarea{font-size : 12px ; color: #444; height: 106px; width: 600px; border: 1px solid #d4d4d4; margin: 0px 0 11px 6px;}
+/* select{font-family: 微软雅黑,新宋体; height: 23px; width: 182px; border: 1px solid #CCC;float:left; margin-top:3px;_margin-left:5px;display:inline;}Styles for validation helpers
 -----------------------------------------------------------*/
-.field-validation-error {
-    font-family: 微软雅黑;
-    color: #ff0000;
-}
-
-.field-validation-valid {
-    font-size: 16px;
-    font-family: 微软雅黑;
-    display: none;
-}
-
-.input-validation-error {
-    font-family: 微软雅黑;
-    border: 1px solid #ff0000;
-    background-color: #ffeeee;
-}
+.field-validation-error{font-family: 微软雅黑; color: #ff0000;}
+.field-validation-valid{font-size: 16px; font-family: 微软雅黑; display: none;}
+.input-validation-error{font-family: 微软雅黑; border: 1px solid #ff0000; background-color: #ffeeee;}
 .search-box{border:1px solid #D4D4D4; padding:5px}
-.search-box  label{ line-height:26px}
-.search {
-    float: left;
-    margin-bottom: 5px;
-    padding-left: 0px;
-}
-
-.search_lable {
-    float: left;
-    margin-left: 0px;
-    width: 90px;
-    text-align: right;
-}
-
-.search_text {
-    float: left;
-}
-
-.searchButton {
-    width: 70px;
-    height: 22px;
-    cursor: pointer;
-    padding: 0 10px 0 5px;
-    margin-left: 15px;
-    float: left;
-    display: inline;
-    background-color: #860101;
-    font: bold 14px "微软雅黑";
-    text-align: center;
-    cursor: pointer;
-    color: #fff;
-    border: 0 none;
-    display: inline;
-}
-#mainframe{ position:absolute; left:0; width:100%;height:100%; bottom:0;top:0}
-
+.search-box label{line-height:26px}
+.search{float: left; margin-bottom: 5px; padding-left: 0px;}
+.search_lable{float: left; margin-left: 0px; width: 90px; text-align: right;}
+.search_text{float: left;}
+.searchButton{width: 70px; height: 22px; cursor: pointer; padding: 0 10px 0 5px; margin-left: 15px; float: left; display: inline; background-color: #860101; font: bold 14px "微软雅黑"; text-align: center; cursor: pointer; color: #fff; border: 0 none; display: inline;}
+#mainframe{position:absolute; left:0; width:100%;height:100%; bottom:0;top:0}
 /*自定义table*/
-.tbl{ border-collapse:collapse; border:1px solid #ccc}
-.tbl th{ background-color: #F2F2F2;
-  background: -webkit-linear-gradient(top,#ffffff 0,#F2F2F2 100%);
-  background: -moz-linear-gradient(top,#ffffff 0,#F2F2F2 100%);
-  background: -o-linear-gradient(top,#ffffff 0,#F2F2F2 100%);
-  background: linear-gradient(to bottom,#ffffff 0,#F2F2F2 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#F2F2F2,GradientType=0); font-weight:normal}
+.tbl{border-collapse:collapse; border:1px solid #ccc}
+.tbl th{background-color: #F2F2F2; background: -webkit-linear-gradient(top,#ffffff 0,#F2F2F2 100%); background: -moz-linear-gradient(top,#ffffff 0,#F2F2F2 100%); background: -o-linear-gradient(top,#ffffff 0,#F2F2F2 100%); background: linear-gradient(to bottom,#ffffff 0,#F2F2F2 100%); background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#F2F2F2,GradientType=0); font-weight:normal}
 .tbl th, .tbl td{border:1px dotted #ccc; padding:3px;height:25px}
 .input-width{width:80px; text-align:right}
 .tbl .subtbl{border-collapse:collapse; border:none}
-.tips{ display:inline-block; vertical-align: bottom; width:16px; height:16px; }
+.tips{display:inline-block; vertical-align: bottom; width:16px; height:16px;}
+
+/*自定义组件*/
 .my-textbox, .my-combobox{border:1px solid #D4D4D4; height:22px}
-.my-combobox{ height:26px}
-
-.b-title{ font-size:12px; font-weight:bold; border-bottom:1px solid #ccc; clear:both; padding:5px; margin:10px 0;}
-.form-foot{ padding-left:100px; margin:10px 0; clear:both}
-
-.datagrid-row-selected a{ color:#fff} 
+.my-combobox{height:26px}
+.b-title{font-size:12px; font-weight:bold; border-bottom:1px solid #ccc; clear:both; padding:5px; margin:10px 0;}
+.form-foot{padding-left:100px; margin:10px 0; clear:both}
+.datagrid-row-selected a{color:#fff} 
+.my-btn {
+  color: #444;
+  background: #f5f5f5;
+  background-repeat: repeat-x;
+  border: 1px solid #bbb;
+  background: -webkit-linear-gradient(top,#ffffff 0,#e6e6e6 100%);
+  background: -moz-linear-gradient(top,#ffffff 0,#e6e6e6 100%);
+  background: -o-linear-gradient(top,#ffffff 0,#e6e6e6 100%);
+  background: linear-gradient(to bottom,#ffffff 0,#e6e6e6 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#e6e6e6,GradientType=0);
+  -moz-border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px; font-size:12px;  width:auto; height:24px; cursor:pointer
+}
+.my-btn:hover {
+  background: #e6e6e6;
+  color: #00438a;
+  border: 1px solid #ddd;
+  filter: none;
+}
