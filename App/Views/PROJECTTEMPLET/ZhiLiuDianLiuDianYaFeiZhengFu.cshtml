@@ -9,16 +9,18 @@
     <!--表头-->
     <tr>
         <th align="center" width="140">量程</th>
-        <th align="center" width="140">标准值</th>
+        <th align="center" width="140">@((ViewBag.canshu == "电压输出") ? "输出示值" : "标准值")</th>
         <th align="center" width="140">
-            显示值<br>
-            <select class="my-combobox" name="sssss" id="sssss_t_1_1" style="width:100px;">
-                <option value=""></option>
-                <option value="CH1">CH1</option>
-                <option value="CH2">CH2</option>
-                <option value="CH3">CH3</option>
-                <option value="CH4">CH4</option>
-            </select>
+            @if (ViewBag.canshu == "电压输出")
+            {
+                ViewBag.data = "输出实际值";
+            }
+            else
+            {
+                ViewBag.data = ("显示值<br/><select class='my-combobox' name='sssss' id='sssss_t_1_1' style='width:100px;'> <option value=''></option> <option value='CH1'>CH1</option><option value='CH2'>CH2</option><option value='CH3'>CH3</option><option value='CH4'>CH4</option></select>");
+            }
+            @Html.Raw(ViewBag.data)
+
         </th>
         <th align="center">相对误差%</th>
         <th align="center">
@@ -94,7 +96,7 @@
                 }
 
                 //需要合并的列
-                var changerHTML = "onblur=''";
+                
 
                 //标准值 增加下拉框单位A
                 htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "resetBiaoZhunZhi"));
@@ -118,16 +120,16 @@
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
 
-       
+
         //计算显示值
         function resetBiaoZhunZhi(obj) {
             //重新计算当前行
-           
+
             xiangDuiWuCha1(obj, "SHIJISHUCHUZHI", "RELATIVEERROR");
         }
         //计算标准值
         function resetXianShiZhi(obj, source, gold) {
-            //重新计算当前行resetBiaoZhunZhi(this) 
+            //重新计算当前行resetBiaoZhunZhi(this)
             debugger;
             alert(2);
             xiangDuiWuCha2(obj, "READVALUE", "RELATIVEERROR");
@@ -139,7 +141,7 @@
 
             //   LianDongShiJiZhi(obj);
         }
-      
+
 
 
     </script>

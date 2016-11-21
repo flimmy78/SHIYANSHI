@@ -9,7 +9,7 @@
                     @Html.LabelFor(model => model.ORDER_NUMBER):
              </div>
                 <div class="input_search-field">
-                    <input type='text' id='ORDER_NUMBER'/>
+                    <input type='text' id='ORDER_NUMBER' class="my-textbox"/>
                </div>
             </div>
             <div class="input_search">
@@ -17,7 +17,7 @@
                    审核状态:
                 </div>
                 <div class="input_search-field">
-                    @Html.DropDownList("REPORTSTATUS", Models.SysFieldModels.GetSysField("VSHENHE","ISAGGREY"),"请选择",new { id = "REPORTSTATUS" })
+                    @Html.DropDownList("REPORTSTATUS", Models.SysFieldModels.GetSysField("VSHENHE", "ISAGGREY"), "请选择", new { id = "REPORTSTATUS", @class = "my-textbox" ,style="margin-top:0"})
                 </div>
             </div>
     <div class='input_search' style="padding-top:10px;">

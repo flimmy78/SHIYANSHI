@@ -220,7 +220,7 @@
                 </select>
             </th>
             <th align="center" class="f14">
-                <select class="my-combobox" name="MYDIANYA517" id="MYDIANYA17_t_1_1">
+                <select class="my-combobox" name="MYDIANYA17" id="MYDIANYA17_t_1_1">
                     <option value="U1">U1</option>
                     <option value="U2">U2</option>
                     <option value="UA">UA</option>
@@ -320,74 +320,90 @@
                         if (i == 0)
                         {
                             ViewBag.canshu2 += @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHIER"
-+ i + c + "', HangHaoID, rowidx, "
-+ ((ViewBag.ceLiangShuChu == "相位输出") ? "txtVal" : "''") + ", '', unit,'changeValue'));";
+ + c + "', HangHaoID, rowidx, "
++ ((ViewBag.ceLiangShuChu == "相位输出") ? "txtVal" : "''") + ", '', unit,'jueDuiwuCha1'));";
 
                         }
                         else if (i == 1)
                         {
-                            ViewBag.canshu2 += @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHIER"
-            + i + c + "', HangHaoID, rowidx, "
-            + ((ViewBag.ceLiangShuChu == "相位输出") ? "''" : "txtVal") + ", '', unit,'changeValue'));";
+                            ViewBag.canshu2 += @"htmlString.push(SetTDHtml(rowspan, 'BIAOZHUNZHIER"
+             + c + "', HangHaoID, rowidx, "
+            + ((ViewBag.ceLiangShuChu == "相位输出") ? "''" : "txtVal") + ", '', unit,'jueDuiwuCha2'));";
 
                         }
                         else if (i == 2)
                         {
-                            ViewBag.canshu2 += @"htmlString.push(SetTDHtml(rowspan, 'XIANSHIZHIER"
-            + i + c + "', HangHaoID, rowidx, '', '', unit));";
+                            ViewBag.canshu2 += @"htmlString.push(SetTDHtml(rowspan, 'YINYONGWUCHAER"
+             + c + "', HangHaoID, rowidx, '', '', unit));";
 
                         }
                     }
 
- 
+
                 }
-            
 
-            if (rowidx == 0) {
-                //需要合并的列
+
+                if (rowidx == 0) {
+                    //需要合并的列
+                }
+
+                //相位
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "", unit));
+
+                //动态计算出的默认值列
+                @Html.Raw(ViewBag.canshu2)
+
+                //校准结果的不确定度 U(K =
+                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', ""));
+
+                htmlString.push("</tr>");
             }
+            htmlString = htmlString.join("");
 
-            //需要合并的列
-            var changerHTML = "onblur=''";
-
-            //相位
-            htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "", unit));
-
-            //动态计算出的默认值列
-            @Html.Raw(ViewBag.canshu2)
-
-            //校准结果的不确定度 U(K =
-            htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', ""));
-
-            htmlString.push("</tr>");
+            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
+            $.parser.parse(tagRow);//渲染easyui组建
+            $('#dlg').window('close');//关闭弹出框
+            $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
-        htmlString = htmlString.join("");
 
-        var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
-        $.parser.parse(tagRow);//渲染easyui组建
-        $('#dlg').window('close');//关闭弹出框
-        $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
-        }
-        function changeValue(obj) {
-            //
-            //取出当前行
-            //var name = $(obj).attr("name");
-            //var last = name.charAt(id.length - 2)
-            //txtPointLen = $("#txtPointLen").val(); //小数点位数
-            //var tr = $(obj).parent().parent();
-            //var shwoData = $(tr).find('td').find('input[name="XIANSHIZHIER"]').find('input').val();
-            //var biaoZhunValue = $(tr).find('td').eq(2).find('input').val();
-            //var wuCha = (shwoData - biaoZhunValue).toFixed(txtPointLen);
-            ////XIANSHIZHIER
-            //$(tr).find('td').eq(3).find('input').val(wuCha);
-          //  (tr).find('td').eq(1).find('input').val(parseFloat(shwoData).toFixed(txtPointLen))
-        }
         //离开事件，用于计算
         function blurValue(obj) {
-            
-         //   LianDongShiJiZhi(obj);
+
+            //   LianDongShiJiZhi(obj);
         }
-         
+        //离开事件，用于计算
+        function jueDuiwuCha1(obj) {
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            var idAdd = id.substring(id.indexOf('_')-1);
+            
+            var biaoZhunData = $(obj).parent().parent().find("#BIAOZHUNZHIER"  + idAdd).val();
+            var showData = $(obj).val();
+            if (showData != "" && biaoZhunData != "") {
+                var txtPointLen = $("#txtPointLen").val(); //小数点位数
+                var xiangDuiWuCha = (showData - biaoZhunData);
+                var data = xiangDuiWuCha.toFixed(txtPointLen);
+                $(obj).parent().parent().find("#YINYONGWUCHAER"  + idAdd).val(data);
+            }
+        }
+        function jueDuiwuCha2(obj) {
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            var idAdd = id.substring(id.indexOf('_') - 1);
+
+            var showData = $(obj).parent().parent().find("#XIANSHIZHIER" + idAdd).val();
+            var biaoZhunData = $(obj).val();
+            if (showData != "" && biaoZhunData != "") {
+                var txtPointLen = $("#txtPointLen").val(); //小数点位数
+                var xiangDuiWuCha = (showData - biaoZhunData);
+                var data = xiangDuiWuCha.toFixed(txtPointLen);
+                $(obj).parent().parent().find("#YINYONGWUCHAER" + idAdd).val(data);
+            }
+        }
+
+
 
 
     </script>
@@ -413,11 +429,11 @@
 
             <tr>
                 <td align="right">检测点数：</td>
-                <td><input type="text" id="txtPoint" value=""  name="txtPoint" class="easyui-textbox  required digits" style="width:200px" /></td>
+                <td><input type="text" id="txtPoint" value="" name="txtPoint" class="easyui-textbox  required digits" style="width:200px" /></td>
             </tr>
             <tr>
                 <td align="right">小数点位数：</td>
-                <td><input type="text" id="txtPointLen"  value=""  name="txtPointLen" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
+                <td><input type="text" id="txtPointLen" value="" name="txtPointLen" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
             </tr>
         </table>
     </div>

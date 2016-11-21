@@ -24,7 +24,7 @@
             <tr>
                 <td> 实验室：</td>
                 <td>
-                    <select name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID" style="width:200px;">
+                    <select name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID" style="width:200px;" class="my-combobox">
                         <option value="电能" selected="selected">电能</option>
                         <option value="数表三相">数表三相</option>
                         <option value="数表单相">数表单相</option>
@@ -39,7 +39,7 @@
                 <td>
 @if (Model != null)
 { 
-                    <input type="text" id="NAME" class="easyui-textbox" style=""  value ="@Model.NAME"/>
+                    <input type="text" id="NAME" class="my-textbox" style=""  value ="@Model.NAME"/>
 }
 else
 {
@@ -54,8 +54,8 @@ else
                                                                 <td>
                         
 
-                                                                    <a href="javascript:Save()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" style=" margin-left 10px; margin-right:10px">提交方案模板</a>
-                    <a href="/SCHEME/Index" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-back'" style=" margin-left 10px; margin-right:10px">返回</a>
+                                                                    <a href="javascript:Save()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-ok'" style=" margin-left: 10px; margin-right: 10px">提交方案模板</a>
+                    <a href="/SCHEME/Index" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-back'" style=" margin-left: 10px; margin-right:10px">返回</a>
 
                 </td>
             </tr>

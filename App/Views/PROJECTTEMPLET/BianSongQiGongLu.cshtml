@@ -147,7 +147,7 @@
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_3" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="4">
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0.8" id="OUTPUTVALUE_t_1_4" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_4" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option value=""> </option><option value="C">C</option></select></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0.8" id="OUTPUTVALUE_t_1_4" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_4" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option value=""> </option><option  selected="selected" value="C">C</option></select></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="330" id="READVALUE_t_1_4" name="READVALUE" onblur="blurValue(this)" type="text"><span>°</span></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_4" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_4" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
@@ -155,7 +155,7 @@
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_4" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="5">
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0.5" id="OUTPUTVALUE_t_1_5" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_5" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option value=""> </option><option value="C">C</option></select></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0.5" id="OUTPUTVALUE_t_1_5" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_5" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option value=""> </option><option selected="selected" value="C">C</option></select></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="360" id="READVALUE_t_1_5" name="READVALUE" onblur="blurValue(this)" type="text"><span>°</span></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_5" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_5" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
@@ -218,8 +218,7 @@
                 if (rowidx == 0) {
                     //需要合并的列
                 }
-                //需要合并的列
-                var changerHTML = "onblur=''";
+               
                 //测量点 需要下拉框
                 htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120"));
                 //二次输入标准值
