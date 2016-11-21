@@ -2366,6 +2366,11 @@ namespace Langben.Report
                                         {
 
                                             Cell c = temp.Cells.FirstOrDefault(p => p.Code == Name.ToString().Trim());
+                                            if(c.IsMergeSameValue=="Y")
+                                            {
+                                                MergedRowCount = 1;
+
+                                            }
                                             int cellIndex = c.ColIndex;
                                             int cellCount = c.ColCount;
                                             if (MergedRowCount > 1)
@@ -2502,7 +2507,7 @@ namespace Langben.Report
                         targetRow_Next = sheet_Destination.GetRow(i + 1);
                         targetCell_Prev = targetRow_Prev.Cells[c.ColIndex];
                         targetCell_Next = targetRow_Next.Cells[c.ColIndex];
-                        if (c.IsHideRowNull == "Y" && (sheet_Destination.GetRow(i).GetCell(c.ColIndex).StringCellValue=="" || sheet_Destination.GetRow(i).GetCell(c.ColIndex).StringCellValue == ""))
+                        if (c.IsHideRowNull == "Y" && (sheet_Destination.GetRow(i).GetCell(c.ColIndex).StringCellValue=="" || sheet_Destination.GetRow(i).GetCell(c.ColIndex).StringCellValue == "/"))
                         {
                             HideRow(sheet_Destination, i, 1);
                             continue;
