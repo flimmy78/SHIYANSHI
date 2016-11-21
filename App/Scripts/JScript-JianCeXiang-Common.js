@@ -5,7 +5,7 @@ DanWeiDDLHtmlArray = [
     {
         Code: 'DianLiu',
         Remark: '电流单位',
-        Value: "<select class=\"my-combox\" name=\"DianLiu\" style=\"width:50px; \">" +
+        Value: "<select class=\"my-combobox\" name=\"DianLiu\" style=\"width:50px; \">" +
                 "<option value=\"A\">A</option> " +
                  "<option value=\"KA\">KA</option>" +
                  "<option value=\"mA\">mA</option>  " +
@@ -17,7 +17,7 @@ DanWeiDDLHtmlArray = [
         {
             Code: 'DianYa',
             Remark: '电压单位',
-            Value: "<select class=\"my-combox\" name=\"DianYa\" style=\"width:50px; \">" +
+            Value: "<select class=\"my-combobox\" name=\"DianYa\" style=\"width:50px; \">" +
                     "<option value=\"V\">V</option> " +
                     "<option value=\"MV\">MV</option>" +
                     "<option value=\"KV\">KV</option>  " +
@@ -29,7 +29,7 @@ DanWeiDDLHtmlArray = [
         {
             Code: 'DianLiuKA',
             Remark: '电流单位KA开头',
-            Value: "<select class=\"my-combox\" name=\"DianLiuKA\" style=\"width:50px; \">" +
+            Value: "<select class=\"my-combobox\" name=\"DianLiuKA\" style=\"width:50px; \">" +
                     "<option value=\"KA\">KA</option> " +
                     "<option value=\"A\">A</option>" +
                     "<option value=\"mA\">mA</option>  " +
@@ -42,7 +42,7 @@ DanWeiDDLHtmlArray = [
         {
             Code: 'LC',
             Remark: 'LC空格',
-            Value: "<select class=\"my-combox\" name=\"LC\">" +
+            Value: "<select class=\"my-combobox\" name=\"LC\">" +
                     "<option value=\"L\">L</option> " +
                     "<option value=\" \"> </option>" +
                     "<option value=\"C\">C</option>  " +
@@ -52,7 +52,7 @@ DanWeiDDLHtmlArray = [
         {
             Code: 'BuQueDingDu',
             Remark: '不确定度',
-            Value: "<select class=\"my-combox\" name=\"LC\" style=\"width:50px; \">" +
+            Value: "<select class=\"my-combobox\" name=\"LC\" style=\"width:50px; \">" +
                     "<option value=\"2\">2</option> " +
                     "<option value=\"3\">3</option>" +
                     "<option value=\"√3\">√3</option>  " +
@@ -62,7 +62,7 @@ DanWeiDDLHtmlArray = [
         {
             Code: 'TongDaoU0',
             Remark: '通道范围U0开头',
-            Value: "<select class=\"my-combox\" name=\"TongDaoU0\" style=\"width:50px; \">" +
+            Value: "<select class=\"my-combobox\" name=\"TongDaoU0\" style=\"width:50px; \">" +
                     "<option value=\"U0\">U0</option> " +
                     "<option value=\"U1\">U1</option>" +
                     "<option value=\"U2\">U2</option>  " +
@@ -137,7 +137,7 @@ DanWeiDDLHtmlArray = [
         {
             Code: 'TongDaoU0UA',
             Remark: '通道范围U0UA开头',
-            Value: "<select class=\"my-combox\" name=\"TongDaoU0UA\" style=\"width:50px; \">" +
+            Value: "<select class=\"my-combobox\" name=\"TongDaoU0UA\" style=\"width:50px; \">" +
                     "<option value=\"U0\">U0</option> " +
                     "<option value=\"U1\">U1</option>" +
                     "<option value=\"U2\">U2</option>  " +
@@ -218,7 +218,7 @@ DanWeiDDLHtmlArray = [
         {
             Code: 'TongDaoI0',
             Remark: '通道范围I0开头',
-            Value: "<select class=\"my-combox\" name=\"TongDaoI0\" style=\"width:50px; \">" +
+            Value: "<select class=\"my-combobox\" name=\"TongDaoI0\" style=\"width:50px; \">" +
                     "<option value=\"I0\">I0</option> " +
                     "<option value=\"I1\">I1</option>" +
                     "<option value=\"I2\">I2</option>  " +
@@ -292,7 +292,7 @@ DanWeiDDLHtmlArray = [
         {
             Code: 'TongDaoUAB',
             Remark: '通道范围UAB开头',
-            Value: "<select class=\"my-combox\" name=\"TongDaoUAB\" style=\"width:50px; \">" +
+            Value: "<select class=\"my-combobox\" name=\"TongDaoUAB\" style=\"width:50px; \">" +
                     "<option value=\"UAB\">UAB</option> " +
                     "<option value=\"UBC\">UBC</option>" +
                     "<option value=\"U1\">U1</option>  " +
@@ -303,7 +303,7 @@ DanWeiDDLHtmlArray = [
         {
             Code: 'TongDaoI1',
             Remark: '通道范围I1开头',
-            Value: "<select class=\"my-combox\" name=\"TongDaoI1\" style=\"width:50px; \">" +
+            Value: "<select class=\"my-combobox\" name=\"TongDaoI1\" style=\"width:50px; \">" +
                     "<option value=\"I1\">I1</option> " +
                     "<option value=\"I2\">I2</option>" +
                    "</select>"
@@ -312,7 +312,7 @@ DanWeiDDLHtmlArray = [
         {
             Code: 'TongDaoUA',
             Remark: '通道范围UA开头',
-            Value: "<select class=\"my-combox\" name=\"TongDaoUA\" style=\"width:50px; \">" +
+            Value: "<select class=\"my-combobox\" name=\"TongDaoUA\" style=\"width:50px; \">" +
                     "<option value=\"UA\">UA</option> " +
                     "<option value=\"UB\">UB</option>" +
                     "<option value=\"UC\">UC</option>  " +
@@ -322,7 +322,7 @@ DanWeiDDLHtmlArray = [
         {
             Code: 'HZ',
             Remark: '赫兹',
-            Value: "<select class=\"my-combox\" name=\"HZ\" >" +
+            Value: "<select class=\"my-combobox\" name=\"HZ\" >" +
                     "<option value=\"Hz\">Hz</option> " +
                     "<option value=\"KHz\">KHz</option>" +
                     "<option value=\"MHz\">MHz</option>  " +
@@ -334,7 +334,7 @@ DanWeiDDLHtmlArray = [
         {
             Code: 'OM',
             Remark: '欧姆',
-            Value: "<select class=\"my-combox\" name=\"OM\" >" +
+            Value: "<select class=\"my-combobox\" name=\"OM\" >" +
                     "<option value=\"Ω\">Ω</option> " +
                     "<option value=\"TΩ\">TΩ</option>" +
                     "<option value=\"GΩ\">GΩ</option>  " +
