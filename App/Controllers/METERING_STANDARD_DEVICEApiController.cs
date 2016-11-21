@@ -100,6 +100,12 @@ namespace Langben.App.Controllers
                     item.CREATETIME = DateTime.Now;
                     item.CREATEPERSON = currentPerson;
                 }
+                foreach (var item in entity.UNCERTAINTYTABLE)
+                {
+                    item.ID = Result.GetNewId();
+                    item.CREATETIME = DateTime.Now;
+                    item.CREATEPERSON = currentPerson;
+                }
                 string returnValue = string.Empty;
                 if (m_BLL.CreateX(ref validationErrors, entity))
                 {
