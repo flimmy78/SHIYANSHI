@@ -246,12 +246,7 @@ legend {
     padding: 2px 8px 8px 12px; font-family:'Microsoft yahei'; font-size:14px 
 }
 
-input[type="password"] {
-    font-family: 微软雅黑;
-    height: 19px;
-    width: 240px;
-    border: 1px solid #CCC;
-}
+
 
 textarea {
     font-size :  12px ;
