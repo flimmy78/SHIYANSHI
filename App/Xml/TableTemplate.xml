@@ -1221,7 +1221,7 @@
 						</Cell>
 						<Cell>
 							<!--字段代码与模板中设置的字段保持一致-->
-							<Code>dianya</Code>
+							<Code>dianliu</Code>
 							<!--字段名称含义-->
 							<Name>输入范围单位</Name>
 							<!--模板中单元格开始列号-->
@@ -1271,7 +1271,7 @@
 						</Cell>
 						<Cell>
 							<!--字段代码与模板中设置的字段保持一致-->
-							<Code>dianymya</Code>
+							<Code>dianlimyu</Code>
 							<!--字段名称含义-->
 							<Name>Un单位</Name>
 							<!--模板中单元格开始列号-->
@@ -2221,7 +2221,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>ZHONGJIQNZHI</Code>
+					<Code>ZHONGJIANZHI</Code>
 					<!--字段名称含义-->
 					<Name>相位值</Name>
 					<!--模板中单元格开始列号-->
@@ -2509,7 +2509,7 @@
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
-					<Code>ZHONGJIQNZHI</Code>
+					<Code>ZHONGJIANZHI</Code>
 					<!--字段名称含义-->
 					<Name>相位值</Name>
 					<!--模板中单元格开始列号-->

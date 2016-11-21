@@ -13,7 +13,7 @@
                 <tr>
                     <td> 标准量传部：</td>
                     <td>                      
-                        <select  name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID" style="width:200px;" onchange="flexiQuery();" class="my-combox" >
+                        <select  name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID" style="width:200px;" onchange="flexiQuery();" class="my-combobox" >
                            
                             <option value="数表三相">数表三相</option><option value="电能" selected="selected">电能1</option>
                             <option value="数表单相">数表单相</option>
@@ -30,8 +30,8 @@
     </div>
 </div>
 <br style="clear: both;" />
-
-<script type="text/javascript" language="javascript">
+<div class="p5">
+    <script type="text/javascript" language="javascript">
     $(function () {
         bindShiyanshi("#UNDERTAKE_LABORATORYID");
         $('#flexigridData').datagrid({
@@ -46,7 +46,7 @@
             sortName: 'ID',
             sortOrder: 'desc',
             idField: 'ID',
-            queryParams: { search: GetQuery() },//默认查询条件                    
+            queryParams: { search: GetQuery() },//默认查询条件
             toolbar: [
                 {
                     text: '添加',
@@ -85,7 +85,7 @@
              },
             ],
             columns: [[
-               
+
                 {
                     field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', align: 'center',
                     formatter: function (value, row, index) {
@@ -116,9 +116,9 @@
                             html += "&nbsp;&nbsp;<a  href='javascript:void(0)' onclick='javascript:UpdateIsStop(" +'"'+ row.ID +'"'+ ',"启用"'+"); '>  启用 </a>";
                             return html;
                         }
-                        
+
                     }}
-                @*, { field: 'ISPUBLISH', title: '@Html.DisplayNameFor(model => model.ISPUBLISH)', width:140,align: 'center' }*@                
+                @*, { field: 'ISPUBLISH', title: '@Html.DisplayNameFor(model => model.ISPUBLISH)', width:140,align: 'center' }*@
                 @*, { field: 'COPYID', title: '@Html.DisplayNameFor(model => model.COPYID)', width: 51 }
                 , { field: 'PUBLISHPERSON', title: '@Html.DisplayNameFor(model => model.PUBLISHPERSON)', width: 51 }
                 , { field: 'ISPUBLISHTIME', title: '@Html.DisplayNameFor(model => model.ISPUBLISHTIME)', width: 51 }
@@ -152,7 +152,7 @@
     });
 
     //“查询”按钮，弹出查询框
-    function flexiQuery() {        
+    function flexiQuery() {
         //执行查询
         $('#flexigridData').datagrid('load', { search: GetQuery() });
     };
@@ -243,7 +243,7 @@
     //导航到修改的按钮
     function flexiModify() {
 
-        var arr = $('#flexigridData').datagrid('getSelections');        
+        var arr = $('#flexigridData').datagrid('getSelections');
         if (arr.length == 1) {
             window.location.href = "../SCHEME/Create?id=" + arr[0].ID + "&OP=修改&UNDERTAKE_LABORATORYID=" + $("#UNDERTAKE_LABORATORYID").val();
 
@@ -268,7 +268,7 @@
     }
     //批量删除、停用
     function flexiMultOp(Op) {
-       
+
         var rows = $('#flexigridData').datagrid('getSelections');
         if (rows.length == 0) {
             $.messager.alert('操作提示', '请选择数据!', 'warning');
@@ -326,7 +326,7 @@
             }
         });
 
-    }; 
+    };
     //启用停用
     function UpdateIsStop(ID,ISSTOP)
     {
@@ -359,6 +359,7 @@
             }
         });
     }
-  
-</script>
 
+    </script>
+
+</div>
