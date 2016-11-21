@@ -164,6 +164,192 @@
                 </ul>
 
             </div>
+            <h2 class="f14 mt10">不确定参数信息</h2>
+            <label>
+                <input type="radio" name="wucha" id="wucha_1" onclick="radio2.check()" checked="checked" />
+                误差来源
+            </label>
+            <div class="mt10" id="div5">
+                <ul class="clear mt10">
+                    <li class="fl mr10">
+                        评定项：
+                        <select class="my-combobox" name="ASSESSMENTITEM">
+                            <option value="">请选择</option>
+                            <option value="三相四线">三相四线</option>
+                            <option value="三相三线">三相三线</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        误差来源：
+                        <input class="my-textbox " value="" name="ERRORSOURCES">
+                    </li>
+                    <li class="fl mr10">
+                        误差限：
+                        <input class="my-textbox" value="" name="ERRORLIMITS">
+                    </li>
+                    <li class="fl mr10">
+                        误差限单位：
+                        <select class="my-combobox" name="ERRORLIMITUNIT">
+                            <option value="">请选择</option>
+                            <option value="%">%</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        误差分布状况：
+                        <select class="my-combobox" name="THEERRODISTRIBUTION">
+                            <option value="">请选择</option>
+                            <option value="正态分布">正态分布</option>
+                            <option value="矩形分布">矩形分布</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        k：
+                        <select class="my-combobox" name="KVALE">
+                            <option value="">请选择</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        备注：
+                        <input class="my-textbox" value="" name="NOTE">
+                    </li>
+                    <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                </ul>
+
+            </div>
+            <label>
+                <input type="radio" name="wucha" id="wucha_2" onclick="radio2.check()"/>
+                范围指标
+            </label>
+            <div class="mt10" id="div6">
+                <ul class="clear mt10">
+                    <li class="fl mr10">
+                        评定项：
+                        <select class="my-combobox" name="ASSESSMENTITEM">
+                            <option value="">请选择</option>
+                            <option value="三相四线">三相四线</option>
+                            <option value="三相三线">三相三线</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        量程范围起：
+                        <input class="my-textbox " value="" name="THERANGESCOPE">
+                    </li>
+                    <li class="fl mr10">
+                        起单位：
+                        <select class="my-combobox" name="THEUNIT">
+                            <option value="">请选择</option>
+                            <option value="V">V</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        起关系：
+                        <select class="my-combobox" name="THERELATIONSHIP">
+                            <option value="">请选择</option>
+                            <option value="<"><</option>
+                            <option value=">">></option>
+                            <option value="<="><=</option>
+                            <option value=">=">>=</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        量程范围止：
+                        <input class="my-textbox " value="" name="ENDRANGESCOPE">
+                    </li>
+                    <li class="fl mr10">
+                        止单位：
+                        <select class="my-combobox" name="ENDUNIT">
+                            <option value="">请选择</option>
+                            <option value="V">V</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        止关系：
+                        <select class="my-combobox" name="ENDRELATIONSHIP">
+                            <option value="">请选择</option>
+                            <option value="<"><</option>
+                            <option value=">">></option>
+                            <option value="<="><=</option>
+                            <option value=">=">>=</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        频率范围起：
+                        <input class="my-textbox " value="" name="THEFREQUENCY">
+                    </li>
+                    <li class="fl mr10">
+                        起单位：
+                        <select class="my-combobox" name="THEUNITFREQUENCY">
+                            <option value="">请选择</option>
+                            <option value="V">V</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        频率起关系：
+                        <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
+                            <option value="">请选择</option>
+                            <option value="<"><</option>
+                            <option value=">">></option>
+                            <option value="<="><=</option>
+                            <option value=">=">>=</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        频率范围止：
+                        <input class="my-textbox " value="" name="ENDFREQUENCY">
+                    </li>
+                    <li class="fl mr10">
+                        频率止单位：
+                        <select class="my-combobox" name="ENDUNITFREQUENCY">
+                            <option value="">请选择</option>
+                            <option value="V">V</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        频率止关系：
+                        <select class="my-combobox" name="ENDRELATIONSHIPFREQUENCY">
+                            <option value="">请选择</option>
+                            <option value="<"><</option>
+                            <option value=">">></option>
+                            <option value="<="><=</option>
+                            <option value=">=">>=</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        指标1：
+                        <input class="my-textbox " value="" name="INDEX1">
+
+                    </li>
+                    <li class="fl mr10">
+                        指标1单位：
+                        <select class="my-combobox" name="INDEX1UNIT">
+                            <option value="">请选择</option>
+                            <option value="V">V</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        指标2：
+                        <select class="my-combobox" name="ENDUNITFREQUENCY">
+                            <option value="">请选择</option>
+                            <option value="V">V</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        指标2单位：
+                        <select class="my-combobox" name="INDEX2UNIT">
+                            <option value="">请选择</option>
+                            <option value="V">V</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        备注：
+                        <input class="my-textbox" value="" name="NOTE">
+                    </li>
+                    <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                </ul>
+
+            </div>
         </div>
         <div class="mt10"><a href="javascript:;" class="easyui-linkbutton" onclick="baocun()">保存</a> <a href="javascript:;" class="easyui-linkbutton" onclick="">取消</a></div>
     </div>
@@ -244,6 +430,45 @@
                                             //$(this).combobox('select', "");
                                         })
                                 })
+                                break                        
+                            default:
+
+                        }
+                        //$("#divtable .easyui-linkbutton").linkbutton("disable");
+                        //$(obj).next('div').children(1).find('li a').linkbutton("enable");
+                        //$(".mt10").next('div').children(9).find('li a').linkbutton("enable");
+                        //$(".mt10").eq(12).find('a').linkbutton("enable");
+
+                    }
+                }
+                var radio2 = {
+                    check: function () {
+                        var obj = $("input[name='wucha']:checked");
+                        var id = obj.attr("id");
+                        switch (id) {                   
+                            case ("wucha_1"):
+                                var row = $("#div6 ul");
+                                row.each(function () {
+                                    if ($("#div6 ul").length > 1)
+                                        $(this).remove();
+                                    else
+                                        $("#div6").find(":text,:selected,select,textarea").each(function () {
+                                            $(this).val("");
+                                            //$(this).combobox('select', "");
+                                        })
+                                })
+                                break
+                            case ("wucha_2"):
+                                var row = $("#div5 ul");
+                                row.each(function () {
+                                    if ($("#div5 ul").length > 1)
+                                        $(this).remove();
+                                    else
+                                        $("#div5").find(":text,:selected,select,textarea").each(function () {
+                                            $(this).val("");
+                                            //$(this).combobox('select', "");
+                                        })
+                                })
                                 break
                             default:
 
@@ -279,11 +504,14 @@
 <script type="text/javascript">
     //保存
     function baocun() {
+        debugger
         var METERING_STANDARD_DEVICE = new Object();//标准装置/计量标准器信息
         var myArray = null;
         var myArray2 = null;
         var myArray3 = null;
         var myArray4 = new Array()
+        var myArray5 = null;
+        var myArray6 = null;
         var obj = $("input[name='three']:checked");
         var id = obj.attr("id");
         switch (id) {
@@ -314,6 +542,51 @@
                 break
             default:
         }
+        //*******************************************不确定度
+        var obj2 = $("input[name='wucha']:checked");
+        var id2 = obj2.attr("id");
+        switch (id2) {
+            case ("wucha_1"):
+                myArray5 = new Array()
+                $("#div5").find("ul").each(function () {
+                    debugger
+                    var ASSESSMENTITEM = $(this).find("li :selected").eq(0).val();//评定项
+                    var ERRORSOURCES = $(this).find("li :input").eq(0).val();//误差来源
+                    var THEUNIT = $(this).find("li :input").eq(1).val();//误差限
+                    var ERRORLIMITUNIT = $(this).find("li :selected").eq(1).val();//误差限单位
+                    var THEERRODISTRIBUTION = $(this).find("li :selected").eq(2).val();//误差分布状况
+                    var KVALE = $(this).find("li :selected").eq(3).val();//K
+                    var NOTE = $(this).find("li :input").eq(2).val();//备注
+                    myArray5.push({ ASSESSMENTITEM: ASSESSMENTITEM, ERRORSOURCES: ERRORSOURCES, THEUNIT: THEUNIT, ERRORLIMITUNIT: ERRORLIMITUNIT, THEERRODISTRIBUTION: THEERRODISTRIBUTION, KVALE: KVALE, NOTE: NOTE });
+                })
+                break
+            case ("wucha_2"):
+                myArray6 = new Array()
+                $("#div6").find("ul").each(function () {
+                    var ASSESSMENTITEM = $(this).find("li :selected").eq(0).val();//评定项
+                    var THERANGESCOPE = $(this).find("li :input").eq(0).val();//量程范围起
+                    var ERRORLIMITS = $(this).find("li :selected").eq(1).val();//起单位
+                    var THERELATIONSHIP = $(this).find("li :selected").eq(2).val();//起关系
+                    var ENDRANGESCOPE = $(this).find("li :input").eq(1).val();//量程范围止
+                    var ENDUNIT = $(this).find("li :selected").eq(3).val();//止单位
+                    var ENDRELATIONSHIP = $(this).find("li :selected").eq(4).val();//止关系
+                    var THEFREQUENCY = $(this).find("li :input").eq(2).val();//频率范围起
+                    var THEUNITFREQUENCY = $(this).find("li :selected").eq(5).val();//起单位
+                    var THERELATIONSHIPFREQUENCY = $(this).find("li :selected").eq(6).val();//频率起关系
+                    var ENDFREQUENCY = $(this).find("li :input").eq(3).val();//频率范围止
+                    var ENDUNITFREQUENCY = $(this).find("li :selected").eq(7).val();//频率止单位
+                    var ENDRELATIONSHIPFREQUENCY = $(this).find("li :selected").eq(8).val();//频率止关系
+                    var INDEX1 = $(this).find("li :input").eq(4).val();//指标1
+                    var INDEX1UNIT = $(this).find("li :selected").eq(9).val();//指标1单位
+                    var ENDUNITFREQUENCY = $(this).find("li :input").eq(5).val();//指标2
+                    var INDEX2UNIT = $(this).find("li :selected").eq(10).val();//指标2单位
+                    var NOTE = $(this).find("li :input").eq(6).val();//备注
+                    myArray6.push({ ASSESSMENTITEM: ASSESSMENTITEM, THERANGESCOPE: THERANGESCOPE, ERRORLIMITS: ERRORLIMITS, THERELATIONSHIP: THERELATIONSHIP, ENDRANGESCOPE: ENDRANGESCOPE, ENDUNIT: ENDUNIT, ENDRELATIONSHIP: ENDRELATIONSHIP, THEFREQUENCY: THEFREQUENCY, THEUNITFREQUENCY: THEUNITFREQUENCY, THERELATIONSHIPFREQUENCY: THERELATIONSHIPFREQUENCY, ENDFREQUENCY: ENDFREQUENCY, ENDUNITFREQUENCY: ENDUNITFREQUENCY, ENDRELATIONSHIPFREQUENCY: ENDRELATIONSHIPFREQUENCY, INDEX1: INDEX1, INDEX1UNIT: INDEX1UNIT, ENDUNITFREQUENCY: ENDUNITFREQUENCY, INDEX2UNIT: INDEX2UNIT, NOTE: NOTE });
+                })
+                break        
+            default:
+        }
+        //*****************************************************
         $("#div4").find("ul").each(function () {
             var CERTIFICATEUNIT = $(this).find("li :input").eq(0).val();
             var CERTIFICATE_NUM = $(this).find("li :input").eq(1).val();
@@ -336,35 +609,39 @@
         else if (myArray3 != null)
             METERING_STANDARD_DEVICE.ALLOWABLE_ERROR = myArray3;
         METERING_STANDARD_DEVICE.METERING_STANDARD_DEVICE_CHECK = myArray4;
+        if (myArray5 != null)
+            METERING_STANDARD_DEVICE.UNCERTAINTYTABLE = myArray5;
+        else if(myArray6!=null)
+            METERING_STANDARD_DEVICE.UNCERTAINTYTABLE = myArray6;
         //调用后台方法
-        if (ifshuju(METERING_STANDARD_DEVICE)) {
-            $.ajax({
-                url: "/api/METERING_STANDARD_DEVICEApi/Post",
-                type: "Post",
-                data: METERING_STANDARD_DEVICE,
-                dataType: "json",
+        //if (ifshuju(METERING_STANDARD_DEVICE)) {
+        //    //$.ajax({
+        //    //    url: "/api/METERING_STANDARD_DEVICEApi/Post",
+        //    //    type: "Post",
+        //    //    data: METERING_STANDARD_DEVICE,
+        //    //    dataType: "json",
 
-                success: function (data) {
-                    if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
-                    else if (data.Code == 1) {
-                        $.messager.alert('操作提示', "新增成功！", 'info');
-                        return false;
-                    }
-                    else {
-                        if ($.messager) {
-                            $.messager.defaults.ok = '继续';
-                            $.messager.defaults.cancel = '返回';
+        //    //    success: function (data) {
+        //    //        if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+        //    //        else if (data.Code == 1) {
+        //    //            $.messager.alert('操作提示', "新增成功！", 'info');
+        //    //            return false;
+        //    //        }
+        //    //        else {
+        //    //            if ($.messager) {
+        //    //                $.messager.defaults.ok = '继续';
+        //    //                $.messager.defaults.cancel = '返回';
 
-                            $.messager.confirm('操作提示', "新增失败！", function (r) {
-                                if (!r) {
-                                    window.location.href = 'javascript:history.go(-1)';
-                                }
-                            });
-                        }
-                    }
-                }
-            })
-        }
+        //    //                $.messager.confirm('操作提示', "新增失败！", function (r) {
+        //    //                    if (!r) {
+        //    //                        window.location.href = 'javascript:history.go(-1)';
+        //    //                    }
+        //    //                });
+        //    //            }
+        //    //        }
+        //    //    }
+        //    //})
+        //}
         
     }
     //数据校验
@@ -390,6 +667,9 @@
         }
         if (m.METERING_STANDARD_DEVICE_CHECK == null) {
             zhi += "证书信息不能为空！<br>";
+        }
+        if (m.UNCERTAINTYTABLE == null) {
+            zhi += "不确定参数信息不能为空！<br>";
         }
         if (zhi != "") {
             $.messager.alert('操作提示', "" + zhi + "", 'info');
