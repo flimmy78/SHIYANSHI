@@ -2145,6 +2145,10 @@
 					<ColIndex>44</ColIndex>
 					<!--所占列数-->
 					<ColCount>6</ColCount>
+					<!--相同值是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）-->
+					<IsMergeSameValue>N</IsMergeSameValue>
+					<!--空值是否不展示该行，不填表示不隐藏（Y:隐藏、N:不隐藏）-->
+					<IsHideRowNull>Y</IsHideRowNull>
 				</Cell>
 				<Cell>
 					<!--字段代码与模板中设置的字段保持一致-->
