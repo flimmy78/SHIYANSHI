@@ -2533,7 +2533,7 @@ namespace Langben.Report
                                 sheet_Destination.AddMergedRegion(new CellRangeAddress(startMergeRow, endMergeRow, c.ColIndex, c.ColIndex + c.ColCount));
                                 
                             }
-                            startMergeRow = i;
+                            startMergeRow = i+1;
                         }
                     }
 
