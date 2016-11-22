@@ -253,7 +253,8 @@
             if (dianya == null || dianya == "") {
                 return;
             }
-            var gudingzhi = (3 * dianliu * dianya).toFixed(0);
+            var guding=@((ViewBag.canshu== "三相四线")?3:System.Math.Sqrt(3));
+            var gudingzhi = (guding * dianliu * dianya).toFixed(0);
             //重新计算当前行
             var name = $(obj).attr("name");
             var id = $(obj).attr("id");
@@ -312,7 +313,7 @@
                     if (ZHONGJIANZHI1.indexOf('.') > 0) {
                         txtPointLen = ZHONGJIANZHI1.split(".")[1].length;//小数点位数
                     }
-
+                    debugger;
                     var xiangDuiWuCha = ((showData - biaoZhunData) / gudingzhi * 100);
                     var data = fomatFloat(xiangDuiWuCha, txtPointLen)
                     $(obj).parent().parent().find("#ACTUALVALUE" + id).val(data);

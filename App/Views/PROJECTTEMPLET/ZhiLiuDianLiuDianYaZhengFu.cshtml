@@ -12,13 +12,16 @@
         <th rowspan="2" align="center" width="140">标准值</th>
         <th colspan="2" align="center" width="140">
             显示值
-            <select class="my-combobox" name="sssss" id="sssss_t_1_1" style="width:100px;">
-                <option value=""></option>
-                <option value="CH1">CH1</option>
-                <option value="CH2">CH2</option>
-                <option value="CH3">CH3</option>
-                <option value="CH4">CH4</option>
-            </select>
+            @if ((ViewBag.canshu == "相对误差"))
+            {
+                <select class="my-combobox" name="sssss" id="sssss_t_1_1" style="width:100px;">
+                    <option value=""></option>
+                    <option value="CH1">CH1</option>
+                    <option value="CH2">CH2</option>
+                    <option value="CH3">CH3</option>
+                    <option value="CH4">CH4</option>
+                </select>
+            }
         </th>
         <th colspan="2" align="center">相对误差%</th>
         <th align="center">
@@ -102,16 +105,18 @@
                 }
 
                 //需要合并的列
-                
+
 
                 //标准值 增加下拉框单位A
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "resetBiaoZhunZhi"));
+
+
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "@((ViewBag.canshu == "相对误差") ? "resetBiaoZhunZhi" : "jueDuiWuChaBiaoZhunZhi")"));
 
                 //显示值
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "", '', "resetXianShiZhi"));
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "", '', "@((ViewBag.canshu == "相对误差") ? "resetXianShiZhi" : "jueDuiWuChaXianShiZhi")"));
 
                 //显示值 负
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHIFU", HangHaoID, rowidx, '', "", '', "resetXianShiZhiFu"));
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHIFU", HangHaoID, rowidx, '', "", '', "@((ViewBag.canshu == "相对误差") ? "resetXianShiZhiFu" : "jueDuiWuChaXianShiZhiFu")"));
 
                 //相对误差
                 htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', ""));
@@ -129,6 +134,26 @@
             $('#dlg').window('close');//关闭弹出框
             $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
+
+        //计算标准值 绝对误差
+        function jueDuiWuChaBiaoZhunZhi(obj) {
+
+            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHIFU", "RELATIVEERRORFU");
+        }
+        //计算显示值  绝对误差
+        function jueDuiWuChaXianShiZhi(obj) {
+
+            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+        }
+
+        //计算显示值  绝对误差
+        function jueDuiWuChaXianShiZhiFu(obj) {
+
+            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHIFU", "RELATIVEERRORFU");
+
+        }
+
 
         //计算标准值
         function resetBiaoZhunZhi(obj) {
@@ -155,7 +180,7 @@
 
             //   LianDongShiJiZhi(obj);
         }
-   
+
 
     </script>
 

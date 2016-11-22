@@ -9,20 +9,20 @@
     <!--表头-->
     <tr>
         <th align="center" width="140">量程</th>
-        <th align="center" width="140">@((ViewBag.canshu == "电压输出") ? "输出示值" : "标准值")</th>
+        <th align="center" width="140">@((ViewBag.canshu == "输出") ? "输出示值" : "标准值")</th>
         <th align="center" width="140">
-            @if (ViewBag.canshu == "电压输出")
+            @if (ViewBag.canshu == "输出")
             {
                 ViewBag.data = "输出实际值";
             }
             else
             {
-                ViewBag.data = ("显示值<br/><select class='my-combobox' name='sssss' id='sssss_t_1_1' style='width:100px;'> <option value=''></option> <option value='CH1'>CH1</option><option value='CH2'>CH2</option><option value='CH3'>CH3</option><option value='CH4'>CH4</option></select>");
+                ViewBag.data = ("显示值");
             }
             @Html.Raw(ViewBag.data)
 
         </th>
-        <th align="center">相对误差%</th>
+        <th align="center">@ViewBag.wucha  %</th>
         <th align="center">
             校准结果的不确定度<br>
             U(K = <select class="my-combobox" name="K" id="K_1_1_1">
@@ -96,13 +96,13 @@
                 }
 
                 //需要合并的列
-                
+
 
                 //标准值 增加下拉框单位A
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "resetBiaoZhunZhi"));
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "@((ViewBag.wucha == "绝对误差") ? "jueDuiWuChaBiaoZhunZhi" : "resetBiaoZhunZhi")"));
 
                 //显示值
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "", '', "resetXianShiZhi"));
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "", '', "@((ViewBag.wucha == "绝对误差") ? "jueDuiWuChaXianShiZhi" : "resetXianShiZhi")"));
 
                 //相对误差
                 htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', ""));
@@ -120,15 +120,25 @@
             $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
 
+        //计算标准值 绝对误差
+        function jueDuiWuChaBiaoZhunZhi(obj) {
 
-        //计算显示值
-        function resetBiaoZhunZhi(obj) {          
             jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
-          
+            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHIFU", "RELATIVEERRORFU");
+        }
+        //计算显示值  绝对误差
+        function jueDuiWuChaXianShiZhi(obj) {
+
+            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+        }
+        //计算显示值
+        function resetBiaoZhunZhi(obj) {
+            xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+
         }
         //计算标准值
-        function resetXianShiZhi(obj) {            
-            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+        function resetXianShiZhi(obj) {
+            xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
         }
 
         //离开事件，用于计算
