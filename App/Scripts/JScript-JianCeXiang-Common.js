@@ -352,18 +352,18 @@ RuleAttributeArray = [{
     Remark: '直流电流输出-相对误差',//检测项说明
     Attributes:
         [{
-            //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+            //添加通道按钮是否显示show:显示，hidden:不显示
             DuoTongDao: 'hidden',
-            //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+            //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
             //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-            LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
-            //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+            LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
+            //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
             //DianLiu:电流单位；DianYa:电压单位   
-            //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-            DanWeiHtmlDDL: 'DianLiu|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenUNCERTAINTYDEGREE;DianYa|txtPointLenACTUALVALUE',
+            //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+            DanWeiHtmlDDL: 'DianLiu|RANGE,READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;DianYa|ACTUALVALUE',
             //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
             BuBaoCunShuJu: '',
-            //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+            //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
             CalculateForAddLianCheng: ',READVALUE,'
         }]
@@ -374,18 +374,18 @@ RuleAttributeArray = [{
         Remark: '直流电流输出-相对误差',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenUNCERTAINTYDEGREE;DianYa|txtPointLenACTUALVALUE',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|RANGE,READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;DianYa|ACTUALVALUE',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -396,18 +396,18 @@ RuleAttributeArray = [{
         Remark: '直流电流输出-绝对误差',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenUNCERTAINTYDEGREE;DianYa|txtPointLenACTUALVALUE',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|RANGE,READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;DianYa|ACTUALVALUE',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -418,18 +418,18 @@ RuleAttributeArray = [{
         Remark: '直流电阻测量-相对误差',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'OM|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenUNCERTAINTYDEGREE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'OM|RANGE,READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -440,18 +440,18 @@ RuleAttributeArray = [{
         Remark: '直流电阻测量-绝对误差',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,RELATIVEERROR,UNCERTAINTYDEGREE;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,RELATIVEERROR,UNCERTAINTYDEGREE;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'OM|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenRELATIVEERROR,txtPointLenUNCERTAINTYDEGREE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'OM|RANGE,READVALUE,SHIJISHUCHUZHI,RELATIVEERROR,UNCERTAINTYDEGREE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -462,18 +462,18 @@ RuleAttributeArray = [{
         Remark: '直流电阻输出-相对误差',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'OM|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenUNCERTAINTYDEGREE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'OM|RANGE,READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -484,18 +484,18 @@ RuleAttributeArray = [{
         Remark: '直流电压输出-绝对误差',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,RELATIVEERROR,UNCERTAINTYDEGREE;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,RELATIVEERROR,UNCERTAINTYDEGREE;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenRELATIVEERROR,txtPointLenUNCERTAINTYDEGREE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|RANGE,READVALUE,SHIJISHUCHUZHI,RELATIVEERROR,UNCERTAINTYDEGREE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -506,18 +506,18 @@ RuleAttributeArray = [{
         Remark: '直流电阻输出-绝对误差',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,RELATIVEERROR,UNCERTAINTYDEGREE;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,RELATIVEERROR,UNCERTAINTYDEGREE;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'OM|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenRELATIVEERROR,txtPointLenUNCERTAINTYDEGREE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'OM|RANGE,READVALUE,SHIJISHUCHUZHI,RELATIVEERROR,UNCERTAINTYDEGREE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -528,18 +528,18 @@ RuleAttributeArray = [{
         Remark: '直流电压输出-绝对误差',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenUNCERTAINTYDEGREE;DianYa|txtPointLenACTUALVALUE',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|RANGE,READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;DianYa|ACTUALVALUE',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -550,18 +550,18 @@ RuleAttributeArray = [{
         Remark: '直流电压测量-非正负极性-相对误差（单相）',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenUNCERTAINTYDEGREE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|RANGE,READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -572,18 +572,18 @@ RuleAttributeArray = [{
         Remark: '直流电压测量-非正负极性-相对误差（多通道）',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenUNCERTAINTYDEGREE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|RANGE,READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -594,18 +594,18 @@ RuleAttributeArray = [{
         Remark: '直流电流测量-非正负极性-相对误差（单相）',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenUNCERTAINTYDEGREE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|RANGE,READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -616,18 +616,18 @@ RuleAttributeArray = [{
         Remark: '直流电流测量-非正负极性-相对误差（多通道）',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenUNCERTAINTYDEGREE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|RANGE,READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -638,18 +638,18 @@ RuleAttributeArray = [{
         Remark: '直流电压输出-非正负极性-相对误差',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenUNCERTAINTYDEGREE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|RANGE,READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -660,18 +660,18 @@ RuleAttributeArray = [{
         Remark: '直流电压测量-正负极性-相对误差（单相）',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenSHIJISHUCHUZHIFU;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|RANGE,READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -682,18 +682,18 @@ RuleAttributeArray = [{
         Remark: '直流电压测量-正负极性-相对误差-单相',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU,RELATIVEERROR,RELATIVEERRORFU,UNCERTAINTYDEGREE',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU,RELATIVEERROR,RELATIVEERRORFU,UNCERTAINTYDEGREE',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenSHIJISHUCHUZHIFU,txtPointLenRELATIVEERROR,txtPointLenRELATIVEERRORFU,txtPointLenUNCERTAINTYDEGREE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|RANGE,READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU,RELATIVEERROR,RELATIVEERRORFU,UNCERTAINTYDEGREE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -704,18 +704,18 @@ RuleAttributeArray = [{
         Remark: '直流电压测量-正负极性-相对误差（多通道）',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenSHIJISHUCHUZHIFU;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|RANGE,READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -726,18 +726,18 @@ RuleAttributeArray = [{
         Remark: '直流电流测量-正负极性-相对误差（单相）',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenSHIJISHUCHUZHIFU;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|RANGE,READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -748,18 +748,18 @@ RuleAttributeArray = [{
         Remark: '直流电流测量-正负极性-相对误差-单相',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU,RELATIVEERROR,RELATIVEERRORFU,UNCERTAINTYDEGREE',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU,RELATIVEERROR,RELATIVEERRORFU,UNCERTAINTYDEGREE',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenSHIJISHUCHUZHIFU,txtPointLenRELATIVEERROR,txtPointLenRELATIVEERRORFU,txtPointLenUNCERTAINTYDEGREE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|RANGE,READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU,RELATIVEERROR,RELATIVEERRORFU,UNCERTAINTYDEGREE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -770,18 +770,18 @@ RuleAttributeArray = [{
         Remark: '直流电流测量-正负极性-相对误差（多通道）',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenRANGE|READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'RANGE|READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|txtPointLenRANGE,txtPointLenREADVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenSHIJISHUCHUZHIFU;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|RANGE,READVALUE,SHIJISHUCHUZHI,SHIJISHUCHUZHIFU;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',READVALUE,'
             }]
@@ -792,18 +792,18 @@ RuleAttributeArray = [{
         Remark: '频率输出-相对误差',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
                 DanWeiHtmlDDL: 'HZ|OUTPUTVALUE,READVALUE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ''
             }]
@@ -814,18 +814,18 @@ RuleAttributeArray = [{
         Remark: '频率测量-相对误差',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
                 DanWeiHtmlDDL: 'HZ|OUTPUTVALUE,READVALUE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ''
             }]
@@ -836,18 +836,18 @@ RuleAttributeArray = [{
         Remark: '交流电压输出-电压误差-两相',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenREADVALUE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|READVALUE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',DIANYASHUCHU1,DIANYASHUCHU2,'
             }]
@@ -858,18 +858,18 @@ RuleAttributeArray = [{
         Remark: '交流电压测量-交流电压测量-两相',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenREADVALUE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|READVALUE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,'
             }]
@@ -880,18 +880,18 @@ RuleAttributeArray = [{
         Remark: '交流电压测量-相对误差-两相-多通道',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenREADVALUE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|READVALUE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,'
             }]
@@ -902,18 +902,18 @@ RuleAttributeArray = [{
         Remark: '交流电流测量-相对误差-两相',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|txtPointLenREADVALUE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|READVALUE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,'
             }]
@@ -924,18 +924,18 @@ RuleAttributeArray = [{
         Remark: '交流电流测量-相对误差-两相-多通道',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|txtPointLenREADVALUE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|READVALUE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,'
             }]
@@ -946,18 +946,18 @@ RuleAttributeArray = [{
         Remark: '交流电流输出-相对误差-两相',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|txtPointLenREADVALUE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|READVALUE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',DIANYASHUCHU1,DIANYASHUCHU2,'
             }]
@@ -968,18 +968,18 @@ RuleAttributeArray = [{
         Remark: '交流电压输出-相对误差-三相',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenREADVALUE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|READVALUE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',DIANYASHUCHU1,DIANYASHUCHU2,DIANYASHUCHU3,'
             }]
@@ -990,18 +990,18 @@ RuleAttributeArray = [{
         Remark: '交流电压测量-相对误差-三相',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenREADVALUE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|READVALUE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,DIANYACELIANG3,'
             }]
@@ -1012,18 +1012,18 @@ RuleAttributeArray = [{
         Remark: '交流电压测量-相对误差-三相-多通道',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenREADVALUE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|READVALUE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,DIANYACELIANG3,'
             }]
@@ -1034,18 +1034,18 @@ RuleAttributeArray = [{
         Remark: '交流电流测量-相对误差-三相',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|txtPointLenREADVALUE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|READVALUE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,DIANYACELIANG3,'
             }]
@@ -1056,18 +1056,18 @@ RuleAttributeArray = [{
         Remark: '交流电流输出-相对误差-三相',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|txtPointLenREADVALUE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|READVALUE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',DIANYASHUCHU1,DIANYASHUCHU2,DIANYASHUCHU3,'
             }]
@@ -1078,18 +1078,18 @@ RuleAttributeArray = [{
         Remark: '交流电流测量-相对误差-三相-多通道',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|txtPointLenREADVALUE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|READVALUE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,DIANYACELIANG3,'
             }]
@@ -1100,18 +1100,18 @@ RuleAttributeArray = [{
         Remark: '交流电压测量-相对误差-单相',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenREADVALUE|txtPointLenACTUALVALUE,txtPointLenSHIJISHUCHUZHI;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'READVALUE|ACTUALVALUE,SHIJISHUCHUZHI;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenREADVALUE,txtPointLenACTUALVALUE,txtPointLenSHIJISHUCHUZHI;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',ACTUALVALUE,'
             }]
@@ -1119,21 +1119,21 @@ RuleAttributeArray = [{
     ,
     {
         RuleID: '34-1999_3_2',//检测项编号
-        Remark: '交流电压测量-相对误差-单相txtPointLen多通道）',//检测项说明
+        Remark: '交流电压测量-相对误差-单相多通道）',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: 'READVALUE|ACTUALVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
                 DanWeiHtmlDDL: 'DianYa|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;HZ|HZMY;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',ACTUALVALUE,'
             }]
@@ -1144,18 +1144,18 @@ RuleAttributeArray = [{
         Remark: '交流电流测量-相对误差-单相',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenREADVALUE|txtPointLenACTUALVALUE,txtPointLenSHIJISHUCHUZHI;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'READVALUE|ACTUALVALUE,SHIJISHUCHUZHI;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|txtPointLenREADVALUE,txtPointLenACTUALVALUE,txtPointLenSHIJISHUCHUZHI;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',ACTUALVALUE,'
             }]
@@ -1163,21 +1163,21 @@ RuleAttributeArray = [{
     ,
     {
         RuleID: '35-1999_3_2',//检测项编号
-        Remark: '交流电流测量-相对误差-单相txtPointLen多通道）',//检测项说明
+        Remark: '交流电流测量-相对误差-单相多通道）',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenREADVALUE|txtPointLenACTUALVALUE,txtPointLenSHIJISHUCHUZHI;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'READVALUE|ACTUALVALUE,SHIJISHUCHUZHI;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|txtPointLenREADVALUE,txtPointLenACTUALVALUE,txtPointLenSHIJISHUCHUZHI;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',ACTUALVALUE,'
             }]
@@ -1188,18 +1188,18 @@ RuleAttributeArray = [{
         Remark: '交流电压测量-绝对误差-单相',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenREADVALUE|txtPointLenACTUALVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenRELATIVEERROR,txtPointLenUNCERTAINTYDEGREE;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'READVALUE|ACTUALVALUE,SHIJISHUCHUZHI,RELATIVEERROR,UNCERTAINTYDEGREE;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenREADVALUE,txtPointLenACTUALVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenRELATIVEERROR,txtPointLenUNCERTAINTYDEGREE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI,RELATIVEERROR,UNCERTAINTYDEGREE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',ACTUALVALUE,'
             }]
@@ -1210,18 +1210,18 @@ RuleAttributeArray = [{
         Remark: '交流电流测量-绝对误差-单相',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenREADVALUE|txtPointLenACTUALVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenRELATIVEERROR,txtPointLenUNCERTAINTYDEGREE;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'READVALUE|ACTUALVALUE,SHIJISHUCHUZHI,RELATIVEERROR,UNCERTAINTYDEGREE;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|txtPointLenREADVALUE,txtPointLenACTUALVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenRELATIVEERROR,txtPointLenUNCERTAINTYDEGREE;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI,RELATIVEERROR,UNCERTAINTYDEGREE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',ACTUALVALUE,'
             }]
@@ -1232,18 +1232,18 @@ RuleAttributeArray = [{
         Remark: '交流电压输出-相对误差-单相',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenREADVALUE|txtPointLenACTUALVALUE,txtPointLenSHIJISHUCHUZHI;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'READVALUE|ACTUALVALUE,SHIJISHUCHUZHI;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenREADVALUE,txtPointLenACTUALVALUE,txtPointLenSHIJISHUCHUZHI;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',ACTUALVALUE,'
             }]
@@ -1254,18 +1254,18 @@ RuleAttributeArray = [{
         Remark: '交流电压输出-绝对误差-单相',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'txtPointLenREADVALUE|txtPointLenACTUALVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenRELATIVEERROR;',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                LianDongDanWeiDDL: 'READVALUE|ACTUALVALUE,SHIJISHUCHUZHI,RELATIVEERROR;',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenREADVALUE,txtPointLenACTUALVALUE,txtPointLenSHIJISHUCHUZHI,txtPointLenRELATIVEERROR;',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI,RELATIVEERROR;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ',ACTUALVALUE,'
             }]
@@ -1276,18 +1276,18 @@ RuleAttributeArray = [{
         Remark: '工频相位测量-绝对误差-一列',//检测项说明
         Attributes:
         [{
-            //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+            //添加通道按钮是否显示show:显示，hidden:不显示
             DuoTongDao: 'hidden',
-            //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+            //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
             //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
             LianDongDanWeiDDL: '',
-            //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+            //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
             //DianLiu:电流单位；DianYa:电压单位   
-            //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+            //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
             DanWeiHtmlDDL: '',
             //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
             BuBaoCunShuJu: '',
-            //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+            //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
             CalculateForAddLianCheng: ''
         }]
@@ -1298,18 +1298,18 @@ RuleAttributeArray = [{
         Remark: '工频相位输出-绝对误差-一列',//检测项说明
         Attributes:
         [{
-            //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+            //添加通道按钮是否显示show:显示，hidden:不显示
             DuoTongDao: 'hidden',
-            //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+            //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
             //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
             LianDongDanWeiDDL: '',
-            //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+            //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
             //DianLiu:电流单位；DianYa:电压单位   
-            //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+            //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
             DanWeiHtmlDDL: '',
             //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
             BuBaoCunShuJu: '',
-            //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+            //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
             CalculateForAddLianCheng: ''
         }]
@@ -1320,18 +1320,18 @@ RuleAttributeArray = [{
         Remark: '工频相位测量-绝对误差-两列',//检测项说明
         Attributes:
         [{
-            //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+            //添加通道按钮是否显示show:显示，hidden:不显示
             DuoTongDao: 'hidden',
-            //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+            //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
             //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
             LianDongDanWeiDDL: '',
-            //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+            //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
             //DianLiu:电流单位；DianYa:电压单位   
-            //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+            //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
             DanWeiHtmlDDL: '',
             //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
             BuBaoCunShuJu: '',
-            //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+            //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
             CalculateForAddLianCheng: ''
         }]
@@ -1342,18 +1342,18 @@ RuleAttributeArray = [{
         Remark: '工频相位输出-绝对误差-两列',//检测项说明
         Attributes:
         [{
-            //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+            //添加通道按钮是否显示show:显示，hidden:不显示
             DuoTongDao: 'hidden',
-            //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+            //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
             //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
             LianDongDanWeiDDL: '',
-            //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+            //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
             //DianLiu:电流单位；DianYa:电压单位   
-            //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+            //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
             DanWeiHtmlDDL: '',
             //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
             BuBaoCunShuJu: '',
-            //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+            //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
             CalculateForAddLianCheng: ''
         }]
@@ -1362,21 +1362,21 @@ RuleAttributeArray = [{
 
     {
         RuleID: '440-2008_3_1_4',//检测项编号
-        Remark: '工频相位测量-绝对误差-三列 txtPointLen多通道）',//检测项说明
+        Remark: '工频相位测量-绝对误差-三列 多通道）',//检测项说明
         Attributes:
         [{
-            //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+            //添加通道按钮是否显示show:显示，hidden:不显示
             DuoTongDao: 'show',
-            //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+            //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
             //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
             LianDongDanWeiDDL: '',
-            //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+            //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
             //DianLiu:电流单位；DianYa:电压单位   
-            //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+            //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
             DanWeiHtmlDDL: '',
             //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
             BuBaoCunShuJu: '',
-            //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+            //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
             CalculateForAddLianCheng: ''
         }]
@@ -1384,21 +1384,21 @@ RuleAttributeArray = [{
     ,
     {
         RuleID: '440-2008_3_2_4',//检测项编号
-        Remark: '工频相位输出-绝对误差-三列 txtPointLen多通道）',//检测项说明
+        Remark: '工频相位输出-绝对误差-三列 多通道）',//检测项说明
         Attributes:
         [{
-            //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+            //添加通道按钮是否显示show:显示，hidden:不显示
             DuoTongDao: 'show',
-            //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+            //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
             //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
             LianDongDanWeiDDL: '',
-            //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+            //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
             //DianLiu:电流单位；DianYa:电压单位   
-            //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+            //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
             DanWeiHtmlDDL: '',
             //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
             BuBaoCunShuJu: '',
-            //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+            //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
             CalculateForAddLianCheng: ''
         }]
@@ -1409,18 +1409,18 @@ RuleAttributeArray = [{
         Remark: '变送器-电压-引用误差',//检测项说明
         Attributes:
         [{
-            //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+            //添加通道按钮是否显示show:显示，hidden:不显示
             DuoTongDao: 'show',
-            //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+            //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
             //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
             LianDongDanWeiDDL: '',
-            //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+            //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
             //DianLiu:电流单位；DianYa:电压单位   
-            //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+            //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
             DanWeiHtmlDDL: '',
             //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
             BuBaoCunShuJu: '',
-            //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+            //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
             CalculateForAddLianCheng: ''
         }]
@@ -1431,18 +1431,18 @@ RuleAttributeArray = [{
         Remark: '变送器-电流-引用误差',//检测项说明
         Attributes:
         [{
-            //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+            //添加通道按钮是否显示show:显示，hidden:不显示
             DuoTongDao: 'show',
-            //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+            //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
             //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
             LianDongDanWeiDDL: '',
-            //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+            //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
             //DianLiu:电流单位；DianYa:电压单位   
-            //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+            //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
             DanWeiHtmlDDL: '',
             //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
             BuBaoCunShuJu: '',
-            //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+            //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
             CalculateForAddLianCheng: ''
         }]
@@ -1453,18 +1453,18 @@ RuleAttributeArray = [{
         Remark: '变送器-功率-引用误差',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'LC|txtPointLenOUTPUTVALUE',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'LC|OUTPUTVALUE',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ''
             }]
@@ -1475,18 +1475,18 @@ RuleAttributeArray = [{
         Remark: '变送器-频率-引用误差',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'HZ|txtPointLenOUTPUTVALUE',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'HZ|OUTPUTVALUE',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ''
             }]
@@ -1497,18 +1497,18 @@ RuleAttributeArray = [{
         Remark: '变送器-相位-引用误差',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
                 DanWeiHtmlDDL: '',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ''
             }]
@@ -1519,18 +1519,18 @@ RuleAttributeArray = [{
         Remark: '变送器-有功功率-引用误差',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
                 DanWeiHtmlDDL: '',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ''
             }]
@@ -1541,18 +1541,18 @@ RuleAttributeArray = [{
         Remark: '变送器-无功功率-引用误差',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'show',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
                 DanWeiHtmlDDL: '',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ''
             }]
@@ -1563,18 +1563,18 @@ RuleAttributeArray = [{
         Remark: '有功功率输出-三相四线有功功率',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
                 DanWeiHtmlDDL: '',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ''
             }]
@@ -1585,18 +1585,18 @@ RuleAttributeArray = [{
         Remark: '有功功率测量-三相四线有功功率',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
                 DanWeiHtmlDDL: '',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ''
             }]
@@ -1607,18 +1607,18 @@ RuleAttributeArray = [{
         Remark: '有功功率输出-三相三线有功功率',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
                 DanWeiHtmlDDL: '',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ''
             }]
@@ -1629,18 +1629,18 @@ RuleAttributeArray = [{
         Remark: '有功功率测量-三相三线有功功率',//检测项说明
         Attributes:
             [{
-                //添加通道按钮是否显示txtPointLenshow:显示，hidden:不显示
+                //添加通道按钮是否显示show:显示，hidden:不显示
                 DuoTongDao: 'hidden',
-                //检测项单位联动下拉框联动:txtPointLen变更项名称1|联动相名称1,联动相名称2;txtPointLen变更项名称2|联动相名称1,联动相名称2
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
-                //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
-                //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
                 DanWeiHtmlDDL: '',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
-                //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
                 CalculateForAddLianCheng: ''
             }]
