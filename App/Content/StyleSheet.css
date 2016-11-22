@@ -19,6 +19,21 @@ input[type="checkbox"],input[type="radio"]{vertical-align:middle; margin-top:-2p
 .mr10{margin-right:10px}
 h2{padding-left: 5px;}
 
+
+/*home*/
+
+       body{font-family: 微软雅黑,新宋体;}
+a{color: Black;text-decoration: none;}
+.easyui-tree li{margin: 5px 0px 0px 0px;padding: 1px;}
+#mainlogo{position: absolute;top: 0px;left: 0px;width: 575px;height: 72px;}
+#mainctrl{position: absolute;top: 0px;right: 0px;height: 72px;width: 425px;}
+.user{color: #464646;float: right;text-align: right;margin: 10px 15px 10px 0px;line-height: 21px;}
+.user a{color: #464646;text-decoration: none;}
+.user a:hover{color: #F00;}
+.wel{display: inline;}
+.wel em{font-style: normal;color: #06c;margin-right: 10px;}
+.uset{display: inline;margin: 0 0 0 8px;} 
+
 input[type="submit"]{height:25px}
 .textbox{-moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0;}
 .mbx{height: 23px; font-weight: bold; color: #9b6835; border-bottom: 1px #999 dotted; padding: 12px 19px 3px 19px; margin: 4px; background: url(../Images/direction.gif) 0 center no-repeat;}
