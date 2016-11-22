@@ -24,16 +24,16 @@
         <td colspan="9">
             <div class="fl" style="margin-right:20px">
                 输入范围：(
-                <input  id="shurufanwei_t_1_1"  name="shurufanwei" type="text" class="my-textbox tc" value="0" style="width:30px">
+                <input id="shurufanwei_t_1_1" name="shurufanwei" type="text" class="my-textbox tc" value="0" style="width:30px">
                 -
-                <input  id="shurufanweijian_t_1_1"  name="shurufanweijian" type="text" class="my-textbox tc" value="5" style="width:30px">
+                <input id="shurufanweijian_t_1_1" name="shurufanweijian" type="text" class="my-textbox tc" value="5" style="width:30px">
                 )
             </div>
             <div class="fl" style="margin-right:20px">
                 输出范围：(
-                <input  name="dianmyliu" id="dianmyliu_t_1_1" type="text" class="my-textbox tc" value="4" style="width:30px">
+                <input name="dianmyliu" id="dianmyliu_t_1_1" type="text" class="my-textbox tc" value="4" style="width:30px">
                 -
-                <input  name="dianmyya" id="dianmyya_t_1_1"  type="text" class="my-textbox tc" value="20" style="width:30px">
+                <input name="dianmyya" id="dianmyya_t_1_1" type="text" class="my-textbox tc" value="20" style="width:30px">
                 )
                 <select class="my-combobox" name="mAV" id="mAV_t_1_1">
                     <option value="mA">mA</option>
@@ -43,8 +43,8 @@
 
             <div class="fl" style="margin-right:20px;">
                 U<sub>n</sub> =
-                <input  name="dianym32ya" id="dianym32ya_t_1_1" type="text" class="my-textbox tc" value="100" style="width:40px">
-                <select class="my-combobox"  name="mAVdianliu" id="mAVdianliu_t_1_1" >
+                <input name="dianym32ya" id="dianym32ya_t_1_1" type="text" class="my-textbox tc" value="100" style="width:40px">
+                <select class="my-combobox" name="mAVdianliu" id="mAVdianliu_t_1_1">
                     <option value="V">V</option>
                     <option value="MV">MV</option>
                     <option value="KV">KV</option>
@@ -54,8 +54,8 @@
             </div>
             <div class="fl" style="margin-right:20px; ">
                 I<sub>n</sub> =
-                <input  name="dianymya" id="dianymya_t_1_1" type="text" class="my-textbox tc" value="5" style="width:40px">
-                <select class="my-combobox"  name="dianymy123a" id="dianymy123a_t_1_1">
+                <input name="dianymya" id="dianymya_t_1_1" type="text" class="my-textbox tc" value="5" style="width:40px">
+                <select class="my-combobox" name="dianymy123a" id="dianymy123a_t_1_1">
                     <option value="A">A</option>
                     <option value="KA">KA</option>
                     <option value="mA">mA</option>
@@ -77,14 +77,14 @@
         </th>
         <th align="center" width="100">
             标准输出值<br>
-            <select class="my-combobox"  name="m123AV" id="m123AV_t_1_1">
+            <select class="my-combobox" name="m123AV" id="m123AV_t_1_1">
                 <option value="mA">mA</option>
                 <option value="V">V</option>
             </select>
         </th>
         <th align="center" width="100">
             实际输出值<br>
-            <select class="my-combobox"  name="m456AV" id="m456AV_t_1_1">
+            <select class="my-combobox" name="m456AV" id="m456AV_t_1_1">
                 <option value="mA">mA</option>
                 <option value="V">V</option>
             </select>
@@ -114,7 +114,7 @@
             cosφ
         </td>
         <td align="center" width="100">
-            <input name="DengJi" type="text" class="my-textbox tr" value="0.0" style="width:70px" onblur="JS1(this)" id="DengJi_t_1_1">
+            <input name="DengJi" type="text" class="my-textbox tr" value="0.0" style="width:70px" onblur="Recalculate()" id="DengJi_t_1_1">
             级
         </td>
         <td colspan="7" style="padding:0">
@@ -122,43 +122,44 @@
                 <tbody id="tbody_moban">
                     <!--插入行的位置-->
                     <tr rowindex="1">
-                        <td rowspan="1" align="center" width="120"> 
-                        <input class="my-textbox input-width" value="0.5" id="OUTPUTVALUE_t_1_1" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_1" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option value=""> </option><option value="C">C</option></select></td>
-                        <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="60" id="READVALUE_t_1_1" name="READVALUE" onblur="blurValue(this)" type="text"><span>°</span></td>
-                        <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_1" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center" width="120">
+                            <input class="my-textbox input-width" value="0.5" id="OUTPUTVALUE_t_1_1" name="OUTPUTVALUE" onblur="blurCeLiangDian(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_1" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option value=""> </option><option value="C">C</option></select>
+                        </td>
+                        <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="60" id="READVALUE_t_1_1" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"><span>°</span></td>
+                        <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_1" name="ACTUALVALUE" onblur="blurBiaoZhunShuChuZhi(this)" type="text"></td>
+                        <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" onblur="blurShiJiShuChuZhi(this)" type="text"></td>
                         <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_1" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="2">
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0.8" id="OUTPUTVALUE_t_1_2" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_2" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option value=""> </option><option value="C">C</option></select></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="30" id="READVALUE_t_1_2" name="READVALUE" onblur="blurValue(this)" type="text"><span>°</span></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_2" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_2" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0.8" id="OUTPUTVALUE_t_1_2" name="OUTPUTVALUE" onblur="blurCeLiangDian(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_2" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option value=""> </option><option value="C">C</option></select></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="30" id="READVALUE_t_1_2" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"><span>°</span></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_2" name="ACTUALVALUE" onblur="blurBiaoZhunShuChuZhi(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_2" name="SHIJISHUCHUZHI" onblur="blurShiJiShuChuZhi(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_2" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_2" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="3">
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="1.0" id="OUTPUTVALUE_t_1_3" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_3" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option selected="selected" value=""> </option><option value="C">C</option></select></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0" id="READVALUE_t_1_3" name="READVALUE" onblur="blurValue(this)" type="text"><span>°</span></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_3" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_3" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="1.0" id="OUTPUTVALUE_t_1_3" name="OUTPUTVALUE" onblur="blurCeLiangDian(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_3" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option selected="selected" value=""> </option><option value="C">C</option></select></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0" id="READVALUE_t_1_3" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"><span>°</span></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_3" name="ACTUALVALUE" onblur="blurBiaoZhunShuChuZhi(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_3" name="SHIJISHUCHUZHI" onblur="blurShiJiShuChuZhi(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_3" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_3" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="4">
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0.8" id="OUTPUTVALUE_t_1_4" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_4" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option value=""> </option><option  selected="selected" value="C">C</option></select></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="330" id="READVALUE_t_1_4" name="READVALUE" onblur="blurValue(this)" type="text"><span>°</span></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_4" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_4" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0.8" id="OUTPUTVALUE_t_1_4" name="OUTPUTVALUE" onblur="blurCeLiangDian(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_4" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option value=""> </option><option selected="selected" value="C">C</option></select></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="330" id="READVALUE_t_1_4" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"><span>°</span></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_4" name="ACTUALVALUE" onblur="blurBiaoZhunShuChuZhi(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_4" name="SHIJISHUCHUZHI" onblur="blurShiJiShuChuZhi(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_4" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_4" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="5">
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0.5" id="OUTPUTVALUE_t_1_5" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_5" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option value=""> </option><option selected="selected" value="C">C</option></select></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="360" id="READVALUE_t_1_5" name="READVALUE" onblur="blurValue(this)" type="text"><span>°</span></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_5" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_5" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0.5" id="OUTPUTVALUE_t_1_5" name="OUTPUTVALUE" onblur="blurCeLiangDian(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_5" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option value=""> </option><option selected="selected" value="C">C</option></select></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="360" id="READVALUE_t_1_5" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"><span>°</span></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_5" name="ACTUALVALUE" onblur="blurBiaoZhunShuChuZhi(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_5" name="SHIJISHUCHUZHI" onblur="blurShiJiShuChuZhi(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_5" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_5" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
@@ -218,7 +219,7 @@
                 if (rowidx == 0) {
                     //需要合并的列
                 }
-               
+
                 //测量点 需要下拉框
                 htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120"));
                 //二次输入标准值
@@ -241,11 +242,113 @@
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
 
+        ///计算标准值
+        function JiSuanBiaoZhunZhi() {
+
+        }
+        //离开事件，用于计算 输入范围最小
+        function blurShuRuFanWeiZuiXiao(obj) {
+            //注意多通道
+            RecalculateBiaoZhunShuChu(); //重新计算页面上标准输出值
+        }
+
+        //离开事件，用于计算 输入范围最大
+        function blurShuRuFanWeiZuiDa(obj) {
+            //注意多通道
+            RecalculateBiaoZhunShuChu(); //重新计算页面上标准输出值
+
+        }
+        //离开事件，用于计算 输出范围最小
+        function blurShuChuFanWeiZuiXiao(obj) {
+            //注意多通道
+            RecalculateYinYongWuCha();//重新计算引用
+            RecalculateBiaoZhunShuChu(); //重新计算页面上标准输出值
+        }
+        //离开事件，用于计算 输出范围最大
+        function blurShuChuFanWeiZuiDa(obj) {
+            //注意多通道
+            RecalculateYinYongWuCha();//重新计算引用
+            RecalculateBiaoZhunShuChu(); //重新计算页面上标准输出值
+        }
+        //离开事件，用于计算 标准输出值
+        function blurShiJiShuChuZhi(obj) {
+            //注意多通道
+            $(obj).parents('tr:eq(0)').find('td:eq(4) input').val(YinYongWuCha($(obj).val(), $(obj).parents('tr:eq(0)').find('td:eq(2)').find('input').val()))
+        }
+        //离开事件，用于计算 标准输出值
+        function blurBiaoZhunShuChuZhi(obj) {
+            //注意多通道
+            //
+        }
+        //离开事件，用于计算 二次输入标准值
+        function blurErCiShuRuBiaoZhunZhi(obj) {
+            //注意多通道
+            //3.标准输出值=（二次输入标准值-输入范围最小值）/（输入范围的最大值-输入范围的最小值）*（输出范围的最大值-输出范围的最小值）+输出范围最小值
+            $(obj).parents('tr:eq(0)').find('td:eq(2) input').val(BiaoZhunZhi($(obj).val()))
+
+        }
+        function GetValue() {
+            var hideDangQianTongDao = GetTongDao();//当前操作第几通道
+            var datas = {
+                inputMinValue: $.trim($(".clone #shurufanwei_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #shurufanwei_" + hideDangQianTongDao + "_1_1").val())),
+                inputMaxValue: $.trim($(".clone #shurufanweijian_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #shurufanweijian_" + hideDangQianTongDao + "_1_1").val())),
+                outputMinValue: $.trim($(".clone #dianmyliu_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #dianmyliu_" + hideDangQianTongDao + "_1_1").val())),
+                outputMaxValue: $.trim($(".clone #dianmyya_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #dianmyya_" + hideDangQianTongDao + "_1_1").val())),
+                level: $(".clone #DengJi_" + $("#hideDangQianTongDao").val() + "_1_1").val(),
+                levellength: $(".clone #DengJi_" + $("#hideDangQianTongDao").val() + "_1_1").val().split('.')[1].length
+            }
+            return datas;
+        }
+        function GetTongDao() {
+            return $("#hideDangQianTongDao").val();//当前操作第几通道
+        }
+        ///标准值
+        function BiaoZhunZhi(erciBiaoZhun) {
+            //3.标准输出值=（二次输入标准值-输入范围最小值）/（输入范围的最大值-输入范围的最小值）*（输出范围的最大值-输出范围的最小值）+输出范围最小值
+            var datas = GetValue();
+            if ($.trim(erciBiaoZhun) != "" && datas.inputMinValue != "" && datas.inputMaxValue != "" && datas.outputMinValue != "" && datas.outputMaxValue != "")
+                return (((datas.inputMaxValue - datas.inputMinValue) == 0 ? 0 : (parseFloat(erciBiaoZhun) - datas.inputMinValue) / (datas.inputMaxValue - datas.inputMinValue)) * (datas.outputMaxValue - datas.outputMinValue) + datas.outputMinValue).toFixed(2)
+            else
+                return "";
+        }
+        function Recalculate() {
+            RecalculateYinYongWuCha();
+        }
+        ///重新计算页面上标准输出值
+        function RecalculateBiaoZhunShuChu() {
+            //注意多通道
+            $("#tbody_" + GetTongDao() + " tr").each(function () {
+                console.log($(this).find('td:eq(1)').find('input').val());
+                $(this).find('td:eq(2)').find('input').val(BiaoZhunZhi($(this).find('td:eq(1)').find('input').val()))//引用误差
+            })
+        }
+        ///重新计算页面上引用误差
+        function RecalculateYinYongWuCha() {
+            //注意多通道
+            $("#tbody_" + GetTongDao() + " tr").each(function () {
+                console.log($(this).find('td:eq(1)').find('input').val());
+                $(this).find('td:eq(4)').find('input').val(YinYongWuCha($(this).find('td:eq(3)').find('input').val(), $(this).find('td:eq(2)').find('input').val()))//引用误差
+            })
+        }
+        //引用误差
+        function YinYongWuCha(ShijiShuChu, BiaoZhunShuChu) {
+            //4.引用误差=Round(（实际输出值-标准输出值）/（输出范围的最大值-输出范围的最小值）*100/等级,1)*等级
+            var datas = GetValue();
+            var level = datas.level;
+            var length = datas.levellength;
+            if (level == "0.0" || ShijiShuChu == "" || BiaoZhunShuChu == "") return ""
+            else
+                return (((parseFloat(ShijiShuChu) - parseFloat(BiaoZhunShuChu)) / (datas.outputMaxValue - datas.outputMinValue) * 100 / parseFloat(level)) * parseFloat(level)).toFixed(length + 1);
+        }
+        //离开事件，用于计算 测量点
+        function blurCeLiangDian(obj) {
+            //注意多通道
+            $(obj).parents('tr:eq(0)').find('td:eq(1) input').val($.trim($(obj).val()) == "" ? "" : parseFloat($(obj).val()).toFixed(4))
+        }
         //离开事件，用于计算
         function blurValue(obj) {
-        //     
+
         }
-        
 
     </script>
 
@@ -255,7 +358,6 @@
     <!--弹框的位置-->
     <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
     <input type="hidden" id="txtPointLen" value="1" /><!--小数点位数-->
-
 }
 
 

@@ -22,15 +22,15 @@ namespace Langben.App.Controllers
         /// 获取树形页面的数据
         /// </summary>
         /// <returns></returns>
-        public ActionResult GetTree()
+        public ActionResult GetTree(string id = "数表三相")
         {
             List<SystemTree> listSystemTree = new List<SystemTree>();
-            
+
             IBLL.IRULEBLL db = new RULEBLL();
-         
+
             RULETreeNodeCollection tree = new RULETreeNodeCollection();
 
-            var trees = db.GetAll().OrderBy(o => o.ID);
+            var trees = db.GetAll().Where(w => w.UNDERTAKE_LABORATORYID != null && w.UNDERTAKE_LABORATORYID.Contains(id)).OrderBy(o => o.ID);
             if (trees != null)
             {
                 string parentId = Request["parentid"];//父节点编号

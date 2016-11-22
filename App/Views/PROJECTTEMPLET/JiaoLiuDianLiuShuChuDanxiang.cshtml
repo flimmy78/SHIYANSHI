@@ -10,19 +10,18 @@
     <tr>
         <th align="center" width="140">量程</th>
         <th width="140" align="center">标准值</th>
-        <th width="140" align="center">赫兹</th>
+        <th width="140" align="center">频率</th>
         <th width="140" align="center"> 显示值</th>
 
         <th width="140" align="center">相对误差(%)</th>
         <th align="center">
             校准结果的不确定度<br>
             U(K = <select class="my-combobox" name="K" id="K_t_1_1">
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="√3">√3</option>
-</select>
-
-            </select>)
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="√3">√3</option>
+            </select>
+            )
         </th>
     </tr>
 
@@ -89,7 +88,7 @@
                 }
 
                 //需要合并的列
-                
+
 
                 //标准值 增加下拉框单位V
                 htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, '', "classstyle100", "", "resetXianShiZhi"));
@@ -113,27 +112,27 @@
             var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
             $('#dlg').window('close');//关闭弹出框
-            $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+            $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
 
         //计算显示值
-        function resetXianShiZhi(obj) {            
+        function resetXianShiZhi(obj) {
             //重新计算当前行
             xiangDuiWuCha1(obj, "SHIJISHUCHUZHI", "RELATIVEERROR");
         }
         //计算标准值
-        function resetBiaoZhunZhi(obj,source,gold) {
+        function resetBiaoZhunZhi(obj, source, gold) {
             //重新计算当前行
             xiangDuiWuCha2(obj, "ACTUALVALUE", "RELATIVEERROR");
-           
+
         }
-    
+
         //离开事件，用于计算
         function blurValue(obj) {
 
             //   LianDongShiJiZhi(obj);
         }
-        
+
 
     </script>
 
@@ -157,15 +156,15 @@
         <table>
             <tr>
                 <td width="80" align="right">量程值：</td>
-                <td><input type="text" id="txtNumber" name="txtNumber" value=""  class="my-textbox  required digits" style="width:200px" /></td>
+                <td><input type="text" id="txtNumber" name="txtNumber" value="" class="my-textbox  required digits" style="width:200px" /></td>
             </tr>
             <tr>
                 <td align="right">检测点数：</td>
-                <td><input type="text" id="txtPoint"  name="txtPoint" value=""  class="my-textbox  required digits" style="width:200px" /></td>
+                <td><input type="text" id="txtPoint" name="txtPoint" value="" class="my-textbox  required digits" style="width:200px" /></td>
             </tr>
             <tr>
                 <td align="right">小数点位数：</td>
-                <td><input type="text" id="txtPointLen"  name="txtPointLen" value="" class="my-textbox  required digits" style="width:200px" /></td>
+                <td><input type="text" id="txtPointLen" name="txtPointLen" value="" class="my-textbox  required digits" style="width:200px" /></td>
             </tr>
         </table>
     </div>

@@ -246,7 +246,7 @@
 
                 }
                 //需要合并的列
-                
+
                 //测量点
                 htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120", unit));
                 //二次输入标准值
@@ -350,7 +350,7 @@
             var datas = GetValue();
             var edingTiaoJian = parseFloat($("#mAVdianliu_" + GetTongDao() + "_1_1").val());
             if ($.trim(edingTiaoJian) != "" && edingTiaoJian != "0")
-                return parseFloat(erciBiaoZhun) / edingTiaoJian * (datas.outputMaxValue - datas.outputMinValue) + datas.outputMinValue;
+                return (parseFloat(erciBiaoZhun) / edingTiaoJian * (datas.outputMaxValue - datas.outputMinValue) + datas.outputMinValue).toFixed(3);
             else
                 return "";
         }
@@ -362,10 +362,10 @@
             var length = datas.levellength;
             if (level == "0.0" || ShijiShuChu == "" || BiaoZhunShuChu == "") return ""
             else
-                return (((parseFloat(ShijiShuChu) - parseFloat(BiaoZhunShuChu)) / (datas.outputMaxValue - datas.outputMinValue) * 100 / parseFloat(level)) * parseFloat(level)).toFixed(length);
+                return (((parseFloat(ShijiShuChu) - parseFloat(BiaoZhunShuChu)) / (datas.outputMaxValue - datas.outputMinValue) * 100 / parseFloat(level)) * parseFloat(level)).toFixed(length+1);
         }
 
-      
+
 
     </script>
 

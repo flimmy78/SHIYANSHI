@@ -10,7 +10,7 @@
     <tr>
         <th align="center" width="140">量程</th>
         <th width="140" align="center">标准值</th>
-        <th width="140" align="center">赫兹(Hz)</th>
+        <th width="140" align="center">频率</th>
         <th width="140" align="center"> 显示值</th>
 
         <th width="140" align="center">相对误差(%)</th>
@@ -22,7 +22,7 @@
     <option value="√3">√3</option>
 </select>
 
-            </select>)
+            )
         </th>
     </tr>
 
@@ -113,7 +113,7 @@
             var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
             $('#dlg').window('close');//关闭弹出框
-            $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+            $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
 
         //计算显示值

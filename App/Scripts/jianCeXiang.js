@@ -79,29 +79,32 @@ function GetRuleAttributeByRuleID(RuleID) {
 //obj:下拉框控件
 //LianDongDanWeiDDLAttribute:检测项单位联动下拉框联动控件信息
 function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
+
     if (obj == null || LianDongDanWeiDDLAttribute == null || LianDongDanWeiDDLAttribute.trim() == "") {
         return;
     }
     var id = obj.id.replace(obj.name, "");
+    var idarr = id.split('_');
     if (id.split('_').length <= 3) {
         id = id + "_";//_表编号_量程编号_
+    } else {
+        id = id.substring(0, id.lastIndexOf('_') + 1);//_表编号_量程编号_
     }
 
     var ddlArray = LianDongDanWeiDDLAttribute.split(';');
     $.each(ddlArray, function (i, item) {
-        var biangeng = "(" + obj.name + ")|";
+
+        var biangeng = obj.name.split('_')[0] + "|";
         //if (item == null || item.trim() == "" || item.indexOf(biangeng) < 0) {
         //    return true;
         //}
 
-        if (item == null || item.trim() == "" ) {
+        if (item == null || item.trim() == "") {
             return true;
         }
-        else
-        {
-            item = item + '_UNIT'
-            if(item.indexOf(biangeng) < 0)
-            {
+        else {
+            // item = item + '_UNIT'
+            if (item.indexOf(biangeng) < 0) {
                 return true;
             }
         }
@@ -110,10 +113,13 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
             return true;
         }
         $.each(liandongs, function (i, item_LianDong) {
+
             if (item_LianDong == null || item_LianDong.trim() == "") {
                 return true;
             }
-            $("select[name=" + item_LianDong.trim() + "]").each(function (a, b) {
+
+            $("select[name=" + item_LianDong.trim() + "_UNIT]").each(function (a, b) {
+                 
                 if (b.id.indexOf(id) >= 0) {
                     b.value = obj.value;
                 }
@@ -131,9 +137,11 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
 //ddlName:检查项中的属性控件名称
 //DanWeiCode:单位代码（如果有值直接取，RuleAttribute、ddlName失效)
 function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
+
     var Result = null;
 
-    if (DanWeiCode != null && DanWeiCode.trim() != "") {//如果有有单位代码直接取，RuleAttribute、ddlName失效
+    if (DanWeiCode != null && DanWeiCode.trim() != "") {
+        //如果有有单位代码直接取，RuleAttribute、ddlName失效
         $.each(DanWeiDDLHtmlArray, function (i, item) {
             if (item == null || item.Code != DanWeiCode) {
                 return true;
@@ -152,7 +160,7 @@ function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
         return "";
     }
     var ddlArray = AttributeValue.split(';');
-    var ddlNameNew = "(" + ddlName + ")"
+    var ddlNameNew = ddlName;
     ddlNameNew = ddlNameNew.toUpperCase();
     $.each(ddlArray, function (i, item) {
         if (item == null || item.trim() == "" || item.toUpperCase().indexOf(ddlNameNew) < 0 || item.split('|').length < 2) {
@@ -160,6 +168,7 @@ function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
         }
         var dw = item.split('|')[0];
         $.each(DanWeiDDLHtmlArray, function (j, danwei) {
+
             if (danwei == null || danwei.Code != dw) {
                 return true;
             }
@@ -201,6 +210,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='" + blurValue + "(this)'/>");
     if (ddlHtml != null && ddlHtml.trim() != "") {
         var AttributeValue = GetAttributeValue("LianDongDanWeiDDL");
+
         htmlString.push($(ddlHtml).attr("onchange", "LianDongDanWeiDDL(this,'" + AttributeValue + "')").attr("name", ddlName).attr("id", ddlId)[0].outerHTML);
     }
     if (unit) {
@@ -613,7 +623,7 @@ function xiangDuiWuCha1(obj, source, gold) {
 //第2列的事件
 //source第1列的名称
 function xiangDuiWuCha2(obj, source, gold) {
-    
+
     //重新计算当前行
     var name = $(obj).attr("name");
     var id = $(obj).attr("id");
@@ -655,7 +665,7 @@ function xiangDuiWuCha(obj, first, second, gold) {
 
         $(obj).parent().parent().find("#" + gold).val(data);
     }
-     
+
 }
 //绝对误差
 //obj 自身对象
@@ -682,7 +692,6 @@ function jueDuiWuCha(obj, first, second, gold) {
 
         $(obj).parent().parent().find("#" + gold).val(data);
     }
-    
+
 }
 
- 

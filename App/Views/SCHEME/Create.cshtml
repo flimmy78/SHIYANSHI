@@ -52,12 +52,7 @@
                     <td> 实验室：</td>
                     <td>
                         <select name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID" style="width:200px;" >
-                            <option value="电能">电能</option>
-                            <option value="数表三相">数表三相</option>
-                            <option value="数表单相">数表单相</option>
-                            <option value="指示仪表">指示仪表</option>
-                            <option value="直流仪器">直流仪器</option>
-                            <option value="互感器">互感器</option>
+                            
                         </select>
                     </td>
 
@@ -87,7 +82,7 @@
     <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
         <div class="easyui-layout" data-options="fit:true">
 
-            <div data-options="region:'west',collapsible:false,split:false" title="树选择" style="width: 300px;">
+            <div data-options="region:'west',collapsible:false,split:false" title="树选择" style="width: 380px;">
                 <ul id="tt" class="easyui-tree" data-options="url:'',method:'get',animate:true,checkbox:true"></ul>
             </div>
 
@@ -104,11 +99,13 @@
 
 @*<script src="/Scripts/JScript-ShangAn-Common.js"></script>*@
 <script type="text/javascript">
-    $(document).ready(function () {        
+    $(document).ready(function () {
+        var url = "";
         bindShiyanshi("#UNDERTAKE_LABORATORYID");
         if ($("#hideUNDERTAKE_LABORATORYID").val() != "") {
             $("#UNDERTAKE_LABORATORYID").val($("#hideUNDERTAKE_LABORATORYID").val()).change();
-            ChangeTree($("#hideUNDERTAKE_LABORATORYID").val());
+           
+            url=  ChangeTree($("#hideUNDERTAKE_LABORATORYID").val());
         }
         $('#UNDERTAKE_LABORATORYID').combobox({
             onChange: function (n, o) {
@@ -121,8 +118,8 @@
     });
 
     //加载树
-    function TreeLoad() {       
-        $('#tt').tree({
+    function TreeLoad(url) {       
+        $('#tt').tree({ 
             onClick: function (node) {
                 var ID = $("#hideID").val();
                 if ($('#tt').tree('isLeaf', node.target)) {
@@ -175,10 +172,11 @@
         if (url == null || url.trim() == "") {
             url = "/Res/tree_data1.js";
         }
+    
         $('#tt').tree({
             url: url
         });
-
+        return url;
     }
     //数据验证
     function CheckData() {

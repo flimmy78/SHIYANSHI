@@ -1516,12 +1516,12 @@
                 //电压输出 电压测量  电流输出 电流测量
 
                 htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU1', HangHaoID, rowidx, '', 'classstyle100', '', 'resetXianShiZhi'));
-                htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU2', HangHaoID, rowidx, '', 'classstyle100', '', 'resetXianShiZhi'));
-                htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU3', HangHaoID, rowidx, '', 'classstyle100', '', 'resetXianShiZhi'));
+                htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU2', HangHaoID, rowidx, '', 'classstyle100', '', 'resetBiaoZhunZhi'));
+                htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU3', HangHaoID, rowidx, '', 'classstyle100', '', 'resetBiaoZhunZhi3'));
 
-                htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG1', HangHaoID, rowidx, '', 'classstyle100', '', 'resetBiaoZhunZhi'));
+                htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG1', HangHaoID, rowidx, '', 'classstyle100', '', 'resetXianShiZhi'));
                 htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG2', HangHaoID, rowidx, '', 'classstyle100', '', 'resetBiaoZhunZhi'));
-                htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG3', HangHaoID, rowidx, '', 'classstyle100', '', 'resetBiaoZhunZhi'));
+                htmlString.push(SetTDHtml(rowspan, 'DIANYACELIANG3', HangHaoID, rowidx, '', 'classstyle100', '', 'resetBiaoZhunZhi3'));
 
 
 
@@ -1543,18 +1543,25 @@
             var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
             $('#dlg').window('close');//关闭弹出框
-            $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+            $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
        
         //计算显示值
         function resetXianShiZhi(obj) {
             //重新计算当前行
-            xiangDuiWuCha1(obj, "DIANYACELIANG", "RELATIVEERROR");
+            xiangDuiWuCha(obj, "DIANYASHUCHU1", "DIANYACELIANG1", "RELATIVEERROR1");
         }
+
         //计算标准值
         function resetBiaoZhunZhi(obj, source, gold) {
             //重新计算当前行
-            xiangDuiWuCha2(obj, "DIANYASHUCHU", "RELATIVEERROR");
+            xiangDuiWuCha(obj, "DIANYASHUCHU2", "DIANYACELIANG2", "RELATIVEERROR2");
+
+        }
+        //计算标准值
+        function resetBiaoZhunZhi3(obj, source, gold) {
+            //重新计算当前行
+            xiangDuiWuCha(obj, "DIANYASHUCHU3", "DIANYACELIANG3", "RELATIVEERROR3");
 
         }
         //离开事件，用于计算
