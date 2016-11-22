@@ -796,7 +796,7 @@ RuleAttributeArray = [{
                 DuoTongDao: 'hidden',
                 //检测项单位联动下拉框联动:(变更项名称1)|联动相名称1,联动相名称2;(变更项名称2)|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: '',
+                LianDongDanWeiDDL: '(OUTPUTVALUE)|READVALUE;',
                 //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
@@ -805,7 +805,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -818,16 +818,16 @@ RuleAttributeArray = [{
                 DuoTongDao: 'hidden',
                 //检测项单位联动下拉框联动:(变更项名称1)|联动相名称1,联动相名称2;(变更项名称2)|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: '',
+                LianDongDanWeiDDL: '(OUTPUTVALUE)|READVALUE;',
                 //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
-                DanWeiHtmlDDL: 'DianYa|(RANGE_UNIT);',
+                DanWeiHtmlDDL: 'HZ|(OUTPUTVALUE),(READVALUE);',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -1170,11 +1170,11 @@ RuleAttributeArray = [{
                 DuoTongDao: 'show',
                 //检测项单位联动下拉框联动:(变更项名称1)|联动相名称1,联动相名称2;(变更项名称2)|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: '(READVALUE)|(ACTUALVALUE),(SHIJISHUCHUZHI);',
+                LianDongDanWeiDDL: '(READVALUE)|(ACTUALVALUE),(SHIJISHUCHUZHI),(UNCERTAINTYDEGREE);',
                 //检测项属性单位下拉框选项(单位类型1|(检测项属性单位名称1),(检测项属性单位名称2);单位类型2|(检测项属性单位名称1),(检测项属性单位名称2))
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|(RANGE_UNIT:量程),(OUTPUT_VALUE_UNIT:输出示值),(ACTUAL_OUTPUT_VALUE_UNIT：输出实际值);DianYa|(READ_VALUE_UNIT:读数值)',
-                DanWeiHtmlDDL: 'DianLiu|(READVALUE),(ACTUALVALUE),(SHIJISHUCHUZHI);',
+                DanWeiHtmlDDL: 'DianLiu|(READVALUE),(ACTUALVALUE),(SHIJISHUCHUZHI),(UNCERTAINTYDEGREE);HZ|(HZMY);',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列(,检测项属性单位名称1,检测项属性单位名称2,)
