@@ -82,7 +82,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult JiaoLiuDianLiuShuChuDanxiang(string id = "相对误差", string RULEID = "410-1994_6_5", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JiaoLiuDianLiuShuChuDanxiang(string id = "相对误差", string RULEID = "34-1999_3_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             //相对误差 410-1994_6_5           
@@ -293,8 +293,12 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult JiaoLiuDianYaXiangDuiWuChaDanxiang(string RULEID = "34-1999_3_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaDanxiang(string id = "相对误差", string RULEID = "34-1999_3_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
+            //相对误差 410-1994_6_5           
+
+            //绝对误差 410 - 1994_6_6
+            ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 

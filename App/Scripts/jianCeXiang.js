@@ -131,9 +131,11 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
 //ddlName:检查项中的属性控件名称
 //DanWeiCode:单位代码（如果有值直接取，RuleAttribute、ddlName失效)
 function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
+     
     var Result = null;
 
-    if (DanWeiCode != null && DanWeiCode.trim() != "") {//如果有有单位代码直接取，RuleAttribute、ddlName失效
+    if (DanWeiCode != null && DanWeiCode.trim() != "") {
+        //如果有有单位代码直接取，RuleAttribute、ddlName失效
         $.each(DanWeiDDLHtmlArray, function (i, item) {
             if (item == null || item.Code != DanWeiCode) {
                 return true;
