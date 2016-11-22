@@ -65,15 +65,15 @@ body{
 }
 .input-login{
     border-left: 0px;
-    height: 30px!important;
+    height: 34px!important;
 }
 .input-verify{
     height: 34px!important;
-    width: 50%!important;
+    width: 70%!important;
 }
 .input-verify-img{
     width: 26%;
-    margin: 2px;
+    margin: 0 0 0 2px; height:34px
 }
 a.verify-ctrl:hover{
     text-decoration:none;
