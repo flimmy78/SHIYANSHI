@@ -925,6 +925,7 @@
     <Content Include="Views\PROJECTTEMPLET\JueYuanDianZu.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\OMYiXiaWuWuCha.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaZhengFuJueDuiWuCha.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaFeiZhengFuJueDuiWuCha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
