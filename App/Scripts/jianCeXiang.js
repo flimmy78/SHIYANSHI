@@ -93,7 +93,7 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
 
     var ddlArray = LianDongDanWeiDDLAttribute.split(';');
     $.each(ddlArray, function (i, item) {
-        debugger;
+       
         var biangeng =   obj.name.split('_')[0] + "|";
         //if (item == null || item.trim() == "" || item.indexOf(biangeng) < 0) {
         //    return true;
@@ -208,8 +208,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='" + blurValue + "(this)'/>");
     if (ddlHtml != null && ddlHtml.trim() != "") {
         var AttributeValue = GetAttributeValue("LianDongDanWeiDDL");
-        
-        debugger;
+         
         htmlString.push($(ddlHtml).attr("onchange", "LianDongDanWeiDDL(this,'" + AttributeValue + "')").attr("name", ddlName).attr("id", ddlId)[0].outerHTML);
     }
     if (unit) {
