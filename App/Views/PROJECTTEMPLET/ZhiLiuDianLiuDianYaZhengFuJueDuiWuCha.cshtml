@@ -1,7 +1,7 @@
 ﻿@model Langben.DAL.PROJECTTEMPLET
 @{
     Layout = "~/Views/Shared/TempleOnly.cshtml";
-    ViewBag.title = "直流电压（电流）测量-正负极性-相对误差（多通道）";
+    ViewBag.title = "直流电压（电流）测量-正负极性-绝对误差";
 }
 @using Common
 @using Models
@@ -12,15 +12,9 @@
         <th rowspan="2" align="center" width="140">标准值</th>
         <th colspan="2" align="center" width="140">
             显示值
-            <select class="my-combobox" name="sssss" id="sssss_t_1_1" style="width:100px;">
-                <option value=""></option>
-                <option value="CH1">CH1</option>
-                <option value="CH2">CH2</option>
-                <option value="CH3">CH3</option>
-                <option value="CH4">CH4</option>
-            </select>
+
         </th>
-        <th colspan="2" align="center">相对误差%</th>
+        <th colspan="2" align="center">绝对误差%</th>
         <th align="center">
             校准结果的不确定度
 
@@ -102,7 +96,7 @@
                 }
 
                 //需要合并的列
-                
+
 
                 //标准值 增加下拉框单位A
                 htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "resetBiaoZhunZhi"));
@@ -129,33 +123,31 @@
             $('#dlg').window('close');//关闭弹出框
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
-
         //计算标准值
         function resetBiaoZhunZhi(obj) {
-
-            xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
-            xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHIFU", "RELATIVEERRORFU");
+       
+            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHIFU", "RELATIVEERRORFU");
         }
         //计算显示值
         function resetXianShiZhi(obj) {
-
-            xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+           
+            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
         }
 
         //计算显示值
         function resetXianShiZhiFu(obj) {
-
-            xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHIFU", "RELATIVEERRORFU");
+         
+            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHIFU", "RELATIVEERRORFU");
 
         }
-
 
         //离开事件，用于计算
         function blurValue(obj) {
 
             //   LianDongShiJiZhi(obj);
         }
-   
+
 
     </script>
 

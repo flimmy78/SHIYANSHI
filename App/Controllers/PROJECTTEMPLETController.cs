@@ -204,6 +204,19 @@ namespace Langben.App.Controllers
             ViewBag.canshu =id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
+        /// <summary>
+        /// 直流电压（电流）测量-正负极性-绝对误差
+        /// </summary> 
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <returns></returns>
+        public ActionResult ZhiLiuDianLiuDianYaZhengFuJueDuiWuCha(string RULEID = "315-1983_2_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+            //电压测量 
+            ////电流测量
+            //ViewBag.canshu = id;
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
 
         /// <summary>
         /// 直流电压（电流）测量-正负极性-相对误差（多通道）

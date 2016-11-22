@@ -631,5 +631,58 @@ function xiangDuiWuCha2(obj, source, gold) {
         $(obj).parent().parent().find("#" + gold + id).val(data);
     }
 }
+//相对误差
+//obj 自身对象
+//first 第一列的值，做分母第一位
+//second 第二列的值，做分子
+//gold 误差列
+function xiangDuiWuCha(obj, first, second, gold) {
+    //重新计算当前行
+    var name = $(obj).attr("name");
+    var id = $(obj).attr("id");
+    id = id.substring(id.indexOf('_'));
+
+    first = first + id;//改动的地方，参与计算的列的name值
+    second = second + id;//改动的地方，参与计算的列的name值
+    gold = gold + id;//改动的地方，误差的列的name值
+
+    var firstData = $(obj).parent().parent().find("#" + first).val();
+    var secondData = $(obj).parent().parent().find("#" + second).val();
+    if (firstData != "" && secondData != "" && secondData != "0") {
+        var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+        var data = ((firstData - secondData) / secondData * 100).toFixed(txtPointLen);
+
+        $(obj).parent().parent().find("#" + gold).val(data);
+    }
+     
+}
+//绝对误差
+//obj 自身对象
+//first 第一列的值，做分母第一位
+//second 第二列的值，做分子
+//gold 误差列
+function jueDuiWuCha(obj, first, second, gold) {
+    //重新计算当前行
+    //重新计算当前行
+    var name = $(obj).attr("name");
+    var id = $(obj).attr("id");
+    id = id.substring(id.indexOf('_'));
+
+    first = first + id;//改动的地方，参与计算的列的name值
+    second = second + id;//改动的地方，参与计算的列的name值
+    gold = gold + id;//改动的地方，误差的列的name值
+
+    var firstData = $(obj).parent().parent().find("#" + first).val();
+    var secondData = $(obj).parent().parent().find("#" + second).val();
+    if (firstData != "" && secondData != "") {
+        var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+        var data = (firstData - secondData).toFixed(txtPointLen);
+
+        $(obj).parent().parent().find("#" + gold).val(data);
+    }
+    
+}
 
  
