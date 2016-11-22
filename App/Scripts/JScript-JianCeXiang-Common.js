@@ -800,12 +800,12 @@ RuleAttributeArray = [{
                 //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'HZ|txtPointLenOUTPUTVALUE,txtPointLenREADVALUE;',
+                DanWeiHtmlDDL: 'HZ|OUTPUTVALUE,READVALUE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
@@ -822,12 +822,12 @@ RuleAttributeArray = [{
                 //检测项属性单位下拉框选项txtPointLen单位类型1|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2;单位类型2|txtPointLen检测项属性单位名称1,txtPointLen检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|txtPointLenRANGE_UNIT:量程,txtPointLenOUTPUT_VALUE_UNIT:输出示值,txtPointLenACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|txtPointLenREAD_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|txtPointLenRANGE_UNIT;',
+                DanWeiHtmlDDL: 'HZ|OUTPUTVALUE,READVALUE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列txtPointLen,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',OUTPUT_VALUE,'
+                CalculateForAddLianCheng: ''
             }]
     }
     ,
