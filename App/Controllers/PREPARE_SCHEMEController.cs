@@ -129,9 +129,10 @@ namespace Langben.App.Controllers
                 }
                 catch
                 {
-                    result.Code = Common.ClientCode.Fail;
-                    result.Message = Suggestion.UpdateFail + "有效期格式错误";
-                    return Json(result); //提示插入失败
+                    //result.Code = Common.ClientCode.Fail;
+                    //result.Message = Suggestion.UpdateFail + "有效期格式错误";
+                    //return Json(result); //提示插入失败
+                    entity.VALIDITY_PERIOD = null;
                 }
                 string currentPerson = GetCurrentPerson();
                 entity.UPDATETIME = DateTime.Now;
