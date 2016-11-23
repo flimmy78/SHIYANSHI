@@ -1646,9 +1646,14 @@ namespace Langben.Report
             }
             else
             {
-                value = string.Format(sourceCell.StringCellValue, "").Trim();
+                value = string.Format(sourceCell.StringCellValue, "").Trim();                
                 speStartIndex = 0;
                 SpecialStr = value;
+            }
+            if (value != null && value.Trim() != "" && value.Trim().ToUpper().IndexOf("U(K") >= 0)
+            {
+                speStartIndex = value.Trim().ToUpper().IndexOf("U(K");
+                SpecialStr = "U(K";
             }
             result = new HSSFRichTextString(value);
 
