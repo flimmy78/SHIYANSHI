@@ -97,9 +97,16 @@
         }
         else
         {
+          
             url = "../PROJECTTEMPLET/"+SCHEME_MENU;
         }
-        url = url + "?PREPARE_SCHEMEID=" + PREPARE_SCHEMEID;
+        if (url.indexOf('?') > 0) {
+            //刘腾飞修改 2016.11.23
+            url = url + "&PREPARE_SCHEMEID=" + PREPARE_SCHEMEID;
+        } else {
+            url = url + "?PREPARE_SCHEMEID=" + PREPARE_SCHEMEID;
+        }
+       
         url = url + "&RULEID=" + RULEID;
         url = url + "&INPUTSTATE=" + INPUTSTATE;
         $('#mainframe').attr('src', url);

@@ -481,9 +481,23 @@ function Save_FangAn() {
 }
 //由于html无法获取value，重新给outerHTML赋值
 function SetAllControlHtml() {
+    var sd = $("input[type='text']");
+    var sddd = $("input[type='text']").not('#tongdao_moban :input');
+
     $("input[type='text']").not('#tongdao_moban :input').each(function () {
-        //除了隐藏模板中的输入框，其他所有的输入框
+        var dsa = this.id
+      
+        //除了隐藏模板中的输入框，其他所有的输入框123
         if (this.id != "") {
+            if (this.value == "123") {
+                alert(12);
+                debugger;
+            }
+            var dsasad = this.attributes.value;
+            if (this.attributes.value=="123") {
+                alert(2);
+                debugger;
+            }
             if (this.attributes.value != undefined) {
                 this.attributes.value.value = $(this).val();
             }
@@ -493,6 +507,7 @@ function SetAllControlHtml() {
     $("select").not('#tongdao_moban select').each(function () {
         //除了隐藏模板中的下拉框，其他所有的下拉框
         if (this.id != "") {
+          
             var checkText = $(this).find("option:selected").text();  //获取Select选择的Text           
             $(this).find("option[value='" + checkText + "']").attr("selected", true);
 
