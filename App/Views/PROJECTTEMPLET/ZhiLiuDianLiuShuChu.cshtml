@@ -84,15 +84,12 @@
                     //需要合并的列 //量程
 
                     htmlString.push(SetTDHtml(txtPoint, "RANGE", HangHaoID, rowidx, txtNumber, ""));
+                    //选用电阻阻值   （Ω）
+                    htmlString.push(SetTDHtml(txtPoint, "OUTPUTVALUE", HangHaoID, rowidx, '', ""));
 
                 }
-
-                //需要合并的列
-
-
-                //选用电阻阻值   （Ω）
-                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, '', ""));
-
+                 
+              
                 //输出示值 增加下拉框单位A
                 htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "@((ViewBag.canshu == "相对误差") ? "resetBiaoZhunZhi" : "jueDuiWuChaBiaoZhunZhi")"));
 
