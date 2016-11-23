@@ -223,11 +223,13 @@
                 //测量点 需要下拉框
                 htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120"));
                 //二次输入标准值
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100", unit));
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100", unit, 'blurErCiShuRuBiaoZhunZhi'));
+                //  //二次输入标准值
+                // htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurErCiShuRuBiaoZhunZhi'));
                 //标准输出值
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurBiaoZhunShuChuZhi'));
                 //实际输出值
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurShiJiShuChuZhi'));
                 //引用误差
                 htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "classstyle100"));
                 //校准结果的不确定度 U(K =
@@ -250,25 +252,29 @@
         function blurShuRuFanWeiZuiXiao(obj) {
             //注意多通道
             RecalculateBiaoZhunShuChu(); //重新计算页面上标准输出值
+            RecalculateYinYongWuCha();//重新计算引用
         }
 
         //离开事件，用于计算 输入范围最大
         function blurShuRuFanWeiZuiDa(obj) {
             //注意多通道
             RecalculateBiaoZhunShuChu(); //重新计算页面上标准输出值
+            RecalculateYinYongWuCha();//重新计算引用
 
         }
         //离开事件，用于计算 输出范围最小
         function blurShuChuFanWeiZuiXiao(obj) {
             //注意多通道
-            RecalculateYinYongWuCha();//重新计算引用
+
             RecalculateBiaoZhunShuChu(); //重新计算页面上标准输出值
+            RecalculateYinYongWuCha();//重新计算引用
         }
         //离开事件，用于计算 输出范围最大
         function blurShuChuFanWeiZuiDa(obj) {
             //注意多通道
-            RecalculateYinYongWuCha();//重新计算引用
+
             RecalculateBiaoZhunShuChu(); //重新计算页面上标准输出值
+            RecalculateYinYongWuCha();//重新计算引用
         }
         //离开事件，用于计算 标准输出值
         function blurShiJiShuChuZhi(obj) {
@@ -278,7 +284,8 @@
         //离开事件，用于计算 标准输出值
         function blurBiaoZhunShuChuZhi(obj) {
             //注意多通道
-            //
+            // $(obj).parents('tr:eq(0)').find('td:eq(0) input').blur();
+
         }
         //离开事件，用于计算 二次输入标准值
         function blurErCiShuRuBiaoZhunZhi(obj) {
@@ -338,12 +345,14 @@
             var length = datas.levellength;
             if (level == "0.0" || ShijiShuChu == "" || BiaoZhunShuChu == "") return ""
             else
-                return (((parseFloat(ShijiShuChu) - parseFloat(BiaoZhunShuChu)) / (datas.outputMaxValue - datas.outputMinValue) * 100 / parseFloat(level)) * parseFloat(level)).toFixed(length + 1);
+                return ((parseFloat(ShijiShuChu) - parseFloat(BiaoZhunShuChu) / (datas.outputMaxValue - datas.outputMinValue) * 100 / parseFloat(level)) * parseFloat(level)).toFixed(length + 1);
         }
         //离开事件，用于计算 测量点
         function blurCeLiangDian(obj) {
             //注意多通道
             $(obj).parents('tr:eq(0)').find('td:eq(1) input').val($.trim($(obj).val()) == "" ? "" : parseFloat($(obj).val()).toFixed(4))
+            $(obj).parents('tr:eq(0)').find('td:eq(1) input').blur();
+            $(obj).parents('tr:eq(0)').find('td:eq(3) input').blur();
         }
         //离开事件，用于计算
         function blurValue(obj) {

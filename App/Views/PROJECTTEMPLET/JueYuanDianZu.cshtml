@@ -6,29 +6,61 @@
 @using Common
 @using Models
 <thead>
-    <!--表头-->
+<thead>
     <tr>
-        <th align="center" width="140">量程</th>
-        <th width="140" align="center">标准值</th>
-        <th width="140" align="center">赫兹(Hz)</th>
-        <th width="140" align="center"> 显示值</th>
-
-        <th width="140" align="center">相对误差(%)</th>
-        <th align="center">
-            校准结果的不确定度<br>
-            U(K = <select class="my-combobox" name="K" id="K_t_1_1">
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="√3">√3</option>
-</select>
-
-            </select>)
-        </th>
+        <th align="center" width="200">相线对机壳</th>
+        <th width="200" align="center"> 零线对机壳</th>
+        <th width="200" align="center">允许值</th>
     </tr>
-
 </thead>
 
 <tbody id="tbody_moban">
+    <tr>
+        <td align="center">
+            <input class="my-textbox input-width" />
+            <select class="my-combobox" name="state">
+                <option value="Ω">Ω </option>
+                <option value="TΩ">TΩ</option>
+                <option value="GΩ">GΩ</option>
+                <option value="MΩ">MΩ</option>
+                <option value="kΩ">kΩ</option>
+                <option value="mΩ">mΩ</option>
+                <option value="μΩ">μΩ</option>
+            </select>
+        </td>
+        <td align="center">
+            <input class="my-textbox input-width" />
+            <select class="my-combobox" name="state">
+                <option value="Ω">Ω </option>
+                <option value="TΩ">TΩ</option>
+                <option value="GΩ">GΩ</option>
+                <option value="MΩ">MΩ</option>
+                <option value="kΩ">kΩ</option>
+                <option value="mΩ">mΩ</option>
+                <option value="μΩ">μΩ</option>
+            </select>
+        </td>
+        <td align="center">
+            <select class="my-combobox" name="state">
+                <option value="＞">＞ </option>
+                <option value="≥">≥</option>
+                <option value="≤">≤</option>
+                <option value="＜">＜</option>
+                <option value="＝">＝</option>
+                <option value="≠">≠</option>
+            </select>
+            <input class="my-textbox input-width" />
+            <select class="my-combobox" name="state">
+                <option value="Ω">Ω </option>
+                <option value="TΩ">TΩ</option>
+                <option value="GΩ">GΩ</option>
+                <option value="MΩ">MΩ</option>
+                <option value="kΩ">kΩ</option>
+                <option value="mΩ">mΩ</option>
+                <option value="μΩ">μΩ</option>
+            </select>
+        </td>
+    </tr>
     <!--表体-->
     <!--插入行的位置-->
 </tbody>

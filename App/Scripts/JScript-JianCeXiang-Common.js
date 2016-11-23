@@ -27,6 +27,24 @@ DanWeiDDLHtmlArray = [
         }
         ,
         {
+            Code: 'DYDL',
+            Remark: '电压单位',
+            Value: "<select class=\"my-combobox\" name=\"DianYa\" style=\"width:50px; \">" +
+                    "<option value=\"V\">V</option> " +
+                    "<option value=\"MV\">MV</option>" +
+                    "<option value=\"KV\">KV</option>  " +
+                    "<option value=\"mV\">mV</option>" +
+                    "<option value=\"μV\">μV</option> " +
+                    "<option value=\"A\">A</option> " +
+                    "<option value=\"KA\">KA</option>" +
+                    "<option value=\"mA\">mA</option>  " +
+                    "<option value=\"μA\">μA</option>" +
+                    "<option value=\"nA\">nA</option> " +
+                    "<option value=\"pA\">pA</option> " +
+                   "</select>"
+        }
+        ,
+        {
             Code: 'DianLiuKA',
             Remark: '电流单位KA开头',
             Value: "<select class=\"my-combobox\" name=\"DianLiuKA\" style=\"width:50px; \">" +
@@ -382,7 +400,7 @@ RuleAttributeArray = [{
                 //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|RANGE,READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;DianYa|ACTUALVALUE',
+                DanWeiHtmlDDL: 'DianLiu|RANGE,READVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;DYDL|ACTUALVALUE',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
@@ -1170,11 +1188,11 @@ RuleAttributeArray = [{
                 DuoTongDao: 'show',
                 //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
-                LianDongDanWeiDDL: 'READVALUE|ACTUALVALUE,SHIJISHUCHUZHI;',
+                LianDongDanWeiDDL: 'READVALUE|ACTUALVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;',
                 //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianLiu|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI;',
+                DanWeiHtmlDDL: 'DianLiu|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI,UNCERTAINTYDEGREE;HZ|HZMY;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
@@ -1196,7 +1214,7 @@ RuleAttributeArray = [{
                 //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI,RELATIVEERROR,UNCERTAINTYDEGREE;',
+                DanWeiHtmlDDL: 'DianYa|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI,RELATIVEERROR,UNCERTAINTYDEGREE;HZ|HZMY;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
@@ -1240,7 +1258,7 @@ RuleAttributeArray = [{
                 //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI;',
+                DanWeiHtmlDDL: 'DianYa|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI;HZ|HZMY;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
@@ -1262,7 +1280,7 @@ RuleAttributeArray = [{
                 //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI,RELATIVEERROR;',
+                DanWeiHtmlDDL: 'DianYa|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI,RELATIVEERROR;HZ|HZMY;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
