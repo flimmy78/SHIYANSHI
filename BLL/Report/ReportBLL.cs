@@ -1434,10 +1434,10 @@ namespace Langben.Report
                             RowIndex++;
                         }
                     }
-                    if (sheet_Destination.LastRowNum <= RowIndex)
-                    {
-                        CopyRow(sheet_Destination, sheet_Destination, 0, RowIndex, 1, true);
-                    }
+                    //if (sheet_Destination.LastRowNum <= RowIndex)
+                    //{
+                        CopyRow(sheet_Source, sheet_Destination, 4, RowIndex, 1, true);
+                    //}
                     #endregion
                     RowIndex++;
                     i++;
