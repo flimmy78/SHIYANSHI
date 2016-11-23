@@ -1615,105 +1615,109 @@ namespace Langben.Report
             {
                 return new HSSFRichTextString("");
             }
-            if (DongTaiShuJuList == null || DongTaiShuJuList.Count == 0)
-            {
-                return new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
-            }
-            if (rowInfoList == null || rowInfoList.Count == 0)
-            {
-                return new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
-            }
+            ////if (DongTaiShuJuList == null || DongTaiShuJuList.Count == 0)
+            ////{
+            ////    return new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
+            ////}
+            //if (rowInfoList == null || rowInfoList.Count == 0)
+            //{
+            //    return new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
+            //}
             string key = "";
-            if (rowInfoList.FirstOrDefault(p => p.RowIndex == sourceCell.RowIndex && p.Cells != null && p.Cells.Count>0) != null)
-            {                
+            if (rowInfoList != null && rowInfoList.Count > 0 && rowInfoList.FirstOrDefault(p => p.RowIndex == sourceCell.RowIndex && p.Cells != null && p.Cells.Count > 0) != null)
+            {
                 RowInfo r = rowInfoList.FirstOrDefault(p => p.RowIndex == sourceCell.RowIndex && p.Cells != null && p.Cells.Count > 0);
-                if(r!=null)
+                if (r != null)
                 {
                     Cell c = r.Cells.FirstOrDefault(p => p.ColIndex == sourceCell.ColumnIndex);
-                    if(c!=null && DongTaiShuJuList.ContainsKey(c.Code))
+                    if (c != null && DongTaiShuJuList.ContainsKey(c.Code))
                     {
                         key = c.Code;
                     }
                 }
-                
-
-                //if (r.CellIndexList.Count(p => p == sourceCell.ColumnIndex) > 0)
-                //{
-                    int speStartIndex = sourceCell.StringCellValue.IndexOf("{0}");//动态字符位置
-                    string value = "";
-                    if (key != null && key.Trim() != "")
-                    {
-                        value = string.Format(sourceCell.StringCellValue, DongTaiShuJuList[key]).Trim();
-                    }
-                    else
-                    {
-                        value = string.Format(sourceCell.StringCellValue, "").Trim();
-                    }
-
-                    result = new HSSFRichTextString(value);
-                    //if (DongTaiShuJuList!= null && DongTaiShuJuList.Count>0 && speStartIndex>=0)
-                    //{
-                    if(key!=null && key.Trim()!="" && speStartIndex>=0)
-                    { 
-                        //string key = DongTaiShuJuList.Keys.FirstOrDefault();
-
-                        if (workbook != null && DongTaiShuJuList[key].Trim() != "" && allSpecialCharacters != null && allSpecialCharacters.SpecialCharacterList != null &&
-                            allSpecialCharacters.SpecialCharacterList.Count > 0 &&
-                            allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == DongTaiShuJuList[key].Trim().ToUpper()) != null)
-                        {
-                            SpecialCharacter spec = allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == DongTaiShuJuList[key].Trim().ToUpper());
-                            #region 将字符设置成斜体
-                           
-                            HSSFFont normalFont = (HSSFFont)workbook.CreateFont();                            
-                            normalFont.IsItalic = true;
-                            normalFont.FontName = "宋体";
-                            int startIndex = speStartIndex;
-                            if (startIndex < 0)
-                            {
-                                startIndex = 0;
-                            }
-                            int endIndex = speStartIndex + spec.Code.Trim().Length - spec.SubscriptLastCount;
-                            if (endIndex < 0)
-                            {
-                                endIndex = 0;
-                            }
-                            result.ApplyFont(startIndex, endIndex, normalFont);
-                            #endregion
-
-                            #region 设置下标
-                            if (spec.SubscriptLastCount > 0)
-                            {
-                                //result = new HSSFRichTextString(value);
-                                // superscript = (HSSFFont)workbook.CreateFont();
-                                //superscript.TypeOffset = FontSuperScript.Super;//上标
-                                //superscript.Color = HSSFColor.RED.index;
-
-                                HSSFFont subscript = (HSSFFont)workbook.CreateFont();
-                                subscript.TypeOffset = FontSuperScript.Sub; //下标  
-                                subscript.IsItalic = true;
-                                subscript.FontName = "宋体";
-                                //subscript.Color = HSSFColor.Red.Index;
-                                //HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
-                                startIndex = speStartIndex +spec.Code.Trim().Length- spec.SubscriptLastCount;
-                                if (startIndex < 0)
-                                {
-                                    startIndex = 0;
-                                }
-                                endIndex = speStartIndex + spec.Code.Trim().Length;
-                                if (endIndex < 0)
-                                {
-                                    endIndex = 0;
-                                }
-                                result.ApplyFont(startIndex, endIndex, subscript);                                
-                            }
-                            #endregion 
-
-                        }
-                        DongTaiShuJuList.Remove(key);                       
-                        return result;                     
-                    }
-                //}
+            }          
+            int speStartIndex = sourceCell.StringCellValue.IndexOf("{0}");//动态字符位置
+            string value = "";
+            string SpecialStr = "";
+            if (key != null && key.Trim() != "")
+            {
+                value = string.Format(sourceCell.StringCellValue, DongTaiShuJuList[key]).Trim();
+                SpecialStr = DongTaiShuJuList[key];
             }
+            else
+            {
+                value = string.Format(sourceCell.StringCellValue, "").Trim();                
+                speStartIndex = 0;
+                SpecialStr = value;
+            }
+            if (value != null && value.Trim() != "" && value.Trim().ToUpper().IndexOf("U(K") >= 0)
+            {
+                speStartIndex = value.Trim().ToUpper().IndexOf("U(K");
+                SpecialStr = "U(K";
+            }
+            result = new HSSFRichTextString(value);
+
+            if (!string.IsNullOrEmpty(SpecialStr) && SpecialStr.Trim() != "" && speStartIndex >= 0)
+            {
+                if (workbook != null && allSpecialCharacters != null && allSpecialCharacters.SpecialCharacterList != null &&
+                        allSpecialCharacters.SpecialCharacterList.Count > 0 &&
+                        allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == SpecialStr.Trim().ToUpper()) != null)
+                {
+                    SpecialCharacter spec = allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == SpecialStr.Trim().ToUpper());
+                    #region 将字符设置成斜体
+
+                    HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                    normalFont.IsItalic = true;
+                    normalFont.FontName = "宋体";
+                    int startIndex = speStartIndex;
+                    if (startIndex < 0)
+                    {
+                        startIndex = 0;
+                    }
+                    int endIndex = speStartIndex + spec.Code.Trim().Length - spec.SubscriptLastCount;
+                    if (endIndex < 0)
+                    {
+                        endIndex = 0;
+                    }
+                    result.ApplyFont(startIndex, endIndex, normalFont);
+                    #endregion
+
+                    #region 设置下标
+                    if (spec.SubscriptLastCount > 0)
+                    {
+                        //result = new HSSFRichTextString(value);
+                        // superscript = (HSSFFont)workbook.CreateFont();
+                        //superscript.TypeOffset = FontSuperScript.Super;//上标
+                        //superscript.Color = HSSFColor.RED.index;
+
+                        HSSFFont subscript = (HSSFFont)workbook.CreateFont();
+                        subscript.TypeOffset = FontSuperScript.Sub; //下标  
+                        subscript.IsItalic = true;
+                        subscript.FontName = "宋体";
+                        //subscript.Color = HSSFColor.Red.Index;
+                        //HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                        startIndex = speStartIndex + spec.Code.Trim().Length - spec.SubscriptLastCount;
+                        if (startIndex < 0)
+                        {
+                            startIndex = 0;
+                        }
+                        endIndex = speStartIndex + spec.Code.Trim().Length;
+                        if (endIndex < 0)
+                        {
+                            endIndex = 0;
+                        }
+                        result.ApplyFont(startIndex, endIndex, subscript);
+                    }
+                    #endregion
+
+                }
+                if (!string.IsNullOrEmpty(key) && key.Trim() != "" && DongTaiShuJuList != null)
+                {
+                    DongTaiShuJuList.Remove(key);
+                }
+                return result;
+            }                
+           
             return new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
         }
         /// <summary>
@@ -1958,7 +1962,7 @@ namespace Langben.Report
                         if (Id.ToString() != "" && Id.ToString().Split('_').Length >= 4 && !dic.ContainsKey(Id.ToString()))
                         {
                             dic.Add(Id.ToString(), rowIndex_Destination);
-                            CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true);
+                            CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true,null,null, allSpecialCharacters);
                             rowIndex_Destination++;
 
                         }
@@ -2315,7 +2319,7 @@ namespace Langben.Report
                 {
                     NodeList nodeList_Input = InputDic[key];
                     int startRowIndex = rowIndex_Destination;                    
-                    Dictionary<string, int> dic = SetRowIndex(nodeList_Input, sheet_Source, sheet_Destination, temp.DataRowIndex, rowIndex_Destination, out rowIndex);
+                    Dictionary<string, int> dic = SetRowIndex(nodeList_Input, sheet_Source, sheet_Destination, temp.DataRowIndex, rowIndex_Destination, out rowIndex, allSpecialCharacters);
                     rowIndex_Destination = rowIndex;
                     int endRowIndex = rowIndex;
 

@@ -6850,7 +6850,7 @@
 							<!--模板中单元格开始列号-->
 							<ColIndex>13</ColIndex>
 							<!--所占列数-->
-							<ColCount>2</ColCount>
+							<ColCount>4</ColCount>
 						</Cell>
 						<Cell>
 							<!--字段代码与模板中设置的字段保持一致-->
@@ -6858,7 +6858,7 @@
 							<!--字段名称含义-->
 							<Name>频率单位</Name>
 							<!--模板中单元格开始列号-->
-							<ColIndex>15</ColIndex>
+							<ColIndex>17</ColIndex>
 							<!--所占列数-->
 							<ColCount>3</ColCount>
 						</Cell>
@@ -7064,7 +7064,7 @@
 							<!--模板中单元格开始列号-->
 							<ColIndex>13</ColIndex>
 							<!--所占列数-->
-							<ColCount>2</ColCount>
+							<ColCount>4</ColCount>
 						</Cell>
 						<Cell>
 							<!--字段代码与模板中设置的字段保持一致-->
@@ -7072,7 +7072,7 @@
 							<!--字段名称含义-->
 							<Name>频率单位</Name>
 							<!--模板中单元格开始列号-->
-							<ColIndex>15</ColIndex>
+							<ColIndex>17</ColIndex>
 							<!--所占列数-->
 							<ColCount>3</ColCount>
 						</Cell>
@@ -7278,7 +7278,7 @@
 							<!--模板中单元格开始列号-->
 							<ColIndex>13</ColIndex>
 							<!--所占列数-->
-							<ColCount>2</ColCount>
+							<ColCount>4</ColCount>
 						</Cell>
 						<Cell>
 							<!--字段代码与模板中设置的字段保持一致-->
@@ -7286,7 +7286,7 @@
 							<!--字段名称含义-->
 							<Name>频率单位</Name>
 							<!--模板中单元格开始列号-->
-							<ColIndex>15</ColIndex>
+							<ColIndex>17</ColIndex>
 							<!--所占列数-->
 							<ColCount>3</ColCount>
 						</Cell>
@@ -7492,7 +7492,7 @@
 							<!--模板中单元格开始列号-->
 							<ColIndex>13</ColIndex>
 							<!--所占列数-->
-							<ColCount>2</ColCount>
+							<ColCount>4</ColCount>
 						</Cell>
 						<Cell>
 							<!--字段代码与模板中设置的字段保持一致-->
@@ -7500,7 +7500,7 @@
 							<!--字段名称含义-->
 							<Name>频率单位</Name>
 							<!--模板中单元格开始列号-->
-							<ColIndex>15</ColIndex>
+							<ColIndex>17</ColIndex>
 							<!--所占列数-->
 							<ColCount>3</ColCount>
 						</Cell>

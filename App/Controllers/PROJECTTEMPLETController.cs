@@ -203,20 +203,22 @@ namespace Langben.App.Controllers
             ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
-
         /// <summary>
-        /// 直流电压（电流）测量-正负极性-绝对误差
+        /// 直流电压（电流）测量-非正负极性-绝对误差
+        /// http://localhost:55977/PROJECTTEMPLET/ZhiLiuDianLiuDianYaFeiZhengFuJueDuiWuCha/%E6%B5%8B%E9%87%8F?wucha=%E7%9B%B8%E5%AF%B9%E8%AF%AF%E5%B7%AE
         /// </summary> 
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult ZhiLiuDianLiuDianYaZhengFuJueDuiWuCha(string RULEID = "315-1983_2_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult ZhiLiuDianLiuDianYaFeiZhengFuJueDuiWuCha(string id = "输出", string wucha = "绝对误差", string RULEID = "315-1983_2_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-            //电压测量 
-            ////电流测量
-            //ViewBag.canshu = id;
+            //输出 测量
+            ViewBag.canshu =id;
+            //绝对误差 相对误差 
+            ViewBag.wucha = wucha;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
+      
 
         /// <summary>
         /// 直流电压（电流）测量-正负极性-相对误差（多通道）
@@ -224,8 +226,10 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public ActionResult ZhiLiuDianLiuDianYaZhengFu(string RULEID = "315-1983_2_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult ZhiLiuDianLiuDianYaZhengFu(string id = "相对误差", string RULEID = "315-1983_2_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
+            //相对误差 绝对误差
+            ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
@@ -237,8 +241,10 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult ZhiLiuDianLiuShuChu(string RULEID = "445-1986_2_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult ZhiLiuDianLiuShuChu(string id = "相对误差", string RULEID = "445-1986_2_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
+            //相对误差 绝对误差
+            ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 
@@ -282,11 +288,13 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult JiaoLiuDianYaXiangDuiWuChaDanxiang(string id = "相对误差", string RULEID = "34-1999_3_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaDanxiang(string id = "输出", string wucha = "相对误差",  string RULEID = "34-1999_3_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-            //相对误差 410-1994_6_5           
+                   
 
-            //绝对误差 410 - 1994_6_6
+            //绝对误差 410 - 1994_6_6//相对误差 410-1994_6_5    
+            ViewBag.wucha = wucha;
+
             ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }

@@ -658,10 +658,11 @@ function xiangDuiWuCha(obj, first, second, gold) {
 
     var firstData = $(obj).parent().parent().find("#" + first).val();
     var secondData = $(obj).parent().parent().find("#" + second).val();
-    if (firstData != "" && secondData != "" && secondData != "0") {
+    if (firstData != "undefined" && secondData != "undefined" && firstData != "" && secondData != "" && secondData != "0") {
         var txtPointLen = $("#txtPointLen").val(); //小数点位数
-
-        var data = ((firstData - secondData) / secondData * 100).toFixed(txtPointLen);
+        
+        var data = fomatFloat(((firstData - secondData) / secondData * 100), txtPointLen)
+   
 
         $(obj).parent().parent().find("#" + gold).val(data);
     }
