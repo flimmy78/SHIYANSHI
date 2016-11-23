@@ -704,3 +704,15 @@ function jueDuiWuCha(obj, first, second, gold) {
 
 }
 
+//表头单位联动
+//自身
+//className同一类的类名
+function uonchange(thi, className) {
+
+    var checkvalue = $(thi).find("option:selected").val();  //获取Select选择的value  
+    $('.' + className + '').each(function () {
+        //关联的所有的下拉框                
+        $(this).find("option[value='" + checkvalue + "']").attr("selected", true);
+
+    });
+}

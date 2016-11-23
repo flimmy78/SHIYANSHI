@@ -116,7 +116,10 @@ namespace Langben.App.Controllers
         {
 
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
+            try
             {
+
+
                 string currentPerson = GetCurrentPerson();
                 if (string.IsNullOrWhiteSpace(entity.ID))
                 {
@@ -248,11 +251,16 @@ namespace Langben.App.Controllers
                 {
 
                 }
+
+
+                result.Code = Common.ClientCode.FindNull;
+                result.Message = Suggestion.InsertFail + "，请核对输入的数据的格式"; //提示输入的数据的格式不对 
             }
+            catch (Exception lastError) 
+            {
 
-            result.Code = Common.ClientCode.FindNull;
-            result.Message = Suggestion.InsertFail + "，请核对输入的数据的格式"; //提示输入的数据的格式不对 
-
+                ExceptionsHander.WriteExceptions(lastError);//将异常写入数据库
+            }
             return Json(result);
 
         }
@@ -308,7 +316,7 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="TP"></param>
         /// <param name="pathErWeiMa"></param>
-        public  void TuPanBaoCun(Image TP, string pathErWeiMa)
+        public void TuPanBaoCun(Image TP, string pathErWeiMa)
         {
             ImageCodecInfo myImageCodecInfo;
             //获得JPEG格式的编码器
@@ -343,12 +351,12 @@ namespace Langben.App.Controllers
         /// <returns></returns> 
         [SupportFilter]
         public ActionResult Edit(string id)
-        {          
+        {
             ORDER_TASK_INFORMATION on = m_BLL.GetById(id);
             foreach (var item in on.SIGN)
             {
                 ViewBag.HTML = item.HTMLVALUE;
-            }           
+            }
             return View();
         }
         IBLL.IORDER_TASK_INFORMATIONBLL m_BLL;
