@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Langben.BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -46,6 +47,7 @@ namespace App
                 string exceptionOperator = System.Configuration.ConfigurationManager.AppSettings["ExceptionUrl"];
                 try
                 {
+                    ExceptionsHander.WriteExceptions(lastError);//将异常写入数据库
                     exceptionOperator = new System.Web.UI.Control().ResolveUrl(exceptionOperator);
                     if (!String.IsNullOrEmpty(exceptionOperator) && !s.Contains(exceptionOperator))
                     {
@@ -58,7 +60,7 @@ namespace App
                 catch (Exception)
                 {
                 }
-
+                
             }
         }
     }
