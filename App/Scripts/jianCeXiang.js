@@ -489,15 +489,8 @@ function SetAllControlHtml() {
       
         //除了隐藏模板中的输入框，其他所有的输入框123
         if (this.id != "") {
-            if (this.value == "123") {
-                alert(12);
-                debugger;
-            }
-            var dsasad = this.attributes.value;
-            if (this.attributes.value=="123") {
-                alert(2);
-                debugger;
-            }
+            
+            
             if (this.attributes.value != undefined) {
                 this.attributes.value.value = $(this).val();
             }
