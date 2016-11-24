@@ -209,10 +209,10 @@
                 success: function (res) {
                     if (res.Code == 1) {
                         $("#Submit1,#fashongid").attr("disabled", true);
-                        $.messager.alert('操作提示', "发送审核成功！", 'info');
+                        $.messager.alert('操作提示', res.Message, 'info');
                     }
                     else {
-                        $.messager.alert('操作提示', "发送审核失败！", 'error');
+                        $.messager.alert('操作提示', res.Message, 'error');
                     }
                 }
             })

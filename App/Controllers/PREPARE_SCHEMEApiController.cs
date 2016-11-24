@@ -344,31 +344,41 @@ namespace Langben.App.Controllers
                 entity.UPDATETIME = DateTime.Now;
                 entity.UPDATEPERSON = currentPerson;
 
-                string returnValue = string.Empty;
-                if (m_BLL.EditField1(ref validationErrors, entity))
+                PREPARE_SCHEME ps = m_BLL.GetById(entity.ID);
+                if (ps.REPORTSTATUSZI == Common.REPORTSTATUS.审核驳回.GetHashCode().ToString() || ps.REPORTSTATUSZI == Common.REPORTSTATUS.批准驳回.GetHashCode().ToString() || ps.REPORTSTATUSZI == null)
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，预备方案信息的Id为" + entity.ID, "预备方案"
-                        );//写入日志                   
-                    result.Code = Common.ClientCode.Succeed;
-                    result.Message = Suggestion.UpdateSucceed;
-                    result.Id = entity.ID;
-                    return result; //提示更新成功 
+                    string returnValue = string.Empty;
+                    if (m_BLL.EditField1(ref validationErrors, entity))
+                    {
+                        LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，预备方案信息的Id为" + entity.ID, "预备方案"
+                            );//写入日志                   
+                        result.Code = Common.ClientCode.Succeed;
+                        result.Message = "发送审核成功!";
+                        result.Id = entity.ID;
+                        return result; //提示更新成功 
+                    }
+                    else
+                    {
+                        if (validationErrors != null && validationErrors.Count > 0)
+                        {
+                            validationErrors.All(a =>
+                            {
+                                returnValue += a.ErrorMessage;
+                                return true;
+                            });
+                        }
+                        LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，预备方案信息的Id为" + entity.ID + "," + returnValue, "预备方案"
+                            );//写入日志   
+                        result.Code = Common.ClientCode.Fail;
+                        result.Message = "发送审核失败，" + returnValue;
+                        return result; //提示更新失败
+                    }
                 }
                 else
                 {
-                    if (validationErrors != null && validationErrors.Count > 0)
-                    {
-                        validationErrors.All(a =>
-                        {
-                            returnValue += a.ErrorMessage;
-                            return true;
-                        });
-                    }
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，预备方案信息的Id为" + entity.ID + "," + returnValue, "预备方案"
-                        );//写入日志   
-                    result.Code = Common.ClientCode.Fail;
-                    result.Message = Suggestion.UpdateFail + returnValue;
-                    return result; //提示更新失败
+                    result.Code = Common.ClientCode.FindNull;
+                    result.Message = "报告状态不对，不能发送！";
+                    return result; //提示输入的数据的格式不对
                 }
             }
             result.Code = Common.ClientCode.FindNull;
@@ -414,7 +424,7 @@ namespace Langben.App.Controllers
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.审核驳回.ToString();
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.审核驳回.GetHashCode().ToString();
-                        
+
                         if (APPlist.Count > 1)
                         {
                             if (appliance.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName)
@@ -445,7 +455,7 @@ namespace Langben.App.Controllers
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.待批准.ToString();
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.待批准.GetHashCode().ToString();
-                      
+
                         if (APPlist.Count > 1)
                         {
                             if (appliance.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName)
@@ -484,7 +494,7 @@ namespace Langben.App.Controllers
                     if (entity.APPROVALISAGGREY == "不同意")
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.批准驳回.ToString();
-                        entity.REPORTSTATUSZI = Common.REPORTSTATUS.批准驳回.GetHashCode().ToString();                      
+                        entity.REPORTSTATUSZI = Common.REPORTSTATUS.批准驳回.GetHashCode().ToString();
                         int i = APPlist.Count;
                         if (i > 1)
                         {
@@ -562,7 +572,7 @@ namespace Langben.App.Controllers
                     else if (entity.APPROVALISAGGREY == "同意")
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.已批准.ToString();
-                        entity.REPORTSTATUSZI = Common.REPORTSTATUS.已批准.GetHashCode().ToString();            
+                        entity.REPORTSTATUSZI = Common.REPORTSTATUS.已批准.GetHashCode().ToString();
                         //判断器具是否满足入库条件
                         if (ISAPPLIANCE(entity.APPLIANCE_DETAIL_INFORMATIONID))
                         {
