@@ -265,8 +265,54 @@ else if (ViewBag.CERTIFICATE_CATEGORY == "校准")
         <table id="biaozhuizhuangzi"></table><br style="clear:both;" />
         <table id="biaozhuiqi"></table><br style="clear:both;" />
         @*弹窗*@
+        <h4 class="b-title">标准器</h4>
+        <div class="input_search">
+            <div class="input_search-label">
 
+                选择器具设备   ：
+            </div>
+            <div class="input_search-field" style="width:400px">
+                <table>
+                    <tr>
+                        <td width="100">
+                            <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="showModalMany('METERING_STANDARD_DEVICEID', '../../METERING_STANDARD_DEVICE/IndexSef/@ViewBag.UNDERTAKE_LABORATORY_NAME');">选择测试器具</a>
+                            <div class="editor-field">
+                                <div id="checkMETERING_STANDARD_DEVICEID">
+
+                                    @if (Model != null && !string.IsNullOrWhiteSpace(Model.METERING_STANDARD_DEVICEID))
+                                    {
+                                        foreach (var item40 in Model.METERING_STANDARD_DEVICEID.Split('^'))
+                                        {
+                                            string[] it = item40.Split('&');
+                                            if (it != null && it.Length == 2 && !string.IsNullOrWhiteSpace(it[0]) && !string.IsNullOrWhiteSpace(it[1]))
+                                            {
+
+                                                <table id="@item40"
+                                                       class="deleteStyle">
+                                                    <tr>
+                                                        <td>
+                                                            <img alt="删除" title="点击删除" onclick="deleteTable('@item40','METERING_STANDARD_DEVICEID');" src="../../../Images/deleteimge.png" />
+                                                        </td>
+                                                        <td>
+                                                            @it[1]
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            }
+                                        }
+                                    }
+                                    <input type="hidden" value="@Model.METERING_STANDARD_DEVICEID" name="METERING_STANDARD_DEVICEIDOld" id="METERING_STANDARD_DEVICEIDOld" />
+                                    @Html.HiddenFor(model => model.METERING_STANDARD_DEVICEID)
+                                </div>
+                            </div>
+                    </tr>
+                </table>
+
+
+            </div>
+        </div>
         @*************************@
+        <h4 class="b-title"></h4><br /><br />
         <div class="input_search">
             <div class="input_search-label">
 
@@ -318,8 +364,10 @@ else if (ViewBag.CERTIFICATE_CATEGORY == "校准")
         arr.CHECK_PLACE = $('#CHECK_PLACE').combobox('getValue');//检定/校准地点
         arr.CALIBRATION_DATE = $('#CALIBRATION_DATE').datebox('getValue');//检定/校准日期
         arr.DETECTERID = $('#DETECTERID').combobox('getValue');//核验员
-        arr.RATED_FREQUENCY = $("#RATED_FREQUENCY").val();//额定频率
-        arr.OTHER = $("#OTHER").val();//其他
+        arr.RATED_FREQUENCY = $("#RATED_FREQUENCY").val();//额定频率 
+        arr.OTHER = $("#OTHER").val();//其他     
+        arr.METERING_STANDARD_DEVICEID = $("#METERING_STANDARD_DEVICEID").val();//新的标准器id
+        arr.METERING_STANDARD_DEVICEIDOld = $("#METERING_STANDARD_DEVICEIDOld").val();//旧的标准器id
         arr.ID = "@Model.ID";
         if (arr.SCHEMEID=='') {
             $.messager.alert('操作提示', "请选择方案模板！", 'error');
@@ -327,7 +375,7 @@ else if (ViewBag.CERTIFICATE_CATEGORY == "校准")
         }
         if (ifshuju(arr)) {
             $.ajax({
-                url: "/api/PREPARE_SCHEMEApi/EditField",
+                url: "/api/PREPARE_SCHEMEApi/EditInst",
                 type: "Put",
                 dataType: "json",
                 data: arr,

@@ -41,6 +41,14 @@ namespace Langben.IBLL
         /// <returns></returns>
         [OperationContract]
         bool EditField(ref Common.ValidationErrors validationErrors, PREPARE_SCHEME entity);
+
+        /// <summary>
+        /// 建立方案保存下一步
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool EditInst(ref Common.ValidationErrors validationErrors, PREPARE_SCHEME entity);
         /// <summary>
         /// 获取在该表一条数据中，出现的所有外键实体
         /// </summary>

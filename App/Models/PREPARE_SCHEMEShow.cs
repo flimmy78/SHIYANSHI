@@ -59,5 +59,6 @@ namespace Langben.App.Models
         public string YEARS { get; set; }
         public string PACKAGETYPE { get; set; }
         public string OTHER { get; set; }
+        public string METERING_STANDARD_DEVICEID { get; set; }
     }
 }

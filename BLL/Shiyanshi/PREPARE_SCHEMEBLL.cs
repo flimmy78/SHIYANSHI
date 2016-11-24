@@ -119,6 +119,66 @@ namespace Langben.BLL
             }
             return false;
         }
+
+        /// <summary>
+        /// 建立方案保存下一步
+        /// </summary>
+        /// <param name="validationErrors"></param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public bool EditInst(ref ValidationErrors validationErrors, PREPARE_SCHEME entity)
+        {
+            try
+            {
+                if (entity == null)
+                {
+                    return false;
+                }
+                int count = 1;
+                List<string> addMETERING_STANDARD_DEVICEID = new List<string>();
+                List<string> deleteMETERING_STANDARD_DEVICEID = new List<string>();
+                DataOfDiffrent.GetDiffrent(entity.METERING_STANDARD_DEVICEID.GetIdSort(), entity.METERING_STANDARD_DEVICEIDOld.GetIdSort(), ref addMETERING_STANDARD_DEVICEID, ref deleteMETERING_STANDARD_DEVICEID);
+                List<METERING_STANDARD_DEVICE> listEntityMETERING_STANDARD_DEVICE = new List<METERING_STANDARD_DEVICE>();
+                if (deleteMETERING_STANDARD_DEVICEID != null && deleteMETERING_STANDARD_DEVICEID.Count() > 0)
+                {
+                    foreach (var item in deleteMETERING_STANDARD_DEVICEID)
+                    {
+                        METERING_STANDARD_DEVICE sys = new METERING_STANDARD_DEVICE { ID = item };
+                        listEntityMETERING_STANDARD_DEVICE.Add(sys);
+                        entity.METERING_STANDARD_DEVICE.Add(sys);
+                    }
+                }
+
+                PREPARE_SCHEME editEntity = repository.EditInst(db, entity);
+
+                if (addMETERING_STANDARD_DEVICEID != null && addMETERING_STANDARD_DEVICEID.Count() > 0)
+                {
+                    foreach (var item in addMETERING_STANDARD_DEVICEID)
+                    {
+                        METERING_STANDARD_DEVICE sys = new METERING_STANDARD_DEVICE { ID = item };
+                        db.METERING_STANDARD_DEVICE.Attach(sys);
+                        editEntity.METERING_STANDARD_DEVICE.Add(sys);
+                        count++;
+                    }
+                }
+                if (deleteMETERING_STANDARD_DEVICEID != null && deleteMETERING_STANDARD_DEVICEID.Count() > 0)
+                {
+                    foreach (METERING_STANDARD_DEVICE item in listEntityMETERING_STANDARD_DEVICE)
+                    {
+                        editEntity.METERING_STANDARD_DEVICE.Remove(item);
+                        count++;
+                    }
+                }
+                repository.Save(db);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                validationErrors.Add(ex.Message);
+                ExceptionsHander.WriteExceptions(ex);
+            }
+            return false;
+        }
     }
 }
 

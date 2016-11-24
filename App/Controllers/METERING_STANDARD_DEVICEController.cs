@@ -33,9 +33,9 @@ namespace Langben.App.Controllers
         /// 列表
         /// </summary>
         /// <returns></returns>
-        public ActionResult IndexSef()
+        public ActionResult IndexSef(string id)
         {
-
+            ViewBag.shiyanshi = id;
             return View();
         }
 

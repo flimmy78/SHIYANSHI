@@ -269,6 +269,13 @@ namespace Langben.App.Controllers
                 prepShow.SCHEMENAME = prme.SCHEME.NAME;//  选择方案模板
                 prepShow.SCHEMEID = prme.SCHEME.ID;//  选择方案模板
             }
+            if (prme != null && prme.METERING_STANDARD_DEVICE != null)
+            {
+                foreach (var item in prme.METERING_STANDARD_DEVICE)
+                {
+                    prepShow.METERING_STANDARD_DEVICEID += item.ID + "&" + item.NAME + "^";
+                }
+            }
             foreach (var item in prme.APPLIANCE_LABORATORY)
             {
                 if (item.RECYCLING != null)
@@ -295,6 +302,7 @@ namespace Langben.App.Controllers
             prepShow.DETECTERID = prme.DETECTERID;//核验员
             prepShow.OTHER = prme.OTHER;//其他 
             prepShow.ID = prme.ID;//id
+            
             #region 标准装置/计量标准器相关数据
             prepShow.METERING_STANDARD_DEVICEShow = mete.Select(m => new METERING_STANDARD_DEVICEShow
             {
