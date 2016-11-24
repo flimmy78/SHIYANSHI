@@ -1,6 +1,6 @@
 <TableTemplates>
 	<TableTemplateList>
-    <!--数表三相-->
+    <!--数表三相原始记录数据配置-->
 		<TableTemplate>
 			<!--输入格式-->
 			<RuleID>38-1987_2_1</RuleID>
@@ -8305,7 +8305,7 @@
 				</Cell>
 			</CellList>
 		</TableTemplate>
-    <!--数表单相-->
+    <!--数表单相原始记录数据配置-->
     <TableTemplate>
 			<!--输入格式-->
 			<RuleID>315-1983_2_5</RuleID>
