@@ -141,7 +141,7 @@
 		</SpecialCharacter>
 		<SpecialCharacter>
 			<!--特殊字符-->
-			<Code>U112</Code>
+			<Code>U12</Code>
 			<!--下标后几位，如果没有填-1-->
 			<SubscriptLastCount>2</SubscriptLastCount>
 		</SpecialCharacter>
