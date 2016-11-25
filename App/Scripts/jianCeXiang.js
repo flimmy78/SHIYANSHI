@@ -356,20 +356,29 @@ function BtnInit() {
 
     if (PREPARE_SCHEMEID.trim() != "")//数据录入
     {
-        $("#btnDuoTongDao").hide();
-        //$("#btnSave").hide();
-        $("#btnReset").hide();
-        $("#btnAddLiangCheng").hide();
-        //$("#btnSave_ITE").show();
-        $("#btnReset_ITE").show();
+        //$("#btnDuoTongDao").hide();
+        ////$("#btnSave").hide();
+        //$("#btnReset").hide();
+        //$("#btnAddLiangCheng").hide();
+        ////$("#btnSave_ITE").show();
+        //$("#btnReset_ITE").show();
+        $("a").each(function () {          
+            if (this.id != "btnSave") {
+                $(this).hide();
+            }
+            else {
+                $(this).show();
+            }
+        });       
+
     }
     else//方案设置
     {
 
         //$("#btnSave").show();
-        $("#btnReset").show();
+        //$("#btnReset").show();
         //$("#btnSave_ITE").hide();
-        $("#btnReset_ITE").hide();
+        //$("#btnReset_ITE").hide();
     }
 }
 //数据验证
