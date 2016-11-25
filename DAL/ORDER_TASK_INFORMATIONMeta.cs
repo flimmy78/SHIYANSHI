@@ -104,7 +104,13 @@ namespace Langben.DAL
         [Display(Name = "修改人", Order = 21)]
         public object UPDATEPERSON { get; set; }
 
+        [ScaffoldColumn(true)]
+        [Display(Name = "送检单位隐藏字段", Order = 22)]
+        public object INSPECTION_ENTERPRISEHELLD { get; set; }
 
+        [ScaffoldColumn(true)]
+        [Display(Name = "证书单位隐藏字段", Order = 23)]
+        public object CERTIFICATE_ENTERPRISEHELLD { get; set; }
     }
 }
 

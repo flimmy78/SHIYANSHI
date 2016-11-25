@@ -44,6 +44,8 @@ namespace Langben.DAL
         public string UPDATEPERSON { get; set; }
         public Nullable<decimal> ORSERIALNUMBER { get; set; }
         public string ORYEARS { get; set; }
+        public string INSPECTION_ENTERPRISEHELLD { get; set; }
+        public string CERTIFICATE_ENTERPRISEHELLD { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<APPLIANCE_DETAIL_INFORMATION> APPLIANCE_DETAIL_INFORMATION { get; set; }
