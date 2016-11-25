@@ -141,7 +141,7 @@
 		</SpecialCharacter>
 		<SpecialCharacter>
 			<!--特殊字符-->
-			<Code>U112</Code>
+			<Code>U12</Code>
 			<!--下标后几位，如果没有填-1-->
 			<SubscriptLastCount>2</SubscriptLastCount>
 		</SpecialCharacter>
@@ -666,6 +666,12 @@
       <Code>Pn</Code>
       <!--下标后几位，如果没有填-1-->
       <SubscriptLastCount>1</SubscriptLastCount>
+    </SpecialCharacter>
+    <SpecialCharacter>
+      <!--特殊字符-->
+      <Code>sinφ</Code>
+      <!--下标后几位，如果没有填-1-->
+      <SubscriptLastCount>-1</SubscriptLastCount>
     </SpecialCharacter>
 	</SpecialCharacterList>
 </SpecialCharacters>

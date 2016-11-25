@@ -8,18 +8,26 @@
 <thead>
     <!--表头-->
     <tr>
+        <td colspan="8">
+            <input id="shurufanwei_1_1_1" name="shurufanwei" type="text" class="my-textbox tc" value="50" style="width:50px">
+            Hz
+        </td>
+    </tr>
+    <tr>
         <th align="center" width="140">量程</th>
-        <th width="140" align="center">标准值</th>
+        <th width="140" align="center">是否使用变换器</th>
+        <th width="140" align="center"> 输出示值</th>
         <th width="140" align="center">频率</th>
-        <th width="140" align="center"> 显示值</th>
-
+        <th width="140" align="center">读数值</th>
+        <th width="140" align="center">输出实际值</th>
         <th width="140" align="center">相对误差(%)</th>
         <th align="center">
             校准结果的不确定度<br>
-            U(K = <select class="my-combobox" name="K" id="K_t_1_1">
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="√3">√3</option>
+            U(K =
+            <select class="my-combobox" name="state" id="">
+                <option value="">2 </option>
+                <option value="">3</option>
+                <option value="">√3</option>
             </select>
             )
         </th>
@@ -28,6 +36,7 @@
 </thead>
 
 <tbody id="tbody_moban">
+   
     <!--表体-->
     <!--插入行的位置-->
 </tbody>
@@ -35,7 +44,7 @@
 <tfoot>
     <!--表尾-->
     <tr>
-        <td colspan="7">
+        <td colspan="8">
             <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
             <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加量程</a>
 
@@ -55,6 +64,7 @@
         }
         //增加行
         function CreateRow() {
+
 
             var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
             var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
@@ -83,28 +93,28 @@
                 if (rowidx == 0) {
                     //需要合并的列 //量程
 
-                    htmlString.push(SetTDHtml(txtPoint, "READVALUE", HangHaoID, rowidx, txtNumber, ""));
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE", HangHaoID, rowidx, txtNumber, ""));
+                    //选用电阻阻值   （Ω）
+                    htmlString.push(SetTDHtml(txtPoint, "OUTPUTVALUE", HangHaoID, rowidx, '', ""));
 
                 }
 
-                //需要合并的列
 
+                //输出示值 增加下拉框单位A
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "@((ViewBag.canshu == "相对误差") ? "resetBiaoZhunZhi" : "jueDuiWuChaBiaoZhunZhi")"));
 
-                //标准值 增加下拉框单位V
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, '', "classstyle100", "", "resetXianShiZhi"));
+                //读数值 增加下拉框单位V
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx));
 
-                //赫兹 增加下拉框单位赫兹
-                htmlString.push(SetTDHtml(rowspan, "HZMY", HangHaoID, rowidx, '', "classstyle100"));
-
-                //显示值 增加下拉框单位V
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100", '', "resetBiaoZhunZhi"));
+                //输出实际值
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "", '', "@((ViewBag.canshu == "相对误差") ? "resetBiaoZhunZhi" : "jueDuiWuChaBiaoZhunZhi")"));
 
                 //相对误差
-                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', ""));
 
 
                 //校准结果的不确定度 U(K =
-                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', "classstyle"));
+                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', ""));
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
@@ -112,26 +122,40 @@
             var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
             $('#dlg').window('close');//关闭弹出框
+
             $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
 
+        function shiJiZhi(obj)
+        {
+
+           // 输出实际值计算：【是否使用变换器】有数值时，输出实际值= 读数值 / 1.5*量程值；【是否使用变换器】没有数值时，输出实际值=读数值
+                var duShuZhi = $(obj).parents('tr:eq(0)').find('td:eq(4) input').val() == "" ? "" : parseFloat($(obj).parents('tr:eq(0)').find('td:eq(4) input').val());
+                var liangChengZhi = $(obj).parents('tr:eq(0)').find('td:eq(0) input').val() == "" ? "" : parseFloat($(obj).parents('tr:eq(0)').find('td:eq(0) input').val());
+                if (duShuZhi == "" || liangChengZhi == "") $(obj).parents('tr:eq(0)').find('td:eq(5) input').val("")
+                else
+                    $(obj).parents('tr:eq(0)').find('td:eq(5) input').val(fomatFloat((duShuZhi) / 1.5 * liangChengZhi, 1));
+                JsxiangDuiWuCha(obj);
+
+        }
+
         //计算显示值
-        function resetXianShiZhi(obj) {
-            //重新计算当前行
-            xiangDuiWuCha1(obj, "SHIJISHUCHUZHI", "RELATIVEERROR");
-        }
-        //计算标准值
-        function resetBiaoZhunZhi(obj, source, gold) {
-            //重新计算当前行
-            xiangDuiWuCha2(obj, "ACTUALVALUE", "RELATIVEERROR");
+        function JsxiangDuiWuCha(obj) {
+            //【相对误差】=（输出示值-输出实际值）/输出示值*100%，
+            var shuChuShiZhi = $(obj).parents('tr:eq(0)').find('td:eq(2) input').val() == "" ? "" : parseFloat($(obj).parents('tr:eq(0)').find('td:eq(2) input').val());
+            var shuChuShiJiZhi = $(obj).parents('tr:eq(0)').find('td:eq(5) input').val() == "" ? "" : parseFloat($(obj).parents('tr:eq(0)').find('td:eq(5) input').val());
+            if (shuChuShiZhi == "" || shuChuShiZhi == "") $(obj).parents('tr:eq(0)').find('td:eq(6) input').val("")
+            else
+                $(obj).parents('tr:eq(0)').find('td:eq(6) input').val(fomatFloat((shuChuShiZhi - shuChuShiJiZhi) / shuChuShiZhi * 100, 1));
 
         }
-
         //离开事件，用于计算
         function blurValue(obj) {
 
             //   LianDongShiJiZhi(obj);
         }
+
+
 
 
     </script>

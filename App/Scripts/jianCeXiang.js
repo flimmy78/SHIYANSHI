@@ -607,7 +607,7 @@ function fomatFloat(src, pos) {
 }
 
 
-//第1列的事件
+//第1列的事件  未来作废
 //source第2列的名称
 function xiangDuiWuCha1(obj, source, gold) {
 
@@ -628,7 +628,7 @@ function xiangDuiWuCha1(obj, source, gold) {
         $(obj).parent().parent().find("#" + gold + id).val(data);
     }
 }
-//第2列的事件
+//第2列的事件 未来作废
 //source第1列的名称
 function xiangDuiWuCha2(obj, source, gold) {
 
