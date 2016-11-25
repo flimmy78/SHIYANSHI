@@ -537,6 +537,8 @@
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="ORSERIALNUMBER" Type="number" Precision="38" Scale="0" />
           <Property Name="ORYEARS" Type="varchar2" MaxLength="200" />
+          <Property Name="INSPECTION_ENTERPRISEHELLD" Type="varchar2" MaxLength="200" />
+          <Property Name="CERTIFICATE_ENTERPRISEHELLD" Type="nvarchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="OVERALL_TABLE">
           <Key>
@@ -3651,6 +3653,8 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ORSERIALNUMBER" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="ORYEARS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="INSPECTION_ENTERPRISEHELLD" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CERTIFICATE_ENTERPRISEHELLD" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="APPLIANCE_DETAIL_INFORMATION" Relationship="Model.FK_APPLIANC_REFERENCE_ORDER_TA" FromRole="ORDER_TASK_INFORMATION" ToRole="APPLIANCE_DETAIL_INFORMATION" />
           <NavigationProperty Name="SIGN" Relationship="Model.FK_SIGN_REFERENCE_ORDER_TA" FromRole="ORDER_TASK_INFORMATION" ToRole="SIGN" />
         </EntityType>
@@ -5842,6 +5846,8 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
           <EntitySetMapping Name="ORDER_TASK_INFORMATION">
             <EntityTypeMapping TypeName="Model.ORDER_TASK_INFORMATION">
               <MappingFragment StoreEntitySet="ORDER_TASK_INFORMATION">
+                <ScalarProperty Name="CERTIFICATE_ENTERPRISEHELLD" ColumnName="CERTIFICATE_ENTERPRISEHELLD" />
+                <ScalarProperty Name="INSPECTION_ENTERPRISEHELLD" ColumnName="INSPECTION_ENTERPRISEHELLD" />
                 <ScalarProperty Name="ORYEARS" ColumnName="ORYEARS" />
                 <ScalarProperty Name="ORSERIALNUMBER" ColumnName="ORSERIALNUMBER" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
