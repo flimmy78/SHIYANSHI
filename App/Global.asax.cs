@@ -13,7 +13,7 @@ namespace App
     public class MvcApplication : System.Web.HttpApplication
     {
         /// <summary>
-        /// 解决BaseApiController中的HttpContext.Current.Session为null问题
+        /// 解决BaseApiController中的HttpContext.Current.Session为null问题 zhangerhu
         /// </summary>
         public override void Init()
         {
