@@ -142,84 +142,154 @@ namespace Langben.App.Controllers
         [System.Web.Http.HttpPost]
         public Common.ClientResult.Result Post([FromBody]PREPARE_SCHEME entity)
         {
-            Common.Account account = GetCurrentAccount();
-            string putid = entity.ID;
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
-            if (entity != null && ModelState.IsValid)
+            try
             {
-                //if (entity.ID != null && string.IsNullOrWhiteSpace(entity.SCHEMEID))
-                //{
-                //    result.Code = Common.ClientCode.FindNull;
-                //    result.Message = Suggestion.InsertFail + "，请选择方案模板"; //提示输入的数据的格式不对 
-                //    return result;
-                //}
-                string currentPerson = GetCurrentPerson();
-                entity.CREATETIME = DateTime.Now;
-                entity.CREATEPERSON = currentPerson;
-                //修改证书编号
-                entity.ID = Result.GetNewId();
-                string returnValue = string.Empty;
-                APPLIANCE_LABORATORY app = new APPLIANCE_LABORATORY();
-                app.ID = entity.APPLIANCE_LABORATORYID;
-                app.PREPARE_SCHEMEID = entity.ID;
-                if (!string.IsNullOrEmpty(putid))//判断是否为第二次进入
+                Common.Account account = GetCurrentAccount();
+                string putid = entity.ID;
+
+                if (entity != null && ModelState.IsValid)
                 {
-                    //修改
-                    entity.ID = putid;
-                    if (m_BLL.EditField(ref validationErrors, entity) && m_BLL.UPTSerialNumber(entity.ID))
+                    string currentPerson = GetCurrentPerson();
+                    entity.CREATETIME = DateTime.Now;
+                    entity.CREATEPERSON = currentPerson;
+                    //修改证书编号
+                    entity.ID = Result.GetNewId();
+                    string returnValue = string.Empty;
+                    APPLIANCE_LABORATORY app = new APPLIANCE_LABORATORY();
+                    if (string.IsNullOrWhiteSpace(entity.APPLIANCE_LABORATORYID))
                     {
-                        LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，预备方案信息的Id为" + entity.ID, "预备方案"
-                            );//写入日志                   
-                        result.Code = Common.ClientCode.Succeed;
-                        result.Message = Suggestion.UpdateSucceed;
-                        result.Id = entity.ID;
+                        LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，中间表没有id" + entity.ID, "预备方案表数据保存");//写入日志 
+                        result.Code = Common.ClientCode.Fail;
+                        result.Message = "中间表ID没取到";
                         return result; //提示更新成功 
+                    }
+                    app.ID = entity.APPLIANCE_LABORATORYID;
+                    app.PREPARE_SCHEMEID = entity.ID;
+                    if (!string.IsNullOrEmpty(putid))//判断是否为第二次进入
+                    {
+                        //修改
+                        entity.ID = putid;
+                        if (m_BLL.EditField(ref validationErrors, entity) && m_BLL.UPTSerialNumber(entity.ID))
+                        {
+                            LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，预备方案信息修改" + entity.ID, "预备方案");//写入日志                  
+                            result.Code = Common.ClientCode.Succeed;
+                            result.Message = Suggestion.UpdateSucceed;
+                            result.Id = entity.ID;
+                            return result; //提示更新成功 
+                        }
+                        else
+                        {
+                            if (validationErrors != null && validationErrors.Count > 0)
+                            {
+                                validationErrors.All(a =>
+                                {
+                                    returnValue += a.ErrorMessage;
+                                    return true;
+                                });
+                            }
+                            LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，预备方案信息的Id为" + entity.ID + "," + returnValue, "预备方案"
+                                );//写入日志   
+                            result.Code = Common.ClientCode.Fail;
+                            result.Message = Suggestion.UpdateFail + returnValue;
+                            return result; //提示更新失败
+                        }
                     }
                     else
                     {
-                        if (validationErrors != null && validationErrors.Count > 0)
+                        try
                         {
-                            validationErrors.All(a =>
+                            if (m_BLL.Create(ref validationErrors, entity))
                             {
-                                returnValue += a.ErrorMessage;
-                                return true;
-                            });
+                                LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，预备方案的信息的Id为" + entity.ID, "预备方案保存");//写入日志 
+                                result.Code = Common.ClientCode.Succeed;
+                                result.Id = entity.ID;
+                            }
+                            else
+                            {
+                                if (validationErrors != null && validationErrors.Count > 0)
+                                {
+                                    validationErrors.All(a =>
+                                    {
+                                        returnValue += a.ErrorMessage;
+                                        return true;
+                                    });
+                                }
+                                result.Code = Common.ClientCode.Fail;
+                                result.Message = returnValue + "预备方案添加数据出错!";
+                                result.Id = entity.ID;
+                                return result;
+                            }
                         }
-                        LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，预备方案信息的Id为" + entity.ID + "," + returnValue, "预备方案"
-                            );//写入日志   
-                        result.Code = Common.ClientCode.Fail;
-                        result.Message = Suggestion.UpdateFail + returnValue;
-                        return result; //提示更新失败
-                    }
-                }
-                //新增
-                if (m_BLL.Create(ref validationErrors, entity) && m_BLL2.EditField(ref validationErrors, app) && m_BLL.UPTSerialNumber(entity.ID))
-                {
-                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，预备方案的信息的Id为" + entity.ID, "预备方案"
-                        );//写入日志 
-                    result.Code = Common.ClientCode.Succeed;
-                    result.Message = Suggestion.InsertSucceed;
-                    result.Id = entity.ID;
-                    return result; //提示创建成功
-                }
-                else
-                {
-                    if (validationErrors != null && validationErrors.Count > 0)
-                    {
-                        validationErrors.All(a =>
+                        catch (Exception ex)
                         {
-                            returnValue += a.ErrorMessage;
-                            return true;
-                        });
-                    }
-                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，预备方案的信息，" + returnValue, "预备方案"
-                        );//写入日志                      
-                    result.Code = Common.ClientCode.Fail;
-                    result.Message = Suggestion.InsertFail + returnValue;
-                    return result; //提示插入失败
-                }
-            }
+                            validationErrors.Add(ex.Message);
+                            ExceptionsHander.WriteExceptions(ex);
+                        }
 
+                        if (m_BLL2.EditField(ref validationErrors, app))
+                        {
+                            LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，中间表出错了" + app.ID, "中间表修改");//写入日志 
+                            result.Code = Common.ClientCode.Succeed;
+                            result.Id = entity.ID;
+                        }
+                        else
+                        {
+                            result.Code = Common.ClientCode.Fail;
+                            result.Message = validationErrors + "中间表修改出错了!";
+                            result.Id = entity.ID;
+                            return result;
+                        }
+                        if (m_BLL.UPTSerialNumber(entity.ID))
+                        {
+                            LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，修改编号" + entity.ID, "修改编号");//写入日志 
+                            result.Code = Common.ClientCode.Succeed;
+                            result.Id = entity.ID;
+                        }
+                        else
+                        {
+                            result.Code = Common.ClientCode.Fail;
+                            result.Message = validationErrors + "修改编号出错!";
+                            result.Id = entity.ID;
+                            return result;
+                        }
+                        return result;
+                    }
+                    //新增
+                    //if (m_BLL.Create(ref validationErrors, entity) && m_BLL2.EditField(ref validationErrors, app) && m_BLL.UPTSerialNumber(entity.ID))
+                    //{
+                    //    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，预备方案的信息的Id为" + entity.ID, "预备方案"
+                    //        );//写入日志 
+                    //    result.Code = Common.ClientCode.Succeed;
+                    //    result.Message = Suggestion.InsertSucceed;
+                    //    result.Id = entity.ID;
+                    //    return result; //提示创建成功
+                    //}
+
+                    //else
+                    //{
+                    //    if (validationErrors != null && validationErrors.Count > 0)
+                    //    {
+                    //        validationErrors.All(a =>
+                    //        {
+                    //            returnValue += a.ErrorMessage;
+                    //            return true;
+                    //        });
+                    //    }
+                    //    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，预备方案的信息，" + returnValue, "预备方案"
+                    //        );//写入日志                      
+                    //    result.Code = Common.ClientCode.Fail;
+                    //    result.Message = Suggestion.InsertFail + returnValue;
+                    //    return result; //提示插入失败
+                    //}
+                }
+
+            }
+            catch (Exception ex)
+            {
+                validationErrors.Add(ex.Message);
+                ExceptionsHander.WriteExceptions(ex);
+            }
             result.Code = Common.ClientCode.FindNull;
             result.Message = Suggestion.InsertFail + "，请核对输入的数据的格式"; //提示输入的数据的格式不对 
             return result;
@@ -345,7 +415,7 @@ namespace Langben.App.Controllers
 
                 string returnValue = string.Empty;
 
-                
+
                 if (m_BLL.EditInst(ref validationErrors, entity))
                 {
                     LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，预备方案信息的Id为" + entity.ID, "预备方案"
