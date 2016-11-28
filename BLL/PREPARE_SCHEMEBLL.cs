@@ -163,7 +163,6 @@ namespace Langben.BLL
                 validationErrors.Add(ex.HelpLink);
                 validationErrors.Add(ex.HResult.ToString());
 
-
                 if (ex.InnerException!=null&&!string.IsNullOrWhiteSpace(ex.InnerException.Message))
                 {
                     validationErrors.Add(ex.InnerException.Message);
@@ -179,9 +178,7 @@ namespace Langben.BLL
                 if (ex.InnerException != null && null!=(ex.InnerException.TargetSite))
                 {
                     validationErrors.Add(ex.InnerException.TargetSite.Name);
-                }
-                
-
+                }               
 
                 if (ex.Data != null)
                 {
@@ -189,19 +186,36 @@ namespace Langben.BLL
                 }
                 if (ex.Data != null)
                 {
-                    
+                    foreach (KeyValuePair<string, string> kvp in ex.Data.Keys)
+                    {
+                        validationErrors.Add(string.Format("姓名：{0},电影：{1}", kvp.Key, kvp.Value));                       
+                    }
                 }
-
-
 
                 if (ex.TargetSite != null)
                 {
-                  
+                    validationErrors.Add(ex.TargetSite.Name);
                 }
-
-
-
-
+                if (ex.TargetSite != null)
+                {
+                    validationErrors.Add(ex.TargetSite.ReflectedType.ToString());
+                }
+                if (ex.TargetSite != null)
+                {
+                    validationErrors.Add(ex.TargetSite.Module.ToString());
+                }
+                if (ex.TargetSite != null)
+                {
+                    validationErrors.Add(ex.TargetSite.MethodImplementationFlags.ToString());
+                }
+                if (ex.TargetSite != null)
+                {
+                    validationErrors.Add(ex.TargetSite.MethodHandle.ToString());
+                }
+                if (ex.TargetSite != null)
+                {
+                    validationErrors.Add(ex.TargetSite.MetadataToken.ToString());
+                }
                 ExceptionsHander.WriteExceptions(ex);                
             }
             return false;

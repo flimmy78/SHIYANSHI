@@ -118,22 +118,29 @@ namespace Langben.App.Controllers
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             try
             {
-
-
                 string currentPerson = GetCurrentPerson();
                 if (string.IsNullOrWhiteSpace(entity.ID))
                 {
                     List<COMPANY> companylist = m_BLL2.GetByParam(null, "asc", "ID", "COMPANYNAME&" + entity.INSPECTION_ENTERPRISE + "");
+                    List<COMPANY> companylist2 = m_BLL2.GetByParam(null, "asc", "ID", "COMPANYNAME&" + entity.CERTIFICATE_ENTERPRISE + "");
+
+
                     foreach (var item in companylist)
                     {
-                        if (item.PARENTID != null)
+                        if (item.COMPANY2 != null)
                         {
-                            COMPANY company = m_BLL2.GetById(item.PARENTID);
-                            
+                            entity.INSPECTION_ENTERPRISEHELLD = item.COMPANY2.COMPANYNAME;
+                            break;
                         }
-
                     }
-
+                    foreach (var item in companylist2)
+                    {
+                        if (item.COMPANY2 != null)
+                        {
+                            entity.CERTIFICATE_ENTERPRISEHELLD = item.COMPANY2.COMPANYNAME;
+                            break;
+                        }
+                    }
                     string ORDER_NUMBER = m_BLL.GetORDER_NUMBER(ref validationErrors);
                     var order = ORDER_NUMBER.Split('*');// DC2016001 * 1 * 2016
                     entity.ORDER_STATUS = Common.ORDER_STATUS_INFORMATION.保存.ToString();
