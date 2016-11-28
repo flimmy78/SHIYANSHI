@@ -158,6 +158,50 @@ namespace Langben.BLL
             catch (Exception ex)
             {
                 validationErrors.Add(ex.Message);
+                validationErrors.Add(ex.Source);
+                validationErrors.Add(ex.StackTrace);
+                validationErrors.Add(ex.HelpLink);
+                validationErrors.Add(ex.HResult.ToString());
+
+
+                if (ex.InnerException!=null&&!string.IsNullOrWhiteSpace(ex.InnerException.Message))
+                {
+                    validationErrors.Add(ex.InnerException.Message);
+                }
+                if (ex.InnerException != null && !string.IsNullOrWhiteSpace(ex.InnerException.Source))
+                {
+                    validationErrors.Add(ex.InnerException.Source);
+                }
+                if (ex.InnerException != null && !string.IsNullOrWhiteSpace(ex.InnerException.StackTrace))
+                {
+                    validationErrors.Add(ex.InnerException.StackTrace);
+                }
+                if (ex.InnerException != null && null!=(ex.InnerException.TargetSite))
+                {
+                    validationErrors.Add(ex.InnerException.TargetSite.Name);
+                }
+                
+
+
+                if (ex.Data != null)
+                {
+                    validationErrors.Add(ex.Data.Count.ToString());
+                }
+                if (ex.Data != null)
+                {
+                    
+                }
+
+
+
+                if (ex.TargetSite != null)
+                {
+                  
+                }
+
+
+
+
                 ExceptionsHander.WriteExceptions(ex);                
             }
             return false;
