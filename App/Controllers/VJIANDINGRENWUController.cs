@@ -44,8 +44,7 @@ namespace Langben.App.Controllers
             string Id = string.Empty;//预备方案表ID
             string APPLIANCE_LABORATORYID = string.Empty;//器具明细信息_承接实验室ID
             APPLIANCE_DETAIL_INFORMATION appl = m_BLL5.GetById(id);
-            ICollection<APPLIANCE_LABORATORY> ory = appl.APPLIANCE_LABORATORY;
-            foreach (var item in ory)
+            foreach (var item in appl.APPLIANCE_LABORATORY)
             {
                 if (account.UNDERTAKE_LABORATORYName == item.UNDERTAKE_LABORATORYID)
                 {
@@ -82,11 +81,12 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult BaoGaoShangChuan(string id)
         {
+
             string[] bs = id.Split('|');
             ViewBag.PREPARE_SCHEMEID = bs[0];
             PREPARE_SCHEME prepare = m_BLL3.GetById(bs[0]);
-            // List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(bs[0]);
 
+            // List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(bs[0]);
             foreach (var item in prepare.FILE_UPLOADER)
             {
                 ViewBag.NAME2 = item.NAME2;
@@ -286,7 +286,7 @@ namespace Langben.App.Controllers
                 {
                     prepShow.REPORTNUMBER = m_BLL3.GetSerialNumber(PREPARE_SCHEMEID);//报告编号
                 }
-            }      
+            }
             prepShow.APPLIANCE_DETAIL_INFORMATIONShows.APPLIANCE_NAME = appion.APPLIANCE_NAME;//器具名称
             prepShow.APPLIANCE_DETAIL_INFORMATIONShows.VERSION = appion.VERSION;//器具型号
             prepShow.APPLIANCE_DETAIL_INFORMATIONShows.FORMAT = appion.FORMAT;//器具规格
@@ -302,7 +302,7 @@ namespace Langben.App.Controllers
             prepShow.DETECTERID = prme.DETECTERID;//核验员
             prepShow.OTHER = prme.OTHER;//其他 
             prepShow.ID = prme.ID;//id
-            
+
             #region 标准装置/计量标准器相关数据
             prepShow.METERING_STANDARD_DEVICEShow = mete.Select(m => new METERING_STANDARD_DEVICEShow
             {

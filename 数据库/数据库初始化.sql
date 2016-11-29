@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 11g                           */
-/* Created on:     2016/9/14 18:32:25                           */
+/* Created on:     2016/11/25 20:07:53                          */
 /*==============================================================*/
 
 
@@ -21,9 +21,6 @@ alter table APPLIANCE_DETAIL_INFORMATION
 
 alter table APPLIANCE_LABORATORY
    drop constraint FK_APPLIANC_REFERENCE_PREPARE_;
-
-alter table APPLIANCE_LABORATORY
-   drop constraint FK_APPLIANC_REFERENCE_UNDERTAK;
 
 alter table APPLIANCE_LABORATORY
    drop constraint FK_APPLIANC_REFERENCE_APPLIAN2;
@@ -64,9 +61,6 @@ alter table FILE_UPLOADER
 alter table FREQUENCY
    drop constraint FK_FREQUENC_REFERENCE_OVERALL_;
 
-alter table METERING_STANDARD_DEVICE
-   drop constraint FK_METERING_REFERENCE_UNDERTAK;
-
 alter table METERING_STANDARD_DEVICEPREPAR
    drop constraint FK_PREPARE_SCHEME_REF;
 
@@ -86,16 +80,16 @@ alter table PRINTREPORT
    drop constraint FK_PRINTREP_REFERENCE_PREPARE_;
 
 alter table PROJECTTEMPLET
-   drop constraint FK_PROJECTT_REFERENCE_SCHEME_R;
+   drop constraint FK_PROJECTT_REFERENCE_RULE;
+
+alter table PROJECTTEMPLET
+   drop constraint FK_PROJECTT_REFERENCE_SCHEME;
 
 alter table QUALIFIED_UNQUALIFIED_TEST_ITE
    drop constraint FK_QUALIFIED_UN;
 
 alter table REPORTCOLLECTION
    drop constraint FK_REPORTCO_REFERENCE_PREPARE_;
-
-alter table RULE
-   drop constraint FK_RULE_REFERENCE_UNDERTAK;
 
 alter table RULE
    drop constraint FK_RULE_REFERENCE_RULE;
@@ -108,6 +102,9 @@ alter table SCHEME_RULE
 
 alter table SCHEME_RULE
    drop constraint FK_SCHEME_R_REFERENCE_SCHEME;
+
+alter table SIGN
+   drop constraint FK_SIGN_REFERENCE_ORDER_TA;
 
 alter table THREE_PHASE_UNCERTAINTY
    drop constraint FK_THREE_PH_REFERENCE_RULE;
@@ -133,9 +130,18 @@ alter table UNCERTAINTY2_HZ
 alter table UNCERTAINTYPARAMETERMANAGEMENT
    drop constraint FK_UNCERTAI_REFERENCE_RULE;
 
+alter table UNCERTAINTYTABLE
+   drop constraint FK_UNCERTAI_REFERENCE_METERING;
+
+drop view VXIANGQING;
+
+drop view VTEST_ITE;
+
 drop view VSHENPI;
 
 drop view VSHENHE;
+
+drop view VRULE;
 
 drop view VRUKU;
 
@@ -215,6 +221,8 @@ drop table SCHEME cascade constraints;
 
 drop table SCHEME_RULE cascade constraints;
 
+drop table SIGN cascade constraints;
+
 drop table THREE_PHASE_UNCERTAINTY cascade constraints;
 
 drop table TRANSMITER_SIN cascade constraints;
@@ -234,6 +242,8 @@ drop table UNCERTAINTY cascade constraints;
 drop table UNCERTAINTY2_HZ cascade constraints;
 
 drop table UNCERTAINTYPARAMETERMANAGEMENT cascade constraints;
+
+drop table UNCERTAINTYTABLE cascade constraints;
 
 drop table UNDERTAKE_LABORATORY cascade constraints;
 
@@ -313,8 +323,13 @@ comment on column AC_VOLTAGE_CURRENT.REFERENCE_ERROR_UNIT is
 create table ALLOWABLE_ERROR 
 (
    ID                   VARCHAR2(36)         not null,
-   VALUE                VARCHAR2(200),
-   UNIT                 VARCHAR2(200),
+   THEACCURACYLEVEL     VARCHAR2(200),
+   THEUNCERTAINTYVALUEK VARCHAR2(200),
+   THEUNCERTAINTYNDEXL  VARCHAR2(200),
+   THEUNCERTAINTYVALUE  VARCHAR2(200),
+   THEUNCERTAINTY       VARCHAR2(200),
+   MAXVALUE             VARCHAR2(200),
+   MAXCATEGORIES        VARCHAR2(200),
    METERING_STANDARD_DEVICEID VARCHAR2(36),
    CREATETIME           DATE,
    CREATEPERSON         VARCHAR2(200),
@@ -339,6 +354,8 @@ create table APPLIANCECOLLECTION
    UPDATEPERSON         VARCHAR2(200),
    APPLIANCE_DETAIL_INFORMATIONID VARCHAR2(36),
    APPLIANCECOLLECTIONSATE VARCHAR2(200),
+   LABORATORY           VARCHAR2(200),
+   RECEIVEINS           VARCHAR2(200),
    constraint PK_APPLIANCECOLLECTION primary key (ID)
 );
 
@@ -366,13 +383,10 @@ create table APPLIANCE_DETAIL_INFORMATION
    UPDATEPERSON         VARCHAR2(200),
    APPLIANCE_RECIVE     VARCHAR2(200),
    APPLIANCE_PROGRESS   VARCHAR2(200),
-   ORDER_STATUS         VARCHAR2(200),
    ISOVERDUE            VARCHAR2(200),
    OVERDUE              VARCHAR2(200),
    STORAGEINSTRUCTIONS  VARCHAR2(4000),
    STORAGEINSTRUCTI_STATU VARCHAR2(200),
-   EQUIPMENT_STATUS_VALUUMN VARCHAR2(200),
-   RETURN_INSTRUCTIONS  VARCHAR2(4000),
    constraint PK_APPLIANCE_DETAIL_INFORMATIO primary key (ID)
 );
 
@@ -403,17 +417,11 @@ comment on column APPLIANCE_DETAIL_INFORMATION.END_PLAN_DATE is
 comment on column APPLIANCE_DETAIL_INFORMATION.APPLIANCE_RECIVE is
 'DropDown';
 
-comment on column APPLIANCE_DETAIL_INFORMATION.ORDER_STATUS is
-'已分配、已归档DropDownResearch';
-
 comment on column APPLIANCE_DETAIL_INFORMATION.ISOVERDUE is
 '是、否DropDownResearch';
 
 comment on column APPLIANCE_DETAIL_INFORMATION.STORAGEINSTRUCTI_STATU is
 'DropDown';
-
-comment on column APPLIANCE_DETAIL_INFORMATION.EQUIPMENT_STATUS_VALUUMN is
-'器具状态值用来进行排序';
 
 /*==============================================================*/
 /* Table: APPLIANCE_LABORATORY                                  */
@@ -421,8 +429,8 @@ comment on column APPLIANCE_DETAIL_INFORMATION.EQUIPMENT_STATUS_VALUUMN is
 create table APPLIANCE_LABORATORY 
 (
    ID                   VARCHAR2(36)         not null,
-   UNDERTAKE_LABORATORYID VARCHAR2(36),
    APPLIANCE_DETAIL_INFORMATIONID VARCHAR2(36),
+   UNDERTAKE_LABORATORYID VARCHAR2(36),
    PREPARE_SCHEMEID     VARCHAR2(36),
    RECEIVEPERSON        VARCHAR2(200),
    RECEIVETIME          DATE,
@@ -432,8 +440,19 @@ create table APPLIANCE_LABORATORY
    DISTRIBUTIONTIME     DATE,
    CREATEPERSON         VARCHAR2(200),
    CREATETIME           DATE,
+   ORDER_STATUS         VARCHAR2(200),
+   EQUIPMENT_STATUS_VALUUMN VARCHAR2(200),
+   RETURN_INSTRUCTIONS  VARCHAR2(4000),
+   ISRECEIVE            VARCHAR2(200),
+   RECYCLING            VARCHAR2(200),
    constraint PK_APPLIANCE_LABORATORY primary key (ID)
 );
+
+comment on column APPLIANCE_LABORATORY.EQUIPMENT_STATUS_VALUUMN is
+'器具状态值用来进行排序';
+
+comment on column APPLIANCE_LABORATORY.RECYCLING is
+'存储证书回收编号';
 
 /*==============================================================*/
 /* Table: COMPANY                                               */
@@ -452,11 +471,15 @@ create table COMPANY
    CREATEPERSON         VARCHAR2(200),
    UPDATETIME           DATE,
    UPDATEPERSON         VARCHAR2(200),
+   CATEGORY             VARCHAR2(200),
    constraint PK_COMPANY primary key (ID)
 );
 
 comment on column COMPANY.ID is
 '标识';
+
+comment on column COMPANY.CATEGORY is
+'分辨是证书单位还是送检单位';
 
 /*==============================================================*/
 /* Table: CROSS_COS                                             */
@@ -903,13 +926,15 @@ create table METERING_STANDARD_DEVICE
    NAME                 VARCHAR2(200),
    TEST_RANGE           VARCHAR2(200),
    FACTORY_NUM          VARCHAR2(200),
+   XINGHAO              VARCHAR2(200),
    CATEGORY             VARCHAR2(200),
-   STATUS               VARCHAR2(200),
    UNDERTAKE_LABORATORYID VARCHAR2(36),
+   STATUS               VARCHAR2(200),
    CREATETIME           DATE,
    CREATEPERSON         VARCHAR2(200),
    UPDATETIME           DATE,
    UPDATEPERSON         VARCHAR2(200),
+   THESUPERIOR          VARCHAR2(36),
    constraint PK_METERING_STANDARD_DEVICE primary key (ID)
 );
 
@@ -931,7 +956,8 @@ create table METERING_STANDARD_DEVICEPREPAR
 /*==============================================================*/
 create table METERING_STANDARD_DEVICE_CHECK 
 (
-   ID                   VARCHAR2(200)        not null,
+   ID                   VARCHAR2(36)         not null,
+   CERTIFICATEUNIT      VARCHAR2(200),
    CERTIFICATE_NUM      VARCHAR2(200),
    CHECK_DATE           DATE,
    VALID_TO             DATE,
@@ -951,12 +977,14 @@ create table ORDER_TASK_INFORMATION
    ID                   VARCHAR2(36)         not null,
    ORDER_NUMBER         VARCHAR2(200),
    ACCEPT_ORGNIZATION   VARCHAR2(200),
+   INSPECTION_ENTERPRISEHELLD VARCHAR2(200),
    INSPECTION_ENTERPRISE VARCHAR2(200),
    INSPECTION_ENTERPRISE_ADDRESS VARCHAR2(200),
    INSPECTION_ENTERPRISE_POST VARCHAR2(200),
    CONTACTS             VARCHAR2(200),
    CONTACT_PHONE        VARCHAR2(200),
    FAX                  VARCHAR2(200),
+   CERTIFICATE_ENTERPRISEHELLD VARCHAR2(200),
    CERTIFICATE_ENTERPRISE VARCHAR2(200),
    CERTIFICATE_ENTERPRISE_ADDRESS VARCHAR2(200),
    CERTIFICATE_ENTERPRISE_POST VARCHAR2(200),
@@ -969,6 +997,8 @@ create table ORDER_TASK_INFORMATION
    CREATEPERSON         VARCHAR2(200),
    UPDATETIME           DATE,
    UPDATEPERSON         VARCHAR2(200),
+   ORSERIALNUMBER       INT,
+   ORYEARS              VARCHAR2(200),
    constraint PK_ORDER_TASK_INFORMATION primary key (ID)
 );
 
@@ -1065,7 +1095,7 @@ create table PREPARE_SCHEME
    CALIBRATION_DATE     DATE,
    CONCLUSION           VARCHAR2(200),
    CONCLUSION_EXPLAIN   VARCHAR2(4000),
-   VALIDITY_PERIOD      DATE,
+   VALIDITY_PERIOD      NUMBER,
    CALIBRATION_INSTRUCTIONS VARCHAR2(4000),
    ACCURACY_GRADE       VARCHAR2(200),
    RATED_FREQUENCY      VARCHAR2(200),
@@ -1092,6 +1122,7 @@ create table PREPARE_SCHEME
    SERIALNUMBER         INT,
    YEARS                VARCHAR2(200),
    PACKAGETYPE          VARCHAR2(200),
+   OTHER                VARCHAR2(200),
    constraint PK_PREPARE_SCHEME primary key (ID)
 );
 
@@ -1134,7 +1165,8 @@ create table PRINTREPORT
 create table PROJECTTEMPLET 
 (
    ID                   VARCHAR2(36)         not null,
-   SCHEME_RULEID        VARCHAR2(36),
+   RULEID               VARCHAR2(36),
+   SCHEMEID             VARCHAR2(36),
    HTMLVALUE            CLOB,
    CREATETIME           DATE,
    CREATEPERSON         VARCHAR2(200),
@@ -1155,10 +1187,13 @@ create table QUALIFIED_UNQUALIFIED_TEST_ITE
    RULENAME             VARCHAR(200),
    RULENJOINAME         VARCHAR(2000),
    HTMLVALUE            CLOB,
+   REMARK               VARCHAR2(4000),
    CREATETIME           DATE,
    CREATEPERSON         VARCHAR2(200),
    UPDATETIME           DATE,
    UPDATEPERSON         VARCHAR2(200),
+   SORT                 NUMBER,
+   INPUTSTATE           VARCHAR2(200),
    constraint PK_QUALIFIED_UNQUALIFIED_TEST_ primary key (ID)
 );
 
@@ -1184,6 +1219,7 @@ create table REPORTCOLLECTION
    UPDATEPERSON         VARCHAR2(200),
    PREPARE_SCHEMEID     VARCHAR2(36),
    REPORTTORECEVESTATE  VARCHAR2(200),
+   RECEIVEREPORT        VARCHAR2(200),
    constraint PK_REPORTCOLLECTION primary key (ID)
 );
 
@@ -1197,9 +1233,9 @@ create table RULE
    NAME                 VARCHAR2(200),
    SCHEME_MENU          VARCHAR2(200),
    SORT                 NUMBER,
+   UNDERTAKE_LABORATORYID VARCHAR2(36),
    IS_UNCERTAINTY       VARCHAR2(200),
    UNCERTAINTY_MENU     VARCHAR2(200),
-   UNDERTAKE_LABORATORYID VARCHAR2(36),
    INPUTSTATE           VARCHAR2(200),
    PARENTID             VARCHAR2(36),
    CREATETIME           DATE,
@@ -1247,11 +1283,28 @@ create table SCHEME_RULE
    CREATEPERSON         VARCHAR2(200),
    UPDATETIME           DATE,
    UPDATEPERSON         VARCHAR2(200),
+   SORT                 NUMBER,
    constraint PK_SCHEME_RULE primary key (ID)
 );
 
 comment on column SCHEME_RULE.RULEID is
 '标识';
+
+/*==============================================================*/
+/* Table: SIGN                                                  */
+/*==============================================================*/
+create table SIGN 
+(
+   ID                   VARCHAR2(36)         not null,
+   PICTURE              CLOB,
+   ORDER_TASK_INFORMATIONID VARCHAR2(36),
+   HTMLVALUE            CLOB,
+   CREATETIME           DATE,
+   CREATEPERSON         VARCHAR2(200),
+   UPDATETIME           DATE,
+   UPDATEPERSON         VARCHAR2(200),
+   constraint PK_SIGN primary key (ID)
+);
 
 /*==============================================================*/
 /* Table: THREE_PHASE_UNCERTAINTY                               */
@@ -1555,6 +1608,43 @@ comment on column UNCERTAINTYPARAMETERMANAGEMENT."k" is
 'DropDown';
 
 /*==============================================================*/
+/* Table: UNCERTAINTYTABLE                                      */
+/*==============================================================*/
+create table UNCERTAINTYTABLE 
+(
+   NOTE                 VARCHAR2(200),
+   INDEX2UNIT           VARCHAR2(200),
+   INDEX2               VARCHAR2(200),
+   INDEX1UNIT           VARCHAR2(200),
+   INDEX1               VARCHAR2(200),
+   ENDRELATIONSHIPFREQUENCY VARCHAR2(200),
+   ENDUNITFREQUENCY     VARCHAR2(200),
+   ENDFREQUENCY         VARCHAR2(200),
+   THERELATIONSHIPFREQUENCY VARCHAR2(200),
+   THEUNITFREQUENCY     VARCHAR2(200),
+   THEFREQUENCY         VARCHAR2(200),
+   ENDRELATIONSHIP      VARCHAR2(200),
+   ENDUNIT              VARCHAR2(200),
+   ENDRANGESCOPE        VARCHAR2(200),
+   THERELATIONSHIP      VARCHAR2(200),
+   THEUNIT              VARCHAR2(200),
+   THERANGESCOPE        VARCHAR2(200),
+   KVALE                VARCHAR2(200),
+   THEERRODISTRIBUTION  VARCHAR2(200),
+   ERRORLIMITUNIT       VARCHAR2(200),
+   ERRORLIMITS          VARCHAR2(200),
+   ERRORSOURCES         VARCHAR2(200),
+   ASSESSMENTITEM       VARCHAR2(200),
+   CREATETIME           DATE,
+   CREATEPERSON         VARCHAR2(200),
+   UPDATETIME           DATE,
+   UPDATEPERSON         VARCHAR2(200),
+   METERING_STANDARD_DEVICEID VARCHAR2(36),
+   ID                   VARCHAR2(36)         not null,
+   constraint PK_UNCERTAINTYTABLE primary key (ID)
+);
+
+/*==============================================================*/
 /* Table: UNDERTAKE_LABORATORY                                  */
 /*==============================================================*/
 create table UNDERTAKE_LABORATORY 
@@ -1571,7 +1661,7 @@ create table UNDERTAKE_LABORATORY
 /*==============================================================*/
 /* View: VBAOGAODAYIN                                           */
 /*==============================================================*/
-create or replace view VBAOGAODAYIN(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, UNDERTAKE_LABORATORYID, APPROVALDATE, BAR_CODE_NUM, PRINTSTATUS) as
+create or replace view VBAOGAODAYIN(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, UNDERTAKE_LABORATORYID, APPROVALDATE, BAR_CODE_NUM, PRINTSTATUS, REPORTSTATUS, REPORTSTATUSZI, PACKAGETYPE, FILECONCLUSION, FULLPATH) as
 select d.ID,
   d.REPORTNUMBER,             --报告编号
   a.ORDER_NUMBER,                  --委托单号
@@ -1621,14 +1711,22 @@ select d.ID,
   c.UNDERTAKE_LABORATORYID, --实验室
   d.APPROVALDATE,           --批准日期
   b.BAR_CODE_NUM,           --条形码
-  d.PRINTSTATUS             --打印状态
+  d.PRINTSTATUS,             --打印状态
+  d.REPORTSTATUS,--报告状态
+  d.REPORTSTATUSZI,--报告状态值
+  d.PACKAGETYPE,--报告类型
+  e.CONCLUSION as FILECONCLUSION,--上传报告结论
+ e.FULLPATH--证书路径
+  
 from PREPARE_SCHEME d
 LEFT join APPLIANCE_LABORATORY c
 on c.PREPARE_SCHEMEID=d.id
 LEFT join APPLIANCE_DETAIL_INFORMATION b
-on b.id=c.APPLIANCE_DETAIL_INFORMATIOID
+on b.id=c.APPLIANCE_DETAIL_INFORMATIONID
 LEFT join ORDER_TASK_INFORMATION a 
 on a.id=b.ORDER_TASK_INFORMATIONID
+left join FILE_UPLOADER e--附件表
+on d.id=e.PREPARE_SCHEMEID
 with read only;
 
 comment on column VBAOGAODAYIN.REPORTNUMBER is
@@ -1666,7 +1764,7 @@ select b.ID, --器具明细id
   b.FACTORY_NUM,                   --出厂编号
   a.CERTIFICATE_ENTERPRISE,        --证书单位
   a.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
-  b.ORDER_STATUS,                  --器具状态
+  c.ORDER_STATUS,                  --器具状态
   a.CREATETIME,                  --送检时间
   b.APPLIANCE_PROGRESS,            --器具进度
   b.OVERDUE,                       --超期原因
@@ -1676,8 +1774,9 @@ select b.ID, --器具明细id
   a.INSPECTION_ENTERPRISE,         --送检单位
   b.ISOVERDUE,                      --是否超期
 u.NAME,--实验室
-b.EQUIPMENT_STATUS_VALUUMN,--状态值
-b.UPDATETIME--器具明细表修改时间
+c.EQUIPMENT_STATUS_VALUUMN,--状态值
+b.UPDATETIME,--器具明细表修改时间
+c.ISRECEIVE--是否领取
 
 
 from APPLIANCE_DETAIL_INFORMATION  b--器具明细
@@ -1733,7 +1832,10 @@ a.CERTIFICATE_ENTERPRISE,--证书单位
 a.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
 a.CREATETIME,--登记时间（送检时间段）
 c.APPLIANCECOLLECTIONSATE,--器具领取状态
-f.REPORTTORECEVESTATE--报告领取状态
+f.REPORTTORECEVESTATE,--报告领取状态
+d.EQUIPMENT_STATUS_VALUUMN,--器具状态值
+e.REPORTSTATUSZI--报告状态值
+
 
 from ORDER_TASK_INFORMATION a--委托单
 LEFT join APPLIANCE_DETAIL_INFORMATION b--器具明细
@@ -1760,20 +1862,22 @@ comment on column VQIJULINGQU1.CREATETIME is
 /*==============================================================*/
 /* View: VQIJULINGQU2                                           */
 /*==============================================================*/
-create or replace view VQIJULINGQU2(ID, APPLIANCE_NAME, VERSION, FACTORY_NUM, NUM, ATTACHMENT, NAME, APPLIANCE_RECIVE, REPORTNUMBER, REMARKS, ORDER_TASK_INFORMATIONID, APPLIANCECOLLECTIONSATE, REPORTTORECEVESTATE) as
+create or replace view VQIJULINGQU2(ID, APPLIANCE_NAME, VERSION, FACTORY_NUM, NUM, ATTACHMENT, UNDERTAKE_LABORATORYID, APPLIANCE_RECIVE, REPORTNUMBER, REMARKS, ORDER_TASK_INFORMATIONID, APPLIANCECOLLECTIONSATE, REPORTTORECEVESTATE, PREPARE_SCHEMEID, REPORTSTATUS) as
 select b.ID,
   b.APPLIANCE_NAME, --器具名称
   b.VERSION,               --型号
   b.FACTORY_NUM,         --出厂编号
   b.NUM,                 --数量
   b.ATTACHMENT,          --附件
-  e.NAME,                --承接实验室
+  c.UNDERTAKE_LABORATORYID,                --承接实验室
   b.APPLIANCE_RECIVE,--器具接收
   d.REPORTNUMBER,--证书编号
   b.REMARKS,             --备注
   b.ORDER_TASK_INFORMATIONID,--委托单id
   g.APPLIANCECOLLECTIONSATE,--器具领取状态
-f.REPORTTORECEVESTATE--报告领取状态
+f.REPORTTORECEVESTATE,--报告领取状态
+d.ID as PREPARE_SCHEMEID,--预备方案id
+d.REPORTSTATUS--报告状态
   
 from APPLIANCE_DETAIL_INFORMATION b--器具明细
 LEFT join  ORDER_TASK_INFORMATION a--委托单
@@ -1784,17 +1888,15 @@ LEFT join APPLIANCE_LABORATORY c--器具明细信息_承接实验室
 on b.id=c.APPLIANCE_DETAIL_INFORMATIONID
 LEFT join PREPARE_SCHEME d--预备方案
 on c.PREPARE_SCHEMEID=d.id
-left join UNDERTAKE_LABORATORY e--实验室表
-on c.UNDERTAKE_LABORATORYID=e.id
 left join REPORTCOLLECTION f--报告领取
-on f.PREPARE_SCHEMEID=e.id
+on f.PREPARE_SCHEMEID=d.id
 with read only;
 
 /*==============================================================*/
 /* View: VRUKU                                                  */
 /*==============================================================*/
-create or replace view VRUKU(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, NAME, ORDER_STATUS, STORAGEINSTRUCTIONS, UNDERTAKE_LABORATORYID, APPROVALDATE, STORAGEINSTRUCTI_STATU, REPORTSTATUS, REPORTSTATUSZI, "b.EQUIPMENT_STATUS_VALUUMNfrom") as
-select b.ID,
+create or replace view VRUKU(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, APPLIANCE_PROGRESS, ORDER_STATUS, STORAGEINSTRUCTIONS, APPROVALDATE, STORAGEINSTRUCTI_STATU, REPORTSTATUS, REPORTSTATUSZI, EQUIPMENT_STATUS_VALUUMN) as
+ select distinct  b.ID, 
   d.REPORTNUMBER,             --报告编号
   a.ORDER_NUMBER,                  --委托单号
   b.APPLIANCE_NAME,                --器具名称
@@ -1802,24 +1904,24 @@ select b.ID,
   b.FACTORY_NUM,                   --出厂编号
   a.CERTIFICATE_ENTERPRISE,        --证书单位
   a.CUSTOMER_SPECIFIC_REQUIREMENTS,--客户特殊要求
-  e.NAME,                          --器具所在实验室
-  b.ORDER_STATUS,                  --器具状态
+  b.APPLIANCE_PROGRESS,                          --器具所在实验室
+  c.ORDER_STATUS,                  --器具状态
   b.STORAGEINSTRUCTIONS,           --入库说明
-  c.UNDERTAKE_LABORATORYID,        --实验室
+  --c.UNDERTAKE_LABORATORYID,        --实验室
   d.APPROVALDATE,                  --批准日期
   b.STORAGEINSTRUCTI_STATU,         --入库状态
   d.REPORTSTATUS,--报告状态
   d.REPORTSTATUSZI,--报告状态值
-  b.EQUIPMENT_STATUS_VALUUMN--器具状态值
+  c.EQUIPMENT_STATUS_VALUUMN--器具状态值
+  
 from APPLIANCE_DETAIL_INFORMATION b
 LEFT join  ORDER_TASK_INFORMATION a
 on a.id=b.ORDER_TASK_INFORMATIONID
-LEFT join APPLIANCE_LABORATORY c
+ join APPLIANCE_LABORATORY c
 on b.id=c.APPLIANCE_DETAIL_INFORMATIONID
 LEFT join PREPARE_SCHEME d
-on c.PREPARE_SCHEMEID=d.id
-left join UNDERTAKE_LABORATORY e
-on c.UNDERTAKE_LABORATORYID=e.id
+on c.PREPARE_SCHEMEID=d.id 
+
 with read only;
 
 comment on column VRUKU.ORDER_NUMBER is
@@ -1828,9 +1930,6 @@ comment on column VRUKU.ORDER_NUMBER is
 comment on column VRUKU.CERTIFICATE_ENTERPRISE is
 'Research';
 
-comment on column VRUKU.UNDERTAKE_LABORATORYID is
-'ResearchDropDown';
-
 comment on column VRUKU.APPROVALDATE is
 'Research';
 
@@ -1838,9 +1937,21 @@ comment on column VRUKU.STORAGEINSTRUCTI_STATU is
 'ResearchDropDown';
 
 /*==============================================================*/
+/* View: VRULE                                                  */
+/*==============================================================*/
+create or replace view VRULE as
+select distinct T2.*,T1.SCHEMEID from SCHEME_RULE T1
+inner join RULE T2 on substr(T1.RULEID,0,instr(T1.RULEID, '_')-1)=T2.ID
+
+with read only;
+
+ comment on table VRULE is
+'用于获取所使用一级规程';
+
+/*==============================================================*/
 /* View: VSHENHE                                                */
 /*==============================================================*/
-create or replace view VSHENHE(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, ISAGGREY, PACKAGETYPE, REPORTSTATUSZI, REPORTSTATUS, FILECONCLUSION) as
+create or replace view VSHENHE(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, ISAGGREY, PACKAGETYPE, REPORTSTATUSZI, REPORTSTATUS, FILECONCLUSION, UPDATETIME, UNDERTAKE_LABORATORYID) as
 select a.ID,
   a.REPORTNUMBER,             --报告编号
   d.ORDER_NUMBER,                  --委托单号
@@ -1891,7 +2002,9 @@ select a.ID,
   a.PACKAGETYPE,--报告类型
   a.REPORTSTATUSZI,--报告状态值
   a.REPORTSTATUS,--报告状态
-  e.CONCLUSION as FILECONCLUSION--上传报告结论
+  e.CONCLUSION as FILECONCLUSION,--上传报告结论
+  a.UPDATETIME,--修改时间
+  b.UNDERTAKE_LABORATORYID--实验室id
 
 from PREPARE_SCHEME a--预备方案表
 left join  APPLIANCE_LABORATORY b--器具明细信息_承接实验室表
@@ -1915,7 +2028,7 @@ comment on column VSHENHE.ISAGGREY is
 /*==============================================================*/
 /* View: VSHENPI                                                */
 /*==============================================================*/
-create or replace view VSHENPI(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, APPROVALISAGGREY, PACKAGETYPE, REPORTSTATUSZI, REPORTSTATUS, UNDERTAKE_LABORATORYID, FILECONCLUSION) as
+create or replace view VSHENPI(ID, REPORTNUMBER, ORDER_NUMBER, APPLIANCE_NAME, VERSION, FACTORY_NUM, CERTIFICATE_ENTERPRISE, CUSTOMER_SPECIFIC_REQUIREMENTS, CERTIFICATE_CATEGORY, QUALIFICATIONS, CONCLUSION_EXPLAIN, CONCLUSION, APPROVALISAGGREY, PACKAGETYPE, REPORTSTATUSZI, REPORTSTATUS, UNDERTAKE_LABORATORYID, FILECONCLUSION, AUDITTIME) as
 select a.ID,
   a.REPORTNUMBER,             --报告编号
   d.ORDER_NUMBER,                  --委托单号
@@ -1967,7 +2080,8 @@ select a.ID,
   a.REPORTSTATUSZI,--报告状态值
   a.REPORTSTATUS,--报告状态
   b.UNDERTAKE_LABORATORYID,--实验室
-e.CONCLUSION as FILECONCLUSION--上传报告结论
+e.CONCLUSION as FILECONCLUSION,--上传报告结论
+a.AUDITTIME--审核时间
 
 from PREPARE_SCHEME a--预备方案表
 left join  APPLIANCE_LABORATORY b--器具明细信息_承接实验室表
@@ -1988,6 +2102,72 @@ comment on column VSHENPI.APPROVALISAGGREY is
 
 comment on column VSHENPI.PACKAGETYPE is
 'ResearchDropDown';
+
+/*==============================================================*/
+/* View: VTEST_ITE                                              */
+/*==============================================================*/
+create or replace view VTEST_ITE as
+select P.ID ||'|' ||  R.ID as ROW_FLAG,P.ID as PREPARE_SCHEMEID,P.SCHEMEID as SCHEMEID, R.ID as RULEID,R.INPUTSTATE,R.NAMEOTHER,R.NAME,R.SCHEME_MENU
+,Q.ID,Q.CONCLUSION,Q.HTMLVALUE,Q.REMARK,NVL2(Q.ID,'已做','未做') as ISComplete ,S.ID as SCHEME_RULEID ,S.SORT
+from 
+PREPARE_SCHEME P left join SCHEME_RULE S on P.SCHEMEID=S.SCHEMEID 
+left join RULE R on S.RULEID=R.ID
+left join QUALIFIED_UNQUALIFIED_TEST_ITE Q on P.ID=Q.PREPARE_SCHEMEID
+and S.RULEID=Q.RULEID
+where P.SCHEMEID=S.SCHEMEID 
+with read only;
+
+ comment on table VTEST_ITE is
+'用于获取预备方案检测项信息数据录入';
+
+/*==============================================================*/
+/* View: VXIANGQING                                             */
+/*==============================================================*/
+create or replace view VXIANGQING as
+select ROWNUM as ID
+,a.ID dd--器具明细ID
+,b.ID ORDER_TASK_INFORMATIONID--委托单ID
+,a.APPLIANCE_NAME--器具名称
+,'' REPORTNUMBER--报告编号
+,CASE  
+    WHEN g.APPLIANCECOLLECTIONSATE IS NULL 
+    THEN '未领取'     
+    ELSE g.APPLIANCECOLLECTIONSATE
+ END AS STATE   --器具领取状态
+,g.RECEIVEINS--器具领取单
+,g.CREATEPERSON--领取人
+,g.CREATETIME--领取时间
+
+from APPLIANCE_DETAIL_INFORMATION a--器具明细
+left join  ORDER_TASK_INFORMATION b--委托单
+on b.id=a.ORDER_TASK_INFORMATIONID
+left join APPLIANCECOLLECTION g--器具领取
+on a.id=g.APPLIANCE_DETAIL_INFORMATIONID
+union
+select ROWNUM  as ID
+,d.ID dd--器具明细ID
+,b.ID APPLIANCE_DETAIL_INFORMATIONID--委托单ID
+,a.APPLIANCE_NAME --器具名称
+,d.REPORTNUMBER REPORTNUMBER--报告编号
+,CASE  
+    WHEN f.REPORTTORECEVESTATE IS NULL 
+    THEN '未领取'     
+    ELSE f.REPORTTORECEVESTATE
+ END STATE    --报告领取状态
+,f.RECEIVEREPORT--报告领取单 
+,f.CREATEPERSON--领取人
+,f.CREATETIME--领取时间
+
+from PREPARE_SCHEME d--预备方案
+left join REPORTCOLLECTION f--报告领取
+on d.ID=f.PREPARE_SCHEMEID
+left join APPLIANCE_LABORATORY c--器具明细信息_承接实验室
+on d.ID=c.PREPARE_SCHEMEID
+left join  APPLIANCE_DETAIL_INFORMATION a--器具明细
+on c.APPLIANCE_DETAIL_INFORMATIONID=a.ID
+left join ORDER_TASK_INFORMATION  b--委托单
+on b.ID=a.ORDER_TASK_INFORMATIONID
+with read only;
 
 alter table ACTIVE_POWER
    add constraint FK_ACTIVE_P_REFERENCE_OVERALL_ foreign key (OVERALL_TABLEID)
@@ -2012,10 +2192,6 @@ alter table APPLIANCE_DETAIL_INFORMATION
 alter table APPLIANCE_LABORATORY
    add constraint FK_APPLIANC_REFERENCE_PREPARE_ foreign key (PREPARE_SCHEMEID)
       references PREPARE_SCHEME (ID);
-
-alter table APPLIANCE_LABORATORY
-   add constraint FK_APPLIANC_REFERENCE_UNDERTAK foreign key (UNDERTAKE_LABORATORYID)
-      references UNDERTAKE_LABORATORY (ID);
 
 alter table APPLIANCE_LABORATORY
    add constraint FK_APPLIANC_REFERENCE_APPLIAN2 foreign key (APPLIANCE_DETAIL_INFORMATIONID)
@@ -2069,10 +2245,6 @@ alter table FREQUENCY
    add constraint FK_FREQUENC_REFERENCE_OVERALL_ foreign key (OVERALL_TABLEID)
       references OVERALL_TABLE (ID);
 
-alter table METERING_STANDARD_DEVICE
-   add constraint FK_METERING_REFERENCE_UNDERTAK foreign key (UNDERTAKE_LABORATORYID)
-      references UNDERTAKE_LABORATORY (ID);
-
 alter table METERING_STANDARD_DEVICEPREPAR
    add constraint FK_PREPARE_SCHEME_REF foreign key (PREPARE_SCHEME)
       references PREPARE_SCHEME (ID);
@@ -2098,8 +2270,12 @@ alter table PRINTREPORT
       references PREPARE_SCHEME (ID);
 
 alter table PROJECTTEMPLET
-   add constraint FK_PROJECTT_REFERENCE_SCHEME_R foreign key (SCHEME_RULEID)
-      references SCHEME_RULE (ID);
+   add constraint FK_PROJECTT_REFERENCE_RULE foreign key (RULEID)
+      references RULE (ID);
+
+alter table PROJECTTEMPLET
+   add constraint FK_PROJECTT_REFERENCE_SCHEME foreign key (SCHEMEID)
+      references SCHEME (ID);
 
 alter table QUALIFIED_UNQUALIFIED_TEST_ITE
    add constraint FK_QUALIFIED_UN foreign key (PREPARE_SCHEMEID)
@@ -2108,10 +2284,6 @@ alter table QUALIFIED_UNQUALIFIED_TEST_ITE
 alter table REPORTCOLLECTION
    add constraint FK_REPORTCO_REFERENCE_PREPARE_ foreign key (PREPARE_SCHEMEID)
       references PREPARE_SCHEME (ID);
-
-alter table RULE
-   add constraint FK_RULE_REFERENCE_UNDERTAK foreign key (UNDERTAKE_LABORATORYID)
-      references UNDERTAKE_LABORATORY (ID);
 
 alter table RULE
    add constraint FK_RULE_REFERENCE_RULE foreign key (PARENTID)
@@ -2128,6 +2300,10 @@ alter table SCHEME_RULE
 alter table SCHEME_RULE
    add constraint FK_SCHEME_R_REFERENCE_SCHEME foreign key (SCHEMEID)
       references SCHEME (ID);
+
+alter table SIGN
+   add constraint FK_SIGN_REFERENCE_ORDER_TA foreign key (ORDER_TASK_INFORMATIONID)
+      references ORDER_TASK_INFORMATION (ID);
 
 alter table THREE_PHASE_UNCERTAINTY
    add constraint FK_THREE_PH_REFERENCE_RULE foreign key (RULEID)
@@ -2160,4 +2336,8 @@ alter table UNCERTAINTY2_HZ
 alter table UNCERTAINTYPARAMETERMANAGEMENT
    add constraint FK_UNCERTAI_REFERENCE_RULE foreign key (RULEID)
       references RULE (ID);
+
+alter table UNCERTAINTYTABLE
+   add constraint FK_UNCERTAI_REFERENCE_METERING foreign key (METERING_STANDARD_DEVICEID)
+      references METERING_STANDARD_DEVICE (ID);
 

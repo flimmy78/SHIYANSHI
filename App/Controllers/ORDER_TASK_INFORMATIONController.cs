@@ -118,11 +118,29 @@ namespace Langben.App.Controllers
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             try
             {
-
-
                 string currentPerson = GetCurrentPerson();
                 if (string.IsNullOrWhiteSpace(entity.ID))
                 {
+                    List<COMPANY> companylist = m_BLL2.GetByParam(null, "asc", "ID", "COMPANYNAME&" + entity.INSPECTION_ENTERPRISE + "");
+                    List<COMPANY> companylist2 = m_BLL2.GetByParam(null, "asc", "ID", "COMPANYNAME&" + entity.CERTIFICATE_ENTERPRISE + "");
+
+
+                    foreach (var item in companylist)
+                    {
+                        if (item.COMPANY2 != null)
+                        {
+                            entity.INSPECTION_ENTERPRISEHELLD = item.COMPANY2.COMPANYNAME;
+                            break;
+                        }
+                    }
+                    foreach (var item in companylist2)
+                    {
+                        if (item.COMPANY2 != null)
+                        {
+                            entity.CERTIFICATE_ENTERPRISEHELLD = item.COMPANY2.COMPANYNAME;
+                            break;
+                        }
+                    }
                     string ORDER_NUMBER = m_BLL.GetORDER_NUMBER(ref validationErrors);
                     var order = ORDER_NUMBER.Split('*');// DC2016001 * 1 * 2016
                     entity.ORDER_STATUS = Common.ORDER_STATUS_INFORMATION.保存.ToString();
@@ -256,7 +274,7 @@ namespace Langben.App.Controllers
                 result.Code = Common.ClientCode.FindNull;
                 result.Message = Suggestion.InsertFail + "，请核对输入的数据的格式"; //提示输入的数据的格式不对 
             }
-            catch (Exception lastError) 
+            catch (Exception lastError)
             {
 
                 ExceptionsHander.WriteExceptions(lastError);//将异常写入数据库
@@ -360,15 +378,17 @@ namespace Langben.App.Controllers
             return View();
         }
         IBLL.IORDER_TASK_INFORMATIONBLL m_BLL;
+        IBLL.ICOMPANYBLL m_BLL2;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public ORDER_TASK_INFORMATIONController()
-            : this(new ORDER_TASK_INFORMATIONBLL()) { }
+            : this(new ORDER_TASK_INFORMATIONBLL(), new COMPANYBLL()) { }
 
-        public ORDER_TASK_INFORMATIONController(ORDER_TASK_INFORMATIONBLL bll)
+        public ORDER_TASK_INFORMATIONController(ORDER_TASK_INFORMATIONBLL bll, COMPANYBLL bll2)
         {
             m_BLL = bll;
+            m_BLL2 = bll2;
         }
 
     }

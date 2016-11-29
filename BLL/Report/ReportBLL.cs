@@ -1389,25 +1389,39 @@ namespace Langben.Report
 
                 entity.QUALIFIED_UNQUALIFIED_TEST_ITE = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.OrderBy(p => p.SORT).ToList();
                 int i = 1;
+                string SameRuleName = "";
+                List<string> SameRuleNameList = GetSameRuleName();
                 foreach (QUALIFIED_UNQUALIFIED_TEST_ITE iEntity in entity.QUALIFIED_UNQUALIFIED_TEST_ITE)
                 {
-                    #region 检测项目标题
-                    CopyRow(sheet_Source, sheet_Destination, ruleTitleTemplateIndex, RowIndex, 1, false);
-                    string celStr = i.ToString() + "、";
+                    #region 检测项目标题     
+                    //相同检测项只展示一个标题               
+                    //if(SameRuleNameList==null || SameRuleNameList.Count==0 || SameRuleNameList.FirstOrDefault(p => p == iEntity.RULENAME) == null || SameRuleName != iEntity.RULENAME)
+                    //{
+                        CopyRow(sheet_Source, sheet_Destination, ruleTitleTemplateIndex, RowIndex, 1, false);
+                        string celStr = i.ToString() + "、";
 
-                    if (iEntity.RULENAME != null && iEntity.RULENAME.Trim() != "")
+                        if (iEntity.RULENAME != null && iEntity.RULENAME.Trim() != "")
+                        {
+                            celStr = celStr + iEntity.RULENAME.Trim() + "：";
+                        }
+                        if (iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
+                        {
+                            celStr = celStr + iEntity.CONCLUSION.Trim();
+                        }
+                        sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue(celStr);
+                        RowIndex++;
+                    //}
+                    //相同检测项只展示一个标题   
+                    if (SameRuleNameList != null && SameRuleNameList.Count >0 && SameRuleNameList.FirstOrDefault(p => p == iEntity.RULENAME) != null && SameRuleName == iEntity.RULENAME)
+
                     {
-                        celStr = celStr + iEntity.RULENAME.Trim() + "：";
-                    }
-                    if (iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
-                    {
-                        celStr = celStr + iEntity.CONCLUSION.Trim();
-                    }
-                    sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue(celStr);
+                        HideRow(sheet_Destination, RowIndex - 2, 2);
+                    }                 
+                   
                     #endregion
 
                     #region 检测项目表格
-                    RowIndex++;
+
                     //if (TableTemplateDic != null && TableTemplateDic.ContainsKey(iEntity.RULEID))
                     //{
                     //    TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
@@ -1434,12 +1448,12 @@ namespace Langben.Report
                             RowIndex++;
                         }
                     }
-                    //if (sheet_Destination.LastRowNum <= RowIndex)
-                    //{
-                        CopyRow(sheet_Source, sheet_Destination, 4, RowIndex, 1, true);
-                    //}
-                    #endregion
+
+                    CopyRow(sheet_Source, sheet_Destination, 4, RowIndex, 1, true);
                     RowIndex++;
+                    SameRuleName = iEntity.RULENAME;
+                   
+                    #endregion
                     i++;
 
                 }
@@ -1500,7 +1514,7 @@ namespace Langben.Report
         /// <param name="DongTaiShuJuList">需要替换的动态数据</param>
         /// <param name="rowInfoList">需要替换的动态数据位置</param>
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
-        private void CopyRow(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, int insertCount, bool IsCopyContent = false, Dictionary<string,string> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, SpecialCharacters allSpecialCharacters = null)
+        private void CopyRow(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, int insertCount, bool IsCopyContent = false, Dictionary<string,string> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, SpecialCharacters allSpecialCharacters = null, List<Cell> CellsTemplate = null)
         {
             IRow row_Source = sheet_Source.GetRow(rowIndex_Source);
             int sourceCellCount = row_Source.Cells.Count;
@@ -1544,11 +1558,14 @@ namespace Langben.Report
                         {
                             startMergeCell = m;
                         }
-                        
-                        if (m + 1 == sourceCellCount || sourceCell.CellStyle.BorderRight != BorderStyle.None || row_Source.Cells[m + 1].StringCellValue != "" || row_Source.Cells[m+1].IsMergedCell==false)
+
+                        if (m + 1 == sourceCellCount || sourceCell.CellStyle.BorderRight != BorderStyle.None 
+                            || row_Source.Cells[m + 1].StringCellValue != "" || row_Source.Cells[m + 1].IsMergedCell == false
+                            || (CellsTemplate!=null && CellsTemplate.Count>0 && CellsTemplate.FirstOrDefault(p => p.ColIndex == startMergeCell && p.ColCount == (m - startMergeCell)) != null))
                         {
                             endMergeCell = m;
-                        }
+                        }                        
+                       
                         if (startMergeCell < endMergeCell)
                         {
                             sheet_Destination.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, endMergeCell));
@@ -1558,6 +1575,7 @@ namespace Langben.Report
                                 //targetRow.Cells[startMergeCell].SetCellValue(value);
                                 HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell], targetRow.Cells[startMergeCell], allSpecialCharacters);
                                 targetRow.Cells[startMergeCell].SetCellValue(value);
+                                startMergeCell = -1;
 
                             }
                         }
@@ -1943,7 +1961,7 @@ namespace Langben.Report
         /// <param name="rowIndex">最大行号</param>
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <returns></returns>
-        private Dictionary<string, int> SetRowIndex(NodeList nodeList, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, out int rowIndex, SpecialCharacters allSpecialCharacters = null)
+        private Dictionary<string, int> SetRowIndex(NodeList nodeList, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, out int rowIndex, SpecialCharacters allSpecialCharacters = null, List<Cell> CellsTemplate = null)
         {            
             Dictionary<string, int> dic = new Dictionary<string, int>();
 
@@ -1962,7 +1980,7 @@ namespace Langben.Report
                         if (Id.ToString() != "" && Id.ToString().Split('_').Length >= 4 && !dic.ContainsKey(Id.ToString()))
                         {
                             dic.Add(Id.ToString(), rowIndex_Destination);
-                            CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true,null,null, allSpecialCharacters);
+                            CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true,null,null, allSpecialCharacters,CellsTemplate);
                             rowIndex_Destination++;
 
                         }
@@ -2319,7 +2337,7 @@ namespace Langben.Report
                 {
                     NodeList nodeList_Input = InputDic[key];
                     int startRowIndex = rowIndex_Destination;                    
-                    Dictionary<string, int> dic = SetRowIndex(nodeList_Input, sheet_Source, sheet_Destination, temp.DataRowIndex, rowIndex_Destination, out rowIndex, allSpecialCharacters);
+                    Dictionary<string, int> dic = SetRowIndex(nodeList_Input, sheet_Source, sheet_Destination, temp.DataRowIndex, rowIndex_Destination, out rowIndex, allSpecialCharacters,temp.Cells);
                     rowIndex_Destination = rowIndex;
                     int endRowIndex = rowIndex;
 
@@ -2866,6 +2884,20 @@ namespace Langben.Report
             return rowIndex;
 
         }
-        #endregion 
+        #endregion
+        /// <summary>
+        /// 相同规则名称，需要合并只有展示一个标题
+        /// </summary>
+        /// <returns></returns>
+        private List<string> GetSameRuleName()
+        {
+            List<string> result = new List<string>();
+            result.Add("有功功率测量");
+            result.Add("有功功率输出");
+            return result;
+
+        }
+        
+
     }
 }
