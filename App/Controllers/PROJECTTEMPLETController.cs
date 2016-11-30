@@ -430,6 +430,11 @@ namespace Langben.App.Controllers
             m_BLL = bll;
         }
 
+
+        //public ActionResult BuQueDingDu()
+       // {
+        //    return View();
+        //}
     }
 }
 
