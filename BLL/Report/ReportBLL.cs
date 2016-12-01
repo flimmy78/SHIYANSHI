@@ -1266,28 +1266,28 @@ namespace Langben.Report
         {
             //int rowIndex = rowIndex_Destination;
             //标准装置
-            int rowIndex_Source_ZhuangZhi = 27;
+            int rowIndex_Source_ZhuangZhi = 29;
             //计量器具
-            int rowIndex_Source_QiJu = 30;
+            int rowIndex_Source_QiJu = 32;
             //中间试品
-            int rowIndex_Source_ShiPin = 33;
+            int rowIndex_Source_ShiPin = 35;
             string sheetName_Source = "封皮模板";
             switch(type)
             {
                 case ExportType.OriginalRecord_JianDing:
                 case ExportType.OriginalRecord_XiaoZhun:
                     sheetName_Source = "封皮模板";
-                    rowIndex_Source_ZhuangZhi = 27;
-                    rowIndex_Source_QiJu = 30;
-                    rowIndex_Source_ShiPin = 33;
+                    rowIndex_Source_ZhuangZhi = 29;
+                    rowIndex_Source_QiJu = 32;
+                    rowIndex_Source_ShiPin = 35;
                     break;
                 case ExportType.Report_JianDing:
                 case ExportType.Report_XiaoZhun:
                 case ExportType.Report_XiaoZhun_CNAS:
                     sheetName_Source = "第二页模板";
-                    rowIndex_Source_ZhuangZhi = 9;
-                    rowIndex_Source_QiJu = 12;
-                    rowIndex_Source_ShiPin =15;
+                    rowIndex_Source_ZhuangZhi = 11;
+                    rowIndex_Source_QiJu = 14;
+                    rowIndex_Source_ShiPin =17;
                     break;
             }            
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
@@ -1297,6 +1297,10 @@ namespace Langben.Report
                 List<METERING_STANDARD_DEVICE> list = entity.METERING_STANDARD_DEVICE.ToList();
                 if(list!=null && list.Count>0)
                 {
+                    //空三行
+                    CopyRow(sheet_Source, sheet_Destination, 2, rowIndex_Destination, 3, true);                    
+                    rowIndex_Destination=rowIndex_Destination+3;
+
                     //标准装置
                     List<METERING_STANDARD_DEVICE> listZhuanZhi = list.FindAll(p => p.CATEGORY == "标准装置");
                     SetZhuangZhi(sheet_Source, sheet_Destination, rowIndex_Source_ZhuangZhi, ref rowIndex_Destination, CATEGORYType.标准装置, listZhuanZhi);
@@ -1323,20 +1327,36 @@ namespace Langben.Report
         {
             if (listZhuanZhi != null && listZhuanZhi.Count > 0)
             {
+                //标题
+                CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true);                
+                rowIndex_Source++;
+                rowIndex_Destination++;
+                //表头
                 CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true);
                 rowIndex_Source++;
                 rowIndex_Destination++;
+                #region 数据
                 foreach (METERING_STANDARD_DEVICE item in listZhuanZhi)
                 {
                     CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, false);
                     //名称
                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(item.NAME);
-                    //测量范围
-                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(7).SetCellValue(item.TEST_RANGE);
+                    if (type == CATEGORYType.标准装置)
+                    {
+                        //测量范围
+                        sheet_Destination.GetRow(rowIndex_Destination).GetCell(7).SetCellValue(item.TEST_RANGE);
+                    }
+                    else
+                    {
+                        //型号
+                        sheet_Destination.GetRow(rowIndex_Destination).GetCell(7).SetCellValue(item.XINGHAO);
+                        //编号
+                        sheet_Destination.GetRow(rowIndex_Destination).GetCell(10).SetCellValue(item.FACTORY_NUM);
+                    }
 
                     #region 不确定度/准确度等级/最大允许误差
                     //不确定度/准确度等级/最大允许误差
-                    List<ALLOWABLE_ERROR> aList = (List<ALLOWABLE_ERROR>)item.ALLOWABLE_ERROR;
+                    List<ALLOWABLE_ERROR> aList = item.ALLOWABLE_ERROR.ToList();
                     if (aList != null && aList.Count > 0)
                     {
                         rowIndex_Source++;
@@ -1356,10 +1376,46 @@ namespace Langben.Report
                                 aValue += aItem.THEUNCERTAINTYVALUEK + ":" + aItem.THEUNCERTAINTYNDEXL + " " + aItem.THEUNCERTAINTYVALUE + ":" + aItem.THEUNCERTAINTY + "、";
                             }
                         }
+                        if (!string.IsNullOrEmpty(aValue) && aValue.Trim() != "")
+                        {
+                            aValue = aValue.Trim().Remove(aValue.Trim().Length - 1);
+                        }
                         sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(aValue);
                     }
                     #endregion
+
+                    #region 证书编号 有效期至
+                    List<METERING_STANDARD_DEVICE_CHECK> mList = item.METERING_STANDARD_DEVICE_CHECK.ToList();
+                    if (mList != null && mList.Count > 0)
+                    {
+                        string cValue = "";//证书编号
+                        string vValue = "";//有效期
+                        foreach (METERING_STANDARD_DEVICE_CHECK mItem in mList)
+                        {
+                            if (mItem != null && !string.IsNullOrEmpty(mItem.CERTIFICATE_NUM) && mItem.CERTIFICATE_NUM.Trim() != "")
+                            {
+                                cValue += mItem.CERTIFICATE_NUM + "、";
+                            }
+                            if (mItem != null && mItem.VALID_TO.HasValue)
+                            {
+                                vValue += mItem.VALID_TO.Value.ToString("yyyy/MM/dd") + "、";
+                            }
+                           
+                        }
+                        if (!string.IsNullOrEmpty(cValue) && cValue.Trim() != "")
+                        {
+                            cValue = cValue.Trim().Remove(cValue.Trim().Length - 1);
+                        }
+                        if (!string.IsNullOrEmpty(vValue) && vValue.Trim() != "")
+                        {
+                            vValue = vValue.Trim().Remove(vValue.Trim().Length - 1);
+                        }
+                        sheet_Destination.GetRow(rowIndex_Destination).GetCell(20).SetCellValue(cValue);
+                        sheet_Destination.GetRow(rowIndex_Destination).GetCell(27).SetCellValue(vValue);
+                    }
+                    #endregion 
                 }
+                #endregion 
             }
         }
 
