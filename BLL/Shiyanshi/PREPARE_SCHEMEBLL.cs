@@ -169,8 +169,15 @@ namespace Langben.BLL
                         count++;
                     }
                 }
-                repository.Save(db);
-                return true;
+                if (count == repository.Save(db))
+                {
+                    return true;
+                }
+                else
+                {
+                    validationErrors.Add("编辑预备方案出错了");
+                }
+                return false;
             }
             catch (Exception ex)
             {
