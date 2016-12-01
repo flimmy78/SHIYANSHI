@@ -1335,6 +1335,7 @@ namespace Langben.Report
                 CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true);
                 rowIndex_Source++;
                 rowIndex_Destination++;
+                
                 #region 数据
                 foreach (METERING_STANDARD_DEVICE item in listZhuanZhi)
                 {
@@ -1359,7 +1360,7 @@ namespace Langben.Report
                     List<ALLOWABLE_ERROR> aList = item.ALLOWABLE_ERROR.ToList();
                     if (aList != null && aList.Count > 0)
                     {
-                        rowIndex_Source++;
+                        //rowIndex_Source++;
                         string aValue = "";
                         foreach (ALLOWABLE_ERROR aItem in aList)
                         {
@@ -1413,9 +1414,11 @@ namespace Langben.Report
                         sheet_Destination.GetRow(rowIndex_Destination).GetCell(20).SetCellValue(cValue);
                         sheet_Destination.GetRow(rowIndex_Destination).GetCell(27).SetCellValue(vValue);
                     }
-                    #endregion 
+                    #endregion
+                    rowIndex_Destination++;
                 }
-                #endregion 
+               
+                #endregion
             }
         }
 
@@ -1503,9 +1506,14 @@ namespace Langben.Report
                             sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue("结论：" + iEntity.CONCLUSION);
                             RowIndex++;
                         }
+                        CopyRow(sheet_Source, sheet_Destination, 4, RowIndex, 1, true);
+                    }
+                    else
+                    {
+                        CopyRow(sheet_Source, sheet_Destination, 2, RowIndex, 1, true);
                     }
 
-                    CopyRow(sheet_Source, sheet_Destination, 4, RowIndex, 1, true);
+                   
                     RowIndex++;
                     SameRuleName = iEntity.RULENAME;
                    
