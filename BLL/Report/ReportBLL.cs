@@ -1503,9 +1503,14 @@ namespace Langben.Report
                             sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue("结论：" + iEntity.CONCLUSION);
                             RowIndex++;
                         }
+                        CopyRow(sheet_Source, sheet_Destination, 4, RowIndex, 1, true);
+                    }
+                    else
+                    {
+                        CopyRow(sheet_Source, sheet_Destination, 2, RowIndex, 1, true);
                     }
 
-                    CopyRow(sheet_Source, sheet_Destination, 4, RowIndex, 1, true);
+                   
                     RowIndex++;
                     SameRuleName = iEntity.RULENAME;
                    
