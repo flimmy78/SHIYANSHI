@@ -691,6 +691,5 @@
       <!--下标后几位，如果没有填-1-->
       <SubscriptLastCount>1</SubscriptLastCount>
     </SpecialCharacter>
-    </SpecialCharacter>
 	</SpecialCharacterList>
 </SpecialCharacters>
