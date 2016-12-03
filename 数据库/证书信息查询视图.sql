@@ -15,8 +15,8 @@ select al."ID",----1主键
   adi."FORMAT",----15器具规格
   ps."CHECKERID",----16检定/校准员
   ps."DETECTERID",----17核验员
-  ps."VALIDITY_PERIOD",----18有效期（个月）
-  '',----19有效期至
+  ps."VALIDITY_PERIOD",----18有效期（年）
+  add_months(CALIBRATION_DATE,12*VALIDITY_PERIOD) as YOUXIAOQIZHI,----19有效期至
   ps."REPORTNUMBER",----20证书/报告编号
   ps."CERTIFICATE_CATEGORY",----21证书类别
   ps."REPORT_CATEGORY",----22报告类别
@@ -55,8 +55,9 @@ select al."ID",----1主键
     THEN '校准'
     ELSE ''
   end as SHOUQUANZIZHI, ----23授权/资质
-  rn."REPORTTORECEVESTATE",----24发放状态
-  '',----25所属单位
+  (SELECT REPORTTORECEVESTATE from REPORTCOLLECTION where PREPARE_SCHEMEID=ps.id)----24发放状态
+  --rn."REPORTTORECEVESTATE",----24发放状态
+  oti."CERTIFICATE_ENTERPRISEHELLD",----25所属单位
   oti."ORDER_NUMBER",----26委托单号
   adi."REMARKS"----27备注
 
@@ -64,8 +65,8 @@ select al."ID",----1主键
   from PREPARE_SCHEME ps
 inner join APPLIANCE_LABORATORY al
 on al.PREPARE_SCHEMEID=ps.id
-inner join REPORTCOLLECTION   rn
-on rn.PREPARE_SCHEMEID=ps.id
+--inner join REPORTCOLLECTION   rn
+--on rn.PREPARE_SCHEMEID=ps.id
 inner join APPLIANCE_DETAIL_INFORMATION adi
 on al.appliance_detail_informationid=adi.id
 inner join ORDER_TASK_INFORMATION oti
