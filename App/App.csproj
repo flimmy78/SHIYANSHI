@@ -936,6 +936,7 @@
     <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaFeiZhengFuJueDuiWuCha.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\IndexSef.cshtml" />
     <Content Include="Views\VCharts\Index.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\JiSuanBuQueDingDu.cshtml" />
     <Content Include="Views\VZHENGSHULEIBEITONGJIFENXI\Index.cshtml" />
     <Content Include="Views\VZHENGSHUXINXICHAXUN\Index.cshtml" />
     <Content Include="Views\VBIAOZHUNLIANGCHUANGONGZHUO\Index.cshtml" />

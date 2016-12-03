@@ -130,7 +130,32 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
     });
 
 }
+//获取每行不确定度按钮
+//Name：不确定度按钮所在某检测项控件名称后
+function GetJiSuanBuQueDingDu_MeiHang_Html(Name)
+{
+    var Result = false;    
 
+    if (Name == null || Name.trim() == "") {
+        return "";
+    }
+    var AttributeValue = GetAttributeValue("JiSuanBuQueDingDu_MeiHang");
+    if (AttributeValue == null || AttributeValue.trim() == "") {
+        return "";
+    }
+    var objArray = AttributeValue.split(',');
+    var NameNew = Name;
+    NameNew = NameNew.toUpperCase();
+    $.each(objArray, function (i, item) {
+        if (item == null || item.trim() == "" || item.toUpperCase().indexOf(NameNew) < 0 ) {
+            return true;
+        }
+        Result = true;
+        return false;
+       
+    });
+    return Result;
+}
 
 //获取下拉框单位html
 //RuleAttribute:检测项属性
@@ -194,8 +219,13 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     if (blurValue == null || blurValue == '') {
         blurValue = 'blurValue';
     }
+    //下拉框
     var ddlName = name + "_UNIT";//下拉框名
     var ddlId = ddlName + "_" + id;//下拉框ID
+    //不确定度
+    var BuQueDingDuName = name + "_BuQueDingDu";//不确定度名
+    var BuQueDingDuId = BuQueDingDuName + "_" + id;//不确定度ID
+
     var id = name + "_" + id;//输入框id
 
     var ddlHtml = GetDanWeiDDLHtml(name, null);//单位下拉框html
@@ -215,6 +245,15 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     }
     if (unit) {
         htmlString.push(unit);
+    }
+    
+    //不确定度
+    var IsHaveJiSuanBuQueDingDu_MeiHang = GetJiSuanBuQueDingDu_MeiHang_Html(name);
+    debugger;
+    if (IsHaveJiSuanBuQueDingDu_MeiHang)
+    {
+        debugger;
+        htmlString.push("<a href=\"/JiSuanBuQueDingDu?ID=\""+id+"&RuleID="+RuleID+" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\">计算不确定度</a>")       
     }
     htmlString.push("</td>");
     return htmlString.join("");

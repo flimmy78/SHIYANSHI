@@ -2110,6 +2110,14 @@ namespace Langben.Report
                 if(count==-1 && tag.GetAttribute("$<TAGNAME>$") == "option")
                 {
                     firstValue= tag.GetAttribute("VALUE");
+                    if(string.IsNullOrEmpty(firstValue) || firstValue.Trim()=="")
+                    {
+                        firstValue = ((Winista.Text.HtmlParser.Tags.CompositeTag)tag).StringText;
+                        if(firstValue==null)
+                        {
+                            firstValue = "";
+                        }
+                    }
                     count++;
                 }
                 //子节点  
@@ -2124,15 +2132,15 @@ namespace Langben.Report
                     }
                 }
                 //兄弟节点 
-                if (IsEnd == false)
-                {
-                    INode siblingNode = tag.NextSibling;
-                    while (siblingNode != null)
-                    {
-                        value = GetHearderValue(siblingNode, out IsEnd, ref count, ref firstValue);
-                        siblingNode = siblingNode.NextSibling;
-                    }
-                }
+                //if (IsEnd == false)
+                //{
+                //    INode siblingNode = tag.NextSibling;
+                //    while (siblingNode != null)
+                //    {
+                //        value = GetHearderValue(siblingNode, out IsEnd, ref count, ref firstValue);
+                //        siblingNode = siblingNode.NextSibling;
+                //    }
+                //}
             }            
             return value;
         }
