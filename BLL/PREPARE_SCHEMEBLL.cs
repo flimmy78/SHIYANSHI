@@ -142,26 +142,26 @@ namespace Langben.BLL
         {
             try
             {
-                using (TransactionScope transactionScope = new TransactionScope())
-                { 
-                    if (Create(ref validationErrors, db, entity))
-                    {
-                        transactionScope.Complete();
+                //using (TransactionScope transactionScope = new TransactionScope())
+                //{ 
+                if (Create(ref validationErrors, db, entity))
+                {
+                        //transactionScope.Complete();
                         return true;
                     }
                     else
                     {
                         Transaction.Current.Rollback();
                     }
-                }
+                //}
             }
             catch (Exception ex)
             {
-                validationErrors.Add(ex.Message);
-                validationErrors.Add(ex.Source);
-                validationErrors.Add(ex.StackTrace);
-                validationErrors.Add(ex.HelpLink);
-                validationErrors.Add(ex.HResult.ToString());
+                validationErrors.Add(ex.Message+"@");
+                validationErrors.Add(ex.Source + "@");
+                validationErrors.Add(ex.StackTrace + "@");
+                validationErrors.Add(ex.HelpLink + "@");
+                validationErrors.Add(ex.HResult.ToString() + "@");
 
                 if (ex.InnerException!=null&&!string.IsNullOrWhiteSpace(ex.InnerException.Message))
                 {
