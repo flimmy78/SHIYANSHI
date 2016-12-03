@@ -1,27 +1,55 @@
 
-  CREATE OR REPLACE FORCE VIEW "TENGFEI"."VZHENGSHUXINXICHAXUN" ("ID", "SONGJIANDANWEI", "ZHENGSHUDANWEI", "SHOULIDANWEI", "CHUCHANGRIQI", "QIJUMINGCHENG", "SHENGCHANCHANGJIA", "QIJUXINGHAO", "CHUCHANGBIANHAO", "ZHUNQUEDUDENGJI", "JIANDINGRIQI", "WENDU", "XIANGDUISHIDU", "MOCHONGCHANGSHU", "QIJUGUIGE", "JIANDINGXIAOZHUNYUAN", "HEYANYUAN", "YOUXIAOQI", "YOUXIAOQIZHI", "ZHENGSHUBAOGAOBIANHAO", "ZHENGSHULEIBIE", "BAOGAOLEIBIE", "SHOUQUANZIZHI", "FAFANGZHUANGTAI", "SUOSHUDANWEI", "WEITUODANWEI", "BEIZHU") AS 
-  select al."ID",----1主键
+  CREATE OR REPLACE FORCE VIEW TENGFEI.VZHENGSHUXINXICHAXUN(
+  ID,----1主键
+  SONGJIANDANWEI, ---2送检单位
+  ZHENGSHUDANWEI, ---3证书单位
+  SHOULIDANWEI",---4受理单位
+  CHUCHANGRIQI, ----5出厂日期
+  QIJUMINGCHENG,----6器具名称
+  SHENGCHANCHANGJIA, ----7生产厂家
+  QIJUXINGHAO,----8器具型号
+  CHUCHANGBIANHAO,----9出厂编号
+  ZHUNQUEDUDENGJI, ----10准确度等级
+  JIANDINGRIQI, ----11检定日期
+  WENDU, ----12温度（℃）
+  XIANGDUISHIDU, ----13相对湿度（%）
+  MOCHONGCHANGSHU,----14脉冲常数(imp/kWh)
+  QIJUGUIGE,----15器具规格
+  JIANDINGXIAOZHUNYUAN,----16检定/校准员
+  HEYANYUAN, ----17核验员
+  YOUXIAOQI, ----18有效期（年）
+  YOUXIAOQIZHI, ----19有效期至
+  ZHENGSHUBAOGAOBIANHAO,----20证书/报告编号
+  ZHENGSHULEIBIE, ----21证书类别
+  BAOGAOLEIBIE,----22报告类别
+  SHOUQUANZIZHI,----23授权/资质
+  FAFANGZHUANGTAI, ----24发放状态
+  SUOSHUDANWEI,----25所属单位
+  WEITUODANWEI, ----26委托单号
+  BEIZHU----27备注
+  ) AS 
+  select ps.ID,----1主键
   oti.INSPECTION_ENTERPRISE,---2送检单位
-  oti."CERTIFICATE_ENTERPRISE",----3证书单位
-  oti."ACCEPT_ORGNIZATION",----4受理单位
+  oti.CERTIFICATE_ENTERPRISE,----3证书单位
+  oti.ACCEPT_ORGNIZATION,----4受理单位
   '',----5出厂日期
-  adi."APPLIANCE_NAME",----6器具名称
+  adi.APPLIANCE_NAME,----6器具名称
   '',----7生产厂家
-  adi."VERSION",----8器具型号
-  adi."FACTORY_NUM",----9出厂编号
-  ps."ACCURACY_GRADE",----10准确度等级
-  ps."CALIBRATION_DATE",----11检定日期
-  ps."TEMPERATURE",----12温度（℃）
-  ps."HUMIDITY",----13相对湿度（%）
-  ps."PULSE_CONSTANT",----14脉冲常数(imp/kWh)
-  adi."FORMAT",----15器具规格
-  ps."CHECKERID",----16检定/校准员
-  ps."DETECTERID",----17核验员
-  ps."VALIDITY_PERIOD",----18有效期（年）
+  adi.VERSION,----8器具型号
+  adi.FACTORY_NUM,----9出厂编号
+  ps.ACCURACY_GRADE,----10准确度等级
+  ps.CALIBRATION_DATE,----11检定日期
+  ps.TEMPERATURE,----12温度（℃）
+  ps.HUMIDITY,----13相对湿度（%）
+  ps.PULSE_CONSTANT,----14脉冲常数(imp/kWh)
+  adi.FORMAT,----15器具规格
+  ps.CHECKERID,----16检定/校准员
+  ps.DETECTERID,----17核验员
+  ps.VALIDITY_PERIOD,----18有效期（年）
   add_months(CALIBRATION_DATE,12*VALIDITY_PERIOD) as YOUXIAOQIZHI,----19有效期至
-  ps."REPORTNUMBER",----20证书/报告编号
-  ps."CERTIFICATE_CATEGORY",----21证书类别
-  ps."REPORT_CATEGORY",----22报告类别
+  ps.REPORTNUMBER,----20证书/报告编号
+  ps.CERTIFICATE_CATEGORY,----21证书类别
+  ps.REPORT_CATEGORY,----22报告类别
     CASE
     when ps.QUALIFICATIONS     ='本单位获北京市质量技术监督局专项计量授权，证书编号：（京）法计（2012）006号'
     and ps.CERTIFICATE_CATEGORY='检定'
@@ -57,20 +85,19 @@
     THEN '校准'
     ELSE ''
   end as SHOUQUANZIZHI, ----23授权/资质
-  --(SELECT REPORTTORECEVESTATE from REPORTCOLLECTION where PREPARE_SCHEMEID=ps.id)----24发放状态
-  rn."REPORTTORECEVESTATE",----24发放状态
-  oti."CERTIFICATE_ENTERPRISEHELLD",----25所属单位
-  oti."ORDER_NUMBER",----26委托单号
-  adi."REMARKS"----27备注
+  rn.REPORTTORECEVESTATE,----24发放状态
+  oti.CERTIFICATE_ENTERPRISEHELLD,----25所属单位
+  oti.ORDER_NUMBER,----26委托单号
+  adi.REMARKS----27备注
 
   
-  from PREPARE_SCHEME ps
+from PREPARE_SCHEME ps
 inner join APPLIANCE_LABORATORY al
 on al.PREPARE_SCHEMEID=ps.id
-
 inner join APPLIANCE_DETAIL_INFORMATION adi
 on al.appliance_detail_informationid=adi.id
 inner join ORDER_TASK_INFORMATION oti
 on oti.id=adi.order_task_informationid
  left join REPORTCOLLECTION   rn
 on rn.PREPARE_SCHEMEID=ps.id;
+ 

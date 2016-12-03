@@ -1,18 +1,18 @@
 
-  CREATE OR REPLACE FORCE VIEW "TENGFEI"."VZHENGSHULEIBEITONGJIFENXI" 
+  CREATE OR REPLACE FORCE VIEW TENGFEI.VZHENGSHULEIBEITONGJIFENXI 
   (
-  "ID", ----1主键 
-  "SUOSHUDANWEI",----2所属单位
-  "ZHENGSHUDANWEI", ----3证书单位
-  "SHOULIDANWEI",----4受理单位
-  "PIZHUNJIELUN", ----5批准结论
-  "PIZHUNSHIJIAN", ----6批准时间
-  "SHOUQUANZIZHI",----7授权/资质
-  "ZHENGSHULEIBIE",----8证书类别
-  "BAOGAOLEIBIE", ----9报告类别
-  "BAOGAOSHULIANG"----10报告数量
+  ID, ----1主键 
+  SUOSHUDANWEI,----2所属单位
+  ZHENGSHUDANWEI, ----3证书单位
+  SHOULIDANWEI,----4受理单位
+  PIZHUNJIELUN, ----5批准结论
+  PIZHUNSHIJIAN, ----6批准时间
+  SHOUQUANZIZHI,----7授权/资质
+  ZHENGSHULEIBIE,----8证书类别
+  BAOGAOLEIBIE, ----9报告类别
+  BAOGAOSHULIANG----10报告数量
   ) AS 
-  select al."ID",----1主键  
+  select al.ID,----1主键  
     '',----2所属单位
     oti.CERTIFICATE_ENTERPRISE,----3证书单位
     oti.ACCEPT_ORGNIZATION,----4受理单位
