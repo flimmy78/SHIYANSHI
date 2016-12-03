@@ -118,7 +118,9 @@ namespace Langben.DAL
         [Display(Name = "入库状态", Order = 24)]
         public object STORAGEINSTRUCTI_STATU { get; set; }
 
-
+        [ScaffoldColumn(true)]
+        [Display(Name = "退回原因", Order = 25)]
+        public object RETURNREASON { get; set; }
     }
 }
 

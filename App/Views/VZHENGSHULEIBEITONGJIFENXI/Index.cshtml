@@ -1,0 +1,124 @@
+﻿@model Langben.DAL.VZHENGSHULEIBEITONGJIFENXI
+@{ Layout = "~/Views/Shared/Index.cshtml"; }
+@using Common
+@using Models
+<div id="divQuery">
+    
+    <div class='input_search' style="padding-top:10px;">
+        <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
+            查 询
+        </a>
+    </div>
+</div>
+ <br style="clear: both;" />
+
+<script type="text/javascript" language="javascript">
+    $(function () {
+
+        $('#flexigridData').datagrid({
+            title: '证书类别统计分析', //列表的标题
+            iconCls: 'icon-site',
+            width: 'auto',
+            height: 'auto',
+            //nowrap: false,
+            striped: true,
+            collapsible: true,
+            url: '../VZHENGSHULEIBEITONGJIFENXI/GetData', //获取数据的url
+            sortName: '^m_Sort^',
+            sortOrder: 'desc',
+            idField: 'ID',
+
+            toolbar: [
+
+                 {
+                     text: '详细',
+                     iconCls: 'icon-search',
+                     handler: function () {
+                         return getView();
+                     }
+                 } ],
+            columns: [[
+
+                
+					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 129 }
+					,{ field: 'SUOSHUDANWEI', title:  '@Html.DisplayNameFor(model => model.SUOSHUDANWEI)', width: 129 }
+					,{ field: 'ZHENGSHUDANWEI', title:  '@Html.DisplayNameFor(model => model.ZHENGSHUDANWEI)', width: 129 }
+					,{ field: 'SHOULIDANWEI', title:  '@Html.DisplayNameFor(model => model.SHOULIDANWEI)', width: 129 }
+					,{ field: 'PIZHUNJIELUN', title:  '@Html.DisplayNameFor(model => model.PIZHUNJIELUN)', width: 129 }
+					,{ field: 'PIZHUNSHIJIAN', title:  '@Html.DisplayNameFor(model => model.PIZHUNSHIJIAN)', width: 129 }
+					,{ field: 'SHOUQUANZIZHI', title:  '@Html.DisplayNameFor(model => model.SHOUQUANZIZHI)', width: 129 }
+					,{ field: 'ZHENGSHULEIBIE', title:  '@Html.DisplayNameFor(model => model.ZHENGSHULEIBIE)', width: 129 }
+					,{ field: 'BAOGAOLEIBIE', title:  '@Html.DisplayNameFor(model => model.BAOGAOLEIBIE)', width: 129 }
+					,{ field: 'BAOGAOSHULIANG', title:  '@Html.DisplayNameFor(model => model.BAOGAOSHULIANG)', width: 129 }
+                ]],
+            pagination: true,
+            rownumbers: true
+
+        });
+
+        var parent = window.dialogArguments; //获取父页面
+        if (parent == "undefined" || parent == null) {
+            //    不是在iframe中打开的
+        } else {
+            //隐藏所有的按钮和分隔符
+            $(".l-btn.l-btn-plain").hide();
+            $(".datagrid-btn-separator").hide();
+            //添加选择按钮
+            $('#flexigridData').datagrid("addToolbarItem", [{ "text": "选择", "iconCls": "icon-ok", handler: function () { flexiSelect(); } }]);
+        }
+    });
+
+    //“查询”按钮，弹出查询框
+    function flexiQuery() {
+
+        //将查询条件按照分隔符拼接成字符串
+        var search = "";
+        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
+            if (this.id)
+                search = search + this.id + "&" + this.value + "^";
+            else
+                search = search + this.name + "&" + this.value + "^";
+        });
+        //执行查询
+        $('#flexigridData').datagrid('load', { search: search });
+    };
+ 
+    //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
+    function flexiSelect() {
+
+        var rows = $('#flexigridData').datagrid('getSelections');
+        if (rows.length == 0) {
+            $.messager.alert('操作提示', '请选择数据!', 'warning');
+            return false;
+        }
+
+        var arr = [];
+        for (var i = 0; i < rows.length; i++) {
+            arr.push(rows[i].ID);
+        }
+        arr.push("^");
+        for (var i = 0; i < rows.length; i++) {
+            arr.push(rows[i].SUOSHUDANWEI);
+        }
+        //主键列和显示列之间用 ^ 分割   每一项用 , 分割
+        if (arr.length > 0) {//一条数据和多于一条
+            returnParent(arr.join("&")); //每一项用 & 分割
+        }
+    }
+    //导航到查看详细的按钮
+    function getView() {
+
+        var arr = $('#flexigridData').datagrid('getSelections');
+
+        if (arr.length == 1) {
+            window.location.href = "../VZHENGSHULEIBEITONGJIFENXI/Details/" + arr[0].ID;
+
+        } else {
+            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
+        }
+        return false;
+    }
+ 
+
+</script>
+

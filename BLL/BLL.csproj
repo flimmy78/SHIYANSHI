@@ -169,6 +169,7 @@
     <Compile Include="REPORTCOLLECTIONBLL.cs" />
     <Compile Include="UNCERTAINTYPARAMETERMANAGEMENTBLL.cs" />
     <Compile Include="COMPANYBLL.cs" />
+    <Compile Include="VBIAOZHUNLIANGCHUANGONGZHUOBLL.cs" />
     <Compile Include="VJIANDINGRENWUBLL.cs" />
     <Compile Include="VSHENHEBLL.cs" />
     <Compile Include="VSHENPIBLL.cs" />
@@ -177,6 +178,8 @@
     <Compile Include="VQIJULINGQU2BLL.cs" />
     <Compile Include="VQIJULINGQU1BLL.cs" />
     <Compile Include="VXIANGQINGBLL.cs" />
+    <Compile Include="VZHENGSHULEIBEITONGJIFENXIBLL.cs" />
+    <Compile Include="VZHENGSHUXINXICHAXUNBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

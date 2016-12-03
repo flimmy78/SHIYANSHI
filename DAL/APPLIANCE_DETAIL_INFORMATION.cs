@@ -44,6 +44,7 @@ namespace Langben.DAL
         public string OVERDUE { get; set; }
         public string STORAGEINSTRUCTIONS { get; set; }
         public string STORAGEINSTRUCTI_STATU { get; set; }
+        public string RETURNREASON { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<APPLIANCE_LABORATORY> APPLIANCE_LABORATORY { get; set; }
