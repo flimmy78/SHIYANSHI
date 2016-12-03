@@ -930,6 +930,7 @@
     <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaFeiZhengFuJueDuiWuCha.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\IndexSef.cshtml" />
     <Content Include="Views\VCharts\Index.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\JiSuanBuQueDingDu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

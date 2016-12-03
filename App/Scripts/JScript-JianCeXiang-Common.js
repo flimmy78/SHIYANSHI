@@ -1,4 +1,6 @@
 ﻿//---------------------------------
+//每行不确定度计算按钮
+var JiSuanBuQueDingDu_MeiHang_Html = " <a href=\"javascript:void(0)\" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\">计算不确定度</a>";
 //检测项目单位
 var DanWeiDDLHtmlArray = Array;
 DanWeiDDLHtmlArray = [
@@ -383,7 +385,13 @@ RuleAttributeArray = [{
             BuBaoCunShuJu: '',
             //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
-            CalculateForAddLianCheng: ',READVALUE,'
+            CalculateForAddLianCheng: ',READVALUE,',
+            //每行计算不确定度按钮
+            //检测项属性名称后需要加不确定计算按钮多个用,分割（检测项属性名称1,检测项属性名称2）            
+            JiSuanBuQueDingDu_MeiHang: 'UNCERTAINTYDEGREE',
+            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            JiSuanBuQueDingDu_DiBu:'Y'
+
         }]
 }
     ,
@@ -405,7 +413,12 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //每行计算不确定度按钮
+                //检测项属性名称后需要加不确定计算按钮多个用,分割（检测项属性名称1,检测项属性名称2）            
+                JiSuanBuQueDingDu_MeiHang: 'UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu:'Y'
             }]
     }
         ,
