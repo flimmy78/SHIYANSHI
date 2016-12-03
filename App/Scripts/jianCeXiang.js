@@ -253,7 +253,9 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     if (IsHaveJiSuanBuQueDingDu_MeiHang)
     {
         debugger;
-        htmlString.push("<a href=\"/JiSuanBuQueDingDu?ID=\""+id+"&RuleID="+RuleID+" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\">计算不确定度</a>")       
+        //htmlString.push("<a href=\"/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID + "\" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\">计算不确定度</a>")
+        htmlString.push("<a href=\"#\" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\" onclick = \"showModal('" + id + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID + "');\">计算不确定度</a>")
+        //"onclick = \"showModalOnly('SCHEMEID', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID+"');\"";
     }
     htmlString.push("</td>");
     return htmlString.join("");

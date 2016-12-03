@@ -419,6 +419,51 @@ namespace Langben.App.Controllers
             }
 
         }
+        /// <summary>
+        /// 计算不确定度页
+        /// </summary>
+        /// <param name="ID">控件ID</param>
+        /// <param name="RULEID">检测项目ID</param>
+        /// <returns></returns>
+        public ActionResult JiSuanBuQueDingDu(string ID = "", string RULEID = "")
+        {
+            string URL = GetBuQueDingDuUrl(ID, RULEID);
+            string htmlValue = "";
+            if(DirFile.FileExists(URL))
+            {
+                htmlValue = DirFile.ReadFile(URL);
+            }
+            ViewBag.ID = ID;
+            ViewBag.RULEID = RULEID;            
+            ViewBag.HTMLVALUE = htmlValue;
+            return View();
+        }
+        /// <summary>
+        /// 获取不确定路径
+        /// </summary>
+        /// <param name="ID">控件ID</param>
+        /// <param name="RULEID">检测项目ID</param>
+        /// <returns></returns>
+        private string GetBuQueDingDuUrl(string ID = "", string RULEID = "")
+        {
+            string URL = "~up/BuQueDingDu/";
+            if (!string.IsNullOrEmpty(RULEID) && RULEID.Trim() != "")
+            {
+                URL += RULEID;
+                URL += "/" + RULEID;
+                if (!string.IsNullOrEmpty(ID) && ID.Trim() != "")
+                {
+                    URL += "_" + ID;
+                }
+                URL += ".html";
+            }
+            string htmlValue = "";
+            if (DirFile.FileExists(URL))
+            {
+                htmlValue = DirFile.ReadFile(URL);
+            }
+            return URL;
+        }
 
         IBLL.IPROJECTTEMPLETBLL m_BLL;
         ValidationErrors validationErrors = new ValidationErrors();

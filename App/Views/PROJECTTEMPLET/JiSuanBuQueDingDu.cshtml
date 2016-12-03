@@ -1,42 +1,359 @@
-﻿@model Langben.DAL.PROJECTTEMPLETMetadata
+﻿@model Langben.DAL.PROJECTTEMPLET
 
-
-@using (Html.BeginForm())
+@{
+    Layout = "~/Views/Shared/Edit.cshtml";
+}
+@using Common
+@using Models
+@section CurentPlace {
+    不确定度评定过程
+}
+<input type="hidden" id="hideID" value="@ViewBag.ID"/>
+<input type="hidden" id="hideRULEID" value="@ViewBag.RULEID" />
+@if (ViewBag.HTMLVALUE != null && ViewBag.HTMLVALUE != "")
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>PROJECTTEMPLETMetadata</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.CREATETIME, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CREATETIME, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CREATETIME, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    @ViewBag.HTMLVALUE
+}
+else
+{
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.UPDATETIME, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UPDATETIME, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UPDATETIME, "", new { @class = "text-danger" })
-            </div>
+<div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+    <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+        <table width="500">            
+            <tr>             
+                <td>
+                    不确定度的评定
+                </td>
+                <td>
+                    <select class="my-combobox" name="" id="">
+                        <option value=""> </option>
+                        <option value="">评定项</option>
+                        <option value="">量程</option>
+                        <option value="">档位</option>
+                        <option value="">测量范围</option>
+                    </select>
+                    <input class="my-textbox " type="text" name="" id="" value="" style="width:100px">
+                </td>
+                <td><a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnSave" onclick="Save();">保存</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!--评定点 -->
+<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+    <div class="mt10">
+        <table width="95%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td nowrap valign="top" width="60">评定点：</td>
+                <td valign="top">
+                    <ul class="clear mb10">
+                        <li class="fl mr10">
+                            <select class="my-combobox" name="" id="">
+                                <option value=""> </option>
+                                <option value="">额定电压</option>
+                                <option value="">负载</option>
+                                <option value="">功率因数</option>
+                            </select>
+                            <input class="my-textbox " type="text" name="" id="" value="" style="width:100px">
+                            <select class="my-combobox" name="" id="">
+                                <option value="V">V</option>
+                                <option value="MV">MV</option>
+                                <option value="KV">KV</option>
+                                <option value="mV">mV</option>
+                                <option value="μV">μV</option>
+                            </select>
+                        </li>
+                        <li class="fl mr10">
+                            <input type="button" class="my-btn" value="添 加" onclick="linkButton.add(this)" />
+                            <input type="button" class="my-btn" value="移 除" onclick="linkButton.del(this)" />
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--/评定点 -->
+    <!--A类 -->
+    <div class="mt10">
+        <h2 class="f14 mt10 "> （1）不确定度的A类评定 </h2>
+    </div>
+    <div class="mt10" id="tongdao">
+        <div>
+            <i>U</i><small>A</small> =
+            <input class="my-textbox " value="" style="width:200px" name="" id="txtBuQueDingA"> <input class="my-textbox " value="" style="width:100px" name="" id="txtValue" onblur="calculate()">
         </div>
+        <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_moban">
+            <thead>
+                <tr>
+                    <th align="center" width="150">y<sub>1</sub>/y<sub>6</sub></th>
+                    <th align="center" width="150">y<sub>2</sub>/y<sub>7</sub></th>
+                    <th align="center" width="150">y<sub>3</sub>/y<sub>8</sub></th>
+                    <th align="center" width="150">y<sub>4</sub>/y<sub>9</sub></th>
+                    <th align="center" width="150">y<sub>5</sub>/y<sub>10</sub></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td align="center"><input class="my-textbox input-width" type="text" name="" id="" value="" style="width:95%" onblur="calculate()"></td>
+                    <td align="center"><input class="my-textbox input-width" type="text" name="" id="" value="" style="width:95%" onblur="calculate()"></td>
+                    <td align="center"><input class="my-textbox input-width" type="text" name="" id="" value="" style="width:95%" onblur="calculate()"></td>
+                    <td align="center"><input class="my-textbox input-width" type="text" name="" id="" value="" style="width:95%" onblur="calculate()"></td>
+                    <td align="center"><input class="my-textbox input-width" type="text" name="" id="" value="" style="width:95%" onblur="calculate()"></td>
+                </tr>
+                <tr>
+                    <td align="center"><input class="my-textbox input-width" type="text" name="" id="" value="" style="width:95%" onblur="calculate()"></td>
+                    <td align="center"><input class="my-textbox input-width" type="text" name="" id="" value="" style="width:95%" onblur="calculate()"></td>
+                    <td align="center"><input class="my-textbox input-width" type="text" name="" id="" value="" style="width:95%" onblur="calculate()"></td>
+                    <td align="center"><input class="my-textbox input-width" type="text" name="" id="" value="" style="width:95%" onblur="calculate()"></td>
+                    <td align="center"><input class="my-textbox input-width" type="text" name="" id="" value="" style="width:95%" onblur="calculate()"></td>
+                </tr>
+            </tbody>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        </table>
+    </div>
+
+    <!--/A类 -->
+    <!--B类 -->
+    <div class="mt10">
+        <h2 class="f14 mt10 "> （2）不确定度的B类评定 </h2>
+    </div>
+    <div class="mt10">
+        <div>
+            <i>U</i><small>B</small> =
+            <input class="my-textbox " value="" style="width:200px" name="" id="txtBuQueDingB"> <input class="my-textbox " value="" style="width:100px" name="" id="txtValueB" onblur="calculateB()">
+        </div>
+        <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_B">
+            <thead>
+                <tr>
+                    <th align="center" width="150">评定项/范围</th>
+                    <th align="center" width="150">误差来源</th>
+                    <th align="center" width="150">误差限</th>
+                    <th align="center" width="150">误差分布状况</th>
+                    <th align="center" width="100"><i>k</i></th>
+                    <th align="center" width="150">不确定度Ui</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td align="center"><input class="my-textbox " type="text" name="" id="" value="" style="width:95%"></td>
+                    <td align="center">
+                        <input class="my-textbox input-width" type="text" name="" id="" value="">
+                        u<span id="sourceNum">1</span>
+                    </td>
+                    <td align="center">
+                        <input class="my-textbox input-width" type="text" name="" id="" value="">
+                        <input class="my-textbox " type="text" name="" id="" value="" style="width:40px">
+                    </td>
+                    <td align="center"><input class="my-textbox input-width" type="text" name="" id="" value="" style="width:95%"></td>
+                    <td align="center"><input class="my-textbox input-width" type="text" name="" id="" value=""></td>
+                    <td align="center">
+                        <input class="my-textbox input-width" type="text" name="" id="" value="" onblur="calculateB()">
+                        <input class="my-textbox " type="text" name="" id="" value="" style="width:40px">
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addRow(this)">增加</a> <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="">选择</a></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!--/B类 -->
+    <!--合成不确定度评定 -->
+    <div class="mt10">
+        <h2 class="f14 mt10 "> （3）合成不确定度评定 </h2>
+        <div class="mt10">
+            <div>
+                <i>U</i><small>c</small> =
+                <input class="my-textbox " value="" style="width:300px" id="txtBuQueDingC" onclick="calculateB()">
             </div>
         </div>
     </div>
-}
+    <!--合成不确定度评定 -->
+    <!--扩展不确定度评定 -->
+    <div class="mt10">
+        <h2 class="f14 mt10 " style=" display:inherit"> （4）合成不确定度评定 </h2>
+        (k =
+        <select class="my-combobox" name="ddlSelectD" id="ddlSelectD">
+            <option value="2">2 </option>
+            <option value="3">3</option>
+            <option value="√3">√3</option>
+        </select>
+        )
+        <div class="mt10">
+            <div>
+                <i>U</i><small>rel</small> =
+                <input class="my-textbox " value="" style="width:300px" id="txtvalueD">
+            </div>
+        </div>
+    </div>
+    <!--扩展不确定度评定 -->
+    <!--测量结果报告 -->
+    <div class="mt10">
+        <h2 class="f14 mt10 "> （5）测量结果报告 </h2>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+        <div class="mt10">
+            <div>
+                扩展不确定度为：
+                <input class="my-textbox " value="" style="width:300px" id="txtValueE">
+            </div>
+        </div>
+    </div>
+    <!--测量结果报告 -->
+
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }
+
+
+<script type="text/javascript">
+
+
+    //添加评定点
+    var linkButton = {
+        add: function (obj) {
+            var newRow = " <ul class=\"clear mb10\">" + $(obj).parents('div ul').html() + "</ul>";
+            var parDiv = $(obj).parents('div ul').parent()
+            var newobj = $(parDiv).append(newRow);
+            // $.parser.parse();
+            // $.parser.parse();
+        },
+        del: function (obj) {
+            var row = $(obj).parents('div ul');
+            if ($(row).parent().children().length > 1)
+                $(row).remove();
+            else
+                alert('就剩一行了你还删除呀？');
+        }
+    }
+    //B类增加行
+    var idx = 1;
+    var addRow = function (obj) {
+
+        var trNew = $('#tongdao_B tbody').find('tr:last').clone();
+        idx++;
+        $(trNew).children().eq(1).find('span').text(idx)
+        $(trNew).children().eq(5).find('input').eq(0).val("");
+        $("#tongdao_B tbody").append(trNew);
+    }
+    function getData() {
+        var data = "";
+        $("#tongdao_moban tr:not(:first)").each(function () {
+            $($(this).children()).each(function () {
+                if ($(this).find('input').val() != "")
+                    data += $(this).find('input').val() + ",";
+            })
+
+        })
+        if (data.lastIndexOf(",") > -1)
+            data = data.substring(0, data.length - 1);
+        return data;
+    }
+    function calculate() {
+        var x = getData();
+        x = x.replace(' ', '');
+        var arr = x.split(',');
+        if (arr.length == 1) return false;
+        var lcm = 0;
+        var flag = false;
+        var total = 0;
+        for (var j = 0; j < arr.length; j++) {
+            arr[j] = parseFloat(arr[j]);
+            total += arr[j];
+        }
+        var mean = total / arr.length;
+        mean = Math.round(mean * 10000) / 10000;
+        var xm2 = 0;
+        var srt = '';
+        var srt1 = '';
+        var srt2 = '';
+        for (var j = 0; j < arr.length; j++) {
+            xm2 += Math.pow((arr[j] - mean), 2);
+            if (j == arr.length - 1) {
+                srt += '(' + arr[j] + '-' + mean + ')^2';
+                srt1 += '(' + (arr[j] - mean) + ')^2';
+                srt2 += '(' + Math.pow((arr[j] - mean), 2) + ')';
+            } else {
+                srt += '(' + arr[j] + '-' + mean + ')^2+';
+                srt1 += '(' + (arr[j] - mean) + ')^2+';
+                srt2 += '(' + Math.pow((arr[j] - mean), 2) + ')+';
+            }
+        }
+        var sd = xm2 / (arr.length - 1);
+        var psd = xm2 / (arr.length);
+        var sd1 = sd;
+        var psd1 = psd;
+        sd = Math.sqrt(sd);
+        psd = Math.sqrt(psd);
+        var sVariance = Math.pow(sd, 2);
+        sVariance = Math.round(sVariance * 10000) / 10000;
+        var pVariance = Math.pow(psd, 2);
+        pVariance = Math.round(pVariance * 10000) / 10000;
+        sd = Math.round(sd * 10000) / 10000;
+        psd = Math.round(psd * 10000) / 10000;
+        var v = $("#txtValue").val();
+        $("#txtBuQueDingA").val(v == "" ? sd : parseFloat(sd) / parseFloat(v));
+
+        calculateC();
+    }
+
+    function getDataB() {
+        var data = "";
+        $("#tongdao_B tr:not(:first)").each(function (idx) {
+            if ($(this).children().eq(5).find('input').eq(0).val() != "" && $(this).children().eq(5).find('input').eq(0).val() != undefined)
+                data += $(this).children().eq(5).find('input').eq(0).val() + ","
+
+        })
+        if (data.lastIndexOf(",") > -1)
+            data = data.substring(0, data.length - 1);
+        return data;
+    }
+
+    function calculateB() {
+        var x = getDataB();
+        x = x.replace(' ', '');
+        var arr = x.split(',');
+        if (arr.length == 1) return false;
+        var lcm = 0;
+        var flag = false;
+        var total = 0;
+        for (var j = 0; j < arr.length; j++) {
+            total += Math.pow(parseFloat(arr[j]), 2);
+        }
+
+        var mean = Math.sqrt(total / arr.length);
+        mean = Math.round(mean * 10000) / 10000;
+        var v = $("#txtValue").val();
+        $("#txtBuQueDingB").val(v == "" ? mean : parseFloat(mean) / parseFloat(v));
+        calculateC();
+    }
+    function calculateC() {
+        var valueA = $("#txtBuQueDingA").val();
+        var valueB = $("#txtBuQueDingB").val();
+        if (valueB == "" || valueA == "") return false;
+        var valueC = Math.pow(parseFloat(valueA), 2) + Math.pow(parseFloat(valueB), 2);
+        $("#txtBuQueDingC").val(Math.sqrt(valueC));
+        caculateD();
+    }
+
+    function caculateD() {
+        var valueC = $("#txtBuQueDingC").val();
+        var ddlValue = $("#ddlSelectD").val();
+        $("#txtvalueD,#txtValueE").val(parseFloat(ddlValue) * parseFloat(valueC))
+    }
+    //保存
+    function Save()
+    {
+        var ValueE = $("#txtValueE").val();
+        returnParent(ValueE);
+        //var ID = '#' + $("#hideID").val()
+        //$(ID, parent.document).val(ValueE);//更新不确定度
+        $.messager.alert('操作提示', "操作成功！", 'info');
+    }
+
+</script>
+
+
+
+
