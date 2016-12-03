@@ -467,6 +467,9 @@
     </Compile>
     <Compile Include="VSHENPIMeta.cs" />
     <Compile Include="VSHENPIRepository.cs" />
+    <Compile Include="VSHIYANSHIGONGZUOLIANG.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="VTEST_ITE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

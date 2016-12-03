@@ -37,11 +37,8 @@ namespace Langben.DAL
 			[Display(Name = "授权/资质", Order = 7)]
 			public object SHOUQUANZIZHI { get; set; }
 
-			[Display(Name = "证书类别", Order = 8)]
-			public object ZHENGSHULEIBIE { get; set; }
-
-			[Display(Name = "报告类别", Order = 9)]
-			public object BAOGAOLEIBIE { get; set; }
+			[Display(Name = "证书/报告类别", Order = 9)]
+			public object ZHEGNSHUBAOGAOLEIBIE { get; set; }
 
 			[Display(Name = "报告数量", Order = 10)]
 			public object BAOGAOSHULIANG { get; set; }

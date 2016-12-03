@@ -58,9 +58,10 @@ namespace Langben.App.Controllers
 					,PIZHUNJIELUN = s.PIZHUNJIELUN
 					,PIZHUNSHIJIAN = s.PIZHUNSHIJIAN
 					,SHOUQUANZIZHI = s.SHOUQUANZIZHI
-					,ZHENGSHULEIBIE = s.ZHENGSHULEIBIE
-					,BAOGAOLEIBIE = s.BAOGAOLEIBIE
-					,BAOGAOSHULIANG = s.BAOGAOSHULIANG
+					,
+                    ZHEGNSHUBAOGAOLEIBIE = s.ZHEGNSHUBAOGAOLEIBIE
+                    ,
+                    BAOGAOSHULIANG = s.BAOGAOSHULIANG
 					
                 }
 

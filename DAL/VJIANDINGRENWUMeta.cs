@@ -73,6 +73,9 @@ namespace Langben.DAL
         [Display(Name = "修改时间", Order = 19)]
         public object UPDATETIME { get; set; }
 
+        [Display(Name = "退回原因", Order = 19)]
+        public object RETURNREASON { get; set; }
+
     }
 
 

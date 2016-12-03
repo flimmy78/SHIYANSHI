@@ -99,6 +99,7 @@ namespace Langben.DAL
         public virtual DbSet<VRULE> VRULE { get; set; }
         public virtual DbSet<VSHENHE> VSHENHE { get; set; }
         public virtual DbSet<VSHENPI> VSHENPI { get; set; }
+        public virtual DbSet<VSHIYANSHIGONGZUOLIANG> VSHIYANSHIGONGZUOLIANG { get; set; }
         public virtual DbSet<VTEST_ITE> VTEST_ITE { get; set; }
         public virtual DbSet<VXIANGQING> VXIANGQING { get; set; }
         public virtual DbSet<VZHENGSHULEIBEITONGJIFENXI> VZHENGSHULEIBEITONGJIFENXI { get; set; }

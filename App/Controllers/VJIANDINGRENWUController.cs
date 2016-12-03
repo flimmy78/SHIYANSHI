@@ -425,7 +425,8 @@ namespace Langben.App.Controllers
                     ,
                     NAME = s.NAME,
                     VERSION = s.VERSION,
-                    ISRECEIVE = s.ISRECEIVE
+                    ISRECEIVE = s.ISRECEIVE,
+                    RETURNREASON=s.RETURNREASON
                 }
 
                     )

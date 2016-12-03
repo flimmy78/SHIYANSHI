@@ -95,6 +95,7 @@
           <Property Name="OVERDUE" Type="varchar2" MaxLength="200" />
           <Property Name="STORAGEINSTRUCTIONS" Type="varchar2" MaxLength="4000" />
           <Property Name="STORAGEINSTRUCTI_STATU" Type="varchar2" MaxLength="200" />
+          <Property Name="RETURNREASON" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="APPLIANCE_LABORATORY">
           <Key>
@@ -1431,6 +1432,7 @@
           <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="nvarchar2" MaxLength="200" />
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="ISRECEIVE" Type="nvarchar2" MaxLength="200" />
+          <Property Name="RETURNREASON" Type="varchar2" MaxLength="200" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VQIJULINGQU1”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -1569,6 +1571,21 @@
           <Property Name="AUDITTIME" Type="date" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6002: 表/视图“TENGFEI.VSHIYANSHIGONGZUOLIANG”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="VSHIYANSHIGONGZUOLIANG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
+          <Property Name="WEITUODAN" Type="number" Precision="38" Scale="0" />
+          <Property Name="JIANDINGWANCHENG" Type="number" Precision="38" Scale="0" />
+          <Property Name="SHEBEIGUZHANG" Type="number" Precision="38" Scale="0" />
+          <Property Name="PIZHUNTONGGUO" Type="number" Precision="38" Scale="0" />
+          <Property Name="HEGE" Type="number" Precision="38" Scale="0" />
+          <Property Name="BUHEGE" Type="number" Precision="38" Scale="0" />
+          <Property Name="CHAOQI" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VTEST_ITE”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VTEST_ITE">
           <Key>
@@ -1608,6 +1625,18 @@
           <Property Name="CREATETIME" Type="date" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6013: 表/视图“TENGFEI.VZHENGSHUHAOLEIBIE”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+        <EntityType Name="VZHENGSHUHAOLEIBIE">
+          <Property Name="ID" Type="varchar2" MaxLength="200" />
+          <Property Name="WEITUODAN" Type="number" Precision="38" Scale="0" />
+          <Property Name="JIANDINGWANCHENG" Type="number" Precision="38" Scale="0" />
+          <Property Name="SHEBEIGUZHANG" Type="number" Precision="38" Scale="0" />
+          <Property Name="PIZHUNTONGGUO" Type="number" Precision="38" Scale="0" />
+          <Property Name="HEGE" Type="number" Precision="38" Scale="0" />
+          <Property Name="BUHEGE" Type="number" Precision="38" Scale="0" />
+          <Property Name="CHAOQI" Type="number" Precision="38" Scale="0" />
+        </EntityType>-->
+        <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VZHENGSHULEIBEITONGJIFENXI”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VZHENGSHULEIBEITONGJIFENXI">
           <Key>
@@ -1620,8 +1649,7 @@
           <Property Name="PIZHUNJIELUN" Type="varchar2" MaxLength="200" />
           <Property Name="PIZHUNSHIJIAN" Type="date" />
           <Property Name="SHOUQUANZIZHI" Type="varchar2" MaxLength="12" />
-          <Property Name="ZHENGSHULEIBIE" Type="varchar2" MaxLength="200" />
-          <Property Name="BAOGAOLEIBIE" Type="varchar2" MaxLength="200" />
+          <Property Name="ZHEGNSHUBAOGAOLEIBIE" Type="varchar2" MaxLength="206" />
           <Property Name="BAOGAOSHULIANG" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <!--生成过程中发现错误:
@@ -2582,7 +2610,8 @@ FROM "TENGFEI"."VGONGZUOSHICHANG" "VGONGZUOSHICHANG"</DefiningQuery>
 "VJIANDINGRENWU"."NAME" AS "NAME", 
 "VJIANDINGRENWU"."EQUIPMENT_STATUS_VALUUMN" AS "EQUIPMENT_STATUS_VALUUMN", 
 "VJIANDINGRENWU"."UPDATETIME" AS "UPDATETIME", 
-"VJIANDINGRENWU"."ISRECEIVE" AS "ISRECEIVE"
+"VJIANDINGRENWU"."ISRECEIVE" AS "ISRECEIVE", 
+"VJIANDINGRENWU"."RETURNREASON" AS "RETURNREASON"
 FROM "TENGFEI"."VJIANDINGRENWU" "VJIANDINGRENWU"</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VQIJULINGQU1" EntityType="Self.VQIJULINGQU1" store:Type="Views" store:Schema="TENGFEI">
@@ -2702,6 +2731,18 @@ FROM "TENGFEI"."VSHENHE" "VSHENHE"</DefiningQuery>
 "VSHENPI"."AUDITTIME" AS "AUDITTIME"
 FROM "TENGFEI"."VSHENPI" "VSHENPI"</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VSHIYANSHIGONGZUOLIANG" EntityType="Self.VSHIYANSHIGONGZUOLIANG" store:Type="Views" store:Schema="TENGFEI">
+            <DefiningQuery>SELECT 
+"VSHIYANSHIGONGZUOLIANG"."ID" AS "ID", 
+"VSHIYANSHIGONGZUOLIANG"."WEITUODAN" AS "WEITUODAN", 
+"VSHIYANSHIGONGZUOLIANG"."JIANDINGWANCHENG" AS "JIANDINGWANCHENG", 
+"VSHIYANSHIGONGZUOLIANG"."SHEBEIGUZHANG" AS "SHEBEIGUZHANG", 
+"VSHIYANSHIGONGZUOLIANG"."PIZHUNTONGGUO" AS "PIZHUNTONGGUO", 
+"VSHIYANSHIGONGZUOLIANG"."HEGE" AS "HEGE", 
+"VSHIYANSHIGONGZUOLIANG"."BUHEGE" AS "BUHEGE", 
+"VSHIYANSHIGONGZUOLIANG"."CHAOQI" AS "CHAOQI"
+FROM "TENGFEI"."VSHIYANSHIGONGZUOLIANG" "VSHIYANSHIGONGZUOLIANG"</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VTEST_ITE" EntityType="Self.VTEST_ITE" store:Type="Views" store:Schema="TENGFEI">
             <DefiningQuery>SELECT 
 "VTEST_ITE"."RID" AS "RID", 
@@ -2743,8 +2784,7 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
 "VZHENGSHULEIBEITONGJIFENXI"."PIZHUNJIELUN" AS "PIZHUNJIELUN", 
 "VZHENGSHULEIBEITONGJIFENXI"."PIZHUNSHIJIAN" AS "PIZHUNSHIJIAN", 
 "VZHENGSHULEIBEITONGJIFENXI"."SHOUQUANZIZHI" AS "SHOUQUANZIZHI", 
-"VZHENGSHULEIBEITONGJIFENXI"."ZHENGSHULEIBIE" AS "ZHENGSHULEIBIE", 
-"VZHENGSHULEIBEITONGJIFENXI"."BAOGAOLEIBIE" AS "BAOGAOLEIBIE", 
+"VZHENGSHULEIBEITONGJIFENXI"."ZHEGNSHUBAOGAOLEIBIE" AS "ZHEGNSHUBAOGAOLEIBIE", 
 "VZHENGSHULEIBEITONGJIFENXI"."BAOGAOSHULIANG" AS "BAOGAOSHULIANG"
 FROM "TENGFEI"."VZHENGSHULEIBEITONGJIFENXI" "VZHENGSHULEIBEITONGJIFENXI"</DefiningQuery>
           </EntitySet>
@@ -3107,6 +3147,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySet Name="VRULE" EntityType="Model.VRULE" />
           <EntitySet Name="VSHENHE" EntityType="Model.VSHENHE" />
           <EntitySet Name="VSHENPI" EntityType="Model.VSHENPI" />
+          <EntitySet Name="VSHIYANSHIGONGZUOLIANG" EntityType="Model.VSHIYANSHIGONGZUOLIANG" />
           <EntitySet Name="VTEST_ITE" EntityType="Model.VTEST_ITE" />
           <EntitySet Name="VXIANGQING" EntityType="Model.VXIANGQING" />
           <EntitySet Name="VZHENGSHULEIBEITONGJIFENXI" EntityType="Model.VZHENGSHULEIBEITONGJIFENXI" />
@@ -3433,6 +3474,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="OVERDUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="STORAGEINSTRUCTIONS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="STORAGEINSTRUCTI_STATU" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RETURNREASON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="APPLIANCE_LABORATORY" Relationship="Model.FK_APPLIANC_REFERENCE_APPLIAN2" FromRole="APPLIANCE_DETAIL_INFORMATION" ToRole="APPLIANCE_LABORATORY" />
           <NavigationProperty Name="APPLIANCECOLLECTION" Relationship="Model.FK_APPLIANC_REFERENCE_APPLIANC" FromRole="APPLIANCE_DETAIL_INFORMATION" ToRole="APPLIANCECOLLECTION" />
           <NavigationProperty Name="ORDER_TASK_INFORMATION" Relationship="Model.FK_APPLIANC_REFERENCE_ORDER_TA" FromRole="APPLIANCE_DETAIL_INFORMATION" ToRole="ORDER_TASK_INFORMATION" />
@@ -4823,6 +4865,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="ISRECEIVE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RETURNREASON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VQIJULINGQU1">
           <Key>
@@ -4947,6 +4990,19 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="FILECONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="AUDITTIME" Type="DateTime" />
         </EntityType>
+        <EntityType Name="VSHIYANSHIGONGZUOLIANG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="WEITUODAN" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="JIANDINGWANCHENG" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="SHEBEIGUZHANG" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PIZHUNTONGGUO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="HEGE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="BUHEGE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CHAOQI" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
         <EntityType Name="VTEST_ITE">
           <Key>
             <PropertyRef Name="PREPARE_SCHEMEID" />
@@ -4993,8 +5049,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="PIZHUNJIELUN" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="PIZHUNSHIJIAN" Type="DateTime" />
           <Property Name="SHOUQUANZIZHI" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="ZHENGSHULEIBIE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="BAOGAOLEIBIE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ZHEGNSHUBAOGAOLEIBIE" Type="String" MaxLength="206" FixedLength="false" Unicode="false" />
           <Property Name="BAOGAOSHULIANG" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="VZHENGSHUXINXICHAXUN">
@@ -5748,6 +5803,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="APPLIANCE_DETAIL_INFORMATION">
             <EntityTypeMapping TypeName="Model.APPLIANCE_DETAIL_INFORMATION">
               <MappingFragment StoreEntitySet="APPLIANCE_DETAIL_INFORMATION">
+                <ScalarProperty Name="RETURNREASON" ColumnName="RETURNREASON" />
                 <ScalarProperty Name="STORAGEINSTRUCTI_STATU" ColumnName="STORAGEINSTRUCTI_STATU" />
                 <ScalarProperty Name="STORAGEINSTRUCTIONS" ColumnName="STORAGEINSTRUCTIONS" />
                 <ScalarProperty Name="OVERDUE" ColumnName="OVERDUE" />
@@ -7094,6 +7150,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="VJIANDINGRENWU">
             <EntityTypeMapping TypeName="Model.VJIANDINGRENWU">
               <MappingFragment StoreEntitySet="VJIANDINGRENWU">
+                <ScalarProperty Name="RETURNREASON" ColumnName="RETURNREASON" />
                 <ScalarProperty Name="ISRECEIVE" ColumnName="ISRECEIVE" />
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
                 <ScalarProperty Name="EQUIPMENT_STATUS_VALUUMN" ColumnName="EQUIPMENT_STATUS_VALUUMN" />
@@ -7246,6 +7303,20 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="VSHIYANSHIGONGZUOLIANG">
+            <EntityTypeMapping TypeName="Model.VSHIYANSHIGONGZUOLIANG">
+              <MappingFragment StoreEntitySet="VSHIYANSHIGONGZUOLIANG">
+                <ScalarProperty Name="CHAOQI" ColumnName="CHAOQI" />
+                <ScalarProperty Name="BUHEGE" ColumnName="BUHEGE" />
+                <ScalarProperty Name="HEGE" ColumnName="HEGE" />
+                <ScalarProperty Name="PIZHUNTONGGUO" ColumnName="PIZHUNTONGGUO" />
+                <ScalarProperty Name="SHEBEIGUZHANG" ColumnName="SHEBEIGUZHANG" />
+                <ScalarProperty Name="JIANDINGWANCHENG" ColumnName="JIANDINGWANCHENG" />
+                <ScalarProperty Name="WEITUODAN" ColumnName="WEITUODAN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="VTEST_ITE">
             <EntityTypeMapping TypeName="Model.VTEST_ITE">
               <MappingFragment StoreEntitySet="VTEST_ITE">
@@ -7286,8 +7357,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
             <EntityTypeMapping TypeName="Model.VZHENGSHULEIBEITONGJIFENXI">
               <MappingFragment StoreEntitySet="VZHENGSHULEIBEITONGJIFENXI">
                 <ScalarProperty Name="BAOGAOSHULIANG" ColumnName="BAOGAOSHULIANG" />
-                <ScalarProperty Name="BAOGAOLEIBIE" ColumnName="BAOGAOLEIBIE" />
-                <ScalarProperty Name="ZHENGSHULEIBIE" ColumnName="ZHENGSHULEIBIE" />
+                <ScalarProperty Name="ZHEGNSHUBAOGAOLEIBIE" ColumnName="ZHEGNSHUBAOGAOLEIBIE" />
                 <ScalarProperty Name="SHOUQUANZIZHI" ColumnName="SHOUQUANZIZHI" />
                 <ScalarProperty Name="PIZHUNSHIJIAN" ColumnName="PIZHUNSHIJIAN" />
                 <ScalarProperty Name="PIZHUNJIELUN" ColumnName="PIZHUNJIELUN" />

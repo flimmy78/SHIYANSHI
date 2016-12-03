@@ -12,16 +12,15 @@ namespace Langben.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class VZHENGSHULEIBEITONGJIFENXI
+    public partial class VSHIYANSHIGONGZUOLIANG
     {
         public string ID { get; set; }
-        public string SUOSHUDANWEI { get; set; }
-        public string ZHENGSHUDANWEI { get; set; }
-        public string SHOULIDANWEI { get; set; }
-        public string PIZHUNJIELUN { get; set; }
-        public Nullable<System.DateTime> PIZHUNSHIJIAN { get; set; }
-        public string SHOUQUANZIZHI { get; set; }
-        public string ZHEGNSHUBAOGAOLEIBIE { get; set; }
-        public Nullable<decimal> BAOGAOSHULIANG { get; set; }
+        public Nullable<decimal> WEITUODAN { get; set; }
+        public Nullable<decimal> JIANDINGWANCHENG { get; set; }
+        public Nullable<decimal> SHEBEIGUZHANG { get; set; }
+        public Nullable<decimal> PIZHUNTONGGUO { get; set; }
+        public Nullable<decimal> HEGE { get; set; }
+        public Nullable<decimal> BUHEGE { get; set; }
+        public Nullable<decimal> CHAOQI { get; set; }
     }
 }
