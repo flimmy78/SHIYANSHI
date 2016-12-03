@@ -67,10 +67,10 @@
   from PREPARE_SCHEME ps
 inner join APPLIANCE_LABORATORY al
 on al.PREPARE_SCHEMEID=ps.id
-inner join REPORTCOLLECTION   rn
-on rn.PREPARE_SCHEMEID=ps.id
+
 inner join APPLIANCE_DETAIL_INFORMATION adi
 on al.appliance_detail_informationid=adi.id
 inner join ORDER_TASK_INFORMATION oti
-on oti.id=adi.order_task_informationid;
- 
+on oti.id=adi.order_task_informationid
+ left join REPORTCOLLECTION   rn
+on rn.PREPARE_SCHEMEID=ps.id;
