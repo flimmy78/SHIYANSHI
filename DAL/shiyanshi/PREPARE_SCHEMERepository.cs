@@ -80,6 +80,8 @@ namespace Langben.DAL
                 deleteItem.YEARS = entity.YEARS == null ? deleteItem.YEARS : entity.YEARS;
                 deleteItem.PACKAGETYPE = entity.PACKAGETYPE == null ? deleteItem.PACKAGETYPE : entity.PACKAGETYPE;
                 deleteItem.REPORTSTATUSZI = entity.REPORTSTATUSZI == null ? deleteItem.REPORTSTATUSZI : entity.REPORTSTATUSZI;
+                deleteItem.AUTHORIZATION = entity.AUTHORIZATION == null ? deleteItem.AUTHORIZATION : entity.AUTHORIZATION;
+                deleteItem.VALIDITYEND = entity.VALIDITYEND == null ? deleteItem.VALIDITYEND : entity.VALIDITYEND;
             }
         }
 
@@ -137,6 +139,8 @@ namespace Langben.DAL
             deleteItem.YEARS = entity.YEARS == null ? deleteItem.YEARS : entity.YEARS;
             deleteItem.PACKAGETYPE = entity.PACKAGETYPE == null ? deleteItem.PACKAGETYPE : entity.PACKAGETYPE;
             deleteItem.REPORTSTATUSZI = entity.REPORTSTATUSZI == null ? deleteItem.REPORTSTATUSZI : entity.REPORTSTATUSZI;
+            deleteItem.AUTHORIZATION = entity.AUTHORIZATION == null ? deleteItem.AUTHORIZATION : entity.AUTHORIZATION;
+            deleteItem.VALIDITYEND = entity.VALIDITYEND == null ? deleteItem.VALIDITYEND : entity.VALIDITYEND;
             return deleteItem;
         }
     }

@@ -213,6 +213,17 @@ namespace Langben.DAL
         [ScaffoldColumn(true)]
         [Display(Name = "其他", Order = 43)]
         public object OTHER { get; set; }
+
+        [ScaffoldColumn(true)]
+        [Display(Name = "授权资质", Order = 44)]
+        public object AUTHORIZATION { get; set; }
+
+
+        [ScaffoldColumn(true)]
+        [Display(Name = "有效期至", Order = 45)]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.DateTime, ErrorMessage = "时间格式不正确")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
+        public DateTime? VALIDITYEND { get; set; }
     }
 }
 

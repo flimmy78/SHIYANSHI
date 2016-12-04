@@ -135,8 +135,8 @@
 
                 </div>
                 <div class="input_search-field">
-                    <a class="easyui-linkbutton" onclick="shangchuan()" id="sc">报告上传</a>
-                    <a class="easyui-linkbutton" onclick="fangan()" id="jl">建立方案</a>
+                    <a class="easyui-linkbutton" onclick="shangchuan(1)" id="sc">报告上传</a>
+                    <a class="easyui-linkbutton" onclick="shangchuan(2)" id="jl">建立方案</a>
                     <a class="easyui-linkbutton" onclick="BackList('VJIANDINGRENWU')">返回</a>
                 </div>
             </div>
@@ -200,17 +200,57 @@
         var re = new RegExp(regu);
         return re.test(str);
     }
-    //报告上传
-    function shangchuan() {
+    //报告上传/建立方案
+    function shangchuan(e) {
+        debugger
+        var AUTHORIZATION = null;
+        var zslb = $("#CERTIFICATE_CATEGORY").val();//证书类别
+        var sqdw = $("#ACCEPT_ORGNIZATION_HIDDEN").val();//授权单位
+        var zi = $("#QUALIFICATIONS").val();//资质
+        switch (zi) {
+            case "本单位获北京市质量技术监督局专项计量授权，证书编号：（京）法计（2012）006号":
+                if (zslb == "检定" && sqdw == "华北电力科学研究院有限责任公司") {
+                    AUTHORIZATION = "北京授权检定";
+                }
+                break;
+            case "本实验室获中国合格评定国家认可委员（CNAS）认可证书，证书号No.L0394":
+                if (zslb == "校准" && sqdw == "华北电力科学研究院有限责任公司") {
+                    AUTHORIZATION = "CNAS校准";
+                }
+                else if (zslb == "校准" && sqdw == "冀北电力有限公司计量中心") {
+                    AUTHORIZATION = "CNAS校准";
+                }
+                break;
+            case "本单位获河北市质量技术监督局专项计量授权，证书编号：（冀）法计（2014）D033号":
+                if (zslb == "检定" && sqdw == "冀北电力有限公司计量中心") {
+                    AUTHORIZATION = "河北授权检定";
+                }
+                break;
+            case "/":
+                if (zslb == "检定" && sqdw == "华北电力科学研究院有限责任公司") {
+                    AUTHORIZATION = "检定";
+                }
+                else if (zslb == "校准" && sqdw == "华北电力科学研究院有限责任公司") {
+                    AUTHORIZATION = "校准";
+                }
+                else if (zslb == "校准" && sqdw == "冀北电力有限公司计量中心") {
+                    AUTHORIZATION = "校准";
+                }
+                break;
+            default:
+
+        }
+
         var arr = {
             REPORT_CATEGORY: $("#REPORT_CATEGORY").val(),//报告类别
-            CERTIFICATE_CATEGORY: $("#CERTIFICATE_CATEGORY").val(),//证书类别
+            CERTIFICATE_CATEGORY: zslb,//证书类别
             CNAS: $("input[name='CNAS']:checked").val(),//CNAS
             CERTIFICATION_AUTHORITY: $("input[name='CERTIFICATION_AUTHORITY']:checked").val(),//检定授权
             CONTROL_NUMBER: $("#CONTROL_NUMBER").val(),//控制编号
-            QUALIFICATIONS: $("#QUALIFICATIONS").val(),//资质
+            QUALIFICATIONS: zi,//资质
             APPLIANCE_LABORATORYID: $("#APPLIANCE_LABORATORYID").val(),
-            ID: $("#ID_String").val()
+            ID: $("#ID_String").val(),
+            AUTHORIZATION: AUTHORIZATION
         }
         if (baogaoif(arr)) {
             $.ajax({
@@ -224,7 +264,12 @@
                     else if (data.Code == 1) {
                         var id = "@ViewBag.Id";
                         var di = data.Id;
-                        window.location.href = "/VJIANDINGRENWU/BaoGaoShangChuan/" + di + "|@ViewBag.APPLIANCE_DETAIL_INFORMATIONID";
+                        if (e ==1) {
+                            window.location.href = "/VJIANDINGRENWU/BaoGaoShangChuan/" + di + "|@ViewBag.APPLIANCE_DETAIL_INFORMATIONID";
+                        }
+                        else if (e == 2) {
+                            window.location.href = "/VJIANDINGRENWU/JianLiFangAn/" + di + "|@ViewBag.APPLIANCE_DETAIL_INFORMATIONID";
+                        }
                         return false;
                     }
                     else {
@@ -243,47 +288,7 @@
             })
         }
     }
-    //建立方案
-    function fangan() {
-        var arr = {
-            REPORT_CATEGORY: $("#REPORT_CATEGORY").val(),//报告类别
-            CERTIFICATE_CATEGORY: $("#CERTIFICATE_CATEGORY").val(),//证书类别
-            CNAS: $("input[name='CNAS']:checked").val(),//CNAS
-            CERTIFICATION_AUTHORITY: $("input[name='CERTIFICATION_AUTHORITY']:checked").val(),//检定授权
-            CONTROL_NUMBER: $("#CONTROL_NUMBER").val(),//控制编号
-            QUALIFICATIONS: $("#QUALIFICATIONS").val(),//资质
-            APPLIANCE_LABORATORYID: $("#APPLIANCE_LABORATORYID").val(),
-            ID: $("#ID_String").val()
-        }
-        if (baogaoif(arr)) {
-            $.ajax({
-                url: "/api/PREPARE_SCHEMEApi/Post",
-                type: "Post",
-                data: arr,
-                dataType: "json",
-                success: function (data) {
-                    if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
-                    else if (data.Code == 1) {
-                        var id = "@ViewBag.Id";
-                        var di = data.Id;
-                        window.location.href = "/VJIANDINGRENWU/JianLiFangAn/" + di + "|@ViewBag.APPLIANCE_DETAIL_INFORMATIONID";
-                        return false;
-                    }
-                    else {
-                        if ($.messager) {
-                            $.messager.defaults.ok = '继续';
-                            $.messager.defaults.cancel = '返回';
-                            $.messager.confirm('操作提示', data.Message, function (r) {
-                                if (!r) {
-                                    window.location.href = 'javascript:history.go(-1)';
-                                }
-                            });
-                        }
-                    }
-                }
-            })
-        }
-    }
+    
     //重新绑定资质
     function zizhiget(arr) {
         var zhi = $(arr).attr("atps");
@@ -310,7 +315,7 @@
                 $("#kongzhi").hide();
                 $('#CONTROL_NUMBER').val("");
                 if (zhi2 == "华北电力科学研究院有限责任公司") {
-                   getCity($("#QUALIFICATIONS"));
+                    getCity($("#QUALIFICATIONS"));
                     $("<option></option>")
                                .val("/")
                                .text("/")

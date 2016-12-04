@@ -69,6 +69,8 @@ namespace Langben.DAL
         public string YEARS { get; set; }
         public string PACKAGETYPE { get; set; }
         public string OTHER { get; set; }
+        public string AUTHORIZATION { get; set; }
+        public Nullable<System.DateTime> VALIDITYEND { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<APPLIANCE_LABORATORY> APPLIANCE_LABORATORY { get; set; }
