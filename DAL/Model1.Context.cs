@@ -79,6 +79,8 @@ namespace Langben.DAL
         public virtual DbSet<SysOperation> SysOperation { get; set; }
         public virtual DbSet<SysPerson> SysPerson { get; set; }
         public virtual DbSet<SysRole> SysRole { get; set; }
+        public virtual DbSet<THEAPPROVALPROCESS> THEAPPROVALPROCESS { get; set; }
+        public virtual DbSet<THEREVIEWPROCESS> THEREVIEWPROCESS { get; set; }
         public virtual DbSet<THREE_PHASE_UNCERTAINTY> THREE_PHASE_UNCERTAINTY { get; set; }
         public virtual DbSet<TRANSMITER_SIN> TRANSMITER_SIN { get; set; }
         public virtual DbSet<TRANSMITTER_COS> TRANSMITTER_COS { get; set; }
@@ -91,8 +93,6 @@ namespace Langben.DAL
         public virtual DbSet<UNCERTAINTYPARAMETERMANAGEMENT> UNCERTAINTYPARAMETERMANAGEMENT { get; set; }
         public virtual DbSet<UNCERTAINTYTABLE> UNCERTAINTYTABLE { get; set; }
         public virtual DbSet<UNDERTAKE_LABORATORY> UNDERTAKE_LABORATORY { get; set; }
-        public virtual DbSet<THEAPPROVALPROCESS> THEAPPROVALPROCESS { get; set; }
-        public virtual DbSet<THEREVIEWPROCESS> THEREVIEWPROCESS { get; set; }
         public virtual DbSet<VBAOGAODAYIN> VBAOGAODAYIN { get; set; }
         public virtual DbSet<VBIAOZHUNLIANGCHUANGONGZHUO> VBIAOZHUNLIANGCHUANGONGZHUO { get; set; }
         public virtual DbSet<VGONGZUOSHICHANG> VGONGZUOSHICHANG { get; set; }
