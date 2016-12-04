@@ -123,3 +123,5 @@ textarea{font-size : 12px ; color: #444; height: 106px; width: 600px; border: 1p
   border: 1px solid #ddd;
   filter: none;
 }
+.border-b{ border-bottom:1px solid #ccc}
+.border-t{ border-top:1px solid #ccc}
