@@ -93,9 +93,6 @@
     </Compile>
     <Compile Include="COMPANYMeta.cs" />
     <Compile Include="COMPANYRepository.cs" />
-    <Compile Include="ComplexType1.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="CROSS_COS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -478,9 +475,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="VXIANGQING.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="VXIANGQING1.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="VXIANGQINGMeta.cs" />

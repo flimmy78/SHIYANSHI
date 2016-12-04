@@ -624,6 +624,8 @@
           <Property Name="YEARS" Type="nvarchar2" MaxLength="200" />
           <Property Name="PACKAGETYPE" Type="nvarchar2" MaxLength="200" />
           <Property Name="OTHER" Type="varchar2" MaxLength="200" />
+          <Property Name="AUTHORIZATION" Type="varchar2" MaxLength="200" />
+          <Property Name="VALIDITYEND" Type="date" />
         </EntityType>
         <EntityType Name="PRINTREPORT">
           <Key>
@@ -1590,10 +1592,9 @@
         <EntityType Name="VTEST_ITE">
           <Key>
             <PropertyRef Name="PREPARE_SCHEMEID" />
-            <PropertyRef Name="ROW_FLAG" />
           </Key>
           <Property Name="RID" Type="number" Precision="38" Scale="0" />
-          <Property Name="ROW_FLAG" Type="varchar2" MaxLength="73" Nullable="false" />
+          <Property Name="ROW_FLAG" Type="varchar2" MaxLength="73" />
           <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="SCHEMEID" Type="varchar2" MaxLength="36" />
           <Property Name="RULEID" Type="varchar2" MaxLength="36" />
@@ -4036,6 +4037,8 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="YEARS" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="PACKAGETYPE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="OTHER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AUTHORIZATION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="VALIDITYEND" Type="DateTime" />
           <NavigationProperty Name="APPLIANCE_LABORATORY" Relationship="Model.FK_APPLIANC_REFERENCE_PREPARE_" FromRole="PREPARE_SCHEME" ToRole="APPLIANCE_LABORATORY" />
           <NavigationProperty Name="FILE_UPLOADER" Relationship="Model.FK_FILE_UPL_REFERENCE_PREPARE_" FromRole="PREPARE_SCHEME" ToRole="FILE_UPLOADER" />
           <NavigationProperty Name="SCHEME" Relationship="Model.FK_PREPARE__REFERENCE_SCHEME" FromRole="PREPARE_SCHEME" ToRole="SCHEME" />
@@ -5006,10 +5009,9 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
         <EntityType Name="VTEST_ITE">
           <Key>
             <PropertyRef Name="PREPARE_SCHEMEID" />
-            <PropertyRef Name="ROW_FLAG" />
           </Key>
           <Property Name="RID" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="ROW_FLAG" Type="String" MaxLength="73" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ROW_FLAG" Type="String" MaxLength="73" FixedLength="false" Unicode="false" />
           <Property Name="PREPARE_SCHEMEID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="RULEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
@@ -6326,6 +6328,8 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="PREPARE_SCHEME">
             <EntityTypeMapping TypeName="Model.PREPARE_SCHEME">
               <MappingFragment StoreEntitySet="PREPARE_SCHEME">
+                <ScalarProperty Name="VALIDITYEND" ColumnName="VALIDITYEND" />
+                <ScalarProperty Name="AUTHORIZATION" ColumnName="AUTHORIZATION" />
                 <ScalarProperty Name="OTHER" ColumnName="OTHER" />
                 <ScalarProperty Name="PACKAGETYPE" ColumnName="PACKAGETYPE" />
                 <ScalarProperty Name="YEARS" ColumnName="YEARS" />

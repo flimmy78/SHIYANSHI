@@ -134,6 +134,9 @@ namespace Langben.App.Controllers
                     //return Json(result); //提示插入失败
                     entity.VALIDITY_PERIOD = null;
                 }
+                //有效期至
+                entity.VALIDITYEND = Convert.ToDateTime(entity.CALIBRATION_DATE).AddYears(Convert.ToInt32(VALIDITY_PERIOD));
+
                 string currentPerson = GetCurrentPerson();
                 entity.UPDATETIME = DateTime.Now;
                 entity.UPDATEPERSON = currentPerson;
@@ -181,7 +184,7 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="ID">预备方案ID</param>
         /// <returns></returns>
-        public ActionResult Export(string ID,string Type)
+        public ActionResult Export(string ID, string Type)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             ReportBLL reportBll = new ReportBLL();
@@ -189,7 +192,7 @@ namespace Langben.App.Controllers
             bool IsSuccess = false;
             FILE_UPLOADER fEntity = null;
             if (Type == "OriginalRecord")
-            {                
+            {
                 IsSuccess = reportBll.ExportOriginalRecord(ID, out Message, out fEntity);
             }
             else
@@ -205,9 +208,9 @@ namespace Langben.App.Controllers
             {
                 result.Code = Common.ClientCode.Fail;
                 result.Message = Message;
-            }            
+            }
             return Json(result); //返回        
-        
+
         }
         IBLL.IPREPARE_SCHEMEBLL m_BLL;
         ValidationErrors validationErrors = new ValidationErrors();
