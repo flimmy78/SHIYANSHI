@@ -626,6 +626,7 @@
           <Property Name="OTHER" Type="varchar2" MaxLength="200" />
           <Property Name="AUTHORIZATION" Type="varchar2" MaxLength="200" />
           <Property Name="VALIDITYEND" Type="date" />
+          <Property Name="UNQUALIFIEDTYPE" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="PRINTREPORT">
           <Key>
@@ -1316,7 +1317,7 @@
           <Property Name="CERTIFICATE_ENTERPRISE" Type="varchar2" MaxLength="200" />
           <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="varchar2" MaxLength="4000" />
           <Property Name="CERTIFICATE_CATEGORY" Type="varchar2" MaxLength="200" />
-          <Property Name="QUALIFICATIONS" Type="varchar2" MaxLength="12" />
+          <Property Name="QUALIFICATIONS" Type="varchar2" MaxLength="200" />
           <Property Name="CONCLUSION_EXPLAIN" Type="varchar2" MaxLength="4000" />
           <Property Name="CONCLUSION" Type="varchar2" MaxLength="200" />
           <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
@@ -1360,7 +1361,7 @@
           <Property Name="ZHENGSHUBAOGAOBIANHAO" Type="varchar2" MaxLength="200" />
           <Property Name="ZHENGSHULEIBIE" Type="varchar2" MaxLength="200" />
           <Property Name="BAOGAOLEIBIE" Type="varchar2" MaxLength="200" />
-          <Property Name="SHOUQUANZIZHI" Type="varchar2" MaxLength="12" />
+          <Property Name="SHOUQUANZIZHI" Type="varchar2" MaxLength="200" />
           <Property Name="QIJUZHUANGTAI" Type="varchar2" MaxLength="200" />
           <Property Name="YOUXIAOQIZHI" Type="date" />
           <Property Name="BAOGAOSHENPITONGGUORIQI" Type="date" />
@@ -1535,7 +1536,7 @@
           <Property Name="CERTIFICATE_ENTERPRISE" Type="varchar2" MaxLength="200" />
           <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="varchar2" MaxLength="4000" />
           <Property Name="CERTIFICATE_CATEGORY" Type="varchar2" MaxLength="200" />
-          <Property Name="QUALIFICATIONS" Type="varchar2" MaxLength="12" />
+          <Property Name="QUALIFICATIONS" Type="varchar2" MaxLength="200" />
           <Property Name="CONCLUSION_EXPLAIN" Type="varchar2" MaxLength="4000" />
           <Property Name="CONCLUSION" Type="varchar2" MaxLength="200" />
           <Property Name="ISAGGREY" Type="varchar2" MaxLength="200" />
@@ -1545,6 +1546,7 @@
           <Property Name="FILECONCLUSION" Type="varchar2" MaxLength="200" />
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
+          <Property Name="DETECTERID" Type="varchar2" MaxLength="36" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VSHENPI”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -1561,7 +1563,7 @@
           <Property Name="CERTIFICATE_ENTERPRISE" Type="varchar2" MaxLength="200" />
           <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="varchar2" MaxLength="4000" />
           <Property Name="CERTIFICATE_CATEGORY" Type="varchar2" MaxLength="200" />
-          <Property Name="QUALIFICATIONS" Type="varchar2" MaxLength="12" />
+          <Property Name="QUALIFICATIONS" Type="varchar2" MaxLength="200" />
           <Property Name="CONCLUSION_EXPLAIN" Type="varchar2" MaxLength="4000" />
           <Property Name="CONCLUSION" Type="varchar2" MaxLength="200" />
           <Property Name="APPROVALISAGGREY" Type="varchar2" MaxLength="200" />
@@ -1592,9 +1594,10 @@
         <EntityType Name="VTEST_ITE">
           <Key>
             <PropertyRef Name="PREPARE_SCHEMEID" />
+            <PropertyRef Name="ROW_FLAG" />
           </Key>
           <Property Name="RID" Type="number" Precision="38" Scale="0" />
-          <Property Name="ROW_FLAG" Type="varchar2" MaxLength="73" />
+          <Property Name="ROW_FLAG" Type="varchar2" MaxLength="73" Nullable="false" />
           <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="SCHEMEID" Type="varchar2" MaxLength="36" />
           <Property Name="RULEID" Type="varchar2" MaxLength="36" />
@@ -1611,6 +1614,7 @@
           <Property Name="SORT" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VXIANGQING”中的列“REPORTNUMBER”。
 警告 6002: 表/视图“TENGFEI.VXIANGQING”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VXIANGQING">
           <Key>
@@ -1649,7 +1653,7 @@
           <Property Name="SHOULIDANWEI" Type="varchar2" MaxLength="200" />
           <Property Name="PIZHUNJIELUN" Type="varchar2" MaxLength="200" />
           <Property Name="PIZHUNSHIJIAN" Type="date" />
-          <Property Name="SHOUQUANZIZHI" Type="varchar2" MaxLength="12" />
+          <Property Name="SHOUQUANZIZHI" Type="varchar2" MaxLength="200" />
           <Property Name="ZHEGNSHUBAOGAOLEIBIE" Type="varchar2" MaxLength="206" />
           <Property Name="BAOGAOSHULIANG" Type="number" Precision="38" Scale="0" />
         </EntityType>
@@ -1681,7 +1685,7 @@
           <Property Name="ZHENGSHUBAOGAOBIANHAO" Type="varchar2" MaxLength="200" />
           <Property Name="ZHENGSHULEIBIE" Type="varchar2" MaxLength="200" />
           <Property Name="BAOGAOLEIBIE" Type="varchar2" MaxLength="200" />
-          <Property Name="SHOUQUANZIZHI" Type="varchar2" MaxLength="12" />
+          <Property Name="SHOUQUANZIZHI" Type="varchar2" MaxLength="200" />
           <Property Name="FAFANGZHUANGTAI" Type="varchar2" MaxLength="200" />
           <Property Name="SUOSHUDANWEI" Type="nvarchar2" MaxLength="200" />
           <Property Name="WEITUODANWEI" Type="varchar2" MaxLength="200" />
@@ -2706,7 +2710,8 @@ FROM "TENGFEI"."VRULE" "VRULE"</DefiningQuery>
 "VSHENHE"."REPORTSTATUS" AS "REPORTSTATUS", 
 "VSHENHE"."FILECONCLUSION" AS "FILECONCLUSION", 
 "VSHENHE"."UPDATETIME" AS "UPDATETIME", 
-"VSHENHE"."UNDERTAKE_LABORATORYID" AS "UNDERTAKE_LABORATORYID"
+"VSHENHE"."UNDERTAKE_LABORATORYID" AS "UNDERTAKE_LABORATORYID", 
+"VSHENHE"."DETECTERID" AS "DETECTERID"
 FROM "TENGFEI"."VSHENHE" "VSHENHE"</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VSHENPI" EntityType="Self.VSHENPI" store:Type="Views" store:Schema="TENGFEI">
@@ -4039,6 +4044,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="OTHER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="AUTHORIZATION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="VALIDITYEND" Type="DateTime" />
+          <Property Name="UNQUALIFIEDTYPE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="APPLIANCE_LABORATORY" Relationship="Model.FK_APPLIANC_REFERENCE_PREPARE_" FromRole="PREPARE_SCHEME" ToRole="APPLIANCE_LABORATORY" />
           <NavigationProperty Name="FILE_UPLOADER" Relationship="Model.FK_FILE_UPL_REFERENCE_PREPARE_" FromRole="PREPARE_SCHEME" ToRole="FILE_UPLOADER" />
           <NavigationProperty Name="SCHEME" Relationship="Model.FK_PREPARE__REFERENCE_SCHEME" FromRole="PREPARE_SCHEME" ToRole="SCHEME" />
@@ -4765,7 +4771,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="CERTIFICATE_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="CERTIFICATE_CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="QUALIFICATIONS" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="QUALIFICATIONS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CONCLUSION_EXPLAIN" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="CONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
@@ -4807,7 +4813,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="ZHENGSHUBAOGAOBIANHAO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ZHENGSHULEIBIE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="BAOGAOLEIBIE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="SHOUQUANZIZHI" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="SHOUQUANZIZHI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="QIJUZHUANGTAI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="YOUXIAOQIZHI" Type="DateTime" />
           <Property Name="BAOGAOSHENPITONGGUORIQI" Type="DateTime" />
@@ -4958,7 +4964,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="CERTIFICATE_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="CERTIFICATE_CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="QUALIFICATIONS" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="QUALIFICATIONS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CONCLUSION_EXPLAIN" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="CONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ISAGGREY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -4968,6 +4974,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="FILECONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="DETECTERID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VSHENPI">
           <Key>
@@ -4982,7 +4989,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="CERTIFICATE_ENTERPRISE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CUSTOMER_SPECIFIC_REQUIREMENTS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="CERTIFICATE_CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="QUALIFICATIONS" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="QUALIFICATIONS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CONCLUSION_EXPLAIN" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <Property Name="CONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="APPROVALISAGGREY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -5009,9 +5016,10 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
         <EntityType Name="VTEST_ITE">
           <Key>
             <PropertyRef Name="PREPARE_SCHEMEID" />
+            <PropertyRef Name="ROW_FLAG" />
           </Key>
           <Property Name="RID" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="ROW_FLAG" Type="String" MaxLength="73" FixedLength="false" Unicode="false" />
+          <Property Name="ROW_FLAG" Type="String" MaxLength="73" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PREPARE_SCHEMEID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="RULEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
@@ -5050,7 +5058,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="SHOULIDANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="PIZHUNJIELUN" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="PIZHUNSHIJIAN" Type="DateTime" />
-          <Property Name="SHOUQUANZIZHI" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="SHOUQUANZIZHI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ZHEGNSHUBAOGAOLEIBIE" Type="String" MaxLength="206" FixedLength="false" Unicode="false" />
           <Property Name="BAOGAOSHULIANG" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
@@ -5080,7 +5088,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="ZHENGSHUBAOGAOBIANHAO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ZHENGSHULEIBIE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="BAOGAOLEIBIE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="SHOUQUANZIZHI" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="SHOUQUANZIZHI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FAFANGZHUANGTAI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="SUOSHUDANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="WEITUODANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -6328,6 +6336,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="PREPARE_SCHEME">
             <EntityTypeMapping TypeName="Model.PREPARE_SCHEME">
               <MappingFragment StoreEntitySet="PREPARE_SCHEME">
+                <ScalarProperty Name="UNQUALIFIEDTYPE" ColumnName="UNQUALIFIEDTYPE" />
                 <ScalarProperty Name="VALIDITYEND" ColumnName="VALIDITYEND" />
                 <ScalarProperty Name="AUTHORIZATION" ColumnName="AUTHORIZATION" />
                 <ScalarProperty Name="OTHER" ColumnName="OTHER" />
@@ -7260,6 +7269,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="VSHENHE">
             <EntityTypeMapping TypeName="Model.VSHENHE">
               <MappingFragment StoreEntitySet="VSHENHE">
+                <ScalarProperty Name="DETECTERID" ColumnName="DETECTERID" />
                 <ScalarProperty Name="UNDERTAKE_LABORATORYID" ColumnName="UNDERTAKE_LABORATORYID" />
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
                 <ScalarProperty Name="FILECONCLUSION" ColumnName="FILECONCLUSION" />

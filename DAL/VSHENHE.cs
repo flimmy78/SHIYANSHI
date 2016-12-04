@@ -33,5 +33,6 @@ namespace Langben.DAL
         public string FILECONCLUSION { get; set; }
         public Nullable<System.DateTime> UPDATETIME { get; set; }
         public string UNDERTAKE_LABORATORYID { get; set; }
+        public string DETECTERID { get; set; }
     }
 }

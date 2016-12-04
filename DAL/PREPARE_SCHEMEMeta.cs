@@ -224,6 +224,10 @@ namespace Langben.DAL
         [DataType(System.ComponentModel.DataAnnotations.DataType.DateTime, ErrorMessage = "时间格式不正确")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         public DateTime? VALIDITYEND { get; set; }
+
+        [ScaffoldColumn(true)]
+        [Display(Name = "不合格类型", Order = 46)]
+        public object UNQUALIFIEDTYPE { get; set; }
     }
 }
 
