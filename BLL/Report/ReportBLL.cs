@@ -34,6 +34,40 @@ namespace Langben.Report
     public class ReportBLL
     {
         /// <summary>
+        /// 模板中所有的合并的单元格
+        /// </summary>
+        List<CellRangeAddress> returnList = new List<CellRangeAddress>();
+        /// <summary>
+        ///  获取合并区域信息
+        /// </summary>
+        /// <param name="sheet"></param>
+        /// <returns></returns>
+        private List<CellRangeAddress> GetMergedCellRegion(ISheet sheet)
+        {
+            int mergedRegionCellCount = sheet.NumMergedRegions;
+
+            for (int i = 0; i < mergedRegionCellCount; i++)
+            {
+                returnList.Add(sheet.GetMergedRegion(i));
+            }
+
+            return returnList;
+        }
+        /// <summary>
+        /// 获取合并单元格的坐标范围
+        /// </summary>
+        /// <param name="columnIndex"></param>
+        /// <param name="rowIndex"></param> 
+        /// <returns>合并单元格的范围</returns>
+        public CellRangeAddress getMergedRegionCell(int columnIndex, int rowIndex)
+        {
+            return (from c in returnList
+                    where columnIndex >= c.FirstColumn && columnIndex <= c.LastColumn && rowIndex >= c.FirstRow && rowIndex <= c.LastRow
+                    select c).FirstOrDefault();
+
+        }
+
+        /// <summary>
         /// 获取特殊字符配置信息
         /// </summary>
         /// <returns></returns>
@@ -51,12 +85,12 @@ namespace Langben.Report
         /// </summary>
         /// <param name="type">报告类型</param>
         /// <returns></returns>
-        public TableTemplates GetTableTemplates(ExportType type= ExportType.OriginalRecord_JianDing)
+        public TableTemplates GetTableTemplates(ExportType type = ExportType.OriginalRecord_JianDing)
         {
             TableTemplates result = null;
             if (ReportStatic.TableTemplateXml != null && ReportStatic.TableTemplateXml.Trim() != "")
             {
-                switch(type)
+                switch (type)
                 {
                     case ExportType.OriginalRecord_JianDing:
                     case ExportType.OriginalRecord_XiaoZhun:
@@ -76,10 +110,12 @@ namespace Langben.Report
                         break;
 
                 }
-                
+
             }
             return result;
         }
+  
+
         /// <summary>
         /// 导出原始记录及报告并保存路径
         /// </summary>
@@ -87,16 +123,17 @@ namespace Langben.Report
         /// <param name="Message">返回信息</param>
         /// <param name="Person">操作人</param>
         /// <returns></returns>
-        public bool ExportAndSavePath(string ID, out string Message,string Person="")
+        public bool ExportAndSavePath(string ID, out string Message, string Person = "")
         {
+
             ValidationErrors validationErrors = new ValidationErrors();
             //fBll.Create(ref validationErrors, fEntity);       
             FILE_UPLOADERBLL fBll = new FILE_UPLOADERBLL();
             FILE_UPLOADER oEntity = null;
             FILE_UPLOADER rEntity = null;
             FILE_UPLOADER Entity = null;
-            bool oSuccess = ExportOriginalRecord(ID, out Message,out oEntity);
-            if(oSuccess)
+            bool oSuccess = ExportOriginalRecord(ID, out Message, out oEntity);
+            if (oSuccess)
             {
                 Entity = oEntity;
             }
@@ -105,7 +142,7 @@ namespace Langben.Report
             {
                 Entity = rEntity;
             }
-            else if(oSuccess && rSuccess)
+            else if (oSuccess && rSuccess)
             {
                 Entity.PATH = rEntity.PATH;
                 Entity.FULLPATH = rEntity.FULLPATH;
@@ -113,14 +150,14 @@ namespace Langben.Report
                 Entity.SUFFIX = rEntity.SUFFIX;
                 Entity.STATE = rEntity.STATE;
             }
-            if(Entity!=null)
+            if (Entity != null)
             {
-                Entity.CREATEPERSON = Person;                
+                Entity.CREATEPERSON = Person;
                 fBll.Create(ref validationErrors, Entity);
                 return true;
             }
-            return false;          
-            
+            return false;
+
         }
         /// <summary>
         /// 导出报告Excel
@@ -129,7 +166,7 @@ namespace Langben.Report
         /// <param name="Message">返回消息</param>
         /// <param name="CreatePerson">创建人</param>
         /// <returns></returns>
-        public bool ExportReport(string ID, out string Message,out FILE_UPLOADER fEntity)
+        public bool ExportReport(string ID, out string Message, out FILE_UPLOADER fEntity)
         {
             fEntity = new FILE_UPLOADER();
             IBLL.IPREPARE_SCHEMEBLL m_BLL = new PREPARE_SCHEMEBLL();
@@ -138,27 +175,27 @@ namespace Langben.Report
             if (entity != null)
             {
                 ExportType type = GetExportType(entity, "Report");
-                string xlsPath = GetTemplatePath(type);             
-                          
+                string xlsPath = GetTemplatePath(type);
+
 
                 HSSFWorkbook _book = new HSSFWorkbook();
                 FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
                 IWorkbook hssfworkbook = new HSSFWorkbook(file);
 
                 //设置封皮                
-                if(type== ExportType.Report_JianDing)
+                if (type == ExportType.Report_JianDing)
                 {
                     SetFengPi_BaoGaoJianDing(hssfworkbook, entity);
                 }
                 else
                 {
-                    SetFengPi_BaoGaoXiaoZhun(hssfworkbook, entity,type);
+                    SetFengPi_BaoGaoXiaoZhun(hssfworkbook, entity, type);
                 }
                 //设置数据
-               
+
                 //第二页数据
-                SetSecond_BaoGao(hssfworkbook,entity, type);
-               
+                SetSecond_BaoGao(hssfworkbook, entity, type);
+
                 SetShuJu(hssfworkbook, entity, type);
                 string fileName = SetFileName(type);
                 //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";
@@ -227,10 +264,10 @@ namespace Langben.Report
         private string SetFileName(ExportType type = ExportType.OriginalRecord_JianDing)
         {
             string result = "检定原始记录";
-            switch(type)
+            switch (type)
             {
                 case ExportType.OriginalRecord_JianDing:
-                    result= "检定原始记录";
+                    result = "检定原始记录";
                     break;
                 case ExportType.OriginalRecord_XiaoZhun:
                     result = "校准原始记录";
@@ -245,7 +282,7 @@ namespace Langben.Report
                     result = "校准报告_CNAS";
                     break;
             }
-            result= result+"_"+Result.GetNewId();
+            result = result + "_" + Result.GetNewId();
             return result;
         }
         /// <summary>
@@ -254,7 +291,7 @@ namespace Langben.Report
         /// <param name="entity"></param>
         /// <param name="type">Report：报告、OriginalRecord：原始记录</param>
         /// <returns></returns>
-        private ExportType GetExportType(PREPARE_SCHEME entity,string type= "Report")
+        private ExportType GetExportType(PREPARE_SCHEME entity, string type = "Report")
         {
             ExportType result = ExportType.Report_JianDing;
             if (type == "Report")
@@ -294,13 +331,13 @@ namespace Langben.Report
         /// <param name="hssfworkbook"></param>
         /// <param name="entity"></param>
         /// <param name="type">报告类型</param>
-        private void SetFengPi_BaoGaoXiaoZhun(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type= ExportType.Report_XiaoZhun)
-        {           
-            if(type== ExportType.Report_XiaoZhun_CNAS)
+        private void SetFengPi_BaoGaoXiaoZhun(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.Report_XiaoZhun)
+        {
+            if (type == ExportType.Report_XiaoZhun_CNAS)
             {
                 return;//待修改成Word
             }
-            string sheetName_Destination = "封皮";                      
+            string sheetName_Destination = "封皮";
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
             #region 封皮
             //单元格从0开始
@@ -377,7 +414,7 @@ namespace Langben.Report
                 }
             }
 
-            
+
 
             //批 准 人
             if (entity.APPROVALID == null || entity.APPROVALID.Trim() == "")
@@ -414,7 +451,7 @@ namespace Langben.Report
             else
             {
                 sheet_Destination.GetRow(42).GetCell(9).SetCellValue("/");
-            }            
+            }
             #region 暂时没有数据，不做
             ////检定所使用的计量标准装置
             ////HideRow(sheet, RowIndex, 6);
@@ -442,7 +479,7 @@ namespace Langben.Report
         /// <param name="entity"></param>
         private void SetFengPi_BaoGaoJianDing_TongZhiShu(IWorkbook hssfworkbook, PREPARE_SCHEME entity)
         {
-            string sheetName_Destination = "通知书封皮";            
+            string sheetName_Destination = "通知书封皮";
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
             #region 封皮
             //单元格从0开始
@@ -619,8 +656,8 @@ namespace Langben.Report
         /// </summary>
         /// <param name="hssfworkbook"></param>
         /// <param name="entity"></param>
-        private void SetSecond_BaoGao(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type= ExportType.OriginalRecord_JianDing)
-        {         
+        private void SetSecond_BaoGao(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing)
+        {
 
             string sheetName_Destination = "第二页";
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
@@ -654,7 +691,7 @@ namespace Langben.Report
             {
                 sheet_Destination.GetRow(5).GetCell(20).SetCellValue("/");
             }
-           
+
             //检定地点
             if (entity.CHECK_PLACE != null && entity.CHECK_PLACE.Trim() != "")
             {
@@ -665,7 +702,7 @@ namespace Langben.Report
                 sheet_Destination.GetRow(6).GetCell(6).SetCellValue("/");
             }
             //其他
-            if(entity.OTHER!=null && entity.OTHER.Trim()!="")
+            if (entity.OTHER != null && entity.OTHER.Trim() != "")
             {
                 sheet_Destination.GetRow(6).GetCell(20).SetCellValue(entity.OTHER);
             }
@@ -680,11 +717,11 @@ namespace Langben.Report
             int RowIndex = 0;
             if (rList != null && rList.Count > 1)//两个以上规程
             {
-                
+
                 IRow GCTemplateRow = sheet_Destination.GetRow(8);//获取源格式行
                 int GCTemplateIndex = 8;//规程模板行号   
                 RowIndex = 8;
-                CopyRow(sheet_Destination, GCTemplateIndex + 1, GCTemplateIndex, rList.Count-1, false);
+                CopyRow(sheet_Destination, GCTemplateIndex + 1, GCTemplateIndex, rList.Count - 1, false);
                 foreach (VRULE r in rList)
                 {
                     sheet_Destination.GetRow(RowIndex).GetCell(2).SetCellValue(r.NAME);
@@ -699,7 +736,7 @@ namespace Langben.Report
             #endregion
             RowIndex++;
             //各类装置
-            SetZhuangZhis(hssfworkbook, sheet_Destination, ref RowIndex, entity, type);            
+            SetZhuangZhis(hssfworkbook, sheet_Destination, ref RowIndex, entity, type);
             #region 校准说明            
             RowIndex++;
             if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
@@ -712,7 +749,7 @@ namespace Langben.Report
             }
             #endregion
 
-            if (type== ExportType.Report_XiaoZhun_CNAS)
+            if (type == ExportType.Report_XiaoZhun_CNAS)
             {
                 RowIndex = RowIndex + 7;
                 //检定员\校准员
@@ -735,9 +772,9 @@ namespace Langben.Report
                 }
             }
             #endregion
-           
+
             //设置页面页脚
-            SetHeaderAndFooter(sheet_Destination, entity,type);
+            SetHeaderAndFooter(sheet_Destination, entity, type);
             sheet_Destination.ForceFormulaRecalculation = true;
         }
         /// <summary>
@@ -747,15 +784,15 @@ namespace Langben.Report
         /// <param name="entity"></param>
         private void SetFengPi_BaoGaoJianDing(IWorkbook hssfworkbook, PREPARE_SCHEME entity)
         {
-           
+
             if (entity.CONCLUSION == "不合格")//不合格只有通知书封皮
             {
                 SetFengPi_BaoGaoJianDing_TongZhiShu(hssfworkbook, entity);
                 return;
-            }            
+            }
 
-            string sheetName_Destination = "封皮";                     
-            ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);           
+            string sheetName_Destination = "封皮";
+            ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
             #region 封皮
             //单元格从0开始
             //证书编号
@@ -780,15 +817,15 @@ namespace Langben.Report
                     {
                         sheet_Destination.GetRow(19).GetCell(7).SetCellValue(infEntity.VERSION);
                     }
-                    else if(infEntity.APPLIANCE_NAME != null && infEntity.APPLIANCE_NAME.Trim() != "")//计量器具名称
+                    else if (infEntity.APPLIANCE_NAME != null && infEntity.APPLIANCE_NAME.Trim() != "")//计量器具名称
                     {
                         sheet_Destination.GetRow(19).GetCell(7).SetCellValue(infEntity.APPLIANCE_NAME);
                     }
                     else
                     {
                         sheet_Destination.GetRow(19).GetCell(7).SetCellValue("/");
-                    }                    
-                   
+                    }
+
                     //出厂编号
                     if (infEntity.FACTORY_NUM != null && infEntity.FACTORY_NUM.Trim() != "")
                     {
@@ -837,7 +874,7 @@ namespace Langben.Report
             List<VRULE> rList = rBll.GetBySCHEMEID(entity.SCHEMEID);
             if (rList != null && rList.Count == 1)//一个规程
             {
-                sheet_Destination.GetRow(25).GetCell(7).SetCellValue(rList[0].NAME);                
+                sheet_Destination.GetRow(25).GetCell(7).SetCellValue(rList[0].NAME);
             }
             else
             {
@@ -881,7 +918,7 @@ namespace Langben.Report
             else
             {
                 sheet_Destination.GetRow(37).GetCell(13).SetCellValue("/");
-            }           
+            }
             //检定日期
             if (entity.CALIBRATION_DATE.HasValue)
             {
@@ -893,7 +930,7 @@ namespace Langben.Report
             }
             //有效期
             if (entity.VALIDITY_PERIOD.HasValue && entity.CALIBRATION_DATE.HasValue)
-            {                
+            {
                 //sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
                 sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.CALIBRATION_DATE.Value.AddYears((int)entity.VALIDITY_PERIOD.Value).ToString("yyyy年MM月dd日"));
             }
@@ -979,20 +1016,20 @@ namespace Langben.Report
                 IWorkbook hssfworkbook = new HSSFWorkbook(file);
 
                 //设置封皮
-                SetFengPi(hssfworkbook, entity,type);
+                SetFengPi(hssfworkbook, entity, type);
 
                 //设置数据
                 SetShuJu(hssfworkbook, entity, type);
 
                 //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";                
-                string fileName = SetFileName(type);              
+                string fileName = SetFileName(type);
                 saveFileName = "~/up/Report/" + fileName + ".xls";
-                
+
                 string saveFileNamePath = System.Web.HttpContext.Current.Server.MapPath(saveFileName);
                 using (FileStream fileWrite = new FileStream(saveFileNamePath, FileMode.Create))
                 {
                     hssfworkbook.Write(fileWrite);
-                }                
+                }
                 Message = "../up/Report/" + fileName + ".xls";
                 fEntity.CONCLUSION = entity.CONCLUSION;
                 fEntity.CREATETIME = DateTime.Now;
@@ -1016,7 +1053,7 @@ namespace Langben.Report
         /// </summary>
         /// <param name="hssfworkbook"></param>
         /// <param name="entity"></param>
-        private void SetFengPi(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type= ExportType.OriginalRecord_JianDing)
+        private void SetFengPi(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing)
         {
             string sheetName_Source = "封皮模板";
             string sheetName_Destination = "封皮";
@@ -1199,7 +1236,7 @@ namespace Langben.Report
             //有效期
             if (entity.VALIDITY_PERIOD.HasValue)
             {
-                sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString()+"年");
+                sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString() + "年");
                 //sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
             }
             else
@@ -1208,7 +1245,7 @@ namespace Langben.Report
             }
             //RowIndex = RowIndex + 2;
             //if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString())
-            if (type== ExportType.OriginalRecord_XiaoZhun)
+            if (type == ExportType.OriginalRecord_XiaoZhun)
             {
                 //校准说明   
                 RowIndex = RowIndex + 1;
@@ -1248,7 +1285,7 @@ namespace Langben.Report
             }
             RowIndex++;
             //各类装置
-            SetZhuangZhis(hssfworkbook, sheet_Destination,ref RowIndex, entity, type);           
+            SetZhuangZhis(hssfworkbook, sheet_Destination, ref RowIndex, entity, type);
             #endregion
             //设置页面页脚
             SetHeaderAndFooter(sheet_Destination, entity);
@@ -1262,7 +1299,7 @@ namespace Langben.Report
         /// <param name="rowIndex_Destination">目标行号</param>
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <param name="type">报告类型</param>
-        private void SetZhuangZhis(IWorkbook hssfworkbook,ISheet sheet_Destination,ref int rowIndex_Destination, PREPARE_SCHEME entity, ExportType type)
+        private void SetZhuangZhis(IWorkbook hssfworkbook, ISheet sheet_Destination, ref int rowIndex_Destination, PREPARE_SCHEME entity, ExportType type)
         {
             //int rowIndex = rowIndex_Destination;
             //标准装置
@@ -1272,7 +1309,7 @@ namespace Langben.Report
             //中间试品
             int rowIndex_Source_ShiPin = 35;
             string sheetName_Source = "封皮模板";
-            switch(type)
+            switch (type)
             {
                 case ExportType.OriginalRecord_JianDing:
                 case ExportType.OriginalRecord_XiaoZhun:
@@ -1287,19 +1324,19 @@ namespace Langben.Report
                     sheetName_Source = "第二页模板";
                     rowIndex_Source_ZhuangZhi = 11;
                     rowIndex_Source_QiJu = 14;
-                    rowIndex_Source_ShiPin =17;
+                    rowIndex_Source_ShiPin = 17;
                     break;
-            }            
+            }
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
-            IMETERING_STANDARD_DEVICEBLL bll = new METERING_STANDARD_DEVICEBLL();           
-            if (entity.METERING_STANDARD_DEVICE != null )
+            IMETERING_STANDARD_DEVICEBLL bll = new METERING_STANDARD_DEVICEBLL();
+            if (entity.METERING_STANDARD_DEVICE != null)
             {
                 List<METERING_STANDARD_DEVICE> list = entity.METERING_STANDARD_DEVICE.ToList();
-                if(list!=null && list.Count>0)
+                if (list != null && list.Count > 0)
                 {
                     //空三行
-                    CopyRow(sheet_Source, sheet_Destination, 2, rowIndex_Destination, 3, true);                    
-                    rowIndex_Destination=rowIndex_Destination+3;
+                    CopyRow(sheet_Source, sheet_Destination, 2, rowIndex_Destination, 3, true);
+                    rowIndex_Destination = rowIndex_Destination + 3;
 
                     //标准装置
                     List<METERING_STANDARD_DEVICE> listZhuanZhi = list.FindAll(p => p.CATEGORY == "标准装置");
@@ -1312,7 +1349,7 @@ namespace Langben.Report
                     SetZhuangZhi(sheet_Source, sheet_Destination, rowIndex_Source_ShiPin, ref rowIndex_Destination, CATEGORYType.中间试品, listShiPin);
                 }
             }
-               
+
         }
         /// <summary>
         /// 设置标准装置/计量标准器信息
@@ -1323,19 +1360,19 @@ namespace Langben.Report
         /// <param name="rowIndex_Destination">目标行号</param>
         /// <param name="type">装置类型</param>
         /// <param name="listZhuanZhi">装置实体</param>
-        private void SetZhuangZhi(ISheet sheet_Source, ISheet sheet_Destination,int rowIndex_Source,ref int  rowIndex_Destination, CATEGORYType type= CATEGORYType.标准装置, List<METERING_STANDARD_DEVICE> listZhuanZhi = null)
+        private void SetZhuangZhi(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, ref int rowIndex_Destination, CATEGORYType type = CATEGORYType.标准装置, List<METERING_STANDARD_DEVICE> listZhuanZhi = null)
         {
             if (listZhuanZhi != null && listZhuanZhi.Count > 0)
             {
                 //标题
-                CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true);                
+                CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true);
                 rowIndex_Source++;
                 rowIndex_Destination++;
                 //表头
                 CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true);
                 rowIndex_Source++;
                 rowIndex_Destination++;
-                
+
                 #region 数据
                 foreach (METERING_STANDARD_DEVICE item in listZhuanZhi)
                 {
@@ -1401,7 +1438,7 @@ namespace Langben.Report
                             {
                                 vValue += mItem.VALID_TO.Value.ToString("yyyy/MM/dd") + "、";
                             }
-                           
+
                         }
                         if (!string.IsNullOrEmpty(cValue) && cValue.Trim() != "")
                         {
@@ -1417,7 +1454,7 @@ namespace Langben.Report
                     #endregion
                     rowIndex_Destination++;
                 }
-               
+
                 #endregion
             }
         }
@@ -1428,21 +1465,21 @@ namespace Langben.Report
         /// <param name="hssfworkbook">工作文件</param>
         /// <param name="entity">预备方案对象</param>
         /// <param name="type">导出类型</param>
-        private void SetShuJu(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type= ExportType.OriginalRecord_JianDing)
+        private void SetShuJu(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing)
         {
             int RowIndex = 1;
             int JWTemplateIndex = 0;//规程标题获取源格式行   
             int ruleTitleTemplateIndex = 1;//检测项目名称
-            string sheetName_Source = "数据模板";            
+            string sheetName_Source = "数据模板";
             string sheetName_Destination = "数据";
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
-            ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);            
+            ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
             #region 检测项目            
             if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE != null &&
                 entity.QUALIFIED_UNQUALIFIED_TEST_ITE.Count > 0)
-            {             
+            {
 
-                TableTemplates allTableTemplates = GetTableTemplates(type);                
+                TableTemplates allTableTemplates = GetTableTemplates(type);
                 SpecialCharacters allSpecialCharacters = GetSpecialCharacters();
 
 
@@ -1456,27 +1493,27 @@ namespace Langben.Report
                     //相同检测项只展示一个标题               
                     //if(SameRuleNameList==null || SameRuleNameList.Count==0 || SameRuleNameList.FirstOrDefault(p => p == iEntity.RULENAME) == null || SameRuleName != iEntity.RULENAME)
                     //{
-                        CopyRow(sheet_Source, sheet_Destination, ruleTitleTemplateIndex, RowIndex, 1, false);
-                        string celStr = i.ToString() + "、";
+                    CopyRow(sheet_Source, sheet_Destination, ruleTitleTemplateIndex, RowIndex, 1, false);
+                    string celStr = i.ToString() + "、";
 
-                        if (iEntity.RULENAME != null && iEntity.RULENAME.Trim() != "")
-                        {
-                            celStr = celStr + iEntity.RULENAME.Trim() + "：";
-                        }
-                        if (iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
-                        {
-                            celStr = celStr + iEntity.CONCLUSION.Trim();
-                        }
-                        sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue(celStr);
-                        RowIndex++;
+                    if (iEntity.RULENAME != null && iEntity.RULENAME.Trim() != "")
+                    {
+                        celStr = celStr + iEntity.RULENAME.Trim() + "：";
+                    }
+                    if (iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
+                    {
+                        celStr = celStr + iEntity.CONCLUSION.Trim();
+                    }
+                    sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue(celStr);
+                    RowIndex++;
                     //}
                     //相同检测项只展示一个标题   
-                    if (SameRuleNameList != null && SameRuleNameList.Count >0 && SameRuleNameList.FirstOrDefault(p => p == iEntity.RULENAME) != null && SameRuleName == iEntity.RULENAME)
+                    if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iEntity.RULENAME) != null && SameRuleName == iEntity.RULENAME)
 
                     {
                         HideRow(sheet_Destination, RowIndex - 2, 2);
-                    }                 
-                   
+                    }
+
                     #endregion
 
                     #region 检测项目表格
@@ -1513,10 +1550,10 @@ namespace Langben.Report
                         CopyRow(sheet_Source, sheet_Destination, 2, RowIndex, 1, true);
                     }
 
-                   
+
                     RowIndex++;
                     SameRuleName = iEntity.RULENAME;
-                   
+
                     #endregion
                     i++;
 
@@ -1534,7 +1571,7 @@ namespace Langben.Report
         /// </summary>
         /// <param name="sheet_Destination">目标sheet</param>
         /// <param name="entity">预备方案</param>
-        private void SetHeaderAndFooter(ISheet sheet_Destination, PREPARE_SCHEME entity,ExportType type= ExportType.OriginalRecord_JianDing)
+        private void SetHeaderAndFooter(ISheet sheet_Destination, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing)
         {
             string REPORTNUMBER = entity.REPORTNUMBER;
             //页眉
@@ -1544,10 +1581,10 @@ namespace Langben.Report
                 header = "证书编号：";
             }
             else if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
-            { 
+            {
                 int index = entity.REPORTNUMBER.IndexOf("-");
                 REPORTNUMBER = REPORTNUMBER.Split('-')[0] + "原始" + REPORTNUMBER.Substring(index);
-            }           
+            }
             if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
             {
                 sheet_Destination.Header.Left = header + REPORTNUMBER;
@@ -1578,7 +1615,7 @@ namespace Langben.Report
         /// <param name="DongTaiShuJuList">需要替换的动态数据</param>
         /// <param name="rowInfoList">需要替换的动态数据位置</param>
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
-        private void CopyRow(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, int insertCount, bool IsCopyContent = false, Dictionary<string,string> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, SpecialCharacters allSpecialCharacters = null, List<Cell> CellsTemplate = null)
+        private void CopyRow(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, int insertCount, bool IsCopyContent = false, Dictionary<string, string> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, SpecialCharacters allSpecialCharacters = null, List<Cell> CellsTemplate = null)
         {
             IRow row_Source = sheet_Source.GetRow(rowIndex_Source);
             int sourceCellCount = row_Source.Cells.Count;
@@ -1607,7 +1644,7 @@ namespace Langben.Report
                     row_Source.Cells[m].SetCellType(CellType.String);
                     if (m + 1 != row_Source.LastCellNum)
                     {
-                        row_Source.Cells[m+1].SetCellType(CellType.String);
+                        row_Source.Cells[m + 1].SetCellType(CellType.String);
                     }
                     if (sourceCell == null)
                         continue;
@@ -1623,15 +1660,17 @@ namespace Langben.Report
                             startMergeCell = m;
                         }
 
-                        if (m + 1 == sourceCellCount || sourceCell.CellStyle.BorderRight != BorderStyle.None 
+                        if (m + 1 == sourceCellCount || sourceCell.CellStyle.BorderRight != BorderStyle.None
                             || row_Source.Cells[m + 1].StringCellValue != "" || row_Source.Cells[m + 1].IsMergedCell == false
-                            || (CellsTemplate!=null && CellsTemplate.Count>0 && CellsTemplate.FirstOrDefault(p => p.ColIndex == startMergeCell && p.ColCount == (m - startMergeCell)) != null))
+                            || (CellsTemplate != null && CellsTemplate.Count > 0 && CellsTemplate.FirstOrDefault(p => p.ColIndex == startMergeCell && p.ColCount == (m - startMergeCell)) != null))
                         {
                             endMergeCell = m;
-                        }                        
-                       
+                        }
+
                         if (startMergeCell < endMergeCell)
                         {
+
+                            var d = IsMergedRegionCell(i, i);  //2、单元格为合并单元格且不在合并区域左上角
                             sheet_Destination.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, endMergeCell));
                             if (IsCopyContent)
                             {
@@ -1661,15 +1700,15 @@ namespace Langben.Report
                         //}
                         //else
                         //{
-                            if (IsCopyContent)
-                            {
-                                //string value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m]);
-                                //targetRow.Cells[m].SetCellValue(value);
-                                HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
-                                targetRow.Cells[m].SetCellValue(value);
+                        if (IsCopyContent)
+                        {
+                            //string value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m]);
+                            //targetRow.Cells[m].SetCellValue(value);
+                            HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
+                            targetRow.Cells[m].SetCellValue(value);
 
-                            }
-                            startMergeCell = -1;
+                        }
+                        startMergeCell = -1;
                         //}
                     }
                 }
@@ -1684,14 +1723,14 @@ namespace Langben.Report
         /// <param name="targetCell">目标单元格</param>
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <returns></returns>
-        private HSSFRichTextString GetDongTaiShuJu(Dictionary<string,string> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, ICell sourceCell = null, ICell targetCell = null, SpecialCharacters allSpecialCharacters = null)
+        private HSSFRichTextString GetDongTaiShuJu(Dictionary<string, string> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, ICell sourceCell = null, ICell targetCell = null, SpecialCharacters allSpecialCharacters = null)
         {
-            
+
             HSSFWorkbook workbook = null;
             if (targetCell != null && targetCell.Sheet != null && targetCell.Sheet.Workbook != null)
             {
                 workbook = (HSSFWorkbook)targetCell.Sheet.Workbook;
-            }           
+            }
             HSSFRichTextString result = null;
             if (sourceCell == null)
             {
@@ -1717,7 +1756,7 @@ namespace Langben.Report
                         key = c.Code;
                     }
                 }
-            }          
+            }
             int speStartIndex = sourceCell.StringCellValue.IndexOf("{0}");//动态字符位置
             string value = "";
             string SpecialStr = "";
@@ -1728,7 +1767,7 @@ namespace Langben.Report
             }
             else
             {
-                value = string.Format(sourceCell.StringCellValue, "").Trim();                
+                value = string.Format(sourceCell.StringCellValue, "").Trim();
                 speStartIndex = 0;
                 SpecialStr = value;
             }
@@ -1798,8 +1837,8 @@ namespace Langben.Report
                     DongTaiShuJuList.Remove(key);
                 }
                 return result;
-            }                
-           
+            }
+
             return new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
         }
         /// <summary>
@@ -1809,11 +1848,11 @@ namespace Langben.Report
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <param name="value">特殊字符</param>
         /// <returns></returns>
-        private HSSFRichTextString SetSub(HSSFWorkbook workbook=null, SpecialCharacters allSpecialCharacters = null, string value = "")
+        private HSSFRichTextString SetSub(HSSFWorkbook workbook = null, SpecialCharacters allSpecialCharacters = null, string value = "")
         {
-            if(value==null)
+            if (value == null)
             {
-                value = ""; 
+                value = "";
             }
             //HSSFWorkbook workbook = null;
             //if (targetCell != null && targetCell.Sheet != null && targetCell.Sheet.Workbook != null)
@@ -1833,9 +1872,9 @@ namespace Langben.Report
                 HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
                 normalFont.IsItalic = true;
                 normalFont.FontName = "宋体";
-                int startIndex = 0 ;
-                int endIndex =  spec.Code.Trim().Length-1;
-                if(endIndex<0)
+                int startIndex = 0;
+                int endIndex = spec.Code.Trim().Length - 1;
+                if (endIndex < 0)
                 {
                     endIndex = 0;
                 }
@@ -1861,7 +1900,7 @@ namespace Langben.Report
                     {
                         startIndex = 0;
                     }
-                    endIndex =  spec.Code.Trim().Length;
+                    endIndex = spec.Code.Trim().Length;
                     if (endIndex < 0)
                     {
                         endIndex = 0;
@@ -1895,9 +1934,9 @@ namespace Langben.Report
                 return string.Format(sourceCell.StringCellValue, "");
             }
 
-            if (rowInfoList.FirstOrDefault(p => p.RowIndex == sourceCell.RowIndex && p.Cells != null && p.Cells.Count>0) != null)
+            if (rowInfoList.FirstOrDefault(p => p.RowIndex == sourceCell.RowIndex && p.Cells != null && p.Cells.Count > 0) != null)
             {
-                RowInfo r = rowInfoList.FirstOrDefault(p => p.RowIndex == sourceCell.RowIndex && p.Cells != null && p.Cells.Count>0);
+                RowInfo r = rowInfoList.FirstOrDefault(p => p.RowIndex == sourceCell.RowIndex && p.Cells != null && p.Cells.Count > 0);
                 if (r.Cells.Count(p => p.ColIndex == sourceCell.ColumnIndex) > 0)
                 {
                     string value = string.Format(sourceCell.StringCellValue, DongTaiShuJuList[0]);
@@ -2026,7 +2065,7 @@ namespace Langben.Report
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <returns></returns>
         private Dictionary<string, int> SetRowIndex(NodeList nodeList, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, out int rowIndex, SpecialCharacters allSpecialCharacters = null, List<Cell> CellsTemplate = null)
-        {            
+        {
             Dictionary<string, int> dic = new Dictionary<string, int>();
 
             if (nodeList.Count > 0)
@@ -2044,7 +2083,7 @@ namespace Langben.Report
                         if (Id.ToString() != "" && Id.ToString().Split('_').Length >= 4 && !dic.ContainsKey(Id.ToString()))
                         {
                             dic.Add(Id.ToString(), rowIndex_Destination);
-                            CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true,null,null, allSpecialCharacters,CellsTemplate);
+                            CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true, null, null, allSpecialCharacters, CellsTemplate);
                             rowIndex_Destination++;
 
                         }
@@ -2094,7 +2133,7 @@ namespace Langben.Report
         /// <param name="node">节点</param>
         /// <param name="IsEnd">是否结束</param>
         /// <returns></returns>
-        private string GetHearderValue(INode node, out bool IsEnd,ref int count,ref string firstValue)
+        private string GetHearderValue(INode node, out bool IsEnd, ref int count, ref string firstValue)
         {
             IsEnd = false;
             string value = "";
@@ -2107,13 +2146,13 @@ namespace Langben.Report
                     value = tag.GetAttribute("VALUE");
                     return value;
                 }
-                if(count==-1 && tag.GetAttribute("$<TAGNAME>$") == "option")
+                if (count == -1 && tag.GetAttribute("$<TAGNAME>$") == "option")
                 {
-                    firstValue= tag.GetAttribute("VALUE");
-                    if(string.IsNullOrEmpty(firstValue) || firstValue.Trim()=="")
+                    firstValue = tag.GetAttribute("VALUE");
+                    if (string.IsNullOrEmpty(firstValue) || firstValue.Trim() == "")
                     {
                         firstValue = ((Winista.Text.HtmlParser.Tags.CompositeTag)tag).StringText;
-                        if(firstValue==null)
+                        if (firstValue == null)
                         {
                             firstValue = "";
                         }
@@ -2127,7 +2166,7 @@ namespace Langben.Report
                     {
                         if (IsEnd == false)
                         {
-                            value = GetHearderValue(tag.Children[j], out IsEnd,ref count,ref firstValue);
+                            value = GetHearderValue(tag.Children[j], out IsEnd, ref count, ref firstValue);
                         }
                     }
                 }
@@ -2141,7 +2180,7 @@ namespace Langben.Report
                 //        siblingNode = siblingNode.NextSibling;
                 //    }
                 //}
-            }            
+            }
             return value;
         }
         /// <summary>
@@ -2160,8 +2199,8 @@ namespace Langben.Report
                 if (tag.GetAttribute("$<TAGNAME>$") == "select" || tag.GetAttribute("$<TAGNAME>$") == "input")
                 {
                     IsEnd = true;
-                    result= true;
-                    return true;                   
+                    result = true;
+                    return true;
                 }
                 //子节点  
                 if (tag.Children != null && tag.Children.Count > 0 && IsEnd == false)
@@ -2197,7 +2236,7 @@ namespace Langben.Report
         /// <param name="temp">模板行号单元对象</param>
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <returns></returns>
-        private int paserData(string html, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, SpecialCharacters allSpecialCharacters=null)
+        private int paserData(string html, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, SpecialCharacters allSpecialCharacters = null)
         {
             #region 将hmtl转换程文本框及下拉框对象
             Lexer lexer_Input = new Lexer(html);//必须定义多个，否则第二个获取不到数据
@@ -2207,7 +2246,7 @@ namespace Langben.Report
             NodeFilter filter_Input = new TagNameFilter("input");
             NodeFilter filter_Option = new TagNameFilter("OPTION");
             NodeList nodeList_Input = parser_Input.Parse(filter_Input);
-            NodeList nodeList_Option = parser_Option.Parse(filter_Option);      
+            NodeList nodeList_Option = parser_Option.Parse(filter_Option);
 
             Lexer lexer_Thead = new Lexer(html);
             Parser parser_Thead = new Parser(lexer_Thead);
@@ -2218,7 +2257,7 @@ namespace Langben.Report
             //Dictionary<int, List<string>> TableTitleDic = null;
             Dictionary<int, Dictionary<string, string>> TableTitleDic = null;
             Dictionary<int, NodeList> InputDic = null;
-            Dictionary<int, NodeList> OptionDic = null;            
+            Dictionary<int, NodeList> OptionDic = null;
 
             //表头 
             TableTitleDic = GetHeaderDic(nodeList_Thead);
@@ -2239,13 +2278,13 @@ namespace Langben.Report
 
         }
 
-        
+
         /// <summary>
         /// 获取某节点下的数据
         /// </summary>
         /// <param name="node">节点</param>       
         /// <param name="DataDic">返回数据</param>
-        private void GetAllData(INode node,int TongDaoID, ref Dictionary<int, Dictionary<string,string>> DataDic)
+        private void GetAllData(INode node, int TongDaoID, ref Dictionary<int, Dictionary<string, string>> DataDic)
         {
             //ITag tag = getTag(node);
             ////if (tag != null && tag.GetAttribute("$<TAGNAME>$")=="input")
@@ -2328,20 +2367,20 @@ namespace Langben.Report
             //    siblingNode = siblingNode.NextSibling;
             //}
 
-            ITag tag = getTag(node);            
+            ITag tag = getTag(node);
             if (TongDaoID < 1)
             {
                 TongDaoID = GetTongDaoID(node);
-            }            
-            if (tag != null && tag.GetAttribute("name")!=null && (tag.GetAttribute("$<TAGNAME>$") == "select" || tag.GetAttribute("$<TAGNAME>$") == "input"))
+            }
+            if (tag != null && tag.GetAttribute("name") != null && (tag.GetAttribute("$<TAGNAME>$") == "select" || tag.GetAttribute("$<TAGNAME>$") == "input"))
             {
-                
+
                 string Name = tag.GetAttribute("name");
                 string Value = "";
 
                 //输入框
                 if (tag.GetAttribute("ID") != null && tag.GetAttribute("name") != null && tag.GetAttribute("$<TAGNAME>$") == "input")
-                {                                       
+                {
                     Value = tag.GetAttribute("value");
                 }
                 //下拉框
@@ -2350,8 +2389,8 @@ namespace Langben.Report
                     bool IsEnd = false;
                     int count = -1;
                     string firstValue = "";
-                    Value = GetHearderValue(node, out IsEnd,ref count,ref firstValue);
-                    if(Value==null || Value.Trim()=="")
+                    Value = GetHearderValue(node, out IsEnd, ref count, ref firstValue);
+                    if (Value == null || Value.Trim() == "")
                     {
                         Value = firstValue;
                     }
@@ -2370,7 +2409,7 @@ namespace Langben.Report
                 {
                     DataDic[TongDaoID].Add(Name, Value); ;
                 }
-            }           
+            }
         }
 
         /// <summary>
@@ -2386,10 +2425,10 @@ namespace Langben.Report
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <returns></returns>
         private int paserData(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination,
-            TableTemplate temp, Dictionary<int, Dictionary<string,string>> TableTitleDic,
-            Dictionary<int, NodeList> InputDic, Dictionary<int, NodeList> OptionDic, SpecialCharacters allSpecialCharacters=null)
+            TableTemplate temp, Dictionary<int, Dictionary<string, string>> TableTitleDic,
+            Dictionary<int, NodeList> InputDic, Dictionary<int, NodeList> OptionDic, SpecialCharacters allSpecialCharacters = null)
         {
-            int rowIndex = rowIndex_Destination;           
+            int rowIndex = rowIndex_Destination;
             foreach (int key in TableTitleDic.Keys)
             {
                 //画表头                            
@@ -2399,7 +2438,7 @@ namespace Langben.Report
                     {
                         if (t.RowIndex >= 0)
                         {
-                            CopyRow(sheet_Source, sheet_Destination, t.RowIndex, rowIndex_Destination, 1, true, TableTitleDic[key],temp.TableTitleList, allSpecialCharacters);
+                            CopyRow(sheet_Source, sheet_Destination, t.RowIndex, rowIndex_Destination, 1, true, TableTitleDic[key], temp.TableTitleList, allSpecialCharacters);
                             rowIndex_Destination++;
                         }
                     }
@@ -2408,8 +2447,8 @@ namespace Langben.Report
                 if (InputDic.ContainsKey(key))
                 {
                     NodeList nodeList_Input = InputDic[key];
-                    int startRowIndex = rowIndex_Destination;                    
-                    Dictionary<string, int> dic = SetRowIndex(nodeList_Input, sheet_Source, sheet_Destination, temp.DataRowIndex, rowIndex_Destination, out rowIndex, allSpecialCharacters,temp.Cells);
+                    int startRowIndex = rowIndex_Destination;
+                    Dictionary<string, int> dic = SetRowIndex(nodeList_Input, sheet_Source, sheet_Destination, temp.DataRowIndex, rowIndex_Destination, out rowIndex, allSpecialCharacters, temp.Cells);
                     rowIndex_Destination = rowIndex;
                     int endRowIndex = rowIndex;
 
@@ -2427,20 +2466,20 @@ namespace Langben.Report
                             if (tag != null)
                             {
                                 ITag parentTag = getTag(tag.Parent);
-                                if (parentTag != null && parentTag.GetAttribute("$<TAGNAME>$") == "td" && parentTag.GetAttribute("ROWSPAN")!=null)
+                                if (parentTag != null && parentTag.GetAttribute("$<TAGNAME>$") == "td" && parentTag.GetAttribute("ROWSPAN") != null)
                                 {
                                     MergedRowCount = Convert.ToInt32(parentTag.GetAttribute("ROWSPAN"));
-                                }  
+                                }
                                 else
                                 {
                                     MergedRowCount = 1;
-                                }                              
+                                }
                             }
 
                             Id = tag.GetAttribute("ID");
                             Name = tag.GetAttribute("name");
                             Value = tag.GetAttribute("VALUE");
-                            if(Value==null || Value.ToString().Trim()=="")
+                            if (Value == null || Value.ToString().Trim() == "")
                             {
                                 Value = "/";
                             }
@@ -2460,7 +2499,7 @@ namespace Langben.Report
                                         {
 
                                             Cell c = temp.Cells.FirstOrDefault(p => p.Code == Name.ToString().Trim());
-                                            if(c.IsMergeSameValue=="Y")
+                                            if (c.IsMergeSameValue == "Y")
                                             {
                                                 MergedRowCount = 1;
 
@@ -2576,9 +2615,9 @@ namespace Langben.Report
         /// <param name="rowDic"></param>
         /// <param name="sheet_Destination"></param>
         /// <param name="temp"></param>
-        private void SetMergeAndHideRowSameValue(ISheet sheet_Destination, int startRowIndex,int endRowIndex, TableTemplate temp)
+        private void SetMergeAndHideRowSameValue(ISheet sheet_Destination, int startRowIndex, int endRowIndex, TableTemplate temp)
         {
-           
+
             int startMergeRow = startRowIndex;
             int endMergeRow = startRowIndex;
             IRow targetRow_Prev = null;//前一行
@@ -2589,30 +2628,30 @@ namespace Langben.Report
             {
                 foreach (Cell c in temp.Cells)
                 {
-                    if(c.IsMergeSameValue=="N" && c.IsHideRowNull=="N")
+                    if (c.IsMergeSameValue == "N" && c.IsHideRowNull == "N")
                     {
                         continue;
                     }
                     startMergeRow = startRowIndex;
                     endMergeRow = startRowIndex;
-                    for (int i=startRowIndex;i<endRowIndex;i++)
+                    for (int i = startRowIndex; i < endRowIndex; i++)
                     {
                         targetRow_Prev = sheet_Destination.GetRow(i);
                         targetRow_Next = sheet_Destination.GetRow(i + 1);
                         targetCell_Prev = targetRow_Prev.Cells[c.ColIndex];
                         targetCell_Next = targetRow_Next.Cells[c.ColIndex];
-                        if (c.IsHideRowNull == "Y" && (sheet_Destination.GetRow(i).GetCell(c.ColIndex).StringCellValue=="" || sheet_Destination.GetRow(i).GetCell(c.ColIndex).StringCellValue == "/"))
+                        if (c.IsHideRowNull == "Y" && (sheet_Destination.GetRow(i).GetCell(c.ColIndex).StringCellValue == "" || sheet_Destination.GetRow(i).GetCell(c.ColIndex).StringCellValue == "/"))
                         {
                             HideRow(sheet_Destination, i, 1);
                             continue;
                         }
-                        if(c.IsMergeSameValue=="N")
+                        if (c.IsMergeSameValue == "N")
                         {
                             continue;
                         }
 
-                       
-                        if ((targetCell_Prev.StringCellValue==targetCell_Next.StringCellValue || targetCell_Next.StringCellValue=="") && (i+1)<endRowIndex)
+
+                        if ((targetCell_Prev.StringCellValue == targetCell_Next.StringCellValue || targetCell_Next.StringCellValue == "") && (i + 1) < endRowIndex)
                         {
                             endMergeRow = i + 1;
                         }
@@ -2625,14 +2664,14 @@ namespace Langben.Report
                                     sheet_Destination.GetRow(j).GetCell(c.ColIndex).SetCellValue("");
                                 }
                                 sheet_Destination.AddMergedRegion(new CellRangeAddress(startMergeRow, endMergeRow, c.ColIndex, c.ColIndex + c.ColCount));
-                                
+
                             }
-                            startMergeRow = i+1;
+                            startMergeRow = i + 1;
                         }
                     }
 
                 }
-            }            
+            }
         }
         /// <summary>
         /// 获取表头信息
@@ -2714,16 +2753,16 @@ namespace Langben.Report
             {
                 headerDic = new Dictionary<int, List<string>>();
                 for (int i = 1; i < nodeList.Count; i++)
-                {                   
-                    ITag tag = getTag(nodeList[i]);                   
+                {
+                    ITag tag = getTag(nodeList[i]);
                     //NodeList headerList = null;
                     INode ParentNode = ((Winista.Text.HtmlParser.Nodes.AbstractNode)tag).Parent;
                     ITag ParentTag = getTag(ParentNode);
                     int TongDaoID = 0;
-                    if(ParentNode!=null)
+                    if (ParentNode != null)
                     {
-                        string [] IDs = ParentTag.GetAttribute("ID").Split('_');
-                        if(IDs.Length>1)
+                        string[] IDs = ParentTag.GetAttribute("ID").Split('_');
+                        if (IDs.Length > 1)
                         {
                             try
                             {
@@ -2765,9 +2804,9 @@ namespace Langben.Report
                     NodeList nodeList_Input = parser_Input.Parse(filter_Input);
                     NodeList nodeList_Option = parser_Option.Parse(filter_Option);
 
-                    if(nodeList_Input!=null && nodeList_Input.Count>0)
+                    if (nodeList_Input != null && nodeList_Input.Count > 0)
                     {
-                        for(int j=0;j<nodeList_Input.Count;j++)
+                        for (int j = 0; j < nodeList_Input.Count; j++)
                         {
                             INode node = nodeList_Input[j];
                             GetAllData(node, TongDaoID, ref DataDic);
@@ -2781,12 +2820,12 @@ namespace Langben.Report
                             GetAllData(node, TongDaoID, ref DataDic);
                         }
                     }
-                    
+
                 }
             }
             #endregion
             return DataDic;
-        }      
+        }
 
         /// <summary>
         /// 获取数据信息
@@ -2969,7 +3008,7 @@ namespace Langben.Report
             return result;
 
         }
-        
+
 
     }
 }
