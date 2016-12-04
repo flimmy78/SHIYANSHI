@@ -91,6 +91,8 @@ namespace Langben.DAL
         public virtual DbSet<UNCERTAINTYPARAMETERMANAGEMENT> UNCERTAINTYPARAMETERMANAGEMENT { get; set; }
         public virtual DbSet<UNCERTAINTYTABLE> UNCERTAINTYTABLE { get; set; }
         public virtual DbSet<UNDERTAKE_LABORATORY> UNDERTAKE_LABORATORY { get; set; }
+        public virtual DbSet<THEAPPROVALPROCESS> THEAPPROVALPROCESS { get; set; }
+        public virtual DbSet<THEREVIEWPROCESS> THEREVIEWPROCESS { get; set; }
         public virtual DbSet<VBAOGAODAYIN> VBAOGAODAYIN { get; set; }
         public virtual DbSet<VBIAOZHUNLIANGCHUANGONGZHUO> VBIAOZHUNLIANGCHUANGONGZHUO { get; set; }
         public virtual DbSet<VGONGZUOSHICHANG> VGONGZUOSHICHANG { get; set; }

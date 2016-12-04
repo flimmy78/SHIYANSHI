@@ -65,6 +65,8 @@
     <Compile Include="ISysOperationBLL.cs" />
     <Compile Include="ISysPersonBLL.cs" />
     <Compile Include="ISysRoleBLL.cs" />
+    <Compile Include="ITHEAPPROVALPROCESSBLL.cs" />
+    <Compile Include="ITHEREVIEWPROCESSBLL.cs" />
     <Compile Include="IUNCERTAINTYTABLEBLL.cs" />
     <Compile Include="IVBIAOZHUNLIANGCHUANGONGZHUOBLL.cs" />
     <Compile Include="IVXIANGQINGBLL.cs" />

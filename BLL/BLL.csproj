@@ -127,6 +127,8 @@
     <Compile Include="SysOperationBLL.cs" />
     <Compile Include="SysPersonBLL.cs" />
     <Compile Include="SysRoleBLL.cs" />
+    <Compile Include="THEAPPROVALPROCESSBLL.cs" />
+    <Compile Include="THEREVIEWPROCESSBLL.cs" />
     <Compile Include="UNCERTAINTYTABLEBLL.cs" />
     <Compile Include="UNDERTAKE_LABORATORYBLL.cs" />
     <Compile Include="APPLIANCE_LABORATORYBLL.cs" />

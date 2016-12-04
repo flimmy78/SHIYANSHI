@@ -1042,6 +1042,36 @@
           <Property Name="SysPersonId" Type="nvarchar2" MaxLength="36" Nullable="false" />
           <Property Name="SysRoleId" Type="nvarchar2" MaxLength="36" Nullable="false" />
         </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“TENGFEI.THEAPPROVALPROCESS”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="THEAPPROVALPROCESS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
+          <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" />
+          <Property Name="APPROVALCONCLUSIONZI" Type="varchar2" MaxLength="200" />
+          <Property Name="APPROVALCONCLUSION" Type="varchar2" MaxLength="200" />
+          <Property Name="CREATETIME" Type="date" />
+          <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="UPDATETIME" Type="date" />
+          <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“TENGFEI.THEREVIEWPROCESS”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="THEREVIEWPROCESS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
+          <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" />
+          <Property Name="REVIEWCONCLUSION" Type="varchar2" MaxLength="200" />
+          <Property Name="REVIEWCONCLUSIONZI" Type="varchar2" MaxLength="200" />
+          <Property Name="CREATETIME" Type="date" />
+          <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="UPDATETIME" Type="date" />
+          <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
+        </EntityType>
         <EntityType Name="THREE_PHASE_UNCERTAINTY">
           <Key>
             <PropertyRef Name="ID" />
@@ -1629,6 +1659,18 @@
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="CREATETIME" Type="date" />
         </EntityType>
+        <!--生成过程中发现错误:
+警告 6013: 表/视图“TENGFEI.VZHENGSHUHAOLEIBIE”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+        <EntityType Name="VZHENGSHUHAOLEIBIE">
+          <Property Name="ID" Type="varchar2" MaxLength="200" />
+          <Property Name="WEITUODAN" Type="number" Precision="38" Scale="0" />
+          <Property Name="JIANDINGWANCHENG" Type="number" Precision="38" Scale="0" />
+          <Property Name="SHEBEIGUZHANG" Type="number" Precision="38" Scale="0" />
+          <Property Name="PIZHUNTONGGUO" Type="number" Precision="38" Scale="0" />
+          <Property Name="HEGE" Type="number" Precision="38" Scale="0" />
+          <Property Name="BUHEGE" Type="number" Precision="38" Scale="0" />
+          <Property Name="CHAOQI" Type="number" Precision="38" Scale="0" />
+        </EntityType>-->
         <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VZHENGSHULEIBEITONGJIFENXI”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VZHENGSHULEIBEITONGJIFENXI">
@@ -2327,6 +2369,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_THEAPPRO_REFERENCE_PREPARE_">
+          <End Role="PREPARE_SCHEME" Type="Self.PREPARE_SCHEME" Multiplicity="0..1" />
+          <End Role="THEAPPROVALPROCESS" Type="Self.THEAPPROVALPROCESS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PREPARE_SCHEME">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THEAPPROVALPROCESS">
+              <PropertyRef Name="PREPARE_SCHEMEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THEREVIE_REFERENCE_PREPARE_">
+          <End Role="PREPARE_SCHEME" Type="Self.PREPARE_SCHEME" Multiplicity="0..1" />
+          <End Role="THEREVIEWPROCESS" Type="Self.THEREVIEWPROCESS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PREPARE_SCHEME">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THEREVIEWPROCESS">
+              <PropertyRef Name="PREPARE_SCHEMEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_THREE_PH_REFERENCE_RULE">
           <End Role="RULE" Type="Self.RULE" Multiplicity="0..1" />
           <End Role="THREE_PHASE_UNCERTAINTY" Type="Self.THREE_PHASE_UNCERTAINTY" Multiplicity="*" />
@@ -2498,6 +2564,30 @@
           <EntitySet Name="UNCERTAINTYPARAMETERMANAGEMENT" EntityType="Self.UNCERTAINTYPARAMETERMANAGEMENT" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="UNCERTAINTYTABLE" EntityType="Self.UNCERTAINTYTABLE" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="UNDERTAKE_LABORATORY" EntityType="Self.UNDERTAKE_LABORATORY" Schema="TENGFEI" store:Type="Tables" />
+          <EntitySet Name="THEAPPROVALPROCESS" EntityType="Self.THEAPPROVALPROCESS" store:Type="Tables" store:Schema="TENGFEI">
+            <DefiningQuery>SELECT 
+"THEAPPROVALPROCESS"."ID" AS "ID", 
+"THEAPPROVALPROCESS"."PREPARE_SCHEMEID" AS "PREPARE_SCHEMEID", 
+"THEAPPROVALPROCESS"."APPROVALCONCLUSIONZI" AS "APPROVALCONCLUSIONZI", 
+"THEAPPROVALPROCESS"."APPROVALCONCLUSION" AS "APPROVALCONCLUSION", 
+"THEAPPROVALPROCESS"."CREATETIME" AS "CREATETIME", 
+"THEAPPROVALPROCESS"."CREATEPERSON" AS "CREATEPERSON", 
+"THEAPPROVALPROCESS"."UPDATETIME" AS "UPDATETIME", 
+"THEAPPROVALPROCESS"."UPDATEPERSON" AS "UPDATEPERSON"
+FROM "TENGFEI"."THEAPPROVALPROCESS" "THEAPPROVALPROCESS"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="THEREVIEWPROCESS" EntityType="Self.THEREVIEWPROCESS" store:Type="Tables" store:Schema="TENGFEI">
+            <DefiningQuery>SELECT 
+"THEREVIEWPROCESS"."ID" AS "ID", 
+"THEREVIEWPROCESS"."PREPARE_SCHEMEID" AS "PREPARE_SCHEMEID", 
+"THEREVIEWPROCESS"."REVIEWCONCLUSION" AS "REVIEWCONCLUSION", 
+"THEREVIEWPROCESS"."REVIEWCONCLUSIONZI" AS "REVIEWCONCLUSIONZI", 
+"THEREVIEWPROCESS"."CREATETIME" AS "CREATETIME", 
+"THEREVIEWPROCESS"."CREATEPERSON" AS "CREATEPERSON", 
+"THEREVIEWPROCESS"."UPDATETIME" AS "UPDATETIME", 
+"THEREVIEWPROCESS"."UPDATEPERSON" AS "UPDATEPERSON"
+FROM "TENGFEI"."THEREVIEWPROCESS" "THEREVIEWPROCESS"</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VBAOGAODAYIN" EntityType="Self.VBAOGAODAYIN" store:Type="Views" store:Schema="TENGFEI">
             <DefiningQuery>SELECT 
 "VBAOGAODAYIN"."ID" AS "ID", 
@@ -3034,6 +3124,14 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
             <End Role="SysRole" EntitySet="SysRole" />
             <End Role="SysRoleSysPerson" EntitySet="SysRoleSysPerson" />
           </AssociationSet>
+          <AssociationSet Name="FK_THEAPPRO_REFERENCE_PREPARE_" Association="Self.FK_THEAPPRO_REFERENCE_PREPARE_">
+            <End Role="PREPARE_SCHEME" EntitySet="PREPARE_SCHEME" />
+            <End Role="THEAPPROVALPROCESS" EntitySet="THEAPPROVALPROCESS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THEREVIE_REFERENCE_PREPARE_" Association="Self.FK_THEREVIE_REFERENCE_PREPARE_">
+            <End Role="PREPARE_SCHEME" EntitySet="PREPARE_SCHEME" />
+            <End Role="THEREVIEWPROCESS" EntitySet="THEREVIEWPROCESS" />
+          </AssociationSet>
           <AssociationSet Name="FK_THREE_PH_REFERENCE_RULE" Association="Self.FK_THREE_PH_REFERENCE_RULE">
             <End Role="RULE" EntitySet="RULE" />
             <End Role="THREE_PHASE_UNCERTAINTY" EntitySet="THREE_PHASE_UNCERTAINTY" />
@@ -3072,6 +3170,11 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="SysEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="SHIYANSHIGONGZUO" ReturnType="Collection(Model.SHIYANSHIGONGZUO_Result)">
+            <Parameter Name="STARTDATE" Mode="In" Type="DateTime" />
+            <Parameter Name="ENDDATE" Mode="In" Type="DateTime" />
+            <Parameter Name="DANWEI" Mode="In" Type="String" />
+          </FunctionImport>
           <EntitySet Name="AC_VOLTAGE_CURRENT" EntityType="Model.AC_VOLTAGE_CURRENT" />
           <EntitySet Name="ACTIVE_POWER" EntityType="Model.ACTIVE_POWER" />
           <EntitySet Name="ALLOWABLE_ERROR" EntityType="Model.ALLOWABLE_ERROR" />
@@ -3136,6 +3239,8 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySet Name="UNCERTAINTYPARAMETERMANAGEMENT" EntityType="Model.UNCERTAINTYPARAMETERMANAGEMENT" />
           <EntitySet Name="UNCERTAINTYTABLE" EntityType="Model.UNCERTAINTYTABLE" />
           <EntitySet Name="UNDERTAKE_LABORATORY" EntityType="Model.UNDERTAKE_LABORATORY" />
+          <EntitySet Name="THEAPPROVALPROCESS" EntityType="Model.THEAPPROVALPROCESS" />
+          <EntitySet Name="THEREVIEWPROCESS" EntityType="Model.THEREVIEWPROCESS" />
           <EntitySet Name="VBAOGAODAYIN" EntityType="Model.VBAOGAODAYIN" />
           <EntitySet Name="VBIAOZHUNLIANGCHUANGONGZHUO" EntityType="Model.VBIAOZHUNLIANGCHUANGONGZHUO" />
           <EntitySet Name="VGONGZUOSHICHANG" EntityType="Model.VGONGZUOSHICHANG" />
@@ -3263,6 +3368,14 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
             <End Role="PREPARE_SCHEME" EntitySet="PREPARE_SCHEME" />
             <End Role="REPORTCOLLECTION" EntitySet="REPORTCOLLECTION" />
           </AssociationSet>
+          <AssociationSet Name="FK_THEAPPRO_REFERENCE_PREPARE_" Association="Model.FK_THEAPPRO_REFERENCE_PREPARE_">
+            <End Role="PREPARE_SCHEME" EntitySet="PREPARE_SCHEME" />
+            <End Role="THEAPPROVALPROCESS" EntitySet="THEAPPROVALPROCESS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THEREVIE_REFERENCE_PREPARE_" Association="Model.FK_THEREVIE_REFERENCE_PREPARE_">
+            <End Role="PREPARE_SCHEME" EntitySet="PREPARE_SCHEME" />
+            <End Role="THEREVIEWPROCESS" EntitySet="THEREVIEWPROCESS" />
+          </AssociationSet>
           <AssociationSet Name="FK_PROJECTT_REFERENCE_RULE" Association="Model.FK_PROJECTT_REFERENCE_RULE">
             <End Role="RULE" EntitySet="RULE" />
             <End Role="PROJECTTEMPLET" EntitySet="PROJECTTEMPLET" />
@@ -3379,12 +3492,17 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
             <End Role="SysPerson" EntitySet="SysPerson" />
             <End Role="SysRole" EntitySet="SysRole" />
           </AssociationSet>
-          <FunctionImport Name="SHIYANSHIGONGZUO" ReturnType="Collection(Model.SHIYANSHIGONGZUO_Result)">
-            <Parameter Name="STARTDATE" Mode="In" Type="DateTime" />
-            <Parameter Name="ENDDATE" Mode="In" Type="DateTime" />
-            <Parameter Name="DANWEI" Mode="In" Type="String" />
-          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="SHIYANSHIGONGZUO_Result">
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="20" />
+          <Property Type="Decimal" Name="WEITUODAN" Nullable="false" />
+          <Property Type="Decimal" Name="BUHEGE" Nullable="false" />
+          <Property Type="Decimal" Name="CHAOQI" Nullable="false" />
+          <Property Type="Decimal" Name="HEGE" Nullable="false" />
+          <Property Type="Decimal" Name="JIANDINGWANCHENG" Nullable="false" />
+          <Property Type="Decimal" Name="PIZHUNTONGGUO" Nullable="false" />
+          <Property Type="Decimal" Name="SHEBEIGUZHANG" Nullable="false" />
+        </ComplexType>
         <EntityType Name="AC_VOLTAGE_CURRENT">
           <Key>
             <PropertyRef Name="ID" />
@@ -4049,6 +4167,8 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <NavigationProperty Name="PRINTREPORT" Relationship="Model.FK_PRINTREP_REFERENCE_PREPARE_" FromRole="PREPARE_SCHEME" ToRole="PRINTREPORT" />
           <NavigationProperty Name="QUALIFIED_UNQUALIFIED_TEST_ITE" Relationship="Model.FK_QUALIFIED_UN" FromRole="PREPARE_SCHEME" ToRole="QUALIFIED_UNQUALIFIED_TEST_ITE" />
           <NavigationProperty Name="REPORTCOLLECTION" Relationship="Model.FK_REPORTCO_REFERENCE_PREPARE_" FromRole="PREPARE_SCHEME" ToRole="REPORTCOLLECTION" />
+          <NavigationProperty Name="THEAPPROVALPROCESS" Relationship="Model.FK_THEAPPRO_REFERENCE_PREPARE_" FromRole="PREPARE_SCHEME" ToRole="THEAPPROVALPROCESS" />
+          <NavigationProperty Name="THEREVIEWPROCESS" Relationship="Model.FK_THEREVIE_REFERENCE_PREPARE_" FromRole="PREPARE_SCHEME" ToRole="THEREVIEWPROCESS" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.METERING_STANDARD_DEVICEPREPAR" FromRole="PREPARE_SCHEME" ToRole="METERING_STANDARD_DEVICE" />
         </EntityType>
         <EntityType Name="PRINTREPORT">
@@ -4756,6 +4876,34 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.FK_METERING_REFERENCE_UNDERTAK" FromRole="UNDERTAKE_LABORATORY" ToRole="METERING_STANDARD_DEVICE" />
           <NavigationProperty Name="SCHEME" Relationship="Model.FK_SCHEME_REFERENCE_UNDERTAK" FromRole="UNDERTAKE_LABORATORY" ToRole="SCHEME" />
         </EntityType>
+        <EntityType Name="THEAPPROVALPROCESS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="PREPARE_SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="APPROVALCONCLUSIONZI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="APPROVALCONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CREATETIME" Type="DateTime" />
+          <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATETIME" Type="DateTime" />
+          <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PREPARE_SCHEME" Relationship="Model.FK_THEAPPRO_REFERENCE_PREPARE_" FromRole="THEAPPROVALPROCESS" ToRole="PREPARE_SCHEME" />
+        </EntityType>
+        <EntityType Name="THEREVIEWPROCESS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="PREPARE_SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="REVIEWCONCLUSION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="REVIEWCONCLUSIONZI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CREATETIME" Type="DateTime" />
+          <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATETIME" Type="DateTime" />
+          <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PREPARE_SCHEME" Relationship="Model.FK_THEREVIE_REFERENCE_PREPARE_" FromRole="THEREVIEWPROCESS" ToRole="PREPARE_SCHEME" />
+        </EntityType>
         <EntityType Name="VBAOGAODAYIN">
           <Key>
             <PropertyRef Name="ID" />
@@ -5428,6 +5576,30 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_THEAPPRO_REFERENCE_PREPARE_">
+          <End Type="Model.PREPARE_SCHEME" Role="PREPARE_SCHEME" Multiplicity="0..1" />
+          <End Type="Model.THEAPPROVALPROCESS" Role="THEAPPROVALPROCESS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PREPARE_SCHEME">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THEAPPROVALPROCESS">
+              <PropertyRef Name="PREPARE_SCHEMEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THEREVIE_REFERENCE_PREPARE_">
+          <End Type="Model.PREPARE_SCHEME" Role="PREPARE_SCHEME" Multiplicity="0..1" />
+          <End Type="Model.THEREVIEWPROCESS" Role="THEREVIEWPROCESS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PREPARE_SCHEME">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="THEREVIEWPROCESS">
+              <PropertyRef Name="PREPARE_SCHEMEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PROJECTT_REFERENCE_RULE">
           <End Type="Model.RULE" Role="RULE" Multiplicity="0..1" />
           <End Type="Model.PROJECTTEMPLET" Role="PROJECTTEMPLET" Multiplicity="*" />
@@ -5736,22 +5908,26 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <End Type="Model.SysPerson" Role="SysPerson" Multiplicity="*" />
           <End Type="Model.SysRole" Role="SysRole" Multiplicity="*" />
         </Association>
-        <ComplexType Name="SHIYANSHIGONGZUO_Result">
-          <Property Type="String" Name="ID" Nullable="false" MaxLength="20" />
-          <Property Type="Decimal" Name="WEITUODAN" Nullable="false" />
-          <Property Type="Decimal" Name="BUHEGE" Nullable="false" />
-          <Property Type="Decimal" Name="CHAOQI" Nullable="false" />
-          <Property Type="Decimal" Name="HEGE" Nullable="false" />
-          <Property Type="Decimal" Name="JIANDINGWANCHENG" Nullable="false" />
-          <Property Type="Decimal" Name="PIZHUNTONGGUO" Nullable="false" />
-          <Property Type="Decimal" Name="SHEBEIGUZHANG" Nullable="false" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="SysEntities">
+          <FunctionImportMapping FunctionImportName="SHIYANSHIGONGZUO" FunctionName="Model.Store.SHIYANSHIGONGZUO" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.SHIYANSHIGONGZUO_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="WEITUODAN" ColumnName="WEITUODAN" />
+                <ScalarProperty Name="BUHEGE" ColumnName="BUHEGE" />
+                <ScalarProperty Name="CHAOQI" ColumnName="CHAOQI" />
+                <ScalarProperty Name="HEGE" ColumnName="HEGE" />
+                <ScalarProperty Name="JIANDINGWANCHENG" ColumnName="JIANDINGWANCHENG" />
+                <ScalarProperty Name="PIZHUNTONGGUO" ColumnName="PIZHUNTONGGUO" />
+                <ScalarProperty Name="SHEBEIGUZHANG" ColumnName="SHEBEIGUZHANG" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="AC_VOLTAGE_CURRENT">
             <EntityTypeMapping TypeName="Model.AC_VOLTAGE_CURRENT">
               <MappingFragment StoreEntitySet="AC_VOLTAGE_CURRENT">
@@ -7073,6 +7249,34 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="THEAPPROVALPROCESS">
+            <EntityTypeMapping TypeName="Model.THEAPPROVALPROCESS">
+              <MappingFragment StoreEntitySet="THEAPPROVALPROCESS">
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="APPROVALCONCLUSION" ColumnName="APPROVALCONCLUSION" />
+                <ScalarProperty Name="APPROVALCONCLUSIONZI" ColumnName="APPROVALCONCLUSIONZI" />
+                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THEREVIEWPROCESS">
+            <EntityTypeMapping TypeName="Model.THEREVIEWPROCESS">
+              <MappingFragment StoreEntitySet="THEREVIEWPROCESS">
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="REVIEWCONCLUSIONZI" ColumnName="REVIEWCONCLUSIONZI" />
+                <ScalarProperty Name="REVIEWCONCLUSION" ColumnName="REVIEWCONCLUSION" />
+                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="VBAOGAODAYIN">
             <EntityTypeMapping TypeName="Model.VBAOGAODAYIN">
               <MappingFragment StoreEntitySet="VBAOGAODAYIN">
@@ -7463,20 +7667,6 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
               <ScalarProperty Name="Id" ColumnName="SysPersonId" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="SHIYANSHIGONGZUO" FunctionName="Model.Store.SHIYANSHIGONGZUO" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model.SHIYANSHIGONGZUO_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="WEITUODAN" ColumnName="WEITUODAN" />
-                <ScalarProperty Name="BUHEGE" ColumnName="BUHEGE" />
-                <ScalarProperty Name="CHAOQI" ColumnName="CHAOQI" />
-                <ScalarProperty Name="HEGE" ColumnName="HEGE" />
-                <ScalarProperty Name="JIANDINGWANCHENG" ColumnName="JIANDINGWANCHENG" />
-                <ScalarProperty Name="PIZHUNTONGGUO" ColumnName="PIZHUNTONGGUO" />
-                <ScalarProperty Name="SHEBEIGUZHANG" ColumnName="SHEBEIGUZHANG" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
