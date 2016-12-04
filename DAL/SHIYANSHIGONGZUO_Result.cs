@@ -11,7 +11,15 @@ namespace Langben.DAL
 {
     using System;
     
-    public partial class ComplexType1
+    public partial class SHIYANSHIGONGZUO_Result
     {
+        public string ID { get; set; }
+        public decimal WEITUODAN { get; set; }
+        public decimal BUHEGE { get; set; }
+        public decimal CHAOQI { get; set; }
+        public decimal HEGE { get; set; }
+        public decimal JIANDINGWANCHENG { get; set; }
+        public decimal PIZHUNTONGGUO { get; set; }
+        public decimal SHEBEIGUZHANG { get; set; }
     }
 }

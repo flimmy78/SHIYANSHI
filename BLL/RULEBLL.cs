@@ -278,7 +278,10 @@ namespace Langben.BLL
         }
       
         public List<RULE> GetAll()
-        {           
+        {
+            var dsf = DateTime.Now.AddDays(-1221);
+                var da=  db.SHIYANSHIGONGZUO(dsf, DateTime.Now, "华北电力科学研究院有限责任公司");
+            var dsfa = da.ToList();
             return repository.GetAll(db).ToList();          
         }   
         

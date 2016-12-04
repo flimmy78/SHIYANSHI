@@ -1625,18 +1625,6 @@
           <Property Name="CREATETIME" Type="date" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6013: 表/视图“TENGFEI.VZHENGSHUHAOLEIBIE”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
-        <EntityType Name="VZHENGSHUHAOLEIBIE">
-          <Property Name="ID" Type="varchar2" MaxLength="200" />
-          <Property Name="WEITUODAN" Type="number" Precision="38" Scale="0" />
-          <Property Name="JIANDINGWANCHENG" Type="number" Precision="38" Scale="0" />
-          <Property Name="SHEBEIGUZHANG" Type="number" Precision="38" Scale="0" />
-          <Property Name="PIZHUNTONGGUO" Type="number" Precision="38" Scale="0" />
-          <Property Name="HEGE" Type="number" Precision="38" Scale="0" />
-          <Property Name="BUHEGE" Type="number" Precision="38" Scale="0" />
-          <Property Name="CHAOQI" Type="number" Precision="38" Scale="0" />
-        </EntityType>-->
-        <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VZHENGSHULEIBEITONGJIFENXI”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VZHENGSHULEIBEITONGJIFENXI">
           <Key>
@@ -2430,6 +2418,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SHIYANSHIGONGZUO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TENGFEI">
+          <Parameter Name="STARTDATE" Type="date" Mode="In" />
+          <Parameter Name="ENDDATE" Type="date" Mode="In" />
+          <Parameter Name="DANWEI" Type="varchar2" Mode="In" />
+        </Function>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="AC_VOLTAGE_CURRENT" EntityType="Self.AC_VOLTAGE_CURRENT" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="ACTIVE_POWER" EntityType="Self.ACTIVE_POWER" Schema="TENGFEI" store:Type="Tables" />
@@ -3380,6 +3373,11 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
             <End Role="SysPerson" EntitySet="SysPerson" />
             <End Role="SysRole" EntitySet="SysRole" />
           </AssociationSet>
+          <FunctionImport Name="SHIYANSHIGONGZUO" ReturnType="Collection(Model.SHIYANSHIGONGZUO_Result)">
+            <Parameter Name="STARTDATE" Mode="In" Type="DateTime" />
+            <Parameter Name="ENDDATE" Mode="In" Type="DateTime" />
+            <Parameter Name="DANWEI" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="AC_VOLTAGE_CURRENT">
           <Key>
@@ -5728,6 +5726,16 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <End Type="Model.SysPerson" Role="SysPerson" Multiplicity="*" />
           <End Type="Model.SysRole" Role="SysRole" Multiplicity="*" />
         </Association>
+        <ComplexType Name="SHIYANSHIGONGZUO_Result">
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="20" />
+          <Property Type="Decimal" Name="WEITUODAN" Nullable="false" />
+          <Property Type="Decimal" Name="BUHEGE" Nullable="false" />
+          <Property Type="Decimal" Name="CHAOQI" Nullable="false" />
+          <Property Type="Decimal" Name="HEGE" Nullable="false" />
+          <Property Type="Decimal" Name="JIANDINGWANCHENG" Nullable="false" />
+          <Property Type="Decimal" Name="PIZHUNTONGGUO" Nullable="false" />
+          <Property Type="Decimal" Name="SHEBEIGUZHANG" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7441,6 +7449,20 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
               <ScalarProperty Name="Id" ColumnName="SysPersonId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="SHIYANSHIGONGZUO" FunctionName="Model.Store.SHIYANSHIGONGZUO" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.SHIYANSHIGONGZUO_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="WEITUODAN" ColumnName="WEITUODAN" />
+                <ScalarProperty Name="BUHEGE" ColumnName="BUHEGE" />
+                <ScalarProperty Name="CHAOQI" ColumnName="CHAOQI" />
+                <ScalarProperty Name="HEGE" ColumnName="HEGE" />
+                <ScalarProperty Name="JIANDINGWANCHENG" ColumnName="JIANDINGWANCHENG" />
+                <ScalarProperty Name="PIZHUNTONGGUO" ColumnName="PIZHUNTONGGUO" />
+                <ScalarProperty Name="SHEBEIGUZHANG" ColumnName="SHEBEIGUZHANG" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
