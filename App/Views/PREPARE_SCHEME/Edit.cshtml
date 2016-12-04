@@ -6,8 +6,8 @@
 @using Webdiyer.WebControls.Mvc
 @using Common
 @using Models
- @section CurentPlace {
-  
+@section CurentPlace {
+
 }
 
 <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
@@ -60,8 +60,8 @@
                         <option value="不合格">不合格</option>
                     }
                 </select>
+                @Html.DropDownList("UNQUALIFIEDTYPE", Models.SysFieldModels.GetSysField("PREPARE_SCHEME", "UNQUALIFIEDTYPE"), "请选择不合格类型", new { @style = "width:60%;display:none" })
             </td>
-
         </tr>
         <tr>
             <td style="background:#FCFCFC">结论说明：</td>
@@ -89,16 +89,13 @@
     //RULEID:检测项目ID
     //INPUTSTATE:录入格式
     //SCHEME_MENU:菜单地址
-    function SetIframeSrc(PREPARE_SCHEMEID, RULEID, INPUTSTATE,SCHEME_MENU)
-    {
-        if (SCHEME_MENU == null || SCHEME_MENU.trim()=="")
-        {
+    function SetIframeSrc(PREPARE_SCHEMEID, RULEID, INPUTSTATE, SCHEME_MENU) {
+        if (SCHEME_MENU == null || SCHEME_MENU.trim() == "") {
             url = "/QUALIFIED_UNQUALIFIED_TEST_ITE/FeiBiaoGe";
         }
-        else
-        {
-          
-            url = "../PROJECTTEMPLET/"+SCHEME_MENU;
+        else {
+
+            url = "../PROJECTTEMPLET/" + SCHEME_MENU;
         }
         if (url.indexOf('?') > 0) {
             //刘腾飞修改 2016.11.23
@@ -106,7 +103,7 @@
         } else {
             url = url + "?PREPARE_SCHEMEID=" + PREPARE_SCHEMEID;
         }
-       
+
         url = url + "&RULEID=" + RULEID;
         url = url + "&INPUTSTATE=" + INPUTSTATE;
         $('#mainframe').attr('src', url);
@@ -125,6 +122,13 @@
         var CONCLUSION = $("#CONCLUSION").val();//总结论
         var CONCLUSION_EXPLAIN = $("#CONCLUSION_EXPLAIN").val();//结论说明
         var VALIDITY_PERIOD = $("#VALIDITY_PERIOD").val();//有效期
+        var UNQUALIFIEDTYPE = $("#UNQUALIFIEDTYPE option:selected").val()//不合格类型
+        if (CONCLUSION == "不合格") {
+            if (UNQUALIFIEDTYPE == null || UNQUALIFIEDTYPE == "") {
+                $.messager.alert('操作提示', "请选择不合格类型！", 'info');
+                return false;
+            }
+        }
 
         //获取空对象用于保存添加的信息
         $.ajax({
@@ -132,7 +136,7 @@
             dataType: "json", //返回json格式的数据
             url: '/PREPARE_SCHEME/Save', //要访问的后台地址
             contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
-            data: { 'ID': ID, 'CONCLUSION': CONCLUSION, 'CONCLUSION_EXPLAIN': CONCLUSION_EXPLAIN, 'VALIDITY_PERIOD': VALIDITY_PERIOD },
+            data: { 'ID': ID, 'CONCLUSION': CONCLUSION, 'CONCLUSION_EXPLAIN': CONCLUSION_EXPLAIN, 'VALIDITY_PERIOD': VALIDITY_PERIOD, 'UNQUALIFIEDTYPE': UNQUALIFIEDTYPE },
             beforeSend: function () {
                 //InitAlertJS();
             },
@@ -169,7 +173,7 @@
             dataType: "json", //返回json格式的数据
             url: '/PREPARE_SCHEME/Export', //要访问的后台地址
             contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
-            data: { 'ID': ID,'Type':type },
+            data: { 'ID': ID, 'Type': type },
             beforeSend: function () {
                 //InitAlertJS();
             },
@@ -198,7 +202,7 @@
             ID: "@ViewBag.ID",//预备方案的id
             REPORTSTATUS: "@Common.REPORTSTATUS.待审核",
             REPORTSTATUSZI: "@Common.REPORTSTATUS.待审核.GetHashCode()",
-            PACKAGETYPE : "@Common.PACKAGETYPE.生成.ToString()"
+            PACKAGETYPE: "@Common.PACKAGETYPE.生成.ToString()"
         }
         if (true) {//判断报告是否生成
             $.ajax({
@@ -223,5 +227,17 @@
             return false;
         }
     }
+
+    //不合格原因
+    $("#CONCLUSION").change(function () {
+        var option = $("#CONCLUSION option:selected").val();
+        if (option == "合格") {
+            $("#UNQUALIFIEDTYPE").hide();
+            $("#UNQUALIFIEDTYPE").val("");
+        }
+        else if (option == "不合格") {
+            $("#UNQUALIFIEDTYPE").show();
+        }
+    })
 </script>
 

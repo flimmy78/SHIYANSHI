@@ -115,7 +115,7 @@ namespace Langben.App.Controllers
         /// <param name="CONCLUSION_EXPLAIN">结论说明</param>
         /// <param name="VALIDITY_PERIOD">有效期</param>
         /// <returns></returns>
-        public ActionResult Save(string ID, string CONCLUSION, string CONCLUSION_EXPLAIN, string VALIDITY_PERIOD)
+        public ActionResult Save(string ID, string CONCLUSION, string CONCLUSION_EXPLAIN, string VALIDITY_PERIOD,string UNQUALIFIEDTYPE)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             PREPARE_SCHEME entity = m_BLL.GetById(ID);
@@ -136,6 +136,8 @@ namespace Langben.App.Controllers
                 }
                 //有效期至
                 entity.VALIDITYEND = Convert.ToDateTime(entity.CALIBRATION_DATE).AddYears(Convert.ToInt32(VALIDITY_PERIOD));
+                //不合格类型
+                entity.UNQUALIFIEDTYPE = UNQUALIFIEDTYPE;
 
                 string currentPerson = GetCurrentPerson();
                 entity.UPDATETIME = DateTime.Now;

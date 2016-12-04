@@ -70,8 +70,9 @@
 
                 <p class="static">
 
-                    <label><input type="radio" name="CONCLUSION" value="合格" id="CONCLUSION1" />合格</label>   <label><input type="radio" name="CONCLUSION" value="不合格" id="CONCLUSION2" />不合格</label>
+                    <label><input type="radio" name="CONCLUSION" value="合格" id="CONCLUSION1" onclick="jielun(1)"/>合格</label>   <label><input type="radio" name="CONCLUSION" value="不合格" id="CONCLUSION2" onclick="jielun(2)"/>不合格</label>
                 </p>
+                @Html.DropDownList("UNQUALIFIEDTYPE", Models.SysFieldModels.GetSysField("PREPARE_SCHEME", "UNQUALIFIEDTYPE"), "请选择不合格类型", new { @style = "width:60%;display:none" })
             </div>
 
 
@@ -103,6 +104,12 @@
             } else {
                 return true;
             };
+            if ($('input[name=CONCLUSION]:checked').val() == '不合格') {
+                var con=$('#CONCLUSION option:selected').val();
+                if (con==''||con==null) {
+                    $.messager.alert('操作提示', '请选择不合格类型！', 'info');
+                }
+            }
         }
         else {
             $.messager.alert('操作提示', '请选择上传文件！', 'info');
@@ -182,6 +189,16 @@
         else {
             $.messager.alert('操作提示', "请先上传文件！", 'info');
             return false;
+        }
+    }
+
+    function jielun(e) {
+        if (e == 1) {
+            $("#UNQUALIFIEDTYPE").hide();
+            $("#UNQUALIFIEDTYPE").val("");
+        }
+        else if (e == 2) {
+            $("#UNQUALIFIEDTYPE").show();
         }
     }
 </script>

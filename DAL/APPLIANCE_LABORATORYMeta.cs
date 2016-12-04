@@ -22,6 +22,7 @@ namespace Langben.DAL
 
         [Display(Name = "入库说明")]
         public object STORAGEINSTRUCTIONS { get; set; }
+
         #endregion
 
     }

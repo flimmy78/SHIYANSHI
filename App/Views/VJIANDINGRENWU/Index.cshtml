@@ -93,12 +93,12 @@
         <label>
             <input type="radio" name="tuihuiaa" value="2" />器具不能检测
         </label>
-            <textarea name="STORAGEINSTRUCTIONS" style="width:560px;height:260px;" id="STORAGEINSTRUCTIONS" placeholder="请填写退回原因"></textarea>
-            <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
-                <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="tuihuibaocun()" style="width:80px">确定</a>
-                <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:$('#d').dialog('close')" style="width:80px">取消</a>
-            </div>
-</div>
+        <textarea name="STORAGEINSTRUCTIONS" style="width:560px;height:260px;" id="STORAGEINSTRUCTIONS" placeholder="请填写退回原因"></textarea>
+        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="tuihuibaocun()" style="width:80px">确定</a>
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:$('#d').dialog('close')" style="width:80px">取消</a>
+        </div>
+    </div>
 </div>
 @*************************@
 <br style="clear: both;" />
@@ -183,6 +183,7 @@
         }
 
     }
+
     //退回保存
     function tuihuibaocun() {
         var tuihu = $("input[name='tuihuiaa']:checked").val();
@@ -211,7 +212,7 @@
             entity.RETURN_INSTRUCTIONS = RETURN_INSTRUCTIONS,
             entity.STORAGEINSTRUCTIONS = STORAGEINSTRUCTIONS,
             entity.ORDER_STATUS = ORDER_STATUS,
-            entity.RETURNREASON = RETURNREASON
+            entity.RETURNREASON = RETURNREASON,
             $.ajax({
                 url: "/api/APPLIANCE_LABORATORYApi/EditSENDBACK",
                 type: "Post",
@@ -233,7 +234,6 @@
         else {
             $.messager.alert('操作提示', "请选择退回原因！", 'info');
         }
-
     }
 </script>
 
@@ -353,7 +353,7 @@
                     , { field: 'REPORTSTATUS', title: '@Html.DisplayNameFor(model => model.REPORTSTATUS)', align: 'center', width: 70 }
                     , { field: 'APPROVAL', title: '@Html.DisplayNameFor(model => model.APPROVAL)', align: 'center', width: 200 }
                     , { field: 'INSPECTION_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.INSPECTION_ENTERPRISE)', width: 64 }
-                    
+
             ]],
             pagination: true,
             rownumbers: true
@@ -379,12 +379,12 @@
         var search = "";
         search += "ORDER_NUMBER&" + $("#ORDER_NUMBER").val() + "^";
         search += "APPLIANCE_NAME&" + $("#APPLIANCE_NAME").val() + "^";
-        search += "VERSION&" + $("#VERSION").val() + "^"; 
+        search += "VERSION&" + $("#VERSION").val() + "^";
         search += "FACTORY_NUM&" + $("#FACTORY_NUM").val() + "^";
         search += "CERTIFICATE_ENTERPRISE&" + $('#CERTIFICATE_ENTERPRISE').combobox('getText') + "^";
-        search += "ORDER_STATUS&" + $('#ORDER_STATUS').combobox('getText') + "^"; 
+        search += "ORDER_STATUS&" + $('#ORDER_STATUS').combobox('getText') + "^";
         search += "INSPECTION_ENTERPRISE&" + $('#INSPECTION_ENTERPRISE').combobox('getText') + "^";
-        if ($('#ISOVERDUE').combobox('getText')=="是") {
+        if ($('#ISOVERDUE').combobox('getText') == "是") {
             search += "ISOVERDUE&" + $('#ISOVERDUE').combobox('getText') + "^";
         }
         else {

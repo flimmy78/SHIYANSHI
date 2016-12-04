@@ -13,7 +13,9 @@ namespace Langben.DAL
         
         [Display(Name = "预备方案")]
         public string PREPARE_SCHEMEIDOld { get; set; }
-        
+
+        [Display(Name = "不合格类型")]
+        public string UNQUALIFIEDTYPE { get; set; }
         #endregion
 
     }
