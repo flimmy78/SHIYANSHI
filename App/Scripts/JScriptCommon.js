@@ -222,6 +222,21 @@ function showModalOnly(me, url) { //弹出窗体 ,单选
     return;
 }
 
+function showModal(me, url) { //弹出窗体 
+    var hidden = document.getElementById(me); //获取隐藏的控件
+    if (hidden == null) {
+        alert("请先设置更新控件");
+        return;
+    }
+    var reValue = window.showModalDialog(url, window, "dialogHeight:500px; dialogWidth:987px;  status:off; scroll:auto");
+
+    if (reValue == null || reValue == "undefined" || reValue == "") {
+        return; //如果返回值为空，就返回
+    }
+    hidden.value = reValue;    
+    return;
+}
+
 function isInt(t) {
     t.value = t.value.replace(/[^0-9]/g, '')
 }

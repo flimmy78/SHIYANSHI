@@ -419,6 +419,93 @@ namespace Langben.App.Controllers
             }
 
         }
+        /// <summary>
+        /// 计算不确定度页
+        /// </summary>
+        /// <param name="ID">控件ID</param>
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <returns></returns>
+        public ActionResult JiSuanBuQueDingDu(string ID = "", string RULEID = "",string PREPARE_SCHEMEID = "")
+        {
+            string URL = GetBuQueDingDuUrl(ID, RULEID, PREPARE_SCHEMEID);
+            string htmlValue = "";
+            if(DirFile.FileExists(URL))
+            {
+                htmlValue = DirFile.ReadFile(URL);
+            }
+            ViewBag.ID = ID;
+            ViewBag.RULEID = RULEID;            
+            ViewBag.HTMLVALUE = htmlValue;
+            ViewBag.PREPARE_SCHEMEID = PREPARE_SCHEMEID;
+            return View();
+        }
+        /// <summary>
+        /// 保存不确定度
+        /// </summary>
+        /// <param name="ID">控件ID</param>
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <param name="HTMLVALUE">html</param>
+        /// <returns></returns>
+        public ActionResult JiSuanBuQueDingDuSave(string ID = "", string RULEID = "", string PREPARE_SCHEMEID = "", string HTMLVALUE="")
+        {
+            Common.ClientResult.Result result = new Common.ClientResult.Result();
+            try
+            {
+                string URL = GetBuQueDingDuUrl(ID, RULEID, PREPARE_SCHEMEID);
+                if (DirFile.FileExists(URL))
+                {
+                    DirFile.DeleteFile(URL);
+                }
+                HTMLVALUE = Server.UrlDecode(HTMLVALUE);//解码
+                DirFile.SaveFile(HTMLVALUE, URL);
+                LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + Url, "不确定度计算");//写入日志 
+                result.Code = Common.ClientCode.Succeed;               
+                result.Message = "保存成功";
+                return Json(result); //提示创建成功
+            }
+            catch(Exception ex)
+            {
+                LogClassModels.WriteServiceLog(Suggestion.InsertFail + Url+":"+ex.Message,"不确定度计算");//写入日志                      
+                result.Code = Common.ClientCode.Fail;
+                result.Message = Suggestion.InsertFail + ex.Message;
+                return Json(result); //提示插入失败
+            }       
+           
+
+        }
+        /// <summary>
+        /// 获取不确定路径
+        /// </summary>
+        /// <param name="ID">控件ID</param>
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <returns></returns>
+        private string GetBuQueDingDuUrl(string ID = "", string RULEID = "", string PREPARE_SCHEMEID = "")
+        {
+            string URL = "/up/BuQueDingDu/";
+            if(!string.IsNullOrEmpty(PREPARE_SCHEMEID) && PREPARE_SCHEMEID.Trim()!="")
+            {
+                URL += PREPARE_SCHEMEID;
+            }
+            if (!string.IsNullOrEmpty(RULEID) && RULEID.Trim() != "")
+            {
+                URL += "/"+RULEID;
+                URL += "/" + RULEID;
+                if (!string.IsNullOrEmpty(ID) && ID.Trim() != "")
+                {
+                    URL += "_" + ID;
+                }
+                URL += ".html";
+            }
+            string htmlValue = "";
+            if (DirFile.FileExists(URL))
+            {
+                htmlValue = DirFile.ReadFile(URL);
+            }
+            return URL;
+        }
 
         IBLL.IPROJECTTEMPLETBLL m_BLL;
         ValidationErrors validationErrors = new ValidationErrors();
