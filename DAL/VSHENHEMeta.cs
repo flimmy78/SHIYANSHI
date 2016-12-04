@@ -69,6 +69,8 @@ namespace Langben.DAL
 
         [Display(Name = "修改时间", Order = 18)]
         public object UPDATETIME { get; set; }
+        [Display(Name = "核验员", Order = 18)]
+        public object DETECTERID { get; set; }
     }
 
 

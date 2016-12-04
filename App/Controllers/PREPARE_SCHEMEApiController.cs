@@ -414,7 +414,7 @@ namespace Langben.App.Controllers
                 entity.UPDATEPERSON = currentPerson;
 
                 string returnValue = string.Empty;
-
+                entity.CHECKERID = currentPerson;
 
                 if (m_BLL.EditInst(ref validationErrors, entity))
                 {

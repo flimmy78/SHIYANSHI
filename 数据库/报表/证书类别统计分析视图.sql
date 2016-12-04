@@ -8,9 +8,8 @@
   PIZHUNJIELUN, ----5批准结论
   PIZHUNSHIJIAN, ----6批准时间
   SHOUQUANZIZHI,----7授权/资质
-  ZHENGSHULEIBIE,----8证书类别
-  BAOGAOLEIBIE, ----9报告类别
-  BAOGAOSHULIANG----10报告数量
+  BAOGAOSHULIANG----8报告数量
+  ,ZHEGNSHUBAOGAOLEIBIE ----9证书/报告类别
   ) AS 
   select al.ID,----1主键  
     '',----2所属单位
@@ -53,10 +52,17 @@
     THEN '校准'
     ELSE ''
   end as SHOUQUANZIZHI, ----7授权/资质
-    ps.CERTIFICATE_CATEGORY,----8证书类别
-  ps.REPORT_CATEGORY,----9报告类别
-  1----10报告数量
     
+  0----8报告数量
+     ,CASE   
+    WHEN ps.CONCLUSION = '合格'----9总结论   
+    THEN ps.CERTIFICATE_CATEGORY
+
+	  WHEN ps.CONCLUSION = '不合格'----9总结论   
+    THEN ps.CERTIFICATE_CATEGORY ||'通知书'
+	  ELSE '0'
+  end as ZHEGNSHUBAOGAOLEIBIE----9证书/报告类别
+ 
   from PREPARE_SCHEME ps
 inner join APPLIANCE_LABORATORY al
 on al.PREPARE_SCHEMEID=ps.id

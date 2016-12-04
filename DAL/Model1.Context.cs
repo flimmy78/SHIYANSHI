@@ -12,6 +12,8 @@ namespace Langben.DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class SysEntities : DbContext
     {
@@ -89,7 +91,11 @@ namespace Langben.DAL
         public virtual DbSet<UNCERTAINTYPARAMETERMANAGEMENT> UNCERTAINTYPARAMETERMANAGEMENT { get; set; }
         public virtual DbSet<UNCERTAINTYTABLE> UNCERTAINTYTABLE { get; set; }
         public virtual DbSet<UNDERTAKE_LABORATORY> UNDERTAKE_LABORATORY { get; set; }
+        public virtual DbSet<THEAPPROVALPROCESS> THEAPPROVALPROCESS { get; set; }
+        public virtual DbSet<THEREVIEWPROCESS> THEREVIEWPROCESS { get; set; }
         public virtual DbSet<VBAOGAODAYIN> VBAOGAODAYIN { get; set; }
+        public virtual DbSet<VBIAOZHUNLIANGCHUANGONGZHUO> VBIAOZHUNLIANGCHUANGONGZHUO { get; set; }
+        public virtual DbSet<VGONGZUOSHICHANG> VGONGZUOSHICHANG { get; set; }
         public virtual DbSet<VJIANDINGRENWU> VJIANDINGRENWU { get; set; }
         public virtual DbSet<VQIJULINGQU1> VQIJULINGQU1 { get; set; }
         public virtual DbSet<VQIJULINGQU2> VQIJULINGQU2 { get; set; }
@@ -97,7 +103,27 @@ namespace Langben.DAL
         public virtual DbSet<VRULE> VRULE { get; set; }
         public virtual DbSet<VSHENHE> VSHENHE { get; set; }
         public virtual DbSet<VSHENPI> VSHENPI { get; set; }
+        public virtual DbSet<VSHIYANSHIGONGZUOLIANG> VSHIYANSHIGONGZUOLIANG { get; set; }
         public virtual DbSet<VTEST_ITE> VTEST_ITE { get; set; }
         public virtual DbSet<VXIANGQING> VXIANGQING { get; set; }
+        public virtual DbSet<VZHENGSHULEIBEITONGJIFENXI> VZHENGSHULEIBEITONGJIFENXI { get; set; }
+        public virtual DbSet<VZHENGSHUXINXICHAXUN> VZHENGSHUXINXICHAXUN { get; set; }
+    
+        public virtual ObjectResult<SHIYANSHIGONGZUO_Result> SHIYANSHIGONGZUO(Nullable<System.DateTime> sTARTDATE, Nullable<System.DateTime> eNDDATE, string dANWEI)
+        {
+            var sTARTDATEParameter = sTARTDATE.HasValue ?
+                new ObjectParameter("STARTDATE", sTARTDATE) :
+                new ObjectParameter("STARTDATE", typeof(System.DateTime));
+    
+            var eNDDATEParameter = eNDDATE.HasValue ?
+                new ObjectParameter("ENDDATE", eNDDATE) :
+                new ObjectParameter("ENDDATE", typeof(System.DateTime));
+    
+            var dANWEIParameter = dANWEI != null ?
+                new ObjectParameter("DANWEI", dANWEI) :
+                new ObjectParameter("DANWEI", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SHIYANSHIGONGZUO_Result>("SHIYANSHIGONGZUO", sTARTDATEParameter, eNDDATEParameter, dANWEIParameter);
+        }
     }
 }

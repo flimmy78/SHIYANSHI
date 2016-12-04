@@ -202,14 +202,24 @@
     <Compile Include="Controllers\SysOperationController.cs" />
     <Compile Include="Controllers\SysPersonController.cs" />
     <Compile Include="Controllers\SysRoleController.cs" />
+    <Compile Include="Controllers\THEAPPROVALPROCESSApiController.cs" />
+    <Compile Include="Controllers\THEAPPROVALPROCESSController.cs" />
+    <Compile Include="Controllers\THEREVIEWPROCESSApiController.cs" />
+    <Compile Include="Controllers\THEREVIEWPROCESSController.cs" />
     <Compile Include="Controllers\UNCERTAINTYTABLEApiController.cs" />
     <Compile Include="Controllers\UNCERTAINTYTABLEController.cs" />
     <Compile Include="Controllers\VAPPLIANCE_DETAIL_INFORMATIONApiController .cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ApplianceController.cs" />
+    <Compile Include="Controllers\VBIAOZHUNLIANGCHUANGONGZHUOApiController.cs" />
+    <Compile Include="Controllers\VBIAOZHUNLIANGCHUANGONGZHUOController.cs" />
     <Compile Include="Controllers\VXIANGQINGApiController.cs" />
     <Compile Include="Controllers\VChartsController.cs" />
     <Compile Include="Controllers\VXIANGQINGController.cs" />
+    <Compile Include="Controllers\VZHENGSHULEIBEITONGJIFENXIApiController.cs" />
+    <Compile Include="Controllers\VZHENGSHULEIBEITONGJIFENXIController.cs" />
+    <Compile Include="Controllers\VZHENGSHUXINXICHAXUNApiController.cs" />
+    <Compile Include="Controllers\VZHENGSHUXINXICHAXUNController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -931,6 +941,17 @@
     <Content Include="Views\METERING_STANDARD_DEVICE\IndexSef.cshtml" />
     <Content Include="Views\VCharts\Index.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\JiSuanBuQueDingDu.cshtml" />
+    <Content Include="Views\VZHENGSHULEIBEITONGJIFENXI\Index.cshtml" />
+    <Content Include="Views\VZHENGSHUXINXICHAXUN\Index.cshtml" />
+    <Content Include="Views\VBIAOZHUNLIANGCHUANGONGZHUO\Index.cshtml" />
+    <Content Include="Views\THEAPPROVALPROCESS\Create.cshtml" />
+    <Content Include="Views\THEAPPROVALPROCESS\Details.cshtml" />
+    <Content Include="Views\THEAPPROVALPROCESS\Edit.cshtml" />
+    <Content Include="Views\THEAPPROVALPROCESS\Index.cshtml" />
+    <Content Include="Views\THEREVIEWPROCESS\Create.cshtml" />
+    <Content Include="Views\THEREVIEWPROCESS\Details.cshtml" />
+    <Content Include="Views\THEREVIEWPROCESS\Edit.cshtml" />
+    <Content Include="Views\THEREVIEWPROCESS\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

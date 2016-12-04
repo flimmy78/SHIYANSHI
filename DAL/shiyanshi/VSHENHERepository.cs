@@ -24,7 +24,7 @@ namespace Langben.DAL
             string where = string.Empty;
             int flagWhere = 0;
             string REPORTSTATUSZI = string.Empty;
-            string UNDERTAKE_LABORATORYID = string.Empty;
+            string DETECTERID = string.Empty;
             Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
             if (queryDic != null && queryDic.Count > 0)
             {
@@ -35,9 +35,9 @@ namespace Langben.DAL
                         REPORTSTATUSZI = item.Value;
                         continue;
                     }
-                    if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "UNDERTAKE_LABORATORYID")
+                    if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "DETECTERID")
                     {
-                        UNDERTAKE_LABORATORYID = item.Value;
+                        DETECTERID = item.Value;
                         continue;
                     }
                     if (flagWhere != 0)
@@ -94,7 +94,7 @@ namespace Langben.DAL
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
                      .OrderBy("it.[UPDATETIME] " + "asc")
                      .Where(w => REPORTSTATUSZIarr.Contains(w.REPORTSTATUSZI))
-                     .Where(w=>w.UNDERTAKE_LABORATORYID==UNDERTAKE_LABORATORYID)
+                     .Where(w=>w.DETECTERID == DETECTERID)
                      .AsQueryable();
 
         }

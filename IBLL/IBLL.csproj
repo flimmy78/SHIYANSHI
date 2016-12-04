@@ -65,8 +65,13 @@
     <Compile Include="ISysOperationBLL.cs" />
     <Compile Include="ISysPersonBLL.cs" />
     <Compile Include="ISysRoleBLL.cs" />
+    <Compile Include="ITHEAPPROVALPROCESSBLL.cs" />
+    <Compile Include="ITHEREVIEWPROCESSBLL.cs" />
     <Compile Include="IUNCERTAINTYTABLEBLL.cs" />
+    <Compile Include="IVBIAOZHUNLIANGCHUANGONGZHUOBLL.cs" />
     <Compile Include="IVXIANGQINGBLL.cs" />
+    <Compile Include="IVZHENGSHULEIBEITONGJIFENXIBLL.cs" />
+    <Compile Include="IVZHENGSHUXINXICHAXUNBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IORDER_TASK_INFORMATIONBLL.cs" />
     <Compile Include="IAPPLIANCE_DETAIL_INFORMATIONBLL.cs" />

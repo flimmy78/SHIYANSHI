@@ -22,6 +22,8 @@ namespace Langben.DAL
             this.PRINTREPORT = new HashSet<PRINTREPORT>();
             this.QUALIFIED_UNQUALIFIED_TEST_ITE = new HashSet<QUALIFIED_UNQUALIFIED_TEST_ITE>();
             this.REPORTCOLLECTION = new HashSet<REPORTCOLLECTION>();
+            this.THEAPPROVALPROCESS = new HashSet<THEAPPROVALPROCESS>();
+            this.THEREVIEWPROCESS = new HashSet<THEREVIEWPROCESS>();
             this.METERING_STANDARD_DEVICE = new HashSet<METERING_STANDARD_DEVICE>();
         }
     
@@ -69,6 +71,9 @@ namespace Langben.DAL
         public string YEARS { get; set; }
         public string PACKAGETYPE { get; set; }
         public string OTHER { get; set; }
+        public string AUTHORIZATION { get; set; }
+        public Nullable<System.DateTime> VALIDITYEND { get; set; }
+        public string UNQUALIFIEDTYPE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<APPLIANCE_LABORATORY> APPLIANCE_LABORATORY { get; set; }
@@ -81,6 +86,10 @@ namespace Langben.DAL
         public virtual ICollection<QUALIFIED_UNQUALIFIED_TEST_ITE> QUALIFIED_UNQUALIFIED_TEST_ITE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REPORTCOLLECTION> REPORTCOLLECTION { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<THEAPPROVALPROCESS> THEAPPROVALPROCESS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<THEREVIEWPROCESS> THEREVIEWPROCESS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<METERING_STANDARD_DEVICE> METERING_STANDARD_DEVICE { get; set; }
     }

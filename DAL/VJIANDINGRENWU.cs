@@ -34,5 +34,6 @@ namespace Langben.DAL
         public string EQUIPMENT_STATUS_VALUUMN { get; set; }
         public Nullable<System.DateTime> UPDATETIME { get; set; }
         public string ISRECEIVE { get; set; }
+        public string RETURNREASON { get; set; }
     }
 }

@@ -45,6 +45,7 @@ namespace Langben.DAL
                 deleteItem.OVERDUE = entity.OVERDUE == null ? deleteItem.OVERDUE : entity.OVERDUE;
                 deleteItem.STORAGEINSTRUCTIONS = entity.STORAGEINSTRUCTIONS == null ? deleteItem.STORAGEINSTRUCTIONS : entity.STORAGEINSTRUCTIONS;
                 deleteItem.STORAGEINSTRUCTI_STATU = entity.STORAGEINSTRUCTI_STATU == null ? deleteItem.STORAGEINSTRUCTI_STATU : entity.STORAGEINSTRUCTI_STATU;
+                deleteItem.RETURNREASON = entity.RETURNREASON == null ? deleteItem.RETURNREASON : entity.RETURNREASON;
             }
         }
 

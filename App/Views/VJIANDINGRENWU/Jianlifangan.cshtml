@@ -372,9 +372,9 @@
         arr.RATED_FREQUENCY = $("#RATED_FREQUENCY").val();//额定频率
         arr.OTHER = $("#OTHER").val();//其他
         arr.METERING_STANDARD_DEVICEID = $("#METERING_STANDARD_DEVICEID").val();//新的标准器id
-        arr.METERING_STANDARD_DEVICEIDOld = $("#METERING_STANDARD_DEVICEIDOld").val();//旧的标准器id
+        arr.METERING_STANDARD_DEVICEIDOld = $("#METERING_STANDARD_DEVICEIDOld").val();//旧的标准器id 
         arr.ID = "@Model.ID";
-        if (arr.SCHEMEID=='') {
+        if (arr.SCHEMEID == '') {
             $.messager.alert('操作提示', "请选择方案模板！", 'error');
             return;
         }

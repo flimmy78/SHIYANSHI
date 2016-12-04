@@ -101,7 +101,7 @@ namespace Langben.App.Controllers
         {
             Common.Account account = GetCurrentAccount();
             int total = 0;
-            search += "UNDERTAKE_LABORATORYID&" + account.UNDERTAKE_LABORATORYName + "^";
+            search += "DETECTERID&" + account.Name + "^";
             search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.审核驳回.GetHashCode() + "*" + Common.REPORTSTATUS.待审核.GetHashCode() + "*" + Common.REPORTSTATUS.待批准.GetHashCode() + "";
 
             List<VSHENHE> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
