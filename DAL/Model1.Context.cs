@@ -12,6 +12,8 @@ namespace Langben.DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class SysEntities : DbContext
     {
@@ -104,5 +106,22 @@ namespace Langben.DAL
         public virtual DbSet<VXIANGQING> VXIANGQING { get; set; }
         public virtual DbSet<VZHENGSHULEIBEITONGJIFENXI> VZHENGSHULEIBEITONGJIFENXI { get; set; }
         public virtual DbSet<VZHENGSHUXINXICHAXUN> VZHENGSHUXINXICHAXUN { get; set; }
+    
+        public virtual ObjectResult<SHIYANSHIGONGZUO_Result> SHIYANSHIGONGZUO(Nullable<System.DateTime> sTARTDATE, Nullable<System.DateTime> eNDDATE, string dANWEI)
+        {
+            var sTARTDATEParameter = sTARTDATE.HasValue ?
+                new ObjectParameter("STARTDATE", sTARTDATE) :
+                new ObjectParameter("STARTDATE", typeof(System.DateTime));
+    
+            var eNDDATEParameter = eNDDATE.HasValue ?
+                new ObjectParameter("ENDDATE", eNDDATE) :
+                new ObjectParameter("ENDDATE", typeof(System.DateTime));
+    
+            var dANWEIParameter = dANWEI != null ?
+                new ObjectParameter("DANWEI", dANWEI) :
+                new ObjectParameter("DANWEI", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SHIYANSHIGONGZUO_Result>("SHIYANSHIGONGZUO", sTARTDATEParameter, eNDDATEParameter, dANWEIParameter);
+        }
     }
 }
