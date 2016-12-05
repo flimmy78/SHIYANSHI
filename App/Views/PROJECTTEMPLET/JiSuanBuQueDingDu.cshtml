@@ -42,8 +42,7 @@ else
                                 <option value="测量范围">测量范围</option>
                             </select>
                             <input class="my-textbox " type="text" name="pdText" id="pdText" value="" style="width:100px">
-                        </td>
-                        <td><a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnSave" onclick="Save();">保存</a></td>
+                        </td>                       
                     </tr>
                 </table>
             </div>
@@ -163,7 +162,7 @@ else
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="6"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addRow(this)">增加</a> <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="">选择</a></td>
+                            <td colspan="6"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addRow(this)">增加</a> <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="">选择</a><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'" onclick="resetRow()">重置</a></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -184,7 +183,7 @@ else
             <div class="mt10">
                 <h2 class="f14 mt10 " style="display:inherit"> （4）合成不确定度评定 </h2>
                 (k =
-                <select class="my-combobox" name="ddlSelectD" id="ddlSelectD">
+                <select class="my-combobox" name="ddlSelectD" id="ddlSelectD"  onchange="caculateD()">
                     <option value="2">2 </option>
                     <option value="3">3</option>
                     <option value="√3">√3</option>
@@ -210,6 +209,7 @@ else
                 </div>
             </div>
             <!--测量结果报告 -->
+            <div class="mt10 form-foot"><input type="button" class="my-btn" value="保 存" id="btnSave" onclick="Save();"/> <input type="button" class="my-btn" value="取 消" /></div>
 
         </div>
 </div>
@@ -290,6 +290,10 @@ else
 
         $("#tongdao_B tbody").append(trNew);
     }
+    //清空增加的行
+    function resetRow() {
+        $("#tongdao_B tbody tr:not(:first)").empty();
+    }
     function getData() {
         var data = "";
         $("#tongdao_moban tr:not(:first)").each(function () {
@@ -340,11 +344,11 @@ else
         sd = Math.sqrt(sd);
         psd = Math.sqrt(psd);
         var sVariance = Math.pow(sd, 2);
-        sVariance = Math.round(sVariance * 10000) / 10000;
+        sVariance = Math.round(sVariance * 1000000) / 1000000;
         var pVariance = Math.pow(psd, 2);
-        pVariance = Math.round(pVariance * 10000) / 10000;
-        sd = Math.round(sd * 10000) / 10000;
-        psd = Math.round(psd * 10000) / 10000;
+        pVariance = Math.round(pVariance * 1000000) / 1000000;
+        sd = Math.round(sd * 1000000) / 1000000;
+        psd = Math.round(psd * 1000000) / 1000000;
         var v = $("#txtValue").val();
         $("#txtBuQueDingA").val(v == "" ? sd : parseFloat(sd) / parseFloat(v));
 
