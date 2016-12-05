@@ -1670,8 +1670,7 @@ namespace Langben.Report
                         if (startMergeCell < endMergeCell)
                         {
 
-                            var d = IsMergedRegionCell(i, i);  //2、单元格为合并单元格且不在合并区域左上角
-                            sheet_Destination.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, endMergeCell));
+                             sheet_Destination.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, endMergeCell));
                             if (IsCopyContent)
                             {
                                 //string value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell]);
