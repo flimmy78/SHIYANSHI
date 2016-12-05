@@ -104,6 +104,9 @@
                 //输出示值 增加下拉框单位A
                 htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "@((ViewBag.canshu == "相对误差") ? "resetBiaoZhunZhi" : "jueDuiWuChaBiaoZhunZhi")"));
 
+                //频率
+                htmlString.push(SetTDHtml(rowspan, "HZMY", HangHaoID, rowidx));
+
                 //读数值 增加下拉框单位V
                 htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx));
 
