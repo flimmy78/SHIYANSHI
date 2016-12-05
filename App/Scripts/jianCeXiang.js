@@ -671,7 +671,7 @@ function xiangDuiWuCha1(obj, source, gold) {
     var biaoZhunData = $(obj).parent().parent().find("#" + newid).val();
     var showData = $(obj).val();
     if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
-        var txtPointLen = $("#txtPointLen").val(); //小数点位数
+        var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
 
         var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
         var data = fomatFloat(xiangDuiWuCha, txtPointLen)
@@ -692,7 +692,7 @@ function xiangDuiWuCha2(obj, source, gold) {
     var showData = $(obj).parent().parent().find("#" + newid).val();
     var biaoZhunData = $(obj).val();
     if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
-        var txtPointLen = $("#txtPointLen").val(); //小数点位数
+        var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
 
         var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
         var data = fomatFloat(xiangDuiWuCha, txtPointLen)
@@ -717,7 +717,7 @@ function xiangDuiWuCha(obj, first, second, gold) {
     var firstData = $(obj).parent().parent().find("#" + first).val();
     var secondData = $(obj).parent().parent().find("#" + second).val();
     if (firstData != "undefined" && secondData != "undefined" && firstData != "" && secondData != "" && secondData != "0") {
-        var txtPointLen = $("#txtPointLen").val(); //小数点位数
+        var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
         
         var data = fomatFloat(((firstData - secondData) / secondData * 100), txtPointLen)
    
@@ -745,7 +745,7 @@ function jueDuiWuCha(obj, first, second, gold) {
     var firstData = $(obj).parent().parent().find("#" + first).val();
     var secondData = $(obj).parent().parent().find("#" + second).val();
     if (firstData != "" && secondData != "") {
-        var txtPointLen = $("#txtPointLen").val(); //小数点位数
+        var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
 
         var data = (firstData - secondData).toFixed(txtPointLen);
 
