@@ -9,14 +9,16 @@
     <!--表头-->
     <tr>
         <td colspan="9">
-            <input name="mAVdianliu" id="mAVdianliu_t_1_1" type="text" class="my-textbox tc" value="50" style="width:40px">
-            <select class="my-combobox" name="HZOUTPUTVALUE_UNIT" id="HZOUTPUTVALUE_UNIT_t_1_1">
-                <option value="Hz">Hz</option>
-                <option value="KHz">KHz</option>
-                <option value="MHz">MHz</option>
-                <option value="GHz">GHz</option>
-            </select>
-
+            @if (ViewBag.canshu != "电压输出")
+            {
+                <input name="mAVdianliu" id="mAVdianliu_t_1_1" type="text" class="my-textbox tc" value="50" style="width:40px">
+                <select class="my-combobox" name="HZOUTPUTVALUE_UNIT" id="HZOUTPUTVALUE_UNIT_t_1_1">
+                    <option value="Hz">Hz</option>
+                    <option value="KHz">KHz</option>
+                    <option value="MHz">MHz</option>
+                    <option value="GHz">GHz</option>
+                </select>
+            }
         </td>
     </tr>
     <tr>
@@ -31,356 +33,33 @@
         <th align="center" class="f14">
             @if (ViewBag.canshu == "电压输出" || ViewBag.canshu == "电压测量")
             {
-                <select onchange="uonchange(this, 'uonchange1')"  class="my-combobox uonchange1"   name="TMYDIANYA1" id="TMYDIANYA1_t_1_1">                    
-                    <option value="U1">U1</option>
-                    <option value="U2">U2</option>
-                    <option value="UA">UA</option>
-                    <option value="UB">UB</option>
-                    <option value="UC">UC</option>  
-                    <option selected="selected" value="UAB">UAB</option>                 
-                    <option value="UCB">UCB</option>
-                </select>
-            }
-            else if (ViewBag.canshu == "电流输出")
-            {
-                <select onchange="uonchange(this, 'uonchange1')"  class="my-combobox uonchange1"   name="my123a" id="my123a_t_1_1">
-                    <option value="A相">A相</option>
-                    <option value="B相">B相</option>
-                    <option value="C相">C相</option>
-                    <option selected="selected" value="I1">I1</option>
-
-                    <option value="I2">I2</option>
-                </select>
-            }
-            else if (ViewBag.canshu == "电流测量")
-            {
-                <select onchange="uonchange(this, 'uonchange1')"  class="my-combobox uonchange1"   name="dianymy123a" id="dianymy123a_t_1_1">
-
-
-
-                    <option value="I0">I0</option>
-
-                    <option selected="selected" value="I1">I1</option>
-
-                    <option value="I2">I2</option>
-
-                    <option value="I3">I3</option>
-
-                    <option value="I4">I4</option>
-
-                    <option value="I5">I5</option>
-
-                    <option value="I6">I6</option>
-
-                    <option value="I7">I7</option>
-
-                    <option value="I8">I8</option>
-
-                    <option value="I9">I9</option>
-
-                    <option value="I10">I10</option>
-
-                    <option value="I11">I11</option>
-
-                    <option value="I12">I12</option>
-
-                    <option value="I13">I13</option>
-
-                    <option value="I14">I14</option>
-
-                    <option value="I15">I15</option>
-
-                    <option value="I16">I16</option>
-
-                    <option value="I17">I17</option>
-
-                    <option value="I18">I18</option>
-
-                    <option value="I19">I19</option>
-
-                    <option value="I20">I20</option>
-
-
-                    <option value="CH0">CH0</option>
-
-                    <option value="CH1">CH1</option>
-
-                    <option value="CH2">CH2</option>
-
-                    <option value="CH3">CH3</option>
-
-                    <option value="CH4">CH4</option>
-
-                    <option value="CH5">CH5</option>
-
-                    <option value="CH6">CH6</option>
-
-                    <option value="CH7">CH7</option>
-
-                    <option value="CH8">CH8</option>
-
-                    <option value="CH9">CH9</option>
-
-                    <option value="CH10">CH10</option>
-
-                    <option value="CH11">CH11</option>
-
-                    <option value="CH12">CH12</option>
-
-                    <option value="CH13">CH13</option>
-
-                    <option value="CH14">CH14</option>
-
-                    <option value="CH15">CH15</option>
-
-                    <option value="CH16">CH16</option>
-
-
-                    <option value="IA1">IA1</option>
-
-                    <option value="IA2">IA2</option>
-
-                    <option value="IA3">IA3</option>
-
-                    <option value="IA4">IA4</option>
-
-                    <option value="IA5">IA5</option>
-
-                    <option value="IA6">IA6</option>
-
-
-                    <option value="IB1">IB1</option>
-
-                    <option value="IB2">IB2</option>
-
-                    <option value="IB3">IB3</option>
-
-                    <option value="IB4">IB4</option>
-
-                    <option value="IB5">IB5</option>
-
-                    <option value="IB6">IB6</option>
-
-
-                    <option value="IC1">IC1</option>
-
-                    <option value="IC2">IC2</option>
-
-                    <option value="IC3">IB3</option>
-
-                    <option value="IC4">IC4</option>
-
-                    <option value="IC5">IC5</option>
-
-                    <option value="IC6">IC6</option>
-
-
-                    <option value="I01">I01</option>
-
-                    <option value="I02">I02</option>
-
-                    <option value="I03">I03</option>
-
-                    <option value="I04">I04</option>
-
-                    <option value="I05">I05</option>
-
-                    <option value="I06">I06</option>
-
-                </select>
-            }
-        </th>
-
-        <th align="center" class="f14">
-
-            @if (ViewBag.canshu == "电压输出" || ViewBag.canshu == "电压测量")
-            {
-                <select onchange="uonchange(this, 'uonchange2')"  class="my-combobox uonchange2"   name="TMYDIANYA32" id="TMYDIANYA32_t_1_1">                    
+                <select onchange="uonchange(this, 'uonchange1')" class="my-combobox uonchange1" name="TMYDIANYA1" id="TMYDIANYA1_t_1_1">
                     <option value="U1">U1</option>
                     <option value="U2">U2</option>
                     <option value="UA">UA</option>
                     <option value="UB">UB</option>
                     <option value="UC">UC</option>
-                    <option value="UAB">UAB</option>
-                    <option selected="selected" value="UCB">UCB</option>                   
-                </select>
-            }
-            else if (ViewBag.canshu == "电流输出")
-            {
-                <select onchange="uonchange(this, 'uonchange2')"  class="my-combobox uonchange2"   name="my123a2" id="my123a2_t_1_1">
-                    <option value="A相">A相</option>
-                    <option value="B相">B相</option>
-                    <option value="C相">C相</option>
-                    <option  value="I1">I1</option>
-
-                    <option selected="selected" value="I2">I2</option>
-                </select>
-            }
-            else if (ViewBag.canshu == "电流测量")
-            {
-                <select onchange="uonchange(this, 'uonchange2')"  class="my-combobox uonchange2"   name="dianymy123a2" id="dianymy123a2_t_1_1">
-                    <option value="I0">I0</option>
-
-                    <option value="I1">I1</option>
-
-                    <option selected="selected" value="I2">I2</option>
-
-                    <option value="I3">I3</option>
-
-                    <option value="I4">I4</option>
-
-                    <option value="I5">I5</option>
-
-                    <option value="I6">I6</option>
-
-                    <option value="I7">I7</option>
-
-                    <option value="I8">I8</option>
-
-                    <option value="I9">I9</option>
-
-                    <option value="I10">I10</option>
-
-                    <option value="I11">I11</option>
-
-                    <option value="I12">I12</option>
-
-                    <option value="I13">I13</option>
-
-                    <option value="I14">I14</option>
-
-                    <option value="I15">I15</option>
-
-                    <option value="I16">I16</option>
-
-                    <option value="I17">I17</option>
-
-                    <option value="I18">I18</option>
-
-                    <option value="I19">I19</option>
-
-                    <option value="I20">I20</option>
-
-
-                    <option value="CH0">CH0</option>
-
-                    <option value="CH1">CH1</option>
-
-                    <option value="CH2">CH2</option>
-
-                    <option value="CH3">CH3</option>
-
-                    <option value="CH4">CH4</option>
-
-                    <option value="CH5">CH5</option>
-
-                    <option value="CH6">CH6</option>
-
-                    <option value="CH7">CH7</option>
-
-                    <option value="CH8">CH8</option>
-
-                    <option value="CH9">CH9</option>
-
-                    <option value="CH10">CH10</option>
-
-                    <option value="CH11">CH11</option>
-
-                    <option value="CH12">CH12</option>
-
-                    <option value="CH13">CH13</option>
-
-                    <option value="CH14">CH14</option>
-
-                    <option value="CH15">CH15</option>
-
-                    <option value="CH16">CH16</option>
-
-
-                    <option value="IA1">IA1</option>
-
-                    <option value="IA2">IA2</option>
-
-                    <option value="IA3">IA3</option>
-
-                    <option value="IA4">IA4</option>
-
-                    <option value="IA5">IA5</option>
-
-                    <option value="IA6">IA6</option>
-
-
-                    <option value="IB1">IB1</option>
-
-                    <option value="IB2">IB2</option>
-
-                    <option value="IB3">IB3</option>
-
-                    <option value="IB4">IB4</option>
-
-                    <option value="IB5">IB5</option>
-
-                    <option value="IB6">IB6</option>
-
-
-                    <option value="IC1">IC1</option>
-
-                    <option value="IC2">IC2</option>
-
-                    <option value="IC3">IB3</option>
-
-                    <option value="IC4">IC4</option>
-
-                    <option value="IC5">IC5</option>
-
-                    <option value="IC6">IC6</option>
-
-
-                    <option value="I01">I01</option>
-
-                    <option value="I02">I02</option>
-
-                    <option value="I03">I03</option>
-
-                    <option value="I04">I04</option>
-
-                    <option value="I05">I05</option>
-
-                    <option value="I06">I06</option>
-
-                </select>
-            }
-        </th>
-
-        <th align="center" class="f14">
-
-            @if (ViewBag.canshu == "电压输出" || ViewBag.canshu == "电压测量")
-            {
-                <select onchange="uonchange(this, 'uonchange1')"  class="my-combobox uonchange1"   name="TMYDIANYA323" id="TMYDIANYA323_t_1_1">
-                    
-                    <option value="U1">U1</option>
-                    <option value="U2">U2</option>
-                    <option value="UA">UA</option>
-                    <option value="UB">UB</option>
-                    <option value="UC">UC</option>   
-                    <option selected="selected" value="UAB">UAB</option>                
+                    <option selected="selected" value="UAB">UAB</option>
                     <option value="UCB">UCB</option>
                 </select>
             }
             else if (ViewBag.canshu == "电流输出")
             {
-                <select onchange="uonchange(this, 'uonchange1')"  class="my-combobox uonchange1"   name="my123a23" id="my123a23_t_1_1">
+                <select onchange="uonchange(this, 'uonchange1')" class="my-combobox uonchange1" name="my123a" id="my123a_t_1_1">
                     <option value="A相">A相</option>
                     <option value="B相">B相</option>
                     <option value="C相">C相</option>
                     <option selected="selected" value="I1">I1</option>
 
-                    <option  value="I2">I2</option>
+                    <option value="I2">I2</option>
                 </select>
             }
             else if (ViewBag.canshu == "电流测量")
             {
-                <select onchange="uonchange(this, 'uonchange1')"  class="my-combobox uonchange1"   name="dianymy123a23" id="dianymy123a23_t_1_1">
+                <select onchange="uonchange(this, 'uonchange1')" class="my-combobox uonchange1" name="dianymy123a" id="dianymy123a_t_1_1">
+
+
+
                     <option value="I0">I0</option>
 
                     <option selected="selected" value="I1">I1</option>
@@ -518,160 +197,160 @@
 
             @if (ViewBag.canshu == "电压输出" || ViewBag.canshu == "电压测量")
             {
-                <select onchange="uonchange(this, 'uonchange2')"  class="my-combobox uonchange2"   name="TMYDIANYA3234" id="TMYDIANYA3234_t_1_1">                
-                    <option value="U1">U1</option>
-                    <option value="U2">U2</option>
-                    <option value="UA">UA</option>
-                    <option value="UB">UB</option>
-                    <option value="UC">UC</option>
-                    <option value="UAB">UAB</option>  
-                    <option selected="selected" value="UCB">UCB</option>                
-                </select>
+            <select onchange="uonchange(this, 'uonchange2')" class="my-combobox uonchange2" name="TMYDIANYA32" id="TMYDIANYA32_t_1_1">
+                <option value="U1">U1</option>
+                <option value="U2">U2</option>
+                <option value="UA">UA</option>
+                <option value="UB">UB</option>
+                <option value="UC">UC</option>
+                <option value="UAB">UAB</option>
+                <option selected="selected" value="UCB">UCB</option>
+            </select>
             }
             else if (ViewBag.canshu == "电流输出")
             {
-                <select onchange="uonchange(this, 'uonchange2')"  class="my-combobox uonchange2"   name="my123a234" id="my123a234_t_1_1">
-                    <option value="A相">A相</option>
-                    <option value="B相">B相</option>
-                    <option value="C相">C相</option>
-                    <option value="I1">I1</option>
+            <select onchange="uonchange(this, 'uonchange2')" class="my-combobox uonchange2" name="my123a2" id="my123a2_t_1_1">
+                <option value="A相">A相</option>
+                <option value="B相">B相</option>
+                <option value="C相">C相</option>
+                <option value="I1">I1</option>
 
-                    <option selected="selected"  value="I2">I2</option>
-                </select>
+                <option selected="selected" value="I2">I2</option>
+            </select>
             }
             else if (ViewBag.canshu == "电流测量")
             {
-                <select onchange="uonchange(this, 'uonchange2')"  class="my-combobox uonchange2"   name="dianymy123a234" id="dianymy123a234_t_1_1">
-                    <option value="I0">I0</option>
+            <select onchange="uonchange(this, 'uonchange2')" class="my-combobox uonchange2" name="dianymy123a2" id="dianymy123a2_t_1_1">
+                <option value="I0">I0</option>
 
-                    <option value="I1">I1</option>
+                <option value="I1">I1</option>
 
-                    <option selected="selected" value="I2">I2</option>
+                <option selected="selected" value="I2">I2</option>
 
-                    <option value="I3">I3</option>
+                <option value="I3">I3</option>
 
-                    <option value="I4">I4</option>
+                <option value="I4">I4</option>
 
-                    <option value="I5">I5</option>
+                <option value="I5">I5</option>
 
-                    <option value="I6">I6</option>
+                <option value="I6">I6</option>
 
-                    <option value="I7">I7</option>
+                <option value="I7">I7</option>
 
-                    <option value="I8">I8</option>
+                <option value="I8">I8</option>
 
-                    <option value="I9">I9</option>
+                <option value="I9">I9</option>
 
-                    <option value="I10">I10</option>
+                <option value="I10">I10</option>
 
-                    <option value="I11">I11</option>
+                <option value="I11">I11</option>
 
-                    <option value="I12">I12</option>
+                <option value="I12">I12</option>
 
-                    <option value="I13">I13</option>
+                <option value="I13">I13</option>
 
-                    <option value="I14">I14</option>
+                <option value="I14">I14</option>
 
-                    <option value="I15">I15</option>
+                <option value="I15">I15</option>
 
-                    <option value="I16">I16</option>
+                <option value="I16">I16</option>
 
-                    <option value="I17">I17</option>
+                <option value="I17">I17</option>
 
-                    <option value="I18">I18</option>
+                <option value="I18">I18</option>
 
-                    <option value="I19">I19</option>
+                <option value="I19">I19</option>
 
-                    <option value="I20">I20</option>
+                <option value="I20">I20</option>
 
 
-                    <option value="CH0">CH0</option>
+                <option value="CH0">CH0</option>
 
-                    <option value="CH1">CH1</option>
+                <option value="CH1">CH1</option>
 
-                    <option value="CH2">CH2</option>
+                <option value="CH2">CH2</option>
 
-                    <option value="CH3">CH3</option>
+                <option value="CH3">CH3</option>
 
-                    <option value="CH4">CH4</option>
+                <option value="CH4">CH4</option>
 
-                    <option value="CH5">CH5</option>
+                <option value="CH5">CH5</option>
 
-                    <option value="CH6">CH6</option>
+                <option value="CH6">CH6</option>
 
-                    <option value="CH7">CH7</option>
+                <option value="CH7">CH7</option>
 
-                    <option value="CH8">CH8</option>
+                <option value="CH8">CH8</option>
 
-                    <option value="CH9">CH9</option>
+                <option value="CH9">CH9</option>
 
-                    <option value="CH10">CH10</option>
+                <option value="CH10">CH10</option>
 
-                    <option value="CH11">CH11</option>
+                <option value="CH11">CH11</option>
 
-                    <option value="CH12">CH12</option>
+                <option value="CH12">CH12</option>
 
-                    <option value="CH13">CH13</option>
+                <option value="CH13">CH13</option>
 
-                    <option value="CH14">CH14</option>
+                <option value="CH14">CH14</option>
 
-                    <option value="CH15">CH15</option>
+                <option value="CH15">CH15</option>
 
-                    <option value="CH16">CH16</option>
+                <option value="CH16">CH16</option>
 
 
-                    <option value="IA1">IA1</option>
+                <option value="IA1">IA1</option>
 
-                    <option value="IA2">IA2</option>
+                <option value="IA2">IA2</option>
 
-                    <option value="IA3">IA3</option>
+                <option value="IA3">IA3</option>
 
-                    <option value="IA4">IA4</option>
+                <option value="IA4">IA4</option>
 
-                    <option value="IA5">IA5</option>
+                <option value="IA5">IA5</option>
 
-                    <option value="IA6">IA6</option>
+                <option value="IA6">IA6</option>
 
 
-                    <option value="IB1">IB1</option>
+                <option value="IB1">IB1</option>
 
-                    <option value="IB2">IB2</option>
+                <option value="IB2">IB2</option>
 
-                    <option value="IB3">IB3</option>
+                <option value="IB3">IB3</option>
 
-                    <option value="IB4">IB4</option>
+                <option value="IB4">IB4</option>
 
-                    <option value="IB5">IB5</option>
+                <option value="IB5">IB5</option>
 
-                    <option value="IB6">IB6</option>
+                <option value="IB6">IB6</option>
 
 
-                    <option value="IC1">IC1</option>
+                <option value="IC1">IC1</option>
 
-                    <option value="IC2">IC2</option>
+                <option value="IC2">IC2</option>
 
-                    <option value="IC3">IB3</option>
+                <option value="IC3">IB3</option>
 
-                    <option value="IC4">IC4</option>
+                <option value="IC4">IC4</option>
 
-                    <option value="IC5">IC5</option>
+                <option value="IC5">IC5</option>
 
-                    <option value="IC6">IC6</option>
+                <option value="IC6">IC6</option>
 
 
-                    <option value="I01">I01</option>
+                <option value="I01">I01</option>
 
-                    <option value="I02">I02</option>
+                <option value="I02">I02</option>
 
-                    <option value="I03">I03</option>
+                <option value="I03">I03</option>
 
-                    <option value="I04">I04</option>
+                <option value="I04">I04</option>
 
-                    <option value="I05">I05</option>
+                <option value="I05">I05</option>
 
-                    <option value="I06">I06</option>
+                <option value="I06">I06</option>
 
-                </select>
+            </select>
             }
         </th>
 
@@ -679,160 +358,161 @@
 
             @if (ViewBag.canshu == "电压输出" || ViewBag.canshu == "电压测量")
             {
-                <select onchange="uonchange(this, 'uonchange1')"  class="my-combobox uonchange1"   name="TMYDIANYA3235" id="TMYDIANYA3235_t_1_1">                    
-                    <option value="U1">U1</option>
-                    <option value="U2">U2</option>
-                    <option value="UA">UA</option>
-                    <option value="UB">UB</option>
-                    <option value="UC">UC</option>   
-                    <option selected="selected" value="UAB">UAB</option>                
-                    <option value="UCB">UCB</option>
-                </select>
+            <select onchange="uonchange(this, 'uonchange1')" class="my-combobox uonchange1" name="TMYDIANYA323" id="TMYDIANYA323_t_1_1">
+
+                <option value="U1">U1</option>
+                <option value="U2">U2</option>
+                <option value="UA">UA</option>
+                <option value="UB">UB</option>
+                <option value="UC">UC</option>
+                <option selected="selected" value="UAB">UAB</option>
+                <option value="UCB">UCB</option>
+            </select>
             }
             else if (ViewBag.canshu == "电流输出")
             {
-                <select onchange="uonchange(this, 'uonchange1')"  class="my-combobox uonchange1"   name="my123a235" id="my123a235_t_1_1">
-                    <option value="A相">A相</option>
-                    <option value="B相">B相</option>
-                    <option value="C相">C相</option>
-                    <option selected="selected" value="I1">I1</option>
+            <select onchange="uonchange(this, 'uonchange1')" class="my-combobox uonchange1" name="my123a23" id="my123a23_t_1_1">
+                <option value="A相">A相</option>
+                <option value="B相">B相</option>
+                <option value="C相">C相</option>
+                <option selected="selected" value="I1">I1</option>
 
-                    <option  value="I2">I2</option>
-                </select>
+                <option value="I2">I2</option>
+            </select>
             }
             else if (ViewBag.canshu == "电流测量")
             {
-                <select onchange="uonchange(this, 'uonchange1')"  class="my-combobox uonchange1"   name="dianymy123a235" id="dianymy123a235_t_1_1">
-                    <option value="I0">I0</option>
+            <select onchange="uonchange(this, 'uonchange1')" class="my-combobox uonchange1" name="dianymy123a23" id="dianymy123a23_t_1_1">
+                <option value="I0">I0</option>
 
-                    <option selected="selected" value="I1">I1</option>
+                <option selected="selected" value="I1">I1</option>
 
-                    <option value="I2">I2</option>
+                <option value="I2">I2</option>
 
-                    <option value="I3">I3</option>
+                <option value="I3">I3</option>
 
-                    <option value="I4">I4</option>
+                <option value="I4">I4</option>
 
-                    <option value="I5">I5</option>
+                <option value="I5">I5</option>
 
-                    <option value="I6">I6</option>
+                <option value="I6">I6</option>
 
-                    <option value="I7">I7</option>
+                <option value="I7">I7</option>
 
-                    <option value="I8">I8</option>
+                <option value="I8">I8</option>
 
-                    <option value="I9">I9</option>
+                <option value="I9">I9</option>
 
-                    <option value="I10">I10</option>
+                <option value="I10">I10</option>
 
-                    <option value="I11">I11</option>
+                <option value="I11">I11</option>
 
-                    <option value="I12">I12</option>
+                <option value="I12">I12</option>
 
-                    <option value="I13">I13</option>
+                <option value="I13">I13</option>
 
-                    <option value="I14">I14</option>
+                <option value="I14">I14</option>
 
-                    <option value="I15">I15</option>
+                <option value="I15">I15</option>
 
-                    <option value="I16">I16</option>
+                <option value="I16">I16</option>
 
-                    <option value="I17">I17</option>
+                <option value="I17">I17</option>
 
-                    <option value="I18">I18</option>
+                <option value="I18">I18</option>
 
-                    <option value="I19">I19</option>
+                <option value="I19">I19</option>
 
-                    <option value="I20">I20</option>
+                <option value="I20">I20</option>
 
 
-                    <option value="CH0">CH0</option>
+                <option value="CH0">CH0</option>
 
-                    <option value="CH1">CH1</option>
+                <option value="CH1">CH1</option>
 
-                    <option value="CH2">CH2</option>
+                <option value="CH2">CH2</option>
 
-                    <option value="CH3">CH3</option>
+                <option value="CH3">CH3</option>
 
-                    <option value="CH4">CH4</option>
+                <option value="CH4">CH4</option>
 
-                    <option value="CH5">CH5</option>
+                <option value="CH5">CH5</option>
 
-                    <option value="CH6">CH6</option>
+                <option value="CH6">CH6</option>
 
-                    <option value="CH7">CH7</option>
+                <option value="CH7">CH7</option>
 
-                    <option value="CH8">CH8</option>
+                <option value="CH8">CH8</option>
 
-                    <option value="CH9">CH9</option>
+                <option value="CH9">CH9</option>
 
-                    <option value="CH10">CH10</option>
+                <option value="CH10">CH10</option>
 
-                    <option value="CH11">CH11</option>
+                <option value="CH11">CH11</option>
 
-                    <option value="CH12">CH12</option>
+                <option value="CH12">CH12</option>
 
-                    <option value="CH13">CH13</option>
+                <option value="CH13">CH13</option>
 
-                    <option value="CH14">CH14</option>
+                <option value="CH14">CH14</option>
 
-                    <option value="CH15">CH15</option>
+                <option value="CH15">CH15</option>
 
-                    <option value="CH16">CH16</option>
+                <option value="CH16">CH16</option>
 
 
-                    <option value="IA1">IA1</option>
+                <option value="IA1">IA1</option>
 
-                    <option value="IA2">IA2</option>
+                <option value="IA2">IA2</option>
 
-                    <option value="IA3">IA3</option>
+                <option value="IA3">IA3</option>
 
-                    <option value="IA4">IA4</option>
+                <option value="IA4">IA4</option>
 
-                    <option value="IA5">IA5</option>
+                <option value="IA5">IA5</option>
 
-                    <option value="IA6">IA6</option>
+                <option value="IA6">IA6</option>
 
 
-                    <option value="IB1">IB1</option>
+                <option value="IB1">IB1</option>
 
-                    <option value="IB2">IB2</option>
+                <option value="IB2">IB2</option>
 
-                    <option value="IB3">IB3</option>
+                <option value="IB3">IB3</option>
 
-                    <option value="IB4">IB4</option>
+                <option value="IB4">IB4</option>
 
-                    <option value="IB5">IB5</option>
+                <option value="IB5">IB5</option>
 
-                    <option value="IB6">IB6</option>
+                <option value="IB6">IB6</option>
 
 
-                    <option value="IC1">IC1</option>
+                <option value="IC1">IC1</option>
 
-                    <option value="IC2">IC2</option>
+                <option value="IC2">IC2</option>
 
-                    <option value="IC3">IB3</option>
+                <option value="IC3">IB3</option>
 
-                    <option value="IC4">IC4</option>
+                <option value="IC4">IC4</option>
 
-                    <option value="IC5">IC5</option>
+                <option value="IC5">IC5</option>
 
-                    <option value="IC6">IC6</option>
+                <option value="IC6">IC6</option>
 
 
-                    <option value="I01">I01</option>
+                <option value="I01">I01</option>
 
-                    <option value="I02">I02</option>
+                <option value="I02">I02</option>
 
-                    <option value="I03">I03</option>
+                <option value="I03">I03</option>
 
-                    <option value="I04">I04</option>
+                <option value="I04">I04</option>
 
-                    <option value="I05">I05</option>
+                <option value="I05">I05</option>
 
-                    <option value="I06">I06</option>
+                <option value="I06">I06</option>
 
-                </select>
+            </select>
             }
         </th>
 
@@ -840,160 +520,482 @@
 
             @if (ViewBag.canshu == "电压输出" || ViewBag.canshu == "电压测量")
             {
-                <select onchange="uonchange(this, 'uonchange2')"  class="my-combobox uonchange2"   name="TMYDIANYA3236" id="TMYDIANYA3236_t_1_1">                 
-                    <option value="U1">U1</option>
-                    <option value="U2">U2</option>
-                    <option value="UA">UA</option>
-                    <option value="UB">UB</option>
-                    <option value="UC">UC</option>
-                    <option value="UAB">UAB</option>  
-                    <option selected="selected" value="UCB">UCB</option>
-                </select>
+            <select onchange="uonchange(this, 'uonchange2')" class="my-combobox uonchange2" name="TMYDIANYA3234" id="TMYDIANYA3234_t_1_1">
+                <option value="U1">U1</option>
+                <option value="U2">U2</option>
+                <option value="UA">UA</option>
+                <option value="UB">UB</option>
+                <option value="UC">UC</option>
+                <option value="UAB">UAB</option>
+                <option selected="selected" value="UCB">UCB</option>
+            </select>
             }
             else if (ViewBag.canshu == "电流输出")
             {
-                <select onchange="uonchange(this, 'uonchange2')"  class="my-combobox uonchange2"   name="my123a236" id="my123a236_t_1_1">
-                    <option value="A相">A相</option>
-                    <option value="B相">B相</option>
-                    <option value="C相">C相</option>
-                    <option  value="I1">I1</option>
+            <select onchange="uonchange(this, 'uonchange2')" class="my-combobox uonchange2" name="my123a234" id="my123a234_t_1_1">
+                <option value="A相">A相</option>
+                <option value="B相">B相</option>
+                <option value="C相">C相</option>
+                <option value="I1">I1</option>
 
-                    <option selected="selected" value="I2">I2</option>
-                </select>
+                <option selected="selected" value="I2">I2</option>
+            </select>
             }
             else if (ViewBag.canshu == "电流测量")
             {
-                <select onchange="uonchange(this, 'uonchange2')"  class="my-combobox uonchange2"   name="dianymy123a236" id="dianymy123a236_t_1_1">
-                    <option value="I0">I0</option>
+            <select onchange="uonchange(this, 'uonchange2')" class="my-combobox uonchange2" name="dianymy123a234" id="dianymy123a234_t_1_1">
+                <option value="I0">I0</option>
 
-                    <option value="I1">I1</option>
+                <option value="I1">I1</option>
 
-                    <option selected="selected" value="I2">I2</option>
+                <option selected="selected" value="I2">I2</option>
 
-                    <option value="I3">I3</option>
+                <option value="I3">I3</option>
 
-                    <option value="I4">I4</option>
+                <option value="I4">I4</option>
 
-                    <option value="I5">I5</option>
+                <option value="I5">I5</option>
 
-                    <option value="I6">I6</option>
+                <option value="I6">I6</option>
 
-                    <option value="I7">I7</option>
+                <option value="I7">I7</option>
 
-                    <option value="I8">I8</option>
+                <option value="I8">I8</option>
 
-                    <option value="I9">I9</option>
+                <option value="I9">I9</option>
 
-                    <option value="I10">I10</option>
+                <option value="I10">I10</option>
 
-                    <option value="I11">I11</option>
+                <option value="I11">I11</option>
 
-                    <option value="I12">I12</option>
+                <option value="I12">I12</option>
 
-                    <option value="I13">I13</option>
+                <option value="I13">I13</option>
 
-                    <option value="I14">I14</option>
+                <option value="I14">I14</option>
 
-                    <option value="I15">I15</option>
+                <option value="I15">I15</option>
 
-                    <option value="I16">I16</option>
+                <option value="I16">I16</option>
 
-                    <option value="I17">I17</option>
+                <option value="I17">I17</option>
 
-                    <option value="I18">I18</option>
+                <option value="I18">I18</option>
 
-                    <option value="I19">I19</option>
+                <option value="I19">I19</option>
 
-                    <option value="I20">I20</option>
+                <option value="I20">I20</option>
 
 
-                    <option value="CH0">CH0</option>
+                <option value="CH0">CH0</option>
 
-                    <option value="CH1">CH1</option>
+                <option value="CH1">CH1</option>
 
-                    <option value="CH2">CH2</option>
+                <option value="CH2">CH2</option>
 
-                    <option value="CH3">CH3</option>
+                <option value="CH3">CH3</option>
 
-                    <option value="CH4">CH4</option>
+                <option value="CH4">CH4</option>
 
-                    <option value="CH5">CH5</option>
+                <option value="CH5">CH5</option>
 
-                    <option value="CH6">CH6</option>
+                <option value="CH6">CH6</option>
 
-                    <option value="CH7">CH7</option>
+                <option value="CH7">CH7</option>
 
-                    <option value="CH8">CH8</option>
+                <option value="CH8">CH8</option>
 
-                    <option value="CH9">CH9</option>
+                <option value="CH9">CH9</option>
 
-                    <option value="CH10">CH10</option>
+                <option value="CH10">CH10</option>
 
-                    <option value="CH11">CH11</option>
+                <option value="CH11">CH11</option>
 
-                    <option value="CH12">CH12</option>
+                <option value="CH12">CH12</option>
 
-                    <option value="CH13">CH13</option>
+                <option value="CH13">CH13</option>
 
-                    <option value="CH14">CH14</option>
+                <option value="CH14">CH14</option>
 
-                    <option value="CH15">CH15</option>
+                <option value="CH15">CH15</option>
 
-                    <option value="CH16">CH16</option>
+                <option value="CH16">CH16</option>
 
 
-                    <option value="IA1">IA1</option>
+                <option value="IA1">IA1</option>
 
-                    <option value="IA2">IA2</option>
+                <option value="IA2">IA2</option>
 
-                    <option value="IA3">IA3</option>
+                <option value="IA3">IA3</option>
 
-                    <option value="IA4">IA4</option>
+                <option value="IA4">IA4</option>
 
-                    <option value="IA5">IA5</option>
+                <option value="IA5">IA5</option>
 
-                    <option value="IA6">IA6</option>
+                <option value="IA6">IA6</option>
 
 
-                    <option value="IB1">IB1</option>
+                <option value="IB1">IB1</option>
 
-                    <option value="IB2">IB2</option>
+                <option value="IB2">IB2</option>
 
-                    <option value="IB3">IB3</option>
+                <option value="IB3">IB3</option>
 
-                    <option value="IB4">IB4</option>
+                <option value="IB4">IB4</option>
 
-                    <option value="IB5">IB5</option>
+                <option value="IB5">IB5</option>
 
-                    <option value="IB6">IB6</option>
+                <option value="IB6">IB6</option>
 
 
-                    <option value="IC1">IC1</option>
+                <option value="IC1">IC1</option>
 
-                    <option value="IC2">IC2</option>
+                <option value="IC2">IC2</option>
 
-                    <option value="IC3">IB3</option>
+                <option value="IC3">IB3</option>
 
-                    <option value="IC4">IC4</option>
+                <option value="IC4">IC4</option>
 
-                    <option value="IC5">IC5</option>
+                <option value="IC5">IC5</option>
 
-                    <option value="IC6">IC6</option>
+                <option value="IC6">IC6</option>
 
 
-                    <option value="I01">I01</option>
+                <option value="I01">I01</option>
 
-                    <option value="I02">I02</option>
+                <option value="I02">I02</option>
 
-                    <option value="I03">I03</option>
+                <option value="I03">I03</option>
 
-                    <option value="I04">I04</option>
+                <option value="I04">I04</option>
 
-                    <option value="I05">I05</option>
+                <option value="I05">I05</option>
 
-                    <option value="I06">I06</option>
+                <option value="I06">I06</option>
 
-                </select>
+            </select>
+            }
+        </th>
+
+        <th align="center" class="f14">
+
+            @if (ViewBag.canshu == "电压输出" || ViewBag.canshu == "电压测量")
+            {
+            <select onchange="uonchange(this, 'uonchange1')" class="my-combobox uonchange1" name="TMYDIANYA3235" id="TMYDIANYA3235_t_1_1">
+                <option value="U1">U1</option>
+                <option value="U2">U2</option>
+                <option value="UA">UA</option>
+                <option value="UB">UB</option>
+                <option value="UC">UC</option>
+                <option selected="selected" value="UAB">UAB</option>
+                <option value="UCB">UCB</option>
+            </select>
+            }
+            else if (ViewBag.canshu == "电流输出")
+            {
+            <select onchange="uonchange(this, 'uonchange1')" class="my-combobox uonchange1" name="my123a235" id="my123a235_t_1_1">
+                <option value="A相">A相</option>
+                <option value="B相">B相</option>
+                <option value="C相">C相</option>
+                <option selected="selected" value="I1">I1</option>
+
+                <option value="I2">I2</option>
+            </select>
+            }
+            else if (ViewBag.canshu == "电流测量")
+            {
+            <select onchange="uonchange(this, 'uonchange1')" class="my-combobox uonchange1" name="dianymy123a235" id="dianymy123a235_t_1_1">
+                <option value="I0">I0</option>
+
+                <option selected="selected" value="I1">I1</option>
+
+                <option value="I2">I2</option>
+
+                <option value="I3">I3</option>
+
+                <option value="I4">I4</option>
+
+                <option value="I5">I5</option>
+
+                <option value="I6">I6</option>
+
+                <option value="I7">I7</option>
+
+                <option value="I8">I8</option>
+
+                <option value="I9">I9</option>
+
+                <option value="I10">I10</option>
+
+                <option value="I11">I11</option>
+
+                <option value="I12">I12</option>
+
+                <option value="I13">I13</option>
+
+                <option value="I14">I14</option>
+
+                <option value="I15">I15</option>
+
+                <option value="I16">I16</option>
+
+                <option value="I17">I17</option>
+
+                <option value="I18">I18</option>
+
+                <option value="I19">I19</option>
+
+                <option value="I20">I20</option>
+
+
+                <option value="CH0">CH0</option>
+
+                <option value="CH1">CH1</option>
+
+                <option value="CH2">CH2</option>
+
+                <option value="CH3">CH3</option>
+
+                <option value="CH4">CH4</option>
+
+                <option value="CH5">CH5</option>
+
+                <option value="CH6">CH6</option>
+
+                <option value="CH7">CH7</option>
+
+                <option value="CH8">CH8</option>
+
+                <option value="CH9">CH9</option>
+
+                <option value="CH10">CH10</option>
+
+                <option value="CH11">CH11</option>
+
+                <option value="CH12">CH12</option>
+
+                <option value="CH13">CH13</option>
+
+                <option value="CH14">CH14</option>
+
+                <option value="CH15">CH15</option>
+
+                <option value="CH16">CH16</option>
+
+
+                <option value="IA1">IA1</option>
+
+                <option value="IA2">IA2</option>
+
+                <option value="IA3">IA3</option>
+
+                <option value="IA4">IA4</option>
+
+                <option value="IA5">IA5</option>
+
+                <option value="IA6">IA6</option>
+
+
+                <option value="IB1">IB1</option>
+
+                <option value="IB2">IB2</option>
+
+                <option value="IB3">IB3</option>
+
+                <option value="IB4">IB4</option>
+
+                <option value="IB5">IB5</option>
+
+                <option value="IB6">IB6</option>
+
+
+                <option value="IC1">IC1</option>
+
+                <option value="IC2">IC2</option>
+
+                <option value="IC3">IB3</option>
+
+                <option value="IC4">IC4</option>
+
+                <option value="IC5">IC5</option>
+
+                <option value="IC6">IC6</option>
+
+
+                <option value="I01">I01</option>
+
+                <option value="I02">I02</option>
+
+                <option value="I03">I03</option>
+
+                <option value="I04">I04</option>
+
+                <option value="I05">I05</option>
+
+                <option value="I06">I06</option>
+
+            </select>
+            }
+        </th>
+
+        <th align="center" class="f14">
+
+            @if (ViewBag.canshu == "电压输出" || ViewBag.canshu == "电压测量")
+            {
+            <select onchange="uonchange(this, 'uonchange2')" class="my-combobox uonchange2" name="TMYDIANYA3236" id="TMYDIANYA3236_t_1_1">
+                <option value="U1">U1</option>
+                <option value="U2">U2</option>
+                <option value="UA">UA</option>
+                <option value="UB">UB</option>
+                <option value="UC">UC</option>
+                <option value="UAB">UAB</option>
+                <option selected="selected" value="UCB">UCB</option>
+            </select>
+            }
+            else if (ViewBag.canshu == "电流输出")
+            {
+            <select onchange="uonchange(this, 'uonchange2')" class="my-combobox uonchange2" name="my123a236" id="my123a236_t_1_1">
+                <option value="A相">A相</option>
+                <option value="B相">B相</option>
+                <option value="C相">C相</option>
+                <option value="I1">I1</option>
+
+                <option selected="selected" value="I2">I2</option>
+            </select>
+            }
+            else if (ViewBag.canshu == "电流测量")
+            {
+            <select onchange="uonchange(this, 'uonchange2')" class="my-combobox uonchange2" name="dianymy123a236" id="dianymy123a236_t_1_1">
+                <option value="I0">I0</option>
+
+                <option value="I1">I1</option>
+
+                <option selected="selected" value="I2">I2</option>
+
+                <option value="I3">I3</option>
+
+                <option value="I4">I4</option>
+
+                <option value="I5">I5</option>
+
+                <option value="I6">I6</option>
+
+                <option value="I7">I7</option>
+
+                <option value="I8">I8</option>
+
+                <option value="I9">I9</option>
+
+                <option value="I10">I10</option>
+
+                <option value="I11">I11</option>
+
+                <option value="I12">I12</option>
+
+                <option value="I13">I13</option>
+
+                <option value="I14">I14</option>
+
+                <option value="I15">I15</option>
+
+                <option value="I16">I16</option>
+
+                <option value="I17">I17</option>
+
+                <option value="I18">I18</option>
+
+                <option value="I19">I19</option>
+
+                <option value="I20">I20</option>
+
+
+                <option value="CH0">CH0</option>
+
+                <option value="CH1">CH1</option>
+
+                <option value="CH2">CH2</option>
+
+                <option value="CH3">CH3</option>
+
+                <option value="CH4">CH4</option>
+
+                <option value="CH5">CH5</option>
+
+                <option value="CH6">CH6</option>
+
+                <option value="CH7">CH7</option>
+
+                <option value="CH8">CH8</option>
+
+                <option value="CH9">CH9</option>
+
+                <option value="CH10">CH10</option>
+
+                <option value="CH11">CH11</option>
+
+                <option value="CH12">CH12</option>
+
+                <option value="CH13">CH13</option>
+
+                <option value="CH14">CH14</option>
+
+                <option value="CH15">CH15</option>
+
+                <option value="CH16">CH16</option>
+
+
+                <option value="IA1">IA1</option>
+
+                <option value="IA2">IA2</option>
+
+                <option value="IA3">IA3</option>
+
+                <option value="IA4">IA4</option>
+
+                <option value="IA5">IA5</option>
+
+                <option value="IA6">IA6</option>
+
+
+                <option value="IB1">IB1</option>
+
+                <option value="IB2">IB2</option>
+
+                <option value="IB3">IB3</option>
+
+                <option value="IB4">IB4</option>
+
+                <option value="IB5">IB5</option>
+
+                <option value="IB6">IB6</option>
+
+
+                <option value="IC1">IC1</option>
+
+                <option value="IC2">IC2</option>
+
+                <option value="IC3">IB3</option>
+
+                <option value="IC4">IC4</option>
+
+                <option value="IC5">IC5</option>
+
+                <option value="IC6">IC6</option>
+
+
+                <option value="I01">I01</option>
+
+                <option value="I02">I02</option>
+
+                <option value="I03">I03</option>
+
+                <option value="I04">I04</option>
+
+                <option value="I05">I05</option>
+
+                <option value="I06">I06</option>
+
+            </select>
             }
         </th>
 
@@ -1069,7 +1071,7 @@
                     htmlString.push(SetTDHtml(txtPoint, "READVALUE", HangHaoID, rowidx, txtNumber, ""));
 
                 }
-                
+
 
                 //电压输出 电压测量  电流输出 电流测量
                 htmlString.push(SetTDHtml(rowspan, 'DIANYASHUCHU1', HangHaoID, rowidx, '', 'classstyle100', '', 'resetXianShiZhi'));
@@ -1092,13 +1094,13 @@
             $.parser.parse(tagRow);//渲染easyui组建
             $('#dlg').window('close');//关闭弹出框
             $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
-        }     
+        }
         //计算显示值
         function resetXianShiZhi(obj) {
             //重新计算当前行
             xiangDuiWuCha(obj, "DIANYASHUCHU1", "DIANYACELIANG1", "RELATIVEERROR1");
         }
-       
+
         //计算标准值
         function resetBiaoZhunZhi(obj, source, gold) {
             //重新计算当前行
@@ -1110,7 +1112,7 @@
 
             //   LianDongShiJiZhi(obj);
         }
-       
+
     </script>
 
 
