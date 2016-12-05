@@ -1629,7 +1629,8 @@ namespace Langben.Report
                              );
 
             int startMergeCell = -1; //记录每行的合并单元格起始位置
-            int endMergeCell = -1;//记录每行的合并单元结束位置            
+            int endMergeCell = -1;//记录每行的合并单元结束位置     
+            //给目标行正式处理格式及插入多少行数据       
             for (int i = rowIndex_Destination; i < rowIndex_Destination + insertCount; i++)
             {
                 IRow targetRow = null;
@@ -1637,7 +1638,8 @@ namespace Langben.Report
                 ICell targetCell = null;
 
                 targetRow = sheet_Destination.CreateRow(i);
-                targetRow.Height = row_Source.Height;//复制行高                
+                targetRow.Height = row_Source.Height;//复制行高 
+                //每行单元格处理               
                 for (int m = row_Source.FirstCellNum; m < row_Source.LastCellNum; m++)
                 {
                     sourceCell = row_Source.GetCell(m);
@@ -1652,14 +1654,15 @@ namespace Langben.Report
                     targetCell.CellStyle = sourceCell.CellStyle;//赋值单元格格式
                     targetCell.SetCellType(sourceCell.CellType);
 
-                    //以下为复制模板行的单元格合并格式
+                    //列合并，以下为复制模板行的单元格合并格式
                     if (sourceCell.IsMergedCell)
                     {
+                        //起始位置
                         if (startMergeCell < 0 || sourceCell.CellStyle.BorderLeft != BorderStyle.None || sourceCell.StringCellValue != "")
                         {
                             startMergeCell = m;
                         }
-
+                        //结束位置
                         if (m + 1 == sourceCellCount || sourceCell.CellStyle.BorderRight != BorderStyle.None
                             || row_Source.Cells[m + 1].StringCellValue != "" || row_Source.Cells[m + 1].IsMergedCell == false
                             || (CellsTemplate != null && CellsTemplate.Count > 0 && CellsTemplate.FirstOrDefault(p => p.ColIndex == startMergeCell && p.ColCount == (m - startMergeCell)) != null))
