@@ -57,13 +57,27 @@
     </div>
     <div class="input_search">
         <div class="input_search-label">
-            @Html.LabelFor(model => model.JIANDINGXIAOZHUNYUAN):
+            @Html.LabelFor(model => model.ZHENGSHULEIBIE):
         </div>
         <div class="input_search-field">
-            <input type='text' id='JIANDINGXIAOZHUNYUAN' />
+            <select>
+                <option value="">请选择</option>
+                <option value="检定">检定</option>
+                <option value="校准">校准</option>
+            </select>
         </div>
     </div>
-
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.SHOUQUANZIZHI):
+        </div>
+        <div class="input_search-field">
+            <select>
+                <option value="检定">检定</option>
+                <option value="校准">校准</option>
+            </select>
+        </div>
+    </div>
     <div class='input_search' style="padding-top:10px;">
         <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
             查 询
