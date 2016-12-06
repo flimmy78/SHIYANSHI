@@ -113,6 +113,13 @@
     function CheckData() {
         return true;
     }
+    //非空判断
+    function isNull(str) {
+        if (str == "") return true;
+        var regu = "^[ ]+$";
+        var re = new RegExp(regu);
+        return re.test(str);
+    }
     //保存
     function Save() {
         if (!CheckData()) {
@@ -124,12 +131,15 @@
         var VALIDITY_PERIOD = $("#VALIDITY_PERIOD").val();//有效期
         var UNQUALIFIEDTYPE = $("#UNQUALIFIEDTYPE option:selected").val()//不合格类型
         if (CONCLUSION == "不合格") {
-            if (UNQUALIFIEDTYPE == null || UNQUALIFIEDTYPE == "") {
+            if (isNull(UNQUALIFIEDTYPE)) {
                 $.messager.alert('操作提示', "请选择不合格类型！", 'info');
                 return false;
             }
         }
-
+        if (isNull(VALIDITY_PERIOD)) {         
+            $.messager.alert('操作提示', "请输入有效期！", 'info');
+                return false;           
+        }
         //获取空对象用于保存添加的信息
         $.ajax({
             type: 'post', //使用post方法访问后台
