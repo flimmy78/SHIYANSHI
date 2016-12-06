@@ -1031,6 +1031,15 @@
 @section JS {
     <input type="hidden" id="hidecanshu" value="@ViewBag.canshu" /><!--预备方案检测项ID-->
     <script type="text/javascript" language="javascript">
+        $(function () {
+            //注
+            if ($('#REMARK').textbox('getValue') == "") {
+                $('#REMARK').textbox('setValue', "显示值、标准值的单位与量程单位一致。");
+            }
+
+
+
+        });
         //一个量程的需要这个方法
         //重写set方法，只准对增加空白行
         function set(tbodyIndex) {
