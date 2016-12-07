@@ -137,7 +137,10 @@ namespace Langben.DAL
         [Display(Name = "ID", Order = 28)]
         public object ID { get; set; }
 
-
+        [ScaffoldColumn(true)]
+        [Display(Name = "组别", Order =29)]
+        [Range(0, 2147483646, ErrorMessage = "数值超出范围")]
+        public int? GROUPS { get; set; }
     }
 }
 

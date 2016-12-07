@@ -56,8 +56,11 @@
                             <option value="互感器">互感器</option>
                         </select>
                     </li>
-                    <li class="fl mr10" @*style="display:none"*@ id="choicePre"> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="showModalOnly('THESUPERIOR', '../../METERING_STANDARD_DEVICE');">选择上一级</a></li>
+                    <li class="fl mr10" @*style="display:none"*@ id="choicePre"> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="showModalOnly('THESUPERIOR', '../../METERING_STANDARD_DEVICE');">选择上一级</a><span id="checkTHESUPERIOR">
+</span>@Html.HiddenFor(model => model.THESUPERIOR)</li>
                 </ul>
+              
+              
             </div>
             <hr>
             <div class="clearfix"></div>
@@ -147,7 +150,7 @@
             <br>
             <h2 class="f14 mt10"> 证书信息 </h2>
             <div class="mt10" id="div4">
-      
+
                 <ul class="clear mt10">
                     <li class="fl mr10">
                         证书发放单位：
@@ -519,7 +522,7 @@
                     myArray.push({ THEACCURACYLEVEL: THEACCURACYLEVEL });
                 })
                 break
-            case ("three_2"):               
+            case ("three_2"):
                 $("#div2").find("ul").each(function () {
                     var MAXCATEGORIES = $(this).find("li :selected").eq(0).val();
                     var MAXVALUE = $(this).find("li :input").eq(1).val();
@@ -528,7 +531,7 @@
                     myArray2.push({ MAXCATEGORIES: MAXCATEGORIES, MAXVALUE: MAXVALUE });
                 })
                 break
-            case ("three_3"):                
+            case ("three_3"):
                 $("#div3").find("ul").each(function () {
                     var THEUNCERTAINTY = $(this).find("li :selected").eq(0).val();
                     var THEUNCERTAINTYVALUE = $(this).find("li :input").eq(1).val();
@@ -545,7 +548,7 @@
         var obj2 = $("input[name='wucha']:checked");
         var id2 = obj2.attr("id");
         switch (id2) {
-            case ("wucha_1"):              
+            case ("wucha_1"):
                 $("#div5").find("ul").each(function () {
                     var ASSESSMENTITEM = $(this).find("li :selected").eq(0).val();//评定项
                     var ERRORSOURCES = $(this).find("li :input").eq(1).val();//误差来源
@@ -559,7 +562,7 @@
                     myArray5.push({ ASSESSMENTITEM: ASSESSMENTITEM, ERRORSOURCES: ERRORSOURCES, THEUNIT: THEUNIT, ERRORLIMITUNIT: ERRORLIMITUNIT, THEERRODISTRIBUTION: THEERRODISTRIBUTION, KVALE: KVALE, NOTE: NOTE });
                 })
                 break
-            case ("wucha_2"):              
+            case ("wucha_2"):
                 $("#div6").find("ul").each(function () {
                     var ASSESSMENTITEM = $(this).find("li :selected").eq(0).val();//评定项
                     var THERANGESCOPE = $(this).find("li :input").eq(1).val();//量程范围起
