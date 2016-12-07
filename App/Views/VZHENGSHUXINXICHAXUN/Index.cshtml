@@ -168,6 +168,13 @@
                .text("校准")
                .appendTo($("#SHOUQUANZIZHI"));
                 break;
+            case "":
+                $("#SHOUQUANZIZHI").empty();
+                $("<option></option>")
+                        .val("")
+                        .text("请选择")
+                        .appendTo("#SHOUQUANZIZHI");             
+                break;
             default:
 
         }

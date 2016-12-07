@@ -124,6 +124,7 @@ namespace Langben.DAL
             {
                 data = data.Where(m => endTime3 <= m.BAOGAOSHENPITONGGUORIQI);
             }
+            return data;
         }
         /// <summary>
         /// 通过主键id，获取标准量传部工作信息查询---查看详细，首次编辑
