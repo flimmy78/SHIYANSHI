@@ -958,6 +958,7 @@
     <Content Include="Views\THEREVIEWPROCESS\Details.cshtml" />
     <Content Include="Views\THEREVIEWPROCESS\Edit.cshtml" />
     <Content Include="Views\THEREVIEWPROCESS\Index.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\JiBenWuChaDianZuShiZhi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
