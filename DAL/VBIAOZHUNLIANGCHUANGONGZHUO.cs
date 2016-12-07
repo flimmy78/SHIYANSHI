@@ -52,5 +52,6 @@ namespace Langben.DAL
         public string GONHZUOSHIJIAN { get; set; }
         public string ZONGSHIJIAN { get; set; }
         public string BEIZHU { get; set; }
+        public string TIAOXINGMA { get; set; }
     }
 }
