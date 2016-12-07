@@ -958,6 +958,7 @@
     <Content Include="Views\THEREVIEWPROCESS\Details.cshtml" />
     <Content Include="Views\THEREVIEWPROCESS\Edit.cshtml" />
     <Content Include="Views\THEREVIEWPROCESS\Index.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\JiBenWuChaDianZuShiZhi.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\ALLOWABLE_ERROR.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\UNCERTAINTYTABLE.cshtml" />
   </ItemGroup>
