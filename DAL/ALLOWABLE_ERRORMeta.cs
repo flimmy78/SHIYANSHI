@@ -72,7 +72,11 @@ namespace Langben.DAL
         [ScaffoldColumn(true)]
         [Display(Name = "计量标准器id", Order = 13)]
         public object METERING_STANDARD_DEVICEID { get; set; }
-
+        
+        [ScaffoldColumn(true)]
+        [Display(Name = "组别", Order = 14)]
+        [Range(0, 2147483646, ErrorMessage = "数值超出范围")]
+        public int? GROUPS { get; set; }
     }
 }
  

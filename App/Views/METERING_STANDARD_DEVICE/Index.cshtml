@@ -6,17 +6,71 @@
 <script src="~/Scripts/JScriptIndex.js"></script>
 @*<div id="divQuery">
 
-    <div class='input_search' style="padding-top:10px;">
-        <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
-            查 询
-        </a>
-    </div>
-</div>*@
+        <div class='input_search' style="padding-top:10px;">
+            <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
+                查 询
+            </a>
+        </div>
+    </div>*@
 <br style="clear: both;" />
+@*新增*@
+<div id="w" class="easyui-dialog" title="新增" data-options="iconCls:''" style="width:600px;height:400px;padding:5px;">
+    <div class="easyui-layout" data-options="fit:true">
+        <div class="clear mt10">
+            <ul>
+                <li class="fl mr10">
+                    名称：
+                    <input class="my-textbox " value="" name="NAME" id="NAME">
+                </li>
+                <li class="fl mr10">
+                    测量范围：
+                    <input class="my-textbox " value="" name="TEST_RANGE" id="TEST_RANGE">
+                </li>
+                <li class="fl mr10">
+                    型号：
+                    <input class="my-textbox " value="" name="XINGHAO" id="XINGHAO">
+                </li>
+                <li class="fl mr10">
+                    编号：
+                    <input class="my-textbox " value="" name="FACTORY_NUM" id="FACTORY_NUM">
+                </li>
+                <li class="fl mr10">
+                    类别：
+                    <select class="my-combobox" name="CATEGORY" id="CATEGORY">
+                        <option value="">请选择 </option>
+                        <option value="标准装置">标准装置 </option>
+                        <option value="标准器">标准器</option>
+                        <option value="中间试品">中间试品</option>
+                    </select>
+                </li>
+                <li class="fl mr10">
+                    实验室：
+                    <select class="my-combobox" name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID">
+                        <option value="">请选择 </option>
+                        <option value="数表三相">数表三相 </option>
+                        <option value="数表单相">数表单相</option>
+                        <option value="电能">电能</option>
+                        <option value="指示仪表">指示仪表</option>
+                        <option value="直流仪器">直流仪器</option>
+                        <option value="互感器">互感器</option>
+                    </select>
+                </li>
+                <li class="fl mr10" id="choicePre">
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="showModalOnly('THESUPERIOR', '../../METERING_STANDARD_DEVICE');">选择上一级</a><span id="checkTHESUPERIOR">
+                    </span>@Html.HiddenFor(model => model.THESUPERIOR)
+                </li>
+            </ul>
+        </div>
 
+        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="baocun()" style="width:80px">确定</a>
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="javascript:$('#w').dialog('close')" style="width:80px">取消</a>
+        </div>
+    </div>
+</div>
 <script type="text/javascript" language="javascript">
     $(function () {
-
+        $("#w").dialog('close');
         $('#flexigridData').datagrid({
             title: '标准装置/计量标准器信息', //列表的标题
             iconCls: 'icon-site',
@@ -31,27 +85,14 @@
             idField: 'ID',
 
             toolbar: [
-
-                 //{
-                 //    text: '详细',
-                 //    iconCls: 'icon-search',
-                 //    handler: function () {
-                 //        return getView();
-                 //    }
-                 //},
                  {
                      text: '创建',
                      iconCls: 'icon-add',
                      handler: function () {
                          return flexiCreate();
                      }
-                 }, {
-                     text: '删除',
-                     iconCls: 'icon-remove',
-                     handler: function () {
-                         return flexiDelete();
-                     }
-                 }, {
+                 }
+                 , {
                      text: '修改',
                      iconCls: 'icon-edit',
                      handler: function () {
@@ -69,7 +110,14 @@
                 , { field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width: 86, align: 'center' }
                 , { field: 'CREATETIME', title: '@Html.DisplayNameFor(model => model.CREATETIME)', width: 86, formatter: formatDatebox, align: 'center' }
                 , { field: 'CREATEPERSON', title: '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 86, align: 'center' }
-                @*//, { display: '@Html.DisplayNameFor(model => model.PREPARE_SCHEMEID)', name: 'PREPARE_SCHEMEID', width: 86, sortable: false, align: 'left' }*@
+                 , {
+                     field: 'aa', title: '操作', width: 86, formatter: function (value, row, index) {
+                         var html = "<a href='/METERING_STANDARD_DEVICE/ALLOWABLE_ERROR/" + row.ID + "'>准确度等级</a><br/>";
+                         //html += "<a href='/VSHENHE/XiaZaiShenHe/" + row.ID + "^P'>证书信息</a><br/>";
+                         html += "<a href='/METERING_STANDARD_DEVICE/UNCERTAINTYTABLE/" + row.ID+"'>不确定参数信息</a>";
+                         return html;
+                     }
+                 }
             ]],
             pagination: true,
             rownumbers: true
@@ -102,41 +150,9 @@
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
-    //“导出”按钮     在6.0版本中修改
-    function flexiExport() {
 
-        //将查询条件按照分隔符拼接成字符串
-        var search = "";
-        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
-            search = search + this.id + "&" + this.value + "^";
-        });
-
-        var p = $('#flexigridData').datagrid('options').columns[0];
-        var field = [];//所有的列名
-        var title = [];//所有的标题名称
-        $(p).each(function () {
-            field.push(this.field);
-            title.push(this.title);
-        });
-
-        $.post("api/METERING_STANDARD_DEVICEApi/PostExport",
-            {
-                title: title.join(","),
-                field: field.join(","),
-                sortName: $('#flexigridData').datagrid('options').sortName,
-                sortOrder: $('#flexigridData').datagrid('options').sortOrder,
-                search: search
-            }, function (res) {
-                if (res.Code == 1) {
-                    window.location.href = res.Message;
-                }
-                else $.messager.alert('操作提示', res.Message, 'info');
-
-            });
-    };
     //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
     function flexiSelect() {
-
         var rows = $('#flexigridData').datagrid('getSelections');
         if (rows.length == 0) {
             $.messager.alert('操作提示', '请选择数据!', 'warning');
@@ -156,25 +172,14 @@
             returnParent(arr.join("&")); //每一项用 & 分割
         }
     }
-    //导航到查看详细的按钮
-    function getView() {
 
-        var arr = $('#flexigridData').datagrid('getSelections');
-
-        if (arr.length == 1) {
-            window.location.href = "../METERING_STANDARD_DEVICE/Details/" + arr[0].ID;
-
-        } else {
-            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
-        }
-        return false;
-    }
     //导航到创建的按钮
     function flexiCreate() {
-
-        window.location.href = "../METERING_STANDARD_DEVICE/Create";
-        return false;
+        $("#w").dialog('open');
+        //window.location.href = "../METERING_STANDARD_DEVICE/Create";
+        //return false;
     }
+
     //导航到修改的按钮
     function flexiModify() {
 
@@ -189,43 +194,90 @@
         return false;
 
     };
-    //删除的按钮
-    function flexiDelete() {
 
-        var rows = $('#flexigridData').datagrid('getSelections');
-        if (rows.length == 0) {
-            $.messager.alert('操作提示', '请选择数据!', 'warning');
+    //新增保存
+    function baocun() {
+        debugger
+        var METERING_STANDARD_DEVICE = new Object();
+        METERING_STANDARD_DEVICE.NAME = $("#NAME").val();//名称
+        METERING_STANDARD_DEVICE.TEST_RANGE = $("#TEST_RANGE").val();//测量范围
+        METERING_STANDARD_DEVICE.XINGHAO = $("#XINGHAO").val();//型号
+        METERING_STANDARD_DEVICE.FACTORY_NUM = $("#FACTORY_NUM").val();//编号
+        METERING_STANDARD_DEVICE.CATEGORY = $("#CATEGORY option:selected").val();//类别
+        METERING_STANDARD_DEVICE.UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID option:selected").val();//实验室
+        METERING_STANDARD_DEVICE.THESUPERIOR = $("#THESUPERIOR").val();//上级
+
+        //if (ifshuju(METERING_STANDARD_DEVICE)) {
+        if (false) {
+            $.ajax({
+                url: "/api/METERING_STANDARD_DEVICEApi/Post",
+                type: "Post",
+                data: METERING_STANDARD_DEVICE,
+                dataType: "json",
+
+                success: function (data) {
+                    if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                    else if (data.Code == 1) {
+                        $.messager.alert('操作提示', "新增成功！", 'info');
+                        $("#flexigridData").datagrid("reload");
+                        $("#flexigridData").datagrid("clearSelections");
+                        $('#w').dialog('close');
+                        return false;
+                    }
+                    else {
+                        if ($.messager) {
+                            $.messager.defaults.ok = '继续';
+                            $.messager.defaults.cancel = '返回';
+
+                            $.messager.confirm('操作提示', "新增失败！", function (r) {
+                                if (!r) {
+                                    window.location.href = 'javascript:history.go(-1)';
+                                }
+                            });
+                        }
+                    }
+                }
+            })
+        }
+    }
+    //数据校验
+    function ifshuju(m) {
+        var zhi = "";
+        if (isNull(m.NAME)) {
+            zhi += "名称不能为空！<br>";
+        }
+        if (isNull(m.TEST_RANGE)) {
+            zhi += "测量范围不能为空！<br>";
+        }
+        if (isNull(m.XINGHAO)) {
+            zhi += "型号不能为空！<br>";
+        }
+        if (isNull(m.FACTORY_NUM)) {
+            zhi += "类别不能为空！<br>";
+        }
+        if (isNull(m.UNDERTAKE_LABORATORYID)) {
+            zhi += "实验室不能为空！<br>";
+        }
+        if (zhi != "") {
+            $.messager.alert('操作提示', "" + zhi + "", 'info');
             return false;
         }
-
-        var arr = [];
-        for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].ID);
+        else {
+            //return false;
+            return true;
         }
-
-        $.messager.confirm('操作提示', "确认删除这 " + arr.length + " 项吗？", function (r) {
-            if (r) {
-                $.ajax({
-                    url: "api/METERING_STANDARD_DEVICEApi/Delete?query=" + arr.join(","),
-                    type: "DELETE",
-                    success: function (res) {
-                        if (res.Code == 1) {
-                            //移除删除的数据
-
-                            $.messager.alert('操作提示', res.Message, 'info');
-                            $("#flexigridData").datagrid("reload");
-                            $("#flexigridData").datagrid("clearSelections");
-                        }
-                        else {
-                            $.messager.alert('操作提示', res.Message, 'info');
-                        }
-
-                    }
-                })
-            }
-        });
-
-    };
-
+    }
+    /*
+用途：检查输入字符串是否为空或者全部都是空格
+输入：str
+返回：
+如果全是空返回true,否则返回false
+*/
+    function isNull(str) {
+        if (str == "") return true;
+        var regu = "^[ ]+$";
+        var re = new RegExp(regu);
+        return re.test(str);
+    }
 </script>
 

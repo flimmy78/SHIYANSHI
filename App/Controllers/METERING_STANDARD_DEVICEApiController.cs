@@ -88,24 +88,7 @@ namespace Langben.App.Controllers
                 entity.CREATEPERSON = currentPerson;
 
                 entity.ID = Result.GetNewId();
-                foreach (var item in entity.ALLOWABLE_ERROR)
-                {
-                    item.ID = Result.GetNewId();
-                    item.CREATETIME = DateTime.Now;
-                    item.CREATEPERSON = currentPerson;
-                }
-                foreach (var item in entity.METERING_STANDARD_DEVICE_CHECK)
-                {
-                    item.ID = Result.GetNewId();
-                    item.CREATETIME = DateTime.Now;
-                    item.CREATEPERSON = currentPerson;
-                }
-                foreach (var item in entity.UNCERTAINTYTABLE)
-                {
-                    item.ID = Result.GetNewId();
-                    item.CREATETIME = DateTime.Now;
-                    item.CREATEPERSON = currentPerson;
-                }
+     
                 string returnValue = string.Empty;
                 if (m_BLL.CreateX(ref validationErrors, entity))
                 {
