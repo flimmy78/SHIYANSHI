@@ -345,6 +345,8 @@
     <Content Include="Images\view.png" />
     <Content Include="Images\yuanjiao.gif" />
     <Content Include="Images\yuanjiao.png" />
+    <Content Include="Res\huganqi.js" />
+    <Content Include="Res\zhishiyibiao.js" />
     <Content Include="Res\easyui\jquery.easyui.min.js" />
     <Content Include="Res\easyui\jquery.portal.js" />
     <Content Include="Res\easyui\locale\easyui-lang-zh_CN.js" />
@@ -474,6 +476,8 @@
     <Content Include="Res\My97DatePicker\skin\whyGreen\datepicker.css" />
     <Content Include="Res\My97DatePicker\skin\whyGreen\img.gif" />
     <Content Include="Res\My97DatePicker\WdatePicker.js" />
+    <Content Include="Res\dianneng.js" />
+    <Content Include="Res\zhiliuyiqi.js" />
     <Content Include="Res\tree_data_SBDX.js" />
     <Content Include="Res\tree_data_SBSX.js" />
     <Content Include="Scripts\bootstrap.js" />
