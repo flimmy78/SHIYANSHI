@@ -7,10 +7,6 @@ namespace Langben.App.Models
 {
     public partial class METERING_STANDARD_DEVICE_CHECKShow
     {
-        public METERING_STANDARD_DEVICE_CHECKShow()
-        {
-
-        }
         public string ID { get; set; }
         public string CERTIFICATE_NUM { get; set; }
         public Nullable<System.DateTime> CHECK_DATE { get; set; }
@@ -20,5 +16,9 @@ namespace Langben.App.Models
         public string CREATEPERSON { get; set; }
         public Nullable<System.DateTime> UPDATETIME { get; set; }
         public string UPDATEPERSON { get; set; }
+        public string CERTIFICATEUNIT { get; set; }
+        public Nullable<decimal> GROUPS { get; set; }
+
+
     }
 }
