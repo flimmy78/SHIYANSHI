@@ -1400,6 +1400,7 @@
           <Property Name="GONHZUOSHIJIAN" Type="char" MaxLength="1" />
           <Property Name="ZONGSHIJIAN" Type="char" MaxLength="1" />
           <Property Name="BEIZHU" Type="varchar2" MaxLength="4000" />
+          <Property Name="TIAOXINGMA" Type="varchar2" MaxLength="200" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VGONGZUOSHICHANG”中的列“SUOSHUDANWEI”。
@@ -2614,7 +2615,8 @@ FROM "TENGFEI"."VBAOGAODAYIN" "VBAOGAODAYIN"</DefiningQuery>
 "VBIAOZHUNLIANGCHUANGONGZHUO"."BAOGAOYUEDU" AS "BAOGAOYUEDU", 
 "VBIAOZHUNLIANGCHUANGONGZHUO"."GONHZUOSHIJIAN" AS "GONHZUOSHIJIAN", 
 "VBIAOZHUNLIANGCHUANGONGZHUO"."ZONGSHIJIAN" AS "ZONGSHIJIAN", 
-"VBIAOZHUNLIANGCHUANGONGZHUO"."BEIZHU" AS "BEIZHU"
+"VBIAOZHUNLIANGCHUANGONGZHUO"."BEIZHU" AS "BEIZHU", 
+"VBIAOZHUNLIANGCHUANGONGZHUO"."TIAOXINGMA" AS "TIAOXINGMA"
 FROM "TENGFEI"."VBIAOZHUNLIANGCHUANGONGZHUO" "VBIAOZHUNLIANGCHUANGONGZHUO"</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VGONGZUOSHICHANG" EntityType="Self.VGONGZUOSHICHANG" store:Type="Views" store:Schema="TENGFEI">
@@ -4934,6 +4936,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="GONHZUOSHIJIAN" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="ZONGSHIJIAN" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="BEIZHU" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="TIAOXINGMA" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VGONGZUOSHICHANG">
           <Key>
@@ -7269,6 +7272,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="VBIAOZHUNLIANGCHUANGONGZHUO">
             <EntityTypeMapping TypeName="Model.VBIAOZHUNLIANGCHUANGONGZHUO">
               <MappingFragment StoreEntitySet="VBIAOZHUNLIANGCHUANGONGZHUO">
+                <ScalarProperty Name="TIAOXINGMA" ColumnName="TIAOXINGMA" />
                 <ScalarProperty Name="BEIZHU" ColumnName="BEIZHU" />
                 <ScalarProperty Name="ZONGSHIJIAN" ColumnName="ZONGSHIJIAN" />
                 <ScalarProperty Name="GONHZUOSHIJIAN" ColumnName="GONHZUOSHIJIAN" />
