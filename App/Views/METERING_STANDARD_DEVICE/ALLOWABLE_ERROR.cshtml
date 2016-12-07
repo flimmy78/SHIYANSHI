@@ -1,0 +1,145 @@
+﻿@model Langben.DAL.ALLOWABLE_ERROR
+@{ Layout = "~/Views/Shared/Index.cshtml"; }
+@using Common
+@using Models
+<script src="~/Scripts/JScriptIndex.js"></script>
+
+<script type="text/javascript" language="javascript">
+    $(function () {
+
+        $('#flexigridData').datagrid({
+            title: '证书信息列表', //列表的标题
+            iconCls: 'icon-site',
+            width: 'auto',
+            height: 'auto',
+            //nowrap: false,
+            striped: true,
+            collapsible: true,
+            url: '/api/ALLOWABLE_ERRORApi/PostData', //获取数据的url
+            sortName: 'ID',
+            sortOrder: 'desc',
+            idField: 'ID',
+            toolbar: [
+
+                 {
+                     text: '创建',
+                     iconCls: 'icon-add',
+                     handler: function () {
+                         return flexiCreate();
+                     }
+                 }, {
+                     text: '删除',
+                     iconCls: 'icon-remove',
+                     handler: function () {
+                         return flexiDelete();
+                     }
+                 }, {
+                     text: '修改',
+                     iconCls: 'icon-edit',
+                     handler: function () {
+                         return flexiModify();
+                     }
+                 }],
+            columns: [[
+                { field: 'METERING_STANDARD_DEVICEID', title: '不确定度/准确度等级/最大允许误差', width: 129 }
+                , { field: 'CREATETIME', title: '证书编号', width: 129 }
+                , { field: 'CREATEPERSON', title: '有效期', width: 129 }
+            ]],
+            pagination: true,
+            rownumbers: true
+
+        });
+        var parent = window.dialogArguments; //获取父页面
+        if (parent == "undefined" || parent == null) {
+            //    不是在iframe中打开的
+        } else {
+            //隐藏所有的按钮和分隔符
+            $(".l-btn.l-btn-plain").hide();
+            $(".datagrid-btn-separator").hide();
+            //添加选择按钮
+            $('#flexigridData').datagrid("addToolbarItem", [{ "text": "选择", "iconCls": "icon-ok", handler: function () { flexiSelect(); } }]);
+        }
+    });
+
+    //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
+    function flexiSelect() {
+
+        var rows = $('#flexigridData').datagrid('getSelections');
+        if (rows.length == 0) {
+            $.messager.alert('操作提示', '请选择数据!', 'warning');
+            return false;
+        }
+
+        var arr = [];
+        for (var i = 0; i < rows.length; i++) {
+            arr.push(rows[i].ID);
+        }
+        arr.push("^");
+        for (var i = 0; i < rows.length; i++) {
+            arr.push(rows[i].VALUE);
+        }
+        //主键列和显示列之间用 ^ 分割   每一项用 , 分割
+        if (arr.length > 0) {//一条数据和多于一条
+            returnParent(arr.join("&")); //每一项用 & 分割
+        }
+    }
+    //导航到创建的按钮
+    function flexiCreate() {
+
+        window.location.href = "../ALLOWABLE_ERROR/Create";
+        return false;
+    }
+    //导航到修改的按钮
+    function flexiModify() {
+
+        var arr = $('#flexigridData').datagrid('getSelections');
+
+        if (arr.length == 1) {
+            window.location.href = "../ALLOWABLE_ERROR/Edit/" + arr[0].ID;
+
+        } else {
+            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
+        }
+        return false;
+
+    };
+    //删除的按钮
+    function flexiDelete() {
+
+        var rows = $('#flexigridData').datagrid('getSelections');
+        if (rows.length == 0) {
+            $.messager.alert('操作提示', '请选择数据!', 'warning');
+            return false;
+        }
+
+        var arr = [];
+        for (var i = 0; i < rows.length; i++) {
+            arr.push(rows[i].ID);
+        }
+
+        $.messager.confirm('操作提示', "确认删除这 " + arr.length + " 项吗？", function (r) {
+            if (r) {
+                $.ajax({
+                    url: "api/ALLOWABLE_ERRORApi/Delete?query=" + arr.join(","),
+                    type: "DELETE",
+                    success: function (res) {
+                        if (res.Code == 1) {
+                            //移除删除的数据
+
+                            $.messager.alert('操作提示', res.Message, 'info');
+                            $("#flexigridData").datagrid("reload");
+                            $("#flexigridData").datagrid("clearSelections");
+                        }
+                        else {
+                            $.messager.alert('操作提示', res.Message, 'info');
+                        }
+
+                    }
+                })
+            }
+        });
+
+    };
+
+</script>
+

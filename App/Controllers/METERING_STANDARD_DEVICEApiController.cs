@@ -88,24 +88,7 @@ namespace Langben.App.Controllers
                 entity.CREATEPERSON = currentPerson;
 
                 entity.ID = Result.GetNewId();
-                foreach (var item in entity.ALLOWABLE_ERROR)
-                {
-                    item.ID = Result.GetNewId();
-                    item.CREATETIME = DateTime.Now;
-                    item.CREATEPERSON = currentPerson;
-                }
-                foreach (var item in entity.METERING_STANDARD_DEVICE_CHECK)
-                {
-                    item.ID = Result.GetNewId();
-                    item.CREATETIME = DateTime.Now;
-                    item.CREATEPERSON = currentPerson;
-                }
-                foreach (var item in entity.UNCERTAINTYTABLE)
-                {
-                    item.ID = Result.GetNewId();
-                    item.CREATETIME = DateTime.Now;
-                    item.CREATEPERSON = currentPerson;
-                }
+     
                 string returnValue = string.Empty;
                 if (m_BLL.CreateX(ref validationErrors, entity))
                 {
@@ -358,6 +341,48 @@ namespace Langben.App.Controllers
                 this.m_dAttributeFeature += dFeature;
 
             }
+        }
+
+
+
+        public Common.ClientResult.DataResult ALLOWABLE_ERRORData(string id)
+        {
+            int total = 0;
+            METERING_STANDARD_DEVICE item = m_BLL.GetById(id);
+
+            var data= new Common.ClientResult.DataResult { } ;
+            return data;
+            //var data = new Common.ClientResult.DataResult
+            //{
+            //    total = total,
+            //    rows = queryData.Select(s => new
+            //    {
+            //        ID = s.ID
+            //        ,
+            //        NAME = s.NAME
+            //        ,
+            //        TEST_RANGE = s.TEST_RANGE
+            //        ,
+            //        FACTORY_NUM = s.FACTORY_NUM
+            //        ,
+            //        XINGHAO = s.XINGHAO
+            //        ,
+            //        CATEGORY = s.CATEGORY
+            //        ,
+            //        STATUS = s.STATUS
+            //        ,
+            //        UNDERTAKE_LABORATORYID = s.UNDERTAKE_LABORATORYIDOld
+            //        ,
+            //        CREATETIME = s.CREATETIME
+            //        ,
+            //        CREATEPERSON = s.CREATEPERSON
+            //        ,
+            //        UPDATETIME = s.UPDATETIME
+            //        ,
+            //        UPDATEPERSON = s.UPDATEPERSON
+            //    })
+            //};
+            //return data;
         }
 
         IBLL.IMETERING_STANDARD_DEVICEBLL m_BLL;

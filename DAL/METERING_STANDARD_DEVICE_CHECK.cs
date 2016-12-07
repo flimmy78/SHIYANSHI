@@ -24,6 +24,7 @@ namespace Langben.DAL
         public Nullable<System.DateTime> UPDATETIME { get; set; }
         public string UPDATEPERSON { get; set; }
         public string CERTIFICATEUNIT { get; set; }
+        public Nullable<decimal> GROUPS { get; set; }
     
         public virtual METERING_STANDARD_DEVICE METERING_STANDARD_DEVICE { get; set; }
     }
