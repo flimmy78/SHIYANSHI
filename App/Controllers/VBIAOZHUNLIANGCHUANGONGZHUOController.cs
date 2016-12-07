@@ -89,7 +89,9 @@ namespace Langben.App.Controllers
 					,GONHZUOSHIJIAN = s.GONHZUOSHIJIAN
 					,ZONGSHIJIAN = s.ZONGSHIJIAN
 					,BEIZHU = s.BEIZHU
-					
+                        ,
+                    TIAOXINGMA = s.TIAOXINGMA
+
                 }
 
                     )

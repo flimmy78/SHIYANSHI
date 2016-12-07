@@ -67,6 +67,10 @@ namespace Langben.DAL
         [Display(Name = "证书发放单位", Order = 10)]
         public object CERTIFICATEUNIT { get; set; }
 
+        [ScaffoldColumn(true)]
+        [Display(Name = "组别", Order = 11)]
+        [Range(0, 2147483646, ErrorMessage = "数值超出范围")]
+        public int? GROUPS { get; set; }
     }
 }
  

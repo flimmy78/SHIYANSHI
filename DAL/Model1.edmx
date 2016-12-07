@@ -67,6 +67,7 @@
           <Property Name="THEUNCERTAINTY" Type="nvarchar2" MaxLength="200" />
           <Property Name="MAXVALUE" Type="nvarchar2" MaxLength="200" />
           <Property Name="MAXCATEGORIES" Type="nvarchar2" MaxLength="200" />
+          <Property Name="GROUPS" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="APPLIANCE_DETAIL_INFORMATION">
           <Key>
@@ -502,6 +503,7 @@
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="CERTIFICATEUNIT" Type="varchar2" MaxLength="200" />
+          <Property Name="GROUPS" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="METERING_STANDARD_DEVICEPREPAR">
           <Key>
@@ -1316,6 +1318,7 @@
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="METERING_STANDARD_DEVICEID" Type="varchar2" MaxLength="36" />
           <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
+          <Property Name="GROUPS" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="UNDERTAKE_LABORATORY">
           <Key>
@@ -1400,6 +1403,7 @@
           <Property Name="GONHZUOSHIJIAN" Type="char" MaxLength="1" />
           <Property Name="ZONGSHIJIAN" Type="char" MaxLength="1" />
           <Property Name="BEIZHU" Type="varchar2" MaxLength="4000" />
+          <Property Name="TIAOXINGMA" Type="varchar2" MaxLength="200" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VGONGZUOSHICHANG”中的列“SUOSHUDANWEI”。
@@ -2614,7 +2618,8 @@ FROM "TENGFEI"."VBAOGAODAYIN" "VBAOGAODAYIN"</DefiningQuery>
 "VBIAOZHUNLIANGCHUANGONGZHUO"."BAOGAOYUEDU" AS "BAOGAOYUEDU", 
 "VBIAOZHUNLIANGCHUANGONGZHUO"."GONHZUOSHIJIAN" AS "GONHZUOSHIJIAN", 
 "VBIAOZHUNLIANGCHUANGONGZHUO"."ZONGSHIJIAN" AS "ZONGSHIJIAN", 
-"VBIAOZHUNLIANGCHUANGONGZHUO"."BEIZHU" AS "BEIZHU"
+"VBIAOZHUNLIANGCHUANGONGZHUO"."BEIZHU" AS "BEIZHU", 
+"VBIAOZHUNLIANGCHUANGONGZHUO"."TIAOXINGMA" AS "TIAOXINGMA"
 FROM "TENGFEI"."VBIAOZHUNLIANGCHUANGONGZHUO" "VBIAOZHUNLIANGCHUANGONGZHUO"</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VGONGZUOSHICHANG" EntityType="Self.VGONGZUOSHICHANG" store:Type="Views" store:Schema="TENGFEI">
@@ -3529,6 +3534,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="THEUNCERTAINTY" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="MAXVALUE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="MAXCATEGORIES" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="GROUPS" Type="Decimal" Precision="38" Scale="0" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.FK_MAXIMUM__REFERENCE_METERIN2" FromRole="ALLOWABLE_ERROR" ToRole="METERING_STANDARD_DEVICE" />
         </EntityType>
         <EntityType Name="APPLIANCE_DETAIL_INFORMATION">
@@ -3993,6 +3999,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CERTIFICATEUNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="GROUPS" Type="Decimal" Precision="38" Scale="0" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.FK_METERING_REFERENCE_METERIN2" FromRole="METERING_STANDARD_DEVICE_CHECK" ToRole="METERING_STANDARD_DEVICE" />
         </EntityType>
         <EntityType Name="ORDER_TASK_INFORMATION">
@@ -4851,6 +4858,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="METERING_STANDARD_DEVICEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="GROUPS" Type="Decimal" Precision="38" Scale="0" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.FK_UNCERTAI_REFERENCE_METERING" FromRole="UNCERTAINTYTABLE" ToRole="METERING_STANDARD_DEVICE" />
         </EntityType>
         <EntityType Name="UNDERTAKE_LABORATORY">
@@ -4934,6 +4942,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="GONHZUOSHIJIAN" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="ZONGSHIJIAN" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="BEIZHU" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="TIAOXINGMA" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VGONGZUOSHICHANG">
           <Key>
@@ -5940,6 +5949,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="ALLOWABLE_ERROR">
             <EntityTypeMapping TypeName="Model.ALLOWABLE_ERROR">
               <MappingFragment StoreEntitySet="ALLOWABLE_ERROR">
+                <ScalarProperty Name="GROUPS" ColumnName="GROUPS" />
                 <ScalarProperty Name="MAXCATEGORIES" ColumnName="MAXCATEGORIES" />
                 <ScalarProperty Name="MAXVALUE" ColumnName="MAXVALUE" />
                 <ScalarProperty Name="THEUNCERTAINTY" ColumnName="THEUNCERTAINTY" />
@@ -6398,6 +6408,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="METERING_STANDARD_DEVICE_CHECK">
             <EntityTypeMapping TypeName="Model.METERING_STANDARD_DEVICE_CHECK">
               <MappingFragment StoreEntitySet="METERING_STANDARD_DEVICE_CHECK">
+                <ScalarProperty Name="GROUPS" ColumnName="GROUPS" />
                 <ScalarProperty Name="CERTIFICATEUNIT" ColumnName="CERTIFICATEUNIT" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
@@ -7195,6 +7206,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="UNCERTAINTYTABLE">
             <EntityTypeMapping TypeName="Model.UNCERTAINTYTABLE">
               <MappingFragment StoreEntitySet="UNCERTAINTYTABLE">
+                <ScalarProperty Name="GROUPS" ColumnName="GROUPS" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="METERING_STANDARD_DEVICEID" ColumnName="METERING_STANDARD_DEVICEID" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
@@ -7269,6 +7281,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="VBIAOZHUNLIANGCHUANGONGZHUO">
             <EntityTypeMapping TypeName="Model.VBIAOZHUNLIANGCHUANGONGZHUO">
               <MappingFragment StoreEntitySet="VBIAOZHUNLIANGCHUANGONGZHUO">
+                <ScalarProperty Name="TIAOXINGMA" ColumnName="TIAOXINGMA" />
                 <ScalarProperty Name="BEIZHU" ColumnName="BEIZHU" />
                 <ScalarProperty Name="ZONGSHIJIAN" ColumnName="ZONGSHIJIAN" />
                 <ScalarProperty Name="GONHZUOSHIJIAN" ColumnName="GONHZUOSHIJIAN" />

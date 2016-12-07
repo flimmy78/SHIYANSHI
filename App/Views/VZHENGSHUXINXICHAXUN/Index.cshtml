@@ -34,9 +34,9 @@
             @Html.LabelFor(model => model.YOUXIAOQIZHI):
         </div>
         <div class='input_search-field-time'>
-            <input type="text" id="YOUXIAOQIZHIStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'YOUXIAOQIZHIStart_Time\');}' })" />
+            <input type="text" id="YOUXIAOQIZHIStart_Time2" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'YOUXIAOQIZHIStart_Time\');}' })" />
             <span>到</span>
-            <input type="text" id="YOUXIAOQIZHIEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'YOUXIAOQIZHIEnd_Time\');}' })" />
+            <input type="text" id="YOUXIAOQIZHIEnd_Time2" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'YOUXIAOQIZHIEnd_Time\');}' })" />
         </div>
     </div>
     <div class="input_search">
@@ -57,22 +57,130 @@
     </div>
     <div class="input_search">
         <div class="input_search-label">
-            @Html.LabelFor(model => model.JIANDINGXIAOZHUNYUAN):
+            @Html.LabelFor(model => model.ZHENGSHULEIBIE):
         </div>
         <div class="input_search-field">
-            <input type='text' id='JIANDINGXIAOZHUNYUAN' />
+            <select id="ZHENGSHULEIBIE">
+                <option value="">请选择</option>
+                <option value="检定">检定</option>
+                <option value="校准">校准</option>
+            </select>
         </div>
     </div>
-
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.SHOUQUANZIZHI):
+        </div>
+        <div class="input_search-field">
+            <select id="SHOUQUANZIZHI">
+                <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.CHUCHANGBIANHAO):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='CHUCHANGBIANHAO' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.HEYANYUAN):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='HEYANYUAN' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.ZHENGSHUBAOGAOBIANHAO):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='ZHENGSHUBAOGAOBIANHAO' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.FAFANGZHUANGTAI):
+        </div>
+        <div class="input_search-field">
+            <select id="FAFANGZHUANGTAI">
+                <option value="">请选择</option>
+                <option value="报告已领取">报告已领取</option>
+                <option value="报告未领取">报告未领取</option>
+            </select>
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.SHOULIDANWEI):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='SHOULIDANWEI' />
+        </div>
+    </div>
     <div class='input_search' style="padding-top:10px;">
         <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
             查 询
         </a>
     </div>
 </div>
- <br style="clear: both;" />
+<br style="clear: both;" />
 
 <script type="text/javascript" language="javascript">
+    //资质绑定
+    $("#ZHENGSHULEIBIE").change(function () {
+        var option = $("#ZHENGSHULEIBIE option:selected").val();
+        switch (option) {
+            case "检定":
+                $("#SHOUQUANZIZHI").empty();
+                $("<option></option>")
+                        .val("")
+                        .text("请选择")
+                        .appendTo("#SHOUQUANZIZHI");
+                $("<option></option>")
+                             .val("北京授权检定")
+                             .text("北京授权检定")
+                             .appendTo($("#SHOUQUANZIZHI"));
+                $("<option></option>")
+                         .val("河北授权检定")
+                         .text("河北授权检定")
+                         .appendTo($("#SHOUQUANZIZHI"));
+                $("<option></option>")
+                     .val("检定")
+                     .text("检定")
+                     .appendTo($("#SHOUQUANZIZHI"));
+                break;
+            case "校准":
+                $("#SHOUQUANZIZHI").empty();
+                $("<option></option>")
+                        .val("")
+                        .text("请选择")
+                        .appendTo("#SHOUQUANZIZHI");
+                $("<option></option>")
+                    .val("CNAS校准")
+                    .text("CNAS校准")
+                    .appendTo($("#SHOUQUANZIZHI"));
+                $("<option></option>")
+               .val("校准")
+               .text("校准")
+               .appendTo($("#SHOUQUANZIZHI"));
+                break;
+            case "":
+                $("#SHOUQUANZIZHI").empty();
+                $("<option></option>")
+                        .val("")
+                        .text("请选择")
+                        .appendTo("#SHOUQUANZIZHI");             
+                break;
+            default:
+
+        }
+    })
+
+
     $(function () {
 
         $('#flexigridData').datagrid({
@@ -90,16 +198,17 @@
 
             toolbar: [
 
-                 {
-                     text: '详细',
-                     iconCls: 'icon-search',
-                     handler: function () {
-                         return getView();
-                     }
-                 } ],
+                 //{
+                 //    text: '详细',
+                 //    iconCls: 'icon-search',
+                 //    handler: function () {
+                 //        return getView();
+                 //    }
+                 //}
+            ],
             columns: [[
 
-                
+
 					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 100, hidden: true }
 					, { field: 'SONGJIANDANWEI', title: '@Html.DisplayNameFor(model => model.SONGJIANDANWEI)', width: 100 }
 					, { field: 'ZHENGSHUDANWEI', title: '@Html.DisplayNameFor(model => model.ZHENGSHUDANWEI)', width: 100 }
@@ -110,7 +219,13 @@
 					, { field: 'QIJUXINGHAO', title: '@Html.DisplayNameFor(model => model.QIJUXINGHAO)', width: 100 }
 					, { field: 'CHUCHANGBIANHAO', title: '@Html.DisplayNameFor(model => model.CHUCHANGBIANHAO)', width: 100 }
 					, { field: 'ZHUNQUEDUDENGJI', title: '@Html.DisplayNameFor(model => model.ZHUNQUEDUDENGJI)', width: 100 }
-					, { field: 'JIANDINGRIQI', title: '@Html.DisplayNameFor(model => model.JIANDINGRIQI)', width: 100 }
+					, {
+					    field: 'JIANDINGRIQI', title: '@Html.DisplayNameFor(model => model.JIANDINGRIQI)', width: 100, formatter: function (value, row, index) {
+					        if (value) {
+					            return dateConvert(value);
+					        }
+					    }
+					}
 					, { field: 'WENDU', title: '@Html.DisplayNameFor(model => model.WENDU)', width: 60 }
 					, { field: 'XIANGDUISHIDU', title: '@Html.DisplayNameFor(model => model.XIANGDUISHIDU)', width: 100 }
 					, { field: 'MOCHONGCHANGSHU', title: '@Html.DisplayNameFor(model => model.MOCHONGCHANGSHU)', width: 100 }
@@ -133,7 +248,7 @@
 					, { field: 'SUOSHUDANWEI', title: '@Html.DisplayNameFor(model => model.SUOSHUDANWEI)', width: 100 }
 					, { field: 'WEITUODANWEI', title: '@Html.DisplayNameFor(model => model.WEITUODANWEI)', width: 100 }
 					, { field: 'BEIZHU', title: '@Html.DisplayNameFor(model => model.BEIZHU)', width: 100 }
-                ]],
+            ]],
             pagination: true,
             rownumbers: true
 
@@ -158,14 +273,24 @@
         var search = "";
         $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
             if (this.id)
-                search = search + this.id + "&" + this.value + "^";
+                if (this.id == "FAFANGZHUANGTAI" && this.value == "报告未领取") {
+                    search = search + this.id + "&^";
+                }
+                else {
+                    search = search + this.id + "&" + this.value + "^";
+                }
             else
-                search = search + this.name + "&" + this.value + "^";
+                if (this.id == "FAFANGZHUANGTAI" && this.value == "报告未领取") {
+                    search = search + this.id + "&^";
+                }
+                else {
+                    search = search + this.id + "&" + this.value + "^";
+                }
         });
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
- 
+
     //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
     function flexiSelect() {
 
@@ -201,7 +326,7 @@
         }
         return false;
     }
- 
+
 
 </script>
 

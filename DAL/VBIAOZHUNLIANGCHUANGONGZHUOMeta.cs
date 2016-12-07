@@ -130,7 +130,8 @@ namespace Langben.DAL
 			[Display(Name = "备注", Order = 38)]
 			public object BEIZHU { get; set; }
 
-
+        [Display(Name = "条形码", Order = 39)]
+        public object TIAOXINGMA { get; set; }
     }
 
 

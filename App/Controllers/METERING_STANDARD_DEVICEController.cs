@@ -63,6 +63,27 @@ namespace Langben.App.Controllers
             return View();
         }
 
+
+        /// <summary>
+        /// 最大允许误差信息
+        /// </summary>
+        /// <returns></returns>
+        [SupportFilter]
+        public ActionResult ALLOWABLE_ERROR(string id)
+        {
+            ViewBag.METERING_STANDARD_DEVICEID = id;
+            return View();
+        }
+        /// <summary>
+        ///不确定度
+        /// </summary>
+        /// <returns></returns>
+        [SupportFilter]
+        public ActionResult UNCERTAINTYTABLE(string id)
+        {
+            ViewBag.METERING_STANDARD_DEVICEID = id;
+            return View();
+        }
         /// <summary>
         /// 首次编辑
         /// </summary>

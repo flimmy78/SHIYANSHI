@@ -1577,8 +1577,8 @@
     <script type="text/javascript" language="javascript">
         $(function () {
             //注
-            if ($("#REMARK").val()=="") {
-                $("#REMARK").val("显示值、标准值的单位与量程单位一致。");
+            if ($('#REMARK').textbox('getValue') == "") {
+                $('#REMARK').textbox('setValue', "显示值、标准值的单位与量程单位一致。");
             }
          
              

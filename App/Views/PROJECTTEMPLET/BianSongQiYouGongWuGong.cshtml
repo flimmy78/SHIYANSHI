@@ -297,7 +297,7 @@
                 var rowspan = 1; //合并单元格行数
 
                 var txtVal = "";//(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
-                var unit = @((ViewBag.canshu == "有功功率") ? "Pn" : "Q");//在输入框后面的单位
+                var unit = @((ViewBag.canshu == "有功功率") ? "'Pn'" : "'Q'");//在输入框后面的单位
 
 
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行

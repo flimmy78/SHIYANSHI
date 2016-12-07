@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>基本误差-电阻示值-相对误差</title>
+    <link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="/Content/default.css" rel="stylesheet" />
+    <link href="/Content/StyleSheet.css" rel="stylesheet" />
+    <script src="/Scripts/jquery.min.js"></script>
+    <script src="/Scripts/JScriptCommon.js"></script>
+    <script src="/Res/easyui/jquery.easyui.min.js"></script>
+    <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/Scripts/jianCeXiang.js"></script>
+</head>
+<body class="easyui-layout">
+    <input type="hidden" id="rowindex" value="1" />
+    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+            <table>
+                <tr>
+                    <td><a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="TongDao.addTongDao()">增加通道</a> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'">保存检测项</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+        <div class="mt10">
+            <span>电阻示值</span>
+        </div>
+        <div class="mt10" id="tongdao">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10"  id="tongdao_dy_1">
+                <thead>
+                    <tr>
+                        <th width="80" rowspan="2" align="center">电阻示值</th>
+                        <th colspan="2" align="center">
+                            ×
+                            <input class="my-textbox input-width" value="" type="text" name="input" id="input"  onblur="TongDao.getCurTongDaoIdx(this); calculate.calculateWuCha()">
+                            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="changeValue(this)">
+                                <option value="Ω">Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                        </th>
+                        <th colspan="2" align="center">
+                            ×
+                            <input class="my-textbox input-width" value="" type="text" name="input2" id="input2" onblur="TongDao.getCurTongDaoIdx(this); calculate.calculateWuCha()">
+                            <select class="my-combobox" name="state_1_3" id="state_1_3" onchange="changeValue(this)">
+                                <option value="Ω">Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th width="140" align="center">
+                            实际值<br>(<select class="my-combobox" name="state_1_2" id="state_1_2" onchange="changeValue(this)">
+                                <option value="Ω">Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>)
+                        </th>
+                        <th width="140" align="center">误差 %</th>
+                        <th width="140" align="center">
+                            实际值<br>
+                            (
+                            <select class="my-combobox" name="state_1_4" id="state_1_4" onchange="changeValue(this)">
+                                <option value="Ω">Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                            )
+                        </th>
+                        <th width="140" align="center">误差 %</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_1">
+                    <!--示例，可删 -->
+                    <tr>
+                        <td align="center">1</td>
+                        <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" onblur="calculate.calculateWuCha(this)" /></td>
+                        <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
+                        <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" onblur="calculate.calculateWuCha(this)" /></td>
+                        <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
+
+                    </tr>
+                    <!--/示例，可删 -->
+                </tbody>
+
+                <tr>
+                    <td colspan="8" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open');TongDao.getCurTongDaoIdx(this)">增加行数</a></td>
+                </tr>
+
+                <tr>
+                    <td align="center">允许误差 %</td>
+                    <td align="right">±</td>
+                    <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" onblur="TongDao.getCurTongDaoIdx(this); calculate.calculateWuCha()" /></td>
+                    <td align="right">±</td>
+                    <td align="center"><input name="" id="" type="text" class="my-textbox tr" value=""onblur="TongDao.getCurTongDaoIdx(this); calculate.calculateWuCha()" /></td>
+
+                </tr>
+                <tr>
+                    <th>注：</th>
+                    <td colspan="4"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%" value=""></td>
+                </tr>
+                <tr>
+                    <th>结论：</th>
+                    <td colspan="4"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"> <input name="" id="" type="text" class="my-textbox tr" value="" style="width:96%" />      </td>
+                    <td colspan="3">
+                        <i>U</i><small>rel</small>(k =
+                        <select class="my-combobox" name="ddlSelectD" id="ddlSelectD" onchange="caculateD()">
+                            <option value="2">2 </option>
+                            <option value="3">3</option>
+                            <option value="√3">√3</option>
+                        </select>
+                        ) =
+                        <input class="my-textbox " value="" style="width:300px" id="txtvalueD">  <input type="button" class="my-btn" value="计 算" onclick="calculate(this)" />
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="mt10">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl"></table>
+        </div>
+    </div>
+
+    <!--增加行数弹层-->
+    <div id="dlg" class="easyui-dialog" title="增加行数" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return TongDao.addRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+        <table>
+            <tr>
+                <td width="100" align="right" height="100">增加的数量：</td>
+                <td><input type="text" id="txtNumber" class="my-textbox  required " style="width:200px" /></td>
+            </tr>
+
+        </table>
+    </div>
+    <!--/增加量程弹层-->
+
+    <script type="text/javascript" language="javascript">
+        var index = 1;
+        var currentindex = 1;
+        var TongDao = {
+            addTongDao: function () {
+                var tongdao = $("#tongdao_dy_1").clone();
+                this.setTongDaoIdx(index + 1);
+                $("#tongdao").append($(tongdao).attr("id", "tongdao_dy_" + this.getTongDaoIdx()));
+            },
+            addRow: function () {
+                var rows = $("#txtNumber").val();
+                for (var i = 0; i < rows; i++) {
+                    var rowIdx = $("#tongdao_dy_" + currentindex + " tbody").eq(0).find('tr').last().children().eq(0).text();
+                    $("#tongdao_dy_" + currentindex + " tbody").eq(0).append("<tr>" +
+                                                              "<td align=\"center\">" + (parseInt(rowIdx) + 1) + "</td>" +
+                                                              "<td align=\"center\"><input name=\"\" id=\"\" type=\"text\" class=\"my-textbox tr\" value=\"\" onblur=\"calculate.calculateWuCha(this)\" /></td>" +
+                                                              "<td align=\"center\"><input name=\"\" id=\"\" type=\"text\" class=\"my-textbox tr\" value=\"\" /></td>" +
+                                                              "<td align=\"center\"><input name=\"\" id=\"\" type=\"text\" class=\"my-textbox tr\" value=\"\" onblur=\"calculate.calculateWuCha(this)\"/></td>" +
+                                                              "<td align=\"center\"><input name=\"\" id=\"\" type=\"text\" class=\"my-textbox tr\" value=\"\" /></td>" +
+                                                            "</tr>");
+                }
+
+            },
+            setTongDaoIdx: function (idx) {
+                index = currentindex = idx;
+            },
+            getTongDaoIdx: function () {
+                return index;
+            },
+            getCurTongDaoIdx: function (obj) {
+                var id = $(obj).parents('table').eq(0).attr("id");
+                currentindex = id.split('_')[2];
+            }
+        }
+        var calculate = {
+            calculateWuCha: function (obj) {
+                //【误差】=(【×电阻值】*序号-【实际值】)/【实际值】*100%，比允许误差多一位，四舍六入，逢五奇进偶不进
+                var arry =this.getYunXuWuChaLength();
+                if (obj != undefined)
+                {
+                    var tr = $(obj).parents('tr').eq(0);
+                    var shijizhi = $(tr).children().eq(1).find('input').val();
+                    var xuhao = $(tr).children().eq(0).text();
+                    var dianzuzhi = $(obj).parents('table').eq(0).children('thead').find('tr').eq(0).children('th').eq(1).find('input').val();
+                    if (shijizhi != "" && dianzuzhi != "")
+                        $(tr).children().eq(2).find('input').val(fomatFloat((parseFloat(dianzuzhi) * parseFloat(xuhao) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100, arry[0].valuelength + 1))
+                    shijizhi = $(tr).children().eq(3).find('input').val();
+                    dianzuzhi = $(obj).parents('table').eq(0).children('thead').find('tr').eq(0).children('th').eq(2).find('input').val();
+                    if (shijizhi != "" && dianzuzhi != "")
+                        $(tr).children().eq(4).find('input').val(fomatFloat((parseFloat(dianzuzhi) * parseFloat(xuhao) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100, arry[0].value1length + 1))
+                }
+                else {
+                    var thead = $("#tongdao_dy_" + currentindex + " thead").eq(0);
+                    var tbody = $("#tongdao_dy_" + currentindex + " tbody:first tr");
+                    var dianzuzhi = $(thead).find('tr').eq(0).children('th').eq(1).find('input').val()
+                    var dianzuzhi1 = $(thead).find('tr').eq(0).children('th').eq(2).find('input').val()
+                    $(tbody).each(function () {
+                        var shijizhi = $(this).children().eq(1).find('input').val();
+                        var xuhao = $(this).children().eq(0).text();
+                        if (shijizhi != "" && dianzuzhi != "")
+                            $(this).children().eq(2).find('input').val(fomatFloat((parseFloat(dianzuzhi) * parseFloat(xuhao) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100, arry[0].valuelength + 1))
+                        shijizhi = $(this).children().eq(3).find('input').val(); 
+                        if (shijizhi != "" && dianzuzhi1 != "")
+                            $(this).children().eq(4).find('input').val(fomatFloat((parseFloat(dianzuzhi1) * parseFloat(xuhao) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100, arry[0].value1length+1))
+                    })
+                }
+                   
+              
+            }, getYunXuWuChaLength: function () {
+                var value = $("#tongdao_dy_" + currentindex + " tbody").eq(1).find('tr').eq(1).children().eq(2).find('input').val();
+                var value1 = $("#tongdao_dy_" + currentindex + " tbody").eq(1).find('tr').eq(1).children().eq(4).find('input').val();
+                 
+                var datas = value.split('.');
+                var datas1 = value1.split('.');
+                var arry=[];
+                arry.push({
+                    valuelength: datas.length >1 ? datas[1].length : 0,
+                    value1length: datas1.length > 1 ? datas1[1].length : 0,
+                });
+                return arry;
+            }
+        }
+
+    </script>
+</body>
+</html>
