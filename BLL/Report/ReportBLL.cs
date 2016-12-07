@@ -2118,26 +2118,29 @@ namespace Langben.Report
         /// <param name="id">控件ID</param>
         /// <param name="name">控件name</param>
         /// <returns></returns>
-        private string GetExceptNameID(string Id,string Name)
+        private string GetExceptNameID(object Id,object Name)
         {
-            if (!string.IsNullOrWhiteSpace(Id) && Id.Trim().IndexOf(Name.Trim()) == 0)
+            if(Id==null || Name==null)
             {
-                Id = Id.Trim().Replace(Name.Trim(), "");
+                return "";
+            }            
+            if (!string.IsNullOrWhiteSpace(Id.ToString().Trim()) && Id.ToString().Trim().IndexOf(Name.ToString().Trim()) == 0)
+            {
+                Id = Id.ToString().Trim().Replace(Name.ToString().Trim(), "");
             }
-            else if(!string.IsNullOrWhiteSpace(Id))
+            
+            string[] ids = Id.ToString().Trim().Split('_');
+            if (ids.Length > 3)
             {
-                string[] ids = Id.Trim().Split('_');
-                if (ids.Length > 3)
+                Id = "";
+                for (int i = ids.Length - 3; i < ids.Length - 1; i++)
                 {
-                    Id = "";
-                    for (int i = ids.Length - 3; i < ids.Length - 1; i++)
-                    {
-                        Id += "_" + ids[i];
-                    }
+                    Id += "_" + ids[i];
                 }
-
             }
-            return Id;
+
+            
+            return Id.ToString().Trim();
         }
         /// <summary>
         /// 设置行号，同时插入行
@@ -2503,9 +2506,9 @@ namespace Langben.Report
 
                     if (dic != null && dic.Count > 0)
                     {
-                        string Id = string.Empty;
-                        string Name = string.Empty;
-                        string Value = string.Empty;
+                        object Id = string.Empty;
+                        object Name = string.Empty;
+                        object Value = string.Empty;
 
                         #region 输出文本框内容
                         for (int j = 0; j < nodeList_Input.Count; j++)
