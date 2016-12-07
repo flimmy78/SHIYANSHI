@@ -4484,8 +4484,18 @@
 					<!--表格表头行号-->
 					<RowIndex>212</RowIndex>
 					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
-					<CellIndexs>46</CellIndexs>
+					<!--<CellIndexs>46</CellIndexs>-->
 					<CellList>
+            <Cell>
+							<!--字段代码与模板中设置的字段保持一致-->
+							<Code>sssss</Code>
+							<!--字段名称含义-->
+							<Name>显示值</Name>
+							<!--模板中单元格开始列号-->
+							<ColIndex>26</ColIndex>
+							<!--所占列数-->
+							<ColCount>10</ColCount>
+						</Cell>
 						<Cell>
 							<!--字段代码与模板中设置的字段保持一致-->
 							<Code>K</Code>
@@ -4609,7 +4619,17 @@
 					<!--模板中单元格开始列号-->
 					<ColIndex>46</ColIndex>
 					<!--所占列数-->
-					<ColCount>12</ColCount>
+					<ColCount>10</ColCount>
+				</Cell>
+        <Cell>
+					<!--字段代码与模板中设置的字段保持一致-->
+					<Code>UNCERTAINTYDEGREE_UNIT</Code>
+					<!--字段名称含义-->
+					<Name>校准结果的不确定度U(k=2)</Name>
+					<!--模板中单元格开始列号-->
+					<ColIndex>56</ColIndex>
+					<!--所占列数-->
+					<ColCount>2</ColCount>
 				</Cell>
 			</CellList>
 		</TableTemplate>
@@ -4818,9 +4838,13 @@
 						</Cell>
 					</CellList>
 				</RowInfo>
-				<RowInfo>
-					<!--表格表头行号-->
+        <RowInfo>
 					<RowIndex>352</RowIndex>
+					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
+				</RowInfo>
+				<RowInfo>
+					<!--表格表头行号-->     
+					<RowIndex>353</RowIndex>
 					<!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
 					<CellIndexs>8,15,22,29,36,43,50</CellIndexs>
 					<CellList>
