@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using System.Linq;
 namespace Langben.Report
 {
     /// <summary>
@@ -104,7 +104,44 @@ namespace Langben.Report
             return theadOfInputAndSelect;//
         }
 
-
+        public static string Getinput(HtmlAgilityPack.HtmlDocument doc)
+        {
+            string errors = "";
+            string xpath = @"//input | //select";
+            var collection = doc.DocumentNode.SelectNodes(xpath);
+            Dictionary<string, string> ids = new Dictionary<string, string>();
+            foreach (var item in collection)
+            {
+                if (string.IsNullOrWhiteSpace(item.Id))
+                {
+                    errors += item.XPath + "|Id没有";
+                }
+                else
+                {
+                    ids.Add(item.Id, item.XPath);
+                }
+                if (item.Name == "input")
+                {
+                    if (item.Attributes["type"] == null)
+                    {
+                        errors += item.XPath + "|type没有";
+                    }
+                    else if ((item.Attributes["type"].Value != "hidden") && item.Attributes["name"] == null)
+                    {
+                        errors += item.XPath + "|name没有";
+                    }
+                }
+                else if (item.Name == "select")
+                {
+                    if (item.Attributes["name"] == null)
+                    {
+                        errors += item.XPath + "|selectname没有";
+                    }
+                }
+            }
+            
+            return errors;
+        }
 
 
 
@@ -114,13 +151,13 @@ namespace Langben.Report
             return doc.DocumentNode.SelectNodes(xpath);
 
 
-        }        
+        }
         public static HtmlAgilityPack.HtmlNodeCollection GetTBodyOfInputAndSelect3(HtmlAgilityPack.HtmlDocument doc)
         {
             string xpath = @"//tabletitlelist/rowinfo[1]/rowindex";
             return doc.DocumentNode.SelectNodes(xpath);
-            
-             
+
+
         }
 
     }
