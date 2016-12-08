@@ -13,665 +13,672 @@
 }
 @using (Html.BeginForm("", "api/METERING_STANDARD_DEVICEApi/Post"))
 {
-    <input type="hidden" id="rowindex" value="1" />
-    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
-        <div class="mt10" id="">
-            <h2 class="f14"> 基本信息 </h2>
-            <div class="clear mt10">
-                <ul>
-                    <li class="fl mr10">
-                        名称：
-                        <input class="my-textbox " value="" name="NAME" id="NAME">
-                    </li>
-                    <li class="fl mr10">
-                        测量范围：
-                        <input class="my-textbox " value="" name="TEST_RANGE" id="TEST_RANGE">
-                    </li>
-                    <li class="fl mr10">
-                        型号：
-                        <input class="my-textbox " value="" name="XINGHAO" id="XINGHAO">
-                    </li>
-                    <li class="fl mr10">
-                        编号：
-                        <input class="my-textbox " value="" name="FACTORY_NUM" id="FACTORY_NUM">
-                    </li>
-                    <li class="fl mr10">
-                        类别：
-                        <select class="my-combobox" name="CATEGORY" id="CATEGORY">
-                            <option value="">请选择 </option>
-                            <option value="标准装置">标准装置 </option>
-                            <option value="标准器">标准器</option>
-                            <option value="中间试品">中间试品</option>
-                        </select>
-                    </li>
-                    <li class="fl mr10">
-                        实验室：
-                        <select class="my-combobox" name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID">
-                            <option value="">请选择 </option>
-                            <option value="数表三相">数表三相 </option>
-                            <option value="数表单相">数表单相</option>
-                            <option value="电能">电能</option>
-                            <option value="指示仪表">指示仪表</option>
-                            <option value="直流仪器">直流仪器</option>
-                            <option value="互感器">互感器</option>
-                        </select>
-                    </li>
-                    <li class="fl mr10" @*style="display:none"*@ id="choicePre"> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="showModalOnly('THESUPERIOR', '../../METERING_STANDARD_DEVICE');">选择上一级</a><span id="checkTHESUPERIOR">
-</span>@Html.HiddenFor(model => model.THESUPERIOR)</li>
-                </ul>
-              
-              
-            </div>
-            <hr>
-            <div class="clearfix"></div>
-            <br>
-            <div id="divtable">
-                <h2 class="f14 mt10"> 不确定度/准确度等级/最大允许误差 </h2>
-                <label>
-                    <input type="radio" name="three" id="three_1" onclick="radio.check()" checked="checked" />
-                    准确度等级
-                </label>
-                <div class="mt10" id="div1">
-                    <ul class="clear mt10">
-                        <li class="fl mr10">
-                            <input class="my-textbox " value="" name="THEACCURACYLEVEL" style="width:200px" placeholder="请输入数值">
-                        </li>
-                        <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
-                    </ul>
+<input type="hidden" id="rowindex" value="1" />
+<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+    @if (ViewBag.IS == "A")
+    {
+    <div class="mt10" id="">
+        <br>
 
-                </div>
-                <br>
-                <label>
-                    <input type="radio" name="three" id="three_2" onclick="radio.check()" />
-                    最大允许误差
-                </label>
-                <div class="clear" id="div2">
-                    <ul class="clear mt10">
-                        <li class="fl mr10">
-                            <select class="my-combobox" name="MAXCATEGORIES">
-                                <option value="">请选择类别</option>
-                                <option value="DCV:">DCV:</option>
-                                <option value="ACV:">ACV:</option>
-                                <option value="DCI:">DCI:</option>
-                                <option value="ACI:">ACI:</option>
-                                <option value="DCR:">DCR:</option>
-                            </select>
-                        </li>
-                        <li class="fl mr10">
-                            ±
-                            <input class="my-textbox " value="" name="MAXVALUE" placeholder="填入数据">
-                            %
-                        </li>
-                        <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
-                    </ul>
-                </div>
-                <br>
-                <label>
-                    <input type="radio" name="three" id="three_3" onclick="radio.check()" />
-                    不确定度
-                </label>
-                <div class="clear" id="div3">
-                    <ul class="clear mt10">
-                        <li class="fl mr10">
-                            <select class="my-combobox" name="THEUNCERTAINTY">
-                                <option value="">请选择类别</option>
-                                <option value="DCV:Urel=">DCV:Urel=</option>
-                                <option value="ACV:Urel=">ACV:Urel=</option>
-                                <option value="DCI:Urel=">DCI:Urel=</option>
-                                <option value="ACI:Urel=">ACI:Urel=</option>
-                                <option value="DCR:Urel=">DCR:Urel=</option>
-                            </select>
-                        </li>
-                        <li class="fl mr10">
-                            <input class="my-textbox " value="" name="THEUNCERTAINTYVALUE" placeholder="填入数据">
-                        </li>
-                        <li class="fl mr10">
-                            <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
-                                <option value="">请选择指数级别</option>
-                                <option value="×10-1">×10-1</option>
-                                <option value="×10-2">×10-2</option>
-                                <option value="×10-3">×10-3</option>
-                                <option value="×10-4">×10-4</option>
-                                <option value="×10-5">×10-5</option>
-                                <option value="×10-6">×10-6</option>
-                            </select>
-                        </li>
-                        <li class="fl mr10">
-                            <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
-                                <option value="">请选择k值</option>
-                                <option value="k=2">k=2</option>
-                                <option value="k=3">k=3</option>
-                            </select>
-                        </li>
-                        <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
-                    </ul>
-                </div>
+        <div id="divtable">
+            <h2 class="f14 mt10"> 不确定度/准确度等级/最大允许误差 </h2>
+            <label>
+                <input type="radio" name="three" id="three_1" onclick="radio.check()" checked="checked" />
+                准确度等级
+            </label>
+            <div class="mt10" id="div1">
+                <ul class="clear mt10">
+                    <li class="fl mr10">
+                        <input class="my-textbox " value="" name="THEACCURACYLEVEL" style="width:200px" placeholder="请输入数值">
+                    </li>
+                    <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                </ul>
+
             </div>
             <br>
-            <h2 class="f14 mt10"> 证书信息 </h2>
-            <div class="mt10" id="div4">
-
+            <label>
+                <input type="radio" name="three" id="three_2" onclick="radio.check()" />
+                最大允许误差
+            </label>
+            <div class="clear" id="div2">
                 <ul class="clear mt10">
                     <li class="fl mr10">
-                        证书发放单位：
-                        <input class="my-textbox " value="" name="CERTIFICATEUNIT">
+                        <select class="my-combobox" name="MAXCATEGORIES">
+                            <option value="">请选择类别</option>
+                            <option value="DCV:">DCV:</option>
+                            <option value="ACV:">ACV:</option>
+                            <option value="DCI:">DCI:</option>
+                            <option value="ACI:">ACI:</option>
+                            <option value="DCR:">DCR:</option>
+                        </select>
                     </li>
                     <li class="fl mr10">
-                        证书编号：
-                        <input class="my-textbox " value="" name="CERTIFICATE_NUM">
-                    </li>
-                    <li class="fl mr10">
-                        有效期至：
-                        <input class="easyui-datebox" value="" name="VALID_TO">
+                        ±
+                        <input class="my-textbox " value="" name="MAXVALUE" placeholder="填入数据">
+                        %
                     </li>
                     <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
                 </ul>
             </div>
-            <h2 class="f14 mt10">不确定参数信息</h2>
+            <br>
             <label>
-                <input type="radio" name="wucha" id="wucha_1" onclick="radio2.check()" checked="checked" />
-                误差来源
+                <input type="radio" name="three" id="three_3" onclick="radio.check()" />
+                不确定度
             </label>
-            <div class="mt10" id="div5">
+            <div class="clear" id="div3">
                 <ul class="clear mt10">
                     <li class="fl mr10">
-                        评定项：
-                        <select class="my-combobox" name="ASSESSMENTITEM">
-                            <option value="">请选择</option>
-                            <option value="三相四线">三相四线</option>
-                            <option value="三相三线">三相三线</option>
+                        <select class="my-combobox" name="THEUNCERTAINTY">
+                            <option value="">请选择类别</option>
+                            <option value="DCV:Urel=">DCV:Urel=</option>
+                            <option value="ACV:Urel=">ACV:Urel=</option>
+                            <option value="DCI:Urel=">DCI:Urel=</option>
+                            <option value="ACI:Urel=">ACI:Urel=</option>
+                            <option value="DCR:Urel=">DCR:Urel=</option>
                         </select>
                     </li>
                     <li class="fl mr10">
-                        误差来源：
-                        <input class="my-textbox " value="" name="ERRORSOURCES">
+                        <input class="my-textbox " value="" name="THEUNCERTAINTYVALUE" placeholder="填入数据">
                     </li>
                     <li class="fl mr10">
-                        误差限：
-                        <input class="my-textbox" value="" name="ERRORLIMITS">
-                    </li>
-                    <li class="fl mr10">
-                        误差限单位：
-                        <select class="my-combobox" name="ERRORLIMITUNIT">
-                            <option value="">请选择</option>
-                            <option value="%">%</option>
+                        <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
+                            <option value="">请选择指数级别</option>
+                            <option value="×10-1">×10-1</option>
+                            <option value="×10-2">×10-2</option>
+                            <option value="×10-3">×10-3</option>
+                            <option value="×10-4">×10-4</option>
+                            <option value="×10-5">×10-5</option>
+                            <option value="×10-6">×10-6</option>
                         </select>
                     </li>
                     <li class="fl mr10">
-                        误差分布状况：
-                        <select class="my-combobox" name="THEERRODISTRIBUTION">
-                            <option value="">请选择</option>
-                            <option value="正态分布">正态分布</option>
-                            <option value="矩形分布">矩形分布</option>
+                        <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
+                            <option value="">请选择k值</option>
+                            <option value="k=2">k=2</option>
+                            <option value="k=3">k=3</option>
                         </select>
-                    </li>
-                    <li class="fl mr10">
-                        k：
-                        <select class="my-combobox" name="KVALE">
-                            <option value="">请选择</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                    </li>
-                    <li class="fl mr10">
-                        备注：
-                        <input class="my-textbox" value="" name="NOTE">
                     </li>
                     <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
                 </ul>
-
-            </div>
-            <label>
-                <input type="radio" name="wucha" id="wucha_2" onclick="radio2.check()" />
-                范围指标
-            </label>
-            <div class="mt10" id="div6">
-                <ul class="clear mt10">
-                    <li class="fl mr10">
-                        评定项：
-                        <select class="my-combobox" name="ASSESSMENTITEM">
-                            <option value="">请选择</option>
-                            <option value="三相四线">三相四线</option>
-                            <option value="三相三线">三相三线</option>
-                        </select>
-                    </li>
-                    <li class="fl mr10">
-                        量程范围起：
-                        <input class="my-textbox " value="" name="THERANGESCOPE">
-                    </li>
-                    <li class="fl mr10">
-                        起单位：
-                        <select class="my-combobox" name="THEUNIT">
-                            <option value="">请选择</option>
-                            <option value="V1">V1</option>
-                        </select>
-                    </li>
-                    <li class="fl mr10">
-                        起关系：
-                        <select class="my-combobox" name="THERELATIONSHIP">
-                            <option value="">请选择</option>
-                            <option value="<"><</option>
-                            <option value=">">></option>
-                            <option value="<="><=</option>
-                            <option value=">=">>=</option>
-                        </select>
-                    </li>
-                    <li class="fl mr10">
-                        量程范围止：
-                        <input class="my-textbox " value="" name="ENDRANGESCOPE">
-                    </li>
-                    <li class="fl mr10">
-                        止单位：
-                        <select class="my-combobox" name="ENDUNIT">
-                            <option value="">请选择</option>
-                            <option value="V2">V2</option>
-                        </select>
-                    </li>
-                    <li class="fl mr10">
-                        止关系：
-                        <select class="my-combobox" name="ENDRELATIONSHIP">
-                            <option value="">请选择</option>
-                            <option value="<"><</option>
-                            <option value=">">></option>
-                            <option value="<="><=</option>
-                            <option value=">=">>=</option>
-                        </select>
-                    </li>
-                    <li class="fl mr10">
-                        频率范围起：
-                        <input class="my-textbox " value="" name="THEFREQUENCY">
-                    </li>
-                    <li class="fl mr10">
-                        起单位：
-                        <select class="my-combobox" name="THEUNITFREQUENCY">
-                            <option value="">请选择</option>
-                            <option value="V3">V3</option>
-                        </select>
-                    </li>
-                    <li class="fl mr10">
-                        频率起关系：
-                        <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
-                            <option value="">请选择</option>
-                            <option value="<"><</option>
-                            <option value=">">></option>
-                            <option value="<="><=</option>
-                            <option value=">=">>=</option>
-                        </select>
-                    </li>
-                    <li class="fl mr10">
-                        频率范围止：
-                        <input class="my-textbox " value="" name="ENDFREQUENCY">
-                    </li>
-                    <li class="fl mr10">
-                        频率止单位：
-                        <select class="my-combobox" name="ENDUNITFREQUENCY">
-                            <option value="">请选择</option>
-                            <option value="V4">V4</option>
-                        </select>
-                    </li>
-                    <li class="fl mr10">
-                        频率止关系：
-                        <select class="my-combobox" name="ENDRELATIONSHIPFREQUENCY">
-                            <option value="">请选择</option>
-                            <option value="<"><</option>
-                            <option value=">">></option>
-                            <option value="<="><=</option>
-                            <option value=">=">>=</option>
-                        </select>
-                    </li>
-                    <li class="fl mr10">
-                        指标1：
-                        <input class="my-textbox " value="" name="INDEX1">
-
-                    </li>
-                    <li class="fl mr10">
-                        指标1单位：
-                        <select class="my-combobox" name="INDEX1UNIT">
-                            <option value="">请选择</option>
-                            <option value="V5">V5</option>
-                        </select>
-                    </li>
-                    <li class="fl mr10">
-                        指标2：
-                        <input class="my-textbox " value="" name="ENDUNITFREQUENCY">
-                    </li>
-                    <li class="fl mr10">
-                        指标2单位：
-                        <select class="my-combobox" name="INDEX2UNIT">
-                            <option value="">请选择</option>
-                            <option value="V6">V6</option>
-                        </select>
-                    </li>
-                    <li class="fl mr10">
-                        备注：
-                        <input class="my-textbox" value="" name="NOTE">
-                    </li>
-                    <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
-                </ul>
-
             </div>
         </div>
-        <div class="mt10"><a href="javascript:;" class="easyui-linkbutton" onclick="baocun()">保存</a> <a href="javascript:;" class="easyui-linkbutton" onclick="javascript: window.location.href = '/METERING_STANDARD_DEVICE/Index';">返回</a></div>
+        <br>
+        <h2 class="f14 mt10"> 证书信息 </h2>
+        <div class="mt10" id="div4">
+
+            <ul class="clear mt10">
+                <li class="fl mr10">
+                    证书发放单位：
+                    <input class="my-textbox " value="" name="CERTIFICATEUNIT">
+                </li>
+                <li class="fl mr10">
+                    证书编号：
+                    <input class="my-textbox " value="" name="CERTIFICATE_NUM">
+                </li>
+                <li class="fl mr10">
+                    有效期至(如:2016-01-01)：
+                    <input class="my-textbox" value="" name="VALID_TO" onblur="jaoyanshijian(this)">
+                </li>
+                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+            </ul>
+        </div>
+
     </div>
-    <script>
-        $(function () {
-            $("#state").bind('change', function (obj) {
-                (($(this).val() == 1) ? $('#choicePre').show() : $('#choicePre').hide());
+    }
+    else if (ViewBag.IS == "U")
+    {
+    <div class="mt10" id="">
+        <h2 class="f14 mt10">不确定参数信息</h2>
+        <label>
+            <input type="radio" name="wucha" id="wucha_1" onclick="radio2.check()" checked="checked" />
+            误差来源
+        </label>
+        <div class="mt10" id="div5">
+            <ul class="clear mt10">
+                <li class="fl mr10">
+                    评定项：
+                    <select class="my-combobox" name="ASSESSMENTITEM">
+                        <option value="">请选择</option>
+                        <option value="三相四线">三相四线</option>
+                        <option value="三相三线">三相三线</option>
+                    </select>
+                </li>
+                <li class="fl mr10">
+                    误差来源：
+                    <input class="my-textbox " value="" name="ERRORSOURCES">
+                </li>
+                <li class="fl mr10">
+                    误差限：
+                    <input class="my-textbox" value="" name="ERRORLIMITS">
+                </li>
+                <li class="fl mr10">
+                    误差限单位：
+                    <select class="my-combobox" name="ERRORLIMITUNIT">
+                        <option value="">请选择</option>
+                        <option value="%">%</option>
+                    </select>
+                </li>
+                <li class="fl mr10">
+                    误差分布状况：
+                    <select class="my-combobox" name="THEERRODISTRIBUTION">
+                        <option value="">请选择</option>
+                        <option value="正态分布">正态分布</option>
+                        <option value="矩形分布">矩形分布</option>
+                    </select>
+                </li>
+                <li class="fl mr10">
+                    k：
+                    <select class="my-combobox" name="KVALE">
+                        <option value="">请选择</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </li>
+                <li class="fl mr10">
+                    备注：
+                    <input class="my-textbox" value="" name="NOTE">
+                </li>
+                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+            </ul>
 
-            }); 0
-        })
-        var radio = {
-            check: function () {
-                var obj = $("input[name='three']:checked");
-                var id = obj.attr("id");
-                switch (id) {
-                    case ("three_1"):
-                        var row = $("#div2 ul");
-                        var row2 = $("#div3 ul");
-                        row.each(function () {
-                            if ($("#div2 ul").length > 1)
-                                $(this).remove();
-                            else
-                                $("#div2").find(":text,:selected,select,textarea").each(function () {
-                                    $(this).val("");
-                                    //$(this).combobox('select', "");
-                                })
-                        })
-                        row2.each(function () {
-                            if ($("#div3 ul").length > 1)
-                                $(this).remove();
-                            else
-                                $("#div3").find(":text,:selected,select,textarea").each(function () {
-                                    $(this).val("");
-                                    //$(this).combobox('select', "");
-                                })
-                        })
-                        break
-                    case ("three_2"):
-                        var row = $("#div1 ul");
-                        var row2 = $("#div3 ul");
-                        row.each(function () {
-                            if ($("#div1 ul").length > 1)
-                                $(this).remove();
-                            else
-                                $("#div1").find(":text,:selected,select,textarea").each(function () {
-                                    $(this).val("");
-                                    //$(this).combobox('select', "");
-                                })
-                        })
-                        row2.each(function () {
-                            if ($("#div3 ul").length > 1)
-                                $(this).remove();
-                            else
-                                $("#div3").find(":text,:selected,select,textarea").each(function () {
-                                    $(this).val("");
-                                    //$(this).combobox('select', "");
-                                })
-                        })
-                        break
-                    case ("three_3"):
-                        var row = $("#div2 ul");
-                        var row2 = $("#div1 ul");
-                        row.each(function () {
-                            if ($("#div2 ul").length > 1)
-                                $(this).remove();
-                            else
-                                $("#div2").find(":text,:selected,select,textarea").each(function () {
-                                    $(this).val("");
-                                    //$(this).combobox('select', "");
-                                })
-                        })
-                        row2.each(function () {
-                            if ($("#div1 ul").length > 1)
-                                $(this).remove();
-                            else
-                                $("#div1").find(":text,:selected,select,textarea").each(function () {
-                                    $(this).val("");
-                                    //$(this).combobox('select', "");
-                                })
-                        })
-                        break
-                    default:
+        </div>
+        <label>
+            <input type="radio" name="wucha" id="wucha_2" onclick="radio2.check()" />
+            范围指标
+        </label>
+        <div class="mt10" id="div6">
+            <ul class="clear mt10">
+                <li class="fl mr10">
+                    评定项：
+                    <select class="my-combobox" name="ASSESSMENTITEM">
+                        <option value="">请选择</option>
+                        <option value="三相四线">三相四线</option>
+                        <option value="三相三线">三相三线</option>
+                    </select>
+                </li>
+                <li class="fl mr10">
+                    量程范围起：
+                    <input class="my-textbox " value="" name="THERANGESCOPE">
+                </li>
+                <li class="fl mr10">
+                    起单位：
+                    <select class="my-combobox" name="THEUNIT">
+                        <option value="">请选择</option>
+                        <option value="V1">V1</option>
+                    </select>
+                </li>
+                <li class="fl mr10">
+                    起关系：
+                    <select class="my-combobox" name="THERELATIONSHIP">
+                        <option value="">请选择</option>
+                        <option value="<"><</option>
+                        <option value=">">></option>
+                        <option value="<="><=</option>
+                        <option value=">=">>=</option>
+                    </select>
+                </li>
+                <li class="fl mr10">
+                    量程范围止：
+                    <input class="my-textbox " value="" name="ENDRANGESCOPE">
+                </li>
+                <li class="fl mr10">
+                    止单位：
+                    <select class="my-combobox" name="ENDUNIT">
+                        <option value="">请选择</option>
+                        <option value="V2">V2</option>
+                    </select>
+                </li>
+                <li class="fl mr10">
+                    止关系：
+                    <select class="my-combobox" name="ENDRELATIONSHIP">
+                        <option value="">请选择</option>
+                        <option value="<"><</option>
+                        <option value=">">></option>
+                        <option value="<="><=</option>
+                        <option value=">=">>=</option>
+                    </select>
+                </li>
+                <li class="fl mr10">
+                    频率范围起：
+                    <input class="my-textbox " value="" name="THEFREQUENCY">
+                </li>
+                <li class="fl mr10">
+                    起单位：
+                    <select class="my-combobox" name="THEUNITFREQUENCY">
+                        <option value="">请选择</option>
+                        <option value="V3">V3</option>
+                    </select>
+                </li>
+                <li class="fl mr10">
+                    频率起关系：
+                    <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
+                        <option value="">请选择</option>
+                        <option value="<"><</option>
+                        <option value=">">></option>
+                        <option value="<="><=</option>
+                        <option value=">=">>=</option>
+                    </select>
+                </li>
+                <li class="fl mr10">
+                    频率范围止：
+                    <input class="my-textbox " value="" name="ENDFREQUENCY">
+                </li>
+                <li class="fl mr10">
+                    频率止单位：
+                    <select class="my-combobox" name="ENDUNITFREQUENCY">
+                        <option value="">请选择</option>
+                        <option value="V4">V4</option>
+                    </select>
+                </li>
+                <li class="fl mr10">
+                    频率止关系：
+                    <select class="my-combobox" name="ENDRELATIONSHIPFREQUENCY">
+                        <option value="">请选择</option>
+                        <option value="<"><</option>
+                        <option value=">">></option>
+                        <option value="<="><=</option>
+                        <option value=">=">>=</option>
+                    </select>
+                </li>
+                <li class="fl mr10">
+                    指标1：
+                    <input class="my-textbox " value="" name="INDEX1">
 
-                }
-                //$("#divtable .easyui-linkbutton").linkbutton("disable");
-                //$(obj).next('div').children(1).find('li a').linkbutton("enable");
-                //$(".mt10").next('div').children(9).find('li a').linkbutton("enable");
-                //$(".mt10").eq(12).find('a').linkbutton("enable");
+                </li>
+                <li class="fl mr10">
+                    指标1单位：
+                    <select class="my-combobox" name="INDEX1UNIT">
+                        <option value="">请选择</option>
+                        <option value="V5">V5</option>
+                    </select>
+                </li>
+                <li class="fl mr10">
+                    指标2：
+                    <input class="my-textbox " value="" name="ENDUNITFREQUENCY">
+                </li>
+                <li class="fl mr10">
+                    指标2单位：
+                    <select class="my-combobox" name="INDEX2UNIT">
+                        <option value="">请选择</option>
+                        <option value="V6">V6</option>
+                    </select>
+                </li>
+                <li class="fl mr10">
+                    备注：
+                    <input class="my-textbox" value="" name="NOTE">
+                </li>
+                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+            </ul>
+        </div>
+    </div>
+    }
+
+    <div class="mt10"><a href="javascript:;" class="easyui-linkbutton" onclick="baocun()">保存</a> <a href="javascript:;" class="easyui-linkbutton" onclick="javascript: window.location.href = '/METERING_STANDARD_DEVICE/Index';">返回</a></div>
+</div>
+<script>
+    //$(function () {
+    //    $("#state").bind('change', function (obj) {
+    //        (($(this).val() == 1) ? $('#choicePre').show() : $('#choicePre').hide());
+
+    //    }); 0
+    //})
+    var radio = {
+        check: function () {
+            var obj = $("input[name='three']:checked");
+            var id = obj.attr("id");
+            switch (id) {
+                case ("three_1"):
+                    var row = $("#div2 ul");
+                    var row2 = $("#div3 ul");
+                    row.each(function () {
+                        if ($("#div2 ul").length > 1)
+                            $(this).remove();
+                        else
+                            $("#div2").find(":text,:selected,select,textarea").each(function () {
+                                $(this).val("");
+                                //$(this).combobox('select', "");
+                            })
+                    })
+                    row2.each(function () {
+                        if ($("#div3 ul").length > 1)
+                            $(this).remove();
+                        else
+                            $("#div3").find(":text,:selected,select,textarea").each(function () {
+                                $(this).val("");
+                                //$(this).combobox('select', "");
+                            })
+                    })
+                    break
+                case ("three_2"):
+                    var row = $("#div1 ul");
+                    var row2 = $("#div3 ul");
+                    row.each(function () {
+                        if ($("#div1 ul").length > 1)
+                            $(this).remove();
+                        else
+                            $("#div1").find(":text,:selected,select,textarea").each(function () {
+                                $(this).val("");
+                                //$(this).combobox('select', "");
+                            })
+                    })
+                    row2.each(function () {
+                        if ($("#div3 ul").length > 1)
+                            $(this).remove();
+                        else
+                            $("#div3").find(":text,:selected,select,textarea").each(function () {
+                                $(this).val("");
+                                //$(this).combobox('select', "");
+                            })
+                    })
+                    break
+                case ("three_3"):
+                    var row = $("#div2 ul");
+                    var row2 = $("#div1 ul");
+                    row.each(function () {
+                        if ($("#div2 ul").length > 1)
+                            $(this).remove();
+                        else
+                            $("#div2").find(":text,:selected,select,textarea").each(function () {
+                                $(this).val("");
+                                //$(this).combobox('select', "");
+                            })
+                    })
+                    row2.each(function () {
+                        if ($("#div1 ul").length > 1)
+                            $(this).remove();
+                        else
+                            $("#div1").find(":text,:selected,select,textarea").each(function () {
+                                $(this).val("");
+                                //$(this).combobox('select', "");
+                            })
+                    })
+                    break
+                default:
 
             }
-        }
-        var radio2 = {
-            check: function () {
-                var obj = $("input[name='wucha']:checked");
-                var id = obj.attr("id");
-                switch (id) {
-                    case ("wucha_1"):
-                        var row = $("#div6 ul");
-                        row.each(function () {
-                            if ($("#div6 ul").length > 1)
-                                $(this).remove();
-                            else
-                                $("#div6").find(":text,:selected,select,textarea").each(function () {
-                                    $(this).val("");
-                                    //$(this).combobox('select', "");
-                                })
-                        })
-                        break
-                    case ("wucha_2"):
-                        var row = $("#div5 ul");
-                        row.each(function () {
-                            if ($("#div5 ul").length > 1)
-                                $(this).remove();
-                            else
-                                $("#div5").find(":text,:selected,select,textarea").each(function () {
-                                    $(this).val("");
-                                    //$(this).combobox('select', "");
-                                })
-                        })
-                        break
-                    default:
 
-                }
-                //$("#divtable .easyui-linkbutton").linkbutton("disable");
-                //$(obj).next('div').children(1).find('li a').linkbutton("enable");
-                //$(".mt10").next('div').children(9).find('li a').linkbutton("enable");
-                //$(".mt10").eq(12).find('a').linkbutton("enable");
+
+        }
+    }
+    var radio2 = {
+        check: function () {
+            var obj = $("input[name='wucha']:checked");
+            var id = obj.attr("id");
+            switch (id) {
+                case ("wucha_1"):
+                    var row = $("#div6 ul");
+                    row.each(function () {
+                        if ($("#div6 ul").length > 1)
+                            $(this).remove();
+                        else
+                            $("#div6").find(":text,:selected,select,textarea").each(function () {
+                                $(this).val("");
+                                //$(this).combobox('select', "");
+                            })
+                    })
+                    break
+                case ("wucha_2"):
+                    var row = $("#div5 ul");
+                    row.each(function () {
+                        if ($("#div5 ul").length > 1)
+                            $(this).remove();
+                        else
+                            $("#div5").find(":text,:selected,select,textarea").each(function () {
+                                $(this).val("");
+                                //$(this).combobox('select', "");
+                            })
+                    })
+                    break
+                default:
 
             }
-        }
-        var linkButton = {
-            add: function (obj) {
-                var newRow = " <ul class=\"clear mt10\">" + $(obj).parents('div ul').html() + "</ul>";
-                var parDiv = $(obj).parents('div ul').parent()
-                var newobj = $(parDiv).append(newRow);
+            //$("#divtable .easyui-linkbutton").linkbutton("disable");
+            //$(obj).next('div').children(1).find('li a').linkbutton("enable");
+            //$(".mt10").next('div').children(9).find('li a').linkbutton("enable");
+            //$(".mt10").eq(12).find('a').linkbutton("enable");
 
-                // $.parser.parse();
-            },
-            del: function (obj) {
-                var row = $(obj).parents('div ul');
-                if ($(row).parent().children().length > 1)
-                    $(row).remove();
-                else
-                    alert('就剩一行了你还删除呀？');
-            }
         }
+    }
+    var linkButton = {
+        add: function (obj) {
+            var newRow = " <ul class=\"clear mt10\">" + $(obj).parents('div ul').html() + "</ul>";
+            var parDiv = $(obj).parents('div ul').parent()
+            var newobj = $(parDiv).append(newRow);
 
-    </script>
+            // $.parser.parse();
+        },
+        del: function (obj) {
+            var row = $(obj).parents('div ul');
+            if ($(row).parent().children().length > 1)
+                $(row).remove();
+            else
+                alert('就剩一行了你还删除呀？');
+        }
+    }
+
+</script>
 
 
 }
 <script type="text/javascript">
+    //时间校验
+    function jaoyanshijian(e) {
+        var zhi = $(e).val();
+        if (zhi != "") {
+            var regu = "(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)";
+            var re = new RegExp(regu);           
+            if (!re.test(zhi)) {
+                $.messager.alert('操作提示', "时间格式不对!", 'info');
+                return false;
+            }
+        }
+        
+    }
     //保存
     function baocun() {
-        var METERING_STANDARD_DEVICE = new Object();//标准装置/计量标准器信息
-        var myArray = null;
-        var myArray2 = null;
-        var myArray3 = null;
-        var myArray4 = null;
-        var myArray5 = null;
-        var myArray6 = null;
-        var obj = $("input[name='three']:checked");
-        var id = obj.attr("id");
-        switch (id) {
-            case ("three_1"):
-                $("#div1").find("ul").each(function () {
-                    var THEACCURACYLEVEL = $(this).find("li :input").eq(0).val();
-                    if (THEACCURACYLEVEL != null)
-                        myArray = new Array()
-                    myArray.push({ THEACCURACYLEVEL: THEACCURACYLEVEL });
-                })
-                break
-            case ("three_2"):
-                $("#div2").find("ul").each(function () {
-                    var MAXCATEGORIES = $(this).find("li :selected").eq(0).val();
-                    var MAXVALUE = $(this).find("li :input").eq(1).val();
-                    if (MAXCATEGORIES != null || MAXVALUE != null)
-                        myArray2 = new Array()
-                    myArray2.push({ MAXCATEGORIES: MAXCATEGORIES, MAXVALUE: MAXVALUE });
-                })
-                break
-            case ("three_3"):
-                $("#div3").find("ul").each(function () {
-                    var THEUNCERTAINTY = $(this).find("li :selected").eq(0).val();
-                    var THEUNCERTAINTYVALUE = $(this).find("li :input").eq(1).val();
-                    var THEUNCERTAINTYNDEXL = $(this).find("li :selected").eq(1).val();
-                    var THEUNCERTAINTYVALUEK = $(this).find("li :selected").eq(2).val();
-                    if (THEUNCERTAINTY != null || THEUNCERTAINTYVALUE != null || THEUNCERTAINTYNDEXL != null || THEUNCERTAINTYVALUEK != null)
-                        myArray3 = new Array()
-                    myArray3.push({ THEUNCERTAINTY: THEUNCERTAINTY, THEUNCERTAINTYVALUE: THEUNCERTAINTYVALUE, THEUNCERTAINTYNDEXL: THEUNCERTAINTYNDEXL, THEUNCERTAINTYVALUEK: THEUNCERTAINTYVALUEK });
-                })
-                break
-            default:
-        }
-        //*******************************************不确定度
-        var obj2 = $("input[name='wucha']:checked");
-        var id2 = obj2.attr("id");
-        switch (id2) {
-            case ("wucha_1"):
-                $("#div5").find("ul").each(function () {
-                    var ASSESSMENTITEM = $(this).find("li :selected").eq(0).val();//评定项
-                    var ERRORSOURCES = $(this).find("li :input").eq(1).val();//误差来源
-                    var THEUNIT = $(this).find("li :input").eq(2).val();//误差限
-                    var ERRORLIMITUNIT = $(this).find("li :selected").eq(1).val();//误差限单位
-                    var THEERRODISTRIBUTION = $(this).find("li :selected").eq(2).val();//误差分布状况
-                    var KVALE = $(this).find("li :selected").eq(3).val();//K
-                    var NOTE = $(this).find("li :input").eq(6).val();//备注
-                    if (ASSESSMENTITEM != null || ERRORSOURCES != null || THEUNIT != null || ERRORLIMITUNIT != null || THEERRODISTRIBUTION != null || KVALE != null || NOTE != null)
-                        myArray5 = new Array()
-                    myArray5.push({ ASSESSMENTITEM: ASSESSMENTITEM, ERRORSOURCES: ERRORSOURCES, THEUNIT: THEUNIT, ERRORLIMITUNIT: ERRORLIMITUNIT, THEERRODISTRIBUTION: THEERRODISTRIBUTION, KVALE: KVALE, NOTE: NOTE });
-                })
-                break
-            case ("wucha_2"):
-                $("#div6").find("ul").each(function () {
-                    var ASSESSMENTITEM = $(this).find("li :selected").eq(0).val();//评定项
-                    var THERANGESCOPE = $(this).find("li :input").eq(1).val();//量程范围起
-                    var ERRORLIMITS = $(this).find("li :selected").eq(1).val();//起单位
-                    var THERELATIONSHIP = $(this).find("li :selected").eq(2).val();//起关系
-                    var ENDRANGESCOPE = $(this).find("li :input").eq(4).val();//量程范围止
-                    var ENDUNIT = $(this).find("li :selected").eq(3).val();//止单位
-                    var ENDRELATIONSHIP = $(this).find("li :selected").eq(4).val();//止关系
-                    var THEFREQUENCY = $(this).find("li :input").eq(7).val();//频率范围起
-                    var THEUNITFREQUENCY = $(this).find("li :selected").eq(5).val();//起单位
-                    var THERELATIONSHIPFREQUENCY = $(this).find("li :selected").eq(6).val();//频率起关系
-                    var ENDFREQUENCY = $(this).find("li :input").eq(10).val();//频率范围止
-                    var ENDUNITFREQUENCY = $(this).find("li :selected").eq(7).val();//频率止单位
-                    var ENDRELATIONSHIPFREQUENCY = $(this).find("li :selected").eq(8).val();//频率止关系
-                    var INDEX1 = $(this).find("li :input").eq(13).val();//指标1
-                    var INDEX1UNIT = $(this).find("li :selected").eq(9).val();//指标1单位
-                    var INDEX2 = $(this).find("li :input").eq(15).val();//指标2
-                    var INDEX2UNIT = $(this).find("li :selected").eq(10).val();//指标2单位
-                    var NOTE = $(this).find("li :input").eq(17).val();//备注
-                    if (ASSESSMENTITEM != null || THERANGESCOPE != null || ERRORLIMITS != null || THERELATIONSHIP != null || ENDRANGESCOPE != null || ENDUNIT != null || ENDRELATIONSHIP != null || THEFREQUENCY != null || THEUNITFREQUENCY != null || THERELATIONSHIPFREQUENCY != null || ENDFREQUENCY != null || ENDUNITFREQUENCY != null || ENDRELATIONSHIPFREQUENCY != null || INDEX1 != null || INDEX1UNIT != null || INDEX2 != null || INDEX2UNIT != null || NOTE != null)
-                        myArray6 = new Array()
-                    myArray6.push({ ASSESSMENTITEM: ASSESSMENTITEM, THERANGESCOPE: THERANGESCOPE, ERRORLIMITS: ERRORLIMITS, THERELATIONSHIP: THERELATIONSHIP, ENDRANGESCOPE: ENDRANGESCOPE, ENDUNIT: ENDUNIT, ENDRELATIONSHIP: ENDRELATIONSHIP, THEFREQUENCY: THEFREQUENCY, THEUNITFREQUENCY: THEUNITFREQUENCY, THERELATIONSHIPFREQUENCY: THERELATIONSHIPFREQUENCY, ENDFREQUENCY: ENDFREQUENCY, ENDUNITFREQUENCY: ENDUNITFREQUENCY, ENDRELATIONSHIPFREQUENCY: ENDRELATIONSHIPFREQUENCY, INDEX1: INDEX1, INDEX1UNIT: INDEX1UNIT, INDEX2: INDEX2, INDEX2UNIT: INDEX2UNIT, NOTE: NOTE });
-                })
-                break
-            default:
-        }
-        //*****************************************************
-        $("#div4").find("ul").each(function () {
-            var CERTIFICATEUNIT = $(this).find("li :input").eq(0).val();
-            var CERTIFICATE_NUM = $(this).find("li :input").eq(1).val();
-            var VALID_TO = $(this).find("li :input").eq(2).datebox('getValue');
-            //校验时间格式是否正确
-            if (CERTIFICATEUNIT != "" || CERTIFICATE_NUM != "" || VALID_TO != "")
-                myArray4 = new Array();
-            myArray4.push({ CERTIFICATEUNIT: CERTIFICATEUNIT, CERTIFICATE_NUM: CERTIFICATE_NUM, VALID_TO: VALID_TO });
-        })
-        METERING_STANDARD_DEVICE.NAME = $("#NAME").val();//名称
-        METERING_STANDARD_DEVICE.TEST_RANGE = $("#TEST_RANGE").val();//测量范围
-        METERING_STANDARD_DEVICE.XINGHAO = $("#XINGHAO").val();//型号
-        METERING_STANDARD_DEVICE.FACTORY_NUM = $("#FACTORY_NUM").val();//编号
-        METERING_STANDARD_DEVICE.CATEGORY = $("#CATEGORY  option:selected").val();//类别
-        METERING_STANDARD_DEVICE.UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID  option:selected").val();//实验室
-        METERING_STANDARD_DEVICE.THESUPERIOR = $("#THESUPERIOR").val();//上级
-        if (myArray != null)
-            METERING_STANDARD_DEVICE.ALLOWABLE_ERROR = myArray;
-        else if (myArray2 != null)
-            METERING_STANDARD_DEVICE.ALLOWABLE_ERROR = myArray2;
-        else if (myArray3 != null)
-            METERING_STANDARD_DEVICE.ALLOWABLE_ERROR = myArray3;
-        METERING_STANDARD_DEVICE.METERING_STANDARD_DEVICE_CHECK = myArray4;
-        if (myArray5 != null)
-            METERING_STANDARD_DEVICE.UNCERTAINTYTABLE = myArray5;
-        else if (myArray6 != null)
-            METERING_STANDARD_DEVICE.UNCERTAINTYTABLE = myArray6;
-        //调用后台方法
-        if (ifshuju(METERING_STANDARD_DEVICE)) {
-            $.ajax({
-                url: "/api/METERING_STANDARD_DEVICEApi/Post",
-                type: "Post",
-                data: METERING_STANDARD_DEVICE,
-                dataType: "json",
-
-                success: function (data) {
-                    if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
-                    else if (data.Code == 1) {
-                        $.messager.alert('操作提示', "新增成功！", 'info');
-                        return false;
-                    }
-                    else {
-                        if ($.messager) {
-                            $.messager.defaults.ok = '继续';
-                            $.messager.defaults.cancel = '返回';
-
-                            $.messager.confirm('操作提示', "新增失败！", function (r) {
-                                if (!r) {
-                                    window.location.href = 'javascript:history.go(-1)';
-                                }
-                            });
+        if ("@ViewBag.IS" == "A") {
+          
+            var myArray = null;
+            var myArray2 = null;
+            var myArray3 = null;
+            var myArray4 = null;
+            var METERING_STANDARD_DEVICE = new Object();
+            var obj = $("input[name='three']:checked");
+            var id = obj.attr("id");
+            switch (id) {
+                case ("three_1"):
+                    myArray = new Array()
+                    $("#div1").find("ul").each(function () {
+                        
+                        var THEACCURACYLEVEL = $(this).find("li :input").eq(0).val();
+                        if (THEACCURACYLEVEL != null){                            
+                            myArray.push({ THEACCURACYLEVEL: THEACCURACYLEVEL });
                         }
-                    }
+                    })
+                    break
+                case ("three_2"):
+                    myArray2 = new Array()
+                    $("#div2").find("ul").each(function () {                     
+                        var MAXCATEGORIES = $(this).find("li :selected").eq(0).val();
+                        var MAXVALUE = $(this).find("li :input").eq(1).val();
+                        if (MAXCATEGORIES != null || MAXVALUE != null){                           
+                            myArray2.push({ MAXCATEGORIES: MAXCATEGORIES, MAXVALUE: MAXVALUE });
+                        }
+                    })
+                    break
+                case ("three_3"):
+                    myArray3 = new Array()
+                    $("#div3").find("ul").each(function () {
+                        var THEUNCERTAINTY = $(this).find("li :selected").eq(0).val();
+                        var THEUNCERTAINTYVALUE = $(this).find("li :input").eq(1).val();
+                        var THEUNCERTAINTYNDEXL = $(this).find("li :selected").eq(1).val();
+                        var THEUNCERTAINTYVALUEK = $(this).find("li :selected").eq(2).val();
+                        if (THEUNCERTAINTY != null || THEUNCERTAINTYVALUE != null || THEUNCERTAINTYNDEXL != null || THEUNCERTAINTYVALUEK != null){
+                            
+                        myArray3.push({ THEUNCERTAINTY: THEUNCERTAINTY, THEUNCERTAINTYVALUE: THEUNCERTAINTYVALUE, THEUNCERTAINTYNDEXL: THEUNCERTAINTYNDEXL, THEUNCERTAINTYVALUEK: THEUNCERTAINTYVALUEK });
+                        }
+                    })
+                    break
+                default:
+            }
+            //证书
+            debugger
+            myArray4 = new Array();
+            $("#div4").find("ul").each(function () {
+                debugger
+                var CERTIFICATEUNIT = $(this).find("li :input").eq(0).val();
+                var CERTIFICATE_NUM = $(this).find("li :input").eq(1).val();
+                var VALID_TO = $(this).find("li :input").eq(2).val();
+                //校验时间格式是否正确
+                if (CERTIFICATEUNIT != "" || CERTIFICATE_NUM != "" || VALID_TO != ""){                  
+                    myArray4.push({ CERTIFICATEUNIT: CERTIFICATEUNIT, CERTIFICATE_NUM: CERTIFICATE_NUM, VALID_TO: VALID_TO });
                 }
             })
-        }
+            if (myArray != null)
+                METERING_STANDARD_DEVICE.ALLOWABLE_ERROR = myArray;
+            else if (myArray2 != null)
+                METERING_STANDARD_DEVICE.ALLOWABLE_ERROR = myArray2;
+            else if (myArray3 != null)
+                METERING_STANDARD_DEVICE.ALLOWABLE_ERROR = myArray3;
+            METERING_STANDARD_DEVICE.METERING_STANDARD_DEVICE_CHECK = myArray4;
+            METERING_STANDARD_DEVICE.ID = "@ViewBag.METERING_STANDARD_DEVICEID";
+            debugger
+            //调用后台方法
+            if (ifshujuA(METERING_STANDARD_DEVICE)) {
+                //if (false) {
+                $.ajax({
+                    url: "/api/ALLOWABLE_ERRORApi/Post",
+                    type: "Post",
+                    data: METERING_STANDARD_DEVICE,
+                    dataType: "json",
 
+                    success: function (data) {
+                        if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                        else if (data.Code == 1) {
+                            $.messager.alert('操作提示', "新增成功！", 'info');
+                            return false;
+                        }
+                        else {
+                            if ($.messager) {
+                                $.messager.defaults.ok = '继续';
+                                $.messager.defaults.cancel = '返回';
+
+                                $.messager.confirm('操作提示', "新增失败！", function (r) {
+                                    if (!r) {
+                                        window.location.href = 'javascript:history.go(-1)';
+                                    }
+                                });
+                            }
+                        }
+                    }
+                })
+            }
+    }
+        else if ("@ViewBag.IS" == "U") {
+            var myArray5 = null;
+            var myArray6 = null;
+
+            //*******************************************不确定度
+            var obj2 = $("input[name='wucha']:checked");
+            var id2 = obj2.attr("id");
+            switch (id2) {
+                case ("wucha_1"):
+                    $("#div5").find("ul").each(function () {
+                        var ASSESSMENTITEM = $(this).find("li :selected").eq(0).val();//评定项
+                        var ERRORSOURCES = $(this).find("li :input").eq(1).val();//误差来源
+                        var THEUNIT = $(this).find("li :input").eq(2).val();//误差限
+                        var ERRORLIMITUNIT = $(this).find("li :selected").eq(1).val();//误差限单位
+                        var THEERRODISTRIBUTION = $(this).find("li :selected").eq(2).val();//误差分布状况
+                        var KVALE = $(this).find("li :selected").eq(3).val();//K
+                        var NOTE = $(this).find("li :input").eq(6).val();//备注
+                        if (ASSESSMENTITEM != null || ERRORSOURCES != null || THEUNIT != null || ERRORLIMITUNIT != null || THEERRODISTRIBUTION != null || KVALE != null || NOTE != null)
+                            myArray5 = new Array()
+                        myArray5.push({ ASSESSMENTITEM: ASSESSMENTITEM, ERRORSOURCES: ERRORSOURCES, THEUNIT: THEUNIT, ERRORLIMITUNIT: ERRORLIMITUNIT, THEERRODISTRIBUTION: THEERRODISTRIBUTION, KVALE: KVALE, NOTE: NOTE });
+                    })
+                    break
+                case ("wucha_2"):
+                    $("#div6").find("ul").each(function () {
+                        var ASSESSMENTITEM = $(this).find("li :selected").eq(0).val();//评定项
+                        var THERANGESCOPE = $(this).find("li :input").eq(1).val();//量程范围起
+                        var ERRORLIMITS = $(this).find("li :selected").eq(1).val();//起单位
+                        var THERELATIONSHIP = $(this).find("li :selected").eq(2).val();//起关系
+                        var ENDRANGESCOPE = $(this).find("li :input").eq(4).val();//量程范围止
+                        var ENDUNIT = $(this).find("li :selected").eq(3).val();//止单位
+                        var ENDRELATIONSHIP = $(this).find("li :selected").eq(4).val();//止关系
+                        var THEFREQUENCY = $(this).find("li :input").eq(7).val();//频率范围起
+                        var THEUNITFREQUENCY = $(this).find("li :selected").eq(5).val();//起单位
+                        var THERELATIONSHIPFREQUENCY = $(this).find("li :selected").eq(6).val();//频率起关系
+                        var ENDFREQUENCY = $(this).find("li :input").eq(10).val();//频率范围止
+                        var ENDUNITFREQUENCY = $(this).find("li :selected").eq(7).val();//频率止单位
+                        var ENDRELATIONSHIPFREQUENCY = $(this).find("li :selected").eq(8).val();//频率止关系
+                        var INDEX1 = $(this).find("li :input").eq(13).val();//指标1
+                        var INDEX1UNIT = $(this).find("li :selected").eq(9).val();//指标1单位
+                        var INDEX2 = $(this).find("li :input").eq(15).val();//指标2
+                        var INDEX2UNIT = $(this).find("li :selected").eq(10).val();//指标2单位
+                        var NOTE = $(this).find("li :input").eq(17).val();//备注
+                        if (ASSESSMENTITEM != null || THERANGESCOPE != null || ERRORLIMITS != null || THERELATIONSHIP != null || ENDRANGESCOPE != null || ENDUNIT != null || ENDRELATIONSHIP != null || THEFREQUENCY != null || THEUNITFREQUENCY != null || THERELATIONSHIPFREQUENCY != null || ENDFREQUENCY != null || ENDUNITFREQUENCY != null || ENDRELATIONSHIPFREQUENCY != null || INDEX1 != null || INDEX1UNIT != null || INDEX2 != null || INDEX2UNIT != null || NOTE != null)
+                            myArray6 = new Array()
+                        myArray6.push({ ASSESSMENTITEM: ASSESSMENTITEM, THERANGESCOPE: THERANGESCOPE, ERRORLIMITS: ERRORLIMITS, THERELATIONSHIP: THERELATIONSHIP, ENDRANGESCOPE: ENDRANGESCOPE, ENDUNIT: ENDUNIT, ENDRELATIONSHIP: ENDRELATIONSHIP, THEFREQUENCY: THEFREQUENCY, THEUNITFREQUENCY: THEUNITFREQUENCY, THERELATIONSHIPFREQUENCY: THERELATIONSHIPFREQUENCY, ENDFREQUENCY: ENDFREQUENCY, ENDUNITFREQUENCY: ENDUNITFREQUENCY, ENDRELATIONSHIPFREQUENCY: ENDRELATIONSHIPFREQUENCY, INDEX1: INDEX1, INDEX1UNIT: INDEX1UNIT, INDEX2: INDEX2, INDEX2UNIT: INDEX2UNIT, NOTE: NOTE });
+                    })
+                    break
+                default:
+            }
+            //*****************************************************
+            if (myArray5 != null)
+                METERING_STANDARD_DEVICE.UNCERTAINTYTABLE = myArray5;
+            else if (myArray6 != null)
+                METERING_STANDARD_DEVICE.UNCERTAINTYTABLE = myArray6;
+            //调用后台方法
+            if (ifshujuU(METERING_STANDARD_DEVICE)) {
+                $.ajax({
+                    url: "/api/METERING_STANDARD_DEVICEApi/Post",
+                    type: "Post",
+                    data: METERING_STANDARD_DEVICE,
+                    dataType: "json",
+
+                    success: function (data) {
+                        if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                        else if (data.Code == 1) {
+                            $.messager.alert('操作提示', "新增成功！", 'info');
+                            return false;
+                        }
+                        else {
+                            if ($.messager) {
+                                $.messager.defaults.ok = '继续';
+                                $.messager.defaults.cancel = '返回';
+
+                                $.messager.confirm('操作提示', "新增失败！", function (r) {
+                                    if (!r) {
+                                        window.location.href = 'javascript:history.go(-1)';
+                                    }
+                                });
+                            }
+                        }
+                    }
+                })
+            }
+        }
     }
     //数据校验
-    function ifshuju(m) {
+    function ifshujuA(m) {
         var zhi = "";
-        if (isNull(m.NAME)) {
-            zhi += "名称不能为空！<br>";
-        }
-        if (isNull(m.TEST_RANGE)) {
-            zhi += "测量范围不能为空！<br>";
-        }
-        if (isNull(m.XINGHAO)) {
-            zhi += "型号不能为空！<br>";
-        }
-        if (isNull(m.FACTORY_NUM)) {
-            zhi += "类别不能为空！<br>";
-        }
-        if (isNull(m.UNDERTAKE_LABORATORYID)) {
-            zhi += "实验室不能为空！<br>";
-        }
         if (m.ALLOWABLE_ERROR == null) {
             zhi += "不确定度/准确度等级/最大允许误差不能为空！<br>";
         }
         if (m.METERING_STANDARD_DEVICE_CHECK == null) {
             zhi += "证书信息不能为空！<br>";
         }
+        if (zhi != "") {
+            $.messager.alert('操作提示', "" + zhi + "", 'info');
+            return false;
+        }
+        else {
+            //return false;
+            return true;
+        }
+    }
+    function ifshujuU(m) {
+        var zhi = "";
         if (m.UNCERTAINTYTABLE == null) {
             zhi += "不确定参数信息不能为空！<br>";
         }
@@ -684,23 +691,12 @@
             return true;
         }
     }
-    /*
-用途：检查输入字符串是否为空或者全部都是空格
-输入：str
-返回：
-如果全是空返回true,否则返回false
-*/
     function isNull(str) {
         if (str == "") return true;
         var regu = "^[ ]+$";
         var re = new RegExp(regu);
         return re.test(str);
     }
-    $(function () {
-
-    });
-
-
 </script>
 
 
