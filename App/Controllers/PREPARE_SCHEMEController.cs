@@ -115,7 +115,7 @@ namespace Langben.App.Controllers
         /// <param name="CONCLUSION_EXPLAIN">结论说明</param>
         /// <param name="VALIDITY_PERIOD">有效期</param>
         /// <returns></returns>
-        public ActionResult Save(string ID, string CONCLUSION, string CONCLUSION_EXPLAIN, string VALIDITY_PERIOD,string UNQUALIFIEDTYPE)
+        public ActionResult Save(string ID, string CONCLUSION, string CONCLUSION_EXPLAIN, string VALIDITY_PERIOD, string UNQUALIFIEDTYPE)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             PREPARE_SCHEME entity = m_BLL.GetById(ID);
@@ -179,6 +179,17 @@ namespace Langben.App.Controllers
             }
 
 
+
+        }
+        public ActionResult Test(string id)
+        {
+            ReportBLL reportBll = new ReportBLL();
+            string Message = string.Empty;
+
+            reportBll.Test(id, out Message);
+           
+            ViewBag.IsSuccess = Message;
+            return View();
 
         }
         /// <summary>

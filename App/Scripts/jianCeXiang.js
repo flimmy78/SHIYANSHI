@@ -222,9 +222,9 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     //下拉框
     var ddlName = name + "_UNIT";//下拉框名
     var ddlId = ddlName + "_" + id;//下拉框ID
-    //不确定度
-    var BuQueDingDuName = name + "_BuQueDingDu";//不确定度名
-    var BuQueDingDuId = BuQueDingDuName + "_" + id;//不确定度ID
+    //不确定度(隐藏域中存储不确定计算过程html路径)
+    var BuQueDingDuLuJingName = "BuQueDingDuLuJing";//不确定度名
+    var BuQueDingDuLuJingId = name + "_"+BuQueDingDuLuJingName + id;//不确定度ID
 
     var id = name + "_" + id;//输入框id
 
@@ -252,10 +252,12 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     debugger;
     if (IsHaveJiSuanBuQueDingDu_MeiHang)
     {
-        debugger;
-        //htmlString.push("<a href=\"/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID + "\" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\">计算不确定度</a>")
-        htmlString.push("<a href=\"#\" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\" onclick = \"showModal('" + id + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID + "');\">计算不确定度</a>")
-        //"onclick = \"showModalOnly('SCHEMEID', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID+"');\"";
+        debugger;        
+
+        htmlString.push("<input type='hidden' name='" + BuQueDingDuLuJingName + "' id='" + BuQueDingDuLuJingId + "' value=''/>");
+        var returnIds = id + "&" + BuQueDingDuLuJingId + "^" + BuQueDingDuLuJingId;
+        htmlString.push("<a href=\"#\" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\" onclick = \"showModal('" + returnIds + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID + "');\">计算不确定度</a>")
+        
     }
     htmlString.push("</td>");
     return htmlString.join("");
@@ -673,7 +675,7 @@ function xiangDuiWuCha1(obj, source, gold) {
     if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
 
-        var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
+        var xiangDuiWuCha = ((showData - biaoZhunData) / showData * 100);
         var data = fomatFloat(xiangDuiWuCha, txtPointLen)
         $(obj).parent().parent().find("#" + gold + id).val(data);
     }
@@ -694,7 +696,7 @@ function xiangDuiWuCha2(obj, source, gold) {
     if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
 
-        var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
+        var xiangDuiWuCha = ((showData - biaoZhunData) / showData * 100);
         var data = fomatFloat(xiangDuiWuCha, txtPointLen)
         $(obj).parent().parent().find("#" + gold + id).val(data);
     }
@@ -719,7 +721,7 @@ function xiangDuiWuCha(obj, first, second, gold) {
     if (firstData != "undefined" && secondData != "undefined" && firstData != "" && secondData != "" && secondData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
         
-        var data = fomatFloat(((firstData - secondData) / secondData * 100), txtPointLen)
+        var data = fomatFloat(((firstData - secondData) / firstData * 100), txtPointLen)
    
 
         $(obj).parent().parent().find("#" + gold).val(data);

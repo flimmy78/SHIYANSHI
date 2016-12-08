@@ -962,6 +962,8 @@
     <Content Include="Views\PROJECTTEMPLET\JiBenWuChaDianZuShiZhi.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\ALLOWABLE_ERROR.cshtml" />
     <Content Include="Views\UNCERTAINTYTABLE\IndexUB.cshtml" />
+    <Content Include="Views\METERING_STANDARD_DEVICE\UNCERTAINTYTABLE.cshtml" />
+    <Content Include="Views\PREPARE_SCHEME\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

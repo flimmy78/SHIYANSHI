@@ -331,9 +331,9 @@
                 }
                
                 //显示值 需要下拉框
-                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "", '', 'blurXianShiZhi'));
+                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "", '', 'resetXianShiZhi'));
                 //标准值
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "", '', 'blurBiaoZhunZhi'));
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "", '', 'resetBiaoZhunZhi'));
                 //相对误差
                 htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "", '', ''));
                 //校准结果的不确定度
@@ -348,61 +348,17 @@
             //$('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
-
-        //离开事件，用于计算 显示值
-        function blurXianShiZhi(obj) {
-            //注意多通道
-            //
-            //重新计算当前行
-            var name = $(obj).attr("name");
-            var id = $(obj).attr("id");
-            id = id.substring(id.indexOf('_'));
-
-            var newid = "READVALUE" + id;//改动的地方，参与计算的列的name值
-
-            var biaoZhunData = $(obj).parent().parent().find("#" + newid).val();
-            var showData = $(obj).val();
-            if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
-                var txtPointLen = $("#txtPointLen").val(); //小数点位数
-
-                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
-                var data = fomatFloat(xiangDuiWuCha, txtPointLen)
-                $(obj).parent().parent().find("#ACTUALVALUE" + id).val(data);
-            }
-
-
-        }
-        //离开事件，用于计算 标准值
-        function blurBiaoZhunZhi(obj) {
-            //注意多通道
-            //
-
-            //重新计算当前行
-            var name = $(obj).attr("name");
-            var id = $(obj).attr("id");
-            id = id.substring(id.indexOf('_'));
-
-            var newid = "OUTPUTVALUE" + id;//改动的地方，参与计算的列的name值
-
-            var showData = $(obj).parent().parent().find("#" + newid).val();
-            var biaoZhunData = $(obj).val();
-            if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
-                var txtPointLen = $("#txtPointLen").val(); //小数点位数
-
-                var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
-                var data = fomatFloat(xiangDuiWuCha, txtPointLen)
-                $(obj).parent().parent().find("#ACTUALVALUE" + id).val(data);
-            }
-        }
+ 
         //计算显示值
         function resetXianShiZhi(obj) {
             //重新计算当前行
-            xiangDuiWuCha1(obj, "SHIJISHUCHUZHI", "RELATIVEERROR");
+            xiangDuiWuCha(obj, "OUTPUTVALUE", "READVALUE", "RELATIVEERROR");
+           
         }
         //计算标准值
         function resetBiaoZhunZhi(obj, source, gold) {
             //重新计算当前行
-            xiangDuiWuCha2(obj, "ACTUALVALUE", "RELATIVEERROR");
+            xiangDuiWuCha(obj, "OUTPUTVALUE", "READVALUE", "RELATIVEERROR");
 
         }
         //离开事件，用于计算

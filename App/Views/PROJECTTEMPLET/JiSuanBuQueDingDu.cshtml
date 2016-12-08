@@ -14,7 +14,8 @@
 <input type="hidden" id="hideRULEID" value="@ViewBag.RULEID" />
 <!--预备方案ID-->
 <input type="hidden" id="hidePREPARE_SCHEMEID" value="@ViewBag.PREPARE_SCHEMEID" />
-
+<!--不确定计算存储地址-->
+<input type="hidden" id="hideURL" value="@ViewBag.URL" />
 @if (string.IsNullOrWhiteSpace(ViewBag.HTMLVALUE))
 {
     <input type="hidden" id="hideHTMLVALUE" value="" />
@@ -427,7 +428,8 @@ else
         SetAllControlHtml();
         var ID = $("#hideID").val();//控件ID
         var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();//预备方案ID
-        var RULEID = $("#hideRULEID").val();//检测项ID           
+        var RULEID = $("#hideRULEID").val();//检测项ID    
+        var URL = $("#hideURL").val();//不确定计算存储地址     
         var HTMLVALUE = encodeURI($("#divHtml").html());
 
         //获取空对象用于保存添加的信息
@@ -436,7 +438,7 @@ else
             dataType: "json", //返回json格式的数据
             url: '/PROJECTTEMPLET/JiSuanBuQueDingDuSave', //要访问的后台地址      
             contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式        
-            data: { 'ID': ID, 'RULEID': RULEID, 'PREPARE_SCHEMEID': PREPARE_SCHEMEID, 'HTMLVALUE': HTMLVALUE },
+            data: { 'HTMLVALUE': HTMLVALUE,"URL":URL },
             beforeSend: function () {
                 //InitAlertJS();
             },
@@ -446,7 +448,8 @@ else
             success: function (res) {//msg为返回的数据，在这里做数据绑定               
                 if (res.Code == 1) {
                     var ValueE = $("#txtValueE").val();
-                    returnParent(ValueE);
+                    var returnVale = ValueE + "&" + res.Message;
+                    returnParent(returnVale);
                     $.messager.alert('操作提示', "操作成功！", 'info');
                 }
                 else {
