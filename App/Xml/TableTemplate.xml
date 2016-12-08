@@ -176,7 +176,50 @@
     </TableTemplate>
     <TableTemplate>
       <!--输入格式-->
-      <RuleID>315-1983_2_2</RuleID>  
+      <RuleID>315-1983_2_2</RuleID>
+      <!--二级标题开始行号,如果有二级标题填具体开始行号，如果没有填-1-->
+      <!--二级标题，有就配置，没有该节点可不配置-->
+      <!--<SecondTitleList>-->
+      <!--二级标题每行信息，每行一个-->
+      <!--<RowInfo>-->
+      <!--二级标题行号-->
+      <!--<RowIndex>276</RowIndex>-->
+      <!--二级标题改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
+      <!--<CellIndexs>4,5</CellIndexs>-->
+      <!--</RowInfo>-->
+      <!--</SecondTitleList>-->
+      <!--表格表头，有就配置，没有该节点可不配置-->
+      <TableTitleList>
+        <!--表格表头每行信息，每行一个-->
+        <RowInfo>
+          <!--表格表头行号-->
+          <RowIndex>422</RowIndex>
+          <!--表格表头改行动态数据的单元给列号，多个用,分割例如：4,6如果没有动态数据可以不填-->
+          <CellIndexs>21,47</CellIndexs>
+          <CellList>
+            <Cell>
+              <!--字段代码与模板中设置的字段保持一致-->
+              <Code>sssss</Code>
+              <!--字段名称含义-->
+              <Name>显示值</Name>
+              <!--模板中单元格开始列号-->
+              <ColIndex>21</ColIndex>
+              <!--所占列数-->
+              <ColCount>13</ColCount>
+            </Cell>
+            <Cell>
+              <!--字段代码与模板中设置的字段保持一致-->
+              <Code>K</Code>
+              <!--字段名称含义-->
+              <Name>K2</Name>
+              <!--模板中单元格开始列号-->
+              <ColIndex>47</ColIndex>
+              <!--所占列数-->
+              <ColCount>11</ColCount>
+            </Cell>
+          </CellList>
+        </RowInfo>
+      </TableTitleList>
       <!--数据模板开始行号-->
       <DataRowIndex>423</DataRowIndex>
       <!--备注模板行号-->
@@ -186,7 +229,102 @@
       <!--备注-->
       <Remark>直流电压测量-非正负极性-相对误差-单相-多通道</Remark>
       <!--单元格信息-->
-    
+      <CellList>
+        <Cell>
+          <!--字段代码与模板中设置的字段保持一致-->
+          <Code>RANGE</Code>
+          <!--字段名称含义-->
+          <Name>量程</Name>
+          <!--模板中单元格开始列号-->
+          <ColIndex>1</ColIndex>
+          <!--所占列数-->
+          <ColCount>5</ColCount>
+          <!--相同值是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）-->
+          <!--<IsMergeSameValue>Y</IsMergeSameValue>-->
+        </Cell>
+        <Cell>
+          <!--字段代码与模板中设置的字段保持一致-->
+          <Code>RANGE_UNIT</Code>
+          <!--字段名称含义-->
+          <Name>量程单位</Name>
+          <!--模板中单元格开始列号-->
+          <ColIndex>6</ColIndex>
+          <!--所占列数-->
+          <ColCount>2</ColCount>
+        </Cell>
+        <Cell>
+          <!--字段代码与模板中设置的字段保持一致-->
+          <Code>READVALUE</Code>
+          <!--字段名称含义-->
+          <Name>标准值</Name>
+          <!--模板中单元格开始列号-->
+          <ColIndex>8</ColIndex>
+          <!--所占列数-->
+          <ColCount>9</ColCount>
+        </Cell>
+        <Cell>
+          <!--字段代码与模板中设置的字段保持一致-->
+          <Code>READVALUE_UNIT</Code>
+          <!--字段名称含义-->
+          <Name>标准值单位</Name>
+          <!--模板中单元格开始列号-->
+          <ColIndex>17</ColIndex>
+          <!--所占列数-->
+          <ColCount>4</ColCount>
+        </Cell>
+        <Cell>
+          <!--字段代码与模板中设置的字段保持一致-->
+          <Code>SHIJISHUCHUZHI</Code>
+          <!--字段名称含义-->
+          <Name>显示值</Name>
+          <!--模板中单元格开始列号-->
+          <ColIndex>21</ColIndex>
+          <!--所占列数-->
+          <ColCount>9</ColCount>
+        </Cell>
+        <Cell>
+          <!--字段代码与模板中设置的字段保持一致-->
+          <Code>SHIJISHUCHUZHI_UNIT</Code>
+          <!--字段名称含义-->
+          <Name>显示值单位</Name>
+          <!--模板中单元格开始列号-->
+          <ColIndex>30</ColIndex>
+          <!--所占列数-->
+          <ColCount>4</ColCount>
+        </Cell>
+        <Cell>
+          <!--字段代码与模板中设置的字段保持一致-->
+          <Code>RELATIVEERROR</Code>
+          <!--字段名称含义-->
+          <Name>相对误差</Name>
+          <!--模板中单元格开始列号-->
+          <ColIndex>34</ColIndex>
+          <!--所占列数-->
+          <ColCount>13</ColCount>
+          <!--空值是否不展示改行，不填表示不隐藏（Y:隐藏、N:不隐藏）-->
+          <IsHideRowNull>Y</IsHideRowNull>
+        </Cell>
+        <Cell>
+          <!--字段代码与模板中设置的字段保持一致-->
+          <Code>UNCERTAINTYDEGREE</Code>
+          <!--字段名称含义-->
+          <Name>校准结果的不确定度U(k=2)</Name>
+          <!--模板中单元格开始列号-->
+          <ColIndex>47</ColIndex>
+          <!--所占列数-->
+          <ColCount>9</ColCount>
+        </Cell>
+        <Cell>
+          <!--字段代码与模板中设置的字段保持一致-->
+          <Code>UNCERTAINTYDEGREE_UNIT</Code>
+          <!--字段名称含义-->
+          <Name>校准结果的不确定度U(k=2)单位</Name>
+          <!--模板中单元格开始列号-->
+          <ColIndex>56</ColIndex>
+          <!--所占列数-->
+          <ColCount>2</ColCount>
+        </Cell>
+      </CellList>
     </TableTemplate>
     <TableTemplate>
       <!--输入格式-->
