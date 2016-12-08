@@ -1738,16 +1738,28 @@ namespace Langben.Report
             if (sourceCell == null)
             {
                 return new HSSFRichTextString("");
-            }
-            ////if (DongTaiShuJuList == null || DongTaiShuJuList.Count == 0)
-            ////{
-            ////    return new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
-            ////}
-            //if (rowInfoList == null || rowInfoList.Count == 0)
-            //{
-            //    return new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
-            //}
+            }            
             string key = "";
+            //xml是否配置了信息
+            //< Cell >
+
+            //                < !--字段代码与模板中设置的字段保持一致-- >
+
+            //                < Code > sssss </ Code >
+
+            //                < !--字段名称含义-- >
+
+            //                < Name > 显示值 </ Name >
+
+            //                < !--模板中单元格开始列号-- >
+
+            //                < ColIndex > 21 </ ColIndex >
+
+            //                < !--所占列数-- >
+
+            //                < ColCount > 13 </ ColCount >
+
+            //            </ Cell >
             if (rowInfoList != null && rowInfoList.Count > 0 && rowInfoList.FirstOrDefault(p => p.RowIndex == sourceCell.RowIndex && p.Cells != null && p.Cells.Count > 0) != null)
             {
                 RowInfo r = rowInfoList.FirstOrDefault(p => p.RowIndex == sourceCell.RowIndex && p.Cells != null && p.Cells.Count > 0);
@@ -1763,11 +1775,13 @@ namespace Langben.Report
             int speStartIndex = sourceCell.StringCellValue.IndexOf("{0}");//动态字符位置
             string value = "";
             string SpecialStr = "";
+            //有动态数据
             if (key != null && key.Trim() != "")
             {
                 value = string.Format(sourceCell.StringCellValue, DongTaiShuJuList[key]).Trim();
                 SpecialStr = DongTaiShuJuList[key];
             }
+            //无动态数据
             else
             {
                 value = string.Format(sourceCell.StringCellValue, "").Trim();
@@ -1779,10 +1793,12 @@ namespace Langben.Report
                 speStartIndex = value.Trim().ToUpper().IndexOf("U(K");
                 SpecialStr = "U(K";
             }
+            //处理特殊字符下标上标斜体
             result = new HSSFRichTextString(value);
 
             if (!string.IsNullOrEmpty(SpecialStr) && SpecialStr.Trim() != "" && speStartIndex >= 0)
             {
+                //特殊字符是否配置
                 if (workbook != null && allSpecialCharacters != null && allSpecialCharacters.SpecialCharacterList != null &&
                         allSpecialCharacters.SpecialCharacterList.Count > 0 &&
                         allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == SpecialStr.Trim().ToUpper()) != null)
@@ -1816,7 +1832,7 @@ namespace Langben.Report
 
                         HSSFFont subscript = (HSSFFont)workbook.CreateFont();
                         subscript.TypeOffset = FontSuperScript.Sub; //下标  
-                        subscript.IsItalic = true;
+                        //subscript.IsItalic = true;
                         subscript.FontName = "宋体";
                         //subscript.Color = HSSFColor.Red.Index;
                         //HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
@@ -2073,28 +2089,58 @@ namespace Langben.Report
 
             if (nodeList.Count > 0)
             {
-                object Id = string.Empty;
-                object Name = string.Empty;
+                string Id = string.Empty;
+                string Name = string.Empty;
                 for (int j = 0; j < nodeList.Count; j++)
                 {
                     ITag tag = getTag(nodeList[j]);
                     Id = tag.GetAttribute("ID");
                     Name = tag.GetAttribute("name");
-                    if (Id != null && Id.ToString().Trim() != "" && Name != null && Name.ToString().Trim() != "")
-                    {
-                        Id = Id.ToString().Trim().Replace(Name.ToString().Trim(), "");
-                        if (Id.ToString() != "" && Id.ToString().Split('_').Length >= 4 && !dic.ContainsKey(Id.ToString()))
-                        {
-                            dic.Add(Id.ToString(), rowIndex_Destination);
-                            CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true, null, null, allSpecialCharacters, CellsTemplate);
-                            rowIndex_Destination++;
 
-                        }
+                    Id = GetExceptNameID(Id, Name);
+
+                    if (Id != null && Id.ToString().Trim() != "")
+                    {
+
+                        dic.Add(Id.ToString(), rowIndex_Destination);
+                        CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true, null, null, allSpecialCharacters, CellsTemplate);
+                        rowIndex_Destination++;
+
                     }
                 }
             }
             rowIndex = rowIndex_Destination;
             return dic;
+        }
+        /// <summary>
+        /// 获取ID中的通道号_量程号_行号信息
+        /// </summary>
+        /// <param name="id">控件ID</param>
+        /// <param name="name">控件name</param>
+        /// <returns></returns>
+        private string GetExceptNameID(object Id,object Name)
+        {
+            if(Id==null || Name==null)
+            {
+                return "";
+            }            
+            if (!string.IsNullOrWhiteSpace(Id.ToString().Trim()) && Id.ToString().Trim().IndexOf(Name.ToString().Trim()) == 0)
+            {
+                Id = Id.ToString().Trim().Replace(Name.ToString().Trim(), "");
+            }
+            
+            string[] ids = Id.ToString().Trim().Split('_');
+            if (ids.Length > 3)
+            {
+                Id = "";
+                for (int i = ids.Length - 3; i < ids.Length - 1; i++)
+                {
+                    Id += "_" + ids[i];
+                }
+            }
+
+            
+            return Id.ToString().Trim();
         }
         /// <summary>
         /// 设置行号，同时插入行
@@ -2432,6 +2478,7 @@ namespace Langben.Report
             Dictionary<int, NodeList> InputDic, Dictionary<int, NodeList> OptionDic, SpecialCharacters allSpecialCharacters = null)
         {
             int rowIndex = rowIndex_Destination;
+            //通道循环
             foreach (int key in TableTitleDic.Keys)
             {
                 //画表头                            
@@ -2441,16 +2488,18 @@ namespace Langben.Report
                     {
                         if (t.RowIndex >= 0)
                         {
+                            //数据与创建行同时进行
                             CopyRow(sheet_Source, sheet_Destination, t.RowIndex, rowIndex_Destination, 1, true, TableTitleDic[key], temp.TableTitleList, allSpecialCharacters);
                             rowIndex_Destination++;
                         }
                     }
                 }
-
+                //是否包含某通道表格数据
                 if (InputDic.ContainsKey(key))
                 {
                     NodeList nodeList_Input = InputDic[key];
                     int startRowIndex = rowIndex_Destination;
+                    //画行不包含数据
                     Dictionary<string, int> dic = SetRowIndex(nodeList_Input, sheet_Source, sheet_Destination, temp.DataRowIndex, rowIndex_Destination, out rowIndex, allSpecialCharacters, temp.Cells);
                     rowIndex_Destination = rowIndex;
                     int endRowIndex = rowIndex;
@@ -2468,6 +2517,7 @@ namespace Langben.Report
                             ITag tag = getTag(nodeList_Input[j]);
                             if (tag != null)
                             {
+                                //根据html中的合并行数设置合并
                                 ITag parentTag = getTag(tag.Parent);
                                 if (parentTag != null && parentTag.GetAttribute("$<TAGNAME>$") == "td" && parentTag.GetAttribute("ROWSPAN") != null)
                                 {
@@ -2484,11 +2534,12 @@ namespace Langben.Report
                             Value = tag.GetAttribute("VALUE");
                             if (Value == null || Value.ToString().Trim() == "")
                             {
-                                Value = "/";
+                                Value = "";//无数据设置空
                             }
                             if (Id != null && Id.ToString().Trim() != "" && Name != null && Name.ToString().Trim() != "")
-                            {
-                                Id = Id.ToString().Trim().Replace(Name.ToString().Trim(), "");
+                            {                                
+                                Id = GetExceptNameID(Id, Name);
+                                //防止遗漏行号
                                 if (!dic.ContainsKey(Id.ToString()) && dic.ContainsKey(Id.ToString() + "_0"))
                                 {
                                     Id = Id.ToString() + "_0";
@@ -2523,6 +2574,9 @@ namespace Langben.Report
                                             sheet_Destination.GetRow(dic[Id.ToString()]).GetCell(cellIndex).SetCellValue(value);
 
                                         }
+                                        //Dictionary<int, NodeList> controlDic
+                                        #region 未配置任何CellLis信息,按html中的顺序导出（将页面中的所有文本框、下拉框按html中的顺序取出节点存到controlDic中）
+                                        #endregion
                                     }
                                     catch (Exception ex)
                                     {
@@ -2611,6 +2665,15 @@ namespace Langben.Report
             }
 
             return rowIndex_Destination;
+        }
+        /// <summary>
+        /// 获取页面中的表格数据中的文本框、下拉框按html中的顺序取出节点存到controlDic中
+        /// </summary>
+        /// <returns></returns>
+        private Dictionary<int, NodeList> GetControlDic()
+        {
+            Dictionary<int, NodeList> ControlDic = null;
+            return ControlDic;
         }
         /// <summary>
         /// 行合并（相同数据合并）
@@ -2865,6 +2928,7 @@ namespace Langben.Report
             ITag tag = getTag(node);
             object Id = string.Empty;
             object Name = string.Empty;
+            //标签类型
             if (tag.GetAttribute("$<TAGNAME>$") == "input")
             {
 
@@ -2888,21 +2952,37 @@ namespace Langben.Report
             }
             if (Id != null && Id.ToString().Trim() != "" && Name != null && Name.ToString().Trim() != "")
             {
-                string[] ids = Id.ToString().Trim().Replace(Name.ToString().Trim(), "").Split('_');
-                if (ids.Length > 1)
+                if (Id.ToString().Trim().IndexOf(Name.ToString().Trim()) == 0)
                 {
-                    try
+                    string[] ids = Id.ToString().Trim().Replace(Name.ToString().Trim(), "").Split('_');
+                    if (ids.Length > 1)
                     {
-                        return int.Parse(ids[1]);
+                        try
+                        {
+                            return int.Parse(ids[1]);
+                        }
+                        catch
+                        {
+                            return 0;
+                        }
                     }
-                    catch
+                    else
                     {
-                        return 0;
+                        return -1;
                     }
                 }
                 else
                 {
-                    return -1;
+                    string[] ids = Id.ToString().Trim().Split('_');
+                    if (ids.Length > 3)
+                    {                        
+                       return int.Parse(ids[ids.Length - 3]);
+                        
+                    }
+                    else
+                    {
+                        return -1;
+                    }
                 }
             }
             else
