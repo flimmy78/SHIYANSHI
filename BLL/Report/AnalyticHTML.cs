@@ -119,38 +119,53 @@ namespace Langben.Report
                 }
                 else
                 {
+                    if ((item.Name == "input")&&(item.Attributes["type"] != null)&& (item.Attributes["type"].Value == "hidden"))
+                    {
+                        continue;
+                    }
                     try
                     {
                         ids.Add(item.Id, item.XPath);
                     }
                     catch (System.Exception ex)
                     {
-                        if(item.Attributes["name"] == null)
+                        if (item.Attributes["name"] == null)
                         {
                             errors += item.Attributes["name"].Value;
                         }
-                        errors += item.XPath + ex.Message + "|"+ item.Id;
-                        continue;
+                        errors += item.XPath + ex.Message + "|" + item.Id;
+
                     }
-                 
+
                 }
                 if (item.Name == "input")
                 {
                     if (item.Attributes["type"] == null)
                     {
-                        errors += item.XPath + "|type没有";
+                        errors += item.XPath + "|type没有" + item.Id;
                     }
                     else if ((item.Attributes["type"].Value != "hidden") && item.Attributes["name"] == null)
                     {
-                        errors += item.XPath + "|name没有";
+                        errors += item.XPath + "|name没有" + item.Id;
                     }
+
+
                 }
                 else if (item.Name == "select")
                 {
                     if (item.Attributes["name"] == null)
                     {
-                        errors += item.XPath + "|selectname没有";
+                        errors += item.XPath + "|selectname没有" + item.Id;
                     }
+                }
+
+                if (item.Attributes["name"] != null)
+                {
+                    if (!item.Id.Contains(item.Attributes["name"].Value))
+                    {
+                        errors += item.XPath + "|name和id不一致" + item.Attributes["name"].Value + "|" + item.Id;
+                    }
+
                 }
             }
 

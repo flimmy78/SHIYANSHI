@@ -991,7 +991,7 @@ namespace Langben.Report
             sheet_Destination.GetRow(47).GetCell(14).SetCellValue(chuanzhen);
             #endregion
         }
-        public bool ExportOriginalRecord(string ID, out string Message)
+        public bool Test(string ID, out string Message)
         {
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             string errors = string.Empty;
@@ -1012,8 +1012,12 @@ namespace Langben.Report
 
                     foreach (QUALIFIED_UNQUALIFIED_TEST_ITE iEntity in entity.QUALIFIED_UNQUALIFIED_TEST_ITE)
                     {
-                        doc.LoadHtml(iEntity.HTMLVALUE);
-                        errors += iEntity.ID + iEntity.RULENJOINAME + AnalyticHTML.Getinput(doc);
+                        if (!string.IsNullOrWhiteSpace(iEntity.HTMLVALUE))
+                        {
+                            doc.LoadHtml(iEntity.HTMLVALUE);
+                            errors += iEntity.ID + iEntity.RULENJOINAME + AnalyticHTML.Getinput(doc);
+                        }
+                      
                     }
                 }
             }
