@@ -344,7 +344,11 @@ namespace Langben.App.Controllers
         }
 
 
-
+        /// <summary>
+        /// 准确度等级数据展示
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Common.ClientResult.DataResult ALLOWABLE_ERRORData(string id)
         {
             int total = 0;

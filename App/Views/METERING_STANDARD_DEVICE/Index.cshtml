@@ -113,8 +113,8 @@
                  , {
                      field: 'aa', title: '操作', width: 86, formatter: function (value, row, index) {
                          var html = "<a href='/METERING_STANDARD_DEVICE/ALLOWABLE_ERROR/" + row.ID + "'>准确度等级</a><br/>";
-                         //html += "<a href='/VSHENHE/XiaZaiShenHe/" + row.ID + "^P'>证书信息</a><br/>";
-                         html += "<a href='/METERING_STANDARD_DEVICE/UNCERTAINTYTABLE/" + row.ID+"'>不确定参数信息</a>";
+                         html += "<a href='/UNCERTAINTYTABLE/IndexUB/" + row.ID + "'>范围指标</a><br/>";
+                         html += "<a href='/UNCERTAINTYTABLE/Index/" + row.ID + "'>误差来源</a>";
                          return html;
                      }
                  }

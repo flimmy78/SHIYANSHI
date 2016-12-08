@@ -75,16 +75,7 @@ namespace Langben.App.Controllers
             ViewBag.METERING_STANDARD_DEVICEID = id;
             return View();
         }
-        /// <summary>
-        ///不确定度
-        /// </summary>
-        /// <returns></returns>
-        [SupportFilter]
-        public ActionResult UNCERTAINTYTABLE(string id)
-        {
-            ViewBag.METERING_STANDARD_DEVICEID = id;
-            return View();
-        }
+
         /// <summary>
         /// 首次编辑
         /// </summary>
