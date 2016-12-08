@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
+//using System.Web.Mvc;
 using System.Text;
 using System.EnterpriseServices;
 using System.Configuration;
@@ -34,34 +34,61 @@ namespace Langben.App.Controllers
                 rows = queryData.Select(s => new
                 {
                     NOTE = s.NOTE
-					,INDEX2UNIT = s.INDEX2UNIT
-					,INDEX2 = s.INDEX2
-					,INDEX1UNIT = s.INDEX1UNIT
-					,INDEX1 = s.INDEX1
-					,ENDUNITFREQUENCY = s.ENDUNITFREQUENCY
-					,ENDRELATIONSHIPFREQUENCY = s.ENDRELATIONSHIPFREQUENCY
-					,THERELATIONSHIPFREQUENCY = s.THERELATIONSHIPFREQUENCY
-					,THEUNITFREQUENCY = s.THEUNITFREQUENCY
-					,THEFREQUENCY = s.THEFREQUENCY
-					,ENDRELATIONSHIP = s.ENDRELATIONSHIP
-					,ENDUNIT = s.ENDUNIT
-					,ENDRANGESCOPE = s.ENDRANGESCOPE
-					,THERELATIONSHIP = s.THERELATIONSHIP
-					,THEUNIT = s.THEUNIT
-					,THERANGESCOPE = s.THERANGESCOPE
-					,KVALE = s.KVALE
-					,THEERRODISTRIBUTION = s.THEERRODISTRIBUTION
-					,ERRORLIMITUNIT = s.ERRORLIMITUNIT
-					,ERRORLIMITS = s.ERRORLIMITS
-					,ERRORSOURCES = s.ERRORSOURCES
-					,ASSESSMENTITEM = s.ASSESSMENTITEM
-					,CREATETIME = s.CREATETIME
-					,CREATEPERSON = s.CREATEPERSON
-					,UPDATETIME = s.UPDATETIME
-					,UPDATEPERSON = s.UPDATEPERSON
-					,METERING_STANDARD_DEVICEID =   s.METERING_STANDARD_DEVICEIDOld
-					,ID = s.ID
-					
+                    ,
+                    INDEX2UNIT = s.INDEX2UNIT
+                    ,
+                    INDEX2 = s.INDEX2
+                    ,
+                    INDEX1UNIT = s.INDEX1UNIT
+                    ,
+                    INDEX1 = s.INDEX1
+                    ,
+                    ENDUNITFREQUENCY = s.ENDUNITFREQUENCY
+                    ,
+                    ENDRELATIONSHIPFREQUENCY = s.ENDRELATIONSHIPFREQUENCY
+                    ,
+                    THERELATIONSHIPFREQUENCY = s.THERELATIONSHIPFREQUENCY
+                    ,
+                    THEUNITFREQUENCY = s.THEUNITFREQUENCY
+                    ,
+                    THEFREQUENCY = s.THEFREQUENCY
+                    ,
+                    ENDRELATIONSHIP = s.ENDRELATIONSHIP
+                    ,
+                    ENDUNIT = s.ENDUNIT
+                    ,
+                    ENDRANGESCOPE = s.ENDRANGESCOPE
+                    ,
+                    THERELATIONSHIP = s.THERELATIONSHIP
+                    ,
+                    THEUNIT = s.THEUNIT
+                    ,
+                    THERANGESCOPE = s.THERANGESCOPE
+                    ,
+                    KVALE = s.KVALE
+                    ,
+                    THEERRODISTRIBUTION = s.THEERRODISTRIBUTION
+                    ,
+                    ERRORLIMITUNIT = s.ERRORLIMITUNIT
+                    ,
+                    ERRORLIMITS = s.ERRORLIMITS
+                    ,
+                    ERRORSOURCES = s.ERRORSOURCES
+                    ,
+                    ASSESSMENTITEM = s.ASSESSMENTITEM
+                    ,
+                    CREATETIME = s.CREATETIME
+                    ,
+                    CREATEPERSON = s.CREATEPERSON
+                    ,
+                    UPDATETIME = s.UPDATETIME
+                    ,
+                    UPDATEPERSON = s.UPDATEPERSON
+                    ,
+                    METERING_STANDARD_DEVICEID = s.METERING_STANDARD_DEVICEIDOld
+                    ,
+                    ID = s.ID
+
 
                 })
             };
@@ -78,14 +105,15 @@ namespace Langben.App.Controllers
             UNCERTAINTYTABLE item = m_BLL.GetById(id);
             return item;
         }
- 
+
         /// <summary>
         /// 创建
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
-        public Common.ClientResult.Result Post([FromBody]UNCERTAINTYTABLE entity)
-        {           
+        [HttpPost]
+        public Common.ClientResult.Result InstUA([FromBody]METERING_STANDARD_DEVICE entity)
+        {
 
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
@@ -93,39 +121,55 @@ namespace Langben.App.Controllers
                 //string currentPerson = GetCurrentPerson();
                 //entity.CreateTime = DateTime.Now;
                 //entity.CreatePerson = currentPerson;
-              
-                entity.ID = Result.GetNewId();   
-                string returnValue = string.Empty;
-                if (m_BLL.Create(ref validationErrors, entity))
+                int groups = 1;
+                string currentPerson = GetCurrentPerson();
+
+                List<UNCERTAINTYTABLE> list = m_BLL.GetByRefMETERING_STANDARD_DEVICEID(entity.ID);
+                var data = (from f in list select f.GROUPS).Max();
+                if (data != null)
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed  + "，不确定度的信息的Id为" + entity.ID,"不确定度"
-                        );//写入日志 
-                    result.Code = Common.ClientCode.Succeed;
-                    result.Message = Suggestion.InsertSucceed;
-                    return result; //提示创建成功
+                    groups = (int)data + 1;
                 }
-                else
-                { 
-                    if (validationErrors != null && validationErrors.Count > 0)
+                string returnValue = string.Empty;
+                foreach (var item in entity.UNCERTAINTYTABLE)
+                {
+                    item.CREATETIME = DateTime.Now;
+                    item.CREATEPERSON = currentPerson;
+                    item.ID = Result.GetNewId();
+                    item.GROUPS = groups;
+                    if (m_BLL.Create(ref validationErrors, item))
                     {
-                        validationErrors.All(a =>
-                        {
-                            returnValue += a.ErrorMessage;
-                            return true;
-                        });
+                        LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，不确定度的信息的Id为" + item.ID, "不确定度"
+                            );//写入日志 
+                        result.Code = Common.ClientCode.Succeed;
+                        result.Message = Suggestion.InsertSucceed;
+                        //return result; //提示创建成功
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，不确定度的信息，" + returnValue,"不确定度"
-                        );//写入日志                      
-                    result.Code = Common.ClientCode.Fail;
-                    result.Message = Suggestion.InsertFail + returnValue;
-                    return result; //提示插入失败
+                    else
+                    {
+                        if (validationErrors != null && validationErrors.Count > 0)
+                        {
+                            validationErrors.All(a =>
+                            {
+                                returnValue += a.ErrorMessage;
+                                return true;
+                            });
+                        }
+                        LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，不确定度的信息，" + returnValue, "不确定度"
+                            );//写入日志                      
+                        result.Code = Common.ClientCode.Fail;
+                        result.Message = Suggestion.InsertFail + returnValue;
+                        return result; //提示插入失败
+                    }
                 }
+                return result;
             }
 
             result.Code = Common.ClientCode.FindNull;
             result.Message = Suggestion.InsertFail + "，请核对输入的数据的格式"; //提示输入的数据的格式不对 
             return result;
         }
+
 
         // PUT api/<controller>/5
         /// <summary>
@@ -146,7 +190,7 @@ namespace Langben.App.Controllers
                 string returnValue = string.Empty;
                 if (m_BLL.Edit(ref validationErrors, entity))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，不确定度信息的Id为" + entity.ID,"不确定度"
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，不确定度信息的Id为" + entity.ID, "不确定度"
                         );//写入日志                   
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.UpdateSucceed;
@@ -205,7 +249,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId)+ "," + returnValue, "消息"
+                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail + "，信息的Id为" + string.Join(",", deleteId) + "," + returnValue, "消息"
                         );//删除失败，写入日志
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.DeleteFail + returnValue;
@@ -214,6 +258,144 @@ namespace Langben.App.Controllers
             return result;
         }
 
+        /// <summary>
+        /// 误差来源数据展示
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Common.ClientResult.DataResult UNCERTAINTYTABLEData_WUCHA(string id)
+        {
+            int total = 0;
+            List<UNCERTAINTYTABLE> msd = m_BLL.GetByRefMETERING_STANDARD_DEVICEID(id);
+            string ASSESSMENTITEM = string.Empty;//评定项
+            string ERRORSOURCES = string.Empty;//误差来源
+            string ERRORLIMITS = string.Empty;//误差限
+            string THEERRODISTRIBUTION = string.Empty;//误差分布状况
+            string KVALE = string.Empty;//k
+            string UNCERTAINTYUI = string.Empty;//不确定度ui
+
+            //分组
+            var data = (from f in msd
+                        select f.GROUPS).Distinct();
+
+
+            List<UNCERTAINTYTABLE> alldata = new List<UNCERTAINTYTABLE>();
+
+            foreach (var item in data)
+            {
+                ASSESSMENTITEM = null;
+                ERRORSOURCES = null;
+                ERRORLIMITS = null;
+                THEERRODISTRIBUTION = null;
+                KVALE = null;
+                UNCERTAINTYUI = null;
+                //计量标准装置检定/校准信息
+                foreach (var it in msd.Where(w => w.GROUPS == item))
+                {
+                    ASSESSMENTITEM += it.ASSESSMENTITEM + ",";
+                    ERRORSOURCES += it.ERRORSOURCES + ",";
+                    ERRORLIMITS += it.ERRORLIMITS + it.ERRORLIMITUNIT + ",";
+                    THEERRODISTRIBUTION += it.THEERRODISTRIBUTION + ",";
+                    KVALE += it.KVALE + ",";
+                    UNCERTAINTYUI += it.UNCERTAINTYUI + ",";
+                }
+                alldata.Add(new UNCERTAINTYTABLE()
+                {
+                    ASSESSMENTITEM = ASSESSMENTITEM,
+                    ERRORSOURCES = ERRORSOURCES,
+                    ERRORLIMITS = ERRORLIMITS,
+                    THEERRODISTRIBUTION = THEERRODISTRIBUTION,
+                    KVALE = KVALE,
+                    UNCERTAINTYUI = UNCERTAINTYUI,
+                    GROUPS = item
+
+                });
+            }
+
+            var show = new Common.ClientResult.DataResult
+            {
+                total = total,
+                rows = alldata.Select(s => new
+                {
+                    ASSESSMENTITEM = s.ASSESSMENTITEM.TrimEnd(','),
+                    ERRORSOURCES = s.ERRORSOURCES.TrimEnd(','),
+                    ERRORLIMITS = s.ERRORLIMITS.TrimEnd(','),
+                    THEERRODISTRIBUTION = s.THEERRODISTRIBUTION.TrimEnd(','),
+                    KVALE = s.KVALE.TrimEnd(','),
+                    UNCERTAINTYUI = s.UNCERTAINTYUI.TrimEnd(','),
+                    GROUPS = s.GROUPS,
+                    METERING_STANDARD_DEVICEID = id
+                })
+            };
+            return show;
+        }
+        /// <summary>
+        /// 范围指标数据展示
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Common.ClientResult.DataResult UNCERTAINTYTABLEData_ZHIBIAO(string id)
+        {
+            int total = 0;
+            List<UNCERTAINTYTABLE> msd = m_BLL.GetByRefMETERING_STANDARD_DEVICEID(id);
+            string ASSESSMENTITEM = string.Empty;//评定项
+            string THERANGESCOPE = string.Empty;//量程范围
+            string THEFREQUENCY = string.Empty;//频率范围
+            string INDEX1 = string.Empty;//指标1
+            string INDEX2 = string.Empty;//指标2
+
+
+            //分组
+            var data = (from f in msd
+                        select f.GROUPS).Distinct();
+
+
+            List<UNCERTAINTYTABLE> alldata = new List<UNCERTAINTYTABLE>();
+
+            foreach (var item in data)
+            {
+                ASSESSMENTITEM = null;
+                THERANGESCOPE = null;
+                THEFREQUENCY = null;
+                INDEX1 = null;
+                INDEX2 = null;
+                //计量标准装置检定/校准信息
+                foreach (var it in msd.Where(w => w.GROUPS == item))
+                {
+                    ASSESSMENTITEM += it.ASSESSMENTITEM + ",";
+                    THERANGESCOPE += it.THERANGESCOPE + it.THEUNIT + it.THERELATIONSHIP + it.ENDRANGESCOPE + it.ENDUNIT + it.ENDRELATIONSHIP + ",";
+                    THEFREQUENCY += it.THEFREQUENCY + it.THEUNITFREQUENCY + it.THERELATIONSHIPFREQUENCY + it.ENDFREQUENCY + it.ENDUNITFREQUENCY + it.ENDRELATIONSHIPFREQUENCY + ",";
+                    INDEX1 += it.INDEX1 + it.INDEX1UNIT + ",";
+                    INDEX2 += it.INDEX2 + it.INDEX2UNIT + ",";
+                }
+                alldata.Add(new UNCERTAINTYTABLE()
+                {
+                    ASSESSMENTITEM = ASSESSMENTITEM,
+                    THERANGESCOPE = THERANGESCOPE,
+                    THEFREQUENCY = THEFREQUENCY,
+                    INDEX1 = INDEX1,
+                    INDEX2 = INDEX2,
+                    GROUPS = item
+
+                });
+            }
+
+            var show = new Common.ClientResult.DataResult
+            {
+                total = total,
+                rows = alldata.Select(s => new
+                {
+                    ASSESSMENTITEM = s.ASSESSMENTITEM.TrimEnd(','),
+                    THERANGESCOPE = s.THERANGESCOPE.TrimEnd(','),
+                    THEFREQUENCY = s.THEFREQUENCY.TrimEnd(','),
+                    INDEX1 = s.INDEX1.TrimEnd(','),
+                    INDEX2 = s.INDEX2.TrimEnd(','),                   
+                    GROUPS = s.GROUPS,
+                    METERING_STANDARD_DEVICEID = id
+                })
+            };
+            return show;
+        }
         IBLL.IUNCERTAINTYTABLEBLL m_BLL;
 
         ValidationErrors validationErrors = new ValidationErrors();
@@ -225,7 +407,7 @@ namespace Langben.App.Controllers
         {
             m_BLL = bll;
         }
-        
+
     }
 }
 

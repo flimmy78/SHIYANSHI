@@ -4,56 +4,61 @@
 @using Common
 @using Models
 <script src="~/Scripts/JScriptIndex.js"></script>
+<div id="divQuery">
 
+    <div class='input_search' style="padding-top:10px;">
+        <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
+            查 询
+        </a>
+    </div>
+</div>
 <br style="clear: both;" />
 
 <script type="text/javascript" language="javascript">
     $(function () {
 
         $('#flexigridData').datagrid({
-            title: '误差来源', //列表的标题
+            title: '范围指标', //列表的标题
             iconCls: 'icon-site',
             width: 'auto',
             height: 'auto',
             //nowrap: false,
             striped: true,
             collapsible: true,
-            url: '/api/UNCERTAINTYTABLEApi/UNCERTAINTYTABLEData_WUCHA/' + "@ViewBag.METERING_STANDARD_DEVICEID", //获取数据的url
+            url: '/api/UNCERTAINTYTABLEApi/UNCERTAINTYTABLEData_ZHIBIAO/' + "@ViewBag.METERING_STANDARD_DEVICEID", //获取数据的url
             sortName: 'ID',
             sortOrder: 'desc',
             idField: 'ID',
 
             toolbar: [
-                {
-                    text: '创建',
-                    iconCls: 'icon-add',
-                    handler: function () {
-                        return flexiCreate();
-                    }
-                }, {
-                    text: '删除',
-                    iconCls: 'icon-remove',
-                    handler: function () {
-                        return flexiDelete();
-                    }
-                }, {
-                    text: '修改',
-                    iconCls: 'icon-edit',
-                    handler: function () {
-                        return flexiModify();
-                    }
-                }
-            ],
+
+                 {
+                     text: '创建',
+                     iconCls: 'icon-add',
+                     handler: function () {
+                         return flexiCreate();
+                     }
+                 }, {
+                     text: '删除',
+                     iconCls: 'icon-remove',
+                     handler: function () {
+                         return flexiDelete();
+                     }
+                 }, {
+                     text: '修改',
+                     iconCls: 'icon-edit',
+                     handler: function () {
+                         return flexiModify();
+                     }
+                 }],
             columns: [[
-                 { field: 'ID', title: 'ID', width: 29, hidden: true }
-               , { field: 'ASSESSMENTITEM', title: '评定项/范围', width: 100 }
-               , { field: 'ERRORSOURCES', title: '误差来源', width: 100 }
-               , { field: 'ERRORLIMITS', title: '误差限', width: 100 }
-               , { field: 'THEERRODISTRIBUTION', title: '误差分布状况', width: 100 }
-               , { field: 'KVALE', title: 'K', width: 100 }
-               , { field: 'UNCERTAINTYUI', title: '不确定度ui', width: 100 }
-               , { field: 'GROUPS', title: '组别', width: 100 }
-               , { field: 'METERING_STANDARD_DEVICEID', title: '@Html.DisplayNameFor(model => model.METERING_STANDARD_DEVICEIDOld)', width: 29, hidden: true }
+                   { field: 'ASSESSMENTITEM', title: '评定项', width: 100 }
+                  , { field: 'THERANGESCOPE', title: '量程范围', width: 100 }
+                  , { field: 'THEFREQUENCY', title: '频率范围', width: 100 }
+                  , { field: 'INDEX1', title: '指标1', width: 100 }
+                  , { field: 'INDEX2', title: '指标2', width: 100 }
+                   , { field: 'GROUPS', title: '组别', width: 100 }
+                  , { field: 'METERING_STANDARD_DEVICEID', title: '@Html.DisplayNameFor(model => model.METERING_STANDARD_DEVICEIDOld)', width: 100, hidden: true }
             ]],
             pagination: true,
             rownumbers: true
@@ -94,12 +99,11 @@
             returnParent(arr.join("&")); //每一项用 & 分割
         }
     }
-   
+
     //导航到创建的按钮
     function flexiCreate() {
 
-        window.location.href = "/METERING_STANDARD_DEVICE/Create/@ViewBag.METERING_STANDARD_DEVICEID^UA";
-        return false;
+        window.location.href = "/METERING_STANDARD_DEVICE/Create/@ViewBag.METERING_STANDARD_DEVICEID^UB";
         return false;
     }
     //导航到修改的按钮
@@ -155,4 +159,3 @@
     };
 
 </script>
-

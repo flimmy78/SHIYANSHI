@@ -1319,6 +1319,7 @@
           <Property Name="METERING_STANDARD_DEVICEID" Type="varchar2" MaxLength="36" />
           <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="GROUPS" Type="number" Precision="38" Scale="0" />
+          <Property Name="UNCERTAINTYUI" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="UNDERTAKE_LABORATORY">
           <Key>
@@ -4859,6 +4860,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="METERING_STANDARD_DEVICEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="GROUPS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="UNCERTAINTYUI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.FK_UNCERTAI_REFERENCE_METERING" FromRole="UNCERTAINTYTABLE" ToRole="METERING_STANDARD_DEVICE" />
         </EntityType>
         <EntityType Name="UNDERTAKE_LABORATORY">
@@ -7206,6 +7208,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="UNCERTAINTYTABLE">
             <EntityTypeMapping TypeName="Model.UNCERTAINTYTABLE">
               <MappingFragment StoreEntitySet="UNCERTAINTYTABLE">
+                <ScalarProperty Name="UNCERTAINTYUI" ColumnName="UNCERTAINTYUI" />
                 <ScalarProperty Name="GROUPS" ColumnName="GROUPS" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="METERING_STANDARD_DEVICEID" ColumnName="METERING_STANDARD_DEVICEID" />

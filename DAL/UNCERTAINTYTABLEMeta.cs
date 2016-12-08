@@ -141,6 +141,10 @@ namespace Langben.DAL
         [Display(Name = "组别", Order =29)]
         [Range(0, 2147483646, ErrorMessage = "数值超出范围")]
         public int? GROUPS { get; set; }
+
+        [ScaffoldColumn(true)]
+        [Display(Name = "不确定度ui", Order = 30)]
+        public object UNCERTAINTYUI { get; set; }
     }
 }
 
