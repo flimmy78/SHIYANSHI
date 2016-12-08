@@ -655,10 +655,42 @@ function fomatFloat(src, pos) {
     } else {
         return resultSymbol + src;
     }
-    return src;
+   
 }
 
+   //小数位数不够的时候补足零
+function zeroFloat(src, pos) {
+    
+    var numArray, resultSymbol = "";
+    if (src < 0) {
+        resultSymbol = "-";
+    }
+    if (pos == "") {
+        pos = new Number(0);
+    }
+    src = src.toString().replace("-", "");  
 
+    var xsd = src.toString().split(".");
+    if (xsd.length == 1) {
+        var zero = "";
+        for (var i = 0; i < pos; i++) {
+            zero += "0";
+        }
+        src = src.toString() + "." + zero;
+        
+    }
+    if (xsd.length > 1) {
+        if (xsd[1].length < pos) {
+            var zero = "";
+            for (var i = 0; i < pos - xsd[1].length; i++) {
+                zero += "0";
+            }
+            src = src.toString() + zero;
+        
+        }       
+    }
+    return resultSymbol + src;
+}
 //第1列的事件  未来作废
 //source第2列的名称
 function xiangDuiWuCha1(obj, source, gold) {
@@ -676,7 +708,7 @@ function xiangDuiWuCha1(obj, source, gold) {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
 
         var xiangDuiWuCha = ((showData - biaoZhunData) / showData * 100);
-        var data = fomatFloat(xiangDuiWuCha, txtPointLen)
+        var data = zeroFloat(fomatFloat(xiangDuiWuCha, txtPointLen), txtPointLen);
         $(obj).parent().parent().find("#" + gold + id).val(data);
     }
 }
@@ -697,7 +729,7 @@ function xiangDuiWuCha2(obj, source, gold) {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
 
         var xiangDuiWuCha = ((showData - biaoZhunData) / showData * 100);
-        var data = fomatFloat(xiangDuiWuCha, txtPointLen)
+        var data = zeroFloat(fomatFloat(xiangDuiWuCha, txtPointLen), txtPointLen);
         $(obj).parent().parent().find("#" + gold + id).val(data);
     }
 }
@@ -721,7 +753,7 @@ function xiangDuiWuCha(obj, first, second, gold) {
     if (firstData != "undefined" && secondData != "undefined" && firstData != "" && secondData != "" && secondData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
         
-        var data = fomatFloat(((firstData - secondData) / firstData * 100), txtPointLen)
+        var data = zeroFloat(fomatFloat(((firstData - secondData) / firstData * 100), txtPointLen));
    
 
         $(obj).parent().parent().find("#" + gold).val(data);
