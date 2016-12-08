@@ -252,14 +252,11 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     debugger;
     if (IsHaveJiSuanBuQueDingDu_MeiHang)
     {
-        debugger;
-        //不确定度(隐藏域中存储不确定计算过程html路径)
-        var BuQueDingDuLuJingName = "BuQueDingDuLuJing";//不确定度名
-        var BuQueDingDuLuJingId = name + "_"+BuQueDingDuLuJingName + id;//不确定度ID
+        debugger;        
 
-        //<input type=\"hidden\" name=\""+BuQueDingDuLuJingName+"id=\""+BuQueDingDuLuJingId+"\" value=\"@ViewBag.ID\" />
-        htmlString.push("<input type=''")
-        htmlString.push("<a href=\"#\" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\" onclick = \"showModal('" + id + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID + "');\">计算不确定度</a>")
+        htmlString.push("<input type='hidden' name='" + BuQueDingDuLuJingName + "' id='" + BuQueDingDuLuJingId + "' value=''/>");
+        var returnIds = id + "&" + BuQueDingDuLuJingId + "^" + BuQueDingDuLuJingId;
+        htmlString.push("<a href=\"#\" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\" onclick = \"showModal('" + returnIds + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID + "');\">计算不确定度</a>")
         
     }
     htmlString.push("</td>");
