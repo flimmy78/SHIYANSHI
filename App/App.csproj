@@ -226,6 +226,7 @@
     <Compile Include="Images\HtmlHelper\CheckBoxListHelper.cs" />
     <Compile Include="Images\HtmlHelper\Easyui.cs" />
     <Compile Include="Images\HtmlHelper\RadioButtonListHelper.cs" />
+    <Compile Include="Models\ALLOWABLE_ERRORData.cs" />
     <Compile Include="Models\ApplianceModel.cs" />
     <Compile Include="Models\APPLIANCE_LABORATORYShow .cs" />
     <Compile Include="Models\BaseException.cs" />

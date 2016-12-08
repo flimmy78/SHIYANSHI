@@ -207,8 +207,8 @@
         METERING_STANDARD_DEVICE.UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID option:selected").val();//实验室
         METERING_STANDARD_DEVICE.THESUPERIOR = $("#THESUPERIOR").val();//上级
 
-        //if (ifshuju(METERING_STANDARD_DEVICE)) {
-        if (false) {
+        if (ifshuju(METERING_STANDARD_DEVICE)) {
+        //if (false) {
             $.ajax({
                 url: "/api/METERING_STANDARD_DEVICEApi/Post",
                 type: "Post",
