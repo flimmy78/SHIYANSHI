@@ -675,7 +675,7 @@ function xiangDuiWuCha1(obj, source, gold) {
     if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
 
-        var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
+        var xiangDuiWuCha = ((showData - biaoZhunData) / showData * 100);
         var data = fomatFloat(xiangDuiWuCha, txtPointLen)
         $(obj).parent().parent().find("#" + gold + id).val(data);
     }
@@ -696,7 +696,7 @@ function xiangDuiWuCha2(obj, source, gold) {
     if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
 
-        var xiangDuiWuCha = ((showData - biaoZhunData) / biaoZhunData * 100);
+        var xiangDuiWuCha = ((showData - biaoZhunData) / showData * 100);
         var data = fomatFloat(xiangDuiWuCha, txtPointLen)
         $(obj).parent().parent().find("#" + gold + id).val(data);
     }
@@ -721,7 +721,7 @@ function xiangDuiWuCha(obj, first, second, gold) {
     if (firstData != "undefined" && secondData != "undefined" && firstData != "" && secondData != "" && secondData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
         
-        var data = fomatFloat(((firstData - secondData) / secondData * 100), txtPointLen)
+        var data = fomatFloat(((firstData - secondData) / firstData * 100), txtPointLen)
    
 
         $(obj).parent().parent().find("#" + gold).val(data);
