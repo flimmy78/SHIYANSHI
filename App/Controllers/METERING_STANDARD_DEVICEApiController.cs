@@ -88,7 +88,7 @@ namespace Langben.App.Controllers
                 entity.CREATEPERSON = currentPerson;
 
                 entity.ID = Result.GetNewId();
-     
+
                 string returnValue = string.Empty;
                 if (m_BLL.CreateX(ref validationErrors, entity))
                 {
@@ -348,41 +348,84 @@ namespace Langben.App.Controllers
         public Common.ClientResult.DataResult ALLOWABLE_ERRORData(string id)
         {
             int total = 0;
-            METERING_STANDARD_DEVICE item = m_BLL.GetById(id);
+            METERING_STANDARD_DEVICE msd = m_BLL.GetById(id);
+            string CERTIFICATE_NUM = string.Empty;//证书编号
+            string VALID_TO = string.Empty;//有效期
+            string MAXCATEGORIES = string.Empty;//最大允许误差
 
-            var data= new Common.ClientResult.DataResult { } ;
-            return data;
-            //var data = new Common.ClientResult.DataResult
-            //{
-            //    total = total,
-            //    rows = queryData.Select(s => new
-            //    {
-            //        ID = s.ID
-            //        ,
-            //        NAME = s.NAME
-            //        ,
-            //        TEST_RANGE = s.TEST_RANGE
-            //        ,
-            //        FACTORY_NUM = s.FACTORY_NUM
-            //        ,
-            //        XINGHAO = s.XINGHAO
-            //        ,
-            //        CATEGORY = s.CATEGORY
-            //        ,
-            //        STATUS = s.STATUS
-            //        ,
-            //        UNDERTAKE_LABORATORYID = s.UNDERTAKE_LABORATORYIDOld
-            //        ,
-            //        CREATETIME = s.CREATETIME
-            //        ,
-            //        CREATEPERSON = s.CREATEPERSON
-            //        ,
-            //        UPDATETIME = s.UPDATETIME
-            //        ,
-            //        UPDATEPERSON = s.UPDATEPERSON
-            //    })
-            //};
-            //return data;
+            //分组
+            var data = (from f in msd.METERING_STANDARD_DEVICE_CHECK
+                        select f.GROUPS).Distinct();
+
+
+            List<App.Models.ALLOWABLE_ERRORData> alldata = new List<App.Models.ALLOWABLE_ERRORData>();
+
+            foreach (var item in data)
+            {
+                CERTIFICATE_NUM = null;
+                VALID_TO = null;
+                MAXCATEGORIES = null;
+                //计量标准装置检定/校准信息
+                foreach (var it in msd.METERING_STANDARD_DEVICE_CHECK.Where(w => w.GROUPS == item))
+                {
+                    TimeSpan ts = Convert.ToDateTime(it.VALID_TO) - DateTime.Now;
+
+                    if (ts.Days > 0)
+                    {
+
+                        CERTIFICATE_NUM += it.CERTIFICATE_NUM + ",";
+
+                        VALID_TO += Convert.ToDateTime(it.VALID_TO).ToString("yyyy-MM-dd") + ",";
+                    }
+                }
+                //最大允许误差信息
+                foreach (var it in msd.ALLOWABLE_ERROR.Where(w => w.GROUPS == item))
+                {
+                    if (!string.IsNullOrWhiteSpace(VALID_TO))
+                    {
+                        if (!string.IsNullOrWhiteSpace(it.THEACCURACYLEVEL))
+                        {
+
+                            MAXCATEGORIES += it.THEACCURACYLEVEL + ",";
+                        }
+                        else if (!string.IsNullOrWhiteSpace(it.MAXCATEGORIES) || !string.IsNullOrWhiteSpace(it.MAXVALUE))
+                        {
+
+                            MAXCATEGORIES += it.MAXCATEGORIES + it.MAXVALUE + ",";
+                        }
+                        else if (!string.IsNullOrWhiteSpace(it.THEUNCERTAINTY) || !string.IsNullOrWhiteSpace(it.THEUNCERTAINTYVALUE) || !string.IsNullOrWhiteSpace(it.THEUNCERTAINTYNDEXL) || !string.IsNullOrWhiteSpace(it.THEUNCERTAINTYVALUEK))
+                        {
+
+                            MAXCATEGORIES += it.THEUNCERTAINTY + it.THEUNCERTAINTYVALUE + it.THEUNCERTAINTYNDEXL + it.THEUNCERTAINTYVALUEK + ",";
+                        }
+                    }
+                }
+                if (!string.IsNullOrWhiteSpace(MAXCATEGORIES))
+                {
+                    alldata.Add(new ALLOWABLE_ERRORData()
+                    {
+                        CERTIFICATE_NUM = CERTIFICATE_NUM,//证书编号
+                        VALID_TO = VALID_TO,//有效期
+                        ID = id,//id
+                        MAXCATEGORIES = MAXCATEGORIES,//最大允许误差
+                        GROUPS = item
+                    });
+                }
+            }
+
+            var show = new Common.ClientResult.DataResult
+            {
+                total = total,
+                rows = alldata.Select(s => new
+                {
+                    CERTIFICATE_NUM = s.CERTIFICATE_NUM.TrimEnd(','),//证书编号
+                    VALID_TO = s.VALID_TO.TrimEnd(','),//有效期
+                    ID = s.ID,//id
+                    MAXCATEGORIES = s.MAXCATEGORIES.TrimEnd(','),//最大允许误差
+                    GROUPS = s.GROUPS
+                })
+            };
+            return show;
         }
 
         IBLL.IMETERING_STANDARD_DEVICEBLL m_BLL;

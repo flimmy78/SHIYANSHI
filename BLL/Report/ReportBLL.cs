@@ -2102,8 +2102,11 @@ namespace Langben.Report
 
                     if (Id != null && Id.ToString().Trim() != "" && !dic.ContainsKey(Id))
                     {
-
-                        dic.Add(Id.ToString(), rowIndex_Destination);
+                        if (!dic.Keys.Contains(Id.ToString()))
+                        {
+             dic.Add(Id.ToString(), rowIndex_Destination);
+                        }
+           
                         CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true, null, null, allSpecialCharacters, CellsTemplate);
                         rowIndex_Destination++;
 

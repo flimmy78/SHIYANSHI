@@ -58,8 +58,9 @@ namespace Langben.App.Controllers
         /// <returns></returns>
         [SupportFilter]
         public ActionResult Create(string id)
-        { 
-            
+        {
+            ViewBag.METERING_STANDARD_DEVICEID = id.Split('^')[0];
+            ViewBag.IS = id.Split('^')[1];
             return View();
         }
 
