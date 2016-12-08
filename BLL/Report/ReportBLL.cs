@@ -1524,7 +1524,8 @@ namespace Langben.Report
                     if (allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
-                        //解析html表格数据                           
+                        //解析html表格数据    
+                                               
                         RowIndex = paserData(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);
 
 
@@ -2099,7 +2100,7 @@ namespace Langben.Report
 
                     Id = GetExceptNameID(Id, Name);
 
-                    if (Id != null && Id.ToString().Trim() != "")
+                    if (Id != null && Id.ToString().Trim() != "" && !dic.ContainsKey(Id))
                     {
 
                         dic.Add(Id.ToString(), rowIndex_Destination);
@@ -2287,6 +2288,10 @@ namespace Langben.Report
         /// <returns></returns>
         private int paserData(string html, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, SpecialCharacters allSpecialCharacters = null)
         {
+            if(html==null || html.Trim()=="")
+            {
+                return rowIndex_Destination;
+            }
             #region 将hmtl转换程文本框及下拉框对象
             Lexer lexer_Input = new Lexer(html);//必须定义多个，否则第二个获取不到数据
             Parser parser_Input = new Parser(lexer_Input);

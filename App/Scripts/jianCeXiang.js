@@ -222,9 +222,9 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     //下拉框
     var ddlName = name + "_UNIT";//下拉框名
     var ddlId = ddlName + "_" + id;//下拉框ID
-    //不确定度
-    var BuQueDingDuName = name + "_BuQueDingDu";//不确定度名
-    var BuQueDingDuId = BuQueDingDuName + "_" + id;//不确定度ID
+    //不确定度(隐藏域中存储不确定计算过程html路径)
+    var BuQueDingDuLuJingName = "BuQueDingDuLuJing";//不确定度名
+    var BuQueDingDuLuJingId = name + "_"+BuQueDingDuLuJingName + id;//不确定度ID
 
     var id = name + "_" + id;//输入框id
 
@@ -253,9 +253,14 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     if (IsHaveJiSuanBuQueDingDu_MeiHang)
     {
         debugger;
-        //htmlString.push("<a href=\"/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID + "\" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\">计算不确定度</a>")
+        //不确定度(隐藏域中存储不确定计算过程html路径)
+        var BuQueDingDuLuJingName = "BuQueDingDuLuJing";//不确定度名
+        var BuQueDingDuLuJingId = name + "_"+BuQueDingDuLuJingName + id;//不确定度ID
+
+        //<input type=\"hidden\" name=\""+BuQueDingDuLuJingName+"id=\""+BuQueDingDuLuJingId+"\" value=\"@ViewBag.ID\" />
+        htmlString.push("<input type=''")
         htmlString.push("<a href=\"#\" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\" onclick = \"showModal('" + id + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID + "');\">计算不确定度</a>")
-        //"onclick = \"showModalOnly('SCHEMEID', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID+"');\"";
+        
     }
     htmlString.push("</td>");
     return htmlString.join("");
