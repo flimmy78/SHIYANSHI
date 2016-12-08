@@ -114,7 +114,7 @@ namespace Langben.Report
             }
             return result;
         }
-  
+
 
         /// <summary>
         /// 导出原始记录及报告并保存路径
@@ -991,6 +991,35 @@ namespace Langben.Report
             sheet_Destination.GetRow(47).GetCell(14).SetCellValue(chuanzhen);
             #endregion
         }
+        public bool ExportOriginalRecord(string ID, out string Message)
+        {
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            string errors = string.Empty;
+            IBLL.IPREPARE_SCHEMEBLL m_BLL = new PREPARE_SCHEMEBLL();
+            PREPARE_SCHEME entity = m_BLL.GetById(ID);
+            string saveFileName = "";
+            if (entity != null)
+            {
+                ExportType type = GetExportType(entity, "ExportOriginal");
+
+                if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE != null &&
+              entity.QUALIFIED_UNQUALIFIED_TEST_ITE.Count > 0)
+                {
+                    TableTemplates allTableTemplates = GetTableTemplates(type);
+                    SpecialCharacters allSpecialCharacters = GetSpecialCharacters();
+
+                    entity.QUALIFIED_UNQUALIFIED_TEST_ITE = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.OrderBy(p => p.SORT).ToList();
+
+                    foreach (QUALIFIED_UNQUALIFIED_TEST_ITE iEntity in entity.QUALIFIED_UNQUALIFIED_TEST_ITE)
+                    {
+                        doc.LoadHtml(iEntity.HTMLVALUE);
+                        errors += iEntity.ID + iEntity.RULENJOINAME + AnalyticHTML.Getinput(doc);
+                    }
+                }
+            }
+            Message = errors;
+            return false;
+        }
         /// <summary>
         /// 导出原始记录Excel
         /// </summary>
@@ -1525,7 +1554,7 @@ namespace Langben.Report
                     {
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
                         //解析html表格数据    
-                                               
+
                         RowIndex = paserData(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);
 
 
@@ -1739,7 +1768,7 @@ namespace Langben.Report
             if (sourceCell == null)
             {
                 return new HSSFRichTextString("");
-            }            
+            }
             string key = "";
             //xml是否配置了信息
             //< Cell >
@@ -2104,9 +2133,9 @@ namespace Langben.Report
                     {
                         if (!dic.Keys.Contains(Id.ToString()))
                         {
-             dic.Add(Id.ToString(), rowIndex_Destination);
+                            dic.Add(Id.ToString(), rowIndex_Destination);
                         }
-           
+
                         CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true, null, null, allSpecialCharacters, CellsTemplate);
                         rowIndex_Destination++;
 
@@ -2122,17 +2151,17 @@ namespace Langben.Report
         /// <param name="id">控件ID</param>
         /// <param name="name">控件name</param>
         /// <returns></returns>
-        private string GetExceptNameID(object Id,object Name)
+        private string GetExceptNameID(object Id, object Name)
         {
-            if(Id==null || Name==null)
+            if (Id == null || Name == null)
             {
                 return "";
-            }            
+            }
             if (!string.IsNullOrWhiteSpace(Id.ToString().Trim()) && Id.ToString().Trim().IndexOf(Name.ToString().Trim()) == 0)
             {
                 Id = Id.ToString().Trim().Replace(Name.ToString().Trim(), "");
             }
-            
+
             string[] ids = Id.ToString().Trim().Split('_');
             if (ids.Length > 3)
             {
@@ -2143,7 +2172,7 @@ namespace Langben.Report
                 }
             }
 
-            
+
             return Id.ToString().Trim();
         }
         /// <summary>
@@ -2291,7 +2320,7 @@ namespace Langben.Report
         /// <returns></returns>
         private int paserData(string html, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, SpecialCharacters allSpecialCharacters = null)
         {
-            if(html==null || html.Trim()=="")
+            if (html == null || html.Trim() == "")
             {
                 return rowIndex_Destination;
             }
@@ -2545,7 +2574,7 @@ namespace Langben.Report
                                 Value = "";//无数据设置空
                             }
                             if (Id != null && Id.ToString().Trim() != "" && Name != null && Name.ToString().Trim() != "")
-                            {                                
+                            {
                                 Id = GetExceptNameID(Id, Name);
                                 //防止遗漏行号
                                 if (!dic.ContainsKey(Id.ToString()) && dic.ContainsKey(Id.ToString() + "_0"))
@@ -2983,9 +3012,9 @@ namespace Langben.Report
                 {
                     string[] ids = Id.ToString().Trim().Split('_');
                     if (ids.Length > 3)
-                    {                        
-                       return int.Parse(ids[ids.Length - 3]);
-                        
+                    {
+                        return int.Parse(ids[ids.Length - 3]);
+
                     }
                     else
                     {

@@ -1577,12 +1577,9 @@
     <script type="text/javascript" language="javascript">
         $(function () {
             //注
-            if ($('#REMARK').textbox('getValue') == "") {
-                $('#REMARK').textbox('setValue', "显示值、标准值的单位与量程单位一致。");
+            if ($('#REMARK').val() == "") {
+                $('#REMARK').val("显示值、标准值的单位与量程单位一致。");
             }
-         
-             
-
         });
         //一个量程的需要这个方法
         //重写set方法，只准对增加空白行

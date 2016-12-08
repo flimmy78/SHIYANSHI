@@ -115,10 +115,24 @@ namespace Langben.Report
                 if (string.IsNullOrWhiteSpace(item.Id))
                 {
                     errors += item.XPath + "|Id没有";
+                    continue;
                 }
                 else
                 {
-                    ids.Add(item.Id, item.XPath);
+                    try
+                    {
+                        ids.Add(item.Id, item.XPath);
+                    }
+                    catch (System.Exception ex)
+                    {
+                        if(item.Attributes["name"] == null)
+                        {
+                            errors += item.Attributes["name"].Value;
+                        }
+                        errors += item.XPath + ex.Message + "|"+ item.Id;
+                        continue;
+                    }
+                 
                 }
                 if (item.Name == "input")
                 {
@@ -139,7 +153,7 @@ namespace Langben.Report
                     }
                 }
             }
-            
+
             return errors;
         }
 
