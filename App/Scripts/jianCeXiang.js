@@ -561,11 +561,11 @@ function SetAllControlHtml() {
                 } else {
                     $(item).attr("selected", false);
                 }
-              
+
 
             }
         );
- 
+
         }
 
     });
@@ -601,7 +601,7 @@ function fomatFloat(src, pos) {
     if (src < 0) {
         resultSymbol = "-";
     }
-    if (pos == "") {
+    if (pos == "undefined" || pos == "") {
         pos = new Number(0);
     }
     src = src.toString().replace("-", "");
@@ -666,39 +666,57 @@ function fomatFloat(src, pos) {
     }
 
 }
+$(function () {
+    //debugger;
 
+    //var gf = (round2(3.504501, 3));
+    //var ewgf = (round2(9.8249, 3));
+
+});
+ 
+//科学技术法
+//pos保留的小数位数，不足的位数补零
+function kexue(src, pos) {
+    if (pos == "undefined" || pos == "") {
+
+        return;
+    }
+    var zero = "";
+    for (var i = 0; i < pos; i++) {
+        zero += "0";
+    }
+
+    return numeral(src).format('0.' + zero + 'e+0');//'0.000e+0'
+
+}
+//小数变成百分比
+//pos保留的小数位数，不足的位数补零
+function percentages(src, pos) {
+    if (pos == "undefined" || pos == "") {
+
+        return;
+    }
+    var zero = "";
+    for (var i = 0; i < pos; i++) {
+        zero += "0";
+    }
+
+    return numeral(src).format('0.' + zero + '%');//'(0.000 %)'
+
+}
 //小数位数不够的时候补足零
 function zeroFloat(src, pos) {
+    if (pos == "undefined" || pos == "") {
 
-    var numArray, resultSymbol = "";
-    if (src < 0) {
-        resultSymbol = "-";
+        return;
     }
-    if (pos == "") {
-        pos = new Number(0);
+    var zero = "";
+    for (var i = 0; i < pos; i++) {
+        zero += "0";
     }
-    src = src.toString().replace("-", "");
 
-    var xsd = src.toString().split(".");
-    if (xsd.length == 1) {
-        var zero = "";
-        for (var i = 0; i < pos; i++) {
-            zero += "0";
-        }
-        src = src.toString() + "." + zero;
+    return numeral(src).format('0.' + zero);
 
-    }
-    if (xsd.length > 1) {
-        if (xsd[1].length < pos) {
-            var zero = "";
-            for (var i = 0; i < pos - xsd[1].length; i++) {
-                zero += "0";
-            }
-            src = src.toString() + zero;
-
-        }
-    }
-    return resultSymbol + src;
 }
 //第1列的事件  未来作废
 //source第2列的名称
@@ -762,7 +780,7 @@ function xiangDuiWuCha(obj, first, second, gold) {
     if (firstData != "undefined" && secondData != "undefined" && firstData != "" && secondData != "" && secondData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
 
-        var data = zeroFloat(fomatFloat(((firstData - secondData) / firstData * 100), txtPointLen));
+        var data = zeroFloat(fomatFloat(((firstData - secondData) / firstData * 100), txtPointLen), txtPointLen);
 
 
         $(obj).parent().parent().find("#" + gold).val(data);
@@ -790,7 +808,7 @@ function jueDuiWuCha(obj, first, second, gold) {
     if (firstData != "" && secondData != "") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
 
-        var data = (firstData - secondData).toFixed(txtPointLen);
+        var data = zeroFloat((firstData - secondData).toFixed(txtPointLen), txtPointLen);
 
         $(obj).parent().parent().find("#" + gold).val(data);
     }

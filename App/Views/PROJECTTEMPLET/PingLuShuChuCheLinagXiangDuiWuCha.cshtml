@@ -351,14 +351,15 @@
  
         //计算显示值
         function resetXianShiZhi(obj) {
-            //重新计算当前行
-            xiangDuiWuCha(obj, "OUTPUTVALUE", "READVALUE", "RELATIVEERROR");
+            //重新计算当前行RELATIVEERROR_1_1_1
+          
+            xiangDuiWuCha(obj, "OUTPUTVALUE", "READVALUE", "ACTUALVALUE");
            
         }
         //计算标准值
         function resetBiaoZhunZhi(obj, source, gold) {
             //重新计算当前行
-            xiangDuiWuCha(obj, "OUTPUTVALUE", "READVALUE", "RELATIVEERROR");
+            xiangDuiWuCha(obj, "OUTPUTVALUE", "READVALUE", "ACTUALVALUE");
 
         }
         //离开事件，用于计算
