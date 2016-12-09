@@ -74,11 +74,11 @@
 
         var arr = [];
         for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].ID);
+            arr.push(rows[i].ID + "*" + rows[i].GROUPS + "*A*" + rows[i].CERTIFICATE_NUM);
         }
         arr.push("^");
         for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].VALUE);
+            arr.push(rows[i].CERTIFICATE_NUM);
         }
         //主键列和显示列之间用 ^ 分割   每一项用 , 分割
         if (arr.length > 0) {//一条数据和多于一条

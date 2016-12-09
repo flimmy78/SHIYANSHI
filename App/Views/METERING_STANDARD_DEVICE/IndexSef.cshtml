@@ -13,7 +13,10 @@
         </div>
     </div>*@
 <br style="clear: both;" />
-
+<span id="checkUNDERTAKE_LABORATORYIDOld">
+</span>
+@*<input type="hidden" value="" name="abc" id="abc" />*@
+@Html.HiddenFor(model => model.UNDERTAKE_LABORATORYIDOld)
 <script type="text/javascript" language="javascript">
     $(function () {
 
@@ -25,11 +28,11 @@
             //nowrap: false,
             striped: true,
             collapsible: true,
-            url: '/api/METERING_STANDARD_DEVICEApi/PostData', //获取数据的url
+            url: '/api/METERING_STANDARD_DEVICEApi/PostDataX', //获取数据的url
             sortName: 'ID',
             sortOrder: 'desc',
             idField: 'ID',
-            queryParams: { search: GetQuery() },//默认查询条件   
+            queryParams: { search: GetQuery() },//默认查询条件
             toolbar: [
 
                  {
@@ -65,21 +68,16 @@
                 , { field: 'XINGHAO', title: '@Html.DisplayNameFor(model => model.XINGHAO)', width: 130, align: 'center' }
                 , { field: 'CATEGORY', title: '@Html.DisplayNameFor(model => model.CATEGORY)', width: 86, align: 'center' }
                 , { field: 'STATUS', title: '@Html.DisplayNameFor(model => model.STATUS)', width: 86, hidden: true, align: 'center' }
-                , { field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width: 86, align: 'center' }
-                , { field: 'CREATETIME', title: '@Html.DisplayNameFor(model => model.CREATETIME)', width: 86, formatter: formatDatebox, align: 'center' }
-                , { field: 'CREATEPERSON', title: '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 86, align: 'center' }
                 , {
-                    field: 'aa', title: '操作', width: 86, formatter: function (value, row, index) {
-                        var html = "<a href='/METERING_STANDARD_DEVICE/ALLOWABLE_ERROR/" + row.ID + "'>准确度等级</a><br/>";
-                        html += "<a href='/UNCERTAINTYTABLE/IndexUB/" + row.ID + "'>范围指标</a><br/>";
-                        html += "<a href='/UNCERTAINTYTABLE/Index/" + row.ID + "'>误差来源</a>";
-                        return html;
+                    field: 'A', title: '准确度等级', width: 86, align: 'center', formatter: function (value, row, index) {
+                        var a = "<a href=_t_javascript:;_t_ class=_t_easyui-linkbutton_t_ data-options=_t_iconCls:'icon-search'_t_ onclick=_t_showModalOnly('UNDERTAKE_LABORATORYIDOld', '/METERING_STANDARD_DEVICE/ALLOWABLE_ERROR/" + row.ID + "');_t_>选择准确度等级</a>";
+                        var reg = new RegExp("_t_", "g");//g,表示全部替换。
+                        return a.replace(reg, '"');                                              
                     }
-                }
-                @*//, { display: '@Html.DisplayNameFor(model => model.PREPARE_SCHEMEID)', name: 'PREPARE_SCHEMEID', width: 86, sortable: false, align: 'left' }*@
+                }                             
             ]],
-            pagination: true,
-            rownumbers: true
+            pagination: false,
+            rownumbers: false
 
         });
 
@@ -148,27 +146,23 @@
     };
     //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
     function flexiSelect() {
-
-        var rows = $('#flexigridData').datagrid('getSelections');
-        if (rows.length == 0) {
-            $.messager.alert('操作提示', '请选择数据!', 'warning');
-            return false;
-        }
-
         var arr = [];
-        for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].ID);
+        var zhi=$("#UNDERTAKE_LABORATORYIDOld").val();
+        if (zhi != "") {
+            arr.push(zhi);
+            arr.push("^");
+            arr.push(zhi.split('*')[3]);
         }
-        arr.push("^");
-        for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].NAME);
+        else {
+            $.messager.alert('操作提示', "选择不能为空!", 'info');
         }
+              
         //主键列和显示列之间用 ^ 分割   每一项用 , 分割
         if (arr.length > 0) {//一条数据和多于一条
             returnParent(arr.join("&")); //每一项用 & 分割
         }
     }
-   
+
     //导航到查看详细的按钮
     function getView() {
 
@@ -241,4 +235,3 @@
     };
 
 </script>
-
