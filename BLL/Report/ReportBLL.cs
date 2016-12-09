@@ -2165,14 +2165,16 @@ namespace Langben.Report
             {
                 Id = Id.ToString().Trim().Replace(Name.ToString().Trim(), "");
             }
-
-            string[] ids = Id.ToString().Trim().Split('_');
-            if (ids.Length > 3)
+            else
             {
-                Id = "";
-                for (int i = ids.Length - 3; i < ids.Length - 1; i++)
+                string[] ids = Id.ToString().Trim().Split('_');
+                if (ids.Length > 3)
                 {
-                    Id += "_" + ids[i];
+                    Id = "";
+                    for (int i = ids.Length - 3; i < ids.Length - 1; i++)
+                    {
+                        Id += "_" + ids[i];
+                    }
                 }
             }
 
@@ -2972,9 +2974,15 @@ namespace Langben.Report
             //标签类型
             if (tag.GetAttribute("$<TAGNAME>$") == "input")
             {
-
-                Id = tag.GetAttribute("ID");
-                Name = tag.GetAttribute("name");
+                if (tag.GetAttribute("TYPE") == "hidden")
+                {
+                    return -1;
+                }
+                else
+                {
+                    Id = tag.GetAttribute("ID");
+                    Name = tag.GetAttribute("name");
+                }
             }
             else
             {
