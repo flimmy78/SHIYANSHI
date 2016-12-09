@@ -182,6 +182,8 @@
     <Compile Include="Controllers\HomeRightController.cs" />
     <Compile Include="Controllers\PROJECTTEMPLETApiController.cs" />
     <Compile Include="Controllers\PROJECTTEMPLETController.cs" />
+    <Compile Include="Controllers\STANDARDCHOICEApiController.cs" />
+    <Compile Include="Controllers\STANDARDCHOICEController.cs" />
     <Compile Include="Controllers\SysAnnouncementController.cs" />
     <Compile Include="Controllers\SysDepartmentController.cs" />
     <Compile Include="Controllers\SysDepartmentTreeController.cs" />
@@ -964,6 +966,10 @@
     <Content Include="Views\UNCERTAINTYTABLE\IndexUB.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\UNCERTAINTYTABLE.cshtml" />
     <Content Include="Views\PREPARE_SCHEME\Test.cshtml" />
+    <Content Include="Views\STANDARDCHOICE\Create.cshtml" />
+    <Content Include="Views\STANDARDCHOICE\Details.cshtml" />
+    <Content Include="Views\STANDARDCHOICE\Edit.cshtml" />
+    <Content Include="Views\STANDARDCHOICE\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
