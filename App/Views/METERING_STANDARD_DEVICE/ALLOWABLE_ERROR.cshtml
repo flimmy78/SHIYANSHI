@@ -65,7 +65,7 @@
 
     //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
     function flexiSelect() {
-
+        debugger
         var rows = $('#flexigridData').datagrid('getSelections');
         if (rows.length == 0) {
             $.messager.alert('操作提示', '请选择数据!', 'warning');
@@ -85,6 +85,7 @@
             returnParent(arr.join("&")); //每一项用 & 分割
         }
     }
+
     //导航到创建的按钮
     function flexiCreate() {
 
