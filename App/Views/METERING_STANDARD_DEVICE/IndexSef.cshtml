@@ -68,6 +68,14 @@
                 , { field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width: 86, align: 'center' }
                 , { field: 'CREATETIME', title: '@Html.DisplayNameFor(model => model.CREATETIME)', width: 86, formatter: formatDatebox, align: 'center' }
                 , { field: 'CREATEPERSON', title: '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 86, align: 'center' }
+                , {
+                    field: 'aa', title: '操作', width: 86, formatter: function (value, row, index) {
+                        var html = "<a href='/METERING_STANDARD_DEVICE/ALLOWABLE_ERROR/" + row.ID + "'>准确度等级</a><br/>";
+                        html += "<a href='/UNCERTAINTYTABLE/IndexUB/" + row.ID + "'>范围指标</a><br/>";
+                        html += "<a href='/UNCERTAINTYTABLE/Index/" + row.ID + "'>误差来源</a>";
+                        return html;
+                    }
+                }
                 @*//, { display: '@Html.DisplayNameFor(model => model.PREPARE_SCHEMEID)', name: 'PREPARE_SCHEMEID', width: 86, sortable: false, align: 'left' }*@
             ]],
             pagination: true,
@@ -160,6 +168,7 @@
             returnParent(arr.join("&")); //每一项用 & 分割
         }
     }
+   
     //导航到查看详细的按钮
     function getView() {
 
