@@ -101,7 +101,6 @@ function deleteTable(table, hidden) { //删除table和隐藏的值
     }
 }
 function showModalMany(me, url, dialogWidth, callback) { //弹出窗体，多选 
-    debugger
     if (dialogWidth == null || dialogWidth == "undefined" || dialogWidth == "") {
         dialogWidth = 968;
     }

@@ -22,6 +22,7 @@ namespace Langben.DAL
             this.PRINTREPORT = new HashSet<PRINTREPORT>();
             this.QUALIFIED_UNQUALIFIED_TEST_ITE = new HashSet<QUALIFIED_UNQUALIFIED_TEST_ITE>();
             this.REPORTCOLLECTION = new HashSet<REPORTCOLLECTION>();
+            this.STANDARDCHOICE = new HashSet<STANDARDCHOICE>();
             this.THEAPPROVALPROCESS = new HashSet<THEAPPROVALPROCESS>();
             this.THEREVIEWPROCESS = new HashSet<THEREVIEWPROCESS>();
             this.METERING_STANDARD_DEVICE = new HashSet<METERING_STANDARD_DEVICE>();
@@ -86,6 +87,8 @@ namespace Langben.DAL
         public virtual ICollection<QUALIFIED_UNQUALIFIED_TEST_ITE> QUALIFIED_UNQUALIFIED_TEST_ITE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REPORTCOLLECTION> REPORTCOLLECTION { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<STANDARDCHOICE> STANDARDCHOICE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<THEAPPROVALPROCESS> THEAPPROVALPROCESS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

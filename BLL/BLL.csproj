@@ -116,6 +116,7 @@
     <Compile Include="Shiyanshi\VSHENHEBLL.cs" />
     <Compile Include="Shiyanshi\VSHENPIBLL.cs" />
     <Compile Include="Shiyanshi\VTEST_ITEBLL.cs" />
+    <Compile Include="STANDARDCHOICEBLL.cs" />
     <Compile Include="SysAnnouncementBLL.cs" />
     <Compile Include="SysDepartmentBLL.cs" />
     <Compile Include="SysDocumentBLL.cs" />

@@ -48,6 +48,7 @@
     <Compile Include="Framework\ISysMenuSysRoleSysOperationBLL.cs" />
     <Compile Include="IFileUploaderBLL.cs" />
     <Compile Include="IPROJECTTEMPLETBLL.cs" />
+    <Compile Include="ISTANDARDCHOICEBLL.cs" />
     <Compile Include="ISysAnnouncementBLL.cs" />
     <Compile Include="ISysDepartmentBLL.cs" />
     <Compile Include="ISysDocumentBLL.cs" />

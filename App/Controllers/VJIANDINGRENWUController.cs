@@ -270,11 +270,12 @@ namespace Langben.App.Controllers
                 prepShow.SCHEMENAME = prme.SCHEME.NAME;//  选择方案模板
                 prepShow.SCHEMEID = prme.SCHEME.ID;//  选择方案模板
             }
-            if (prme != null && prme.METERING_STANDARD_DEVICE != null)
+            if (prme != null && prme.STANDARDCHOICE != null)
             {
-                foreach (var item in prme.METERING_STANDARD_DEVICE)
+                foreach (var item in prme.STANDARDCHOICE)
                 {
-                    prepShow.METERING_STANDARD_DEVICEID += item.ID + "&" + item.NAME + "^";
+                    //rows[i].ID + "*" + rows[i].GROUPS + "*A*" + rows[i].CERTIFICATE_NUM
+                    prepShow.METERING_STANDARD_DEVICEID +=item.ID+"*"+item.METERING_STANDARD_DEVICEID+"*"+item.GROUPS+"*"+item.TYPE+"*"+item.NAMES + "&" + item.NAMES + "^";
                 }
             }
             foreach (var item in prme.APPLIANCE_LABORATORY)

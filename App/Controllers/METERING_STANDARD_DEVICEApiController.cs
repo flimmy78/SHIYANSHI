@@ -62,6 +62,49 @@ namespace Langben.App.Controllers
         }
 
         /// <summary>
+        /// 异步加载数据
+        /// </summary>
+        /// <param name="getParam"></param>
+        /// <returns></returns>
+        public Common.ClientResult.DataResult PostDataX([FromBody]GetDataParam getParam)
+        {
+            int total = 0;
+            getParam.page = 1;
+            getParam.rows = 9999;
+            List<METERING_STANDARD_DEVICE> queryData = m_BLL.GetByParam(null, getParam.page, getParam.rows, getParam.order, getParam.sort, getParam.search, ref total);
+            var data = new Common.ClientResult.DataResult
+            {
+                total = total,
+                rows = queryData.Select(s => new
+                {
+                    ID = s.ID
+                    ,
+                    NAME = s.NAME
+                    ,
+                    TEST_RANGE = s.TEST_RANGE
+                    ,
+                    FACTORY_NUM = s.FACTORY_NUM
+                    ,
+                    XINGHAO = s.XINGHAO
+                    ,
+                    CATEGORY = s.CATEGORY
+                    ,
+                    STATUS = s.STATUS
+                    ,
+                    UNDERTAKE_LABORATORYID = s.UNDERTAKE_LABORATORYIDOld
+                    ,
+                    CREATETIME = s.CREATETIME
+                    ,
+                    CREATEPERSON = s.CREATEPERSON
+                    ,
+                    UPDATETIME = s.UPDATETIME
+                    ,
+                    UPDATEPERSON = s.UPDATEPERSON
+                })
+            };
+            return data;
+        }
+        /// <summary>
         /// 根据ID获取数据模型
         /// </summary>
         /// <param name="id">编号</param>
