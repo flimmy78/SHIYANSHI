@@ -22,6 +22,8 @@ namespace Langben.DAL
         public Nullable<System.DateTime> UPDATETIME { get; set; }
         public string UPDATEPERSON { get; set; }
         public string PREPARE_SCHEMEID { get; set; }
+        public string METERING_STANDARD_DEVICEID { get; set; }
+        public string NAMES { get; set; }
     
         public virtual PREPARE_SCHEME PREPARE_SCHEME { get; set; }
     }

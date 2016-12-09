@@ -767,6 +767,8 @@
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" />
+          <Property Name="METERING_STANDARD_DEVICEID" Type="varchar2" MaxLength="36" />
+          <Property Name="NAMES" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="SysAnnouncement">
           <Key>
@@ -4334,6 +4336,8 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="PREPARE_SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="METERING_STANDARD_DEVICEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="NAMES" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PREPARE_SCHEME" Relationship="Model.FK_STANDARD_REFERENCE_PREPARE_" FromRole="STANDARDCHOICE" ToRole="PREPARE_SCHEME" />
         </EntityType>
         <EntityType Name="SysAnnouncement">
@@ -6743,6 +6747,8 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="STANDARDCHOICE">
             <EntityTypeMapping TypeName="Model.STANDARDCHOICE">
               <MappingFragment StoreEntitySet="STANDARDCHOICE">
+                <ScalarProperty Name="NAMES" ColumnName="NAMES" />
+                <ScalarProperty Name="METERING_STANDARD_DEVICEID" ColumnName="METERING_STANDARD_DEVICEID" />
                 <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />

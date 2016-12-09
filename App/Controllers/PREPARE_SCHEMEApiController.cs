@@ -255,33 +255,7 @@ namespace Langben.App.Controllers
                         }
                         return result;
                     }
-                    //新增
-                    //if (m_BLL.Create(ref validationErrors, entity) && m_BLL2.EditField(ref validationErrors, app) && m_BLL.UPTSerialNumber(entity.ID))
-                    //{
-                    //    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，预备方案的信息的Id为" + entity.ID, "预备方案"
-                    //        );//写入日志 
-                    //    result.Code = Common.ClientCode.Succeed;
-                    //    result.Message = Suggestion.InsertSucceed;
-                    //    result.Id = entity.ID;
-                    //    return result; //提示创建成功
-                    //}
-
-                    //else
-                    //{
-                    //    if (validationErrors != null && validationErrors.Count > 0)
-                    //    {
-                    //        validationErrors.All(a =>
-                    //        {
-                    //            returnValue += a.ErrorMessage;
-                    //            return true;
-                    //        });
-                    //    }
-                    //    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，预备方案的信息，" + returnValue, "预备方案"
-                    //        );//写入日志                      
-                    //    result.Code = Common.ClientCode.Fail;
-                    //    result.Message = Suggestion.InsertFail + returnValue;
-                    //    return result; //提示插入失败
-                    //}
+                  
                 }
 
             }

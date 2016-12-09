@@ -53,7 +53,13 @@ namespace Langben.DAL
 			[Display(Name = "预备方案", Order = 8)]
 			public object PREPARE_SCHEMEID { get; set; }
 
+        [ScaffoldColumn(true)]
+        [Display(Name = "标准装置/计量标准器信息", Order = 9)]
+        public object METERING_STANDARD_DEVICEID { get; set; }
 
+        [ScaffoldColumn(true)]
+        [Display(Name = "显示值", Order = 10)]
+        public object NAMES { get; set; }
     }
 }
  
