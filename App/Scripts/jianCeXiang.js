@@ -119,7 +119,7 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
             }
 
             $("select[name=" + item_LianDong.trim() + "_UNIT]").each(function (a, b) {
-                 
+
                 if (b.id.indexOf(id) >= 0) {
                     b.value = obj.value;
                 }
@@ -132,9 +132,8 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
 }
 //获取每行不确定度按钮
 //Name：不确定度按钮所在某检测项控件名称后
-function GetJiSuanBuQueDingDu_MeiHang_Html(Name)
-{
-    var Result = false;    
+function GetJiSuanBuQueDingDu_MeiHang_Html(Name) {
+    var Result = false;
 
     if (Name == null || Name.trim() == "") {
         return "";
@@ -147,12 +146,12 @@ function GetJiSuanBuQueDingDu_MeiHang_Html(Name)
     var NameNew = Name;
     NameNew = NameNew.toUpperCase();
     $.each(objArray, function (i, item) {
-        if (item == null || item.trim() == "" || item.toUpperCase().indexOf(NameNew) < 0 ) {
+        if (item == null || item.trim() == "" || item.toUpperCase().indexOf(NameNew) < 0) {
             return true;
         }
         Result = true;
         return false;
-       
+
     });
     return Result;
 }
@@ -224,7 +223,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     var ddlId = ddlName + "_" + id;//下拉框ID
     //不确定度(隐藏域中存储不确定计算过程html路径)
     var BuQueDingDuLuJingName = "BuQueDingDuLuJing";//不确定度名
-    var BuQueDingDuLuJingId = name + "_"+BuQueDingDuLuJingName + id;//不确定度ID
+    var BuQueDingDuLuJingId = name + "_" + BuQueDingDuLuJingName + id;//不确定度ID
 
     var id = name + "_" + id;//输入框id
 
@@ -246,18 +245,17 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     if (unit) {
         htmlString.push(unit);
     }
-    
+
     //不确定度
     var IsHaveJiSuanBuQueDingDu_MeiHang = GetJiSuanBuQueDingDu_MeiHang_Html(name);
     debugger;
-    if (IsHaveJiSuanBuQueDingDu_MeiHang)
-    {
-        debugger;        
+    if (IsHaveJiSuanBuQueDingDu_MeiHang) {
+        debugger;
 
         htmlString.push("<input type='hidden' name='" + BuQueDingDuLuJingName + "' id='" + BuQueDingDuLuJingId + "' value=''/>");
         var returnIds = id + "&" + BuQueDingDuLuJingId + "^" + BuQueDingDuLuJingId;
         htmlString.push("<a href=\"#\" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\" onclick = \"showModal('" + returnIds + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID + "');\">计算不确定度</a>")
-        
+
     }
     htmlString.push("</td>");
     return htmlString.join("");
@@ -405,14 +403,14 @@ function BtnInit() {
         //$("#btnAddLiangCheng").hide();
         ////$("#btnSave_ITE").show();
         //$("#btnReset_ITE").show();
-        $("a").each(function () {          
+        $("a").each(function () {
             if (this.id != "btnSave") {
                 $(this).hide();
             }
             else {
                 $(this).show();
             }
-        });       
+        });
 
     }
     else//方案设置
@@ -533,30 +531,41 @@ function Save_FangAn() {
 }
 //由于html无法获取value，重新给outerHTML赋值
 function SetAllControlHtml() {
-    var sd = $("input[type='text']");
-    var sddd = $("input[type='text']").not('#tongdao_moban :input');
 
     $("input[type='text']").not('#tongdao_moban :input').each(function () {
-        var dsa = this.id
-      
-        //除了隐藏模板中的输入框，其他所有的输入框123
+
+        //除了隐藏模板中的输入框，其他所有的输入框
         if (this.id != "") {
-            
-            
+
             if (this.attributes.value != undefined) {
                 this.attributes.value.value = $(this).val();
+            } else {//如果没有写value属性，则加上
+                var value = $(this).val();
+                $(this).attr("value", value);
             }
+
+
         }
     });
 
     $("select").not('#tongdao_moban select').each(function () {
         //除了隐藏模板中的下拉框，其他所有的下拉框
         if (this.id != "") {
-          
-            var checkText = $(this).find("option:selected").text();  //获取Select选择的Text           
-            $(this).find("option[value='" + checkText + "']").attr("selected", true);
 
+            var value = $(this).val();
+            //清除所有的selected
+            $(this).find("option").each(function (i, item) {
+                if ($(item).val() == value) {
+                    //将选中的value的option设置为selected
+                    $(item).attr("selected", true);
+                } else {
+                    $(item).attr("selected", false);
+                }
+              
 
+            }
+        );
+ 
         }
 
     });
@@ -655,12 +664,12 @@ function fomatFloat(src, pos) {
     } else {
         return resultSymbol + src;
     }
-   
+
 }
 
-   //小数位数不够的时候补足零
+//小数位数不够的时候补足零
 function zeroFloat(src, pos) {
-    
+
     var numArray, resultSymbol = "";
     if (src < 0) {
         resultSymbol = "-";
@@ -668,7 +677,7 @@ function zeroFloat(src, pos) {
     if (pos == "") {
         pos = new Number(0);
     }
-    src = src.toString().replace("-", "");  
+    src = src.toString().replace("-", "");
 
     var xsd = src.toString().split(".");
     if (xsd.length == 1) {
@@ -677,7 +686,7 @@ function zeroFloat(src, pos) {
             zero += "0";
         }
         src = src.toString() + "." + zero;
-        
+
     }
     if (xsd.length > 1) {
         if (xsd[1].length < pos) {
@@ -686,8 +695,8 @@ function zeroFloat(src, pos) {
                 zero += "0";
             }
             src = src.toString() + zero;
-        
-        }       
+
+        }
     }
     return resultSymbol + src;
 }
@@ -752,9 +761,9 @@ function xiangDuiWuCha(obj, first, second, gold) {
     var secondData = $(obj).parent().parent().find("#" + second).val();
     if (firstData != "undefined" && secondData != "undefined" && firstData != "" && secondData != "" && secondData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-        
+
         var data = zeroFloat(fomatFloat(((firstData - secondData) / firstData * 100), txtPointLen));
-   
+
 
         $(obj).parent().parent().find("#" + gold).val(data);
     }
