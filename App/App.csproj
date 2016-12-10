@@ -554,6 +554,7 @@
     </Content>
     <Content Include="Scripts\datagrid-detailview.js" />
     <Content Include="Scripts\echarts.js" />
+    <Content Include="Scripts\numeral.js" />
     <Content Include="Scripts\shine.js" />
     <Content Include="Xml\TableTemplate_JianDing.xml" />
     <Content Include="Xml\TableTemplate_JiaoZhun.xml" />
