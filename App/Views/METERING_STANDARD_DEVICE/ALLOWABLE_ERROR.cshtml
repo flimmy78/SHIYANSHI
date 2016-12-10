@@ -98,7 +98,7 @@
         var arr = $('#flexigridData').datagrid('getSelections');
 
         if (arr.length == 1) {
-            window.location.href = "../ALLOWABLE_ERROR/Edit/" + arr[0].ID;
+            window.location.href = "/METERING_STANDARD_DEVICE/Edit/" + arr[0].ID + "^" + arr[0].GROUPS+"^"+"A";
 
         } else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');

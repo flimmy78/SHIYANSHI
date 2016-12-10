@@ -9,11 +9,10 @@ namespace Langben.App.Models
     {
         public METERING_STANDARD_DEVICEShow()
         {
-            METERING_STANDARD_DEVICE_CHECKShow = new List<METERING_STANDARD_DEVICE_CHECKShow>();
-            ALLOWABLE_ERRORShow = new List<ALLOWABLE_ERRORShow>();
+            this.ALLOWABLE_ERRORShow = new HashSet<ALLOWABLE_ERRORShow>();
+            this.METERING_STANDARD_DEVICE_CHECKShow = new HashSet<METERING_STANDARD_DEVICE_CHECKShow>();
+            this.UNCERTAINTYTABLEShow = new HashSet<UNCERTAINTYTABLEShow>();
         }
-        public List<METERING_STANDARD_DEVICE_CHECKShow>METERING_STANDARD_DEVICE_CHECKShow { get; set; }
-        public List<ALLOWABLE_ERRORShow> ALLOWABLE_ERRORShow { get; set; }
         public string ID { get; set; }
         public string NAME { get; set; }
         public string TEST_RANGE { get; set; }
@@ -25,5 +24,13 @@ namespace Langben.App.Models
         public string CREATEPERSON { get; set; }
         public Nullable<System.DateTime> UPDATETIME { get; set; }
         public string UPDATEPERSON { get; set; }
+        public string XINGHAO { get; set; }
+        public string THESUPERIOR { get; set; }
+        public string IS { get; set; }
+        public virtual ICollection<ALLOWABLE_ERRORShow> ALLOWABLE_ERRORShow { get; set; }
+
+        public virtual ICollection<METERING_STANDARD_DEVICE_CHECKShow> METERING_STANDARD_DEVICE_CHECKShow { get; set; }
+
+        public virtual ICollection<UNCERTAINTYTABLEShow> UNCERTAINTYTABLEShow { get; set; }
     }
 }
