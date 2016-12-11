@@ -1015,9 +1015,47 @@ namespace Langben.Report
                         if (!string.IsNullOrWhiteSpace(iEntity.HTMLVALUE))
                         {
                             doc.LoadHtml(iEntity.HTMLVALUE);
-                            errors += iEntity.ID + iEntity.RULENJOINAME + AnalyticHTML.Getinput(doc);
+                            string data = AnalyticHTML.Getinput(doc);
+                            if (!string.IsNullOrWhiteSpace(data))
+                            {
+                                errors += iEntity.ID + iEntity.RULENJOINAME + data;
+                            }
                         }
                       
+                    }
+                }
+            }
+            Message = errors;
+            return false;
+        }
+        public bool TestPROJECTTEMPLET(string ID, out string Message)
+        {
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            string errors = string.Empty;
+            var m_BLL = new SCHEMEBLL();
+            var entity = m_BLL.GetById(ID);
+         
+            if (entity != null)
+            {
+              
+                if (entity.PROJECTTEMPLET != null &&
+              entity.PROJECTTEMPLET.Count > 0)
+                {
+                  
+              
+                    foreach (var iEntity in entity.PROJECTTEMPLET)
+                    {
+                        if (!string.IsNullOrWhiteSpace(iEntity.HTMLVALUE))
+                        {
+                            doc.LoadHtml(iEntity.HTMLVALUE);
+                            string data = AnalyticHTML.Getinput(doc);
+                            if (!string.IsNullOrWhiteSpace(data))
+                            {
+                                errors += iEntity.ID + iEntity.RULE.NAME + data;
+                            }
+                          
+                        }
+
                     }
                 }
             }

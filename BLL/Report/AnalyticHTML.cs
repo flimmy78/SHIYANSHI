@@ -150,21 +150,34 @@ namespace Langben.Report
 
      };
                 var max = q.Select(s => s.Value).Max(m => m);
+
+
                 var dat = from f in q
                           where f.Value < max
                           select f.Key;
 
-                var change = from f in list
-                             where dat.Contains(f.name)
-                             select f;
-                foreach (var it in change)
+                if (tableCount > 1)
                 {
-                    if (it.mergedRowNum < 2)
+                    //表格嵌套
+                    var change = from f in list
+                                 where dat.Contains(f.name)
+                                 select f;
+                    foreach (var it in change)
                     {
-                        throw new System.Exception("我没有遇到这要的情况");
-                    }
-                    it.mergedRowNum = max;
+                        if (it.mergedRowNum > 1)
+                        {
+                            throw new System.Exception("我没有遇到这要的情况");
+                        }
+                        it.mergedRowNum = max;
 
+                    }
+                }
+                else
+                {
+                    if (dat != null)
+                    {
+                        throw new System.Exception("估计要出错，因为所有列的行数不一样");
+                    }
                 }
 
                 data.Add(item, new DataValue() { Count = max, Data = list });

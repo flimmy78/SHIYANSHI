@@ -246,11 +246,11 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
         htmlString.push(unit);
     }
 
-    //不确定度
+    //不确定度e
     var IsHaveJiSuanBuQueDingDu_MeiHang = GetJiSuanBuQueDingDu_MeiHang_Html(name);
-    debugger;
+    
     if (IsHaveJiSuanBuQueDingDu_MeiHang) {
-        debugger;
+        
 
         htmlString.push("<input type='hidden' name='" + BuQueDingDuLuJingName + "' id='" + BuQueDingDuLuJingId + "' value=''/>");
         var returnIds = id + "&" + BuQueDingDuLuJingId + "^" + BuQueDingDuLuJingId;
@@ -312,6 +312,8 @@ function CalculateForAddLianCheng(Rowidx, objName) {
         return "";
     }
     var arry = new Array();
+    
+    debugger;
     if (point == 3) {
         //输入的检测点是3的时候，按照量程*100%，量程*60%，量程*10%作为默认标准值显示
         arry.push((number * 1).toFixed(pointLen));
@@ -667,7 +669,7 @@ function fomatFloat(src, pos) {
 
 }
 $(function () {
-    //debugger;
+    //
 
     //var gf = (round2(3.504501, 3));
     //var ewgf = (round2(9.8249, 3));

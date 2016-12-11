@@ -490,7 +490,7 @@
                 { temp = 30 }
                 else
                     temp = "";
-                txtVal = (rowidx * temp).toFixed(2);
+                txtVal = (rowidx * temp).toFixed(txtPointLen);
                 @for (int i = 0; i < 3; i++)//一共3列
                 {
                     for (int c = 0; c < ViewBag.canshu; c++)//组
@@ -552,33 +552,20 @@
         //离开事件，用于计算
         function jueDuiwuCha1(obj) {
             //重新计算当前行
-            var name = $(obj).attr("name");
+           
             var id = $(obj).attr("id");
-            var idAdd = id.substring(id.indexOf('_')-1);
+            var idAdd = id.substring(id.indexOf('_') - 1, id.indexOf('_'));
             
-            var biaoZhunData = $(obj).parent().parent().find("#BIAOZHUNZHIER"  + idAdd).val();
-            var showData = $(obj).val();
-            if (showData != "" && biaoZhunData != "") {
-                var txtPointLen = $("#txtPointLen").val(); //小数点位数
-                var xiangDuiWuCha = (showData - biaoZhunData);
-                var data = xiangDuiWuCha.toFixed(txtPointLen);
-                $(obj).parent().parent().find("#YINYONGWUCHAER"  + idAdd).val(data);
-            }
+            jueDuiWuCha(obj, "XIANSHIZHIER" + idAdd, "BIAOZHUNZHIER" + idAdd, "YINYONGWUCHAER" + idAdd);
+
+           
         }
         function jueDuiwuCha2(obj) {
             //重新计算当前行
-            var name = $(obj).attr("name");
             var id = $(obj).attr("id");
-            var idAdd = id.substring(id.indexOf('_') - 1);
+            var idAdd = id.substring(id.indexOf('_') - 1, id.indexOf('_'));
 
-            var showData = $(obj).parent().parent().find("#XIANSHIZHIER" + idAdd).val();
-            var biaoZhunData = $(obj).val();
-            if (showData != "" && biaoZhunData != "") {
-                var txtPointLen = $("#txtPointLen").val(); //小数点位数
-                var xiangDuiWuCha = (showData - biaoZhunData);
-                var data = xiangDuiWuCha.toFixed(txtPointLen);
-                $(obj).parent().parent().find("#YINYONGWUCHAER" + idAdd).val(data);
-            }
+            jueDuiWuCha(obj, "XIANSHIZHIER" + idAdd, "BIAOZHUNZHIER" + idAdd, "YINYONGWUCHAER" + idAdd);
         }
 
 

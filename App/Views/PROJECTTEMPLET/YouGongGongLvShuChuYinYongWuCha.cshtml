@@ -313,7 +313,7 @@
                     if (ZHONGJIANZHI1.indexOf('.') > 0) {
                         txtPointLen = ZHONGJIANZHI1.split(".")[1].length;//小数点位数
                     }
-                    debugger;
+                    
                     var xiangDuiWuCha = ((showData - biaoZhunData) / gudingzhi * 100);
                     var data = fomatFloat(xiangDuiWuCha, txtPointLen)
                     $(obj).parent().parent().find("#ACTUALVALUE" + id).val(data);

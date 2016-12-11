@@ -972,6 +972,7 @@
     <Content Include="Views\STANDARDCHOICE\Details.cshtml" />
     <Content Include="Views\STANDARDCHOICE\Edit.cshtml" />
     <Content Include="Views\STANDARDCHOICE\Index.cshtml" />
+    <Content Include="Views\PREPARE_SCHEME\TestPROJECTTEMPLET.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

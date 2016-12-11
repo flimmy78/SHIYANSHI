@@ -187,6 +187,17 @@ namespace Langben.App.Controllers
             string Message = string.Empty;
 
             reportBll.Test(id, out Message);
+
+            ViewBag.IsSuccess = Message;
+            return View();
+
+        }
+        public ActionResult TestPROJECTTEMPLET(string id)
+        {
+            ReportBLL reportBll = new ReportBLL();
+            string Message = string.Empty;
+
+            reportBll.TestPROJECTTEMPLET(id, out Message);
            
             ViewBag.IsSuccess = Message;
             return View();
