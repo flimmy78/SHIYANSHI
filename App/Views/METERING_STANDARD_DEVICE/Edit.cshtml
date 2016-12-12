@@ -21,375 +21,441 @@
 
             <div id="divtable">
                 <h2 class="f14 mt10"> 不确定度/准确度等级/最大允许误差 </h2>
-
-                <label>
-                    @foreach (var item in Model.ALLOWABLE_ERRORShow)
+                @if (ViewBag.CATEGORY == "AA")
+                {
+                    <label>
+                        @foreach (var item in Model.ALLOWABLE_ERRORShow)
                     {
                         if (item.THEACCURACYLEVEL != null)
                         {
-                            <input type="radio" name="three" id="three_1" onclick="radio.check()" checked="checked" />
-                            break;
+                                <input type="radio" name="three" id="three_1" onclick="radio.check()" checked="checked" />
+                                break;
+                            }
+                            else
+                            {
+                                <input type="radio" name="three" id="three_1" onclick="radio.check()" />
+                                break;
+                            }
                         }
-                        else
-                        {
-                            <input type="radio" name="three" id="three_1" onclick="radio.check()" />
-                            break;
-                        }
-                    }
-                    准确度等级
-                </label>
-                <div class="mt10" id="div1">
-                    @foreach (var item in Model.ALLOWABLE_ERRORShow)
+                        准确度等级
+                    </label>
+                    <div class="mt10" id="div1">
+                        @foreach (var item in Model.ALLOWABLE_ERRORShow)
                     {
                         if (item.THEACCURACYLEVEL != null)
                         {
-                            <ul class="clear mt10">
-                                <li class="fl mr10">
-                                    <input class="my-textbox " value="@item.THEACCURACYLEVEL" id="@item.ID" name="THEACCURACYLEVEL" style="width:200px" placeholder="请输入数值">
-                                </li>
-                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
-                            </ul>
+                                <ul class="clear mt10">
+                                    <li class="fl mr10">
+                                        <input class="my-textbox " value="@item.THEACCURACYLEVEL" id="@item.ID" name="THEACCURACYLEVEL" style="width:200px" placeholder="请输入数值">
+                                    </li>
+                                    <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <ul class="clear mt10">
+                                    <li class="fl mr10">
+                                        <input class="my-textbox " value="" name="THEACCURACYLEVEL" id="" style="width:200px" placeholder="请输入数值">
+                                    </li>
+                                    <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
+                                </ul>
+                                break;
+                            }
                         }
-                        else
-                        {
-                            <ul class="clear mt10">
-                                <li class="fl mr10">
-                                    <input class="my-textbox " value="" name="THEACCURACYLEVEL" id="" style="width:200px" placeholder="请输入数值">
-                                </li>
-                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
-                            </ul>
-                            break;
-                        }
-                    }
-                </div>
-                <br>
-                <label>
-                    @foreach (var item in Model.ALLOWABLE_ERRORShow)
+                    </div>
+                }
+                else if (ViewBag.CATEGORY == "AB")
+                {
+                    <label>
+                        @foreach (var item in Model.ALLOWABLE_ERRORShow)
                     {
                         if (item.MAXCATEGORIES != null || item.MAXVALUE != null)
                         {
-                            <input type="radio" name="three" id="three_2" checked="checked" onclick="radio.check()" />
-                            break;
+                                <input type="radio" name="three" id="three_2" checked="checked" onclick="radio.check()" />
+                                break;
+                            }
+                            else
+                            {
+                                <input type="radio" name="three" id="three_2" onclick="radio.check()" />
+                                break;
+                            }
                         }
-                        else
-                        {
-                            <input type="radio" name="three" id="three_2" onclick="radio.check()" />
-                            break;
-                        }
-                    }
 
-                    最大允许误差
-                </label>
-                <div class="clear" id="div2">
-                    @foreach (var item in Model.ALLOWABLE_ERRORShow)
+                        最大允许误差
+                    </label>
+                    <div class="clear" id="div2">
+                        @foreach (var item in Model.ALLOWABLE_ERRORShow)
                     {
                         if (item.MAXCATEGORIES != null || item.MAXVALUE != null)
                         {
-                            <ul class="clear mt10">
-                                @if (item.MAXCATEGORIES == "DCV:")
-                                {
+                                <ul class="clear mt10">
+                                    @if (item.MAXCATEGORIES == "DCV:")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="MAXCATEGORIES">
+                                                <option value="">请选择类别</option>
+                                                <option selected="selected" value="DCV:">DCV:</option>
+                                                <option value="ACV:">ACV:</option>
+                                                <option value="DCI:">DCI:</option>
+                                                <option value="ACI:">ACI:</option>
+                                                <option value="DCR:">DCR:</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else if (item.MAXCATEGORIES == "ACV:")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="MAXCATEGORIES">
+                                                <option value="">请选择类别</option>
+                                                <option value="DCV:">DCV:</option>
+                                                <option selected="selected" value="ACV:">ACV:</option>
+                                                <option value="DCI:">DCI:</option>
+                                                <option value="ACI:">ACI:</option>
+                                                <option value="DCR:">DCR:</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else if (item.MAXCATEGORIES == "DCI:")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="MAXCATEGORIES">
+                                                <option value="">请选择类别</option>
+                                                <option value="DCV:">DCV:</option>
+                                                <option value="ACV:">ACV:</option>
+                                                <option selected="selected" value="DCI:">DCI:</option>
+                                                <option value="ACI:">ACI:</option>
+                                                <option value="DCR:">DCR:</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else if (item.MAXCATEGORIES == "ACI:")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="MAXCATEGORIES">
+                                                <option value="">请选择类别</option>
+                                                <option value="DCV:">DCV:</option>
+                                                <option value="ACV:">ACV:</option>
+                                                <option value="DCI:">DCI:</option>
+                                                <option selected="selected" value="ACI:">ACI:</option>
+                                                <option value="DCR:">DCR:</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else if (item.MAXCATEGORIES == "DCR:")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="MAXCATEGORIES">
+                                                <option value="">请选择类别</option>
+                                                <option value="DCV:">DCV:</option>
+                                                <option value="ACV:">ACV:</option>
+                                                <option value="DCI:">DCI:</option>
+                                                <option value="ACI:">ACI:</option>
+                                                <option selected="selected" value="DCR:">DCR:</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="MAXCATEGORIES">
+                                                <option value="">请选择类别</option>
+                                                <option value="DCV:">DCV:</option>
+                                                <option value="ACV:">ACV:</option>
+                                                <option value="DCI:">DCI:</option>
+                                                <option value="ACI:">ACI:</option>
+                                                <option value="DCR:">DCR:</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    <li class="fl mr10">
+                                        ±
+                                        <input class="my-textbox " value="@item.MAXVALUE" name="MAXVALUE" id="@item.ID" placeholder="填入数据">
+                                        %
+                                    </li>
+                                    <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <ul class="clear mt10">
                                     <li class="fl mr10">
                                         <select class="my-combobox" name="MAXCATEGORIES">
                                             <option value="">请选择类别</option>
-                                            <option selected="selected" value="DCV:">DCV:</option>
+                                            <option value="DCV:">DCV:</option>
                                             <option value="ACV:">ACV:</option>
                                             <option value="DCI:">DCI:</option>
                                             <option value="ACI:">ACI:</option>
                                             <option value="DCR:">DCR:</option>
                                         </select>
                                     </li>
-                                }
-                                else if (item.MAXCATEGORIES == "ACV:")
-                                {
                                     <li class="fl mr10">
-                                        <select class="my-combobox" name="MAXCATEGORIES">
-                                            <option value="">请选择类别</option>
-                                            <option value="DCV:">DCV:</option>
-                                            <option selected="selected" value="ACV:">ACV:</option>
-                                            <option value="DCI:">DCI:</option>
-                                            <option value="ACI:">ACI:</option>
-                                            <option value="DCR:">DCR:</option>
-                                        </select>
+                                        ±
+                                        <input class="my-textbox " value="" name="MAXVALUE" id="" placeholder="填入数据">
+                                        %
                                     </li>
-                                }
-                                else if (item.MAXCATEGORIES == "DCI:")
-                                {
-                                    <li class="fl mr10">
-                                        <select class="my-combobox" name="MAXCATEGORIES">
-                                            <option value="">请选择类别</option>
-                                            <option value="DCV:">DCV:</option>
-                                            <option value="ACV:">ACV:</option>
-                                            <option selected="selected" value="DCI:">DCI:</option>
-                                            <option value="ACI:">ACI:</option>
-                                            <option value="DCR:">DCR:</option>
-                                        </select>
-                                    </li>
-                                }
-                                else if (item.MAXCATEGORIES == "ACI:")
-                                {
-                                    <li class="fl mr10">
-                                        <select class="my-combobox" name="MAXCATEGORIES">
-                                            <option value="">请选择类别</option>
-                                            <option value="DCV:">DCV:</option>
-                                            <option value="ACV:">ACV:</option>
-                                            <option value="DCI:">DCI:</option>
-                                            <option selected="selected" value="ACI:">ACI:</option>
-                                            <option value="DCR:">DCR:</option>
-                                        </select>
-                                    </li>
-                                }
-                                else if (item.MAXCATEGORIES == "DCR:")
-                                {
-                                    <li class="fl mr10">
-                                        <select class="my-combobox" name="MAXCATEGORIES">
-                                            <option value="">请选择类别</option>
-                                            <option value="DCV:">DCV:</option>
-                                            <option value="ACV:">ACV:</option>
-                                            <option value="DCI:">DCI:</option>
-                                            <option value="ACI:">ACI:</option>
-                                            <option selected="selected" value="DCR:">DCR:</option>
-                                        </select>
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li class="fl mr10">
-                                        <select class="my-combobox" name="MAXCATEGORIES">
-                                            <option value="">请选择类别</option>
-                                            <option value="DCV:">DCV:</option>
-                                            <option value="ACV:">ACV:</option>
-                                            <option value="DCI:">DCI:</option>
-                                            <option value="ACI:">ACI:</option>
-                                            <option value="DCR:">DCR:</option>
-                                        </select>
-                                    </li>
-                                }
-                                <li class="fl mr10">
-                                    ±
-                                    <input class="my-textbox " value="@item.MAXVALUE" name="MAXVALUE" id="@item.ID" placeholder="填入数据">
-                                    %
-                                </li>
-                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
-                            </ul>
+                                    <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
+                                </ul>
+                                break;
+                            }
                         }
-                        else
-                        {
-                            <ul class="clear mt10">
-                                <li class="fl mr10">
-                                    <select class="my-combobox" name="MAXCATEGORIES">
-                                        <option value="">请选择类别</option>
-                                        <option value="DCV:">DCV:</option>
-                                        <option value="ACV:">ACV:</option>
-                                        <option value="DCI:">DCI:</option>
-                                        <option value="ACI:">ACI:</option>
-                                        <option value="DCR:">DCR:</option>
-                                    </select>
-                                </li>
-                                <li class="fl mr10">
-                                    ±
-                                    <input class="my-textbox " value="" name="MAXVALUE" id="" placeholder="填入数据">
-                                    %
-                                </li>
-                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
-                            </ul>
-                            break;
-                        }
-                    }
 
-                </div>
-                <br>
-                <label>
-                    @foreach (var item in Model.ALLOWABLE_ERRORShow)
+                    </div>
+                }
+                else if (ViewBag.CATEGORY == "AC")
+                {
+                    <label>
+                        @foreach (var item in Model.ALLOWABLE_ERRORShow)
                     {
                         if (item.THEUNCERTAINTY != null || item.THEUNCERTAINTYVALUE != null || item.THEUNCERTAINTYNDEXL != null || item.THEUNCERTAINTYVALUEK != null)
                         {
-                            <input type="radio" name="three" id="three_3" onclick="radio.check()" checked="checked" />
-                            break;
+                                <input type="radio" name="three" id="three_3" onclick="radio.check()" checked="checked" />
+                                break;
+                            }
+                            else
+                            {
+                                <input type="radio" name="three" id="three_3" onclick="radio.check()" />
+                                break;
+                            }
                         }
-                        else
-                        {
-                            <input type="radio" name="three" id="three_3" onclick="radio.check()" />
-                            break;
-                        }
-                    }
 
-                    不确定度
-                </label>
-                <div class="clear" id="div3">
+                        不确定度
+                    </label>
+                    <div class="clear" id="div3">
 
-                    @foreach (var item in Model.ALLOWABLE_ERRORShow)
+                        @foreach (var item in Model.ALLOWABLE_ERRORShow)
                     {
 
                         if (item.THEUNCERTAINTY != null || item.THEUNCERTAINTYVALUE != null || item.THEUNCERTAINTYNDEXL != null || item.THEUNCERTAINTYVALUEK != null)
                         {
-                            <ul class="clear mt10">
-                                @if (item.THEUNCERTAINTY == "DCV:Urel=")
-                                {
+                                <ul class="clear mt10">
+                                    @if (item.THEUNCERTAINTY == "DCV:Urel=")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="THEUNCERTAINTY">
+                                                <option value="">请选择类别</option>
+                                                <option selected="selected" value="DCV:Urel=">DCV:Urel=</option>
+                                                <option value="ACV:Urel=">ACV:Urel=</option>
+                                                <option value="DCI:Urel=">DCI:Urel=</option>
+                                                <option value="ACI:Urel=">ACI:Urel=</option>
+                                                <option value="DCR:Urel=">DCR:Urel=</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else if (item.THEUNCERTAINTY == "ACV:Urel=")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="THEUNCERTAINTY">
+                                                <option value="">请选择类别</option>
+                                                <option value="DCV:Urel=">DCV:Urel=</option>
+                                                <option selected="selected" value="ACV:Urel=">ACV:Urel=</option>
+                                                <option value="DCI:Urel=">DCI:Urel=</option>
+                                                <option value="ACI:Urel=">ACI:Urel=</option>
+                                                <option value="DCR:Urel=">DCR:Urel=</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else if (item.THEUNCERTAINTY == "DCI:Urel=")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="THEUNCERTAINTY">
+                                                <option value="">请选择类别</option>
+                                                <option value="DCV:Urel=">DCV:Urel=</option>
+                                                <option value="ACV:Urel=">ACV:Urel=</option>
+                                                <option selected="selected" value="DCI:Urel=">DCI:Urel=</option>
+                                                <option value="ACI:Urel=">ACI:Urel=</option>
+                                                <option value="DCR:Urel=">DCR:Urel=</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else if (item.THEUNCERTAINTY == "ACI:Urel=")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="THEUNCERTAINTY">
+                                                <option value="">请选择类别</option>
+                                                <option value="DCV:Urel=">DCV:Urel=</option>
+                                                <option value="ACV:Urel=">ACV:Urel=</option>
+                                                <option value="DCI:Urel=">DCI:Urel=</option>
+                                                <option selected="selected" value="ACI:Urel=">ACI:Urel=</option>
+                                                <option value="DCR:Urel=">DCR:Urel=</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else if (item.THEUNCERTAINTY == "DCR:Urel=")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="THEUNCERTAINTY">
+                                                <option value="">请选择类别</option>
+                                                <option value="DCV:Urel=">DCV:Urel=</option>
+                                                <option value="ACV:Urel=">ACV:Urel=</option>
+                                                <option value="DCI:Urel=">DCI:Urel=</option>
+                                                <option value="ACI:Urel=">ACI:Urel=</option>
+                                                <option selected="selected" value="DCR:Urel=">DCR:Urel=</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="THEUNCERTAINTY">
+                                                <option value="">请选择类别</option>
+                                                <option value="DCV:Urel=">DCV:Urel=</option>
+                                                <option value="ACV:Urel=">ACV:Urel=</option>
+                                                <option value="DCI:Urel=">DCI:Urel=</option>
+                                                <option value="ACI:Urel=">ACI:Urel=</option>
+                                                <option value="DCR:Urel=">DCR:Urel=</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    <li class="fl mr10">
+                                        <input class="my-textbox " value="@item.THEUNCERTAINTYVALUE" name="THEUNCERTAINTYVALUE" id="@item.ID" placeholder="填入数据">
+                                    </li>
+                                    @if (item.THEUNCERTAINTYNDEXL == "×10-1")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
+                                                <option value="">请选择指数级别</option>
+                                                <option selected="selected" value="×10-1">×10-1</option>
+                                                <option value="×10-2">×10-2</option>
+                                                <option value="×10-3">×10-3</option>
+                                                <option value="×10-4">×10-4</option>
+                                                <option value="×10-5=">×10-5=</option>
+                                                <option value="×10-6=">×10-6=</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else if (item.THEUNCERTAINTYNDEXL == "×10-2")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
+                                                <option value="">请选择指数级别</option>
+                                                <option value="×10-1">×10-1</option>
+                                                <option selected="selected" value="×10-2">×10-2</option>
+                                                <option value="×10-3">×10-3</option>
+                                                <option value="×10-4">×10-4</option>
+                                                <option value="×10-5=">×10-5=</option>
+                                                <option value="×10-6=">×10-6=</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else if (item.THEUNCERTAINTYNDEXL == "×10-3")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
+                                                <option value="">请选择指数级别</option>
+                                                <option value="×10-1">×10-1</option>
+                                                <option value="×10-2">×10-2</option>
+                                                <option selected="selected" value="×10-3">×10-3</option>
+                                                <option value="×10-4">×10-4</option>
+                                                <option value="×10-5=">×10-5=</option>
+                                                <option value="×10-6=">×10-6=</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else if (item.THEUNCERTAINTYNDEXL == "×10-4")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
+                                                <option value="">请选择指数级别</option>
+                                                <option value="×10-1">×10-1</option>
+                                                <option value="×10-2">×10-2</option>
+                                                <option value="×10-3">×10-3</option>
+                                                <option selected="selected" value="×10-4">×10-4</option>
+                                                <option value="×10-5=">×10-5=</option>
+                                                <option value="×10-6=">×10-6=</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else if (item.THEUNCERTAINTYNDEXL == "×10-5=")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
+                                                <option value="">请选择指数级别</option>
+                                                <option value="×10-1">×10-1</option>
+                                                <option value="×10-2">×10-2</option>
+                                                <option value="×10-3">×10-3</option>
+                                                <option value="×10-4">×10-4</option>
+                                                <option selected="selected" value="×10-5=">×10-5=</option>
+                                                <option value="×10-6=">×10-6=</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else if (item.THEUNCERTAINTYNDEXL == "×10-6=")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
+                                                <option value="">请选择指数级别</option>
+                                                <option value="×10-1">×10-1</option>
+                                                <option value="×10-2">×10-2</option>
+                                                <option value="×10-3">×10-3</option>
+                                                <option value="×10-4">×10-4</option>
+                                                <option value="×10-5=">×10-5=</option>
+                                                <option selected="selected" value="×10-6=">×10-6=</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
+                                                <option value="">请选择指数级别</option>
+                                                <option value="×10-1">×10-1</option>
+                                                <option value="×10-2">×10-2</option>
+                                                <option value="×10-3">×10-3</option>
+                                                <option value="×10-4">×10-4</option>
+                                                <option value="×10-5=">×10-5=</option>
+                                                <option value="×10-6=">×10-6=</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    @if (item.THEUNCERTAINTYVALUEK == "k=2")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
+                                                <option value="">请选择k值</option>
+                                                <option selected="selected" value="k=2">k=2</option>
+                                                <option value="k=3">k=3</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else if (item.THEUNCERTAINTYVALUEK == "k=3")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
+                                                <option value="">请选择k值</option>
+                                                <option value="k=2">k=2</option>
+                                                <option selected="selected" value="k=3">k=3</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
+                                                <option value="">请选择k值</option>
+                                                <option value="k=2">k=2</option>
+                                                <option value="k=3">k=3</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <ul class="clear mt10">
                                     <li class="fl mr10">
                                         <select class="my-combobox" name="THEUNCERTAINTY">
                                             <option value="">请选择类别</option>
-                                            <option selected="selected" value="DCV:Urel=">DCV:Urel=</option>
+                                            <option value="DCV:Urel=">DCV:Urel=</option>
                                             <option value="ACV:Urel=">ACV:Urel=</option>
                                             <option value="DCI:Urel=">DCI:Urel=</option>
                                             <option value="ACI:Urel=">ACI:Urel=</option>
                                             <option value="DCR:Urel=">DCR:Urel=</option>
                                         </select>
                                     </li>
-                                }
-                                else if (item.THEUNCERTAINTY == "ACV:Urel=")
-                                {
                                     <li class="fl mr10">
-                                        <select class="my-combobox" name="THEUNCERTAINTY">
-                                            <option value="">请选择类别</option>
-                                            <option value="DCV:Urel=">DCV:Urel=</option>
-                                            <option selected="selected" value="ACV:Urel=">ACV:Urel=</option>
-                                            <option value="DCI:Urel=">DCI:Urel=</option>
-                                            <option value="ACI:Urel=">ACI:Urel=</option>
-                                            <option value="DCR:Urel=">DCR:Urel=</option>
-                                        </select>
+                                        <input class="my-textbox " value="" name="THEUNCERTAINTYVALUE" id="" placeholder="填入数据">
                                     </li>
-                                }
-                                else if (item.THEUNCERTAINTY == "DCI:Urel=")
-                                {
-                                    <li class="fl mr10">
-                                        <select class="my-combobox" name="THEUNCERTAINTY">
-                                            <option value="">请选择类别</option>
-                                            <option value="DCV:Urel=">DCV:Urel=</option>
-                                            <option value="ACV:Urel=">ACV:Urel=</option>
-                                            <option selected="selected" value="DCI:Urel=">DCI:Urel=</option>
-                                            <option value="ACI:Urel=">ACI:Urel=</option>
-                                            <option value="DCR:Urel=">DCR:Urel=</option>
-                                        </select>
-                                    </li>
-                                }
-                                else if (item.THEUNCERTAINTY == "ACI:Urel=")
-                                {
-                                    <li class="fl mr10">
-                                        <select class="my-combobox" name="THEUNCERTAINTY">
-                                            <option value="">请选择类别</option>
-                                            <option value="DCV:Urel=">DCV:Urel=</option>
-                                            <option value="ACV:Urel=">ACV:Urel=</option>
-                                            <option value="DCI:Urel=">DCI:Urel=</option>
-                                            <option selected="selected" value="ACI:Urel=">ACI:Urel=</option>
-                                            <option value="DCR:Urel=">DCR:Urel=</option>
-                                        </select>
-                                    </li>
-                                }
-                                else if (item.THEUNCERTAINTY == "DCR:Urel=")
-                                {
-                                    <li class="fl mr10">
-                                        <select class="my-combobox" name="THEUNCERTAINTY">
-                                            <option value="">请选择类别</option>
-                                            <option value="DCV:Urel=">DCV:Urel=</option>
-                                            <option value="ACV:Urel=">ACV:Urel=</option>
-                                            <option value="DCI:Urel=">DCI:Urel=</option>
-                                            <option value="ACI:Urel=">ACI:Urel=</option>
-                                            <option selected="selected" value="DCR:Urel=">DCR:Urel=</option>
-                                        </select>
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li class="fl mr10">
-                                        <select class="my-combobox" name="THEUNCERTAINTY">
-                                            <option value="">请选择类别</option>
-                                            <option value="DCV:Urel=">DCV:Urel=</option>
-                                            <option value="ACV:Urel=">ACV:Urel=</option>
-                                            <option value="DCI:Urel=">DCI:Urel=</option>
-                                            <option value="ACI:Urel=">ACI:Urel=</option>
-                                            <option value="DCR:Urel=">DCR:Urel=</option>
-                                        </select>
-                                    </li>
-                                }
-                                <li class="fl mr10">
-                                    <input class="my-textbox " value="@item.THEUNCERTAINTYVALUE" name="THEUNCERTAINTYVALUE" id="@item.ID" placeholder="填入数据">
-                                </li>
-                                @if (item.THEUNCERTAINTYNDEXL == "×10-1")
-                                {
-                                    <li class="fl mr10">
-                                        <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
-                                            <option value="">请选择指数级别</option>
-                                            <option selected="selected" value="×10-1">×10-1</option>
-                                            <option value="×10-2">×10-2</option>
-                                            <option value="×10-3">×10-3</option>
-                                            <option value="×10-4">×10-4</option>
-                                            <option value="×10-5=">×10-5=</option>
-                                            <option value="×10-6=">×10-6=</option>
-                                        </select>
-                                    </li>
-                                }
-                                else if (item.THEUNCERTAINTYNDEXL == "×10-2")
-                                {
-                                    <li class="fl mr10">
-                                        <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
-                                            <option value="">请选择指数级别</option>
-                                            <option value="×10-1">×10-1</option>
-                                            <option selected="selected" value="×10-2">×10-2</option>
-                                            <option value="×10-3">×10-3</option>
-                                            <option value="×10-4">×10-4</option>
-                                            <option value="×10-5=">×10-5=</option>
-                                            <option value="×10-6=">×10-6=</option>
-                                        </select>
-                                    </li>
-                                }
-                                else if (item.THEUNCERTAINTYNDEXL == "×10-3")
-                                {
-                                    <li class="fl mr10">
-                                        <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
-                                            <option value="">请选择指数级别</option>
-                                            <option value="×10-1">×10-1</option>
-                                            <option value="×10-2">×10-2</option>
-                                            <option selected="selected" value="×10-3">×10-3</option>
-                                            <option value="×10-4">×10-4</option>
-                                            <option value="×10-5=">×10-5=</option>
-                                            <option value="×10-6=">×10-6=</option>
-                                        </select>
-                                    </li>
-                                }
-                                else if (item.THEUNCERTAINTYNDEXL == "×10-4")
-                                {
-                                    <li class="fl mr10">
-                                        <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
-                                            <option value="">请选择指数级别</option>
-                                            <option value="×10-1">×10-1</option>
-                                            <option value="×10-2">×10-2</option>
-                                            <option value="×10-3">×10-3</option>
-                                            <option selected="selected" value="×10-4">×10-4</option>
-                                            <option value="×10-5=">×10-5=</option>
-                                            <option value="×10-6=">×10-6=</option>
-                                        </select>
-                                    </li>
-                                }
-                                else if (item.THEUNCERTAINTYNDEXL == "×10-5=")
-                                {
-                                    <li class="fl mr10">
-                                        <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
-                                            <option value="">请选择指数级别</option>
-                                            <option value="×10-1">×10-1</option>
-                                            <option value="×10-2">×10-2</option>
-                                            <option value="×10-3">×10-3</option>
-                                            <option value="×10-4">×10-4</option>
-                                            <option selected="selected" value="×10-5=">×10-5=</option>
-                                            <option value="×10-6=">×10-6=</option>
-                                        </select>
-                                    </li>
-                                }
-                                else if (item.THEUNCERTAINTYNDEXL == "×10-6=")
-                                {
-                                    <li class="fl mr10">
-                                        <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
-                                            <option value="">请选择指数级别</option>
-                                            <option value="×10-1">×10-1</option>
-                                            <option value="×10-2">×10-2</option>
-                                            <option value="×10-3">×10-3</option>
-                                            <option value="×10-4">×10-4</option>
-                                            <option value="×10-5=">×10-5=</option>
-                                            <option selected="selected" value="×10-6=">×10-6=</option>
-                                        </select>
-                                    </li>
-                                }
-                                else
-                                {
                                     <li class="fl mr10">
                                         <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
                                             <option value="">请选择指数级别</option>
@@ -401,81 +467,20 @@
                                             <option value="×10-6=">×10-6=</option>
                                         </select>
                                     </li>
-                                }
-                                @if (item.THEUNCERTAINTYVALUEK == "k=2")
-                                {
-                                    <li class="fl mr10">
-                                        <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
-                                            <option value="">请选择k值</option>
-                                            <option selected="selected" value="k=2">k=2</option>
-                                            <option value="k=3">k=3</option>
-                                        </select>
-                                    </li>
-                                }
-                                else if (item.THEUNCERTAINTYVALUEK == "k=3")
-                                {
                                     <li class="fl mr10">
                                         <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
                                             <option value="">请选择k值</option>
                                             <option value="k=2">k=2</option>
-                                            <option selected="selected" value="k=3">k=3</option>
-                                        </select>
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li class="fl mr10">
-                                        <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
-                                            <option value="">请选择k值</option>
-                                            <option value="k=2">k=2</option>
                                             <option value="k=3">k=3</option>
                                         </select>
                                     </li>
-                                }
-                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
-                            </ul>
+                                    <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
+                                </ul>
+                                break;
+                            }
                         }
-                        else
-                        {
-                            <ul class="clear mt10">
-                                <li class="fl mr10">
-                                    <select class="my-combobox" name="THEUNCERTAINTY">
-                                        <option value="">请选择类别</option>
-                                        <option value="DCV:Urel=">DCV:Urel=</option>
-                                        <option value="ACV:Urel=">ACV:Urel=</option>
-                                        <option value="DCI:Urel=">DCI:Urel=</option>
-                                        <option value="ACI:Urel=">ACI:Urel=</option>
-                                        <option value="DCR:Urel=">DCR:Urel=</option>
-                                    </select>
-                                </li>
-                                <li class="fl mr10">
-                                    <input class="my-textbox " value="" name="THEUNCERTAINTYVALUE" id="" placeholder="填入数据">
-                                </li>
-                                <li class="fl mr10">
-                                    <select class="my-combobox" name="THEUNCERTAINTYNDEXL">
-                                        <option value="">请选择指数级别</option>
-                                        <option value="×10-1">×10-1</option>
-                                        <option value="×10-2">×10-2</option>
-                                        <option value="×10-3">×10-3</option>
-                                        <option value="×10-4">×10-4</option>
-                                        <option value="×10-5=">×10-5=</option>
-                                        <option value="×10-6=">×10-6=</option>
-                                    </select>
-                                </li>
-                                <li class="fl mr10">
-                                    <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
-                                        <option value="">请选择k值</option>
-                                        <option value="k=2">k=2</option>
-                                        <option value="k=3">k=3</option>
-                                    </select>
-                                </li>
-                                <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
-                            </ul>
-                            break;
-                        }
-                    }
-                </div>
-
+                    </div>
+                }             
             </div>
             <br>
             <h2 class="f14 mt10"> 证书信息 </h2>
@@ -1687,8 +1692,19 @@
         if (m.ALLOWABLE_ERROR == null) {
             zhi += "不确定度/准确度等级/最大允许误差不能为空！<br>";
         }
-        if (m.METERING_STANDARD_DEVICE_CHECK == null) {
+        if (m.METERING_STANDARD_DEVICE_CHECK.length == 0) {
             zhi += "证书信息不能为空！<br>";
+        }
+        for (var i = 0; i < m.METERING_STANDARD_DEVICE_CHECK.length; i++) {
+            if (isNull(m.METERING_STANDARD_DEVICE_CHECK[i].CERTIFICATEUNIT)) {
+                zhi += "证书发放单位不能为空！<br>";
+            }
+            if (isNull(m.METERING_STANDARD_DEVICE_CHECK[i].CERTIFICATE_NUM)) {
+                zhi += "证书编号不能为空！<br>";
+            }
+            if (isNull(m.METERING_STANDARD_DEVICE_CHECK[i].VALID_TO)) {
+                zhi += "有效期至不能为空！<br>";
+            }
         }
         if (zhi != "") {
             $.messager.alert('操作提示', "" + zhi + "", 'info');

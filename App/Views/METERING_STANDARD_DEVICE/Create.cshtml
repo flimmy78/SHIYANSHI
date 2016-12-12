@@ -665,14 +665,20 @@
         if (m.ALLOWABLE_ERROR == null) {
             zhi += "不确定度/准确度等级/最大允许误差不能为空！<br>";
         }
-        if (isNull(m.ALLOWABLE_ERROR.CERTIFICATEUNIT)) {
-            zhi += "证书发放单位不能为空！<br>";
+        if (m.METERING_STANDARD_DEVICE_CHECK.length==0) {
+            zhi += "证书信息不能为空！<br>";
         }
-        if (isNull(m.ALLOWABLE_ERROR.CERTIFICATE_NUM)) {
-            zhi += "证书编号不能为空！<br>";
-        }
-        if (isNull(m.ALLOWABLE_ERROR.VALID_TO)) {
-            zhi += "有效期至不能为空！<br>";
+        for (var i = 0; i < m.METERING_STANDARD_DEVICE_CHECK.length; i++) {
+            if (isNull(m.METERING_STANDARD_DEVICE_CHECK[i].CERTIFICATEUNIT))
+            {
+                zhi += "证书发放单位不能为空！<br>";
+            }
+            if (isNull(m.METERING_STANDARD_DEVICE_CHECK[i].CERTIFICATE_NUM)) {
+                zhi += "证书编号不能为空！<br>";
+            }
+            if (isNull(m.METERING_STANDARD_DEVICE_CHECK[i].VALID_TO)) {
+                zhi += "有效期至不能为空！<br>";
+            }
         }
         if (zhi != "") {
             $.messager.alert('操作提示', "" + zhi + "", 'info');
