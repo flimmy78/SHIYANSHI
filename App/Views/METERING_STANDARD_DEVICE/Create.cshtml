@@ -459,8 +459,9 @@
                     $("#div1").find("ul").each(function () {
 
                         var THEACCURACYLEVEL = $(this).find("li :input").eq(0).val();
+                        var CATEGORY = "AA";
                         if (THEACCURACYLEVEL != null) {
-                            myArray.push({ THEACCURACYLEVEL: THEACCURACYLEVEL });
+                            myArray.push({ THEACCURACYLEVEL: THEACCURACYLEVEL, CATEGORY: CATEGORY });
                         }
                     })
                     break
@@ -469,8 +470,9 @@
                     $("#div2").find("ul").each(function () {
                         var MAXCATEGORIES = $(this).find("li :selected").eq(0).val();
                         var MAXVALUE = $(this).find("li :input").eq(1).val();
+                        var CATEGORY = "AB";
                         if (MAXCATEGORIES != null || MAXVALUE != null) {
-                            myArray2.push({ MAXCATEGORIES: MAXCATEGORIES, MAXVALUE: MAXVALUE });
+                            myArray2.push({ MAXCATEGORIES: MAXCATEGORIES, MAXVALUE: MAXVALUE, CATEGORY: CATEGORY });
                         }
                     })
                     break
@@ -481,9 +483,10 @@
                         var THEUNCERTAINTYVALUE = $(this).find("li :input").eq(1).val();
                         var THEUNCERTAINTYNDEXL = $(this).find("li :selected").eq(1).val();
                         var THEUNCERTAINTYVALUEK = $(this).find("li :selected").eq(2).val();
+                        var CATEGORY = "AC";
                         if (THEUNCERTAINTY != null || THEUNCERTAINTYVALUE != null || THEUNCERTAINTYNDEXL != null || THEUNCERTAINTYVALUEK != null) {
 
-                            myArray3.push({ THEUNCERTAINTY: THEUNCERTAINTY, THEUNCERTAINTYVALUE: THEUNCERTAINTYVALUE, THEUNCERTAINTYNDEXL: THEUNCERTAINTYNDEXL, THEUNCERTAINTYVALUEK: THEUNCERTAINTYVALUEK });
+                            myArray3.push({ THEUNCERTAINTY: THEUNCERTAINTY, THEUNCERTAINTYVALUE: THEUNCERTAINTYVALUE, THEUNCERTAINTYNDEXL: THEUNCERTAINTYNDEXL, THEUNCERTAINTYVALUEK: THEUNCERTAINTYVALUEK, CATEGORY: CATEGORY });
                         }
                     })
                     break
@@ -553,9 +556,10 @@
                 var KVALE = $(this).find("li :selected").eq(3).val();//K
                 var UNCERTAINTYUI = $(this).find("li :input").eq(6).val();//不确定度ui
                 var NOTE = $(this).find("li :input").eq(7).val();//备注
+                var CATEGORY = "UA";
                 if (ASSESSMENTITEM != null || ERRORSOURCES != null || THEUNIT != null || ERRORLIMITUNIT != null || THEERRODISTRIBUTION != null || KVALE != null || UNCERTAINTYUI != null || NOTE != null)
 
-                    myArray5.push({ METERING_STANDARD_DEVICEID: "@ViewBag.METERING_STANDARD_DEVICEID", ASSESSMENTITEM: ASSESSMENTITEM, ERRORSOURCES: ERRORSOURCES, ERRORLIMITS: ERRORLIMITS, ERRORLIMITUNIT: ERRORLIMITUNIT, THEERRODISTRIBUTION: THEERRODISTRIBUTION, KVALE: KVALE, UNCERTAINTYUI: UNCERTAINTYUI, NOTE: NOTE });
+                    myArray5.push({ METERING_STANDARD_DEVICEID: "@ViewBag.METERING_STANDARD_DEVICEID", ASSESSMENTITEM: ASSESSMENTITEM, ERRORSOURCES: ERRORSOURCES, ERRORLIMITS: ERRORLIMITS, ERRORLIMITUNIT: ERRORLIMITUNIT, THEERRODISTRIBUTION: THEERRODISTRIBUTION, KVALE: KVALE, UNCERTAINTYUI: UNCERTAINTYUI, NOTE: NOTE, CATEGORY: CATEGORY });
             })
             //*****************************************************
             if (myArray5 != null)
@@ -616,8 +620,9 @@
                 var INDEX2 = $(this).find("li :input").eq(15).val();//指标2
                 var INDEX2UNIT = $(this).find("li :selected").eq(10).val();//指标2单位
                 var NOTE = $(this).find("li :input").eq(17).val();//备注
+                var CATEGORY = "UB";
                 if (ASSESSMENTITEM != null || THERANGESCOPE != null || ERRORLIMITS != null || THERELATIONSHIP != null || ENDRANGESCOPE != null || ENDUNIT != null || ENDRELATIONSHIP != null || THEFREQUENCY != null || THEUNITFREQUENCY != null || THERELATIONSHIPFREQUENCY != null || ENDFREQUENCY != null || ENDUNITFREQUENCY != null || ENDRELATIONSHIPFREQUENCY != null || INDEX1 != null || INDEX1UNIT != null || INDEX2 != null || INDEX2UNIT != null || NOTE != null)
-                    myArray6.push({ METERING_STANDARD_DEVICEID: "@ViewBag.METERING_STANDARD_DEVICEID", ASSESSMENTITEM: ASSESSMENTITEM, THERANGESCOPE: THERANGESCOPE, ERRORLIMITS: ERRORLIMITS, THERELATIONSHIP: THERELATIONSHIP, ENDRANGESCOPE: ENDRANGESCOPE, ENDUNIT: ENDUNIT, ENDRELATIONSHIP: ENDRELATIONSHIP, THEFREQUENCY: THEFREQUENCY, THEUNITFREQUENCY: THEUNITFREQUENCY, THERELATIONSHIPFREQUENCY: THERELATIONSHIPFREQUENCY, ENDFREQUENCY: ENDFREQUENCY, ENDUNITFREQUENCY: ENDUNITFREQUENCY, ENDRELATIONSHIPFREQUENCY: ENDRELATIONSHIPFREQUENCY, INDEX1: INDEX1, INDEX1UNIT: INDEX1UNIT, INDEX2: INDEX2, INDEX2UNIT: INDEX2UNIT, NOTE: NOTE });
+                    myArray6.push({ METERING_STANDARD_DEVICEID: "@ViewBag.METERING_STANDARD_DEVICEID", ASSESSMENTITEM: ASSESSMENTITEM, THERANGESCOPE: THERANGESCOPE, ERRORLIMITS: ERRORLIMITS, THERELATIONSHIP: THERELATIONSHIP, ENDRANGESCOPE: ENDRANGESCOPE, ENDUNIT: ENDUNIT, ENDRELATIONSHIP: ENDRELATIONSHIP, THEFREQUENCY: THEFREQUENCY, THEUNITFREQUENCY: THEUNITFREQUENCY, THERELATIONSHIPFREQUENCY: THERELATIONSHIPFREQUENCY, ENDFREQUENCY: ENDFREQUENCY, ENDUNITFREQUENCY: ENDUNITFREQUENCY, ENDRELATIONSHIPFREQUENCY: ENDRELATIONSHIPFREQUENCY, INDEX1: INDEX1, INDEX1UNIT: INDEX1UNIT, INDEX2: INDEX2, INDEX2UNIT: INDEX2UNIT, NOTE: NOTE, CATEGORY: CATEGORY });
             })
             //*****************************************************
             if (myArray6 != null)

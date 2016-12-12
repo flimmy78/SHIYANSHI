@@ -1470,8 +1470,9 @@
                         var THEACCURACYLEVEL = $(this).find("li :input").eq(0).val();
                         var ID = $(this).find("li :input").eq(0).attr("id");
                         var GROUPS = "@ViewBag.GROUPS";
+                        var CATEGORY="@ViewBag.CATEGORY"
                         if (THEACCURACYLEVEL != null) {
-                            myArray.push({ THEACCURACYLEVEL: THEACCURACYLEVEL, ID: ID, GROUPS: GROUPS });
+                            myArray.push({ THEACCURACYLEVEL: THEACCURACYLEVEL, ID: ID, GROUPS: GROUPS, CATEGORY: CATEGORY });
                         }
                     })
                     break
@@ -1482,8 +1483,9 @@
                         var MAXVALUE = $(this).find("li :input").eq(1).val();
                         var ID = $(this).find("li :input").eq(1).attr("id");
                         var GROUPS = "@ViewBag.GROUPS";
+                        var CATEGORY = "@ViewBag.CATEGORY";
                         if (MAXCATEGORIES != null || MAXVALUE != null) {
-                            myArray2.push({ MAXCATEGORIES: MAXCATEGORIES, MAXVALUE: MAXVALUE, ID: ID, GROUPS: GROUPS });
+                            myArray2.push({ MAXCATEGORIES: MAXCATEGORIES, MAXVALUE: MAXVALUE, ID: ID, GROUPS: GROUPS, CATEGORY: CATEGORY });
                         }
                     })
                     break
@@ -1496,9 +1498,10 @@
                         var THEUNCERTAINTYNDEXL = $(this).find("li :selected").eq(1).val();
                         var THEUNCERTAINTYVALUEK = $(this).find("li :selected").eq(2).val();
                         var GROUPS = "@ViewBag.GROUPS";
+                        var CATEGORY = "@ViewBag.CATEGORY";
                         if (THEUNCERTAINTY != null || THEUNCERTAINTYVALUE != null || THEUNCERTAINTYNDEXL != null || THEUNCERTAINTYVALUEK != null) {
 
-                            myArray3.push({ THEUNCERTAINTY: THEUNCERTAINTY, THEUNCERTAINTYVALUE: THEUNCERTAINTYVALUE, THEUNCERTAINTYNDEXL: THEUNCERTAINTYNDEXL, THEUNCERTAINTYVALUEK: THEUNCERTAINTYVALUEK, ID: ID, GROUPS: GROUPS });
+                            myArray3.push({ THEUNCERTAINTY: THEUNCERTAINTY, THEUNCERTAINTYVALUE: THEUNCERTAINTYVALUE, THEUNCERTAINTYNDEXL: THEUNCERTAINTYNDEXL, THEUNCERTAINTYVALUEK: THEUNCERTAINTYVALUEK, ID: ID, GROUPS: GROUPS, CATEGORY: CATEGORY });
                         }
                     })
                     break
@@ -1512,9 +1515,10 @@
                 var CERTIFICATE_NUM = $(this).find("li :input").eq(1).val();
                 var VALID_TO = $(this).find("li :input").eq(2).val();
                 var GROUPS = "@ViewBag.GROUPS";
+                var CATEGORY = "@ViewBag.CATEGORY";
                 //校验时间格式是否正确
                 if (CERTIFICATEUNIT != "" || CERTIFICATE_NUM != "" || VALID_TO != "") {
-                    myArray4.push({ CERTIFICATEUNIT: CERTIFICATEUNIT, CERTIFICATE_NUM: CERTIFICATE_NUM, VALID_TO: VALID_TO, ID: ID, GROUPS: GROUPS });
+                    myArray4.push({ CERTIFICATEUNIT: CERTIFICATEUNIT, CERTIFICATE_NUM: CERTIFICATE_NUM, VALID_TO: VALID_TO, ID: ID, GROUPS: GROUPS, CATEGORY: CATEGORY });
                 }
             })
             if (myArray != null)
@@ -1572,9 +1576,10 @@
                 var UNCERTAINTYUI = $(this).find("li :input").eq(6).val();//不确定度ui
                 var NOTE = $(this).find("li :input").eq(7).val();//备注
                 var GROUPS = "@ViewBag.GROUPS";
+                var CATEGORY = "@ViewBag.CATEGORY";
                 if (ASSESSMENTITEM != null || ERRORSOURCES != null || THEUNIT != null || ERRORLIMITUNIT != null || THEERRODISTRIBUTION != null || KVALE != null || UNCERTAINTYUI != null || NOTE != null)
 
-                    myArray5.push({ METERING_STANDARD_DEVICEID: "@ViewBag.METERING_STANDARD_DEVICEID", ASSESSMENTITEM: ASSESSMENTITEM, ERRORSOURCES: ERRORSOURCES, ERRORLIMITS: ERRORLIMITS, ERRORLIMITUNIT: ERRORLIMITUNIT, THEERRODISTRIBUTION: THEERRODISTRIBUTION, KVALE: KVALE, UNCERTAINTYUI: UNCERTAINTYUI, NOTE: NOTE, ID: ID, GROUPS: GROUPS });
+                    myArray5.push({ METERING_STANDARD_DEVICEID: "@ViewBag.METERING_STANDARD_DEVICEID", ASSESSMENTITEM: ASSESSMENTITEM, ERRORSOURCES: ERRORSOURCES, ERRORLIMITS: ERRORLIMITS, ERRORLIMITUNIT: ERRORLIMITUNIT, THEERRODISTRIBUTION: THEERRODISTRIBUTION, KVALE: KVALE, UNCERTAINTYUI: UNCERTAINTYUI, NOTE: NOTE, ID: ID, GROUPS: GROUPS, CATEGORY: CATEGORY });
             })
             //*****************************************************
             if (myArray5 != null)
@@ -1636,8 +1641,10 @@
                 var INDEX2 = $(this).find("li :input").eq(15).val();//指标2
                 var INDEX2UNIT = $(this).find("li :selected").eq(10).val();//指标2单位
                 var NOTE = $(this).find("li :input").eq(17).val();//备注
+                var GROUPS = "@ViewBag.GROUPS";
+                var CATEGORY = "@ViewBag.CATEGORY";
                 if (ASSESSMENTITEM != null || THERANGESCOPE != null || ERRORLIMITS != null || THERELATIONSHIP != null || ENDRANGESCOPE != null || ENDUNIT != null || ENDRELATIONSHIP != null || THEFREQUENCY != null || THEUNITFREQUENCY != null || THERELATIONSHIPFREQUENCY != null || ENDFREQUENCY != null || ENDUNITFREQUENCY != null || ENDRELATIONSHIPFREQUENCY != null || INDEX1 != null || INDEX1UNIT != null || INDEX2 != null || INDEX2UNIT != null || NOTE != null)
-                    myArray6.push({ METERING_STANDARD_DEVICEID: "@ViewBag.METERING_STANDARD_DEVICEID", ASSESSMENTITEM: ASSESSMENTITEM, THERANGESCOPE: THERANGESCOPE, ERRORLIMITS: ERRORLIMITS, THERELATIONSHIP: THERELATIONSHIP, ENDRANGESCOPE: ENDRANGESCOPE, ENDUNIT: ENDUNIT, ENDRELATIONSHIP: ENDRELATIONSHIP, THEFREQUENCY: THEFREQUENCY, THEUNITFREQUENCY: THEUNITFREQUENCY, THERELATIONSHIPFREQUENCY: THERELATIONSHIPFREQUENCY, ENDFREQUENCY: ENDFREQUENCY, ENDUNITFREQUENCY: ENDUNITFREQUENCY, ENDRELATIONSHIPFREQUENCY: ENDRELATIONSHIPFREQUENCY, INDEX1: INDEX1, INDEX1UNIT: INDEX1UNIT, INDEX2: INDEX2, INDEX2UNIT: INDEX2UNIT, NOTE: NOTE, ID: ID });
+                    myArray6.push({ METERING_STANDARD_DEVICEID: "@ViewBag.METERING_STANDARD_DEVICEID", ASSESSMENTITEM: ASSESSMENTITEM, THERANGESCOPE: THERANGESCOPE, ERRORLIMITS: ERRORLIMITS, THERELATIONSHIP: THERELATIONSHIP, ENDRANGESCOPE: ENDRANGESCOPE, ENDUNIT: ENDUNIT, ENDRELATIONSHIP: ENDRELATIONSHIP, THEFREQUENCY: THEFREQUENCY, THEUNITFREQUENCY: THEUNITFREQUENCY, THERELATIONSHIPFREQUENCY: THERELATIONSHIPFREQUENCY, ENDFREQUENCY: ENDFREQUENCY, ENDUNITFREQUENCY: ENDUNITFREQUENCY, ENDRELATIONSHIPFREQUENCY: ENDRELATIONSHIPFREQUENCY, INDEX1: INDEX1, INDEX1UNIT: INDEX1UNIT, INDEX2: INDEX2, INDEX2UNIT: INDEX2UNIT, NOTE: NOTE, ID: ID, GROUPS: GROUPS, CATEGORY: CATEGORY });
             })
             //*****************************************************
             if (myArray6 != null)

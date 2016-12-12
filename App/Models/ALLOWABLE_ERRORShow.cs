@@ -21,5 +21,6 @@ namespace Langben.App.Models
         public string MAXVALUE { get; set; }
         public string MAXCATEGORIES { get; set; }
         public Nullable<decimal> GROUPS { get; set; }
+        public string CATEGORY { get; set; }
     }
 }

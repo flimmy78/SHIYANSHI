@@ -399,10 +399,10 @@ namespace Langben.App.Controllers
             string CERTIFICATE_NUM = string.Empty;//证书编号
             string VALID_TO = string.Empty;//有效期
             string MAXCATEGORIES = string.Empty;//最大允许误差
-
+            decimal? GROUPS=0;//组别
             //分组
             var data = (from f in msd.METERING_STANDARD_DEVICE_CHECK
-                        select f.GROUPS).Distinct();
+                        select f.CATEGORY).Distinct();
 
 
             List<App.Models.ALLOWABLE_ERRORData> alldata = new List<App.Models.ALLOWABLE_ERRORData>();
@@ -413,7 +413,7 @@ namespace Langben.App.Controllers
                 VALID_TO = null;
                 MAXCATEGORIES = null;
                 //计量标准装置检定/校准信息
-                foreach (var it in msd.METERING_STANDARD_DEVICE_CHECK.Where(w => w.GROUPS == item))
+                foreach (var it in msd.METERING_STANDARD_DEVICE_CHECK.Where(w => w.CATEGORY == item))
                 {
                     TimeSpan ts = Convert.ToDateTime(it.VALID_TO) - DateTime.Now;
 
@@ -424,9 +424,10 @@ namespace Langben.App.Controllers
 
                         VALID_TO += Convert.ToDateTime(it.VALID_TO).ToString("yyyy-MM-dd") + ",";
                     }
+                    GROUPS = it.GROUPS;
                 }
                 //最大允许误差信息
-                foreach (var it in msd.ALLOWABLE_ERROR.Where(w => w.GROUPS == item))
+                foreach (var it in msd.ALLOWABLE_ERROR.Where(w => w.CATEGORY == item))
                 {
                     if (!string.IsNullOrWhiteSpace(VALID_TO))
                     {
@@ -455,7 +456,8 @@ namespace Langben.App.Controllers
                         VALID_TO = VALID_TO,//有效期
                         ID = id,//id
                         MAXCATEGORIES = MAXCATEGORIES,//最大允许误差
-                        GROUPS = item
+                        GROUPS = GROUPS,
+                        CATEGORY=item
                     });
                 }
             }
@@ -469,7 +471,8 @@ namespace Langben.App.Controllers
                     VALID_TO = s.VALID_TO.TrimEnd(','),//有效期
                     ID = s.ID,//id
                     MAXCATEGORIES = s.MAXCATEGORIES.TrimEnd(','),//最大允许误差
-                    GROUPS = s.GROUPS
+                    GROUPS = s.GROUPS,
+                    CATEGORY=s.CATEGORY
                 })
             };
             return show;

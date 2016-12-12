@@ -90,10 +90,12 @@ namespace Langben.App.Controllers
                 METERING_STANDARD_DEVICE msd = m_BLL.GetById(id.Split('^')[0]);//通过id查询数据
                 int GROUPS = Convert.ToInt32(id.Split('^')[1]);//组别
                 string IS = id.Split('^')[2];
+                
                 if (IS == "A")
                 {
-                    var alledata = msd.ALLOWABLE_ERROR.Where(a => a.GROUPS == GROUPS);//筛选数据
-                    var msdcdata = msd.METERING_STANDARD_DEVICE_CHECK.Where(a => a.GROUPS == GROUPS);//筛选数据
+                    string CATEGORY = id.Split('^')[3];
+                    var alledata = msd.ALLOWABLE_ERROR.Where(a => a.GROUPS == GROUPS&&a.CATEGORY== CATEGORY);//筛选数据
+                    var msdcdata = msd.METERING_STANDARD_DEVICE_CHECK.Where(a => a.GROUPS == GROUPS && a.CATEGORY == CATEGORY);//筛选数据
                     foreach (var al in alledata)//循环添加数据
                     {
                         var alladd = new ALLOWABLE_ERRORShow()
@@ -127,11 +129,8 @@ namespace Langben.App.Controllers
                     }
                 }
                 else if (IS == "UA"||IS=="UB")
-                {                    
-                    
-                    if (IS == "UA")
-                    {
-                        var undata = msd.UNCERTAINTYTABLE.Where(a => a.GROUPS == GROUPS);//筛选数据
+                {                                     
+                        var undata = msd.UNCERTAINTYTABLE.Where(a => a.GROUPS == GROUPS && a.CATEGORY == IS);//筛选数据
                         //undata = undata.Where(b => b.UNCERTAINTYUI != null);
                         foreach (var al in undata)//循环添加数据
                         {
@@ -166,52 +165,12 @@ namespace Langben.App.Controllers
                                 UNCERTAINTYUI = al.UNCERTAINTYUI
                             };
                             msdshow.UNCERTAINTYTABLEShow.Add(unadd);
-                        }
-                    }
-                    else if (IS == "UB")
-                    {
-                        var ubdata =msd.UNCERTAINTYTABLE.Where(a => a.GROUPS == GROUPS);//筛选数据
-                        //ubdata = ubdata.Where(b => b.INDEX1 != null);
-                        foreach (var al in ubdata)//循环添加数据
-                        {
-                            var unadd = new UNCERTAINTYTABLEShow()
-                            {
-                                ID = al.ID,
-                                ASSESSMENTITEM = al.ASSESSMENTITEM,
-                                ERRORSOURCES = al.ERRORSOURCES,
-                                ERRORLIMITS = al.ERRORLIMITS,
-                                ERRORLIMITUNIT = al.ERRORLIMITUNIT,
-                                THEERRODISTRIBUTION = al.THEERRODISTRIBUTION,
-                                KVALE = al.KVALE,
-                                THERANGESCOPE = al.THERANGESCOPE,
-                                THEUNIT = al.THEUNIT,
-                                THERELATIONSHIP = al.THERELATIONSHIP,
-                                ENDRANGESCOPE = al.ENDRANGESCOPE,
-                                ENDUNIT = al.ENDUNIT,
-                                ENDRELATIONSHIP = al.ENDRELATIONSHIP,
-                                THEFREQUENCY = al.THEFREQUENCY,
-                                THEUNITFREQUENCY = al.THEUNITFREQUENCY,
-                                THERELATIONSHIPFREQUENCY = al.THERELATIONSHIPFREQUENCY,
-                                ENDFREQUENCY = al.ENDFREQUENCY,
-                                ENDUNITFREQUENCY = al.ENDUNITFREQUENCY,
-                                ENDRELATIONSHIPFREQUENCY = al.ENDRELATIONSHIPFREQUENCY,
-                                INDEX1 = al.INDEX1,
-                                INDEX1UNIT = al.INDEX1UNIT,
-                                INDEX2 = al.INDEX2,
-                                INDEX2UNIT = al.INDEX2UNIT,
-                                NOTE = al.NOTE,
-                                METERING_STANDARD_DEVICEID = al.METERING_STANDARD_DEVICEID,
-                                GROUPS = al.GROUPS,
-                                UNCERTAINTYUI = al.UNCERTAINTYUI
-                            };
-                            msdshow.UNCERTAINTYTABLEShow.Add(unadd);
-                        }
-                    }                
-                   
+                        }                                                  
                 }
                 msdshow.IS = IS;
                 msdshow.ID = msd.ID;
                 ViewBag.GROUPS = GROUPS.ToString();
+                ViewBag.CATEGORY = IS.ToString();
             }
             return View(msdshow);
         }

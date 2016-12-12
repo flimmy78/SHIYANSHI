@@ -11,6 +11,7 @@ namespace Langben.App.Models
         public string CERTIFICATE_NUM { get; set; }
         public string VALID_TO { get; set; }
         public string MAXCATEGORIES { get; set; }
+        public string CATEGORY { get; set; }
         public Nullable<decimal> GROUPS { get; set; }
     }
 }

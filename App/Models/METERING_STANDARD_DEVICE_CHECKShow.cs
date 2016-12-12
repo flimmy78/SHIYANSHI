@@ -18,5 +18,6 @@ namespace Langben.App.Models
         public string UPDATEPERSON { get; set; }
         public string CERTIFICATEUNIT { get; set; }
         public Nullable<decimal> GROUPS { get; set; }
+        public string CATEGORY { get; set; }
     }
 }

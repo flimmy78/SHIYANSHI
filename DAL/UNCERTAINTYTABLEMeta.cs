@@ -145,6 +145,10 @@ namespace Langben.DAL
         [ScaffoldColumn(true)]
         [Display(Name = "不确定度ui", Order = 30)]
         public object UNCERTAINTYUI { get; set; }
+
+        [ScaffoldColumn(true)]
+        [Display(Name = "类别", Order = 31)]
+        public object CATEGORY { get; set; }
     }
 }
 

@@ -97,7 +97,7 @@ namespace Langben.App.Controllers
                 {
                     groups = (int)data + 1;
                 }
-
+                string CATEGORY = string.Empty;
                 foreach (var item in entity.ALLOWABLE_ERROR)
                 {
                     item.ID = Result.GetNewId();
@@ -105,6 +105,7 @@ namespace Langben.App.Controllers
                     item.CREATEPERSON = currentPerson;
                     item.METERING_STANDARD_DEVICEID = entity.ID;
                     item.GROUPS = groups;
+                    CATEGORY = item.CATEGORY;
                     if (m_BLL.Create(ref validationErrors, item))
                     {
                         LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，最大允许误差信息的信息的Id为" + entity.ID, "最大允许误差信息"
@@ -137,6 +138,7 @@ namespace Langben.App.Controllers
                     item.CREATEPERSON = currentPerson;
                     item.METERING_STANDARD_DEVICEID = entity.ID;
                     item.GROUPS = groups;
+                    item.CATEGORY = CATEGORY;
                     if (m_BLL2.Create(ref validationErrors, item))
                     {
                         LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，计量标准装置检定/校准信息的信息的Id为" + entity.ID, "计量标准装置检定/校准信息"
