@@ -470,6 +470,7 @@
                     $("#div2").find("ul").each(function () {
                         var MAXCATEGORIES = $(this).find("li :selected").eq(0).val();
                         var MAXVALUE = $(this).find("li :input").eq(1).val();
+                        MAXVALUE = "±" + MAXVALUE + "%";
                         var CATEGORY = "AB";
                         if (MAXCATEGORIES != null || MAXVALUE != null) {
                             myArray2.push({ MAXCATEGORIES: MAXCATEGORIES, MAXVALUE: MAXVALUE, CATEGORY: CATEGORY });

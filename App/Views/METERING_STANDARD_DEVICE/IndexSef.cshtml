@@ -70,7 +70,7 @@
                 , { field: 'STATUS', title: '@Html.DisplayNameFor(model => model.STATUS)', width: 86, hidden: true, align: 'center' }
                 , {
                     field: 'A', title: '准确度等级', width: 86, align: 'center', formatter: function (value, row, index) {
-                        var a = "<a href=_t_javascript:;_t_ class=_t_easyui-linkbutton_t_ data-options=_t_iconCls:'icon-search'_t_ onclick=_t_showModalOnly('UNDERTAKE_LABORATORYIDOld', '/METERING_STANDARD_DEVICE/ALLOWABLE_ERROR/" + row.ID + "');_t_>选择准确度等级</a>";
+                        var a = "<a href=_t_javascript:;_t_ class=_t_easyui-linkbutton_t_ data-options=_t_iconCls:'icon-search'_t_ onclick=_t_showModalMany('UNDERTAKE_LABORATORYIDOld', '/METERING_STANDARD_DEVICE/ALLOWABLE_ERROR/" + row.ID + "');_t_>选择准确度等级</a>";
                         var reg = new RegExp("_t_", "g");//g,表示全部替换。
                         return a.replace(reg, '"');                                              
                     }
@@ -149,9 +149,25 @@
         var arr = [];
         var zhi=$("#UNDERTAKE_LABORATORYIDOld").val();
         if (zhi != "") {
-            arr.push(zhi);
+            var z = zhi.split('^');
+            for (var i = 0; i < z.length; i++) {
+                if (z[i] != null) {
+                    var b=z[i].split('&')[0]
+                    arr.push(b);
+                }
+               
+            }
             arr.push("^");
-            arr.push(zhi.split('*')[3]);
+            for (var i = 0; i < z.length; i++) {
+                if (z[i] != null) {
+                    var b = z[i].split('&')[1]
+                    arr.push(b);
+                }
+
+            }                   
+            if (arr.length > 0) {//一条数据和多于一条
+                returnParent(arr.join("&")); //每一项用 & 分割
+            }
         }
         else {
             $.messager.alert('操作提示', "选择不能为空!", 'info');
