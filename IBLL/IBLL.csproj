@@ -134,6 +134,7 @@
     <Compile Include="Shiyanshi\IORDER_TASK_INFORMATIONBLL.cs" />
     <Compile Include="Shiyanshi\IPREPARE_SCHEMEBLL.cs" />
     <Compile Include="Shiyanshi\ISysPersonBLL.cs" />
+    <Compile Include="Shiyanshi\IUNCERTAINTYTABLEBLL.cs" />
     <Compile Include="Shiyanshi\IVBAOGAODAYINBLL.cs" />
     <Compile Include="Shiyanshi\IVJIANDINGRENWUBLL.cs" />
     <Compile Include="Shiyanshi\IVQIJULINGQU1BLL.cs" />

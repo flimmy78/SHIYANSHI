@@ -112,7 +112,7 @@ namespace Langben.App.Controllers
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
         [HttpPost]
-        public Common.ClientResult.Result InstUA([FromBody]METERING_STANDARD_DEVICE entity)
+        public Common.ClientResult.Result InstUAUB([FromBody]METERING_STANDARD_DEVICE entity)
         {
 
             Common.ClientResult.Result result = new Common.ClientResult.Result();
@@ -177,18 +177,22 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>  
-        public Common.ClientResult.Result Put([FromBody]UNCERTAINTYTABLE entity)
+        public Common.ClientResult.Result Put([FromBody]METERING_STANDARD_DEVICE entity)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
             {   //数据校验
 
-                //string currentPerson = GetCurrentPerson();
-                //entity.UpdateTime = DateTime.Now;
-                //entity.UpdatePerson = currentPerson;
+                string currentPerson = GetCurrentPerson();
+                
 
+                foreach (var item in entity.UNCERTAINTYTABLE)
+                {
+                    item.UPDATETIME = DateTime.Now;
+                    item.UPDATEPERSON = currentPerson;
+                }
                 string returnValue = string.Empty;
-                if (m_BLL.Edit(ref validationErrors, entity))
+                if (m_BLL.EditUpdate(ref validationErrors, entity))
                 {
                     LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，不确定度信息的Id为" + entity.ID, "不确定度"
                         );//写入日志                   

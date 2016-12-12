@@ -126,7 +126,92 @@ namespace Langben.App.Controllers
                         msdshow.METERING_STANDARD_DEVICE_CHECKShow.Add(msdcadd);
                     }
                 }
+                else if (IS == "UA"||IS=="UB")
+                {                    
+                    
+                    if (IS == "UA")
+                    {
+                        var undata = msd.UNCERTAINTYTABLE.Where(a => a.GROUPS == GROUPS);//筛选数据
+                        //undata = undata.Where(b => b.UNCERTAINTYUI != null);
+                        foreach (var al in undata)//循环添加数据
+                        {
+                            var unadd = new UNCERTAINTYTABLEShow()
+                            {
+                                ID = al.ID,
+                                ASSESSMENTITEM = al.ASSESSMENTITEM,
+                                ERRORSOURCES = al.ERRORSOURCES,
+                                ERRORLIMITS = al.ERRORLIMITS,
+                                ERRORLIMITUNIT = al.ERRORLIMITUNIT,
+                                THEERRODISTRIBUTION = al.THEERRODISTRIBUTION,
+                                KVALE = al.KVALE,
+                                THERANGESCOPE = al.THERANGESCOPE,
+                                THEUNIT = al.THEUNIT,
+                                THERELATIONSHIP = al.THERELATIONSHIP,
+                                ENDRANGESCOPE = al.ENDRANGESCOPE,
+                                ENDUNIT = al.ENDUNIT,
+                                ENDRELATIONSHIP = al.ENDRELATIONSHIP,
+                                THEFREQUENCY = al.THEFREQUENCY,
+                                THEUNITFREQUENCY = al.THEUNITFREQUENCY,
+                                THERELATIONSHIPFREQUENCY = al.THERELATIONSHIPFREQUENCY,
+                                ENDFREQUENCY = al.ENDFREQUENCY,
+                                ENDUNITFREQUENCY = al.ENDUNITFREQUENCY,
+                                ENDRELATIONSHIPFREQUENCY = al.ENDRELATIONSHIPFREQUENCY,
+                                INDEX1 = al.INDEX1,
+                                INDEX1UNIT = al.INDEX1UNIT,
+                                INDEX2 = al.INDEX2,
+                                INDEX2UNIT = al.INDEX2UNIT,
+                                NOTE = al.NOTE,
+                                METERING_STANDARD_DEVICEID = al.METERING_STANDARD_DEVICEID,
+                                GROUPS = al.GROUPS,
+                                UNCERTAINTYUI = al.UNCERTAINTYUI
+                            };
+                            msdshow.UNCERTAINTYTABLEShow.Add(unadd);
+                        }
+                    }
+                    else if (IS == "UB")
+                    {
+                        var ubdata =msd.UNCERTAINTYTABLE.Where(a => a.GROUPS == GROUPS);//筛选数据
+                        //ubdata = ubdata.Where(b => b.INDEX1 != null);
+                        foreach (var al in ubdata)//循环添加数据
+                        {
+                            var unadd = new UNCERTAINTYTABLEShow()
+                            {
+                                ID = al.ID,
+                                ASSESSMENTITEM = al.ASSESSMENTITEM,
+                                ERRORSOURCES = al.ERRORSOURCES,
+                                ERRORLIMITS = al.ERRORLIMITS,
+                                ERRORLIMITUNIT = al.ERRORLIMITUNIT,
+                                THEERRODISTRIBUTION = al.THEERRODISTRIBUTION,
+                                KVALE = al.KVALE,
+                                THERANGESCOPE = al.THERANGESCOPE,
+                                THEUNIT = al.THEUNIT,
+                                THERELATIONSHIP = al.THERELATIONSHIP,
+                                ENDRANGESCOPE = al.ENDRANGESCOPE,
+                                ENDUNIT = al.ENDUNIT,
+                                ENDRELATIONSHIP = al.ENDRELATIONSHIP,
+                                THEFREQUENCY = al.THEFREQUENCY,
+                                THEUNITFREQUENCY = al.THEUNITFREQUENCY,
+                                THERELATIONSHIPFREQUENCY = al.THERELATIONSHIPFREQUENCY,
+                                ENDFREQUENCY = al.ENDFREQUENCY,
+                                ENDUNITFREQUENCY = al.ENDUNITFREQUENCY,
+                                ENDRELATIONSHIPFREQUENCY = al.ENDRELATIONSHIPFREQUENCY,
+                                INDEX1 = al.INDEX1,
+                                INDEX1UNIT = al.INDEX1UNIT,
+                                INDEX2 = al.INDEX2,
+                                INDEX2UNIT = al.INDEX2UNIT,
+                                NOTE = al.NOTE,
+                                METERING_STANDARD_DEVICEID = al.METERING_STANDARD_DEVICEID,
+                                GROUPS = al.GROUPS,
+                                UNCERTAINTYUI = al.UNCERTAINTYUI
+                            };
+                            msdshow.UNCERTAINTYTABLEShow.Add(unadd);
+                        }
+                    }                
+                   
+                }
                 msdshow.IS = IS;
+                msdshow.ID = msd.ID;
+                ViewBag.GROUPS = GROUPS.ToString();
             }
             return View(msdshow);
         }

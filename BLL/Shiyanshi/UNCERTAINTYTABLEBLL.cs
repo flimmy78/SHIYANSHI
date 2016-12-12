@@ -9,17 +9,17 @@ using Common;
 namespace Langben.BLL
 {
     /// <summary>
-    /// 最大允许误差信息 
+    /// 不确定度 
     /// </summary>
-    public partial class ALLOWABLE_ERRORBLL : IBLL.IALLOWABLE_ERRORBLL, IDisposable
+    public partial class UNCERTAINTYTABLEBLL :  IBLL.IUNCERTAINTYTABLEBLL, IDisposable
     {
         /// <summary>
-        /// 最大允许误差信息
+        /// 编辑计量标准装置检定/校准信息 
         /// </summary>
         /// <param name="validationErrors">返回的错误信息</param>
-        /// <param name="entity">最大允许误差信息 </param>
+        /// <param name="entity">计量标准装置检定/校准信息 </param>
         /// <returns></returns>
-        public bool EditField(ref ValidationErrors validationErrors, ALLOWABLE_ERROR entity)
+        public bool EditField(ref ValidationErrors validationErrors, UNCERTAINTYTABLE entity)
         {
             try
             {
@@ -35,38 +35,38 @@ namespace Langben.BLL
             return false;
         }
         /// <summary>
-        /// 最大允许误差信息
+        /// 编辑一个不确定度
         /// </summary>
         /// <param name="validationErrors">返回的错误信息</param>
-        /// <param name="entity">最大允许误差信息 </param>
+        /// <param name="entity">一个不确定度</param>
         /// <returns></returns>
         public bool EditUpdate(ref ValidationErrors validationErrors, METERING_STANDARD_DEVICE entity)
         {
             try
             {
-                var data = entity.ALLOWABLE_ERROR.Where(s => s.ID == null ).ToList();
-                var upda = entity.ALLOWABLE_ERROR.Where(s => s.ID != null ).ToList();            
+                var data = entity.UNCERTAINTYTABLE.Where(s => s.ID == null).ToList();
+                var upda = entity.UNCERTAINTYTABLE.Where(s => s.ID != null).ToList();
                 foreach (var item in upda)
                 {
                     repository.EditField(db, item);
                 }
                 foreach (var item in data)
                 {
-                    item.ID= Result.GetNewId();
+                    item.ID = Result.GetNewId();
                     item.METERING_STANDARD_DEVICEID = entity.ID;
                     repository.Create(item);
                 }
-
                 repository.Save(db);
                 return true;
             }
             catch (Exception ex)
             {
                 validationErrors.Add(ex.Message);
-                ExceptionsHander.WriteExceptions(ex);
+                ExceptionsHander.WriteExceptions(ex);                
             }
             return false;
         }
+     
     }
 }
 

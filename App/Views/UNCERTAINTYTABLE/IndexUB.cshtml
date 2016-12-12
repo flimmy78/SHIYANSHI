@@ -4,14 +4,7 @@
 @using Common
 @using Models
 <script src="~/Scripts/JScriptIndex.js"></script>
-<div id="divQuery">
 
-    <div class='input_search' style="padding-top:10px;">
-        <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
-            查 询
-        </a>
-    </div>
-</div>
 <br style="clear: both;" />
 
 <script type="text/javascript" language="javascript">
@@ -50,7 +43,15 @@
                      handler: function () {
                          return flexiModify();
                      }
-                 }],
+                 }
+                  , {
+                      text: '返回',
+                      iconCls: 'icon-edit',
+                      handler: function () {
+                          return fanhui();
+                      }
+                  }
+            ],
             columns: [[
                    { field: 'ASSESSMENTITEM', title: '评定项', width: 100 }
                   , { field: 'THERANGESCOPE', title: '量程范围', width: 100 }
@@ -112,8 +113,7 @@
         var arr = $('#flexigridData').datagrid('getSelections');
 
         if (arr.length == 1) {
-            window.location.href = "../UNCERTAINTYTABLE/Edit/" + arr[0].ID;
-
+            window.location.href = "/METERING_STANDARD_DEVICE/Edit/" + arr[0].METERING_STANDARD_DEVICEID + "^" + arr[0].GROUPS + "^" + "UB";
         } else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
         }
@@ -157,5 +157,8 @@
         });
 
     };
-
+    //返回
+    function fanhui() {
+        window.location.href = '/METERING_STANDARD_DEVICE/Index';
+    }
 </script>

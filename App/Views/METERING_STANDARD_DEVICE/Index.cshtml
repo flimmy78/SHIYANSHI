@@ -108,14 +108,19 @@
                 , { field: 'CATEGORY', title: '@Html.DisplayNameFor(model => model.CATEGORY)', width: 86, align: 'center' }
                 , { field: 'STATUS', title: '@Html.DisplayNameFor(model => model.STATUS)', width: 86, hidden: true, align: 'center' }
                 , { field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width: 86, align: 'center' }
-                , { field: 'CREATETIME', title: '@Html.DisplayNameFor(model => model.CREATETIME)', width: 86, formatter: formatDatebox, align: 'center' }
-                , { field: 'CREATEPERSON', title: '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 86, align: 'center' }
+                , {
+                    field: 'A', title: '准确度等级', width: 86, formatter: formatDatebox, align: 'center', formatter: function (value, row, index) {
+                        return "<a href='/METERING_STANDARD_DEVICE/ALLOWABLE_ERROR/" + row.ID + "'>选择准确度等级</a><br/>";
+                    }
+                }
+                , {
+                    field: 'UA', title: '误差来源', width: 86, align: 'center', formatter: function (value, row, index) {
+                        return "<a href='/UNCERTAINTYTABLE/Index/" + row.ID + "'>选择误差来源</a>";
+                    }
+                }
                  , {
-                     field: 'aa', title: '操作', width: 86, formatter: function (value, row, index) {
-                         var html = "<a href='/METERING_STANDARD_DEVICE/ALLOWABLE_ERROR/" + row.ID + "'>准确度等级</a><br/>";
-                         html += "<a href='/UNCERTAINTYTABLE/IndexUB/" + row.ID + "'>范围指标</a><br/>";
-                         html += "<a href='/UNCERTAINTYTABLE/Index/" + row.ID + "'>误差来源</a>";
-                         return html;
+                     field: 'UB', title: '范围指标', width: 86, formatter: function (value, row, index) {
+                         return "<a href='/UNCERTAINTYTABLE/IndexUB/" + row.ID + "'>选择范围指标</a><br/>";
                      }
                  }
             ]],

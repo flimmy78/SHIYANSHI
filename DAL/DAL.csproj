@@ -266,6 +266,7 @@
     <Compile Include="shiyanshi\PREPARE_SCHEMEMeta.cs" />
     <Compile Include="shiyanshi\PREPARE_SCHEMERepository.cs" />
     <Compile Include="shiyanshi\SysPersonRepository.cs" />
+    <Compile Include="shiyanshi\UNCERTAINTYTABLERepository.cs" />
     <Compile Include="shiyanshi\VBAOGAODAYINRepository.cs" />
     <Compile Include="shiyanshi\VJIANDINGRENWURepository.cs" />
     <Compile Include="shiyanshi\VQIJULINGQU1Repository.cs" />

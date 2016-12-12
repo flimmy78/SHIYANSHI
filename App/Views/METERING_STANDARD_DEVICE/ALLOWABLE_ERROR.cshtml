@@ -39,7 +39,15 @@
                      handler: function () {
                          return flexiModify();
                      }
-                 }],
+                 }
+                 , {
+                     text: '返回',
+                     iconCls: 'icon-edit',
+                     handler: function () {
+                         return fanhui();
+                     }
+                 }
+            ],
             columns: [[
                 { field: 'ID', title: 'id', width: 129, hidden: true },
                 { field: 'MAXCATEGORIES', title: '不确定度/准确度等级/最大允许误差', width: 129 }
@@ -143,6 +151,9 @@
         });
 
     };
-
+    //返回
+    function fanhui() {
+        window.location.href = '/METERING_STANDARD_DEVICE/Index';
+    }
 </script>
 

@@ -108,6 +108,7 @@
     <Compile Include="Shiyanshi\RULEBLL.cs" />
     <Compile Include="Shiyanshi\SCHEME_RULEBLL.cs" />
     <Compile Include="Shiyanshi\SysPersonBLL.cs" />
+    <Compile Include="Shiyanshi\UNCERTAINTYTABLEBLL.cs" />
     <Compile Include="Shiyanshi\VBAOGAODAYINBLL.cs" />
     <Compile Include="Shiyanshi\VJIANDINGRENWUBLL.cs" />
     <Compile Include="Shiyanshi\VQIJULINGQU1BLL.cs" />

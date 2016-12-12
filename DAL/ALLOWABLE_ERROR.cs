@@ -28,6 +28,7 @@ namespace Langben.DAL
         public string MAXVALUE { get; set; }
         public string MAXCATEGORIES { get; set; }
         public Nullable<decimal> GROUPS { get; set; }
+        public string CATEGORY { get; set; }
     
         public virtual METERING_STANDARD_DEVICE METERING_STANDARD_DEVICE { get; set; }
     }
