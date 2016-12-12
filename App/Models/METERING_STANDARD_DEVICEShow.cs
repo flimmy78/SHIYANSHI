@@ -27,6 +27,7 @@ namespace Langben.App.Models
         public string XINGHAO { get; set; }
         public string THESUPERIOR { get; set; }
         public string IS { get; set; }
+        public string THESUPERIORNAME { get; set; }
         public virtual ICollection<ALLOWABLE_ERRORShow> ALLOWABLE_ERRORShow { get; set; }
 
         public virtual ICollection<METERING_STANDARD_DEVICE_CHECKShow> METERING_STANDARD_DEVICE_CHECKShow { get; set; }

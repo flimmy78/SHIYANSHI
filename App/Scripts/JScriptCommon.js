@@ -88,7 +88,6 @@ function bindDropDownList(id, parentid) {
 }
 
 function deleteTable(table, hidden) { //删除table和隐藏的值
-    
     var tableId = document.getElementById(table); //获取表格
     tableId.parentNode.removeChild(tableId); //删除table
     // tableId.style.display = "none";//table隐藏isNaN(Number())

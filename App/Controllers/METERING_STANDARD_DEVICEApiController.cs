@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
+//using System.Web.Mvc;
 using System.Text;
 using System.EnterpriseServices;
 using System.Configuration;
@@ -126,39 +126,68 @@ namespace Langben.App.Controllers
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
             {
-                string currentPerson = GetCurrentPerson();
-                entity.CREATETIME = DateTime.Now;
-                entity.CREATEPERSON = currentPerson;
-
-                entity.ID = Result.GetNewId();
-
+                string currentPerson = GetCurrentPerson();             
                 string returnValue = string.Empty;
-                if (m_BLL.CreateX(ref validationErrors, entity))
+                if (!string.IsNullOrWhiteSpace(entity.ID))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，标准装置/计量标准器信息的信息的Id为" + entity.ID, "标准装置/计量标准器信息"
-                        );//写入日志 
-                    result.Code = Common.ClientCode.Succeed;
-                    result.Message = Suggestion.InsertSucceed;
-                    return result; //提示创建成功
+                    entity.UPDATEPERSON = currentPerson;
+                    entity.UPDATETIME = DateTime.Now;
+                    if (m_BLL.EditField(ref validationErrors, entity))
+                    {
+                        LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，标准装置/计量标准器信息的信息的Id为" + entity.ID, "标准装置/计量标准器信息"
+                            );//写入日志 
+                        result.Code = Common.ClientCode.Succeed;
+                        result.Message = Suggestion.UpdateSucceed;
+                        return result; //提示修改成功
+                    }
+                    else
+                    {
+                        if (validationErrors != null && validationErrors.Count > 0)
+                        {
+                            validationErrors.All(a =>
+                            {
+                                returnValue += a.ErrorMessage;
+                                return true;
+                            });
+                        }
+                        LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，标准装置/计量标准器信息的信息，" + returnValue, "标准装置/计量标准器信息"
+                            );//写入日志                      
+                        result.Code = Common.ClientCode.Fail;
+                        result.Message = Suggestion.UpdateFail + returnValue;
+                        return result; //提示修改失败
+                    }
                 }
                 else
                 {
-                    if (validationErrors != null && validationErrors.Count > 0)
+                    entity.ID = Result.GetNewId();
+                    entity.CREATETIME = DateTime.Now;
+                    entity.CREATEPERSON = currentPerson;
+                    if (m_BLL.CreateX(ref validationErrors, entity))
                     {
-                        validationErrors.All(a =>
-                        {
-                            returnValue += a.ErrorMessage;
-                            return true;
-                        });
+                        LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，标准装置/计量标准器信息的信息的Id为" + entity.ID, "标准装置/计量标准器信息"
+                            );//写入日志 
+                        result.Code = Common.ClientCode.Succeed;
+                        result.Message = Suggestion.InsertSucceed;
+                        return result; //提示创建成功
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，标准装置/计量标准器信息的信息，" + returnValue, "标准装置/计量标准器信息"
-                        );//写入日志                      
-                    result.Code = Common.ClientCode.Fail;
-                    result.Message = Suggestion.InsertFail + returnValue;
-                    return result; //提示插入失败
-                }
+                    else
+                    {
+                        if (validationErrors != null && validationErrors.Count > 0)
+                        {
+                            validationErrors.All(a =>
+                            {
+                                returnValue += a.ErrorMessage;
+                                return true;
+                            });
+                        }
+                        LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，标准装置/计量标准器信息的信息，" + returnValue, "标准装置/计量标准器信息"
+                            );//写入日志                      
+                        result.Code = Common.ClientCode.Fail;
+                        result.Message = Suggestion.InsertFail + returnValue;
+                        return result; //提示插入失败
+                    }
+                }       
             }
-
             result.Code = Common.ClientCode.FindNull;
             result.Message = Suggestion.InsertFail + "，请核对输入的数据的格式"; //提示输入的数据的格式不对 
             return result;
@@ -217,106 +246,42 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>  
-        public Common.ClientResult.Result Update([FromBody]METERING_STANDARD_DEVICE entity)
+        [HttpPost]
+        public METERING_STANDARD_DEVICEShow Update(string id)
         {
-            Common.ClientResult.Result result = new Common.ClientResult.Result();
-            if (entity != null && ModelState.IsValid)
-            {   //数据校验
-
-                string currentPerson = GetCurrentPerson();
-                entity.UPDATETIME = DateTime.Now;
-                entity.UPDATEPERSON = currentPerson;
-
-                METERING_STANDARD_DEVICE mce = m_BLL.GetById(entity.ID);
-
-                //List<CAttributeFeature> check = mce.METERING_STANDARD_DEVICE_CHECK.ToList();
-                //check.Sort(SortCompare);
-                foreach (var item in mce.METERING_STANDARD_DEVICE_CHECK)
+            METERING_STANDARD_DEVICEShow msdshow = new METERING_STANDARD_DEVICEShow();
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                METERING_STANDARD_DEVICE msd = m_BLL.GetById(id);
+                msdshow.ID = msd.ID;
+                msdshow.NAME = msd.NAME;
+                msdshow.TEST_RANGE = msd.TEST_RANGE;
+                msdshow.FACTORY_NUM = msd.FACTORY_NUM;
+                msdshow.CATEGORY = msd.CATEGORY;
+                msdshow.STATUS = msd.STATUS;
+                msdshow.UNDERTAKE_LABORATORYID = msd.UNDERTAKE_LABORATORYID;
+                msdshow.CREATETIME = msd.CREATETIME;
+                msdshow.CREATEPERSON = msd.CREATEPERSON;
+                msdshow.UPDATETIME = msd.UPDATETIME;
+                msdshow.UPDATEPERSON = msd.UPDATEPERSON;
+                msdshow.XINGHAO = msd.XINGHAO;
+                msdshow.THESUPERIOR = msd.THESUPERIOR;
+                if (!string.IsNullOrWhiteSpace(msd.THESUPERIOR))
                 {
-                    foreach (var item2 in entity.METERING_STANDARD_DEVICE_CHECK)
-                    {
-                        if (item.ID == item2.ID)
-                        {
-
-                        }
-                    }
+                    METERING_STANDARD_DEVICE msd2 = m_BLL.GetById(msd.THESUPERIOR);
+                    msdshow.THESUPERIORNAME = msd2.ID + "&" + msd2.NAME;
                 }
-
-
-                string returnValue = string.Empty;
-                if (m_BLL.EditField(ref validationErrors, entity))
+                if (!string.IsNullOrWhiteSpace(msd.ID))
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，标准装置/计量标准器信息信息的Id为" + entity.ID, "标准装置/计量标准器信息"
-                        );//写入日志                   
-                    result.Code = Common.ClientCode.Succeed;
-                    result.Message = Suggestion.UpdateSucceed;
-                    return result; //提示更新成功 
+                    msdshow.IS = "1";
                 }
                 else
                 {
-                    if (validationErrors != null && validationErrors.Count > 0)
-                    {
-                        validationErrors.All(a =>
-                        {
-                            returnValue += a.ErrorMessage;
-                            return true;
-                        });
-                    }
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，标准装置/计量标准器信息信息的Id为" + entity.ID + "," + returnValue, "标准装置/计量标准器信息"
-                        );//写入日志   
-                    result.Code = Common.ClientCode.Fail;
-                    result.Message = Suggestion.UpdateFail + returnValue;
-                    return result; //提示更新失败
+                    msdshow.IS = "2";
                 }
             }
-            result.Code = Common.ClientCode.FindNull;
-            result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";
-            return result; //提示输入的数据的格式不对         
+            return msdshow;
         }
-        #region
-
-        #region SortCompare()函数，对List<CAttributeFeature>进行排序时作为参数使用
-
-        /// <summary>
-
-        /// 对List<CAttributeFeature>进行排序时作为参数使用
-
-        /// </summary>
-
-        /// <param name="AF1"></param>
-
-        /// <param name="AF2"></param>
-
-        /// <returns></returns>
-
-        public static int SortCompare(CAttributeFeature AF1, CAttributeFeature AF2)
-
-        {
-
-            int res = 0;
-
-            if (AF1.m_dAttributeFeature > AF2.m_dAttributeFeature)
-
-            {
-
-                res = -1;
-
-            }
-
-            else if (AF1.m_dAttributeFeature < AF2.m_dAttributeFeature)
-
-            {
-
-                res = 1;
-
-            }
-
-            return res;
-
-        }
-
-        #endregion
-        #endregion
 
         // DELETE api/<controller>/5
         /// <summary>
@@ -359,35 +324,6 @@ namespace Langben.App.Controllers
         }
 
         /// <summary>
-        /// list排序
-        /// </summary>
-        public class CAttributeFeature
-        {
-            public string m_strAttributeName { get; set; }
-
-            public double m_dAttributeFeature { get; set; }
-
-            public CAttributeFeature(string strName, double dFeature)
-
-            {
-
-                this.m_strAttributeName = strName;
-
-                this.m_dAttributeFeature = dFeature;
-
-            }
-
-            public void FeatureAdd(double dFeature)
-
-            {
-
-                this.m_dAttributeFeature += dFeature;
-
-            }
-        }
-
-
-        /// <summary>
         /// 准确度等级数据展示
         /// </summary>
         /// <param name="id"></param>
@@ -399,7 +335,7 @@ namespace Langben.App.Controllers
             string CERTIFICATE_NUM = string.Empty;//证书编号
             string VALID_TO = string.Empty;//有效期
             string MAXCATEGORIES = string.Empty;//最大允许误差
-            decimal? GROUPS=0;//组别
+            decimal? GROUPS = 0;//组别
             //分组
             var data = (from f in msd.METERING_STANDARD_DEVICE_CHECK
                         select f.CATEGORY).Distinct();
@@ -457,7 +393,7 @@ namespace Langben.App.Controllers
                         ID = id,//id
                         MAXCATEGORIES = MAXCATEGORIES,//最大允许误差
                         GROUPS = GROUPS,
-                        CATEGORY=item
+                        CATEGORY = item
                     });
                 }
             }
@@ -472,7 +408,7 @@ namespace Langben.App.Controllers
                     ID = s.ID,//id
                     MAXCATEGORIES = s.MAXCATEGORIES.TrimEnd(','),//最大允许误差
                     GROUPS = s.GROUPS,
-                    CATEGORY=s.CATEGORY
+                    CATEGORY = s.CATEGORY
                 })
             };
             return show;
