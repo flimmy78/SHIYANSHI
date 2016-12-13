@@ -88,7 +88,6 @@ function bindDropDownList(id, parentid) {
 }
 
 function deleteTable(table, hidden) { //删除table和隐藏的值
-    
     var tableId = document.getElementById(table); //获取表格
     tableId.parentNode.removeChild(tableId); //删除table
     // tableId.style.display = "none";//table隐藏isNaN(Number())
@@ -100,7 +99,7 @@ function deleteTable(table, hidden) { //删除table和隐藏的值
         hiddenValue.value = hiddenValue.value.replace(table, ""); //为隐藏控件赋值
     }
 }
-function showModalMany(me, url, dialogWidth, callback) { //弹出窗体，多选   
+function showModalMany(me, url, dialogWidth, callback) { //弹出窗体，多选 
     if (dialogWidth == null || dialogWidth == "undefined" || dialogWidth == "") {
         dialogWidth = 968;
     }
@@ -223,18 +222,42 @@ function showModalOnly(me, url) { //弹出窗体 ,单选
     return;
 }
 
-function showModal(me, url) { //弹出窗体 
-    var hidden = document.getElementById(me); //获取隐藏的控件
-    if (hidden == null) {
-        alert("请先设置更新控件");
-        return;
-    }
+function showModal(me, url) { //弹出窗体
+    var constrols = null;
+    var BuQueDingDuLuJing=null;
+    if (me != null && me.trim() != "")//回填控件id
+    {
+        constrols = me.split("^")[0].split("&");
+        if(me.split("^").length>1)
+        {
+            BuQueDingDuLuJing = me.split("^")[1];
+            var BuQueDingDuLuJingObj = document.getElementById(BuQueDingDuLuJing);
+            if (BuQueDingDuLuJingObj != null)
+            {
+                url += "&URL=" + BuQueDingDuLuJingObj.value;
+            }
+            
+        }
+    }   
     var reValue = window.showModalDialog(url, window, "dialogHeight:500px; dialogWidth:987px;  status:off; scroll:auto");
 
     if (reValue == null || reValue == "undefined" || reValue == "") {
         return; //如果返回值为空，就返回
     }
-    hidden.value = reValue;    
+    else {
+        var reValues = reValue.split("&");        
+        for(var i=0;i<constrols.length;i++)
+        {
+            if (reValues.length - 1 >= i)
+            {
+                var constrol = document.getElementById(constrols[i]);
+                if (constrol != null)
+                {
+                    constrol.value = reValues[i];
+                }              
+            }
+        }
+    }
     return;
 }
 

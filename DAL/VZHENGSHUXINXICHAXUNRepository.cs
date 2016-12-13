@@ -91,19 +91,19 @@ namespace Langben.DAL
                      .AsQueryable();
             if (null != startTime)
             {
-                data = data.Where(m => startTime >= m.JIANDINGRIQI);
+                data = data.Where(m => startTime < m.JIANDINGRIQI);
             }
             if (null != endTime)
             {
-                data = data.Where(m => endTime <= m.JIANDINGRIQI);
+                data = data.Where(m => endTime > m.JIANDINGRIQI);
             }
             if (null != startTime2)
             {
-                data = data.Where(m => startTime2 >= m.YOUXIAOQIZHI);
+                data = data.Where(m => startTime2 < m.YOUXIAOQIZHI);
             }
             if (null != endTime2)
             {
-                data = data.Where(m => endTime2 <= m.YOUXIAOQIZHI);
+                data = data.Where(m => endTime2 > m.YOUXIAOQIZHI);
             }
             return data;
         }

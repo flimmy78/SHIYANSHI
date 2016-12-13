@@ -25,6 +25,7 @@ namespace Langben.DAL
         public string UPDATEPERSON { get; set; }
         public string CERTIFICATEUNIT { get; set; }
         public Nullable<decimal> GROUPS { get; set; }
+        public string CATEGORY { get; set; }
     
         public virtual METERING_STANDARD_DEVICE METERING_STANDARD_DEVICE { get; set; }
     }

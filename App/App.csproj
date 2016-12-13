@@ -182,6 +182,8 @@
     <Compile Include="Controllers\HomeRightController.cs" />
     <Compile Include="Controllers\PROJECTTEMPLETApiController.cs" />
     <Compile Include="Controllers\PROJECTTEMPLETController.cs" />
+    <Compile Include="Controllers\STANDARDCHOICEApiController.cs" />
+    <Compile Include="Controllers\STANDARDCHOICEController.cs" />
     <Compile Include="Controllers\SysAnnouncementController.cs" />
     <Compile Include="Controllers\SysDepartmentController.cs" />
     <Compile Include="Controllers\SysDepartmentTreeController.cs" />
@@ -226,6 +228,8 @@
     <Compile Include="Images\HtmlHelper\CheckBoxListHelper.cs" />
     <Compile Include="Images\HtmlHelper\Easyui.cs" />
     <Compile Include="Images\HtmlHelper\RadioButtonListHelper.cs" />
+    <Compile Include="Models\ALLOWABLE_ERRORData.cs" />
+    <Compile Include="Models\UNCERTAINTYTABLEShow.cs" />
     <Compile Include="Models\ApplianceModel.cs" />
     <Compile Include="Models\APPLIANCE_LABORATORYShow .cs" />
     <Compile Include="Models\BaseException.cs" />
@@ -270,9 +274,12 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="html\1基本误差-电阻示值-相对误差.html" />
+<<<<<<< HEAD
     <Content Include="html\2示值误差-有电压示值-末盘值残余电阻参与运算.html" />
     <Content Include="html\3残余电阻-无不确定度.html" />
     <Content Include="html\4绝缘电阻-无误差.html" />
+=======
+>>>>>>> b4ef1b3c86432bbf889914033e8fb8b1d7c578f4
     <Content Include="html\不确定度评定过程.html" />
     <Content Include="html\交流电压（电流）测量-相对误差-单相%28多通道）.html" />
     <Content Include="html\变送器-功率-引用误差.html" />
@@ -552,6 +559,7 @@
     </Content>
     <Content Include="Scripts\datagrid-detailview.js" />
     <Content Include="Scripts\echarts.js" />
+    <Content Include="Scripts\numeral.js" />
     <Content Include="Scripts\shine.js" />
     <Content Include="Xml\TableTemplate_JianDing.xml" />
     <Content Include="Xml\TableTemplate_JiaoZhun.xml" />
@@ -962,7 +970,12 @@
     <Content Include="Views\THEREVIEWPROCESS\Index.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\JiBenWuChaDianZuShiZhi.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\ALLOWABLE_ERROR.cshtml" />
-    <Content Include="Views\METERING_STANDARD_DEVICE\UNCERTAINTYTABLE.cshtml" />
+    <Content Include="Views\UNCERTAINTYTABLE\IndexUB.cshtml" />
+    <Content Include="Views\PREPARE_SCHEME\Test.cshtml" />
+    <Content Include="Views\STANDARDCHOICE\Create.cshtml" />
+    <Content Include="Views\STANDARDCHOICE\Details.cshtml" />
+    <Content Include="Views\STANDARDCHOICE\Edit.cshtml" />
+    <Content Include="Views\STANDARDCHOICE\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

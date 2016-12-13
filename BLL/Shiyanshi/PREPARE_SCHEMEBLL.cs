@@ -134,30 +134,43 @@ namespace Langben.BLL
                 {
                     return false;
                 }
-                int count = 1;
                 List<string> addMETERING_STANDARD_DEVICEID = new List<string>();
                 List<string> deleteMETERING_STANDARD_DEVICEID = new List<string>();
+              
                 DataOfDiffrent.GetDiffrent(entity.METERING_STANDARD_DEVICEID.GetIdSort(), entity.METERING_STANDARD_DEVICEIDOld.GetIdSort(), ref addMETERING_STANDARD_DEVICEID, ref deleteMETERING_STANDARD_DEVICEID);
-               
+
                 PREPARE_SCHEME editEntity = repository.EditInst(db, entity);
 
                 if (addMETERING_STANDARD_DEVICEID != null && addMETERING_STANDARD_DEVICEID.Count() > 0)
                 {
                     foreach (var item in addMETERING_STANDARD_DEVICEID)
                     {
-                        METERING_STANDARD_DEVICE sys = new METERING_STANDARD_DEVICE { ID = item };
-                        db.METERING_STANDARD_DEVICE.Attach(sys);
-                        editEntity.METERING_STANDARD_DEVICE.Add(sys);
-                        count++;
+                        STANDARDCHOICE sys = new STANDARDCHOICE
+                        {
+                            ID = Result.GetNewId(),
+                            PREPARE_SCHEMEID = entity.ID,
+                            METERING_STANDARD_DEVICEID = item.Split('*')[0],
+                            GROUPS = item.Split('*')[1],
+                            TYPE = item.Split('*')[2],
+                            NAMES = item.Split('*')[3],
+                            CREATEPERSON=entity.CREATEPERSON,
+                            CREATETIME=entity.CREATETIME
+                        };
+                        //db.STANDARDCHOICE.Attach(sys);
+                        editEntity.STANDARDCHOICE.Add(sys);
                     }
                 }
                 if (deleteMETERING_STANDARD_DEVICEID != null && deleteMETERING_STANDARD_DEVICEID.Count() > 0)
                 {
                     foreach (var item in deleteMETERING_STANDARD_DEVICEID)
                     {
+                        string ID = item.Split('*')[0];                       
+                         
+                        STANDARDCHOICE sys = new STANDARDCHOICE() { ID=ID};
                         
-                        editEntity.METERING_STANDARD_DEVICE.Remove(editEntity.METERING_STANDARD_DEVICE.Where(d=>d.ID==item).FirstOrDefault());
-                        count++;
+                        db.STANDARDCHOICE.Attach(sys);
+                        editEntity.STANDARDCHOICE.Remove(sys);
+                        db.STANDARDCHOICE.Remove(sys);
 
                     }
 

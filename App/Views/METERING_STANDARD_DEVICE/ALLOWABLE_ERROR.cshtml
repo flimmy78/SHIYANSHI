@@ -15,7 +15,7 @@
             //nowrap: false,
             striped: true,
             collapsible: true,
-            url: '/api/ALLOWABLE_ERRORApi/PostData', //获取数据的url
+            url: '/api/METERING_STANDARD_DEVICEApi/ALLOWABLE_ERRORData/' + "@ViewBag.METERING_STANDARD_DEVICEID", //获取数据的url
             sortName: 'ID',
             sortOrder: 'desc',
             idField: 'ID',
@@ -39,11 +39,22 @@
                      handler: function () {
                          return flexiModify();
                      }
-                 }],
+                 }
+                 , {
+                     text: '返回',
+                     iconCls: 'icon-edit',
+                     handler: function () {
+                         return fanhui();
+                     }
+                 }
+            ],
             columns: [[
-                { field: 'METERING_STANDARD_DEVICEID', title: '不确定度/准确度等级/最大允许误差', width: 129 }
-                , { field: 'CREATETIME', title: '证书编号', width: 129 }
-                , { field: 'CREATEPERSON', title: '有效期', width: 129 }
+                { field: 'ID', title: 'id', width: 129, hidden: true },
+                { field: 'MAXCATEGORIES', title: '不确定度/准确度等级/最大允许误差', width: 129 }
+                , { field: 'CERTIFICATE_NUM', title: '证书编号', width: 129 }
+                , { field: 'VALID_TO', title: '有效期', width: 129 }
+                 , { field: 'GROUPS', title: '组别', width: 129 }
+                  , { field: 'CATEGORY', title: '类别', width: 129 }
             ]],
             pagination: true,
             rownumbers: true
@@ -63,7 +74,7 @@
 
     //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
     function flexiSelect() {
-
+        debugger
         var rows = $('#flexigridData').datagrid('getSelections');
         if (rows.length == 0) {
             $.messager.alert('操作提示', '请选择数据!', 'warning');
@@ -72,21 +83,22 @@
 
         var arr = [];
         for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].ID);
+            arr.push(rows[i].ID + "*" + rows[i].GROUPS + "*" + rows[i].CATEGORY + "*" + rows[i].CERTIFICATE_NUM);
         }
         arr.push("^");
         for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].VALUE);
+            arr.push(rows[i].CERTIFICATE_NUM);
         }
         //主键列和显示列之间用 ^ 分割   每一项用 , 分割
         if (arr.length > 0) {//一条数据和多于一条
             returnParent(arr.join("&")); //每一项用 & 分割
         }
     }
+
     //导航到创建的按钮
     function flexiCreate() {
 
-        window.location.href = "../ALLOWABLE_ERROR/Create";
+        window.location.href = "/METERING_STANDARD_DEVICE/Create/@ViewBag.METERING_STANDARD_DEVICEID^A";
         return false;
     }
     //导航到修改的按钮
@@ -95,7 +107,7 @@
         var arr = $('#flexigridData').datagrid('getSelections');
 
         if (arr.length == 1) {
-            window.location.href = "../ALLOWABLE_ERROR/Edit/" + arr[0].ID;
+            window.location.href = "/METERING_STANDARD_DEVICE/Edit/" + arr[0].ID + "^" + arr[0].GROUPS + "^" + "A" + "^" + arr[0].CATEGORY;
 
         } else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
@@ -140,6 +152,9 @@
         });
 
     };
-
+    //返回
+    function fanhui() {
+        window.location.href = '/METERING_STANDARD_DEVICE/Index';
+    }
 </script>
 

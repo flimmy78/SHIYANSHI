@@ -81,42 +81,89 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
-        public Common.ClientResult.Result Post([FromBody]ALLOWABLE_ERROR entity)
+        public Common.ClientResult.Result Post([FromBody]METERING_STANDARD_DEVICE entity)
         {
-
             Common.ClientResult.Result result = new Common.ClientResult.Result();
+            string returnValue = string.Empty;
             if (entity != null && ModelState.IsValid)
             {
                 string currentPerson = GetCurrentPerson();
                 entity.CREATETIME = DateTime.Now;
                 entity.CREATEPERSON = currentPerson;
-
-                entity.ID = Result.GetNewId();
-                string returnValue = string.Empty;
-                if (m_BLL.Create(ref validationErrors, entity))
+                int groups = 1;
+                List<ALLOWABLE_ERROR> list = m_BLL.GetByRefMETERING_STANDARD_DEVICEID(entity.ID);
+                var data = (from f in list select f.GROUPS).Max();
+                if (data!=null)
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，最大允许误差信息的信息的Id为" + entity.ID, "最大允许误差信息"
-                        );//写入日志 
-                    result.Code = Common.ClientCode.Succeed;
-                    result.Message = Suggestion.InsertSucceed;
-                    return result; //提示创建成功
+                    groups = (int)data + 1;
                 }
-                else
+                string CATEGORY = string.Empty;
+                foreach (var item in entity.ALLOWABLE_ERROR)
                 {
-                    if (validationErrors != null && validationErrors.Count > 0)
+                    item.ID = Result.GetNewId();
+                    item.CREATETIME = DateTime.Now;
+                    item.CREATEPERSON = currentPerson;
+                    item.METERING_STANDARD_DEVICEID = entity.ID;
+                    item.GROUPS = groups;
+                    CATEGORY = item.CATEGORY;
+                    if (m_BLL.Create(ref validationErrors, item))
                     {
-                        validationErrors.All(a =>
-                        {
-                            returnValue += a.ErrorMessage;
-                            return true;
-                        });
+                        LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，最大允许误差信息的信息的Id为" + entity.ID, "最大允许误差信息"
+                            );//写入日志 
+                        result.Code = Common.ClientCode.Succeed;
+                        result.Message = Suggestion.InsertSucceed;
+                        //return result; //提示创建成功
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，最大允许误差信息的信息，" + returnValue, "最大允许误差信息"
-                        );//写入日志                      
-                    result.Code = Common.ClientCode.Fail;
-                    result.Message = Suggestion.InsertFail + returnValue;
-                    return result; //提示插入失败
+                    else
+                    {
+                        if (validationErrors != null && validationErrors.Count > 0)
+                        {
+                            validationErrors.All(a =>
+                            {
+                                returnValue += a.ErrorMessage;
+                                return true;
+                            });
+                        }
+                        LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，最大允许误差信息的信息，" + returnValue, "最大允许误差信息"
+                            );//写入日志                      
+                        result.Code = Common.ClientCode.Fail;
+                        result.Message = Suggestion.InsertFail + returnValue;
+                        return result; //提示插入失败
+                    }
                 }
+                foreach (var item in entity.METERING_STANDARD_DEVICE_CHECK)
+                {
+                    item.ID = Result.GetNewId();
+                    item.CREATETIME = DateTime.Now;
+                    item.CREATEPERSON = currentPerson;
+                    item.METERING_STANDARD_DEVICEID = entity.ID;
+                    item.GROUPS = groups;
+                    item.CATEGORY = CATEGORY;
+                    if (m_BLL2.Create(ref validationErrors, item))
+                    {
+                        LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，计量标准装置检定/校准信息的信息的Id为" + entity.ID, "计量标准装置检定/校准信息"
+                            );//写入日志 
+                        result.Code = Common.ClientCode.Succeed;
+                        result.Message = Suggestion.InsertSucceed;
+                        return result; //提示创建成功
+                    }
+                    else
+                    {
+                        if (validationErrors != null && validationErrors.Count > 0)
+                        {
+                            validationErrors.All(a =>
+                            {
+                                returnValue += a.ErrorMessage;
+                                return true;
+                            });
+                        }
+                        LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，计量标准装置检定/校准信息的信息，" + returnValue, "计量标准装置检定/校准信息"
+                            );//写入日志                      
+                        result.Code = Common.ClientCode.Fail;
+                        result.Message = Suggestion.InsertFail + returnValue;
+                        return result; //提示插入失败
+                    }
+                }                        
             }
 
             result.Code = Common.ClientCode.FindNull;
@@ -130,21 +177,52 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>  
-        public Common.ClientResult.Result Put([FromBody]ALLOWABLE_ERROR entity)
+        public Common.ClientResult.Result Put([FromBody]METERING_STANDARD_DEVICE entity)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
             {   //数据校验
 
                 string currentPerson = GetCurrentPerson();
-                entity.UPDATETIME = DateTime.Now;
-                entity.UPDATEPERSON = currentPerson;
-
+               
+                foreach (var item in entity.ALLOWABLE_ERROR)
+                {
+                    item.UPDATETIME = DateTime.Now;
+                    item.UPDATEPERSON = currentPerson;
+                }
+                foreach (var item in entity.METERING_STANDARD_DEVICE_CHECK)
+                {
+                    item.UPDATETIME = DateTime.Now;
+                    item.UPDATEPERSON = currentPerson;
+                }
                 string returnValue = string.Empty;
-                if (m_BLL.Edit(ref validationErrors, entity))
+                if (m_BLL.EditUpdate(ref validationErrors, entity))
                 {
                     LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，最大允许误差信息信息的Id为" + entity.ID, "最大允许误差信息"
                         );//写入日志                   
+                    result.Code = Common.ClientCode.Succeed;
+                    result.Message = Suggestion.UpdateSucceed;
+                    //return result; //提示更新成功 
+                }
+                else
+                {
+                    if (validationErrors != null && validationErrors.Count > 0)
+                    {
+                        validationErrors.All(a =>
+                        {
+                            returnValue += a.ErrorMessage;
+                            return true;
+                        });
+                    }
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，最大允许误差信息信息的Id为" + entity.ID + "," + returnValue, "最大允许误差信息"
+                        );//写入日志   
+                    result.Code = Common.ClientCode.Fail;
+                    result.Message = Suggestion.UpdateFail + returnValue;
+                    return result; //提示更新失败
+                }
+                if (m_BLL2.EditUpdate(ref validationErrors, entity))
+                {
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，最计量标准装置检定/校准信息的Id为" + entity.ID, "计量标准装置检定/校准信息");
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.UpdateSucceed;
                     return result; //提示更新成功 
@@ -159,7 +237,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，最大允许误差信息信息的Id为" + entity.ID + "," + returnValue, "最大允许误差信息"
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，最计量标准装置检定/校准信息的Id为" + entity.ID + "," + returnValue, "最计量标准装置检定/校准信息"
                         );//写入日志   
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.UpdateFail + returnValue;
@@ -212,15 +290,17 @@ namespace Langben.App.Controllers
         }
 
         IBLL.IALLOWABLE_ERRORBLL m_BLL;
+        IBLL.IMETERING_STANDARD_DEVICE_CHECKBLL m_BLL2;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public ALLOWABLE_ERRORApiController()
-            : this(new ALLOWABLE_ERRORBLL()) { }
+            : this(new ALLOWABLE_ERRORBLL(), new METERING_STANDARD_DEVICE_CHECKBLL()) { }
 
-        public ALLOWABLE_ERRORApiController(ALLOWABLE_ERRORBLL bll)
+        public ALLOWABLE_ERRORApiController(ALLOWABLE_ERRORBLL bll, METERING_STANDARD_DEVICE_CHECKBLL bll2)
         {
             m_BLL = bll;
+            m_BLL2 = bll2;
         }
 
     }

@@ -68,6 +68,7 @@
           <Property Name="MAXVALUE" Type="nvarchar2" MaxLength="200" />
           <Property Name="MAXCATEGORIES" Type="nvarchar2" MaxLength="200" />
           <Property Name="GROUPS" Type="number" Precision="38" Scale="0" />
+          <Property Name="CATEGORY" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="APPLIANCE_DETAIL_INFORMATION">
           <Key>
@@ -504,6 +505,7 @@
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="CERTIFICATEUNIT" Type="varchar2" MaxLength="200" />
           <Property Name="GROUPS" Type="number" Precision="38" Scale="0" />
+          <Property Name="CATEGORY" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="METERING_STANDARD_DEVICEPREPAR">
           <Key>
@@ -754,6 +756,21 @@
           <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="STANDARDCHOICE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
+          <Property Name="GROUPS" Type="varchar2" MaxLength="200" />
+          <Property Name="TYPE" Type="varchar2" MaxLength="200" />
+          <Property Name="CREATETIME" Type="date" />
+          <Property Name="CREATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="UPDATETIME" Type="date" />
+          <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
+          <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" />
+          <Property Name="METERING_STANDARD_DEVICEID" Type="varchar2" MaxLength="36" />
+          <Property Name="NAMES" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="SysAnnouncement">
           <Key>
@@ -1319,6 +1336,8 @@
           <Property Name="METERING_STANDARD_DEVICEID" Type="varchar2" MaxLength="36" />
           <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="GROUPS" Type="number" Precision="38" Scale="0" />
+          <Property Name="UNCERTAINTYUI" Type="varchar2" MaxLength="200" />
+          <Property Name="CATEGORY" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="UNDERTAKE_LABORATORY">
           <Key>
@@ -2141,6 +2160,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_STANDARD_REFERENCE_PREPARE_">
+          <End Role="PREPARE_SCHEME" Type="Self.PREPARE_SCHEME" Multiplicity="0..1" />
+          <End Role="STANDARDCHOICE" Type="Self.STANDARDCHOICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PREPARE_SCHEME">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="STANDARDCHOICE">
+              <PropertyRef Name="PREPARE_SCHEMEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SYSDEPAR_REFERENCE_SYSDEPAR">
           <End Role="SysDepartment" Type="Self.SysDepartment" Multiplicity="0..1" />
           <End Role="SysDepartment1" Type="Self.SysDepartment" Multiplicity="*" />
@@ -2519,6 +2550,7 @@
           <EntitySet Name="SCHEME" EntityType="Self.SCHEME" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="SCHEME_RULE" EntityType="Self.SCHEME_RULE" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="SIGN" EntityType="Self.SIGN" Schema="TENGFEI" store:Type="Tables" />
+          <EntitySet Name="STANDARDCHOICE" EntityType="Self.STANDARDCHOICE" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="SysAnnouncement" EntityType="Self.SysAnnouncement" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="SysDepartment" EntityType="Self.SysDepartment" Schema="TENGFEI" store:Type="Tables" />
           <EntitySet Name="SysDocument" EntityType="Self.SysDocument" Schema="TENGFEI" store:Type="Tables" />
@@ -3019,6 +3051,10 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
             <End Role="ORDER_TASK_INFORMATION" EntitySet="ORDER_TASK_INFORMATION" />
             <End Role="SIGN" EntitySet="SIGN" />
           </AssociationSet>
+          <AssociationSet Name="FK_STANDARD_REFERENCE_PREPARE_" Association="Self.FK_STANDARD_REFERENCE_PREPARE_">
+            <End Role="PREPARE_SCHEME" EntitySet="PREPARE_SCHEME" />
+            <End Role="STANDARDCHOICE" EntitySet="STANDARDCHOICE" />
+          </AssociationSet>
           <AssociationSet Name="FK_SYSDEPAR_REFERENCE_SYSDEPAR" Association="Self.FK_SYSDEPAR_REFERENCE_SYSDEPAR">
             <End Role="SysDepartment" EntitySet="SysDepartment" />
             <End Role="SysDepartment1" EntitySet="SysDepartment" />
@@ -3177,6 +3213,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySet Name="SCHEME" EntityType="Model.SCHEME" />
           <EntitySet Name="SCHEME_RULE" EntityType="Model.SCHEME_RULE" />
           <EntitySet Name="SIGN" EntityType="Model.SIGN" />
+          <EntitySet Name="STANDARDCHOICE" EntityType="Model.STANDARDCHOICE" />
           <EntitySet Name="SysAnnouncement" EntityType="Model.SysAnnouncement" />
           <EntitySet Name="SysDepartment" EntityType="Model.SysDepartment" />
           <EntitySet Name="SysDocument" EntityType="Model.SysDocument" />
@@ -3334,6 +3371,10 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <AssociationSet Name="FK_REPORTCO_REFERENCE_PREPARE_" Association="Model.FK_REPORTCO_REFERENCE_PREPARE_">
             <End Role="PREPARE_SCHEME" EntitySet="PREPARE_SCHEME" />
             <End Role="REPORTCOLLECTION" EntitySet="REPORTCOLLECTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STANDARD_REFERENCE_PREPARE_" Association="Model.FK_STANDARD_REFERENCE_PREPARE_">
+            <End Role="PREPARE_SCHEME" EntitySet="PREPARE_SCHEME" />
+            <End Role="STANDARDCHOICE" EntitySet="STANDARDCHOICE" />
           </AssociationSet>
           <AssociationSet Name="FK_THEAPPRO_REFERENCE_PREPARE_" Association="Model.FK_THEAPPRO_REFERENCE_PREPARE_">
             <End Role="PREPARE_SCHEME" EntitySet="PREPARE_SCHEME" />
@@ -3535,6 +3576,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="MAXVALUE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="MAXCATEGORIES" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="GROUPS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.FK_MAXIMUM__REFERENCE_METERIN2" FromRole="ALLOWABLE_ERROR" ToRole="METERING_STANDARD_DEVICE" />
         </EntityType>
         <EntityType Name="APPLIANCE_DETAIL_INFORMATION">
@@ -4000,6 +4042,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CERTIFICATEUNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="GROUPS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.FK_METERING_REFERENCE_METERIN2" FromRole="METERING_STANDARD_DEVICE_CHECK" ToRole="METERING_STANDARD_DEVICE" />
         </EntityType>
         <EntityType Name="ORDER_TASK_INFORMATION">
@@ -4136,6 +4179,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <NavigationProperty Name="PRINTREPORT" Relationship="Model.FK_PRINTREP_REFERENCE_PREPARE_" FromRole="PREPARE_SCHEME" ToRole="PRINTREPORT" />
           <NavigationProperty Name="QUALIFIED_UNQUALIFIED_TEST_ITE" Relationship="Model.FK_QUALIFIED_UN" FromRole="PREPARE_SCHEME" ToRole="QUALIFIED_UNQUALIFIED_TEST_ITE" />
           <NavigationProperty Name="REPORTCOLLECTION" Relationship="Model.FK_REPORTCO_REFERENCE_PREPARE_" FromRole="PREPARE_SCHEME" ToRole="REPORTCOLLECTION" />
+          <NavigationProperty Name="STANDARDCHOICE" Relationship="Model.FK_STANDARD_REFERENCE_PREPARE_" FromRole="PREPARE_SCHEME" ToRole="STANDARDCHOICE" />
           <NavigationProperty Name="THEAPPROVALPROCESS" Relationship="Model.FK_THEAPPRO_REFERENCE_PREPARE_" FromRole="PREPARE_SCHEME" ToRole="THEAPPROVALPROCESS" />
           <NavigationProperty Name="THEREVIEWPROCESS" Relationship="Model.FK_THEREVIE_REFERENCE_PREPARE_" FromRole="PREPARE_SCHEME" ToRole="THEREVIEWPROCESS" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.METERING_STANDARD_DEVICEPREPAR" FromRole="PREPARE_SCHEME" ToRole="METERING_STANDARD_DEVICE" />
@@ -4284,6 +4328,22 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ORDER_TASK_INFORMATION" Relationship="Model.FK_SIGN_REFERENCE_ORDER_TA" FromRole="SIGN" ToRole="ORDER_TASK_INFORMATION" />
+        </EntityType>
+        <EntityType Name="STANDARDCHOICE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="GROUPS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="TYPE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CREATETIME" Type="DateTime" />
+          <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATETIME" Type="DateTime" />
+          <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PREPARE_SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="METERING_STANDARD_DEVICEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="NAMES" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PREPARE_SCHEME" Relationship="Model.FK_STANDARD_REFERENCE_PREPARE_" FromRole="STANDARDCHOICE" ToRole="PREPARE_SCHEME" />
         </EntityType>
         <EntityType Name="SysAnnouncement">
           <Key>
@@ -4859,6 +4919,8 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="METERING_STANDARD_DEVICEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="GROUPS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="UNCERTAINTYUI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.FK_UNCERTAI_REFERENCE_METERING" FromRole="UNCERTAINTYTABLE" ToRole="METERING_STANDARD_DEVICE" />
         </EntityType>
         <EntityType Name="UNDERTAKE_LABORATORY">
@@ -5547,6 +5609,18 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_STANDARD_REFERENCE_PREPARE_">
+          <End Type="Model.PREPARE_SCHEME" Role="PREPARE_SCHEME" Multiplicity="0..1" />
+          <End Type="Model.STANDARDCHOICE" Role="STANDARDCHOICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PREPARE_SCHEME">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="STANDARDCHOICE">
+              <PropertyRef Name="PREPARE_SCHEMEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_THEAPPRO_REFERENCE_PREPARE_">
           <End Type="Model.PREPARE_SCHEME" Role="PREPARE_SCHEME" Multiplicity="0..1" />
           <End Type="Model.THEAPPROVALPROCESS" Role="THEAPPROVALPROCESS" Multiplicity="*" />
@@ -5949,6 +6023,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="ALLOWABLE_ERROR">
             <EntityTypeMapping TypeName="Model.ALLOWABLE_ERROR">
               <MappingFragment StoreEntitySet="ALLOWABLE_ERROR">
+                <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
                 <ScalarProperty Name="GROUPS" ColumnName="GROUPS" />
                 <ScalarProperty Name="MAXCATEGORIES" ColumnName="MAXCATEGORIES" />
                 <ScalarProperty Name="MAXVALUE" ColumnName="MAXVALUE" />
@@ -6408,6 +6483,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="METERING_STANDARD_DEVICE_CHECK">
             <EntityTypeMapping TypeName="Model.METERING_STANDARD_DEVICE_CHECK">
               <MappingFragment StoreEntitySet="METERING_STANDARD_DEVICE_CHECK">
+                <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
                 <ScalarProperty Name="GROUPS" ColumnName="GROUPS" />
                 <ScalarProperty Name="CERTIFICATEUNIT" ColumnName="CERTIFICATEUNIT" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
@@ -6672,6 +6748,22 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
                 <ScalarProperty Name="HTMLVALUE" ColumnName="HTMLVALUE" />
                 <ScalarProperty Name="ORDER_TASK_INFORMATIONID" ColumnName="ORDER_TASK_INFORMATIONID" />
                 <ScalarProperty Name="PICTURE" ColumnName="PICTURE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STANDARDCHOICE">
+            <EntityTypeMapping TypeName="Model.STANDARDCHOICE">
+              <MappingFragment StoreEntitySet="STANDARDCHOICE">
+                <ScalarProperty Name="NAMES" ColumnName="NAMES" />
+                <ScalarProperty Name="METERING_STANDARD_DEVICEID" ColumnName="METERING_STANDARD_DEVICEID" />
+                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
+                <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
+                <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+                <ScalarProperty Name="GROUPS" ColumnName="GROUPS" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7206,6 +7298,8 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="UNCERTAINTYTABLE">
             <EntityTypeMapping TypeName="Model.UNCERTAINTYTABLE">
               <MappingFragment StoreEntitySet="UNCERTAINTYTABLE">
+                <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
+                <ScalarProperty Name="UNCERTAINTYUI" ColumnName="UNCERTAINTYUI" />
                 <ScalarProperty Name="GROUPS" ColumnName="GROUPS" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="METERING_STANDARD_DEVICEID" ColumnName="METERING_STANDARD_DEVICEID" />

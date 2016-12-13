@@ -102,27 +102,27 @@ namespace Langben.DAL
                      .AsQueryable();
             if (null != startTime)
             {
-                data = data.Where(m => startTime >= m.SONGJIANRIQI);
+                data = data.Where(m => startTime < m.SONGJIANRIQI);
             }
             if (null != endTime)
             {
-                data = data.Where(m => endTime <= m.SONGJIANRIQI);
+                data = data.Where(m => endTime > m.SONGJIANRIQI);
             }
             if (null != startTime2)
             {
-                data = data.Where(m => startTime2 >= m.JIANDINGRIQI);
+                data = data.Where(m => startTime2 < m.JIANDINGRIQI);
             }
             if (null != endTime2)
             {
-                data = data.Where(m => endTime2 <= m.JIANDINGRIQI);
+                data = data.Where(m => endTime2 >m.JIANDINGRIQI);
             }
             if (null != startTime3)
             {
-                data = data.Where(m => startTime3 >= m.BAOGAOSHENPITONGGUORIQI);
+                data = data.Where(m => startTime3 < m.BAOGAOSHENPITONGGUORIQI);
             }
             if (null != endTime3)
             {
-                data = data.Where(m => endTime3 <= m.BAOGAOSHENPITONGGUORIQI);
+                data = data.Where(m => endTime3 > m.BAOGAOSHENPITONGGUORIQI);
             }
             return data;
         }

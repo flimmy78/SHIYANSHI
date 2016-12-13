@@ -17,6 +17,7 @@
 <div id="w" class="easyui-dialog" title="新增" data-options="iconCls:''" style="width:600px;height:400px;padding:5px;">
     <div class="easyui-layout" data-options="fit:true">
         <div class="clear mt10">
+            <input type="hidden" id="ID" value="" />
             <ul>
                 <li class="fl mr10">
                     名称：
@@ -47,7 +48,7 @@
                     实验室：
                     <select class="my-combobox" name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID">
                         <option value="">请选择 </option>
-                        <option value="数表三相">数表三相 </option>
+                        <option value="数表三相">数表三相</option>
                         <option value="数表单相">数表单相</option>
                         <option value="电能">电能</option>
                         <option value="指示仪表">指示仪表</option>
@@ -56,7 +57,8 @@
                     </select>
                 </li>
                 <li class="fl mr10" id="choicePre">
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="showModalOnly('THESUPERIOR', '../../METERING_STANDARD_DEVICE');">选择上一级</a><span id="checkTHESUPERIOR">
+                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="showModalOnly('THESUPERIOR', '../../METERING_STANDARD_DEVICE');">选择上一级</a>
+                    <span id="checkTHESUPERIOR">
                     </span>@Html.HiddenFor(model => model.THESUPERIOR)
                 </li>
             </ul>
@@ -108,16 +110,21 @@
                 , { field: 'CATEGORY', title: '@Html.DisplayNameFor(model => model.CATEGORY)', width: 86, align: 'center' }
                 , { field: 'STATUS', title: '@Html.DisplayNameFor(model => model.STATUS)', width: 86, hidden: true, align: 'center' }
                 , { field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width: 86, align: 'center' }
-                , { field: 'CREATETIME', title: '@Html.DisplayNameFor(model => model.CREATETIME)', width: 86, formatter: formatDatebox, align: 'center' }
-                , { field: 'CREATEPERSON', title: '@Html.DisplayNameFor(model => model.CREATEPERSON)', width: 86, align: 'center' }
-                 , {
-                     field: 'aa', title: '操作', width: 86, formatter: function (value, row, index) {
-                         var html = "<a href='/METERING_STANDARD_DEVICE/ALLOWABLE_ERROR/" + row.ID + "'>准确度等级</a><br/>";
-                         //html += "<a href='/VSHENHE/XiaZaiShenHe/" + row.ID + "^P'>证书信息</a><br/>";
-                         html += "<a href='/METERING_STANDARD_DEVICE/UNCERTAINTYTABLE/" + row.ID+"'>不确定参数信息</a>";
-                         return html;
-                     }
-                 }
+                , {
+                    field: 'A', title: '准确度等级', width: 86, formatter: formatDatebox, align: 'center', formatter: function (value, row, index) {
+                        return "<a href='/METERING_STANDARD_DEVICE/ALLOWABLE_ERROR/" + row.ID + "'>选择准确度等级</a><br/>";
+                    }
+                }
+                , {
+                    field: 'UA', title: '误差来源', width: 86, align: 'center', formatter: function (value, row, index) {
+                        return "<a href='/UNCERTAINTYTABLE/Index/" + row.ID + "'>选择误差来源</a>";
+                    }
+                }
+                , {
+                    field: 'UB', title: '范围指标', width: 86, formatter: function (value, row, index) {
+                        return "<a href='/UNCERTAINTYTABLE/IndexUB/" + row.ID + "'>选择范围指标</a><br/>";
+                    }
+                }
             ]],
             pagination: true,
             rownumbers: true
@@ -176,6 +183,9 @@
     //导航到创建的按钮
     function flexiCreate() {
         $("#w").dialog('open');
+        $('#w').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
+            $(this).val("");
+        });
         //window.location.href = "../METERING_STANDARD_DEVICE/Create";
         //return false;
     }
@@ -186,19 +196,57 @@
         var arr = $('#flexigridData').datagrid('getSelections');
 
         if (arr.length == 1) {
-            window.location.href = "../METERING_STANDARD_DEVICE/Edit/" + arr[0].ID;
+            $.ajax({
+                url: "/api/METERING_STANDARD_DEVICEApi/Update/" + arr[0].ID,
+                type: "Post",
+                dataType: "json",
+                success: function (data) {
+                    if (data.IS == "1") {
+                        $("#ID").val(data.ID);
+                        $("#NAME").val(data.NAME);
+                        $("#TEST_RANGE").val(data.TEST_RANGE);
+                        $("#XINGHAO").val(data.XINGHAO);
+                        $("#FACTORY_NUM").val(data.FACTORY_NUM);
+                        $("#CATEGORY").val(data.CATEGORY);
+                        $("#UNDERTAKE_LABORATORYID").val(data.UNDERTAKE_LABORATORYID);
+                        if (data.THESUPERIORNAME!=null) {
+                            $("#checkTHESUPERIOR").html('<table id="' + data.THESUPERIORNAME + '" class="deleteStyle"><tr><td>' + data.THESUPERIORNAME.split('&')[1] + '</td><td><img alt="删除" style="cursor:pointer" title="点击删除" as="' + data.THESUPERIORNAME + '" onclick="deleteTable2(this);" src="../../../Images/deleteimge.png" /></td></tr></table>');
+                            $("#THESUPERIOR").val(data.THESUPERIORNAME.split('&')[0]);
+                        }                       
+                        $('#w').dialog('open');
+                        return false;
+                    }
+                    else {
+                        $.messager.confirm('操作提示', "无法查出数据！", function (r) {
+                            if (!r) {
+                                window.location.href = 'javascript:history.go(-1)';
+                            }
+                        });
+                    }
+                }
+            })
 
         } else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
         }
-        return false;
-
+        return false;   
     };
 
+    //删除父节点
+    function deleteTable2(e) { //删除table和隐藏的值
+        debugger
+        var tableId = document.getElementById($(e).attr("as")); //获取表格
+        tableId.parentNode.removeChild(tableId); //删除table
+        // tableId.style.display = "none";//table隐藏isNaN(Number())
+        var hiddenValue = document.getElementById("THESUPERIOR"); //获取隐藏的控件
+
+        //  hiddenValue.value+="";
+            hiddenValue.value = ""; //为隐藏控件赋值
+    }
     //新增保存
     function baocun() {
-        debugger
         var METERING_STANDARD_DEVICE = new Object();
+        METERING_STANDARD_DEVICE.ID = $("#ID").val();//ID
         METERING_STANDARD_DEVICE.NAME = $("#NAME").val();//名称
         METERING_STANDARD_DEVICE.TEST_RANGE = $("#TEST_RANGE").val();//测量范围
         METERING_STANDARD_DEVICE.XINGHAO = $("#XINGHAO").val();//型号
@@ -207,8 +255,7 @@
         METERING_STANDARD_DEVICE.UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID option:selected").val();//实验室
         METERING_STANDARD_DEVICE.THESUPERIOR = $("#THESUPERIOR").val();//上级
 
-        //if (ifshuju(METERING_STANDARD_DEVICE)) {
-        if (false) {
+        if (ifshuju(METERING_STANDARD_DEVICE)) {
             $.ajax({
                 url: "/api/METERING_STANDARD_DEVICEApi/Post",
                 type: "Post",
@@ -218,7 +265,7 @@
                 success: function (data) {
                     if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
                     else if (data.Code == 1) {
-                        $.messager.alert('操作提示', "新增成功！", 'info');
+                        $.messager.alert('操作提示', data.Message, 'info');
                         $("#flexigridData").datagrid("reload");
                         $("#flexigridData").datagrid("clearSelections");
                         $('#w').dialog('close');
@@ -229,7 +276,7 @@
                             $.messager.defaults.ok = '继续';
                             $.messager.defaults.cancel = '返回';
 
-                            $.messager.confirm('操作提示', "新增失败！", function (r) {
+                            $.messager.confirm('操作提示', data.Message, function (r) {
                                 if (!r) {
                                     window.location.href = 'javascript:history.go(-1)';
                                 }

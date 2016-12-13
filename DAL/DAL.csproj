@@ -266,6 +266,7 @@
     <Compile Include="shiyanshi\PREPARE_SCHEMEMeta.cs" />
     <Compile Include="shiyanshi\PREPARE_SCHEMERepository.cs" />
     <Compile Include="shiyanshi\SysPersonRepository.cs" />
+    <Compile Include="shiyanshi\UNCERTAINTYTABLERepository.cs" />
     <Compile Include="shiyanshi\VBAOGAODAYINRepository.cs" />
     <Compile Include="shiyanshi\VJIANDINGRENWURepository.cs" />
     <Compile Include="shiyanshi\VQIJULINGQU1Repository.cs" />
@@ -280,6 +281,11 @@
     <Compile Include="SIGN.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="STANDARDCHOICE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="STANDARDCHOICEMeta.cs" />
+    <Compile Include="STANDARDCHOICERepository.cs" />
     <Compile Include="SysAnnouncement.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

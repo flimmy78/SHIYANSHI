@@ -22,7 +22,14 @@ namespace Langben.IBLL
         /// <returns></returns>       
         [OperationContract]
         bool EditField(ref Common.ValidationErrors validationErrors, ALLOWABLE_ERROR entity);
-
+        /// <summary>
+        /// 修改对象
+        /// </summary>
+        /// <param name="validationErrors">返回的错误信息</param>
+        /// <param name="deleteCollection">表实体对象</param>
+        /// <returns></returns>       
+        [OperationContract]
+        bool EditUpdate(ref Common.ValidationErrors validationErrors, METERING_STANDARD_DEVICE entity);
     }
 }
 
