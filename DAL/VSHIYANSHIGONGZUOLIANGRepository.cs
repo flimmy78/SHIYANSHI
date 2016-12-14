@@ -34,9 +34,7 @@ namespace Langben.DAL
                         where += " and ";
                     }
                     flagWhere++;
-                  
-                    
-                    ^m_Repos^
+                                    
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Time)) + "] >=  CAST('" + item.Value + "' as   System.DateTime)";
@@ -82,7 +80,7 @@ namespace Langben.DAL
         /// </summary>
         /// <param name="id">主键</param>
         /// <returns>实验室别工作量统计分析</returns>
-        public VSHIYANSHIGONGZUOLIANG GetById(^string^ id)
+        public VSHIYANSHIGONGZUOLIANG GetById(string id)
         {
             using (SysEntities db = new SysEntities())
             {
@@ -94,7 +92,7 @@ namespace Langben.DAL
         /// </summary>
         /// <param name="id">主键</param>
         /// <returns>实验室别工作量统计分析</returns>
-        public VSHIYANSHIGONGZUOLIANG GetById(SysEntities db, ^string^ id)
+        public VSHIYANSHIGONGZUOLIANG GetById(SysEntities db, string id)
         { 
                  return db.VSHIYANSHIGONGZUOLIANG.SingleOrDefault(s => s.ID == id); 
         }

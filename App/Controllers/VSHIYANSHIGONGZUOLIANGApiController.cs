@@ -48,16 +48,6 @@ namespace Langben.App.Controllers
             return data;
         }
 
-        /// <summary>
-        /// 根据ID获取数据模型
-        /// </summary>
-        /// <param name="id">编号</param>
-        /// <returns></returns>
-        public VSHIYANSHIGONGZUOLIANG Get(^string^ id)
-        {
-            VSHIYANSHIGONGZUOLIANG item = m_BLL.GetById(id);
-            return item;
-        }
   
 
         IBLL.IVSHIYANSHIGONGZUOLIANGBLL m_BLL;

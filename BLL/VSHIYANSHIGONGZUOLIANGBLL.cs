@@ -49,7 +49,7 @@ namespace Langben.BLL
         /// <returns>结果集</returns>
         public List<VSHIYANSHIGONGZUOLIANG> GetByParam(string id, int page, int rows, string order, string sort, string search, ref int total)
         {
-            IQueryable<VSHIYANSHIGONGZUOLIANG> queryData = repository.DaoChuData(db, order, sort, search);
+            IQueryable<VSHIYANSHIGONGZUOLIANG> queryData = repository.GetData(db, order, sort, search);
             total = queryData.Count();
             if (total > 0)
             {

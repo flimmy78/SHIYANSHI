@@ -33,13 +33,7 @@ namespace Langben.IBLL
         /// <returns></returns>
         [OperationContract]
         System.Collections.Generic.List<VSHIYANSHIGONGZUOLIANG> GetAll();
-        /// <summary>
-        /// 根据主键，查看详细信息
-        /// </summary>
-        /// <param name="id">根据主键</param>
-        /// <returns></returns>
-        [OperationContract]
-        VSHIYANSHIGONGZUOLIANG GetById(^string^ id);    
+  
  
     }
 }
