@@ -132,16 +132,21 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
 }
 //获取每行不确定度按钮
 //Name：不确定度按钮所在某检测项控件名称后
-function GetJiSuanBuQueDingDu_MeiHang_Html(Name) {
-    var Result = false;
-
+function GetJiSuanBuQueDingDuType(Name) {
+    var Result = ""
     if (Name == null || Name.trim() == "") {
         return "";
     }
-    var AttributeValue = GetAttributeValue("JiSuanBuQueDingDu_MeiHang");
+    var AttributeValue = GetAttributeValue("JiSuanBuQueDingDu");
     if (AttributeValue == null || AttributeValue.trim() == "") {
         return "";
     }
+    var type = AttributeValue.split(":")[0].trim().toUpperCase();
+    if (type != "A" && type != "Z" && AttributeValue.split(":").length<2)
+    {
+        return "";
+    }
+    AttributeValue = AttributeValue.split(":")[1];
     var objArray = AttributeValue.split(',');
     var NameNew = Name;
     NameNew = NameNew.toUpperCase();
@@ -149,7 +154,7 @@ function GetJiSuanBuQueDingDu_MeiHang_Html(Name) {
         if (item == null || item.trim() == "" || item.toUpperCase().indexOf(NameNew) < 0) {
             return true;
         }
-        Result = true;
+        Result = type;
         return false;
 
     });
@@ -220,12 +225,17 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     }
     //下拉框
     var ddlName = name + "_UNIT";//下拉框名
-    var ddlId = ddlName + "_" + id;//下拉框ID
-    //不确定度(隐藏域中存储不确定计算过程html路径)
-    var BuQueDingDuLuJingName = "BuQueDingDuLuJing";//不确定度名
-    var BuQueDingDuLuJingId = name + "_" + BuQueDingDuLuJingName + id;//不确定度ID
+    var ddlId = ddlName + "_" + id;//下拉框ID    
 
     var id = name + "_" + id;//输入框id
+
+    //不确定度(隐藏域中存储不确定计算过程html路径)
+    var BuQueDingDuLuJingName = "hideBuQueDingDuLuJing";//不确定度名
+    var BuQueDingDuLuJingId =  BuQueDingDuLuJingName +"_"+ id;//不确定度ID
+
+    //不确定度(隐藏域中存储不确定原始值)
+    var BuQueDingDuZhiName = "hideBuQueDingDuZhi";//不确定度名
+    var BuQueDingDuZhiId =  BuQueDingDuZhiName +"_"+ id;//不确定度ID
 
     var ddlHtml = GetDanWeiDDLHtml(name, null);//单位下拉框html
     if ((txtVal == null || txtVal.trim() == "") && rowidx != null) {
@@ -247,20 +257,101 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     }
 
     //不确定度
-    var IsHaveJiSuanBuQueDingDu_MeiHang = GetJiSuanBuQueDingDu_MeiHang_Html(name);
+    var JiSuanBuQueDingDuType= GetJiSuanBuQueDingDuType(name);
     debugger;
-    if (IsHaveJiSuanBuQueDingDu_MeiHang) {
-        debugger;
+    if (JiSuanBuQueDingDuType != null && JiSuanBuQueDingDuType.trim()!="") {       
 
-        htmlString.push("<input type='hidden' name='" + BuQueDingDuLuJingName + "' id='" + BuQueDingDuLuJingId + "' value=''/>");
-        var returnIds = id + "&" + BuQueDingDuLuJingId + "^" + BuQueDingDuLuJingId;
-        htmlString.push("<a href=\"#\" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\" onclick = \"showModal('" + returnIds + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID + "');\">计算不确定度</a>")
-
+        htmlString.push("<input type='hidden' name='" + BuQueDingDuZhiName + "' id='" + BuQueDingDuZhiId + "' value=''/>");
+        if (JiSuanBuQueDingDuType == "A") {//按钮计算不确定度
+            htmlString.push("<input type='hidden' name='" + BuQueDingDuLuJingName + "' id='" + BuQueDingDuLuJingId + "' value=''/>");
+            var returnIds = BuQueDingDuZhiId + "&" + BuQueDingDuLuJingId + "^" + BuQueDingDuLuJingId+"^"+id;
+            htmlString.push("<a href=\"#\" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\" onclick = \"showModal('" + returnIds + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID + "');\">计算不确定度</a>")
+        }
     }
     htmlString.push("</td>");
     return htmlString.join("");
 
 
+}
+//修改不确定度展示方式及小数位数联动不确定度
+function ChangeBuQueDingDuShowTypeOrBuQueDingDuXiaoShuWeiShu()
+{
+    $("input[name='hideBuQueDingDuZhi']").each(function () {
+        //除了隐藏模板中的输入框，其他所有的输入框
+        if (this.id != "") {
+            var ShowBuQueDingDuId = this.id.replace(this.name + "_","");
+            JiSuanBuQueDingDuByType(this.id, ShowBuQueDingDuId);
+        }
+    });
+}
+//根据不确定展示类型计算不确定值
+//BuQueDingDuZhiId:不确定度原始值控件Id
+//ShowBuQueDingDuId:不确定度展示控件Id
+function JiSuanBuQueDingDuByType(BuQueDingDuZhiId, ShowBuQueDingDuId)
+{
+    var type = $("#ddlBuQueDingDuShowType").val();
+    var pos = $("#BuQueDingDuXiaoShuWeiShu").val();
+
+    var BuQueDingDuZhi = document.getElementById(BuQueDingDuZhiId);
+    var ShowBuQueDingDu = document.getElementById(ShowBuQueDingDuId);
+    if (BuQueDingDuZhi == null || ShowBuQueDingDu == null || BuQueDingDuZhi.value.trim()=="") {
+        return;
+    }
+
+    if (type == "B")//百分比模式
+    {
+        ShowBuQueDingDu.value = percentages(BuQueDingDuZhi.value, pos);
+    }
+    else if (type == "K")//科学计算法模式
+    {
+        ShowBuQueDingDu.value = kexue(BuQueDingDuZhi.value, pos);
+    }
+    else//原始模式
+    {       
+        ShowBuQueDingDu.value = zeroFloat(BuQueDingDuZhi.value, pos);
+    }
+}
+//弹计算不确定过程框
+function showModal(me, url) { //弹出窗体
+    var constrols = null;
+    var BuQueDingDuLuJing = null;
+    var BuQueDingDuZhiId = "";
+    var ShowBuQueDingDuId = "";
+    if (me != null && me.trim() != "")//回填控件id
+    {
+        constrols = me.split("^")[0].split("&");
+        BuQueDingDuZhiId = constrols[0];
+
+        if (me.split("^").length > 1) {
+            BuQueDingDuLuJing = me.split("^")[1];
+            var BuQueDingDuLuJingObj = document.getElementById(BuQueDingDuLuJing);
+            if (BuQueDingDuLuJingObj != null) {
+                url += "&URL=" + BuQueDingDuLuJingObj.value;
+            }
+        }
+        if(me.split("^").length>2)
+        {
+            ShowBuQueDingDuId = me.split("^")[2];
+        }
+    }
+    var reValue = window.showModalDialog(url, window, "dialogHeight:500px; dialogWidth:987px;  status:off; scroll:auto");
+
+    if (reValue == null || reValue == "undefined" || reValue == "") {
+        return; //如果返回值为空，就返回
+    }
+    else {
+        var reValues = reValue.split("&");
+        for (var i = 0; i < constrols.length; i++) {
+            if (reValues.length - 1 >= i) {
+                var constrol = document.getElementById(constrols[i]);
+                if (constrol != null) {
+                    constrol.value = reValues[i];                    
+                }
+            }
+        }
+        JiSuanBuQueDingDuByType(BuQueDingDuZhiId, ShowBuQueDingDuId);
+    }
+    return;
 }
 //根据属性名获取属性值
 //RuleAttribute：检查项属性对象

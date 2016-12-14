@@ -222,44 +222,7 @@ function showModalOnly(me, url) { //弹出窗体 ,单选
     return;
 }
 
-function showModal(me, url) { //弹出窗体
-    var constrols = null;
-    var BuQueDingDuLuJing=null;
-    if (me != null && me.trim() != "")//回填控件id
-    {
-        constrols = me.split("^")[0].split("&");
-        if(me.split("^").length>1)
-        {
-            BuQueDingDuLuJing = me.split("^")[1];
-            var BuQueDingDuLuJingObj = document.getElementById(BuQueDingDuLuJing);
-            if (BuQueDingDuLuJingObj != null)
-            {
-                url += "&URL=" + BuQueDingDuLuJingObj.value;
-            }
-            
-        }
-    }   
-    var reValue = window.showModalDialog(url, window, "dialogHeight:500px; dialogWidth:987px;  status:off; scroll:auto");
 
-    if (reValue == null || reValue == "undefined" || reValue == "") {
-        return; //如果返回值为空，就返回
-    }
-    else {
-        var reValues = reValue.split("&");        
-        for(var i=0;i<constrols.length;i++)
-        {
-            if (reValues.length - 1 >= i)
-            {
-                var constrol = document.getElementById(constrols[i]);
-                if (constrol != null)
-                {
-                    constrol.value = reValues[i];
-                }              
-            }
-        }
-    }
-    return;
-}
 
 function isInt(t) {
     t.value = t.value.replace(/[^0-9]/g, '')
