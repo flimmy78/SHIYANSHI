@@ -128,25 +128,28 @@
                     <th>结论：</th>
                     <td colspan="4"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%"></td>
                 </tr>
+                <tbody id="tbody_2">
+                    <tr>
+                        <td colspan="2" align="center"> <input name="" id="" type="text" class="my-textbox tr" value="" style="width:96%" />      </td>
+                        <td colspan="3">
+                            <i>U</i><small>rel</small>(k =
+                            <select class="my-combobox" name="ddlSelectD" id="ddlSelectD" onchange="caculateD()">
+                                <option value="2">2 </option>
+                                <option value="3">3</option>
+                                <option value="√3">√3</option>
+                            </select>
+                            ) =
+                            <input class="my-textbox " value="" style="width:300px" id="txtvalueD">  <input type="button" class="my-btn" value="计 算" onclick="calculate(this)" />
+                        </td>
+                    </tr>
+                </tbody>
                 <tr>
-                    <td colspan="2" align="center"> <input name="" id="" type="text" class="my-textbox tr" value="" style="width:96%" />      </td>
-                    <td colspan="3">
-                        <i>U</i><small>rel</small>(k =
-                        <select class="my-combobox" name="ddlSelectD" id="ddlSelectD" onchange="caculateD()">
-                            <option value="2">2 </option>
-                            <option value="3">3</option>
-                            <option value="√3">√3</option>
-                        </select>
-                        ) =
-                        <input class="my-textbox " value="" style="width:300px" id="txtvalueD">  <input type="button" class="my-btn" value="计 算" onclick="calculate(this)" />
-                    </td>
+                    <td colspan="8" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addUrel()">增加不确定度计算行</a></td>
                 </tr>
             </table>
 
         </div>
-        <div class="mt10">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl"></table>
-        </div>
+       
     </div>
 
     <!--增加行数弹层-->
@@ -253,6 +256,10 @@
                 });
                 return arry;
             }
+        }
+        //增加不确定度行
+        function addUrel() {
+            $('#tongdao_B tbody').find('tr:last').clone();
         }
 
     </script>
