@@ -3,14 +3,31 @@
 @using Common
 @using Models
 <div id="divQuery">
-    
+    <div class="input_search">
+        <div class="input_search-label">
+            统计期间:
+        </div>
+        <div class='input_search-field-time'>
+            <input type="text" id="PIZHUNSHIJIANStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'PIZHUNSHIJIANStart_Time\');}' })" />
+            <span>到</span>
+            <input type="text" id="PIZHUNSHIJIANEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'PIZHUNSHIJIANEnd_Time\');}' })" />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            受理单位:
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='SHOULIDANWEI' />
+        </div>
+    </div>
     <div class='input_search' style="padding-top:10px;">
         <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
             查 询
         </a>
     </div>
 </div>
- <br style="clear: both;" />
+<br style="clear: both;" />
 
 <script type="text/javascript" language="javascript">
     $(function () {
@@ -24,31 +41,47 @@
             striped: true,
             collapsible: true,
             url: '../VSHIYANSHIGONGZUOLIANG/GetData', //获取数据的url
-            sortName: '^m_Sort^',
+            sortName: 'ID',
             sortOrder: 'desc',
             idField: 'ID',
-
+            onLoadSuccess: function (data) {
+                var rows = $('#flexigridData').datagrid('getRows');
+                var WEITUODAN = 0;
+                var JIANDINGWANCHENG = 0;
+                var SHEBEIGUZHANG = 0;
+                var PIZHUNTONGGUO = 0;
+                var HEGE = 0;
+                var BUHEGE = 0;
+                var CHAOQI = 0;
+                for (var i = 0; i < rows.length; i++) {
+                    WEITUODAN += parseFloat(rows[i].WEITUODAN);
+                    JIANDINGWANCHENG += parseFloat(rows[i].JIANDINGWANCHENG);
+                    SHEBEIGUZHANG += parseFloat(rows[i].SHEBEIGUZHANG);
+                    PIZHUNTONGGUO += parseFloat(rows[i].PIZHUNTONGGUO);
+                    HEGE += parseFloat(rows[i].HEGE);
+                    BUHEGE += parseFloat(rows[i].BUHEGE);
+                    CHAOQI += parseFloat(rows[i].CHAOQI);
+                }
+                $('#flexigridData').datagrid('appendRow', { ID: '<b>统计：</b>', WEITUODAN: WEITUODAN, JIANDINGWANCHENG: JIANDINGWANCHENG, SHEBEIGUZHANG: SHEBEIGUZHANG, PIZHUNTONGGUO: PIZHUNTONGGUO, HEGE: HEGE, BUHEGE: BUHEGE, CHAOQI: CHAOQI });
+            },
             toolbar: [
-
                  {
                      text: '详细',
                      iconCls: 'icon-search',
                      handler: function () {
                          return getView();
                      }
-                 } ],
+                 }],
             columns: [[
-
-                
 					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 194 }
-					,{ field: 'WEITUODAN', title:  '@Html.DisplayNameFor(model => model.WEITUODAN)', width: 194 }
-					,{ field: 'JIANDINGWANCHENG', title:  '@Html.DisplayNameFor(model => model.JIANDINGWANCHENG)', width: 194 }
-					,{ field: 'SHEBEIGUZHANG', title:  '@Html.DisplayNameFor(model => model.SHEBEIGUZHANG)', width: 194 }
-					,{ field: 'PIZHUNTONGGUO', title:  '@Html.DisplayNameFor(model => model.PIZHUNTONGGUO)', width: 194 }
-					,{ field: 'HEGE', title:  '@Html.DisplayNameFor(model => model.HEGE)', width: 194 }
-					,{ field: 'BUHEGE', title:  '@Html.DisplayNameFor(model => model.BUHEGE)', width: 194 }
-					,{ field: 'CHAOQI', title:  '@Html.DisplayNameFor(model => model.CHAOQI)', width: 194 }
-                ]],
+					, { field: 'WEITUODAN', title: '@Html.DisplayNameFor(model => model.WEITUODAN)', width: 194 }
+					, { field: 'JIANDINGWANCHENG', title: '@Html.DisplayNameFor(model => model.JIANDINGWANCHENG)', width: 194 }
+					, { field: 'SHEBEIGUZHANG', title: '@Html.DisplayNameFor(model => model.SHEBEIGUZHANG)', width: 194 }
+					, { field: 'PIZHUNTONGGUO', title: '@Html.DisplayNameFor(model => model.PIZHUNTONGGUO)', width: 194 }
+					, { field: 'HEGE', title: '@Html.DisplayNameFor(model => model.HEGE)', width: 194 }
+					, { field: 'BUHEGE', title: '@Html.DisplayNameFor(model => model.BUHEGE)', width: 194 }
+					, { field: 'CHAOQI', title: '@Html.DisplayNameFor(model => model.CHAOQI)', width: 194 }
+            ]],
             pagination: true,
             rownumbers: true
 
@@ -80,7 +113,7 @@
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
- 
+
     //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
     function flexiSelect() {
 
@@ -116,7 +149,7 @@
         }
         return false;
     }
- 
+
 
 </script>
 
