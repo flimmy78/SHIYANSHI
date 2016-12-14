@@ -215,6 +215,8 @@
     <Compile Include="Controllers\ApplianceController.cs" />
     <Compile Include="Controllers\VBIAOZHUNLIANGCHUANGONGZHUOApiController.cs" />
     <Compile Include="Controllers\VBIAOZHUNLIANGCHUANGONGZHUOController.cs" />
+    <Compile Include="Controllers\VSHIYANSHIGONGZUOLIANGApiController.cs" />
+    <Compile Include="Controllers\VSHIYANSHIGONGZUOLIANGController.cs" />
     <Compile Include="Controllers\VXIANGQINGApiController.cs" />
     <Compile Include="Controllers\VChartsController.cs" />
     <Compile Include="Controllers\VXIANGQINGController.cs" />
@@ -970,6 +972,7 @@
     <Content Include="Views\STANDARDCHOICE\Details.cshtml" />
     <Content Include="Views\STANDARDCHOICE\Edit.cshtml" />
     <Content Include="Views\STANDARDCHOICE\Index.cshtml" />
+    <Content Include="Views\VSHIYANSHIGONGZUOLIANG\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

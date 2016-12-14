@@ -3,15 +3,53 @@
 @using Common
 @using Models
 <div id="divQuery">
-    
+    <div class="input_search">
+        <div class="input_search-label">
+            报告批准通期间:
+        </div>
+        <div class='input_search-field-time'>
+            <input type="text" id="PIZHUNSHIJIANStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'PIZHUNSHIJIANStart_Time\');}' })" />
+            <span>到</span>
+            <input type="text" id="PIZHUNSHIJIANEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'PIZHUNSHIJIANEnd_Time\');}' })" />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            所属单位:
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='SUOSHUDANWEI' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            证书单位:
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='ZHENGSHUDANWEI' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            受理单位:
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='SHOULIDANWEI' />
+        </div>
+    </div>
     <div class='input_search' style="padding-top:10px;">
         <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
             查 询
         </a>
     </div>
 </div>
- <br style="clear: both;" />
-
+<br style="clear: both;" />
+<style type="text/css">
+    .subtotal {
+        font-weight: bold;
+    }
+    /*合计单元格样式*/
+</style>
 <script type="text/javascript" language="javascript">
     $(function () {
 
@@ -24,33 +62,34 @@
             striped: true,
             collapsible: true,
             url: '../VZHENGSHULEIBEITONGJIFENXI/GetData', //获取数据的url
-            sortName: '^m_Sort^',
+            sortName: 'ID',
             sortOrder: 'desc',
             idField: 'ID',
-
+            onLoadSuccess: function (data) {
+                var rows = $('#flexigridData').datagrid('getRows');
+                var total = 0;
+                for (var i = 0; i < rows.length; i++) {
+                    total += parseFloat(rows[i].BAOGAOSHULIANG);
+                }
+                $('#flexigridData').datagrid('appendRow', { ZHEGNSHUBAOGAOLEIBIE: '<b>统计：</b>', BAOGAOSHULIANG: total });
+            },
+            showFooter: true,
             toolbar: [
 
-                 {
-                     text: '详细',
-                     iconCls: 'icon-search',
-                     handler: function () {
-                         return getView();
-                     }
-                 } ],
+                 //{
+                 //    text: '详细',
+                 //    iconCls: 'icon-search',
+                 //    handler: function () {
+                 //        return getView();
+                 //    }
+                 //}
+            ],
             columns: [[
-
-                
-					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 129 }
-					,{ field: 'SUOSHUDANWEI', title:  '@Html.DisplayNameFor(model => model.SUOSHUDANWEI)', width: 129 }
-					,{ field: 'ZHENGSHUDANWEI', title:  '@Html.DisplayNameFor(model => model.ZHENGSHUDANWEI)', width: 129 }
-					,{ field: 'SHOULIDANWEI', title:  '@Html.DisplayNameFor(model => model.SHOULIDANWEI)', width: 129 }
-					,{ field: 'PIZHUNJIELUN', title:  '@Html.DisplayNameFor(model => model.PIZHUNJIELUN)', width: 129 }
-					,{ field: 'PIZHUNSHIJIAN', title:  '@Html.DisplayNameFor(model => model.PIZHUNSHIJIAN)', width: 129 }
-					,{ field: 'SHOUQUANZIZHI', title:  '@Html.DisplayNameFor(model => model.SHOUQUANZIZHI)', width: 129 }
-					,{ field: 'ZHENGSHULEIBIE', title:  '@Html.DisplayNameFor(model => model.ZHENGSHULEIBIE)', width: 129 }
-					,{ field: 'BAOGAOLEIBIE', title:  '@Html.DisplayNameFor(model => model.BAOGAOLEIBIE)', width: 129 }
-					,{ field: 'BAOGAOSHULIANG', title:  '@Html.DisplayNameFor(model => model.BAOGAOSHULIANG)', width: 129 }
-                ]],
+					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 129, hidden: true }
+					, { field: 'ZHEGNSHUBAOGAOLEIBIE', title: '@Html.DisplayNameFor(model => model.ZHEGNSHUBAOGAOLEIBIE)', width: 129 }
+					, { field: 'SHOUQUANZIZHI', title: '@Html.DisplayNameFor(model => model.SHOUQUANZIZHI)', width: 129 }
+					, { field: 'BAOGAOSHULIANG', title: '@Html.DisplayNameFor(model => model.BAOGAOSHULIANG)', width: 129 }
+            ]],
             pagination: true,
             rownumbers: true
 
@@ -75,14 +114,26 @@
         var search = "";
         $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
             if (this.id)
-                search = search + this.id + "&" + this.value + "^";
+                if (this.id == "PIZHUNSHIJIANStart_Time") {
+                    search = search + "PIZHUNJIELUN" + "&" + "合格" + "^";
+                    search = search + this.id + "&" + this.value + "^";
+                }
+                else {
+                    search = search + this.id + "&" + this.value + "^";
+                }
             else
-                search = search + this.name + "&" + this.value + "^";
+                if (this.id == "PIZHUNSHIJIANStart_Time") {
+                    search = search + "PIZHUNJIELUN" + "&" + "合格" + "^";
+                    search = search + this.id + "&" + this.value + "^";
+                }
+                else {
+                    search = search + this.id + "&" + this.value + "^";
+                }
         });
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
- 
+
     //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
     function flexiSelect() {
 
@@ -118,7 +169,5 @@
         }
         return false;
     }
- 
-
 </script>
 

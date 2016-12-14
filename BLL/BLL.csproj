@@ -190,6 +190,7 @@
     <Compile Include="VBAOGAODAYINBLL.cs" />
     <Compile Include="VQIJULINGQU2BLL.cs" />
     <Compile Include="VQIJULINGQU1BLL.cs" />
+    <Compile Include="VSHIYANSHIGONGZUOLIANGBLL.cs" />
     <Compile Include="VXIANGQINGBLL.cs" />
     <Compile Include="VZHENGSHULEIBEITONGJIFENXIBLL.cs" />
     <Compile Include="VZHENGSHUXINXICHAXUNBLL.cs" />
