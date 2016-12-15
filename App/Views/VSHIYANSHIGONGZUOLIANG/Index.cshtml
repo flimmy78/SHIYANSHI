@@ -55,6 +55,7 @@
                 var HEGE = 0;
                 var BUHEGE = 0;
                 var CHAOQI = 0;
+                
                 for (var i = 0; i < rows.length; i++) {
                     WEITUODAN += parseFloat(rows[i].WEITUODAN);
                     JIANDINGWANCHENG += parseFloat(rows[i].JIANDINGWANCHENG);
@@ -66,27 +67,30 @@
                 }
 
                 var myChart = echarts.init(document.getElementById('main'));
-
-              var  legend_size = 10;
-
-              var  data = [
-                    [0.5, 0.4, 0.3, 0.5],
-                    [4.5, 2.3, 1.8, 1.9],
-                    [1.7, 1.2, 0.7, 1.4],
-                    [1.2, 0.8, 0.9, 0.9],
+                 
+                var data = [
+                      [0.5, 0.4, 0.3, 0.5],
+                      [4.5, 2.3, 1.8, 1.9],
+                      [1.7, 1.2, 0.7, 1.4],
+                      [1.2, 0.8, 0.9, 0.9],
                 ];
-              var categories = ['好奇', '妈咪宝贝', '帮宝适', '花王'];
-              var dims = ['柔软度', '吸水性', '透气度', '厚度']
+                var categories = ['数表实验室',
+  '电能实验室',
+  '互感器实验室',
+  '指示仪表实验室',
+  '直流仪器实验室'
+                ];
+                var dims = ['委托数量','检定完成数量','设备故障数量','批准通过数量','合格报告数量','不合格报告数量','超期数量']
 
                 myChart.setOption({
-                    
+
                     legend: {
                         bottom: '10',
                         data: dims,
                         icon: 'square',
 
-                        itemWidth: legend_size,
-                        itemHeight: legend_size,
+                        itemWidth: 11,
+                        itemHeight: 11,
                     },
 
 
@@ -98,7 +102,7 @@
                     yAxis: [{
 
                         type: 'value',
-                        name: '差评占比',
+                        name: '实验室别工作量统计图表分析',
                     }, ],
                     series: [{
                         name: dims[0],
@@ -172,6 +176,3 @@
 
 
 </script>
-
-
-
