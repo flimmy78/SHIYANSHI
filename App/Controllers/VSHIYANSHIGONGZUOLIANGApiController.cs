@@ -27,7 +27,7 @@ namespace Langben.App.Controllers
         public Common.ClientResult.DataResult PostData([FromBody]GetDataParam getParam)
         {
             int total = 0;
-            List<VSHIYANSHIGONGZUOLIANG> queryData = m_BLL.GetByParam(getParam.id, getParam.page, getParam.rows, getParam.order, getParam.sort, getParam.search, ref total);
+            List<SHIYANSHIGONGZUO_Result> queryData = m_BLL.GetByParam(getParam.id, getParam.page, getParam.rows, getParam.order, getParam.sort, getParam.search, ref total);
             var data = new Common.ClientResult.DataResult
             {
                 total = total,
