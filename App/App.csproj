@@ -977,6 +977,8 @@
     <Content Include="Views\VSHIYANSHIGONGZUOLIANG\Index.cshtml" />
     <Content Include="Views\PREPARE_SCHEME\TestPROJECTTEMPLET.cshtml" />
     <Content Include="Views\Shared\Echart.cshtml" />
+    <Content Include="Views\VSHIYANSHIGONGZUOLIANG\ZhengShu.cshtml" />
+    <Content Include="Views\VSHIYANSHIGONGZUOLIANG\RenYuan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

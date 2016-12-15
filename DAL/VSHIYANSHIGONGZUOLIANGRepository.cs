@@ -60,9 +60,19 @@ namespace Langben.DAL
                 dANWEI = "";
             }
 
+            List<SHIYANSHIGONGZUO_Result> data = null ;
+            if (listQuery[0].ToString()== "SYANSHI")
+            {
+                 data = db.SHIYANSHIGONGZUO(sTARTDATE, eNDDATE, dANWEI).ToList();
+            }
+            else if (listQuery[0].ToString() == "ZhengShu")
+            {
 
-            var data = db.SHIYANSHIGONGZUO(System.DateTime.Now.AddYears(-1), System.DateTime.Now.AddYears(1), dANWEI).ToList();
+            }
+            else if (listQuery[0].ToString()== "RenYuan")
+            {
 
+            }
 
 
 

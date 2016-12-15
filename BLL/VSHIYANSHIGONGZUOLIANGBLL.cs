@@ -49,7 +49,7 @@ namespace Langben.BLL
         /// <returns>结果集</returns>
         public List<SHIYANSHIGONGZUO_Result> GetByParam(string id, int page, int rows, string order, string sort, string search, ref int total)
         {
-          return  repository.GetData(db, order, sort, search);
+          return  repository.GetData(db, order, sort, search,id);
              
         }
       

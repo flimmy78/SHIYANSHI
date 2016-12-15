@@ -68,7 +68,19 @@ namespace Langben.App.Controllers
             });
         }
 
+        /// <summary>
+        /// 异步加载数据
+        /// </summary>
+        /// <param name="page">页码</param>
+        /// <param name="rows">每页显示的行数</param>
+        /// <param name="order">排序字段</param>
+        /// <param name="sort">升序asc（默认）还是降序desc</param>
+        /// <param name="search">查询条件</param>
+        /// <returns></returns>
+ 
 
+
+   
         IBLL.IVSHIYANSHIGONGZUOLIANGBLL m_BLL;
 
         ValidationErrors validationErrors = new ValidationErrors();
