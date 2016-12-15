@@ -1,5 +1,5 @@
 ﻿@model Langben.DAL.VSHIYANSHIGONGZUOLIANG
-@{ Layout = "~/Views/Shared/Index.cshtml"; }
+@{ Layout = "~/Views/Shared/Echart.cshtml"; }
 @using Common
 @using Models
 <div id="divQuery">
@@ -30,6 +30,8 @@
 <br style="clear: both;" />
 
 <script type="text/javascript" language="javascript">
+
+
     $(function () {
 
         $('#flexigridData').datagrid({
@@ -62,8 +64,65 @@
                     BUHEGE += parseFloat(rows[i].BUHEGE);
                     CHAOQI += parseFloat(rows[i].CHAOQI);
                 }
+
+                var myChart = echarts.init(document.getElementById('main'));
+
+              var  legend_size = 10;
+
+              var  data = [
+                    [0.5, 0.4, 0.3, 0.5],
+                    [4.5, 2.3, 1.8, 1.9],
+                    [1.7, 1.2, 0.7, 1.4],
+                    [1.2, 0.8, 0.9, 0.9],
+                ];
+              var categories = ['好奇', '妈咪宝贝', '帮宝适', '花王'];
+              var dims = ['柔软度', '吸水性', '透气度', '厚度']
+
+                myChart.setOption({
+                    
+                    legend: {
+                        bottom: '10',
+                        data: dims,
+                        icon: 'square',
+
+                        itemWidth: legend_size,
+                        itemHeight: legend_size,
+                    },
+
+
+                    xAxis: [{
+                        type: 'category',
+                        data: categories,
+
+                    }],
+                    yAxis: [{
+
+                        type: 'value',
+                        name: '差评占比',
+                    }, ],
+                    series: [{
+                        name: dims[0],
+                        type: 'bar',
+                        data: data[0]
+                    }, {
+                        name: dims[1],
+                        type: 'bar',
+                        data: data[1]
+                    }, {
+                        name: dims[2],
+                        type: 'bar',
+                        data: data[2]
+                    }, {
+                        name: dims[3],
+                        type: 'bar',
+                        data: data[3],
+                    }]
+                });
+
+
+
                 $('#flexigridData').datagrid('appendRow', { ID: '<b>统计：</b>', WEITUODAN: WEITUODAN, JIANDINGWANCHENG: JIANDINGWANCHENG, SHEBEIGUZHANG: SHEBEIGUZHANG, PIZHUNTONGGUO: PIZHUNTONGGUO, HEGE: HEGE, BUHEGE: BUHEGE, CHAOQI: CHAOQI });
-            },          
+            },
             columns: [[
 					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 140 }
 					, { field: 'WEITUODAN', title: '@Html.DisplayNameFor(model => model.WEITUODAN)', width: 140 }
@@ -89,6 +148,11 @@
             //添加选择按钮
             $('#flexigridData').datagrid("addToolbarItem", [{ "text": "选择", "iconCls": "icon-ok", handler: function () { flexiSelect(); } }]);
         }
+
+
+
+
+
     });
 
     //“查询”按钮，弹出查询框
@@ -106,42 +170,8 @@
         $('#flexigridData').datagrid('load', { search: search });
     };
 
-    //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
-    function flexiSelect() {
-
-        var rows = $('#flexigridData').datagrid('getSelections');
-        if (rows.length == 0) {
-            $.messager.alert('操作提示', '请选择数据!', 'warning');
-            return false;
-        }
-
-        var arr = [];
-        for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].ID);
-        }
-        arr.push("^");
-        for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].WEITUODAN);
-        }
-        //主键列和显示列之间用 ^ 分割   每一项用 , 分割
-        if (arr.length > 0) {//一条数据和多于一条
-            returnParent(arr.join("&")); //每一项用 & 分割
-        }
-    }
-    //导航到查看详细的按钮
-    function getView() {
-
-        var arr = $('#flexigridData').datagrid('getSelections');
-
-        if (arr.length == 1) {
-            window.location.href = "../VSHIYANSHIGONGZUOLIANG/Details/" + arr[0].ID;
-
-        } else {
-            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
-        }
-        return false;
-    }
-
 
 </script>
+
+
 

@@ -40,7 +40,7 @@ namespace Langben.App.Controllers
         /// <param name="search">查询条件</param>
         /// <returns></returns>
         [HttpPost]
-        [SupportFilter]
+       
         public JsonResult GetData(string id="", int page=11, int rows=11, string order="", string sort = "", string search = "")
         {
 

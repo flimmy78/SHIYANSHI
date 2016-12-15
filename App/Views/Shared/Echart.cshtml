@@ -1,0 +1,42 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head id="MyHead">
+
+    <title>  </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/easyui")
+    @RenderSection("HeadContent", false)
+    <script type="text/javascript" language="javascript">
+        $(function () {
+            $('.easyui-combobox').combobox({
+                width: 201,
+                onSelect: function (record) {
+                    var strs = record.text.split("—");
+                    $(this).combobox('setValue', strs[0]);
+                }
+            });
+            //查询按钮样式
+            $('.submitcss').mouseover(function () { this.style.background = 'rgb(113,4,4)'; }).mouseout(function () { this.style.background = 'rgb(131,0,0)'; });
+
+        });
+    </script>
+    <style>
+        a {
+            border-bottom: 1px solid #1c49b9;
+            text-decoration: none;
+            color: #1c49b9;
+            cursor: pointer;
+        }
+    </style>
+    <script src="~/Scripts/echarts.js"></script>
+</head>
+<body>
+    @RenderBody()
+
+    <table id="flexigridData"></table>
+    <br style="clear: both;" />
+    <div id="main" style="width: 800px;height:500px;"></div>
+</body>
+</html>

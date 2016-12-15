@@ -976,6 +976,7 @@
     <Content Include="Views\STANDARDCHOICE\Index.cshtml" />
     <Content Include="Views\VSHIYANSHIGONGZUOLIANG\Index.cshtml" />
     <Content Include="Views\PREPARE_SCHEME\TestPROJECTTEMPLET.cshtml" />
+    <Content Include="Views\Shared\Echart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
