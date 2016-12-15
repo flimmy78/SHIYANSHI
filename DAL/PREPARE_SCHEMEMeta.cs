@@ -228,6 +228,12 @@ namespace Langben.DAL
         [ScaffoldColumn(true)]
         [Display(Name = "不合格类型", Order = 46)]
         public object UNQUALIFIEDTYPE { get; set; }
+
+        [ScaffoldColumn(true)]
+        [Display(Name = "送审核时间", Order = 47)]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.DateTime, ErrorMessage = "时间格式不正确")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
+        public DateTime? AUDITDATE { get; set; }
     }
 }
 

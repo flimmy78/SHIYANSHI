@@ -557,6 +557,7 @@ namespace Langben.App.Controllers
                     SH.CREATEPERSON = account.Name;//审核者
                     SH.CREATETIME = DateTime.Now;//审核时间
                     SH.REVIEWCONCLUSION = entity.ISAGGREY;
+                    SH.REVIEWCONCLUSIONZI = entity.AUDITOPINION;//审核意见
                     SH.PREPARE_SCHEMEID = entity.ID;
                     if (!m_BLL4.Create(ref validationErrors, SH))
                     {
@@ -647,6 +648,7 @@ namespace Langben.App.Controllers
                     SP.CREATETIME = DateTime.Now;//审核时间
                     SP.APPROVALCONCLUSION = entity.APPROVALISAGGREY;
                     SP.PREPARE_SCHEMEID = entity.ID;
+                    SP.APPROVALCONCLUSIONZI = entity.APPROVAL;//审批意见
                     if (!m_BLL5.Create(ref validationErrors, SP))
                     {
                         if (validationErrors != null && validationErrors.Count > 0)

@@ -631,6 +631,7 @@
           <Property Name="AUTHORIZATION" Type="varchar2" MaxLength="200" />
           <Property Name="VALIDITYEND" Type="date" />
           <Property Name="UNQUALIFIEDTYPE" Type="varchar2" MaxLength="200" />
+          <Property Name="AUDITDATE" Type="date" />
         </EntityType>
         <EntityType Name="PRINTREPORT">
           <Key>
@@ -4173,6 +4174,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="AUTHORIZATION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="VALIDITYEND" Type="DateTime" />
           <Property Name="UNQUALIFIEDTYPE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AUDITDATE" Type="DateTime" />
           <NavigationProperty Name="APPLIANCE_LABORATORY" Relationship="Model.FK_APPLIANC_REFERENCE_PREPARE_" FromRole="PREPARE_SCHEME" ToRole="APPLIANCE_LABORATORY" />
           <NavigationProperty Name="FILE_UPLOADER" Relationship="Model.FK_FILE_UPL_REFERENCE_PREPARE_" FromRole="PREPARE_SCHEME" ToRole="FILE_UPLOADER" />
           <NavigationProperty Name="SCHEME" Relationship="Model.FK_PREPARE__REFERENCE_SCHEME" FromRole="PREPARE_SCHEME" ToRole="SCHEME" />
@@ -6569,6 +6571,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="PREPARE_SCHEME">
             <EntityTypeMapping TypeName="Model.PREPARE_SCHEME">
               <MappingFragment StoreEntitySet="PREPARE_SCHEME">
+                <ScalarProperty Name="AUDITDATE" ColumnName="AUDITDATE" />
                 <ScalarProperty Name="UNQUALIFIEDTYPE" ColumnName="UNQUALIFIEDTYPE" />
                 <ScalarProperty Name="VALIDITYEND" ColumnName="VALIDITYEND" />
                 <ScalarProperty Name="AUTHORIZATION" ColumnName="AUTHORIZATION" />

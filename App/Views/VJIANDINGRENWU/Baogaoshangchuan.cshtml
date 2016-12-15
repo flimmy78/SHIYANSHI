@@ -166,7 +166,8 @@
         var arr = {
             ID: "@ViewBag.PREPARE_SCHEMEID",
             REPORTSTATUS: "@Common.REPORTSTATUS.待审核",
-            REPORTSTATUSZI: "@Common.REPORTSTATUS.待审核.GetHashCode()"
+            REPORTSTATUSZI: "@Common.REPORTSTATUS.待审核.GetHashCode()",
+            AUDITDATE:"@DateTime.Now;"
         }
         if ("@ViewBag.NAME2" != "") {
             $.ajax({

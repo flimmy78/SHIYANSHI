@@ -75,6 +75,7 @@ namespace Langben.DAL
         public string AUTHORIZATION { get; set; }
         public Nullable<System.DateTime> VALIDITYEND { get; set; }
         public string UNQUALIFIEDTYPE { get; set; }
+        public Nullable<System.DateTime> AUDITDATE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<APPLIANCE_LABORATORY> APPLIANCE_LABORATORY { get; set; }
