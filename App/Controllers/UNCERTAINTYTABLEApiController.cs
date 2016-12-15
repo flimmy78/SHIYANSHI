@@ -112,7 +112,7 @@ namespace Langben.App.Controllers
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
         [HttpPost]
-        public Common.ClientResult.Result InstUA([FromBody]METERING_STANDARD_DEVICE entity)
+        public Common.ClientResult.Result InstUAUB([FromBody]METERING_STANDARD_DEVICE entity)
         {
 
             Common.ClientResult.Result result = new Common.ClientResult.Result();
@@ -177,18 +177,22 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>  
-        public Common.ClientResult.Result Put([FromBody]UNCERTAINTYTABLE entity)
+        public Common.ClientResult.Result Put([FromBody]METERING_STANDARD_DEVICE entity)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
             {   //数据校验
 
-                //string currentPerson = GetCurrentPerson();
-                //entity.UpdateTime = DateTime.Now;
-                //entity.UpdatePerson = currentPerson;
+                string currentPerson = GetCurrentPerson();
+                
 
+                foreach (var item in entity.UNCERTAINTYTABLE)
+                {
+                    item.UPDATETIME = DateTime.Now;
+                    item.UPDATEPERSON = currentPerson;
+                }
                 string returnValue = string.Empty;
-                if (m_BLL.Edit(ref validationErrors, entity))
+                if (m_BLL.EditUpdate(ref validationErrors, entity))
                 {
                     LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，不确定度信息的Id为" + entity.ID, "不确定度"
                         );//写入日志                   
@@ -273,11 +277,11 @@ namespace Langben.App.Controllers
             string THEERRODISTRIBUTION = string.Empty;//误差分布状况
             string KVALE = string.Empty;//k
             string UNCERTAINTYUI = string.Empty;//不确定度ui
-
+            decimal? GROUPS = 0;
             //分组
-            var data = (from f in msd
-                        select f.GROUPS).Distinct();
-
+            //var data = (from f in msd
+            //            select f.CATEGORY).Distinct();
+            var data = msd.Where(m => m.CATEGORY == "UA").Select(m => m.CATEGORY).Distinct();
 
             List<UNCERTAINTYTABLE> alldata = new List<UNCERTAINTYTABLE>();
 
@@ -290,7 +294,7 @@ namespace Langben.App.Controllers
                 KVALE = null;
                 UNCERTAINTYUI = null;
                 //计量标准装置检定/校准信息
-                foreach (var it in msd.Where(w => w.GROUPS == item))
+                foreach (var it in msd.Where(w => w.CATEGORY == item))
                 {
                     ASSESSMENTITEM += it.ASSESSMENTITEM + ",";
                     ERRORSOURCES += it.ERRORSOURCES + ",";
@@ -298,6 +302,7 @@ namespace Langben.App.Controllers
                     THEERRODISTRIBUTION += it.THEERRODISTRIBUTION + ",";
                     KVALE += it.KVALE + ",";
                     UNCERTAINTYUI += it.UNCERTAINTYUI + ",";
+                    GROUPS = it.GROUPS;
                 }
                 alldata.Add(new UNCERTAINTYTABLE()
                 {
@@ -307,7 +312,8 @@ namespace Langben.App.Controllers
                     THEERRODISTRIBUTION = THEERRODISTRIBUTION,
                     KVALE = KVALE,
                     UNCERTAINTYUI = UNCERTAINTYUI,
-                    GROUPS = item
+                    GROUPS = GROUPS,
+                    CATEGORY= item
 
                 });
             }
@@ -324,7 +330,8 @@ namespace Langben.App.Controllers
                     KVALE = s.KVALE.TrimEnd(','),
                     UNCERTAINTYUI = s.UNCERTAINTYUI.TrimEnd(','),
                     GROUPS = s.GROUPS,
-                    METERING_STANDARD_DEVICEID = id
+                    METERING_STANDARD_DEVICEID = id,
+                    CATEGORY=s.CATEGORY
                 })
             };
             return show;
@@ -343,11 +350,12 @@ namespace Langben.App.Controllers
             string THEFREQUENCY = string.Empty;//频率范围
             string INDEX1 = string.Empty;//指标1
             string INDEX2 = string.Empty;//指标2
-
+            decimal? GROUPS = 0;
 
             //分组
-            var data = (from f in msd
-                        select f.GROUPS).Distinct();
+            //var data = (from f in msd
+            //            select f.CATEGORY).Distinct();
+            var data = msd.Where(m => m.CATEGORY == "UB").Select(m=>m.CATEGORY).Distinct();
 
 
             List<UNCERTAINTYTABLE> alldata = new List<UNCERTAINTYTABLE>();
@@ -360,13 +368,14 @@ namespace Langben.App.Controllers
                 INDEX1 = null;
                 INDEX2 = null;
                 //计量标准装置检定/校准信息
-                foreach (var it in msd.Where(w => w.GROUPS == item))
+                foreach (var it in msd.Where(w => w.CATEGORY == item))
                 {
                     ASSESSMENTITEM += it.ASSESSMENTITEM + ",";
                     THERANGESCOPE += it.THERANGESCOPE + it.THEUNIT + it.THERELATIONSHIP + it.ENDRANGESCOPE + it.ENDUNIT + it.ENDRELATIONSHIP + ",";
                     THEFREQUENCY += it.THEFREQUENCY + it.THEUNITFREQUENCY + it.THERELATIONSHIPFREQUENCY + it.ENDFREQUENCY + it.ENDUNITFREQUENCY + it.ENDRELATIONSHIPFREQUENCY + ",";
                     INDEX1 += it.INDEX1 + it.INDEX1UNIT + ",";
                     INDEX2 += it.INDEX2 + it.INDEX2UNIT + ",";
+                    GROUPS = it.GROUPS;
                 }
                 alldata.Add(new UNCERTAINTYTABLE()
                 {
@@ -375,8 +384,8 @@ namespace Langben.App.Controllers
                     THEFREQUENCY = THEFREQUENCY,
                     INDEX1 = INDEX1,
                     INDEX2 = INDEX2,
-                    GROUPS = item
-
+                    GROUPS = GROUPS,
+                    CATEGORY=item
                 });
             }
 
@@ -391,7 +400,8 @@ namespace Langben.App.Controllers
                     INDEX1 = s.INDEX1.TrimEnd(','),
                     INDEX2 = s.INDEX2.TrimEnd(','),                   
                     GROUPS = s.GROUPS,
-                    METERING_STANDARD_DEVICEID = id
+                    METERING_STANDARD_DEVICEID = id,
+                    CATEGORY=s.CATEGORY
                 })
             };
             return show;

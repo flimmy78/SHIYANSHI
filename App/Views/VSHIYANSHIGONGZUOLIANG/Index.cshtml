@@ -1,32 +1,16 @@
-﻿@model Langben.DAL.VZHENGSHULEIBEITONGJIFENXI
+﻿@model Langben.DAL.VSHIYANSHIGONGZUOLIANG
 @{ Layout = "~/Views/Shared/Index.cshtml"; }
 @using Common
 @using Models
 <div id="divQuery">
     <div class="input_search">
         <div class="input_search-label">
-            报告批准通期间:
+            统计期间:
         </div>
         <div class='input_search-field-time'>
             <input type="text" id="PIZHUNSHIJIANStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'PIZHUNSHIJIANStart_Time\');}' })" />
             <span>到</span>
             <input type="text" id="PIZHUNSHIJIANEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'PIZHUNSHIJIANEnd_Time\');}' })" />
-        </div>
-    </div>
-    <div class="input_search">
-        <div class="input_search-label">
-            所属单位:
-        </div>
-        <div class="input_search-field">
-            <input type='text' id='SUOSHUDANWEI' />
-        </div>
-    </div>
-    <div class="input_search">
-        <div class="input_search-label">
-            证书单位:
-        </div>
-        <div class="input_search-field">
-            <input type='text' id='ZHENGSHUDANWEI' />
         </div>
     </div>
     <div class="input_search">
@@ -44,51 +28,59 @@
     </div>
 </div>
 <br style="clear: both;" />
-<style type="text/css">
-    .subtotal {
-        font-weight: bold;
-    }
-    /*合计单元格样式*/
-</style>
+
 <script type="text/javascript" language="javascript">
     $(function () {
 
         $('#flexigridData').datagrid({
-            title: '证书类别统计分析', //列表的标题
+            title: '实验室别工作量统计分析', //列表的标题
             iconCls: 'icon-site',
             width: 'auto',
             height: 'auto',
             //nowrap: false,
             striped: true,
             collapsible: true,
-            url: '../VZHENGSHULEIBEITONGJIFENXI/GetData', //获取数据的url
+            url: '../VSHIYANSHIGONGZUOLIANG/GetData', //获取数据的url
             sortName: 'ID',
             sortOrder: 'desc',
             idField: 'ID',
             onLoadSuccess: function (data) {
                 var rows = $('#flexigridData').datagrid('getRows');
-                var total = 0;
+                var WEITUODAN = 0;
+                var JIANDINGWANCHENG = 0;
+                var SHEBEIGUZHANG = 0;
+                var PIZHUNTONGGUO = 0;
+                var HEGE = 0;
+                var BUHEGE = 0;
+                var CHAOQI = 0;
                 for (var i = 0; i < rows.length; i++) {
-                    total += parseFloat(rows[i].BAOGAOSHULIANG);
+                    WEITUODAN += parseFloat(rows[i].WEITUODAN);
+                    JIANDINGWANCHENG += parseFloat(rows[i].JIANDINGWANCHENG);
+                    SHEBEIGUZHANG += parseFloat(rows[i].SHEBEIGUZHANG);
+                    PIZHUNTONGGUO += parseFloat(rows[i].PIZHUNTONGGUO);
+                    HEGE += parseFloat(rows[i].HEGE);
+                    BUHEGE += parseFloat(rows[i].BUHEGE);
+                    CHAOQI += parseFloat(rows[i].CHAOQI);
                 }
-                $('#flexigridData').datagrid('appendRow', { ZHEGNSHUBAOGAOLEIBIE: '<b>统计：</b>', BAOGAOSHULIANG: total });
+                $('#flexigridData').datagrid('appendRow', { ID: '<b>统计：</b>', WEITUODAN: WEITUODAN, JIANDINGWANCHENG: JIANDINGWANCHENG, SHEBEIGUZHANG: SHEBEIGUZHANG, PIZHUNTONGGUO: PIZHUNTONGGUO, HEGE: HEGE, BUHEGE: BUHEGE, CHAOQI: CHAOQI });
             },
-            showFooter: true,
             toolbar: [
-
-                 //{
-                 //    text: '详细',
-                 //    iconCls: 'icon-search',
-                 //    handler: function () {
-                 //        return getView();
-                 //    }
-                 //}
-            ],
+                 {
+                     text: '详细',
+                     iconCls: 'icon-search',
+                     handler: function () {
+                         return getView();
+                     }
+                 }],
             columns: [[
-					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 129, hidden: true }
-					, { field: 'ZHEGNSHUBAOGAOLEIBIE', title: '@Html.DisplayNameFor(model => model.ZHEGNSHUBAOGAOLEIBIE)', width: 129 }
-					, { field: 'SHOUQUANZIZHI', title: '@Html.DisplayNameFor(model => model.SHOUQUANZIZHI)', width: 129 }
-					, { field: 'BAOGAOSHULIANG', title: '@Html.DisplayNameFor(model => model.BAOGAOSHULIANG)', width: 129 }
+					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 194 }
+					, { field: 'WEITUODAN', title: '@Html.DisplayNameFor(model => model.WEITUODAN)', width: 194 }
+					, { field: 'JIANDINGWANCHENG', title: '@Html.DisplayNameFor(model => model.JIANDINGWANCHENG)', width: 194 }
+					, { field: 'SHEBEIGUZHANG', title: '@Html.DisplayNameFor(model => model.SHEBEIGUZHANG)', width: 194 }
+					, { field: 'PIZHUNTONGGUO', title: '@Html.DisplayNameFor(model => model.PIZHUNTONGGUO)', width: 194 }
+					, { field: 'HEGE', title: '@Html.DisplayNameFor(model => model.HEGE)', width: 194 }
+					, { field: 'BUHEGE', title: '@Html.DisplayNameFor(model => model.BUHEGE)', width: 194 }
+					, { field: 'CHAOQI', title: '@Html.DisplayNameFor(model => model.CHAOQI)', width: 194 }
             ]],
             pagination: true,
             rownumbers: true
@@ -114,21 +106,9 @@
         var search = "";
         $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
             if (this.id)
-                if (this.id == "PIZHUNSHIJIANStart_Time") {
-                    search = search + "PIZHUNJIELUN" + "&" + "合格" + "^";
-                    search = search + this.id + "&" + this.value + "^";
-                }
-                else {
-                    search = search + this.id + "&" + this.value + "^";
-                }
+                search = search + this.id + "&" + this.value + "^";
             else
-                if (this.id == "PIZHUNSHIJIANStart_Time") {
-                    search = search + "PIZHUNJIELUN" + "&" + "合格" + "^";
-                    search = search + this.id + "&" + this.value + "^";
-                }
-                else {
-                    search = search + this.id + "&" + this.value + "^";
-                }
+                search = search + this.name + "&" + this.value + "^";
         });
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
@@ -149,7 +129,7 @@
         }
         arr.push("^");
         for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].SUOSHUDANWEI);
+            arr.push(rows[i].WEITUODAN);
         }
         //主键列和显示列之间用 ^ 分割   每一项用 , 分割
         if (arr.length > 0) {//一条数据和多于一条
@@ -162,12 +142,14 @@
         var arr = $('#flexigridData').datagrid('getSelections');
 
         if (arr.length == 1) {
-            window.location.href = "../VZHENGSHULEIBEITONGJIFENXI/Details/" + arr[0].ID;
+            window.location.href = "../VSHIYANSHIGONGZUOLIANG/Details/" + arr[0].ID;
 
         } else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
         }
         return false;
     }
+
+
 </script>
 

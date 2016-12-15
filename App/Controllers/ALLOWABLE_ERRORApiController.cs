@@ -97,7 +97,7 @@ namespace Langben.App.Controllers
                 {
                     groups = (int)data + 1;
                 }
-
+                string CATEGORY = string.Empty;
                 foreach (var item in entity.ALLOWABLE_ERROR)
                 {
                     item.ID = Result.GetNewId();
@@ -105,6 +105,7 @@ namespace Langben.App.Controllers
                     item.CREATEPERSON = currentPerson;
                     item.METERING_STANDARD_DEVICEID = entity.ID;
                     item.GROUPS = groups;
+                    CATEGORY = item.CATEGORY;
                     if (m_BLL.Create(ref validationErrors, item))
                     {
                         LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，最大允许误差信息的信息的Id为" + entity.ID, "最大允许误差信息"
@@ -137,6 +138,7 @@ namespace Langben.App.Controllers
                     item.CREATEPERSON = currentPerson;
                     item.METERING_STANDARD_DEVICEID = entity.ID;
                     item.GROUPS = groups;
+                    item.CATEGORY = CATEGORY;
                     if (m_BLL2.Create(ref validationErrors, item))
                     {
                         LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，计量标准装置检定/校准信息的信息的Id为" + entity.ID, "计量标准装置检定/校准信息"
@@ -175,21 +177,52 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>  
-        public Common.ClientResult.Result Put([FromBody]ALLOWABLE_ERROR entity)
+        public Common.ClientResult.Result Put([FromBody]METERING_STANDARD_DEVICE entity)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
             {   //数据校验
 
                 string currentPerson = GetCurrentPerson();
-                entity.UPDATETIME = DateTime.Now;
-                entity.UPDATEPERSON = currentPerson;
-
+               
+                foreach (var item in entity.ALLOWABLE_ERROR)
+                {
+                    item.UPDATETIME = DateTime.Now;
+                    item.UPDATEPERSON = currentPerson;
+                }
+                foreach (var item in entity.METERING_STANDARD_DEVICE_CHECK)
+                {
+                    item.UPDATETIME = DateTime.Now;
+                    item.UPDATEPERSON = currentPerson;
+                }
                 string returnValue = string.Empty;
-                if (m_BLL.Edit(ref validationErrors, entity))
+                if (m_BLL.EditUpdate(ref validationErrors, entity))
                 {
                     LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，最大允许误差信息信息的Id为" + entity.ID, "最大允许误差信息"
                         );//写入日志                   
+                    result.Code = Common.ClientCode.Succeed;
+                    result.Message = Suggestion.UpdateSucceed;
+                    //return result; //提示更新成功 
+                }
+                else
+                {
+                    if (validationErrors != null && validationErrors.Count > 0)
+                    {
+                        validationErrors.All(a =>
+                        {
+                            returnValue += a.ErrorMessage;
+                            return true;
+                        });
+                    }
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，最大允许误差信息信息的Id为" + entity.ID + "," + returnValue, "最大允许误差信息"
+                        );//写入日志   
+                    result.Code = Common.ClientCode.Fail;
+                    result.Message = Suggestion.UpdateFail + returnValue;
+                    return result; //提示更新失败
+                }
+                if (m_BLL2.EditUpdate(ref validationErrors, entity))
+                {
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，最计量标准装置检定/校准信息的Id为" + entity.ID, "计量标准装置检定/校准信息");
                     result.Code = Common.ClientCode.Succeed;
                     result.Message = Suggestion.UpdateSucceed;
                     return result; //提示更新成功 
@@ -204,7 +237,7 @@ namespace Langben.App.Controllers
                             return true;
                         });
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，最大允许误差信息信息的Id为" + entity.ID + "," + returnValue, "最大允许误差信息"
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，最计量标准装置检定/校准信息的Id为" + entity.ID + "," + returnValue, "最计量标准装置检定/校准信息"
                         );//写入日志   
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.UpdateFail + returnValue;

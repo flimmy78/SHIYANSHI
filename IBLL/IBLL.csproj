@@ -70,6 +70,7 @@
     <Compile Include="ITHEREVIEWPROCESSBLL.cs" />
     <Compile Include="IUNCERTAINTYTABLEBLL.cs" />
     <Compile Include="IVBIAOZHUNLIANGCHUANGONGZHUOBLL.cs" />
+    <Compile Include="IVSHIYANSHIGONGZUOLIANGBLL.cs" />
     <Compile Include="IVXIANGQINGBLL.cs" />
     <Compile Include="IVZHENGSHULEIBEITONGJIFENXIBLL.cs" />
     <Compile Include="IVZHENGSHUXINXICHAXUNBLL.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Shiyanshi\IORDER_TASK_INFORMATIONBLL.cs" />
     <Compile Include="Shiyanshi\IPREPARE_SCHEMEBLL.cs" />
     <Compile Include="Shiyanshi\ISysPersonBLL.cs" />
+    <Compile Include="Shiyanshi\IUNCERTAINTYTABLEBLL.cs" />
     <Compile Include="Shiyanshi\IVBAOGAODAYINBLL.cs" />
     <Compile Include="Shiyanshi\IVJIANDINGRENWUBLL.cs" />
     <Compile Include="Shiyanshi\IVQIJULINGQU1BLL.cs" />

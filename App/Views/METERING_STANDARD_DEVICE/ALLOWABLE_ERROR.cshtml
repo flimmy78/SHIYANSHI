@@ -39,13 +39,22 @@
                      handler: function () {
                          return flexiModify();
                      }
-                 }],
+                 }
+                 , {
+                     text: '返回',
+                     iconCls: 'icon-edit',
+                     handler: function () {
+                         return fanhui();
+                     }
+                 }
+            ],
             columns: [[
                 { field: 'ID', title: 'id', width: 129, hidden: true },
                 { field: 'MAXCATEGORIES', title: '不确定度/准确度等级/最大允许误差', width: 129 }
                 , { field: 'CERTIFICATE_NUM', title: '证书编号', width: 129 }
                 , { field: 'VALID_TO', title: '有效期', width: 129 }
                  , { field: 'GROUPS', title: '组别', width: 129 }
+                  , { field: 'CATEGORY', title: '类别', width: 129 }
             ]],
             pagination: true,
             rownumbers: true
@@ -74,7 +83,7 @@
 
         var arr = [];
         for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].ID + "*" + rows[i].GROUPS + "*A*" + rows[i].CERTIFICATE_NUM);
+            arr.push(rows[i].ID + "*" + rows[i].GROUPS + "*" + rows[i].CATEGORY + "*" + rows[i].CERTIFICATE_NUM);
         }
         arr.push("^");
         for (var i = 0; i < rows.length; i++) {
@@ -98,7 +107,7 @@
         var arr = $('#flexigridData').datagrid('getSelections');
 
         if (arr.length == 1) {
-            window.location.href = "/METERING_STANDARD_DEVICE/Edit/" + arr[0].ID + "^" + arr[0].GROUPS+"^"+"A";
+            window.location.href = "/METERING_STANDARD_DEVICE/Edit/" + arr[0].ID + "^" + arr[0].GROUPS + "^" + "A" + "^" + arr[0].CATEGORY;
 
         } else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
@@ -143,6 +152,9 @@
         });
 
     };
-
+    //返回
+    function fanhui() {
+        window.location.href = '/METERING_STANDARD_DEVICE/Index';
+    }
 </script>
 

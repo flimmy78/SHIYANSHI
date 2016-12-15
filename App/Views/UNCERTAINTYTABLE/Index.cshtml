@@ -43,6 +43,13 @@
                         return flexiModify();
                     }
                 }
+                 , {
+                     text: '返回',
+                     iconCls: 'icon-edit',
+                     handler: function () {
+                         return fanhui();
+                     }
+                 }
             ],
             columns: [[
                  { field: 'ID', title: 'ID', width: 29, hidden: true }
@@ -53,6 +60,7 @@
                , { field: 'KVALE', title: 'K', width: 100 }
                , { field: 'UNCERTAINTYUI', title: '不确定度ui', width: 100 }
                , { field: 'GROUPS', title: '组别', width: 100 }
+               , { field: 'CATEGORY', title: '类别', width: 100 }
                , { field: 'METERING_STANDARD_DEVICEID', title: '@Html.DisplayNameFor(model => model.METERING_STANDARD_DEVICEIDOld)', width: 29, hidden: true }
             ]],
             pagination: true,
@@ -108,7 +116,7 @@
         var arr = $('#flexigridData').datagrid('getSelections');
 
         if (arr.length == 1) {
-            window.location.href = "../UNCERTAINTYTABLE/Edit/" + arr[0].ID;
+            window.location.href = "/METERING_STANDARD_DEVICE/Edit/" + arr[0].METERING_STANDARD_DEVICEID + "^" + arr[0].GROUPS + "^" + "UA";
 
         } else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
@@ -153,6 +161,9 @@
         });
 
     };
-
+    //返回
+    function fanhui() {
+        window.location.href = '/METERING_STANDARD_DEVICE/Index';
+    }
 </script>
 

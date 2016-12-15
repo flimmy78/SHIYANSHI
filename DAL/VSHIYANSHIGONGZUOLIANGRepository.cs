@@ -6,9 +6,9 @@ using Common;
 namespace Langben.DAL
 {
     /// <summary>
-    /// 证书类别统计分析
+    /// 实验室别工作量统计分析
     /// </summary>
-    public class VZHENGSHULEIBEITONGJIFENXIRepository : BaseRepository<VZHENGSHULEIBEITONGJIFENXI>, IDisposable
+    public class VSHIYANSHIGONGZUOLIANGRepository : BaseRepository<VSHIYANSHIGONGZUOLIANG>, IDisposable
     {
         /// <summary>
         /// 查询的数据
@@ -19,35 +19,32 @@ namespace Langben.DAL
         /// <param name="search">查询条件</param>
         /// <param name="listQuery">额外的参数</param>
         /// <returns></returns>      
-        public IQueryable<VZHENGSHULEIBEITONGJIFENXI> GetData(SysEntities db, string order, string sort, string search, params object[] listQuery)
+        public IQueryable<VSHIYANSHIGONGZUOLIANG> GetData(SysEntities db, string order, string sort, string search, params object[] listQuery)
         {
             string where = string.Empty;
             int flagWhere = 0;
-            DateTime? startTime = null;
-            DateTime? endTime = null;
+
             Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
             if (queryDic != null && queryDic.Count > 0)
             {
                 foreach (var item in queryDic)
                 {
-                    //oracle数据库使用linq对时间段查询
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
-                    {
-                        startTime = Convert.ToDateTime(item.Value);
-                        continue;
-                    }
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(End_Time)) //结束时间+1
-                    {
-                        endTime = Convert.ToDateTime(item.Value).AddDays(1);
-                        continue;
-                    }
                     if (flagWhere != 0)
                     {
                         where += " and ";
                     }
                     flagWhere++;
-
-                   
+                                    
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
+                    {
+                        where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Time)) + "] >=  CAST('" + item.Value + "' as   System.DateTime)";
+                        continue;
+                    }
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(End_Time)) //结束时间+1
+                    {
+                        where += "it.[" + item.Key.Remove(item.Key.IndexOf(End_Time)) + "] <  CAST('" + Convert.ToDateTime(item.Value).AddDays(1) + "' as   System.DateTime)";
+                        continue;
+                    }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Int)) //开始数值
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Int)) + "] >= " + item.Value.GetInt();
@@ -72,26 +69,18 @@ namespace Langben.DAL
                     where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
                 }
             }
-            var data =((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext 
-                     .CreateObjectSet<VZHENGSHULEIBEITONGJIFENXI>().Where(string.IsNullOrEmpty(where) ? "true" : where)
+            return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext 
+                     .CreateObjectSet<VSHIYANSHIGONGZUOLIANG>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                     .AsQueryable();
-            if (null != startTime)
-            {
-                data = data.Where(m => startTime < m.PIZHUNSHIJIAN);
-            }
-            if (null != endTime)
-            {
-                data = data.Where(m => endTime > m.PIZHUNSHIJIAN);
-            }
-            return data;
+                     .AsQueryable(); 
+
         }
         /// <summary>
-        /// 通过主键id，获取证书类别统计分析---查看详细，首次编辑
+        /// 通过主键id，获取实验室别工作量统计分析---查看详细，首次编辑
         /// </summary>
         /// <param name="id">主键</param>
-        /// <returns>证书类别统计分析</returns>
-        public VZHENGSHULEIBEITONGJIFENXI GetById(string id)
+        /// <returns>实验室别工作量统计分析</returns>
+        public VSHIYANSHIGONGZUOLIANG GetById(string id)
         {
             using (SysEntities db = new SysEntities())
             {
@@ -99,13 +88,13 @@ namespace Langben.DAL
             }                   
         }
         /// <summary>
-        /// 通过主键id，获取证书类别统计分析---查看详细，首次编辑
+        /// 通过主键id，获取实验室别工作量统计分析---查看详细，首次编辑
         /// </summary>
         /// <param name="id">主键</param>
-        /// <returns>证书类别统计分析</returns>
-        public VZHENGSHULEIBEITONGJIFENXI GetById(SysEntities db, string id)
+        /// <returns>实验室别工作量统计分析</returns>
+        public VSHIYANSHIGONGZUOLIANG GetById(SysEntities db, string id)
         { 
-                 return db.VZHENGSHULEIBEITONGJIFENXI.SingleOrDefault(s => s.ID == id); 
+                 return db.VSHIYANSHIGONGZUOLIANG.SingleOrDefault(s => s.ID == id); 
         }
  
         public void Dispose()

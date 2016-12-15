@@ -68,6 +68,7 @@
           <Property Name="MAXVALUE" Type="nvarchar2" MaxLength="200" />
           <Property Name="MAXCATEGORIES" Type="nvarchar2" MaxLength="200" />
           <Property Name="GROUPS" Type="number" Precision="38" Scale="0" />
+          <Property Name="CATEGORY" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="APPLIANCE_DETAIL_INFORMATION">
           <Key>
@@ -504,6 +505,7 @@
           <Property Name="UPDATEPERSON" Type="varchar2" MaxLength="200" />
           <Property Name="CERTIFICATEUNIT" Type="varchar2" MaxLength="200" />
           <Property Name="GROUPS" Type="number" Precision="38" Scale="0" />
+          <Property Name="CATEGORY" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="METERING_STANDARD_DEVICEPREPAR">
           <Key>
@@ -1335,6 +1337,7 @@
           <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="GROUPS" Type="number" Precision="38" Scale="0" />
           <Property Name="UNCERTAINTYUI" Type="varchar2" MaxLength="200" />
+          <Property Name="CATEGORY" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="UNDERTAKE_LABORATORY">
           <Key>
@@ -3573,6 +3576,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="MAXVALUE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="MAXCATEGORIES" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="GROUPS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.FK_MAXIMUM__REFERENCE_METERIN2" FromRole="ALLOWABLE_ERROR" ToRole="METERING_STANDARD_DEVICE" />
         </EntityType>
         <EntityType Name="APPLIANCE_DETAIL_INFORMATION">
@@ -4038,6 +4042,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="UPDATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CERTIFICATEUNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="GROUPS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.FK_METERING_REFERENCE_METERIN2" FromRole="METERING_STANDARD_DEVICE_CHECK" ToRole="METERING_STANDARD_DEVICE" />
         </EntityType>
         <EntityType Name="ORDER_TASK_INFORMATION">
@@ -4915,6 +4920,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="GROUPS" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="UNCERTAINTYUI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.FK_UNCERTAI_REFERENCE_METERING" FromRole="UNCERTAINTYTABLE" ToRole="METERING_STANDARD_DEVICE" />
         </EntityType>
         <EntityType Name="UNDERTAKE_LABORATORY">
@@ -6017,6 +6023,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="ALLOWABLE_ERROR">
             <EntityTypeMapping TypeName="Model.ALLOWABLE_ERROR">
               <MappingFragment StoreEntitySet="ALLOWABLE_ERROR">
+                <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
                 <ScalarProperty Name="GROUPS" ColumnName="GROUPS" />
                 <ScalarProperty Name="MAXCATEGORIES" ColumnName="MAXCATEGORIES" />
                 <ScalarProperty Name="MAXVALUE" ColumnName="MAXVALUE" />
@@ -6476,6 +6483,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="METERING_STANDARD_DEVICE_CHECK">
             <EntityTypeMapping TypeName="Model.METERING_STANDARD_DEVICE_CHECK">
               <MappingFragment StoreEntitySet="METERING_STANDARD_DEVICE_CHECK">
+                <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
                 <ScalarProperty Name="GROUPS" ColumnName="GROUPS" />
                 <ScalarProperty Name="CERTIFICATEUNIT" ColumnName="CERTIFICATEUNIT" />
                 <ScalarProperty Name="UPDATEPERSON" ColumnName="UPDATEPERSON" />
@@ -7290,6 +7298,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="UNCERTAINTYTABLE">
             <EntityTypeMapping TypeName="Model.UNCERTAINTYTABLE">
               <MappingFragment StoreEntitySet="UNCERTAINTYTABLE">
+                <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
                 <ScalarProperty Name="UNCERTAINTYUI" ColumnName="UNCERTAINTYUI" />
                 <ScalarProperty Name="GROUPS" ColumnName="GROUPS" />
                 <ScalarProperty Name="ID" ColumnName="ID" />

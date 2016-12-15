@@ -128,8 +128,7 @@
         else if (ViewBag.IS == "UA")
         {
             <div class="mt10" id="">
-                <label>
-                    <input type="radio" name="wucha" id="wucha_1" onclick="radio2.check()" checked="checked" />
+                <label>                    
                     误差来源
                 </label>
                 <div class="mt10" id="div5">
@@ -191,8 +190,7 @@
         else if (ViewBag.IS == "UB")
         {
             <div class="mt10" id="">
-                <label>
-                    <input type="radio" name="wucha" id="wucha_2" onclick="radio2.check()" />
+                <label>                  
                     范围指标
                 </label>
                 <div class="mt10" id="div6">
@@ -461,8 +459,9 @@
                     $("#div1").find("ul").each(function () {
 
                         var THEACCURACYLEVEL = $(this).find("li :input").eq(0).val();
+                        var CATEGORY = "AA";
                         if (THEACCURACYLEVEL != null) {
-                            myArray.push({ THEACCURACYLEVEL: THEACCURACYLEVEL });
+                            myArray.push({ THEACCURACYLEVEL: THEACCURACYLEVEL, CATEGORY: CATEGORY });
                         }
                     })
                     break
@@ -471,8 +470,10 @@
                     $("#div2").find("ul").each(function () {
                         var MAXCATEGORIES = $(this).find("li :selected").eq(0).val();
                         var MAXVALUE = $(this).find("li :input").eq(1).val();
+                        MAXVALUE = "±" + MAXVALUE + "%";
+                        var CATEGORY = "AB";
                         if (MAXCATEGORIES != null || MAXVALUE != null) {
-                            myArray2.push({ MAXCATEGORIES: MAXCATEGORIES, MAXVALUE: MAXVALUE });
+                            myArray2.push({ MAXCATEGORIES: MAXCATEGORIES, MAXVALUE: MAXVALUE, CATEGORY: CATEGORY });
                         }
                     })
                     break
@@ -483,19 +484,18 @@
                         var THEUNCERTAINTYVALUE = $(this).find("li :input").eq(1).val();
                         var THEUNCERTAINTYNDEXL = $(this).find("li :selected").eq(1).val();
                         var THEUNCERTAINTYVALUEK = $(this).find("li :selected").eq(2).val();
+                        var CATEGORY = "AC";
                         if (THEUNCERTAINTY != null || THEUNCERTAINTYVALUE != null || THEUNCERTAINTYNDEXL != null || THEUNCERTAINTYVALUEK != null) {
 
-                            myArray3.push({ THEUNCERTAINTY: THEUNCERTAINTY, THEUNCERTAINTYVALUE: THEUNCERTAINTYVALUE, THEUNCERTAINTYNDEXL: THEUNCERTAINTYNDEXL, THEUNCERTAINTYVALUEK: THEUNCERTAINTYVALUEK });
+                            myArray3.push({ THEUNCERTAINTY: THEUNCERTAINTY, THEUNCERTAINTYVALUE: THEUNCERTAINTYVALUE, THEUNCERTAINTYNDEXL: THEUNCERTAINTYNDEXL, THEUNCERTAINTYVALUEK: THEUNCERTAINTYVALUEK, CATEGORY: CATEGORY });
                         }
                     })
                     break
                 default:
             }
-            //证书
-            debugger
+            //证书          
             myArray4 = new Array();
-            $("#div4").find("ul").each(function () {
-                debugger
+            $("#div4").find("ul").each(function () {              
                 var CERTIFICATEUNIT = $(this).find("li :input").eq(0).val();
                 var CERTIFICATE_NUM = $(this).find("li :input").eq(1).val();
                 var VALID_TO = $(this).find("li :input").eq(2).val();
@@ -557,9 +557,10 @@
                 var KVALE = $(this).find("li :selected").eq(3).val();//K
                 var UNCERTAINTYUI = $(this).find("li :input").eq(6).val();//不确定度ui
                 var NOTE = $(this).find("li :input").eq(7).val();//备注
+                var CATEGORY = "UA";
                 if (ASSESSMENTITEM != null || ERRORSOURCES != null || THEUNIT != null || ERRORLIMITUNIT != null || THEERRODISTRIBUTION != null || KVALE != null || UNCERTAINTYUI != null || NOTE != null)
 
-                    myArray5.push({ METERING_STANDARD_DEVICEID: "@ViewBag.METERING_STANDARD_DEVICEID", ASSESSMENTITEM: ASSESSMENTITEM, ERRORSOURCES: ERRORSOURCES, ERRORLIMITS: ERRORLIMITS, ERRORLIMITUNIT: ERRORLIMITUNIT, THEERRODISTRIBUTION: THEERRODISTRIBUTION, KVALE: KVALE, UNCERTAINTYUI: UNCERTAINTYUI, NOTE: NOTE });
+                    myArray5.push({ METERING_STANDARD_DEVICEID: "@ViewBag.METERING_STANDARD_DEVICEID", ASSESSMENTITEM: ASSESSMENTITEM, ERRORSOURCES: ERRORSOURCES, ERRORLIMITS: ERRORLIMITS, ERRORLIMITUNIT: ERRORLIMITUNIT, THEERRODISTRIBUTION: THEERRODISTRIBUTION, KVALE: KVALE, UNCERTAINTYUI: UNCERTAINTYUI, NOTE: NOTE, CATEGORY: CATEGORY });
             })
             //*****************************************************
             if (myArray5 != null)
@@ -569,7 +570,7 @@
             if (ifshujuUA(METERING_STANDARD_DEVICE)) {
             //if (true) {
                 $.ajax({
-                    url: "/api/UNCERTAINTYTABLEApi/InstUA",
+                    url: "/api/UNCERTAINTYTABLEApi/InstUAUB",
                     type: "Post",
                     data: METERING_STANDARD_DEVICE,
                     //data: { entity: "123" },
@@ -620,8 +621,9 @@
                 var INDEX2 = $(this).find("li :input").eq(15).val();//指标2
                 var INDEX2UNIT = $(this).find("li :selected").eq(10).val();//指标2单位
                 var NOTE = $(this).find("li :input").eq(17).val();//备注
+                var CATEGORY = "UB";
                 if (ASSESSMENTITEM != null || THERANGESCOPE != null || ERRORLIMITS != null || THERELATIONSHIP != null || ENDRANGESCOPE != null || ENDUNIT != null || ENDRELATIONSHIP != null || THEFREQUENCY != null || THEUNITFREQUENCY != null || THERELATIONSHIPFREQUENCY != null || ENDFREQUENCY != null || ENDUNITFREQUENCY != null || ENDRELATIONSHIPFREQUENCY != null || INDEX1 != null || INDEX1UNIT != null || INDEX2 != null || INDEX2UNIT != null || NOTE != null)
-                    myArray6.push({ METERING_STANDARD_DEVICEID: "@ViewBag.METERING_STANDARD_DEVICEID", ASSESSMENTITEM: ASSESSMENTITEM, THERANGESCOPE: THERANGESCOPE, ERRORLIMITS: ERRORLIMITS, THERELATIONSHIP: THERELATIONSHIP, ENDRANGESCOPE: ENDRANGESCOPE, ENDUNIT: ENDUNIT, ENDRELATIONSHIP: ENDRELATIONSHIP, THEFREQUENCY: THEFREQUENCY, THEUNITFREQUENCY: THEUNITFREQUENCY, THERELATIONSHIPFREQUENCY: THERELATIONSHIPFREQUENCY, ENDFREQUENCY: ENDFREQUENCY, ENDUNITFREQUENCY: ENDUNITFREQUENCY, ENDRELATIONSHIPFREQUENCY: ENDRELATIONSHIPFREQUENCY, INDEX1: INDEX1, INDEX1UNIT: INDEX1UNIT, INDEX2: INDEX2, INDEX2UNIT: INDEX2UNIT, NOTE: NOTE });
+                    myArray6.push({ METERING_STANDARD_DEVICEID: "@ViewBag.METERING_STANDARD_DEVICEID", ASSESSMENTITEM: ASSESSMENTITEM, THERANGESCOPE: THERANGESCOPE, ERRORLIMITS: ERRORLIMITS, THERELATIONSHIP: THERELATIONSHIP, ENDRANGESCOPE: ENDRANGESCOPE, ENDUNIT: ENDUNIT, ENDRELATIONSHIP: ENDRELATIONSHIP, THEFREQUENCY: THEFREQUENCY, THEUNITFREQUENCY: THEUNITFREQUENCY, THERELATIONSHIPFREQUENCY: THERELATIONSHIPFREQUENCY, ENDFREQUENCY: ENDFREQUENCY, ENDUNITFREQUENCY: ENDUNITFREQUENCY, ENDRELATIONSHIPFREQUENCY: ENDRELATIONSHIPFREQUENCY, INDEX1: INDEX1, INDEX1UNIT: INDEX1UNIT, INDEX2: INDEX2, INDEX2UNIT: INDEX2UNIT, NOTE: NOTE, CATEGORY: CATEGORY });
             })
             //*****************************************************
             if (myArray6 != null)
@@ -630,7 +632,7 @@
             //调用后台方法
             if (ifshujuUB(METERING_STANDARD_DEVICE)) {
                 $.ajax({
-                    url: "/api/UNCERTAINTYTABLEApi/InstUA",
+                    url: "/api/UNCERTAINTYTABLEApi/InstUAUB",
                     type: "Post",
                     data: METERING_STANDARD_DEVICE,
                     dataType: "json",
@@ -664,8 +666,20 @@
         if (m.ALLOWABLE_ERROR == null) {
             zhi += "不确定度/准确度等级/最大允许误差不能为空！<br>";
         }
-        if (m.METERING_STANDARD_DEVICE_CHECK == null) {
+        if (m.METERING_STANDARD_DEVICE_CHECK.length==0) {
             zhi += "证书信息不能为空！<br>";
+        }
+        for (var i = 0; i < m.METERING_STANDARD_DEVICE_CHECK.length; i++) {
+            if (isNull(m.METERING_STANDARD_DEVICE_CHECK[i].CERTIFICATEUNIT))
+            {
+                zhi += "证书发放单位不能为空！<br>";
+            }
+            if (isNull(m.METERING_STANDARD_DEVICE_CHECK[i].CERTIFICATE_NUM)) {
+                zhi += "证书编号不能为空！<br>";
+            }
+            if (isNull(m.METERING_STANDARD_DEVICE_CHECK[i].VALID_TO)) {
+                zhi += "有效期至不能为空！<br>";
+            }
         }
         if (zhi != "") {
             $.messager.alert('操作提示', "" + zhi + "", 'info');
@@ -678,8 +692,26 @@
     }
     function ifshujuUA(m) {
         var zhi = "";
-        if (m.UNCERTAINTYTABLE == null) {
+        if (isNull(m.UNCERTAINTYTABLE.ASSESSMENTITEM)) {
+            zhi += "评定项不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.ERRORSOURCES)) {
             zhi += "误差来源不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.ERRORLIMITS)) {
+            zhi += "误差限不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.ERRORLIMITUNIT)) {
+            zhi += "误差限单位不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.KVALE)) {
+            zhi += "K不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.THEERRODISTRIBUTION)) {
+            zhi += "误差分布状况不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.UNCERTAINTYUI)) {
+            zhi += "不确定度ui不能为空！<br>";
         }
         if (zhi != "") {
             $.messager.alert('操作提示', "" + zhi + "", 'info');
@@ -692,8 +724,56 @@
     }
     function ifshujuUB(m) {
         var zhi = "";
-        if (m.UNCERTAINTYTABLE == null) {
-            zhi += "范围指标不能为空！<br>";
+        if (isNull(m.UNCERTAINTYTABLE.ASSESSMENTITEM)) {
+            zhi += "评定项不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.THERANGESCOPE)) {
+            zhi += "量程范围起不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.ERRORLIMITS)) {
+            zhi += "起单位不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.THERELATIONSHIP)) {
+            zhi += "起关系不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.ENDRANGESCOPE)) {
+            zhi += "量程范围止不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.ENDUNIT)) {
+            zhi += "止单位不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.ENDRELATIONSHIP)) {
+            zhi += "止关系不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.THEFREQUENCY)) {
+            zhi += "频率范围起不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.THEUNITFREQUENCY)) {
+            zhi += "频率范围起单位不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.THERELATIONSHIPFREQUENCY)) {
+            zhi += "频率范围起关系不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.ENDFREQUENCY)) {
+            zhi += "频率范围止不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.ENDUNITFREQUENCY)) {
+            zhi += "频率范围止单位不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.ENDRELATIONSHIPFREQUENCY)) {
+            zhi += "频率范围止关系指标不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.INDEX1)) {
+            zhi += "指标1不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.INDEX1UNIT)) {
+            zhi += "指标1单位不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.INDEX2)) {
+            zhi += "指标2不能为空！<br>";
+        }
+        if (isNull(m.UNCERTAINTYTABLE.INDEX2UNIT)) {
+            zhi += "指标2单位不能为空！<br>";
         }
         if (zhi != "") {
             $.messager.alert('操作提示', "" + zhi + "", 'info');
