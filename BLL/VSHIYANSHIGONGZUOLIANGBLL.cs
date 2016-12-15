@@ -47,23 +47,10 @@ namespace Langben.BLL
         /// <param name="search">查询条件</param>
         /// <param name="total">结果集的总数</param>
         /// <returns>结果集</returns>
-        public List<VSHIYANSHIGONGZUOLIANG> GetByParam(string id, int page, int rows, string order, string sort, string search, ref int total)
+        public List<SHIYANSHIGONGZUO_Result> GetByParam(string id, int page, int rows, string order, string sort, string search, ref int total)
         {
-            IQueryable<VSHIYANSHIGONGZUOLIANG> queryData = repository.GetData(db, order, sort, search);
-            total = queryData.Count();
-            if (total > 0)
-            {
-                if (page <= 1)
-                {
-                    queryData = queryData.Take(rows);
-                }
-                else
-                {
-                    queryData = queryData.Skip((page - 1) * rows).Take(rows);
-                }
-                 
-            }
-            return queryData.ToList();
+          return  repository.GetData(db, order, sort, search);
+             
         }
       
       

@@ -45,7 +45,7 @@ namespace Langben.App.Controllers
         {
 
             int total = 0;
-            List<VSHIYANSHIGONGZUOLIANG> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
+            List<SHIYANSHIGONGZUO_Result> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
             {
                 total = total,

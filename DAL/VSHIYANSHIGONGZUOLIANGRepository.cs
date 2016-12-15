@@ -19,11 +19,13 @@ namespace Langben.DAL
         /// <param name="search">查询条件</param>
         /// <param name="listQuery">额外的参数</param>
         /// <returns></returns>      
-        public IQueryable<VSHIYANSHIGONGZUOLIANG> GetData(SysEntities db, string order, string sort, string search, params object[] listQuery)
+        public List<SHIYANSHIGONGZUO_Result> GetData(SysEntities db, string order, string sort, string search, params object[] listQuery)
         {
             string where = string.Empty;
             int flagWhere = 0;
 
+            Nullable<System.DateTime> sTARTDATE = null; Nullable<System.DateTime> eNDDATE = null; string dANWEI = string.Empty;
+       
             Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
             if (queryDic != null && queryDic.Count > 0)
             {
@@ -69,10 +71,28 @@ namespace Langben.DAL
                     where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
                 }
             }
-            return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext 
-                     .CreateObjectSet<VSHIYANSHIGONGZUOLIANG>().Where(string.IsNullOrEmpty(where) ? "true" : where)
-                     .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                     .AsQueryable(); 
+
+        
+            if (sTARTDATE == null)
+            {
+                sTARTDATE = System.DateTime.Now.AddYears(-11);
+            }
+            if (eNDDATE == null)
+            {
+                eNDDATE = System.DateTime.Now.AddYears(11);
+            }
+            if (string.IsNullOrWhiteSpace(dANWEI))
+            {
+                dANWEI = "";
+            }
+
+
+            var data = db.SHIYANSHIGONGZUO(System.DateTime.Now.AddYears(-1), System.DateTime.Now.AddYears(1), "*").ToList();
+
+
+
+
+            return data; 
 
         }
         /// <summary>
