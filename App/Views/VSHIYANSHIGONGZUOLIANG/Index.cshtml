@@ -47,6 +47,7 @@
             sortOrder: 'desc',
             idField: 'ID',
             onLoadSuccess: function (data) {
+                debugger
                 var rows = $('#flexigridData').datagrid('getRows');
                 var WEITUODAN = 0;
                 var JIANDINGWANCHENG = 0;
@@ -55,8 +56,18 @@
                 var HEGE = 0;
                 var BUHEGE = 0;
                 var CHAOQI = 0;
-                
+                var data1 = [];
+                var WEITUODAN1 = [];
+                var JIANDINGWANCHENG1 = [];
+                var SHEBEIGUZHANG1 = [];
+                var PIZHUNTONGGUO1 = [];
+                var HEGE1 = [];
+                var BUHEGE1 = [];
+                var CHAOQI1 = [];
+                var categories = [];
+
                 for (var i = 0; i < rows.length; i++) {
+                    categories.push(rows[i].ID);
                     WEITUODAN += parseFloat(rows[i].WEITUODAN);
                     JIANDINGWANCHENG += parseFloat(rows[i].JIANDINGWANCHENG);
                     SHEBEIGUZHANG += parseFloat(rows[i].SHEBEIGUZHANG);
@@ -64,22 +75,19 @@
                     HEGE += parseFloat(rows[i].HEGE);
                     BUHEGE += parseFloat(rows[i].BUHEGE);
                     CHAOQI += parseFloat(rows[i].CHAOQI);
+                    WEITUODAN1.push(rows[i].WEITUODAN);
+                    JIANDINGWANCHENG1.push(rows[i].JIANDINGWANCHENG);
+                    SHEBEIGUZHANG1.push(rows[i].SHEBEIGUZHANG);
+                    PIZHUNTONGGUO1.push(rows[i].PIZHUNTONGGUO);
+                    HEGE1.push(rows[i].HEGE);
+                    BUHEGE1.push(rows[i].BUHEGE);
+                    CHAOQI1.push(rows[i].CHAOQI);
                 }
-
+                data1.push(WEITUODAN1, JIANDINGWANCHENG1, SHEBEIGUZHANG1, PIZHUNTONGGUO1, HEGE1, BUHEGE1, CHAOQI1);
                 var myChart = echarts.init(document.getElementById('main'));
                  
-                var data = [
-                      [0.5, 0.4, 0.3, 0.5],
-                      [4.5, 2.3, 1.8, 1.9],
-                      [1.7, 1.2, 0.7, 1.4],
-                      [1.2, 0.8, 0.9, 0.9],
-                ];
-                var categories = ['数表实验室',
-  '电能实验室',
-  '互感器实验室',
-  '指示仪表实验室',
-  '直流仪器实验室'
-                ];
+                
+                
                 var dims = ['委托数量','检定完成数量','设备故障数量','批准通过数量','合格报告数量','不合格报告数量','超期数量']
 
                 myChart.setOption({
@@ -97,30 +105,41 @@
                     xAxis: [{
                         type: 'category',
                         data: categories,
-
                     }],
                     yAxis: [{
-
                         type: 'value',
                         name: '实验室别工作量统计图表分析',
                     }, ],
                     series: [{
                         name: dims[0],
                         type: 'bar',
-                        data: data[0]
+                        data: data1[0]
                     }, {
                         name: dims[1],
                         type: 'bar',
-                        data: data[1]
+                        data: data1[1]
                     }, {
                         name: dims[2],
                         type: 'bar',
-                        data: data[2]
+                        data: data1[2]
                     }, {
                         name: dims[3],
                         type: 'bar',
-                        data: data[3],
-                    }]
+                        data: data1[3],
+                    }, {
+                        name: dims[4],
+                        type: 'bar',
+                        data: data1[4],
+                    }, {
+                        name: dims[5],
+                        type: 'bar',
+                        data: data1[5],
+                    }, {
+                        name: dims[6],
+                        type: 'bar',
+                        data: data1[6],
+                    }
+                    ]
                 });
 
 
