@@ -41,7 +41,7 @@ namespace Langben.App.Controllers
         /// <returns></returns>
         [HttpPost]
         [SupportFilter]
-        public JsonResult GetData(string id, int page, int rows, string order, string sort, string search)
+        public JsonResult GetData(string id="", int page=11, int rows=11, string order="", string sort = "", string search = "")
         {
 
             int total = 0;
