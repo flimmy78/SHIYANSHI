@@ -121,11 +121,21 @@
                 <tbody id="tbody_moban">
                     <!--插入行的位置-->
                     <tr rowindex="1">
-                        <td rowspan="1" align="center" width="120"> <input class="my-textbox input-width" value="" id="OUTPUTVALUE_t_1_1" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>°</span></td>
-                        <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_1" name="READVALUE" onblur="blurValue(this)" type="text"><span>°</span></td>
-                        <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_1" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_1" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center" width="120">
+                            <input class="my-textbox input-width" value="" id="OUTPUTVALUE_t_1_1" name="OUTPUTVALUE" onblur="blurValue(this)" type="text"><span>°</span>
+                        </td>
+                        <td rowspan="1" align="center" width="100">
+                            <input class="my-textbox input-width" value="" id="READVALUE_t_1_1" name="READVALUE" onblur="blurValue(this)" type="text"><span>°</span>
+                        </td>
+                        <td rowspan="1" align="center" width="100">
+                            <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_1" name="ACTUALVALUE" onblur="blurValue(this)" type="text">
+                        </td>
+                        <td rowspan="1" align="center" width="100">
+                            <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text">
+                        </td>
+                        <td rowspan="1" align="center" width="100">
+                            <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_1" name="RELATIVEERROR" onblur="blurValue(this)" type="text">
+                        </td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="2">
@@ -210,7 +220,7 @@
 
             CreateRow();
             // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
-          
+
         }
         //增加行
         function CreateRow() {
@@ -239,7 +249,7 @@
                 if (rowidx == 0) {
                     //需要合并的列
                 }
-                
+
                 //测量点 需要下拉框
                 htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120", unit));
                 //二次输入标准值
@@ -264,9 +274,9 @@
 
         //离开事件，用于计算
         function blurValue(obj) {
-        //    LianDongShiJiZhi(obj);
+            //    LianDongShiJiZhi(obj);
         }
-       
+
 
     </script>
 

@@ -175,18 +175,13 @@ namespace Langben.App.Controllers
                             r.WriteToStream(qr.Matrix, ms, ImageFormat.Png);
 
                         }
-
-
                         //QRCodeHelper.GetQRCode(item.ID, ms);
                         var pathErWeiMa = path + item.ID + ".png";
-
-
 
                         System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate);
 
 
                         System.IO.BinaryWriter w = new System.IO.BinaryWriter(fs);
-
                         #region 二维码加字
 
                         //System.IO.FileStream fss = new System.IO.FileStream(Server.MapPath("~/up/模版.png"), System.IO.FileMode.OpenOrCreate);
