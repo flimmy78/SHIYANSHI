@@ -40,7 +40,7 @@
             //nowrap: false,
             striped: true,
             collapsible: true,
-            url: '../VSHIYANSHIGONGZUOLIANG/GetData', //获取数据的url
+            url: '/VSHIYANSHIGONGZUOLIANG/GetData', //获取数据的url
             sortName: 'ID',
             sortOrder: 'desc',
             idField: 'ID',
@@ -63,27 +63,19 @@
                     CHAOQI += parseFloat(rows[i].CHAOQI);
                 }
                 $('#flexigridData').datagrid('appendRow', { ID: '<b>统计：</b>', WEITUODAN: WEITUODAN, JIANDINGWANCHENG: JIANDINGWANCHENG, SHEBEIGUZHANG: SHEBEIGUZHANG, PIZHUNTONGGUO: PIZHUNTONGGUO, HEGE: HEGE, BUHEGE: BUHEGE, CHAOQI: CHAOQI });
-            },
-            toolbar: [
-                 {
-                     text: '详细',
-                     iconCls: 'icon-search',
-                     handler: function () {
-                         return getView();
-                     }
-                 }],
+            },          
             columns: [[
-					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 194 }
-					, { field: 'WEITUODAN', title: '@Html.DisplayNameFor(model => model.WEITUODAN)', width: 194 }
-					, { field: 'JIANDINGWANCHENG', title: '@Html.DisplayNameFor(model => model.JIANDINGWANCHENG)', width: 194 }
-					, { field: 'SHEBEIGUZHANG', title: '@Html.DisplayNameFor(model => model.SHEBEIGUZHANG)', width: 194 }
-					, { field: 'PIZHUNTONGGUO', title: '@Html.DisplayNameFor(model => model.PIZHUNTONGGUO)', width: 194 }
-					, { field: 'HEGE', title: '@Html.DisplayNameFor(model => model.HEGE)', width: 194 }
-					, { field: 'BUHEGE', title: '@Html.DisplayNameFor(model => model.BUHEGE)', width: 194 }
-					, { field: 'CHAOQI', title: '@Html.DisplayNameFor(model => model.CHAOQI)', width: 194 }
+					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 140 }
+					, { field: 'WEITUODAN', title: '@Html.DisplayNameFor(model => model.WEITUODAN)', width: 140 }
+					, { field: 'JIANDINGWANCHENG', title: '@Html.DisplayNameFor(model => model.JIANDINGWANCHENG)', width: 140 }
+					, { field: 'SHEBEIGUZHANG', title: '@Html.DisplayNameFor(model => model.SHEBEIGUZHANG)', width: 140 }
+					, { field: 'PIZHUNTONGGUO', title: '@Html.DisplayNameFor(model => model.PIZHUNTONGGUO)', width: 140 }
+					, { field: 'HEGE', title: '@Html.DisplayNameFor(model => model.HEGE)', width: 140 }
+					, { field: 'BUHEGE', title: '@Html.DisplayNameFor(model => model.BUHEGE)', width: 140 }
+					, { field: 'CHAOQI', title: '@Html.DisplayNameFor(model => model.CHAOQI)', width: 140 }
             ]],
             pagination: true,
-            rownumbers: true
+            rownumbers: false
 
         });
 
