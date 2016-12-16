@@ -1426,15 +1426,6 @@
           <Property Name="TIAOXINGMA" Type="varchar2" MaxLength="200" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VGONGZUOSHICHANG”中的列“SUOSHUDANWEI”。
-警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VGONGZUOSHICHANG”中的列“SHENGCHANCHANGJIA”。
-警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VGONGZUOSHICHANG”中的列“CHUCHANGRIQI”。
-警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VGONGZUOSHICHANG”中的列“JIANDINGWANCHENGRIQI”。
-警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VGONGZUOSHICHANG”中的列“DAILINGQUSHICHANG”。
-警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VGONGZUOSHICHANG”中的列“JIANDINGSHICHANG”。
-警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VGONGZUOSHICHANG”中的列“SHENHESHICHANG”。
-警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VGONGZUOSHICHANG”中的列“PIZHUNSHICHANG”。
-警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VGONGZUOSHICHANG”中的列“ZONGSHICHANG”。
 警告 6002: 表/视图“TENGFEI.VGONGZUOSHICHANG”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VGONGZUOSHICHANG">
           <Key>
@@ -1442,9 +1433,11 @@
           </Key>
           <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="WEITUODANWEI" Type="varchar2" MaxLength="200" />
+          <Property Name="SUOSHUDANWEI" Type="varchar2" MaxLength="200" />
           <Property Name="ZHENGSHUDANWEI" Type="varchar2" MaxLength="200" />
           <Property Name="SHOULIDANWEI" Type="varchar2" MaxLength="200" />
           <Property Name="QIJUMINGCHENG" Type="varchar2" MaxLength="200" />
+          <Property Name="SHENGCHANCHANGJIA" Type="char" MaxLength="1" />
           <Property Name="QIJUXINGHAO" Type="varchar2" MaxLength="200" />
           <Property Name="QIJUGUIGE" Type="varchar2" MaxLength="200" />
           <Property Name="CHUCHANGBIANHAO" Type="varchar2" MaxLength="200" />
@@ -1453,10 +1446,16 @@
           <Property Name="SHIYANSHI" Type="varchar2" MaxLength="36" />
           <Property Name="JIANDINGXIAOZHUNYUAN" Type="varchar2" MaxLength="36" />
           <Property Name="HEYANYUAN" Type="varchar2" MaxLength="36" />
-          <Property Name="SONGJIANRIQI" Type="date" />
+          <Property Name="WEITUORIQI" Type="date" />
           <Property Name="SHIYANSHIJIESHOUSHIJIAN" Type="date" />
+          <Property Name="JIANDINGWANCHENGRIQI" Type="date" />
           <Property Name="SHENHERIQI" Type="date" />
-          <Property Name="SHENGPIRIQI" Type="date" />
+          <Property Name="PIZHUNRIQI" Type="date" />
+          <Property Name="DAILINGQUSHICHANG" Type="char" MaxLength="1" />
+          <Property Name="JIANDINGSHICHANG" Type="char" MaxLength="1" />
+          <Property Name="SHENHESHICHANG" Type="char" MaxLength="1" />
+          <Property Name="PIZHUNSHICHANG" Type="char" MaxLength="1" />
+          <Property Name="ZONGSHICHANG" Type="char" MaxLength="1" />
           <Property Name="BEIZHU" Type="varchar2" MaxLength="4000" />
         </EntityType>
         <!--生成过程中发现错误:
@@ -2659,9 +2658,11 @@ FROM "TENGFEI"."VBIAOZHUNLIANGCHUANGONGZHUO" "VBIAOZHUNLIANGCHUANGONGZHUO"</Defi
             <DefiningQuery>SELECT 
 "VGONGZUOSHICHANG"."ID" AS "ID", 
 "VGONGZUOSHICHANG"."WEITUODANWEI" AS "WEITUODANWEI", 
+"VGONGZUOSHICHANG"."SUOSHUDANWEI" AS "SUOSHUDANWEI", 
 "VGONGZUOSHICHANG"."ZHENGSHUDANWEI" AS "ZHENGSHUDANWEI", 
 "VGONGZUOSHICHANG"."SHOULIDANWEI" AS "SHOULIDANWEI", 
 "VGONGZUOSHICHANG"."QIJUMINGCHENG" AS "QIJUMINGCHENG", 
+"VGONGZUOSHICHANG"."SHENGCHANCHANGJIA" AS "SHENGCHANCHANGJIA", 
 "VGONGZUOSHICHANG"."QIJUXINGHAO" AS "QIJUXINGHAO", 
 "VGONGZUOSHICHANG"."QIJUGUIGE" AS "QIJUGUIGE", 
 "VGONGZUOSHICHANG"."CHUCHANGBIANHAO" AS "CHUCHANGBIANHAO", 
@@ -2670,10 +2671,16 @@ FROM "TENGFEI"."VBIAOZHUNLIANGCHUANGONGZHUO" "VBIAOZHUNLIANGCHUANGONGZHUO"</Defi
 "VGONGZUOSHICHANG"."SHIYANSHI" AS "SHIYANSHI", 
 "VGONGZUOSHICHANG"."JIANDINGXIAOZHUNYUAN" AS "JIANDINGXIAOZHUNYUAN", 
 "VGONGZUOSHICHANG"."HEYANYUAN" AS "HEYANYUAN", 
-"VGONGZUOSHICHANG"."SONGJIANRIQI" AS "SONGJIANRIQI", 
+"VGONGZUOSHICHANG"."WEITUORIQI" AS "WEITUORIQI", 
 "VGONGZUOSHICHANG"."SHIYANSHIJIESHOUSHIJIAN" AS "SHIYANSHIJIESHOUSHIJIAN", 
+"VGONGZUOSHICHANG"."JIANDINGWANCHENGRIQI" AS "JIANDINGWANCHENGRIQI", 
 "VGONGZUOSHICHANG"."SHENHERIQI" AS "SHENHERIQI", 
-"VGONGZUOSHICHANG"."SHENGPIRIQI" AS "SHENGPIRIQI", 
+"VGONGZUOSHICHANG"."PIZHUNRIQI" AS "PIZHUNRIQI", 
+"VGONGZUOSHICHANG"."DAILINGQUSHICHANG" AS "DAILINGQUSHICHANG", 
+"VGONGZUOSHICHANG"."JIANDINGSHICHANG" AS "JIANDINGSHICHANG", 
+"VGONGZUOSHICHANG"."SHENHESHICHANG" AS "SHENHESHICHANG", 
+"VGONGZUOSHICHANG"."PIZHUNSHICHANG" AS "PIZHUNSHICHANG", 
+"VGONGZUOSHICHANG"."ZONGSHICHANG" AS "ZONGSHICHANG", 
 "VGONGZUOSHICHANG"."BEIZHU" AS "BEIZHU"
 FROM "TENGFEI"."VGONGZUOSHICHANG" "VGONGZUOSHICHANG"</DefiningQuery>
           </EntitySet>
@@ -5014,9 +5021,11 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           </Key>
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="WEITUODANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SUOSHUDANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ZHENGSHUDANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="SHOULIDANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="QIJUMINGCHENG" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SHENGCHANCHANGJIA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="QIJUXINGHAO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="QIJUGUIGE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CHUCHANGBIANHAO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -5025,10 +5034,16 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="SHIYANSHI" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="JIANDINGXIAOZHUNYUAN" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="HEYANYUAN" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="SONGJIANRIQI" Type="DateTime" />
+          <Property Name="WEITUORIQI" Type="DateTime" />
           <Property Name="SHIYANSHIJIESHOUSHIJIAN" Type="DateTime" />
+          <Property Name="JIANDINGWANCHENGRIQI" Type="DateTime" />
           <Property Name="SHENHERIQI" Type="DateTime" />
-          <Property Name="SHENGPIRIQI" Type="DateTime" />
+          <Property Name="PIZHUNRIQI" Type="DateTime" />
+          <Property Name="DAILINGQUSHICHANG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="JIANDINGSHICHANG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="SHENHESHICHANG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="PIZHUNSHICHANG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ZONGSHICHANG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="BEIZHU" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VJIANDINGRENWU">
@@ -7424,10 +7439,16 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
             <EntityTypeMapping TypeName="Model.VGONGZUOSHICHANG">
               <MappingFragment StoreEntitySet="VGONGZUOSHICHANG">
                 <ScalarProperty Name="BEIZHU" ColumnName="BEIZHU" />
-                <ScalarProperty Name="SHENGPIRIQI" ColumnName="SHENGPIRIQI" />
+                <ScalarProperty Name="ZONGSHICHANG" ColumnName="ZONGSHICHANG" />
+                <ScalarProperty Name="PIZHUNSHICHANG" ColumnName="PIZHUNSHICHANG" />
+                <ScalarProperty Name="SHENHESHICHANG" ColumnName="SHENHESHICHANG" />
+                <ScalarProperty Name="JIANDINGSHICHANG" ColumnName="JIANDINGSHICHANG" />
+                <ScalarProperty Name="DAILINGQUSHICHANG" ColumnName="DAILINGQUSHICHANG" />
+                <ScalarProperty Name="PIZHUNRIQI" ColumnName="PIZHUNRIQI" />
                 <ScalarProperty Name="SHENHERIQI" ColumnName="SHENHERIQI" />
+                <ScalarProperty Name="JIANDINGWANCHENGRIQI" ColumnName="JIANDINGWANCHENGRIQI" />
                 <ScalarProperty Name="SHIYANSHIJIESHOUSHIJIAN" ColumnName="SHIYANSHIJIESHOUSHIJIAN" />
-                <ScalarProperty Name="SONGJIANRIQI" ColumnName="SONGJIANRIQI" />
+                <ScalarProperty Name="WEITUORIQI" ColumnName="WEITUORIQI" />
                 <ScalarProperty Name="HEYANYUAN" ColumnName="HEYANYUAN" />
                 <ScalarProperty Name="JIANDINGXIAOZHUNYUAN" ColumnName="JIANDINGXIAOZHUNYUAN" />
                 <ScalarProperty Name="SHIYANSHI" ColumnName="SHIYANSHI" />
@@ -7436,9 +7457,11 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
                 <ScalarProperty Name="CHUCHANGBIANHAO" ColumnName="CHUCHANGBIANHAO" />
                 <ScalarProperty Name="QIJUGUIGE" ColumnName="QIJUGUIGE" />
                 <ScalarProperty Name="QIJUXINGHAO" ColumnName="QIJUXINGHAO" />
+                <ScalarProperty Name="SHENGCHANCHANGJIA" ColumnName="SHENGCHANCHANGJIA" />
                 <ScalarProperty Name="QIJUMINGCHENG" ColumnName="QIJUMINGCHENG" />
                 <ScalarProperty Name="SHOULIDANWEI" ColumnName="SHOULIDANWEI" />
                 <ScalarProperty Name="ZHENGSHUDANWEI" ColumnName="ZHENGSHUDANWEI" />
+                <ScalarProperty Name="SUOSHUDANWEI" ColumnName="SUOSHUDANWEI" />
                 <ScalarProperty Name="WEITUODANWEI" ColumnName="WEITUODANWEI" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

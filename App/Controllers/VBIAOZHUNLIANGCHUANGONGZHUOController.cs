@@ -45,6 +45,7 @@ namespace Langben.App.Controllers
         {
 
             int total = 0;
+            string a = string.Empty;
             List<VBIAOZHUNLIANGCHUANGONGZHUO> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
             {
@@ -82,13 +83,20 @@ namespace Langben.App.Controllers
 					,BAOGAOSHENPITONGGUORIQI = s.BAOGAOSHENPITONGGUORIQI
 					,MOCHONGCHANGSHU = s.MOCHONGCHANGSHU
 					,SONGJIANYUEDU = s.SONGJIANYUEDU
-					,JIANDINGSHIJIAN = s.JIANDINGSHIJIAN
-					,JIANDINGYUEDU = s.JIANDINGYUEDU
-					,BAOGAOSHIJIAN = s.BAOGAOSHIJIAN
-					,BAOGAOYUEDU = s.BAOGAOYUEDU
-					,GONHZUOSHIJIAN = s.GONHZUOSHIJIAN
-					,ZONGSHIJIAN = s.ZONGSHIJIAN
-					,BEIZHU = s.BEIZHU
+					,JIANDINGSHIJIAN = s.JIANDINGSHIJIAN == null ? "0" : ((Convert.ToDateTime(s.JIANDINGRIQI) - Convert.ToDateTime(s.SONGJIANRIQI)).Days + 1).ToString()          
+                    ,
+                    JIANDINGYUEDU =s.JIANDINGRIQI==null? "0" : Convert.ToDateTime(s.JIANDINGRIQI).Month.ToString()
+                    ,
+                    BAOGAOSHIJIAN = s.BAOGAOSHENPITONGGUORIQI == null ? "0" : ((Convert.ToDateTime(s.BAOGAOSHENPITONGGUORIQI) - Convert.ToDateTime(s.JIANDINGRIQI)).Days + 1).ToString()
+                    ,
+                    BAOGAOYUEDU = s.BAOGAOSHENPITONGGUORIQI == null ? "0" : Convert.ToDateTime(s.BAOGAOSHENPITONGGUORIQI).Month.ToString()
+                    ,
+                    GONHZUOSHIJIAN = Convert.ToInt32(s.JIANDINGSHIJIAN == null ? "0" : ((Convert.ToDateTime(s.JIANDINGRIQI) - Convert.ToDateTime(s.SONGJIANRIQI)).Days + 1).ToString())+Convert.ToInt32(s.BAOGAOSHENPITONGGUORIQI == null ? "0" : ((Convert.ToDateTime(s.BAOGAOSHENPITONGGUORIQI) - Convert.ToDateTime(s.JIANDINGRIQI)).Days + 1).ToString())
+                    ,
+                    ZONGSHIJIAN = s.BAOGAOSHENPITONGGUORIQI == null ? "0" : ((Convert.ToDateTime(s.BAOGAOSHENPITONGGUORIQI) - Convert.ToDateTime(s.SONGJIANRIQI)).Days + 1).ToString()
+
+                    ,
+                    BEIZHU = s.BEIZHU
                         ,
                     TIAOXINGMA = s.TIAOXINGMA
 
