@@ -1,0 +1,140 @@
+﻿@model Langben.DAL.VGONGZUOSHICHANG
+@{ Layout = "~/Views/Shared/Index.cshtml"; }
+@using Common
+@using Models
+<div id="divQuery">
+    
+    <div class='input_search' style="padding-top:10px;">
+        <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
+            查 询
+        </a>
+    </div>
+</div>
+ <br style="clear: both;" />
+
+<script type="text/javascript" language="javascript">
+    $(function () {
+
+        $('#flexigridData').datagrid({
+            title: '工作时长查询', //列表的标题
+            iconCls: 'icon-site',
+            width: 'auto',
+            height: 'auto',
+            //nowrap: false,
+            striped: true,
+            collapsible: true,
+            url: '../VGONGZUOSHICHANG/GetData', //获取数据的url
+            sortName: '^m_Sort^',
+            sortOrder: 'desc',
+            idField: 'ID',
+
+            toolbar: [
+
+                 {
+                     text: '详细',
+                     iconCls: 'icon-search',
+                     handler: function () {
+                         return getView();
+                     }
+                 } ],
+            columns: [[
+
+                
+					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 35 }
+					,{ field: 'WEITUODANWEI', title:  '@Html.DisplayNameFor(model => model.WEITUODANWEI)', width: 35 }
+					,{ field: 'SUOSHUDANWEI', title:  '@Html.DisplayNameFor(model => model.SUOSHUDANWEI)', width: 35 }
+					,{ field: 'ZHENGSHUDANWEI', title:  '@Html.DisplayNameFor(model => model.ZHENGSHUDANWEI)', width: 35 }
+					,{ field: 'SHOULIDANWEI', title:  '@Html.DisplayNameFor(model => model.SHOULIDANWEI)', width: 35 }
+					,{ field: 'QIJUMINGCHENG', title:  '@Html.DisplayNameFor(model => model.QIJUMINGCHENG)', width: 35 }
+					,{ field: 'SHENGCHANCHANGJIA', title:  '@Html.DisplayNameFor(model => model.SHENGCHANCHANGJIA)', width: 35 }
+					,{ field: 'QIJUXINGHAO', title:  '@Html.DisplayNameFor(model => model.QIJUXINGHAO)', width: 35 }
+					,{ field: 'QIJUGUIGE', title:  '@Html.DisplayNameFor(model => model.QIJUGUIGE)', width: 35 }
+					,{ field: 'CHUCHANGBIANHAO', title:  '@Html.DisplayNameFor(model => model.CHUCHANGBIANHAO)', width: 35 }
+					,{ field: 'SHULIANG', title:  '@Html.DisplayNameFor(model => model.SHULIANG)', width: 35 }
+					,{ field: 'ZHENGSHUBAOGAOBIANHAO', title:  '@Html.DisplayNameFor(model => model.ZHENGSHUBAOGAOBIANHAO)', width: 35 }
+					,{ field: 'SHIYANSHI', title:  '@Html.DisplayNameFor(model => model.SHIYANSHI)', width: 35 }
+					,{ field: 'JIANDINGXIAOZHUNYUAN', title:  '@Html.DisplayNameFor(model => model.JIANDINGXIAOZHUNYUAN)', width: 35 }
+					,{ field: 'HEYANYUAN', title:  '@Html.DisplayNameFor(model => model.HEYANYUAN)', width: 35 }
+					,{ field: 'WEITUORIQI', title:  '@Html.DisplayNameFor(model => model.WEITUORIQI)', width: 35 }
+					,{ field: 'SHIYANSHIJIESHOUSHIJIAN', title:  '@Html.DisplayNameFor(model => model.SHIYANSHIJIESHOUSHIJIAN)', width: 35 }
+					,{ field: 'JIANDINGWANCHENGRIQI', title:  '@Html.DisplayNameFor(model => model.JIANDINGWANCHENGRIQI)', width: 35 }
+					,{ field: 'SHENHERIQI', title:  '@Html.DisplayNameFor(model => model.SHENHERIQI)', width: 35 }
+					,{ field: 'PIZHUNRIQI', title:  '@Html.DisplayNameFor(model => model.PIZHUNRIQI)', width: 35 }
+					,{ field: 'DAILINGQUSHICHANG', title:  '@Html.DisplayNameFor(model => model.DAILINGQUSHICHANG)', width: 35 }
+					,{ field: 'JIANDINGSHICHANG', title:  '@Html.DisplayNameFor(model => model.JIANDINGSHICHANG)', width: 35 }
+					,{ field: 'SHENHESHICHANG', title:  '@Html.DisplayNameFor(model => model.SHENHESHICHANG)', width: 35 }
+					,{ field: 'PIZHUNSHICHANG', title:  '@Html.DisplayNameFor(model => model.PIZHUNSHICHANG)', width: 35 }
+					,{ field: 'ZONGSHICHANG', title:  '@Html.DisplayNameFor(model => model.ZONGSHICHANG)', width: 35 }
+					,{ field: 'BEIZHU', title:  '@Html.DisplayNameFor(model => model.BEIZHU)', width: 35 }
+                ]],
+            pagination: true,
+            rownumbers: true
+
+        });
+
+        var parent = window.dialogArguments; //获取父页面
+        if (parent == "undefined" || parent == null) {
+            //    不是在iframe中打开的
+        } else {
+            //隐藏所有的按钮和分隔符
+            $(".l-btn.l-btn-plain").hide();
+            $(".datagrid-btn-separator").hide();
+            //添加选择按钮
+            $('#flexigridData').datagrid("addToolbarItem", [{ "text": "选择", "iconCls": "icon-ok", handler: function () { flexiSelect(); } }]);
+        }
+    });
+
+    //“查询”按钮，弹出查询框
+    function flexiQuery() {
+
+        //将查询条件按照分隔符拼接成字符串
+        var search = "";
+        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
+            if (this.id)
+                search = search + this.id + "&" + this.value + "^";
+            else
+                search = search + this.name + "&" + this.value + "^";
+        });
+        //执行查询
+        $('#flexigridData').datagrid('load', { search: search });
+    };
+ 
+    //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
+    function flexiSelect() {
+
+        var rows = $('#flexigridData').datagrid('getSelections');
+        if (rows.length == 0) {
+            $.messager.alert('操作提示', '请选择数据!', 'warning');
+            return false;
+        }
+
+        var arr = [];
+        for (var i = 0; i < rows.length; i++) {
+            arr.push(rows[i].ID);
+        }
+        arr.push("^");
+        for (var i = 0; i < rows.length; i++) {
+            arr.push(rows[i].WEITUODANWEI);
+        }
+        //主键列和显示列之间用 ^ 分割   每一项用 , 分割
+        if (arr.length > 0) {//一条数据和多于一条
+            returnParent(arr.join("&")); //每一项用 & 分割
+        }
+    }
+    //导航到查看详细的按钮
+    function getView() {
+
+        var arr = $('#flexigridData').datagrid('getSelections');
+
+        if (arr.length == 1) {
+            window.location.href = "../VGONGZUOSHICHANG/Details/" + arr[0].ID;
+
+        } else {
+            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
+        }
+        return false;
+    }
+ 
+
+</script>
+

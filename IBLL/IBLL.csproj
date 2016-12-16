@@ -70,6 +70,7 @@
     <Compile Include="ITHEREVIEWPROCESSBLL.cs" />
     <Compile Include="IUNCERTAINTYTABLEBLL.cs" />
     <Compile Include="IVBIAOZHUNLIANGCHUANGONGZHUOBLL.cs" />
+    <Compile Include="IVGONGZUOSHICHANGBLL.cs" />
     <Compile Include="IVSHIYANSHIGONGZUOLIANGBLL.cs" />
     <Compile Include="IVXIANGQINGBLL.cs" />
     <Compile Include="IVZHENGSHULEIBEITONGJIFENXIBLL.cs" />
