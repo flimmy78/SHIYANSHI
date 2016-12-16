@@ -23,28 +23,66 @@ namespace Langben.DAL
         {
             string where = string.Empty;
             int flagWhere = 0;
-
+            DateTime? startTime = null;
+            DateTime? endTime = null;
+            DateTime? startTime2 = null;
+            DateTime? endTime2 = null;
+            DateTime? startTime3 = null;
+            DateTime? endTime3 = null;
+            DateTime? startTime4 = null;
+            DateTime? endTime4 = null;
             Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
             if (queryDic != null && queryDic.Count > 0)
             {
                 foreach (var item in queryDic)
                 {
+                    //oracle数据库使用linq对时间段查询
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
+                    {
+                        startTime = Convert.ToDateTime(item.Value);
+                        continue;
+                    }
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(End_Time)) //结束时间+1
+                    {
+                        endTime = Convert.ToDateTime(item.Value).AddDays(1);
+                        continue;
+                    }
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains("Start_Time2")) //开始时间
+                    {
+                        startTime2 = Convert.ToDateTime(item.Value);
+                        continue;
+                    }
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains("Start_Time2")) //结束时间+1
+                    {
+                        endTime2 = Convert.ToDateTime(item.Value).AddDays(1);
+                        continue;
+                    }
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains("Start_Time3")) //开始时间
+                    {
+                        startTime3 = Convert.ToDateTime(item.Value);
+                        continue;
+                    }
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains("Start_Time3")) //结束时间+1
+                    {
+                        endTime3 = Convert.ToDateTime(item.Value).AddDays(1);
+                        continue;
+                    }
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains("Start_Time4")) //开始时间
+                    {
+                        startTime4 = Convert.ToDateTime(item.Value);
+                        continue;
+                    }
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains("Start_Time4")) //结束时间+1
+                    {
+                        endTime4 = Convert.ToDateTime(item.Value).AddDays(1);
+                        continue;
+                    }
                     if (flagWhere != 0)
                     {
                         where += " and ";
                     }
                     flagWhere++;
-                                     
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
-                    {
-                        where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Time)) + "] >=  CAST('" + item.Value + "' as   System.DateTime)";
-                        continue;
-                    }
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(End_Time)) //结束时间+1
-                    {
-                        where += "it.[" + item.Key.Remove(item.Key.IndexOf(End_Time)) + "] <  CAST('" + Convert.ToDateTime(item.Value).AddDays(1) + "' as   System.DateTime)";
-                        continue;
-                    }
+                                                      
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Int)) //开始数值
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Int)) + "] >= " + item.Value.GetInt();
@@ -69,11 +107,43 @@ namespace Langben.DAL
                     where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
                 }
             }
-            return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext 
+            var data= ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext 
                      .CreateObjectSet<VGONGZUOSHICHANG>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                     .AsQueryable(); 
-
+                     .AsQueryable();
+            if (null != startTime)
+            {
+                data = data.Where(m => startTime < m.WEITUORIQI);
+            }
+            if (null != endTime)
+            {
+                data = data.Where(m => endTime > m.WEITUORIQI);
+            }
+            if (null != startTime2)
+            {
+                data = data.Where(m => startTime2 < m.JIANDINGWANCHENGRIQI);
+            }
+            if (null != endTime2)
+            {
+                data = data.Where(m => endTime2 > m.JIANDINGWANCHENGRIQI);
+            }
+            if (null != startTime3)
+            {
+                data = data.Where(m => startTime3 < m.SHENHERIQI);
+            }
+            if (null != endTime3)
+            {
+                data = data.Where(m => endTime3 > m.SHENHERIQI);
+            }
+            if (null != startTime4)
+            {
+                data = data.Where(m => startTime3 < m.PIZHUNRIQI);
+            }
+            if (null != endTime4)
+            {
+                data = data.Where(m => endTime3 > m.PIZHUNRIQI);
+            }
+            return data;
         }
 
 

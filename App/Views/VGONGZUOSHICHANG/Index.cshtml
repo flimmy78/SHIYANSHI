@@ -3,7 +3,114 @@
 @using Common
 @using Models
 <div id="divQuery">
-    
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.WEITUORIQI):
+        </div>
+        <div class='input_search-field-time'>
+            <input type="text" id="WEITUORIQIStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'WEITUORIQIStart_Time\');}' })" />
+            <span>到</span>
+            <input type="text" id="WEITUORIQIEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'WEITUORIQIEnd_Time\');}' })" />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.JIANDINGWANCHENGRIQI):
+        </div>
+        <div class='input_search-field-time'>
+            <input type="text" id="JIANDINGWANCHENGRIQIStart_Time2" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'JIANDINGWANCHENGRIQIStart_Time2\');}' })" />
+            <span>到</span>
+            <input type="text" id="JIANDINGWANCHENGRIQIEnd_Time2" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'JIANDINGWANCHENGRIQIEnd_Time2\');}' })" />
+        </div>
+    </div>
+
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.SHENHERIQI):
+        </div>
+        <div class='input_search-field-time'>
+            <input type="text" id="SHENHERIQIStart_Time3" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'SHENHERIQIStart_Time3\');}' })" />
+            <span>到</span>
+            <input type="text" id="SHENHERIQIEnd_Time3" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'SHENHERIQIEnd_Time3\');}' })" />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.SHIYANSHI):
+        </div>
+        <div class="input_search-field">
+            @Html.DropDownList("SHIYANSHI", Models.SysFieldModels.GetSysField("UNDERTAKE_LABORATORY", "NAME"), "请选择", new { id = "SHIYANSHI" })
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.PIZHUNRIQI):
+        </div>
+        <div class='input_search-field-time'>
+            <input type="text" id="PIZHUNRIQIStart_Time4" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'PIZHUNRIQIStart_Time4\');}' })" />
+            <span>到</span>
+            <input type="text" id="PIZHUNRIQIEnd_Time4" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'PIZHUNRIQIEnd_Time4\');}' })" />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.JIANDINGXIAOZHUNYUAN):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='JIANDINGXIAOZHUNYUAN' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.QIJUMINGCHENG):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='QIJUMINGCHENG' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.ZHENGSHUBAOGAOBIANHAO):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='ZHENGSHUBAOGAOBIANHAO' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.CHUCHANGBIANHAO):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='CHUCHANGBIANHAO' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.ZHENGSHUDANWEI):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='ZHENGSHUDANWEI' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.QIJUXINGHAO):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='QIJUXINGHAO' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.SHOULIDANWEI):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='SHOULIDANWEI' />
+        </div>
+    </div>
+
+
+
     <div class='input_search' style="padding-top:10px;">
         <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
             查 询
@@ -24,48 +131,70 @@
             striped: true,
             collapsible: true,
             url: '../VGONGZUOSHICHANG/GetData', //获取数据的url
-            sortName: '^m_Sort^',
+            sortName: 'ID',
             sortOrder: 'desc',
             idField: 'ID',
 
-            toolbar: [
-
-                 {
-                     text: '详细',
-                     iconCls: 'icon-search',
-                     handler: function () {
-                         return getView();
-                     }
-                 } ],
             columns: [[
 
                 
-					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 35 }
-					,{ field: 'WEITUODANWEI', title:  '@Html.DisplayNameFor(model => model.WEITUODANWEI)', width: 35 }
-					,{ field: 'SUOSHUDANWEI', title:  '@Html.DisplayNameFor(model => model.SUOSHUDANWEI)', width: 35 }
-					,{ field: 'ZHENGSHUDANWEI', title:  '@Html.DisplayNameFor(model => model.ZHENGSHUDANWEI)', width: 35 }
-					,{ field: 'SHOULIDANWEI', title:  '@Html.DisplayNameFor(model => model.SHOULIDANWEI)', width: 35 }
-					,{ field: 'QIJUMINGCHENG', title:  '@Html.DisplayNameFor(model => model.QIJUMINGCHENG)', width: 35 }
-					,{ field: 'SHENGCHANCHANGJIA', title:  '@Html.DisplayNameFor(model => model.SHENGCHANCHANGJIA)', width: 35 }
-					,{ field: 'QIJUXINGHAO', title:  '@Html.DisplayNameFor(model => model.QIJUXINGHAO)', width: 35 }
-					,{ field: 'QIJUGUIGE', title:  '@Html.DisplayNameFor(model => model.QIJUGUIGE)', width: 35 }
-					,{ field: 'CHUCHANGBIANHAO', title:  '@Html.DisplayNameFor(model => model.CHUCHANGBIANHAO)', width: 35 }
-					,{ field: 'SHULIANG', title:  '@Html.DisplayNameFor(model => model.SHULIANG)', width: 35 }
-					,{ field: 'ZHENGSHUBAOGAOBIANHAO', title:  '@Html.DisplayNameFor(model => model.ZHENGSHUBAOGAOBIANHAO)', width: 35 }
-					,{ field: 'SHIYANSHI', title:  '@Html.DisplayNameFor(model => model.SHIYANSHI)', width: 35 }
-					,{ field: 'JIANDINGXIAOZHUNYUAN', title:  '@Html.DisplayNameFor(model => model.JIANDINGXIAOZHUNYUAN)', width: 35 }
-					,{ field: 'HEYANYUAN', title:  '@Html.DisplayNameFor(model => model.HEYANYUAN)', width: 35 }
-					,{ field: 'WEITUORIQI', title:  '@Html.DisplayNameFor(model => model.WEITUORIQI)', width: 35 }
-					,{ field: 'SHIYANSHIJIESHOUSHIJIAN', title:  '@Html.DisplayNameFor(model => model.SHIYANSHIJIESHOUSHIJIAN)', width: 35 }
-					,{ field: 'JIANDINGWANCHENGRIQI', title:  '@Html.DisplayNameFor(model => model.JIANDINGWANCHENGRIQI)', width: 35 }
-					,{ field: 'SHENHERIQI', title:  '@Html.DisplayNameFor(model => model.SHENHERIQI)', width: 35 }
-					,{ field: 'PIZHUNRIQI', title:  '@Html.DisplayNameFor(model => model.PIZHUNRIQI)', width: 35 }
-					,{ field: 'DAILINGQUSHICHANG', title:  '@Html.DisplayNameFor(model => model.DAILINGQUSHICHANG)', width: 35 }
-					,{ field: 'JIANDINGSHICHANG', title:  '@Html.DisplayNameFor(model => model.JIANDINGSHICHANG)', width: 35 }
-					,{ field: 'SHENHESHICHANG', title:  '@Html.DisplayNameFor(model => model.SHENHESHICHANG)', width: 35 }
-					,{ field: 'PIZHUNSHICHANG', title:  '@Html.DisplayNameFor(model => model.PIZHUNSHICHANG)', width: 35 }
-					,{ field: 'ZONGSHICHANG', title:  '@Html.DisplayNameFor(model => model.ZONGSHICHANG)', width: 35 }
-					,{ field: 'BEIZHU', title:  '@Html.DisplayNameFor(model => model.BEIZHU)', width: 35 }
+					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 35, hidden: true }
+					,{ field: 'WEITUODANWEI', title:  '@Html.DisplayNameFor(model => model.WEITUODANWEI)', width: 100}
+					, { field: 'SUOSHUDANWEI', title: '@Html.DisplayNameFor(model => model.SUOSHUDANWEI)', width: 100 }
+					, { field: 'ZHENGSHUDANWEI', title: '@Html.DisplayNameFor(model => model.ZHENGSHUDANWEI)', width: 100 }
+					, { field: 'SHOULIDANWEI', title: '@Html.DisplayNameFor(model => model.SHOULIDANWEI)', width: 100 }
+					, { field: 'QIJUMINGCHENG', title: '@Html.DisplayNameFor(model => model.QIJUMINGCHENG)', width: 100 }
+					, { field: 'SHENGCHANCHANGJIA', title: '@Html.DisplayNameFor(model => model.SHENGCHANCHANGJIA)', width: 100 }
+					, { field: 'QIJUXINGHAO', title: '@Html.DisplayNameFor(model => model.QIJUXINGHAO)', width: 100 }
+					, { field: 'QIJUGUIGE', title: '@Html.DisplayNameFor(model => model.QIJUGUIGE)', width: 100 }
+					, { field: 'CHUCHANGBIANHAO', title: '@Html.DisplayNameFor(model => model.CHUCHANGBIANHAO)', width: 100 }
+					, { field: 'SHULIANG', title: '@Html.DisplayNameFor(model => model.SHULIANG)', width: 100 }
+					, { field: 'ZHENGSHUBAOGAOBIANHAO', title: '@Html.DisplayNameFor(model => model.ZHENGSHUBAOGAOBIANHAO)', width: 100 }
+					, { field: 'SHIYANSHI', title: '@Html.DisplayNameFor(model => model.SHIYANSHI)', width: 100 }
+					, { field: 'JIANDINGXIAOZHUNYUAN', title: '@Html.DisplayNameFor(model => model.JIANDINGXIAOZHUNYUAN)', width: 100 }
+					, { field: 'HEYANYUAN', title: '@Html.DisplayNameFor(model => model.HEYANYUAN)', width: 100 }
+
+					, {
+					    field: 'WEITUORIQI', title: '@Html.DisplayNameFor(model => model.WEITUORIQI)', width: 100, formatter: function (value, row, index) {
+					        if (value) {
+					            return dateConvert(value);
+					        }
+					    }
+					}
+					, {
+					    field: 'SHIYANSHIJIESHOUSHIJIAN', title: '@Html.DisplayNameFor(model => model.SHIYANSHIJIESHOUSHIJIAN)', width: 100, formatter: function (value, row, index) {
+					        if (value) {
+					            return dateConvert(value);
+					        }
+					    }
+					}
+					, {
+					    field: 'JIANDINGWANCHENGRIQI', title: '@Html.DisplayNameFor(model => model.JIANDINGWANCHENGRIQI)', width: 100, formatter: function (value, row, index) {
+					        if (value) {
+					            return dateConvert(value);
+					        }
+					    }
+					}
+					, {
+					    field: 'SHENHERIQI', title: '@Html.DisplayNameFor(model => model.SHENHERIQI)', width: 100, formatter: function (value, row, index) {
+					        if (value) {
+					            return dateConvert(value);
+					        }
+					    }
+					}
+					, {
+					    field: 'PIZHUNRIQI', title: '@Html.DisplayNameFor(model => model.PIZHUNRIQI)', width: 100, formatter: function (value, row, index) {
+					        if (value) {
+					            return dateConvert(value);
+					        }
+					    }
+					}
+					, { field: 'DAILINGQUSHICHANG', title: '@Html.DisplayNameFor(model => model.DAILINGQUSHICHANG)', width: 100 }
+					, { field: 'JIANDINGSHICHANG', title: '@Html.DisplayNameFor(model => model.JIANDINGSHICHANG)', width: 100 }
+					, { field: 'SHENHESHICHANG', title: '@Html.DisplayNameFor(model => model.SHENHESHICHANG)', width: 100 }
+					, { field: 'PIZHUNSHICHANG', title: '@Html.DisplayNameFor(model => model.PIZHUNSHICHANG)', width: 100 }
+					, { field: 'ZONGSHICHANG', title: '@Html.DisplayNameFor(model => model.ZONGSHICHANG)', width: 100 }
+					, { field: 'BEIZHU', title: '@Html.DisplayNameFor(model => model.BEIZHU)', width: 100 }
                 ]],
             pagination: true,
             rownumbers: true

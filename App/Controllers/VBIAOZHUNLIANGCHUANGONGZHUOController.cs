@@ -91,7 +91,7 @@ namespace Langben.App.Controllers
                     ,
                     BAOGAOYUEDU = s.BAOGAOSHENPITONGGUORIQI == null ? "0" : Convert.ToDateTime(s.BAOGAOSHENPITONGGUORIQI).Month.ToString()
                     ,
-                    GONHZUOSHIJIAN = Convert.ToInt32(s.JIANDINGSHIJIAN == null ? "0" : ((Convert.ToDateTime(s.JIANDINGRIQI) - Convert.ToDateTime(s.SONGJIANRIQI)).Days + 1).ToString())+Convert.ToInt32(s.BAOGAOSHENPITONGGUORIQI == null ? "0" : ((Convert.ToDateTime(s.BAOGAOSHENPITONGGUORIQI) - Convert.ToDateTime(s.JIANDINGRIQI)).Days + 1).ToString())
+                    GONHZUOSHIJIAN = (s.JIANDINGSHIJIAN == null ? "0" : ((Convert.ToDateTime(s.JIANDINGRIQI) - Convert.ToDateTime(s.SONGJIANRIQI)).Days + 1).ToString())!="0"&&(s.BAOGAOSHENPITONGGUORIQI == null ? "0" : ((Convert.ToDateTime(s.BAOGAOSHENPITONGGUORIQI) - Convert.ToDateTime(s.JIANDINGRIQI)).Days + 1).ToString())!="0"? Convert.ToInt32(s.JIANDINGSHIJIAN == null ? "0" : ((Convert.ToDateTime(s.JIANDINGRIQI) - Convert.ToDateTime(s.SONGJIANRIQI)).Days + 1).ToString())+Convert.ToInt32(s.BAOGAOSHENPITONGGUORIQI == null ? "0" : ((Convert.ToDateTime(s.BAOGAOSHENPITONGGUORIQI) - Convert.ToDateTime(s.JIANDINGRIQI)).Days + 1).ToString()):0
                     ,
                     ZONGSHIJIAN = s.BAOGAOSHENPITONGGUORIQI == null ? "0" : ((Convert.ToDateTime(s.BAOGAOSHENPITONGGUORIQI) - Convert.ToDateTime(s.SONGJIANRIQI)).Days + 1).ToString()
 
