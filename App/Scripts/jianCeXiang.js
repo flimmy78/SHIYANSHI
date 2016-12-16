@@ -258,7 +258,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
 
     //不确定度
     var JiSuanBuQueDingDuType= GetJiSuanBuQueDingDuType(name);
-    debugger;
+  
     if (JiSuanBuQueDingDuType != null && JiSuanBuQueDingDuType.trim()!="") {       
 
         htmlString.push("<input type='hidden' name='" + BuQueDingDuZhiName + "' id='" + BuQueDingDuZhiId + "' value=''/>");
