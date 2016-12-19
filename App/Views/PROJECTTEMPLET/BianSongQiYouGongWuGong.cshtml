@@ -112,7 +112,7 @@
     <!--表体-->
     <tr>
         <td align="center" width="100">
-            @((ViewBag.canshu == "有功功率") ? "P" : "Q")
+            @((ViewBag.canshu == "有功功率") ? "P" : "In")
         </td>
         <td align="center" width="100">
             <input name="DengJi" type="text" class="my-textbox tr" value="1.0" style="width:70px" onblur="JS1(this)" id="DengJi_t_1_1">
@@ -123,7 +123,7 @@
                 <tbody class="myliangcheng_1">
                     <!--插入行的位置-->
                     <tr rowindex="1">
-                        <td rowspan="1" align="center" width="120"> <input class="my-textbox input-width" value="100%" id="OUTPUTVALUE_t_1_1" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "Q")</td>
+                        <td rowspan="1" align="center" width="120"> <input class="my-textbox input-width" value="100%" id="OUTPUTVALUE_t_1_1" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
                         <td width="50" rowspan="96" align="center">
                             <input type="text" class="my-textbox tr" value="1.0" style="width:44px" name="ZHONGJIANZHI" id="ZHONGJIANZHI_t_1_1">
                         </td>
@@ -135,7 +135,7 @@
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="2">
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="80%" id="OUTPUTVALUE_t_1_2" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "Q")</td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="80%" id="OUTPUTVALUE_t_1_2" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_2" name="READVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_2" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_2" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
@@ -143,7 +143,7 @@
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_2" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="3">
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="60%" id="OUTPUTVALUE_t_1_3" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "Q")</td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="60%" id="OUTPUTVALUE_t_1_3" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_3" name="READVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_3" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_3" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
@@ -151,7 +151,7 @@
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_3" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="4">
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="40%" id="OUTPUTVALUE_t_1_4" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "Q")</td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="40%" id="OUTPUTVALUE_t_1_4" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_4" name="READVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_4" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_4" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
@@ -159,7 +159,7 @@
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_4" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="5">
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="20%" id="OUTPUTVALUE_t_1_5" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "Q")</td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="20%" id="OUTPUTVALUE_t_1_5" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_5" name="READVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_5" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_5" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
@@ -167,7 +167,7 @@
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_5" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
                     </tr>
                     <tr rowindex="6">
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0%" id="OUTPUTVALUE_t_1_6" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "Q")</td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0%" id="OUTPUTVALUE_t_1_6" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_6" name="READVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_6" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_6" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
@@ -190,7 +190,7 @@
                 <tbody class="myliangcheng_2">
                     <!--插入行的位置-->
                     <tr rowindex="1">
-                        <td rowspan="1" align="center" width="120"> <input class="my-textbox input-width" value="100%" id="OUTPUTVALUE_t_2_1" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "Q")</td>
+                        <td rowspan="1" align="center" width="120"> <input class="my-textbox input-width" value="100%" id="OUTPUTVALUE_t_2_1" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
                         <td width="50" rowspan="96" align="center"> 
                             <input type="text" class="my-textbox tr" value="0.5L" style="width:44px" name="ZHONGJIANZHI" id="ZHONGJIANZHI_t_2_1">
 
@@ -204,7 +204,7 @@
                     </tr>
 
                     <tr rowindex="2">
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0%" id="OUTPUTVALUE_t_2_2" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "Q")</td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0%" id="OUTPUTVALUE_t_2_2" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_2_2" name="READVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_2_2" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_2_2" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
@@ -227,7 +227,7 @@
                 <tbody class="myliangcheng_3">
                     <!--插入行的位置-->
                     <tr rowindex="1">
-                        <td rowspan="1" align="center" width="120"> <input class="my-textbox input-width" value="100%" id="OUTPUTVALUE_t_3_1" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "Q")</td>
+                        <td rowspan="1" align="center" width="120"> <input class="my-textbox input-width" value="100%" id="OUTPUTVALUE_t_3_1" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
                         <td width="50" rowspan="96" align="center">
                             <input type="text" class="my-textbox tr" value="0.5C" style="width:44px" name="ZHONGJIANZHI" id="ZHONGJIANZHI_t_3_1">
  
@@ -241,7 +241,7 @@
                     </tr>
 
                     <tr rowindex="2">
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0%" id="OUTPUTVALUE_t_3_2" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "Q")</td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0%" id="OUTPUTVALUE_t_3_2" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_3_2" name="READVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_3_2" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_3_2" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
@@ -297,7 +297,7 @@
                 var rowspan = 1; //合并单元格行数
 
                 var txtVal = "";//(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
-                var unit = '@((ViewBag.canshu == "有功功率") ? "Pn" : "Q")';//在输入框后面的单位
+                var unit = '@((ViewBag.canshu == "有功功率") ? "Pn" : "In")';//在输入框后面的单位
 
 
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
