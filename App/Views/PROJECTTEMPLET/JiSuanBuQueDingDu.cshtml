@@ -163,7 +163,7 @@ else
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="6"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addRow(this)">增加</a> <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="">选择</a><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'" onclick="resetRow()">重置</a></td>
+                            <td colspan="6"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addRow(this)">增加</a> <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="xunzhe()">选择</a><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'" onclick="resetRow()">重置</a></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -222,13 +222,13 @@ else
         if (hideHtml.trim() != "") {
             $("#divHtml").html("");
             $("#divHtml").append(hideHtml);
-        }    
+        }
     });
 
     //添加评定点
     var linkButton = {
         add: function (obj) {
-            var newRow = " <ul class=\"clear mb10\">" + $(obj).parents('div ul').html() + "</ul>";          
+            var newRow = " <ul class=\"clear mb10\">" + $(obj).parents('div ul').html() + "</ul>";
 
             var parDiv = $(obj).parents('div ul').parent()
             var newobj = $(parDiv).append(newRow);
@@ -241,7 +241,7 @@ else
                     return false;
                 }
 
-            });                
+            });
             $(newobj).find('ul:last').children().find('input').each(function () {
                 if (this.name != "") {
                     var id = this.name + "_" + rowNum;
@@ -268,14 +268,14 @@ else
                 alert('就剩一行了你还删除呀？');
         }
     }
-    //B类增加行    
-    var addRow = function (obj) {        
-        var trNew = $('#tongdao_B tbody').find('tr:last').clone();          
+    //B类增加行
+    var addRow = function (obj) {
+        var trNew = $('#tongdao_B tbody').find('tr:last').clone();
         $(trNew).children().eq(5).find('input').eq(0).val("");
         $(trNew).children().find('input').each(function () {
             if (this.name != "" && this.id != "" && this.id.lastIndexOf("_") >= 0) {
                 var id = this.name + "_" + (parseInt(this.id.substring(this.id.lastIndexOf("_")+1)) + 1);
-                $(this).attr('id', id);               
+                $(this).attr('id', id);
             }
         });
         $(trNew).children().find('span').each(function () {
@@ -284,12 +284,16 @@ else
                 var num=parseInt(id.substring(id.lastIndexOf("_")+1)) + 1;
                 id = id.substring(0, id.lastIndexOf("_")+1) + num;
                 $(this).attr('id', id);
-                $(this).html( "u"+num);               
+                $(this).html( "u"+num);
             }
         });
-        
+
 
         $("#tongdao_B tbody").append(trNew);
+    }
+    //B类选择
+    function xunzhe() {
+        showModalMany('METERING_STANDARD_DEVICEID', '../../METERING_STANDARD_DEVICE/IndexSef/@ViewBag.UNDERTAKE_LABORATORY_NAME');
     }
     //清空增加的行
     function resetRow() {
@@ -401,9 +405,9 @@ else
         $("#txtvalueD,#txtValueE").val(parseFloat(ddlValue) * parseFloat(valueC))
     }
     //由于html无法获取value，重新给outerHTML赋值
-    function SetAllControlHtml() {       
+    function SetAllControlHtml() {
 
-        $("input[type='text']").each(function () {          
+        $("input[type='text']").each(function () {
 
             //除了隐藏模板中的输入框，其他所有的输入框123
             if (this.id != "") {
@@ -416,7 +420,7 @@ else
         $("select").each(function () {
             //除了隐藏模板中的下拉框，其他所有的下拉框
             if (this.id != "") {
-                var checkText = $(this).find("option:selected").text();  //获取Select选择的Text           
+                var checkText = $(this).find("option:selected").text();  //获取Select选择的Text
                 $(this).find("option[value='" + checkText + "']").attr("selected", true);
             }
 
@@ -428,16 +432,16 @@ else
         SetAllControlHtml();
         var ID = $("#hideID").val();//控件ID
         var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();//预备方案ID
-        var RULEID = $("#hideRULEID").val();//检测项ID    
-        var URL = $("#hideURL").val();//不确定计算存储地址     
+        var RULEID = $("#hideRULEID").val();//检测项ID
+        var URL = $("#hideURL").val();//不确定计算存储地址
         var HTMLVALUE = encodeURI($("#divHtml").html());
 
         //获取空对象用于保存添加的信息
         $.ajax({
             type: 'post', //使用post方法访问后台
             dataType: "json", //返回json格式的数据
-            url: '/PROJECTTEMPLET/JiSuanBuQueDingDuSave', //要访问的后台地址      
-            contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式        
+            url: '/PROJECTTEMPLET/JiSuanBuQueDingDuSave', //要访问的后台地址
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
             data: { 'HTMLVALUE': HTMLVALUE,"URL":URL },
             beforeSend: function () {
                 //InitAlertJS();
@@ -445,7 +449,7 @@ else
             complete: function () {
             }, //AJAX请求完成时隐藏loading提示
 
-            success: function (res) {//msg为返回的数据，在这里做数据绑定               
+            success: function (res) {//msg为返回的数据，在这里做数据绑定
                 if (res.Code == 1) {
                     var ValueE = $("#txtValueE").val();
                     var returnVale = ValueE + "&" + res.Message;
@@ -460,8 +464,8 @@ else
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
             }
-        });       
-        
+        });
+
     }
 
 </script>

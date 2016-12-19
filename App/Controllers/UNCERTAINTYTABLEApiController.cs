@@ -301,7 +301,7 @@ namespace Langben.App.Controllers
                     ERRORLIMITS += it.ERRORLIMITS + it.ERRORLIMITUNIT + ",";
                     THEERRODISTRIBUTION += it.THEERRODISTRIBUTION + ",";
                     KVALE += it.KVALE + ",";
-                    UNCERTAINTYUI += it.UNCERTAINTYUI + ",";
+                    UNCERTAINTYUI += it.UNCERTAINTYUI+it.UNCERTAINTYUIUNIT + ",";
                     GROUPS = it.GROUPS;
                 }
                 alldata.Add(new UNCERTAINTYTABLE()

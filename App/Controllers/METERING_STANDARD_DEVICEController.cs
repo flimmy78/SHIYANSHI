@@ -162,7 +162,8 @@ namespace Langben.App.Controllers
                                 NOTE = al.NOTE,
                                 METERING_STANDARD_DEVICEID = al.METERING_STANDARD_DEVICEID,
                                 GROUPS = al.GROUPS,
-                                UNCERTAINTYUI = al.UNCERTAINTYUI
+                                UNCERTAINTYUI = al.UNCERTAINTYUI,
+                                UNCERTAINTYUIUNIT=al.UNCERTAINTYUIUNIT
                             };
                             msdshow.UNCERTAINTYTABLEShow.Add(unadd);
                         }                                                  
