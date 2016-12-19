@@ -46,6 +46,7 @@ namespace Langben.DAL
         public Nullable<decimal> GROUPS { get; set; }
         public string UNCERTAINTYUI { get; set; }
         public string CATEGORY { get; set; }
+        public string UNCERTAINTYUIUNIT { get; set; }
     
         public virtual METERING_STANDARD_DEVICE METERING_STANDARD_DEVICE { get; set; }
     }

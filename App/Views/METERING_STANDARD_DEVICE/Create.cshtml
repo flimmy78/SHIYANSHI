@@ -177,6 +177,14 @@
                             <input class="my-textbox" value="" name="UNCERTAINTYUI">
                         </li>
                         <li class="fl mr10">
+                            不确定度ui单位：
+                            <select class="my-combobox" name="UNCERTAINTYUIUNIT">
+                                <option value="">请选择</option>
+                                <option value="V">V</option>
+                            </select>
+
+                        </li>
+                        <li class="fl mr10">
                             备注：
                             <input class="my-textbox" value="" name="NOTE">
                         </li>
@@ -556,11 +564,12 @@
                 var THEERRODISTRIBUTION = $(this).find("li :selected").eq(2).val();//误差分布状况
                 var KVALE = $(this).find("li :selected").eq(3).val();//K
                 var UNCERTAINTYUI = $(this).find("li :input").eq(6).val();//不确定度ui
+                var UNCERTAINTYUIUNIT = $(this).find("li :selected").eq(4).val();//不确定度ui单位
                 var NOTE = $(this).find("li :input").eq(7).val();//备注
                 var CATEGORY = "UA";
                 if (ASSESSMENTITEM != null || ERRORSOURCES != null || THEUNIT != null || ERRORLIMITUNIT != null || THEERRODISTRIBUTION != null || KVALE != null || UNCERTAINTYUI != null || NOTE != null)
 
-                    myArray5.push({ METERING_STANDARD_DEVICEID: "@ViewBag.METERING_STANDARD_DEVICEID", ASSESSMENTITEM: ASSESSMENTITEM, ERRORSOURCES: ERRORSOURCES, ERRORLIMITS: ERRORLIMITS, ERRORLIMITUNIT: ERRORLIMITUNIT, THEERRODISTRIBUTION: THEERRODISTRIBUTION, KVALE: KVALE, UNCERTAINTYUI: UNCERTAINTYUI, NOTE: NOTE, CATEGORY: CATEGORY });
+                    myArray5.push({ METERING_STANDARD_DEVICEID: "@ViewBag.METERING_STANDARD_DEVICEID", ASSESSMENTITEM: ASSESSMENTITEM, ERRORSOURCES: ERRORSOURCES, ERRORLIMITS: ERRORLIMITS, ERRORLIMITUNIT: ERRORLIMITUNIT, THEERRODISTRIBUTION: THEERRODISTRIBUTION, KVALE: KVALE, UNCERTAINTYUI: UNCERTAINTYUI, NOTE: NOTE, CATEGORY: CATEGORY, UNCERTAINTYUIUNIT: UNCERTAINTYUIUNIT });
             })
             //*****************************************************
             if (myArray5 != null)

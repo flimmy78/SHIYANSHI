@@ -671,6 +671,26 @@
                                 不确定度ui：
                                 <input class="my-textbox" value="@item.UNCERTAINTYUI" name="UNCERTAINTYUI">
                             </li>
+                            @if (item.UNCERTAINTYUIUNIT=="V")
+                            {
+                                <li class="fl mr10">
+                                    不确定度ui单位：
+                                    <select class="my-combobox" name="UNCERTAINTYUIUNIT">
+                                        <option value="">请选择</option>
+                                        <option selected="selected" value="V">V</option>
+                                    </select>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="fl mr10">
+                                    不确定度ui单位：
+                                    <select class="my-combobox" name="UNCERTAINTYUIUNIT">
+                                        <option value="">请选择</option>
+                                        <option value="V">V</option>
+                                    </select>
+                                </li>
+                            }
                             <li class="fl mr10">
                                 备注：
                                 <input class="my-textbox" value="@item.NOTE" name="NOTE">
