@@ -183,6 +183,7 @@
     <Compile Include="UNCERTAINTYPARAMETERMANAGEMENTBLL.cs" />
     <Compile Include="COMPANYBLL.cs" />
     <Compile Include="VBIAOZHUNLIANGCHUANGONGZHUOBLL.cs" />
+    <Compile Include="VGONGZUOSHICHANGBLL.cs" />
     <Compile Include="VJIANDINGRENWUBLL.cs" />
     <Compile Include="VSHENHEBLL.cs" />
     <Compile Include="VSHENPIBLL.cs" />

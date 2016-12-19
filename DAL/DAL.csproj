@@ -454,6 +454,8 @@
     <Compile Include="VGONGZUOSHICHANG.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="VGONGZUOSHICHANGMeta.cs" />
+    <Compile Include="VGONGZUOSHICHANGRepository.cs" />
     <Compile Include="VJIANDINGRENWU.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

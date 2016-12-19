@@ -215,6 +215,8 @@
     <Compile Include="Controllers\ApplianceController.cs" />
     <Compile Include="Controllers\VBIAOZHUNLIANGCHUANGONGZHUOApiController.cs" />
     <Compile Include="Controllers\VBIAOZHUNLIANGCHUANGONGZHUOController.cs" />
+    <Compile Include="Controllers\VGONGZUOSHICHANGApiController.cs" />
+    <Compile Include="Controllers\VGONGZUOSHICHANGController.cs" />
     <Compile Include="Controllers\VSHIYANSHIGONGZUOLIANGController.cs" />
     <Compile Include="Controllers\VXIANGQINGApiController.cs" />
     <Compile Include="Controllers\VChartsController.cs" />
@@ -979,6 +981,7 @@
     <Content Include="Views\Shared\Echart.cshtml" />
     <Content Include="Views\VSHIYANSHIGONGZUOLIANG\ZhengShu.cshtml" />
     <Content Include="Views\VSHIYANSHIGONGZUOLIANG\RenYuan.cshtml" />
+    <Content Include="Views\VGONGZUOSHICHANG\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

@@ -16,9 +16,11 @@ namespace Langben.DAL
     {
         public string ID { get; set; }
         public string WEITUODANWEI { get; set; }
+        public string SUOSHUDANWEI { get; set; }
         public string ZHENGSHUDANWEI { get; set; }
         public string SHOULIDANWEI { get; set; }
         public string QIJUMINGCHENG { get; set; }
+        public string SHENGCHANCHANGJIA { get; set; }
         public string QIJUXINGHAO { get; set; }
         public string QIJUGUIGE { get; set; }
         public string CHUCHANGBIANHAO { get; set; }
@@ -27,10 +29,16 @@ namespace Langben.DAL
         public string SHIYANSHI { get; set; }
         public string JIANDINGXIAOZHUNYUAN { get; set; }
         public string HEYANYUAN { get; set; }
-        public Nullable<System.DateTime> SONGJIANRIQI { get; set; }
+        public Nullable<System.DateTime> WEITUORIQI { get; set; }
         public Nullable<System.DateTime> SHIYANSHIJIESHOUSHIJIAN { get; set; }
+        public Nullable<System.DateTime> JIANDINGWANCHENGRIQI { get; set; }
         public Nullable<System.DateTime> SHENHERIQI { get; set; }
-        public Nullable<System.DateTime> SHENGPIRIQI { get; set; }
+        public Nullable<System.DateTime> PIZHUNRIQI { get; set; }
+        public string DAILINGQUSHICHANG { get; set; }
+        public string JIANDINGSHICHANG { get; set; }
+        public string SHENHESHICHANG { get; set; }
+        public string PIZHUNSHICHANG { get; set; }
+        public string ZONGSHICHANG { get; set; }
         public string BEIZHU { get; set; }
     }
 }
