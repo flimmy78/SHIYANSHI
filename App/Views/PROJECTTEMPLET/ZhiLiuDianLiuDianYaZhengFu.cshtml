@@ -108,8 +108,6 @@
 
 
                 //标准值 增加下拉框单位A
-
-
                 htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "@((ViewBag.canshu == "相对误差") ? "resetBiaoZhunZhi" : "jueDuiWuChaBiaoZhunZhi")"));
 
                 //显示值
@@ -138,19 +136,19 @@
         //计算标准值 绝对误差
         function jueDuiWuChaBiaoZhunZhi(obj) {
 
-            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
-            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHIFU", "RELATIVEERRORFU");
+            jueDuiWuCha(obj, "SHIJISHUCHUZHI", "READVALUE", "RELATIVEERROR");
+            jueDuiWuCha(obj, "SHIJISHUCHUZHIFU", "READVALUE", "RELATIVEERRORFU");
         }
         //计算显示值  绝对误差
         function jueDuiWuChaXianShiZhi(obj) {
 
-            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+            jueDuiWuCha(obj, "SHIJISHUCHUZHI", "READVALUE", "RELATIVEERROR");
         }
 
         //计算显示值  绝对误差
         function jueDuiWuChaXianShiZhiFu(obj) {
 
-            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHIFU", "RELATIVEERRORFU");
+            jueDuiWuCha(obj, "SHIJISHUCHUZHIFU", "READVALUE", "RELATIVEERRORFU");
 
         }
 
@@ -158,19 +156,19 @@
         //计算标准值
         function resetBiaoZhunZhi(obj) {
 
-            xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
-            xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHIFU", "RELATIVEERRORFU");
+            xiangDuiWuCha(obj, "SHIJISHUCHUZHI", "READVALUE", "RELATIVEERROR");
+            xiangDuiWuCha(obj, "SHIJISHUCHUZHIFU", "READVALUE", "RELATIVEERRORFU");
         }
         //计算显示值
         function resetXianShiZhi(obj) {
 
-            xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+            xiangDuiWuCha(obj, "SHIJISHUCHUZHI", "READVALUE", "RELATIVEERROR");
         }
 
         //计算显示值
         function resetXianShiZhiFu(obj) {
 
-            xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHIFU", "RELATIVEERRORFU");
+            xiangDuiWuCha(obj, "SHIJISHUCHUZHIFU", "READVALUE", "RELATIVEERRORFU");
 
         }
 
