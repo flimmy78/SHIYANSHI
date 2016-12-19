@@ -982,6 +982,7 @@
     <Content Include="Views\VSHIYANSHIGONGZUOLIANG\ZhengShu.cshtml" />
     <Content Include="Views\VSHIYANSHIGONGZUOLIANG\RenYuan.cshtml" />
     <Content Include="Views\VGONGZUOSHICHANG\Index.cshtml" />
+    <Content Include="Views\METERING_STANDARD_DEVICE\IndexUA.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
