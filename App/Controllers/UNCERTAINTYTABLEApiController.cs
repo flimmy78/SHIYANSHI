@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-//using System.Web.Mvc;
+using System.Web.Mvc;
 using System.Text;
 using System.EnterpriseServices;
 using System.Configuration;
@@ -111,7 +111,7 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
-        [HttpPost]
+        [System.Web.Http.HttpPost]
         public Common.ClientResult.Result InstUAUB([FromBody]METERING_STANDARD_DEVICE entity)
         {
 
@@ -184,7 +184,7 @@ namespace Langben.App.Controllers
             {   //数据校验
 
                 string currentPerson = GetCurrentPerson();
-                
+
 
                 foreach (var item in entity.UNCERTAINTYTABLE)
                 {
@@ -301,7 +301,7 @@ namespace Langben.App.Controllers
                     ERRORLIMITS += it.ERRORLIMITS + it.ERRORLIMITUNIT + ",";
                     THEERRODISTRIBUTION += it.THEERRODISTRIBUTION + ",";
                     KVALE += it.KVALE + ",";
-                    UNCERTAINTYUI += it.UNCERTAINTYUI+it.UNCERTAINTYUIUNIT + ",";
+                    UNCERTAINTYUI += it.UNCERTAINTYUI + it.UNCERTAINTYUIUNIT + ",";
                     GROUPS = it.GROUPS;
                 }
                 alldata.Add(new UNCERTAINTYTABLE()
@@ -313,7 +313,7 @@ namespace Langben.App.Controllers
                     KVALE = KVALE,
                     UNCERTAINTYUI = UNCERTAINTYUI,
                     GROUPS = GROUPS,
-                    CATEGORY= item
+                    CATEGORY = item
 
                 });
             }
@@ -331,7 +331,7 @@ namespace Langben.App.Controllers
                     UNCERTAINTYUI = s.UNCERTAINTYUI.TrimEnd(','),
                     GROUPS = s.GROUPS,
                     METERING_STANDARD_DEVICEID = id,
-                    CATEGORY=s.CATEGORY
+                    CATEGORY = s.CATEGORY
                 })
             };
             return show;
@@ -355,7 +355,7 @@ namespace Langben.App.Controllers
             //分组
             //var data = (from f in msd
             //            select f.CATEGORY).Distinct();
-            var data = msd.Where(m => m.CATEGORY == "UB").Select(m=>m.CATEGORY).Distinct();
+            var data = msd.Where(m => m.CATEGORY == "UB").Select(m => m.CATEGORY).Distinct();
 
 
             List<UNCERTAINTYTABLE> alldata = new List<UNCERTAINTYTABLE>();
@@ -385,7 +385,7 @@ namespace Langben.App.Controllers
                     INDEX1 = INDEX1,
                     INDEX2 = INDEX2,
                     GROUPS = GROUPS,
-                    CATEGORY=item
+                    CATEGORY = item
                 });
             }
 
@@ -398,13 +398,56 @@ namespace Langben.App.Controllers
                     THERANGESCOPE = s.THERANGESCOPE.TrimEnd(','),
                     THEFREQUENCY = s.THEFREQUENCY.TrimEnd(','),
                     INDEX1 = s.INDEX1.TrimEnd(','),
-                    INDEX2 = s.INDEX2.TrimEnd(','),                   
+                    INDEX2 = s.INDEX2.TrimEnd(','),
                     GROUPS = s.GROUPS,
                     METERING_STANDARD_DEVICEID = id,
-                    CATEGORY=s.CATEGORY
+                    CATEGORY = s.CATEGORY
                 })
             };
             return show;
+        }
+
+        /// <summary>
+        ///获取不确定度数据(不确定度的选择功能)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [System.Web.Mvc.ValidateInput(false)]      
+        public List<UNCERTAINTYTABLEShow> Getdata(string id)
+        {
+            List<UNCERTAINTYTABLEShow> unceshow = new List<UNCERTAINTYTABLEShow>();
+            UNCERTAINTYTABLEShow uncele;
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                string[] shu = id.Split('^');
+                foreach (var item in shu)
+                {
+                    if (!string.IsNullOrWhiteSpace(item))
+                    {
+                        List<UNCERTAINTYTABLE> uncelist = m_BLL.GetByRefMETERING_STANDARD_DEVICEID(item.Split('$')[0]);
+                        string CATEGORY = item.Split('$')[1];
+                        string b = item.Split('$')[2].ToString().Split('~')[0].ToString();
+                        int GROUPS = Convert.ToInt32(b);
+                        var data = uncelist.Where(m => m.CATEGORY == CATEGORY && m.GROUPS == GROUPS);
+                        foreach (var a in data)
+                        {
+                            uncele = new UNCERTAINTYTABLEShow()
+                            {
+                                ASSESSMENTITEM = a.ASSESSMENTITEM,
+                                ERRORSOURCES = a.ERRORSOURCES,
+                                ERRORLIMITS = a.ERRORLIMITS,
+                                ERRORLIMITUNIT = a.ERRORLIMITUNIT,
+                                THEERRODISTRIBUTION = a.THEERRODISTRIBUTION,
+                                KVALE = a.KVALE,
+                                UNCERTAINTYUI = a.UNCERTAINTYUI,
+                                UNCERTAINTYUIUNIT = a.UNCERTAINTYUIUNIT
+                            };
+                            unceshow.Add(uncele);
+                        }
+                    }
+                }
+            }
+            return unceshow;
         }
         IBLL.IUNCERTAINTYTABLEBLL m_BLL;
 

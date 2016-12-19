@@ -126,7 +126,7 @@ namespace Langben.App.Controllers
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
             {
-                string currentPerson = GetCurrentPerson();             
+                string currentPerson = GetCurrentPerson();
                 string returnValue = string.Empty;
                 if (!string.IsNullOrWhiteSpace(entity.ID))
                 {
@@ -186,7 +186,7 @@ namespace Langben.App.Controllers
                         result.Message = Suggestion.InsertFail + returnValue;
                         return result; //提示插入失败
                     }
-                }       
+                }
             }
             result.Code = Common.ClientCode.FindNull;
             result.Message = Suggestion.InsertFail + "，请核对输入的数据的格式"; //提示输入的数据的格式不对 
@@ -414,20 +414,79 @@ namespace Langben.App.Controllers
             return show;
         }
 
+        /// <summary>
+        /// 标准器的选择查询
+        /// </summary>
+        /// <param name="id">预备方案id</param>
+        /// <returns></returns>
+        public METERING_STANDARD_DEVICEShow GetPREPARE_SCHEME(string id)
+        {
+            METERING_STANDARD_DEVICEShow msdshow = new METERING_STANDARD_DEVICEShow();
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                List<STANDARDCHOICE> stalist = m_BLL4.GetByRefPREPARE_SCHEMEID(id);
+                foreach (var item in stalist)
+                {
+                    if (!string.IsNullOrWhiteSpace(item.METERING_STANDARD_DEVICEID))
+                    {
+                        METERING_STANDARD_DEVICE msd = m_BLL.GetById(item.METERING_STANDARD_DEVICEID);
+                        var data = msd.ALLOWABLE_ERROR.Where(m => m.CATEGORY == "AA" && m.GROUPS ==Convert.ToInt32(item.GROUPS));
+                        foreach (var al in data)
+                        {
+                            var alladd = new ALLOWABLE_ERRORShow()
+                            {
+                                ID = al.ID,
+                                THEACCURACYLEVEL = al.THEACCURACYLEVEL,
+                                THEUNCERTAINTYVALUEK = al.THEUNCERTAINTYVALUEK,
+                                THEUNCERTAINTYNDEXL = al.THEUNCERTAINTYNDEXL,
+                                THEUNCERTAINTYVALUE = al.THEUNCERTAINTYVALUE,
+                                THEUNCERTAINTY = al.THEUNCERTAINTY,
+                                MAXVALUE = al.MAXVALUE,
+                                MAXCATEGORIES = al.MAXCATEGORIES,
+                                METERING_STANDARD_DEVICEID = al.METERING_STANDARD_DEVICEID,
+                                GROUPS = al.GROUPS
+                            };
+                            msdshow.ALLOWABLE_ERRORShow.Add(alladd);
+                        }
+                        var data2 = msd.METERING_STANDARD_DEVICE_CHECK.Where(m => m.CATEGORY == "AA" && m.GROUPS == Convert.ToInt32(item.GROUPS));
+                        foreach (var ms in data2)
+                        {
+                            var msdcadd = new METERING_STANDARD_DEVICE_CHECKShow()
+                            {
+                                ID = ms.ID,
+                                CERTIFICATEUNIT = ms.CERTIFICATEUNIT,
+                                CERTIFICATE_NUM = ms.CERTIFICATE_NUM,
+                                CHECK_DATE = ms.CHECK_DATE,
+                                VALID_TO = ms.VALID_TO,
+                                METERING_STANDARD_DEVICEID = ms.METERING_STANDARD_DEVICEID,
+                                GROUPS = ms.GROUPS
+                            };
+                            msdshow.METERING_STANDARD_DEVICE_CHECKShow.Add(msdcadd);
+                        }
+                    }
+                }
+            }
+
+            return msdshow;
+        }
+
+
         IBLL.IMETERING_STANDARD_DEVICEBLL m_BLL;
         IBLL.IALLOWABLE_ERRORBLL m_BLL2;
         IBLL.IMETERING_STANDARD_DEVICE_CHECKBLL m_BLL3;
+        IBLL.ISTANDARDCHOICEBLL m_BLL4;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public METERING_STANDARD_DEVICEApiController()
-            : this(new METERING_STANDARD_DEVICEBLL(), new ALLOWABLE_ERRORBLL(), new METERING_STANDARD_DEVICE_CHECKBLL()) { }
+            : this(new METERING_STANDARD_DEVICEBLL(), new ALLOWABLE_ERRORBLL(), new METERING_STANDARD_DEVICE_CHECKBLL(), new STANDARDCHOICEBLL()) { }
 
-        public METERING_STANDARD_DEVICEApiController(METERING_STANDARD_DEVICEBLL bll, ALLOWABLE_ERRORBLL bll2, METERING_STANDARD_DEVICE_CHECKBLL bll3)
+        public METERING_STANDARD_DEVICEApiController(METERING_STANDARD_DEVICEBLL bll, ALLOWABLE_ERRORBLL bll2, METERING_STANDARD_DEVICE_CHECKBLL bll3, STANDARDCHOICEBLL bll4)
         {
             m_BLL = bll;
             m_BLL2 = bll2;
             m_BLL3 = bll3;
+            m_BLL4 = bll4;
         }
 
     }

@@ -91,11 +91,11 @@
 
         var arr = [];
         for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].ID);
+            arr.push(rows[i].METERING_STANDARD_DEVICEID+"$"+rows[i].CATEGORY + "$" + rows[i].GROUPS);
         }
         arr.push("^");
         for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].INDEX2UNIT);
+            arr.push(rows[i].METERING_STANDARD_DEVICEID);
         }
         //主键列和显示列之间用 ^ 分割   每一项用 , 分割
         if (arr.length > 0) {//一条数据和多于一条
