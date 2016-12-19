@@ -235,7 +235,10 @@
         }
         //清空增加的行
         function resetRow() {
-            $("#tongdao_B tbody tr:not(:first)").empty();
+            //$("#tongdao_B tbody tr:not(:first)").empty();
+            $("#tongdao_B tbody tr:not(:first)").remove();
+            idx = 1;
+
         }
         function getData() {
             var data = "";
