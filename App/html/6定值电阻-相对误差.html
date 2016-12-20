@@ -2,9 +2,9 @@
 
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width" />
-<title>定值电阻-相对误差</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>定值电阻-相对误差</title>
     <link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
     <link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
     <link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
@@ -16,95 +16,102 @@
     <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
     <script src="/Scripts/jquery.validate.js"></script>
     <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/Scripts/jianCeXiang.js"></script>
 </head>
-<body class="easyui-layout">  
-<input type="hidden" id="rowindex" value="1" />
-<div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
-  <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
-    <table>
-      <tr>
-        <td><!--<a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a> -->  <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" >保存检测项</a></td>
-      </tr>
-    </table>
-  </div>
-</div>
-<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
-  <div class="mt10"> <span>定值电阻-相对误差</span> </div>
-  <div class="mt10" id="tongdao">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_dy_1">
-      <thead>
-        
-        <tr>
-          <th width="140" align="center">标准值</th>
-          <th width="140" align="center">实际值</th>
-          <th width="120" align="center">误差(%)</th>
-           <th width="120" align="center">允许误差(%)</th>
-            <th width="120" align="center">校准结果的不确定度<br>U(k={0})</th>
-        </tr>
-      </thead>
-      <tbody id="tbody_1">
-        <!--示例 可删 -->
-        <tr>
-          <td align="center"><input class="my-textbox input-width" value="" type="text" name="input" id="input">
-            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="changeValue(this)" >
-              <option value="Ω" selected>Ω</option>
-              <option value="TΩ">TΩ</option>
-              <option value="GΩ">GΩ</option>
-              <option value="MΩ">MΩ</option>
-              <option value="kΩ">kΩ</option>
-              <option value="mΩ">mΩ</option>
-              <option value="μΩ">μΩ</option>
-            </select></td>
-          <td align="center"><input class="my-textbox input-width" value="" type="text" name="input" id="input">
-            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="changeValue(this)" >
-              <option value="Ω" selected>Ω</option>
-              <option value="TΩ">TΩ</option>
-              <option value="GΩ">GΩ</option>
-              <option value="MΩ">MΩ</option>
-              <option value="kΩ">kΩ</option>
-              <option value="mΩ">mΩ</option>
-              <option value="μΩ">μΩ</option>
-            </select></td>
-          <td align="center"><input name="NUMBER" id="" type="text" class="my-textbox tc " style="width:96%" value="" /></td>
-          <td align="center">± 
-            <select class="my-combobox" name="state_1_2" id="state_1_" onchange="changeValue(this)" >
-              <option value="5" selected>5</option>
-              <option value="2">2</option>
-              <option value="1">1</option>
-              <option value="0.5">0.5</option>
-              <option value="0.2">0.2</option>
-              <option value="0.1">0.1</option>
-           
-          </select></td>
-          <td align="center"><input name="NUMBER" id="" type="text" class="my-textbox tc " style="width:96%" value="" /></td>
-        </tr>
-        
-        <!--/示例可删 -->
-      </tbody>
-      <tr>
-        <td colspan="5" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" ">增加空行</a></td>
-      </tr>
-      
-      
-      
-    </table>
-  </div>
-  <div class="mt10">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
-     <tr>
-        <th width="50" >注：</th>
-        <td colspan="7"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%" value=""></td>
-      </tr>
-      <tr>
-        <th>结论：</th>
-        <td colspan="7"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%"></td>
-      </tr>
-    </table>
-  </div>
-  
-</div>
+<body class="easyui-layout">
+    <input type="hidden" id="rowindex" value="1" />
+    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+            <table>
+                <tr>
+                    <td><!--<a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a> -->  <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'">保存检测项</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+        <div class="mt10"> <span>定值电阻-相对误差</span> </div>
+        <div class="mt10" id="tongdao">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_dy_1">
+                <thead>
 
- <!--增加量程弹层-->
+                    <tr>
+                        <th width="140" align="center">标准值</th>
+                        <th width="140" align="center">实际值</th>
+                        <th width="120" align="center">误差(%)</th>
+                        <th width="120" align="center">允许误差(%)</th>
+                        <th width="120" align="center">校准结果的不确定度<br>U(k={0})</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_1">
+                    <!--示例 可删 -->
+                    <tr>
+                        <td align="center">
+                            <input class="my-textbox input-width" value="" type="text" name="input" id="input" onblur="tongdao.wucha(this)">
+                            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" >
+                                <option value="Ω" selected>Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                        </td>
+                        <td align="center">
+                            <input class="my-textbox input-width" value="" type="text" name="input" id="input" onblur="tongdao.wucha(this)">
+                            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" >
+                                <option value="Ω" selected>Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                        </td>
+                        <td align="center"><input name="NUMBER" id="" type="text" class="my-textbox tc " style="width:96%" value="" /></td>
+                        <td align="center">
+                            ±
+                            <select class="my-combobox" name="state_1_2" id="state_1_" >
+                                <option value="5" selected>5</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                                <option value="0.5">0.5</option>
+                                <option value="0.2">0.2</option>
+                                <option value="0.1">0.1</option>
+
+                            </select>
+                        </td>
+                        <td align="center"><input name="NUMBER" id="" type="text" class="my-textbox tc " style="width:96%" value="" /></td>
+                    </tr>
+
+                    <!--/示例可删 -->
+                </tbody>
+                <tr>
+                    <td colspan="5" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="tongdao.addRow()">增加空行</a></td>
+                </tr>
+
+
+
+            </table>
+        </div>
+        <div class="mt10">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
+                <tr>
+                    <th width="50">注：</th>
+                    <td colspan="7"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%" value=""></td>
+                </tr>
+                <tr>
+                    <th>结论：</th>
+                    <td colspan="7"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%"></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <!--增加量程弹层-->
     <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
 					text:'确定',
 					iconCls:'icon-ok',
@@ -132,12 +139,66 @@
             </tr>
         </table>
     </div>
-    <!--/增加量程弹层--> 
+    <!--/增加量程弹层-->
 
-<script type="text/javascript" language="javascript">
-      
-       
+    <script type="text/javascript" language="javascript">
+        var tongdao = {
+            addRow: function () {
+                var ddlHtml = " <select class=\"my-combobox\" name=\"state_1_\" id=\"state_UNIT_1_\" >" +
+                             "<option value=\"Ω\" selected>Ω</option>" +
+                             "<option value=\"TΩ\">TΩ</option>" +
+                             "<option value=\"GΩ\">GΩ</option>" +
+                             "<option value=\"MΩ\">MΩ</option>" +
+                             "<option value=\"kΩ\">kΩ</option>" +
+                             "<option value=\"mΩ\">mΩ</option>" +
+                             "<option value=\"μΩ\">μΩ</option>" +
+                           "</select>";
+                var ddlHtml1 = " <select class=\"my-combobox\" name=\"state_1_2\" id=\"state_1_\" >" +
+                                 "<option value=\"5\" selected>5</option>" +
+                                 "<option value=\"2\">2</option>" +
+                                 "<option value=\"1\">1</option>" +
+                                 "<option value=\"0.5\">0.5</option>" +
+                                 "<option value=\"0.2\">0.2</option>" +
+                                 "<option value=\"0.1\">0.1</option>" +
+                             "</select>";
+                var newRow = "<tr>" +
+                             "<td align=\"center\"><input class=\"my-textbox input-width\" value=\"\" type=\"text\" name=\"input\" id=\"input\" onblur=\"tongdao.wucha(this)\">" + ddlHtml+"</td>" +
+                             "<td align=\"center\"><input class=\"my-textbox input-width\" value=\"\" type=\"text\" name=\"input\" id=\"input\" onblur=\"tongdao.wucha(this)\">" + ddlHtml + "</td>" +
+                             "<td align=\"center\"><input name=\"NUMBER\" id=\"\" type=\"text\" class=\"my-textbox tc\" style=\"width:96%\" value=\"\" /></td>" +
+                             "<td align=\"center\">±" + ddlHtml1+"</td>" +
+                             "<td align=\"center\"><input name=\"NUMBER\" id=\"\" type=\"text\" class=\"my-textbox tc\" style=\"width:96%\" value=\"\" /></td>" +
+                    "</tr>"
 
-</script>
+                $("#tbody_1").eq(0).append(newRow);
+            },
+            wucha: function (obj) {
+                //【误差】=(【标准值】-【实际值】)/【实际值】*100%，比允许误差多一位，四舍六入，逢五奇进偶不进
+                var tr = $(obj).parents('tr').eq(0); 
+                var shijizhi = $(tr).children().eq(1).find('input').val();
+                var biaozhunzhi = $(tr).children().eq(0).find('input').val();
+                var arry = this.getYunXuWuChaLength(obj);
+                if (shijizhi != "" && biaozhunzhi != "")
+                    $(tr).children().eq(2).find('input').val(fomatFloat((parseFloat((parseFloat(biaozhunzhi) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100, arry[0].length + 1))))
+            }, getYunXuWuChaLength: function (obj) {
+                var arry = [];
+                var tr = $(obj).parents('tr').eq(0); 
+                var wucha = $(tr).children().eq(2).find('input').val();
+                if (wucha == "") {
+                    arry.push({
+                        length: 0
+                    });
+                }
+                else {
+                    arry.push({
+                        length: wucha.split(".").length == 2 ? wucha.split(".")[1].length : 0
+                    });
+                }
+                return arry;
+
+            }
+        }
+
+
+    </script>
 </body>
 </html>
