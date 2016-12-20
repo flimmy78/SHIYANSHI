@@ -178,7 +178,7 @@
                 var biaozhunzhi = $(tr).children().eq(0).find('input').val();
                 var arry = this.getYunXuWuChaLength(obj);
                 if (shijizhi != "" && biaozhunzhi != "")
-                    $(tr).children().eq(2).find('input').val(fomatFloat((parseFloat((parseFloat(biaozhunzhi) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100, arry[0].length + 1))))
+                    $(tr).children().eq(2).find('input').val(fomatFloat(parseFloat((parseFloat(biaozhunzhi) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100), arry[0].length + 1))
             }, getYunXuWuChaLength: function (obj) {
                 var arry = [];
                 var tr = $(obj).parents('tr').eq(0); 

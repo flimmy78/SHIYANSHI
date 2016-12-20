@@ -286,7 +286,7 @@
                 var biaozhunzhi = $(tr).children().eq((isFirst ? 2 : 1)).find('input').val();
 
                 if (xianshizhi != "" && biaozhunzhi != "")
-                    $(tr).children().eq((isFirst ? 4 : 3)).find('input').val(fomatFloat((parseFloat((parseFloat(xianshizhi) - parseFloat(biaozhunzhi)) / parseFloat(biaozhunzhi) * 100, arry[0].length + 1))))
+                    $(tr).children().eq((isFirst ? 4 : 3)).find('input').val(fomatFloat(parseFloat((parseFloat(xianshizhi) - parseFloat(biaozhunzhi)) / parseFloat(biaozhunzhi) * 100), arry[0].length + 1))
 
             }, getXianZhiLength: function (obj) {
                 var arry = [];
