@@ -203,6 +203,17 @@ namespace Langben.App.Controllers
             return View();
 
         }
+        public ActionResult Testxml(string id)
+        {
+            ReportBLL reportBll = new ReportBLL();
+            string Message = string.Empty;
+
+            reportBll.Testxml(id, out Message);
+
+            ViewBag.IsSuccess = Message;
+            return View();
+
+        }
         /// <summary>
         /// 导出Excel
         /// </summary>
