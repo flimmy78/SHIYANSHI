@@ -277,6 +277,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="html\1000Ω以上-无误差.html" />
+    <Content Include="html\11开关变差-无不确定度.html" />
     <Content Include="html\1基本误差-电阻示值-相对误差.html" />
     <Content Include="html\2示值误差-有电压示值-末盘值残余电阻参与运算.html" />
     <Content Include="html\3残余电阻-无不确定度.html" />
@@ -989,6 +990,7 @@
     <Content Include="Views\VSHIYANSHIGONGZUOLIANG\RenYuan.cshtml" />
     <Content Include="Views\VGONGZUOSHICHANG\Index.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\IndexUA.cshtml" />
+    <Content Include="Views\PREPARE_SCHEME\Testxml.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\GongZuoDianLiuShiZhiWuCha9.cshtml" />
   </ItemGroup>
   <ItemGroup>
