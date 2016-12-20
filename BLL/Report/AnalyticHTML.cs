@@ -5,8 +5,32 @@ namespace Langben.Report
     /// <summary>
     /// 解析HTML文件
     /// </summary>
-    public class AnalyticHTML
+    public  class AnalyticHTML
     {
+        public static HtmlAgilityPack.HtmlDocument docBuQueDingDu = new HtmlAgilityPack.HtmlDocument();
+        public static BuDueDingDu GetTBodyOfTR(string url)
+        {
+            BuDueDingDu buDueDingDu = new BuDueDingDu();
+             docBuQueDingDu.Load(url);
+             
+            string xpath = @"/select[@id='pdDDL']";
+            var pdDDL = docBuQueDingDu.DocumentNode.SelectSingleNode(xpath);
+            if (pdDDL.Name == "select")
+            {
+                
+            }
+            if (thead == null)
+            {
+                 
+            }
+            else
+            {
+        
+            }
+            return buDueDingDu;
+        }
+
+
         /// <summary>
         /// 获取表头中的所有的第一级tr标签
         /// </summary>
@@ -60,6 +84,11 @@ namespace Langben.Report
             }
 
         }
+        /// <summary>
+        /// 列头的名称
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
         public static Dictionary<string, int> GetHead(HtmlAgilityPack.HtmlDocument doc)
         {
             var list = new Dictionary<string, int>();

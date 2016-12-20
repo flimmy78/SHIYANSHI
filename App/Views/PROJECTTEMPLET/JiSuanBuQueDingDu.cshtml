@@ -89,7 +89,8 @@ else
         <div class="mt10" id="tongdao">
             <div>
                 <i>U</i><small>A</small> =
-                <input class="my-textbox " value="" style="width:200px" name="" id="txtBuQueDingA"> <input class="my-textbox " value="" style="width:100px" name="" id="txtValue" onblur="calculate()">
+                <input class="my-textbox " value="" style="width:200px" name="" id="txtBuQueDingA">
+                 <input class="my-textbox " value="" style="width:100px" name="" id="txtValue" onblur="calculate()">
             </div>
             <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_moban">
                 <thead>
@@ -129,7 +130,8 @@ else
         <div class="mt10">
             <div>
                 <i>U</i><small>B</small> =
-                <input class="my-textbox " value="" style="width:200px" name="" id="txtBuQueDingB"> <input class="my-textbox " value="" style="width:100px" name="" id="txtValueB" onblur="calculateB()">
+                <input class="my-textbox " value="" style="width:200px" name="" id="txtBuQueDingB"> 
+                <input class="my-textbox " value="" style="width:100px" name="" id="txtValueB" onblur="calculateB()">
             </div>
             <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_B">
                 <thead>
@@ -142,12 +144,13 @@ else
                         <th align="center" width="150">不确定度Ui</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody  id="buquedingdub">
                     <tr>
                         <td align="center"><input class="my-textbox " type="text" name="B_PingDing" id="B_PingDing_1" value="" style="width:95%"></td>
                         <td align="center">
                             <input class="my-textbox input-width" type="text" name="B_WuChaLaiYuan" id="B_WuChaLaiYuan_1" value="">
-                            <span name="sourceNum" id="sourceNum_1">u1</span>
+                            <input class="my-textbox input-width" type="text" name="sourceNum" id="sourceNum_1" value="u1"  style="width:40px">
+                       
                         </td>
                         <td align="center">
                             <input class="my-textbox input-width" type="text" name="B_WuChaXian" id="B_WuChaXian_1" value="">
@@ -163,7 +166,11 @@ else
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="6"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addRow(this)">增加</a> <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="xunzhe()">选择</a><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'" onclick="resetRow()">重置</a></td>
+                        <td colspan="6">
+                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addRow(this)">增加</a> 
+                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="xunzhe()">选择</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'" onclick="resetRow()">重置</a>
+                        </td>
                     </tr>
                 </tfoot>
             </table>
@@ -210,7 +217,8 @@ else
             </div>
         </div>
         <!--测量结果报告 -->
-        <div class="mt10 form-foot"><input type="button" class="my-btn" value="保 存" id="btnSave" onclick="Save();" /> <input type="button" class="my-btn" value="取 消" /></div>
+        <div class="mt10 form-foot"><input type="button" class="my-btn" value="保 存" id="btnSave" onclick="Save();" /> 
+        <input type="button" class="my-btn" value="取 消" /></div>
 
     </div>
 </div>
@@ -430,23 +438,42 @@ else
 
         $("input[type='text']").each(function () {
 
-            //除了隐藏模板中的输入框，其他所有的输入框123
+            //除了隐藏模板中的输入框，其他所有的输入框
             if (this.id != "") {
+
                 if (this.attributes.value != undefined) {
                     this.attributes.value.value = $(this).val();
+                } else {//如果没有写value属性，则加上
+                    var value = $(this).val();
+                    $(this).attr("value", value);
                 }
+
+
             }
         });
 
         $("select").each(function () {
             //除了隐藏模板中的下拉框，其他所有的下拉框
             if (this.id != "") {
-                var checkText = $(this).find("option:selected").text();  //获取Select选择的Text
-                $(this).find("option[value='" + checkText + "']").attr("selected", true);
+
+                var value = $(this).val();
+                //清除所有的selected
+                $(this).find("option").each(function (i, item) {
+                    if ($(item).val() == value) {
+                        //将选中的value的option设置为selected
+                        $(item).attr("selected", true);
+                    } else {
+                        $(item).attr("selected", false);
+                    }
+
+
+                }
+            );
+
             }
 
         });
-    }
+    } 
     //保存
     function Save() {
         SetAllControlHtml();
