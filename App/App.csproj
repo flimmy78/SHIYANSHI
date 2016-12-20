@@ -989,6 +989,7 @@
     <Content Include="Views\VSHIYANSHIGONGZUOLIANG\RenYuan.cshtml" />
     <Content Include="Views\VGONGZUOSHICHANG\Index.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\IndexUA.cshtml" />
+    <Content Include="Views\PREPARE_SCHEME\Testxml.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

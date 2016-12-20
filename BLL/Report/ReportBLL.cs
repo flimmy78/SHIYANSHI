@@ -1009,24 +1009,64 @@ namespace Langben.Report
                     SpecialCharacters allSpecialCharacters = GetSpecialCharacters();
 
                     entity.QUALIFIED_UNQUALIFIED_TEST_ITE = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.OrderBy(p => p.SORT).ToList();
-
+                    string xml = string.Empty;
                     foreach (QUALIFIED_UNQUALIFIED_TEST_ITE iEntity in entity.QUALIFIED_UNQUALIFIED_TEST_ITE)
+                    {
+                        //iEntity.RULEID;
+                        if (!string.IsNullOrWhiteSpace(iEntity.HTMLVALUE))
+                        {
+                            doc.LoadHtml(iEntity.HTMLVALUE);
+
+                            xml+= CreatXML.Create(doc, iEntity.RULEID);
+
+                            //测试的时候使用
+                            //string data = AnalyticHTML.Getinput(doc);
+                            //if (!string.IsNullOrWhiteSpace(data))
+                            //{
+                            //    errors += iEntity.ID + iEntity.RULENJOINAME + data;
+                            //}
+                        }
+                      
+                    }
+                    var da = xml;
+                }
+            }
+            Message = errors;
+            return false;
+        }
+        public bool Testxml(string ID, out string Message)
+        {
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            string errors = string.Empty;
+            var m_BLL = new SCHEMEBLL();
+            var entity = m_BLL.GetById(ID);
+
+            if (entity != null)
+            {
+
+                if (entity.PROJECTTEMPLET != null &&
+              entity.PROJECTTEMPLET.Count > 0)
+                {
+
+
+                    foreach (var iEntity in entity.PROJECTTEMPLET)
                     {
                         if (!string.IsNullOrWhiteSpace(iEntity.HTMLVALUE))
                         {
                             doc.LoadHtml(iEntity.HTMLVALUE);
-                            string data = AnalyticHTML.Getinput(doc);
-                            if (!string.IsNullOrWhiteSpace(data))
-                            {
-                                errors += iEntity.ID + iEntity.RULENJOINAME + data;
-                            }
+                            
+                            errors += CreatXML.Create(doc, iEntity.RULEID);
+
+
                         }
-                      
+
                     }
                 }
             }
             Message = errors;
             return false;
+          
+            
         }
         public bool TestPROJECTTEMPLET(string ID, out string Message)
         {

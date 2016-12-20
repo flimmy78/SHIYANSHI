@@ -19,14 +19,7 @@ namespace Langben.Report
             {
                 
             }
-            if (thead == null)
-            {
-                 
-            }
-            else
-            {
-        
-            }
+         
             return buDueDingDu;
         }
 
@@ -265,6 +258,10 @@ namespace Langben.Report
                 var thead = doc.DocumentNode.SelectNodes(xpath);
                 if (thead == null)
                 {
+                    if (i==1)
+                    {
+                        continue;
+                    }
                     return theadOfInputAndSelect;
                 }
                 else
@@ -325,7 +322,11 @@ namespace Langben.Report
 
             return theadOfInputAndSelect;//
         }
-
+        /// <summary>
+        /// 测试的时候使用
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
         public static string Getinput(HtmlAgilityPack.HtmlDocument doc)
         {
             string errors = "";
