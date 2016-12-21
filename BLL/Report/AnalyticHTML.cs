@@ -73,7 +73,18 @@ namespace Langben.Report
             var thead = doc.DocumentNode.SelectNodes(xpath);
             if (thead == null)
             {
-                return 0;//表头下没有行
+                string xpath2 = @"//table[@id='tongdao_2']/tbody//table";
+                var thead2 = doc.DocumentNode.SelectNodes(xpath2);
+                if (thead2 == null)
+                {
+                   
+                    return 0;//表头下没有行
+                }
+                else
+                {
+                    return thead2.Count;
+                }
+                
             }
             else
             {
@@ -86,7 +97,7 @@ namespace Langben.Report
         /// </summary>
         /// <param name="doc"></param>
         /// <returns></returns>
-        public static Dictionary<string, int> GetHead(HtmlAgilityPack.HtmlDocument doc)
+        public static Dictionary<string, int> GetColName(HtmlAgilityPack.HtmlDocument doc)
         {
             var list = new Dictionary<string, int>();
             //只遍历通道1
@@ -108,33 +119,61 @@ namespace Langben.Report
 
             return list;
         }
-        public static Dictionary<int, MYDataHead> GetHeadData(HtmlAgilityPack.HtmlDocument doc)
+
+        /// <summary>
+        /// 获取表头中的所有的input和select标签的数据
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
+        public static Dictionary<int, List<MYDataHead>> GetHeadData(HtmlAgilityPack.HtmlDocument doc)
         {
-            var data = new Dictionary<int, MYDataHead>();
+            var data = new Dictionary<int, List<MYDataHead>>();
+
             //表头
             Dictionary<int, HtmlAgilityPack.HtmlNodeCollection> theadOfInputAndSelect = AnalyticHTML.GetTheadOfInputAndSelect(doc);
             //遍历通道
-            for (int i = 1; i < theadOfInputAndSelect.Count + 1; i++)
+            foreach (var item in theadOfInputAndSelect.Keys)
             {
-                var tongdao1 = theadOfInputAndSelect[i];
-                for (int t = 0; t < tongdao1.Count;t++)
+                HtmlAgilityPack.HtmlNodeCollection body = theadOfInputAndSelect[item];
+                List<MYDataHead> list = new List<MYDataHead>();
+                foreach (var b in body)
                 {
-                    MYData mydata = new MYData();
-                    //mydata.id = b.Attributes["id"].Value;
-                    //mydata.name = b.Attributes["name"].Value;
+                    MYDataHead mydata = new MYDataHead();
+                    mydata.id = b.Attributes["id"].Value;
+                    mydata.name = b.Attributes["name"].Value;
 
-                    //tongdao1[i].Attributes["name"].Value;
+                    if (b.Name == "input")
+                    {
+                        if (b.Attributes["value"] != null)
+                        {
+                            mydata.value = b.Attributes["value"].Value;
 
+                        }
+                    }
+                    else if (b.Name == "select")
+                    {
+                        var node = b.ChildNodes.Where(w=>w.Name=="option"&& w.Attributes["selected"]!=null).Select(s=>s.Attributes["value"].Value).First();
+
+                        if (node != null)
+                        {
+                           mydata.value = node;
+                        }
+                        else
+                        {
+                            mydata.value = node;
+                        }
+                        
+                      
+                    }
+                    list.Add(mydata);
                 }
-            }
-
-
-
+                data.Add(item, list);
+            } 
             return data;
 
         }
         /// <summary>
-        /// 获取表头中的所有的input和select标签
+        /// 获取表体中的所有的input和select标签的数据
         /// </summary>
         /// <param name="doc"></param>
         /// <returns>按照通道+节点的方式返回</returns>
@@ -144,7 +183,7 @@ namespace Langben.Report
 
             int trCount = GetTBodyOfTR(doc);//最外层有几行
             int tableCount = GetContainTable(doc);//内部包含几个table
-            Dictionary<string, int> head = GetHead(doc);//列头的名称
+            Dictionary<string, int> head = GetColName(doc);//列头的名称
 
             Dictionary<int, HtmlAgilityPack.HtmlNodeCollection> tbodyOfInputAndSelect = GetTBodyOfInputAndSelect(doc);//列
 
@@ -164,9 +203,9 @@ namespace Langben.Report
                         if (b.Attributes["value"] != null)
                         {
                             mydata.value = b.Attributes["value"].Value;
-                             
+
                         }
-                       
+
 
                     }
                     else if (b.Name == "select")
@@ -174,9 +213,9 @@ namespace Langben.Report
                         var node = b.SelectSingleNode(@"//option[@selected='selected']");
                         if (node != null)
                         {
-                            mydata.value = node.NextSibling.InnerText;
+                            mydata.value = node.Attributes["value"].Value;
                         }
-                       
+
                     }
 
                     if (string.IsNullOrWhiteSpace(b.ParentNode.GetAttributeValue("rowspan", string.Empty)))
@@ -225,7 +264,7 @@ namespace Langben.Report
                           where f.Value < max
                           select f.Key;
 
-                if (tableCount > 1)
+                if (tableCount > 0)
                 {
                     //表格嵌套
                     var change = from f in list
@@ -243,7 +282,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    if (dat != null)
+                    if (dat != null&&dat.Count()>0)
                     {
                         throw new System.Exception("估计要出错，因为所有列的行数不一样");
                     }

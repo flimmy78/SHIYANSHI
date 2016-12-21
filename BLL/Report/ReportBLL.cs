@@ -1055,12 +1055,15 @@ namespace Langben.Report
                         {
                             doc.LoadHtml(iEntity.HTMLVALUE);
 
-                            string s = CreatXML.Create(doc, iEntity.RULEID);
-                            if (string.IsNullOrWhiteSpace(s))
-                            {
-                                dsaf++;
-                            }
-                            errors += s;
+                            var data1 = AnalyticHTML.GetData(doc);
+                            var data2 = AnalyticHTML.GetHeadData(doc);
+
+                            //string s = CreatXML.Create(doc, iEntity.RULEID);
+                            //if (string.IsNullOrWhiteSpace(s))
+                            //{
+                            //    dsaf++;
+                            //}
+                            //errors += s;
                         }
                         else
                         {
