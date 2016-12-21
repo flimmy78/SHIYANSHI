@@ -42,7 +42,7 @@ namespace Langben.Report
               <Code>{0}</Code>
               <!--在页面中的排序-->
               <Name>{1}</Name>
-              <ColIndex></ColIndex>             
+              <ColIndex>-1</ColIndex>             
             </Cell>
 ";
         public static string  Create(HtmlAgilityPack.HtmlDocument doc,string  RuleID)
@@ -92,10 +92,10 @@ namespace Langben.Report
             string outXML = "";
          return   outXML = string.Format(temp,
                  RuleID,
-                ""/*数据模板开始行号*/,
-                 ""/*备注模板行号*/,
-                  ""/*结论模板行号*/,
-                   ""/*表格表头行号*/,
+                "-1"/*数据模板开始行号*/,
+                 "-1"/*备注模板行号*/,
+                  "-1"/*结论模板行号*/,
+                   "-1"/*表格表头行号*/,
                     outHead,
                     outBody);
             }
