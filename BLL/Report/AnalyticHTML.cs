@@ -108,7 +108,31 @@ namespace Langben.Report
 
             return list;
         }
+        public static Dictionary<int, MYDataHead> GetHeadData(HtmlAgilityPack.HtmlDocument doc)
+        {
+            var data = new Dictionary<int, MYDataHead>();
+            //表头
+            Dictionary<int, HtmlAgilityPack.HtmlNodeCollection> theadOfInputAndSelect = AnalyticHTML.GetTheadOfInputAndSelect(doc);
+            //遍历通道
+            for (int i = 1; i < theadOfInputAndSelect.Count + 1; i++)
+            {
+                var tongdao1 = theadOfInputAndSelect[i];
+                for (int t = 0; t < tongdao1.Count;t++)
+                {
+                    MYData mydata = new MYData();
+                    //mydata.id = b.Attributes["id"].Value;
+                    //mydata.name = b.Attributes["name"].Value;
 
+                    //tongdao1[i].Attributes["name"].Value;
+
+                }
+            }
+
+
+
+            return data;
+
+        }
         /// <summary>
         /// 获取表头中的所有的input和select标签
         /// </summary>
@@ -135,6 +159,25 @@ namespace Langben.Report
                     mydata.name = b.Attributes["name"].Value;
                     mydata.columnNum = head[mydata.name];
                     mydata.rowNum = GetRowNum(mydata.id);
+                    if (b.Name == "input")
+                    {
+                        if (b.Attributes["value"] != null)
+                        {
+                            mydata.value = b.Attributes["value"].Value;
+                             
+                        }
+                       
+
+                    }
+                    else if (b.Name == "select")
+                    {
+                        var node = b.SelectSingleNode(@"//option[@selected='selected']");
+                        if (node != null)
+                        {
+                            mydata.value = node.NextSibling.InnerText;
+                        }
+                       
+                    }
 
                     if (string.IsNullOrWhiteSpace(b.ParentNode.GetAttributeValue("rowspan", string.Empty)))
                     {
@@ -255,14 +298,14 @@ namespace Langben.Report
         public static Dictionary<int, HtmlAgilityPack.HtmlNodeCollection> GetTheadOfInputAndSelect(HtmlAgilityPack.HtmlDocument doc)
         {
             Dictionary<int, HtmlAgilityPack.HtmlNodeCollection> theadOfInputAndSelect = new Dictionary<int, HtmlAgilityPack.HtmlNodeCollection>();
-          
+
             for (int i = 1; i < 99; i++)
             {
 
                 string xpath = @"//table[@id='tongdao_" + i + @"']/thead//input[@type='text'] | //table[@id='tongdao_" + i + @"']/thead//select";
                 var thead = doc.DocumentNode.SelectNodes(xpath);
                 if (thead == null)
-                {                  
+                {
                     if (i == 1)
                     {
                         continue;
@@ -271,8 +314,8 @@ namespace Langben.Report
                 }
                 else
                 {
-                  
-                    if (theadOfInputAndSelect.Count != i-1)
+
+                    if (theadOfInputAndSelect.Count != i - 1)
                     {
                         theadOfInputAndSelect.Add(i - 1, thead);
                     }
@@ -309,7 +352,7 @@ namespace Langben.Report
                 else
                 {
 
-                    if (theadOfInputAndSelect.Count != i-1)
+                    if (theadOfInputAndSelect.Count != i - 1)
                     {
                         theadOfInputAndSelect.Add(i - 1, thead);
                     }
@@ -318,7 +361,7 @@ namespace Langben.Report
                         theadOfInputAndSelect.Add(i, thead);
                     }
                 }
-               
+
             }
 
             return theadOfInputAndSelect;//

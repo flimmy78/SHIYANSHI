@@ -41,8 +41,7 @@ namespace Langben.Report
             <Cell>
               <Code>{0}</Code>
               <!--在页面中的排序-->
-              <Name>{1}</Name>
-              <ColIndex>-1</ColIndex>             
+              <ColIndex>{1}</ColIndex>             
             </Cell>
 ";
         public static string  Create(HtmlAgilityPack.HtmlDocument doc,string  RuleID)
