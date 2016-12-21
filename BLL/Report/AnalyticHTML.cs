@@ -108,6 +108,12 @@ namespace Langben.Report
 
             return list;
         }
+
+        /// <summary>
+        /// 获取表头中的所有的input和select标签的数据
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
         public static Dictionary<int, List<MYDataHead>> GetHeadData(HtmlAgilityPack.HtmlDocument doc)
         {
             var data = new Dictionary<int, List<MYDataHead>>();
@@ -151,7 +157,7 @@ namespace Langben.Report
 
         }
         /// <summary>
-        /// 获取表头中的所有的input和select标签
+        /// 获取表体中的所有的input和select标签的数据
         /// </summary>
         /// <param name="doc"></param>
         /// <returns>按照通道+节点的方式返回</returns>
