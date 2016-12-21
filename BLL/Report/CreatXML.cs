@@ -9,7 +9,25 @@ namespace Langben.Report
     public class CreatXML
     {
 
-
+        public static string temp = @"
+    <TableTemplate>
+      <RuleID>{0}</RuleID>
+      <!--数据模板开始行号-->
+      <DataRowIndex>{1}</DataRowIndex>
+      <!--备注模板行号-->
+      <RemarkRowIndex>{2}</RemarkRowIndex>
+      <!--结论模板行号-->
+      <ConclusionRowIndex>{3}</ConclusionRowIndex>
+      <TableTitleList>
+        <RowInfo>     
+          <!--表格表头行号-->   
+          <RowIndex>{4}</RowIndex>
+{5}
+        </RowInfo>
+      </TableTitleList>
+{6}
+    </TableTemplate>
+";
         public static string tempRowNumber = @"
           <RowNumber>{1}</RowNumber>
             {0}
@@ -24,11 +42,15 @@ namespace Langben.Report
               <Code>{0}</Code>
               <!--在页面中的排序-->
               <Name>{1}</Name>
-              <ColIndex></ColIndex>             
+              <ColIndex>-1</ColIndex>             
             </Cell>
 ";
-        public static void Create(HtmlAgilityPack.HtmlDocument doc)
+        public static string  Create(HtmlAgilityPack.HtmlDocument doc,string  RuleID)
         {
+            try
+            {
+
+         
             //表头
             Dictionary<int, HtmlAgilityPack.HtmlNodeCollection> theadOfInputAndSelect = AnalyticHTML.GetTheadOfInputAndSelect(doc);
             //表身
@@ -64,42 +86,25 @@ namespace Langben.Report
                 outBody += string.Format(tempCell, tongdao1OfBodyOfInputAndSelectAttributes[i], i);
 
             }
-            outBody += string.Format(tempCellList, outBody);
+            outBody = string.Format(tempCellList, outBody);
 
             //表格xml
             string outXML = "";
-            outXML = string.Format(temp,
-                ""/*RuleID*/,
-                ""/*数据模板开始行号*/,
-                 ""/*备注模板行号*/,
-                  ""/*结论模板行号*/,
-                   ""/*表格表头行号*/,
+         return   outXML = string.Format(temp,
+                 RuleID,
+                "-1"/*数据模板开始行号*/,
+                 "-1"/*备注模板行号*/,
+                  "-1"/*结论模板行号*/,
+                   "-1"/*表格表头行号*/,
                     outHead,
                     outBody);
+            }
+            catch (System.Exception ex)
+            {
 
-
-
-            var d = 0;
-
+                throw;
+            }
         }
-        public static string temp = @"
-    <TableTemplate>
-      <RuleID>{0}</RuleID>
-      <!--数据模板开始行号-->
-      <DataRowIndex>{1}</DataRowIndex>
-      <!--备注模板行号-->
-      <RemarkRowIndex>{2}</RemarkRowIndex>
-      <!--结论模板行号-->
-      <ConclusionRowIndex>{3}</ConclusionRowIndex>
-      <TableTitleList>
-        <RowInfo>     
-          <!--表格表头行号-->   
-          <RowIndex>{4}</RowIndex>
-{5}
-        </RowInfo>
-      </TableTitleList>
-{6}
-    </TableTemplate>
-";
+        
     }
 }

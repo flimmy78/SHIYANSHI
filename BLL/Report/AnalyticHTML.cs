@@ -5,28 +5,25 @@ namespace Langben.Report
     /// <summary>
     /// 解析HTML文件
     /// </summary>
-    public  class AnalyticHTML
+    public class AnalyticHTML
     {
         public static HtmlAgilityPack.HtmlDocument docBuQueDingDu = new HtmlAgilityPack.HtmlDocument();
         public static BuDueDingDu GetTBodyOfTR(string url)
         {
             BuDueDingDu buDueDingDu = new BuDueDingDu();
-             docBuQueDingDu.Load(url);
-             
+            docBuQueDingDu.Load(url);
+
             string xpath = @"/select[@id='pdDDL']";
             var pdDDL = docBuQueDingDu.DocumentNode.SelectSingleNode(xpath);
             if (pdDDL.Name == "select")
             {
-                
-            }
-            if (thead == null)
-            {
-                 
+
             }
             else
             {
-        
+                throw new System.Exception("没有找到pdDDL");
             }
+
             return buDueDingDu;
         }
 
@@ -249,27 +246,40 @@ namespace Langben.Report
             }
 
         }
- 
+
         /// <summary>
-        /// 获取表头中的所有的input和select标签
+        /// 获取表头中的所有的input和select标签 此处有一个bug,如果通道1表头没有数据,就使用2通道
         /// </summary>
         /// <param name="doc"></param>
         /// <returns>按照通道+节点的方式返回</returns>
         public static Dictionary<int, HtmlAgilityPack.HtmlNodeCollection> GetTheadOfInputAndSelect(HtmlAgilityPack.HtmlDocument doc)
         {
             Dictionary<int, HtmlAgilityPack.HtmlNodeCollection> theadOfInputAndSelect = new Dictionary<int, HtmlAgilityPack.HtmlNodeCollection>();
-
+          
             for (int i = 1; i < 99; i++)
             {
+
                 string xpath = @"//table[@id='tongdao_" + i + @"']/thead//input[@type='text'] | //table[@id='tongdao_" + i + @"']/thead//select";
                 var thead = doc.DocumentNode.SelectNodes(xpath);
                 if (thead == null)
-                {
+                {                  
+                    if (i == 1)
+                    {
+                        continue;
+                    }
                     return theadOfInputAndSelect;
                 }
                 else
                 {
-                    theadOfInputAndSelect.Add(i, thead);//表头下的所有input和select
+                  
+                    if (theadOfInputAndSelect.Count != i-1)
+                    {
+                        theadOfInputAndSelect.Add(i - 1, thead);
+                    }
+                    else
+                    {
+                        theadOfInputAndSelect.Add(i, thead);
+                    }
                 }
             }
 
@@ -290,12 +300,25 @@ namespace Langben.Report
                 var thead = doc.DocumentNode.SelectNodes(xpath);
                 if (thead == null)
                 {
+                    if (i == 1)
+                    {
+                        continue;
+                    }
                     return theadOfInputAndSelect;
                 }
                 else
                 {
-                    theadOfInputAndSelect.Add(i, thead);//表体下的所有input和select
+
+                    if (theadOfInputAndSelect.Count != i-1)
+                    {
+                        theadOfInputAndSelect.Add(i - 1, thead);
+                    }
+                    else
+                    {
+                        theadOfInputAndSelect.Add(i, thead);
+                    }
                 }
+               
             }
 
             return theadOfInputAndSelect;//
@@ -325,7 +348,11 @@ namespace Langben.Report
 
             return theadOfInputAndSelect;//
         }
-
+        /// <summary>
+        /// 测试的时候使用
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
         public static string Getinput(HtmlAgilityPack.HtmlDocument doc)
         {
             string errors = "";
@@ -341,7 +368,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    if ((item.Name == "input")&&(item.Attributes["type"] != null)&& (item.Attributes["type"].Value == "hidden"))
+                    if ((item.Name == "input") && (item.Attributes["type"] != null) && (item.Attributes["type"].Value == "hidden"))
                     {
                         continue;
                     }
