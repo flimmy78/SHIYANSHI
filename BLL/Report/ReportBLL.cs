@@ -1017,13 +1017,14 @@ namespace Langben.Report
                         {
                             doc.LoadHtml(iEntity.HTMLVALUE);
 
-
+                          //  var data = AnalyticHTML.GetData(doc);
+                            var data2 = AnalyticHTML.GetHeadData(doc);
                             //测试的时候使用
-                            string data = AnalyticHTML.Getinput(doc);
-                            if (!string.IsNullOrWhiteSpace(data))
-                            {
-                                errors += iEntity.ID + iEntity.RULENJOINAME + data;
-                            }
+                            //string data = AnalyticHTML.Getinput(doc);
+                            //if (!string.IsNullOrWhiteSpace(data))
+                            //{
+                            //    errors += iEntity.ID + iEntity.RULENJOINAME + data;
+                            //}
                         }
 
                     }

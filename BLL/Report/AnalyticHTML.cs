@@ -86,7 +86,7 @@ namespace Langben.Report
         /// </summary>
         /// <param name="doc"></param>
         /// <returns></returns>
-        public static Dictionary<string, int> GetHead(HtmlAgilityPack.HtmlDocument doc)
+        public static Dictionary<string, int> GetColName(HtmlAgilityPack.HtmlDocument doc)
         {
             var list = new Dictionary<string, int>();
             //只遍历通道1
@@ -108,28 +108,45 @@ namespace Langben.Report
 
             return list;
         }
-        public static Dictionary<int, MYDataHead> GetHeadData(HtmlAgilityPack.HtmlDocument doc)
+        public static Dictionary<int, List<MYDataHead>> GetHeadData(HtmlAgilityPack.HtmlDocument doc)
         {
-            var data = new Dictionary<int, MYDataHead>();
+            var data = new Dictionary<int, List<MYDataHead>>();
+
             //表头
             Dictionary<int, HtmlAgilityPack.HtmlNodeCollection> theadOfInputAndSelect = AnalyticHTML.GetTheadOfInputAndSelect(doc);
             //遍历通道
-            for (int i = 1; i < theadOfInputAndSelect.Count + 1; i++)
+            foreach (var item in theadOfInputAndSelect.Keys)
             {
-                var tongdao1 = theadOfInputAndSelect[i];
-                for (int t = 0; t < tongdao1.Count;t++)
+                HtmlAgilityPack.HtmlNodeCollection body = theadOfInputAndSelect[item];
+                List<MYDataHead> list = new List<MYDataHead>();
+                foreach (var b in body)
                 {
-                    MYData mydata = new MYData();
-                    //mydata.id = b.Attributes["id"].Value;
-                    //mydata.name = b.Attributes["name"].Value;
+                    MYDataHead mydata = new MYDataHead();
+                    mydata.id = b.Attributes["id"].Value;
+                    mydata.name = b.Attributes["name"].Value;
 
-                    //tongdao1[i].Attributes["name"].Value;
+                    if (b.Name == "input")
+                    {
+                        if (b.Attributes["value"] != null)
+                        {
+                            mydata.value = b.Attributes["value"].Value;
 
+                        }
+                    }
+                    else if (b.Name == "select")
+                    {
+                        var node = b.SelectSingleNode(@"//option[@selected='selected']");
+                        if (node != null)
+                        {
+                            mydata.value = node.Attributes["value"].Value;
+                        }
+                        
+                      
+                    }
+                    list.Add(mydata);
                 }
-            }
-
-
-
+                data.Add(item, list);
+            } 
             return data;
 
         }
@@ -144,7 +161,7 @@ namespace Langben.Report
 
             int trCount = GetTBodyOfTR(doc);//最外层有几行
             int tableCount = GetContainTable(doc);//内部包含几个table
-            Dictionary<string, int> head = GetHead(doc);//列头的名称
+            Dictionary<string, int> head = GetColName(doc);//列头的名称
 
             Dictionary<int, HtmlAgilityPack.HtmlNodeCollection> tbodyOfInputAndSelect = GetTBodyOfInputAndSelect(doc);//列
 
@@ -164,9 +181,9 @@ namespace Langben.Report
                         if (b.Attributes["value"] != null)
                         {
                             mydata.value = b.Attributes["value"].Value;
-                             
+
                         }
-                       
+
 
                     }
                     else if (b.Name == "select")
@@ -174,9 +191,9 @@ namespace Langben.Report
                         var node = b.SelectSingleNode(@"//option[@selected='selected']");
                         if (node != null)
                         {
-                            mydata.value = node.NextSibling.InnerText;
+                            mydata.value = node.Attributes["value"].Value;
                         }
-                       
+
                     }
 
                     if (string.IsNullOrWhiteSpace(b.ParentNode.GetAttributeValue("rowspan", string.Empty)))
