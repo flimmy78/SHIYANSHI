@@ -73,7 +73,18 @@ namespace Langben.Report
             var thead = doc.DocumentNode.SelectNodes(xpath);
             if (thead == null)
             {
-                return 0;//表头下没有行
+                string xpath2 = @"//table[@id='tongdao_2']/tbody//table";
+                var thead2 = doc.DocumentNode.SelectNodes(xpath2);
+                if (thead2 == null)
+                {
+                   
+                    return 0;//表头下没有行
+                }
+                else
+                {
+                    return thead2.Count;
+                }
+                
             }
             else
             {
@@ -141,10 +152,15 @@ namespace Langben.Report
                     }
                     else if (b.Name == "select")
                     {
-                        var node = b.SelectSingleNode(@"//option[@selected='selected']");
+                        var node = b.ChildNodes.Where(w=>w.Name=="option"&& w.Attributes["selected"]!=null).Select(s=>s.Attributes["value"].Value).First();
+
                         if (node != null)
                         {
-                            mydata.value = node.Attributes["value"].Value;
+                           mydata.value = node;
+                        }
+                        else
+                        {
+                            mydata.value = node;
                         }
                         
                       
@@ -248,7 +264,7 @@ namespace Langben.Report
                           where f.Value < max
                           select f.Key;
 
-                if (tableCount > 1)
+                if (tableCount > 0)
                 {
                     //表格嵌套
                     var change = from f in list
@@ -266,7 +282,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    if (dat != null)
+                    if (dat != null&&dat.Count()>0)
                     {
                         throw new System.Exception("估计要出错，因为所有列的行数不一样");
                     }
