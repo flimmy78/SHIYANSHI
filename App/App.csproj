@@ -277,6 +277,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="html\1000Ω以上-无误差.html" />
+    <Content Include="html\11开关变差-无不确定度.html" />
     <Content Include="html\1基本误差-电阻示值-相对误差.html" />
     <Content Include="html\2示值误差-有电压示值-末盘值残余电阻参与运算.html" />
     <Content Include="html\3残余电阻-无不确定度.html" />
