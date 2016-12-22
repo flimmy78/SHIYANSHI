@@ -8,7 +8,11 @@ namespace Langben.Report
     public class AnalyticHTML
     {
         public static HtmlAgilityPack.HtmlDocument docBuQueDingDu = new HtmlAgilityPack.HtmlDocument();
-
+        /// <summary>
+        /// 不确定解析
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public static BuDueDingDu GetBuDueDingDu(string url)
         {
             BuDueDingDu buDueDingDu = new BuDueDingDu();
@@ -174,11 +178,7 @@ namespace Langben.Report
                 buDueDingDu.pingding = list;
 
             }
-
-
-
-
-
+             
             return buDueDingDu;
         }
 
