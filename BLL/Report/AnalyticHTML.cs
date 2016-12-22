@@ -8,21 +8,85 @@ namespace Langben.Report
     public class AnalyticHTML
     {
         public static HtmlAgilityPack.HtmlDocument docBuQueDingDu = new HtmlAgilityPack.HtmlDocument();
-        public static BuDueDingDu GetTBodyOfTR(string url)
+        public static BuDueDingDu GetBuDueDingDu(string url)
         {
             BuDueDingDu buDueDingDu = new BuDueDingDu();
             docBuQueDingDu.Load(url);
 
-            string xpath = @"/select[@id='pdDDL']";
+            string xpath = @"//select[@id='pdDDL']/option[@selected='selected']";
             var pdDDL = docBuQueDingDu.DocumentNode.SelectSingleNode(xpath);
-            if (pdDDL.Name == "select")
-            {
+            buDueDingDu.pdDDL = pdDDL.Attributes["selected"].Value;
 
-            }
-            else
+
+            var xpathpdText = @"//input[@id='pdText']";
+            var pdText = docBuQueDingDu.DocumentNode.SelectSingleNode(xpathpdText);
+            buDueDingDu.pdText = pdDDL.Attributes["value"].Value;
+
+            //var xpathpingding = @"//li[@bag='pingding']";
+            //var pingding = docBuQueDingDu.DocumentNode.SelectNodes(xpathpingding);
+            //foreach (var item in xpathpingding)
+            //{
+
+            //        }
+
+            var xpathA = @"//input[@name='A']";
+            var A = docBuQueDingDu.DocumentNode.SelectNodes(xpathA);
+            foreach (var item in A)
             {
-                throw new System.Exception("没有找到pdDDL");
+                if (item.Attributes["id"].Value == "A_1_1")
+                {
+                    buDueDingDu.A_1_1 = item.Attributes["value"].Value;
+                }
+                else if (item.Attributes["id"].Value == "A_1_2")
+                {
+                    buDueDingDu.A_1_2 = item.Attributes["value"].Value;
+                }
+                else if (item.Attributes["id"].Value == "A_1_3")
+                {
+                    buDueDingDu.A_1_3 = item.Attributes["value"].Value;
+                }
+                else if (item.Attributes["id"].Value == "A_1_4")
+                {
+                    buDueDingDu.A_1_4 = item.Attributes["value"].Value;
+                }
+                else if (item.Attributes["id"].Value == "A_1_5")
+                {
+                    buDueDingDu.A_1_5 = item.Attributes["value"].Value;
+                }
+                else if (item.Attributes["id"].Value == "A_2_1")
+                {
+                    buDueDingDu.A_2_1 = item.Attributes["value"].Value;
+                }
+                else if (item.Attributes["id"].Value == "A_2_2")
+                {
+                    buDueDingDu.A_2_2 = item.Attributes["value"].Value;
+                }
+                else if (item.Attributes["id"].Value == "A_2_3")
+                {
+                    buDueDingDu.A_2_3 = item.Attributes["value"].Value;
+                }
+                else if (item.Attributes["id"].Value == "A_2_4")
+                {
+                    buDueDingDu.A_2_4 = item.Attributes["value"].Value;
+                }
+                else if (item.Attributes["id"].Value == "A_2_5")
+                {
+                    buDueDingDu.A_2_5 = item.Attributes["value"].Value;
+                }
             }
+
+            string xpathtxtBuQueDingB = @"//input[@id='txtBuQueDingB']";
+            var txtBuQueDingB = docBuQueDingDu.DocumentNode.SelectSingleNode(xpathtxtBuQueDingB);
+            buDueDingDu.txtBuQueDingB = txtBuQueDingB.Attributes["value"].Value;
+
+            string xpathtxtValueB = @"//input[@id='txtValueB']";
+            var txtValueB = docBuQueDingDu.DocumentNode.SelectSingleNode(xpathtxtValueB);
+            buDueDingDu.txtValueB = txtValueB.Attributes["value"].Value;
+
+            string xpathtxtBuQueDingC = @"//input[@id='txtValueB']";
+            var txtBuQueDingC = docBuQueDingDu.DocumentNode.SelectSingleNode(xpathtxtBuQueDingC);
+            buDueDingDu.txtBuQueDingC = txtBuQueDingC.Attributes["value"].Value;
+
 
             return buDueDingDu;
         }
@@ -73,18 +137,21 @@ namespace Langben.Report
             var thead = doc.DocumentNode.SelectNodes(xpath);
             if (thead == null)
             {
-                string xpath2 = @"//table[@id='tongdao_2']/tbody//table";
-                var thead2 = doc.DocumentNode.SelectNodes(xpath2);
-                if (thead2 == null)
-                {
-                   
-                    return 0;//表头下没有行
-                }
-                else
-                {
-                    return thead2.Count;
-                }
-                
+                return 0;//表头下没有行
+                         ////未来是要删掉的
+                         //string xpath2 = @"//table[@id='tongdao_2']/tbody//table";
+                         //var thead2 = doc.DocumentNode.SelectNodes(xpath2);
+                         //if (thead2 == null)
+                         //{
+
+                //    return 0;//表头下没有行
+                //}
+                //else
+                //{
+                //    throw new System.Exception();
+                //    return thead2.Count;
+                //}
+
             }
             else
             {
@@ -152,23 +219,23 @@ namespace Langben.Report
                     }
                     else if (b.Name == "select")
                     {
-                        var node = b.ChildNodes.Where(w=>w.Name=="option"&& w.Attributes["selected"]!=null).Select(s=>s.Attributes["value"].Value).First();
+                        var node = b.ChildNodes.Where(w => w.Name == "option" && w.Attributes["selected"] != null).Select(s => s.Attributes["value"].Value).First();
 
                         if (node != null)
                         {
-                           mydata.value = node;
+                            mydata.value = node;
                         }
                         else
                         {
                             mydata.value = node;
                         }
-                        
-                      
+
+
                     }
                     list.Add(mydata);
                 }
                 data.Add(item, list);
-            } 
+            }
             return data;
 
         }
@@ -282,7 +349,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    if (dat != null&&dat.Count()>0)
+                    if (dat != null && dat.Count() > 0)
                     {
                         throw new System.Exception("估计要出错，因为所有列的行数不一样");
                     }
