@@ -1074,12 +1074,12 @@ namespace Langben.Report
                             var data1 = AnalyticHTML.GetData(doc);
                             var data2 = AnalyticHTML.GetHeadData(doc);
 
-                            ////string s = CreatXML.Create(doc, iEntity.RULEID);
-                            ////if (string.IsNullOrWhiteSpace(s))
-                            ////{
-                            ////    dsaf++;
-                            ////}
-                            ////errors += s;
+                            string s = CreatXML.Create(doc, iEntity.RULEID);
+                            if (string.IsNullOrWhiteSpace(s))
+                            {
+                                dsaf++;
+                            }
+                            errors += s;
                         }
                         else
                         {
@@ -1110,7 +1110,7 @@ namespace Langben.Report
             
                 item.DataRowIndex = TableTemplate.DataRowIndex;//数据模板开始行号
                 item.RemarkRowIndex = TableTemplate.RemarkRowIndex;//备注模板行号
-                item.ConclusionRowIndex = TableTemplate.ConclusionRowIndex;//结论模板行号
+               item.ConclusionRowIndex = TableTemplate.ConclusionRowIndex;//结论模板行号
 
                 var RowInfo = (from f in TableTemplate.TableTitleList
 
