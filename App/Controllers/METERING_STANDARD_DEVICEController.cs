@@ -38,7 +38,11 @@ namespace Langben.App.Controllers
             ViewBag.shiyanshi = id;
             return View();
         }
-
+        public ActionResult IndexUA(string id)
+        {
+            ViewBag.shiyanshi = id;
+            return View();
+        }
         /// <summary>
         /// 查看详细
         /// </summary>
@@ -162,7 +166,8 @@ namespace Langben.App.Controllers
                                 NOTE = al.NOTE,
                                 METERING_STANDARD_DEVICEID = al.METERING_STANDARD_DEVICEID,
                                 GROUPS = al.GROUPS,
-                                UNCERTAINTYUI = al.UNCERTAINTYUI
+                                UNCERTAINTYUI = al.UNCERTAINTYUI,
+                                UNCERTAINTYUIUNIT=al.UNCERTAINTYUIUNIT
                             };
                             msdshow.UNCERTAINTYTABLEShow.Add(unadd);
                         }                                                  

@@ -101,7 +101,7 @@ namespace Langben.App.Controllers
                 id = "ORDER_TASK_INFORMATIONID&" + id;
             }
             int total = 0;
-            List<VQIJULINGQU2> queryData = m_BLL.GetByParam(id, 1, 100, "DESC", "ID", id, ref total);
+            List<VQIJULINGQU2> queryData = m_BLL.GetByParam(id, 1, 100, "DESC", "ID", id, ref total).Distinct().ToList();
             return Json(new datagrid
             {
                 total = total,

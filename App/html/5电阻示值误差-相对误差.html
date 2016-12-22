@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>电阻示值误差-相对误差</title>
+    <link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="/Content/default.css" rel="stylesheet" />
+    <link href="/Content/StyleSheet.css" rel="stylesheet" />
+    <script src="/Scripts/jquery.min.js"></script>
+    <script src="/Scripts/JScriptCommon.js"></script>
+    <script src="/Res/easyui/jquery.easyui.min.js"></script>
+    <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/Scripts/jianCeXiang.js"></script>
+</head>
+<body class="easyui-layout">
+    <input type="hidden" id="rowindex" value="1" />
+    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+            <table>
+                <tr>
+                    <td><a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="TongDao.addTongDao()">增加通道</a>  <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'">保存检测项</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+        <div class="mt10"> <span>残余电阻</span> </div>
+        <div class="mt10" id="tongdao">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_dy_1">
+                <thead>
+
+                    <tr>
+                        <th width="240" align="center">
+                            测量范围<select class="my-combobox" name="state_1_" id="state_UNIT_1_">
+                                <option value="1" selected>通道1</option>
+                                <option value="2">通道2</option>
+
+                            </select>
+                        </th>
+                        <th width="140" align="center">工作电流</th>
+                        <th width="140" align="center">标准值</th>
+                        <th width="140" align="center">显示值</th>
+                        <th width="120" align="center">误差(%)</th>
+                        <th width="120" align="center">允许限值(%)</th>
+                        <th width="120" align="center">校准结果的不确定度<br>U(k={0})</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_1">
+                    <!--示例 -->
+                    <tr>
+                        <td rowspan="2" align="center">
+                            <input class="my-textbox input-width " value="" type="text" name="input" id="input">
+                            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="changeValue(this)">
+                                <option value="Ω" selected>Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select><input class="my-textbox tc" value="" type="text" name="input" id="input" style="width:30px"><input class="my-textbox input-width" value="" type="text" name="input" id="input">
+                            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="changeValue(this)">
+                                <option value="Ω" selected>Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                        </td>
+                        <td align="center">
+                            <input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value="0.1" />
+                            <select class="my-combobox" name="DIANLIU_UNIT_1_1_1" id="DIANLIU_UNIT_1_1_1">
+                                <option value="A">A</option>
+                                <option value="KA">KA</option>
+                                <option value="mA">mA</option>
+                                <option value="μA">μA</option>
+                                <option value="nA">nA</option>
+                                <option value="pA">pA</option>
+                            </select>
+                        </td>
+                        <td align="center">
+                            <input class="my-textbox input-width" value="" type="text" name="input" id="input" onblur="calculate.xiangduiWuCha(this)">
+                            <select class="my-combobox" name="state_1_" id="state_UNIT_1_">
+                                <option value="Ω" selected>Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                        </td>
+                        <td align="center">
+                            <input class="my-textbox input-width" value="" type="text" name="input" id="input" onblur="calculate.xiangduiWuCha(this)">
+                            <select class="my-combobox" name="state_1_" id="state_UNIT_1_">
+                                <option value="Ω" selected>Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                        </td>
+                        <td align="center"><input name="NUMBER" id="" type="text" class="my-textbox tc " style="width:96%" value="" /></td>
+                        <td align="center">± <input name="NUMBER" id="" type="text" class="my-textbox tc " value="" /></td>
+                        <td rowspan="2" align="center"><input name="NUMBER" id="" type="text" class="my-textbox tc " style="width:96%" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value="0.1" />
+                            <select class="my-combobox" name="DIANLIU_UNIT_1_1_1" id="DIANLIU_UNIT_1_1_1">
+                                <option value="A">A</option>
+                                <option value="KA">KA</option>
+                                <option value="mA">mA</option>
+                                <option value="μA">μA</option>
+                                <option value="nA">nA</option>
+                                <option value="pA">pA</option>
+                            </select>
+                        </td>
+                        <td align="center">
+                            <input class="my-textbox input-width" value="" type="text" name="input" id="input" onblur="calculate.xiangduiWuCha(this)">
+                            <select class="my-combobox" name="state_1_" id="state_UNIT_1_">
+                                <option value="Ω" selected>Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                        </td>
+                        <td align="center">
+                            <input class="my-textbox input-width" value="" type="text" name="input" id="input" onblur="calculate.xiangduiWuCha(this)">
+                            <select class="my-combobox" name="state_1_" id="state_UNIT_1_">
+                                <option value="Ω" selected>Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                        </td>
+                        <td align="center"><input name="NUMBER" id="" type="text" class="my-textbox tc " style="width:96%" value="" /></td>
+                        <td align="center">± <input name="NUMBER" id="" type="text" class="my-textbox tc " value="" /></td>
+                    </tr>
+                    <!--/示例 -->
+                </tbody>
+                <tr>
+                    <td colspan="7" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open');TongDao.getCurTongDaoIdx(this)">增加量程</a></td>
+                </tr>
+
+
+
+            </table>
+        </div>
+        <div class="mt10">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
+                <tr>
+                    <th width="50">注：</th>
+                    <td colspan="7"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%" value=""></td>
+                </tr>
+                <tr>
+                    <th>结论：</th>
+                    <td colspan="7"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%"></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <!--增加量程弹层-->
+    <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return TongDao.addRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+        <table>
+            <tr>
+                <td width="80" align="right">量程值：</td>
+                <td><input type="text" id="txtNumber" class="my-textbox " style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">检测点数：</td>
+                <td><input type="text" id="txtPoint" class="my-textbox " style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">小数点位数：</td>
+                <td><input type="text" id="txtPointLen" class="my-textbox " style="width:200px" /></td>
+            </tr>
+        </table>
+    </div>
+    <!--/增加量程弹层-->
+
+    <script type="text/javascript" language="javascript">
+
+        var index = 1;
+        var currentindex = 1;
+        var TongDao = {
+            addTongDao: function () {
+                var tongdao = $("#tongdao_dy_1").clone();
+                this.setTongDaoIdx(index + 1);
+                $("#tongdao").append($(tongdao).attr("id", "tongdao_dy_" + this.getTongDaoIdx()));
+            },
+            addRow: function () {
+                var ddlHtml = "  <select class=\"my-combobox\" name=\"state_1_\" id=\"state_UNIT_1_\">" +
+                                 " <option value=\"Ω\" selected>Ω</option>" +
+                                 "<option value=\"TΩ\">TΩ</option>" +
+                                  "<option value=\"GΩ\">GΩ</option>" +
+                                  "<option value=\"MΩ\">MΩ</option>" +
+                                  "<option value=\"kΩ\">kΩ</option>" +
+                                  "<option value=\"mΩ\">mΩ</option>" +
+                                  "<option value=\"μΩ\">μΩ</option>" +
+                                "</select>";
+                var ddHtml1 = "  <select class=\"my-combobox\" name=\"DIANLIU_UNIT_1_1_1\" id=\"DIANLIU_UNIT_1_1_1\">" +
+                                 " <option value=\"A\" >A</option>" +
+                                  "<option value=\"KA\">KA</option>" +
+                                  "<option value=\"mA\">mA</option>" +
+                                  "<option value=\"μA\">μA</option>" +
+                                  "<option value=\"nA\">nA</option>" +
+                                  "<option value=\"pA\">pA</option>" +
+                                  "</select> ";
+                var inputHtml = "<input class=\"my-textbox input-width \" value=\"\" type=\"text\" name=\"input\" id=\"input\" onblur=\"calculate.xiangduiWuCha(this)\">";
+                var intputHtml1 = "<input class=\"my-textbox tc\" value=\"\" type=\"text\" name=\"input\" id=\"input\" style=\"width:30px\">";
+                var rows = $("#txtPoint").val();
+                for (var i = 0; i < rows; i++) {
+                    // var rowIdx = $("#tongdao_dy_" + currentindex + " tbody").eq(0).find('tr').last().children().eq(0).text();
+
+                    $("#tongdao_dy_" + currentindex + " tbody").eq(0).append("   <tr>" +
+                                                                               //"<td rowspan=" + rows + " align=\"center\">" + inputHtml +
+                                                                               // ddlHtml + intputHtml1 + inputHtml + ddlHtml +
+                                                                               // "</td>" +
+                                                                               "<td align=\"center\"><input name=\"DIANLIU\" id=\"DIANLIU_1_1_1\" type=\"text\" class=\"my-textbox input-width tr\" value=\"0.1\" />" +
+                                                                               ddlHtml + "</td>" +
+                                                                               "<td align=\"center\">" + inputHtml + ddlHtml + "</td>" +
+                                                                               "<td align=\"center\"><input class=\"my-textbox input-width\" value=\"\" type=\"text\" name=\"input\" id=\"input\" onblur=\"calculate.xiangduiWuCha(this)\">" +
+                                                                                 ddlHtml +
+                                                                                 "</td>" +
+                                                                               "<td align=\"center\"><input name=\"NUMBER\" id=\"\" type=\"text\" class=\"my-textbox tc\" style=\"width:96%\" value=\"\" /></td>" +
+                                                                               "<td align=\"center\">± <input name=\"NUMBER\" id=\"\" type=\"text\" class=\"my-textbox tc \"  value=\"\" /></td>" +
+                                                                               //"<td rowspan=\"2\" align=\"center\"><input name=\"NUMBER\" id=\"\" type=\"text\" class=\"my-textbox tc \" style=\"width:96%\" value=\"\" /></td>" +
+                                                                             " </tr>");
+
+
+
+                }
+                var curRowspan = $("#tongdao_dy_" + currentindex + " tbody tr:eq(0) td").eq(0).attr("rowspan");
+                $("#tongdao_dy_" + currentindex + " tbody tr:eq(0) td").eq(0).attr("rowspan", (parseInt(curRowspan) + rows));
+                $("#tongdao_dy_" + currentindex + " tbody tr:eq(0) td").eq(6).attr("rowspan", (parseInt(curRowspan) + rows));
+
+            },
+            setTongDaoIdx: function (idx) {
+                index = currentindex = idx;
+            },
+            getTongDaoIdx: function () {
+                return index;
+            },
+            getCurTongDaoIdx: function (obj) {
+                var id = $(obj).parents('table').eq(0).attr("id");
+                currentindex = id.split('_')[2];
+            }
+        }
+        var calculate = {
+            xiangduiWuCha: function (obj) {
+                //【相对误差】=（显示值-标准值）/标准值*100%，
+                var arry = this.getXianZhiLength(obj);
+                var tr = $(obj).parents('tr').eq(0);
+                var isFirst = $(tr).children().eq(0).attr("rowspan") == undefined ? false : true;
+                var xianshizhi = $(tr).children().eq((isFirst ? 3 : 2)).find('input').val();
+                var biaozhunzhi = $(tr).children().eq((isFirst ? 2 : 1)).find('input').val();
+
+                if (xianshizhi != "" && biaozhunzhi != "")
+                    $(tr).children().eq((isFirst ? 4 : 3)).find('input').val(fomatFloat(parseFloat((parseFloat(xianshizhi) - parseFloat(biaozhunzhi)) / parseFloat(biaozhunzhi) * 100), arry[0].length + 1))
+
+            }, getXianZhiLength: function (obj) {
+                var arry = [];
+                var tr = $(obj).parents('tr').eq(0);
+                var isFirst = $(tr).children().eq(0).attr("rowspan") == undefined ? false : true;
+                var xianZhi = $(tr).children().eq((isFirst ? 5 : 4)).find('input').val();
+                if (xianZhi == "") {
+                    arry.push({
+                        length: 0
+                    });
+                }
+                else {
+                    arry.push({
+                        length: xianZhi.split(".").length ==2 ? xianZhi.split(".")[1].length : 0
+                    });
+                }
+                return arry;
+
+            }
+        }
+
+    </script>
+</body>
+</html>

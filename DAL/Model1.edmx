@@ -1339,6 +1339,7 @@
           <Property Name="GROUPS" Type="number" Precision="38" Scale="0" />
           <Property Name="UNCERTAINTYUI" Type="varchar2" MaxLength="200" />
           <Property Name="CATEGORY" Type="varchar2" MaxLength="200" />
+          <Property Name="UNCERTAINTYUIUNIT" Type="nvarchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="UNDERTAKE_LABORATORY">
           <Key>
@@ -1643,10 +1644,10 @@
         <EntityType Name="VTEST_ITE">
           <Key>
             <PropertyRef Name="PREPARE_SCHEMEID" />
-            <PropertyRef Name="ROW_FLAG" />
+            <PropertyRef Name="RID" />
           </Key>
-          <Property Name="RID" Type="number" Precision="38" Scale="0" />
-          <Property Name="ROW_FLAG" Type="varchar2" MaxLength="73" Nullable="false" />
+          <Property Name="RID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ROW_FLAG" Type="varchar2" MaxLength="73" />
           <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="SCHEMEID" Type="varchar2" MaxLength="36" />
           <Property Name="RULEID" Type="varchar2" MaxLength="36" />
@@ -2508,7 +2509,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="RENYUANGONGZUOLIANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TENGFEI">
+          <Parameter Name="STARTDATE" Type="date" Mode="In" />
+          <Parameter Name="ENDDATE" Type="date" Mode="In" />
+          <Parameter Name="DANWEI" Type="varchar2" Mode="In" />
+        </Function>
         <Function Name="SHIYANSHIGONGZUO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TENGFEI">
+          <Parameter Name="STARTDATE" Type="date" Mode="In" />
+          <Parameter Name="ENDDATE" Type="date" Mode="In" />
+          <Parameter Name="DANWEI" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="ZHENGSHUHAOLEIBIE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TENGFEI">
           <Parameter Name="STARTDATE" Type="date" Mode="In" />
           <Parameter Name="ENDDATE" Type="date" Mode="In" />
           <Parameter Name="DANWEI" Type="varchar2" Mode="In" />
@@ -3186,6 +3197,16 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
             <Parameter Name="ENDDATE" Mode="In" Type="DateTime" />
             <Parameter Name="DANWEI" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="RENYUANGONGZUOLIANG" ReturnType="Collection(Model.RENYUANGONGZUOLIANG_Result)">
+            <Parameter Name="STARTDATE" Mode="In" Type="DateTime" />
+            <Parameter Name="ENDDATE" Mode="In" Type="DateTime" />
+            <Parameter Name="DANWEI" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ZHENGSHUHAOLEIBIE" ReturnType="Collection(Model.ZHENGSHUHAOLEIBIE_Result)">
+            <Parameter Name="STARTDATE" Mode="In" Type="DateTime" />
+            <Parameter Name="ENDDATE" Mode="In" Type="DateTime" />
+            <Parameter Name="DANWEI" Mode="In" Type="String" />
+          </FunctionImport>
           <EntitySet Name="AC_VOLTAGE_CURRENT" EntityType="Model.AC_VOLTAGE_CURRENT" />
           <EntitySet Name="ACTIVE_POWER" EntityType="Model.ACTIVE_POWER" />
           <EntitySet Name="ALLOWABLE_ERROR" EntityType="Model.ALLOWABLE_ERROR" />
@@ -3265,7 +3286,6 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySet Name="VSHENPI" EntityType="Model.VSHENPI" />
           <EntitySet Name="VSHIYANSHIGONGZUOLIANG" EntityType="Model.VSHIYANSHIGONGZUOLIANG" />
           <EntitySet Name="VTEST_ITE" EntityType="Model.VTEST_ITE" />
-          <EntitySet Name="VXIANGQING" EntityType="Model.VXIANGQING" />
           <EntitySet Name="VZHENGSHULEIBEITONGJIFENXI" EntityType="Model.VZHENGSHULEIBEITONGJIFENXI" />
           <EntitySet Name="VZHENGSHUXINXICHAXUN" EntityType="Model.VZHENGSHUXINXICHAXUN" />
           <AssociationSet Name="FK_AC_VOLTA_REFERENCE_OVERALL_" Association="Model.FK_AC_VOLTA_REFERENCE_OVERALL_">
@@ -3508,6 +3528,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
             <End Role="SysPerson" EntitySet="SysPerson" />
             <End Role="SysRole" EntitySet="SysRole" />
           </AssociationSet>
+          <EntitySet Name="VXIANGQING" EntityType="Model.VXIANGQING" />
           </EntityContainer>
         <ComplexType Name="SHIYANSHIGONGZUO_Result">
           <Property Type="String" Name="ID" Nullable="false" MaxLength="20" />
@@ -3518,6 +3539,28 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Type="Decimal" Name="JIANDINGWANCHENG" Nullable="false" />
           <Property Type="Decimal" Name="PIZHUNTONGGUO" Nullable="false" />
           <Property Type="Decimal" Name="SHEBEIGUZHANG" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ZHENGSHUHAOLEIBIE_Result">
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="20" />
+          <Property Type="Decimal" Name="WEITUODAN" Nullable="false" />
+          <Property Type="Decimal" Name="JIANDINGWANCHENG" Nullable="false" />
+          <Property Type="Decimal" Name="SHEBEIGUZHANG" Nullable="false" />
+          <Property Type="Decimal" Name="PIZHUNTONGGUO" Nullable="false" />
+          <Property Type="Decimal" Name="HEGE" Nullable="false" />
+          <Property Type="Decimal" Name="BUHEGE" Nullable="false" />
+          <Property Type="Decimal" Name="CHAOQI" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="RENYUANGONGZUOLIANG_Result">
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="20" />
+          <Property Type="Decimal" Name="WEITUODAN" Nullable="false" />
+          <Property Type="Decimal" Name="JIANDINGWANCHENG" Nullable="false" />
+          <Property Type="Decimal" Name="SHEBEIGUZHANG" Nullable="false" />
+          <Property Type="Decimal" Name="PIZHUNTONGGUO" Nullable="false" />
+          <Property Type="Decimal" Name="PIZHUNBUTONGGUO" Nullable="false" />
+          <Property Type="Decimal" Name="SHENHEBUTONGGUO" Nullable="false" />
+          <Property Type="Decimal" Name="HEGE" Nullable="false" />
+          <Property Type="Decimal" Name="BUHEGE" Nullable="false" />
+          <Property Type="Decimal" Name="CHAOQI" Nullable="false" />
         </ComplexType>
         <EntityType Name="AC_VOLTAGE_CURRENT">
           <Key>
@@ -4930,6 +4973,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="GROUPS" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="UNCERTAINTYUI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CATEGORY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UNCERTAINTYUIUNIT" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="METERING_STANDARD_DEVICE" Relationship="Model.FK_UNCERTAI_REFERENCE_METERING" FromRole="UNCERTAINTYTABLE" ToRole="METERING_STANDARD_DEVICE" />
         </EntityType>
         <EntityType Name="UNDERTAKE_LABORATORY">
@@ -5212,10 +5256,10 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
         <EntityType Name="VTEST_ITE">
           <Key>
             <PropertyRef Name="PREPARE_SCHEMEID" />
-            <PropertyRef Name="ROW_FLAG" />
+            <PropertyRef Name="RID" />
           </Key>
-          <Property Name="RID" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="ROW_FLAG" Type="String" MaxLength="73" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ROW_FLAG" Type="String" MaxLength="73" FixedLength="false" Unicode="false" />
           <Property Name="PREPARE_SCHEMEID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="RULEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
@@ -5230,19 +5274,6 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="ISCOMPLETE" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="SCHEME_RULEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="SORT" Type="Decimal" Precision="38" Scale="0" />
-        </EntityType>
-        <EntityType Name="VXIANGQING">
-          <Key>
-            <PropertyRef Name="DD" />
-          </Key>
-          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="DD" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="ORDER_TASK_INFORMATIONID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="STATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="RECEIVEINS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CREATETIME" Type="DateTime" />
         </EntityType>
         <EntityType Name="VZHENGSHULEIBEITONGJIFENXI">
           <Key>
@@ -5970,6 +6001,19 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <End Type="Model.SysPerson" Role="SysPerson" Multiplicity="*" />
           <End Type="Model.SysRole" Role="SysRole" Multiplicity="*" />
         </Association>
+        <EntityType Name="VXIANGQING">
+          <Key>
+            <PropertyRef Name="DD" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DD" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="ORDER_TASK_INFORMATIONID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="STATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RECEIVEINS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CREATETIME" Type="DateTime" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5987,6 +6031,36 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
                 <ScalarProperty Name="JIANDINGWANCHENG" ColumnName="JIANDINGWANCHENG" />
                 <ScalarProperty Name="PIZHUNTONGGUO" ColumnName="PIZHUNTONGGUO" />
                 <ScalarProperty Name="SHEBEIGUZHANG" ColumnName="SHEBEIGUZHANG" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RENYUANGONGZUOLIANG" FunctionName="Model.Store.RENYUANGONGZUOLIANG" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.RENYUANGONGZUOLIANG_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="WEITUODAN" ColumnName="WEITUODAN" />
+                <ScalarProperty Name="JIANDINGWANCHENG" ColumnName="JIANDINGWANCHENG" />
+                <ScalarProperty Name="SHEBEIGUZHANG" ColumnName="SHEBEIGUZHANG" />
+                <ScalarProperty Name="PIZHUNTONGGUO" ColumnName="PIZHUNTONGGUO" />
+                <ScalarProperty Name="PIZHUNBUTONGGUO" ColumnName="PIZHUNBUTONGGUO" />
+                <ScalarProperty Name="SHENHEBUTONGGUO" ColumnName="SHENHEBUTONGGUO" />
+                <ScalarProperty Name="HEGE" ColumnName="HEGE" />
+                <ScalarProperty Name="BUHEGE" ColumnName="BUHEGE" />
+                <ScalarProperty Name="CHAOQI" ColumnName="CHAOQI" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ZHENGSHUHAOLEIBIE" FunctionName="Model.Store.ZHENGSHUHAOLEIBIE" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.ZHENGSHUHAOLEIBIE_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="WEITUODAN" ColumnName="WEITUODAN" />
+                <ScalarProperty Name="JIANDINGWANCHENG" ColumnName="JIANDINGWANCHENG" />
+                <ScalarProperty Name="SHEBEIGUZHANG" ColumnName="SHEBEIGUZHANG" />
+                <ScalarProperty Name="PIZHUNTONGGUO" ColumnName="PIZHUNTONGGUO" />
+                <ScalarProperty Name="HEGE" ColumnName="HEGE" />
+                <ScalarProperty Name="BUHEGE" ColumnName="BUHEGE" />
+                <ScalarProperty Name="CHAOQI" ColumnName="CHAOQI" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -7316,6 +7390,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="UNCERTAINTYTABLE">
             <EntityTypeMapping TypeName="Model.UNCERTAINTYTABLE">
               <MappingFragment StoreEntitySet="UNCERTAINTYTABLE">
+                <ScalarProperty Name="UNCERTAINTYUIUNIT" ColumnName="UNCERTAINTYUIUNIT" />
                 <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
                 <ScalarProperty Name="UNCERTAINTYUI" ColumnName="UNCERTAINTYUI" />
                 <ScalarProperty Name="GROUPS" ColumnName="GROUPS" />
@@ -7660,20 +7735,6 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VXIANGQING">
-            <EntityTypeMapping TypeName="Model.VXIANGQING">
-              <MappingFragment StoreEntitySet="VXIANGQING">
-                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
-                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
-                <ScalarProperty Name="RECEIVEINS" ColumnName="RECEIVEINS" />
-                <ScalarProperty Name="STATE" ColumnName="STATE" />
-                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
-                <ScalarProperty Name="ORDER_TASK_INFORMATIONID" ColumnName="ORDER_TASK_INFORMATIONID" />
-                <ScalarProperty Name="DD" ColumnName="DD" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VZHENGSHULEIBEITONGJIFENXI">
             <EntityTypeMapping TypeName="Model.VZHENGSHULEIBEITONGJIFENXI">
               <MappingFragment StoreEntitySet="VZHENGSHULEIBEITONGJIFENXI">
@@ -7762,6 +7823,20 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
               <ScalarProperty Name="Id" ColumnName="SysPersonId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="VXIANGQING">
+            <EntityTypeMapping TypeName="Model.VXIANGQING">
+              <MappingFragment StoreEntitySet="VXIANGQING">
+                <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+                <ScalarProperty Name="CREATEPERSON" ColumnName="CREATEPERSON" />
+                <ScalarProperty Name="RECEIVEINS" ColumnName="RECEIVEINS" />
+                <ScalarProperty Name="STATE" ColumnName="STATE" />
+                <ScalarProperty Name="APPLIANCE_NAME" ColumnName="APPLIANCE_NAME" />
+                <ScalarProperty Name="ORDER_TASK_INFORMATIONID" ColumnName="ORDER_TASK_INFORMATIONID" />
+                <ScalarProperty Name="DD" ColumnName="DD" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

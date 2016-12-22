@@ -2,215 +2,239 @@
 
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width" />
-<title>残余电阻-无不确定度</title>
-<link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
-<link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
-<link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
-<link href="/Content/default.css" rel="stylesheet" />
-<link href="/Content/StyleSheet.css" rel="stylesheet" />
-<script src="/Scripts/jquery.min.js"></script>
-<script src="/Scripts/JScriptCommon.js"></script>
-<script src="/Res/easyui/jquery.easyui.min.js"></script>
-<script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
-<script src="/Scripts/jquery.validate.js"></script>
-<script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>残余电阻-无不确定度</title>
+    <link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="/Content/default.css" rel="stylesheet" />
+    <link href="/Content/StyleSheet.css" rel="stylesheet" />
+    <script src="/Scripts/jquery.min.js"></script>
+    <script src="/Scripts/JScriptCommon.js"></script>
+    <script src="/Res/easyui/jquery.easyui.min.js"></script>
+    <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/Scripts/jianCeXiang.js"></script>
 </head>
 <body class="easyui-layout">
-<input type="hidden" id="rowindex" value="1" />
-<div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
-  <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
-    <table>
-      <tr>
-        <td><!--<a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a> --> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" >保存检测项</a></td>
-      </tr>
-    </table>
-  </div>
-</div>
-<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
-  <div class="mt10"> <span>残余电阻</span> </div>
-  <div class="mt10" id="tongdao">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_dy_1">
-      <thead>
-        <tr>
-          <th width="80" rowspan="2" align="center">序号</th>
-        </tr>
-        <tr>
-          <th width="140" align="center">电压</th>
-          <th width="140" align="center">检定电流</th>
-          <th width="140" align="center">残余电阻</th>
-          <th width="140" align="center">平均值</th>
-          <th width="200" align="center">允许值</th>
-        </tr>
-      </thead>
-      <tbody id="tbody_1">
-        <!--示例 -->
-        <tr>
-          <td align="center"><input name="NUMBER" id="NUMBER_1_1_1" type="text" class="my-textbox input-width " value="" /></td>
-          <td align="center"><input name="DIANYA" id="DIANYA_1_1_1" type="text" class="my-textbox input-width tr" value="" />
-            <select class="my-combobox" name="DIANYA_UNIT" id="DIANYA_UNIT_1_1_1" onchange="changeValue(this)" >
-              <option value="V">V</option>
-              <option value="MV">MV</option>
-              <option value="KV">KV</option>
-              <option value="mV">mV</option>
-              <option value="μV">μV</option>
-          </select></td>
-          <td align="center"><input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value="0.1" />
-            <select class="my-combobox" name="DIANLIU_UNIT_1_1_1" id="DIANLIU_UNIT_1_1_1">
-              <option value="A" >A</option>
-              <option value="KA">KA</option>
-              <option value="mA">mA</option>
-              <option value="μA">μA</option>
-              <option value="nA">nA</option>
-              <option value="pA">pA</option>
-          </select></td>
-          <td align="center"><input name="DIANZU" id="DIANZU_1_1_1" type="text" class="my-textbox input-width tr" value="" />
-            <select class="my-combobox" name="DIANZU_UNIT" id="DIANZU_UNIT_1_1_1" onchange="changeValue(this)" >
-              <option value="Ω">Ω</option>
-              <option value="TΩ">TΩ</option>
-              <option value="GΩ">GΩ</option>
-              <option value="MΩ">MΩ</option>
-              <option value="kΩ">kΩ</option>
-              <option value="mΩ">mΩ</option>
-              <option value="μΩ">μΩ</option>
-          </select></td>
-          <td rowspan="3" align="center"><input name="PINGJUN" id="PINGJUN_1_1_1" type="text" class="my-textbox input-width tr" value="" />
-            <select class="my-combobox" name="PINGJUN_UNIT" id="PINGJUN_UNIT_1_1_1" onchange="changeValue(this)" >
-              <option value="Ω">Ω</option>
-              <option value="TΩ">TΩ</option>
-              <option value="GΩ">GΩ</option>
-              <option value="MΩ">MΩ</option>
-              <option value="kΩ">kΩ</option>
-              <option value="mΩ">mΩ</option>
-              <option value="μΩ">μΩ</option>
-          </select></td>
-          <td rowspan="3" align="center" ><input name="input6" id="input4" type="text" class="my-textbox input-width tr" value="" />
-            <select class="my-combobox" name="select5" id="select5" onchange="changeValue(this)" >
-              <option value="Ω">Ω</option>
-              <option value="TΩ">TΩ</option>
-              <option value="GΩ">GΩ</option>
-              <option value="MΩ">MΩ</option>
-              <option value="kΩ">kΩ</option>
-              <option value="mΩ">mΩ</option>
-              <option value="μΩ">μΩ</option>
-            </select> 
-            ~ 
-            <input name="input7" id="input7" type="text" class="my-textbox input-width tr" value="" />
-            <select class="my-combobox" name="select6" id="select6" onchange="changeValue(this)" >
-              <option value="Ω">Ω</option>
-              <option value="TΩ">TΩ</option>
-              <option value="GΩ">GΩ</option>
-              <option value="MΩ">MΩ</option>
-              <option value="kΩ">kΩ</option>
-              <option value="mΩ">mΩ</option>
-              <option value="μΩ">μΩ</option>
-            </select></td>
-        </tr>
-        <tr>
-          <td align="center"><input name="NUMBER" id="NUMBER_1_1_1" type="text" class="my-textbox input-width " value="" /></td>
-          <td align="center"><input name="DIANYA" id="DIANYA_1_1_1" type="text" class="my-textbox input-width tr" value="" />
-            <select class="my-combobox" name="DIANYA_UNIT" id="DIANYA_UNIT_1_1_1" onchange="changeValue(this)" >
-              <option value="V">V</option>
-              <option value="MV">MV</option>
-              <option value="KV">KV</option>
-              <option value="mV">mV</option>
-              <option value="μV">μV</option>
-          </select></td>
-          <td align="center"><input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value="0.1" />
-            <select class="my-combobox" name="DIANLIU_UNIT_1_1_1" id="DIANLIU_UNIT_1_1_1">
-              <option value="A" >A</option>
-              <option value="KA">KA</option>
-              <option value="mA">mA</option>
-              <option value="μA">μA</option>
-              <option value="nA">nA</option>
-              <option value="pA">pA</option>
-          </select></td>
-          <td align="center"><input name="DIANZU" id="DIANZU_1_1_1" type="text" class="my-textbox input-width tr" value="" />
-            <select class="my-combobox" name="DIANZU_UNIT" id="DIANZU_UNIT_1_1_1" onchange="changeValue(this)" >
-              <option value="Ω">Ω</option>
-              <option value="TΩ">TΩ</option>
-              <option value="GΩ">GΩ</option>
-              <option value="MΩ">MΩ</option>
-              <option value="kΩ">kΩ</option>
-              <option value="mΩ">mΩ</option>
-              <option value="μΩ">μΩ</option>
-          </select></td>
-        </tr>
-        <tr>
-          <td align="center"><input name="NUMBER" id="NUMBER_1_1_1" type="text" class="my-textbox input-width " value="" /></td>
-          <td align="center"><input name="DIANYA" id="DIANYA_1_1_1" type="text" class="my-textbox input-width tr" value="" />
-            <select class="my-combobox" name="DIANYA_UNIT" id="DIANYA_UNIT_1_1_1" onchange="changeValue(this)" >
-              <option value="V">V</option>
-              <option value="MV">MV</option>
-              <option value="KV">KV</option>
-              <option value="mV">mV</option>
-              <option value="μV">μV</option>
-          </select></td>
-          <td align="center"><input name="DIANLIU_1_1_" id="DIANLIU_1_1_2" type="text" class="my-textbox input-width tr" value="0.1" />
-            <select class="my-combobox" name="DIANLIU_UNIT_1_1_1" id="DIANLIU_UNIT_1_1_1">
-              <option value="A" >A</option>
-              <option value="KA">KA</option>
-              <option value="mA">mA</option>
-              <option value="μA">μA</option>
-              <option value="nA">nA</option>
-              <option value="pA">pA</option>
-          </select></td>
-          <td align="center"><input name="DIANZU" id="DIANZU_1_1_1" type="text" class="my-textbox input-width tr" value="" />
-            <select class="my-combobox" name="DIANZU_UNIT" id="DIANZU_UNIT_1_1_1" onchange="changeValue(this)" >
-              <option value="Ω">Ω</option>
-              <option value="TΩ">TΩ</option>
-              <option value="GΩ">GΩ</option>
-              <option value="MΩ">MΩ</option>
-              <option value="kΩ">kΩ</option>
-              <option value="mΩ">mΩ</option>
-              <option value="μΩ">μΩ</option>
-          </select></td>
-        </tr>
-        <!--/示例 -->
-      </tbody>
-      
-      
-      <tr>
-        <th >注：</th>
-        <td colspan="6"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%" value=""></td>
-      </tr>
-      <tr>
-        <th>结论：</th>
-        <td colspan="6"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%"></td>
-      </tr>
-      
-    </table>
-  </div>
-  
-</div>
+    <input type="hidden" id="rowindex" value="1" />
+    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+            <table>
+                <tr>
+                    <td><!--<a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a> --> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'">保存检测项</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+        <div class="mt10"> <span>残余电阻</span> </div>
+        <div class="mt10" id="tongdao">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_dy_1">
+                <thead>
+                    <tr>
+                        <th width="80" rowspan="2" align="center">序号</th>
+                    </tr>
+                    <tr>
+                        <th width="140" align="center">电压</th>
+                        <th width="140" align="center">检定电流</th>
+                        <th width="140" align="center">残余电阻</th>
+                        <th width="140" align="center">平均值</th>
+                        <th  align="center">允许值</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_1">
+                    <!--示例 -->
+                    <tr>
+                        <td align="center"><input name="NUMBER" id="NUMBER_1_1_1" type="text" class="my-textbox input-width " value="" /></td>
+                        <td align="center">
+                            <input name="DIANYA" id="DIANYA_1_1_1" type="text" class="my-textbox input-width tr" value="" onblur="calculate.canyuDianZu(this)" />
+                            <select class="my-combobox" name="DIANYA_UNIT" id="DIANYA_UNIT_1_1_1" onchange="changeValue(this)">
+                                <option value="V">V</option>
+                                <option value="MV">MV</option>
+                                <option value="KV">KV</option>
+                                <option value="mV">mV</option>
+                                <option value="μV">μV</option>
+                            </select>
+                        </td>
+                        <td align="center">
+                            <input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value="0.1" onblur="calculate.canyuDianZu(this)" />
+                            <select class="my-combobox" name="DIANLIU_UNIT_1_1_1" id="DIANLIU_UNIT_1_1_1">
+                                <option value="A">A</option>
+                                <option value="KA">KA</option>
+                                <option value="mA">mA</option>
+                                <option value="μA">μA</option>
+                                <option value="nA">nA</option>
+                                <option value="pA">pA</option>
+                            </select>
+                        </td>
+                        <td align="center">
+                            <input name="DIANZU" id="DIANZU_1_1_1" type="text" class="my-textbox input-width tr" value="" />
+                            <select class="my-combobox" name="DIANZU_UNIT" id="DIANZU_UNIT_1_1_1">
+                                <option value="Ω">Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                        </td>
+                        <td rowspan="3" align="center">
+                            <input name="PINGJUN" id="PINGJUN_1_1_1" type="text" class="my-textbox input-width tr" value="" />
+                            <select class="my-combobox" name="PINGJUN_UNIT" id="PINGJUN_UNIT_1_1_1">
+                                <option value="Ω">Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                        </td>
+                        <td rowspan="3" align="center">
+                            <input name="input6" id="input4" type="text" class="my-textbox input-width tr" value="" />
+                            <select class="my-combobox" name="select5" id="select5" onchange="changeValue(this)">
+                                <option value="Ω">Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                            ~
+                            <input name="input7" id="input7" type="text" class="my-textbox input-width tr" value="" />
+                            <select class="my-combobox" name="select6" id="select6" onchange="changeValue(this)">
+                                <option value="Ω">Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center"><input name="NUMBER" id="NUMBER_1_1_1" type="text" class="my-textbox input-width " value="" /></td>
+                        <td align="center">
+                            <input name="DIANYA" id="DIANYA_1_1_1" type="text" class="my-textbox input-width tr" value="" onblur="calculate.canyuDianZu(this)" />
+                            <select class="my-combobox" name="DIANYA_UNIT" id="DIANYA_UNIT_1_1_1">
+                                <option value="V">V</option>
+                                <option value="MV">MV</option>
+                                <option value="KV">KV</option>
+                                <option value="mV">mV</option>
+                                <option value="μV">μV</option>
+                            </select>
+                        </td>
+                        <td align="center">
+                            <input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value="0.1" onblur="calculate.canyuDianZu(this)" />
+                            <select class="my-combobox" name="DIANLIU_UNIT_1_1_1" id="DIANLIU_UNIT_1_1_1">
+                                <option value="A">A</option>
+                                <option value="KA">KA</option>
+                                <option value="mA">mA</option>
+                                <option value="μA">μA</option>
+                                <option value="nA">nA</option>
+                                <option value="pA">pA</option>
+                            </select>
+                        </td>
+                        <td align="center">
+                            <input name="DIANZU" id="DIANZU_1_1_1" type="text" class="my-textbox input-width tr" value="" />
+                            <select class="my-combobox" name="DIANZU_UNIT" id="DIANZU_UNIT_1_1_1">
+                                <option value="Ω">Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center"><input name="NUMBER" id="NUMBER_1_1_1" type="text" class="my-textbox input-width " value="" /></td>
+                        <td align="center">
+                            <input name="DIANYA" id="DIANYA_1_1_1" type="text" class="my-textbox input-width tr" value="" onblur="calculate.canyuDianZu(this)" />
+                            <select class="my-combobox" name="DIANYA_UNIT" id="DIANYA_UNIT_1_1_1">
+                                <option value="V">V</option>
+                                <option value="MV">MV</option>
+                                <option value="KV">KV</option>
+                                <option value="mV">mV</option>
+                                <option value="μV">μV</option>
+                            </select>
+                        </td>
+                        <td align="center">
+                            <input name="DIANLIU_1_1_" id="DIANLIU_1_1_2" type="text" class="my-textbox input-width tr" value="0.1" onblur="calculate.canyuDianZu(this)" />
+                            <select class="my-combobox" name="DIANLIU_UNIT_1_1_1" id="DIANLIU_UNIT_1_1_1">
+                                <option value="A">A</option>
+                                <option value="KA">KA</option>
+                                <option value="mA">mA</option>
+                                <option value="μA">μA</option>
+                                <option value="nA">nA</option>
+                                <option value="pA">pA</option>
+                            </select>
+                        </td>
+                        <td align="center">
+                            <input name="DIANZU" id="DIANZU_1_1_1" type="text" class="my-textbox input-width tr" value="" />
+                            <select class="my-combobox" name="DIANZU_UNIT" id="DIANZU_UNIT_1_1_1">
+                                <option value="Ω">Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!--/示例 -->
+                </tbody>
 
-<!--增加行数弹层-->
-<div id="dlg" class="easyui-dialog" title="增加行数" closed="true" data-options="buttons: [{
-					text:'确定',
-					iconCls:'icon-ok',
-					handler:function(){
-					  return CreateRow()
-					}
-				},{
-					text:'取消',
-					handler:function(){
-                    $('#dlg').window('close');
-         }
-         }]" style="width:400px;height:200px;padding:10px">
-  <table>
-    <tr>
-      <td width="100" align="right" height="100">增加的数量：</td>
-      <td><input type="text" id="txtNumber" class="my-textbox  required " style="width:200px" /></td>
-    </tr>
-  </table>
-</div>
-<!--/增加量程弹层--> 
 
-<script type="text/javascript" language="javascript">
-      
-       
+                <tr>
+                    <th>注：</th>
+                    <td colspan="6"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%" value=""></td>
+                </tr>
+                <tr>
+                    <th>结论：</th>
+                    <td colspan="6"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%"></td>
+                </tr>
 
-</script>
+            </table>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" language="javascript">
+        var calculate = {
+            canyuDianZu: function (obj) {
+                //【残余电阻】=【电压】/【检定电流】，小数位数后三位，四舍六入，逢五奇进偶不进
+                var dianYa = $(obj).parents("tr").children().eq(1).find("input").val();
+                var jianDingDianLiu = $(obj).parents("tr").children().eq(2).find("input").val();
+                if (dianYa != "" && jianDingDianLiu != "") {
+                    $(obj).parents("tr").children().eq(3).find('input').val(fomatFloat(dianYa / jianDingDianLiu, 3));
+                    this.average();
+                }
+
+            },
+            average: function () {
+                var sumTotal = 0;
+                var row = 0;
+                $("#tbody_1 tr").each(function () {
+                    if ($(this).children().eq(3).find("input").val() != "") {
+                        row = row + 1;
+                        sumTotal += parseFloat($(this).children().eq(3).find("input").val());
+                    }
+                })
+                if (row > 0)
+                    $("#PINGJUN_1_1_1").val(fomatFloat(sumTotal / row, 3));
+            }
+        }
+
+
+    </script>
 </body>
 </html>

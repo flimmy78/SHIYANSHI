@@ -9,7 +9,7 @@
     不确定度评定过程
 }
 <!--控件ID-->
-<input type="hidden" id="hideID" value="@ViewBag.ID"/>
+<input type="hidden" id="hideID" value="@ViewBag.ID" />
 <!--检测项目ID-->
 <input type="hidden" id="hideRULEID" value="@ViewBag.RULEID" />
 <!--预备方案ID-->
@@ -26,195 +26,205 @@ else
 
 }
 
-<div id="divHtml" style="height:400px; overflow-x:hidden;">   
-        <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
-            <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
-                <table width="500">
+<div id="divHtml" style="height:400px; overflow-x:hidden;">
+    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+            <table width="500">
+                <tr>
+                    <td>
+                        不确定度的评定
+                    </td>
+                    <td>
+                        <select class="my-combobox" name="pdDDL" id="pdDDL">
+                            <option value=""> </option>
+                            <option value="评定项">评定项</option>
+                            <option value="量程">量程</option>
+                            <option value="档位">档位</option>
+                            <option value="测量范围">测量范围</option>
+                        </select>
+                        <input class="my-textbox " type="text" name="pdText" id="pdText" value="" style="width:100px">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!--评定点 -->
+    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+        <div class="mt10">
+            <table width="95%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td nowrap valign="top" width="60">评定点：</td>
+                    <td valign="top">
+                        <ul class="clear mb10">
+                            <li class="fl mr10">
+                                <select class="my-combobox" name="pddDDL" id="pddDDL_1">
+                                    <option value=""> </option>
+                                    <option value="额定电压">额定电压</option>
+                                    <option value="负载">负载</option>
+                                    <option value="功率因数">功率因数</option>
+                                </select>
+                                <input class="my-textbox " type="text" name="pdd" id="pdd_1" value="" style="width:100px">
+                                <select class="my-combobox" name="pdd" id="pdd_UNIT_1">
+                                    <option value="V">V</option>
+                                    <option value="MV">MV</option>
+                                    <option value="KV">KV</option>
+                                    <option value="mV">mV</option>
+                                    <option value="μV">μV</option>
+                                </select>
+                            </li>
+                            <li class="fl mr10">
+                                <input type="button" class="my-btn" value="添 加" onclick="linkButton.add(this)" />
+                                <input type="button" class="my-btn" value="移 除" onclick="linkButton.del(this)" />
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--/评定点 -->
+        <!--A类 -->
+        <div class="mt10">
+            <h2 class="f14 mt10 "> （1）不确定度的A类评定 </h2>
+        </div>
+        <div class="mt10" id="tongdao">
+            <div>
+                <i>U</i><small>A</small> =
+                <input class="my-textbox " value="" style="width:200px" name="" id="txtBuQueDingA">
+                 <input class="my-textbox " value="" style="width:100px" name="" id="txtValue" onblur="calculate()">
+            </div>
+            <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_moban">
+                <thead>
                     <tr>
-                        <td>
-                            不确定度的评定
-                        </td>
-                        <td>
-                            <select class="my-combobox" name="pdDDL" id="pdDDL">
-                                <option value=""> </option>
-                                <option value="评定项">评定项</option>
-                                <option value="量程">量程</option>
-                                <option value="档位">档位</option>
-                                <option value="测量范围">测量范围</option>
-                            </select>
-                            <input class="my-textbox " type="text" name="pdText" id="pdText" value="" style="width:100px">
-                        </td>                       
+                        <th align="center" width="150">y<sub>1</sub>/y<sub>6</sub></th>
+                        <th align="center" width="150">y<sub>2</sub>/y<sub>7</sub></th>
+                        <th align="center" width="150">y<sub>3</sub>/y<sub>8</sub></th>
+                        <th align="center" width="150">y<sub>4</sub>/y<sub>9</sub></th>
+                        <th align="center" width="150">y<sub>5</sub>/y<sub>10</sub></th>
                     </tr>
-                </table>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_1_1" value="" style="width:95%" onblur="calculate()"></td>
+                        <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_1_2" value="" style="width:95%" onblur="calculate()"></td>
+                        <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_1_3" value="" style="width:95%" onblur="calculate()"></td>
+                        <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_1_4" value="" style="width:95%" onblur="calculate()"></td>
+                        <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_1_5" value="" style="width:95%" onblur="calculate()"></td>
+                    </tr>
+                    <tr>
+                        <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_2_1" value="" style="width:95%" onblur="calculate()"></td>
+                        <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_2_2" value="" style="width:95%" onblur="calculate()"></td>
+                        <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_2_3" value="" style="width:95%" onblur="calculate()"></td>
+                        <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_2_4" value="" style="width:95%" onblur="calculate()"></td>
+                        <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_2_5" value="" style="width:95%" onblur="calculate()"></td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+        <!--/A类 -->
+        <!--B类 -->
+        <div class="mt10">
+            <h2 class="f14 mt10 "> （2）不确定度的B类评定 </h2>
+        </div>
+        <div class="mt10">
+            <div>
+                <i>U</i><small>B</small> =
+                <input class="my-textbox " value="" style="width:200px" name="" id="txtBuQueDingB"> 
+                <input class="my-textbox " value="" style="width:100px" name="" id="txtValueB" onblur="calculateB()">
+            </div>
+            <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_B">
+                <thead>
+                    <tr>
+                        <th align="center" width="150">评定项/范围</th>
+                        <th align="center" width="150">误差来源</th>
+                        <th align="center" width="150">误差限</th>
+                        <th align="center" width="150">误差分布状况</th>
+                        <th align="center" width="100"><i>k</i></th>
+                        <th align="center" width="150">不确定度Ui</th>
+                    </tr>
+                </thead>
+                <tbody  id="buquedingdub">
+                    <tr>
+                        <td align="center"><input class="my-textbox " type="text" name="B_PingDing" id="B_PingDing_1" value="" style="width:95%"></td>
+                        <td align="center">
+                            <input class="my-textbox input-width" type="text" name="B_WuChaLaiYuan" id="B_WuChaLaiYuan_1" value="">
+                            <input class="my-textbox input-width" type="text" name="sourceNum" id="sourceNum_1" value="u1"  style="width:40px">
+                       
+                        </td>
+                        <td align="center">
+                            <input class="my-textbox input-width" type="text" name="B_WuChaXian" id="B_WuChaXian_1" value="">
+                            <input class="my-textbox " type="text" name="B_WuChaXian_UNIT" id="B_WuChaXian_UNIT_1" value="" style="width:40px">
+                        </td>
+                        <td align="center"><input class="my-textbox input-width" type="text" name="B_WuChaFenBu" id="B_WuChaFenBu_1" value="" style="width:95%"></td>
+                        <td align="center"><input class="my-textbox input-width" type="text" name="B_K" id="B_K_1" value=""></td>
+                        <td align="center">
+                            <input class="my-textbox input-width" type="text" name="B_Ui" id="B_Ui_1" value="" onblur="calculateB()">
+                            <input class="my-textbox " type="text" name="B_Ui_UNIT" id="B_Ui_UNIT_1" value="" style="width:40px">
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6">
+                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addRow(this)">增加</a> 
+                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="xunzhe()">选择</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'" onclick="resetRow()">重置</a>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!--/B类 -->
+        <!--合成不确定度评定 -->
+        <div class="mt10">
+            <h2 class="f14 mt10 "> （3）合成不确定度评定 </h2>
+            <div class="mt10">
+                <div>
+                    <i>U</i><small>c</small> =
+                    <input class="my-textbox " value="" style="width:300px" id="txtBuQueDingC" onclick="calculateB()">
+                </div>
             </div>
         </div>
-        <!--评定点 -->
-        <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
-            <div class="mt10">
-                <table width="95%" border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td nowrap valign="top" width="60">评定点：</td>
-                        <td valign="top">
-                            <ul class="clear mb10">                               
-                                <li class="fl mr10">
-                                    <select class="my-combobox" name="pddDDL" id="pddDDL_1">
-                                        <option value=""> </option>
-                                        <option value="额定电压">额定电压</option>
-                                        <option value="负载">负载</option>
-                                        <option value="功率因数">功率因数</option>
-                                    </select>
-                                    <input class="my-textbox " type="text" name="pdd" id="pdd_1" value="" style="width:100px">
-                                    <select class="my-combobox" name="pdd" id="pdd_UNIT_1">
-                                        <option value="V">V</option>
-                                        <option value="MV">MV</option>
-                                        <option value="KV">KV</option>
-                                        <option value="mV">mV</option>
-                                        <option value="μV">μV</option>
-                                    </select>
-                                </li>
-                                <li class="fl mr10">
-                                    <input type="button" class="my-btn" value="添 加" onclick="linkButton.add(this)" />
-                                    <input type="button" class="my-btn" value="移 除" onclick="linkButton.del(this)" />
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <!--/评定点 -->
-            <!--A类 -->
-            <div class="mt10">
-                <h2 class="f14 mt10 "> （1）不确定度的A类评定 </h2>
-            </div>
-            <div class="mt10" id="tongdao">
-                <div>
-                    <i>U</i><small>A</small> =
-                    <input class="my-textbox " value="" style="width:200px" name="" id="txtBuQueDingA"> <input class="my-textbox " value="" style="width:100px" name="" id="txtValue" onblur="calculate()">
-                </div>
-                <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_moban">
-                    <thead>
-                        <tr>
-                            <th align="center" width="150">y<sub>1</sub>/y<sub>6</sub></th>
-                            <th align="center" width="150">y<sub>2</sub>/y<sub>7</sub></th>
-                            <th align="center" width="150">y<sub>3</sub>/y<sub>8</sub></th>
-                            <th align="center" width="150">y<sub>4</sub>/y<sub>9</sub></th>
-                            <th align="center" width="150">y<sub>5</sub>/y<sub>10</sub></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_1_1" value="" style="width:95%" onblur="calculate()"></td>
-                            <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_1_2" value="" style="width:95%" onblur="calculate()"></td>
-                            <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_1_3" value="" style="width:95%" onblur="calculate()"></td>
-                            <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_1_4" value="" style="width:95%" onblur="calculate()"></td>
-                            <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_1_5" value="" style="width:95%" onblur="calculate()"></td>
-                        </tr>
-                        <tr>
-                            <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_2_1" value="" style="width:95%" onblur="calculate()"></td>
-                            <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_2_2" value="" style="width:95%" onblur="calculate()"></td>
-                            <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_2_3" value="" style="width:95%" onblur="calculate()"></td>
-                            <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_2_4" value="" style="width:95%" onblur="calculate()"></td>
-                            <td align="center"><input class="my-textbox input-width" type="text" name="A" id="A_2_5" value="" style="width:95%" onblur="calculate()"></td>
-                        </tr>
-                    </tbody>
-
-                </table>
-            </div>
-
-            <!--/A类 -->
-            <!--B类 -->
-            <div class="mt10">
-                <h2 class="f14 mt10 "> （2）不确定度的B类评定 </h2>
-            </div>
+        <!--合成不确定度评定 -->
+        <!--扩展不确定度评定 -->
+        <div class="mt10">
+            <h2 class="f14 mt10 " style="display:inherit"> （4）合成不确定度评定 </h2>
+            (k =
+            <select class="my-combobox" name="ddlSelectD" id="ddlSelectD" onchange="caculateD()">
+                <option value="2">2 </option>
+                <option value="3">3</option>
+                <option value="√3">√3</option>
+            </select>
+            )
             <div class="mt10">
                 <div>
-                    <i>U</i><small>B</small> =
-                    <input class="my-textbox " value="" style="width:200px" name="" id="txtBuQueDingB"> <input class="my-textbox " value="" style="width:100px" name="" id="txtValueB" onblur="calculateB()">
-                </div>
-                <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_B">
-                    <thead>
-                        <tr>
-                            <th align="center" width="150">评定项/范围</th>
-                            <th align="center" width="150">误差来源</th>
-                            <th align="center" width="150">误差限</th>
-                            <th align="center" width="150">误差分布状况</th>
-                            <th align="center" width="100"><i>k</i></th>
-                            <th align="center" width="150">不确定度Ui</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td align="center"><input class="my-textbox " type="text" name="B_PingDing" id="B_PingDing_1" value="" style="width:95%"></td>
-                            <td align="center">
-                                <input class="my-textbox input-width" type="text" name="B_WuChaLaiYuan" id="B_WuChaLaiYuan_1" value="">
-                                <span name="sourceNum" id="sourceNum_1">u1</span>
-                            </td>
-                            <td align="center">
-                                <input class="my-textbox input-width" type="text" name="B_WuChaXian" id="B_WuChaXian_1" value="">
-                                <input class="my-textbox " type="text" name="B_WuChaXian_UNIT" id="B_WuChaXian_UNIT_1" value="" style="width:40px">
-                            </td>
-                            <td align="center"><input class="my-textbox input-width" type="text" name="B_WuChaFenBu" id="B_WuChaFenBu_1" value="" style="width:95%"></td>
-                            <td align="center"><input class="my-textbox input-width" type="text" name="B_K" id="B_K_1" value=""></td>
-                            <td align="center">
-                                <input class="my-textbox input-width" type="text" name="B_Ui" id="B_Ui_1" value="" onblur="calculateB()">
-                                <input class="my-textbox " type="text" name="B_Ui_UNIT" id="B_Ui_UNIT_1" value="" style="width:40px">
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="6"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addRow(this)">增加</a> <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="">选择</a><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'" onclick="resetRow()">重置</a></td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-            <!--/B类 -->
-            <!--合成不确定度评定 -->
-            <div class="mt10">
-                <h2 class="f14 mt10 "> （3）合成不确定度评定 </h2>
-                <div class="mt10">
-                    <div>
-                        <i>U</i><small>c</small> =
-                        <input class="my-textbox " value="" style="width:300px" id="txtBuQueDingC" onclick="calculateB()">
-                    </div>
+                    <i>U</i><small>rel</small> =
+                    <input class="my-textbox " value="" style="width:300px" id="txtvalueD">
                 </div>
             </div>
-            <!--合成不确定度评定 -->
-            <!--扩展不确定度评定 -->
-            <div class="mt10">
-                <h2 class="f14 mt10 " style="display:inherit"> （4）合成不确定度评定 </h2>
-                (k =
-                <select class="my-combobox" name="ddlSelectD" id="ddlSelectD"  onchange="caculateD()">
-                    <option value="2">2 </option>
-                    <option value="3">3</option>
-                    <option value="√3">√3</option>
-                </select>
-                )
-                <div class="mt10">
-                    <div>
-                        <i>U</i><small>rel</small> =
-                        <input class="my-textbox " value="" style="width:300px" id="txtvalueD">
-                    </div>
-                </div>
-            </div>
-            <!--扩展不确定度评定 -->
-            <!--测量结果报告 -->
-            <div class="mt10">
-                <h2 class="f14 mt10 "> （5）测量结果报告 </h2>
-
-                <div class="mt10">
-                    <div>
-                        扩展不确定度为：
-                        <input class="my-textbox " value="" style="width:300px" id="txtValueE">
-                    </div>
-                </div>
-            </div>
-            <!--测量结果报告 -->
-            <div class="mt10 form-foot"><input type="button" class="my-btn" value="保 存" id="btnSave" onclick="Save();"/> <input type="button" class="my-btn" value="取 消" /></div>
-
         </div>
+        <!--扩展不确定度评定 -->
+        <!--测量结果报告 -->
+        <div class="mt10">
+            <h2 class="f14 mt10 "> （5）测量结果报告 </h2>
+
+            <div class="mt10">
+                <div>
+                    扩展不确定度为：
+                    <input class="my-textbox " value="" style="width:300px" id="txtValueE">
+                </div>
+            </div>
+        </div>
+        <!--测量结果报告 -->
+        <div class="mt10 form-foot"><input type="button" class="my-btn" value="保 存" id="btnSave" onclick="Save();" /> 
+        <input type="button" class="my-btn" value="取 消" /></div>
+
+    </div>
 </div>
-
+<span id="checkMETERING_STANDARD_DEVICEID" style="display:none">
+</span>
+<input type="hidden" id="METERING_STANDARD_DEVICEID" value="" />
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -222,26 +232,25 @@ else
         if (hideHtml.trim() != "") {
             $("#divHtml").html("");
             $("#divHtml").append(hideHtml);
-        }    
+        }
     });
 
     //添加评定点
     var linkButton = {
         add: function (obj) {
-            var newRow = " <ul class=\"clear mb10\">" + $(obj).parents('div ul').html() + "</ul>";          
+            var newRow = " <ul class=\"clear mb10\">" + $(obj).parents('div ul').html() + "</ul>";
 
             var parDiv = $(obj).parents('div ul').parent()
             var newobj = $(parDiv).append(newRow);
             var rowNum = 2;
 
             $(newobj).find('ul:last').prev().children().find('input').each(function () {
-                if(this.id!=null && this.id.trim()!="" && this.id.lastIndexOf("_")>=0)
-                {
+                if (this.id != null && this.id.trim() != "" && this.id.lastIndexOf("_") >= 0) {
                     rowNum = (parseInt(this.id.substring(this.id.lastIndexOf("_") + 1)) + 1);
                     return false;
                 }
 
-            });                
+            });
             $(newobj).find('ul:last').children().find('input').each(function () {
                 if (this.name != "") {
                     var id = this.name + "_" + rowNum;
@@ -268,28 +277,52 @@ else
                 alert('就剩一行了你还删除呀？');
         }
     }
-    //B类增加行    
-    var addRow = function (obj) {        
-        var trNew = $('#tongdao_B tbody').find('tr:last').clone();          
+    //B类增加行
+    var addRow = function (obj) {
+        var trNew = $('#tongdao_B tbody').find('tr:last').clone();
         $(trNew).children().eq(5).find('input').eq(0).val("");
         $(trNew).children().find('input').each(function () {
             if (this.name != "" && this.id != "" && this.id.lastIndexOf("_") >= 0) {
-                var id = this.name + "_" + (parseInt(this.id.substring(this.id.lastIndexOf("_")+1)) + 1);
-                $(this).attr('id', id);               
+                var id = this.name + "_" + (parseInt(this.id.substring(this.id.lastIndexOf("_") + 1)) + 1);
+                $(this).attr('id', id);
             }
         });
         $(trNew).children().find('span').each(function () {
             if (this.id != "" && this.id.lastIndexOf("_") >= 0) {
                 var id = this.id;
-                var num=parseInt(id.substring(id.lastIndexOf("_")+1)) + 1;
-                id = id.substring(0, id.lastIndexOf("_")+1) + num;
+                var num = parseInt(id.substring(id.lastIndexOf("_") + 1)) + 1;
+                id = id.substring(0, id.lastIndexOf("_") + 1) + num;
                 $(this).attr('id', id);
-                $(this).html( "u"+num);               
+                $(this).html("u" + num);
             }
         });
-        
+
 
         $("#tongdao_B tbody").append(trNew);
+    }
+    //B类选择
+    function xunzhe() {
+        showModalMany('METERING_STANDARD_DEVICEID', '../../METERING_STANDARD_DEVICE/IndexUA/@ViewBag.UNDERTAKE_LABORATORY_NAME');
+        var zhi = $("#METERING_STANDARD_DEVICEID").val()
+        var reg = new RegExp("&", "g");//g,表示全部替换。
+        var shu = zhi.replace(reg, '~');
+        $.ajax({
+            type: "Get", //使用Get方法访问后台
+            dataType: "json", //返回json格式的数据
+            url: "../api/UNCERTAINTYTABLEApi/Getdata/" + shu, //要访问的后台地址
+
+            success: function (res) {//msg为返回的数据，在这里做数据绑定
+                if (res != null && res.length > 0) {
+                    for (var i = 0; i < res.length; i++) {
+
+                    }
+                }
+
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
+            }
+        });
     }
     //清空增加的行
     function resetRow() {
@@ -401,51 +434,69 @@ else
         $("#txtvalueD,#txtValueE").val(parseFloat(ddlValue) * parseFloat(valueC))
     }
     //由于html无法获取value，重新给outerHTML赋值
-    function SetAllControlHtml() {       
+    function SetAllControlHtml() {
 
-        $("input[type='text']").each(function () {          
+        $("input[type='text']").each(function () {
 
-            //除了隐藏模板中的输入框，其他所有的输入框123
+            //除了隐藏模板中的输入框，其他所有的输入框
             if (this.id != "") {
+
                 if (this.attributes.value != undefined) {
                     this.attributes.value.value = $(this).val();
+                } else {//如果没有写value属性，则加上
+                    var value = $(this).val();
+                    $(this).attr("value", value);
                 }
+
+
             }
         });
 
         $("select").each(function () {
             //除了隐藏模板中的下拉框，其他所有的下拉框
             if (this.id != "") {
-                var checkText = $(this).find("option:selected").text();  //获取Select选择的Text           
-                $(this).find("option[value='" + checkText + "']").attr("selected", true);
+
+                var value = $(this).val();
+                //清除所有的selected
+                $(this).find("option").each(function (i, item) {
+                    if ($(item).val() == value) {
+                        //将选中的value的option设置为selected
+                        $(item).attr("selected", true);
+                    } else {
+                        $(item).attr("selected", false);
+                    }
+
+
+                }
+            );
+
             }
 
         });
-    }
+    } 
     //保存
-    function Save()
-    {
+    function Save() {
         SetAllControlHtml();
         var ID = $("#hideID").val();//控件ID
         var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();//预备方案ID
-        var RULEID = $("#hideRULEID").val();//检测项ID    
-        var URL = $("#hideURL").val();//不确定计算存储地址     
+        var RULEID = $("#hideRULEID").val();//检测项ID
+        var URL = $("#hideURL").val();//不确定计算存储地址
         var HTMLVALUE = encodeURI($("#divHtml").html());
 
         //获取空对象用于保存添加的信息
         $.ajax({
             type: 'post', //使用post方法访问后台
             dataType: "json", //返回json格式的数据
-            url: '/PROJECTTEMPLET/JiSuanBuQueDingDuSave', //要访问的后台地址      
-            contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式        
-            data: { 'HTMLVALUE': HTMLVALUE,"URL":URL },
+            url: '/PROJECTTEMPLET/JiSuanBuQueDingDuSave', //要访问的后台地址
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
+            data: { 'HTMLVALUE': HTMLVALUE, "URL": URL },
             beforeSend: function () {
                 //InitAlertJS();
             },
             complete: function () {
             }, //AJAX请求完成时隐藏loading提示
 
-            success: function (res) {//msg为返回的数据，在这里做数据绑定               
+            success: function (res) {//msg为返回的数据，在这里做数据绑定
                 if (res.Code == 1) {
                     var ValueE = $("#txtValueE").val();
                     var returnVale = ValueE + "&" + res.Message;
@@ -460,8 +511,8 @@ else
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
             }
-        });       
-        
+        });
+
     }
 
 </script>

@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width" />
+<title>示值误差-无电压示值</title>
+    <link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="/Content/default.css" rel="stylesheet" />
+    <link href="/Content/StyleSheet.css" rel="stylesheet" />
+    <script src="/Scripts/jquery.min.js"></script>
+    <script src="/Scripts/JScriptCommon.js"></script>
+    <script src="/Res/easyui/jquery.easyui.min.js"></script>
+    <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/Scripts/jianCeXiang.js"></script>
+</head>
+<body class="easyui-layout">
+<input type="hidden" id="rowindex" value="1" />
+<div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+  <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+    <table>
+      <tr>
+        <td><a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="TongDao.addTongDao()">增加通道</a> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" >保存检测项</a></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+  <div class="mt10"> <span>示值误差-无电压示值</span> </div>
+  <div class="mt10" id="tongdao">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_dy_1">
+      <thead>
+        <tr>
+          <th width="80" rowspan="3" align="center">序号</th>
+          <th colspan="2" align="center">×
+            <input class="my-textbox input-width" value="" type="text" name="input" id="input" onblur="calculate.wuCha(this)">
+            <select class="my-combobox" name="state_1_" id="state_UNIT_1_"  >
+              <option value="Ω" selected>Ω</option>
+              <option value="TΩ">TΩ</option>
+              <option value="GΩ">GΩ</option>
+              <option value="MΩ">MΩ</option>
+              <option value="kΩ">kΩ</option>
+              <option value="mΩ">mΩ</option>
+              <option value="μΩ">μΩ</option>
+            </select></th>
+          <th colspan="2" align="center">×
+            <input class="my-textbox input-width" value="" type="text" name="input2" id="input2" onblur="calculate.wuCha(this)">
+            <select class="my-combobox" name="state_1_3" id="state_1_2" >
+              <option value="Ω" selected>Ω</option>
+              <option value="TΩ">TΩ</option>
+              <option value="GΩ">GΩ</option>
+              <option value="MΩ">MΩ</option>
+              <option value="kΩ">kΩ</option>
+              <option value="mΩ">mΩ</option>
+              <option value="μΩ">μΩ</option>
+            </select></th>
+        </tr>
+        <tr>
+          <th colspan="2" align="center">检定电流：
+            <input class="my-textbox input-width" value="" type="text" name="input4" id="input5">
+            <select class="my-combobox" name="" id="">
+              <option value="A" selected>A</option>
+              <option value="KA">KA</option>
+              <option value="mA">mA</option>
+              <option value="μA">μA</option>
+              <option value="nA">nA</option>
+              <option value="pA">pA</option>
+            </select></th>
+          <th colspan="2" align="center">检定电流：
+            <input class="my-textbox input-width" value="" type="text" name="input5" id="input6">
+            <select class="my-combobox" name="select2" id="select2">
+              <option value="A" selected>A</option>
+              <option value="KA">KA</option>
+              <option value="mA">mA</option>
+              <option value="μA">μA</option>
+              <option value="nA">nA</option>
+              <option value="pA">pA</option>
+            </select></th>
+        </tr>
+        <tr>
+          <th width="140" align="center">实际值<br>
+            (
+            <select class="my-combobox" name="" id="" onchange="changeValue(this)" >
+              <option value="Ω">Ω</option>
+              <option value="TΩ">TΩ</option>
+              <option value="GΩ">GΩ</option>
+              <option value="MΩ">MΩ</option>
+              <option value="kΩ">kΩ</option>
+              <option value="mΩ">mΩ</option>
+              <option value="μΩ">μΩ</option>
+            </select>
+            )</th>
+          <th width="140" align="center">误差 %</th>
+          <th width="140" align="center">实际值<br>
+            (
+            <select class="my-combobox" name="" id="" onchange="changeValue(this)" >
+              <option value="Ω">Ω</option>
+              <option value="TΩ">TΩ</option>
+              <option value="GΩ">GΩ</option>
+              <option value="MΩ">MΩ</option>
+              <option value="kΩ">kΩ</option>
+              <option value="mΩ">mΩ</option>
+              <option value="μΩ">μΩ</option>
+            </select>
+            )</th>
+          <th width="140" align="center">误差 %</th>
+        </tr>
+      </thead>
+      <tbody id="tbody_1">
+        <!--示例，可删 -->
+        <tr>
+          <td align="center">1</td>
+          <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" onblur="calculate.wuCha(this)"/></td>
+          <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
+          <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" onblur="calculate.wuCha(this)"/></td>
+          <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
+        </tr>
+        <!--/示例，可删 -->
+      </tbody>
+      <tr>
+        <td colspan="5" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open');TongDao.getCurTongDaoIdx(this)">增加行数</a></td>
+      </tr>
+      <tr>
+        <td align="center" nowrap>允许误差 %</td>
+        <td align="right">±</td>
+        <td align="center" ><input name="" id="" type="text" class="my-textbox tr" value=""  onblur="calculate.wuCha(this)"/></td>
+        <td align="right">±</td>
+        <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" onblur="calculate.wuCha(this)"/></td>
+      </tr>
+    </table>
+  </div>
+  <div class="mt10">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
+      <tr>
+        <th width="60" >注：</th>
+        <td colspan="6"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%" value=""></td>
+      </tr>
+      <tr>
+        <th>结论：</th>
+        <td colspan="6"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%"></td>
+      </tr>
+      </table>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10">
+      <tbody id="tbody_2">
+        <tr>
+          <td  align="center" width="50%"><input name="" id="" type="text" class="my-textbox tr" value="" style="width:96%" /></td>
+          <td ><i>U</i><small>rel</small>(k =
+            <select class="my-combobox" name="ddlSelectD" id="ddlSelectD" onchange="caculateD()">
+              <option value="2">2 </option>
+              <option value="3">3</option>
+              <option value="√3">√3</option>
+            </select>
+            ) =
+            <input class="my-textbox " value="" style="width:300px" id="txtvalueD">
+            <input type="button" class="my-btn" value="计 算" onclick="calculate(this)" /></td>
+        </tr>
+      </tbody>
+      <!--<tr>
+        <td colspan="8" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addUrel()">增加不确定度计算行</a></td>
+      </tr> -->
+    </table>
+  </div>
+</div>
+
+<!--增加行数弹层-->
+<div id="dlg" class="easyui-dialog" title="增加行数" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return TongDao.addRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+  <table>
+    <tr>
+      <td width="100" align="right" height="100">增加的数量：</td>
+      <td><input type="text" id="txtNumber" class="my-textbox  required " style="width:200px" /></td>
+    </tr>
+  </table>
+</div>
+<!--/增加量程弹层--> 
+
+<script type="text/javascript" language="javascript">
+    var rowNumber=1;
+    var index = 1;
+    var currentindex = 1;
+    var TongDao = {
+        addTongDao: function () {
+            var tongdao = $("#tongdao_dy_1").clone();
+            this.setTongDaoIdx(index + 1);
+            $("#tongdao").append($(tongdao).attr("id", "tongdao_dy_" + this.getTongDaoIdx()));
+        },
+        addRow: function () { 
+          
+            var inputHtml="<input name=\"\" id=\"\" type=\"text\" class=\"my-textbox tr\" value=\"\" onblur=\"calculate.wuCha(this)\"/>";
+            var rows = $("#txtNumber").val();
+            for (var i = 0; i < rows; i++) {
+                // var rowIdx = $("#tongdao_dy_" + currentindex + " tbody").eq(0).find('tr').last().children().eq(0).text();
+                rowNumber = (rowNumber + 1);
+                $("#tongdao_dy_" + currentindex + " tbody").eq(0).append("<tr>"+
+                                                                              "<td align=\"center\">" + rowNumber + "</td>" +
+                                                                              "<td align=\"center\">"+inputHtml+"</td>"+
+                                                                               "<td align=\"center\">"+inputHtml+"</td>"+
+                                                                              "<td align=\"center\">"+inputHtml+"</td>"+
+                                                                              "<td align=\"center\">"+inputHtml+"</td>"+
+                                                                         "</tr>"); 
+
+            } 
+        },
+        setTongDaoIdx: function (idx) {
+            index = currentindex = idx;
+        },
+        getTongDaoIdx: function () {
+            return index;
+        },
+        getCurTongDaoIdx: function (obj) {
+            var id = $(obj).parents('table').eq(0).attr("id");
+            currentindex = id.split('_')[2];
+        }
+    }
+    var calculate = {
+        wuCha: function (obj) {
+            //【误差】=(【×电阻值】*序号-【实际值】)/【实际值】*100%，比允许误差多一位，四舍六入，逢五奇进偶不进
+            TongDao.getCurTongDaoIdx(obj);
+            var arry = this.getWuChaLength(obj); 
+            $("#tongdao_dy_" + currentindex + " tbody:eq(0) tr").each(function () {
+                //获取序号
+                var xuhao = $(this).children().eq(0).text();
+                //获取电阻值
+                var dianzuzhi = $("#tongdao_dy_" + currentindex + " thead tr th:eq(1)").find("input").val();
+                //获取实际值
+                var shijizhi = $(this).children().eq(1).find('input').val();
+                //计算第一个误差
+                if (dianzuzhi != "" && shijizhi != "")
+                    $(this).children().eq(2).find('input').val(fomatFloat(parseFloat((parseFloat(dianzuzhi) * parseFloat(xuhao) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100), arry[0].length + 1))
+                //计算第二个误差
+                dianzuzhi = $("#tongdao_dy_" + currentindex + " thead tr th:eq(2)").find("input").val();
+                shijizhi = $(this).children().eq(3).find('input').val();
+                if (dianzuzhi != "" && shijizhi != "")
+                    $(this).children().eq(4).find('input').val(fomatFloat(parseFloat((parseFloat(dianzuzhi) * parseFloat(xuhao) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100), arry[0].length1 + 1))
+            });
+
+        }, getWuChaLength: function (obj) {
+            var arry = [];
+            var tr = $(obj).parents('tr').eq(0); 
+            var yunxuWuCha = $("#tongdao_dy_" + currentindex + " tbody:eq(1) tr:eq(1) td:eq(2)").find("input").val();
+            var yunxuWuCha1 = $("#tongdao_dy_" + currentindex + " tbody:eq(1) tr:eq(1) td:eq(4)").find("input").val();
+            if (yunxuWuCha == "" && yunxuWuCha1=="") {
+                arry.push({
+                    length: 0,
+                    length1:0
+                });
+            }
+            else {
+                arry.push({
+                    length: yunxuWuCha.split(".").length == 2 ? yunxuWuCha.split(".")[1].length : 0,
+                    length1: yunxuWuCha1.split(".").length == 2 ? yunxuWuCha1.split(".")[1].length : 0
+                });
+            }
+            return arry;
+
+        }
+    }
+       
+
+</script>
+</body>
+</html>

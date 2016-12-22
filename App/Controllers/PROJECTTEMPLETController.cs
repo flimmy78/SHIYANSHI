@@ -442,6 +442,7 @@ namespace Langben.App.Controllers
         /// <returns></returns>
         public ActionResult JiSuanBuQueDingDu(string ID = "", string RULEID = "",string PREPARE_SCHEMEID = "",string URL="")
         {
+            Common.Account account = GetCurrentAccount();
             if (string.IsNullOrWhiteSpace(URL) || URL.Trim() == "")
             {
                 URL = GetBuQueDingDuUrl(URL);
@@ -456,6 +457,7 @@ namespace Langben.App.Controllers
             ViewBag.HTMLVALUE = htmlValue;
             ViewBag.PREPARE_SCHEMEID = PREPARE_SCHEMEID;
             ViewBag.URL = URL;
+            ViewBag.UNDERTAKE_LABORATORY_NAME = account.UNDERTAKE_LABORATORYName;
             return View();
         }
         /// <summary>
@@ -526,6 +528,11 @@ namespace Langben.App.Controllers
        // {
         //    return View();
         //}
+        public ActionResult GongZuoDianLiuShiZhiWuCha9()
+        {
+
+            return View();
+        }
     }
 }
 

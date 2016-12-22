@@ -38,6 +38,7 @@ namespace Langben.App.Models
         public string ID { get; set; }
         public Nullable<decimal> GROUPS { get; set; }
         public string UNCERTAINTYUI { get; set; }
+        public string UNCERTAINTYUIUNIT{get;set;}
         public string CATEGORY { get; set; }
     }
 }
