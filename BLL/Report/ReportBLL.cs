@@ -1054,16 +1054,17 @@ namespace Langben.Report
                         if (!string.IsNullOrWhiteSpace(iEntity.HTMLVALUE))
                         {
                             doc.LoadHtml(iEntity.HTMLVALUE);
-
+                            
+                            //测试获取数据的时候使用
                             var data1 = AnalyticHTML.GetData(doc);
                             var data2 = AnalyticHTML.GetHeadData(doc);
 
-                            //string s = CreatXML.Create(doc, iEntity.RULEID);
-                            //if (string.IsNullOrWhiteSpace(s))
-                            //{
-                            //    dsaf++;
-                            //}
-                            //errors += s;
+                            ////string s = CreatXML.Create(doc, iEntity.RULEID);
+                            ////if (string.IsNullOrWhiteSpace(s))
+                            ////{
+                            ////    dsaf++;
+                            ////}
+                            ////errors += s;
                         }
                         else
                         {

@@ -106,9 +106,9 @@ namespace Langben.DAL
         public virtual DbSet<VSHENPI> VSHENPI { get; set; }
         public virtual DbSet<VSHIYANSHIGONGZUOLIANG> VSHIYANSHIGONGZUOLIANG { get; set; }
         public virtual DbSet<VTEST_ITE> VTEST_ITE { get; set; }
-        public virtual DbSet<VXIANGQING> VXIANGQING { get; set; }
         public virtual DbSet<VZHENGSHULEIBEITONGJIFENXI> VZHENGSHULEIBEITONGJIFENXI { get; set; }
         public virtual DbSet<VZHENGSHUXINXICHAXUN> VZHENGSHUXINXICHAXUN { get; set; }
+        public virtual DbSet<VXIANGQING> VXIANGQING { get; set; }
     
         public virtual ObjectResult<SHIYANSHIGONGZUO_Result> SHIYANSHIGONGZUO(Nullable<System.DateTime> sTARTDATE, Nullable<System.DateTime> eNDDATE, string dANWEI)
         {
@@ -125,6 +125,40 @@ namespace Langben.DAL
                 new ObjectParameter("DANWEI", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SHIYANSHIGONGZUO_Result>("SHIYANSHIGONGZUO", sTARTDATEParameter, eNDDATEParameter, dANWEIParameter);
+        }
+    
+        public virtual ObjectResult<RENYUANGONGZUOLIANG_Result> RENYUANGONGZUOLIANG(Nullable<System.DateTime> sTARTDATE, Nullable<System.DateTime> eNDDATE, string dANWEI)
+        {
+            var sTARTDATEParameter = sTARTDATE.HasValue ?
+                new ObjectParameter("STARTDATE", sTARTDATE) :
+                new ObjectParameter("STARTDATE", typeof(System.DateTime));
+    
+            var eNDDATEParameter = eNDDATE.HasValue ?
+                new ObjectParameter("ENDDATE", eNDDATE) :
+                new ObjectParameter("ENDDATE", typeof(System.DateTime));
+    
+            var dANWEIParameter = dANWEI != null ?
+                new ObjectParameter("DANWEI", dANWEI) :
+                new ObjectParameter("DANWEI", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RENYUANGONGZUOLIANG_Result>("RENYUANGONGZUOLIANG", sTARTDATEParameter, eNDDATEParameter, dANWEIParameter);
+        }
+    
+        public virtual ObjectResult<ZHENGSHUHAOLEIBIE_Result> ZHENGSHUHAOLEIBIE(Nullable<System.DateTime> sTARTDATE, Nullable<System.DateTime> eNDDATE, string dANWEI)
+        {
+            var sTARTDATEParameter = sTARTDATE.HasValue ?
+                new ObjectParameter("STARTDATE", sTARTDATE) :
+                new ObjectParameter("STARTDATE", typeof(System.DateTime));
+    
+            var eNDDATEParameter = eNDDATE.HasValue ?
+                new ObjectParameter("ENDDATE", eNDDATE) :
+                new ObjectParameter("ENDDATE", typeof(System.DateTime));
+    
+            var dANWEIParameter = dANWEI != null ?
+                new ObjectParameter("DANWEI", dANWEI) :
+                new ObjectParameter("DANWEI", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ZHENGSHUHAOLEIBIE_Result>("ZHENGSHUHAOLEIBIE", sTARTDATEParameter, eNDDATEParameter, dANWEIParameter);
         }
     }
 }
