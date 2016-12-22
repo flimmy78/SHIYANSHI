@@ -2671,6 +2671,43 @@ namespace Langben.Report
         /// <param name="sheet_Destination">目标sheet</param>
         /// <param name="rowIndex_Destination">目标开始行号</param>
         /// <param name="temp">模板信息</param>
+        /// <param name="tableData">表格所有数据（包含表头数据、表数据、表尾数据）</param>              
+        /// <param name="allSpecialCharacters">特殊字符配置信息</param>
+        /// <returns></returns>
+        private int paserData(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination,TableTemplate temp, ALLData tableALLData=null, SpecialCharacters allSpecialCharacters = null)
+        {
+            int rowIndex = rowIndex_Destination;
+
+            //循环通道
+            if (tableALLData != null && tableALLData.data != null && tableALLData.data.Count > 0)
+            {
+                foreach(int tongDaoID in tableALLData.data.Keys)
+                {
+                    #region 画表头
+                    #region 画格子
+                        //CopyRow()
+                    #endregion
+                    #region 填充数据
+                    #endregion 
+                    #endregion
+                    #region 画数据  
+                    #region 画格子
+                    #endregion
+                    #region 填充数据
+                    #endregion 
+                    #endregion
+                }
+            }
+            return 1;
+        }
+
+        /// <summary>
+        /// 设置表格
+        /// </summary>
+        /// <param name="sheet_Source">源sheet</param>
+        /// <param name="sheet_Destination">目标sheet</param>
+        /// <param name="rowIndex_Destination">目标开始行号</param>
+        /// <param name="temp">模板信息</param>
         /// <param name="TableTitleDic">表头</param>
         /// <param name="InputDic">文本框</param>
         /// <param name="OptionDic">下拉框</param>       
