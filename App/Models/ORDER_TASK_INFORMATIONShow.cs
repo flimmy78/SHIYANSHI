@@ -10,8 +10,10 @@ namespace Langben.App.Models
         public ORDER_TASK_INFORMATIONShow()
         {
             APPLIANCE_DETAIL_INFORMATIONShows = new List<APPLIANCE_DETAIL_INFORMATIONShow>();
+            VQIJULINGQU2Show = new List<VQIJULINGQU2Show>();
         }
         public List<APPLIANCE_DETAIL_INFORMATIONShow> APPLIANCE_DETAIL_INFORMATIONShows { get; set; }
+        public List<VQIJULINGQU2Show> VQIJULINGQU2Show { get; set; }
         public string ID { get; set; }
         public string ORDER_NUMBER { get; set; }
         public string ACCEPT_ORGNIZATION { get; set; }
