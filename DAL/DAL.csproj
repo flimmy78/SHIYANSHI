@@ -231,6 +231,9 @@
     </Compile>
     <Compile Include="QUALIFIED_UNQUALIFIED_TEST_ITEMeta.cs" />
     <Compile Include="QUALIFIED_UNQUALIFIED_TEST_ITERepository.cs" />
+    <Compile Include="RENYUANGONGZUOLIANG_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="REPORTCOLLECTION.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -512,6 +515,9 @@
     </Compile>
     <Compile Include="VZHENGSHUXINXICHAXUNMeta.cs" />
     <Compile Include="VZHENGSHUXINXICHAXUNRepository.cs" />
+    <Compile Include="ZHENGSHUHAOLEIBIE_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

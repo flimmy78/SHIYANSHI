@@ -1009,24 +1009,110 @@ namespace Langben.Report
                     SpecialCharacters allSpecialCharacters = GetSpecialCharacters();
 
                     entity.QUALIFIED_UNQUALIFIED_TEST_ITE = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.OrderBy(p => p.SORT).ToList();
-
+                    string xml = string.Empty;
                     foreach (QUALIFIED_UNQUALIFIED_TEST_ITE iEntity in entity.QUALIFIED_UNQUALIFIED_TEST_ITE)
                     {
+                        //iEntity.RULEID;
                         if (!string.IsNullOrWhiteSpace(iEntity.HTMLVALUE))
                         {
                             doc.LoadHtml(iEntity.HTMLVALUE);
+
+
+                            //测试的时候使用
                             string data = AnalyticHTML.Getinput(doc);
                             if (!string.IsNullOrWhiteSpace(data))
                             {
                                 errors += iEntity.ID + iEntity.RULENJOINAME + data;
                             }
                         }
-                      
+
                     }
+                    var da = xml;
                 }
             }
             Message = errors;
             return false;
+        }
+        public bool Testxml(string ID, out string Message)
+        {
+            var dsaf = 1;
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            string errors = string.Empty;
+            var m_BLL = new SCHEMEBLL();
+            var entity = m_BLL.GetById(ID);
+            TableTemplates allTableTemplates = GetTableTemplates();
+            if (entity != null)
+            {
+
+                if (entity.PROJECTTEMPLET != null &&
+              entity.PROJECTTEMPLET.Count > 0)
+                {
+
+
+                    foreach (var iEntity in entity.PROJECTTEMPLET)
+                    {
+                        if (!string.IsNullOrWhiteSpace(iEntity.HTMLVALUE))
+                        {
+                            doc.LoadHtml(iEntity.HTMLVALUE);
+                            
+                            //测试获取数据的时候使用
+                            var data1 = AnalyticHTML.GetData(doc);
+                            var data2 = AnalyticHTML.GetHeadData(doc);
+
+                            ////string s = CreatXML.Create(doc, iEntity.RULEID);
+                            ////if (string.IsNullOrWhiteSpace(s))
+                            ////{
+                            ////    dsaf++;
+                            ////}
+                            ////errors += s;
+                        }
+                        else
+                        {
+                            dsaf++;
+                        }
+
+                    }
+                }
+            }
+            Message = @"<TableTemplates><TableTemplateList>
+ " + errors + @"
+</TableTemplateList></TableTemplates>";
+
+            TableTemplates allTableTemplates2 = TableTemplates.XmlCovertObj(Message);
+            var data = (from f in allTableTemplates.TableTemplateList
+                        from f2 in allTableTemplates2.TableTemplateList
+                        where f.RuleID == f2.RuleID
+
+                                 select f2);
+            TableTemplates t = new TableTemplates();
+            t.TableTemplateList = new List<TableTemplate>();
+
+            foreach (var item in data)
+            {
+                var TableTemplate = (from f in allTableTemplates.TableTemplateList
+                                     where f.RuleID == item.RuleID
+                                     select f).FirstOrDefault();
+            
+                item.DataRowIndex = TableTemplate.DataRowIndex;//数据模板开始行号
+                item.RemarkRowIndex = TableTemplate.RemarkRowIndex;//备注模板行号
+                item.ConclusionRowIndex = TableTemplate.ConclusionRowIndex;//结论模板行号
+
+                var RowInfo = (from f in TableTemplate.TableTitleList
+
+                               select f).FirstOrDefault();
+                if (RowInfo != null)
+                {
+                    foreach (var it in item.TableTitleList)
+                    {
+                        it.RowIndex = RowInfo.RowIndex;//表格表头行号
+                    }
+                }
+                t.TableTemplateList.Add(item);
+            }
+            Message = t.ToString();
+            return false;
+
+
         }
         public bool TestPROJECTTEMPLET(string ID, out string Message)
         {
@@ -1034,15 +1120,15 @@ namespace Langben.Report
             string errors = string.Empty;
             var m_BLL = new SCHEMEBLL();
             var entity = m_BLL.GetById(ID);
-         
+
             if (entity != null)
             {
-              
+
                 if (entity.PROJECTTEMPLET != null &&
               entity.PROJECTTEMPLET.Count > 0)
                 {
-                  
-              
+
+
                     foreach (var iEntity in entity.PROJECTTEMPLET)
                     {
                         if (!string.IsNullOrWhiteSpace(iEntity.HTMLVALUE))
@@ -1053,7 +1139,7 @@ namespace Langben.Report
                             {
                                 errors += iEntity.ID + iEntity.RULE.NAME + data;
                             }
-                          
+
                         }
 
                     }

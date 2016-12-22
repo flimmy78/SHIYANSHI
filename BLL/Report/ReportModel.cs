@@ -52,7 +52,7 @@ namespace Langben.Report
                 return _SubscriptLastCount;
             }
             set
-            {
+            {               
                 _SubscriptLastCount = value;
             }
         }
@@ -202,7 +202,17 @@ namespace Langben.Report
     [XmlRoot("RowInfo")]
     public class RowInfo
     {
-
+        //RowNumber
+        private int _RowNumber = -1;
+        /// <summary>
+        /// 表格表头行号
+        /// </summary>
+        [XmlElement("RowNumber")]
+        public int RowNumber
+        {
+            get { return _RowNumber; }
+            set { _RowNumber = value; }
+        }
         private int _RowIndex = -1;
         /// <summary>
         /// 表格表头行号
