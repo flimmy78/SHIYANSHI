@@ -10,6 +10,7 @@ using System.Text;
 using System.EnterpriseServices;
 using System.Configuration;
 using Models;
+using Langben.App.Models;
 
 namespace Langben.App.Controllers
 {
@@ -34,14 +35,82 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
-        public ActionResult Show(string id)
+        public ActionResult Show(string baogaoid, string qijuid)
         {
-            string search = "ID&" + id + "";
+            ORDER_TASK_INFORMATIONShow osi = new ORDER_TASK_INFORMATIONShow();
+            string ORDER_TASK_INFORMATIONID = string.Empty;
+            List<string> Bao = new List<string>();
+            List<string> Qi = new List<string>();
+            if (!string.IsNullOrWhiteSpace(baogaoid))
+            {
+                foreach (var item in baogaoid.Split('|'))
+                {
+                    if (!string.IsNullOrWhiteSpace(item))
+                    {
+                        ORDER_TASK_INFORMATIONID = item.Split('#')[0];
+                        Bao.Add(item.Split('#')[1]);
+                    }
+                }
+            }
+            if (!string.IsNullOrWhiteSpace(qijuid))
+            {
+                foreach (var item in qijuid.Split('|'))
+                {
+                    if (!string.IsNullOrWhiteSpace(item))
+                    {
+                        Qi.Add(item.Split('#')[1]);
+                    }
+                }
+            }
             int total = 0;
-            List<VQIJULINGQU1> queryData = m_BLL.GetByParamX(id, 10, 10, "asc", "ID", search, ref total);
-            string idd = "ORDER_TASK_INFORMATIONID&" + id;
-            List<VQIJULINGQU2> queryData2 = m_BLL2.GetByParam(id, 1, 100, "DESC", "ID", idd, ref total);
-            App.Models.ORDER_TASK_INFORMATIONShow otn = new Models.ORDER_TASK_INFORMATIONShow();
+            if (!string.IsNullOrWhiteSpace(ORDER_TASK_INFORMATIONID))
+            {
+                List<VQIJULINGQU2> queryData = m_BLL5.GetByParam(null, 1, 100, "DESC", "ID", "ORDER_TASK_INFORMATIONID&" + ORDER_TASK_INFORMATIONID, ref total).Distinct().ToList();
+                foreach (var item in Bao)
+                {
+                    foreach (var q in queryData)
+                    {
+                        if (item == q.PREPARE_SCHEMEID)
+                        {
+                            q.REPORTTORECEVESTATE = "已领取";
+                        }
+                    }
+                }
+                foreach (var item in Qi)
+                {
+                    foreach (var q in queryData)
+                    {
+                        if (item == q.ID)
+                        {
+                            q.APPLIANCECOLLECTIONSATE = "已领取";
+                        }
+                    }
+                }
+                foreach (var item in queryData)
+                {
+                    var vq = new VQIJULINGQU2Show()
+                    {
+                        ID = item.ID,
+                        APPLIANCE_NAME = item.APPLIANCE_NAME,
+                        VERSION = item.VERSION,
+                        FACTORY_NUM = item.FACTORY_NUM,
+                        NUM = item.NUM,
+                        ATTACHMENT = item.ATTACHMENT,
+                        UNDERTAKE_LABORATORYID = item.UNDERTAKE_LABORATORYID,
+                        APPLIANCE_RECIVE = item.APPLIANCE_RECIVE,
+                        REPORTNUMBER = item.REPORTNUMBER,
+                        REMARKS = item.REMARKS,
+                        ORDER_TASK_INFORMATIONID = item.ORDER_TASK_INFORMATIONID,
+                        APPLIANCECOLLECTIONSATE = item.APPLIANCECOLLECTIONSATE,
+                        REPORTTORECEVESTATE = item.REPORTTORECEVESTATE,
+                        PREPARE_SCHEMEID = item.PREPARE_SCHEMEID,
+                        REPORTSTATUS = item.REPORTSTATUS,
+                    };
+                    osi.VQIJULINGQU2Show.Add(vq);
+                }
+
+            }
+
             return View();
         }
         /// <summary>
@@ -59,7 +128,7 @@ namespace Langben.App.Controllers
         {
             search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已领取.GetHashCode() + "^" + "REPORTSTATUSZI&" + Common.REPORTSTATUS.报告已打印.GetHashCode() + "*" + Common.REPORTSTATUS.报告已领取.GetHashCode() + "";
             int total = 0;
-            List<VQIJULINGQU1> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
+            List<VQIJULINGQU1> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total).Distinct().ToList();
             return Json(new datagrid
             {
                 total = total,
@@ -88,16 +157,22 @@ namespace Langben.App.Controllers
 
         IBLL.IVQIJULINGQU1BLL m_BLL;
         IBLL.IVQIJULINGQU2BLL m_BLL2;
+        IBLL.IORDER_TASK_INFORMATIONBLL m_BLL3;
+        IBLL.IPREPARE_SCHEMEBLL m_BLL4;
+        IBLL.IVQIJULINGQU2BLL m_BLL5;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VQIJULINGQU1Controller()
-            : this(new VQIJULINGQU1BLL(), new VQIJULINGQU2BLL()) { }
+            : this(new VQIJULINGQU1BLL(), new VQIJULINGQU2BLL(), new ORDER_TASK_INFORMATIONBLL(), new PREPARE_SCHEMEBLL(), new VQIJULINGQU2BLL()) { }
 
-        public VQIJULINGQU1Controller(VQIJULINGQU1BLL bll, VQIJULINGQU2BLL bll2)
+        public VQIJULINGQU1Controller(VQIJULINGQU1BLL bll, VQIJULINGQU2BLL bll2, ORDER_TASK_INFORMATIONBLL bll3, PREPARE_SCHEMEBLL bll4, VQIJULINGQU2BLL bll5)
         {
             m_BLL = bll;
             m_BLL2 = bll2;
+            m_BLL3 = bll3;
+            m_BLL4 = bll4;
+            m_BLL5 = bll5;
         }
 
     }

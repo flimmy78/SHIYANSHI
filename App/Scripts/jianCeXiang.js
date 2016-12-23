@@ -47,14 +47,15 @@ function Reset() {
     var hideTongDaoShuLiang = $("#hideTongDaoShuLiang").val();//通道数量
     for (var i = 1; i <= hideTongDaoShuLiang; i++) {
         var tongdao = "#tongdao_" + i;
-        $(tongdao).html("");
+        $(tongdao).remove(); //$(tongdao).html("");
     }
+    $("#hideDangQianTongDao").val("0");//当前通道
     $("#hideTongDaoShuLiang").val("0");
     CreateTongDao();
-    //注
-    $("#REMARK").val("");
-    //结论
-    $("#CONCLUSION").val("");
+    ////注
+    //$("#REMARK").val("");
+    ////结论
+    //$("#CONCLUSION").val("");
 }
 
 //根据检测项ID获取控制信息

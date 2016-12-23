@@ -7,12 +7,14 @@ namespace Langben.Report
     /// </summary>
     public class BuDueDingDu
     {
-      public  BuDueDingDu()
+        public BuDueDingDu()
         {
             buDueDingDuB = new List<BuDueDingDuB>();
+            pingding = new List<MYData>();
         }
 
         public List<BuDueDingDuB> buDueDingDuB { get; set; }
+        public List<MYData> pingding { get; set; }
 
         /// <summary>
         /// 不确定度的评定 下拉框

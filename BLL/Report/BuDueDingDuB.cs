@@ -1,5 +1,6 @@
 ﻿namespace Langben.Report
 {
+
     /// <summary>
     /// id name value hangshu(合并几行单元格) 通道 量程 行号 第几列
     /// </summary>
