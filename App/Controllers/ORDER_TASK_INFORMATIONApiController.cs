@@ -178,7 +178,7 @@ namespace Langben.App.Controllers
             data.FAX2 = queryData.FAX2;
             data.CUSTOMER_SPECIFIC_REQUIREMENTS = queryData.CUSTOMER_SPECIFIC_REQUIREMENTS;
             data.ORDER_STATUS = queryData.ORDER_STATUS;
-            data.CREATETIME = queryData.CREATETIME;
+            data.CREATETIME =  queryData.CREATETIME;
             data.CREATEPERSON = queryData.CREATEPERSON;
             data.UPDATETIME = queryData.UPDATETIME;
             data.UPDATEPERSON = queryData.UPDATEPERSON;
