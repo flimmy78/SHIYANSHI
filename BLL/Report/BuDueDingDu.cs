@@ -9,11 +9,11 @@ namespace Langben.Report
     {
         public BuDueDingDu()
         {
-            buDueDingDuB = new List<BuDueDingDuB>();
+            buDueDingDuB = new List<MYData>();
             pingding = new List<MYData>();
         }
 
-        public List<BuDueDingDuB> buDueDingDuB { get; set; }
+        public List<MYData> buDueDingDuB { get; set; }
         public List<MYData> pingding { get; set; }
 
         /// <summary>
