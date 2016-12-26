@@ -947,7 +947,7 @@ namespace Langben.Report
             if (entity.VALIDITY_PERIOD.HasValue && entity.CALIBRATION_DATE.HasValue)
             {
                 //sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
-                sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.CALIBRATION_DATE.Value.AddYears((int)entity.VALIDITY_PERIOD.Value).ToString("yyyy年MM月dd日"));
+                sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.CALIBRATION_DATE.Value.AddYears((int)entity.VALIDITY_PERIOD.Value).AddDays(-1).ToString("yyyy年MM月dd日"));
             }
             else
             {
