@@ -186,7 +186,7 @@ namespace Langben.Report
             set;
         }
         /// <summary>
-        /// 二级标题，有就配置，没有该节点可不配置
+        /// 标题,没有该节点可不配置
         /// </summary>
         [XmlArray("TableTitleList")]
         [XmlArrayItem("RowInfo")]
@@ -205,7 +205,7 @@ namespace Langben.Report
         //RowNumber
         private int _RowNumber = -1;
         /// <summary>
-        /// 表格表头行号
+        /// 表格表头行数
         /// </summary>
         [XmlElement("RowNumber")]
         public int RowNumber

@@ -1698,7 +1698,8 @@ namespace Langben.Report
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
                         //解析html表格数据    
 
-                        RowIndex = paserData(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);
+                        //RowIndex = paserData(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);
+                        RowIndex = paserData_1(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);                        
 
 
                         //表格注
@@ -1776,6 +1777,104 @@ namespace Langben.Report
             }
         }
         #region 复制行
+
+        /// <summary>
+        /// 复制行格式并插入指定行数(返回动态区域)
+        /// </summary>
+        /// <param name="sheet_Source">源sheet</param>
+        /// <param name="sheet_Destination">目标sheet</param>
+        /// <param name="rowIndex_Source">源行号</param>
+        /// <param name="rowIndex_Destination">目标行号</param>
+        /// <param name="insertCount">插入行数</param>
+        /// <param name="IsCopyContent">是否拷贝内容</param>
+        /// <param name="rowInfoList">需要替换的动态模板数据</param>
+        /// <param name="allSpecialCharacters">特殊字符配置信息</param>
+        /// <param name="DongTaiShuJuList">需要替换的动态数据</param>
+        private List<CellRangeAddress> CopyRow_1(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, int insertCount, bool IsCopyContent, List<RowInfo> rowInfoList, SpecialCharacters allSpecialCharacters, List<MYDataHead> DongTaiShuJuList)
+        {
+            List<CellRangeAddress> result = new List<CellRangeAddress>();    
+            IRow row_Source = sheet_Source.GetRow(rowIndex_Source);
+            int sourceCellCount = row_Source.Cells.Count;
+            if(insertCount<=0)
+            {
+                insertCount = 1;
+            }
+            //1. 批量移动行,清空插入区域
+            sheet_Destination.ShiftRows(rowIndex_Destination, //开始行
+                             sheet_Destination.LastRowNum, //结束行
+                             insertCount, //插入行总数
+                             true,        //是否复制行高
+                             false        //是否重置行高
+                             );
+
+            int startMergeCell = -1; //记录每行的合并单元格起始位置
+            //int endMergeCell = -1;//记录每行的合并单元结束位置     
+            //给目标行正式处理格式及插入多少行数据       
+            for (int i = rowIndex_Destination; i < rowIndex_Destination + insertCount; i++)
+            {
+                startMergeCell = -1;
+                IRow targetRow = null;
+                ICell sourceCell = null;
+                ICell targetCell = null;
+
+                targetRow = sheet_Destination.CreateRow(i);
+                targetRow.Height = row_Source.Height;//复制行高 
+                //每行单元格处理               
+                for (int m = row_Source.FirstCellNum; m < row_Source.LastCellNum; m++)
+                {
+                    sourceCell = row_Source.GetCell(m);
+                    row_Source.Cells[m].SetCellType(CellType.String);
+                    if (m + 1 != row_Source.LastCellNum)
+                    {
+                        row_Source.Cells[m + 1].SetCellType(CellType.String);
+                    }
+                    if (sourceCell == null)
+                        continue;
+                    targetCell = targetRow.CreateCell(m);
+                    targetCell.CellStyle = sourceCell.CellStyle;//赋值单元格格式
+                    targetCell.SetCellType(sourceCell.CellType);
+
+                    //列合并，以下为复制模板行的单元格合并格式                    
+                    #region 新合并方式                   
+                    if (sourceCell.IsMergedCell)
+                    {
+                        CellRangeAddress cellAddress = getMergedRegionCell(sheet_Source, m, rowIndex_Source);
+                        if (cellAddress != null && cellAddress.LastColumn > startMergeCell && (cellAddress.LastRow > cellAddress.FirstRow || cellAddress.LastColumn > cellAddress.FirstColumn))
+                        {
+                            if (rowIndex_Source == cellAddress.LastRow)
+                            {
+                                sheet_Destination.AddMergedRegion(new CellRangeAddress(i - (cellAddress.LastRow - cellAddress.FirstRow), i, cellAddress.FirstColumn, cellAddress.LastColumn));
+                                startMergeCell = cellAddress.LastColumn + 1;
+
+                                result.Add(new CellRangeAddress(i - (cellAddress.LastRow - cellAddress.FirstRow), i, cellAddress.FirstColumn, cellAddress.LastColumn));
+                            }
+                            if (IsCopyContent && rowIndex_Source == cellAddress.FirstRow)
+                            {
+                                HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
+                                targetRow.Cells[m].SetCellValue(value);
+                                
+                            }
+                        }
+
+                    }
+                    else
+                    {
+
+                        result.Add(new CellRangeAddress(targetRow.RowNum, targetRow.RowNum, m, m));
+                        if (IsCopyContent)
+                        {
+                            HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
+                            targetRow.Cells[m].SetCellValue(value);
+                        }
+                    }
+                    #endregion
+                }
+            }
+            return result;
+        }
+
+
+
         /// <summary>
         /// 复制行格式并插入指定行数
         /// </summary>
@@ -1911,6 +2010,117 @@ namespace Langben.Report
                 }
             }
         }
+
+        /// <summary>
+        /// 获取单元格数据及动态数据组合
+        /// </summary>
+        /// <param name="DongTaiShuJuList">动态数据值</param>
+        /// <param name="rowInfoList">动态数据位置</param>
+        /// <param name="sourceCell">单元格</param>
+        /// <param name="targetCell">目标单元格</param>
+        /// <param name="allSpecialCharacters">特殊字符配置信息</param>
+        /// <returns></returns>
+        private HSSFRichTextString GetDongTaiShuJu(List<MYDataHead> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, ICell sourceCell = null, ICell targetCell = null, SpecialCharacters allSpecialCharacters = null)
+        {
+            HSSFWorkbook workbook = null;
+            if (targetCell != null && targetCell.Sheet != null && targetCell.Sheet.Workbook != null)
+            {
+                workbook = (HSSFWorkbook)targetCell.Sheet.Workbook;
+            }
+            HSSFRichTextString result = null;
+            if (sourceCell == null)
+            {
+                return new HSSFRichTextString("");
+            }                
+
+            int speStartIndex = sourceCell.StringCellValue.IndexOf("{0}");//动态字符位置
+            string value = "";
+            string SpecialStr = "";
+            //有动态数据
+            if (speStartIndex>=0 && DongTaiShuJuList!=null && DongTaiShuJuList.Count>0 && rowInfoList!=null && rowInfoList.Count>0 && 
+                rowInfoList.FirstOrDefault().Cells!=null && rowInfoList.FirstOrDefault().Cells.FirstOrDefault(p=>p.Code==DongTaiShuJuList.FirstOrDefault().name)!=null )
+            {
+                value = string.Format(sourceCell.StringCellValue, DongTaiShuJuList.FirstOrDefault().value).Trim();
+                SpecialStr = DongTaiShuJuList.FirstOrDefault().value;
+                DongTaiShuJuList.RemoveAt(0);
+            }
+            //无动态数据
+            else
+            {
+                value = string.Format(sourceCell.StringCellValue, "").Trim();
+                speStartIndex = 0;
+                SpecialStr = value;
+            }
+            if (value != null && value.Trim() != "" && value.Trim().ToUpper().IndexOf("U(K") >= 0)
+            {
+                speStartIndex = value.Trim().ToUpper().IndexOf("U(K");
+                SpecialStr = "U(K";
+            }
+            //处理特殊字符下标上标斜体
+            result = new HSSFRichTextString(value);
+
+            if (!string.IsNullOrEmpty(SpecialStr) && SpecialStr.Trim() != "" && speStartIndex >= 0)
+            {
+                //特殊字符是否配置
+                if (workbook != null && allSpecialCharacters != null && allSpecialCharacters.SpecialCharacterList != null &&
+                        allSpecialCharacters.SpecialCharacterList.Count > 0 &&
+                        allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == SpecialStr.Trim().ToUpper()) != null)
+                {
+                    SpecialCharacter spec = allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == SpecialStr.Trim().ToUpper());
+                    #region 将字符设置成斜体
+
+                    HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                    normalFont.IsItalic = true;
+                    normalFont.FontName = "宋体";
+                    int startIndex = speStartIndex;
+                    if (startIndex < 0)
+                    {
+                        startIndex = 0;
+                    }
+                    int endIndex = speStartIndex + spec.Code.Trim().Length - spec.SubscriptLastCount;
+                    if (endIndex < 0)
+                    {
+                        endIndex = 0;
+                    }
+                    result.ApplyFont(startIndex, endIndex, normalFont);
+                    #endregion
+
+                    #region 设置下标
+                    if (spec.SubscriptLastCount > 0)
+                    {
+                        //result = new HSSFRichTextString(value);
+                        // superscript = (HSSFFont)workbook.CreateFont();
+                        //superscript.TypeOffset = FontSuperScript.Super;//上标
+                        //superscript.Color = HSSFColor.RED.index;
+
+                        HSSFFont subscript = (HSSFFont)workbook.CreateFont();
+                        subscript.TypeOffset = FontSuperScript.Sub; //下标  
+                        //subscript.IsItalic = true;
+                        subscript.FontName = "宋体";
+                        //subscript.Color = HSSFColor.Red.Index;
+                        //HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                        startIndex = speStartIndex + spec.Code.Trim().Length - spec.SubscriptLastCount;
+                        if (startIndex < 0)
+                        {
+                            startIndex = 0;
+                        }
+                        endIndex = speStartIndex + spec.Code.Trim().Length;
+                        if (endIndex < 0)
+                        {
+                            endIndex = 0;
+                        }
+                        result.ApplyFont(startIndex, endIndex, subscript);
+                    }
+                    #endregion
+
+                }               
+                return result;
+            }
+
+            return new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
+        }
+
+
         /// <summary>
         /// 获取单元格数据及动态数据组合
         /// </summary>
@@ -2529,7 +2739,103 @@ namespace Langben.Report
             return rowIndex;
 
         }
+        /// <summary>
+        /// 设置表格
+        /// </summary>
+        /// <param name="html"></param>
+        /// <param name="sheet_Source">源sheet</param>     
+        /// <param name="sheet_Destination">目标sheet</param>
+        /// <param name="rowIndex_Destination">目标开始行号</param>
+        /// <param name="temp">模板信息</param>                 
+        /// <param name="allSpecialCharacters">特殊字符配置信息</param>
+        /// <returns></returns>
+        private int paserData_1(string html, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp,  SpecialCharacters allSpecialCharacters = null)
+        {
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(html);
+            Dictionary < int, DataValue > dataDic = AnalyticHTML.GetData(doc);
+            Dictionary < int, List < MYDataHead >> headDic = AnalyticHTML.GetHeadData(doc);
+            int rowIndex = rowIndex_Destination;           
 
+            //循环通道
+            if (headDic != null && headDic.Count>0)
+            {
+                foreach (int tongDaoID in headDic.Keys)
+                {
+                    #region 画表头
+                    #region 画格子 同时填充数据                   
+
+                    if (temp != null && temp.TableTitleList != null && temp.TableTitleList.Count > 0)
+                    {
+                        RowInfo t = temp.TableTitleList.FirstOrDefault();
+                        if (t.RowIndex >= 0)
+                        {
+                            //数据与创建行同时进行 
+                            for (int k = 0; k < t.RowNumber; k++)
+                            {
+                                CopyRow_1(sheet_Source, sheet_Destination, t.RowIndex + k, rowIndex_Destination, 1, true, temp.TableTitleList, allSpecialCharacters, headDic[tongDaoID]);
+
+                                rowIndex_Destination++;
+                            }
+                        }
+                    }
+                  
+                    #endregion
+                    #endregion
+                    int startRowIndex = rowIndex_Destination;
+                    if (dataDic != null && dataDic.ContainsKey(tongDaoID) && dataDic[tongDaoID] != null && dataDic[tongDaoID].Count > 0 && dataDic[tongDaoID].Data!=null && dataDic[tongDaoID].Data.Count>0)
+                    {
+                        #region 画数据  
+                        #region 画格子                       
+                        List<CellRangeAddress>  cellAddressList = CopyRow_1(sheet_Source, sheet_Destination, temp.DataRowIndex, rowIndex_Destination, dataDic[tongDaoID].Count, true, null, allSpecialCharacters, null);
+                        rowIndex_Destination = rowIndex_Destination + dataDic[tongDaoID].Count;
+                        #endregion
+                        #region 填充数据
+                        
+                        foreach(MYData d in dataDic[tongDaoID].Data)
+                        {
+                            if(temp.Cells.Count(p=>p.Code==d.name)>0)//配置中存在说明需要打印
+                            {
+                                //如果模板中有数据表示固定数据，否则是动态数据，固定数据跳过
+                                CellRangeAddress c = cellAddressList.FirstOrDefault();
+                                string cValue = sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).StringCellValue;
+                                while (!string.IsNullOrWhiteSpace(cValue))
+                                {
+                                    cellAddressList.Remove(c);
+                                    c = cellAddressList.FirstOrDefault();
+                                    cValue = sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).StringCellValue;
+                                }
+                                HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, d.value);
+                                sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).SetCellValue(value);                               
+                                if (d.mergedRowNum > 1)//多行单元格合并
+                                {
+                                    sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow+d.mergedRowNum-1, c.FirstColumn, c.LastColumn));                                   
+                                }                              
+
+                                for(int j=0;j<d.mergedRowNum;j++)//将已合并或者已使用的区域移除
+                                {
+                                    
+                                    if(j>0)
+                                    {
+                                        c = cellAddressList.Find(p => p.FirstRow == c.FirstRow + 1 && p.LastRow == c.LastRow + 1 && p.FirstColumn == c.FirstColumn && p.LastColumn == c.LastColumn);
+                                    }
+                                    cellAddressList.Remove(c);
+                                }
+                               
+                            }
+                        }
+
+                        #endregion
+                        #endregion
+                    }
+                    #region 合并行
+                    //SetMergeAndHideRowSameValue(sheet_Destination, startRowIndex, rowIndex_Destination, temp);
+                    #endregion
+                }
+
+            }
+            return rowIndex_Destination;
+        }
 
         /// <summary>
         /// 获取某节点下的数据
@@ -2664,42 +2970,6 @@ namespace Langben.Report
             }
         }
 
-        /// <summary>
-        /// 设置表格
-        /// </summary>
-        /// <param name="sheet_Source">源sheet</param>
-        /// <param name="sheet_Destination">目标sheet</param>
-        /// <param name="rowIndex_Destination">目标开始行号</param>
-        /// <param name="temp">模板信息</param>
-        /// <param name="tableData">表格所有数据（包含表头数据、表数据、表尾数据）</param>              
-        /// <param name="allSpecialCharacters">特殊字符配置信息</param>
-        /// <returns></returns>
-        private int paserData(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination,TableTemplate temp, ALLData tableALLData=null, SpecialCharacters allSpecialCharacters = null)
-        {
-            int rowIndex = rowIndex_Destination;
-
-            //循环通道
-            if (tableALLData != null && tableALLData.data != null && tableALLData.data.Count > 0)
-            {
-                foreach(int tongDaoID in tableALLData.data.Keys)
-                {
-                    #region 画表头
-                    #region 画格子
-                        //CopyRow()
-                    #endregion
-                    #region 填充数据
-                    #endregion 
-                    #endregion
-                    #region 画数据  
-                    #region 画格子
-                    #endregion
-                    #region 填充数据
-                    #endregion 
-                    #endregion
-                }
-            }
-            return 1;
-        }
 
         /// <summary>
         /// 设置表格
