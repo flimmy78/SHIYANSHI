@@ -167,16 +167,16 @@
                 <p>请客户确认上述信息后签字：</p>
                 </td>
             </tr>-->
-            <!--<tr>
-                <td width="80" height="25">委托人签字：</td>
-                <td width="120" >a</td>
+            <tr>
+                @*<td width="80" height="25">委托人签字：</td>
+                <td width="120" >a</td>*@
                 <td width="80"  nowrap="nowrap">送检日期：</td>
-                <td align="left" >系统时间</td>
+                <td align="left" id="CREATETIME1"></td>
                 <td width="80" nowrap="nowrap">接收人签字：</td>
-                <td width="200" >a</td>
+                <td width="200" id="CREATEPERSON"></td>
                 <td width="80" >接受日期：</td>
-                <td width="120" >系统时间</td>
-            </tr>-->
+                <td width="120" id="CREATETIME"></td>
+            </tr>
             <tr>
                 <td nowrap=nowrap>注意事项：</td>
                 <td colspan="4" style="text-align:left; ">
@@ -185,7 +185,7 @@
                     3、本单位对送检器具的保管期为12个月，逾期不取的器具，视为主动放弃器具所有权，本单位有权进行处理。<br />
                     4、本外观状态只限于器具外观有无明显损伤。在器具送达实验室进行通电、预热等专业检查后，实验室将对器具工作状态进行最终的判断。
                 </td>
-                <td colspan="3" width="200"><p style=" text-align:left;"=text-align:left;">盖章处：</p></td>
+                <td colspan="3" width="200"><p style="text-align:left;"=text-align:left;">盖章处：</p></td>
             </tr>
         </table>
         <p class="beizhu" id="tongxundizi">
@@ -267,6 +267,10 @@
             $("#CONTACTS2").text(row.CONTACTS2 == null ? "/" : row.CONTACTS2);//联系人2
             $("#CONTACT_PHONE2").text(row.CONTACT_PHONE2 == null ? "/" : row.CONTACT_PHONE2);//联系电话2
             $("#FAX2").text(row.FAX2 == null ? "/" : row.FAX2);//传真2
+            var a = new Date(row.CREATETIME).format("yyyy-MM-dd");
+            $("#CREATETIME1").text(row.CREATETIME == null ? "/" : a );//送检日期
+            $("#CREATETIME").text(row.CREATETIME == null ? "/" :a);//接收日期
+            $("#CREATEPERSON").text(row.CREATEPERSON == null ? "/" : row.CREATEPERSON);//接收人
             if (row.ACCEPT_ORGNIZATION == "冀北电力有限公司计量中心") {
                 $("#tongxundizi").html('通信地址：北京市昌平区回龙观镇二拨子村<span class="mail">邮编：102208</span><br />联系电话：010-56585812<span class="yb">传真：010-56585804</span><br />');
             }

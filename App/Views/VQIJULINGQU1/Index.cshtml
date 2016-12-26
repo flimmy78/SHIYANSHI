@@ -135,7 +135,7 @@
                                     return "已领取";
                                 }
                                 else {
-                                    return "<input id='qiju' type='checkbox' name='qiju' value='" + row.ID + "#" + row.ORDER_TASK_INFORMATIONID + "'/>";
+                                    return "<input id='qiju' type='checkbox' name='qiju' value='" + row.ID + "~" + row.ORDER_TASK_INFORMATIONID + "'/>";
                                 }
                             }
                         }
@@ -148,7 +148,7 @@
                              }
                              else {
                                  if (row.REPORTNUMBER != null) {
-                                     return "<input id='baogao' type='checkbox' name='baogao' value='" + row.PREPARE_SCHEMEID + "#" + row.ORDER_TASK_INFORMATIONID + "'/><label>" + row.REPORTNUMBER + "</label>";
+                                     return "<input id='baogao' type='checkbox' name='baogao' value='" + row.PREPARE_SCHEMEID + "~" + row.ORDER_TASK_INFORMATIONID + "'/><label>" + row.REPORTNUMBER + "</label>";
                                  }
                              }
 
@@ -249,11 +249,11 @@
         if (baogao != "" || qiju != "") {
             if (baogao != "") {
                 var a = baogao.split('|');
-                var z = a[1].split('#')[1];
+                var z = a[1].split('~')[1];
                 for (var i = 0; i <a.length; i++) {
                     if (a[i] != "") {
-                        if (a[i].split('#')[1] != z) {
-                            alert("no!")
+                        if (a[i].split('~')[1] != z) {
+                            $.messager.alert('操作提示', '请选择同一委托单下的数据!', 'warning');
                             return false;
                         }
                     }
@@ -261,33 +261,17 @@
             }
             if (qiju != "") {
                 var b = qiju.split('|');
-                var z = b[1].split('#')[1];
+                var z = b[1].split('~')[1];
                 for (var i = 0; i < b.length; i++) {
                     if (b[i] != "") {
-                        if (b[i].split('#')[1] != z) {
-                            alert("no!")
+                        if (b[i].split('~')[1] != z) {
+                            $.messager.alert('操作提示', '请选择同一委托单下的数据!', 'warning');
                             return false;
                         }                        
                     }
                 }
             }
-            alert("ok!")
-            //$.ajax({
-            //    url: "/api/VQIJULINGQU2Api/Put?baogaoid=" + baogao + "&qijuid=" + qiju + "",
-            //    type: "Put",
-            //    //data: arr,
-            //    success: function (res) {
-            //        if (res.Code == 1) {
-            //            $.messager.alert('操作提示', "领取成功！", 'info');
-            //            $("#flexigridData").datagrid("reload");
-            //            $("#flexigridData").datagrid("clearSelections");
-            //        }
-            //        else {
-            //            $.messager.alert('操作提示', "领取失败！", 'error');
-            //        }
-            //    }
-            //})
-
+            window.open('/VQIJULINGQU1/Show/?baogaoid=' + baogao + "&qijuid=" + qiju);       
         } else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
         }
