@@ -38,6 +38,7 @@ namespace Langben.App.Controllers
         public ActionResult Show(string baogaoid, string qijuid)
         {
             ORDER_TASK_INFORMATIONShow osi = new ORDER_TASK_INFORMATIONShow();
+            #region 器具信息数据展示处理
             string ORDER_TASK_INFORMATIONID = string.Empty;
             List<string> Bao = new List<string>();
             List<string> Qi = new List<string>();
@@ -47,8 +48,8 @@ namespace Langben.App.Controllers
                 {
                     if (!string.IsNullOrWhiteSpace(item))
                     {
-                        ORDER_TASK_INFORMATIONID = item.Split('#')[0];
-                        Bao.Add(item.Split('#')[1]);
+                        ORDER_TASK_INFORMATIONID = item.Split('~')[1];
+                        Bao.Add(item.Split('~')[0]);
                     }
                 }
             }
@@ -58,7 +59,8 @@ namespace Langben.App.Controllers
                 {
                     if (!string.IsNullOrWhiteSpace(item))
                     {
-                        Qi.Add(item.Split('#')[1]);
+                        ORDER_TASK_INFORMATIONID = item.Split('~')[1];
+                        Qi.Add(item.Split('~')[0]);
                     }
                 }
             }
@@ -110,8 +112,30 @@ namespace Langben.App.Controllers
                 }
 
             }
-
-            return View();
+            #endregion
+            ORDER_TASK_INFORMATION oti = m_BLL3.GetById(ORDER_TASK_INFORMATIONID);
+            osi.ID = oti.ID;
+            osi.ORDER_NUMBER = oti.ORDER_NUMBER;
+            osi.ACCEPT_ORGNIZATION = oti.ACCEPT_ORGNIZATION;
+            osi.INSPECTION_ENTERPRISE = oti.INSPECTION_ENTERPRISE;
+            osi.INSPECTION_ENTERPRISE_ADDRESS = oti.INSPECTION_ENTERPRISE_ADDRESS;
+            osi.INSPECTION_ENTERPRISE_POST = oti.INSPECTION_ENTERPRISE_POST;
+            osi.CONTACTS = oti.CONTACTS;
+            osi.CONTACT_PHONE = oti.CONTACT_PHONE;
+            osi.FAX = oti.FAX;
+            osi.CERTIFICATE_ENTERPRISE = oti.CERTIFICATE_ENTERPRISE;
+            osi.CERTIFICATE_ENTERPRISE_ADDRESS = oti.CERTIFICATE_ENTERPRISE_ADDRESS;
+            osi.CERTIFICATE_ENTERPRISE_POST = oti.CERTIFICATE_ENTERPRISE_POST;
+            osi.CONTACTS2 = oti.CONTACTS2;
+            osi.CONTACT_PHONE2 = oti.CONTACT_PHONE2;
+            osi.FAX2 = oti.FAX2;
+            osi.CUSTOMER_SPECIFIC_REQUIREMENTS = oti.CUSTOMER_SPECIFIC_REQUIREMENTS;
+            osi.ORDER_STATUS = oti.ORDER_STATUS;
+            osi.CREATETIME = oti.CREATETIME;
+            osi.CREATEPERSON = oti.CREATEPERSON;
+            osi.UPDATETIME = oti.UPDATETIME;
+            osi.UPDATEPERSON = oti.UPDATEPERSON;
+            return View(osi);
         }
         /// <summary>
         /// 异步加载数据

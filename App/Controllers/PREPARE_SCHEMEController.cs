@@ -135,7 +135,7 @@ namespace Langben.App.Controllers
                     entity.VALIDITY_PERIOD = null;
                 }
                 //有效期至
-                entity.VALIDITYEND = Convert.ToDateTime(entity.CALIBRATION_DATE).AddYears(Convert.ToInt32(VALIDITY_PERIOD));
+                entity.VALIDITYEND = Convert.ToDateTime(entity.CALIBRATION_DATE).AddYears(Convert.ToInt32(VALIDITY_PERIOD)).AddDays(-1);
                 //不合格类型
                 entity.UNQUALIFIEDTYPE = UNQUALIFIEDTYPE;
 
