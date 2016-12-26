@@ -36,7 +36,7 @@ namespace Langben.Report
         /// <summary>
         /// 模板中所有的合并的单元格
         /// </summary>
-        Dictionary<string,List<CellRangeAddress>> returnList = new Dictionary<string, List<CellRangeAddress>>();
+        Dictionary<string, List<CellRangeAddress>> returnList = new Dictionary<string, List<CellRangeAddress>>();
         /// <summary>
         ///  获取合并区域信息
         /// </summary>
@@ -45,7 +45,7 @@ namespace Langben.Report
         private Dictionary<string, List<CellRangeAddress>> GetMergedCellRegion(ISheet sheet)
         {
             if (!returnList.ContainsKey(sheet.SheetName))
-            {               
+            {
                 int mergedRegionCellCount = sheet.NumMergedRegions;
                 List<CellRangeAddress> cellList = new List<CellRangeAddress>();
 
@@ -56,7 +56,7 @@ namespace Langben.Report
                 returnList.Add(sheet.SheetName, cellList);
 
             }
-            
+
 
             return returnList;
         }
@@ -73,7 +73,7 @@ namespace Langben.Report
             if (!returnList.ContainsKey(sheet.SheetName))
             {
                 GetMergedCellRegion(sheet);
-                
+
             }
             result = returnList[sheet.SheetName];
             return (from c in result
@@ -1069,7 +1069,7 @@ namespace Langben.Report
                         if (!string.IsNullOrWhiteSpace(iEntity.HTMLVALUE))
                         {
                             doc.LoadHtml(iEntity.HTMLVALUE);
-                            
+
                             //测试获取数据的时候使用
                             var data1 = AnalyticHTML.GetData(doc);
                             var data2 = AnalyticHTML.GetHeadData(doc);
@@ -1098,7 +1098,7 @@ namespace Langben.Report
                         from f2 in allTableTemplates2.TableTemplateList
                         where f.RuleID == f2.RuleID
 
-                                 select f2);
+                        select f2).ToList();
             TableTemplates t = new TableTemplates();
             t.TableTemplateList = new List<TableTemplate>();
 
@@ -1107,10 +1107,10 @@ namespace Langben.Report
                 var TableTemplate = (from f in allTableTemplates.TableTemplateList
                                      where f.RuleID == item.RuleID
                                      select f).FirstOrDefault();
-            
-                item.DataRowIndex = TableTemplate.DataRowIndex;//数据模板开始行号
-                item.RemarkRowIndex = TableTemplate.RemarkRowIndex;//备注模板行号
-               item.ConclusionRowIndex = TableTemplate.ConclusionRowIndex;//结论模板行号
+               
+                item.DataRowIndex = TableTemplate.DataRowIndex + 2;//数据模板开始行号
+                item.RemarkRowIndex = TableTemplate.RemarkRowIndex + 2;//备注模板行号
+                item.ConclusionRowIndex = TableTemplate.ConclusionRowIndex + 2;//结论模板行号
 
                 var RowInfo = (from f in TableTemplate.TableTitleList
 
@@ -1119,11 +1119,13 @@ namespace Langben.Report
                 {
                     foreach (var it in item.TableTitleList)
                     {
-                        it.RowIndex = RowInfo.RowIndex;//表格表头行号
+                        it.RowIndex = RowInfo.RowIndex + 2;//表格表头行号
                     }
                 }
+
                 t.TableTemplateList.Add(item);
             }
+
             Message = t.ToString();
             return false;
 
@@ -1882,20 +1884,20 @@ namespace Langben.Report
                     #endregion
                     #region 新合并方式                   
                     if (sourceCell.IsMergedCell)
-                    {                       
+                    {
                         CellRangeAddress cellAddress = getMergedRegionCell(sheet_Source, m, rowIndex_Source);
-                        if (cellAddress != null  && cellAddress.LastColumn > startMergeCell && (cellAddress.LastRow > cellAddress.FirstRow || cellAddress.LastColumn > cellAddress.FirstColumn))
+                        if (cellAddress != null && cellAddress.LastColumn > startMergeCell && (cellAddress.LastRow > cellAddress.FirstRow || cellAddress.LastColumn > cellAddress.FirstColumn))
                         {
                             if (rowIndex_Source == cellAddress.LastRow)
                             {
-                                sheet_Destination.AddMergedRegion(new CellRangeAddress(i-(cellAddress.LastRow - cellAddress.FirstRow), i , cellAddress.FirstColumn, cellAddress.LastColumn));
+                                sheet_Destination.AddMergedRegion(new CellRangeAddress(i - (cellAddress.LastRow - cellAddress.FirstRow), i, cellAddress.FirstColumn, cellAddress.LastColumn));
                                 startMergeCell = cellAddress.LastColumn + 1;
                             }
                             if (IsCopyContent && rowIndex_Source == cellAddress.FirstRow)
                             {
                                 HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
                                 targetRow.Cells[m].SetCellValue(value);
-                            }                            
+                            }
                         }
 
                     }
@@ -2674,27 +2676,27 @@ namespace Langben.Report
         /// <param name="tableData">表格所有数据（包含表头数据、表数据、表尾数据）</param>              
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <returns></returns>
-        private int paserData(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination,TableTemplate temp, ALLData tableALLData=null, SpecialCharacters allSpecialCharacters = null)
+        private int paserData(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, ALLData tableALLData = null, SpecialCharacters allSpecialCharacters = null)
         {
             int rowIndex = rowIndex_Destination;
 
             //循环通道
             if (tableALLData != null && tableALLData.data != null && tableALLData.data.Count > 0)
             {
-                foreach(int tongDaoID in tableALLData.data.Keys)
+                foreach (int tongDaoID in tableALLData.data.Keys)
                 {
                     #region 画表头
                     #region 画格子
-                        //CopyRow()
+                    //CopyRow()
                     #endregion
                     #region 填充数据
-                    #endregion 
+                    #endregion
                     #endregion
                     #region 画数据  
                     #region 画格子
                     #endregion
                     #region 填充数据
-                    #endregion 
+                    #endregion
                     #endregion
                 }
             }
