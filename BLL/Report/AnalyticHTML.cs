@@ -23,9 +23,21 @@ namespace Langben.Report
 
             foreach (var b in allselected)
             {
-                var node = b.ChildNodes
-                                    .Where(w => (w.Name == "option" && w.Attributes["selected"] != null) ? (w.Name == "option" && w.Attributes["selected"] != null) : (w.Name == "option"))
-                                    .Select(s => s.Attributes["value"].Value).First();
+                var nodes = b.ChildNodes
+                      .Where(w => (w.Name == "option" && w.Attributes["selected"] != null))
+                      .Select(s => s.Attributes["value"].Value).FirstOrDefault();
+                string node = string.Empty;
+                if (string.IsNullOrWhiteSpace(nodes))
+                {
+                    node = b.ChildNodes
+           .Where(w => (w.Name == "option"))
+           .Select(s => s.Attributes["value"].Value).First();
+                }
+                else
+                {
+                    node = nodes;
+                }
+
 
                 if (node != null)
                 {
@@ -156,17 +168,19 @@ namespace Langben.Report
                     }
                     else if (b.Name == "select")
                     {
-                        var node = b.ChildNodes
-                                       .Where(w => (w.Name == "option" && w.Attributes["selected"] != null) ? (w.Name == "option" && w.Attributes["selected"] != null) : (w.Name == "option"))
-                                       .Select(s => s.Attributes["value"].Value).First();
-
-                        if (node != null)
+                        var nodes = b.ChildNodes
+                      .Where(w => (w.Name == "option" && w.Attributes["selected"] != null))
+                      .Select(s => s.Attributes["value"].Value).FirstOrDefault();
+                        string node = string.Empty;
+                        if (string.IsNullOrWhiteSpace(nodes))
                         {
-                            mydata.value = node;
+                            mydata.value = b.ChildNodes
+                   .Where(w => (w.Name == "option"))
+                   .Select(s => s.Attributes["value"].Value).First();
                         }
                         else
                         {
-                            throw new System.Exception();
+                            mydata.value = nodes;
                         }
 
                     }
@@ -349,21 +363,23 @@ namespace Langben.Report
                     }
                     else if (b.Name == "select")
                     {
-                        var node = b.ChildNodes
-                      .Where(w => (w.Name == "option" && w.Attributes["selected"] != null) ? (w.Name == "option" && w.Attributes["selected"] != null) : (w.Name == "option"))
-                      .Select(s => s.Attributes["value"].Value).First();
-
-                        if (node != null)
+                        var nodes = b.ChildNodes
+                      .Where(w => (w.Name == "option" && w.Attributes["selected"] != null)) 
+                      .Select(s => s.Attributes["value"].Value).FirstOrDefault();
+                        string node = string.Empty;
+                        if (string.IsNullOrWhiteSpace(nodes))
                         {
-                            mydata.value = node;
+                            mydata.value = b.ChildNodes
+                   .Where(w => (w.Name == "option"))
+                   .Select(s => s.Attributes["value"].Value).First();
                         }
                         else
                         {
-                            mydata.value = node;
+                            mydata.value = nodes;
                         }
 
-
                     }
+                    
                     list.Add(mydata);
                 }
                 data.Add(item, list);
@@ -409,13 +425,19 @@ namespace Langben.Report
                     }
                     else if (b.Name == "select")
                     {
-                        var node = b.ChildNodes
-                                 .Where(w => (w.Name == "option" && w.Attributes["selected"] != null) ? (w.Name == "option" && w.Attributes["selected"] != null) : (w.Name == "option"))
-                                 .Select(s => s.Attributes["value"].Value).First();
-
-                        if (node != null)
+                        var nodes = b.ChildNodes
+                      .Where(w => (w.Name == "option" && w.Attributes["selected"] != null))
+                      .Select(s => s.Attributes["value"].Value).FirstOrDefault();
+                        string node = string.Empty;
+                        if (string.IsNullOrWhiteSpace(nodes))
                         {
-                            mydata.value = node;
+                            mydata.value = b.ChildNodes
+                   .Where(w => (w.Name == "option"))
+                   .Select(s => s.Attributes["value"].Value).First();
+                        }
+                        else
+                        {
+                            mydata.value = nodes;
                         }
 
                     }
@@ -704,23 +726,5 @@ namespace Langben.Report
 
             return errors;
         }
-
-
-
-        public static HtmlAgilityPack.HtmlNodeCollection GetTBodyOfInputAndSelect2(HtmlAgilityPack.HtmlDocument doc)
-        {
-            string xpath = @"//ruleid";
-            return doc.DocumentNode.SelectNodes(xpath);
-
-
-        }
-        public static HtmlAgilityPack.HtmlNodeCollection GetTBodyOfInputAndSelect3(HtmlAgilityPack.HtmlDocument doc)
-        {
-            string xpath = @"//tabletitlelist/rowinfo[1]/rowindex";
-            return doc.DocumentNode.SelectNodes(xpath);
-
-
-        }
-
     }
 }
