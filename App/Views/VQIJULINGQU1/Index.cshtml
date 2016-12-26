@@ -253,7 +253,7 @@
                 for (var i = 0; i <a.length; i++) {
                     if (a[i] != "") {
                         if (a[i].split('~')[1] != z) {
-                            alert("no!")
+                            $.messager.alert('操作提示', '请选择同一委托单下的数据!', 'warning');
                             return false;
                         }
                     }
@@ -265,29 +265,13 @@
                 for (var i = 0; i < b.length; i++) {
                     if (b[i] != "") {
                         if (b[i].split('~')[1] != z) {
-                            alert("no!")
+                            $.messager.alert('操作提示', '请选择同一委托单下的数据!', 'warning');
                             return false;
                         }                        
                     }
                 }
             }
-            window.open('/VQIJULINGQU1/Show/?baogaoid=' + baogao + "&qijuid=" + qiju);
-            //$.ajax({
-            //    url: "/api/VQIJULINGQU2Api/Put?baogaoid=" + baogao + "&qijuid=" + qiju + "",
-            //    type: "Put",
-            //    //data: arr,
-            //    success: function (res) {
-            //        if (res.Code == 1) {
-            //            $.messager.alert('操作提示', "领取成功！", 'info');
-            //            $("#flexigridData").datagrid("reload");
-            //            $("#flexigridData").datagrid("clearSelections");
-            //        }
-            //        else {
-            //            $.messager.alert('操作提示', "领取失败！", 'error');
-            //        }
-            //    }
-            //})
-
+            window.open('/VQIJULINGQU1/Show/?baogaoid=' + baogao + "&qijuid=" + qiju);       
         } else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
         }
