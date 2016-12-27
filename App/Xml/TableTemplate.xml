@@ -1,16 +1,23 @@
 <TableTemplates>
 	<TableTemplateList>
 		<TableTemplate>
+		<!--检测项编号，必填-->
 			<RuleID>38-1987_2_1</RuleID>
+			<!--数据开始行号，必填-->
 			<DataRowIndex>10</DataRowIndex>
+			<!--注释开始行号，必填-->
 			<RemarkRowIndex>11</RemarkRowIndex>
+			<!--结论开始行号，必填-->
 			<ConclusionRowIndex>12</ConclusionRowIndex>
 			<CellList>
 				<Cell>
+				<!--表动态数据对应控件名称，必填-->
 					<Code>RANGE</Code>
 					<ColIndex>-1</ColIndex>
 					<ColCount>0</ColCount>
+					<!--相同数据是否需要合并，如果否可不填-->
 					<IsMergeSameValue>N</IsMergeSameValue>
+					<!--空置数据是否需要隐藏，如果否可不填-->
 					<IsHideRowNull>N</IsHideRowNull>
 				</Cell>
 				<Cell>
@@ -92,16 +99,20 @@
 				</Cell>
 			</CellList>
 			<SecondTitleList/>
+			<!--表头信息-->
 			<TableTitleList>
 				<RowInfo>
+					<!--表头总行数，必填-->
 					<RowNumber>1</RowNumber>
+					<!--表头开始行号，必填-->
 					<RowIndex>9</RowIndex>
 					<CellList>
 						<Cell>
+							<!--表头动态数据控件名称，必填-->
 							<Code>K</Code>
 							<ColIndex>-1</ColIndex>
 							<ColCount>0</ColCount>
-							<IsMergeSameValue>N</IsMergeSameValue>
+							<IsMergeSameValue>N</IsMergeSameValue>							
 							<IsHideRowNull>N</IsHideRowNull>
 						</Cell>
 					</CellList>
