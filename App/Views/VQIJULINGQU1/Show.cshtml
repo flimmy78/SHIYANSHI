@@ -186,9 +186,29 @@
 
         </p>
         <div class="tr mt10">
-            @*<input id="Button3" type="button" value="重新签字" class="my-btn" onclick="return Button3_onclick()" />
-            <input id="Button14" type="button" value="签字后，打印委托单，同时发送实验室" class="my-btn" onclick="return Button14_onclick()" />*@
+            <input id="Button3" type="button" value="重新签字" class="my-btn" onclick="" />
+            <input id="Button14" type="button" value="确定" class="my-btn" onclick="baocun()" />
         </div>
     </div>
+
+    <script type="text/javascript">
+        function baocun() {
+            $.ajax({
+                url: "/api/VQIJULINGQU2Api/Put?baogaoid=" + '@ViewBag.Baogaoid '+ "&qijuid=" +'@ViewBag.Qijuid' + "&yemian=" + null + "",
+                type: "Put",
+                //data: arr,
+                success: function (res) {
+                    if (res.Code == 1) {
+                        $.messager.alert('操作提示', "领取成功！", 'info');
+                        $("#flexigridData").datagrid("reload");
+                        $("#flexigridData").datagrid("clearSelections");
+                    }
+                    else {
+                        $.messager.alert('操作提示', "领取失败！", 'error');
+                    }
+                }
+            })
+        }
+    </script>
 </body>
 </html>

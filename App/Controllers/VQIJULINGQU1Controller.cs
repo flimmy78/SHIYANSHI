@@ -113,6 +113,7 @@ namespace Langben.App.Controllers
 
             }
             #endregion
+            #region 委托单信息数据处理
             ORDER_TASK_INFORMATION oti = m_BLL3.GetById(ORDER_TASK_INFORMATIONID);
             osi.ID = oti.ID;
             osi.ORDER_NUMBER = oti.ORDER_NUMBER;
@@ -135,6 +136,9 @@ namespace Langben.App.Controllers
             osi.CREATEPERSON = oti.CREATEPERSON;
             osi.UPDATETIME = oti.UPDATETIME;
             osi.UPDATEPERSON = oti.UPDATEPERSON;
+            #endregion
+            ViewBag.Baogaoid = baogaoid;
+            ViewBag.Qijuid = qijuid;
             return View(osi);
         }
         /// <summary>

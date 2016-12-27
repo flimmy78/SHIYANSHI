@@ -79,109 +79,119 @@ namespace Langben.App.Controllers
         /// <param name="entity"></param>
         /// <returns></returns>  
         [System.Web.Http.HttpPut]
-        public Common.ClientResult.Result Put(string baogaoid, string qijuid)
+        public Common.ClientResult.Result Put(string baogaoid, string qijuid, string yemian)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (baogaoid != null || qijuid != null && ModelState.IsValid)
             {   //数据校验          
                 string currentPerson = GetCurrentPerson();
                 string returnValue = string.Empty;
-                foreach (var item in baogaoid.Split('|'))
+                #region 报告领取操作
+                if (!string.IsNullOrWhiteSpace(baogaoid))
                 {
-                    REPORTCOLLECTION rep = new REPORTCOLLECTION();//报告领取
-                    PREPARE_SCHEME prep = new PREPARE_SCHEME();//预备方案
-                    if (!string.IsNullOrEmpty(item))
+                    foreach (var item in baogaoid.Split('|'))
                     {
-                        rep.CREATETIME = DateTime.Now;//领取时间
-                        rep.CREATEPERSON = currentPerson;//领取者
-                        rep.ID = Result.GetNewId();//主键id
-                        rep.PREPARE_SCHEMEID = item;//预备方案id
-                        rep.REPORTTORECEVESTATE = Common.REPORTSTATUS.报告已领取.ToString();//报告领取状态
-                        prep.ID = item;
-                        prep.REPORTSTATUS = Common.REPORTSTATUS.报告已领取.ToString();//报告领取状态
-                        prep.REPORTSTATUSZI = Common.REPORTSTATUS.报告已领取.GetHashCode().ToString();//报告领取状态
-                        if (m_BLL3.Create(ref validationErrors, rep) && m_BLL5.EditField(ref validationErrors, prep))
+                        REPORTCOLLECTION rep = new REPORTCOLLECTION();//报告领取
+                        PREPARE_SCHEME prep = new PREPARE_SCHEME();//预备方案
+                        if (!string.IsNullOrEmpty(item))
                         {
-                            LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，报告领取信息的Id为" + rep.ID, "报告领取");//写入日志        
-                            result.Code = Common.ClientCode.Succeed;
-                            result.Message = Suggestion.InsertSucceed;
-                        }
-                        else
-                        {
-                            if (validationErrors != null && validationErrors.Count > 0)
+                            rep.CREATETIME = DateTime.Now;//领取时间
+                            rep.CREATEPERSON = currentPerson;//领取者
+                            rep.ID = Result.GetNewId();//主键id
+                            rep.PREPARE_SCHEMEID = item.Split('~')[0];//预备方案id
+                            rep.REPORTTORECEVESTATE = Common.REPORTSTATUS.报告已领取.ToString();//报告领取状态
+                            rep.RECEIVEREPORT = yemian;//领取单
+                            prep.ID = item.Split('~')[0];
+                            prep.REPORTSTATUS = Common.REPORTSTATUS.报告已领取.ToString();//报告领取状态
+                            prep.REPORTSTATUSZI = Common.REPORTSTATUS.报告已领取.GetHashCode().ToString();//报告领取状态
+                            if (m_BLL3.Create(ref validationErrors, rep) && m_BLL5.EditField(ref validationErrors, prep))
                             {
-                                validationErrors.All(a =>
-                                {
-                                    returnValue += a.ErrorMessage;
-                                    return true;
-                                });
+                                LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，报告领取信息的Id为" + rep.ID, "报告领取");//写入日志        
+                                result.Code = Common.ClientCode.Succeed;
+                                result.Message = Suggestion.InsertSucceed;
                             }
-                            LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，报告领取信息的Id为" + rep.ID + "," + returnValue, "报告领取");//写入日志
-                            result.Code = Common.ClientCode.Fail;
-                            result.Message = Suggestion.InsertFail + returnValue;
-                            return result; //提示创建失败
+                            else
+                            {
+                                if (validationErrors != null && validationErrors.Count > 0)
+                                {
+                                    validationErrors.All(a =>
+                                    {
+                                        returnValue += a.ErrorMessage;
+                                        return true;
+                                    });
+                                }
+                                LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，报告领取信息的Id为" + rep.ID + "," + returnValue, "报告领取");//写入日志
+                                result.Code = Common.ClientCode.Fail;
+                                result.Message = Suggestion.InsertFail + returnValue;
+                                return result; //提示创建失败
+                            }
                         }
                     }
                 }
-                foreach (var item in qijuid.Split('|'))
+                #endregion
+                #region 器具领取操作
+                if (!string.IsNullOrWhiteSpace(qijuid))
                 {
-                    APPLIANCECOLLECTION app = new APPLIANCECOLLECTION();//器具领取
-                    APPLIANCE_LABORATORY appry = new APPLIANCE_LABORATORY();//器具明细信息_承接实验室
-                    APPLIANCE_DETAIL_INFORMATION appion = new APPLIANCE_DETAIL_INFORMATION();//器具明细
-                    if (!string.IsNullOrEmpty(item))
+                    foreach (var item in qijuid.Split('|'))
                     {
-                        app.CREATETIME = DateTime.Now;//领取时间
-                        app.CREATEPERSON = currentPerson;//领取者
-                        app.ID = Result.GetNewId();//主键id
-                        app.APPLIANCE_DETAIL_INFORMATIONID = item;//器具明细id
-                        app.APPLIANCECOLLECTIONSATE = Common.ORDER_STATUS.器具已领取.ToString();//器具领取状态
-                        appion.APPLIANCE_PROGRESS = null;//所在实验室
-                        appion.ID = item;//id
-                        if (!m_BLL6.EditField(ref validationErrors, appion))//修改器具所在实验室数据
+                        APPLIANCECOLLECTION app = new APPLIANCECOLLECTION();//器具领取
+                        APPLIANCE_LABORATORY appry = new APPLIANCE_LABORATORY();//器具明细信息_承接实验室
+                        APPLIANCE_DETAIL_INFORMATION appion = new APPLIANCE_DETAIL_INFORMATION();//器具明细
+                        if (!string.IsNullOrEmpty(item))
                         {
-                            LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息的Id为" + appion.ID, "器具领取");//写入日志       
-                            result.Code = Common.ClientCode.Succeed;
-                            result.Message = Suggestion.UpdateFail;
-                            return result;
-                        }
-                        List<APPLIANCE_LABORATORY> list = m_BLL4.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item);
-                        foreach (var item2 in list)
-                        {
-                            appry.ID = item2.ID;
-                            appry.ORDER_STATUS = Common.ORDER_STATUS.器具已领取.ToString();
-                            appry.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.器具已领取.GetHashCode().ToString();
-                            if (!m_BLL4.EditField(ref validationErrors, appry))
+                            app.CREATETIME = DateTime.Now;//领取时间
+                            app.CREATEPERSON = currentPerson;//领取者
+                            app.ID = Result.GetNewId();//主键id
+                            app.APPLIANCE_DETAIL_INFORMATIONID = item.Split('~')[0];//器具明细id
+                            app.APPLIANCECOLLECTIONSATE = Common.ORDER_STATUS.器具已领取.ToString();//器具领取状态
+                            app.RECEIVEINS = yemian;//领取单
+                            appion.APPLIANCE_PROGRESS = null;//所在实验室
+                            appion.ID = item.Split('~')[0];//id
+                            if (!m_BLL6.EditField(ref validationErrors, appion))//修改器具所在实验室数据
                             {
-                                LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息_承接实验室的Id为" + appry.ID, "器具领取");//写入日志  
+                                LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息的Id为" + appion.ID, "器具领取");//写入日志       
                                 result.Code = Common.ClientCode.Succeed;
                                 result.Message = Suggestion.UpdateFail;
-                                return result;
                             }
-                        }
-                        if (m_BLL2.Create(ref validationErrors, app))
-                        {
-                            LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具领取信息的Id为" + app.ID, "器具领取");//写入日志       
-                            result.Code = Common.ClientCode.Succeed;
-                            result.Message = Suggestion.InsertSucceed;
-                        }
-                        else
-                        {
-                            if (validationErrors != null && validationErrors.Count > 0)
+                            List<APPLIANCE_LABORATORY> list = m_BLL4.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item.Split('~')[0]);
+                            foreach (var item2 in list)
                             {
-                                validationErrors.All(a =>
+                                appry.ID = item2.ID;
+                                appry.ORDER_STATUS = Common.ORDER_STATUS.器具已领取.ToString();
+                                appry.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.器具已领取.GetHashCode().ToString();
+                                if (!m_BLL4.EditField(ref validationErrors, appry))
                                 {
-                                    returnValue += a.ErrorMessage;
-                                    return true;
-                                });
+                                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息_承接实验室的Id为" + appry.ID, "器具领取");//写入日志  
+                                    result.Code = Common.ClientCode.Succeed;
+                                    result.Message = Suggestion.UpdateFail;
+                                }
                             }
-                            LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具领取信息的Id为" + app.ID + "," + returnValue, "器具领取"
-                                );//写入日志   
-                            result.Code = Common.ClientCode.Fail;
-                            result.Message = Suggestion.InsertFail + returnValue;
-                            return result; //提示创建失败
+                            if (m_BLL2.Create(ref validationErrors, app))
+                            {
+                                LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具领取信息的Id为" + app.ID, "器具领取");//写入日志       
+                                result.Code = Common.ClientCode.Succeed;
+                                result.Message = Suggestion.InsertSucceed;
+                            }
+                            else
+                            {
+                                if (validationErrors != null && validationErrors.Count > 0)
+                                {
+                                    validationErrors.All(a =>
+                                    {
+                                        returnValue += a.ErrorMessage;
+                                        return true;
+                                    });
+                                }
+                                LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具领取信息的Id为" + app.ID + "," + returnValue, "器具领取"
+                                    );//写入日志   
+                                result.Code = Common.ClientCode.Fail;
+                                result.Message = Suggestion.InsertFail + returnValue;
+                                return result; //提示创建失败
+                            }
                         }
                     }
                 }
+                #endregion
                 return result;
             }
             result.Code = Common.ClientCode.FindNull;
@@ -229,7 +239,7 @@ namespace Langben.App.Controllers
                     result.Code = Common.ClientCode.Fail;
                     result.Message = Suggestion.InsertFail + returnValue;
                     return result; //提示创建失败
-                }             
+                }
             }
             result.Code = Common.ClientCode.FindNull;
             result.Message = Suggestion.InsertFail + "请核对输入的数据的格式";
