@@ -278,7 +278,10 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="html\1000Ω以上-无误差.html" />
+    <Content Include="html\1000Ω以下-标准电阻-相对误差-无型号编号.html" />
     <Content Include="html\11开关变差-无不确定度.html" />
+    <Content Include="html\12单桥-基本量程-相对误差.html" />
+    <Content Include="html\13标准电阻箱-相对误差.html" />
     <Content Include="html\1基本误差-电阻示值-相对误差.html" />
     <Content Include="html\2示值误差-有电压示值-末盘值残余电阻参与运算.html" />
     <Content Include="html\3残余电阻-无不确定度.html" />
