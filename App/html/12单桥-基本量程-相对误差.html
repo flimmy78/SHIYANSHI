@@ -2,9 +2,9 @@
 
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width" />
-<title>单桥-基本量程-相对误差</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>单桥-基本量程-相对误差</title>
     <link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
     <link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
     <link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
@@ -16,182 +16,205 @@
     <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
     <script src="/Scripts/jquery.validate.js"></script>
     <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script src="/Scripts/jianCeXiang.js"></script> 
+    <script src="/Scripts/jianCeXiang.js"></script>
 </head>
 <body class="easyui-layout">
-<input type="hidden" id="rowindex" value="1" />
-<div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
-  <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
-    <table>
-      <tr>
-        <td><a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" >保存检测项</a></td>
-      </tr>
-    </table>
-  </div>
-</div>
-<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
-<div class="mt10"> <span>基本误差：</span>×
-            
-            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="changeValue(this)" >
-              <option value="yes" selected>合格</option>
-              <option value="no">不合格</option>
-              
-  </select> </div>
-  <div class="mt10"> <span>基本量程：</span>×
-            
-            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="changeValue(this)" >
-              <option value="1000" selected>1000</option>
-              <option value="100">100</option>
-              <option value="10">10</option>
-              <option value="1">1</option>
-              <option value="0.1">0.1</option>
-              <option value="0.01">0.01</option>
-              <option value="0.001">0.001</option>
-  </select> </div>
-  <div class="mt10" id="tongdao">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_dy_1">
-      <thead>
-        <tr>
-          <th width="80" rowspan="3" align="center">序号</th>
-          <th colspan="3" align="center">×
-            <input class="my-textbox input-width" value="" type="text" name="input" id="input">
-            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="changeValue(this)" >
-              <option value="Ω" selected>Ω</option>
-              <option value="TΩ">TΩ</option>
-              <option value="GΩ">GΩ</option>
-              <option value="MΩ">MΩ</option>
-              <option value="kΩ">kΩ</option>
-              <option value="mΩ">mΩ</option>
-              <option value="μΩ">μΩ</option>
-            </select></th>
-          <th colspan="3" align="center">×
-            <input class="my-textbox input-width" value="" type="text" name="input2" id="input2">
-            <select class="my-combobox" name="state_1_3" id="state_1_2" onchange="changeValue(this)" >
-              <option value="Ω" selected>Ω</option>
-              <option value="TΩ">TΩ</option>
-              <option value="GΩ">GΩ</option>
-              <option value="MΩ">MΩ</option>
-              <option value="kΩ">kΩ</option>
-              <option value="mΩ">mΩ</option>
-              <option value="μΩ">μΩ</option>
-            </select></th>
-        </tr>
-        <tr></tr>
-        <tr>
-          <th width="140" align="center">实际值<br>
-            (
-            <select class="my-combobox" name="" id="" onchange="changeValue(this)" >
-              <option value="Ω" selected>Ω</option>
-              <option value="TΩ">TΩ</option>
-              <option value="GΩ">GΩ</option>
-              <option value="MΩ">MΩ</option>
-              <option value="kΩ">kΩ</option>
-              <option value="mΩ">mΩ</option>
-              <option value="μΩ">μΩ</option>
-            </select>
-            )</th>
-          <th width="140" align="center">标称值<br>
-(
-  <select class="my-combobox" name="select" id="select" onchange="changeValue(this)" >
-    <option value="Ω" selected>Ω</option>
-    <option value="TΩ">TΩ</option>
-    <option value="GΩ">GΩ</option>
-    <option value="MΩ">MΩ</option>
-    <option value="kΩ">kΩ</option>
-    <option value="mΩ">mΩ</option>
-    <option value="μΩ">μΩ</option>
-  </select>
-)</th>
-          <th width="140" align="center">误差 %</th>
-          <th width="140" align="center">实际值<br>
-            (
-            <select class="my-combobox" name="" id="" onchange="changeValue(this)" >
-              <option value="Ω">Ω</option>
-              <option value="TΩ">TΩ</option>
-              <option value="GΩ">GΩ</option>
-              <option value="MΩ">MΩ</option>
-              <option value="kΩ">kΩ</option>
-              <option value="mΩ">mΩ</option>
-              <option value="μΩ">μΩ</option>
-            </select>
-            )</th>
-          <th width="140" align="center">标称值<br>
-(
-  <select class="my-combobox" name="select2" id="select2" onchange="changeValue(this)" >
-    <option value="Ω" selected>Ω</option>
-    <option value="TΩ">TΩ</option>
-    <option value="GΩ">GΩ</option>
-    <option value="MΩ">MΩ</option>
-    <option value="kΩ">kΩ</option>
-    <option value="mΩ">mΩ</option>
-    <option value="μΩ">μΩ</option>
-  </select>
-)</th>
-          <th width="140" align="center">误差 %</th>
-        </tr>
-      </thead>
-      <tbody id="tbody_1">
-        <!--示例，可删 -->
-        <tr>
-          <td align="center"><input name="input5" id="input5" type="text" class="my-textbox tc" value="1" style="width:40px" /></td>
-          <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
-          <td align="center"><input name="input3" id="input3" type="text" class="my-textbox tr" value="" /></td>
-          <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
-          <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
-          <td align="center"><input name="input4" id="input4" type="text" class="my-textbox tr" value="" /></td>
-          <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
-        </tr>
-        <!--/示例，可删 -->
-      </tbody>
-      <tr>
-        <td colspan="7" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open'); set('1')">增加行数</a></td>
-      </tr>
-      <tr>
-        <td align="center" nowrap>允许误差 %</td>
-        <td align="right">±</td>
-        
-        <td  colspan="2"><input name="" id="" type="text" class="my-textbox " value="" /></td>
-        <td align="right">±</td>
-        
-        <td  colspan="2"><input name="" id="" type="text" class="my-textbox " value="" /></td>
-      </tr>
-    </table>
-  </div>
-  <div class="mt10">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
-      <tr>
-        <th width="60" >注：</th>
-        <td colspan="6"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%" value=""></td>
-      </tr>
-      <tr>
-        <th>结论：</th>
-        <td colspan="6"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%"></td>
-      </tr>
-      </table>
-      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10">
-      <tbody id="tbody_2">
-        <tr>
-          <td  align="center" width="50%"><input name="" id="" type="text" class="my-textbox tr" value="" style="width:96%" /></td>
-          <td ><i>U</i><small>rel</small>(k =
-            <select class="my-combobox" name="ddlSelectD" id="ddlSelectD" onchange="caculateD()">
-              <option value="2">2 </option>
-              <option value="3">3</option>
-              <option value="√3">√3</option>
-            </select>
-            ) =
-            <input class="my-textbox " value="" style="width:300px" id="txtvalueD">
-            <input type="button" class="my-btn" value="计 算" onclick="calculate(this)" /></td>
-        </tr>
-      </tbody>
-      <!--<tr>
-        <td colspan="8" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addUrel()">增加不确定度计算行</a></td>
-      </tr> -->
-    </table>
-  </div>
-</div>
+    <input type="hidden" id="rowindex" value="1" />
+    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+            <table>
+                <tr>
+                    <td><a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'">保存检测项</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+        <div class="mt10">
+            <span>基本误差：</span>×
 
-<!--增加行数弹层-->
-<div id="dlg" class="easyui-dialog" title="增加行数" closed="true" data-options="buttons: [{
+            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="changeValue(this)">
+                <option value="yes" selected>合格</option>
+                <option value="no">不合格</option>
+
+            </select>
+        </div>
+        <div class="mt10">
+            <span>基本量程：</span>×
+
+            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="changeValue(this)">
+                <option value="1000" selected>1000</option>
+                <option value="100">100</option>
+                <option value="10">10</option>
+                <option value="1">1</option>
+                <option value="0.1">0.1</option>
+                <option value="0.01">0.01</option>
+                <option value="0.001">0.001</option>
+            </select>
+        </div>
+        <div class="mt10" id="tongdao">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_dy_1">
+                <thead>
+                    <tr>
+                        <th width="80" rowspan="3" align="center">序号</th>
+                        <th colspan="3" align="center">
+                            ×
+                            <input class="my-textbox input-width" value="" type="text" name="input" id="input">
+                            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="changeValue(this)">
+                                <option value="Ω" selected>Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                        </th>
+                        <th colspan="3" align="center">
+                            ×
+                            <input class="my-textbox input-width" value="" type="text" name="input2" id="input2">
+                            <select class="my-combobox" name="state_1_3" id="state_1_2" onchange="changeValue(this)">
+                                <option value="Ω" selected>Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                        </th>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <th width="140" align="center">
+                            实际值<br>
+                            (
+                            <select class="my-combobox" name="" id="" onchange="changeValue(this)">
+                                <option value="Ω" selected>Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                            )
+                        </th>
+                        <th width="140" align="center">
+                            标称值<br>
+                            (
+                            <select class="my-combobox" name="select" id="select" onchange="changeValue(this)">
+                                <option value="Ω" selected>Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                            )
+                        </th>
+                        <th width="140" align="center">误差 %</th>
+                        <th width="140" align="center">
+                            实际值<br>
+                            (
+                            <select class="my-combobox" name="" id="" onchange="changeValue(this)">
+                                <option value="Ω">Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                            )
+                        </th>
+                        <th width="140" align="center">
+                            标称值<br>
+                            (
+                            <select class="my-combobox" name="select2" id="select2" onchange="changeValue(this)">
+                                <option value="Ω" selected>Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                            )
+                        </th>
+                        <th width="140" align="center">误差 %</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_1">
+                    <!--示例，可删 -->
+                    <tr>
+                        <td align="center"><input name="input5" id="input5" type="text" class="my-textbox tc" value="1" style="width:40px" /></td>
+                        <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
+                        <td align="center"><input name="input3" id="input3" type="text" class="my-textbox tr" value="" /></td>
+                        <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
+                        <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
+                        <td align="center"><input name="input4" id="input4" type="text" class="my-textbox tr" value="" /></td>
+                        <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
+                    </tr>
+                    <!--/示例，可删 -->
+                </tbody>
+
+                <tr>
+                    <td colspan="7" style="background:#F7F7F7">
+                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open'); set('1')">增加行数</a>
+                    </td>
+                </tr>
+                <tfoot id="tfoot_1">
+                    <tr>
+                        <td align="center" nowrap>允许误差 %</td>
+                        <td align="right">±</td>
+
+                        <td colspan="2"><input name="" id="" type="text" class="my-textbox " value="" /></td>
+                        <td align="right">±</td>
+
+                        <td colspan="2"><input name="" id="" type="text" class="my-textbox " value="" /></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="mt10">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
+                <tr>
+                    <th width="60">注：</th>
+                    <td colspan="6"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%" value=""></td>
+                </tr>
+                <tr>
+                    <th>结论：</th>
+                    <td colspan="6"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%"></td>
+                </tr>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10">
+                <tbody id="tbody_2">
+                    <tr>
+                        <td align="center" width="50%"><input name="" id="" type="text" class="my-textbox tr" value="" style="width:96%" /></td>
+                        <td>
+                            <i>U</i><small>rel</small>(k =
+                            <select class="my-combobox" name="ddlSelectD" id="ddlSelectD" onchange="caculateD()">
+                                <option value="2">2 </option>
+                                <option value="3">3</option>
+                                <option value="√3">√3</option>
+                            </select>
+                            ) =
+                            <input class="my-textbox " value="" style="width:300px" id="txtvalueD">
+                            <input type="button" class="my-btn" value="计 算" onclick="calculate(this)" />
+                        </td>
+                    </tr>
+                </tbody>
+                <!--<tr>
+                  <td colspan="8" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addUrel()">增加不确定度计算行</a></td>
+                </tr> -->
+            </table>
+        </div>
+    </div>
+
+    <!--增加行数弹层-->
+    <div id="dlg" class="easyui-dialog" title="增加行数" closed="true" data-options="buttons: [{
 					text:'确定',
 					iconCls:'icon-ok',
 					handler:function(){
@@ -203,19 +226,19 @@
                     $('#dlg').window('close');
          }
          }]" style="width:400px;height:200px;padding:10px">
-  <table>
-    <tr>
-      <td width="100" align="right" height="100">增加的数量：</td>
-      <td><input type="text" id="txtNumber" class="my-textbox  required " style="width:200px" /></td>
-    </tr>
-  </table>
-</div>
-<!--/增加量程弹层--> 
+        <table>
+            <tr>
+                <td width="100" align="right" height="100">增加的数量：</td>
+                <td><input type="text" id="txtNumber" class="my-textbox  required " style="width:200px" /></td>
+            </tr>
+        </table>
+    </div>
+    <!--/增加量程弹层-->
 
-<script type="text/javascript" language="javascript">
-      
-       
+    <script type="text/javascript" language="javascript">
 
-</script>
+
+
+    </script>
 </body>
 </html>
