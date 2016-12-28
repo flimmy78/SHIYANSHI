@@ -554,7 +554,7 @@ namespace Langben.Report
         }
 
         /// <summary>
-        /// 获取表头中的所有的input和select标签 此处有一个bug,如果通道1表头没有数据,就使用2通道
+        /// 获取表头中的所有的input和select标签 此处有一个bug,如果通道1表头没有数据,就使用2通道 
         /// </summary>
         /// <param name="doc"></param>
         /// <returns>按照通道+节点的方式返回</returns>

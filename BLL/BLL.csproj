@@ -96,6 +96,7 @@
     <Compile Include="Report\KeyValue.cs" />
     <Compile Include="Report\AnalyticHTML.cs" />
     <Compile Include="Report\CreatXML.cs" />
+    <Compile Include="Report\PartialReportBLL.cs" />
     <Compile Include="Report\ReportBLL.cs" />
     <Compile Include="Report\ReportModel.cs" />
     <Compile Include="Report\ReportModelBase.cs" />
