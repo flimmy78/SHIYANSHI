@@ -1,7 +1,7 @@
 ﻿@model Langben.DAL.PROJECTTEMPLET
 @{
     Layout = "~/Views/Shared/TempleOnly.cshtml";
-    ViewBag.title = "交流电流输出-相对误差-单相";
+    ViewBag.title = "单桥-基本量程-相对误差";
 }
 @using Common
 @using Models
@@ -12,7 +12,7 @@
             <div class="mt10">
                 <span>基本误差：</span>×
 
-                <select class="my-combobox" name="state" id="state" onchange="changeValue(this)">
+                <select class="my-combobox" name="state" id="state_t_1_1" onchange="changeValue(this)">
                     <option value="yes" selected>合格</option>
                     <option value="no">不合格</option>
 
@@ -21,7 +21,7 @@
             <div class="mt10">
                 <span>基本量程：</span>×
 
-                <select class="my-combobox" name="state1" id="state1" onchange="changeValue(this)">
+                <select class="my-combobox" name="state1" id="state1_t_1_1" onchange="changeValue(this)">
                     <option value="1000" selected>1000</option>
                     <option value="100">100</option>
                     <option value="10">10</option>
@@ -37,8 +37,8 @@
         <th width="80" rowspan="3" align="center">序号</th>
         <th colspan="3" align="center">
             ×
-            <input class="my-textbox input-width" value="" type="text" name="input" id="input">
-            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="changeValue(this)">
+            <input class="my-textbox input-width" value="" type="text" name="input" id="input_t_1_1">
+            <select class="my-combobox" name="stateq" id="stateq_t_1_1" onchange="changeValue(this)">
                 <option value="Ω" selected>Ω</option>
                 <option value="TΩ">TΩ</option>
                 <option value="GΩ">GΩ</option>
@@ -51,7 +51,7 @@
         <th colspan="3" align="center">
             ×
             <input class="my-textbox input-width" value="" type="text" name="input2" id="input2">
-            <select class="my-combobox" name="state_1_3" id="state_1_2" onchange="changeValue(this)">
+            <select class="my-combobox" name="statew" id="statew_t_1_1" onchange="changeValue(this)">
                 <option value="Ω" selected>Ω</option>
                 <option value="TΩ">TΩ</option>
                 <option value="GΩ">GΩ</option>
@@ -62,12 +62,11 @@
             </select>
         </th>
     </tr>
-
     <tr>
         <th width="140" align="center">
             实际值<br>
             (
-            <select class="my-combobox" name="" id="" onchange="changeValue(this)">
+            <select class="my-combobox"  name="statee" id="statee_t_1_1"  onchange="changeValue(this)">
                 <option value="Ω" selected>Ω</option>
                 <option value="TΩ">TΩ</option>
                 <option value="GΩ">GΩ</option>
@@ -81,7 +80,7 @@
         <th width="140" align="center">
             标称值<br>
             (
-            <select class="my-combobox" name="select" id="select" onchange="changeValue(this)">
+            <select class="my-combobox"  name="stateer" id="stateer_t_1_1"  onchange="changeValue(this)">
                 <option value="Ω" selected>Ω</option>
                 <option value="TΩ">TΩ</option>
                 <option value="GΩ">GΩ</option>
@@ -96,7 +95,7 @@
         <th width="140" align="center">
             实际值<br>
             (
-            <select class="my-combobox" name="" id="" onchange="changeValue(this)">
+            <select class="my-combobox"  name="stateet" id="stateet_t_1_1"  onchange="changeValue(this)">
                 <option value="Ω">Ω</option>
                 <option value="TΩ">TΩ</option>
                 <option value="GΩ">GΩ</option>
@@ -110,7 +109,7 @@
         <th width="140" align="center">
             标称值<br>
             (
-            <select class="my-combobox" name="select2" id="select2" onchange="changeValue(this)">
+            <select class="my-combobox"  name="stateey" id="stateey_t_1_1"  onchange="changeValue(this)">
                 <option value="Ω" selected>Ω</option>
                 <option value="TΩ">TΩ</option>
                 <option value="GΩ">GΩ</option>

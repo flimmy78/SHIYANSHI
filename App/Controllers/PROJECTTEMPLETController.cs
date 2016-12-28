@@ -19,6 +19,19 @@ namespace Langben.App.Controllers
     public class PROJECTTEMPLETController : BaseController
     {
         /// <summary>
+        /// 单桥-基本量程-相对误差
+        /// </summary> 
+        /// <param name="RULEID">检测项目ID</param>
+        /// <param name="SCHEMEID">方案ID</param>
+        /// <returns></returns>
+        public ActionResult DanQiaoJiBenLiangcheng(string id = "频率输出", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            //频率输出
+            ViewBag.canshu = id;
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
         /// 基本误差-电阻示值-相对误差
         /// </summary>
         /// <param name="id">canshu</param>

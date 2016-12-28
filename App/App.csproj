@@ -1000,6 +1000,7 @@
     <Content Include="Views\PREPARE_SCHEME\Testxml.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\GongZuoDianLiuShiZhiWuCha9.cshtml" />
     <Content Include="Views\PREPARE_SCHEME\TestxmlDistinct.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\DanQiaoJiBenLiangcheng.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
