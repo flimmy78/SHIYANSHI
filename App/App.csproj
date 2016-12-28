@@ -572,6 +572,7 @@
     <Content Include="Scripts\echarts.js" />
     <Content Include="Scripts\numeral.js" />
     <Content Include="Scripts\shine.js" />
+    <Content Include="Xml\TableTemplate.xml" />
     <Content Include="Xml\TableTemplate_JianDing.xml" />
     <Content Include="Xml\TableTemplate_JiaoZhun.xml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
@@ -584,7 +585,6 @@
     <Content Include="Scripts\jianCeXiang.js" />
     <Content Include="Scripts\nugetexample.js" />
     <Content Include="Xml\SpecialCharacter.xml" />
-    <Content Include="Xml\TableTemplate.xml" />
     <None Include="Properties\PublishProfiles\shiyanshi.pubxml" />
     <Content Include="Res\tree_data1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
