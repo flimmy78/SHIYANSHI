@@ -573,6 +573,10 @@
     <Content Include="Scripts\echarts.js" />
     <Content Include="Scripts\numeral.js" />
     <Content Include="Scripts\shine.js" />
+    <Content Include="Xml\TableTemplate - 复制%282%29.xml" />
+    <Content Include="Xml\TableTemplate - 复制.xml" />
+    <Content Include="Xml\TableTemplate.xml" />
+    <Content Include="Xml\TableTemplate1.xml" />
     <Content Include="Xml\TableTemplate_JianDing.xml" />
     <Content Include="Xml\TableTemplate_JiaoZhun.xml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
@@ -585,7 +589,6 @@
     <Content Include="Scripts\jianCeXiang.js" />
     <Content Include="Scripts\nugetexample.js" />
     <Content Include="Xml\SpecialCharacter.xml" />
-    <Content Include="Xml\TableTemplate.xml" />
     <None Include="Properties\PublishProfiles\shiyanshi.pubxml" />
     <Content Include="Res\tree_data1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
@@ -997,6 +1000,8 @@
     <Content Include="Views\METERING_STANDARD_DEVICE\IndexUA.cshtml" />
     <Content Include="Views\PREPARE_SCHEME\Testxml.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\GongZuoDianLiuShiZhiWuCha9.cshtml" />
+    <Content Include="Views\PREPARE_SCHEME\TestxmlDistinct.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\DanQiaoJiBenLiangcheng.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
