@@ -161,7 +161,7 @@
         <th width="140" align="center">@ViewBag.wucha %</th>
         <th align="center">
             校准结果的不确定度<br>
-            U(K = <select class="my-combobox" name="K" id="K_t_1_1">
+            U(k = <select class="my-combobox" name="K" id="K_t_1_1">
     <option value="2">2</option>
     <option value="3">3</option>
     <option value="√3">√3</option>
@@ -190,6 +190,15 @@
 </tfoot>
 @section JS {
     <script type="text/javascript" language="javascript">
+        $(function () {
+            //注
+            if ($('#REMARK').val() == "") {
+                $('#REMARK').val("显示值、标准值的单位与量程单位一致。");
+            }
+
+
+
+        });
         //一个量程的需要这个方法
         //重写set方法，只准对增加空白行
         function set(tbodyIndex) {

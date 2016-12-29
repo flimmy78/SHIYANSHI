@@ -937,7 +937,7 @@
           <Name>测量点单位</Name>
           <ColIndex>1</ColIndex>
           <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
+          <IsMergeSameValue>Y</IsMergeSameValue>
           <IsHideRowNull>N</IsHideRowNull>
         </Cell>
         <Cell>
@@ -985,7 +985,7 @@
       <TableTitleList>
         <RowInfo>
           <RowNumber>3</RowNumber>
-          <RowIndex>80</RowIndex>
+          <RowIndex>79</RowIndex>
           <CellList>
             <Cell>
               <Code>BianSongQiTongDao</Code>
