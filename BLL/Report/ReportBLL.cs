@@ -2620,8 +2620,11 @@ namespace Langben.Report
         {
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(html);
-            Dictionary < int, DataValue > dataDic = AnalyticHTML.GetData(doc);
-            Dictionary < int, List < MYDataHead >> headDic = AnalyticHTML.GetHeadData(doc);
+            Dictionary < int, DataValue > dataDic = AnalyticHTML.GetData(doc);//数据
+            Dictionary < int, List < MYDataHead >> headDic = AnalyticHTML.GetHeadData(doc);//表头
+            Dictionary<int, List<MYDataHead>> footDic = AnalyticHTML.GetFootData(doc);//表尾
+
+
             int rowIndex = rowIndex_Destination;           
 
             //循环通道
@@ -2646,9 +2649,10 @@ namespace Langben.Report
                             }
                         }
                     }
-                  
+
                     #endregion
                     #endregion
+                    #region 画数据部分
                     int startRowIndex = rowIndex_Destination;
                     if (dataDic != null && dataDic.ContainsKey(tongDaoID) && dataDic[tongDaoID] != null && dataDic[tongDaoID].Count > 0 && dataDic[tongDaoID].Data!=null && dataDic[tongDaoID].Data.Count>0)
                     {
@@ -2721,9 +2725,29 @@ namespace Langben.Report
                         #endregion
                         #endregion
                     }
-                    #region 合并行
-                    //SetMergeAndHideRowSameValue(sheet_Destination, startRowIndex, rowIndex_Destination, temp);
                     #endregion
+
+                    #region 画表尾
+                    #region 画格子 同时填充数据                   
+
+                    if (temp != null && temp.TableFooterList != null && temp.TableFooterList.Count > 0)
+                    {
+                        RowInfo t = temp.TableFooterList.FirstOrDefault();
+                        if (t.RowIndex >= 0)
+                        {
+                            //数据与创建行同时进行 
+                            for (int k = 0; k < t.RowNumber; k++)
+                            {
+                                CopyRow_1(sheet_Source, sheet_Destination, t.RowIndex + k, rowIndex_Destination, 1, true, temp.TableFooterList, allSpecialCharacters, footDic[tongDaoID]);
+
+                                rowIndex_Destination++;
+                            }
+                        }
+                    }
+
+                    #endregion
+                    #endregion
+
                 }
 
             }
