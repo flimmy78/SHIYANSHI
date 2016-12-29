@@ -214,6 +214,17 @@ namespace Langben.App.Controllers
             return View();
 
         }
+        public ActionResult TestxmlDistinct(string id)
+        {
+            ReportBLL reportBll = new ReportBLL();
+            string Message = string.Empty;
+
+            reportBll.TestxmlDistinct(id, out Message);
+
+            ViewBag.IsSuccess = Message;
+            return View();
+
+        }
         /// <summary>
         /// 导出Excel
         /// </summary>
