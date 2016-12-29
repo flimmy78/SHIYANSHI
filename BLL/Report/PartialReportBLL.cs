@@ -33,7 +33,7 @@ namespace Langben.Report
     /// </summary>
     public partial class ReportBLL
     {
-        
+
         public bool Test(string ID, out string Message)
         {
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
@@ -101,7 +101,8 @@ namespace Langben.Report
                             //测试获取数据的时候使用
                             var data1 = AnalyticHTML.GetData(doc);
                             var data2 = AnalyticHTML.GetHeadData(doc);
-
+                            //不确定度的
+                            var sadf = AnalyticHTML.GetBuDueDingDu(doc);
                             string s = CreatXML.Create(doc, iEntity.RULEID);
                             if (string.IsNullOrWhiteSpace(s))
                             {
@@ -135,7 +136,7 @@ namespace Langben.Report
                 var TableTemplate = (from f in allTableTemplates.TableTemplateList
                                      where f.RuleID == item.RuleID
                                      select f).FirstOrDefault();
-               
+
                 item.DataRowIndex = TableTemplate.DataRowIndex + 2;//数据模板开始行号
                 item.RemarkRowIndex = TableTemplate.RemarkRowIndex + 2;//备注模板行号
                 item.ConclusionRowIndex = TableTemplate.ConclusionRowIndex + 2;//结论模板行号
@@ -154,29 +155,29 @@ namespace Langben.Report
 
                 var Cells = (from f in TableTemplate.Cells
 
-                               select f);
+                             select f);
                 if (Cells != null)
                 {
                     foreach (var it in item.Cells)
                     {
                         var ishide = (from f in Cells
-                                      where f.Code==it.Code
-                                     select f.IsHideRowNull).FirstOrDefault();
+                                      where f.Code == it.Code
+                                      select f.IsHideRowNull).FirstOrDefault();
                         if (!string.IsNullOrWhiteSpace(ishide))
                         {
                             it.IsHideRowNull = ishide;
                         }
 
                         var IsMergeSameValue = (from f in Cells
-                                      where f.Code == it.Code
-                                      select f.IsMergeSameValue).FirstOrDefault();
+                                                where f.Code == it.Code
+                                                select f.IsMergeSameValue).FirstOrDefault();
                         if (!string.IsNullOrWhiteSpace(IsMergeSameValue))
                         {
                             it.IsMergeSameValue = IsMergeSameValue;
                         }
                         var Name = (from f in Cells
-                                                where f.Code == it.Code
-                                                select f.Name).FirstOrDefault();
+                                    where f.Code == it.Code
+                                    select f.Name).FirstOrDefault();
                         if (!string.IsNullOrWhiteSpace(Name))
                         {
                             it.Name = Name;
@@ -193,17 +194,17 @@ namespace Langben.Report
 
         }
         public bool TestxmlDistinct(string ID, out string Message)
-        { 
+        {
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             string errors = string.Empty;
             var m_BLL = new SCHEMEBLL();
             var entity = m_BLL.GetById(ID);
             TableTemplates allTableTemplates = GetTableTemplates();
 
-            
+
 
             var data = (from f in allTableTemplates.TableTemplateList
-                       
+
 
                         select f.RuleID).ToList();
 
@@ -217,8 +218,8 @@ namespace Langben.Report
 
                 var datafirst = (from f in allTableTemplates.TableTemplateList
 
-                            where f.RuleID ==item
-                            select f).First();
+                                 where f.RuleID == item
+                                 select f).First();
                 t.TableTemplateList.Add(datafirst);
 
 
@@ -262,7 +263,7 @@ namespace Langben.Report
             Message = errors;
             return false;
         }
-    
+
 
     }
 }
