@@ -1537,6 +1537,7 @@ namespace Langben.Report
                     //if (TableTemplateDic != null && TableTemplateDic.ContainsKey(iEntity.RULEID))
                     //{
                     //    TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
+                    //if (iEntity.RULEID== "126-1995_2_6_1" && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     if (allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
@@ -1634,9 +1635,12 @@ namespace Langben.Report
         /// <param name="rowInfoList">需要替换的动态模板数据</param>
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <param name="DongTaiShuJuList">需要替换的动态数据</param>
-        private List<CellRangeAddress> CopyRow_1(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, int insertCount, bool IsCopyContent, List<RowInfo> rowInfoList, SpecialCharacters allSpecialCharacters, List<MYDataHead> DongTaiShuJuList)
+        private Dictionary<string,CellRangeAddress> CopyRow_1(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, int insertCount, bool IsCopyContent, List<RowInfo> rowInfoList, SpecialCharacters allSpecialCharacters, List<MYDataHead> DongTaiShuJuList)
         {
-            List<CellRangeAddress> result = new List<CellRangeAddress>();    
+            //key：//第几行_第几列 
+            Dictionary<string, CellRangeAddress> result = new Dictionary<string, CellRangeAddress>();
+            string key = "";//第几行_第几列 
+            int colCount = 0;
             IRow row_Source = sheet_Source.GetRow(rowIndex_Source);
             int sourceCellCount = row_Source.Cells.Count;
             if(insertCount<=0)
@@ -1689,8 +1693,17 @@ namespace Langben.Report
                             {
                                 sheet_Destination.AddMergedRegion(new CellRangeAddress(i - (cellAddress.LastRow - cellAddress.FirstRow), i, cellAddress.FirstColumn, cellAddress.LastColumn));
                                 startMergeCell = cellAddress.LastColumn + 1;
-
-                                result.Add(new CellRangeAddress(i - (cellAddress.LastRow - cellAddress.FirstRow), i, cellAddress.FirstColumn, cellAddress.LastColumn));
+                                if (m == 0)
+                                {
+                                    colCount = 1;
+                                }
+                                else
+                                {
+                                    colCount++;
+                                }
+                                key = (i - (cellAddress.LastRow - cellAddress.FirstRow)).ToString()+"_"+colCount.ToString();//第几行_第几列 
+                                //result.Add(new CellRangeAddress(i - (cellAddress.LastRow - cellAddress.FirstRow), i, cellAddress.FirstColumn, cellAddress.LastColumn));
+                                result.Add(key, new CellRangeAddress(i - (cellAddress.LastRow - cellAddress.FirstRow), i, cellAddress.FirstColumn, cellAddress.LastColumn));
                             }
                             if (IsCopyContent && rowIndex_Source == cellAddress.FirstRow)
                             {
@@ -1703,8 +1716,18 @@ namespace Langben.Report
                     }
                     else
                     {
-
-                        result.Add(new CellRangeAddress(targetRow.RowNum, targetRow.RowNum, m, m));
+                        //colIndex++;
+                        //result.Add(new CellRangeAddress(targetRow.RowNum, targetRow.RowNum, m, m));
+                        if (m == 0)
+                        {
+                            colCount = 1;
+                        }
+                        else
+                        {
+                            colCount++;
+                        }
+                        key = targetRow.RowNum.ToString() + "_" + colCount.ToString();//第几行_第几列 
+                        result.Add(key,new CellRangeAddress(targetRow.RowNum, targetRow.RowNum, m, m));
                         if (IsCopyContent)
                         {
                             HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
@@ -2631,7 +2654,7 @@ namespace Langben.Report
                     {
                         #region 画数据  
                         #region 画格子                       
-                        List<CellRangeAddress>  cellAddressList = CopyRow_1(sheet_Source, sheet_Destination, temp.DataRowIndex, rowIndex_Destination, dataDic[tongDaoID].Count, true, null, allSpecialCharacters, null);
+                        Dictionary<string,CellRangeAddress>  cellAddressList = CopyRow_1(sheet_Source, sheet_Destination, temp.DataRowIndex, rowIndex_Destination, dataDic[tongDaoID].Count, true, null, allSpecialCharacters, null);
                         rowIndex_Destination = rowIndex_Destination + dataDic[tongDaoID].Count;
                         #endregion
                         #region 填充数据
@@ -2641,15 +2664,42 @@ namespace Langben.Report
                             if(temp.Cells.Count(p=>p.Code==d.name)>0)//配置中存在说明需要打印
                             {
                                 //如果模板中有数据表示固定数据，否则是动态数据，固定数据跳过
-                                CellRangeAddress c = cellAddressList.FirstOrDefault();
+                                string key = cellAddressList.Keys.FirstOrDefault();
+                                int colCount = Convert.ToInt32(key.Split('_')[1]);
+                                CellRangeAddress c = cellAddressList[key];
                                 string cValue = sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).StringCellValue;
                                 while (!string.IsNullOrWhiteSpace(cValue))
                                 {
-                                    cellAddressList.Remove(c);
-                                    c = cellAddressList.FirstOrDefault();
+                                    if (temp.Cells.Count >= colCount && temp.Cells[colCount - 1].IsMergeSameValue == "Y")//固定值是否需要合并
+                                    {
+                                        sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + dataDic[tongDaoID].Count - 1, c.FirstColumn, c.LastColumn));
+
+                                        for (int j = 0; j < dataDic[tongDaoID].Count; j++)//将已合并或者已使用的区域移除
+                                        {                                           
+
+                                            KeyValuePair<string, CellRangeAddress> cc = cellAddressList.FirstOrDefault(p =>  p.Value.FirstColumn == c.FirstColumn && p.Value.LastColumn == c.LastColumn);
+                                            if (!string.IsNullOrWhiteSpace(cc.Key) && cc.Value != null && cc.Value.FirstColumn == c.FirstColumn && cc.Value.LastColumn == c.LastColumn)
+                                            {
+                                                cellAddressList.Remove(cc.Key);
+                                            }
+                                            
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        cellAddressList.Remove(key);
+                                    }
+                                    key = cellAddressList.Keys.FirstOrDefault();
+                                    c = cellAddressList[key];                                   
                                     cValue = sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).StringCellValue;
                                 }
                                 HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, d.value);
+                               
+                                if((value==null ||string.IsNullOrWhiteSpace(value.String)) && temp.Cells.FirstOrDefault(p => p.Code == d.name)!=null && temp.Cells.FirstOrDefault(p => p.Code == d.name).IsHideRowNull == "Y")
+                                {
+                                    HideRow(sheet_Destination, c.FirstRow, 1);                                   
+                                }
                                 sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).SetCellValue(value);                               
                                 if (d.mergedRowNum > 1)//多行单元格合并
                                 {
@@ -2658,14 +2708,13 @@ namespace Langben.Report
 
                                 for(int j=0;j<d.mergedRowNum;j++)//将已合并或者已使用的区域移除
                                 {
-                                    
-                                    if(j>0)
-                                    {
-                                        c = cellAddressList.Find(p => p.FirstRow == c.FirstRow + 1 && p.LastRow == c.LastRow + 1 && p.FirstColumn == c.FirstColumn && p.LastColumn == c.LastColumn);
+                                    KeyValuePair<string, CellRangeAddress> cc = cellAddressList.FirstOrDefault(p => p.Value.FirstColumn == c.FirstColumn && p.Value.LastColumn == c.LastColumn);
+                                    if (!string.IsNullOrWhiteSpace(cc.Key) && cc.Value != null &&  cc.Value.FirstColumn == c.FirstColumn && cc.Value.LastColumn == c.LastColumn)
+                                    {                                       
+                                        cellAddressList.Remove(cc.Key);
                                     }
-                                    cellAddressList.Remove(c);
                                 }
-                               
+
                             }
                         }
 
