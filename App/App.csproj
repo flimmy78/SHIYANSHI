@@ -574,8 +574,6 @@
     <Content Include="Scripts\echarts.js" />
     <Content Include="Scripts\numeral.js" />
     <Content Include="Scripts\shine.js" />
-    <Content Include="Xml\TableTemplate - 复制%282%29.xml" />
-    <Content Include="Xml\TableTemplate - 复制.xml" />
     <Content Include="Xml\TableTemplate.xml" />
     <Content Include="Xml\TableTemplate1.xml" />
     <Content Include="Xml\TableTemplate_JianDing.xml" />
@@ -1000,9 +998,6 @@
     <Content Include="Views\VGONGZUOSHICHANG\Index.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\IndexUA.cshtml" />
     <Content Include="Views\PREPARE_SCHEME\Testxml.cshtml" />
-    <Content Include="Views\PROJECTTEMPLET\GongZuoDianLiuShiZhiWuCha9.cshtml" />
-    <Content Include="Views\PREPARE_SCHEME\TestxmlDistinct.cshtml" />
-    <Content Include="Views\PROJECTTEMPLET\DanQiaoJiBenLiangcheng.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
