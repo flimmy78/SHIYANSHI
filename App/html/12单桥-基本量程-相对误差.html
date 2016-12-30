@@ -24,7 +24,7 @@
         <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
             <table>
                 <tr>
-                    <td><a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'">保存检测项</a></td>
+                    <td><a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="TongDao.addTongDao()">增加通道</a> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'">保存检测项</a></td>
                 </tr>
             </table>
         </div>
@@ -150,11 +150,11 @@
                     <!--示例，可删 -->
                     <tr>
                         <td align="center"><input name="input5" id="input5" type="text" class="my-textbox tc" value="1" style="width:40px" /></td>
+                        <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" onblur="calculate.wuCha(this)" /></td>
+                        <td align="center"><input name="input3" id="input3" type="text" class="my-textbox tr" value="" onblur="calculate.wuCha(this)" /></td>
                         <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
-                        <td align="center"><input name="input3" id="input3" type="text" class="my-textbox tr" value="" /></td>
-                        <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
-                        <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
-                        <td align="center"><input name="input4" id="input4" type="text" class="my-textbox tr" value="" /></td>
+                        <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" onblur="calculate.wuCha(this)" /></td>
+                        <td align="center"><input name="input4" id="input4" type="text" class="my-textbox tr" value="" onblur="calculate.wuCha(this)" /></td>
                         <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
                     </tr>
                     <!--/示例，可删 -->
@@ -162,7 +162,7 @@
 
                 <tr>
                     <td colspan="7" style="background:#F7F7F7">
-                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open'); set('1')">增加行数</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open');TongDao.getCurTongDaoIdx(this)">增加行数</a>
                     </td>
                 </tr>
                 <tfoot id="tfoot_1">
@@ -170,10 +170,10 @@
                         <td align="center" nowrap>允许误差 %</td>
                         <td align="right">±</td>
 
-                        <td colspan="2"><input name="" id="" type="text" class="my-textbox " value="" /></td>
+                        <td colspan="2"><input name="" id="" type="text" class="my-textbox " value="" onblur="calculate.wuCha(this)" /></td>
                         <td align="right">±</td>
 
-                        <td colspan="2"><input name="" id="" type="text" class="my-textbox " value="" /></td>
+                        <td colspan="2"><input name="" id="" type="text" class="my-textbox " value="" onblur="calculate.wuCha(this)" /></td>
                     </tr>
                 </tfoot>
             </table>
@@ -195,7 +195,7 @@
                         <td align="center" width="50%"><input name="" id="" type="text" class="my-textbox tr" value="" style="width:96%" /></td>
                         <td>
                             <i>U</i><small>rel</small>(k =
-                            <select class="my-combobox" name="ddlSelectD" id="ddlSelectD" onchange="caculateD()">
+                            <select class="my-combobox" name="ddlSelectD" id="ddlSelectD">
                                 <option value="2">2 </option>
                                 <option value="3">3</option>
                                 <option value="√3">√3</option>
@@ -218,7 +218,7 @@
 					text:'确定',
 					iconCls:'icon-ok',
 					handler:function(){
-					  return CreateRow()
+					  return TongDao.addRow()
 					}
 				},{
 					text:'取消',
@@ -236,9 +236,90 @@
     <!--/增加量程弹层-->
 
     <script type="text/javascript" language="javascript">
+        var rowNumber = 1;
+        var index = 1;
+        var currentindex = 1;
+        var TongDao = {
+            addTongDao: function () {
+                var tongdao = $("#tongdao_dy_1").clone();
+                this.setTongDaoIdx(index + 1);
+                $("#tongdao").append($(tongdao).attr("id", "tongdao_dy_" + this.getTongDaoIdx()));
+            },
+            addRow: function () {
 
+                var inputHtml = "<input name=\"\" id=\"\" type=\"text\" class=\"my-textbox tr\" value=\"\" onblur=\"calculate.wuCha(this)\"/>";
+                var rows = $("#txtNumber").val();
+                for (var i = 0; i < rows; i++) {
+                    // var rowIdx = $("#tongdao_dy_" + currentindex + " tbody").eq(0).find('tr').last().children().eq(0).text();
+                    rowNumber = (rowNumber + 1);
+                    $("#tongdao_dy_" + currentindex + " tbody").eq(0).append("<tr>" +
+                                                                                  "<td align=\"center\">" + rowNumber + "</td>" +
+                                                                                  "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                   "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                    "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                   "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                  "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                  "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                             "</tr>");
+
+                }
+            },
+            setTongDaoIdx: function (idx) {
+                index = currentindex = idx;
+            },
+            getTongDaoIdx: function () {
+                return index;
+            },
+            getCurTongDaoIdx: function (obj) {
+                var id = $(obj).parents('table').eq(0).attr("id");
+                currentindex = id.split('_')[2];
+            }
+        }
+        var calculate = {
+            wuCha: function (obj) {
+                //【误差】=(【标称值】-【实际值】)/【标称值】*100%，比允许误差多一位，四舍六入，逢五奇进偶不进
+                TongDao.getCurTongDaoIdx(obj);
+                var arry = this.getWuChaLength(obj);
+                $("#tongdao_dy_" + currentindex + " tbody:eq(0) tr").each(function () {
+
+                    //标称值
+                    var biaochenzhi = $(this).children().eq(2).find('input').val();;// $("#tongdao_dy_" + currentindex + " thead tr th:eq(2)").find("input").val();
+                    //获取实际值
+                    var shijizhi = $(this).children().eq(1).find('input').val();
+                    //计算第一个误差
+                    if (biaochenzhi != "" && shijizhi != "")
+                        $(this).children().eq(3).find('input').val(fomatFloat(parseFloat((parseFloat(biaochenzhi) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100), arry[0].length + 1))
+                    //计算第二个误差
+                    biaochenzhi = $(this).children().eq(5).find('input').val();
+                    shijizhi = $(this).children().eq(4).find('input').val();
+                    if (biaochenzhi != "" && shijizhi != "")
+                        $(this).children().eq(6).find('input').val(fomatFloat(parseFloat((parseFloat(biaochenzhi) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100), arry[0].length + 1))
+                });
+
+            }, getWuChaLength: function (obj) {
+                var arry = [];
+                var tr = $(obj).parents('tr').eq(0);
+                var yunxuWuCha = $("#tongdao_dy_" + currentindex + " tfoot:eq(0) tr:eq(0) td:eq(2)").find("input").val();
+                var yunxuWuCha1 = $("#tongdao_dy_" + currentindex + " tfoot:eq(0) tr:eq(0) td:eq(4)").find("input").val();
+                if (yunxuWuCha == "" && yunxuWuCha1 == "") {
+                    arry.push({
+                        length: 0,
+                        length1: 0
+                    });
+                }
+                else {
+                    arry.push({
+                        length: yunxuWuCha.split(".").length == 2 ? yunxuWuCha.split(".")[1].length : 0,
+                        length1: yunxuWuCha1.split(".").length == 2 ? yunxuWuCha1.split(".")[1].length : 0
+                    });
+                }
+                return arry;
+
+            }
+        }
 
 
     </script>
 </body>
+
 </html>

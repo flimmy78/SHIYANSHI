@@ -90,23 +90,23 @@ namespace Langben.Report
             get;
             set;
         }
-        ///// <summary>
-        ///// 是否有二级标题
-        ///// </summary>
-        //public bool IsHaveSecondTitle
-        //{
-        //    get
-        //    {
-        //        if(SecondTitleList!=null && SecondTitleList.Count>0 && SecondTitleList.Count(p=>p.RowIndex>=0)>0)
-        //        {
-        //            return true;
-        //        }
-        //        else
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //}
+        /// <summary>
+        /// 是否有二级标题
+        /// </summary>
+        public bool IsHaveSecondTitle
+        {
+            get
+            {
+                if(SecondTitleList!=null && SecondTitleList.Count>0 && SecondTitleList.Count(p=>p.RowIndex>=0)>0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
         /// <summary>
         /// 是否有表格表头
         /// </summary>
@@ -175,49 +175,22 @@ namespace Langben.Report
             get;
             set;
         }
-        ///// <summary>
-        ///// 二级标题，有就配置，没有该节点可不配置
-        ///// </summary>
-        //[XmlArray("SecondTitleList")]
-        //[XmlArrayItem("RowInfo")]
-        //public List<RowInfo> SecondTitleList
-        //{
-        //    get;
-        //    set;
-        //}
         /// <summary>
-        /// 表头,没有该节点可不配置
+        /// 二级标题，有就配置，没有该节点可不配置
         /// </summary>
-        [XmlArray("TableTitleList")]
+        [XmlArray("SecondTitleList")]
         [XmlArrayItem("RowInfo")]
-        public List<RowInfo> TableTitleList
+        public List<RowInfo> SecondTitleList
         {
             get;
             set;
         }
         /// <summary>
-        /// 是否有表格表尾
+        /// 标题,没有该节点可不配置
         /// </summary>
-        public bool IsHaveTableFooter
-        {
-            get
-            {
-                if (TableFooterList != null && TableFooterList.Count > 0 && TableFooterList.Count(p => p.RowIndex >= 0) > 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-        /// <summary>
-        /// 表尾,没有该节点可不配置
-        /// </summary>
-        [XmlArray("TableFooterList")]
+        [XmlArray("TableTitleList")]
         [XmlArrayItem("RowInfo")]
-        public List<RowInfo> TableFooterList
+        public List<RowInfo> TableTitleList
         {
             get;
             set;

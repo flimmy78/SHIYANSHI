@@ -691,12 +691,7 @@ s：字符串
                                      
                                 }
                                 else {
-                                    if (data.Message!=null) {
-                                        $.messager.alert('操作提示', data.Message, 'error');
-                                    }
-                                    else {
-                                        $.messager.alert('操作提示', "数据有误出错！", 'error');
-                                    }
+                                    $.messager.alert('操作提示', "数据保存失败！", 'error');
                                 }
                             }
                         });
