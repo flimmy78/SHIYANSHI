@@ -178,57 +178,32 @@ namespace Langben.App.Controllers
                         //QRCodeHelper.GetQRCode(item.ID, ms);
                         var pathErWeiMa = path + item.ID + ".png";
 
-                        //System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate);
+                        System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate);
 
 
-                        //System.IO.BinaryWriter w = new System.IO.BinaryWriter(fs);
+                        System.IO.BinaryWriter w = new System.IO.BinaryWriter(fs);
                         #region 二维码加字
 
-                        System.IO.FileStream fss = new System.IO.FileStream(Server.MapPath("~/up/模版.png"), System.IO.FileMode.OpenOrCreate);
-                        int filelength = 0;
-                        filelength = (int)fss.Length; //获得文件长度 
-                        Byte[] image = new Byte[filelength]; //建立一个字节数组 
-                        fss.Read(image, 0, filelength); //按字节流读取 
-                        System.Drawing.Image imag = System.Drawing.Image.FromStream(fss);
-                        //System.Drawing.Image Image = System.Drawing.Image.FromStream(ms);
-                        Graphics g = null;
-                        g = Graphics.FromImage(imag);
-                        string xinghao = item.VERSION;//需要写入的字
-                        //string xinghao = "123456789abcd";//需要写入的字
-                        int w = imag.Width;
-                        int h = imag.Height;
-                        int y = 0;
-                        int x = 250;
-                        for (int i = 0; i < xinghao.Length; i++)
-                        {
-                            if (x > w)
-                            {
-                                result.Code = Common.ClientCode.Fail;
-                                result.Message = "内容太多二维码生成失败！";
-                                return Json(result);
-                            }
-                            else
-                            {
-                                    if (i % 6 == 0)
-                                    {
-                                        x = x + 50;
-                                        y = 0;
-                                        y = y + 40;
-                                        g.DrawString(xinghao[i].ToString(), new Font("宋体", 13), Brushes.Red, new PointF(x, y));//x:值越大越靠右；y：值越小越靠上
+                        //System.IO.FileStream fss = new System.IO.FileStream(Server.MapPath("~/up/模版.png"), System.IO.FileMode.OpenOrCreate);
+                        //int filelength = 0;
+                        //filelength = (int)fss.Length; //获得文件长度 
+                        //Byte[] image = new Byte[filelength]; //建立一个字节数组 
+                        //fss.Read(image, 0, filelength); //按字节流读取 
+                        //System.Drawing.Image imag = System.Drawing.Image.FromStream(fss);
+                        ////System.Drawing.Image Image = System.Drawing.Image.FromStream(ms);
+                        //Graphics g = null;
+                        //g = Graphics.FromImage(imag);
+                        //string xinghao = item.VERSION;
+                        //int y = 0;
 
-                                    }
-                                    else
-                                    {
-                                        y = y + 40;
-                                        g.DrawString(xinghao[i].ToString(), new Font("宋体", 13), Brushes.Red, new PointF(x, y));//x:值越大越靠右；y：值越小越靠上
-                                    }                                                         
-                            }
-
-                        }
-                        Image ig = CombinImage(imag, ms);
-                        fss.Close();
-                        TuPanBaoCun(ig, pathErWeiMa);
-
+                        //for (int i = 0; i < xinghao.Length; i++)
+                        //{
+                        //    y = y + 40;
+                        //    g.DrawString(xinghao[i].ToString(), new Font("宋体", 13), Brushes.Red, new PointF(400, y));//x:值越大越靠右；y：值越小越靠上
+                        //}
+                        //Image ig = CombinImage(imag, ms);
+                        //fss.Close();
+                        //TuPanBaoCun(ig, pathErWeiMa);
                         //Font f = new Font("微软雅黑", 16, FontStyle.Bold);
                         //SolidBrush B = new SolidBrush(ColorTranslator.FromHtml("#411464"));
 
@@ -236,8 +211,8 @@ namespace Langben.App.Controllers
 
 
 
-                        //w.Write(ms.ToArray());
-                        //fs.Close();
+                        w.Write(ms.ToArray());
+                        fs.Close();
                         //器具明细信息_承接实验室表添加数据
                         foreach (var it in item.UNDERTAKE_LABORATORYID.TrimEnd(',').Split(','))
                         {
@@ -310,18 +285,18 @@ namespace Langben.App.Controllers
         /// <param name="destImg">粘贴的目标图片</param>
         public static Image CombinImage(Image sourceImg, MemoryStream destImg)
         {
-            Image imgBack = sourceImg;     //相框图片 模板图片
-            Image img = System.Drawing.Image.FromStream(destImg);        //照片图片 二维码
+            Image imgBack = sourceImg;     //相框图片 
+            Image img = System.Drawing.Image.FromStream(destImg);        //照片图片
             //从指定的System.Drawing.Image创建新的System.Drawing.Graphics       
             Graphics g = Graphics.FromImage(imgBack);
             //g.DrawImage(imgBack, 0, 0, 148, 124);      // g.DrawImage(imgBack, 0, 0, 相框宽, 相框高);
-            //g.FillRectangle(System.Drawing.Brushes.Black, -50, -50, (int)212, ((int)203));//相片四周刷一层黑色边框，这里没有，需要调尺寸
+            g.FillRectangle(System.Drawing.Brushes.Black, -50, -50, (int)212, ((int)203));//相片四周刷一层黑色边框，这里没有，需要调尺寸
             //g.DrawImage(img, 照片与相框的左边距, 照片与相框的上边距, 照片宽, 照片高);
 
-            int x = 30;
-            int y = 30;
-            int w = imgBack.Width - 200;
-            int h = imgBack.Height - 100;
+            int x = 400;
+            int y = 10;
+            int w = imgBack.Width - 400;
+            int h = imgBack.Height - 400;
             g.DrawImage(img, x, y, w, h);
             GC.Collect();
             //string saveImagePath = @"D:\shiyanshi\App\up\sss.png";
