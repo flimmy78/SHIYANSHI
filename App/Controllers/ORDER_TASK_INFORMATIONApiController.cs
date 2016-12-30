@@ -133,11 +133,11 @@ namespace Langben.App.Controllers
                 s.UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID;
                 if (s.APPLIANCE_LABORATORY.Count>1)
                 {
-                    tiqureqi = Convert.ToDateTime(s.CREATETIME).AddDays(14).ToString("yyyy-MM-dd");
+                    tiqureqi = Convert.ToDateTime(s.CREATETIME).AddDays(28).ToString("yyyy-MM-dd");
                 }
                 else
                 {
-                    tiqureqi = Convert.ToDateTime(s.CREATETIME).AddDays(28).ToString("yyyy-MM-dd");
+                    tiqureqi = Convert.ToDateTime(s.CREATETIME).AddDays(14).ToString("yyyy-MM-dd");
                 }
 
                 var show = new Models.APPLIANCE_DETAIL_INFORMATIONShow()
