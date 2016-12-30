@@ -232,6 +232,7 @@
     <Compile Include="Images\HtmlHelper\Easyui.cs" />
     <Compile Include="Images\HtmlHelper\RadioButtonListHelper.cs" />
     <Compile Include="Models\ALLOWABLE_ERRORData.cs" />
+    <Compile Include="Models\SHIYANSHIGONGZUO_show.cs" />
     <Compile Include="Models\VQIJULINGQU2Show.cs" />
     <Compile Include="Models\UNCERTAINTYTABLEShow.cs" />
     <Compile Include="Models\ApplianceModel.cs" />
