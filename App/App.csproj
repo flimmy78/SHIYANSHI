@@ -571,15 +571,14 @@
     </Content>
     <Content Include="Scripts\datagrid-detailview.js" />
     <Content Include="Scripts\echarts.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\numeral.js" />
     <Content Include="Scripts\shine.js" />
     <Content Include="Xml\TableTemplate.xml" />
     <Content Include="Xml\TableTemplate1.xml" />
     <Content Include="Xml\TableTemplate_JianDing.xml" />
     <Content Include="Xml\TableTemplate_JiaoZhun.xml" />
-    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
-    <Content Include="Scripts\jquery-2.1.1.js" />
-    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Scripts\jquery-ui-1.10.1.custom.min.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.edatagrid.js" />
@@ -589,7 +588,7 @@
     <Content Include="Xml\SpecialCharacter.xml" />
     <None Include="Properties\PublishProfiles\shiyanshi.pubxml" />
     <Content Include="Res\tree_data1.js" />
-    <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="Scripts\jquery.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
