@@ -44,18 +44,18 @@ namespace Langben.BLL
         {
             try
             {
-                using (TransactionScope transactionScope = new TransactionScope())
-                { 
+                //using (TransactionScope transactionScope = new TransactionScope())
+                //{ 
                     if (CreateX(ref validationErrors, db, entity))
                     {
-                        transactionScope.Complete();
+                        //transactionScope.Complete();
                         return true;
                     }
                     else
                     {
                         Transaction.Current.Rollback();
                     }
-                }
+                //}
             }
             catch (Exception ex)
             {

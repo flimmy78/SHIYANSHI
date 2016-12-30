@@ -52,8 +52,39 @@ namespace Langben.BLL
           return  repository.GetData(db, order, sort, search,id);
              
         }
-      
-      
+        /// <summary>
+        /// 人员查询的数据
+        /// </summary>
+        /// <param name="id">额外的参数</param>
+        /// <param name="page">页码</param>
+        /// <param name="rows">每页显示的行数</param>
+        /// <param name="order">排序字段</param>
+        /// <param name="sort">升序asc（默认）还是降序desc</param>
+        /// <param name="search">查询条件</param>
+        /// <param name="total">结果集的总数</param>
+        /// <returns>结果集</returns>
+        public List<RENYUANGONGZUOLIANG_Result> GetByParamRE(string id, int page, int rows, string order, string sort, string search, ref int total)
+        {
+            return repository.GetDataRE(db, order, sort, search, id);
+
+        }
+        /// <summary>
+        /// 人员查询的数据
+        /// </summary>
+        /// <param name="id">额外的参数</param>
+        /// <param name="page">页码</param>
+        /// <param name="rows">每页显示的行数</param>
+        /// <param name="order">排序字段</param>
+        /// <param name="sort">升序asc（默认）还是降序desc</param>
+        /// <param name="search">查询条件</param>
+        /// <param name="total">结果集的总数</param>
+        /// <returns>结果集</returns>
+        public List<ZHENGSHUHAOLEIBIE_Result> GetByParamZH(string id, int page, int rows, string order, string sort, string search, ref int total)
+        {
+            return repository.GetDataZH(db, order, sort, search, id);
+
+        }
+
         public List<VSHIYANSHIGONGZUOLIANG> GetAll()
         {
             SysEntities db = new SysEntities();            
