@@ -112,6 +112,7 @@ namespace Langben.App.Controllers
             string ORDER_STATUS = string.Empty;
             string ORDER_STATUS_NAME = string.Empty;
             ORDER_TASK_INFORMATION queryData = m_BLL.GetById(id);
+            string tiqureqi = string.Empty;
             foreach (var s in queryData.APPLIANCE_DETAIL_INFORMATION)
             {
                 UNDERTAKE_LABORATORYID = null;
@@ -130,6 +131,15 @@ namespace Langben.App.Controllers
                    
                 }
                 s.UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID;
+                if (s.APPLIANCE_LABORATORY.Count>1)
+                {
+                    tiqureqi = Convert.ToDateTime(s.CREATETIME).AddDays(14).ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    tiqureqi = Convert.ToDateTime(s.CREATETIME).AddDays(28).ToString("yyyy-MM-dd");
+                }
+
                 var show = new Models.APPLIANCE_DETAIL_INFORMATIONShow()
                 {
                     ID = s.ID,
@@ -157,7 +167,8 @@ namespace Langben.App.Controllers
                     STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU,
                     UNDERTAKE_LABORATORYIDString = UNDERTAKE_LABORATORYID.TrimEnd(','),
                     ORDER_STATUS = ORDER_STATUS,
-                    ORDER_STATUS_NAME = ORDER_STATUS_NAME
+                    ORDER_STATUS_NAME = ORDER_STATUS_NAME,
+                    TIQURIQI = tiqureqi
                 };
                 data.APPLIANCE_DETAIL_INFORMATIONShows.Add(show);
             }
