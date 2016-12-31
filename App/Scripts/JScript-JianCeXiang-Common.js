@@ -9,7 +9,7 @@ DanWeiDDLHtmlArray = [
         Remark: '电流单位',
         Value: "<select class=\"my-combobox\" name=\"DianLiu\" style=\"width:50px; \">" +
                 "<option value=\"A\">A</option> " +
-                 "<option value=\"KA\">KA</option>" +
+                 "<option value=\"kA\">kA</option>" +
                  "<option value=\"mA\">mA</option>  " +
                  "<option value=\"μA\">μA</option>" +
                  "<option value=\"nA\">nA</option> " +
@@ -444,7 +444,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -466,7 +473,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -488,7 +502,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -510,7 +531,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -532,7 +560,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
       ,
@@ -554,7 +589,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -576,7 +618,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -598,7 +647,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -620,7 +676,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -642,7 +705,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -664,7 +734,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -686,7 +763,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -708,7 +792,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
         ,
@@ -730,7 +821,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -752,7 +850,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -774,7 +879,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
         ,
@@ -796,7 +908,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -818,7 +937,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',READVALUE,'
+                CalculateForAddLianCheng: ',READVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -840,7 +966,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ''
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -862,7 +995,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ''
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -884,7 +1024,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',DIANYASHUCHU1,DIANYASHUCHU2,'
+                CalculateForAddLianCheng: ',DIANYASHUCHU1,DIANYASHUCHU2,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -906,7 +1053,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,'
+                CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -928,7 +1082,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,'
+                CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -950,7 +1111,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,'
+                CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -972,7 +1140,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,'
+                CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -994,7 +1169,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',DIANYASHUCHU1,DIANYASHUCHU2,'
+                CalculateForAddLianCheng: ',DIANYASHUCHU1,DIANYASHUCHU2,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1016,7 +1198,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',DIANYASHUCHU1,DIANYASHUCHU2,DIANYASHUCHU3,'
+                CalculateForAddLianCheng: ',DIANYASHUCHU1,DIANYASHUCHU2,DIANYASHUCHU3,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1038,7 +1227,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,DIANYACELIANG3,'
+                CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,DIANYACELIANG3,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1060,7 +1256,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,DIANYACELIANG3,'
+                CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,DIANYACELIANG3,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1082,7 +1285,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,DIANYACELIANG3,'
+                CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,DIANYACELIANG3,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1104,7 +1314,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',DIANYASHUCHU1,DIANYASHUCHU2,DIANYASHUCHU3,'
+                CalculateForAddLianCheng: ',DIANYASHUCHU1,DIANYASHUCHU2,DIANYASHUCHU3,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1126,7 +1343,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,DIANYACELIANG3,'
+                CalculateForAddLianCheng: ',DIANYACELIANG1,DIANYACELIANG2,DIANYACELIANG3,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1148,7 +1372,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',ACTUALVALUE,'
+                CalculateForAddLianCheng: ',ACTUALVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1170,7 +1401,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',ACTUALVALUE,'
+                CalculateForAddLianCheng: ',ACTUALVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1192,7 +1430,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',ACTUALVALUE,'
+                CalculateForAddLianCheng: ',ACTUALVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1214,7 +1459,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',ACTUALVALUE,'
+                CalculateForAddLianCheng: ',ACTUALVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
         ,
@@ -1236,7 +1488,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',ACTUALVALUE,'
+                CalculateForAddLianCheng: ',ACTUALVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
         ,
@@ -1258,7 +1517,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',ACTUALVALUE,'
+                CalculateForAddLianCheng: ',ACTUALVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
         ,
@@ -1280,7 +1546,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',ACTUALVALUE,'
+                CalculateForAddLianCheng: ',ACTUALVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
         ,
@@ -1302,7 +1575,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',ACTUALVALUE,'
+                CalculateForAddLianCheng: ',ACTUALVALUE,',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1324,7 +1604,14 @@ RuleAttributeArray = [{
             BuBaoCunShuJu: '',
             //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
-            CalculateForAddLianCheng: ''
+            CalculateForAddLianCheng: '',
+            //不确定度
+            //检测项属性名称后需要加自动或者按钮不确定计算
+            //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+            //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+            JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            JiSuanBuQueDingDu_DiBu: 'N'
         }]
     }
     ,
@@ -1346,7 +1633,14 @@ RuleAttributeArray = [{
             BuBaoCunShuJu: '',
             //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
-            CalculateForAddLianCheng: ''
+            CalculateForAddLianCheng: '',
+            //不确定度
+            //检测项属性名称后需要加自动或者按钮不确定计算
+            //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+            //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+            JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            JiSuanBuQueDingDu_DiBu: 'N'
         }]
     }
     ,
@@ -1368,7 +1662,14 @@ RuleAttributeArray = [{
             BuBaoCunShuJu: '',
             //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
-            CalculateForAddLianCheng: ''
+            CalculateForAddLianCheng: '',
+            //不确定度
+            //检测项属性名称后需要加自动或者按钮不确定计算
+            //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+            //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+            JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            JiSuanBuQueDingDu_DiBu: 'N'
         }]
     }
     ,
@@ -1390,7 +1691,14 @@ RuleAttributeArray = [{
             BuBaoCunShuJu: '',
             //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
-            CalculateForAddLianCheng: ''
+            CalculateForAddLianCheng: '',
+            //不确定度
+            //检测项属性名称后需要加自动或者按钮不确定计算
+            //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+            //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+            JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            JiSuanBuQueDingDu_DiBu: 'N'
         }]
     }
     ,
@@ -1413,7 +1721,14 @@ RuleAttributeArray = [{
             BuBaoCunShuJu: '',
             //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
-            CalculateForAddLianCheng: ''
+            CalculateForAddLianCheng: '',
+            //不确定度
+            //检测项属性名称后需要加自动或者按钮不确定计算
+            //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+            //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+            JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            JiSuanBuQueDingDu_DiBu: 'N'
         }]
     }
     ,
@@ -1435,7 +1750,14 @@ RuleAttributeArray = [{
             BuBaoCunShuJu: '',
             //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
-            CalculateForAddLianCheng: ''
+            CalculateForAddLianCheng: '',
+            //不确定度
+            //检测项属性名称后需要加自动或者按钮不确定计算
+            //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+            //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+            JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            JiSuanBuQueDingDu_DiBu: 'N'
         }]
     }
     ,
@@ -1457,7 +1779,14 @@ RuleAttributeArray = [{
             BuBaoCunShuJu: '',
             //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
-            CalculateForAddLianCheng: ''
+            CalculateForAddLianCheng: '',
+            //不确定度
+            //检测项属性名称后需要加自动或者按钮不确定计算
+            //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+            //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+            JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            JiSuanBuQueDingDu_DiBu: 'N'
         }]
     }
     ,
@@ -1479,7 +1808,14 @@ RuleAttributeArray = [{
             BuBaoCunShuJu: '',
             //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
             //OUTPUT_VALUE：输出示值
-            CalculateForAddLianCheng: ''
+            CalculateForAddLianCheng: '',
+            //不确定度
+            //检测项属性名称后需要加自动或者按钮不确定计算
+            //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+            //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+            JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            JiSuanBuQueDingDu_DiBu: 'N'
         }]
     }
     ,
@@ -1501,7 +1837,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ''
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1523,7 +1866,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ''
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1545,7 +1895,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ''
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1567,7 +1924,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ''
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1589,7 +1953,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ''
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1611,7 +1982,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ''
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1633,7 +2011,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ''
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1655,7 +2040,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ''
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
     ,
@@ -1677,7 +2069,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ''
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
         ,
@@ -1699,7 +2098,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ''
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
             ,
@@ -1721,7 +2127,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ''
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
                 ,
@@ -1743,7 +2156,14 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ''
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
 ];
