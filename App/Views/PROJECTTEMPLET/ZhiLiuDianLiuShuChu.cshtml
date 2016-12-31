@@ -88,15 +88,15 @@
                     htmlString.push(SetTDHtml(txtPoint, "OUTPUTVALUE", HangHaoID, rowidx, '', ""));
 
                 }
-                 
-              
+
+
                 //输出示值 增加下拉框单位A
                 htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "@((ViewBag.canshu == "相对误差") ? "resetBiaoZhunZhi" : "jueDuiWuChaBiaoZhunZhi")"));
 
                 //读数值 增加下拉框单位V
                 htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx));
 
-               //输出实际值
+                //输出实际值
                 htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "", '', "@((ViewBag.canshu == "相对误差") ? "resetBiaoZhunZhi" : "jueDuiWuChaBiaoZhunZhi")"));
 
                 //相对误差
@@ -112,10 +112,10 @@
             var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
             $('#dlg').window('close');//关闭弹出框
-           
+
             $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
-        
+
         //计算标准值 绝对误差
         function jueDuiWuChaBiaoZhunZhi(obj) {
 
@@ -125,6 +125,7 @@
 
         //计算显示值
         function resetBiaoZhunZhi(obj) {
+
             xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
 
         }

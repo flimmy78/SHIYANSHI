@@ -143,8 +143,7 @@ function GetJiSuanBuQueDingDuType(Name) {
         return "";
     }
     var type = AttributeValue.split(":")[0].trim().toUpperCase();
-    if (type != "A" && type != "Z" && AttributeValue.split(":").length<2)
-    {
+    if (type != "A" && type != "Z" && AttributeValue.split(":").length < 2) {
         return "";
     }
     AttributeValue = AttributeValue.split(":")[1];
@@ -232,11 +231,11 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
 
     //不确定度(隐藏域中存储不确定计算过程html路径)
     var BuQueDingDuLuJingName = "hideBuQueDingDuLuJing";//不确定度名
-    var BuQueDingDuLuJingId =  BuQueDingDuLuJingName +"_"+ id;//不确定度ID
+    var BuQueDingDuLuJingId = BuQueDingDuLuJingName + "_" + id;//不确定度ID
 
     //不确定度(隐藏域中存储不确定原始值)
     var BuQueDingDuZhiName = "hideBuQueDingDuZhi";//不确定度名
-    var BuQueDingDuZhiId =  BuQueDingDuZhiName +"_"+ id;//不确定度ID
+    var BuQueDingDuZhiId = BuQueDingDuZhiName + "_" + id;//不确定度ID
 
     var ddlHtml = GetDanWeiDDLHtml(name, null);//单位下拉框html
     if ((txtVal == null || txtVal.trim() == "") && rowidx != null) {
@@ -258,14 +257,14 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     }
 
     //不确定度
-    var JiSuanBuQueDingDuType= GetJiSuanBuQueDingDuType(name);
-  
-    if (JiSuanBuQueDingDuType != null && JiSuanBuQueDingDuType.trim()!="") {       
+    var JiSuanBuQueDingDuType = GetJiSuanBuQueDingDuType(name);
+
+    if (JiSuanBuQueDingDuType != null && JiSuanBuQueDingDuType.trim() != "") {
 
         htmlString.push("<input type='hidden' name='" + BuQueDingDuZhiName + "' id='" + BuQueDingDuZhiId + "' value=''/>");
         if (JiSuanBuQueDingDuType == "A") {//按钮计算不确定度
             htmlString.push("<input type='hidden' name='" + BuQueDingDuLuJingName + "' id='" + BuQueDingDuLuJingId + "' value=''/>");
-            var returnIds = BuQueDingDuZhiId + "&" + BuQueDingDuLuJingId + "^" + BuQueDingDuLuJingId+"^"+id;
+            var returnIds = BuQueDingDuZhiId + "&" + BuQueDingDuLuJingId + "^" + BuQueDingDuLuJingId + "^" + id;
             htmlString.push("<a href=\"#\" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\" onclick = \"showModal('" + returnIds + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID + "');\">计算不确定度</a>")
         }
     }
@@ -275,12 +274,11 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
 
 }
 //修改不确定度展示方式及小数位数联动不确定度
-function ChangeBuQueDingDuShowTypeOrBuQueDingDuXiaoShuWeiShu()
-{
+function ChangeBuQueDingDuShowTypeOrBuQueDingDuXiaoShuWeiShu() {
     $("input[name='hideBuQueDingDuZhi']").each(function () {
         //除了隐藏模板中的输入框，其他所有的输入框
         if (this.id != "") {
-            var ShowBuQueDingDuId = this.id.replace(this.name + "_","");
+            var ShowBuQueDingDuId = this.id.replace(this.name + "_", "");
             JiSuanBuQueDingDuByType(this.id, ShowBuQueDingDuId);
         }
     });
@@ -288,14 +286,13 @@ function ChangeBuQueDingDuShowTypeOrBuQueDingDuXiaoShuWeiShu()
 //根据不确定展示类型计算不确定值
 //BuQueDingDuZhiId:不确定度原始值控件Id
 //ShowBuQueDingDuId:不确定度展示控件Id
-function JiSuanBuQueDingDuByType(BuQueDingDuZhiId, ShowBuQueDingDuId)
-{
+function JiSuanBuQueDingDuByType(BuQueDingDuZhiId, ShowBuQueDingDuId) {
     var type = $("#ddlBuQueDingDuShowType").val();
     var pos = $("#BuQueDingDuXiaoShuWeiShu").val();
 
     var BuQueDingDuZhi = document.getElementById(BuQueDingDuZhiId);
     var ShowBuQueDingDu = document.getElementById(ShowBuQueDingDuId);
-    if (BuQueDingDuZhi == null || ShowBuQueDingDu == null || BuQueDingDuZhi.value.trim()=="") {
+    if (BuQueDingDuZhi == null || ShowBuQueDingDu == null || BuQueDingDuZhi.value.trim() == "") {
         return;
     }
 
@@ -308,7 +305,7 @@ function JiSuanBuQueDingDuByType(BuQueDingDuZhiId, ShowBuQueDingDuId)
         ShowBuQueDingDu.value = kexue(BuQueDingDuZhi.value, pos);
     }
     else//原始模式
-    {       
+    {
         ShowBuQueDingDu.value = zeroFloat(BuQueDingDuZhi.value, pos);
     }
 }
@@ -330,8 +327,7 @@ function showModal(me, url) { //弹出窗体
                 url += "&URL=" + BuQueDingDuLuJingObj.value;
             }
         }
-        if(me.split("^").length>2)
-        {
+        if (me.split("^").length > 2) {
             ShowBuQueDingDuId = me.split("^")[2];
         }
     }
@@ -346,7 +342,7 @@ function showModal(me, url) { //弹出窗体
             if (reValues.length - 1 >= i) {
                 var constrol = document.getElementById(constrols[i]);
                 if (constrol != null) {
-                    constrol.value = reValues[i];                    
+                    constrol.value = reValues[i];
                 }
             }
         }
@@ -763,9 +759,9 @@ $(function () {
 
     //var gf = (round2(3.504501, 3));
     //var ewgf = (round2(9.8249, 3));
-
+    //accSub()
 });
- 
+
 //科学技术法
 //pos保留的小数位数，不足的位数补零
 function kexue(src, pos) {
@@ -810,48 +806,7 @@ function zeroFloat(src, pos) {
     return numeral(src).format('0.' + zero);
 
 }
-//第1列的事件  未来作废
-//source第2列的名称
-function xiangDuiWuCha1(obj, source, gold) {
-
-    //重新计算当前行
-    var name = $(obj).attr("name");
-    var id = $(obj).attr("id");
-    id = id.substring(id.indexOf('_'));
-
-    var newid = source + id;//改动的地方，参与计算的列的name值
-
-    var biaoZhunData = $(obj).parent().parent().find("#" + newid).val();
-    var showData = $(obj).val();
-    if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
-        var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-
-        var xiangDuiWuCha = ((showData - biaoZhunData) / showData * 100);
-        var data = zeroFloat(fomatFloat(xiangDuiWuCha, txtPointLen), txtPointLen);
-        $(obj).parent().parent().find("#" + gold + id).val(data);
-    }
-}
-//第2列的事件 未来作废
-//source第1列的名称
-function xiangDuiWuCha2(obj, source, gold) {
-
-    //重新计算当前行
-    var name = $(obj).attr("name");
-    var id = $(obj).attr("id");
-    id = id.substring(id.indexOf('_'));
-
-    var newid = source + id;//改动的地方，参与计算的列的name值
-
-    var showData = $(obj).parent().parent().find("#" + newid).val();
-    var biaoZhunData = $(obj).val();
-    if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
-        var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-
-        var xiangDuiWuCha = ((showData - biaoZhunData) / showData * 100);
-        var data = zeroFloat(fomatFloat(xiangDuiWuCha, txtPointLen), txtPointLen);
-        $(obj).parent().parent().find("#" + gold + id).val(data);
-    }
-}
+ 
 //相对误差
 //obj 自身对象
 //first 第一列的值，做分母第一位
@@ -871,13 +826,22 @@ function xiangDuiWuCha(obj, first, second, gold) {
     var secondData = $(obj).parent().parent().find("#" + second).val();
     if (firstData != "undefined" && secondData != "undefined" && firstData != "" && secondData != "" && secondData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-
-        var data = zeroFloat(fomatFloat(((firstData - secondData) / firstData * 100), txtPointLen), txtPointLen);
+        var jianfa = (accSub(firstData , secondData) / firstData * 100);
+        var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
 
 
         $(obj).parent().parent().find("#" + gold).val(data);
     }
 
+}
+//减法
+function accSub(arg1, arg2) {
+    var r1, r2, m, n;
+    try { r1 = arg1.toString().split(".")[1].length } catch (e) { r1 = 0 }
+    try { r2 = arg2.toString().split(".")[1].length } catch (e) { r2 = 0 }
+    m = Math.pow(10, Math.max(r1, r2));
+    n = (r1 >= r2) ? r1 : r2;
+    return ((arg1 * m - arg2 * m) / m).toFixed(n);
 }
 //绝对误差
 //obj 自身对象
@@ -899,8 +863,9 @@ function jueDuiWuCha(obj, first, second, gold) {
     var secondData = $(obj).parent().parent().find("#" + second).val();
     if (firstData != "" && secondData != "") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-
-        var data = zeroFloat((firstData - secondData).toFixed(txtPointLen), txtPointLen);
+        var jianfa = (accSub(firstData, secondData));
+        var baoliu = (jianfa * 1).toFixed(txtPointLen);
+        var data = zeroFloat(baoliu, txtPointLen);
 
         $(obj).parent().parent().find("#" + gold).val(data);
     }
