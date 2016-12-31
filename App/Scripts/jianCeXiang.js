@@ -230,11 +230,11 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     var id = name + "_" + id;//输入框id
 
     //不确定度(隐藏域中存储不确定计算过程html路径)
-    var BuQueDingDuLuJingName = "hideBuQueDingDuLuJing";//不确定度名
+    var BuQueDingDuLuJingName = "BuQueDingDuLuJing";//不确定度名
     var BuQueDingDuLuJingId = BuQueDingDuLuJingName + "_" + id;//不确定度ID
 
     //不确定度(隐藏域中存储不确定原始值)
-    var BuQueDingDuZhiName = "hideBuQueDingDuZhi";//不确定度名
+    var BuQueDingDuZhiName = "BuQueDingDuZhi";//不确定度名
     var BuQueDingDuZhiId = BuQueDingDuZhiName + "_" + id;//不确定度ID
 
     var ddlHtml = GetDanWeiDDLHtml(name, null);//单位下拉框html
@@ -275,7 +275,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
 }
 //修改不确定度展示方式及小数位数联动不确定度
 function ChangeBuQueDingDuShowTypeOrBuQueDingDuXiaoShuWeiShu() {
-    $("input[name='hideBuQueDingDuZhi']").each(function () {
+    $("input[name='BuQueDingDuZhi']").each(function () {
         //除了隐藏模板中的输入框，其他所有的输入框
         if (this.id != "") {
             var ShowBuQueDingDuId = this.id.replace(this.name + "_", "");

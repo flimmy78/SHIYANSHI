@@ -1195,6 +1195,9 @@ namespace Langben.Report
                 //设置数据
                 SetShuJu(hssfworkbook, entity, type);
 
+                //设置不确定度
+                SetBuQueDingDu(hssfworkbook, entity, type);
+
                 //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";                
                 string fileName = SetFileName(type);
                 saveFileName = "~/up/Report/" + fileName + ".xls";
@@ -1221,6 +1224,180 @@ namespace Langben.Report
             }
             Message = "未找到预备方案ID为【" + ID + "】的数据";
             return false;
+        }
+        /// <summary>
+        /// 设置不确定度
+        /// </summary>
+        /// <param name="hssfworkbook">workbook</param>
+        /// <param name="entity"></param>
+        /// <param name="type"></param>        
+        private void SetBuQueDingDu(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing)
+        {
+            if (type == ExportType.OriginalRecord_JianDing || type == ExportType.OriginalRecord_XiaoZhun)
+            {
+                string sheetName_Source = "不确定度模板";
+                string sheetName_Destination = "不确定度";
+                ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
+                ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
+                #region 检测项目            
+                if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE != null &&
+                    entity.QUALIFIED_UNQUALIFIED_TEST_ITE.Count > 0)
+                {
+                    SpecialCharacters allSpecialCharacters = GetSpecialCharacters();
+                    entity.QUALIFIED_UNQUALIFIED_TEST_ITE = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.OrderBy(p => p.SORT).ToList();
+
+                    int rowIndex_Destination = 0;
+                    int ruleCount = 0;
+                    foreach (QUALIFIED_UNQUALIFIED_TEST_ITE iEntity in entity.QUALIFIED_UNQUALIFIED_TEST_ITE)
+                    {
+
+                        HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                        doc.LoadHtml(iEntity.HTMLVALUE);
+                        Dictionary<int, List<BuDueDingDu>> buQueDingDuDic = AnalyticHTML.GetBuDueDingDu(doc);
+                        if (buQueDingDuDic != null && buQueDingDuDic.Count > 0)
+                        {
+                            foreach (List<BuDueDingDu> buQueDingDus in buQueDingDuDic.Values)
+                            {
+                                foreach (BuDueDingDu buQueDingDu in buQueDingDus)
+                                {
+                                    #region 不确定度的评定
+                                    ruleCount++;
+                                    CopyRow_1(sheet_Source, sheet_Destination, 0, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(ruleCount.ToString() + "." + iEntity.RULENAME + "不确定度的评定");
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(35).SetCellValue(buQueDingDu.pdDDL);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(41).SetCellValue(buQueDingDu.pdText);
+                                    rowIndex_Destination++;
+                                    #endregion
+
+                                    #region 评定点                               
+                                    int pingdingIndex = 1;
+                                    if (buQueDingDu.pingding != null && buQueDingDu.pingding.Count > 0)
+                                    {
+
+                                        while (buQueDingDu.pingding != null && buQueDingDu.pingding.Count > 0)
+                                        {
+                                            List<CellRangeAddress> cellAddressList = CopyRow_1(sheet_Source, sheet_Destination, 1, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);                                           
+                                            int cIndex = 1;
+                                            foreach (CellRangeAddress c in cellAddressList)
+                                            {
+                                                MYData d = buQueDingDu.pingding.FirstOrDefault();
+                                                if (cIndex == 1 && pingdingIndex == 1)
+                                                {
+                                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue("评定点：");
+                                                }
+                                                else if (cIndex == 1 )
+                                                {
+                                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue("");
+                                                }
+                                                else
+                                                {
+                                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue(d.value);
+                                                    buQueDingDu.pingding.Remove(d);
+                                                }
+                                                cIndex++;
+                                            }
+                                            pingdingIndex++;
+                                            rowIndex_Destination++;                                            
+
+                                        }
+                                    }
+                                    #endregion
+
+                                    #region 不确定度的A类评定
+                                    CopyRow_1(sheet_Source, sheet_Destination, 2, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    rowIndex_Destination++;
+                                    CopyRow_1(sheet_Source, sheet_Destination, 3, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    rowIndex_Destination++;
+                                    CopyRow_1(sheet_Source, sheet_Destination, 4, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(buQueDingDu.txtBuQueDingA);
+                                    rowIndex_Destination++;
+                                    CopyRow_1(sheet_Source, sheet_Destination, 5, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    rowIndex_Destination++;
+                                    CopyRow_1(sheet_Source, sheet_Destination, 6, rowIndex_Destination, 1, false, null, allSpecialCharacters, null);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(buQueDingDu.A_1_1);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(12).SetCellValue(buQueDingDu.A_1_2);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(23).SetCellValue(buQueDingDu.A_1_3);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(34).SetCellValue(buQueDingDu.A_1_4);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(45).SetCellValue(buQueDingDu.A_1_5);
+                                    rowIndex_Destination++;
+                                    CopyRow_1(sheet_Source, sheet_Destination, 7, rowIndex_Destination, 1, false, null, allSpecialCharacters, null);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(buQueDingDu.A_2_1);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(12).SetCellValue(buQueDingDu.A_2_2);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(23).SetCellValue(buQueDingDu.A_2_3);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(34).SetCellValue(buQueDingDu.A_2_4);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(45).SetCellValue(buQueDingDu.A_2_5);
+                                    rowIndex_Destination++;
+                                    #endregion
+
+                                    #region 不确定度的B类评定
+                                    CopyRow_1(sheet_Source, sheet_Destination, 2, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    rowIndex_Destination++;
+                                    CopyRow_1(sheet_Source, sheet_Destination, 9, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    rowIndex_Destination++;
+                                    CopyRow_1(sheet_Source, sheet_Destination, 10, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(buQueDingDu.txtBuQueDingB);
+                                    rowIndex_Destination++;
+                                    CopyRow_1(sheet_Source, sheet_Destination, 11, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    rowIndex_Destination++;
+                                    if (buQueDingDu.buDueDingDuB != null && buQueDingDu.buDueDingDuB.Count > 0)
+                                    {
+
+                                        while (buQueDingDu.buDueDingDuB != null && buQueDingDu.buDueDingDuB.Count > 0)
+                                        {
+                                            List<CellRangeAddress> cellAddressList = CopyRow_1(sheet_Source, sheet_Destination, 12, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);                                            
+                                            foreach (CellRangeAddress c in cellAddressList)
+                                            {
+                                                MYData d = buQueDingDu.buDueDingDuB.FirstOrDefault();
+                                                sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue(d.value);
+                                                buQueDingDu.buDueDingDuB.Remove(d);
+                                            }
+                                            rowIndex_Destination++;
+
+                                        }
+                                    }
+                                    #endregion
+
+                                    #region 合成不确定度评定Uc
+                                    CopyRow_1(sheet_Source, sheet_Destination, 2, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    rowIndex_Destination++;
+                                    CopyRow_1(sheet_Source, sheet_Destination, 14, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    rowIndex_Destination++;
+                                    CopyRow_1(sheet_Source, sheet_Destination, 15, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(buQueDingDu.txtBuQueDingC);
+                                    rowIndex_Destination++;
+                                    #endregion
+
+                                    #region 扩展不确定度评定
+                                    CopyRow_1(sheet_Source, sheet_Destination, 2, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    rowIndex_Destination++;
+                                    CopyRow_1(sheet_Source, sheet_Destination, 17, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(20).SetCellValue(buQueDingDu.ddlSelectD);
+                                    rowIndex_Destination++;
+                                    CopyRow_1(sheet_Source, sheet_Destination, 18, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(buQueDingDu.txtvalueD);
+                                    rowIndex_Destination++;
+                                    #endregion
+
+                                    #region 测量结果报告
+                                    CopyRow_1(sheet_Source, sheet_Destination, 2, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    rowIndex_Destination++;
+                                    CopyRow_1(sheet_Source, sheet_Destination, 20, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    rowIndex_Destination++;
+                                    CopyRow_1(sheet_Source, sheet_Destination, 21, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(11).SetCellValue(buQueDingDu.txtValueE);
+                                    rowIndex_Destination++;
+                                    #endregion
+                                }
+                            }
+                        }
+
+
+
+                    }
+                }
+                #endregion
+            }
+           
         }
         /// <summary>
         /// 设置封皮信息
@@ -2057,6 +2234,11 @@ namespace Langben.Report
             {
                 speStartIndex = value.Trim().ToUpper().IndexOf("U(K");
                 SpecialStr = "U(K";
+            }
+            else if (value != null && value.Trim() != "" && value.Trim().ToUpper().IndexOf("UI") >= 0)
+            {
+                speStartIndex = value.Trim().ToUpper().IndexOf("UI");
+                SpecialStr = "UI";
             }
             //处理特殊字符下标上标斜体
             result = new HSSFRichTextString(value);

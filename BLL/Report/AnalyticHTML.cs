@@ -7,13 +7,56 @@ namespace Langben.Report
     /// </summary>
     public class AnalyticHTML
     {
+
         public static HtmlAgilityPack.HtmlDocument docBuQueDingDu = new HtmlAgilityPack.HtmlDocument();
+        /// <summary>
+        /// 获取不确定度标签
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns>按照通道+节点的方式返回</returns>
+        public static Dictionary<int, List<BuDueDingDu>> GetBuDueDingDu(HtmlAgilityPack.HtmlDocument doc)
+        {
+
+            var buDueDingDu = new Dictionary<int, List<BuDueDingDu>>();
+
+            for (int i = 1; i < 99; i++)
+            {
+
+                string xpath = @"//table[@id='tongdao_" + i + @"']/tbody//input[@type='hidden'][@name='BuQueDingDuLuJing']";
+                var thead = doc.DocumentNode.SelectNodes(xpath);
+                if (thead == null)
+                {
+                    return buDueDingDu;
+                }
+                else
+                {
+                    List<BuDueDingDu> list = new List<Report.BuDueDingDu>();
+                    // 
+                    foreach (var item in thead)
+                    {
+                        string url = item.Attributes["value"].Value;
+                        if (!string.IsNullOrWhiteSpace(url))
+                        {
+                            url = System.Web.HttpContext.Current.Server.MapPath(url);
+                            list.Add(GetBuDueDingDu(url));
+
+                        }
+                    }
+                    buDueDingDu.Add(i, list);
+
+                }
+
+            }
+
+
+            return buDueDingDu;
+        }
         /// <summary>
         /// 不确定解析
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static BuDueDingDu GetBuDueDingDu(string url)
+        private static BuDueDingDu GetBuDueDingDu(string url)
         {
             BuDueDingDu buDueDingDu = new BuDueDingDu();
             docBuQueDingDu.Load(url);
@@ -42,7 +85,7 @@ namespace Langben.Report
                 if (node != null)
                 {
                     if (b.Attributes["id"].Value == "pdDDL")
-                    { 
+                    {
                         buDueDingDu.pdDDL = node;
                     }
                     else if (b.Attributes["id"].Value == "ddlSelectD")
@@ -50,7 +93,7 @@ namespace Langben.Report
                         buDueDingDu.ddlSelectD = node;
                     }
 
-                }                 
+                }
             }
 
             var xpathA = @"//input[@tag='only']";
@@ -197,7 +240,7 @@ namespace Langben.Report
                 headb.Add("B_WuChaFenBu", 6);
                 headb.Add("B_K", 7);
                 headb.Add("B_Ui", 8);
-                headb.Add("B_Ui_UNIT_1", 9);
+                headb.Add("B_Ui_UNIT", 9);
                 double ib = 0;
                 var xpathpingdingb = @"//tbody[@id='buquedingdub']//input[@type='text']";
                 var pingdingb = docBuQueDingDu.DocumentNode.SelectNodes(xpathpingdingb);
@@ -231,7 +274,7 @@ namespace Langben.Report
                     buDueDingDu.buDueDingDuB = listb;
                 }
             }
-             
+
             return buDueDingDu;
         }
 
@@ -273,6 +316,7 @@ namespace Langben.Report
             }
 
         }
+
         public static int GetContainTable(HtmlAgilityPack.HtmlDocument doc)
         {
             Dictionary<int, HtmlAgilityPack.HtmlNodeCollection> theadOfInputAndSelect = new Dictionary<int, HtmlAgilityPack.HtmlNodeCollection>();
@@ -330,7 +374,62 @@ namespace Langben.Report
 
             return list;
         }
+        /// <summary>
+        /// 获取表尾巴中的所有的input标签的数据，注意没有select
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
+        public static Dictionary<int, List<MYDataHead>> GetFootData(HtmlAgilityPack.HtmlDocument doc)
+        {
+            var data = new Dictionary<int, List<MYDataHead>>();
 
+            //表头
+            Dictionary<int, HtmlAgilityPack.HtmlNodeCollection> tfootOfInputAndSelect = AnalyticHTML.GetTfootOfInputAndSelect(doc);
+            //遍历通道
+            foreach (var item in tfootOfInputAndSelect.Keys)
+            {
+                HtmlAgilityPack.HtmlNodeCollection body = tfootOfInputAndSelect[item];
+                List<MYDataHead> list = new List<MYDataHead>();
+                foreach (var b in body)
+                {
+                    MYDataHead mydata = new MYDataHead();
+                    mydata.id = b.Attributes["id"].Value;
+                    mydata.name = b.Attributes["name"].Value;
+
+                    if (b.Name == "input")
+                    {
+                        if (b.Attributes["value"] != null)
+                        {
+                            mydata.value = b.Attributes["value"].Value;
+
+                        }
+                    }
+                    else if (b.Name == "select")
+                    {
+                        var nodes = b.ChildNodes
+                      .Where(w => (w.Name == "option" && w.Attributes["selected"] != null))
+                      .Select(s => s.Attributes["value"].Value).FirstOrDefault();
+                        string node = string.Empty;
+                        if (string.IsNullOrWhiteSpace(nodes))
+                        {
+                            mydata.value = b.ChildNodes
+                   .Where(w => (w.Name == "option"))
+                   .Select(s => s.Attributes["value"].Value).First();
+                        }
+                        else
+                        {
+                            mydata.value = nodes;
+                        }
+
+                    }
+
+                    list.Add(mydata);
+                }
+                data.Add(item, list);
+            }
+            return data;
+
+        }
         /// <summary>
         /// 获取表头中的所有的input和select标签的数据
         /// </summary>
@@ -364,7 +463,7 @@ namespace Langben.Report
                     else if (b.Name == "select")
                     {
                         var nodes = b.ChildNodes
-                      .Where(w => (w.Name == "option" && w.Attributes["selected"] != null)) 
+                      .Where(w => (w.Name == "option" && w.Attributes["selected"] != null))
                       .Select(s => s.Attributes["value"].Value).FirstOrDefault();
                         string node = string.Empty;
                         if (string.IsNullOrWhiteSpace(nodes))
@@ -379,7 +478,7 @@ namespace Langben.Report
                         }
 
                     }
-                    
+
                     list.Add(mydata);
                 }
                 data.Add(item, list);
@@ -554,7 +653,7 @@ namespace Langben.Report
         }
 
         /// <summary>
-        /// 获取表头中的所有的input和select标签 此处有一个bug,如果通道1表头没有数据,就使用2通道
+        /// 获取表头中的所有的input和select标签 此处有一个bug,如果通道1表头没有数据,就使用2通道 
         /// </summary>
         /// <param name="doc"></param>
         /// <returns>按照通道+节点的方式返回</returns>
@@ -640,7 +739,7 @@ namespace Langben.Report
 
             for (int i = 1; i < 99; i++)
             {
-                string xpath = @"//table[@id='tongdao_" + i + @"']//tfoot//input[@type='text'] | //table[@id='tongdao_" + i + @"']//tfoot//select";
+                string xpath = @"//table[@id='tongdao_" + i + @"']/tfoot//input[@type='text']";
                 var thead = doc.DocumentNode.SelectNodes(xpath);
                 if (thead == null)
                 {
