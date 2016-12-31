@@ -1496,10 +1496,14 @@ namespace Langben.Report
                     ORDER_TASK_INFORMATION taskEntity = taskBll.GetById(infEntity.ORDER_TASK_INFORMATIONID);
                     if (taskEntity != null)
                     {
-                        //委托单位        
-                        if (taskEntity.INSPECTION_ENTERPRISE != null && taskEntity.INSPECTION_ENTERPRISE.Trim() != "")
+                        //委托单位（证书单位）        
+                        //if (taskEntity.INSPECTION_ENTERPRISE != null && taskEntity.INSPECTION_ENTERPRISE.Trim() != "")
+                        //{
+                        //    sheet_Destination.GetRow(6).GetCell(5).SetCellValue(taskEntity.INSPECTION_ENTERPRISE);
+                        //}
+                        if (taskEntity.CERTIFICATE_ENTERPRISE != null && taskEntity.CERTIFICATE_ENTERPRISE.Trim() != "")
                         {
-                            sheet_Destination.GetRow(6).GetCell(5).SetCellValue(taskEntity.INSPECTION_ENTERPRISE);
+                            sheet_Destination.GetRow(6).GetCell(5).SetCellValue(taskEntity.CERTIFICATE_ENTERPRISE);
                         }
                         else
                         {
@@ -1619,13 +1623,13 @@ namespace Langben.Report
             {
                 //检定结论  
                 RowIndex = RowIndex + 2;
-                if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
+                if (entity.CALIBRATION_INSTRUCTIONS == null || entity.CALIBRATION_INSTRUCTIONS.Trim() == "")
                 {
                     sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue("/");
                 }
                 else
                 {
-                    sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CONCLUSION);
+                    sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CALIBRATION_INSTRUCTIONS);
                 }
                 RowIndex++;
                 //检定说明  
