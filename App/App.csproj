@@ -1000,7 +1000,7 @@
     <Content Include="Views\METERING_STANDARD_DEVICE\IndexUA.cshtml" />
     <Content Include="Views\PREPARE_SCHEME\Testxml.cshtml" />
     <Content Include="Views\PREPARE_SCHEME\TestxmlDistinct.cshtml" />
-    <Content Include="Views\PROJECTTEMPLET\DanQiaoJiBenLiangCheng.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\DanQiaoJiBenLiangcheng.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

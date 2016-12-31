@@ -67,7 +67,7 @@ else
                                 <select class="my-combobox" name="pingding3" id="pingding3_1_1_1">
                                     <option value="V">V</option>
                                     <option value="MV">MV</option>
-                                    <option value="KV">KV</option>
+                                    <option value="kV">kV</option>
                                     <option value="mV">mV</option>
                                     <option value="μV">μV</option>
                                 </select>
@@ -314,23 +314,26 @@ else
         var zhi = $("#METERING_STANDARD_DEVICEID").val()
         var reg = new RegExp("&", "g");//g,表示全部替换。
         var shu = zhi.replace(reg, '~');
-        $.ajax({
-            type: "Get", //使用Get方法访问后台
-            dataType: "json", //返回json格式的数据
-            url: "../api/UNCERTAINTYTABLEApi/Getdata/" + shu, //要访问的后台地址
+        if (shu!="") {
+            $.ajax({
+                type: "Get", //使用Get方法访问后台
+                dataType: "json", //返回json格式的数据
+                url: "../api/UNCERTAINTYTABLEApi/Getdata/" + shu, //要访问的后台地址
 
-            success: function (res) {//msg为返回的数据，在这里做数据绑定
-                if (res != null && res.length > 0) {
-                    for (var i = 0; i < res.length; i++) {
+                success: function (res) {//msg为返回的数据，在这里做数据绑定
+                    if (res != null && res.length > 0) {
+                        for (var i = 0; i < res.length; i++) {
 
+                        }
                     }
-                }
 
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
-            }
-        });
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
+                }
+            });
+        }
+       
     }
     //清空增加的行
     function resetRow() {
