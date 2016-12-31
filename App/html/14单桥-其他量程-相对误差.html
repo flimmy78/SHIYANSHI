@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width" />
-    <title>单桥-基本量程-相对误差</title>
+    <title>单桥-其他量程-相对误差</title>
     <link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
     <link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
     <link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
@@ -15,7 +15,7 @@
     <script src="/Res/easyui/jquery.easyui.min.js"></script>
     <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
     <script src="/Scripts/jquery.validate.js"></script>
-    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>                                   
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="/Scripts/jianCeXiang.js"></script>
 </head>
 <body class="easyui-layout">
@@ -30,63 +30,31 @@
         </div>
     </div>
     <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
-        <div class="mt10">
-            <span>基本误差：</span>×
 
-            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="changeValue(this)">
-                <option value="yes" selected>合格</option>
-                <option value="no">不合格</option>
-
-            </select>
-        </div>
-        <div class="mt10">
-            <span>基本量程：</span>×
-
-            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="changeValue(this)">
-                <option value="1000" selected>1000</option>
-                <option value="100">100</option>
-                <option value="10">10</option>
-                <option value="1">1</option>
-                <option value="0.1">0.1</option>
-                <option value="0.01">0.01</option>
-                <option value="0.001">0.001</option>
-            </select>
-        </div>
         <div class="mt10" id="tongdao">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_dy_1">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_dy_1">
                 <thead>
+
                     <tr>
-                        <th width="80" rowspan="3" align="center">序号</th>
-                        <th colspan="3" align="center">
-                            ×
-                            <input class="my-textbox input-width" value="" type="text" name="input" id="input">
-                            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="changeValue(this)">
-                                <option value="Ω" selected>Ω</option>
-                                <option value="TΩ">TΩ</option>
-                                <option value="GΩ">GΩ</option>
-                                <option value="MΩ">MΩ</option>
-                                <option value="kΩ">kΩ</option>
-                                <option value="mΩ">mΩ</option>
-                                <option value="μΩ">μΩ</option>
-                            </select>
-                        </th>
-                        <th colspan="3" align="center">
-                            ×
-                            <input class="my-textbox input-width" value="" type="text" name="input2" id="input2">
-                            <select class="my-combobox" name="state_1_3" id="state_1_2" onchange="changeValue(this)">
-                                <option value="Ω" selected>Ω</option>
-                                <option value="TΩ">TΩ</option>
-                                <option value="GΩ">GΩ</option>
-                                <option value="MΩ">MΩ</option>
-                                <option value="kΩ">kΩ</option>
-                                <option value="mΩ">mΩ</option>
-                                <option value="μΩ">μΩ</option>
-                            </select>
-                        </th>
-                    </tr>
-                    <tr></tr>
-                    <tr>
+                        <th width="80" align="center">量程</th>
                         <th width="140" align="center">
+                            测量盘<br>
+                            (
+                            <select class="my-combobox" name="" id="" onchange="changeValue(this)">
+                                <option value="Ω" selected>Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                            )
+                        </th>
+                        <th width="110" align="center">
+                            测量点
+                        </th>
+                        <th width="110" align="center">
                             实际值<br>
                             (
                             <select class="my-combobox" name="" id="" onchange="changeValue(this)">
@@ -100,36 +68,7 @@
                             </select>
                             )
                         </th>
-                        <th width="140" align="center">
-                            标称值<br>
-                            (
-                            <select class="my-combobox" name="select" id="select" onchange="changeValue(this)">
-                                <option value="Ω" selected>Ω</option>
-                                <option value="TΩ">TΩ</option>
-                                <option value="GΩ">GΩ</option>
-                                <option value="MΩ">MΩ</option>
-                                <option value="kΩ">kΩ</option>
-                                <option value="mΩ">mΩ</option>
-                                <option value="μΩ">μΩ</option>
-                            </select>
-                            )
-                        </th>
-                        <th width="140" align="center">误差 %</th>
-                        <th width="140" align="center">
-                            实际值<br>
-                            (
-                            <select class="my-combobox" name="" id="" onchange="changeValue(this)">
-                                <option value="Ω">Ω</option>
-                                <option value="TΩ">TΩ</option>
-                                <option value="GΩ">GΩ</option>
-                                <option value="MΩ">MΩ</option>
-                                <option value="kΩ">kΩ</option>
-                                <option value="mΩ">mΩ</option>
-                                <option value="μΩ">μΩ</option>
-                            </select>
-                            )
-                        </th>
-                        <th width="140" align="center">
+                        <th width="110" align="center">
                             标称值<br>
                             (
                             <select class="my-combobox" name="select2" id="select2" onchange="changeValue(this)">
@@ -143,21 +82,60 @@
                             </select>
                             )
                         </th>
-                        <th width="140" align="center">误差 %</th>
+                        <th width="110" align="center">误差</th>
+                        <th align="center">允许误差</th>
                     </tr>
                 </thead>
                 <tbody id="tbody_1">
-                    <!--示例，可删 -->
+                    <!--默认0行 -->
                     <tr>
-                        <td align="center"><input name="input5" id="input5" type="text" class="my-textbox tc" value="1" style="width:40px" /></td>
-                        <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" onblur="calculate.wuCha(this)" /></td>
-                        <td align="center"><input name="input3" id="input3" type="text" class="my-textbox tr" value="" onblur="calculate.wuCha(this)" /></td>
-                        <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
+                        <td align="center">
+                            × <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="calculate.biaochenzhi(this)">
+                                <option value="1000" selected>1000</option>
+                                <option value="100">100</option>
+                                <option value="10">10</option>
+                                <option value="1">1</option>
+                                <option value="0.1">0.1</option>
+                                <option value="0.01">0.01</option>
+                                <option value="0.001">0.001</option>
+                            </select>
+                        </td>
+                        <td align="center">
+                            × <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="calculate.biaochenzhi(this)">
+                                <option value="1000" selected>1000</option>
+                                <option value="100">100</option>
+                                <option value="10">10</option>
+                                <option value="1">1</option>
+                                <option value="0.1">0.1</option>
+                                <option value="0.01">0.01</option>
+                                <option value="0.001">0.001</option>
+                            </select>
+                            <select class="my-combobox" name="select" id="select" onchange="changeValue(this)">
+                                <option value="Ω" selected>Ω</option>
+                                <option value="TΩ">TΩ</option>
+                                <option value="GΩ">GΩ</option>
+                                <option value="MΩ">MΩ</option>
+                                <option value="kΩ">kΩ</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="μΩ">μΩ</option>
+                            </select>
+                        </td>
+                        <td align="center">第 <input name="input3" id="input3" type="text" class="my-textbox" value="" style="width:40px" onblur="calculate.biaochenzhi(this)" /> 点</td>
                         <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" onblur="calculate.wuCha(this)" /></td>
                         <td align="center"><input name="input4" id="input4" type="text" class="my-textbox tr" value="" onblur="calculate.wuCha(this)" /></td>
                         <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
+                        <td align="center">
+                            ±
+                            <select class="my-combobox" name="select3" id="select3" onchange="changeValue(this)">
+                                <option value="2">2</option>
+                                <option value="0.5">0.5</option>
+                                <option value="0.2">0.2</option>
+                                <option value="0.1">0.1</option>
+
+                            </select>
+                        </td>
                     </tr>
-                    <!--/示例，可删 -->
+                    <!--/默认0行 -->
                 </tbody>
 
                 <tr>
@@ -165,17 +143,7 @@
                         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open');TongDao.getCurTongDaoIdx(this)">增加行数</a>
                     </td>
                 </tr>
-                <tfoot id="tfoot_1">
-                    <tr>
-                        <td align="center" nowrap>允许误差 %</td>
-                        <td align="right">±</td>
 
-                        <td colspan="2"><input name="" id="" type="text" class="my-textbox " value="" onblur="calculate.wuCha(this)" /></td>
-                        <td align="right">±</td>
-
-                        <td colspan="2"><input name="" id="" type="text" class="my-textbox " value="" onblur="calculate.wuCha(this)" /></td>
-                    </tr>
-                </tfoot>
             </table>
         </div>
         <div class="mt10">
@@ -206,9 +174,9 @@
                         </td>
                     </tr>
                 </tbody>
-                <!--<tr>
-                  <td colspan="8" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addUrel()">增加不确定度计算行</a></td>
-                </tr> -->
+                <tr>
+                    <td colspan="8" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addUrel()">增加不确定度计算行</a></td>
+                </tr>
             </table>
         </div>
     </div>
@@ -246,20 +214,45 @@
                 $("#tongdao").append($(tongdao).attr("id", "tongdao_dy_" + this.getTongDaoIdx()));
             },
             addRow: function () {
+                var ddl = "× <select class=\"my-combobox\" name=\"state_1_\" id=\"state_UNIT_1_\" onchange=\"calculate.biaochenzhi(this)\">"+
+                "<option value=\"1000\" selected>1000</option>"+
+                "<option value=\"100\">100</option>"+
+                "<option value=\"10\">10</option>"+
+                "<option value=\"1\">1</option>"+
+                "<option value=\"0.1\">0.1</option>"+
+                "<option value=\"0.01\">0.01</option>"+
+                "<option value=\"0.001\">0.001</option>"+
+            "</select>";
+                var ddl1 = "<select class=\"my-combobox\" name=\"select\" id=\"select\" >"+
+                            "<option value=\"Ω\" selected>Ω</option>"+
+                            "<option value=\"TΩ\">TΩ</option>"+
+                            "<option value=\"GΩ\">GΩ</option>"+
+                            "<option value=\"MΩ\">MΩ</option>"+
+                            "<option value=\"kΩ\">kΩ</option>"+
+                            "<option value=\"mΩ\">mΩ</option>"+
+                            "<option value=\"μΩ\">μΩ</option>"+
+                      "</select>";
+                var ddl2 = " ±"+
+                            "<select class=\"my-combobox\" name=\"select3\" id=\"select3\" >"+
+                                "<option value=\"2\">2</option>"+
+                                "<option value=\"0.5\">0.5</option>"+
+                                "<option value=\"0.2\">0.2</option>"+
+                                "<option value=\"0.1\">0.1</option>"+
 
+                            "</select>";
                 var inputHtml = "<input name=\"\" id=\"\" type=\"text\" class=\"my-textbox tr\" value=\"\" onblur=\"calculate.wuCha(this)\"/>";
                 var rows = $("#txtNumber").val();
                 for (var i = 0; i < rows; i++) {
                     // var rowIdx = $("#tongdao_dy_" + currentindex + " tbody").eq(0).find('tr').last().children().eq(0).text();
                     rowNumber = (rowNumber + 1);
                     $("#tongdao_dy_" + currentindex + " tbody").eq(0).append("<tr>" +
-                                                                                  "<td align=\"center\">" + rowNumber + "</td>" +
-                                                                                  "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                  "<td align=\"center\">" + ddl + "</td>" +
+                                                                                  "<td align=\"center\">" + ddl +ddl1+ "</td>" +
+                                                                                   "<td align=\"center\">第<input name=\"input3\" id=\"input3\" type=\"text\" class=\"my-textbox\" value=\"\" style=\"width:40px\" onblur=\"calculate.biaochenzhi(this)\"/>点</td>" +
+                                                                                    "<td align=\"center\">" +  inputHtml + "</td>" +
                                                                                    "<td align=\"center\">" + inputHtml + "</td>" +
-                                                                                    "<td align=\"center\">" + inputHtml + "</td>" +
-                                                                                   "<td align=\"center\">" + inputHtml + "</td>" +
                                                                                   "<td align=\"center\">" + inputHtml + "</td>" +
-                                                                                  "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                  "<td align=\"center\">" + ddl2 + "</td>" +
                                                                              "</tr>");
 
                 }
@@ -277,44 +270,70 @@
         }
         var calculate = {
             wuCha: function (obj) {
-                //【误差】=(【标称值】-【实际值】)/【标称值】*100%，比允许误差多一位，四舍六入，逢五奇进偶不进
+                //【误差】=(【实际值】-【标称值】)/【标称值】*100%,小数位数比允许误差多一位，四舍六入，逢五奇进偶不进。
                 TongDao.getCurTongDaoIdx(obj);
                 var arry = this.getWuChaLength(obj);
-                $("#tongdao_dy_" + currentindex + " tbody:eq(0) tr").each(function () {
+                var tr = $(obj).parents('tr').eq(0);
+              //  $("#tongdao_dy_" + currentindex + " tbody:eq(0) tr").each(function () {
 
                     //标称值
-                    var biaochenzhi = $(this).children().eq(2).find('input').val();;// $("#tongdao_dy_" + currentindex + " thead tr th:eq(2)").find("input").val();
+                var biaochenzhi = $(tr).children().eq(4).find('input').val();;// $("#tongdao_dy_" + currentindex + " thead tr th:eq(2)").find("input").val();
                     //获取实际值
-                    var shijizhi = $(this).children().eq(1).find('input').val();
-                    //计算第一个误差
+                var shijizhi = $(tr).children().eq(3).find('input').val();
+                    //计算误差
                     if (biaochenzhi != "" && shijizhi != "")
-                        $(this).children().eq(3).find('input').val(fomatFloat(parseFloat((parseFloat(biaochenzhi) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100), arry[0].length + 1))
-                    //计算第二个误差
-                    biaochenzhi = $(this).children().eq(5).find('input').val();
-                    shijizhi = $(this).children().eq(4).find('input').val();
-                    if (biaochenzhi != "" && shijizhi != "")
-                        $(this).children().eq(6).find('input').val(fomatFloat(parseFloat((parseFloat(biaochenzhi) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100), arry[0].length + 1))
-                });
+                        $(tr).children().eq(5).find('input').val(fomatFloat(parseFloat((parseFloat(shijizhi) - parseFloat(biaochenzhi)) / parseFloat(biaochenzhi) * 100), arry[0].length + 1))
+                  
+              //  });
 
+            }, biaochenzhi: function (obj) {
+                //TongDao.getCurTongDaoIdx(obj);
+                //【标称值】=【量程】*【测量盘】*【测量点】，小数位数与实际值小数位数相同，
+                var tr = $(obj).parents('tr').eq(0);
+                var liangcheng = $(tr).children().eq(0).find('select').val();
+                var celiangpan = $(tr).children().eq(1).find('select').eq(0).val();
+                var celiangdian = $(tr).children().eq(2).find('input').val();
+                var ary = this.getShijiZhiLength(obj);
+                if (liangcheng != "" && celiangpan != "" && celiangdian != "") {
+                    $(tr).children().eq(4).find('input').val((parseFloat(liangcheng) * parseFloat(celiangpan) * parseFloat(celiangdian)).toFixed(ary[0].length));
+                    this.wuCha(obj);
+                }
             }, getWuChaLength: function (obj) {
                 var arry = [];
                 var tr = $(obj).parents('tr').eq(0);
-                var yunxuWuCha = $("#tongdao_dy_" + currentindex + " tfoot:eq(0) tr:eq(0) td:eq(2)").find("input").val();
-                var yunxuWuCha1 = $("#tongdao_dy_" + currentindex + " tfoot:eq(0) tr:eq(0) td:eq(4)").find("input").val();
-                if (yunxuWuCha == "" && yunxuWuCha1 == "") {
+                var wucha=$(tr).children().eq(6).find('select').val();
+                
                     arry.push({
-                        length: 0,
-                        length1: 0
+                        length: wucha.split(".").length == 2 ? wucha.split(".")[1].length : 0
                     });
+               
+                return arry;
+
+            },
+            getShijiZhiLength: function (obj)
+            {
+                var arry = [];
+                var tr = $(obj).parents('tr').eq(0);
+                var shijiZhi = $(tr).children().eq(3).find('input').val();
+                if (shijiZhi != "") {
+                    var datas = shijiZhi.split(".");
+                    if (datas.length >= 2) {
+                        arry.push({
+                            length: datas[1].length
+                        });
+                    }
+                    else {
+                        arry.push({
+                            length: 0
+                        });
+                    }
                 }
                 else {
                     arry.push({
-                        length: yunxuWuCha.split(".").length == 2 ? yunxuWuCha.split(".")[1].length : 0,
-                        length1: yunxuWuCha1.split(".").length == 2 ? yunxuWuCha1.split(".")[1].length : 0
+                        length: 0
                     });
                 }
                 return arry;
-
             }
         }
 

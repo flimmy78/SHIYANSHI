@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width" />
+<title>双桥-基本量程-滑线盘步进盘-相对误差</title>
+    <link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="/Content/default.css" rel="stylesheet" />
+    <link href="/Content/StyleSheet.css" rel="stylesheet" />
+    <script src="/Scripts/jquery.min.js"></script>
+    <script src="/Scripts/JScriptCommon.js"></script>
+    <script src="/Res/easyui/jquery.easyui.min.js"></script>
+    <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/Scripts/jianCeXiang.js"></script> 
+</head>
+<body class="easyui-layout">
+    <input type="hidden" id="rowindex" value="1" />
+    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+            <table>
+                <tr>
+                    <td><!--<a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="TongDao.addTongDao()">增加通道</a> --> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'">保存检测项</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+        <div class="mt10">
+            <span>基本量程：</span>×
+
+            <select class="my-combobox" name="ddlliangCheng" id="ddlliangCheng" onchange="calculate.biaochenzhi(this)">
+                <option value="1000" selected>1000</option>
+                <option value="100">100</option>
+                <option value="10">10</option>
+                <option value="1">1</option>
+                <option value="0.1">0.1</option>
+                <option value="0.01">0.01</option>
+                <option value="0.001">0.001</option>
+            </select>
+        </div>
+        <div class="mt10">           
+
+            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="changeValue(this)">
+                <option value="hxp" selected>滑线盘</option>
+                <option value="bjp">步进盘</option>
+            </select>
+        </div>
+        <div class="mt10" id="tongdao">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_dy_1">
+                <thead>
+                    
+                    <tr>
+                    <th width="70"  align="center">序号</th>
+                        <th width="160" align="center">测量盘示值(Ω)</th>
+                        <th width="110" align="center">
+                            标称值(Ω)                           
+                      </th>
+                        <th width="110" align="center">实际值(Ω)</th>
+                        <th width="110" align="center">误差(%)</th>
+                         <th  align="center">允许误差(%)</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_1">
+                    <!--默认0行 -->
+                    <tr>
+                        <td align="center"> 
+                        <input name="input" id="input" type="text" class="my-textbox tc" value="1" style="width:40px" /></td>
+                        <td align="center"><input name="input2" id="input2" type="text" class="my-textbox" value="" style="width:50px" onblur="calculate.biaochenzhi(this)" />
+                        <select class="my-combobox" name="state_1_" id="state_UNIT_1_" >
+                <option value="plus" selected>+</option>
+                
+            </select>
+                        <input name="input4" id="input4" type="text" class="my-textbox" value="" style="width:50px" onblur="calculate.biaochenzhi(this)"  /></td>
+                        <td align="center"><input name="input3" id="input3" type="text" class="my-textbox tr" value="" onblur="calculate.wuCha(this)" /></td>
+                        <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" onblur="calculate.wuCha(this)" /></td>
+                        <td align="center"><input name="" id="" type="text" class="my-textbox tr" value="" /></td>
+                        <td align="center">± 
+                          <select class="my-combobox" name="select3" id="select3"  onchange="calculate.wuCha(this)">
+                            <option value="2" >2</option>
+                            <option value="0.5">0.5</option>
+                            <option value="0.2">0.2</option>
+                            <option value="0.1">0.1</option>
+                            
+                        </select></td>
+                    </tr>
+                    <!--/默认0行 -->
+                </tbody>
+
+                <tr>
+                    <td colspan="6" style="background:#F7F7F7">
+                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open');TongDao.getCurTongDaoIdx(this)">增加行数</a>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+        <div class="mt10">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
+                <tr>
+                    <th width="60">注：</th>
+                    <td colspan="6"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%" value=""></td>
+                </tr>
+                <tr>
+                    <th>结论：</th>
+                    <td colspan="6"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%"></td>
+                </tr>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10">
+                <tbody id="tbody_2">
+                    <tr>
+                        <td align="center" width="50%"><input name="" id="" type="text" class="my-textbox tr" value="" style="width:96%" /></td>
+                        <td>
+                            <i>U</i><small>rel</small>(k =
+                            <select class="my-combobox" name="ddlSelectD" id="ddlSelectD">
+                                <option value="2">2 </option>
+                                <option value="3">3</option>
+                                <option value="√3">√3</option>
+                            </select>
+                            ) =
+                            <input class="my-textbox " value="" style="width:300px" id="txtvalueD">
+                            <input type="button" class="my-btn" value="计 算" onclick="calculate(this)" />
+                        </td>
+                    </tr>
+                </tbody>
+                <tr>
+                  <td colspan="8" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addUrel()">增加不确定度计算行</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!--增加行数弹层-->
+    <div id="dlg" class="easyui-dialog" title="增加行数" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return TongDao.addRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+        <table>
+            <tr>
+                <td width="100" align="right" height="100">增加的数量：</td>
+                <td><input type="text" id="txtNumber" class="my-textbox  required " style="width:200px" /></td>
+            </tr>
+        </table>
+    </div>
+    <!--/增加量程弹层-->
+
+    <script type="text/javascript" language="javascript">
+        var rowNumber = 1;
+        var index = 1;
+        var currentindex = 1;
+        var TongDao = {
+            addTongDao: function () {
+                var tongdao = $("#tongdao_dy_1").clone();
+                this.setTongDaoIdx(index + 1);
+                $("#tongdao").append($(tongdao).attr("id", "tongdao_dy_" + this.getTongDaoIdx()));
+            },
+            addRow: function () {
+                var ddl2 = " ±" +
+                         "<select class=\"my-combobox\" name=\"select3\" id=\"select3\" onchange=\"calculate.wuCha(this)\" >" +
+                             "<option value=\"2\">2</option>" +
+                             "<option value=\"0.5\">0.5</option>" +
+                             "<option value=\"0.2\">0.2</option>" +
+                             "<option value=\"0.1\">0.1</option>" +
+
+                         "</select>";
+                var inputHtml = "<input name=\"\" id=\"\" type=\"text\" class=\"my-textbox tr\" value=\"\" onblur=\"calculate.wuCha(this)\"/>";
+                var rows = $("#txtNumber").val();
+                for (var i = 0; i < rows; i++) {
+                    // var rowIdx = $("#tongdao_dy_" + currentindex + " tbody").eq(0).find('tr').last().children().eq(0).text();
+                    rowNumber = (rowNumber + 1);
+                    $("#tongdao_dy_" + currentindex + " tbody").eq(0).append("<tr>" +
+                                                                                  "<td align=\"center\"><input name=\"input\" id=\"input\" type=\"text\" class=\"my-textbox tc\" value="+rowNumber+" style=\"width:40px\" /></td>" +
+                                                                                  "<td align=\"center\"><input name=\"input2\" id=\"input2\" type=\"text\" class=\"my-textbox\" value=\"\" style=\"width:50px\"onblur=\"calculate.biaochenzhi(this)\"  />" +
+                                                                                        "<select class=\"my-combobox\" name=\"state_1_\" id=\"state_UNIT_1_\" >" +
+                                                                                        "<option value=\"plus\" selected>+</option></select>" +
+                                                                                     "<input name=\"input4\" id=\"input4\" type=\"text\" class=\"my-textbox\" value=\"\" style=\"width:50px\" onblur=\"calculate.biaochenzhi(this)\"  /></td>" +
+                                                                                   "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                    "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                   "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                  "<td align=\"center\">" + ddl2 + "</td>" + 
+                                                                             "</tr>");
+
+                }
+            },
+            setTongDaoIdx: function (idx) {
+                index = currentindex = idx;
+            },
+            getTongDaoIdx: function () {
+                return index;
+            },
+            getCurTongDaoIdx: function (obj) { 
+                currentindex = 1;
+            }
+        }
+        var calculate = {
+            wuCha: function (obj) {
+                //【误差】=(【实际值】-【标称值】)/【标称值】*100%，小数位数比允许误差多一位，四舍六入，逢五奇进偶不进
+                TongDao.getCurTongDaoIdx(obj);
+               
+                $("#tongdao_dy_" + currentindex + " tbody:eq(0) tr").each(function () {
+
+                    var wuchalength = $(this).children().eq(5).find('select').val();
+                    //标称值
+                    var biaochenzhi = $(this).children().eq(2).find('input').val();;// $("#tongdao_dy_" + currentindex + " thead tr th:eq(2)").find("input").val();
+                    //获取实际值
+                    var shijizhi = $(this).children().eq(3).find('input').val();
+                    //计算第一个误差
+                    if (biaochenzhi != "" && shijizhi != "")
+                        $(this).children().eq(4).find('input').val(fomatFloat(parseFloat((parseFloat(shijizhi) - parseFloat(biaochenzhi)) / parseFloat(biaochenzhi) * 100), (wuchalength.split(".").length == 2 ? (wuchalength.split(".")[1].length + 1) : 0)))
+                   
+                });
+
+            }, biaochenzhi: function (obj) {
+                //【标称值】=【测量盘示值(Ω)】*【基本量程的量程系数】，例如当【基本量程的量程系数】=100则乘以100，小数位数5位，四舍六入，逢五奇进偶不进
+                TongDao.getCurTongDaoIdx(obj);
+               
+                $("#tongdao_dy_" + currentindex + " tbody:eq(0) tr").each(function () {
+
+                    //测量盘
+                    var celiangpan = parseFloat($(this).children().eq(1).find('input').eq(0).val() == "" ? 0 : $(this).children().eq(1).find('input').eq(0).val()) + parseFloat($(this).children().eq(1).find('input').eq(1).val() == "" ? 0 : $(this).children().eq(1).find('input').eq(1).val());
+                    //获取量程
+                    var liangcheng = $("#ddlliangCheng").val();
+                    //计算第一个误差
+                    if (celiangpan != "" && liangcheng != ""){
+                        $(this).children().eq(2).find('input').val(fomatFloat(parseFloat(celiangpan) * parseFloat(liangcheng), 5)) 
+                    }
+                   
+                });
+                this.wuCha(obj);
+
+            } 
+        }
+
+
+    </script>
+</body>
+
+</html>

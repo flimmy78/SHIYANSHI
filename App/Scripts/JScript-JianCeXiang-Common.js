@@ -1682,7 +1682,7 @@ RuleAttributeArray = [{
     }
         ,
     {
-        RuleID: '51-1999_3_3',//检测项编号
+        RuleID: '410-1994_6_5',//检测项编号
         Remark: '(数表单相)交流电流输出-相对误差-单相',//检测项说明
         Attributes:
             [{
@@ -1704,7 +1704,7 @@ RuleAttributeArray = [{
     }
             ,
     {
-        RuleID: '51-1999_3_4',//检测项编号
+        RuleID: '410-1994_6_6',//检测项编号
         Remark: '(数表单相)交流电流输出-绝对误差-单相',//检测项说明
         Attributes:
             [{
