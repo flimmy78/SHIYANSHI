@@ -999,9 +999,8 @@
     <Content Include="Views\VGONGZUOSHICHANG\Index.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\IndexUA.cshtml" />
     <Content Include="Views\PREPARE_SCHEME\Testxml.cshtml" />
-    <Content Include="Views\PROJECTTEMPLET\GongZuoDianLiuShiZhiWuCha9.cshtml" />
     <Content Include="Views\PREPARE_SCHEME\TestxmlDistinct.cshtml" />
-    <Content Include="Views\PROJECTTEMPLET\DanQiaoJiBenLiangcheng.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\DanQiaoJiBenLiangCheng.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

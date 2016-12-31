@@ -115,8 +115,6 @@
 
                 //相对误差
                 htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', ""));
-
-
                 //校准结果的不确定度 U(K =
                 htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', ""));
                 htmlString.push("</tr>");
@@ -129,35 +127,18 @@
 
             $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
-
-        function shiJiZhi(obj)
-        {
-
-           // 输出实际值计算：【是否使用变换器】有数值时，输出实际值= 读数值 / 1.5*量程值；【是否使用变换器】没有数值时，输出实际值=读数值
-                var duShuZhi = $(obj).parents('tr:eq(0)').find('td:eq(4) input').val() == "" ? "" : parseFloat($(obj).parents('tr:eq(0)').find('td:eq(4) input').val());
-                var liangChengZhi = $(obj).parents('tr:eq(0)').find('td:eq(0) input').val() == "" ? "" : parseFloat($(obj).parents('tr:eq(0)').find('td:eq(0) input').val());
-                if (duShuZhi == "" || liangChengZhi == "") $(obj).parents('tr:eq(0)').find('td:eq(5) input').val("")
-                else
-                    $(obj).parents('tr:eq(0)').find('td:eq(5) input').val(fomatFloat((duShuZhi) / 1.5 * liangChengZhi, 1));
-                JsxiangDuiWuCha(obj);
+        //计算标准值 绝对误差
+        function jueDuiWuChaBiaoZhunZhi(obj) {
+            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
 
         }
 
         //计算显示值
-        function JsxiangDuiWuCha(obj) {
-            //【相对误差】=（输出示值-输出实际值）/输出示值*100%，
-            var shuChuShiZhi = $(obj).parents('tr:eq(0)').find('td:eq(2) input').val() == "" ? "" : parseFloat($(obj).parents('tr:eq(0)').find('td:eq(2) input').val());
-            var shuChuShiJiZhi = $(obj).parents('tr:eq(0)').find('td:eq(5) input').val() == "" ? "" : parseFloat($(obj).parents('tr:eq(0)').find('td:eq(5) input').val());
-            if (shuChuShiZhi == "" || shuChuShiZhi == "") $(obj).parents('tr:eq(0)').find('td:eq(6) input').val("")
-            else
-                $(obj).parents('tr:eq(0)').find('td:eq(6) input').val(fomatFloat((shuChuShiZhi - shuChuShiJiZhi) / shuChuShiZhi * 100, 1));
+        function resetBiaoZhunZhi(obj) {
+            xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
 
         }
-        //离开事件，用于计算
-        function blurValue(obj) {
-
-            //   LianDongShiJiZhi(obj);
-        }
+   
 
 
 

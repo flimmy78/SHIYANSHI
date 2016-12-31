@@ -75,8 +75,9 @@
                         </td>
 
 
-                        <td rowspan="1" align="center" width="100"> 
-                        <input class="my-textbox input-width" value="" id="READVALUE_t_1_1" name="READVALUE" onblur="blurBiaoZhunZhi(this)" type="text"></td>
+                        <td rowspan="1" align="center" width="100">
+                            <input class="my-textbox input-width" value="" id="READVALUE_t_1_1" name="READVALUE" onblur="blurBiaoZhunZhi(this)" type="text">
+                        </td>
                         <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_1" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
                     </tr>
@@ -192,7 +193,7 @@
 
             CreateRow(thi);
             // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
-           
+
         }
         //增加行
         function CreateRow(thi) {
@@ -220,7 +221,7 @@
                     //需要合并的列
                 }
                 //需要合并的列
-                
+
                 //显示值 需要下拉框
                 htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, '', '', '', 'blurXianShiZhi'));
                 //标准值
@@ -266,25 +267,20 @@
             var showData = $(obj).val();
             if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
                 //获取文本框的值
-                var ZHONGJIANZHI1 = $(obj).parent().parent().parent().find(".ZHONGJIANZHI").val();
-                if (ZHONGJIANZHI1) {
-                    ZHONGJIANZHI1 = ZHONGJIANZHI1.toUpperCase().replace('L', '').replace('C', '');
-                    var txtPointLen = 0;
-                    if (ZHONGJIANZHI1.indexOf('.') > 0) {
-                        txtPointLen = ZHONGJIANZHI1.split(".")[1].length;//小数点位数
-                    }  
 
-                    var xiangDuiWuCha = ((showData - biaoZhunData) / gudingzhi * 100);
-                    var data = fomatFloat(xiangDuiWuCha, txtPointLen)
-                    $(obj).parent().parent().find("#ACTUALVALUE" + id).val(data);
-                }
+                var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+                var jianfa = (accSub(showData , biaoZhunData) / gudingzhi * 100);
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+
+                $(obj).parent().parent().find("#ACTUALVALUE" + id).val(data);
+
 
             }
         }
         //离开事件，用于计算 输入范围最小
         function blurBiaoZhunZhi(obj) {
             //注意多通道
-            
+
             var dianliu = $(obj).parent().parent().parent().parent().parent().parent().find("input[name='fhzkhz']").val();
             var dianya = $(obj).parent().parent().parent().parent().parent().parent().find("input[name='chzkhz']").val();
             if (dianliu == null || dianliu == "") {
@@ -305,28 +301,21 @@
             var biaoZhunData = $(obj).val();
             if (showData != "" && biaoZhunData != "" && biaoZhunData != "0") {
 
-                //获取文本框的值
-                var ZHONGJIANZHI1 = $(obj).parent().parent().parent().find(".ZHONGJIANZHI").val();
-                if (ZHONGJIANZHI1) {
-                    ZHONGJIANZHI1 = ZHONGJIANZHI1.toUpperCase().replace('L', '').replace('C', '');
-                    var txtPointLen = 0;
-                    if (ZHONGJIANZHI1.indexOf('.') > 0) {
-                        txtPointLen = ZHONGJIANZHI1.split(".")[1].length;//小数点位数
-                    }
-                    
-                    var xiangDuiWuCha = ((showData - biaoZhunData) / gudingzhi * 100);
-                    var data = fomatFloat(xiangDuiWuCha, txtPointLen)
-                    $(obj).parent().parent().find("#ACTUALVALUE" + id).val(data);
-                }
+                var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+                var jianfa = (accSub(showData , biaoZhunData) / gudingzhi * 100);
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+
+                $(obj).parent().parent().find("#ACTUALVALUE" + id).val(data);
+
 
             }
-            
+
         }
         //离开事件，用于计算
         function blurValue(obj) {
             //  LianDongShiJiZhi(obj);
         }
-        
+
 
 
     </script>

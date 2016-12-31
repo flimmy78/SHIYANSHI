@@ -191,7 +191,7 @@
                     <!--插入行的位置-->
                     <tr rowindex="1">
                         <td rowspan="1" align="center" width="120"> <input class="my-textbox input-width" value="100%" id="OUTPUTVALUE_t_2_1" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
-                        <td width="50" rowspan="96" align="center"> 
+                        <td width="50" rowspan="96" align="center">
                             <input type="text" class="my-textbox tr" value="0.5L" style="width:44px" name="ZHONGJIANZHI" id="ZHONGJIANZHI_t_2_1">
 
                         </td>
@@ -230,7 +230,7 @@
                         <td rowspan="1" align="center" width="120"> <input class="my-textbox input-width" value="100%" id="OUTPUTVALUE_t_3_1" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
                         <td width="50" rowspan="96" align="center">
                             <input type="text" class="my-textbox tr" value="0.5C" style="width:44px" name="ZHONGJIANZHI" id="ZHONGJIANZHI_t_3_1">
- 
+
                         </td>
 
                         <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="READVALUE_t_3_1" name="READVALUE" onblur="blurValue(this)" type="text"></td>
@@ -305,7 +305,7 @@
                     //需要合并的列
                 }
                 //需要合并的列
-                
+
                 //测量点 需要下拉框
                 htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120", unit));
                 //二次输入标准值
@@ -325,12 +325,12 @@
             var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find(".myliangcheng_" + LiangChengShuLiang).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
             //$('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
-                         $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find(".myliangcheng_" + LiangChengShuLiang).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+            $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find(".myliangcheng_" + LiangChengShuLiang).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
 
         //离开事件，用于计算
         function blurValue(obj) {
-          //  LianDongShiJiZhi(obj);
+            //  LianDongShiJiZhi(obj);
         }
 
 
