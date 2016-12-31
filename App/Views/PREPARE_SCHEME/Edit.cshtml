@@ -63,6 +63,24 @@
                 @Html.DropDownList("UNQUALIFIEDTYPE", Models.SysFieldModels.GetSysField("PREPARE_SCHEME", "UNQUALIFIEDTYPE"), "请选择不合格类型", new { @style = "width:60%;display:none" })
             </td>
         </tr>
+                @if (Model != null && Model.prepare_scheme != null && Model.prepare_scheme.CERTIFICATE_CATEGORY == "检定")
+                {
+                    <tr>
+                        <td style="background:#FCFCFC">检定结论：</td>
+                        <td colspan="2" align="left"><input type="text" class="my-textbox" value="@Model.prepare_scheme.CALIBRATION_INSTRUCTIONS" id="CALIBRATION_INSTRUCTIONS" /> </td>
+
+                    </tr>
+                }
+
+                else
+                {
+                    <tr style="display:none">
+                        <td style="background:#FCFCFC">检定结论：</td>
+                        <td colspan="2" align="left"><input type="text" class="my-textbox" value="@Model.prepare_scheme.CALIBRATION_INSTRUCTIONS" id="CALIBRATION_INSTRUCTIONS" /> 年</td>
+
+                    </tr>
+                }
+                       
         <tr>
             <td style="background:#FCFCFC">结论说明：</td>
             <td colspan="2" align="left"><textarea rows="1" style="width:97%; height:26px" id="CONCLUSION_EXPLAIN">@Model.prepare_scheme.CONCLUSION_EXPLAIN</textarea></td>
@@ -139,6 +157,7 @@
         var CONCLUSION_EXPLAIN = $("#CONCLUSION_EXPLAIN").val();//结论说明
         var VALIDITY_PERIOD = $("#VALIDITY_PERIOD").val();//有效期
         var UNQUALIFIEDTYPE = $("#UNQUALIFIEDTYPE option:selected").val()//不合格类型
+        var CALIBRATION_INSTRUCTIONS = $("#CALIBRATION_INSTRUCTIONS").val();//检定结论
         if (CONCLUSION == "不合格") {
             if (isNull(UNQUALIFIEDTYPE)) {
                 $.messager.alert('操作提示', "请选择不合格类型！", 'info');
@@ -161,7 +180,7 @@
             dataType: "json", //返回json格式的数据
             url: '/PREPARE_SCHEME/Save', //要访问的后台地址
             contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
-            data: { 'ID': ID, 'CONCLUSION': CONCLUSION, 'CONCLUSION_EXPLAIN': CONCLUSION_EXPLAIN, 'VALIDITY_PERIOD': VALIDITY_PERIOD, 'UNQUALIFIEDTYPE': UNQUALIFIEDTYPE },
+            data: { 'ID': ID, 'CONCLUSION': CONCLUSION, 'CONCLUSION_EXPLAIN': CONCLUSION_EXPLAIN, 'VALIDITY_PERIOD': VALIDITY_PERIOD, 'UNQUALIFIEDTYPE': UNQUALIFIEDTYPE, 'CALIBRATION_INSTRUCTIONS': CALIBRATION_INSTRUCTIONS },
             beforeSend: function () {
                 //InitAlertJS();
             },

@@ -265,7 +265,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
         if (JiSuanBuQueDingDuType == "A") {//按钮计算不确定度
             htmlString.push("<input type='hidden' name='" + BuQueDingDuLuJingName + "' id='" + BuQueDingDuLuJingId + "' value=''/>");
             var returnIds = BuQueDingDuZhiId + "&" + BuQueDingDuLuJingId + "^" + BuQueDingDuLuJingId + "^" + id;
-            htmlString.push("<a href=\"#\" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\" onclick = \"showModal('" + returnIds + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID + "');\">计算不确定度</a>")
+            htmlString.push("<a href=\"#\" name=\"btnBuQueDing\" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\" onclick = \"showModal('" + returnIds + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID + "');\">计算不确定度</a>")
         }
     }
     htmlString.push("</td>");
@@ -492,7 +492,7 @@ function BtnInit() {
         ////$("#btnSave_ITE").show();
         //$("#btnReset_ITE").show();
         $("a").each(function () {
-            if (this.id != "btnSave") {
+            if (this.id != "btnSave" && this.name!="btnBuQueDing") {
                 $(this).hide();
             }
             else {
