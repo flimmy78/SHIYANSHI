@@ -944,10 +944,15 @@ namespace Langben.Report
                 sheet_Destination.GetRow(42).GetCell(9).SetCellValue("/");
             }
             //有效期
-            if (entity.VALIDITY_PERIOD.HasValue && entity.CALIBRATION_DATE.HasValue)
+            //if (entity.VALIDITY_PERIOD.HasValue && entity.CALIBRATION_DATE.HasValue)
+            //{
+            //    //sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
+            //    sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.CALIBRATION_DATE.Value.AddYears((int)entity.VALIDITY_PERIOD.Value).AddDays(-1).ToString("yyyy年MM月dd日"));
+            //}
+            if (entity.VALIDITYEND.HasValue)//有效期改为直接取数据库值
             {
-                //sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
-                sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.CALIBRATION_DATE.Value.AddYears((int)entity.VALIDITY_PERIOD.Value).AddDays(-1).ToString("yyyy年MM月dd日"));
+                sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.VALIDITYEND.Value.ToString("yyyy年MM月dd日"));
+               
             }
             else
             {
