@@ -22,7 +22,7 @@ DanWeiDDLHtmlArray = [
             Value: "<select class=\"my-combobox\" name=\"DianYa\" style=\"width:50px; \">" +
                     "<option value=\"V\">V</option> " +
                     "<option value=\"MV\">MV</option>" +
-                    "<option value=\"KV\">KV</option>  " +
+                    "<option value=\"kV\">kV</option>  " +
                     "<option value=\"mV\">mV</option>" +
                     "<option value=\"μV\">μV</option> " +
                    "</select>"
@@ -34,11 +34,11 @@ DanWeiDDLHtmlArray = [
             Value: "<select class=\"my-combobox\" name=\"DianYa\" style=\"width:50px; \">" +
                     "<option value=\"V\">V</option> " +
                     "<option value=\"MV\">MV</option>" +
-                    "<option value=\"KV\">KV</option>  " +
+                    "<option value=\"kV\">kV</option>  " +
                     "<option value=\"mV\">mV</option>" +
                     "<option value=\"μV\">μV</option> " +
                     "<option value=\"A\">A</option> " +
-                    "<option value=\"KA\">KA</option>" +
+                    "<option value=\"kA\">kA</option>" +
                     "<option value=\"mA\">mA</option>  " +
                     "<option value=\"μA\">μA</option>" +
                     "<option value=\"nA\">nA</option> " +
@@ -50,7 +50,7 @@ DanWeiDDLHtmlArray = [
             Code: 'DianLiuKA',
             Remark: '电流单位KA开头',
             Value: "<select class=\"my-combobox\" name=\"DianLiuKA\" style=\"width:50px; \">" +
-                    "<option value=\"KA\">KA</option> " +
+                    "<option value=\"kA\">kA</option> " +
                     "<option value=\"A\">A</option>" +
                     "<option value=\"mA\">mA</option>  " +
                     "<option value=\"μA\">μA</option>" +
@@ -344,7 +344,7 @@ DanWeiDDLHtmlArray = [
             Remark: '赫兹',
             Value: "<select class=\"my-combobox\" name=\"HZ\" >" +
                     "<option value=\"Hz\">Hz</option> " +
-                    "<option value=\"KHz\">KHz</option>" +
+                    "<option value=\"kHz\">kHz</option>" +
                     "<option value=\"MHz\">MHz</option>  " +
                     "<option value=\"GHz\">GHz</option>  " +
                     "<option value=\"\"></option>  " +
