@@ -2010,52 +2010,55 @@ namespace Langben.Report
                 //每行单元格处理               
                 for (int m = row_Source.FirstCellNum; m < row_Source.LastCellNum; m++)
                 {
-                    sourceCell = row_Source.GetCell(m);
-                    row_Source.Cells[m].SetCellType(CellType.String);
-                    if (m + 1 != row_Source.LastCellNum)
+                    if (m < 57)
                     {
-                        row_Source.Cells[m + 1].SetCellType(CellType.String);
-                    }
-                    if (sourceCell == null)
-                        continue;
-                    targetCell = targetRow.CreateCell(m);
-                    targetCell.CellStyle = sourceCell.CellStyle;//赋值单元格格式
-                    targetCell.SetCellType(sourceCell.CellType);
-
-                    //列合并，以下为复制模板行的单元格合并格式                    
-                    #region 新合并方式                   
-                    if (sourceCell.IsMergedCell)
-                    {
-                        CellRangeAddress cellAddress = getMergedRegionCell(sheet_Source, m, rowIndex_Source);
-                        if (cellAddress != null && cellAddress.LastColumn > startMergeCell && (cellAddress.LastRow > cellAddress.FirstRow || cellAddress.LastColumn > cellAddress.FirstColumn))
+                        sourceCell = row_Source.GetCell(m);
+                        row_Source.Cells[m].SetCellType(CellType.String);
+                        if (m + 1 != row_Source.LastCellNum)
                         {
-                            if (rowIndex_Source == cellAddress.LastRow)
-                            {
-                                sheet_Destination.AddMergedRegion(new CellRangeAddress(i - (cellAddress.LastRow - cellAddress.FirstRow), i, cellAddress.FirstColumn, cellAddress.LastColumn));
-                                startMergeCell = cellAddress.LastColumn + 1;
+                            row_Source.Cells[m + 1].SetCellType(CellType.String);
+                        }
+                        if (sourceCell == null)
+                            continue;
+                        targetCell = targetRow.CreateCell(m);
+                        targetCell.CellStyle = sourceCell.CellStyle;//赋值单元格格式
+                        targetCell.SetCellType(sourceCell.CellType);
 
-                                result.Add(new CellRangeAddress(i - (cellAddress.LastRow - cellAddress.FirstRow), i, cellAddress.FirstColumn, cellAddress.LastColumn));
+                        //列合并，以下为复制模板行的单元格合并格式                    
+                        #region 新合并方式                   
+                        if (sourceCell.IsMergedCell)
+                        {
+                            CellRangeAddress cellAddress = getMergedRegionCell(sheet_Source, m, rowIndex_Source);
+                            if (cellAddress != null && cellAddress.LastColumn > startMergeCell && (cellAddress.LastRow > cellAddress.FirstRow || cellAddress.LastColumn > cellAddress.FirstColumn))
+                            {
+                                if (rowIndex_Source == cellAddress.LastRow)
+                                {
+                                    sheet_Destination.AddMergedRegion(new CellRangeAddress(i - (cellAddress.LastRow - cellAddress.FirstRow), i, cellAddress.FirstColumn, cellAddress.LastColumn));
+                                    startMergeCell = cellAddress.LastColumn + 1;
+
+                                    result.Add(new CellRangeAddress(i - (cellAddress.LastRow - cellAddress.FirstRow), i, cellAddress.FirstColumn, cellAddress.LastColumn));
+                                }
+                                if (IsCopyContent && rowIndex_Source == cellAddress.FirstRow)
+                                {
+                                    HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
+                                    targetRow.Cells[m].SetCellValue(value);
+
+                                }
                             }
-                            if (IsCopyContent && rowIndex_Source == cellAddress.FirstRow)
+
+                        }
+                        else
+                        {
+
+                            result.Add(new CellRangeAddress(targetRow.RowNum, targetRow.RowNum, m, m));
+                            if (IsCopyContent)
                             {
                                 HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
                                 targetRow.Cells[m].SetCellValue(value);
-                                
                             }
                         }
-
+                        #endregion
                     }
-                    else
-                    {
-
-                        result.Add(new CellRangeAddress(targetRow.RowNum, targetRow.RowNum, m, m));
-                        if (IsCopyContent)
-                        {
-                            HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
-                            targetRow.Cells[m].SetCellValue(value);
-                        }
-                    }
-                    #endregion
                 }
             }
             return result;
@@ -2102,99 +2105,102 @@ namespace Langben.Report
                 //每行单元格处理               
                 for (int m = row_Source.FirstCellNum; m < row_Source.LastCellNum; m++)
                 {
-                    sourceCell = row_Source.GetCell(m);
-                    row_Source.Cells[m].SetCellType(CellType.String);
-                    if (m + 1 != row_Source.LastCellNum)
+                    if (m < 57)
                     {
-                        row_Source.Cells[m + 1].SetCellType(CellType.String);
-                    }
-                    if (sourceCell == null)
-                        continue;
-                    targetCell = targetRow.CreateCell(m);
-                    targetCell.CellStyle = sourceCell.CellStyle;//赋值单元格格式
-                    targetCell.SetCellType(sourceCell.CellType);
-
-                    //列合并，以下为复制模板行的单元格合并格式
-                    #region 原合并方式
-                    //if (sourceCell.IsMergedCell)
-                    //{
-                    //    //起始位置
-                    //    if (startMergeCell < 0 || sourceCell.CellStyle.BorderLeft != BorderStyle.None || sourceCell.StringCellValue != "")
-                    //    {
-                    //        startMergeCell = m;
-                    //    }
-                    //    //结束位置
-                    //    if (m + 1 == sourceCellCount || sourceCell.CellStyle.BorderRight != BorderStyle.None
-                    //        || row_Source.Cells[m + 1].StringCellValue != "" || row_Source.Cells[m + 1].IsMergedCell == false
-                    //        || (CellsTemplate != null && CellsTemplate.Count > 0 && CellsTemplate.FirstOrDefault(p => p.ColIndex == startMergeCell && p.ColCount == (m - startMergeCell)) != null))
-                    //    {
-                    //        endMergeCell = m;
-                    //    }
-
-                    //    if (startMergeCell < endMergeCell)
-                    //    {
-                    //        //int firstRow, int lastRow, int firstCol, int lastCol
-                    //        sheet_Destination.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, endMergeCell));
-                    //        //CellRangeAddress cellAddress = getMergedRegionCell(m, i);
-                    //        //if (cellAddress != null)
-                    //        //{
-                    //        //    sheet_Destination.AddMergedRegion(new CellRangeAddress(i, cellAddress.LastRow-cellAddress.FirstRow+i, cellAddress.FirstColumn, cellAddress.LastColumn));
-                    //        //}
-                    //        //else
-                    //        //{
-                    //        //    sheet_Destination.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, endMergeCell));
-                    //        //}
-
-
-                    //        if (IsCopyContent)
-                    //        {
-                    //            HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell], targetRow.Cells[startMergeCell], allSpecialCharacters);
-                    //            targetRow.Cells[startMergeCell].SetCellValue(value);
-                    //            startMergeCell = -1;
-
-                    //        }
-                    //    }
-                    //}
-                    //else
-                    //{                       
-                    //    if (IsCopyContent)
-                    //    {
-
-                    //        HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
-                    //        targetRow.Cells[m].SetCellValue(value);
-
-                    //    }
-                    //    startMergeCell = -1;                       
-                    //}
-                    #endregion
-                    #region 新合并方式                   
-                    if (sourceCell.IsMergedCell)
-                    {
-                        CellRangeAddress cellAddress = getMergedRegionCell(sheet_Source, m, rowIndex_Source);
-                        if (cellAddress != null && cellAddress.LastColumn > startMergeCell && (cellAddress.LastRow > cellAddress.FirstRow || cellAddress.LastColumn > cellAddress.FirstColumn))
+                        sourceCell = row_Source.GetCell(m);
+                        row_Source.Cells[m].SetCellType(CellType.String);
+                        if (m + 1 != row_Source.LastCellNum)
                         {
-                            if (rowIndex_Source == cellAddress.LastRow)
+                            row_Source.Cells[m + 1].SetCellType(CellType.String);
+                        }
+                        if (sourceCell == null)
+                            continue;
+                        targetCell = targetRow.CreateCell(m);
+                        targetCell.CellStyle = sourceCell.CellStyle;//赋值单元格格式
+                        targetCell.SetCellType(sourceCell.CellType);
+
+                        //列合并，以下为复制模板行的单元格合并格式
+                        #region 原合并方式
+                        //if (sourceCell.IsMergedCell)
+                        //{
+                        //    //起始位置
+                        //    if (startMergeCell < 0 || sourceCell.CellStyle.BorderLeft != BorderStyle.None || sourceCell.StringCellValue != "")
+                        //    {
+                        //        startMergeCell = m;
+                        //    }
+                        //    //结束位置
+                        //    if (m + 1 == sourceCellCount || sourceCell.CellStyle.BorderRight != BorderStyle.None
+                        //        || row_Source.Cells[m + 1].StringCellValue != "" || row_Source.Cells[m + 1].IsMergedCell == false
+                        //        || (CellsTemplate != null && CellsTemplate.Count > 0 && CellsTemplate.FirstOrDefault(p => p.ColIndex == startMergeCell && p.ColCount == (m - startMergeCell)) != null))
+                        //    {
+                        //        endMergeCell = m;
+                        //    }
+
+                        //    if (startMergeCell < endMergeCell)
+                        //    {
+                        //        //int firstRow, int lastRow, int firstCol, int lastCol
+                        //        sheet_Destination.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, endMergeCell));
+                        //        //CellRangeAddress cellAddress = getMergedRegionCell(m, i);
+                        //        //if (cellAddress != null)
+                        //        //{
+                        //        //    sheet_Destination.AddMergedRegion(new CellRangeAddress(i, cellAddress.LastRow-cellAddress.FirstRow+i, cellAddress.FirstColumn, cellAddress.LastColumn));
+                        //        //}
+                        //        //else
+                        //        //{
+                        //        //    sheet_Destination.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, endMergeCell));
+                        //        //}
+
+
+                        //        if (IsCopyContent)
+                        //        {
+                        //            HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell], targetRow.Cells[startMergeCell], allSpecialCharacters);
+                        //            targetRow.Cells[startMergeCell].SetCellValue(value);
+                        //            startMergeCell = -1;
+
+                        //        }
+                        //    }
+                        //}
+                        //else
+                        //{                       
+                        //    if (IsCopyContent)
+                        //    {
+
+                        //        HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
+                        //        targetRow.Cells[m].SetCellValue(value);
+
+                        //    }
+                        //    startMergeCell = -1;                       
+                        //}
+                        #endregion
+                        #region 新合并方式                   
+                        if (sourceCell.IsMergedCell)
+                        {
+                            CellRangeAddress cellAddress = getMergedRegionCell(sheet_Source, m, rowIndex_Source);
+                            if (cellAddress != null && cellAddress.LastColumn > startMergeCell && (cellAddress.LastRow > cellAddress.FirstRow || cellAddress.LastColumn > cellAddress.FirstColumn))
                             {
-                                sheet_Destination.AddMergedRegion(new CellRangeAddress(i - (cellAddress.LastRow - cellAddress.FirstRow), i, cellAddress.FirstColumn, cellAddress.LastColumn));
-                                startMergeCell = cellAddress.LastColumn + 1;
+                                if (rowIndex_Source == cellAddress.LastRow)
+                                {
+                                    sheet_Destination.AddMergedRegion(new CellRangeAddress(i - (cellAddress.LastRow - cellAddress.FirstRow), i, cellAddress.FirstColumn, cellAddress.LastColumn));
+                                    startMergeCell = cellAddress.LastColumn + 1;
+                                }
+                                if (IsCopyContent && rowIndex_Source == cellAddress.FirstRow)
+                                {
+                                    HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
+                                    targetRow.Cells[m].SetCellValue(value);
+                                }
                             }
-                            if (IsCopyContent && rowIndex_Source == cellAddress.FirstRow)
+
+                        }
+                        else
+                        {
+                            if (IsCopyContent)
                             {
                                 HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
                                 targetRow.Cells[m].SetCellValue(value);
                             }
                         }
-
+                        #endregion
                     }
-                    else
-                    {
-                        if (IsCopyContent)
-                        {
-                            HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
-                            targetRow.Cells[m].SetCellValue(value);
-                        }
-                    }
-                    #endregion
                 }
             }
         }
@@ -2595,36 +2601,39 @@ namespace Langben.Report
 
                 for (int m = sourceRow.FirstCellNum; m < sourceRow.LastCellNum; m++)
                 {
-                    sourceCell = sourceRow.GetCell(m);
-                    if (sourceCell == null)
-                        continue;
-                    targetCell = targetRow.CreateCell(m);
-                    targetCell.CellStyle = sourceCell.CellStyle;//赋值单元格格式
-                    targetCell.SetCellType(sourceCell.CellType);
+                    if (m < 57)
+                    {
+                        sourceCell = sourceRow.GetCell(m);
+                        if (sourceCell == null)
+                            continue;
+                        targetCell = targetRow.CreateCell(m);
+                        targetCell.CellStyle = sourceCell.CellStyle;//赋值单元格格式
+                        targetCell.SetCellType(sourceCell.CellType);
 
-                    //以下为复制模板行的单元格合并格式                                        
-                    if (sourceCell.IsMergedCell)
-                    {
-                        if (startMergeCell <= 0)
-                            startMergeCell = m;
-                        else if (startMergeCell > 0 && sourceCellCount == m + 1)
+                        //以下为复制模板行的单元格合并格式                                        
+                        if (sourceCell.IsMergedCell)
                         {
-                            sheet.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, m));
-                            startMergeCell = -1;
+                            if (startMergeCell <= 0)
+                                startMergeCell = m;
+                            else if (startMergeCell > 0 && sourceCellCount == m + 1)
+                            {
+                                sheet.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, m));
+                                startMergeCell = -1;
+                            }
+                        }
+                        else
+                        {
+                            if (startMergeCell >= 0)
+                            {
+                                sheet.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, m - 1));
+                                startMergeCell = -1;
+                            }
                         }
                     }
-                    else
+                    if (IsCopyContent)
                     {
-                        if (startMergeCell >= 0)
-                        {
-                            sheet.AddMergedRegion(new CellRangeAddress(i, i, startMergeCell, m - 1));
-                            startMergeCell = -1;
-                        }
+                        sheet.CopyRow(sourceRowIndex, targetRow.RowNum);
                     }
-                }
-                if (IsCopyContent)
-                {
-                    sheet.CopyRow(sourceRowIndex, targetRow.RowNum);
                 }
             }
             if (IsCopyContent)
