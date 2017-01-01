@@ -1827,6 +1827,12 @@ namespace Langben.Report
         /// <param name="type">导出类型</param>
         private void SetShuJu(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing)
         {
+            List<VTEST_ITE> vList = null;
+            if (entity != null)
+            {                
+                IBLL.IVTEST_ITEBLL vBLL = new VTEST_ITEBLL();
+                vList = vBLL.GetByPREPARE_SCHEMEID(entity.ID);               
+            }
             int RowIndex = 1;
             int JWTemplateIndex = 0;//规程标题获取源格式行   
             int ruleTitleTemplateIndex = 1;//检测项目名称
@@ -1835,8 +1841,7 @@ namespace Langben.Report
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
             #region 检测项目            
-            if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE != null &&
-                entity.QUALIFIED_UNQUALIFIED_TEST_ITE.Count > 0)
+            if (vList != null &&  vList.Count > 0)
             {
 
                 TableTemplates allTableTemplates = GetTableTemplates(type);
@@ -1847,28 +1852,41 @@ namespace Langben.Report
                 int i = 1;
                 string SameRuleName = "";
                 List<string> SameRuleNameList = GetSameRuleName();
-                foreach (QUALIFIED_UNQUALIFIED_TEST_ITE iEntity in entity.QUALIFIED_UNQUALIFIED_TEST_ITE)
+                QUALIFIED_UNQUALIFIED_TEST_ITE iEntity = null;
+                foreach (VTEST_ITE iVTEST_ITE in vList)
                 {
+                    if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE != null && entity.QUALIFIED_UNQUALIFIED_TEST_ITE.Count > 0 && entity.QUALIFIED_UNQUALIFIED_TEST_ITE.FirstOrDefault(p => p.RULEID == iVTEST_ITE.RULEID) != null)
+                    {
+                        iEntity = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.FirstOrDefault(p => p.RULEID == iVTEST_ITE.RULEID);
+                    }
+                    else
+                    {
+                        iEntity = null;
+                    }
+
                     #region 检测项目标题     
-                    //相同检测项只展示一个标题               
-                    //if(SameRuleNameList==null || SameRuleNameList.Count==0 || SameRuleNameList.FirstOrDefault(p => p == iEntity.RULENAME) == null || SameRuleName != iEntity.RULENAME)
-                    //{
+                    //相同检测项只展示一个标题      
+                        
                     CopyRow(sheet_Source, sheet_Destination, ruleTitleTemplateIndex, RowIndex, 1, false);
                     string celStr = i.ToString() + "、";
 
-                    if (iEntity.RULENAME != null && iEntity.RULENAME.Trim() != "")
+                    if (iVTEST_ITE.NAME != null && iVTEST_ITE.NAME.Trim() != "")
                     {
-                        celStr = celStr + iEntity.RULENAME.Trim() + "：";
+                        celStr = celStr + iVTEST_ITE.NAME.Trim() + "：";
                     }
-                    if (iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
+                    if (iEntity!=null && iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
                     {
                         celStr = celStr + iEntity.CONCLUSION.Trim();
                     }
+                    else if(iEntity==null)
+                    {
+                        celStr = celStr + "/";
+                    }
                     sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue(celStr);
                     RowIndex++;
-                    //}
+                    
                     //相同检测项只展示一个标题   
-                    if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iEntity.RULENAME) != null && SameRuleName == iEntity.RULENAME)
+                    if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
 
                     {
                         HideRow(sheet_Destination, RowIndex - 2, 2);
@@ -1876,12 +1894,12 @@ namespace Langben.Report
 
                     #endregion
 
-                    #region 检测项目表格
-
+                    #region 检测项目表格                    
+                                        
                     //if (TableTemplateDic != null && TableTemplateDic.ContainsKey(iEntity.RULEID))
                     //{
                     //    TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
-                    if (allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
+                    if (iEntity != null && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
                         //解析html表格数据    
@@ -1914,7 +1932,7 @@ namespace Langben.Report
 
 
                     RowIndex++;
-                    SameRuleName = iEntity.RULENAME;
+                    SameRuleName = iVTEST_ITE.NAME;
 
                     #endregion
                     i++;
