@@ -70,7 +70,7 @@ namespace Langben.Report
                       .Where(w => (w.Name == "option" && w.Attributes["selected"] != null))
                       .Select(s => s.Attributes["value"].Value).FirstOrDefault();
                 string node = string.Empty;
-                if (string.IsNullOrWhiteSpace(nodes))
+                if (null != (nodes))
                 {
                     node = b.ChildNodes
            .Where(w => (w.Name == "option"))
@@ -215,7 +215,7 @@ namespace Langben.Report
                       .Where(w => (w.Name == "option" && w.Attributes["selected"] != null))
                       .Select(s => s.Attributes["value"].Value).FirstOrDefault();
                         string node = string.Empty;
-                        if (string.IsNullOrWhiteSpace(nodes))
+                        if (null != (nodes))
                         {
                             mydata.value = b.ChildNodes
                    .Where(w => (w.Name == "option"))
@@ -410,7 +410,7 @@ namespace Langben.Report
                       .Where(w => (w.Name == "option" && w.Attributes["selected"] != null))
                       .Select(s => s.Attributes["value"].Value).FirstOrDefault();
                         string node = string.Empty;
-                        if (string.IsNullOrWhiteSpace(nodes))
+                        if (null != (nodes))
                         {
                             mydata.value = b.ChildNodes
                    .Where(w => (w.Name == "option"))
@@ -466,7 +466,7 @@ namespace Langben.Report
                       .Where(w => (w.Name == "option" && w.Attributes["selected"] != null))
                       .Select(s => s.Attributes["value"].Value).FirstOrDefault();
                         string node = string.Empty;
-                        if (string.IsNullOrWhiteSpace(nodes))
+                        if (null != (nodes))
                         {
                             mydata.value = b.ChildNodes
                    .Where(w => (w.Name == "option"))
@@ -528,7 +528,7 @@ namespace Langben.Report
                       .Where(w => (w.Name == "option" && w.Attributes["selected"] != null))
                       .Select(s => s.Attributes["value"].Value).FirstOrDefault();
                         string node = string.Empty;
-                        if (string.IsNullOrWhiteSpace(nodes))
+                        if (null != (nodes))
                         {
                             mydata.value = b.ChildNodes
                    .Where(w => (w.Name == "option"))
