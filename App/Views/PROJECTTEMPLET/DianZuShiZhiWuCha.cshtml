@@ -56,7 +56,7 @@
             </select>
         </td>
 
-        @*<td rowspan="1" align="center" width="100">
+         <td rowspan="1" align="center" width="100">
             <input class="my-textbox input-width" value="" id="OUTPUTVALUE_t_1_1" name="OUTPUTVALUE" onblur="blurXianShiZhi(this)" type="text">
         </td>
         <td rowspan="1" align="center" width="100">
@@ -75,11 +75,11 @@
             <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
             <input name="BuQueDingDuZhi" id="BuQueDingDuZhi_UNCERTAINTYDEGREE_t_1_1" value="" type="hidden">
             <input name="BuQueDingDuLuJing" id="BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_1" value="" type="hidden">
-            <a href="#" name="btnBuQueDing" class="easyui-linkbutton l-btn l-btn-small l-btn-plain" data-options="plain:true,iconCls:'icon-save'" onclick="showModal('BuQueDingDuZhi_UNCERTAINTYDEGREE_t_1_1&amp;BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_1^BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_1^UNCERTAINTYDEGREE_t_1_1', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=UNCERTAINTYDEGREE_t_1_1&amp;RuleID=126-1995_2_6_1');" group="" id="">
-                <span class="l-btn-left l-btn-icon-left"><span class="l-btn-text">计算不确定度</span><span class="l-btn-icon icon-save">&nbsp;</span></span>
+            <a href="#" name="btnBuQueDing"  onclick="showModal('BuQueDingDuZhi_UNCERTAINTYDEGREE_t_1_1&amp;BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_1^BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_1^UNCERTAINTYDEGREE_t_1_1', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=UNCERTAINTYDEGREE_t_1_1&amp;RuleID=126-1995_2_6_1');" group="" id="">
+                计算 
             </a>
            
-        </td>*@
+        </td>
     </tr>
     <!--插入行的位置-->
 </tbody>
@@ -88,7 +88,7 @@
     <!--表尾-->
     <tr>
         <td colspan="7">
-            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+            <input type="hidden" id="hideLiangChengShuLiang" value="1" /> <!--默认量程是0-->
             <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
 
         </td>
