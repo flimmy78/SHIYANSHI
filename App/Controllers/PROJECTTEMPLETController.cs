@@ -383,6 +383,13 @@ namespace Langben.App.Controllers
                 }
                 else
                 {
+                    PREPARE_SCHEME pEntity = new DAL.PREPARE_SCHEME();
+                    IBLL.IPREPARE_SCHEMEBLL pBLL = new BLL.PREPARE_SCHEMEBLL();
+                    pEntity = pBLL.GetById(PREPARE_SCHEMEID);
+                    if(pEntity!=null)
+                    {
+                        SCHEMEID = pEntity.SCHEMEID;
+                    }
                     //方案
                     DAL.PROJECTTEMPLET entity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
                     if (entity != null)
