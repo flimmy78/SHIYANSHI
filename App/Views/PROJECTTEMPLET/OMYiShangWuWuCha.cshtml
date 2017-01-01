@@ -10,19 +10,9 @@
     <tr>
         <th colspan="3" align="center">被测电阻</th>
         <th colspan="3" align="center">二等标准电阻</th>
-        <th width="90" rowspan="2" align="center">
-            正向测量<br>
-            δx1(×10-6)
-        </th>
-        <th width="90" rowspan="2" align="center">
-            反向测量<br>
-            δx2(×10-6)
-        </th>
-        <th width="90" rowspan="2" align="center">
-            测量平均值<br>
-            δx（×10-6）
-        </th>
-        <th width="90" rowspan="2" align="center">实际值<br>(Ω)</th>
+        <th width="90" rowspan="2" align="center">A<sub>x</sub>(V)</th>
+        <th width="90" rowspan="2" align="center">A<sub>n</sub>(V)</th>
+        <th width="90" rowspan="2" align="center">实际值R<sub>x</sub><br>(Ω)</th>
         <th width="90" rowspan="2" align="center">检定电流</th>
         <th rowspan="2" align="center">校准结果的不确定度<br>U(k=<select class="my-combobox" name="K" id="K_t_1_1">
     <option value="2">2</option>
@@ -36,8 +26,9 @@
         <th width="90" align="center">编号</th>
         <th width="90" align="center">标称值（Ω）</th>
         <th width="90" align="center">编号</th>
-        <th width="90" align="center">δ<sub>n</sub>(×10-6)</th>
+        <th width="90" align="center">R<sub>n</sub>(Ω)</th>
     </tr>
+    
     
 </thead>
 
@@ -99,8 +90,7 @@
                 }
 
                 //需要合并的列
-
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", ""));
+                 
 
                 htmlString.push(SetTDHtml(rowspan, "WE", HangHaoID, rowidx, "", ""));
                 htmlString.push(SetTDHtml(rowspan, "TYEW", HangHaoID, rowidx, "", ""));

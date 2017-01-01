@@ -1001,6 +1001,8 @@
     <Content Include="Views\PREPARE_SCHEME\Testxml.cshtml" />
     <Content Include="Views\PREPARE_SCHEME\TestxmlDistinct.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\DanQiaoJiBenLiangcheng.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\OMYiXiaBiaoZhunDianZu.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\OMYiShangWuWuCha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
