@@ -3022,7 +3022,7 @@
 					<ColIndex>5</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
-					<IsHideRowNull>N</IsHideRowNull>
+					<IsHideRowNull>Y</IsHideRowNull>
 				</Cell>
 				<Cell>
 					<Code>RELATIVEERROR2</Code>
