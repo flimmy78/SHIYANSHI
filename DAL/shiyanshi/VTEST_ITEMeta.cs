@@ -64,6 +64,10 @@ namespace Langben.DAL
             [ScaffoldColumn(true)]
             [Display(Name = "排序", Order = 15)]
             public object SORT { get; set; }
+
+            [ScaffoldColumn(true)]
+            [Display(Name = "检测项父类ID", Order = 15)]
+            public object PARENTID { get; set; }
     }
 }
 

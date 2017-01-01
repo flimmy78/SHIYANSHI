@@ -30,5 +30,6 @@ namespace Langben.DAL
         public string ISCOMPLETE { get; set; }
         public string SCHEME_RULEID { get; set; }
         public Nullable<decimal> SORT { get; set; }
+        public string PARENTID { get; set; }
     }
 }

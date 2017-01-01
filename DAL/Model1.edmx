@@ -1662,6 +1662,7 @@
           <Property Name="ISCOMPLETE" Type="varchar2" MaxLength="4" />
           <Property Name="SCHEME_RULEID" Type="varchar2" MaxLength="36" />
           <Property Name="SORT" Type="number" Precision="38" Scale="0" />
+          <Property Name="PARENTID" Type="varchar2" MaxLength="36" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VXIANGQING”中的列“REPORTNUMBER”。
@@ -2867,7 +2868,8 @@ FROM "TENGFEI"."VSHIYANSHIGONGZUOLIANG" "VSHIYANSHIGONGZUOLIANG"</DefiningQuery>
 "VTEST_ITE"."REMARK" AS "REMARK", 
 "VTEST_ITE"."ISCOMPLETE" AS "ISCOMPLETE", 
 "VTEST_ITE"."SCHEME_RULEID" AS "SCHEME_RULEID", 
-"VTEST_ITE"."SORT" AS "SORT"
+"VTEST_ITE"."SORT" AS "SORT", 
+"VTEST_ITE"."PARENTID" AS "PARENTID"
 FROM "TENGFEI"."VTEST_ITE" "VTEST_ITE"</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VXIANGQING" EntityType="Self.VXIANGQING" store:Type="Views" store:Schema="TENGFEI">
@@ -3285,7 +3287,6 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySet Name="VSHENHE" EntityType="Model.VSHENHE" />
           <EntitySet Name="VSHENPI" EntityType="Model.VSHENPI" />
           <EntitySet Name="VSHIYANSHIGONGZUOLIANG" EntityType="Model.VSHIYANSHIGONGZUOLIANG" />
-          <EntitySet Name="VTEST_ITE" EntityType="Model.VTEST_ITE" />
           <EntitySet Name="VZHENGSHULEIBEITONGJIFENXI" EntityType="Model.VZHENGSHULEIBEITONGJIFENXI" />
           <EntitySet Name="VZHENGSHUXINXICHAXUN" EntityType="Model.VZHENGSHUXINXICHAXUN" />
           <AssociationSet Name="FK_AC_VOLTA_REFERENCE_OVERALL_" Association="Model.FK_AC_VOLTA_REFERENCE_OVERALL_">
@@ -3529,6 +3530,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
             <End Role="SysRole" EntitySet="SysRole" />
           </AssociationSet>
           <EntitySet Name="VXIANGQING" EntityType="Model.VXIANGQING" />
+          <EntitySet Name="VTEST_ITE" EntityType="Model.VTEST_ITE" />
           </EntityContainer>
         <ComplexType Name="SHIYANSHIGONGZUO_Result">
           <Property Type="String" Name="ID" Nullable="false" MaxLength="20" />
@@ -5253,28 +5255,6 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="BUHEGE" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="CHAOQI" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
-        <EntityType Name="VTEST_ITE">
-          <Key>
-            <PropertyRef Name="PREPARE_SCHEMEID" />
-            <PropertyRef Name="RID" />
-          </Key>
-          <Property Name="RID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="ROW_FLAG" Type="String" MaxLength="73" FixedLength="false" Unicode="false" />
-          <Property Name="PREPARE_SCHEMEID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="RULEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="INPUTSTATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="NAMEOTHER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="SCHEME_MENU" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="ID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="CONCLUSION" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="HTMLVALUE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="REMARK" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="ISCOMPLETE" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="SCHEME_RULEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="SORT" Type="Decimal" Precision="38" Scale="0" />
-        </EntityType>
         <EntityType Name="VZHENGSHULEIBEITONGJIFENXI">
           <Key>
             <PropertyRef Name="ID" />
@@ -6013,6 +5993,29 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="RECEIVEINS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CREATETIME" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="VTEST_ITE">
+          <Key>
+            <PropertyRef Name="PREPARE_SCHEMEID" />
+            <PropertyRef Name="RID" />
+          </Key>
+          <Property Name="RID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ROW_FLAG" Type="String" MaxLength="73" FixedLength="false" Unicode="false" />
+          <Property Name="PREPARE_SCHEMEID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="RULEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="INPUTSTATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NAMEOTHER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SCHEME_MENU" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="CONCLUSION" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="HTMLVALUE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="REMARK" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="ISCOMPLETE" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="SCHEME_RULEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="SORT" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PARENTID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -7713,28 +7716,6 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VTEST_ITE">
-            <EntityTypeMapping TypeName="Model.VTEST_ITE">
-              <MappingFragment StoreEntitySet="VTEST_ITE">
-                <ScalarProperty Name="SORT" ColumnName="SORT" />
-                <ScalarProperty Name="SCHEME_RULEID" ColumnName="SCHEME_RULEID" />
-                <ScalarProperty Name="ISCOMPLETE" ColumnName="ISCOMPLETE" />
-                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
-                <ScalarProperty Name="HTMLVALUE" ColumnName="HTMLVALUE" />
-                <ScalarProperty Name="CONCLUSION" ColumnName="CONCLUSION" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="SCHEME_MENU" ColumnName="SCHEME_MENU" />
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
-                <ScalarProperty Name="NAMEOTHER" ColumnName="NAMEOTHER" />
-                <ScalarProperty Name="INPUTSTATE" ColumnName="INPUTSTATE" />
-                <ScalarProperty Name="RULEID" ColumnName="RULEID" />
-                <ScalarProperty Name="SCHEMEID" ColumnName="SCHEMEID" />
-                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
-                <ScalarProperty Name="ROW_FLAG" ColumnName="ROW_FLAG" />
-                <ScalarProperty Name="RID" ColumnName="RID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VZHENGSHULEIBEITONGJIFENXI">
             <EntityTypeMapping TypeName="Model.VZHENGSHULEIBEITONGJIFENXI">
               <MappingFragment StoreEntitySet="VZHENGSHULEIBEITONGJIFENXI">
@@ -7834,6 +7815,29 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
                 <ScalarProperty Name="ORDER_TASK_INFORMATIONID" ColumnName="ORDER_TASK_INFORMATIONID" />
                 <ScalarProperty Name="DD" ColumnName="DD" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VTEST_ITE">
+            <EntityTypeMapping TypeName="Model.VTEST_ITE">
+              <MappingFragment StoreEntitySet="VTEST_ITE">
+                <ScalarProperty Name="PARENTID" ColumnName="PARENTID" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="SCHEME_RULEID" ColumnName="SCHEME_RULEID" />
+                <ScalarProperty Name="ISCOMPLETE" ColumnName="ISCOMPLETE" />
+                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+                <ScalarProperty Name="HTMLVALUE" ColumnName="HTMLVALUE" />
+                <ScalarProperty Name="CONCLUSION" ColumnName="CONCLUSION" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SCHEME_MENU" ColumnName="SCHEME_MENU" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="NAMEOTHER" ColumnName="NAMEOTHER" />
+                <ScalarProperty Name="INPUTSTATE" ColumnName="INPUTSTATE" />
+                <ScalarProperty Name="RULEID" ColumnName="RULEID" />
+                <ScalarProperty Name="SCHEMEID" ColumnName="SCHEMEID" />
+                <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
+                <ScalarProperty Name="ROW_FLAG" ColumnName="ROW_FLAG" />
+                <ScalarProperty Name="RID" ColumnName="RID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1861,6 +1861,10 @@ namespace Langben.Report
                 QUALIFIED_UNQUALIFIED_TEST_ITE iEntity = null;
                 foreach (VTEST_ITE iVTEST_ITE in vList)
                 {
+                    if (string.IsNullOrWhiteSpace(iVTEST_ITE.PARENTID))//一级检测项不打印
+                    {
+                        continue;
+                    }
                     if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE != null && entity.QUALIFIED_UNQUALIFIED_TEST_ITE.Count > 0 && entity.QUALIFIED_UNQUALIFIED_TEST_ITE.FirstOrDefault(p => p.RULEID == iVTEST_ITE.RULEID) != null)
                     {
                         iEntity = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.FirstOrDefault(p => p.RULEID == iVTEST_ITE.RULEID);
@@ -1897,6 +1901,10 @@ namespace Langben.Report
                     {
                         HideRow(sheet_Destination, RowIndex - 2, 2);
                     }
+                    else
+                    {
+                        i++;
+                    }
 
                     #endregion
 
@@ -1905,8 +1913,9 @@ namespace Langben.Report
                     //if (TableTemplateDic != null && TableTemplateDic.ContainsKey(iEntity.RULEID))
                     //{
                     //    TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
-                    if (iEntity != null && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
+                    if (iEntity != null  &&  allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
+                        //&&iEntity.RULEID== "126-1995_2_4_1"
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
                         //解析html表格数据    
 
@@ -1941,7 +1950,7 @@ namespace Langben.Report
                     SameRuleName = iVTEST_ITE.NAME;
 
                     #endregion
-                    i++;
+                    //i++;
 
                 }
             }
@@ -2280,11 +2289,24 @@ namespace Langben.Report
             string SpecialStr = "";
             //有动态数据
             if (speStartIndex>=0 && DongTaiShuJuList!=null && DongTaiShuJuList.Count>0 && rowInfoList!=null && rowInfoList.Count>0 && 
-                rowInfoList.FirstOrDefault().Cells!=null && rowInfoList.FirstOrDefault().Cells.FirstOrDefault(p=>p.Code==DongTaiShuJuList.FirstOrDefault().name)!=null )
+                rowInfoList.FirstOrDefault().Cells!=null )
             {
-                value = string.Format(sourceCell.StringCellValue, DongTaiShuJuList.FirstOrDefault().value).Trim();
-                SpecialStr = DongTaiShuJuList.FirstOrDefault().value;
-                DongTaiShuJuList.RemoveAt(0);
+                while(DongTaiShuJuList != null && DongTaiShuJuList.Count > 0 && rowInfoList.FirstOrDefault().Cells.FirstOrDefault(p => p.Code == DongTaiShuJuList.FirstOrDefault().name) ==null )
+                {
+                    DongTaiShuJuList.RemoveAt(0);
+                }
+                if (DongTaiShuJuList != null && DongTaiShuJuList.Count > 0)
+                {
+                    value = string.Format(sourceCell.StringCellValue, DongTaiShuJuList.FirstOrDefault().value).Trim();
+                    SpecialStr = DongTaiShuJuList.FirstOrDefault().value;
+                    DongTaiShuJuList.RemoveAt(0);
+                }
+                else
+                {
+                    value = string.Format(sourceCell.StringCellValue, "").Trim();
+                    speStartIndex = 0;
+                    SpecialStr = value;
+                }
             }
             //无动态数据
             else
