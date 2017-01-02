@@ -1913,7 +1913,7 @@ namespace Langben.Report
                     //if (TableTemplateDic != null && TableTemplateDic.ContainsKey(iEntity.RULEID))
                     //{
                     //    TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
-                    if (iEntity != null  &&  allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
+                    if (iEntity != null && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
                         //&&iEntity.RULEID== "126-1995_2_4_1"
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
@@ -3029,6 +3029,68 @@ namespace Langben.Report
             Dictionary<int, List<MYDataHead>> headDic = AnalyticHTML.GetHeadData(doc);//表头
             Dictionary<int, List<MYDataHead>> footDic = AnalyticHTML.GetFootData(doc);//表尾
 
+            #region 处理下一行数据为空需要单元格合并数据
+            if (temp!=null && temp.Cells!=null && temp.Cells.Count>0 && dataDic != null && dataDic.Count > 0)
+            {
+                List<Cell> cList = temp.Cells.FindAll(p => p.IsMergeNullValue == "Y");
+                if(cList!=null && cList.Count>0)
+                {
+                    foreach(Cell c in cList)
+                    {
+                        foreach (DataValue d in dataDic.Values)
+                        {
+                            if(d!=null && d.Data!=null && d.Data.Count>0)
+                            {
+                                List<MYData> cData= d.Data.FindAll(p => p.name == c.Code);                               
+                                int mergedRowNum = 0;
+                                MYData mdd = null;
+
+                                List<MYData> removeList = new List<MYData>();
+                                int indexCount = 1;
+                                if (cData!=null && cData.Count>0)
+                                {
+                                    foreach(MYData md in cData)
+                                    {
+                                        if (indexCount == 1)
+                                        {
+                                            mdd = md;
+                                            mergedRowNum = md.mergedRowNum;
+                                        }
+                                        else
+                                        {
+                                            if (md != null && !string.IsNullOrWhiteSpace(md.value))
+                                            {
+                                                mergedRowNum = md.mergedRowNum;
+                                                if (mdd != null)
+                                                {
+                                                    mdd.mergedRowNum = mergedRowNum;
+                                                }
+                                                mdd = md;
+                                            }
+                                            else if (md != null && string.IsNullOrWhiteSpace(md.value))
+                                            {
+                                                mergedRowNum = mergedRowNum + md.mergedRowNum;
+                                                removeList.Add(md);
+                                            }
+                                        }
+                                        if(indexCount== cData.Count)
+                                        {
+                                            mdd.mergedRowNum = mergedRowNum;
+                                        }
+                                        indexCount++;
+                                    }
+                                    foreach(MYData md in removeList)
+                                    {
+                                        d.Data.Remove(md);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+               
+            }
+            #endregion 
 
             int rowIndex = rowIndex_Destination;
 
