@@ -367,7 +367,18 @@ namespace Langben.Report
             get { return _IsHideRowNull; }
             set { _IsHideRowNull = value; }
         }
-        
+
+        private string _IsMergeNullValue = "N";
+        /// <summary>
+        /// 下一行数据为空是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）
+        /// </summary>
+        [XmlElement("IsMergeNullValue")]
+        public string IsMergeNullValue
+        {
+            get { return _IsMergeNullValue; }
+            set { _IsMergeNullValue = value; }
+        }
+
 
     }
 }
