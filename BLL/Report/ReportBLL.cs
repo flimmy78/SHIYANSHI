@@ -1913,7 +1913,7 @@ namespace Langben.Report
                     //if (TableTemplateDic != null && TableTemplateDic.ContainsKey(iEntity.RULEID))
                     //{
                     //    TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
-                    if (iEntity != null && iEntity.RULEID== "603-2006_3_2_1" &&  allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
+                    if (iEntity != null && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
                         //&&iEntity.RULEID== "126-1995_2_4_1"
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
