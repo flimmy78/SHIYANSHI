@@ -233,7 +233,8 @@
 
                         </td>
 
-                        <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="READVALUE_t_3_1" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center" width="100">
+                         <input class="my-textbox input-width" value="" id="READVALUE_t_3_1" name="READVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_3_1" name="ACTUALVALUE" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_3_1" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text"></td>
                         <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_3_1" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
@@ -305,15 +306,15 @@
                     //需要合并的列
                 }
                 //需要合并的列
-
+                //引用误差=Round(（实际输出值-标准输出值）/（输出范围的最大值-输出范围的最小值）*100/等级,1)*等级
                 //测量点 需要下拉框
                 htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120", unit));
                 //二次输入标准值
                 htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100"));
                 //标准输出值
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100", "", "ACTUALVALUE"));
                 //实际输出值
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "classstyle100", "", "SHIJISHUCHUZHI"));
                 //引用误差
                 htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "classstyle100"));
                 //校准结果的不确定度 U(K =
@@ -327,10 +328,24 @@
             //$('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find(".myliangcheng_" + LiangChengShuLiang).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
+       
+        //离开事件，用于计算
+        function SHIJISHUCHUZHI(obj) {
+         
+            yinYongWuCha(obj, "SHIJISHUCHUZHI", "ACTUALVALUE", "shurufanweijian", "shurufanwei", "DengJi", "RELATIVEERROR");
+           
 
+        }     //离开事件，用于计算
+        function ACTUALVALUE(obj) {
+            
+            yinYongWuCha(obj, "SHIJISHUCHUZHI", "ACTUALVALUE",  "shurufanweijian", "shurufanwei", "DengJi", "RELATIVEERROR");
+
+
+        } 
         //离开事件，用于计算
         function blurValue(obj) {
-            //  LianDongShiJiZhi(obj);
+
+            //   LianDongShiJiZhi(obj);
         }
 
 

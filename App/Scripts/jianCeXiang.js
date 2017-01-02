@@ -492,7 +492,7 @@ function BtnInit() {
         ////$("#btnSave_ITE").show();
         //$("#btnReset_ITE").show();
         $("a").each(function () {
-            if (this.id != "btnSave" && this.name!="btnBuQueDing") {
+            if (this.id != "btnSave" && this.name != "btnBuQueDing") {
                 $(this).hide();
             }
             else {
@@ -661,21 +661,6 @@ function SetAllControlHtml() {
 function JS1(thi) {
 }
 
-function ddd(str) {
-    var r = /^([0-9]+\.[0-9]{1}[0|2|4|6|8])5$/g;
-    var r1 = /^([0-9]+\.[0-9]{1}[1|3|5|7|9])5$/g;
-    var r2 = /^([0-9]+\.[0-9]{2})5[0]?[1-9]*/g;
-    if (r.test(str)) {
-        str = str.replace(r, "$1");
-    } else if (r1.test(str)) {
-        str = str.replace(r1, "$16");
-    } else if (r2.test(str)) {
-        str = str.replace(r2, "$16");
-    }
-    str = parseFloat(str).toFixed(2);
-    return str;
-}
-
 
 function PointFloat(src, pos) {
 
@@ -806,7 +791,7 @@ function zeroFloat(src, pos) {
     return numeral(src).format('0.' + zero);
 
 }
- 
+
 //相对误差
 //obj 自身对象
 //first 第一列的值，做分母第一位
@@ -826,7 +811,7 @@ function xiangDuiWuCha(obj, first, second, gold) {
     var secondData = $(obj).parent().parent().find("#" + second).val();
     if (firstData != "undefined" && secondData != "undefined" && firstData != "" && secondData != "" && secondData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-        var jianfa = (accSub(firstData , secondData) / firstData * 100);
+        var jianfa = (accSub(firstData, secondData) / firstData * 100);
         var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
 
 
@@ -883,4 +868,45 @@ function uonchange(thi, className) {
         $(this).find("option[value='" + checkvalue + "']").attr("selected", true);
 
     });
+}
+//相对误差
+//obj 自身对象
+//first 第一列的值，做分母第一位
+//second 第二列的值，做分子
+//gold 误差列
+function yinYongWuCha(obj, first, second, third, fourth, fifth, gold) {
+
+
+    //重新计算当前行
+    var name = $(obj).attr("name");
+    var id = $(obj).attr("id");
+    id = id.substring(id.indexOf('_'));
+    var tongdao = id.split('_')[1];
+
+    first = first + id;//改动的地方，参与计算的列的name值
+    second = second + id;//改动的地方，参与计算的列的name值
+    third = third + "_" + tongdao + "_1_1";
+    fourth = fourth + "_" + tongdao + "_1_1";
+    fifth = fifth + "_" + tongdao + "_1_1";
+
+    gold = gold + id;//改动的地方，误差的列的name值
+
+    var firstData = $("#" + first).val();
+    var secondData = $("#" + second).val();
+    var thirdData = $("#" + third).val();
+    var fourthData = $("#" + fourth).val();
+    var fifthData = $("#" + fifth).val();
+    if (firstData != "undefined" && secondData != "undefined" && thirdData != "undefined" && fourthData != "undefined" && fifthData != "undefined"
+        && firstData != "" && secondData != "" && thirdData != "" && fourthData != "" && fifthData != "") {
+        var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+        //引用误差=Round(（实际输出值-标准输出值）/（输出范围的最大值-输出范围的最小值）*100/等级,1)*等级
+       
+        var jianfa = ((accSub(firstData, secondData) / accSub(thirdData, fourthData) * 100 / fifthData).toFixed(1)) * fifthData;
+        var data = zeroFloat(jianfa, txtPointLen);
+
+
+        $(obj).parent().parent().find("#" + gold).val(data);
+    }
+
+
 }
