@@ -80,7 +80,7 @@
 					<Code>RELATIVEERROR</Code>
 					<ColIndex>8</ColIndex>
 					<ColCount>0</ColCount>
-					<IsMergeSameValue>N</IsMergeSameValue>
+					<IsMergeSameValue>Y</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 				</Cell>
 				<Cell>
@@ -1249,14 +1249,14 @@
 					<ColIndex>5</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
-					<IsHideRowNull>N</IsHideRowNull>
+					<IsHideRowNull>Y</IsHideRowNull>
 				</Cell>
 				<Cell>
 					<Code>UNCERTAINTYDEGREE</Code>
 					<ColIndex>6</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
-					<IsHideRowNull>Y</IsHideRowNull>
+					<IsHideRowNull>N</IsHideRowNull>
 				</Cell>
 			</CellList>
 			<SecondTitleList/>
@@ -1360,6 +1360,14 @@
 			<RemarkRowIndex>35</RemarkRowIndex>
 			<ConclusionRowIndex>36</ConclusionRowIndex>
 			<CellList>
+        <Cell>
+          <!--字段代码与模板中设置的字段保持一致-->
+          <Code/>
+          <ColCount>0</ColCount>
+          <!--相同值是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）-->
+          <IsMergeSameValue>Y</IsMergeSameValue>
+          <IsHideRowNull>N</IsHideRowNull>
+        </Cell>
 				<Cell>
 					<Code>DengJi</Code>
 					<ColIndex>-1</ColIndex>
@@ -1367,6 +1375,14 @@
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 				</Cell>
+        <Cell>
+          <!--字段代码与模板中设置的字段保持一致-->
+          <Code/>
+          <ColCount>0</ColCount>
+          <!--相同值是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）-->
+          <IsMergeSameValue>Y</IsMergeSameValue>
+          <IsHideRowNull>N</IsHideRowNull>
+        </Cell>
 				<Cell>
 					<Code>OUTPUTVALUE</Code>
 					<ColIndex>0</ColIndex>
@@ -1374,6 +1390,14 @@
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 				</Cell>
+        <Cell>
+          <!--字段代码与模板中设置的字段保持一致-->
+          <Code/>
+          <ColCount>0</ColCount>
+          <!--相同值是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）-->
+          <IsMergeSameValue>N</IsMergeSameValue>
+          <IsHideRowNull>N</IsHideRowNull>
+        </Cell>
 				<Cell>
 					<Code>ZHONGJIANZHI</Code>
 					<ColIndex>1</ColIndex>
@@ -1407,7 +1431,7 @@
 					<ColIndex>5</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
-					<IsHideRowNull>N</IsHideRowNull>
+					<IsHideRowNull>Y</IsHideRowNull>
 				</Cell>
 				<Cell>
 					<Code>UNCERTAINTYDEGREE</Code>
@@ -1420,16 +1444,10 @@
 			<SecondTitleList/>
 			<TableTitleList>
 				<RowInfo>
-					<RowNumber>3</RowNumber>
+					<RowNumber>2</RowNumber>
 					<RowIndex>32</RowIndex>
 					<CellList>
-						<Cell>
-							<Code>BianSongQiTongDao</Code>
-							<ColIndex>-1</ColIndex>
-							<ColCount>0</ColCount>
-							<IsMergeSameValue>N</IsMergeSameValue>
-							<IsHideRowNull>N</IsHideRowNull>
-						</Cell>
+
 						<Cell>
 							<Code>shurufanwei</Code>
 							<ColIndex>0</ColIndex>
