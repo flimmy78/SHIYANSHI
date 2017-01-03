@@ -255,9 +255,9 @@
                 //二次输入标准值
                 htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100", unit));
                 //标准输出值
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100", "", "ACTUALVALUE"));
                 //实际输出值
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "classstyle100", "", "SHIJISHUCHUZHI"));
                 //引用误差
                 htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "classstyle100"));
                 //校准结果的不确定度 U(K =
@@ -272,6 +272,18 @@
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
 
+        //离开事件，用于计算
+        function SHIJISHUCHUZHI(obj) {
+
+            yinYongWuCha(obj, "SHIJISHUCHUZHI", "ACTUALVALUE", "dianmyya", "dianmyliu", "DengJi", "RELATIVEERROR");
+
+
+        }     //离开事件，用于计算
+        function ACTUALVALUE(obj) {
+
+            yinYongWuCha(obj, "SHIJISHUCHUZHI", "ACTUALVALUE", "dianmyya", "dianmyliu", "DengJi", "RELATIVEERROR");
+
+        }
         //离开事件，用于计算
         function blurValue(obj) {
             //    LianDongShiJiZhi(obj);

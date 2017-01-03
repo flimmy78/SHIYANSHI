@@ -952,7 +952,7 @@ namespace Langben.Report
             if (entity.VALIDITYEND.HasValue)//有效期改为直接取数据库值
             {
                 sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.VALIDITYEND.Value.ToString("yyyy年MM月dd日"));
-               
+
             }
             else
             {
@@ -1055,12 +1055,15 @@ namespace Langben.Report
         }
         public bool Testxml(string ID, out string Message)
         {
-            var dsaf = 1;
+
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             string errors = string.Empty;
             var m_BLL = new SCHEMEBLL();
             var entity = m_BLL.GetById(ID);
             TableTemplates allTableTemplates = GetTableTemplates();
+            var ruleids = (from f in allTableTemplates.TableTemplateList
+
+                           select f.RuleID);
             if (entity != null)
             {
 
@@ -1078,17 +1081,17 @@ namespace Langben.Report
                             //测试获取数据的时候使用
                             var data1 = AnalyticHTML.GetData(doc);
                             var data2 = AnalyticHTML.GetHeadData(doc);
-
-                            string s = CreatXML.Create(doc, iEntity.RULEID);
-                            if (string.IsNullOrWhiteSpace(s))
+                            if (!ruleids.Contains(iEntity.RULEID))
                             {
-                                dsaf++;
+                                string s = CreatXML.Create(doc, iEntity.RULEID);
+
+                                errors += s;
                             }
-                            errors += s;
+
                         }
                         else
                         {
-                            dsaf++;
+
                         }
 
                     }
@@ -1112,7 +1115,7 @@ namespace Langben.Report
                 var TableTemplate = (from f in allTableTemplates.TableTemplateList
                                      where f.RuleID == item.RuleID
                                      select f).FirstOrDefault();
-               
+
                 item.DataRowIndex = TableTemplate.DataRowIndex + 2;//数据模板开始行号
                 item.RemarkRowIndex = TableTemplate.RemarkRowIndex + 2;//备注模板行号
                 item.ConclusionRowIndex = TableTemplate.ConclusionRowIndex + 2;//结论模板行号
@@ -1281,7 +1284,7 @@ namespace Langben.Report
 
                                         while (buQueDingDu.pingding != null && buQueDingDu.pingding.Count > 0)
                                         {
-                                            Dictionary<string, CellRangeAddress> cellAddressList = CopyRow_1(sheet_Source, sheet_Destination, 1, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);                                           
+                                            Dictionary<string, CellRangeAddress> cellAddressList = CopyRow_1(sheet_Source, sheet_Destination, 1, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
                                             int cIndex = 1;
                                             if (cellAddressList != null && cellAddressList.Count > 0)
                                             {
@@ -1305,9 +1308,9 @@ namespace Langben.Report
                                                 }
                                                 pingdingIndex++;
                                             }
-                                            rowIndex_Destination++;                                            
+                                            rowIndex_Destination++;
 
-                                        } 
+                                        }
                                     }
                                     #endregion
 
@@ -1408,7 +1411,7 @@ namespace Langben.Report
                 }
                 #endregion
             }
-           
+
         }
         /// <summary>
         /// 设置封皮信息
@@ -1835,9 +1838,9 @@ namespace Langben.Report
         {
             List<VTEST_ITE> vList = null;
             if (entity != null)
-            {                
+            {
                 IBLL.IVTEST_ITEBLL vBLL = new VTEST_ITEBLL();
-                vList = vBLL.GetByPREPARE_SCHEMEID(entity.ID);               
+                vList = vBLL.GetByPREPARE_SCHEMEID(entity.ID);
             }
             int RowIndex = 1;
             int JWTemplateIndex = 0;//规程标题获取源格式行   
@@ -1847,7 +1850,7 @@ namespace Langben.Report
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
             #region 检测项目            
-            if (vList != null &&  vList.Count > 0)
+            if (vList != null && vList.Count > 0)
             {
 
                 TableTemplates allTableTemplates = GetTableTemplates(type);
@@ -1876,7 +1879,7 @@ namespace Langben.Report
 
                     #region 检测项目标题     
                     //相同检测项只展示一个标题      
-                        
+
                     CopyRow(sheet_Source, sheet_Destination, ruleTitleTemplateIndex, RowIndex, 1, false);
                     string celStr = i.ToString() + "、";
 
@@ -1884,17 +1887,17 @@ namespace Langben.Report
                     {
                         celStr = celStr + iVTEST_ITE.NAME.Trim() + "：";
                     }
-                    if (iEntity!=null && iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
+                    if (iEntity != null && iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
                     {
                         celStr = celStr + iEntity.CONCLUSION.Trim();
                     }
-                    else if(iEntity==null)
+                    else if (iEntity == null)
                     {
                         celStr = celStr + "/";
                     }
                     sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue(celStr);
                     RowIndex++;
-                    
+
                     //相同检测项只展示一个标题   
                     if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
 
@@ -1909,18 +1912,18 @@ namespace Langben.Report
                     #endregion
 
                     #region 检测项目表格                    
-                                        
+
                     //if (TableTemplateDic != null && TableTemplateDic.ContainsKey(iEntity.RULEID))
                     //{
                     //    TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
-                    if (iEntity != null  &&  allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
+                    if (iEntity != null && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
                         //&&iEntity.RULEID== "126-1995_2_4_1"
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
                         //解析html表格数据    
 
                         //RowIndex = paserData(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);
-                        RowIndex = paserData_1(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);                        
+                        RowIndex = paserData_1(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);
 
 
                         //表格注
@@ -2282,16 +2285,16 @@ namespace Langben.Report
             if (sourceCell == null)
             {
                 return new HSSFRichTextString("");
-            }                
+            }
 
             int speStartIndex = sourceCell.StringCellValue.IndexOf("{0}");//动态字符位置
             string value = "";
             string SpecialStr = "";
             //有动态数据
-            if (speStartIndex>=0 && DongTaiShuJuList!=null && DongTaiShuJuList.Count>0 && rowInfoList!=null && rowInfoList.Count>0 && 
-                rowInfoList.FirstOrDefault().Cells!=null )
+            if (speStartIndex >= 0 && DongTaiShuJuList != null && DongTaiShuJuList.Count > 0 && rowInfoList != null && rowInfoList.Count > 0 &&
+                rowInfoList.FirstOrDefault().Cells != null)
             {
-                while(DongTaiShuJuList != null && DongTaiShuJuList.Count > 0 && rowInfoList.FirstOrDefault().Cells.FirstOrDefault(p => p.Code == DongTaiShuJuList.FirstOrDefault().name) ==null )
+                while (DongTaiShuJuList != null && DongTaiShuJuList.Count > 0 && rowInfoList.FirstOrDefault().Cells.FirstOrDefault(p => p.Code == DongTaiShuJuList.FirstOrDefault().name) == null)
                 {
                     DongTaiShuJuList.RemoveAt(0);
                 }
@@ -2382,7 +2385,7 @@ namespace Langben.Report
                     }
                     #endregion
 
-                }               
+                }
                 return result;
             }
 
@@ -3029,6 +3032,68 @@ namespace Langben.Report
             Dictionary<int, List<MYDataHead>> headDic = AnalyticHTML.GetHeadData(doc);//表头
             Dictionary<int, List<MYDataHead>> footDic = AnalyticHTML.GetFootData(doc);//表尾
 
+            #region 处理下一行数据为空需要单元格合并数据
+            if (temp != null && temp.Cells != null && temp.Cells.Count > 0 && dataDic != null && dataDic.Count > 0)
+            {
+                List<Cell> cList = temp.Cells.FindAll(p => p.IsMergeNullValue == "Y");
+                if (cList != null && cList.Count > 0)
+                {
+                    foreach (Cell c in cList)
+                    {
+                        foreach (DataValue d in dataDic.Values)
+                        {
+                            if (d != null && d.Data != null && d.Data.Count > 0)
+                            {
+                                List<MYData> cData = d.Data.FindAll(p => p.name == c.Code);
+                                int mergedRowNum = 0;
+                                MYData mdd = null;
+
+                                List<MYData> removeList = new List<MYData>();
+                                int indexCount = 1;
+                                if (cData != null && cData.Count > 0)
+                                {
+                                    foreach (MYData md in cData)
+                                    {
+                                        if (indexCount == 1)
+                                        {
+                                            mdd = md;
+                                            mergedRowNum = md.mergedRowNum;
+                                        }
+                                        else
+                                        {
+                                            if (md != null && !string.IsNullOrWhiteSpace(md.value))
+                                            {
+                                                mergedRowNum = md.mergedRowNum;
+                                                if (mdd != null)
+                                                {
+                                                    mdd.mergedRowNum = mergedRowNum;
+                                                }
+                                                mdd = md;
+                                            }
+                                            else if (md != null && string.IsNullOrWhiteSpace(md.value))
+                                            {
+                                                mergedRowNum = mergedRowNum + md.mergedRowNum;
+                                                removeList.Add(md);
+                                            }
+                                        }
+                                        if (indexCount == cData.Count)
+                                        {
+                                            mdd.mergedRowNum = mergedRowNum;
+                                        }
+                                        indexCount++;
+                                    }
+                                    foreach (MYData md in removeList)
+                                    {
+                                        d.Data.Remove(md);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            #endregion 
 
             int rowIndex = rowIndex_Destination;
 
@@ -3109,7 +3174,7 @@ namespace Langben.Report
                                 {
                                     HideRow(sheet_Destination, c.FirstRow, 1);
                                 }
-                                else if((value == null || string.IsNullOrWhiteSpace(value.String)))
+                                else if ((value == null || string.IsNullOrWhiteSpace(value.String)))
                                 {
                                     value = new HSSFRichTextString("/");
                                 }
