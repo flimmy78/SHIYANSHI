@@ -574,6 +574,7 @@
     <Content Include="Scripts\numeral.js" />
     <Content Include="Scripts\shine.js" />
     <Content Include="Xml\TableTemplate - 复制%282%29.xml" />
+    <Content Include="Xml\TableTemplate单相.xml" />
     <Content Include="Xml\TableTemplate - 复制.xml" />
     <Content Include="Xml\TableTemplate.xml" />
     <Content Include="Xml\TableTemplate1.xml" />
