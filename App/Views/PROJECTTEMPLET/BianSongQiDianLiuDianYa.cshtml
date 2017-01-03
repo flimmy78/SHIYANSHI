@@ -290,12 +290,17 @@
         //离开事件，用于计算 实际输出值
         function blurShiJiShuChuZhi(obj) {
             //注意多通道
-            $(obj).parents('tr:eq(0)').find('td:eq(4) input').val(YinYongWuCha($(obj).val(), $(obj).parents('tr:eq(0)').find('td:eq(2)').find('input').val()))
+            //$(obj).parents('tr:eq(0)').find('td:eq(4) input').val(YinYongWuCha($(obj).val(), $(obj).parents('tr:eq(0)').find('td:eq(2)').find('input').val()))
+            yinYongWuCha(obj, "SHIJISHUCHUZHI", "ACTUALVALUE", "dianmyya", "dianmyliu", "DengJi", "RELATIVEERROR");
+
         }
         //离开事件，用于计算 标准输出值
         function blurBiaoZhunShuChuZhi(obj) {
             //注意多通道
-            $(obj).parents('tr:eq(0)').find('td:eq(4) input').val(YinYongWuCha($(obj).parents('tr:eq(0)').find('td:eq(3)').find('input').val(),$(obj).val()))
+            //$(obj).parents('tr:eq(0)').find('td:eq(4) input').val(YinYongWuCha($(obj).parents('tr:eq(0)').find('td:eq(3)').find('input').val(), $(obj).val()))
+
+            yinYongWuCha(obj, "SHIJISHUCHUZHI", "ACTUALVALUE", "dianmyya", "dianmyliu", "DengJi", "RELATIVEERROR");
+
         }
         //离开事件，用于计算 二次输入标准值
         function blurErCiShuRuBiaoZhunZhi(obj) {
