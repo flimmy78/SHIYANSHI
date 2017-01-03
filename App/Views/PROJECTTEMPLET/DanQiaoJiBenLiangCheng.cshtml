@@ -195,15 +195,15 @@
                 //测量点
                 htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120"));
                 //二次输入标准值
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurErCiShuRuBiaoZhunZhi'));
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'resetXianShiZhi'));
                 //标准输出值
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurBiaoZhunShuChuZhi'));
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'resetXianShiZhi'));
                 //实际输出值
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurShiJiShuChuZhi'));
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "classstyle100"));
                 //引用误差
-                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "classstyle100", '', 'resetXianShiZhi2'));
                 //校准结果的不确定度 U(K =
-                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, txtVal, "classstyle"));
+                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, txtVal, "classstyle", '', 'resetXianShiZhi2'));
 
                 htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE2", HangHaoID, rowidx, txtVal, "classstyle"));
 
@@ -216,108 +216,17 @@
             //$('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
-        //离开事件，用于计算 额定条件
-        function blurEDingTiaoJiao(obj) {
-            //注意多通道
-            //
+        //计算显示值
+        function resetXianShiZhi(obj) {
+            //重新计算当前行
+            xiangDuiWuCha(obj, "READVALUE", "ACTUALVALUE", "SHIJISHUCHUZHI");
         }
-        //离开事件，用于计算 输出范围最小
-        function blurShuChuFanWeiZuiXiao(obj) {
-            //注意多通道
-
-            RecalculateBiaoZhunShuChu();
-            RecalculateYinYongWuCha();
-        }
-        //离开事件，用于计算 输出范围最大
-        function blurShuChuFanWeiZuiDa(obj) {
-            //注意多通道
-
-            RecalculateBiaoZhunShuChu();
-            RecalculateYinYongWuCha();
-        }
-        //离开事件，用于计算 实际输出值
-        function blurShiJiShuChuZhi(obj) {
-            //注意多通道
-            $(obj).parents('tr:eq(0)').find('td:eq(4) input').val(YinYongWuCha($(obj).val(), $(obj).parents('tr:eq(0)').find('td:eq(2)').find('input').val()))
-        }
-        //离开事件，用于计算 标准输出值
-        function blurBiaoZhunShuChuZhi(obj) {
-            //注意多通道
-            $(obj).parents('tr:eq(0)').find('td:eq(4) input').val(YinYongWuCha($(obj).parents('tr:eq(0)').find('td:eq(3)').find('input').val(), $(obj).val()))
-        }
-        //离开事件，用于计算 二次输入标准值
-        function blurErCiShuRuBiaoZhunZhi(obj) {
-            //注意多通道
-            //
-            $(obj).parents('tr:eq(0)').find('td:eq(2) input').val(BiaoZhunZhi($(obj).val()))
-            $(obj).parents('tr:eq(0)').find('td:eq(2) input').blur();
-            $(obj).parents('tr:eq(0)').find('td:eq(3) input').blur();
-        }
-        //离开事件，用于计算 测量点
-        function blurCeLiangDian(obj) {
-            //注意多通道
-            //
-            //2.二次输入标准值=额定条件*测量点，默认3位小数
-            var celiangdian = (parseFloat($(obj).val().replace("%", "")) / 100)
-            $(obj).parents('tr:eq(0)').find('td:eq(1) input').val((celiangdian * parseFloat($("#mAVdianliu_" + GetTongDao() + "_1_1").val())).toFixed(3));
-        }
-        //离开事件，用于计算
-        function blurValue(obj) {
-
-        }
-        ///重新计算页面上标准输出值
-        function RecalculateBiaoZhunShuChu() {
-            //注意多通道
-            $("#tbody_" + GetTongDao() + " tr").each(function () {
-                console.log($(this).find('td:eq(1)').find('input').val());
-                $(this).find('td:eq(2)').find('input').val(BiaoZhunZhi($(this).find('td:eq(1)').find('input').val()))//标准输出
-            })
-        }
-        ///重新计算页面上引用误差
-        function RecalculateYinYongWuCha() {
-            //注意多通道
-            $("#tbody_" + GetTongDao() + " tr").each(function () {
-                console.log($(this).find('td:eq(1)').find('input').val());
-                $(this).find('td:eq(4)').find('input').val(YinYongWuCha($(this).find('td:eq(3)').find('input').val(), $(this).find('td:eq(2)').find('input').val()))//引用误差
-            })
-        }
-        function GetValue() {
-            var hideDangQianTongDao = GetTongDao();//当前操作第几通道
-            var datas = {
-                inputMinValue: $.trim($(".clone #shurufanwei_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #shurufanwei_" + hideDangQianTongDao + "_1_1").val())),
-                inputMaxValue: $.trim($(".clone #shurufanweijian_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #shurufanweijian_" + hideDangQianTongDao + "_1_1").val())),
-                outputMinValue: $.trim($(".clone #dianmyliu_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #dianmyliu_" + hideDangQianTongDao + "_1_1").val())),
-                outputMaxValue: $.trim($(".clone #dianmyya_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #dianmyya_" + hideDangQianTongDao + "_1_1").val())),
-                level: $(".clone #DengJi_" + $("#hideDangQianTongDao").val() + "_1_1").val(),
-                levellength: $(".clone #DengJi_" + $("#hideDangQianTongDao").val() + "_1_1").val().split('.')[1].length
-            }
-            return datas;
-        }
-        function GetTongDao() {
-            return $("#hideDangQianTongDao").val();//当前操作第几通道
-        }
-        ///标准值
-        function BiaoZhunZhi(erciBiaoZhun) {
-            //3.标准输出值=二次输入标准值/额定条件*（输出范围的最大值-输出范围的最小值）+输出范围最小值
-            var datas = GetValue();
-            var edingTiaoJian = parseFloat($("#mAVdianliu_" + GetTongDao() + "_1_1").val());
-            if ($.trim(edingTiaoJian) != "" && edingTiaoJian != "0")
-                return (parseFloat(erciBiaoZhun) / edingTiaoJian * (datas.outputMaxValue - datas.outputMinValue) + datas.outputMinValue).toFixed(3);
-            else
-                return "";
-        }
-        //引用误差
-        function YinYongWuCha(ShijiShuChu, BiaoZhunShuChu) {
-            //4.4.引用误差=Round(（实际输出值-标准输出值）/（输出范围的最大值-输出范围的最小值）*100*修约值,1)/修约值
-            var datas = GetValue();
-            var level = datas.level
-            var length = datas.levellength;
-            if (level == "0.0" || ShijiShuChu == "" || BiaoZhunShuChu == "") return ""
-            else
-                return ((parseFloat(ShijiShuChu) - parseFloat(BiaoZhunShuChu) / (datas.outputMaxValue - datas.outputMinValue) * 100 * parseFloat(level)) / parseFloat(level)).toFixed(length + 1);
+        function resetXianShiZhi2(obj) {
+            //重新计算当前行
+            xiangDuiWuCha(obj, "RELATIVEERROR", "UNCERTAINTYDEGREE", "UNCERTAINTYDEGREE2");
         }
 
-
+       
 
     </script>
 
