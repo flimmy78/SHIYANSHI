@@ -4657,6 +4657,8 @@
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
+          <!--下一行数据为空是否需要单元格合并，不填表示不合并（Y:合并、N:不合并）-->
+          <IsMergeNullValue>Y</IsMergeNullValue>
 				</Cell>
 			</CellList>
 			<SecondTitleList/>
