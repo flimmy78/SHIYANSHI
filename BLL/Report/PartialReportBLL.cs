@@ -16,11 +16,6 @@ using NPOI.HSSF.Util;
 using NPOI.POIFS.FileSystem;
 //using NPOI.SS.UserModel;
 
-using Winista.Text.HtmlParser;
-using Winista.Text.HtmlParser.Lex;
-using Winista.Text.HtmlParser.Util;
-using Winista.Text.HtmlParser.Tags;
-using Winista.Text.HtmlParser.Filters;
 using Langben.BLL;
 using System.IO;
 using Langben.IBLL;
@@ -28,12 +23,20 @@ using Common;
 
 namespace Langben.Report
 {
+    public partial class ReportRule
+    {
+        public string ruleid { get; set; }
+        public int ruleidnum { get; set; }
+        public string biaoshi { get; set; }
+        public int biaoshinum { get; set; }
+
+    }
     /// <summary>
     /// 报告业务逻辑
     /// </summary>
     public partial class ReportBLL
     {
-       
+
         public bool Test(string ID, out string Message)
         {
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
@@ -79,10 +82,69 @@ namespace Langben.Report
         public bool Testxml(string ID, out string Message)
         {
 
+
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             string errors = string.Empty;
             var m_BLL = new SCHEMEBLL();
             var entity = m_BLL.GetById(ID);
+
+
+
+            string xlsPath = @"D:\codes\SHIYANSHI\App\Template\原始记录-数据模板-数表三相.xls";//TableTemplateXml
+
+
+            HSSFWorkbook _book = new HSSFWorkbook();
+            FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
+            IWorkbook hssfworkbook = new HSSFWorkbook(file);
+            string sheetName_Destination = "数据模板";
+            ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
+            int rowCount = sheet_Destination.LastRowNum;
+            var list = new List<ReportRule>();
+            int flo = 0;
+            for (int i = 0; i <= rowCount; ++i)
+            {
+                IRow row = sheet_Destination.GetRow(i);
+                if (row == null) continue; //没有数据的行默认是null　　　　　　　
+
+                for (int j = 67; j <= 69; ++j)
+                {
+                    if (row.GetCell(j) != null) //同理，没有数据的单元格都默认是null
+                    {
+                        ReportRule rr = new Report.ReportRule();
+                        string s = row.GetCell(j).ToString();
+                        if (!string.IsNullOrWhiteSpace(s))
+                        {
+                            if (j == 67)
+                            {
+                                var datadouhoa = s.Split(',');
+                                foreach (var item in datadouhoa)
+                                {
+                                    rr.ruleid = item.Trim();
+
+                                    rr.ruleidnum = i;
+                                    flo++;
+                                    list.Add(rr);
+                                }
+
+                            }
+                            else
+                            {
+                                rr.biaoshi = s.Trim().ToUpper();
+                                rr.biaoshinum = i;
+                                flo++;
+                                list.Add(rr);
+                            }
+
+
+                        }
+
+                    }
+                }
+
+            }
+
+
+
             TableTemplates allTableTemplates = GetTableTemplates();
             var ruleids = (from f in allTableTemplates.TableTemplateList
 
@@ -125,36 +187,87 @@ namespace Langben.Report
 </TableTemplateList></TableTemplates>";
 
             TableTemplates allTableTemplates2 = TableTemplates.XmlCovertObj(Message);
-            var data = (from f in allTableTemplates.TableTemplateList
+            var data = (
                         from f2 in allTableTemplates2.TableTemplateList
-                        where f.RuleID == f2.RuleID
 
                         select f2).ToList();
             TableTemplates t = new TableTemplates();
             t.TableTemplateList = new List<TableTemplate>();
-
+            var dsaf =new List<string>();
             foreach (var item in data)
             {
-                var TableTemplate = (from f in allTableTemplates.TableTemplateList
-                                     where f.RuleID == item.RuleID
-                                     select f).FirstOrDefault();
-
-                item.DataRowIndex = TableTemplate.DataRowIndex + 2;//数据模板开始行号
-                item.RemarkRowIndex = TableTemplate.RemarkRowIndex + 2;//备注模板行号
-                item.ConclusionRowIndex = TableTemplate.ConclusionRowIndex + 2;//结论模板行号
-
-                var RowInfo = (from f in TableTemplate.TableTitleList
-
-                               select f).FirstOrDefault();
-                if (RowInfo != null)
+                var rrd = (from l in list
+                          where l.ruleid != null
+                          select l);
+                var rr = (from l in list
+                          where l.ruleid == item.RuleID
+                          select l).FirstOrDefault();
+                if (rr==null)
                 {
-                    foreach (var it in item.TableTitleList)
-                    {
-                        it.RowIndex = RowInfo.RowIndex + 2;//表格表头行号
-                    }
+                    dsaf.Add(item.RuleID);
+                    continue;
+                }
+                ReportRule rr2 = (from l in list
+                           where l.ruleid != null && l.ruleidnum > rr.ruleidnum
+                           select l).FirstOrDefault();
+
+                if (rr2==null)
+                {
+                    rr2 = (from l in list
+                          
+                           select l).Last();
+                }
+                ////////////////
+                var rrbiaoshi = (from l in list
+                                 where l.biaoshinum >= rr.ruleidnum && l.biaoshinum <= rr2.ruleidnum
+                                 select l);
+
+                var BODY = rrbiaoshi.Where(c => c.biaoshi == "BODY").FirstOrDefault();
+
+                if (BODY != null)
+                {
+                    item.DataRowIndex = BODY.biaoshinum;//数据模板开始行号
+                }
+                var ZHU = rrbiaoshi.Where(c => c.biaoshi == "ZHU").FirstOrDefault();
+
+                if (ZHU != null)
+                {
+                    item.RemarkRowIndex = ZHU.biaoshinum;//备注模板行号
+                }
+                var JIELUN = rrbiaoshi.Where(c => c.biaoshi == "JIELUN").FirstOrDefault();
+
+                if (JIELUN != null)
+                {
+                    item.ConclusionRowIndex = JIELUN.biaoshinum;//结论模板行号
                 }
 
+                if (item.IsHaveTableTitle)
+                {
+                    var countData= (from f in rrbiaoshi
+                                where f.biaoshi == "HEAD"
+                                select f);
+                    if (countData!=null)
+                    {
+                        item.TableTitleList.First().RowIndex = countData.Count();
+                    }
+
+                  
+                }
+
+                if (item.IsHaveTableFooter)
+                {
+                    var countData = (from f in rrbiaoshi
+                                     where f.biaoshi == "BUQUEDINGDU"
+                                     select f);
+                    if (countData != null)
+                    {
+                        item.TableFooterList.First().RowIndex = countData.Count();
+                    }
+
+                }
                 t.TableTemplateList.Add(item);
+
+
             }
 
             Message = t.ToString();
@@ -196,7 +309,7 @@ namespace Langben.Report
             Message = errors;
             return false;
         }
-       
+
 
     }
 }
