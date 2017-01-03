@@ -38,8 +38,8 @@
                 <li class="fl mr10">
                     类别：
                     <select class="my-combobox" name="CATEGORY" id="CATEGORY">
-                        <option value="">请选择 </option>
-                        <option value="标准装置">标准装置 </option>
+                        <option value="">请选择</option>
+                        <option value="标准装置">标准装置</option>
                         <option value="标准器">标准器</option>
                         <option value="中间试品">中间试品</option>
                     </select>
@@ -47,7 +47,7 @@
                 <li class="fl mr10">
                     实验室：
                     <select class="my-combobox" name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID">
-                        <option value="">请选择 </option>
+                        <option value="">请选择</option>
                         <option value="数表三相">数表三相</option>
                         <option value="数表单相">数表单相</option>
                         <option value="电能">电能</option>
@@ -292,12 +292,6 @@
         var zhi = "";
         if (isNull(m.NAME)) {
             zhi += "名称不能为空！<br>";
-        }
-        if (isNull(m.XINGHAO)) {
-            zhi += "型号不能为空！<br>";
-        }
-        if (isNull(m.FACTORY_NUM)) {
-            zhi += "类别不能为空！<br>";
         }
         if (isNull(m.UNDERTAKE_LABORATORYID)) {
             zhi += "实验室不能为空！<br>";
