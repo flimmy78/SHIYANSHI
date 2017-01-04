@@ -226,42 +226,44 @@ namespace Langben.Report
 
                 if (BODY != null)
                 {
-                    item.DataRowIndex = BODY.biaoshinum;//数据模板开始行号
+                    item.DataRowIndex = BODY.biaoshinum + 2;//数据模板开始行号
                 }
                 var ZHU = rrbiaoshi.Where(c => c.biaoshi == "ZHU").FirstOrDefault();
 
                 if (ZHU != null)
                 {
-                    item.RemarkRowIndex = ZHU.biaoshinum;//备注模板行号
+                    item.RemarkRowIndex = ZHU.biaoshinum+2;//备注模板行号
                 }
                 var JIELUN = rrbiaoshi.Where(c => c.biaoshi == "JIELUN").FirstOrDefault();
 
                 if (JIELUN != null)
                 {
-                    item.ConclusionRowIndex = JIELUN.biaoshinum;//结论模板行号
+                    item.ConclusionRowIndex = JIELUN.biaoshinum + 2;//结论模板行号
                 }
 
-                if (item.IsHaveTableTitle)
+                //if (item.IsHaveTableTitle)
                 {
                     var countData= (from f in rrbiaoshi
                                 where f.biaoshi == "HEAD"
                                 select f);
-                    if (countData!=null)
+                    if (countData!=null && countData.Count() > 0)
                     {
-                        item.TableTitleList.First().RowIndex = countData.Count();
+                        item.TableTitleList.First().RowIndex = countData.First().biaoshinum + 2;
+                        item.TableTitleList.First().RowNumber = countData.Count();
                     }
 
                   
                 }
 
-                if (item.IsHaveTableFooter)
+                //if (item.IsHaveTableFooter)
                 {
                     var countData = (from f in rrbiaoshi
                                      where f.biaoshi == "BUQUEDINGDU"
                                      select f);
-                    if (countData != null)
+                    if (countData != null&& countData.Count()>0)
                     {
-                        item.TableFooterList.First().RowIndex = countData.Count();
+                        item.TableFooterList.First().RowIndex = countData.First().biaoshinum + 2;
+                        item.TableFooterList.First().RowNumber = countData.Count();
                     }
 
                 }
