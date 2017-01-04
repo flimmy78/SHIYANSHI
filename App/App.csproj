@@ -1017,6 +1017,7 @@
     <Content Include="Views\PROJECTTEMPLET\DanQiaoQiTaLiangCheng.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\ShuangQiaoJiBenLiangCheng.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\DianNengBiaoZhunPianChaGuJiZhi.cshtml" />
+    <Content Include="Views\UNCERTAINTYTABLE\IndexSet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

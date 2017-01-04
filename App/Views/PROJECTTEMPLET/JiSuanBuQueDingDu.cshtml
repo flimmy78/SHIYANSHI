@@ -310,30 +310,20 @@ else
     }
     //B类选择
     function xunzhe() {
+        debugger
         showModalMany('METERING_STANDARD_DEVICEID', '../../METERING_STANDARD_DEVICE/IndexUA/@ViewBag.UNDERTAKE_LABORATORY_NAME');
-        var zhi = $("#METERING_STANDARD_DEVICEID").val()
-        var reg = new RegExp("&", "g");//g,表示全部替换。
-        var shu = zhi.replace(reg, '~');
-        if (shu!="") {
-            $.ajax({
-                type: "Get", //使用Get方法访问后台
-                dataType: "json", //返回json格式的数据
-                url: "../api/UNCERTAINTYTABLEApi/Getdata/" + shu, //要访问的后台地址
-
-                success: function (res) {//msg为返回的数据，在这里做数据绑定
-                    if (res != null && res.length > 0) {
-                        for (var i = 0; i < res.length; i++) {
-
-                        }
-                    }
-
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
-                }
-            });
-        }
-       
+        var zhi = $("#METERING_STANDARD_DEVICEID").val();
+        var zhu = zhi.split('^');
+        for (var i = 0; i < zhu.length; i++) {
+            if (zhu[i] != "") {
+                zhu[i].split('$')[0];//评定项
+                zhu[i].split('$')[1];//误差来源
+                zhu[i].split('$')[2];//误差限
+                zhu[i].split('$')[3];//误差分布状况
+                zhu[i].split('$')[4];//k
+                zhu[i].split('$')[5].split('&')[0];//不确定度ui
+            }
+        }           
     }
     //清空增加的行
     function resetRow() {

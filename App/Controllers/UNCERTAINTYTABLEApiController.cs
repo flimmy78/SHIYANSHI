@@ -337,6 +337,47 @@ namespace Langben.App.Controllers
             return show;
         }
         /// <summary>
+        /// 误差来源数据展示
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Common.ClientResult.DataResult UNCERTAINTYTABLEData_WUCHA_Set(string id)
+        {
+            int total = 0;
+            List<UNCERTAINTYTABLE> msd = m_BLL.GetByRefMETERING_STANDARD_DEVICEID(id);
+            string ASSESSMENTITEM = string.Empty;//评定项
+            string ERRORSOURCES = string.Empty;//误差来源
+            string ERRORLIMITS = string.Empty;//误差限
+            string THEERRODISTRIBUTION = string.Empty;//误差分布状况
+            string KVALE = string.Empty;//k
+            string UNCERTAINTYUI = string.Empty;//不确定度ui
+
+            //分组
+            //var data = (from f in msd
+            //            select f.CATEGORY).Distinct();
+            //var data = msd.Where(m => m.CATEGORY == "UA").Select(m => m.CATEGORY).Distinct();
+            var data = msd.Where(m => m.CATEGORY == "UA");
+            List<UNCERTAINTYTABLE> alldata = new List<UNCERTAINTYTABLE>();
+            //计量标准装置检定/校准信息
+            var show = new Common.ClientResult.DataResult
+            {
+                total = total,
+                rows = data.Select(s => new
+                {
+                    ASSESSMENTITEM = s.ASSESSMENTITEM,
+                    ERRORSOURCES = s.ERRORSOURCES,
+                    ERRORLIMITS = s.ERRORLIMITS+s.ERRORLIMITUNIT,
+                    THEERRODISTRIBUTION = s.THEERRODISTRIBUTION,
+                    KVALE = s.KVALE,
+                    UNCERTAINTYUI = s.UNCERTAINTYUI+s.UNCERTAINTYUIUNIT,
+                    GROUPS = s.GROUPS,
+                    METERING_STANDARD_DEVICEID = id,
+                    CATEGORY = s.CATEGORY
+                })
+            };
+            return show;
+        }
+        /// <summary>
         /// 范围指标数据展示
         /// </summary>
         /// <param name="id"></param>
@@ -406,49 +447,7 @@ namespace Langben.App.Controllers
             };
             return show;
         }
-
-        /// <summary>
-        ///获取不确定度数据(不确定度的选择功能)
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [System.Web.Mvc.ValidateInput(false)]      
-        public List<UNCERTAINTYTABLEShow> Getdata(string id)
-        {
-            List<UNCERTAINTYTABLEShow> unceshow = new List<UNCERTAINTYTABLEShow>();
-            UNCERTAINTYTABLEShow uncele;
-            if (!string.IsNullOrWhiteSpace(id))
-            {
-                string[] shu = id.Split('^');
-                foreach (var item in shu)
-                {
-                    if (!string.IsNullOrWhiteSpace(item))
-                    {
-                        List<UNCERTAINTYTABLE> uncelist = m_BLL.GetByRefMETERING_STANDARD_DEVICEID(item.Split('$')[0]);
-                        string CATEGORY = item.Split('$')[1];
-                        string b = item.Split('$')[2].ToString().Split('~')[0].ToString();
-                        int GROUPS = Convert.ToInt32(b);
-                        var data = uncelist.Where(m => m.CATEGORY == CATEGORY && m.GROUPS == GROUPS);
-                        foreach (var a in data)
-                        {
-                            uncele = new UNCERTAINTYTABLEShow()
-                            {
-                                ASSESSMENTITEM = a.ASSESSMENTITEM,
-                                ERRORSOURCES = a.ERRORSOURCES,
-                                ERRORLIMITS = a.ERRORLIMITS,
-                                ERRORLIMITUNIT = a.ERRORLIMITUNIT,
-                                THEERRODISTRIBUTION = a.THEERRODISTRIBUTION,
-                                KVALE = a.KVALE,
-                                UNCERTAINTYUI = a.UNCERTAINTYUI,
-                                UNCERTAINTYUIUNIT = a.UNCERTAINTYUIUNIT
-                            };
-                            unceshow.Add(uncele);
-                        }
-                    }
-                }
-            }
-            return unceshow;
-        }
+       
         IBLL.IUNCERTAINTYTABLEBLL m_BLL;
 
         ValidationErrors validationErrors = new ValidationErrors();
