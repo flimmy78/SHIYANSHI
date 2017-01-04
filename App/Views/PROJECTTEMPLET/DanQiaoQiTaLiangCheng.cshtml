@@ -1,0 +1,274 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "单桥-其他量程-相对误差";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    <tr>
+        <th width="80" align="center">量程</th>
+        <th width="140" align="center">
+            测量盘<br>
+            (
+            <select class="my-combobox" name="celiangpan" id="celiangpan_t_1_1" onchange="changeValue(this)">
+                <option value="Ω" selected="selected">Ω</option>
+                <option value="TΩ">TΩ</option>
+                <option value="GΩ">GΩ</option>
+                <option value="MΩ">MΩ</option>
+                <option value="kΩ">kΩ</option>
+                <option value="mΩ">mΩ</option>
+                <option value="μΩ">μΩ</option>
+            </select>
+            )
+        </th>
+        <th width="110" align="center">
+            测量点
+        </th>
+        <th width="110" align="center">
+            实际值<br>
+            (
+            <select class="my-combobox" name="ce2liangpan" id="ce2liangpan_t_1_1" onchange="changeValue(this)">
+                <option value="Ω" selected="selected">Ω</option>
+                <option value="TΩ">TΩ</option>
+                <option value="GΩ">GΩ</option>
+                <option value="MΩ">MΩ</option>
+                <option value="kΩ">kΩ</option>
+                <option value="mΩ">mΩ</option>
+                <option value="μΩ">μΩ</option>
+            </select>
+            )
+        </th>
+        <th width="110" align="center">
+            标称值<br>
+            (
+            <select class="my-combobox" name="ce2liangpan" id="ce2liangpan_t_1_1" onchange="changeValue(this)">
+                <option value="Ω" selected="selected">Ω</option>
+                <option value="TΩ">TΩ</option>
+                <option value="GΩ">GΩ</option>
+                <option value="MΩ">MΩ</option>
+                <option value="kΩ">kΩ</option>
+                <option value="mΩ">mΩ</option>
+                <option value="μΩ">μΩ</option>
+            </select>
+            )
+        </th>
+        <th width="110" align="center">误差</th>
+        <th align="center">允许误差</th>
+    </tr>
+
+</thead>
+<tbody>
+    <!--表体-->
+
+</tbody>
+@section BUQueDingDu {
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10">
+        <tbody id="tbody_2">
+            <tr>
+                <td align="center" width="50%"><input name="" id="" type="text" class="my-textbox tr" value="" style="width:96%" /></td>
+                <td>
+                    <i>U</i><small>rel</small>(k =
+                    <select class="my-combobox" name="ddlSelectD" id="ddlSelectD">
+                        <option value="2">2 </option>
+                        <option value="3">3</option>
+                        <option value="√3">√3</option>
+                    </select>
+                    ) =
+                    <input class="my-textbox " value="" style="width:300px" id="txtvalueD">
+                    <input type="button" class="my-btn" value="计 算" onclick="calculate(this)" />
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="8" style="background:#F7F7F7">
+                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addUrel()">增加不确定度计算行</a>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+}
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        //tbodyIndex通道
+        //thi 当前位置
+        function set(tbodyIndex, thi) {
+
+
+
+            // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
+            $("#hideDangQianTongDao").val(tbodyIndex); CreateRow();
+
+        }
+        //增加行
+        function CreateRow() {
+
+            var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+            var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
+            LiangChengShuLiang++;
+            var rowspanIdx = $("#txtPoint").val();     //检测点数
+            txtPointLen = $("#txtPointLen").val(); //小数点位数
+            var standardValue = "";
+            var htmlString = [];
+            var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
+
+            var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
+            for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
+                rowLength++;
+                htmlString.push("<tr rowindex='" + rowLength + "'>");
+
+                var rowspan = 1; //合并单元格行数
+
+                var txtVal = "";//(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
+                var unit = "<span>@((ViewBag.canshu == "电流") ? "I" : "U")<sub>n</sub></span>";//在输入框后面的单位
+
+
+                var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
+                if (rowidx == 0) {
+                    //需要合并的列
+
+                }
+                //需要合并的列
+
+                //测量点
+                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120", unit));
+                //二次输入标准值
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurErCiShuRuBiaoZhunZhi'));
+                //标准输出值
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurBiaoZhunShuChuZhi'));
+                //实际输出值
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurShiJiShuChuZhi'));
+                //引用误差
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "classstyle100"));
+                //校准结果的不确定度 U(K =
+                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, txtVal, "classstyle"));
+                htmlString.push("</tr>");
+            }
+            htmlString = htmlString.join("");
+
+            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
+            $.parser.parse(tagRow);//渲染easyui组建
+            //$('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
+            $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+        }
+        //离开事件，用于计算 额定条件
+        function blurEDingTiaoJiao(obj) {
+            //注意多通道
+            //
+        }
+        //离开事件，用于计算 输出范围最小
+        function blurShuChuFanWeiZuiXiao(obj) {
+            //注意多通道
+
+            RecalculateBiaoZhunShuChu();
+            RecalculateYinYongWuCha();
+        }
+        //离开事件，用于计算 输出范围最大
+        function blurShuChuFanWeiZuiDa(obj) {
+            //注意多通道
+
+            RecalculateBiaoZhunShuChu();
+            RecalculateYinYongWuCha();
+        }
+        //离开事件，用于计算 实际输出值
+        function blurShiJiShuChuZhi(obj) {
+            //注意多通道
+            //$(obj).parents('tr:eq(0)').find('td:eq(4) input').val(YinYongWuCha($(obj).val(), $(obj).parents('tr:eq(0)').find('td:eq(2)').find('input').val()))
+            yinYongWuCha(obj, "SHIJISHUCHUZHI", "ACTUALVALUE", "dianmyya", "dianmyliu", "DengJi", "RELATIVEERROR");
+
+        }
+        //离开事件，用于计算 标准输出值
+        function blurBiaoZhunShuChuZhi(obj) {
+            //注意多通道
+            //$(obj).parents('tr:eq(0)').find('td:eq(4) input').val(YinYongWuCha($(obj).parents('tr:eq(0)').find('td:eq(3)').find('input').val(), $(obj).val()))
+
+            yinYongWuCha(obj, "SHIJISHUCHUZHI", "ACTUALVALUE", "dianmyya", "dianmyliu", "DengJi", "RELATIVEERROR");
+
+        }
+        //离开事件，用于计算 二次输入标准值
+        function blurErCiShuRuBiaoZhunZhi(obj) {
+            //注意多通道
+            //
+            $(obj).parents('tr:eq(0)').find('td:eq(2) input').val(BiaoZhunZhi($(obj).val()))
+            $(obj).parents('tr:eq(0)').find('td:eq(2) input').blur();
+            $(obj).parents('tr:eq(0)').find('td:eq(3) input').blur();
+        }
+        //离开事件，用于计算 测量点
+        function blurCeLiangDian(obj) {
+            //注意多通道
+            //
+            //2.二次输入标准值=额定条件*测量点，默认3位小数
+            var celiangdian = (parseFloat($(obj).val().replace("%", "")) / 100)
+            $(obj).parents('tr:eq(0)').find('td:eq(1) input').val((celiangdian * parseFloat($("#mAVdianliu_" + GetTongDao() + "_1_1").val())).toFixed(3));
+        }
+        //离开事件，用于计算
+        function blurValue(obj) {
+
+        }
+        ///重新计算页面上标准输出值
+        function RecalculateBiaoZhunShuChu() {
+            //注意多通道
+            $("#tbody_" + GetTongDao() + " tr").each(function () {
+                console.log($(this).find('td:eq(1)').find('input').val());
+                $(this).find('td:eq(2)').find('input').val(BiaoZhunZhi($(this).find('td:eq(1)').find('input').val()))//标准输出
+            })
+        }
+        ///重新计算页面上引用误差
+        function RecalculateYinYongWuCha() {
+            //注意多通道
+            $("#tbody_" + GetTongDao() + " tr").each(function () {
+                console.log($(this).find('td:eq(1)').find('input').val());
+                $(this).find('td:eq(4)').find('input').val(YinYongWuCha($(this).find('td:eq(3)').find('input').val(), $(this).find('td:eq(2)').find('input').val()))//引用误差
+            })
+        }
+        function GetValue() {
+            var hideDangQianTongDao = GetTongDao();//当前操作第几通道
+            var datas = {
+                inputMinValue: $.trim($(".clone #shurufanwei_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #shurufanwei_" + hideDangQianTongDao + "_1_1").val())),
+                inputMaxValue: $.trim($(".clone #shurufanweijian_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #shurufanweijian_" + hideDangQianTongDao + "_1_1").val())),
+                outputMinValue: $.trim($(".clone #dianmyliu_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #dianmyliu_" + hideDangQianTongDao + "_1_1").val())),
+                outputMaxValue: $.trim($(".clone #dianmyya_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #dianmyya_" + hideDangQianTongDao + "_1_1").val())),
+                level: $(".clone #DengJi_" + $("#hideDangQianTongDao").val() + "_1_1").val(),
+                levellength: $(".clone #DengJi_" + $("#hideDangQianTongDao").val() + "_1_1").val().split('.')[1].length
+            }
+            return datas;
+        }
+        function GetTongDao() {
+            return $("#hideDangQianTongDao").val();//当前操作第几通道
+        }
+        ///标准值
+        function BiaoZhunZhi(erciBiaoZhun) {
+            //3.标准输出值=二次输入标准值/额定条件*（输出范围的最大值-输出范围的最小值）+输出范围最小值
+            var datas = GetValue();
+            var edingTiaoJian = parseFloat($("#mAVdianliu_" + GetTongDao() + "_1_1").val());
+            if ($.trim(edingTiaoJian) != "" && edingTiaoJian != "0")
+                return (parseFloat(erciBiaoZhun) / edingTiaoJian * (datas.outputMaxValue - datas.outputMinValue) + datas.outputMinValue).toFixed(3);
+            else
+                return "";
+        }
+        //引用误差
+        function YinYongWuCha(ShijiShuChu, BiaoZhunShuChu) {
+            //4.4.引用误差=Round(（实际输出值-标准输出值）/（输出范围的最大值-输出范围的最小值）*100*修约值,1)/修约值
+            var datas = GetValue();
+            var level = datas.level
+            var length = datas.levellength;
+            if (level == "0.0" || ShijiShuChu == "" || BiaoZhunShuChu == "") return ""
+            else
+                return ((parseFloat(ShijiShuChu) - parseFloat(BiaoZhunShuChu) / (datas.outputMaxValue - datas.outputMinValue) * 100 * parseFloat(level)) / parseFloat(level)).toFixed(length+1);
+        }
+
+
+
+    </script>
+
+}
+@section TanKuang {
+    <!--弹框的位置-->
+    <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
+    <input type="hidden" id="txtPointLen" value="1" /><!--小数点位数-->
+}
+

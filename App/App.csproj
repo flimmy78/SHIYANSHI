@@ -320,6 +320,7 @@
     <Content Include="html\检定流程.html" />
     <Content Include="html\直流电压（电流）测量-非正负极性-相对误差（已做）.html" />
     <Content Include="html\直流电流输出-相对误差（已做）.html" />
+    <Content Include="html\频率输出-频率测量-相对误差.html" />
     <Content Include="html\频率输出-频率测量-相对误差（已做）.html" />
     <Content Include="Images\anquantuichu.gif" />
     <Content Include="Images\bangzhu.gif" />
@@ -953,7 +954,7 @@
     <Content Include="Views\PROJECTTEMPLET\BianSongQiGongLu.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\BianSongQiPinLu.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\BianSongQiXiangWei.cshtml" />
-    <Content Include="Views\PROJECTTEMPLET\BianSongQiYouGongWuGong.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BiaoZhunDianZuXiang.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\YouGongGongLvShuChuYinYongWuCha.cshtml" />
     <Content Include="Views\Shared\TempleOnly.cshtml" />
     <Content Include="Views\Shared\TempleMany.cshtml" />
@@ -1012,6 +1013,11 @@
     <Content Include="Views\PROJECTTEMPLET\DanQiaoJiBenLiangcheng.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\OMYiXiaBiaoZhunDianZu.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\OMYiShangWuWuCha.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BianSongQiYouGongWuGong.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\DanQiaoQiTaLiangCheng.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\ShuangQiaoJiBenLiangCheng.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\DianNengBiaoZhunPianChaGuJiZhi.cshtml" />
+    <Content Include="Views\UNCERTAINTYTABLE\IndexSet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

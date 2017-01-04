@@ -175,7 +175,7 @@ namespace Langben.App.Controllers
                 msdshow.IS = IS;
                 msdshow.ID = msd.ID;
                 ViewBag.GROUPS = GROUPS.ToString();
-                ViewBag.CATEGORY = IS.ToString();
+                ViewBag.CATEGORY = id.Split('^')[3];
             }
             return View(msdshow);
         }

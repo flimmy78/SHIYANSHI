@@ -581,7 +581,7 @@ namespace Langben.Report
             }
             else
             {
-                HideRow(sheet_Destination, 25, 1);
+                HideRow(sheet_Destination, 25, 2);
             }
             #endregion
 
@@ -686,7 +686,7 @@ namespace Langben.Report
             //温度
             if (entity.TEMPERATURE != null && entity.TEMPERATURE.Trim() != "")
             {
-                sheet_Destination.GetRow(5).GetCell(6).SetCellValue(entity.TEMPERATURE);
+                sheet_Destination.GetRow(5).GetCell(6).SetCellValue(entity.TEMPERATURE+ "℃");
             }
             else
             {
@@ -695,7 +695,7 @@ namespace Langben.Report
             //相对湿度
             if (entity.HUMIDITY != null && entity.HUMIDITY.Trim() != "")
             {
-                sheet_Destination.GetRow(5).GetCell(20).SetCellValue(entity.HUMIDITY);
+                sheet_Destination.GetRow(5).GetCell(20).SetCellValue(entity.HUMIDITY+"%");
             }
             else
             {
@@ -748,7 +748,7 @@ namespace Langben.Report
             //各类装置
             SetZhuangZhis(hssfworkbook, sheet_Destination, ref RowIndex, entity, type);
             #region 校准说明            
-            RowIndex++;
+            //RowIndex++;
             if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
             {
                 sheet_Destination.GetRow(RowIndex).GetCell(2).SetCellValue("/");
@@ -888,7 +888,7 @@ namespace Langben.Report
             }
             else
             {
-                HideRow(sheet_Destination, 25, 1);
+                HideRow(sheet_Destination, 25, 2);
             }
             #endregion
 
@@ -1750,7 +1750,8 @@ namespace Langben.Report
                     //if (TableTemplateDic != null && TableTemplateDic.ContainsKey(iEntity.RULEID))
                     //{
                     //    TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
-                    if (iEntity != null && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
+                    if (iEntity != null 
+                        && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
                         //&&iEntity.RULEID== "126-1995_2_4_1"
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
@@ -1779,7 +1780,7 @@ namespace Langben.Report
                     }
                     else
                     {
-                        CopyRow(sheet_Source, sheet_Destination, 2, RowIndex, 1, true);
+                        CopyRow(sheet_Source, sheet_Destination, 5, RowIndex, 1, true);
                     }
 
 
@@ -2594,9 +2595,8 @@ namespace Langben.Report
                             if (d != null && d.Data != null && d.Data.Count > 0)
                             {
                                 List<MYData> cData = d.Data.FindAll(p => p.name == c.Code);
-                                int mergedRowNum = 0;
+                                
                                 MYData mdd = null;
-
                                 List<MYData> removeList = new List<MYData>();
                                 int indexCount = 1;
                                 if (cData != null && cData.Count > 0)
@@ -2605,30 +2605,21 @@ namespace Langben.Report
                                     {
                                         if (indexCount == 1)
                                         {
-                                            mdd = md;
-                                            mergedRowNum = md.mergedRowNum;
+                                            mdd = md;                                          
                                         }
                                         else
                                         {
                                             if (md != null && !string.IsNullOrWhiteSpace(md.value))
-                                            {
-                                                mergedRowNum = md.mergedRowNum;
-                                                if (mdd != null)
-                                                {
-                                                    mdd.mergedRowNum = mergedRowNum;
-                                                }
+                                            {                                               
                                                 mdd = md;
+                                                mdd.mergedRowNum = md.mergedRowNum;
                                             }
                                             else if (md != null && string.IsNullOrWhiteSpace(md.value))
-                                            {
-                                                mergedRowNum = mergedRowNum + md.mergedRowNum;
+                                            {                                                
+                                                mdd.mergedRowNum = mdd.mergedRowNum + md.mergedRowNum;
                                                 removeList.Add(md);
                                             }
-                                        }
-                                        if (indexCount == cData.Count)
-                                        {
-                                            mdd.mergedRowNum = mergedRowNum;
-                                        }
+                                        }                                       
                                         indexCount++;
                                     }
                                     foreach (MYData md in removeList)
@@ -2696,14 +2687,19 @@ namespace Langben.Report
                                     if (temp.Cells.Count >= colCount && temp.Cells[colCount - 1].IsMergeSameValue == "Y")//固定值是否需要合并
                                     {
                                         sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + dataDic[tongDaoID].Count - 1, c.FirstColumn, c.LastColumn));
-
+                                        int ccCount = 0;
                                         for (int j = 0; j < dataDic[tongDaoID].Count; j++)//将已合并或者已使用的区域移除
                                         {
 
                                             KeyValuePair<string, CellRangeAddress> cc = cellAddressList.FirstOrDefault(p => p.Value.FirstColumn == c.FirstColumn && p.Value.LastColumn == c.LastColumn);
                                             if (!string.IsNullOrWhiteSpace(cc.Key) && cc.Value != null && cc.Value.FirstColumn == c.FirstColumn && cc.Value.LastColumn == c.LastColumn)
                                             {
+                                                if (ccCount > 0)
+                                                {
+                                                    sheet_Destination.GetRow(cc.Value.FirstRow).GetCell(cc.Value.FirstColumn).SetCellValue(new HSSFRichTextString(""));
+                                                }
                                                 cellAddressList.Remove(cc.Key);
+                                                ccCount++;
                                             }
 
                                         }
@@ -2723,7 +2719,7 @@ namespace Langben.Report
                                 {
                                     HideRow(sheet_Destination, c.FirstRow, 1);
                                 }
-                                else if ((value == null || string.IsNullOrWhiteSpace(value.String)))
+                                else if ((value == null || string.IsNullOrWhiteSpace(value.String)) && d.name.IndexOf("_UNIT")<0)
                                 {
                                     value = new HSSFRichTextString("/");
                                 }

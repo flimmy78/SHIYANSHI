@@ -145,7 +145,7 @@ namespace Langben.App.Controllers
                             );//写入日志 
                         result.Code = Common.ClientCode.Succeed;
                         result.Message = Suggestion.InsertSucceed;
-                        return result; //提示创建成功
+                        //return result; //提示创建成功
                     }
                     else
                     {
@@ -164,10 +164,7 @@ namespace Langben.App.Controllers
                         return result; //提示插入失败
                     }
                 }                        
-            }
-
-            result.Code = Common.ClientCode.FindNull;
-            result.Message = Suggestion.InsertFail + "，请核对输入的数据的格式"; //提示输入的数据的格式不对 
+            }          
             return result;
         }
 
