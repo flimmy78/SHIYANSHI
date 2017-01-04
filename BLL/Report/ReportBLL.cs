@@ -1779,7 +1779,7 @@ namespace Langben.Report
                     }
                     else
                     {
-                        CopyRow(sheet_Source, sheet_Destination, 2, RowIndex, 1, true);
+                        CopyRow(sheet_Source, sheet_Destination, 5, RowIndex, 1, true);
                     }
 
 
