@@ -581,7 +581,7 @@ namespace Langben.Report
             }
             else
             {
-                HideRow(sheet_Destination, 25, 1);
+                HideRow(sheet_Destination, 25, 2);
             }
             #endregion
 
@@ -748,7 +748,7 @@ namespace Langben.Report
             //各类装置
             SetZhuangZhis(hssfworkbook, sheet_Destination, ref RowIndex, entity, type);
             #region 校准说明            
-            RowIndex++;
+            //RowIndex++;
             if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
             {
                 sheet_Destination.GetRow(RowIndex).GetCell(2).SetCellValue("/");
@@ -888,7 +888,7 @@ namespace Langben.Report
             }
             else
             {
-                HideRow(sheet_Destination, 25, 1);
+                HideRow(sheet_Destination, 25, 2);
             }
             #endregion
 
