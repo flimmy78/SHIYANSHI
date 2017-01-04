@@ -686,7 +686,7 @@ namespace Langben.Report
             //温度
             if (entity.TEMPERATURE != null && entity.TEMPERATURE.Trim() != "")
             {
-                sheet_Destination.GetRow(5).GetCell(6).SetCellValue(entity.TEMPERATURE);
+                sheet_Destination.GetRow(5).GetCell(6).SetCellValue(entity.TEMPERATURE+ "℃");
             }
             else
             {
@@ -695,7 +695,7 @@ namespace Langben.Report
             //相对湿度
             if (entity.HUMIDITY != null && entity.HUMIDITY.Trim() != "")
             {
-                sheet_Destination.GetRow(5).GetCell(20).SetCellValue(entity.HUMIDITY);
+                sheet_Destination.GetRow(5).GetCell(20).SetCellValue(entity.HUMIDITY+"%");
             }
             else
             {
