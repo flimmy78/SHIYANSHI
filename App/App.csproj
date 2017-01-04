@@ -283,6 +283,9 @@
     <Content Include="html\11开关变差-无不确定度.html" />
     <Content Include="html\12单桥-基本量程-相对误差.html" />
     <Content Include="html\13标准电阻箱-相对误差.html" />
+    <Content Include="html\14单桥-其他量程-相对误差.html" />
+    <Content Include="html\15双桥-其他量程-相对误差.html" />
+    <Content Include="html\16双桥-基本量程-滑线盘步进盘-相对误差.html" />
     <Content Include="html\1基本误差-电阻示值-相对误差.html" />
     <Content Include="html\2示值误差-有电压示值-末盘值残余电阻参与运算.html" />
     <Content Include="html\3残余电阻-无不确定度.html" />
@@ -292,7 +295,12 @@
     <Content Include="html\7电压表示值误差-相对误差.html" />
     <Content Include="html\8示值误差-无电压示值.html" />
     <Content Include="html\9工作电流示值误差-相对误差.html" />
+    <Content Include="html\a位置影响.html" />
+    <Content Include="html\a倾斜影响.html" />
+    <Content Include="html\a指针式示值误差.html" />
     <Content Include="html\a指针式辅助电阻影响.html" />
+    <Content Include="html\a电子式示值误差.html" />
+    <Content Include="html\a电子式辅助电阻影响.html" />
     <Content Include="html\不确定度评定过程.html" />
     <Content Include="html\交流电压（电流）测量-相对误差-单相%28多通道）.html" />
     <Content Include="html\变送器-功率-引用误差.html" />
