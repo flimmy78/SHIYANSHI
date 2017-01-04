@@ -29,6 +29,17 @@ namespace Langben.App.Controllers
             ViewBag.METERING_STANDARD_DEVICEID = id;
             return View();
         }
+
+        /// <summary>
+        /// 列表
+        /// </summary>
+        /// <returns></returns>
+        [SupportFilter]
+        public ActionResult IndexSet(string id)
+        {
+            ViewBag.METERING_STANDARD_DEVICEID = id;
+            return View();
+        }
         /// <summary>
         /// 列表
         /// </summary>
