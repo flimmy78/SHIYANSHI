@@ -147,7 +147,10 @@
                         <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="20.000" id="ACTUALVALUE_t_1_1" name="ACTUALVALUE" onblur="blurBiaoZhunShuChuZhi(this)" type="text"></td>
                         <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" onblur="blurShiJiShuChuZhi(this)" type="text"></td>
                         <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_1" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center">
+                            <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
+                            <a href="#" name="btnBuQueDing" class="my-linkbutton" onclick="showModal('BuQueDingDuZhi_UNCERTAINTYDEGREE_1_1_7&amp;BuQueDingDuLuJing_UNCERTAINTYDEGREE_1_1_7^BuQueDingDuLuJing_UNCERTAINTYDEGREE_1_1_7^UNCERTAINTYDEGREE_1_1_7', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=UNCERTAINTYDEGREE_1_1_7&amp;RuleID=$(\"#hideRULEID\").val()');">计算</a>
+                        </td>
                     </tr>
                     <tr rowindex="2">
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="80%" id="OUTPUTVALUE_t_1_2" name="OUTPUTVALUE" onblur="blurCeLiangDian(this)" type="text"><span>@((ViewBag.canshu == "电流") ? "I" : "U")<sub>n</sub></span></td>
@@ -371,7 +374,7 @@
             var length = datas.levellength;
             if (level == "0.0" || ShijiShuChu == "" || BiaoZhunShuChu == "") return ""
             else
-                return ((parseFloat(ShijiShuChu) - parseFloat(BiaoZhunShuChu) / (datas.outputMaxValue - datas.outputMinValue) * 100 * parseFloat(level)) / parseFloat(level)).toFixed(length+1);
+                return ((parseFloat(ShijiShuChu) - parseFloat(BiaoZhunShuChu) / (datas.outputMaxValue - datas.outputMinValue) * 100 * parseFloat(level)) / parseFloat(level)).toFixed(length + 1);
         }
 
 
