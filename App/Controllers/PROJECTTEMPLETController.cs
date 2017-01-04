@@ -18,6 +18,7 @@ namespace Langben.App.Controllers
     /// </summary>
     public class PROJECTTEMPLETController : BaseController
     {//
+
      /// <summary>
      ///电能标准偏差估计值
      /// </summary>
