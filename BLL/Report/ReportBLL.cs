@@ -1750,7 +1750,8 @@ namespace Langben.Report
                     //if (TableTemplateDic != null && TableTemplateDic.ContainsKey(iEntity.RULEID))
                     //{
                     //    TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
-                    if (iEntity != null && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
+                    if (iEntity != null
+                        && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
                         //&&iEntity.RULEID== "126-1995_2_4_1"
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
@@ -2594,9 +2595,8 @@ namespace Langben.Report
                             if (d != null && d.Data != null && d.Data.Count > 0)
                             {
                                 List<MYData> cData = d.Data.FindAll(p => p.name == c.Code);
-                                int mergedRowNum = 0;
+                                
                                 MYData mdd = null;
-
                                 List<MYData> removeList = new List<MYData>();
                                 int indexCount = 1;
                                 if (cData != null && cData.Count > 0)
@@ -2605,30 +2605,21 @@ namespace Langben.Report
                                     {
                                         if (indexCount == 1)
                                         {
-                                            mdd = md;
-                                            mergedRowNum = md.mergedRowNum;
+                                            mdd = md;                                          
                                         }
                                         else
                                         {
                                             if (md != null && !string.IsNullOrWhiteSpace(md.value))
-                                            {
-                                                mergedRowNum = md.mergedRowNum;
-                                                if (mdd != null)
-                                                {
-                                                    mdd.mergedRowNum = mergedRowNum;
-                                                }
+                                            {                                               
                                                 mdd = md;
+                                                mdd.mergedRowNum = md.mergedRowNum;
                                             }
                                             else if (md != null && string.IsNullOrWhiteSpace(md.value))
-                                            {
-                                                mergedRowNum = mergedRowNum + md.mergedRowNum;
+                                            {                                                
+                                                mdd.mergedRowNum = mdd.mergedRowNum + md.mergedRowNum;
                                                 removeList.Add(md);
                                             }
-                                        }
-                                        if (indexCount == cData.Count)
-                                        {
-                                            mdd.mergedRowNum = mergedRowNum;
-                                        }
+                                        }                                       
                                         indexCount++;
                                     }
                                     foreach (MYData md in removeList)
