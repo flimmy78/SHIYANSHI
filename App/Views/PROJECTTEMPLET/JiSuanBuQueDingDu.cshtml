@@ -287,23 +287,29 @@ else
     }
     //B类增加行
     var addRow = function (obj) {
+        debugger;
         var trNew = $('#tongdao_B tbody').find('tr:last').clone();
         $(trNew).children().eq(5).find('input').eq(0).val("");
         $(trNew).children().find('input').each(function () {
             if (this.name != "" && this.id != "" && this.id.lastIndexOf("_") >= 0) {
-                var id = this.name + "_" + (parseInt(this.id.substring(this.id.lastIndexOf("_") + 1)) + 1);
-                $(this).attr('id', id);
+                var num = (parseInt(this.id.substring(this.id.lastIndexOf("_") + 1)) + 1);
+                var id = this.name + "_" + num;
+                $(this).attr('id', id);              
+                if(this.name=="sourceNum")
+                {                                      
+                    $(this).val("u" + num);
+                }
             }
         });
-        $(trNew).children().find('span').each(function () {
-            if (this.id != "" && this.id.lastIndexOf("_") >= 0) {
-                var id = this.id;
-                var num = parseInt(id.substring(id.lastIndexOf("_") + 1)) + 1;
-                id = id.substring(0, id.lastIndexOf("_") + 1) + num;
-                $(this).attr('id', id);
-                $(this).html("u" + num);
-            }
-        });
+        //$(trNew).children().find('span').each(function () {
+        //    if (this.id != "" && this.id.lastIndexOf("_") >= 0) {
+        //        var id = this.id;
+        //        var num = parseInt(id.substring(id.lastIndexOf("_") + 1)) + 1;
+        //        id = id.substring(0, id.lastIndexOf("_") + 1) + num;
+        //        $(this).attr('id', id);
+        //        $(this).html("u" + num);
+        //    }
+        //});
 
 
         $("#tongdao_B tbody").append(trNew);
@@ -327,7 +333,7 @@ else
     }
     //清空增加的行
     function resetRow() {
-        $("#tongdao_B tbody tr:not(:first)").empty();
+        $("#tongdao_B tbody tr:not(:first)").remove();
     }
     function getData() {
         var data = "";
