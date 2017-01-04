@@ -1,0 +1,115 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "电能标准偏差估计值";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    <tr>
+        <th colspan="5">量限：</th>
+        <th>cosφ</th>
+        <th>y1(%)</th>
+        <th>y2(%)</th>
+        <th>y2(%)</th>
+        <th>y4(%)</th>
+        <th>y5(%)</th>
+        <th>s(%)</th>
+        <th>s化整(%)</th>
+    </tr>   
+    <tr rowindex="1">
+        <td>
+            <select class="my-combobox" name="RANGE" id="RANGE_t_1_1">
+                <option value="单相">单相</option>
+                <option value="三相三线">三相三线</option>
+                <option value="三相四线">三相四线</option>
+            </select>
+        </td>
+        <td>100</td>
+        <td>
+            <select class="my-combobox" name="OUTPUTVALUE" id="OUTPUTVALUE_t_1_1">
+                <option value="V">V</option>
+                <option value="MV">MV</option>
+                <option value="kV">kV</option>
+                <option value="mV">mV</option>
+                <option value="μV">μV</option>
+            </select>
+        </td>
+        <td>5</td>
+        <td>
+            <select class="my-combobox" name="READVALUE" id="READVALUE_t_1_1">
+                <option value="A">A</option>
+                <option value="kA">kA</option>
+                <option value="mA">mA</option>
+                <option value="μA">μA</option>
+                <option value="nA">nA</option>
+                <option value="pA">pA</option>
+            </select>
+        </td>
+        <td colspan="8">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="subtbl">
+                <tr>
+                    <td>
+                        <select class="my-combobox" name="ACTUALVALUE" id="ACTUALVALUE_t_1_1">
+                            <option value="1.0">1.0</option>
+                            <option value="0.5L">0.5L</option>
+                        </select>
+                    </td>
+                    <td><input id="shurufanwei_t_1_1" name="shurufanwei" type="text" class="my-textbox tc" value="" style="width:30px"></td>
+                    <td>0.0188</td>
+                    <td>0.0143</td>
+                    <td>0.0188</td>
+                    <td>0.0143</td>
+                    <td>0.00246</td>
+                    <td>0.0025</td>
+                </tr>
+                <tr>
+                    <td>
+                        <select class="my-combobox" name="SHIJISHUCHUZHI" id="SHIJISHUCHUZHI_t_1_1">
+                            1.0
+                            <option value="1.0">1.0</option>
+                            <option value="0.5L">0.5L</option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</thead>
+<tbody>
+    <!--表体-->
+   
+ </tbody>
+ <tfoot>
+     <!--表尾-->
+     
+ </tfoot> 
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        //tbodyIndex通道
+        //thi 当前位置
+        function set(tbodyIndex, thi) {
+            // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
+            $("#hideDangQianTongDao").val(tbodyIndex); CreateRow();
+
+        }
+        
+
+
+    </script>
+}
+@section TanKuang {
+    <!--弹框的位置-->
+    <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
+    <input type="hidden" id="txtPointLen" value="1" /><!--小数点位数-->
+}
