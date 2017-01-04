@@ -116,7 +116,7 @@
         var arr = $('#flexigridData').datagrid('getSelections');
 
         if (arr.length == 1) {
-            window.location.href = "/METERING_STANDARD_DEVICE/Edit/" + arr[0].METERING_STANDARD_DEVICEID + "^" + arr[0].GROUPS + "^" + "UA";
+            window.location.href = "/METERING_STANDARD_DEVICE/Edit/" + arr[0].METERING_STANDARD_DEVICEID + "^" + arr[0].GROUPS + "^" + "UA" + "^" + arr[0].CATEGORY;
 
         } else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
