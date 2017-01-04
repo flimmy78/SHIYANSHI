@@ -15,12 +15,7 @@ using NPOI.HPSF;
 using NPOI.HSSF.Util;
 using NPOI.POIFS.FileSystem;
 //using NPOI.SS.UserModel;
-
-using Winista.Text.HtmlParser;
-using Winista.Text.HtmlParser.Lex;
-using Winista.Text.HtmlParser.Util;
-using Winista.Text.HtmlParser.Tags;
-using Winista.Text.HtmlParser.Filters;
+ 
 using Langben.BLL;
 using System.IO;
 using Langben.IBLL;
@@ -31,7 +26,7 @@ namespace Langben.Report
     /// <summary>
     /// 报告业务逻辑
     /// </summary>
-    public class ReportBLL
+    public partial class  ReportBLL
     {
         /// <summary>
         /// 模板中所有的合并的单元格
@@ -952,7 +947,7 @@ namespace Langben.Report
             if (entity.VALIDITYEND.HasValue)//有效期改为直接取数据库值
             {
                 sheet_Destination.GetRow(43).GetCell(9).SetCellValue(entity.VALIDITYEND.Value.ToString("yyyy年MM月dd日"));
-               
+
             }
             else
             {
@@ -1011,165 +1006,7 @@ namespace Langben.Report
             sheet_Destination.GetRow(47).GetCell(14).SetCellValue(chuanzhen);
             #endregion
         }
-        public bool Test(string ID, out string Message)
-        {
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            string errors = string.Empty;
-            IBLL.IPREPARE_SCHEMEBLL m_BLL = new PREPARE_SCHEMEBLL();
-            PREPARE_SCHEME entity = m_BLL.GetById(ID);
-            string saveFileName = "";
-            if (entity != null)
-            {
-                ExportType type = GetExportType(entity, "ExportOriginal");
-
-                if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE != null &&
-              entity.QUALIFIED_UNQUALIFIED_TEST_ITE.Count > 0)
-                {
-                    TableTemplates allTableTemplates = GetTableTemplates(type);
-                    SpecialCharacters allSpecialCharacters = GetSpecialCharacters();
-
-                    entity.QUALIFIED_UNQUALIFIED_TEST_ITE = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.OrderBy(p => p.SORT).ToList();
-                    string xml = string.Empty;
-                    foreach (QUALIFIED_UNQUALIFIED_TEST_ITE iEntity in entity.QUALIFIED_UNQUALIFIED_TEST_ITE)
-                    {
-                        //iEntity.RULEID;
-                        if (!string.IsNullOrWhiteSpace(iEntity.HTMLVALUE))
-                        {
-                            doc.LoadHtml(iEntity.HTMLVALUE);
-
-
-                            //测试的时候使用
-                            string data = AnalyticHTML.Getinput(doc);
-                            if (!string.IsNullOrWhiteSpace(data))
-                            {
-                                errors += iEntity.ID + iEntity.RULENJOINAME + data;
-                            }
-                        }
-
-                    }
-                    var da = xml;
-                }
-            }
-            Message = errors;
-            return false;
-        }
-        public bool Testxml(string ID, out string Message)
-        {
-            var dsaf = 1;
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            string errors = string.Empty;
-            var m_BLL = new SCHEMEBLL();
-            var entity = m_BLL.GetById(ID);
-            TableTemplates allTableTemplates = GetTableTemplates();
-            if (entity != null)
-            {
-
-                if (entity.PROJECTTEMPLET != null &&
-              entity.PROJECTTEMPLET.Count > 0)
-                {
-
-
-                    foreach (var iEntity in entity.PROJECTTEMPLET)
-                    {
-                        if (!string.IsNullOrWhiteSpace(iEntity.HTMLVALUE))
-                        {
-                            doc.LoadHtml(iEntity.HTMLVALUE);
-
-                            //测试获取数据的时候使用
-                            var data1 = AnalyticHTML.GetData(doc);
-                            var data2 = AnalyticHTML.GetHeadData(doc);
-
-                            string s = CreatXML.Create(doc, iEntity.RULEID);
-                            if (string.IsNullOrWhiteSpace(s))
-                            {
-                                dsaf++;
-                            }
-                            errors += s;
-                        }
-                        else
-                        {
-                            dsaf++;
-                        }
-
-                    }
-                }
-            }
-            Message = @"<TableTemplates><TableTemplateList>
- " + errors + @"
-</TableTemplateList></TableTemplates>";
-
-            TableTemplates allTableTemplates2 = TableTemplates.XmlCovertObj(Message);
-            var data = (from f in allTableTemplates.TableTemplateList
-                        from f2 in allTableTemplates2.TableTemplateList
-                        where f.RuleID == f2.RuleID
-
-                        select f2).ToList();
-            TableTemplates t = new TableTemplates();
-            t.TableTemplateList = new List<TableTemplate>();
-
-            foreach (var item in data)
-            {
-                var TableTemplate = (from f in allTableTemplates.TableTemplateList
-                                     where f.RuleID == item.RuleID
-                                     select f).FirstOrDefault();
-               
-                item.DataRowIndex = TableTemplate.DataRowIndex + 2;//数据模板开始行号
-                item.RemarkRowIndex = TableTemplate.RemarkRowIndex + 2;//备注模板行号
-                item.ConclusionRowIndex = TableTemplate.ConclusionRowIndex + 2;//结论模板行号
-
-                var RowInfo = (from f in TableTemplate.TableTitleList
-
-                               select f).FirstOrDefault();
-                if (RowInfo != null)
-                {
-                    foreach (var it in item.TableTitleList)
-                    {
-                        it.RowIndex = RowInfo.RowIndex + 2;//表格表头行号
-                    }
-                }
-
-                t.TableTemplateList.Add(item);
-            }
-
-            Message = t.ToString();
-            return false;
-
-
-        }
-        public bool TestPROJECTTEMPLET(string ID, out string Message)
-        {
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            string errors = string.Empty;
-            var m_BLL = new SCHEMEBLL();
-            var entity = m_BLL.GetById(ID);
-
-            if (entity != null)
-            {
-
-                if (entity.PROJECTTEMPLET != null &&
-              entity.PROJECTTEMPLET.Count > 0)
-                {
-
-
-                    foreach (var iEntity in entity.PROJECTTEMPLET)
-                    {
-                        if (!string.IsNullOrWhiteSpace(iEntity.HTMLVALUE))
-                        {
-                            doc.LoadHtml(iEntity.HTMLVALUE);
-                            string data = AnalyticHTML.Getinput(doc);
-                            if (!string.IsNullOrWhiteSpace(data))
-                            {
-                                errors += iEntity.ID + iEntity.RULE.NAME + data;
-                            }
-
-                        }
-
-                    }
-                }
-            }
-            Message = errors;
-            return false;
-        }
+     
         /// <summary>
         /// 导出原始记录Excel
         /// </summary>
@@ -1281,7 +1118,7 @@ namespace Langben.Report
 
                                         while (buQueDingDu.pingding != null && buQueDingDu.pingding.Count > 0)
                                         {
-                                            Dictionary<string, CellRangeAddress> cellAddressList = CopyRow_1(sheet_Source, sheet_Destination, 1, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);                                           
+                                            Dictionary<string, CellRangeAddress> cellAddressList = CopyRow_1(sheet_Source, sheet_Destination, 1, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
                                             int cIndex = 1;
                                             if (cellAddressList != null && cellAddressList.Count > 0)
                                             {
@@ -1305,9 +1142,9 @@ namespace Langben.Report
                                                 }
                                                 pingdingIndex++;
                                             }
-                                            rowIndex_Destination++;                                            
+                                            rowIndex_Destination++;
 
-                                        } 
+                                        }
                                     }
                                     #endregion
 
@@ -1408,7 +1245,7 @@ namespace Langben.Report
                 }
                 #endregion
             }
-           
+
         }
         /// <summary>
         /// 设置封皮信息
@@ -1835,9 +1672,9 @@ namespace Langben.Report
         {
             List<VTEST_ITE> vList = null;
             if (entity != null)
-            {                
+            {
                 IBLL.IVTEST_ITEBLL vBLL = new VTEST_ITEBLL();
-                vList = vBLL.GetByPREPARE_SCHEMEID(entity.ID);               
+                vList = vBLL.GetByPREPARE_SCHEMEID(entity.ID);
             }
             int RowIndex = 1;
             int JWTemplateIndex = 0;//规程标题获取源格式行   
@@ -1847,7 +1684,7 @@ namespace Langben.Report
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
             #region 检测项目            
-            if (vList != null &&  vList.Count > 0)
+            if (vList != null && vList.Count > 0)
             {
 
                 TableTemplates allTableTemplates = GetTableTemplates(type);
@@ -1876,7 +1713,7 @@ namespace Langben.Report
 
                     #region 检测项目标题     
                     //相同检测项只展示一个标题      
-                        
+
                     CopyRow(sheet_Source, sheet_Destination, ruleTitleTemplateIndex, RowIndex, 1, false);
                     string celStr = i.ToString() + "、";
 
@@ -1884,17 +1721,17 @@ namespace Langben.Report
                     {
                         celStr = celStr + iVTEST_ITE.NAME.Trim() + "：";
                     }
-                    if (iEntity!=null && iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
+                    if (iEntity != null && iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
                     {
                         celStr = celStr + iEntity.CONCLUSION.Trim();
                     }
-                    else if(iEntity==null)
+                    else if (iEntity == null)
                     {
                         celStr = celStr + "/";
                     }
                     sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue(celStr);
                     RowIndex++;
-                    
+
                     //相同检测项只展示一个标题   
                     if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
 
@@ -1909,7 +1746,7 @@ namespace Langben.Report
                     #endregion
 
                     #region 检测项目表格                    
-                                        
+
                     //if (TableTemplateDic != null && TableTemplateDic.ContainsKey(iEntity.RULEID))
                     //{
                     //    TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
@@ -1920,7 +1757,7 @@ namespace Langben.Report
                         //解析html表格数据    
 
                         //RowIndex = paserData(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);
-                        RowIndex = paserData_1(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);                        
+                        RowIndex = paserData_1(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);
 
 
                         //表格注
@@ -2282,16 +2119,16 @@ namespace Langben.Report
             if (sourceCell == null)
             {
                 return new HSSFRichTextString("");
-            }                
+            }
 
             int speStartIndex = sourceCell.StringCellValue.IndexOf("{0}");//动态字符位置
             string value = "";
             string SpecialStr = "";
             //有动态数据
-            if (speStartIndex>=0 && DongTaiShuJuList!=null && DongTaiShuJuList.Count>0 && rowInfoList!=null && rowInfoList.Count>0 && 
-                rowInfoList.FirstOrDefault().Cells!=null )
+            if (speStartIndex >= 0 && DongTaiShuJuList != null && DongTaiShuJuList.Count > 0 && rowInfoList != null && rowInfoList.Count > 0 &&
+                rowInfoList.FirstOrDefault().Cells != null)
             {
-                while(DongTaiShuJuList != null && DongTaiShuJuList.Count > 0 && rowInfoList.FirstOrDefault().Cells.FirstOrDefault(p => p.Code == DongTaiShuJuList.FirstOrDefault().name) ==null )
+                while (DongTaiShuJuList != null && DongTaiShuJuList.Count > 0 && rowInfoList.FirstOrDefault().Cells.FirstOrDefault(p => p.Code == DongTaiShuJuList.FirstOrDefault().name) == null)
                 {
                     DongTaiShuJuList.RemoveAt(0);
                 }
@@ -2382,7 +2219,7 @@ namespace Langben.Report
                     }
                     #endregion
 
-                }               
+                }
                 return result;
             }
 
@@ -2725,292 +2562,7 @@ namespace Langben.Report
             }
         }
 
-        #endregion 
-        #region 解析html
-        private ITag getTag(INode node)
-        {
-            if (node == null)
-                return null;
-            return node is ITag ? node as ITag : null;
-        }
-        /// <summary>
-        /// 隐藏行
-        /// </summary>
-        /// <param name="sheet"></param>
-        /// <param name="startRowIndex">开始行号</param>
-        /// <param name="rowCount">行数</param>
-        private void HideRow(ISheet sheet, int startRowIndex, int rowCount)
-        {
-            for (int i = 0; i < rowCount; i++)
-            {
-                IRow sourceRow = sheet.GetRow(startRowIndex);
-                sourceRow.Height = 0;
-                startRowIndex++;
-            }
-        }
-        /// <summary>
-        /// 设置行号，同时插入行
-        /// </summary>
-        /// <param name="nodeList">节点(按输入框)</param>
-        /// <param name="sheet_Source">源sheet</param>
-        /// <param name="sheet_Destination">目标sheet</param>
-        /// <param name="rowIndex_Source">源行号</param>
-        /// <param name="rowIndex_Destination">目标开始行号</param>
-        /// <param name="rowIndex">最大行号</param>
-        /// <param name="allSpecialCharacters">特殊字符配置信息</param>
-        /// <returns></returns>
-        private Dictionary<string, int> SetRowIndex(NodeList nodeList, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, out int rowIndex, SpecialCharacters allSpecialCharacters = null, List<Cell> CellsTemplate = null)
-        {
-            Dictionary<string, int> dic = new Dictionary<string, int>();
-
-            if (nodeList.Count > 0)
-            {
-                string Id = string.Empty;
-                string Name = string.Empty;
-                for (int j = 0; j < nodeList.Count; j++)
-                {
-                    ITag tag = getTag(nodeList[j]);
-                    Id = tag.GetAttribute("ID");
-                    Name = tag.GetAttribute("name");
-
-                    Id = GetExceptNameID(Id, Name);
-
-                    if (Id != null && Id.ToString().Trim() != "" && !dic.ContainsKey(Id))
-                    {
-                        if (!dic.Keys.Contains(Id.ToString()))
-                        {
-                            dic.Add(Id.ToString(), rowIndex_Destination);
-                        }
-
-                        CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true, null, null, allSpecialCharacters, CellsTemplate);
-                        rowIndex_Destination++;
-
-                    }
-                }
-            }
-            rowIndex = rowIndex_Destination;
-            return dic;
-        }
-        /// <summary>
-        /// 获取ID中的通道号_量程号_行号信息
-        /// </summary>
-        /// <param name="id">控件ID</param>
-        /// <param name="name">控件name</param>
-        /// <returns></returns>
-        private string GetExceptNameID(object Id, object Name)
-        {
-            if (Id == null || Name == null)
-            {
-                return "";
-            }
-            if (!string.IsNullOrWhiteSpace(Id.ToString().Trim()) && Id.ToString().Trim().IndexOf(Name.ToString().Trim()) == 0)
-            {
-                Id = Id.ToString().Trim().Replace(Name.ToString().Trim(), "");
-            }
-            else
-            {
-                string[] ids = Id.ToString().Trim().Split('_');
-                if (ids.Length > 3)
-                {
-                    Id = "";
-                    for (int i = ids.Length - 3; i < ids.Length - 1; i++)
-                    {
-                        Id += "_" + ids[i];
-                    }
-                }
-            }
-
-
-            return Id.ToString().Trim();
-        }
-        /// <summary>
-        /// 设置行号，同时插入行
-        /// </summary>
-        /// <param name="nodeList"></param>
-        /// <returns></returns>
-        private Dictionary<string, int> SetRowIndex1(NodeList nodeList, ISheet sheet, int startRowIndex, int sourceRowIndex, out int rowIndex)
-        {
-            Dictionary<string, int> dic = new Dictionary<string, int>();
-
-            if (nodeList.Count > 0)
-            {
-                object Id = string.Empty;
-                object Name = string.Empty;
-                for (int j = 0; j < nodeList.Count; j++)
-                {
-                    ITag tag = getTag(nodeList[j]);
-                    Id = tag.GetAttribute("ID");
-                    Name = tag.GetAttribute("name");
-                    if (Id != null && Id.ToString().Trim() != "" && Name != null && Name.ToString().Trim() != "")
-                    {
-                        Id = Id.ToString().Trim().Replace(Name.ToString().Trim(), "");
-                        if (Id.ToString() != "" && Id.ToString().Split('_').Length >= 4 && !dic.ContainsKey(Id.ToString()))
-                        {
-                            startRowIndex++;
-                            dic.Add(Id.ToString(), startRowIndex);
-                            CopyRow(sheet, startRowIndex, sourceRowIndex, 1, true);
-
-                        }
-                    }
-                }
-            }
-            rowIndex = startRowIndex;
-            return dic;
-        }
-        /// <summary>
-        /// 获取表头下拉框值，如果没有下拉框直接返回空字符串
-        /// </summary>
-        /// <param name="node">节点</param>
-        /// <param name="IsEnd">是否结束</param>
-        /// <returns></returns>
-        private string GetHearderValue(INode node, out bool IsEnd, ref int count, ref string firstValue)
-        {
-            IsEnd = false;
-            string value = "";
-            ITag tag = getTag(node);
-            if (tag != null)
-            {
-                if ((tag.GetAttribute("$<TAGNAME>$") == "option" && tag.GetAttribute("SELECTED") == "selected") || tag.GetAttribute("$<TAGNAME>$") == "input")
-                {
-                    IsEnd = true;
-                    value = tag.GetAttribute("VALUE");
-                    return value;
-                }
-                if (count == -1 && tag.GetAttribute("$<TAGNAME>$") == "option")
-                {
-                    firstValue = tag.GetAttribute("VALUE");
-                    if (string.IsNullOrEmpty(firstValue) || firstValue.Trim() == "")
-                    {
-                        firstValue = ((Winista.Text.HtmlParser.Tags.CompositeTag)tag).StringText;
-                        if (firstValue == null)
-                        {
-                            firstValue = "";
-                        }
-                    }
-                    count++;
-                }
-                //子节点  
-                if (tag.Children != null && tag.Children.Count > 0 && IsEnd == false)
-                {
-                    for (int j = 0; j < tag.Children.Count; j++)
-                    {
-                        if (IsEnd == false)
-                        {
-                            value = GetHearderValue(tag.Children[j], out IsEnd, ref count, ref firstValue);
-                        }
-                    }
-                }
-                //兄弟节点 
-                //if (IsEnd == false)
-                //{
-                //    INode siblingNode = tag.NextSibling;
-                //    while (siblingNode != null)
-                //    {
-                //        value = GetHearderValue(siblingNode, out IsEnd, ref count, ref firstValue);
-                //        siblingNode = siblingNode.NextSibling;
-                //    }
-                //}
-            }
-            return value;
-        }
-        /// <summary>
-        /// 是否存在输入框\下拉框
-        /// </summary>
-        /// <param name="node">节点</param>
-        /// <param name="IsEnd">是否结束</param>
-        /// <returns></returns>
-        private bool IsExistInputOrSelect(INode node, out bool IsEnd)
-        {
-            IsEnd = false;
-            bool result = false;
-            ITag tag = getTag(node);
-            if (tag != null)
-            {
-                if (tag.GetAttribute("$<TAGNAME>$") == "select" || tag.GetAttribute("$<TAGNAME>$") == "input")
-                {
-                    IsEnd = true;
-                    result = true;
-                    return true;
-                }
-                //子节点  
-                if (tag.Children != null && tag.Children.Count > 0 && IsEnd == false)
-                {
-                    for (int j = 0; j < tag.Children.Count; j++)
-                    {
-                        if (IsEnd == false)
-                        {
-                            result = IsExistInputOrSelect(tag.Children[j], out IsEnd);
-                        }
-                    }
-                }
-                //兄弟节点 
-                if (IsEnd == false)
-                {
-                    INode siblingNode = tag.NextSibling;
-                    while (siblingNode != null)
-                    {
-                        result = IsExistInputOrSelect(siblingNode, out IsEnd);
-                        siblingNode = siblingNode.NextSibling;
-                    }
-                }
-            }
-            return result;
-        }
-        /// <summary>
-        /// 解析html，然后行号
-        /// </summary>
-        /// <param name="html">html</param>
-        /// <param name="sheet_Source">源sheet</param>
-        /// <param name="sheet_Destination">目标sheet</param>
-        /// <param name="rowIndex_Destination">目标开始行号</param>
-        /// <param name="temp">模板行号单元对象</param>
-        /// <param name="allSpecialCharacters">特殊字符配置信息</param>
-        /// <returns></returns>
-        private int paserData(string html, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, SpecialCharacters allSpecialCharacters = null)
-        {
-            if (html == null || html.Trim() == "")
-            {
-                return rowIndex_Destination;
-            }
-            #region 将hmtl转换程文本框及下拉框对象
-            Lexer lexer_Input = new Lexer(html);//必须定义多个，否则第二个获取不到数据
-            Parser parser_Input = new Parser(lexer_Input);
-            Lexer lexer_Option = new Lexer(html);
-            Parser parser_Option = new Parser(lexer_Option);
-            NodeFilter filter_Input = new TagNameFilter("input");
-            NodeFilter filter_Option = new TagNameFilter("OPTION");
-            NodeList nodeList_Input = parser_Input.Parse(filter_Input);
-            NodeList nodeList_Option = parser_Option.Parse(filter_Option);
-
-            Lexer lexer_Thead = new Lexer(html);
-            Parser parser_Thead = new Parser(lexer_Thead);
-            NodeFilter filter_Thead = new TagNameFilter("thead");
-            NodeList nodeList_Thead = parser_Thead.Parse(filter_Thead);
-
-            //表头
-            //Dictionary<int, List<string>> TableTitleDic = null;
-            Dictionary<int, Dictionary<string, string>> TableTitleDic = null;
-            Dictionary<int, NodeList> InputDic = null;
-            Dictionary<int, NodeList> OptionDic = null;
-
-            //表头 
-            TableTitleDic = GetHeaderDic(nodeList_Thead);
-            #region 数据
-            if (TableTitleDic != null && TableTitleDic.Count > 0)
-            {
-                // 数据文本                
-                InputDic = GetDataDic(nodeList_Input);
-                // 数据下拉框                
-                OptionDic = GetDataDic(nodeList_Option);
-
-            }
-            #endregion
-
-            #endregion            
-            int rowIndex = paserData(sheet_Source, sheet_Destination, rowIndex_Destination, temp, TableTitleDic, InputDic, OptionDic, allSpecialCharacters);
-            return rowIndex;
-
-        }
+        #endregion
         /// <summary>
         /// 设置表格
         /// </summary>
@@ -3030,26 +2582,26 @@ namespace Langben.Report
             Dictionary<int, List<MYDataHead>> footDic = AnalyticHTML.GetFootData(doc);//表尾
 
             #region 处理下一行数据为空需要单元格合并数据
-            if (temp!=null && temp.Cells!=null && temp.Cells.Count>0 && dataDic != null && dataDic.Count > 0)
+            if (temp != null && temp.Cells != null && temp.Cells.Count > 0 && dataDic != null && dataDic.Count > 0)
             {
                 List<Cell> cList = temp.Cells.FindAll(p => p.IsMergeNullValue == "Y");
-                if(cList!=null && cList.Count>0)
+                if (cList != null && cList.Count > 0)
                 {
-                    foreach(Cell c in cList)
+                    foreach (Cell c in cList)
                     {
                         foreach (DataValue d in dataDic.Values)
                         {
-                            if(d!=null && d.Data!=null && d.Data.Count>0)
+                            if (d != null && d.Data != null && d.Data.Count > 0)
                             {
-                                List<MYData> cData= d.Data.FindAll(p => p.name == c.Code);                               
+                                List<MYData> cData = d.Data.FindAll(p => p.name == c.Code);
                                 int mergedRowNum = 0;
                                 MYData mdd = null;
 
                                 List<MYData> removeList = new List<MYData>();
                                 int indexCount = 1;
-                                if (cData!=null && cData.Count>0)
+                                if (cData != null && cData.Count > 0)
                                 {
-                                    foreach(MYData md in cData)
+                                    foreach (MYData md in cData)
                                     {
                                         if (indexCount == 1)
                                         {
@@ -3073,13 +2625,13 @@ namespace Langben.Report
                                                 removeList.Add(md);
                                             }
                                         }
-                                        if(indexCount== cData.Count)
+                                        if (indexCount == cData.Count)
                                         {
                                             mdd.mergedRowNum = mergedRowNum;
                                         }
                                         indexCount++;
                                     }
-                                    foreach(MYData md in removeList)
+                                    foreach (MYData md in removeList)
                                     {
                                         d.Data.Remove(md);
                                     }
@@ -3088,7 +2640,7 @@ namespace Langben.Report
                         }
                     }
                 }
-               
+
             }
             #endregion 
 
@@ -3171,7 +2723,7 @@ namespace Langben.Report
                                 {
                                     HideRow(sheet_Destination, c.FirstRow, 1);
                                 }
-                                else if((value == null || string.IsNullOrWhiteSpace(value.String)))
+                                else if ((value == null || string.IsNullOrWhiteSpace(value.String)))
                                 {
                                     value = new HSSFRichTextString("/");
                                 }
@@ -3226,764 +2778,21 @@ namespace Langben.Report
         }
 
         /// <summary>
-        /// 获取某节点下的数据
+        /// 隐藏行
         /// </summary>
-        /// <param name="node">节点</param>       
-        /// <param name="DataDic">返回数据</param>
-        private void GetAllData(INode node, int TongDaoID, ref Dictionary<int, Dictionary<string, string>> DataDic)
-        {
-            //ITag tag = getTag(node);
-            ////if (tag != null && tag.GetAttribute("$<TAGNAME>$")=="input")
-            ////if (tag != null && tag.GetAttribute("ID")!=null && tag.GetAttribute("name")!=null && ((tag.GetAttribute("$<TAGNAME>$") == "option" && tag.GetAttribute("SELECTED") == "selected") || tag.GetAttribute("$<TAGNAME>$") == "input"))
-            ////{             
-
-            //if (TongDaoID <1)
-            //{
-            //    TongDaoID = GetTongDaoID(node);
-            //}
-            ////    string Name = tag.GetAttribute("name");
-            ////    bool IsEnd = false;
-            ////    var value = GetHearderValue(node, out IsEnd);
-            ////   // IsEnd = false;
-            ////   // var IsExist = IsExistInputOrSelect(node, out IsEnd);
-
-            ////    //if ((value != null && value.Trim() != "") || IsExist)
-            ////    if ((value != null && value.Trim() != ""))
-            ////        {
-            ////        if (DataDic == null)
-            ////        {
-            ////            DataDic = new Dictionary<int, Dictionary<string,string>>();
-            ////        }
-            ////        if (!DataDic.ContainsKey(ID))
-            ////        {
-            ////            DataDic.Add(ID, new Dictionary<string, string>());
-
-            ////        }
-            ////        if(!DataDic[ID].ContainsKey(Name))
-            ////        {
-            ////            DataDic[ID].Add(Name, value); ;
-            ////        }
-
-            ////    }
-            ////}
-            //if (tag != null  && (tag.GetAttribute("$<TAGNAME>$") == "select"  || tag.GetAttribute("$<TAGNAME>$") == "input"))
-            //{
-            //    //int ID = GetTongDaoID(node);
-            //    string Name = tag.GetAttribute("name");
-            //    string Value = "";
-
-            //    //输入框
-            //    if (tag.GetAttribute("ID") != null && tag.GetAttribute("name") != null && tag.GetAttribute("$<TAGNAME>$") == "input")
-            //    {
-            //        //ID = GetTongDaoID(node);                    
-            //        Value = tag.GetAttribute("value");                    
-            //    }
-            //    //下拉框
-            //    else if (tag.GetAttribute("$<TAGNAME>$") == "select")
-            //    {                   
-            //        bool IsEnd = false;                   
-            //        Value = GetHearderValue(node, out IsEnd);
-
-            //    }
-            //    if (DataDic == null)
-            //    {
-            //        DataDic = new Dictionary<int, Dictionary<string, string>>();
-            //    }
-            //    if (!DataDic.ContainsKey(TongDaoID))
-            //    {
-            //        DataDic.Add(TongDaoID, new Dictionary<string, string>());
-
-            //    }
-            //    if (!DataDic[TongDaoID].ContainsKey(Name))
-            //    {
-            //        DataDic[TongDaoID].Add(Name, Value); ;
-            //    }               
-
-            //}
-            ////子节点
-            //if (node.Children != null && node.Children.Count > 0 && tag.GetAttribute("$<TAGNAME>$") != "select")
-            //{
-            //    GetAllData(node.FirstChild, TongDaoID,ref DataDic);
-            //}
-            ////兄弟节点
-            //INode siblingNode = node.NextSibling;
-            //while (siblingNode != null)
-            //{
-            //    GetAllData(siblingNode, TongDaoID,ref DataDic);
-            //    siblingNode = siblingNode.NextSibling;
-            //}
-
-            ITag tag = getTag(node);
-            if (TongDaoID < 1)
-            {
-                TongDaoID = GetTongDaoID(node);
-            }
-            if (tag != null && tag.GetAttribute("name") != null && (tag.GetAttribute("$<TAGNAME>$") == "select" || tag.GetAttribute("$<TAGNAME>$") == "input"))
-            {
-
-                string Name = tag.GetAttribute("name");
-                string Value = "";
-
-                //输入框
-                if (tag.GetAttribute("ID") != null && tag.GetAttribute("name") != null && tag.GetAttribute("$<TAGNAME>$") == "input")
-                {
-                    Value = tag.GetAttribute("value");
-                }
-                //下拉框
-                else if (tag.GetAttribute("$<TAGNAME>$") == "select")
-                {
-                    bool IsEnd = false;
-                    int count = -1;
-                    string firstValue = "";
-                    Value = GetHearderValue(node, out IsEnd, ref count, ref firstValue);
-                    if (Value == null || Value.Trim() == "")
-                    {
-                        Value = firstValue;
-                    }
-
-                }
-                if (DataDic == null)
-                {
-                    DataDic = new Dictionary<int, Dictionary<string, string>>();
-                }
-                if (!DataDic.ContainsKey(TongDaoID))
-                {
-                    DataDic.Add(TongDaoID, new Dictionary<string, string>());
-
-                }
-                if (!DataDic[TongDaoID].ContainsKey(Name))
-                {
-                    DataDic[TongDaoID].Add(Name, Value); ;
-                }
-            }
-        }
-
-
-
-        /// <summary>
-        /// 设置表格
-        /// </summary>
-        /// <param name="sheet_Source">源sheet</param>
-        /// <param name="sheet_Destination">目标sheet</param>
-        /// <param name="rowIndex_Destination">目标开始行号</param>
-        /// <param name="temp">模板信息</param>
-        /// <param name="TableTitleDic">表头</param>
-        /// <param name="InputDic">文本框</param>
-        /// <param name="OptionDic">下拉框</param>       
-        /// <param name="allSpecialCharacters">特殊字符配置信息</param>
-        /// <returns></returns>
-        private int paserData(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination,
-            TableTemplate temp, Dictionary<int, Dictionary<string, string>> TableTitleDic,
-            Dictionary<int, NodeList> InputDic, Dictionary<int, NodeList> OptionDic, SpecialCharacters allSpecialCharacters = null)
-        {
-            int rowIndex = rowIndex_Destination;
-            //通道循环
-            foreach (int key in TableTitleDic.Keys)
-            {
-                //画表头                            
-                if (temp.TableTitleList != null && temp.TableTitleList.Count > 0)
-                {
-                    foreach (RowInfo t in temp.TableTitleList)
-                    {
-                        if (t.RowIndex >= 0)
-                        {
-                            //数据与创建行同时进行
-                            CopyRow(sheet_Source, sheet_Destination, t.RowIndex, rowIndex_Destination, 1, true, TableTitleDic[key], temp.TableTitleList, allSpecialCharacters);
-                            rowIndex_Destination++;
-                        }
-                    }
-                }
-                //是否包含某通道表格数据
-                if (InputDic.ContainsKey(key))
-                {
-                    NodeList nodeList_Input = InputDic[key];
-                    int startRowIndex = rowIndex_Destination;
-                    //画行不包含数据
-                    Dictionary<string, int> dic = SetRowIndex(nodeList_Input, sheet_Source, sheet_Destination, temp.DataRowIndex, rowIndex_Destination, out rowIndex, allSpecialCharacters, temp.Cells);
-                    rowIndex_Destination = rowIndex;
-                    int endRowIndex = rowIndex;
-
-                    if (dic != null && dic.Count > 0)
-                    {
-                        object Id = string.Empty;
-                        object Name = string.Empty;
-                        object Value = string.Empty;
-
-                        #region 输出文本框内容
-                        for (int j = 0; j < nodeList_Input.Count; j++)
-                        {
-                            int MergedRowCount = 1;//合并行数
-                            ITag tag = getTag(nodeList_Input[j]);
-                            if (tag != null)
-                            {
-                                //根据html中的合并行数设置合并
-                                ITag parentTag = getTag(tag.Parent);
-                                if (parentTag != null && parentTag.GetAttribute("$<TAGNAME>$") == "td" && parentTag.GetAttribute("ROWSPAN") != null)
-                                {
-                                    MergedRowCount = Convert.ToInt32(parentTag.GetAttribute("ROWSPAN"));
-                                }
-                                else
-                                {
-                                    MergedRowCount = 1;
-                                }
-                            }
-
-                            Id = tag.GetAttribute("ID");
-                            Name = tag.GetAttribute("name");
-                            Value = tag.GetAttribute("VALUE");
-                            if (Value == null || Value.ToString().Trim() == "")
-                            {
-                                Value = "";//无数据设置空
-                            }
-                            if (Id != null && Id.ToString().Trim() != "" && Name != null && Name.ToString().Trim() != "")
-                            {
-                                Id = GetExceptNameID(Id, Name);
-                                //防止遗漏行号
-                                if (!dic.ContainsKey(Id.ToString()) && dic.ContainsKey(Id.ToString() + "_0"))
-                                {
-                                    Id = Id.ToString() + "_0";
-                                }
-                                if (dic.ContainsKey(Id.ToString()))
-                                {
-                                    try
-                                    {
-
-                                        if (temp.Cells != null && temp.Cells.Count > 0 && temp.Cells.FirstOrDefault(p => p.Code == Name.ToString().Trim()) != null)
-                                        {
-
-                                            Cell c = temp.Cells.FirstOrDefault(p => p.Code == Name.ToString().Trim());
-                                            if (c.IsMergeSameValue == "Y")
-                                            {
-                                                MergedRowCount = 1;
-
-                                            }
-                                            int cellIndex = c.ColIndex;
-                                            int cellCount = c.ColCount;
-                                            if (MergedRowCount > 1)
-                                            {
-                                                sheet_Destination.AddMergedRegion(new CellRangeAddress(dic[Id.ToString()], dic[Id.ToString()] + MergedRowCount - 1, cellIndex, cellIndex + cellCount - 1));
-                                                for (int i = dic[Id.ToString()]; i < (dic[Id.ToString()] + MergedRowCount); i++)
-                                                {
-                                                    sheet_Destination.GetRow(i).GetCell(cellIndex).SetCellValue("");
-                                                }
-                                            }
-
-                                            //sheet_Destination.GetRow(dic[Id.ToString()]).GetCell(cellIndex).SetCellValue(Value.ToString());
-                                            HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, Value.ToString());
-                                            sheet_Destination.GetRow(dic[Id.ToString()]).GetCell(cellIndex).SetCellValue(value);
-
-                                        }
-                                        //Dictionary<int, NodeList> controlDic
-                                        #region 未配置任何CellLis信息,按html中的顺序导出（将页面中的所有文本框、下拉框按html中的顺序取出节点存到controlDic中）
-                                        #endregion
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                    }
-                                }
-
-                            }
-                        }
-                        #endregion
-
-                        #region 输出下拉框内容
-                        if (OptionDic.ContainsKey(key))
-                        {
-                            NodeList nodeList_Option = OptionDic[key];
-                            for (int j = 0; j < nodeList_Option.Count; j++)
-                            {
-                                int MergedRowCount = 1;//合并行数
-                                ITag tag = getTag(nodeList_Option[j]);
-                                if (tag != null)
-                                {
-                                    ITag parentTag = getTag(tag.Parent.Parent);
-                                    if (parentTag != null && parentTag.GetAttribute("$<TAGNAME>$") == "td" && parentTag.GetAttribute("ROWSPAN") != null)
-                                    {
-                                        MergedRowCount = Convert.ToInt32(parentTag.GetAttribute("ROWSPAN"));
-                                    }
-                                    else
-                                    {
-                                        MergedRowCount = 1;
-                                    }
-                                }
-
-                                if ((((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"] != null &&
-                           ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"].ToString() != "K"
-                           && tag.GetAttribute("SELECTED") == "selected"))
-                                {
-                                    Id = ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["ID"];
-                                    Name = ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"];
-                                    Value = tag.GetAttribute("VALUE");
-                                    if (Id != null && Id.ToString().Trim() != "" && Name != null && Name.ToString().Trim() != "")
-                                    {
-                                        Id = Id.ToString().Trim().Replace(Name.ToString().Trim(), "");
-                                        if (!dic.ContainsKey(Id.ToString()) && dic.ContainsKey(Id.ToString() + "_0"))
-                                        {
-                                            Id = Id.ToString() + "_0";
-                                        }
-                                        if (dic.ContainsKey(Id.ToString()))
-                                        {
-                                            try
-                                            {
-
-                                                if (temp.Cells != null && temp.Cells.Count > 0 && temp.Cells.FirstOrDefault(p => p.Code == Name.ToString().Trim()) != null)
-                                                {
-
-                                                    Cell c = temp.Cells.FirstOrDefault(p => p.Code == Name.ToString().Trim());
-                                                    int cellIndex = c.ColIndex;
-                                                    int cellCount = c.ColCount;
-                                                    if (MergedRowCount > 1)
-                                                    {
-                                                        sheet_Destination.AddMergedRegion(new CellRangeAddress(dic[Id.ToString()], dic[Id.ToString()] + MergedRowCount - 1, cellIndex, cellIndex + cellCount - 1));
-                                                        for (int i = dic[Id.ToString()]; i < (dic[Id.ToString()] + MergedRowCount); i++)
-                                                        {
-                                                            sheet_Destination.GetRow(i).GetCell(cellIndex).SetCellValue("");
-                                                        }
-                                                    }
-                                                    //sheet_Destination.GetRow(dic[Id.ToString()]).GetCell(cellIndex).SetCellValue(Value.ToString());
-                                                    HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, Value.ToString());
-                                                    sheet_Destination.GetRow(dic[Id.ToString()]).GetCell(cellIndex).SetCellValue(value);
-
-                                                }
-                                            }
-                                            catch (Exception ex)
-                                            {
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        #endregion
-
-                        #region 合并行
-                        SetMergeAndHideRowSameValue(sheet_Destination, startRowIndex, endRowIndex, temp);
-                        #endregion
-                    }
-                }
-            }
-
-            return rowIndex_Destination;
-        }
-        /// <summary>
-        /// 获取页面中的表格数据中的文本框、下拉框按html中的顺序取出节点存到controlDic中
-        /// </summary>
-        /// <returns></returns>
-        private Dictionary<int, NodeList> GetControlDic()
-        {
-            Dictionary<int, NodeList> ControlDic = null;
-            return ControlDic;
-        }
-        /// <summary>
-        /// 行合并（相同数据合并）
-        /// </summary>
-        /// <param name="rowDic"></param>
-        /// <param name="sheet_Destination"></param>
-        /// <param name="temp"></param>
-        private void SetMergeAndHideRowSameValue(ISheet sheet_Destination, int startRowIndex, int endRowIndex, TableTemplate temp)
-        {
-
-            int startMergeRow = startRowIndex;
-            int endMergeRow = startRowIndex;
-            IRow targetRow_Prev = null;//前一行
-            IRow targetRow_Next = null;//后一行
-            ICell targetCell_Prev = null;//前一个单元格
-            ICell targetCell_Next = null;//后一个单元格            
-            if (temp != null && temp.Cells != null && temp.Cells.Count > 0)
-            {
-                foreach (Cell c in temp.Cells)
-                {
-                    if (c.IsMergeSameValue == "N" && c.IsHideRowNull == "N")
-                    {
-                        continue;
-                    }
-                    startMergeRow = startRowIndex;
-                    endMergeRow = startRowIndex;
-                    for (int i = startRowIndex; i < endRowIndex; i++)
-                    {
-                        targetRow_Prev = sheet_Destination.GetRow(i);
-                        targetRow_Next = sheet_Destination.GetRow(i + 1);
-                        targetCell_Prev = targetRow_Prev.Cells[c.ColIndex];
-                        targetCell_Next = targetRow_Next.Cells[c.ColIndex];
-                        if (c.IsHideRowNull == "Y" && (sheet_Destination.GetRow(i).GetCell(c.ColIndex).StringCellValue == "" || sheet_Destination.GetRow(i).GetCell(c.ColIndex).StringCellValue == "/"))
-                        {
-                            HideRow(sheet_Destination, i, 1);
-                            continue;
-                        }
-                        if (c.IsMergeSameValue == "N")
-                        {
-                            continue;
-                        }
-
-
-                        if ((targetCell_Prev.StringCellValue == targetCell_Next.StringCellValue || targetCell_Next.StringCellValue == "") && (i + 1) < endRowIndex)
-                        {
-                            endMergeRow = i + 1;
-                        }
-                        else
-                        {
-                            if (startMergeRow < endMergeRow)
-                            {
-                                for (int j = startMergeRow + 1; j <= endMergeRow; j++)
-                                {
-                                    sheet_Destination.GetRow(j).GetCell(c.ColIndex).SetCellValue("");
-                                }
-                                sheet_Destination.AddMergedRegion(new CellRangeAddress(startMergeRow, endMergeRow, c.ColIndex, c.ColIndex + c.ColCount));
-
-                            }
-                            startMergeRow = i + 1;
-                        }
-                    }
-
-                }
-            }
-        }
-        /// <summary>
-        /// 获取表头信息
-        /// </summary>
-        /// <returns></returns>
-        //private Dictionary<int, List<string>> GetHeaderDic(NodeList nodeList)
-        //{
-        //    Dictionary<int, List<string>> headerDic = new Dictionary<int, List<string>>();
-        //    #region 表头           
-
-        //    if (nodeList != null && nodeList.Count > 1)
-        //    {
-        //        headerDic = new Dictionary<int, List<string>>();
-        //        for (int i = 1; i < nodeList.Count; i++)
-        //        {
-        //            int key = 0;
-        //            ITag tag = getTag(nodeList[i]);
-        //            //TableHeader[] headerList = ((Winista.Text.HtmlParser.Tags.TableRow)((Winista.Text.HtmlParser.Nodes.AbstractNode)((Winista.Text.HtmlParser.Nodes.AbstractNode)tag).NextSibling).NextSibling).Headers;
-        //            NodeList headerList = ((Winista.Text.HtmlParser.Nodes.AbstractNode)((Winista.Text.HtmlParser.Nodes.AbstractNode)((Winista.Text.HtmlParser.Nodes.AbstractNode)((Winista.Text.HtmlParser.Nodes.AbstractNode)((Winista.Text.HtmlParser.Nodes.AbstractNode)tag).NextSibling).NextSibling).NextSibling).NextSibling).Children;
-        //            if (nodeList[i] != null && nodeList[i].Parent != null)
-        //            {
-        //                ITag tagHeader = getTag(nodeList[i].Parent);
-        //                object obj = tagHeader.GetAttribute("id");
-        //                if (obj != null)
-        //                {
-        //                    string id = obj.ToString().Trim().Split('_')[obj.ToString().Trim().Split('_').Length - 1];
-        //                    try
-        //                    {
-        //                        key = int.Parse(id);
-        //                    }
-        //                    catch (Exception ex)
-        //                    {
-        //                        key = 0;
-        //                    }
-
-        //                }
-        //            }
-        //            //if (headerList != null && headerList.Count() > 0)
-        //            if (headerList != null && headerList.Count > 0)
-        //            {
-        //                List<string> hList = new List<string>();
-        //                //foreach (TableHeader header in headerList)
-        //                for (int j=0;j< headerList.Count;j++)
-        //                {
-        //                   INode header = headerList[j];
-
-        //                    bool IsEnd = false;
-        //                    var headerValue = GetHearderValue(header, out IsEnd);
-        //                    IsEnd = false;
-        //                    var IsExist = IsExistInputOrSelect(header, out IsEnd);
-
-        //                    if ((headerValue != null && headerValue.Trim()!="") || IsExist)
-        //                    {
-        //                        hList.Add(headerValue);
-        //                    }
-        //                }
-        //                if (!headerDic.ContainsKey(key))
-        //                {                           
-        //                   headerDic.Add(key, hList);                            
-        //                }
-
-        //            }
-        //        }
-        //    }
-        //    #endregion
-        //    return headerDic;
-        //}
-        /// <summary>
-        /// 获取表头信息
-        /// </summary>
-        /// <returns></returns>
-        private Dictionary<int, Dictionary<string, string>> GetHeaderDic(NodeList nodeList)
-        {
-            Dictionary<int, List<string>> headerDic = new Dictionary<int, List<string>>();
-            Dictionary<int, Dictionary<string, string>> DataDic = new Dictionary<int, Dictionary<string, string>>();
-            #region 表头           
-
-            if (nodeList != null && nodeList.Count > 1)
-            {
-                headerDic = new Dictionary<int, List<string>>();
-                for (int i = 1; i < nodeList.Count; i++)
-                {
-                    ITag tag = getTag(nodeList[i]);
-                    //NodeList headerList = null;
-                    INode ParentNode = ((Winista.Text.HtmlParser.Nodes.AbstractNode)tag).Parent;
-                    ITag ParentTag = getTag(ParentNode);
-                    int TongDaoID = 0;
-                    if (ParentNode != null)
-                    {
-                        string[] IDs = ParentTag.GetAttribute("ID").Split('_');
-                        if (IDs.Length > 1)
-                        {
-                            try
-                            {
-                                TongDaoID = Convert.ToInt32(IDs[IDs.Length - 1]);
-                            }
-                            catch
-                            {
-                                TongDaoID = -1;
-                            }
-                        }
-                    }
-
-                    #region 暂时关闭                   
-                    //string str = ((Winista.Text.HtmlParser.Tags.CompositeTag)((Winista.Text.HtmlParser.Nodes.AbstractNode)tag).Parent).StringText;
-                    //int startIndex = str.IndexOf("<thead>");
-                    //int endIndex= str.IndexOf("</thead>");
-                    //if(startIndex>=0 && endIndex>=0)
-                    //{
-                    //    str = "<table>" + str.Substring(startIndex, endIndex) + "</table>";
-                    //    Lexer lexer_Tr = new Lexer(str);//必须定义多个，否则第二个获取不到数据
-                    //    Parser parser_Tr = new Parser(lexer_Tr);
-                    //    NodeFilter filter_Tr = new TagNameFilter("tr");
-                    //    headerList = parser_Tr.Parse(filter_Tr);
-                    //}
-                    //if (headerList != null && headerList.Count > 0)
-                    //{                        
-                    //    INode header = headerList[0];
-                    //    GetAllData(header, TongDaoID, ref DataDic);
-                    //}
-                    #endregion
-
-                    string html = ((Winista.Text.HtmlParser.Tags.CompositeTag)((Winista.Text.HtmlParser.Nodes.AbstractNode)tag).Parent).StringText;
-                    Lexer lexer_Input = new Lexer(html);//必须定义多个，否则第二个获取不到数据
-                    Parser parser_Input = new Parser(lexer_Input);
-                    Lexer lexer_Option = new Lexer(html);
-                    Parser parser_Option = new Parser(lexer_Option);
-                    NodeFilter filter_Input = new TagNameFilter("input");
-                    NodeFilter filter_Option = new TagNameFilter("select");
-                    NodeList nodeList_Input = parser_Input.Parse(filter_Input);
-                    NodeList nodeList_Option = parser_Option.Parse(filter_Option);
-
-                    if (nodeList_Input != null && nodeList_Input.Count > 0)
-                    {
-                        for (int j = 0; j < nodeList_Input.Count; j++)
-                        {
-                            INode node = nodeList_Input[j];
-                            GetAllData(node, TongDaoID, ref DataDic);
-                        }
-                    }
-                    if (nodeList_Option != null && nodeList_Option.Count > 0)
-                    {
-                        for (int jj = 0; jj < nodeList_Option.Count; jj++)
-                        {
-                            INode node = nodeList_Option[jj];
-                            GetAllData(node, TongDaoID, ref DataDic);
-                        }
-                    }
-
-                }
-            }
-            #endregion
-            return DataDic;
-        }
-
-        /// <summary>
-        /// 获取数据信息
-        /// </summary>
-        /// <param name="nodeList"></param>
-        /// <returns></returns>
-        private Dictionary<int, NodeList> GetDataDic(NodeList nodeList)
-        {
-            Dictionary<int, NodeList> dic = new Dictionary<int, NodeList>();
-            if (nodeList != null && nodeList.Count > 0)
-            {
-                for (int i = 0; i < nodeList.Count; i++)
-                {
-                    int tongdaoId = GetTongDaoID(nodeList[i]);
-                    if (tongdaoId != -1)
-                    {
-                        if (!dic.ContainsKey(tongdaoId))
-                        {
-                            dic.Add(tongdaoId, new NodeList());
-                        }
-                        dic[tongdaoId].Add(nodeList[i]);
-                    }
-                }
-            }
-            return dic;
-        }
-        /// <summary>
-        /// 获取通道ID
-        /// </summary>
-        /// <param name="node"></param>
-        /// <returns></returns>
-        private int GetTongDaoID(INode node)
-        {
-            ITag tag = getTag(node);
-            object Id = string.Empty;
-            object Name = string.Empty;
-            //标签类型
-            if (tag.GetAttribute("$<TAGNAME>$") == "input")
-            {
-                if (tag.GetAttribute("TYPE") == "hidden")
-                {
-                    return -1;
-                }
-                else
-                {
-                    Id = tag.GetAttribute("ID");
-                    Name = tag.GetAttribute("name");
-                }
-            }
-            else
-            {
-                if ((((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"] != null &&
-((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"].ToString() != "K"
-&& tag.GetAttribute("SELECTED") == "selected"))
-                {
-                    Id = ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["ID"];
-                    Name = ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"];
-
-                }
-                else
-                {
-                    return -1;
-                }
-            }
-            if (Id != null && Id.ToString().Trim() != "" && Name != null && Name.ToString().Trim() != "")
-            {
-                if (Id.ToString().Trim().IndexOf(Name.ToString().Trim()) == 0)
-                {
-                    string[] ids = Id.ToString().Trim().Replace(Name.ToString().Trim(), "").Split('_');
-                    if (ids.Length > 1)
-                    {
-                        try
-                        {
-                            return int.Parse(ids[1]);
-                        }
-                        catch
-                        {
-                            return 0;
-                        }
-                    }
-                    else
-                    {
-                        return -1;
-                    }
-                }
-                else
-                {
-                    string[] ids = Id.ToString().Trim().Split('_');
-                    if (ids.Length > 3)
-                    {
-                        return int.Parse(ids[ids.Length - 3]);
-
-                    }
-                    else
-                    {
-                        return -1;
-                    }
-                }
-            }
-            else
-            {
-                return -1;
-            }
-
-        }
-
-        /// <summary>
-        /// 解析html，然后行号
-        /// </summary>
-        /// <param name="nodeList_Input">文本框</param>
-        /// <param name="nodeList_Option">下拉框</param>
         /// <param name="sheet"></param>
-        /// <param name="startRowIndex">复制开始行号</param>
-        /// <param name="sourceRowIndex">复制源行号</param>
-        /// <returns></returns>
-        private int paserData1(NodeList nodeList_Input, NodeList nodeList_Option, ISheet sheet, int startRowIndex, int sourceRowIndex)
+        /// <param name="startRowIndex">开始行号</param>
+        /// <param name="rowCount">行数</param>
+        private void HideRow(ISheet sheet, int startRowIndex, int rowCount)
         {
-            int rowIndex = startRowIndex;
-            Dictionary<string, int> dic = SetRowIndex1(nodeList_Input, sheet, startRowIndex, sourceRowIndex, out rowIndex);
-            if (dic != null && dic.Count > 0)
+            for (int i = 0; i < rowCount; i++)
             {
-                object Id = string.Empty;
-                object Name = string.Empty;
-                object Value = string.Empty;
-
-                #region 输出文本框内容
-                for (int j = 0; j < nodeList_Input.Count; j++)
-                {
-                    ITag tag = getTag(nodeList_Input[j]);
-                    Id = tag.GetAttribute("ID");
-                    Name = tag.GetAttribute("name");
-                    Value = tag.GetAttribute("VALUE");
-                    if (Id != null && Id.ToString().Trim() != "" && Name != null && Name.ToString().Trim() != "")
-                    {
-                        Id = Id.ToString().Trim().Replace(Name.ToString().Trim(), "");
-                        if (!dic.ContainsKey(Id.ToString()) && dic.ContainsKey(Id.ToString() + "_0"))
-                        {
-                            Id = Id.ToString() + "_0";
-                        }
-                        if (dic.ContainsKey(Id.ToString()))
-                        {
-                            try
-                            {
-                                ZhiLiuDianLiuShuChuEnum colIndex = (ZhiLiuDianLiuShuChuEnum)Enum.Parse(typeof(ZhiLiuDianLiuShuChuEnum), Name.ToString().Trim());
-                                sheet.GetRow(dic[Id.ToString()]).GetCell((int)colIndex).SetCellValue(Value.ToString());
-                            }
-                            catch (Exception ex)
-                            { }
-                        }
-
-                    }
-                }
-                #endregion 
-
-                #region 输出下拉框内容
-                for (int j = 0; j < nodeList_Option.Count; j++)
-                {
-                    ITag tag = getTag(nodeList_Option[j]);
-
-                    if ((((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"] != null &&
-               ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"].ToString() != "K"
-               && tag.GetAttribute("SELECTED") == "selected"))
-                    {
-                        Id = ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["ID"];
-                        Name = ((Winista.Text.HtmlParser.Nodes.TagNode)tag.Parent).Attributes["NAME"];
-                        Value = tag.GetAttribute("VALUE");
-                        if (Id != null && Id.ToString().Trim() != "" && Name != null && Name.ToString().Trim() != "")
-                        {
-                            Id = Id.ToString().Trim().Replace(Name.ToString().Trim(), "");
-                            if (!dic.ContainsKey(Id.ToString()) && dic.ContainsKey(Id.ToString() + "_0"))
-                            {
-                                Id = Id.ToString() + "_0";
-                            }
-                            if (dic.ContainsKey(Id.ToString()))
-                            {
-                                try
-                                {
-                                    ZhiLiuDianLiuShuChuEnum colIndex = (ZhiLiuDianLiuShuChuEnum)Enum.Parse(typeof(ZhiLiuDianLiuShuChuEnum), Name.ToString().Trim());
-                                    sheet.GetRow(dic[Id.ToString()]).GetCell((int)colIndex).SetCellValue(Value.ToString());
-                                }
-                                catch (Exception ex)
-                                { }
-                            }
-                        }
-                    }
-                }
-                #endregion 
-
+                IRow sourceRow = sheet.GetRow(startRowIndex);
+                sourceRow.Height = 0;
+                startRowIndex++;
             }
-            return rowIndex;
-
         }
-        #endregion
+       
         /// <summary>
         /// 相同规则名称，需要合并只有展示一个标题
         /// </summary>

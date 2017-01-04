@@ -26,7 +26,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    url = "~/ Xml / TableTemplate.xml";
+                    url = "~/Xml/TableTemplate.xml";
                 }
                 return Common.DirFile.ReadFile(url);
             }

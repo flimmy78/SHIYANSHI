@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width" />
+<title>倾斜影响</title>
+<link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+<link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
+<link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
+<link href="/Content/default.css" rel="stylesheet" />
+<link href="/Content/StyleSheet.css" rel="stylesheet" />
+<script src="/Scripts/jquery.min.js"></script>
+<script src="/Scripts/JScriptCommon.js"></script>
+<script src="/Res/easyui/jquery.easyui.min.js"></script>
+<script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script src="/Scripts/jquery.validate.js"></script>
+<script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="/Scripts/jianCeXiang.js"></script>
+</head>
+<body class="easyui-layout">
+<input type="hidden" id="rowindex" value="1" />
+<div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+  <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+    <table>
+      <tr>
+        <td><!--<a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="TongDao.addTongDao()">增加通道</a> --> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'">保存检测项</a></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+  <div class="mt10"> <span>倾斜影响：</span>
+    <select class="my-combobox" name="hege" id="hege">
+      <option value="1000" selected>合格</option>
+      <option value="100">不合格</option>
+    </select>
+  </div>
+  <div class="mt10" id="tongdao">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_dy_1">
+      <thead>
+      <tr>
+         <th></th>
+         <th align="center" >
+         示值：<input name="shizhi" id="shizhi" type="text" class="my-textbox" value="100" style="width:60px"  />
+           
+         </th>
+         <th align="center" >
+         实际值：<input name="shizhi" id="shizhi" type="text" class="my-textbox" value="100" style="width:60px"  />
+           
+         </th>
+         <th align="center" >
+         示值：<input name="shizhi" id="shizhi" type="text" class="my-textbox" value="100" style="width:60px"  />
+           
+         </th>
+         <th align="center" >
+         实际值：<input name="shizhi" id="shizhi" type="text" class="my-textbox" value="100" style="width:60px"  />
+           
+         </th>
+         <th align="center" >
+         示值：<input name="shizhi" id="shizhi" type="text" class="my-textbox" value="100" style="width:60px"  />
+           
+         </th>
+         <th align="center" >
+         实际值：<input name="shizhi" id="shizhi" type="text" class="my-textbox" value="100" style="width:60px"  />
+           
+         </th>
+        </tr>
+        <tr>         
+          <th width="90" align="center"> 工作位置</th>
+          <th width="90" align="center">上限值(MΩ)</th>
+          <th width="90" align="center">偏差(%)</th>
+          <th width="90" align="center"> 中值(MΩ)</th>
+          <th width="90" align="center">偏差(%)</th>
+          <th width="90" align="center">下限值(MΩ)</th>
+          <th width="90" align="center"> 偏差(%)</th>
+        </tr>
+        
+      </thead>
+      <tbody id="tbody_1">
+        <!--默认行 -->
+        <tr>
+          <td align="center"><input name="input3" id="input3" type="text" class="my-textbox  tc" value="前" style="width:50px"  /></td>
+          <td align="center"><input name="input5" id="input5" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input6" id="input6" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input3" id="input3" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input5" id="input5" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input6" id="input6" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input3" id="input3" type="text" class="my-textbox input-width" value=""  /></td>
+        </tr>
+        <tr>
+          <td align="center"><input name="input3" id="input3" type="text" class="my-textbox tc " value="后"  style="width:50px"/></td>
+          <td align="center"><input name="input5" id="input5" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input6" id="input6" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input3" id="input3" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input5" id="input5" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input6" id="input6" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input3" id="input3" type="text" class="my-textbox input-width" value=""  /></td>
+        </tr>
+        <tr>
+          <td align="center"><input name="input3" id="input3" type="text" class="my-textbox tc " value="左" style="width:50px" /></td>
+          <td align="center"><input name="input5" id="input5" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input6" id="input6" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input3" id="input3" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input5" id="input5" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input6" id="input6" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input3" id="input3" type="text" class="my-textbox input-width" value=""  /></td>
+        </tr>
+        <tr>
+          <td align="center"><input name="input3" id="input3" type="text" class="my-textbox tc " value="右" style="width:50px"  /></td>
+          <td align="center"><input name="input5" id="input5" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input6" id="input6" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input3" id="input3" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input5" id="input5" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input6" id="input6" type="text" class="my-textbox input-width" value=""  /></td>
+          <td align="center"><input name="input3" id="input3" type="text" class="my-textbox input-width" value=""  /></td>
+        </tr>
+        <!--/默认行 -->
+      </tbody>
+      
+    </table>
+  </div>
+  <div class="mt10">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
+      <tr>
+        <th width="60">注：</th>
+        <td colspan="6"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%" value=""></td>
+      </tr>
+      <tr>
+        <th>结论：</th>
+        <td colspan="6"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%"></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!--增加行数弹层-->
+<div id="dlg" class="easyui-dialog" title="增加行数" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return TongDao.addRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+  <table>
+    <tr>
+      <td width="100" align="right" height="100">增加的数量：</td>
+      <td><input type="text" id="txtNumber" class="my-textbox  required " style="width:200px" /></td>
+    </tr>
+  </table>
+</div>
+<!--/增加量程弹层--> 
+
+<script type="text/javascript" language="javascript">
+        
+
+    </script>
+</body>
+</html>

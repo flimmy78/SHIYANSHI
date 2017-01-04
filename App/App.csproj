@@ -573,6 +573,9 @@
     <Content Include="Scripts\echarts.js" />
     <Content Include="Scripts\numeral.js" />
     <Content Include="Scripts\shine.js" />
+    <Content Include="Xml\TableTemplate - 复制%282%29.xml" />
+    <Content Include="Xml\TableTemplate单相.xml" />
+    <Content Include="Xml\TableTemplate - 复制.xml" />
     <Content Include="Xml\TableTemplate.xml" />
     <Content Include="Xml\TableTemplate1.xml" />
     <Content Include="Xml\TableTemplate_JianDing.xml" />
@@ -941,7 +944,7 @@
     <Content Include="Views\PROJECTTEMPLET\BianSongQiGongLu.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\BianSongQiPinLu.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\BianSongQiXiangWei.cshtml" />
-    <Content Include="Views\PROJECTTEMPLET\BianSongQiYouGongWuGong.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BiaoZhunDianZuXiang.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\YouGongGongLvShuChuYinYongWuCha.cshtml" />
     <Content Include="Views\Shared\TempleOnly.cshtml" />
     <Content Include="Views\Shared\TempleMany.cshtml" />
@@ -1000,6 +1003,9 @@
     <Content Include="Views\PROJECTTEMPLET\DanQiaoJiBenLiangcheng.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\OMYiXiaBiaoZhunDianZu.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\OMYiShangWuWuCha.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BianSongQiYouGongWuGong.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\DanQiaoQiTaLiangCheng.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\ShuangQiaoJiBenLiangCheng.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
