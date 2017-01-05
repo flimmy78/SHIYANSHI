@@ -798,28 +798,10 @@ function zeroFloat(src, pos) {
 //second 第二列的值，做分子
 //gold 误差列
 function xiangDuiWuCha(obj, first, second, gold) {
-    //重新计算当前行
-    var name = $(obj).attr("name");
-    var id = $(obj).attr("id");
-    id = id.substring(id.indexOf('_'));
-
-    first = first + id;//改动的地方，参与计算的列的name值
-    second = second + id;//改动的地方，参与计算的列的name值
-    gold = gold + id;//改动的地方，误差的列的name值
-
-    var firstData = $(obj).parent().parent().find("#" + first).val();
-    var secondData = $(obj).parent().parent().find("#" + second).val();
-    if (firstData != "undefined" && secondData != "undefined" && firstData != "" && secondData != "" && secondData != "0") {
-        var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-        var jianfa = (accSub(firstData, secondData) / firstData * 100);
-        var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
-
-
-        $(obj).parent().parent().find("#" + gold).val(data);
-    }
-
+  
+    wuCha(obj, first, second, first, gold);
 }
-function xiangDuiWuChaTanTou(obj, first, second,third, gold) {
+function wuCha(obj, first, second,third, gold) {
     //重新计算当前行
     var name = $(obj).attr("name");
     var id = $(obj).attr("id");
@@ -832,9 +814,10 @@ function xiangDuiWuChaTanTou(obj, first, second,third, gold) {
 
     var firstData = $(obj).parent().parent().find("#" + first).val();
     var secondData = $(obj).parent().parent().find("#" + second).val();
-    if (firstData != "undefined" && secondData != "undefined" && firstData != "" && secondData != "" && secondData != "0") {
+    var thirdData = $(obj).parent().parent().find("#" + second).val();
+    if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-        var jianfa = (accSub(firstData, secondData) / firstData * 100);
+        var jianfa = (accSub(firstData, secondData) / thirdData * 100);
         var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
 
 
@@ -842,15 +825,7 @@ function xiangDuiWuChaTanTou(obj, first, second,third, gold) {
     }
 
 }
-//减法
-function accSub(arg1, arg2) {
-    var r1, r2, m, n;
-    try { r1 = arg1.toString().split(".")[1].length } catch (e) { r1 = 0 }
-    try { r2 = arg2.toString().split(".")[1].length } catch (e) { r2 = 0 }
-    m = Math.pow(10, Math.max(r1, r2));
-    n = (r1 >= r2) ? r1 : r2;
-    return ((arg1 * m - arg2 * m) / m).toFixed(n);
-}
+
 //绝对误差
 //obj 自身对象
 //first 第一列的值，做分母第一位
@@ -933,7 +908,7 @@ function yinYongWuCha(obj, first, second, third, fourth, fifth, gold) {
 
 
 }
-
+///贝塞尔
 ///计算标准偏差
 ///strData 值逗号隔开
 ///返回 sd 标准偏差值
@@ -982,4 +957,13 @@ function calculate(strData) {
     // psd = Math.round(psd * 1000000) / 1000000;
 
 
+}
+//减法
+function accSub(arg1, arg2) {
+    var r1, r2, m, n;
+    try { r1 = arg1.toString().split(".")[1].length } catch (e) { r1 = 0 }
+    try { r2 = arg2.toString().split(".")[1].length } catch (e) { r2 = 0 }
+    m = Math.pow(10, Math.max(r1, r2));
+    n = (r1 >= r2) ? r1 : r2;
+    return ((arg1 * m - arg2 * m) / m).toFixed(n);
 }
