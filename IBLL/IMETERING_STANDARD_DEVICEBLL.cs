@@ -99,8 +99,10 @@ namespace Langben.IBLL
         /// <param name="entity">一个对象</param>
         /// <returns></returns>
         [OperationContract]
-        bool Edit(ref Common.ValidationErrors validationErrors, METERING_STANDARD_DEVICE entity); 
-    
+        bool Edit(ref Common.ValidationErrors validationErrors, METERING_STANDARD_DEVICE entity);
+
+        [OperationContract]
+        List<METERING_STANDARD_DEVICE> GetPREPARE_SCHEME( string id);
     }
 }
 

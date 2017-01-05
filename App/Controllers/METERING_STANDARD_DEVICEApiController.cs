@@ -26,6 +26,7 @@ namespace Langben.App.Controllers
         /// <returns></returns>
         public Common.ClientResult.DataResult PostData([FromBody]GetDataParam getParam)
         {
+            m_BLL.GetPREPARE_SCHEME("17010110511490515926e1b30d2da");
             int total = 0;
             List<METERING_STANDARD_DEVICE> queryData = m_BLL.GetByParam(null, getParam.page, getParam.rows, getParam.order, getParam.sort, getParam.search, ref total);
             var data = new Common.ClientResult.DataResult
@@ -412,62 +413,6 @@ namespace Langben.App.Controllers
                 })
             };
             return show;
-        }
-
-        /// <summary>
-        /// 标准器的选择查询
-        /// </summary>
-        /// <param name="id">预备方案id</param>
-        /// <returns></returns>
-        public METERING_STANDARD_DEVICEShow GetPREPARE_SCHEME(string id)
-        {
-            METERING_STANDARD_DEVICEShow msdshow = new METERING_STANDARD_DEVICEShow();
-            if (!string.IsNullOrWhiteSpace(id))
-            {
-                List<STANDARDCHOICE> stalist = m_BLL4.GetByRefPREPARE_SCHEMEID(id);
-                foreach (var item in stalist)
-                {
-                    if (!string.IsNullOrWhiteSpace(item.METERING_STANDARD_DEVICEID))
-                    {
-                        METERING_STANDARD_DEVICE msd = m_BLL.GetById(item.METERING_STANDARD_DEVICEID);
-                        var data = msd.ALLOWABLE_ERROR.Where(m => m.CATEGORY == "AA" && m.GROUPS ==Convert.ToInt32(item.GROUPS));
-                        foreach (var al in data)
-                        {
-                            var alladd = new ALLOWABLE_ERRORShow()
-                            {
-                                ID = al.ID,
-                                THEACCURACYLEVEL = al.THEACCURACYLEVEL,
-                                THEUNCERTAINTYVALUEK = al.THEUNCERTAINTYVALUEK,
-                                THEUNCERTAINTYNDEXL = al.THEUNCERTAINTYNDEXL,
-                                THEUNCERTAINTYVALUE = al.THEUNCERTAINTYVALUE,
-                                THEUNCERTAINTY = al.THEUNCERTAINTY,
-                                MAXVALUE = al.MAXVALUE,
-                                MAXCATEGORIES = al.MAXCATEGORIES,
-                                METERING_STANDARD_DEVICEID = al.METERING_STANDARD_DEVICEID,
-                                GROUPS = al.GROUPS
-                            };
-                            msdshow.ALLOWABLE_ERRORShow.Add(alladd);
-                        }
-                        var data2 = msd.METERING_STANDARD_DEVICE_CHECK.Where(m => m.CATEGORY == "AA" && m.GROUPS == Convert.ToInt32(item.GROUPS));
-                        foreach (var ms in data2)
-                        {
-                            var msdcadd = new METERING_STANDARD_DEVICE_CHECKShow()
-                            {
-                                ID = ms.ID,
-                                CERTIFICATEUNIT = ms.CERTIFICATEUNIT,
-                                CERTIFICATE_NUM = ms.CERTIFICATE_NUM,
-                                CHECK_DATE = ms.CHECK_DATE,
-                                VALID_TO = ms.VALID_TO,
-                                METERING_STANDARD_DEVICEID = ms.METERING_STANDARD_DEVICEID,
-                                GROUPS = ms.GROUPS
-                            };
-                            msdshow.METERING_STANDARD_DEVICE_CHECKShow.Add(msdcadd);
-                        }
-                    }
-                }
-            }
-
-            return msdshow;
         }
 
 
