@@ -933,3 +933,53 @@ function yinYongWuCha(obj, first, second, third, fourth, fifth, gold) {
 
 
 }
+
+///计算标准偏差
+///strData 值逗号隔开
+///返回 sd 标准偏差值
+function calculate(strData) {
+    var x = strData;//getData();
+    x = x.replace(' ', '');
+    var arr = x.split(',');
+    if (arr.length == 1) return false;
+    var lcm = 0;
+    var flag = false;
+    var total = 0;
+    for (var j = 0; j < arr.length; j++) {
+        arr[j] = parseFloat(arr[j]);
+        total += arr[j];
+    }
+    var mean = total / arr.length;
+    mean = Math.round(mean * 10000) / 10000;
+    var xm2 = 0;
+    var srt = '';
+    var srt1 = '';
+    var srt2 = '';
+    for (var j = 0; j < arr.length; j++) {
+        xm2 += Math.pow((arr[j] - mean), 2);
+        if (j == arr.length - 1) {
+            srt += '(' + arr[j] + '-' + mean + ')^2';
+            srt1 += '(' + (arr[j] - mean) + ')^2';
+            srt2 += '(' + Math.pow((arr[j] - mean), 2) + ')';
+        } else {
+            srt += '(' + arr[j] + '-' + mean + ')^2+';
+            srt1 += '(' + (arr[j] - mean) + ')^2+';
+            srt2 += '(' + Math.pow((arr[j] - mean), 2) + ')+';
+        }
+    }
+    var sd = xm2 / (arr.length - 1);
+    var psd = xm2 / (arr.length);
+    var sd1 = sd;
+    var psd1 = psd;
+    sd = Math.sqrt(sd);
+    psd = Math.sqrt(psd);
+    var sVariance = Math.pow(sd, 2);
+    sVariance = Math.round(sVariance * 1000000) / 1000000;
+    var pVariance = Math.pow(psd, 2);
+    pVariance = Math.round(pVariance * 1000000) / 1000000;
+    sd = Math.round(sd * 1000000) / 1000000;//标准偏差
+    return sd;
+    // psd = Math.round(psd * 1000000) / 1000000;
+
+
+}

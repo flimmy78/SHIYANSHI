@@ -11,7 +11,7 @@ namespace Langben.BLL
     /// <summary>
     /// 标准装置/计量标准器信息 
     /// </summary>
-    public partial  class METERING_STANDARD_DEVICEBLL : IBLL.IMETERING_STANDARD_DEVICEBLL, IDisposable
+    public partial class METERING_STANDARD_DEVICEBLL : IBLL.IMETERING_STANDARD_DEVICEBLL, IDisposable
     {
         /// <summary>
         /// 私有的数据访问上下文
@@ -21,6 +21,7 @@ namespace Langben.BLL
         /// 标准装置/计量标准器信息的数据库访问对象
         /// </summary>
         METERING_STANDARD_DEVICERepository repository = new METERING_STANDARD_DEVICERepository();
+        STANDARDCHOICERepository repository2 = new STANDARDCHOICERepository();
         /// <summary>
         /// 构造函数，默认加载数据访问上下文
         /// </summary>
@@ -50,7 +51,7 @@ namespace Langben.BLL
         public List<METERING_STANDARD_DEVICE> GetByParam(string id, int page, int rows, string order, string sort, string search, ref int total)
         {
 
-            
+
             IQueryable<METERING_STANDARD_DEVICE> queryData = repository.GetData(db, order, sort, search);
             total = queryData.Count();
             if (total > 0)
@@ -63,29 +64,29 @@ namespace Langben.BLL
                 {
                     queryData = queryData.Skip((page - 1) * rows).Take(rows);
                 }
-                
-                    foreach (var item in queryData)
-                    {
-                        if (item.UNDERTAKE_LABORATORYID != null && item.UNDERTAKE_LABORATORY != null)
-                        { 
-                                item.UNDERTAKE_LABORATORYIDOld = item.UNDERTAKE_LABORATORY.NAME.GetString();//                            
-                        }                  
- 
-                        if (item.PREPARE_SCHEME != null)
-                        {
-                            item.PREPARE_SCHEMEID = string.Empty;
-                            foreach (var it in item.PREPARE_SCHEME)
-                            {
-                                item.PREPARE_SCHEMEID += it.REPORT_CATEGORY + ' ';
-                            }                         
-                        } 
 
+                foreach (var item in queryData)
+                {
+                    if (item.UNDERTAKE_LABORATORYID != null && item.UNDERTAKE_LABORATORY != null)
+                    {
+                        item.UNDERTAKE_LABORATORYIDOld = item.UNDERTAKE_LABORATORY.NAME.GetString();//                            
                     }
- 
+
+                    if (item.PREPARE_SCHEME != null)
+                    {
+                        item.PREPARE_SCHEMEID = string.Empty;
+                        foreach (var it in item.PREPARE_SCHEME)
+                        {
+                            item.PREPARE_SCHEMEID += it.REPORT_CATEGORY + ' ';
+                        }
+                    }
+
+                }
+
             }
             return queryData.ToList();
         }
-                /// <summary>
+        /// <summary>
         /// 查询的数据 /*在6.0版本中 新增*/
         /// </summary>
         /// <param name="id">额外的参数</param>
@@ -99,7 +100,7 @@ namespace Langben.BLL
         public List<METERING_STANDARD_DEVICE> GetByParam(string id, string order, string sort, string search)
         {
             IQueryable<METERING_STANDARD_DEVICE> queryData = repository.GetData(db, order, sort, search);
-            
+
             return queryData.ToList();
         }
         /// <summary>
@@ -109,10 +110,10 @@ namespace Langben.BLL
         /// <param name="db">数据库上下文</param>
         /// <param name="entity">一个标准装置/计量标准器信息</param>
         /// <returns></returns>
-       public bool Create(ref ValidationErrors validationErrors, SysEntities db, METERING_STANDARD_DEVICE entity)
-        {   
+        public bool Create(ref ValidationErrors validationErrors, SysEntities db, METERING_STANDARD_DEVICE entity)
+        {
             int count = 1;
-        
+
             foreach (string item in entity.PREPARE_SCHEMEID.GetIdSort())
             {
                 PREPARE_SCHEME sys = new PREPARE_SCHEME { ID = item };
@@ -143,7 +144,7 @@ namespace Langben.BLL
             try
             {
                 using (TransactionScope transactionScope = new TransactionScope())
-                { 
+                {
                     if (Create(ref validationErrors, db, entity))
                     {
                         transactionScope.Complete();
@@ -158,7 +159,7 @@ namespace Langben.BLL
             catch (Exception ex)
             {
                 validationErrors.Add(ex.Message);
-                ExceptionsHander.WriteExceptions(ex);                
+                ExceptionsHander.WriteExceptions(ex);
             }
             return false;
         }
@@ -203,12 +204,12 @@ namespace Langben.BLL
             catch (Exception ex)
             {
                 validationErrors.Add(ex.Message);
-                ExceptionsHander.WriteExceptions(ex);                
+                ExceptionsHander.WriteExceptions(ex);
             }
             return false;
         }
 
-      /// <summary>
+        /// <summary>
         /// 删除一个标准装置/计量标准器信息
         /// </summary>
         /// <param name="validationErrors">返回的错误信息</param>
@@ -223,7 +224,7 @@ namespace Langben.BLL
             catch (Exception ex)
             {
                 validationErrors.Add(ex.Message);
-                ExceptionsHander.WriteExceptions(ex);                
+                ExceptionsHander.WriteExceptions(ex);
             }
             return false;
         }
@@ -238,28 +239,28 @@ namespace Langben.BLL
             try
             {
                 if (deleteCollection != null)
-                { 
+                {
 
-                        using (TransactionScope transactionScope = new TransactionScope())
+                    using (TransactionScope transactionScope = new TransactionScope())
+                    {
+                        repository.Delete(db, deleteCollection);
+                        if (deleteCollection.Length == repository.Save(db))
                         {
-                            repository.Delete(db, deleteCollection);
-                            if (deleteCollection.Length == repository.Save(db))
-                            {
-                                transactionScope.Complete();
-                                return true;
-                            }
-                            else
-                            {
-                                Transaction.Current.Rollback();
-                            }
+                            transactionScope.Complete();
+                            return true;
                         }
-                    
+                        else
+                        {
+                            Transaction.Current.Rollback();
+                        }
+                    }
+
                 }
             }
             catch (Exception ex)
             {
                 validationErrors.Add(ex.Message);
-                ExceptionsHander.WriteExceptions(ex);                
+                ExceptionsHander.WriteExceptions(ex);
             }
             return false;
         }
@@ -303,7 +304,7 @@ namespace Langben.BLL
                 catch (Exception ex)
                 {
                     validationErrors.Add(ex.Message);
-                    ExceptionsHander.WriteExceptions(ex);                
+                    ExceptionsHander.WriteExceptions(ex);
                 }
             }
             return false;
@@ -315,7 +316,7 @@ namespace Langben.BLL
         /// <param name="db">数据上下文</param>
         /// <param name="entity">一个标准装置/计量标准器信息</param>
         /// <returns>是否编辑成功</returns>
-       public bool Edit(ref ValidationErrors validationErrors, SysEntities db, METERING_STANDARD_DEVICE entity)
+        public bool Edit(ref ValidationErrors validationErrors, SysEntities db, METERING_STANDARD_DEVICE entity)
         {  /*                       
                            * 不操作 原有 现有
                            * 增加   原没 现有
@@ -345,18 +346,18 @@ namespace Langben.BLL
             DataOfDiffrent.GetDiffrent(entity.PREPARE_SCHEMEID.GetIdSort(), entity.PREPARE_SCHEMEIDOld.GetIdSort(), ref addPREPARE_SCHEMEID, ref deletePREPARE_SCHEMEID);
             List<PREPARE_SCHEME> listEntityPREPARE_SCHEME = new List<PREPARE_SCHEME>();
             if (deletePREPARE_SCHEMEID != null && deletePREPARE_SCHEMEID.Count() > 0)
-            {                
+            {
                 foreach (var item in deletePREPARE_SCHEMEID)
                 {
                     PREPARE_SCHEME sys = new PREPARE_SCHEME { ID = item };
                     listEntityPREPARE_SCHEME.Add(sys);
                     entity.PREPARE_SCHEME.Add(sys);
-                }                
-            } 
+                }
+            }
 
             METERING_STANDARD_DEVICE editEntity = repository.Edit(db, entity);
-            
-         
+
+
             if (addPREPARE_SCHEMEID != null && addPREPARE_SCHEMEID.Count() > 0)
             {
                 foreach (var item in addPREPARE_SCHEMEID)
@@ -368,13 +369,13 @@ namespace Langben.BLL
                 }
             }
             if (deletePREPARE_SCHEMEID != null && deletePREPARE_SCHEMEID.Count() > 0)
-            { 
+            {
                 foreach (PREPARE_SCHEME item in listEntityPREPARE_SCHEME)
                 {
                     editEntity.PREPARE_SCHEME.Remove(item);
                     count++;
                 }
-            } 
+            }
 
             if (count == repository.Save(db))
             {
@@ -393,11 +394,11 @@ namespace Langben.BLL
         /// <param name="entity">一个标准装置/计量标准器信息</param>
         /// <returns>是否编辑成功</returns>
         public bool Edit(ref ValidationErrors validationErrors, METERING_STANDARD_DEVICE entity)
-        {           
+        {
             try
             {
                 using (TransactionScope transactionScope = new TransactionScope())
-                { 
+                {
                     if (Edit(ref validationErrors, db, entity))
                     {
                         transactionScope.Complete();
@@ -412,32 +413,32 @@ namespace Langben.BLL
             catch (Exception ex)
             {
                 validationErrors.Add(ex.Message);
-                ExceptionsHander.WriteExceptions(ex);                
+                ExceptionsHander.WriteExceptions(ex);
             }
             return false;
         }
         public List<METERING_STANDARD_DEVICE> GetAll()
-        {            
-            return repository.GetAll(db).ToList();          
-        }     
-        
+        {
+            return repository.GetAll(db).ToList();
+        }
+
         /// <summary>
         /// 根据主键获取一个标准装置/计量标准器信息
         /// </summary>
         /// <param name="id">标准装置/计量标准器信息的主键</param>
         /// <returns>一个标准装置/计量标准器信息</returns>
         public METERING_STANDARD_DEVICE GetById(string id)
-        {          
-            return repository.GetById(db, id);           
+        {
+            return repository.GetById(db, id);
         }
-        
+
         /// <summary>
         /// 获取在该表一条数据中，出现的所有外键实体
         /// </summary>
         /// <param name="id">主键</param>
         /// <returns>外键实体集合</returns>
         public List<PREPARE_SCHEME> GetRefPREPARE_SCHEME(string id)
-        { 
+        {
             return repository.GetRefPREPARE_SCHEME(db, id).ToList();
         }
         /// <summary>
@@ -446,11 +447,11 @@ namespace Langben.BLL
         /// <param name="id">主键</param>
         /// <returns>外键实体集合</returns>
         public List<PREPARE_SCHEME> GetRefPREPARE_SCHEME()
-        { 
+        {
             return repository.GetRefPREPARE_SCHEME(db).ToList();
         }
 
-        
+
         /// <summary>
         /// 根据UNDERTAKE_LABORATORYIDId，获取所有标准装置/计量标准器信息数据
         /// </summary>
@@ -458,12 +459,70 @@ namespace Langben.BLL
         /// <returns></returns>
         public List<METERING_STANDARD_DEVICE> GetByRefUNDERTAKE_LABORATORYID(string id)
         {
-            return repository.GetByRefUNDERTAKE_LABORATORYID(db, id).ToList();                      
+            return repository.GetByRefUNDERTAKE_LABORATORYID(db, id).ToList();
         }
 
+        /// <summary>
+        /// 标准器的选择查询
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<METERING_STANDARD_DEVICE> GetPREPARE_SCHEME(string id)
+        {
+            List<METERING_STANDARD_DEVICE> msddlist = new List<METERING_STANDARD_DEVICE>();
+            METERING_STANDARD_DEVICE msdd = new METERING_STANDARD_DEVICE();
+            //if (!string.IsNullOrWhiteSpace(id))
+            //{
+            //    List<STANDARDCHOICE> stalist = repository2.GetByRefPREPARE_SCHEMEID(db,id).ToList();
+            //    foreach (var item in stalist)
+            //    {
+            //        if (!string.IsNullOrWhiteSpace(item.METERING_STANDARD_DEVICEID))
+            //        {
+            //            METERING_STANDARD_DEVICE msd = repository.GetById(item.METERING_STANDARD_DEVICEID);
+                        
+            //            var data = msd.ALLOWABLE_ERROR.Where(m => m.CATEGORY == "AA" && m.GROUPS == Convert.ToInt32(item.GROUPS));
+            //            foreach (var al in data)
+            //            {
+            //                var alladd = new ALLOWABLE_ERROR()
+            //                {
+            //                    ID = al.ID,
+            //                    THEACCURACYLEVEL = al.THEACCURACYLEVEL,
+            //                    THEUNCERTAINTYVALUEK = al.THEUNCERTAINTYVALUEK,
+            //                    THEUNCERTAINTYNDEXL = al.THEUNCERTAINTYNDEXL,
+            //                    THEUNCERTAINTYVALUE = al.THEUNCERTAINTYVALUE,
+            //                    THEUNCERTAINTY = al.THEUNCERTAINTY,
+            //                    MAXVALUE = al.MAXVALUE,
+            //                    MAXCATEGORIES = al.MAXCATEGORIES,
+            //                    METERING_STANDARD_DEVICEID = al.METERING_STANDARD_DEVICEID,
+            //                    GROUPS = al.GROUPS
+            //                };
+            //                msdd.ALLOWABLE_ERROR.Add(alladd);
+            //            }
+            //            var data2 = msd.METERING_STANDARD_DEVICE_CHECK.Where(m => m.CATEGORY == "AA" && m.GROUPS == Convert.ToInt32(item.GROUPS));
+            //            foreach (var ms in data2)
+            //            {
+            //                var msdcadd = new METERING_STANDARD_DEVICE_CHECK()
+            //                {
+            //                    ID = ms.ID,
+            //                    CERTIFICATEUNIT = ms.CERTIFICATEUNIT,
+            //                    CERTIFICATE_NUM = ms.CERTIFICATE_NUM,
+            //                    CHECK_DATE = ms.CHECK_DATE,
+            //                    VALID_TO = ms.VALID_TO,
+            //                    METERING_STANDARD_DEVICEID = ms.METERING_STANDARD_DEVICEID,
+            //                    GROUPS = ms.GROUPS
+            //                };
+            //                msdd.METERING_STANDARD_DEVICE_CHECK.Add(msdcadd);
+            //            }
+            //        }
+            //        msddlist.Add(msdd);
+            //    }
+            //}
+
+            return msddlist;
+        }
         public void Dispose()
         {
-           
+
         }
     }
 }
