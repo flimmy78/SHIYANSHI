@@ -1,0 +1,372 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "误差测试";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    <tr>
+        <td colspan="9">
+            通道：
+            <select class="my-combobox" name="BianSongQiTongDao" id="BianSongQiTongDaoD_t_1_1">
+                <option value=""></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span>功率因数</span>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="9">
+            <div class="fl" style="margin-right:20px">
+                输入范围：(
+                <input id="shurufanwei_t_1_1" name="shurufanwei" type="text" class="my-textbox tc" value="0" style="width:30px">
+                -
+                <input id="shurufanweijian_t_1_1" name="shurufanweijian" type="text" class="my-textbox tc" value="5" style="width:30px">
+                )
+            </div>
+            <div class="fl" style="margin-right:20px">
+                输出范围：(
+                <input name="dianmyliu" id="dianmyliu_t_1_1" type="text" class="my-textbox tc" value="4" style="width:30px">
+                -
+                <input name="dianmyya" id="dianmyya_t_1_1" type="text" class="my-textbox tc" value="20" style="width:30px">
+                )
+                <select class="my-combobox" name="mAV" id="mAV_t_1_1">
+                    <option value="mA">mA</option>
+                    <option value="V">V</option>
+                </select>
+            </div>
+
+            <div class="fl" style="margin-right:20px;">
+                U<sub>n</sub> =
+                <input name="dianym32ya" id="dianym32ya_t_1_1" type="text" class="my-textbox tc" value="100" style="width:40px">
+                <select class="my-combobox" name="mAVdianliu" id="mAVdianliu_t_1_1">
+                    <option value="V">V</option>
+                    <option value="MV">MV</option>
+                    <option value="kV">kV</option>
+                    <option value="mV">mV</option>
+                    <option value="μV">μV</option>
+                </select>
+            </div>
+            <div class="fl" style="margin-right:20px; ">
+                I<sub>n</sub> =
+                <input name="dianymya" id="dianymya_t_1_1" type="text" class="my-textbox tc" value="5" style="width:40px">
+                <select class="my-combobox" name="dianymy123a" id="dianymy123a_t_1_1">
+                    <option value="A">A</option>
+                    <option value="kA">kA</option>
+                    <option value="mA">mA</option>
+                    <option value="μA">μA</option>
+                    <option value="nA">nA</option>
+                    <option value="pA">pA</option>
+                </select>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th align="center" width="100">测试量</th>
+        <th align="center" width="100"> 等级</th>
+        <th align="center" width="120"> 测量点</th>
+
+        <th align="center" width="100">
+            二次输入标准值<br>
+
+        </th>
+        <th align="center" width="100">
+            标准输出值<br>
+            <select class="my-combobox" name="m123AV" id="m123AV_t_1_1">
+                <option value="mA">mA</option>
+                <option value="V">V</option>
+            </select>
+        </th>
+        <th align="center" width="100">
+            实际输出值<br>
+            <select class="my-combobox" name="m456AV" id="m456AV_t_1_1">
+                <option value="mA">mA</option>
+                <option value="V">V</option>
+            </select>
+        </th>
+        <th align="center" width="100">
+            引用误差<br>
+            (%)
+        </th>
+        <th align="center">
+            校准结果的不确定度<br>
+            U(k =
+            <select class="my-combobox" name="K" id="K_t_1_1">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="√3">√3</option>
+            </select>
+            )
+        </th>
+    </tr>
+
+</thead>
+
+<tbody>
+    <!--表体-->
+    <tr>
+        <td align="center" width="100">
+            cosφ
+        </td>
+        <td align="center" width="100">
+            <input name="DengJi" type="text" class="my-textbox tr" value="0.0" style="width:70px" onblur="Recalculate()" id="DengJi_t_1_1">
+            级
+        </td>
+        <td colspan="7" style="padding:0">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="subtbl">
+                <tbody id="tbody_moban">
+                    <!--插入行的位置-->
+                    <tr rowindex="1">
+                        <td rowspan="1" align="center" width="120">
+                            <input class="my-textbox input-width" value="0.5" id="OUTPUTVALUE_t_1_1" name="OUTPUTVALUE" onblur="blurCeLiangDian(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_1" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option value=""> </option><option value="C">C</option></select>
+                        </td>
+                        <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="60" id="READVALUE_t_1_1" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"><span>°</span></td>
+                        <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_1" name="ACTUALVALUE" onblur="blurBiaoZhunShuChuZhi(this)" type="text"></td>
+                        <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" onblur="blurShiJiShuChuZhi(this)" type="text"></td>
+                        <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_1" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
+                    </tr>
+                    <tr rowindex="2">
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0.8" id="OUTPUTVALUE_t_1_2" name="OUTPUTVALUE" onblur="blurCeLiangDian(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_2" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option value=""> </option><option value="C">C</option></select></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="30" id="READVALUE_t_1_2" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"><span>°</span></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_2" name="ACTUALVALUE" onblur="blurBiaoZhunShuChuZhi(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_2" name="SHIJISHUCHUZHI" onblur="blurShiJiShuChuZhi(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_2" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_2" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
+                    </tr>
+                    <tr rowindex="3">
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="1.0" id="OUTPUTVALUE_t_1_3" name="OUTPUTVALUE" onblur="blurCeLiangDian(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_3" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option selected="selected" value=""> </option><option value="C">C</option></select></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0" id="READVALUE_t_1_3" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"><span>°</span></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_3" name="ACTUALVALUE" onblur="blurBiaoZhunShuChuZhi(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_3" name="SHIJISHUCHUZHI" onblur="blurShiJiShuChuZhi(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_3" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_3" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
+                    </tr>
+                    <tr rowindex="4">
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0.8" id="OUTPUTVALUE_t_1_4" name="OUTPUTVALUE" onblur="blurCeLiangDian(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_4" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option value=""> </option><option selected="selected" value="C">C</option></select></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="330" id="READVALUE_t_1_4" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"><span>°</span></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_4" name="ACTUALVALUE" onblur="blurBiaoZhunShuChuZhi(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_4" name="SHIJISHUCHUZHI" onblur="blurShiJiShuChuZhi(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_4" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_4" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
+                    </tr>
+                    <tr rowindex="5">
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0.5" id="OUTPUTVALUE_t_1_5" name="OUTPUTVALUE" onblur="blurCeLiangDian(this)" type="text"><select class="my-combox" id="OUTPUTVALUE_UNIT_t_1_5" name="OUTPUTVALUE_UNIT"><option value="L">L</option><option value=""> </option><option selected="selected" value="C">C</option></select></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="360" id="READVALUE_t_1_5" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"><span>°</span></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_5" name="ACTUALVALUE" onblur="blurBiaoZhunShuChuZhi(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_5" name="SHIJISHUCHUZHI" onblur="blurShiJiShuChuZhi(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_5" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_5" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text"></td>
+                    </tr>
+
+                </tbody>
+                <tfoot>
+                    <!--表尾-->
+                    <tr>
+                        <td colspan="7">
+                            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+                            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
+
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </td>
+    </tr>
+
+</tbody>
+
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        function set(tbodyIndex) {
+
+            CreateRow();
+            // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
+            $("#hideDangQianTongDao").val(tbodyIndex);
+
+        }
+        //增加行
+        function CreateRow() {
+
+            var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+            var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
+            LiangChengShuLiang++;
+            var rowspanIdx = $("#txtPoint").val();     //检测点数
+            txtPointLen = $("#txtPointLen").val(); //小数点位数
+            var standardValue = "";
+            var htmlString = [];
+            var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
+
+            var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
+            for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
+                rowLength++;
+                htmlString.push("<tr rowindex='" + rowLength + "'>");
+
+                var rowspan = 1; //合并单元格行数
+
+                var txtVal = "";//(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
+                var unit = "<span>°</span>";//在输入框后面的单位
+
+
+                var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
+                if (rowidx == 0) {
+                    //需要合并的列
+                }
+
+                //测量点 需要下拉框
+                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120"));
+                //二次输入标准值
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100", unit, 'blurErCiShuRuBiaoZhunZhi'));
+                //  //二次输入标准值
+                // htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurErCiShuRuBiaoZhunZhi'));
+                //标准输出值
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurBiaoZhunShuChuZhi'));
+                //实际输出值
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurShiJiShuChuZhi'));
+                //引用误差
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "classstyle100"));
+                //校准结果的不确定度 U(K =
+                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, txtVal, "classstyle"));
+                htmlString.push("</tr>");
+            }
+            htmlString = htmlString.join("");
+
+            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
+            $.parser.parse(tagRow);//渲染easyui组建
+            //$('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
+            $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+        }
+
+        ///计算标准值
+        function JiSuanBiaoZhunZhi() {
+
+        }
+        //离开事件，用于计算 输入范围最小
+        function blurShuRuFanWeiZuiXiao(obj) {
+            //注意多通道
+            RecalculateBiaoZhunShuChu(); //重新计算页面上标准输出值
+            RecalculateYinYongWuCha();//重新计算引用
+        }
+
+        //离开事件，用于计算 输入范围最大
+        function blurShuRuFanWeiZuiDa(obj) {
+            //注意多通道
+            RecalculateBiaoZhunShuChu(); //重新计算页面上标准输出值
+            RecalculateYinYongWuCha();//重新计算引用
+
+        }
+        //离开事件，用于计算 输出范围最小
+        function blurShuChuFanWeiZuiXiao(obj) {
+            //注意多通道
+
+            RecalculateBiaoZhunShuChu(); //重新计算页面上标准输出值
+            RecalculateYinYongWuCha();//重新计算引用
+        }
+        //离开事件，用于计算 输出范围最大
+        function blurShuChuFanWeiZuiDa(obj) {
+            //注意多通道
+
+            RecalculateBiaoZhunShuChu(); //重新计算页面上标准输出值
+            RecalculateYinYongWuCha();//重新计算引用
+        }
+        //离开事件，用于计算 标准输出值
+        function blurShiJiShuChuZhi(obj) {
+            //注意多通道
+            $(obj).parents('tr:eq(0)').find('td:eq(4) input').val(YinYongWuCha($(obj).val(), $(obj).parents('tr:eq(0)').find('td:eq(2)').find('input').val()))
+        }
+        //离开事件，用于计算 标准输出值
+        function blurBiaoZhunShuChuZhi(obj) {
+            //注意多通道
+            // $(obj).parents('tr:eq(0)').find('td:eq(0) input').blur();
+
+        }
+        //离开事件，用于计算 二次输入标准值
+        function blurErCiShuRuBiaoZhunZhi(obj) {
+            //注意多通道
+            //3.标准输出值=（二次输入标准值-输入范围最小值）/（输入范围的最大值-输入范围的最小值）*（输出范围的最大值-输出范围的最小值）+输出范围最小值
+            $(obj).parents('tr:eq(0)').find('td:eq(2) input').val(BiaoZhunZhi($(obj).val()))
+
+        }
+        function GetValue() {
+            var hideDangQianTongDao = GetTongDao();//当前操作第几通道
+            var datas = {
+                inputMinValue: $.trim($(".clone #shurufanwei_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #shurufanwei_" + hideDangQianTongDao + "_1_1").val())),
+                inputMaxValue: $.trim($(".clone #shurufanweijian_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #shurufanweijian_" + hideDangQianTongDao + "_1_1").val())),
+                outputMinValue: $.trim($(".clone #dianmyliu_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #dianmyliu_" + hideDangQianTongDao + "_1_1").val())),
+                outputMaxValue: $.trim($(".clone #dianmyya_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #dianmyya_" + hideDangQianTongDao + "_1_1").val())),
+                level: $(".clone #DengJi_" + $("#hideDangQianTongDao").val() + "_1_1").val(),
+                levellength: $(".clone #DengJi_" + $("#hideDangQianTongDao").val() + "_1_1").val().split('.')[1].length
+            }
+            return datas;
+        }
+        function GetTongDao() {
+            return $("#hideDangQianTongDao").val();//当前操作第几通道
+        }
+        ///标准值
+        function BiaoZhunZhi(erciBiaoZhun) {
+            //3.标准输出值=（二次输入标准值-输入范围最小值）/（输入范围的最大值-输入范围的最小值）*（输出范围的最大值-输出范围的最小值）+输出范围最小值
+            var datas = GetValue();
+            if ($.trim(erciBiaoZhun) != "" && datas.inputMinValue != "" && datas.inputMaxValue != "" && datas.outputMinValue != "" && datas.outputMaxValue != "")
+                return (((datas.inputMaxValue - datas.inputMinValue) == 0 ? 0 : (parseFloat(erciBiaoZhun) - datas.inputMinValue) / (datas.inputMaxValue - datas.inputMinValue)) * (datas.outputMaxValue - datas.outputMinValue) + datas.outputMinValue).toFixed(2)
+            else
+                return "";
+        }
+        function Recalculate() {
+            RecalculateYinYongWuCha();
+        }
+        ///重新计算页面上标准输出值
+        function RecalculateBiaoZhunShuChu() {
+            //注意多通道
+            $("#tbody_" + GetTongDao() + " tr").each(function () {
+                console.log($(this).find('td:eq(1)').find('input').val());
+                $(this).find('td:eq(2)').find('input').val(BiaoZhunZhi($(this).find('td:eq(1)').find('input').val()))//引用误差
+            })
+        }
+        ///重新计算页面上引用误差
+        function RecalculateYinYongWuCha() {
+            //注意多通道
+            $("#tbody_" + GetTongDao() + " tr").each(function () {
+                console.log($(this).find('td:eq(1)').find('input').val());
+                $(this).find('td:eq(4)').find('input').val(YinYongWuCha($(this).find('td:eq(3)').find('input').val(), $(this).find('td:eq(2)').find('input').val()))//引用误差
+            })
+        }
+        //引用误差
+        function YinYongWuCha(ShijiShuChu, BiaoZhunShuChu) {
+            //4.引用误差=Round(（实际输出值-标准输出值）/（输出范围的最大值-输出范围的最小值）*100/等级,1)*等级
+            var datas = GetValue();
+            var level = datas.level;
+            var length = datas.levellength;
+            if (level == "0.0" || ShijiShuChu == "" || BiaoZhunShuChu == "") return ""
+            else
+                return ((parseFloat(ShijiShuChu) - parseFloat(BiaoZhunShuChu) / (datas.outputMaxValue - datas.outputMinValue) * 100 / parseFloat(level)) * parseFloat(level)).toFixed(length + 1);
+        }
+        //离开事件，用于计算 测量点
+        function blurCeLiangDian(obj) {
+            //注意多通道
+            $(obj).parents('tr:eq(0)').find('td:eq(1) input').val($.trim($(obj).val()) == "" ? "" : parseFloat($(obj).val()).toFixed(4))
+            $(obj).parents('tr:eq(0)').find('td:eq(1) input').blur();
+            $(obj).parents('tr:eq(0)').find('td:eq(3) input').blur();
+        }
+        //离开事件，用于计算
+        function blurValue(obj) {
+
+        }
+
+    </script>
+
+
+}
+@section TanKuang {
+    <!--弹框的位置-->
+    <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
+    <input type="hidden" id="txtPointLen" value="1" /><!--小数点位数-->
+}
+
+
