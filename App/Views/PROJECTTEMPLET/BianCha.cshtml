@@ -1,0 +1,115 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "24h变差";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    <tr>
+        <th>Δymax= <input id="RANGE_t_1_1" name="RANGE" type="text" class="my-textbox tc" value="" style="width:80px"></th>
+        <th colspan="5" style="text-align:right">
+            <input id="SHURUKONG_t_1_1" name="SHURUKONG" type="text" class="my-textbox tc" value="" style="width:230px">
+        </th>
+    </tr>
+    <tr>
+        <th align="center" width="100">量限：</th>
+        <th style="width:30px">cosφ</th>
+        <th style="width:30px">Ib(%)</th>
+        <th style="width:30px">初始值y1(%)</th>
+        <th style="width:30px">24h后y2(%)</th>
+        <th style="width:30px">|y1-y2|(%)</th>
+    </tr>
+    <tr>
+        <td rowspan="2">
+            <!--量限-->
+            <select class="my-combobox" name="READVALUE" id="READVALUE_t_1_1">
+                <option value="单相">单相</option>
+                <option value="三相三线">三相三线</option>
+                <option value="三相四线">三相四线</option>
+            </select>
+        </td>
+        <td><!--cosφ-->1.0</td>
+        <td>
+            <!--Ib(%)-->
+            <select class="my-combobox" name="ACTUALVALUE" id="ACTUALVALUE_t_1_1">
+                <option value="100">100</option>
+                <option value="50">50</option>
+                <option value="20">20</option>
+                <option value="10">10</option>
+                <option value="5">5</option>
+            </select>
+        </td>
+        <td>
+            <!--初始值y1(%)-->
+            <input id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" type="text" class="my-textbox tc" value="" style="width:30px" onblur="blurShuChuFanWeiZuiXiao(this)">
+        </td>
+        <td>
+            <!--24h后y2(%)-->
+            <input id="RELATIVEERROR_t_1_1" name="RELATIVEERROR" type="text" class="my-textbox tc" value="" style="width:30px" onblur="blurShuChuFanWeiZuiXiao(this)">
+        </td>
+        <td>
+            <!--|y1-y2|(%)-->
+            <input id="UNCERTAINTYDEGREE_t_1_1" name="UNCERTAINTYDEGREE" type="text" class="my-textbox tc" value="" style="width:30px" onblur="blurShuChuFanWeiZuiXiao(this)">
+        </td>
+    </tr>
+    <tr>
+        <td><!--cosφ-->1.0</td>
+        <td>
+            <!--Ib(%)-->
+            <select class="my-combobox" name="BUQUEDINGDU" id="BUQUEDINGDU_t_1_1">
+                <option value="100">100</option>
+                <option value="50">50</option>
+                <option value="20">20</option>
+                <option value="10">10</option>
+                <option value="5">5</option>
+            </select>
+        </td>
+        <td>
+            <!--初始值y1(%)-->
+            <input id="CHUSHIZHIYA_t_1_1" name="CHUSHIZHIYA" type="text" class="my-textbox tc" value="" style="width:30px" onblur="blurShuChuFanWeiZuiXiao(this)">
+        </td>
+        <td>
+            <!--24h后y2(%)-->
+            <input id="ERSIHHOUA_t_1_1" name="ERSIHHOUA" type="text" class="my-textbox tc" value="" style="width:30px" onblur="blurShuChuFanWeiZuiXiao(this)">
+        </td>
+        <td>
+            <!--|y1-y2|(%)-->
+            <input id="ABSYANDY_t_1_1" name="ABSYANDY" type="text" class="my-textbox tc" value="" style="width:30px" onblur="blurShuChuFanWeiZuiXiao(this)">
+        </td>
+    </tr>
+</thead>
+<tbody>
+    <!--表体-->
+
+</tbody>
+<tfoot>
+    <!--表尾-->
+
+</tfoot>
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        //tbodyIndex通道
+        //thi 当前位置
+        function set(tbodyIndex, thi) {
+            // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
+            $("#hideDangQianTongDao").val(tbodyIndex); CreateRow();
+
+        }
+        function blurShuChuFanWeiZuiXiao(obj) {
+
+
+        }
+
+
+
+    </script>
+}
+@section TanKuang {
+    <!--弹框的位置-->
+    <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
+    <input type="hidden" id="txtPointLen" value="1" /><!--小数点位数-->
+}
