@@ -8,6 +8,7 @@
 @section CurentPlace {
     不确定度评定过程
 }
+<script src="~/Scripts/jianCeXiang.js"></script>
 <!--控件ID-->
 <input type="hidden" id="hideID" value="@ViewBag.ID" />
 <!--检测项目ID-->
@@ -90,7 +91,7 @@ else
             <div>
                 <i>U</i><small>A</small> =
                 <input tag="only" class="my-textbox " value="" style="width:200px" name="" id="txtBuQueDingA">
-                <input tag="only" class="my-textbox " value="" style="width:100px" name="" id="txtValue" onblur="calculate()">
+                <input tag="only" class="my-textbox " value="" style="width:100px" name="" id="txtValue" onblur="biaozhunpiancha()">
             </div>
             <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_moban">
                 <thead>
@@ -104,18 +105,18 @@ else
                 </thead>
                 <tbody>
                     <tr>
-                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_1_1" value="" style="width:95%" onblur="calculate()"></td>
-                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_1_2" value="" style="width:95%" onblur="calculate()"></td>
-                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_1_3" value="" style="width:95%" onblur="calculate()"></td>
-                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_1_4" value="" style="width:95%" onblur="calculate()"></td>
-                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_1_5" value="" style="width:95%" onblur="calculate()"></td>
+                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_1_1" value="" style="width:95%" onblur="biaozhunpiancha()"></td>
+                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_1_2" value="" style="width:95%" onblur="biaozhunpiancha()"></td>
+                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_1_3" value="" style="width:95%" onblur="biaozhunpiancha()"></td>
+                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_1_4" value="" style="width:95%" onblur="biaozhunpiancha()"></td>
+                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_1_5" value="" style="width:95%" onblur="biaozhunpiancha()"></td>
                     </tr>
                     <tr>
-                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_2_1" value="" style="width:95%" onblur="calculate()"></td>
-                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_2_2" value="" style="width:95%" onblur="calculate()"></td>
-                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_2_3" value="" style="width:95%" onblur="calculate()"></td>
-                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_2_4" value="" style="width:95%" onblur="calculate()"></td>
-                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_2_5" value="" style="width:95%" onblur="calculate()"></td>
+                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_2_1" value="" style="width:95%" onblur="biaozhunpiancha()"></td>
+                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_2_2" value="" style="width:95%" onblur="biaozhunpiancha()"></td>
+                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_2_3" value="" style="width:95%" onblur="biaozhunpiancha()"></td>
+                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_2_4" value="" style="width:95%" onblur="biaozhunpiancha()"></td>
+                        <td align="center"><input tag="only" class="my-textbox input-width" type="text" name="A" id="A_2_5" value="" style="width:95%" onblur="biaozhunpiancha()"></td>
                     </tr>
                 </tbody>
 
@@ -348,53 +349,17 @@ else
             data = data.substring(0, data.length - 1);
         return data;
     }
-    function calculate() {
-        var x = getData();
-        x = x.replace(' ', '');
-        var arr = x.split(',');
-        if (arr.length == 1) return false;
-        var lcm = 0;
-        var flag = false;
-        var total = 0;
-        for (var j = 0; j < arr.length; j++) {
-            arr[j] = parseFloat(arr[j]);
-            total += arr[j];
-        }
-        var mean = total / arr.length;
-        mean = Math.round(mean * 10000) / 10000;
-        var xm2 = 0;
-        var srt = '';
-        var srt1 = '';
-        var srt2 = '';
-        for (var j = 0; j < arr.length; j++) {
-            xm2 += Math.pow((arr[j] - mean), 2);
-            if (j == arr.length - 1) {
-                srt += '(' + arr[j] + '-' + mean + ')^2';
-                srt1 += '(' + (arr[j] - mean) + ')^2';
-                srt2 += '(' + Math.pow((arr[j] - mean), 2) + ')';
-            } else {
-                srt += '(' + arr[j] + '-' + mean + ')^2+';
-                srt1 += '(' + (arr[j] - mean) + ')^2+';
-                srt2 += '(' + Math.pow((arr[j] - mean), 2) + ')+';
-            }
-        }
-        var sd = xm2 / (arr.length - 1);
-        var psd = xm2 / (arr.length);
-        var sd1 = sd;
-        var psd1 = psd;
-        sd = Math.sqrt(sd);
-        psd = Math.sqrt(psd);
-        var sVariance = Math.pow(sd, 2);
-        sVariance = Math.round(sVariance * 1000000) / 1000000;
-        var pVariance = Math.pow(psd, 2);
-        pVariance = Math.round(pVariance * 1000000) / 1000000;
-        sd = Math.round(sd * 1000000) / 1000000;
-        psd = Math.round(psd * 1000000) / 1000000;
+    //A类评定（标准偏差）
+    function biaozhunpiancha()
+    {
+        var data = getData();
+       var biaozhun= calculate(data);
         var v = $("#txtValue").val();
-        $("#txtBuQueDingA").val(v == "" ? sd : parseFloat(sd) / parseFloat(v));
-
+        $("#txtBuQueDingA").val(v == "" ? biaozhun : parseFloat(biaozhun) / parseFloat(v));
         calculateC();
+
     }
+
 
     function getDataB() {
         var data = "";
