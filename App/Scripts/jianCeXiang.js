@@ -819,6 +819,29 @@ function xiangDuiWuCha(obj, first, second, gold) {
     }
 
 }
+function xiangDuiWuChaTanTou(obj, first, second,third, gold) {
+    //重新计算当前行
+    var name = $(obj).attr("name");
+    var id = $(obj).attr("id");
+    id = id.substring(id.indexOf('_'));
+
+    first = first + id;//改动的地方，参与计算的列的name值
+    second = second + id;//改动的地方，参与计算的列的name值
+    third = third + id;
+    gold = gold + id;//改动的地方，误差的列的name值
+
+    var firstData = $(obj).parent().parent().find("#" + first).val();
+    var secondData = $(obj).parent().parent().find("#" + second).val();
+    if (firstData != "undefined" && secondData != "undefined" && firstData != "" && secondData != "" && secondData != "0") {
+        var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+        var jianfa = (accSub(firstData, secondData) / firstData * 100);
+        var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+
+
+        $(obj).parent().parent().find("#" + gold).val(data);
+    }
+
+}
 //减法
 function accSub(arg1, arg2) {
     var r1, r2, m, n;
