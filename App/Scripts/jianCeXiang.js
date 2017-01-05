@@ -433,7 +433,7 @@ function CalculateForAddLianCheng(Rowidx, objName) {
     return "";
 }
 
-//优化保留两位小数 zh
+//优化保留两位小数 四舍五入
 Number.prototype.toFixed = function toFixed(s) {
     var IsFuShu = false;//判断是否是负数，负数单独处理
     var je = 0;
@@ -801,6 +801,12 @@ function xiangDuiWuCha(obj, first, second, gold) {
   
     wuCha(obj, first, second, first, gold);
 }
+//通用的误差算法
+//obj 自身对象
+//first 第一列的值，做分母第一位
+//second 第二列的值，做分母第二位
+//third 第三列的值，做分子
+//gold 误差列
 function wuCha(obj, first, second,third, gold) {
     //重新计算当前行
     var name = $(obj).attr("name");
