@@ -1021,6 +1021,7 @@
     <Content Include="Views\PROJECTTEMPLET\DianYaBiaoShiZhiWuCha.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\DingZhiDianZuXiangDuiWuCha.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\BianBiCeShi.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\QianXingBiao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
