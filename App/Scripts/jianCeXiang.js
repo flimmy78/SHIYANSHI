@@ -758,6 +758,9 @@ function kexue(src, pos) {
     for (var i = 0; i < pos; i++) {
         zero += "0";
     }
+    var p = Math.floor(Math.log(src) / Math.LN10);
+    var n = src * Math.pow(10, -p);
+    return n + '*10' + p;
 
     return numeral(src).format('0.' + zero + 'e+0');//'0.000e+0'
 
