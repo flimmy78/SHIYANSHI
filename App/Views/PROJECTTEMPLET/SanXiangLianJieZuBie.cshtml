@@ -1,0 +1,310 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "三相连接组别";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    <tr>
+        <td colspan="2">
+            <div class="mt10">
+                <span>三相连接组别：</span>
+            </div>
+           
+        </td>
+       
+        <td colspan="8">
+            <div class="mt10">
+                
+            </div>
+
+        </td>
+    </tr>
+    <tr>
+        <th width="80" align="center" colspan="2">组别</th>
+        <th align="center">
+            Y/y0
+        </th>
+        <th  align="center">
+            Y/y6
+        </th>
+        <th align="center">
+            D/d0
+        </th>
+        <th align="center">
+            D/d6
+        </th>
+        <th align="center">
+            Y/d5
+        </th>
+        <th align="center">
+            Y/d11
+        </th>
+        <th align="center">
+            D/y5
+        </th>
+        <th align="center">
+            D/y11
+        </th>
+    </tr>
+    <tr>
+        <th width="80" align="center" colspan="2">变比值</th>
+        <th align="center">
+         <input class="my-textbox input-width" value="10" type="text" name="BBZ1" id="BBZ1_t_1_1" >
+            
+        </th>
+        <th align="center">
+             <input class="my-textbox input-width" value="10" type="text" name="BBZ2" id="BBZ2_t_1_1" >
+        </th>
+        <th align="center">
+             <input class="my-textbox input-width" value="10" type="text" name="BBZ3" id="BBZ3_t_1_1" >
+        </th>
+        <th align="center">
+             <input class="my-textbox input-width" value="10" type="text" name="BBZ4" id="BBZ4_t_1_1" >
+        </th>
+        <th align="center">
+            <input class="my-textbox input-width" value="10×√3" type="text" name="BBZ5" id="BBZ5_t_1_1" >
+        </th>
+        <th align="center">
+           <input class="my-textbox input-width" value="10×√3" type="text" name="BBZ6" id="BBZ6_t_1_1" >
+          
+        </th>
+        <th align="center">
+             <input class="my-textbox input-width" value="10/√3" type="text" name="BBZ7" id="BBZ7_t_1_1" >
+        </th>
+        <th align="center">
+             <input class="my-textbox input-width" value="10/√3" type="text" name="BBZ8" id="BBZ8_t_1_1" >
+        </th>
+    </tr>
+    <tr>
+        <td width="140" align="center" rowspan="6">
+            显示值/误差(%)
+        </td>
+        <td width="140" align="center" rowspan="2">
+            AB
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="AB1" id="AB1_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="AB2" id="AB2_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="AB3" id="AB3_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="AB4" id="AB4_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="AB5" id="AB5_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="AB6" id="AB6_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="AB7" id="AB7_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="AB8" id="AB8_t_1_1" onblur="blurValue(this)">
+        </td>
+    </tr>
+    <tr>
+        
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RAB1" id="RAB1_t_1_1" >
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RAB2" id="RAB2_t_1_1">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RAB3" id="RAB3_t_1_1" >
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RAB4" id="RAB4_t_1_1" >
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RAB5" id="RAB5_t_1_1" >
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RAB6" id="RAB6_t_1_1" >
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RAB7" id="RAB7_t_1_1" >
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RAB8" id="RAB8_t_1_1" >
+        </td>
+    </tr>
+    <tr>
+        <td width="140" align="center" rowspan="2">
+            BC
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="BC1" id="BC1_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="BC2" id="BC2_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="BC3" id="BC3_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="BC4" id="BC4_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="BC5" id="BC5_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="BC6" id="BC6_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="BC7" id="BC7_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="BC8" id="BC8_t_1_1" onblur="blurValue(this)">
+        </td>
+    </tr>
+    <tr>
+
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RBC1" id="RBC1_t_1_1">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RBC2" id="RBC2_t_1_1" >
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RBC3" id="RBC3_t_1_1">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RBC4" id="RBC4_t_1_1" >
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RBC5" id="RBC5_t_1_1" >
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RBC6" id="RBC6_t_1_1">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RBC7" id="RBC7_t_1_1" >
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RBC8" id="RBC8_t_1_1">
+        </td>
+    </tr>
+    <tr>
+        <td width="140" align="center" rowspan="2">
+           CA
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="CA1" id="CA1_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="CA2" id="CA2_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="CA3" id="CA3_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="CA4" id="CA4_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="CA5" id="CA5_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="CA6" id="CA6_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="CA7" id="CA7_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="CA8" id="CA8_t_1_1" onblur="blurValue(this)">
+        </td>
+    </tr>
+    <tr>
+
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RCA1" id="RCA1_t_1_1" >
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RCA2" id="RCA2_t_1_1">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RCA3" id="RCA3_t_1_1" >
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RCA4" id="RCA4_t_1_1" >
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RCA5" id="RCA5_t_1_1" >
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RCA6" id="RCA6_t_1_1" >
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RCA7" id="RCA7_t_1_1" >
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="RCA18" id="RCA8_t_1_1" >
+        </td>
+    </tr>
+</thead>
+
+<tbody id="tbody_moban">
+
+    <!--表体-->
+    <!--插入行的位置-->
+</tbody>
+
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //离开事件，用于计算
+        function blurValue(obj) {
+            biaoZhunPianCha(obj, "BBZ");
+        }
+        //误差
+        //obj 自身对象
+        //second 变比值
+        function biaoZhunPianCha(obj,  second) {
+
+
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+            var num=name.charAt(name.length - 1);
+            first = name + "_" + tongdao + "_1_1";;//改动的地方，参与计算的列的name值
+            second = second+num+ "_" + tongdao + "_1_1";;//改动的地方，参与计算的列的name值
+            gold = "R"+name + "_" + tongdao + "_1_1";//改动的地方，误差的列的name值
+            var firstData = $("#" + first).val();
+            var secondData = $("#" + second).val();
+            if (firstData != "undefined" && secondData != "undefined"&& firstData != "" && secondData != "") {
+                if(secondData=="10×√3")
+                {
+                secondData=10*Math.sqrt(3);
+                }
+                if(secondData=="10/√3")
+                {
+                secondData=10/Math.sqrt(3);
+                }
+                var jianfa = (accSub( parseFloat(firstData), parseFloat(secondData))) / parseFloat(secondData) ;
+              
+                $("#" + gold).val(fomatFloat(jianfa,2));
+             
+            }
+
+
+        }
+      
+    </script>
+
+}
+
+@section TanKuang {
+    <!--弹框的位置-->
+    <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
+    <input type="hidden" id="txtPointLen" value="1" /><!--小数点位数-->
+}
+

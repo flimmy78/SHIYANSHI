@@ -765,8 +765,14 @@ function fomatFloat(src, pos) {
 
 }
 $(function () {
-    //debugger;
-
+    //
+    var dsa = kexue(3.504501, 3);
+    var dsa1 = kexue(35.04501, 3);
+    var dsa2 = kexue(0.3504501, 3);
+    var dsa4 = kexue(-0.03504501, 3);
+    var dsa15 = kexue(-35.04501, 3);
+    var dsa26 = kexue(-3504.501, 3);
+debugger;
     //var gf = (round2(3.504501, 3));
     //var ewgf = (round2(9.8249, 3));
     //accSub()
@@ -779,15 +785,24 @@ function kexue(src, pos) {
 
         return;
     }
+    var  resultSymbol = "";
+    if (src < 0) {
+        resultSymbol = "-";
+    }
+
     var zero = "";
     for (var i = 0; i < pos; i++) {
         zero += "0";
     }
+    debugger;
     var p = Math.floor(Math.log(src) / Math.LN10);
     var n = src * Math.pow(10, -p);
+
+    n = numeral(n).format('0.' + zero);
+
     return n + '*10' + p;
 
-    return numeral(src).format('0.' + zero + 'e+0');//'0.000e+0'
+    //return numeral(src).format('0.' + zero + 'e+0');//'0.000e+0'
 
 }
 //小数变成百分比

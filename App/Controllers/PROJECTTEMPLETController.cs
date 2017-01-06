@@ -19,15 +19,27 @@ namespace Langben.App.Controllers
     public class PROJECTTEMPLETController : BaseController
     {//
 
+        /// <summary>
+        ///三相连接组别
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult SanXiangLianJieZuBie(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
 
-     /// <summary>
-     ///指针式辅助电阻影响
-     /// </summary>
-     /// <param name="id">canshu</param>
-     /// <param name="RULEID">规程id</param>
-     /// <param name="SCHEMEID">方案id</param>
-     /// <param name="PREPARE_SCHEMEID">预备方案id</param>
-     /// <returns></returns>
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///指针式辅助电阻影响
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
         public ActionResult ZhiZhenShiFuZhuDianZuYingXiang(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
