@@ -1023,6 +1023,8 @@
     <Content Include="Views\PROJECTTEMPLET\BianBiCeShi.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\QianXingBiao.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\WuChaCeShi.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BiaoZhunPianCha.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\TanTou.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

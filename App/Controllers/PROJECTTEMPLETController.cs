@@ -17,15 +17,41 @@ namespace Langben.App.Controllers
     /// 检定项目模板
     /// </summary>
     public class PROJECTTEMPLETController : BaseController
-    {//.
+    {//
      /// <summary>
-     ///误差测试
+     ///探头
      /// </summary>
      /// <param name="id">canshu</param>
      /// <param name="RULEID">规程id</param>
      /// <param name="SCHEMEID">方案id</param>
      /// <param name="PREPARE_SCHEMEID">预备方案id</param>
      /// <returns></returns>
+        public ActionResult TanTou(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///误差测试
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult BiaoZhunPianCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///误差测试
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
         public ActionResult WuChaCeShi(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
