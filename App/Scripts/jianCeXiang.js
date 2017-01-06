@@ -1,5 +1,5 @@
 ﻿
-
+var JiSuanBuQueDingDuParaArray = new Array;//每行自动计算参数数组
 var RuleID = $("#hideRULEID").val();//检测项目ID
 var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
 var $Tongdao_moban//模板
@@ -146,6 +146,27 @@ function GetJiSuanBuQueDingDuType(Name) {
     if (type != "A" && type != "Z" && AttributeValue.split(":").length < 2) {
         return "";
     }
+    //if (type == "Z" && JiSuanBuQueDingDuParaArray != null && JiSuanBuQueDingDuParaArray.length == 0)
+    //{
+    //    //if (AttributeValue.split("|")[1].length > 1 && AttributeValue.split("|")[1].split(";").length == "4") {
+
+    //    //    //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
+    //    //    //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+    //    //    //例如：显示值属性名称;量程属性名称;K属性名称;;
+
+    //    //    var pArray = AttributeValue.split("|")[1].split(";");
+    //    //    JiSuanBuQueDingDuParaArray.ShuChuShiJiZhi = pArray[0];
+    //    //    JiSuanBuQueDingDuParaArray.ShuChuShiJiZhiDanWei = pArray[0]+"_UNIT";
+    //    //    JiSuanBuQueDingDuParaArray.LiangCheng = pArray[1];
+    //    //    JiSuanBuQueDingDuParaArray.K = pArray[2];
+    //    //    JiSuanBuQueDingDuParaArray.XuanYongDianZu = pArray[3];
+    //    //}
+    //    //else
+    //    //{
+    //    //    return "";
+    //    //}        
+
+    //}
     AttributeValue = AttributeValue.split(":")[1];
     var objArray = AttributeValue.split(',');
     var NameNew = Name;
@@ -266,6 +287,10 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
             htmlString.push("<input type='hidden' name='" + BuQueDingDuLuJingName + "' id='" + BuQueDingDuLuJingId + "' value=''/>");
             var returnIds = BuQueDingDuZhiId + "&" + BuQueDingDuLuJingId + "^" + BuQueDingDuLuJingId + "^" + id;
             htmlString.push("<a href=\"#\" name=\"btnBuQueDing\" class=\"my-linkbutton\" onclick = \"showModal('" + returnIds + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID='+$('#hideRULEID').val());\">计算</a>")
+        }
+        else if(JiSuanBuQueDingDuType=="Z")//每行自动计算不确定度
+        {
+
         }
     }
     htmlString.push("</td>");
