@@ -1,0 +1,153 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "标准偏差";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    <tr>
+        <td>
+            <div class="mt10">
+                <span>标准偏差：</span>
+            </div>
+
+        </td>
+        <td>
+            <div class="mt10">
+                <span>(标准值k=<input class="my-textbox input-width" value="" type="text" name="biaozhunzhi" id="biaozhunzhi_t_1_1">）</span>
+            </div>
+
+        </td>
+        <td colspan="4">
+            <div class="mt10">
+
+            </div>
+
+        </td>
+    </tr>
+    <tr>
+        <th width="80" align="center">检定次数</th>
+        <th align="center">
+            1
+        </th>
+        <th align="center">
+            2
+        </th>
+        <th align="center">
+            3
+        </th>
+        <th align="center">
+            4
+        </th>
+        <th align="center">
+            5
+        </th>
+
+    </tr>
+    <tr>
+        <td width="140" align="center">
+            测得值（xi）
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi1" id="celiangzhi1_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi2" id="celiangzhi2_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi3" id="celiangzhi3_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi4" id="celiangzhi4_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi5" id="celiangzhi5_t_1_1" onblur="blurValue(this)">
+        </td>
+    </tr>
+    <tr>
+        <td width="140" align="center">
+            平均值(x)
+        </td>
+        <td align="left" colspan="5">
+            <input class="my-textbox input-width" value="" type="text" name="pingjunzhi" id="pingjunzhi_t_1_1" style="height:25px; width:95%">
+        </td>
+
+    </tr>
+    <tr>
+        <td width="140" align="center">
+            标准偏差
+        </td>
+        <td align="left" colspan="5">
+            <input class="my-textbox input-width" value="" type="text" name="bzpc" id="bzpc_t_1_1" style="height:25px; width:95%">
+        </td>
+
+    </tr>
+</thead>
+
+<tbody id="tbody_moban">
+
+    <!--表体-->
+    <!--插入行的位置-->
+</tbody>
+
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //离开事件，用于计算
+        function blurValue(obj) {
+            biaoZhunPianCha(obj, "celiangzhi1", "celiangzhi2", "celiangzhi3", "celiangzhi4", "celiangzhi5", "pingjunzhi", "bzpc");
+        }
+        //标准偏差
+        //obj 自身对象
+        //first 第一列的值
+        //second 第二列的值
+        //Average 平均值列
+        //Bzpc 标准偏差列
+        function biaoZhunPianCha(obj, first, second, third, fourth, fifth, Average,Bzpc) {
+
+
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+
+            first = first + "_" + tongdao + "_1_1";;//改动的地方，参与计算的列的name值
+            second = second + "_" + tongdao + "_1_1";;//改动的地方，参与计算的列的name值
+            third = third + "_" + tongdao + "_1_1";
+            fourth = fourth + "_" + tongdao + "_1_1";
+            fifth = fifth + "_" + tongdao + "_1_1";
+
+            Average = Average + "_" + tongdao + "_1_1";//改动的地方，误差的列的name值
+            Bzpc = Bzpc + "_" + tongdao + "_1_1";//改动的地方，误差的列的name值
+            var firstData = $("#" + first).val();
+            var secondData = $("#" + second).val();
+            var thirdData = $("#" + third).val();
+            var fourthData = $("#" + fourth).val();
+            var fifthData = $("#" + fifth).val();
+            if (firstData != "undefined" && secondData != "undefined" && thirdData != "undefined" && fourthData != "undefined" && fifthData != "undefined"
+                && firstData != "" && secondData != "" && thirdData != "" && fourthData != "" && fifthData != "") {
+
+
+                var AVERAGE = (parseFloat(firstData) + parseFloat(secondData) + parseFloat(thirdData) + parseFloat(fourthData) + parseFloat(fifthData)) / 5;
+                $("#" + Average).val(percentages(AVERAGE,3));
+                var strData = firstData + "," + secondData + "," + thirdData + "," + fourthData + "," + fifthData;
+                var bzpc = calculate(strData);
+                $("#" + Bzpc).val(percentages(bzpc, 2));
+             //   $(obj).parent().parent().find("#" + gold).val(data);
+            }
+
+
+        }
+
+    </script>
+
+}
+
+@section TanKuang {
+    <!--弹框的位置-->
+    <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
+    <input type="hidden" id="txtPointLen" value="1" /><!--小数点位数-->
+}
+

@@ -277,11 +277,12 @@ namespace Langben.App.Controllers
             string THEERRODISTRIBUTION = string.Empty;//误差分布状况
             string KVALE = string.Empty;//k
             string UNCERTAINTYUI = string.Empty;//不确定度ui
+            string CATEGORY = string.Empty;//类型
             decimal? GROUPS = 0;
             //分组
             //var data = (from f in msd
             //            select f.CATEGORY).Distinct();
-            var data = msd.Where(m => m.CATEGORY == "UA").Select(m => m.CATEGORY).Distinct();
+            var data = msd.Where(m => m.CATEGORY == "UA").Select(m => m.GROUPS).Distinct();
 
             List<UNCERTAINTYTABLE> alldata = new List<UNCERTAINTYTABLE>();
 
@@ -294,7 +295,7 @@ namespace Langben.App.Controllers
                 KVALE = null;
                 UNCERTAINTYUI = null;
                 //计量标准装置检定/校准信息
-                foreach (var it in msd.Where(w => w.CATEGORY == item))
+                foreach (var it in msd.Where(w => w.GROUPS == item))
                 {
                     ASSESSMENTITEM += it.ASSESSMENTITEM + ",";
                     ERRORSOURCES += it.ERRORSOURCES + ",";
@@ -303,6 +304,7 @@ namespace Langben.App.Controllers
                     KVALE += it.KVALE + ",";
                     UNCERTAINTYUI += it.UNCERTAINTYUI + it.UNCERTAINTYUIUNIT + ",";
                     GROUPS = it.GROUPS;
+                    CATEGORY = it.CATEGORY;
                 }
                 alldata.Add(new UNCERTAINTYTABLE()
                 {
@@ -313,7 +315,7 @@ namespace Langben.App.Controllers
                     KVALE = KVALE,
                     UNCERTAINTYUI = UNCERTAINTYUI,
                     GROUPS = GROUPS,
-                    CATEGORY = item
+                    CATEGORY = CATEGORY
 
                 });
             }
@@ -392,11 +394,11 @@ namespace Langben.App.Controllers
             string INDEX1 = string.Empty;//指标1
             string INDEX2 = string.Empty;//指标2
             decimal? GROUPS = 0;
-
+            string CATEGORY = string.Empty;//类型
             //分组
             //var data = (from f in msd
             //            select f.CATEGORY).Distinct();
-            var data = msd.Where(m => m.CATEGORY == "UB").Select(m => m.CATEGORY).Distinct();
+            var data = msd.Where(m => m.CATEGORY == "UB").Select(m => m.GROUPS).Distinct();
 
 
             List<UNCERTAINTYTABLE> alldata = new List<UNCERTAINTYTABLE>();
@@ -409,7 +411,7 @@ namespace Langben.App.Controllers
                 INDEX1 = null;
                 INDEX2 = null;
                 //计量标准装置检定/校准信息
-                foreach (var it in msd.Where(w => w.CATEGORY == item))
+                foreach (var it in msd.Where(w => w.GROUPS == item))
                 {
                     ASSESSMENTITEM += it.ASSESSMENTITEM + ",";
                     THERANGESCOPE += it.THERANGESCOPE + it.THEUNIT + it.THERELATIONSHIP + it.ENDRANGESCOPE + it.ENDUNIT + it.ENDRELATIONSHIP + ",";
@@ -417,6 +419,7 @@ namespace Langben.App.Controllers
                     INDEX1 += it.INDEX1 + it.INDEX1UNIT + ",";
                     INDEX2 += it.INDEX2 + it.INDEX2UNIT + ",";
                     GROUPS = it.GROUPS;
+                    CATEGORY = it.CATEGORY;
                 }
                 alldata.Add(new UNCERTAINTYTABLE()
                 {
@@ -426,7 +429,7 @@ namespace Langben.App.Controllers
                     INDEX1 = INDEX1,
                     INDEX2 = INDEX2,
                     GROUPS = GROUPS,
-                    CATEGORY = item
+                    CATEGORY = CATEGORY
                 });
             }
 

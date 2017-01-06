@@ -979,7 +979,7 @@
     <Content Include="Views\PROJECTTEMPLET\GongZuoDianLiuShiZhiWuCha.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\JueYuanDianZu.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\OMYiXiaWuWuCha.cshtml" />
-    <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaFeiZhengFuJueDuiWuCha.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaFeiZhengFuJueDuiWuChaLiangCheng.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\IndexSef.cshtml" />
     <Content Include="Views\VCharts\Index.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\JiSuanBuQueDingDu.cshtml" />
@@ -1020,9 +1020,14 @@
     <Content Include="Views\PROJECTTEMPLET\BianCha.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\DianYaBiaoShiZhiWuCha.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\DingZhiDianZuXiangDuiWuCha.cshtml" />
+    <Content Include="Views\UNCERTAINTYTABLE\IndexSet.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\BianBiCeShi.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\QianXingBiao.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\WuChaCeShi.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BiaoZhunPianCha.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\TanTou.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\ZhiZhenShiFuZhuDianZuYingXiang.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaFeiZhengFuJueDuiWuCha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

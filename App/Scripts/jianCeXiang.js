@@ -939,7 +939,7 @@ function yinYongWuCha(obj, first, second, third, fourth, fifth, gold) {
 
 
 }
-///贝塞尔
+///贝塞尔公式STDEV
 ///计算标准偏差
 ///strData 值逗号隔开
 ///返回 sd 标准偏差值
