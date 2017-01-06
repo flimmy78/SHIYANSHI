@@ -469,56 +469,30 @@ namespace Langben.BLL
         /// <returns></returns>
         public List<METERING_STANDARD_DEVICE> GetPREPARE_SCHEME(string id)
         {
-            List<METERING_STANDARD_DEVICE> msddlist = new List<METERING_STANDARD_DEVICE>();
-            METERING_STANDARD_DEVICE msdd = new METERING_STANDARD_DEVICE();
-            //if (!string.IsNullOrWhiteSpace(id))
-            //{
-            //    List<STANDARDCHOICE> stalist = repository2.GetByRefPREPARE_SCHEMEID(db,id).ToList();
-            //    foreach (var item in stalist)
-            //    {
-            //        if (!string.IsNullOrWhiteSpace(item.METERING_STANDARD_DEVICEID))
-            //        {
-            //            METERING_STANDARD_DEVICE msd = repository.GetById(item.METERING_STANDARD_DEVICEID);
-                        
-            //            var data = msd.ALLOWABLE_ERROR.Where(m => m.CATEGORY == "AA" && m.GROUPS == Convert.ToInt32(item.GROUPS));
-            //            foreach (var al in data)
-            //            {
-            //                var alladd = new ALLOWABLE_ERROR()
-            //                {
-            //                    ID = al.ID,
-            //                    THEACCURACYLEVEL = al.THEACCURACYLEVEL,
-            //                    THEUNCERTAINTYVALUEK = al.THEUNCERTAINTYVALUEK,
-            //                    THEUNCERTAINTYNDEXL = al.THEUNCERTAINTYNDEXL,
-            //                    THEUNCERTAINTYVALUE = al.THEUNCERTAINTYVALUE,
-            //                    THEUNCERTAINTY = al.THEUNCERTAINTY,
-            //                    MAXVALUE = al.MAXVALUE,
-            //                    MAXCATEGORIES = al.MAXCATEGORIES,
-            //                    METERING_STANDARD_DEVICEID = al.METERING_STANDARD_DEVICEID,
-            //                    GROUPS = al.GROUPS
-            //                };
-            //                msdd.ALLOWABLE_ERROR.Add(alladd);
-            //            }
-            //            var data2 = msd.METERING_STANDARD_DEVICE_CHECK.Where(m => m.CATEGORY == "AA" && m.GROUPS == Convert.ToInt32(item.GROUPS));
-            //            foreach (var ms in data2)
-            //            {
-            //                var msdcadd = new METERING_STANDARD_DEVICE_CHECK()
-            //                {
-            //                    ID = ms.ID,
-            //                    CERTIFICATEUNIT = ms.CERTIFICATEUNIT,
-            //                    CERTIFICATE_NUM = ms.CERTIFICATE_NUM,
-            //                    CHECK_DATE = ms.CHECK_DATE,
-            //                    VALID_TO = ms.VALID_TO,
-            //                    METERING_STANDARD_DEVICEID = ms.METERING_STANDARD_DEVICEID,
-            //                    GROUPS = ms.GROUPS
-            //                };
-            //                msdd.METERING_STANDARD_DEVICE_CHECK.Add(msdcadd);
-            //            }
-            //        }
-            //        msddlist.Add(msdd);
-            //    }
-            //}
+            List<METERING_STANDARD_DEVICE> msdtlinst = null;
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                List<STANDARDCHOICE> stalist = repository2.GetByRefPREPARE_SCHEMEID(db, id).ToList();//查询标准器选表数据
+                string[] ID = stalist.Select(s => s.METERING_STANDARD_DEVICEID).ToArray();//筛选出标准器主表需要的id
+                msdtlinst = repository.GetByRefIDLIST(db, ID).ToList();//通过筛选出来的id到标准器主表中查询数据
 
-            return msddlist;
+
+                //筛选出符合要求的数据
+                foreach (var item in msdtlinst)
+                {
+                    item.ALLOWABLE_ERROR = (from a in item.ALLOWABLE_ERROR
+                                            from b in stalist
+                                            where a.GROUPS == Convert.ToInt32(b.GROUPS) && a.METERING_STANDARD_DEVICEID == b.METERING_STANDARD_DEVICEID
+                                            select a
+                     ).ToList();
+                    item.METERING_STANDARD_DEVICE_CHECK = (from a in item.METERING_STANDARD_DEVICE_CHECK
+                                                           from b in stalist
+                                                           where a.GROUPS == Convert.ToInt32(b.GROUPS) && a.METERING_STANDARD_DEVICEID == b.METERING_STANDARD_DEVICEID
+                                                           select a
+                   ).ToList();
+                }
+            }
+            return msdtlinst;
         }
         public void Dispose()
         {

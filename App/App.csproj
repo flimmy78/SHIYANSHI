@@ -1020,6 +1020,7 @@
     <Content Include="Views\PROJECTTEMPLET\BianCha.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\DianYaBiaoShiZhiWuCha.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\DingZhiDianZuXiangDuiWuCha.cshtml" />
+    <Content Include="Views\UNCERTAINTYTABLE\IndexSet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

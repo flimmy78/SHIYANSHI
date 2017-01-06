@@ -214,7 +214,19 @@ namespace Langben.DAL
                         select c;
                       
         }
+        /// <summary>
+        /// 根据UNDERTAKE_LABORATORYID，获取所有标准装置/计量标准器信息数据
+        /// </summary>
+        /// <param name="id">外键的主键</param>
+        /// <returns></returns>
+        public IQueryable<METERING_STANDARD_DEVICE> GetByRefIDLIST(SysEntities db, string[] id)
+        {
+            return from c in db.METERING_STANDARD_DEVICE
+                   from d in id
+                   where c.ID ==d
+                   select c;
 
+        }
         public void Dispose()
         {
         }
