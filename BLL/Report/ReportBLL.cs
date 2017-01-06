@@ -1627,9 +1627,14 @@ namespace Langben.Report
                         if (!string.IsNullOrEmpty(aValue) && aValue.Trim() != "")
                         {
                             aValue = aValue.Trim().Remove(aValue.Trim().Length - 1);
-                            aValue = aValue.Replace(",", Environment.NewLine);
+                            //aValue = aValue.Replace(",", Environment.NewLine);
+                            HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, null, aValue);
+                            sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(value);
                         }
-                        sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(aValue);
+                        else
+                        {
+                            sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(aValue);
+                        }
                     }
                     #endregion
 
@@ -1761,7 +1766,7 @@ namespace Langben.Report
                     //if (TableTemplateDic != null && TableTemplateDic.ContainsKey(iEntity.RULEID))
                     //{
                     //    TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
-                    if (iEntity != null 
+                    if (iEntity != null && iEntity.RULEID== "315-1983_2_5"
                         && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
                         //&&iEntity.RULEID== "126-1995_2_4_1"
@@ -2402,53 +2407,86 @@ namespace Langben.Report
             //}
             HSSFRichTextString result = new HSSFRichTextString(value.Trim());
 
-            if (workbook != null && value != null && value.Trim() != ""
-                && allSpecialCharacters != null && allSpecialCharacters.SpecialCharacterList != null &&
-                allSpecialCharacters.SpecialCharacterList.Count > 0 &&
-                allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == value.Trim().ToUpper()) != null)
+           
+            if (workbook != null && value != null && value.Trim() != "" )
             {
-                SpecialCharacter spec = allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == value.Trim().ToUpper());
-                #region 将字符设置成斜体
-
-                HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
-                normalFont.IsItalic = true;
-                normalFont.FontName = "宋体";
-                int startIndex = 0;
-                int endIndex = spec.Code.Trim().Length - 1;
-                if (endIndex < 0)
+                #region 设置上标
+                #region 处理*10
+                if(value.IndexOf("*10")>0)
                 {
-                    endIndex = 0;
+                    value = value.Replace(",", Environment.NewLine);
+                    result = new HSSFRichTextString(value.Trim().Replace("|", ""));
+
+                    string[] vArray = value.Trim().Split('|');
+                    int length = 0;
+                    int startIndex = 0;
+                    int endIndex = 0;                    
+                    foreach(string v in vArray)
+                    {
+                                               
+                        if(v.IndexOf("*10") >= 0)
+                        {
+                            startIndex = length + v.IndexOf("*10") + 3;
+                            endIndex = length + v.Length;                            
+                            HSSFFont superscript = (HSSFFont)workbook.CreateFont();
+                            superscript.TypeOffset = FontSuperScript.Super;//上标
+                            superscript.FontName = "宋体";
+                            result.ApplyFont(startIndex, endIndex, superscript);
+                        }
+                        length = length + v.Length;
+
+                    }
                 }
-                result.ApplyFont(startIndex, endIndex, normalFont);
+                #endregion 
                 #endregion
 
-                #region 设置下标
-                if (spec.SubscriptLastCount > 0)
+                if (allSpecialCharacters != null && allSpecialCharacters.SpecialCharacterList != null &&
+                    allSpecialCharacters.SpecialCharacterList.Count > 0 &&
+                    allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == value.Trim().ToUpper()) != null)
                 {
-                    //result = new HSSFRichTextString(value);
-                    // superscript = (HSSFFont)workbook.CreateFont();
-                    //superscript.TypeOffset = FontSuperScript.Super;//上标
-                    //superscript.Color = HSSFColor.RED.index;
+                    SpecialCharacter spec = allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == value.Trim().ToUpper());
+                    #region 将字符设置成斜体
 
-                    HSSFFont subscript = (HSSFFont)workbook.CreateFont();
-                    subscript.TypeOffset = FontSuperScript.Sub; //下标  
-                    subscript.IsItalic = true;
-                    subscript.FontName = "宋体";
-                    //subscript.Color = HSSFColor.Red.Index;
-                    //HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
-                    startIndex = spec.Code.Trim().Length - spec.SubscriptLastCount;
-                    if (startIndex < 0)
-                    {
-                        startIndex = 0;
-                    }
-                    endIndex = spec.Code.Trim().Length;
+                    HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                    normalFont.IsItalic = true;
+                    normalFont.FontName = "宋体";
+                    int startIndex = 0;
+                    int endIndex = spec.Code.Trim().Length - 1;
                     if (endIndex < 0)
                     {
                         endIndex = 0;
                     }
-                    result.ApplyFont(startIndex, endIndex, subscript);
+                    result.ApplyFont(startIndex, endIndex, normalFont);
+                    #endregion
+
+                    #region 设置下标
+                    if (spec.SubscriptLastCount > 0)
+                    {
+                        //result = new HSSFRichTextString(value);
+                        // superscript = (HSSFFont)workbook.CreateFont();
+                        //superscript.TypeOffset = FontSuperScript.Super;//上标
+                        //superscript.Color = HSSFColor.RED.index;
+
+                        HSSFFont subscript = (HSSFFont)workbook.CreateFont();
+                        subscript.TypeOffset = FontSuperScript.Sub; //下标  
+                        //subscript.IsItalic = true;
+                        subscript.FontName = "宋体";
+                        //subscript.Color = HSSFColor.Red.Index;
+                        //HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                        startIndex = spec.Code.Trim().Length - spec.SubscriptLastCount;
+                        if (startIndex < 0)
+                        {
+                            startIndex = 0;
+                        }
+                        endIndex = spec.Code.Trim().Length;
+                        if (endIndex < 0)
+                        {
+                            endIndex = 0;
+                        }
+                        result.ApplyFont(startIndex, endIndex, subscript);
+                    }
+                    #endregion
                 }
-                #endregion                 
             }
             return result;
 
