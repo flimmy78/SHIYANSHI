@@ -190,7 +190,7 @@ namespace Langben.Report
             var data = (
                         from f2 in allTableTemplates2.TableTemplateList
 
-                        select f2).ToList();
+                        select f2).Distinct().ToList();
             TableTemplates t = new TableTemplates();
             t.TableTemplateList = new List<TableTemplate>();
             var dsaf =new List<string>();

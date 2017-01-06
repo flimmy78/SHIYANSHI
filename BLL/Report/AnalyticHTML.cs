@@ -199,7 +199,7 @@ namespace Langben.Report
                     mydata.id = b.Attributes["id"].Value;
                     mydata.name = b.Attributes["name"].Value;
                     mydata.columnNum = head[mydata.name];
-                    mydata.rowNum = int.Parse(System.Math.Ceiling((i / 3)).ToString());
+                    //mydata.rowNum = int.Parse(System.Math.Ceiling((i / 3)).ToString());
                     if (b.Name == "input")
                     {
                         if (b.Attributes["value"] != null)
@@ -258,7 +258,7 @@ namespace Langben.Report
                         mydata.id = b.Attributes["id"].Value;
                         mydata.name = b.Attributes["name"].Value;
                         mydata.columnNum = headb[mydata.name];
-                        mydata.rowNum = int.Parse(System.Math.Ceiling((ib / 3)).ToString());
+                        //mydata.rowNum = int.Parse(System.Math.Ceiling((ib / 3)).ToString());
                         if (b.Name == "input")
                         {
                             if (b.Attributes["value"] != null)
@@ -511,7 +511,7 @@ namespace Langben.Report
                     mydata.id = b.Attributes["id"].Value;
                     mydata.name = b.Attributes["name"].Value;
                     mydata.columnNum = head[mydata.name];
-                    mydata.rowNum = GetRowNum(mydata.id);
+                    //mydata.rowNum = GetRowNum(mydata.id);
                     if (b.Name == "input")
                     {
                         if (b.Attributes["value"] != null)
@@ -616,42 +616,7 @@ namespace Langben.Report
 
             return data;//
         }
-        /// <summary>
-        /// 根据id获取行号
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        private static int GetRowNum(string id)
-        {
-            if (id.Contains("_UNIT_"))
-            {
-                var ids = id.Split('_');
-                if (ids.Length == 5)
-                {
-                    return int.Parse(ids[4]);
-                }
-                else
-                {
-                    throw new System.Exception("id中没有行号" + id);
-
-                }
-            }
-            else
-            {
-                var ids = id.Split('_');
-                if (ids.Length == 4)
-                {
-                    return int.Parse(ids[3]);
-                }
-                else
-                {
-                    throw new System.Exception("id中没有行号" + id);
-
-                }
-            }
-
-        }
-
+     
         /// <summary>
         /// 获取表头中的所有的input和select标签 此处有一个bug,如果通道1表头没有数据,就使用2通道 
         /// </summary>

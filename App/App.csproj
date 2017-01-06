@@ -1028,6 +1028,7 @@
     <Content Include="Views\PROJECTTEMPLET\TanTou.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\ZhiZhenShiFuZhuDianZuYingXiang.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaFeiZhengFuJueDuiWuCha.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\SanXiangLianJieZuBie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

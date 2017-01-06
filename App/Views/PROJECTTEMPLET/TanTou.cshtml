@@ -80,9 +80,9 @@
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
                 if (rowidx == 0) {
                     //需要合并的列
-                    htmlString.push(SetTDHtml(rowspanIdx, "TDA", HangHaoID, rowidx, lcval, "", 'A', 'blurYinYongWuCha'));
+                    htmlString.push(SetTDHtml(rowspanIdx, "TDA", lianChengID, rowidx, lcval, "", 'A', 'blurYinYongWuCha'));
                     //二次输入标准值
-                    htmlString.push(SetTDHtml(rowspanIdx, "TDB", HangHaoID, rowidx, '', "", 'mv/A', 'blurDianliu'));
+                    htmlString.push(SetTDHtml(rowspanIdx, "TDB", lianChengID, rowidx, '', "", 'mv/A', 'blurDianliu'));
                 }
                 //需要合并的列
 
