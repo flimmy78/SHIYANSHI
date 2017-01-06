@@ -1,0 +1,146 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "钳形表";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    <tr >
+        <th colspan="6">基本误差</th>
+    </tr>
+    <tr>
+        <th align="center" width="120">量限：</th>
+        <th style="width:30px">标准值(A)</th>
+        <th style="width:30px">显示值(A)</th>
+        <th style="width:30px">最大基本误差(%)</th>
+        <th style="width:30px">引用误差(%)</th>
+        <th style="width:30px">校准结果的不确定度U(k=
+        <select class="my-combobox" name="K" id="K_t_1_1">
+    <option value="2">2 </option>
+    <option value="3">3</option>
+    <option value="√3">√3</option>
+</select>
+        )</th>        
+    </tr>    
+</thead>
+<tbody>
+    <!--表体-->
+      <tr>
+          <td rowspan="3" align="center" width="120"><!--量限-->
+               <input class="my-textbox input-width" value="1000" id="RANGE_t_1_1" name="RANGE" onblur="blurCeLiangDian(this)" type="text">
+           </td>
+           <td align="center" width="30"><!--标准值(A)-->
+               <input class="my-textbox input-width" value="200" id="READVALUE_t_1_1" name="READVALUE" onblur="blurCeLiangDian(this)" type="text">
+           </td>
+           <td align="center" width="30"><!--显示值(A)-->
+               <input class="my-textbox input-width" value="204" id="ACTUALVALUE_t_1_1" name="ACTUALVALUE" onblur="blurCeLiangDian(this)" type="text">
+           </td>
+           <td rowspan="6" align="center" width="30"><!--最大基本误差(%)-->
+               <input class="my-textbox input-width" value="-0.90" id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" onblur="blurCeLiangDian(this)" type="text">
+           </td>
+           <td align="center" width="30"><!--引用误差(%)-->
+               <input class="my-textbox input-width" value="0.40" id="RELATIVEERROR_t_1_1" name="RELATIVEERROR" onblur="blurCeLiangDian(this)" type="text">
+           </td>
+           <td rowspan="6" align="center" width="30"><!--校准结果的不确定度U(k={0})-->
+               <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_1" name="UNCERTAINTYDEGREE" onblur="blurCeLiangDian(this)" type="text">
+           </td>
+     </tr>
+     <tr>
+         
+           <td align="center" width="30"><!--标准值(A)-->
+                <input class="my-textbox input-width" value="400" id="SHURUAA_t_1_1" name="SHURUAA" onblur="blurCeLiangDian(this)" type="text">
+           </td>
+           <td align="center" width="30"><!--显示值(A)-->
+                <input class="my-textbox input-width" value="402" id="SHURUAB_t_1_1" name="SHURUAB" onblur="blurCeLiangDian(this)" type="text">
+           </td>         
+           <td align="center" width="30"><!--引用误差(%)-->
+                <input class="my-textbox input-width" value="0.40" id="SHURUAC_t_1_1" name="SHURUAC" onblur="blurCeLiangDian(this)" type="text">
+           </td>           
+     </tr>
+      <tr>
+         
+           <td align="center" width="30"><!--标准值(A)-->
+                <input class="my-textbox input-width" value="800" id="SHURUBA_t_1_1" name="SHURUBA" onblur="blurCeLiangDian(this)" type="text">
+           </td>
+           <td align="center" width="30"><!--显示值(A)-->
+                <input class="my-textbox input-width" value="804" id="SHURUBB_t_1_1" name="SHURUBB" onblur="blurCeLiangDian(this)" type="text">
+           </td>         
+           <td align="center" width="30"><!--引用误差(%)-->
+                <input class="my-textbox input-width" value="804" id="SHURUBC_t_1_1" name="SHURUBC" onblur="blurCeLiangDian(this)" type="text">
+           </td>          
+     </tr>
+         <tr>
+          <td rowspan="3" align="center" width="120"><!--量限-->
+               <input class="my-textbox input-width" value="2000" id="SHURUCA_t_1_1" name="SHURUCA" onblur="blurCeLiangDian(this)" type="text">
+           </td>
+           <td align="center" width="30"><!--标准值(A)-->
+               <input class="my-textbox input-width" value="1000" id="SHURUCB_t_1_1" name="SHURUCB" onblur="blurCeLiangDian(this)" type="text">
+           </td>
+           <td align="center" width="30"><!--显示值(A)-->
+               <input class="my-textbox input-width" value="1003" id="SHURUCC_t_1_1" name="SHURUCC" onblur="blurCeLiangDian(this)" type="text">
+           </td>          
+           <td align="center" width="30"><!--引用误差(%)-->            
+               <input class="my-textbox input-width" value="0.30" id="SHURUCD_t_1_1" name="SHURUCD" onblur="blurCeLiangDian(this)" type="text">           
+           </td>          
+     </tr>
+       <tr>         
+           <td align="center" width="30"><!--标准值(A)-->
+               <input class="my-textbox input-width" value="1600" id="SHURUDA_t_1_1" name="SHURUDA" onblur="blurCeLiangDian(this)" type="text">
+           </td>
+           <td align="center" width="30"><!--显示值(A)-->
+                <input class="my-textbox input-width" value="1609" id="SHURUDB_t_1_1" name="SHURUDB" onblur="blurCeLiangDian(this)" type="text">
+           </td>         
+           <td align="center" width="30"><!--引用误差(%)-->
+                <input class="my-textbox input-width" value="0.90" id="SHURUDC_t_1_1" name="SHURUDC" onblur="blurCeLiangDian(this)" type="text">
+           </td>          
+     </tr>
+       <tr>
+         
+           <td align="center" width="30"><!--标准值(A)-->
+               <input class="my-textbox input-width" value="2000" id="SHURUEA_t_1_1" name="SHURUEA" onblur="blurCeLiangDian(this)" type="text">
+           </td>
+           <td align="center" width="30"><!--显示值(A)-->
+               <input class="my-textbox input-width" value="1982" id="SHURUEB_t_1_1" name="SHURUEB" onblur="blurCeLiangDian(this)" type="text">
+           </td>         
+           <td align="center" width="30"><!--引用误差(%)-->
+              <input class="my-textbox input-width" value="-1.80" id="SHURUEC_t_1_1" name="SHURUEC" onblur="blurCeLiangDian(this)" type="text">
+           </td>          
+     </tr>
+
+</tbody>
+<tfoot>
+    <!--表尾-->
+     <tr>
+       <td colspan="7">
+       <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+       <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
+       </td>
+    </tr>
+</tfoot>
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        //tbodyIndex通道
+        //thi 当前位置
+        function set(tbodyIndex, thi) {
+            // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
+            $("#hideDangQianTongDao").val(tbodyIndex); CreateRow();
+
+        }
+        function blurShuChuFanWeiZuiXiao(obj) {
+            
+
+        }
+
+
+
+    </script>
+}
+@section TanKuang {
+    <!--弹框的位置-->
+    <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
+    <input type="hidden" id="txtPointLen" value="1" /><!--小数点位数-->
+}

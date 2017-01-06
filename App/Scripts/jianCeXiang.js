@@ -433,7 +433,7 @@ function CalculateForAddLianCheng(Rowidx, objName) {
     return "";
 }
 
-//优化保留两位小数 zh
+//优化保留两位小数 四舍五入
 Number.prototype.toFixed = function toFixed(s) {
     var IsFuShu = false;//判断是否是负数，负数单独处理
     var je = 0;
@@ -798,6 +798,16 @@ function zeroFloat(src, pos) {
 //second 第二列的值，做分子
 //gold 误差列
 function xiangDuiWuCha(obj, first, second, gold) {
+  
+    wuCha(obj, first, second, first, gold);
+}
+//通用的误差算法
+//obj 自身对象
+//first 第一列的值，做分母第一位
+//second 第二列的值，做分母第二位
+//third 第三列的值，做分子
+//gold 误差列
+function wuCha(obj, first, second,third, gold) {
     //重新计算当前行
     var name = $(obj).attr("name");
     var id = $(obj).attr("id");
@@ -805,13 +815,15 @@ function xiangDuiWuCha(obj, first, second, gold) {
 
     first = first + id;//改动的地方，参与计算的列的name值
     second = second + id;//改动的地方，参与计算的列的name值
+    third = third + id;
     gold = gold + id;//改动的地方，误差的列的name值
 
     var firstData = $(obj).parent().parent().find("#" + first).val();
     var secondData = $(obj).parent().parent().find("#" + second).val();
-    if (firstData != "undefined" && secondData != "undefined" && firstData != "" && secondData != "" && secondData != "0") {
+    var thirdData = $(obj).parent().parent().find("#" + second).val();
+    if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-        var jianfa = (accSub(firstData, secondData) / firstData * 100);
+        var jianfa = (accSub(firstData, secondData) / thirdData * 100);
         var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
 
 
@@ -819,15 +831,7 @@ function xiangDuiWuCha(obj, first, second, gold) {
     }
 
 }
-//减法
-function accSub(arg1, arg2) {
-    var r1, r2, m, n;
-    try { r1 = arg1.toString().split(".")[1].length } catch (e) { r1 = 0 }
-    try { r2 = arg2.toString().split(".")[1].length } catch (e) { r2 = 0 }
-    m = Math.pow(10, Math.max(r1, r2));
-    n = (r1 >= r2) ? r1 : r2;
-    return ((arg1 * m - arg2 * m) / m).toFixed(n);
-}
+
 //绝对误差
 //obj 自身对象
 //first 第一列的值，做分母第一位
@@ -910,7 +914,7 @@ function yinYongWuCha(obj, first, second, third, fourth, fifth, gold) {
 
 
 }
-
+///贝塞尔
 ///计算标准偏差
 ///strData 值逗号隔开
 ///返回 sd 标准偏差值
@@ -959,4 +963,13 @@ function calculate(strData) {
     // psd = Math.round(psd * 1000000) / 1000000;
 
 
+}
+//减法
+function accSub(arg1, arg2) {
+    var r1, r2, m, n;
+    try { r1 = arg1.toString().split(".")[1].length } catch (e) { r1 = 0 }
+    try { r2 = arg2.toString().split(".")[1].length } catch (e) { r2 = 0 }
+    m = Math.pow(10, Math.max(r1, r2));
+    n = (r1 >= r2) ? r1 : r2;
+    return ((arg1 * m - arg2 * m) / m).toFixed(n);
 }

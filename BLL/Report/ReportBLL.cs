@@ -741,10 +741,10 @@ namespace Langben.Report
             else
             {
                 HideRow(sheet_Destination, 7, 2);
-                RowIndex = 10;
+                RowIndex = 9;
             }
             #endregion
-            RowIndex++;
+            //RowIndex++;
             //各类装置
             SetZhuangZhis(hssfworkbook, sheet_Destination, ref RowIndex, entity, type);
             #region 校准说明            
@@ -1532,14 +1532,17 @@ namespace Langben.Report
             }
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
             IMETERING_STANDARD_DEVICEBLL bll = new METERING_STANDARD_DEVICEBLL();
-            if (entity.METERING_STANDARD_DEVICE != null)
-            {
-                List<METERING_STANDARD_DEVICE> list = entity.METERING_STANDARD_DEVICE.ToList();
+            List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
+            //List<METERING_STANDARD_DEVICE> list =    bll.GetAll();//测试
+            //if (entity.METERING_STANDARD_DEVICE != null)            
+            //{
+                //List<METERING_STANDARD_DEVICE> list = entity.METERING_STANDARD_DEVICE.ToList();
+                
                 if (list != null && list.Count > 0)
                 {
                     //空三行
-                    CopyRow(sheet_Source, sheet_Destination, 2, rowIndex_Destination, 3, true);
-                    rowIndex_Destination = rowIndex_Destination + 3;
+                    //CopyRow(sheet_Source, sheet_Destination, 2, rowIndex_Destination, 3, true);
+                    //rowIndex_Destination = rowIndex_Destination + 3;
 
                     //标准装置
                     List<METERING_STANDARD_DEVICE> listZhuanZhi = list.FindAll(p => p.CATEGORY == "标准装置");
@@ -1551,7 +1554,7 @@ namespace Langben.Report
                     List<METERING_STANDARD_DEVICE> listShiPin = list.FindAll(p => p.CATEGORY == "中间试品");
                     SetZhuangZhi(sheet_Source, sheet_Destination, rowIndex_Source_ShiPin, ref rowIndex_Destination, CATEGORYType.中间试品, listShiPin);
                 }
-            }
+            //}
 
         }
         /// <summary>
@@ -1604,22 +1607,27 @@ namespace Langben.Report
                         string aValue = "";
                         foreach (ALLOWABLE_ERROR aItem in aList)
                         {
-                            if (aItem.THEACCURACYLEVEL != null && aItem.THEACCURACYLEVEL.Trim() != "")
+                            if (!string.IsNullOrWhiteSpace(aItem.THEACCURACYLEVEL))
                             {
-                                aValue += aItem.THEACCURACYLEVEL + "、";
+
+                                aValue += aItem.THEACCURACYLEVEL + ",";
                             }
-                            else if (aItem.MAXCATEGORIES != null && aItem.MAXCATEGORIES.Trim() != "")
+                            else if (!string.IsNullOrWhiteSpace(aItem.MAXCATEGORIES) || !string.IsNullOrWhiteSpace(aItem.MAXVALUE))
                             {
-                                aValue += aItem.MAXCATEGORIES + ":" + aItem.MAXVALUE + "、";
+
+                                aValue += aItem.MAXCATEGORIES + aItem.MAXVALUE + ",";
                             }
-                            else if (aItem.THEUNCERTAINTYVALUEK != null && aItem.THEUNCERTAINTYVALUEK.Trim() != "")
+                            else if (!string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTY) || !string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTYVALUE) || !string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTYNDEXL) || !string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTYVALUEK))
                             {
-                                aValue += aItem.THEUNCERTAINTYVALUEK + ":" + aItem.THEUNCERTAINTYNDEXL + " " + aItem.THEUNCERTAINTYVALUE + ":" + aItem.THEUNCERTAINTY + "、";
+
+                                aValue += aItem.THEUNCERTAINTY + aItem.THEUNCERTAINTYVALUE + aItem.THEUNCERTAINTYNDEXL + aItem.THEUNCERTAINTYVALUEK + ",";
                             }
+
                         }
                         if (!string.IsNullOrEmpty(aValue) && aValue.Trim() != "")
                         {
                             aValue = aValue.Trim().Remove(aValue.Trim().Length - 1);
+                            aValue = aValue.Replace(",", Environment.NewLine);
                         }
                         sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(aValue);
                     }
@@ -1635,21 +1643,23 @@ namespace Langben.Report
                         {
                             if (mItem != null && !string.IsNullOrEmpty(mItem.CERTIFICATE_NUM) && mItem.CERTIFICATE_NUM.Trim() != "")
                             {
-                                cValue += mItem.CERTIFICATE_NUM + "、";
+                                cValue += mItem.CERTIFICATE_NUM + ",";
                             }
                             if (mItem != null && mItem.VALID_TO.HasValue)
                             {
-                                vValue += mItem.VALID_TO.Value.ToString("yyyy/MM/dd") + "、";
+                                vValue += mItem.VALID_TO.Value.ToString("yyyy/MM/dd") + ",";
                             }
 
                         }
                         if (!string.IsNullOrEmpty(cValue) && cValue.Trim() != "")
                         {
                             cValue = cValue.Trim().Remove(cValue.Trim().Length - 1);
+                            cValue = cValue.Replace(",", Environment.NewLine);
                         }
                         if (!string.IsNullOrEmpty(vValue) && vValue.Trim() != "")
                         {
                             vValue = vValue.Trim().Remove(vValue.Trim().Length - 1);
+                            vValue = vValue.Replace(",", Environment.NewLine);
                         }
                         sheet_Destination.GetRow(rowIndex_Destination).GetCell(20).SetCellValue(cValue);
                         sheet_Destination.GetRow(rowIndex_Destination).GetCell(27).SetCellValue(vValue);

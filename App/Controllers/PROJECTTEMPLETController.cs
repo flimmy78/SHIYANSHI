@@ -17,15 +17,54 @@ namespace Langben.App.Controllers
     /// 检定项目模板
     /// </summary>
     public class PROJECTTEMPLETController : BaseController
-    {//
+    {//.
      /// <summary>
-     ///定值电阻-相对误差
+     ///误差测试
      /// </summary>
      /// <param name="id">canshu</param>
      /// <param name="RULEID">规程id</param>
      /// <param name="SCHEMEID">方案id</param>
      /// <param name="PREPARE_SCHEMEID">预备方案id</param>
      /// <returns></returns>
+        public ActionResult WuChaCeShi(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///钳形表
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult QianXingBiao(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///定值电阻-相对误差
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult BianBiCeShi(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///定值电阻-相对误差
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
         public ActionResult DingZhiDianZuXiangDuiWuCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
