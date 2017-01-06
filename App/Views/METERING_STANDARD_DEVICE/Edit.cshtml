@@ -588,6 +588,66 @@
                                     <select class="my-combobox" name="ERRORLIMITUNIT">
                                         <option value="">请选择</option>
                                         <option selected="selected" value="%">%</option>
+                                        <option value="Ω">Ω</option>
+                                        <option value="mΩ">mΩ</option>
+                                        <option value="ˊ">ˊ</option>
+                                        <option value="%">mS</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.ERRORLIMITUNIT == "Ω")
+                            {
+                                <li class="fl mr10">
+                                    误差限单位：
+                                    <select class="my-combobox" name="ERRORLIMITUNIT">
+                                        <option value="">请选择</option>
+                                        <option value="%">%</option>
+                                        <option selected="selected" value="Ω">Ω</option>
+                                        <option value="mΩ">mΩ</option>
+                                        <option value="ˊ">ˊ</option>
+                                        <option value="%">mS</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.ERRORLIMITUNIT == "mΩ")
+                            {
+                                <li class="fl mr10">
+                                    误差限单位：
+                                    <select class="my-combobox" name="ERRORLIMITUNIT">
+                                        <option value="">请选择</option>
+                                        <option value="%">%</option>
+                                        <option  value="Ω">Ω</option>
+                                        <option selected="selected" value="mΩ">mΩ</option>
+                                        <option value="ˊ">ˊ</option>
+                                        <option value="%">mS</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.ERRORLIMITUNIT == "ˊ")
+                            {
+                                <li class="fl mr10">
+                                    误差限单位：
+                                    <select class="my-combobox" name="ERRORLIMITUNIT">
+                                        <option value="">请选择</option>
+                                        <option value="%">%</option>
+                                        <option selected="selected" value="Ω">Ω</option>
+                                        <option value="mΩ">mΩ</option>
+                                        <option selected="selected" value="ˊ">ˊ</option>
+                                        <option value="%">mS</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.ERRORLIMITUNIT == "mS")
+                            {
+                                <li class="fl mr10">
+                                    误差限单位：
+                                    <select class="my-combobox" name="ERRORLIMITUNIT">
+                                        <option value="">请选择</option>
+                                        <option value="%">%</option>
+                                        <option selected="selected" value="Ω">Ω</option>
+                                        <option value="mΩ">mΩ</option>
+                                        <option value="ˊ">ˊ</option>
+                                        <option selected="selected" value="mS">mS</option>
                                     </select>
                                 </li>
                             }
@@ -598,6 +658,10 @@
                                     <select class="my-combobox" name="ERRORLIMITUNIT">
                                         <option value="">请选择</option>
                                         <option value="%">%</option>
+                                        <option value="Ω">Ω</option>
+                                        <option value="mΩ">mΩ</option>
+                                        <option value="ˊ">ˊ</option>
+                                        <option selected="selected" value="mS">mS</option>
                                     </select>
                                 </li>
                             }
@@ -671,13 +735,55 @@
                                 不确定度ui：
                                 <input class="my-textbox" value="@item.UNCERTAINTYUI" name="UNCERTAINTYUI">
                             </li>
-                            @if (item.UNCERTAINTYUIUNIT=="V")
+                            @if (item.UNCERTAINTYUIUNIT== "%")
                             {
                                 <li class="fl mr10">
                                     不确定度ui单位：
                                     <select class="my-combobox" name="UNCERTAINTYUIUNIT">
                                         <option value="">请选择</option>
-                                        <option selected="selected" value="V">V</option>
+                                        <option selected="selected" value="%">%</option>
+                                        <option value="Ω">Ω</option>
+                                        <option value="mΩ">mΩ</option>
+                                        <option value="&prime;">&prime;</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.UNCERTAINTYUIUNIT == "Ω")
+                            {
+                                <li class="fl mr10">
+                                    不确定度ui单位：
+                                    <select class="my-combobox" name="UNCERTAINTYUIUNIT">
+                                        <option value="">请选择</option>
+                                        <option  value="%">%</option>
+                                        <option selected="selected" value="Ω">Ω</option>
+                                        <option value="mΩ">mΩ</option>
+                                        <option value="&prime;">&prime;</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.UNCERTAINTYUIUNIT == "mΩ")
+                            {
+                                <li class="fl mr10">
+                                    不确定度ui单位：
+                                    <select class="my-combobox" name="UNCERTAINTYUIUNIT">
+                                        <option value="">请选择</option>
+                                        <option selected="selected" value="%">%</option>
+                                        <option value="Ω">Ω</option>
+                                        <option selected="selected" value="mΩ">mΩ</option>
+                                        <option value="&prime;">&prime;</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.UNCERTAINTYUIUNIT == "&prime;")
+                            {
+                                <li class="fl mr10">
+                                    不确定度ui单位：
+                                    <select class="my-combobox" name="UNCERTAINTYUIUNIT">
+                                        <option value="">请选择</option>
+                                        <option selected="selected" value="%">%</option>
+                                        <option value="Ω">Ω</option>
+                                        <option value="mΩ">mΩ</option>
+                                        <option selected="selected" value="&prime;">&prime;</option>
                                     </select>
                                 </li>
                             }
@@ -687,7 +793,10 @@
                                     不确定度ui单位：
                                     <select class="my-combobox" name="UNCERTAINTYUIUNIT">
                                         <option value="">请选择</option>
-                                        <option value="V">V</option>
+                                        <option value="%">%</option>
+                                        <option value="Ω">Ω</option>
+                                        <option value="mΩ">mΩ</option>
+                                        <option value="&prime;">&prime;</option>
                                     </select>
                                 </li>
                             }
@@ -722,6 +831,10 @@
                                 <select class="my-combobox" name="ERRORLIMITUNIT">
                                     <option value="">请选择</option>
                                     <option value="%">%</option>
+                                    <option selected="selected" value="Ω">Ω</option>
+                                    <option value="mΩ">mΩ</option>
+                                    <option value="&prime">&prime</option>
+                                    <option value="%">mS</option>
                                 </select>
                             </li>
                             <li class="fl mr10">
@@ -743,6 +856,16 @@
                             <li class="fl mr10">
                                 不确定度ui：
                                 <input class="my-textbox" value="" name="UNCERTAINTYUI">
+                            </li>
+                            <li class="fl mr10">
+                                不确定度ui单位：
+                                <select class="my-combobox" name="UNCERTAINTYUIUNIT">
+                                    <option value="">请选择</option>
+                                    <option value="%">%</option>
+                                    <option value="Ω">Ω</option>
+                                    <option value="mΩ">mΩ</option>
+                                    <option value="&prime;">&prime;</option>
+                                </select>
                             </li>
                             <li class="fl mr10">
                                 备注：

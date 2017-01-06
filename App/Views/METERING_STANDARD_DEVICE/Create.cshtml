@@ -128,7 +128,7 @@
         else if (ViewBag.IS == "UA")
         {
             <div class="mt10" id="">
-                <label>                    
+                <label>
                     误差来源
                 </label>
                 <div class="mt10" id="div5">
@@ -154,6 +154,10 @@
                             <select class="my-combobox" name="ERRORLIMITUNIT">
                                 <option value="">请选择</option>
                                 <option value="%">%</option>
+                                <option value="Ω">Ω</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="&prime;">&prime;</option>
+                                <option value="mS">mS</option>
                             </select>
                         </li>
                         <li class="fl mr10">
@@ -180,7 +184,10 @@
                             不确定度ui单位：
                             <select class="my-combobox" name="UNCERTAINTYUIUNIT">
                                 <option value="">请选择</option>
-                                <option value="V">V</option>
+                                <option value="%">%</option>
+                                <option value="Ω">Ω</option>
+                                <option value="mΩ">mΩ</option>
+                                <option value="&prime;">&prime;</option>
                             </select>
 
                         </li>
@@ -190,7 +197,6 @@
                         </li>
                         <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
                     </ul>
-
                 </div>
 
             </div>
@@ -198,7 +204,7 @@
         else if (ViewBag.IS == "UB")
         {
             <div class="mt10" id="">
-                <label>                  
+                <label>
                     范围指标
                 </label>
                 <div class="mt10" id="div6">
@@ -501,10 +507,10 @@
                     break
                 default:
             }
-            //证书          
+            //证书
             myArray4 = new Array();
             debugger
-            $("#div4").find("ul").each(function () {              
+            $("#div4").find("ul").each(function () {
                 var CERTIFICATEUNIT = $(this).find("li :input").eq(0).val();
                 var CERTIFICATE_NUM = $(this).find("li :input").eq(1).val();
                 var VALID_TO = $(this).find("li :input").eq(2).val();
@@ -576,9 +582,10 @@
             if (myArray5 != null)
                 METERING_STANDARD_DEVICE.UNCERTAINTYTABLE = myArray5;
             METERING_STANDARD_DEVICE.ID = "@ViewBag.METERING_STANDARD_DEVICEID";
+            debugger
             //调用后台方法
             if (ifshujuUA(METERING_STANDARD_DEVICE)) {
-            //if (true) {
+                //if (true) {
                 $.ajax({
                     url: "/api/UNCERTAINTYTABLEApi/InstUAUB",
                     type: "Post",
@@ -676,12 +683,11 @@
         if (m.ALLOWABLE_ERROR == null) {
             zhi += "不确定度/准确度等级/最大允许误差不能为空！<br>";
         }
-        if (m.METERING_STANDARD_DEVICE_CHECK.length==0) {
+        if (m.METERING_STANDARD_DEVICE_CHECK.length == 0) {
             zhi += "证书信息不能为空！<br>";
         }
         for (var i = 0; i < m.METERING_STANDARD_DEVICE_CHECK.length; i++) {
-            if (isNull(m.METERING_STANDARD_DEVICE_CHECK[i].CERTIFICATEUNIT))
-            {
+            if (isNull(m.METERING_STANDARD_DEVICE_CHECK[i].CERTIFICATEUNIT)) {
                 zhi += "证书发放单位不能为空！<br>";
             }
             if (isNull(m.METERING_STANDARD_DEVICE_CHECK[i].CERTIFICATE_NUM)) {
