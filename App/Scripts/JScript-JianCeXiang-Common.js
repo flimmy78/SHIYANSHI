@@ -1198,7 +1198,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',DIANYASHUCHU1,DIANYASHUCHU2,',
+                CalculateForAddLianCheng: ',READVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
@@ -1227,7 +1227,7 @@ RuleAttributeArray = [{
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
                 //OUTPUT_VALUE：输出示值
-                CalculateForAddLianCheng: ',DIANYASHUCHU1,DIANYASHUCHU2,',
+                CalculateForAddLianCheng: ',READVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
