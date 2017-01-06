@@ -1731,10 +1731,11 @@ namespace Langben.Report
                     {
                         celStr = celStr + iVTEST_ITE.NAME.Trim() + "：";
                     }
-                    if (iEntity != null && iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
-                    {
-                        celStr = celStr + iEntity.CONCLUSION.Trim();
-                    }
+                    //结论不展示了
+                    //if (iEntity != null && iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
+                    //{
+                    //    celStr = celStr + iEntity.CONCLUSION.Trim();
+                    //}
                     else if (iEntity == null)
                     {
                         celStr = celStr + "/";
