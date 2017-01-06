@@ -23,7 +23,7 @@
                 </select>
             }
         </th>
-        <th colspan="2" align="center">@ViewBag.canshu  %</th>
+        <th colspan="2" align="center">@((ViewBag.canshu == "相对误差") ? (ViewBag.canshu + "%") : ViewBag.canshu )</th>
         <th align="center">
             校准结果的不确定度
 

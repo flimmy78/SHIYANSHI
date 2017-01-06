@@ -22,7 +22,7 @@
             @Html.Raw(ViewBag.data)
 
         </th>
-        <th align="center">@ViewBag.wucha  %</th>
+        <th align="center">@((ViewBag.canshu == "相对误差") ? (ViewBag.canshu + "%") : ViewBag.canshu )</th>
         <th align="center">
             校准结果的不确定度<br>
             U(k = <select class="my-combobox" name="K" id="K_t_1_1">
@@ -45,7 +45,7 @@
     <tr>
         <td colspan="7">
             <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
-            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加量程</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加行数</a>
 
         </td>
     </tr>
