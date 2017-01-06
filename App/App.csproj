@@ -979,7 +979,7 @@
     <Content Include="Views\PROJECTTEMPLET\GongZuoDianLiuShiZhiWuCha.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\JueYuanDianZu.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\OMYiXiaWuWuCha.cshtml" />
-    <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaFeiZhengFuJueDuiWuCha.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaFeiZhengFuJueDuiWuChaLiangCheng.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\IndexSef.cshtml" />
     <Content Include="Views\VCharts\Index.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\JiSuanBuQueDingDu.cshtml" />
