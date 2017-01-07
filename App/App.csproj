@@ -1030,6 +1030,8 @@
     <Content Include="Views\PROJECTTEMPLET\ZhiLiuDianLiuDianYaFeiZhengFuJueDuiWuCha.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\SanXiangLianJieZuBie.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\DianYaHuGanQiCeLiangHuiLu.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\DianZiShiFuZhuDianZuYingXiang.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\WeiZhiYingXiang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

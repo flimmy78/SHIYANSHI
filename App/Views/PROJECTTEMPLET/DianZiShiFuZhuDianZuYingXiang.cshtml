@@ -1,7 +1,7 @@
 ﻿@model Langben.DAL.PROJECTTEMPLET
 @{
     Layout = "~/Views/Shared/TempleOnly.cshtml";
-    ViewBag.title = "指针式辅助电阻影响";
+    ViewBag.title = "电子式辅助电阻影响";
 }
 @using Common
 @using Models
@@ -20,10 +20,10 @@
         </th>
     </tr>
     <tr>
-        <th colspan="2" width="120" align="center">量程(Ω)</th>
+        <th width="120" align="center">量程(Ω)</th>
         <th width="110" align="center">辅助电阻(Ω)</th>
-        <th width="110" align="center">示值</th>
-        <th width="110" align="center">实际值(Ω)</th>
+        <th width="110" align="center">标准值(Ω)</th>
+        <th width="110" align="center">显示值(Ω)</th>
         <th width="110" align="center">误差(%)</th>
         <th width="110" align="center">500Ω显示值(Ω)</th>
         <th align="center">改变量(%)</th>
@@ -89,7 +89,7 @@
 
                 if (rowidx == 0) {
                     //需要合并的列 //量程
-                    htmlString.push("<td  rowspan='" + txtPoint + "' align='center' >X</td>");
+
                     htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, txtNumber, ""));
                     //选用电阻阻值   （Ω）
                  
@@ -132,8 +132,7 @@
                 var id = $(obj).attr("id");
                 id = id.substring(id.indexOf('_'));
                 var tongdao = id.split('_')[1];
-                var liangcheng = id.split('_')[2];
-                third = third + "_" + tongdao + "_" + liangcheng;
+                third = third + "_" + tongdao + "_1_1";
                 first = first + id;//改动的地方，参与计算的列的name值
                 second = second + id;//改动的地方，参与计算的列的name值
                
