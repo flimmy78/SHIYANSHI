@@ -153,11 +153,11 @@ function LianDongBuQueDingDu(obj)
     var liangChengID = "";//量程编号
     var hangHaoID = "";//行号
     var ids=id.split("_");
-    if(ids.length>=3)
+    if(ids.length>=4)
     {       
-        tongDaoID = ids[0];
-        liangChengID = ids[1];
-        hangHaoID = ids[2];
+        tongDaoID = ids[1];
+        liangChengID = ids[2];
+        hangHaoID = ids[3];
 
         //显示值属性名称或者输出实际值属性名称
         var ShuChuShiJiZhi = obj.value;
