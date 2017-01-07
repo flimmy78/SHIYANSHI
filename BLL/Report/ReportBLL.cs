@@ -1628,7 +1628,15 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                         }
                         if (!string.IsNullOrEmpty(aValue) && aValue.Trim() != "")
                         {
-                            aValue = aValue.Trim().Remove(aValue.Trim().Length - 2);
+                            if (aValue.IndexOf("|,") > 0)
+                            {
+                                aValue = aValue.Trim().Remove(aValue.Trim().Length - 2);
+                            }
+                            else
+                            {
+                                aValue = aValue.Trim().Remove(aValue.Trim().Length - 1);
+                            }
+
                             //aValue = aValue.Replace(",", Environment.NewLine);
                             HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, null, aValue);
                             sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(value);
