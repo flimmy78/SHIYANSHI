@@ -1588,6 +1588,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                     if (type == CATEGORYType.标准装置)
                     {
                         //测量范围
+                        item.TEST_RANGE = item.TEST_RANGE.Replace(";", Environment.NewLine);
                         sheet_Destination.GetRow(rowIndex_Destination).GetCell(7).SetCellValue(item.TEST_RANGE);
                     }
                     else
@@ -1627,7 +1628,15 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                         }
                         if (!string.IsNullOrEmpty(aValue) && aValue.Trim() != "")
                         {
-                            aValue = aValue.Trim().Remove(aValue.Trim().Length - 2);
+                            if (aValue.IndexOf("|,") > 0)
+                            {
+                                aValue = aValue.Trim().Remove(aValue.Trim().Length - 2);
+                            }
+                            else
+                            {
+                                aValue = aValue.Trim().Remove(aValue.Trim().Length - 1);
+                            }
+
                             //aValue = aValue.Replace(",", Environment.NewLine);
                             HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, null, aValue);
                             sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(value);
@@ -1770,6 +1779,16 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                     if (iEntity != null 
                         && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
+
+                        if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
+
+                        {
+                            //为了相同项表格底部没有线
+                            CopyRow(sheet_Source, sheet_Destination, 4, RowIndex, 1, true);
+                            HideRow(sheet_Destination, RowIndex, 1);
+                            RowIndex++;
+                        }
+
                         //&&iEntity.RULEID== "126-1995_2_4_1"
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
                         //解析html表格数据    
@@ -1793,10 +1812,12 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                             sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue("结论：" + iEntity.CONCLUSION);
                             RowIndex++;
                         }
+                        //为了表格底部没有线
                         CopyRow(sheet_Source, sheet_Destination, 4, RowIndex, 1, true);
                     }
                     else
                     {
+                        //增加一行空行
                         CopyRow(sheet_Source, sheet_Destination, 5, RowIndex, 1, true);
                     }
 
