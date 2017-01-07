@@ -13,7 +13,7 @@
         <th rowspan="2" align="center"> 输出示值 </th>
         <th rowspan="2" align="center"> 读数值 </th>
         <th rowspan="2" align="center"> 输出实际值 </th>
-        <th rowspan="2" align="center">@((ViewBag.canshu == "相对误差") ? (ViewBag.canshu + "%") : ViewBag.canshu )</th>
+        <th rowspan="2" align="center">@((ViewBag.canshu == "相对误差") ? (ViewBag.canshu + "%") : ViewBag.canshu)</th>
         <th align="center">
             校准结果的不确定度<br>
             U(k = <select class="my-combobox" name="K" id="K_t_1_1">
@@ -130,13 +130,41 @@
             xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
 
         }
-        //离开事件，用于计算
+
+        ///计算输出实际值
         function blurValue(obj) {
+            var curidx = $(obj).parents('tr').attr("rowindex");//當前行
+            var tr = $(obj).parents('tr');
+            var liangchengIdx = $(obj).attr("id").toString().split("_")[2];//量程
+            var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+            var liangcheng;//量程值
+            var xuanyongdianzuzhi;
+            var shuchushijizhi;//输出实际值
+            var trs = $("#tbody_" + hideDangQianTongDao + " tr");
+            var arr = jQuery.makeArray(trs);
+            arr.reverse();//翻轉
+            $(arr).each(function (i) {
+                if ($(this).attr("rowindex") <= curidx)//当遍历的行小于等于当前操作行时候进行取值
+                {
+                    if ($(this).children().eq(0).attr("rowspan") != "1") {
+                        liangcheng = $(this).children().eq(0).find('input').val();
+                        xuanyongdianzuzhi = $(this).children().eq(1).find('input').val();
+                        return false;
+                    }
+                }
+            })
+            var dushuzhi = $(obj).val();
+            if (xuanyongdianzuzhi != "")
+                shuchushijizhi = parseFloat(dushuzhi) /  parseFloat(xuanyongdianzuzhi);
+            else
+                shuchushijizhi = parseFloat(dushuzhi);
+            if ($(obj).parents('tr').children().eq(0).attr("rowspan") != "1") {
+                $(obj).parents('tr').children().eq(4).find('input').val(shuchushijizhi)
+            }
+            else
+                $(obj).parents('tr').children().eq(2).find('input').val(shuchushijizhi)
 
-            //   LianDongShiJiZhi(obj);
         }
-
-
 
     </script>
 
