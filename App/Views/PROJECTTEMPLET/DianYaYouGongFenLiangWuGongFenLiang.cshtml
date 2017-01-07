@@ -1,0 +1,329 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "电压有功分量无功分量";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    <tr>
+        <th width="160" rowspan="2" align="center">标称值S(VA)</th>
+        <th width="160" rowspan="2" align="center">校准点(%)</th>
+
+        <th width="160" colspan="2" align="center">有功分量</th>
+        <th width="160" colspan="2" align="center">无功分量</th>
+        <th width="160" rowspan="2" align="center">cosφ</th>
+        <th width="160" rowspan="2" align="center">额定电压(V)</th>
+    </tr>
+    <tr>
+        <th width="80" align="center">实测值(mS)</th>
+        <th width="80" align="center">相对误差(%)</th>
+        <th width="80" align="center">实测值(mS)</th>
+        <th width="80" align="center">相对误差(%)</th>
+    </tr>
+</thead>
+
+<tbody id="tbody_moban">
+
+    <!--表体-->
+    <!--插入行的位置-->
+</tbody>
+<tr>
+    <td colspan="11">
+        <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加量程</a>
+    </td>
+</tr>
+<tfoot tag="tag">
+
+    <!--表尾-->
+    @section BUQueDingDu {
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10">
+            <tbody id="tbody_2">
+                <tr>
+                    <td align="center">
+                        <input name="buquedingduxia" id="buquedingduxia_t_1_1" type="text" class="my-textbox tr" value="" style="width:157px" />
+                    </td>
+                    <td>
+                        <i>U</i><small>rel</small>(k =
+                        <select class="my-combobox" name="K" id="K_t_1_1">
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="√3">√3</option>
+                        </select>
+                        ) =
+                        <input class="my-textbox " value="" style="width:157px" id="txtvaluebuquedingdu" name="txtvaluebuquedingdu_t_1_1">
+                        <input type="button" class="my-btn" value="计 算" onclick="calculate(this)" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <input  name="buquedingduer" id="buquedingduer_t_2_1"  type="text" class="my-textbox tr" value="" style="width:157px" />
+                    </td>
+                    <td>
+                        <i>U</i><small>rel</small>(k =
+                        <select class="my-combobox" name="K" id="K_t_2_1">
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="√3">√3</option>
+                        </select>
+                        ) =
+                        <input class="my-textbox " value="" style="width:157px" id="txtvalueD" name="txtvalueD_t_2_1" />
+                        <input type="button" class="my-btn" value="计 算" onclick="calculate(this)" />
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    }
+</tfoot>
+
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        function set(tbodyIndex) {
+
+            $('#dlg').dialog('open');//打开弹出框
+
+            $("#hideDangQianTongDao").val(tbodyIndex);
+
+        }
+        //增加行
+        function CreateRow() {
+
+
+            var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+            var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
+            LiangChengShuLiang++;
+            var txtNumber = $("#txtNumber").val();     //量程值
+            var txtPoint = $("#txtPoint").val();     //检测点数
+            var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+            var htmlString = [];
+            var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
+
+            var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
+
+
+
+            for (var rowidx = 0; rowidx < txtPoint; rowidx++) {
+                rowLength++;
+                htmlString.push("<tr rowindex='" + rowLength + "'>");
+
+                var rowspan = 1; //合并单元格行数
+
+                var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
+                //计算默认值
+
+                if (rowidx == 0) {
+                    //需要合并的列 //标称值S(VA)
+
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE", HangHaoID, rowidx, txtNumber));
+                }
+
+                //校准点(%)
+                htmlString.push(SetTDSelectHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, "", "JiaoZhunDian"));
+                //有功分量 实测值(mS
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "blurValue"));
+
+                //有功分量 相对误差(%
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, "", "", "", ""));
+
+                //无功分量 实测值(mS)
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, "", "", "", "blurValue"));
+                //无功分量 相对误差(%
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, "", "", "", ""));
+                //cosφ
+                htmlString.push(SetTDSelectHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, "", "Cos"));
+                // SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, "", "", "", "blurValue"));
+                //额定电压(V)
+                htmlString.push(SetTDSelectHtml(rowspan, "BUQUEDINGDU", HangHaoID, rowidx, "", "EDingDianYa"));
+                //SetTDHtml(rowspan, "BUQUEDINGDU", HangHaoID, rowidx, "", "", "", "blurValue"));
+                htmlString.push("</tr>");
+            }
+            htmlString = htmlString.join("");
+
+            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
+            $.parser.parse(tagRow);//渲染easyui组建
+            $('#dlg').window('close');//关闭弹出框
+
+            $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+        }
+        //计算标准值
+        function blurValue(obj) {
+
+            jiSuanWuCha(obj, "RANGE", "OUTPUTVALUE", "READVALUE", "ACTUALVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR", "UNCERTAINTYDEGREE", "BUQUEDINGDU");
+
+        }
+        //误差
+        //obj 自身对象
+        //T1 标称值S(VA)
+        //T2 校准点(%)
+        //T3 有功分量 实测值(mS
+        //T4 有功分量 相对误差(%
+        //T5 无功分量 实测值(mS)
+        //T6 无功分量 相对误差(%
+        //T7 cosφ
+        //T8 额定电压(V)
+        function jiSuanWuCha(obj, T1, T2, T3, T4, T5, T6, T7, T8) {
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+            T1 = T1 + "_" + tongdao + "_1_1";            //改动的地方，参与计算的列的name值
+            T2 = T2 + id;//改动的地方，参与计算的列的name值
+            T3 = T3 + id;//改动的地方，误差的列的name值
+            T4 = T4 + id;//有功分量 相对误差(%
+            T5 = T5 + id;//改动的地方，参与计算的列的name值
+            T6 = T6 + id;//无功分量 相对误差(%
+            T7 = T7 + id; //T7 cosφ
+            T8 = T8 + id; //T8 额定电压(V)
+            var T1Data = $("#" + T1).val();//T1 标称值S(VA)
+            var myselect = document.getElementById(T2);
+            var index = myselect.selectedIndex;             // selectedIndex代表的是你所选中项的index
+            var T2Data = myselect.options[index].value;
+            //  var T2Data = $(obj).parent().parent().find("#" + T2 + " option:selected").val();//T2 校准点(%)
+            var T3Data = $(obj).parent().parent().find("#" + T3).val(); //T3 有功分量 实测值(mS
+            //  var T4Data = $(obj).parent().parent().find("#" + T4).val(); //T4 有功分量 相对误差(%
+            var T5Data = $(obj).parent().parent().find("#" + T5).val(); //T5 无功分量 实测值(mS)
+            //  var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T6 无功分量 相对误差(%
+            var myselect7 = document.getElementById(T7);
+            var index7 = myselect7.selectedIndex;             // selectedIndex代表的是你所选中项的index
+            var T7Data = myselect7.options[index7].value;
+            // var T7Data = $(obj).parent().parent().find("#" + T7 + " option:selected").val(); //T7  cosφ
+            var myselect8 = document.getElementById(T8);
+            var index8 = myselect8.selectedIndex;             // selectedIndex代表的是你所选中项的index
+            var T8Data = myselect8.options[index8].value;
+            //var T8Data = $(obj).parent().parent().find("#" + T8 + " option:selected").val(); //T8 额定电压(V)
+
+            //【有功分量-相对误差%】=100*(ABS（有功分量实测值）*0.001*额定电压平方-标称值*0.8)/(标称值*0.8)，小数点后两位，四舍六入，逢五奇进偶不进
+            if (T3Data != "" && T8Data != "" && T1Data != "") {
+                T8Data = parseFloat(T8Data);
+                var jianfa = 100 * (Math.abs(parseFloat(T3Data)) * 0.001 * T8Data * T8Data - parseFloat(T1Data) * 0.8) / (parseFloat(T1Data) * 0.8);
+                var data = fomatFloat(jianfa, 2);
+                $(obj).parent().parent().find("#" + T4).val(data);
+            }
+            //【无功分量-相对误差%】=100*（ABS(无功分量实测值)*0.001*额定电压平方-标称值*0.6）/(标称值*0.6)，小数点后两位，四舍六入，逢五奇进偶不进
+            if (T5Data != "" && T8Data != "" && T1Data != "") {
+
+                T8Data = parseFloat(T8Data);
+                var jianfa = 100 * (Math.abs(parseFloat(T5Data)) * 0.001 * T8Data * T8Data - parseFloat(T1Data) * 0.6) / (parseFloat(T1Data) * 0.6);
+                var data = fomatFloat(jianfa, 2);
+                $(obj).parent().parent().find("#" + T6).val(data);
+            }
+
+        }
+        // 【校准点%】20、100、120
+        //【cosφ】下拉0.8,1
+        //【额定电压】下拉100,57.7
+        var SelectDDLHtmlArray = Array;
+        SelectDDLHtmlArray = [
+            {
+                Code: 'JiaoZhunDian',
+                Remark: '校准点%',
+                Value: "<select  name=\"JiaoZhunDian\" style=\"width:150px; \" onchange=\"blurValue(this)\" >" +
+                        "<option selected=\"selected\" value=\"20\">20</option> " +
+                         "<option value=\"100\">100</option>" +
+                         "<option value=\"120\">120</option>  " +
+                        "</select>"
+            }, {
+                Code: 'Cos',
+                Remark: 'cosφ',
+                Value: "<select  name=\"Cos\" style=\"width:150px; \"  onchange=\"blurValue(this)\">" +
+                        "<option selected=\"selected\" value=\"0.8\">0.8</option> " +
+                         "<option value=\"1\">1</option>" +
+                        "</select>"
+            }, {
+                Code: 'EDingDianYa',
+                Remark: '额定电压',
+                Value: "<select  name=\"EDingDianYa\" style=\"width:150px; \"  onchange=\"blurValue(this)\">" +
+                         "<option selected=\"selected\" value=\"100\">100</option>" +
+                         "<option value=\"57.7\">57.7</option>  " +
+                        "</select>"
+            }];
+        //获取下拉框单位html
+        //RuleAttribute:检测项属性
+        //ddlName:检查项中的属性控件名称
+        //DanWeiCode:单位代码（如果有值直接取，RuleAttribute、ddlName失效)
+        function GetSelectDDLHtml(ddlName, DanWeiCode) {
+
+            var Result = null;
+            if (DanWeiCode != null && DanWeiCode.trim() != "") {
+                //如果有有单位代码直接取，RuleAttribute、ddlName失效
+                $.each(SelectDDLHtmlArray, function (i, item) {
+                    if (item == null || item.Code != DanWeiCode) {
+                        return true;
+                    }
+                    Result = item.Value;
+                    return false;
+                });
+                return Result;
+            }
+        }
+        //设置TD的html
+        //RuleAttribute:检测项目属性
+        //rowspan合并单元格行数SetTDHtml
+        //name(控件名称),
+        //id(控件id不包含name部分),
+        //rowidx:行号
+        //txtVal(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
+        //classstyle样式类名
+        //unit在输入框后面的单位
+        //blurValue数表离开输入框之后触发的事件
+        function SetTDSelectHtml(rowspan, name, id, rowidx, classstyle, DanWeiCode) {
+            //下拉框
+            var ddlName = name;//下拉框名
+            var ddlId = ddlName + "_" + id;//下拉框ID
+
+            var id = name + "_" + id;//输入框id
+
+            var ddlHtml = GetSelectDDLHtml(name, DanWeiCode);//单位下拉框html
+
+            var htmlString = [];
+            htmlString.push("<td class='" + classstyle + "' rowspan='" + rowspan + "' align='center' > ");
+
+            if (ddlHtml != null && ddlHtml.trim() != "") {
+
+                htmlString.push($(ddlHtml).attr("name", ddlName).attr("id", ddlId)[0].outerHTML);
+            }
+            htmlString.push("</td>");
+            return htmlString.join("");
+        }
+
+
+    </script>
+
+}
+
+@section TanKuang {
+    <!--弹框的位置-->
+    <!--增加量程弹层-->
+    <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return CreateRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+        <table>
+            <tr>
+                <td align="right">检测点数：</td>
+                <td><input type="text" id="txtPoint" name="txtPoint" value="" class="my-textbox  required digits" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">小数点位数：</td>
+                <td><input type="text" id="txtPointLen" name="txtPointLen" value="" class="my-textbox  required digits" style="width:200px" /></td>
+            </tr>
+        </table>
+    </div>
+    <!--/增加量程弹层-->
+}
+

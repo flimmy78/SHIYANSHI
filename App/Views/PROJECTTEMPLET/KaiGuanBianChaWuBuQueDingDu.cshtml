@@ -1,0 +1,177 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "开关变差-无不确定度";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    <tr>
+        <th align="center" colspan="6">
+            检定电流：
+            <input class="my-textbox input-width" value="" type="text" name="input4" id="input4_t_1_1">
+            <select class="my-combobox"  name="input5" id="input5_t_1_1">
+                <option value="A" selected="">A</option>
+                <option value="KA">KA</option>
+                <option value="mA">mA</option>
+                <option value="μA">μA</option>
+                <option value="nA">nA</option>
+                <option value="pA">pA</option>
+            </select>
+        </th>
+        <th>
+            末盘步进：
+            <input class="my-textbox input-width" value="" type="text"  name="input6" id="input6_t_1_1">
+            <select class="my-combobox"  name="input7" id="input7_t_1_1">
+                <option value="A" selected="">A</option>
+                <option value="KA">KA</option>
+                <option value="mA">mA</option>
+                <option value="μA">μA</option>
+                <option value="nA">nA</option>
+                <option value="pA">pA</option>
+            </select>
+        </th>
+        <th>
+
+            末盘等级指数：
+            <input class="my-textbox input-width" value="" type="text" name="input8" id="input8_t_1_1">
+        </th>
+
+    </tr>
+    <tr>
+        <th width="80" align="center">序号</th>
+    
+        <th width="140" align="center">U<sub>i</sub>(mV)</th>
+        <th width="140" align="center">M<sub>i</sub>(mΩ)</th>
+        <th width="140" align="center">∆<sub>i</sub>(mΩ)</th>
+        <th width="140" align="center">开关变差(mΩ)</th>
+        <th align="center">允许变差(mΩ)</th>
+    </tr>
+</thead>
+
+<tbody id="tbody_moban">
+    <!--表体-->
+
+</tbody>
+<tfoot>
+    <!--表尾-->
+    <tr>
+        <td colspan="6">
+            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加行数</a>
+
+        </td>
+    </tr>
+</tfoot>
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        function set(tbodyIndex) {
+
+            $('#dlg').dialog('open');//打开弹出框
+
+            $("#hideDangQianTongDao").val(tbodyIndex);
+
+        }
+        //增加行
+        function CreateRow() {
+
+            var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+            var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
+            LiangChengShuLiang++;
+            //var txtNumber = $("#txtNumber").val();     //量程值
+            var txtPoint = $("#txtPoint").val();     //检测点数
+            var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+            var htmlString = [];
+            var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
+
+            var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
+
+            for (var rowidx = 0; rowidx < txtPoint; rowidx++) {
+                rowLength++;
+                htmlString.push("<tr rowindex='" + rowLength + "'>");
+
+                var rowspan = 1; //合并单元格行数
+
+                var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
+
+                //计算默认值
+
+                if (rowidx == 0) {
+                    //需要合并的列 //量程
+
+                }
+
+                //需要合并的列
+                htmlString.push(SetTDHtml(rowspan, "RANGE", HangHaoID, rowidx, '', "classstyle100", ''));
+
+                //标准值 增加下拉框单位A
+                htmlString.push("<td  rowspan='1' class='classstyle100' align='center' >:</td>");
+
+                //显示值
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100"));
+
+                //相对误差
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
+
+                //校准结果的不确定度 U(K =
+                htmlString.push("<td  rowspan='1' class='classstyle100' align='center'>:</td>");
+
+                htmlString.push(SetTDHtml(rowspan, "JUEDUIZHI", HangHaoID, rowidx, '', "classstyle100"));
+                htmlString.push("</tr>");
+            }
+            htmlString = htmlString.join("");
+
+            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
+            $.parser.parse(tagRow);//渲染easyui组建
+            $('#dlg').window('close');//关闭弹出框
+            $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+        }
+        //离开事件，用于计算
+        function blurValue(obj) {
+              LianDongShiJiZhi(obj);
+        }
+
+
+
+    </script>
+
+
+}
+@section TanKuang {
+    <!--弹框的位置-->
+    <!--增加量程弹层-->
+    <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return CreateRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+        <table>
+
+            <tr>
+                <td align="right">检测点数：</td>
+                <td><input type="text" id="txtPoint" value="" name="txtPoint" class="easyui-textbox  required digits" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">小数点位数：</td>
+                <td><input type="text" id="txtPointLen" value="" name="txtPointLen" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
+            </tr>
+        </table>
+    </div>
+    <!--/增加量程弹层-->
+}
+
+
+
