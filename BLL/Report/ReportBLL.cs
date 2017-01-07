@@ -748,7 +748,7 @@ namespace Langben.Report
             //各类装置
             SetZhuangZhis(hssfworkbook, sheet_Destination, ref RowIndex, entity, type);
             #region 校准说明            
-            //RowIndex++;
+            RowIndex++;
             if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
             {
                 sheet_Destination.GetRow(RowIndex).GetCell(2).SetCellValue("/");
@@ -1737,8 +1737,8 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                     {
                         celStr = celStr + iVTEST_ITE.NAME.Trim() + "：";
                     }
-                    //结论不展示了
-                    if (iEntity != null && iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
+                    //结论,只有非表格的才需要打结论
+                    if (iEntity != null && (iVTEST_ITE.INPUTSTATE==InputStateEnums.HGBHG.ToString() || iVTEST_ITE.INPUTSTATE== InputStateEnums.WBK.ToString()) && iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
                     {
                         celStr = celStr + iEntity.CONCLUSION.Trim();
                     }
