@@ -1532,7 +1532,7 @@ namespace Langben.Report
             }
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
             IMETERING_STANDARD_DEVICEBLL bll = new METERING_STANDARD_DEVICEBLL();
-            List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
+List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             //List<METERING_STANDARD_DEVICE> list =    bll.GetAll();//测试
             //if (entity.METERING_STANDARD_DEVICE != null)            
             //{
@@ -1620,13 +1620,14 @@ namespace Langben.Report
                             else if (!string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTY) || !string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTYVALUE) || !string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTYNDEXL) || !string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTYVALUEK))
                             {
 
-                                aValue += aItem.THEUNCERTAINTY + aItem.THEUNCERTAINTYVALUE + aItem.THEUNCERTAINTYNDEXL + aItem.THEUNCERTAINTYVALUEK + ",";
+                                // aValue += aItem.THEUNCERTAINTY + aItem.THEUNCERTAINTYVALUE + aItem.THEUNCERTAINTYNDEXL +"|"+ aItem.THEUNCERTAINTYVALUEK + ",";
+                                aValue += aItem.THEUNCERTAINTY + aItem.THEUNCERTAINTYVALUE + aItem.THEUNCERTAINTYNDEXL + "|,";
                             }
 
                         }
                         if (!string.IsNullOrEmpty(aValue) && aValue.Trim() != "")
                         {
-                            aValue = aValue.Trim().Remove(aValue.Trim().Length - 1);
+                            aValue = aValue.Trim().Remove(aValue.Trim().Length - 2);
                             //aValue = aValue.Replace(",", Environment.NewLine);
                             HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, null, aValue);
                             sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(value);
@@ -1737,10 +1738,10 @@ namespace Langben.Report
                         celStr = celStr + iVTEST_ITE.NAME.Trim() + "：";
                     }
                     //结论不展示了
-                    //if (iEntity != null && iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
-                    //{
-                    //    celStr = celStr + iEntity.CONCLUSION.Trim();
-                    //}
+                    if (iEntity != null && iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
+                    {
+                        celStr = celStr + iEntity.CONCLUSION.Trim();
+                    }
                     else if (iEntity == null)
                     {
                         celStr = celStr + "/";
@@ -1766,7 +1767,7 @@ namespace Langben.Report
                     //if (TableTemplateDic != null && TableTemplateDic.ContainsKey(iEntity.RULEID))
                     //{
                     //    TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
-                    if (iEntity != null && iEntity.RULEID== "315-1983_2_5"
+                    if (iEntity != null 
                         && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
                         //&&iEntity.RULEID== "126-1995_2_4_1"
@@ -2412,7 +2413,7 @@ namespace Langben.Report
             {
                 #region 设置上标
                 #region 处理*10
-                if(value.IndexOf("*10")>0)
+                if(value.IndexOf("*10")>0 || value.IndexOf("×10") > 0)
                 {
                     value = value.Replace(",", Environment.NewLine);
                     result = new HSSFRichTextString(value.Trim().Replace("|", ""));
@@ -2424,9 +2425,16 @@ namespace Langben.Report
                     foreach(string v in vArray)
                     {
                                                
-                        if(v.IndexOf("*10") >= 0)
+                        if(v.IndexOf("*10") >= 0 || value.IndexOf("×10")>0)
                         {
-                            startIndex = length + v.IndexOf("*10") + 3;
+                            if (v.IndexOf("*10") >= 0)
+                            {
+                                startIndex = length + v.IndexOf("*10") + 3;
+                            }
+                            else
+                            {
+                                startIndex = length + v.IndexOf("×10") + 3;
+                            }
                             endIndex = length + v.Length;                            
                             HSSFFont superscript = (HSSFFont)workbook.CreateFont();
                             superscript.TypeOffset = FontSuperScript.Super;//上标
