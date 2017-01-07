@@ -1588,6 +1588,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                     if (type == CATEGORYType.标准装置)
                     {
                         //测量范围
+                        item.TEST_RANGE = item.TEST_RANGE.Replace(";", Environment.NewLine);
                         sheet_Destination.GetRow(rowIndex_Destination).GetCell(7).SetCellValue(item.TEST_RANGE);
                     }
                     else
