@@ -801,6 +801,36 @@ namespace Langben.App.Controllers
             return URL;
         }
 
+        /// <summary>
+        /// 获取计算不确定度值
+        /// </summary>
+        /// <param name="RuleID">检测项ID</param>
+        /// <param name="ShuChuShiJiZhi">输出实际值、显示值</param>
+        /// <param name="ShuChuShiJiZhiDanWei">输出实际值单位、显示值单位</param>
+        /// <param name="LiangCheng">量程</param>
+        /// <param name="K"></param>
+        /// <param name="XuanYongDianZu">选用电阻</param>
+        /// <returns></returns>
+        public ActionResult GetSuanBuQueDingDu(string RuleID, string ShuChuShiJiZhi, string ShuChuShiJiZhiDanWei, string LiangCheng, string K, string XuanYongDianZu)
+        {
+            Common.ClientResult.Result result = new Common.ClientResult.Result();
+            try
+            {
+
+                string value = Langben.BLL.Report.BuQueDingBuGongShi.GetBuQueDingDu(RuleID, ShuChuShiJiZhi, ShuChuShiJiZhiDanWei, LiangCheng, K, XuanYongDianZu);
+                result.Code = Common.ClientCode.Succeed;
+                result.Message = value;
+            }
+            catch(Exception ex)
+            {
+                result.Code = Common.ClientCode.Fail;
+                result.Message = ex.Message;               
+            }
+            return Json(result); 
+
+
+        }
+
         IBLL.IPROJECTTEMPLETBLL m_BLL;
         ValidationErrors validationErrors = new ValidationErrors();
         public PROJECTTEMPLETController()

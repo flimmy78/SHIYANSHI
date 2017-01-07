@@ -1,7 +1,7 @@
 ﻿
-var JiSuanBuQueDingDuParaArray = new Array;//每行自动计算参数数组
 var RuleID = $("#hideRULEID").val();//检测项目ID
 var RuleAttribute = GetRuleAttributeByRuleID(RuleID);
+var JiSuanBuQueDingDuPara= GetJiSuanBuQueDingDuParaArray();//计算不确定参数信息
 var $Tongdao_moban//模板
 $(document).ready(function () {
 
@@ -131,6 +131,197 @@ function LianDongDanWeiDDL(obj, LianDongDanWeiDDLAttribute) {
     });
 
 }
+//联动自动计算不确定度
+//触发事件控件
+function LianDongBuQueDingDu(obj)
+{    
+    //只有在显示值或者输出实际值才触发不确定度自动计算
+    if (JiSuanBuQueDingDuPara.Type == null || JiSuanBuQueDingDuPara.Type.trim() == "" || JiSuanBuQueDingDuPara.Type.trim() != "Z" || JiSuanBuQueDingDuPara.Name == "undefined"
+        || obj == null || obj.name=="undefined" || obj.ID=="undefined" || obj.name != JiSuanBuQueDingDuPara.ShuChuShiJiZhi) {
+        return;
+    }       
+
+    var id = obj.id.replace(obj.name, "");
+    //不确定度显示控件
+    var ShowBuQueDingDuID = JiSuanBuQueDingDuPara.Name + id;
+    var ShowBuQueDingDuObj = document.getElementById(ShowBuQueDingDuID);
+    if (ShowBuQueDingDuObj == null) {
+        return;
+    }
+
+    var tongDaoID = "";//通道编号
+    var liangChengID = "";//量程编号
+    var hangHaoID = "";//行号
+    var ids=id.split("_");
+    if(ids.length>=3)
+    {       
+        tongDaoID = ids[0];
+        liangChengID = ids[1];
+        hangHaoID = ids[2];
+
+        //显示值属性名称或者输出实际值属性名称
+        var ShuChuShiJiZhi = obj.value;
+
+        //显示值单位属性名称或者输出实际值单位属性名称  
+        var ShuChuShiJiZhiDanWei = "";
+        if (JiSuanBuQueDingDuPara.ShuChuShiJiZhiDanWei != null && JiSuanBuQueDingDuPara.ShuChuShiJiZhiDanWei.trim() != "" && JiSuanBuQueDingDuPara.ShuChuShiJiZhiDanWei != "undefined") {
+            var ShuChuShiJiZhiDanWeiID = JiSuanBuQueDingDuPara.ShuChuShiJiZhiDanWei + id;
+            var ShuChuShiJiZhiDanWeiObj = document.getElementById(ShuChuShiJiZhiDanWeiID);
+            if (ShuChuShiJiZhiDanWeiObj != null) {
+                ShuChuShiJiZhiDanWei = ShuChuShiJiZhiDanWeiObj.value;
+            }
+        }
+
+        //量程属性名称
+        var LiangCheng = "";
+        if (JiSuanBuQueDingDuPara.LiangCheng != null && JiSuanBuQueDingDuPara.LiangCheng.trim() != "" && JiSuanBuQueDingDuPara.LiangCheng != "undefined") {
+
+            var LiangChengID = JiSuanBuQueDingDuPara.LiangCheng + "_" + tongDaoID + "_" + liangChengID;
+            var LiangChengObj = document.getElementById(LiangChengID);
+            if (LiangChengObj != null) {
+                LiangCheng = LiangChengObj.value;
+            }
+            else
+            {
+                LiangChengID = JiSuanBuQueDingDuPara.LiangCheng + "_" + tongDaoID + "_" + liangChengID + "_1";
+                LiangChengObj = document.getElementById(LiangChengID);
+                if (LiangChengObj != null) {
+                    LiangCheng = LiangChengObj.value;
+                }
+            }
+        }
+
+        //K
+        var K = "";
+        if (JiSuanBuQueDingDuPara.K != null && JiSuanBuQueDingDuPara.K.trim() != "" && JiSuanBuQueDingDuPara.K != "undefined") {
+
+            var KID = JiSuanBuQueDingDuPara.K + "_" + tongDaoID + "_" + liangChengID;
+            var KObj = document.getElementById(KID);
+            if (KObj != null) {
+                K = KObj.value;
+            }
+            else {
+                KID = JiSuanBuQueDingDuPara.K + "_" + tongDaoID + "_" + liangChengID + "_1";
+                KObj = document.getElementById(KID);
+                if (KObj != null) {
+                    K = KObj.value;
+                }
+            }
+        }
+          
+        //选用电阻属性名称
+        var XuanYongDianZu = "";
+        if (JiSuanBuQueDingDuPara.XuanYongDianZu != null && JiSuanBuQueDingDuPara.XuanYongDianZu.trim() != "" && JiSuanBuQueDingDuPara.XuanYongDianZu != "undefined") {
+
+            var XuanYongDianZuID = JiSuanBuQueDingDuPara.XuanYongDianZu + "_" + tongDaoID + "_" + liangChengID;
+            var XuanYongDianZuObj = document.getElementById(XuanYongDianZuID);
+            if (XuanYongDianZuObj != null) {
+                XuanYongDianZu = XuanYongDianZuObj.value;
+            }
+            else {
+                XuanYongDianZuID = JiSuanBuQueDingDuPara.XuanYongDianZu + "_" + tongDaoID + "_" + liangChengID + "_1";
+                XuanYongDianZuObj = document.getElementById(XuanYongDianZuID);
+                if (XuanYongDianZuObj != null) {
+                    XuanYongDianZu = XuanYongDianZuObj.value;
+                }
+            }
+        }
+
+
+        //获取空对象用于保存添加的信息
+        $.ajax({
+            type: 'post', //使用post方法访问后台
+            dataType: "json", //返回json格式的数据
+            url: '/PROJECTTEMPLET/GetSuanBuQueDingDu', //要访问的后台地址
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
+            data: { 'RuleID': RuleID, 'ShuChuShiJiZhi': ShuChuShiJiZhi, 'ShuChuShiJiZhiDanWei': ShuChuShiJiZhiDanWei, 'LiangCheng': LiangCheng, 'K': K, 'XuanYongDianZu': XuanYongDianZu },
+            //data: { 'RuleID': RuleID },
+            beforeSend: function () {
+                //InitAlertJS();
+            },
+            complete: function () {
+            }, //AJAX请求完成时隐藏loading提示
+
+            success: function (res) {//msg为返回的数据，在这里做数据绑定
+                if (res.Code == 1) {
+                    ShowBuQueDingDuObj.value = res.Message;
+                    var BuQueDingDuZhiID = "BuQueDingDuZhi" + "_" + ShowBuQueDingDuID;//不确定度原始值隐藏控件                   
+
+                    var BuQueDingDuZhiObj = document.getElementById(BuQueDingDuZhiID);
+                    if (BuQueDingDuZhiObj != null) {
+                        BuQueDingDuZhiObj.value = res.Message;
+                        JiSuanBuQueDingDuByType(BuQueDingDuZhiID, ShowBuQueDingDuID);
+                    }
+                    else
+                    {
+                        JiSuanBuQueDingDuByType(ShowBuQueDingDuID, ShowBuQueDingDuID);
+                    }
+
+                }
+                else {
+                    $.messager.alert('操作提示', res.Message, 'info');
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
+            }
+        });
+    }
+
+    
+
+    
+}
+//获取不确定度设置详情
+function GetJiSuanBuQueDingDuParaArray()
+{
+    var JiSuanBuQueDingDuParaArray = new Array;
+
+    JiSuanBuQueDingDuParaArray.Type = "";//不确定度计算方式
+    var AttributeValue = GetAttributeValue("JiSuanBuQueDingDu");
+    if (AttributeValue == null || AttributeValue.trim() == "") {       
+        return JiSuanBuQueDingDuParaArray;
+    }
+    var type = AttributeValue.split(":")[0].trim().toUpperCase();
+    if (type != "A" && type != "Z" && AttributeValue.split(":").length < 2) {
+        return JiSuanBuQueDingDuParaArray;
+    }
+
+    if (AttributeValue.split(":").length <2)
+    {
+        return JiSuanBuQueDingDuParaArray;
+    }
+    else if (AttributeValue.split(":")[1].split("|")<1)
+    {
+        return JiSuanBuQueDingDuParaArray;
+    }
+    else
+    {
+        JiSuanBuQueDingDuParaArray.Name = AttributeValue.split(":")[1].split("|")[0];//不确定文本框名称
+    }
+    JiSuanBuQueDingDuParaArray.Type = type;
+    if (type == "Z" && AttributeValue.split("|")[1].length > 1 && AttributeValue.split("|")[1].split(";").length >= "4")
+    {
+        //检测项属性名称后需要加自动或者按钮不确定计算
+        //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
+        //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+        //例如：显示值属性名称;量程属性名称;K属性名称;;
+        //按钮计算不确定(A:检测项属性名称)
+
+        var pArray = AttributeValue.split("|")[1].split(";");
+        JiSuanBuQueDingDuParaArray.ShuChuShiJiZhi = pArray[0];//显示值属性名称或者输出实际值属性名称
+        JiSuanBuQueDingDuParaArray.ShuChuShiJiZhiDanWei = pArray[0] + "_UNIT";//显示值单位属性名称或者输出实际值单位属性名称
+        JiSuanBuQueDingDuParaArray.LiangCheng = pArray[1];//量程属性名称
+        JiSuanBuQueDingDuParaArray.K = pArray[2];//量程属性名称
+        JiSuanBuQueDingDuParaArray.XuanYongDianZu = pArray[3];//选用电阻属性名称
+    }
+    else if(type=="Z")
+    {
+        JiSuanBuQueDingDuParaArray.Type = "";
+    }
+    return JiSuanBuQueDingDuParaArray;
+}
+
 //获取每行不确定度按钮
 //Name：不确定度按钮所在某检测项控件名称后
 function GetJiSuanBuQueDingDuType(Name) {
@@ -146,27 +337,30 @@ function GetJiSuanBuQueDingDuType(Name) {
     if (type != "A" && type != "Z" && AttributeValue.split(":").length < 2) {
         return "";
     }
-    //if (type == "Z" && JiSuanBuQueDingDuParaArray != null && JiSuanBuQueDingDuParaArray.length == 0)
-    //{
-    //    //if (AttributeValue.split("|")[1].length > 1 && AttributeValue.split("|")[1].split(";").length == "4") {
+    if (type == "Z" && JiSuanBuQueDingDuParaArray != null && JiSuanBuQueDingDuParaArray.length == 0)
+    {
+        debugger
+        if (AttributeValue.split("|")[1].length > 1 && AttributeValue.split("|")[1].split(";").length >= "4") {
 
-    //    //    //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-    //    //    //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-    //    //    //例如：显示值属性名称;量程属性名称;K属性名称;;
+            //检测项属性名称后需要加自动或者按钮不确定计算
+            //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
+            //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+            //例如：显示值属性名称;量程属性名称;K属性名称;;
+            //按钮计算不确定(A:检测项属性名称)
 
-    //    //    var pArray = AttributeValue.split("|")[1].split(";");
-    //    //    JiSuanBuQueDingDuParaArray.ShuChuShiJiZhi = pArray[0];
-    //    //    JiSuanBuQueDingDuParaArray.ShuChuShiJiZhiDanWei = pArray[0]+"_UNIT";
-    //    //    JiSuanBuQueDingDuParaArray.LiangCheng = pArray[1];
-    //    //    JiSuanBuQueDingDuParaArray.K = pArray[2];
-    //    //    JiSuanBuQueDingDuParaArray.XuanYongDianZu = pArray[3];
-    //    //}
-    //    //else
-    //    //{
-    //    //    return "";
-    //    //}        
+            var pArray = AttributeValue.split("|")[1].split(";");
+            JiSuanBuQueDingDuParaArray.ShuChuShiJiZhi = pArray[0];
+            JiSuanBuQueDingDuParaArray.ShuChuShiJiZhiDanWei = pArray[0]+"_UNIT";
+            JiSuanBuQueDingDuParaArray.LiangCheng = pArray[1];
+            JiSuanBuQueDingDuParaArray.K = pArray[2];
+            JiSuanBuQueDingDuParaArray.XuanYongDianZu = pArray[3];
+        }
+        else
+        {
+            return "";
+        }        
 
-    //}
+    }
     AttributeValue = AttributeValue.split(":")[1];
     var objArray = AttributeValue.split(',');
     var NameNew = Name;
@@ -267,8 +461,11 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     }
     var htmlString = [];
     htmlString.push("<td class='" + classstyle + "' rowspan='" + rowspan + "' align='center' > ");
-    htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='" + blurValue + "(this)'/>");
-    if (ddlHtml != null && ddlHtml.trim() != "") {
+
+    htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='" + blurValue + "(this);LianDongBuQueDingDu(this);'/>");
+    //htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='alert(\"1\");alert(\"2\");'/>");
+    
+   if (ddlHtml != null && ddlHtml.trim() != "") {
         var AttributeValue = GetAttributeValue("LianDongDanWeiDDL");
 
         htmlString.push($(ddlHtml).attr("onchange", "LianDongDanWeiDDL(this,'" + AttributeValue + "')").attr("name", ddlName).attr("id", ddlId)[0].outerHTML);
@@ -278,20 +475,20 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     }
 
     //不确定度
-    var JiSuanBuQueDingDuType = GetJiSuanBuQueDingDuType(name);
+    //var JiSuanBuQueDingDuType = GetJiSuanBuQueDingDuType(name);    
 
-    if (JiSuanBuQueDingDuType != null && JiSuanBuQueDingDuType.trim() != "") {
+    if (JiSuanBuQueDingDuPara.Type != null && JiSuanBuQueDingDuPara.Type.trim() != "" && JiSuanBuQueDingDuPara.Name==name) {
 
         htmlString.push("<input type='hidden' name='" + BuQueDingDuZhiName + "' id='" + BuQueDingDuZhiId + "' value=''/>");
-        if (JiSuanBuQueDingDuType == "A") {//按钮计算不确定度
+        if (JiSuanBuQueDingDuPara.Type == "A") {//按钮计算不确定度
             htmlString.push("<input type='hidden' name='" + BuQueDingDuLuJingName + "' id='" + BuQueDingDuLuJingId + "' value=''/>");
             var returnIds = BuQueDingDuZhiId + "&" + BuQueDingDuLuJingId + "^" + BuQueDingDuLuJingId + "^" + id;
             htmlString.push("<a href=\"#\" name=\"btnBuQueDing\" class=\"my-linkbutton\" onclick = \"showModal('" + returnIds + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID='+$('#hideRULEID').val());\">计算</a>")
         }
-        else if(JiSuanBuQueDingDuType=="Z")//每行自动计算不确定度
-        {
+        //else if (JiSuanBuQueDingDuPara.Type == "Z")//每行自动计算不确定度
+        //{
 
-        }
+        //}
     }
     htmlString.push("</td>");
     return htmlString.join("");
@@ -317,8 +514,12 @@ function JiSuanBuQueDingDuByType(BuQueDingDuZhiId, ShowBuQueDingDuId) {
 
     var BuQueDingDuZhi = document.getElementById(BuQueDingDuZhiId);
     var ShowBuQueDingDu = document.getElementById(ShowBuQueDingDuId);
-    if (BuQueDingDuZhi == null || ShowBuQueDingDu == null || BuQueDingDuZhi.value.trim() == "") {
+    if (BuQueDingDuZhi == null || ShowBuQueDingDu == null ) {
         return;
+    }
+    if (BuQueDingDuZhi.value.trim() == "")
+    {
+        BuQueDingDuZhi.value = ShowBuQueDingDu.value;      
     }
 
     if (type == "B")//百分比模式

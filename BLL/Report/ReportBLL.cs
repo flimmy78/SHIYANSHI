@@ -1583,11 +1583,19 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                 foreach (METERING_STANDARD_DEVICE item in listZhuanZhi)
                 {
                     CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, false);
+
+                    int row_SourceHeight = sheet_Source.GetRow(rowIndex_Source).Height;//源行高
+                    int maxRowCount = 1;//最大换行数用来控制行高
+
                     //名称
                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(item.NAME);
                     if (type == CATEGORYType.标准装置)
                     {
                         //测量范围
+                        if (item.TEST_RANGE != null)
+                        {
+                            maxRowCount = item.TEST_RANGE.Split(';').Length;
+                        }
                         item.TEST_RANGE = item.TEST_RANGE.Replace(";", Environment.NewLine);
                         sheet_Destination.GetRow(rowIndex_Destination).GetCell(7).SetCellValue(item.TEST_RANGE);
                     }
@@ -1638,6 +1646,11 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                             }
 
                             //aValue = aValue.Replace(",", Environment.NewLine);
+                            if(maxRowCount < aValue.Split(',').Length)
+                            {
+                                maxRowCount = aValue.Split(',').Length;
+                            }
+
                             HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, null, aValue);
                             sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(value);
                         }
@@ -1668,16 +1681,27 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                         }
                         if (!string.IsNullOrEmpty(cValue) && cValue.Trim() != "")
                         {
+                            if (maxRowCount < cValue.Split(',').Length)
+                            {
+                                maxRowCount = cValue.Split(',').Length;
+                            }
                             cValue = cValue.Trim().Remove(cValue.Trim().Length - 1);
                             cValue = cValue.Replace(",", Environment.NewLine);
                         }
                         if (!string.IsNullOrEmpty(vValue) && vValue.Trim() != "")
                         {
+                            if (maxRowCount < vValue.Split(',').Length)
+                            {
+                                maxRowCount = vValue.Split(',').Length;
+                            }
                             vValue = vValue.Trim().Remove(vValue.Trim().Length - 1);
                             vValue = vValue.Replace(",", Environment.NewLine);
                         }
                         sheet_Destination.GetRow(rowIndex_Destination).GetCell(20).SetCellValue(cValue);
                         sheet_Destination.GetRow(rowIndex_Destination).GetCell(27).SetCellValue(vValue);
+
+                        //重新设置行高
+                        sheet_Destination.GetRow(rowIndex_Destination).Height = (short)(row_SourceHeight * maxRowCount);
                     }
                     #endregion
                     rowIndex_Destination++;
@@ -1776,7 +1800,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                     //if (TableTemplateDic != null && TableTemplateDic.ContainsKey(iEntity.RULEID))
                     //{
                     //    TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
-                    if (iEntity != null 
+                    if (iEntity != null && iEntity.RULEID== "598-1989_2_2"
                         && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
 
