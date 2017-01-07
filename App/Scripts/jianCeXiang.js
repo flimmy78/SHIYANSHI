@@ -789,7 +789,7 @@ function kexue(src, pos) {
     if (src < 0) {
         resultSymbol = "-";
     }
-
+    src = src.toString().replace("-", "");
     var zero = "";
     for (var i = 0; i < pos; i++) {
         zero += "0";
@@ -799,8 +799,11 @@ function kexue(src, pos) {
     var n = src * Math.pow(10, -p);
 
     n = numeral(n).format('0.' + zero);
-
-    return n + '*10' + p;
+    var str = '*10'
+    if (p>0) {
+        str += "+";
+    }
+    return resultSymbol + n + str + p;
 
     //return numeral(src).format('0.' + zero + 'e+0');//'0.000e+0'
 
