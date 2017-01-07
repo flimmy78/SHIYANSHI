@@ -19,13 +19,78 @@ namespace Langben.App.Controllers
     public class PROJECTTEMPLETController : BaseController
     {//
      /// <summary>
-     ///二次负荷导纳阻抗误差
+     ///电压有功分量无功分量
      /// </summary>
      /// <param name="id">canshu</param>
      /// <param name="RULEID">规程id</param>
      /// <param name="SCHEMEID">方案id</param>
      /// <param name="PREPARE_SCHEMEID">预备方案id</param>
      /// <returns></returns>
+        public ActionResult DianYaYouGongFenLiangWuGongFenLiang(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///开关变差-无不确定度
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult KaiGuanBianChaWuBuQueDingDu(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///倾斜影响
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult QingXieYingXiang(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///电子式示值误差
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult DianZiShiShiZhiWuCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///指针式示值误差
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult ZhiZhenShiZhiWuCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///二次负荷导纳阻抗误差
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
         public ActionResult ErCiFuHeDaoNaZuKangWuCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
@@ -252,9 +317,9 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult OMYiShangWuWuCha(  string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult OMYiShangWuWuCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-             
+
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -265,9 +330,9 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult OMYiXiaBiaoZhunDianZu( string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult OMYiXiaBiaoZhunDianZu(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-             
+
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -336,7 +401,7 @@ namespace Langben.App.Controllers
         /// <returns></returns>
         public ActionResult GongZuoDianLiuShiZhiWuCha(string id = "频率输出", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-             
+
             ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
@@ -350,7 +415,7 @@ namespace Langben.App.Controllers
         /// <returns></returns>
         public ActionResult DianZuShiZhiWuCha(string id = "频率输出", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-             
+
             ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
@@ -493,7 +558,7 @@ namespace Langben.App.Controllers
         public ActionResult ZhiLiuDianLiuDianYaFeiZhengFuJueDuiWuChaLiangCheng(string id = "输出", string wucha = "绝对误差", string RULEID = "315-1983_2_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             //输出 测量
-            ViewBag.canshu =id;
+            ViewBag.canshu = id;
             //绝对误差 相对误差 
             ViewBag.wucha = wucha;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
@@ -583,9 +648,9 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns> 
         [SupportFilter]
-        public ActionResult JiaoLiuDianYaXiangDuiWuChaDanxiang(string id = "输出", string wucha = "相对误差",  string RULEID = "34-1999_3_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JiaoLiuDianYaXiangDuiWuChaDanxiang(string id = "输出", string wucha = "相对误差", string RULEID = "34-1999_3_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-                   
+
 
             //绝对误差 410 - 1994_6_6//相对误差 410-1994_6_5    
             ViewBag.wucha = wucha;
@@ -627,7 +692,7 @@ namespace Langben.App.Controllers
                     PREPARE_SCHEME pEntity = new DAL.PREPARE_SCHEME();
                     IBLL.IPREPARE_SCHEMEBLL pBLL = new BLL.PREPARE_SCHEMEBLL();
                     pEntity = pBLL.GetById(PREPARE_SCHEMEID);
-                    if(pEntity!=null)
+                    if (pEntity != null)
                     {
                         SCHEMEID = pEntity.SCHEMEID;
                     }
@@ -728,7 +793,7 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns>
-        public ActionResult JiSuanBuQueDingDu(string ID = "", string RULEID = "",string PREPARE_SCHEMEID = "",string URL="")
+        public ActionResult JiSuanBuQueDingDu(string ID = "", string RULEID = "", string PREPARE_SCHEMEID = "", string URL = "")
         {
             Common.Account account = GetCurrentAccount();
             if (string.IsNullOrWhiteSpace(URL) || URL.Trim() == "")
@@ -736,12 +801,12 @@ namespace Langben.App.Controllers
                 URL = GetBuQueDingDuUrl(URL);
             }
             string htmlValue = "";
-            if(DirFile.FileExists(URL))
+            if (DirFile.FileExists(URL))
             {
                 htmlValue = DirFile.ReadFile(URL);
             }
             ViewBag.ID = ID;
-            ViewBag.RULEID = RULEID;            
+            ViewBag.RULEID = RULEID;
             ViewBag.HTMLVALUE = htmlValue;
             ViewBag.PREPARE_SCHEMEID = PREPARE_SCHEMEID;
             ViewBag.URL = URL;
@@ -754,7 +819,7 @@ namespace Langben.App.Controllers
         /// <param name="HTMLVALUE">html</param>
         /// <param name="URL">不确定计算存储地址</param>
         /// <returns></returns>
-        public ActionResult JiSuanBuQueDingDuSave(string HTMLVALUE="",string URL="")
+        public ActionResult JiSuanBuQueDingDuSave(string HTMLVALUE = "", string URL = "")
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             try
@@ -767,18 +832,18 @@ namespace Langben.App.Controllers
                 HTMLVALUE = Server.UrlDecode(HTMLVALUE);//解码
                 DirFile.SaveFile(HTMLVALUE, URL);
                 LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + Url, "不确定度计算");//写入日志 
-                result.Code = Common.ClientCode.Succeed;               
+                result.Code = Common.ClientCode.Succeed;
                 result.Message = URL;
                 return Json(result); //提示创建成功
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                LogClassModels.WriteServiceLog(Suggestion.InsertFail + Url+":"+ex.Message,"不确定度计算");//写入日志                      
+                LogClassModels.WriteServiceLog(Suggestion.InsertFail + Url + ":" + ex.Message, "不确定度计算");//写入日志                      
                 result.Code = Common.ClientCode.Fail;
                 result.Message = Suggestion.InsertFail + ex.Message;
                 return Json(result); //提示插入失败
-            }       
-           
+            }
+
 
         }
         /// <summary>
@@ -787,8 +852,8 @@ namespace Langben.App.Controllers
         /// <param name="RULEID">检测项目ID</param>        
         /// <returns></returns>
         private string GetBuQueDingDuUrl(string URL)
-        {          
-            
+        {
+
             string htmlValue = "";
             if (!string.IsNullOrWhiteSpace(URL) && DirFile.FileExists(URL))
             {
@@ -796,7 +861,7 @@ namespace Langben.App.Controllers
             }
             else
             {
-               URL = "/up/BuQueDingDu/"+Result.GetNewId()+".html";
+                URL = "/up/BuQueDingDu/" + Result.GetNewId() + ".html";
             }
             return URL;
         }
@@ -843,7 +908,7 @@ namespace Langben.App.Controllers
 
 
         //public ActionResult BuQueDingDu()
-       // {
+        // {
         //    return View();
         //}
         public ActionResult GongZuoDianLiuShiZhiWuCha9()

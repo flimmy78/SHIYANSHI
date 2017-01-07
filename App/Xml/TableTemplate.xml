@@ -5956,6 +5956,14 @@
           <IsMergeNullValue>N</IsMergeNullValue>
         </Cell>
         <Cell>
+          <Code>RELATIVEERROR_UNIT</Code>
+          <ColIndex>8</ColIndex>
+          <ColCount>0</ColCount>
+          <IsMergeSameValue>N</IsMergeSameValue>
+          <IsHideRowNull>Y</IsHideRowNull>
+          <IsMergeNullValue>N</IsMergeNullValue>
+        </Cell>
+        <Cell>
           <Code>UNCERTAINTYDEGREE</Code>
           <ColIndex>9</ColIndex>
           <ColCount>0</ColCount>
@@ -6498,7 +6506,6 @@
         </RowInfo>
       </TableFooterList>
     </TableTemplate>
-
     <TableTemplate>
       <RuleID>51-1999_3_3</RuleID>
       <DataRowIndex>671</DataRowIndex>
@@ -6507,6 +6514,14 @@
       <CellList>
         <Cell>
           <Code>RANGE</Code>
+          <ColIndex>-1</ColIndex>
+          <ColCount>0</ColCount>
+          <IsMergeSameValue>N</IsMergeSameValue>
+          <IsHideRowNull>N</IsHideRowNull>
+          <IsMergeNullValue>N</IsMergeNullValue>
+        </Cell>
+        <Cell>
+          <Code>RANGE_UNIT</Code>
           <ColIndex>-1</ColIndex>
           <ColCount>0</ColCount>
           <IsMergeSameValue>N</IsMergeSameValue>
@@ -6530,7 +6545,23 @@
           <IsMergeNullValue>N</IsMergeNullValue>
         </Cell>
         <Cell>
+          <Code>READVALUE_UNIT</Code>
+          <ColIndex>1</ColIndex>
+          <ColCount>0</ColCount>
+          <IsMergeSameValue>N</IsMergeSameValue>
+          <IsHideRowNull>N</IsHideRowNull>
+          <IsMergeNullValue>N</IsMergeNullValue>
+        </Cell>
+        <Cell>
           <Code>HZMY</Code>
+          <ColIndex>2</ColIndex>
+          <ColCount>0</ColCount>
+          <IsMergeSameValue>N</IsMergeSameValue>
+          <IsHideRowNull>N</IsHideRowNull>
+          <IsMergeNullValue>N</IsMergeNullValue>
+        </Cell>
+        <Cell>
+          <Code>HZMY_UNIT</Code>
           <ColIndex>2</ColIndex>
           <ColCount>0</ColCount>
           <IsMergeSameValue>N</IsMergeSameValue>
@@ -6546,7 +6577,23 @@
           <IsMergeNullValue>N</IsMergeNullValue>
         </Cell>
         <Cell>
+          <Code>ACTUALVALUE_UNIT</Code>
+          <ColIndex>3</ColIndex>
+          <ColCount>0</ColCount>
+          <IsMergeSameValue>N</IsMergeSameValue>
+          <IsHideRowNull>N</IsHideRowNull>
+          <IsMergeNullValue>N</IsMergeNullValue>
+        </Cell>
+        <Cell>
           <Code>SHIJISHUCHUZHI</Code>
+          <ColIndex>4</ColIndex>
+          <ColCount>0</ColCount>
+          <IsMergeSameValue>N</IsMergeSameValue>
+          <IsHideRowNull>N</IsHideRowNull>
+          <IsMergeNullValue>N</IsMergeNullValue>
+        </Cell>
+        <Cell>
+          <Code>SHIJISHUCHUZHI_UNIT</Code>
           <ColIndex>4</ColIndex>
           <ColCount>0</ColCount>
           <IsMergeSameValue>N</IsMergeSameValue>
@@ -6563,6 +6610,14 @@
         </Cell>
         <Cell>
           <Code>UNCERTAINTYDEGREE</Code>
+          <ColIndex>6</ColIndex>
+          <ColCount>0</ColCount>
+          <IsMergeSameValue>N</IsMergeSameValue>
+          <IsHideRowNull>N</IsHideRowNull>
+          <IsMergeNullValue>N</IsMergeNullValue>
+        </Cell>
+        <Cell>
+          <Code>UNCERTAINTYDEGREE_UNIT</Code>
           <ColIndex>6</ColIndex>
           <ColCount>0</ColCount>
           <IsMergeSameValue>N</IsMergeSameValue>
@@ -6617,6 +6672,14 @@
           <IsMergeNullValue>N</IsMergeNullValue>
         </Cell>
         <Cell>
+          <Code>RANGE_UNIT</Code>
+          <ColIndex>-1</ColIndex>
+          <ColCount>0</ColCount>
+          <IsMergeSameValue>N</IsMergeSameValue>
+          <IsHideRowNull>N</IsHideRowNull>
+          <IsMergeNullValue>N</IsMergeNullValue>
+        </Cell>
+        <Cell>
           <Code>OUTPUTVALUE</Code>
           <ColIndex>0</ColIndex>
           <ColCount>0</ColCount>
@@ -6633,7 +6696,23 @@
           <IsMergeNullValue>N</IsMergeNullValue>
         </Cell>
         <Cell>
+          <Code>READVALUE_UNIT</Code>
+          <ColIndex>1</ColIndex>
+          <ColCount>0</ColCount>
+          <IsMergeSameValue>N</IsMergeSameValue>
+          <IsHideRowNull>N</IsHideRowNull>
+          <IsMergeNullValue>N</IsMergeNullValue>
+        </Cell>
+        <Cell>
           <Code>HZMY</Code>
+          <ColIndex>2</ColIndex>
+          <ColCount>0</ColCount>
+          <IsMergeSameValue>N</IsMergeSameValue>
+          <IsHideRowNull>N</IsHideRowNull>
+          <IsMergeNullValue>N</IsMergeNullValue>
+        </Cell>
+        <Cell>
+          <Code>HZMY_UNIT</Code>
           <ColIndex>2</ColIndex>
           <ColCount>0</ColCount>
           <IsMergeSameValue>N</IsMergeSameValue>
@@ -6649,7 +6728,23 @@
           <IsMergeNullValue>N</IsMergeNullValue>
         </Cell>
         <Cell>
+          <Code>ACTUALVALUE_UNIT</Code>
+          <ColIndex>3</ColIndex>
+          <ColCount>0</ColCount>
+          <IsMergeSameValue>N</IsMergeSameValue>
+          <IsHideRowNull>N</IsHideRowNull>
+          <IsMergeNullValue>N</IsMergeNullValue>
+        </Cell>
+        <Cell>
           <Code>SHIJISHUCHUZHI</Code>
+          <ColIndex>4</ColIndex>
+          <ColCount>0</ColCount>
+          <IsMergeSameValue>N</IsMergeSameValue>
+          <IsHideRowNull>N</IsHideRowNull>
+          <IsMergeNullValue>N</IsMergeNullValue>
+        </Cell>
+        <Cell>
+          <Code>SHIJISHUCHUZHI_UNIT</Code>
           <ColIndex>4</ColIndex>
           <ColCount>0</ColCount>
           <IsMergeSameValue>N</IsMergeSameValue>
@@ -6666,6 +6761,14 @@
         </Cell>
         <Cell>
           <Code>UNCERTAINTYDEGREE</Code>
+          <ColIndex>6</ColIndex>
+          <ColCount>0</ColCount>
+          <IsMergeSameValue>N</IsMergeSameValue>
+          <IsHideRowNull>N</IsHideRowNull>
+          <IsMergeNullValue>N</IsMergeNullValue>
+        </Cell>
+        <Cell>
+          <Code>UNCERTAINTYDEGREE_UNIT</Code>
           <ColIndex>6</ColIndex>
           <ColCount>0</ColCount>
           <IsMergeSameValue>N</IsMergeSameValue>

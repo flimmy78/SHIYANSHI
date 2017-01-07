@@ -1,0 +1,283 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "倾斜影响";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    <tr>
+        <th colspan="5">
+            <span>辅助电阻影响：</span>
+            <select class="my-combobox" name="hege" id="hege_t_1_1">
+                <option value="1000" selected="selected">合格</option>
+                <option value="100">不合格</option>
+            </select>
+        </th>
+        <th colspan="2">
+            <span>等级：</span>
+            <input name="zhidingwucha" id="zhidingwucha_t_1_1" type="text" class="my-textbox tc" value="" style="width:140px">
+        </th>
+    </tr>
+    <tr>
+        <th></th>
+        <th align="center">
+            示值：<input name="shizhi" id="shizhi_t_1_1" type="text" class="my-textbox" value="100" style="width:60px" />
+
+        </th>
+        <th align="center">
+            实际值：<input name="shijizhi" id="shijizhi_t_1_1" type="text" class="my-textbox" value="100" style="width:60px" />
+
+        </th>
+        <th align="center">
+            示值：<input name="shizhi3" id="shizhi3_t_1_1" type="text" class="my-textbox" value="100" style="width:60px" />
+
+        </th>
+        <th align="center">
+            实际值：<input name="shijizhi4" id="shijizhi4_t_1_1" type="text" class="my-textbox" value="100" style="width:60px" />
+
+        </th>
+        <th align="center">
+            示值：<input name="shizhi5" id="shizhi5_t_1_1" type="text" class="my-textbox" value="100" style="width:60px" />
+
+        </th>
+        <th align="center">
+            实际值：<input name="shijizhi6" id="shijizhi6_t_1_1" type="text" class="my-textbox" value="100" style="width:60px" />
+
+        </th>
+    </tr>
+    <tr>
+        <th width="90" align="center"> 工作位置</th>
+        <th width="90" align="center">上限值(MΩ)</th>
+        <th width="90" align="center">偏差(%)</th>
+        <th width="90" align="center"> 中值(MΩ)</th>
+        <th width="90" align="center">偏差(%)</th>
+        <th width="90" align="center">下限值(MΩ)</th>
+        <th width="90" align="center"> 偏差(%)</th>
+    </tr>
+    <!--表体-->
+    <tr>
+        <td class="classstyle100" rowspan="1" align="center">
+            前
+        </td>
+        <td rowspan="1" class="classstyle100" align="center">
+            <input class="my-textbox input-width" value="" id="RANGE_t_1_1" name="RANGE" onblur="shangXianZhi(this)" type="text">
+        </td>
+        <td class="classstyle100" rowspan="1" align="center">
+            <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" type="text">
+        </td>
+        <td class="classstyle100" rowspan="1" align="center">
+            <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_1" name="RELATIVEERROR" onblur="zhongZhi(this)" type="text">
+        </td>
+        <td rowspan="1" class="classstyle100" align="center">
+            <input class="my-textbox input-width" value="" id="ZHONG_t_1_1" name="ZHONG"  type="text">
+        </td>
+        <td class="classstyle100" rowspan="1" align="center">
+            <input class="my-textbox input-width" value="" id="JUEDUIZHI_t_1_1" name="JUEDUIZHI" onblur="xiaXianZhi(this)" type="text">
+        </td>
+        <td  rowspan="1" align="center">
+            <input class="my-textbox input-width" value="" id="XIA_t_1_1" name="XIA" type="text">
+        </td>
+    </tr>
+    <tr>
+        <td class="classstyle100" rowspan="1" align="center">
+            后
+        </td>
+        <td rowspan="1" class="classstyle100" align="center">
+            <input class="my-textbox input-width" value="" id="RANGE_t_2_1" name="RANGE" onblur="shangXianZhi(this)" type="text">
+        </td>
+        <td class="classstyle100" rowspan="1" align="center">
+            <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_2_1" name="SHIJISHUCHUZHI" type="text">
+        </td>
+        <td class="classstyle100" rowspan="1" align="center">
+            <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_2_1" name="RELATIVEERROR" onblur="zhongZhi(this)" type="text">
+        </td>
+        <td rowspan="1" class="classstyle100" align="center">
+            <input class="my-textbox input-width" value="" id="ZHONG_t_2_1" name="ZHONG" type="text">
+        </td>
+        <td class="classstyle100" rowspan="1" align="center">
+            <input class="my-textbox input-width" value="" id="JUEDUIZHI_t_2_1" name="JUEDUIZHI" onblur="xiaXianZhi(this)" type="text">
+        </td>
+        <td rowspan="1" align="center">
+            <input class="my-textbox input-width" value="" id="XIA_t_2_1" name="XIA" type="text">
+        </td>
+    </tr>
+    <tr>
+        <td class="classstyle100" rowspan="1" align="center">
+            左
+        </td>
+        <td rowspan="1" class="classstyle100" align="center">
+            <input class="my-textbox input-width" value="" id="RANGE_t_3_1" name="RANGE" onblur="shangXianZhi(this)" type="text">
+        </td>
+        <td class="classstyle100" rowspan="1" align="center">
+            <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_3_1" name="SHIJISHUCHUZHI" type="text">
+        </td>
+        <td class="classstyle100" rowspan="1" align="center">
+            <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_3_1" name="RELATIVEERROR" onblur="zhongZhi(this)" type="text">
+        </td>
+        <td rowspan="1" class="classstyle100" align="center">
+            <input class="my-textbox input-width" value="" id="ZHONG_t_3_1" name="ZHONG" type="text">
+        </td>
+        <td class="classstyle100" rowspan="1" align="center">
+            <input class="my-textbox input-width" value="" id="JUEDUIZHI_t_3_1" name="JUEDUIZHI" onblur="xiaXianZhi(this)" type="text">
+        </td>
+        <td rowspan="1" align="center">
+            <input class="my-textbox input-width" value="" id="XIA_t_3_1" name="XIA" type="text">
+        </td>
+    </tr>
+
+    <tr>
+        <td class="classstyle100" rowspan="1" align="center">
+            右
+        </td>
+        <td rowspan="1" class="classstyle100" align="center">
+            <input class="my-textbox input-width" value="" id="RANGE_t_4_1" name="RANGE" onblur="shangXianZhi(this)" type="text">
+        </td>
+        <td class="classstyle100" rowspan="1" align="center">
+            <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_4_1" name="SHIJISHUCHUZHI" type="text">
+        </td>
+        <td class="classstyle100" rowspan="1" align="center">
+            <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_4_1" name="RELATIVEERROR" onblur="zhongZhi(this)" type="text">
+        </td>
+        <td rowspan="1" class="classstyle100" align="center">
+            <input class="my-textbox input-width" value="" id="ZHONG_t_4_1" name="ZHONG" type="text">
+        </td>
+        <td class="classstyle100" rowspan="1" align="center">
+            <input class="my-textbox input-width" value="" id="JUEDUIZHI_t_4_1" name="JUEDUIZHI" onblur="xiaXianZhi(this)" type="text">
+        </td>
+        <td rowspan="1" align="center">
+            <input class="my-textbox input-width" value="" id="XIA_t_4_1" name="XIA" type="text">
+        </td>
+    </tr>
+
+</thead>
+
+<tbody id="tbody_moban">
+    <!--表体-->
+
+</tbody>
+<tfoot>
+    <!--表尾-->
+    <tr>
+        <td colspan="6">
+            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加行数</a>
+
+        </td>
+    </tr>
+</tfoot>
+@section JS {
+    <script type="text/javascript" language="javascript">
+
+
+        //离开事件，用于计算
+        function shangXianZhi(obj) {
+            var first = "shijizhi",  third = "shizhi", gold = "SHIJISHUCHUZHI";
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+            first = first + "_" + tongdao + "_1_1";
+
+            third = third + "_" + tongdao + "_1_1";
+             
+            gold = gold + id;//改动的地方，误差的列的name值
+
+            var firstData = $("#" + first).val();
+            var secondData = $(obj).val();
+            var thirdData = $("#" + third).val();
+            if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
+                var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+                var jianfa = (accSub(firstData, secondData) / thirdData * 100);
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+
+
+                $(obj).parent().parent().find("#" + gold).val(data);
+            }
+        }
+        function zhongZhi(obj) {
+            var first = "shijizhi4", third = "shizhi3", gold = "ZHONG";
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+            first = first + "_" + tongdao + "_1_1";
+
+            third = third + "_" + tongdao + "_1_1";
+
+            gold = gold + id;//改动的地方，误差的列的name值
+
+            var firstData = $("#" + first).val();
+            var secondData = $(obj).val();
+            var thirdData = $("#" + third).val();
+            if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
+                var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+                var jianfa = (accSub(firstData, secondData) / thirdData * 100);
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+
+
+                $(obj).parent().parent().find("#" + gold).val(data);
+            }
+        }
+
+        function xiaXianZhi(obj) {
+            var first = "shijizhi6", third = "shizhi5", gold = "XIA";
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+            first = first + "_" + tongdao + "_1_1";
+
+            third = third + "_" + tongdao + "_1_1";
+
+            gold = gold + id;//改动的地方，误差的列的name值
+
+            var firstData = $("#" + first).val();
+            var secondData = $(obj).val();
+            var thirdData = $("#" + third).val();
+            if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
+                var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+                var jianfa = (accSub(firstData, secondData) / thirdData * 100);
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+
+
+                $(obj).parent().parent().find("#" + gold).val(data);
+            }
+        }
+    </script>
+
+
+}
+@section TanKuang {
+    <!--弹框的位置-->
+    <!--增加量程弹层-->
+    <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return CreateRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+        <table>
+
+            <tr>
+                <td align="right">检测点数：</td>
+                <td><input type="text" id="txtPoint" value="" name="txtPoint" class="easyui-textbox  required digits" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">小数点位数：</td>
+                <td><input type="text" id="txtPointLen" value="" name="txtPointLen" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
+            </tr>
+        </table>
+    </div>
+    <!--/增加量程弹层-->
+}
+
+
+

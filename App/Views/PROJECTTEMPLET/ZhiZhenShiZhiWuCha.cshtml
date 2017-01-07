@@ -1,28 +1,35 @@
 ﻿@model Langben.DAL.PROJECTTEMPLET
 @{
     Layout = "~/Views/Shared/TempleOnly.cshtml";
-    ViewBag.title = "直流电流输出-相对误差";
+    ViewBag.title = "指针式示值误差";
 }
 @using Common
 @using Models
 <thead>
     <!--表头-->
     <tr>
-        <th align="center" width="140">量程</th>
-        <th width="140" align="center">选用电阻阻值(Ω)</th>
-        <th rowspan="2" align="center"> 输出示值 </th>
-        <th rowspan="2" align="center"> 读数值 </th>
-        <th rowspan="2" align="center"> 输出实际值 </th>
-        <th rowspan="2" align="center">@((ViewBag.canshu == "相对误差") ? (ViewBag.canshu + "%") : ViewBag.canshu)</th>
-        <th align="center">
-            校准结果的不确定度<br>
-            U(k = <select class="my-combobox" name="K" id="K_t_1_1">
-                <option value="2">2 </option>
-                <option value="3">3</option>
-                <option value="√3">√3</option>
-            </select>)
+        <th colspan="5">
+            <span>辅助电阻影响：</span>
+            <select class="my-combobox" name="hege" id="hege_t_1_1">
+                <option value="1000" selected="selected">合格</option>
+                <option value="100">不合格</option>
+            </select>
+        </th>
+        <th colspan="2">
+            <span>等级：</span>
+            <input name="zhidingwucha"  id="zhidingwucha_t_1_1" type="text" class="my-textbox tc" value="" style="width:140px">
         </th>
     </tr>
+    <tr>
+        <th colspan="2" width="120" align="center">量程(Ω)</th>
+       
+        <th width="110" align="center">示值</th>
+        <th width="110" align="center">实际值(Ω)</th>
+        <th width="110" align="center">误差(%)</th>
+        <th width="110" align="center">500Ω显示值(Ω)</th>
+        <th align="center">改变量(%)</th>
+    </tr>
+
 
 </thead>
 
@@ -83,22 +90,22 @@
 
                 if (rowidx == 0) {
                     //需要合并的列 //量程
-
+                    htmlString.push("<td  rowspan='" + txtPoint + "' align='center' >X</td>");
                     htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, txtNumber, ""));
                     //选用电阻阻值   （Ω）
-                    htmlString.push(SetTDHtml(txtPoint, "OUTPUTVALUE", lianChengID, rowidx, '', ""));
+                 
 
                 }
 
-
+              
                 //输出示值 增加下拉框单位A
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "@((ViewBag.canshu == "相对误差") ? "resetBiaoZhunZhi" : "jueDuiWuChaBiaoZhunZhi")"));
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "resetBiaoZhunZhi"));
 
                 //读数值 增加下拉框单位V
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx));
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, '', "", '', "resetBiaoZhunZhi"));
 
-                //输出实际值
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "", '', "@((ViewBag.canshu == "相对误差") ? "resetBiaoZhunZhi" : "jueDuiWuChaBiaoZhunZhi")"));
+                //误差(%)
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx));
 
                 //相对误差
                 htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', ""));
@@ -118,53 +125,43 @@
         }
 
         //计算标准值 绝对误差
-        function jueDuiWuChaBiaoZhunZhi(obj) {
-
-            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
-
-        }
-
-        //计算显示值
+        //【误差】=（示值-实际值/量程）/10*100，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进
         function resetBiaoZhunZhi(obj) {
+            var first = "READVALUE", second = "ACTUALVALUE", third = "RANGE", gold = "SHIJISHUCHUZHI";
+                //重新计算当前行
+                var name = $(obj).attr("name");
+                var id = $(obj).attr("id");
+                id = id.substring(id.indexOf('_'));
+                var tongdao = id.split('_')[1];
+                var liangcheng = id.split('_')[2];
+                third = third + "_" + tongdao + "_" + liangcheng;
+                first = first + id;//改动的地方，参与计算的列的name值
+                second = second + id;//改动的地方，参与计算的列的name值
+               
+                gold = gold + id;//改动的地方，误差的列的name值
 
-            xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+                var firstData = $(obj).parent().parent().find("#" + first).val();
+                var secondData = $(obj).parent().parent().find("#" + second).val();
+                var thirdData = $("#" + second).val();
+                if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
+                    var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+                    var jianfa = (accSub(firstData, (secondData / thirdData))/10 * 100);
+                    var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
 
-        }
 
-        ///计算输出实际值
-        function blurValue(obj) {
-            var curidx = $(obj).parents('tr').attr("rowindex");//當前行
-            var tr = $(obj).parents('tr');
-            var liangchengIdx = $(obj).attr("id").toString().split("_")[2];//量程
-            var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
-            var liangcheng;//量程值
-            var xuanyongdianzuzhi;
-            var shuchushijizhi;//输出实际值
-            var trs = $("#tbody_" + hideDangQianTongDao + " tr");
-            var arr = jQuery.makeArray(trs);
-            arr.reverse();//翻轉
-            $(arr).each(function (i) {
-                if ($(this).attr("rowindex") <= curidx)//当遍历的行小于等于当前操作行时候进行取值
-                {
-                    if ($(this).children().eq(0).attr("rowspan") != "1") {
-                        liangcheng = $(this).children().eq(0).find('input').val();
-                        xuanyongdianzuzhi = $(this).children().eq(1).find('input').val();
-                        return false;
-                    }
+                    $(obj).parent().parent().find("#" + gold).val(data);
                 }
-            })
-            var dushuzhi = $(obj).val();
-            if (xuanyongdianzuzhi != "")
-                shuchushijizhi = parseFloat(dushuzhi) /  parseFloat(xuanyongdianzuzhi);
-            else
-                shuchushijizhi = parseFloat(dushuzhi);
-            if ($(obj).parents('tr').children().eq(0).attr("rowspan") != "1") {
-                $(obj).parents('tr').children().eq(4).find('input').val(shuchushijizhi)
-            }
-            else
-                $(obj).parents('tr').children().eq(2).find('input').val(shuchushijizhi)
+             
 
         }
+ 
+        //离开事件，用于计算
+        function blurValue(obj) {
+
+            //   LianDongShiJiZhi(obj);
+        }
+
+
 
     </script>
 
