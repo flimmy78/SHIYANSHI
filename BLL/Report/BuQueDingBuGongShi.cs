@@ -23,7 +23,14 @@ namespace Langben.BLL.Report
         /// <returns></returns>
         public static string GetBuQueDingDu(string RuleID, string ShuChuShiJiZhi, string ShuChuShiJiZhiDanWei, string LiangCheng, string K, string XuanYongDianZu)
         {
-            return "10.123";
+            if (!string.IsNullOrWhiteSpace(ShuChuShiJiZhi))
+            {
+                return "10.123";
+            }
+            else
+            {
+                return "";
+            }
         }
     }
 }
