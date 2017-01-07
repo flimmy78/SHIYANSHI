@@ -1,0 +1,183 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "位置影响";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    <tr>
+        <th width="90" colspan="2" rowspan="2" align="center">量程(Ω)</th>
+        <th colspan="3" align="center">前</th>
+        <th colspan="3" align="center">后</th>
+        <th colspan="3" align="center">左</th>
+        <th colspan="3" align="center">右</th>
+    </tr>
+    <tr>
+        <th width="90" align="center"> 示值</th>
+        <th width="90" align="center">标准值(Ω)</th>
+        <th width="90" align="center">误差(%)</th>
+        <th width="90" align="center"> 示值</th>
+        <th width="90" align="center">标准值(Ω)</th>
+        <th width="90" align="center">误差(%)</th>
+        <th width="90" align="center"> 示值</th>
+        <th width="90" align="center">标准值(Ω)</th>
+        <th width="90" align="center">误差(%)</th>
+        <th width="90" align="center"> 示值</th>
+        <th width="90" align="center">标准值(Ω)</th>
+        <th width="90" align="center">误差(%)</th>
+    </tr>
+
+</thead>
+
+<tbody id="tbody_moban">
+    <!--表体-->
+    <!--插入行的位置-->
+
+</tbody>
+
+<tfoot>
+    <!--表尾-->
+    <tr>
+        <td colspan="7">
+            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加行</a>
+
+        </td>
+    </tr>
+</tfoot>
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        function set(tbodyIndex) {
+
+            CreateRow();
+            // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
+            $("#hideDangQianTongDao").val(tbodyIndex);
+
+
+        }
+        //增加行
+        function CreateRow() {
+
+
+            var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+            var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
+            LiangChengShuLiang++;
+            var txtNumber = $("#txtNumber").val();     //量程值
+            var txtPoint = $("#txtPoint").val();     //检测点数
+            var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+            var htmlString = [];
+            var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
+
+            var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
+
+
+
+            for (var rowidx = 0; rowidx < txtPoint; rowidx++) {
+                rowLength++;
+                htmlString.push("<tr rowindex='" + rowLength + "'>");
+
+                var rowspan = 1; //合并单元格行数
+
+                var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
+
+                //计算默认值
+
+                if (rowidx == 0) {
+                    //需要合并的列
+                    htmlString.push("<td  rowspan='" + txtPoint + "' align='center' >X</td>");
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, txtNumber, ""));
+
+                }
+                //量程
+              //前 示值			
+                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, '', "", '', "resetBiaoZhunZhi"));
+                //输出示值 增加下拉框单位A
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "resetBiaoZhunZhi"));
+
+                //读数值 增加下拉框单位V
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx));
+
+                //误差(%)
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx));
+
+                //相对误差
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', ""));
+
+
+                //校准结果的不确定度 U(K =
+                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', ""));
+
+                htmlString.push(SetTDHtml(rowspan, "FIR", HangHaoID, rowidx, '', ""));
+                htmlString.push(SetTDHtml(rowspan, "SEC", HangHaoID, rowidx, '', ""));
+                htmlString.push(SetTDHtml(rowspan, "THI", HangHaoID, rowidx, '', ""));
+                htmlString.push(SetTDHtml(rowspan, "FOUR", HangHaoID, rowidx, '', ""));
+                htmlString.push(SetTDHtml(rowspan, "FIFTH", HangHaoID, rowidx, '', ""));
+                htmlString.push(SetTDHtml(rowspan, "SIX", HangHaoID, rowidx, '', ""));
+                htmlString.push("</tr>");
+            }
+            htmlString = htmlString.join("");
+
+            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
+            $.parser.parse(tagRow);//渲染easyui组建
+            $('#dlg').window('close');//关闭弹出框
+
+            $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+        }
+
+        //计算标准值 绝对误差
+        //【误差】=（示值-实际值/量程）/10*100，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进
+        function resetBiaoZhunZhi(obj) {
+            var first = "OUTPUTVALUE", second = "READVALUE", third = "RANGE", gold = "ACTUALVALUE";
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            
+           
+            first = first + id;//改动的地方，参与计算的列的name值
+            second = second + id;//改动的地方，参与计算的列的name值
+            third = third + id;//改动的地方，参与计算的列的name值
+            gold = gold + id;//改动的地方，误差的列的name值
+
+            var firstData = $(obj).parent().parent().find("#" + first).val();
+            var secondData = $(obj).parent().parent().find("#" + second).val();
+            var thirdData = $("#" + second).val();
+            if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
+                var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+                var jianfa = (accSub(firstData, (secondData / thirdData)) / 10 * 100);
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+
+
+                $(obj).parent().parent().find("#" + gold).val(data);
+            }
+
+
+        }
+
+        //离开事件，用于计算
+        function blurValue(obj) {
+
+            //   LianDongShiJiZhi(obj);
+        }
+
+
+
+    </script>
+
+
+}
+@section TanKuang {
+    <!--弹框的位置-->
+    <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
+    <input type="hidden" id="txtPointLen" value="1" /><!--小数点位数-->
+}
+
+
+
+
+
