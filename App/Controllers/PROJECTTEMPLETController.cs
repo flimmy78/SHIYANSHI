@@ -18,14 +18,28 @@ namespace Langben.App.Controllers
     /// </summary>
     public class PROJECTTEMPLETController : BaseController
     {//
-     /// <summary>
-     ///偏离零位
-     /// </summary>
-     /// <param name="id">canshu</param>
-     /// <param name="RULEID">规程id</param>
-     /// <param name="SCHEMEID">方案id</param>
-     /// <param name="PREPARE_SCHEMEID">预备方案id</param>
-     /// <returns></returns>
+
+        /// <summary>
+        ///非额定负载影响
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult FeiEDingFUZaiYngXiang(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///偏离零位
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
         public ActionResult PianLiLingWei(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
