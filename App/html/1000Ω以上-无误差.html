@@ -2,107 +2,109 @@
 
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width" />
-<title>1000Ω以上-无误差</title>
-<link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
-<link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
-<link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
-<link href="/Content/default.css" rel="stylesheet" />
-<link href="/Content/StyleSheet.css" rel="stylesheet" />
-<script src="/Scripts/jquery.min.js"></script>
-<script src="/Scripts/JScriptCommon.js"></script>
-<script src="/Res/easyui/jquery.easyui.min.js"></script>
-<script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
-<script src="/Scripts/jquery.validate.js"></script>
-<script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>1000Ω以上-无误差</title>
+    <link id="easyuiTheme" href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="/Res/easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link href="/Res/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="/Content/default.css" rel="stylesheet" />
+    <link href="/Content/StyleSheet.css" rel="stylesheet" />
+    <script src="/Scripts/jquery.min.js"></script>
+    <script src="/Scripts/JScriptCommon.js"></script>
+    <script src="/Res/easyui/jquery.easyui.min.js"></script>
+    <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
 </head>
 <body class="easyui-layout">
-<input type="hidden" id="rowindex" value="1" />
-<div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
-  <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
-    <table>
-      <tr>
-        <td><!--<a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a> --> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" >保存检测项</a></td>
-      </tr>
-    </table>
-  </div>
-</div>
-<div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
-  <div class="mt10"> <span>基本误差</span> </div>
-  <div class="mt10" id="tongdao">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_dy_1">
-      <thead>
-        <tr>
-          <th colspan="3" align="center">被测电阻</th>
-          <th colspan="3"   align="center">二等标准电阻</th>
-          <th width="90" rowspan="2"  align="center">A<sub>x</sub>(V)</th>
-          <th width="90" rowspan="2"  align="center">A<sub>n</sub>(V)</th>
-          <th width="90" rowspan="2"  align="center">实际值R<sub>x</sub><br>(Ω)</th>
-          <th width="90" rowspan="2"   align="center">检定电流</th>
-          <th rowspan="2" align="center" >校准结果的不确定度<br>U(k={0})</th>
-        </tr>
-        <tr>
-         <th width="90"  align="center">标称值（Ω）</th>
-          <th width="90" align="center">型号</th>
-          <th width="90" align="center">编号</th>
-          <th width="90"  align="center">标称值（Ω）</th>
-          <th width="90" align="center">编号</th>
-          <th width="90" align="center">R<sub>n</sub>(Ω)</th>
-        </tr>
-      </thead>
-      <tbody id="tbody_1">
-        <!--示例可删，默认无此行 -->
-        <tr>
-          <td align="center"><input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
-          <td align="center"><input name="LINGXIAN" id="LINGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
-          <td align="center"><input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
-          <td align="center"><input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
-          <td align="center"><input name="LINGXIAN" id="LINGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
-          <td align="center"><input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
-          <td align="center"><input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
-          <td align="center"><input name="LINGXIAN" id="LINGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
-          <td align="center"><input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
-          <td align="center"><input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
-          <td align="center"><input name="LINGXIAN" id="LINGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
-          
-        </tr>
-        
-        <!--/示例可删，默认无此行  -->
-      </tbody>
-      
-      <tr>
-        <td colspan="11" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open'); set('1')">增加行数</a></td>
-      </tr>
-      
-      
-    </table>
-    <div class="mt10">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" >
-        <tr>
-        <th width="80">注：</th>
-        <td colspan="3">Rn —  二等标准电阻的上级检定结果 <br>
-Rx —  被测电阻的实际值 <br>
-Ax —  本装置检定被测电阻时电压表示值 <br>
-An —  本装置检定二等标准电阻时电压表示值 <br>
-R<sub>x</sub>=R<sub>n</sub>+(A<sub>x</sub>/I-A<sub>n</sub>/I)</td>
-      </tr>
-      <tr>
-        <th>结论：</th>
-        <td colspan="3"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%"></td>
-      </tr>
-      </table>
+    <input type="hidden" id="rowindex" value="1" />
+    <div data-options="region:'north',border:false" style="height: 50px; overflow:hidden; padding:5px;">
+        <div class="easyui-panel" title="" data-options="iconcls:'icon-search',fit:true" style="padding:5px; overflow:hidden;">
+            <table>
+                <tr>
+                    <td><!--<a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTable()">增加通道</a> --> <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'">保存检测项</a></td>
+                </tr>
+            </table>
+        </div>
     </div>
-  </div>
-  
-</div>
+    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+        <div class="mt10"> <span>基本误差</span> </div>
+        <div class="mt10" id="tongdao">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl" id="tongdao_dy_1">
+                <thead>
+                    <tr>
+                        <th colspan="3" align="center">被测电阻</th>
+                        <th colspan="3" align="center">二等标准电阻</th>
+                        <th width="90" rowspan="2" align="center">A<sub>x</sub>(V)</th>
+                        <th width="90" rowspan="2" align="center">A<sub>n</sub>(V)</th>
+                        <th width="90" rowspan="2" align="center">实际值R<sub>x</sub><br>(Ω)</th>
+                        <th width="90" rowspan="2" align="center">检定电流</th>
+                        <th rowspan="2" align="center">校准结果的不确定度<br>U(k={0})</th>
+                    </tr>
+                    <tr>
+                        <th width="90" align="center">标称值（Ω）</th>
+                        <th width="90" align="center">型号</th>
+                        <th width="90" align="center">编号</th>
+                        <th width="90" align="center">标称值（Ω）</th>
+                        <th width="90" align="center">编号</th>
+                        <th width="90" align="center">R<sub>n</sub>(Ω)</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_1">
+                    <!--示例可删，默认无此行 -->
+                    <tr>
+                        <td align="center"><input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
+                        <td align="center"><input name="LINGXIAN" id="LINGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
+                        <td align="center"><input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
+                        <td align="center"><input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value=""onblur="calculate.erdengbiaozhundianzubiaochenzhi(this)"  /></td>
+                        <td align="center"><input name="LINGXIAN" id="LINGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
+                        <td align="center"><input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
+                        <td align="center"><input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value=""  onblur="calculate.shijizhiRX(this)"/></td>
+                        <td align="center"><input name="LINGXIAN" id="LINGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value=""  onblur="calculate.shijizhiRX(this)"/></td>
+                        <td align="center"><input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
+                        <td align="center"><input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value=""  onblur="calculate.shijizhiRX(this)"/></td>
+                        <td align="center"><input name="LINGXIAN" id="LINGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
 
-<!--增加行数弹层-->
-<div id="dlg" class="easyui-dialog" title="增加行数" closed="true" data-options="buttons: [{
+                    </tr>
+
+                    <!--/示例可删，默认无此行  -->
+                </tbody>
+
+                <tr>
+                    <td colspan="11" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open');TongDao.getCurTongDaoIdx(this)">增加行数</a></td>
+                </tr>
+
+
+            </table>
+            <div class="mt10">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl">
+                    <tr>
+                        <th width="80">注：</th>
+                        <td colspan="3">
+                            Rn —  二等标准电阻的上级检定结果 <br>
+                            Rx —  被测电阻的实际值 <br>
+                            Ax —  本装置检定被测电阻时电压表示值 <br>
+                            An —  本装置检定二等标准电阻时电压表示值 <br>
+                            R<sub>x</sub>=R<sub>n</sub>+(A<sub>x</sub>/I-A<sub>n</sub>/I)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>结论：</th>
+                        <td colspan="3"><input class="easyui-textbox " name="" data-options="multiline:true" style="height:40px; width:95%"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!--增加行数弹层-->
+    <div id="dlg" class="easyui-dialog" title="增加行数" closed="true" data-options="buttons: [{
 					text:'确定',
 					iconCls:'icon-ok',
 					handler:function(){
-					  return CreateRow()
+					  return TongDao.addRow()
 					}
 				},{
 					text:'取消',
@@ -110,19 +112,119 @@ R<sub>x</sub>=R<sub>n</sub>+(A<sub>x</sub>/I-A<sub>n</sub>/I)</td>
                     $('#dlg').window('close');
          }
          }]" style="width:400px;height:200px;padding:10px">
-  <table>
-    <tr>
-      <td width="100" align="right" height="100">增加的数量：</td>
-      <td><input type="text" id="txtNumber" class="my-textbox  required " style="width:200px" /></td>
-    </tr>
-  </table>
-</div>
-<!--/增加量程弹层--> 
+        <table>
+            <tr>
+                <td width="100" align="right" height="100">增加的数量：</td>
+                <td><input type="text" id="txtNumber" class="my-textbox  required " style="width:200px" /></td>
+            </tr>
+        </table>
+    </div>
+    <!--/增加量程弹层-->
 
-<script type="text/javascript" language="javascript">
-      
-       
+    <script type="text/javascript" language="javascript">
+        var rowNumber = 1;
+        var index = 1;
+        var currentindex = 1;
+        var TongDao = {
+            addTongDao: function () {
+                var tongdao = $("#tongdao_dy_1").clone();
+                this.setTongDaoIdx(index + 1);
+                $("#tongdao").append($(tongdao).attr("id", "tongdao_dy_" + this.getTongDaoIdx()));
+            },
+            addRow: function () {
 
-</script>
+                var inputHtml = "<input name=\"\" id=\"\" type=\"text\" class=\"my-textbox input-width tr\" value=\"\" onblur=\"calculate.erdengbiaozhundianzubiaochenzhi(this)\"/>";
+                var inputHtml2 = "<input name=\"\" id=\"\" type=\"text\" class=\"my-textbox input-width tr\" value=\"\" onblur=\"calculate.shijizhiRX(this)\"/>";
+               // var inputHtml3 = "<input name=\"\" id=\"\" type=\"text\" class=\"my-textbox input-width tr\" value=\"\" onblur=\"calculate.wuCha(this)\"/>";
+                var rows = $("#txtNumber").val();
+                for (var i = 0; i < rows; i++) {
+                    // var rowIdx = $("#tongdao_dy_" + currentindex + " tbody").eq(0).find('tr').last().children().eq(0).text();
+                    rowNumber = (rowNumber + 1);
+                    $("#tongdao_dy_" + currentindex + " tbody").eq(0).append("<tr>" +
+                                                                                  "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                  "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                   "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                    "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                   "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                  "<td align=\"center\">" + inputHtml2 + "</td>" +
+                                                                                  "<td align=\"center\">" + inputHtml2 + "</td>" +
+                                                                                    "<td align=\"center\">" + inputHtml2 + "</td>" +
+                                                                                   "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                  "<td align=\"center\">" + inputHtml2 + "</td>" +
+                                                                                  "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                             "</tr>");
+
+                }
+            },
+            setTongDaoIdx: function (idx) {
+                index = currentindex = idx;
+            },
+            getTongDaoIdx: function () {
+                return index;
+            },
+            getCurTongDaoIdx: function (obj) {
+                var id = $(obj).parents('table').eq(0).attr("id");
+                currentindex = id.split('_')[2];
+            }
+        }
+        var calculate = {
+            erdengbiaozhundianzubiaochenzhi: function (obj) {
+                //【二等标准电阻-标称值（Ω）】计算方式如下10000,100000
+                //【二等标准电阻-标称值（Ω）】=【被测电阻-标称值（Ω）】条件是：【二等标准电阻-标称值（Ω）】为10000,100000
+                TongDao.getCurTongDaoIdx(obj);
+               // var arry = this.getWuChaLength(obj);
+                var tr = $(obj).parents('tr');
+                var biaochenzhi = $(tr).children().eq(3).find('input').val();
+                if ((biaochenzhi == '10000' || biaochenzhi == '100000') && $(tr).children().eq(0).find('input').val() != "") {
+                    $(tr).children().eq(3).find('input').val($(tr).children().eq(0).find('input').val());
+                }
+
+            }, shijizhiRX: function (obj) {
+                //【实际值Rx((Ω)】计算方式如下：
+                //【实际值Rx(Ω)】=Rn(Ω)+(【Ax(V)】/【检定电流】-【An(V)】/【检定电流】)
+                //备注：【实际值Rx(Ω)】小数位数要求如下
+                //【被测电阻-标称值（Ω）】对【实际值Rx(Ω)】的小数位数是：10000对1位，100000对0位
+                var tr = $(obj).parents('tr');
+                var rn = $(tr).children().eq(5).find('input').val();
+                var axv = $(tr).children().eq(6).find('input').val();
+                var jiandingdianliu = $(tr).children().eq(9).find('input').val();
+                var anv = $(tr).children().eq(7).find('input').val();
+                var biaochenzhi = $(tr).children().eq(0).find('input').val();
+                var length = 2;
+                if (biaochenzhi != "" && biaochenzhi == "10000")
+                    length = 1;
+                if (biaochenzhi != "" && biaochenzhi == "100000")
+                    length = 0;
+                if (rn != "" && axv != "" && jiandingdianliu != "") {
+                    var shijizhiRx = (parseFloat(rn) + (parseFloat(axv) / parseFloat(jiandingdianliu) - parseFloat(anv) / parseFloat(jiandingdianliu))).toFixed(length);
+                    $(tr).children().eq(8).find('input').val(shijizhiRx);
+                }
+            }, jiandingdianliu: function (obj) {
+                //【被测电阻-标称值（Ω）】对【检定电流】是：10000对应0.0001,100000对应0.0001
+            }, getWuChaLength: function (obj) {
+                var arry = [];
+                var tr = $(obj).parents('tr').eq(0);
+                var yunxuWuCha = $("#tongdao_dy_" + currentindex + " tfoot:eq(0) tr:eq(0) td:eq(2)").find("input").val();
+                var yunxuWuCha1 = $("#tongdao_dy_" + currentindex + " tfoot:eq(0) tr:eq(0) td:eq(4)").find("input").val();
+                if (yunxuWuCha == "" && yunxuWuCha1 == "") {
+                    arry.push({
+                        length: 0,
+                        length1: 0
+                    });
+                }
+                else {
+                    arry.push({
+                        length: yunxuWuCha.split(".").length == 2 ? yunxuWuCha.split(".")[1].length : 0,
+                        length1: yunxuWuCha1.split(".").length == 2 ? yunxuWuCha1.split(".")[1].length : 0
+                    });
+                }
+                return arry;
+
+            }
+        }
+
+
+
+    </script>
 </body>
 </html>
