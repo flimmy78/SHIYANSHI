@@ -46,7 +46,7 @@ namespace Langben.App.Controllers
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
-        ///示值误差
+        ///示值误差 
         /// </summary>
         /// <param name="id">canshu</param>
         /// <param name="RULEID">规程id</param>
