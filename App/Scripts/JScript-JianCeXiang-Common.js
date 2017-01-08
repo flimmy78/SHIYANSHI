@@ -4,6 +4,19 @@ var JiSuanBuQueDingDu_MeiHang_Html = " <a href=\"javascript:void(0)\" class=\"ea
 //检测项目单位
 var DanWeiDDLHtmlArray = Array;
 DanWeiDDLHtmlArray = [
+     {
+         Code: 'EDingDianYa',
+         Remark: '额定电压',
+         Value: "<select class=\"my-combobox\" name=\"EDingDianYa\" style=\"width:150px; \">" +
+                 "<option value=\"50\">50</option> " +
+                  "<option value=\100\">100</option>" +
+                  "<option value=\"250\">250</option>  " +
+                  "<option value=\"500\">500</option>  " +
+                  "<option value=\"1000\">1000</option>  " +
+                  "<option value=\"2500\">2500</option>  " +
+                  "<option value=\"5000\">5000</option>  " +
+                 "</select>"
+     },
     {
         Code: 'DianLiu',
         Remark: '电流单位',
@@ -392,7 +405,7 @@ RuleAttributeArray = [{
             //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
             JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
             //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
-            JiSuanBuQueDingDu_DiBu:'N'
+            JiSuanBuQueDingDu_DiBu: 'N'
 
         }]
 }
@@ -422,7 +435,7 @@ RuleAttributeArray = [{
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 //JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
-                JiSuanBuQueDingDu_DiBu:'N'
+                JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
         ,
