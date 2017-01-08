@@ -188,6 +188,14 @@ function LianDongBuQueDingDu(obj)
                 if (LiangChengObj != null) {
                     LiangCheng = LiangChengObj.value;
                 }
+                else
+                {
+                    LiangChengID = JiSuanBuQueDingDuPara.LiangCheng + id;
+                    LiangChengObj = document.getElementById(LiangChengID);
+                    if (LiangChengObj != null) {
+                        LiangCheng = LiangChengObj.value;
+                    }
+                }
             }
         }
 
@@ -206,6 +214,14 @@ function LianDongBuQueDingDu(obj)
                 if (KObj != null) {
                     K = KObj.value;
                 }
+                else
+                {
+                    KID = JiSuanBuQueDingDuPara.K + "_" + tongDaoID + "_1_1";
+                    KObj = document.getElementById(KID);
+                    if (KObj != null) {
+                        K = KObj.value;
+                    }
+                }
             }
         }
           
@@ -223,6 +239,14 @@ function LianDongBuQueDingDu(obj)
                 XuanYongDianZuObj = document.getElementById(XuanYongDianZuID);
                 if (XuanYongDianZuObj != null) {
                     XuanYongDianZu = XuanYongDianZuObj.value;
+                }
+                else
+                {
+                    XuanYongDianZuID = JiSuanBuQueDingDuPara.XuanYongDianZu +id;
+                    XuanYongDianZuObj = document.getElementById(XuanYongDianZuID);
+                    if (XuanYongDianZuObj != null) {
+                        XuanYongDianZu = XuanYongDianZuObj.value;
+                    }
                 }
             }
         }
@@ -528,7 +552,11 @@ function JiSuanBuQueDingDuByType(BuQueDingDuZhiId, ShowBuQueDingDuId) {
     {
         BuQueDingDuZhi.value = ShowBuQueDingDu.value;      
     }
-
+    if (BuQueDingDuZhi.value.trim() == "")
+    {
+        ShowBuQueDingDu.value = "";
+        return;
+    }
     if (type == "B")//百分比模式
     {
         ShowBuQueDingDu.value = percentages(BuQueDingDuZhi.value, pos);

@@ -1120,16 +1120,17 @@ namespace Langben.Report
                                         {
                                             Dictionary<string, CellRangeAddress> cellAddressList = CopyRow_1(sheet_Source, sheet_Destination, 1, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
                                             int cIndex = 1;
+                                            string pingDing2 = "";//第二项数据
                                             if (cellAddressList != null && cellAddressList.Count > 0)
                                             {
                                                 foreach (CellRangeAddress c in cellAddressList.Values)
                                                 {
                                                     MYData d = buQueDingDu.pingding.FirstOrDefault();
-                                                    if (cIndex == 1 && pingdingIndex == 1)
+                                                    if (cIndex == 1 && pingdingIndex == 1)//第一行第一个数
                                                     {
                                                         sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue("评定点：");
                                                     }
-                                                    else if (cIndex == 1)
+                                                    else if (cIndex == 1)//除第一行外的第一个数
                                                     {
                                                         sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue("");
                                                     }
@@ -1138,9 +1139,20 @@ namespace Langben.Report
                                                         sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue(d.value);
                                                         buQueDingDu.pingding.Remove(d);
                                                     }
+                                                    if(cIndex==2)
+                                                    {
+                                                        pingDing2 = d.value;
+                                                    }
                                                     cIndex++;
                                                 }
-                                                pingdingIndex++;
+                                                if (pingDing2 == null || pingDing2.Trim() == "")//评定点第一项如果未输入整行隐藏
+                                                {
+                                                    HideRow(sheet_Destination, rowIndex_Destination, 1);
+                                                }
+                                                else
+                                                {
+                                                    pingdingIndex++;
+                                                }
                                             }
                                             rowIndex_Destination++;
 
@@ -1800,7 +1812,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                     //if (TableTemplateDic != null && TableTemplateDic.ContainsKey(iEntity.RULEID))
                     //{
                     //    TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
-                    if (iEntity != null && iEntity.RULEID== "598-1989_2_2"
+                    if (iEntity != null 
                         && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
 
@@ -1819,6 +1831,11 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
 
                         //RowIndex = paserData(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);
                         RowIndex = paserData_1(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);
+
+                        //为了表格底部没有线
+                        CopyRow(sheet_Source, sheet_Destination, 4, RowIndex, 1, true);
+                        HideRow(sheet_Destination, RowIndex, 1);
+                        RowIndex++;
 
 
                         //表格注
@@ -2828,7 +2845,8 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                                 sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).SetCellValue(value);
                                 if (d.mergedRowNum > 1)//多行单元格合并
                                 {
-                                    sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
+                                    sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));                                  
+
                                 }
 
                                 for (int j = 0; j < d.mergedRowNum; j++)//将已合并或者已使用的区域移除
