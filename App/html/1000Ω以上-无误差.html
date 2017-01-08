@@ -54,10 +54,10 @@
                 <tbody id="tbody_1">
                     <!--示例可删，默认无此行 -->
                     <tr>
-                        <td align="center"><input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
+                        <td align="center"><input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" onblur="calculate.erdengbiaozhundianzubiaochenzhi(this)" /></td>
                         <td align="center"><input name="LINGXIAN" id="LINGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
                         <td align="center"><input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
-                        <td align="center"><input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value=""onblur="calculate.erdengbiaozhundianzubiaochenzhi(this)"  /></td>
+                        <td align="center"><input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
                         <td align="center"><input name="LINGXIAN" id="LINGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
                         <td align="center"><input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value="" onblur="calculate.shijizhiRX(this)"/></td>
                         <td align="center"><input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value=""  onblur="calculate.shijizhiRX(this)"/></td>
@@ -141,10 +141,10 @@
                     // var rowIdx = $("#tongdao_dy_" + currentindex + " tbody").eq(0).find('tr').last().children().eq(0).text();
                     rowNumber = (rowNumber + 1);
                     $("#tongdao_dy_" + currentindex + " tbody").eq(0).append("<tr>" +
-                                                                                  "<td align=\"center\">" + inputHtml3 + "</td>" +
+                                                                                  "<td align=\"center\">" + inputHtml + "</td>" +
                                                                                   "<td align=\"center\">" + inputHtml3 + "</td>" +
                                                                                    "<td align=\"center\">" + inputHtml3 + "</td>" +
-                                                                                    "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                    "<td align=\"center\">" + inputHtml3 + "</td>" +
                                                                                    "<td align=\"center\">" + inputHtml3 + "</td>" +
                                                                                   "<td align=\"center\">" + inputHtml2 + "</td>" +
                                                                                   "<td align=\"center\">" + inputHtml2 + "</td>" +
@@ -174,7 +174,7 @@
                 TongDao.getCurTongDaoIdx(obj);
                // var arry = this.getWuChaLength(obj);
                 var tr = $(obj).parents('tr');
-                var biaochenzhi = $(tr).children().eq(3).find('input').val();
+                var biaochenzhi = $(tr).children().eq(0).find('input').val();
                 if ((biaochenzhi == '10000' || biaochenzhi == '100000') && $(tr).children().eq(0).find('input').val() != "") {
                     $(tr).children().eq(3).find('input').val($(tr).children().eq(0).find('input').val());
                 }
