@@ -16,6 +16,7 @@
 <script src="/Res/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script src="/Scripts/jquery.validate.js"></script>
 <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/Scripts/jianCeXiang.js"></script>
 </head>
 <body class="easyui-layout">
 <input type="hidden" id="rowindex" value="1" />
@@ -59,15 +60,14 @@
         <!--示例可删，默认无此行 -->
         <tr>
           <td align="center">
-            <input name="XIANGXIAN" id="XIANGXIAN_1_1_1"
-                    type="text" class="my-textbox input-width tr" value="" /></td>
+            <input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" onblur="calculate.erdengbiaozhundianzubiaochenzhi(this)" /></td>
           <td align="center"><input name="LINGXIAN" id="LINGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
           <td align="center"><input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
           <td align="center"><input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
           <td align="center"><input name="LINGXIAN" id="LINGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
-          <td align="center"><input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
-          <td align="center"><input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
-          <td align="center"><input name="LINGXIAN" id="LINGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
+          <td align="center"><input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value=""  onblur="calculate.shijizhi(this)"/></td>
+          <td align="center"><input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" onblur="calculate.celiangpingjunzhi(this)"/></td>
+          <td align="center"><input name="LINGXIAN" id="LINGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" onblur="calculate.celiangpingjunzhi(this)"/></td>
           <td align="center"><input name="LINGXIAN_1_1_" id="LINGXIAN_1_1_2" type="text" class="my-textbox input-width tr" value="" /></td>
           <td align="center"><input name="DIANLIU" id="DIANLIU_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
           <td align="center"><input name="XIANGXIAN" id="XIANGXIAN_1_1_1" type="text" class="my-textbox input-width tr" value="" /></td>
@@ -79,7 +79,7 @@
       </tbody>
       
       <tr>
-        <td colspan="12" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open'); set('1')">增加行数</a></td>
+        <td colspan="12" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick=" $('#dlg').dialog('open');TongDao.getCurTongDaoIdx(this)">增加行数</a></td>
       </tr>
       
       
@@ -110,7 +110,7 @@ R<sub>x</sub>=R<sub>n</sub>+(A<sub>x</sub>/I-A<sub>n</sub>/I)</td>
 					text:'确定',
 					iconCls:'icon-ok',
 					handler:function(){
-					  return CreateRow()
+					  return TongDao.addRow()
 					}
 				},{
 					text:'取消',
@@ -127,10 +127,192 @@ R<sub>x</sub>=R<sub>n</sub>+(A<sub>x</sub>/I-A<sub>n</sub>/I)</td>
 </div>
 <!--/增加量程弹层--> 
 
-<script type="text/javascript" language="javascript">
-      
-       
+    <script type="text/javascript" language="javascript">
+        var rowNumber = 1;
+        var index = 1;
+        var currentindex = 1;
+        var TongDao = {
+            addTongDao: function () {
+                var tongdao = $("#tongdao_dy_1").clone();
+                this.setTongDaoIdx(index + 1);
+                $("#tongdao").append($(tongdao).attr("id", "tongdao_dy_" + this.getTongDaoIdx()));
+            },
+            addRow: function () {
 
-</script>
+                var inputHtml = "<input name=\"\" id=\"\" type=\"text\" class=\"my-textbox input-width tr\" value=\"\" />";
+                var inputHtml2 = "<input name=\"\" id=\"\" type=\"text\" class=\"my-textbox input-width tr\" value=\"\" onblur=\"calculate.shijizhiRX(this)\"/>";
+                // var inputHtml3 = "<input name=\"\" id=\"\" type=\"text\" class=\"my-textbox input-width tr\" value=\"\" onblur=\"calculate.wuCha(this)\"/>";
+                var rows = $("#txtNumber").val();
+                for (var i = 0; i < rows; i++) {
+                    // var rowIdx = $("#tongdao_dy_" + currentindex + " tbody").eq(0).find('tr').last().children().eq(0).text();
+                    rowNumber = (rowNumber + 1);
+                    $("#tongdao_dy_" + currentindex + " tbody").eq(0).append("<tr>" +
+                                                                                  "<td align=\"center\"><input name=\"\" id=\"\" type=\"text\" class=\"my-textbox input-width tr\" value=\"\" onblur=\"calculate.erdengbiaozhundianzubiaochenzhi(this)\"/></td>" +
+                                                                                  "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                   "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                    "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                   "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                  "<td align=\"center\"><input name=\"\" id=\"\" type=\"text\" class=\"my-textbox input-width tr\" value=\"\" onblur=\"calculate.shijizhi(this)\"/></td>" +
+                                                                                  "<td align=\"center\"><input name=\"\" id=\"\" type=\"text\" class=\"my-textbox input-width tr\" value=\"\" onblur=\"calculate.celiangpingjunzhi(this)\"/></td>" +
+                                                                                    "<td align=\"center\"><input name=\"\" id=\"\" type=\"text\" class=\"my-textbox input-width tr\" value=\"\" onblur=\"calculate.celiangpingjunzhi(this)\"/></td>" +
+                                                                                   "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                  "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                  "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                                    "<td align=\"center\">" + inputHtml + "</td>" +
+                                                                             "</tr>");
+
+                }
+            },
+            setTongDaoIdx: function (idx) {
+                index = currentindex = idx;
+            },
+            getTongDaoIdx: function () {
+                return index;
+            },
+            getCurTongDaoIdx: function (obj) {
+                var id = $(obj).parents('table').eq(0).attr("id");
+                currentindex = id.split('_')[2];
+            }
+        }
+        var calculate = {
+            erdengbiaozhundianzubiaochenzhi: function (obj) {
+                //【二等标准电阻-标称值（Ω）】计算方式如下：
+                //【第一种：
+                //【二等标准电阻-标称值（Ω）】=【被测电阻-标称值（Ω）】*100，条件是【被测电阻-标称值（Ω）】为0.0001,0.001,0.01,0.1;
+                //第二种：
+                //其余情况【二等标准电阻-标称值（Ω）】=【被测电阻-标称值（Ω）】
+                TongDao.getCurTongDaoIdx(obj);
+                // var arry = this.getWuChaLength(obj);
+                var tr = $(obj).parents('tr');
+                var beicebiaochenzhi = $(tr).children().eq(0).find('input').val();
+                if ((beicebiaochenzhi == '0.0001' || beicebiaochenzhi == '0.001' || beicebiaochenzhi == '0.01' || beicebiaochenzhi == '0.1') && $(tr).children().eq(0).find('input').val() != "") {
+                    $(tr).children().eq(3).find('input').val(parseFloat(beicebiaochenzhi) * 100);
+                }
+                else {
+                    if (beicebiaochenzhi != "")
+                    {
+                        $(tr).children().eq(3).find('input').val(parseFloat(beicebiaochenzhi));
+                    }
+                }
+
+                this.shijizhi(obj);
+               // this.wucha(obj);
+                this.jiandingdianliu(obj);
+            }, shijizhi: function (obj) {
+                //【实际值((Ω)】计算方式如下：
+                //第一种：
+                //【实际值】=【被测电阻-标称值（Ω）】*10-6*(【测量平均值δx（×10-6）】+【二等标准电阻-δn(×10-6)】）+【被测电阻-标称值（Ω）】，条件是【被测电阻-标称值（Ω）】0.0001,0.001,0.01,0.1
+                // 第二种：
+                //其余情况【实际值】=【被测电阻-标称值（Ω）】*10-6*【测量平均值δx（×10-6）】+【被测电阻-标称值（Ω）】
+                // 备注：【实际值】小数位数要求如下
+                //【被测电阻-标称值（Ω）】对【实际值】的小数位数是：0.0001对9位,0.001对8位,0.01对7位,0.1对6位，1对5位,10对4位,100对3位,1000对2位,10000对1位，100000对0位
+
+                var tr = $(obj).parents('tr');
+                var arry = this.getbeiceLength(obj);
+                var beicebiaozhunzhi = $(tr).children().eq(0).find('input').val();
+                var celiangpingjunzhi = $(tr).children().eq(8).find('input').val();
+                var erdengbiaozhundianzu = $(tr).children().eq(5).find('input').val();
+
+                if ((beicebiaozhunzhi != "" && celiangpingjunzhi != "" && erdengbiaozhundianzu != "") && (beicebiaozhunzhi == "0.0001" || beicebiaozhunzhi == "0.001" || beicebiaozhunzhi != "0.01" || beicebiaozhunzhi != "0.1")) {
+                    var shijizhi =fomatFloat( parseFloat(beicebiaozhunzhi) * Math.pow(10, -6) * (parseFloat(celiangpingjunzhi) + parseFloat(erdengbiaozhundianzu)) +parseFloat( beicebiaozhunzhi),arry[0].length)
+                    $(tr).children().eq(9).find('input').val(shijizhi);
+                }
+                else {
+                    if (celiangpingjunzhi != "") {
+                        var shijizhi = fomatFloat(parseFloat(beicebiaozhunzhi) * Math.pow(10, -6) * parseFloat(celiangpingjunzhi) + parseFloat(beicebiaozhunzhi), arry[0].length)
+                        $(tr).children().eq(9).find('input').val(shijizhi);
+                    }
+
+                }
+               // this.wucha(obj);
+            }, jiandingdianliu: function (obj) {
+                //【被测电阻-标称值（Ω）】对【检定电流】是：0.0001对5,0.001对5,0.01对2,0.1对0.3，
+                //1对0.1位,10对0.03,100对0.01,1000对0.003，10000对应0.0001,100000对应0.0001
+                var tr = $(obj).parents('tr');
+                var beicedianzubiaochenzhi= $(tr).children().eq(0).find('input').val();
+                var jiandingdianliu=this.getjiandingdianliu(beicedianzubiaochenzhi);
+                if(jiandingdianliu!="")
+                {
+                    $(tr).children().eq(10).find('input').val(jiandingdianliu);
+                }
+
+            } , celiangpingjunzhi: function (obj) {
+                //【测量平均值】=(正向测量+反向测量)/2,无小数，四舍六入，逢五奇进偶不进，表格备注中
+                //公式
+                var tr = $(obj).parents('tr');
+                var zhengxiangceliang = $(tr).children().eq(6).find('input').val();
+                var fanxiangceliang = $(tr).children().eq(7).find('input').val();
+                if (zhengxiangceliang != "" && fanxiangceliang != "")
+                {
+                    $(tr).children().eq(8).find('input').val(fomatFloat((parseFloat(zhengxiangceliang) + parseFloat(fanxiangceliang)) / 2, 0));
+                    this.shijizhi(obj);
+                }
+            }, getjiandingdianliu: function (value) {
+                if(value!="")
+                {
+                    switch(value)
+                    {
+                        case "0.0001":
+                            return 5;
+                            break;
+                        case "0.001":
+                            return 5;
+                            break;
+                        case "0.01":
+                            return 2;
+                            break;
+                        case "0.1":
+                            return 0.3;
+                            break;
+                        case "1":
+                            return 0.1;
+                            break;
+                        case "10":
+                            return 0.03;
+                            break;
+                        case "100":
+                            return 0.01;
+                            break;
+                        case "1000":
+                            return 0.003;
+                            break;
+                        case "10000":
+                            return 0.0001;
+                            break;
+                        case "100000":
+                            return 0.0001;
+                            break;
+                    }
+                }
+
+            },
+            getbeiceLength: function (obj)
+            {
+                var tr = $(obj).parents('tr');
+                var arry = [];
+                var len = 5;
+                var beicedianzubiaochenzhi = $(tr).children().eq(0).find('input').val();
+                if (beicedianzubiaochenzhi != "") {
+
+                    var datas = beicedianzubiaochenzhi.split('.');
+                    if (datas.length > 1) {
+                        arry.push({
+                            length: 5 + datas[1].length
+                        });
+                    }
+                    else {
+                        arry.push({
+                            length: 5 - datas[0].length + 1
+                        })
+                    }
+                    return arry;
+                }
+
+            }
+        }
+
+
+
+    </script>
 </body>
 </html>
