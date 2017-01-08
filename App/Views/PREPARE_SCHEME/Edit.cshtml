@@ -164,16 +164,16 @@
                 return false;
             }
         }
-        if (isNull(VALIDITY_PERIOD)) {         
-            $.messager.alert('操作提示', "请输入有效期！", 'info');
-                return false;           
-        }
-        else {
-            if (!isNumber(VALIDITY_PERIOD)) {
+        //if (isNull(VALIDITY_PERIOD)) {         
+        //    $.messager.alert('操作提示', "请输入有效期！", 'info');
+        //        return false;           
+        //}
+        //else {
+        if (!isNull(VALIDITY_PERIOD) && !isNumber(VALIDITY_PERIOD)) {
                 $.messager.alert('操作提示', "请输入正确的有效期！", 'info');
                 return false;
             }
-        }
+        //}
         //获取空对象用于保存添加的信息
         $.ajax({
             type: 'post', //使用post方法访问后台
