@@ -1,0 +1,202 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "钮端电压稳定性";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    <tr>
+        <td>
+            <div class="mt10">
+                <span>钮端电压稳定性：</span>
+            </div>
+
+        </td>
+        <td>
+            <div class="mt10">
+                <input class="my-textbox input-width" value="" type="text" name="NDDYWDX" id="NDDYWDX_t_1_1">
+            </div>
+        </td>
+        <td colspan="5"></td>
+    </tr>
+    <tr>
+        <td>
+            <div class="mt10">
+                <span>额定电压：</span>
+            </div>
+
+        </td>
+        <td>
+            <div class="mt10">
+                <input class="my-textbox input-width" value="" type="text" name="EDDY" id="EDDY_t_1_1">
+            </div>
+        </td>
+        <td colspan="3"></td>
+        <th colspan="2">
+            <span>等级：</span>
+            <input name="zhidingwucha" id="zhidingwucha_t_1_1" type="text" class="my-textbox tc" value="" style="width:140px">
+        </th>
+    </tr>
+    <tr>
+        <th align="center" colspan="7">1分钟内开路电压输出值(V)</th>
+    </tr>
+    <tr>
+
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi" id="celiangzhi1_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi" id="celiangzhi2_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi" id="celiangzhi3_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi" id="celiangzhi4_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi" id="celiangzhi5_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi" id="celiangzhi6_t_1_1" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi" id="celiangzhi7_t_1_1" onblur="blurValue(this)">
+        </td>
+    </tr>
+    <tr>
+
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi" id="celiangzhi1_t_1_2" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi" id="celiangzhi2_t_1_2" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi" id="celiangzhi3_t_1_2" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi" id="celiangzhi4_t_1_2" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi" id="celiangzhi5_t_1_2" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi" id="celiangzhi6_t_1_2" onblur="blurValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="celiangzhi" id="celiangzhi7_t_1_2" onblur="blurValue(this)">
+        </td>
+    </tr>
+    <tr>
+        <td align="center" colspan="2">
+            最大指示值Umax(V)
+        </td>
+        <td align="center" colspan="2">
+            最小指示值Umin(V)
+        </td>
+        <td align="center" colspan="2">
+            开路电压稳定度(%)
+        </td>
+        <td align="center">
+            允许稳定度(%)
+        </td>
+
+    </tr>
+    <tr>
+        <td align="center" colspan="2">
+            <input class="my-textbox input-width" value="" type="text" name="ZDZSZ" id="ZDZSZ_t_1_1">
+        </td>
+        <td align="center" colspan="2">
+            <input class="my-textbox input-width" value="" type="text" name="ZXZSZ" id="ZXZSZ_t_1_1">
+        </td>
+        <td align="center" colspan="2">
+            <input class="my-textbox input-width" value="" type="text" name="KLDYWDD" id="KLDYWDD_t_1_1">
+        </td>
+        <td align="center">
+            <select class="my-combobox" name="X" id="X_t_1_1">
+                <option value="≤">≤</option>
+                <option value="＝">＝</option>
+            </select>
+            <input class="my-textbox input-width" value="" type="text" name="YXWDD" id="YXWDD_t_1_1">
+        </td>
+
+    </tr>
+</thead>
+
+<tbody id="tbody_moban">
+
+    <!--表体-->
+    <!--插入行的位置-->
+</tbody>
+
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //离开事件，用于计算
+        function blurValue(obj) {
+
+            //重新计算当前行
+                        var name = $(obj).attr("name");
+                        var id = $(obj).attr("id");
+                        id = id.substring(id.indexOf('_'));
+                        var tongdao = id.split('_')[1];
+            ////【最大指示值Umax(V)】为14个数据最大值
+            var els = document.getElementsByName("celiangzhi");
+            var max = els[0].value;
+            if (max != "") {
+                max = parseFloat(max);
+            }
+            //循环取最大值
+            for (var i = 0, j = els.length; i < j; i++) {
+                var val = els[i].value;
+                if (val != "") {
+                    val = parseFloat(val);
+                   // val = Math.abs(val);
+                    if (max == "") {
+                        max = val;
+                    } else if (max < val)
+                    { max = val; }
+                }
+
+            }
+            $("#ZDZSZ" + "_" + tongdao + "_1_1").val(max);
+            //【最小指示值Umin(V)】为14个数据最小值
+            var min = els[0].value;
+            if (min != "") {
+                min = parseFloat(min);
+            }
+            //循环取最小值
+            for (var i = 0, j = els.length; i < j; i++) {
+                var val = els[i].value;
+                if (val != "") {
+                    val = parseFloat(val);
+                    // val = Math.abs(val);
+                    if (min == "") {
+                        min = val;
+                    } else if (min > val)
+                    { min = val; }
+                }
+
+            }
+            $("#ZXZSZ" + "_" + tongdao + "_1_1").val(min);
+            //【开路电压稳定度(%)】=（最大指示值-最小指示值）/额定电压*100，例如当前额定电压为1000，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进
+            var EDDY = $("#EDDY" + "_" + tongdao + "_1_1").val();
+            EDDY = parseFloat(EDDY);
+            var KLDYWDD = accSub(max, min) / EDDY * 100;
+            $("#KLDYWDD" + "_" + tongdao + "_1_1").val(KLDYWDD);
+            //biaoZhunPianCha(obj);
+        }
+
+
+    </script>
+
+}
+
+@section TanKuang {
+    <!--弹框的位置-->
+    <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
+    <input type="hidden" id="txtPointLen" value="1" /><!--小数点位数-->
+}
+

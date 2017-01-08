@@ -10,16 +10,20 @@
     <tr>
         <th colspan="1" align="right">钮端电压：</th>
         <th colspan="7" align="left"><input class="my-textbox input-width" value="" type="text" name="HZ" id="HZ_t_1_1"></th>
+        <th colspan="2">
+            <span>等级：</span>
+            <input name="zhidingwucha" id="zhidingwucha_t_1_1" type="text" class="my-textbox tc" value="" style="width:140px">
+        </th>
     </tr>
     <tr>
-        <th  align="center">额定电压(V)</th>
-        <th  align="center">开路电压(V)</th>
-        <th  align="center">偏差(%)</th>
-        <th  align="center">允许偏差(%)</th>
-        <th  align="center">中值电压(V)</th>
-        <th  align="center">偏差(%)</th>
-        <th  align="center">允许偏差(%)</th>
-        <th align="center" >
+        <th align="center">额定电压(V)</th>
+        <th align="center">开路电压(V)</th>
+        <th align="center">偏差(%)</th>
+        <th align="center" colspan="3">允许偏差(%)</th>
+        <th align="center">中值电压(V)</th>
+        <th align="center">偏差(%)</th>
+        <th align="center">允许偏差(%)</th>
+        <th align="center">
             校准结果的不确定度<br>
             U(k =
             <select class="my-combobox" name="K" id="K_t_1_1">
@@ -35,7 +39,8 @@
 <tbody id="tbody_moban">
 
     <!--表体 默认行-->
-    <tr rowindex="1"><td class="classstyle" rowspan="1" align="center"> <select class="my-combobox" name="RANGE" style="width:150px; " onchange="changeValue(this)" id="RANGE_1_1_1"><option value="50">50</option> <option value="100">100</option><option value="250">250</option>  <option value="500">500</option>  <option value="1000">1000</option>  <option value="2500">2500</option>  <option value="5000">5000</option>  </select></td><td class="classstyle" rowspan="1" align="center"> <input type="text" class="my-textbox input-width" value="" id="OUTPUTVALUE_1_1_1" name="OUTPUTVALUE" onblur="changeValue(this);LianDongBuQueDingDu(this);"></td><td class="classstyle" rowspan="1" align="center"> <input type="text" class="my-textbox input-width" value="" id="READVALUE_1_1_1" name="READVALUE" onblur="blurValue(this);LianDongBuQueDingDu(this);"></td><td class="classstyle" rowspan="1" align="center"> <input type="text" class="my-textbox input-width" value="-10~10" id="ACTUALVALUE_1_1_1" name="ACTUALVALUE" onblur="changeValue(this);LianDongBuQueDingDu(this);"></td><td class="classstyle" rowspan="1" align="center"> <input type="text" class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_1" name="SHIJISHUCHUZHI" onblur="changeValue(this);LianDongBuQueDingDu(this);"></td><td class="classstyle" rowspan="1" align="center"> <input type="text" class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_1" name="RELATIVEERROR" onblur="blurValue(this);LianDongBuQueDingDu(this);"></td><td class="classstyle" rowspan="1" align="center"> <input type="text" class="my-textbox input-width" value="≥-10" id="UNCERTAINTYDEGREE_1_1_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this);LianDongBuQueDingDu(this);"></td><td class="classstyle" rowspan="1" align="center"> <input type="text" class="my-textbox input-width" value="" id="BUQUEDINGDU_1_1_1" name="BUQUEDINGDU" onblur="blurValue(this);LianDongBuQueDingDu(this);"></td></tr>
+    <tr rowindex="1"><td class="classstyle" rowspan="1" align="center"> 
+        <select class="my-combobox" name="RANGE" style="width:100px; " onchange="changeValue(this)" id="RANGE_1_1_1"><option value="50">50</option> <option value="100">100</option><option value="250">250</option>  <option value="500">500</option>  <option value="1000">1000</option>  <option value="2500">2500</option>  <option value="5000">5000</option>  </select></td><td class="classstyle" rowspan="1" align="center"> <input type="text" class="my-textbox input-width" value="" id="OUTPUTVALUE_1_1_1" name="OUTPUTVALUE" onblur="changeValue(this);LianDongBuQueDingDu(this);"></td><td class="classstyle" rowspan="1" align="center"> <input type="text" class="my-textbox input-width" value="" id="READVALUE_1_1_1" name="READVALUE" onblur="blurValue(this);LianDongBuQueDingDu(this);"></td><td class="classstyle" rowspan="1" align="center"> <input type="text" class="my-textbox input-width" value="-10" id="ACTUALVALUE1_1_1_1" name="ACTUALVALUE1" onblur="changeValue(this);LianDongBuQueDingDu(this);"></td><td class="classstyle" rowspan="1" align="center"> <input type="text" class="my-textbox input-width" value="~" id="ACTUALVALUE2_1_1_1" name="ACTUALVALUE2" onblur="changeValue(this);LianDongBuQueDingDu(this);"></td><td class="classstyle" rowspan="1" align="center"> <input type="text" class="my-textbox input-width" value="10" id="ACTUALVALUE3_1_1_1" name="ACTUALVALUE3" onblur="changeValue(this);LianDongBuQueDingDu(this);"></td><td class="classstyle" rowspan="1" align="center"> <input type="text" class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_1" name="SHIJISHUCHUZHI" onblur="changeValue(this);LianDongBuQueDingDu(this);"></td><td class="classstyle" rowspan="1" align="center"> <input type="text" class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_1" name="RELATIVEERROR" onblur="blurValue(this);LianDongBuQueDingDu(this);"></td><td class="classstyle" rowspan="1" align="center"> <input type="text" class="my-textbox input-width" value="≥-10" id="UNCERTAINTYDEGREE_1_1_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this);LianDongBuQueDingDu(this);"></td><td class="classstyle" rowspan="1" align="center"> <input type="text" class="my-textbox input-width" value="" id="BUQUEDINGDU_1_1_1" name="BUQUEDINGDU" onblur="blurValue(this);LianDongBuQueDingDu(this);"></td></tr>
     <!--插入行的位置-->
 </tbody>
 <tr>
@@ -67,7 +72,7 @@
                 </tr>
                 <tr>
                     <td align="center">
-                        <input  name="buquedingduer" id="buquedingduer_t_2_1"  type="text" class="my-textbox tr" value="" style="width:157px" />
+                        <input name="buquedingduer" id="buquedingduer_t_2_1" type="text" class="my-textbox tr" value="" style="width:157px" />
                     </td>
                     <td>
                         <i>U</i><small>rel</small>(k =
@@ -89,7 +94,7 @@
 
 @section JS {
     <script type="text/javascript" language="javascript">
-    
+
         //一个量程的需要这个方法
         //重写set方法，只准对增加空白行
         function set(tbodyIndex) {
@@ -126,7 +131,7 @@
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
                 //计算默认值
                 if (rowidx == 0) {
-                    //需要合并的列 
+                    //需要合并的列
                 }
 
                 //额定电压(V)
@@ -136,7 +141,11 @@
                 //偏差(%)
                 htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", ""));
                 //允许偏差(%)
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, "-10~10", "", "", "changeValue"));
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE1", HangHaoID, rowidx, "-10", "", "", "changeValue"));
+                //允许偏差(%)
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE2", HangHaoID, rowidx, "~", "", "", "changeValue"));
+                //允许偏差(%)
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE3", HangHaoID, rowidx, "10", "", "", "changeValue"));
                 //中值电压(V)
                 htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, "", "", "", "changeValue"));
                 //偏差(%)
@@ -188,33 +197,36 @@
 
             var T1Data = $(obj).parent().parent().find("#" + T1).val();//T1 额定电压
             var T2Data = $(obj).parent().parent().find("#" + T2).val();//T1 开路电压(V)
-     
+
             // var T3Data = $(obj).parent().parent().find("#" + T3).val(); //T3 偏差(%)
            // var T4Data = $(obj).parent().parent().find("#" + T4).val(); //T4 允许偏差(%)
-           // var T5Data = $(obj).parent().parent().find("#" + T5).val(); //T5 中值电压(V)
+            var T5Data = $(obj).parent().parent().find("#" + T5).val(); //T5 中值电压(V)
             //   var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T6 偏差(%)
             //   var T7Data = $(obj).parent().parent().find("#" + T7).val(); //T7  允许偏差(%)
             var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
             txtPointLen = parseFloat(txtPointLen);
-            // 【额定电压】数据下拉列表：50,100,250,500,1000,2500,5000																																																												
-            //【偏差】=（开路电压-额定电压）/额定电压*100，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进																																																												
-            //  第一个【允许偏差】默认-10~10																																																												
-            //  第二个【允许偏差】默认≥-10																																																												
-																																																																																																																																																																																																							
+            // 【额定电压】数据下拉列表：50,100,250,500,1000,2500,5000
+            //【偏差】=（开路电压-额定电压）/额定电压*100，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进
+            //  第一个【允许偏差】默认-10~10
+            //  第二个【允许偏差】默认≥-10
+
             if (T2Data != "" && T1Data != "") {
                 T2Data = parseFloat(T2Data);
                 T1Data = parseFloat(T1Data);
                 var jianfa = (accSub(T2Data, T1Data)) / T1Data * 100;
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
-                if (data > -10 && data<10){
-                    $(obj).parent().parent().find("#" + T3).val(data);
-                }
-                if (data >= -10 ) {
-                    $(obj).parent().parent().find("#" + T6).val(data);
-                }
+                $(obj).parent().parent().find("#" + T3).val(data);
+            }
+            //【偏差2】=（中值电压-额定电压）/额定电压*100，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进
+            if (T5Data != "" && T1Data != "") {
+                T5Data = parseFloat(T5Data);
+                T1Data = parseFloat(T1Data);
+                var jianfa = (accSub(T5Data, T1Data)) / T1Data * 100;
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                $(obj).parent().parent().find("#" + T6).val(data);
             }
         }
-    
+
     </script>
 
 }

@@ -1046,6 +1046,7 @@
     <Content Include="Views\PROJECTTEMPLET\JiBenWuChaJianDing.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\ShiZhiWuCha.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\NiuDuanDianYa.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\NiuDuanDianYaWenDingXing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
