@@ -1038,6 +1038,11 @@
     <Content Include="Views\PROJECTTEMPLET\QingXieYingXiang.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\KaiGuanBianChaWuBuQueDingDu.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\DianYaYouGongFenLiangWuGongFenLiang.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\JiBenWuChaHeShengJiangBianCha.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\JiBenWuChaHeShengJiangBianCha440.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\CeLiangWuCha.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\PianLiLingWei.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\FeiEDingFUZaiYngXiang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
