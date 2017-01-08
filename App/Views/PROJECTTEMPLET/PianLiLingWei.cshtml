@@ -1,0 +1,70 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "偏离零位";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+
+    <tr>
+        <td colspan="4">
+           
+                <span>偏离零位：</span>×
+
+                <select class="my-combobox" name="state" id="state_t_1_1" >
+                    <option value="合格" selected="selected">合格</option>
+                    <option value="不合格">不合格</option>
+
+                </select>
+            
+        </td>
+         
+    </tr>
+    <tr>
+        <td colspan="4">
+            Δymax= <input id="RANGE_t_1_1" name="RANGE" type="text" class="my-textbox tc" value="" style="width:180px">
+
+        </td>
+        <td colspan="4">
+            标度尺长度= <input id="statew_t_1_1" name="statew" type="text" class="my-textbox tc" value="" style="width:180px">
+
+        </td>
+
+    </tr>
+  
+</thead>
+<tbody>
+    <!--表体-->
+
+</tbody>
+<tfoot>
+    <!--表尾-->
+
+</tfoot>
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        //tbodyIndex通道
+        //thi 当前位置
+        function set(tbodyIndex, thi) {
+            // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
+            $("#hideDangQianTongDao").val(tbodyIndex); CreateRow();
+
+        }
+        function blurShuChuFanWeiZuiXiao(obj) {
+
+
+        }
+
+
+
+    </script>
+}
+@section TanKuang {
+    <!--弹框的位置-->
+    <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
+    <input type="hidden" id="txtPointLen" value="1" /><!--小数点位数-->
+}
