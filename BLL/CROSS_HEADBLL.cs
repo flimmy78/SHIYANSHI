@@ -122,17 +122,17 @@ namespace Langben.BLL
                     }
                     else if (count > 1)
                     {
-                        using (TransactionScope transactionScope = new TransactionScope())
+                        //using (TransactionScope transactionScope = new TransactionScope())
                         { 
                             repository.Create(db, entitys);
                             if (count == repository.Save(db))
                             {
-                                transactionScope.Complete();
+                                //transactionScope.Complete();
                                 return true;
                             }
                             else
                             {
-                                Transaction.Current.Rollback();
+                                //Transaction.Current.Rollback();
                             }                          
                         }
                     }
@@ -176,17 +176,17 @@ namespace Langben.BLL
             {
                 if (deleteCollection != null)
                 { 
-                        using (TransactionScope transactionScope = new TransactionScope())
+                        //using (TransactionScope transactionScope = new TransactionScope())
                         { 
                             repository.Delete(db, deleteCollection);
                             if (deleteCollection.Length == repository.Save(db))
                             {
-                                transactionScope.Complete();
+                                //transactionScope.Complete();
                                 return true;
                             }
                             else
                             {
-                                Transaction.Current.Rollback();
+                                //Transaction.Current.Rollback();
                             }
                         }
                     }
@@ -218,17 +218,17 @@ namespace Langben.BLL
                     }
                     else if (count > 1)
                     {
-                        using (TransactionScope transactionScope = new TransactionScope())
+                        //using (TransactionScope transactionScope = new TransactionScope())
                         { 
                             repository.Edit(db, entitys);
                             if (count == repository.Save(db))
                             {
-                                transactionScope.Complete();
+                                //transactionScope.Complete();
                                 return true;
                             }
                             else
                             {
-                                Transaction.Current.Rollback();
+                                //Transaction.Current.Rollback();
                             }
                         }
                     }

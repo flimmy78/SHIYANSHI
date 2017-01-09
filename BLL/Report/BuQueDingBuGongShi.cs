@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Langben.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-
+using Langben.BLL;
 namespace Langben.BLL.Report
 {
     /// <summary>
@@ -12,7 +12,7 @@ namespace Langben.BLL.Report
     public class BuQueDingBuGongShi
     {
         /// <summary>
-        /// 获取计算不确定度
+        /// 获取计算不确定度UNCERTAINTYTABLE
         /// </summary>
         /// <param name="ID">不确定组ID</param>
         /// <param name="ShuChuShiJiZhi">输出实际值、显示值</param>
@@ -23,6 +23,9 @@ namespace Langben.BLL.Report
         /// <returns></returns>
         public static string GetBuQueDingDu(string ID, string ShuChuShiJiZhi, string ShuChuShiJiZhiDanWei, string LiangCheng, string K, string XuanYongDianZu)
         {
+            UNCERTAINTYTABLEBLL bll = new BLL.UNCERTAINTYTABLEBLL();
+            List<UNCERTAINTYTABLE> data = bll.GetByASSESSMENTITEM("METERING_STANDARD_DEVICEID", "", "", "");
+
             if (!string.IsNullOrWhiteSpace(ShuChuShiJiZhi))
             {
                 return "10.123";

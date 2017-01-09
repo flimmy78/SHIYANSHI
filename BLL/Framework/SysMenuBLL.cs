@@ -59,7 +59,7 @@ namespace Langben.BLL
                 if (deleteCollection != null)
                 {
 
-                    using (TransactionScope transactionScope = new TransactionScope())
+                    //using (TransactionScope transactionScope = new TransactionScope())
                     {
                         repository.Delete(db, deleteCollection);
                         if (deleteCollection.Length == repository.Save(db))
@@ -74,12 +74,12 @@ namespace Langben.BLL
                             GetMenus2(null, flags);
                             db.SaveChanges();
 
-                            transactionScope.Complete();
+                            //transactionScope.Complete();
                             return true;
                         }
                         else
                         {
-                            Transaction.Current.Rollback();
+                            //Transaction.Current.Rollback();
                         }
                     }
 
