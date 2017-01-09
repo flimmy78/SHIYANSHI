@@ -1815,12 +1815,12 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                     if (iEntity != null 
                         && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
-
+                        //&& (iEntity.RULEID== "780-1992_3_2_2" || iEntity.RULEID== "780-1992_3_2_1")
                         if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
 
                         {
                             //为了相同项表格底部没有线
-                            CopyRow(sheet_Source, sheet_Destination, 4, RowIndex, 1, true);
+                            CopyRow(sheet_Source, sheet_Destination, 3, RowIndex, 1, true);
                             HideRow(sheet_Destination, RowIndex, 1);
                             RowIndex++;
                         }
@@ -1833,7 +1833,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                         RowIndex = paserData_1(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);
 
                         //为了表格底部没有线
-                        CopyRow(sheet_Source, sheet_Destination, 4, RowIndex, 1, true);
+                        CopyRow(sheet_Source, sheet_Destination, 3, RowIndex, 1, true);
                         HideRow(sheet_Destination, RowIndex, 1);
                         RowIndex++;
 
@@ -2204,6 +2204,9 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             int speStartIndex = sourceCell.StringCellValue.IndexOf("{0}");//动态字符位置
             string value = "";
             string SpecialStr = "";
+
+            int notItalicStartIndex = -1;//非斜体开始位置
+            int notItalicEndIndex = -1;//非斜体结束位置
             //有动态数据
             if (speStartIndex >= 0 && DongTaiShuJuList != null && DongTaiShuJuList.Count > 0 && rowInfoList != null && rowInfoList.Count > 0 &&
                 rowInfoList.FirstOrDefault().Cells != null)
@@ -2236,6 +2239,9 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             {
                 speStartIndex = value.Trim().ToUpper().IndexOf("U(K");
                 SpecialStr = "U(K";
+
+                notItalicStartIndex = speStartIndex+1;//非斜体开始位置
+                notItalicEndIndex = speStartIndex + 2;//非斜体结束位置
             }
             else if (value != null && value.Trim() != "" && value.Trim().ToUpper().IndexOf("UI") >= 0)
             {
@@ -2267,9 +2273,23 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                     if (endIndex < 0)
                     {
                         endIndex = 0;
-                    }
+                    }                   
+
                     result.ApplyFont(startIndex, endIndex, normalFont);
                     #endregion
+
+                    #region 设置非斜体
+                    if (notItalicStartIndex >= 0 && notItalicEndIndex >= 0)
+                    {
+                        HSSFFont notItalicFont = (HSSFFont)workbook.CreateFont();
+                        notItalicFont.IsItalic = false;
+                        notItalicFont.FontName = "宋体";
+
+                        result.ApplyFont(notItalicStartIndex, notItalicEndIndex, notItalicFont);
+
+                    }
+
+                    #endregion 
 
                     #region 设置下标
                     if (spec.SubscriptLastCount > 0)

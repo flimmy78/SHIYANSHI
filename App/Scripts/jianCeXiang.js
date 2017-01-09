@@ -258,7 +258,7 @@ function LianDongBuQueDingDu(obj)
             dataType: "json", //返回json格式的数据
             url: '/PROJECTTEMPLET/GetSuanBuQueDingDu', //要访问的后台地址
             contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
-            data: { 'RuleID': RuleID, 'ShuChuShiJiZhi': ShuChuShiJiZhi, 'ShuChuShiJiZhiDanWei': ShuChuShiJiZhiDanWei, 'LiangCheng': LiangCheng, 'K': K, 'XuanYongDianZu': XuanYongDianZu },
+            data: { 'ID': RuleID, 'ShuChuShiJiZhi': ShuChuShiJiZhi, 'ShuChuShiJiZhiDanWei': ShuChuShiJiZhiDanWei, 'LiangCheng': LiangCheng, 'K': K, 'XuanYongDianZu': XuanYongDianZu },
             //data: { 'RuleID': RuleID },
             beforeSend: function () {
                 //InitAlertJS();
