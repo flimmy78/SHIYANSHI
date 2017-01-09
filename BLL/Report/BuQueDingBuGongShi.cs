@@ -11,7 +11,7 @@ namespace Langben.BLL.Report
     public class BuQueDingBuGongShi
     {
         /// <summary>
-        /// 获取计算不确定度
+        /// 获取计算不确定度UNCERTAINTYTABLE
         /// </summary>
         /// <param name="ID">不确定组ID</param>
         /// <param name="ShuChuShiJiZhi">输出实际值、显示值</param>
