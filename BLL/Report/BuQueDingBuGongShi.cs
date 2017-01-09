@@ -14,14 +14,14 @@ namespace Langben.BLL.Report
         /// <summary>
         /// 获取计算不确定度
         /// </summary>
-        /// <param name="RuleID">检测项ID</param>
+        /// <param name="ID">不确定组ID</param>
         /// <param name="ShuChuShiJiZhi">输出实际值、显示值</param>
         /// <param name="ShuChuShiJiZhiDanWei">输出实际值单位、显示值单位</param>
         /// <param name="LiangCheng">量程</param>
         /// <param name="K"></param>
         /// <param name="XuanYongDianZu">选用电阻</param>
         /// <returns></returns>
-        public static string GetBuQueDingDu(string RuleID, string ShuChuShiJiZhi, string ShuChuShiJiZhiDanWei, string LiangCheng, string K, string XuanYongDianZu)
+        public static string GetBuQueDingDu(string ID, string ShuChuShiJiZhi, string ShuChuShiJiZhiDanWei, string LiangCheng, string K, string XuanYongDianZu)
         {
             if (!string.IsNullOrWhiteSpace(ShuChuShiJiZhi))
             {
