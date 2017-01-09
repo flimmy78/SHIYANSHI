@@ -48,17 +48,17 @@ namespace Langben.BLL
             {
                 if (deleteCollection != null)
                 {
-                    using (TransactionScope transactionScope = new TransactionScope())
+                    //using (TransactionScope transactionScope = new TransactionScope())
                     {
                         repository.EditSTORAGEINSTRUCTI_STATU(db, deleteCollection);
                         if (deleteCollection.Length == repository.Save(db))
                         {
-                            transactionScope.Complete();
+                            //transactionScope.Complete();
                             return true;
                         }
                         else
                         {
-                            Transaction.Current.Rollback();
+                            //Transaction.Current.Rollback();
                         }
                     }
                 }

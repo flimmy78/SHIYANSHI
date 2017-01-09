@@ -137,16 +137,16 @@ namespace Langben.BLL
         {
             try
             {
-                using (TransactionScope transactionScope = new TransactionScope())
+                //using (TransactionScope transactionScope = new TransactionScope())
                 { 
                     if (Create(ref validationErrors, db, entity))
                     {
-                        transactionScope.Complete();
+                        //transactionScope.Complete();
                         return true;
                     }
                     else
                     {
-                        Transaction.Current.Rollback();
+                        //Transaction.Current.Rollback();
                     }
                 }
             }
@@ -172,7 +172,7 @@ namespace Langben.BLL
                     int flag = 0, count = entitys.Count();
                     if (count > 0)
                     {
-                        using (TransactionScope transactionScope = new TransactionScope())
+                        //using (TransactionScope transactionScope = new TransactionScope())
                         {
                             foreach (var entity in entitys)
                             {
@@ -182,13 +182,13 @@ namespace Langben.BLL
                                 }
                                 else
                                 {
-                                    Transaction.Current.Rollback();
+                                    //Transaction.Current.Rollback();
                                     return false;
                                 }
                             }
                             if (count == flag)
                             {
-                                transactionScope.Complete();
+                                //transactionScope.Complete();
                                 return true;
                             }
                         }
@@ -235,17 +235,17 @@ namespace Langben.BLL
                 if (deleteCollection != null)
                 { 
 
-                        using (TransactionScope transactionScope = new TransactionScope())
+                        //using (TransactionScope transactionScope = new TransactionScope())
                         {
                             repository.Delete(db, deleteCollection);
                             if (deleteCollection.Length == repository.Save(db))
                             {
-                                transactionScope.Complete();
+                                //transactionScope.Complete();
                                 return true;
                             }
                             else
                             {
-                                Transaction.Current.Rollback();
+                                //Transaction.Current.Rollback();
                             }
                         }
                     
@@ -273,7 +273,7 @@ namespace Langben.BLL
                     int flag = 0, count = entitys.Count();
                     if (count > 0)
                     {
-                        using (TransactionScope transactionScope = new TransactionScope())
+                        //using (TransactionScope transactionScope = new TransactionScope())
                         {
                             foreach (var entity in entitys)
                             {
@@ -283,13 +283,13 @@ namespace Langben.BLL
                                 }
                                 else
                                 {
-                                    Transaction.Current.Rollback();
+                                    //Transaction.Current.Rollback();
                                     return false;
                                 }
                             }
                             if (count == flag)
                             {
-                                transactionScope.Complete();
+                                //transactionScope.Complete();
                                 return true;
                             }
                         }
@@ -378,16 +378,16 @@ namespace Langben.BLL
         {           
             try
             {
-                using (TransactionScope transactionScope = new TransactionScope())
+                //using (TransactionScope transactionScope = new TransactionScope())
                 { 
                     if (Edit(ref validationErrors, db, entity))
                     {
-                        transactionScope.Complete();
+                        //transactionScope.Complete();
                         return true;
                     }
                     else
                     {
-                        Transaction.Current.Rollback();
+                        //Transaction.Current.Rollback();
                     }
                 }
             }
@@ -452,7 +452,7 @@ namespace Langben.BLL
                 where !string.IsNullOrWhiteSpace(f) && !f.Contains(split)
                 select f);
 
-            using (TransactionScope transactionScope = new TransactionScope())
+            //using (TransactionScope transactionScope = new TransactionScope())
             {
                 //利用编码机制，查询出所有的菜单
                 var codes = db.SysMenu.Where(w => data.Contains(w.Id)).Select(s => s.Remark).Distinct();
@@ -501,7 +501,7 @@ namespace Langben.BLL
                     }
                 }
                 db.SaveChanges();
-                transactionScope.Complete();
+                //transactionScope.Complete();
                 return true;
 
             }

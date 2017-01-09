@@ -583,9 +583,7 @@
     <Content Include="Scripts\echarts.js" />
     <Content Include="Scripts\numeral.js" />
     <Content Include="Scripts\shine.js" />
-    <Content Include="Xml\TableTemplate - 复制%282%29.xml" />
     <Content Include="Xml\TableTemplate单相.xml" />
-    <Content Include="Xml\TableTemplate - 复制.xml" />
     <Content Include="Xml\TableTemplate.xml" />
     <Content Include="Xml\TableTemplate1.xml" />
     <Content Include="Xml\TableTemplate_JianDing.xml" />
@@ -1002,11 +1000,8 @@
     <Content Include="Views\STANDARDCHOICE\Details.cshtml" />
     <Content Include="Views\STANDARDCHOICE\Edit.cshtml" />
     <Content Include="Views\STANDARDCHOICE\Index.cshtml" />
-    <Content Include="Views\VSHIYANSHIGONGZUOLIANG\Index.cshtml" />
     <Content Include="Views\PREPARE_SCHEME\TestPROJECTTEMPLET.cshtml" />
     <Content Include="Views\Shared\Echart.cshtml" />
-    <Content Include="Views\VSHIYANSHIGONGZUOLIANG\ZhengShu.cshtml" />
-    <Content Include="Views\VSHIYANSHIGONGZUOLIANG\RenYuan.cshtml" />
     <Content Include="Views\VGONGZUOSHICHANG\Index.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\IndexUA.cshtml" />
     <Content Include="Views\PREPARE_SCHEME\Testxml.cshtml" />
@@ -1047,6 +1042,13 @@
     <Content Include="Views\PROJECTTEMPLET\ShiZhiWuCha.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\NiuDuanDianYa.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\NiuDuanDianYaWenDingXing.cshtml" />
+    <Content Include="Views\VSHIYANSHIGONGZUOLIANG\Index.cshtml" />
+    <Content Include="Views\VSHIYANSHIGONGZUOLIANG\RenYuan.cshtml" />
+    <Content Include="Views\VSHIYANSHIGONGZUOLIANG\ZhengShu.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BianBiShiZhi.cshtml" />
+    <Content Include="Views\METERING_STANDARD_DEVICE\IndexSelect.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\PingHengFuZaiShiYouGongDianNengWuCha.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\GongZuoDianliuDianYa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

@@ -143,16 +143,16 @@ namespace Langben.BLL
         {
             try
             {
-                using (TransactionScope transactionScope = new TransactionScope())
+                //using (TransactionScope transactionScope = new TransactionScope())
                 {
                     if (Create(ref validationErrors, db, entity))
                     {
-                        transactionScope.Complete();
+                        //transactionScope.Complete();
                         return true;
                     }
                     else
                     {
-                        Transaction.Current.Rollback();
+                        //Transaction.Current.Rollback();
                     }
                 }
             }
@@ -178,7 +178,7 @@ namespace Langben.BLL
                     int flag = 0, count = entitys.Count();
                     if (count > 0)
                     {
-                        using (TransactionScope transactionScope = new TransactionScope())
+                        //using (TransactionScope transactionScope = new TransactionScope())
                         {
                             foreach (var entity in entitys)
                             {
@@ -188,13 +188,13 @@ namespace Langben.BLL
                                 }
                                 else
                                 {
-                                    Transaction.Current.Rollback();
+                                    //Transaction.Current.Rollback();
                                     return false;
                                 }
                             }
                             if (count == flag)
                             {
-                                transactionScope.Complete();
+                                //transactionScope.Complete();
                                 return true;
                             }
                         }
@@ -241,17 +241,17 @@ namespace Langben.BLL
                 if (deleteCollection != null)
                 {
 
-                    using (TransactionScope transactionScope = new TransactionScope())
+                    //using (TransactionScope transactionScope = new TransactionScope())
                     {
                         repository.Delete(db, deleteCollection);
                         if (deleteCollection.Length == repository.Save(db))
                         {
-                            transactionScope.Complete();
+                            //transactionScope.Complete();
                             return true;
                         }
                         else
                         {
-                            Transaction.Current.Rollback();
+                            //Transaction.Current.Rollback();
                         }
                     }
 
@@ -279,7 +279,7 @@ namespace Langben.BLL
                     int flag = 0, count = entitys.Count();
                     if (count > 0)
                     {
-                        using (TransactionScope transactionScope = new TransactionScope())
+                        //using (TransactionScope transactionScope = new TransactionScope())
                         {
                             foreach (var entity in entitys)
                             {
@@ -289,13 +289,13 @@ namespace Langben.BLL
                                 }
                                 else
                                 {
-                                    Transaction.Current.Rollback();
+                                    //Transaction.Current.Rollback();
                                     return false;
                                 }
                             }
                             if (count == flag)
                             {
-                                transactionScope.Complete();
+                                //transactionScope.Complete();
                                 return true;
                             }
                         }
@@ -397,16 +397,16 @@ namespace Langben.BLL
         {
             try
             {
-                using (TransactionScope transactionScope = new TransactionScope())
+                //using (TransactionScope transactionScope = new TransactionScope())
                 {
                     if (Edit(ref validationErrors, db, entity))
                     {
-                        transactionScope.Complete();
+                        //transactionScope.Complete();
                         return true;
                     }
                     else
                     {
-                        Transaction.Current.Rollback();
+                        //Transaction.Current.Rollback();
                     }
                 }
             }
@@ -473,23 +473,27 @@ namespace Langben.BLL
             if (!string.IsNullOrWhiteSpace(id))
             {
                 List<STANDARDCHOICE> stalist = repository2.GetByRefPREPARE_SCHEMEID(db, id).ToList();//查询标准器选表数据
-                string[] ID = stalist.Select(s => s.METERING_STANDARD_DEVICEID).ToArray();//筛选出标准器主表需要的id
-                msdtlinst = repository.GetByRefIDLIST(db, ID).ToList();//通过筛选出来的id到标准器主表中查询数据
-
-
-                //筛选出符合要求的数据
-                foreach (var item in msdtlinst)
+                if (stalist.Count > 0)
                 {
-                    item.ALLOWABLE_ERROR = (from a in item.ALLOWABLE_ERROR
-                                            from b in stalist
-                                            where a.GROUPS == Convert.ToInt32(b.GROUPS) && a.METERING_STANDARD_DEVICEID == b.METERING_STANDARD_DEVICEID
-                                            select a
-                     ).ToList();
-                    item.METERING_STANDARD_DEVICE_CHECK = (from a in item.METERING_STANDARD_DEVICE_CHECK
-                                                           from b in stalist
-                                                           where a.GROUPS == Convert.ToInt32(b.GROUPS) && a.METERING_STANDARD_DEVICEID == b.METERING_STANDARD_DEVICEID
-                                                           select a
-                   ).ToList();
+                    string[] ID = stalist.Select(s => s.METERING_STANDARD_DEVICEID).ToArray();//筛选出标准器主表需要的id
+                    msdtlinst = repository.GetByRefIDLIST(db, ID).ToList();//通过筛选出来的id到标准器主表中查询数据
+                    if (msdtlinst.Count > 0)
+                    {
+                        //筛选出符合要求的数据
+                        foreach (var item in msdtlinst)
+                        {
+                            item.ALLOWABLE_ERROR = (from a in item.ALLOWABLE_ERROR
+                                                    from b in stalist
+                                                    where a.GROUPS == Convert.ToInt32(b.GROUPS) && a.METERING_STANDARD_DEVICEID == b.METERING_STANDARD_DEVICEID
+                                                    select a
+                             ).ToList();
+                            item.METERING_STANDARD_DEVICE_CHECK = (from a in item.METERING_STANDARD_DEVICE_CHECK
+                                                                   from b in stalist
+                                                                   where a.GROUPS == Convert.ToInt32(b.GROUPS) && a.METERING_STANDARD_DEVICEID == b.METERING_STANDARD_DEVICEID
+                                                                   select a
+                           ).ToList();
+                        }
+                    }
                 }
             }
             return msdtlinst;

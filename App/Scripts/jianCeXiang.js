@@ -545,7 +545,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     if (selectCode != null && selectCode.trim() != "") {
         var selectHtml = GetDanWeiDDLHtml(name, selectCode);//单位下拉框html
         if (blurValue != null && blurValue.trim() != "") {
-            htmlString.push($(selectHtml).attr("onchange", +blurValue + "(this)").attr("name", name).attr("id", id)[0].outerHTML);
+            htmlString.push($(selectHtml).attr("onchange", blurValue + "(this)").attr("name", name).attr("id", id)[0].outerHTML);
         } else {
             htmlString.push($(selectHtml).attr("name", name).attr("id", id)[0].outerHTML);
         }

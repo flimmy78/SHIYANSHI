@@ -211,10 +211,20 @@
                     <ul class="clear mt10">
                         <li class="fl mr10">
                             评定项：
-                            <select class="my-combobox" name="ASSESSMENTITEM">
+                            <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" id="ASSESSMENTITEM">
                                 <option value="">请选择</option>
-                                <option value="三相四线">三相四线</option>
-                                <option value="三相三线">三相三线</option>
+                                <option value="5720A交流电流测量">5720A交流电流测量</option>
+                                <option value="5720A交流电压测量单相">5720A交流电压测量单相</option>
+                                <option value="5720A交流电压测量三相">5720A交流电压测量三相</option>
+                                <option value="5720A直流电流测量">5720A直流电流测量</option>
+                                <option value="5720A直流电压测量">5720A直流电压测量</option>
+                                <option value="5720A直流电阻输出">5720A直流电阻输出</option>
+                                <option value="8508A交流电流输出">85080A交流电流输出</option>
+                                <option value="8508A交流电压变换器">8508A交流电压变换器</option>
+                                <option value="8508A交流电压输出">8508A交流电压输出</option>
+                                <option value="8508A直流电流输出">8508A直流电流输出</option>
+                                <option value="8508A直流电压输出">8508A直流电压输出</option>
+                                <option value="8508A直流电阻测量">8508A直流电阻测量</option>
                             </select>
                         </li>
                         <li class="fl mr10">
@@ -223,9 +233,8 @@
                         </li>
                         <li class="fl mr10">
                             起单位：
-                            <select class="my-combobox" name="THEUNIT">
-                                <option value="">请选择</option>
-                                <option value="V1">V1</option>
+                            <select class="my-combobox" name="THEUNIT" id="THEUNIT">
+                                <option value="">请选择</option>                         
                             </select>
                         </li>
                         <li class="fl mr10">
@@ -244,9 +253,8 @@
                         </li>
                         <li class="fl mr10">
                             止单位：
-                            <select class="my-combobox" name="ENDUNIT">
+                            <select class="my-combobox" name="ENDUNIT" id="ENDUNIT">
                                 <option value="">请选择</option>
-                                <option value="V2">V2</option>
                             </select>
                         </li>
                         <li class="fl mr10">
@@ -267,7 +275,10 @@
                             起单位：
                             <select class="my-combobox" name="THEUNITFREQUENCY">
                                 <option value="">请选择</option>
-                                <option value="V3">V3</option>
+                                <option value="Hz">Hz</option>
+                                <option value="kHz">kHz</option>
+                                <option value="MHz">MHz</option>
+                                <option value="GHz">GHz</option>
                             </select>
                         </li>
                         <li class="fl mr10">
@@ -288,7 +299,10 @@
                             频率止单位：
                             <select class="my-combobox" name="ENDUNITFREQUENCY">
                                 <option value="">请选择</option>
-                                <option value="V4">V4</option>
+                                <option value="Hz">Hz</option>
+                                <option value="kHz">kHz</option>
+                                <option value="MHz">MHz</option>
+                                <option value="GHz">GHz</option>
                             </select>
                         </li>
                         <li class="fl mr10">
@@ -308,9 +322,8 @@
                         </li>
                         <li class="fl mr10">
                             指标1单位：
-                            <select class="my-combobox" name="INDEX1UNIT">
+                            <select class="my-combobox" name="INDEX1UNIT" id="INDEX1UNIT">
                                 <option value="">请选择</option>
-                                <option value="V5">V5</option>
                             </select>
                         </li>
                         <li class="fl mr10">
@@ -319,9 +332,8 @@
                         </li>
                         <li class="fl mr10">
                             指标2单位：
-                            <select class="my-combobox" name="INDEX2UNIT">
+                            <select class="my-combobox" name="INDEX2UNIT" id="INDEX2UNIT">
                                 <option value="">请选择</option>
-                                <option value="V6">V6</option>
                             </select>
                         </li>
                         <li class="fl mr10">
@@ -444,6 +456,56 @@
 
 }
 <script type="text/javascript">
+    //下拉框选择事件
+    function gradeChange(ex) {
+        var zhi = $(ex).val();      
+        if (zhi == "直流电流" || zhi == "交流电流") {        
+            getCity($("#THEUNIT"));
+            getCity($("#ENDUNIT")); 
+            getCity($("#INDEX1UNIT"));
+            getCity($("#INDEX2UNIT"));         
+            tianjiazhi("THEUNIT,ENDUNIT,INDEX1UNIT,INDEX2UNIT","电流")
+        }
+        else if (zhi == "直流电压" || zhi == "交流电压") {
+            getCity($("#THEUNIT"));
+            getCity($("#ENDUNIT"));
+            getCity($("#INDEX1UNIT"));
+            getCity($("#INDEX2UNIT"));
+            tianjiazhi("THEUNIT,ENDUNIT,INDEX1UNIT,INDEX2UNIT", "电压")
+        }
+        else if (zhi == "直流电阻") {
+            getCity($("#THEUNIT"));
+            getCity($("#ENDUNIT"));
+            getCity($("#INDEX1UNIT"));
+            getCity($("#INDEX2UNIT"));
+            tianjiazhi("THEUNIT,ENDUNIT,INDEX1UNIT,INDEX2UNIT", "电阻")
+        }
+    }
+    function tianjiazhi(sun, lei) {
+        var lst = sun.split(',');
+        if (lei=="电流") {
+            for (var i = 0; i < lst.length; i++) {
+                $("#" + lst[i] + "").append('<option value="A">A</option><option value="mA">mA</option><option value="μA">μA</option><option value="nA">nA</option><option value="pA">pA</option><option value="kA">kA</option>');
+            }
+        }
+       else if (lei == "电压") {
+           for (var i = 0; i < lst.length; i++) {
+               $("#" + lst[i] + "").append('<option value="V">V</option><option value="mV">mV</option><option value="μV">μV</option><option value="kV">kV</option><option value="MV">MV</option>');
+            }
+        }
+       else if (lei == "电阻") {
+           for (var i = 0; i < lst.length; i++) {
+               $("#" + lst[i] + "").append('<option value="Ω">Ω</option><option value="TΩ">TΩ</option><option value="GΩ">GΩ</option><option value="MΩ">MΩ</option><option value="kΩ">kΩ</option><option value="mΩ">mΩ</option><option value="μΩ">μΩ</option>');
+            }
+        }
+    }
+    function getCity(City) {
+        $(City).empty();
+        $("<option></option>")
+                .val("")
+                .text("请选择")
+                .appendTo($(City));
+    }
     //时间校验
     function jaoyanshijian(e) {
         var zhi = $(e).val();
