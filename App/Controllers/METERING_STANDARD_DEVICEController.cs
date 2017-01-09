@@ -44,6 +44,16 @@ namespace Langben.App.Controllers
             return View();
         }
         /// <summary>
+        /// 母版页上的选择按钮
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult IndexSelect(string id)
+        {
+            ViewBag.shiyanshi = id;
+            return View();
+        }
+        /// <summary>
         /// 查看详细
         /// </summary>
         /// <param name="id"></param>
