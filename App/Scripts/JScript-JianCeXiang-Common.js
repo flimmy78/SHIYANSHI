@@ -4,7 +4,38 @@ var JiSuanBuQueDingDu_MeiHang_Html = " <a href=\"javascript:void(0)\" class=\"ea
 //检测项目单位
 var DanWeiDDLHtmlArray = Array;
 DanWeiDDLHtmlArray = [
-            {
+          {
+              Code: 'EDGZDianliu',
+              Remark: '额定工作电流',
+              Value: "<select class=\"my-combobox\" name=\"EDGZDianliu\" style=\"width:50px; \">" +
+                      "<option value=\"5\">5</option> " +
+                      "<option value=\"1\">1</option>" +
+                     "</select>"
+          }
+        , {
+            Code: 'JieLun',
+            Remark: '结论',
+            Value: "<select class=\"my-combobox\" name=\"JieLun\" style=\"width:50px; \">" +
+                    "<option value=\"合格\">合格</option> " +
+                    "<option value=\"不合格\">不合格</option>" +
+                   "</select>"
+        }
+         , {
+             Code: 'DianLiuBaiFenBi',
+             Remark: '额定电流百分比',
+             Value: "<select class=\"my-combobox\" name=\"DianLiuBaiFenBi\" style=\"width:50px; \">" +
+                     "<option value=\"1%\">1%</option> " +
+                     "<option value=\"5%\">5%</option>" +
+                     "<option value=\"20%\">20%</option> " +
+                     "<option value=\"50%\">50%</option>" +
+                     "<option value=\"80%\">80%</option> " +
+                     "<option value=\"100%\">100%</option>" +
+                    "<option value=\"120%\">120%</option> " +
+
+                    "</select>"
+         }
+   ,
+  {
                 Code: 'Cos',
                 Remark: 'cosθ',
                 Value: "<select class=\"my-combobox\" name=\"Cos\" style=\"width:79px; \">" +
