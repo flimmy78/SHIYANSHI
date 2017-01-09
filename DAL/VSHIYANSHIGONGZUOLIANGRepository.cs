@@ -60,23 +60,113 @@ namespace Langben.DAL
                 dANWEI = "";
             }
 
-            List<SHIYANSHIGONGZUO_Result> data = null ;
-            if (listQuery[0].ToString()== "SYANSHI")
+            return db.SHIYANSHIGONGZUO(sTARTDATE, eNDDATE, dANWEI).ToList();
+
+        }
+        /// <summary>
+        /// 人员查询的数据
+        /// </summary>
+        /// <param name="SysEntities">数据访问的上下文</param>
+        /// <param name="order">排序字段</param>
+        /// <param name="sort">升序asc（默认）还是降序desc</param>
+        /// <param name="search">查询条件</param>
+        /// <param name="listQuery">额外的参数</param>
+        /// <returns></returns>      
+        public List<RENYUANGONGZUOLIANG_Result> GetDataRE(SysEntities db, string order, string sort, string search, params object[] listQuery)
+        {
+            Nullable<System.DateTime> sTARTDATE = null; Nullable<System.DateTime> eNDDATE = null; string dANWEI = string.Empty;
+
+            Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
+            if (queryDic != null && queryDic.Count > 0)
             {
-                 data = db.SHIYANSHIGONGZUO(sTARTDATE, eNDDATE, dANWEI).ToList();
+                foreach (var item in queryDic)
+                {
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
+                    {
+                        sTARTDATE = Convert.ToDateTime(item.Value);
+                        continue;
+                    }
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(End_Time)) //结束时间+1
+                    {
+                        eNDDATE = Convert.ToDateTime(item.Value).AddDays(1);
+                        continue;
+                    }
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "SHOULIDANWEI") //
+                    {
+                        dANWEI = item.Value;
+                        continue;
+                    }
+                }
             }
-            else if (listQuery[0].ToString() == "ZhengShu")
+
+
+            if (sTARTDATE == null)
             {
-
+                sTARTDATE = System.DateTime.Now.AddYears(-11);
             }
-            else if (listQuery[0].ToString()== "RenYuan")
+            if (eNDDATE == null)
             {
+                eNDDATE = System.DateTime.Now.AddYears(11);
+            }
+            if (string.IsNullOrWhiteSpace(dANWEI))
+            {
+                dANWEI = "";
+            }
 
+            return db.RENYUANGONGZUOLIANG(sTARTDATE, eNDDATE, dANWEI).ToList();
+
+        }
+        /// <summary>
+        /// 证书查询的数据
+        /// </summary>
+        /// <param name="SysEntities">数据访问的上下文</param>
+        /// <param name="order">排序字段</param>
+        /// <param name="sort">升序asc（默认）还是降序desc</param>
+        /// <param name="search">查询条件</param>
+        /// <param name="listQuery">额外的参数</param>
+        /// <returns></returns>      
+        public List<ZHENGSHUHAOLEIBIE_Result> GetDataZH(SysEntities db, string order, string sort, string search, params object[] listQuery)
+        {
+            Nullable<System.DateTime> sTARTDATE = null; Nullable<System.DateTime> eNDDATE = null; string dANWEI = string.Empty;
+
+            Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
+            if (queryDic != null && queryDic.Count > 0)
+            {
+                foreach (var item in queryDic)
+                {
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
+                    {
+                        sTARTDATE = Convert.ToDateTime(item.Value);
+                        continue;
+                    }
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(End_Time)) //结束时间+1
+                    {
+                        eNDDATE = Convert.ToDateTime(item.Value).AddDays(1);
+                        continue;
+                    }
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "SHOULIDANWEI") //
+                    {
+                        dANWEI = item.Value;
+                        continue;
+                    }
+                }
             }
 
 
+            if (sTARTDATE == null)
+            {
+                sTARTDATE = System.DateTime.Now.AddYears(-11);
+            }
+            if (eNDDATE == null)
+            {
+                eNDDATE = System.DateTime.Now.AddYears(11);
+            }
+            if (string.IsNullOrWhiteSpace(dANWEI))
+            {
+                dANWEI = "";
+            }
 
-            return data; 
+            return db.ZHENGSHUHAOLEIBIE(sTARTDATE, eNDDATE, dANWEI).ToList();
 
         }
         /// <summary>

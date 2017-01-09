@@ -42,16 +42,18 @@
             //nowrap: false,
             striped: true,
             collapsible: true,
-            url: '/VSHIYANSHIGONGZUOLIANG/GetData/' + "RenYuan", //获取数据的url
+            url: '/VSHIYANSHIGONGZUOLIANG/GetDataRE', //获取数据的url
             sortName: 'ID',
             sortOrder: 'desc',
             idField: 'ID',
-            onLoadSuccess: function (data) {              
+            onLoadSuccess: function (data) {
                 var rows = $('#flexigridData').datagrid('getRows');
                 var WEITUODAN = 0;
                 var JIANDINGWANCHENG = 0;
                 var SHEBEIGUZHANG = 0;
                 var PIZHUNTONGGUO = 0;
+                var PIZHUNBUTONGGUO = 0;
+                var SHENHEBUTONGGUO = 0;
                 var HEGE = 0;
                 var BUHEGE = 0;
                 var CHAOQI = 0;
@@ -60,6 +62,8 @@
                 var JIANDINGWANCHENG1 = [];
                 var SHEBEIGUZHANG1 = [];
                 var PIZHUNTONGGUO1 = [];
+                var PIZHUNBUTONGGUO1 = [];
+                var SHENHEBUTONGGUO1 = [];
                 var HEGE1 = [];
                 var BUHEGE1 = [];
                 var CHAOQI1 = [];
@@ -71,6 +75,8 @@
                     JIANDINGWANCHENG += parseFloat(rows[i].JIANDINGWANCHENG);
                     SHEBEIGUZHANG += parseFloat(rows[i].SHEBEIGUZHANG);
                     PIZHUNTONGGUO += parseFloat(rows[i].PIZHUNTONGGUO);
+                    PIZHUNBUTONGGUO += parseFloat(rows[i].PIZHUNBUTONGGUO);
+                    SHENHEBUTONGGUO += parseFloat(rows[i].SHENHEBUTONGGUO);
                     HEGE += parseFloat(rows[i].HEGE);
                     BUHEGE += parseFloat(rows[i].BUHEGE);
                     CHAOQI += parseFloat(rows[i].CHAOQI);
@@ -78,16 +84,18 @@
                     JIANDINGWANCHENG1.push(rows[i].JIANDINGWANCHENG);
                     SHEBEIGUZHANG1.push(rows[i].SHEBEIGUZHANG);
                     PIZHUNTONGGUO1.push(rows[i].PIZHUNTONGGUO);
+                    PIZHUNBUTONGGUO1.push(rows[i].PIZHUNBUTONGGUO);
+                    SHENHEBUTONGGUO1.push(rows[i].SHENHEBUTONGGUO);
                     HEGE1.push(rows[i].HEGE);
                     BUHEGE1.push(rows[i].BUHEGE);
                     CHAOQI1.push(rows[i].CHAOQI);
                 }
-                data1.push(WEITUODAN1, JIANDINGWANCHENG1, SHEBEIGUZHANG1, PIZHUNTONGGUO1, HEGE1, BUHEGE1, CHAOQI1);
+                data1.push(WEITUODAN1, JIANDINGWANCHENG1, SHEBEIGUZHANG1, PIZHUNTONGGUO1, PIZHUNBUTONGGUO1, SHENHEBUTONGGUO1, HEGE1, BUHEGE1, CHAOQI1);
                 var myChart = echarts.init(document.getElementById('main'));
-                 
-                
-                
-                var dims = ['委托数量','检定完成数量','设备故障数量','批准通过数量','合格报告数量','不合格报告数量','超期数量']
+
+
+
+                var dims = ['委托数量', '检定完成数量', '设备故障数量', '批准通过数量', '批准不通过数量', '审核不通过数量', '合格报告数量', '不合格报告数量', '超期数量']
 
                 myChart.setOption({
 
@@ -107,7 +115,7 @@
                     }],
                     yAxis: [{
                         type: 'value',
-                        name: '实验室别工作量统计图表分析',
+                        name: '人员别工作量统计图表分析',
                     }, ],
                     series: [{
                         name: dims[0],
@@ -138,22 +146,34 @@
                         type: 'bar',
                         data: data1[6],
                     }
+                    , {
+                        name: dims[7],
+                        type: 'bar',
+                        data: data1[7],
+                    }
+                    , {
+                        name: dims[8],
+                        type: 'bar',
+                        data: data1[8],
+                    }
                     ]
                 });
 
 
 
-                $('#flexigridData').datagrid('appendRow', { ID: '<b>统计：</b>', WEITUODAN: WEITUODAN, JIANDINGWANCHENG: JIANDINGWANCHENG, SHEBEIGUZHANG: SHEBEIGUZHANG, PIZHUNTONGGUO: PIZHUNTONGGUO, HEGE: HEGE, BUHEGE: BUHEGE, CHAOQI: CHAOQI });
+                $('#flexigridData').datagrid('appendRow', { ID: '<b>统计：</b>', WEITUODAN: WEITUODAN, JIANDINGWANCHENG: JIANDINGWANCHENG, SHEBEIGUZHANG: SHEBEIGUZHANG, PIZHUNTONGGUO: PIZHUNTONGGUO, PIZHUNBUTONGGUO: PIZHUNBUTONGGUO, SHENHEBUTONGGUO: SHENHEBUTONGGUO, HEGE: HEGE, BUHEGE: BUHEGE, CHAOQI: CHAOQI });
             },
             columns: [[
-					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 120 }
-					, { field: 'WEITUODAN', title: '@Html.DisplayNameFor(model => model.WEITUODAN)', width: 120 }
-					, { field: 'JIANDINGWANCHENG', title: '@Html.DisplayNameFor(model => model.JIANDINGWANCHENG)', width: 120 }
-					, { field: 'SHEBEIGUZHANG', title: '@Html.DisplayNameFor(model => model.SHEBEIGUZHANG)', width: 120 }
-					, { field: 'PIZHUNTONGGUO', title: '@Html.DisplayNameFor(model => model.PIZHUNTONGGUO)', width: 120 }
-					, { field: 'HEGE', title: '@Html.DisplayNameFor(model => model.HEGE)', width: 120 }
-					, { field: 'BUHEGE', title: '@Html.DisplayNameFor(model => model.BUHEGE)', width: 120 }
-					, { field: 'CHAOQI', title: '@Html.DisplayNameFor(model => model.CHAOQI)', width: 120 }
+					{ field: 'ID', title: '检定/校准员', width: 120 }
+					, { field: 'WEITUODAN', title: '委托单', width: 120 }
+					, { field: 'JIANDINGWANCHENG', title: '检定完成数量', width: 120 }
+					, { field: 'SHEBEIGUZHANG', title: '设备故障数量', width: 120 }
+					, { field: 'PIZHUNTONGGUO', title: '批准通过数量', width: 120 }
+                    , { field: 'PIZHUNBUTONGGUO', title: '批准不通过数量', width: 120 }
+                    , { field: 'SHENHEBUTONGGUO', title: '审核不通过数量', width: 120 }
+					, { field: 'HEGE', title: '合格', width: 120 }
+					, { field: 'BUHEGE', title: '不合格', width: 120 }
+					, { field: 'CHAOQI', title: '超期数量', width: 120 }
             ]],
             pagination: false,
             rownumbers: false
