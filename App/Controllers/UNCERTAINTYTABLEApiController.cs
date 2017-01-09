@@ -413,7 +413,7 @@ namespace Langben.App.Controllers
                 //计量标准装置检定/校准信息
                 foreach (var it in msd.Where(w => w.GROUPS == item))
                 {
-                    ASSESSMENTITEM += it.ASSESSMENTITEM + ",";
+                    ASSESSMENTITEM = it.ASSESSMENTITEM ;
                     THERANGESCOPE += it.THERANGESCOPE + it.THEUNIT + it.THERELATIONSHIP + it.ENDRANGESCOPE + it.ENDUNIT + it.ENDRELATIONSHIP + ",";
                     THEFREQUENCY += it.THEFREQUENCY + it.THEUNITFREQUENCY + it.THERELATIONSHIPFREQUENCY + it.ENDFREQUENCY + it.ENDUNITFREQUENCY + it.ENDRELATIONSHIPFREQUENCY + ",";
                     INDEX1 += it.INDEX1 + it.INDEX1UNIT + ",";

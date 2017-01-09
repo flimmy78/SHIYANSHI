@@ -81,6 +81,7 @@
 
     //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
     function flexiSelect() {
+        debugger
 
         var rows = $('#flexigridData').datagrid('getSelections');
         if (rows.length == 0) {
@@ -90,11 +91,11 @@
 
         var arr = [];
         for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].ID);
+            arr.push(rows[i].ASSESSMENTITEM);
         }
         arr.push("^");
         for (var i = 0; i < rows.length; i++) {
-            arr.push(rows[i].INDEX2UNIT);
+            arr.push(rows[i].ASSESSMENTITEM);
         }
         //主键列和显示列之间用 ^ 分割   每一项用 , 分割
         if (arr.length > 0) {//一条数据和多于一条

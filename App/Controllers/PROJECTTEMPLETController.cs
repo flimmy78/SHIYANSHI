@@ -18,7 +18,45 @@ namespace Langben.App.Controllers
     /// </summary>
     public class PROJECTTEMPLETController : BaseController
     {//
+     /// <summary>
+     ///工作电流
+     /// </summary>
+     /// <param name="id">canshu</param>
+     /// <param name="RULEID">规程id</param>
+     /// <param name="SCHEMEID">方案id</param>
+     /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+     /// <returns></returns>
+        public ActionResult GongZuoDianliuDianYa(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
 
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///平衡负载时有功电能误差
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult PingHengFuZaiShiYouGongDianNengWuCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///钮端电压稳定性
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult BianBiShiZhi(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
         /// <summary>
         ///钮端电压稳定性
         /// </summary>
