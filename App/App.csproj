@@ -1049,6 +1049,7 @@
     <Content Include="Views\METERING_STANDARD_DEVICE\IndexSelect.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\PingHengFuZaiShiYouGongDianNengWuCha.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\GongZuoDianliuDianYa.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\BuPingHengFuZaiShiYouGongDianNengWuCha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
