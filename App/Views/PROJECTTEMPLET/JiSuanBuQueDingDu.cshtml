@@ -93,7 +93,7 @@ else
                 <input tag="only" class="my-textbox " value="" style="width:200px" name="" id="txtBuQueDingA">
                 <input tag="only" class="my-textbox " value="" style="width:100px" name="" id="txtValue" onblur="biaozhunpiancha()">
             </div>
-            <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tongdao_moban">
+            <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="aaaa">
                 <thead>
                     <tr>
                         <th align="center" width="150">y<sub>1</sub>/y<sub>6</sub></th>
@@ -338,7 +338,7 @@ else
     }
     function getData() {
         var data = "";
-        $("#tongdao_moban tr:not(:first)").each(function () {
+        $("#aaaa tr:not(:first)").each(function () {
             $($(this).children()).each(function () {
                 if ($(this).find('input').val() != "")
                     data += $(this).find('input').val() + ",";

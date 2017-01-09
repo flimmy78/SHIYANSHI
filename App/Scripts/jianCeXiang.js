@@ -457,7 +457,7 @@ function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
 //classstyle样式类名
 //unit在输入框后面的单位
 //blurValue数表离开输入框之后触发的事件
-function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValue) {
+function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValue,selectCode) {
 
     if (blurValue == null || blurValue == '') {
         blurValue = 'blurValue';
@@ -485,10 +485,17 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     }
     var htmlString = [];
     htmlString.push("<td class='" + classstyle + "' rowspan='" + rowspan + "' align='center' > ");
-
-    htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='" + blurValue + "(this);LianDongBuQueDingDu(this);'/>");
-    //htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='alert(\"1\");alert(\"2\");'/>");
-    
+    //增加下拉框类型
+    if (selectCode != null && selectCode.trim() != "") {
+        var selectHtml = GetDanWeiDDLHtml(name, selectCode);//单位下拉框html
+        if (blurValue != null && blurValue.trim() != "") {
+            htmlString.push($(selectHtml).attr("onchange", +blurValue + "(this)").attr("name", name).attr("id", id)[0].outerHTML);
+        } else {
+            htmlString.push($(selectHtml).attr("name", name).attr("id", id)[0].outerHTML);
+        }
+    } else {
+        htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='" + blurValue + "(this);LianDongBuQueDingDu(this);'/>");
+     }
    if (ddlHtml != null && ddlHtml.trim() != "") {
         var AttributeValue = GetAttributeValue("LianDongDanWeiDDL");
 

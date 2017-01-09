@@ -5236,7 +5236,6 @@
     </TableTemplate>
 
     <!--数表单相-->
-
     <TableTemplate>
       <RuleID>410-1994_6_3</RuleID>
       <DataRowIndex>617</DataRowIndex>
@@ -6245,7 +6244,6 @@
         </RowInfo>
       </TableFooterList>
     </TableTemplate>
-
     <!--单相二次加入-->
     <TableTemplate>
       <RuleID>724-1991_2_3</RuleID>
