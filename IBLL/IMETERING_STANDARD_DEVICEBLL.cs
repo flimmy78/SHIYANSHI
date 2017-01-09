@@ -101,6 +101,11 @@ namespace Langben.IBLL
         [OperationContract]
         bool Edit(ref Common.ValidationErrors validationErrors, METERING_STANDARD_DEVICE entity);
 
+        /// <summary>
+        /// 通过预备方案id查询标准器
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [OperationContract]
         List<METERING_STANDARD_DEVICE> GetPREPARE_SCHEME( string id);
     }

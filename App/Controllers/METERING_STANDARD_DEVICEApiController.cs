@@ -26,7 +26,6 @@ namespace Langben.App.Controllers
         /// <returns></returns>
         public Common.ClientResult.DataResult PostData([FromBody]GetDataParam getParam)
         {
-            m_BLL.GetPREPARE_SCHEME("17010110511490515926e1b30d2da");
             int total = 0;
             List<METERING_STANDARD_DEVICE> queryData = m_BLL.GetByParam(null, getParam.page, getParam.rows, getParam.order, getParam.sort, getParam.search, ref total);
             var data = new Common.ClientResult.DataResult
@@ -337,9 +336,10 @@ namespace Langben.App.Controllers
             string VALID_TO = string.Empty;//有效期
             string MAXCATEGORIES = string.Empty;//最大允许误差
             decimal? GROUPS = 0;//组别
+            string CATEGORY = string.Empty;//类型
             //分组
             var data = (from f in msd.METERING_STANDARD_DEVICE_CHECK
-                        select f.CATEGORY).Distinct();
+                        select f.GROUPS).Distinct();
 
 
             List<App.Models.ALLOWABLE_ERRORData> alldata = new List<App.Models.ALLOWABLE_ERRORData>();
@@ -349,8 +349,9 @@ namespace Langben.App.Controllers
                 CERTIFICATE_NUM = null;
                 VALID_TO = null;
                 MAXCATEGORIES = null;
+                
                 //计量标准装置检定/校准信息
-                foreach (var it in msd.METERING_STANDARD_DEVICE_CHECK.Where(w => w.CATEGORY == item))
+                foreach (var it in msd.METERING_STANDARD_DEVICE_CHECK.Where(w => w.GROUPS == item))
                 {
                     TimeSpan ts = Convert.ToDateTime(it.VALID_TO) - DateTime.Now;
 
@@ -362,9 +363,10 @@ namespace Langben.App.Controllers
                         VALID_TO += Convert.ToDateTime(it.VALID_TO).ToString("yyyy-MM-dd") + ",";
                     }
                     GROUPS = it.GROUPS;
+                    CATEGORY = it.CATEGORY;
                 }
                 //最大允许误差信息
-                foreach (var it in msd.ALLOWABLE_ERROR.Where(w => w.CATEGORY == item))
+                foreach (var it in msd.ALLOWABLE_ERROR.Where(w => w.GROUPS == item))
                 {
                     if (!string.IsNullOrWhiteSpace(VALID_TO))
                     {
@@ -394,7 +396,7 @@ namespace Langben.App.Controllers
                         ID = id,//id
                         MAXCATEGORIES = MAXCATEGORIES,//最大允许误差
                         GROUPS = GROUPS,
-                        CATEGORY = item
+                        CATEGORY = CATEGORY
                     });
                 }
             }
