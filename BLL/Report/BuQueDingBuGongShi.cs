@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Langben.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
- 
+using Langben.BLL;
 namespace Langben.BLL.Report
 {
     /// <summary>
@@ -22,6 +23,9 @@ namespace Langben.BLL.Report
         /// <returns></returns>
         public static string GetBuQueDingDu(string ID, string ShuChuShiJiZhi, string ShuChuShiJiZhiDanWei, string LiangCheng, string K, string XuanYongDianZu)
         {
+            UNCERTAINTYTABLEBLL bll = new BLL.UNCERTAINTYTABLEBLL();
+            List<UNCERTAINTYTABLE> data = bll.GetByASSESSMENTITEM("METERING_STANDARD_DEVICEID", "", "", "");
+
             if (!string.IsNullOrWhiteSpace(ShuChuShiJiZhi))
             {
                 return "10.123";
