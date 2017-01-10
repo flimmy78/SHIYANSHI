@@ -1058,6 +1058,7 @@
     <Content Include="Views\UNCERTAINTYTABLE2\Index.cshtml" />
     <Content Include="Views\UNCERTAINTYTABLE2\IndexSet.cshtml" />
     <Content Include="Views\UNCERTAINTYTABLE2\IndexUB.cshtml" />
+    <Content Include="Views\METERING_STANDARD_DEVICE\Create2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
