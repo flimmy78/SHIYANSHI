@@ -431,7 +431,7 @@ else
     //由于html无法获取value，重新给outerHTML赋值
     function SetAllControlHtml() {
 
-        $("input[type='text']").each(function () {
+        $("input").each(function () {
 
             //除了隐藏模板中的输入框，其他所有的输入框
             if (this.id != "") {
