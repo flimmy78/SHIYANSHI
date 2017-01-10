@@ -219,6 +219,35 @@ function LianDongBuQueDingDu(obj)
             LiangCheng = "";
         }
 
+        //量程单位
+        var LiangChengDanWei = "";
+        if (JiSuanBuQueDingDuPara.LiangCheng != null && JiSuanBuQueDingDuPara.LiangCheng.trim() != "" && JiSuanBuQueDingDuPara.LiangCheng != "undefined") {
+
+            var LiangChengDanWeiID = JiSuanBuQueDingDuPara.LiangCheng + "_UNIT_" + tongDaoID + "_" + liangChengID;
+            var LiangChengDanWeiObj = document.getElementById(LiangChengDanWeiID);
+            if (LiangChengDanWeiObj != null) {
+                LiangChengDanWei = LiangChengDanWeiObj.value;
+            }
+            else {
+                LiangChengDanWeiID = JiSuanBuQueDingDuPara.LiangCheng + "_UNIT_" + tongDaoID + "_" + liangChengID + "_1";
+                LiangChengDanWeiObj = document.getElementById(LiangChengDanWeiID);
+                if (LiangChengDanWeiObj != null) {
+                    LiangChengDanWei = LiangChengDanWeiObj.value;
+                }
+                else {
+                    LiangChengDanWeiID = JiSuanBuQueDingDuPara.LiangCheng + id;
+                    LiangChengDanWeiObj = document.getElementById(LiangChengDanWeiID);
+                    if (LiangChengDanWeiObj != null) {
+                        LiangChengDanWei = LiangChengDanWeiObj.value;
+                    }
+                }
+            }
+        }
+        if (LiangChengDanWei == "NaN") {
+            LiangChengDanWei = "";
+        }
+
+
         //K
         var K = "";
         if (JiSuanBuQueDingDuPara.K != null && JiSuanBuQueDingDuPara.K.trim() != "" && JiSuanBuQueDingDuPara.K != "undefined") {
@@ -277,6 +306,34 @@ function LianDongBuQueDingDu(obj)
             XuanYongDianZu = "";
         }
 
+        //选用电阻单位属性名称
+        var XuanYongDianZuDanWei = "";
+        if (JiSuanBuQueDingDuPara.XuanYongDianZu != null && JiSuanBuQueDingDuPara.XuanYongDianZu.trim() != "" && JiSuanBuQueDingDuPara.XuanYongDianZu != "undefined") {
+
+            var XuanYongDianZuDanWeiID = JiSuanBuQueDingDuPara.XuanYongDianZu + "_UNIT_" + tongDaoID + "_" + liangChengID;
+            var XuanYongDianZuDanWeiObj = document.getElementById(XuanYongDianZuDanWeiID);
+            if (XuanYongDianZuDanWeiObj != null) {
+                XuanYongDianZuDanWei = XuanYongDianZuDanWeiObj.value;
+            }
+            else {
+                XuanYongDianZuDanWeiID = JiSuanBuQueDingDuPara.XuanYongDianZu + "_UNIT_" + tongDaoID + "_" + liangChengID + "_1";
+                XuanYongDianZuDanWeiObj = document.getElementById(XuanYongDianZuDanWeiID);
+                if (XuanYongDianZuDanWeiObj != null) {
+                    XuanYongDianZuDanWei = XuanYongDianZuDanWeiObj.value;
+                }
+                else {
+                    XuanYongDianZuDanWeiID = JiSuanBuQueDingDuPara.XuanYongDianZu +"_UNIT"+ id;
+                    XuanYongDianZuDanWeiObj = document.getElementById(XuanYongDianZuDanWeiID);
+                    if (XuanYongDianZuDanWeiObj != null) {
+                        XuanYongDianZuDanWei = XuanYongDianZuDanWeiObj.value;
+                    }
+                }
+            }
+        }
+        if (XuanYongDianZuDanWei == "NaN") {
+            XuanYongDianZuDanWei = "";
+        }
+
         //输出示值、标准值属性名称
         var ShuChuShiZhi = "";
         if (JiSuanBuQueDingDuPara.ShuChuShiZhi != null && JiSuanBuQueDingDuPara.ShuChuShiZhi.trim() != "" && JiSuanBuQueDingDuPara.ShuChuShiZhi != "undefined") {
@@ -291,6 +348,19 @@ function LianDongBuQueDingDu(obj)
             ShuChuShiZhi = "";
         }
 
+        //输出示值单位、标准值单位属性名称
+        var ShuChuShiZhiDanWei = "";
+        if (JiSuanBuQueDingDuPara.ShuChuShiZhi != null && JiSuanBuQueDingDuPara.ShuChuShiZhi.trim() != "" && JiSuanBuQueDingDuPara.ShuChuShiZhi != "undefined") {
+
+            var ShuChuShiZhiDanWeiID = JiSuanBuQueDingDuPara.ShuChuShiZhi + "_UNIT" + id;
+            var ShuChuShiZhiDanWeiObj = document.getElementById(ShuChuShiZhiDanWeiID);
+            if (ShuChuShiZhiDanWeiObj != null) {
+                ShuChuShiZhiDanWei = ShuChuShiZhiDanWeiObj.value;
+            }
+        }
+        if (ShuChuShiZhiDanWei == "NaN") {
+            ShuChuShiZhiDanWei = "";
+        }
 
         //频率属性名称
         var PinLv = "";
@@ -306,13 +376,27 @@ function LianDongBuQueDingDu(obj)
             PinLv = "";
         }
 
+        //频率单位属性名称
+        var PinLvDanWei = "";
+        if (JiSuanBuQueDingDuPara.PinLv != null && JiSuanBuQueDingDuPara.PinLv.trim() != "" && JiSuanBuQueDingDuPara.PinLv != "undefined") {
+
+            var PinLvDanWeiID = JiSuanBuQueDingDuPara.PinLv + "_UNIT"+id;
+            var PinLvDanWeiObj = document.getElementById(PinLvDanWeiID);
+            if (PinLvDanWeiObj != null) {
+                PinLvDanWei = PinLvDanWeiObj.value;
+            }
+        }
+        if (PinLvDanWei == "NaN") {
+            PinLvDanWei = "";
+        }
+
         //获取空对象用于保存添加的信息
         $.ajax({
             type: 'post', //使用post方法访问后台
             dataType: "json", //返回json格式的数据
             url: '/PROJECTTEMPLET/GetSuanBuQueDingDu', //要访问的后台地址
             contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
-            data: { 'RuleID': RuleID, 'ShuChuShiJiZhi': ShuChuShiJiZhi, 'ShuChuShiJiZhiDanWei': ShuChuShiJiZhiDanWei, 'LiangCheng': LiangCheng, 'K': K, 'XuanYongDianZu': XuanYongDianZu, 'ShuChuShiZhi': ShuChuShiZhi, 'PinLv': PinLv },
+            data: { 'RuleID': RuleID, 'ShuChuShiJiZhi': ShuChuShiJiZhi, 'ShuChuShiJiZhiDanWei': ShuChuShiJiZhiDanWei, 'LiangCheng': LiangCheng, 'LiangChengDanWei': LiangChengDanWei, 'K': K, 'XuanYongDianZu': XuanYongDianZu, 'XuanYongDianZuDanWei': XuanYongDianZuDanWei, 'ShuChuShiZhi': ShuChuShiZhi, 'ShuChuShiZhiDanWei': ShuChuShiZhiDanWei, 'PinLv': PinLv, 'PinLvDanWei': PinLvDanWei },
             //data: { 'RuleID': RuleID },
             beforeSend: function () {
                 //InitAlertJS();
