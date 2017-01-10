@@ -76,7 +76,7 @@ namespace Common
         /// <param name="tempDir">格式:a/b.htm,相对根目录</param>
         public static void SaveFile(string TxtStr, string tempDir)
         {
-            SaveFile(TxtStr, tempDir, true);
+            SaveFile(TxtStr, tempDir, false);
         }
         /// <summary>
         /// 保存文件内容,自动创建目录
