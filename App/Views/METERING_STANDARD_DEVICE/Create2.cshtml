@@ -13,6 +13,11 @@
 }
 @using (Html.BeginForm("", "api/METERING_STANDARD_DEVICEApi/Post"))
 {
+    <style type="text/css">
+        ul{border-bottom:1px solid #d4d4d4;padding-bottom:5px}
+        li{ width:235px; height:26px; margin-bottom:5px }
+        li label{ display:inline;width:40px} 
+    </style>
     <input type="hidden" id="rowindex" value="1" />
     <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
 
@@ -23,7 +28,7 @@
             <div class="mt10" id="div6">
                 <ul class="clear mt10">
                     <li class="fl mr10">
-                        评定项：
+                        <label>评定项：</label>
                         <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" id="ASSESSMENTITEM">
                             <option value="">请选择</option>
                             <option value="5720A交流电流测量">5720A交流电流测量</option>
@@ -153,18 +158,18 @@
                         备注：
                         <input class="my-textbox" value="" name="NOTE">
                     </li>
-                    <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                    <li class="fr " style="width:auto"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
                 </ul>
             </div>
         </div>
 
 
-
-        <div class="mt10">
-            <a href="javascript:;" class="easyui-linkbutton" onclick="baocun()">保存</a>
-            <a href="javascript:;" class="easyui-linkbutton" onclick="javascript: window.location.href = '/UNCERTAINTYTABLE/IndexUB';">返回</a>
-        </div>
+       
+    <div class="mt10">
+        <a href="javascript:;" class="easyui-linkbutton" onclick="baocun()">保存</a>
+        <a href="javascript:;" class="easyui-linkbutton" onclick="javascript: window.location.href = '/UNCERTAINTYTABLE/IndexUB';">返回</a>
     </div>
+</div>
     <script>
 
         var radio = {
