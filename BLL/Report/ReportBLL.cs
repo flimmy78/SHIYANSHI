@@ -1027,7 +1027,7 @@ namespace Langben.Report
                 //    xlsPath = ReportStatic.YuanShiJiLuXiaoZhunPath;
                 //}
                 string xlsPath = GetTemplatePath(type);
-                HSSFWorkbook _book = new HSSFWorkbook();
+                //HSSFWorkbook _book = new HSSFWorkbook();
                 FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
                 IWorkbook hssfworkbook = new HSSFWorkbook(file);
 
@@ -1039,6 +1039,9 @@ namespace Langben.Report
 
                 //设置不确定度
                 SetBuQueDingDu(hssfworkbook, entity, type);
+
+                //隐藏不需要的sheet
+                HiddenSheet(hssfworkbook, type);
 
                 //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";                
                 string fileName = SetFileName(type);
@@ -1066,6 +1069,37 @@ namespace Langben.Report
             }
             Message = "未找到预备方案ID为【" + ID + "】的数据";
             return false;
+        }
+        /// <summary>
+        /// 隐藏不需要的sheet(模板需要隐藏)
+        /// </summary>
+        /// <param name="hssfworkbook"></param>
+        /// <param name="type"></param>
+        private void HiddenSheet(IWorkbook hssfworkbook, ExportType type)
+        {
+            switch(type)
+            {
+                case ExportType.OriginalRecord_JianDing:
+                case ExportType.OriginalRecord_XiaoZhun:
+                    hssfworkbook.SetSheetHidden(3,SheetState.Hidden);//封皮模板
+                    hssfworkbook.SetSheetHidden(4, SheetState.Hidden);//数据模板
+                    hssfworkbook.SetSheetHidden(5, SheetState.Hidden);//不确定度模板
+                    break;
+               
+               
+                case ExportType.Report_JianDing:
+                    hssfworkbook.SetSheetHidden(4, SheetState.Hidden);//第二页模板
+                    hssfworkbook.SetSheetHidden(5, SheetState.Hidden);//数据模板                
+                    break;
+                case ExportType.Report_XiaoZhun:
+                    hssfworkbook.SetSheetHidden(3, SheetState.Hidden);//第二页模板
+                    hssfworkbook.SetSheetHidden(4, SheetState.Hidden);//数据模板
+                    break;
+                case ExportType.Report_XiaoZhun_CNAS:
+                    hssfworkbook.SetSheetHidden(2, SheetState.Hidden);//第二页模板
+                    hssfworkbook.SetSheetHidden(3, SheetState.Hidden);//数据模板
+                    break;
+            }
         }
         /// <summary>
         /// 设置不确定度
