@@ -400,7 +400,7 @@ else
         var x = getDataB();
         x = x.replace(' ', '');
         var arr = x.split(',');
-        if (arr.length == 1) return false;
+        //if (arr.length == 1) return false;
         var lcm = 0;
         var flag = false;
         var total = 0;
@@ -409,8 +409,8 @@ else
         }
 
         var mean = Math.sqrt(total / arr.length);
-        mean = Math.round(mean * 10000) / 10000;
-        var v = $("#txtValue").val();
+        mean = Math.round(mean * 10000) / 10000;        
+        var v = $("#txtValueB").val();
         $("#txtBuQueDingB").val(v == "" ? mean : parseFloat(mean) / parseFloat(v));
         calculateC();
     }
