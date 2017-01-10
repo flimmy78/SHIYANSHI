@@ -1042,12 +1042,16 @@ namespace Langben.App.Controllers
         /// <param name="ShuChuShiJiZhi">输出实际值、显示值</param>
         /// <param name="ShuChuShiJiZhiDanWei">输出实际值单位、显示值单位</param>
         /// <param name="LiangCheng">量程</param>
+        /// <param name="LiangChengDanWei">量程单位</param>
         /// <param name="K"></param>
         /// <param name="XuanYongDianZu">选用电阻</param>
+        ///<param name="XuanYongDianZuDanWei">选用电阻单位</param>
         /// <param name="ShuChuShiZhi">输出示值、标准值</param>
+        /// <param name="ShuChuShiZhiDanWei">输出示值单位、标准值单位</param>
         /// <param name="PinLv">频率</param>
+        /// <param name="PinLvDanWei">频率单位</param>
         /// <returns></returns>
-        public ActionResult GetSuanBuQueDingDu(string RuleID, string ShuChuShiJiZhi, string ShuChuShiJiZhiDanWei, string LiangCheng, string K, string XuanYongDianZu, string ShuChuShiZhi, string PinLv)
+        public ActionResult GetSuanBuQueDingDu(string RuleID, string ShuChuShiJiZhi, string ShuChuShiJiZhiDanWei, string LiangCheng,string LiangChengDanWei, string K, string XuanYongDianZu, string XuanYongDianZuDanWei, string ShuChuShiZhi, string ShuChuShiZhiDanWei, string PinLv, string PinLvDanWei)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             try
@@ -1057,10 +1061,14 @@ namespace Langben.App.Controllers
                 para.ShuChuShiJiZhi = ShuChuShiJiZhi;
                 para.ShuChuShiJiZhiDanWei = ShuChuShiJiZhiDanWei;
                 para.LiangCheng = LiangCheng;
+                para.LiangChengDanWei = LiangChengDanWei;
                 para.K = K;
                 para.XuanYongDianZu = XuanYongDianZu;
+                para.XuanYongDianZuDanWei = XuanYongDianZuDanWei;
                 para.ShuChuShiZhi = ShuChuShiZhi;
-                para.PinLv = PinLv; 
+                para.ShuChuShiZhiDanWei = ShuChuShiZhiDanWei;
+                para.PinLv = PinLv;
+                para.PinLvDanWei = PinLvDanWei;
                 string value = Langben.BLL.Report.BuQueDingBuGongShi.GetBuQueDingDu(para);
                 result.Code = Common.ClientCode.Succeed;
                 result.Message = value;

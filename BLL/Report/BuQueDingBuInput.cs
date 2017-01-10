@@ -31,6 +31,10 @@ namespace Langben.BLL.Report
         /// </summary>
         public string LiangCheng { get; set; }
         /// <summary>
+        /// 量程单位
+        /// </summary>
+        public string LiangChengDanWei { get; set; }
+        /// <summary>
         /// K值
         /// </summary>
         public string K { get; set; }
@@ -40,13 +44,28 @@ namespace Langben.BLL.Report
         public string XuanYongDianZu { get; set; }
 
         /// <summary>
+        /// 选用电阻单位
+        /// </summary>
+        public string XuanYongDianZuDanWei { get; set; }
+
+        /// <summary>
         /// 输出示值、标准值
         /// </summary>
         public string ShuChuShiZhi { get; set; }
+
+        /// <summary>
+        /// 输出示值单位、标准值单位
+        /// </summary>
+        public string ShuChuShiZhiDanWei { get; set; }
         /// <summary>
         /// 频率
         /// </summary>
         public string PinLv { get; set; }
+
+        /// <summary>
+        /// 频率单位
+        /// </summary>
+        public string PinLvDanWei { get; set; }
 
     }
 
