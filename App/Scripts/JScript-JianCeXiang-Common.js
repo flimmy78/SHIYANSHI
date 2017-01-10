@@ -4,10 +4,87 @@ var JiSuanBuQueDingDu_MeiHang_Html = " <a href=\"javascript:void(0)\" class=\"ea
 //检测项目单位
 var DanWeiDDLHtmlArray = Array;
 DanWeiDDLHtmlArray = [
-     {
+          {
+              Code: 'EDGZDianliu',
+              Remark: '额定工作电流',
+              Value: "<select class=\"my-combobox\" name=\"EDGZDianliu\" style=\"width:50px; \">" +
+                      "<option value=\"5\">5</option> " +
+                      "<option value=\"1\">1</option>" +
+                     "</select>"
+          }
+        , {
+            Code: 'JieLun',
+            Remark: '结论',
+            Value: "<select class=\"my-combobox\" name=\"JieLun\" style=\"width:50px; \">" +
+                    "<option value=\"合格\">合格</option> " +
+                    "<option value=\"不合格\">不合格</option>" +
+                   "</select>"
+        }
+         , {
+             Code: 'DianLiuBaiFenBi',
+             Remark: '额定电流百分比',
+             Value: "<select class=\"my-combobox\" name=\"DianLiuBaiFenBi\" style=\"width:50px; \">" +
+                     "<option value=\"1%\">1%</option> " +
+                     "<option value=\"5%\">5%</option>" +
+                     "<option value=\"20%\">20%</option> " +
+                     "<option value=\"50%\">50%</option>" +
+                     "<option value=\"80%\">80%</option> " +
+                     "<option value=\"100%\">100%</option>" +
+                    "<option value=\"120%\">120%</option> " +
+
+                    "</select>"
+         }
+   ,
+  {
+                Code: 'Cos',
+                Remark: 'cosθ',
+                Value: "<select class=\"my-combobox\" name=\"Cos\" style=\"width:79px; \">" +
+                        "<option value=\"1.0\">1.0</option> " +
+                         "<option value=\"0.5L\">0.5L</option>" +
+                        "</select>"
+            },
+       {
+           Code: 'XiangBie',
+           Remark: '相别',
+           Value: "<select class=\"my-combobox\" name=\"XiangBie\" style=\"width:79px; \">" +
+                   "<option value=\"A相\">A相</option> " +
+                    "<option value=\"B相\">B相</option>" +
+                    "<option value=\"C相\">C相</option>  " +
+                   "</select>"
+       }, {
+         Code: 'Ib',
+         Remark: 'Ib(%)',
+         Value: "<select class=\"my-combobox\" name=\"Ib\" style=\"width:79px; \">" +
+                 "<option value=\"100\">100</option> " +
+                  "<option value=\"50\">50</option>" +
+                  "<option value=\"20\">20</option>  " +
+                 "<option value=\"10\">10</option>  " +
+                 "<option value=\"5\">5</option>  " +
+                 "</select>"
+     },
+    {
+        Code: 'GongLvYinShu',
+        Remark: '功率因数cosφ',
+        Value: "<select class=\"my-combobox\" name=\"GongLvYinShu\" style=\"width:79px; \">" +
+                "<option value=\"1.0\">1.0</option> " +
+                 "<option value=\"0.5L\">0.5L</option>" +
+                 "<option value=\"0.8C\">0.8C</option>  " +
+                "<option value=\"0.5C\">0.5C</option>  " +
+                "<option value=\"0.25L\">0.25L</option>  " +
+                "</select>"
+    },
+    {
+        Code: 'XiangXianJiCeLiangMoShi',
+        Remark: '相线及测量模式',
+        Value: "<select class=\"my-combobox\" name=\"XiangXianJiCeLiangMoShi\" style=\"width:79px; \">" +
+                "<option value=\"单相\">单相</option> " +
+                 "<option value=\"三相三线\">三相三线</option>" +
+                 "<option value=\"三相四线\">三相四线</option>  " +
+                "</select>"
+    }, {
          Code: 'EDingDianYa',
          Remark: '额定电压',
-         Value: "<select class=\"my-combobox\" name=\"EDingDianYa\" style=\"width:100px; \">" +
+         Value: "<select class=\"my-combobox\" name=\"EDingDianYa\" style=\"width:79px; \">" +
                  "<option value=\"50\">50</option> " +
                   "<option value=\100\">100</option>" +
                   "<option value=\"250\">250</option>  " +
@@ -431,11 +508,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',READVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;OUTPUTVALUE;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;OUTPUTVALUE;READVALUE;;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -462,11 +539,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',READVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;OUTPUTVALUE;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;OUTPUTVALUE;READVALUE;;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -493,11 +570,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: '',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -524,11 +601,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: '',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -555,11 +632,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: '',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -615,11 +692,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: '',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -646,11 +723,12 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',READVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
+
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -706,11 +784,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',READVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -766,11 +844,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',READVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -797,11 +875,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',READVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -857,11 +935,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',READVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -888,11 +966,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',READVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -948,11 +1026,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',READVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -979,11 +1057,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',READVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -1242,11 +1320,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',READVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;HZMY;',
 
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
@@ -1274,11 +1352,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',READVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;HZMY;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -1508,11 +1586,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',ACTUALVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;ACTUALVALUE;HZMY;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -1570,11 +1648,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',ACTUALVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;ACTUALVALUE;HZMY;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -1601,11 +1679,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',ACTUALVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;ACTUALVALUE;HZMY;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -1632,11 +1710,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',ACTUALVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;ACTUALVALUE;HZMY;',
 
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
@@ -1664,11 +1742,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',ACTUALVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;ACTUALVALUE;HZMY;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
@@ -1695,11 +1773,11 @@ RuleAttributeArray = [{
                 CalculateForAddLianCheng: ',ACTUALVALUE,',
                 //不确定度
                 //检测项属性名称后需要加自动或者按钮不确定计算
-                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
-                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
-                //例如：显示值属性名称;量程属性名称;K属性名称;;
+                //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称)
+                //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
+                //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;ACTUALVALUE;HZMY;',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]

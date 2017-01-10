@@ -18,7 +18,58 @@ namespace Langben.App.Controllers
     /// </summary>
     public class PROJECTTEMPLETController : BaseController
     {//
+     /// <summary>
+     ///不平衡负载时有功电能误差
+     /// </summary>
+     /// <param name="id">canshu</param>
+     /// <param name="RULEID">规程id</param>
+     /// <param name="SCHEMEID">方案id</param>
+     /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+     /// <returns></returns>
+        public ActionResult BuPingHengFuZaiShiYouGongDianNengWuCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
 
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///工作电流
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult GongZuoDianliuDianYa(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///平衡负载时有功电能误差
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult PingHengFuZaiShiYouGongDianNengWuCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///钮端电压稳定性
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult BianBiShiZhi(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
         /// <summary>
         ///钮端电压稳定性
         /// </summary>
@@ -993,14 +1044,24 @@ namespace Langben.App.Controllers
         /// <param name="LiangCheng">量程</param>
         /// <param name="K"></param>
         /// <param name="XuanYongDianZu">选用电阻</param>
+        /// <param name="ShuChuShiZhi">输出示值、标准值</param>
+        /// <param name="PinLv">频率</param>
         /// <returns></returns>
-        public ActionResult GetSuanBuQueDingDu(string RuleID, string ShuChuShiJiZhi, string ShuChuShiJiZhiDanWei, string LiangCheng, string K, string XuanYongDianZu)
+        public ActionResult GetSuanBuQueDingDu(string RuleID, string ShuChuShiJiZhi, string ShuChuShiJiZhiDanWei, string LiangCheng, string K, string XuanYongDianZu, string ShuChuShiZhi, string PinLv)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             try
             {
-
-                string value = Langben.BLL.Report.BuQueDingBuGongShi.GetBuQueDingDu(RuleID, ShuChuShiJiZhi, ShuChuShiJiZhiDanWei, LiangCheng, K, XuanYongDianZu);
+                BLL.Report.BuQueDingBuGongShi.BuQueDingBuInput para = new BLL.Report.BuQueDingBuGongShi.BuQueDingBuInput();
+                para.RuleID = RuleID;
+                para.ShuChuShiJiZhi = ShuChuShiJiZhi;
+                para.ShuChuShiJiZhiDanWei = ShuChuShiJiZhiDanWei;
+                para.LiangCheng = LiangCheng;
+                para.K = K;
+                para.XuanYongDianZu = XuanYongDianZu;
+                para.ShuChuShiZhi = ShuChuShiZhi;
+                para.PinLv = PinLv; 
+                string value = Langben.BLL.Report.BuQueDingBuGongShi.GetBuQueDingDu(para);
                 result.Code = Common.ClientCode.Succeed;
                 result.Message = value;
             }

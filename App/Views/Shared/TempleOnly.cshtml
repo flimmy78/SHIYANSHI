@@ -44,8 +44,16 @@
                             <option value="K">科学计算法模式</option>
                         </select>
                         不确定度小数位数：<input name="BuQueDingDuXiaoShuWeiShu" id="BuQueDingDuXiaoShuWeiShu" value="2" type="text" class="my-textbox tc" style="width:16px" onchange="ChangeBuQueDingDuShowTypeOrBuQueDingDuXiaoShuWeiShu();">
+                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="xunze()" id="btnXuanZe">选择</a>
+                       
+                        <input type="hidden" value="" id="METERINGDEVIC" name="METERINGDEVIC" />
+                        <div class="l-btn-left" id="checkMETERINGDEVIC">
+
+                        </div>
                     </td>
-                    <td align="right"><a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'" id="btnReset" onclick="Reset()">重置检测项</a></td>
+                    <td align="right">
+                        <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'" id="btnReset" onclick="Reset()">重置检测项</a>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -107,6 +115,33 @@
     </div>
     @RenderSection("JS", false)
     <script src="/Scripts/jianCeXiang.js"></script>
+    <script type="text/javascript">
+          @{
+              Common.Account account = Models.AccountModel.GetCurrentAccount();
+              if (account!=null)
+              {
+                  ViewBag.UNDERTAKE_LABORATORY_NAME = account.UNDERTAKE_LABORATORYName;
+              }
+
+          }
+        function xunze() {
+            debugger
+
+            showModalOnly('METERINGDEVIC', '../../METERING_STANDARD_DEVICE/IndexSelect/@ViewBag.UNDERTAKE_LABORATORY_NAME');
+            var zhi = $("#METERINGDEVIC").val();
+            var zhu = zhi.split('^');
+            for (var i = 0; i < zhu.length; i++) {
+                if (zhu[i] != "") {
+                    zhu[i].split('$')[0];//评定项
+                    zhu[i].split('$')[1];//误差来源
+                    zhu[i].split('$')[2];//误差限
+                    zhu[i].split('$')[3];//误差分布状况
+                    zhu[i].split('$')[4];//k
+                    zhu[i].split('$')[5].split('&')[0];//不确定度ui
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>

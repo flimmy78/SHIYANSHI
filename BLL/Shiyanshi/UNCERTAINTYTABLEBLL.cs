@@ -13,6 +13,14 @@ namespace Langben.BLL
     /// </summary>
     public partial class UNCERTAINTYTABLEBLL :  IBLL.IUNCERTAINTYTABLEBLL, IDisposable
     {
+        public List<UNCERTAINTYTABLE> GetByASSESSMENTITEM(string METERING_STANDARD_DEVICEID, string UNCERTAINTYTABLE, string sort, string search)
+        {
+            var queryData = from u in db.UNCERTAINTYTABLE
+                            where u.ASSESSMENTITEM == UNCERTAINTYTABLE && u.METERING_STANDARD_DEVICEID == METERING_STANDARD_DEVICEID
+                            select u;
+
+            return queryData.ToList();
+        }
         /// <summary>
         /// 编辑计量标准装置检定/校准信息 
         /// </summary>

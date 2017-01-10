@@ -137,7 +137,7 @@ function LianDongBuQueDingDu(obj)
 {    
     //只有在显示值或者输出实际值才触发不确定度自动计算
     if (JiSuanBuQueDingDuPara.Type == null || JiSuanBuQueDingDuPara.Type.trim() == "" || JiSuanBuQueDingDuPara.Type.trim() != "Z" || JiSuanBuQueDingDuPara.Name == "undefined"
-        || obj == null || obj.name=="undefined" || obj.ID=="undefined" || obj.name != JiSuanBuQueDingDuPara.ShuChuShiJiZhi) {
+        || obj == null || obj.name=="undefined" || obj.ID=="undefined" || (obj.name != JiSuanBuQueDingDuPara.ShuChuShiJiZhi && obj.name!=JiSuanBuQueDingDuPara.ShuChuShiZhi && obj.name!=JiSuanBuQueDingDuPara.PinLv)) {
         return;
     }       
 
@@ -160,7 +160,21 @@ function LianDongBuQueDingDu(obj)
         hangHaoID = ids[3];
 
         //显示值属性名称或者输出实际值属性名称
-        var ShuChuShiJiZhi = obj.value;
+        //var ShuChuShiJiZhi = obj.value;
+        var ShuChuShiJiZhi = "";
+        if (JiSuanBuQueDingDuPara.ShuChuShiJiZhi != null && JiSuanBuQueDingDuPara.ShuChuShiJiZhi.trim() != "" && JiSuanBuQueDingDuPara.ShuChuShiJiZhi != "undefined") {
+            var ShuChuShiJiZhiID = JiSuanBuQueDingDuPara.ShuChuShiJiZhi + id;
+            var ShuChuShiJiZhiObj = document.getElementById(ShuChuShiJiZhiID);
+            if (ShuChuShiJiZhiObj != null) {
+                ShuChuShiJiZhi= ShuChuShiJiZhiObj.value;
+            }
+        }
+        if (ShuChuShiJiZhi == "NaN")
+        {
+            ShuChuShiJiZhi = "";
+        }
+
+
 
         //显示值单位属性名称或者输出实际值单位属性名称  
         var ShuChuShiJiZhiDanWei = "";
@@ -170,6 +184,9 @@ function LianDongBuQueDingDu(obj)
             if (ShuChuShiJiZhiDanWeiObj != null) {
                 ShuChuShiJiZhiDanWei = ShuChuShiJiZhiDanWeiObj.value;
             }
+        }
+        if (ShuChuShiJiZhiDanWei == "NaN") {
+            ShuChuShiJiZhiDanWei = "";
         }
 
         //量程属性名称
@@ -198,6 +215,9 @@ function LianDongBuQueDingDu(obj)
                 }
             }
         }
+        if (LiangCheng == "NaN") {
+            LiangCheng = "";
+        }
 
         //K
         var K = "";
@@ -223,8 +243,11 @@ function LianDongBuQueDingDu(obj)
                     }
                 }
             }
+        }          
+        if (K == "NaN") {
+            K = "";
         }
-          
+
         //选用电阻属性名称
         var XuanYongDianZu = "";
         if (JiSuanBuQueDingDuPara.XuanYongDianZu != null && JiSuanBuQueDingDuPara.XuanYongDianZu.trim() != "" && JiSuanBuQueDingDuPara.XuanYongDianZu != "undefined") {
@@ -250,7 +273,38 @@ function LianDongBuQueDingDu(obj)
                 }
             }
         }
+        if (XuanYongDianZu == "NaN") {
+            XuanYongDianZu = "";
+        }
 
+        //输出示值、标准值属性名称
+        var ShuChuShiZhi = "";
+        if (JiSuanBuQueDingDuPara.ShuChuShiZhi != null && JiSuanBuQueDingDuPara.ShuChuShiZhi.trim() != "" && JiSuanBuQueDingDuPara.ShuChuShiZhi != "undefined") {
+
+            var ShuChuShiZhiID = JiSuanBuQueDingDuPara.ShuChuShiZhi + id;
+            var ShuChuShiZhiObj = document.getElementById(ShuChuShiZhiID);
+            if (ShuChuShiZhiObj != null) {
+                ShuChuShiZhi = ShuChuShiZhiObj.value;
+            }
+        }
+        if (ShuChuShiZhi == "NaN") {
+            ShuChuShiZhi = "";
+        }
+
+
+        //频率属性名称
+        var PinLv = "";
+        if (JiSuanBuQueDingDuPara.PinLv != null && JiSuanBuQueDingDuPara.PinLv.trim() != "" && JiSuanBuQueDingDuPara.PinLv != "undefined") {
+
+            var PinLvID = JiSuanBuQueDingDuPara.PinLv + id;
+            var PinLvObj = document.getElementById(PinLvID);
+            if (PinLvObj != null) {
+                PinLv = PinLvObj.value;
+            }
+        }
+        if (PinLv == "NaN") {
+            PinLv = "";
+        }
 
         //获取空对象用于保存添加的信息
         $.ajax({
@@ -258,7 +312,7 @@ function LianDongBuQueDingDu(obj)
             dataType: "json", //返回json格式的数据
             url: '/PROJECTTEMPLET/GetSuanBuQueDingDu', //要访问的后台地址
             contentType: 'application/x-www-form-urlencoded; charset=utf-8', //指定编码方式
-            data: { 'ID': RuleID, 'ShuChuShiJiZhi': ShuChuShiJiZhi, 'ShuChuShiJiZhiDanWei': ShuChuShiJiZhiDanWei, 'LiangCheng': LiangCheng, 'K': K, 'XuanYongDianZu': XuanYongDianZu },
+            data: { 'RuleID': RuleID, 'ShuChuShiJiZhi': ShuChuShiJiZhi, 'ShuChuShiJiZhiDanWei': ShuChuShiJiZhiDanWei, 'LiangCheng': LiangCheng, 'K': K, 'XuanYongDianZu': XuanYongDianZu, 'ShuChuShiZhi': ShuChuShiZhi, 'PinLv': PinLv },
             //data: { 'RuleID': RuleID },
             beforeSend: function () {
                 //InitAlertJS();
@@ -324,7 +378,7 @@ function GetJiSuanBuQueDingDuParaArray()
         JiSuanBuQueDingDuParaArray.Name = AttributeValue.split(":")[1].split("|")[0];//不确定文本框名称
     }
     JiSuanBuQueDingDuParaArray.Type = type;
-    if (type == "Z" && AttributeValue.split("|")[1].length > 1 && AttributeValue.split("|")[1].split(";").length >= "4")
+    if (type == "Z" && AttributeValue.split("|")[1].length > 1 && AttributeValue.split("|")[1].split(";").length >= "6")
     {
         //检测项属性名称后需要加自动或者按钮不确定计算
         //自动计算不确定(Z:检测项属性名称|显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称)
@@ -338,6 +392,8 @@ function GetJiSuanBuQueDingDuParaArray()
         JiSuanBuQueDingDuParaArray.LiangCheng = pArray[1];//量程属性名称
         JiSuanBuQueDingDuParaArray.K = pArray[2];//量程属性名称
         JiSuanBuQueDingDuParaArray.XuanYongDianZu = pArray[3];//选用电阻属性名称
+        JiSuanBuQueDingDuParaArray.ShuChuShiZhi = pArray[4];//输出示值、标准值属性名称
+        JiSuanBuQueDingDuParaArray.PinLv = pArray[5];//频率属性名称
     }
     else if(type=="Z")
     {
@@ -489,7 +545,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     if (selectCode != null && selectCode.trim() != "") {
         var selectHtml = GetDanWeiDDLHtml(name, selectCode);//单位下拉框html
         if (blurValue != null && blurValue.trim() != "") {
-            htmlString.push($(selectHtml).attr("onchange", +blurValue + "(this)").attr("name", name).attr("id", id)[0].outerHTML);
+            htmlString.push($(selectHtml).attr("onchange", blurValue + "(this)").attr("name", name).attr("id", id)[0].outerHTML);
         } else {
             htmlString.push($(selectHtml).attr("name", name).attr("id", id)[0].outerHTML);
         }
