@@ -436,7 +436,9 @@
         }
         var linkButton = {
             add: function (obj) {
-                var newRow = " <ul class=\"clear mt10\">" + $(obj).parents('div ul').html() + "</ul>";
+                var html = $(obj).parents('div ul').html();
+                var html2 = html.replace(/id="\w*"/, "");
+                var newRow = " <ul class=\"clear mt10\">" + html2 + "</ul>";
                 var parDiv = $(obj).parents('div ul').parent()
                 var newobj = $(parDiv).append(newRow);
 
@@ -459,21 +461,21 @@
     //下拉框选择事件
     function gradeChange(ex) {
         var zhi = $(ex).val();      
-        if (zhi == "直流电流" || zhi == "交流电流") {        
+        if (zhi == "5720A交流电流测量" || zhi == "5720A直流电流测量" || zhi == "85080A交流电流输出" || zhi == "8508A直流电流输出") {
             getCity($("#THEUNIT"));
             getCity($("#ENDUNIT")); 
             getCity($("#INDEX1UNIT"));
             getCity($("#INDEX2UNIT"));         
             tianjiazhi("THEUNIT,ENDUNIT,INDEX1UNIT,INDEX2UNIT","电流")
         }
-        else if (zhi == "直流电压" || zhi == "交流电压") {
+        else if (zhi == "5720A交流电压测量单相" || zhi == "5720A交流电压测量三相" || zhi == "5720A直流电压测量" || zhi == "8508A交流电压变换器" || zhi == "8508A交流电压输出"||zhi=="8508A直流电压输出") {
             getCity($("#THEUNIT"));
             getCity($("#ENDUNIT"));
             getCity($("#INDEX1UNIT"));
             getCity($("#INDEX2UNIT"));
             tianjiazhi("THEUNIT,ENDUNIT,INDEX1UNIT,INDEX2UNIT", "电压")
         }
-        else if (zhi == "直流电阻") {
+        else if (zhi == "5720A直流电阻输出" || zhi == "8508A直流电阻测量") {
             getCity($("#THEUNIT"));
             getCity($("#ENDUNIT"));
             getCity($("#INDEX1UNIT"));

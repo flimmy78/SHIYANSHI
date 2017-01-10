@@ -112,6 +112,7 @@ namespace Langben.App.Controllers
             string ORDER_STATUS = string.Empty;
             string ORDER_STATUS_NAME = string.Empty;
             ORDER_TASK_INFORMATION queryData = m_BLL.GetById(id);
+            string tiqu = string.Empty;//提取日期
             foreach (var s in queryData.APPLIANCE_DETAIL_INFORMATION)
             {
                 UNDERTAKE_LABORATORYID = null;
@@ -128,6 +129,14 @@ namespace Langben.App.Controllers
                     }
                     UNDERTAKE_LABORATORYID = item2.UNDERTAKE_LABORATORYID;
                    
+                }
+                if (list.Count>1)
+                {
+                    tiqu = Convert.ToDateTime(queryData.CREATETIME).AddDays(28).ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    tiqu = Convert.ToDateTime(queryData.CREATETIME).AddDays(14).ToString("yyyy-MM-dd");
                 }
                 s.UNDERTAKE_LABORATORYID = UNDERTAKE_LABORATORYID;
                 var show = new Models.APPLIANCE_DETAIL_INFORMATIONShow()
@@ -157,7 +166,8 @@ namespace Langben.App.Controllers
                     STORAGEINSTRUCTI_STATU = s.STORAGEINSTRUCTI_STATU,
                     UNDERTAKE_LABORATORYIDString = UNDERTAKE_LABORATORYID.TrimEnd(','),
                     ORDER_STATUS = ORDER_STATUS,
-                    ORDER_STATUS_NAME = ORDER_STATUS_NAME
+                    ORDER_STATUS_NAME = ORDER_STATUS_NAME,
+                    TIQURIQI=tiqu
                 };
                 data.APPLIANCE_DETAIL_INFORMATIONShows.Add(show);
             }
@@ -181,7 +191,7 @@ namespace Langben.App.Controllers
             data.CREATETIME =  queryData.CREATETIME;
             data.CREATEPERSON = queryData.CREATEPERSON;
             data.UPDATETIME = queryData.UPDATETIME;
-            data.UPDATEPERSON = queryData.UPDATEPERSON;
+            data.UPDATEPERSON = queryData.UPDATEPERSON; 
             return data;
         }
         /// <summary>
