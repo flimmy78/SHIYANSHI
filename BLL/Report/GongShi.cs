@@ -258,6 +258,10 @@ namespace Langben.BLL.Report
                  "<option value=\"nA\">nA</option> " +
                  "<option value=\"pA\">pA</option> " +
                 "</select>"
+                 "<option value=\"Hz\">Hz</option> " +
+                    "<option value=\"kHz\">kHz</option>" +
+                    "<option value=\"MHz\">MHz</option>  " +
+                    "<option value=\"GHz\">GHz</option>  " +
                 1MA（兆安）=1000kA（千安）=1000000A（安） 
 1A（安）=1000mA（毫安）=1000000μA（微安）
 nA是纳安等于0.001微安，pA 皮安，就是0.000001微安 
@@ -265,6 +269,14 @@ nA是纳安等于0.001微安，pA 皮安，就是0.000001微安
                    */
             switch (danwei)
             {
+                case "Hz":
+                    return Convert.ToDouble(result);
+                case "kHz":
+                    return Convert.ToDouble(result) * 1000;
+                case "MHz":
+                    return Convert.ToDouble(result) * 1000 * 1000;
+                case "GHz":
+                    return Convert.ToDouble(result) * 1000 * 1000 * 1000;
                 case "μV":
                     return Convert.ToDouble(result);
                 case "mV":
