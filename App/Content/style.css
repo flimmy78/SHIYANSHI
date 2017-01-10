@@ -223,11 +223,16 @@ nav .open>a.system-ctrl-photo-a, .nav .open>a.system-ctrl-photo-a:focus, .nav .o
     margin-top: 0.5%;
     margin-left: 0.25%;
     margin-right: 0.25%;
+    margin-left: 5px\0;
+    margin-right: 5px\0;
     padding-top: 3.5%;
     width: 32%;
     height: 170px;
-    background-color: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000);
+     background:url(../images/alphabg.png)\0;
     color: #999999!important;
+   
 }
 .column-div-no{
     margin-top: 0.5%;
