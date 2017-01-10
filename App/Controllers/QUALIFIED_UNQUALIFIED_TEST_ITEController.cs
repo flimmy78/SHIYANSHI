@@ -115,6 +115,7 @@ namespace Langben.App.Controllers
         /// <returns></returns>
         public ActionResult Save(string ID="", string PREPARE_SCHEMEID="", string RULEID="",string CONCLUSION="",string REMARK="",string HTMLVALUE="",string INPUTSTATE="")
         {
+            string returnValue = string.Empty;
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             QUALIFIED_UNQUALIFIED_TEST_ITE entity = new QUALIFIED_UNQUALIFIED_TEST_ITE();
             string currentPerson = GetCurrentPerson();
@@ -127,6 +128,7 @@ namespace Langben.App.Controllers
             entity.CONCLUSION = CONCLUSION;
             entity.REMARK = REMARK;
             entity.INPUTSTATE = INPUTSTATE;
+            
                         
             IBLL.IVTEST_ITEBLL vBLL = new BLL.VTEST_ITEBLL();
             DAL.VTEST_ITE vEntity = vBLL.GetById(PREPARE_SCHEMEID, RULEID);
@@ -140,10 +142,24 @@ namespace Langben.App.Controllers
 
             if (ID != null && ID.Trim() != "")
             {
-                m_BLL.Delete(ref validationErrors, ID);
+                if (!m_BLL.Delete(ref validationErrors, ID))
+                {
+                    LogClassModels.WriteServiceLog(Suggestion.DeleteFail+ "，预备方案检测项的Id为" + entity.ID, "预备方案检测项");//写入日志 
+                    if (validationErrors != null && validationErrors.Count > 0)
+                    {
+                        validationErrors.All(a =>
+                        {
+                            returnValue += a.ErrorMessage;
+                            return true;
+                        });
+                    }
+                    result.Code = Common.ClientCode.Fail;
+                    result.Message = Suggestion.InsertFail + returnValue;
+                    return Json(result); //提示插入失败
+                }
             }
 
-            string returnValue = string.Empty;
+            
             if (m_BLL.Create(ref validationErrors, entity))
             {
                 LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，预备方案检测项的Id为" + entity.ID, "预备方案检测项"
