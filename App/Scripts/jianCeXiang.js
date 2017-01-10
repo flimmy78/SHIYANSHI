@@ -1141,14 +1141,14 @@ function fomatFloat(src, pos) {
 
 }
 $(function () {
-    //
-    debugger
-    var dsa = kexue(3.504501, 3);
-    var dsa1 = kexue(35.04501, 3);
-    var dsa2 = kexue(0.3504501, 3);
-    var dsa4 = kexue(-0.03504501, 3);
-    var dsa15 = kexue(-35.04501, 3);
-    var dsa26 = kexue(-3504.501, 3);
+    ////
+    //debugger
+    //var dsa = kexue(3.504501, 3);
+    //var dsa1 = kexue(35.04501, 3);
+    //var dsa2 = kexue(0.3504501, 3);
+    //var dsa4 = kexue(-0.03504501, 3);
+    //var dsa15 = kexue(-35.04501, 3);
+    //var dsa26 = kexue(-3504.501, 3);
  
     //var gf = (round2(3.504501, 3));
     //var ewgf = (round2(9.8249, 3));
