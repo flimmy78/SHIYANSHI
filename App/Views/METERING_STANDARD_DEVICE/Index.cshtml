@@ -252,7 +252,10 @@
         METERING_STANDARD_DEVICE.XINGHAO = $("#XINGHAO").val();//型号
         METERING_STANDARD_DEVICE.FACTORY_NUM = $("#FACTORY_NUM").val();//编号
         METERING_STANDARD_DEVICE.CATEGORY = $("#CATEGORY option:selected").val();//类别
-        METERING_STANDARD_DEVICE.UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID option:selected").val();//实验室
+        debugger;
+        METERING_STANDARD_DEVICE.UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID").find("option:selected").text();//实验室
+
+
         METERING_STANDARD_DEVICE.THESUPERIOR = $("#THESUPERIOR").val();//上级
 
         if (ifshuju(METERING_STANDARD_DEVICE)) {

@@ -13,10 +13,10 @@ namespace Langben.BLL
     /// </summary>
     public partial class UNCERTAINTYTABLEBLL :  IBLL.IUNCERTAINTYTABLEBLL, IDisposable
     {
-        public List<UNCERTAINTYTABLE> GetByASSESSMENTITEM(string METERING_STANDARD_DEVICEID, string UNCERTAINTYTABLE, string sort, string search)
+        public List<UNCERTAINTYTABLE> GetByASSESSMENTITEM(string UNCERTAINTYTABLE)
         {
             var queryData = from u in db.UNCERTAINTYTABLE
-                            where u.ASSESSMENTITEM == UNCERTAINTYTABLE && u.METERING_STANDARD_DEVICEID == METERING_STANDARD_DEVICEID
+                            where u.ASSESSMENTITEM == UNCERTAINTYTABLE 
                             select u;
 
             return queryData.ToList();

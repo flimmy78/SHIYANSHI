@@ -91,6 +91,9 @@
     <Compile Include="APPLIANCE_DETAIL_INFORMATIONBLL.cs" />
     <Compile Include="Report\BuDueDingDuB.cs" />
     <Compile Include="Report\BuDueDingDu.cs" />
+    <Compile Include="Report\GongShi.cs" />
+    <Compile Include="Report\BuQueDingBuJiHe.cs" />
+    <Compile Include="Report\BuQueDingBuInput.cs" />
     <Compile Include="Report\BuQueDingBuGongShi.cs" />
     <Compile Include="Report\MYData.cs" />
     <Compile Include="Report\DataValue.cs" />

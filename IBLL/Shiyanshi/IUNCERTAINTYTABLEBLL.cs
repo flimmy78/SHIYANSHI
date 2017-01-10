@@ -13,7 +13,7 @@ namespace Langben.IBLL
     /// </summary>
     public partial interface IUNCERTAINTYTABLEBLL
     {
-        List<UNCERTAINTYTABLE> GetByASSESSMENTITEM(string METERING_STANDARD_DEVICEID, string UNCERTAINTYTABLE, string sort, string search);
+        List<UNCERTAINTYTABLE> GetByASSESSMENTITEM(string UNCERTAINTYTABLE);
 
         /// <summary>
         /// 修改

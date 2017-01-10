@@ -1052,7 +1052,7 @@ namespace Langben.App.Controllers
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             try
             {
-                BLL.Report.BuQueDingBuGongShi.BuQueDingBuInput para = new BLL.Report.BuQueDingBuGongShi.BuQueDingBuInput();
+                BLL.Report.BuQueDingBuInput para = new BLL.Report.BuQueDingBuInput();
                 para.RuleID = RuleID;
                 para.ShuChuShiJiZhi = ShuChuShiJiZhi;
                 para.ShuChuShiJiZhiDanWei = ShuChuShiJiZhiDanWei;
