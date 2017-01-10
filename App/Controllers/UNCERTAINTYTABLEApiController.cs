@@ -170,42 +170,45 @@ namespace Langben.App.Controllers
             return result;
         }
         [System.Web.Http.HttpPost]
-        public Common.ClientResult.Result InstUAUB2([FromBody]UNCERTAINTYTABLE entity)
+        public Common.ClientResult.Result InstUAUB2([FromBody]List<UNCERTAINTYTABLE> entity)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
-            {                 
-                string currentPerson = GetCurrentPerson(); 
-                string returnValue = string.Empty;
-                entity.CREATETIME = DateTime.Now;
-                entity.CREATEPERSON = currentPerson;
-                entity.ID = Result.GetNewId();
-         
-                if (m_BLL.Create(ref validationErrors, entity))
+            {
+                foreach (var item in entity)
                 {
-                    LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，不确定度的信息的Id为" + entity.ID, "不确定度"
-                        );//写入日志 
-                    result.Code = Common.ClientCode.Succeed;
-                    result.Message = Suggestion.InsertSucceed;
-                    //return result; //提示创建成功
-                }
-                else
-                {
-                    if (validationErrors != null && validationErrors.Count > 0)
+                    string currentPerson = GetCurrentPerson();
+                    string returnValue = string.Empty;
+                    item.CREATETIME = DateTime.Now;
+                    item.CREATEPERSON = currentPerson;
+                    item.ID = Result.GetNewId();
+
+                    if (m_BLL.Create(ref validationErrors, item))
                     {
-                        validationErrors.All(a =>
-                        {
-                            returnValue += a.ErrorMessage;
-                            return true;
-                        });
+                        LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，不确定度的信息的Id为" + item.ID, "不确定度"
+                            );//写入日志 
+                        result.Code = Common.ClientCode.Succeed;
+                        result.Message = Suggestion.InsertSucceed;
+                        //return result; //提示创建成功
                     }
-                    LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，不确定度的信息，" + returnValue, "不确定度"
-                        );//写入日志                      
-                    result.Code = Common.ClientCode.Fail;
-                    result.Message = Suggestion.InsertFail + returnValue;
-                    return result; //提示插入失败
+                    else
+                    {
+                        if (validationErrors != null && validationErrors.Count > 0)
+                        {
+                            validationErrors.All(a =>
+                            {
+                                returnValue += a.ErrorMessage;
+                                return true;
+                            });
+                        }
+                        LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，不确定度的信息，" + returnValue, "不确定度"
+                            );//写入日志                      
+                        result.Code = Common.ClientCode.Fail;
+                        result.Message = Suggestion.InsertFail + returnValue;
+                        return result; //提示插入失败
+                    }
+                    return result;
                 }
-                return result;
             }
             result.Code = Common.ClientCode.FindNull;
             result.Message = Suggestion.InsertFail + "，请核对输入的数据的格式"; //提示输入的数据的格式不对 
