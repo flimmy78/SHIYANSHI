@@ -892,25 +892,73 @@
                 if (item.INDEX1 != null)
                 {
                     <ul class="clear mt10">
-                        @if (item.ASSESSMENTITEM == "三相四线")
+                        @if (item.ASSESSMENTITEM == "直流电压")
                         {
                             <li class="fl mr10">
                                 评定项：
-                                <select class="my-combobox" name="ASSESSMENTITEM">
+                                <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" >
                                     <option value="">请选择</option>
-                                    <option selected="selected" value="三相四线">三相四线</option>
-                                    <option value="三相三线">三相三线</option>
+                                    <option selected="selected" value="直流电压">直流电压</option>
+                                    <option value="直流电流">直流电流</option>
+                                    <option value="直流电阻">直流电阻</option>
+                                    <option value="交流电压">交流电压</option>
+                                    <option value="交流电流">交流电流</option>
                                 </select>
                             </li>
                         }
-                        else if (item.ASSESSMENTITEM == "三相三线")
+                        else if (item.ASSESSMENTITEM == "直流电流")
                         {
                             <li class="fl mr10">
                                 评定项：
-                                <select class="my-combobox" name="ASSESSMENTITEM">
+                                <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" >
                                     <option value="">请选择</option>
-                                    <option value="三相四线">三相四线</option>
-                                    <option selected="selected" value="三相三线">三相三线</option>
+                                    <option  value="直流电压">直流电压</option>
+                                    <option selected="selected" value="直流电流">直流电流</option>
+                                    <option value="直流电阻">直流电阻</option>
+                                    <option value="交流电压">交流电压</option>
+                                    <option value="交流电流">交流电流</option>
+                                </select>
+                            </li>
+                        }
+                        else if (item.ASSESSMENTITEM == "直流电阻")
+                        {
+                            <li class="fl mr10">
+                                评定项：
+                                <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" >
+                                    <option value="">请选择</option>
+                                    <option value="直流电压">直流电压</option>
+                                    <option  value="直流电流">直流电流</option>
+                                    <option selected="selected" value="直流电阻">直流电阻</option>
+                                    <option value="交流电压">交流电压</option>
+                                    <option value="交流电流">交流电流</option>
+                                </select>
+                            </li>
+                        }
+                        else if (item.ASSESSMENTITEM == "交流电压")
+                        {
+                            <li class="fl mr10">
+                                评定项：
+                                <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" >
+                                    <option value="">请选择</option>
+                                    <option value="直流电压">直流电压</option>
+                                    <option value="直流电流">直流电流</option>
+                                    <option  value="直流电阻">直流电阻</option>
+                                    <option selected="selected" value="交流电压">交流电压</option>
+                                    <option value="交流电流">交流电流</option>
+                                </select>
+                            </li>
+                        }
+                        else if (item.ASSESSMENTITEM == "交流电流")
+                        {
+                            <li class="fl mr10">
+                                评定项：
+                                <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" >
+                                    <option value="">请选择</option>
+                                    <option value="直流电压">直流电压</option>
+                                    <option value="直流电流">直流电流</option>
+                                    <option value="直流电阻">直流电阻</option>
+                                    <option value="交流电压">交流电压</option>
+                                    <option selected="selected" value="交流电流">交流电流</option>
                                 </select>
                             </li>
                         }
@@ -918,10 +966,13 @@
                         {
                             <li class="fl mr10">
                                 评定项：
-                                <select class="my-combobox" name="ASSESSMENTITEM">
+                                <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" >
                                     <option value="">请选择</option>
-                                    <option value="三相四线">三相四线</option>
-                                    <option value="三相三线">三相三线</option>
+                                    <option value="直流电压">直流电压</option>
+                                    <option value="直流电流">直流电流</option>
+                                    <option value="直流电阻">直流电阻</option>
+                                    <option value="交流电压">交流电压</option>
+                                    <option value="交流电流">交流电流</option>
                                 </select>
                             </li>
                         }
@@ -929,26 +980,15 @@
                             量程范围起：
                             <input class="my-textbox " value="@item.THERANGESCOPE" name="THERANGESCOPE" id="@item.ID">
                         </li>
-                        @if (item.THEUNIT == "V1")
-                        {
+                    
                             <li class="fl mr10">
                                 起单位：
-                                <select class="my-combobox" name="THEUNIT">
+                                <select class="my-combobox" name="THEUNIT" id="THEUNIT">
                                     <option value="">请选择</option>
-                                    <option selected="selected" value="V1">V1</option>
                                 </select>
                             </li>
-                        }
-                        else
-                        {
-                            <li class="fl mr10">
-                                起单位：
-                                <select class="my-combobox" name="THEUNIT">
-                                    <option value="">请选择</option>
-                                    <option value="V1">V1</option>
-                                </select>
-                            </li>
-                        }
+                        
+                       
                        @if (item.THERELATIONSHIP == "<")
                        {
                         <li class="fl mr10">
@@ -1018,27 +1058,14 @@
                         <li class="fl mr10">
                             量程范围止：
                             <input class="my-textbox " value="@item.ENDRANGESCOPE" name="ENDRANGESCOPE">
-                        </li>
-                        @if (item.ENDUNIT == "V2")
-                        {
+                        </li>                     
                             <li class="fl mr10">
                                 止单位：
-                                <select class="my-combobox" name="ENDUNIT">
+                                <select class="my-combobox" name="ENDUNIT" id="ENDUNIT">
                                     <option value="">请选择</option>
-                                    <option selected="selected" value="V2">V2</option>
+                                    
                                 </select>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="fl mr10">
-                                止单位：
-                                <select class="my-combobox" name="ENDUNIT">
-                                    <option value="">请选择</option>
-                                    <option value="V2">V2</option>
-                                </select>
-                            </li>
-                        }
+                            </li>                                           
                         @if (item.ENDRELATIONSHIP == "<")
                         {
                             <li class="fl mr10">
@@ -1109,26 +1136,15 @@
                             频率范围起：
                             <input class="my-textbox " value="@item.THEFREQUENCY" name="THEFREQUENCY">
                         </li>
-                        @if (item.THEUNITFREQUENCY == "V3")
-                        {
+                 
                             <li class="fl mr10">
                                 起单位：
-                                <select class="my-combobox" name="THEUNITFREQUENCY">
+                                <select class="my-combobox" name="THEUNITFREQUENCY" id="THEUNITFREQUENCY">
                                     <option value="">请选择</option>
-                                    <option selected="selected" value="V3">V3</option>
+                                 
                                 </select>
                             </li>
-                        }
-                        else
-                        {
-                            <li class="fl mr10">
-                                起单位：
-                                <select class="my-combobox" name="THEUNITFREQUENCY">
-                                    <option value="">请选择</option>
-                                    <option value="V3">V3</option>
-                                </select>
-                            </li>
-                        }
+                     
                         @if (item.THERELATIONSHIPFREQUENCY == "<")
                         {
                             <li class="fl mr10">
@@ -1199,26 +1215,15 @@
                             频率范围止：
                             <input class="my-textbox " value="@item.ENDFREQUENCY" name="ENDFREQUENCY">
                         </li>
-                        @if (item.ENDUNITFREQUENCY == "V4")
-                        {
+                      
                             <li class="fl mr10">
                                 频率止单位：
-                                <select class="my-combobox" name="ENDUNITFREQUENCY">
+                                <select class="my-combobox" name="ENDUNITFREQUENCY" id="ENDUNITFREQUENCY">
                                     <option value="">请选择</option>
-                                    <option selected="selected" value="V4">V4</option>
+                                   
                                 </select>
                             </li>
-                        }
-                        else
-                        {
-                            <li class="fl mr10">
-                                频率止单位：
-                                <select class="my-combobox" name="ENDUNITFREQUENCY">
-                                    <option value="">请选择</option>
-                                    <option value="V4">V4</option>
-                                </select>
-                            </li>
-                        }  
+                      
                         @if (item.THERELATIONSHIPFREQUENCY == "<")
                         {
                             <li class="fl mr10">
@@ -1289,51 +1294,28 @@
                             <input class="my-textbox " value="@item.INDEX1" name="INDEX1">
 
                         </li>
-                        @if (item.INDEX1UNIT == "V5")
-                        {
                             <li class="fl mr10">
                                 指标1单位：
-                                <select class="my-combobox" name="INDEX1UNIT">
+                                <select class="my-combobox" name="INDEX1UNIT" id="INDEX1UNIT">
                                     <option value="">请选择</option>
-                                    <option selected="selected" value="V5">V5</option>
+                                  
                                 </select>
                             </li>
-                        }
-                        else
-                        {
-                            <li class="fl mr10">
-                                指标1单位：
-                                <select class="my-combobox" name="INDEX1UNIT">
-                                    <option value="">请选择</option>
-                                    <option value="V5">V5</option>
-                                </select>
-                            </li>
-                        }  
                    
                         <li class="fl mr10">
                             指标2：
                             <input class="my-textbox " value="@item.ENDUNITFREQUENCY" name="ENDUNITFREQUENCY">
                         </li>
-                        @if (item.INDEX2UNIT == "V6")
-                        {
+                     
                             <li class="fl mr10">
                                 指标2单位：
-                                <select class="my-combobox" name="INDEX2UNIT">
+                                <select class="my-combobox" name="INDEX2UNIT" id="INDEX2UNIT">
                                     <option value="">请选择</option>
-                                    <option selected="selected" value="V6">V6</option>
+                                  
                                 </select>
                             </li>
-                        }
-                        else
-                        {
-                            <li class="fl mr10">
-                                指标2单位：
-                                <select class="my-combobox" name="INDEX2UNIT">
-                                    <option value="">请选择</option>
-                                    <option value="V6">V6</option>
-                                </select>
-                            </li>
-                        }  
+                        
+                      
                       
                         <li class="fl mr10">
                             备注：
@@ -1349,8 +1331,11 @@
                             评定项：
                             <select class="my-combobox" name="ASSESSMENTITEM">
                                 <option value="">请选择</option>
-                                <option value="三相四线">三相四线</option>
-                                <option value="三相三线">三相三线</option>
+                                <option value="直流电压">直流电压</option>
+                                <option value="直流电流">直流电流</option>
+                                <option value="直流电阻">直流电阻</option>
+                                <option value="交流电压">交流电压</option>
+                                <option value="交流电流">交流电流</option>
                             </select>
                         </li>
                         <li class="fl mr10">
@@ -1359,9 +1344,8 @@
                         </li>
                         <li class="fl mr10">
                             起单位：
-                            <select class="my-combobox" name="THEUNIT">
-                                <option value="">请选择</option>
-                                <option value="V1">V1</option>
+                            <select class="my-combobox" name="THEUNIT"id="THEUNIT">
+                                <option value="">请选择</option>                             
                             </select>
                         </li>
                         <li class="fl mr10">
@@ -1380,9 +1364,8 @@
                         </li>
                         <li class="fl mr10">
                             止单位：
-                            <select class="my-combobox" name="ENDUNIT">
-                                <option value="">请选择</option>
-                                <option value="V2">V2</option>
+                            <select class="my-combobox" name="ENDUNIT" id="ENDUNIT">
+                                <option value="">请选择</option>                                
                             </select>
                         </li>
                         <li class="fl mr10">
@@ -1401,9 +1384,8 @@
                         </li>
                         <li class="fl mr10">
                             起单位：
-                            <select class="my-combobox" name="THEUNITFREQUENCY">
-                                <option value="">请选择</option>
-                                <option value="V3">V3</option>
+                            <select class="my-combobox" name="THEUNITFREQUENCY" id="THEUNITFREQUENCY">
+                                <option value="">请选择</option>                               
                             </select>
                         </li>
                         <li class="fl mr10">
@@ -1422,9 +1404,8 @@
                         </li>
                         <li class="fl mr10">
                             频率止单位：
-                            <select class="my-combobox" name="ENDUNITFREQUENCY">
-                                <option value="">请选择</option>
-                                <option value="V4">V4</option>
+                            <select class="my-combobox" name="ENDUNITFREQUENCY" id="ENDUNITFREQUENCY">
+                                <option value="">请选择</option>                              
                             </select>
                         </li>
                         <li class="fl mr10">
@@ -1440,13 +1421,11 @@
                         <li class="fl mr10">
                             指标1：
                             <input class="my-textbox " value="" name="INDEX1">
-
                         </li>
                         <li class="fl mr10">
                             指标1单位：
-                            <select class="my-combobox" name="INDEX1UNIT">
-                                <option value="">请选择</option>
-                                <option value="V5">V5</option>
+                            <select class="my-combobox" name="INDEX1UNIT" id="INDEX1UNIT">
+                                <option value="">请选择</option>                               
                             </select>
                         </li>
                         <li class="fl mr10">
@@ -1455,9 +1434,8 @@
                         </li>
                         <li class="fl mr10">
                             指标2单位：
-                            <select class="my-combobox" name="INDEX2UNIT">
-                                <option value="">请选择</option>
-                                <option value="V6">V6</option>
+                            <select class="my-combobox" name="INDEX2UNIT" id="INDEX2UNIT">
+                                <option value="">请选择</option>                              
                             </select>
                         </li>
                         <li class="fl mr10">
@@ -1582,7 +1560,86 @@
 
 </script>
 
+<script type="text/javascript">
+    $(function () {
+        debugger
+        if ("@Model.IS" == "UB") {
+            var a=new Object();
+            a= @Model.UNCERTAINTYTABLEShow;
 
+            
+           
+        }
+    })
+    function morengzhi(zhi, id) {
+
+        var dianliu = "A, mA, μA, nA, pA, kA";
+        var dianya = "V,mV,μV,kV,MV";
+        var dianzhu = "Ω,TΩ,GΩ,MΩ,kΩ,mΩ,μΩ";
+        if (dianliu.indexOf(zhi) >= 0) {
+            $("#" + id + "").append('<option value="A">A</option><option value="mA">mA</option><option value="μA">μA</option><option value="nA">nA</option><option value="pA">pA</option><option value="kA">kA</option>');
+            $("#" + id + "").val(zhi);
+        }
+        else if (dianya.indexOf(zhi) >= 0) {
+            $("#" + id + "").append('<option value="V">V</option><option value="mV">mV</option><option value="μV">μV</option><option value="kV">kV</option><option value="MV">MV</option>');
+            $("#" + id + "").val(zhi);
+        }
+        else if (dianzhu.indexOf(zhi) >= 0) {
+            $("#" + id + "").append('<option value="Ω">Ω</option><option value="TΩ">TΩ</option><option value="GΩ">GΩ</option><option value="MΩ">MΩ</option><option value="kΩ">kΩ</option><option value="mΩ">mΩ</option><option value="μΩ">μΩ</option>');
+            $("#" + id + "").val(zhi);
+        }                                  
+    }
+    //下拉框选择事件
+    function gradeChange(ex) {
+        var zhi = $(ex).val();
+        if (zhi == "直流电流" || zhi == "交流电流") {
+            getCity($("#THEUNIT"));
+            getCity($("#ENDUNIT"));
+            getCity($("#INDEX1UNIT"));
+            getCity($("#INDEX2UNIT"));
+            tianjiazhi("THEUNIT,ENDUNIT,INDEX1UNIT,INDEX2UNIT", "电流")
+        }
+        else if (zhi == "直流电压" || zhi == "交流电压") {
+            getCity($("#THEUNIT"));
+            getCity($("#ENDUNIT"));
+            getCity($("#INDEX1UNIT"));
+            getCity($("#INDEX2UNIT"));
+            tianjiazhi("THEUNIT,ENDUNIT,INDEX1UNIT,INDEX2UNIT", "电压")
+        }
+        else if (zhi == "直流电阻") {
+            getCity($("#THEUNIT"));
+            getCity($("#ENDUNIT"));
+            getCity($("#INDEX1UNIT"));
+            getCity($("#INDEX2UNIT"));
+            tianjiazhi("THEUNIT,ENDUNIT,INDEX1UNIT,INDEX2UNIT", "电阻")
+        }
+    }
+    function tianjiazhi(sun, lei) {
+        var lst = sun.split(',');
+        if (lei == "电流") {
+            for (var i = 0; i < lst.length; i++) {
+                $("#" + lst[i] + "").append('<option value="A">A</option><option value="mA">mA</option><option value="μA">μA</option><option value="nA">nA</option><option value="pA">pA</option><option value="kA">kA</option>');
+            }
+        }
+        else if (lei == "电压") {
+            for (var i = 0; i < lst.length; i++) {
+                $("#" + lst[i] + "").append('<option value="V">V</option><option value="mV">mV</option><option value="μV">μV</option><option value="kV">kV</option><option value="MV">MV</option>');
+            }
+        }
+        else if (lei == "电阻") {
+            for (var i = 0; i < lst.length; i++) {
+                $("#" + lst[i] + "").append('<option value="Ω">Ω</option><option value="TΩ">TΩ</option><option value="GΩ">GΩ</option><option value="MΩ">MΩ</option><option value="kΩ">kΩ</option><option value="mΩ">mΩ</option><option value="μΩ">μΩ</option>');
+            }
+        }
+    }
+    function getCity(City) {
+        $(City).empty();
+        $("<option></option>")
+                .val("")
+                .text("请选择")
+                .appendTo($(City));
+    }
+</script>
 
 <script type="text/javascript">
     //时间校验

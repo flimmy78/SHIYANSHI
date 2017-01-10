@@ -208,7 +208,9 @@
     <Compile Include="Controllers\THEAPPROVALPROCESSController.cs" />
     <Compile Include="Controllers\THEREVIEWPROCESSApiController.cs" />
     <Compile Include="Controllers\THEREVIEWPROCESSController.cs" />
+    <Compile Include="Controllers\UNCERTAINTYTABLE2ApiController.cs" />
     <Compile Include="Controllers\UNCERTAINTYTABLEApiController.cs" />
+    <Compile Include="Controllers\UNCERTAINTYTABLE2Controller.cs" />
     <Compile Include="Controllers\UNCERTAINTYTABLEController.cs" />
     <Compile Include="Controllers\VAPPLIANCE_DETAIL_INFORMATIONApiController .cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1050,6 +1052,12 @@
     <Content Include="Views\PROJECTTEMPLET\PingHengFuZaiShiYouGongDianNengWuCha.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\GongZuoDianliuDianYa.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\BuPingHengFuZaiShiYouGongDianNengWuCha.cshtml" />
+    <Content Include="Views\UNCERTAINTYTABLE2\Create.cshtml" />
+    <Content Include="Views\UNCERTAINTYTABLE2\Details.cshtml" />
+    <Content Include="Views\UNCERTAINTYTABLE2\Edit.cshtml" />
+    <Content Include="Views\UNCERTAINTYTABLE2\Index.cshtml" />
+    <Content Include="Views\UNCERTAINTYTABLE2\IndexSet.cshtml" />
+    <Content Include="Views\UNCERTAINTYTABLE2\IndexUB.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
