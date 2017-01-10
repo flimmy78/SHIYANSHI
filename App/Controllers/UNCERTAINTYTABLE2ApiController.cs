@@ -455,10 +455,10 @@ namespace Langben.App.Controllers
 
         ValidationErrors validationErrors = new ValidationErrors();
 
-        public UNCERTAINTYTABLEApiController()
+        public UNCERTAINTYTABLE2ApiController()
             : this(new UNCERTAINTYTABLEBLL()) { }
 
-        public UNCERTAINTYTABLEApiController(UNCERTAINTYTABLEBLL bll)
+        public UNCERTAINTYTABLE2ApiController(UNCERTAINTYTABLEBLL bll)
         {
             m_BLL = bll;
         }
