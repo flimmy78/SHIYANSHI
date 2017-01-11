@@ -82,7 +82,7 @@ namespace Langben.App.Controllers
         public Common.ClientResult.Result Put(string baogaoid, string qijuid, string yemian)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
-            if (baogaoid != null || qijuid != null && ModelState.IsValid)
+            if (baogaoid != null || qijuid != null )
             {   //数据校验          
                 string currentPerson = GetCurrentPerson();
                 string returnValue = string.Empty;
@@ -152,7 +152,9 @@ namespace Langben.App.Controllers
                                 LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息的Id为" + appion.ID, "器具领取");//写入日志       
                                 result.Code = Common.ClientCode.Succeed;
                                 result.Message = Suggestion.UpdateFail;
+                                return result; //提示创建失败
                             }
+               
                             List<APPLIANCE_LABORATORY> list = m_BLL4.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item.Split('~')[0]);
                             foreach (var item2 in list)
                             {
@@ -164,6 +166,7 @@ namespace Langben.App.Controllers
                                     LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息_承接实验室的Id为" + appry.ID, "器具领取");//写入日志  
                                     result.Code = Common.ClientCode.Succeed;
                                     result.Message = Suggestion.UpdateFail;
+                                    return result; //提示创建失败
                                 }
                             }
                             if (m_BLL2.Create(ref validationErrors, app))
