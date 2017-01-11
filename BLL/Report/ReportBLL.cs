@@ -1136,6 +1136,23 @@ namespace Langben.Report
                             {
                                 foreach (BuDueDingDu buQueDingDu in buQueDingDus)
                                 {
+                                    if(buQueDingDu==null)
+                                    {
+                                        continue;
+                                    }
+                                    if(ruleCount!=0)
+                                    {
+                                        int yuShu = rowIndex_Destination % 30;
+                                        if (yuShu == 0)
+                                        {                                           
+                                            rowIndex_Destination++;
+                                        }
+                                        else
+                                        {
+                                            CopyRow_1(sheet_Source, sheet_Destination, 2, rowIndex_Destination + 1, (30 - yuShu), true, null, allSpecialCharacters, null);
+                                            rowIndex_Destination = rowIndex_Destination + (30 - yuShu) + 1;
+                                        }
+                                    }
                                     #region 不确定度的评定
                                     ruleCount++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 0, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
@@ -1205,6 +1222,50 @@ namespace Langben.Report
                                     CopyRow_1(sheet_Source, sheet_Destination, 5, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 6, rowIndex_Destination, 1, false, null, allSpecialCharacters, null);
+                                    #region 空值显示/
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_1_1) || buQueDingDu.A_1_1.Trim() == "")
+                                    {
+                                        buQueDingDu.A_1_1 = "/";
+                                    }
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_1_2) || buQueDingDu.A_1_2.Trim() == "")
+                                    {
+                                        buQueDingDu.A_1_2 = "/";
+                                    }
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_1_3) || buQueDingDu.A_1_3.Trim() == "")
+                                    {
+                                        buQueDingDu.A_1_3 = "/";
+                                    }
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_1_4) || buQueDingDu.A_1_4.Trim() == "")
+                                    {
+                                        buQueDingDu.A_1_4 = "/";
+                                    }
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_1_5) || buQueDingDu.A_1_5.Trim() == "")
+                                    {
+                                        buQueDingDu.A_1_5 = "/";
+                                    }
+
+
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_2_1) || buQueDingDu.A_2_1.Trim() == "")
+                                    {
+                                        buQueDingDu.A_2_1 = "/";
+                                    }
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_2_2) || buQueDingDu.A_2_2.Trim() == "")
+                                    {
+                                        buQueDingDu.A_2_2 = "/";
+                                    }
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_2_3) || buQueDingDu.A_2_3.Trim() == "")
+                                    {
+                                        buQueDingDu.A_2_3 = "/";
+                                    }
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_2_4) || buQueDingDu.A_2_4.Trim() == "")
+                                    {
+                                        buQueDingDu.A_2_4 = "/";
+                                    }
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_2_5) || buQueDingDu.A_2_5.Trim() == "")
+                                    {
+                                        buQueDingDu.A_2_5 = "/";
+                                    }
+                                    #endregion 
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(buQueDingDu.A_1_1);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(12).SetCellValue(buQueDingDu.A_1_2);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(23).SetCellValue(buQueDingDu.A_1_3);
@@ -1241,7 +1302,13 @@ namespace Langben.Report
                                                 foreach (CellRangeAddress c in cellAddressList.Values)
                                                 {
                                                     MYData d = buQueDingDu.buDueDingDuB.FirstOrDefault();
-                                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue(d.value);
+                                                    if (string.IsNullOrWhiteSpace(d.value) || d.value.Trim() == "")
+                                                    {
+                                                        d.value = "/";
+                                                    }
+                                                    HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, d.value);
+                                                    
+                                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue(value);
                                                     buQueDingDu.buDueDingDuB.Remove(d);
                                                 }
                                             }
@@ -1279,13 +1346,25 @@ namespace Langben.Report
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 21, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(11).SetCellValue(buQueDingDu.txtValueE);
-                                    rowIndex_Destination++;
+                                    //rowIndex_Destination++;
                                     #endregion
+
+                                    //int yuShu = rowIndex_Destination % 30;
+                                    //if (yuShu == 0)
+                                    //{
+                                    //    //CopyRow_1(sheet_Source, sheet_Destination, 1, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    //    rowIndex_Destination++;
+                                    //}
+                                    //else
+                                    //{
+                                    //    CopyRow_1(sheet_Source, sheet_Destination, 2, rowIndex_Destination+1, (30 - yuShu), true, null, allSpecialCharacters, null);
+                                    //    rowIndex_Destination = rowIndex_Destination + (30 - yuShu) + 1;
+                                    //}
                                 }
                             }
                         }
 
-
+                        
 
                     }
                 }

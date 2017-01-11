@@ -280,7 +280,7 @@ namespace Langben.Report
             }
             catch(Exception ex)
             {
-
+                buDueDingDu = null;
             }
 
             return buDueDingDu;
