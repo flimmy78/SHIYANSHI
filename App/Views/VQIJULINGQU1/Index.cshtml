@@ -156,7 +156,8 @@
                      }, {
                          field: 'a', title: '报告回收', width: 111, formatter: function (value, row, index) {
                              if (row.REPORTSTATUS == "@Common.REPORTSTATUS.报告已回收.ToString()") {
-                                 return "<input type='radio' name='huishou' value='" + row.PREPARE_SCHEMEID + "' checked='checked' disabled='disabled'/>";
+                                 //return "<input type='radio' name='huishou' value='" + row.PREPARE_SCHEMEID + "' checked='checked' disabled='disabled'/>";
+                                 return "已回收";
                              }
                              else {
                                  return "<input type='radio' name='huishou' value='" + row.PREPARE_SCHEMEID + "'/>";
