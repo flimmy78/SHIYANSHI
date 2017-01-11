@@ -199,9 +199,15 @@
                 //data: arr,
                 success: function (res) {
                     if (res.Code == 1) {
+
                         $.messager.alert('操作提示', "领取成功！", 'info');
-                        $("#flexigridData").datagrid("reload");
-                        $("#flexigridData").datagrid("clearSelections");
+                        if (window.opener) {
+                            window.opener.location.href = "/VQIJULINGQU1";
+
+                            window.close();
+                        }
+                        //$("#flexigridData").datagrid("reload");
+                        //$("#flexigridData").datagrid("clearSelections");
                     }
                     else {
                         $.messager.alert('操作提示', "领取失败！", 'error');

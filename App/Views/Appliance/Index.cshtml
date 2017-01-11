@@ -647,6 +647,7 @@ s：字符串
                 $.messager.alert('操作提示', "请先选择一行！", 'info');
             }
         }
+        var WindowObjectReference; // global variable
         //委托单(包含器具信息)发送
         function flexiSave() {
             //结束器具的编辑状态
@@ -685,8 +686,25 @@ s：字符串
                             },
                             success: function (data) {
                                 if (data.Code == 1) {
+                                    var fulls = "left=0,screenX=0,top=0,screenY=0,scrollbars=1";    //定义弹出窗口的参数  
+                                    if (window.screen) {
+                                        var ah = screen.availHeight - 30;
+                                        var aw = screen.availWidth - 10;
+                                        fulls += ",height=" + ah;
+                                        fulls += ",innerHeight=" + ah;
+                                        fulls += ",width=" + aw;
+                                        fulls += ",innerWidth=" + aw;
+                                        fulls += ",resizable"
+                                    } else {
+                                        fulls += ",resizable"; // 对于不支持screen属性的浏览器，可以手工进行最大化。 manually  
+                                    }
                                      
-                                        window.open('/ORDER_TASK_INFORMATION/Show/' + data.Id);
+                                     
+                                    WindowObjectReference = window.open('/ORDER_TASK_INFORMATION/Show/' + data.Id,
+       "签字",
+      fulls);
+                                    debugger
+                                        //window.open('/ORDER_TASK_INFORMATION/Show/' + data.Id);
                                       //  window.location.href = '/Appliance/Index';
                                      
                                 }
