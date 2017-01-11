@@ -1302,7 +1302,8 @@ namespace Langben.Report
                                                 foreach (CellRangeAddress c in cellAddressList.Values)
                                                 {
                                                     MYData d = buQueDingDu.buDueDingDuB.FirstOrDefault();
-                                                    if (string.IsNullOrWhiteSpace(d.value) || d.value.Trim() == "")
+                                                    if ((string.IsNullOrWhiteSpace(d.value) || d.value.Trim() == "" || d.value=="null") && d.name!= "sourceNum" 
+                                                        && d.name!= "B_WuChaXian_UNIT" && d.name!= "B_Ui_UNIT")
                                                     {
                                                         d.value = "/";
                                                     }
