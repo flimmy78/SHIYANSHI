@@ -429,7 +429,7 @@ else
         }
 
         var mean = Math.sqrt(total / arr.length);
-        mean = Math.round(mean * 10000) / 10000;        
+        mean = Math.round(mean * 1000000) / 1000000;        
         var v = $("#txtValueB").val();
         $("#txtBuQueDingB").val(v == "" ? mean : parseFloat(mean) / parseFloat(v));
         calculateC();

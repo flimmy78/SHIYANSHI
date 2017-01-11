@@ -1380,8 +1380,8 @@ function calculate(strData) {
     var sVariance = Math.pow(sd, 2);
     sVariance = Math.round(sVariance * 1000000) / 1000000;
     var pVariance = Math.pow(psd, 2);
-    pVariance = Math.round(pVariance * 1000000) / 1000000;
-    sd = Math.round(sd * 1000000) / 1000000;//标准偏差
+    pVariance = Math.round(pVariance * 100000000) / 100000000;
+    sd = Math.round(sd * 100000000) / 100000000;//标准偏差
     return sd;
     // psd = Math.round(psd * 1000000) / 1000000;
 
