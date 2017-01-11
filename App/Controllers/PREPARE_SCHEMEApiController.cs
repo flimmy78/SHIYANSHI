@@ -437,7 +437,7 @@ namespace Langben.App.Controllers
                 string currentPerson = GetCurrentPerson();
                 entity.UPDATETIME = DateTime.Now;
                 entity.UPDATEPERSON = currentPerson;
-
+                entity.AUDITDATE = System.DateTime.Now;
                 PREPARE_SCHEME ps = m_BLL.GetById(entity.ID);
                 if (ps.REPORTSTATUSZI == Common.REPORTSTATUS.审核驳回.GetHashCode().ToString() || ps.REPORTSTATUSZI == Common.REPORTSTATUS.批准驳回.GetHashCode().ToString() || ps.REPORTSTATUSZI == null)
                 {
