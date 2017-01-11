@@ -67,13 +67,23 @@ namespace Models
             PropertyInfo[] properties;
             //标题行  委托单号	器具名称	型号	出厂编号	证书单位	客户特殊要求	器具所在位置	器具状态	入库说明
             var titles = "委托单号,器具名称,型号,出厂编号,证书单位,客户特殊要求,器具所在位置,器具状态,入库说明".Split(',');
+      
+            var dd = sheet.GetRow(0).GetCell(1).CellStyle;
+         
+
+
             HSSFRow dataRow = sheet.CreateRow(0) as HSSFRow;
+
+
+            ICellStyle cellStyle = hssfworkbook.CreateCellStyle();
+            cellStyle.ShrinkToFit = true;
             for (int i = 0; i < titles.Length; i++)
             {
                 if (!string.IsNullOrWhiteSpace(titles[i]))
                 {
-
-                    dataRow.CreateCell(i).SetCellValue(titles[i]); //列值
+                    var cell = dataRow.CreateCell(i);
+                    cell.CellStyle = dd;
+                    cell.SetCellValue(titles[i]); //列值
 
                 }
             }
@@ -102,8 +112,9 @@ namespace Models
 
                     if (propertyName.ContainsKey(a)) //列名
                     {
-
-                        dataRow.CreateCell(j).SetCellValue(propertyName[a]);
+                        var cell = dataRow.CreateCell(j);
+                      
+                        cell.SetCellValue(propertyName[a]);
                         //列值
                     }
                     j++;
