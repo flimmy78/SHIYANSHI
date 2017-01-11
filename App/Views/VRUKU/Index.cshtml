@@ -85,22 +85,22 @@
                         text: '打印入库单',
                         iconCls: 'icon-print',
                         handler: function () {
-                            return getView();
+                            return flexiExport();
                         }
                     }
             ],
             columns: [[
 					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 77, hidden: true }
-					, { field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 77 }
-					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 77 }
-					, { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 77 }
-					, { field: 'VERSION', title: '@Html.DisplayNameFor(model => model.VERSION)', width: 77 }
+					//, { field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 77 }
+					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 97 }
+					, { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 97 }
+					, { field: 'VERSION', title: '@Html.DisplayNameFor(model => model.VERSION)', width: 97 }
 					, { field: 'FACTORY_NUM', title: '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 77 }
-					, { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 77 }
-					, { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 77 }
-					, { field: 'APPLIANCE_PROGRESS', title: '@Html.DisplayNameFor(model => model.APPLIANCE_PROGRESS)', width: 77 }
-					, { field: 'ORDER_STATUS', title: '@Html.DisplayNameFor(model => model.ORDER_STATUS)', width: 77 }
-					, { field: 'STORAGEINSTRUCTIONS', title: '@Html.DisplayNameFor(model => model.STORAGEINSTRUCTIONS)', width: 77 }
+					, { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 97 }
+					, { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 97 }
+					, { field: 'APPLIANCE_PROGRESS', title: '@Html.DisplayNameFor(model => model.APPLIANCE_PROGRESS)', width: 97 }
+					, { field: 'ORDER_STATUS', title: '@Html.DisplayNameFor(model => model.ORDER_STATUS)', width: 97 }
+					, { field: 'STORAGEINSTRUCTIONS', title: '@Html.DisplayNameFor(model => model.STORAGEINSTRUCTIONS)', width: 97 }
                     , { field: 'STORAGEINSTRUCTI_STATU', title: '@Html.DisplayNameFor(model => model.STORAGEINSTRUCTI_STATU)', width: 77, hidden: true }
             ]],
             pagination: true,
@@ -119,7 +119,29 @@
             $('#flexigridData').datagrid("addToolbarItem", [{ "text": "选择", "iconCls": "icon-ok", handler: function () { flexiSelect(); } }]);
         }
     });
+    //“导出”按钮     在6.0版本中修改
+    function flexiExport() {
 
+        //将查询条件按照分隔符拼接成字符串
+        var search = "";
+        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
+            search = search + this.id + "&" + this.value + "^";
+        });
+
+ 
+        $.post('../VRUKU/GetData2',
+            {
+             
+                sortName: $('#flexigridData').datagrid('options').sortName,
+                sortOrder: $('#flexigridData').datagrid('options').sortOrder,
+                search: search
+            }, function (res) {
+               
+                    window.location.href = res;
+               
+
+            });
+    };
     //“查询”按钮，弹出查询框
     function flexiQuery() {
 

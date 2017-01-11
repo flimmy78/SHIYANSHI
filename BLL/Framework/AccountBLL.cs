@@ -10,7 +10,27 @@ namespace Langben.BLL
 {
     public class AccountBLL : IAccountBLL
     {
+        /// <summary>
+        /// 根据登录名获取签字地址
+        /// </summary>
+        /// <param name="personName">登录名</param>
+        /// <returns>Dictionary<登录名, 签字地址></returns>
+        public Dictionary<string, string> GetPictureByName(List<string> personName)
+        {
+            Dictionary<string, string> name = new Dictionary<string, string>();
 
+            using (SysEntities db = new SysEntities())
+            {
+                var person = db.SysPerson.Where(p => (personName.Contains(p.Name))).ToList();
+                foreach (var item in person)
+                {
+                    name.Add(item.Name, item.HDpic);
+                }
+
+            }
+
+            return name;
+        }
         /// <summary>
         /// 验证用户名和密码是否正确
         /// </summary>
@@ -25,7 +45,7 @@ namespace Langben.BLL
             //获取用户信息,请确定web.config中的连接字符串正确
             using (SysEntities db = new SysEntities())
             {
-                
+
                 var person = (from p in db.SysPerson
                               where p.Name == userName
                               && p.Password == password

@@ -52,6 +52,85 @@ namespace Models
         /// <param name="path">excle模版的位置</param>
         /// <param name="from">显示的标题默认行数为1</param>
         /// <returns></returns>
+        public string WriteExcleRuKu( string[] fields, dynamic[] query, string path = @"~/up/ruku.xls", int from = 1)
+        {
+            HSSFWorkbook _book = new HSSFWorkbook();
+            string xlsPath = System.Web.HttpContext.Current.Server.MapPath(path);
+
+            FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
+            IWorkbook hssfworkbook = new HSSFWorkbook(file);
+            ISheet sheet = hssfworkbook.GetSheet("入库单");
+            string guid = Guid.NewGuid().ToString();
+            string saveFileName = xlsPath.Path(guid);
+
+            Dictionary<string, string> propertyName;
+            PropertyInfo[] properties;
+            //标题行  委托单号	器具名称	型号	出厂编号	证书单位	客户特殊要求	器具所在位置	器具状态	入库说明
+            var titles = "委托单号,器具名称,型号,出厂编号,证书单位,客户特殊要求,器具所在位置,器具状态,入库说明".Split(',');
+            HSSFRow dataRow = sheet.CreateRow(0) as HSSFRow;
+            for (int i = 0; i < titles.Length; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(titles[i]))
+                {
+
+                    dataRow.CreateCell(i).SetCellValue(titles[i]); //列值
+
+                }
+            }
+            //内容行
+            for (int i = 0; i < query.Length; i++)
+            {
+                propertyName = new Dictionary<string, string>();
+                if (query[i] == null)
+                {
+                    continue;
+                }
+                Type type = query[i].GetType();
+                properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+                foreach (PropertyInfo property in properties)
+                {
+                    object o = property.GetValue(query[i], null);
+                    if (!string.IsNullOrEmpty(property.Name) && o != null)
+                    {
+                        propertyName.Add(property.Name, o.ToString());
+                    }
+                }
+                int j = 0;
+                dataRow = sheet.CreateRow(i + from) as HSSFRow;
+                fields.All(a =>
+                {
+
+                    if (propertyName.ContainsKey(a)) //列名
+                    {
+
+                        dataRow.CreateCell(j).SetCellValue(propertyName[a]);
+                        //列值
+                    }
+                    j++;
+                    return true;
+                });
+            }
+            sheet.ForceFormulaRecalculation = true;
+            using (FileStream fileWrite = new FileStream(saveFileName, FileMode.Create))
+            {
+                hssfworkbook.Write(fileWrite);
+            }
+
+
+            //一般只用写这一个就OK了，他会遍历并释放所有资源，但当前版本有问题所以只释放sheet  
+            return string.Format("../../up/{0}.xls", guid);
+            //记录日志
+
+        }
+        /// <summary>
+        /// 导出数据集到excle
+        /// </summary>
+        /// <param name="titles">第一行显示的标题名称</param>
+        /// <param name="fields">字段</param>
+        /// <param name="query">数据集</param>
+        /// <param name="path">excle模版的位置</param>
+        /// <param name="from">显示的标题默认行数为1</param>
+        /// <returns></returns>
         public string WriteExcle(string[] titles, string[] fields, dynamic[] query, string path = @"~/up/b.xls", int from = 1)
         {
             HSSFWorkbook _book = new HSSFWorkbook();

@@ -112,6 +112,60 @@ namespace Langben.App.Controllers
                     )
             });
         }
+        /// <summary>
+        /// 异步加载数据
+        /// </summary>
+        /// <param name="page">页码</param>
+        /// <param name="rows">每页显示的行数</param>
+        /// <param name="order">升序asc（默认）还是降序desc</param>
+        /// <param name="sort">排序字段</param>
+        /// <param name="search">查询条件</param>
+        /// <returns></returns>
+        [HttpPost]
+        [SupportFilter]
+        public ActionResult GetData2(string order, string sort, string search)
+        {
+            string STORAGEINSTRUCTI_STATU = string.Empty;
+            Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
+            foreach (var item in queryDic)
+            {
+                if (item.Key == "STORAGEINSTRUCTI_STATU")
+                {
+                    STORAGEINSTRUCTI_STATU = item.Value;
+                }
+            }
+
+            if (STORAGEINSTRUCTI_STATU == Common.ORDER_STATUS.待入库.ToString() || search == null)
+            {
+                if (search != null)
+                {
+                    int end = search.LastIndexOf("^STORAGEINSTRUCTI_STATU&");
+                    search = search.Substring(0, end) + "^";
+                }
+                search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.待入库.GetHashCode() + "^";
+                search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.批准驳回.GetHashCode() + "*" + Common.REPORTSTATUS.已批准.GetHashCode() + "*" + Common.REPORTSTATUS.待批准.GetHashCode() + "*" + Common.REPORTSTATUS.报告已打印.GetHashCode() + "*" + Common.REPORTSTATUS.报告已领取.GetHashCode() + "";
+            }
+            else if (STORAGEINSTRUCTI_STATU == Common.ORDER_STATUS.器具已入库.ToString())
+            {
+                int end = search.LastIndexOf("^STORAGEINSTRUCTI_STATU&");
+                search = search.Substring(0, end);
+                search += "^EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "";
+            }
+            else
+            {
+                search += "^EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.待入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "";
+                search += "^REPORTSTATUSZI&" + Common.REPORTSTATUS.批准驳回.GetHashCode() + "*" + Common.REPORTSTATUS.已批准.GetHashCode() + "*" + Common.REPORTSTATUS.待批准.GetHashCode() + "*" + Common.REPORTSTATUS.报告已打印.GetHashCode() + "*" + Common.REPORTSTATUS.报告已领取.GetHashCode() + "";
+            }
+            int total = 0;
+            List<VRUKU> queryData = m_BLL.GetByParamX(null, 1, 9999, "desc", "APPROVALDATE", search, ref total);
+            //string[] titles = title.Split(',');//如果确定显示的名称，可以直接定义
+            string[] fields = "ORDER_NUMBER,APPLIANCE_NAME,VERSION,FACTORY_NUM,CERTIFICATE_ENTERPRISE,CUSTOMER_SPECIFIC_REQUIREMENTS,APPLIANCE_PROGRESS,ORDER_STATUS,STORAGEINSTRUCTIONS".Split(',');
+          
+            return Content(WriteExcleRuKu(fields, queryData.ToArray()));
+
+              
+        }
+
 
 
         IBLL.IVRUKUBLL m_BLL;
