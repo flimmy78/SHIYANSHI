@@ -1038,10 +1038,10 @@ namespace Langben.Report
                 SetShuJu(hssfworkbook, entity, type);
 
                 //设置不确定度
-                SetBuQueDingDu(hssfworkbook, entity, type);
+                bool IsIsHaveBuQueDingDu= SetBuQueDingDu(hssfworkbook, entity, type);
 
                 //隐藏不需要的sheet
-                HiddenSheet(hssfworkbook, type);
+                HiddenSheet(hssfworkbook, type, IsIsHaveBuQueDingDu);
 
                 //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";                
                 string fileName = SetFileName(type);
@@ -1075,12 +1075,16 @@ namespace Langben.Report
         /// </summary>
         /// <param name="hssfworkbook"></param>
         /// <param name="type"></param>
-        private void HiddenSheet(IWorkbook hssfworkbook, ExportType type)
+        private void HiddenSheet(IWorkbook hssfworkbook, ExportType type,bool IsHaveBuQueDingDu=true)
         {
             switch(type)
             {
                 case ExportType.OriginalRecord_JianDing:
                 case ExportType.OriginalRecord_XiaoZhun:
+                    if(IsHaveBuQueDingDu==false)
+                    {
+                        hssfworkbook.SetSheetHidden(1, SheetState.Hidden);//不确定度,没有不确定度需要隐藏该sheet
+                    }
                     hssfworkbook.SetSheetHidden(3,SheetState.Hidden);//封皮模板
                     hssfworkbook.SetSheetHidden(4, SheetState.Hidden);//数据模板
                     hssfworkbook.SetSheetHidden(5, SheetState.Hidden);//不确定度模板
@@ -1102,15 +1106,16 @@ namespace Langben.Report
             }
         }
         /// <summary>
-        /// 设置不确定度
+        /// 设置不确定度(返回是否有不确定计算过程)
         /// </summary>
         /// <param name="hssfworkbook">workbook</param>
         /// <param name="entity"></param>
         /// <param name="type"></param>        
-        private void SetBuQueDingDu(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing)
+        private bool SetBuQueDingDu(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing)
         {
             if (type == ExportType.OriginalRecord_JianDing || type == ExportType.OriginalRecord_XiaoZhun)
             {
+                int ruleCount = 0;
                 string sheetName_Source = "不确定度模板";
                 string sheetName_Destination = "不确定度";
                 ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
@@ -1123,7 +1128,7 @@ namespace Langben.Report
                     entity.QUALIFIED_UNQUALIFIED_TEST_ITE = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.OrderBy(p => p.SORT).ToList();
 
                     int rowIndex_Destination = 0;
-                    int ruleCount = 0;
+                
                     foreach (QUALIFIED_UNQUALIFIED_TEST_ITE iEntity in entity.QUALIFIED_UNQUALIFIED_TEST_ITE)
                     {
 
@@ -1136,6 +1141,23 @@ namespace Langben.Report
                             {
                                 foreach (BuDueDingDu buQueDingDu in buQueDingDus)
                                 {
+                                    if(buQueDingDu==null)
+                                    {
+                                        continue;
+                                    }
+                                    if(ruleCount!=0)
+                                    {
+                                        int yuShu = rowIndex_Destination % 30;
+                                        if (yuShu == 0)
+                                        {                                           
+                                            rowIndex_Destination++;
+                                        }
+                                        else
+                                        {
+                                            CopyRow_1(sheet_Source, sheet_Destination, 2, rowIndex_Destination + 1, (30 - yuShu), true, null, allSpecialCharacters, null);
+                                            rowIndex_Destination = rowIndex_Destination + (30 - yuShu) + 1;
+                                        }
+                                    }
                                     #region 不确定度的评定
                                     ruleCount++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 0, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
@@ -1205,6 +1227,50 @@ namespace Langben.Report
                                     CopyRow_1(sheet_Source, sheet_Destination, 5, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 6, rowIndex_Destination, 1, false, null, allSpecialCharacters, null);
+                                    #region 空值显示/
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_1_1) || buQueDingDu.A_1_1.Trim() == "")
+                                    {
+                                        buQueDingDu.A_1_1 = "/";
+                                    }
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_1_2) || buQueDingDu.A_1_2.Trim() == "")
+                                    {
+                                        buQueDingDu.A_1_2 = "/";
+                                    }
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_1_3) || buQueDingDu.A_1_3.Trim() == "")
+                                    {
+                                        buQueDingDu.A_1_3 = "/";
+                                    }
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_1_4) || buQueDingDu.A_1_4.Trim() == "")
+                                    {
+                                        buQueDingDu.A_1_4 = "/";
+                                    }
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_1_5) || buQueDingDu.A_1_5.Trim() == "")
+                                    {
+                                        buQueDingDu.A_1_5 = "/";
+                                    }
+
+
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_2_1) || buQueDingDu.A_2_1.Trim() == "")
+                                    {
+                                        buQueDingDu.A_2_1 = "/";
+                                    }
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_2_2) || buQueDingDu.A_2_2.Trim() == "")
+                                    {
+                                        buQueDingDu.A_2_2 = "/";
+                                    }
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_2_3) || buQueDingDu.A_2_3.Trim() == "")
+                                    {
+                                        buQueDingDu.A_2_3 = "/";
+                                    }
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_2_4) || buQueDingDu.A_2_4.Trim() == "")
+                                    {
+                                        buQueDingDu.A_2_4 = "/";
+                                    }
+                                    if (string.IsNullOrWhiteSpace(buQueDingDu.A_2_5) || buQueDingDu.A_2_5.Trim() == "")
+                                    {
+                                        buQueDingDu.A_2_5 = "/";
+                                    }
+                                    #endregion 
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(buQueDingDu.A_1_1);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(12).SetCellValue(buQueDingDu.A_1_2);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(23).SetCellValue(buQueDingDu.A_1_3);
@@ -1241,7 +1307,14 @@ namespace Langben.Report
                                                 foreach (CellRangeAddress c in cellAddressList.Values)
                                                 {
                                                     MYData d = buQueDingDu.buDueDingDuB.FirstOrDefault();
-                                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue(d.value);
+                                                    if ((string.IsNullOrWhiteSpace(d.value) || d.value.Trim() == "" || d.value=="null") && d.name!= "sourceNum" 
+                                                        && d.name!= "B_WuChaXian_UNIT" && d.name!= "B_Ui_UNIT")
+                                                    {
+                                                        d.value = "/";
+                                                    }
+                                                    HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, d.value);
+                                                    
+                                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue(value);
                                                     buQueDingDu.buDueDingDuB.Remove(d);
                                                 }
                                             }
@@ -1279,18 +1352,36 @@ namespace Langben.Report
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 21, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(11).SetCellValue(buQueDingDu.txtValueE);
-                                    rowIndex_Destination++;
+                                    //rowIndex_Destination++;
                                     #endregion
+
+                                    //int yuShu = rowIndex_Destination % 30;
+                                    //if (yuShu == 0)
+                                    //{
+                                    //    //CopyRow_1(sheet_Source, sheet_Destination, 1, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                    //    rowIndex_Destination++;
+                                    //}
+                                    //else
+                                    //{
+                                    //    CopyRow_1(sheet_Source, sheet_Destination, 2, rowIndex_Destination+1, (30 - yuShu), true, null, allSpecialCharacters, null);
+                                    //    rowIndex_Destination = rowIndex_Destination + (30 - yuShu) + 1;
+                                    //}
                                 }
                             }
                         }
 
-
+                        
 
                     }
                 }
                 #endregion
+
+                if (ruleCount > 0)//如果不确定过程一个都没有需要隐藏不确定sheet
+                {
+                    return true;
+                }                
             }
+            return false;
 
         }
         /// <summary>

@@ -120,7 +120,11 @@ namespace Langben.App.Controllers
             PREPARE_SCHEME pre = new PREPARE_SCHEME();
             pre.REPORTNUMBER = REPORTNUMBER;//证书编号
             pre.PACKAGETYPE = Common.PACKAGETYPE.上传.ToString();
-            pre.UNQUALIFIEDTYPE = file.UNQUALIFIEDTYPE.ToString();//不合格类型
+            if (!string.IsNullOrWhiteSpace(file.UNQUALIFIEDTYPE))
+            {
+                pre.UNQUALIFIEDTYPE = file.UNQUALIFIEDTYPE.ToString();//不合格类型
+            }
+         
             string msg = string.Empty;
             if (Request.Files.Count > 0)//前端获取文件选择控件值
             {

@@ -66,12 +66,32 @@ else
                                 </select>
                                 <input class="my-textbox " type="text" name="pingding2" id="pingding2_1_1_1" value="" style="width:100px">
                                 <select class="my-combobox" name="pingding3" id="pingding3_1_1_1">
-                                    <option value="V">V</option>
+                                    <option value=""></option>
+                                    <option value="A">A</option>
+                                    <option value="KA">KA</option>
+                                    <option value="mA">mA</option>
+                                    <option value="μA">μA</option>
+                                    <option value="nA">nA</option>
+                                    <option value="pA">pA</option>
                                     <option value="MV">MV</option>
-                                    <option value="kV">kV</option>
+                                    <option value="KV">KV</option>
+                                    <option value="V">V</option>
                                     <option value="mV">mV</option>
                                     <option value="μV">μV</option>
+                                    <option value="Hz">Hz</option>
+                                    <option value="KHz">KHz</option>
+                                    <option value="MHz">MHz</option>
+                                    <option value="GHz">GHz</option>
+                                    <option value="THz">THz</option>
+                                    <option value="Ω">Ω</option>
+                                    <option value="TΩ">TΩ</option>
+                                    <option value="GΩ">GΩ</option>
+                                    <option value="MΩ">MΩ</option>
+                                    <option value="kΩ">kΩ</option>
+                                    <option value="mΩ">mΩ</option>
+                                    <option value="μΩ">μΩ</option>                                   
                                 </select>
+
                             </li>
                             <li class="fl mr10">
                                 <input type="button" class="my-btn" value="添 加" onclick="linkButton.add(this)" />
@@ -247,7 +267,7 @@ else
     //添加评定点
     var linkButton = {
         add: function (obj) {
-            var newRow = " <ul class=\"clear mb10\">" + $(obj).parents('div ul').html() + "</ul>";
+            var newRow = " <ul class=\"clear mb10\" tag=\"pingding\">" + $(obj).parents('div ul').html() + "</ul>";
 
             var parDiv = $(obj).parents('div ul').parent()
             var newobj = $(parDiv).append(newRow);

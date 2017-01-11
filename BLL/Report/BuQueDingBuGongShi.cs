@@ -25,13 +25,13 @@ namespace Langben.BLL.Report
             if (string.IsNullOrWhiteSpace(paras.XuanYongDianZu))
             {//无电阻
                 buQueDingBuJiHe = (from f in BuQueDingBuJiHe.jihe
-                 where f.RuleID == paras.RuleID
-                 select f).First();
+                                   where f.RuleID == paras.RuleID
+                                   select f).First();
             }
             else
             {//有电阻
                 buQueDingBuJiHe = (from f in BuQueDingBuJiHe.jihe
-                                   where f.RuleID == paras.RuleID && f.DianZu=="Y"
+                                   where f.RuleID == paras.RuleID && f.DianZu == "Y"
                                    select f).First();
             }
 
@@ -39,7 +39,7 @@ namespace Langben.BLL.Report
             UNCERTAINTYTABLEBLL bll = new BLL.UNCERTAINTYTABLEBLL();
             List<UNCERTAINTYTABLE> data = bll.GetByASSESSMENTITEM(buQueDingBuJiHe.MingChen);
 
-
+            GongShi.GetBuQueDingDu(paras, data, buQueDingBuJiHe);
 
             if (!string.IsNullOrWhiteSpace(paras.ShuChuShiJiZhi))
             {
