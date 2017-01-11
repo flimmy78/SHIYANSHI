@@ -128,7 +128,7 @@
                     </tr>
                 </tbody>
                 <tr>
-                  <td colspan="8" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addUrel()">增加不确定度计算行</a></td>
+                  <td colspan="8" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="TongDao.addBuQueDingRow()">增加不确定度计算行</a></td>
                 </tr>
             </table>
         </div>
@@ -202,6 +202,13 @@
             },
             getCurTongDaoIdx: function (obj) { 
                 currentindex = 1;
+            }, addBuQueDingRow: function () {
+                var tr = $("#tbody_2 tr:eq(0)").clone();
+                $('input[type="text"]', tr).each(function () {
+                    $(this).val("");
+                })
+                $("#tbody_2").append(tr);
+
             }
         }
         var calculate = {
