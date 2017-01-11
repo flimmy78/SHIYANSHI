@@ -16,7 +16,8 @@
     <style type="text/css">
         ul{border-bottom:1px solid #d4d4d4;padding-bottom:5px}
         li{ width:235px; height:26px; margin-bottom:5px }
-        li label{ display:inline;width:40px} 
+        li label{ display:inline;width:40px}
+            li .my-textbox {width:150px}
     </style>
     <input type="hidden" id="rowindex" value="1" />
     <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
@@ -29,7 +30,7 @@
                 <ul class="clear mt10">
                     <li class="fl mr10">
                         <label>评定项：</label>
-                        <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" id="ASSESSMENTITEM">
+                        <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" id="ASSESSMENTITEM_1">
                             <option value="">请选择</option>
                             <option value="5720A交流电流测量">5720A交流电流测量</option>
                             <option value="5720A交流电压测量单相">5720A交流电压测量单相</option>
@@ -51,7 +52,7 @@
                     </li>
                     <li class="fl mr10">
                         起单位：
-                        <select class="my-combobox" name="THEUNIT" id="THEUNIT">
+                        <select class="my-combobox" name="THEUNIT" id="THEUNIT_1">
                             <option value="">请选择</option>
                         </select>
                     </li>
@@ -71,7 +72,7 @@
                     </li>
                     <li class="fl mr10">
                         止单位：
-                        <select class="my-combobox" name="ENDUNIT" id="ENDUNIT">
+                        <select class="my-combobox" name="ENDUNIT" id="ENDUNIT_1">
                             <option value="">请选择</option>
                         </select>
                     </li>
@@ -140,7 +141,7 @@
                     </li>
                     <li class="fl mr10">
                         指标1单位：
-                        <select class="my-combobox" name="INDEX1UNIT" id="INDEX1UNIT">
+                        <select class="my-combobox" name="INDEX1UNIT" id="INDEX1UNIT_1">
                             <option value="">请选择</option>
                         </select>
                     </li>
@@ -150,7 +151,7 @@
                     </li>
                     <li class="fl mr10">
                         指标2单位：
-                        <select class="my-combobox" name="INDEX2UNIT" id="INDEX2UNIT">
+                        <select class="my-combobox" name="INDEX2UNIT" id="INDEX2UNIT_1">
                             <option value="">请选择</option>
                         </select>
                     </li>
@@ -250,11 +251,21 @@
 
             }
         }
+        var curIdx = 1;
         var linkButton = {
             add: function (obj) {
+                var h = $(obj).parents('div ul').clone();
+                curIdx = curIdx + 1;
+                $('li', h).each(function () {
+                    
+                    if ($(this).children('select'). attr("id") != undefined)
+                        $(this).children('select').attr("id", ($(this).children('select').attr("id").split("_")[0] +"_"+ curIdx))
+                  
+                })
                 var html = $(obj).parents('div ul').html();
-                var html2 = html.replace(/id="\w*"/, "");
-                var newRow = " <ul class=\"clear mt10\">" + html2 + "</ul>";
+               // var html2 = html.replace(/id="\w*"/, "");
+               // var html2 = html2.replace("onchange=\"gradeChange(this)\"", "");
+                var newRow = " <ul class=\"clear mt10\">" + $(h).html() + "</ul>";
                 var parDiv = $(obj).parents('div ul').parent()
                 var newobj = $(parDiv).append(newRow);
 
@@ -277,26 +288,27 @@
     //下拉框选择事件
     function gradeChange(ex) {
         var zhi = $(ex).val();
+        var idx = $(ex).attr("id").split("_")[1];
         if (zhi == "5720A交流电流测量" || zhi == "5720A直流电流测量" || zhi == "85080A交流电流输出" || zhi == "8508A直流电流输出") {
-            getCity($("#THEUNIT"));
-            getCity($("#ENDUNIT"));
-            getCity($("#INDEX1UNIT"));
-            getCity($("#INDEX2UNIT"));
-            tianjiazhi("THEUNIT,ENDUNIT,INDEX1UNIT,INDEX2UNIT", "电流")
+            getCity($("#THEUNIT_" + idx));
+            getCity($("#ENDUNIT_" + idx));
+            getCity($("#INDEX1UNIT_" + idx));
+            getCity($("#INDEX2UNIT_" + idx));
+            tianjiazhi("THEUNIT_" + +idx + ",ENDUNIT_" + +idx + ",INDEX1UNIT_" + +idx + ",INDEX2UNIT_" + +idx + "", "电流")
         }
         else if (zhi == "5720A交流电压测量单相" || zhi == "5720A交流电压测量三相" || zhi == "5720A直流电压测量" || zhi == "8508A交流电压变换器" || zhi == "8508A交流电压输出" || zhi == "8508A直流电压输出") {
-            getCity($("#THEUNIT"));
-            getCity($("#ENDUNIT"));
-            getCity($("#INDEX1UNIT"));
-            getCity($("#INDEX2UNIT"));
-            tianjiazhi("THEUNIT,ENDUNIT,INDEX1UNIT,INDEX2UNIT", "电压")
+            getCity($("#THEUNIT_" + idx));
+            getCity($("#ENDUNIT_" + idx));
+            getCity($("#INDEX1UNIT_" + idx));
+            getCity($("#INDEX2UNIT_" + idx));
+            tianjiazhi("THEUNIT_" + +idx + ",ENDUNIT_" + +idx + ",INDEX1UNIT_" + +idx + ",INDEX2UNIT_" + +idx + "", "电压")
         }
         else if (zhi == "5720A直流电阻输出" || zhi == "8508A直流电阻测量") {
-            getCity($("#THEUNIT"));
-            getCity($("#ENDUNIT"));
-            getCity($("#INDEX1UNIT"));
-            getCity($("#INDEX2UNIT"));
-            tianjiazhi("THEUNIT,ENDUNIT,INDEX1UNIT,INDEX2UNIT", "电阻")
+            getCity($("#THEUNIT_" + idx));
+            getCity($("#ENDUNIT_" + idx));
+            getCity($("#INDEX1UNIT_" + idx));
+            getCity($("#INDEX2UNIT_" + idx));
+            tianjiazhi("THEUNIT_" + +idx + ",ENDUNIT_" + +idx + ",INDEX1UNIT_" + +idx + ",INDEX2UNIT_" + +idx + "", "电阻")
         }
     }
     function tianjiazhi(sun, lei) {

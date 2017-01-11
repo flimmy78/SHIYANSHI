@@ -267,7 +267,7 @@ else
     //添加评定点
     var linkButton = {
         add: function (obj) {
-            var newRow = " <ul class=\"clear mb10\">" + $(obj).parents('div ul').html() + "</ul>";
+            var newRow = " <ul class=\"clear mb10\" tag=\"pingding\">" + $(obj).parents('div ul').html() + "</ul>";
 
             var parDiv = $(obj).parents('div ul').parent()
             var newobj = $(parDiv).append(newRow);
@@ -428,8 +428,8 @@ else
             total += Math.pow(parseFloat(arr[j]), 2);
         }
 
-        var mean = Math.sqrt(total / arr.length);
-        mean = Math.round(mean * 10000) / 10000;        
+        var mean = Math.sqrt(total);
+        mean = Math.round(mean * 1000000) / 1000000;        
         var v = $("#txtValueB").val();
         $("#txtBuQueDingB").val(v == "" ? mean : parseFloat(mean) / parseFloat(v));
         calculateC();

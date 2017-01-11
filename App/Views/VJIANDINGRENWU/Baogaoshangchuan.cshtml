@@ -8,8 +8,8 @@
     <div>
         <form id="form1" method="post" enctype="multipart/form-data" action="BaoGaoShangChuan">
 
-           
-        
+
+
             <div class="input_search">
                 <div class="input_search-label">
                     证书编号：
@@ -18,8 +18,8 @@
                     <p class="static">
                         <label>@ViewBag.REPORTNUMBER</label>
                     </p>
-                        <input type="hidden" name="REPORTNUMBER" value="@ViewBag.REPORTNUMBER" />
-</div>
+                    <input type="hidden" name="REPORTNUMBER" value="@ViewBag.REPORTNUMBER" />
+                </div>
             </div>
             <br style="clear:both" />
             <div class="input_search">
@@ -27,7 +27,7 @@
                     原始记录：
                 </div>
                 <div class="input_search-field">
-                    <input name="name" type="file" id="file"  /><br />
+                    <input name="name" type="file" id="file" /><br />
 
                 </div>
             </div>
@@ -36,7 +36,7 @@
 
                 </div>
                 <div class="input_search-field">
-                    <input type="hidden" name="NAME2" value="@ViewBag.NAME2"  />
+                    <input type="hidden" name="NAME2" value="@ViewBag.NAME2" />
                     <label>@ViewBag.NAME2</label>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                     上传证书：
                 </div>
                 <div class="input_search-field">
-                    <input name="name2" type="file" id="file2"  />
+                    <input name="name2" type="file" id="file2" />
                 </div>
             </div>
             <br style="clear:both" />
@@ -56,9 +56,10 @@
                 </div>
                 <div class="input_search-field" style="width:400px">
                     <p class="static">
-                        <label>@ViewBag.NAME</label></p>
-                        <input type="hidden" name="NAME" value="@ViewBag.NAME" />
-</div>
+                        <label>@ViewBag.NAME</label>
+                    </p>
+                    <input type="hidden" name="NAME" value="@ViewBag.NAME" />
+                </div>
 
             </div>
             <br style="clear:both" />
@@ -70,12 +71,19 @@
 
                 <p class="static">
 
-                    <label><input type="radio" name="CONCLUSION" value="合格" id="CONCLUSION1" onclick="jielun(1)"/>合格</label>   <label><input type="radio" name="CONCLUSION" value="不合格" id="CONCLUSION2" onclick="jielun(2)"/>不合格</label>
+                    <label><input type="radio" name="CONCLUSION" value="合格" id="CONCLUSION1" onclick="jielun(1)" />合格</label>   <label><input type="radio" name="CONCLUSION" value="不合格" id="CONCLUSION2" onclick="jielun(2)" />不合格</label>
                 </p>
                 @Html.DropDownList("UNQUALIFIEDTYPE", Models.SysFieldModels.GetSysField("PREPARE_SCHEME", "UNQUALIFIEDTYPE"), "请选择不合格类型", new { @style = "width:60%;display:none" })
             </div>
 
-
+            <div class="input_search">
+                <div class="input_search-label">
+                    <span style='color:#F00'>*</span>核验员：
+                </div>
+                <div class="input_search-field">
+                    @Html.DropDownList("DETECTERID", Models.SysPersonModels.GetMyName(), "请选择", new { id = "DETECTERID", @class = "easyui-combobox" })
+                </div>
+            </div><br style="clear:both;" />
 
 
 
@@ -91,11 +99,11 @@
 
                 </div>
                 <div class="input_search-field">
-                   
 
-                    
-                        @*上传按钮不能提到form外面*@
-                        <input id="Submit1" type="submit" value="上传" class="my-btn" onclick="javascript:
+
+
+                    @*上传按钮不能提到form外面*@
+                    <input id="Submit1" type="submit" value="上传" class="my-btn" onclick="javascript:
         if ($('#file').val() != '' && $('#file2').val() != '')
         {
             if ($('input[name=CONCLUSION]:checked').val() == undefined) {
@@ -116,21 +124,25 @@
             return false;
         };
   " />
-                   
-                   <input id="fashongid" type="button" class="my-btn" value="发送审核" onclick="songwangshenghe()" />
-                  
-                        <input type="button" onclick="javascript: window.location.href = '/VJIANDINGRENWU/Index';" value="返回" class="my-btn" />
-                  
+
+                    <input id="fashongid" type="button" class="my-btn" value="发送审核" onclick="songwangshenghe()" />
+
+                    <input type="button" onclick="javascript: window.location.href = '/VJIANDINGRENWU/Index';" value="返回" class="my-btn" />
+
                 </div>
             </div>
 
         </form>
     </div>
-   
+
 </fieldset>
 
 <script type="text/javascript">
     $(function () {
+        //加载核验员
+        if ("@ViewBag.DETECTERID"!="") {
+            $("#DETECTERID").val(@ViewBag.DETECTERID);
+        }
         //输入框的禁用
         if ("@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.审核驳回.ToString()" || "@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.批准驳回.ToString()" || "@ViewBag.REPORTSTATUS" == "") {
             //return true;
@@ -162,33 +174,41 @@
         }
     })
     //发送审核
-    function songwangshenghe() {
+    function songwangshenghe() {      
+        var DETECTERID = $("#DETECTERID").combobox('getValue');
         var arr = {
             ID: "@ViewBag.PREPARE_SCHEMEID",
             REPORTSTATUS: "@Common.REPORTSTATUS.待审核",
             REPORTSTATUSZI: "@Common.REPORTSTATUS.待审核.GetHashCode()",
-            AUDITDATE:"@DateTime.Now;"
+            AUDITDATE: "@DateTime.Now;",
+            DETECTERID: DETECTERID
         }
-        if ("@ViewBag.NAME2" != "") {
-            $.ajax({
-                url: "/api/PREPARE_SCHEMEApi/EditField",
-                type: "Put",
-                data: arr,
-                // async: false,
-                success: function (res) {
-                    if (res.Code == 1) {
-                        $("#Submit1,#fashongid").attr("disabled", true);
-                        $.messager.alert('操作提示', "发送审核成功！", 'info');
+        if (arr.DETECTERID!="") {
+            if ("@ViewBag.NAME2" != "") {
+                $.ajax({
+                    url: "/api/PREPARE_SCHEMEApi/EditField",
+                    type: "Put",
+                    data: arr,
+                    // async: false,
+                    success: function (res) {
+                        if (res.Code == 1) {
+                            $("#Submit1,#fashongid").attr("disabled", true);
+                            $.messager.alert('操作提示', "发送审核成功！", 'info');
+                        }
+                        else {
+                            $.messager.alert('操作提示', "发送审核失败！", 'error');
+                        }
                     }
-                    else {
-                        $.messager.alert('操作提示', "发送审核失败！", 'error');
-                    }
-                }
-            })
-            return true;
+                })
+                return true;
+            }
+            else {
+                $.messager.alert('操作提示', "请先上传文件！", 'info');
+                return false;
+            }
         }
         else {
-            $.messager.alert('操作提示', "请先上传文件！", 'info');
+            $.messager.alert('操作提示', "请选择核验员！", 'info');
             return false;
         }
     }

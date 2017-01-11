@@ -81,33 +81,37 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult BaoGaoShangChuan(string id)
         {
-
-            string[] bs = id.Split('|');
-            ViewBag.PREPARE_SCHEMEID = bs[0];
-            PREPARE_SCHEME prepare = m_BLL3.GetById(bs[0]);
-
-            // List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(bs[0]);
-            foreach (var item in prepare.FILE_UPLOADER)
+            if (!string.IsNullOrWhiteSpace(id))
             {
-                ViewBag.NAME2 = item.NAME2;
-                ViewBag.NAME = item.NAME;
-                ViewBag.CONCLUSION = item.CONCLUSION;
-                ViewBag.FILE_UPLOADERID = item.ID;
-                ViewBag.PREPARE_SCHEMEID = item.PREPARE_SCHEMEID;
-            }
-            ViewBag.REPORTSTATUS = prepare.REPORTSTATUS;
-            foreach (var item in prepare.APPLIANCE_LABORATORY)
-            {
-                if (item.RECYCLING != null)
+                string[] bs = id.Split('|');
+                ViewBag.PREPARE_SCHEMEID = bs[0];
+                PREPARE_SCHEME prepare = m_BLL3.GetById(bs[0]);
+
+                // List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(bs[0]);
+                foreach (var item in prepare.FILE_UPLOADER)
                 {
-                    ViewBag.REPORTNUMBER = item.RECYCLING;
+                    ViewBag.NAME2 = item.NAME2;
+                    ViewBag.NAME = item.NAME;
+                    ViewBag.CONCLUSION = item.CONCLUSION;
+                    ViewBag.FILE_UPLOADERID = item.ID;
+                    ViewBag.PREPARE_SCHEMEID = item.PREPARE_SCHEMEID;
                 }
-                else
+                ViewBag.REPORTSTATUS = prepare.REPORTSTATUS;
+                foreach (var item in prepare.APPLIANCE_LABORATORY)
                 {
-                    ViewBag.REPORTNUMBER = m_BLL3.GetSerialNumber(bs[0]);
+                    if (item.RECYCLING != null)
+                    {
+                        ViewBag.REPORTNUMBER = item.RECYCLING;
+                    }
+                    else
+                    {
+                        ViewBag.REPORTNUMBER = m_BLL3.GetSerialNumber(bs[0]);
+                    }
                 }
+                ViewBag.APPLIANCE_DETAIL_INFORMATIONID = bs[1];//器具明细id
+                ViewBag.DETECTERID = prepare.DETECTERID;//核验员
             }
-            ViewBag.APPLIANCE_DETAIL_INFORMATIONID = bs[1];//器具明细id
+
             return View();
         }
         /// <summary>
@@ -120,7 +124,11 @@ namespace Langben.App.Controllers
             PREPARE_SCHEME pre = new PREPARE_SCHEME();
             pre.REPORTNUMBER = REPORTNUMBER;//证书编号
             pre.PACKAGETYPE = Common.PACKAGETYPE.上传.ToString();
-            pre.UNQUALIFIEDTYPE = file.UNQUALIFIEDTYPE.ToString();//不合格类型
+            if (!string.IsNullOrWhiteSpace(file.UNQUALIFIEDTYPE))
+            {
+                pre.UNQUALIFIEDTYPE = file.UNQUALIFIEDTYPE.ToString();//不合格类型
+            }
+
             string msg = string.Empty;
             if (Request.Files.Count > 0)//前端获取文件选择控件值
             {
@@ -275,7 +283,7 @@ namespace Langben.App.Controllers
                 foreach (var item in prme.STANDARDCHOICE)
                 {
                     //rows[i].ID + "*" + rows[i].GROUPS + "*A*" + rows[i].CERTIFICATE_NUM
-                    prepShow.METERING_STANDARD_DEVICEID +=item.ID+"*"+item.METERING_STANDARD_DEVICEID+"*"+item.GROUPS+"*"+item.TYPE+"*"+item.NAMES + "&" + item.NAMES + "^";
+                    prepShow.METERING_STANDARD_DEVICEID += item.ID + "*" + item.METERING_STANDARD_DEVICEID + "*" + item.GROUPS + "*" + item.TYPE + "*" + item.NAMES + "&" + item.NAMES + "^";
                 }
             }
             foreach (var item in prme.APPLIANCE_LABORATORY)
@@ -389,7 +397,7 @@ namespace Langben.App.Controllers
                     NAME = s.NAME,
                     VERSION = s.VERSION,
                     ISRECEIVE = s.ISRECEIVE,
-                    RETURNREASON=s.RETURNREASON
+                    RETURNREASON = s.RETURNREASON
                 }
 
                     )

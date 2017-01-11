@@ -1038,10 +1038,10 @@ namespace Langben.Report
                 SetShuJu(hssfworkbook, entity, type);
 
                 //设置不确定度
-                SetBuQueDingDu(hssfworkbook, entity, type);
+                bool IsIsHaveBuQueDingDu= SetBuQueDingDu(hssfworkbook, entity, type);
 
                 //隐藏不需要的sheet
-                HiddenSheet(hssfworkbook, type);
+                HiddenSheet(hssfworkbook, type, IsIsHaveBuQueDingDu);
 
                 //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";                
                 string fileName = SetFileName(type);
@@ -1075,12 +1075,16 @@ namespace Langben.Report
         /// </summary>
         /// <param name="hssfworkbook"></param>
         /// <param name="type"></param>
-        private void HiddenSheet(IWorkbook hssfworkbook, ExportType type)
+        private void HiddenSheet(IWorkbook hssfworkbook, ExportType type,bool IsHaveBuQueDingDu=true)
         {
             switch(type)
             {
                 case ExportType.OriginalRecord_JianDing:
                 case ExportType.OriginalRecord_XiaoZhun:
+                    if(IsHaveBuQueDingDu==false)
+                    {
+                        hssfworkbook.SetSheetHidden(1, SheetState.Hidden);//不确定度,没有不确定度需要隐藏该sheet
+                    }
                     hssfworkbook.SetSheetHidden(3,SheetState.Hidden);//封皮模板
                     hssfworkbook.SetSheetHidden(4, SheetState.Hidden);//数据模板
                     hssfworkbook.SetSheetHidden(5, SheetState.Hidden);//不确定度模板
@@ -1102,15 +1106,16 @@ namespace Langben.Report
             }
         }
         /// <summary>
-        /// 设置不确定度
+        /// 设置不确定度(返回是否有不确定计算过程)
         /// </summary>
         /// <param name="hssfworkbook">workbook</param>
         /// <param name="entity"></param>
         /// <param name="type"></param>        
-        private void SetBuQueDingDu(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing)
+        private bool SetBuQueDingDu(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing)
         {
             if (type == ExportType.OriginalRecord_JianDing || type == ExportType.OriginalRecord_XiaoZhun)
             {
+                int ruleCount = 0;
                 string sheetName_Source = "不确定度模板";
                 string sheetName_Destination = "不确定度";
                 ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
@@ -1123,7 +1128,7 @@ namespace Langben.Report
                     entity.QUALIFIED_UNQUALIFIED_TEST_ITE = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.OrderBy(p => p.SORT).ToList();
 
                     int rowIndex_Destination = 0;
-                    int ruleCount = 0;
+                
                     foreach (QUALIFIED_UNQUALIFIED_TEST_ITE iEntity in entity.QUALIFIED_UNQUALIFIED_TEST_ITE)
                     {
 
@@ -1370,7 +1375,13 @@ namespace Langben.Report
                     }
                 }
                 #endregion
+
+                if (ruleCount > 0)//如果不确定过程一个都没有需要隐藏不确定sheet
+                {
+                    return true;
+                }                
             }
+            return false;
 
         }
         /// <summary>
