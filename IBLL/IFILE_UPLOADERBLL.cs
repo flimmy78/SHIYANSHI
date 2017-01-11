@@ -93,7 +93,16 @@ namespace Langben.IBLL
         /// <param name="entity">一个对象</param>
         /// <returns></returns>
         [OperationContract]
-        bool Edit(ref Common.ValidationErrors validationErrors, FILE_UPLOADER entity); 
+        bool Edit(ref Common.ValidationErrors validationErrors, FILE_UPLOADER entity);
+
+        /// <summary>
+        /// 根据预备方案ID获取报告列表
+        /// </summary>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <returns></returns>
+        [OperationContract]
+        FILE_UPLOADER GetListByPREPARE_SCHEMEID(string PREPARE_SCHEMEID);
+        
     
     }
 }

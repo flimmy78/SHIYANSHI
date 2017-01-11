@@ -37,6 +37,25 @@ namespace Langben.BLL
             db = entities;
         }
         /// <summary>
+        /// 根据预备方案ID获取报告列表
+        /// </summary>
+        /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
+        /// <returns></returns>
+        public FILE_UPLOADER GetListByPREPARE_SCHEMEID(string PREPARE_SCHEMEID)
+        {
+            List<FILE_UPLOADER> list = null;
+
+            using (SysEntities db = new SysEntities())
+            {
+                list = db.FILE_UPLOADER.Where(p => p.PREPARE_SCHEMEID == PREPARE_SCHEMEID && !string.IsNullOrWhiteSpace(p.PATH) && p.STATE!="已删除").ToList();
+            }
+            if(list!=null && list.Count>0)
+            {
+                return list[0];
+            }
+            return null;         
+        }
+        /// <summary>
         /// 查询的数据
         /// </summary>
         /// <param name="id">额外的参数</param>
