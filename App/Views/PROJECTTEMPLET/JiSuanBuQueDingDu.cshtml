@@ -267,7 +267,7 @@ else
     //添加评定点
     var linkButton = {
         add: function (obj) {
-            var newRow = " <ul class=\"clear mb10\">" + $(obj).parents('div ul').html() + "</ul>";
+            var newRow = " <ul class=\"clear mb10\" tag=\"pingding\">" + $(obj).parents('div ul').html() + "</ul>";
 
             var parDiv = $(obj).parents('div ul').parent()
             var newobj = $(parDiv).append(newRow);
