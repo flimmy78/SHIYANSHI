@@ -428,8 +428,8 @@ else
             total += Math.pow(parseFloat(arr[j]), 2);
         }
 
-        var mean = Math.sqrt(total / arr.length);
-        mean = Math.round(mean * 10000) / 10000;        
+        var mean = Math.sqrt(total);
+        mean = Math.round(mean * 1000000) / 1000000;        
         var v = $("#txtValueB").val();
         $("#txtBuQueDingB").val(v == "" ? mean : parseFloat(mean) / parseFloat(v));
         calculateC();
