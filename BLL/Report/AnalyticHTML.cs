@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 namespace Langben.Report
 {
@@ -59,206 +60,149 @@ namespace Langben.Report
         private static BuDueDingDu GetBuDueDingDu(string url)
         {
             BuDueDingDu buDueDingDu = new BuDueDingDu();
-            docBuQueDingDu.Load(url);
-
-            string xpath = @"//select[@tag='only']";
-            var allselected = docBuQueDingDu.DocumentNode.SelectNodes(xpath);
-
-            foreach (var b in allselected)
+            try
             {
-                var nodes = b.ChildNodes
-                      .Where(w => (w.Name == "option" && w.Attributes["selected"] != null))
-                      .Select(s => s.Attributes["value"].Value).FirstOrDefault();
-                string node = string.Empty;
-                if (null == (nodes))
-                {
-                    node = b.ChildNodes
-           .Where(w => (w.Name == "option"))
-           .Select(s => s.Attributes["value"].Value).First();
-                }
-                else
-                {
-                    node = nodes;
-                }
+                docBuQueDingDu.Load(url);
 
+                string xpath = @"//select[@tag='only']";
+                var allselected = docBuQueDingDu.DocumentNode.SelectNodes(xpath);
 
-                if (node != null)
+                foreach (var b in allselected)
                 {
-                    if (b.Attributes["id"].Value == "pdDDL")
+                    var nodes = b.ChildNodes
+                          .Where(w => (w.Name == "option" && w.Attributes["selected"] != null))
+                          .Select(s => s.Attributes["value"].Value).FirstOrDefault();
+                    string node = string.Empty;
+                    if (null == (nodes))
                     {
-                        buDueDingDu.pdDDL = node;
+                        node = b.ChildNodes
+               .Where(w => (w.Name == "option"))
+               .Select(s => s.Attributes["value"].Value).First();
                     }
-                    else if (b.Attributes["id"].Value == "ddlSelectD")
+                    else
                     {
-                        buDueDingDu.ddlSelectD = node;
+                        node = nodes;
                     }
 
-                }
-            }
 
-            var xpathA = @"//input[@tag='only']";
-            var A = docBuQueDingDu.DocumentNode.SelectNodes(xpathA);
-            foreach (var item in A)
-            {
-                if (item.Attributes["id"].Value == "pdText")
-                {
-                    buDueDingDu.pdText = item.Attributes["value"].Value;
-                }
-                else if (item.Attributes["id"].Value == "txtBuQueDingA")
-                {
-                    buDueDingDu.txtBuQueDingA = item.Attributes["value"].Value;
-                }
-                else if (item.Attributes["id"].Value == "txtValue")
-                {
-                    buDueDingDu.txtValue = item.Attributes["value"].Value;
-                }
-                else if (item.Attributes["id"].Value == "A_1_1")
-                {
-                    buDueDingDu.A_1_1 = item.Attributes["value"].Value;
-                }
-                else if (item.Attributes["id"].Value == "A_1_2")
-                {
-                    buDueDingDu.A_1_2 = item.Attributes["value"].Value;
-                }
-                else if (item.Attributes["id"].Value == "A_1_3")
-                {
-                    buDueDingDu.A_1_3 = item.Attributes["value"].Value;
-                }
-                else if (item.Attributes["id"].Value == "A_1_4")
-                {
-                    buDueDingDu.A_1_4 = item.Attributes["value"].Value;
-                }
-                else if (item.Attributes["id"].Value == "A_1_5")
-                {
-                    buDueDingDu.A_1_5 = item.Attributes["value"].Value;
-                }
-                else if (item.Attributes["id"].Value == "A_2_1")
-                {
-                    buDueDingDu.A_2_1 = item.Attributes["value"].Value;
-                }
-                else if (item.Attributes["id"].Value == "A_2_2")
-                {
-                    buDueDingDu.A_2_2 = item.Attributes["value"].Value;
-                }
-                else if (item.Attributes["id"].Value == "A_2_3")
-                {
-                    buDueDingDu.A_2_3 = item.Attributes["value"].Value;
-                }
-                else if (item.Attributes["id"].Value == "A_2_4")
-                {
-                    buDueDingDu.A_2_4 = item.Attributes["value"].Value;
-                }
-                else if (item.Attributes["id"].Value == "A_2_5")
-                {
-                    buDueDingDu.A_2_5 = item.Attributes["value"].Value;
-                }
-
-                else if (item.Attributes["id"].Value == "txtBuQueDingB")
-                {
-                    buDueDingDu.txtBuQueDingB = item.Attributes["value"].Value;
-                }
-                else if (item.Attributes["id"].Value == "txtValueB")
-                {
-                    buDueDingDu.txtValueB = item.Attributes["value"].Value;
-                }
-
-
-
-
-                else if (item.Attributes["id"].Value == "txtBuQueDingC")
-                {
-                    buDueDingDu.txtBuQueDingC = item.Attributes["value"].Value;
-                }
-                else if (item.Attributes["id"].Value == "txtvalueD")
-                {
-                    buDueDingDu.txtvalueD = item.Attributes["value"].Value;
-                }
-                else if (item.Attributes["id"].Value == "txtValueE")
-                {
-                    buDueDingDu.txtValueE = item.Attributes["value"].Value;
-                }
-            }
-            Dictionary<string, int> head = new Dictionary<string, int>();
-            head.Add("pingding1", 1);
-            head.Add("pingding2", 2);
-            head.Add("pingding3", 3);
-            double i = 0;
-            var xpathpingding = @"//ul[@tag='pingding']//input[@type='text'] | //ul[@tag='pingding']//select";
-            var pingding = docBuQueDingDu.DocumentNode.SelectNodes(xpathpingding);
-            if (pingding == null)
-            {
-
-            }
-            else
-            {
-                List<MYData> list = new List<MYData>();
-                foreach (var b in pingding)
-                {
-                    i++;
-                    MYData mydata = new MYData();
-                    mydata.id = b.Attributes["id"].Value;
-                    mydata.name = b.Attributes["name"].Value;
-                    mydata.columnNum = head[mydata.name];
-                    //mydata.rowNum = int.Parse(System.Math.Ceiling((i / 3)).ToString());
-                    if (b.Name == "input")
+                    if (node != null)
                     {
-                        if (b.Attributes["value"] != null)
+                        if (b.Attributes["id"].Value == "pdDDL")
                         {
-                            mydata.value = b.Attributes["value"].Value;
-
+                            buDueDingDu.pdDDL = node;
+                        }
+                        else if (b.Attributes["id"].Value == "ddlSelectD")
+                        {
+                            buDueDingDu.ddlSelectD = node;
                         }
 
                     }
-                    else if (b.Name == "select")
-                    {
-                        var nodes = b.ChildNodes
-                      .Where(w => (w.Name == "option" && w.Attributes["selected"] != null))
-                      .Select(s => s.Attributes["value"].Value).FirstOrDefault();
-                       
-                        if (null == (nodes))
-                        {
-                            mydata.value = b.ChildNodes
-                   .Where(w => (w.Name == "option"))
-                   .Select(s => s.Attributes["value"].Value).First();
-                        }
-                        else
-                        {
-                            mydata.value = nodes;
-                        }
-
-                    }
-                    list.Add(mydata);
                 }
-                buDueDingDu.pingding = list;
 
-                Dictionary<string, int> headb = new Dictionary<string, int>();
-                headb.Add("B_PingDing", 1);
-                headb.Add("B_WuChaLaiYuan", 2);
-                headb.Add("sourceNum", 3);
-                headb.Add("B_WuChaXian", 4);
-                headb.Add("B_WuChaXian_UNIT", 5);
-                headb.Add("B_WuChaFenBu", 6);
-                headb.Add("B_K", 7);
-                headb.Add("B_Ui", 8);
-                headb.Add("B_Ui_UNIT", 9);
-                double ib = 0;
-                var xpathpingdingb = @"//tbody[@id='buquedingdub']//input[@type='text']";
-                var pingdingb = docBuQueDingDu.DocumentNode.SelectNodes(xpathpingdingb);
-                if (pingdingb == null)
+                var xpathA = @"//input[@tag='only']";
+                var A = docBuQueDingDu.DocumentNode.SelectNodes(xpathA);
+                foreach (var item in A)
+                {
+                    if (item.Attributes["id"].Value == "pdText")
+                    {
+                        buDueDingDu.pdText = item.Attributes["value"].Value;
+                    }
+                    else if (item.Attributes["id"].Value == "txtBuQueDingA")
+                    {
+                        buDueDingDu.txtBuQueDingA = item.Attributes["value"].Value;
+                    }
+                    else if (item.Attributes["id"].Value == "txtValue")
+                    {
+                        buDueDingDu.txtValue = item.Attributes["value"].Value;
+                    }
+                    else if (item.Attributes["id"].Value == "A_1_1")
+                    {
+                        buDueDingDu.A_1_1 = item.Attributes["value"].Value;
+                    }
+                    else if (item.Attributes["id"].Value == "A_1_2")
+                    {
+                        buDueDingDu.A_1_2 = item.Attributes["value"].Value;
+                    }
+                    else if (item.Attributes["id"].Value == "A_1_3")
+                    {
+                        buDueDingDu.A_1_3 = item.Attributes["value"].Value;
+                    }
+                    else if (item.Attributes["id"].Value == "A_1_4")
+                    {
+                        buDueDingDu.A_1_4 = item.Attributes["value"].Value;
+                    }
+                    else if (item.Attributes["id"].Value == "A_1_5")
+                    {
+                        buDueDingDu.A_1_5 = item.Attributes["value"].Value;
+                    }
+                    else if (item.Attributes["id"].Value == "A_2_1")
+                    {
+                        buDueDingDu.A_2_1 = item.Attributes["value"].Value;
+                    }
+                    else if (item.Attributes["id"].Value == "A_2_2")
+                    {
+                        buDueDingDu.A_2_2 = item.Attributes["value"].Value;
+                    }
+                    else if (item.Attributes["id"].Value == "A_2_3")
+                    {
+                        buDueDingDu.A_2_3 = item.Attributes["value"].Value;
+                    }
+                    else if (item.Attributes["id"].Value == "A_2_4")
+                    {
+                        buDueDingDu.A_2_4 = item.Attributes["value"].Value;
+                    }
+                    else if (item.Attributes["id"].Value == "A_2_5")
+                    {
+                        buDueDingDu.A_2_5 = item.Attributes["value"].Value;
+                    }
+
+                    else if (item.Attributes["id"].Value == "txtBuQueDingB")
+                    {
+                        buDueDingDu.txtBuQueDingB = item.Attributes["value"].Value;
+                    }
+                    else if (item.Attributes["id"].Value == "txtValueB")
+                    {
+                        buDueDingDu.txtValueB = item.Attributes["value"].Value;
+                    }
+
+
+
+
+                    else if (item.Attributes["id"].Value == "txtBuQueDingC")
+                    {
+                        buDueDingDu.txtBuQueDingC = item.Attributes["value"].Value;
+                    }
+                    else if (item.Attributes["id"].Value == "txtvalueD")
+                    {
+                        buDueDingDu.txtvalueD = item.Attributes["value"].Value;
+                    }
+                    else if (item.Attributes["id"].Value == "txtValueE")
+                    {
+                        buDueDingDu.txtValueE = item.Attributes["value"].Value;
+                    }
+                }
+                Dictionary<string, int> head = new Dictionary<string, int>();
+                head.Add("pingding1", 1);
+                head.Add("pingding2", 2);
+                head.Add("pingding3", 3);
+                double i = 0;
+                var xpathpingding = @"//ul[@tag='pingding']//input[@type='text'] | //ul[@tag='pingding']//select";
+                var pingding = docBuQueDingDu.DocumentNode.SelectNodes(xpathpingding);
+                if (pingding == null)
                 {
 
                 }
                 else
                 {
-                    List<MYData> listb = new List<MYData>();
-                    foreach (var b in pingdingb)
+                    List<MYData> list = new List<MYData>();
+                    foreach (var b in pingding)
                     {
-                        ib++;
+                        i++;
                         MYData mydata = new MYData();
                         mydata.id = b.Attributes["id"].Value;
                         mydata.name = b.Attributes["name"].Value;
-                        mydata.columnNum = headb[mydata.name];
-                        //mydata.rowNum = int.Parse(System.Math.Ceiling((ib / 3)).ToString());
+                        mydata.columnNum = head[mydata.name];
+                        //mydata.rowNum = int.Parse(System.Math.Ceiling((i / 3)).ToString());
                         if (b.Name == "input")
                         {
                             if (b.Attributes["value"] != null)
@@ -268,11 +212,75 @@ namespace Langben.Report
                             }
 
                         }
+                        else if (b.Name == "select")
+                        {
+                            var nodes = b.ChildNodes
+                          .Where(w => (w.Name == "option" && w.Attributes["selected"] != null))
+                          .Select(s => s.Attributes["value"].Value).FirstOrDefault();
 
-                        listb.Add(mydata);
+                            if (null == (nodes))
+                            {
+                                mydata.value = b.ChildNodes
+                       .Where(w => (w.Name == "option"))
+                       .Select(s => s.Attributes["value"].Value).First();
+                            }
+                            else
+                            {
+                                mydata.value = nodes;
+                            }
+
+                        }
+                        list.Add(mydata);
                     }
-                    buDueDingDu.buDueDingDuB = listb;
+                    buDueDingDu.pingding = list;
+
+                    Dictionary<string, int> headb = new Dictionary<string, int>();
+                    headb.Add("B_PingDing", 1);
+                    headb.Add("B_WuChaLaiYuan", 2);
+                    headb.Add("sourceNum", 3);
+                    headb.Add("B_WuChaXian", 4);
+                    headb.Add("B_WuChaXian_UNIT", 5);
+                    headb.Add("B_WuChaFenBu", 6);
+                    headb.Add("B_K", 7);
+                    headb.Add("B_Ui", 8);
+                    headb.Add("B_Ui_UNIT", 9);
+                    double ib = 0;
+                    var xpathpingdingb = @"//tbody[@id='buquedingdub']//input[@type='text']";
+                    var pingdingb = docBuQueDingDu.DocumentNode.SelectNodes(xpathpingdingb);
+                    if (pingdingb == null)
+                    {
+
+                    }
+                    else
+                    {
+                        List<MYData> listb = new List<MYData>();
+                        foreach (var b in pingdingb)
+                        {
+                            ib++;
+                            MYData mydata = new MYData();
+                            mydata.id = b.Attributes["id"].Value;
+                            mydata.name = b.Attributes["name"].Value;
+                            mydata.columnNum = headb[mydata.name];
+                            //mydata.rowNum = int.Parse(System.Math.Ceiling((ib / 3)).ToString());
+                            if (b.Name == "input")
+                            {
+                                if (b.Attributes["value"] != null)
+                                {
+                                    mydata.value = b.Attributes["value"].Value;
+
+                                }
+
+                            }
+
+                            listb.Add(mydata);
+                        }
+                        buDueDingDu.buDueDingDuB = listb;
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+
             }
 
             return buDueDingDu;

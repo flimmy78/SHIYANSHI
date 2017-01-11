@@ -1,0 +1,458 @@
+﻿@model Langben.DAL.METERING_STANDARD_DEVICE
+
+@{
+    Layout = "~/Views/Shared/Create.cshtml";
+}
+@using Common
+@using Models
+
+@section CurentPlace {
+
+    创建
+
+}
+@using (Html.BeginForm("", "api/METERING_STANDARD_DEVICEApi/Post"))
+{
+    <style type="text/css">
+        ul{border-bottom:1px solid #d4d4d4;padding-bottom:5px}
+        li{ width:235px; height:26px; margin-bottom:5px }
+        li label{ display:inline;width:40px} 
+    </style>
+    <input type="hidden" id="rowindex" value="1" />
+    <div data-options="region:'center',title:'',iconCls:'icon-ok',border:false" style="padding:3px;">
+
+        <div class="mt10" id="">
+            <label>
+                范围指标
+            </label>
+            <div class="mt10" id="div6">
+                <ul class="clear mt10">
+                    <li class="fl mr10">
+                        <label>评定项：</label>
+                        <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" id="ASSESSMENTITEM">
+                            <option value="">请选择</option>
+                            <option value="5720A交流电流测量">5720A交流电流测量</option>
+                            <option value="5720A交流电压测量单相">5720A交流电压测量单相</option>
+                            <option value="5720A交流电压测量三相">5720A交流电压测量三相</option>
+                            <option value="5720A直流电流测量">5720A直流电流测量</option>
+                            <option value="5720A直流电压测量">5720A直流电压测量</option>
+                            <option value="5720A直流电阻输出">5720A直流电阻输出</option>
+                            <option value="8508A交流电流输出">85080A交流电流输出</option>
+                            <option value="8508A交流电压变换器">8508A交流电压变换器</option>
+                            <option value="8508A交流电压输出">8508A交流电压输出</option>
+                            <option value="8508A直流电流输出">8508A直流电流输出</option>
+                            <option value="8508A直流电压输出">8508A直流电压输出</option>
+                            <option value="8508A直流电阻测量">8508A直流电阻测量</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        量程范围起：
+                        <input class="my-textbox " value="" name="THERANGESCOPE">
+                    </li>
+                    <li class="fl mr10">
+                        起单位：
+                        <select class="my-combobox" name="THEUNIT" id="THEUNIT">
+                            <option value="">请选择</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        起关系：
+                        <select class="my-combobox" name="THERELATIONSHIP">
+                            <option value="">请选择</option>
+                            <option value="<"><</option>
+
+                            <option value="<="><=</option>
+
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        量程范围止：
+                        <input class="my-textbox " value="" name="ENDRANGESCOPE">
+                    </li>
+                    <li class="fl mr10">
+                        止单位：
+                        <select class="my-combobox" name="ENDUNIT" id="ENDUNIT">
+                            <option value="">请选择</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        止关系：
+                        <select class="my-combobox" name="ENDRELATIONSHIP">
+                            <option value="">请选择</option>
+                            <option value="<"><</option>
+
+                            <option value="<="><=</option>
+
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        频率范围起：
+                        <input class="my-textbox " value="" name="THEFREQUENCY">
+                    </li>
+                    <li class="fl mr10">
+                        起单位：
+                        <select class="my-combobox" name="THEUNITFREQUENCY">
+                            <option value="">请选择</option>
+                            <option value="Hz">Hz</option>
+                            <option value="kHz">kHz</option>
+                            <option value="MHz">MHz</option>
+                            <option value="GHz">GHz</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        频率起关系：
+                        <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
+                            <option value="">请选择</option>
+                            <option value="<"><</option>
+
+                            <option value="<="><=</option>
+
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        频率范围止：
+                        <input class="my-textbox " value="" name="ENDFREQUENCY">
+                    </li>
+                    <li class="fl mr10">
+                        频率止单位：
+                        <select class="my-combobox" name="ENDUNITFREQUENCY">
+                            <option value="">请选择</option>
+                            <option value="Hz">Hz</option>
+                            <option value="kHz">kHz</option>
+                            <option value="MHz">MHz</option>
+                            <option value="GHz">GHz</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        频率止关系：
+                        <select class="my-combobox" name="ENDRELATIONSHIPFREQUENCY">
+                            <option value="">请选择</option>
+                            <option value="<"><</option>
+
+                            <option value="<="><=</option>
+
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        指标1：
+                        <input class="my-textbox " value="" name="INDEX1">
+
+                    </li>
+                    <li class="fl mr10">
+                        指标1单位：
+                        <select class="my-combobox" name="INDEX1UNIT" id="INDEX1UNIT">
+                            <option value="">请选择</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        指标2：
+                        <input class="my-textbox " value="" name="ENDUNITFREQUENCY">
+                    </li>
+                    <li class="fl mr10">
+                        指标2单位：
+                        <select class="my-combobox" name="INDEX2UNIT" id="INDEX2UNIT">
+                            <option value="">请选择</option>
+                        </select>
+                    </li>
+                    <li class="fl mr10">
+                        备注：
+                        <input class="my-textbox" value="" name="NOTE">
+                    </li>
+                    <li class="fr " style="width:auto"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
+                </ul>
+            </div>
+        </div>
+
+
+       
+    <div class="mt10">
+        <a href="javascript:;" class="easyui-linkbutton" onclick="baocun()">保存</a>
+        <a href="javascript:;" class="easyui-linkbutton" onclick="javascript: window.location.href = '/UNCERTAINTYTABLE/IndexUB';">返回</a>
+    </div>
+</div>
+    <script>
+
+        var radio = {
+            check: function () {
+                var obj = $("input[name='three']:checked");
+                var id = obj.attr("id");
+                switch (id) {
+                    case ("three_1"):
+                        var row = $("#div2 ul");
+                        var row2 = $("#div3 ul");
+                        row.each(function () {
+                            if ($("#div2 ul").length > 1)
+                                $(this).remove();
+                            else
+                                $("#div2").find(":text,:selected,select,textarea").each(function () {
+                                    $(this).val("");
+                                    //$(this).combobox('select', "");
+                                })
+                        })
+                        row2.each(function () {
+                            if ($("#div3 ul").length > 1)
+                                $(this).remove();
+                            else
+                                $("#div3").find(":text,:selected,select,textarea").each(function () {
+                                    $(this).val("");
+                                    //$(this).combobox('select', "");
+                                })
+                        })
+                        break
+                    case ("three_2"):
+                        var row = $("#div1 ul");
+                        var row2 = $("#div3 ul");
+                        row.each(function () {
+                            if ($("#div1 ul").length > 1)
+                                $(this).remove();
+                            else
+                                $("#div1").find(":text,:selected,select,textarea").each(function () {
+                                    $(this).val("");
+                                    //$(this).combobox('select', "");
+                                })
+                        })
+                        row2.each(function () {
+                            if ($("#div3 ul").length > 1)
+                                $(this).remove();
+                            else
+                                $("#div3").find(":text,:selected,select,textarea").each(function () {
+                                    $(this).val("");
+                                    //$(this).combobox('select', "");
+                                })
+                        })
+                        break
+                    case ("three_3"):
+                        var row = $("#div2 ul");
+                        var row2 = $("#div1 ul");
+                        row.each(function () {
+                            if ($("#div2 ul").length > 1)
+                                $(this).remove();
+                            else
+                                $("#div2").find(":text,:selected,select,textarea").each(function () {
+                                    $(this).val("");
+                                    //$(this).combobox('select', "");
+                                })
+                        })
+                        row2.each(function () {
+                            if ($("#div1 ul").length > 1)
+                                $(this).remove();
+                            else
+                                $("#div1").find(":text,:selected,select,textarea").each(function () {
+                                    $(this).val("");
+                                    //$(this).combobox('select', "");
+                                })
+                        })
+                        break
+                    default:
+
+                }
+
+
+            }
+        }
+        var linkButton = {
+            add: function (obj) {
+                var html = $(obj).parents('div ul').html();
+                var html2 = html.replace(/id="\w*"/, "");
+                var newRow = " <ul class=\"clear mt10\">" + html2 + "</ul>";
+                var parDiv = $(obj).parents('div ul').parent()
+                var newobj = $(parDiv).append(newRow);
+
+                // $.parser.parse();
+            },
+            del: function (obj) {
+                var row = $(obj).parents('div ul');
+                if ($(row).parent().children().length > 1)
+                    $(row).remove();
+                else
+                    alert('就剩一行了你还删除呀？');
+            }
+        }
+
+    </script>
+
+
+}
+<script type="text/javascript">
+    //下拉框选择事件
+    function gradeChange(ex) {
+        var zhi = $(ex).val();
+        if (zhi == "5720A交流电流测量" || zhi == "5720A直流电流测量" || zhi == "85080A交流电流输出" || zhi == "8508A直流电流输出") {
+            getCity($("#THEUNIT"));
+            getCity($("#ENDUNIT"));
+            getCity($("#INDEX1UNIT"));
+            getCity($("#INDEX2UNIT"));
+            tianjiazhi("THEUNIT,ENDUNIT,INDEX1UNIT,INDEX2UNIT", "电流")
+        }
+        else if (zhi == "5720A交流电压测量单相" || zhi == "5720A交流电压测量三相" || zhi == "5720A直流电压测量" || zhi == "8508A交流电压变换器" || zhi == "8508A交流电压输出" || zhi == "8508A直流电压输出") {
+            getCity($("#THEUNIT"));
+            getCity($("#ENDUNIT"));
+            getCity($("#INDEX1UNIT"));
+            getCity($("#INDEX2UNIT"));
+            tianjiazhi("THEUNIT,ENDUNIT,INDEX1UNIT,INDEX2UNIT", "电压")
+        }
+        else if (zhi == "5720A直流电阻输出" || zhi == "8508A直流电阻测量") {
+            getCity($("#THEUNIT"));
+            getCity($("#ENDUNIT"));
+            getCity($("#INDEX1UNIT"));
+            getCity($("#INDEX2UNIT"));
+            tianjiazhi("THEUNIT,ENDUNIT,INDEX1UNIT,INDEX2UNIT", "电阻")
+        }
+    }
+    function tianjiazhi(sun, lei) {
+        var lst = sun.split(',');
+        if (lei == "电流") {
+            for (var i = 0; i < lst.length; i++) {
+                $("#" + lst[i] + "").append('<option value="A">A</option><option value="mA">mA</option><option value="μA">μA</option><option value="nA">nA</option><option value="pA">pA</option><option value="kA">kA</option>');
+            }
+        }
+        else if (lei == "电压") {
+            for (var i = 0; i < lst.length; i++) {
+                $("#" + lst[i] + "").append('<option value="V">V</option><option value="mV">mV</option><option value="μV">μV</option><option value="kV">kV</option><option value="MV">MV</option>');
+            }
+        }
+        else if (lei == "电阻") {
+            for (var i = 0; i < lst.length; i++) {
+                $("#" + lst[i] + "").append('<option value="Ω">Ω</option><option value="TΩ">TΩ</option><option value="GΩ">GΩ</option><option value="MΩ">MΩ</option><option value="kΩ">kΩ</option><option value="mΩ">mΩ</option><option value="μΩ">μΩ</option>');
+            }
+        }
+    }
+    function getCity(City) {
+        $(City).empty();
+        $("<option></option>")
+                .val("")
+                .text("请选择")
+                .appendTo($(City));
+    }
+ 
+
+    //保存
+    function baocun() {
+
+        debugger;
+
+        var myArray6 = new Array();
+        var UNCERTAINTYTABLE = new Object();
+        //*******************************************不确定度
+        $("#div6").find("ul").each(function () {
+            debugger;
+            var ASSESSMENTITEM = $(this).find("li :selected").eq(0).val();//评定项
+            var THERANGESCOPE = $(this).find("li :input").eq(1).val();//量程范围起
+            var ERRORLIMITS = $(this).find("li :selected").eq(1).val();//起单位
+            var THERELATIONSHIP = $(this).find("li :selected").eq(2).val();//起关系
+            var ENDRANGESCOPE = $(this).find("li :input").eq(4).val();//量程范围止
+            var ENDUNIT = $(this).find("li :selected").eq(3).val();//止单位
+            var ENDRELATIONSHIP = $(this).find("li :selected").eq(4).val();//止关系
+            var THEFREQUENCY = $(this).find("li :input").eq(7).val();//频率范围起
+            var THEUNITFREQUENCY = $(this).find("li :selected").eq(5).val();//起单位
+            var THERELATIONSHIPFREQUENCY = $(this).find("li :selected").eq(6).val();//频率起关系
+            var ENDFREQUENCY = $(this).find("li :input").eq(10).val();//频率范围止
+            var ENDUNITFREQUENCY = $(this).find("li :selected").eq(7).val();//频率止单位
+            var ENDRELATIONSHIPFREQUENCY = $(this).find("li :selected").eq(8).val();//频率止关系
+            var INDEX1 = $(this).find("li :input").eq(13).val();//指标1
+            var INDEX1UNIT = $(this).find("li :selected").eq(9).val();//指标1单位
+            var INDEX2 = $(this).find("li :input").eq(15).val();//指标2
+            var INDEX2UNIT = $(this).find("li :selected").eq(10).val();//指标2单位
+            var NOTE = $(this).find("li :input").eq(17).val();//备注
+            var CATEGORY = "UB";
+            if (ASSESSMENTITEM != null || THERANGESCOPE != null || ERRORLIMITS != null || THERELATIONSHIP != null || ENDRANGESCOPE != null || ENDUNIT != null || ENDRELATIONSHIP != null || THEFREQUENCY != null || THEUNITFREQUENCY != null || THERELATIONSHIPFREQUENCY != null || ENDFREQUENCY != null || ENDUNITFREQUENCY != null || ENDRELATIONSHIPFREQUENCY != null || INDEX1 != null || INDEX1UNIT != null || INDEX2 != null || INDEX2UNIT != null || NOTE != null) {
+                myArray6.push({ METERING_STANDARD_DEVICEID: "@ViewBag.METERING_STANDARD_DEVICEID", ASSESSMENTITEM: ASSESSMENTITEM, THERANGESCOPE: THERANGESCOPE, ERRORLIMITS: ERRORLIMITS, THERELATIONSHIP: THERELATIONSHIP, ENDRANGESCOPE: ENDRANGESCOPE, ENDUNIT: ENDUNIT, ENDRELATIONSHIP: ENDRELATIONSHIP, THEFREQUENCY: THEFREQUENCY, THEUNITFREQUENCY: THEUNITFREQUENCY, THERELATIONSHIPFREQUENCY: THERELATIONSHIPFREQUENCY, ENDFREQUENCY: ENDFREQUENCY, ENDUNITFREQUENCY: ENDUNITFREQUENCY, ENDRELATIONSHIPFREQUENCY: ENDRELATIONSHIPFREQUENCY, INDEX1: INDEX1, INDEX1UNIT: INDEX1UNIT, INDEX2: INDEX2, INDEX2UNIT: INDEX2UNIT, NOTE: NOTE, CATEGORY: CATEGORY });
+
+            }
+        })
+        //*****************************************************
+
+
+        //调用后台方法
+        debugger;
+        if (ifshujuUB(myArray6[0])) {
+            $.ajax({
+                url: "/api/UNCERTAINTYTABLEApi/InstUAUB2",
+                type: "Post",
+                
+                dataType: "json",
+                data: JSON.stringify(myArray6),
+                contentType: 'application/json; charset=utf-8',//将json数据以request payload的形式发起请求  
+                success: function (data) {
+                    if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                    else if (data.Code == 1) {
+                        $.messager.alert('操作提示', "新增成功！", 'info');
+                        return false;
+                    }
+                    else {
+                        if ($.messager) {
+                            $.messager.defaults.ok = '继续';
+                            $.messager.defaults.cancel = '返回';
+
+                            $.messager.confirm('操作提示', "新增失败！", function (r) {
+                                if (!r) {
+                                    window.location.href = '/UNCERTAINTYTABLE/IndexUB';
+                                }
+                            });
+                        }
+                    }
+                }
+            })
+        }
+
+    }
+
+    function ifshujuUB(m) {
+        var zhi = "";
+
+        if (m.ASSESSMENTITEM == '' || m.ASSESSMENTITEM == 'undefined') {
+            zhi += "评定项不能为空！<br>";
+        }
+        
+        if (isNull(m.THERANGESCOPE)) {
+            zhi += "量程范围起不能为空！<br>";
+        }
+        if (isNull(m.ERRORLIMITS)) {
+            zhi += "起单位不能为空！<br>";
+        }
+        if (isNull(m.THERELATIONSHIP)) {
+            zhi += "起关系不能为空！<br>";
+        }
+        if (isNull(m.ENDRANGESCOPE)) {
+            zhi += "量程范围止不能为空！<br>";
+        }
+        if (isNull(m.ENDUNIT)) {
+            zhi += "止单位不能为空！<br>";
+        }
+        if (isNull(m.ENDRELATIONSHIP)) {
+            zhi += "止关系不能为空！<br>";
+        }
+
+        if (isNull(m.INDEX1)) {
+            zhi += "指标1不能为空！<br>";
+        }
+        if (isNull(m.INDEX1UNIT)) {
+            zhi += "指标1单位不能为空！<br>";
+        }
+        if (isNull(m.INDEX2)) {
+            zhi += "指标2不能为空！<br>";
+        }
+        if (isNull(m.INDEX2UNIT)) {
+            zhi += "指标2单位不能为空！<br>";
+        }
+        if (zhi != "") {
+            $.messager.alert('操作提示', "" + zhi + "", 'info');
+            return false;
+        }
+        else {
+            //return false;
+            return true;
+        }
+    }
+    function isNull(str) {
+        if (str == '' || str == 'undefined') {
+            return true;
+        }
+
+        var regu = "^[ ]+$";
+        var re = new RegExp(regu);
+        return re.test(str);
+    }
+</script>
+
+

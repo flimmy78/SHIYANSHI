@@ -18,7 +18,7 @@
             //nowrap: false,
             striped: true,
             collapsible: true,
-            url: '/api/UNCERTAINTYTABLEApi/UNCERTAINTYTABLEData_ZHIBIAO/' + "@ViewBag.METERING_STANDARD_DEVICEID", //获取数据的url
+            url: '/api/UNCERTAINTYTABLEApi/UNCERTAINTYTABLEData_ZHIBIAO/', //获取数据的url
             sortName: 'ID',
             sortOrder: 'desc',
             idField: 'ID',
@@ -38,23 +38,17 @@
                          return flexiModify();
                      }
                  }
-                  , {
-                      text: '返回',
-                      iconCls: 'icon-edit',
-                      handler: function () {
-                          return fanhui();
-                      }
-                  }
+                  
             ],
             columns: [[
-                   { field: 'ASSESSMENTITEM', title: '评定项', width: 100 }
-                  , { field: 'THERANGESCOPE', title: '量程范围', width: 100 }
-                  , { field: 'THEFREQUENCY', title: '频率范围', width: 100 }
+                   { field: 'ASSESSMENTITEM', title: '评定项', width: 200 }
+                  , { field: 'THERANGESCOPE', title: '量程范围', width: 200 }
+                  , { field: 'THEFREQUENCY', title: '频率范围', width: 200 }
                   , { field: 'INDEX1', title: '指标1', width: 100 }
                   , { field: 'INDEX2', title: '指标2', width: 100 }
-                   , { field: 'GROUPS', title: '组别', width: 100 }
-                    , { field: 'CATEGORY', title: '类别', width: 100 }
-                  , { field: 'METERING_STANDARD_DEVICEID', title: '@Html.DisplayNameFor(model => model.METERING_STANDARD_DEVICEIDOld)', width: 100, hidden: true }
+               //    , { field: 'GROUPS', title: '组别', width: 100 }
+                    //, { field: 'CATEGORY', title: '类别', width: 100 }
+                
             ]],
             pagination: true,
             rownumbers: true
@@ -100,7 +94,7 @@
     //导航到创建的按钮
     function flexiCreate() {
 
-        window.location.href = "/METERING_STANDARD_DEVICE/Create/@ViewBag.METERING_STANDARD_DEVICEID^UB";
+        window.location.href = "/METERING_STANDARD_DEVICE/Create2";
         return false;
     }
     //导航到修改的按钮

@@ -400,7 +400,7 @@ else
         var x = getDataB();
         x = x.replace(' ', '');
         var arr = x.split(',');
-        if (arr.length == 1) return false;
+        //if (arr.length == 1) return false;
         var lcm = 0;
         var flag = false;
         var total = 0;
@@ -409,8 +409,8 @@ else
         }
 
         var mean = Math.sqrt(total / arr.length);
-        mean = Math.round(mean * 10000) / 10000;
-        var v = $("#txtValue").val();
+        mean = Math.round(mean * 10000) / 10000;        
+        var v = $("#txtValueB").val();
         $("#txtBuQueDingB").val(v == "" ? mean : parseFloat(mean) / parseFloat(v));
         calculateC();
     }
@@ -431,7 +431,7 @@ else
     //由于html无法获取value，重新给outerHTML赋值
     function SetAllControlHtml() {
 
-        $("input[type='text']").each(function () {
+        $("input").each(function () {
 
             //除了隐藏模板中的输入框，其他所有的输入框
             if (this.id != "") {

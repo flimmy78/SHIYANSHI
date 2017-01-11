@@ -45,9 +45,9 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
-        public ActionResult IndexUB(string id)
+        public ActionResult IndexUB()
         {
-            ViewBag.METERING_STANDARD_DEVICEID = id;
+            
             return View();
         }
         /// <summary>

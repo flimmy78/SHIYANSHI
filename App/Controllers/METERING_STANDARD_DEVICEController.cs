@@ -77,7 +77,16 @@ namespace Langben.App.Controllers
             ViewBag.IS = id.Split('^')[1];
             return View();
         }
-
+        /// <summary>
+        /// 首次创建
+        /// </summary>
+        /// <returns></returns>
+        [SupportFilter]
+        public ActionResult Create2()
+        {
+         
+            return View();
+        }
 
         /// <summary>
         /// 最大允许误差信息

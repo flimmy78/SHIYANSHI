@@ -194,7 +194,9 @@ namespace Langben.BLL
         {
             try
             {
-                return repository.Delete(id) == 1;
+                //return repository.Delete(id) == 1;
+                repository.Delete(id);
+                return true;
             }
             catch (Exception ex)
             {
