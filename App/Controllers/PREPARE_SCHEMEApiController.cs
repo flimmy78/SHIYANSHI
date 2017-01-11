@@ -330,7 +330,7 @@ namespace Langben.App.Controllers
         public Common.ClientResult.Result EditField([FromBody]PREPARE_SCHEME entity)
         {
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
-            if (entity != null && ModelState.IsValid)
+            if (entity != null)
             {   //数据校验
 
                 string currentPerson = GetCurrentPerson();
