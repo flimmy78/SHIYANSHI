@@ -43,7 +43,12 @@
             @Html.LabelFor(model => model.STORAGEINSTRUCTI_STATU):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("STORAGEINSTRUCTI_STATU", Models.SysFieldModels.GetSysField("VRUKU", "STORAGEINSTRUCTI_STATU"), "请选择", new { id = "STORAGEINSTRUCTI_STATU" })
+            <select id="STORAGEINSTRUCTI_STATU" name="STORAGEINSTRUCTI_STATU">
+                <option value="">请选择</option>
+                <option value="器具已入库">器具已入库</option>
+                <option selected="selected" value="待入库">待入库</option>
+            </select>
+          @*  @Html.DropDownList("STORAGEINSTRUCTI_STATU", Models.SysFieldModels.GetSysField("VRUKU", "STORAGEINSTRUCTI_STATU"), "请选择", new { id = "STORAGEINSTRUCTI_STATU" })*@
         </div>
     </div>
     <div class='input_search' style="padding-top:10px;">

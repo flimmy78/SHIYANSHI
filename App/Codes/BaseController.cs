@@ -61,7 +61,7 @@ namespace Models
             IWorkbook hssfworkbook = new HSSFWorkbook(file);
             ISheet sheet = hssfworkbook.GetSheet("入库单");
             string guid = Guid.NewGuid().ToString();
-            string saveFileName = xlsPath.Path(guid);
+            string saveFileName = xlsPath.Path(@"RuKu/"+guid);
 
             Dictionary<string, string> propertyName;
             PropertyInfo[] properties;
@@ -118,7 +118,7 @@ namespace Models
 
 
             //一般只用写这一个就OK了，他会遍历并释放所有资源，但当前版本有问题所以只释放sheet  
-            return string.Format("../../up/{0}.xls", guid);
+            return string.Format("../../up/RuKu/{0}.xls", guid);
             //记录日志
 
         }

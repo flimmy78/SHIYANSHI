@@ -158,6 +158,7 @@
     <Folder Include="up\ErWeiMa\" />
     <Folder Include="up\QianZi\" />
     <Folder Include="up\Report\" />
+    <Folder Include="up\RuKu\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
