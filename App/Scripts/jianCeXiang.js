@@ -421,7 +421,7 @@ function LianDongBuQueDingDu(obj)
 
                 }
                 else {
-                    $.messager.alert('操作提示', res.Message, 'info');
+                    //$.messager.alert('操作提示', res.Message, 'info');
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
