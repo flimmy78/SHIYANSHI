@@ -124,6 +124,110 @@ namespace Langben.Report
             }
             return result;
         }
+        /// <summary>
+        /// 添加签名
+        /// </summary>
+        /// <param name="ID">预备方案ID</param>
+        /// <param name="Message"></param>
+        /// <param name="Person">操作人</param>
+        public void AddQianMing(string ID)
+        {            
+            ValidationErrors validationErrors = new ValidationErrors();            
+            IBLL.IFILE_UPLOADERBLL fBll = new BLL.FILE_UPLOADERBLL();
+            FILE_UPLOADER fEntity = fBll.GetListByPREPARE_SCHEMEID(ID);
+            if(fEntity==null)
+            {
+                return;
+            }
+            IBLL.IPREPARE_SCHEMEBLL m_BLL = new PREPARE_SCHEMEBLL();
+            PREPARE_SCHEME entity = m_BLL.GetById(ID);
+
+            if(entity==null)
+            {
+                return;
+            }
+            List<string> personName = new List<string>();           
+            AccountBLL aBll = new BLL.AccountBLL();           
+            //批 准 人
+             personName.Add(entity.APPROVALID);
+            //核验员
+            personName.Add(entity.DETECTERID);
+            //检定员
+            personName.Add(entity.CHECKERID);
+            Dictionary<string, string> picList = aBll.GetPictureByName(personName);
+            if(picList==null || picList.Count==0)
+            {
+                return;
+            }
+
+            string xlsPath = System.Web.HttpContext.Current.Server.MapPath(fEntity.PATH);           
+            
+            FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.ReadWrite);
+            IWorkbook hssfworkbook = new HSSFWorkbook(file);
+
+            string sheetName_Destination = "封皮";
+            ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
+
+            bool IsSave = false;
+
+            #region 批准人
+            string picPath = "";
+            byte[] bytes = null;
+            if (!string.IsNullOrWhiteSpace(entity.APPROVALID) && picList.ContainsKey(entity.APPROVALID) && !string.IsNullOrWhiteSpace(picList[entity.APPROVALID]) && fEntity.Row_PiZhunRen!=-1 && fEntity.Col_PiZhunRen!=-1)
+            {
+                picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.APPROVALID]);
+                bytes = System.IO.File.ReadAllBytes(picPath);
+                int pictureIdx = hssfworkbook.AddPicture(bytes,PictureType.PNG);
+                IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
+                IClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen+3, fEntity.Row_PiZhunRen+1);
+                IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
+                pict.Resize();
+                IsSave = true;                
+
+            }
+
+            #endregion
+            #region 核验员
+            if (!string.IsNullOrWhiteSpace(entity.DETECTERID) && picList.ContainsKey(entity.DETECTERID) && !string.IsNullOrWhiteSpace(picList[entity.DETECTERID]) && fEntity.Row_HeYanYuan != -1 && fEntity.Col_HeYanYuan != -1)
+            {
+                picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.DETECTERID]);
+                bytes = System.IO.File.ReadAllBytes(picPath);
+                int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
+                IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
+                IClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0, fEntity.Col_HeYanYuan, fEntity.Row_HeYanYuan, fEntity.Col_HeYanYuan + 3, fEntity.Row_HeYanYuan + 1);
+                IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
+                pict.Resize();
+                IsSave = true;                
+
+            }
+            #endregion
+            #region 检定员/校准员
+            if (!string.IsNullOrWhiteSpace(entity.CHECKERID) &&　picList.ContainsKey(entity.CHECKERID) && !string.IsNullOrWhiteSpace(picList[entity.CHECKERID]) && fEntity.Row_JianDingYuan != -1 && fEntity.Col_JianDingYuan != -1)
+            {
+                picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.CHECKERID]);
+                bytes = System.IO.File.ReadAllBytes(picPath);
+                int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
+                IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
+                IClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0, fEntity.Col_JianDingYuan, fEntity.Row_JianDingYuan , fEntity.Col_JianDingYuan + 3, fEntity.Row_JianDingYuan + 1);
+                IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
+                pict.Resize();
+                IsSave = true;                
+
+            }
+            if(IsSave)
+            {
+                using (FileStream fileWrite = new FileStream(fEntity.PATH, FileMode.Create))
+                {
+                    hssfworkbook.Write(fileWrite);
+                }
+                
+            }
+            #endregion
+
+
+
+
+        }
 
 
         /// <summary>
@@ -192,14 +296,15 @@ namespace Langben.Report
                 FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
                 IWorkbook hssfworkbook = new HSSFWorkbook(file);
 
-                //设置封皮                
+                //设置封皮
+                string fRemark = "";//用于记录批准人行号_批准人列号|核验员行号_核验员列号|检定员/校准员行号_检定员/校准员列号                
                 if (type == ExportType.Report_JianDing)
                 {
-                    SetFengPi_BaoGaoJianDing(hssfworkbook, entity);
+                    SetFengPi_BaoGaoJianDing(hssfworkbook, entity,out fRemark);
                 }
                 else
                 {
-                    SetFengPi_BaoGaoXiaoZhun(hssfworkbook, entity, type);
+                    SetFengPi_BaoGaoXiaoZhun(hssfworkbook, entity, out fRemark,type);
                 }
                 //设置数据
 
@@ -232,6 +337,7 @@ namespace Langben.Report
                 fEntity.STATE = "已上传";
                 //fEntity.CREATEPERSON = CreatePerson;
                 fEntity.ID = Result.GetNewId();
+                fEntity.REMARK = fRemark;
                 //ValidationErrors validationErrors = new ValidationErrors();
                 //fBll.Create(ref validationErrors, fEntity);
                 //}
@@ -341,8 +447,9 @@ namespace Langben.Report
         /// <param name="hssfworkbook"></param>
         /// <param name="entity"></param>
         /// <param name="type">报告类型</param>
-        private void SetFengPi_BaoGaoXiaoZhun(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.Report_XiaoZhun)
+        private void SetFengPi_BaoGaoXiaoZhun(IWorkbook hssfworkbook, PREPARE_SCHEME entity,out string fRemark, ExportType type = ExportType.Report_XiaoZhun)
         {
+            fRemark = "";
             if (type == ExportType.Report_XiaoZhun_CNAS)
             {
                 return;//待修改成Word
@@ -435,6 +542,7 @@ namespace Langben.Report
             {
                 sheet_Destination.GetRow(33).GetCell(13).SetCellValue(entity.APPROVALID);
             }
+            fRemark = "33_13";
             //核验员
             if (entity.DETECTERID != null && entity.DETECTERID.Trim() != "")
             {
@@ -444,6 +552,7 @@ namespace Langben.Report
             {
                 sheet_Destination.GetRow(35).GetCell(13).SetCellValue("/");
             }
+            fRemark += "|35_13";
             //检定员\校 准 员
             if (entity.CHECKERID != null && entity.CHECKERID.Trim() != "")
             {
@@ -453,6 +562,7 @@ namespace Langben.Report
             {
                 sheet_Destination.GetRow(37).GetCell(13).SetCellValue("/");
             }
+            fRemark += "|37_13";
             //检定日期\校 准 日 期
             if (entity.CALIBRATION_DATE.HasValue)
             {
@@ -792,9 +902,9 @@ namespace Langben.Report
         /// </summary>
         /// <param name="hssfworkbook"></param>
         /// <param name="entity"></param>
-        private void SetFengPi_BaoGaoJianDing(IWorkbook hssfworkbook, PREPARE_SCHEME entity)
+        private void SetFengPi_BaoGaoJianDing(IWorkbook hssfworkbook, PREPARE_SCHEME entity,out string fRemark)
         {
-
+            fRemark = "";
             if (entity.CONCLUSION == "不合格")//不合格只有通知书封皮
             {
                 SetFengPi_BaoGaoJianDing_TongZhiShu(hssfworkbook, entity);
@@ -911,6 +1021,7 @@ namespace Langben.Report
             {
                 sheet_Destination.GetRow(33).GetCell(13).SetCellValue(entity.APPROVALID);
             }
+            fRemark = "33_13";
             //核验员
             if (entity.DETECTERID != null && entity.DETECTERID.Trim() != "")
             {
@@ -920,6 +1031,7 @@ namespace Langben.Report
             {
                 sheet_Destination.GetRow(35).GetCell(13).SetCellValue("/");
             }
+            fRemark += "|35_13";
             //检定员
             if (entity.CHECKERID != null && entity.CHECKERID.Trim() != "")
             {
@@ -929,6 +1041,7 @@ namespace Langben.Report
             {
                 sheet_Destination.GetRow(37).GetCell(13).SetCellValue("/");
             }
+            fRemark += "|37_13";
             //检定日期
             if (entity.CALIBRATION_DATE.HasValue)
             {
@@ -1031,7 +1144,7 @@ namespace Langben.Report
                 FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
                 IWorkbook hssfworkbook = new HSSFWorkbook(file);
 
-                //设置封皮
+                //设置封皮               
                 SetFengPi(hssfworkbook, entity, type);
 
                 //设置数据
@@ -1390,7 +1503,7 @@ namespace Langben.Report
         /// <param name="hssfworkbook"></param>
         /// <param name="entity"></param>
         private void SetFengPi(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing)
-        {
+        {            
             string sheetName_Source = "封皮模板";
             string sheetName_Destination = "封皮";
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
@@ -1554,6 +1667,7 @@ namespace Langben.Report
             {
                 sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue("/");
             }
+            
             //核验员
             if (entity.DETECTERID != null && entity.DETECTERID.Trim() != "")
             {

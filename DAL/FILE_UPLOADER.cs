@@ -37,5 +37,155 @@ namespace Langben.DAL
         public string UPDATEPERSON { get; set; }
     
         public virtual PREPARE_SCHEME PREPARE_SCHEME { get; set; }
+
+        /// <summary>
+        /// 批准人行号
+        /// </summary>
+        public int Row_PiZhunRen
+        {
+            get
+            {
+                int index = -1;
+                if(!string.IsNullOrWhiteSpace(REMARK) && REMARK.Trim()!="" && REMARK.Split('_').Length>=2)
+                {                   
+                    try
+                    {
+                        index = Convert.ToInt32(REMARK.Split('|')[0].Split('_')[0]);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                return index;
+            }
+        }
+        /// <summary>
+        /// 核验员行号
+        /// </summary>
+        public int Row_HeYanYuan
+        {
+            get
+            {
+                int index = -1;
+                if (!string.IsNullOrWhiteSpace(REMARK) && REMARK.Trim() != "" && REMARK.Split('|').Length>=2)
+                {
+                    try
+                    {
+                        index = Convert.ToInt32(REMARK.Split('|')[1].Split('_')[0]);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                if (index == -1 && Row_PiZhunRen != -1)
+                {
+                    index = Row_PiZhunRen + 2;
+                }
+                return index;
+            }
+        }
+        /// <summary>
+        /// 检定员/校准员行号
+        /// </summary>
+        public int Row_JianDingYuan
+        {
+            get
+            {
+                int index = -1;
+                if (!string.IsNullOrWhiteSpace(REMARK) && REMARK.Trim() != "" && REMARK.Split('|').Length >= 3 && REMARK.Split('|')[2].Split('_').Length >= 2)
+                {
+                    try
+                    {
+                        index = Convert.ToInt32(REMARK.Split('|')[2].Split('_')[0]);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                if (index == -1 && Row_HeYanYuan != -1)
+                {
+                    index = Row_HeYanYuan + 2;
+                }
+                return index;
+            }
+        }
+        /// <summary>
+        /// 批准人列号
+        /// </summary>
+        public int Col_PiZhunRen
+        {
+            get
+            {
+                int index = -1;
+                if (!string.IsNullOrWhiteSpace(REMARK) && REMARK.Trim() != "" && REMARK.Split('_').Length >= 2 && REMARK.Split('|')[1].Split('_').Length >= 2)
+                {
+                    try
+                    {
+                        index = Convert.ToInt32(REMARK.Split('|')[0].Split('_')[1]);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                return index;
+            }
+        }
+        /// <summary>
+        /// 核验员列号
+        /// </summary>
+        public int Col_HeYanYuan
+        {
+            get
+            {
+                int index = -1;
+                if (!string.IsNullOrWhiteSpace(REMARK) && REMARK.Trim() != "" && REMARK.Split('|').Length >= 2 && REMARK.Split('|')[1].Split('_').Length>=2)
+                {
+                    try
+                    {
+                        index = Convert.ToInt32(REMARK.Split('|')[1].Split('_')[1]);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                if (index == -1 && Col_PiZhunRen != -1)
+                {
+                    index = Col_PiZhunRen + 2;
+                }
+                return index;
+            }
+        }
+        /// <summary>
+        /// 检定员/校准员列号
+        /// </summary>
+        public int Col_JianDingYuan
+        {
+            get
+            {
+                int index = -1;
+                if (!string.IsNullOrWhiteSpace(REMARK) && REMARK.Trim() != "" && REMARK.Split('|').Length >= 3 && REMARK.Split('|')[2].Split('_').Length>=2)
+                {
+                    try
+                    {
+                        index = Convert.ToInt32(REMARK.Split('|')[2].Split('_')[1]);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                if (index == -1 && Col_HeYanYuan != -1)
+                {
+                    index = Col_HeYanYuan + 2;
+                }
+                return index;
+            }
+        }
+
     }
 }
