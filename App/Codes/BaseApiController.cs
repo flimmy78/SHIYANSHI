@@ -65,12 +65,16 @@ namespace Models
             PropertyInfo[] properties;
             //标题行  
             HSSFRow dataRow = sheet.CreateRow(0) as HSSFRow;
+           
+            //缩小字体填充  
+            //cellStyle.ShrinkToFit = true;
             for (int i = 0; i < titles.Length; i++)
             {
                 if (!string.IsNullOrWhiteSpace(titles[i]))
                 {
-
-                    dataRow.CreateCell(i).SetCellValue(titles[i]); //列值
+                    var Cell = dataRow.CreateCell(i);
+             
+                    Cell.SetCellValue(titles[i]); //列值
 
                 }
             }
@@ -152,7 +156,7 @@ namespace Models
                 str = serializer.Serialize(obj);
             }
             HttpResponseMessage result = new HttpResponseMessage { Content = new StringContent(str, System.Text.Encoding.GetEncoding("UTF-8"), "application/json") };
-          
+
             return result;
         }
     }

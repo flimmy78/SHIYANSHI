@@ -61,19 +61,29 @@ namespace Models
             IWorkbook hssfworkbook = new HSSFWorkbook(file);
             ISheet sheet = hssfworkbook.GetSheet("入库单");
             string guid = Guid.NewGuid().ToString();
-            string saveFileName = xlsPath.Path(guid);
+            string saveFileName = xlsPath.Path(@"RuKu/"+guid);
 
             Dictionary<string, string> propertyName;
             PropertyInfo[] properties;
             //标题行  委托单号	器具名称	型号	出厂编号	证书单位	客户特殊要求	器具所在位置	器具状态	入库说明
             var titles = "委托单号,器具名称,型号,出厂编号,证书单位,客户特殊要求,器具所在位置,器具状态,入库说明".Split(',');
+      
+            var dd = sheet.GetRow(0).GetCell(1).CellStyle;
+         
+
+
             HSSFRow dataRow = sheet.CreateRow(0) as HSSFRow;
+
+
+            ICellStyle cellStyle = hssfworkbook.CreateCellStyle();
+            cellStyle.ShrinkToFit = true;
             for (int i = 0; i < titles.Length; i++)
             {
                 if (!string.IsNullOrWhiteSpace(titles[i]))
                 {
-
-                    dataRow.CreateCell(i).SetCellValue(titles[i]); //列值
+                    var cell = dataRow.CreateCell(i);
+                    cell.CellStyle = dd;
+                    cell.SetCellValue(titles[i]); //列值
 
                 }
             }
@@ -102,8 +112,9 @@ namespace Models
 
                     if (propertyName.ContainsKey(a)) //列名
                     {
-
-                        dataRow.CreateCell(j).SetCellValue(propertyName[a]);
+                        var cell = dataRow.CreateCell(j);
+                      
+                        cell.SetCellValue(propertyName[a]);
                         //列值
                     }
                     j++;
@@ -118,7 +129,7 @@ namespace Models
 
 
             //一般只用写这一个就OK了，他会遍历并释放所有资源，但当前版本有问题所以只释放sheet  
-            return string.Format("../../up/{0}.xls", guid);
+            return string.Format("../../up/RuKu/{0}.xls", guid);
             //记录日志
 
         }
