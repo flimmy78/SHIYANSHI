@@ -26,7 +26,7 @@ namespace Langben.App.Controllers
      /// <param name="SCHEMEID">方案id</param>
      /// <param name="PREPARE_SCHEMEID">预备方案id</param>
      /// <returns></returns>
-        public ActionResult BuPingHengFuZaiShiYouGongDianNengWuCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult BuPingHengFuZaiShiYouGongDianNengWuCha(string RULEID = "1085-2013_6_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
