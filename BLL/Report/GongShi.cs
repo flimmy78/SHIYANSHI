@@ -160,7 +160,7 @@ namespace Langben.BLL.Report
                     if (!string.IsNullOrWhiteSpace(paras.XuanYongDianZu))
                     {
 
-                        return Math.Pow((Math.Pow(ui8, 2) + Math.Pow(uiMax8, 2) + Math.Pow(0.0000001/Convert.ToDouble( paras.XuanYongDianZu), 2)), 0.5) * Convert.ToDouble(paras.K);
+                        return Math.Pow((Math.Pow(ui8, 2) + Math.Pow(uiMax8, 2) + Math.Pow(0.0000001 / Convert.ToDouble(paras.XuanYongDianZu), 2)), 0.5) * Convert.ToDouble(paras.K);
 
                     }
                     else
@@ -179,18 +179,36 @@ namespace Langben.BLL.Report
         public static UNCERTAINTYTABLE GetUNCERTAINTYTABLE(BuQueDingBuInput paras, List<UNCERTAINTYTABLE> data)
         {
             var liangcheng = DanWei(paras.ShuChuShiZhi, paras.ShuChuShiJiZhiDanWei);
+           
             foreach (var f in data)
             {//THEUNIT
-                if (f.THEUNIT == "<")
+                if (f.THERELATIONSHIP == "<")//量程起关系
                 {
-                    if (f.ENDUNIT == "<")
+                    if (f.ENDRELATIONSHIP == "<")
                     {
                         if ((DanWei(f.THEUNIT, f.THERANGESCOPE) < liangcheng) && liangcheng < (DanWei(f.ENDUNIT, f.ENDRANGESCOPE)))
                         {
-                            return f;
+                            if (!string.IsNullOrWhiteSpace(paras.PinLv) && !string.IsNullOrWhiteSpace(paras.PinLvDanWei))
+                            {
+                                var pinglv = DanWei(paras.PinLv, paras.PinLvDanWei);
+
+                                if ((DanWei(f.THEFREQUENCY, f.THEUNITFREQUENCY) < pinglv) && pinglv < (DanWei(f.ENDFREQUENCY, f.ENDUNITFREQUENCY)))
+                                {//频率起关系
+
+                                }
+                                else
+                                {
+
+                                }
+                            }
+                            else
+                            {
+                                return f;
+                            }
+
                         }
                     }
-                    else if (f.ENDUNIT == "<=")
+                    else if (f.ENDRELATIONSHIP == "<=")
                     {
                         if ((DanWei(f.THEUNIT, f.THERANGESCOPE) < liangcheng) && liangcheng <= (DanWei(f.ENDUNIT, f.ENDRANGESCOPE)))
                         {
@@ -199,16 +217,16 @@ namespace Langben.BLL.Report
                     }
 
                 }
-                else if (f.THEUNIT == "<=")
+                else if (f.THERELATIONSHIP == "<=")
                 {
-                    if (f.ENDUNIT == "<")
+                    if (f.ENDRELATIONSHIP == "<")
                     {
                         if ((DanWei(f.THEUNIT, f.THERANGESCOPE) <= liangcheng) && liangcheng < (DanWei(f.ENDUNIT, f.ENDRANGESCOPE)))
                         {
                             return f;
                         }
                     }
-                    else if (f.ENDUNIT == "<=")
+                    else if (f.ENDRELATIONSHIP == "<=")
                     {
                         if ((DanWei(f.THEUNIT, f.THERANGESCOPE) <= liangcheng) && liangcheng <= (DanWei(f.ENDUNIT, f.ENDRANGESCOPE)))
                         {
@@ -218,14 +236,14 @@ namespace Langben.BLL.Report
                 }
                 else
                 {
-                    if (f.ENDUNIT == "<")
+                    if (f.ENDRELATIONSHIP == "<")
                     {
                         if (liangcheng < (DanWei(f.ENDUNIT, f.ENDRANGESCOPE)))
                         {
                             return f;
                         }
                     }
-                    else if (f.ENDUNIT == "<=")
+                    else if (f.ENDRELATIONSHIP == "<=")
                     {
                         if (liangcheng <= (DanWei(f.ENDUNIT, f.ENDRANGESCOPE)))
                         {
@@ -240,7 +258,7 @@ namespace Langben.BLL.Report
 
             return null;
         }
-        public static double DanWei(string result, string danwei)
+        public static double DanWei(string danwei, string result)
         {
             /*
              "<select class=\"my-combobox\" name=\"DianYa\" style=\"width:50px; \">" +

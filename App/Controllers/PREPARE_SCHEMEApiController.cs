@@ -330,7 +330,7 @@ namespace Langben.App.Controllers
         public Common.ClientResult.Result EditField([FromBody]PREPARE_SCHEME entity)
         {
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
-            if (entity != null && ModelState.IsValid)
+            if (entity != null)
             {   //数据校验
 
                 string currentPerson = GetCurrentPerson();
@@ -437,7 +437,7 @@ namespace Langben.App.Controllers
                 string currentPerson = GetCurrentPerson();
                 entity.UPDATETIME = DateTime.Now;
                 entity.UPDATEPERSON = currentPerson;
-
+                entity.AUDITDATE = System.DateTime.Now;
                 PREPARE_SCHEME ps = m_BLL.GetById(entity.ID);
                 if (ps.REPORTSTATUSZI == Common.REPORTSTATUS.审核驳回.GetHashCode().ToString() || ps.REPORTSTATUSZI == Common.REPORTSTATUS.批准驳回.GetHashCode().ToString() || ps.REPORTSTATUSZI == null)
                 {

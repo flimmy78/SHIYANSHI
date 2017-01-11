@@ -104,7 +104,7 @@ function showModalMany(me, url, dialogWidth, callback) { //弹出窗体，多选
         dialogWidth = 968;
     }
     var reValue = window.showModalDialog(url, window, "dialogHeight:500px; dialogWidth:" + dialogWidth + "px;  status:off; scroll:auto");
-    debugger
+    
     if (reValue == null || reValue == "undefined" || reValue == "") {
         return; //如果返回值为空，就返回
     }
