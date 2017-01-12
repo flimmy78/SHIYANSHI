@@ -584,6 +584,7 @@
     </Content>
     <Content Include="Scripts\datagrid-detailview.js" />
     <Content Include="Scripts\echarts.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\numeral.js" />
     <Content Include="Scripts\shine.js" />
     <Content Include="Xml\TableTemplate单相.xml" />
