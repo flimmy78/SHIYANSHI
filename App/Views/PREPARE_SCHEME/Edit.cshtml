@@ -52,15 +52,23 @@
                     @if (Model != null && Model.prepare_scheme.CONCLUSION == "不合格")
                     {
                         <option value="合格">合格</option>
-                        <option value="不合格" check="true">不合格</option>
+                        <option value="不合格" selected="selected" >不合格</option>
                     }
                     else
                     {
-                        <option value="合格" check="true">合格</option>
+                        <option value="合格" selected="selected">合格</option>
                         <option value="不合格">不合格</option>
                     }
                 </select>
-                @Html.DropDownList("UNQUALIFIEDTYPE", Models.SysFieldModels.GetSysField("PREPARE_SCHEME", "UNQUALIFIEDTYPE"), "请选择不合格类型", new { @style = "width:60%;display:none" })
+                @if (Model != null && Model.prepare_scheme != null && Model != null && string.IsNullOrWhiteSpace(Model.prepare_scheme.UNQUALIFIEDTYPE))
+                {
+                    <input type="hidden" id="hideUNQUALIFIEDTYPE" value="" />
+                }
+                else
+                {
+                    <input type="hidden" id="hideUNQUALIFIEDTYPE" value="@Model.prepare_scheme.UNQUALIFIEDTYPE" />
+                }
+                @Html.DropDownList("UNQUALIFIEDTYPE", Models.SysFieldModels.GetSysField("PREPARE_SCHEME", "UNQUALIFIEDTYPE"), "请选择不合格类型", new { @style = "width:60%;display:none" })                
             </td>
         </tr>
                 @if (Model != null && Model.prepare_scheme != null && Model.prepare_scheme.CERTIFICATE_CATEGORY == "检定")
@@ -275,6 +283,18 @@
 
     //不合格原因
     $("#CONCLUSION").change(function () {
+        //var option = $("#CONCLUSION option:selected").val();
+        //if (option == "合格") {
+        //    $("#UNQUALIFIEDTYPE").hide();
+        //    $("#UNQUALIFIEDTYPE").val("");
+        //}
+        //else if (option == "不合格") {
+        //    $("#UNQUALIFIEDTYPE").show();
+        //}
+        changeCONCLUSION();
+    })
+    function changeCONCLUSION()
+    {
         var option = $("#CONCLUSION option:selected").val();
         if (option == "合格") {
             $("#UNQUALIFIEDTYPE").hide();
@@ -283,6 +303,14 @@
         else if (option == "不合格") {
             $("#UNQUALIFIEDTYPE").show();
         }
-    })
+    }
+    $(document).ready(function () {
+        var UNQUALIFIEDTYPE = $("#hideUNQUALIFIEDTYPE").val();
+        if (UNQUALIFIEDTYPE != null && UNQUALIFIEDTYPE.trim() != "")
+        {
+            $("#UNQUALIFIEDTYPE").val(UNQUALIFIEDTYPE);
+        }
+        changeCONCLUSION();
+    });
 </script>
 

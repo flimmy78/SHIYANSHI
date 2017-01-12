@@ -179,9 +179,10 @@ namespace Langben.Report
                 bytes = System.IO.File.ReadAllBytes(picPath);
                 int pictureIdx = hssfworkbook.AddPicture(bytes,PictureType.PNG);
                 IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
-                IClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen+3, fEntity.Row_PiZhunRen+1);
+                IClientAnchor anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen+3, fEntity.Row_PiZhunRen+1);
                 IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
-                pict.Resize();
+                //pict.Resize();
+                sheet_Destination.GetRow(fEntity.Row_PiZhunRen).GetCell(fEntity.Col_PiZhunRen).SetCellValue("");
                 IsSave = true;                
 
             }
@@ -194,9 +195,10 @@ namespace Langben.Report
                 bytes = System.IO.File.ReadAllBytes(picPath);
                 int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
                 IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
-                IClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0, fEntity.Col_HeYanYuan, fEntity.Row_HeYanYuan, fEntity.Col_HeYanYuan + 3, fEntity.Row_HeYanYuan + 1);
+                IClientAnchor anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_HeYanYuan, fEntity.Row_HeYanYuan, fEntity.Col_HeYanYuan + 3, fEntity.Row_HeYanYuan + 1);
                 IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
-                pict.Resize();
+                //pict.Resize();
+                sheet_Destination.GetRow(fEntity.Row_HeYanYuan).GetCell(fEntity.Col_HeYanYuan).SetCellValue("");
                 IsSave = true;                
 
             }
@@ -208,15 +210,16 @@ namespace Langben.Report
                 bytes = System.IO.File.ReadAllBytes(picPath);
                 int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
                 IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
-                IClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0, fEntity.Col_JianDingYuan, fEntity.Row_JianDingYuan , fEntity.Col_JianDingYuan + 3, fEntity.Row_JianDingYuan + 1);
+                IClientAnchor anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_JianDingYuan, fEntity.Row_JianDingYuan, fEntity.Col_JianDingYuan + 3, fEntity.Row_JianDingYuan+1 );
                 IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
-                pict.Resize();
+                //pict.Resize();
+                sheet_Destination.GetRow(fEntity.Row_JianDingYuan).GetCell(fEntity.Col_JianDingYuan).SetCellValue("");
                 IsSave = true;                
 
             }
             if(IsSave)
             {
-                using (FileStream fileWrite = new FileStream(fEntity.PATH, FileMode.Create))
+                using (FileStream fileWrite = new FileStream(xlsPath, FileMode.Create))
                 {
                     hssfworkbook.Write(fileWrite);
                 }
@@ -263,6 +266,7 @@ namespace Langben.Report
                 Entity.NAME = rEntity.NAME;
                 Entity.SUFFIX = rEntity.SUFFIX;
                 Entity.STATE = rEntity.STATE;
+                Entity.REMARK = rEntity.REMARK;
             }
             if (Entity != null)
             {
@@ -314,7 +318,7 @@ namespace Langben.Report
                 SetShuJu(hssfworkbook, entity, type);
                 string fileName = SetFileName(type);
                 //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";
-                saveFileName = "~/up/Report/" + fileName + ".xls";
+                saveFileName = "/up/Report/" + fileName + ".xls";
                 string saveFileNamePath = System.Web.HttpContext.Current.Server.MapPath(saveFileName);
                 using (FileStream fileWrite = new FileStream(saveFileNamePath, FileMode.Create))
                 {
@@ -1158,7 +1162,7 @@ namespace Langben.Report
 
                 //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";                
                 string fileName = SetFileName(type);
-                saveFileName = "~/up/Report/" + fileName + ".xls";
+                saveFileName = "/up/Report/" + fileName + ".xls";
 
                 string saveFileNamePath = System.Web.HttpContext.Current.Server.MapPath(saveFileName);
                 using (FileStream fileWrite = new FileStream(saveFileNamePath, FileMode.Create))
