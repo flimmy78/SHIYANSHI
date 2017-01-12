@@ -661,6 +661,18 @@ namespace Langben.App.Controllers
                         }
                         LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，预备方案信息的Id为" + entity.ID, "审批过程记录");//写入日志  
                     }
+                    try
+                    {
+                        if (entity.REPORTSTATUS == Common.REPORTSTATUS.已批准.ToString())
+                        {
+                            Langben.Report.ReportBLL rBLL = new Langben.Report.ReportBLL();
+                            rBLL.AddQianMing(entity.ID);
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+
+                    }
                     #endregion
                 }
 

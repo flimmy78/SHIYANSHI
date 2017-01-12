@@ -47,7 +47,7 @@ namespace Langben.BLL
 
             using (SysEntities db = new SysEntities())
             {
-                list = db.FILE_UPLOADER.Where(p => p.PREPARE_SCHEMEID == PREPARE_SCHEMEID && !string.IsNullOrWhiteSpace(p.PATH) && p.STATE!="已删除").ToList();
+                list = db.FILE_UPLOADER.Where(p => p.PREPARE_SCHEMEID == PREPARE_SCHEMEID && p.STATE!="已删除").ToList();
             }
             if(list!=null && list.Count>0)
             {
