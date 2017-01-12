@@ -148,12 +148,12 @@
 <script type="text/javascript">
     $(function () {
         if ("@ViewBag.REPORTSTATUS" != "") {
-            //if ("@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.待审核.ToString()" && "@ViewBag.HEIFSP" == "H" || "@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.待批准.ToString()" && "@ViewBag.HEIFSP" == "P") {
+            if ("@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.待审核.ToString()" && "@ViewBag.HEIFSP" == "H" || "@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.待批准.ToString()" && "@ViewBag.HEIFSP" == "P") {
                 $('#shenghediv').find(":submit").each(function () {
                     //$(this).removeAttr("disabled");
                     $(this).attr("disabled", false);
                 });
-            //}
+            }
         }
     })
     function ajaxFrom(form, url) {
