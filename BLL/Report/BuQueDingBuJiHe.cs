@@ -49,7 +49,8 @@ namespace Langben.BLL.Report
             jihe.Add(new BuQueDingDu() { RuleID = "445-1986_2_2", GongShi = "9", MingChen = "8508A直流电压输出", DianZu = "N" });
             jihe.Add(new BuQueDingDu() { RuleID = "724-1991_2_4", GongShi = "9", MingChen = "5720A直流电阻输出", DianZu = "N" });
 
-            jihe.Add(new BuQueDingDu() { RuleID = "34-1999_3_2", GongShi = "2", MingChen = "3", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "34-1999_3_2", GongShi = "2", MingChen = "5720A交流电压测量单相", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "d34-1999_3_2", GongShi = "2", MingChen = "5720A交流电压测量三相", DianZu = "N" });
             jihe.Add(new BuQueDingDu() { RuleID = "35-1999_3_2", GongShi = "2", MingChen = "5720A交流电流测量", DianZu = "N" });
             jihe.Add(new BuQueDingDu() { RuleID = "34-1999_3_7", GongShi = "2", MingChen = "5720A交流电压测量单相", DianZu = "N" });
             jihe.Add(new BuQueDingDu() { RuleID = "35-1999_3_7", GongShi = "2", MingChen = "5720A交流电流测量", DianZu = "N" });
