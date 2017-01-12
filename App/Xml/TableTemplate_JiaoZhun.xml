@@ -1,5 +1,6 @@
 <TableTemplates>
 	<TableTemplateList>
+    <!--数表三相-->
     <TableTemplate>
       <!--检测项编号，必填-->
       <RuleID>38-1987_2_1</RuleID>
