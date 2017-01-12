@@ -16,7 +16,7 @@ namespace Langben.App.Controllers
     /// <summary>
     /// 人员
     /// </summary>
-    public class SysPersonController : BaseController
+    public class SysPerson2Controller : BaseController
     {
 
         /// <summary>
@@ -47,19 +47,20 @@ namespace Langben.App.Controllers
         /// <param name="sort">升序asc（默认）还是降序desc</param>
         /// <param name="search">查询条件</param>
         /// <returns></returns>
-        [HttpPost]
+        
         public JsonResult GetData(string id, int page, int rows, string order, string sort, string search)
         {
+         
+            LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，人员的信息，dd2w", "人员qq2w"
+                       );//写入日志 
+            
             try
             {
-                LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，人员的信息，dd2w", "人员qq2w"
-                   );//写入日志 
 
                 int total = 0;
                 List<SysPerson> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
-                 LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，人员的信息，dd", "人员"
-                    );//写入日志  
-               
+                 LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，人员的信息，dd", "人员qq"
+                    );//写入日志   
                 return Json(new datagrid
                 {
                     total = total,
@@ -121,9 +122,7 @@ namespace Langben.App.Controllers
                         ,
                         Version = s.Version
 
-                    }
-
-                        )
+                    } )
                 });
             }
             catch (Exception ex)
@@ -398,10 +397,10 @@ namespace Langben.App.Controllers
 
         ValidationErrors validationErrors = new ValidationErrors();
 
-        public SysPersonController()
+        public SysPerson2Controller()
             : this(new SysPersonBLL()) { }
 
-        public SysPersonController(SysPersonBLL bll)
+        public SysPerson2Controller(SysPersonBLL bll)
         {
             m_BLL = bll;
         }

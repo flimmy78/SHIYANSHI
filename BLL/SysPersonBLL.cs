@@ -63,7 +63,11 @@ namespace Langben.BLL
         public List<SysPerson> GetByParam(string id, int page, int rows, string order, string sort, string search, ref int total)
         {
 
-            
+            try
+            {
+
+           
+
             IQueryable<SysPerson> queryData = repository.DaoChuData(db, order, sort, search);
             total = queryData.Count();
             if (total > 0)
@@ -93,19 +97,19 @@ namespace Langben.BLL
                             }                         
                         } 
  
-                        if (item.SysDocument != null)
-                        {
-                            item.SysDocumentId = string.Empty;
-                            foreach (var it in item.SysDocument)
-                            {
-                                item.SysDocumentId += it.Name + ' ';
-                            }                         
-                        } 
+                        
 
                     }
- 
-            }
+
+                }
+           
             return queryData.ToList();
+            }
+            catch (Exception ex)
+            { 
+                ExceptionsHander.WriteExceptions(ex);
+            }
+            return null;
         }
                 /// <summary>
         /// 查询的数据 /*在6.0版本中 新增*/
@@ -187,7 +191,7 @@ namespace Langben.BLL
             }
             catch (Exception ex)
             {
-                validationErrors.Add(ex.Message);
+                 
                 ExceptionsHander.WriteExceptions(ex);                
             }
             return false;

@@ -45,8 +45,10 @@ namespace App
                 Application["LastError"] = lastError;
                 int statusCode = HttpContext.Current.Response.StatusCode;
                 string exceptionOperator = System.Configuration.ConfigurationManager.AppSettings["ExceptionUrl"];
-                try
-                {
+              
+                    Models.LogClassModels.WriteServiceLog( "，人员的信息，ddw", "人员qqw"
+                       );//写入日志 
+
                     ExceptionsHander.WriteExceptions(lastError);//将异常写入数据库
                     exceptionOperator = new System.Web.UI.Control().ResolveUrl(exceptionOperator);
                     if (!String.IsNullOrEmpty(exceptionOperator) && !s.Contains(exceptionOperator))
@@ -56,10 +58,7 @@ namespace App
                         Response.Write(script);
                         Response.End();
                     }
-                }
-                catch (Exception)
-                {
-                }
+                
                 
             }
         }

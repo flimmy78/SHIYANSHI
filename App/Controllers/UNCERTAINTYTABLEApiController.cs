@@ -205,13 +205,12 @@ namespace Langben.App.Controllers
                             );//写入日志                      
                         result.Code = Common.ClientCode.Fail;
                         result.Message = Suggestion.InsertFail + returnValue;
-                        return result; //提示插入失败
+                      //  return result; //提示插入失败
                     }
-                    return result;
+                    //return result;
                 }
             }
-            result.Code = Common.ClientCode.FindNull;
-            result.Message = Suggestion.InsertFail + "，请核对输入的数据的格式"; //提示输入的数据的格式不对 
+        
             return result;
         }
 

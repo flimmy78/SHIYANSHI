@@ -52,7 +52,7 @@ namespace Models
                     sysLog.CreateTime = DateTime.Now;
                     sysLog.Ip = GetIP();
                     sysLog.Message = message;
-
+              
                     sysLog.CreatePerson = AccountModel.GetCurrentPerson();
                     sysLog.MenuId = logType;//哪个模块生成的日志
 
@@ -68,7 +68,7 @@ namespace Models
             {
                 try
                 {
-                    string path = @"mylog.txt";
+                    string path = @"/up/mylog.txt";
                     string txtPath = System.Web.HttpContext.Current.Server.MapPath(path);//获取绝对路径
                     using (StreamWriter sw = new StreamWriter(txtPath, true, Encoding.Default))
                     {
