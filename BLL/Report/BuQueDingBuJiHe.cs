@@ -33,45 +33,45 @@ namespace Langben.BLL.Report
 */
             jihe = new List<BuQueDingDu>();
             jihe.Add(new BuQueDingDu() { RuleID = "315-1983_2_4", GongShi = "2", MingChen = "5720A交流电压测量单相", DianZu="N"});
-            jihe.Add(new BuQueDingDu() { RuleID = "598-1989_2_2", GongShi = "2", MingChen = "3", DianZu = "N" });
-            jihe.Add(new BuQueDingDu() { RuleID = "315-1983_2_5", GongShi = "2", MingChen = "3", DianZu = "N" });
-            jihe.Add(new BuQueDingDu() { RuleID = "598-1989_2_6", GongShi = "2", MingChen = "3", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "598-1989_2_2", GongShi = "2", MingChen = "5720A直流电流测量", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "315-1983_2_5", GongShi = "2", MingChen = "5720A直流电压测量", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "598-1989_2_6", GongShi = "2", MingChen = "5720A直流电流测量", DianZu = "N" });
 
-            jihe.Add(new BuQueDingDu() { RuleID = "315-1983_2_2", GongShi = "2", MingChen = "3", DianZu = "N" });
-            jihe.Add(new BuQueDingDu() { RuleID = "598-1989_2_4", GongShi = "2", MingChen = "3", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "315-1983_2_2", GongShi = "2", MingChen = "5720A直流电压测量", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "598-1989_2_4", GongShi = "2", MingChen = "5720A直流电流测量", DianZu = "N" });
 
-            jihe.Add(new BuQueDingDu() { RuleID = "445-1986_2_1", GongShi = "9", MingChen = "3", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "445-1986_2_1", GongShi = "9", MingChen = "8508A直流电压输出", DianZu = "N" });
 
-            jihe.Add(new BuQueDingDu() { RuleID = "724-1991_2_1", GongShi = "5", MingChen = "3", DianZu = "N" });
-            jihe.Add(new BuQueDingDu() { RuleID = "724-1991_2_2", GongShi = "5", MingChen = "3", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "724-1991_2_1", GongShi = "5", MingChen = "8508A直流电阻测量", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "724-1991_2_2", GongShi = "5", MingChen = "8508A直流电阻测量", DianZu = "N" });
 
-            jihe.Add(new BuQueDingDu() { RuleID = "724-1991_2_3", GongShi = "9", MingChen = "3", DianZu = "N" });
-            jihe.Add(new BuQueDingDu() { RuleID = "445-1986_2_2", GongShi = "9", MingChen = "3", DianZu = "N" });
-            jihe.Add(new BuQueDingDu() { RuleID = "724-1991_2_4", GongShi = "9", MingChen = "3", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "724-1991_2_3", GongShi = "9", MingChen = "5720A直流电阻输出", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "445-1986_2_2", GongShi = "9", MingChen = "8508A直流电压输出", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "724-1991_2_4", GongShi = "9", MingChen = "5720A直流电阻输出", DianZu = "N" });
 
             jihe.Add(new BuQueDingDu() { RuleID = "34-1999_3_2", GongShi = "2", MingChen = "3", DianZu = "N" });
-            jihe.Add(new BuQueDingDu() { RuleID = "35-1999_3_2", GongShi = "2", MingChen = "3", DianZu = "N" });
-            jihe.Add(new BuQueDingDu() { RuleID = "34-1999_3_7", GongShi = "2", MingChen = "3", DianZu = "N" });
-            jihe.Add(new BuQueDingDu() { RuleID = "35-1999_3_7", GongShi = "2", MingChen = "3", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "35-1999_3_2", GongShi = "2", MingChen = "5720A交流电流测量", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "34-1999_3_7", GongShi = "2", MingChen = "5720A交流电压测量单相", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "35-1999_3_7", GongShi = "2", MingChen = "5720A交流电流测量", DianZu = "N" });
 
 
-            jihe.Add(new BuQueDingDu() { RuleID = "410-1994_6_3", GongShi = "9", MingChen = "3", DianZu = "N" });
-            jihe.Add(new BuQueDingDu() { RuleID = "410-1994_6_4", GongShi = "9", MingChen = "3", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "410-1994_6_3", GongShi = "9", MingChen = "8508A交流电压输出", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "410-1994_6_4", GongShi = "9", MingChen = "8508A交流电压输出", DianZu = "N" });
 
 
 
-            jihe.Add(new BuQueDingDu() { RuleID = "38-1987_2_1", GongShi = "9", MingChen = "3", DianZu = "N" });
-            jihe.Add(new BuQueDingDu() { RuleID = "38-1987_2_1", GongShi = "8", MingChen = "3", DianZu = "Y" });
+            jihe.Add(new BuQueDingDu() { RuleID = "38-1987_2_1", GongShi = "9", MingChen = "8508A直流电流输出", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "38-1987_2_1", GongShi = "8", MingChen = "8508A直流电压输出", DianZu = "Y" });
 
-            jihe.Add(new BuQueDingDu() { RuleID = "38-1987_2_2", GongShi = "9", MingChen = "3", DianZu = "N" });
-            jihe.Add(new BuQueDingDu() { RuleID = "38-1987_2_2", GongShi = "8", MingChen = "3", DianZu = "Y" });
+            jihe.Add(new BuQueDingDu() { RuleID = "38-1987_2_2", GongShi = "9", MingChen = "8508A直流电流输出", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "38-1987_2_2", GongShi = "8", MingChen = "8508A直流电压输出", DianZu = "Y" });
 
 
-            jihe.Add(new BuQueDingDu() { RuleID = "51-1999_3_3", GongShi = "9", MingChen = "3", DianZu = "N" });
-            jihe.Add(new BuQueDingDu() { RuleID = "51-1999_3_3", GongShi = "6", MingChen = "3", DianZu = "Y" });
+            jihe.Add(new BuQueDingDu() { RuleID = "51-1999_3_3", GongShi = "9", MingChen = "8508A交流电流输出", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "51-1999_3_3", GongShi = "6", MingChen = "8508A交流电压", DianZu = "Y" });
 
-            jihe.Add(new BuQueDingDu() { RuleID = "51-1999_3_4", GongShi = "9", MingChen = "3", DianZu = "N" });
-            jihe.Add(new BuQueDingDu() { RuleID = "51-1999_3_4", GongShi = "6", MingChen = "3", DianZu = "Y" });
+            jihe.Add(new BuQueDingDu() { RuleID = "51-1999_3_4", GongShi = "9", MingChen = "8508A交流电流输出", DianZu = "N" });
+            jihe.Add(new BuQueDingDu() { RuleID = "51-1999_3_4", GongShi = "6", MingChen = "8508A交流电压", DianZu = "Y" });
 
         }
 
