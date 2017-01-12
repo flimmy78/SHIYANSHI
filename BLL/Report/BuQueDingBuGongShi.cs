@@ -39,16 +39,16 @@ namespace Langben.BLL.Report
             UNCERTAINTYTABLEBLL bll = new BLL.UNCERTAINTYTABLEBLL();
             List<UNCERTAINTYTABLE> data = bll.GetByASSESSMENTITEM(buQueDingBuJiHe.MingChen);
 
-            GongShi.GetBuQueDingDu(paras, data, buQueDingBuJiHe);
-
-            if (!string.IsNullOrWhiteSpace(paras.ShuChuShiJiZhi))
-            {
-                return "10.123";
-            }
-            else
-            {
-                return "";
-            }
+            var re = GongShi.GetBuQueDingDu(paras, data, buQueDingBuJiHe);
+            return re.ToString();
+            //if (!string.IsNullOrWhiteSpace(paras.ShuChuShiJiZhi))
+            //{
+            //    return "10.123";
+            //}
+            //else
+            //{
+            //    return "";
+            //}
         }
 
     }

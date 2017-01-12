@@ -242,7 +242,7 @@
         $('#flexigridData').datagrid('load', { search: search });
     };
 
-
+    var WindowObjectReference; // global variable
     //签名
     function getView() {
         var baogao = $("#baogaoid").val();
@@ -272,7 +272,24 @@
                     }
                 }
             }
-            window.open('/VQIJULINGQU1/Show/?baogaoid=' + baogao + "&qijuid=" + qiju);       
+            var fulls = "left=0,screenX=0,top=0,screenY=0,scrollbars=1";    //定义弹出窗口的参数  
+            if (window.screen) {
+                var ah = screen.availHeight - 30;
+                var aw = screen.availWidth - 10;
+                fulls += ",height=" + ah;
+                fulls += ",innerHeight=" + ah;
+                fulls += ",width=" + aw;
+                fulls += ",innerWidth=" + aw;
+                fulls += ",resizable"
+            } else {
+                fulls += ",resizable"; // 对于不支持screen属性的浏览器，可以手工进行最大化。 manually  
+            }
+
+
+            WindowObjectReference = window.open('/VQIJULINGQU1/Show/?baogaoid=' + baogao + "&qijuid=" + qiju,
+"签字",
+fulls);
+             
         } else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
         }
