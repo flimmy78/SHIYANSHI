@@ -202,6 +202,7 @@
     <Compile Include="Controllers\SysMessageTempController.cs" />
     <Compile Include="Controllers\SysNoticeController.cs" />
     <Compile Include="Controllers\SysOperationController.cs" />
+    <Compile Include="Controllers\SysPersonController .cs" />
     <Compile Include="Controllers\SysPersonController.cs" />
     <Compile Include="Controllers\SysRoleController.cs" />
     <Compile Include="Controllers\THEAPPROVALPROCESSApiController.cs" />
