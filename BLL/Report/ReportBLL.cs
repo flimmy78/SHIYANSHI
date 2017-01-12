@@ -309,13 +309,17 @@ namespace Langben.Report
                 else
                 {
                     SetFengPi_BaoGaoXiaoZhun(hssfworkbook, entity, out fRemark,type);
-                }
-                //设置数据
+                }                
 
                 //第二页数据
                 SetSecond_BaoGao(hssfworkbook, entity, type);
 
+                //设置数据
                 SetShuJu(hssfworkbook, entity, type);
+
+                //隐藏不需要的sheet
+                HiddenSheet(hssfworkbook, type, false,entity.CONCLUSION);
+
                 string fileName = SetFileName(type);
                 //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";
                 saveFileName = "/up/Report/" + fileName + ".xls";
@@ -520,10 +524,10 @@ namespace Langben.Report
                         {
                             sheet_Destination.GetRow(3).GetCell(0).SetCellValue(taskEntity.ACCEPT_ORGNIZATION);
                         }
-                        //委托单位 /送 检 单 位       
-                        if (taskEntity.INSPECTION_ENTERPRISE != null && taskEntity.INSPECTION_ENTERPRISE.Trim() != "")
+                        //委托单位 /送 检 单 位  (改为证书单位）     
+                        if (taskEntity.CERTIFICATE_ENTERPRISE != null && taskEntity.CERTIFICATE_ENTERPRISE.Trim() != "")
                         {
-                            sheet_Destination.GetRow(15).GetCell(7).SetCellValue(taskEntity.INSPECTION_ENTERPRISE);
+                            sheet_Destination.GetRow(15).GetCell(7).SetCellValue(taskEntity.CERTIFICATE_ENTERPRISE);
                         }
                         else
                         {
@@ -670,10 +674,10 @@ namespace Langben.Report
                         {
                             sheet_Destination.GetRow(3).GetCell(0).SetCellValue(taskEntity.ACCEPT_ORGNIZATION);
                         }
-                        //委托单位 /送 检 单 位       
-                        if (taskEntity.INSPECTION_ENTERPRISE != null && taskEntity.INSPECTION_ENTERPRISE.Trim() != "")
+                        //委托单位 /送 检 单 位  (改为证书单位)     
+                        if (taskEntity.CERTIFICATE_ENTERPRISE != null && taskEntity.CERTIFICATE_ENTERPRISE.Trim() != "")
                         {
-                            sheet_Destination.GetRow(15).GetCell(7).SetCellValue(taskEntity.INSPECTION_ENTERPRISE);
+                            sheet_Destination.GetRow(15).GetCell(7).SetCellValue(taskEntity.CERTIFICATE_ENTERPRISE);
                         }
                         else
                         {
@@ -700,13 +704,13 @@ namespace Langben.Report
             #endregion
 
             //检定结论   
-            if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
+            if (entity.CALIBRATION_INSTRUCTIONS == null || entity.CALIBRATION_INSTRUCTIONS.Trim() == "")
             {
                 sheet_Destination.GetRow(27).GetCell(7).SetCellValue("/");
             }
             else
             {
-                sheet_Destination.GetRow(27).GetCell(7).SetCellValue(entity.CONCLUSION);
+                sheet_Destination.GetRow(27).GetCell(7).SetCellValue(entity.CALIBRATION_INSTRUCTIONS);
             }
 
             //批 准 人
@@ -977,10 +981,10 @@ namespace Langben.Report
                         {
                             sheet_Destination.GetRow(3).GetCell(0).SetCellValue(taskEntity.ACCEPT_ORGNIZATION);
                         }
-                        //委托单位 /送 检 单 位       
-                        if (taskEntity.INSPECTION_ENTERPRISE != null && taskEntity.INSPECTION_ENTERPRISE.Trim() != "")
+                        //委托单位 /送 检 单 位 （改为证书单位）    
+                        if (taskEntity.CERTIFICATE_ENTERPRISE != null && taskEntity.CERTIFICATE_ENTERPRISE.Trim() != "")
                         {
-                            sheet_Destination.GetRow(15).GetCell(7).SetCellValue(taskEntity.INSPECTION_ENTERPRISE);
+                            sheet_Destination.GetRow(15).GetCell(7).SetCellValue(taskEntity.CERTIFICATE_ENTERPRISE);
                         }
                         else
                         {
@@ -1007,13 +1011,13 @@ namespace Langben.Report
             #endregion
 
             //检定结论   
-            if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
+            if (entity.CALIBRATION_INSTRUCTIONS == null || entity.CALIBRATION_INSTRUCTIONS.Trim() == "")
             {
                 sheet_Destination.GetRow(27).GetCell(7).SetCellValue("/");
             }
             else
             {
-                sheet_Destination.GetRow(27).GetCell(7).SetCellValue(entity.CONCLUSION);
+                sheet_Destination.GetRow(27).GetCell(7).SetCellValue(entity.CALIBRATION_INSTRUCTIONS);
             }
 
             //批 准 人
@@ -1158,7 +1162,7 @@ namespace Langben.Report
                 bool IsIsHaveBuQueDingDu= SetBuQueDingDu(hssfworkbook, entity, type);
 
                 //隐藏不需要的sheet
-                HiddenSheet(hssfworkbook, type, IsIsHaveBuQueDingDu);
+                HiddenSheet(hssfworkbook, type, IsIsHaveBuQueDingDu,entity.CONCLUSION);
 
                 //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";                
                 string fileName = SetFileName(type);
@@ -1191,8 +1195,10 @@ namespace Langben.Report
         /// 隐藏不需要的sheet(模板需要隐藏)
         /// </summary>
         /// <param name="hssfworkbook"></param>
-        /// <param name="type"></param>
-        private void HiddenSheet(IWorkbook hssfworkbook, ExportType type,bool IsHaveBuQueDingDu=true)
+        /// <param name="type"></param
+        /// <param name="IsHaveBuQueDingDu">是否有不确定度</param
+        /// <param name="CONCLUSION">总结论</param>
+        private void HiddenSheet(IWorkbook hssfworkbook, ExportType type,bool IsHaveBuQueDingDu=true,string CONCLUSION = "合格")
         {
             switch(type)
             {
@@ -1209,6 +1215,14 @@ namespace Langben.Report
                
                
                 case ExportType.Report_JianDing:
+                    if(CONCLUSION == "合格")
+                    {
+                        hssfworkbook.SetSheetHidden(1, SheetState.Hidden);//通知书
+                    }
+                    else
+                    {
+                        hssfworkbook.SetSheetHidden(0, SheetState.Hidden);//封皮
+                    }
                     hssfworkbook.SetSheetHidden(4, SheetState.Hidden);//第二页模板
                     hssfworkbook.SetSheetHidden(5, SheetState.Hidden);//数据模板                
                     break;
@@ -2148,13 +2162,13 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             {
                 sheet_Destination.Header.Left = header;
             }
-            //页脚
-            if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString() && entity.CNAS == ShiFouCNAS.Yes.ToString() && entity.REPORTNUMBER != null && entity.REPORTNUMBER.Trim() != "")
+            //页脚控制编号
+            if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString() && entity.CNAS == ShiFouCNAS.Yes.ToString() && entity.CONTROL_NUMBER != null && entity.CONTROL_NUMBER.Trim() != "")
             {
-                if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
-                {
-                    sheet_Destination.Footer.Left = REPORTNUMBER;
-                }
+                //if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
+                //{
+                    sheet_Destination.Footer.Left = entity. CONTROL_NUMBER;
+                //}
             }
         }
         #region 复制行
