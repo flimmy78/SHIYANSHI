@@ -50,74 +50,153 @@ namespace Langben.App.Controllers
         [HttpPost]
         public JsonResult GetData(string id, int page, int rows, string order, string sort, string search)
         {
-
-            int total = 0;
-            List<SysPerson> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
-            return Json(new datagrid
+            try
             {
-                total = total,
-                rows = queryData.Select(s => new
-                {
-                    Id = s.Id
-                    ,
-                    Name = s.Name
-                    ,
-                    MyName = s.MyName
-                    ,
-                    Password = s.Password
-                    ,
-                    SurePassword = s.SurePassword
-                    ,
-                    Sex = s.Sex
-                    ,
-                    SysDepartmentId = s.SysDepartmentIdOld
-                    ,
-                    Position = s.Position
-                    ,
-                    MobilePhoneNumber = s.MobilePhoneNumber
-                    ,
-                    PhoneNumber = s.PhoneNumber
-                    ,
-                    Province = s.Province
-                    ,
-                    City = s.City
-                    ,
-                    Village = s.Village
-                    ,
-                    Address = s.Address
-                    ,
-                    EmailAddress = s.EmailAddress
-                    ,
-                    Remark = s.Remark
-                    ,
-                    State = s.State
-                    ,
-                    CreateTime = s.CreateTime
-                    ,
-                    CreatePerson = s.CreatePerson
-                    ,
-                    UpdateTime = s.UpdateTime
-                    ,
-                    LogonNum = s.LogonNum
-                    ,
-                    LogonTime = s.LogonTime
-                    ,
-                    LogonIP = s.LogonIP
-                    ,
-                    LastLogonTime = s.LastLogonTime
-                    ,
-                    LastLogonIP = s.LastLogonIP
-                    ,
-                    PageStyle = s.PageStyle
-                    ,
-                    UpdatePerson = s.UpdatePerson
-                    ,
-                    Version = s.Version
 
+                int total = 0;
+                List<SysPerson> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
+                return Json(new datagrid
+                {
+                    total = total,
+                    rows = queryData.Select(s => new
+                    {
+                        Id = s.Id
+                        ,
+                        Name = s.Name
+                        ,
+                        MyName = s.MyName
+                        ,
+                        Password = s.Password
+                        ,
+                        SurePassword = s.SurePassword
+                        ,
+                        Sex = s.Sex
+                        ,
+                        SysDepartmentId = s.SysDepartmentIdOld
+                        ,
+                        Position = s.Position
+                        ,
+                        MobilePhoneNumber = s.MobilePhoneNumber
+                        ,
+                        PhoneNumber = s.PhoneNumber
+                        ,
+                        Province = s.Province
+                        ,
+                        City = s.City
+                        ,
+                        Village = s.Village
+                        ,
+                        Address = s.Address
+                        ,
+                        EmailAddress = s.EmailAddress
+                        ,
+                        Remark = s.Remark
+                        ,
+                        State = s.State
+                        ,
+                        CreateTime = s.CreateTime
+                        ,
+                        CreatePerson = s.CreatePerson
+                        ,
+                        UpdateTime = s.UpdateTime
+                        ,
+                        LogonNum = s.LogonNum
+                        ,
+                        LogonTime = s.LogonTime
+                        ,
+                        LogonIP = s.LogonIP
+                        ,
+                        LastLogonTime = s.LastLogonTime
+                        ,
+                        LastLogonIP = s.LastLogonIP
+                        ,
+                        PageStyle = s.PageStyle
+                        ,
+                        UpdatePerson = s.UpdatePerson
+                        ,
+                        Version = s.Version
+
+                    }
+
+                        )
+                });
+            }
+            catch (Exception ex)
+            {
+                validationErrors.Add(ex.Message + "@");
+                validationErrors.Add(ex.Source + "@");
+                validationErrors.Add(ex.StackTrace + "@");
+                validationErrors.Add(ex.HelpLink + "@");
+                validationErrors.Add(ex.HResult.ToString() + "@");
+
+                if (ex.InnerException != null && !string.IsNullOrWhiteSpace(ex.InnerException.Message))
+                {
+                    validationErrors.Add(ex.InnerException.Message);
+                }
+                if (ex.InnerException != null && !string.IsNullOrWhiteSpace(ex.InnerException.Source))
+                {
+                    validationErrors.Add(ex.InnerException.Source);
+                }
+                if (ex.InnerException != null && !string.IsNullOrWhiteSpace(ex.InnerException.StackTrace))
+                {
+                    validationErrors.Add(ex.InnerException.StackTrace);
+                }
+                if (ex.InnerException != null && null != (ex.InnerException.TargetSite))
+                {
+                    validationErrors.Add(ex.InnerException.TargetSite.Name);
                 }
 
-                    )
-            });
+                if (ex.Data != null)
+                {
+                    validationErrors.Add(ex.Data.Count.ToString());
+                }
+                if (ex.Data != null)
+                {
+                    foreach (KeyValuePair<string, string> kvp in ex.Data.Keys)
+                    {
+                        validationErrors.Add(string.Format("姓名：{0},电影：{1}", kvp.Key, kvp.Value));
+                    }
+                }
+
+                if (ex.TargetSite != null)
+                {
+                    validationErrors.Add(ex.TargetSite.Name);
+                }
+                if (ex.TargetSite != null)
+                {
+                    validationErrors.Add(ex.TargetSite.ReflectedType.ToString());
+                }
+                if (ex.TargetSite != null)
+                {
+                    validationErrors.Add(ex.TargetSite.Module.ToString());
+                }
+                if (ex.TargetSite != null)
+                {
+                    validationErrors.Add(ex.TargetSite.MethodImplementationFlags.ToString());
+                }
+                if (ex.TargetSite != null)
+                {
+                    validationErrors.Add(ex.TargetSite.MethodHandle.ToString());
+                }
+                if (ex.TargetSite != null)
+                {
+                    validationErrors.Add(ex.TargetSite.MetadataToken.ToString());
+                }
+             
+                string returnValue = string.Empty;
+                if (validationErrors != null && validationErrors.Count > 0)
+                {
+                    validationErrors.All(a =>
+                    {
+                        returnValue += a.ErrorMessage;
+                        return true;
+                    });
+                }
+                LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，人员的信息，dd" + returnValue, "人员"
+                    );//写入日志   
+                ExceptionsHander.WriteExceptions(ex);
+            }
+            return null;
         }
         /// <summary>
         ///  导出Excle /*在6.0版本中 新增*/

@@ -93,14 +93,7 @@ namespace Langben.BLL
                             }                         
                         } 
  
-                        if (item.SysDocument != null)
-                        {
-                            item.SysDocumentId = string.Empty;
-                            foreach (var it in item.SysDocument)
-                            {
-                                item.SysDocumentId += it.Name + ' ';
-                            }                         
-                        } 
+                        
 
                     }
  

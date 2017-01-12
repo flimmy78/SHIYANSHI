@@ -158,7 +158,6 @@
     <Folder Include="up\ErWeiMa\" />
     <Folder Include="up\QianZi\" />
     <Folder Include="up\Report\" />
-    <Folder Include="up\RuKu\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -584,8 +583,10 @@
     </Content>
     <Content Include="Scripts\datagrid-detailview.js" />
     <Content Include="Scripts\echarts.js" />
+    <Content Include="Scripts\jquery.jqprint-0.3.js" />
     <Content Include="Scripts\numeral.js" />
     <Content Include="Scripts\shine.js" />
+    <Content Include="up\ruku.xls" />
     <Content Include="Xml\TableTemplate单相.xml" />
     <Content Include="Xml\TableTemplate.xml" />
     <Content Include="Xml\TableTemplate1.xml" />
@@ -1060,7 +1061,18 @@
     <Content Include="Views\UNCERTAINTYTABLE2\IndexSet.cshtml" />
     <Content Include="Views\UNCERTAINTYTABLE2\IndexUB.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\Create2.cshtml" />
-    <Content Include="up\ruku.xls" />
+    <Content Include="up\RuKu\3822b414-f796-4f76-886f-88dd2dd6e226.xls" />
+    <Content Include="up\RuKu\48bc4878-0601-4788-b24b-a28b83e0626c.xls" />
+    <Content Include="up\RuKu\4908f70b-be96-41c8-a4f4-3b52f4d8d42f.xls" />
+    <Content Include="up\RuKu\5d5a3cab-7358-4ef9-949c-1dc9a37de375.xls" />
+    <Content Include="up\RuKu\770970b5-962e-4a62-b828-7b601fe72da9.xls" />
+    <Content Include="up\RuKu\ccd8396f-b2ad-4752-81d4-42a108c666cc.xls" />
+    <Content Include="up\RuKu\d5d2596f-fc7f-4f37-acc1-6e7d18e3ed54.xls" />
+    <Content Include="up\RuKu\dd907fe3-2d04-49be-997f-325cd6ae4b21.xls" />
+    <Content Include="up\RuKu\e601ef69-df44-4d67-b976-352501cdf3a9.xls" />
+    <Content Include="up\RuKu\ee83e508-f00e-4311-b7a7-fec689a901c3.xls" />
+    <Content Include="up\RuKu\f6d8bc09-25ee-4f93-b308-67713bb6c98a.xls" />
+    <Content Include="up\RuKu\ff282cf5-dfc0-4a99-a1fb-b347a65e4a8e.xls" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
