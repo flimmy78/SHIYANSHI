@@ -441,9 +441,6 @@
         if (isNull(m.INDEX2)) {
             zhi += "指标2不能为空！<br>";
         }
-        if (isNull(m.INDEX2UNIT)) {
-            zhi += "指标2单位不能为空！<br>";
-        }
         if (zhi != "") {
             $.messager.alert('操作提示', "" + zhi + "", 'info');
             return false;
