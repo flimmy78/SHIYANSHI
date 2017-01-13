@@ -166,13 +166,13 @@ else
                     </tr>
                 </thead>
                 <tbody id="buquedingdub">
-                    <tr>
+                    <tr style="display:none">
                         <td align="center">
                             <input class="my-textbox " type="text" name="B_PingDing" id="B_PingDing_1" value="" style="width:95%">
                         </td>
                         <td align="center">
                             <input class="my-textbox input-width" type="text" name="B_WuChaLaiYuan" id="B_WuChaLaiYuan_1" value="">
-                            <input class="my-textbox input-width" type="text" name="sourceNum" id="sourceNum_1" value="u1" style="width:40px">
+                            <input class="my-textbox input-width" type="text" name="sourceNum" id="sourceNum_0" value="u1" style="width:40px">
 
                         </td>
                         <td align="center">
@@ -257,11 +257,13 @@ else
 <script type="text/javascript">
 
     $(document).ready(function () {
+       
         var hideHtml = $("#hideHTMLVALUE").val();
         if (hideHtml.trim() != "") {
             $("#divHtml").html("");
             $("#divHtml").append(hideHtml);
         }
+        //$("#buquedingdub tr:eq(0)").hide();
     });
 
     //添加评定点
@@ -310,6 +312,7 @@ else
     var addRow = function (obj) {
         var trNew = $('#tongdao_B tbody').find('tr:last').clone();
         $(trNew).children().eq(5).find('input').eq(0).val("");
+        $(trNew).css("display", "");
         $(trNew).children().find('input').each(function () {
             if (this.name != "" && this.id != "" && this.id.lastIndexOf("_") >= 0) {
                 var num = (parseInt(this.id.substring(this.id.lastIndexOf("_") + 1)) + 1);
