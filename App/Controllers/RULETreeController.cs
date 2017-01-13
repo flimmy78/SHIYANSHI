@@ -30,7 +30,7 @@ namespace Langben.App.Controllers
 
             RULETreeNodeCollection tree = new RULETreeNodeCollection();
 
-            var trees = db.GetAll().Where(w => w.UNDERTAKE_LABORATORYID != null && w.UNDERTAKE_LABORATORYID.Contains(id)).OrderBy(o => o.ID);
+            var trees = db.GetAll().Where(w => w.UNDERTAKE_LABORATORYID.Contains(id)).OrderBy(o => o.ID);
             if (trees != null)
             {
                 string parentId = Request["parentid"];//父节点编号

@@ -1246,6 +1246,7 @@ function wuCha(obj, first, second,third, gold) {
     var thirdData = $(obj).parent().parent().find("#" + third).val();
     if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+        var dsfa = firstData - secondData;
         var jianfa = (accSub(firstData, secondData) / thirdData * 100);
         var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
 
