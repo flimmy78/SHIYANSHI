@@ -666,6 +666,46 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
 
 
 }
+//底部不确定计算
+function JiSuanBuQueDingDu_DiBu(obj)
+{
+    if (obj != null && obj.id != "undefined")
+    {
+        var id = obj.id;
+        id = id.substring(id.indexOf('_')+1);
+        var BuQueDingDuLuJingId = "BuQueDingDuLuJing_" + id; //不确定度(隐藏域中存储不确定计算过程html路径)
+        var BuQueDingDuZhiId = "BuQueDingDuZhi_" + id;//不确定度(隐藏域中存储不确定原始值)
+        var returnIds = BuQueDingDuZhiId + "&" + BuQueDingDuLuJingId + "^" + BuQueDingDuLuJingId + "^" + id;
+        showModal(returnIds, "/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID);
+
+
+    }
+    
+}
+
+//添加底部不确定度行
+function addBuQueDingRow() {
+    var tr = $('#tbodyBuQueDingDuD_2').find('tr:last').clone();   
+    $('input', tr).each(function () {
+        if (this.name != "" && this.id != "" && this.id.lastIndexOf("_") >= 0) {
+            var num = (parseInt(this.id.substring(this.id.lastIndexOf("_") + 1)) + 1);
+            var id = this.id.substring(0, this.id.lastIndexOf("_")) + "_" + num;
+            $(this).attr('id', id);
+        }
+        //if (this.name != "btn_txtvalueD") {
+        //    $(this).val("");
+        //}
+    });
+    $('select', tr).each(function () {
+        if (this.name != "" && this.id != "" && this.id.lastIndexOf("_") >= 0) {
+            var num = (parseInt(this.id.substring(this.id.lastIndexOf("_") + 1)) + 1);
+            var id = this.id.substring(0, this.id.lastIndexOf("_")) + "_" + num;
+            $(this).attr('id', id);
+        }       
+    });
+    $("#tbodyBuQueDingDuD_2").append(tr);
+
+}
 //修改不确定度展示方式及小数位数联动不确定度
 function ChangeBuQueDingDuShowTypeOrBuQueDingDuXiaoShuWeiShu() {
     $("input[name='BuQueDingDuZhi']").each(function () {
@@ -879,9 +919,35 @@ function ShowOrHideDuoTongDao() {
         }
     }
 }
+//显示隐藏底部不确定部分
+function ShowOrHideDiBuBuQueDingDu()
+{
+    if (RuleAttribute == null) {
+        $("#tbBuQueDingDuD").remove();
+        $("#tbBuQueDingDuG").remove();
+    }
+    else {
+
+
+        var AttributeValue = GetAttributeValue("JiSuanBuQueDingDu_DiBu")
+        if (AttributeValue != null && AttributeValue.trim().toUpperCase() == "D") {//动态添加
+            $("#tbBuQueDingDuD").show();
+            $("#tbBuQueDingDuG").remove();
+        }
+        else if (AttributeValue != null && AttributeValue.trim().toUpperCase() == "G") {//固定两行
+            $("#tbBuQueDingDuD").remove();
+            $("#tbBuQueDingDuG").show();
+        }
+        else {
+            $("#tbBuQueDingDuD").remove();
+            $("#tbBuQueDingDuG").remove();
+        }
+    }
+}
 //按钮初始化（显示、隐藏）
 function BtnInit() {
     ShowOrHideDuoTongDao();
+    ShowOrHideDiBuBuQueDingDu();
     var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();
 
     if (PREPARE_SCHEMEID.trim() != "")//数据录入

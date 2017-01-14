@@ -100,7 +100,68 @@
                 </tr>
 
             </table>
-            @RenderSection("BUQueDingDu", false)
+            @*@RenderSection("BUQueDingDu", false)*@
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tbBuQueDingDuD">
+                <tbody id="tbodyBuQueDingDuD_2">
+                    <tr>
+                        <td align="center" width="40%"><input name="D1" id="D1_1" type="text" class="my-textbox tr" value="" style="width:96%" /></td>
+                        <td>
+                            <i>U</i><small>rel</small>(k =
+                            <select class="my-combobox" name="KD" id="KD_1">
+                                <option value="2">2 </option>
+                                <option value="3">3</option>
+                                <option value="√3">√3</option>
+                            </select>
+                            ) =
+                            <input class="my-textbox " value="" name="txtvalueD" style="width:300px" id="txtvalueD_1">
+                            <input type='hidden' name='BuQueDingDuLuJing' id='BuQueDingDuLuJing_txtvalueD_1' value='' />
+                            <input type='hidden' name='BuQueDingDuZhi' id='BuQueDingDuZhi_txtvalueD_1' value='' />
+                            <input type="button" class="my-btn" value="计 算" name="btn_txtvalueD" id="btn_txtvalueD_1" onclick="JiSuanBuQueDingDu_DiBu(this);" />
+                        </td>
+                    </tr>
+                </tbody>
+                <tr>
+                    <td colspan="8" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="addBuQueDingRow()">增加不确定度计算行</a></td>
+                </tr>
+            </table>
+            
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="tbBuQueDingDuG">
+                <tbody id="tbodyBuQueDingDuG_2">
+                    <tr>
+                        <td align="center" width="40%"><input name="G1" id="G1_1" type="text" class="my-textbox tr" value="" style="width:96%" /></td>
+                        <td>
+                            <i>U</i><small>rel</small>(k =
+                            <select class="my-combobox" name="KG" id="KG_1">
+                                <option value="2">2 </option>
+                                <option value="3">3</option>
+                                <option value="√3">√3</option>
+                            </select>
+                            ) =
+                            <input class="my-textbox " value="" name="txtvalueG" style="width:300px" id="txtvalueG_1">
+                           <input type='hidden' name='BuQueDingDuLuJing' id='BuQueDingDuLuJing_txtvalueG_1' value='' />
+                            <input type='hidden' name='BuQueDingDuZhi' id='BuQueDingDuZhi_txtvalueG_1' value='' />
+                            <input type="button" class="my-btn" value="计 算" name="btn_txtvalueG" id="btn_txtvalueG_1" onclick="JiSuanBuQueDingDu_DiBu(this);" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" width="40%"><input name="G1" id="G1_2" type="text" class="my-textbox tr" value="" style="width:96%" /></td>
+                        <td>
+                            <i>U</i><small>rel</small>(k =
+                            <select class="my-combobox" name="KG" id="KG_2">
+                                <option value="2">2 </option>
+                                <option value="3">3</option>
+                                <option value="√3">√3</option>
+                            </select>
+                            ) =
+                            <input class="my-textbox " value="" name="txtvalueG" style="width:300px" id="txtvalueG_2">
+                            <input type='hidden' name='BuQueDingDuLuJing' id='BuQueDingDuLuJing_txtvalueG_2' value='' />
+                            <input type='hidden' name='BuQueDingDuZhi' id='BuQueDingDuZhi_txtvalueG_2' value='' />
+                            <input type="button" class="my-btn" value="计 算" name="btn_txtvalueG" id="btn_txtvalueG_2" onclick="alert('dd');" />
+                        </td>
+                    </tr>
+                </tbody>               
+            </table>
+
         </div>
         <!--增加量程弹层-->
         @RenderSection("TanKuang", false)
@@ -114,3 +175,6 @@
 </body>
 
 </html>
+<script type="text/javascript">
+
+</script>
