@@ -2073,25 +2073,33 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                         && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
                     {
                         //&& (iEntity.RULEID== "780-1992_3_2_2" || iEntity.RULEID== "780-1992_3_2_1")
-                        if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
+                        //if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
 
-                        {
-                            //为了相同项表格底部没有线
-                            CopyRow(sheet_Source, sheet_Destination, 3, RowIndex, 1, true);
-                            HideRow(sheet_Destination, RowIndex, 1);
-                            RowIndex++;
-                        }
+                        //{
+                        //    //为了相同项表格底部没有线
+                        //    CopyRow(sheet_Source, sheet_Destination, 3, RowIndex, 1, true);
+                        //    HideRow(sheet_Destination, RowIndex, 1);
+                        //    RowIndex++;
+                        //}
 
                         //&&iEntity.RULEID== "126-1995_2_4_1"
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
                         //解析html表格数据    
-
+                        int RowIndexT = RowIndex;
                         //RowIndex = paserData(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);
                         RowIndex = paserData_1(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);
 
+                        if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
+
+                        {
+                            //为了相同项表格底部没有线                     
+                            SetBorderTop(hssfworkbook, sheet_Destination, RowIndexT);
+                        }
+
+
                         //为了表格底部没有线
                         CopyRow(sheet_Source, sheet_Destination, 3, RowIndex, 1, true);
-                        HideRow(sheet_Destination, RowIndex, 1);
+                        HideRow(sheet_Destination, RowIndex, 1);                        
                         RowIndex++;
 
 
@@ -2112,6 +2120,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                         }
                         //为了表格底部没有线
                         CopyRow(sheet_Source, sheet_Destination, 4, RowIndex, 1, true);
+
                     }
                     else
                     {
@@ -2134,6 +2143,30 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             //设置页面页脚
             SetHeaderAndFooter(sheet_Destination, entity, type);
             sheet_Destination.ForceFormulaRecalculation = true;
+        }
+        /// <summary>
+        /// 画表格顶部线
+        /// </summary>
+        /// <param name="hssfworkbook"></param>
+        /// <param name="sheet_Destination"></param>
+        /// <param name="RowIndex">需要划线的行号</param>
+        private void SetBorderTop(IWorkbook hssfworkbook, ISheet sheet_Destination,int RowIndex)
+        {
+            //为了相同项表格底部没有线                           
+            ICellStyle style = hssfworkbook.CreateCellStyle();
+            style.BorderTop = BorderStyle.Thin;
+
+            IRow targetRow = sheet_Destination.GetRow(RowIndex);
+            ICell targetCell = null;
+            //每行单元格处理               
+            for (int m = targetRow.FirstCellNum; m < targetRow.LastCellNum; m++)
+            {
+                if (m < 57)
+                {
+                    targetCell = targetRow.GetCell(m);
+                    targetCell.CellStyle = style;//样式                                  
+                }
+            }
         }
         /// <summary>
         /// 设置页眉页脚
