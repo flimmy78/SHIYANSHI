@@ -338,19 +338,22 @@ else
     }
     //B类选择
     function xunzhe() {
-        debugger
+        $("#METERING_STANDARD_DEVICEID").val("");        
         showModalMany('METERING_STANDARD_DEVICEID', '../../METERING_STANDARD_DEVICE/IndexUA/@ViewBag.UNDERTAKE_LABORATORY_NAME');
-        var zhi = $("#METERING_STANDARD_DEVICEID").val();
+        var zhi = $("#METERING_STANDARD_DEVICEID").val();        
         var zhu = zhi.split('^');
         for (var i = 0; i < zhu.length; i++) {
             if (zhu[i] != "") {
                 zhu[i].split('$')[0];//评定项
                 zhu[i].split('$')[1];//误差来源
                 zhu[i].split('$')[2];//误差限
-                zhu[i].split('$')[3];//误差分布状况
-                zhu[i].split('$')[4];//k
-                zhu[i].split('$')[5].split('&')[0];//不确定度ui
+                zhu[i].split('$')[3];//误差限单位
+                zhu[i].split('$')[4];//误差分布状况
+                zhu[i].split('$')[5];//k
+                zhu[i].split('$')[6].split('&')[0];//不确定度ui
+                zhu[i].split('$')[7].split('&')[0];//不确定度ui单位
                 var trNew = $('#tongdao_B tbody').find('tr:last').clone();
+                $(trNew).css("display", "");
                 var id = $(trNew).children().find("input[name='sourceNum']").attr("id");
                 var num = (parseInt(id.substring(id.lastIndexOf("_") + 1)) + 1); 
                 $(trNew).children().find('input').each(function (idx) {
@@ -362,18 +365,71 @@ else
                             $(this).val("u" + num);
                         }
                     }
-                    if (idx == 0)
-                        $(this).val(zhu[i].split('$')[0]);
-                    if (idx == 1)
-                        $(this).val(zhu[i].split('$')[1]); 
-                    if (idx == 3)
+                    if (idx == 0) {
+                        if (zhu[i].split('$')[0] == null || zhu[i].split('$')[0] == "null") {
+                            $(this).val("");
+                        }
+                        else {
+                            $(this).val(zhu[i].split('$')[0]);
+                        }
+                    }
+                    if (idx == 1) {
+                        if (zhu[i].split('$')[1] == null || zhu[i].split('$')[1] == "null") {
+                            $(this).val("");
+                        }
+                        else {
+                            $(this).val(zhu[i].split('$')[1]);
+                        }
+                    }
+                    if (idx == 3) {
+                        if (zhu[i].split('$')[2] == null || zhu[i].split('$')[2] == "null") {
+                            $(this).val("");
+                        }
+                        else {
                             $(this).val(zhu[i].split('$')[2]);
-                    if (idx == 5)
-                        $(this).val(zhu[i].split('$')[3]);
-                    if (idx == 6)
+                        }
+                    }
+                    if (idx == 4) {
+                        if (zhu[i].split('$')[3] == null || zhu[i].split('$')[3] == "null") {
+                            $(this).val("");
+                        }
+                        else {
+                            $(this).val(zhu[i].split('$')[3]);
+                        }
+                    }
+                    if (idx == 5) {
+                        if (zhu[i].split('$')[4] == null || zhu[i].split('$')[4] == "null") {
+                            $(this).val("");
+                        }
+                        else {
                             $(this).val(zhu[i].split('$')[4]);
-                    if (idx == 7)
-                        $(this).val(zhu[i].split('$')[5].split('&')[0]);
+                        }
+                    }
+                    if (idx == 6) {
+                        if (zhu[i].split('$')[5] == null || zhu[i].split('$')[5] == "null") {
+                            $(this).val("");
+                        }
+                        else {
+                            $(this).val(zhu[i].split('$')[5]);
+                        }                       
+                    }
+                    if (idx == 7) {
+                        if (zhu[i].split('$')[6].split('&')[0] == null || zhu[i].split('$')[6].split('&')[0] == "null") {
+                            $(this).val("");
+                        }
+                        else {
+                            $(this).val(zhu[i].split('$')[6].split('&')[0]);
+                        }                        
+                    }
+                    if (idx == 8) {
+                        if (zhu[i].split('$')[7].split('&')[0] == null || zhu[i].split('$')[7].split('&')[0] == "null") {
+                            $(this).val("");
+                        }
+                        else {
+                            $(this).val(zhu[i].split('$')[7].split('&')[0]);
+                        }
+                       
+                    }
                 });
                 $("#tongdao_B tbody").append(trNew);
             }
