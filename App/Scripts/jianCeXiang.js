@@ -19,10 +19,13 @@ $(document).ready(function () {
 
 //创建通道
 function CreateTongDao() {
-    var tableIdx = $("#hideDangQianTongDao").val();//当前通道
+    var tableIdx = $("#hideDangQianTongDao").val();//当前通道    
     tableIdx++;
     var $tongdao = $Tongdao_moban.clone().appendTo($('#tongdao'));
-
+    if ($tongdao.html() == "undefined" || $tongdao.html() == undefined)
+    {
+        return;
+    }
     var reg = new RegExp("_t_", "g");//g,表示全部替换。
 
     $tongdao.html($tongdao.html().replace(reg, '_' + tableIdx + '_'));
@@ -638,7 +641,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
         if (JiSuanBuQueDingDuPara.Type == "A") {//按钮计算不确定度
             htmlString.push("<input type='hidden' name='" + BuQueDingDuLuJingName + "' id='" + BuQueDingDuLuJingId + "' value=''/>");
             var returnIds = BuQueDingDuZhiId + "&" + BuQueDingDuLuJingId + "^" + BuQueDingDuLuJingId + "^" + id;
-            htmlString.push("<a href=\"#\" name=\"btnBuQueDing\" class=\"my-linkbutton\" onclick = \"showModal('" + returnIds + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID='+$('#hideRULEID').val());\">计算</a>")
+            htmlString.push("<a href=\"#\" name=\"btnBuQueDing\" class=\"my-linkbutton\" onclick = \"showModal('" + returnIds + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID="+RuleID+"');\">计算</a>")
         }
         //else if (JiSuanBuQueDingDuPara.Type == "Z")//每行自动计算不确定度
         //{

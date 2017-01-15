@@ -1888,12 +1888,12 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                             if (!string.IsNullOrWhiteSpace(aItem.THEACCURACYLEVEL))
                             {
 
-                                aValue += aItem.THEACCURACYLEVEL + ",";
+                                aValue += aItem.THEACCURACYLEVEL + "|,";
                             }
                             else if (!string.IsNullOrWhiteSpace(aItem.MAXCATEGORIES) || !string.IsNullOrWhiteSpace(aItem.MAXVALUE))
                             {
 
-                                aValue += aItem.MAXCATEGORIES + aItem.MAXVALUE + ",";
+                                aValue += aItem.MAXCATEGORIES + aItem.MAXVALUE + "|,";
                             }
                             else if (!string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTY) || !string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTYVALUE) || !string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTYNDEXL) || !string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTYVALUEK))
                             {
@@ -1919,8 +1919,8 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                             {
                                 maxRowCount = aValue.Split(',').Length;
                             }
-
-                            HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, null, aValue);
+                            //aValue = aValue.Replace(",", Environment.NewLine);
+                            HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, null, aValue);                                                    
                             sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(value);
                         }
                         else
@@ -2143,6 +2143,14 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             //设置页面页脚
             SetHeaderAndFooter(sheet_Destination, entity, type);
             sheet_Destination.ForceFormulaRecalculation = true;
+        }
+        /// <summary>
+        /// 设置底部不确定度
+        /// </summary>
+        /// <returns></returns>
+        private int SetDiBuBuQueDingDu()
+        {
+            return 0;
         }
         /// <summary>
         /// 画表格顶部线
@@ -2816,6 +2824,12 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                         length = length + v.Length;
 
                     }
+                }
+                else if(value.IndexOf("|,")>=0)
+                {
+                    value = value.Replace(",", Environment.NewLine);
+                    result = new HSSFRichTextString(value.Trim().Replace("|", ""));
+                   
                 }
                 #endregion 
                 #endregion

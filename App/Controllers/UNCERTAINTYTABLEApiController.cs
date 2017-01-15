@@ -412,10 +412,12 @@ namespace Langben.App.Controllers
                 {
                     ASSESSMENTITEM = s.ASSESSMENTITEM,
                     ERRORSOURCES = s.ERRORSOURCES,
-                    ERRORLIMITS = s.ERRORLIMITS + s.ERRORLIMITUNIT,
+                    ERRORLIMITS = s.ERRORLIMITS,
+                    ERRORLIMITUNIT=s.ERRORLIMITUNIT,
                     THEERRODISTRIBUTION = s.THEERRODISTRIBUTION,
                     KVALE = s.KVALE,
-                    UNCERTAINTYUI = s.UNCERTAINTYUI + s.UNCERTAINTYUIUNIT,
+                    UNCERTAINTYUI = s.UNCERTAINTYUI,
+                    UNCERTAINTYUIUNIT=s.UNCERTAINTYUIUNIT,
                     GROUPS = s.GROUPS,
                     METERING_STANDARD_DEVICEID = id,
                     CATEGORY = s.CATEGORY
