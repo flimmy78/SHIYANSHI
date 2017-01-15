@@ -18,49 +18,56 @@
     <div class="easyui-layout" data-options="fit:true">
         <div class="clear mt10">
             <input type="hidden" id="ID" value="" />
+            <table width="90%" align="center">
+                <tr>
+                    <td width="40" height="30"> 名称：</td>
+                    <td width="30%"><input class="my-textbox " value="" name="NAME" id="NAME"></td>
+                    <td width="60"> 测量范围：</td>
+                    <td><input class="my-textbox " value="" name="TEST_RANGE" id="TEST_RANGE"></td>
+                </tr>
+                <tr>
+                    <td height="30">型号：</td>
+                    <td><input class="my-textbox " value="" name="XINGHAO" id="XINGHAO"></td>
+                    <td> 编号：</td>
+                    <td><input class="my-textbox " value="" name="FACTORY_NUM" id="FACTORY_NUM"></td>
+                </tr>
+                <tr>
+                    <td height="30"> 类别：</td>
+                    <td>
+                        <select class="my-combobox" name="CATEGORY" id="CATEGORY">
+                            <option value="">请选择</option>
+                            <option value="标准装置">标准装置</option>
+                            <option value="标准器">标准器</option>
+                            <option value="中间试品">中间试品</option>
+                        </select></td>
+                    <td>实验室：</td>
+                    <td><select class="my-combobox" name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID">
+    <option value="">请选择</option>
+    <option value="数表三相">数表三相</option>
+    <option value="数表单相">数表单相</option>
+    <option value="电能">电能</option>
+    <option value="指示仪表">指示仪表</option>
+    <option value="直流仪器">直流仪器</option>
+    <option value="互感器">互感器</option>
+</select></td>
+                </tr>
+                <tr>
+                    <td colspan="4" height="30">
+                        <div class="" id="choicePre">
+                            <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="showModalOnly('THESUPERIOR', '../../METERING_STANDARD_DEVICE');">选择上一级</a>
+                           
+                        </div>
+                        <div class="">
+                        <span id="checkTHESUPERIOR">
+</span>@Html.HiddenFor(model => model.THESUPERIOR)</div>
+                    </td>
+                   
+                </tr>
+            </table>
             <ul>
-                <li class="fl mr10">
-                    名称：
-                    <input class="my-textbox " value="" name="NAME" id="NAME">
-                </li>
-                <li class="fl mr10">
-                    测量范围：
-                    <input class="my-textbox " value="" name="TEST_RANGE" id="TEST_RANGE">
-                </li>
-                <li class="fl mr10">
-                    型号：
-                    <input class="my-textbox " value="" name="XINGHAO" id="XINGHAO">
-                </li>
-                <li class="fl mr10">
-                    编号：
-                    <input class="my-textbox " value="" name="FACTORY_NUM" id="FACTORY_NUM">
-                </li>
-                <li class="fl mr10">
-                    类别：
-                    <select class="my-combobox" name="CATEGORY" id="CATEGORY">
-                        <option value="">请选择</option>
-                        <option value="标准装置">标准装置</option>
-                        <option value="标准器">标准器</option>
-                        <option value="中间试品">中间试品</option>
-                    </select>
-                </li>
-                <li class="fl mr10">
-                    实验室：
-                    <select class="my-combobox" name="UNDERTAKE_LABORATORYID" id="UNDERTAKE_LABORATORYID">
-                        <option value="">请选择</option>
-                        <option value="数表三相">数表三相</option>
-                        <option value="数表单相">数表单相</option>
-                        <option value="电能">电能</option>
-                        <option value="指示仪表">指示仪表</option>
-                        <option value="直流仪器">直流仪器</option>
-                        <option value="互感器">互感器</option>
-                    </select>
-                </li>
-                <li class="fl mr10" id="choicePre">
-                    <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'" onclick="showModalOnly('THESUPERIOR', '../../METERING_STANDARD_DEVICE');">选择上一级</a>
-                    <span id="checkTHESUPERIOR">
-                    </span>@Html.HiddenFor(model => model.THESUPERIOR)
-                </li>
+              
+               
+                
             </ul>
         </div>
 
