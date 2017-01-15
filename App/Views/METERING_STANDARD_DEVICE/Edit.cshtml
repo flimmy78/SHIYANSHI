@@ -405,23 +405,36 @@
                                             </select>
                                         </li>
                                     }
-                                    @if (item.THEUNCERTAINTYVALUEK == "k=2")
+                                    @if (item.THEUNCERTAINTYVALUEK == "2")
                                     {
                                         <li class="fl mr10">
                                             <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
                                                 <option value="">请选择k值</option>
-                                                <option selected="selected" value="k=2">k=2</option>
-                                                <option value="k=3">k=3</option>
+                                                <option  selected="selected"  value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="√3">√3</option>
                                             </select>
                                         </li>
                                     }
-                                    else if (item.THEUNCERTAINTYVALUEK == "k=3")
+                                    else if (item.THEUNCERTAINTYVALUEK == "3")
                                     {
                                         <li class="fl mr10">
                                             <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
                                                 <option value="">请选择k值</option>
-                                                <option value="k=2">k=2</option>
-                                                <option selected="selected" value="k=3">k=3</option>
+                                                <option value="2">2</option>
+                                                <option selected="selected" value="3">3</option>
+                                                <option value="√3">√3</option>
+                                            </select>
+                                        </li>
+                                    }
+                                    else if (item.THEUNCERTAINTYVALUEK == "√3")
+                                    {
+                                        <li class="fl mr10">
+                                            <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
+                                                <option value="">请选择k值</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option selected="selected" value="√3">√3</option>
                                             </select>
                                         </li>
                                     }
@@ -430,8 +443,9 @@
                                         <li class="fl mr10">
                                             <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
                                                 <option value="">请选择k值</option>
-                                                <option value="k=2">k=2</option>
-                                                <option value="k=3">k=3</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="√3">√3</option>
                                             </select>
                                         </li>
                                     }
@@ -468,8 +482,9 @@
                                     <li class="fl mr10">
                                         <select class="my-combobox" name="THEUNCERTAINTYVALUEK">
                                             <option value="">请选择k值</option>
-                                            <option value="k=2">k=2</option>
-                                            <option value="k=3">k=3</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="√3">√3</option>
                                         </select>
                                     </li>
                                     <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
@@ -478,7 +493,7 @@
                             }
                         }
                     </div>
-                }             
+                }
             </div>
             <br>
             <h2 class="f14 mt10"> 证书信息 </h2>
@@ -530,7 +545,7 @@
     else if (Model.IS == "UA")
     {
         <div class="mt10" id="">
-            <label>              
+            <label>
                 误差来源
             </label>
             <div class="mt10" id="div5">
@@ -616,7 +631,7 @@
                                     <select class="my-combobox" name="ERRORLIMITUNIT">
                                         <option value="">请选择</option>
                                         <option value="%">%</option>
-                                        <option  value="Ω">Ω</option>
+                                        <option value="Ω">Ω</option>
                                         <option selected="selected" value="mΩ">mΩ</option>
                                         <option value="ˊ">ˊ</option>
                                         <option value="%">mS</option>
@@ -706,6 +721,7 @@
                                         <option value="">请选择</option>
                                         <option selected="selected" value="2">2</option>
                                         <option value="3">3</option>
+                                        <option value="√3">√3</option>
                                     </select>
                                 </li>
                             }
@@ -735,7 +751,7 @@
                                 不确定度ui：
                                 <input class="my-textbox" value="@item.UNCERTAINTYUI" name="UNCERTAINTYUI">
                             </li>
-                            @if (item.UNCERTAINTYUIUNIT== "%")
+                            @if (item.UNCERTAINTYUIUNIT == "%")
                             {
                                 <li class="fl mr10">
                                     不确定度ui单位：
@@ -754,7 +770,7 @@
                                     不确定度ui单位：
                                     <select class="my-combobox" name="UNCERTAINTYUIUNIT">
                                         <option value="">请选择</option>
-                                        <option  value="%">%</option>
+                                        <option value="%">%</option>
                                         <option selected="selected" value="Ω">Ω</option>
                                         <option value="mΩ">mΩ</option>
                                         <option value="&prime;">&prime;</option>
@@ -880,574 +896,574 @@
         </div>
     }
     else if (Model.IS == "UB")
-    { 
-         <div class="mt10" id="">
-        <label>            
-            范围指标
-        </label>
-        <div class="mt10" id="div6">
-            @foreach (var item in Model.UNCERTAINTYTABLEShow)
-            {
-
-                if (item.INDEX1 != null)
+    {
+        <div class="mt10" id="">
+            <label>
+                范围指标
+            </label>
+            <div class="mt10" id="div6">
+                @foreach (var item in Model.UNCERTAINTYTABLEShow)
                 {
-                    <ul class="clear mt10">
-                        @if (item.ASSESSMENTITEM == "直流电压")
+
+                    if (item.INDEX1 != null)
+                    {
+                        <ul class="clear mt10">
+                            @if (item.ASSESSMENTITEM == "直流电压")
                         {
+                                <li class="fl mr10">
+                                    评定项：
+                                    <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)">
+                                        <option value="">请选择</option>
+                                        <option selected="selected" value="直流电压">直流电压</option>
+                                        <option value="直流电流">直流电流</option>
+                                        <option value="直流电阻">直流电阻</option>
+                                        <option value="交流电压">交流电压</option>
+                                        <option value="交流电流">交流电流</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.ASSESSMENTITEM == "直流电流")
+                            {
+                                <li class="fl mr10">
+                                    评定项：
+                                    <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)">
+                                        <option value="">请选择</option>
+                                        <option value="直流电压">直流电压</option>
+                                        <option selected="selected" value="直流电流">直流电流</option>
+                                        <option value="直流电阻">直流电阻</option>
+                                        <option value="交流电压">交流电压</option>
+                                        <option value="交流电流">交流电流</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.ASSESSMENTITEM == "直流电阻")
+                            {
+                                <li class="fl mr10">
+                                    评定项：
+                                    <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)">
+                                        <option value="">请选择</option>
+                                        <option value="直流电压">直流电压</option>
+                                        <option value="直流电流">直流电流</option>
+                                        <option selected="selected" value="直流电阻">直流电阻</option>
+                                        <option value="交流电压">交流电压</option>
+                                        <option value="交流电流">交流电流</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.ASSESSMENTITEM == "交流电压")
+                            {
+                                <li class="fl mr10">
+                                    评定项：
+                                    <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)">
+                                        <option value="">请选择</option>
+                                        <option value="直流电压">直流电压</option>
+                                        <option value="直流电流">直流电流</option>
+                                        <option value="直流电阻">直流电阻</option>
+                                        <option selected="selected" value="交流电压">交流电压</option>
+                                        <option value="交流电流">交流电流</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.ASSESSMENTITEM == "交流电流")
+                            {
+                                <li class="fl mr10">
+                                    评定项：
+                                    <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)">
+                                        <option value="">请选择</option>
+                                        <option value="直流电压">直流电压</option>
+                                        <option value="直流电流">直流电流</option>
+                                        <option value="直流电阻">直流电阻</option>
+                                        <option value="交流电压">交流电压</option>
+                                        <option selected="selected" value="交流电流">交流电流</option>
+                                    </select>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="fl mr10">
+                                    评定项：
+                                    <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)">
+                                        <option value="">请选择</option>
+                                        <option value="直流电压">直流电压</option>
+                                        <option value="直流电流">直流电流</option>
+                                        <option value="直流电阻">直流电阻</option>
+                                        <option value="交流电压">交流电压</option>
+                                        <option value="交流电流">交流电流</option>
+                                    </select>
+                                </li>
+                            }
                             <li class="fl mr10">
-                                评定项：
-                                <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" >
-                                    <option value="">请选择</option>
-                                    <option selected="selected" value="直流电压">直流电压</option>
-                                    <option value="直流电流">直流电流</option>
-                                    <option value="直流电阻">直流电阻</option>
-                                    <option value="交流电压">交流电压</option>
-                                    <option value="交流电流">交流电流</option>
-                                </select>
+                                量程范围起：
+                                <input class="my-textbox " value="@item.THERANGESCOPE" name="THERANGESCOPE" id="@item.ID">
                             </li>
-                        }
-                        else if (item.ASSESSMENTITEM == "直流电流")
-                        {
-                            <li class="fl mr10">
-                                评定项：
-                                <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" >
-                                    <option value="">请选择</option>
-                                    <option  value="直流电压">直流电压</option>
-                                    <option selected="selected" value="直流电流">直流电流</option>
-                                    <option value="直流电阻">直流电阻</option>
-                                    <option value="交流电压">交流电压</option>
-                                    <option value="交流电流">交流电流</option>
-                                </select>
-                            </li>
-                        }
-                        else if (item.ASSESSMENTITEM == "直流电阻")
-                        {
-                            <li class="fl mr10">
-                                评定项：
-                                <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" >
-                                    <option value="">请选择</option>
-                                    <option value="直流电压">直流电压</option>
-                                    <option  value="直流电流">直流电流</option>
-                                    <option selected="selected" value="直流电阻">直流电阻</option>
-                                    <option value="交流电压">交流电压</option>
-                                    <option value="交流电流">交流电流</option>
-                                </select>
-                            </li>
-                        }
-                        else if (item.ASSESSMENTITEM == "交流电压")
-                        {
-                            <li class="fl mr10">
-                                评定项：
-                                <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" >
-                                    <option value="">请选择</option>
-                                    <option value="直流电压">直流电压</option>
-                                    <option value="直流电流">直流电流</option>
-                                    <option  value="直流电阻">直流电阻</option>
-                                    <option selected="selected" value="交流电压">交流电压</option>
-                                    <option value="交流电流">交流电流</option>
-                                </select>
-                            </li>
-                        }
-                        else if (item.ASSESSMENTITEM == "交流电流")
-                        {
-                            <li class="fl mr10">
-                                评定项：
-                                <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" >
-                                    <option value="">请选择</option>
-                                    <option value="直流电压">直流电压</option>
-                                    <option value="直流电流">直流电流</option>
-                                    <option value="直流电阻">直流电阻</option>
-                                    <option value="交流电压">交流电压</option>
-                                    <option selected="selected" value="交流电流">交流电流</option>
-                                </select>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="fl mr10">
-                                评定项：
-                                <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" >
-                                    <option value="">请选择</option>
-                                    <option value="直流电压">直流电压</option>
-                                    <option value="直流电流">直流电流</option>
-                                    <option value="直流电阻">直流电阻</option>
-                                    <option value="交流电压">交流电压</option>
-                                    <option value="交流电流">交流电流</option>
-                                </select>
-                            </li>
-                        }
-                        <li class="fl mr10">
-                            量程范围起：
-                            <input class="my-textbox " value="@item.THERANGESCOPE" name="THERANGESCOPE" id="@item.ID">
-                        </li>
-                    
+
                             <li class="fl mr10">
                                 起单位：
                                 <select class="my-combobox" name="THEUNIT" id="THEUNIT">
                                     <option value="">请选择</option>
                                 </select>
                             </li>
-                        
-                       
-                       @if (item.THERELATIONSHIP == "<")
-                       {
-                        <li class="fl mr10">
-                            起关系：
-                            <select class="my-combobox" name="THERELATIONSHIP">
-                                <option value="">请选择</option>
-                                <option selected="selected" value="<"><</option>
-                                <option value=">">></option>
-                                <option value="<="><=</option>
-                                <option value=">=">>=</option>
-                            </select>
-                        </li>
-                       }
-                       else if (item.THERELATIONSHIP == ">")
-                       {
-                        <li class="fl mr10">
-                            起关系：
-                            <select class="my-combobox" name="THERELATIONSHIP">
-                                <option value="">请选择</option>
-                                <option value="<"><</option>
-                                <option selected="selected" value=">">></option>
-                                <option value="<="><=</option>
-                                <option value=">=">>=</option>
-                            </select>
-                        </li>
-                       }
-                       else if (item.THERELATIONSHIP == "<=")
-                       {
-                        <li class="fl mr10">
-                            起关系：
-                            <select class="my-combobox" name="THERELATIONSHIP">
-                                <option value="">请选择</option>
-                                <option value="<"><</option>
-                                <option value=">">></option>
-                                <option selected="selected" value="<="><=</option>
-                                <option value=">=">>=</option>
-                            </select>
-                        </li>
-                       }
-                       else if (item.THERELATIONSHIP == ">=")
-                       {
-                        <li class="fl mr10">
-                            起关系：
-                            <select class="my-combobox" name="THERELATIONSHIP">
-                                <option value="">请选择</option>
-                                <option value="<"><</option>
-                                <option value=">">></option>
-                                <option value="<="><=</option>
-                                <option selected="selected" value=">=">>=</option>
-                            </select>
-                        </li>
-                       }
-                       else
-                       {
-                        <li class="fl mr10">
-                            起关系：
-                            <select class="my-combobox" name="THERELATIONSHIP">
-                                <option value="">请选择</option>
-                                <option value="<"><</option>
-                                <option value=">">></option>
-                                <option value="<="><=</option>
-                                <option value=">=">>=</option>
-                            </select>
-                        </li>
-                       }
-                      
-                        <li class="fl mr10">
-                            量程范围止：
-                            <input class="my-textbox " value="@item.ENDRANGESCOPE" name="ENDRANGESCOPE">
-                        </li>                     
+
+
+                            @if (item.THERELATIONSHIP == "<")
+                            {
+                                <li class="fl mr10">
+                                    起关系：
+                                    <select class="my-combobox" name="THERELATIONSHIP">
+                                        <option value="">请选择</option>
+                                        <option selected="selected" value="<"><</option>
+                                        <option value=">">></option>
+                                        <option value="<="><=</option>
+                                        <option value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.THERELATIONSHIP == ">")
+                            {
+                                <li class="fl mr10">
+                                    起关系：
+                                    <select class="my-combobox" name="THERELATIONSHIP">
+                                        <option value="">请选择</option>
+                                        <option value="<"><</option>
+                                        <option selected="selected" value=">">></option>
+                                        <option value="<="><=</option>
+                                        <option value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.THERELATIONSHIP == "<=")
+                            {
+                                <li class="fl mr10">
+                                    起关系：
+                                    <select class="my-combobox" name="THERELATIONSHIP">
+                                        <option value="">请选择</option>
+                                        <option value="<"><</option>
+                                        <option value=">">></option>
+                                        <option selected="selected" value="<="><=</option>
+                                        <option value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.THERELATIONSHIP == ">=")
+                            {
+                                <li class="fl mr10">
+                                    起关系：
+                                    <select class="my-combobox" name="THERELATIONSHIP">
+                                        <option value="">请选择</option>
+                                        <option value="<"><</option>
+                                        <option value=">">></option>
+                                        <option value="<="><=</option>
+                                        <option selected="selected" value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="fl mr10">
+                                    起关系：
+                                    <select class="my-combobox" name="THERELATIONSHIP">
+                                        <option value="">请选择</option>
+                                        <option value="<"><</option>
+                                        <option value=">">></option>
+                                        <option value="<="><=</option>
+                                        <option value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+
+                            <li class="fl mr10">
+                                量程范围止：
+                                <input class="my-textbox " value="@item.ENDRANGESCOPE" name="ENDRANGESCOPE">
+                            </li>
                             <li class="fl mr10">
                                 止单位：
                                 <select class="my-combobox" name="ENDUNIT" id="ENDUNIT">
                                     <option value="">请选择</option>
-                                    
-                                </select>
-                            </li>                                           
-                        @if (item.ENDRELATIONSHIP == "<")
-                        {
-                            <li class="fl mr10">
-                                止关系：
-                                <select class="my-combobox" name="ENDRELATIONSHIP">
-                                    <option value="">请选择</option>
-                                    <option selected="selected" value="<"><</option>
-                                    <option value=">">></option>
-                                    <option value="<="><=</option>
-                                    <option value=">=">>=</option>
+
                                 </select>
                             </li>
-                        }
-                        else if (item.ENDRELATIONSHIP == ">")
+                            @if (item.ENDRELATIONSHIP == "<")
                         {
+                                <li class="fl mr10">
+                                    止关系：
+                                    <select class="my-combobox" name="ENDRELATIONSHIP">
+                                        <option value="">请选择</option>
+                                        <option selected="selected" value="<"><</option>
+                                        <option value=">">></option>
+                                        <option value="<="><=</option>
+                                        <option value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.ENDRELATIONSHIP == ">")
+                            {
+                                <li class="fl mr10">
+                                    止关系：
+                                    <select class="my-combobox" name="ENDRELATIONSHIP">
+                                        <option value="">请选择</option>
+                                        <option value="<"><</option>
+                                        <option selected="selected" value=">">></option>
+                                        <option value="<="><=</option>
+                                        <option value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.ENDRELATIONSHIP == "<=")
+                            {
+                                <li class="fl mr10">
+                                    止关系：
+                                    <select class="my-combobox" name="ENDRELATIONSHIP">
+                                        <option value="">请选择</option>
+                                        <option value="<"><</option>
+                                        <option value=">">></option>
+                                        <option selected="selected" value="<="><=</option>
+                                        <option value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.ENDRELATIONSHIP == ">=")
+                            {
+                                <li class="fl mr10">
+                                    止关系：
+                                    <select class="my-combobox" name="ENDRELATIONSHIP">
+                                        <option value="">请选择</option>
+                                        <option value="<"><</option>
+                                        <option value=">">></option>
+                                        <option value="<="><=</option>
+                                        <option selected="selected" value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="fl mr10">
+                                    止关系：
+                                    <select class="my-combobox" name="ENDRELATIONSHIP">
+                                        <option value="">请选择</option>
+                                        <option value="<"><</option>
+                                        <option value=">">></option>
+                                        <option value="<="><=</option>
+                                        <option value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+
                             <li class="fl mr10">
-                                止关系：
-                                <select class="my-combobox" name="ENDRELATIONSHIP">
-                                    <option value="">请选择</option>
-                                    <option value="<"><</option>
-                                    <option selected="selected" value=">">></option>
-                                    <option value="<="><=</option>
-                                    <option value=">=">>=</option>
-                                </select>
+                                频率范围起：
+                                <input class="my-textbox " value="@item.THEFREQUENCY" name="THEFREQUENCY">
                             </li>
-                        }
-                        else if (item.ENDRELATIONSHIP == "<=")
-                        {
-                            <li class="fl mr10">
-                                止关系：
-                                <select class="my-combobox" name="ENDRELATIONSHIP">
-                                    <option value="">请选择</option>
-                                    <option value="<"><</option>
-                                    <option value=">">></option>
-                                    <option selected="selected" value="<="><=</option>
-                                    <option value=">=">>=</option>
-                                </select>
-                            </li>
-                        }
-                        else if (item.ENDRELATIONSHIP == ">=")
-                        {
-                            <li class="fl mr10">
-                                止关系：
-                                <select class="my-combobox" name="ENDRELATIONSHIP">
-                                    <option value="">请选择</option>
-                                    <option value="<"><</option>
-                                    <option value=">">></option>
-                                    <option value="<="><=</option>
-                                    <option selected="selected" value=">=">>=</option>
-                                </select>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="fl mr10">
-                                止关系：
-                                <select class="my-combobox" name="ENDRELATIONSHIP">
-                                    <option value="">请选择</option>
-                                    <option value="<"><</option>
-                                    <option value=">">></option>
-                                    <option value="<="><=</option>
-                                    <option value=">=">>=</option>
-                                </select>
-                            </li>
-                        }
-                   
-                        <li class="fl mr10">
-                            频率范围起：
-                            <input class="my-textbox " value="@item.THEFREQUENCY" name="THEFREQUENCY">
-                        </li>
-                 
+
                             <li class="fl mr10">
                                 起单位：
                                 <select class="my-combobox" name="THEUNITFREQUENCY" id="THEUNITFREQUENCY">
                                     <option value="">请选择</option>
-                                 
+
                                 </select>
                             </li>
-                     
-                        @if (item.THERELATIONSHIPFREQUENCY == "<")
+
+                            @if (item.THERELATIONSHIPFREQUENCY == "<")
                         {
+                                <li class="fl mr10">
+                                    止关系：
+                                    <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
+                                        <option value="">请选择</option>
+                                        <option selected="selected" value="<"><</option>
+                                        <option value=">">></option>
+                                        <option value="<="><=</option>
+                                        <option value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.THERELATIONSHIPFREQUENCY == ">")
+                            {
+                                <li class="fl mr10">
+                                    频率起关系：
+                                    <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
+                                        <option value="">请选择</option>
+                                        <option value="<"><</option>
+                                        <option selected="selected" value=">">></option>
+                                        <option value="<="><=</option>
+                                        <option value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.THERELATIONSHIPFREQUENCY == "<=")
+                            {
+                                <li class="fl mr10">
+                                    频率起关系：
+                                    <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
+                                        <option value="">请选择</option>
+                                        <option value="<"><</option>
+                                        <option value=">">></option>
+                                        <option selected="selected" value="<="><=</option>
+                                        <option value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.THERELATIONSHIPFREQUENCY == ">=")
+                            {
+                                <li class="fl mr10">
+                                    频率起关系：
+                                    <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
+                                        <option value="">请选择</option>
+                                        <option value="<"><</option>
+                                        <option value=">">></option>
+                                        <option value="<="><=</option>
+                                        <option selected="selected" value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="fl mr10">
+                                    频率起关系：
+                                    <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
+                                        <option value="">请选择</option>
+                                        <option value="<"><</option>
+                                        <option value=">">></option>
+                                        <option value="<="><=</option>
+                                        <option value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+
                             <li class="fl mr10">
-                                止关系：
-                                <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
-                                    <option value="">请选择</option>
-                                    <option selected="selected" value="<"><</option>
-                                    <option value=">">></option>
-                                    <option value="<="><=</option>
-                                    <option value=">=">>=</option>
-                                </select>
+                                频率范围止：
+                                <input class="my-textbox " value="@item.ENDFREQUENCY" name="ENDFREQUENCY">
                             </li>
-                        }
-                        else if (item.THERELATIONSHIPFREQUENCY == ">")
-                        {
-                            <li class="fl mr10">
-                                频率起关系：
-                                <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
-                                    <option value="">请选择</option>
-                                    <option value="<"><</option>
-                                    <option selected="selected" value=">">></option>
-                                    <option value="<="><=</option>
-                                    <option value=">=">>=</option>
-                                </select>
-                            </li>
-                        }
-                        else if (item.THERELATIONSHIPFREQUENCY == "<=")
-                        {
-                            <li class="fl mr10">
-                                频率起关系：
-                                <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
-                                    <option value="">请选择</option>
-                                    <option value="<"><</option>
-                                    <option value=">">></option>
-                                    <option selected="selected" value="<="><=</option>
-                                    <option value=">=">>=</option>
-                                </select>
-                            </li>
-                        }
-                        else if (item.THERELATIONSHIPFREQUENCY == ">=")
-                        {
-                            <li class="fl mr10">
-                                频率起关系：
-                                <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
-                                    <option value="">请选择</option>
-                                    <option value="<"><</option>
-                                    <option value=">">></option>
-                                    <option value="<="><=</option>
-                                    <option selected="selected" value=">=">>=</option>
-                                </select>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="fl mr10">
-                                频率起关系：
-                                <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
-                                    <option value="">请选择</option>
-                                    <option value="<"><</option>
-                                    <option value=">">></option>
-                                    <option value="<="><=</option>
-                                    <option value=">=">>=</option>
-                                </select>
-                            </li>
-                        }
-                       
-                        <li class="fl mr10">
-                            频率范围止：
-                            <input class="my-textbox " value="@item.ENDFREQUENCY" name="ENDFREQUENCY">
-                        </li>
-                      
+
                             <li class="fl mr10">
                                 频率止单位：
                                 <select class="my-combobox" name="ENDUNITFREQUENCY" id="ENDUNITFREQUENCY">
                                     <option value="">请选择</option>
-                                   
-                                </select>
-                            </li>
-                      
-                        @if (item.THERELATIONSHIPFREQUENCY == "<")
-                        {
-                            <li class="fl mr10">
-                                频率止关系：
-                                <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
-                                    <option value="">请选择</option>
-                                    <option selected="selected" value="<"><</option>
-                                    <option value=">">></option>
-                                    <option value="<="><=</option>
-                                    <option value=">=">>=</option>
-                                </select>
-                            </li>
-                        }
-                        else if (item.ENDRELATIONSHIPFREQUENCY == ">")
-                        {
-                            <li class="fl mr10">
-                                频率止关系：
-                                <select class="my-combobox" name="ENDRELATIONSHIPFREQUENCY">
-                                    <option value="">请选择</option>
-                                    <option value="<"><</option>
-                                    <option selected="selected" value=">">></option>
-                                    <option value="<="><=</option>
-                                    <option value=">=">>=</option>
-                                </select>
-                            </li>
-                        }
-                        else if (item.ENDRELATIONSHIPFREQUENCY == "<=")
-                        {
-                            <li class="fl mr10">
-                                频率止关系：
-                                <select class="my-combobox" name="ENDRELATIONSHIPFREQUENCY">
-                                    <option value="">请选择</option>
-                                    <option value="<"><</option>
-                                    <option value=">">></option>
-                                    <option selected="selected" value="<="><=</option>
-                                    <option value=">=">>=</option>
-                                </select>
-                            </li>
-                        }
-                        else if (item.ENDRELATIONSHIPFREQUENCY == ">=")
-                        {
-                            <li class="fl mr10">
-                                频率止关系：
-                                <select class="my-combobox" name="ENDRELATIONSHIPFREQUENCY">
-                                    <option value="">请选择</option>
-                                    <option value="<"><</option>
-                                    <option value=">">></option>
-                                    <option value="<="><=</option>
-                                    <option selected="selected" value=">=">>=</option>
-                                </select>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="fl mr10">
-                                频率止关系：
-                                <select class="my-combobox" name="ENDRELATIONSHIPFREQUENCY">
-                                    <option value="">请选择</option>
-                                    <option value="<"><</option>
-                                    <option value=">">></option>
-                                    <option value="<="><=</option>
-                                    <option value=">=">>=</option>
-                                </select>
-                            </li>
-                        }                                    
-                        <li class="fl mr10">
-                            指标1：
-                            <input class="my-textbox " value="@item.INDEX1" name="INDEX1">
 
-                        </li>
+                                </select>
+                            </li>
+
+                            @if (item.THERELATIONSHIPFREQUENCY == "<")
+                        {
+                                <li class="fl mr10">
+                                    频率止关系：
+                                    <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
+                                        <option value="">请选择</option>
+                                        <option selected="selected" value="<"><</option>
+                                        <option value=">">></option>
+                                        <option value="<="><=</option>
+                                        <option value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.ENDRELATIONSHIPFREQUENCY == ">")
+                            {
+                                <li class="fl mr10">
+                                    频率止关系：
+                                    <select class="my-combobox" name="ENDRELATIONSHIPFREQUENCY">
+                                        <option value="">请选择</option>
+                                        <option value="<"><</option>
+                                        <option selected="selected" value=">">></option>
+                                        <option value="<="><=</option>
+                                        <option value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.ENDRELATIONSHIPFREQUENCY == "<=")
+                            {
+                                <li class="fl mr10">
+                                    频率止关系：
+                                    <select class="my-combobox" name="ENDRELATIONSHIPFREQUENCY">
+                                        <option value="">请选择</option>
+                                        <option value="<"><</option>
+                                        <option value=">">></option>
+                                        <option selected="selected" value="<="><=</option>
+                                        <option value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+                            else if (item.ENDRELATIONSHIPFREQUENCY == ">=")
+                            {
+                                <li class="fl mr10">
+                                    频率止关系：
+                                    <select class="my-combobox" name="ENDRELATIONSHIPFREQUENCY">
+                                        <option value="">请选择</option>
+                                        <option value="<"><</option>
+                                        <option value=">">></option>
+                                        <option value="<="><=</option>
+                                        <option selected="selected" value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="fl mr10">
+                                    频率止关系：
+                                    <select class="my-combobox" name="ENDRELATIONSHIPFREQUENCY">
+                                        <option value="">请选择</option>
+                                        <option value="<"><</option>
+                                        <option value=">">></option>
+                                        <option value="<="><=</option>
+                                        <option value=">=">>=</option>
+                                    </select>
+                                </li>
+                            }
+                            <li class="fl mr10">
+                                指标1：
+                                <input class="my-textbox " value="@item.INDEX1" name="INDEX1">
+
+                            </li>
                             <li class="fl mr10">
                                 指标1单位：
                                 <select class="my-combobox" name="INDEX1UNIT" id="INDEX1UNIT">
                                     <option value="">请选择</option>
-                                  
+
                                 </select>
                             </li>
-                   
-                        <li class="fl mr10">
-                            指标2：
-                            <input class="my-textbox " value="@item.ENDUNITFREQUENCY" name="ENDUNITFREQUENCY">
-                        </li>
-                     
+
+                            <li class="fl mr10">
+                                指标2：
+                                <input class="my-textbox " value="@item.ENDUNITFREQUENCY" name="ENDUNITFREQUENCY">
+                            </li>
+
                             <li class="fl mr10">
                                 指标2单位：
                                 <select class="my-combobox" name="INDEX2UNIT" id="INDEX2UNIT">
                                     <option value="">请选择</option>
-                                  
+
                                 </select>
                             </li>
-                        
-                      
-                      
-                        <li class="fl mr10">
-                            备注：
-                            <input class="my-textbox" value="@item.NOTE" name="NOTE">
-                        </li>
-                        <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
-                    </ul>
+
+
+
+                            <li class="fl mr10">
+                                备注：
+                                <input class="my-textbox" value="@item.NOTE" name="NOTE">
+                            </li>
+                            <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="clear mt10">
+                            <li class="fl mr10">
+                                评定项：
+                                <select class="my-combobox" name="ASSESSMENTITEM">
+                                    <option value="">请选择</option>
+                                    <option value="直流电压">直流电压</option>
+                                    <option value="直流电流">直流电流</option>
+                                    <option value="直流电阻">直流电阻</option>
+                                    <option value="交流电压">交流电压</option>
+                                    <option value="交流电流">交流电流</option>
+                                </select>
+                            </li>
+                            <li class="fl mr10">
+                                量程范围起：
+                                <input class="my-textbox " value="" name="THERANGESCOPE">
+                            </li>
+                            <li class="fl mr10">
+                                起单位：
+                                <select class="my-combobox" name="THEUNIT" id="THEUNIT">
+                                    <option value="">请选择</option>
+                                </select>
+                            </li>
+                            <li class="fl mr10">
+                                起关系：
+                                <select class="my-combobox" name="THERELATIONSHIP">
+                                    <option value="">请选择</option>
+                                    <option value="<"><</option>
+                                    <option value=">">></option>
+                                    <option value="<="><=</option>
+                                    <option value=">=">>=</option>
+                                </select>
+                            </li>
+                            <li class="fl mr10">
+                                量程范围止：
+                                <input class="my-textbox " value="" name="ENDRANGESCOPE">
+                            </li>
+                            <li class="fl mr10">
+                                止单位：
+                                <select class="my-combobox" name="ENDUNIT" id="ENDUNIT">
+                                    <option value="">请选择</option>
+                                </select>
+                            </li>
+                            <li class="fl mr10">
+                                止关系：
+                                <select class="my-combobox" name="ENDRELATIONSHIP">
+                                    <option value="">请选择</option>
+                                    <option value="<"><</option>
+                                    <option value=">">></option>
+                                    <option value="<="><=</option>
+                                    <option value=">=">>=</option>
+                                </select>
+                            </li>
+                            <li class="fl mr10">
+                                频率范围起：
+                                <input class="my-textbox " value="" name="THEFREQUENCY">
+                            </li>
+                            <li class="fl mr10">
+                                起单位：
+                                <select class="my-combobox" name="THEUNITFREQUENCY" id="THEUNITFREQUENCY">
+                                    <option value="">请选择</option>
+                                </select>
+                            </li>
+                            <li class="fl mr10">
+                                频率起关系：
+                                <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
+                                    <option value="">请选择</option>
+                                    <option value="<"><</option>
+                                    <option value=">">></option>
+                                    <option value="<="><=</option>
+                                    <option value=">=">>=</option>
+                                </select>
+                            </li>
+                            <li class="fl mr10">
+                                频率范围止：
+                                <input class="my-textbox " value="" name="ENDFREQUENCY">
+                            </li>
+                            <li class="fl mr10">
+                                频率止单位：
+                                <select class="my-combobox" name="ENDUNITFREQUENCY" id="ENDUNITFREQUENCY">
+                                    <option value="">请选择</option>
+                                </select>
+                            </li>
+                            <li class="fl mr10">
+                                频率止关系：
+                                <select class="my-combobox" name="ENDRELATIONSHIPFREQUENCY">
+                                    <option value="">请选择</option>
+                                    <option value="<"><</option>
+                                    <option value=">">></option>
+                                    <option value="<="><=</option>
+                                    <option value=">=">>=</option>
+                                </select>
+                            </li>
+                            <li class="fl mr10">
+                                指标1：
+                                <input class="my-textbox " value="" name="INDEX1">
+                            </li>
+                            <li class="fl mr10">
+                                指标1单位：
+                                <select class="my-combobox" name="INDEX1UNIT" id="INDEX1UNIT">
+                                    <option value="">请选择</option>
+                                </select>
+                            </li>
+                            <li class="fl mr10">
+                                指标2：
+                                <input class="my-textbox " value="" name="ENDUNITFREQUENCY">
+                            </li>
+                            <li class="fl mr10">
+                                指标2单位：
+                                <select class="my-combobox" name="INDEX2UNIT" id="INDEX2UNIT">
+                                    <option value="">请选择</option>
+                                </select>
+                            </li>
+                            <li class="fl mr10">
+                                备注：
+                                <input class="my-textbox" value="" name="NOTE">
+                            </li>
+                            <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
+                        </ul>
+                    }
                 }
-                else
-                {
-                    <ul class="clear mt10">
-                        <li class="fl mr10">
-                            评定项：
-                            <select class="my-combobox" name="ASSESSMENTITEM">
-                                <option value="">请选择</option>
-                                <option value="直流电压">直流电压</option>
-                                <option value="直流电流">直流电流</option>
-                                <option value="直流电阻">直流电阻</option>
-                                <option value="交流电压">交流电压</option>
-                                <option value="交流电流">交流电流</option>
-                            </select>
-                        </li>
-                        <li class="fl mr10">
-                            量程范围起：
-                            <input class="my-textbox " value="" name="THERANGESCOPE">
-                        </li>
-                        <li class="fl mr10">
-                            起单位：
-                            <select class="my-combobox" name="THEUNIT"id="THEUNIT">
-                                <option value="">请选择</option>                             
-                            </select>
-                        </li>
-                        <li class="fl mr10">
-                            起关系：
-                            <select class="my-combobox" name="THERELATIONSHIP">
-                                <option value="">请选择</option>
-                                <option value="<"><</option>
-                                <option value=">">></option>
-                                <option value="<="><=</option>
-                                <option value=">=">>=</option>
-                            </select>
-                        </li>
-                        <li class="fl mr10">
-                            量程范围止：
-                            <input class="my-textbox " value="" name="ENDRANGESCOPE">
-                        </li>
-                        <li class="fl mr10">
-                            止单位：
-                            <select class="my-combobox" name="ENDUNIT" id="ENDUNIT">
-                                <option value="">请选择</option>                                
-                            </select>
-                        </li>
-                        <li class="fl mr10">
-                            止关系：
-                            <select class="my-combobox" name="ENDRELATIONSHIP">
-                                <option value="">请选择</option>
-                                <option value="<"><</option>
-                                <option value=">">></option>
-                                <option value="<="><=</option>
-                                <option value=">=">>=</option>
-                            </select>
-                        </li>
-                        <li class="fl mr10">
-                            频率范围起：
-                            <input class="my-textbox " value="" name="THEFREQUENCY">
-                        </li>
-                        <li class="fl mr10">
-                            起单位：
-                            <select class="my-combobox" name="THEUNITFREQUENCY" id="THEUNITFREQUENCY">
-                                <option value="">请选择</option>                               
-                            </select>
-                        </li>
-                        <li class="fl mr10">
-                            频率起关系：
-                            <select class="my-combobox" name="THERELATIONSHIPFREQUENCY">
-                                <option value="">请选择</option>
-                                <option value="<"><</option>
-                                <option value=">">></option>
-                                <option value="<="><=</option>
-                                <option value=">=">>=</option>
-                            </select>
-                        </li>
-                        <li class="fl mr10">
-                            频率范围止：
-                            <input class="my-textbox " value="" name="ENDFREQUENCY">
-                        </li>
-                        <li class="fl mr10">
-                            频率止单位：
-                            <select class="my-combobox" name="ENDUNITFREQUENCY" id="ENDUNITFREQUENCY">
-                                <option value="">请选择</option>                              
-                            </select>
-                        </li>
-                        <li class="fl mr10">
-                            频率止关系：
-                            <select class="my-combobox" name="ENDRELATIONSHIPFREQUENCY">
-                                <option value="">请选择</option>
-                                <option value="<"><</option>
-                                <option value=">">></option>
-                                <option value="<="><=</option>
-                                <option value=">=">>=</option>
-                            </select>
-                        </li>
-                        <li class="fl mr10">
-                            指标1：
-                            <input class="my-textbox " value="" name="INDEX1">
-                        </li>
-                        <li class="fl mr10">
-                            指标1单位：
-                            <select class="my-combobox" name="INDEX1UNIT" id="INDEX1UNIT">
-                                <option value="">请选择</option>                               
-                            </select>
-                        </li>
-                        <li class="fl mr10">
-                            指标2：
-                            <input class="my-textbox " value="" name="ENDUNITFREQUENCY">
-                        </li>
-                        <li class="fl mr10">
-                            指标2单位：
-                            <select class="my-combobox" name="INDEX2UNIT" id="INDEX2UNIT">
-                                <option value="">请选择</option>                              
-                            </select>
-                        </li>
-                        <li class="fl mr10">
-                            备注：
-                            <input class="my-textbox" value="" name="NOTE">
-                        </li>
-                        <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
-                    </ul>
-                }
-            }
+            </div>
         </div>
-    </div>
     }
     <div class="mt10"><a href="javascript:;" class="easyui-linkbutton" onclick="baocun()">保存修改</a> <a href="javascript:;" class="easyui-linkbutton" onclick="javascript: window.location.href = '/METERING_STANDARD_DEVICE/Index';">返回</a></div>
 </div>
@@ -1567,8 +1583,8 @@
             var a=new Object();
             a= @Model.UNCERTAINTYTABLEShow;
 
-            
-           
+
+
         }
     })
     function morengzhi(zhi, id) {
@@ -1587,7 +1603,7 @@
         else if (dianzhu.indexOf(zhi) >= 0) {
             $("#" + id + "").append('<option value="Ω">Ω</option><option value="TΩ">TΩ</option><option value="GΩ">GΩ</option><option value="MΩ">MΩ</option><option value="kΩ">kΩ</option><option value="mΩ">mΩ</option><option value="μΩ">μΩ</option>');
             $("#" + id + "").val(zhi);
-        }                                  
+        }
     }
     //下拉框选择事件
     function gradeChange(ex) {
@@ -1934,7 +1950,7 @@
         }
         if (isNull(m.UNCERTAINTYTABLE.UNCERTAINTYUI)) {
             zhi += "不确定度ui不能为空！<br>";
-        }     
+        }
         if (zhi != "") {
             $.messager.alert('操作提示', "" + zhi + "", 'info');
             return false;
