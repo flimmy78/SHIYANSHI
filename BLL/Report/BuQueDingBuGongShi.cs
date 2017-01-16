@@ -20,7 +20,7 @@ namespace Langben.BLL.Report
         /// <returns></returns>
         public static string GetBuQueDingDu(BuQueDingBuInput paras)
         {
-            if (string.IsNullOrWhiteSpace(paras.ShuChuShiJiZhi) && string.IsNullOrWhiteSpace(paras.ShuChuShiZhi))
+            if (string.IsNullOrWhiteSpace(paras.ShuChuShiJiZhi) || string.IsNullOrWhiteSpace(paras.ShuChuShiZhi))
             {
                 return null;
             }
