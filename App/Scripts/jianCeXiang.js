@@ -1403,7 +1403,7 @@ function calculate(strData) {
         total += arr[j];
     }
     var mean = total / arr.length;
-    mean = Math.round(mean * 10000000) / 10000000;
+    mean = Math.round(mean * 100000000000) / 100000000000;
     var xm2 = 0;
     var srt = '';
     var srt1 = '';
@@ -1430,7 +1430,7 @@ function calculate(strData) {
     sVariance = Math.round(sVariance * 1000000) / 1000000;
     var pVariance = Math.pow(psd, 2);
     pVariance = Math.round(pVariance * 10000000) / 10000000;
-    sd = Math.round(sd * 100000000) / 100000000;//标准偏差
+    sd = Math.round(sd * 1000000000000) / 1000000000000;//标准偏差
     return sd;
     // psd = Math.round(psd * 1000000) / 1000000;
 
