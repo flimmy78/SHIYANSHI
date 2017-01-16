@@ -165,10 +165,10 @@ namespace Langben.BLL.Report
 
                     if (!string.IsNullOrWhiteSpace(paras.XuanYongDianZu))
                     {
-                        var zhi = Convert.ToDouble(paras.XuanYongDianZu)* DanWei(paras.ShuChuShiJiZhiDanWei, paras.ShuChuShiJiZhi);
-                        string str = ((decimal)zhi).ToString();
-                        paras.ShuChuShiJiZhi = str;
-                        paras.ShuChuShiJiZhiDanWei = "μV";
+                        //var zhi = Convert.ToDouble(paras.XuanYongDianZu)* DanWei(paras.ShuChuShiJiZhiDanWei, paras.ShuChuShiJiZhi);
+                        //string str = ((decimal)zhi).ToString();
+                        //paras.ShuChuShiJiZhi = str;
+                        //paras.ShuChuShiJiZhiDanWei = "μV";
                         UNCERTAINTYTABLE d8 = GetUNCERTAINTYTABLE(paras, data);
                         var uiMax8 = (Convert.ToDouble(d8.INDEX1) * Math.Pow(10, -6) * Math.Abs(Convert.ToDouble(paras.ShuChuShiJiZhi))
                             + Convert.ToDouble(d8.INDEX2) * Math.Pow(10, -6) * Convert.ToDouble(d8.ENDRANGESCOPE)) / 2;
