@@ -44,7 +44,8 @@ namespace Langben.BLL.Report
             List<UNCERTAINTYTABLE> data = bll.GetByASSESSMENTITEM(buQueDingBuJiHe.MingChen);
 
             var re = GongShi.GetBuQueDingDu(paras, data, buQueDingBuJiHe);
-            return re.ToString();
+            string str = ((decimal)re).ToString();
+            return str;
             //if (!string.IsNullOrWhiteSpace(paras.ShuChuShiJiZhi))
             //{
             //    return "10.123";

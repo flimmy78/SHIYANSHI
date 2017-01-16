@@ -119,8 +119,7 @@
 </table>
 @*<table class="tab1" border="1px" cellpadding="0" cellspacing="0" align="center" id="qijuzhi"></table>*@
 <div id="tiaoma"></div>
-
-<script src="~/Scripts/jquery.jqprint-0.3.js"></script>
+ 
 <script language="javascript" type="text/javascript">
     $.ajax({
         url: '/api/ORDER_TASK_INFORMATIONApi/PostID/' + '@ViewBag.Id',
@@ -129,7 +128,7 @@
         success: function (row) {
             var html = '';
             for (var i = 0; i < row.APPLIANCE_DETAIL_INFORMATIONShows.length; i++) {
-                html += '<img id="' + row.APPLIANCE_DETAIL_INFORMATIONShows[i].ID + '" src="/up/ErWeiMa/' + row.APPLIANCE_DETAIL_INFORMATIONShows[i].ID + '.png"/><br /><input type="button" onclick="$(#\'' + row.APPLIANCE_DETAIL_INFORMATIONShows[i].ID + '\').jqprint({debug: false,importCSS: true,printContainer: true,operaSupport: false});" value="打印二维码" />';
+                html += '<img id="' + row.APPLIANCE_DETAIL_INFORMATIONShows[i].ID + '" src="/up/ErWeiMa/' + row.APPLIANCE_DETAIL_INFORMATIONShows[i].ID + '.png"/><br /><input type="button" onclick="printdiv(\'' + row.APPLIANCE_DETAIL_INFORMATIONShows[i].ID + '\')" value="打印二维码" />';
             }
             $("#tiaoma").html(html);//器具信息
             $("#ORDER_NUMBER").text(row.ORDER_NUMBER == null ? "/" : row.ORDER_NUMBER);//委托单号
@@ -155,9 +154,26 @@
             window.close();
         }
     }
+    var WindowObjectReference; // global variable
+    function printdiv(data) {
+        debugger;
+        var fulls = "left=0,screenX=0,top=0,screenY=0,scrollbars=1";    //定义弹出窗口的参数  
+        if (window.screen) {
+            var ah = screen.availHeight - 30;
+            var aw = screen.availWidth - 10;
+            fulls += ",height=" + ah;
+            fulls += ",innerHeight=" + ah;
+            fulls += ",width=" + aw;
+            fulls += ",innerWidth=" + aw;
+            fulls += ",resizable"
+        } else {
+            fulls += ",resizable"; // 对于不支持screen属性的浏览器，可以手工进行最大化。 manually  
+        }
 
-    function printdiv(obj) {
-
-        $("#" + obj).jqprint({debug: false,importCSS: true,printContainer: true,operaSupport: false});
+      
+        WindowObjectReference = window.open('/up/ErWeiMa/' + data+".pdf",
+"二维码",
+fulls);
+        
     }
 </script>
