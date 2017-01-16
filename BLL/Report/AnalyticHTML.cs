@@ -257,6 +257,10 @@ namespace Langben.Report
                         foreach (var b in pingdingb)
                         {
                             ib++;
+                            if(ib<=9)//第一行数据隐藏数据不要打印
+                            {
+                                continue;
+                            }
                             MYData mydata = new MYData();
                             mydata.id = b.Attributes["id"].Value;
                             mydata.name = b.Attributes["name"].Value;
