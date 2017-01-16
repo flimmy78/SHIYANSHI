@@ -344,10 +344,11 @@
         var UNCERTAINTYTABLE = new Object();
         //*******************************************不确定度
         $("#div6").find("ul").each(function () {
-            debugger;
+         
             var ASSESSMENTITEM = $(this).find("li :selected").eq(0).val();//评定项
             var THERANGESCOPE = $(this).find("li :input").eq(1).val();//量程范围起
-            var ERRORLIMITS = $(this).find("li :selected").eq(1).val();//起单位
+           
+            var THEUNIT = $(this).find("li :selected").eq(1).val();//起单位
             var THERELATIONSHIP = $(this).find("li :selected").eq(2).val();//起关系
             var ENDRANGESCOPE = $(this).find("li :input").eq(4).val();//量程范围止
             var ENDUNIT = $(this).find("li :selected").eq(3).val();//止单位
@@ -364,8 +365,8 @@
             var INDEX2UNIT = $(this).find("li :selected").eq(10).val();//指标2单位
             var NOTE = $(this).find("li :input").eq(17).val();//备注
             var CATEGORY = "UB";
-            if (ASSESSMENTITEM != null || THERANGESCOPE != null || ERRORLIMITS != null || THERELATIONSHIP != null || ENDRANGESCOPE != null || ENDUNIT != null || ENDRELATIONSHIP != null || THEFREQUENCY != null || THEUNITFREQUENCY != null || THERELATIONSHIPFREQUENCY != null || ENDFREQUENCY != null || ENDUNITFREQUENCY != null || ENDRELATIONSHIPFREQUENCY != null || INDEX1 != null || INDEX1UNIT != null || INDEX2 != null || INDEX2UNIT != null || NOTE != null) {
-                myArray6.push({ METERING_STANDARD_DEVICEID: "@ViewBag.METERING_STANDARD_DEVICEID", ASSESSMENTITEM: ASSESSMENTITEM, THERANGESCOPE: THERANGESCOPE, ERRORLIMITS: ERRORLIMITS, THERELATIONSHIP: THERELATIONSHIP, ENDRANGESCOPE: ENDRANGESCOPE, ENDUNIT: ENDUNIT, ENDRELATIONSHIP: ENDRELATIONSHIP, THEFREQUENCY: THEFREQUENCY, THEUNITFREQUENCY: THEUNITFREQUENCY, THERELATIONSHIPFREQUENCY: THERELATIONSHIPFREQUENCY, ENDFREQUENCY: ENDFREQUENCY, ENDUNITFREQUENCY: ENDUNITFREQUENCY, ENDRELATIONSHIPFREQUENCY: ENDRELATIONSHIPFREQUENCY, INDEX1: INDEX1, INDEX1UNIT: INDEX1UNIT, INDEX2: INDEX2, INDEX2UNIT: INDEX2UNIT, NOTE: NOTE, CATEGORY: CATEGORY });
+            if (ASSESSMENTITEM != null || THERANGESCOPE != null || THEUNIT != null || THERELATIONSHIP != null || ENDRANGESCOPE != null || ENDUNIT != null || ENDRELATIONSHIP != null || THEFREQUENCY != null || THEUNITFREQUENCY != null || THERELATIONSHIPFREQUENCY != null || ENDFREQUENCY != null || ENDUNITFREQUENCY != null || ENDRELATIONSHIPFREQUENCY != null || INDEX1 != null || INDEX1UNIT != null || INDEX2 != null || INDEX2UNIT != null || NOTE != null) {
+                myArray6.push({ METERING_STANDARD_DEVICEID: "@ViewBag.METERING_STANDARD_DEVICEID", ASSESSMENTITEM: ASSESSMENTITEM, THERANGESCOPE: THERANGESCOPE, THEUNIT: THEUNIT, THERELATIONSHIP: THERELATIONSHIP, ENDRANGESCOPE: ENDRANGESCOPE, ENDUNIT: ENDUNIT, ENDRELATIONSHIP: ENDRELATIONSHIP, THEFREQUENCY: THEFREQUENCY, THEUNITFREQUENCY: THEUNITFREQUENCY, THERELATIONSHIPFREQUENCY: THERELATIONSHIPFREQUENCY, ENDFREQUENCY: ENDFREQUENCY, ENDUNITFREQUENCY: ENDUNITFREQUENCY, ENDRELATIONSHIPFREQUENCY: ENDRELATIONSHIPFREQUENCY, INDEX1: INDEX1, INDEX1UNIT: INDEX1UNIT, INDEX2: INDEX2, INDEX2UNIT: INDEX2UNIT, NOTE: NOTE, CATEGORY: CATEGORY });
 
             }
         })
@@ -413,24 +414,7 @@
             zhi += "评定项不能为空！<br>";
         }
         
-        if (isNull(m.THERANGESCOPE)) {
-            zhi += "量程范围起不能为空！<br>";
-        }
-        if (isNull(m.ERRORLIMITS)) {
-            zhi += "起单位不能为空！<br>";
-        }
-        if (isNull(m.THERELATIONSHIP)) {
-            zhi += "起关系不能为空！<br>";
-        }
-        if (isNull(m.ENDRANGESCOPE)) {
-            zhi += "量程范围止不能为空！<br>";
-        }
-        if (isNull(m.ENDUNIT)) {
-            zhi += "止单位不能为空！<br>";
-        }
-        if (isNull(m.ENDRELATIONSHIP)) {
-            zhi += "止关系不能为空！<br>";
-        }
+   
 
      
         if (zhi != "") {

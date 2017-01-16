@@ -16,6 +16,10 @@ namespace Langben.BLL.Report
         public static double GetBuQueDingDu(BuQueDingBuInput paras, List<UNCERTAINTYTABLE> data, BuQueDingDu buQueDingDu)
         {
             double result = 0;
+            if (paras.K == "√3")
+            {
+                paras.K = Math.Sqrt(3).ToString();
+            }
 
             switch (buQueDingDu.GongShi)
             {
@@ -39,8 +43,8 @@ namespace Langben.BLL.Report
                     // 最大允许误差ui=(指标1*10-6*ABS【显示值+】+指标2)/2，备注指标2的单位要换算成和【显示值+】单位一致
                     UNCERTAINTYTABLE d = GetUNCERTAINTYTABLE(paras, data);
                     var uiMax = (Convert.ToDouble(d.INDEX1) * Math.Pow(10, -6) * Math.Abs(Convert.ToDouble(paras.ShuChuShiJiZhi))
-                        + Convert.ToDouble(d.INDEX2)) * Math.Pow(10, DanWeiHuanSuan(d.INDEX2UNIT, paras.ShuChuShiJiZhiDanWei)) / 2;
-
+                        + Convert.ToDouble(d.INDEX2) * Math.Pow(10, DanWeiHuanSuan(d.INDEX2UNIT, paras.ShuChuShiJiZhiDanWei))) / 2;
+                   
                     // 算法=((被试设备分辨力ui)^2+(最大允许误差ui)^2)^0.5*k，小数位数要与【显示值+】位数一致	
                     return Math.Pow((Math.Pow(ui, 2) + Math.Pow(uiMax, 2)), 0.5) * Convert.ToDouble(paras.K);
                 case "9":
@@ -178,7 +182,7 @@ namespace Langben.BLL.Report
         }
         public static UNCERTAINTYTABLE GetUNCERTAINTYTABLE(BuQueDingBuInput paras, List<UNCERTAINTYTABLE> data)
         {
-            var liangcheng = DanWei(paras.ShuChuShiZhi, paras.ShuChuShiJiZhiDanWei);
+            var liangcheng = DanWei(paras.ShuChuShiJiZhiDanWei, paras.ShuChuShiZhi);
 
             foreach (var f in data)
             {//
@@ -192,7 +196,7 @@ namespace Langben.BLL.Report
                             if (!string.IsNullOrWhiteSpace(paras.PinLv))
                             {
                                 #region 频率
-                                var pinglv = DanWei(paras.PinLv, paras.PinLvDanWei);
+                                var pinglv = DanWei(paras.PinLvDanWei, paras.PinLv);
 
                                 if (f.THERELATIONSHIPFREQUENCY == ">")//频率起关系
                                 {
@@ -263,8 +267,7 @@ namespace Langben.BLL.Report
                             if (!string.IsNullOrWhiteSpace(paras.PinLv))
                             {
                                 #region 频率
-                                var pinglv = DanWei(paras.PinLv, paras.PinLvDanWei);
-
+                                var pinglv = DanWei(paras.PinLvDanWei, paras.PinLv);
                                 if (f.THERELATIONSHIPFREQUENCY == ">")//频率起关系
                                 {
                                     if (f.ENDRELATIONSHIPFREQUENCY == "<")//频率结束关系
@@ -337,8 +340,7 @@ namespace Langben.BLL.Report
                             if (!string.IsNullOrWhiteSpace(paras.PinLv))
                             {
                                 #region 频率
-                                var pinglv = DanWei(paras.PinLv, paras.PinLvDanWei);
-
+                                var pinglv = DanWei(paras.PinLvDanWei, paras.PinLv);
                                 if (f.THERELATIONSHIPFREQUENCY == ">")//频率起关系
                                 {
                                     if (f.ENDRELATIONSHIPFREQUENCY == "<")//频率结束关系
@@ -407,8 +409,7 @@ namespace Langben.BLL.Report
                             if (!string.IsNullOrWhiteSpace(paras.PinLv))
                             {
                                 #region 频率
-                                var pinglv = DanWei(paras.PinLv, paras.PinLvDanWei);
-
+                                var pinglv = DanWei(paras.PinLvDanWei, paras.PinLv);
                                 if (f.THERELATIONSHIPFREQUENCY == ">")//频率起关系
                                 {
                                     if (f.ENDRELATIONSHIPFREQUENCY == "<")//频率结束关系
@@ -480,8 +481,7 @@ namespace Langben.BLL.Report
                             if (!string.IsNullOrWhiteSpace(paras.PinLv))
                             {
                                 #region 频率
-                                var pinglv = DanWei(paras.PinLv, paras.PinLvDanWei);
-
+                                var pinglv = DanWei(paras.PinLvDanWei, paras.PinLv);
                                 if (f.THERELATIONSHIPFREQUENCY == ">")//频率起关系
                                 {
                                     if (f.ENDRELATIONSHIPFREQUENCY == "<")//频率结束关系
@@ -550,8 +550,7 @@ namespace Langben.BLL.Report
                             if (!string.IsNullOrWhiteSpace(paras.PinLv))
                             {
                                 #region 频率
-                                var pinglv = DanWei(paras.PinLv, paras.PinLvDanWei);
-
+                                var pinglv = DanWei(paras.PinLvDanWei, paras.PinLv);
                                 if (f.THERELATIONSHIPFREQUENCY == ">")//频率起关系
                                 {
                                     if (f.ENDRELATIONSHIPFREQUENCY == "<")//频率结束关系
@@ -715,7 +714,10 @@ nA是纳安等于0.001微安，pA 皮安，就是0.000001微安
             dic.Add("pA", 6);
             dic.Add("nA", 7);
             dic.Add("μA", 8);
-            dic.Add("mA", 9); dic.Add("A", 10); dic.Add("kA", 11); dic.Add("MA", 12);
+            dic.Add("mA", 9);
+            dic.Add("A", 10);
+            dic.Add("kA", 11);
+            dic.Add("MA", 12);
             var data = dic[yuan] - dic[mubiao];
             if (data == 0)
             {
@@ -723,10 +725,9 @@ nA是纳安等于0.001微安，pA 皮安，就是0.000001微安
             }
             else
             {
-                return Math.Pow(10, data * 3);
+                return (data * 3);
             }
 
-            return 0;
         }
     }
 
