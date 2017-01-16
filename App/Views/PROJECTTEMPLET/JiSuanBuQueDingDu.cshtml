@@ -89,7 +89,7 @@ else
                                     <option value="MΩ">MΩ</option>
                                     <option value="kΩ">kΩ</option>
                                     <option value="mΩ">mΩ</option>
-                                    <option value="μΩ">μΩ</option>                                   
+                                    <option value="μΩ">μΩ</option>
                                 </select>
 
                             </li>
@@ -257,7 +257,7 @@ else
 <script type="text/javascript">
 
     $(document).ready(function () {
-       
+
         var hideHtml = $("#hideHTMLVALUE").val();
         if (hideHtml.trim() != "") {
             $("#divHtml").html("");
@@ -338,9 +338,9 @@ else
     }
     //B类选择
     function xunzhe() {
-        $("#METERING_STANDARD_DEVICEID").val("");        
+        $("#METERING_STANDARD_DEVICEID").val("");
         showModalMany('METERING_STANDARD_DEVICEID', '../../METERING_STANDARD_DEVICE/IndexUA/@ViewBag.UNDERTAKE_LABORATORY_NAME');
-        var zhi = $("#METERING_STANDARD_DEVICEID").val();        
+        var zhi = $("#METERING_STANDARD_DEVICEID").val();
         var zhu = zhi.split('^');
         for (var i = 0; i < zhu.length; i++) {
             if (zhu[i] != "") {
@@ -355,7 +355,7 @@ else
                 var trNew = $('#tongdao_B tbody').find('tr:last').clone();
                 $(trNew).css("display", "");
                 var id = $(trNew).children().find("input[name='sourceNum']").attr("id");
-                var num = (parseInt(id.substring(id.lastIndexOf("_") + 1)) + 1); 
+                var num = (parseInt(id.substring(id.lastIndexOf("_") + 1)) + 1);
                 $(trNew).children().find('input').each(function (idx) {
                     if (this.name != "" && this.id != "" && this.id.lastIndexOf("_") >= 0) {
                         var num = (parseInt(this.id.substring(this.id.lastIndexOf("_") + 1)) + 1);
@@ -411,7 +411,7 @@ else
                         }
                         else {
                             $(this).val(zhu[i].split('$')[5]);
-                        }                       
+                        }
                     }
                     if (idx == 7) {
                         if (zhu[i].split('$')[6].split('&')[0] == null || zhu[i].split('$')[6].split('&')[0] == "null") {
@@ -419,7 +419,7 @@ else
                         }
                         else {
                             $(this).val(zhu[i].split('$')[6].split('&')[0]);
-                        }                        
+                        }
                     }
                     if (idx == 8) {
                         if (zhu[i].split('$')[7].split('&')[0] == null || zhu[i].split('$')[7].split('&')[0] == "null") {
@@ -428,7 +428,7 @@ else
                         else {
                             $(this).val(zhu[i].split('$')[7].split('&')[0]);
                         }
-                       
+
                     }
                 });
                 $("#tongdao_B tbody").append(trNew);
@@ -488,7 +488,7 @@ else
         }
 
         var mean = Math.sqrt(total);
-        mean = Math.round(mean * 1000000) / 1000000;        
+        mean = Math.round(mean * 1000000) / 1000000;
         var v = $("#txtValueB").val();
         $("#txtBuQueDingB").val(v == "" ? mean : parseFloat(mean) / parseFloat(v));
         calculateC();

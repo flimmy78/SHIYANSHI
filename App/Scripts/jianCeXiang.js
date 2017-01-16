@@ -22,8 +22,7 @@ function CreateTongDao() {
     var tableIdx = $("#hideDangQianTongDao").val();//当前通道    
     tableIdx++;
     var $tongdao = $Tongdao_moban.clone().appendTo($('#tongdao'));
-    if ($tongdao.html() == "undefined" || $tongdao.html() == undefined)
-    {
+    if ($tongdao.html() == "undefined" || $tongdao.html() == undefined) {
         return;
     }
     var reg = new RegExp("_t_", "g");//g,表示全部替换。
@@ -641,7 +640,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
         if (JiSuanBuQueDingDuPara.Type == "A") {//按钮计算不确定度
             htmlString.push("<input type='hidden' name='" + BuQueDingDuLuJingName + "' id='" + BuQueDingDuLuJingId + "' value=''/>");
             var returnIds = BuQueDingDuZhiId + "&" + BuQueDingDuLuJingId + "^" + BuQueDingDuLuJingId + "^" + id;
-            htmlString.push("<a href=\"#\" name=\"btnBuQueDing\" class=\"my-linkbutton\" onclick = \"showModal('" + returnIds + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID="+RuleID+"');\">计算</a>")
+            htmlString.push("<a href=\"#\" name=\"btnBuQueDing\" class=\"my-linkbutton\" onclick = \"showModal('" + returnIds + "', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=" + id + "&RuleID=" + RuleID + "');\">计算</a>")
         }
         //else if (JiSuanBuQueDingDuPara.Type == "Z")//每行自动计算不确定度
         //{
@@ -1404,7 +1403,7 @@ function calculate(strData) {
         total += arr[j];
     }
     var mean = total / arr.length;
-    mean = Math.round(mean * 10000) / 10000;
+    mean = Math.round(mean * 10000000) / 10000000;
     var xm2 = 0;
     var srt = '';
     var srt1 = '';
@@ -1430,7 +1429,7 @@ function calculate(strData) {
     var sVariance = Math.pow(sd, 2);
     sVariance = Math.round(sVariance * 1000000) / 1000000;
     var pVariance = Math.pow(psd, 2);
-    pVariance = Math.round(pVariance * 100000000) / 100000000;
+    pVariance = Math.round(pVariance * 10000000) / 10000000;
     sd = Math.round(sd * 100000000) / 100000000;//标准偏差
     return sd;
     // psd = Math.round(psd * 1000000) / 1000000;
