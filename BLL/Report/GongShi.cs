@@ -179,27 +179,75 @@ namespace Langben.BLL.Report
         public static UNCERTAINTYTABLE GetUNCERTAINTYTABLE(BuQueDingBuInput paras, List<UNCERTAINTYTABLE> data)
         {
             var liangcheng = DanWei(paras.ShuChuShiZhi, paras.ShuChuShiJiZhiDanWei);
-           
+
             foreach (var f in data)
-            {//THEUNIT
-                if (f.THERELATIONSHIP == "<")//量程起关系
+            {//
+                if (f.THERELATIONSHIP == ">")//量程起关系
                 {
-                    if (f.ENDRELATIONSHIP == "<")
+                    if (f.ENDRELATIONSHIP == "<")//量程结束关系
                     {
-                        if ((DanWei(f.THEUNIT, f.THERANGESCOPE) < liangcheng) && liangcheng < (DanWei(f.ENDUNIT, f.ENDRANGESCOPE)))
+                        if ((liangcheng > DanWei(f.THEUNIT, f.THERANGESCOPE)) && liangcheng < (DanWei(f.ENDUNIT, f.ENDRANGESCOPE)))
                         {
-                            if (!string.IsNullOrWhiteSpace(paras.PinLv) && !string.IsNullOrWhiteSpace(paras.PinLvDanWei))
+
+                            if (!string.IsNullOrWhiteSpace(paras.PinLv))
                             {
+                                #region 频率
                                 var pinglv = DanWei(paras.PinLv, paras.PinLvDanWei);
 
-                                if ((DanWei(f.THEFREQUENCY, f.THEUNITFREQUENCY) < pinglv) && pinglv < (DanWei(f.ENDFREQUENCY, f.ENDUNITFREQUENCY)))
-                                {//频率起关系
+                                if (f.THERELATIONSHIPFREQUENCY == ">")//频率起关系
+                                {
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")//频率结束关系
+                                    {
+                                        if ((pinglv > DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")//频率结束关系
+                                    {
+                                        if ((pinglv > DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
 
+                                }
+                                else if (f.THERELATIONSHIPFREQUENCY == ">=")
+                                {
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")
+                                    {
+                                        if ((pinglv >= DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")
+                                    {
+
+                                        if ((pinglv >= DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
                                 }
                                 else
-                                {
-
+                                {//没有起频率
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")
+                                    {
+                                        if (pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")
+                                    {
+                                        if (pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
                                 }
+                                #endregion
                             }
                             else
                             {
@@ -208,46 +256,361 @@ namespace Langben.BLL.Report
 
                         }
                     }
-                    else if (f.ENDRELATIONSHIP == "<=")
+                    else if (f.ENDRELATIONSHIP == "<=")//量程结束关系
                     {
-                        if ((DanWei(f.THEUNIT, f.THERANGESCOPE) < liangcheng) && liangcheng <= (DanWei(f.ENDUNIT, f.ENDRANGESCOPE)))
+                        if ((liangcheng > DanWei(f.THEUNIT, f.THERANGESCOPE)) && liangcheng <= (DanWei(f.ENDUNIT, f.ENDRANGESCOPE)))
                         {
-                            return f;
+                            if (!string.IsNullOrWhiteSpace(paras.PinLv))
+                            {
+                                #region 频率
+                                var pinglv = DanWei(paras.PinLv, paras.PinLvDanWei);
+
+                                if (f.THERELATIONSHIPFREQUENCY == ">")//频率起关系
+                                {
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")//频率结束关系
+                                    {
+                                        if ((pinglv > DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")//频率结束关系
+                                    {
+                                        if ((pinglv > DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+
+                                }
+                                else if (f.THERELATIONSHIPFREQUENCY == ">=")
+                                {
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")
+                                    {
+                                        if ((pinglv >= DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")
+                                    {
+
+                                        if ((pinglv >= DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                }
+                                else
+                                {//没有起频率
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")
+                                    {
+                                        if (pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")
+                                    {
+                                        if (pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                }
+                                #endregion
+                            }
+                            else
+                            {
+                                return f;
+                            }
                         }
                     }
 
                 }
-                else if (f.THERELATIONSHIP == "<=")
+                else if (f.THERELATIONSHIP == ">=")
                 {
                     if (f.ENDRELATIONSHIP == "<")
                     {
-                        if ((DanWei(f.THEUNIT, f.THERANGESCOPE) <= liangcheng) && liangcheng < (DanWei(f.ENDUNIT, f.ENDRANGESCOPE)))
+                        if (liangcheng >= (DanWei(f.THEUNIT, f.THERANGESCOPE)) && liangcheng < (DanWei(f.ENDUNIT, f.ENDRANGESCOPE)))
                         {
-                            return f;
+                            if (!string.IsNullOrWhiteSpace(paras.PinLv))
+                            {
+                                #region 频率
+                                var pinglv = DanWei(paras.PinLv, paras.PinLvDanWei);
+
+                                if (f.THERELATIONSHIPFREQUENCY == ">")//频率起关系
+                                {
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")//频率结束关系
+                                    {
+                                        if ((pinglv > DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")//频率结束关系
+                                    {
+                                        if ((pinglv > DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+
+                                }
+                                else if (f.THERELATIONSHIPFREQUENCY == ">=")
+                                {
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")
+                                    {
+                                        if ((pinglv >= DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")
+                                    {
+
+                                        if ((pinglv >= DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                }
+                                else
+                                {//没有起频率
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")
+                                    {
+                                        if (pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")
+                                    {
+                                        if (pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                }
+                                #endregion
+                            }
+                            else
+                            {
+                                return f;
+                            }
                         }
                     }
                     else if (f.ENDRELATIONSHIP == "<=")
                     {
-                        if ((DanWei(f.THEUNIT, f.THERANGESCOPE) <= liangcheng) && liangcheng <= (DanWei(f.ENDUNIT, f.ENDRANGESCOPE)))
+                        if (liangcheng >= (DanWei(f.THEUNIT, f.THERANGESCOPE)) && liangcheng <= (DanWei(f.ENDUNIT, f.ENDRANGESCOPE)))
                         {
-                            return f;
+                            if (!string.IsNullOrWhiteSpace(paras.PinLv))
+                            {
+                                #region 频率
+                                var pinglv = DanWei(paras.PinLv, paras.PinLvDanWei);
+
+                                if (f.THERELATIONSHIPFREQUENCY == ">")//频率起关系
+                                {
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")//频率结束关系
+                                    {
+                                        if ((pinglv > DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")//频率结束关系
+                                    {
+                                        if ((pinglv > DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+
+                                }
+                                else if (f.THERELATIONSHIPFREQUENCY == ">=")
+                                {
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")
+                                    {
+                                        if ((pinglv >= DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")
+                                    {
+
+                                        if ((pinglv >= DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                }
+                                else
+                                {//没有起频率
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")
+                                    {
+                                        if (pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")
+                                    {
+                                        if (pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                }
+                                #endregion
+                            }
+                            else
+                            {
+                                return f;
+                            }
                         }
                     }
                 }
                 else
-                {
+                {//没有起量程
                     if (f.ENDRELATIONSHIP == "<")
                     {
                         if (liangcheng < (DanWei(f.ENDUNIT, f.ENDRANGESCOPE)))
                         {
-                            return f;
+                            if (!string.IsNullOrWhiteSpace(paras.PinLv))
+                            {
+                                #region 频率
+                                var pinglv = DanWei(paras.PinLv, paras.PinLvDanWei);
+
+                                if (f.THERELATIONSHIPFREQUENCY == ">")//频率起关系
+                                {
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")//频率结束关系
+                                    {
+                                        if ((pinglv > DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")//频率结束关系
+                                    {
+                                        if ((pinglv > DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+
+                                }
+                                else if (f.THERELATIONSHIPFREQUENCY == ">=")
+                                {
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")
+                                    {
+                                        if ((pinglv >= DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")
+                                    {
+
+                                        if ((pinglv >= DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                }
+                                else
+                                {//没有起频率
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")
+                                    {
+                                        if (pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")
+                                    {
+                                        if (pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                }
+                                #endregion
+                            }
+                            else
+                            {
+                                return f;
+                            }
                         }
                     }
                     else if (f.ENDRELATIONSHIP == "<=")
                     {
                         if (liangcheng <= (DanWei(f.ENDUNIT, f.ENDRANGESCOPE)))
                         {
-                            return f;
+                            if (!string.IsNullOrWhiteSpace(paras.PinLv))
+                            {
+                                #region 频率
+                                var pinglv = DanWei(paras.PinLv, paras.PinLvDanWei);
+
+                                if (f.THERELATIONSHIPFREQUENCY == ">")//频率起关系
+                                {
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")//频率结束关系
+                                    {
+                                        if ((pinglv > DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")//频率结束关系
+                                    {
+                                        if ((pinglv > DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+
+                                }
+                                else if (f.THERELATIONSHIPFREQUENCY == ">=")
+                                {
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")
+                                    {
+                                        if ((pinglv >= DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")
+                                    {
+
+                                        if ((pinglv >= DanWei(f.THEUNITFREQUENCY, f.THEFREQUENCY)) && pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                }
+                                else
+                                {//没有起频率
+                                    if (f.ENDRELATIONSHIPFREQUENCY == "<")
+                                    {
+                                        if (pinglv < (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                    else if (f.ENDRELATIONSHIPFREQUENCY == "<=")
+                                    {
+                                        if (pinglv <= (DanWei(f.ENDUNITFREQUENCY, f.ENDFREQUENCY)))
+                                        {
+                                            return f;
+                                        }
+                                    }
+                                }
+                                #endregion
+                            }
+                            else
+                            {
+                                return f;
+                            }
                         }
                     }
                 }
@@ -260,6 +623,10 @@ namespace Langben.BLL.Report
         }
         public static double DanWei(string danwei, string result)
         {
+            if (string.IsNullOrWhiteSpace(danwei))
+            {
+                return Convert.ToDouble(result);
+            }
             /*
              "<select class=\"my-combobox\" name=\"DianYa\" style=\"width:50px; \">" +
                     "<option value=\"V\">V</option> " +
