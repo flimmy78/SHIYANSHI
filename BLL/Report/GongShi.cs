@@ -178,7 +178,7 @@ namespace Langben.BLL.Report
         }
         public static UNCERTAINTYTABLE GetUNCERTAINTYTABLE(BuQueDingBuInput paras, List<UNCERTAINTYTABLE> data)
         {
-            var liangcheng = DanWei(paras.ShuChuShiZhi, paras.ShuChuShiJiZhiDanWei);
+            var liangcheng = DanWei(paras.ShuChuShiJiZhiDanWei, paras.ShuChuShiZhi);
 
             foreach (var f in data)
             {//
