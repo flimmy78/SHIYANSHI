@@ -44,7 +44,7 @@ namespace Langben.BLL.Report
                     UNCERTAINTYTABLE d = GetUNCERTAINTYTABLE(paras, data);
                     var uiMax = (Convert.ToDouble(d.INDEX1) * Math.Pow(10, -6) * Math.Abs(Convert.ToDouble(paras.ShuChuShiJiZhi))
                         + Convert.ToDouble(d.INDEX2) * Math.Pow(10, DanWeiHuanSuan(d.INDEX2UNIT, paras.ShuChuShiJiZhiDanWei))) / 2;
-                   
+
                     // 算法=((被试设备分辨力ui)^2+(最大允许误差ui)^2)^0.5*k，小数位数要与【显示值+】位数一致	
                     return Math.Pow((Math.Pow(ui, 2) + Math.Pow(uiMax, 2)), 0.5) * Convert.ToDouble(paras.K);
                 case "9":
@@ -115,17 +115,21 @@ namespace Langben.BLL.Report
 
                     var ui6 = Math.Pow(10, -length6) / 2 / Math.Sqrt(3); //被试设备分辨力ui = (10 - n / 2) /√3
 
-                    UNCERTAINTYTABLE d6 = GetUNCERTAINTYTABLE(paras, data);
-                    var uiMax6 = (Convert.ToDouble(d6.INDEX1) * Math.Pow(10, -6) * Math.Abs(Convert.ToDouble(paras.ShuChuShiJiZhi))
-                        + Convert.ToDouble(d6.INDEX2) * Math.Pow(10, -6) * Convert.ToDouble(d6.ENDRANGESCOPE)) / 2;
+
 
                     if (paras.XuanYongDianZu == "是")
                     {
+                        var uiMax6 = (Convert.ToDouble(85) * Math.Pow(10, -6) * Math.Abs(Convert.ToDouble(paras.ShuChuShiJiZhi))
+                            + Convert.ToDouble(10) * Math.Pow(10, -6) * Convert.ToDouble(2)) / 2;
+
                         return Math.Pow((Math.Pow(ui6, 2) + Math.Pow(uiMax6, 2) + Math.Pow(0.00005, 2)), 0.5) * Convert.ToDouble(paras.K);
 
                     }
                     else
                     {
+                        UNCERTAINTYTABLE d6 = GetUNCERTAINTYTABLE(paras, data);
+                        var uiMax6 = (Convert.ToDouble(d6.INDEX1) * Math.Pow(10, -6) * Math.Abs(Convert.ToDouble(paras.ShuChuShiJiZhi))
+                            + Convert.ToDouble(d6.INDEX2) * Math.Pow(10, -6) * Convert.ToDouble(d6.ENDRANGESCOPE)) / 2;
                         return Math.Pow((Math.Pow(ui6, 2) + Math.Pow(uiMax6, 2)), 0.5) * Convert.ToDouble(paras.K);
                     }
 
@@ -157,18 +161,25 @@ namespace Langben.BLL.Report
 
                     var ui8 = Math.Pow(10, -length8) / 2 / Math.Sqrt(3); //被试设备分辨力ui = (10 - n / 2) /√3
 
-                    UNCERTAINTYTABLE d8 = GetUNCERTAINTYTABLE(paras, data);
-                    var uiMax8 = (Convert.ToDouble(d8.INDEX1) * Math.Pow(10, -6) * Math.Abs(Convert.ToDouble(paras.ShuChuShiJiZhi))
-                        + Convert.ToDouble(d8.INDEX2) * Math.Pow(10, -6) * Convert.ToDouble(d8.ENDRANGESCOPE)) / 2;
+
 
                     if (!string.IsNullOrWhiteSpace(paras.XuanYongDianZu))
                     {
-
+                        //var zhi = Convert.ToDouble(paras.XuanYongDianZu)* DanWei(paras.ShuChuShiJiZhiDanWei, paras.ShuChuShiJiZhi);
+                        //string str = ((decimal)zhi).ToString();
+                        //paras.ShuChuShiJiZhi = str;
+                        //paras.ShuChuShiJiZhiDanWei = "μV";
+                        UNCERTAINTYTABLE d8 = GetUNCERTAINTYTABLE(paras, data);
+                        var uiMax8 = (Convert.ToDouble(d8.INDEX1) * Math.Pow(10, -6) * Math.Abs(Convert.ToDouble(paras.ShuChuShiJiZhi))
+                            + Convert.ToDouble(d8.INDEX2) * Math.Pow(10, -6) * Convert.ToDouble(d8.ENDRANGESCOPE)) / 2;
                         return Math.Pow((Math.Pow(ui8, 2) + Math.Pow(uiMax8, 2) + Math.Pow(0.0000001 / Convert.ToDouble(paras.XuanYongDianZu), 2)), 0.5) * Convert.ToDouble(paras.K);
 
                     }
                     else
                     {
+                        UNCERTAINTYTABLE d8 = GetUNCERTAINTYTABLE(paras, data);
+                        var uiMax8 = (Convert.ToDouble(d8.INDEX1) * Math.Pow(10, -6) * Math.Abs(Convert.ToDouble(paras.ShuChuShiJiZhi))
+                            + Convert.ToDouble(d8.INDEX2) * Math.Pow(10, -6) * Convert.ToDouble(d8.ENDRANGESCOPE)) / 2;
                         return Math.Pow((Math.Pow(ui8, 2) + Math.Pow(uiMax8, 2)), 0.5) * Convert.ToDouble(paras.K);
                     }
 
@@ -182,7 +193,7 @@ namespace Langben.BLL.Report
         }
         public static UNCERTAINTYTABLE GetUNCERTAINTYTABLE(BuQueDingBuInput paras, List<UNCERTAINTYTABLE> data)
         {
-            var liangcheng = DanWei(paras.ShuChuShiJiZhiDanWei, paras.ShuChuShiZhi);
+            var liangcheng = DanWei(paras.ShuChuShiZhiDanWei, paras.ShuChuShiZhi);
 
             foreach (var f in data)
             {//

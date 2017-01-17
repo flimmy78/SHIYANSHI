@@ -15,6 +15,7 @@ using System.Drawing;
 using Gma.QrCodeNet.Encoding;
 using Gma.QrCodeNet.Encoding.Windows.Controls;
 using System.Drawing.Imaging;
+ 
 
 namespace Langben.App.Controllers
 {
@@ -225,9 +226,15 @@ namespace Langben.App.Controllers
                             }
 
                         }
-                        Image ig = CombinImage(imag, ms);
+                        System.Drawing.Image ig = CombinImage(imag, ms);
                         fss.Close();
                         TuPanBaoCun(ig, pathErWeiMa);
+                        //生成pdf
+                        //图片
+                        //Image image = Image.GetInstance(imagePath);
+                        //cell = new PdfPCell(image, true);
+                        //table.AddCell(cell);
+                        PDF.Create(path + item.ID);
                         #endregion
 
                         //w.Write(ms.ToArray());
