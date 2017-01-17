@@ -585,9 +585,7 @@ function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
 //blurValue数表离开输入框之后触发的事件
 function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValue, selectCode) {
 
-    if (blurValue == null || blurValue == '') {
-        blurValue = 'blurValue';
-    }
+    
     //下拉框
     var ddlName = name + "_UNIT";//下拉框名
     var ddlId = ddlName + "_" + id;//下拉框ID    
@@ -620,7 +618,13 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
             htmlString.push($(selectHtml).attr("name", name).attr("id", id)[0].outerHTML);
         }
     } else {
-        htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='" + blurValue + "(this);LianDongBuQueDingDu(this);'/>");
+        if (blurValue != null && blurValue.trim() != "") {
+            htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='" + blurValue + "(this);LianDongBuQueDingDu(this);'/>");
+
+        } else {
+            htmlString.push("<input type='text' class=\"my-textbox input-width\" value='" + txtVal + "' id='" + id + "' name='" + name + "' onblur='LianDongBuQueDingDu(this);'/>");
+
+        }
     }
     if (ddlHtml != null && ddlHtml.trim() != "") {
         var AttributeValue = GetAttributeValue("LianDongDanWeiDDL");

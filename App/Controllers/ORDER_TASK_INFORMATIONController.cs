@@ -40,6 +40,11 @@ namespace Langben.App.Controllers
             ViewBag.Id = id;
             return View();
         }
+        public ActionResult ErWeiMa2(string id = "1611081523323547325feb23206e5")
+        {
+            ViewBag.Id = id;
+            return View();
+        }
 
         [HttpPut]
         [ValidateInput(false)]
