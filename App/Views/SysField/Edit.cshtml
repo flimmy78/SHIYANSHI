@@ -9,77 +9,98 @@
     修改  
 }
 
-    <fieldset>
-        <legend>
-            <input class="a2 f2" type="submit" value="修改" />
-            <input class="a2 f2" type="button" onclick="BackList('SysField')" value="返回列表" />
-        </legend>
+    
         <div class="bigdiv">
-            @Html.HiddenFor(model => model.Id )      
-            <div class="editor-label">
-                @Html.LabelFor(model => model.MyTexts)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.MyTexts)
-                @Html.ValidationMessageFor(model => model.MyTexts)
-            </div>       
-            <div class="editor-label">
-                <a class="anUnderLine" onclick="showModalOnly('ParentId','../../SysField');">
-                    @Html.LabelFor(model => model.ParentId) 
-                </a>：
-            </div>
-            <div class="editor-field">
-                <div id="checkParentId">
-                    @if(Model!=null)
-                        {
-                        if (!string.IsNullOrWhiteSpace(Model.ParentId))
-                        {
-                    <table  id="@Model.ParentId"
-                        class="deleteStyle">
-                        <tr>
-                            <td>
-                                <img  alt="删除"  title="点击删除" src="../../../Images/deleteimge.png" onclick="deleteTable('@Model.ParentId ','ParentId');"/>
-                            </td>
-                            <td>
-                                @Model.SysField2.MyTexts
-                            </td>
-                        </tr>
-                    </table>
-                     }} 
+            @Html.HiddenFor(model => model.Id)
+        
+            <div class="search-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.MyTexts)：
                 </div>
-                @Html.HiddenFor(model => model.ParentId)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.MyTables)：
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.MyTexts)
+                    @Html.ValidationMessageFor(model => model.MyTexts)
+                </div>
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.MyTables)
-                @Html.ValidationMessageFor(model => model.MyTables)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.MyColums)：
+            <div class="search-form">
+                <div class="editor-label">
+                    <a class="anUnderLine" onclick="showModalOnly('ParentId','../../SysField');">
+                        @Html.LabelFor(model => model.ParentId)
+                    </a>：
+                </div>
+                <div class="editor-field">
+                    <div id="checkParentId">
+                        @if (Model != null)
+                        {
+                            if (!string.IsNullOrWhiteSpace(Model.ParentId))
+                            {
+                        <table id="@Model.ParentId"
+                               class="deleteStyle">
+                            <tr>
+                                <td>
+                                    <img alt="删除" title="点击删除" src="../../../Images/deleteimge.png" onclick="deleteTable('@Model.ParentId ','ParentId');" />
+                                </td>
+                                <td>
+                                    @Model.SysField2.MyTexts
+                                </td>
+                            </tr>
+                        </table>
+                            }
+                        }
+                    </div>
+                    @Html.HiddenFor(model => model.ParentId)
+                </div>
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.MyColums)
-                @Html.ValidationMessageFor(model => model.MyColums)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Sort) ：
+            <div class="search-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.MyTables)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.MyTables)
+                    @Html.ValidationMessageFor(model => model.MyTables)
+                </div>
             </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(model => model.Sort, new {  onkeyup = "isInt(this)", @class="text-box single-line" })
-                @Html.ValidationMessageFor(model => model.Sort) 
+            <div class="search-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.MyColums)：
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.MyColums)
+                    @Html.ValidationMessageFor(model => model.MyColums)
+                </div>
             </div>
-            <br style="clear: both;" />
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Remark)：
+            <div class="search-form">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Sort) ：
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.Sort, new { onkeyup = "isInt(this)", @class = "text-box single-line" })
+                    @Html.ValidationMessageFor(model => model.Sort)
+                </div>
+            </div><br style="clear: both;" />
+            <div class="textarea-box" style="height:110px">
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Remark)：
+                </div>
+                <div class="editor-field">
+    @Html.TextAreaFor(model => model.Remark)
+    @Html.ValidationMessageFor(model => model.Remark)
+</div>@Html.HiddenFor(model => model.CreateTime) @Html.HiddenFor(model => model.CreatePerson)
             </div>
-            <div class="textarea-box">
-                @Html.TextAreaFor(model => model.Remark) 
-                @Html.ValidationMessageFor(model => model.Remark) 
-            </div>@Html.HiddenFor(model => model.CreateTime ) @Html.HiddenFor(model => model.CreatePerson ) 
         </div>
-    </fieldset>
+
+            <div class="clearfix"></div>
+            <div class="search-form">
+                <div class="editor-label"></div>
+                <div class="editor-field">
+
+                    <input class="a2 f2" type="submit" value="修改" />
+                    <input class="a2 f2" type="button" onclick="BackList('SysField')" value="返回列表" />
+
+                </div>
+            </div>
+
 
 
 
