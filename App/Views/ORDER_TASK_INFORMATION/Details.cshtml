@@ -474,6 +474,10 @@ s：字符串
     function dayingweituodan() {
         window.location.href = '/ORDER_TASK_INFORMATION/Show/'+"@ViewBag.Id";
     }
+    //查看委托单
+    function chakanweituodan() {
+        window.location.href = '/ORDER_TASK_INFORMATION/Edit/' + "@ViewBag.Id";
+    }
 
     //打印条码
     function dayingtiaoma() {
@@ -522,6 +526,12 @@ s：字符串
                    iconCls: 'icon-print',
                    handler: function () {
                        return dayingweituodan();
+                   }
+               }, {
+                   text: '查看委托单',
+                   iconCls: 'icon-print',
+                   handler: function () {
+                       return chakanweituodan();
                    }
                },
                {

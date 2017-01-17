@@ -1068,6 +1068,7 @@
     <Content Include="Views\UNCERTAINTYTABLE2\IndexUB.cshtml" />
     <Content Include="Views\METERING_STANDARD_DEVICE\Create2.cshtml" />
     <Content Include="Views\ORDER_TASK_INFORMATION\ErWeiMa2.cshtml" />
+    <Content Include="Views\ORDER_TASK_INFORMATION\ShowPicture.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
