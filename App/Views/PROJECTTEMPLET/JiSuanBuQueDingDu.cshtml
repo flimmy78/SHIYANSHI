@@ -187,7 +187,7 @@ else
                         </td>
                         <td align="center">
                             <input class="my-textbox input-width" type="text" name="B_Ui" id="B_Ui_1" value="" onblur="calculateB()">
-                            <input class="my-textbox " type="text" name="B_Ui_UNIT" id="B_Ui_UNIT_1" value="" style="width:40px">
+                            <input class="my-textbox " type="text" name="B_Ui_UNIT" id="B_Ui_UNIT_1" value="" style="width:40px" onblur="calculateB()">
                         </td>
                     </tr>
                 </tbody>
@@ -467,7 +467,10 @@ else
         var data = "";
         $("#tongdao_B tr:not(:first)").each(function (idx) {
             if ($(this).children().eq(5).find('input').eq(0).val() != "" && $(this).children().eq(5).find('input').eq(0).val() != undefined)
-                data += $(this).children().eq(5).find('input').eq(0).val() + ","
+                if ($(this).children().eq(5).find('input').eq(1).val() == "%")
+                    data += parseFloat($(this).children().eq(5).find('input').eq(0).val()) / 100 + ","
+                else
+                    data += $(this).children().eq(5).find('input').eq(0).val() + ","
 
         })
         if (data.lastIndexOf(",") > -1)
