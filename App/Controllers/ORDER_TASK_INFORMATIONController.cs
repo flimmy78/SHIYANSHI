@@ -185,7 +185,7 @@ namespace Langben.App.Controllers
 
                         //System.IO.BinaryWriter w = new System.IO.BinaryWriter(fs);
                         #region 二维码加字
-                        System.IO.FileStream fss = new System.IO.FileStream(Server.MapPath("~/up/模版.png"), System.IO.FileMode.OpenOrCreate);
+                        System.IO.FileStream fss = new System.IO.FileStream(Server.MapPath("~/up/moban.png"), System.IO.FileMode.OpenOrCreate);
                         int filelength = 0;
                         filelength = (int)fss.Length; //获得文件长度 
                         Byte[] image = new Byte[filelength]; //建立一个字节数组 
@@ -199,7 +199,7 @@ namespace Langben.App.Controllers
                         int w = imag.Width;
                         int h = imag.Height;
                         int y = 0;
-                        int x = 250;
+                        int x = 380;
                         for (int i = 0; i < xinghao.Length; i++)
                         {
                             if (x > w)
@@ -214,14 +214,14 @@ namespace Langben.App.Controllers
                                 {
                                     x = x + 50;
                                     y = 0;
-                                    y = y + 40;
-                                    g.DrawString(xinghao[i].ToString(), new Font("宋体", 13), Brushes.Red, new PointF(x, y));//x:值越大越靠右；y：值越小越靠上
+                                    y = y + 45;
+                                    g.DrawString(xinghao[i].ToString(), new Font("宋体", 14), Brushes.Red, new PointF(x, y));//x:值越大越靠右；y：值越小越靠上
 
                                 }
                                 else
                                 {
-                                    y = y + 40;
-                                    g.DrawString(xinghao[i].ToString(), new Font("宋体", 13), Brushes.Red, new PointF(x, y));//x:值越大越靠右；y：值越小越靠上
+                                    y = y + 45;
+                                    g.DrawString(xinghao[i].ToString(), new Font("宋体", 14), Brushes.Red, new PointF(x, y));//x:值越大越靠右；y：值越小越靠上
                                 }
                             }
 
