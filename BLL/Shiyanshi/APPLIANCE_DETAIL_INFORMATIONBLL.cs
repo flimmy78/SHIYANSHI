@@ -32,7 +32,7 @@ namespace Langben.BLL
                 var queryData = repository.GetData(db, "asc", "CREATETIME", search);//调用GetData方法从数据库中获取到相关数据      
                 if (queryData != null)
                 {
-                    queryData = queryData.Take(2).Distinct();//5表示显示5行
+                    queryData = queryData.Take(5).Distinct();//5表示显示5行
                     foreach (var item in queryData)
                     {
                         if (null == item)
