@@ -29,6 +29,17 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        public ActionResult ShowPicture(string id = "1611081523323547325feb23206e5")
+        {
+            
+            ViewBag.Id = id;
+            return View();
+        }
+        /// <summary>
+        /// 委托单页面
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Show(string id = "1611081523323547325feb23206e5")
         {
 
@@ -36,6 +47,11 @@ namespace Langben.App.Controllers
             return View();
         }
         public ActionResult ErWeiMa(string id = "1611081523323547325feb23206e5")
+        {
+            ViewBag.Id = id;
+            return View();
+        }
+        public ActionResult ErWeiMa2(string id = "1611081523323547325feb23206e5")
         {
             ViewBag.Id = id;
             return View();

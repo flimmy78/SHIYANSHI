@@ -7,7 +7,7 @@
 @using Common
 <script src="~/Scripts/jquery.edatagrid.js"></script>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+    <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     @*<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />*@
@@ -81,7 +81,6 @@
             width: 1085px;
             border: none;
         }
-
         .my-btn {
             cursor: pointer;
             font-size: 14px;
@@ -102,8 +101,19 @@
 
 <body>
     <div id="HTMLVALUE">
-        @Html.Raw(ViewBag.HTML)
+       
     </div>
+    <input type="hidden" id="hideHTMLVALUE" value="@ViewBag.HTMLVALUE" />
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
 
+            var hideHtml = $("#hideHTMLVALUE").val();
+            if (hideHtml.trim() != "") {
+                $("#HTMLVALUE").html("");
+                $("#HTMLVALUE").append(hideHtml);
+            }
+           
+        });
+    </script>
 </body>
 </html>
