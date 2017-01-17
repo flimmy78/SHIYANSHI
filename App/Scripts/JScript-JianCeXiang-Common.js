@@ -1420,7 +1420,7 @@ RuleAttributeArray = [{
                 //自动计算不确定度中的显示值属性名称或者输出实际值属性名称;量程属性名称;K属性名称;选用电阻属性名称;输出示值属性名称或者标准值属性名称;频率属性名称，如果对应的属性可以为空，但顺序不能变并且个数不能变
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
-                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;HZMY;',
+                JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;OUTPUTVALUE;READVALUE;HZMY;',
 
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
