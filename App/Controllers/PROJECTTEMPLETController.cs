@@ -763,7 +763,7 @@ namespace Langben.App.Controllers
         }
 
         /// <summary>
-        /// 直流电流输出
+        /// 直流电流输出38-1987_2_2
         /// </summary>
         /// <param name="RULEID">检测项目ID</param>
         /// <param name="SCHEMEID">方案ID</param>
