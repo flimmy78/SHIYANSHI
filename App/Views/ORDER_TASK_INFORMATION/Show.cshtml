@@ -12,6 +12,11 @@
 <head>
     @*<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />*@
     <title>委托单</title>
+    <style media="print">
+        .noprint {
+            display: none;
+        }
+    </style> 
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -191,7 +196,8 @@
 
         </p>
 
-    </div><div id="remove" class="tr mt10">
+    </div>
+    <div id="remove" class="tr mt10 noprint">
         <input id="Button3" type="button" value="重新签字" class="my-btn" onclick="return Button3_onclick()" />
         <input id="Button14" type="button" value="签字后，打印委托单，同时发送实验室" class="my-btn" onclick="return Button14_onclick()" />
     </div>
