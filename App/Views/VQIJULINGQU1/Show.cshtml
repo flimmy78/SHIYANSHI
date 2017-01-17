@@ -101,40 +101,24 @@
 
 <body>
     <div id="HTMLVALUE">
-        <div class="title_jibei" id="ACCEPT_ORGNIZATION">冀北电力有限公司计量中心</div>
+        <div class="title_jibei" id="ACCEPT_ORGNIZATION">器具报告领取单</div>
         <table class="tab" border="1px" cellpadding="0" cellspacing="0" align="center">
             <tr>
                 <td width="81" height="32">送检单位</td>
                 <td colspan="2" id="INSPECTION_ENTERPRISE">@Model.INSPECTION_ENTERPRISE</td>
                 <td width="81">单位地址</td>
                 <td colspan="2" id="INSPECTION_ENTERPRISE_ADDRESS">@Model.INSPECTION_ENTERPRISE_ADDRESS</td>
-                <td width="81">邮政编码</td>
-                <td id="INSPECTION_ENTERPRISE_POST">@Model.INSPECTION_ENTERPRISE_POST</td>
+                
             </tr>
-            <tr>
-                <td width="81" height="32">联系人</td>
-                <td colspan="2" id="CONTACTS">@Model.CONTACTS</td>
-                <td width="81">联系电话</td>
-                <td colspan="2" id="CONTACT_PHONE">@Model.CONTACT_PHONE</td>
-                <td width="81">传真</td>
-                <td id="FAX">@Model.FAX</td>
-            </tr>
+            
             <tr>
                 <td width="81" height="32">证书单位名称</td>
                 <td colspan="2" id="CERTIFICATE_ENTERPRISE">@Model.CERTIFICATE_ENTERPRISE</td>
                 <td width="81">单位地址</td>
                 <td colspan="2" id="CERTIFICATE_ENTERPRISE_ADDRESS">@Model.CERTIFICATE_ENTERPRISE_ADDRESS</td>
-                <td width="81">邮政编码</td>
-                <td id="CERTIFICATE_ENTERPRISE_POST">@Model.CERTIFICATE_ENTERPRISE_POST</td>
+                
             </tr>
-            <tr>
-                <td width="81" height="32">联系人</td>
-                <td colspan="2" id="CONTACTS2">@Model.CONTACTS2</td>
-                <td width="81">联系电话</td>
-                <td colspan="2" id="CONTACT_PHONE2">@Model.CONTACT_PHONE2</td>
-                <td width="81">传真</td>
-                <td id="FAX2">@Model.FAX2</td>
-            </tr>
+          
         </table>
         <table class="tab1" border="1px" cellpadding="0" cellspacing="0" align="center" id="qijuzhi">
             <tr>
@@ -159,7 +143,7 @@
                     <td>@item.UNDERTAKE_LABORATORYID</td>
                     <td>@item.APPLIANCE_RECIVE</td>
                     <td>@item.APPLIANCECOLLECTIONSATE</td>   
-                    <td>@item.REPORTTORECEVESTATE</td>                 
+                    <td>@((item.REPORTTORECEVESTATE=="已领取")?item.PREPARE_SCHEMEID : item.REPORTTORECEVESTATE)</td>                 
                 </tr>
             }
         </table>
@@ -183,14 +167,14 @@
         </table>
        
         <p class="beizhu" id="tongxundizi">
-
+            领取日期：@System.DateTime.Now.ToShortDateString()
         </p>
-        <div class="tr mt10">
-            <input id="Button3" type="button" value="重新签字" class="my-btn" onclick="" />
-            <input id="Button14" type="button" value="确定" class="my-btn" onclick="baocun()" />
-        </div>
+     
     </div>
-
+    <div class="tr mt10">
+        <input id="Button3" type="button" value="重新签字" class="my-btn" onclick="" />
+        <input id="Button14" type="button" value="确定" class="my-btn" onclick="baocun()" />
+    </div>
     <script type="text/javascript">
         function baocun() {
             $.ajax({
