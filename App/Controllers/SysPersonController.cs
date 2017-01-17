@@ -305,6 +305,7 @@ namespace Langben.App.Controllers
         {
             SysPerson item = m_BLL.GetById(id);
             ViewBag.OldPic = item.HDpic;
+            ViewBag.OldProvince = item.Province;
             return View(item);
         }
         /// <summary>
