@@ -190,6 +190,7 @@ namespace Langben.App.Controllers
             uplo.PREPARE_SCHEMEID = file.PREPARE_SCHEMEID;//预备方案ID
             pre.ID = file.PREPARE_SCHEMEID;//预备方案ID(修改)
             uplo.CONCLUSION = file.CONCLUSION;//结论
+            uplo.REMARK = "33_13|35_13|37_13";//添加签名位置
             bool Create = false;
             bool Edit = false;
             if (string.IsNullOrEmpty(file.ID))//判断是否为第一次进入
