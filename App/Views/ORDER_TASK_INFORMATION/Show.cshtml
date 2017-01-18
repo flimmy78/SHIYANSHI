@@ -305,9 +305,18 @@
                 success: function (data) {
                     if (data.Code == 1) {
                         window.print();//打印
-                        alert("签字成功，并成功发送实验室");
+                        $.messager.alert({
+                            title: '提示',
+                            msg: '签字成功，并成功发送实验室',
+                            icon: 'info',
+                            width: 400,
+                            top: 100,
+                            fn: function () {
+                                window.location.href = "/ORDER_TASK_INFORMATION/ErWeiMa/@ViewBag.Id";
+                            }
+                        });
 
-                        window.location.href = "/ORDER_TASK_INFORMATION/ErWeiMa/@ViewBag.Id";
+
                     }
                     else {
                         alert("签字保存失败");
