@@ -21,7 +21,7 @@
         <th width="140" align="center">读数值</th>
         <th width="140" align="center">输出实际值</th>
         <th width="140" align="center">
-            @ViewBag.canshu (%)
+          @((ViewBag.canshu == "相对误差") ? (ViewBag.canshu + "%") : ViewBag.canshu )  
         </th>
         <th align="center">
             校准结果的不确定度<br>

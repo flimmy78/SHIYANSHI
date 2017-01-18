@@ -149,12 +149,13 @@
                     <div style="font-size:16pt; margin-top:20px">请客户确认上述信息后签字：</div>
                 </td>
                 <td width="700" height="300">
-                    <div style="width:700px; height:300px; background:#eee">
+                    <div id="img" style="width:700px; height:300px; background:#eee">
                         <object id="HWPenSign"
                                 name="HWPenSign"
                                 classid="clsid:E8F5278C-0C72-4561-8F7E-CCBC3E48C2E3"
                                 width="700"
-                                height="330"></object>
+                                height="300"></object>
+                        <img id="hid" src="" style="width:700px; height:300px;"/>
                     </div>
                 </td>
             </tr>
@@ -218,18 +219,14 @@
             //初始化代码
             var res;
             res = obj.HWInitialize();
-
+            $("#hid").hidden();
         }
 
 
         function Button3_onclick() {
             obj.HWClearPenSign();
         }
-
-        function tiaoxingma() {
-            window.location.href = "/ORDER_TASK_INFORMATION/ErWeiMa/@ViewBag.Id";
-
-        }
+         
         $.ajax({
             url: '/api/ORDER_TASK_INFORMATIONApi/PostID/' + '@ViewBag.Id',
             type: "Post",
@@ -290,7 +287,7 @@
         function Button14_onclick() {
             var stream;
             //stream = obj.HWGetBase64Stream(3);
-            stream = null;
+            //stream = null;
             //正式发布的时候要去掉注释
             //if (stream=='') {
             //   alert("请签字！");
@@ -300,13 +297,22 @@
                 url: "/ORDER_TASK_INFORMATION/QianZi/@ViewBag.Id",
                 type: "Put",
                 dataType: "json",
-                data: { s: stream, HTMLVALUE: $("#HTMLVALUE").html() },
+                data: { PICTURE: stream, HTMLVALUE: $("#HTMLVALUE").html() },
                 success: function (data) {
                     if (data.Code == 1) {
                         window.print();//打印
-                        alert("签字成功，并成功发送实验室");
+                        $.messager.alert({
+                            title: '提示',
+                            msg: '签字成功，并成功发送实验室',
+                            icon: 'info',
+                            width: 400,
+                            top: 100,
+                            fn: function () {
+                                window.location.href = "/ORDER_TASK_INFORMATION/ErWeiMa/@ViewBag.Id";
+                            }
+                        });
 
-                        window.location.href = "/ORDER_TASK_INFORMATION/ErWeiMa/@ViewBag.Id";
+
                     }
                     else {
                         alert("签字保存失败");

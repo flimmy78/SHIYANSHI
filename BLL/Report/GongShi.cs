@@ -41,7 +41,7 @@ namespace Langben.BLL.Report
 
                     var ui = Math.Pow(10, -length) / 2 / Math.Sqrt(3); //被试设备分辨力ui = (10 - n / 2) /√3
                     // 最大允许误差ui=(指标1*10-6*ABS【显示值+】+指标2)/2，备注指标2的单位要换算成和【显示值+】单位一致
-                    UNCERTAINTYTABLE d = GetUNCERTAINTYTABLE(paras, data);
+                    UNCERTAINTYTABLE d = GetUNCERTAINTYTABLE(paras, data, buQueDingDu);
                     var uiMax = (Convert.ToDouble(d.INDEX1) * Math.Pow(10, -6) * Math.Abs(Convert.ToDouble(paras.ShuChuShiJiZhi))
                         + Convert.ToDouble(d.INDEX2) * Math.Pow(10, DanWeiHuanSuan(d.INDEX2UNIT, paras.ShuChuShiJiZhiDanWei))) / 2;
 
@@ -67,7 +67,7 @@ namespace Langben.BLL.Report
 
                     var ui9 = Math.Pow(10, -length9) / 2 / Math.Sqrt(3); //被试设备分辨力ui = (10 - n / 2) /√3
 
-                    UNCERTAINTYTABLE d9 = GetUNCERTAINTYTABLE(paras, data);
+                    UNCERTAINTYTABLE d9 = GetUNCERTAINTYTABLE(paras, data, buQueDingDu);
                     var uiMax9 = (Convert.ToDouble(d9.INDEX1) * Math.Pow(10, -6) * Math.Abs(Convert.ToDouble(paras.ShuChuShiJiZhi))
                         + Convert.ToDouble(d9.INDEX2) * Math.Pow(10, -6) * Convert.ToDouble(d9.ENDRANGESCOPE)) / 2;
 
@@ -89,7 +89,7 @@ namespace Langben.BLL.Report
 
                     var ui5 = Math.Pow(10, -length5) / 2 / Math.Sqrt(3); //被试设备分辨力ui = (10 - n / 2) /√3
 
-                    UNCERTAINTYTABLE d5 = GetUNCERTAINTYTABLE(paras, data);
+                    UNCERTAINTYTABLE d5 = GetUNCERTAINTYTABLE(paras, data, buQueDingDu);
                     var uiMax5 = (Convert.ToDouble(d5.INDEX1) * Math.Pow(10, -6) * Math.Abs(Convert.ToDouble(paras.ShuChuShiJiZhi))
                         + 0) / 2;
 
@@ -127,7 +127,7 @@ namespace Langben.BLL.Report
                     }
                     else
                     {
-                        UNCERTAINTYTABLE d6 = GetUNCERTAINTYTABLE(paras, data);
+                        UNCERTAINTYTABLE d6 = GetUNCERTAINTYTABLE(paras, data, buQueDingDu);
                         var uiMax6 = (Convert.ToDouble(d6.INDEX1) * Math.Pow(10, -6) * Math.Abs(Convert.ToDouble(paras.ShuChuShiJiZhi))
                             + Convert.ToDouble(d6.INDEX2) * Math.Pow(10, -6) * Convert.ToDouble(d6.ENDRANGESCOPE)) / 2;
                         return Math.Pow((Math.Pow(ui6, 2) + Math.Pow(uiMax6, 2)), 0.5) * Convert.ToDouble(paras.K);
@@ -169,7 +169,7 @@ namespace Langben.BLL.Report
                         //string str = ((decimal)zhi).ToString();
                         //paras.ShuChuShiJiZhi = str;
                         //paras.ShuChuShiJiZhiDanWei = "μV";
-                        UNCERTAINTYTABLE d8 = GetUNCERTAINTYTABLE(paras, data);
+                        UNCERTAINTYTABLE d8 = GetUNCERTAINTYTABLE(paras, data, buQueDingDu);
                         var uiMax8 = (Convert.ToDouble(d8.INDEX1) * Math.Pow(10, -6) * Math.Abs(Convert.ToDouble(paras.ShuChuShiJiZhi))
                             + Convert.ToDouble(d8.INDEX2) * Math.Pow(10, -6) * Convert.ToDouble(d8.ENDRANGESCOPE)) / 2;
                         return Math.Pow((Math.Pow(ui8, 2) + Math.Pow(uiMax8, 2) + Math.Pow(0.0000001 / Convert.ToDouble(paras.XuanYongDianZu), 2)), 0.5) * Convert.ToDouble(paras.K);
@@ -177,7 +177,7 @@ namespace Langben.BLL.Report
                     }
                     else
                     {
-                        UNCERTAINTYTABLE d8 = GetUNCERTAINTYTABLE(paras, data);
+                        UNCERTAINTYTABLE d8 = GetUNCERTAINTYTABLE(paras, data, buQueDingDu);
                         var uiMax8 = (Convert.ToDouble(d8.INDEX1) * Math.Pow(10, -6) * Math.Abs(Convert.ToDouble(paras.ShuChuShiJiZhi))
                             + Convert.ToDouble(d8.INDEX2) * Math.Pow(10, -6) * Convert.ToDouble(d8.ENDRANGESCOPE)) / 2;
                         return Math.Pow((Math.Pow(ui8, 2) + Math.Pow(uiMax8, 2)), 0.5) * Convert.ToDouble(paras.K);
@@ -191,10 +191,20 @@ namespace Langben.BLL.Report
             return result;
 
         }
-        public static UNCERTAINTYTABLE GetUNCERTAINTYTABLE(BuQueDingBuInput paras, List<UNCERTAINTYTABLE> data)
+        public static UNCERTAINTYTABLE GetUNCERTAINTYTABLE(BuQueDingBuInput paras, List<UNCERTAINTYTABLE> data,BuQueDingDu buQueDingDu)
         {
-            var liangcheng = DanWei(paras.ShuChuShiZhiDanWei, paras.ShuChuShiZhi);
+            double liangcheng = 0;
 
+            if (buQueDingDu.ShuChu=="Y")
+            {//是测量的则为量程
+                liangcheng = DanWei(paras.LiangCheng, paras.LiangChengDanWei);
+               
+            }
+            else
+            {
+                liangcheng = DanWei(paras.ShuChuShiZhiDanWei, paras.ShuChuShiZhi);
+            }
+          
             foreach (var f in data)
             {//
                 if (f.THERELATIONSHIP == ">")//量程起关系

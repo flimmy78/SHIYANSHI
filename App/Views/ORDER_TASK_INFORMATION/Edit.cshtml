@@ -104,6 +104,19 @@
     <div id="HTMLVALUE">
         @Html.Raw(ViewBag.HTML)
     </div>
+    
+    <script language="javascript" type="text/javascript">
 
+        
+
+        window.onload = function () {
+            $("#HWPenSign").remove();
+            $("#hid").attr("src", "@Html.Raw(ViewBag.Img)");
+            $("#hid").show();
+        }
+
+ 
+
+    </script>
 </body>
 </html>
