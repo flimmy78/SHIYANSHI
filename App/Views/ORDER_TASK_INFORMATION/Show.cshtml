@@ -154,7 +154,7 @@
                                 name="HWPenSign"
                                 classid="clsid:E8F5278C-0C72-4561-8F7E-CCBC3E48C2E3"
                                 width="700"
-                                height="330"></object>
+                                height="300"></object>
                         <img id="hid" src="" style="width:700px; height:300px;"/>
                     </div>
                 </td>
@@ -226,11 +226,7 @@
         function Button3_onclick() {
             obj.HWClearPenSign();
         }
-
-        function tiaoxingma() {
-            window.location.href = "/ORDER_TASK_INFORMATION/ErWeiMa/@ViewBag.Id";
-
-        }
+         
         $.ajax({
             url: '/api/ORDER_TASK_INFORMATIONApi/PostID/' + '@ViewBag.Id',
             type: "Post",

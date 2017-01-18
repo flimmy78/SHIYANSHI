@@ -158,7 +158,8 @@
                                 name="HWPenSign"
                                 classid="clsid:E8F5278C-0C72-4561-8F7E-CCBC3E48C2E3"
                                 width="700"
-                                height="330"></object>
+                                height="300"></object>
+                        <img id="hid" src="" style="width:700px; height:300px;" />
                     </div>
                 </td>
             </tr>
@@ -176,6 +177,28 @@
         <input id="Button14" type="button" value="确定" class="my-btn" onclick="baocun()" />
     </div>
     <script type="text/javascript">
+
+        var obj;
+        penwidth = 3;
+        width = 700;
+        height = 385;
+        linespace = 55;
+        lineNum = height / linespace;
+
+        window.onload = function () {
+            obj = document.getElementById("HWPenSign");
+            obj.HWSetBkColor(0xE0F8E0);
+            obj.HWSetCtlFrame(2, 0x000000);
+            obj.HWSetSeparatorLine(lineNum, 0x000000);
+            //初始化代码
+            var res;
+            res = obj.HWInitialize();
+            $("#hid").hidden();
+        }
+
+        function Button3_onclick() {
+            obj.HWClearPenSign();
+        }
         function baocun() {
             $.ajax({
                 url: "/api/VQIJULINGQU2Api/Put?baogaoid=" + '@ViewBag.Baogaoid '+ "&qijuid=" +'@ViewBag.Qijuid' + "&yemian=" + null + "",

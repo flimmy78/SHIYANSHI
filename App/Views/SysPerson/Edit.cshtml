@@ -161,6 +161,8 @@
     <input type="hidden" id="OldPic" name="OldPic" value="@(ViewBag.OldPic)" />
     <input type="hidden" id="OldProvince" name="OldProvince" value="@(ViewBag.OldProvince)" />
     <input type="hidden" id="fileUrl" value="HDpic" />
+    <script type="text/javascript" src="@Url.Content("~/Res/webuploader/js/webuploader.nolog.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/UploadFile.js")"></script>
 
 </fieldset>
 
@@ -188,8 +190,6 @@
 @section HeadContent{
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Res/webuploader/css/webuploader.css")" />
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Res/webuploader/images/style.css")" />
-    <script type="text/javascript" src="@Url.Content("~/Res/webuploader/js/webuploader.nolog.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Scripts/UploadFile.js")"></script>
 
 }
 
