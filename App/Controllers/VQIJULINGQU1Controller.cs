@@ -74,7 +74,7 @@ namespace Langben.App.Controllers
                     {
                         if (item == q.PREPARE_SCHEMEID)
                         {
-                            q.REPORTTORECEVESTATE = "已领取";
+                            q.REPORTTORECEVESTATE =q.REPORTNUMBER;
                         }
                     }
                 }
