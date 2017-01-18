@@ -61,10 +61,11 @@ namespace Langben.App.Controllers
         [ValidateInput(false)]
         public ActionResult QianZi(string id, string PICTURE, string HTMLVALUE)
         {
+            var pic = "/up/QianZi/" + id + ".png";
             if (!string.IsNullOrWhiteSpace(PICTURE))
             {
                 string path = Server.MapPath("~/up/QianZi/");
-                var pathErWeiMa = path + id + ".png";
+                var  pathErWeiMa = path + id + ".png";
                 using (System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate))
                 {
                     byte[] byt = Convert.FromBase64String(PICTURE);
@@ -77,7 +78,7 @@ namespace Langben.App.Controllers
             }
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             SIGN sign = new SIGN();
-            sign.PICTURE = PICTURE;
+            sign.PICTURE = pic;
             sign.HTMLVALUE = Server.UrlDecode(HTMLVALUE);//解码
             string currentPerson = GetCurrentPerson();
             sign.CREATETIME = DateTime.Now;
@@ -406,12 +407,19 @@ namespace Langben.App.Controllers
         /// <returns></returns> 
         [SupportFilter]
         public ActionResult Edit(string id)
+
         {
-            ORDER_TASK_INFORMATION on = m_BLL.GetById(id);
-            foreach (var item in on.SIGN)
+            ORDER_TASK_INFORMATION ont = m_BLL.GetById(id);
+            var data = (from f in ont.SIGN.AsQueryable()
+                       orderby f.CREATETIME
+                       select f).FirstOrDefault();
+            if (data!=null)
             {
-                ViewBag.HTML = item.HTMLVALUE;
+                ViewBag.HTML = data.HTMLVALUE;
+                ViewBag.Img = data.PICTURE;
             }
+                
+          
             return View();
         }
         IBLL.IORDER_TASK_INFORMATIONBLL m_BLL;
