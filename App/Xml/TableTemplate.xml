@@ -6760,7 +6760,7 @@
         </Cell>
         <Cell>
           <Code>RELATIVEERROR_UNIT</Code>
-          <ColIndex>5</ColIndex>
+          <ColIndex>6</ColIndex>
           <ColCount>0</ColCount>
           <IsMergeSameValue>N</IsMergeSameValue>
           <IsHideRowNull>N</IsHideRowNull>
@@ -6768,7 +6768,7 @@
         </Cell>
         <Cell>
           <Code>UNCERTAINTYDEGREE</Code>
-          <ColIndex>6</ColIndex>
+          <ColIndex>7</ColIndex>
           <ColCount>0</ColCount>
           <IsMergeSameValue>N</IsMergeSameValue>
           <IsHideRowNull>N</IsHideRowNull>
@@ -6776,7 +6776,7 @@
         </Cell>
         <Cell>
           <Code>UNCERTAINTYDEGREE_UNIT</Code>
-          <ColIndex>6</ColIndex>
+          <ColIndex>8</ColIndex>
           <ColCount>0</ColCount>
           <IsMergeSameValue>N</IsMergeSameValue>
           <IsHideRowNull>N</IsHideRowNull>
