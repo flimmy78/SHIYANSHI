@@ -6546,14 +6546,6 @@
           <IsHideRowNull>N</IsHideRowNull>
           <IsMergeNullValue>N</IsMergeNullValue>
         </Cell>
-        <Cell>
-          <Code>UNCERTAINTYDEGREE_UNIT</Code>
-          <ColIndex>6</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
       </CellList>
       <TableTitleList>
         <RowInfo>
@@ -6667,14 +6659,6 @@
         </Cell>
         <Cell>
           <Code>UNCERTAINTYDEGREE</Code>
-          <ColIndex>6</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>UNCERTAINTYDEGREE_UNIT</Code>
           <ColIndex>6</ColIndex>
           <ColCount>0</ColCount>
           <IsMergeSameValue>N</IsMergeSameValue>
