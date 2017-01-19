@@ -386,13 +386,12 @@
                 // async: false,
                 success: function (res) {
                     if (res.Code == 1) {
-                        $.messager.alert('操作提示', "成功！", 'info');
-                      
+                       
                         $("#flexigridData").datagrid("clearSelections");
                         window.location.href = res.Message;
                     }
                     else {
-                        $.messager.alert('操作提示', "失败！", 'error');
+                        $.messager.alert('操作提示', "没有找到！", 'error');
                     }
                 }
             })
