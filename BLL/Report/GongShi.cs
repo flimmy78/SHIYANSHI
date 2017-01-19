@@ -122,7 +122,7 @@ namespace Langben.BLL.Report
                         var uiMax6 = (Convert.ToDouble(85) * Math.Pow(10, -6) * Math.Abs(Convert.ToDouble(paras.ShuChuShiJiZhi))
                             + Convert.ToDouble(10) * Math.Pow(10, -6) * Convert.ToDouble(2)) / 2;
 
-                        return Math.Pow((Math.Pow(ui6, 2) + Math.Pow(uiMax6, 2) + Math.Pow(0.00005, 2)), 0.5) * Convert.ToDouble(paras.K);
+                        return Math.Pow((Math.Pow(ui6, 2) + Math.Pow(uiMax6, 2) + Math.Pow(0.00005 / 2, 2)), 0.5) * Convert.ToDouble(paras.K);
 
                     }
                     else
@@ -191,20 +191,20 @@ namespace Langben.BLL.Report
             return result;
 
         }
-        public static UNCERTAINTYTABLE GetUNCERTAINTYTABLE(BuQueDingBuInput paras, List<UNCERTAINTYTABLE> data,BuQueDingDu buQueDingDu)
+        public static UNCERTAINTYTABLE GetUNCERTAINTYTABLE(BuQueDingBuInput paras, List<UNCERTAINTYTABLE> data, BuQueDingDu buQueDingDu)
         {
             double liangcheng = 0;
 
-            if (buQueDingDu.ShuChu=="Y")
+            if (buQueDingDu.ShuChu == "Y")
             {//是测量的则为量程
-                liangcheng = DanWei(paras.LiangCheng, paras.LiangChengDanWei);
-               
+                liangcheng = DanWei(paras.LiangChengDanWei, paras.LiangCheng);
+
             }
             else
             {
                 liangcheng = DanWei(paras.ShuChuShiZhiDanWei, paras.ShuChuShiZhi);
             }
-          
+
             foreach (var f in data)
             {//
                 if (f.THERELATIONSHIP == ">")//量程起关系
@@ -671,9 +671,66 @@ namespace Langben.BLL.Report
 1A（安）=1000mA（毫安）=1000000μA（微安）
 nA是纳安等于0.001微安，pA 皮安，就是0.000001微安 
 1nA=0.001微安，1pA=0.000001微安 
+<option value="Ω">Ω</option>
+<option value="TΩ">TΩ</option>
+<option value="GΩ">GΩ</option> 
+<option value="MΩ">MΩ</option>  
+<option value="kΩ">kΩ</option>
+<option value="mΩ">mΩ</option>
+<option value="μΩ">μΩ</option>  
                    */
+            if (danwei.ToUpper() == "V")
+            {
+                danwei = "V";
+            }
+            else if (danwei.ToUpper() == "HZ")
+            {
+                danwei = "Hz";
+            }
+            else if (danwei.ToUpper() == "KHZ")
+            {
+                danwei = "kHz";
+            }
+            else if (danwei.ToUpper() == "MHZ")
+            {
+                danwei = "MHz";
+            }
+            else if (danwei.ToUpper() == "GHZ")
+            {
+                danwei = "GHz";
+            }
+            else if (danwei.ToUpper() == "GHZ")
+            {
+                danwei = "GHz";
+            }
+            else
+            {
+                danwei.Replace("v", "V").Replace("a", "A");
+            }
+            /*<option value="Ω">Ω</option>
+<option value="TΩ">TΩ</option>
+<option value="GΩ">GΩ</option> 
+<option value="MΩ">MΩ</option>  
+<option value="kΩ">kΩ</option>
+<option value="mΩ">mΩ</option>
+<option value="μΩ">μΩ</option>  */
             switch (danwei)
             {
+                case "μΩ":
+                    return Convert.ToDouble(result);
+                case "mΩ":
+                    return Convert.ToDouble(result) * 1000;
+                case "Ω":
+                    return Convert.ToDouble(result) * 1000 * 1000;
+                case "kΩ":
+                    return Convert.ToDouble(result) * 1000 * 1000 * 1000;
+                case "MΩ":
+                    return Convert.ToDouble(result) * 1000 * 1000 * 1000 * 1000;
+                case "GΩ":
+                    return Convert.ToDouble(result) * 1000 * 1000 * 1000 * 1000 * 1000;
+                case "TΩ":
+                    return Convert.ToDouble(result) * 1000 * 1000 * 1000 * 1000 * 1000 * 1000;
+               
                 case "Hz":
                     return Convert.ToDouble(result);
                 case "kHz":
