@@ -89,7 +89,7 @@ namespace Langben.DAL
                      .CreateObjectSet<VSHENPI>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
                     // .OrderBy("it.[AUDITTIME] " + "asc")
-                     .Where(w => REPORTSTATUSZIarr.Contains(w.REPORTSTATUSZI))
+                     .Where(w => REPORTSTATUSZIarr.Contains(w.REPORTSTATUSZI)).Distinct()
                      .AsQueryable(); 
 
         }
