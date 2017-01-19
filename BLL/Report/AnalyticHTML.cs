@@ -9,6 +9,20 @@ namespace Langben.Report
     public class AnalyticHTML
     {
 
+
+        public static HtmlAgilityPack.HtmlDocument docBuQueDingDuDiBu = new HtmlAgilityPack.HtmlDocument();
+        /// <summary>
+        /// 获取不确定度标签
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns>按照通道+节点的方式返回</returns>
+        public static List<MYData> GetBuDueDingDuDiBu(HtmlAgilityPack.HtmlDocument doc)
+        {
+
+            var buDueDingDuDiBu = new List<MYData>();
+            return buDueDingDuDiBu;
+        }
+
         public static HtmlAgilityPack.HtmlDocument docBuQueDingDu = new HtmlAgilityPack.HtmlDocument();
         /// <summary>
         /// 获取不确定度标签

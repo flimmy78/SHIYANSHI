@@ -2790,32 +2790,76 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             if (value == null)
             {
                 value = "";
-            }
-            //HSSFWorkbook workbook = null;
-            //if (targetCell != null && targetCell.Sheet != null && targetCell.Sheet.Workbook != null)
-            //{
-            //    workbook = (HSSFWorkbook)targetCell.Sheet.Workbook;
-            //}
-            HSSFRichTextString result = new HSSFRichTextString(value.Trim());
-
-           
+            }           
+            HSSFRichTextString result = new HSSFRichTextString(value.Trim());           
             if (workbook != null && value != null && value.Trim() != "" )
             {
-                #region 设置上标
-                #region 处理*10
-                if(value.IndexOf("*10")>0 || value.IndexOf("×10") > 0)
+                
+                if (value.IndexOf("|,") >= 0)
                 {
                     value = value.Replace(",", Environment.NewLine);
                     result = new HSSFRichTextString(value.Trim().Replace("|", ""));
 
+                }
+
+                #region 处理标准装置中的特殊字符（斜体）
+
+                List<string> XieLTiList = GetXieTiList();
+                if(XieLTiList!=null && XieLTiList.Count>0)
+                {                   
+                    foreach(string xt in XieLTiList)
+                    {
+                        if (value.ToUpper().IndexOf(xt.ToUpper()) >= 0)
+                        {
+                            
+                            string[] vArray = value.Trim().Split('|');
+                            int length = 0;
+                            int startIndex = 0;
+                            int endIndex = 0;
+                            foreach (string v in vArray)
+                            {
+
+                                if (v.ToUpper().IndexOf(xt) >= 0)
+                                {
+                                    startIndex = length + v.ToUpper().IndexOf(xt);
+                                    endIndex = startIndex + xt.Length;
+                                    HSSFFont superscriptX = (HSSFFont)workbook.CreateFont();
+                                    superscriptX.IsItalic = true;                                    
+                                    superscriptX.FontName = "宋体";
+                                    result.ApplyFont(startIndex, endIndex, superscriptX);
+                                    if (xt.ToUpper()=="UREL")
+                                    {
+
+                                        HSSFFont subscriptX = (HSSFFont)workbook.CreateFont();
+                                        subscriptX.TypeOffset = FontSuperScript.Sub; //下标                                     
+                                        subscriptX.FontName = "宋体";                                   
+                                        result.ApplyFont(startIndex+1, endIndex, subscriptX);
+                                    }                                    
+                                }
+                                length = length + v.Length;
+
+                            }
+                        }
+                       
+                    }
+                }
+                #endregion
+
+                #region 设置上标
+                #region 处理*10
+                if (value.IndexOf("*10") > 0 || value.IndexOf("×10") > 0)
+                {
+                    //value = value.Replace(",", Environment.NewLine);
+                    //result = new HSSFRichTextString(value.Trim().Replace("|", ""));
+
                     string[] vArray = value.Trim().Split('|');
                     int length = 0;
                     int startIndex = 0;
-                    int endIndex = 0;                    
-                    foreach(string v in vArray)
+                    int endIndex = 0;
+                    foreach (string v in vArray)
                     {
-                                               
-                        if(v.IndexOf("*10") >= 0 || value.IndexOf("×10")>0)
+
+                        if (v.IndexOf("*10") >= 0 || value.IndexOf("×10") > 0)
                         {
                             if (v.IndexOf("*10") >= 0)
                             {
@@ -2825,7 +2869,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                             {
                                 startIndex = length + v.IndexOf("×10") + 3;
                             }
-                            endIndex = length + v.Length;                            
+                            endIndex = length + v.Length;
                             HSSFFont superscript = (HSSFFont)workbook.CreateFont();
                             superscript.TypeOffset = FontSuperScript.Super;//上标
                             superscript.FontName = "宋体";
@@ -2835,12 +2879,12 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
 
                     }
                 }
-                else if(value.IndexOf("|,")>=0)
-                {
-                    value = value.Replace(",", Environment.NewLine);
-                    result = new HSSFRichTextString(value.Trim().Replace("|", ""));
-                   
-                }
+                //else if (value.IndexOf("|,") >= 0)
+                //{
+                //    value = value.Replace(",", Environment.NewLine);
+                //    result = new HSSFRichTextString(value.Trim().Replace("|", ""));
+
+                //}
                 #endregion 
                 #endregion
 
@@ -2893,14 +2937,16 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                 }
             }
             return result;
-
+             
         }
+
+
         /// <summary>
         /// 获取单元格数据及动态数据组合
         /// </summary>
         /// <param name="DongTaiShuJuList">动态数据值</param>
-        /// <param name="rowInfoList">动态数据位置</param>
-        /// <param name="sourceCell">单元格</param>
+        /// <param name="rowInfoList">动态数据位置</param>.
+        /// <param name="sourceCell">单元格</param> 
         /// <returns></returns>
         private string GetDongTaiShuJu(List<string> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, ICell sourceCell = null)
         {
@@ -3252,6 +3298,22 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             List<string> result = new List<string>();
             result.Add("有功功率测量");
             result.Add("有功功率输出");
+            return result;
+
+        }
+        /// <summary>
+        /// 获取斜体字符集,主要用于字符中含有多个的情况
+        /// </summary>
+        /// <returns></returns>
+        private List<string> GetXieTiList()
+        {
+            List<string> result = new List<string>();
+            result.Add("DCV");
+            result.Add("ACV");
+            result.Add("DCI");
+            result.Add("ACI");
+            result.Add("DCR");
+            result.Add("UREL");           
             return result;
 
         }
