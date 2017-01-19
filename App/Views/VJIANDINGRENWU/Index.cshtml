@@ -271,7 +271,7 @@
             url: '../VJIANDINGRENWU/GetData', //获取数据的url
             sortName: 'EQUIPMENT_STATUS_VALUUMN',
             sortOrder: 'asc',
-            idField: 'ISRECEIVE',
+
             rowStyler: function (value, row, index) {
                 if (row.ISRECEIVE != "是") {
                     if (row.CREATETIME != null) {
@@ -326,7 +326,7 @@
                  text: '查看原始记录',
                  iconCls: 'icon-detail',
                  handler: function () {
-                     //return getView();
+                     return getView();
                  }
              }
             ],
@@ -372,6 +372,36 @@
             $('#flexigridData').datagrid("addToolbarItem", [{ "text": "选择", "iconCls": "icon-ok", handler: function () { flexiSelect(); } }]);
         }
     });
+    //查看原始记录
+    function getView() {
+        var arr = $('#flexigridData').datagrid('getSelections');
+        if (arr.length == 1) {
+          
+            var id = arr[0].ID;
+            debugger;
+            $.ajax({
+                url: "/api/APPLIANCE_LABORATORYApi/ChaKan/" + id,
+                type: "Post",
+               
+                // async: false,
+                success: function (res) {
+                    if (res.Code == 1) {
+                        $.messager.alert('操作提示', "成功！", 'info');
+                      
+                        $("#flexigridData").datagrid("clearSelections");
+                        window.location.href = res.Message;
+                    }
+                    else {
+                        $.messager.alert('操作提示', "失败！", 'error');
+                    }
+                }
+            })
+
+        }
+        else {
+            $.messager.alert('操作提示', '请选择一条数据!', 'warning');
+        }
+    }
 
     //“查询”按钮，弹出查询框
     function flexiQuery() {
@@ -404,7 +434,11 @@
 
             }
             else {
-                if (arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.试验完成.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.待入库.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.器具已入库.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.器具已领取.ToString()") {
+                if (arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()" ||
+                    arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.试验完成.ToString()" ||
+                    arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.待入库.ToString()" ||
+                    arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.器具已入库.ToString()" ||
+                    arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.器具已领取.ToString()") {
                     return true;
                 }
                 else {

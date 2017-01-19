@@ -220,6 +220,45 @@ namespace Langben.App.Controllers
             return result;
         }
 
+        /// <summary>
+        /// 编辑集合（领取功能）
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>  
+        /// 
+        [HttpPost]
+        public Common.ClientResult.Result ChaKan(string id)
+        {
+            Common.ClientResult.Result result = new Common.ClientResult.Result();
+            string returnValue = string.Empty;
+            Common.Account account = GetCurrentAccount();
+            var data = m_BLL.GetYuanShiJILu(ref validationErrors, id, account.UNDERTAKE_LABORATORYName);
+
+            if (!string.IsNullOrWhiteSpace(data))
+            {
+                result.Code = Common.ClientCode.Succeed;
+                result.Message = data;
+                return result; //提示更新失败
+            }
+            else
+            {
+                if (validationErrors != null && validationErrors.Count > 0)
+                {
+                    validationErrors.All(a =>
+                    {
+                        returnValue += a.ErrorMessage;
+                        return true;
+                    });
+                }
+                result.Code = Common.ClientCode.Fail;
+                result.Message = Suggestion.UpdateFail + returnValue;
+                return result; //提示更新失败
+            }
+
+
+           
+
+        }
 
         /// <summary>
         /// 编辑集合（领取功能）
@@ -475,7 +514,7 @@ namespace Langben.App.Controllers
                     {
                         entity.ID = aryOne.ID;
                         if (m_BLL.EditField(ref validationErrors, entity))
-                        {                          
+                        {
                             LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具退回的Id为" + entity.ID, "器具明细信息"
                                 );//写入日志                   
                             result.Code = Common.ClientCode.Succeed;
@@ -618,7 +657,7 @@ namespace Langben.App.Controllers
         ValidationErrors validationErrors = new ValidationErrors();
 
         public APPLIANCE_LABORATORYApiController()
-            : this(new APPLIANCE_LABORATORYBLL(), new APPLIANCE_DETAIL_INFORMATIONBLL(), new ORDER_TASK_INFORMATIONBLL(), new PREPARE_SCHEMEBLL()) { }
+                    : this(new APPLIANCE_LABORATORYBLL(), new APPLIANCE_DETAIL_INFORMATIONBLL(), new ORDER_TASK_INFORMATIONBLL(), new PREPARE_SCHEMEBLL()) { }
 
         public APPLIANCE_LABORATORYApiController(APPLIANCE_LABORATORYBLL bll, APPLIANCE_DETAIL_INFORMATIONBLL bll2, ORDER_TASK_INFORMATIONBLL bll3, PREPARE_SCHEMEBLL bll4)
         {

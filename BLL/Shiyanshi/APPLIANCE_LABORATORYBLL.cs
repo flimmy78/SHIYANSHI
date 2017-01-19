@@ -11,7 +11,7 @@ namespace Langben.BLL
     /// <summary>
     /// 器具明细信息_承接实验室 
     /// </summary>
-    public partial class APPLIANCE_LABORATORYBLL :  IBLL.IAPPLIANCE_LABORATORYBLL, IDisposable
+    public partial class APPLIANCE_LABORATORYBLL : IBLL.IAPPLIANCE_LABORATORYBLL, IDisposable
     {
         /// <summary>
         /// 编辑一个器具明细信息_承接实验室(公用)
@@ -34,8 +34,30 @@ namespace Langben.BLL
             }
             return false;
         }
+        public string GetYuanShiJILu(ref ValidationErrors validationErrors, string id, string shiyanshi)
+        {
+            try
+            {
+                var data = (from f in db.APPLIANCE_LABORATORY
+                            where f.APPLIANCE_DETAIL_INFORMATIONID == id && f.UNDERTAKE_LABORATORYID == shiyanshi
+                            select f).First();
 
-        
+                var file = db.FILE_UPLOADER.Where(w => w.PREPARE_SCHEMEID == data.PREPARE_SCHEMEID && w.STATE != "已上传").OrderBy(o => o.CREATETIME).FirstOrDefault();
+                if (file!=null)
+                {
+                    return file.PATH2;
+                }
+            
+            }
+            catch (Exception ex)
+            {
+                validationErrors.Add(ex.Message);
+                ExceptionsHander.WriteExceptions(ex);
+            }
+            return string.Empty;
+        }
+
+
         /// <summary>
         /// 入库
         /// </summary>
