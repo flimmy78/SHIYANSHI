@@ -165,14 +165,17 @@ namespace Langben.BLL.Report
 
                     if (!string.IsNullOrWhiteSpace(paras.XuanYongDianZu))
                     {
-                        //var zhi = Convert.ToDouble(paras.XuanYongDianZu)* DanWei(paras.ShuChuShiJiZhiDanWei, paras.ShuChuShiJiZhi);
-                        //string str = ((decimal)zhi).ToString();
-                        //paras.ShuChuShiJiZhi = str;
-                        //paras.ShuChuShiJiZhiDanWei = "μV";
+                     //       var zhi = Convert.ToDouble(paras.XuanYongDianZu) * DanWei(paras.ShuChuShiJiZhiDanWei, paras.ShuChuShiJiZhi) * 0.001 * 0.001;
+                    var zhi = Convert.ToDouble(paras.XuanYongDianZu) * DanWei(paras.LiangChengDanWei, paras.LiangCheng) * 0.001 * 0.001;
+                        string str = (((decimal)zhi) ).ToString();
+                        paras.LiangCheng = str;
+                        paras.LiangChengDanWei = "μV";
                         UNCERTAINTYTABLE d8 = GetUNCERTAINTYTABLE(paras, data, buQueDingDu);
                         var uiMax8 = (Convert.ToDouble(d8.INDEX1) * Math.Pow(10, -6) * Math.Abs(Convert.ToDouble(paras.ShuChuShiJiZhi))
                             + Convert.ToDouble(d8.INDEX2) * Math.Pow(10, -6) * Convert.ToDouble(d8.ENDRANGESCOPE)) / 2;
-                        return Math.Pow((Math.Pow(ui8, 2) + Math.Pow(uiMax8, 2) + Math.Pow(0.0000001 / Convert.ToDouble(paras.XuanYongDianZu), 2)), 0.5) * Convert.ToDouble(paras.K);
+                        var dsf = Convert.ToDouble(paras.XuanYongDianZu);
+                        var dd = Convert.ToDecimal(0.0000001 / dsf/2);
+                        return Math.Pow((Math.Pow(ui8, 2) + Math.Pow(uiMax8, 2) + Math.Pow(Convert.ToDouble(dd), 2)), 0.5) * Convert.ToDouble(paras.K);
 
                     }
                     else
@@ -750,19 +753,19 @@ nA是纳安等于0.001微安，pA 皮安，就是0.000001微安
                 case "MV":
                     return Convert.ToDouble(result) * 1000 * 1000 * 1000 * 1000;
                 case "pA":
-                    return Convert.ToDouble(result) * 0.001 * 0.001;
-                case "nA":
-                    return Convert.ToDouble(result) * 0.001;
-                case "μA":
                     return Convert.ToDouble(result);
-                case "mA":
+                case "nA":
                     return Convert.ToDouble(result) * 1000;
-                case "A":
+                case "μA":
                     return Convert.ToDouble(result) * 1000 * 1000;
-                case "kA":
+                case "mA":
                     return Convert.ToDouble(result) * 1000 * 1000 * 1000;
-                case "MA":
+                case "A":
                     return Convert.ToDouble(result) * 1000 * 1000 * 1000 * 1000;
+                case "kA":
+                    return Convert.ToDouble(result) * 1000 * 1000 * 1000 * 1000 * 1000;
+                case "MA":
+                    return Convert.ToDouble(result) * 1000 * 1000 * 1000 * 1000 * 1000 * 1000;
                 default:
                     break;
             }
