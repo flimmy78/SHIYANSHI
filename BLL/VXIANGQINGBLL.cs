@@ -49,7 +49,7 @@ namespace Langben.BLL
         /// <returns>结果集</returns>
         public List<VXIANGQING> GetByParam(string id, int page, int rows, string order, string sort, string search, ref int total)
         {
-            IQueryable<VXIANGQING> queryData = repository.GetData(db, order, sort, search);
+            IQueryable<VXIANGQING> queryData = repository.GetData(db, order, sort, search).Where(w=>w.ORDER_TASK_INFORMATIONID==id).AsQueryable();
             total = queryData.Count();
             if (total > 0)
             {
