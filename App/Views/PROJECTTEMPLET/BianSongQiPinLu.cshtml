@@ -100,7 +100,7 @@
             f
         </td>
         <td align="center" width="60">
-            <input name="DengJi" type="text" class="my-textbox tr" value="0.0" style="width:40px" onblur="Recalculate()" id="DengJi_t_1_1">
+            <input name="DengJi" type="text" class="my-textbox tr" value="0.0" style="width:40px"  id="DengJi_t_1_1">
             级
         </td>
         <td colspan="7" style="padding:0">
@@ -309,7 +309,7 @@
             //注意多通道
             //$(obj).parents('tr:eq(0)').find('td:eq(4) input').val(YinYongWuCha($(obj).val(), $(obj).parents('tr:eq(0)').find('td:eq(2)').find('input').val()))
             yinYongWuCha(obj, "SHIJISHUCHUZHI", "ACTUALVALUE", "dianmyya", "dianmyliu", "DengJi", "RELATIVEERROR");
-
+            //Recalculate();
         }
         //离开事件，用于计算 标准输出值
         function blurBiaoZhunShuChuZhi(obj) {

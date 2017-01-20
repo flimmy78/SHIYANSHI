@@ -1380,8 +1380,11 @@ function yinYongWuCha(obj, first, second, third, fourth, fifth, gold) {
         && firstData != "" && secondData != "" && thirdData != "" && fourthData != "" && fifthData != "") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
         //引用误差=Round(（实际输出值-标准输出值）/（输出范围的最大值-输出范围的最小值）*100/等级,1)*等级
-
-        var jianfa = accMul((accDiv((accDiv(accSub(firstData, secondData), accSub(thirdData, fourthData)) * 100, fifthData)).toFixed(1)), fifthData);
+        var a=accSub(firstData, secondData);
+        var b = accSub(thirdData, fourthData);
+        var c = accDiv(a, b);
+        var d=(accDiv((c * 100), fifthData).toFixed(1));
+        var jianfa = accMul(d, fifthData);
         var data = zeroFloat(jianfa, txtPointLen);
 
 
@@ -1483,7 +1486,7 @@ function accDiv(arg1, arg2) {
     try { t2 = arg2.toString().split(".")[1].length } catch (e) { }
     with (Math) {
         r1 = Number(arg1.toString().replace(".", ""))
-        r2 = Number(arg2.toString().replace(".", ""))
+        r2 = Number(Number(arg2).toString().replace(".", ""))
         return (r1 / r2) * pow(10, t2 - t1);
     }
 }
