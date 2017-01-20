@@ -208,6 +208,35 @@
             //   alert("请签字！");
             //}
             $.ajax({
+                url: "/api/VQIJULINGQU2Api/Put?baogaoid=" + '@ViewBag.Baogaoid ' + "&qijuid=" + '@ViewBag.Qijuid' + "&yemian=" + null + "",
+                type: "Put",
+                //data: arr,
+                success: function (res) {
+                    if (res.Code == 1) {
+                        $.ajax({
+                            url: "/ORDER_TASK_INFORMATION/QianZi2/@ViewBag.Id",
+                            type: "Put",
+                            dataType: "json",
+                            data: { PICTURE: stream, HTMLVALUE: $("#HTMLVALUE").html() },
+                            success: function (data) {
+                                $.messager.alert('操作提示', "领取成功！", 'info');
+                                if (window.opener) {
+                                    window.opener.location.href = "/VQIJULINGQU1";
+
+                                    window.close();
+                                }
+                            }
+                        });
+                      
+                        //$("#flexigridData").datagrid("reload");
+                        //$("#flexigridData").datagrid("clearSelections");
+                    }
+                    else {
+                        $.messager.alert('操作提示', "领取失败！", 'error');
+                    }
+                }
+            })
+            @*$.ajax({
                 url: "/api/VQIJULINGQU2Api/Put",
                 type: "Put",
                 data: { PICTURE: stream, yemian: $("#HTMLVALUE").html(), qijuid: '@ViewBag.Qijuid', baogaoid: '@ViewBag.Baogaoid ' },
@@ -227,7 +256,7 @@
                         $.messager.alert('操作提示', "领取失败！", 'error');
                     }
                 }
-            })
+            })*@
         }
     </script>
 </body>
