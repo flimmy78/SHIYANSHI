@@ -37,11 +37,11 @@ namespace Langben.BLL
             db = entities;
         }
         /// <summary>
-        /// 根据预备方案ID获取报告列表
+        /// 根据预备方案ID获取报告
         /// </summary>
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <returns></returns>
-        public FILE_UPLOADER GetListByPREPARE_SCHEMEID(string PREPARE_SCHEMEID)
+        public FILE_UPLOADER GetEntityByPREPARE_SCHEMEID(string PREPARE_SCHEMEID)
         {
             List<FILE_UPLOADER> list = null;
 
@@ -153,7 +153,7 @@ namespace Langben.BLL
         {
             try
             {
-                DeleteByPREPARE_SCHEMEID(entity.PREPARE_SCHEMEID,entity.CREATEPERSON);
+                //DeleteByPREPARE_SCHEMEID(entity.PREPARE_SCHEMEID,entity.CREATEPERSON);
                 repository.Create(entity);
                 return true;
             }

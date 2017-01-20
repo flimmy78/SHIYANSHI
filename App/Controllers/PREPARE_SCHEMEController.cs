@@ -234,11 +234,11 @@ namespace Langben.App.Controllers
             FILE_UPLOADER fEntity = null;
             if (Type == "OriginalRecord")
             {
-                IsSuccess = reportBll.ExportOriginalRecord(ID, out Message, out fEntity);
+                IsSuccess = reportBll.ExportOriginalRecord(ID, GetCurrentPerson(), out Message, out fEntity);
             }
             else
             {
-                IsSuccess = reportBll.ExportReport(ID, out Message, out fEntity);
+                IsSuccess = reportBll.ExportReport(ID, GetCurrentPerson(), out Message, out fEntity);
             }
             if (IsSuccess)
             {

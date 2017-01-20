@@ -134,7 +134,7 @@ namespace Langben.Report
         {            
             ValidationErrors validationErrors = new ValidationErrors();            
             IBLL.IFILE_UPLOADERBLL fBll = new BLL.FILE_UPLOADERBLL();
-            FILE_UPLOADER fEntity = fBll.GetListByPREPARE_SCHEMEID(ID);
+            FILE_UPLOADER fEntity = fBll.GetEntityByPREPARE_SCHEMEID(ID);
             if(fEntity==null)
             {
                 return;
@@ -255,12 +255,12 @@ namespace Langben.Report
             FILE_UPLOADER oEntity = null;
             FILE_UPLOADER rEntity = null;
             FILE_UPLOADER Entity = null;
-            bool oSuccess = ExportOriginalRecord(ID, out Message, out oEntity);
+            bool oSuccess = ExportOriginalRecord(ID, Person, out Message, out oEntity);
             if (oSuccess)
             {
                 Entity = oEntity;
             }
-            bool rSuccess = ExportReport(ID, out Message, out rEntity);
+            bool rSuccess = ExportReport(ID, Person,out Message, out rEntity);
             if (!oSuccess && rSuccess)
             {
                 Entity = rEntity;
@@ -284,13 +284,67 @@ namespace Langben.Report
 
         }
         /// <summary>
+        /// 保存报告，存储到附件表
+        /// </summary>
+        /// <param name="rEntity">附件对象</param>
+        /// <param name="type">报告类型</param>
+        /// <returns></returns>
+        public bool SaveFuJian(FILE_UPLOADER rEntity, ExportType type)
+        {
+            if(rEntity==null || string.IsNullOrWhiteSpace(rEntity.PREPARE_SCHEMEID) || rEntity.PREPARE_SCHEMEID.Trim()=="")
+            {
+                return false;
+            }
+            ValidationErrors validationErrors = new ValidationErrors();
+            FILE_UPLOADERBLL fBll = new FILE_UPLOADERBLL();           
+            FILE_UPLOADER Entity = fBll.GetEntityByPREPARE_SCHEMEID(rEntity.PREPARE_SCHEMEID);
+            if(Entity==null)
+            {              
+                return fBll.Create(ref validationErrors, rEntity);
+            }
+            else 
+            {
+                switch(type)
+                {
+                    case ExportType.OriginalRecord_JianDing:
+                    case ExportType.OriginalRecord_XiaoZhun:
+                        Entity.PATH2 = rEntity.PATH2;
+                        Entity.FULLPATH2 = rEntity.FULLPATH2;
+                        Entity.NAME2 = rEntity.NAME2;
+                        Entity.SUFFIX2 = rEntity.SUFFIX2;
+                        Entity.STATE2 = rEntity.STATE2;
+                        Entity.REMARK2 = rEntity.REMARK2;
+                        Entity.CONCLUSION = rEntity.CONCLUSION;
+                        Entity.UPDATEPERSON = rEntity.CREATEPERSON;
+                        Entity.UPDATETIME = DateTime.Now;
+                        break;
+                    case ExportType.Report_JianDing:
+                    case ExportType.Report_XiaoZhun:
+                    case ExportType.Report_XiaoZhun_CNAS:
+                        Entity.PATH = rEntity.PATH;
+                        Entity.FULLPATH = rEntity.FULLPATH;
+                        Entity.NAME = rEntity.NAME;
+                        Entity.SUFFIX = rEntity.SUFFIX;
+                        Entity.STATE = rEntity.STATE;
+                        Entity.REMARK = rEntity.REMARK;
+                        Entity.CONCLUSION = rEntity.CONCLUSION;
+                        Entity.UPDATEPERSON = rEntity.CREATEPERSON;
+                        Entity.UPDATETIME = DateTime.Now;
+                        break;
+                }
+                return fBll.Edit(ref validationErrors, Entity);
+
+            }
+        }
+        /// <summary>
         /// 导出报告Excel
         /// </summary>
         /// <param name="ID">预备方案ID</param>
+        /// <param name="Person">操作人</param>
         /// <param name="Message">返回消息</param>
-        /// <param name="CreatePerson">创建人</param>
+        /// <param name="fEntity">返回附件实体</param>
         /// <returns></returns>
-        public bool ExportReport(string ID, out string Message, out FILE_UPLOADER fEntity)
+        public bool ExportReport(string ID, string Person,out string Message,out FILE_UPLOADER fEntity)
         {
             fEntity = new FILE_UPLOADER();
             IBLL.IPREPARE_SCHEMEBLL m_BLL = new PREPARE_SCHEMEBLL();
@@ -349,13 +403,14 @@ namespace Langben.Report
                 fEntity.SUFFIX = ".xls";
                 fEntity.PREPARE_SCHEMEID = entity.ID;
                 fEntity.STATE = "已上传";
-                //fEntity.CREATEPERSON = CreatePerson;
+                fEntity.CREATEPERSON = Person;
                 fEntity.ID = Result.GetNewId();
                 fEntity.REMARK = fRemark;
                 //ValidationErrors validationErrors = new ValidationErrors();
                 //fBll.Create(ref validationErrors, fEntity);
                 //}
-
+                FILE_UPLOADER ffEntity = fEntity;
+                SaveFuJian(ffEntity, type);//将发送审核记录报告地址改为点生成报告保存报告地址
 
                 return true;
             }
@@ -1137,13 +1192,16 @@ namespace Langben.Report
             sheet_Destination.GetRow(47).GetCell(14).SetCellValue(chuanzhen);
             #endregion
         }
-     
+
         /// <summary>
         /// 导出原始记录Excel
         /// </summary>
         /// <param name="ID">预备方案ID</param>
+        /// <param name="Person">操作人</param>
+        /// <param name="Message">返回消息</param>
+        /// <param name="fEntity">返回附件实体</param>
         /// <returns></returns>
-        public bool ExportOriginalRecord(string ID, out string Message, out FILE_UPLOADER fEntity)
+        public bool ExportOriginalRecord(string ID,string Person, out string Message, out FILE_UPLOADER fEntity)
         {
             fEntity = new FILE_UPLOADER();
             IBLL.IPREPARE_SCHEMEBLL m_BLL = new PREPARE_SCHEMEBLL();
@@ -1192,10 +1250,12 @@ namespace Langben.Report
                 fEntity.SUFFIX2 = ".xls";
                 fEntity.PREPARE_SCHEMEID = entity.ID;
                 fEntity.STATE2 = "已上传";
-                //fEntity.CREATEPERSON = CreatePerson;
+                fEntity.CREATEPERSON = Person;
                 fEntity.ID = Result.GetNewId();
                 //ValidationErrors validationErrors = new ValidationErrors();
-                //fBll.Create(ref validationErrors, fEntity);                
+                //fBll.Create(ref validationErrors, fEntity);  
+                FILE_UPLOADER ffEntity = fEntity;
+                SaveFuJian(ffEntity, type);//将发送审核记录报告地址改为点生成原始记录保存原始记录地址
                 return true;
             }
             Message = "未找到预备方案ID为【" + ID + "】的数据";
