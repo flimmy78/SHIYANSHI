@@ -27,7 +27,7 @@ namespace Langben.BLL
         /// <returns>结果集</returns>
         public List<VSHENPI> GetByParamX(string id, int page, int rows, string order, string sort, string search, ref int total)
         {
-            IQueryable<VSHENPI> queryData = repository.GetDataX(db, order, sort, search);
+           var queryData = repository.GetDataX(db, order, sort, search).ToList().AsQueryable();
             total = queryData.Count();
             if (total > 0)
             {
