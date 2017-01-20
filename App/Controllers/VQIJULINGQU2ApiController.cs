@@ -79,7 +79,7 @@ namespace Langben.App.Controllers
         /// <param name="entity"></param>
         /// <returns></returns>  
         [System.Web.Http.HttpPut]
-        public Common.ClientResult.Result Put(string baogaoid, string qijuid, string yemian)
+        public Common.ClientResult.Result Put(string baogaoid, string qijuid, string yemian, string PICTURE)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (baogaoid != null || qijuid != null )

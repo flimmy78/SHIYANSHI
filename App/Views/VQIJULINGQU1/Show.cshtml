@@ -7,7 +7,7 @@
 @using Common
 <script src="~/Scripts/jquery.edatagrid.js"></script>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     @*<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />*@
@@ -81,6 +81,7 @@
             width: 1085px;
             border: none;
         }
+
         .my-btn {
             cursor: pointer;
             font-size: 14px;
@@ -108,17 +109,17 @@
                 <td colspan="2" id="INSPECTION_ENTERPRISE">@Model.INSPECTION_ENTERPRISE</td>
                 <td width="81">单位地址</td>
                 <td colspan="2" id="INSPECTION_ENTERPRISE_ADDRESS">@Model.INSPECTION_ENTERPRISE_ADDRESS</td>
-                
+
             </tr>
-            
+
             <tr>
                 <td width="81" height="32">证书单位名称</td>
                 <td colspan="2" id="CERTIFICATE_ENTERPRISE">@Model.CERTIFICATE_ENTERPRISE</td>
                 <td width="81">单位地址</td>
                 <td colspan="2" id="CERTIFICATE_ENTERPRISE_ADDRESS">@Model.CERTIFICATE_ENTERPRISE_ADDRESS</td>
-                
+
             </tr>
-          
+
         </table>
         <table class="tab1" border="1px" cellpadding="0" cellspacing="0" align="center" id="qijuzhi">
             <tr>
@@ -142,8 +143,8 @@
                     <td>@item.ATTACHMENT</td>
                     <td>@item.UNDERTAKE_LABORATORYID</td>
                     <td>@item.APPLIANCE_RECIVE</td>
-                    <td>@item.APPLIANCECOLLECTIONSATE</td>   
-                    <td>@((item.REPORTTORECEVESTATE=="已领取")?item.PREPARE_SCHEMEID : item.REPORTTORECEVESTATE)</td>                 
+                    <td>@(string.IsNullOrWhiteSpace(item.APPLIANCECOLLECTIONSATE)?"未领取": item.APPLIANCECOLLECTIONSATE)</td>
+                    <td>@((item.REPORTTORECEVESTATE == "已领取") ? item.PREPARE_SCHEMEID : (string.IsNullOrWhiteSpace(item.REPORTTORECEVESTATE))?"未领取":item.REPORTTORECEVESTATE)</td>
                 </tr>
             }
         </table>
@@ -163,14 +164,13 @@
                     </div>
                 </td>
             </tr>
-            <tr>
-            </tr>
+            <tr></tr>
         </table>
-       
+
         <p class="beizhu" id="tongxundizi">
             领取日期：@System.DateTime.Now.ToShortDateString()
         </p>
-     
+
     </div>
     <div class="tr mt10">
         <input id="Button3" type="button" value="重新签字" class="my-btn" onclick="" />
@@ -200,10 +200,17 @@
             obj.HWClearPenSign();
         }
         function baocun() {
+            var stream;
+            //stream = obj.HWGetBase64Stream(3);
+            //stream = null;
+            //正式发布的时候要去掉注释
+            //if (stream=='') {
+            //   alert("请签字！");
+            //}
             $.ajax({
-                url: "/api/VQIJULINGQU2Api/Put?baogaoid=" + '@ViewBag.Baogaoid '+ "&qijuid=" +'@ViewBag.Qijuid' + "&yemian=" + null + "",
+                url: "/api/VQIJULINGQU2Api/Put",
                 type: "Put",
-                //data: arr,
+                data: { PICTURE: stream, yemian: $("#HTMLVALUE").html(), qijuid: '@ViewBag.Qijuid', baogaoid: '@ViewBag.Baogaoid ' },
                 success: function (res) {
                     if (res.Code == 1) {
 
