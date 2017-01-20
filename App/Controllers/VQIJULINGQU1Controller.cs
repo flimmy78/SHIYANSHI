@@ -141,6 +141,129 @@ namespace Langben.App.Controllers
             ViewBag.Qijuid = qijuid;
             return View(osi);
         }
+        public ActionResult QianZi(string baogaoid, string qijuid, string yemian, string PICTURE)
+        {
+            Common.ClientResult.Result result = new Common.ClientResult.Result();
+            if (baogaoid != null || qijuid != null)
+            {   //数据校验          
+                string currentPerson = GetCurrentPerson();
+                string returnValue = string.Empty;
+                //#region 报告领取操作
+                //if (!string.IsNullOrWhiteSpace(baogaoid))
+                //{
+                //    foreach (var item in baogaoid.Split('|'))
+                //    {
+                //        REPORTCOLLECTION rep = new REPORTCOLLECTION();//报告领取
+                //        PREPARE_SCHEME prep = new PREPARE_SCHEME();//预备方案
+                //        if (!string.IsNullOrEmpty(item))
+                //        {
+                //            rep.CREATETIME = DateTime.Now;//领取时间
+                //            rep.CREATEPERSON = currentPerson;//领取者
+                //            rep.ID = Result.GetNewId();//主键id
+                //            rep.PREPARE_SCHEMEID = item.Split('~')[0];//预备方案id
+                //            rep.REPORTTORECEVESTATE = Common.REPORTSTATUS.报告已领取.ToString();//报告领取状态
+                //            rep.RECEIVEREPORT = yemian;//领取单
+                //            prep.ID = item.Split('~')[0];
+                //            prep.REPORTSTATUS = Common.REPORTSTATUS.报告已领取.ToString();//报告领取状态
+                //            prep.REPORTSTATUSZI = Common.REPORTSTATUS.报告已领取.GetHashCode().ToString();//报告领取状态
+                //            if (m_BLL3.Create(ref validationErrors, rep) && m_BLL5.EditField(ref validationErrors, prep))
+                //            {
+                //                LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，报告领取信息的Id为" + rep.ID, "报告领取");//写入日志        
+                //                result.Code = Common.ClientCode.Succeed;
+                //                result.Message = Suggestion.InsertSucceed;
+                //            }
+                //            else
+                //            {
+                //                if (validationErrors != null && validationErrors.Count > 0)
+                //                {
+                //                    validationErrors.All(a =>
+                //                    {
+                //                        returnValue += a.ErrorMessage;
+                //                        return true;
+                //                    });
+                //                }
+                //                LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，报告领取信息的Id为" + rep.ID + "," + returnValue, "报告领取");//写入日志
+                //                result.Code = Common.ClientCode.Fail;
+                //                result.Message = Suggestion.InsertFail + returnValue;
+                //                return View(result);
+                //            }
+                //        }
+                //    }
+                //}
+                //#endregion
+                //#region 器具领取操作
+                //if (!string.IsNullOrWhiteSpace(qijuid))
+                //{
+                //    foreach (var item in qijuid.Split('|'))
+                //    {
+                //        APPLIANCECOLLECTION app = new APPLIANCECOLLECTION();//器具领取
+                //        APPLIANCE_LABORATORY appry = new APPLIANCE_LABORATORY();//器具明细信息_承接实验室
+                //        APPLIANCE_DETAIL_INFORMATION appion = new APPLIANCE_DETAIL_INFORMATION();//器具明细
+                //        if (!string.IsNullOrEmpty(item))
+                //        {
+                //            app.CREATETIME = DateTime.Now;//领取时间
+                //            app.CREATEPERSON = currentPerson;//领取者
+                //            app.ID = Result.GetNewId();//主键id
+                //            app.APPLIANCE_DETAIL_INFORMATIONID = item.Split('~')[0];//器具明细id
+                //            app.APPLIANCECOLLECTIONSATE = Common.ORDER_STATUS.器具已领取.ToString();//器具领取状态
+                //            app.RECEIVEINS = yemian;//领取单
+                //            appion.APPLIANCE_PROGRESS = null;//所在实验室
+                //            appion.ID = item.Split('~')[0];//id
+                //            if (!m_BLL6.EditField(ref validationErrors, appion))//修改器具所在实验室数据
+                //            {
+                //                LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息的Id为" + appion.ID, "器具领取");//写入日志       
+                //                result.Code = Common.ClientCode.Succeed;
+                //                result.Message = Suggestion.UpdateFail;
+                //                return View(result);
+                //            }
+
+                //            List<APPLIANCE_LABORATORY> list = m_BLL4.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item.Split('~')[0]);
+                //            foreach (var item2 in list)
+                //            {
+                //                appry.ID = item2.ID;
+                //                appry.ORDER_STATUS = Common.ORDER_STATUS.器具已领取.ToString();
+                //                appry.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.器具已领取.GetHashCode().ToString();
+                //                if (!m_BLL4.EditField(ref validationErrors, appry))
+                //                {
+                //                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息_承接实验室的Id为" + appry.ID, "器具领取");//写入日志  
+                //                    result.Code = Common.ClientCode.Succeed;
+                //                    result.Message = Suggestion.UpdateFail;
+                //                    return View(result);
+                //                }
+                //            }
+                //            if (m_BLL2.Create(ref validationErrors, app))
+                //            {
+                //                LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具领取信息的Id为" + app.ID, "器具领取");//写入日志       
+                //                result.Code = Common.ClientCode.Succeed;
+                //                result.Message = Suggestion.InsertSucceed;
+                //            }
+                //            else
+                //            {
+                //                if (validationErrors != null && validationErrors.Count > 0)
+                //                {
+                //                    validationErrors.All(a =>
+                //                    {
+                //                        returnValue += a.ErrorMessage;
+                //                        return true;
+                //                    });
+                //                }
+                //                LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具领取信息的Id为" + app.ID + "," + returnValue, "器具领取"
+                //                    );//写入日志   
+                //                result.Code = Common.ClientCode.Fail;
+                //                result.Message = Suggestion.InsertFail + returnValue;
+                //                return View(result);
+                //            }
+                //        }
+                //    }
+                //}
+                //#endregion
+                return View(result);
+            }
+            result.Code = Common.ClientCode.FindNull;
+            result.Message = Suggestion.InsertFail + "请核对输入的数据的格式";
+              
+            return View(result);
+        }
         /// <summary>
         /// 异步加载数据
         /// </summary>
@@ -188,19 +311,21 @@ namespace Langben.App.Controllers
         IBLL.IORDER_TASK_INFORMATIONBLL m_BLL3;
         IBLL.IPREPARE_SCHEMEBLL m_BLL4;
         IBLL.IVQIJULINGQU2BLL m_BLL5;
+        IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL m_BLL6;
 
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VQIJULINGQU1Controller()
-            : this(new VQIJULINGQU1BLL(), new VQIJULINGQU2BLL(), new ORDER_TASK_INFORMATIONBLL(), new PREPARE_SCHEMEBLL(), new VQIJULINGQU2BLL()) { }
+            : this(new VQIJULINGQU1BLL(), new VQIJULINGQU2BLL(), new ORDER_TASK_INFORMATIONBLL(), new PREPARE_SCHEMEBLL(), new VQIJULINGQU2BLL(), new APPLIANCE_DETAIL_INFORMATIONBLL()) { }
 
-        public VQIJULINGQU1Controller(VQIJULINGQU1BLL bll, VQIJULINGQU2BLL bll2, ORDER_TASK_INFORMATIONBLL bll3, PREPARE_SCHEMEBLL bll4, VQIJULINGQU2BLL bll5)
+        public VQIJULINGQU1Controller(VQIJULINGQU1BLL bll, VQIJULINGQU2BLL bll2, ORDER_TASK_INFORMATIONBLL bll3, PREPARE_SCHEMEBLL bll4, VQIJULINGQU2BLL bll5, APPLIANCE_DETAIL_INFORMATIONBLL bll6)
         {
+          
             m_BLL = bll;
             m_BLL2 = bll2;
             m_BLL3 = bll3;
             m_BLL4 = bll4;
-            m_BLL5 = bll5;
+            m_BLL5 = bll5; m_BLL6 = bll6;
         }
 
     }
