@@ -77,8 +77,10 @@ namespace Langben.App.Controllers
             string dizhi = file.FULLPATH.Substring(end);
             int end2 = file.FULLPATH2.LastIndexOf("\\up");
             string dizhi2 = file.FULLPATH2.Substring(end);
-            ViewBag.FULLPATH = dizhi;//证书地址
-            ViewBag.FULLPATH2 = dizhi2;//原始记录地址          
+            string x = "/";
+            string sx = @"\";
+            ViewBag.FULLPATH = dizhi.Replace(sx, x);//证书地址
+            ViewBag.FULLPATH2 = dizhi2.Replace(sx,x);//原始记录地址          
             ViewBag.NAME = file.NAME;//证书名字
             ViewBag.NAME2 = file.NAME2;//原始记录
             ViewBag.CONCLUSION = file.CONCLUSION;//结论
@@ -101,7 +103,7 @@ namespace Langben.App.Controllers
         {
             Common.Account account = GetCurrentAccount();
             int total = 0;
-            search += "DETECTERID&" + account.Name + "^";
+            search += "DETECTERID&" + account.PersonName + "^";
             search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.审核驳回.GetHashCode() + "*" + Common.REPORTSTATUS.待审核.GetHashCode() + "*" + Common.REPORTSTATUS.待批准.GetHashCode() + "";
 
             List<VSHENHE> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
