@@ -968,9 +968,7 @@
     <Content Include="Views\Shared\TempleMany.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\test.cshtml" />
     <Content Include="Template\原始记录-数据模板-数表三相.xls" />
-    <Content Include="Template\原始记录-校准.xls" />
     <Content Include="Template\原始记录-检定.xls" />
-    <Content Include="Template\校准证书-CNAS.xls" />
     <Content Include="Template\校准证书-数据模板-数表三相.xls" />
     <Content Include="Template\校准证书-空.xls" />
     <Content Include="Template\校准证书.xls" />
