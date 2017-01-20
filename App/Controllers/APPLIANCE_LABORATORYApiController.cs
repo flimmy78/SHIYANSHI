@@ -374,13 +374,14 @@ namespace Langben.App.Controllers
             APPLIANCE_LABORATORY aryTwo = null;
             if (entity != null && ModelState.IsValid)
             {   //数据校验
+                Common.Account account = GetCurrentAccount();
                 List<APPLIANCE_LABORATORY> appory = m_BLL.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(entity.APPLIANCE_DETAIL_INFORMATION.ID);
-                aryOne = appory.Find(f => f.ID == entity.ID);
+                aryOne = appory.Find(f => f.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName);//选择的器具
                 if (appory.Remove(aryOne))
                 {
                     aryTwo = appory.FirstOrDefault();
                 }
-                Common.Account account = GetCurrentAccount();
+              
                 string currentPerson = GetCurrentPerson();
                 entity.BACKTIME = DateTime.Now;
                 entity.BACKPERSON = currentPerson;
