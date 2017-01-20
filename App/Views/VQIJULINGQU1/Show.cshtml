@@ -142,8 +142,8 @@
                     <td>@item.ATTACHMENT</td>
                     <td>@item.UNDERTAKE_LABORATORYID</td>
                     <td>@item.APPLIANCE_RECIVE</td>
-                    <td>@item.APPLIANCECOLLECTIONSATE</td>   
-                    <td>@((item.REPORTTORECEVESTATE=="已领取")?item.PREPARE_SCHEMEID : item.REPORTTORECEVESTATE)</td>                 
+                    <td>@((item.APPLIANCECOLLECTIONSATE != null) ? item.APPLIANCECOLLECTIONSATE : "未领取")</td>   
+                    <td>@((item.REPORTTORECEVESTATE!=null)?item.REPORTTORECEVESTATE :"未领取")</td>                 
                 </tr>
             }
         </table>
