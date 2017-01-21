@@ -105,6 +105,11 @@ namespace Langben.App.Controllers
                 entity = new PREPARE_SCHEME();
                 result.prepare_scheme = entity;
             }
+            Account current = GetCurrentAccount();
+            if (current!=null)
+            {
+                ViewBag.ShiYanShi = current.UNDERTAKE_LABORATORYName;
+            }
             return View(result);
         }
         /// <summary>

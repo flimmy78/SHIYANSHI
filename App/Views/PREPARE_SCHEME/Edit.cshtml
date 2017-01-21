@@ -68,7 +68,90 @@
                 {
                     <input type="hidden" id="hideUNQUALIFIEDTYPE" value="@Model.prepare_scheme.UNQUALIFIEDTYPE" />
                 }
-                @Html.DropDownList("UNQUALIFIEDTYPE", Models.SysFieldModels.GetSysField("PREPARE_SCHEME", "UNQUALIFIEDTYPE"), "请选择不合格类型", new { @style = "width:60%;display:none" })                
+                @*@Html.DropDownList("UNQUALIFIEDTYPE", Models.SysFieldModels.GetSysField("PREPARE_SCHEME", "UNQUALIFIEDTYPE"), "请选择不合格类型", new { @style = "width:60%;display:none" })*@
+              @if (ViewBag.ShiYanShi == "指示仪表")
+              {
+                <select class="form-control  input-inline" id="UNQUALIFIEDTYPE" name="UNQUALIFIEDTYPE" style="width:60%;display:none">
+                    <option value="">请选择不合格类型</option>
+                    <option value="外观异常">外观异常</option>
+                    <option value="通电异常">通电异常</option>
+                    <option value="绝缘异常">绝缘异常</option>
+                    <option value="指示异常">指示异常</option>
+                    <option value="屏显异常">屏显异常</option>
+                    <option value="数据超差">数据超差</option>
+                    <option value="配件缺失">配件缺失</option>
+                    <option value="其他">其他</option>
+                </select>
+              }
+              else if (ViewBag.ShiYanShi == "数表三相" || ViewBag.ShiYanShi == "数表单相")
+              {
+                <select class="form-control  input-inline" id="UNQUALIFIEDTYPE" name="UNQUALIFIEDTYPE" style="width:60%;display:none">
+                    <option value="">请选择不合格类型</option>
+                    <option value="外观异常">外观异常</option>
+                    <option value="数据超差">数据超差</option>
+                    <option value="设备故障">设备故障</option>
+                    <option value="软件故障">软件故障</option>
+                    <option value="配件故障">配件故障</option>
+                    <option value="信息缺失">信息缺失</option>
+                    <option value="配件缺失">配件缺失</option>
+                    <option value="其他">其他</option>
+                </select>
+              }
+              else if (ViewBag.ShiYanShi == "电能")
+              {
+                <select class="form-control  input-inline" id="UNQUALIFIEDTYPE" name="UNQUALIFIEDTYPE" style="width:60%;display:none">
+                    <option value="">请选择不合格类型</option>
+                    <option value="误差超差">误差超差</option>
+                    <option value="开机异常">开机异常</option>
+                    <option value="屏显异常">屏显异常</option>
+                    <option value="配件缺失">配件缺失</option>
+                    <option value="脉冲异常">脉冲异常</option>
+                    <option value="外观异常">外观异常</option>                  
+                    <option value="其他">其他</option>
+                </select>
+              }
+              else if (ViewBag.ShiYanShi == "直流仪器")
+              {
+                <select class="form-control  input-inline" id="UNQUALIFIEDTYPE" name="UNQUALIFIEDTYPE" style="width:60%;display:none">
+                    <option value="">请选择不合格类型</option>
+                    <option value="外观异常">外观异常</option>
+                    <option value="开机异常">开机异常</option>
+                    <option value="屏显异常">屏显异常</option>
+                    <option value="配件缺失">配件缺失</option>
+                    <option value="数据超差">数据超差</option>
+                    <option value="设备故障">设备故障</option>
+                    <option value="其他">其他</option>
+                </select>
+              }
+              else if (ViewBag.ShiYanShi == "互感器")
+              {
+                <select class="form-control  input-inline" id="UNQUALIFIEDTYPE" name="UNQUALIFIEDTYPE" style="width:60%;display:none">
+                    <option value="">请选择不合格类型</option>
+                    <option value="外观异常">外观异常</option>
+                    <option value="开机异常">开机异常</option>
+                    <option value="屏显异常">屏显异常</option>
+                    <option value="配件缺失">配件缺失</option>
+                    <option value="数据超差">数据超差</option>                 
+                    <option value="其他">其他</option>
+                </select>
+              }
+              else
+              {
+                <select class="form-control  input-inline" id="UNQUALIFIEDTYPE" name="UNQUALIFIEDTYPE" style="width:60%;display:none">
+                    <option value="">请选择不合格类型</option>
+                    <option value="外观异常">外观异常</option>
+                    <option value="数据超差">数据超差</option>
+                    <option value="设备故障">设备故障</option>
+                    <option value="软件故障">软件故障</option>
+                    <option value="配件故障">配件故障</option>
+                    <option value="信息缺失">信息缺失</option>
+                    <option value="配件缺失">配件缺失</option>
+                    <option value="其他">其他</option>
+                </select>
+              }
+
+
+
             </td>
         </tr>
                 @if (Model != null && Model.prepare_scheme != null && Model.prepare_scheme.CERTIFICATE_CATEGORY == "检定")
