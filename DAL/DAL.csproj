@@ -284,6 +284,8 @@
     <Compile Include="SIGN.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="SIGNMeta.cs" />
+    <Compile Include="SIGNRepository.cs" />
     <Compile Include="STANDARDCHOICE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

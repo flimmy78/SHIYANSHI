@@ -188,6 +188,8 @@
     <Compile Include="Controllers\HomeRightController.cs" />
     <Compile Include="Controllers\PROJECTTEMPLETApiController.cs" />
     <Compile Include="Controllers\PROJECTTEMPLETController.cs" />
+    <Compile Include="Controllers\SIGNApiController.cs" />
+    <Compile Include="Controllers\SIGNController.cs" />
     <Compile Include="Controllers\STANDARDCHOICEApiController.cs" />
     <Compile Include="Controllers\STANDARDCHOICEController.cs" />
     <Compile Include="Controllers\SysAnnouncementController.cs" />
