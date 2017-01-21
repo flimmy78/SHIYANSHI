@@ -31,6 +31,23 @@ namespace Langben.BLL
             return name;
         }
         /// <summary>
+        /// 根据登录名获取真实姓名
+        /// </summary>
+        /// <param name="personName">登录名</param>
+        /// <returns></returns>
+        public string GetMyNameByName(string Name)
+        {
+            using (SysEntities db = new SysEntities())
+            {
+                var Item = db.SysPerson.FirstOrDefault(p => p.Name == Name);   
+                if(Item!=null)
+                {
+                    return Item.MyName;
+                }             
+            }
+            return null;
+        }
+        /// <summary>
         /// 验证用户名和密码是否正确
         /// </summary>
         /// <param name="userName">用户名</param>

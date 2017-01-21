@@ -663,7 +663,7 @@ namespace Langben.App.Controllers
                     }
                     try
                     {
-                        if (entity.REPORTSTATUS == Common.REPORTSTATUS.已批准.ToString())
+                        if (entity.REPORTSTATUS == Common.REPORTSTATUS.待批准.ToString() || entity.REPORTSTATUS == Common.REPORTSTATUS.已批准.ToString())
                         {
                             Langben.Report.ReportBLL rBLL = new Langben.Report.ReportBLL();
                             rBLL.AddQianMing(entity.ID);
