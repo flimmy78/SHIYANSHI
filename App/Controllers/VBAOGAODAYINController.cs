@@ -54,7 +54,10 @@ namespace Langben.App.Controllers
         {
 
             int total = 0;
-            search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.已批准.GetHashCode() + "";
+            search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.已批准.GetHashCode() + "*";
+            search +=  Common.REPORTSTATUS.报告已打印.GetHashCode() + "*";
+            search +=  Common.REPORTSTATUS.报告已领取.GetHashCode();
+
             List<VBAOGAODAYIN> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
             {

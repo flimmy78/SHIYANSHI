@@ -1508,6 +1508,7 @@
         <EntityType Name="VQIJULINGQU2">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="PREPARE_SCHEMEID" />
           </Key>
           <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="APPLIANCE_NAME" Type="varchar2" MaxLength="200" />
@@ -1522,7 +1523,7 @@
           <Property Name="ORDER_TASK_INFORMATIONID" Type="varchar2" MaxLength="36" />
           <Property Name="APPLIANCECOLLECTIONSATE" Type="varchar2" MaxLength="200" />
           <Property Name="REPORTTORECEVESTATE" Type="varchar2" MaxLength="200" />
-          <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" />
+          <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="REPORTSTATUS" Type="varchar2" MaxLength="200" />
         </EntityType>
         <!--生成过程中发现错误:
@@ -5135,6 +5136,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
         <EntityType Name="VQIJULINGQU2">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="PREPARE_SCHEMEID" />
           </Key>
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -5149,7 +5151,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="ORDER_TASK_INFORMATIONID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="APPLIANCECOLLECTIONSATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="REPORTTORECEVESTATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="PREPARE_SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="PREPARE_SCHEMEID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="REPORTSTATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VRUKU">
