@@ -91,10 +91,10 @@
                     }
             ],
             columns: [[
-					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', hidden: true, width: 259 }
-					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 259 }//委托单号
-					, { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 259 }//证书单位
-					, { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 259 }//客户特殊要求
+					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', hidden: true, width: 359 }
+					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 359 }//委托单号
+					, { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 359 }//证书单位
+					, { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 359 }//客户特殊要求
                     , {
                         field: 'aa', title: '操作记录', width: 86, formatter: function (value, row, index) {
                             return html = "<a onclick='showMyWindow(\"" + row.ID + "\");'href='#'>详情</a>";

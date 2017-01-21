@@ -108,7 +108,7 @@
             columns: [[
 					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 164, hidden: true }
 					, {
-					    field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 164, formatter: function (value, row, index) {
+					    field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 134, formatter: function (value, row, index) {
 					        
 					        var path = row.FULLPATH;
 					        var dataa = "<a iddata='" + row.ID + "' path='" + path + "' onclick='daying(this)'>" + row.REPORTNUMBER + "</a>";
@@ -117,11 +117,11 @@
 					        return dataa.replace(reg, '"');
 					    }
 					}
-					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 64 }
-					, { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 64 }
+					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 110 }
+					, { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 110 }
 					, { field: 'VERSION', title: '@Html.DisplayNameFor(model => model.VERSION)', width: 64 }
 					, { field: 'FACTORY_NUM', title: '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 64 }
-					, { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 64 }
+					, { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 110 }
 					, { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 64 }
 					, { field: 'CERTIFICATE_CATEGORY', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 64 }
 					, { field: 'QUALIFICATIONS', title: '@Html.DisplayNameFor(model => model.QUALIFICATIONS)', width: 64 }

@@ -279,7 +279,7 @@ namespace Langben.App.Controllers
         {
             search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已领取.GetHashCode() + "^" + "REPORTSTATUSZI&" + Common.REPORTSTATUS.报告已打印.GetHashCode() + "*" + Common.REPORTSTATUS.报告已领取.GetHashCode() + "";
             int total = 0;
-            List<VQIJULINGQU1> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total).Distinct().ToList();
+            List<VQIJULINGQU1> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total).ToList();
             return Json(new datagrid
             {
                 total = total,

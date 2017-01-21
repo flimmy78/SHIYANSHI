@@ -86,6 +86,10 @@ namespace Langben.App.Controllers
                 PREPARE_SCHEME prep = new PREPARE_SCHEME();
                 prep.ID = entity.PREPARE_SCHEMEID;
                 prep.PRINTSTATUS = Common.REPORTSTATUS.报告已打印.ToString();
+
+                prep.REPORTSTATUS = Common.REPORTSTATUS.报告已打印.ToString();
+                prep.REPORTSTATUSZI = Common.REPORTSTATUS.报告已打印.GetHashCode().ToString();
+
                 if (m_BLL.Create(ref validationErrors, entity)&& m_BLL2.EditField(ref validationErrors, prep))//修改预备方案数据
                 {                   
                     LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，打印报告的信息的Id为" + entity.ID, "打印报告"
