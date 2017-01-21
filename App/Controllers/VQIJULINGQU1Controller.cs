@@ -49,7 +49,11 @@ namespace Langben.App.Controllers
                     if (!string.IsNullOrWhiteSpace(item))
                     {
                         ORDER_TASK_INFORMATIONID = item.Split('~')[1];
-                        Bao.Add(item.Split('~')[0]);
+                        if (!Bao.Contains(item.Split('~')[0]))
+                        {
+                            Bao.Add(item.Split('~')[0]);
+                        }
+
                     }
                 }
             }
@@ -60,7 +64,8 @@ namespace Langben.App.Controllers
                     if (!string.IsNullOrWhiteSpace(item))
                     {
                         ORDER_TASK_INFORMATIONID = item.Split('~')[1];
-                        Qi.Add(item.Split('~')[0]);
+                        if (!Qi.Contains(item.Split('~')[0]))
+                            Qi.Add(item.Split('~')[0]);
                     }
                 }
             }
@@ -74,7 +79,7 @@ namespace Langben.App.Controllers
                     {
                         if (item == q.PREPARE_SCHEMEID)
                         {
-                            q.REPORTTORECEVESTATE =q.REPORTNUMBER;
+                            q.REPORTTORECEVESTATE = q.REPORTNUMBER;
                         }
                     }
                 }
@@ -261,7 +266,7 @@ namespace Langben.App.Controllers
             }
             result.Code = Common.ClientCode.FindNull;
             result.Message = Suggestion.InsertFail + "请核对输入的数据的格式";
-              
+
             return View(result);
         }
         /// <summary>
@@ -279,29 +284,11 @@ namespace Langben.App.Controllers
         {
             search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已领取.GetHashCode() + "^" + "REPORTSTATUSZI&" + Common.REPORTSTATUS.报告已打印.GetHashCode() + "*" + Common.REPORTSTATUS.报告已领取.GetHashCode() + "";
             int total = 0;
-            List<VQIJULINGQU1> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total).ToList();
+            var queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
             {
                 total = total,
-                rows = queryData.Select(s => new
-                {
-                    ID = s.ID
-                    ,
-                    ORDER_NUMBER = s.ORDER_NUMBER
-                    ,
-                    CERTIFICATE_ENTERPRISE = s.CERTIFICATE_ENTERPRISE
-                    ,
-                    CUSTOMER_SPECIFIC_REQUIREMENTS = s.CUSTOMER_SPECIFIC_REQUIREMENTS
-                    ,
-                    APPLIANCECOLLECTIONSATE = s.APPLIANCECOLLECTIONSATE
-                    ,
-                    CREATETIME = s.CREATETIME
-                    ,
-                    REPORTTORECEVESTATE = s.REPORTTORECEVESTATE
-
-                }
-
-                    )
+                rows = queryData
             });
         }
 
@@ -320,7 +307,7 @@ namespace Langben.App.Controllers
 
         public VQIJULINGQU1Controller(VQIJULINGQU1BLL bll, VQIJULINGQU2BLL bll2, ORDER_TASK_INFORMATIONBLL bll3, PREPARE_SCHEMEBLL bll4, VQIJULINGQU2BLL bll5, APPLIANCE_DETAIL_INFORMATIONBLL bll6)
         {
-          
+
             m_BLL = bll;
             m_BLL2 = bll2;
             m_BLL3 = bll3;
