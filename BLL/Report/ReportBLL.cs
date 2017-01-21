@@ -146,19 +146,20 @@ namespace Langben.Report
             {
                 return;
             }
-            List<string> personName = new List<string>();           
-            AccountBLL aBll = new BLL.AccountBLL();
-            //批 准 人(改为审核人)2017.1.21
-            personName.Add(entity.AUDITTEPERSON);
-            //核验员（改成审批人）2017.1.21
-            personName.Add(entity.APPROVALEPERSON);
-            //检定员（改为创建人）2017.1.21
-            personName.Add(entity.CREATEPERSON);
-            Dictionary<string, SysPerson> picList = aBll.GetPictureByName(personName);
-            if(picList==null || picList.Count==0)
-            {
-                return;
-            }
+            //List<string> personName = new List<string>();           
+            //AccountBLL aBll = new BLL.AccountBLL();
+            ////批 准 人(改为审批人)2017.1.21
+            //personName.Add(entity.APPROVALEPERSON);
+            ////核验员（改成审核人）2017.1.21
+            //personName.Add(entity.AUDITTEPERSON);
+            ////检定员（改为创建人）2017.1.21
+            //personName.Add(entity.CREATEPERSON);
+            //Dictionary<string, SysPerson> picList = aBll.GetPictureByName(personName);
+            Dictionary<string, SysPerson> picList = GetPerson(entity);
+            //if(picList==null || picList.Count==0)
+            //{
+            //    return;
+            //}
 
             // string xlsPath = System.Web.HttpContext.Current.Server.MapPath(fEntity.PATH);   
             string xlsPath = fEntity.FULLPATH;        
@@ -180,11 +181,11 @@ namespace Langben.Report
             byte[] bytes = null;
             if (fEntity.Row_PiZhunRen != -1 && fEntity.Col_PiZhunRen != -1)
             {
-                if (!string.IsNullOrWhiteSpace(entity.AUDITTEPERSON))
+                if (!string.IsNullOrWhiteSpace(entity.APPROVALEPERSON))
                 {
-                    if (picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].HDpic))
+                    if (picList!=null && picList.ContainsKey(entity.APPROVALEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.APPROVALEPERSON].HDpic))
                     {
-                        picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.AUDITTEPERSON].HDpic);
+                        picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.APPROVALEPERSON].HDpic);
                         bytes = System.IO.File.ReadAllBytes(picPath);
                         int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
                         IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
@@ -194,15 +195,14 @@ namespace Langben.Report
                         sheet_Destination.GetRow(fEntity.Row_PiZhunRen).GetCell(fEntity.Col_PiZhunRen).SetCellValue("");
 
                     }
-                    else if(picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].MyName))
+                    else if(picList!=null && picList.ContainsKey(entity.APPROVALEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.APPROVALEPERSON].MyName))
                     {
-                        sheet_Destination.GetRow(fEntity.Row_PiZhunRen).GetCell(fEntity.Col_PiZhunRen).SetCellValue(picList[entity.AUDITTEPERSON].MyName);
+                        sheet_Destination.GetRow(fEntity.Row_PiZhunRen).GetCell(fEntity.Col_PiZhunRen).SetCellValue(picList[entity.APPROVALEPERSON].MyName);
                     }
                     else
                     {
-                        sheet_Destination.GetRow(fEntity.Row_PiZhunRen).GetCell(fEntity.Col_PiZhunRen).SetCellValue(entity.AUDITTEPERSON);
+                        sheet_Destination.GetRow(fEntity.Row_PiZhunRen).GetCell(fEntity.Col_PiZhunRen).SetCellValue(entity.APPROVALEPERSON);
                     }
-
                 }
                 else
                 {
@@ -214,11 +214,11 @@ namespace Langben.Report
             #region 核验员
             if (fEntity.Row_HeYanYuan != -1 && fEntity.Col_HeYanYuan != -1)
             {
-                if (!string.IsNullOrWhiteSpace(entity.APPROVALEPERSON))
+                if (!string.IsNullOrWhiteSpace(entity.AUDITTEPERSON))
                 {
-                    if (picList.ContainsKey(entity.APPROVALEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.APPROVALEPERSON].HDpic))
+                    if (picList!=null && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].HDpic))
                     {
-                        picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.APPROVALEPERSON].HDpic);
+                        picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.AUDITTEPERSON].HDpic);
                         bytes = System.IO.File.ReadAllBytes(picPath);
                         int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
                         IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
@@ -228,13 +228,13 @@ namespace Langben.Report
                         sheet_Destination.GetRow(fEntity.Row_HeYanYuan).GetCell(fEntity.Col_HeYanYuan).SetCellValue("");
 
                     }
-                    else if(picList.ContainsKey(entity.APPROVALEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.APPROVALEPERSON].MyName))
+                    else if(picList!=null && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].MyName))
                     {
-                        sheet_Destination.GetRow(fEntity.Row_HeYanYuan).GetCell(fEntity.Col_HeYanYuan).SetCellValue(picList[entity.APPROVALEPERSON].MyName);
+                        sheet_Destination.GetRow(fEntity.Row_HeYanYuan).GetCell(fEntity.Col_HeYanYuan).SetCellValue(picList[entity.AUDITTEPERSON].MyName);
                     }
                     else
                     {
-                        sheet_Destination.GetRow(fEntity.Row_HeYanYuan).GetCell(fEntity.Col_HeYanYuan).SetCellValue(entity.APPROVALEPERSON);
+                        sheet_Destination.GetRow(fEntity.Row_HeYanYuan).GetCell(fEntity.Col_HeYanYuan).SetCellValue(entity.AUDITTEPERSON);
                     }
                 }
                 else
@@ -249,7 +249,7 @@ namespace Langben.Report
             {
                 if (!string.IsNullOrWhiteSpace(entity.CREATEPERSON))
                 {
-                    if (picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].HDpic))
+                    if (picList!=null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].HDpic))
                     {
                         picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.CREATEPERSON].HDpic);
                         bytes = System.IO.File.ReadAllBytes(picPath);
@@ -261,7 +261,7 @@ namespace Langben.Report
                         sheet_Destination.GetRow(fEntity.Row_JianDingYuan).GetCell(fEntity.Col_JianDingYuan).SetCellValue("");
 
                     }
-                    else if (picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].MyName))
+                    else if (picList!=null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].MyName))
                     {
                         sheet_Destination.GetRow(fEntity.Row_JianDingYuan).GetCell(fEntity.Col_JianDingYuan).SetCellValue(picList[entity.CREATEPERSON].MyName);
                     }
@@ -651,32 +651,53 @@ namespace Langben.Report
                 }
             }
 
-
-
-            //批 准 人（改为审批人）
-            if (entity.AUDITTEPERSON == null || entity.AUDITTEPERSON.Trim() == "")
+            Dictionary<string, SysPerson> picList = GetPerson(entity);
+            //批 准 人(改为审批人)
+            if (entity.APPROVALEPERSON == null || entity.APPROVALEPERSON.Trim() == "")
             {
                 sheet_Destination.GetRow(33).GetCell(13).SetCellValue("/");
             }
             else
             {
-                sheet_Destination.GetRow(33).GetCell(13).SetCellValue(entity.AUDITTEPERSON);
+                if (picList != null && picList.ContainsKey(entity.APPROVALEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.APPROVALEPERSON].MyName))
+                {
+                    sheet_Destination.GetRow(33).GetCell(13).SetCellValue(picList[entity.APPROVALEPERSON].MyName);
+                }
+                else
+                {
+                    sheet_Destination.GetRow(33).GetCell(13).SetCellValue(entity.APPROVALEPERSON);
+                }
             }
             fRemark = "33_13";
-            //核验员
-            if (entity.DETECTERID != null && entity.DETECTERID.Trim() != "")
+            //核验员（改成审核人）
+            if (entity.AUDITTEPERSON != null && entity.AUDITTEPERSON.Trim() != "")
             {
-                sheet_Destination.GetRow(35).GetCell(13).SetCellValue(entity.DETECTERID);
+                if (picList != null && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].MyName))
+                {
+                    sheet_Destination.GetRow(35).GetCell(13).SetCellValue(picList[entity.AUDITTEPERSON].MyName);
+                }
+                else
+                {
+                    sheet_Destination.GetRow(35).GetCell(13).SetCellValue(entity.AUDITTEPERSON);
+                }
             }
             else
             {
                 sheet_Destination.GetRow(35).GetCell(13).SetCellValue("/");
             }
             fRemark += "|35_13";
-            //检定员\校 准 员
-            if (entity.CHECKERID != null && entity.CHECKERID.Trim() != "")
+
+            //检定员（改为创建人）
+            if (entity.CREATEPERSON != null && entity.CREATEPERSON.Trim() != "")
             {
-                sheet_Destination.GetRow(37).GetCell(13).SetCellValue(entity.CHECKERID);
+                if (picList != null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].MyName))
+                {
+                    sheet_Destination.GetRow(37).GetCell(13).SetCellValue(picList[entity.CREATEPERSON].MyName);
+                }
+                else
+                {
+                    sheet_Destination.GetRow(37).GetCell(13).SetCellValue(entity.CREATEPERSON);
+                }
             }
             else
             {
@@ -825,36 +846,62 @@ namespace Langben.Report
             {
                 sheet_Destination.GetRow(27).GetCell(7).SetCellValue(entity.CALIBRATION_INSTRUCTIONS);
             }
-
+            Dictionary<string, SysPerson> picList = GetPerson(entity);
             //批 准 人(改为审批人)
-            if (entity.AUDITTEPERSON == null || entity.AUDITTEPERSON.Trim() == "")
+            if (entity.APPROVALEPERSON == null || entity.APPROVALEPERSON.Trim() == "")
             {
                 sheet_Destination.GetRow(33).GetCell(13).SetCellValue("/");
             }
             else
             {
-                sheet_Destination.GetRow(33).GetCell(13).SetCellValue(entity.AUDITTEPERSON);
+                if (picList != null && picList.ContainsKey(entity.APPROVALEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.APPROVALEPERSON].MyName))
+                {
+                    sheet_Destination.GetRow(33).GetCell(13).SetCellValue(picList[entity.APPROVALEPERSON].MyName);
+                }
+                else
+                {
+                    sheet_Destination.GetRow(33).GetCell(13).SetCellValue(entity.APPROVALEPERSON);
+                }
             }
-            fRemark = "33_13";
-            //核验员
-            if (entity.DETECTERID != null && entity.DETECTERID.Trim() != "")
+
+            fRemark = "33_13";           
+
+            //核验员（改成审核人）
+            if (entity.AUDITTEPERSON != null && entity.AUDITTEPERSON.Trim() != "")
             {
-                sheet_Destination.GetRow(35).GetCell(13).SetCellValue(entity.DETECTERID);
+                if (picList != null && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].MyName))
+                {
+                    sheet_Destination.GetRow(35).GetCell(13).SetCellValue(picList[entity.AUDITTEPERSON].MyName);
+                }
+                else
+                {
+                    sheet_Destination.GetRow(35).GetCell(13).SetCellValue(entity.AUDITTEPERSON);
+                }
             }
             else
             {
                 sheet_Destination.GetRow(35).GetCell(13).SetCellValue("/");
             }
+
             fRemark += "|35_13";
-            //检定员
-            if (entity.CHECKERID != null && entity.CHECKERID.Trim() != "")
+            
+            //检定员（改为创建人）
+            if (entity.CREATEPERSON != null && entity.CREATEPERSON.Trim() != "")
             {
-                sheet_Destination.GetRow(37).GetCell(13).SetCellValue(entity.CHECKERID);
+                if (picList != null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].MyName))
+                {
+                    sheet_Destination.GetRow(37).GetCell(13).SetCellValue(picList[entity.CREATEPERSON].MyName);
+                }
+                else
+                {
+                    sheet_Destination.GetRow(37).GetCell(13).SetCellValue(entity.CREATEPERSON);
+                }
             }
             else
             {
                 sheet_Destination.GetRow(37).GetCell(13).SetCellValue("/");
             }
+
             fRemark += "|37_13";
             //检定日期
             if (entity.CALIBRATION_DATE.HasValue)
@@ -1135,31 +1182,52 @@ namespace Langben.Report
             {
                 sheet_Destination.GetRow(27).GetCell(7).SetCellValue(entity.CALIBRATION_INSTRUCTIONS);
             }
-
+            Dictionary<string, SysPerson> picList = GetPerson(entity);
             //批 准 人(改为审批人)
-            if (entity.AUDITTEPERSON == null || entity.AUDITTEPERSON.Trim() == "")
+            if (entity.APPROVALEPERSON == null || entity.APPROVALEPERSON.Trim() == "")
             {
                 sheet_Destination.GetRow(33).GetCell(13).SetCellValue("/");
             }
             else
             {
-                sheet_Destination.GetRow(33).GetCell(13).SetCellValue(entity.AUDITTEPERSON);
+                if (picList != null && picList.ContainsKey(entity.APPROVALEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.APPROVALEPERSON].MyName))
+                {
+                    sheet_Destination.GetRow(33).GetCell(13).SetCellValue(picList[entity.APPROVALEPERSON].MyName);
+                }
+                else
+                {
+                    sheet_Destination.GetRow(33).GetCell(13).SetCellValue(entity.APPROVALEPERSON);
+                }
             }
             fRemark = "33_13";
-            //核验员
-            if (entity.DETECTERID != null && entity.DETECTERID.Trim() != "")
+            //核验员（改成审核人）
+            if (entity.AUDITTEPERSON != null && entity.AUDITTEPERSON.Trim() != "")
             {
-                sheet_Destination.GetRow(35).GetCell(13).SetCellValue(entity.DETECTERID);
+                if (picList != null && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].MyName))
+                {
+                    sheet_Destination.GetRow(35).GetCell(13).SetCellValue(picList[entity.AUDITTEPERSON].MyName);
+                }
+                else
+                {
+                    sheet_Destination.GetRow(35).GetCell(13).SetCellValue(entity.AUDITTEPERSON);
+                }
             }
             else
             {
                 sheet_Destination.GetRow(35).GetCell(13).SetCellValue("/");
             }
             fRemark += "|35_13";
-            //检定员
-            if (entity.CHECKERID != null && entity.CHECKERID.Trim() != "")
+            //检定员（改为创建人）
+            if (entity.CREATEPERSON != null && entity.CREATEPERSON.Trim() != "")
             {
-                sheet_Destination.GetRow(37).GetCell(13).SetCellValue(entity.CHECKERID);
+                if (picList != null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].MyName))
+                {
+                    sheet_Destination.GetRow(37).GetCell(13).SetCellValue(picList[entity.CREATEPERSON].MyName);
+                }
+                else
+                {
+                    sheet_Destination.GetRow(37).GetCell(13).SetCellValue(entity.CREATEPERSON);
+                }
             }
             else
             {
@@ -1797,20 +1865,37 @@ namespace Langben.Report
             }
 
             RowIndex++;
-            //检定员
-            if (entity.CHECKERID != null && entity.CHECKERID.Trim() != "")
-            {
-                sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CHECKERID);
+            Dictionary<string, SysPerson> picList = GetPerson(entity);
+            
+            //检定员(改为创建人)
+            if (entity.CREATEPERSON != null && entity.CREATEPERSON.Trim() != "")
+            {               
+                if (picList!=null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].MyName))
+                {
+                    sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(picList[entity.CREATEPERSON].MyName);
+                }
+                else
+                {
+                    sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CREATEPERSON);
+                }
             }
             else
             {
                 sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue("/");
             }
-            
-            //核验员
-            if (entity.DETECTERID != null && entity.DETECTERID.Trim() != "")
+
+            //核验员（改成审核人）
+            if (entity.AUDITTEPERSON != null && entity.AUDITTEPERSON.Trim() != "")
             {
-                sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue(entity.DETECTERID);
+
+                if (picList != null && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].MyName))
+                {
+                    sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue(picList[entity.AUDITTEPERSON].MyName);
+                }
+                else
+                {
+                    sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue(entity.AUDITTEPERSON);
+                }                   
             }
             else
             {
@@ -1883,6 +1968,29 @@ namespace Langben.Report
             //设置页面页脚
             SetHeaderAndFooter(sheet_Destination, entity);
             sheet_Destination.ForceFormulaRecalculation = true;
+        }
+        /// <summary>
+        /// 获取封皮批准人、核验员、检定员信息
+        /// </summary>
+        /// <param name="entity">预备方案对象</param>
+        /// <returns></returns>
+        private Dictionary<string, SysPerson> GetPerson(PREPARE_SCHEME entity)
+        {
+            if(entity==null)
+            {
+                return null;
+            }
+            List<string> personName = new List<string>();
+            AccountBLL aBll = new BLL.AccountBLL();
+            //批 准 人(改为审批人)2017.1.21
+            personName.Add(entity.APPROVALEPERSON);
+            //核验员（改成审核人）2017.1.21
+            personName.Add(entity.AUDITTEPERSON);
+            //检定员（改为创建人）2017.1.21
+            personName.Add(entity.CREATEPERSON);
+            Dictionary<string, SysPerson> picList = aBll.GetPictureByName(personName);
+            return picList;
+
         }
         /// <summary>
         /// 设置标准装置/计量标准器信息
