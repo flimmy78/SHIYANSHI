@@ -119,8 +119,23 @@
                 <input class="a2 f2" type="button" onclick="window.location.href = 'javascript:history.go(-1)';" value="返回" />
             </div>
         </div>
+        <input type="hidden" id="OldPic" name="OldPic" value="@(ViewBag.OldPic)" />
 </fieldset>
+<script type="text/javascript">
 
+    $(function () {
+
+
+
+        var picture = $('#OldPic').val();
+        if (picture != '') {
+            $('#showPic').attr("src", picture);
+        }
+
+         
+
+    })
+</script>
 
 @section HeadContent{
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Res/webuploader/css/webuploader.css")" />

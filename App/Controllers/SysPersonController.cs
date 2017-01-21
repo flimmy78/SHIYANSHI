@@ -226,6 +226,7 @@ namespace Langben.App.Controllers
         public ActionResult Details(string id)
         {
             SysPerson item = m_BLL.GetById(id);
+            ViewBag.OldPic = item.HDpic;
             return View(item);
 
         }
