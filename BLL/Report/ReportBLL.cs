@@ -147,14 +147,14 @@ namespace Langben.Report
                 return;
             }
             List<string> personName = new List<string>();           
-            AccountBLL aBll = new BLL.AccountBLL();           
-            //批 准 人(改为审核人)
-             personName.Add(entity.AUDITTEPERSON);
-            //核验员
-            personName.Add(entity.DETECTERID);
-            //检定员
-            personName.Add(entity.CHECKERID);
-            Dictionary<string, string> picList = aBll.GetPictureByName(personName);
+            AccountBLL aBll = new BLL.AccountBLL();
+            //批 准 人(改为审核人)2017.1.21
+            personName.Add(entity.AUDITTEPERSON);
+            //核验员（改成审批人）2017.1.21
+            personName.Add(entity.APPROVALEPERSON);
+            //检定员（改为创建人）2017.1.21
+            personName.Add(entity.CREATEPERSON);
+            Dictionary<string, SysPerson> picList = aBll.GetPictureByName(personName);
             if(picList==null || picList.Count==0)
             {
                 return;
@@ -173,64 +173,115 @@ namespace Langben.Report
                 sheetName_Destination = "通知书封皮";
             }
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
-
-            bool IsSave = false;
+         
 
             #region 批准人
             string picPath = "";
             byte[] bytes = null;
-            if (!string.IsNullOrWhiteSpace(entity.AUDITTEPERSON) && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON]) && fEntity.Row_PiZhunRen!=-1 && fEntity.Col_PiZhunRen!=-1)
+            if (fEntity.Row_PiZhunRen != -1 && fEntity.Col_PiZhunRen != -1)
             {
-                picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.AUDITTEPERSON]);
-                bytes = System.IO.File.ReadAllBytes(picPath);
-                int pictureIdx = hssfworkbook.AddPicture(bytes,PictureType.PNG);
-                IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
-                IClientAnchor anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen+3, fEntity.Row_PiZhunRen+1);
-                IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
-                //pict.Resize();
-                sheet_Destination.GetRow(fEntity.Row_PiZhunRen).GetCell(fEntity.Col_PiZhunRen).SetCellValue("");
-                IsSave = true;                
+                if (!string.IsNullOrWhiteSpace(entity.AUDITTEPERSON))
+                {
+                    if (picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].HDpic))
+                    {
+                        picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.AUDITTEPERSON].HDpic);
+                        bytes = System.IO.File.ReadAllBytes(picPath);
+                        int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
+                        IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
+                        IClientAnchor anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen + 3, fEntity.Row_PiZhunRen + 1);
+                        IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
+                        //pict.Resize();
+                        sheet_Destination.GetRow(fEntity.Row_PiZhunRen).GetCell(fEntity.Col_PiZhunRen).SetCellValue("");
 
+                    }
+                    else if(picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].MyName))
+                    {
+                        sheet_Destination.GetRow(fEntity.Row_PiZhunRen).GetCell(fEntity.Col_PiZhunRen).SetCellValue(picList[entity.AUDITTEPERSON].MyName);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(fEntity.Row_PiZhunRen).GetCell(fEntity.Col_PiZhunRen).SetCellValue(entity.AUDITTEPERSON);
+                    }
+
+                }
+                else
+                {
+                    sheet_Destination.GetRow(fEntity.Row_PiZhunRen).GetCell(fEntity.Col_PiZhunRen).SetCellValue("/");
+                }
             }
 
             #endregion
             #region 核验员
-            if (!string.IsNullOrWhiteSpace(entity.DETECTERID) && picList.ContainsKey(entity.DETECTERID) && !string.IsNullOrWhiteSpace(picList[entity.DETECTERID]) && fEntity.Row_HeYanYuan != -1 && fEntity.Col_HeYanYuan != -1)
+            if (fEntity.Row_HeYanYuan != -1 && fEntity.Col_HeYanYuan != -1)
             {
-                picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.DETECTERID]);
-                bytes = System.IO.File.ReadAllBytes(picPath);
-                int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
-                IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
-                IClientAnchor anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_HeYanYuan, fEntity.Row_HeYanYuan, fEntity.Col_HeYanYuan + 3, fEntity.Row_HeYanYuan + 1);
-                IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
-                //pict.Resize();
-                sheet_Destination.GetRow(fEntity.Row_HeYanYuan).GetCell(fEntity.Col_HeYanYuan).SetCellValue("");
-                IsSave = true;                
-
-            }
-            #endregion
-            #region 检定员/校准员
-            if (!string.IsNullOrWhiteSpace(entity.CHECKERID) &&　picList.ContainsKey(entity.CHECKERID) && !string.IsNullOrWhiteSpace(picList[entity.CHECKERID]) && fEntity.Row_JianDingYuan != -1 && fEntity.Col_JianDingYuan != -1)
-            {
-                picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.CHECKERID]);
-                bytes = System.IO.File.ReadAllBytes(picPath);
-                int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
-                IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
-                IClientAnchor anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_JianDingYuan, fEntity.Row_JianDingYuan, fEntity.Col_JianDingYuan + 3, fEntity.Row_JianDingYuan+1 );
-                IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
-                //pict.Resize();
-                sheet_Destination.GetRow(fEntity.Row_JianDingYuan).GetCell(fEntity.Col_JianDingYuan).SetCellValue("");
-                IsSave = true;                
-
-            }
-            if(IsSave)
-            {
-                using (FileStream fileWrite = new FileStream(xlsPath, FileMode.Create))
+                if (!string.IsNullOrWhiteSpace(entity.APPROVALEPERSON))
                 {
-                    hssfworkbook.Write(fileWrite);
+                    if (picList.ContainsKey(entity.APPROVALEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.APPROVALEPERSON].HDpic))
+                    {
+                        picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.APPROVALEPERSON].HDpic);
+                        bytes = System.IO.File.ReadAllBytes(picPath);
+                        int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
+                        IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
+                        IClientAnchor anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_HeYanYuan, fEntity.Row_HeYanYuan, fEntity.Col_HeYanYuan + 3, fEntity.Row_HeYanYuan + 1);
+                        IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
+                        //pict.Resize();
+                        sheet_Destination.GetRow(fEntity.Row_HeYanYuan).GetCell(fEntity.Col_HeYanYuan).SetCellValue("");
+
+                    }
+                    else if(picList.ContainsKey(entity.APPROVALEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.APPROVALEPERSON].MyName))
+                    {
+                        sheet_Destination.GetRow(fEntity.Row_HeYanYuan).GetCell(fEntity.Col_HeYanYuan).SetCellValue(picList[entity.APPROVALEPERSON].MyName);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(fEntity.Row_HeYanYuan).GetCell(fEntity.Col_HeYanYuan).SetCellValue(entity.APPROVALEPERSON);
+                    }
+                }
+                else
+                {
+                    sheet_Destination.GetRow(fEntity.Row_HeYanYuan).GetCell(fEntity.Col_HeYanYuan).SetCellValue("/");
                 }
                 
             }
+            #endregion
+            #region 检定员/校准员
+            if (fEntity.Row_JianDingYuan != -1 && fEntity.Col_JianDingYuan != -1)
+            {
+                if (!string.IsNullOrWhiteSpace(entity.CREATEPERSON))
+                {
+                    if (picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].HDpic))
+                    {
+                        picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.CREATEPERSON].HDpic);
+                        bytes = System.IO.File.ReadAllBytes(picPath);
+                        int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
+                        IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
+                        IClientAnchor anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_JianDingYuan, fEntity.Row_JianDingYuan, fEntity.Col_JianDingYuan + 3, fEntity.Row_JianDingYuan + 1);
+                        IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
+                        //pict.Resize();
+                        sheet_Destination.GetRow(fEntity.Row_JianDingYuan).GetCell(fEntity.Col_JianDingYuan).SetCellValue("");
+
+                    }
+                    else if (picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].MyName))
+                    {
+                        sheet_Destination.GetRow(fEntity.Row_JianDingYuan).GetCell(fEntity.Col_JianDingYuan).SetCellValue(picList[entity.CREATEPERSON].MyName);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(fEntity.Row_JianDingYuan).GetCell(fEntity.Col_JianDingYuan).SetCellValue(entity.CREATEPERSON);
+                    }
+                }
+                else
+                {
+                    sheet_Destination.GetRow(fEntity.Row_JianDingYuan).GetCell(fEntity.Col_JianDingYuan).SetCellValue("/");
+                }
+            }
+
+            using (FileStream fileWrite = new FileStream(xlsPath, FileMode.Create))
+            {
+                hssfworkbook.Write(fileWrite);
+            }
+                
+            
             #endregion
 
 

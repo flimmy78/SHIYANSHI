@@ -15,20 +15,19 @@ namespace Langben.BLL
         /// </summary>
         /// <param name="personName">登录名</param>
         /// <returns>Dictionary<登录名, 签字地址></returns>
-        public Dictionary<string, string> GetPictureByName(List<string> personName)
+        public Dictionary<string, SysPerson> GetPictureByName(List<string> personName)
         {
-            Dictionary<string, string> name = new Dictionary<string, string>();
+            Dictionary<string, SysPerson> name = new Dictionary<string, SysPerson>();
 
             using (SysEntities db = new SysEntities())
             {
                 var person = db.SysPerson.Where(p => (personName.Contains(p.Name))).ToList();
                 foreach (var item in person)
                 {
-                    name.Add(item.Name, item.HDpic);
+                    // name.Add(item.Name, item.HDpic);
+                    name.Add(item.Name, item);
                 }
-
             }
-
             return name;
         }
         /// <summary>
