@@ -51,6 +51,26 @@ namespace Langben.BLL
             }
             return false;
         }
+        public bool EditSTATUS2(ref ValidationErrors validationErrors, SIGN sign)
+        {
+            try
+            {
+                using (SysEntities sys=new SysEntities())
+                {
+                    sys.SIGN.Add(sign);
+                    sys.SaveChanges();
+                }
+             
+               
+                return true;
+            }
+            catch (Exception ex)
+            {
+                validationErrors.Add(ex.Message);
+                ExceptionsHander.WriteExceptions(ex);
+            }
+            return false;
+        }
 
         /// <summary>
         /// 获取委托单号
