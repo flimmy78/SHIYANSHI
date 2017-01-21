@@ -27,21 +27,41 @@ namespace Langben.BLL
         /// <returns>结果集</returns>
         public List<VRUKU> GetByParamX(string id, int page, int rows, string order, string sort, string search, ref int total)
         {
-            IQueryable<VRUKU> queryData = repository.GetDataX(db, order, sort, search);
-            total = queryData.Count();
+            var queryData = repository.GetDataX(db, order, sort, search).Distinct().ToList();
+
+            List<VRUKU> collection = new List<VRUKU>();
+          
+            foreach (var item in queryData)
+            {
+                if (string.IsNullOrWhiteSpace(item.ORDER_NUMBER))
+                {
+                    continue;
+                }
+                var c = (from f in collection
+                         where f.ORDER_NUMBER == item.ORDER_NUMBER
+                         select f).FirstOrDefault();
+                if (c == null)
+                {
+                    collection.Add(item);
+                }
+
+            }
+            total = collection.Count;
             if (total > 0)
             {
                 if (page <= 1)
                 {
-                    queryData = queryData.Take(rows);
+                    return collection.Take(rows).OrderByDescending(o => o.ID).ToList();
                 }
                 else
                 {
-                    queryData = queryData.Skip((page - 1) * rows).Take(rows);
+                    return collection.Skip((page - 1) * rows).Take(rows).OrderByDescending(o => o.ID).ToList();
                 }
-                 
+
             }
-            return queryData.ToList();
+            return collection;
+
+            
         }
 
     }
