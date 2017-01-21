@@ -25,7 +25,7 @@ namespace Langben.IBLL
         /// <param name="total">结果集的总数</param>
         /// <returns>结果集</returns>
         [OperationContract]
-        List<VQIJULINGQU1> GetByParamX(string id, int page, int rows, string order, string sort, string search, ref int total);
+        List<WeiTuoDan> GetByParamX(string id, int page, int rows, string order, string sort, string search, ref int total);
     
     }
 }

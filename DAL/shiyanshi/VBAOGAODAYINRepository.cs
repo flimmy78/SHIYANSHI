@@ -80,9 +80,13 @@ namespace Langben.DAL
           var data= ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext 
                      .CreateObjectSet<VBAOGAODAYIN>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                     .Where(w=>w.REPORTSTATUSZI==REPORTSTATUSZI)
+                    // .Where(w=>w.REPORTSTATUSZI==REPORTSTATUSZI)
                      .AsQueryable();
-            
+            if (!string.IsNullOrWhiteSpace(REPORTSTATUSZI))
+            {
+                var re = REPORTSTATUSZI.Split('*');
+                data = data.Where(m => re.Contains(m.REPORTSTATUSZI));
+            }
             if (null != startTime)
             {
                 data = data.Where(m => startTime <= m.APPROVALDATE);

@@ -189,7 +189,12 @@ namespace Langben.App.Controllers
             data.CUSTOMER_SPECIFIC_REQUIREMENTS = queryData.CUSTOMER_SPECIFIC_REQUIREMENTS;
             data.ORDER_STATUS = queryData.ORDER_STATUS;
             data.CREATETIME =  queryData.CREATETIME;
-            data.CREATEPERSON = queryData.CREATEPERSON;
+          
+            AccountBLL acc = new AccountBLL();
+            List<string> name = new List<string>();
+            name.Add(queryData.CREATEPERSON);
+            var myname = acc.GetPictureByName(name)[queryData.CREATEPERSON].MyName;
+            data.CREATEPERSON = myname;/////////
             data.UPDATETIME = queryData.UPDATETIME;
             data.UPDATEPERSON = queryData.UPDATEPERSON; 
             return data;
