@@ -56,16 +56,15 @@ namespace Langben.App.Controllers
             ViewBag.Id = id;
             return View();
         }
-
         [HttpPut]
         [ValidateInput(false)]
         public ActionResult QianZi(string id, string PICTURE, string HTMLVALUE)
         {
-            var pic = "/up/QianZi/" + id + ".png";
+            var pic = "";
             if (!string.IsNullOrWhiteSpace(PICTURE))
             {
                 string path = Server.MapPath("~/up/QianZi/");
-                var  pathErWeiMa = path + id + ".png";
+                var pathErWeiMa = path + id + ".png";
                 using (System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate))
                 {
                     byte[] byt = Convert.FromBase64String(PICTURE);
@@ -75,6 +74,7 @@ namespace Langben.App.Controllers
                     fs.Close();
                     stream.Close();
                 }
+                  pic = "/up/QianZi/" + id + ".png";
             }
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             SIGN sign = new SIGN();
@@ -89,6 +89,43 @@ namespace Langben.App.Controllers
             result.Code = Common.ClientCode.Succeed;
             result.Message = Suggestion.InsertSucceed;
 
+            return Json(result); //提示创建成功
+        }
+        [HttpPut]
+        [ValidateInput(false)]
+        public ActionResult QianZi2(string id, string PICTURE, string HTMLVALUE)
+        {
+            SIGN sign = new SIGN();
+         
+            sign.ID = Result.GetNewId();
+            var pic = "";
+            if (!string.IsNullOrWhiteSpace(PICTURE))
+            {
+                string path = Server.MapPath("~/up/QianZi/");
+                var  pathErWeiMa = path + sign.ID + ".png";
+                using (System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate))
+                {
+                    byte[] byt = Convert.FromBase64String(PICTURE);
+                    MemoryStream stream = new MemoryStream(byt);
+                    System.IO.BinaryWriter w = new System.IO.BinaryWriter(fs);
+                    w.Write(stream.ToArray());
+                    fs.Close();
+                    stream.Close();
+                }
+                pic = "/up/QianZi/" + sign.ID + ".png";
+            }
+            Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
+            
+            sign.PICTURE = pic;
+            sign.HTMLVALUE = Server.UrlDecode(HTMLVALUE);//解码
+            string currentPerson = GetCurrentPerson();
+            sign.CREATETIME = DateTime.Now;
+            sign.CREATEPERSON = currentPerson;
+          
+            sign.UPDATEPERSON = id; 
+            result.Code = Common.ClientCode.Succeed;
+            result.Message = Suggestion.InsertSucceed;
+            m_BLL.EditSTATUS2(ref validationErrors, sign);
             return Json(result); //提示创建成功
         }
         /// <summary>

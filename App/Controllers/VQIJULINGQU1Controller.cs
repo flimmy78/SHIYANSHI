@@ -142,6 +142,7 @@ namespace Langben.App.Controllers
             osi.UPDATETIME = oti.UPDATETIME;
             osi.UPDATEPERSON = oti.UPDATEPERSON;
             #endregion
+            ViewBag.Id = osi.ID;
             ViewBag.Baogaoid = baogaoid;
             ViewBag.Qijuid = qijuid;
             return View(osi);
