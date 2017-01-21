@@ -27,10 +27,11 @@ namespace Langben.App.Controllers
         public Common.ClientResult.DataResult PostData([FromBody]GetDataParam getParam)
         {
             int total = 0;
+        
             List<SIGN> queryData = m_BLL.GetByParam(null, getParam.page, getParam.rows, getParam.order, getParam.sort, getParam.search, ref total);
             var data = new Common.ClientResult.DataResult
             {
-                total = total,
+                total = 999,
                 rows = queryData.Select(s => new
                 {
                     ID = s.ID

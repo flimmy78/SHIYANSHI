@@ -1069,6 +1069,11 @@
     <Content Include="Views\METERING_STANDARD_DEVICE\Create2.cshtml" />
     <Content Include="Views\ORDER_TASK_INFORMATION\ErWeiMa2.cshtml" />
     <Content Include="Views\ORDER_TASK_INFORMATION\ShowPicture.cshtml" />
+    <Content Include="Views\SIGN\Create.cshtml" />
+    <Content Include="Views\SIGN\Details.cshtml" />
+    <Content Include="Views\SIGN\Edit.cshtml" />
+    <Content Include="Views\SIGN\Index.cshtml" />
+    <Content Include="Views\VQIJULINGQU1\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
