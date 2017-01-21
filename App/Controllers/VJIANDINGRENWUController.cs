@@ -248,6 +248,10 @@ namespace Langben.App.Controllers
                 };
 
             }
+            Langben.Report.ReportBLL rbll = new Report.ReportBLL();
+            string err = "";
+            rbll.UpdateFuJianRemark2_YuanShiJiLu(uplo.PREPARE_SCHEMEID, out err);
+
             //返回执行结果是新增还是修改并给出结论
             ViewBag.FILE_UPLOADERID = uplo.ID;
 

@@ -18,7 +18,7 @@ namespace Langben.DAL
         public string UNQUALIFIEDTYPE { get; set; }
 
         /// <summary>
-        /// 批准人行号
+        /// 报告批准人行号
         /// </summary>
         public int Row_PiZhunRen
         {
@@ -40,7 +40,7 @@ namespace Langben.DAL
             }
         }
         /// <summary>
-        /// 核验员行号
+        /// 报告核验员行号
         /// </summary>
         public int Row_HeYanYuan
         {
@@ -66,7 +66,7 @@ namespace Langben.DAL
             }
         }
         /// <summary>
-        /// 检定员/校准员行号
+        /// 报告检定员/校准员行号
         /// </summary>
         public int Row_JianDingYuan
         {
@@ -92,7 +92,7 @@ namespace Langben.DAL
             }
         }
         /// <summary>
-        /// 批准人列号
+        /// 报告批准人列号
         /// </summary>
         public int Col_PiZhunRen
         {
@@ -114,7 +114,7 @@ namespace Langben.DAL
             }
         }
         /// <summary>
-        /// 核验员列号
+        /// 报告核验员列号
         /// </summary>
         public int Col_HeYanYuan
         {
@@ -140,7 +140,7 @@ namespace Langben.DAL
             }
         }
         /// <summary>
-        /// 检定员/校准员列号
+        /// 报告检定员/校准员列号
         /// </summary>
         public int Col_JianDingYuan
         {
@@ -165,6 +165,105 @@ namespace Langben.DAL
                 return index;
             }
         }
+
+        #region 原始记录
+        /// <summary>
+        /// 原始记录检定员/校准员行号
+        /// </summary>
+        public int Row_JianDingYuan_YuanShiJiLu
+        {
+            get
+            {
+                int index = -1;
+                if (!string.IsNullOrWhiteSpace(REMARK2) && REMARK2.Trim() != "" && REMARK2.Split('|')[0].Split('_').Length >= 2)
+                {
+                    try
+                    {
+                        index = Convert.ToInt32(REMARK2.Split('|')[0].Split('_')[0]);
+                    }
+                    catch
+                    {
+
+                    }
+                }               
+                return index;
+            }
+        }
+        /// <summary>
+        /// 原始记录检定员/校准员列号
+        /// </summary>
+        public int Col_JianDingYuan_YuanShiJiLu
+        {
+            get
+            {
+                int index = -1;
+                if (!string.IsNullOrWhiteSpace(REMARK2) && REMARK2.Trim() != "" && REMARK2.Split('|')[0].Split('_').Length >= 2)
+                {
+                    try
+                    {
+                        index = Convert.ToInt32(REMARK2.Split('|')[0].Split('_')[1]);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                return index;
+            }
+        }
+        /// <summary>
+        /// 原始记录核验员行号
+        /// </summary>
+        public int Row_HeYanYuan_YuanShiJiLu
+        {
+            get
+            {
+                int index = -1;
+                if (!string.IsNullOrWhiteSpace(REMARK2) && REMARK2.Trim() != "" && REMARK2.Split('|').Length >= 2 && REMARK2.Split('|')[1].Split('_').Length >= 2)
+                {
+                    try
+                    {
+                        index = Convert.ToInt32(REMARK2.Split('|')[1].Split('_')[0]);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                if (index == -1 && Row_JianDingYuan_YuanShiJiLu != -1)
+                {
+                    index = Row_JianDingYuan_YuanShiJiLu;
+                }
+                return index;
+            }
+        }
+        /// <summary>
+        /// 原始记录核验员列号
+        /// </summary>
+        public int Col_HeYanYuan_YuanShiJiLu
+        {
+            get
+            {
+                int index = -1;
+                if (!string.IsNullOrWhiteSpace(REMARK2) && REMARK2.Trim() != "" && REMARK2.Split('|').Length >= 2 && REMARK2.Split('|')[1].Split('_').Length >= 2)
+                {
+                    try
+                    {
+                        index = Convert.ToInt32(REMARK2.Split('|')[1].Split('_')[1]);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                if (index == -1 && Col_JianDingYuan_YuanShiJiLu != -1)
+                {
+                    index = Col_JianDingYuan_YuanShiJiLu + 18;
+                }
+                return index;
+            }
+        }
+        #endregion 
         #endregion
 
     }
