@@ -129,16 +129,34 @@
         //计算显示值  绝对误差
         function jueDuiWuChaXianShiZhi(obj) {
 
-            jueDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+            jueDuiWuCha(obj, "SHIJISHUCHUZHI", "READVALUE", "RELATIVEERROR");
         }
+        var type=@ViewBag.canshu;
         //计算显示值
         function resetBiaoZhunZhi(obj) {
-            xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+           
+            if (type == "输出")
+               {
+                xiangDuiWuCha(obj, "SHIJISHUCHUZHI", "READVALUE", "RELATIVEERROR");
+               }
+               else
+               {
+                xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+               }
+           
 
         }
         //计算标准值
         function resetXianShiZhi(obj) {
-            xiangDuiWuCha(obj, "SHIJISHUCHUZHI", "READVALUE", "RELATIVEERROR");
+          
+            if (type == "输出")
+            {
+                xiangDuiWuCha(obj, "SHIJISHUCHUZHI", "READVALUE", "RELATIVEERROR");
+            }
+            else
+            {
+                xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+            }
         }
 
         //离开事件，用于计算
