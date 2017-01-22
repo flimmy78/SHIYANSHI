@@ -127,7 +127,7 @@ namespace Langben.App.Controllers
                         ORDER_STATUS_NAME = item2.UNDERTAKE_LABORATORYID + item2.ORDER_STATUS;
                       
                     }
-                    UNDERTAKE_LABORATORYID = item2.UNDERTAKE_LABORATORYID;
+                    UNDERTAKE_LABORATORYID +=","+ item2.UNDERTAKE_LABORATORYID;
                    
                 }
                 if (list.Count>1)

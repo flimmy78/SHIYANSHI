@@ -142,7 +142,7 @@
                     }
                      , {
                          field: 'REPORTTORECEVESTATE', title: '报告领取', width: 191, formatter: function (value, row, index) {
-                             if (row.REPORTTORECEVESTATE == "报告已领取") {
+                             if (row.REPORTTORECEVESTATE == "报告已领取" || row.REPORTTORECEVESTATE == "@Common.REPORTSTATUS.报告已回收.ToString()") {
                                  //return "<input id='baogao' type='checkbox' name='baogao' value='" + row.PREPARE_SCHEMEID + "#" + row.ORDER_TASK_INFORMATIONID + "' checked='checked' disabled='disabled'/><label>" + row.REPORTNUMBER + "</label>";
                                  return "已领取";
                              }
@@ -268,11 +268,11 @@
                         if (b[i].split('~')[1] != z) {
                             $.messager.alert('操作提示', '请选择同一委托单下的数据!', 'warning');
                             return false;
-                        }                        
+                        }
                     }
                 }
             }
-            var fulls = "left=0,screenX=0,top=0,screenY=0,scrollbars=1";    //定义弹出窗口的参数  
+            var fulls = "left=0,screenX=0,top=0,screenY=0,scrollbars=1";    //定义弹出窗口的参数
             if (window.screen) {
                 var ah = screen.availHeight - 30;
                 var aw = screen.availWidth - 10;
@@ -282,14 +282,14 @@
                 fulls += ",innerWidth=" + aw;
                 fulls += ",resizable"
             } else {
-                fulls += ",resizable"; // 对于不支持screen属性的浏览器，可以手工进行最大化。 manually  
+                fulls += ",resizable"; // 对于不支持screen属性的浏览器，可以手工进行最大化。 manually
             }
 
 
             WindowObjectReference = window.open('/VQIJULINGQU1/Show/?baogaoid=' + baogao + "&qijuid=" + qiju,
 "签字",
 fulls);
-             
+
         } else {
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
         }
