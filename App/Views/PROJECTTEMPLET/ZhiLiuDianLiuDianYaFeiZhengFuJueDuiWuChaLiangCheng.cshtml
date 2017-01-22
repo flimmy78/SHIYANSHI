@@ -99,7 +99,7 @@
 
 
                 //标准值 增加下拉框单位A
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "@((ViewBag.wucha == "绝对误差") ? "jueDuiWuChaBiaoZhunZhi" : "resetBiaoZhunZhi")"));
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "@((ViewBag.wucha == "绝对误差") ? "jueDuiWuChaXianShiZhi" : "resetBiaoZhunZhi")"));
 
                 //显示值
                 htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "", '', "@((ViewBag.wucha == "绝对误差") ? "jueDuiWuChaXianShiZhi" : "resetXianShiZhi")"));
@@ -131,7 +131,7 @@
 
             jueDuiWuCha(obj, "SHIJISHUCHUZHI", "READVALUE", "RELATIVEERROR");
         }
-        var type=@ViewBag.canshu;
+        var type='@ViewBag.canshu';
         //计算显示值
         function resetBiaoZhunZhi(obj) {
            
