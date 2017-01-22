@@ -102,7 +102,7 @@
                 htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "@((ViewBag.wucha == "绝对误差") ? "jueDuiWuChaXianShiZhi" : "resetBiaoZhunZhi")"));
 
                 //显示值
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "", '', "@((ViewBag.wucha == "绝对误差") ? "jueDuiWuChaXianShiZhi" : "resetXianShiZhi")"));
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "", '', "@((ViewBag.wucha == "绝对误差") ? "jueDuiWuChaXianShiZhi" : "resetBiaoZhunZhi")"));
 
                 //相对误差
                 htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', ""));
@@ -137,27 +137,16 @@
            
             if (type == "输出")
                {
-                xiangDuiWuCha(obj, "SHIJISHUCHUZHI", "READVALUE", "RELATIVEERROR");
+                xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
                }
                else
                {
-                xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+                xiangDuiWuCha(obj, "SHIJISHUCHUZHI", "READVALUE", "RELATIVEERROR");
                }
            
 
         }
-        //计算标准值
-        function resetXianShiZhi(obj) {
-          
-            if (type == "输出")
-            {
-                xiangDuiWuCha(obj, "SHIJISHUCHUZHI", "READVALUE", "RELATIVEERROR");
-            }
-            else
-            {
-                xiangDuiWuCha(obj, "READVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
-            }
-        }
+         
 
         //离开事件，用于计算
         function blurValue(obj) {
