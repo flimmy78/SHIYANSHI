@@ -38,7 +38,7 @@ namespace Common
         /// </summary>
         保存 = 1000,
         /// <summary>
-        /// 器具登记完成时
+        /// 器具登记完成时1
         /// </summary>
         已分配 = 1010,
         /// <summary>
@@ -46,11 +46,11 @@ namespace Common
         /// </summary>
         已退回 = 1015,
         /// <summary>
-        /// 点击领取按钮时
+        /// 点击领取按钮时1
         /// </summary>
         已领取 = 1020,
         /// <summary>
-        /// 审核完成时
+        /// 审核完成时1
         /// </summary>
         试验完成 = 1040,
         /// <summary>
@@ -58,11 +58,11 @@ namespace Common
         /// </summary>
         待入库 = 1041,
         /// <summary>
-        /// 点击入库按钮时
+        /// 点击入库按钮时1
         /// </summary>
         器具已入库 = 1042,
         /// <summary>
-        /// 器具领取环节
+        /// 器具领取环节1
         /// </summary>
         器具已领取 = 1043,
 

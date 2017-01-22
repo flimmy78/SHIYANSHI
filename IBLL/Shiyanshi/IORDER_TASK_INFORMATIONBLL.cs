@@ -24,6 +24,8 @@ namespace Langben.IBLL
         bool EditField(ref Common.ValidationErrors validationErrors, ORDER_TASK_INFORMATION entity);
         [OperationContract]
         bool EditSTATUS(ref ValidationErrors validationErrors, string id, SIGN sign);
+        [OperationContract]
+        bool EditSTATUS2(ref ValidationErrors validationErrors, SIGN sign);
         /// <summary>
         /// 获取委托单号
         /// </summary>

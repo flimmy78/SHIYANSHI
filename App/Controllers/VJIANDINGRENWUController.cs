@@ -248,6 +248,10 @@ namespace Langben.App.Controllers
                 };
 
             }
+            Langben.Report.ReportBLL rbll = new Report.ReportBLL();
+            string err = "";
+            rbll.UpdateFuJianRemark2_YuanShiJiLu(uplo.PREPARE_SCHEMEID, out err);
+
             //返回执行结果是新增还是修改并给出结论
             ViewBag.FILE_UPLOADERID = uplo.ID;
 
@@ -354,7 +358,7 @@ namespace Langben.App.Controllers
 
             int total = 0;
             Common.Account account = GetCurrentAccount();
-            search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.已分配.GetHashCode() + "*" + Common.ORDER_STATUS.已领取.GetHashCode() + "*" + Common.ORDER_STATUS.试验完成.GetHashCode() + "*" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已领取.GetHashCode() + "";
+            search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.已分配.GetHashCode() + "*" + Common.ORDER_STATUS.已领取.GetHashCode() + "*" + Common.ORDER_STATUS.试验完成.GetHashCode() + "*" + Common.ORDER_STATUS.待入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已领取.GetHashCode() + "";
             search += "^NAME&" + account.UNDERTAKE_LABORATORYName;
             List<VJIANDINGRENWU> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid

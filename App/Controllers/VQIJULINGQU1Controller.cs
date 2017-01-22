@@ -142,6 +142,7 @@ namespace Langben.App.Controllers
             osi.UPDATETIME = oti.UPDATETIME;
             osi.UPDATEPERSON = oti.UPDATEPERSON;
             #endregion
+            ViewBag.Id = osi.ID;
             ViewBag.Baogaoid = baogaoid;
             ViewBag.Qijuid = qijuid;
             return View(osi);
@@ -291,8 +292,20 @@ namespace Langben.App.Controllers
                 rows = queryData
             });
         }
+        public ActionResult Edit(string id)
+        {
+            SIGN data = m_BLLSIGN.GetById(id);
+           
+            if (data != null)
+            {
+                ViewBag.HTML = data.HTMLVALUE;
+                ViewBag.Img = data.PICTURE;
+            }
 
 
+            return View();
+        }
+        IBLL.ISIGNBLL m_BLLSIGN;
         IBLL.IVQIJULINGQU1BLL m_BLL;
         IBLL.IVQIJULINGQU2BLL m_BLL2;
         IBLL.IORDER_TASK_INFORMATIONBLL m_BLL3;
@@ -303,16 +316,16 @@ namespace Langben.App.Controllers
         ValidationErrors validationErrors = new ValidationErrors();
 
         public VQIJULINGQU1Controller()
-            : this(new VQIJULINGQU1BLL(), new VQIJULINGQU2BLL(), new ORDER_TASK_INFORMATIONBLL(), new PREPARE_SCHEMEBLL(), new VQIJULINGQU2BLL(), new APPLIANCE_DETAIL_INFORMATIONBLL()) { }
+            : this(new VQIJULINGQU1BLL(), new VQIJULINGQU2BLL(), new ORDER_TASK_INFORMATIONBLL(), new PREPARE_SCHEMEBLL(), new VQIJULINGQU2BLL(), new APPLIANCE_DETAIL_INFORMATIONBLL(), new SIGNBLL()) { }
 
-        public VQIJULINGQU1Controller(VQIJULINGQU1BLL bll, VQIJULINGQU2BLL bll2, ORDER_TASK_INFORMATIONBLL bll3, PREPARE_SCHEMEBLL bll4, VQIJULINGQU2BLL bll5, APPLIANCE_DETAIL_INFORMATIONBLL bll6)
-        {
-
+        public VQIJULINGQU1Controller(VQIJULINGQU1BLL bll, VQIJULINGQU2BLL bll2, ORDER_TASK_INFORMATIONBLL bll3, PREPARE_SCHEMEBLL bll4, VQIJULINGQU2BLL bll5, APPLIANCE_DETAIL_INFORMATIONBLL bll6, SIGNBLL bll7)
+        { 
             m_BLL = bll;
             m_BLL2 = bll2;
             m_BLL3 = bll3;
             m_BLL4 = bll4;
             m_BLL5 = bll5; m_BLL6 = bll6;
+            m_BLLSIGN = bll7;
         }
 
     }

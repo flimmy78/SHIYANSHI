@@ -188,6 +188,8 @@
     <Compile Include="Controllers\HomeRightController.cs" />
     <Compile Include="Controllers\PROJECTTEMPLETApiController.cs" />
     <Compile Include="Controllers\PROJECTTEMPLETController.cs" />
+    <Compile Include="Controllers\SIGNApiController.cs" />
+    <Compile Include="Controllers\SIGNController.cs" />
     <Compile Include="Controllers\STANDARDCHOICEApiController.cs" />
     <Compile Include="Controllers\STANDARDCHOICEController.cs" />
     <Compile Include="Controllers\SysAnnouncementController.cs" />
@@ -1067,6 +1069,11 @@
     <Content Include="Views\METERING_STANDARD_DEVICE\Create2.cshtml" />
     <Content Include="Views\ORDER_TASK_INFORMATION\ErWeiMa2.cshtml" />
     <Content Include="Views\ORDER_TASK_INFORMATION\ShowPicture.cshtml" />
+    <Content Include="Views\SIGN\Create.cshtml" />
+    <Content Include="Views\SIGN\Details.cshtml" />
+    <Content Include="Views\SIGN\Edit.cshtml" />
+    <Content Include="Views\SIGN\Index.cshtml" />
+    <Content Include="Views\VQIJULINGQU1\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

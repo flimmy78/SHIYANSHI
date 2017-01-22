@@ -572,6 +572,7 @@ namespace Langben.App.Controllers
                         LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，预备方案信息的Id为" + entity.ID, "审核过程记录");//写入日志  
                     }
                     #endregion
+                   
                 }
                 else if (entity.SHPI == "P")
                 {
@@ -661,18 +662,7 @@ namespace Langben.App.Controllers
                         }
                         LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，预备方案信息的Id为" + entity.ID, "审批过程记录");//写入日志  
                     }
-                    try
-                    {
-                        if (entity.REPORTSTATUS == Common.REPORTSTATUS.待批准.ToString() || entity.REPORTSTATUS == Common.REPORTSTATUS.已批准.ToString())
-                        {
-                            Langben.Report.ReportBLL rBLL = new Langben.Report.ReportBLL();
-                            rBLL.AddQianMing(entity.ID);
-                        }
-                    }
-                    catch(Exception ex)
-                    {
-
-                    }
+                    
                     #endregion
                 }
 
@@ -682,7 +672,19 @@ namespace Langben.App.Controllers
                 {
                     HE = m_BLL.EditField(ref validationErrors, entity);//器具明细修改
                 }
+                try
+                {
+                    if (entity.REPORTSTATUS == Common.REPORTSTATUS.待批准.ToString() || entity.REPORTSTATUS == Common.REPORTSTATUS.已批准.ToString())
+                    {
+                        Langben.Report.ReportBLL rBLL = new Langben.Report.ReportBLL();
+                        string err = "";
+                        rBLL.AddQianMing(entity.ID, out err);
+                    }
+                }
+                catch (Exception ex)
+                {
 
+                }
                 if (HE)
                 {
                     LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，预备方案信息的Id为" + entity.ID, "预备方案"
