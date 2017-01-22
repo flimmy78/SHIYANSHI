@@ -360,7 +360,7 @@
             var length = datas.levellength;
             if (level == "0.0" || ShijiShuChu == "" || BiaoZhunShuChu == "") return ""
             else
-                return ((parseFloat(ShijiShuChu) - parseFloat(BiaoZhunShuChu) / (datas.outputMaxValue - datas.outputMinValue) * 100 / parseFloat(level)) * parseFloat(level)).toFixed(length + 1);
+                return (((parseFloat(ShijiShuChu) - parseFloat(BiaoZhunShuChu)) / (datas.outputMaxValue - datas.outputMinValue) * 100 / parseFloat(level)) * parseFloat(level)).toFixed(length + 1);
         }
         //离开事件，用于计算 测量点
         function blurCeLiangDian(obj) {
