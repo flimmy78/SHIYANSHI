@@ -16,10 +16,10 @@ namespace Langben.Report
         /// </summary>
         /// <param name="doc"></param>
         /// <returns></returns>
-        public static DataValue GetBuDueDingDu_DiBu(HtmlAgilityPack.HtmlDocument doc)
+        public static HeadValue GetBuDueDingDu_DiBu(HtmlAgilityPack.HtmlDocument doc)
         {
 
-            var buDueDingDu_DiBu = new DataValue();
+            var buDueDingDu_DiBu = new HeadValue();
             return buDueDingDu_DiBu;
         }
 

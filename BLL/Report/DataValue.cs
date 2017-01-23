@@ -14,4 +14,16 @@ namespace Langben.Report
         public List<MYData> Data { get; set; }
 
     }
+    public class HeadValue
+    {
+        /// <summary>
+        /// 行数
+        /// </summary>
+        public int Count { get; set; }
+        /// <summary>
+        /// 数据
+        /// </summary>
+        public List<MYDataHead> Data { get; set; }
+
+    }
 }

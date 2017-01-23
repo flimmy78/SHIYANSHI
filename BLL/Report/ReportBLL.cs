@@ -1768,6 +1768,26 @@ namespace Langben.Report
                     break;
             }
         }
+        ///// <summary>
+        ///// 设置底部不确定度
+        ///// </summary>
+        ///// <param name="hssfworkbook"></param>
+        ///// <param name="entity"></param>
+        ///// <param name="type"></param>
+        ///// <returns></returns>
+        //private bool SetBuQueDingDu_DiBu(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing)
+        //{
+        //    #region 底部不确定度
+        //    HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+        //    doc.LoadHtml(iEntity.HTMLVALUE);
+        //    Dictionary<int, DataValue> dataDic = AnalyticHTML.GetData(doc);//数据
+        //    DataValue BuDueDingDu_DiBu = AnalyticHTML.GetBuDueDingDu_DiBu(doc);//底部不确定度
+        //    if (BuDueDingDu_DiBu != null && BuDueDingDu_DiBu.Count > 0 && BuDueDingDu_DiBu.Data != null && BuDueDingDu_DiBu.Data.Count > 0)
+        //    {
+
+        //    }
+        //    #endregion
+        //}
         /// <summary>
         /// 设置不确定度(返回是否有不确定计算过程)
         /// </summary>
@@ -2628,11 +2648,13 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                     sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue(celStr);
                     RowIndex++;
 
-                    //相同检测项只展示一个标题   
+                    //相同检测项只展示一个标题  
+                    bool IsSameRuleName = false; 
                     if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
 
                     {
                         HideRow(sheet_Destination, RowIndex - 2, 2);
+                        IsSameRuleName = true;
                     }
                     else
                     {
@@ -2641,62 +2663,48 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
 
                     #endregion
 
-                    #region 检测项目表格                    
+                    #region 检测项目表格                   
 
-                    //if (TableTemplateDic != null && TableTemplateDic.ContainsKey(iEntity.RULEID))
-                    //{
-                    //    TableTemplateExt temp = TableTemplateDic[iEntity.INPUTSTATE];                       
+                                          
                     if (iEntity != null
                         && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
-                    {
-                        //&& (iEntity.RULEID== "780-1992_3_2_2" || iEntity.RULEID== "780-1992_3_2_1")
+                    {                       
+                        TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
+                        //解析html表格数据    
+                        //int RowIndexT = RowIndex;                       
+                        RowIndex = paserData_1(iEntity, IsSameRuleName, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);
+
                         //if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
 
                         //{
-                        //    //为了相同项表格底部没有线
-                        //    CopyRow(sheet_Source, sheet_Destination, 3, RowIndex, 1, true);
-                        //    HideRow(sheet_Destination, RowIndex, 1);
+                        //    //为了相同项表格底部没有线                     
+                        //    SetBorderTop(hssfworkbook, sheet_Destination, RowIndexT);
+                        //}
+
+
+                        ////为了表格底部没有线
+                        //CopyRow(sheet_Source, sheet_Destination, 3, RowIndex, 1, true);
+                        //HideRow(sheet_Destination, RowIndex, 1);                        
+                        //RowIndex++;
+                      
+                        ////表格注
+                        //if (iEntity.REMARK != null && iEntity.REMARK.Trim() != "")
+                        //{
+                        //    CopyRow(sheet_Source, sheet_Destination, temp.RemarkRowIndex, RowIndex, 1, true);
+                        //    sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue("注：" + iEntity.REMARK);
                         //    RowIndex++;
                         //}
 
-                        //&&iEntity.RULEID== "126-1995_2_4_1"
-                        TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
-                        //解析html表格数据    
-                        int RowIndexT = RowIndex;
-                        //RowIndex = paserData(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);
-                        RowIndex = paserData_1(iEntity.HTMLVALUE, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);
+                        ////表格结论
+                        //if (iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
+                        //{
+                        //    CopyRow(sheet_Source, sheet_Destination, temp.ConclusionRowIndex, RowIndex, 1, true);
+                        //    sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue("结论：" + iEntity.CONCLUSION);
+                        //    RowIndex++;
+                        //}                      
 
-                        if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
-
-                        {
-                            //为了相同项表格底部没有线                     
-                            SetBorderTop(hssfworkbook, sheet_Destination, RowIndexT);
-                        }
-
-
-                        //为了表格底部没有线
-                        CopyRow(sheet_Source, sheet_Destination, 3, RowIndex, 1, true);
-                        HideRow(sheet_Destination, RowIndex, 1);                        
-                        RowIndex++;
-
-
-                        //表格注
-                        if (iEntity.REMARK != null && iEntity.REMARK.Trim() != "")
-                        {
-                            CopyRow(sheet_Source, sheet_Destination, temp.RemarkRowIndex, RowIndex, 1, true);
-                            sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue("注：" + iEntity.REMARK);
-                            RowIndex++;
-                        }
-
-                        //表格结论
-                        if (iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
-                        {
-                            CopyRow(sheet_Source, sheet_Destination, temp.ConclusionRowIndex, RowIndex, 1, true);
-                            sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue("结论：" + iEntity.CONCLUSION);
-                            RowIndex++;
-                        }
-                        //为了表格底部没有线
-                        CopyRow(sheet_Source, sheet_Destination, 4, RowIndex, 1, true);
+                        ////为了表格底部没有线
+                        //CopyRow(sheet_Source, sheet_Destination, 4, RowIndex, 1, true);
 
                     }
                     else
@@ -3640,13 +3648,16 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
         /// <param name="temp">模板信息</param>                 
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <returns></returns>
-        private int paserData_1(string html, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, SpecialCharacters allSpecialCharacters = null)
+        private int paserData_1(QUALIFIED_UNQUALIFIED_TEST_ITE iEntity, bool IsSameRuleName, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, SpecialCharacters allSpecialCharacters = null)
         {
+            int RowIndexT = rowIndex_Destination;
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc.LoadHtml(html);
+            doc.LoadHtml(iEntity.HTMLVALUE);
             Dictionary<int, DataValue> dataDic = AnalyticHTML.GetData(doc);//数据
             Dictionary<int, List<MYDataHead>> headDic = AnalyticHTML.GetHeadData(doc);//表头
             Dictionary<int, List<MYDataHead>> footDic = AnalyticHTML.GetFootData(doc);//表尾
+            HeadValue buDueDingDu_DiBu = AnalyticHTML.GetBuDueDingDu_DiBu(doc);//底部不确定度
+
 
             #region 处理下一行数据为空需要单元格合并数据
             if (temp != null && temp.Cells != null && temp.Cells.Count > 0 && dataDic != null && dataDic.Count > 0)
@@ -3837,6 +3848,58 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                 }
 
             }
+
+            if (IsSameRuleName)
+            {
+                //为了相同项表格底部没有线                     
+                SetBorderTop(sheet_Destination.Workbook, sheet_Destination, RowIndexT);
+            }
+
+            #region 注、说明
+            //为了表格底部没有线
+            CopyRow(sheet_Source, sheet_Destination, 3, rowIndex_Destination, 1, true);
+            HideRow(sheet_Destination, rowIndex_Destination, 1);
+            rowIndex_Destination++;
+
+            //表格注
+            if (iEntity.REMARK != null && iEntity.REMARK.Trim() != "")
+            {
+                CopyRow(sheet_Source, sheet_Destination, temp.RemarkRowIndex, rowIndex_Destination, 1, true);
+                sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue("注：" + iEntity.REMARK);
+                rowIndex_Destination++;
+            }
+
+            //表格结论
+            if (iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
+            {
+                CopyRow(sheet_Source, sheet_Destination, temp.ConclusionRowIndex, rowIndex_Destination, 1, true);
+                sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue("结论：" + iEntity.CONCLUSION);
+                rowIndex_Destination++;
+            }
+            #endregion
+
+            #region 底部不确定度
+            //if (buDueDingDu_DiBu!=null && buDueDingDu_DiBu.Count>0 && buDueDingDu_DiBu.Data!=null && buDueDingDu_DiBu.Data.Count>0)
+            //{
+            //    List<RowInfo> rowInfoList =new List<RowInfo>();
+            //    RowInfo r = new RowInfo();
+            //    if (buDueDingDu_DiBu.Data.Count >= 0)
+            //    {
+            //        for (int i = 0; i < 3; i++)
+            //        {
+            //            Cell c = new Cell();
+            //            c.Code = buDueDingDu_DiBu.Data[i].name;                        
+            //            r.Cells.Add(c);
+            //        }
+            //        rowInfoList.Add(r);
+            //    }
+            //    CopyRow_1(sheet_Source, sheet_Destination, 1368, rowIndex_Destination, buDueDingDu_DiBu.Count, true, rowInfoList, allSpecialCharacters, buDueDingDu_DiBu);
+            //}
+            #endregion 
+
+            //为了表格底部没有线
+            CopyRow(sheet_Source, sheet_Destination, 4, rowIndex_Destination, 1, true);
+
             return rowIndex_Destination;
         }
 
