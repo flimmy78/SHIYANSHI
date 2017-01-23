@@ -10,17 +10,17 @@ namespace Langben.Report
     {
 
 
-        public static HtmlAgilityPack.HtmlDocument docBuQueDingDuDiBu = new HtmlAgilityPack.HtmlDocument();
+        public static HtmlAgilityPack.HtmlDocument docBuQueDingDu_DiBu = new HtmlAgilityPack.HtmlDocument();
         /// <summary>
-        /// 获取不确定度标签
+        /// 获取底部不确定标签
         /// </summary>
         /// <param name="doc"></param>
-        /// <returns>按照通道+节点的方式返回</returns>
-        public static List<MYData> GetBuDueDingDuDiBu(HtmlAgilityPack.HtmlDocument doc)
+        /// <returns></returns>
+        public static DataValue GetBuDueDingDu_DiBu(HtmlAgilityPack.HtmlDocument doc)
         {
 
-            var buDueDingDuDiBu = new List<MYData>();
-            return buDueDingDuDiBu;
+            var buDueDingDu_DiBu = new DataValue();
+            return buDueDingDu_DiBu;
         }
 
         public static HtmlAgilityPack.HtmlDocument docBuQueDingDu = new HtmlAgilityPack.HtmlDocument();
