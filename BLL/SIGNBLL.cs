@@ -49,30 +49,12 @@ namespace Langben.BLL
         /// <returns>结果集</returns>
         public List<SIGN> GetByParam(string id, int page, int rows, string order, string sort, string search, ref int total)
         {
-            IQueryable<SIGN> queryData = repository.GetData(db, order, sort, search);
-            total = queryData.Count();
-            if (total > 0)
+            using (SysEntities db = new SysEntities())
             {
-                if (page <= 1)
-                {
-                    queryData = queryData.Take(rows);
-                }
-                else
-                {
-                    queryData = queryData.Skip((page - 1) * rows).Take(rows);
-                }
-                
-                    foreach (var item in queryData)
-                    {
-                        if (item.ORDER_TASK_INFORMATIONID != null && item.ORDER_TASK_INFORMATION != null)
-                        { 
-                                item.ORDER_TASK_INFORMATIONIDOld = item.ORDER_TASK_INFORMATION.ORDER_NUMBER.GetString();//                            
-                        }                  
 
-                    }
- 
+                return (db.SIGN.Where(w=>w.UPDATEPERSON== search)).ToList();
             }
-            return queryData.ToList();
+             
         }
         /// <summary>
         /// 查询的数据 /*在6.0版本中 新增*/
