@@ -23,18 +23,14 @@ namespace Langben.DAL
         {
             string where = string.Empty;
             int flagWhere = 0;
-            string REPORTSTATUSZI = string.Empty;
+            
             Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
             if (queryDic != null && queryDic.Count > 0)
             {
 
                 foreach (var item in queryDic)
                 {
-                    if (!string.IsNullOrEmpty(item.Key) && !string.IsNullOrEmpty(item.Value) && item.Key == "REPORTSTATUSZI")
-                    {
-                        REPORTSTATUSZI = item.Value;
-                        continue;
-                    }
+                     
                     if (flagWhere != 0)
                     {
                         where += " and ";
@@ -80,16 +76,15 @@ namespace Langben.DAL
                    
                 }
             }
-            string[] REPORTSTATUSZIarr = null;
-            if (!string.IsNullOrEmpty(REPORTSTATUSZI))
-            {
-                REPORTSTATUSZIarr = REPORTSTATUSZI.Split('*');
-            }
+            string[] REPORTSTATUSZIarr = {  Common.REPORTSTATUS.已批准.ToString(),
+            Common.REPORTSTATUS.待批准.ToString(),Common.REPORTSTATUS.批准驳回.ToString(),
+            Common.REPORTSTATUS.报告已回收.ToString(),Common.REPORTSTATUS.报告已打印.ToString(),Common.REPORTSTATUS.报告已领取.ToString()};
+
             return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext 
                      .CreateObjectSet<VSHENPI>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                    // .OrderBy("it.[AUDITTIME] " + "asc")
-                     .Where(w => REPORTSTATUSZIarr.Contains(w.REPORTSTATUSZI)).Distinct()
+                  
+                     .Where(w => REPORTSTATUSZIarr.Contains(w.REPORTSTATUS)).Distinct()
                      .AsQueryable(); 
 
         }

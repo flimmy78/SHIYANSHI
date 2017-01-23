@@ -14,10 +14,22 @@
             </div>
             <div class="input_search">
              <div class="input_search-label">
-                   审核状态:
+                   报告状态:
                 </div>
                 <div class="input_search-field">
-                    @Html.DropDownList("REPORTSTATUS", Models.SysFieldModels.GetSysField("VSHENHE", "ISAGGREY"), "请选择", new { id = "REPORTSTATUS", @class = "my-textbox" ,style="margin-top:0"})
+                    <select class="my-textbox" id="REPORTSTATUS" name="REPORTSTATUS" style="margin-top:0">
+                        <option value="">请选择</option>
+                        <option value="待审核" selected="selected">待审核</option>
+                        <option value="审核驳回">审核驳回</option>
+                        <option value="待批准">待批准</option>
+                        <option value="批准驳回">批准驳回</option>
+                        <option value="已批准">已批准</option>
+                        <option value="报告已打印">报告已打印</option>
+                        <option value="报告已领取">报告已领取</option>
+                        <option value="报告已回收">报告已回收</option>
+                      
+                    </select>
+                 @*   @Html.DropDownList("REPORTSTATUS", Models.SysFieldModels.GetSysField("VSHENHE", "ISAGGREY"), "请选择", new { id = "REPORTSTATUS", @class = "my-textbox" ,style="margin-top:0"})*@
                 </div>
             </div>
     <div class='input_search' style="padding-top:10px;">

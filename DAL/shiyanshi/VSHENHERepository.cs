@@ -84,16 +84,15 @@ namespace Langben.DAL
 
                 }
             }
-            string[] REPORTSTATUSZIarr = null;
-            if (!string.IsNullOrEmpty(REPORTSTATUSZI))
-            {
-                REPORTSTATUSZIarr = REPORTSTATUSZI.Split('*');
-            }
+            string[] REPORTSTATUSZIarr = {Common.REPORTSTATUS.审核驳回.ToString(), Common.REPORTSTATUS.已批准.ToString(),
+           Common.REPORTSTATUS.待审核.ToString(),Common.REPORTSTATUS.待批准.ToString(),Common.REPORTSTATUS.批准驳回.ToString(),
+            Common.REPORTSTATUS.报告已回收.ToString(),Common.REPORTSTATUS.报告已打印.ToString(),Common.REPORTSTATUS.报告已领取.ToString()};
+          
             return ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
                      .CreateObjectSet<VSHENHE>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                     .OrderBy("it.[UPDATETIME] " + "asc")
-                     .Where(w => REPORTSTATUSZIarr.Contains(w.REPORTSTATUSZI))
+                  
+                     .Where(w => REPORTSTATUSZIarr.Contains(w.REPORTSTATUS))
                      .Where(w=>w.DETECTERID == DETECTERID)
                      .AsQueryable();
 
