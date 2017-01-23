@@ -1,6 +1,12 @@
 <!--特殊字符-->
 <SpecialCharacters>
 	<SpecialCharacterList>
+	<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>UREL(K=</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>6</SubscriptLastCount>
+		</SpecialCharacter>
 		<SpecialCharacter>
 			<!--特殊字符-->
 			<Code>Y1</Code>

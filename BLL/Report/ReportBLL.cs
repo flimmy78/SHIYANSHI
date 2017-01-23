@@ -2672,7 +2672,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
                         //解析html表格数据    
                         //int RowIndexT = RowIndex;                       
-                        RowIndex = paserData_1(iEntity, IsSameRuleName, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters);
+                        RowIndex = paserData_1(iEntity, IsSameRuleName, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters, type);
 
                         //if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
 
@@ -3123,7 +3123,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                 speStartIndex = value.Trim().ToUpper().IndexOf("U(K");
                 SpecialStr = "U(K";
 
-                notItalicStartIndex = speStartIndex+1;//非斜体开始位置
+                notItalicStartIndex = speStartIndex + 1;//非斜体开始位置
                 notItalicEndIndex = speStartIndex + 2;//非斜体结束位置
             }
             else if (value != null && value.Trim() != "" && value.Trim().ToUpper().IndexOf("UI") >= 0)
@@ -3131,10 +3131,21 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                 speStartIndex = value.Trim().ToUpper().IndexOf("UI");
                 SpecialStr = "UI";
             }
+            else if (value.ToUpper().IndexOf("UREL(K=") >= 0)
+            {
+                speStartIndex= value.Trim().ToUpper().IndexOf("UREL(K=");
+                SpecialStr = "UREL(K=";
+
+                notItalicStartIndex = speStartIndex + 4;//非斜体开始位置
+                notItalicEndIndex = speStartIndex + 5;//非斜体结束位置    
+
+            }
+
             //处理特殊字符下标上标斜体
             result = new HSSFRichTextString(value);
 
             if (!string.IsNullOrEmpty(SpecialStr) && SpecialStr.Trim() != "" && speStartIndex >= 0)
+
             {
                 //特殊字符是否配置
                 if (workbook != null && allSpecialCharacters != null && allSpecialCharacters.SpecialCharacterList != null &&
@@ -3156,7 +3167,11 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                     if (endIndex < 0)
                     {
                         endIndex = 0;
-                    }                   
+                    }
+                    if (SpecialStr == "UREL(K=")//特殊处理
+                    {
+                        endIndex = speStartIndex + spec.Code.Trim().Length;
+                    }               
 
                     result.ApplyFont(startIndex, endIndex, normalFont);
                     #endregion
@@ -3188,25 +3203,36 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                         subscript.FontName = "宋体";
                         //subscript.Color = HSSFColor.Red.Index;
                         //HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
-                        startIndex = speStartIndex + spec.Code.Trim().Length - spec.SubscriptLastCount;
-                        if (startIndex < 0)
+                        if (SpecialStr == "UREL(K=")//特殊处理
                         {
-                            startIndex = 0;
+                            startIndex = speStartIndex + 1;
+                            endIndex = speStartIndex + 4;
                         }
-                        endIndex = speStartIndex + spec.Code.Trim().Length;
-                        if (endIndex < 0)
+                        else
                         {
-                            endIndex = 0;
+                            startIndex = speStartIndex + spec.Code.Trim().Length - spec.SubscriptLastCount;
+                            if (startIndex < 0)
+                            {
+                                startIndex = 0;
+                            }
+                            endIndex = speStartIndex + spec.Code.Trim().Length;
+                            if (endIndex < 0)
+                            {
+                                endIndex = 0;
+                            }
                         }
                         result.ApplyFont(startIndex, endIndex, subscript);
                     }
                     #endregion
 
                 }
-                return result;
+                //return result;
             }
-
-            return new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
+            else
+            {
+                result= new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
+            }           
+            return result;
         }
 
 
@@ -3648,7 +3674,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
         /// <param name="temp">模板信息</param>                 
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <returns></returns>
-        private int paserData_1(QUALIFIED_UNQUALIFIED_TEST_ITE iEntity, bool IsSameRuleName, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, SpecialCharacters allSpecialCharacters = null)
+        private int paserData_1(QUALIFIED_UNQUALIFIED_TEST_ITE iEntity, bool IsSameRuleName, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, SpecialCharacters allSpecialCharacters = null, ExportType type = ExportType.OriginalRecord_JianDing)
         {
             int RowIndexT = rowIndex_Destination;
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
@@ -3656,11 +3682,15 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             Dictionary<int, DataValue> dataDic = AnalyticHTML.GetData(doc);//数据
             Dictionary<int, List<MYDataHead>> headDic = AnalyticHTML.GetHeadData(doc);//表头
             Dictionary<int, List<MYDataHead>> footDic = AnalyticHTML.GetFootData(doc);//表尾
-            HeadValue buDueDingDu_DiBu = AnalyticHTML.GetBuDueDingDu_DiBu(doc);//底部不确定度
+            HeadValue buDueDingDu_DiBu =null;//底部不确定度
+            if (type != ExportType.Report_JianDing)//除了检定报告不打底部不确定度，其他都打
+            {
+                buDueDingDu_DiBu = AnalyticHTML.GetBuDueDingDu_DiBu(doc);//底部不确定度
+            }
 
 
-            #region 处理下一行数据为空需要单元格合并数据
-            if (temp != null && temp.Cells != null && temp.Cells.Count > 0 && dataDic != null && dataDic.Count > 0)
+                #region 处理下一行数据为空需要单元格合并数据
+                if (temp != null && temp.Cells != null && temp.Cells.Count > 0 && dataDic != null && dataDic.Count > 0)
             {
                 List<Cell> cList = temp.Cells.FindAll(p => p.IsMergeNullValue == "Y");
                 if (cList != null && cList.Count > 0)
@@ -3879,23 +3909,45 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             #endregion
 
             #region 底部不确定度
-            //if (buDueDingDu_DiBu!=null && buDueDingDu_DiBu.Count>0 && buDueDingDu_DiBu.Data!=null && buDueDingDu_DiBu.Data.Count>0)
+            
+            #region 测试数据
+            //buDueDingDu_DiBu = new HeadValue();
+            //buDueDingDu_DiBu.Count = 3;
+            //List<MYDataHead> mList = new List<MYDataHead>();
+            //for (int i = 0; i < 9; i++)
             //{
-            //    List<RowInfo> rowInfoList =new List<RowInfo>();
-            //    RowInfo r = new RowInfo();
-            //    if (buDueDingDu_DiBu.Data.Count >= 0)
-            //    {
-            //        for (int i = 0; i < 3; i++)
-            //        {
-            //            Cell c = new Cell();
-            //            c.Code = buDueDingDu_DiBu.Data[i].name;                        
-            //            r.Cells.Add(c);
-            //        }
-            //        rowInfoList.Add(r);
-            //    }
-            //    CopyRow_1(sheet_Source, sheet_Destination, 1368, rowIndex_Destination, buDueDingDu_DiBu.Count, true, rowInfoList, allSpecialCharacters, buDueDingDu_DiBu);
+            //    MYDataHead mh = new MYDataHead();
+            //    mh.name = (i % 3).ToString();
+            //    mh.value = i.ToString();
+            //    mList.Add(mh);
             //}
-            #endregion 
+            //buDueDingDu_DiBu.Data = mList;
+            #endregion
+            if (buDueDingDu_DiBu != null && buDueDingDu_DiBu.Count > 0 && buDueDingDu_DiBu.Data != null && buDueDingDu_DiBu.Data.Count > 0)
+            {
+                List<RowInfo> rowInfoList = new List<RowInfo>();
+                RowInfo r = new RowInfo();
+                if (buDueDingDu_DiBu.Data.Count >= 0)
+                {
+                    r.Cells = new List<Cell>();
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Cell c = new Cell();
+                        c.Code = buDueDingDu_DiBu.Data[i].name;
+                        r.Cells.Add(c);
+                    }
+                    rowInfoList.Add(r);
+                }
+                //画底部不确定表格及填充数据
+                for (int i = 0; i < buDueDingDu_DiBu.Count; i++)
+                {
+                    CopyRow_1(sheet_Source, sheet_Destination, 1368, rowIndex_Destination, 1, true, rowInfoList, allSpecialCharacters, buDueDingDu_DiBu.Data);
+                    rowIndex_Destination = rowIndex_Destination + 1;
+                }
+
+            }
+
+            #endregion
 
             //为了表格底部没有线
             CopyRow(sheet_Source, sheet_Destination, 4, rowIndex_Destination, 1, true);
