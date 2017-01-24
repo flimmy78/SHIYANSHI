@@ -238,7 +238,7 @@
                 // async: false,
                 success: function (res) {
                     if (res.Code == 1) {
-                        $.messager.alert('操作提示', "退回成功！", 'info');
+                        $.messager.alert('操作提示',res.Message, 'info');
                         $("#flexigridData").datagrid("reload");
                         $("#flexigridData").datagrid("clearSelections");
                         $('#d').dialog('close');

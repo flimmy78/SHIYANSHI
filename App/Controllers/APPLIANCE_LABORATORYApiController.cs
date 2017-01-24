@@ -373,7 +373,7 @@ namespace Langben.App.Controllers
             APPLIANCE_LABORATORY aryOne = null;
 
             if (entity != null && ModelState.IsValid)
-            {   //数据校验
+            {   //数据校验 
                 Common.Account account = GetCurrentAccount();
                 List<APPLIANCE_LABORATORY> appory = m_BLL.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(entity.APPLIANCE_DETAIL_INFORMATION.ID);
                 aryOne = appory.Find(f => f.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName);//选择的器具
@@ -410,7 +410,7 @@ namespace Langben.App.Controllers
                         LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具退回的Id为" + entity.ID, "器具明细信息"
                                );//写入日志                   
                         result.Code = Common.ClientCode.Succeed;
-                        result.Message = Suggestion.UpdateSucceed;
+                        result.Message = "退回成功！";
                         return result; //提示更新成功 
                     }
                     else if (entity.ORDER_STATUS == Common.ORDER_STATUS.待入库.ToString())
@@ -419,10 +419,19 @@ namespace Langben.App.Controllers
                         entity.APPLIANCE_DETAIL_INFORMATION.STORAGEINSTRUCTIONS = entity.STORAGEINSTRUCTIONS.ToString();//入库说明
                         if (m_BLL2.EditField(ref validationErrors, entity.APPLIANCE_DETAIL_INFORMATION))//修改器具明细表中的入库说明
                         {
+                            if (appory.Remove(aryOne))
+                            {
+                                var aryTwo = appory.FirstOrDefault();
+                                result.Message = "请通知" + aryTwo.UNDERTAKE_LABORATORYID + "该器具不能检测";
+                            }
+                            else
+                            {
+                                result.Message = Suggestion.UpdateSucceed;
+                            }
                             LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具退回的Id为" + entity.ID, "器具明细信息"
                                 );//写入日志                   
                             result.Code = Common.ClientCode.Succeed;
-                            result.Message = Suggestion.UpdateSucceed;
+                         
                             return result; //提示更新成功 
                         }
                     }
