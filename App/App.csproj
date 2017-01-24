@@ -1074,6 +1074,8 @@
     <Content Include="Views\SIGN\Edit.cshtml" />
     <Content Include="Views\SIGN\Index.cshtml" />
     <Content Include="Views\VQIJULINGQU1\Edit.cshtml" />
+    <Content Include="Template\原始记录-校准.xls" />
+    <Content Include="Template\校准证书-CNAS.xls" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
