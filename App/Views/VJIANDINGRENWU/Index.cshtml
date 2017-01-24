@@ -212,7 +212,12 @@
             ORDER_STATUS = "@Common.ORDER_STATUS.待入库.ToString()";
             RETURNREASON = "器具不能检测";
             is = true;
+            if (STORAGEINSTRUCTIONS == '') {
+                alert("请填写原因");
+                return;
+            }
         }
+       
         if (is) {
             //实例化一个委托单对象
             var entity = new Object();
@@ -328,13 +333,13 @@
                             return chaoqi();
                         }
                     },
-            //{
-            //    text: '退回',
-            //    iconCls: 'icon-back',
-            //    handler: function () {
-            //        return tuihui();
-            //    }
-            //},
+            {
+                text: '退回',
+                iconCls: 'icon-back',
+                handler: function () {
+                    return tuihui();
+                }
+            },
              {
                  text: '查看原始记录',
                  iconCls: 'icon-detail',

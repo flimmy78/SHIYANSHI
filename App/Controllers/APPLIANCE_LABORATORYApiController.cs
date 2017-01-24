@@ -256,7 +256,7 @@ namespace Langben.App.Controllers
             }
 
 
-           
+
 
         }
 
@@ -371,17 +371,19 @@ namespace Langben.App.Controllers
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             APPLIANCE_LABORATORY aryOne = null;
-            APPLIANCE_LABORATORY aryTwo = null;
+
             if (entity != null && ModelState.IsValid)
             {   //数据校验
                 Common.Account account = GetCurrentAccount();
                 List<APPLIANCE_LABORATORY> appory = m_BLL.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(entity.APPLIANCE_DETAIL_INFORMATION.ID);
                 aryOne = appory.Find(f => f.UNDERTAKE_LABORATORYID == account.UNDERTAKE_LABORATORYName);//选择的器具
-                if (appory.Remove(aryOne))
-                {
-                    aryTwo = appory.FirstOrDefault();
+                if (!string.IsNullOrWhiteSpace(aryOne.PREPARE_SCHEMEID))
+                {//如果有报告产生，就不能退回
+                    result.Code = Common.ClientCode.Fail;
+                    result.Message = "已经生成报告编号，如果器具不能检测，请完成不合格报告。";
+                    return result;
                 }
-              
+
                 string currentPerson = GetCurrentPerson();
                 entity.BACKTIME = DateTime.Now;
                 entity.BACKPERSON = currentPerson;
@@ -394,206 +396,55 @@ namespace Langben.App.Controllers
                         entity.EQUIPMENT_STATUS_VALUUMN = Enum.Parse(typeof(Common.ORDER_STATUS), entity.ORDER_STATUS).GetHashCode().ToString();
                     }
                 }
-                //退回
-                if (entity.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())
+
+
+                entity.ID = aryOne.ID;
+                if (m_BLL.EditField(ref validationErrors, entity))
                 {
-                    //获取委托单id
-                    APPLIANCE_DETAIL_INFORMATION appl = m_BLL2.GetById(entity.APPLIANCE_DETAIL_INFORMATION.ID);
-                    appl.ORDER_TASK_INFORMATION.ORDER_STATUS = Common.ORDER_STATUS_INFORMATION.有退回.ToString();
-                    m_BLL3.EditField(ref validationErrors, appl.ORDER_TASK_INFORMATION);
-                }
-                APPLIANCE_LABORATORY ary3 = new APPLIANCE_LABORATORY();
-                if (aryTwo != null)
-                {
-                    if (entity.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())
+                    if (entity.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())  //退回
                     {
-                        entity.ID = aryOne.ID;
-                        //判断是否为领取退回
-                        if (aryOne.ORDER_STATUS == Common.ORDER_STATUS.已领取.ToString())
-                        {
-                            ary3.ID = aryTwo.ID;
-                            ary3.ISRECEIVE = Common.ISRECEIVE.是.ToString();
-                            if (!m_BLL.EditField(ref validationErrors, ary3))
-                            {
-                                if (validationErrors != null && validationErrors.Count > 0)
-                                {
-                                    validationErrors.All(a =>
-                                    {
-                                        returnValue += a.ErrorMessage;
-                                        return true;
-                                    });
-                                }
-                                LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具退回的Id为" + entity.ID + "," + returnValue, "领取退回修改第二个实验室领取状态出错！"
-                                    );//写入日志   
-                                result.Code = Common.ClientCode.Fail;
-                                result.Message = Suggestion.UpdateFail + returnValue;
-                                return result; //提示更新失败
-                            }
-                        }
-                        if (m_BLL.EditField(ref validationErrors, entity))
+                        //获取委托单id
+                        APPLIANCE_DETAIL_INFORMATION appl = m_BLL2.GetById(entity.APPLIANCE_DETAIL_INFORMATION.ID);
+                        appl.ORDER_TASK_INFORMATION.ORDER_STATUS = Common.ORDER_STATUS_INFORMATION.有退回.ToString();
+                        m_BLL3.EditField(ref validationErrors, appl.ORDER_TASK_INFORMATION);
+                        LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具退回的Id为" + entity.ID, "器具明细信息"
+                               );//写入日志                   
+                        result.Code = Common.ClientCode.Succeed;
+                        result.Message = Suggestion.UpdateSucceed;
+                        return result; //提示更新成功 
+                    }
+                    else if (entity.ORDER_STATUS == Common.ORDER_STATUS.待入库.ToString())
+                    {
+
+                        entity.APPLIANCE_DETAIL_INFORMATION.STORAGEINSTRUCTIONS = entity.STORAGEINSTRUCTIONS.ToString();//入库说明
+                        if (m_BLL2.EditField(ref validationErrors, entity.APPLIANCE_DETAIL_INFORMATION))//修改器具明细表中的入库说明
                         {
                             LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具退回的Id为" + entity.ID, "器具明细信息"
                                 );//写入日志                   
                             result.Code = Common.ClientCode.Succeed;
                             result.Message = Suggestion.UpdateSucceed;
                             return result; //提示更新成功 
-                        }
-                        else
-                        {
-                            if (validationErrors != null && validationErrors.Count > 0)
-                            {
-                                validationErrors.All(a =>
-                                {
-                                    returnValue += a.ErrorMessage;
-                                    return true;
-                                });
-                            }
-                            LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具退回的Id为" + entity.ID + "," + returnValue, "器具明细信息"
-                                );//写入日志   
-                            result.Code = Common.ClientCode.Fail;
-                            result.Message = Suggestion.UpdateFail + returnValue;
-                            return result; //提示更新失败
-                        }
-                    }
-                    if (entity.ORDER_STATUS == Common.ORDER_STATUS.待入库.ToString())
-                    {
-                        entity.APPLIANCE_DETAIL_INFORMATION.STORAGEINSTRUCTIONS = entity.STORAGEINSTRUCTIONS.ToString();//入库说明
-                        if (m_BLL2.EditField(ref validationErrors, entity.APPLIANCE_DETAIL_INFORMATION))//修改器具明细表中的入库说明
-                        {
-                            foreach (var item2 in appory)
-                            {
-                                entity.ID = item2.ID;
-                                if (m_BLL.EditField(ref validationErrors, entity))
-                                {
-                                    if (!string.IsNullOrWhiteSpace(aryOne.PREPARE_SCHEMEID))
-                                    {
-                                        PREPARE_SCHEME ps = m_BLL4.GetById(aryOne.PREPARE_SCHEMEID);
-                                        ps.CONCLUSION = "不合格";
-                                        ps.UNQUALIFIEDTYPE = "无法检定";
-                                        if (!m_BLL4.EditField(ref validationErrors, ps))
-                                        {
-                                            if (validationErrors != null && validationErrors.Count > 0)
-                                            {
-                                                validationErrors.All(a =>
-                                                {
-                                                    returnValue += a.ErrorMessage;
-                                                    return true;
-                                                });
-                                            }
-                                            LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具退回的Id为" + entity.ID + "," + returnValue, "器具明细信息");//写入日志   
-                                        }
-                                    }
-                                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具退回待入库的Id为" + entity.ID, "器具明细信息"
-                                        );//写入日志                   
-                                    result.Code = Common.ClientCode.Succeed;
-                                    result.Message = Suggestion.UpdateSucceed;
-                                    return result; //提示更新成功 
-                                }
-                                else
-                                {
-                                    if (validationErrors != null && validationErrors.Count > 0)
-                                    {
-                                        validationErrors.All(a =>
-                                        {
-                                            returnValue += a.ErrorMessage;
-                                            return true;
-                                        });
-                                    }
-                                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具退回待入库的Id为" + entity.ID + "," + returnValue, "器具明细信息"
-                                        );//写入日志   
-                                    result.Code = Common.ClientCode.Fail;
-                                    result.Message = Suggestion.UpdateFail + returnValue;
-                                    return result; //提示更新失败
-                                }
-                            }
                         }
                     }
                 }
                 else
                 {
-                    if (entity.ORDER_STATUS == Common.ORDER_STATUS.已退回.ToString())
+                    if (validationErrors != null && validationErrors.Count > 0)
                     {
-                        entity.ID = aryOne.ID;
-                        if (m_BLL.EditField(ref validationErrors, entity))
+                        validationErrors.All(a =>
                         {
-                            LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具退回的Id为" + entity.ID, "器具明细信息"
-                                );//写入日志                   
-                            result.Code = Common.ClientCode.Succeed;
-                            result.Message = Suggestion.UpdateSucceed;
-                            return result; //提示更新成功 
-                        }
-                        else
-                        {
-                            if (validationErrors != null && validationErrors.Count > 0)
-                            {
-                                validationErrors.All(a =>
-                                {
-                                    returnValue += a.ErrorMessage;
-                                    return true;
-                                });
-                            }
-                            LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具退回的Id为" + entity.ID + "," + returnValue, "器具明细信息"
-                                );//写入日志   
-                            result.Code = Common.ClientCode.Fail;
-                            result.Message = Suggestion.UpdateFail + returnValue;
-                            return result; //提示更新失败
-                        }
+                            returnValue += a.ErrorMessage;
+                            return true;
+                        });
                     }
-                    if (entity.ORDER_STATUS == Common.ORDER_STATUS.待入库.ToString())
-                    {
-                        entity.APPLIANCE_DETAIL_INFORMATION.STORAGEINSTRUCTIONS = entity.STORAGEINSTRUCTIONS.ToString();//入库说明
-                        if (m_BLL2.EditField(ref validationErrors, entity.APPLIANCE_DETAIL_INFORMATION))//修改器具明细表中的入库说明
-                        {
-                            if (!string.IsNullOrWhiteSpace(aryOne.PREPARE_SCHEMEID))
-                            {
-                                PREPARE_SCHEME ps = m_BLL4.GetById(aryOne.PREPARE_SCHEMEID);
-                                ps.CONCLUSION = "不合格";
-                                ps.UNQUALIFIEDTYPE = "无法检定";
-                                if (!m_BLL4.EditField(ref validationErrors, ps))
-                                {
-                                    if (validationErrors != null && validationErrors.Count > 0)
-                                    {
-                                        validationErrors.All(a =>
-                                        {
-                                            returnValue += a.ErrorMessage;
-                                            return true;
-                                        });
-                                    }
-                                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具退回的Id为" + entity.ID + "," + returnValue, "器具明细信息");//写入日志   
-                                }
-                            }
-                            foreach (var item2 in appory)
-                            {
-                                entity.ID = item2.ID;
-                                if (m_BLL.EditField(ref validationErrors, entity))
-                                {
-                                    LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具退回待入库的Id为" + entity.ID, "器具明细信息"
-                                        );//写入日志                   
-                                    result.Code = Common.ClientCode.Succeed;
-                                    result.Message = Suggestion.UpdateSucceed;
-                                    return result; //提示更新成功 
-                                }
-                                else
-                                {
-                                    if (validationErrors != null && validationErrors.Count > 0)
-                                    {
-                                        validationErrors.All(a =>
-                                        {
-                                            returnValue += a.ErrorMessage;
-                                            return true;
-                                        });
-                                    }
-                                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具退回待入库的Id为" + entity.ID + "," + returnValue, "器具明细信息"
-                                        );//写入日志   
-                                    result.Code = Common.ClientCode.Fail;
-                                    result.Message = Suggestion.UpdateFail + returnValue;
-                                    return result; //提示更新失败
-                                }
-                            }
-                        }
-                    }
-
+                    LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，器具退回的Id为" + entity.ID + "," + returnValue, "器具明细信息"
+                        );//写入日志   
+                    result.Code = Common.ClientCode.Fail;
+                    result.Message = Suggestion.UpdateFail + returnValue;
+                    return result; //提示更新失败
                 }
+
+
                 result.Code = Common.ClientCode.FindNull;
                 result.Message = Suggestion.UpdateFail + "请核对输入的数据的格式";
             }
