@@ -6261,7 +6261,7 @@
         </RowInfo>
       </TableFooterList>
     </TableTemplate>
-    <!--单相二次加入-->
+    <!--单相二次加入 -->
     <TableTemplate>
       <RuleID>724-1991_2_3</RuleID>
       <DataRowIndex>606</DataRowIndex>
