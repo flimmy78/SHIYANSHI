@@ -49,7 +49,16 @@
             @Html.LabelFor(model => model.ORDER_STATUS):
         </div>
         <div class="input_search-field">
-            @Html.DropDownList("ORDER_STATUS", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "ORDER_STATUS"), "请选择", new { id = "ORDER_STATUS", @class = "easyui-combobox" })
+            <select id="ORDER_STATUSDDL_String" name="ORDER_STATUSDDL_String">
+                <option value="">请选择</option>
+                <option value="已领取">已领取</option>
+                <option value="实验完成">实验完成</option>
+                <option value="已分配">已分配</option>
+                <option value="待入库">待入库</option>
+                <option value="器具已入库">器具已入库</option>
+                <option value="器具已领取">器具已领取</option>
+            </select>
+            @*@Html.DropDownList("ORDER_STATUS", Models.SysFieldModels.GetSysField("VJIANDINGRENWU", "ORDER_STATUS"), "请选择", new { id = "ORDER_STATUS", @class = "easyui-combobox" })*@
         </div>
     </div>
     <div class="input_search">
@@ -415,7 +424,7 @@
         search += "VERSION&" + $("#VERSION").val() + "^";
         search += "FACTORY_NUM&" + $("#FACTORY_NUM").val() + "^";
         search += "CERTIFICATE_ENTERPRISE&" + $('#CERTIFICATE_ENTERPRISE').combobox('getText') + "^";
-        search += "ORDER_STATUS&" + $('#ORDER_STATUS').combobox('getText') + "^";
+        search += "ORDER_STATUSDDL_String&" + $('#ORDER_STATUSDDL_String').val() + "^";
         search += "INSPECTION_ENTERPRISE&" + $('#INSPECTION_ENTERPRISE').combobox('getText') + "^";
         if ($('#ISOVERDUE').combobox('getText') == "是") {
             search += "ISOVERDUE&" + $('#ISOVERDUE').combobox('getText') + "^";
