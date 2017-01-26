@@ -10,8 +10,28 @@
     <tr>
         <td colspan="2">
             <div class="mt10">
-                <span>工作电压：</span>
-                <input class="my-textbox input-width" value="" type="text" name="DianYa" id="DianYa_t_1_1">V
+               
+                @if (ViewBag.canshu == "电压")
+                {
+                    <span>工作电压：</span>
+                    <select class="my-combobox" name="state" id="state_t_1_1" onchange="changeValue(this)">
+                        <option value="100" selected="selected">100</option>
+                        <option value="100/√3">100/√3</option>
+                    </select>
+                    <span>V</span>
+                }
+                else
+                {
+                    <span>工作电流：</span>
+                    <select class="my-combobox" name="state" id="state_t_1_1" onchange="changeValue(this)">
+                        <option value="1" selected="selected">1</option>
+                        <option value="5">5</option>
+                    </select>
+                    <span>A</span>
+                }
+
+               
+                 
             </div>
           
         </td>
@@ -47,41 +67,7 @@
 <tfoot tag="tag">
   
     <!--表尾-->
-  @section BUQueDingDu {
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10">
-        <tbody id="tbody_2">
-            <tr>
-                <td align="center" width="50%"><input name="" id="" type="text" class="my-textbox tr" value="" style="width:96%" /></td>
-                <td>
-                    <i>U</i><small>rel</small>(k =
-                    <select class="my-combobox" name="ddlSelectD" id="ddlSelectD">
-                        <option value="2">2 </option>
-                        <option value="3">3</option>
-                        <option value="√3">√3</option>
-                    </select>
-                    ) =
-                    <input class="my-textbox " value="" style="width:300px" id="txtvalueD">
-                    <input type="button" class="my-btn" value="计 算" onclick="calculate(this)" />
-                </td>
-            </tr>
-            <tr>
-                <td align="center" width="50%"><input name="" id="" type="text" class="my-textbox tr" value="" style="width:96%" /></td>
-                <td>
-                    <i>U</i><small>rel</small>(k =
-                    <select class="my-combobox" name="ddlSelectD" id="ddlSelectD">
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="√3">√3</option>
-                    </select>
-                    ) =
-                    <input class="my-textbox " value="" style="width:300px" id="txtvalueD">
-                    <input type="button" class="my-btn" value="计 算" onclick="calculate(this)" />
-                </td>
-            </tr>
-        </tbody>
-      
-    </table>
-}
+ 
 </tfoot>
 
 @section JS {

@@ -19,13 +19,26 @@ namespace Langben.App.Controllers
     public class PROJECTTEMPLETController : BaseController
     {//
      /// <summary>
-     ///不平衡负载时有功电能误差
+     ///仪器分辨力试验
      /// </summary>
      /// <param name="id">canshu</param>
      /// <param name="RULEID">规程id</param>
      /// <param name="SCHEMEID">方案id</param>
      /// <param name="PREPARE_SCHEMEID">预备方案id</param>
      /// <returns></returns>
+        public ActionResult YiQiFenBianLiShiYan(string RULEID = "169-2010_5", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///不平衡负载时有功电能误差
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
         public ActionResult BuPingHengFuZaiShiYouGongDianNengWuCha(string RULEID = "1085-2013_6_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
@@ -41,7 +54,7 @@ namespace Langben.App.Controllers
         /// <returns></returns>
         public ActionResult GongZuoDianliuDianYa(string id="电压",string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-            ViewBag.id = id;
+            ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -52,9 +65,9 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult PingHengFuZaiShiYouGongDianNengWuCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult PingHengFuZaiShiYouGongDianNengWuCha(string id="", string RULEID = "1085-2013_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-
+            ViewBag.id = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -91,9 +104,9 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult NiuDuanDianYa(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult NiuDuanDianYa(string id = "钮端电压", string RULEID = "622-1997_4", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-
+            ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -260,9 +273,9 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult ErCiFuHeDaoNaZuKangWuCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult ErCiFuHeDaoNaZuKangWuCha(string id = "电压", string RULEID = "169-2010_6_3", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-
+            ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -292,16 +305,16 @@ namespace Langben.App.Controllers
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
-        ///三相连接组别
+        ///电压电流互感器测量回路
         /// </summary>
         /// <param name="id">canshu</param>
         /// <param name="RULEID">规程id</param>
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult DianYaHuGanQiCeLiangHuiLu(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult DianYaHuGanQiCeLiangHuiLu(string id = "电压", string RULEID = "169-2010_6_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-
+            ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
 

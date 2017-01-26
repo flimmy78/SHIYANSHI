@@ -10,7 +10,7 @@
     <tr>
         <td colspan="9">
             <div class="mt10">
-                <span>电压互感器测量回路：</span>×
+                <span>@((ViewBag.canshu== "电压") ? "电压" : "电流")互感器测量回路：</span>×
 
                 <select class="my-combobox" name="state" id="state_t_1_1" onchange="changeValue(this)">
                     <option value="合格" selected="selected">合格</option>
@@ -64,41 +64,7 @@
 <tfoot tag="tag">
   
     <!--表尾-->
-  @section BUQueDingDu {
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10">
-        <tbody id="tbody_2">
-            <tr>
-                <td align="center" width="50%"><input name="" id="" type="text" class="my-textbox tr" value="" style="width:96%" /></td>
-                <td>
-                    <i>U</i><small>rel</small>(k =
-                    <select class="my-combobox" name="ddlSelectD" id="ddlSelectD">
-                        <option value="2">2 </option>
-                        <option value="3">3</option>
-                        <option value="√3">√3</option>
-                    </select>
-                    ) =
-                    <input class="my-textbox " value="" style="width:300px" id="txtvalueD">
-                    <input type="button" class="my-btn" value="计 算" onclick="calculate(this)" />
-                </td>
-            </tr>
-            <tr>
-                <td align="center" width="50%"><input name="" id="" type="text" class="my-textbox tr" value="" style="width:96%" /></td>
-                <td>
-                    <i>U</i><small>rel</small>(k =
-                    <select class="my-combobox" name="ddlSelectD" id="ddlSelectD">
-                        <option value="2">2 </option>
-                        <option value="3">3</option>
-                        <option value="√3">√3</option>
-                    </select>
-                    ) =
-                    <input class="my-textbox " value="" style="width:300px" id="txtvalueD">
-                    <input type="button" class="my-btn" value="计 算" onclick="calculate(this)" />
-                </td>
-            </tr>
-        </tbody>
-      
-    </table>
-}
+ 
 </tfoot>
 
 @section JS {
