@@ -78,7 +78,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult NiuDuanDianYaWenDingXing(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult NiuDuanDianYaWenDingXing(string RULEID = "622-1997_5", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
@@ -104,7 +104,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult ShiZhiWuCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult ShiZhiWuCha(string RULEID = "1005-2005_3", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
@@ -117,7 +117,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult JiBenWuChaJianDing(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JiBenWuChaJianDing(string RULEID = "622-1997_3", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
@@ -143,7 +143,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult PianLiLingWei(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult PianLiLingWei(string RULEID = "124-2005_3", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
@@ -156,7 +156,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult CeLiangWuCha(string RULEID = "313-2010_6_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult CeLiangWuCha(string RULEID = "603-2006_6", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
@@ -221,7 +221,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult QingXieYingXiang(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult QingXieYingXiang(string RULEID = "622-1997_6", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
@@ -234,7 +234,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult DianZiShiShiZhiWuCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult DianZiShiShiZhiWuCha(string RULEID = "366-2004_4_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
@@ -247,7 +247,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult ZhiZhenShiZhiWuCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult ZhiZhenShiZhiWuCha(string RULEID = "366-2004_6_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
@@ -273,7 +273,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult WeiZhiYingXiang(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult WeiZhiYingXiang(string RULEID = "366-2004_5", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
@@ -286,7 +286,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult DianZiShiFuZhuDianZuYingXiang(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult DianZiShiFuZhuDianZuYingXiang(string RULEID = "366-2004_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
