@@ -8,20 +8,23 @@
 <thead>
     <!--表头-->
     <tr>
-        <th width="160" colspan="2" align="right"><span>非额定负载影响：</span>
+        <th width="160" colspan="2" align="right">
+            <span>非额定负载影响：</span>
 
 
-            </th>
+        </th>
         <th width="160" colspan="7" align="left">
-        <select class="my-combobox" name="state" id="state_t_1_1">
-    <option value="yes" selected="selected">合格</option>
-    <option value="no">不合格</option>
+            <select class="my-combobox" name="state" id="state_t_1_1">
+                <option value="合格" selected="selected">合格</option>
+                <option value="不合格">不合格</option>
 
-</select></th>
+            </select>
+        </th>
     </tr>
     <tr>
         <th width="160" colspan="2" align="right"><span>非额定负载影响：</span></th>
-        <th width="160" colspan="7" align="left">量限：220V/5A；220V/2.5A；110V/5A；110V/2.5A，检定时，通以100%额定电压，40%~100额定电流</th>
+        <th width="160" colspan="7" align="left"><input style="width:650px"  value="量限：220V/5A；220V/2.5A；110V/5A；110V/2.5A，检定时，通以100%额定电压，40%~100额定电流" id="LIANGXIAN_t_1_1" name="LIANGXIAN_t" type="text">
+        </th>
     </tr>
     <tr>
         <th width="160" rowspan="2" align="center">量程</th>
@@ -62,45 +65,7 @@
 </tr>
 <tfoot tag="tag">
     <!--表尾-->
-    @section BUQueDingDu {
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbl mt10">
-            <tbody id="tbody_2">
-                <tr>
-                    <td align="center">
-                        <input name="buquedingduxia" id="buquedingduxia_t_1_1" type="text" class="my-textbox tr" value="" style="width:157px" />
-                    </td>
-                    <td>
-                        <i>U</i><small>rel</small>(k =
-                        <select class="my-combobox" name="K" id="K_t_1_1">
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="√3">√3</option>
-                        </select>
-                        ) =
-                        <input class="my-textbox " value="" style="width:157px" id="txtvaluebuquedingdu" name="txtvaluebuquedingdu_t_1_1">
-                        <input type="button" class="my-btn" value="计 算" onclick="calculate(this)" />
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">
-                        <input  name="buquedingduer" id="buquedingduer_t_2_1"  type="text" class="my-textbox tr" value="" style="width:157px" />
-                    </td>
-                    <td>
-                        <i>U</i><small>rel</small>(k =
-                        <select class="my-combobox" name="K" id="K_t_2_1">
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="√3">√3</option>
-                        </select>
-                        ) =
-                        <input class="my-textbox " value="" style="width:157px" id="txtvalueD" name="txtvalueD_t_2_1" />
-                        <input type="button" class="my-btn" value="计 算" onclick="calculate(this)" />
-                    </td>
-                </tr>
-            </tbody>
 
-        </table>
-    }
 </tfoot>
 
 @section JS {
@@ -148,8 +113,8 @@
                     htmlString.push(SetTDHtml(txtPoint, "OUTPUTVALUE", lianChengID, rowidx, "", "", "", "blurValue"));
                 }
 
-               
-                //指示值(格) 
+
+                //指示值(格)
                 htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "blurValue"));
 
                 //标准表读数 上升
@@ -181,12 +146,12 @@
             jiSuanWuCha(obj, "RANGE", "OUTPUTVALUE", "READVALUE", "ACTUALVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR", "UNCERTAINTYDEGREE", "BUQUEDINGDU", "JISUANWUCHA");
 
         }
-      
+
         //误差
         //obj 自身对象
         //T1 量程
         //T2 等级
-        //T3 指示值(格) 
+        //T3 指示值(格)
         //T4 标准表读数 上升
         //T5 标准表读数 下降
         //T6 平均值
@@ -210,21 +175,21 @@
             T8 = T8 + id; //T8 额定电压(V)
             var T1Data = $("#" + T1).val();//T1 量程
             var T2Data = $("#" + T2).val();//T1 等级
-     
-            var T3Data = $(obj).parent().parent().find("#" + T3).val(); //T3 指示值(格) 
+
+            var T3Data = $(obj).parent().parent().find("#" + T3).val(); //T3 指示值(格)
             var T4Data = $(obj).parent().parent().find("#" + T4).val(); //T4 标准表读数 上升
             var T5Data = $(obj).parent().parent().find("#" + T5).val(); //T5 标准表读数 下降
-         //   var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T6 平均值
-         //   var T7Data = $(obj).parent().parent().find("#" + T7).val(); //T7 基本误差(%)
-           // var T8Data = $(obj).parent().parent().find("#" + T8).val(); //T8 升降变差(%)
-          //  var T9Data = $(obj).parent().parent().find("#" + T9).val(); //T9 校准结果的不确定度U(k={0})
+            //   var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T6 平均值
+            //   var T7Data = $(obj).parent().parent().find("#" + T7).val(); //T7 基本误差(%)
+            // var T8Data = $(obj).parent().parent().find("#" + T8).val(); //T8 升降变差(%)
+            //  var T9Data = $(obj).parent().parent().find("#" + T9).val(); //T9 校准结果的不确定度U(k={0})
             var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
             txtPointLen = parseFloat(txtPointLen);
-             //【平均值】=（上升+下降）/2																																																								
+            //【平均值】=（上升+下降）/2
             if (T4Data != "" && T5Data != "") {
                 T4Data = parseFloat(T4Data);
                 T5Data = parseFloat(T5Data);
-                var jianfa = (T4Data+T5Data)/2;
+                var jianfa = (T4Data + T5Data) / 2;
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T6).val(data);
             }
@@ -247,9 +212,9 @@
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T8).val(data);
             }
-           
+
         }
-       
+
     </script>
 
 }
