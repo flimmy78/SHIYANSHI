@@ -1297,9 +1297,36 @@ function wuCha(obj, first, second, third, gold) {
     var thirdData = $(obj).parent().parent().find("#" + third).val();
     if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-       
-        var ds = accSub(firstData, secondData);
+        
         var jianfa = accDiv(accSub(firstData, secondData), thirdData) * 100;
+        var data1 = (fomatFloat(jianfa, txtPointLen), txtPointLen);
+
+        var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+        $(obj).parent().parent().find("#" + gold).val(data);
+    }
+
+}
+function wuChaLiangCheng(obj, first, second, third, gold) {
+    //重新计算当前行
+    var name = $(obj).attr("name");
+    var id = $(obj).attr("id");
+    id = id.substring(id.indexOf('_'));
+    var tongdao = id.split('_')[1];
+    var lian = id.split('_')[2];
+
+    first = first + id;//改动的地方，参与计算的列的name值
+    second = second + id;//改动的地方，参与计算的列的name值
+    third = third + "_" + tongdao + "_" + lian;
+    gold = gold + id;//改动的地方，误差的列的name值
+
+    var firstData = $(obj).parent().parent().find("#" + first).val();
+    var secondData = $(obj).parent().parent().find("#" + second).val();
+    var thirdData = $(obj).parent().parent().find("#" + third).val();
+    if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
+        var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+        //【误差】=（示值-标准值/量程）/10*100，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进
+     
+        var jianfa = accSub(firstData,accDiv(secondData, thirdData)) * 1000;
         var data1 = (fomatFloat(jianfa, txtPointLen), txtPointLen);
 
         var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
