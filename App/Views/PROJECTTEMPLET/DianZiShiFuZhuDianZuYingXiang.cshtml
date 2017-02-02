@@ -91,26 +91,22 @@
                     //需要合并的列 //量程
 
                     htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, txtNumber, ""));
-                    //选用电阻阻值   （Ω）
-                 
-
+                   
                 }
-
+                //辅助电阻(Ω)
                 htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, '', ""));
-                //输出示值 增加下拉框单位A
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "resetBiaoZhunZhi"));
+                //标准值(Ω)
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "resetBiaoZhunZhigaiBianLiang"));
 
-                //读数值 增加下拉框单位V
+                //显示值(Ω)
                 htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, '', "", '', "resetBiaoZhunZhi"));
 
                 //误差(%)
                 htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx));
 
-                //相对误差
-                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', ""));
-
-
-                //校准结果的不确定度 U(K =
+                //500Ω显示值(Ω)
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "", '', "gaiBianLiang"));
+                //改变量(%)
                 htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', ""));
                 htmlString.push("</tr>");
             }
@@ -119,40 +115,54 @@
             var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
             $('#dlg').window('close');//关闭弹出框
-
             $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
-
-        //计算标准值 绝对误差
-        //【误差】=（示值-实际值/量程）/10*100，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进
         function resetBiaoZhunZhi(obj) {
-            var first = "READVALUE", second = "ACTUALVALUE", third = "RANGE", gold = "SHIJISHUCHUZHI";
-                //重新计算当前行
-                var name = $(obj).attr("name");
-                var id = $(obj).attr("id");
-                id = id.substring(id.indexOf('_'));
-                var tongdao = id.split('_')[1];
-                third = third + "_" + tongdao + "_1_1";
-                first = first + id;//改动的地方，参与计算的列的name值
-                second = second + id;//改动的地方，参与计算的列的name值
-               
-                gold = gold + id;//改动的地方，误差的列的name值
-
-                var firstData = $(obj).parent().parent().find("#" + first).val();
-                var secondData = $(obj).parent().parent().find("#" + second).val();
-                var thirdData = $("#" + second).val();
-                if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
-                    var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-                    var jianfa = (accSub(firstData, (secondData / thirdData))/10 * 100);
-                    var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
-
-
-                    $(obj).parent().parent().find("#" + gold).val(data);
-                }
-             
+            var first = "READVALUE", second = "ACTUALVALUE", third = "ACTUALVALUE", gold = "SHIJISHUCHUZHI";
+            wuCha(obj, first, second, third, gold);
+                 
 
         }
- 
+        function resetBiaoZhunZhigaiBianLiang(obj) {
+            var first = "READVALUE", second = "ACTUALVALUE", third = "ACTUALVALUE", gold = "SHIJISHUCHUZHI";
+            wuCha(obj, first, second, third, gold);
+            gaiBianLiang(obj);
+
+        }
+        //通用的误差算法
+        //obj 自身对象
+        //first 第一列的值，做分母第一位
+        //second 第二列的值，做分母第二位
+        //third 第三列的值，做分子
+        //gold 误差列
+        function gaiBianLiang(obj) {
+            var first = "READVALUE", second = "ACTUALVALUE", third = "RANGE", gold = "UNCERTAINTYDEGREE";
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+            var lian = id.split('_')[2];
+            first = first + id;//改动的地方，参与计算的列的name值
+            second = second + id;//改动的地方，参与计算的列的name值
+            third = third + "_" + tongdao + "_" + lian;
+            gold = gold + id;//改动的地方，误差的列的name值
+            
+            var firstData = $(obj).parent().parent().find("#" + first).val();
+            var secondData = $(obj).parent().parent().find("#" + second).val();
+            var thirdData = $(obj).parent().parent().find("#" + third).val();
+            if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
+                var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+               
+                var ds = accSub(firstData, secondData);
+                var jianfa = accDiv(accSub(firstData, secondData), thirdData) * 100;
+                var data1 = (fomatFloat(jianfa, txtPointLen), txtPointLen);
+
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                $(obj).parent().parent().find("#" + gold).val(data);
+            }
+
+        }
         //离开事件，用于计算
         function blurValue(obj) {
 
