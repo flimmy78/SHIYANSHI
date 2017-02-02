@@ -16,13 +16,13 @@
             </select>
         </th>
         <th colspan="2">
-            <span>等级：</span>
+           
             <input name="zhidingwucha"  id="zhidingwucha_t_1_1" type="text" class="my-textbox tc" value="" style="width:140px">
         </th>
     </tr>
     <tr>
-        <th colspan="2" width="120" align="center">量程(Ω)</th>
-       
+        <th colspan="2" width="100" align="center">量程(Ω)</th>
+        <th width="110" align="center">等级</th>
         <th width="110" align="center">标准值(Ω)</th>
         <th width="110" align="center">显示值(Ω)</th>
         <th width="110" align="center">误差(%)</th>
@@ -100,16 +100,16 @@
                     //需要合并的列 //量程
                     htmlString.push("<td  rowspan='" + txtPoint + "' align='center' >X</td>");
                     htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, txtNumber, ""));
-                    //选用电阻阻值   （Ω）
-                 
+                    //等级  
+                    htmlString.push(SetTDHtml(txtPoint, "DENGJI", lianChengID, rowidx));
 
                 }
 
               
-                //输出示值 增加下拉框单位A
+                //标准值(Ω) 
                 htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, '', "", '', "resetBiaoZhunZhi"));
 
-                //读数值 增加下拉框单位V
+                //显示值（Ω）
                 htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, '', "", '', "resetBiaoZhunZhi"));
 
                 //误差(%)
@@ -129,10 +129,10 @@
             $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
 
-        //计算标准值 绝对误差
-        //【误差】=（示值-实际值/量程）/10*100，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进
+        //【误差】=(显示值-标准值)/标准值*100，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进
         function resetBiaoZhunZhi(obj) {
-            xiangDuiWuCha(obj, "ACTUALVALUE", "READVALUE", "SHIJISHUCHUZHI");
+            wuCha(obj, "ACTUALVALUE", "READVALUE", "READVALUE", "SHIJISHUCHUZHI");
+          
 
         }
  
