@@ -1327,8 +1327,7 @@ function wuChaLiangCheng(obj, first, second, third, gold) {
         //【误差】=（示值-标准值/量程）/10*100，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进
      
         var jianfa = accSub(firstData,accDiv(secondData, thirdData)) * 10;
-        var data1 = (fomatFloat(jianfa, txtPointLen), txtPointLen);
-
+        
         var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
         $(obj).parent().parent().find("#" + gold).val(data);
     }
