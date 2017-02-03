@@ -11,6 +11,13 @@ DanWeiDDLHtmlArray = [
                        "<option value=\"滞后\">滞后</option> " +
                        "<option value=\"超前\">超前</option>" +
                       "</select>"
+           }, {
+               Code: 'EDGZDianliu100',
+               Remark: '额定工作电流',
+               Value: "<select class=\"my-combobox\" name=\"EDGZDianliu\" style=\"width:70px; \">" +
+                       "<option value=\"100\">100</option> " +
+                        "<option value=\"100/√3\">100/√3\</option> " +
+                      "</select>"
            }
         , {
               Code: 'EDGZDianliu',
@@ -31,7 +38,7 @@ DanWeiDDLHtmlArray = [
          , {
              Code: 'DianLiuBaiFenBi',
              Remark: '额定电流百分比',
-             Value: "<select class=\"my-combobox\" name=\"DianLiuBaiFenBi\" style=\"width:50px; \">" +
+             Value: "<select class=\"my-combobox\" name=\"DianLiuBaiFenBi\" style=\"width:70px; \">" +
                      "<option value=\"1%\">1%</option> " +
                      "<option value=\"5%\">5%</option>" +
                      "<option value=\"20%\">20%</option> " +
@@ -2617,7 +2624,7 @@ RuleAttributeArray = [{
                 //检测项属性名称后需要加自动或者按钮不确定计算
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
-                JiSuanBuQueDingDu: '',
+                JiSuanBuQueDingDu: 'A:YINYONGXIANGDUI',
                 //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
