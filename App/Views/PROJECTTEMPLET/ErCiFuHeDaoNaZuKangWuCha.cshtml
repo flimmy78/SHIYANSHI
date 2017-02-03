@@ -46,10 +46,10 @@
         <th width="160" colspan="2" align="center">实测值(mS)</th>
     </tr>
     <tr>
-        <th width="80" align="center">GO</th>
-        <th width="80" align="center">BO</th>
-        <th width="80" align="center">GO</th>
-        <th width="80" align="center">BO</th>
+        <th width="80" align="center">@((ViewBag.canshu == "电压") ? "Go" : "Ro")</th>
+        <th width="80" align="center">@((ViewBag.canshu == "电压") ? "Bo" : "Xo")</th>
+        <th width="80" align="center">@((ViewBag.canshu == "电压") ? "Go" : "Rx")</th>
+        <th width="80" align="center">@((ViewBag.canshu == "电压") ? "Bo" : "Xx")</th>
     </tr>
 </thead>
 
