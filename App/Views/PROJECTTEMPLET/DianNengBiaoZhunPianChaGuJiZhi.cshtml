@@ -7,11 +7,11 @@
 @using Models
 <thead>
     <!--表头-->
-    <tr >
+    <tr>
         <th colspan="13" style="text-align:right">等级<input id="RANGE_t_1_1" name="RANGE" type="text" class="my-textbox tc" value="" style="width:120px"></th>
     </tr>
     <tr>
-        <th align="center" width="100" colspan="5">量限：</th>
+        <th align="center" width="100" colspan="3">量限：</th>
         <th style="width:49px">cosφ</th>
         <th style="width:49px">y1(%)</th>
         <th style="width:49px">y2(%)</th>
@@ -29,8 +29,9 @@
                 <option value="三相四线">三相四线</option>
             </select>
         </td>
-        <td><input id="READVALUE_t_1_1" name="READVALUE" type="text" class="my-textbox tc" value="100" style="width:49px" onblur="blurShuChuFanWeiZuiXiao(this)"></td>
         <td>
+            <input id="READVALUE_t_1_1" name="READVALUE" type="text" class="my-textbox tc" value="100" style="width:49px" onblur="blurShuChuFanWeiZuiXiao(this)">
+       
             <select class="my-combobox" name="ACTUALVALUE" id="ACTUALVALUE_t_1_1">
                 <option value="V">V</option>
                 <option value="MV">MV</option>
@@ -39,8 +40,9 @@
                 <option value="μV">μV</option>
             </select>
         </td>
-        <td><input id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" type="text" class="my-textbox tc" value="50" style="width:49px" onblur="blurShuChuFanWeiZuiXiao(this)"></td>
         <td>
+            <input id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" type="text" class="my-textbox tc" value="50" style="width:49px" onblur="blurShuChuFanWeiZuiXiao(this)">
+
             <select class="my-combobox" name="RELATIVEERROR" id="RELATIVEERROR_t_1_1">
                 <option value="A">A</option>
                 <option value="kA">kA</option>
