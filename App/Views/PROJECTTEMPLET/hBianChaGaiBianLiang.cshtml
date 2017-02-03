@@ -1,0 +1,281 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "8h变差改变量";
+}
+@using Common
+@using Models
+<thead id="tbody_moban">
+    <!--表头-->
+    
+    <tr>
+        <th width="80" align="center">Δymax=</th>
+        <th align="center">
+            <input class="my-textbox input-width" value="" type="text" name="ymax" id="ymax_t_1_1" onblur="changeValue(this)">
+        </th>
+        <th  align="center" colspan="7">
+        </th>
+    </tr>
+    <tr>
+        <td width="140" align="center">
+            量限
+        </td>
+        <td width="140" align="center">
+            cosφ
+        </td>
+        <td width="140" align="center">
+            Ib(%)	
+        </td>
+        <td width="140" align="center">
+            y1/y6(%)
+        </td>
+        <td width="140" align="center">
+            y2/y7(%)
+        </td>
+        <td width="140" align="center">
+            y3/y8(%)	
+        </td>
+        <td width="140" align="center">
+            y4/y9(%)
+        </td>
+        <td width="140" align="center">
+            y5(%)
+        </td>
+        <td width="140" align="center">
+            |ymax-ymin|(%)
+        </td>
+    </tr>
+    <tr>
+        <td width="140" align="center" rowspan="4">
+            <select class="my-combobox" name="RANGE" style="width:150px; " onchange="blurValue(this)" id="RANGE_t_1_1">
+                <option value="单相">单相</option>
+                <option value="三相三线">三相三线</option>
+                <option value="三相四线" >三相四线</option>
+            </select>
+        </td>
+        <td width="140" align="center" rowspan="2">
+            <input type="text" class="my-textbox input-width" value="1.0" id="ACTUALVALUE_t_1_1" name="ACTUALVALUE" onblur="blurValue(this);LianDongBuQueDingDu(this);">
+        </td>
+        <td width="140" align="center">
+            <select class="my-combobox" name="OUTPUTVALUE" id="OUTPUTVALUE_t_1_1" style="width:50px; ">
+                <option value="100">100</option>
+                <option value="50">50</option>
+            </select>
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMAX" id="YMAX1_t_1_1" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMAX" id="YMAX2_t_1_1" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMAX" id="YMAX3_t_1_1" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMAX" id="YMAX4_t_1_1" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMAX" id="YMAX5_t_1_1" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center" rowspan="2">
+            <input class="my-textbox input-width" value="" type="text" name="YMAX6" id="YMAX6_t_1_1" onblur="changeValue(this)">
+        </td>
+    </tr>
+    <tr>
+        <td width="140" align="center">
+            <select class="my-combobox" name="OUTPUTVALUE" id="OUTPUTVALUE_t_1_2" style="width:50px; ">
+                <option value="100">100</option>
+                <option value="50">50</option>
+            </select>
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMAX" id="YMAX1_t_1_2" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMAX" id="YMAX2_t_1_2" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMAX" id="YMAX3_t_1_2" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMAX" id="YMAX4_t_1_2" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMAX" id="YMAX5_t_1_2" onblur="changeValue(this)">
+        </td>
+       
+       
+    </tr>
+    <tr>
+        <td width="140" align="center" rowspan="2">
+            <input type="text" class="my-textbox input-width" value="1.0" id="ACTUALVALUE_t_1_3" name="ACTUALVALUE" onblur="blurValue(this);LianDongBuQueDingDu(this);">
+        </td>
+        <td width="140" align="center">
+            <select class="my-combobox" name="OUTPUTVALUE" id="OUTPUTVALUE_t_1_3" style="width:50px; ">
+                <option value="100">100</option>
+                <option value="50">50</option>
+            </select>
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMIN" id="YMIN1_t_1_3" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMIN" id="YMIN2_t_1_3" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMIN" id="YMIN3_t_1_3" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMIN" id="YMIN4_t_1_3" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMIN" id="YMIN5_t_1_3" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center" rowspan="2">
+            <input class="my-textbox input-width" value="" type="text" name="YMIN6" id="YMIN6_t_1_1" onblur="changeValue(this)">
+        </td>
+       
+    </tr>
+    <tr>
+   
+        <td width="140" align="center">
+            <select class="my-combobox" name="OUTPUTVALUE" id="OUTPUTVALUE_t_1_4" style="width:50px; ">
+                <option value="100">100</option>
+                <option value="50">50</option>
+            </select>
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMIN" id="YMIN1_t_1_4" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMIN" id="YMIN2_t_1_4" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMIN" id="YMIN3_t_1_4" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMIN" id="YMIN4_t_1_4" onblur="changeValue(this)">
+        </td>
+        <td width="140" align="center">
+            <input class="my-textbox input-width" value="" type="text" name="YMIN" id="YMIN5_t_1_4" onblur="changeValue(this)">
+        </td>
+       
+
+    </tr>
+</thead>
+
+<tbody id="tbody_moban">
+
+    <!--表体-->
+    <!--插入行的位置-->
+</tbody>
+
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //离开事件，用于计算
+        function changeValue(obj) {
+           
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+            //|ymax-ymin|是九个数最大值减去最小值，然后取绝对值。小数点后四位，四舍六入，逢五奇进偶不进
+           
+            var els = $("#tbody_" + tongdao + "  input[name='YMAX']");
+            var max = els[0].value;
+            if (max != "") {
+                max = parseFloat(max);
+            }
+            //循环取最大值
+            for (var i = 0, j = els.length; i < j; i++) {
+                var val = els[i].value;
+                if (val != "") {
+                    val = parseFloat(val);
+                    // val = Math.abs(val);
+                    if (max == "") {
+                        max = val;
+                    } else if (max < val)
+                    { max = val; }
+                }
+
+            }
+            //【最小指示值Umin(V)】为14个数据最小值	
+            var min = els[0].value;
+            if (min != "") {
+                min = parseFloat(min);
+            }
+            //循环取最小值
+            for (var i = 0, j = els.length; i < j; i++) {
+                var val = els[i].value;
+                if (val != "") {
+                    val = parseFloat(val);
+                    // val = Math.abs(val);
+                    if (min == "") {
+                        min = val;
+                    } else if (min > val)
+                    { min = val; }
+                }
+
+            }
+            var YMAXvalue = Math.abs(max - min);
+            YMAXvalue = zeroFloat(fomatFloat(YMAXvalue, 4), 4);
+            $("#YMAX6" + "_" + tongdao + "_1_1").val(YMAXvalue);
+
+
+           var els = $("#tbody_" + tongdao + "  input[name='YMIN']");
+           var max = els[0].value;
+           if (max != "") {
+               max = parseFloat(max);
+           }
+            //循环取最大值
+           for (var i = 0, j = els.length; i < j; i++) {
+               var val = els[i].value;
+               if (val != "") {
+                   val = parseFloat(val);
+                   // val = Math.abs(val);
+                   if (max == "") {
+                       max = val;
+                   } else if (max < val)
+                   { max = val; }
+               }
+
+           }
+            //【最小指示值Umin(V)】为10个数据最小值	
+           var min = els[0].value;
+           if (min != "") {
+               min = parseFloat(min);
+           }
+            //循环取最小值
+           for (var i = 0, j = els.length; i < j; i++) {
+               var val = els[i].value;
+               if (val != "") {
+                   val = parseFloat(val);
+                   // val = Math.abs(val);
+                   if (min == "") {
+                       min = val;
+                   } else if (min > val)
+                   { min = val; }
+               }
+
+           }
+           var YMINvalue = Math.abs(max - min);
+           YMINvalue = zeroFloat(fomatFloat(YMINvalue, 4), 4);
+           $("#YMIN6" + "_" + tongdao + "_1_1").val(YMINvalue);
+            //Δymax=是绝对值中的最大值										
+           var ymax = parseFloat(YMAXvalue) > parseFloat(YMINvalue) ? YMAXvalue : YMINvalue;
+
+           $("#ymax" + "_" + tongdao + "_1_1").val(ymax);
+        }
+       
+      
+    </script>
+
+}
+
+@section TanKuang {
+    <!--弹框的位置-->
+    <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
+    <input type="hidden" id="txtPointLen" value="1" /><!--小数点位数-->
+}
+

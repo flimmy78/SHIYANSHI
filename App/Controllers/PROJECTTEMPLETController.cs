@@ -438,6 +438,20 @@ namespace Langben.App.Controllers
         }
 
 
+
+        /// <summary>
+        ///8h变差改变量
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult hBianChaGaiBianLiang(string RULEID = "1085-2013_9", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
         /// <summary>
         ///24h变差
         /// </summary>
