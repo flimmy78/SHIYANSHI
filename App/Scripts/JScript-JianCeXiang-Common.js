@@ -2451,6 +2451,441 @@ RuleAttributeArray = [{
             }]
     }
  
+          ///////////////////直流仪器//////////////////////////////////
+                   ,
+    {
+        RuleID: '1052-2009_2_1',//检测项编号
+        Remark: '电阻示值误差-相对误差',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示show:显示，hidden:不显示
+                DuoTongDao: 'show',
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|READVAL1;OM|READVALUE,ACTUALVALUE;',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
+                JiSuanBuQueDingDu_DiBu: ''
+            }]
+    },
+    {
+        RuleID: '1052-2009_6',//检测项编号
+        Remark: '工作电流示值误差-相对误差',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示show:显示，hidden:不显示
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianLiu|DIANLIUZHIZHI,DIANLIUSHIJIZHI;OM|STANDARDRESISTANCE;DianYa|OUTPUTVALUE;',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
+                JiSuanBuQueDingDu_DiBu: ''
+            }]
+    }
+    ,
+    {
+        RuleID: '1052-2009_10',//检测项编号
+        Remark: '绝缘电阻-无误差',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示show:显示，hidden:不显示
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: '',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: '',
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
+                JiSuanBuQueDingDu_DiBu: ''
+            }]
+    }
+     ,
+    {
+        RuleID: '166-1993_3_1',//检测项编号
+        Remark: '1000Ω以下-无误差',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示show:显示，hidden:不显示
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: '',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
+                JiSuanBuQueDingDu_DiBu: ''
+            }]
+    }
+      ,
+    {
+        RuleID: '166-1993_3_2',//检测项编号
+        Remark: '1000Ω以下-标准电阻-相对误差-无型号编号',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示show:显示，hidden:不显示
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: '',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
+                JiSuanBuQueDingDu_DiBu: ''
+            }]
+    }
+       ,
+    {
+        RuleID: '166-1993_3_3',//检测项编号
+        Remark: '1000Ω以上-无误差',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示show:显示，hidden:不显示
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: '',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
+                JiSuanBuQueDingDu_DiBu: ''
+            }]
+    }
+     ,
+    {
+        RuleID: '166-1993_3_4',//检测项编号
+        Remark: '标准电阻箱-相对误差',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示show:显示，hidden:不显示
+                DuoTongDao: 'show',
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: '',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: '',
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
+                JiSuanBuQueDingDu_DiBu: 'D'
+            }]
+    }
+     ,
+    {
+        RuleID: '125-2004_9_1',//检测项编号
+        Remark: '标准电阻箱-相对误差',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示show:显示，hidden:不显示
+                DuoTongDao: 'show',
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: '',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: '',
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
+                JiSuanBuQueDingDu_DiBu: 'D'
+            }]
+    }
+    ,
+    {
+        RuleID: '125-2004_9_2',//检测项编号
+        Remark: '单桥-其他量程-相对误差',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示show:显示，hidden:不显示
+                DuoTongDao: 'show',
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: '',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: '',
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
+                JiSuanBuQueDingDu_DiBu: 'D'
+            }]
+    }
+      ,
+    {
+        RuleID: '125-2004_9_3',//检测项编号
+        Remark: '双桥-基本量程-滑线盘步进盘-相对误差',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示show:显示，hidden:不显示
+                DuoTongDao: 'show',
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: '',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: '',
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
+                JiSuanBuQueDingDu_DiBu: 'D'
+            }]
+    }
+      ,
+    {
+        RuleID: '125-2004_9_4',//检测项编号
+        Remark: '双桥-其他量程-相对误差',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示show:显示，hidden:不显示
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: '',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: '',
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
+                JiSuanBuQueDingDu_DiBu: 'D'
+            }]
+    }
+     ,
+    {
+        RuleID: '982-2003_4',//检测项编号
+        Remark: '残余电阻-无不确定度',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示show:显示，hidden:不显示
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: '',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: '',
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
+                JiSuanBuQueDingDu_DiBu: ''
+            }]
+    },
+    {
+        RuleID: '982-2003_5',//检测项编号
+        Remark: '开关变差-无不确定度',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示show:显示，hidden:不显示
+                DuoTongDao: 'hidden',
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: '',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: '',
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
+                JiSuanBuQueDingDu_DiBu: ''
+            }]
+    }
+    ,
+    {
+        RuleID: '982-2003_6_1',//检测项编号
+        Remark: '示值误差-无电压示值',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示show:显示，hidden:不显示
+                DuoTongDao: 'show',
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: '',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: '',
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
+                JiSuanBuQueDingDu_DiBu: 'D'
+            }]
+    }
+     ,
+    {
+        RuleID: '982-2003_6_1',//检测项编号
+        Remark: '示值误差-无电压示值',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示show:显示，hidden:不显示
+                DuoTongDao: 'show',
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: '',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: '',
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
+                JiSuanBuQueDingDu_DiBu: 'D'
+            }]
+    }
+
                 ,
     {
         RuleID: '1072-2011_6_1',//检测项编号
@@ -2465,7 +2900,36 @@ RuleAttributeArray = [{
                 //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DYDL|RANGE,READVALUE,ACTUALVALUE,SHIJISHUCHUZHI,RELATIVEERROR;HZ|HZMY;',
+                DanWeiHtmlDDL: '',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: '',
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
+                JiSuanBuQueDingDu_DiBu: 'D'
+            }]
+    }
+         ,
+    {
+        RuleID: '1072-2011_6_2',//检测项编号
+        Remark: '定值电阻-相对误差',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示show:显示，hidden:不显示
+                DuoTongDao: 'show',
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'OM|OUTPUTVALUE,READVALUE;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
@@ -2477,11 +2941,37 @@ RuleAttributeArray = [{
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
                 //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
-                JiSuanBuQueDingDu_DiBu: 'D'
+                JiSuanBuQueDingDu_DiBu: ''
+            }]
+    },
+    {
+        RuleID: '315-1983_2_6',//检测项编号
+        Remark: '电压表示值误差-相对误差',//检测项说明
+        Attributes:
+            [{
+                //添加通道按钮是否显示show:显示，hidden:不显示
+                DuoTongDao: 'show',
+                //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
+                //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
+                LianDongDanWeiDDL: '',
+                //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
+                //DianLiu:电流单位；DianYa:电压单位   
+                //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
+                DanWeiHtmlDDL: 'DianYa|OUTPUTVALUE,READVALUE,UNCERTAINTYDEGREE;',
+                //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
+                BuBaoCunShuJu: '',
+                //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
+                //OUTPUT_VALUE：输出示值
+                CalculateForAddLianCheng: '',
+                //不确定度
+                //检测项属性名称后需要加自动或者按钮不确定计算
+                //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
+                //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
+                JiSuanBuQueDingDu_DiBu: ''
             }]
     }
-          ///////////////////直流仪器//////////////////////////////////
-
     ///////////////////电能//////////////////////////////////
      ,
     {

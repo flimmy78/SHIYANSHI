@@ -1077,6 +1077,7 @@
     <Content Include="Views\SIGN\Index.cshtml" />
     <Content Include="Views\VQIJULINGQU1\Edit.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\hBianChaGaiBianLiang.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\CanYvDianZu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

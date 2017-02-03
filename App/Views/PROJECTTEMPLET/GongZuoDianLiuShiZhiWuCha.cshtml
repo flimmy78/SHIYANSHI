@@ -22,9 +22,13 @@
 
 <tbody id="tbody_moban">
     <!--表体-->
-    @*<tr>
+    <tr rowindex="1">
+        <td class="classstyle120" rowspan="1" align="center">
+            <input class="my-textbox input-width" value="1" id="STANDARDRESISTAN1_t_1_1" name="STANDARDRESISTAN1"  type="text">
+        </td>
+
         <td align="center">
-            <input class="my-textbox input-width"  value="" type="text" name="OUTPUTVALUE" id="OUTPUTVALUE_t_1_1" />
+            <input class="my-textbox input-width" value="" type="text" name="OUTPUTVALUE" id="OUTPUTVALUE_t_1_1" />
             <select class="my-combobox" name="OUTPUTVALUE_UNIT" id="OUTPUTVALUE_UNIT_t_1_1">
                 <option value="V">V</option>
                 <option value="MV">MV</option>
@@ -34,7 +38,7 @@
             </select>
         </td>
         <td align="center">
-            <input class="my-textbox input-width" value=""  type="text" name="STANDARDRESISTANCE" id="STANDARDRESISTANCE_t_1_1" />
+            <input class="my-textbox input-width" value="" type="text" name="STANDARDRESISTANCE" id="STANDARDRESISTANCE_t_1_1" />
             <select class="my-combobox" name="STANDARDRESISTANCE_UNIT" id="STANDARDRESISTANCE_UNIT_t_1_1">
                 <option value="Ω">Ω</option>
                 <option value="TΩ">TΩ</option>
@@ -46,7 +50,7 @@
             </select>
         </td>
         <td align="center">
-            <input class="my-textbox input-width"  value="" type="text" name="DIANLIUZHIZHI" id="DIANLIUZHIZHI_t_1_1" onblur="shiZhiWuCha(this)" />
+            <input class="my-textbox input-width" value="" type="text" name="DIANLIUZHIZHI" id="DIANLIUZHIZHI_t_1_1" onblur="shiZhiWuCha(this)" />
             <select class="my-combobox" name="DIANLIUZHIZHI_UNIT" id="DIANLIUZHIZHI_UNIT_t_1_1">
                 <option value="A">A</option>
                 <option value="kA">kA</option>
@@ -57,7 +61,7 @@
             </select>
         </td>
         <td align="center">
-            <input class="my-textbox input-width"  value="" type="text" name="DIANLIUSHIJIZHI" id="DIANLIUSHIJIZHI_t_1_1" onblur="shiZhiWuCha(this)" />
+            <input class="my-textbox input-width" value="" type="text" name="DIANLIUSHIJIZHI" id="DIANLIUSHIJIZHI_t_1_1" onblur="shiZhiWuCha(this)" />
             <select class="my-combobox" name="DIANLIUSHIJIZHI_UNIT" id="DIANLIUSHIJIZHI_UNIT_t_1_1">
                 <option value="A">A</option>
                 <option value="kA">kA</option>
@@ -78,7 +82,7 @@
 
             <input class="my-textbox input-width" type="text" name="UNCERTAINTYDEGREE" id="UNCERTAINTYDEGREE_t_1_1" value="0.12*10-2" />
         </td>
-    </tr>*@
+    </tr>
     <!--插入行的位置-->
 </tbody>
 
@@ -86,7 +90,7 @@
     <!--表尾-->
     <tr>
         <td colspan="7">
-            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+            <input type="hidden" id="hideLiangChengShuLiang" value="1" /> <!--默认量程是0-->
 
 
             <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
@@ -117,7 +121,7 @@
             var standardValue = "";
             var htmlString = [];
             var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
-           
+
             rowIdx = rowIdx + 1;
             var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
             for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
@@ -132,7 +136,7 @@
                 if (rowidx == 0) {
                     //需要合并的列
                 }
-                htmlString.push(SetTDHtml(rowspan, "STANDARDRESISTANCE", HangHaoID, rowidx, rowIdx.toString(), "classstyle120"));
+                htmlString.push(SetTDHtml(rowspan, "STANDARDRESISTAN1", HangHaoID, rowidx, rowIdx.toString(), "classstyle120"));
                 //测量点 需要下拉框
                 htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120"));
                 //二次输入标准值

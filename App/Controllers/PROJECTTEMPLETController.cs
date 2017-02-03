@@ -19,13 +19,52 @@ namespace Langben.App.Controllers
     public class PROJECTTEMPLETController : BaseController
     {//
      /// <summary>
-     ///仪器分辨力试验
+     ///电压表示值误差-相对误差
      /// </summary>
      /// <param name="id">canshu</param>
      /// <param name="RULEID">规程id</param>
      /// <param name="SCHEMEID">方案id</param>
      /// <param name="PREPARE_SCHEMEID">预备方案id</param>
      /// <returns></returns>
+        public ActionResult DianYaBiaoShiZhiWuCha(string RULEID = "315-1983_2_6", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///残余电阻-无不确定度
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult CanYvDianZu(string RULEID = "982-2003_4", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///双桥-基本量程-滑线盘步进盘-相对误差
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult ShuangQiaoJiBenLiangCheng(string RULEID = "169-2010_5", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///仪器分辨力试验
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
         public ActionResult YiQiFenBianLiShiYan(string RULEID = "169-2010_5", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
@@ -221,7 +260,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult KaiGuanBianChaWuBuQueDingDu(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult KaiGuanBianChaWuBuQueDingDu(string RULEID = "982-2003_5", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
@@ -417,28 +456,12 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult DingZhiDianZuXiangDuiWuCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult DingZhiDianZuXiangDuiWuCha(string RULEID = "1072-2011_6_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
-
-        /// <summary>
-        ///24h变差
-        /// </summary>
-        /// <param name="id">canshu</param>
-        /// <param name="RULEID">规程id</param>
-        /// <param name="SCHEMEID">方案id</param>
-        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
-        /// <returns></returns>
-        public ActionResult DianYaBiaoShiZhiWuCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
-        {
-
-            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
-        }
-
-
-
+ 
         /// <summary>
         ///8h变差改变量
         /// </summary>
@@ -487,7 +510,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult DanQiaoQiTaLiangCheng(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult DanQiaoQiTaLiangCheng(string RULEID = "125-2004_9_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
@@ -500,7 +523,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult BiaoZhunDianZuXiang(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult BiaoZhunDianZuXiang(string RULEID = "166-1993_3_4", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
@@ -513,7 +536,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult OMYiShangWuWuCha(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult OMYiShangWuWuCha(string RULEID = "166-1993_3_3", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
@@ -526,9 +549,22 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult OMYiXiaBiaoZhunDianZu(string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult OMYiXiaBiaoZhunDianZu(string RULEID = "166-1993_3_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        /// 单桥-基本量程-相对误差 
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult DanQiaoJiBenLiangCheng(string RULEID = "125-2004_9_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+             
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -539,24 +575,9 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult DanQiaoJiBenLiangCheng(string id = "频率输出", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JiBenWuChaDianZuShiZhi(string RULEID = "1072-2011_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-
-            ViewBag.canshu = id;
-            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
-        }
-        /// <summary>
-        /// 基本误差-电阻示值-相对误差
-        /// </summary>
-        /// <param name="id">canshu</param>
-        /// <param name="RULEID">规程id</param>
-        /// <param name="SCHEMEID">方案id</param>
-        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
-        /// <returns></returns>
-        public ActionResult JiBenWuChaDianZuShiZhi(string id = "频率输出", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
-        {
-
-            ViewBag.canshu = id;
+            
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -567,10 +588,9 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult OMYiXiaWuWuCha(string id = "频率输出", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult OMYiXiaWuWuCha( string RULEID = "166-1993_3_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-
-            ViewBag.canshu = id;
+             
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -581,10 +601,9 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult JueYuanDianZu(string id = "频率输出", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult JueYuanDianZu(string RULEID = "1052-2009_10", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-
-            ViewBag.canshu = id;
+             
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -595,10 +614,9 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult GongZuoDianLiuShiZhiWuCha(string id = "频率输出", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult GongZuoDianLiuShiZhiWuCha(string RULEID = "1052-2009_6", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-
-            ViewBag.canshu = id;
+             
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -609,7 +627,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult DianZuShiZhiWuCha(string id = "频率输出", string RULEID = "126-1995_2_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult DianZuShiZhiWuCha(string id = "频率输出", string RULEID = "1052-2009_2_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
             ViewBag.canshu = id;
