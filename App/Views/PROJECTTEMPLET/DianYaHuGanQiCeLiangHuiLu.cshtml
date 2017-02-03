@@ -10,7 +10,7 @@
     <tr>
         <td colspan="9">
             <div class="mt10">
-                <span>@((ViewBag.canshu== "电压") ? "电压" : "电流")互感器测量回路：</span>×
+                <span>@((ViewBag.canshu== "电压") ? "电压" : "电流")互感器测量回路：</span>
 
                 <select class="my-combobox" name="state" id="state_t_1_1" onchange="changeValue(this)">
                     <option value="合格" selected="selected">合格</option>
@@ -20,12 +20,7 @@
             </div>
           
         </td>
-        <td colspan="2">
-            <div class="mt10">
-                <a href="javascript:;" class="easyui-linkbutton l-btn l-btn-small l-btn-plain" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTongDao()" id="btnDuoTongDao" style="" group=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text">增加</span></span></a>
-            </div>
-
-        </td>
+         
     </tr>
     <tr>
         <th width="160" rowspan="2" align="center">说明</th>
