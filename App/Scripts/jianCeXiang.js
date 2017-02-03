@@ -1319,9 +1319,9 @@ function wuChaLiangCheng(obj, first, second, third, gold) {
     third = third + "_" + tongdao + "_" + lian;
     gold = gold + id;//改动的地方，误差的列的name值
 
-    var firstData = $(obj).parent().parent().find("#" + first).val();
-    var secondData = $(obj).parent().parent().find("#" + second).val();
-    var thirdData = $(obj).parent().parent().find("#" + third).val();
+    var firstData = $("#" + first).val();
+    var secondData = $("#" + second).val();
+    var thirdData = $("#" + third).val();
     if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
         //【误差】=（示值-标准值/量程）/10*100，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进

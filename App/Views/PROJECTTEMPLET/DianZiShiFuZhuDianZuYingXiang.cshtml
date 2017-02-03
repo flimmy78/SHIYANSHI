@@ -119,13 +119,13 @@
             $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
         function resetBiaoZhunZhi(obj) {
-            var first = "READVALUE", second = "ACTUALVALUE", third = "ACTUALVALUE", gold = "SHIJISHUCHUZHI";
+            var first = "ACTUALVALUE", second = "READVALUE", third = "ACTUALVALUE", gold = "SHIJISHUCHUZHI";
             wuCha(obj, first, second, third, gold);
                  
 
         }
         function resetBiaoZhunZhigaiBianLiang(obj) {
-            var first = "READVALUE", second = "ACTUALVALUE", third = "ACTUALVALUE", gold = "SHIJISHUCHUZHI";
+            var first = "ACTUALVALUE", second = "READVALUE", third = "ACTUALVALUE", gold = "SHIJISHUCHUZHI";
             wuCha(obj, first, second, third, gold);
             gaiBianLiang(obj);
 
@@ -137,7 +137,7 @@
         //third 第三列的值，做分子
         //gold 误差列
         function gaiBianLiang(obj) {
-            var first = "READVALUE", second = "ACTUALVALUE", third = "RANGE", gold = "UNCERTAINTYDEGREE";
+            var first = "ACTUALVALUE", second = "RELATIVEERROR", third = "RANGE", gold = "UNCERTAINTYDEGREE";
             //重新计算当前行
             var name = $(obj).attr("name");
             var id = $(obj).attr("id");
@@ -149,13 +149,12 @@
             third = third + "_" + tongdao + "_" + lian;
             gold = gold + id;//改动的地方，误差的列的name值
             
-            var firstData = $(obj).parent().parent().find("#" + first).val();
-            var secondData = $(obj).parent().parent().find("#" + second).val();
-            var thirdData = $(obj).parent().parent().find("#" + third).val();
+            var firstData = $("#" + first).val();
+            var secondData = $("#" + second).val();
+            var thirdData = $("#" + third).val();
             if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
                 var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-               
-                var ds = accSub(firstData, secondData);
+                
                 var jianfa = accDiv(accSub(firstData, secondData), thirdData) * 100;
                 var data1 = (fomatFloat(jianfa, txtPointLen), txtPointLen);
 
