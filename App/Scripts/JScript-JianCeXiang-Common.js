@@ -496,7 +496,7 @@ RuleAttributeArray = [{
             //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
             //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
             JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
             JiSuanBuQueDingDu_DiBu: 'N'
 
         }]
@@ -590,7 +590,8 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)ACTUALVALUE
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;OUTPUTVALUE;READVALUE;;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)     
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -621,7 +622,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -652,7 +653,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -683,7 +684,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -715,7 +716,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -747,7 +748,7 @@ RuleAttributeArray = [{
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
 
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -776,7 +777,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 //JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -807,7 +808,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -836,7 +837,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 //JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -867,7 +868,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -898,7 +899,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -929,7 +930,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -958,7 +959,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 //JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -989,7 +990,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1020,7 +1021,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1051,7 +1052,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1080,7 +1081,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 //JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1111,7 +1112,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1142,7 +1143,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1173,7 +1174,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1202,7 +1203,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:SHIJISHUCHUZHI',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1231,7 +1232,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1260,7 +1261,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1289,7 +1290,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1318,7 +1319,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1347,7 +1348,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1376,7 +1377,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1405,7 +1406,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1437,7 +1438,7 @@ RuleAttributeArray = [{
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;OUTPUTVALUE;READVALUE;HZMY;',
 
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1468,7 +1469,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;;READVALUE;HZMY;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1497,7 +1498,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1526,7 +1527,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1555,7 +1556,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1584,7 +1585,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1613,7 +1614,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1642,7 +1643,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1671,7 +1672,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 //JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1702,7 +1703,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;ACTUALVALUE;HZMY;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1733,7 +1734,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;ACTUALVALUE;HZMY;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1764,7 +1765,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1795,7 +1796,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;ACTUALVALUE;HZMY;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1826,7 +1827,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;ACTUALVALUE;HZMY;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1857,7 +1858,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;ACTUALVALUE;HZMY;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1889,7 +1890,7 @@ RuleAttributeArray = [{
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;ACTUALVALUE;HZMY;',
 
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1920,7 +1921,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;ACTUALVALUE;HZMY;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1951,7 +1952,7 @@ RuleAttributeArray = [{
                 //例如：显示值属性名称;量程属性名称;K属性名称;;;;
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;READVALUE;K;;ACTUALVALUE;HZMY;',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -1980,7 +1981,7 @@ RuleAttributeArray = [{
             //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
             //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
             JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
             JiSuanBuQueDingDu_DiBu: 'N'
         }]
     }
@@ -2009,7 +2010,7 @@ RuleAttributeArray = [{
             //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
             //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
             JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
             JiSuanBuQueDingDu_DiBu: 'N'
         }]
     }
@@ -2038,7 +2039,7 @@ RuleAttributeArray = [{
             //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
             //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
             JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
             JiSuanBuQueDingDu_DiBu: 'N'
         }]
     }
@@ -2067,7 +2068,7 @@ RuleAttributeArray = [{
             //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
             //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
             JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
             JiSuanBuQueDingDu_DiBu: 'N'
         }]
     }
@@ -2097,7 +2098,7 @@ RuleAttributeArray = [{
             //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
             //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
             JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
             JiSuanBuQueDingDu_DiBu: 'N'
         }]
     }
@@ -2126,7 +2127,7 @@ RuleAttributeArray = [{
             //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
             //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
             JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
             JiSuanBuQueDingDu_DiBu: 'N'
         }]
     }
@@ -2155,7 +2156,7 @@ RuleAttributeArray = [{
             //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
             //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
             JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
             JiSuanBuQueDingDu_DiBu: 'N'
         }]
     }
@@ -2184,7 +2185,7 @@ RuleAttributeArray = [{
             //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
             //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
             JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-            //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+            //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
             JiSuanBuQueDingDu_DiBu: 'N'
         }]
     }
@@ -2213,7 +2214,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -2242,7 +2243,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -2271,7 +2272,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -2300,7 +2301,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -2329,7 +2330,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -2358,7 +2359,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:SHIJISHUCHUZHI',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -2387,7 +2388,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:SHIJISHUCHUZHI',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -2416,7 +2417,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:SHIJISHUCHUZHI',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -2445,7 +2446,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:SHIJISHUCHUZHI',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -2506,7 +2507,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:JISUANWUCHA',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -2535,7 +2536,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -2568,7 +2569,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     },
@@ -2596,7 +2597,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -2625,7 +2626,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:YINYONGXIANGDUI',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     },
@@ -2653,7 +2654,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -2682,7 +2683,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:SHIJISHUCHUZHI',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     },
@@ -2710,7 +2711,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:SHIJISHUCHUZHI',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     },
@@ -2738,7 +2739,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     },
@@ -2766,7 +2767,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     },
@@ -2794,7 +2795,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     },
@@ -2822,7 +2823,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -2851,7 +2852,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
@@ -2880,8 +2881,8 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
-                JiSuanBuQueDingDu_DiBu: 'N'
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
+                JiSuanBuQueDingDu_DiBu: 'G'
             }]
     },
     {
@@ -2890,7 +2891,7 @@ RuleAttributeArray = [{
         Attributes:
             [{
                 //添加通道按钮是否显示show:显示，hidden:不显示
-                DuoTongDao: 'hidden',
+                DuoTongDao: 'show',
                 //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
@@ -2908,8 +2909,8 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
-                JiSuanBuQueDingDu_DiBu: 'N'
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
+                JiSuanBuQueDingDu_DiBu: 'G'
             }]
     },
     {
@@ -2918,7 +2919,7 @@ RuleAttributeArray = [{
         Attributes:
             [{
                 //添加通道按钮是否显示show:显示，hidden:不显示
-                DuoTongDao: 'hidden',
+                DuoTongDao: 'show',
                 //检测项单位联动下拉框联动:变更项名称1|联动相名称1,联动相名称2;变更项名称2|联动相名称1,联动相名称2
                 //一个量程下的单位与对应的输出示值和输出实际值的单位联动，更改量程的单位输出示值和输出实际值单位自动变更
                 LianDongDanWeiDDL: '',
@@ -2936,8 +2937,8 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
-                JiSuanBuQueDingDu_DiBu: 'N'
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
+                JiSuanBuQueDingDu_DiBu: 'G'
             }]
     },
     {
@@ -2964,7 +2965,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'G'
             }]
     },
@@ -2992,7 +2993,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'G'
             }]
     }
@@ -3024,7 +3025,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:JISUANWUCHA',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: ''
             }]
     }
@@ -3053,7 +3054,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: ''
             }]
     }
@@ -3082,7 +3083,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: ''
             }]
     }
@@ -3111,7 +3112,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: ''
             }]
     }
@@ -3140,7 +3141,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: ''
             }]
     }
@@ -3169,7 +3170,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: ''
             }]
     }
@@ -3198,7 +3199,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: ''
             }]
     },
@@ -3226,7 +3227,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: ''
             }]
     },
@@ -3254,7 +3255,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:BUQUEDINGDU',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: ''
             }]
     },
@@ -3282,7 +3283,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: ''
             }]
     }
@@ -3311,7 +3312,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: ''
             }]
     }
@@ -3340,7 +3341,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: ''
             }]
     }
@@ -3369,7 +3370,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: ''
             }]
     }
@@ -3398,7 +3399,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: ''
             }]
     },
@@ -3426,7 +3427,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: ''
             }]
     },
@@ -3454,7 +3455,7 @@ RuleAttributeArray = [{
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
                 JiSuanBuQueDingDu: '',
-                //是否有底部计算不确定度按钮,(Y:是,N:否，不填表示没有)
+                //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: ''
             }]
     }
