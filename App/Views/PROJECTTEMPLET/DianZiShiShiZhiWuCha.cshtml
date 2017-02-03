@@ -9,7 +9,7 @@
     <!--表头-->
     <tr>
         <th colspan="3">
-            <span>辅助电阻影响：</span>
+            <span>示值误差：</span>
             <select class="my-combobox" name="hege" id="hege_t_1_1">
                 <option value="合格" selected="selected">合格</option>
                 <option value="不合格">不合格</option>
@@ -21,7 +21,7 @@
         </th>
     </tr>
     <tr>
-        <th colspan="2" width="100" align="center">量程(Ω)</th>
+        <th colspan="1" width="100" align="center">量程(Ω)</th>
         <th width="110" align="center">等级</th>
         <th width="110" align="center">标准值(Ω)</th>
         <th width="110" align="center">显示值(Ω)</th>
@@ -98,7 +98,7 @@
 
                 if (rowidx == 0) {
                     //需要合并的列 //量程
-                    htmlString.push("<td  rowspan='" + txtPoint + "' align='center' >X</td>");
+                 
                     htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, txtNumber, ""));
                     //等级  
                     htmlString.push(SetTDHtml(txtPoint, "DENGJI", lianChengID, rowidx));
