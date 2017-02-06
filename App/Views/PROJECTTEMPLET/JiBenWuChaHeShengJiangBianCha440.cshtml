@@ -186,7 +186,7 @@
                 T4Data = parseFloat(T4Data);
                 T5Data = parseFloat(T5Data);
                 var max = T4Data > T5Data ? T4Data : T5Data;
-                var jianfa =accDiv( accSub(T3Data ,max) , 100);
+                var jianfa =accMul( accDiv( accSub(T3Data ,max) , 1),100);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T7).val(data);
             }
@@ -194,7 +194,7 @@
             if (T4Data != "" && T5Data != "") {
                 T4Data = parseFloat(T4Data);
                 T5Data = parseFloat(T5Data);
-                var jianfa =accDiv( Math.abs(accSub(T4Data, T5Data)) ,100);
+                var jianfa =accMul(accDiv( Math.abs(accSub(T4Data, T5Data)) ,1),100);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T8).val(data);
             }

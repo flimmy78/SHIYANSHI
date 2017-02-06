@@ -86,9 +86,10 @@
                         //(txtPoint, "RANGE", lianChengID, rowidx, "", "", "", ""));
                     //量程
                     htmlString.push(SetTDHtml(txtPoint, "OUTPUTVALUE", lianChengID, rowidx, txtNumber, "", "", ""));
+                    //等级指数
+                    htmlString.push(SetTDHtml(txtPoint, "READVALUE", lianChengID, rowidx, "", "", "", ""));
                 }
-                //等级指数
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", ""));
+               
                 //标准值
                 htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, "", "", "", "changeValue"));
                 //显示值
