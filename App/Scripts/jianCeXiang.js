@@ -1438,6 +1438,61 @@ function yinYongWuCha(obj, first, second, third, fourth, fifth, gold) {
 
 
 }
+///二等标准电阻标称值
+//obj 自身对象
+//计算值的控件名称
+function erDengBiaoChenZhi(obj, targetControlName) {
+    var biaochenzhi = $(obj).val();
+    if ((biaochenzhi == '10000' || biaochenzhi == '100000') && biaochenzhi != "") {
+        $(obj).parent().parent().find("#" + targetControlName).val(biaochenzhi);
+    }
+}
+
+
+///实际值Rx
+//obj 自身对象
+//计算值的控件名称
+//rn控件名称
+//axv控件名称
+//JDDL控件名称
+// anv控件名称
+//biaoChen控件名称
+//目標控件名称
+function shiIiZhiRX(obj, rNControlName, axvControlName, JDDLControlName, anvControlName, biaoChenControlName, targetControlName) {
+    //重新计算当前行
+    var name = $(obj).attr("name");
+    var id = $(obj).attr("id");
+    id = id.substring(id.indexOf('_'));
+    var tongdao = id.split('_')[1];
+    var rowidx = id.split('_')[3];
+
+    var rn = rNControlName + "_" + tongdao + "_1" + "_" + rowidx;
+    var axv = axvControlName + "_" + tongdao + "_1" + "_" + rowidx;
+    var jiandingdianliu = JDDLControlName + "_" + tongdao + "_1" + "_" + rowidx;
+    var anv = anvControlName + "_" + tongdao + "_1" + "_" + rowidx;
+    var biaochenzhi = biaoChenControlName + "_" + tongdao + "_1" + "_" + rowidx;
+    var bcz = $("#" + biaochenzhi).val();
+    var targetControlId = targetControlName + "_" + tongdao + "_1" + "_" + rowidx;
+
+
+    var rnValue = $("#" + rn).val();
+    var axvValue = $("#" + axv).val();
+    var anvValue = $("#" + anv).val();
+    var jiandingValue = $("#" + jiandingdianliu).val();
+
+    var length = 2;
+    if (bcz != "" && bcz == "10000")
+        length = 1;
+    if (bcz != "" && bcz == "100000")
+        length = 0;
+    if (rnValue != "" && axvValue != "" && jiandingValue != "") {
+        var shijizhiRx = (parseFloat(rnValue) + (parseFloat(axvValue) / parseFloat(jiandingValue) - parseFloat(anvValue) / parseFloat(jiandingValue))).toFixed(length);
+
+        $(obj).parent().parent().find("#" + targetControlId).val(shijizhiRx);
+    }
+}
+
+
 ///贝塞尔公式STDEV
 ///计算标准偏差
 ///strData 值逗号隔开

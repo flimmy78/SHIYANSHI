@@ -92,12 +92,12 @@
                 //需要合并的列
                  
 
-                htmlString.push(SetTDHtml(rowspan, "WE", HangHaoID, rowidx, "", ""));
+                htmlString.push(SetTDHtml(rowspan, "WE", HangHaoID, rowidx, "", "", "", 'BEICEDIANZU',""));
                 htmlString.push(SetTDHtml(rowspan, "TYEW", HangHaoID, rowidx, "", ""));
                 htmlString.push(SetTDHtml(rowspan, "UI", HangHaoID, rowidx, "", ""));
                 htmlString.push(SetTDHtml(rowspan, "OP", HangHaoID, rowidx, "", ""));
                 htmlString.push(SetTDHtml(rowspan, "ASF", HangHaoID, rowidx, "", ""));
-                htmlString.push(SetTDHtml(rowspan, "GHJ", HangHaoID, rowidx, "", ""));
+                htmlString.push(SetTDHtml(rowspan, "GHJ", HangHaoID, rowidx, "", "", "", 'blurValue', ""));
 
 
                 //标准值 增加下拉框单位V
@@ -126,8 +126,19 @@
         }
 
        
-        
 
+        //离开事件，用于计算
+        function BEICEDIANZU(obj) {
+
+            erDengBiaoChenZhi(obj, "OP_1_1_1");
+
+        }
+        //离开事件，用于计算
+        function blurValue(obj) {
+
+            shiIiZhiRX(obj, "GHJ", "ACTUALVALUE", "RELATIVEERROR", "HZMY", "WE", "SHIJISHUCHUZHI");
+
+        }
     </script>
 
 
