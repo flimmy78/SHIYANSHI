@@ -5,24 +5,23 @@
 }
 @using Common
 @using Models
-<thead>
+<thead  id="tbody_moban">
     <!--表头-->
     <tr>
-        <th>Δymax= <input id="RANGE_t_1_1" name="RANGE" type="text" class="my-textbox tc" value="" style="width:80px"></th>
+        <th>Δymax= <input id="RANGE_t_1_1" name="RANGE" type="text" class="my-textbox tc" value="" ></th>
         <th colspan="5" style="text-align:right">
-            <input id="SHURUKONG_t_1_1" name="SHURUKONG" type="text" class="my-textbox tc" value="" style="width:230px">
         </th>
     </tr>
     <tr>
-        <th align="center" width="100">量限：</th>
-        <th style="width:30px">cosφ</th>
-        <th style="width:30px">Ib(%)</th>
-        <th style="width:30px">初始值y1(%)</th>
-        <th style="width:30px">24h后y2(%)</th>
-        <th style="width:30px">|y1-y2|(%)</th>
+        <th align="center">量限：</th>
+        <th >cosφ</th>
+        <th>Ib(%)</th>
+        <th >初始值y1(%)</th>
+        <th>24h后y2(%)</th>
+        <th >|y1-y2|(%)</th>
     </tr>
     <tr>
-        <td rowspan="2">
+        <td rowspan="2" >
             <!--量限-->
             <select class="my-combobox" name="READVALUE" id="READVALUE_t_1_1">
                 <option value="单相">单相</option>
@@ -43,19 +42,19 @@
         </td>
         <td>
             <!--初始值y1(%)-->
-            <input id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" type="text" class="my-textbox tc" value="" style="width:30px" onblur="blurShuChuFanWeiZuiXiao(this)">
+            <input id="CHUSHIZHIYA_t_1_1" name="CHUSHIZHIYA" type="text" class="my-textbox tc" value=""onblur="blurShuChuFanWeiZuiXiao(this)">
         </td>
         <td>
             <!--24h后y2(%)-->
-            <input id="RELATIVEERROR_t_1_1" name="RELATIVEERROR" type="text" class="my-textbox tc" value="" style="width:30px" onblur="blurShuChuFanWeiZuiXiao(this)">
+            <input id="ERSIHHOUA_t_1_1" name="ERSIHHOUA" type="text" class="my-textbox tc" value="" onblur="blurShuChuFanWeiZuiXiao(this)">
         </td>
         <td>
             <!--|y1-y2|(%)-->
-            <input id="UNCERTAINTYDEGREE_t_1_1" name="UNCERTAINTYDEGREE" type="text" class="my-textbox tc" value="" style="width:30px" onblur="blurShuChuFanWeiZuiXiao(this)">
+            <input id="ABSYANDY_t_1_1" name="ABSYANDY" type="text" class="my-textbox tc" value="" onblur="blurShuChuFanWeiZuiXiao(this)">
         </td>
     </tr>
     <tr>
-        <td><!--cosφ-->1.0</td>
+        <td><!--cosφ-->0.5L</td>
         <td>
             <!--Ib(%)-->
             <select class="my-combobox" name="BUQUEDINGDU" id="BUQUEDINGDU_t_1_1">
@@ -68,15 +67,15 @@
         </td>
         <td>
             <!--初始值y1(%)-->
-            <input id="CHUSHIZHIYA_t_1_1" name="CHUSHIZHIYA" type="text" class="my-textbox tc" value="" style="width:30px" onblur="blurShuChuFanWeiZuiXiao(this)">
+            <input id="CHUSHIZHIYA_t_2_1" name="CHUSHIZHIYA" type="text" class="my-textbox tc" value="" onblur="blurShuChuFanWeiZuiXiao(this)">
         </td>
         <td>
             <!--24h后y2(%)-->
-            <input id="ERSIHHOUA_t_1_1" name="ERSIHHOUA" type="text" class="my-textbox tc" value="" style="width:30px" onblur="blurShuChuFanWeiZuiXiao(this)">
+            <input id="ERSIHHOUA_t_2_1" name="ERSIHHOUA" type="text" class="my-textbox tc" value=""  onblur="blurShuChuFanWeiZuiXiao(this)">
         </td>
         <td>
             <!--|y1-y2|(%)-->
-            <input id="ABSYANDY_t_1_1" name="ABSYANDY" type="text" class="my-textbox tc" value="" style="width:30px" onblur="blurShuChuFanWeiZuiXiao(this)">
+            <input id="ABSYANDY_t_2_1" name="ABSYANDY" type="text" class="my-textbox tc" value=""  onblur="blurShuChuFanWeiZuiXiao(this)">
         </td>
     </tr>
 </thead>
@@ -100,8 +99,52 @@
 
         }
         function blurShuChuFanWeiZuiXiao(obj) {
+           
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+            var liangCheng = id.split('_')[2];
+            //T1 = "CHUSHIZHIYA" + "_" + tongdao + "_1_1";            //改动的地方，参与计算的列的name值
+            //T2 = T2 + "_" + tongdao + "_1_1";//改动的地方，参与计算的列的name值
+            T1= "CHUSHIZHIYA" +id;                            //改动的地方，误差的列的name值
+            T2 = "ERSIHHOUA" + id;//有功分量 相对误差(%
+            T3 = "ABSYANDY" + id;//改动的地方，参与计算的列的name值
+           
+            var T1Data = $("#" + T1).val();//T1 相线及测量模式
+            var T2Data = $("#" + T2).val();//T1 量程(Un、Ib)
 
+           // var T3Data = $("#" + T3).val();//T1 量程(Un、Ib)
+            //|y1-y2|是y1和y2差值的绝对值，小数点后四位，四舍六入，逢五奇进偶不进。
+            if (T1Data != "" && T2Data != "") {
+                T1Data = parseFloat(T1Data);
+                T2Data = parseFloat(T2Data);
+                var jianfa =  Math.abs(accSub(T1Data, T2Data));
+                var data = zeroFloat(fomatFloat(jianfa, 4), 4);
+                $(obj).parent().parent().find("#" + T3).val(data);
+            }
+            //是绝对值中最大值
+            var els = $("#tongdao_" + tongdao + " input[name='ABSYANDY']"); //document.getElementsByName("ABSYANDY");
+            var max = els[0].value;
+            
+            if (max != "") { max = Math.abs(max); }
+            for (var i = 0, j = els.length; i < j; i++) {
+                var val = els[i].value;
+                if (val != "") {
+                    val = Math.abs(val);
+                    if (max == "") {
+                        max = val;
+                       
+                    } else if (max < val) {
+                        max = val;
+                      
+                    }
+                }
 
+            }
+            var data = zeroFloat(fomatFloat(max, 4), 4);
+            $("#RANGE" + "_" + tongdao + "_1_1").val(data);
+     
         }
 
 
