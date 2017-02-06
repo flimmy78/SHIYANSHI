@@ -1193,7 +1193,9 @@ function fomatFloat(src, pos) {
 }
 $(function () {
     ////
-    //debugger
+    debugger
+    var fd = accAdd(3, 4);
+
     //var dsa = kexue(3.504501, 3);
     //var dsa1 = kexue(35.04501, 3);
     //var dsa2 = kexue(0.3504501, 3);
