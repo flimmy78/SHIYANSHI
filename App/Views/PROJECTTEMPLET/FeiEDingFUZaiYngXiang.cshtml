@@ -8,12 +8,12 @@
 <thead>
     <!--表头-->
     <tr>
-        <th width="160" colspan="2" align="right">
+        <th width="160" colspan="3" align="right">
             <span>非额定负载影响：</span>
 
 
         </th>
-        <th width="160" colspan="7" align="left">
+        <th width="160" colspan="9" align="left">
             <select class="my-combobox" name="state" id="state_t_1_1">
                 <option value="合格" selected="selected">合格</option>
                 <option value="不合格">不合格</option>
@@ -22,12 +22,12 @@
         </th>
     </tr>
     <tr>
-        <th width="160" colspan="2" align="right"><span>非额定负载影响：</span></th>
-        <th width="160" colspan="7" align="left"><input style="width:650px"  value="量限：220V/5A；220V/2.5A；110V/5A；110V/2.5A，检定时，通以100%额定电压，40%~100额定电流" id="LIANGXIAN_t_1_1" name="LIANGXIAN_t" type="text">
+        <th width="160" colspan="3" align="right"><span>非额定负载影响：</span></th>
+        <th width="160" colspan="9" align="left"><input style="width:650px"  value="量限：220V/5A；220V/2.5A；110V/5A；110V/2.5A，检定时，通以100%额定电压，40%~100额定电流" id="LIANGXIAN_t_1_1" name="LIANGXIAN_t" type="text">
         </th>
     </tr>
     <tr>
-        <th width="160" rowspan="2" align="center">量程</th>
+        <th width="160" rowspan="2"  colspan="3" align="center">量程</th>
         <th width="160" rowspan="2" align="center">等级</th>
 
         <th width="160" rowspan="2" align="center">指示值</th>
@@ -107,7 +107,8 @@
                 //计算默认值
                 if (rowidx == 0) {
                     //需要合并的列 //量程
-
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE1", lianChengID, rowidx, txtNumber, "", "", "blurValue"));
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE2", lianChengID, rowidx, "/", "", "", "blurValue"));
                     htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, txtNumber, "", "", "blurValue"));
                     //等级
                     htmlString.push(SetTDHtml(txtPoint, "OUTPUTVALUE", lianChengID, rowidx, "", "", "", "blurValue"));
@@ -187,11 +188,8 @@
             txtPointLen = parseFloat(txtPointLen);
             //【平均值】=（上升+下降）/2
             if (T4Data != "" && T5Data != "") {
-                T4Data = parseFloat(T4Data);
-                T5Data = parseFloat(T5Data);
-                var jianfa = (T4Data + T5Data) / 2;
-                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
-                $(obj).parent().parent().find("#" + T6).val(data);
+                getAverage(obj, T4Data, T5Data, T6);
+           
             }
             //【基本误差】=（指示值-max（上升，下降））/1*100,不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进
             if (T3Data != "" && T4Data != "" && T5Data != "") {
@@ -200,7 +198,7 @@
                 T4Data = parseFloat(T4Data);
                 T5Data = parseFloat(T5Data);
                 var max = T4Data > T5Data ? T4Data : T5Data;
-                var jianfa = (T3Data - max) / 1 * 100;
+                var jianfa =accDiv( accSub(T3Data,max),100);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T7).val(data);
             }
@@ -208,7 +206,7 @@
             if (T4Data != "" && T5Data != "") {
                 T4Data = parseFloat(T4Data);
                 T5Data = parseFloat(T5Data);
-                var jianfa = Math.abs(accSub(T4Data, T5Data)) / 1 * 100;
+                var jianfa =accDiv( Math.abs(accSub(T4Data, T5Data)), 100);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T8).val(data);
             }

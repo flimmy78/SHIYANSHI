@@ -166,7 +166,7 @@
             T6 = T6 + id;//无功分量 相对误差(%
             T7 = T7 + id; //T7 cosφ
             T8 = T8 + id; //T8 额定电压(V)
-          //  var HZ =  "HZ" + "_" + tongdao + "_1_1";
+            var HZ = "HZ" + "_" + tongdao + "_1_1";  //HZ_t_1_1
             var T1Data = $("#" + T1).val();//T1 电压
             var T2Data = $("#" + T2).val();//T1 等级
      
@@ -175,7 +175,8 @@
             var T5Data = $(obj).parent().parent().find("#" + T5).val(); //T5 标准表读数 下降
             //   var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T6 上升误差(%)
             //   var T7Data = $(obj).parent().parent().find("#" + T7).val(); //T7 下降误差(%)
-           // var T8Data = $(obj).parent().parent().find("#" + T8).val(); //T8 升降变差(%)
+            // var T8Data = $(obj).parent().parent().find("#" + T8).val(); //T8 升降变差(%)
+            var HZData = $("#" + HZ).val();
           //  var T9Data = $(obj).parent().parent().find("#" + T9).val(); //T9 校准结果的不确定度U(k={0})
             var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
             txtPointLen = parseFloat(txtPointLen);
@@ -184,8 +185,8 @@
             if (T3Data != "" && T4Data != "") {
                 T3Data = parseFloat(T3Data);
                 T4Data = parseFloat(T4Data);
-                var jianfa = (accSub(T3Data,T4Data)) / T3Data * 100;
-                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                var jianfa = accMul(accDiv(accSub(T3Data, T4Data), HZData), 100);
+                var data = fomatFloat(jianfa, txtPointLen);
                 $(obj).parent().parent().find("#" + T6).val(data);
             }
             //【下降误差】=（指示值-标准下降）/HZ数*100，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进																																																								
@@ -194,8 +195,8 @@
 
                 T3Data = parseFloat(T3Data);
                 T5Data = parseFloat(T5Data);
-                var jianfa = (accSub(T3Data, T5Data)) / T3Data * 100;
-                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                var jianfa = accMul(accDiv(accSub(T3Data, T5Data), HZData), 100);
+                var data = fomatFloat(jianfa, txtPointLen);
                 $(obj).parent().parent().find("#" + T7).val(data);
             }
             //【升降变差】=ABS(上升-下降)/HZ数*100，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进																																																								
@@ -204,7 +205,7 @@
                 T3Data = parseFloat(T3Data);
                 T4Data = parseFloat(T4Data);
                 T5Data = parseFloat(T5Data);
-                var jianfa = Math.abs(accSub(T4Data, T5Data)) / T3Data * 100;
+                var jianfa = accMul(accDiv(Math.abs(accSub(T4Data, T5Data)), HZData), 100);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T8).val(data);
             }
@@ -239,7 +240,35 @@
                     { maxDOWN = val; }
                 }
             }
-            var max = Math.abs(maxUP) > Math.abs(maxDOWN) ? maxUP:maxDOWN;
+            var max = maxUP > maxDOWN ? maxUP : maxDOWN;
+            var minUP = UP[0].value;
+            var minDOWN = DOWN[0].value;
+            // if (max != "") { max = Math.abs(max); }
+            for (var i = 0, j = UP.length; i < j; i++) {
+                var val = UP[i].value;
+                if (val != "") {
+                    //  val = Math.abs(val);
+                    val = parseFloat(val);
+                    if (minUP == "") {
+                        minUP = val;
+                    } else if (minUP > val)
+                    { minUP = val; }
+                }
+
+            }
+            for (var i = 0, j = DOWN.length; i < j; i++) {
+                var val = DOWN[i].value;
+                if (val != "") {
+                    val = parseFloat(val);
+                    //  val = Math.abs(val);
+                    if (minDOWN == "") {
+                        minDOWN = val;
+                    } else if (minDOWN >val)
+                    { minDOWN = val; }
+                }
+            }
+            var min = minDOWN < minUP ? minDOWN : minUP;
+            var max = Math.abs(max) > Math.abs(min) ? max : min;
             $("#ZDJBWC" + "_" + tongdao + "_1_1").val(max);
             //【最大升降变差】=所有量程中最大的升降变差。MAX(AU26:AY29)		
             var els = document.getElementsByName("BUQUEDINGDU");

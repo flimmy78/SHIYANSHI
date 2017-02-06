@@ -12,6 +12,9 @@
             <span>准确度等级:</span>
             <input name="zhidingwucha" id="zhidingwucha_t_1_1" type="text" class="my-textbox tc" value="" style="width:140px">
         </th>
+        <th colspan="6">
+        
+        </th>
     </tr>
     <tr>
         <th  align="center">相线及测量模式</th>
@@ -171,16 +174,16 @@
             if (T5Data != "" && T6Data != "") {
                 T5Data = parseFloat(T5Data);
                 T6Data = parseFloat(T6Data);
-                var jianfa = (T5Data+T6Data)/2;
+                var jianfa =accDiv(accAdd(T5Data,T6Data),2);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T7).val(data);
             }
             var T7Data = $(obj).parent().parent().find("#" + T7).val(); //T7 y平均(%)
-            //y化整(%)=Round(横杠y/等级,1)*等级。																																																								
+            //y化整(%)=Round(y平均/等级,1)*等级。																																																								
             if (T7Data != "" && zhidingwuchaData != "") {
                 T7Data = parseFloat(T7Data);
                 zhidingwuchaData = parseFloat(zhidingwuchaData);
-                var jianfa = Math.round(T7Data / zhidingwuchaData, 1) * zhidingwuchaData;
+                var jianfa =accMul(accDiv(T7Data,zhidingwuchaData).toFixed(1) ,zhidingwuchaData);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T8).val(data);
             }

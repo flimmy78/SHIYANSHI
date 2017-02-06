@@ -5,6 +5,14 @@ var JiSuanBuQueDingDu_MeiHang_Html = " <a href=\"javascript:void(0)\" class=\"ea
 var DanWeiDDLHtmlArray = Array;
 DanWeiDDLHtmlArray = [
            {
+               Code: 'JiaoZhiLiuSelect',
+               Remark: '交直流选择DC,AC',
+               Value: "<select class=\"my-combobox\" name=\"JiaoZhiLiuSelect\" style=\"width:50px; \">" +
+                       "<option value=\"DC\">DC</option> " +
+                       "<option value=\"AC\">AC</option>" +
+                      "</select>"
+           },
+           {
                Code: 'ZhiHouChaoQian',
                Remark: '滞后',
                Value: "<select class=\"my-combobox\" name=\"ZhiHouChaoQian\" style=\"width:50px; \">" +
