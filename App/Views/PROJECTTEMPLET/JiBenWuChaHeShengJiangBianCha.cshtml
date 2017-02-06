@@ -192,7 +192,8 @@
                 MGData = parseFloat(MGData);
                 T1Data = parseFloat(T1Data);
                 T6Data = parseFloat(T6Data);
-                var jianfa = (T3Data/MGData*T1Data-T6Data)/T1Data*100;
+                
+                var jianfa =accMul(accDiv(accSub(accDiv(T3Data,accMul(MGData,T1Data)),T6Data),T1Data),100);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T7).val(data);
             }
@@ -201,7 +202,7 @@
                 T4Data = parseFloat(T4Data);
                 T5Data = parseFloat(T5Data);
                 T1Data = parseFloat(T1Data);
-                var jianfa = Math.abs(accSub(T4Data, T5Data)) / T1Data;
+                var jianfa =accDiv(Math.abs(accSub(T4Data, T5Data)),T1Data);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T8).val(data);
             }
@@ -209,6 +210,9 @@
             var els = document.getElementsByName("UNCERTAINTYDEGREE");
             var max = els[0].value;
             var maxValue = els[0].value;
+            //var r1, r2, n;
+            //try { r1 = maxValue.toString().split(".")[1].length } catch (e) { r1 = 0 }
+            //n = r1;
             if (max != "") { max = Math.abs(max); }
             for (var i = 0, j = els.length; i < j; i++) {
                 var val=els[i].value;
@@ -218,10 +222,14 @@
                     {
                         max = val;
                         maxValue = els[i].value;
+                        //try { r1 = maxValue.toString().split(".")[1].length } catch (e) { r1 = 0 }
+                        //n = r1 > n?r1:n;
                     } else if (max < val)
                     {
                         max = val;
                         maxValue = els[i].value;
+                        //try { r1 = maxValue.toString().split(".")[1].length } catch (e) { r1 = 0 }
+                        //n = r1 > n ? r1 : n;
                     }
                 }
 
