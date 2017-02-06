@@ -1266,6 +1266,25 @@ function zeroFloat(src, pos) {
 
 }
 
+//【平均值】=（上升+下降）/2
+//obj 自身对象
+//first 第一列的值
+//second 第二列的值
+//gold 平均值
+function getAverage(obj, first, second, gold) {
+    var r1, r2,n;
+    try { r1 = first.toString().split(".")[1].length } catch (e) { r1 = 0 }
+    try { r2 = second.toString().split(".")[1].length } catch (e) { r2 = 0 }
+    //last modify by deeka
+    //动态控制精度长度
+    n = (r1 >= r2) ? r1 : r2;
+    var jianfa1 = accDiv(accAdd(first, second), 2);
+    if (n != 0)
+    {
+        var jianfa1 = zeroFloat(fomatFloat(jianfa1, n), n);
+    }
+    $(obj).parent().parent().find("#" + gold).val(jianfa1);
+}
 //相对误差
 //obj 自身对象
 //first 第一列的值，做分母第一位

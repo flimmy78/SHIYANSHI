@@ -8,11 +8,11 @@
 <thead>
     <!--表头-->
     <tr>
-        <th width="160" colspan="2" align="center">基本误差和升降变差:<input class="my-textbox input-width" value="" type="text" name="MGS" id="MGS_t_1_1"></th>
+        <th width="160" colspan="3" align="center">基本误差和升降变差:<input class="my-textbox input-width" value="" type="text" name="MGS" id="MGS_t_1_1"></th>
         <th width="160" colspan="7" align="center"></th>
     </tr>
     <tr>
-        <th width="160" rowspan="2" align="center">量程</th>
+        <th width="160" rowspan="2" colspan="2"  align="center">量程</th>
         <th width="160" rowspan="2" align="center">等级</th>
 
         <th width="160" rowspan="2" align="center">指示值(格)</th>
@@ -100,7 +100,7 @@
                 //计算默认值
                 if (rowidx == 0) {
                     //需要合并的列 //量程
-
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE1", lianChengID, rowidx, "", "", "", "", "JiaoZhiLiuSelect"));
                     htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, txtNumber, "", "", "blurValue"));
                     //等级
                     htmlString.push(SetTDHtml(txtPoint, "OUTPUTVALUE", lianChengID, rowidx, "", "", "", "blurValue"));
@@ -181,11 +181,8 @@
             txtPointLen = parseFloat(txtPointLen);
              //【平均值】=（上升+下降）/2
             if (T4Data != "" && T5Data != "") {
-                T4Data = parseFloat(T4Data);
-                T5Data = parseFloat(T5Data);
-                var jianfa = (T4Data+T5Data)/2;
-                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
-                $(obj).parent().parent().find("#" + T6).val(data);
+                getAverage(obj, T4Data, T5Data, T6);
+               
             }
             var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T6 平均值
             //【基本误差】为=（指示值格/满格*当前量程-平均值）/当前量程*100，注意参与运算值要保持单位一致，如果不一致进行换算。四舍六入，逢五奇进偶不进。
@@ -211,6 +208,7 @@
             //【最大基本误差】所有量程中误差绝对值最大的误差	ZDJBWC
             var els = document.getElementsByName("UNCERTAINTYDEGREE");
             var max = els[0].value;
+            var maxValue = els[0].value;
             if (max != "") { max = Math.abs(max); }
             for (var i = 0, j = els.length; i < j; i++) {
                 var val=els[i].value;
@@ -218,16 +216,21 @@
                     val = Math.abs(val);
                     if (max == "")
                     {
-                        max =val;
+                        max = val;
+                        maxValue = els[i].value;
                     } else if (max < val)
-                    { max = val; }
+                    {
+                        max = val;
+                        maxValue = els[i].value;
+                    }
                 }
 
              }
-            $("#ZDJBWC" + "_" + tongdao + "_1_1").val(max);
+            $("#ZDJBWC" + "_" + tongdao + "_1_1").val(maxValue);
             //【最大升降变差】所有量程中升降变差绝对值最大的升降变差	ZDSJBC
             var els = document.getElementsByName("BUQUEDINGDU");
             var max = els[0].value;
+            var maxValue = els[0].value;
             if (max != "") { max = Math.abs(max); }
             for (var i = 0, j = els.length; i < j; i++) {
                 var val = els[i].value;
@@ -235,12 +238,16 @@
                     val = Math.abs(val);
                     if (max == "") {
                         max = val;
+                        maxValue = els[i].value;
                     } else if (max < val)
-                    { max = val; }
+                    {
+                        max = val;
+                        maxValue = els[i].value;
+                    }
                 }
 
             }
-            $("#ZDSJBC" + "_" + tongdao + "_1_1").val(max );
+            $("#ZDSJBC" + "_" + tongdao + "_1_1").val(maxValue);
         }
 
     </script>
