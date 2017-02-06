@@ -30,7 +30,7 @@
         </td>
         <td>
             <div class="mt10">
-                <input class="my-textbox input-width" value="" type="text" name="EDDY" id="EDDY_t_1_1">
+                <input class="my-textbox input-width" value="" type="text" name="EDDY" id="EDDY_t_1_1">V
             </div>
         </td>
       
@@ -182,11 +182,14 @@
 
             }
             $("#ZXZSZ" + "_" + tongdao + "_1_1").val(min);
+            var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+            txtPointLen = parseFloat(txtPointLen);
             //【开路电压稳定度(%)】=（最大指示值-最小指示值）/额定电压*100，例如当前额定电压为1000，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进
             var EDDY = $("#EDDY" + "_" + tongdao + "_1_1").val();
             EDDY = parseFloat(EDDY);
-            var KLDYWDD = accSub(max, min) / EDDY * 100;
-            $("#KLDYWDD" + "_" + tongdao + "_1_1").val(KLDYWDD);
+            var KLDYWDD =accMul( accDiv( accSub(max, min), EDDY),100);
+            var data = zeroFloat(fomatFloat(KLDYWDD, txtPointLen), txtPointLen);
+            $("#KLDYWDD" + "_" + tongdao + "_1_1").val(data);
             //biaoZhunPianCha(obj);
         }
 
