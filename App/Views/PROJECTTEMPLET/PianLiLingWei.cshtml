@@ -11,7 +11,7 @@
     <tr>
         <td colspan="4">
            
-                <span>偏离零位：</span>×
+                <span>偏离零位：</span>
 
                 <select class="my-combobox" name="state" id="state_t_1_1" >
                     <option value="合格" selected="selected">合格</option>
@@ -24,11 +24,12 @@
     </tr>
     <tr>
         <td colspan="4">
-            Δymax= <input id="RANGE_t_1_1" name="RANGE" type="text" class="my-textbox tc" value="" style="width:180px">
+            Δymax= <input id="RANGE_t_1_1" name="RANGE" type="text" class="my-textbox tc" value="" style="width:180px"  onblur="changeValue(this);">mm
+
 
         </td>
         <td colspan="4">
-            标度尺长度= <input id="statew_t_1_1" name="statew" type="text" class="my-textbox tc" value="" style="width:180px">
+            标度尺长度= <input id="statew_t_1_1" name="statew" type="text" class="my-textbox tc" value="" style="width:180px" onblur="changeValue(this);">mm
 
         </td>
 
@@ -54,8 +55,18 @@
             $("#hideDangQianTongDao").val(tbodyIndex); CreateRow();
 
         }
-        function blurShuChuFanWeiZuiXiao(obj) {
-
+        function changeValue(obj) {
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+          
+            var number = document.getElementById(id).value;
+            var reg = /^[\+\-]?\d*?\.?\d*?$/;
+            if (!number.match(reg)) {
+                document.getElementById(id).value="";
+            } else {
+              
+            }
 
         }
 
