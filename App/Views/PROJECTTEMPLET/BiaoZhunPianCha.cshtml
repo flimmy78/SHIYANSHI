@@ -128,9 +128,13 @@
             var fifthData = $("#" + fifth).val();
             if (firstData != "undefined" && secondData != "undefined" && thirdData != "undefined" && fourthData != "undefined" && fifthData != "undefined"
                 && firstData != "" && secondData != "" && thirdData != "" && fourthData != "" && fifthData != "") {
-
-
-                var AVERAGE = (parseFloat(firstData) + parseFloat(secondData) + parseFloat(thirdData) + parseFloat(fourthData) + parseFloat(fifthData)) / 5;
+              
+                firstData = toPoint(firstData);
+                secondData = toPoint(secondData);
+                thirdData = toPoint(thirdData);
+                fourthData = toPoint(fourthData);
+                fifthData = toPoint(fifthData);
+                var AVERAGE = accDiv(firstData.add(secondData).add(thirdData).add(fourthData).add(fifthData), 5);
                 $("#" + Average).val(percentages(AVERAGE,3));
                 var strData = firstData + "," + secondData + "," + thirdData + "," + fourthData + "," + fifthData;
                 var bzpc = calculate(strData);
