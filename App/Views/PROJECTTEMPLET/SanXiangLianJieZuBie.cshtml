@@ -8,21 +8,6 @@
 <thead>
     <!--表头-->
     <tr>
-        <td colspan="2">
-            <div class="mt10">
-                <span>三相连接组别：</span>
-            </div>
-           
-        </td>
-       
-        <td colspan="8">
-            <div class="mt10">
-                
-            </div>
-
-        </td>
-    </tr>
-    <tr>
         <th width="80" align="center" colspan="2">组别</th>
         <th align="center">
             Y/y0
@@ -52,30 +37,61 @@
     <tr>
         <th width="80" align="center" colspan="2">变比值</th>
         <th align="center">
-         <input class="my-textbox input-width" value="10" type="text" name="BBZ1" id="BBZ1_t_1_1" >
-            
+            <select class="my-combobox" name="BBZ1" id="BBZ1_t_1_1">
+                <option value="10">10</option>
+                <option value="10×√3">10×√3</option>
+                <option value="10/√3">10/√3</option>
+            </select>
         </th>
         <th align="center">
-             <input class="my-textbox input-width" value="10" type="text" name="BBZ2" id="BBZ2_t_1_1" >
+            <select class="my-combobox" name="BBZ2" id="BBZ2_t_1_1">
+                <option value="10">10</option>
+                <option value="10×√3">10×√3</option>
+                <option value="10/√3">10/√3</option>
+            </select>
         </th>
         <th align="center">
-             <input class="my-textbox input-width" value="10" type="text" name="BBZ3" id="BBZ3_t_1_1" >
+            <select class="my-combobox" name="BBZ3" id="BBZ3_t_1_1">
+                <option value="10">10</option>
+                <option value="10×√3">10×√3</option>
+                <option value="10/√3">10/√3</option>
+            </select>
         </th>
         <th align="center">
-             <input class="my-textbox input-width" value="10" type="text" name="BBZ4" id="BBZ4_t_1_1" >
+            <select class="my-combobox" name="BBZ4" id="BBZ4_t_1_1">
+                <option value="10">10</option>
+                <option value="10×√3">10×√3</option>
+                <option value="10/√3">10/√3</option>
+            </select>
         </th>
         <th align="center">
-            <input class="my-textbox input-width" value="10×√3" type="text" name="BBZ5" id="BBZ5_t_1_1" >
+            <select class="my-combobox" name="BBZ5" id="BBZ5_t_1_1">
+                <option value="10">10</option>
+                <option value="10×√3">10×√3</option>
+                <option value="10/√3">10/√3</option>
+            </select>
         </th>
         <th align="center">
-           <input class="my-textbox input-width" value="10×√3" type="text" name="BBZ6" id="BBZ6_t_1_1" >
+            <select class="my-combobox" name="BBZ6" id="BBZ6_t_1_1">
+                <option value="10">10</option>
+                <option value="10×√3">10×√3</option>
+                <option value="10/√3">10/√3</option>
+            </select>
           
         </th>
         <th align="center">
-             <input class="my-textbox input-width" value="10/√3" type="text" name="BBZ7" id="BBZ7_t_1_1" >
+            <select class="my-combobox" name="BBZ7" id="BBZ7_t_1_1">
+                <option value="10">10</option>
+                <option value="10×√3">10×√3</option>
+                <option value="10/√3">10/√3</option>
+            </select>
         </th>
         <th align="center">
-             <input class="my-textbox input-width" value="10/√3" type="text" name="BBZ8" id="BBZ8_t_1_1" >
+            <select class="my-combobox" name="BBZ8" id="BBZ8_t_1_1">
+                <option value="10">10</option>
+                <option value="10×√3">10×√3</option>
+                <option value="10/√3">10/√3</option>
+            </select>
         </th>
     </tr>
     <tr>
@@ -283,15 +299,15 @@
             if (firstData != "undefined" && secondData != "undefined"&& firstData != "" && secondData != "") {
                 if(secondData=="10×√3")
                 {
-                secondData=10*Math.sqrt(3);
+                secondData=accMul(10,Math.sqrt(3));
                 }
                 if(secondData=="10/√3")
                 {
-                secondData=10/Math.sqrt(3);
+                secondData=accDiv( 10,Math.sqrt(3));
                 }
-                var jianfa = (accSub( parseFloat(firstData), parseFloat(secondData))) / parseFloat(secondData) ;
+                var jianfa =accDiv(accSub( firstData,secondData),secondData) ;
               
-                $("#" + gold).val(fomatFloat(jianfa,2));
+                $("#" + gold).val(zeroFloat(fomatFloat(jianfa, 2), 2));
              
             }
 
