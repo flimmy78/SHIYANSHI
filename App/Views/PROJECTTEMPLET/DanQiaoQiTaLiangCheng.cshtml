@@ -8,8 +8,8 @@
 <thead>
     <!--表头-->
     <tr>
-        <th width="80" align="center">量程</th>
-        <th width="140" align="center">
+        <th colspan="2" width="80" align="center">量程</th>
+        <th colspan="2" width="100" align="center">
             测量盘<br>
             (
             <select class="my-combobox" name="celiangpan" id="celiangpan_t_1_1" onchange="changeValue(this)">
@@ -106,8 +106,7 @@
                 var rowspan = 1; //合并单元格行数
 
                 var txtVal = "";//(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
-                var unit = "<span>@((ViewBag.canshu == "电流") ? "I" : "U")<sub>n</sub></span>";//在输入框后面的单位
-
+                
 
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
                 if (rowidx == 0) {
@@ -116,8 +115,11 @@
                 }
                 //需要合并的列
 
-                //测量点
-                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120", unit));
+                //量程
+                htmlString.push("<td align='center' >X</td>");
+                htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, txtVal, "classstyle100", '', '', 'ShuZi'));
+                htmlString.push("<td align='center' >X</td>");
+                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "", '', '', 'ShuZi'));
                 //二次输入标准值
                 htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurErCiShuRuBiaoZhunZhi'));
                 //标准输出值

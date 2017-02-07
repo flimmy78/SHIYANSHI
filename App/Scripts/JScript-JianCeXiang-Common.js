@@ -5,6 +5,19 @@ var JiSuanBuQueDingDu_MeiHang_Html = " <a href=\"javascript:void(0)\" class=\"ea
 var DanWeiDDLHtmlArray = Array;
 DanWeiDDLHtmlArray = [
            {
+               Code: 'ShuZi',
+               Remark: 'Ib(%)',
+               Value: "<select class=\"my-combobox\" name=\"Ib\" style=\"width:79px; \">" +
+                       "<option value=\"1000\">1000</option> " +
+                        "<option value=\"100\">100</option> " +
+                     "<option value=\"10\">10</option>  " +
+                       "<option value=\"1\">1</option>  " +
+                     "<option value=\"0.1\">0.1</option>  " +
+                      "<option value=\"0.01\">0.01</option>  " +
+
+                       "<option value=\"0.001\">0.001</option>  " +
+                       "</select>"
+           }, {
                Code: 'JiaoZhiLiuSelect',
                Remark: '交直流选择DC,AC',
                Value: "<select class=\"my-combobox\" name=\"JiaoZhiLiuSelect\" style=\"width:50px; \">" +
@@ -28,13 +41,13 @@ DanWeiDDLHtmlArray = [
                       "</select>"
            }
         , {
-              Code: 'EDGZDianliu',
-              Remark: '额定工作电流',
-              Value: "<select class=\"my-combobox\" name=\"EDGZDianliu\" style=\"width:50px; \">" +
-                      "<option value=\"5\">5</option> " +
-                      "<option value=\"1\">1</option>" +
-                     "</select>"
-          }
+            Code: 'EDGZDianliu',
+            Remark: '额定工作电流',
+            Value: "<select class=\"my-combobox\" name=\"EDGZDianliu\" style=\"width:50px; \">" +
+                    "<option value=\"5\">5</option> " +
+                    "<option value=\"1\">1</option>" +
+                   "</select>"
+        }
         , {
             Code: 'JieLun',
             Remark: '结论',
@@ -59,13 +72,13 @@ DanWeiDDLHtmlArray = [
          }
    ,
   {
-                Code: 'Cos',
-                Remark: 'cosθ',
-                Value: "<select class=\"my-combobox\" name=\"Cos\" style=\"width:79px; \">" +
-                        "<option value=\"1.0\">1.0</option> " +
-                         "<option value=\"0.5L\">0.5L</option>" +
-                        "</select>"
-            },
+      Code: 'Cos',
+      Remark: 'cosθ',
+      Value: "<select class=\"my-combobox\" name=\"Cos\" style=\"width:79px; \">" +
+              "<option value=\"1.0\">1.0</option> " +
+               "<option value=\"0.5L\">0.5L</option>" +
+              "</select>"
+  },
        {
            Code: 'XiangBie',
            Remark: '相别',
@@ -75,16 +88,16 @@ DanWeiDDLHtmlArray = [
                     "<option value=\"C相\">C相</option>  " +
                    "</select>"
        }, {
-         Code: 'Ib',
-         Remark: 'Ib(%)',
-         Value: "<select class=\"my-combobox\" name=\"Ib\" style=\"width:79px; \">" +
-                 "<option value=\"100\">100</option> " +
-                  "<option value=\"50\">50</option>" +
-                  "<option value=\"20\">20</option>  " +
-                 "<option value=\"10\">10</option>  " +
-                 "<option value=\"5\">5</option>  " +
-                 "</select>"
-     },
+           Code: 'Ib',
+           Remark: 'Ib(%)',
+           Value: "<select class=\"my-combobox\" name=\"Ib\" style=\"width:79px; \">" +
+                   "<option value=\"100\">100</option> " +
+                    "<option value=\"50\">50</option>" +
+                    "<option value=\"20\">20</option>  " +
+                   "<option value=\"10\">10</option>  " +
+                   "<option value=\"5\">5</option>  " +
+                   "</select>"
+       },
     {
         Code: 'GongLvYinShu',
         Remark: '功率因数cosφ',
@@ -105,18 +118,18 @@ DanWeiDDLHtmlArray = [
                  "<option value=\"三相四线\">三相四线</option>  " +
                 "</select>"
     }, {
-         Code: 'EDingDianYa',
-         Remark: '额定电压',
-         Value: "<select class=\"my-combobox\" name=\"EDingDianYa\" style=\"width:79px; \">" +
-                 "<option value=\"50\">50</option> " +
-                  "<option value=\100\">100</option>" +
-                  "<option value=\"250\">250</option>  " +
-                  "<option value=\"500\">500</option>  " +
-                  "<option value=\"1000\">1000</option>  " +
-                  "<option value=\"2500\">2500</option>  " +
-                  "<option value=\"5000\">5000</option>  " +
-                 "</select>"
-     },
+        Code: 'EDingDianYa',
+        Remark: '额定电压',
+        Value: "<select class=\"my-combobox\" name=\"EDingDianYa\" style=\"width:79px; \">" +
+                "<option value=\"50\">50</option> " +
+                 "<option value=\100\">100</option>" +
+                 "<option value=\"250\">250</option>  " +
+                 "<option value=\"500\">500</option>  " +
+                 "<option value=\"1000\">1000</option>  " +
+                 "<option value=\"2500\">2500</option>  " +
+                 "<option value=\"5000\">5000</option>  " +
+                "</select>"
+    },
     {
         Code: 'DianLiu',
         Remark: '电流单位',
@@ -696,7 +709,7 @@ RuleAttributeArray = [{
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
-     
+
       ,
     {
         RuleID: '724-1991_2_4',//检测项编号
@@ -2458,7 +2471,7 @@ RuleAttributeArray = [{
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
     }
- 
+
           ///////////////////直流仪器//////////////////////////////////
                    ,
     {
@@ -2705,7 +2718,7 @@ RuleAttributeArray = [{
                 //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: '',
+                DanWeiHtmlDDL: 'OM|OUTPUTVALUE',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
@@ -3169,7 +3182,7 @@ RuleAttributeArray = [{
                 //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: '', 
+                DanWeiHtmlDDL: '',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
