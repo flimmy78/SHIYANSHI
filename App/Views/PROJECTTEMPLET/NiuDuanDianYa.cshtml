@@ -7,9 +7,15 @@
 @using Models
 <thead>
     <!--表头-->
-    <tr>
-        <th colspan="1" align="right" style="color:#4800ff">@((ViewBag.canshu == "钮端电压") ? "钮端电压" : "电压测量") ：</th>
-        <th colspan="3" align="left"><input class="my-textbox input-width" value="" type="text" name="HZ" id="HZ_t_1_1"></th>
+
+    <tr @((ViewBag.canshu == "钮端电压") ? "" : "hidden=\"hidden\"") >
+        <th colspan="1" align="right" >@((ViewBag.canshu == "钮端电压") ? "钮端电压" : "电压测量") ：</th>
+        <th colspan="3" align="left">
+            <select class="my-combobox" name="HZ" id="HZ_t_1_1">
+                <option value="合格">合格</option>
+                <option value="不合格">不合格</option>
+            </select>
+        </th>
 
         <th colspan="6">
             <span>准确度等级:</span>
@@ -20,11 +26,11 @@
     <tr>
         <th align="center">额定电压(V)</th>
         <th align="center">开路电压(V)</th>
-        <th align="center" style="color:#0026ff">@((ViewBag.canshu == "钮端电压") ? "偏差" : "误差")(%)</th>
-        <th align="center" style="color:#0026ff" colspan="3">允许@((ViewBag.canshu == "钮端电压") ? "偏差" : "误差")(%)</th>
-        <th align="center" style="color:#0026ff">@((ViewBag.canshu == "钮端电压") ? "中值" : "跌落")电压(V)</th>
-        <th align="center" style="color:#0026ff">@((ViewBag.canshu == "钮端电压") ? "偏差" : "误差")(%)</th>
-        <th align="center" style="color:#0026ff">允许@((ViewBag.canshu == "钮端电压") ? "偏差" : "误差")(%)</th>
+        <th align="center">@((ViewBag.canshu == "钮端电压") ? "偏差" : "误差")(%)</th>
+        <th align="center" colspan="3">允许@((ViewBag.canshu == "钮端电压") ? "偏差" : "误差")(%)</th>
+        <th align="center" >@((ViewBag.canshu == "钮端电压") ? "中值" : "跌落")电压(V)</th>
+        <th align="center">@((ViewBag.canshu == "钮端电压") ? "偏差" : "误差")(%)</th>
+        <th align="center">允许@((ViewBag.canshu == "钮端电压") ? "偏差" : "误差")(%)</th>
         <th align="center">
             校准结果的不确定度<br>
             U(k =

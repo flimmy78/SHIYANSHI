@@ -465,13 +465,15 @@
                 $(obj).parent().parent().find("#" + T8).val(data);
             }
             var T8Data = $(obj).parent().parent().find("#" + T8).val(); //T8 y平均(%)
+            var txtPointLen1 = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+            txtPointLen1 = parseFloat(txtPointLen1);
             //y化整(%)=Round(横杠y/等级,1)*等级,比准确度等级多一位。
             if (T8Data != "" && zhidingwuchaData != "") {
                 T8Data = parseFloat(T8Data);
                 zhidingwuchaData = parseFloat(zhidingwuchaData);
                 //var jianfa = Math.round(T8Data / zhidingwuchaData, 1) * zhidingwuchaData;
                 var jianfa = accMul(accDiv(T8Data, zhidingwuchaData).toFixed(1), zhidingwuchaData);
-                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen1), txtPointLen1);
                 $(obj).parent().parent().find("#" + T9).val(data);
             }
         }
