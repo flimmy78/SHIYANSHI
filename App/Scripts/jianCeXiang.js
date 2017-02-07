@@ -1494,6 +1494,57 @@ function shiIiZhiRX(obj, rNControlName, axvControlName, JDDLControlName, anvCont
     }
 }
 
+function wuCha1(obj, shiji, biaochen, target, point) {
+    //重新计算当前行
+    var name = $(obj).attr("name");
+    var id = $(obj).attr("id");
+    id = id.substring(id.indexOf('_'));
+    var tongdao = id.split('_')[1];
+    var rowidx = id.split('_')[3];
+
+    var biaochenName = biaochen + "_" + tongdao + "_1" + "_" + rowidx;
+    var shijiName = shiji + "_" + tongdao + "_1" + "_" + rowidx;
+    var targetName = target + "_" + tongdao + "_1" + "_" + rowidx;
+    var pointName = point + "_" + tongdao + "_1" + "_" + rowidx;
+
+    var biaochenValue = $("#" + biaochenName).val();
+    var shiJiValue = $("#" + shijiName).val();
+    var yuxunwucha = $("#" + pointName).val();
+
+    var length = yuxunwucha.split(".").length == 2 ? yuxunwucha.split(".")[1].length : 0
+    if (biaochenValue != "" && shiJiValue != "")
+        var wucha2 = fomatFloat(parseFloat((parseFloat(shiJiValue) - parseFloat(biaochenValue)) / parseFloat(biaochenValue) * 100), (length + 1))
+    $(obj).parent().parent().find("#" + targetName).val(wucha2);
+
+}
+
+///标称值
+//liangcheng  量程,//celiangPan 测量盘,ceLiangDian 测量点,target 目标,标称值
+function BiaoChenZhi1(obj, liangCheng, ceLiangPan, ceLiangDian, target, point) {
+    //重新计算当前行
+    var name = $(obj).attr("name");
+    var id = $(obj).attr("id");
+    id = id.substring(id.indexOf('_'));
+    var tongdao = id.split('_')[1];
+    var rowidx = id.split('_')[3];
+
+    var liangChengName = liangCheng + "_" + tongdao + "_1" + "_" + rowidx;
+    var ceLiangPanName = ceLiangDian + "_" + tongdao + "_1" + "_" + rowidx;
+    var targetName = target + "_" + tongdao + "_1" + "_" + rowidx;
+    var pointName = point + "_" + tongdao + "_1" + "_" + rowidx;
+    var ceLiangDianName = ceLiangDian + "_" + tongdao + "_1" + "_" + rowidx;
+
+    var liangChengValue = $("#" + liangChengName).val();
+    var ceLiangPanValue = $("#" + ceLiangPanName).val();
+    var ceLiangDianValue = $("#" + ceLiangDianName).val();
+    var shijizhi = $("#" + pointName).val();
+
+    var length = shijizhi.split(".").length >= 2 ? shijizhi.split(".")[1].length : 0
+    if (liangChengValue != "" && ceLiangPanValue != "" && ceLiangDianValue != "")
+        var biaocheng = fomatFloat((parseFloat(liangChengValue) * parseFloat(ceLiangPanValue) * parseFloat(ceLiangDianValue)), (length))
+    $(obj).parent().parent().find("#" + targetName).val(biaocheng);
+
+}
 
 ///贝塞尔公式STDEV
 ///计算标准偏差
