@@ -143,7 +143,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult NiuDuanDianYa(string id = "钮端电压", string RULEID = "622-1997_4", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult NiuDuanDianYa(string id = "电压测量", string RULEID = "1005-2005_4", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
