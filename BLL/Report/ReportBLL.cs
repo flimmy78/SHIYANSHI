@@ -15,7 +15,7 @@ using NPOI.HPSF;
 using NPOI.HSSF.Util;
 using NPOI.POIFS.FileSystem;
 //using NPOI.SS.UserModel;
- 
+
 using Langben.BLL;
 using System.IO;
 using Langben.IBLL;
@@ -26,7 +26,7 @@ namespace Langben.Report
     /// <summary>
     /// 报告业务逻辑
     /// </summary>
-    public partial class  ReportBLL
+    public partial class ReportBLL
     {
         /// <summary>
         /// 模板中所有的合并的单元格
@@ -130,7 +130,7 @@ namespace Langben.Report
         /// <param name="ID">预备方案ID</param>
         /// <param name="err">返回错误信息</param>
         /// <returns></returns>
-        public bool UpdateFuJianRemark2_YuanShiJiLu(string ID,out string err)
+        public bool UpdateFuJianRemark2_YuanShiJiLu(string ID, out string err)
         {
             err = "";
             try
@@ -171,7 +171,7 @@ namespace Langben.Report
                 {
                     string fRemark = "";//用于记录检定员/校准员行号_检定员/校准员列号|核验员行号_核验员列号;
                     fRemark = rowIndex.ToString() + "_5|" + rowIndex.ToString() + "_23";
-                    fEntity.REMARK2 = fRemark;                    
+                    fEntity.REMARK2 = fRemark;
 
                     if (fBll.Edit(ref validationErrors, fEntity))
                     {
@@ -196,7 +196,7 @@ namespace Langben.Report
                 }
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 err = ex.Message;
                 return false;
@@ -211,13 +211,13 @@ namespace Langben.Report
         /// <param name="ID">预备方案ID</param>
         /// <param name="Message"></param>
         /// <param name="Person">操作人</param>
-        public bool AddQianMing(string ID,out string err)
+        public bool AddQianMing(string ID, out string err)
         {
             err = "";
-            
+
             try
             {
-                if(string.IsNullOrWhiteSpace(ID))
+                if (string.IsNullOrWhiteSpace(ID))
                 {
                     err = "请输入预备方案ID";
                     return false;
@@ -236,7 +236,7 @@ namespace Langben.Report
 
                 if (entity == null)
                 {
-                    err = "未找到预备方案数据"+ID;
+                    err = "未找到预备方案数据" + ID;
                     return false;
                 }
                 Dictionary<string, SysPerson> picList = GetPerson(entity);
@@ -247,140 +247,9 @@ namespace Langben.Report
 
                 AddQianMing_BaoGao(entity, picList, fEntity, type);//更新报告签名
 
-
-
-
-                #region 去掉
-
-
-                //string xlsPath = fEntity.FULLPATH;        
-
-                //FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.ReadWrite);
-                //IWorkbook hssfworkbook = new HSSFWorkbook(file);
-
-                //string sheetName_Destination = "封皮";
-                //ExportType type = GetExportType(entity, "Report");
-                //if (entity.CONCLUSION == "不合格" && type == ExportType.Report_JianDing)//不合格只有通知书封皮
-                //{
-                //    sheetName_Destination = "通知书封皮";
-                //}
-                //ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
-
-
-                //#region 批准人
-                //string picPath = "";
-                //byte[] bytes = null;
-                //if (fEntity.Row_PiZhunRen != -1 && fEntity.Col_PiZhunRen != -1)
-                //{
-                //    if (!string.IsNullOrWhiteSpace(entity.APPROVALEPERSON))
-                //    {
-                //        if (picList!=null && picList.ContainsKey(entity.APPROVALEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.APPROVALEPERSON].HDpic))
-                //        {
-                //            picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.APPROVALEPERSON].HDpic);
-                //            bytes = System.IO.File.ReadAllBytes(picPath);
-                //            int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
-                //            IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
-                //            IClientAnchor anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen + 3, fEntity.Row_PiZhunRen + 1);
-                //            IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
-                //            //pict.Resize();
-                //            sheet_Destination.GetRow(fEntity.Row_PiZhunRen).GetCell(fEntity.Col_PiZhunRen).SetCellValue("");
-
-                //        }
-                //        else if(picList!=null && picList.ContainsKey(entity.APPROVALEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.APPROVALEPERSON].MyName))
-                //        {
-                //            sheet_Destination.GetRow(fEntity.Row_PiZhunRen).GetCell(fEntity.Col_PiZhunRen).SetCellValue(picList[entity.APPROVALEPERSON].MyName);
-                //        }
-                //        else
-                //        {
-                //            sheet_Destination.GetRow(fEntity.Row_PiZhunRen).GetCell(fEntity.Col_PiZhunRen).SetCellValue(entity.APPROVALEPERSON);
-                //        }
-                //    }
-                //    else
-                //    {
-                //        sheet_Destination.GetRow(fEntity.Row_PiZhunRen).GetCell(fEntity.Col_PiZhunRen).SetCellValue("/");
-                //    }
-                //}
-
-                //#endregion
-
-                //#region 核验员
-                //if (fEntity.Row_HeYanYuan != -1 && fEntity.Col_HeYanYuan != -1)
-                //{
-                //    if (!string.IsNullOrWhiteSpace(entity.AUDITTEPERSON))
-                //    {
-                //        if (picList!=null && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].HDpic))
-                //        {
-                //            picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.AUDITTEPERSON].HDpic);
-                //            bytes = System.IO.File.ReadAllBytes(picPath);
-                //            int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
-                //            IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
-                //            IClientAnchor anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_HeYanYuan, fEntity.Row_HeYanYuan, fEntity.Col_HeYanYuan + 3, fEntity.Row_HeYanYuan + 1);
-                //            IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
-                //            //pict.Resize();
-                //            sheet_Destination.GetRow(fEntity.Row_HeYanYuan).GetCell(fEntity.Col_HeYanYuan).SetCellValue("");
-
-                //        }
-                //        else if(picList!=null && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].MyName))
-                //        {
-                //            sheet_Destination.GetRow(fEntity.Row_HeYanYuan).GetCell(fEntity.Col_HeYanYuan).SetCellValue(picList[entity.AUDITTEPERSON].MyName);
-                //        }
-                //        else
-                //        {
-                //            sheet_Destination.GetRow(fEntity.Row_HeYanYuan).GetCell(fEntity.Col_HeYanYuan).SetCellValue(entity.AUDITTEPERSON);
-                //        }
-                //    }
-                //    else
-                //    {
-                //        sheet_Destination.GetRow(fEntity.Row_HeYanYuan).GetCell(fEntity.Col_HeYanYuan).SetCellValue("/");
-                //    }
-
-                //}
-                //#endregion
-
-                //#region 检定员/校准员
-                //if (fEntity.Row_JianDingYuan != -1 && fEntity.Col_JianDingYuan != -1)
-                //{
-                //    if (!string.IsNullOrWhiteSpace(entity.CREATEPERSON))
-                //    {
-                //        if (picList!=null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].HDpic))
-                //        {
-                //            picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.CREATEPERSON].HDpic);
-                //            bytes = System.IO.File.ReadAllBytes(picPath);
-                //            int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
-                //            IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
-                //            IClientAnchor anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_JianDingYuan, fEntity.Row_JianDingYuan, fEntity.Col_JianDingYuan + 3, fEntity.Row_JianDingYuan + 1);
-                //            IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
-                //            //pict.Resize();
-                //            sheet_Destination.GetRow(fEntity.Row_JianDingYuan).GetCell(fEntity.Col_JianDingYuan).SetCellValue("");
-
-                //        }
-                //        else if (picList!=null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].MyName))
-                //        {
-                //            sheet_Destination.GetRow(fEntity.Row_JianDingYuan).GetCell(fEntity.Col_JianDingYuan).SetCellValue(picList[entity.CREATEPERSON].MyName);
-                //        }
-                //        else
-                //        {
-                //            sheet_Destination.GetRow(fEntity.Row_JianDingYuan).GetCell(fEntity.Col_JianDingYuan).SetCellValue(entity.CREATEPERSON);
-                //        }
-                //    }
-                //    else
-                //    {
-                //        sheet_Destination.GetRow(fEntity.Row_JianDingYuan).GetCell(fEntity.Col_JianDingYuan).SetCellValue("/");
-                //    }
-                //}
-
-
-
-                //#endregion
-
-                //using (FileStream fileWrite = new FileStream(xlsPath, FileMode.Create))
-                //{
-                //    hssfworkbook.Write(fileWrite);
-                //}
-                #endregion
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 err = ex.Message;
                 return false;
@@ -395,14 +264,14 @@ namespace Langben.Report
         /// <param name="hssfworkbook">exel</param>
         /// <param name="picList">操作人信息集合</param>
         /// <param name="fEntity">附件对象</param>
-        public void AddQianMing_BaoGao(PREPARE_SCHEME entity,Dictionary<string, SysPerson> picList, FILE_UPLOADER fEntity, ExportType type)
+        public void AddQianMing_BaoGao(PREPARE_SCHEME entity, Dictionary<string, SysPerson> picList, FILE_UPLOADER fEntity, ExportType type)
         {
             string xlsPath = fEntity.FULLPATH;
 
             FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.ReadWrite);
             IWorkbook hssfworkbook = new HSSFWorkbook(file);
 
-            string sheetName_Destination = "封皮";          
+            string sheetName_Destination = "封皮";
             if (entity.CONCLUSION == "不合格" && type == ExportType.Report_JianDing)//不合格只有通知书封皮
             {
                 sheetName_Destination = "通知书封皮";
@@ -576,14 +445,14 @@ namespace Langben.Report
             FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.ReadWrite);
             IWorkbook hssfworkbook = new HSSFWorkbook(file);
 
-            string sheetName_Destination = "封皮";          
+            string sheetName_Destination = "封皮";
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
-           
+
             #region 检定员/校准员
             if (fEntity.Row_JianDingYuan_YuanShiJiLu != -1 && fEntity.Col_JianDingYuan_YuanShiJiLu != -1)
             {
                 if (!string.IsNullOrWhiteSpace(entity.CREATEPERSON))
-                {                   
+                {
                     if (picList != null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].MyName))
                     {
                         sheet_Destination.GetRow(fEntity.Row_JianDingYuan_YuanShiJiLu).GetCell(fEntity.Col_JianDingYuan_YuanShiJiLu).SetCellValue(picList[entity.CREATEPERSON].MyName);
@@ -600,12 +469,12 @@ namespace Langben.Report
             }
             #endregion
 
-          
+
             #region 核验员
             if (fEntity.Row_HeYanYuan_YuanShiJiLu != -1 && fEntity.Col_HeYanYuan_YuanShiJiLu != -1)
             {
                 if (!string.IsNullOrWhiteSpace(entity.AUDITTEPERSON))
-                {                   
+                {
                     if (picList != null && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].MyName))
                     {
                         sheet_Destination.GetRow(fEntity.Row_HeYanYuan_YuanShiJiLu).GetCell(fEntity.Col_HeYanYuan_YuanShiJiLu).SetCellValue(picList[entity.AUDITTEPERSON].MyName);
@@ -630,51 +499,6 @@ namespace Langben.Report
 
         }
 
-
-        /// <summary>
-        /// 导出原始记录及报告并保存路径
-        /// </summary>
-        /// <param name="ID">预备方案ID</param>
-        /// <param name="Message">返回信息</param>
-        /// <param name="Person">操作人</param>
-        /// <returns></returns>
-        public bool ExportAndSavePath(string ID, out string Message, string Person = "")
-        {
-
-            ValidationErrors validationErrors = new ValidationErrors();
-            //fBll.Create(ref validationErrors, fEntity);       
-            FILE_UPLOADERBLL fBll = new FILE_UPLOADERBLL();
-            FILE_UPLOADER oEntity = null;
-            FILE_UPLOADER rEntity = null;
-            FILE_UPLOADER Entity = null;
-            bool oSuccess = ExportOriginalRecord(ID, Person, out Message, out oEntity);
-            if (oSuccess)
-            {
-                Entity = oEntity;
-            }
-            bool rSuccess = ExportReport(ID, Person,out Message, out rEntity);
-            if (!oSuccess && rSuccess)
-            {
-                Entity = rEntity;
-            }
-            else if (oSuccess && rSuccess)
-            {
-                Entity.PATH = rEntity.PATH;
-                Entity.FULLPATH = rEntity.FULLPATH;
-                Entity.NAME = rEntity.NAME;
-                Entity.SUFFIX = rEntity.SUFFIX;
-                Entity.STATE = rEntity.STATE;
-                Entity.REMARK = rEntity.REMARK;
-            }
-            if (Entity != null)
-            {
-                Entity.CREATEPERSON = Person;
-                fBll.Create(ref validationErrors, Entity);
-                return true;
-            }
-            return false;
-
-        }
         /// <summary>
         /// 保存报告，存储到附件表
         /// </summary>
@@ -683,20 +507,20 @@ namespace Langben.Report
         /// <returns></returns>
         public bool SaveFuJian(FILE_UPLOADER rEntity, ExportType type)
         {
-            if(rEntity==null || string.IsNullOrWhiteSpace(rEntity.PREPARE_SCHEMEID) || rEntity.PREPARE_SCHEMEID.Trim()=="")
+            if (rEntity == null || string.IsNullOrWhiteSpace(rEntity.PREPARE_SCHEMEID) || rEntity.PREPARE_SCHEMEID.Trim() == "")
             {
                 return false;
             }
             ValidationErrors validationErrors = new ValidationErrors();
-            FILE_UPLOADERBLL fBll = new FILE_UPLOADERBLL();           
+            FILE_UPLOADERBLL fBll = new FILE_UPLOADERBLL();
             FILE_UPLOADER Entity = fBll.GetEntityByPREPARE_SCHEMEID(rEntity.PREPARE_SCHEMEID);
-            if(Entity==null)
-            {              
+            if (Entity == null)
+            {
                 return fBll.Create(ref validationErrors, rEntity);
             }
-            else 
+            else
             {
-                switch(type)
+                switch (type)
                 {
                     case ExportType.OriginalRecord_JianDing:
                     case ExportType.OriginalRecord_XiaoZhun:
@@ -736,7 +560,7 @@ namespace Langben.Report
         /// <param name="Message">返回消息</param>
         /// <param name="fEntity">返回附件实体</param>
         /// <returns></returns>
-        public bool ExportReport(string ID, string Person,out string Message,out FILE_UPLOADER fEntity)
+        public bool ExportReport(string ID, string Person, out string Message, out FILE_UPLOADER fEntity)
         {
             fEntity = new FILE_UPLOADER();
             IBLL.IPREPARE_SCHEMEBLL m_BLL = new PREPARE_SCHEMEBLL();
@@ -756,12 +580,12 @@ namespace Langben.Report
                 string fRemark = "";//用于记录批准人行号_批准人列号|核验员行号_核验员列号|检定员/校准员行号_检定员/校准员列号                
                 if (type == ExportType.Report_JianDing)
                 {
-                    SetFengPi_BaoGaoJianDing(hssfworkbook, entity,out fRemark);
+                    SetFengPi_BaoGaoJianDing(hssfworkbook, entity, out fRemark);
                 }
                 else
                 {
-                    SetFengPi_BaoGaoXiaoZhun(hssfworkbook, entity, out fRemark,type);
-                }                
+                    SetFengPi_BaoGaoXiaoZhun(hssfworkbook, entity, out fRemark, type);
+                }
 
                 //第二页数据
                 SetSecond_BaoGao(hssfworkbook, entity, type);
@@ -770,7 +594,7 @@ namespace Langben.Report
                 SetShuJu(hssfworkbook, entity, type);
 
                 //隐藏不需要的sheet
-                HiddenSheet(hssfworkbook, type, false,entity.CONCLUSION);
+                HiddenSheet(hssfworkbook, type, false, entity.CONCLUSION);
 
                 string fileName = SetFileName(type);
                 //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";
@@ -908,7 +732,7 @@ namespace Langben.Report
         /// <param name="hssfworkbook"></param>
         /// <param name="entity"></param>
         /// <param name="type">报告类型</param>
-        private void SetFengPi_BaoGaoXiaoZhun(IWorkbook hssfworkbook, PREPARE_SCHEME entity,out string fRemark, ExportType type = ExportType.Report_XiaoZhun)
+        private void SetFengPi_BaoGaoXiaoZhun(IWorkbook hssfworkbook, PREPARE_SCHEME entity, out string fRemark, ExportType type = ExportType.Report_XiaoZhun)
         {
             fRemark = "";
             if (type == ExportType.Report_XiaoZhun_CNAS)
@@ -1205,7 +1029,7 @@ namespace Langben.Report
                 }
             }
 
-            fRemark = "33_13";           
+            fRemark = "33_13";
 
             //核验员（改成审核人）
             if (entity.AUDITTEPERSON != null && entity.AUDITTEPERSON.Trim() != "")
@@ -1225,7 +1049,7 @@ namespace Langben.Report
             }
 
             fRemark += "|35_13";
-            
+
             //检定员（改为创建人）
             if (entity.CREATEPERSON != null && entity.CREATEPERSON.Trim() != "")
             {
@@ -1308,7 +1132,7 @@ namespace Langben.Report
             //温度
             if (entity.TEMPERATURE != null && entity.TEMPERATURE.Trim() != "")
             {
-                sheet_Destination.GetRow(5).GetCell(6).SetCellValue(entity.TEMPERATURE+ "℃");
+                sheet_Destination.GetRow(5).GetCell(6).SetCellValue(entity.TEMPERATURE + "℃");
             }
             else
             {
@@ -1317,7 +1141,7 @@ namespace Langben.Report
             //相对湿度
             if (entity.HUMIDITY != null && entity.HUMIDITY.Trim() != "")
             {
-                sheet_Destination.GetRow(5).GetCell(20).SetCellValue(entity.HUMIDITY+"%");
+                sheet_Destination.GetRow(5).GetCell(20).SetCellValue(entity.HUMIDITY + "%");
             }
             else
             {
@@ -1414,12 +1238,12 @@ namespace Langben.Report
         /// </summary>
         /// <param name="hssfworkbook"></param>
         /// <param name="entity"></param>
-        private void SetFengPi_BaoGaoJianDing(IWorkbook hssfworkbook, PREPARE_SCHEME entity,out string fRemark)
+        private void SetFengPi_BaoGaoJianDing(IWorkbook hssfworkbook, PREPARE_SCHEME entity, out string fRemark)
         {
             fRemark = "";
             if (entity.CONCLUSION == "不合格")//不合格只有通知书封皮
             {
-                SetFengPi_BaoGaoJianDing_TongZhiShu(hssfworkbook, entity,out fRemark);
+                SetFengPi_BaoGaoJianDing_TongZhiShu(hssfworkbook, entity, out fRemark);
                 return;
             }
 
@@ -1661,7 +1485,7 @@ namespace Langben.Report
         /// <param name="Message">返回消息</param>
         /// <param name="fEntity">返回附件实体</param>
         /// <returns></returns>
-        public bool ExportOriginalRecord(string ID,string Person, out string Message, out FILE_UPLOADER fEntity)
+        public bool ExportOriginalRecord(string ID, string Person, out string Message, out FILE_UPLOADER fEntity)
         {
             fEntity = new FILE_UPLOADER();
             IBLL.IPREPARE_SCHEMEBLL m_BLL = new PREPARE_SCHEMEBLL();
@@ -1688,10 +1512,10 @@ namespace Langben.Report
                 SetShuJu(hssfworkbook, entity, type);
 
                 //设置不确定度
-                bool IsIsHaveBuQueDingDu= SetBuQueDingDu(hssfworkbook, entity, type);
+                bool IsIsHaveBuQueDingDu = SetBuQueDingDu(hssfworkbook, entity, type);
 
                 //隐藏不需要的sheet
-                HiddenSheet(hssfworkbook, type, IsIsHaveBuQueDingDu,entity.CONCLUSION);
+                HiddenSheet(hssfworkbook, type, IsIsHaveBuQueDingDu, entity.CONCLUSION);
 
                 //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";                
                 string fileName = SetFileName(type);
@@ -1730,24 +1554,24 @@ namespace Langben.Report
         /// <param name="type"></param
         /// <param name="IsHaveBuQueDingDu">是否有不确定度</param
         /// <param name="CONCLUSION">总结论</param>
-        private void HiddenSheet(IWorkbook hssfworkbook, ExportType type,bool IsHaveBuQueDingDu=true,string CONCLUSION = "合格")
+        private void HiddenSheet(IWorkbook hssfworkbook, ExportType type, bool IsHaveBuQueDingDu = true, string CONCLUSION = "合格")
         {
-            switch(type)
+            switch (type)
             {
                 case ExportType.OriginalRecord_JianDing:
                 case ExportType.OriginalRecord_XiaoZhun:
-                    if(IsHaveBuQueDingDu==false)
+                    if (IsHaveBuQueDingDu == false)
                     {
                         hssfworkbook.SetSheetHidden(1, SheetState.Hidden);//不确定度,没有不确定度需要隐藏该sheet
                     }
-                    hssfworkbook.SetSheetHidden(3,SheetState.Hidden);//封皮模板
+                    hssfworkbook.SetSheetHidden(3, SheetState.Hidden);//封皮模板
                     hssfworkbook.SetSheetHidden(4, SheetState.Hidden);//数据模板
                     hssfworkbook.SetSheetHidden(5, SheetState.Hidden);//不确定度模板
                     break;
-               
-               
+
+
                 case ExportType.Report_JianDing:
-                    if(CONCLUSION == "合格")
+                    if (CONCLUSION == "合格")
                     {
                         hssfworkbook.SetSheetHidden(1, SheetState.Hidden);//通知书
                     }
@@ -1768,26 +1592,7 @@ namespace Langben.Report
                     break;
             }
         }
-        ///// <summary>
-        ///// 设置底部不确定度
-        ///// </summary>
-        ///// <param name="hssfworkbook"></param>
-        ///// <param name="entity"></param>
-        ///// <param name="type"></param>
-        ///// <returns></returns>
-        //private bool SetBuQueDingDu_DiBu(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing)
-        //{
-        //    #region 底部不确定度
-        //    HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-        //    doc.LoadHtml(iEntity.HTMLVALUE);
-        //    Dictionary<int, DataValue> dataDic = AnalyticHTML.GetData(doc);//数据
-        //    DataValue BuDueDingDu_DiBu = AnalyticHTML.GetBuDueDingDu_DiBu(doc);//底部不确定度
-        //    if (BuDueDingDu_DiBu != null && BuDueDingDu_DiBu.Count > 0 && BuDueDingDu_DiBu.Data != null && BuDueDingDu_DiBu.Data.Count > 0)
-        //    {
 
-        //    }
-        //    #endregion
-        //}
         /// <summary>
         /// 设置不确定度(返回是否有不确定计算过程)
         /// </summary>
@@ -1811,7 +1616,7 @@ namespace Langben.Report
                     entity.QUALIFIED_UNQUALIFIED_TEST_ITE = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.OrderBy(p => p.SORT).ToList();
 
                     int rowIndex_Destination = 0;
-                
+
                     foreach (QUALIFIED_UNQUALIFIED_TEST_ITE iEntity in entity.QUALIFIED_UNQUALIFIED_TEST_ITE)
                     {
 
@@ -1824,15 +1629,15 @@ namespace Langben.Report
                             {
                                 foreach (BuDueDingDu buQueDingDu in buQueDingDus)
                                 {
-                                    if(buQueDingDu==null)
+                                    if (buQueDingDu == null)
                                     {
                                         continue;
                                     }
-                                    if(ruleCount!=0)
+                                    if (ruleCount != 0)
                                     {
                                         int yuShu = rowIndex_Destination % 30;
                                         if (yuShu == 0)
-                                        {                                           
+                                        {
                                             rowIndex_Destination++;
                                         }
                                         else
@@ -1878,7 +1683,7 @@ namespace Langben.Report
                                                         sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue(d.value);
                                                         buQueDingDu.pingding.Remove(d);
                                                     }
-                                                    if(cIndex==2)
+                                                    if (cIndex == 2)
                                                     {
                                                         pingDing2 = d.value;
                                                     }
@@ -1990,13 +1795,13 @@ namespace Langben.Report
                                                 foreach (CellRangeAddress c in cellAddressList.Values)
                                                 {
                                                     MYData d = buQueDingDu.buDueDingDuB.FirstOrDefault();
-                                                    if ((string.IsNullOrWhiteSpace(d.value) || d.value.Trim() == "" || d.value=="null") && d.name!= "sourceNum" 
-                                                        && d.name!= "B_WuChaXian_UNIT" && d.name!= "B_Ui_UNIT")
+                                                    if ((string.IsNullOrWhiteSpace(d.value) || d.value.Trim() == "" || d.value == "null") && d.name != "sourceNum"
+                                                        && d.name != "B_WuChaXian_UNIT" && d.name != "B_Ui_UNIT")
                                                     {
                                                         d.value = "/";
                                                     }
                                                     HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, d.value);
-                                                    
+
                                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue(value);
                                                     buQueDingDu.buDueDingDuB.Remove(d);
                                                 }
@@ -2053,7 +1858,7 @@ namespace Langben.Report
                             }
                         }
 
-                        
+
 
                     }
                 }
@@ -2062,7 +1867,7 @@ namespace Langben.Report
                 if (ruleCount > 0)//如果不确定过程一个都没有需要隐藏不确定sheet
                 {
                     return true;
-                }                
+                }
             }
             return false;
 
@@ -2232,11 +2037,11 @@ namespace Langben.Report
 
             RowIndex++;
             Dictionary<string, SysPerson> picList = GetPerson(entity);
-            
+
             //检定员(改为创建人)
             if (entity.CREATEPERSON != null && entity.CREATEPERSON.Trim() != "")
-            {               
-                if (picList!=null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].MyName))
+            {
+                if (picList != null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].MyName))
                 {
                     sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(picList[entity.CREATEPERSON].MyName);
                 }
@@ -2262,13 +2067,13 @@ namespace Langben.Report
                 else
                 {
                     sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue(entity.AUDITTEPERSON);
-                }                   
+                }
             }
             else
             {
                 sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue("/");
             }
-            fRemark += "|"+RowIndex.ToString() + "_23";
+            fRemark += "|" + RowIndex.ToString() + "_23";
             RowIndex++;
             //检定日期
             if (entity.CALIBRATION_DATE.HasValue)
@@ -2344,7 +2149,7 @@ namespace Langben.Report
         /// <returns></returns>
         private Dictionary<string, SysPerson> GetPerson(PREPARE_SCHEME entity)
         {
-            if(entity==null)
+            if (entity == null)
             {
                 return null;
             }
@@ -2398,28 +2203,28 @@ namespace Langben.Report
             }
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
             IMETERING_STANDARD_DEVICEBLL bll = new METERING_STANDARD_DEVICEBLL();
-List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
+            List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             //List<METERING_STANDARD_DEVICE> list =    bll.GetAll();//测试
             //if (entity.METERING_STANDARD_DEVICE != null)            
             //{
-                //List<METERING_STANDARD_DEVICE> list = entity.METERING_STANDARD_DEVICE.ToList();
-                
-                if (list != null && list.Count > 0)
-                {
-                    //空三行
-                    //CopyRow(sheet_Source, sheet_Destination, 2, rowIndex_Destination, 3, true);
-                    //rowIndex_Destination = rowIndex_Destination + 3;
+            //List<METERING_STANDARD_DEVICE> list = entity.METERING_STANDARD_DEVICE.ToList();
 
-                    //标准装置
-                    List<METERING_STANDARD_DEVICE> listZhuanZhi = list.FindAll(p => p.CATEGORY == "标准装置");
-                    SetZhuangZhi(sheet_Source, sheet_Destination, rowIndex_Source_ZhuangZhi, ref rowIndex_Destination, CATEGORYType.标准装置, listZhuanZhi);
-                    //标准器
-                    List<METERING_STANDARD_DEVICE> listQiJu = list.FindAll(p => p.CATEGORY == "标准器");
-                    SetZhuangZhi(sheet_Source, sheet_Destination, rowIndex_Source_QiJu, ref rowIndex_Destination, CATEGORYType.标准器, listQiJu);
-                    //中间试品
-                    List<METERING_STANDARD_DEVICE> listShiPin = list.FindAll(p => p.CATEGORY == "中间试品");
-                    SetZhuangZhi(sheet_Source, sheet_Destination, rowIndex_Source_ShiPin, ref rowIndex_Destination, CATEGORYType.中间试品, listShiPin);
-                }
+            if (list != null && list.Count > 0)
+            {
+                //空三行
+                //CopyRow(sheet_Source, sheet_Destination, 2, rowIndex_Destination, 3, true);
+                //rowIndex_Destination = rowIndex_Destination + 3;
+
+                //标准装置
+                List<METERING_STANDARD_DEVICE> listZhuanZhi = list.FindAll(p => p.CATEGORY == "标准装置");
+                SetZhuangZhi(sheet_Source, sheet_Destination, rowIndex_Source_ZhuangZhi, ref rowIndex_Destination, CATEGORYType.标准装置, listZhuanZhi);
+                //标准器
+                List<METERING_STANDARD_DEVICE> listQiJu = list.FindAll(p => p.CATEGORY == "标准器");
+                SetZhuangZhi(sheet_Source, sheet_Destination, rowIndex_Source_QiJu, ref rowIndex_Destination, CATEGORYType.标准器, listQiJu);
+                //中间试品
+                List<METERING_STANDARD_DEVICE> listShiPin = list.FindAll(p => p.CATEGORY == "中间试品");
+                SetZhuangZhi(sheet_Source, sheet_Destination, rowIndex_Source_ShiPin, ref rowIndex_Destination, CATEGORYType.中间试品, listShiPin);
+            }
             //}
 
         }
@@ -2512,12 +2317,12 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                             }
 
                             //aValue = aValue.Replace(",", Environment.NewLine);
-                            if(maxRowCount < aValue.Split(',').Length)
+                            if (maxRowCount < aValue.Split(',').Length)
                             {
                                 maxRowCount = aValue.Split(',').Length;
                             }
                             //aValue = aValue.Replace(",", Environment.NewLine);
-                            HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, null, aValue);                                                    
+                            HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, null, aValue);
                             sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(value);
                         }
                         else
@@ -2637,7 +2442,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                         celStr = celStr + iVTEST_ITE.NAME.Trim() + "：";
                     }
                     //结论,只有非表格的才需要打结论
-                    if (iEntity != null && (iVTEST_ITE.INPUTSTATE==InputStateEnums.HGBHG.ToString() || iVTEST_ITE.INPUTSTATE== InputStateEnums.WBK.ToString()) && iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
+                    if (iEntity != null && (iVTEST_ITE.INPUTSTATE == InputStateEnums.HGBHG.ToString() || iVTEST_ITE.INPUTSTATE == InputStateEnums.WBK.ToString()) && iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
                     {
                         celStr = celStr + iEntity.CONCLUSION.Trim();
                     }
@@ -2649,7 +2454,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                     RowIndex++;
 
                     //相同检测项只展示一个标题  
-                    bool IsSameRuleName = false; 
+                    bool IsSameRuleName = false;
                     if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
 
                     {
@@ -2665,10 +2470,10 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
 
                     #region 检测项目表格                   
 
-                                          
+
                     if (iEntity != null
                         && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
-                    {                       
+                    {
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
                         //解析html表格数据    
                         //int RowIndexT = RowIndex;                       
@@ -2686,7 +2491,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                         //CopyRow(sheet_Source, sheet_Destination, 3, RowIndex, 1, true);
                         //HideRow(sheet_Destination, RowIndex, 1);                        
                         //RowIndex++;
-                      
+
                         ////表格注
                         //if (iEntity.REMARK != null && iEntity.REMARK.Trim() != "")
                         //{
@@ -2729,21 +2534,14 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             SetHeaderAndFooter(sheet_Destination, entity, type);
             sheet_Destination.ForceFormulaRecalculation = true;
         }
-        /// <summary>
-        /// 设置底部不确定度
-        /// </summary>
-        /// <returns></returns>
-        private int SetDiBuBuQueDingDu()
-        {
-            return 0;
-        }
+
         /// <summary>
         /// 画表格顶部线
         /// </summary>
         /// <param name="hssfworkbook"></param>
         /// <param name="sheet_Destination"></param>
         /// <param name="RowIndex">需要划线的行号</param>
-        private void SetBorderTop(IWorkbook hssfworkbook, ISheet sheet_Destination,int RowIndex)
+        private void SetBorderTop(IWorkbook hssfworkbook, ISheet sheet_Destination, int RowIndex)
         {
             //为了相同项表格底部没有线                           
             ICellStyle style = hssfworkbook.CreateCellStyle();
@@ -2793,7 +2591,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             {
                 //if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
                 //{
-                    sheet_Destination.Footer.Left = entity. CONTROL_NUMBER;
+                sheet_Destination.Footer.Left = entity.CONTROL_NUMBER;
                 //}
             }
         }
@@ -3133,7 +2931,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             }
             else if (value.ToUpper().IndexOf("UREL(K=") >= 0)
             {
-                speStartIndex= value.Trim().ToUpper().IndexOf("UREL(K=");
+                speStartIndex = value.Trim().ToUpper().IndexOf("UREL(K=");
                 SpecialStr = "UREL(K=";
 
                 notItalicStartIndex = speStartIndex + 4;//非斜体开始位置
@@ -3171,7 +2969,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                     if (SpecialStr == "UREL(K=")//特殊处理
                     {
                         endIndex = speStartIndex + spec.Code.Trim().Length;
-                    }               
+                    }
 
                     result.ApplyFont(startIndex, endIndex, normalFont);
                     #endregion
@@ -3230,8 +3028,8 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             }
             else
             {
-                result= new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
-            }           
+                result = new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
+            }
             return result;
         }
 
@@ -3391,11 +3189,11 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             if (value == null)
             {
                 value = "";
-            }           
-            HSSFRichTextString result = new HSSFRichTextString(value.Trim());           
-            if (workbook != null && value != null && value.Trim() != "" )
+            }
+            HSSFRichTextString result = new HSSFRichTextString(value.Trim());
+            if (workbook != null && value != null && value.Trim() != "")
             {
-                
+
                 if (value.IndexOf("|,") >= 0)
                 {
                     value = value.Replace(",", Environment.NewLine);
@@ -3406,13 +3204,13 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                 #region 处理标准装置中的特殊字符（斜体）
 
                 List<string> XieLTiList = GetXieTiList();
-                if(XieLTiList!=null && XieLTiList.Count>0)
-                {                   
-                    foreach(string xt in XieLTiList)
+                if (XieLTiList != null && XieLTiList.Count > 0)
+                {
+                    foreach (string xt in XieLTiList)
                     {
                         if (value.ToUpper().IndexOf(xt.ToUpper()) >= 0)
                         {
-                            
+
                             string[] vArray = value.Trim().Split('|');
                             int length = 0;
                             int startIndex = 0;
@@ -3425,23 +3223,23 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                                     startIndex = length + v.ToUpper().IndexOf(xt);
                                     endIndex = startIndex + xt.Length;
                                     HSSFFont superscriptX = (HSSFFont)workbook.CreateFont();
-                                    superscriptX.IsItalic = true;                                    
+                                    superscriptX.IsItalic = true;
                                     superscriptX.FontName = "宋体";
                                     result.ApplyFont(startIndex, endIndex, superscriptX);
-                                    if (xt.ToUpper()=="UREL")
+                                    if (xt.ToUpper() == "UREL")
                                     {
 
                                         HSSFFont subscriptX = (HSSFFont)workbook.CreateFont();
                                         subscriptX.TypeOffset = FontSuperScript.Sub; //下标                                     
-                                        subscriptX.FontName = "宋体";                                   
-                                        result.ApplyFont(startIndex+1, endIndex, subscriptX);
-                                    }                                    
+                                        subscriptX.FontName = "宋体";
+                                        result.ApplyFont(startIndex + 1, endIndex, subscriptX);
+                                    }
                                 }
                                 length = length + v.Length;
 
                             }
                         }
-                       
+
                     }
                 }
                 #endregion
@@ -3538,7 +3336,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                 }
             }
             return result;
-             
+
         }
 
 
@@ -3682,15 +3480,15 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             Dictionary<int, DataValue> dataDic = AnalyticHTML.GetData(doc);//数据
             Dictionary<int, List<MYDataHead>> headDic = AnalyticHTML.GetHeadData(doc);//表头
             Dictionary<int, List<MYDataHead>> footDic = AnalyticHTML.GetFootData(doc);//表尾
-            HeadValue buDueDingDu_DiBu =null;//底部不确定度
+            HeadValue buDueDingDu_DiBu = null;//底部不确定度
             if (type != ExportType.Report_JianDing)//除了检定报告不打底部不确定度，其他都打
             {
                 buDueDingDu_DiBu = AnalyticHTML.GetBuDueDingDu_DiBu(doc);//底部不确定度
             }
 
 
-                #region 处理下一行数据为空需要单元格合并数据
-                if (temp != null && temp.Cells != null && temp.Cells.Count > 0 && dataDic != null && dataDic.Count > 0)
+            #region 处理下一行数据为空需要单元格合并数据
+            if (temp != null && temp.Cells != null && temp.Cells.Count > 0 && dataDic != null && dataDic.Count > 0)
             {
                 List<Cell> cList = temp.Cells.FindAll(p => p.IsMergeNullValue == "Y");
                 if (cList != null && cList.Count > 0)
@@ -3702,7 +3500,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                             if (d != null && d.Data != null && d.Data.Count > 0)
                             {
                                 List<MYData> cData = d.Data.FindAll(p => p.name == c.Code);
-                                
+
                                 MYData mdd = null;
                                 List<MYData> removeList = new List<MYData>();
                                 int indexCount = 1;
@@ -3712,21 +3510,21 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                                     {
                                         if (indexCount == 1)
                                         {
-                                            mdd = md;                                          
+                                            mdd = md;
                                         }
                                         else
                                         {
                                             if (md != null && !string.IsNullOrWhiteSpace(md.value))
-                                            {                                               
+                                            {
                                                 mdd = md;
                                                 mdd.mergedRowNum = md.mergedRowNum;
                                             }
                                             else if (md != null && string.IsNullOrWhiteSpace(md.value))
-                                            {                                                
+                                            {
                                                 mdd.mergedRowNum = mdd.mergedRowNum + md.mergedRowNum;
                                                 removeList.Add(md);
                                             }
-                                        }                                       
+                                        }
                                         indexCount++;
                                     }
                                     foreach (MYData md in removeList)
@@ -3826,14 +3624,14 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                                 {
                                     HideRow(sheet_Destination, c.FirstRow, 1);
                                 }
-                                else if ((value == null || string.IsNullOrWhiteSpace(value.String)) && d.name.IndexOf("_UNIT")<0)
+                                else if ((value == null || string.IsNullOrWhiteSpace(value.String)) && d.name.IndexOf("_UNIT") < 0)
                                 {
                                     value = new HSSFRichTextString("/");
                                 }
                                 sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).SetCellValue(value);
                                 if (d.mergedRowNum > 1)//多行单元格合并
                                 {
-                                    sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));                                  
+                                    sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
 
                                 }
 
@@ -3909,7 +3707,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             #endregion
 
             #region 底部不确定度
-            
+
             #region 测试数据
             //buDueDingDu_DiBu = new HeadValue();
             //buDueDingDu_DiBu.Count = 3;
@@ -3970,7 +3768,7 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
                 startRowIndex++;
             }
         }
-       
+
         /// <summary>
         /// 相同规则名称，需要合并只有展示一个标题
         /// </summary>
@@ -3995,11 +3793,22 @@ List<METERING_STANDARD_DEVICE> list = bll.GetPREPARE_SCHEME(entity.ID);
             result.Add("DCI");
             result.Add("ACI");
             result.Add("DCR");
-            result.Add("UREL");           
+            result.Add("UREL");
             return result;
 
         }
+        /// <summary>
+        /// 此规程如果等级数目>=2.0，比如7；那么检定证书合格，检定项目就标注合格/不合格。否则检定证书都要给出数据。校准证书无论等级如何都需要给出数据。
+        /// </summary>
+        /// <returns></returns>
+        private Dictionary<string, double> GetDengJi()
+        {
+            Dictionary<string, double> result = new Dictionary<string, double>();
+            result.Add("366-2004_6_2", 2.0);
+            
+            return result;
 
+        }
 
     }
 }
