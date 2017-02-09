@@ -101,20 +101,20 @@
                 if (rowidx == 0) {
                     //需要合并的列 //量程
                     htmlString.push(SetTDHtml(txtPoint, "RANGE1", lianChengID, rowidx, "", "", "", "", "JiaoZhiLiuSelect"));
-                    htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, txtNumber, "", "", "blurValue"));
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, txtNumber, "", "", "changeValue"));
                     //等级
-                    htmlString.push(SetTDHtml(txtPoint, "OUTPUTVALUE", lianChengID, rowidx, "", "", "", "blurValue"));
+                    htmlString.push(SetTDHtml(txtPoint, "OUTPUTVALUE", lianChengID, rowidx, "", "", "", "changeValue"));
                 }
 
 
                 //指示值(格)
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "blurValue"));
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "changeValue"));
 
                 //标准表读数 上升
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, "", "", "", "blurValue"));
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, "", "", "", "changeValue"));
 
                 //标准表读数 下降
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, "", "", "", "blurValue"));
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, "", "", "", "changeValue"));
                 //平均值
                 htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, "", "", "", ""));
                 //基本误差(%)
@@ -134,7 +134,7 @@
             $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
         //计算标准值
-        function blurValue(obj) {
+        function changeValue(obj) {
 
             jiSuanWuCha(obj, "RANGE", "OUTPUTVALUE", "READVALUE", "ACTUALVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR", "UNCERTAINTYDEGREE", "BUQUEDINGDU", "JISUANWUCHA");
 
@@ -157,30 +157,44 @@
             id = id.substring(id.indexOf('_'));
             var tongdao = id.split('_')[1];
             var liangCheng = id.split('_')[2];
+            T1_UNIT = T1 + "_UNIT" + "_" + tongdao + "_1";
             T1 = T1 + "_" + tongdao + "_1";            //改动的地方，参与计算的列的name值
             T2 = T2 + "_" + tongdao + "_1";//改动的地方，参与计算的列的name值
             T3 = T3 + id;//改动的地方，误差的列的name值
+            T4_UNIT = T4 + "_UNIT" + id;//有功分量 相对误差(%
             T4 = T4 + id;//有功分量 相对误差(%
+            T5_UNIT = T5 + "_UNIT" + id;//有功分量 相对误差(%
             T5 = T5 + id;//改动的地方，参与计算的列的name值
+            T6_UNIT = T6 + "_UNIT" + id;//有功分量 相对误差(%
             T6 = T6 + id;//无功分量 相对误差(%
             T7 = T7 + id; //T7 cosφ
             T8 = T8 + id; //T8 额定电压(V)
             var MG = "MGS" + "_" + tongdao + "_1_1";
             var T1Data = $("#" + T1).val();//T1 量程
+            var lastUnit = $("#" + T1_UNIT).val();//量程单位
             var T2Data = $("#" + T2).val();//T1 等级
 
             var T3Data = $(obj).parent().parent().find("#" + T3).val(); //T3 指示值(格)
             var T4Data = $(obj).parent().parent().find("#" + T4).val(); //T4 标准表读数 上升
+            var T4Data_UNIT = $(obj).parent().parent().find("#" + T4_UNIT).val(); //T4 标准表读数 上升
             var T5Data = $(obj).parent().parent().find("#" + T5).val(); //T5 标准表读数 下降
-         //   var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T6 平均值
+            var T5Data_UNIT = $(obj).parent().parent().find("#" + T5_UNIT).val(); //T5 标准表读数 下降
+            //   var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T6 平均值
+            var T6Data_UNIT = $(obj).parent().parent().find("#" + T6_UNIT).val(); //T6 平均值单位
          //   var T7Data = $(obj).parent().parent().find("#" + T7).val(); //T7 基本误差(%)
            // var T8Data = $(obj).parent().parent().find("#" + T8).val(); //T8 升降变差(%)
             var T9Data = $(obj).parent().parent().find("#" + T9).val(); //T9 校准结果的不确定度U(k={0})
             var MGData = $("#" + MG).val();//满格
             var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
             txtPointLen = parseFloat(txtPointLen);
+            //SHIJISHUCHUZHI_UNIT_1_1_1
+           
+
              //【平均值】=（上升+下降）/2
             if (T4Data != "" && T5Data != "") {
+
+                T4Data = DanWeiHuanSuan(T6Data_UNIT, T4Data_UNIT, T4Data);
+                T5Data = DanWeiHuanSuan(T6Data_UNIT, T5Data_UNIT, T5Data);
                 getAverage(obj, T4Data, T5Data, T6);
                
             }
@@ -191,7 +205,7 @@
                 T3Data = parseFloat(T3Data);
                 MGData = parseFloat(MGData);
                 T1Data = parseFloat(T1Data);
-                T6Data = parseFloat(T6Data);
+                T6Data = DanWeiHuanSuan(lastUnit, T6Data_UNIT, T6Data);
                 
                 var jianfa =accMul(accDiv(accSub(accDiv(T3Data,accMul(MGData,T1Data)),T6Data),T1Data),100);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
@@ -199,8 +213,8 @@
             }
             //【升降变差】=绝对值(上升-下降）/当前量程，注意单位换算一致，四舍六入，逢五奇进偶不进，与误差小数位数一致。
             if (T4Data != "" && T5Data != "" && T1Data != "") {
-                T4Data = parseFloat(T4Data);
-                T5Data = parseFloat(T5Data);
+                T4Data = DanWeiHuanSuan(lastUnit, T4Data_UNIT, T4Data);
+                T5Data = DanWeiHuanSuan(lastUnit, T5Data_UNIT, T5Data);
                 T1Data = parseFloat(T1Data);
                 var jianfa =accDiv(Math.abs(accSub(T4Data, T5Data)),T1Data);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
@@ -257,7 +271,145 @@
             }
             $("#ZDSJBC" + "_" + tongdao + "_1_1").val(maxValue);
         }
-
+        //单位换算
+        //最终单位
+        //当前单位
+        //值
+        function DanWeiHuanSuan(lastUnit, unit, value)
+        {
+            unit = unit.toUpperCase();
+            lastUnit = lastUnit.toUpperCase();
+            switch (lastUnit) {
+                case "V":
+                    result = toV(unit, value);
+                    break;
+                case "MV":
+                    result = toMV(unit, value);
+                    break;
+                case "A":
+                    result = toA(unit, value);
+                    break;
+                case "MA":
+                    result = toMA(unit, value);
+                    break;
+                case "W":
+                    result = value ;
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
+        //转换为V
+        function toV(danwei, value)
+        {
+            //1KV=1000V, 1V=1000mV,  1mV=1000μV, 1μV=1000nV, 1nV=1000pV.
+            value = parseFloat(value);
+            danwei = danwei.toUpperCase();
+            var result;
+            switch(danwei)
+            {
+                case "KV":
+                    result  = value* 1000;
+                    break;
+                case "V":
+                    result  = value;
+                    break;
+                case "MV":
+                    result  = value/1000;
+                    break;
+                case "μV":
+                    result  = value/1000/1000;
+                    break;
+                case "NV":
+                    result  = value/1000/1000/1000;
+                    break;
+                case "PV":
+                    result = value / 1000 / 1000 / 1000/1000;
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
+        //转换为MV
+        function toMV(danwei, value) {
+            //1KV=1000V, 1V=1000mV,  1mV=1000μV, 1μV=1000nV, 1nV=1000pV.
+            value = parseFloat(value);
+            danwei = danwei.toUpperCase();
+            var result;
+            switch (danwei) {
+                case "KV":
+                    result = value * 1000*1000;
+                    break;
+                case "V":
+                    result = value*1000;
+                    break;
+                case "MV":
+                    result = value
+                    break;
+                case "μV":
+                    result = value / 1000;
+                    break;
+                case "NV":
+                    result = value / 1000 / 1000;
+                    break;
+                case "PV":
+                    result = value / 1000 / 1000 / 1000;
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
+        //转换为A
+        function toA(danwei, value) {
+            //1MA（兆安）=1000kA（千安） kA（千安）=1000A（安）  1A（安）=1000mA（毫安）=1000000μA（微安）
+            value = parseFloat(value);
+            danwei = danwei.toUpperCase();
+            var result;
+            switch (danwei) {
+                case "KA":
+                    result = value * 1000;
+                    break;
+                case "A":
+                    result = value;
+                    break;
+                case "MA":
+                    result = value / 1000;
+                    break;
+                case "μA":
+                    result = value / 1000 / 1000;
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
+        //转换为MA
+        function toMA(danwei, value) {
+            //1MA（兆安）=1000kA（千安） kA（千安）=1000A（安）  1A（安）=1000mA（毫安）=1000000μA（微安）
+            value = parseFloat(value);
+            danwei = danwei.toUpperCase();
+            var result;
+            switch (danwei) {
+                case "KA":
+                    result = value * 1000 * 1000;
+                    break;
+                case "A":
+                    result = value * 1000;
+                    break;
+                case "MA":
+                    result = value
+                    break;
+                case "μA":
+                    result = value / 1000;
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
     </script>
 
 }
