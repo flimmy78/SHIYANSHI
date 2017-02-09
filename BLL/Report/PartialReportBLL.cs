@@ -164,8 +164,8 @@ namespace Langben.Report
                             doc.LoadHtml(iEntity.HTMLVALUE);
 
                             //测试获取数据的时候使用
-                            var data1 = AnalyticHTML.GetData(doc);
-                            var data2 = AnalyticHTML.GetHeadData(doc);
+                            //var data1 = AnalyticHTML.GetData(doc);
+                            //var data2 = AnalyticHTML.GetHeadData(doc);
                             if (!ruleids.Contains(iEntity.RULEID))
                             {
                                 string s = CreatXML.Create(doc, iEntity.RULEID);
