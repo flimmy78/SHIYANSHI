@@ -450,9 +450,12 @@
 
             }
             else {
-                if (arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()" ||
+                if (arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()" &&
+                    arr[0].REPORTSTATUS == null||
+                    arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()"&&
                     arr[0].REPORTSTATUS == "@Common.REPORTSTATUS.审核驳回.ToString()" ||
-                    arr[0].ORDER_STATUS == "@Common.REPORTSTATUS.批准驳回.ToString()") {
+                    arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()" &&
+                    arr[0].REPORTSTATUS == "@Common.REPORTSTATUS.批准驳回.ToString()") {
                     return true;
                 }
                 else {

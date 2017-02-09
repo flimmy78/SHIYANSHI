@@ -253,7 +253,7 @@ namespace Langben.App.Controllers
             else
             {
                 result.Code = Common.ClientCode.Fail;
-                result.Message = Message;
+                result.Message = Message + "错误一";
             }
             return Json(result); //返回        
 

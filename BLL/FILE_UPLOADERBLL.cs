@@ -159,7 +159,7 @@ namespace Langben.BLL
             }
             catch (Exception ex)
             {
-                validationErrors.Add(ex.Message);
+                validationErrors.Add(ex.Message+"创建错误");
                 validationErrors.Add(ex.Source);
                 ExceptionsHander.WriteExceptions(ex);                
             }
