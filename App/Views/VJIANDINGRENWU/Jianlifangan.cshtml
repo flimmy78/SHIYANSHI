@@ -266,8 +266,6 @@
             }
 
         </div>
-        <table id="biaozhuizhuangzi"></table><br style="clear:both;" />
-        <table id="biaozhuiqi"></table><br style="clear:both;" />
         @*弹窗*@
         <h4 class="b-title">设备类别</h4>
         <div class="input_search" style="height:auto">
@@ -436,110 +434,6 @@
         var re = new RegExp(regu);
         return re.test(str);
     }
-</script>
-<script type="text/javascript">
-    $(function () {
-        if ("@ViewBag.UNDERTAKE_LABORATORY_NAME" == "@Common.LABORATORYNAME.电能.ToString()") {
-            //标准装置绑定
-            $('#biaozhuizhuangzi').datagrid({
-                title: '标准装置', //列表的标题
-                iconCls: 'icon-site',
-                width: 'auto',
-                height: 'auto',
-                //nowrap: false,
-                striped: true,
-                collapsible: true,
-                //url: '../VJIANDINGRENWU/GetData', //获取数据的url
-                sortName: 'ID',
-                sortOrder: 'desc',
-                idField: 'ID',
-                toolbar: [
-                     {
-                         text: '+',
-                         iconCls: 'icon-search',
-                         handler: function () {
-                             return biaozhunzhuangzi();
-                         }
-                     }
-                ],
-                columns: [[
-
-                        { field: 'ID', title: '名称', width: 64 }
-                        , { field: 'ORDER_NUMBER', title: '测量范围', width: 64 }
-                        , { field: 'ORDER_NUMBER', title: '不确定度/准确度等级/最大允许误差', width: 64 }
-                        , { field: 'ORDER_NUMBER', title: '测量范围', width: 64 }
-                        , { field: 'ORDER_NUMBER', title: '测量范围', width: 64 }
-                        , { field: 'A', title: '操作', width: 64 }
-                ]],
-            })
-            //标准器绑定
-            $('#biaozhuiqi').datagrid({
-                title: '标准器', //列表的标题
-                iconCls: 'icon-site',
-                width: 'auto',
-                height: 'auto',
-                //nowrap: false,
-                striped: true,
-                collapsible: true,
-                //url: '../VJIANDINGRENWU/GetData', //获取数据的url
-                sortName: 'ID',
-                sortOrder: 'desc',
-                idField: 'ID',
-                toolbar: [
-                     {
-                         text: '+',
-                         iconCls: 'icon-search',
-                         handler: function () {
-                             return biaozhunqi();
-                         }
-                     },
-                      {
-                          text: '删除',
-                          iconCls: 'icon-search',
-                          handler: function () {
-                              return lingqu();
-                          }
-                      }
-                ],
-                columns: [[
-
-                        { field: 'ID', title: '名称', width: 64 }
-                        , { field: 'ORDER_NUMBER', title: '测量范围', width: 64 }
-                ]],
-            })
-        }
-    });
-    //标准器的选择
-    function biaozhunqi() {
-        $('#w').window('close')
-        //标准器弹窗页面添加
-        $('#qitianjia').datagrid({
-            title: '计量标准器列表', //列表的标题
-            iconCls: 'icon-site',
-            width: 'auto',
-            height: 'auto',
-            //nowrap: false,
-            striped: true,
-            collapsible: true,
-            //url: '../VJIANDINGRENWU/GetData', //获取数据的url
-            sortName: 'ID',
-            sortOrder: 'desc',
-            idField: 'ID',
-            columns: [[
-                { field: 'ID', title: '类别', width: 64 }
-                , { field: 'ID', title: '名称', width: 64 }
-				, { field: 'ORDER_NUMBER', title: '出厂编号', width: 64 }
-                , { field: 'ORDER_NUMBER', title: '测量范围', width: 64 }
-                , { field: 'ORDER_NUMBER', title: '不确定度/准确度等级/最大允许误差', width: 64 }
-                , { field: 'ORDER_NUMBER', title: '检定/校准证书编号', width: 64 }
-                , { field: 'ORDER_NUMBER', title: '有效期至', width: 64 }
-            ]],
-        })
-        $("#tanchuandivqi").show();
-        $('#w').window('open');
-        $("#tanchuandivzhuangzi").hide();
-    }
-
 </script>
 <style>
     .deleteStyle {
