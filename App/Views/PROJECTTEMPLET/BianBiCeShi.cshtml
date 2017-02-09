@@ -26,7 +26,7 @@
                     <tr>
                         <td colspan="6">
                             <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
-                            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加行数</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
 
                         </td>
                     </tr>
@@ -76,7 +76,8 @@
 
                 //需要合并的列
                 htmlString.push(SetTDHtml(rowspan, "RANGE", HangHaoID, rowidx, '', "classstyle100",''));
- 
+
+
                 //标准值 增加下拉框单位A
                 htmlString.push("<td  rowspan='1' class='classstyle100' align='center' >:</td>");
 
@@ -111,6 +112,7 @@
 
 }
 @section TanKuang {
+   
     <!--弹框的位置-->
     <!--增加量程弹层-->
     <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
