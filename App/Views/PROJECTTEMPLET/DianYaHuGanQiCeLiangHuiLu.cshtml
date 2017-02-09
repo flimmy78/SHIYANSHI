@@ -8,7 +8,7 @@
 <thead>
     <!--表头-->
     <tr>
-        <td colspan="9">
+        <td colspan="11">
             <div class="mt10">
                 <span>@((ViewBag.canshu== "电压") ? "电压" : "电流")互感器测量回路：</span>
 
@@ -27,9 +27,9 @@
         <th width="160" colspan="2" align="center">整检装置示值</th>
         <th width="80" align="center">a=</th>
         <th width="80" align="center"><input class="my-textbox input-width" value="0.02" type="text" name="A" id="A_t_1_1"></th>
+        <th width="160" colspan="2" align="center">被检仪器示值</th>
         <th width="160" colspan="2" align="center">误差</th>
         <th width="160" colspan="2" align="center">允许误差（±）</th>
-        <th width="160" colspan="2" align="center">整检装置示值</th>
     </tr>
     <tr>
         <th width="80" align="center">同相分量(%)</th>
@@ -102,8 +102,8 @@
 
                 if (rowidx == 0) {
                     //需要合并的列 //量程
-
-                    htmlString.push(SetTDSelectHtml(txtPoint, "RANGE", lianChengID, rowidx, ""));
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE1", lianChengID, rowidx, "", "", "", "", ""));
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, "", "", "", "", ""));
                 }
 
                 //整检装置示值_同相分量(%)
@@ -228,8 +228,7 @@
                 Code: 'ShuoMing',
                 Remark: '说明',
                 Value: "<select class=\"my-combobox\" name=\"ShuoMing\" style=\"width:150px; \">" +
-                        "<option value=\",ΔI/I\">ΔU/U</option> " +
-                         "<option value=\"U=100/√3V\">ΔU/U对应U=100V</option>" +
+                        "<option value=\"ΔI/I\">ΔU/U</option> " +
                          "<option value=\"I=5A\">ΔI/I对应I=1A</option>  " +
                         "</select>"
             }];

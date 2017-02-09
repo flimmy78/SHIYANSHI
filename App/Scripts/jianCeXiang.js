@@ -1238,6 +1238,17 @@ function kexue(src, pos) {
     //return numeral(src).format('0.' + zero + 'e+0');//'0.000e+0'
 
 }
+//百分比变成小数
+function toPoint(percent) {
+    var str;
+    if (percent.indexOf("%") > 0) {
+         str = percent.replace("%", "");
+         str = parseFloat(str) / 100;
+    } else {
+        str = parseFloat(percent)
+    }
+    return str;
+}
 //小数变成百分比
 //pos保留的小数位数，不足的位数补零
 function percentages(src, pos) {
