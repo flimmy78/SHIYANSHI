@@ -160,6 +160,7 @@ namespace Langben.BLL
             catch (Exception ex)
             {
                 validationErrors.Add(ex.Message);
+                validationErrors.Add(ex.Source);
                 ExceptionsHander.WriteExceptions(ex);                
             }
             return false;

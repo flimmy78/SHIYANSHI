@@ -393,17 +393,17 @@
     function getView() {
         var arr = $('#flexigridData').datagrid('getSelections');
         if (arr.length == 1) {
-          
+
             var id = arr[0].ID;
-           
+
             $.ajax({
                 url: "/api/APPLIANCE_LABORATORYApi/ChaKan/" + id,
                 type: "Post",
-               
+
                 // async: false,
                 success: function (res) {
                     if (res.Code == 1) {
-                       
+
                         $("#flexigridData").datagrid("clearSelections");
                         window.location.href = res.Message;
                     }
@@ -451,10 +451,8 @@
             }
             else {
                 if (arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()" ||
-                    arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.试验完成.ToString()" ||
-                    arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.待入库.ToString()" ||
-                    arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.器具已入库.ToString()" ||
-                    arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.器具已领取.ToString()") {
+                    arr[0].REPORTSTATUS == "@Common.REPORTSTATUS.审核驳回.ToString()" ||
+                    arr[0].ORDER_STATUS == "@Common.REPORTSTATUS.批准驳回.ToString()") {
                     return true;
                 }
                 else {
