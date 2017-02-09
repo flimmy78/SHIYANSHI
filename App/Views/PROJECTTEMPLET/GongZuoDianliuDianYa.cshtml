@@ -13,36 +13,35 @@
             <select class="my-combobox" name="BianSongQiTongDao" id="BianSongQiTongDaoD_t_1_1">
                 <option value="合格">合格</option>
                 <option value="不合格">不合格</option>
-              
             </select>
-            &nbsp;&nbsp;&nbsp;&nbsp;<span>@ViewBag.canshu</span>
+
         </td>
     </tr>
     <tr>
-        <th align="center" width="100">额定工作电流(A)</th>
-        <th align="center" width="100">额定电流百分比</th>
+        <th align="center" width="100">额定工作@(((ViewBag.canshu) == "电压") ? "电压(V)" : "电流(A)")</th>
+        <th align="center" width="100">额定@(((ViewBag.canshu) == "电压") ? "电压" : "电流")百分比</th>
         <th align="center" width="100"> 显示值(A)</th>
         <th align="center" width="100"> 标准值(A)</th>
         <th align="center" width="100">误差(%)</th>
         <th align="center" width="100">最大基本误差(%)</th>
         <th align="center" width="100"> 结论</th>
-      
+
     </tr>
 </thead>
 <tbody id="tbody_moban">
     <!--表体-->
-   
+
 </tbody>
-                <tfoot>
-                    <!--表尾-->
-                    <tr>
-                        <td colspan="11">
-                            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
-                            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加量程</a>
-                        </td>
-                    </tr>
-                </tfoot>
-   
+<tfoot>
+    <!--表尾-->
+    <tr>
+        <td colspan="11">
+            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加量程</a>
+        </td>
+    </tr>
+</tfoot>
+
 
 @section JS {
     <script type="text/javascript" language="javascript">
@@ -51,9 +50,9 @@
         //tbodyIndex通道
         //thi 当前位置
         function set(tbodyIndex, thi) {
-             $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
-             $("#hideDangQianTongDao").val(tbodyIndex);
-             //CreateRow();
+            $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
+            $("#hideDangQianTongDao").val(tbodyIndex);
+            //CreateRow();
         }
         var s = 0;
         //增加行
@@ -83,9 +82,9 @@
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
                 if (rowidx == 0) {
                     //需要合并的列
-                    htmlString.push(SetTDHtml(rowspanIdx, "TDA", HangHaoID, rowidx, lcval, "", '','blurbiaozhun', 'EDGZDianliu'));
+                    htmlString.push(SetTDHtml(rowspanIdx, "TDA", lianChengID, rowidx, lcval, "", '', 'blurbiaozhun', '@(((ViewBag.canshu) == "电压") ? "EDGZDianliu100" : "EDGZDianliu")'));
                     //二次输入标准值
-              
+
                 }
                 //需要合并的列
 
@@ -98,13 +97,13 @@
                 htmlString.push(SetTDHtml(rowspan, "BUQUEDINGDU", HangHaoID, rowidx, '', ""));
                 if (rowidx == 0) {
                     //需要合并的列
-                    htmlString.push(SetTDHtml(rowspanIdx, "JISUANWUCHA", HangHaoID, rowidx, '', ""));
-                    htmlString.push(SetTDHtml(rowspanIdx, "YINYONGXIANGDUI", HangHaoID, rowidx, '', "", '','', 'JieLun'));
+                    htmlString.push(SetTDHtml(rowspanIdx, "JISUANWUCHA", lianChengID, rowidx, '', ""));
+                    htmlString.push(SetTDHtml(rowspanIdx, "YINYONGXIANGDUI", lianChengID, rowidx, '', "", '', '', 'JieLun'));
                     //二次输入标准值
 
                 }
-              
-             
+
+
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
@@ -128,7 +127,7 @@
                 }
             })
         }
-        //离开事件，用于计算 计算【引用误差】=(计算后实际电流值-电流值)/量程*100，小数点后两位，四舍六入，逢五奇进偶不进						
+        //离开事件，用于计算 计算【引用误差】=(计算后实际电流值-电流值)/量程*100，小数点后两位，四舍六入，逢五奇进偶不进
         function blurYinYongWuCha(obj) {
             //注意多通道
             wuCha(obj, "READVALUE", "ACTUALVALUE", "ACTUALVALUE", "BUQUEDINGDU")
@@ -145,15 +144,15 @@
         }
 
 
-        function blurValue(obj){
-        
+        function blurValue(obj) {
+
         }
 
         ///保留绝对值默认为0
-        var oldValue = zeroFloat(0, $("#txtPointLen").val());
+        var oldValue = 0;
         function GetAbs(obj) {
-            oldValue = zeroFloat(0, $("#txtPointLen").val());
-           // GetAbs(obj);//得到最大绝对值
+            oldValue = 0;
+            // GetAbs(obj);//得到最大绝对值
             //获取最大误差值
             var k = $(obj).parent().parent().attr("data-value");//代表第几次
             $("#tbody_" + GetMyTongDao(obj) + " tr").each(function () {  //引用误差
@@ -163,12 +162,12 @@
                     var newabs = Math.abs($(this).find("td").find(':input[name="BUQUEDINGDU"]').val());
                     var oldabs = Math.abs(oldValue);
                     if (newabs > oldabs) {
-                        oldValue = zeroFloat(newValue, $("#txtPointLen").val());
+                        oldValue = newValue;
                     }
                 }
-               
-              });
-           return oldValue;
+
+            });
+            return oldValue;
         }
 
 
@@ -189,7 +188,7 @@
                         firstData = $(this).find("td").find(':input[name="' + first + '"]').val();
                         n++;
                     }
-                    var secondData =parseInt($(this).find("td").find(':input[name="' + second + '"]').val().replace('%',''));
+                    var secondData = $(this).find("td").find(':input[name="' + second + '"]').val();
                     if (firstData != "undefined" && secondData != "undefined"
                          && firstData != "" && secondData != "") {
                         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
@@ -212,7 +211,7 @@
             //return $("#hideDangQianTongDao").val();//当前操作第几通道
         }
 
-    
+
 
     </script>
 
@@ -231,18 +230,21 @@
                     $('#dlg').window('close');
          }
          }]" style="width:400px;height:200px;padding:10px">
-    <table>
+        <table>
 
-        <tr>
-            <td align="right">检测点数：</td>
-            <td><input type="text" id="txtPoint" value="" name="txtPoint" class="easyui-textbox  required digits" style="width:200px" /></td>
-        </tr>
-        
-        <tr>
-            <td align="right">小数点位数：</td>
-            <td><input type="text" id="txtPointLen" value="" name="txtPointLen" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
-        </tr>
-    </table>
-</div>
+            <tr>
+                <td align="right">检测点数：</td>
+                <td><input type="text" id="txtPoint" value="" name="txtPoint" class="easyui-textbox  required digits" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">量程设定：</td>
+                <td><input type="text" id="txtlc" value="" name="txtlc" class="easyui-textbox  required digits" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">小数点位数：</td>
+                <td><input type="text" id="txtPointLen" value="" name="txtPointLen" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
+            </tr>
+        </table>
+    </div>
 }
 
