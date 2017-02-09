@@ -81,20 +81,23 @@ namespace Langben.Report
 
                 //表体的xml字符串
                 string outBody = "";
-
-                //只遍历通道1
-                var tongdao1OfBodyOfInputAndSelect = tbodyOfInputAndSelect[1];
-                //将name去重       
-                var tongdao1OfBodyOfInputAndSelectAttributes = (from b in tongdao1OfBodyOfInputAndSelect
-                                                                    // where b.Attributes["name"] != null//hidden标签会为空
-                                                                select b.Attributes["name"].Value).Distinct().ToList();
-
-                for (int i = 0; i < tongdao1OfBodyOfInputAndSelectAttributes.Count; i++)
+                if (tbodyOfInputAndSelect != null && tbodyOfInputAndSelect.Count > 0)
                 {
-                    outBody += string.Format(tempCell, tongdao1OfBodyOfInputAndSelectAttributes[i], i);
+                    //只遍历通道1
+                    var tongdao1OfBodyOfInputAndSelect = tbodyOfInputAndSelect[1];
+                    //将name去重       
+                    var tongdao1OfBodyOfInputAndSelectAttributes = (from b in tongdao1OfBodyOfInputAndSelect
+                                                                        // where b.Attributes["name"] != null//hidden标签会为空
+                                                                    select b.Attributes["name"].Value).Distinct().ToList();
 
+                    for (int i = 0; i < tongdao1OfBodyOfInputAndSelectAttributes.Count; i++)
+                    {
+                        outBody += string.Format(tempCell, tongdao1OfBodyOfInputAndSelectAttributes[i], i);
+
+                    }
+                    outBody = string.Format(tempCellList, outBody);
                 }
-                outBody = string.Format(tempCellList, outBody);
+
                 //表体的xml字符串
                 string outFoot = "";
 
