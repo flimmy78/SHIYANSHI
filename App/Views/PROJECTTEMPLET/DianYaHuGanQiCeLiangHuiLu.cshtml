@@ -213,8 +213,15 @@
 
             if (T5Data != "" && T6Data != "" && T3Data != "") {
                 var a = $("#A" + "_" + tongdao + "_1_1").val();
-                a=parseFloat(a);
-                var data =(Math.abs(parseFloat(T5Data)) /100)*a+0.000291*(Math.abs(parseFloat(T6Data))*a+parseFloat(T3Data)*a*0.1)*100;
+                a = parseFloat(a);
+                T5Data=parseFloat(T5Data);
+                T6Data=parseFloat(T6Data);
+                T3Data=parseFloat(T3Data);
+
+                var jian = accMul(accDiv(Math.abs(T5Data), 100), a);
+                var jian1 = accMul(0.000291, Math.abs(T6Data)).mul(a);
+                var jian2 = T3Data.mul(a).mul(0.1);
+                var data = jian.add(jian1).add(jian2).mul(100);
                     //(Math.abs(parseFloat(T5Data)) / 100) * parseFloat(a) + 0.000291 * (Math.abs(parseFloat(T6Data)) * a + parseFloat(T3Data) * a * 0.1) * 100;
                 $(obj).parent().parent().find("#" + T9).val(zeroFloat(data, 4));
             }
@@ -222,70 +229,16 @@
             if (T5Data != "" && T6Data != "" && T4Data != "") {
                 var a = $("#A" + "_" + tongdao + "_1_1").val();
                 a = parseFloat(a);
+                T5Data = parseFloat(T5Data);
+                T6Data = parseFloat(T6Data);
+                T4Data = parseFloat(T4Data);
+                var jian = accMul(accDiv(Math.abs(T5Data), 100), a);
+
                 var data = (3438 * Math.abs( parseFloat(T5Data) / 100) * a + Math.abs( parseFloat(T6Data)) * a +  parseFloat(T4Data) * a * 0.1)
                 $(obj).parent().parent().find("#" + T10).val(zeroFloat(data,3));
             }
         }
-        var SelectDDLHtmlArray = Array;
-        SelectDDLHtmlArray = [
-            {
-                Code: 'ShuoMing',
-                Remark: '说明',
-                Value: "<select class=\"my-combobox\" name=\"ShuoMing\" style=\"width:150px; \">" +
-                        "<option value=\"ΔI/I\">ΔU/U</option> " +
-                         "<option value=\"I=5A\">ΔI/I对应I=1A</option>  " +
-                        "</select>"
-            }];
-        //获取下拉框单位html
-        //RuleAttribute:检测项属性
-        //ddlName:检查项中的属性控件名称
-        //DanWeiCode:单位代码（如果有值直接取，RuleAttribute、ddlName失效)
-        function GetSelectDDLHtml(ddlName, DanWeiCode) {
-
-            var Result = null;
-            if (DanWeiCode != null && DanWeiCode.trim() != "") {
-                //如果有有单位代码直接取，RuleAttribute、ddlName失效
-                $.each(SelectDDLHtmlArray, function (i, item) {
-                    if (item == null || item.Code != DanWeiCode) {
-                        return true;
-                    }
-                    Result = item.Value;
-                    return false;
-                });
-                return Result;
-            }
-        }
-        //设置TD的html
-        //RuleAttribute:检测项目属性
-        //rowspan合并单元格行数SetTDHtml
-        //name(控件名称),
-        //id(控件id不包含name部分),
-        //rowidx:行号
-        //txtVal(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
-        //classstyle样式类名
-        //unit在输入框后面的单位
-        //blurValue数表离开输入框之后触发的事件
-        function SetTDSelectHtml(rowspan, name, id, rowidx, classstyle) {
-            //下拉框
-            var ddlName = name + "_UNIT";//下拉框名
-            var ddlId = ddlName + "_" + id;//下拉框ID
-
-            var id = name + "_" + id;//输入框id
-
-            var ddlHtml = GetSelectDDLHtml(name, "ShuoMing");//单位下拉框html
-
-            var htmlString = [];
-            htmlString.push("<td class='" + classstyle + "' rowspan='" + rowspan + "' align='center' > ");
-
-            if (ddlHtml != null && ddlHtml.trim() != "") {
-
-                htmlString.push($(ddlHtml).attr("name", ddlName).attr("id", ddlId)[0].outerHTML);
-            }
-            htmlString.push("</td>");
-            return htmlString.join("");
-
-
-        }
+    
 
 
     </script>

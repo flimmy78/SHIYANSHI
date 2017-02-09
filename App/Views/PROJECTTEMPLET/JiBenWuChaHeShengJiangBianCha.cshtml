@@ -157,9 +157,9 @@
             id = id.substring(id.indexOf('_'));
             var tongdao = id.split('_')[1];
             var liangCheng = id.split('_')[2];
-            T1_UNIT = T1 + "_UNIT" + "_" + tongdao + "_1";
-            T1 = T1 + "_" + tongdao + "_1";            //改动的地方，参与计算的列的name值
-            T2 = T2 + "_" + tongdao + "_1";//改动的地方，参与计算的列的name值
+            T1_UNIT = T1 + "_UNIT" + "_" + tongdao + "_" + liangCheng;
+            T1 = T1 + "_" + tongdao + "_" + liangCheng;            //改动的地方，参与计算的列的name值
+            T2 = T2 + "_" + tongdao + "_" + liangCheng;//改动的地方，参与计算的列的name值
             T3 = T3 + id;//改动的地方，误差的列的name值
             T4_UNIT = T4 + "_UNIT" + id;//有功分量 相对误差(%
             T4 = T4 + id;//有功分量 相对误差(%
