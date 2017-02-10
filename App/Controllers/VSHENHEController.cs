@@ -110,7 +110,7 @@ namespace Langben.App.Controllers
                 search += "REPORTSTATUS&" + Common.REPORTSTATUS.待审核;
 
             }
-            search += "DETECTERID&" + account.PersonName + "^";
+            search += "^DETECTERID&" + account.PersonName + "^";
             List<VSHENHE> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
             {
