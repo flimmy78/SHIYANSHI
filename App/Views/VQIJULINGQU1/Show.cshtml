@@ -154,11 +154,12 @@
                 </td>
                 <td width="700" height="300">
                     <div style="width:700px; height:300px; background:#eee">
-                        <object id="HWPenSign"
+                        @*<object id="HWPenSign"
                                 name="HWPenSign"
                                 classid="clsid:E8F5278C-0C72-4561-8F7E-CCBC3E48C2E3"
                                 width="700"
-                                height="300"></object>
+                                height="300"></object>*@
+                        <embed id="HWPenSign" type="application/mozilla-npHWSign-scriptable-plugin" name="HWPenSign" width="700" height="300" /></embed>
                         <img id="hid" src="" style="width:700px; height:300px;" />
                     </div>
                 </td>
@@ -187,12 +188,11 @@
         window.onload = function () {
             obj = document.getElementById("HWPenSign");
             obj.HWSetBkColor(0xE0F8E0);
-            obj.HWSetCtlFrame(2, 0x000000);
-            obj.HWSetSeparatorLine(lineNum, 0x000000);
+            obj.HWSetCtlFrame(2, 0x00000000);
             //初始化代码
             var res;
             res = obj.HWInitialize();
-            $("#hid").hidden();
+            document.getElementById("hid").style.display = "none";
         }
 
         function Button3_onclick() {
@@ -200,7 +200,7 @@
         }
         function baocun() {
             var stream;
-            //stream = obj.HWGetBase64Stream(3);
+            stream = obj.HWGetBase64Stream(3);
             //stream = null;
             //正式发布的时候要去掉注释
             //if (stream=='') {

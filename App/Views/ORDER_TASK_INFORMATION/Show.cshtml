@@ -150,13 +150,14 @@
                 </td>
                 <td width="700" height="300">
                     <div id="img" style="width:700px; height:300px; background:#eee">
+                        <img id="hid" src="" style="width:700px; height:300px;" />
                         <embed id="HWPenSign" type="application/mozilla-npHWSign-scriptable-plugin" name="HWPenSign" width="700" height="300"/></embed>
                         @*<object id="HWPenSign"
                                 name="HWPenSign"
                                 classid="clsid:E8F5278C-0C72-4561-8F7E-CCBC3E48C2E3"
                                 width="700"
                                 height="300"></object>*@
-                   
+                        
                     </div>
                 </td>
             </tr>
@@ -213,13 +214,14 @@
         lineNum = height / linespace;
 
         window.onload = function () {
+            //$("#hid").hidden();
             obj = document.getElementById("HWPenSign");
             obj.HWSetBkColor(0xE0F8E0);
             obj.HWSetCtlFrame(2, 0x00000000);
             //初始化代码
             var res;
              res = obj.HWInitialize();
-            
+             document.getElementById("hid").style.display = "none";
         }
 
 
