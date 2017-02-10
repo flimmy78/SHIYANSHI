@@ -13,8 +13,9 @@
             <select class="my-combobox" name="BianSongQiTongDao" id="BianSongQiTongDaoD_t_1_1">
                 <option value="合格">合格</option>
                 <option value="不合格">不合格</option>
-            </select>
 
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span>@ViewBag.canshu</span>
         </td>
     </tr>
     <tr>
@@ -50,9 +51,9 @@
         //tbodyIndex通道
         //thi 当前位置
         function set(tbodyIndex, thi) {
-            $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
-            $("#hideDangQianTongDao").val(tbodyIndex);
-            //CreateRow();
+             $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
+             $("#hideDangQianTongDao").val(tbodyIndex);
+             //CreateRow();
         }
         var s = 0;
         //增加行
@@ -82,7 +83,7 @@
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
                 if (rowidx == 0) {
                     //需要合并的列
-                    htmlString.push(SetTDHtml(rowspanIdx, "TDA", lianChengID, rowidx, lcval, "", '', 'blurbiaozhun', '@(((ViewBag.canshu) == "电压") ? "EDGZDianliu100" : "EDGZDianliu")'));
+                     htmlString.push(SetTDHtml(rowspanIdx, "TDA", lianChengID, rowidx, lcval, "", '', 'blurbiaozhun', '@(((ViewBag.canshu) == "电压") ? "EDGZDianliu100" : "EDGZDianliu")'));
                     //二次输入标准值
 
                 }
@@ -97,8 +98,8 @@
                 htmlString.push(SetTDHtml(rowspan, "BUQUEDINGDU", HangHaoID, rowidx, '', ""));
                 if (rowidx == 0) {
                     //需要合并的列
-                    htmlString.push(SetTDHtml(rowspanIdx, "JISUANWUCHA", lianChengID, rowidx, '', ""));
-                    htmlString.push(SetTDHtml(rowspanIdx, "YINYONGXIANGDUI", lianChengID, rowidx, '', "", '', '', 'JieLun'));
+                    htmlString.push(SetTDHtml(rowspanIdx, "JISUANWUCHA", HangHaoID, rowidx, '', ""));
+                    htmlString.push(SetTDHtml(rowspanIdx, "YINYONGXIANGDUI", HangHaoID, rowidx, '', "", '','', 'JieLun'));
                     //二次输入标准值
 
                 }
@@ -144,15 +145,15 @@
         }
 
 
-        function blurValue(obj) {
+        function blurValue(obj){
 
         }
 
         ///保留绝对值默认为0
-        var oldValue = 0;
+        var oldValue =0;
         function GetAbs(obj) {
-            oldValue = 0;
-            // GetAbs(obj);//得到最大绝对值
+            oldValue = zeroFloat(0, $("#txtPointLen").val());
+           // GetAbs(obj);//得到最大绝对值
             //获取最大误差值
             var k = $(obj).parent().parent().attr("data-value");//代表第几次
             $("#tbody_" + GetMyTongDao(obj) + " tr").each(function () {  //引用误差
@@ -162,12 +163,12 @@
                     var newabs = Math.abs($(this).find("td").find(':input[name="BUQUEDINGDU"]').val());
                     var oldabs = Math.abs(oldValue);
                     if (newabs > oldabs) {
-                        oldValue = newValue;
+                        oldValue = zeroFloat(newValue, $("#txtPointLen").val());
                     }
                 }
 
-            });
-            return oldValue;
+              });
+           return oldValue;
         }
 
 
@@ -188,7 +189,7 @@
                         firstData = $(this).find("td").find(':input[name="' + first + '"]').val();
                         n++;
                     }
-                    var secondData = $(this).find("td").find(':input[name="' + second + '"]').val();
+                    var secondData =parseInt($(this).find("td").find(':input[name="' + second + '"]').val().replace('%',''));
                     if (firstData != "undefined" && secondData != "undefined"
                          && firstData != "" && secondData != "") {
                         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
