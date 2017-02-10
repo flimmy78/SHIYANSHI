@@ -129,6 +129,7 @@
 					}
                     , {
                         field: 'APPLIANCECOLLECTIONSATE', title: '器具领取', width: 91, formatter: function (value, row, index) {
+                            debugger
                             if (row.APPLIANCE_RECIVE == "是") {
                                 if (row.APPLIANCECOLLECTIONSATE == "器具已领取") {
                                     //return "<input id='qiju' type='checkbox' name='qiju' value='" + row.ID + "#" + row.ORDER_TASK_INFORMATIONID + "' checked='checked' disabled='disabled'/>";
