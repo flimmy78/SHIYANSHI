@@ -25,95 +25,15 @@
         )</th>        
     </tr>    
 </thead>
-<tbody>
-    <!--表体-->
-      <tr>
-          <td rowspan="3" align="center" width="120"><!--量限-->
-               <input class="my-textbox input-width" value="1000" id="RANGE_t_1_1" name="RANGE" onblur="blurCeLiangDian(this)" type="text">
-           </td>
-           <td align="center" width="30"><!--标准值(A)-->
-               <input class="my-textbox input-width" value="200" id="READVALUE_t_1_1" name="READVALUE" onblur="blurCeLiangDian(this)" type="text">
-           </td>
-           <td align="center" width="30"><!--显示值(A)-->
-               <input class="my-textbox input-width" value="204" id="ACTUALVALUE_t_1_1" name="ACTUALVALUE" onblur="blurCeLiangDian(this)" type="text">
-           </td>
-           <td rowspan="6" align="center" width="30"><!--最大基本误差(%)-->
-               <input class="my-textbox input-width" value="-0.90" id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" onblur="blurCeLiangDian(this)" type="text">
-           </td>
-           <td align="center" width="30"><!--引用误差(%)-->
-               <input class="my-textbox input-width" value="0.40" id="RELATIVEERROR_t_1_1" name="RELATIVEERROR" onblur="blurCeLiangDian(this)" type="text">
-           </td>
-           <td rowspan="6" align="center" width="30"><!--校准结果的不确定度U(k={0})-->
-               <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_1" name="UNCERTAINTYDEGREE" onblur="blurCeLiangDian(this)" type="text">
-           </td>
-     </tr>
-     <tr>
-         
-           <td align="center" width="30"><!--标准值(A)-->
-                <input class="my-textbox input-width" value="400" id="SHURUAA_t_1_1" name="SHURUAA" onblur="blurCeLiangDian(this)" type="text">
-           </td>
-           <td align="center" width="30"><!--显示值(A)-->
-                <input class="my-textbox input-width" value="402" id="SHURUAB_t_1_1" name="SHURUAB" onblur="blurCeLiangDian(this)" type="text">
-           </td>         
-           <td align="center" width="30"><!--引用误差(%)-->
-                <input class="my-textbox input-width" value="0.40" id="SHURUAC_t_1_1" name="SHURUAC" onblur="blurCeLiangDian(this)" type="text">
-           </td>           
-     </tr>
-      <tr>
-         
-           <td align="center" width="30"><!--标准值(A)-->
-                <input class="my-textbox input-width" value="800" id="SHURUBA_t_1_1" name="SHURUBA" onblur="blurCeLiangDian(this)" type="text">
-           </td>
-           <td align="center" width="30"><!--显示值(A)-->
-                <input class="my-textbox input-width" value="804" id="SHURUBB_t_1_1" name="SHURUBB" onblur="blurCeLiangDian(this)" type="text">
-           </td>         
-           <td align="center" width="30"><!--引用误差(%)-->
-                <input class="my-textbox input-width" value="804" id="SHURUBC_t_1_1" name="SHURUBC" onblur="blurCeLiangDian(this)" type="text">
-           </td>          
-     </tr>
-         <tr>
-          <td rowspan="3" align="center" width="120"><!--量限-->
-               <input class="my-textbox input-width" value="2000" id="SHURUCA_t_1_1" name="SHURUCA" onblur="blurCeLiangDian(this)" type="text">
-           </td>
-           <td align="center" width="30"><!--标准值(A)-->
-               <input class="my-textbox input-width" value="1000" id="SHURUCB_t_1_1" name="SHURUCB" onblur="blurCeLiangDian(this)" type="text">
-           </td>
-           <td align="center" width="30"><!--显示值(A)-->
-               <input class="my-textbox input-width" value="1003" id="SHURUCC_t_1_1" name="SHURUCC" onblur="blurCeLiangDian(this)" type="text">
-           </td>          
-           <td align="center" width="30"><!--引用误差(%)-->            
-               <input class="my-textbox input-width" value="0.30" id="SHURUCD_t_1_1" name="SHURUCD" onblur="blurCeLiangDian(this)" type="text">           
-           </td>          
-     </tr>
-       <tr>         
-           <td align="center" width="30"><!--标准值(A)-->
-               <input class="my-textbox input-width" value="1600" id="SHURUDA_t_1_1" name="SHURUDA" onblur="blurCeLiangDian(this)" type="text">
-           </td>
-           <td align="center" width="30"><!--显示值(A)-->
-                <input class="my-textbox input-width" value="1609" id="SHURUDB_t_1_1" name="SHURUDB" onblur="blurCeLiangDian(this)" type="text">
-           </td>         
-           <td align="center" width="30"><!--引用误差(%)-->
-                <input class="my-textbox input-width" value="0.90" id="SHURUDC_t_1_1" name="SHURUDC" onblur="blurCeLiangDian(this)" type="text">
-           </td>          
-     </tr>
-       <tr>
-         
-           <td align="center" width="30"><!--标准值(A)-->
-               <input class="my-textbox input-width" value="2000" id="SHURUEA_t_1_1" name="SHURUEA" onblur="blurCeLiangDian(this)" type="text">
-           </td>
-           <td align="center" width="30"><!--显示值(A)-->
-               <input class="my-textbox input-width" value="1982" id="SHURUEB_t_1_1" name="SHURUEB" onblur="blurCeLiangDian(this)" type="text">
-           </td>         
-           <td align="center" width="30"><!--引用误差(%)-->
-              <input class="my-textbox input-width" value="-1.80" id="SHURUEC_t_1_1" name="SHURUEC" onblur="blurCeLiangDian(this)" type="text">
-           </td>          
-     </tr>
+<tbody id="tbody_moban">
 
+    <!--表体-->
+    <!--插入行的位置-->
 </tbody>
 <tfoot>
     <!--表尾-->
      <tr>
-       <td colspan="7">
+       <td colspan="6">
        <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加空行</a>
        </td>
@@ -123,24 +43,172 @@
     <script type="text/javascript" language="javascript">
         //一个量程的需要这个方法
         //重写set方法，只准对增加空白行
-        //tbodyIndex通道
-        //thi 当前位置
-        function set(tbodyIndex, thi) {
-            // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
-            $("#hideDangQianTongDao").val(tbodyIndex); CreateRow();
+        function set(tbodyIndex) {
+
+            $('#dlg').dialog('open');//打开弹出框
+
+            $("#hideDangQianTongDao").val(tbodyIndex);
 
         }
-        function blurShuChuFanWeiZuiXiao(obj) {
-            
+        //增加行
+        function CreateRow() {
+
+
+            var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+            var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
+            LiangChengShuLiang++;
+            var txtNumber = $("#txtNumber").val();     //量程值
+            var txtPoint = $("#txtPoint").val();     //检测点数
+            var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+            var htmlString = [];
+            var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
+
+            var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
+
+
+
+            for (var rowidx = 0; rowidx < txtPoint; rowidx++) {
+                rowLength++;
+                htmlString.push("<tr rowindex='" + rowLength + "'>");
+
+                var rowspan = 1; //合并单元格行数
+
+                var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
+                //计算默认值
+                if (rowidx == 0) {
+                    //需要合并的列 //量程
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, txtNumber, "", "", "blurValue"));
+                   
+                }
+                // 标准值(A)
+                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, "", "", "", "blurValue"));
+                //显示值(A)
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "blurValue"));
+                if (LiangChengShuLiang == 1 && rowidx == 0) {
+                    //需要合并的列 //最大基本误差(%)
+                    htmlString.push(SetTDHtml(txtPoint, "ACTUALVALUE", lianChengID, rowidx, txtNumber, "", "", "blurValue"));
+
+                } else if (LiangChengShuLiang != 1 && rowidx == 0) {
+                    htmlString.push("<td rowspan=\"" + txtPoint + "\"></td>");
+                } 
+                //引用误差(%)
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, "", "", "", "blurValue"));
+                //校准结果的不确定度U(k={0})
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, "", "", "", ""));
+               
+                htmlString.push("</tr>");
+            }
+            htmlString = htmlString.join("");
+
+            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
+            $.parser.parse(tagRow);//渲染easyui组建
+            $('#dlg').window('close');//关闭弹出框
+
+            $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+        }
+        //计算标准值
+        function blurValue(obj) {
+
+            jiSuanWuCha(obj, "RANGE", "OUTPUTVALUE", "READVALUE", "ACTUALVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
 
         }
 
+        //误差
+        //obj 自身对象
+        //T1 量程
+        //T2 标准值(A)
+        //T3 显示值(A)
+        //T4 最大基本误差(%)
+        //T5 引用误差(%)
+        //T6 校准结果的不确定度U(k={0})
+        function jiSuanWuCha(obj, T1, T2, T3, T4, T5, T6) {
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+            var liangCheng = id.split('_')[2];
+            T1 = T1 + "_" + tongdao + "_1";            //改动的地方，参与计算的列的name值
+            T4 = T4 + "_" + tongdao + "_1";//改动的地方，参与计算的列的name值
+            T3 = T3 + id;//改动的地方，误差的列的name值
+            T2 = T2 + id;//有功分量 相对误差(%
+            T5 = T5 + id;//改动的地方，参与计算的列的name值
+          
+            var T1Data = $("#" + T1).val();//T1 量程
+            var T2Data = $(obj).parent().parent().find("#" + T2).val(); //T2 标准值(A)
+          
+
+            var T3Data = $(obj).parent().parent().find("#" + T3).val(); //T3 显示值(A)
+            var T4Data = $("#" + T4).val();//T4 最大基本误差(%)
+         //   var T5Data = $(obj).parent().parent().find("#" + T5).val(); //T5 引用误差(%)
+           
+            var txtPointLen = 2; //小数点位数
+
+
+            ///【引用误差】=(显示值-标准值)/量程*100,小数后两位，四舍六入，逢五奇进偶不进
+            if (T3Data != "" && T2Data != "" && T1Data != "") {
+                var jianfa = accMul(accDiv(accSub(T3Data, T2Data), T1Data), 100);
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                $(obj).parent().parent().find("#" + T5).val(data);
+            }
+            //【最大基本误差】是引用误差绝对值最大的引用误差，所有量程只有一个最大基本误差		
+            var els = document.getElementsByName("SHIJISHUCHUZHI");
+            var max = els[0].value;
+            var maxValue = els[0].value;
+            if (max != "") { max = Math.abs(max); }
+            for (var i = 0, j = els.length; i < j; i++) {
+                var val = els[i].value;
+                if (val != "") {
+                    val = Math.abs(val);
+                    if (max == "") {
+                        max = val;
+                        maxValue = els[i].value;
+                     
+                    } else if (max < val) {
+                        max = val;
+                        maxValue = els[i].value;
+                    }
+                }
+
+            }
+            $("#ACTUALVALUE" + "_" + tongdao + "_1").val(maxValue);
+            //【校准结果不确定度】一个检定项目一个不确定度。	
+
+        }
 
 
     </script>
 }
 @section TanKuang {
     <!--弹框的位置-->
-    <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
-    <input type="hidden" id="txtPointLen" value="1" /><!--小数点位数-->
+<!--增加量程弹层-->
+<div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return CreateRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+    <table>
+        <tr>
+            <td width="80" align="right">量程值：</td>
+            <td><input type="text" id="txtNumber" name="txtNumber" value="" class="my-textbox  required digits" style="width:200px" /></td>
+        </tr>
+        <tr>
+            <td align="right">检测点数：</td>
+            <td><input type="text" id="txtPoint" name="txtPoint" value="" class="my-textbox  required digits" style="width:200px" /></td>
+        </tr>
+        <tr>
+            <td align="right">小数点位数：</td>
+            <td><input type="text" id="txtPointLen" name="txtPointLen" value="" class="my-textbox  required digits" style="width:200px" /></td>
+        </tr>
+    </table>
+</div>
+<!--/增加量程弹层-->
 }
