@@ -192,21 +192,36 @@
             var T5Data = $(obj).parent().parent().find("#" + T5).val(); //T5 被检仪器示值_同相分量(%)
             var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T6 被检仪器示值_正交分量(ˊ)
             //【同相分量-误差】=【被检仪器示值-同相分量】-【整检装置示值-同相分量】，小数位数与【被检仪器示值-同相分量】相同，四舍六入，逢五奇进偶不进。
-          
+            T2Data = T2Data == "" ? 0 : T2Data;
+          //  T3Data = T3Data == "" ? 0 : T3Data;
+          ///  T4Data = T4Data == "" ? 0 : T4Data;
+           // T5Data = T5Data == "" ? 0 : T5Data;
+          //  T6Data = T6Data == "" ? 0 : T6Data;
             if (T5Data != "" && T1Data != "") {
                 var r1
                 try { r1 = T5Data.toString().split(".")[1].length } catch (e) { r1 = 0 }
-                var jianfa =accSub(T5Data,T1Data);
-                var data = zeroFloat(fomatFloat(jianfa, r1), r1);
+                var jianfa = accSub(T5Data, T1Data);
+
+                if (r1 != 0) {
+                    var data = zeroFloat(fomatFloat(jianfa, r1), r1);
+                } else {
+                    var data = jianfa;
+                }
+
                 $(obj).parent().parent().find("#" + T7).val(data);
             }
             //【正交分量-误差】=【被检仪器示值-正交分量】-【整检装置示值-正交分量】，小数位数与【被检仪器示值-正交分量】相同，四舍六入，逢五奇进偶不进。
           
-            if (T6Data != "" && T2Data != "") {
+            if (T6Data != "") {
                 var r1;
                 try { r1 = T6Data.toString().split(".")[1].length } catch (e) { r1 = 0 }
-                var jianfa = accSub(T6Data, T1Data);
-                var data = zeroFloat(fomatFloat(jianfa, r1), r1);
+                var jianfa = accSub(T6Data, T2Data);
+                if (r1 != 0) {
+                    var data = zeroFloat(fomatFloat(jianfa, r1), r1);
+                } else {
+                    var data = fomatFloat(jianfa, r1);
+                }
+               
                 $(obj).parent().parent().find("#" + T8).val(data);
             }
             //【允许误差-同相分量】=（ABS(被检同相)/100）*a+0.000291*ABS(被检正交)*a+比差量程*a*0.1)*100
@@ -222,20 +237,22 @@
                 var jian1 = accMul(0.000291, Math.abs(T6Data)).mul(a);
                 var jian2 = T3Data.mul(a).mul(0.1);
                 var data = jian.add(jian1).add(jian2).mul(100);
-                    //(Math.abs(parseFloat(T5Data)) / 100) * parseFloat(a) + 0.000291 * (Math.abs(parseFloat(T6Data)) * a + parseFloat(T3Data) * a * 0.1) * 100;
-                $(obj).parent().parent().find("#" + T9).val(zeroFloat(data, 4));
+                var data = zeroFloat(fomatFloat(data, 4), 4);
+                $(obj).parent().parent().find("#" + T9).val(data);
             }
             //【允许误差-正交分量】=(3438*ABS(被检同相/100)*a+ABS(被检正交)*a+角差量程*a*0.1)
-            if (T5Data != "" && T6Data != "" && T4Data != "") {
+            if (T4Data != "") {
                 var a = $("#A" + "_" + tongdao + "_1_1").val();
                 a = parseFloat(a);
                 T5Data = parseFloat(T5Data);
                 T6Data = parseFloat(T6Data);
                 T4Data = parseFloat(T4Data);
-                var jian = accMul(accDiv(Math.abs(T5Data), 100), a);
-
-                var data = (3438 * Math.abs( parseFloat(T5Data) / 100) * a + Math.abs( parseFloat(T6Data)) * a +  parseFloat(T4Data) * a * 0.1)
-                $(obj).parent().parent().find("#" + T10).val(zeroFloat(data,3));
+                var jian = accMul(accMul(3438, Math.abs(accDiv(T5Data, 100))), a);
+                var jian2 = Math.abs(T6Data).mul(a);
+                var jian3 = T4Data.mul(a).mul(0.1);
+                var data = jian.add(jian2).add(jian3);
+                var data = zeroFloat(fomatFloat(data, 3), 3);
+                $(obj).parent().parent().find("#" + T10).val(data);
             }
         }
     
