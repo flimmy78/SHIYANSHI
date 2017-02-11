@@ -1,0 +1,268 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "电流有功分量无功分量";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    <tr>
+        <th width="160"  align="center">标称值Z(<select class="my-combobox" name="HeGe" id="HeGe_t_1_1">
+        <option value="VA">VA</option>
+        <option value="Ω">Ω</option>
+    </select>)</th>
+        <th width="160"  align="center">校准点(%)</th>
+
+        <th width="160"  align="center"><select class="my-combobox" name="xsz" id="xsz_t_1_1">
+    <option value="0.06">0.06</option>
+    <option value="0.05">0.05</option>
+</select>显示值(Ω)</th>
+        <th width="160" align="center">有功分量实测值(Ω)</th>
+        <th width="160"  align="center">有功分量相对误差(%)</th>
+        <th width="160"  align="center">无功分量实测值(Ω)</th>
+        <th width="160" align="center">无功分量相对误差(%)</th>
+        <th width="160" align="center">cosφ</th>
+        <th width="160" align="center">额定电流(A)</th>
+    </tr>
+   
+</thead>
+
+<tbody id="tbody_moban">
+
+    <!--表体-->
+    <!--插入行的位置-->
+</tbody>
+<tr>
+    <td colspan="9">
+        <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加量程</a>
+    </td>
+</tr>
+<tfoot tag="tag">
+
+    <!--表尾-->
+    
+</tfoot>
+
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        function set(tbodyIndex) {
+
+            $('#dlg').dialog('open');//打开弹出框
+
+            $("#hideDangQianTongDao").val(tbodyIndex);
+
+        }
+        //增加行
+        function CreateRow() {
+
+
+            var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+            var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
+            LiangChengShuLiang++;
+            var txtNumber = $("#txtNumber").val();     //量程值
+            var txtPoint = $("#txtPoint").val();     //检测点数
+            var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+            var htmlString = [];
+            var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
+
+            var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
+
+
+
+            for (var rowidx = 0; rowidx < txtPoint; rowidx++) {
+                rowLength++;
+                htmlString.push("<tr rowindex='" + rowLength + "'>");
+
+                var rowspan = 1; //合并单元格行数
+
+                var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
+                //计算默认值
+
+                if (rowidx == 0) {
+                    //需要合并的列 //标称值S(VA)
+
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE", HangHaoID, rowidx, "", "", "", "changeValue"));
+                }
+
+                //校准点(%) 【校准点】是5,100,120
+                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, "", "", "", "changeValue", "JiaoZhunDian"));
+                //显示值
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "changeValue", ""));
+                //有功分量实测值(Ω)
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, "", "", "", "changeValue"));
+
+                //有功分量相对误差(%)
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, "", "", "", ""));
+
+                //无功分量 实测值(mS)
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, "", "", "", "changeValue"));
+                //无功分量 相对误差(%
+                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, "", "", "", ""));
+                //cosφ
+                htmlString.push(SetTDHtml(rowspan, "BUQUEDINGDU", HangHaoID, rowidx, "", "", "", "changeValue", "Cos1"));//, "", "Cos1"));
+                //额定电压(V)
+                htmlString.push(SetTDHtml(rowspan, "BUQUEDINGDUM", HangHaoID, rowidx, "", "", "", "changeValue", "EDingDianLiu"));//, "", "EDingDianLiu"));
+              
+                htmlString.push("</tr>");
+            }
+            htmlString = htmlString.join("");
+
+            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
+            $.parser.parse(tagRow);//渲染easyui组建
+            $('#dlg').window('close');//关闭弹出框
+
+            $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+        }
+        //计算标准值
+        function changeValue(obj) {
+
+            jiSuanWuCha(obj, "RANGE", "OUTPUTVALUE", "READVALUE", "ACTUALVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR", "UNCERTAINTYDEGREE", "BUQUEDINGDU", "BUQUEDINGDUM");
+
+        }
+        //误差
+        //obj 自身对象
+        //T1 标称值S(VA)
+        //T2 校准点(%)
+        //T3 显示值
+        //T4 有功分量 实测值(mS
+        //T5 有功分量 相对误差(%
+        //T6 无功分量 实测值(mS)
+        //T7 无功分量 相对误差(%
+        //T8 cosφ
+        //T9 额定电压(V)
+        function jiSuanWuCha(obj, T1, T2, T3, T4, T5, T6, T7, T8, T9) {
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+            T1 = T1 + "_" + tongdao + "_1_1";            //改动的地方，参与计算的列的name值
+            T2 = T2 + id;//改动的地方，参与计算的列的name值
+            T3 = T3 + id;//改动的地方，误差的列的name值
+            T4 = T4 + id;//有功分量 实测值(mS
+            T5 = T5 + id;//有功分量 相对误差(%
+            T6 = T6 + id;//无功分量 实测值(mS)
+            T7 = T7 + id; //无功分量 相对误差(%
+            T8 = T8 + id; //T8 cosφ
+            T9 = T9 + id; //T9 额定电压(V)
+            var T1Data = $("#" + T1).val();//T1 标称值S(VA)
+            //var myselect = document.getElementById(T2);
+            //var index = myselect.selectedIndex;             // selectedIndex代表的是你所选中项的index
+            //var T2Data = myselect.options[index].value;
+           var T2Data = $(obj).parent().parent().find("#" + T2).val();//T2 校准点(%)
+           var T3Data = $(obj).parent().parent().find("#" + T3).val(); //T3 显示值
+          
+           var T5Data = $(obj).parent().parent().find("#" + T5).val(); //T5 无功分量 实测值(mS)
+           var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T6 无功分量 相对误差(%
+            //var myselect7 = document.getElementById(T7);
+            //var index7 = myselect7.selectedIndex;             // selectedIndex代表的是你所选中项的index
+            //var T7Data = myselect7.options[index7].value;
+            var T7Data = $(obj).parent().parent().find("#" + T7).val(); //T7  cosφ
+            //var myselect8 = document.getElementById(T8);
+            //var index8 = myselect8.selectedIndex;             // selectedIndex代表的是你所选中项的index
+            //var T8Data = myselect8.options[index8].value;
+            var T8Data = $(obj).parent().parent().find("#" + T8).val(); //T8 额定电压(V)
+            var T9Data = $(obj).parent().parent().find("#" + T9 ).val(); //T9 额定电压(V)
+            var CanData = $("#" + "xsz_" + tongdao + "_1_1").val(); //"xsz_t_1_1";
+            //【实测值】=显示值+参数(0.06或0.05)		
+            if (T3Data != "" && CanData != "")
+            {
+                CanData = parseFloat(CanData);
+                T3Data = parseFloat(T3Data);
+                var jianfa = accAdd(T3Data, CanData);
+                var data = zeroFloat(fomatFloat(jianfa, 2), 2);
+                $(obj).parent().parent().find("#" + T4).val(data);
+            }
+            var T4Data = $(obj).parent().parent().find("#" + T4).val(); //T4 有功分量实测值
+            var BiaoChenData = $("#" + "HeGe_" + tongdao + "_1_1").val(); //"HeGe_t_1_1";
+            if (BiaoChenData == "VA")
+            {
+                //【有功分量-相对误差%】=100*（标称值/额定电流平方*0.8-有功分量实测值）/有功分量实测值，小数点后两位，四舍六入，逢五奇进偶不进																																																																													
+                if (T1Data != "" && T9Data != "" && T4Data != "") {
+                    T1Data = parseFloat(T1Data);
+                    T9Data = parseFloat(T9Data);
+                    T4Data = parseFloat(T4Data);
+                    var jianfa1 = T1Data.div(accMul(T9Data, T9Data)).mul(0.8);
+                    var jianfa2 = accSub(jianfa1, T4Data);
+                    var jianfa = accDiv(accMul(100, jianfa2), T4Data);
+                    var data = zeroFloat(fomatFloat(jianfa, 2), 2);
+                    $(obj).parent().parent().find("#" + T5).val(data);
+                }
+
+                //【无功分量-相对误差%】=100*(标称值/额定电流平方*0.6-无功分量实测值)/无功分量实测值，小数点后两位，四舍六入，逢五奇进偶不进																																																																													
+                if (T1Data != "" && T9Data != "" && T6Data != "") {
+
+                    T1Data = parseFloat(T1Data);
+                    T9Data = parseFloat(T9Data);
+                    T6Data = parseFloat(T6Data);
+                    var jianfa1 = T1Data.div(accMul(T9Data, T9Data)).mul(0.6);
+                    var jianfa2 = accSub(jianfa1, T6Data);
+                    var jianfa = accDiv(accMul(100, jianfa2), T6Data);
+                    var data = zeroFloat(fomatFloat(jianfa, 2), 2);
+                    $(obj).parent().parent().find("#" + T7).val(data);
+                }
+            } else if (BiaoChenData == "Ω") // // 标称值Ω		
+            {
+                //电流Ω【有功分量-相对误差%】=100*（有功分量实测值-标称值）/标称值，小数点后两位，四舍六入，逢五奇进偶不进		
+                if (T1Data != ""  && T4Data != "") {
+                    T1Data = parseFloat(T1Data);
+                    T4Data = parseFloat(T4Data);
+                    var jianfa1 = accSub(T4Data, T1Data);
+                    var jianfa = accDiv(accMul(100, jianfa1), T1Data);
+                    var data = zeroFloat(fomatFloat(jianfa, 2), 2);
+                    $(obj).parent().parent().find("#" + T5).val(data);
+                }
+                //电流Ω【无功分量-相对误差%】=100*无功分量实测值/标称值，小数点后两位，四舍六入，逢五奇进偶不进																																																																													
+                if (T1Data != ""  && T6Data != "") {
+
+                    T1Data = parseFloat(T1Data);
+                    T6Data = parseFloat(T6Data);
+      
+                    var jianfa = accDiv(accMul(100, T6Data), T1Data);
+                    var data = zeroFloat(fomatFloat(jianfa, 2), 2);
+                    $(obj).parent().parent().find("#" + T7).val(data);
+                }
+
+            }   																																																																											
+        }
+    
+
+
+    </script>
+
+}
+
+@section TanKuang {
+    <!--弹框的位置-->
+    <!--增加量程弹层-->
+    <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return CreateRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+        <table>
+            <tr>
+                <td align="right">检测点数：</td>
+                <td><input type="text" id="txtPoint" name="txtPoint" value="" class="my-textbox  required digits" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">小数点位数：</td>
+                <td><input type="text" id="txtPointLen" name="txtPointLen" value="" class="my-textbox  required digits" style="width:200px" /></td>
+            </tr>
+        </table>
+    </div>
+    <!--/增加量程弹层-->
+}
+

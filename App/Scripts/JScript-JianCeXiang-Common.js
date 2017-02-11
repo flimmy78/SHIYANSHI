@@ -1,9 +1,27 @@
 ﻿//---------------------------------
+
 //每行不确定度计算按钮
 var JiSuanBuQueDingDu_MeiHang_Html = " <a href=\"javascript:void(0)\" class=\"easyui-linkbutton\" data-options=\"plain:true,iconCls:'icon-save'\">计算不确定度</a>";
 //检测项目单位
 var DanWeiDDLHtmlArray = Array;
 DanWeiDDLHtmlArray = [
+            {
+                Code: 'EDingDianLiu',
+                Remark: '额定电流(A)',
+                Value: "<select class=\"my-combobox\" name=\"EDingDianLiu\" style=\"width:50px; \">" +
+                    "<option value=\"1\">1</option>" +
+                    "<option value=\"5\">5</option> " +
+                       "</select>"
+            },
+               {
+                   Code: 'JiaoZhunDian',
+                   Remark: '校准点',
+                   Value: "<select class=\"my-combobox\" name=\"JiaoZhunDian\" style=\"width:50px; \">" +
+                           "<option value=\"5\">5</option> " +
+                           "<option value=\"100\">100</option>" +
+                           "<option value=\"120\">120</option>" +
+                          "</select>"
+               },
           {
               Code: 'DYHG',
               Remark: '电压互感器测量回路说明',
@@ -103,6 +121,14 @@ DanWeiDDLHtmlArray = [
                     "</select>"
          }
    ,
+     {
+         Code: 'Cos1',
+         Remark: '【cosφ】下拉0.8,1',
+         Value: "<select class=\"my-combobox\" name=\"Cos1\" style=\"width:79px; \">" +
+                 "<option value=\"0.8\">0.8</option> " +
+                  "<option value=\"1\">1</option>" +
+                 "</select>"
+     },
   {
       Code: 'Cos',
       Remark: 'cosθ',
