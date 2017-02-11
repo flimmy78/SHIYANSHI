@@ -1,0 +1,145 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "仪器分辨力试验";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    
+    <tr>
+        <th align="center">仪器分辨力试验：</th>
+        <th align="center"><select class="my-combobox" name="HeGe" id="HeGe_t_1_1">
+                        <option value="合格">合格</option>
+                        <option value="不合格">不合格</option>
+                         </select>
+        </th>
+        <th align="center" colspan="6"></th>
+       
+    </tr>
+    <tr>
+        <th align="center">额定工作电压</th>
+        <th align="center"><select class="my-combobox" name="OUTPUTVALUE" id="OUTPUTVALUE_t_1_1">
+    <option value="100">100</option>
+    <option value="100/√3">100/√3</option>
+</select>V</th>
+        <th align="center">试验量程</th>
+        <th align="center"><select class="my-combobox" name="READVALUE" id="READVALUE_t_1_1">
+            <option value="0.01">0.01</option>
+            <option value="0.1">0.1</option>
+            <option value="1×10-4">1×10-4</option>
+        </select>
+        </th>
+        <th align="center">
+            比值差变化
+        </th>
+        <th align="center">
+            <select class="my-combobox" name="ACTUALVALUE" id="ACTUALVALUE_t_1_1">
+                <option value="1×10-4">1×10-4</option>
+                <option value="1×10-6">1×10-6</option>
+            </select>
+        </th>
+        <th align="center">
+            相位差变化
+        </th>
+        <th align="center">
+            <input id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" type="text" class="my-textbox tc" value="" >
+           ˊ
+        </th>
+    </tr>
+    <tr>
+        <th align="center">额定工作电流</th>
+        <th align="center">
+            <select class="my-combobox" name="OUTPUTVALUE" id="OUTPUTVALUE_t_2_1">
+                <option value="1">1</option>
+                <option value="5">5</option>
+            </select>A
+        </th>
+        <th align="center">试验量程</th>
+        <th align="center">
+            <select class="my-combobox" name="READVALUE" id="READVALUE_t_2_1">
+                <option value="0.01">0.01</option>
+                <option value="0.1">0.1</option>
+                <option value="1×10-4">1×10-4</option>
+            </select>
+        </th>
+        <th align="center">
+            比值差变化
+        </th>
+        <th align="center">
+            <select class="my-combobox" name="ACTUALVALUE" id="ACTUALVALUE_t_2_1">
+                <option value="1×10-4">1×10-4</option>
+                <option value="1×10-6">1×10-6</option>
+            </select>
+        </th>
+        <th align="center">
+            相位差变化
+        </th>
+        <th align="center">
+            <input id="SHIJISHUCHUZHI_t_2_1" name="SHIJISHUCHUZHI" type="text" class="my-textbox tc" value="">
+            ˊ
+        </th>
+    </tr>
+</thead>
+
+<tbody id="tbody_moban">
+
+    <!--表体-->
+    <!--插入行的位置-->
+
+</tbody>
+<tfoot tag="tag">
+    <!--表尾-->
+   
+</tfoot>
+
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        function set(tbodyIndex) {
+
+            $('#dlg').dialog('open');//打开弹出框
+
+            $("#hideDangQianTongDao").val(tbodyIndex);
+
+        }
+      
+    </script>
+
+}
+
+@section TanKuang {
+    <!--弹框的位置-->
+    <!--增加量程弹层-->
+    <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return CreateRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+        <table>
+            <!-- <tr>
+                  <td width="80" align="right">量程值：</td>
+                  <td><input type="text" id="txtNumber" name="txtNumber" value="" class="my-textbox  required digits" style="width:200px" /></td>
+              </tr>-->
+            <tr>
+                <td align="right">检测点数：</td>
+                <td><input type="text" id="txtPoint" name="txtPoint" value="" class="my-textbox  required digits" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">小数点位数：</td>
+                <td><input type="text" id="txtPointLen" name="txtPointLen" value="" class="my-textbox  required digits" style="width:200px" /></td>
+            </tr>
+        </table>
+    </div>
+    <!--/增加量程弹层-->
+}
+
