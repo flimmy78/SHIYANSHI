@@ -25,19 +25,18 @@ DanWeiDDLHtmlArray = [
           {
               Code: 'DYHG',
               Remark: '电压互感器测量回路说明',
-              Value: "<select class=\"my-combobox\" name=\"DYHG\" style=\"width:50px; \">" +
+              Value: "<select class=\"my-combobox\" name=\"DYHG\" style=\"width:150px; \">" +
                       "<option value=\"ΔU/U\">ΔU/U</option> " +
                       "<option value=\"ΔI/I\">ΔI/I</option>" +
                      "</select>"
           }, {
               Code: 'DLHG',
               Remark: '电压互感器测量回路说明',
-              Value: "<select class=\"my-combobox\" name=\"DLHG\" style=\"width:50px; \">" +
+              Value: "<select class=\"my-combobox\" name=\"DLHG\" style=\"width:150px; \">" +
 
                       "<option value=\"U=100V\">U=100V</option>" +
                       "<option value=\"U=100/√3V\">U=100/√3V</option> " +
-                      "<option value=\"I=1A\">I=1A</option> " +
-                      "<option value=\"I=5A\">I=5A</option>  " +
+                    
                      "</select>"
           },
         {
@@ -3365,7 +3364,7 @@ RuleAttributeArray = [
                 //检测项属性名称后需要加自动或者按钮不确定计算
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
-                JiSuanBuQueDingDu: '',
+                JiSuanBuQueDingDu: 'A:RELATIVEERROR',
                 //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
