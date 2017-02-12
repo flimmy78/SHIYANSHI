@@ -26,6 +26,19 @@ namespace Langben.App.Controllers
      /// <param name="SCHEMEID">方案id</param>
      /// <param name="PREPARE_SCHEMEID">预备方案id</param>
      /// <returns></returns>
+        public ActionResult DianLiuYouGongFenLiangWuGongFenLiang(string RULEID = "1264-2010_3_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///电压表示值误差-相对误差
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
         public ActionResult DianYaBiaoShiZhiWuCha(string RULEID = "315-1983_2_6", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
