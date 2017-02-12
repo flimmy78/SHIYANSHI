@@ -90,8 +90,9 @@ namespace Langben.Report
 
 
 
-            string xlsPath = @"D:\codes\SHIYANSHI\App\Template\原始记录-数据模板-数表三相.xls";//TableTemplateXml
-
+            // string xlsPath = @"D:\codes\SHIYANSHI\App\Template\原始记录-数据模板-数表三相.xls";//TableTemplateXml
+            //原始记录 - /*校准*/
+                string xlsPath = @"D:\codes\SHIYANSHI\App\Template\原始记录-校准.xls";//TableTemplateXml
 
             HSSFWorkbook _book = new HSSFWorkbook();
             FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
