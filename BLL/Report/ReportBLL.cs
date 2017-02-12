@@ -1562,7 +1562,7 @@ namespace Langben.Report
                 case ExportType.OriginalRecord_XiaoZhun:
                     if (IsHaveBuQueDingDu == false)
                     {
-                        hssfworkbook.SetSheetHidden(1, SheetState.Hidden);//不确定度,没有不确定度需要隐藏该sheet
+                        hssfworkbook.SetSheetHidden(2, SheetState.Hidden);//不确定度,没有不确定度需要隐藏该sheet
                     }
                     hssfworkbook.SetSheetHidden(3, SheetState.Hidden);//封皮模板
                     hssfworkbook.SetSheetHidden(4, SheetState.Hidden);//数据模板

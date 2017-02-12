@@ -110,7 +110,7 @@ else
         <div class="mt10" id="tongdao">
             <div>
                 <i>U</i><small>A</small> =
-                <input tag="only" class="my-textbox " value="" style="width:200px" name="" id="txtBuQueDingA">
+                <input tag="only" class="my-textbox " value="0" style="width:200px" name="" id="txtBuQueDingA">
                 <input tag="only" class="my-textbox " value="" style="width:100px" name="" id="txtValue" onblur="biaozhunpiancha()">
             </div>
             <table border="0" cellspacing="0" cellpadding="0" class="tbl mt10" id="aaaa">
@@ -460,6 +460,12 @@ else
         var biaozhun = calculate(data);
         var v = $("#txtValue").val();
         $("#txtBuQueDingA").val(v == "" ? biaozhun : parseFloat(biaozhun) / parseFloat(v));
+        var reg = /^[0-9]+.?[0-9]*$/;//用来验证数字，包括小数的正则
+        if (!reg.test($("#txtBuQueDingA").val()))
+        {
+            $("#txtBuQueDingA").val("0");
+        }
+       
         calculateC();
 
     }
@@ -496,6 +502,10 @@ else
         mean = Math.round(mean * 1000000) / 1000000;
         var v = $("#txtValueB").val();
         $("#txtBuQueDingB").val(v == "" ? mean : parseFloat(mean) / parseFloat(v));
+        var reg = /^[0-9]+.?[0-9]*$/;//用来验证数字，包括小数的正则
+        if (!reg.test($("#txtBuQueDingB").val())) {
+            $("#txtBuQueDingB").val("");
+        }
         calculateC();
     }
     function calculateC() {
@@ -504,6 +514,10 @@ else
         if (valueB == "" || valueA == "") return false;
         var valueC = Math.pow(parseFloat(valueA), 2) + Math.pow(parseFloat(valueB), 2);
         $("#txtBuQueDingC").val(Math.sqrt(valueC));
+        var reg = /^[0-9]+.?[0-9]*$/;//用来验证数字，包括小数的正则
+        if (!reg.test($("#txtBuQueDingC").val())) {
+            $("#txtBuQueDingC").val("");
+        }
         caculateD();
     }
 
@@ -511,6 +525,13 @@ else
         var valueC = $("#txtBuQueDingC").val();
         var ddlValue = $("#ddlSelectD").val();
         $("#txtvalueD,#txtValueE").val(ddlValue == "√3" ? (Math.sqrt(3) * parseFloat(valueC)) : parseFloat(ddlValue) * parseFloat(valueC))
+        var reg = /^[0-9]+.?[0-9]*$/;//用来验证数字，包括小数的正则
+        if (!reg.test($("#txtvalueD").val())) {
+            $("#txtvalueD").val("");
+        }
+        if (!reg.test($("#txtValueE").val())) {
+            $("#txtValueE").val("");
+        }
     }
     //由于html无法获取value，重新给outerHTML赋值
     function SetAllControlHtml() {
