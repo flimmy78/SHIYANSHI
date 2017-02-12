@@ -2431,6 +2431,8 @@ namespace Langben.Report
                         iEntity = null;
                     }
 
+                    bool IsBiaoGe = false;//是否画表格
+
                     #region 检测项目标题     
                     //相同检测项只展示一个标题      
 
@@ -2445,6 +2447,21 @@ namespace Langben.Report
                     if (iEntity != null && (iVTEST_ITE.INPUTSTATE == InputStateEnums.HGBHG.ToString() || iVTEST_ITE.INPUTSTATE == InputStateEnums.WBK.ToString()) && iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
                     {
                         celStr = celStr + iEntity.CONCLUSION.Trim();
+                    }
+                    else if(type== ExportType.Report_JianDing)//处理检定报告
+                    {
+                        string msg = string.Empty;
+                        IsBiaoGe = IsBiaoGeByDengJi(iEntity, ref msg);
+                        if(msg!=null && msg.Trim()!="")
+                        {
+                            celStr = celStr + msg;
+                        }
+                        else
+                        {
+                            celStr = celStr + "/";
+                        }
+                        celStr = celStr + "/";
+
                     }
                     else if (iEntity == null)
                     {
@@ -2472,7 +2489,7 @@ namespace Langben.Report
 
 
                     if (iEntity != null
-                        && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
+                        && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null && IsBiaoGe)
                     {
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
                         //解析html表格数据    
@@ -2533,6 +2550,92 @@ namespace Langben.Report
             //设置页面页脚
             SetHeaderAndFooter(sheet_Destination, entity, type);
             sheet_Destination.ForceFormulaRecalculation = true;
+        }
+        /// <summary>
+        /// 根据等级判断是否是表格
+        /// </summary>
+        /// <param name="iEntity">检测项信息</param>
+        /// <param name="msg">返回合格不合格信息</param>
+        /// <returns></returns>
+        private bool IsBiaoGeByDengJi(QUALIFIED_UNQUALIFIED_TEST_ITE iEntity,ref string msg)
+        {
+            bool result = true;
+            msg = string.Empty;
+
+            List<Rule_DengJi> rList = ReportStatic.Rule_DengJiList();
+            if (iEntity != null && rList != null && rList.Count > 0 && rList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null)
+            {
+                Rule_DengJi rItem = rList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
+
+                #region 获取到合格不合格级等级数据
+                bool statestandard = false;//是否找到合格不合格
+                bool zhunquedingdudengji = false;//是否找到等级
+                string statestandardValue = string.Empty;//合格不合格值
+                string zhunquedingdudengjiValue = string.Empty;//等级值
+                HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                doc.LoadHtml(iEntity.HTMLVALUE);
+                Dictionary<int, List<MYDataHead>> headDic = AnalyticHTML.GetHeadData(doc);//表头
+                if (headDic != null && headDic.Count > 0)
+                {
+                    MYDataHead data = new MYDataHead();
+                    foreach (List<MYDataHead> items in headDic.Values)
+                    {
+                        if (items != null && items.Count > 0)
+                        {
+                            if (statestandard == false)
+                            {
+                                data = items.FirstOrDefault(p => p.name == "statestandard");
+                                if (data != null)
+                                {
+                                    statestandardValue = data.value;
+                                    statestandard = true;
+                                }
+                            }
+
+                            if (zhunquedingdudengji == false)
+                            {
+                                data = items.FirstOrDefault(p => p.name == "zhunquedingdudengji");
+                                if (data != null)
+                                {
+                                    zhunquedingdudengjiValue = data.value;
+                                    zhunquedingdudengji = true;
+                                }
+                            }
+                            if (statestandard && zhunquedingdudengji)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+                #endregion
+
+                double zhunquedingdudengjiValueNum = 0;
+                if(double.TryParse(zhunquedingdudengjiValue, out zhunquedingdudengjiValueNum))
+                {
+                    if(zhunquedingdudengjiValueNum>=rItem.DengJi)
+                    {
+                        if(rItem.IsXuYaoHeGe==false)
+                        {
+                            result = false;
+                        }
+                        else
+                        {
+                            if(statestandardValue!=null && statestandardValue.Trim()=="合格")
+                            {
+                                result = false;
+                            }
+                        }
+                        if(result==false)
+                        {
+                            msg = statestandardValue.Trim();
+                        }
+
+                    }
+                }
+            }       
+
+            return result;
         }
 
         /// <summary>
