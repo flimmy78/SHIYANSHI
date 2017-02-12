@@ -299,9 +299,14 @@ namespace Langben.Report
                         {
                             doc.LoadHtml(iEntity.HTMLVALUE);
                             string data = AnalyticHTML.Getinput(doc);
+                            string data2 = AnalyticHTML.GetinputHead(doc);
+                            if (!string.IsNullOrWhiteSpace(data2))
+                            {
+                                errors += "<br/><br/>thead标签中，name是不能相同的" + iEntity.ID+ iEntity.RULE.ID + iEntity.RULE.NAMEOTHER + data2;
+                            }
                             if (!string.IsNullOrWhiteSpace(data))
                             {
-                                errors += iEntity.ID + iEntity.RULE.NAME + data;
+                                errors += iEntity.ID + iEntity.RULE.ID + iEntity.RULE.NAMEOTHER + data;
                             }
 
                         }

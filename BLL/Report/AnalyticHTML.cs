@@ -774,7 +774,7 @@ namespace Langben.Report
                     }
                     catch (System.Exception ex)
                     {
-                        if (item.Attributes["name"] == null)
+                        if (item.Attributes["name"] != null)
                         {
                             errors += item.Attributes["name"].Value;
                         }
@@ -812,6 +812,55 @@ namespace Langben.Report
                     }
 
                 }
+            }
+
+            return errors;
+        }
+        /// <summary>
+        /// 测试的时候使用
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
+        public static string GetinputHead(HtmlAgilityPack.HtmlDocument doc)
+        {
+            string errors = "";
+            string xpath = @"//thead//input | //thead//select";
+            var collection = doc.DocumentNode.SelectNodes(xpath);
+            Dictionary<string, string> ids = new Dictionary<string, string>();
+            foreach (var item in collection)
+            {
+                if (string.IsNullOrWhiteSpace(item.Id))
+                {
+                    errors += item.XPath + "|Id没有";
+                    continue;
+                }
+                else
+                {
+                    if ((item.Name == "input") && (item.Attributes["type"] != null) && (item.Attributes["type"].Value == "hidden"))
+                    {
+                        continue;
+                    }
+                    try
+                    {
+                        if (item.Attributes["name"] != null)
+                        {
+                            ids.Add(item.Attributes["name"].Value, item.XPath);
+                           
+                        }
+                       
+                    }
+                    catch (System.Exception ex)
+                    {
+                        if (item.Attributes["name"] != null)
+                        {
+                            errors += item.Attributes["name"].Value;
+                        }
+                        errors += item.XPath + ex.Message + "|" + item.Id;
+
+                    }
+
+                }
+               
             }
 
             return errors;
