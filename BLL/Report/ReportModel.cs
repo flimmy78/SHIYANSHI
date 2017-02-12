@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Langben.DAL.shiyanshi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -378,6 +379,27 @@ namespace Langben.Report
             get { return _IsMergeNullValue; }
             set { _IsMergeNullValue = value; }
         }
+
+
+    }
+    /// <summary>
+    /// 检测项与等级关系类
+    /// </summary>
+    public class Rule_DengJi
+    {
+        /// <summary>
+        /// 检测项ID
+        /// </summary>
+        public string RuleID { get; set; }
+        /// <summary>
+        /// 检测项名称
+        /// </summary>
+        public string RuleName { get; set; }
+       // public List<ExportType> 
+    }
+    public class ExportType_DengJi
+    {
+        public ExportType ExportType { get; set; }
 
 
     }
