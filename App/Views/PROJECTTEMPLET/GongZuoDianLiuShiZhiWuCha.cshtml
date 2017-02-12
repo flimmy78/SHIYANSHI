@@ -164,8 +164,8 @@
         //计算显示值
         function resetXianShiZhi(obj) {
             //重新计算当前行
-            xiangDuiWuCha(obj, "SHIJISHUCHUZHI", "RELATIVEERROR", "RELATIVEERROR");
-
+             
+            wuCha1(obj, "DIANLIUZHIZHI", "DIANLIUSHIJIZHI", "SHIZHIWUCHA", "UNCERTAINTYDEGREE")
 
         }
         //计算标准值
@@ -183,12 +183,7 @@
         }
         ///计算实质误差
         function shiZhiWuCha(obj) {
-            // 【示值误差(%)】=(工作电流示值I-工作电流实际值I0)/工作电流实际值I0*100%
-            var gongZuoDianLiuShiZhi = $(obj).parents('tr:eq(0)').find('td:eq(2) input').val() == "" ? "" : parseFloat($(obj).parents('tr:eq(0)').find('td:eq(2) input').val());
-            var gongZuoDianLiuShiJiZhi = $(obj).parents('tr:eq(0)').find('td:eq(3) input').val() == "" ? "" : parseFloat($(obj).parents('tr:eq(0)').find('td:eq(3) input').val());
-            if (gongZuoDianLiuShiZhi == "" || gongZuoDianLiuShiJiZhi == "") $(obj).parents('tr:eq(0)').find('td:eq(4) input').val("")
-            else
-                $(obj).parents('tr:eq(0)').find('td:eq(4) input').val(fomatFloat((gongZuoDianLiuShiZhi - gongZuoDianLiuShiJiZhi) / gongZuoDianLiuShiJiZhi * 100, 1));
+            wuCha1(obj, "DIANLIUZHIZHI", "DIANLIUSHIJIZHI", "SHIZHIWUCHA", "UNCERTAINTYDEGREE")
         }
 
     </script>

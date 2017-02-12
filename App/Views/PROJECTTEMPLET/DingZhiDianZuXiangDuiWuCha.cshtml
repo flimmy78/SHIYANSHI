@@ -28,7 +28,7 @@
 <tfoot>
     <!--表尾-->
     <tr>
-        <td colspan="7">
+        <td colspan="5">
             <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
             <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加量程</a>
 
@@ -90,7 +90,7 @@
 
                
                 //相对误差
-                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, "±"));
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, "OM", "2", "M"));
 
 
                 //校准结果的不确定度 U(K =
