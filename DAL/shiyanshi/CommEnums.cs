@@ -187,7 +187,6 @@ namespace Langben.DAL.shiyanshi
         
 
     }
-    //public enum
 
 
 }

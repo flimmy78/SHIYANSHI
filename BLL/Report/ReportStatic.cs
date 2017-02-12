@@ -191,5 +191,164 @@ namespace Langben.Report
                 return path;
             }
         }
+        public static List<Rule_DengJi> Rule_DengJiList()
+        {
+            List<Rule_DengJi> list = new List<Rule_DengJi>();
+            Rule_DengJi item = new Rule_DengJi();
+            #region 125-2004_9_1单桥-基本量程-相对误差
+            //如果等级数目 >= 0.1，比如0.2；那么检定证书合格，检定项目就标注合格，不用出数据。如果不合格，所有检定项目都需要给出数据。如果是0.01等 < 0.1,检定证书都要给出数据。校准证书无论等级如何都需要给出数据。
+            item.RuleID = "125-2004_9_1";
+            item.RuleName = "单桥-基本量程-相对误差";           
+            item.DengJi = 0.1;           
+            item.IsXuYaoHeGe = true;           
+            list.Add(item);
+
+            #endregion
+
+            #region 125-2004_9_2单桥-其他量程-相对误差            
+            //如果等级数目>=0.1，比如0.2；那么检定证书合格，检定项目就标注合格，不用出数据。如果不合格，所有检定项目都需要给出数据。如果是0.01等<0.1,检定证书都要给出数据。校准证书无论等级如何都需要给出数据。
+            item = new Rule_DengJi();
+            item.RuleID = "125-2004_9_2";
+            item.RuleName = "单桥-其他量程-相对误差";            
+            item.DengJi = 0.1;          
+            item.IsXuYaoHeGe = true;
+            
+            list.Add(item);
+            #endregion
+
+            #region 125-2004_9_3双桥-基本量程-滑线盘步进盘-相对误差        
+            //如果等级数目>=0.1，比如0.2；那么检定证书合格，检定项目就标注合格，不用出数据。如果不合格，所有检定项目都需要给出数据。如果是0.01等<0.1,检定证书都要给出数据。校准证书无论等级如何都需要给出数据。
+            item = new Rule_DengJi();
+            item.RuleID = "125-2004_9_3";
+            item.RuleName = "双桥-基本量程-滑线盘步进盘-相对误差";           
+            item.DengJi = 0.1;           
+            item.IsXuYaoHeGe = true;            
+            list.Add(item);
+            #endregion
+
+            #region 125-2004_9_4双桥-其他量程-相对误差
+            //如果等级数目>=0.1，比如0.2；那么检定证书合格，检定项目就标注合格，不用出数据。如果不合格，所有检定项目都需要给出数据。如果是0.01等<0.1,检定证书都要给出数据。校准证书无论等级如何都需要给出数据。
+            item = new Rule_DengJi();
+            item.RuleID = "125-2004_9_4";
+            item.RuleName = "双桥-其他量程-相对误差";            
+            item.DengJi = 0.1;           
+            item.IsXuYaoHeGe = true;            
+            list.Add(item);
+            #endregion
+
+            #region 622-1997_3基本误差检定
+            //1.被试设备的准确度等级<=10.0,例如设备准确度为15.0时,出非表格																												
+            //2.被试设备的准确度等级 > 10.0,例如设备准确度为9.0时，出表格
+            item = new Rule_DengJi();
+            item.RuleID = "622-1997_3";
+            item.RuleName = "基本误差检定";           
+            item.DengJi = 10;           
+            item.IsXuYaoHeGe = false;           
+            list.Add(item);
+            #endregion
+
+            #region 622-1997_4钮端电压
+            //1.被试设备的准确度等级<=10.0,例如设备准确度为15.0时,出非表格																												
+            //2.被试设备的准确度等级 > 10.0,例如设备准确度为9.0时，出表格
+            item = new Rule_DengJi();
+            item.RuleID = "622-1997_4";
+            item.RuleName = "钮端电压";
+            item.DengJi = 10;
+            item.IsXuYaoHeGe = false;
+            list.Add(item);
+            #endregion
+
+            #region 1005-2005_4钮端电压
+            //1.被试设备的准确度等级<=10.0,例如设备准确度为15.0时,出非表格																												
+            //2.被试设备的准确度等级 > 10.0,例如设备准确度为9.0时，出表格
+            item = new Rule_DengJi();
+            item.RuleID = "1005-2005_4";
+            item.RuleName = "钮端电压";
+            item.DengJi = 10;
+            item.IsXuYaoHeGe = false;
+            list.Add(item);
+            #endregion
+
+            #region 622-1997_5钮端电压稳定性
+            //1.被试设备的准确度等级<=10.0,例如设备准确度为15.0时,出非表格																												
+            //2.被试设备的准确度等级 > 10.0,例如设备准确度为9.0时，出表格
+            item = new Rule_DengJi();
+            item.RuleID = "622-1997_5";
+            item.RuleName = "钮端电压稳定性";
+            item.DengJi = 10;
+            item.IsXuYaoHeGe = false;
+            list.Add(item);
+            #endregion
+
+            #region 622-1997_6倾斜影响
+            //1.被试设备的准确度等级<=10.0,例如设备准确度为15.0时,出非表格																												
+            //2.被试设备的准确度等级 > 10.0,例如设备准确度为9.0时，出表格
+            item = new Rule_DengJi();
+            item.RuleID = "622-1997_6";
+            item.RuleName = "倾斜影响";
+            item.DengJi = 10;
+            item.IsXuYaoHeGe = false;
+            list.Add(item);
+            #endregion
+
+            #region 366-2004_4_1电子式示值误差
+            //1.被试设备的准确度等级>=2.0,例如设备准确度为3.0时	,出非表格																												
+            //2.被试设备的准确度等级<2.0,例如设备准确度为1.0时，出表格
+            item = new Rule_DengJi();
+            item.RuleID = "366-2004_4_1";
+            item.RuleName = "电子式示值误差";
+            item.DengJi = 2;
+            item.IsXuYaoHeGe = false;
+            list.Add(item);
+            #endregion
+
+            #region 366-2004_4_2指针式示值误差
+            //1.被试设备的准确度等级>=2.0,例如设备准确度为3.0时	,出非表格																												
+            //2.被试设备的准确度等级<2.0,例如设备准确度为1.0时，出表格
+            item = new Rule_DengJi();
+            item.RuleID = "366-2004_4_2";
+            item.RuleName = "指针式示值误差";
+            item.DengJi = 2;
+            item.IsXuYaoHeGe = false;
+            list.Add(item);
+            #endregion
+
+            #region 366-2004_5位置影响
+            //1.被试设备的准确度等级>=2.0,例如设备准确度为3.0时	,出非表格																												
+            //2.被试设备的准确度等级<2.0,例如设备准确度为1.0时，出表格
+            item = new Rule_DengJi();
+            item.RuleID = "366-2004_5";
+            item.RuleName = "位置影响";
+            item.DengJi = 2;
+            item.IsXuYaoHeGe = false;
+            list.Add(item);
+            #endregion
+
+            #region 366-2004_6_1电子式辅助电阻影响
+            //1.被试设备的准确度等级>=2.0,例如设备准确度为3.0时	,出非表格																												
+            //2.被试设备的准确度等级<2.0,例如设备准确度为1.0时，出表格
+            item = new Rule_DengJi();
+            item.RuleID = "366-2004_6_1";
+            item.RuleName = "电子式辅助电阻影响";
+            item.DengJi = 2;
+            item.IsXuYaoHeGe = false;
+            list.Add(item);
+            #endregion
+
+            #region 366-2004_6_2指针式辅助电阻影响
+            //1.被试设备的准确度等级>=2.0,例如设备准确度为3.0时	,出非表格																												
+            //2.被试设备的准确度等级<2.0,例如设备准确度为1.0时，出表格
+            item = new Rule_DengJi();
+            item.RuleID = "366-2004_6_2";
+            item.RuleName = "指针式辅助电阻影响";
+            item.DengJi = 2;
+            item.IsXuYaoHeGe = false;
+            list.Add(item);
+            #endregion
+
+            return list;
+
+
+        }
     }
 }
