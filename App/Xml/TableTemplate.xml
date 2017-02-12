@@ -7807,14 +7807,14 @@
           <RowNumber>2</RowNumber>
           <RowIndex>925</RowIndex>
           <CellList>
-            <Cell>
+            <!--<Cell>
               <Code>zhidingwucha</Code>
               <ColIndex>-1</ColIndex>
               <ColCount>0</ColCount>
               <IsMergeSameValue>N</IsMergeSameValue>
               <IsHideRowNull>N</IsHideRowNull>
               <IsMergeNullValue>N</IsMergeNullValue>
-            </Cell>
+            </Cell>-->
             <Cell>
               <Code>K</Code>
               <ColIndex>0</ColIndex>
@@ -7950,14 +7950,14 @@
           <RowNumber>2</RowNumber>
           <RowIndex>936</RowIndex>
           <CellList>
-            <Cell>
+            <!--<Cell>
               <Code>zhidingwucha</Code>
               <ColIndex>-1</ColIndex>
               <ColCount>0</ColCount>
               <IsMergeSameValue>N</IsMergeSameValue>
               <IsHideRowNull>N</IsHideRowNull>
               <IsMergeNullValue>N</IsMergeNullValue>
-            </Cell>
+            </Cell>-->
             <Cell>
               <Code>K</Code>
               <ColIndex>0</ColIndex>
@@ -8085,14 +8085,14 @@
           <RowNumber>2</RowNumber>
           <RowIndex>973</RowIndex>
           <CellList>
-            <Cell>
+            <!--<Cell>
               <Code>zhidingwucha</Code>
               <ColIndex>-1</ColIndex>
               <ColCount>0</ColCount>
               <IsMergeSameValue>N</IsMergeSameValue>
               <IsHideRowNull>N</IsHideRowNull>
               <IsMergeNullValue>N</IsMergeNullValue>
-            </Cell>
+            </Cell>-->
             <Cell>
               <Code>K</Code>
               <ColIndex>0</ColIndex>
@@ -8123,14 +8123,14 @@
           <RowNumber>1</RowNumber>
           <RowIndex>947</RowIndex>
           <CellList>
-            <Cell>
+            <!--<Cell>
               <Code>zhidingwucha</Code>
               <ColIndex>-1</ColIndex>
               <ColCount>0</ColCount>
               <IsMergeSameValue>N</IsMergeSameValue>
               <IsHideRowNull>N</IsHideRowNull>
               <IsMergeNullValue>N</IsMergeNullValue>
-            </Cell>
+            </Cell>-->
             <Cell>
               <Code>RANGE</Code>
               <ColIndex>0</ColIndex>
@@ -8676,342 +8676,6 @@
     </TableTemplate>
     <!--指示仪表-->
  
-    <TableTemplate>
-      <RuleID>124-2005_2</RuleID>
-      <DataRowIndex>1184</DataRowIndex>
-      <RemarkRowIndex>1186</RemarkRowIndex>
-      <ConclusionRowIndex>1187</ConclusionRowIndex>
-      <CellList>
-        <Cell>
-          <Code>RANGE1</Code>
-          <ColIndex>-1</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>RANGE</Code>
-          <ColIndex>0</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>RANGE_UNIT</Code>
-          <ColIndex>1</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>OUTPUTVALUE</Code>
-          <ColIndex>2</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>READVALUE</Code>
-          <ColIndex>3</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>ACTUALVALUE</Code>
-          <ColIndex>4</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>ACTUALVALUE_UNIT</Code>
-          <ColIndex>5</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>SHIJISHUCHUZHI</Code>
-          <ColIndex>6</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>SHIJISHUCHUZHI_UNIT</Code>
-          <ColIndex>7</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>RELATIVEERROR</Code>
-          <ColIndex>8</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>RELATIVEERROR_UNIT</Code>
-          <ColIndex>9</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>UNCERTAINTYDEGREE</Code>
-          <ColIndex>10</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>BUQUEDINGDU</Code>
-          <ColIndex>11</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>JISUANWUCHA</Code>
-          <ColIndex>12</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-      </CellList>
-      <TableTitleList>
-        <RowInfo>
-          <RowNumber>2</RowNumber>
-          <RowIndex>1182</RowIndex>
-          <CellList>
-            <Cell>
-              <Code>MGS</Code>
-              <ColIndex>-1</ColIndex>
-              <ColCount>0</ColCount>
-              <IsMergeSameValue>N</IsMergeSameValue>
-              <IsHideRowNull>N</IsHideRowNull>
-              <IsMergeNullValue>N</IsMergeNullValue>
-            </Cell>
-            <Cell>
-              <Code>K</Code>
-              <ColIndex>0</ColIndex>
-              <ColCount>0</ColCount>
-              <IsMergeSameValue>N</IsMergeSameValue>
-              <IsHideRowNull>N</IsHideRowNull>
-              <IsMergeNullValue>N</IsMergeNullValue>
-            </Cell>
-          </CellList>
-        </RowInfo>
-      </TableTitleList>
-      <TableFooterList>
-        <RowInfo>
-          <RowNumber>-1</RowNumber>
-          <RowIndex>-2</RowIndex>
-          <CellList>
-            <Cell>
-              <Code>ZDJBWC</Code>
-              <ColIndex>-1</ColIndex>
-              <ColCount>0</ColCount>
-              <IsMergeSameValue>N</IsMergeSameValue>
-              <IsHideRowNull>N</IsHideRowNull>
-              <IsMergeNullValue>N</IsMergeNullValue>
-            </Cell>
-            <Cell>
-              <Code>ZDSJBC</Code>
-              <ColIndex>0</ColIndex>
-              <ColCount>0</ColCount>
-              <IsMergeSameValue>N</IsMergeSameValue>
-              <IsHideRowNull>N</IsHideRowNull>
-              <IsMergeNullValue>N</IsMergeNullValue>
-            </Cell>
-          </CellList>
-        </RowInfo>
-      </TableFooterList>
-    </TableTemplate>
-    <TableTemplate>
-      <RuleID>124-2005_2</RuleID>
-      <DataRowIndex>1184</DataRowIndex>
-      <RemarkRowIndex>1186</RemarkRowIndex>
-      <ConclusionRowIndex>1187</ConclusionRowIndex>
-      <CellList>
-        <Cell>
-          <Code>RANGE1</Code>
-          <ColIndex>-1</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>RANGE</Code>
-          <ColIndex>0</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>RANGE_UNIT</Code>
-          <ColIndex>1</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>OUTPUTVALUE</Code>
-          <ColIndex>2</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>READVALUE</Code>
-          <ColIndex>3</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>ACTUALVALUE</Code>
-          <ColIndex>4</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>ACTUALVALUE_UNIT</Code>
-          <ColIndex>5</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>SHIJISHUCHUZHI</Code>
-          <ColIndex>6</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>SHIJISHUCHUZHI_UNIT</Code>
-          <ColIndex>7</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>RELATIVEERROR</Code>
-          <ColIndex>8</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>RELATIVEERROR_UNIT</Code>
-          <ColIndex>9</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>UNCERTAINTYDEGREE</Code>
-          <ColIndex>10</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>BUQUEDINGDU</Code>
-          <ColIndex>11</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-        <Cell>
-          <Code>JISUANWUCHA</Code>
-          <ColIndex>12</ColIndex>
-          <ColCount>0</ColCount>
-          <IsMergeSameValue>N</IsMergeSameValue>
-          <IsHideRowNull>N</IsHideRowNull>
-          <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
-      </CellList>
-      <TableTitleList>
-        <RowInfo>
-          <RowNumber>2</RowNumber>
-          <RowIndex>1182</RowIndex>
-          <CellList>
-            <Cell>
-              <Code>MGS</Code>
-              <ColIndex>-1</ColIndex>
-              <ColCount>0</ColCount>
-              <IsMergeSameValue>N</IsMergeSameValue>
-              <IsHideRowNull>N</IsHideRowNull>
-              <IsMergeNullValue>N</IsMergeNullValue>
-            </Cell>
-            <Cell>
-              <Code>K</Code>
-              <ColIndex>0</ColIndex>
-              <ColCount>0</ColCount>
-              <IsMergeSameValue>N</IsMergeSameValue>
-              <IsHideRowNull>N</IsHideRowNull>
-              <IsMergeNullValue>N</IsMergeNullValue>
-            </Cell>
-          </CellList>
-        </RowInfo>
-      </TableTitleList>
-      <TableFooterList>
-        <RowInfo>
-          <RowNumber>-1</RowNumber>
-          <RowIndex>-2</RowIndex>
-          <CellList>
-            <Cell>
-              <Code>ZDJBWC</Code>
-              <ColIndex>-1</ColIndex>
-              <ColCount>0</ColCount>
-              <IsMergeSameValue>N</IsMergeSameValue>
-              <IsHideRowNull>N</IsHideRowNull>
-              <IsMergeNullValue>N</IsMergeNullValue>
-            </Cell>
-            <Cell>
-              <Code>ZDSJBC</Code>
-              <ColIndex>0</ColIndex>
-              <ColCount>0</ColCount>
-              <IsMergeSameValue>N</IsMergeSameValue>
-              <IsHideRowNull>N</IsHideRowNull>
-              <IsMergeNullValue>N</IsMergeNullValue>
-            </Cell>
-          </CellList>
-        </RowInfo>
-      </TableFooterList>
-    </TableTemplate>
     <TableTemplate>
       <RuleID>124-2005_2</RuleID>
       <DataRowIndex>1184</DataRowIndex>
