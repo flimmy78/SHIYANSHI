@@ -104,6 +104,9 @@
             CreateRow(thi);
             // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
 
+            $('.ttt').remove();
+            $('input[id*="RELATIVEERROR_"]').before('<span class="ttt">±</span>');
+
         }
         //增加行
         function CreateRow() {
@@ -152,8 +155,11 @@
                 htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx));
 
                 //允许限值(%)
-
                 htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
+                var tt = '#RELATIVEERROR_' + HangHaoID;
+                console.log(tt);
+                //$('.ttt').remove();
+                //$('input[id*="RELATIVEERROR_"]').before('<span class="ttt">±</span>');
 
 
                 //校准结果的不确定度 U(K =
