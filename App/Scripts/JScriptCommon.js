@@ -99,6 +99,14 @@ function deleteTable(table, hidden) { //删除table和隐藏的值
         hiddenValue.value = hiddenValue.value.replace(table, ""); //为隐藏控件赋值
     }
 }
+//删除所有弹框隐藏返回table和值
+function deleteAllTable() {
+    
+    $("table[name='showModalManyTable']").each(function () {
+        $(this).remove();
+    })
+
+}
 function showModalMany(me, url, dialogWidth, callback) { //弹出窗体，多选 
     if (dialogWidth == null || dialogWidth == "undefined" || dialogWidth == "") {
         dialogWidth = 968;
@@ -123,7 +131,7 @@ function showModalMany(me, url, dialogWidth, callback) { //弹出窗体，多选
             var tableId = document.getElementById(hid[i] + "&" + view[i + 1]); //获取表格
             if (tableId == null) {
                 h += "^" + hid[i] + "&" + view[i + 1];
-                content += '<table  id="' + hid[i] + "&" + view[i + 1] + '" class="deleteStyle"><tr><td><img src="../../../Images/deleteimge.png" title="点击删除"  alt="删除" onclick=" deleteTable(' + "'" + hid[i] + "&" + view[i + 1] + "'," + "'" + me + "'" + ');" /></td><td>' + view[i + 1] + '</td></tr></table>';
+                content += '<table name="showModalManyTable" id="' + hid[i] + "&" + view[i + 1] + '" class="deleteStyle"><tr><td><img src="../../../Images/deleteimge.png" title="点击删除"  alt="删除" onclick=" deleteTable(' + "'" + hid[i] + "&" + view[i + 1] + "'," + "'" + me + "'" + ');" /></td><td>' + view[i + 1] + '</td></tr></table>';
             }
         }
     }

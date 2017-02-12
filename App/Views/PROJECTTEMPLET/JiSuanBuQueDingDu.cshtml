@@ -434,10 +434,12 @@ else
                 $("#tongdao_B tbody").append(trNew);
             }
         }
+        calculateB();
     }
     //清空增加的行
     function resetRow() {
         $("#tongdao_B tbody tr:not(:first)").remove();
+        deleteAllTable();
     }
     function getData() {
         var data = "";
