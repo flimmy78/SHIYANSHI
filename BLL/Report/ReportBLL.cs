@@ -2594,7 +2594,7 @@ namespace Langben.Report
 
                             if (zhunquedingdudengji == false)
                             {
-                                data = items.FirstOrDefault(p => p.name == "zhunquedingdudengji");
+                                data = items.FirstOrDefault(p => p.name == "zhidingwucha");
                                 if (data != null)
                                 {
                                     zhunquedingdudengjiValue = data.value;
