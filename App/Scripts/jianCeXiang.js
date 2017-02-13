@@ -36,10 +36,12 @@ function CreateTongDao() {
     $tongdao.find("#K_moban").attr('id', 'K_' + tableIdx);
 
     $tongdao.find('#btnAddLiangCheng').attr("onclick", "set(" + tableIdx + ",this);");
-
-
+    
     $("#hideDangQianTongDao").val(tableIdx);
     $("#hideTongDaoShuLiang").val(tableIdx);
+    if (tableIdx>1)
+    $tongdao.find("#top-only").hide();
+    
 
 };
 
