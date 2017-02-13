@@ -10,7 +10,8 @@
     <tr>
         <th width="240" align="center">
             测量范围<select class="my-combobox" name="state" id="state_t_1_1">
-                <option value="通道1" selected="selected">通道1</option>
+                    <option value="" ></option>
+                <option value="通道1" >通道1</option>
                 <option value="通道2">通道2</option>
 
             </select>
@@ -44,7 +45,7 @@
                 <option value="kΩ">kΩ</option>
                 <option value="mΩ">mΩ</option>
                 <option value="μΩ">μΩ</option>
-            </select> / <input name="chzkhz" id="chzkhz_t_1_1" type="text" class="my-textbox tc" value="5" style="width:50px">
+            </select> ~ <input name="chzkhz" id="chzkhz_t_1_1" type="text" class="my-textbox tc" value="5" style="width:50px">
             <select class="my-combobox" name="dhzkhz" id="dhzkhz_t_1_1">
                 <option value="Ω" selected="selected">Ω</option>
                 <option value="TΩ">TΩ</option>
@@ -57,19 +58,22 @@
         </td>
 
          <td rowspan="1" align="center" width="100">
-            <input class="my-textbox input-width" value="" id="OUTPUTVALUE_t_1_1" name="OUTPUTVALUE" onblur="blurXianShiZhi(this)" type="text">
+            <input class="my-textbox input-width" value="" id="OUTPUTVALUE_t_1_1" name="OUTPUTVALUE" onblur="LianDongBuQueDingDu(this);" type="text">
+             <select class="my-combobox" name="READVAL1_UNIT" style="width:50px; " onchange="LianDongDanWeiDDL(this,'')" id="READVAL1_UNIT_1_1_1"><option value="A">A</option> <option value="kA">kA</option><option value="mA">mA</option>  <option value="μA">μA</option><option value="nA">nA</option> <option value="pA">pA</option> </select>
         </td>
         <td rowspan="1" align="center" width="100">
-            <input class="my-textbox input-width" value="" id="READVALUE_t_1_1" name="READVALUE" onblur="blurBiaoZhunZhi(this)" type="text">
+            <input class="my-textbox input-width" value="" id="READVALUE_t_1_1" name="READVALUE" onblur="resetXianShiZhi(this); LianDongBuQueDingDu(this);" type="text">
+            <select class="my-combobox" name="READVALUE_UNIT" onchange="LianDongDanWeiDDL(this,'')" id="READVALUE_UNIT_1_1_1"><option value="Ω">Ω</option> <option value="TΩ">TΩ</option><option value="GΩ">GΩ</option>  <option value="MΩ">MΩ</option>  <option value="kΩ">kΩ</option>  <option value="mΩ">mΩ</option>  <option value="μΩ">μΩ</option>  </select>
         </td>
         <td rowspan="1" align="center" width="100">
-            <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_1" name="ACTUALVALUE" onblur="blurValue(this)" type="text">
+            <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_1" name="ACTUALVALUE" onblur="resetXianShiZhi(this); LianDongBuQueDingDu(this);" type="text">
+            <select class="my-combobox" name="ACTUALVALUE_UNIT" onchange="LianDongDanWeiDDL(this,'')" id="ACTUALVALUE_UNIT_1_1_1"><option value="Ω">Ω</option> <option value="TΩ">TΩ</option><option value="GΩ">GΩ</option>  <option value="MΩ">MΩ</option>  <option value="kΩ">kΩ</option>  <option value="mΩ">mΩ</option>  <option value="μΩ">μΩ</option>  </select>
         </td>
         <td rowspan="1" align="center">
             <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" onblur="blurValue(this)" type="text">
         </td>
         <td rowspan="1" align="center" width="100">
-            <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_1" name="RELATIVEERROR" onblur="blurValue(this)" type="text">
+            <span class="ttt">±</span><input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_1" name="RELATIVEERROR" onblur="blurValue(this)" type="text">
         </td>
         <td rowspan="1" align="center">
             <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
@@ -103,6 +107,9 @@
 
             CreateRow(thi);
             // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
+
+            $('.ttt').remove();
+            $('input[id*="RELATIVEERROR_"]').before('<span class="ttt">±</span>');
 
         }
         //增加行
@@ -152,9 +159,7 @@
                 htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx));
 
                 //允许限值(%)
-
-                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
-
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));               
 
                 //校准结果的不确定度 U(K =
                 htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', "classstyle"));
@@ -171,7 +176,7 @@
         //计算显示值
         function resetXianShiZhi(obj) {
             //重新计算当前行
-            xiangDuiWuCha(obj, "READVALUE", "ACTUALVALUE", "UNCERTAINTYDEGREE");
+            xiangDuiWuCha(obj, "ACTUALVALUE", "READVALUE", "SHIJISHUCHUZHI");
         }
         
 

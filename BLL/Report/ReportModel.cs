@@ -383,7 +383,7 @@ namespace Langben.Report
 
     }
     /// <summary>
-    /// 检测项与等级关系类
+    /// 检测项与等级关系类(检定证书)
     /// </summary>
     public class Rule_DengJi
     {
@@ -395,12 +395,57 @@ namespace Langben.Report
         /// 检测项名称
         /// </summary>
         public string RuleName { get; set; }
-       // public List<ExportType> 
+        ///// <summary>
+        ///// 报告等级
+        ///// </summary>
+        //public List<ExportType_DengJi> ExportType_DengJiList { get;set;}
+
+        /// <summary>
+        /// 非表格等级值（
+        /// 1.大于等于该值并且IsXuYaoHeGe=false出非表格合格不合格
+        /// 2.大于等于该值并且IsXuYaoHeGe=true并且基本误差合格出非表格合格不合格
+        /// 3.否则出表格）
+        /// </summary>
+        public double DengJi { get; set; }
+
+        private bool _IsXuYaoHeGe = false;
+        /// <summary>
+        /// 是否需要基本误差合格才出非表格
+        /// </summary>
+        public bool IsXuYaoHeGe
+        {
+            get { return _IsXuYaoHeGe; }
+            set { _IsXuYaoHeGe = value; }
+        }
     }
-    public class ExportType_DengJi
-    {
-        public ExportType ExportType { get; set; }
+    ///// <summary>
+    ///// 报告等级
+    ///// </summary>
+    //public class ExportType_DengJi
+    //{
+    //    /// <summary>
+    //    /// 报告类型
+    //    /// </summary>
+    //    public ExportType ExportType { get; set; }
+    //    /// <summary>
+    //    /// 非表格等级值（
+    //    /// 1.大于等于该值并且IsXuYaoHeGe=false出非表格合格不合格
+    //    /// 2.大于等于该值并且IsXuYaoHeGe=true并且基本误差合格出非表格合格不合格
+    //    /// 3.否则出表格）
+    //    /// </summary>
+    //    public double DengJi { get; set; }
+
+    //    private bool _IsXuYaoHeGe = false;
+    //    /// <summary>
+    //    /// 是否需要基本误差合格才出非表格
+    //    /// </summary>
+    //    public bool IsXuYaoHeGe {
+    //        get { return _IsXuYaoHeGe; }
+    //        set { _IsXuYaoHeGe = value; }
+    //    }
 
 
-    }
+
+    //}
+
 }

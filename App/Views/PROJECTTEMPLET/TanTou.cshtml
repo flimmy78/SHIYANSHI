@@ -52,24 +52,30 @@
              $("#hideDangQianTongDao").val(tbodyIndex);
              //CreateRow();
         }
-        var i = 0;
+        var d = 0;
         //增加行
         function CreateRow() {
-            i++;
+            d++;
             var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
             var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
             LiangChengShuLiang++;
             var rowspanIdx = $("#txtPoint").val();     //检测点数
             var lcval = $("#txtlc").val();     //检测点数
-            txtPointLen = $("#txtPointLen").val(); //小数点位数
+            txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
             var standardValue = "";
             var htmlString = [];
             var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
 
             var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
+            var x = true;
+            var t = 0;
             for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
                 rowLength++;
-                htmlString.push("<tr rowindex='" + rowLength + "' data-value='" + i + "'>");
+                if (x) {
+                    t = rowLength;
+                    x = false;
+                }
+                htmlString.push("<tr rowindex='" + rowLength + "' data-value='" + d + "' data-valueindex='"+t+"' >");
 
                 var rowspan = 1; //合并单元格行数
 
@@ -115,7 +121,7 @@
             //注意多通道
             var sjdlval = GetDianliu(obj, "AOUTPUTVALUE", "READVALUE", "SHIJISHUCHUZHI", "TDB", "AUNCERTAINTYDEGREE");//谁知电流值
 
-            wuCha(obj,"AUNCERTAINTYDEGREE", "RELATIVEERROR", "TDA", "JISUANWUCHA")
+            wuChab(obj,"AUNCERTAINTYDEGREE", "RELATIVEERROR", "TDA", "JISUANWUCHA")
 
             GetAbs(obj);//得到最大绝对值
             var k = $(obj).parent().parent().attr("data-value");//代表第几次
@@ -130,7 +136,7 @@
         //离开事件，用于计算 计算【引用误差】=(计算后实际电流值-电流值)/量程*100，小数点后两位，四舍六入，逢五奇进偶不进
         function blurYinYongWuCha(obj) {
             //注意多通道
-            wuCha(obj, "AUNCERTAINTYDEGREE", "RELATIVEERROR", "TDA", "JISUANWUCHA")
+            wuChab(obj, "AUNCERTAINTYDEGREE", "RELATIVEERROR", "TDA", "JISUANWUCHA")
 
             GetAbs(obj);//得到最大绝对值
             //获取最大误差值
@@ -149,19 +155,19 @@
         }
 
         ///保留绝对值默认为0
-        var oldValue = zeroFloat(0, $("#txtPointLen").val());
+        var oldValue =0;
         function GetAbs(obj) {
-            oldValue = zeroFloat(0, $("#txtPointLen").val());
+            oldValue = zeroFloat(0, $("#mywuchaxiaoshuweishu").val());
            // GetAbs(obj);//得到最大绝对值
             //获取最大误差值
             var k = $(obj).parent().parent().attr("data-value");//代表第几次
             $("#tbody_" + GetMyTongDao(obj) + " tr").each(function () {  //引用误差
                 var trval = $(this).attr("data-value");
-                    var newValue = Math.abs($(this).find("td").find(':input[name="JISUANWUCHA"]').val());
+                    var newValue = $(this).find("td").find(':input[name="JISUANWUCHA"]').val();
                     var newabs = Math.abs($(this).find("td").find(':input[name="JISUANWUCHA"]').val());
                     var oldabs = Math.abs(oldValue);
                     if (newabs > oldabs) {
-                        oldValue = zeroFloat(newValue, $("#txtPointLen").val());
+                        oldValue = zeroFloat(newValue, $("#mywuchaxiaoshuweishu").val());
                     }
 
               });
@@ -180,10 +186,11 @@
             var id = $(obj).attr("id");
             id = id.substring(id.indexOf('_'));
             var tongdao = id.split('_')[1];
+           var t= $(obj).parent().parent().attr("data-valueindex");
             first = first + id;//改动的地方，参与计算的列的name值
             second = second + id;//改动的地方，参与计算的列的name值
             third = third + id;//改动的地方，参与计算的列的name值
-            fourth = fourth + "_" + tongdao + "_1_1";
+            fourth = fourth+ "_1_1_"+t;
             gold = gold + id;//改动的地方，误差的列的name值
             var firstData = $("#" + first).val();
             var secondData = $("#" + second).val();
@@ -192,17 +199,44 @@
             if (firstData != "undefined" && secondData != "undefined" && thirdData != "undefined" && fourthData != "undefined"
                 && firstData != "" && secondData != "" && thirdData != "" && fourthData != "") {
                 var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-                var i = 0;
+                var i =1;
+               
                 // 【计算后实际电流值(A)】=【电压表显示值(V)】/【mv/A/】1000/【电流表显示值(A)】*【标准电流值(A)】，小数点后一位，四舍六入，逢五奇进偶不进
-                if (firstData.toString().split(".")[1].length != undefined) {
+                if (firstData.toString().split(".").length==2) {
                     i = (firstData.toString().split(".")[1].length);
                 }
 
-                var jianfa = thirdData/(fourthData/1000)*firstData /secondData  ;
+                var jianfa = (thirdData/(fourthData/1000)/secondData*firstData);
                 data = zeroFloat(fomatFloat(jianfa, i), i);
                 $(obj).parent().parent().find("#" + gold).val(data);
             }
             return data;
+
+        }
+
+        function wuChab(obj, first, second, third, gold) {
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var trval = $(obj).parent().parent().attr("data-valueindex");
+            first = first + id;//改动的地方，参与计算的列的name值
+            second = second + id;//改动的地方，参与计算的列的name值
+            third = third + "_1_1_" + trval;
+            gold = gold + id;//改动的地方，误差的列的name值
+
+            var firstData = $(obj).parent().parent().find("#" + first).val();
+            var secondData = $(obj).parent().parent().find("#" + second).val();
+            var thirdData = $("#" + third).val();
+            if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
+                var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+
+                var jianfa = accDiv(accSub(firstData, secondData), thirdData) * 100;
+                var data1 = (fomatFloat(jianfa, txtPointLen), txtPointLen);
+
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                $(obj).parent().parent().find("#" + gold).val(data);
+            }
 
         }
         function GetMyTongDao(obj) {
@@ -242,7 +276,7 @@
                 <td><input type="text" id="txtPoint" value="" name="txtPoint" class="easyui-textbox  required digits" style="width:200px" /></td>
             </tr>
 
-            <tr>
+            <tr style="display:none">
                 <td align="right">小数点位数：</td>
                 <td><input type="text" id="txtPointLen" value="" name="txtPointLen" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
             </tr>

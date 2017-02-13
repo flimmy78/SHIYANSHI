@@ -8,7 +8,7 @@
 <thead>
     <!--表头-->
     <tr>
-        <td colspan="13">
+        <td colspan="12">
             <div class="mt10">
                 <span>@((ViewBag.canshu== "电压") ? "电压" : "电流")互感器测量回路：</span>
 
@@ -30,16 +30,7 @@
         <th width="160" colspan="2" align="center">被检仪器示值</th>
         <th width="160" colspan="2" align="center">误差</th>
         <th width="160" colspan="2" align="center">允许误差（±）</th>
-        <th align="center" rowspan="2">
-            校准结果的不确定度<br>
-            U(k =
-            <select class="my-combobox" name="K" id="K_t_1_1">
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="√3">√3</option>
-            </select>
-            )
-        </th>
+      
     </tr>
     <tr>
         <th width="80" align="center">同相分量(%)</th>
@@ -61,7 +52,7 @@
     <!--插入行的位置-->
 </tbody>
 <tr>
-    <td colspan="13">
+    <td colspan="12">
         <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
         <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加量程</a>
     </td>
@@ -112,24 +103,24 @@
 
                 if (rowidx == 0) {
                     //需要合并的列 //量程
-                    htmlString.push(SetTDHtml(txtPoint, "RANGE1", lianChengID, rowidx, "", "", "", "", "DYHG"));
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE1", lianChengID, rowidx, "", "", "", "setSecond", "DYHG"));
                     htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, "", "", "", "", "DLHG"));
                 }
 
                 //整检装置示值_同相分量(%)
-                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, "", "", "", "blurValue"));
+                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, "", "", "", "changeValue"));
                 //整检装置示值_正交分量(ˊ)
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "blurValue"));
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "changeValue"));
 
                 //比差量程
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, "", "", "", "blurValue"));
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, "", "", "", "changeValue"));
 
                 //角差量程
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, "", "", "", "blurValue"));
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, "", "", "", "changeValue"));
                 //被检仪器示值_同相分量(%)
-                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, "", "", "", "blurValue"));
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, "", "", "", "changeValue"));
                 //被检仪器示值_正交分量(ˊ)
-                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, "", "", "", "blurValue"));
+                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, "", "", "", "changeValue"));
                 //误差_同相分量(%)
                 htmlString.push(SetTDHtml(rowspan, "BUQUEDINGDU", HangHaoID, rowidx, '', ""));
                 //误差_正交分量(ˊ)
@@ -138,8 +129,7 @@
                 htmlString.push(SetTDHtml(rowspan, "YINYONGXIANGDUI", HangHaoID, rowidx, '', ""));
                 //允许误差（±)_正交分量(ˊ)
                 htmlString.push(SetTDHtml(rowspan, "JUEDUIZHI", HangHaoID, rowidx, '', ""));
-                         //校准结果的不确定度 U(K =
-                htmlString.push(SetTDHtml(rowspan, "JUEDUIZHI1", HangHaoID, rowidx, "", "classstyle"));
+                
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
@@ -150,8 +140,24 @@
 
             $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
+        //下拉框联动
+        function setSecond(obj) {
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+
+            var val = obj.value;
+            if (val == 'ΔU/U') {
+                var sec = document.getElementById('RANGE' + id);
+                sec.innerHTML = " <option value=\"U=100V\">U=100V</option><option value=\"U=100/√3V\">U=100/√3V</option> ";
+            } else if (val == 'ΔI/I') {
+                var sec = document.getElementById('RANGE' + id);
+                sec.innerHTML = "<option value=\"I=1A\">I=1A</option> <option value=\"I=5A\">I=5A</option>";
+            }
+        }
         //计算标准值
-        function blurValue(obj) {
+        function changeValue(obj) {
      
             jiSuanWuCha(obj, "OUTPUTVALUE", "READVALUE", "ACTUALVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR", "UNCERTAINTYDEGREE", "BUQUEDINGDU", "JISUANWUCHA", "YINYONGXIANGDUI", "JUEDUIZHI");
 
@@ -193,10 +199,7 @@
             var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T6 被检仪器示值_正交分量(ˊ)
             //【同相分量-误差】=【被检仪器示值-同相分量】-【整检装置示值-同相分量】，小数位数与【被检仪器示值-同相分量】相同，四舍六入，逢五奇进偶不进。
             T2Data = T2Data == "" ? 0 : T2Data;
-          //  T3Data = T3Data == "" ? 0 : T3Data;
-          ///  T4Data = T4Data == "" ? 0 : T4Data;
-           // T5Data = T5Data == "" ? 0 : T5Data;
-          //  T6Data = T6Data == "" ? 0 : T6Data;
+           
             if (T5Data != "" && T1Data != "") {
                 var r1
                 try { r1 = T5Data.toString().split(".")[1].length } catch (e) { r1 = 0 }

@@ -8,19 +8,17 @@
 <thead>
     <!--表头-->
     <tr>
-        <th width="160" rowspan="2" align="center">标称值S(VA)</th>
-        <th width="160" rowspan="2" align="center">校准点(%)</th>
-
-        <th width="160" colspan="2" align="center">有功分量</th>
-        <th width="160" colspan="2" align="center">无功分量</th>
-        <th width="160" rowspan="2" align="center">cosφ</th>
-        <th width="160" rowspan="2" align="center">额定电压(V)</th>
+        <th width="160"  align="center">标称值S(VA)</th>
+        <th width="160"  align="center">校准点(%)</th>
+        <th width="80" align="center">有功分量实测值(mS)</th>
+        <th width="80" align="center">有功分量相对误差(%)</th>
+        <th width="80" align="center">无功分量实测值(mS)</th>
+        <th width="80" align="center">无功分量相对误差(%)</th>
+        <th width="160"  align="center">cosφ</th>
+        <th width="160"  align="center">额定电压(V)</th>
     </tr>
     <tr>
-        <th width="80" align="center">实测值(mS)</th>
-        <th width="80" align="center">相对误差(%)</th>
-        <th width="80" align="center">实测值(mS)</th>
-        <th width="80" align="center">相对误差(%)</th>
+       
     </tr>
 </thead>
 
@@ -82,7 +80,7 @@
                 if (rowidx == 0) {
                     //需要合并的列 //标称值S(VA)
 
-                    htmlString.push(SetTDHtml(txtPoint, "RANGE", HangHaoID, rowidx, txtNumber));
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, txtNumber));
                 }
 
                 //校准点(%)
@@ -97,12 +95,14 @@
                 htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, "", "", "", "blurValue"));
                 //无功分量 相对误差(%
                 htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, "", "", "", ""));
-                //cosφ
-                htmlString.push(SetTDSelectHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, "", "Cos"));
-                // SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, "", "", "", "blurValue"));
-                //额定电压(V)
-                htmlString.push(SetTDSelectHtml(rowspan, "BUQUEDINGDU", HangHaoID, rowidx, "", "EDingDianYa"));
-                //SetTDHtml(rowspan, "BUQUEDINGDU", HangHaoID, rowidx, "", "", "", "blurValue"));
+                if (rowidx == 0) {
+                    //cosφ
+                    htmlString.push(SetTDSelectHtml(txtPoint, "UNCERTAINTYDEGREE", lianChengID, rowidx, "", "Cos"));
+                    //额定电压(V)
+                    htmlString.push(SetTDSelectHtml(txtPoint, "BUQUEDINGDU", lianChengID, rowidx, "", "EDingDianYa"));
+                }
+              
+                
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
@@ -135,14 +135,16 @@
             var id = $(obj).attr("id");
             id = id.substring(id.indexOf('_'));
             var tongdao = id.split('_')[1];
-            T1 = T1 + "_" + tongdao + "_1_1";            //改动的地方，参与计算的列的name值
+            var liangCheng = id.split('_')[2];
+            T1 = T1 + "_" + tongdao + "_" + liangCheng;            //改动的地方，参与计算的列的name值
+         
             T2 = T2 + id;//改动的地方，参与计算的列的name值
             T3 = T3 + id;//改动的地方，误差的列的name值
             T4 = T4 + id;//有功分量 相对误差(%
             T5 = T5 + id;//改动的地方，参与计算的列的name值
             T6 = T6 + id;//无功分量 相对误差(%
-            T7 = T7 + id; //T7 cosφ
-            T8 = T8 + id; //T8 额定电压(V)
+            T7 = T7 + "_" + tongdao + "_" + liangCheng;   //T7 cosφ
+            T8 = T8 + "_" + tongdao + "_" + liangCheng;   //T8 额定电压(V)
             var T1Data = $("#" + T1).val();//T1 标称值S(VA)
             var myselect = document.getElementById(T2);
             var index = myselect.selectedIndex;             // selectedIndex代表的是你所选中项的index
@@ -160,7 +162,8 @@
             var index8 = myselect8.selectedIndex;             // selectedIndex代表的是你所选中项的index
             var T8Data = myselect8.options[index8].value;
             //var T8Data = $(obj).parent().parent().find("#" + T8 + " option:selected").val(); //T8 额定电压(V)
-
+            var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+            txtPointLen = parseFloat(txtPointLen);
             //【有功分量-相对误差%】=100*(ABS（有功分量实测值）*0.001*额定电压平方-标称值*0.8)/(标称值*0.8)，小数点后两位，四舍六入，逢五奇进偶不进
             if (T3Data != "" && T8Data != "" && T1Data != "") {
                 T8Data = parseFloat(T8Data);
@@ -169,7 +172,7 @@
                 var jianfa1 = Math.abs(T3Data).mul(0.001).mul(T8Data).mul(T8Data);
                 var jianfa2 =accMul( T1Data,0.8);
                 var jianfa =accDiv(accMul(100 ,accSub(jianfa1, jianfa2)),jianfa2);
-                var data = zeroFloat(fomatFloat(jianfa, 2), 2);
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T4).val(data);
             }
             //【无功分量-相对误差%】=100*（ABS(无功分量实测值)*0.001*额定电压平方-标称值*0.6）/(标称值*0.6)，小数点后两位，四舍六入，逢五奇进偶不进
@@ -181,7 +184,7 @@
                 var jianfa1 = Math.abs(T5Data).mul(0.001).mul(T8Data).mul(T8Data);
                 var jianfa2 = accMul(T1Data, 0.6);
                 var jianfa = accDiv(accMul(100 ,accSub(jianfa1,jianfa2)), jianfa2);
-                var data = zeroFloat(fomatFloat(jianfa, 2), 2);
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T6).val(data);
             }
 

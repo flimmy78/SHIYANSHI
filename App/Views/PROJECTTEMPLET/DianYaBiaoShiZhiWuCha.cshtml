@@ -89,9 +89,13 @@
                 //读数值 增加下拉框单位V
                 htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx));
 
-               
+               // htmlString.push("<td class=\"classstyle\" rowspan=\"1\" align=\"center\">+-</td>");
                 //相对误差
-                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, "±"));
+                //htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, ""));
+                //校准结果的不确定度 U(K =
+                var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
+                var id = "select_" + HangHaoID;
+                htmlString.push("<td align='center' >±<select class=\"my-combobox\" name=\"select\" id='" + id + "'>  <option value=\"5\">5</option><option value=\"2\">2</option><option value=\"1\">1</option><option value=\"0.5\">0.5</option><option value=\"0.2\">0.2</option><option value=\"0.1\">0.1</option></select></td>");
 
 
                 //校准结果的不确定度 U(K =
@@ -111,7 +115,7 @@
         //计算显示值
         function resetBiaoZhunZhi(obj) {
 
-            xiangDuiWuCha(obj, "OUTPUTVALUE", "READVALUE", "ACTUALVALUE");
+            xiangDuiWuCha(obj, "READVALUE", "OUTPUTVALUE", "ACTUALVALUE");
 
         }
         //离开事件，用于计算

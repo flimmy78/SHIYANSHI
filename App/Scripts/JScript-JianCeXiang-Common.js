@@ -25,19 +25,18 @@ DanWeiDDLHtmlArray = [
           {
               Code: 'DYHG',
               Remark: '电压互感器测量回路说明',
-              Value: "<select class=\"my-combobox\" name=\"DYHG\" style=\"width:50px; \">" +
+              Value: "<select class=\"my-combobox\" name=\"DYHG\" style=\"width:150px; \">" +
                       "<option value=\"ΔU/U\">ΔU/U</option> " +
                       "<option value=\"ΔI/I\">ΔI/I</option>" +
                      "</select>"
           }, {
               Code: 'DLHG',
               Remark: '电压互感器测量回路说明',
-              Value: "<select class=\"my-combobox\" name=\"DLHG\" style=\"width:50px; \">" +
+              Value: "<select class=\"my-combobox\" name=\"DLHG\" style=\"width:150px; \">" +
 
                       "<option value=\"U=100V\">U=100V</option>" +
                       "<option value=\"U=100/√3V\">U=100/√3V</option> " +
-                      "<option value=\"I=1A\">I=1A</option> " +
-                      "<option value=\"I=5A\">I=5A</option>  " +
+                    
                      "</select>"
           },
         {
@@ -3066,7 +3065,7 @@ RuleAttributeArray = [
                 //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|OUTPUTVALUE,READVALUE,UNCERTAINTYDEGREE;',
+                DanWeiHtmlDDL: 'DianYa|RANGE,OUTPUTVALUE,READVALUE,UNCERTAINTYDEGREE,select;',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
@@ -3182,7 +3181,7 @@ RuleAttributeArray = [
                 //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: '',
+                DanWeiHtmlDDL: 'DianYa|OUTPUTVALUE;DianLiu|OUTPUTVAL1',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
@@ -3365,7 +3364,7 @@ RuleAttributeArray = [
                 //检测项属性名称后需要加自动或者按钮不确定计算
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
-                JiSuanBuQueDingDu: '',
+                JiSuanBuQueDingDu: 'A:RELATIVEERROR',
                 //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)
                 JiSuanBuQueDingDu_DiBu: 'N'
             }]
