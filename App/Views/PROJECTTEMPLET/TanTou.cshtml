@@ -67,9 +67,15 @@
             var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
 
             var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
+            var x = true;
+            var t = 0;
             for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
                 rowLength++;
-                htmlString.push("<tr rowindex='" + rowLength + "' data-value='" + d + "'>");
+                if (x) {
+                    t = rowLength;
+                    x = false;
+                }
+                htmlString.push("<tr rowindex='" + rowLength + "' data-value='" + d + "' data-valueindex='"+t+"' >");
 
                 var rowspan = 1; //合并单元格行数
 
@@ -180,7 +186,7 @@
             var id = $(obj).attr("id");
             id = id.substring(id.indexOf('_'));
             var tongdao = id.split('_')[1];
-           var t= $(obj).parent().parent().attr("data-value");
+           var t= $(obj).parent().parent().attr("data-valueindex");
             first = first + id;//改动的地方，参与计算的列的name值
             second = second + id;//改动的地方，参与计算的列的name值
             third = third + id;//改动的地方，参与计算的列的name值
@@ -213,7 +219,7 @@
             var name = $(obj).attr("name");
             var id = $(obj).attr("id");
             id = id.substring(id.indexOf('_'));
-            var trval = $(obj).parent().parent().attr("data-value");
+            var trval = $(obj).parent().parent().attr("data-valueindex");
             first = first + id;//改动的地方，参与计算的列的name值
             second = second + id;//改动的地方，参与计算的列的name值
             third = third + "_1_1_" + trval;
