@@ -2491,10 +2491,19 @@ namespace Langben.Report
                     if (iEntity != null
                         && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null && IsBiaoGe)
                     {
+                        #region s化整
+                        SHuaZhengRule SHuaZhengRules = ReportStatic.SHuaZhengRules();
+                        QUALIFIED_UNQUALIFIED_TEST_ITE iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan = null;
+                        if(SHuaZhengRules!=null && SHuaZhengRules.DianNengBiaoZhunPianChaGuZhiJiSuan!=null && SHuaZhengRules.DianNengBiaoZhunPianChaGuZhiJiSuan.Trim()!=""　&& SHuaZhengRules.PingHengFuZaiShiYouGongDianNengWuCha!=null && SHuaZhengRules.PingHengFuZaiShiYouGongDianNengWuCha.Count>0 && SHuaZhengRules.PingHengFuZaiShiYouGongDianNengWuCha.FirstOrDefault(p=>p==iEntity.RULEID)!=null)
+                        {
+                            iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.FirstOrDefault(p => p.RULEID == SHuaZhengRules.DianNengBiaoZhunPianChaGuZhiJiSuan);
+                        }
+                        #endregion 
+
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
                         //解析html表格数据    
                         //int RowIndexT = RowIndex;                       
-                        RowIndex = paserData_1(iEntity, IsSameRuleName, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters, type);
+                        RowIndex = paserData_1(iEntity, IsSameRuleName, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters, type, iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan);
 
                         //if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
 
@@ -2552,12 +2561,311 @@ namespace Langben.Report
             sheet_Destination.ForceFormulaRecalculation = true;
         }
         /// <summary>
+        /// S化整合并数据
+        /// </summary>
+        /// <param name="dataDic_PingHengFuZaiShiYouGongDianNengWuCha">平衡负载时有功电能误差</param>
+        /// <param name="dataDic_DianNengBiaoZhunPianChaGuZhiJiSuan">电能标准偏差估计值</param>
+        private Dictionary<int, DataValue> SHuaZhengHeBing(Dictionary<int, DataValue> dataDic_PingHengFuZaiShiYouGongDianNengWuCha, Dictionary<int, DataValue> dataDic_DianNengBiaoZhunPianChaGuZhiJiSuan)
+        {
+            //相线及测量模式、量程(Un、Ib)、功率因数cosφ与电能标准偏差估计值中的前6项目完全一致，同时Ib(%) = 100对应上，取引用中的s化整(%)
+            if (dataDic_PingHengFuZaiShiYouGongDianNengWuCha != null && dataDic_PingHengFuZaiShiYouGongDianNengWuCha .Count>0 )
+            {
+                Dictionary<string, List<string>> SHuaZhengNamesDic = ReportStatic.SHuaZhengNames();               
+
+                List<SHuaZhengData> pList = new List<Report.SHuaZhengData>();//平衡负载时有功电能误差比较数据
+                List<SHuaZhengData> dList = new List<Report.SHuaZhengData>();//电能标准偏差估计值比较数据
+
+                #region 平衡负载时有功电能误差比较数据处理
+                foreach (int pKey in dataDic_PingHengFuZaiShiYouGongDianNengWuCha.Keys)
+                {
+                    
+                    DataValue PingHengFuZaiShiYouGongDianNengWuCha = dataDic_PingHengFuZaiShiYouGongDianNengWuCha[pKey];                   
+                    if (PingHengFuZaiShiYouGongDianNengWuCha != null && PingHengFuZaiShiYouGongDianNengWuCha.Data!=null && PingHengFuZaiShiYouGongDianNengWuCha.Data.Count>0)
+                    {
+
+                        if(SHuaZhengNamesDic!=null && SHuaZhengNamesDic.Count>0 && SHuaZhengNamesDic.ContainsKey("P"))
+                        {
+                            
+                            SHuaZhengData pItem = new SHuaZhengData();
+
+
+                            foreach (string name in SHuaZhengNamesDic["P"])
+                            {
+                                int index = -2;
+                                while (index != -1 && index< PingHengFuZaiShiYouGongDianNengWuCha.Data.Count)
+                                {
+                                    index = PingHengFuZaiShiYouGongDianNengWuCha.Data.FindIndex(index==-2?0:index+1,p => p.name == name);
+                                    if(index>=0)
+                                    {
+                                        pItem = new SHuaZhengData();
+                                        pItem.index = index;
+                                        pItem.name = name;
+                                        pItem.id = PingHengFuZaiShiYouGongDianNengWuCha.Data[index].id;
+                                        pItem.values = PingHengFuZaiShiYouGongDianNengWuCha.Data[index].value;
+                                        pItem.tongtao = pKey;
+                                        pList.Add(pItem);
+                                    }
+                                }
+                            }
+                        }
+                    }                   
+                }
+                #endregion
+
+                #region 电能标准偏差估计值比较数据
+
+                if (dataDic_DianNengBiaoZhunPianChaGuZhiJiSuan != null && dataDic_DianNengBiaoZhunPianChaGuZhiJiSuan.Count > 0)
+                {
+                    foreach (int dKey in dataDic_DianNengBiaoZhunPianChaGuZhiJiSuan.Keys)
+                    {
+
+                        DataValue DianNengBiaoZhunPianChaGuZhiJiSuan = dataDic_DianNengBiaoZhunPianChaGuZhiJiSuan[dKey];
+                        if (DianNengBiaoZhunPianChaGuZhiJiSuan != null && DianNengBiaoZhunPianChaGuZhiJiSuan.Data!=null && DianNengBiaoZhunPianChaGuZhiJiSuan.Data.Count > 0)
+                        {
+                            SHuaZhengData dItem = new SHuaZhengData();
+                            foreach (string name in SHuaZhengNamesDic["D"])
+                            {
+                                int index = -2;
+                                while (index != -1 && index < DianNengBiaoZhunPianChaGuZhiJiSuan.Data.Count)
+                                {
+                                    index = DianNengBiaoZhunPianChaGuZhiJiSuan.Data.FindIndex(index == -2 ? 0 : index + 1, p => p.name == name);
+                                    if (index >= 0)
+                                    {
+                                        dItem = new SHuaZhengData();
+                                        dItem.index = index;
+                                        dItem.name = name;
+                                        dItem.id = DianNengBiaoZhunPianChaGuZhiJiSuan.Data[index].id;
+                                        dItem.values = DianNengBiaoZhunPianChaGuZhiJiSuan.Data[index].value;
+                                        dItem.tongtao = dKey;
+                                        dList.Add(dItem);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion
+
+
+                #region 开始对比
+                if(pList!=null && pList.Count>0)
+                {
+                    //List<SHuaZheng> pDataList = new List<SHuaZheng>();
+                    List<SHuaZheng> dDataList = new List<SHuaZheng>();
+
+                    List<SHuaZhengData> ppList = pList.Where(p => p.name == "JISUANWUCHA").ToList();
+
+                    #region 电能标准偏差估计值
+                    if (dList != null && dList.Count > 0)
+                    {
+                        List<SHuaZhengData> ddList = dList.Where(p => p.name == "READVALUE").ToList();
+
+                        if (ddList != null && ddList.Count > 0)
+                        {
+
+                            SHuaZheng dData = new SHuaZheng();
+                            foreach (SHuaZhengData ddItem in ddList)
+                            {
+                              
+
+                                //功率因素
+                                SHuaZhengData dREADVALUE = dList.LastOrDefault(p => p.name == "READVALUE" && p.index < ddItem.index);
+
+                                dData.READVALUE = dREADVALUE.values;
+                                //量程Ib值
+                                SHuaZhengData dOUTPUTVAL1 = dList.LastOrDefault(p => p.name == "OUTPUTVAL1" && p.index < ddItem.index);
+                                if (dOUTPUTVAL1 != null)
+                                {
+                                    dData.OUTPUTVAL1 = dOUTPUTVAL1.values;
+                                }
+                                else
+                                {
+                                    dData.OUTPUTVAL1 = "";
+                                }
+                                //量程Ib单位
+                                SHuaZhengData dOUTPUTVAL1_UNIT = dList.LastOrDefault(p => p.name == "OUTPUTVAL1_UNIT" && p.index < ddItem.index);
+                                if (dOUTPUTVAL1_UNIT != null)
+                                {
+                                    dData.OUTPUTVAL1_UNIT = dOUTPUTVAL1_UNIT.values;
+                                }
+                                else
+                                {
+                                    dData.OUTPUTVAL1_UNIT = "";
+                                }
+                                //量程Un值
+                                SHuaZhengData dOUTPUTVALUE = dList.LastOrDefault(p => p.name == "OUTPUTVALUE" && p.index < ddItem.index);
+                                if (dOUTPUTVALUE != null)
+                                {
+                                    dData.OUTPUTVALUE = dOUTPUTVALUE.values;
+                                }
+                                else
+                                {
+                                    dData.OUTPUTVALUE = "";
+                                }
+                                //量程Un单位
+                                SHuaZhengData dOUTPUTVALUE_UNIT = dList.LastOrDefault(p => p.name == "OUTPUTVALUE_UNIT" && p.index < ddItem.index);
+                                if (dOUTPUTVALUE_UNIT != null)
+                                {
+                                    dData.OUTPUTVALUE_UNIT = dOUTPUTVALUE_UNIT.values;
+                                }
+                                else
+                                {
+                                    dData.OUTPUTVALUE_UNIT = "";
+                                }
+                                //相线及测量模式
+                                SHuaZhengData dRANGE = pList.LastOrDefault(p => p.name == "RANGE" && p.index < ddItem.index);
+                                if (dRANGE != null)
+                                {
+                                    dData.RANGE = dRANGE.values;
+                                }
+                                else
+                                {
+                                    dData.RANGE = "";
+                                }
+                                //相线及测量模式
+                                SHuaZhengData dJISUANWUCHA1 = pList.FirstOrDefault(p => p.name == "JISUANWUCHA1" && p.index > ddItem.index);
+                                if (dRANGE != null)
+                                {
+                                    dData.JISUANWUCHA1 = dJISUANWUCHA1.values;
+                                }
+                                else
+                                {
+                                    dData.JISUANWUCHA1 = "";
+                                }
+                                dDataList.Add(dData);
+                               
+                            }
+                        }
+                    }
+                    #endregion
+
+
+                    if (ppList != null && ppList.Count > 0)
+                    {
+                        MYData item = new MYData();
+                        SHuaZheng pData = new SHuaZheng();
+
+                        int count = 0;
+                        foreach (SHuaZhengData ppItem in ppList)
+                        {
+                            pData = new SHuaZheng();
+                            item = new MYData();
+                            item.name = "JISUANWUCHA1";
+                            item.id = "JISUANWUCHA1" + ppItem.id.Replace(ppItem.id, "");
+                            item.mergedRowNum = 1;
+                            item.value = "";
+
+                            #region 平衡负载时有功电能误差
+                            if (dList == null || dList.Count == 0)
+                            {
+                                dataDic_PingHengFuZaiShiYouGongDianNengWuCha[ppItem.tongtao].Data.Insert(ppItem.index + count, item);
+                                count++;
+                                continue;
+                            }
+
+                            //Ib(%)
+                            SHuaZhengData ACTUALVALUE = pList.LastOrDefault(p => p.name == "ACTUALVALUE" && p.values == "100" && p.index < ppItem.index);
+                            if (ACTUALVALUE == null)
+                            {
+                                dataDic_PingHengFuZaiShiYouGongDianNengWuCha[ppItem.tongtao].Data.Insert(ppItem.index + count, item);
+                                count++;
+                                continue;
+                            }
+                            pData.ACTUALVALUE = ACTUALVALUE.values;
+                            //功率因素
+                            SHuaZhengData READVALUE = pList.LastOrDefault(p => p.name == "READVALUE" && p.index < ppItem.index);
+                            if (READVALUE == null || (READVALUE.values.Trim() != "1.0" && READVALUE.values.Trim() != "0.5"))
+                            {
+                                dataDic_PingHengFuZaiShiYouGongDianNengWuCha[ppItem.tongtao].Data.Insert(ppItem.index + count, item);
+                                count++;
+                                continue;
+                            }
+                            pData.READVALUE = READVALUE.values;
+                            //量程Ib值
+                            SHuaZhengData OUTPUTVAL1 = pList.LastOrDefault(p => p.name == "OUTPUTVAL1" && p.index < ppItem.index);
+                            if (OUTPUTVAL1 != null)
+                            {
+                                pData.OUTPUTVAL1 = OUTPUTVAL1.values;
+                            }
+                            else
+                            {
+                                pData.OUTPUTVAL1 = "";
+                            }
+                            //量程Ib单位
+                            SHuaZhengData OUTPUTVAL1_UNIT = pList.LastOrDefault(p => p.name == "OUTPUTVAL1_UNIT" && p.index < ppItem.index);
+                            if (OUTPUTVAL1_UNIT != null)
+                            {
+                                pData.OUTPUTVAL1_UNIT = OUTPUTVAL1_UNIT.values;
+                            }
+                            else
+                            {
+                                pData.OUTPUTVAL1_UNIT = "";
+                            }
+                            //量程Un值
+                            SHuaZhengData OUTPUTVALUE = pList.LastOrDefault(p => p.name == "OUTPUTVALUE" && p.index < ppItem.index);
+                            if (OUTPUTVALUE != null)
+                            {
+                                pData.OUTPUTVALUE = OUTPUTVALUE.values;
+                            }
+                            else
+                            {
+                                pData.OUTPUTVALUE = "";
+                            }
+                            //量程Un单位
+                            SHuaZhengData OUTPUTVALUE_UNIT = pList.LastOrDefault(p => p.name == "OUTPUTVALUE_UNIT" && p.index < ppItem.index);
+                            if (OUTPUTVALUE_UNIT != null)
+                            {
+                                pData.OUTPUTVALUE_UNIT = OUTPUTVALUE_UNIT.values;
+                            }
+                            else
+                            {
+                                pData.OUTPUTVALUE_UNIT = "";
+                            }
+                            //相线及测量模式
+                            SHuaZhengData RANGE = pList.LastOrDefault(p => p.name == "RANGE" && p.index < ppItem.index);
+                            if (RANGE != null)
+                            {
+                                pData.RANGE = RANGE.values;
+                            }
+                            else
+                            {
+                                pData.RANGE = "";
+                            }
+                            //相线及测量模式、量程(Un、Ib)、功率因数cosφ与电能标准偏差估计值中的前6项目完全一致，同时Ib(%) = 100对应上，取引用中的s化整(%)
+                            if (dDataList!=null && dDataList.Count>0 )                              
+                            {
+                                SHuaZheng dp = dDataList.FirstOrDefault(p => p.OUTPUTVAL1 == pData.OUTPUTVAL1 && p.OUTPUTVAL1_UNIT == pData.OUTPUTVAL1_UNIT &&
+                             p.OUTPUTVALUE == pData.OUTPUTVALUE && p.OUTPUTVALUE_UNIT == pData.OUTPUTVALUE_UNIT && p.RANGE == pData.RANGE && p.READVALUE == pData.READVALUE);
+                                if(dp!=null)
+                                {
+                                    item.value = dp.JISUANWUCHA1;
+                                }
+                            }
+                            dataDic_PingHengFuZaiShiYouGongDianNengWuCha[ppItem.tongtao].Data.Insert(ppItem.index + count, item);
+                            count++;
+                            continue;
+                            //pDataList.Add(pData);
+                            #endregion
+                            
+
+                        }                    
+                    }
+                }           
+                #endregion
+            }
+
+
+
+            return dataDic_PingHengFuZaiShiYouGongDianNengWuCha;
+           
+        }
+        /// <summary>
         /// 根据等级判断是否是表格
         /// </summary>
         /// <param name="iEntity">检测项信息</param>
         /// <param name="msg">返回合格不合格信息</param>
         /// <returns></returns>
-        private bool IsBiaoGeByDengJi(QUALIFIED_UNQUALIFIED_TEST_ITE iEntity,ref string msg)
+        private bool IsBiaoGeByDengJi(QUALIFIED_UNQUALIFIED_TEST_ITE iEntity, ref string msg)
         {
             bool result = true;
             msg = string.Empty;
@@ -3574,13 +3882,25 @@ namespace Langben.Report
         /// <param name="rowIndex_Destination">目标开始行号</param>
         /// <param name="temp">模板信息</param>                 
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
+        /// <param name="iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan">电能标准偏差估计值检测项（为了解决s化整问题）</param>
         /// <returns></returns>
-        private int paserData_1(QUALIFIED_UNQUALIFIED_TEST_ITE iEntity, bool IsSameRuleName, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, SpecialCharacters allSpecialCharacters = null, ExportType type = ExportType.OriginalRecord_JianDing)
+        private int paserData_1(QUALIFIED_UNQUALIFIED_TEST_ITE iEntity, bool IsSameRuleName, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, SpecialCharacters allSpecialCharacters = null, ExportType type = ExportType.OriginalRecord_JianDing, QUALIFIED_UNQUALIFIED_TEST_ITE iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan=null)
         {
             int RowIndexT = rowIndex_Destination;
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(iEntity.HTMLVALUE);
             Dictionary<int, DataValue> dataDic = AnalyticHTML.GetData(doc);//数据
+
+            #region s化整
+            if(iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan!=null)
+            {
+                HtmlAgilityPack.HtmlDocument doc_DianNengBiaoZhunPianChaGuZhiJiSuan = new HtmlAgilityPack.HtmlDocument();
+                doc.LoadHtml(iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan.HTMLVALUE);
+                Dictionary<int, DataValue> dataDic_DianNengBiaoZhunPianChaGuZhiJiSuan = AnalyticHTML.GetData(doc_DianNengBiaoZhunPianChaGuZhiJiSuan);//数据
+                dataDic = SHuaZhengHeBing(dataDic, dataDic_DianNengBiaoZhunPianChaGuZhiJiSuan);
+            }
+            #endregion 
+
             Dictionary<int, List<MYDataHead>> headDic = AnalyticHTML.GetHeadData(doc);//表头
             Dictionary<int, List<MYDataHead>> footDic = AnalyticHTML.GetFootData(doc);//表尾
             HeadValue buDueDingDu_DiBu = null;//底部不确定度

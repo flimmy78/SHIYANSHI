@@ -447,5 +447,85 @@ namespace Langben.Report
 
 
     //}
+    /// <summary>
+    /// S化整对象
+    /// </summary>
+    public class SHuaZhengData
+    {
+        /// <summary>
+        /// 通道ID
+        /// </summary>
+        public int tongtao { get; set; }
+        /// <summary>
+        /// 控件名称
+        /// </summary>
+        public string name { get; set; }
+        /// <summary>
+        /// 控件Id
+        /// </summary>
+        public string id { get; set; }
+        /// <summary>
+        /// 索引位置
+        /// </summary>
+        public int index { get; set; }
+        /// <summary>
+        /// 具体值
+        /// </summary>
+        public string values { get; set; }
+       
+    }
+    public class SHuaZheng
+    {
+        /// <summary>
+        /// Ib(%)
+        /// </summary>
+        public string ACTUALVALUE { get; set; }
+        /// <summary>
+        /// 功率因素
+        /// </summary>
+        public string READVALUE { get; set; }
+        /// <summary>
+        /// 量程Ib单位
+        /// </summary>
+        public string OUTPUTVAL1_UNIT { get; set; }
+        /// <summary>
+        /// 量程Ib值
+        /// </summary>
+        public string OUTPUTVAL1 { get; set; }
+        /// <summary>
+        /// 量程Un单位
+        /// </summary>
+        public string OUTPUTVALUE_UNIT { get; set; }
+
+        /// <summary>
+        /// 量程Un值
+        /// </summary>
+        public string OUTPUTVALUE { get; set; }
+
+        /// <summary>
+        /// 相线及测量模式
+        /// </summary>
+        public string RANGE { get; set; }
+        /// <summary>
+        /// s(%)
+        /// </summary>
+
+        public string JISUANWUCHA1 { get; set; }
+
+    }
+    /// <summary>
+    /// s化整检测项ID关系
+    /// </summary>
+    public class SHuaZhengRule
+    {
+        /// <summary>
+        /// 电能标准偏差估计值
+        /// </summary>
+        public string DianNengBiaoZhunPianChaGuZhiJiSuan { get; set; }
+        /// <summary>
+        /// 平衡负载时有功电能误差
+        /// </summary>
+        public List<string> PingHengFuZaiShiYouGongDianNengWuCha { get; set; }
+    }
 
 }
