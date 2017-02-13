@@ -64,7 +64,7 @@
             LiangChengShuLiang++;
             var rowspanIdx = $("#txtPoint").val();     //检测点数
             var lcval = $("#txtlc").val();     //检测点数
-            txtPointLen = $("#txtPointLen").val(); //小数点位数
+            txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
             var standardValue = "";
             var htmlString = [];
             var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
@@ -152,7 +152,7 @@
         ///保留绝对值默认为0
         var oldValue =0;
         function GetAbs(obj) {
-            oldValue = zeroFloat(0, $("#txtPointLen").val());
+            oldValue = zeroFloat(0, $("#mywuchaxiaoshuweishu").val());
            // GetAbs(obj);//得到最大绝对值
             //获取最大误差值
             var k = $(obj).parent().parent().attr("data-value");//代表第几次
@@ -163,7 +163,7 @@
                     var newabs = Math.abs($(this).find("td").find(':input[name="BUQUEDINGDU"]').val());
                     var oldabs = Math.abs(oldValue);
                     if (newabs > oldabs) {
-                        oldValue = zeroFloat(newValue, $("#txtPointLen").val());
+                        oldValue = zeroFloat(newValue, $("#mywuchaxiaoshuweishu").val());
                     }
                 }
 
@@ -241,7 +241,7 @@
                 <td><input type="text" id="txtPoint" value="" name="txtPoint" class="easyui-textbox  required digits" style="width:200px" /></td>
             </tr>
            
-            <tr>
+            <tr style="display:none">
                 <td align="right">小数点位数：</td>
                 <td><input type="text" id="txtPointLen" value="" name="txtPointLen" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
             </tr>
