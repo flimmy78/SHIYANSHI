@@ -157,7 +157,7 @@
             var k = $(obj).parent().parent().attr("data-value");//代表第几次
             $("#tbody_" + GetMyTongDao(obj) + " tr").each(function () {  //引用误差
                 var trval = $(this).attr("data-value");
-                    var newValue = Math.abs($(this).find("td").find(':input[name="JISUANWUCHA"]').val());
+                    var newValue = $(this).find("td").find(':input[name="JISUANWUCHA"]').val();
                     var newabs = Math.abs($(this).find("td").find(':input[name="JISUANWUCHA"]').val());
                     var oldabs = Math.abs(oldValue);
                     if (newabs > oldabs) {
@@ -200,7 +200,7 @@
                     i = (firstData.toString().split(".")[1].length);
                 }
 
-                var jianfa = thirdData/(fourthData/1000)*firstData /secondData  ;
+                var jianfa = (thirdData/(fourthData/1000)/secondData*firstData);
                 data = zeroFloat(fomatFloat(jianfa, i), i);
                 $(obj).parent().parent().find("#" + gold).val(data);
             }
