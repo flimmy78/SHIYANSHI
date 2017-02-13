@@ -15,7 +15,7 @@
                 <option value="不合格">不合格</option>
 
             </select>
-            &nbsp;&nbsp;&nbsp;&nbsp;<span>@ViewBag.canshu</span>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span></span>
         </td>
     </tr>
     <tr>
@@ -232,15 +232,15 @@
          }
          }]" style="width:400px;height:200px;padding:10px">
         <table>
-
+           <tr>
+                <td align="right">量程设定：</td>
+                <td><input type="text" id="txtlc" value="" name="txtlc" class="easyui-textbox  required digits" style="width:200px" /></td>
+            </tr>
             <tr>
                 <td align="right">检测点数：</td>
                 <td><input type="text" id="txtPoint" value="" name="txtPoint" class="easyui-textbox  required digits" style="width:200px" /></td>
             </tr>
-            <tr>
-                <td align="right">量程设定：</td>
-                <td><input type="text" id="txtlc" value="" name="txtlc" class="easyui-textbox  required digits" style="width:200px" /></td>
-            </tr>
+           
             <tr>
                 <td align="right">小数点位数：</td>
                 <td><input type="text" id="txtPointLen" value="" name="txtPointLen" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
