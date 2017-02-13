@@ -585,6 +585,7 @@ function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
 //classstyle样式类名
 //unit在输入框后面的单位
 //blurValue数表离开输入框之后触发的事件
+//selectCode如果是下拉框，则为配置
 function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValue, selectCode) {
 
     
