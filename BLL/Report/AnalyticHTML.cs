@@ -824,7 +824,7 @@ namespace Langben.Report
         public static string GetinputHead(HtmlAgilityPack.HtmlDocument doc)
         {
             string errors = "";
-            string xpath = @"//thead//input | //thead//select";
+            string xpath = @"//table[@id='tongdao_1']/thead//input | //table[@id='tongdao_1']/thead//select";
             var collection = doc.DocumentNode.SelectNodes(xpath);
             Dictionary<string, string> ids = new Dictionary<string, string>();
             foreach (var item in collection)
