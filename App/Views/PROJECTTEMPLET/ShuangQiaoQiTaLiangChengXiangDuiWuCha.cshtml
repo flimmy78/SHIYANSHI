@@ -1,0 +1,244 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "双桥-其他量程-相对误差";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    <tr>
+        <td colspan="6">
+            <span>基本误差:</span>
+            <select class="my-combobox" name="ddlliangCheng" id="ddlliangCheng" onchange="blurValue1(this)">
+                <option value="合格" selected>合格</option>
+                <option value="不合格">不合格</option>
+            </select>
+
+        </td>
+    </tr>
+    <tr>
+        <td colspan="6">
+            其他量程
+        </td>
+    </tr>
+
+    <tr>
+        <th width="120" align="center">量程</th>
+        <th width="160" align="center">测量盘示值(Ω)</th>
+        <th width="110" align="center">
+            标称值(Ω)
+        </th>
+        <th width="110" align="center">实际值(Ω)</th>
+        <th width="110" align="center">误差(%)</th>
+        <th align="center">允许误差(%)</th>
+    </tr>
+
+</thead>
+<tbody id="tbody_moban">
+    <!--默认0行 -->
+    <!--/默认0行 -->
+
+</tbody>
+<tfoot>
+    <tr>
+        <td colspan="6" style="background:#F7F7F7">
+            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加行数</a>
+        </td>
+    </tr>
+</tfoot>
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        //tbodyIndex通道
+        //thi 当前位置
+        function set(tbodyIndex, thi) {
+            $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
+            $("#hideDangQianTongDao").val(tbodyIndex); CreateRow();
+
+        }
+        //增加行
+        function CreateRow() {
+
+            var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+            var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
+            LiangChengShuLiang++;
+            var rowspanIdx = $("#txtPoint").val();     //检测点数
+            txtPointLen = $("#txtPointLen").val(); //小数点位数
+            var standardValue = "";
+            var htmlString = [];
+            var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
+
+            var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
+            for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
+                rowLength++;
+                htmlString.push("<tr rowindex='" + rowLength + "'>");
+
+                var rowspan = 1; //合并单元格行数
+
+                var txtVal = "";//(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
+
+
+                var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
+                if (rowidx == 0) {
+                    //需要合并的列
+
+                }
+                //需要合并的列
+
+                //量程
+                //htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, (rowLength).toString(), "classstyle120", ""));
+                var yanShiPanId = "OUTPUTVALUE_" + HangHaoID;
+                var strTd = "<select class=\"my-combobox\" name=\"state_1_\" id=\state_UNIT_1_\">" +
+                                "<option value=\"×\" selected>×</option>" +
+                            "</select> <input name=\"OUTPUTVALUE\" id='" + yanShiPanId + "' type=\"text\" class=\"my-textbox\" value=\"\" style=\"width:50px\" onblur=\"changeValue(this)\" />"
+                htmlString.push("<td align='center' >" + strTd + "</td>");
+                //测量盘示值(Ω)
+                var yanShiPanId = "YanShiPan_" + HangHaoID;
+                var yanShiPanId2 = "YanShiPan1_" + HangHaoID;
+                var strTd = "<input name=\"YanShiPan\" id='" + yanShiPanId + "' type=\"text\" class=\"my-textbox\" value=\"\" style=\"width:50px\"  />" +
+                            "<select class=\"my-combobox\" name=\"state_1_\" id=\state_UNIT_1_\">" +
+                                "<option value=\"plus\" selected>+</option>" +
+                            "</select> <input name=\"YanShiPan1\" id='" + yanShiPanId2 + "' type=\"text\" class=\"my-textbox\" value=\"\" style=\"width:50px\" onblur=\"changeValue(this)\" />"
+                htmlString.push("<td align='center' >" + strTd + "</td>");
+                //标称值(Ω)
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'changeValue'));
+                //实际值(Ω)
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, txtVal, "classstyle100", '', 'changeValue'));
+                //误差(%)
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "classstyle100"));
+                var id = "select_" + HangHaoID;
+                //允许误差(%)
+                // htmlString.push("<td align='center' >±</td>");
+                htmlString.push("<td align='center' >±<select class=\"my-combobox\" name=\"select\" id='" + id + "'>  <option value=\"2\">2</option><option value=\"1\">1</option><option value=\"0.5\">0.5</option><option value=\"0.2\">0.2</option><option value=\"0.1\">0.1</option></select></td>");
+                htmlString.push("</tr>");
+            }
+            htmlString = htmlString.join("");
+
+            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
+            $.parser.parse(tagRow);//渲染easyui组建
+            //$('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
+            $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+        }
+
+        function changeValue(obj) {
+
+            jiSuanWuCha(obj, "OUTPUTVALUE", "YanShiPan", "YanShiPan1", "ACTUALVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+       																																																						
+
+        }
+        //误差
+        //obj 自身对象
+        //T1 量程
+        //T2 标准值(A)
+        //T3 显示值(A)
+        //T4 最大基本误差(%)
+        //T5 引用误差(%)
+        //T6 校准结果的不确定度U(k={0})
+        function jiSuanWuCha(obj, T1, T2, T3, T4, T5, T6) {
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+            var liangCheng = id.split('_')[2];
+            T1 = T1 + id;//有功分量 相对误差(%
+            T2 = T2 + id;//有功分量 相对误差(%
+            T3 = T3 + id;//改动的地方，误差的列的name值
+            T4 = T4 + id;//有功分量 相对误差(%
+            T5 = T5 + id;//改动的地方，参与计算的列的name值
+            T6 = T6 + id;//改动的地方，参与计算的列的name值
+            																			
+
+            var T1Data = $(obj).parent().parent().find("#" + T1).val(); //T2 量程
+            var T2Data = $(obj).parent().parent().find("#" + T2).val(); //T2 测量盘示值(Ω)	
+            var T3Data = $(obj).parent().parent().find("#" + T3).val(); //T3 	测量盘示值(Ω)	
+           // var T4Data = $(obj).parent().parent().find("#" + T4).val(); //T3 		标称值(Ω)							
+            var T5Data = $(obj).parent().parent().find("#" + T5).val(); //T5 	实际值(Ω)								
+           // var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T5 	误差(%)	
+            var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+            txtPointLen = parseFloat(txtPointLen);
+
+
+            // 【标称值】=【量程】*【测量盘示值(Ω)】，四舍六入，逢五奇进偶不进。标称值为1,0.1时，小数点位数5位。标称值0.01时，小数位数6位，标称值0.001时，小数位数7位																																																								
+            		
+            if (T1Data != "" && T2Data != "" && T3Data != "") {
+                T3Data = parseFloat(T3Data);
+                T2Data = parseFloat(T2Data);
+                T1Data = parseFloat(T1Data);
+                var jianfa = accMul(T1Data, accAdd(T2Data, T3Data));
+                if (jianfa == 1 || jianfa == 0.1)
+                {
+                    txtPointLen = 5;
+                } else if ( jianfa == 0.01)
+                {
+                    txtPointLen = 6;
+                } else if (jianfa == 0.001) {
+                    txtPointLen = 7;
+                }
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                $(obj).parent().parent().find("#" + T4).val(data);
+            }
+            var T4Data = $(obj).parent().parent().find("#" + T4).val(); //T3 		标称值(Ω)		
+            //【误差】=(【实际值】-【标称值】)/【标称值】*100%，小数位数比允许误差多一位，四舍六入，逢五奇进偶不进
+            if (T5Data != "" && T4Data != "") {
+                T5Data = parseFloat(T5Data);
+                T4Data = parseFloat(T4Data);
+                var jianfa =accDiv( accSub(T5Data, T4Data),T4Data);
+                var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+                txtPointLen = parseFloat(txtPointLen);
+                txtPointLen = 1 + txtPointLen;
+                var data = percentages(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                $(obj).parent().parent().find("#" + T6).val(data);
+            }
+        }
+        //function blurValue1(obj) {
+        //    $("#tongdao_1 tbody:eq(0) tr").each(function () {
+
+        //        //测量盘
+        //        var celiangpan = parseFloat($(this).children().eq(1).find('input').eq(0).val() == "" ? 0 : $(this).children().eq(1).find('input').eq(0).val()) + parseFloat($(this).children().eq(1).find('input').eq(1).val() == "" ? 0 : $(this).children().eq(1).find('input').eq(1).val());
+        //        //获取量程
+        //        var liangcheng = $("#ddlliangCheng").val();
+        //        //计算第一个误差
+        //        if (celiangpan != "" && liangcheng != "") {
+        //            $(this).children().eq(2).find('input').val(fomatFloat(parseFloat(celiangpan) * parseFloat(liangcheng), 5))
+        //        }
+
+        //    });
+        //}
+        ///重新计算页面上标准输出值
+
+
+
+
+    </script>
+}
+@section TanKuang {
+    <!--弹框的位置-->
+    <!--增加量程弹层-->
+    <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return CreateRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+        <table>
+
+            <tr>
+                <td align="right">检测点数：</td>
+                <td><input type="text" id="txtPoint" name="txtPoint" value="" class="my-textbox  required digits" style="width:200px" /></td>
+            </tr>
+
+        </table>
+    </div>
+    <!--/增加量程弹层-->
+}
+
