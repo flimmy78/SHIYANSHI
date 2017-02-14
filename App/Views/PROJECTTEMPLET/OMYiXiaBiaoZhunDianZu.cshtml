@@ -24,7 +24,7 @@
 </select>)</th>
     </tr>
     <tr>
-        <th align="center">标称值（Ω）</th>
+        <th width="90" align="center">标称值（Ω）</th>
         <th width="90" align="center">标称值（Ω）</th>
         <th width="90" align="center">编号</th>
         <th width="90" align="center">δ<sub>n</sub>(×10-6)</th>
@@ -42,7 +42,7 @@
 <tfoot>
     <!--表尾-->
     <tr>
-        <td colspan="7">
+        <td colspan="12">
             <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
             <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加行数</a>
 
@@ -51,6 +51,9 @@
 </tfoot>
 @section JS {
     <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $('#REMARK').text('(1).δn为标准电阻的相对修正值。 (2). δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。 (3).δx=（δx1+δx2）/2')
+        });
         //一个量程的需要这个方法
         //重写set方法，只准对增加空白行
         function set(tbodyIndex) {
@@ -93,8 +96,9 @@
 
                 //需要合并的列
 
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "calculate1.erdengbiaozhundianzubiaochenzhi", ""));
-
+                //htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "calculate1.erdengbiaozhundianzubiaochenzhi", ""));
+                var id = "READVALUE_" + HangHaoID;
+                htmlString.push("<td align='center' ><select onchange='calculate1.erdengbiaozhundianzubiaochenzhi(this)' class=\"my-combobox\" name=\"select\" id='" + id + "'>   <option value=\"0.0001\">0.0001</option> <option value=\"0.001\">0.001</option> <option value=\"0.01\">0.01</option><option value=\"0.1\">0.1</option><option value=\"1\">1</option><option value=\"10\">10</option><option value=\"100\">100</option><option value=\"1000\">1000</option></td>");
                 htmlString.push(SetTDHtml(rowspan, "WE", HangHaoID, rowidx, "", ""));
                 htmlString.push(SetTDHtml(rowspan, "TYEW", HangHaoID, rowidx, "", ""));
                 htmlString.push(SetTDHtml(rowspan, "UI", HangHaoID, rowidx, "", ""));
@@ -110,11 +114,14 @@
                 htmlString.push(SetTDHtml(rowspan, "HZMY", HangHaoID, rowidx, '', "classstyle100"));
 
                 //显示值 增加下拉框单位V
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100", '', ""));
+                //htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100", '', ""));
+                var sid = "SHIJISHUCHUZHI_" + HangHaoID;
+                htmlString.push("<td align='center' >±<select class=\"my-combobox\" name=\"select\" id='" + sid + "'>    <option value=\"0.01\">0.01</option><option value=\"0.05\">0.05</option><option value=\"0.02\">0.02</option><option value=\"0.1\">0.1</option></td>");
 
                 //相对误差
-                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
-
+                //htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
+                var rid = "RELATIVEERROR_" + HangHaoID;
+                htmlString.push("<td align='center' ><select class=\"my-combobox\" name=\"select\" id='" + rid + "'>    <option value=\"5\">5</option><option value=\"2\">2</option><option value=\"0.3\">0.3</option><option value=\"0.1\">0.1</option><option value=\"0.03\">0.03</option><option value=\"0.01\">0.01</option><option value=\"0.003\">0.003</option><option value=\"0.0001\">0.0001</option></td>");
 
                 //校准结果的不确定度 U(K =
                 htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', "classstyle"));

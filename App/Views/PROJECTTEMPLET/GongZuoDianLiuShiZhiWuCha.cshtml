@@ -28,7 +28,7 @@
         </td>
 
         <td align="center">
-            <input class="my-textbox input-width" value="" type="text" name="OUTPUTVALUE" id="OUTPUTVALUE_t_1_1" />
+            <input class="my-textbox input-width" value="" type="text" name="OUTPUTVALUE" id="OUTPUTVALUE_t_1_1" onblur="blurValue(this)" />
             <select class="my-combobox" name="OUTPUTVALUE_UNIT" id="OUTPUTVALUE_UNIT_t_1_1">
                 <option value="V">V</option>
                 <option value="MV">MV</option>
@@ -38,7 +38,7 @@
             </select>
         </td>
         <td align="center">
-            <input class="my-textbox input-width" value="" type="text" name="STANDARDRESISTANCE" id="STANDARDRESISTANCE_t_1_1" />
+            <input class="my-textbox input-width" value="" type="text" name="STANDARDRESISTANCE" id="STANDARDRESISTANCE_t_1_1" onblur="blurValue(this)"/>
             <select class="my-combobox" name="STANDARDRESISTANCE_UNIT" id="STANDARDRESISTANCE_UNIT_t_1_1">
                 <option value="Ω">Ω</option>
                 <option value="TΩ">TΩ</option>
@@ -143,9 +143,9 @@
                 }
                 htmlString.push(SetTDHtml(rowspan, "STANDARDRESISTAN1", HangHaoID, rowidx, rowIdx.toString(), "classstyle120"));
                 //测量点 需要下拉框
-                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120"));
+                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120", "", "blurValue",""));
                 //二次输入标准值
-                htmlString.push(SetTDHtml(rowspan, "STANDARDRESISTANCE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurErCiShuRuBiaoZhunZhi'));
+                htmlString.push(SetTDHtml(rowspan, "STANDARDRESISTANCE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurValue'));
                 //  //二次输入标准值
                 htmlString.push(SetTDHtml(rowspan, "DIANLIUZHIZHI", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurErCiShuRuBiaoZhunZhi'));
                 //标准输出值
@@ -182,8 +182,13 @@
 
         //离开事件，用于计算
         function blurValue(obj) {
+            //作电流实际值I0= 标准电压示值U0 /标准电阻值R0  
 
-            //   LianDongShiJiZhi(obj);
+            var tr = $(obj).parents('tr').eq(0);
+            var U0 = $(tr).children().eq(1).find('input').val();
+            var R0 = $(tr).children().eq(2).find('input').val();
+            var IO = parseFloat(parseFloat(U0) / parseFloat(R0));
+            $(tr).children().eq(4).find('input').val(IO.toFixed(2)));
 
         }
         ///计算实质误差

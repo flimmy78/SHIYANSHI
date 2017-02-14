@@ -49,6 +49,9 @@
 </tfoot>
 @section JS {
     <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $('#REMARK').text('(1).Rn —  二等标准电阻的上级检定结果  (2). Rx —  被测电阻的实际值 (3).Ax —  本装置检定被测电阻时电压表示值  (4).An —  本装置检定二等标准电阻时电压表示值  Rx=Rn+(Ax/I-An/I)')
+        });
         //一个量程的需要这个方法
         //重写set方法，只准对增加空白行
         function set(tbodyIndex) {
