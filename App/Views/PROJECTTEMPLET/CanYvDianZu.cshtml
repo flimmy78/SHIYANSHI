@@ -23,7 +23,7 @@
 
     <!--表体-->
     <tr>
-        <td align="center"><input name="NUMBER" id="NUMBER_1_1_1" type="text" class="my-textbox input-width " value="" /></td>
+        <td align="center"><input name="NUMBER" id="NUMBER_1_1_1" type="text" class="my-textbox  tc" value="" style="width:60px"/></td>
         <td align="center">
             <input name="DIANYA" id="DIANYA_1_1_1" type="text" class="my-textbox input-width tr" value="" onblur="calculate1.canyuDianZu(this)" />
             <select class="my-combobox" name="DIANYA_UNIT" id="DIANYA_UNIT_1_1_1" onchange="changeValue(this)">
@@ -94,7 +94,7 @@
         </td>
     </tr>
     <tr>
-        <td align="center"><input name="NUMBER" id="NUMBER_1_1_2" type="text" class="my-textbox input-width " value="" /></td>
+        <td align="center"><input name="NUMBER" id="NUMBER_1_1_2" type="text" class="my-textbox  tc" value="" style="width:60px" /></td>
         <td align="center">
             <input name="DIANYA" id="DIANYA_1_1_2" type="text" class="my-textbox input-width tr" value="" onblur="calculate1.canyuDianZu(this)" />
             <select class="my-combobox" name="DIANYA_UNIT" id="DIANYA_UNIT_1_1_2">
@@ -130,7 +130,7 @@
         </td>
     </tr>
     <tr>
-        <td align="center"><input name="NUMBER" id="NUMBER_1_1_3" type="text" class="my-textbox input-width " value="" /></td>
+        <td align="center"><input name="NUMBER" id="NUMBER_1_1_3" type="text" class="my-textbox  tc" value="" style="width:60px" /></td>
         <td align="center">
             <input name="DIANYA" id="DIANYA_1_1_3" type="text" class="my-textbox input-width tr" value="" onblur="calculate1.canyuDianZu(this)" />
             <select class="my-combobox" name="DIANYA_UNIT" id="DIANYA_UNIT_1_1_3">
@@ -192,7 +192,7 @@
                     }
                 })
                 if (row > 0)
-                    $("#tbody_1 tr:eq(0) td:eq(4)").find('input').val(fomatFloat(sumTotal / row, 3))
+                    $("#tbody_1 tr:eq(0) td:eq(4)").find('input').val(fomatFloat(sumTotal / row, 1))
                   //  $("#PINGJUN_1_1_1").val();
             }
         }

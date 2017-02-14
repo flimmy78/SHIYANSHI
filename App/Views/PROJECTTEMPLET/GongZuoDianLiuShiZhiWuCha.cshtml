@@ -76,11 +76,14 @@
         </td>
         <td align="center">
 
-            <input class="my-textbox input-width" value="" type="text" name="YUANXUXIANZHI" id="YUANXUXIANZHI_t_1_1" />
+            <span class="ttt">±</span><input class="my-textbox input-width" value="" type="text" name="YUANXUXIANZHI" id="YUANXUXIANZHI_t_1_1" />
         </td>
         <td align="center">
 
-            <input class="my-textbox input-width" type="text" name="UNCERTAINTYDEGREE" id="UNCERTAINTYDEGREE_t_1_1" value="0.12*10-2" />
+            <input class="my-textbox input-width" type="text" name="UNCERTAINTYDEGREE" id="UNCERTAINTYDEGREE_t_1_1" value="" />
+            <input name="BuQueDingDuZhi" id="BuQueDingDuZhi_UNCERTAINTYDEGREE_t_1_1" value="" type="hidden">
+            <input name="BuQueDingDuLuJing" id="BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_1" value="" type="hidden">
+            <a href="#" name="btnBuQueDing" class="my-linkbutton" onclick="showModal('BuQueDingDuZhi_UNCERTAINTYDEGREE_t_1_1&amp;BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_1^BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_1^UNCERTAINTYDEGREE_t_1_1', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=UNCERTAINTYDEGREE_t_1_1&amp;RuleID=1052-2009_6');">计算</a>
         </td>
     </tr>
     <!--插入行的位置-->
@@ -107,7 +110,9 @@
             CreateRow();
 
             $("#hideDangQianTongDao").val(tbodyIndex);
-
+            //增加±
+            $('.ttt').remove();
+            $('input[id*="YUANXUXIANZHI_"]').before('<span class="ttt">±</span>');
         }
         var rowIdx = 1;
         //增加行
