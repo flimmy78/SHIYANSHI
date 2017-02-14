@@ -8,7 +8,7 @@
 <thead>
     <!--表头-->
     <tr>
-        <th align="center" width="120">量程（A）：</th>
+        <th align="center" width="120">量程（A）</th>
         <th style="width:30px">标准值(A)</th>
         <th style="width:30px">显示值(A)</th>
         <th style="width:30px">最大基本误差(%)</th>
@@ -84,7 +84,7 @@
                 htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "blurValue"));
                 if (LiangChengShuLiang == 1 && rowidx == 0) {
                     //需要合并的列 //最大基本误差(%)
-                    htmlString.push(SetTDHtml(txtPoint, "ACTUALVALUE", lianChengID, rowidx, txtNumber, "", "", "blurValue"));
+                    htmlString.push(SetTDHtml(txtPoint, "ACTUALVALUE", lianChengID, rowidx, "", "", "", "blurValue"));
 
                 } else if (LiangChengShuLiang != 1 && rowidx == 0) {
                     htmlString.push("<td rowspan=\"" + txtPoint + "\"></td>");

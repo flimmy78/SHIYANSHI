@@ -191,6 +191,10 @@ namespace Langben.Report
                 return path;
             }
         }
+        /// <summary>
+        /// 检测项与等级关系
+        /// </summary>
+        /// <returns></returns>
         public static List<Rule_DengJi> Rule_DengJiList()
         {
             List<Rule_DengJi> list = new List<Rule_DengJi>();
@@ -348,6 +352,54 @@ namespace Langben.Report
 
             return list;
 
+
+        }
+
+        /// <summary>
+        /// S化整比较名称
+        /// </summary>
+        /// <returns></returns>
+        public static Dictionary<string, List<string>> SHuaZhengNames()
+        {
+            Dictionary<string, List<string>> result = new Dictionary<string, List<string>>();
+            List<string> list = new List<string>();
+            #region 平衡负载时有功电能误差
+            list.Add("JISUANWUCHA");//校准结果的不确定度
+            list.Add("ACTUALVALUE");//Ib(%)
+            list.Add("READVALUE");//功率因素
+            list.Add("OUTPUTVAL1_UNIT");//量程Ib单位
+            list.Add("OUTPUTVAL1");//量程Ib值
+            list.Add("OUTPUTVALUE_UNIT");//量程Un单位
+            list.Add("OUTPUTVALUE");//量程Un值
+            list.Add("RANGE");//相线及测量模式
+            result.Add("P", list);
+            #endregion
+
+            #region 电能标准偏差估计值         
+            list.Add("READVALUE");//功率因素
+            list.Add("OUTPUTVAL1_UNIT");//量程Ib单位
+            list.Add("OUTPUTVAL1");//量程Ib值
+            list.Add("OUTPUTVALUE_UNIT");//量程Un单位
+            list.Add("OUTPUTVALUE");//量程Un值
+            list.Add("RANGE");//相线及测量模式
+            list.Add("JISUANWUCHA1");//s(%)
+            
+            result.Add("D", list);
+            #endregion 
+            return result;
+        }
+        /// <summary>
+        /// s化整检测项ID关系
+        /// </summary>
+        /// <returns></returns>
+        public static SHuaZhengRule SHuaZhengRules()
+        {
+            SHuaZhengRule result = new Report.SHuaZhengRule();
+            result.DianNengBiaoZhunPianChaGuZhiJiSuan = "1085-2013_7";
+            result.PingHengFuZaiShiYouGongDianNengWuCha = new List<string>();
+            result.PingHengFuZaiShiYouGongDianNengWuCha.Add("1085-2013_6_3");
+            result.PingHengFuZaiShiYouGongDianNengWuCha.Add("1085-2013_6_1");
+            return result;
 
         }
     }
