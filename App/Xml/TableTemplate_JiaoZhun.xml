@@ -7584,5 +7584,7 @@
         </RowInfo>
       </TableTitleList>
     </TableTemplate>
+    <!--电能-->
+		<!--指示仪表-->
 	</TableTemplateList>
 </TableTemplates>
