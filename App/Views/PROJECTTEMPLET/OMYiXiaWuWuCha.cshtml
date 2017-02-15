@@ -59,7 +59,11 @@
 @section JS {
     <script type="text/javascript" language="javascript">
         $(document).ready(function () {
-            $('#REMARK').text('(1).δn为标准电阻的相对修正值。 (2). δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。 (3).δx=（δx1+δx2）/2')
+                  
+            $('#REMARK').parent('td').html('δn为标准电阻的相对修正值。 <br> δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。 <br>δx=（δx1+δx2）/2');
+            //换行转回车
+           // $('#REMARK').val('δn为标准电阻的相对修正值。&#13;&#10;  δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。 &#13;&#10;δx=（δx1+δx2）/2');
+            
         });
         //一个量程的需要这个方法
         //重写set方法，只准对增加空白行
@@ -106,7 +110,7 @@
                 //需要合并的列
                // htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "calculate1.erdengbiaozhundianzubiaochenzhi", ""));
                 var id = "READVALUE_" + HangHaoID;
-                htmlString.push("<td align='center' ><select onchange='calculate1.erdengbiaozhundianzubiaochenzhi(this)' class=\"my-combobox\" name=\"select\" id='" + id + "'>   <option value=\"0.0001\">0.0001</option> <option value=\"0.001\">0.001</option> <option value=\"0.01\">0.01</option><option value=\"0.1\">0.1</option><option value=\"1\">1</option><option value=\"10\">10</option><option value=\"100\">100</option><option value=\"1000\">1000</option></td>");
+                htmlString.push("<td align='center' ><select onchange='calculate1.erdengbiaozhundianzubiaochenzhi(this)' class=\"my-combobox\" name=\"select\" id='" + id + "'>  <option value=\"\"></option> <option value=\"0.0001\">0.0001</option> <option value=\"0.001\">0.001</option> <option value=\"0.01\">0.01</option><option value=\"0.1\">0.1</option><option value=\"1\">1</option><option value=\"10\">10</option><option value=\"100\">100</option><option value=\"1000\">1000</option><option value=\"10000\">10000</option><option value=\"100000\">100000</option></td>");
                 htmlString.push(SetTDHtml(rowspan, "WE", HangHaoID, rowidx, "", ""));
                 htmlString.push(SetTDHtml(rowspan, "TYEW", HangHaoID, rowidx, "", ""));
                 htmlString.push(SetTDHtml(rowspan, "UI", HangHaoID, rowidx, "", ""));
@@ -127,7 +131,7 @@
                 //相对误差
                 //htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
                 var rid = "RELATIVEERROR_" + HangHaoID;
-                htmlString.push("<td align='center' ><select class=\"my-combobox\" name=\"select\" id='" + rid + "'>    <option value=\"5\">5</option><option value=\"2\">2</option><option value=\"0.3\">0.3</option><option value=\"0.1\">0.1</option><option value=\"0.03\">0.03</option><option value=\"0.01\">0.01</option><option value=\"0.003\">0.003</option><option value=\"0.0001\">0.0001</option></td>");
+                htmlString.push("<td align='center' ><select class=\"my-combobox\" name=\"select\" id='" + rid + "'> <option value=\"\"></option><option value=\"5\">5</option><option value=\"2\">2</option><option value=\"0.3\">0.3</option><option value=\"0.1\">0.1</option><option value=\"0.03\">0.03</option><option value=\"0.01\">0.01</option><option value=\"0.003\">0.003</option><option value=\"0.0001\">0.0001</option></td>");
 
                 //校准结果的不确定度 U(K =
                 htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', "classstyle"));
