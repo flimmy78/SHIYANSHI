@@ -189,7 +189,7 @@
             var thirdData = $("#" + third).val();
             if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
                 var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-                var jianfa = (accSub(firstData, secondData) / thirdData * 100);
+                var jianfa = (Math.abs(accSub(firstData, secondData)) / thirdData * 100);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
 
 
@@ -213,7 +213,7 @@
             var thirdData = $("#" + third).val();
             if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
                 var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-                var jianfa = (accSub(firstData, secondData) / thirdData * 100);
+                var jianfa = (Math.abs(accSub(firstData, secondData)) / thirdData * 100);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
 
 
@@ -238,7 +238,7 @@
             var thirdData = $("#" + third).val();
             if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
                 var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-                var jianfa = (accSub(firstData, secondData) / thirdData * 100);
+                var jianfa = (Math.abs(accSub(firstData, secondData)) / thirdData * 100);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
 
 

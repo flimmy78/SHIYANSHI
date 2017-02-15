@@ -11,8 +11,8 @@
         <td colspan="6">
             <span>基本量程：</span>×
 
-            <select class="my-combobox" name="ddlliangCheng" id="ddlliangCheng" onchange="blurValue1(this)">
-                <option value="1000" selected>1000</option>
+            <select class="my-combobox" name="state1" id="state1_t_1_1" onchange="blurValue1(this)">
+                <option value="1000" selected="selected">1000</option>
                 <option value="100">100</option>
                 <option value="10">10</option>
                 <option value="1">1</option>
@@ -25,9 +25,9 @@
     </tr>
     <tr>
         <td colspan="6">
-            <select class="my-combobox" name="state_1_" id="state_UNIT_1_" onchange="blurValue1(this)">
-                <option value="hxp" selected>滑线盘</option>
-                <option value="bjp">步进盘</option>
+            <select class="my-combobox" name="state2" id="state2_t_1_1" onchange="blurValue1(this)">
+                <option value="滑线盘" selected="selected">滑线盘</option>
+                <option value="步进盘">步进盘</option>
             </select>
         </td>
     </tr>
@@ -119,7 +119,7 @@
                 var id = "select_" + HangHaoID;
                 //校准结果的不确定度 U(K =
                 // htmlString.push("<td align='center' >±</td>");
-                htmlString.push("<td align='center' ><select class=\"my-combobox\" name=\"select\" id='" + id + "'>  <option value=\"2\">2</option><option value=\"0.5\">0.5</option><option value=\"0.2\">0.2</option><option value=\"0.1\">0.1</option></select></td>");
+                htmlString.push("<td align='center' >±<select class=\"my-combobox\" name=\"select\" id='" + id + "'>  <option value=\"2\">2</option><option value=\"1\">1</option><option value=\"0.5\">0.5</option><option value=\"0.2\">0.2</option><option value=\"0.1\">0.1</option></select></td>");
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");

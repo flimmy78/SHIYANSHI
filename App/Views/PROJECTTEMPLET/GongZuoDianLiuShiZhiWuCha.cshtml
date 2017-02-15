@@ -28,7 +28,7 @@
         </td>
 
         <td align="center">
-            <input class="my-textbox input-width" value="" type="text" name="OUTPUTVALUE" id="OUTPUTVALUE_t_1_1" onblur="blurValue(this)" />
+            <input class="my-textbox input-width" value="" type="text" name="OUTPUTVALUE" id="OUTPUTVALUE_t_1_1"  />
             <select class="my-combobox" name="OUTPUTVALUE_UNIT" id="OUTPUTVALUE_UNIT_t_1_1">
                 <option value="V">V</option>
                 <option value="MV">MV</option>
@@ -38,7 +38,7 @@
             </select>
         </td>
         <td align="center">
-            <input class="my-textbox input-width" value="" type="text" name="STANDARDRESISTANCE" id="STANDARDRESISTANCE_t_1_1" onblur="blurValue(this)"/>
+            <input class="my-textbox input-width" value="" type="text" name="STANDARDRESISTANCE" id="STANDARDRESISTANCE_t_1_1" />
             <select class="my-combobox" name="STANDARDRESISTANCE_UNIT" id="STANDARDRESISTANCE_UNIT_t_1_1">
                 <option value="Ω">Ω</option>
                 <option value="TΩ">TΩ</option>
@@ -107,12 +107,10 @@
         //重写set方法，只准对增加空白行
         function set(tbodyIndex) {
 
-            CreateRow();
+            $('#dlg').dialog('open');//打开弹出框
 
             $("#hideDangQianTongDao").val(tbodyIndex);
-            //增加±
-            $('.ttt').remove();
-            $('input[id*="YUANXUXIANZHI_"]').before('<span class="ttt">±</span>');
+           
         }
         var rowIdx = 1;
         //增加行
@@ -127,12 +125,12 @@
             var htmlString = [];
             var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
 
-            rowIdx = rowIdx + 1;
+         
             var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
             for (var rowidx = 0; rowidx < rowspanIdx; rowidx++) {
                 rowLength++;
                 htmlString.push("<tr rowindex='" + rowLength + "'>");
-
+                rowIdx = rowIdx + 1;
                 var rowspan = 1; //合并单元格行数
 
                 var txtVal = "";//(文本框值)，如果有值并且行号为null直接赋值，否则走自动计算
@@ -143,9 +141,9 @@
                 }
                 htmlString.push(SetTDHtml(rowspan, "STANDARDRESISTAN1", HangHaoID, rowidx, rowIdx.toString(), "classstyle120"));
                 //测量点 需要下拉框
-                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120", "", "blurValue",""));
+                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120", "", "",""));
                 //二次输入标准值
-                htmlString.push(SetTDHtml(rowspan, "STANDARDRESISTANCE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurValue'));
+                htmlString.push(SetTDHtml(rowspan, "STANDARDRESISTANCE", HangHaoID, rowidx, txtVal, "classstyle100", '', ''));
                 //  //二次输入标准值
                 htmlString.push(SetTDHtml(rowspan, "DIANLIUZHIZHI", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurErCiShuRuBiaoZhunZhi'));
                 //标准输出值
@@ -161,6 +159,9 @@
             htmlString = htmlString.join("");
 
             var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
+            //增加±
+            $('.ttt').remove();
+            $('input[id*="YUANXUXIANZHI_"]').before('<span class="ttt">±</span>');
             $.parser.parse(tagRow);//渲染easyui组建
             //$('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
@@ -188,7 +189,7 @@
             var U0 = $(tr).children().eq(1).find('input').val();
             var R0 = $(tr).children().eq(2).find('input').val();
             var IO = parseFloat(parseFloat(U0) / parseFloat(R0));
-            $(tr).children().eq(4).find('input').val(IO.toFixed(2)));
+            $(tr).children().eq(4).find('input').val(IO.toFixed(2));
 
         }
         ///计算实质误差
@@ -201,10 +202,31 @@
 
 }
 @section TanKuang {
-    <!--弹框的位置-->
-    <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
-    <input type="hidden" id="txtPointLen" value="1" /><!--小数点位数-->
-}
+   <!--弹框的位置-->
+<!--增加量程弹层-->
+<div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return CreateRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+    <table>
+
+        <tr>
+            <td align="right">检测点数：</td>
+            <td><input type="text" id="txtPoint" name="txtPoint" value="" class="my-textbox  required digits" style="width:200px" /></td>
+        </tr>
+
+    </table>
+</div>
+    }
+<!--/增加量程弹层-->
 
 
 
