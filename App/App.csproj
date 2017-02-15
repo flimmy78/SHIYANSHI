@@ -1080,6 +1080,7 @@
     <Content Include="Views\PROJECTTEMPLET\CanYvDianZu.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\DianLiuYouGongFenLiangWuGongFenLiang.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\YiQiFenBianLiShiYan.cshtml" />
+    <Content Include="Views\PROJECTTEMPLET\ShuangQiaoQiTaLiangChengXiangDuiWuCha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
