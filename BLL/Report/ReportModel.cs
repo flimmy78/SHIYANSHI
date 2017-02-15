@@ -528,4 +528,42 @@ namespace Langben.Report
         public List<string> PingHengFuZaiShiYouGongDianNengWuCha { get; set; }
     }
 
+    /// <summary>
+    /// 检测项特殊注关系
+    /// </summary>
+    public class Remark_Rules
+    {
+        /// <summary>
+        /// 检测项ID
+        /// </summary>
+        public string RuleID { get; set; }
+        /// <summary>
+        /// 检测项名称
+        /// </summary>
+        public string RuleName { get; set; }
+        /// <summary>
+        /// 注
+        /// </summary>
+        public string Remark { get; set; }
+        /// <summary>
+        /// 图片地址
+        /// </summary>
+        public string ImgUrl { get; set; }
+    }
+    /// <summary>
+    /// 特殊字符索引信息
+    /// </summary>
+    public class SpecialCharacter_Index
+    {
+        public string Code { get; set; }
+        /// <summary>
+        /// 开始位置
+        /// </summary>
+        public int StartIndex { get; set; }
+        /// <summary>
+        /// 下标个数
+        /// </summary>
+        public int SubCount { get; set; }
+    }
+
 }
