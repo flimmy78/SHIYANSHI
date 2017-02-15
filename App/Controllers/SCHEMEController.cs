@@ -26,6 +26,8 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public ActionResult Index()
         {
+            var data = GetCurrentAccount();
+            ViewBag.shiyanshi = data.UNDERTAKE_LABORATORYName;
             return View();
         }
         /// <summary>
