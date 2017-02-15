@@ -11,7 +11,7 @@
     <tr id="top-only">
         <td colspan="9">
 
-            <div class="fl mr10">
+            <div class="">
                 <span>基本误差：</span>×
 
                 <select class="my-combobox" name="statestandard" id="statestandard_t_1_1" onchange="changeValue(this)">
@@ -19,16 +19,9 @@
                     <option value="不合格">不合格</option>
                 </select>
             </div>
-            <div class="fl mr">准确度等级：<input class="my-textbox " value="" type="text" name="zhidingwucha" id="zhidingwucha_t_1_1"></div>
 
-        </td>
-    </tr>
-    <tr>
-        <td colspan="9">
-            
-           
-              
-
+            <div class="mt10">
+                <div class="fl mr10">
                     <span>基本量程：</span>×
 
                     <select class="my-combobox" name="state1" id="state1_t_1_1" onchange="changeValue(this)">
@@ -40,9 +33,15 @@
                         <option value="0.01">0.01</option>
                         <option value="0.001">0.001</option>
                     </select>
+                </div>
+                    <div class="fl mr">准确度等级：<input class="my-textbox " value="" type="text" name="zhidingwucha" id="zhidingwucha_t_1_1"></div>
+                </div>
+                
 
-</td>
+
+        </td>
     </tr>
+   
     <tr>
         <th width="80" rowspan="3" align="center">序号</th>
         <th colspan="3" align="center">
@@ -230,11 +229,11 @@
         //计算显示值
         function resetXianShiZhi(obj) {
             //重新计算当前行
-            xiangDuiWuCha(obj, "READVALUE", "ACTUALVALUE", "SHIJISHUCHUZHI");
+            xiangDuiWuCha(obj, "ACTUALVALUE", "READVALUE", "SHIJISHUCHUZHI");
         }
         function resetXianShiZhi2(obj) {
             //重新计算当前行
-            xiangDuiWuCha(obj, "RELATIVEERROR", "UNCERTAINTYDEGREE", "UNCERTAINTYDEGREE2");
+            xiangDuiWuCha(obj, "UNCERTAINTYDEGREE", "RELATIVEERROR", "UNCERTAINTYDEGREE2");
         }
 
        
