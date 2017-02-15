@@ -146,8 +146,8 @@
               //  TongDao.getCurTongDaoIdx(obj);
                 // var arry = this.getWuChaLength(obj);
                 var tr = $(obj).parents('tr');
-                var beicebiaochenzhi = $(tr).children().eq(0).find('input').val();
-                if ((beicebiaochenzhi == '0.0001' || beicebiaochenzhi == '0.001' || beicebiaochenzhi == '0.01' || beicebiaochenzhi == '0.1') && $(tr).children().eq(0).find('input').val() != "") {
+                var beicebiaochenzhi = $(tr).children().eq(0).find('select').val();
+                if ((beicebiaochenzhi == '0.0001' || beicebiaochenzhi == '0.001' || beicebiaochenzhi == '0.01' || beicebiaochenzhi == '0.1') && $(tr).children().eq(0).find('select').val() != "") {
                     $(tr).children().eq(1).find('input').val(parseFloat(beicebiaochenzhi) * 100);
                 }
                 else {
@@ -171,7 +171,7 @@
 
                 var tr = $(obj).parents('tr');
                 var arry = this.getbeiceLength(obj);
-                var beicebiaozhunzhi = $(tr).children().eq(0).find('input').val();
+                var beicebiaozhunzhi = $(tr).children().eq(0).find('select').val();
                 var celiangpingjunzhi = $(tr).children().eq(6).find('input').val();
                 var erdengbiaozhundianzu = $(tr).children().eq(3).find('input').val();
 
@@ -192,17 +192,17 @@
                 //【被测电阻-标称值（Ω）】对【检定电流】是：0.0001对5,0.001对5,0.01对2,0.1对0.3，
                 //1对0.1位,10对0.03,100对0.01,1000对0.003，10000对应0.0001,100000对应0.0001
                 var tr = $(obj).parents('tr');
-                var beicedianzubiaochenzhi = $(tr).children().eq(0).find('input').val();
+                var beicedianzubiaochenzhi = $(tr).children().eq(0).find('select').val();
                 var jiandingdianliu = this.getjiandingdianliu(beicedianzubiaochenzhi);
                 if (jiandingdianliu != "") {
-                    $(tr).children().eq(10).find('input').val(jiandingdianliu);
+                    $(tr).children().eq(10).find('select').val(jiandingdianliu);
                 }
 
             },
             wucha: function (obj) {
                 //【误差】=(【被测电阻-标称值（Ω）】-【实际值】)/【实际值】*100%，小数点后三位，四舍六入，逢五奇进偶不进
                 var tr = $(obj).parents('tr');
-                var beijiancedianzubiaochenzhi = $(tr).children().eq(0).find('input').val();
+                var beijiancedianzubiaochenzhi = $(tr).children().eq(0).find('select').val();
                 var shijizhi = $(tr).children().eq(7).find('input').val();
                 if (beijiancedianzubiaochenzhi != "" && shijizhi != "") {
                     var wucha = (parseFloat(beijiancedianzubiaochenzhi) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100;
@@ -261,7 +261,7 @@
                 var tr = $(obj).parents('tr');
                 var arry = [];
                 var len = 5;
-                var beicedianzubiaochenzhi = $(tr).children().eq(0).find('input').val();
+                var beicedianzubiaochenzhi = $(tr).children().eq(0).find('select').val();
                 if (beicedianzubiaochenzhi != "") {
 
                     var datas = beicedianzubiaochenzhi.split('.');
