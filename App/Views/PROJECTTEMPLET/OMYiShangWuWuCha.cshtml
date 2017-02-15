@@ -95,25 +95,25 @@
                 //需要合并的列
                  
 
-                htmlString.push(SetTDHtml(rowspan, "WE", HangHaoID, rowidx, "", "", "", 'BEICEDIANZU',""));
+                htmlString.push(SetTDHtml(rowspan, "WE", HangHaoID, rowidx, "", "", "", 'BEICEDIANZU', ""));
                 htmlString.push(SetTDHtml(rowspan, "TYEW", HangHaoID, rowidx, "", ""));
                 htmlString.push(SetTDHtml(rowspan, "UI", HangHaoID, rowidx, "", ""));
-                htmlString.push(SetTDHtml(rowspan, "OP", HangHaoID, rowidx, "", ""));
+                htmlString.push(SetTDHtml(rowspan, "OP", HangHaoID, rowidx, "", "")); 
                 htmlString.push(SetTDHtml(rowspan, "ASF", HangHaoID, rowidx, "", ""));
                 htmlString.push(SetTDHtml(rowspan, "GHJ", HangHaoID, rowidx, "", "", "", 'blurValue', ""));
 
 
                 //标准值 增加下拉框单位V
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, '', "classstyle100", "", ""));
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, '', "classstyle100", "", "blurValue", ""));
 
                 //赫兹 增加下拉框单位赫兹
-                htmlString.push(SetTDHtml(rowspan, "HZMY", HangHaoID, rowidx, '', "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "HZMY", HangHaoID, rowidx, '', "classstyle100", "", "blurValue", ""));
 
                 //显示值 增加下拉框单位V
                 htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100", '', ""));
 
                 //相对误差
-                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100", "", "blurValue", ""));
 
 
                 //校准结果的不确定度 U(K =
