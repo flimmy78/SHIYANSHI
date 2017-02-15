@@ -576,8 +576,7 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
         public ActionResult OMYiXiaBiaoZhunDianZu(string RULEID = "166-1993_3_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
-        {
-
+        {           
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>

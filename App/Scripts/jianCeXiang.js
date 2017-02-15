@@ -990,8 +990,14 @@ function Save_ShuJuLuRu() {
     var ID = $("#hideITEID").val();//预备方案检查项ID
     var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();//预备方案ID
     var RULEID = $("#hideRULEID").val();//检测项ID   
-    var CONCLUSION = $("#CONCLUSION").val();//结论    
-    var REMARK = $("#REMARK").val();//备注  
+    var CONCLUSION = $("#CONCLUSION").val();//结论   
+    //备注 (有的检测项没有备注控件，是死的，例如166-1993_3_1，报告取模板中的数据)
+    var REMARK = "";    
+    var REMARKobj = document.getElementById("REMARK");
+    if (REMARKobj != null) {
+        REMARK = $("#REMARK").val();//备注 
+    }
+
     var HTMLVALUE = encodeURI($("#divHtml").html());
 
     //获取空对象用于保存添加的信息

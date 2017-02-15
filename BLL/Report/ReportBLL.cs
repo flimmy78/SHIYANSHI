@@ -1615,7 +1615,7 @@ namespace Langben.Report
                     SpecialCharacters allSpecialCharacters = GetSpecialCharacters();
                     entity.QUALIFIED_UNQUALIFIED_TEST_ITE = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.OrderBy(p => p.SORT).ToList();
 
-                    int rowIndex_Destination = 0;
+                    int rowIndex_Destination = 1;
 
                     foreach (QUALIFIED_UNQUALIFIED_TEST_ITE iEntity in entity.QUALIFIED_UNQUALIFIED_TEST_ITE)
                     {
@@ -3594,8 +3594,9 @@ namespace Langben.Report
         /// <param name="workbook">工作文件</param>
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <param name="value">特殊字符</param>
+        /// <param name="ruleID">备注检测项ID,非备注不用传</param>
         /// <returns></returns>
-        private HSSFRichTextString SetSub(HSSFWorkbook workbook = null, SpecialCharacters allSpecialCharacters = null, string value = "")
+        private HSSFRichTextString SetSub(HSSFWorkbook workbook = null, SpecialCharacters allSpecialCharacters = null, string value = "",string ruleID=null)
         {
             if (value == null)
             {
@@ -3610,7 +3611,7 @@ namespace Langben.Report
                     value = value.Replace(",", Environment.NewLine);
                     result = new HSSFRichTextString(value.Trim().Replace("|", ""));
 
-                }
+                }               
 
                 #region 处理标准装置中的特殊字符（斜体）
 
@@ -3688,13 +3689,7 @@ namespace Langben.Report
                         length = length + v.Length;
 
                     }
-                }
-                //else if (value.IndexOf("|,") >= 0)
-                //{
-                //    value = value.Replace(",", Environment.NewLine);
-                //    result = new HSSFRichTextString(value.Trim().Replace("|", ""));
-
-                //}
+                }                
                 #endregion 
                 #endregion
 
