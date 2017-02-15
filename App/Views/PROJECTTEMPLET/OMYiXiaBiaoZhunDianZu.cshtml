@@ -53,7 +53,7 @@
     <script type="text/javascript" language="javascript">
         $(document).ready(function () {
             $('#REMARK').parent('td').html('δn为标准电阻的相对修正值。 <br> δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。 <br>δx=（δx1+δx2）/2');
-            //$('#REMARK').val('δn为标准电阻的相对修正值。&#13;&#10;  δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。 &#13;&#10;δx=（δx1+δx2）/2');
+           // $('#REMARK').text('(1).δn为标准电阻的相对修正值。 (2). δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。 (3).δx=（δx1+δx2）/2')
         });
         //一个量程的需要这个方法
         //重写set方法，只准对增加空白行
@@ -156,7 +156,22 @@
                         $(tr).children().eq(1).find('input').val(parseFloat(beicebiaochenzhi));
                     }
                 }
-
+                if (beicebiaochenzhi == '0.0001')
+                    $(tr).children().eq(9).find('select').val(0.1);
+                if (beicebiaochenzhi == '0.001')
+                    $(tr).children().eq(9).find('select').val(0.05);
+                if (beicebiaochenzhi == '0.01')
+                    $(tr).children().eq(9).find('select').val(0.02);
+                if (beicebiaochenzhi == '0.1')
+                    $(tr).children().eq(9).find('select').val(0.01);
+                if (beicebiaochenzhi == '1')
+                    $(tr).children().eq(9).find('select').val(0.01);
+                if (beicebiaochenzhi == '10')
+                    $(tr).children().eq(9).find('select').val(0.01);
+                if (beicebiaochenzhi == '100')
+                    $(tr).children().eq(9).find('select').val(0.01);
+                if (beicebiaochenzhi == '1000')
+                    $(tr).children().eq(9).find('input').val(0.01);
                 this.shijizhi(obj);
                 this.wucha(obj);
                 this.jiandingdianliu(obj);

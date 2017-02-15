@@ -38,11 +38,22 @@ function bindShiyanshi(id) {
         if (item == null) {
             return;
         }
-        $("<option></option>")
-                .val(item["value"])
-                .text(item["text"])
-                .appendTo($(id));
+        if ($("#UNDERTAKELABORATORYID").val() == item["text"]) {
+            //设置下拉框的默认实验室
+            $("<option></option>")
+               .val(item["value"])
+               .text(item["text"]).attr("selected", "selected")
+               .appendTo($(id));
+        } else {
+            $("<option></option>")
+               .val(item["value"])
+               .text(item["text"])
+               .appendTo($(id));
+        }
+       
     });
+
+    
 }
 
 function returnParent(value) {//获取子窗体返回值
