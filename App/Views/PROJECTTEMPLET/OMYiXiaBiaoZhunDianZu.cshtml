@@ -171,7 +171,7 @@
                 if (beicebiaochenzhi == '100')
                     $(tr).children().eq(9).find('select').val(0.01);
                 if (beicebiaochenzhi == '1000')
-                    $(tr).children().eq(9).find('input').val(0.01);
+                    $(tr).children().eq(9).find('select').val(0.01);
                 this.shijizhi(obj);
                 this.wucha(obj);
                 this.jiandingdianliu(obj);
@@ -197,7 +197,7 @@
                 }
                 else {
                     if (celiangpingjunzhi != "") {
-                        var shijizhi = fomatFloat(parseFloat(beicebiaozhunzhi) * Math.pow(10, -6) * parseFloat(celiangpingjunzhi) + parseFloat(beicebiaozhunzhi), arry[0].length)
+                        var shijizhi = fomatFloat(parseFloat(beicebiaozhunzhi) * Math.pow(11, -6) * parseFloat(celiangpingjunzhi) + parseFloat(beicebiaozhunzhi), arry[0].length)
                         $(tr).children().eq(7).find('input').val(shijizhi);
                     }
 
