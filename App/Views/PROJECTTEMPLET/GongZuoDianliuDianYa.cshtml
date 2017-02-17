@@ -21,8 +21,8 @@
     <tr>
         <th align="center" width="100">额定工作@(((ViewBag.canshu) == "电压") ? "电压(V)" : "电流(A)")</th>
         <th align="center" width="100">额定@(((ViewBag.canshu) == "电压") ? "电压" : "电流")百分比</th>
-        <th align="center" width="100"> 显示值(A)</th>
-        <th align="center" width="100"> 标准值(A)</th>
+        <th align="center" width="100"> 显示值@(((ViewBag.canshu) == "电压") ? "(V)" : "(A)")</th>
+        <th align="center" width="100"> 标准值@(((ViewBag.canshu) == "电压") ? "(V)" : "(A)")</th>
         <th align="center" width="100">误差(%)</th>
         <th align="center" width="100">最大基本误差(%)</th>
         <th align="center" width="100"> 结论</th>
