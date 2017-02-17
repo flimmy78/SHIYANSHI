@@ -149,7 +149,9 @@
                 var tr = $(obj).parents('tr');
                 var beicebiaochenzhi = $(tr).children().eq(0).find('select').val();
                 if ((beicebiaochenzhi == '0.0001' || beicebiaochenzhi == '0.001' || beicebiaochenzhi == '0.01' || beicebiaochenzhi == '0.1') && $(tr).children().eq(0).find('select').val() != "") {
-                    $(tr).children().eq(1).find('input').val(parseFloat(beicebiaochenzhi) * 100);
+                    //$(tr).children().eq(1).find('input').val(parseFloat(beicebiaochenzhi) * 100);
+                   $(tr).children().eq(1).find('input').val(accMul(parseFloat(beicebiaochenzhi),100));
+
                 }
                 else {
                     if (beicebiaochenzhi != "") {
@@ -192,12 +194,12 @@
                 var erdengbiaozhundianzu = $(tr).children().eq(3).find('input').val();
 
                 if ((beicebiaozhunzhi != "" && celiangpingjunzhi != "" && erdengbiaozhundianzu != "") && (beicebiaozhunzhi == "0.0001" || beicebiaozhunzhi == "0.001" || beicebiaozhunzhi != "0.01" || beicebiaozhunzhi != "0.1")) {
-                    var shijizhi = fomatFloat(parseFloat(beicebiaozhunzhi) * Math.pow(10, -6) * (parseFloat(celiangpingjunzhi) + parseFloat(erdengbiaozhundianzu)) + parseFloat(beicebiaozhunzhi), arry[0].length)
+                    var shijizhi = fomatFloat(accAdd(accMul(accMul(parseFloat(beicebiaozhunzhi), Math.pow(10, -6)), accAdd(parseFloat(celiangpingjunzhi), parseFloat(erdengbiaozhundianzu))), parseFloat(beicebiaozhunzhi)), arry[0].length);
                     $(tr).children().eq(7).find('input').val(shijizhi);
                 }
                 else {
                     if (celiangpingjunzhi != "") {
-                        var shijizhi = fomatFloat(parseFloat(beicebiaozhunzhi) * Math.pow(11, -6) * parseFloat(celiangpingjunzhi) + parseFloat(beicebiaozhunzhi), arry[0].length)
+                        var shijizhi = fomatFloat(accAdd(accMul(accMul(parseFloat(beicebiaozhunzhi), Math.pow(10, -6)), parseFloat(celiangpingjunzhi)), parseFloat(beicebiaozhunzhi)), arry[0].length);
                         $(tr).children().eq(7).find('input').val(shijizhi);
                     }
 
@@ -222,6 +224,7 @@
                 var shijizhi = $(tr).children().eq(7).find('input').val();
                 if (beijiancedianzubiaochenzhi != "" && shijizhi != "") {
                     var wucha = (parseFloat(beijiancedianzubiaochenzhi) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100;
+                   // var wucha =accMul(accDiv(accSub(parseFloat(beijiancedianzubiaochenzhi), parseFloat(shijizhi)), parseFloat(shijizhi)), 100)
                     $(tr).children().eq(8).find('input').val(fomatFloat(wucha, 3));
                 }
 
@@ -233,7 +236,8 @@
                 var zhengxiangceliang = $(tr).children().eq(4).find('input').val();
                 var fanxiangceliang = $(tr).children().eq(5).find('input').val();
                 if (zhengxiangceliang != "" && fanxiangceliang != "") {
-                    $(tr).children().eq(6).find('input').val(fomatFloat((parseFloat(zhengxiangceliang) + parseFloat(fanxiangceliang)) / 2, 0));
+                    //$(tr).children().eq(6).find('input').val(fomatFloat((parseFloat(zhengxiangceliang) + parseFloat(fanxiangceliang)) / 2, 0));
+                    $(tr).children().eq(6).find('input').val(fomatFloat(accDiv(accAdd(parseFloat(zhengxiangceliang), parseFloat(fanxiangceliang)), 2), 0));
                     this.shijizhi(obj);
                 }
             }, getjiandingdianliu: function (value) {

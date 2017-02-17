@@ -10,7 +10,7 @@
     <tr>
         <td colspan="6">
             <span>基本误差:</span>
-            <select class="my-combobox" name="ddlliangCheng" id="ddlliangCheng" onchange="blurValue1(this)">
+            <select class="my-combobox" name="ddlliangCheng" id="ddlliangCheng_t_1_1" onchange="changeValue(this)">
                 <option value="合格" selected="selected">合格</option>
                 <option value="不合格">不合格</option>
             </select>
@@ -18,10 +18,14 @@
         </td>
     </tr>
     <tr>
-        <td colspan="6">
+        <td >
             其他量程
         </td>
-    </tr>
+        <td colspan="5">
+            <span>准确度等级:</span>
+            <input name="zhidingwucha" id="zhidingwucha_t_1_1" type="text" class="my-textbox tc" value="" style="width:140px">
+        </td>
+</tr>
 
     <tr>
         <th width="120" align="center">量程</th>
@@ -119,7 +123,7 @@
 
             var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
-            //$('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
+            $('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
 

@@ -1,4 +1,4 @@
-﻿l@model Langben.DAL.PROJECTTEMPLET
+﻿@model Langben.DAL.PROJECTTEMPLET
 @{
     Layout = "~/Views/Shared/TempleOnly.cshtml";
     ViewBag.title = "1000Ω以下-无误差-有型号编号";
@@ -184,17 +184,17 @@
                 var erdengbiaozhundianzu = $(tr).children().eq(5).find('input').val();
 
                 if ((beicebiaozhunzhi != "" && celiangpingjunzhi != "" && erdengbiaozhundianzu != "") && (beicebiaozhunzhi == "0.0001" || beicebiaozhunzhi == "0.001" || beicebiaozhunzhi != "0.01" || beicebiaozhunzhi != "0.1")) {
-                    var shijizhi = fomatFloat(parseFloat(beicebiaozhunzhi) * Math.pow(10, -6) * (parseFloat(celiangpingjunzhi) + parseFloat(erdengbiaozhundianzu)) + parseFloat(beicebiaozhunzhi), arry[0].length)
+                    var shijizhi = fomatFloat(accAdd(accMul(accMul(parseFloat(beicebiaozhunzhi), Math.pow(10, -6)), accAdd(parseFloat(celiangpingjunzhi), parseFloat(erdengbiaozhundianzu))), parseFloat(beicebiaozhunzhi)), arry[0].length);
                     $(tr).children().eq(9).find('input').val(shijizhi);
                 }
                 else {
                     if (celiangpingjunzhi != "") {
-                        var shijizhi = fomatFloat(parseFloat(beicebiaozhunzhi) * Math.pow(10, -6) * parseFloat(celiangpingjunzhi) + parseFloat(beicebiaozhunzhi), arry[0].length)
+                        var shijizhi = fomatFloat(accAdd(accMul(accMul(parseFloat(beicebiaozhunzhi), Math.pow(10, -6)), parseFloat(celiangpingjunzhi)), parseFloat(beicebiaozhunzhi)), arry[0].length);
                         $(tr).children().eq(9).find('input').val(shijizhi);
                     }
 
                 }
-                // this.wucha(obj);
+                 this.wucha(obj);
             }, jiandingdianliu: function (obj) {
                 //【被测电阻-标称值（Ω）】对【检定电流】是：0.0001对5,0.001对5,0.01对2,0.1对0.3，
                 //1对0.1位,10对0.03,100对0.01,1000对0.003，10000对应0.0001,100000对应0.0001
@@ -212,7 +212,7 @@
                 var zhengxiangceliang = $(tr).children().eq(6).find('input').val();
                 var fanxiangceliang = $(tr).children().eq(7).find('input').val();
                 if (zhengxiangceliang != "" && fanxiangceliang != "") {
-                    $(tr).children().eq(8).find('input').val(fomatFloat((parseFloat(zhengxiangceliang) + parseFloat(fanxiangceliang)) / 2, 0));
+                    $(tr).children().eq(6).find('input').val(fomatFloat(accDiv(accAdd(parseFloat(zhengxiangceliang), parseFloat(fanxiangceliang)), 2), 0));
                     this.shijizhi(obj);
                 }
             }, getjiandingdianliu: function (value) {
