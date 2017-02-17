@@ -200,7 +200,7 @@
                 else {
                     if (celiangpingjunzhi != "") {
                         var shijizhi = fomatFloat(accAdd(accMul(accMul(parseFloat(beicebiaozhunzhi), Math.pow(10, -6)), parseFloat(celiangpingjunzhi)), parseFloat(beicebiaozhunzhi)), arry[0].length);
-                        $(tr).children().eq(7).find('input').val(shijizhi);
+                        $(tr).children().eq(7).find('input').val(parseFloat(shijizhi).toFixed(2));
                     }
 
                 }
