@@ -53,7 +53,7 @@
     <script type="text/javascript" language="javascript">
         $(document).ready(function () {
             $('#REMARK').parent('td').html('δn为标准电阻的相对修正值。 <br> δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。 <br>δx=（δx1+δx2）/2');
-            //$('#REMARK').val('δn为标准电阻的相对修正值。&#13;&#10;  δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。 &#13;&#10;δx=（δx1+δx2）/2');
+           // $('#REMARK').text('(1).δn为标准电阻的相对修正值。 (2). δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。 (3).δx=（δx1+δx2）/2')
         });
         //一个量程的需要这个方法
         //重写set方法，只准对增加空白行
@@ -149,14 +149,31 @@
                 var tr = $(obj).parents('tr');
                 var beicebiaochenzhi = $(tr).children().eq(0).find('select').val();
                 if ((beicebiaochenzhi == '0.0001' || beicebiaochenzhi == '0.001' || beicebiaochenzhi == '0.01' || beicebiaochenzhi == '0.1') && $(tr).children().eq(0).find('select').val() != "") {
-                    $(tr).children().eq(1).find('input').val(parseFloat(beicebiaochenzhi) * 100);
+                    //$(tr).children().eq(1).find('input').val(parseFloat(beicebiaochenzhi) * 100);
+                   $(tr).children().eq(1).find('input').val(accMul(parseFloat(beicebiaochenzhi),100));
+
                 }
                 else {
                     if (beicebiaochenzhi != "") {
                         $(tr).children().eq(1).find('input').val(parseFloat(beicebiaochenzhi));
                     }
                 }
-
+                if (beicebiaochenzhi == '0.0001')
+                    $(tr).children().eq(9).find('select').val(0.1);
+                if (beicebiaochenzhi == '0.001')
+                    $(tr).children().eq(9).find('select').val(0.05);
+                if (beicebiaochenzhi == '0.01')
+                    $(tr).children().eq(9).find('select').val(0.02);
+                if (beicebiaochenzhi == '0.1')
+                    $(tr).children().eq(9).find('select').val(0.01);
+                if (beicebiaochenzhi == '1')
+                    $(tr).children().eq(9).find('select').val(0.01);
+                if (beicebiaochenzhi == '10')
+                    $(tr).children().eq(9).find('select').val(0.01);
+                if (beicebiaochenzhi == '100')
+                    $(tr).children().eq(9).find('select').val(0.01);
+                if (beicebiaochenzhi == '1000')
+                    $(tr).children().eq(9).find('select').val(0.01);
                 this.shijizhi(obj);
                 this.wucha(obj);
                 this.jiandingdianliu(obj);
@@ -177,13 +194,13 @@
                 var erdengbiaozhundianzu = $(tr).children().eq(3).find('input').val();
 
                 if ((beicebiaozhunzhi != "" && celiangpingjunzhi != "" && erdengbiaozhundianzu != "") && (beicebiaozhunzhi == "0.0001" || beicebiaozhunzhi == "0.001" || beicebiaozhunzhi != "0.01" || beicebiaozhunzhi != "0.1")) {
-                    var shijizhi = fomatFloat(parseFloat(beicebiaozhunzhi) * Math.pow(10, -6) * (parseFloat(celiangpingjunzhi) + parseFloat(erdengbiaozhundianzu)) + parseFloat(beicebiaozhunzhi), arry[0].length)
-                    $(tr).children().eq(7).find('input').val(shijizhi);
+                    var shijizhi = fomatFloat(accAdd(accMul(accMul(parseFloat(beicebiaozhunzhi), Math.pow(10, -6)), accAdd(parseFloat(celiangpingjunzhi), parseFloat(erdengbiaozhundianzu))), parseFloat(beicebiaozhunzhi)), arry[0].length);
+                    $(tr).children().eq(7).find('input').val(parseFloat(shijizhi).toFixed(arry[0].length));;
                 }
                 else {
                     if (celiangpingjunzhi != "") {
-                        var shijizhi = fomatFloat(parseFloat(beicebiaozhunzhi) * Math.pow(10, -6) * parseFloat(celiangpingjunzhi) + parseFloat(beicebiaozhunzhi), arry[0].length)
-                        $(tr).children().eq(7).find('input').val(shijizhi);
+                        var shijizhi = fomatFloat(accAdd(accMul(accMul(parseFloat(beicebiaozhunzhi), Math.pow(10, -6)), parseFloat(celiangpingjunzhi)), parseFloat(beicebiaozhunzhi)), arry[0].length);
+                        $(tr).children().eq(7).find('input').val(parseFloat(shijizhi).toFixed(arry[0].length));
                     }
 
                 }
@@ -207,6 +224,7 @@
                 var shijizhi = $(tr).children().eq(7).find('input').val();
                 if (beijiancedianzubiaochenzhi != "" && shijizhi != "") {
                     var wucha = (parseFloat(beijiancedianzubiaochenzhi) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100;
+                   // var wucha =accMul(accDiv(accSub(parseFloat(beijiancedianzubiaochenzhi), parseFloat(shijizhi)), parseFloat(shijizhi)), 100)
                     $(tr).children().eq(8).find('input').val(fomatFloat(wucha, 3));
                 }
 
@@ -218,7 +236,8 @@
                 var zhengxiangceliang = $(tr).children().eq(4).find('input').val();
                 var fanxiangceliang = $(tr).children().eq(5).find('input').val();
                 if (zhengxiangceliang != "" && fanxiangceliang != "") {
-                    $(tr).children().eq(6).find('input').val(fomatFloat((parseFloat(zhengxiangceliang) + parseFloat(fanxiangceliang)) / 2, 0));
+                    //$(tr).children().eq(6).find('input').val(fomatFloat((parseFloat(zhengxiangceliang) + parseFloat(fanxiangceliang)) / 2, 0));
+                    $(tr).children().eq(6).find('input').val(fomatFloat(accDiv(accAdd(parseFloat(zhengxiangceliang), parseFloat(fanxiangceliang)), 2), 0));
                     this.shijizhi(obj);
                 }
             }, getjiandingdianliu: function (value) {

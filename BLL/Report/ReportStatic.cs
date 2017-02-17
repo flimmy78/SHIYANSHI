@@ -58,13 +58,13 @@ namespace Langben.Report
             get
             {
                 string url = string.Empty;
-                if(ConfigurationManager.AppSettings["TableTemplate_JiaoZhunXmlPath"] !=null && ConfigurationManager.AppSettings["TableTemplate_JiaoZhunXmlPath"].Trim()!="")
+                if (ConfigurationManager.AppSettings["TableTemplate_JiaoZhunXmlPath"] != null && ConfigurationManager.AppSettings["TableTemplate_JiaoZhunXmlPath"].Trim() != "")
                 {
-                    url= ConfigurationManager.AppSettings["TableTemplate_JiaoZhunXmlPath"].Trim();
+                    url = ConfigurationManager.AppSettings["TableTemplate_JiaoZhunXmlPath"].Trim();
                 }
                 else
                 {
-                    url= "~/ Xml /TableTemplate_JiaoZhun.xml";
+                    url = "~/ Xml /TableTemplate_JiaoZhun.xml";
                 }
                 return Common.DirFile.ReadFile(url);
             }
@@ -103,7 +103,7 @@ namespace Langben.Report
                 else
                 {
                     path = "~/Template/原始记录-校准.xls";
-                }               
+                }
                 path = System.Web.HttpContext.Current.Server.MapPath(path);
                 return path;
             }
@@ -202,9 +202,9 @@ namespace Langben.Report
             #region 125-2004_9_1单桥-基本量程-相对误差
             //如果等级数目 >= 0.1，比如0.2；那么检定证书合格，检定项目就标注合格，不用出数据。如果不合格，所有检定项目都需要给出数据。如果是0.01等 < 0.1,检定证书都要给出数据。校准证书无论等级如何都需要给出数据。
             item.RuleID = "125-2004_9_1";
-            item.RuleName = "单桥-基本量程-相对误差";           
-            item.DengJi = 0.1;           
-            item.IsXuYaoHeGe = true;           
+            item.RuleName = "单桥-基本量程-相对误差";
+            item.DengJi = 0.1;
+            item.IsXuYaoHeGe = true;
             list.Add(item);
 
             #endregion
@@ -213,10 +213,10 @@ namespace Langben.Report
             //如果等级数目>=0.1，比如0.2；那么检定证书合格，检定项目就标注合格，不用出数据。如果不合格，所有检定项目都需要给出数据。如果是0.01等<0.1,检定证书都要给出数据。校准证书无论等级如何都需要给出数据。
             item = new Rule_DengJi();
             item.RuleID = "125-2004_9_2";
-            item.RuleName = "单桥-其他量程-相对误差";            
-            item.DengJi = 0.1;          
+            item.RuleName = "单桥-其他量程-相对误差";
+            item.DengJi = 0.1;
             item.IsXuYaoHeGe = true;
-            
+
             list.Add(item);
             #endregion
 
@@ -224,9 +224,9 @@ namespace Langben.Report
             //如果等级数目>=0.1，比如0.2；那么检定证书合格，检定项目就标注合格，不用出数据。如果不合格，所有检定项目都需要给出数据。如果是0.01等<0.1,检定证书都要给出数据。校准证书无论等级如何都需要给出数据。
             item = new Rule_DengJi();
             item.RuleID = "125-2004_9_3";
-            item.RuleName = "双桥-基本量程-滑线盘步进盘-相对误差";           
-            item.DengJi = 0.1;           
-            item.IsXuYaoHeGe = true;            
+            item.RuleName = "双桥-基本量程-滑线盘步进盘-相对误差";
+            item.DengJi = 0.1;
+            item.IsXuYaoHeGe = true;
             list.Add(item);
             #endregion
 
@@ -234,9 +234,9 @@ namespace Langben.Report
             //如果等级数目>=0.1，比如0.2；那么检定证书合格，检定项目就标注合格，不用出数据。如果不合格，所有检定项目都需要给出数据。如果是0.01等<0.1,检定证书都要给出数据。校准证书无论等级如何都需要给出数据。
             item = new Rule_DengJi();
             item.RuleID = "125-2004_9_4";
-            item.RuleName = "双桥-其他量程-相对误差";            
-            item.DengJi = 0.1;           
-            item.IsXuYaoHeGe = true;            
+            item.RuleName = "双桥-其他量程-相对误差";
+            item.DengJi = 0.1;
+            item.IsXuYaoHeGe = true;
             list.Add(item);
             #endregion
 
@@ -245,9 +245,9 @@ namespace Langben.Report
             //2.被试设备的准确度等级 > 10.0,例如设备准确度为9.0时，出表格
             item = new Rule_DengJi();
             item.RuleID = "622-1997_3";
-            item.RuleName = "基本误差检定";           
-            item.DengJi = 10;           
-            item.IsXuYaoHeGe = false;           
+            item.RuleName = "基本误差检定";
+            item.DengJi = 10;
+            item.IsXuYaoHeGe = false;
             list.Add(item);
             #endregion
 
@@ -383,7 +383,7 @@ namespace Langben.Report
             list.Add("OUTPUTVALUE");//量程Un值
             list.Add("RANGE");//相线及测量模式
             list.Add("JISUANWUCHA1");//s(%)
-            
+
             result.Add("D", list);
             #endregion 
             return result;
@@ -402,5 +402,133 @@ namespace Langben.Report
             return result;
 
         }
+        /// <summary>
+        /// 检测项特殊注
+        /// </summary>
+        /// <returns></returns>
+        public static List<Remark_Rules> RemarkRules()
+        {
+            List<Remark_Rules> result = new List<Remark_Rules>();
+            Remark_Rules item = new Remark_Rules();
+            #region 166-1993_3_1
+            item.RuleID = "166-1993_3_1";
+            item.RuleName = "1000Ω以下 - 无误差 - 有型号编号";
+            item.Remark = "注：δn为标准电阻的相对修正值。</br>　　δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。</br>　　δx =（δx1+δx2）/2".Replace(" </br>", Environment.NewLine);
+            //item.ImgUrl = "/Images/73_74.png";
+            result.Add(item);
+            #endregion
+
+            #region 166-1993_3_2
+            item = new Remark_Rules();
+            item.RuleID = "166-1993_3_2";
+            item.RuleName = "1000Ω以下-标准电阻-相对误差-无型号编号";
+            item.Remark = "注：δn为标准电阻的相对修正值。</br>　　δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。</br>　　δx =（δx1+δx2）/2".Replace(" </br>", Environment.NewLine);
+            //item.ImgUrl = "/Images/73_74.png";
+            result.Add(item);
+            #endregion
+
+            #region 166-1993_3_3
+            item = new Remark_Rules();
+            item.RuleID = "166-1993_3_3";
+            item.RuleName = "1000Ω以上-无误差";
+            item.Remark = "注：Rn —  二等标准电阻的上级检定结果</br>                Rx —  被测电阻的实际值</br>                Ax —  本装置检定被测电阻时电压表示值</br>                An —  本装置检定二等标准电阻时电压表示值</br>                             Rx = Rn + (Ax / I - An / I)".Replace("</br>", Environment.NewLine);
+            //item.ImgUrl = string.Empty;
+            result.Add(item);
+            #endregion
+
+            return result;
+
+        }
+        /// <summary>
+        /// 备注特殊字符
+        /// </summary>
+        /// <returns></returns>
+        public static Dictionary<string, List<SpecialCharacter>> RemarkSpecialCharacter()
+        {
+            Dictionary<string, List<SpecialCharacter>> result = new Dictionary<string, List<SpecialCharacter>>();
+            List<SpecialCharacter> list = new List<SpecialCharacter>();
+            SpecialCharacter item = new SpecialCharacter();
+            item.Code = "δn";
+            item.SubscriptLastCount = 1;
+            list.Add(item);
+            item = new SpecialCharacter();
+            item.Code = "δx1";
+            item.SubscriptLastCount = 2;
+            list.Add(item);
+            item = new SpecialCharacter();
+            item.Code = "δx2";
+            item.SubscriptLastCount = 2;
+            list.Add(item);
+            item = new SpecialCharacter();
+            item.Code = "δx";
+            item.SubscriptLastCount = 1;
+            list.Add(item);
+            result.Add("166-1993_3_1", list);
+            result.Add("166-1993_3_2", list);
+
+            list = new List<SpecialCharacter>();
+            item = new SpecialCharacter();
+            item.Code = "Rn";
+            item.SubscriptLastCount = 1;
+            list.Add(item);
+            item = new SpecialCharacter();
+            item.Code = "Rx";
+            item.SubscriptLastCount = 1;
+            list.Add(item);
+            item = new SpecialCharacter();
+            item.Code = "Ax";
+            item.SubscriptLastCount = 1;
+            list.Add(item);
+            item = new SpecialCharacter();
+            item.Code = "An";
+            item.SubscriptLastCount = 1;
+            list.Add(item);
+            result.Add("166-1993_3_3", list);
+
+            return result;
+        }
+        /// <summary>
+        /// 获取特殊字符索引位置信息
+        /// </summary>
+        /// <param name="RuleID">检测项ID</param>
+        /// <returns></returns>
+        public static List<SpecialCharacter_Index> GetSpecialCharacter_Indexs(string RuleID)
+        {
+            Dictionary<string, List<SpecialCharacter>> RemarkSpecialCharacterDic = RemarkSpecialCharacter();
+            List<Remark_Rules> RemarkRulesList = RemarkRules();
+            if (string.IsNullOrWhiteSpace(RuleID) || (RemarkSpecialCharacterDic == null || !RemarkSpecialCharacterDic.ContainsKey(RuleID) || RemarkSpecialCharacterDic[RuleID] == null || RemarkSpecialCharacterDic[RuleID].Count == 0)
+                || (RemarkRulesList == null || RemarkRulesList.FirstOrDefault(p => p.RuleID == RuleID) == null || string.IsNullOrWhiteSpace(RemarkRulesList.FirstOrDefault(p => p.RuleID == RuleID).Remark)))
+            {
+                return null;
+            }
+
+            List<SpecialCharacter> Speciallist = RemarkSpecialCharacterDic[RuleID];
+            Remark_Rules Remark = RemarkRulesList.FirstOrDefault(p => p.RuleID == RuleID);
+
+            List<SpecialCharacter_Index> result = new List<SpecialCharacter_Index>();
+            SpecialCharacter_Index item = new SpecialCharacter_Index();
+            foreach (SpecialCharacter s in Speciallist)
+            {
+                int index = -2;
+                int length = 0;
+                while (index != -1 && index < Remark.Remark.Length - 1 - length)
+                {
+                    index = Remark.Remark.IndexOf(s.Code, index == -2 ? 0 : index + length);
+                    if (index >= 0 && result == null || result.FirstOrDefault(p => p.StartIndex == index) == null)
+                    {
+                        item = new SpecialCharacter_Index();
+                        item.Code = s.Code;
+                        item.StartIndex = index;
+                        item.SubCount = s.SubscriptLastCount;
+                        result.Add(item);
+                        length = s.Code.Length;
+                    }
+                }
+
+            }
+            return result;
+        }
+
+
     }
 }

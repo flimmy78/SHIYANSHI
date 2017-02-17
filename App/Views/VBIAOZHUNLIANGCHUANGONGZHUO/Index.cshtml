@@ -110,7 +110,7 @@
             @Html.LabelFor(model => model.SHOULIDANWEI):
         </div>
         <div class="input_search-field">
-            <input type='text' id='SHOULIDANWEI' />
+            @Html.DropDownList("SHOULIDANWEI", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "请选择")
         </div>
     </div>
 
@@ -157,7 +157,6 @@
 					, { field: 'WEITUODANWEI', title: '@Html.DisplayNameFor(model => model.WEITUODANWEI)', width: 100 }
 					, { field: 'SUOSHUDANWEI', title: '@Html.DisplayNameFor(model => model.SUOSHUDANWEI)', width: 100 }
 					, { field: 'ZHENGSHUDANWEI', title: '@Html.DisplayNameFor(model => model.ZHENGSHUDANWEI)', width: 100 }
-					, { field: 'SONGJIANDANWEI', title: '@Html.DisplayNameFor(model => model.SONGJIANDANWEI)', width: 100 }
 					, { field: 'SHOULIDANWEI', title: '@Html.DisplayNameFor(model => model.SHOULIDANWEI)', width: 100 }
 					, { field: 'CHUCHANGRIQI', title: '@Html.DisplayNameFor(model => model.CHUCHANGRIQI)', width: 100 }
 					, { field: 'QIJUMINGCHENG', title: '@Html.DisplayNameFor(model => model.QIJUMINGCHENG)', width: 100 }

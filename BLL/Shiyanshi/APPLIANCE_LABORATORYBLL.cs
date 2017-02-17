@@ -42,7 +42,7 @@ namespace Langben.BLL
                             where f.APPLIANCE_DETAIL_INFORMATIONID == id && f.UNDERTAKE_LABORATORYID == shiyanshi
                             select f).First();
 
-                var file = db.FILE_UPLOADER.Where(w => w.PREPARE_SCHEMEID == data.PREPARE_SCHEMEID && w.STATE != "已上传").OrderBy(o => o.CREATETIME).FirstOrDefault();
+                var file = db.FILE_UPLOADER.Where(w => w.PREPARE_SCHEMEID == data.PREPARE_SCHEMEID && w.STATE2 == "已上传").OrderBy(o => o.CREATETIME).FirstOrDefault();
                 if (file!=null)
                 {
                     return file.PATH2;

@@ -90,6 +90,7 @@ DanWeiDDLHtmlArray = [
                Code: 'ZhiHouChaoQian',
                Remark: '滞后',
                Value: "<select class=\"my-combobox\" name=\"ZhiHouChaoQian\" style=\"width:50px; \">" +
+                      "<option value=\" \"> </option> " +
                        "<option value=\"滞后\">滞后</option> " +
                        "<option value=\"超前\">超前</option>" +
                       "</select>"

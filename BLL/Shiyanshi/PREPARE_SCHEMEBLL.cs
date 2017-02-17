@@ -136,7 +136,11 @@ namespace Langben.BLL
                 }
                 List<string> addMETERING_STANDARD_DEVICEID = new List<string>();
                 List<string> deleteMETERING_STANDARD_DEVICEID = new List<string>();
-              
+                PREPARE_SCHEME prepare = null;
+                if (entity != null)
+                {
+                    prepare = repository.GetById(entity.ID);
+                }
                 DataOfDiffrent.GetDiffrent(entity.METERING_STANDARD_DEVICEID.GetIdSort(), entity.METERING_STANDARD_DEVICEIDOld.GetIdSort(), ref addMETERING_STANDARD_DEVICEID, ref deleteMETERING_STANDARD_DEVICEID);
 
                 PREPARE_SCHEME editEntity = repository.EditInst(db, entity);
@@ -176,6 +180,17 @@ namespace Langben.BLL
 
 
                 }
+                #region 更新了引用方案，需要删除原方案数据所录入的数据
+                if(prepare!=null && !string.IsNullOrWhiteSpace(prepare.SCHEMEID) && prepare.SCHEMEID!=entity.SCHEMEID)
+                {
+
+                    List<QUALIFIED_UNQUALIFIED_TEST_ITE> deleteQUALIFIED_UNQUALIFIED_TEST_ITEList = (from f in db.QUALIFIED_UNQUALIFIED_TEST_ITE
+                                                 where f.PREPARE_SCHEMEID == entity.ID
+                                                 select f).ToList();
+                    db.QUALIFIED_UNQUALIFIED_TEST_ITE.RemoveRange(deleteQUALIFIED_UNQUALIFIED_TEST_ITEList);
+                }
+                #endregion 
+               
                 repository.Save(db);
 
                 return true;
