@@ -2085,19 +2085,37 @@ namespace Langben.Report
                 sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue("/");
             }
             //有效期
-            if (entity.VALIDITY_PERIOD.HasValue)
+            if (type == ExportType.OriginalRecord_JianDing)//检定需要打印有效期
             {
-                sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString() + "年");
-                //sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
+                if (entity.VALIDITY_PERIOD.HasValue)
+                {
+                    sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString() + "年");
+                    //sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue(entity.VALIDITY_PERIOD.Value.ToString("yyyy年MM月dd日"));
+                }
+                else
+                {
+                    sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue("/");
+                }
             }
-            else
+            else//校准去掉有效期
             {
-                sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue("/");
+                sheet_Destination.GetRow(RowIndex).GetCell(19).SetCellValue("");
+                sheet_Destination.GetRow(RowIndex).GetCell(23).SetCellValue("");
+
+                //有效期底部线去掉                         
+                ICellStyle style = hssfworkbook.CreateCellStyle();
+                style.BorderTop = BorderStyle.None;
+                for (int col = 23; col < 31; col++)
+                {
+                    ICell targetCell = sheet_Destination.GetRow(RowIndex).GetCell(col);
+                    targetCell.CellStyle = style;
+                }
+              
             }
             //RowIndex = RowIndex + 2;
             //if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString())
             if (type == ExportType.OriginalRecord_XiaoZhun)
-            {
+            { 
                 //校准说明   
                 RowIndex = RowIndex + 1;
                 if (entity.CONCLUSION_EXPLAIN == null || entity.CONCLUSION_EXPLAIN.Trim() == "")
@@ -2970,6 +2988,30 @@ namespace Langben.Report
                 }
             }
         }
+        ///// <summary>
+        ///// 移除单元格底部线（用于解决校准原始记录有效期底部线去掉）
+        ///// </summary>
+        ///// <param name="hssfworkbook"></param>
+        ///// <param name="sheet_Destination"></param>
+        ///// <param name="targetCell">需要移除线的单元格</param>
+        //private void RemoveBorder(IWorkbook hssfworkbook, ISheet sheet_Destination, ICell targetCell)
+        //{
+        //    //为了相同项表格底部没有线                           
+        //    ICellStyle style = hssfworkbook.CreateCellStyle();
+        //    style.BorderTop = BorderStyle.None;
+
+        //    //IRow targetRow = sheet_Destination.GetRow(RowIndex);
+        //    //ICell targetCell = null;
+        //    //每行单元格处理               
+        //    for (int m = targetRow.FirstCellNum; m < targetRow.LastCellNum; m++)
+        //    {
+        //        if (m < 57)
+        //        {
+        //            targetCell = targetRow.GetCell(m);
+        //            targetCell.CellStyle = style;//样式                                  
+        //        }
+        //    }
+        //}
         /// <summary>
         /// 设置页眉页脚
         /// </summary>
