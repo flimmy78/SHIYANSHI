@@ -690,6 +690,7 @@
           <Property Name="PREPARE_SCHEMEID" Type="varchar2" MaxLength="36" />
           <Property Name="REPORTTORECEVESTATE" Type="varchar2" MaxLength="200" />
           <Property Name="RECEIVEREPORT" Type="varchar2" MaxLength="200" />
+          <Property Name="HTMLVALUE" Type="clob" />
         </EntityType>
         <EntityType Name="RULE">
           <Key>
@@ -1394,7 +1395,7 @@
           <Property Name="SHOULIDANWEI" Type="varchar2" MaxLength="200" />
           <Property Name="CHUCHANGRIQI" Type="char" MaxLength="1" />
           <Property Name="QIJUMINGCHENG" Type="varchar2" MaxLength="200" />
-          <Property Name="SHENGCHANCHANGJIA" Type="char" MaxLength="1" />
+          <Property Name="SHENGCHANCHANGJIA" Type="varchar2" MaxLength="200" />
           <Property Name="QIJUXINGHAO" Type="varchar2" MaxLength="200" />
           <Property Name="QIJUGUIGE" Type="varchar2" MaxLength="200" />
           <Property Name="CHUCHANGBIANHAO" Type="varchar2" MaxLength="200" />
@@ -1438,7 +1439,7 @@
           <Property Name="ZHENGSHUDANWEI" Type="varchar2" MaxLength="200" />
           <Property Name="SHOULIDANWEI" Type="varchar2" MaxLength="200" />
           <Property Name="QIJUMINGCHENG" Type="varchar2" MaxLength="200" />
-          <Property Name="SHENGCHANCHANGJIA" Type="char" MaxLength="1" />
+          <Property Name="SHENGCHANCHANGJIA" Type="varchar2" MaxLength="200" />
           <Property Name="QIJUXINGHAO" Type="varchar2" MaxLength="200" />
           <Property Name="QIJUGUIGE" Type="varchar2" MaxLength="200" />
           <Property Name="CHUCHANGBIANHAO" Type="varchar2" MaxLength="200" />
@@ -1709,7 +1710,7 @@
           <Property Name="SHOULIDANWEI" Type="varchar2" MaxLength="200" />
           <Property Name="CHUCHANGRIQI" Type="char" MaxLength="1" />
           <Property Name="QIJUMINGCHENG" Type="varchar2" MaxLength="200" />
-          <Property Name="SHENGCHANCHANGJIA" Type="char" MaxLength="1" />
+          <Property Name="SHENGCHANCHANGJIA" Type="varchar2" MaxLength="200" />
           <Property Name="QIJUXINGHAO" Type="varchar2" MaxLength="200" />
           <Property Name="CHUCHANGBIANHAO" Type="varchar2" MaxLength="200" />
           <Property Name="ZHUNQUEDUDENGJI" Type="varchar2" MaxLength="200" />
@@ -4301,6 +4302,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="REPORTTORECEVESTATE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RECEIVEREPORT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PREPARE_SCHEME" Relationship="Model.FK_REPORTCO_REFERENCE_PREPARE_" FromRole="REPORTCOLLECTION" ToRole="PREPARE_SCHEME" />
+          <Property Name="HTMLVALUE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="RULE">
           <Key>
@@ -6766,6 +6768,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="REPORTCOLLECTION">
             <EntityTypeMapping TypeName="Model.REPORTCOLLECTION">
               <MappingFragment StoreEntitySet="REPORTCOLLECTION">
+                <ScalarProperty Name="HTMLVALUE" ColumnName="HTMLVALUE" />
                 <ScalarProperty Name="RECEIVEREPORT" ColumnName="RECEIVEREPORT" />
                 <ScalarProperty Name="REPORTTORECEVESTATE" ColumnName="REPORTTORECEVESTATE" />
                 <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />

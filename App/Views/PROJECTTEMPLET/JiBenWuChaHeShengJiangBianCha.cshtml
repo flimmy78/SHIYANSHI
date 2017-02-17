@@ -206,8 +206,12 @@
                 MGData = parseFloat(MGData);
                 T1Data = parseFloat(T1Data);
                 T6Data = DanWeiHuanSuan(lastUnit, T6Data_UNIT, T6Data);
+                var jian1 = accDiv(T3Data, MGData);
+                var jian2 = accMul(jian1, T1Data);
+                var jian3 = accSub(jian2, T6Data);
+                var jian4 = accDiv(jian3, T1Data);
                 
-                var jianfa =accMul(accDiv(accSub(accDiv(T3Data,accMul(MGData,T1Data)),T6Data),T1Data),100);
+                var jianfa = accMul(jian4,100);      //accMul(accDiv(accSub(accDiv(T3Data,accMul(MGData,T1Data)),T6Data),T1Data),100);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T7).val(data);
             }
