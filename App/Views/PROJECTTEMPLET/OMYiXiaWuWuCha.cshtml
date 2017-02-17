@@ -194,7 +194,7 @@
                     }
 
                 }
-                 this.wucha(obj);
+                // this.wucha(obj);
             }, jiandingdianliu: function (obj) {
                 //【被测电阻-标称值（Ω）】对【检定电流】是：0.0001对5,0.001对5,0.01对2,0.1对0.3，
                 //1对0.1位,10对0.03,100对0.01,1000对0.003，10000对应0.0001,100000对应0.0001
@@ -212,7 +212,7 @@
                 var zhengxiangceliang = $(tr).children().eq(6).find('input').val();
                 var fanxiangceliang = $(tr).children().eq(7).find('input').val();
                 if (zhengxiangceliang != "" && fanxiangceliang != "") {
-                    $(tr).children().eq(6).find('input').val(fomatFloat(accDiv(accAdd(parseFloat(zhengxiangceliang), parseFloat(fanxiangceliang)), 2), 0));
+                    $(tr).children().eq(8).find('input').val(fomatFloat(accDiv(accAdd(parseFloat(zhengxiangceliang), parseFloat(fanxiangceliang)), 2), 0));
                     this.shijizhi(obj);
                 }
             }, getjiandingdianliu: function (value) {
