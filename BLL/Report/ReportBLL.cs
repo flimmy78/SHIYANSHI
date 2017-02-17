@@ -1791,6 +1791,10 @@ namespace Langben.Report
                                     CopyRow_1(sheet_Source, sheet_Destination, 3, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 4, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+
+                                    HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUA);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
+
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(buQueDingDu.txtBuQueDingA);
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 5, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
@@ -1861,6 +1865,10 @@ namespace Langben.Report
                                     CopyRow_1(sheet_Source, sheet_Destination, 9, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 10, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+
+                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUB);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
+
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(buQueDingDu.txtBuQueDingB);
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 11, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
@@ -1881,7 +1889,7 @@ namespace Langben.Report
                                                     {
                                                         d.value = "/";
                                                     }
-                                                    HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, d.value);
+                                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, d.value);
 
                                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue(value);
                                                     buQueDingDu.buDueDingDuB.Remove(d);
@@ -1899,6 +1907,10 @@ namespace Langben.Report
                                     CopyRow_1(sheet_Source, sheet_Destination, 14, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 15, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+
+                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUC);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
+
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(buQueDingDu.txtBuQueDingC);
                                     rowIndex_Destination++;
                                     #endregion
@@ -1910,6 +1922,10 @@ namespace Langben.Report
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(20).SetCellValue(buQueDingDu.ddlSelectD);
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 18, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+
+                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUrel);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
+
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(buQueDingDu.txtvalueD);
                                     rowIndex_Destination++;
                                     #endregion

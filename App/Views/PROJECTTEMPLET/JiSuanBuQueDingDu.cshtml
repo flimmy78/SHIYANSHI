@@ -109,7 +109,11 @@ else
         </div>
         <div class="mt10" id="tongdao">
             <div>
-                <i>U</i><small>A</small> =
+                @*<i>U</i><small>A</small>*@
+                <select tag='only' class="my-combobox" name="ddlUA" id="ddlUA">
+                    <option value="uA">uA</option>
+                    <option value="uArel">uArel</option>
+                </select> =
                 <input tag="only" class="my-textbox " value="0" style="width:200px" name="" id="txtBuQueDingA">
                 <input tag="only" class="my-textbox " value="" style="width:100px" name="" id="txtValue" onblur="biaozhunpiancha()">
             </div>
@@ -150,7 +154,11 @@ else
         </div>
         <div class="mt10">
             <div>
-                <i>U</i><small>B</small> =
+                @*<i>U</i><small>B</small>*@
+                <select tag='only' class="my-combobox" name="ddlUB" id="ddlUB">
+                    <option value="uB">uB</option>
+                    <option value="uBrel">uBrel</option>
+                </select>  =
                 <input tag="only" class="my-textbox " value="" style="width:200px" name="" id="txtBuQueDingB">
                 <input tag="only" class="my-textbox " value="" style="width:100px" name="" id="txtValueB" onblur="calculateB()">
             </div>
@@ -208,7 +216,11 @@ else
             <h2 class="f14 mt10 "> （3）合成不确定度评定 </h2>
             <div class="mt10">
                 <div>
-                    <i>U</i><small>c</small> =
+                    @*<i>U</i><small>c</small>*@
+                    <select tag='only' class="my-combobox" name="ddlUC" id="ddlUC">
+                        <option value="uC">uC</option>
+                        <option value="uCrel">uCrel</option>
+                    </select> =
                     <input tag="only" class="my-textbox " value="" style="width:300px" id="txtBuQueDingC" onclick="calculateB()">
                 </div>
             </div>
@@ -226,7 +238,12 @@ else
             )
             <div class="mt10">
                 <div>
-                    <i>U</i><small>rel</small> =
+                    @*<i>U</i><small>rel</small>*@
+                    <select tag='only' class="my-combobox" name="ddlUrel" id="ddlUrel">
+                        <option value="U">U</option>
+                        <option value="Urel">Urel</option>                        
+                    </select>
+                     =
                     <input tag="only" class="my-textbox " value="" style="width:300px" id="txtvalueD">
                 </div>
             </div>
