@@ -597,6 +597,8 @@
     <Content Include="Scripts\shine.js" />
     <Content Include="Template\原始记录-校准.xls" />
     <Content Include="Template\校准证书-CNAS.xls" />
+    <Content Include="Xml\TableTemlate_dianneng0217.xml" />
+    <Content Include="Xml\TableTemplate_zhishiyibiao0215.xml" />
     <Content Include="Xml\TableTemplate单相.xml" />
     <Content Include="Xml\TableTemplate.xml" />
     <Content Include="Xml\TableTemplate1.xml" />
