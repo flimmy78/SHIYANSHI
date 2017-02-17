@@ -268,6 +268,11 @@ namespace Langben.Report
         {
             string xlsPath = fEntity.FULLPATH;
 
+            if (!System.IO.File.Exists(xlsPath))
+            {
+                return;
+            }
+
             FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.ReadWrite);
             IWorkbook hssfworkbook = new HSSFWorkbook(file);
 
@@ -432,7 +437,7 @@ namespace Langben.Report
 
         }
         /// <summary>
-        /// 原始记录添加签名（只是更新相关人员名字，并不需要图片签名）
+        /// 原始记录添加签名（只是更新相关人员名字，并不需要图片签名），改为需要图片签名
         /// </summary>
         /// <param name="entity">预备方案对象</param>
         /// <param name="hssfworkbook">exel</param>
@@ -442,18 +447,60 @@ namespace Langben.Report
         {
             string xlsPath = fEntity.FULLPATH2;
 
-            FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.ReadWrite);
+            if (!System.IO.File.Exists(xlsPath))
+            {
+                return;
+            }
+                FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.ReadWrite);
             IWorkbook hssfworkbook = new HSSFWorkbook(file);
 
             string sheetName_Destination = "封皮";
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
 
             #region 检定员/校准员
+            string picPath = "";
+            byte[] bytes = null;
             if (fEntity.Row_JianDingYuan_YuanShiJiLu != -1 && fEntity.Col_JianDingYuan_YuanShiJiLu != -1)
             {
                 if (!string.IsNullOrWhiteSpace(entity.CREATEPERSON))
                 {
-                    if (picList != null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].MyName))
+                    //if (picList != null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].MyName))
+                    //{
+                    //    sheet_Destination.GetRow(fEntity.Row_JianDingYuan_YuanShiJiLu).GetCell(fEntity.Col_JianDingYuan_YuanShiJiLu).SetCellValue(picList[entity.CREATEPERSON].MyName);
+                    //}
+                    //else
+                    //{
+                    //    sheet_Destination.GetRow(fEntity.Row_JianDingYuan_YuanShiJiLu).GetCell(fEntity.Col_JianDingYuan_YuanShiJiLu).SetCellValue(entity.CREATEPERSON);
+                    //}
+
+
+                    if (picList != null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].HDpic))
+                    {
+                        picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.CREATEPERSON].HDpic);
+                        if (System.IO.File.Exists(picPath))
+                        {
+                            bytes = System.IO.File.ReadAllBytes(picPath);
+                            int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
+                            IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
+                            IClientAnchor anchor = new HSSFClientAnchor(50, 50, 200, 200, fEntity.Col_JianDingYuan_YuanShiJiLu, fEntity.Row_JianDingYuan_YuanShiJiLu, fEntity.Col_JianDingYuan_YuanShiJiLu + 7, fEntity.Row_JianDingYuan_YuanShiJiLu);
+                            IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
+                            //pict.Resize();
+                            sheet_Destination.GetRow(fEntity.Row_JianDingYuan_YuanShiJiLu).GetCell(fEntity.Col_JianDingYuan_YuanShiJiLu).SetCellValue("");
+                        }
+                        else
+                        {
+                            if (!string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].MyName))
+                            {
+                                sheet_Destination.GetRow(fEntity.Row_JianDingYuan_YuanShiJiLu).GetCell(fEntity.Col_JianDingYuan_YuanShiJiLu).SetCellValue(picList[entity.CREATEPERSON].MyName);
+                            }
+                            else
+                            {
+                                sheet_Destination.GetRow(fEntity.Row_JianDingYuan_YuanShiJiLu).GetCell(fEntity.Col_JianDingYuan_YuanShiJiLu).SetCellValue(entity.CREATEPERSON);
+                            }
+                        }
+
+                    }
+                    else if (picList != null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].MyName))
                     {
                         sheet_Destination.GetRow(fEntity.Row_JianDingYuan_YuanShiJiLu).GetCell(fEntity.Col_JianDingYuan_YuanShiJiLu).SetCellValue(picList[entity.CREATEPERSON].MyName);
                     }
@@ -475,7 +522,41 @@ namespace Langben.Report
             {
                 if (!string.IsNullOrWhiteSpace(entity.AUDITTEPERSON))
                 {
-                    if (picList != null && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].MyName))
+                    //if (picList != null && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].MyName))
+                    //{
+                    //    sheet_Destination.GetRow(fEntity.Row_HeYanYuan_YuanShiJiLu).GetCell(fEntity.Col_HeYanYuan_YuanShiJiLu).SetCellValue(picList[entity.AUDITTEPERSON].MyName);
+                    //}
+                    //else
+                    //{
+                    //    sheet_Destination.GetRow(fEntity.Row_HeYanYuan_YuanShiJiLu).GetCell(fEntity.Col_HeYanYuan_YuanShiJiLu).SetCellValue(entity.AUDITTEPERSON);
+                    //}
+                    if (picList != null && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].HDpic))
+                    {
+                        picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.AUDITTEPERSON].HDpic);
+                        if (System.IO.File.Exists(picPath))
+                        {
+                            bytes = System.IO.File.ReadAllBytes(picPath);
+                            int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
+                            IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
+                            IClientAnchor anchor = new HSSFClientAnchor(50, 50, 200, 200, fEntity.Col_HeYanYuan_YuanShiJiLu, fEntity.Row_HeYanYuan_YuanShiJiLu, fEntity.Col_HeYanYuan_YuanShiJiLu + 7, fEntity.Row_HeYanYuan_YuanShiJiLu);
+                            IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
+                            //pict.Resize();
+                            sheet_Destination.GetRow(fEntity.Row_HeYanYuan_YuanShiJiLu).GetCell(fEntity.Col_HeYanYuan_YuanShiJiLu).SetCellValue("");
+                        }
+                        else
+                        {
+                            if (!string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].MyName))
+                            {
+                                sheet_Destination.GetRow(fEntity.Row_HeYanYuan_YuanShiJiLu).GetCell(fEntity.Col_HeYanYuan_YuanShiJiLu).SetCellValue(picList[entity.AUDITTEPERSON].MyName);
+                            }
+                            else
+                            {
+                                sheet_Destination.GetRow(fEntity.Row_HeYanYuan_YuanShiJiLu).GetCell(fEntity.Col_HeYanYuan_YuanShiJiLu).SetCellValue(entity.AUDITTEPERSON);
+                            }
+                        }
+
+                    }
+                    else if (picList != null && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].MyName))
                     {
                         sheet_Destination.GetRow(fEntity.Row_HeYanYuan_YuanShiJiLu).GetCell(fEntity.Col_HeYanYuan_YuanShiJiLu).SetCellValue(picList[entity.AUDITTEPERSON].MyName);
                     }
@@ -1710,6 +1791,10 @@ namespace Langben.Report
                                     CopyRow_1(sheet_Source, sheet_Destination, 3, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 4, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+
+                                    HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUA);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
+
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(buQueDingDu.txtBuQueDingA);
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 5, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
@@ -1780,6 +1865,10 @@ namespace Langben.Report
                                     CopyRow_1(sheet_Source, sheet_Destination, 9, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 10, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+
+                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUB);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
+
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(buQueDingDu.txtBuQueDingB);
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 11, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
@@ -1800,7 +1889,7 @@ namespace Langben.Report
                                                     {
                                                         d.value = "/";
                                                     }
-                                                    HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, d.value);
+                                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, d.value);
 
                                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue(value);
                                                     buQueDingDu.buDueDingDuB.Remove(d);
@@ -1818,6 +1907,10 @@ namespace Langben.Report
                                     CopyRow_1(sheet_Source, sheet_Destination, 14, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 15, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+
+                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUC);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
+
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(buQueDingDu.txtBuQueDingC);
                                     rowIndex_Destination++;
                                     #endregion
@@ -1829,6 +1922,10 @@ namespace Langben.Report
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(20).SetCellValue(buQueDingDu.ddlSelectD);
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 18, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+
+                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUrel);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
+
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(buQueDingDu.txtvalueD);
                                     rowIndex_Destination++;
                                     #endregion

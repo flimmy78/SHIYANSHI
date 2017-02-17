@@ -109,6 +109,22 @@ namespace Langben.Report
                         {
                             buDueDingDu.ddlSelectD = node;
                         }
+                        else if (b.Attributes["id"].Value == "ddlUA")
+                        {
+                            buDueDingDu.ddlUA = node;
+                        }
+                        else if (b.Attributes["id"].Value == "ddlUB")
+                        {
+                            buDueDingDu.ddlUB = node;
+                        }
+                        else if (b.Attributes["id"].Value == "ddlUC")
+                        {
+                            buDueDingDu.ddlUC = node;
+                        }
+                        else if (b.Attributes["id"].Value == "ddlUrel")
+                        {
+                            buDueDingDu.ddlUrel = node;
+                        }
 
                     }
                 }
@@ -178,9 +194,6 @@ namespace Langben.Report
                     {
                         buDueDingDu.txtValueB = item.Attributes["value"].Value;
                     }
-
-
-
 
                     else if (item.Attributes["id"].Value == "txtBuQueDingC")
                     {
