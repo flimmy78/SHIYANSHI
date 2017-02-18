@@ -8,8 +8,8 @@
 <thead>
     <!--表头-->
     <tr>
-        <th colspan="2" width="80" align="center">量程</th>
-        <th colspan="2" width="100" align="center">
+        <th  width="80" align="center">量程</th>
+        <th  width="160" align="center">
             测量盘<br>
             (
             <select class="my-combobox" name="celiangpan" id="celiangpan_t_1_1" onchange="changeValue(this)">
@@ -55,7 +55,7 @@
             )
         </th>
         <th width="110" align="center">误差</th>
-        <th align="center" colspan="2">允许误差</th>
+        <th align="center" >允许误差</th>
     </tr>
 
 </thead>
@@ -80,10 +80,11 @@
         //thi 当前位置
         function set(tbodyIndex, thi) {
 
-
+           
 
              $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
-            $("#hideDangQianTongDao").val(tbodyIndex); CreateRow();
+            $("#hideDangQianTongDao").val(tbodyIndex); 
+           //  CreateRow();
 
         }
         //增加行
@@ -116,12 +117,12 @@
                 //需要合并的列
 
                 //量程
-                htmlString.push("<td align='center' >X</td>");
+               
                 htmlString.push(SetTDHtml(rowspan, "RANGE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurValue1', 'ShuZi'));
-                htmlString.push("<td align='center' >X</td>");
+               
                 htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "", '', 'blurValue1', 'ShuZi'));
                 //二次输入标准值
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurValue1'));
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100", '点', 'blurValue1'));
                 //标准输出值
                 htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurValue'));
                 //实际输出值
@@ -130,7 +131,7 @@
                 htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, txtVal, "classstyle100"));
                 var id="select_"+HangHaoID;
                 //校准结果的不确定度 U(K =
-                htmlString.push("<td align='center' >±</td>");
+                //htmlString.push("<td align='center' >±</td>");
                 htmlString.push("<td align='center' ><select class=\"my-combobox\" name=\"select\" id='" + id + "'>  <option value=\"2\">2</option><option value=\"0.5\">0.5</option><option value=\"0.2\">0.2</option><option value=\"0.1\">0.1</option></select></td>");
                 htmlString.push("</tr>");
             }
@@ -138,7 +139,15 @@
 
             var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
-            //$('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
+           
+            //增加±
+            $('.ttt').remove();
+            $('select[id*="select_"]').before('<span class="ttt">±</span>');
+            $('select[id*="RANGE_"]').before('<span class="ttt">×</span>');
+            $('select[id*="OUTPUTVALUE_"]:even').before('<span class="ttt">×</span>');
+            $('input[id*="READVALUE_"]').before('<span class="ttt">第</span>');
+
+            $('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
     
@@ -165,7 +174,7 @@
 @section TanKuang {
     <!--弹框的位置-->
     <!--增加量程弹层-->
-    <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+    <div id="dlg" class="easyui-dialog" title="设置检测点"closed="true" data-options="buttons: [{
 					text:'确定',
 					iconCls:'icon-ok',
 					handler:function(){

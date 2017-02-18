@@ -68,7 +68,8 @@
 
 
             $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
-            $("#hideDangQianTongDao").val(tbodyIndex); CreateRow();
+            $("#hideDangQianTongDao").val(tbodyIndex);
+            //CreateRow();
 
         }
         //增加行
@@ -104,9 +105,10 @@
                 htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, (rowLength).toString(), "classstyle120", ""));
                 var yanShiPanId = "YanShiPan" + HangHaoID;
                 var yanShiPanId2 = "YanShiPan2" + HangHaoID;
-                var strTd = "<input name=\"YanShiPan\" id='" + yanShiPanId + "' type=\"text\" class=\"my-textbox\" value=\"\" style=\"width:50px\"  />" +
+                var strTd = "<input name=\"YanShiPan\" id='" + yanShiPanId + "' type=\"text\" class=\"my-textbox\" value=\"\" style=\"width:50px\"  onblur='blurValue1(this)' />" +
                             "<select class=\"my-combobox\" name=\"state_1_\" id=\state_UNIT_1_\">" +
-                                "<option value=\"plus\" selected>+</option>" +
+                            "<option value=\"\" > </option>" +
+                                "<option value=\"plus\" >+</option>" +
                             "</select> <input name=\"YanShiPan\" id='" + yanShiPanId2 + "' type=\"text\" class=\"my-textbox\" value=\"\" style=\"width:50px\" onblur=\"blurValue1(this)\" />"
                 //二次输入标准值
                 htmlString.push("<td align='center' >" + strTd + "</td>");
@@ -119,14 +121,14 @@
                 var id = "select_" + HangHaoID;
                 //校准结果的不确定度 U(K =
                 // htmlString.push("<td align='center' >±</td>");
-                htmlString.push("<td align='center' >±<select class=\"my-combobox\" name=\"select\" id='" + id + "'>  <option value=\"2\">2</option><option value=\"1\">1</option><option value=\"0.5\">0.5</option><option value=\"0.2\">0.2</option><option value=\"0.1\">0.1</option></select></td>");
+                htmlString.push("<td align='center' >±<select class=\"my-combobox\" name=\"select\" id='" + id + "'>  <option value=\"\"> </option><option value=\"2\">2</option><option value=\"1\">1</option><option value=\"0.5\">0.5</option><option value=\"0.2\">0.2</option><option value=\"0.1\">0.1</option></select></td>");
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
 
             var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
-            //$('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
+            $('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
 
@@ -139,10 +141,10 @@
                 //测量盘
                 var celiangpan = parseFloat($(this).children().eq(1).find('input').eq(0).val() == "" ? 0 : $(this).children().eq(1).find('input').eq(0).val()) + parseFloat($(this).children().eq(1).find('input').eq(1).val() == "" ? 0 : $(this).children().eq(1).find('input').eq(1).val());
                 //获取量程
-                var liangcheng = $("#ddlliangCheng").val();
+                var liangcheng = $("#state1_1_1_1").val();
                 //计算第一个误差
                 if (celiangpan != "" && liangcheng != "") {
-                    $(this).children().eq(2).find('input').val(fomatFloat(parseFloat(celiangpan) * parseFloat(liangcheng), 5))
+                    $(this).children().eq(2).find('input').val(parseFloat(fomatFloat(parseFloat(celiangpan) * parseFloat(liangcheng), 5)).toFixed(5))
                 }
 
             });

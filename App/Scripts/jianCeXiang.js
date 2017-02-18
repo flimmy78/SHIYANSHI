@@ -1465,6 +1465,13 @@ function yinYongWuCha(obj, first, second, third, fourth, fifth, gold) {
 //计算值的控件名称
 function erDengBiaoChenZhi(obj, targetControlName) {
     var biaochenzhi = $(obj).val();
+    //重新计算当前行
+    var name = $(obj).attr("name");
+    var id = $(obj).attr("id");
+    id = id.substring(id.indexOf('_'));
+    var tongdao = id.split('_')[1];
+    var rowidx = id.split('_')[3];
+    targetControlName = targetControlName + "_" + tongdao + "_1_" + rowidx;
     if ((biaochenzhi == '10000' || biaochenzhi == '100000') && biaochenzhi != "") {
         $(obj).parent().parent().find("#" + targetControlName).val(biaochenzhi);
     }
@@ -1533,7 +1540,7 @@ function wuCha1(obj, shiji, biaochen, target, point) {
 
     var length = yuxunwucha.split(".").length == 2 ? yuxunwucha.split(".")[1].length : 0
     if (biaochenValue != "" && shiJiValue != "")
-        var wucha2 = fomatFloat(parseFloat((parseFloat(shiJiValue) - parseFloat(biaochenValue)) / parseFloat(biaochenValue) * 100), (length + 1))
+        var wucha2 = parseFloat(fomatFloat(parseFloat((parseFloat(shiJiValue) - parseFloat(biaochenValue)) / parseFloat(biaochenValue) * 100), (length + 1))).toFixed((length + 1));
     $(obj).parent().parent().find("#" + targetName).val(wucha2);
 
 }
@@ -1549,7 +1556,7 @@ function BiaoChenZhi1(obj, liangCheng, ceLiangPan, ceLiangDian, target, point) {
     var rowidx = id.split('_')[3];
 
     var liangChengName = liangCheng + "_" + tongdao + "_1" + "_" + rowidx;
-    var ceLiangPanName = ceLiangDian + "_" + tongdao + "_1" + "_" + rowidx;
+    var ceLiangPanName = ceLiangPan + "_" + tongdao + "_1" + "_" + rowidx;
     var targetName = target + "_" + tongdao + "_1" + "_" + rowidx;
     var pointName = point + "_" + tongdao + "_1" + "_" + rowidx;
     var ceLiangDianName = ceLiangDian + "_" + tongdao + "_1" + "_" + rowidx;
