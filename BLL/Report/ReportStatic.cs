@@ -413,7 +413,7 @@ namespace Langben.Report
             #region 166-1993_3_1
             item.RuleID = "166-1993_3_1";
             item.RuleName = "1000Ω以下 - 无误差 - 有型号编号";
-            item.Remark = "注：δn为标准电阻的相对修正值。</br>　　δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。</br>　　δx =（δx1+δx2）/2".Replace(" </br>", Environment.NewLine);
+            item.Remark = "注：δn为标准电阻的相对修正值。</br>　　δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。</br>　　δx =（δx1+δx2）/2".Replace("</br>", Environment.NewLine);
             //item.ImgUrl = "/Images/73_74.png";
             result.Add(item);
             #endregion
@@ -491,9 +491,12 @@ namespace Langben.Report
         /// 获取特殊字符索引位置信息
         /// </summary>
         /// <param name="RuleID">检测项ID</param>
+        /// <param name="RemarkStr">备注</param>
         /// <returns></returns>
-        public static List<SpecialCharacter_Index> GetSpecialCharacter_Indexs(string RuleID)
+        public static List<SpecialCharacter_Index> GetSpecialCharacter_Indexs(string RuleID,out string RemarkStr)
         {
+            //RuleID = "166-1993_3_1";//测试
+            RemarkStr = string.Empty;
             Dictionary<string, List<SpecialCharacter>> RemarkSpecialCharacterDic = RemarkSpecialCharacter();
             List<Remark_Rules> RemarkRulesList = RemarkRules();
             if (string.IsNullOrWhiteSpace(RuleID) || (RemarkSpecialCharacterDic == null || !RemarkSpecialCharacterDic.ContainsKey(RuleID) || RemarkSpecialCharacterDic[RuleID] == null || RemarkSpecialCharacterDic[RuleID].Count == 0)
@@ -504,7 +507,10 @@ namespace Langben.Report
 
             List<SpecialCharacter> Speciallist = RemarkSpecialCharacterDic[RuleID];
             Remark_Rules Remark = RemarkRulesList.FirstOrDefault(p => p.RuleID == RuleID);
-
+            if(Remark!=null)
+            {
+                RemarkStr = Remark.Remark;
+            }
             List<SpecialCharacter_Index> result = new List<SpecialCharacter_Index>();
             SpecialCharacter_Index item = new SpecialCharacter_Index();
             foreach (SpecialCharacter s in Speciallist)
@@ -514,7 +520,7 @@ namespace Langben.Report
                 while (index != -1 && index < Remark.Remark.Length - 1 - length)
                 {
                     index = Remark.Remark.IndexOf(s.Code, index == -2 ? 0 : index + length);
-                    if (index >= 0 && result == null || result.FirstOrDefault(p => p.StartIndex == index) == null)
+                    if (index >= 0 && (result == null || result.FirstOrDefault(p => p.StartIndex == index) == null))
                     {
                         item = new SpecialCharacter_Index();
                         item.Code = s.Code;
@@ -522,6 +528,10 @@ namespace Langben.Report
                         item.SubCount = s.SubscriptLastCount;
                         result.Add(item);
                         length = s.Code.Length;
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
 

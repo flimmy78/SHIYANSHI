@@ -3746,9 +3746,9 @@ namespace Langben.Report
         /// <param name="workbook">工作文件</param>
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <param name="value">特殊字符</param>
-        /// <param name="ruleID">备注检测项ID,非备注不用传</param>
+        /// <param name="remarkIndexList">备注特殊字符索引信息,非备注不用传</param>
         /// <returns></returns>
-        private HSSFRichTextString SetSub(HSSFWorkbook workbook = null, SpecialCharacters allSpecialCharacters = null, string value = "",string ruleID=null)
+        private HSSFRichTextString SetSub(HSSFWorkbook workbook = null, SpecialCharacters allSpecialCharacters = null, string value = "", List<SpecialCharacter_Index> remarkIndexList=null)
         {
             if (value == null)
             {
@@ -3757,7 +3757,51 @@ namespace Langben.Report
             HSSFRichTextString result = new HSSFRichTextString(value.Trim());
             if (workbook != null && value != null && value.Trim() != "")
             {
+                #region 处理备注特殊信息
+                if(remarkIndexList!=null && remarkIndexList.Count>0)
+                {
+                    foreach(SpecialCharacter_Index remark in remarkIndexList)
+                    {
+                        #region 将字符设置成斜体
 
+                        HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                        normalFont.IsItalic = true;
+                        normalFont.FontName = "宋体";
+                        int startIndex = remark.StartIndex;
+                        int endIndex = remark.StartIndex + remark.Code.Trim().Length;                     
+                        result.ApplyFont(startIndex, endIndex, normalFont);
+                        #endregion
+
+                        #region 设置下标
+                        if (remark.SubCount > 0)
+                        {
+                            //result = new HSSFRichTextString(value);
+                            // superscript = (HSSFFont)workbook.CreateFont();
+                            //superscript.TypeOffset = FontSuperScript.Super;//上标
+                            //superscript.Color = HSSFColor.RED.index;
+
+                            HSSFFont subscript = (HSSFFont)workbook.CreateFont();
+                            subscript.TypeOffset = FontSuperScript.Sub; //下标  
+                            //subscript.IsItalic = true;
+                            subscript.FontName = "宋体";
+                            //subscript.Color = HSSFColor.Red.Index;
+                            //HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                            startIndex = startIndex + remark.Code.Trim().Length - remark.SubCount;
+                            if (startIndex < 0)
+                            {
+                                startIndex = 0;
+                            }
+                            //endIndex = remark.Code.Trim().Length;
+                            //if (endIndex < 0)
+                            //{
+                            //    endIndex = 0;
+                            //}
+                            result.ApplyFont(startIndex, endIndex, subscript);
+                        }
+                        #endregion
+                    }
+                }
+                #endregion 
                 if (value.IndexOf("|,") >= 0)
                 {
                     value = value.Replace(",", Environment.NewLine);
@@ -4260,9 +4304,21 @@ namespace Langben.Report
             rowIndex_Destination++;
 
             //表格注
-            if (iEntity.REMARK != null && iEntity.REMARK.Trim() != "")
+            string RemarkStr = string.Empty;
+            List<SpecialCharacter_Index> sIndexList = ReportStatic.GetSpecialCharacter_Indexs(iEntity.RULEID, out RemarkStr);
+            if (!string.IsNullOrWhiteSpace(RemarkStr))
             {
                 CopyRow(sheet_Source, sheet_Destination, temp.RemarkRowIndex, rowIndex_Destination, 1, true);
+
+                HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, RemarkStr,sIndexList);
+                sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).CellStyle.WrapText = true;//自动换行
+                sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
+                rowIndex_Destination++;
+            }
+            else if (iEntity.REMARK != null && iEntity.REMARK.Trim() != "")
+            {
+                CopyRow(sheet_Source, sheet_Destination, temp.RemarkRowIndex, rowIndex_Destination, 1, true);
+                
                 sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue("注：" + iEntity.REMARK);
                 rowIndex_Destination++;
             }
