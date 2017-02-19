@@ -2584,10 +2584,10 @@ namespace Langben.Report
                         {
                             celStr = celStr + msg;
                         }
-                        else
-                        {
-                            celStr = celStr + "/";
-                        }                       
+                        //else
+                        //{
+                        //    celStr = celStr + "/";
+                        //}                       
 
                     }
                     else if (iEntity == null)
@@ -2846,7 +2846,7 @@ namespace Langben.Report
                                     dData.OUTPUTVALUE_UNIT = "";
                                 }
                                 //相线及测量模式
-                                SHuaZhengData dRANGE = pList.LastOrDefault(p => p.name == "RANGE" && p.index <= ddItem.index);
+                                SHuaZhengData dRANGE = dList.LastOrDefault(p => p.name == "RANGE" && p.index <= ddItem.index);
                                 if (dRANGE != null)
                                 {
                                     dData.RANGE = dRANGE.values;

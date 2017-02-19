@@ -375,7 +375,8 @@ namespace Langben.Report
             result.Add("P", list);
             #endregion
 
-            #region 电能标准偏差估计值         
+            #region 电能标准偏差估计值   
+            list = new List<string>();      
             list.Add("READVALUE");//功率因素
             list.Add("OUTPUTVAL1_UNIT");//量程Ib单位
             list.Add("OUTPUTVAL1");//量程Ib值
