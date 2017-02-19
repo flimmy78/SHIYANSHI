@@ -4199,6 +4199,10 @@ namespace Langben.Report
 
                         foreach (MYData d in dataDic[tongDaoID].Data)
                         {
+                            if(cellAddressList==null || cellAddressList.Count==0)
+                            {
+                                break;
+                            }
                             if (temp.Cells.Count(p => p.Code == d.name) > 0)//配置中存在说明需要打印
                             {
                                 //如果模板中有数据表示固定数据，否则是动态数据，固定数据跳过
