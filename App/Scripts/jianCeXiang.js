@@ -998,7 +998,7 @@ function Save_ShuJuLuRu() {
         REMARK = $("#REMARK").val();//备注 
     }
 
-    var HTMLVALUE = encodeURI($("#divHtml").html());
+    var HTMLVALUE = encodeURI($("#divHtml").html()).replace(/\+/g, '%2B');;
 
     //获取空对象用于保存添加的信息
     $.ajax({
@@ -1042,7 +1042,7 @@ function Save_FangAn() {
     var OldID = $("#hideID").val();
     var RULEID = $("#hideRULEID").val();
     var SCHEMEID = $("#hideSCHEMEID").val();
-    var HTMLVALUE = encodeURI($("#divHtml").html());
+    var HTMLVALUE = encodeURI($("#divHtml").html()).replace(/\+/g,'%2B');;
 
 
     //获取空对象用于保存添加的信息
@@ -1230,14 +1230,21 @@ function kexue(src, pos) {
     }
     src = src.toString().replace("-", "");
     var zero = "";
-    for (var i = 0; i < pos; i++) {
-        zero += "0";
+    if (pos >= 0) {
+        for (var i = 0; i < pos; i++) {
+            zero += "0";
+        }
     }
 
     var p = Math.floor(Math.log(src) / Math.LN10);
     var n = src * Math.pow(10, -p);
-
-    n = numeral(n).format('0.' + zero);
+    if (pos >= 0) {
+        n = numeral(n).format('0.' + zero);
+    }
+    else
+    {
+        n = numeral(n).value();
+    }
     var str = '*10'
     if (p >= 0) {
         str += "+";

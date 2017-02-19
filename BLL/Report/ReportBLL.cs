@@ -1795,7 +1795,9 @@ namespace Langben.Report
                                     HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUA);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
 
-                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(buQueDingDu.txtBuQueDingA);
+                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.txtBuQueDingA);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(value);
+
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 5, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
                                     rowIndex_Destination++;
@@ -1869,7 +1871,8 @@ namespace Langben.Report
                                     value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUB);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
 
-                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(buQueDingDu.txtBuQueDingB);
+                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.txtBuQueDingB);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(value);
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 11, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
                                     rowIndex_Destination++;
@@ -1911,7 +1914,8 @@ namespace Langben.Report
                                     value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUC);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
 
-                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(buQueDingDu.txtBuQueDingC);
+                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.txtBuQueDingC);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(value);
                                     rowIndex_Destination++;
                                     #endregion
 
@@ -1926,7 +1930,8 @@ namespace Langben.Report
                                     value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUrel);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
 
-                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(buQueDingDu.txtvalueD);
+                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.txtvalueD);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(value);
                                     rowIndex_Destination++;
                                     #endregion
 
@@ -1936,7 +1941,15 @@ namespace Langben.Report
                                     CopyRow_1(sheet_Source, sheet_Destination, 20, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 21, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
-                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(11).SetCellValue(buQueDingDu.txtValueE);
+
+                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.txtValueE);
+                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(11).SetCellValue(value);
+
+                                    //sheet_Destination.GetRow(rowIndex_Destination).GetCell(11).CellStyle.DataFormat = HSSFDataFormat.GetBuiltinFormat("0.00E+00");
+                                    //sheet_Destination.GetRow(rowIndex_Destination).GetCell(11).CellStyle.Alignment = HorizontalAlignment.Left;
+                                    
+                                    
+
                                     //rowIndex_Destination++;
                                     #endregion
 
@@ -2546,7 +2559,7 @@ namespace Langben.Report
                         iEntity = null;
                     }
 
-                    bool IsBiaoGe = false;//是否画表格
+                    bool IsBiaoGe = true;//是否画表格
 
                     #region 检测项目标题     
                     //相同检测项只展示一个标题      

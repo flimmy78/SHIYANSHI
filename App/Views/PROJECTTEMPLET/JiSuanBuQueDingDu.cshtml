@@ -9,6 +9,7 @@
     不确定度评定过程
 }
 <script src="~/Scripts/jianCeXiang.js"></script>
+<script src="~/Scripts/numeral.js"></script>
 <!--控件ID-->
 <input type="hidden" id="hideID" value="@ViewBag.ID" />
 <!--检测项目ID-->
@@ -114,6 +115,7 @@ else
                     <option value="uA">uA</option>
                     <option value="uArel">uArel</option>
                 </select> =
+                <input type="hidden" name="hideBuQueDingA" id="hideBuQueDingA" value="0">
                 <input tag="only" class="my-textbox " value="0" style="width:200px" name="" id="txtBuQueDingA">
                 <input tag="only" class="my-textbox " value="" style="width:100px" name="" id="txtValue" onblur="biaozhunpiancha()">
             </div>
@@ -159,6 +161,7 @@ else
                     <option value="uB">uB</option>
                     <option value="uBrel">uBrel</option>
                 </select>  =
+                <input type="hidden" name="hideBuQueDingB" id="hideBuQueDingB" value="">
                 <input tag="only" class="my-textbox " value="" style="width:200px" name="" id="txtBuQueDingB">
                 <input tag="only" class="my-textbox " value="" style="width:100px" name="" id="txtValueB" onblur="calculateB()">
             </div>
@@ -221,6 +224,7 @@ else
                         <option value="uC">uC</option>
                         <option value="uCrel">uCrel</option>
                     </select> =
+                    <input type="hidden" name="hideBuQueDingC" id="hideBuQueDingC" value="">
                     <input tag="only" class="my-textbox " value="" style="width:300px" id="txtBuQueDingC" onclick="calculateB()">
                 </div>
             </div>
@@ -244,6 +248,7 @@ else
                         <option value="Urel">Urel</option>                        
                     </select>
                      =
+                    <input type="hidden"  name="hidevalueD"id="hidevalueD" value="">
                     <input tag="only" class="my-textbox " value="" style="width:300px" id="txtvalueD">
                 </div>
             </div>
@@ -256,6 +261,7 @@ else
             <div class="mt10">
                 <div>
                     扩展不确定度为：
+                    <input type="hidden" name="hideValueE" id="hideValueE" value="">
                     <input tag="only" class="my-textbox " value="" style="width:300px" id="txtValueE">
                 </div>
             </div>
@@ -483,13 +489,29 @@ else
         var data = getData();
         var biaozhun = calculate(data);
         var v = $("#txtValue").val();
-        $("#txtBuQueDingA").val(v == "" ? biaozhun : parseFloat(biaozhun) / parseFloat(v));
-        var reg = /^[0-9]+.?[0-9]*$/;//用来验证数字，包括小数的正则
-        if (!reg.test($("#txtBuQueDingA").val()))
+        //$("#txtBuQueDingA").val(v == "" ? biaozhun : parseFloat(biaozhun) / parseFloat(v));        
+        //var reg = /^[0-9]+.?[0-9]*$/;//用来验证数字，包括小数的正则
+        //if (!reg.test($("#txtBuQueDingA").val()))
+        //{
+        //    $("#txtBuQueDingA").val("0");
+        //}        
+        
+        //改为科学计算法，使用隐藏域    
+        $("#hideBuQueDingA").val(v == "" ? biaozhun : parseFloat(biaozhun) / parseFloat(v));
+        var reg = /^[0-9]+.?[0-9]*$/;//用来验证数字，包括小数的正则       
+        if (!reg.test($("#hideBuQueDingA").val()))
         {
-            $("#txtBuQueDingA").val("0");
+            $("#hideBuQueDingA").val("0");
         }
-       
+        if ($("#hideBuQueDingA").val() != "" && $("#hideBuQueDingA").val()!="0") {
+            var BuQueDingA = kexue($("#hideBuQueDingA").val(), -1);//科学计算法
+            $("#txtBuQueDingA").val(BuQueDingA);
+        }
+        else
+        {
+            $("#txtBuQueDingA").val("");
+        }
+
         calculateC();
 
     }
@@ -525,37 +547,102 @@ else
         var mean = Math.sqrt(total);
         mean = Math.round(mean * 1000000) / 1000000;
         var v = $("#txtValueB").val();
-        $("#txtBuQueDingB").val(v == "" ? mean : parseFloat(mean) / parseFloat(v));
+        //$("#txtBuQueDingB").val(v == "" ? mean : parseFloat(mean) / parseFloat(v));
+        //var reg = /^[0-9]+.?[0-9]*$/;//用来验证数字，包括小数的正则
+        //if (!reg.test($("#txtBuQueDingB").val())) {
+        //    $("#txtBuQueDingB").val("");
+        //}
+
+        //改为科学计算法，使用隐藏域    
+        $("#hideBuQueDingB").val(v == "" ? mean : parseFloat(mean) / parseFloat(v));
         var reg = /^[0-9]+.?[0-9]*$/;//用来验证数字，包括小数的正则
-        if (!reg.test($("#txtBuQueDingB").val())) {
+        if (!reg.test($("#hideBuQueDingB").val())) {
+            $("#hideBuQueDingB").val("");
+        }
+        if ($("#hideBuQueDingB").val() != "" && $("#hideBuQueDingB").val()!="0") {
+            var BuQueDingB = kexue($("#hideBuQueDingB").val(), -1);//科学计算法
+            $("#txtBuQueDingB").val(BuQueDingB);
+        }
+        else
+        {
             $("#txtBuQueDingB").val("");
         }
+
         calculateC();
     }
     function calculateC() {
-        var valueA = $("#txtBuQueDingA").val();
-        var valueB = $("#txtBuQueDingB").val();
+        //var valueA = $("#txtBuQueDingA").val();
+        //var valueB = $("#txtBuQueDingB").val();
+        //if (valueB == "" || valueA == "") return false;
+        //var valueC = Math.pow(parseFloat(valueA), 2) + Math.pow(parseFloat(valueB), 2);
+        //$("#txtBuQueDingC").val(Math.sqrt(valueC));
+        //var reg = /^[0-9]+.?[0-9]*$/;//用来验证数字，包括小数的正则
+        //if (!reg.test($("#txtBuQueDingC").val())) {
+        //    $("#txtBuQueDingC").val("");
+        //}
+
+        //改为科学计算法，使用隐藏域    
+        var valueA = $("#hideBuQueDingA").val();
+        var valueB = $("#hideBuQueDingB").val();
         if (valueB == "" || valueA == "") return false;
         var valueC = Math.pow(parseFloat(valueA), 2) + Math.pow(parseFloat(valueB), 2);
-        $("#txtBuQueDingC").val(Math.sqrt(valueC));
+        $("#hideBuQueDingC").val(Math.sqrt(valueC));
         var reg = /^[0-9]+.?[0-9]*$/;//用来验证数字，包括小数的正则
-        if (!reg.test($("#txtBuQueDingC").val())) {
+        if (!reg.test($("#hideBuQueDingC").val())) {
+            $("#hideBuQueDingC").val("");
+        }
+        if ($("#hideBuQueDingC").val() != "" && $("#hideBuQueDingC").val() != "0")
+        {
+            var BuQueDingC = kexue($("#hideBuQueDingC").val(), -1);//科学计算法
+            $("#txtBuQueDingC").val(BuQueDingC);
+        }
+        else
+        {
             $("#txtBuQueDingC").val("");
         }
+        
+
         caculateD();
     }
 
     function caculateD() {
-        var valueC = $("#txtBuQueDingC").val();
+        //var valueC = $("#txtBuQueDingC").val();
+        //var ddlValue = $("#ddlSelectD").val();
+        //$("#txtvalueD,#txtValueE").val(ddlValue == "√3" ? (Math.sqrt(3) * parseFloat(valueC)) : parseFloat(ddlValue) * parseFloat(valueC))
+        //var reg = /^[0-9]+.?[0-9]*$/;//用来验证数字，包括小数的正则
+        //if (!reg.test($("#txtvalueD").val())) {
+        //    $("#txtvalueD").val("");
+        //}
+        //if (!reg.test($("#txtValueE").val())) {
+        //    $("#txtValueE").val("");
+        //}
+
+        //改为科学计算法，使用隐藏域   
+        var valueC = $("#hideBuQueDingC").val();
         var ddlValue = $("#ddlSelectD").val();
-        $("#txtvalueD,#txtValueE").val(ddlValue == "√3" ? (Math.sqrt(3) * parseFloat(valueC)) : parseFloat(ddlValue) * parseFloat(valueC))
+        $("#hidevalueD,#hideValueE").val(ddlValue == "√3" ? (Math.sqrt(3) * parseFloat(valueC)) : parseFloat(ddlValue) * parseFloat(valueC))
         var reg = /^[0-9]+.?[0-9]*$/;//用来验证数字，包括小数的正则
-        if (!reg.test($("#txtvalueD").val())) {
+        if (!reg.test($("#hidevalueD").val())) {
+            $("#hidevalueD").val("");
+        }
+        if ($("#hidevalueD").val() != "" && $("#hidevalueD").val() != "0") {
+            var valueD = kexue($("#hidevalueD").val(), -1);//科学计算法
+            $("#txtvalueD").val(valueD);
+        }
+        else {
             $("#txtvalueD").val("");
         }
-        if (!reg.test($("#txtValueE").val())) {
+        if (!reg.test($("#hideValueE").val())) {
+            $("#hideValueE").val("");
+        }
+        if ($("#hideValueE").val() != "" && $("#hideValueE").val() != "0") {
+            var ValueE = kexue($("#hideValueE").val(), -1);//科学计算法
+            $("#txtValueE").val(ValueE);
+        }
+        else {
             $("#txtValueE").val("");
         }
+
     }
     //由于html无法获取value，重新给outerHTML赋值
     function SetAllControlHtml() {
@@ -563,16 +650,13 @@ else
         $("input").each(function () {
 
             //除了隐藏模板中的输入框，其他所有的输入框
-            if (this.id != "") {
-
+            if (this.id != "") {                
                 if (this.attributes.value != undefined) {
                     this.attributes.value.value = $(this).val();
                 } else {//如果没有写value属性，则加上
                     var value = $(this).val();
                     $(this).attr("value", value);
                 }
-
-
             }
         });
 
@@ -605,7 +689,7 @@ else
         var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();//预备方案ID
         var RULEID = $("#hideRULEID").val();//检测项ID
         var URL = $("#hideURL").val();//不确定计算存储地址
-        var HTMLVALUE = encodeURI($("#divHtml").html());
+        var HTMLVALUE = encodeURI($("#divHtml").html()).replace(/\+/g,'%2B');
 
         //获取空对象用于保存添加的信息
         $.ajax({
@@ -622,7 +706,9 @@ else
 
             success: function (res) {//msg为返回的数据，在这里做数据绑定
                 if (res.Code == 1) {
-                    var ValueE = $("#txtValueE").val();
+                    //var ValueE = $("#txtValueE").val();
+                    //改为科学计算法，使用隐藏域   
+                    var ValueE = $("#hideValueE").val();
                     var returnVale = ValueE + "&" + res.Message;
                     returnParent(returnVale);
                     $.messager.alert('操作提示', "操作成功！", 'info');
