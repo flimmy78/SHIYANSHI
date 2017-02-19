@@ -2587,8 +2587,7 @@ namespace Langben.Report
                         else
                         {
                             celStr = celStr + "/";
-                        }
-                        celStr = celStr + "/";
+                        }                       
 
                     }
                     else if (iEntity == null)
@@ -2797,11 +2796,17 @@ namespace Langben.Report
                               
 
                                 //功率因素
-                                SHuaZhengData dREADVALUE = dList.LastOrDefault(p => p.name == "READVALUE" && p.index < ddItem.index);
-
-                                dData.READVALUE = dREADVALUE.values;
+                                SHuaZhengData dREADVALUE = dList.LastOrDefault(p => p.name == "READVALUE" && p.index <= ddItem.index);
+                                if (dREADVALUE != null)
+                                {
+                                    dData.READVALUE = dREADVALUE.values;
+                                }
+                                else
+                                {
+                                    dData.READVALUE = "";
+                                }
                                 //量程Ib值
-                                SHuaZhengData dOUTPUTVAL1 = dList.LastOrDefault(p => p.name == "OUTPUTVAL1" && p.index < ddItem.index);
+                                SHuaZhengData dOUTPUTVAL1 = dList.LastOrDefault(p => p.name == "OUTPUTVAL1" && p.index <= ddItem.index);
                                 if (dOUTPUTVAL1 != null)
                                 {
                                     dData.OUTPUTVAL1 = dOUTPUTVAL1.values;
@@ -2811,7 +2816,7 @@ namespace Langben.Report
                                     dData.OUTPUTVAL1 = "";
                                 }
                                 //量程Ib单位
-                                SHuaZhengData dOUTPUTVAL1_UNIT = dList.LastOrDefault(p => p.name == "OUTPUTVAL1_UNIT" && p.index < ddItem.index);
+                                SHuaZhengData dOUTPUTVAL1_UNIT = dList.LastOrDefault(p => p.name == "OUTPUTVAL1_UNIT" && p.index <= ddItem.index);
                                 if (dOUTPUTVAL1_UNIT != null)
                                 {
                                     dData.OUTPUTVAL1_UNIT = dOUTPUTVAL1_UNIT.values;
@@ -2821,7 +2826,7 @@ namespace Langben.Report
                                     dData.OUTPUTVAL1_UNIT = "";
                                 }
                                 //量程Un值
-                                SHuaZhengData dOUTPUTVALUE = dList.LastOrDefault(p => p.name == "OUTPUTVALUE" && p.index < ddItem.index);
+                                SHuaZhengData dOUTPUTVALUE = dList.LastOrDefault(p => p.name == "OUTPUTVALUE" && p.index <= ddItem.index);
                                 if (dOUTPUTVALUE != null)
                                 {
                                     dData.OUTPUTVALUE = dOUTPUTVALUE.values;
@@ -2831,7 +2836,7 @@ namespace Langben.Report
                                     dData.OUTPUTVALUE = "";
                                 }
                                 //量程Un单位
-                                SHuaZhengData dOUTPUTVALUE_UNIT = dList.LastOrDefault(p => p.name == "OUTPUTVALUE_UNIT" && p.index < ddItem.index);
+                                SHuaZhengData dOUTPUTVALUE_UNIT = dList.LastOrDefault(p => p.name == "OUTPUTVALUE_UNIT" && p.index <= ddItem.index);
                                 if (dOUTPUTVALUE_UNIT != null)
                                 {
                                     dData.OUTPUTVALUE_UNIT = dOUTPUTVALUE_UNIT.values;
@@ -2841,7 +2846,7 @@ namespace Langben.Report
                                     dData.OUTPUTVALUE_UNIT = "";
                                 }
                                 //相线及测量模式
-                                SHuaZhengData dRANGE = pList.LastOrDefault(p => p.name == "RANGE" && p.index < ddItem.index);
+                                SHuaZhengData dRANGE = pList.LastOrDefault(p => p.name == "RANGE" && p.index <= ddItem.index);
                                 if (dRANGE != null)
                                 {
                                     dData.RANGE = dRANGE.values;
@@ -2851,7 +2856,7 @@ namespace Langben.Report
                                     dData.RANGE = "";
                                 }
                                 //相线及测量模式
-                                SHuaZhengData dJISUANWUCHA1 = pList.FirstOrDefault(p => p.name == "JISUANWUCHA1" && p.index > ddItem.index);
+                                SHuaZhengData dJISUANWUCHA1 = dList.FirstOrDefault(p => p.name == "JISUANWUCHA1" && p.index > ddItem.index);
                                 if (dRANGE != null)
                                 {
                                     dData.JISUANWUCHA1 = dJISUANWUCHA1.values;
@@ -4086,7 +4091,7 @@ namespace Langben.Report
             if(iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan!=null)
             {
                 HtmlAgilityPack.HtmlDocument doc_DianNengBiaoZhunPianChaGuZhiJiSuan = new HtmlAgilityPack.HtmlDocument();
-                doc.LoadHtml(iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan.HTMLVALUE);
+                doc_DianNengBiaoZhunPianChaGuZhiJiSuan.LoadHtml(iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan.HTMLVALUE);
                 Dictionary<int, DataValue> dataDic_DianNengBiaoZhunPianChaGuZhiJiSuan = AnalyticHTML.GetData(doc_DianNengBiaoZhunPianChaGuZhiJiSuan);//数据
                 dataDic = SHuaZhengHeBing(dataDic, dataDic_DianNengBiaoZhunPianChaGuZhiJiSuan);
             }
@@ -4164,7 +4169,7 @@ namespace Langben.Report
                     #region 画表头
                     #region 画格子 同时填充数据                   
 
-                    if (temp != null && temp.TableTitleList != null && temp.TableTitleList.Count > 0)
+                    if (temp != null && temp.TableTitleList != null && temp.TableTitleList.Count > 0 && temp.TableTitleList!=null )
                     {
                         RowInfo t = temp.TableTitleList.FirstOrDefault();
                         if (t.RowIndex >= 0)
@@ -4183,7 +4188,7 @@ namespace Langben.Report
                     #endregion
                     #region 画数据部分
                     int startRowIndex = rowIndex_Destination;
-                    if (dataDic != null && dataDic.ContainsKey(tongDaoID) && dataDic[tongDaoID] != null && dataDic[tongDaoID].Count > 0 && dataDic[tongDaoID].Data != null && dataDic[tongDaoID].Data.Count > 0)
+                    if (dataDic != null && dataDic.ContainsKey(tongDaoID) && dataDic[tongDaoID] != null && dataDic[tongDaoID].Count > 0 && dataDic[tongDaoID].Data != null && dataDic[tongDaoID].Data.Count > 0 && temp.DataRowIndex>=0)
                     {
                         #region 画数据  
                         #region 画格子                       
@@ -4269,7 +4274,7 @@ namespace Langben.Report
                     #region 画表尾
                     #region 画格子 同时填充数据                   
 
-                    if (temp != null && temp.TableFooterList != null && temp.TableFooterList.Count > 0)
+                    if (temp != null && temp.TableFooterList != null && temp.TableFooterList.Count > 0 && footDic!=null && footDic.Count>0)
                     {
                         RowInfo t = temp.TableFooterList.FirstOrDefault();
                         if (t.RowIndex >= 0)
@@ -4277,9 +4282,12 @@ namespace Langben.Report
                             //数据与创建行同时进行 
                             for (int k = 0; k < t.RowNumber; k++)
                             {
-                                CopyRow_1(sheet_Source, sheet_Destination, t.RowIndex + k, rowIndex_Destination, 1, true, temp.TableFooterList, allSpecialCharacters, footDic[tongDaoID]);
+                                if (footDic.ContainsKey(tongDaoID))
+                                {
+                                    CopyRow_1(sheet_Source, sheet_Destination, t.RowIndex + k, rowIndex_Destination, 1, true, temp.TableFooterList, allSpecialCharacters, footDic[tongDaoID]);
 
-                                rowIndex_Destination++;
+                                    rowIndex_Destination++;
+                                }
                             }
                         }
                     }

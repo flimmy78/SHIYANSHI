@@ -705,7 +705,7 @@ namespace Langben.Report
 
             for (int i = 1; i < 99; i++)
             {
-                string xpath = @"//table[@id='tongdao_" + i + @"']/tbody//input[@type='text'] | //table[@id='tongdao_" + i + @"']/tbody//select";
+                string xpath = @"//table[@id='tongdao_" + i + @"']/tbody//input[@type='text'] | //table[@id='tongdao_" + i + @"']/tbody[@id='tbody_" + i + @"']//input[@type='text'] |//table[@id='tongdao_" + i + @"']/tbody//select";
                 var thead = doc.DocumentNode.SelectNodes(xpath);
                 if (thead == null)
                 {
