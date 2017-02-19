@@ -135,7 +135,16 @@
         function BEICEDIANZU(obj) {
 
             erDengBiaoChenZhi(obj, "OP");
-
+            var biaochenzhi = $(obj).val();
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+            var rowidx = id.split('_')[3];
+            var JianDing = "RELATIVEERROR" + "_" + tongdao + "_1_" + rowidx;
+            if (biaochenzhi == '10000' || biaochenzhi == '100000') {
+                $(obj).parent().parent().find("#" + JianDing).val(0.0001);
+            }  
         }
         //离开事件，用于计算
         function blurValue(obj) {
