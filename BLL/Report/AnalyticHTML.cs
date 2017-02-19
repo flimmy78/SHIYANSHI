@@ -394,6 +394,12 @@ namespace Langben.Report
         public static Dictionary<string, int> GetColName(HtmlAgilityPack.HtmlDocument doc)
         {
             var list = new Dictionary<string, int>();
+
+            Dictionary<int, HtmlAgilityPack.HtmlNodeCollection> body = GetTBodyOfInputAndSelect(doc);
+            if(body==null || body.Count==0)
+            {
+                return null;
+            }
             //只遍历通道1
             var tongdao1OfBodyOfInputAndSelect = GetTBodyOfInputAndSelect(doc)[1];
             if (tongdao1OfBodyOfInputAndSelect != null)

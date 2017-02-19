@@ -6929,7 +6929,7 @@
 			</TableFooterList>
 		</TableTemplate>
 		<!--指示仪表-->
-		<TableTemplate>
+		<!--<TableTemplate>
 			<RuleID>124-2005_3</RuleID>
 			<DataRowIndex>-2</DataRowIndex>
 			<RemarkRowIndex>-2</RemarkRowIndex>
@@ -6958,7 +6958,7 @@
 					<CellList/>
 				</RowInfo>
 			</TableFooterList>
-		</TableTemplate>
+		</TableTemplate>-->
 		<TableTemplate>
 			<RuleID>622-1997_3</RuleID>
 			<DataRowIndex>1241</DataRowIndex>

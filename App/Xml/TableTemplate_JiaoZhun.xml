@@ -8049,15 +8049,7 @@
 				<RowInfo>
 					<RowNumber>1</RowNumber>
 					<RowIndex>1232</RowIndex>
-					<CellList>
-						<Cell>
-							<Code>state</Code>
-							<ColIndex>-1</ColIndex>
-							<ColCount>0</ColCount>
-							<IsMergeSameValue>N</IsMergeSameValue>
-							<IsHideRowNull>N</IsHideRowNull>
-							<IsMergeNullValue>N</IsMergeNullValue>
-						</Cell>
+					<CellList>						
 						<Cell>
 							<Code>RANGE</Code>
 							<ColIndex>0</ColIndex>
