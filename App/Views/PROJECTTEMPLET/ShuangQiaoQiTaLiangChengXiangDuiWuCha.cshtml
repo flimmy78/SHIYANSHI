@@ -59,8 +59,9 @@
         //tbodyIndex通道
         //thi 当前位置
         function set(tbodyIndex, thi) {
-            $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
-            $("#hideDangQianTongDao").val(tbodyIndex); CreateRow();
+           // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
+            $("#hideDangQianTongDao").val(tbodyIndex);
+            CreateRow();
 
         }
         //增加行
@@ -238,7 +239,7 @@
 
             <tr>
                 <td align="right">检测点数：</td>
-                <td><input type="text" id="txtPoint" name="txtPoint" value="" class="my-textbox  required digits" style="width:200px" /></td>
+                <td><input type="text" id="txtPoint" name="txtPoint" value="1" class="my-textbox  required digits" style="width:200px" /></td>
             </tr>
 
         </table>

@@ -21,7 +21,7 @@
             <option value="mΩ">mΩ</option>  
             <option value="μΩ">μΩ</option>
             </select>  
-            残余电阻：：
+            残余电阻：
             <input class="my-textbox input-width" value="" type="text" name="input9" id="input9_t_1_1">
             <select class="my-combobox" name="input9_UNIT" id="input9_UNIT_t_1_1">
                 <option value="Ω">Ω</option>
@@ -46,7 +46,7 @@
                 <option value="mΩ">mΩ</option>
                 <option value="μΩ">μΩ</option>
             </select>
-            残余电阻：：
+            残余电阻：
             <input class="my-textbox input-width" value="" type="text" name="input10" id="input10_t_1_1">
             <select class="my-combobox" name="input19_UNIT" id="input19_UNIT_t_1_1">
                 <option value="Ω">Ω</option>
@@ -360,6 +360,7 @@
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T3).val(data);
             }
+            var T3Data = $(obj).parent().parent().find("#" + T3).val();  //T3实际值
             if (T5Data != "" && input4Data != "" && input10Data != "") {
                 T5Data = parseFloat(T5Data);
                
@@ -376,7 +377,7 @@
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T6).val(data);
             }
-
+            var T6Data = $(obj).parent().parent().find("#" + T6).val();  //T4 实际值
 //【误差】=(【×电阻值】*序号-【实际值】)/【实际值】*100%，比允许误差多一位，四舍六入，逢五奇进偶不进																																																								
 
             if (input1Data != "" && T1Data != "" && T3Data != "") {

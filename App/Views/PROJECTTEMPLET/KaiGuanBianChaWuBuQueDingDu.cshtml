@@ -45,11 +45,11 @@
     <tr>
         <th width="80" align="center">序号</th>
     
-        <th width="140" align="center">U<sub>i</sub>(mV)</th>
-        <th width="140" align="center">M<sub>i</sub>(mΩ)</th>
-        <th width="140" align="center">∆<sub>i</sub>(mΩ)</th>
-        <th width="140" align="center">开关变差(mΩ)</th>
-        <th align="center">允许变差(mΩ)</th>
+        <th width="140" align="center">U<sub>i</sub></th>
+        <th width="140" align="center">M<sub>i</sub></th>
+        <th width="140" align="center">∆<sub>i</sub></th>
+        <th width="140" align="center">开关变差</th>
+        <th align="center">允许变差</th>
     </tr>
 </thead>
 
@@ -165,7 +165,9 @@
             var rowLength = id.split('_')[3];
             T1 = T1 + id;//改动的地方，误差的列的name值
             T2 = T2 + id;//改动的地方，误差的列的name值
+            T30 = T3 + "_" + tongdao + "_" + (liangCheng - 1) + "_" + (rowLength - 1);
             T3 = T3 + id;//改动的地方，误差的列的name值
+            
             T4 = T4 + id;//有功分量 相对误差(%
             T5 = T5 + id;//改动的地方，参与计算的列的name值
             T6 = T6 + id;//无功分量 相对误差(%
@@ -175,7 +177,7 @@
             var T1Data = $(obj).parent().parent().find("#" + T1).val(); //T1 序号
             var T2Data = $(obj).parent().parent().find("#" + T2).val();  //T2 Ui(mV)
             //   var T3Data = $(obj).parent().parent().find("#" + T3).val();  //T3 Mi(mΩ)
-          //  var T4Data = $(obj).parent().parent().find("#" + T4).val();  //T4 ∆i(mΩ)
+            //  var T4Data = $(obj).parent().parent().find("#" + T4).val();  //T4 ∆i(mΩ)
             var T5Data = $(obj).parent().parent().find("#" + T5).val();   //T5 开关变差(mΩ)
             var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T6 允许变差(mΩ)
            
@@ -190,16 +192,19 @@
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T3).val(data);
             }
-              var T3Data = $(obj).parent().parent().find("#" + T3).val();  //T3 Mi(mΩ)
-            //【∆i】，第一个值默认/,从第二个值开始=【Mi】(当前序号-1)-【Mi】(当前序号)																																										
-              if (rowLength != 1 && T3Data != "" && T1Data != "") {
-                T3Data = parseFloat(T3Data);
-                T1Data = parseFloat(T1Data);
-                var jian1 = accSub(T1Data, 1);
-                var jian = accMul(T3Data, jian1);
-                var jianfa =accSub( jian,accMul(T3Data,T1Data));
-                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
-                $(obj).parent().parent().find("#" + T4).val(data);
+            
+            //【∆i】，第一个值默认/,从第二个值开始=∆i(mΩ)=第一行的Mi(mΩ - 第二行的Mi(mΩ 																																								
+            if (rowLength != 1) {
+                var T3Data0 = $("#" + T30).val();  //T3 Mi(mΩ)
+                var T3Data = $(obj).parent().parent().find("#" + T3).val();  //T3 Mi(mΩ)
+                if (T3Data != "" && T3Data0 != "") {
+                    T3Data = parseFloat(T3Data);
+                    T3Data0 = parseFloat(T3Data0);
+
+                    var jianfa = accSub(T3Data0, T3Data);
+                    var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                    $(obj).parent().parent().find("#" + T4).val(data);
+                }
             }
             //【开关变差】=MAX(ABS【∆i】(2)：ABS【∆i】(n)),即ABS【∆i】中最大的		
               var els = document.getElementsByName("ACTUALVALUE");
