@@ -13,19 +13,46 @@ using Langben.App.Models;
 
 namespace Langben.App.Controllers
 {
+    
     /// <summary>
     /// 检定项目模板
     /// </summary>
     public class PROJECTTEMPLETController : BaseController
-    {//
+    {//  
      /// <summary>
-     ///电压表示值误差-相对误差
+     ///示值误差-有电压示值-末盘值残余电阻参与运算
      /// </summary>
      /// <param name="id">canshu</param>
      /// <param name="RULEID">规程id</param>
      /// <param name="SCHEMEID">方案id</param>
      /// <param name="PREPARE_SCHEMEID">预备方案id</param>
      /// <returns></returns>
+        public ActionResult ShiZhiWuChaYouDianYaShiZhi(string RULEID = "982-2003_6_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///示值误差-无电压示值
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult ShiZhiWuChaWuDianYaShiZhi(string RULEID = "982-2003_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///电压表示值误差-相对误差
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
         public ActionResult ShuangQiaoQiTaLiangChengXiangDuiWuCha(string RULEID = "125-2004_9_4", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
