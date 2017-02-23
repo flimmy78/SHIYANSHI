@@ -73,7 +73,7 @@
                 for (var i = 0; i < rows.length; i++) {
                     total += parseFloat(rows[i].BAOGAOSHULIANG);
                     data2.push(rows[i].ZHEGNSHUBAOGAOLEIBIE);
-                    data3.push({ value: rows[i].SHOUQUANZIZHI, name: rows[i].ZHEGNSHUBAOGAOLEIBIE });
+                    data3.push({ value: rows[i].BAOGAOSHULIANG, name: rows[i].ZHEGNSHUBAOGAOLEIBIE });
                 }
                 $('#flexigridData').datagrid('appendRow', { ZHEGNSHUBAOGAOLEIBIE: '<b>统计：</b>', BAOGAOSHULIANG: total });
                 //图表
