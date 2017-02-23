@@ -46,18 +46,31 @@ namespace Langben.App.Controllers
 
             int total = 0;
             List<VZHENGSHULEIBEITONGJIFENXI> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
+            List<VZHENGSHULEIBEITONGJIFENXI> queryData2 = new List<VZHENGSHULEIBEITONGJIFENXI>();
+            var date = queryData.GroupBy(m => (new { ZHEGNSHUBAOGAOLEIBIE = m.ZHEGNSHUBAOGAOLEIBIE, SHOUQUANZIZHI = m.SHOUQUANZIZHI })).Select(g => (new
+            {
+                ZHEGNSHUBAOGAOLEIBIE = g.Key.ZHEGNSHUBAOGAOLEIBIE,
+                SHOUQUANZIZHI = g.Key.SHOUQUANZIZHI,
+                BAOGAOSHULIANG = g.Key.ZHEGNSHUBAOGAOLEIBIE.Count()
+            }));
+            int w = date.Count();
             return Json(new datagrid
             {
                 total = total,
-                rows = queryData.Select(s => new
+                rows = date.Select(s => new
                 {
-                    ID = s.ID
-					,SUOSHUDANWEI = s.SUOSHUDANWEI
-					,ZHENGSHUDANWEI = s.ZHENGSHUDANWEI
-					,SHOULIDANWEI = s.SHOULIDANWEI
-					,PIZHUNJIELUN = s.PIZHUNJIELUN
-					,PIZHUNSHIJIAN = s.PIZHUNSHIJIAN
-					,SHOUQUANZIZHI = s.SHOUQUANZIZHI
+                    ID = ""
+					,SUOSHUDANWEI = ""
+                    ,
+                    ZHENGSHUDANWEI = ""
+                    ,
+                    SHOULIDANWEI = ""
+                    ,
+                    PIZHUNJIELUN = ""
+                    ,
+                    PIZHUNSHIJIAN = ""
+                    ,
+                    SHOUQUANZIZHI = s.SHOUQUANZIZHI
 					,
                     ZHEGNSHUBAOGAOLEIBIE = s.ZHEGNSHUBAOGAOLEIBIE
                     ,
