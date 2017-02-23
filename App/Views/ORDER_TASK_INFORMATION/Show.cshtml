@@ -152,7 +152,7 @@
                     <div id="img" style="width:700px;  background:#eee">
                         <img id="hid" src="" style="width:700px; height:50px;" />
                         <embed id="HWPenSign" type="application/mozilla-npHWSign-scriptable-plugin" name="HWPenSign" width="700" height="200" /></embed>
-                       
+
 
                     </div>
                 </td>
@@ -180,15 +180,28 @@
                 <td width="80">接收日期：</td>
                 <td width="120" id="CREATETIME"></td>
             </tr>
-            <tr>
-                <td nowrap=nowrap nowrap=nowrap>注意事项：</td>
-                <td colspan="4" style="text-align:left; ">
+            <tr style="height:80px ">
+                <td rowspan="2" >注意事项：</td>
+                <td colspan="3" rowspan="2"  style="text-align:left; ">
                     1、 本单位检定/校准技术依据优先采用国家计量检定规程、校准规范和经国家实验室认可的校准方法，若有特殊要求请注明。<br />
                     2、本委托单填写一式两份，第二联盖章后作为器具及证书的提取凭证。如有丢失或损毁，需凭单位证明及提取人身份证办理提取手续。提取时请确认器具是否正常，附件、证书是否齐全，器具一经取走，如出现问题，本单位概不负责。<br />
                     3、本单位对送检器具的保管期为12个月，逾期不取的器具，视为主动放弃器具所有权，本单位有权进行处理。<br />
                     4、本外观状态只限于器具外观有无明显损伤。在器具送达实验室进行通电、预热等专业检查后，实验室将对器具工作状态进行最终的判断。
                 </td>
-                <td colspan="3" width="200"><p style="text-align:left;text-align:left;">盖章处：</p></td>
+                <td colspan="4"   width="150">
+                 
+                                <p style="text-align:left;text-align:left;">送检人签字：</p>
+                
+                </td>
+              
+            </tr>
+            <tr style="height:80px ">
+              
+                <td width="150">
+
+                    <p style="text-align:left;text-align:left;">盖章处：</p>
+
+                </td>
             </tr>
         </table>
         <p class="beizhu" id="tongxundizi">
@@ -202,7 +215,7 @@
         <input id="Button3" type="button" value="重新签字" class="my-btn" onclick="return Button3_onclick()" />
         <input id="Button14" type="button" value="签字后，打印委托单，同时发送实验室" class="my-btn" onclick="return fasong()" />
     </div>
-    
+
     <script language="javascript" type="text/javascript">
 
         var obj;
@@ -308,10 +321,10 @@
                 success: function (data) {
                     if (data.Code == 1) {
 
-                        $("#hid").attr("src","data:image/png;base64,"+ stream);
+                        $("#hid").attr("src", "data:image/png;base64," + stream);
                         $("#hid").show();
                         $("#HWPenSign").remove();
-                       
+
                         window.print();//打印
                         $.messager.alert({
                             title: '提示',
