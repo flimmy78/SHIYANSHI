@@ -3213,11 +3213,11 @@ namespace Langben.Report
                 //每行单元格处理               
                 for (int m = row_Source.FirstCellNum; m < row_Source.LastCellNum; m++)
                 {
-                    if (m < 57 && m < row_Source.Cells.Count)
+                    if (m < 57 && m < row_Source.Cells.Count - 1)
                     {
                         sourceCell = row_Source.GetCell(m);
                         row_Source.Cells[m].SetCellType(CellType.String);
-                        if (m + 1 != row_Source.LastCellNum && m<row_Source.Cells.Count-1)
+                        if (m + 1 != row_Source.LastCellNum && m<row_Source.Cells.Count-2)
                         {
                             row_Source.Cells[m + 1].SetCellType(CellType.String);
                         }
@@ -3328,11 +3328,11 @@ namespace Langben.Report
                 //每行单元格处理               
                 for (int m = row_Source.FirstCellNum; m < row_Source.LastCellNum; m++)
                 {
-                    if (m < 57 && m < row_Source.Cells.Count )
+                    if (m < 57 && m < row_Source.Cells.Count - 1)
                     {
                         sourceCell = row_Source.GetCell(m);
                         row_Source.Cells[m].SetCellType(CellType.String);
-                        if (m + 1 != row_Source.LastCellNum &&  m < row_Source.Cells.Count-1)
+                        if (m + 1 != row_Source.LastCellNum &&  m < row_Source.Cells.Count - 2)
                         {
                             row_Source.Cells[m + 1].SetCellType(CellType.String);
                         }
@@ -4237,10 +4237,6 @@ namespace Langben.Report
                                     {
                                         cellAddressList.Remove(key);
                                     }
-                                    if (cellAddressList == null || cellAddressList.Count == 0)
-                                    {
-                                        break;
-                                    }
                                     key = cellAddressList.Keys.FirstOrDefault();
                                     c = cellAddressList[key];
                                     cValue = sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).StringCellValue;
@@ -4391,14 +4387,6 @@ namespace Langben.Report
 
             //为了表格底部没有线
             CopyRow(sheet_Source, sheet_Destination, 4, rowIndex_Destination, 1, true);
-            if(iEntity.RULEID== "124-2005_3")
-            {
-                CopyRow(sheet_Source, sheet_Destination, 4, rowIndex_Destination, 1, true);
-                ICellStyle style = sheet_Destination.Workbook.CreateCellStyle();
-                style.BorderBottom = BorderStyle.None;
-                style.BorderTop = BorderStyle.None;
-                sheet_Destination.GetRow(rowIndex_Destination).RowStyle = style;
-            }
 
             return rowIndex_Destination;
         }
