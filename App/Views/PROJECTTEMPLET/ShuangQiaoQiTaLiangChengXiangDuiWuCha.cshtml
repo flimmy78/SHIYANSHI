@@ -117,7 +117,7 @@
                 var id = "select_" + HangHaoID;
                 //允许误差(%)
                 // htmlString.push("<td align='center' >±</td>");
-                htmlString.push("<td align='center' >±<select class=\"my-combobox\" name=\"select\" id='" + id + "'>  <option value=\"2\">2</option><option value=\"1\">1</option><option value=\"0.5\">0.5</option><option value=\"0.2\">0.2</option><option value=\"0.1\">0.1</option></select></td>");
+                htmlString.push("<td align='center' >±<select class=\"my-combobox\" name=\"select\" id='" + id + "'  onblur=\"changeValue(this);\">  <option value=\"2\">2</option><option value=\"1\">1</option><option value=\"0.5\">0.5</option><option value=\"0.2\">0.2</option><option value=\"0.1\">0.1</option></select></td>");
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
@@ -130,7 +130,7 @@
 
         function changeValue(obj) {
 
-            jiSuanWuCha(obj, "OUTPUTVALUE", "YanShiPan", "YanShiPan1", "ACTUALVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+            jiSuanWuCha(obj, "OUTPUTVALUE", "YanShiPan", "YanShiPan1", "ACTUALVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR", "select");
        																																																						
 
         }
@@ -142,7 +142,7 @@
         //T4 最大基本误差(%)
         //T5 引用误差(%)
         //T6 校准结果的不确定度U(k={0})
-        function jiSuanWuCha(obj, T1, T2, T3, T4, T5, T6) {
+        function jiSuanWuCha(obj, T1, T2, T3, T4, T5, T6,T7) {
             //重新计算当前行
             var name = $(obj).attr("name");
             var id = $(obj).attr("id");
@@ -155,14 +155,15 @@
             T4 = T4 + id;//有功分量 相对误差(%
             T5 = T5 + id;//改动的地方，参与计算的列的name值
             T6 = T6 + id;//改动的地方，参与计算的列的name值
-            																			
+            T7 = T7 + id;//改动的地方，参与计算的列的name值																		
 
             var T1Data = $(obj).parent().parent().find("#" + T1).val(); //T2 量程
             var T2Data = $(obj).parent().parent().find("#" + T2).val(); //T2 测量盘示值(Ω)	
             var T3Data = $(obj).parent().parent().find("#" + T3).val(); //T3 	测量盘示值(Ω)	
            // var T4Data = $(obj).parent().parent().find("#" + T4).val(); //T3 		标称值(Ω)							
             var T5Data = $(obj).parent().parent().find("#" + T5).val(); //T5 	实际值(Ω)								
-           // var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T5 	误差(%)	
+            // var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T5 	误差(%)	
+            var T7Data = $(obj).parent().parent().find("#" + T7).val(); //T7 	允许误差(%)	
             var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
             txtPointLen = parseFloat(txtPointLen);
 
@@ -186,16 +187,18 @@
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T4).val(data);
             }
-            var T4Data = $(obj).parent().parent().find("#" + T4).val(); //T3 		标称值(Ω)		
+            var T4Data = $(obj).parent().parent().find("#" + T4).val(); //T3 		标称值(Ω)	
+            var r1;
+            try { r1 = T7Data.toString().split(".")[1].length+1 } catch (e) { r1 =1 }
             //【误差】=(【实际值】-【标称值】)/【标称值】*100%，小数位数比允许误差多一位，四舍六入，逢五奇进偶不进
             if (T5Data != "" && T4Data != "") {
                 T5Data = parseFloat(T5Data);
                 T4Data = parseFloat(T4Data);
                 var jianfa =accDiv( accSub(T5Data, T4Data),T4Data);
-                var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-                txtPointLen = parseFloat(txtPointLen);
-                txtPointLen = 1 + txtPointLen;
-                var data = percentages(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                //var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+                //txtPointLen = parseFloat(txtPointLen);
+                //txtPointLen = 1 + txtPointLen;
+                var data = percentages(fomatFloat(jianfa, r1), r1);
                 $(obj).parent().parent().find("#" + T6).val(data);
             }
         }

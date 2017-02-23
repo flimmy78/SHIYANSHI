@@ -26,13 +26,13 @@
             末盘步进：
             <input class="my-textbox input-width" value="" type="text" name="input6" id="input6_t_1_1">
             <select class="my-combobox" name="input7" id="input7_t_1_1">
-
-                <option value="A" selected="">A</option>
-                <option value="KA">KA</option>
-                <option value="mA">mA</option>
-                <option value="μA">μA</option>
-                <option value="nA">nA</option>
-                <option value="pA">pA</option>
+                <option value="Ω">Ω</option>
+                <option value="TΩ">TΩ</option>
+                <option value="GΩ">GΩ</option>
+                <option value="MΩ">MΩ</option>
+                <option value="kΩ">kΩ</option>
+                <option value="mΩ">mΩ</option>
+                <option value="μΩ">μΩ</option>
             </select>
         </th>
         <th>
@@ -227,6 +227,9 @@
                 }
 
             }
+            var r1;
+            try { r1 = maxValue.toString().split(".")[1].length } catch (e) { r1 = 0 }
+            max = zeroFloat(max, r1);
             $("#SHIJISHUCHUZHI" + "_" + tongdao + "_1").val(max);
            
         }

@@ -47,7 +47,7 @@ namespace Langben.DAL
                     }
                     flagWhere++;
 
-                   
+
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Int)) //开始数值
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Int)) + "] >= " + item.Value.GetInt();
@@ -58,7 +58,7 @@ namespace Langben.DAL
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(End_Int)) + "] <= " + item.Value.GetInt();
                         continue;
                     }
-     
+
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(DDL_Int)) //精确查询数值
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(DDL_Int)) + "] =" + item.Value;
@@ -72,7 +72,7 @@ namespace Langben.DAL
                     where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
                 }
             }
-            var data =((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext 
+            var data = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
                      .CreateObjectSet<VZHENGSHULEIBEITONGJIFENXI>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
                      .AsQueryable();
@@ -83,7 +83,7 @@ namespace Langben.DAL
             if (null != endTime)
             {
                 data = data.Where(m => endTime > m.PIZHUNSHIJIAN);
-            }
+            }           
             return data;
         }
         /// <summary>
@@ -96,7 +96,7 @@ namespace Langben.DAL
             using (SysEntities db = new SysEntities())
             {
                 return GetById(db, id);
-            }                   
+            }
         }
         /// <summary>
         /// 通过主键id，获取证书类别统计分析---查看详细，首次编辑
@@ -104,12 +104,12 @@ namespace Langben.DAL
         /// <param name="id">主键</param>
         /// <returns>证书类别统计分析</returns>
         public VZHENGSHULEIBEITONGJIFENXI GetById(SysEntities db, string id)
-        { 
-                 return db.VZHENGSHULEIBEITONGJIFENXI.SingleOrDefault(s => s.ID == id); 
+        {
+            return db.VZHENGSHULEIBEITONGJIFENXI.SingleOrDefault(s => s.ID == id);
         }
- 
+
         public void Dispose()
-        {            
+        {
         }
     }
 }
