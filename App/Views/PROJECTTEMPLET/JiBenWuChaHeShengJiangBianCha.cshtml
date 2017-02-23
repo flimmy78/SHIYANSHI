@@ -220,7 +220,7 @@
                 T4Data = DanWeiHuanSuan(lastUnit, T4Data_UNIT, T4Data);
                 T5Data = DanWeiHuanSuan(lastUnit, T5Data_UNIT, T5Data);
                 T1Data = parseFloat(T1Data);
-                var jianfa =accDiv(Math.abs(accSub(T4Data, T5Data)),T1Data);
+                var jianfa =accMul(accDiv(Math.abs(accSub(T4Data, T5Data)),T1Data),100);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T8).val(data);
             }
