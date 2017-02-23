@@ -1976,6 +1976,9 @@ namespace Langben.Report
 
                 if (ruleCount > 0)//如果不确定过程一个都没有需要隐藏不确定sheet
                 {
+                    //设置页面页脚
+                    SetHeaderAndFooter(sheet_Destination, entity);
+                    sheet_Destination.ForceFormulaRecalculation = true;
                     return true;
                 }
             }
@@ -3213,11 +3216,11 @@ namespace Langben.Report
                 //每行单元格处理               
                 for (int m = row_Source.FirstCellNum; m < row_Source.LastCellNum; m++)
                 {
-                    if (m < 57 && m < row_Source.Cells.Count - 1)
+                    if (m < 57 && m < row_Source.Cells.Count)
                     {
                         sourceCell = row_Source.GetCell(m);
                         row_Source.Cells[m].SetCellType(CellType.String);
-                        if (m + 1 != row_Source.LastCellNum && m<row_Source.Cells.Count-2)
+                        if (m + 1 != row_Source.LastCellNum && m<row_Source.Cells.Count-1)
                         {
                             row_Source.Cells[m + 1].SetCellType(CellType.String);
                         }
@@ -3328,11 +3331,11 @@ namespace Langben.Report
                 //每行单元格处理               
                 for (int m = row_Source.FirstCellNum; m < row_Source.LastCellNum; m++)
                 {
-                    if (m < 57 && m < row_Source.Cells.Count - 1)
+                    if (m < 57 && m < row_Source.Cells.Count)
                     {
                         sourceCell = row_Source.GetCell(m);
                         row_Source.Cells[m].SetCellType(CellType.String);
-                        if (m + 1 != row_Source.LastCellNum &&  m < row_Source.Cells.Count - 2)
+                        if (m + 1 != row_Source.LastCellNum &&  m < row_Source.Cells.Count - 1)
                         {
                             row_Source.Cells[m + 1].SetCellType(CellType.String);
                         }
