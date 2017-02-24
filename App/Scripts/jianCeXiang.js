@@ -1547,7 +1547,7 @@ function wuCha1(obj, shiji, biaochen, target, point) {
 
     var length = yuxunwucha.split(".").length == 2 ? yuxunwucha.split(".")[1].length : 0
     if (biaochenValue != "" && shiJiValue != "")
-        var wucha2 = parseFloat(fomatFloat(parseFloat((parseFloat(shiJiValue) - parseFloat(biaochenValue)) / parseFloat(biaochenValue) * 100), (length + 1))).toFixed((length + 1));
+        var wucha2 = parseFloat(fomatFloat(parseFloat((parseFloat(biaochenValue) - parseFloat(shiJiValue)) / parseFloat(biaochenValue) * 100), (length + 1))).toFixed((length + 1));
     $(obj).parent().parent().find("#" + targetName).val(wucha2);
 
 }

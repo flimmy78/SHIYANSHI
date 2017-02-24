@@ -187,6 +187,9 @@
                 if (k == trval) {
                     if (n == 0) {
                         firstData = $(this).find("td").find(':input[name="' + first + '"]').val();
+                        if (firstData.indexOf("√") > 0) {
+                            firstData = 100 / Math.sqrt(3);
+                        }
                         n++;
                     }
                     var secondData =parseInt($(this).find("td").find(':input[name="' + second + '"]').val().replace('%',''));

@@ -1,3 +1,4 @@
+<!-- 编辑使用 XMLSpy v2006 U (http://www.altova.com) 由 any (any) -->
 <TableTemplates>
 	<TableTemplateList>
 		<!--数表三相-->
@@ -8049,7 +8050,7 @@
 				<RowInfo>
 					<RowNumber>1</RowNumber>
 					<RowIndex>1232</RowIndex>
-					<CellList>						
+					<CellList>
 						<Cell>
 							<Code>RANGE</Code>
 							<ColIndex>0</ColIndex>
@@ -8177,7 +8178,7 @@
 					<RowNumber>1</RowNumber>
 					<RowIndex>1240</RowIndex>
 					<CellList>
-						<Cell>
+						<!--<Cell>
 							<Code>statestandard</Code>
 							<ColIndex>-1</ColIndex>
 							<ColCount>0</ColCount>
@@ -8192,7 +8193,7 @@
 							<IsMergeSameValue>N</IsMergeSameValue>
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
-						</Cell>
+						</Cell>-->
 						<Cell>
 							<Code>K</Code>
 							<ColIndex>1</ColIndex>
@@ -8304,7 +8305,7 @@
 					<RowNumber>1</RowNumber>
 					<RowIndex>1261</RowIndex>
 					<CellList>
-						<Cell>
+						<!--<Cell>
 							<Code>statestandard</Code>
 							<ColIndex>-1</ColIndex>
 							<ColCount>0</ColCount>
@@ -8319,7 +8320,7 @@
 							<IsMergeSameValue>N</IsMergeSameValue>
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
-						</Cell>
+						</Cell>-->
 						<Cell>
 							<Code>K</Code>
 							<ColIndex>1</ColIndex>
@@ -9053,7 +9054,7 @@
 					<RowNumber>1</RowNumber>
 					<RowIndex>1208</RowIndex>
 					<CellList>
-						<Cell>
+						<!--<Cell>
 							<Code>state</Code>
 							<ColIndex>-1</ColIndex>
 							<ColCount>0</ColCount>
@@ -9068,7 +9069,7 @@
 							<IsMergeSameValue>N</IsMergeSameValue>
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
-						</Cell>
+						</Cell>-->
 						<Cell>
 							<Code>K</Code>
 							<ColIndex>1</ColIndex>
@@ -9537,7 +9538,7 @@
 					<RowNumber>1</RowNumber>
 					<RowIndex>1271</RowIndex>
 					<CellList>
-						<Cell>
+						<!--<Cell>
 							<Code>statestandard</Code>
 							<ColIndex>-1</ColIndex>
 							<ColCount>0</ColCount>
@@ -9552,7 +9553,7 @@
 							<IsMergeSameValue>N</IsMergeSameValue>
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
-						</Cell>
+						</Cell>-->
 						<Cell>
 							<Code>K</Code>
 							<ColIndex>1</ColIndex>
@@ -9792,14 +9793,14 @@
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
-				<Cell>
+				<!--<Cell>
 					<Code>OUTPUTVALUE</Code>
 					<ColIndex>1</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
-				</Cell>
+				</Cell>-->
 				<Cell>
 					<Code>READVALUE</Code>
 					<ColIndex>2</ColIndex>

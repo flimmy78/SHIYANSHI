@@ -6929,7 +6929,7 @@
 			</TableFooterList>
 		</TableTemplate>
 		<!--指示仪表-->
-		<!--<TableTemplate>
+		<TableTemplate>
 			<RuleID>124-2005_3</RuleID>
 			<DataRowIndex>-2</DataRowIndex>
 			<RemarkRowIndex>-2</RemarkRowIndex>
@@ -6938,10 +6938,10 @@
 			<TableTitleList>
 				<RowInfo>
 					<RowNumber>1</RowNumber>
-					<RowIndex>1232</RowIndex>
+					<RowIndex>1231</RowIndex>
 					<CellList>
 						<Cell>
-							<Code>state</Code>
+							<Code>statestandard</Code>
 							<ColIndex>-1</ColIndex>
 							<ColCount>0</ColCount>
 							<IsMergeSameValue>N</IsMergeSameValue>
@@ -6958,7 +6958,7 @@
 					<CellList/>
 				</RowInfo>
 			</TableFooterList>
-		</TableTemplate>-->
+		</TableTemplate>
 		<TableTemplate>
 			<RuleID>622-1997_3</RuleID>
 			<DataRowIndex>1241</DataRowIndex>
@@ -7045,19 +7045,19 @@
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
-				<Cell>
+				<!--<Cell>
 					<Code>UNCERTAINTYDEGREE</Code>
 					<ColIndex>9</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
-				</Cell>
+				</Cell>-->
 			</CellList>
 			<TableTitleList>
 				<RowInfo>
 					<RowNumber>1</RowNumber>
-					<RowIndex>1240</RowIndex>
+					<RowIndex>1239</RowIndex>
 					<CellList>
 						<Cell>
 							<Code>statestandard</Code>
@@ -7067,7 +7067,7 @@
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
 						</Cell>
-						<Cell>
+						<!--<Cell>
 							<Code>zhidingwucha</Code>
 							<ColIndex>0</ColIndex>
 							<ColCount>0</ColCount>
@@ -7082,7 +7082,7 @@
 							<IsMergeSameValue>N</IsMergeSameValue>
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
-						</Cell>
+						</Cell>-->
 					</CellList>
 				</RowInfo>
 			</TableTitleList>
@@ -7172,19 +7172,19 @@
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
-				<Cell>
+				<!--<Cell>
 					<Code>BUQUEDINGDU</Code>
 					<ColIndex>8</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
-				</Cell>
+				</Cell>-->
 			</CellList>
 			<TableTitleList>
 				<RowInfo>
 					<RowNumber>1</RowNumber>
-					<RowIndex>1261</RowIndex>
+					<RowIndex>1260</RowIndex>
 					<CellList>
 						<Cell>
 							<Code>statestandard</Code>
@@ -7194,7 +7194,7 @@
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
 						</Cell>
-						<Cell>
+						<!--<Cell>
 							<Code>zhidingwucha</Code>
 							<ColIndex>0</ColIndex>
 							<ColCount>0</ColCount>
@@ -7209,7 +7209,7 @@
 							<IsMergeSameValue>N</IsMergeSameValue>
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
-						</Cell>
+						</Cell>-->
 					</CellList>
 				</RowInfo>
 			</TableTitleList>
@@ -7819,7 +7819,7 @@
 			<TableTitleList>
 				<RowInfo>
 					<RowNumber>1</RowNumber>
-					<RowIndex>1208</RowIndex>
+					<RowIndex>1206</RowIndex>
 					<CellList>
 						<Cell>
 							<Code>state</Code>
@@ -8275,14 +8275,14 @@
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
-				<Cell>
+				<!--<Cell>
 					<Code>BUQUEDINGDU</Code>
 					<ColIndex>8</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
-				</Cell>
+				</Cell>-->
 			</CellList>
 			<TableTitleList>
 				<RowInfo>
@@ -8297,7 +8297,7 @@
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
 						</Cell>
-						<Cell>
+						<!--<Cell>
 							<Code>zhidingwucha</Code>
 							<ColIndex>0</ColIndex>
 							<ColCount>0</ColCount>
@@ -8312,7 +8312,7 @@
 							<IsMergeSameValue>N</IsMergeSameValue>
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
-						</Cell>
+						</Cell>-->
 					</CellList>
 				</RowInfo>
 			</TableTitleList>
@@ -8552,14 +8552,14 @@
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
-				<Cell>
+				<!--<Cell>
 					<Code>OUTPUTVALUE</Code>
 					<ColIndex>1</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
-				</Cell>
+				</Cell>-->
 				<Cell>
 					<Code>READVALUE</Code>
 					<ColIndex>2</ColIndex>
@@ -8608,14 +8608,14 @@
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
-				<Cell>
+				<!--<Cell>
 					<Code>JISUANWUCHA</Code>
 					<ColIndex>8</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
-				</Cell>
+				</Cell>-->
 			</CellList>
 			<TableTitleList>
 				<RowInfo>
