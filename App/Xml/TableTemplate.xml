@@ -10721,6 +10721,14 @@
 			<ConclusionRowIndex>1324</ConclusionRowIndex>
 			<CellList>
 				<Cell>
+					<Code/>
+					<ColIndex>-1</ColIndex>
+					<ColCount>0</ColCount>
+					<IsMergeSameValue>Y</IsMergeSameValue>
+					<IsHideRowNull>N</IsHideRowNull>
+					<IsMergeNullValue>N</IsMergeNullValue>
+				</Cell>
+				<Cell>
 					<Code>RANGE</Code>
 					<ColIndex>-1</ColIndex>
 					<ColCount>0</ColCount>
@@ -10774,7 +10782,7 @@
 					<RowNumber>1</RowNumber>
 					<RowIndex>1321</RowIndex>
 					<CellList>
-						<Cell>
+						<!--<Cell>
 							<Code>statestandard</Code>
 							<ColIndex>-1</ColIndex>
 							<ColCount>0</ColCount>
@@ -10789,7 +10797,7 @@
 							<IsMergeSameValue>N</IsMergeSameValue>
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
-						</Cell>
+						</Cell>-->
 						<Cell>
 							<Code>K</Code>
 							<ColIndex>1</ColIndex>
