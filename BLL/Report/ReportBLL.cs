@@ -4416,7 +4416,7 @@ namespace Langben.Report
             //为了表格底部没有线           
             CopyRow(sheet_Source, sheet_Destination, 4, rowIndex_Destination, 1, true);
             // 
-            if (iEntity.RULEID == "1085-2013_8" || iEntity.RULEID == "1085-2013_9")
+            if (iEntity.RULEID == "1085-2013_8" || iEntity.RULEID == "1085-2013_9" || iEntity.RULEID== "124-2005_3")
             {                
                 ICellStyle style = sheet_Destination.Workbook.CreateCellStyle();
                 style.BorderBottom = BorderStyle.None;
