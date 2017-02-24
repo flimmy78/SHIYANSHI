@@ -180,7 +180,7 @@
                 <td width="80">接收日期：</td>
                 <td width="120" id="CREATETIME"></td>
             </tr>
-            <tr style="height:40px ">
+            <tr style="height:50px ">
                 <td rowspan="2" >注意事项：</td>
                 <td colspan="3" rowspan="2"  style="text-align:left; ">
                     1、 本单位检定/校准技术依据优先采用国家计量检定规程、校准规范和经国家实验室认可的校准方法，若有特殊要求请注明。<br />
@@ -197,7 +197,7 @@
                     <img id="hid" src="" style="width:140px;height:40px " />
                 </td>
             </tr>
-            <tr style="height:40px ">
+            <tr style="height:50px ">
               
                 <td width="150">
 
@@ -316,7 +316,7 @@
             //}
             $("#hid").attr("src", "data:image/png;base64," + stream);
             $("#hid").show();
-            $("#HWPenSign").remove();
+            $(".qianzi").remove();
 
             $.ajax({
                 url: "/ORDER_TASK_INFORMATION/QianZi/@ViewBag.Id",
