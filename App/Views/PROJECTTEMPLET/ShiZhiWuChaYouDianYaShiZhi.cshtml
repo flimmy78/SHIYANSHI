@@ -388,8 +388,8 @@
                 var jian2 = accSub(jian1, T3Data);
                 var jianfa = accMul(accDiv(jian2, T3Data), 100);
 
-                var data = fomatFloat(jianfa, txtPointLen+1);
-                $(obj).parent().parent().find("#" + T5).val(data);
+                var data =zeroFloat( fomatFloat(jianfa, r1),r1);
+                $(obj).parent().parent().find("#" + T4).val(data);
             }
             //【误差】=(【×电阻值】*序号-【实际值】)/【实际值】*100%，比允许误差多一位，四舍六入，逢五奇进偶不进																																																								
             if (input2Data != "" && T1Data != "" && T6Data != "") {
@@ -400,7 +400,7 @@
                 var jian2 = accSub(jian1, T6Data);
                 var jianfa = accMul(accDiv(jian2, T6Data), 100);
 
-                var data = fomatFloat(jianfa, txtPointLen + 1);
+                var data =zeroFloat( fomatFloat(jianfa, r2),r2);
                 $(obj).parent().parent().find("#" + T7).val(data);
             }
         }

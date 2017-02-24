@@ -268,8 +268,8 @@
             var r1, r2;
             try { r1 = input7Data.toString().split(".")[1].length+1 } catch (e) { r1 = 1 }
             try { r2 = input8Data.toString().split(".")[1].length+1 } catch (e) { r2 = 1 }
-            var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-            txtPointLen = parseFloat(txtPointLen) + 1;
+            //var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+            //txtPointLen = parseFloat(txtPointLen) + 1;
             //【误差】=(【×电阻值】*序号-【实际值】)/【实际值】*100%，比允许误差多一位，四舍六入，逢五奇进偶不进																																																								
             if (input1Data != "" && T1Data != "" && T2Data!="") {
                 T1Data = parseFloat(T1Data);
@@ -279,7 +279,7 @@
                 var jian2=accSub(jian1,T2Data);
                 var jianfa = accMul(accDiv(jian2, T2Data), 100);
 
-                var data = fomatFloat(jianfa, txtPointLen);
+                var data =zeroFloat( fomatFloat(jianfa, r1),r1);
                 $(obj).parent().parent().find("#" + T3).val(data);
             }
             //【误差】=(【×电阻值】*序号-【实际值】)/【实际值】*100%，比允许误差多一位，四舍六入，逢五奇进偶不进																																																								
@@ -291,7 +291,7 @@
                 var jian2 = accSub(jian1, T4Data);
                 var jianfa = accMul(accDiv(jian2, T4Data), 100);
 
-                var data = fomatFloat(jianfa, txtPointLen);
+                var data = zeroFloat( fomatFloat(jianfa, r2),r2);
                 $(obj).parent().parent().find("#" + T5).val(data);
             }
         }
