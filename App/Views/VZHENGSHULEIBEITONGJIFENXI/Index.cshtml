@@ -34,7 +34,7 @@
             受理单位:
         </div>
         <div class="input_search-field">
-            <input type='text' id='SHOULIDANWEI' />
+            @Html.DropDownList("SHOULIDANWEI", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"),"请选择", new { @class = "easyui-combobox" })
         </div>
     </div>
     <div class='input_search' style="padding-top:10px;">
@@ -148,27 +148,16 @@
 
     //“查询”按钮，弹出查询框
     function flexiQuery() {
-
         //将查询条件按照分隔符拼接成字符串
         var search = "";
-        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
-            if (this.id)
-                if (this.id == "PIZHUNSHIJIANStart_Time") {
-                    search = search + "PIZHUNJIELUN" + "&" + "合格" + "^";
-                    search = search + this.id + "&" + this.value + "^";
-                }
-                else {
-                    search = search + this.id + "&" + this.value + "^";
-                }
-            else
-                if (this.id == "PIZHUNSHIJIANStart_Time") {
-                    search = search + "PIZHUNJIELUN" + "&" + "合格" + "^";
-                    search = search + this.id + "&" + this.value + "^";
-                }
-                else {
-                    search = search + this.id + "&" + this.value + "^";
-                }
-        });
+        search += "PIZHUNSHIJIANStart_Time&" + $("#PIZHUNSHIJIANStart_Time").val() + "^";
+        search += "PIZHUNSHIJIANEnd_Time&" + $("#PIZHUNSHIJIANEnd_Time").val() + "^";
+        search += "SUOSHUDANWEI&" + $("#SUOSHUDANWEI").val() + "^";
+        search += "ZHENGSHUDANWEI&" + $("#ZHENGSHUDANWEI").val() + "^";
+        search += "SHOULIDANWEI&" + $('#SHOULIDANWEI').combobox('getValue') + "^";
+        if ($("#PIZHUNSHIJIANStart_Time").val() != "") {
+            search += "PIZHUNJIELUN&" + "合格" + "^";
+        }
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };

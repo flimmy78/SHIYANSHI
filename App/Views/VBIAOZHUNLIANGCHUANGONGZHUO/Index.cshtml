@@ -115,14 +115,14 @@
     </div>
 
 
- 
+
     <div class='input_search' style="padding-top:10px;">
         <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
             查 询
         </a>
     </div>
 </div>
- <br style="clear: both;" />
+<br style="clear: both;" />
 
 <script type="text/javascript" language="javascript">
     $(function () {
@@ -139,7 +139,17 @@
             sortName: 'ID',
             sortOrder: 'desc',
             idField: 'ID',
-
+            rowStyler: function (value, row, index) {
+                if (row.ZONGSHIJIAN < 12) {
+                    return 'background-color:#DDFF77;';
+                }
+                else if (row.ZONGSHIJIAN >= 12 && row.ZONGSHIJIAN <= 14) {
+                    return 'background-color:#FFFF77;';
+                }
+                else if ( row.ZONGSHIJIAN > 14) {
+                    return 'background-color:#FF88C2;';
+                }
+            },
             toolbar: [
 
                  {
@@ -152,7 +162,7 @@
             ],
             columns: [[
 
-                
+
 					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 22, hidden: true }
 					, { field: 'WEITUODANWEI', title: '@Html.DisplayNameFor(model => model.WEITUODANWEI)', width: 100 }
 					, { field: 'SUOSHUDANWEI', title: '@Html.DisplayNameFor(model => model.SUOSHUDANWEI)', width: 100 }
@@ -220,7 +230,7 @@
 					, { field: 'GONHZUOSHIJIAN', title: '@Html.DisplayNameFor(model => model.GONHZUOSHIJIAN)', width: 100 }
 					, { field: 'ZONGSHIJIAN', title: '@Html.DisplayNameFor(model => model.ZONGSHIJIAN)', width: 100 }
 					, { field: 'BEIZHU', title: '@Html.DisplayNameFor(model => model.BEIZHU)', width: 100 }
-                ]],
+            ]],
             pagination: true,
             rownumbers: true
 
@@ -252,7 +262,7 @@
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
- 
+
     //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
     function flexiSelect() {
 
@@ -288,7 +298,7 @@
         }
         return false;
     }
- 
+
     //“导出”按钮     在6.0版本中修改
     function flexiExport() {
 

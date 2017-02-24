@@ -18,7 +18,7 @@
             受理单位:
         </div>
         <div class="input_search-field">
-            <input type='text' id='SHOULIDANWEI' />
+            @Html.DropDownList("SHOULIDANWEI", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "请选择", new { @class = "easyui-combobox" })
         </div>
     </div>
     <div class='input_search' style="padding-top:10px;">
@@ -182,12 +182,9 @@
 
         //将查询条件按照分隔符拼接成字符串
         var search = "";
-        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
-            if (this.id)
-                search = search + this.id + "&" + this.value + "^";
-            else
-                search = search + this.name + "&" + this.value + "^";
-        });
+        search += "sTARTDATEStart_Time&" + $("#sTARTDATEStart_Time").val() + "^";
+        search += "eNDDATEEnd_Time&" + $("#eNDDATEEnd_Time").val() + "^";
+        search += "SHOULIDANWEI&" + $('#SHOULIDANWEI').combobox('getValue') + "^";
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
