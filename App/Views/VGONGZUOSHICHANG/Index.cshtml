@@ -105,7 +105,7 @@
             @Html.LabelFor(model => model.SHOULIDANWEI):
         </div>
         <div class="input_search-field">
-            <input type='text' id='SHOULIDANWEI' />
+            @Html.DropDownList("SHOULIDANWEI", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "请选择", new { @class = "easyui-combobox" })
         </div>
     </div>
 
@@ -227,12 +227,23 @@
 
         //将查询条件按照分隔符拼接成字符串
         var search = "";
-        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
-            if (this.id)
-                search = search + this.id + "&" + this.value + "^";
-            else
-                search = search + this.name + "&" + this.value + "^";
-        });
+        search += "WEITUORIQIStart_Time&" + $("#WEITUORIQIStart_Time").val() + "^";
+        search += "WEITUORIQIEnd_Time&" + $("#WEITUORIQIEnd_Time").val() + "^";
+        search += "JIANDINGWANCHENGRIQIStart_Time&" + $("#JIANDINGWANCHENGRIQIStart_Time").val() + "^";
+        search += "JIANDINGWANCHENGRIQIEnd_Time&" + $("#JIANDINGWANCHENGRIQIEnd_Time").val() + "^"; 
+        search += "SHENHERIQIStart_Time&" + $("#SHENHERIQIStart_Time").val() + "^";
+        search += "SHENHERIQIEnd_Time&" + $("#SHENHERIQIEnd_Time").val() + "^";
+        search += "SHIYANSHI&" + $("#SHIYANSHI option:selected").val() + "^";
+        search += "PIZHUNRIQIStart_Time&" + $("#PIZHUNRIQIStart_Time").val() + "^";
+        search += "PIZHUNRIQIEnd_Time&" + $("#PIZHUNRIQIEnd_Time").val() + "^";
+        search += "JIANDINGXIAOZHUNYUAN&" + $("#JIANDINGXIAOZHUNYUAN").val() + "^";
+        search += "QIJUMINGCHENG&" + $("#QIJUMINGCHENG").val() + "^";
+        search += "ZHENGSHUBAOGAOBIANHAO&" + $("#ZHENGSHUBAOGAOBIANHAO").val() + "^";
+        search += "CHUCHANGBIANHAO&" + $("#CHUCHANGBIANHAO").val() + "^";
+        search += "ZHENGSHUDANWEI&" + $("#ZHENGSHUDANWEI").val() + "^";
+        search += "QIJUXINGHAO&" + $("#QIJUXINGHAO").val() + "^";
+        search += "SHOULIDANWEI&" + $('#SHOULIDANWEI').combobox('getValue') + "^";
+
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
