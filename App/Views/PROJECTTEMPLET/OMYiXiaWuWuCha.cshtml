@@ -189,12 +189,12 @@
 
 
                    var shijizhi = fomatFloat(accAdd(accMul(accMul((beicebiaozhunzhi), Math.pow(10, -6)), accAdd((celiangpingjunzhi), (erdengbiaozhundianzu))), (beicebiaozhunzhi)), arry[0].length);
-                    $(tr).children().eq(9).find('input').val((shijizhi).toFixed(arry[0].length));
+                    $(tr).children().eq(9).find('input').val(shijizhi);
                 }
                 else {
                     if (celiangpingjunzhi != "") {
                         var shijizhi = fomatFloat(accAdd(accMul(accMul((beicebiaozhunzhi), Math.pow(10, -6)), (celiangpingjunzhi)), (beicebiaozhunzhi)), arry[0].length);
-                        $(tr).children().eq(9).find('input').val((shijizhi).toFixed(arry[0].length));
+                        $(tr).children().eq(9).find('input').val(shijizhi);
                     }
 
                 }
