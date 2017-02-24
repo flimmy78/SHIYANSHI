@@ -34,8 +34,9 @@
                 <option value="三相四线">三相四线</option>
             </select>
         </td>
-        <td><!--cosφ-->1.0</td>
-        <td>
+        <!--<td>cosφ1.0</td>-->
+        <td><input id="COS_t_1_1" name="COS" type="text" class="my-textbox tc" value="1.0" readonly="readonly"></td>
+<td>
             <!--Ib(%)-->
             <select class="my-combobox" name="ACTUALVALUE" id="ACTUALVALUE_t_1_1">
                 <option value="100">100</option>
@@ -59,10 +60,11 @@
         </td>
     </tr>
     <tr>
-        <td><!--cosφ-->0.5L</td>
+        <!--<td>cosφ0.5L</td>-->
+        <td><input id="COS_t_1_2" name="COS" type="text" class="my-textbox tc" value="0.5L" readonly="readonly"></td>
         <td>
             <!--Ib(%)-->
-            <select class="my-combobox" name="BUQUEDINGDU" id="BUQUEDINGDU_t_2_1">
+            <select class="my-combobox" name="ACTUALVALUE" id="ACTUALVALUE_t_1_2">
                 <option value="100">100</option>
                 <option value="50">50</option>
                 <option value="20">20</option>
@@ -72,15 +74,15 @@
         </td>
         <td>
             <!--初始值y1(%)-->
-            <input id="CHUSHIZHIYA_t_2_1" name="CHUSHIZHIYA" type="text" class="my-textbox tc" value="" onblur="blurShuChuFanWeiZuiXiao(this)">
+            <input id="CHUSHIZHIYA_t_1_2" name="CHUSHIZHIYA" type="text" class="my-textbox tc" value="" onblur="blurShuChuFanWeiZuiXiao(this)">
         </td>
         <td>
             <!--24h后y2(%)-->
-            <input id="ERSIHHOUA_t_2_1" name="ERSIHHOUA" type="text" class="my-textbox tc" value="" onblur="blurShuChuFanWeiZuiXiao(this)">
+            <input id="ERSIHHOUA_t_1_2" name="ERSIHHOUA" type="text" class="my-textbox tc" value="" onblur="blurShuChuFanWeiZuiXiao(this)">
         </td>
         <td>
             <!--|y1-y2|(%)-->
-            <input id="ABSYANDY_t_2_1" name="ABSYANDY" type="text" class="my-textbox tc" value="" onblur="blurShuChuFanWeiZuiXiao(this)">
+            <input id="ABSYANDY_t_1_2" name="ABSYANDY" type="text" class="my-textbox tc" value="" onblur="blurShuChuFanWeiZuiXiao(this)">
         </td>
     </tr>
 </tbody>

@@ -139,7 +139,10 @@ namespace Langben.App.Controllers
                 entity.SORT = vEntity.SORT;
                 entity.INPUTSTATE = vEntity.INPUTSTATE;
             }
-
+            if(vEntity!=null && !string.IsNullOrWhiteSpace(vEntity.ID))
+            {
+                ID = vEntity.ID;
+            }
             if (ID != null && ID.Trim() != "")
             {
                 if (!m_BLL.Delete(ref validationErrors, ID))

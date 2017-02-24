@@ -23,7 +23,7 @@ namespace Langben.Report
         /// <summary>
         /// 不确定度的评定 输入
         /// </summary>
-        public string pdText { get; set; }
+        public string pdText { get; set; }       
         /// <summary>
         /// （1）不确定度的A类评定 UA
         /// </summary>
@@ -66,6 +66,24 @@ namespace Langben.Report
         /// 测量结果报告 ,扩展不确定度为
         /// </summary>
         public string txtValueE { get; set; }
+
+        /// <summary>
+        /// UA下拉框类型
+        /// </summary>
+        public string ddlUA { get; set; }
+
+        /// <summary>
+        /// UB下拉框类型
+        /// </summary>
+        public string ddlUB { get; set; }
+        /// <summary>
+        /// UC下拉框类型
+        /// </summary>
+        public string ddlUC { get; set; }
+        /// <summary>
+        /// Urel下拉框类型
+        /// </summary>
+        public string ddlUrel { get; set; }
         /// <summary>
         /// 合并几行单元格
         /// </summary>

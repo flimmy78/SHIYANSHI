@@ -109,6 +109,22 @@ namespace Langben.Report
                         {
                             buDueDingDu.ddlSelectD = node;
                         }
+                        else if (b.Attributes["id"].Value == "ddlUA")
+                        {
+                            buDueDingDu.ddlUA = node;
+                        }
+                        else if (b.Attributes["id"].Value == "ddlUB")
+                        {
+                            buDueDingDu.ddlUB = node;
+                        }
+                        else if (b.Attributes["id"].Value == "ddlUC")
+                        {
+                            buDueDingDu.ddlUC = node;
+                        }
+                        else if (b.Attributes["id"].Value == "ddlUrel")
+                        {
+                            buDueDingDu.ddlUrel = node;
+                        }
 
                     }
                 }
@@ -178,9 +194,6 @@ namespace Langben.Report
                     {
                         buDueDingDu.txtValueB = item.Attributes["value"].Value;
                     }
-
-
-
 
                     else if (item.Attributes["id"].Value == "txtBuQueDingC")
                     {
@@ -381,6 +394,12 @@ namespace Langben.Report
         public static Dictionary<string, int> GetColName(HtmlAgilityPack.HtmlDocument doc)
         {
             var list = new Dictionary<string, int>();
+
+            Dictionary<int, HtmlAgilityPack.HtmlNodeCollection> body = GetTBodyOfInputAndSelect(doc);
+            if(body==null || body.Count==0)
+            {
+                return null;
+            }
             //只遍历通道1
             var tongdao1OfBodyOfInputAndSelect = GetTBodyOfInputAndSelect(doc)[1];
             if (tongdao1OfBodyOfInputAndSelect != null)
@@ -692,7 +711,7 @@ namespace Langben.Report
 
             for (int i = 1; i < 99; i++)
             {
-                string xpath = @"//table[@id='tongdao_" + i + @"']/tbody//input[@type='text'] | //table[@id='tongdao_" + i + @"']/tbody//select";
+                string xpath = @"//table[@id='tongdao_" + i + @"']/tbody//input[@type='text'] | //table[@id='tongdao_" + i + @"']/tbody[@id='tbody_" + i + @"']//input[@type='text'] |//table[@id='tongdao_" + i + @"']/tbody//select";
                 var thead = doc.DocumentNode.SelectNodes(xpath);
                 if (thead == null)
                 {
@@ -824,7 +843,7 @@ namespace Langben.Report
         public static string GetinputHead(HtmlAgilityPack.HtmlDocument doc)
         {
             string errors = "";
-            string xpath = @"//thead//input | //thead//select";
+            string xpath = @"//table[@id='tongdao_1']/thead//input | //table[@id='tongdao_1']/thead//select";
             var collection = doc.DocumentNode.SelectNodes(xpath);
             Dictionary<string, string> ids = new Dictionary<string, string>();
             foreach (var item in collection)

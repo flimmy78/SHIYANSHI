@@ -18,9 +18,9 @@
             @Html.LabelFor(model => model.JIANDINGRIQI):
         </div>
         <div class='input_search-field-time'>
-            <input type="text" id="JIANDINGRIQIStart_Time2" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'JIANDINGRIQIStart_Time\');}' })" />
+            <input type="text" id="JIANDINGRIQIStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'JIANDINGRIQIStart_Time\');}' })" />
             <span>到</span>
-            <input type="text" id="JIANDINGRIQIEnd_Time2" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'JIANDINGRIQIEnd_Time\');}' })" />
+            <input type="text" id="JIANDINGRIQIEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'JIANDINGRIQIEnd_Time\');}' })" />
         </div>
     </div>
     <div class="input_search">
@@ -36,9 +36,9 @@
             @Html.LabelFor(model => model.BAOGAOSHENPITONGGUORIQI):
         </div>
         <div class='input_search-field-time'>
-            <input type="text" id="BAOGAOSHENPITONGGUORIQIStart_Time3" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'BAOGAOSHENPITONGGUORIQIStart_Time\');}' })" />
+            <input type="text" id="BAOGAOSHENPITONGGUORIQIStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'BAOGAOSHENPITONGGUORIQIStart_Time\');}' })" />
             <span>到</span>
-            <input type="text" id="BAOGAOSHENPITONGGUORIQIEnd_Time3" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'BAOGAOSHENPITONGGUORIQIEnd_Time\');}' })" />
+            <input type="text" id="BAOGAOSHENPITONGGUORIQIEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'BAOGAOSHENPITONGGUORIQIEnd_Time\');}' })" />
         </div>
     </div>
     <div class="input_search">
@@ -110,7 +110,7 @@
             @Html.LabelFor(model => model.SHOULIDANWEI):
         </div>
         <div class="input_search-field">
-            <input type='text' id='SHOULIDANWEI' />
+            @Html.DropDownList("SHOULIDANWEI", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "请选择")
         </div>
     </div>
 
@@ -142,13 +142,13 @@
 
             toolbar: [
 
-                 //{
-                 //    text: '详细',
-                 //    iconCls: 'icon-search',
-                 //    handler: function () {
-                 //        return getView();
-                 //    }
-                 //}
+                 {
+                     text: '打印报告',
+                     iconCls: 'icon-print',
+                     handler: function () {
+                         return flexiExport();
+                     }
+                 }
             ],
             columns: [[
 
@@ -157,7 +157,6 @@
 					, { field: 'WEITUODANWEI', title: '@Html.DisplayNameFor(model => model.WEITUODANWEI)', width: 100 }
 					, { field: 'SUOSHUDANWEI', title: '@Html.DisplayNameFor(model => model.SUOSHUDANWEI)', width: 100 }
 					, { field: 'ZHENGSHUDANWEI', title: '@Html.DisplayNameFor(model => model.ZHENGSHUDANWEI)', width: 100 }
-					, { field: 'SONGJIANDANWEI', title: '@Html.DisplayNameFor(model => model.SONGJIANDANWEI)', width: 100 }
 					, { field: 'SHOULIDANWEI', title: '@Html.DisplayNameFor(model => model.SHOULIDANWEI)', width: 100 }
 					, { field: 'CHUCHANGRIQI', title: '@Html.DisplayNameFor(model => model.CHUCHANGRIQI)', width: 100 }
 					, { field: 'QIJUMINGCHENG', title: '@Html.DisplayNameFor(model => model.QIJUMINGCHENG)', width: 100 }
@@ -176,7 +175,13 @@
 					, { field: 'SONGJIANREN', title: '@Html.DisplayNameFor(model => model.SONGJIANREN)', width: 100 }
 					, { field: 'JIESHOUREN', title: '@Html.DisplayNameFor(model => model.JIESHOUREN)', width: 100 }
 					, { field: 'SHIYANSHI', title: '@Html.DisplayNameFor(model => model.SHIYANSHI)', width: 100 }
-					, { field: 'SHIYANSHIJIESHOUSHIJIAN', title: '@Html.DisplayNameFor(model => model.SHIYANSHIJIESHOUSHIJIAN)', width: 100 }
+					, {
+					    field: 'SHIYANSHIJIESHOUSHIJIAN', title: '@Html.DisplayNameFor(model => model.SHIYANSHIJIESHOUSHIJIAN)', width: 100, formatter: function (value, row, index) {
+					        if (value) {
+					            return dateConvert(value);
+					        }
+					    }
+					}
 					, {
 					    field: 'JIANDINGRIQI', title: '@Html.DisplayNameFor(model => model.JIANDINGRIQI)', width: 100, formatter: function (value, row, index) {
 					        if (value) {
@@ -284,6 +289,30 @@
         return false;
     }
  
+    //“导出”按钮     在6.0版本中修改
+    function flexiExport() {
 
+        //将查询条件按照分隔符拼接成字符串
+        var search = "";
+        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
+            if (this.id)
+                search = search + this.id + "&" + this.value + "^";
+            else
+                search = search + this.name + "&" + this.value + "^";
+        });
+
+
+        $.post('../VBIAOZHUNLIANGCHUANGONGZHUO/GetData2',
+            {
+
+                sortName: $('#flexigridData').datagrid('options').sortName,
+                sortOrder: $('#flexigridData').datagrid('options').sortOrder,
+                search: search
+            }, function (res) {
+                window.location.href = res;
+
+
+            });
+    };
 </script>
 

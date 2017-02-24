@@ -8,10 +8,12 @@
 <thead>
     <!--表头-->
     <tr>
-        <th align="center" colspan="6">
+        <th></th>
+        <th align="center" colspan="2">
             检定电流：
             <input class="my-textbox input-width" value="" type="text" name="input4" id="input4_t_1_1">
-            <select class="my-combobox"  name="input5" id="input5_t_1_1">
+     
+            <select class="my-combobox" name="input5" id="input5_t_1_1">
                 <option value="A" selected="">A</option>
                 <option value="KA">KA</option>
                 <option value="mA">mA</option>
@@ -20,16 +22,17 @@
                 <option value="pA">pA</option>
             </select>
         </th>
-        <th>
+        <th  align="center" colspan="2">
             末盘步进：
-            <input class="my-textbox input-width" value="" type="text"  name="input6" id="input6_t_1_1">
-            <select class="my-combobox"  name="input7" id="input7_t_1_1">
-                <option value="A" selected="">A</option>
-                <option value="KA">KA</option>
-                <option value="mA">mA</option>
-                <option value="μA">μA</option>
-                <option value="nA">nA</option>
-                <option value="pA">pA</option>
+            <input class="my-textbox input-width" value="" type="text" name="input6" id="input6_t_1_1">
+            <select class="my-combobox" name="input7" id="input7_t_1_1">
+                <option value="Ω">Ω</option>
+                <option value="TΩ">TΩ</option>
+                <option value="GΩ">GΩ</option>
+                <option value="MΩ">MΩ</option>
+                <option value="kΩ">kΩ</option>
+                <option value="mΩ">mΩ</option>
+                <option value="μΩ">μΩ</option>
             </select>
         </th>
         <th>
@@ -42,11 +45,11 @@
     <tr>
         <th width="80" align="center">序号</th>
     
-        <th width="140" align="center">U<sub>i</sub>(mV)</th>
-        <th width="140" align="center">M<sub>i</sub>(mΩ)</th>
-        <th width="140" align="center">∆<sub>i</sub>(mΩ)</th>
-        <th width="140" align="center">开关变差(mΩ)</th>
-        <th align="center">允许变差(mΩ)</th>
+        <th width="140" align="center">U<sub>i</sub></th>
+        <th width="140" align="center">M<sub>i</sub></th>
+        <th width="140" align="center">∆<sub>i</sub></th>
+        <th width="140" align="center">开关变差</th>
+        <th align="center">允许变差</th>
     </tr>
 </thead>
 
@@ -72,18 +75,19 @@
         //重写set方法，只准对增加空白行
         function set(tbodyIndex) {
 
-            $('#dlg').dialog('open');//打开弹出框
+          //  $('#dlg').dialog('open');//打开弹出框
 
             $("#hideDangQianTongDao").val(tbodyIndex);
-
+            CreateRow();
         }
         //增加行
         function CreateRow() {
 
+
             var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
             var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
             LiangChengShuLiang++;
-            //var txtNumber = $("#txtNumber").val();     //量程值
+          //  var txtNumber = $("#txtNumber").val();     //量程值
             var txtPoint = $("#txtPoint").val();     //检测点数
             var txtPointLen = $("#txtPointLen").val(); //小数点位数
 
@@ -92,6 +96,8 @@
 
             var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
 
+
+
             for (var rowidx = 0; rowidx < txtPoint; rowidx++) {
                 rowLength++;
                 htmlString.push("<tr rowindex='" + rowLength + "'>");
@@ -99,30 +105,31 @@
                 var rowspan = 1; //合并单元格行数
 
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
-
                 //计算默认值
-
                 if (rowidx == 0) {
                     //需要合并的列 //量程
-
+                  
+                   
                 }
-
-                //需要合并的列
-                htmlString.push(SetTDHtml(rowspan, "RANGE", HangHaoID, rowidx, '', "classstyle100", ''));
-
-                //标准值 增加下拉框单位A
-                htmlString.push("<td  rowspan='1' class='classstyle100' align='center' >:</td>");
-
-                //显示值
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100"));
-
-                //相对误差
-                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
-
-                //校准结果的不确定度 U(K =
-                htmlString.push("<td  rowspan='1' class='classstyle100' align='center'>:</td>");
-
-                htmlString.push(SetTDHtml(rowspan, "JUEDUIZHI", HangHaoID, rowidx, '', "classstyle100"));
+                //序号
+                htmlString.push(SetTDHtml(rowspan, "RANGE", HangHaoID, rowidx, (rowLength-1).toString(), "", "", "changeValue"));
+                //Ui(mV)
+                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, "", "", "", "changeValue"));
+                //Mi(mΩ)
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "changeValue"));
+                var value="/";
+                if (rowLength != 1)
+                {
+                    value = "";
+                }
+                //∆i(mΩ)
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, value, "", "", "changeValue"));
+                if (rowLength == 1) {
+                    //开关变差(mΩ)
+                    htmlString.push(SetTDHtml(1000, "SHIJISHUCHUZHI", lianChengID, rowidx, "", "", "", "changeValue"));
+                    //允许变差(mΩ)
+                    htmlString.push(SetTDHtml(1000, "RELATIVEERROR", lianChengID, rowidx, "", "", "", "changeValue"));
+                }
                 htmlString.push("</tr>");
             }
             htmlString = htmlString.join("");
@@ -130,14 +137,105 @@
             var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
             $('#dlg').window('close');//关闭弹出框
+
             $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
         //离开事件，用于计算
-        function blurValue(obj) {
-              LianDongShiJiZhi(obj);
+        //计算标准值
+        function changeValue(obj) {
+
+            jiSuanWuCha(obj, "RANGE", "OUTPUTVALUE", "READVALUE", "ACTUALVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR");
+
+        }
+        //误差
+        //obj 自身对象
+        //T1 序号
+        //T2 Ui(mV)
+        //T3 Mi(mΩ)
+        //T4 ∆i(mΩ)
+        //T5 开关变差(mΩ)
+        //T6 允许变差(mΩ)
+        function jiSuanWuCha(obj, T1, T2, T3, T4, T5, T6, T7, T8, T9) {
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+            var liangCheng = id.split('_')[2];
+            var rowLength = id.split('_')[3];
+            T1 = T1 + id;//改动的地方，误差的列的name值
+            T2 = T2 + id;//改动的地方，误差的列的name值
+            T30 = T3 + "_" + tongdao + "_" + (liangCheng - 1) + "_" + (rowLength - 1);
+            T3 = T3 + id;//改动的地方，误差的列的name值
+            
+            T4 = T4 + id;//有功分量 相对误差(%
+            T5 = T5 + id;//改动的地方，参与计算的列的name值
+            T6 = T6 + id;//无功分量 相对误差(%
+
+            var input4 = "input4" + "_" + tongdao + "_1_1";
+            var input4Data = $("#" + input4).val();//检定电流
+            var T1Data = $(obj).parent().parent().find("#" + T1).val(); //T1 序号
+            var T2Data = $(obj).parent().parent().find("#" + T2).val();  //T2 Ui(mV)
+            //   var T3Data = $(obj).parent().parent().find("#" + T3).val();  //T3 Mi(mΩ)
+            //  var T4Data = $(obj).parent().parent().find("#" + T4).val();  //T4 ∆i(mΩ)
+            var T5Data = $(obj).parent().parent().find("#" + T5).val();   //T5 开关变差(mΩ)
+            var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T6 允许变差(mΩ)
+           
+            var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+            txtPointLen = parseFloat(txtPointLen);
+            //【Mi】=【Ui】/【检定电流】，小数位数后三位，四舍六入，逢五奇进偶不进																																										
+            if (T2Data != "" && input4Data != "") {
+                txtPointLen = txtPointLen < 3 ? 3 : txtPointLen;
+                T2Data = parseFloat(T2Data);
+                input4Data = parseFloat(input4Data);
+                var jianfa = accDiv(T2Data, input4Data);
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                $(obj).parent().parent().find("#" + T3).val(data);
+            }
+            
+            //【∆i】，第一个值默认/,从第二个值开始=∆i(mΩ)=第一行的Mi(mΩ - 第二行的Mi(mΩ 																																								
+            if (rowLength != 1) {
+                var T3Data0 = $("#" + T30).val();  //T3 Mi(mΩ)
+                var T3Data = $(obj).parent().parent().find("#" + T3).val();  //T3 Mi(mΩ)
+                if (T3Data != "" && T3Data0 != "") {
+                    T3Data = parseFloat(T3Data);
+                    T3Data0 = parseFloat(T3Data0);
+
+                    var jianfa = accSub(T3Data0, T3Data);
+                    var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                    $(obj).parent().parent().find("#" + T4).val(data);
+                }
+            }
+            //【开关变差】=MAX(ABS【∆i】(2)：ABS【∆i】(n)),即ABS【∆i】中最大的		
+              var els = document.getElementsByName("ACTUALVALUE");
+            var max = els[1].value;
+            var maxValue = els[1].value;
+            if (max != "") { max = Math.abs(max); }
+            for (var i = 1, j = els.length; i < j; i++) {
+                var val=els[i].value;
+                if (val != "") {
+                    val = Math.abs(val);
+                    if (max == "")
+                    {
+                        max = val;
+                        maxValue = els[i].value;
+                    } else if (max < val)
+                    {
+                        max = val;
+                        maxValue = els[i].value;
+                    }
+                }
+
+            }
+            var r1;
+            try { r1 = maxValue.toString().split(".")[1].length } catch (e) { r1 = 0 }
+            max = zeroFloat(max, r1);
+            $("#SHIJISHUCHUZHI" + "_" + tongdao + "_1").val(max);
+           
         }
 
 
+       																																							
 
     </script>
 
@@ -162,11 +260,11 @@
 
             <tr>
                 <td align="right">检测点数：</td>
-                <td><input type="text" id="txtPoint" value="" name="txtPoint" class="easyui-textbox  required digits" style="width:200px" /></td>
+                <td><input type="text" id="txtPoint" value="1" name="txtPoint" class="easyui-textbox  required digits" style="width:200px" /></td>
             </tr>
             <tr>
                 <td align="right">小数点位数：</td>
-                <td><input type="text" id="txtPointLen" value="" name="txtPointLen" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
+                <td><input type="text" id="txtPointLen" value="3" name="txtPointLen" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
             </tr>
         </table>
     </div>

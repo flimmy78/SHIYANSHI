@@ -16,7 +16,7 @@
         <th width="90" rowspan="2" align="center">实际值<br>(Ω)</th>
         <th width="90" rowspan="2" align="center">误差<br>(%)</th>
         <th width="90" rowspan="2" align="center">允许误差<br>(%)</th>
-        <th width="90" rowspan="2" align="center">检定电流</th>
+        <th width="90" rowspan="2" align="center">检定电流<br>(A)</th>
         <th rowspan="2" align="center">校准结果的不确定度<br>U(k=<select class="my-combobox" name="K" id="K_t_1_1">
     <option value="2">2</option>
     <option value="3">3</option>
@@ -24,7 +24,7 @@
 </select>)</th>
     </tr>
     <tr>
-        <th align="center">标称值（Ω）</th>
+        <th width="90" align="center">标称值（Ω）</th>
         <th width="90" align="center">标称值（Ω）</th>
         <th width="90" align="center">编号</th>
         <th width="90" align="center">δ<sub>n</sub>(×10-6)</th>
@@ -42,7 +42,7 @@
 <tfoot>
     <!--表尾-->
     <tr>
-        <td colspan="7">
+        <td colspan="12">
             <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
             <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加行数</a>
 
@@ -51,6 +51,10 @@
 </tfoot>
 @section JS {
     <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $('#REMARK').parent('td').html('δn为标准电阻的相对修正值。 <br> δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。 <br>δx=（δx1+δx2）/2');
+           // $('#REMARK').text('(1).δn为标准电阻的相对修正值。 (2). δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。 (3).δx=（δx1+δx2）/2')
+        });
         //一个量程的需要这个方法
         //重写set方法，只准对增加空白行
         function set(tbodyIndex) {
@@ -93,8 +97,9 @@
 
                 //需要合并的列
 
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "calculate1.erdengbiaozhundianzubiaochenzhi", ""));
-
+                //htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "calculate1.erdengbiaozhundianzubiaochenzhi", ""));
+                var id = "READVALUE_" + HangHaoID;
+                htmlString.push("<td align='center' ><select onchange='calculate1.erdengbiaozhundianzubiaochenzhi(this)' class=\"my-combobox\" name=\"select\" id='" + id + "'>   <option value=\"\"></option> <option value=\"0.0001\">0.0001</option> <option value=\"0.001\">0.001</option> <option value=\"0.01\">0.01</option><option value=\"0.1\">0.1</option><option value=\"1\">1</option><option value=\"10\">10</option><option value=\"100\">100</option><option value=\"1000\">1000</option><option value=\"10000\">10000</option><option value=\"100000\">100000</option></td>");
                 htmlString.push(SetTDHtml(rowspan, "WE", HangHaoID, rowidx, "", ""));
                 htmlString.push(SetTDHtml(rowspan, "TYEW", HangHaoID, rowidx, "", ""));
                 htmlString.push(SetTDHtml(rowspan, "UI", HangHaoID, rowidx, "", ""));
@@ -110,11 +115,14 @@
                 htmlString.push(SetTDHtml(rowspan, "HZMY", HangHaoID, rowidx, '', "classstyle100"));
 
                 //显示值 增加下拉框单位V
-                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100", '', ""));
+                //htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100", '', ""));
+                var sid = "SHIJISHUCHUZHI_" + HangHaoID;
+                htmlString.push("<td align='center' >±<select class=\"my-combobox\" name=\"select\" id='" + sid + "'>   <option value=\"\"></option> <option value=\"0.01\">0.01</option><option value=\"0.05\">0.05</option><option value=\"0.02\">0.02</option><option value=\"0.1\">0.1</option></td>");
 
                 //相对误差
-                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
-
+                //htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
+                var rid = "RELATIVEERROR_" + HangHaoID;
+                htmlString.push("<td align='center' ><select class=\"my-combobox\" name=\"select\" id='" + rid + "'> <option value=\"\"></option><option value=\"5\">5</option><option value=\"2\">2</option><option value=\"0.3\">0.3</option><option value=\"0.1\">0.1</option><option value=\"0.03\">0.03</option><option value=\"0.01\">0.01</option><option value=\"0.003\">0.003</option><option value=\"0.0001\">0.0001</option></td>");
 
                 //校准结果的不确定度 U(K =
                 htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', "classstyle"));
@@ -139,19 +147,36 @@
               //  TongDao.getCurTongDaoIdx(obj);
                 // var arry = this.getWuChaLength(obj);
                 var tr = $(obj).parents('tr');
-                var beicebiaochenzhi = $(tr).children().eq(0).find('input').val();
-                if ((beicebiaochenzhi == '0.0001' || beicebiaochenzhi == '0.001' || beicebiaochenzhi == '0.01' || beicebiaochenzhi == '0.1') && $(tr).children().eq(0).find('input').val() != "") {
-                    $(tr).children().eq(1).find('input').val(parseFloat(beicebiaochenzhi) * 100);
+                var beicebiaochenzhi = $(tr).children().eq(0).find('select').val();
+                if ((beicebiaochenzhi == '0.0001' || beicebiaochenzhi == '0.001' || beicebiaochenzhi == '0.01' || beicebiaochenzhi == '0.1') && $(tr).children().eq(0).find('select').val() != "") {
+                    //$(tr).children().eq(1).find('input').val(parseFloat(beicebiaochenzhi) * 100);
+                   $(tr).children().eq(1).find('input').val(accMul(parseFloat(beicebiaochenzhi),100));
+
                 }
                 else {
                     if (beicebiaochenzhi != "") {
                         $(tr).children().eq(1).find('input').val(parseFloat(beicebiaochenzhi));
                     }
                 }
-
-              //  this.shijizhi(obj);
-                //this.wucha(obj);
-                //this.jiandingdianliu(obj);
+                if (beicebiaochenzhi == '0.0001')
+                    $(tr).children().eq(9).find('select').val(0.1);
+                if (beicebiaochenzhi == '0.001')
+                    $(tr).children().eq(9).find('select').val(0.05);
+                if (beicebiaochenzhi == '0.01')
+                    $(tr).children().eq(9).find('select').val(0.02);
+                if (beicebiaochenzhi == '0.1')
+                    $(tr).children().eq(9).find('select').val(0.01);
+                if (beicebiaochenzhi == '1')
+                    $(tr).children().eq(9).find('select').val(0.01);
+                if (beicebiaochenzhi == '10')
+                    $(tr).children().eq(9).find('select').val(0.01);
+                if (beicebiaochenzhi == '100')
+                    $(tr).children().eq(9).find('select').val(0.01);
+                if (beicebiaochenzhi == '1000')
+                    $(tr).children().eq(9).find('select').val(0.01);
+                this.shijizhi(obj);
+                this.wucha(obj);
+                this.jiandingdianliu(obj);
             },
             shijizhi: function (obj) {
                 //【实际值((Ω)】计算方式如下：
@@ -164,18 +189,18 @@
 
                 var tr = $(obj).parents('tr');
                 var arry = this.getbeiceLength(obj);
-                var beicebiaozhunzhi = $(tr).children().eq(0).find('input').val();
+                var beicebiaozhunzhi = $(tr).children().eq(0).find('select').val();
                 var celiangpingjunzhi = $(tr).children().eq(6).find('input').val();
                 var erdengbiaozhundianzu = $(tr).children().eq(3).find('input').val();
 
                 if ((beicebiaozhunzhi != "" && celiangpingjunzhi != "" && erdengbiaozhundianzu != "") && (beicebiaozhunzhi == "0.0001" || beicebiaozhunzhi == "0.001" || beicebiaozhunzhi != "0.01" || beicebiaozhunzhi != "0.1")) {
-                    var shijizhi = fomatFloat(parseFloat(beicebiaozhunzhi) * Math.pow(10, -6) * (parseFloat(celiangpingjunzhi) + parseFloat(erdengbiaozhundianzu)) + parseFloat(beicebiaozhunzhi), arry[0].length)
-                    $(tr).children().eq(7).find('input').val(shijizhi);
+                    var shijizhi = fomatFloat(accAdd(accMul(accMul(parseFloat(beicebiaozhunzhi), Math.pow(10, -6)), accAdd(parseFloat(celiangpingjunzhi), parseFloat(erdengbiaozhundianzu))), parseFloat(beicebiaozhunzhi)), arry[0].length);
+                    $(tr).children().eq(7).find('input').val(parseFloat(shijizhi).toFixed(arry[0].length));;
                 }
                 else {
                     if (celiangpingjunzhi != "") {
-                        var shijizhi = fomatFloat(parseFloat(beicebiaozhunzhi) * Math.pow(10, -6) * parseFloat(celiangpingjunzhi) + parseFloat(beicebiaozhunzhi), arry[0].length)
-                        $(tr).children().eq(7).find('input').val(shijizhi);
+                        var shijizhi = fomatFloat(accAdd(accMul(accMul(parseFloat(beicebiaozhunzhi), Math.pow(10, -6)), parseFloat(celiangpingjunzhi)), parseFloat(beicebiaozhunzhi)), arry[0].length);
+                        $(tr).children().eq(7).find('input').val(parseFloat(shijizhi).toFixed(arry[0].length));
                     }
 
                 }
@@ -185,20 +210,21 @@
                 //【被测电阻-标称值（Ω）】对【检定电流】是：0.0001对5,0.001对5,0.01对2,0.1对0.3，
                 //1对0.1位,10对0.03,100对0.01,1000对0.003，10000对应0.0001,100000对应0.0001
                 var tr = $(obj).parents('tr');
-                var beicedianzubiaochenzhi = $(tr).children().eq(0).find('input').val();
+                var beicedianzubiaochenzhi = $(tr).children().eq(0).find('select').val();
                 var jiandingdianliu = this.getjiandingdianliu(beicedianzubiaochenzhi);
                 if (jiandingdianliu != "") {
-                    $(tr).children().eq(10).find('input').val(jiandingdianliu);
+                    $(tr).children().eq(10).find('select').val(jiandingdianliu);
                 }
 
             },
             wucha: function (obj) {
                 //【误差】=(【被测电阻-标称值（Ω）】-【实际值】)/【实际值】*100%，小数点后三位，四舍六入，逢五奇进偶不进
                 var tr = $(obj).parents('tr');
-                var beijiancedianzubiaochenzhi = $(tr).children().eq(0).find('input').val();
+                var beijiancedianzubiaochenzhi = $(tr).children().eq(0).find('select').val();
                 var shijizhi = $(tr).children().eq(7).find('input').val();
                 if (beijiancedianzubiaochenzhi != "" && shijizhi != "") {
                     var wucha = (parseFloat(beijiancedianzubiaochenzhi) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100;
+                   // var wucha =accMul(accDiv(accSub(parseFloat(beijiancedianzubiaochenzhi), parseFloat(shijizhi)), parseFloat(shijizhi)), 100)
                     $(tr).children().eq(8).find('input').val(fomatFloat(wucha, 3));
                 }
 
@@ -210,7 +236,8 @@
                 var zhengxiangceliang = $(tr).children().eq(4).find('input').val();
                 var fanxiangceliang = $(tr).children().eq(5).find('input').val();
                 if (zhengxiangceliang != "" && fanxiangceliang != "") {
-                    $(tr).children().eq(6).find('input').val(fomatFloat((parseFloat(zhengxiangceliang) + parseFloat(fanxiangceliang)) / 2, 0));
+                    //$(tr).children().eq(6).find('input').val(fomatFloat((parseFloat(zhengxiangceliang) + parseFloat(fanxiangceliang)) / 2, 0));
+                    $(tr).children().eq(6).find('input').val(fomatFloat(accDiv(accAdd(parseFloat(zhengxiangceliang), parseFloat(fanxiangceliang)), 2), 0));
                     this.shijizhi(obj);
                 }
             }, getjiandingdianliu: function (value) {
@@ -254,7 +281,7 @@
                 var tr = $(obj).parents('tr');
                 var arry = [];
                 var len = 5;
-                var beicedianzubiaochenzhi = $(tr).children().eq(0).find('input').val();
+                var beicedianzubiaochenzhi = $(tr).children().eq(0).find('select').val();
                 if (beicedianzubiaochenzhi != "") {
 
                     var datas = beicedianzubiaochenzhi.split('.');

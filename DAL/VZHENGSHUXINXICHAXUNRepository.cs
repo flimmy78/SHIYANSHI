@@ -33,22 +33,22 @@ namespace Langben.DAL
                 foreach (var item in queryDic)
                 {
                     //oracle数据库使用linq对时间段查询
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Time)) //开始时间
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key== "JIANDINGRIQIStart_Time") //开始时间
                     {
                         startTime = Convert.ToDateTime(item.Value);
                         continue;
                     }
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(End_Time)) //结束时间+1
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "JIANDINGRIQIEnd_Time") //结束时间+1
                     {
                         endTime = Convert.ToDateTime(item.Value).AddDays(1);
                         continue;
                     }
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains("Start_Time2")) //开始时间
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "YOUXIAOQIZHIStart_Time") //开始时间
                     {
                         startTime2 = Convert.ToDateTime(item.Value);
                         continue;
                     }
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains("Start_Time2")) //结束时间+1
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "YOUXIAOQIZHIEnd_Time") //结束时间+1
                     {
                         endTime2 = Convert.ToDateTime(item.Value).AddDays(1);
                         continue;
@@ -91,19 +91,19 @@ namespace Langben.DAL
                      .AsQueryable();
             if (null != startTime)
             {
-                data = data.Where(m => startTime < m.JIANDINGRIQI);
+                data = data.Where(m => startTime <= m.JIANDINGRIQI);
             }
             if (null != endTime)
             {
-                data = data.Where(m => endTime > m.JIANDINGRIQI);
+                data = data.Where(m => endTime >= m.JIANDINGRIQI);
             }
             if (null != startTime2)
             {
-                data = data.Where(m => startTime2 < m.YOUXIAOQIZHI);
+                data = data.Where(m => startTime2 <= m.YOUXIAOQIZHI);
             }
             if (null != endTime2)
             {
-                data = data.Where(m => endTime2 > m.YOUXIAOQIZHI);
+                data = data.Where(m => endTime2 >= m.YOUXIAOQIZHI);
             }
             return data;
         }

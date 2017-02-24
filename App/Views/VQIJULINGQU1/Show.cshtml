@@ -173,6 +173,7 @@
 
     </div>
     <div class="tr mt10">
+        <input id="Button15" type="button" value="签字成功，确认返回" class="my-btn" onclick="return Button15_onclick()" />
         <input id="Button3" type="button" value="重新签字" class="my-btn" onclick="return Button3_onclick()" />
         <input id="Button14" type="button" value="确定" class="my-btn" onclick="baocun()" />
     </div>
@@ -193,10 +194,16 @@
             var res;
             res = obj.HWInitialize();
             document.getElementById("hid").style.display = "none";
+            Button14_onclick();
         }
 
         function Button3_onclick() {
             obj.HWClearPenSign();
+        }
+        function Button14_onclick() {
+            var stream = obj.HWSwitchMonitor(1, 0);
+        } function Button15_onclick() {
+            var stream = obj.HWSwitchMonitor(0, 0);
         }
         function baocun() {
             var stream;

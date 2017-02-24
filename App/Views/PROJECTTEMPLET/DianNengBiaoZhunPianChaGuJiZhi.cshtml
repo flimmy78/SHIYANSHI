@@ -11,82 +11,103 @@
         <th colspan="11" style="text-align:right">等级<input id="zhidingwucha_t_1_1" name="zhidingwucha" type="text" class="my-textbox tc" value="" style="width:120px"></th>
     </tr>
     <tr>
-        <th align="center"  colspan="3">量限：</th>
-        <th >cosφ</th>
-        <th >y1(%)</th>
-        <th >y2(%)</th>
-        <th >y3(%)</th>
-        <th >y4(%)</th>
-        <th >y5(%)</th>
-        <th >s(%)</th>
-        <th >s化整(%)</th>
+        <th align="center" colspan="3">量限：</th>
+        <th>cosφ</th>
+        <th>y1(%)</th>
+        <th>y2(%)</th>
+        <th>y3(%)</th>
+        <th>y4(%)</th>
+        <th>y5(%)</th>
+        <th>s(%)</th>
+        <th>s化整(%)</th>
     </tr>
-     <tr rowindex="1">
-    <td class="classstyle" rowspan="2" align="center">
-          <select class="my-combobox" name="RANGE" style="width:79px; " id="RANGE_t_1">
-        <option value="单相">单相</option> <option value="三相三线">三相三线</option>
-        <option value="三相四线">三相四线</option>  </select></td>
-    <td class="classstyle" rowspan="2" align="center"> 
-         <input type="text" class="my-textbox input-width" value="" id="OUTPUTVALUE_t_1" name="OUTPUTVALUE" onblur="LianDongBuQueDingDu(this);">
-        <select class="my-combobox" name="OUTPUTVALUE_UNIT" id="OUTPUTVALUE_UNIT_t_1_1">
-            <option value="V">V</option>
-            <option value="MV">MV</option>
-            <option value="kV">kV</option>
-            <option value="mV">mV</option>
-            <option value="μV">μV</option>
-        </select>
-    </td>
-    <td class="classstyle" rowspan="2" align="center"> 
-         <input type="text" class="my-textbox input-width" value="" id="OUTPUTVAL1_t_1" name="OUTPUTVAL1" onblur="LianDongBuQueDingDu(this);">
-        <select class="my-combobox" name="OUTPUTVAL1_UNIT" style="width:50px; " id="OUTPUTVAL1_UNIT_t_1">
-            <option value="A">A</option>
-            <option value="kA">kA</option>
-            <option value="mA">mA</option>
-            <option value="μA">μA</option>
-            <option value="nA">nA</option>
-            <option value="pA">pA</option>
-        </select>
-    </td>
-    <td class="classstyle" rowspan="1" align="center"> 
-         <select class="my-combobox" name="READVALUE" style="width:79px; " id="READVALUE_t_1_1">
-        <option value="1.0">1.0</option> <option value="0.5L">0.5L</option></select></td>
-    <td class="classstyle" rowspan="1" align="center"> 
-         <input type="text" class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_1" name="ACTUALVALUE" onblur="changeValue(this); LianDongBuQueDingDu(this);"></td>
-    <td class="classstyle" rowspan="1" align="center"> 
-         <input type="text" class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" onblur="changeValue(this);LianDongBuQueDingDu(this);">
-         </td>
-    <td class="classstyle" rowspan="1" align="center"> 
-         <input type="text" class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_1" name="RELATIVEERROR" onblur="changeValue(this);LianDongBuQueDingDu(this);"></td>
-    <td class="classstyle" rowspan="1" align="center"> 
-         <input type="text" class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE1_t_1_1" name="UNCERTAINTYDEGREE1" onblur="changeValue(this); LianDongBuQueDingDu(this);"></td>
-    <td class="classstyle" rowspan="1" align="center"> 
-         <input type="text" class="my-textbox input-width" value="" id="BUQUEDINGDU_t_1_1" name="BUQUEDINGDU" onblur=" changeValue(this); LianDongBuQueDingDu(this);">
-         </td>
-    <td class="classstyle" rowspan="1" align="center">
-          <input type="text" class="my-textbox input-width" value="" id="JISUANWUCHA_t_1_1" name="JISUANWUCHA" onblur="changeValue(this); LianDongBuQueDingDu(this);"></td>
-    <td class="classstyle" rowspan="1" align="center">
-          <input type="text" class="my-textbox input-width" value="" id="JISUANWUCHA1_t_1_1" name="JISUANWUCHA1" onblur="    LianDongBuQueDingDu(this);"></td></tr>
-     <tr rowindex="2"><td class="classstyle" rowspan="1" align="center"> 
-         <select class="my-combobox" name="READVALUE" style="width:79px; " id="READVALUE_t_1_2">
-         <option value="1.0">1.0</option> <option value="0.5L">0.5L</option></select></td>
-    <td class="classstyle" rowspan="1" align="center">
-          <input type="text" class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_2" name="ACTUALVALUE" onblur="changeValue(this); LianDongBuQueDingDu(this);"></td>
-    <td class="classstyle" rowspan="1" align="center"> 
-         <input type="text" class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_2" name="SHIJISHUCHUZHI" onblur="    changeValue(this); LianDongBuQueDingDu(this);"></td>
-    <td class="classstyle" rowspan="1" align="center"> 
-         <input type="text" class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_2" name="RELATIVEERROR" onblur="    changeValue(this); LianDongBuQueDingDu(this);"></td>
-    <td class="classstyle" rowspan="1" align="center"> 
-         <input type="text" class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE1_t_1_2" name="UNCERTAINTYDEGREE1" onblur="changeValue(this); LianDongBuQueDingDu(this);"></td>
-    <td class="classstyle" rowspan="1" align="center"> 
-         <input type="text" class="my-textbox input-width" value="" id="BUQUEDINGDU_t_1_2" name="BUQUEDINGDU" onblur="changeValue(this); LianDongBuQueDingDu(this);">
-         </td>
-    <td class="classstyle" rowspan="1" align="center">
-          <input type="text" class="my-textbox input-width" value="" id="JISUANWUCHA_t_1_2" name="JISUANWUCHA" onblur="changeValue(this); LianDongBuQueDingDu(this);"></td>
-    <td class="classstyle" rowspan="1" align="center"> 
-         <input type="text" class="my-textbox input-width" value="" id="JISUANWUCHA1_t_1_2" name="JISUANWUCHA1" onblur="    LianDongBuQueDingDu(this);">
-         </td>
+    @*<tr rowindex="1">
+        <td class="classstyle" rowspan="2" align="center">
+            <select class="my-combobox" name="RANGE" style="width:79px; " id="RANGE_t_1">
+                <option value="单相">单相</option>
+                <option value="三相三线">三相三线</option>
+                <option value="三相四线">三相四线</option>
+            </select>
+        </td>
+        <td class="classstyle" rowspan="2" align="center">
+            <input type="text" class="my-textbox input-width" value="" id="OUTPUTVALUE_t_1" name="OUTPUTVALUE" onblur="LianDongBuQueDingDu(this);">
+            <select class="my-combobox" name="OUTPUTVALUE_UNIT" id="OUTPUTVALUE_UNIT_t_1_1">
+                <option value="V">V</option>
+                <option value="MV">MV</option>
+                <option value="kV">kV</option>
+                <option value="mV">mV</option>
+                <option value="μV">μV</option>
+            </select>
+        </td>
+        <td class="classstyle" rowspan="2" align="center">
+            <input type="text" class="my-textbox input-width" value="" id="OUTPUTVAL1_t_1" name="OUTPUTVAL1" onblur="LianDongBuQueDingDu(this);">
+            <select class="my-combobox" name="OUTPUTVAL1_UNIT" style="width:50px; " id="OUTPUTVAL1_UNIT_t_1">
+                <option value="A">A</option>
+                <option value="kA">kA</option>
+                <option value="mA">mA</option>
+                <option value="μA">μA</option>
+                <option value="nA">nA</option>
+                <option value="pA">pA</option>
+            </select>
+        </td>
+        <td class="classstyle" rowspan="1" align="center">
+            <select class="my-combobox" name="READVALUE" style="width:79px; " id="READVALUE_t_1_1">
+                <option value="1.0">1.0</option>
+                <option value="0.5L">0.5L</option>
+            </select>
+        </td>
+        <td class="classstyle" rowspan="1" align="center">
+            <input type="text" class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_1" name="ACTUALVALUE" onblur="changeValue(this); LianDongBuQueDingDu(this);">
+        </td>
+        <td class="classstyle" rowspan="1" align="center">
+            <input type="text" class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" onblur="changeValue(this);LianDongBuQueDingDu(this);">
+        </td>
+        <td class="classstyle" rowspan="1" align="center">
+            <input type="text" class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_1" name="RELATIVEERROR" onblur="changeValue(this);LianDongBuQueDingDu(this);">
+        </td>
+        <td class="classstyle" rowspan="1" align="center">
+            <input type="text" class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE1_t_1_1" name="UNCERTAINTYDEGREE1" onblur="changeValue(this); LianDongBuQueDingDu(this);">
+        </td>
+        <td class="classstyle" rowspan="1" align="center">
+            <input type="text" class="my-textbox input-width" value="" id="BUQUEDINGDU_t_1_1" name="BUQUEDINGDU" onblur=" changeValue(this); LianDongBuQueDingDu(this);">
+        </td>
+        <td class="classstyle" rowspan="1" align="center">
+            <input type="text" class="my-textbox input-width" value="" id="JISUANWUCHA_t_1_1" name="JISUANWUCHA" onblur="changeValue(this); LianDongBuQueDingDu(this);">
+        </td>
+        <td class="classstyle" rowspan="1" align="center">
+            <input type="text" class="my-textbox input-width" value="" id="JISUANWUCHA1_t_1_1" name="JISUANWUCHA1" onblur=" LianDongBuQueDingDu(this);">
+        </td>
     </tr>
-  
+    <tr rowindex="2">
+        <td class="classstyle" rowspan="1" align="center">
+            <select class="my-combobox" name="READVALUE" style="width:79px; " id="READVALUE_t_1_2">
+                <option value="1.0">1.0</option>
+                <option value="0.5L">0.5L</option>
+            </select>
+        </td>
+        <td class="classstyle" rowspan="1" align="center">
+            <input type="text" class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_2" name="ACTUALVALUE" onblur="changeValue(this); LianDongBuQueDingDu(this);">
+        </td>
+        <td class="classstyle" rowspan="1" align="center">
+            <input type="text" class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_2" name="SHIJISHUCHUZHI" onblur=" changeValue(this); LianDongBuQueDingDu(this);">
+        </td>
+        <td class="classstyle" rowspan="1" align="center">
+            <input type="text" class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_2" name="RELATIVEERROR" onblur=" changeValue(this); LianDongBuQueDingDu(this);">
+        </td>
+        <td class="classstyle" rowspan="1" align="center">
+            <input type="text" class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE1_t_1_2" name="UNCERTAINTYDEGREE1" onblur="changeValue(this); LianDongBuQueDingDu(this);">
+        </td>
+        <td class="classstyle" rowspan="1" align="center">
+            <input type="text" class="my-textbox input-width" value="" id="BUQUEDINGDU_t_1_2" name="BUQUEDINGDU" onblur="changeValue(this); LianDongBuQueDingDu(this);">
+        </td>
+        <td class="classstyle" rowspan="1" align="center">
+            <input type="text" class="my-textbox input-width" value="" id="JISUANWUCHA_t_1_2" name="JISUANWUCHA" onblur="changeValue(this); LianDongBuQueDingDu(this);">
+        </td>
+        <td class="classstyle" rowspan="1" align="center">
+            <input type="text" class="my-textbox input-width" value="" id="JISUANWUCHA1_t_1_2" name="JISUANWUCHA1" onblur=" LianDongBuQueDingDu(this);">
+        </td>
+    </tr>*@
+    
 </thead>
 <tbody id="tbody_moban">
 

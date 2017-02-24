@@ -18,9 +18,9 @@
             @Html.LabelFor(model => model.JIANDINGWANCHENGRIQI):
         </div>
         <div class='input_search-field-time'>
-            <input type="text" id="JIANDINGWANCHENGRIQIStart_Time2" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'JIANDINGWANCHENGRIQIStart_Time2\');}' })" />
+            <input type="text" id="JIANDINGWANCHENGRIQIStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'JIANDINGWANCHENGRIQIStart_Time\');}' })" />
             <span>到</span>
-            <input type="text" id="JIANDINGWANCHENGRIQIEnd_Time2" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'JIANDINGWANCHENGRIQIEnd_Time2\');}' })" />
+            <input type="text" id="JIANDINGWANCHENGRIQIEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'JIANDINGWANCHENGRIQIEnd_Time\');}' })" />
         </div>
     </div>
 
@@ -29,9 +29,9 @@
             @Html.LabelFor(model => model.SHENHERIQI):
         </div>
         <div class='input_search-field-time'>
-            <input type="text" id="SHENHERIQIStart_Time3" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'SHENHERIQIStart_Time3\');}' })" />
+            <input type="text" id="SHENHERIQIStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'SHENHERIQIStart_Time\');}' })" />
             <span>到</span>
-            <input type="text" id="SHENHERIQIEnd_Time3" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'SHENHERIQIEnd_Time3\');}' })" />
+            <input type="text" id="SHENHERIQIEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'SHENHERIQIEnd_Time\');}' })" />
         </div>
     </div>
     <div class="input_search">
@@ -47,9 +47,9 @@
             @Html.LabelFor(model => model.PIZHUNRIQI):
         </div>
         <div class='input_search-field-time'>
-            <input type="text" id="PIZHUNRIQIStart_Time4" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'PIZHUNRIQIStart_Time4\');}' })" />
+            <input type="text" id="PIZHUNRIQIStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'PIZHUNRIQIStart_Time\');}' })" />
             <span>到</span>
-            <input type="text" id="PIZHUNRIQIEnd_Time4" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'PIZHUNRIQIEnd_Time4\');}' })" />
+            <input type="text" id="PIZHUNRIQIEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'PIZHUNRIQIEnd_Time\');}' })" />
         </div>
     </div>
     <div class="input_search">
@@ -134,7 +134,16 @@
             sortName: 'ID',
             sortOrder: 'desc',
             idField: 'ID',
+            toolbar: [
 
+                     {
+                         text: '打印报告',
+                         iconCls: 'icon-print',
+                         handler: function () {
+                             return flexiExport();
+                         }
+                     }
+            ],
             columns: [[
 
                 
@@ -264,6 +273,30 @@
         return false;
     }
  
+    //“导出”按钮     在6.0版本中修改
+    function flexiExport() {
 
+        //将查询条件按照分隔符拼接成字符串
+        var search = "";
+        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
+            if (this.id)
+                search = search + this.id + "&" + this.value + "^";
+            else
+                search = search + this.name + "&" + this.value + "^";
+        });
+
+
+        $.post('../VGONGZUOSHICHANG/GetData2',
+            {
+
+                sortName: $('#flexigridData').datagrid('options').sortName,
+                sortOrder: $('#flexigridData').datagrid('options').sortOrder,
+                search: search
+            }, function (res) {
+                window.location.href = res;
+
+
+            });
+    };
 </script>
 

@@ -17,6 +17,7 @@
                            
                            
                         </select>
+                        <input type="hidden" value="@ViewBag.shiyanshi" id="UNDERTAKELABORATORYID" />
                     </td>
 
 
@@ -155,7 +156,7 @@
    //将查询条件按照分隔符拼接成字符串
     function GetQuery() {
         var search = "";
-        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
+        $('#divQuery').find(":text,:selected,select").each(function () {
             if (this.id)
                 search = search + this.id + "&" + this.value + "^";
             else if (this.name)

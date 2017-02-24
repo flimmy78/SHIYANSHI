@@ -1,7 +1,73 @@
 <!--特殊字符-->
 <SpecialCharacters>
 	<SpecialCharacterList>
-	<SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>UArel</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>4</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>UBrel</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>4</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>UCrel</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>4</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>Rn</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>Rx</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>Ax</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>An</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>δn</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>δx1</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>2</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>δx2</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>2</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>δx</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>2</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
 			<!--特殊字符-->
 			<Code>UREL(K=</Code>
 			<!--下标后几位，如果没有填-1-->

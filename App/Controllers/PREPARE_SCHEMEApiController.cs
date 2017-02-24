@@ -382,13 +382,12 @@ namespace Langben.App.Controllers
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             if (entity != null && ModelState.IsValid)
             {   //数据校验
-
-                string currentPerson = GetCurrentPerson();
+                Account acc = GetCurrentAccount();               
                 entity.UPDATETIME = DateTime.Now;
-                entity.UPDATEPERSON = currentPerson;
+                entity.UPDATEPERSON = acc.Name;
 
                 string returnValue = string.Empty;
-                entity.CHECKERID = currentPerson;
+                entity.CHECKERID = acc.Name;
 
                 if (m_BLL.EditInst(ref validationErrors, entity))
                 {

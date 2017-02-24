@@ -36,10 +36,12 @@ function CreateTongDao() {
     $tongdao.find("#K_moban").attr('id', 'K_' + tableIdx);
 
     $tongdao.find('#btnAddLiangCheng').attr("onclick", "set(" + tableIdx + ",this);");
-
-
+    
     $("#hideDangQianTongDao").val(tableIdx);
     $("#hideTongDaoShuLiang").val(tableIdx);
+    if (tableIdx>1)
+    $tongdao.find("#top-only").hide();
+    
 
 };
 
@@ -583,6 +585,7 @@ function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
 //classstyle样式类名
 //unit在输入框后面的单位
 //blurValue数表离开输入框之后触发的事件
+//selectCode如果是下拉框，则为配置
 function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValue, selectCode) {
 
     
@@ -987,9 +990,15 @@ function Save_ShuJuLuRu() {
     var ID = $("#hideITEID").val();//预备方案检查项ID
     var PREPARE_SCHEMEID = $("#hidePREPARE_SCHEMEID").val();//预备方案ID
     var RULEID = $("#hideRULEID").val();//检测项ID   
-    var CONCLUSION = $("#CONCLUSION").val();//结论    
-    var REMARK = $("#REMARK").val();//备注  
-    var HTMLVALUE = encodeURI($("#divHtml").html());
+    var CONCLUSION = $("#CONCLUSION").val();//结论   
+    //备注 (有的检测项没有备注控件，是死的，例如166-1993_3_1，报告取模板中的数据)
+    var REMARK = "";    
+    var REMARKobj = document.getElementById("REMARK");
+    if (REMARKobj != null) {
+        REMARK = $("#REMARK").val();//备注 
+    }
+
+    var HTMLVALUE = encodeURI($("#divHtml").html()).replace(/\+/g, '%2B');;
 
     //获取空对象用于保存添加的信息
     $.ajax({
@@ -1033,7 +1042,7 @@ function Save_FangAn() {
     var OldID = $("#hideID").val();
     var RULEID = $("#hideRULEID").val();
     var SCHEMEID = $("#hideSCHEMEID").val();
-    var HTMLVALUE = encodeURI($("#divHtml").html());
+    var HTMLVALUE = encodeURI($("#divHtml").html()).replace(/\+/g,'%2B');;
 
 
     //获取空对象用于保存添加的信息
@@ -1221,14 +1230,21 @@ function kexue(src, pos) {
     }
     src = src.toString().replace("-", "");
     var zero = "";
-    for (var i = 0; i < pos; i++) {
-        zero += "0";
+    if (pos >= 0) {
+        for (var i = 0; i < pos; i++) {
+            zero += "0";
+        }
     }
 
     var p = Math.floor(Math.log(src) / Math.LN10);
     var n = src * Math.pow(10, -p);
-
-    n = numeral(n).format('0.' + zero);
+    if (pos >= 0) {
+        n = numeral(n).format('0.' + zero);
+    }
+    else
+    {
+        n = numeral(n).value();
+    }
     var str = '*10'
     if (p >= 0) {
         str += "+";
@@ -1456,6 +1472,13 @@ function yinYongWuCha(obj, first, second, third, fourth, fifth, gold) {
 //计算值的控件名称
 function erDengBiaoChenZhi(obj, targetControlName) {
     var biaochenzhi = $(obj).val();
+    //重新计算当前行
+    var name = $(obj).attr("name");
+    var id = $(obj).attr("id");
+    id = id.substring(id.indexOf('_'));
+    var tongdao = id.split('_')[1];
+    var rowidx = id.split('_')[3];
+    targetControlName = targetControlName + "_" + tongdao + "_1_" + rowidx;
     if ((biaochenzhi == '10000' || biaochenzhi == '100000') && biaochenzhi != "") {
         $(obj).parent().parent().find("#" + targetControlName).val(biaochenzhi);
     }
@@ -1524,7 +1547,7 @@ function wuCha1(obj, shiji, biaochen, target, point) {
 
     var length = yuxunwucha.split(".").length == 2 ? yuxunwucha.split(".")[1].length : 0
     if (biaochenValue != "" && shiJiValue != "")
-        var wucha2 = fomatFloat(parseFloat((parseFloat(shiJiValue) - parseFloat(biaochenValue)) / parseFloat(biaochenValue) * 100), (length + 1))
+        var wucha2 = parseFloat(fomatFloat(parseFloat((parseFloat(shiJiValue) - parseFloat(biaochenValue)) / parseFloat(biaochenValue) * 100), (length + 1))).toFixed((length + 1));
     $(obj).parent().parent().find("#" + targetName).val(wucha2);
 
 }
@@ -1540,7 +1563,7 @@ function BiaoChenZhi1(obj, liangCheng, ceLiangPan, ceLiangDian, target, point) {
     var rowidx = id.split('_')[3];
 
     var liangChengName = liangCheng + "_" + tongdao + "_1" + "_" + rowidx;
-    var ceLiangPanName = ceLiangDian + "_" + tongdao + "_1" + "_" + rowidx;
+    var ceLiangPanName = ceLiangPan + "_" + tongdao + "_1" + "_" + rowidx;
     var targetName = target + "_" + tongdao + "_1" + "_" + rowidx;
     var pointName = point + "_" + tongdao + "_1" + "_" + rowidx;
     var ceLiangDianName = ceLiangDian + "_" + tongdao + "_1" + "_" + rowidx;

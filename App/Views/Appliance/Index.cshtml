@@ -240,7 +240,7 @@
         </div>
         <div class="editor-form">
             <div class="editor-label">
-                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
+                <span style="color:#F00">*</span>@Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
             </div>
             <div class="editor-field">
                 @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
@@ -384,6 +384,9 @@
         if (isNull(entity.CONTACTS2)) {
             zhi += "证书单位联系人不能为空！<br>";
         }
+        if (isNull(entity.INSPECTION_ENTERPRISE)) {
+            zhi += "送检单位不能为空！<br>";
+        } 
         if (isNull(entity.CONTACT_PHONE2)) {
             zhi += "证书单位电话不能为空！<br>";
         }

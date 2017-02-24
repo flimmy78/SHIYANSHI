@@ -16,7 +16,7 @@
         .noprint {
             display: none;
         }
-    </style> 
+    </style>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -146,18 +146,14 @@
         <table class="qianzi" cellpadding="0" cellspacing="0" align="center">
             <tr>
                 <td align='right' valign="top">
-                    <div style="font-size:16pt; margin-top:20px">请客户确认上述信息后签字：</div>
+                    <div style="font-size:16pt; margin-top:10px">请客户确认上述信息后签字：</div>
                 </td>
-                <td width="700" height="300">
-                    <div id="img" style="width:700px; height:300px; background:#eee">
-                        <img id="hid" src="" style="width:700px; height:300px;" />
-                        <embed id="HWPenSign" type="application/mozilla-npHWSign-scriptable-plugin" name="HWPenSign" width="700" height="300"/></embed>
-                        @*<object id="HWPenSign"
-                                name="HWPenSign"
-                                classid="clsid:E8F5278C-0C72-4561-8F7E-CCBC3E48C2E3"
-                                width="700"
-                                height="300"></object>*@
-                        
+                <td width="700">
+                    <div id="img" style="width:700px;  background:#eee">
+                     
+                        <embed id="HWPenSign" type="application/mozilla-npHWSign-scriptable-plugin" name="HWPenSign" width="700" height="200" />
+
+
                     </div>
                 </td>
             </tr>
@@ -184,15 +180,30 @@
                 <td width="80">接收日期：</td>
                 <td width="120" id="CREATETIME"></td>
             </tr>
-            <tr>
-                <td nowrap=nowrap>注意事项：</td>
-                <td colspan="4" style="text-align:left; ">
+            <tr style="height:50px ">
+                <td rowspan="2" >注意事项：</td>
+                <td colspan="3" rowspan="2"  style="text-align:left; ">
                     1、 本单位检定/校准技术依据优先采用国家计量检定规程、校准规范和经国家实验室认可的校准方法，若有特殊要求请注明。<br />
                     2、本委托单填写一式两份，第二联盖章后作为器具及证书的提取凭证。如有丢失或损毁，需凭单位证明及提取人身份证办理提取手续。提取时请确认器具是否正常，附件、证书是否齐全，器具一经取走，如出现问题，本单位概不负责。<br />
                     3、本单位对送检器具的保管期为12个月，逾期不取的器具，视为主动放弃器具所有权，本单位有权进行处理。<br />
                     4、本外观状态只限于器具外观有无明显损伤。在器具送达实验室进行通电、预热等专业检查后，实验室将对器具工作状态进行最终的判断。
                 </td>
-                <td colspan="3" width="200"><p style="text-align:left;text-align:left;">盖章处：</p></td>
+                <td   width="150">
+                 
+                                <p style="text-align:left;text-align:left;">送检人签字：</p>
+                
+                </td>
+                <td width="150">
+                    <img id="hid" src="" style="width:140px;height:40px " />
+                </td>
+            </tr>
+            <tr style="height:50px ">
+              
+                <td width="150">
+
+                    <p style="text-align:left;text-align:left;">盖章处：</p>
+
+                </td>
             </tr>
         </table>
         <p class="beizhu" id="tongxundizi">
@@ -201,9 +212,12 @@
 
     </div>
     <div id="remove" class="tr mt10 noprint">
+        <input id="Button15" type="button" value="签字成功，确认返回" class="my-btn" onclick="return Button15_onclick()" />
+        @*<input id="Button14" type="button" value="切换到扩展屏" class="my-btn"  onclick="return Button14_onclick()" />*@
         <input id="Button3" type="button" value="重新签字" class="my-btn" onclick="return Button3_onclick()" />
-        <input id="Button14" type="button" value="签字后，打印委托单，同时发送实验室" class="my-btn" onclick="return Button14_onclick()" />
+        <input id="Button14" type="button" value="签字后，打印委托单，同时发送实验室" class="my-btn" onclick="return fasong()" />
     </div>
+
     <script language="javascript" type="text/javascript">
 
         var obj;
@@ -220,15 +234,21 @@
             obj.HWSetCtlFrame(2, 0x00000000);
             //初始化代码
             var res;
-             res = obj.HWInitialize();
-             document.getElementById("hid").style.display = "none";
+            res = obj.HWInitialize();
+            document.getElementById("hid").style.display = "none";
+            Button14_onclick();
         }
 
 
         function Button3_onclick() {
             obj.HWClearPenSign();
         }
-         
+        function Button14_onclick() {
+            var stream = obj.HWSwitchMonitor(1, 0);
+        }
+        function Button15_onclick() {
+            var stream = obj.HWSwitchMonitor(0, 0);
+        }
         $.ajax({
             url: '/api/ORDER_TASK_INFORMATIONApi/PostID/' + '@ViewBag.Id',
             type: "Post",
@@ -286,7 +306,7 @@
                 }
             }
         })
-        function Button14_onclick() {
+        function fasong() {
             var stream;
             stream = obj.HWGetBase64Stream(3);
             //stream = null;
@@ -294,6 +314,9 @@
             //if (stream=='') {
             //   alert("请签字！");
             //}
+            $("#hid").attr("src", "data:image/png;base64," + stream);
+            $("#hid").show();
+            $(".qianzi").remove();
 
             $.ajax({
                 url: "/ORDER_TASK_INFORMATION/QianZi/@ViewBag.Id",
@@ -302,6 +325,9 @@
                 data: { PICTURE: stream, HTMLVALUE: $("#HTMLVALUE").html() },
                 success: function (data) {
                     if (data.Code == 1) {
+
+                       
+
                         window.print();//打印
                         $.messager.alert({
                             title: '提示',

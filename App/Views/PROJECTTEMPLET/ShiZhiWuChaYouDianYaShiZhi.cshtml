@@ -1,0 +1,446 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "示值误差-有电压示值-末盘值残余电阻参与运算";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    <tr>
+        <th  align="center"  rowspan="4">序号</th>
+        <th align="center" colspan="3">
+            ×：
+            <input class="my-textbox input-width" value="" type="text" name="input1" id="input1_t_1_1">
+            <select class="my-combobox" name="input1_UNIT"  id="input1_UNIT_t_1_1">
+            <option value="Ω">Ω</option> 
+            <option value="TΩ">TΩ</option>
+            <option value="GΩ">GΩ</option> 
+             <option value="MΩ">MΩ</option> 
+             <option value="kΩ">kΩ</option>  
+            <option value="mΩ">mΩ</option>  
+            <option value="μΩ">μΩ</option>
+            </select>  
+            残余电阻：
+            <input class="my-textbox input-width" value="" type="text" name="input9" id="input9_t_1_1">
+            <select class="my-combobox" name="input9_UNIT" id="input9_UNIT_t_1_1">
+                <option value="Ω">Ω</option>
+                <option value="TΩ">TΩ</option>
+                <option value="GΩ">GΩ</option>
+                <option value="MΩ">MΩ</option>
+                <option value="kΩ">kΩ</option>
+                <option value="mΩ">mΩ</option>
+                <option value="μΩ">μΩ</option>
+            </select>
+          
+        </th>
+        <th align="center" colspan="3">
+            ×：
+            <input class="my-textbox input-width" value="" type="text" name="input2" id="input2_t_1_1">
+            <select class="my-combobox" name="input2_UNIT" id="input2_UNIT_t_1_1">
+                <option value="Ω">Ω</option>
+                <option value="TΩ">TΩ</option>
+                <option value="GΩ">GΩ</option>
+                <option value="MΩ">MΩ</option>
+                <option value="kΩ">kΩ</option>
+                <option value="mΩ">mΩ</option>
+                <option value="μΩ">μΩ</option>
+            </select>
+            残余电阻：
+            <input class="my-textbox input-width" value="" type="text" name="input10" id="input10_t_1_1">
+            <select class="my-combobox" name="input19_UNIT" id="input19_UNIT_t_1_1">
+                <option value="Ω">Ω</option>
+                <option value="TΩ">TΩ</option>
+                <option value="GΩ">GΩ</option>
+                <option value="MΩ">MΩ</option>
+                <option value="kΩ">kΩ</option>
+                <option value="mΩ">mΩ</option>
+                <option value="μΩ">μΩ</option>
+            </select>
+        </th>
+       
+
+    </tr>
+    <tr>
+
+        <th align="center" colspan="3">
+            检定电流：
+            <input class="my-textbox input-width" value="" type="text" name="input3" id="input3_t_1_1">
+            <select class="my-combobox" name="input3_UNIT" id="input3_UNIT_t_1_1">
+                <option value="A" selected="">A</option>
+                <option value="KA">KA</option>
+                <option value="mA">mA</option>
+                <option value="μA">μA</option>
+                <option value="nA">nA</option>
+                <option value="pA">pA</option>
+            </select>
+
+        </th>
+        <th align="center" colspan="3">
+            检定电流：
+            <input class="my-textbox input-width" value="" type="text" name="input4" id="input4_t_1_1">
+            <select class="my-combobox" name="input4_UNIT" id="input4_UNIT_t_1_1">
+                <option value="A" selected="">A</option>
+                <option value="KA">KA</option>
+                <option value="mA">mA</option>
+                <option value="μA">μA</option>
+                <option value="nA">nA</option>
+                <option value="pA">pA</option>
+            </select>
+
+        </th>
+
+
+    </tr>
+    <tr>
+        <th align="center">
+            电压示值
+
+        </th>
+       
+        <th align="center">
+            实际值
+
+        </th>
+        <th align="center" rowspan="2">
+            误差(%)
+
+        </th>
+        <th align="center">
+            电压示值
+
+        </th>
+        <th align="center">
+            实际值
+
+        </th>
+        <th align="center" rowspan="2">
+            误差(%)
+
+        </th>
+
+    </tr>
+    <tr>
+        <th align="center">
+            (<select class="my-combobox" name="input12_UNIT" id="input12_UNIT_t_1_1">
+                <option value="V">V</option>
+                <option value="mV">mV</option>
+               
+            </select>)
+        </th>
+        <th align="center">
+            (<select class="my-combobox" name="input13_UNIT" id="input13_UNIT_t_1_1">
+                <option value="Ω">Ω</option>
+                <option value="TΩ">TΩ</option>
+                <option value="GΩ">GΩ</option>
+                <option value="MΩ">MΩ</option>
+                <option value="kΩ">kΩ</option>
+                <option value="mΩ">mΩ</option>
+                <option value="μΩ">μΩ</option>
+            </select>)
+        </th>
+        <th align="center">
+            (<select class="my-combobox" name="input14_UNIT" id="input14_UNIT_t_1_1">
+                <option value="V">V</option>
+                <option value="mV">mV</option>
+
+            </select>)
+        </th>
+      
+        <th align="center">
+           (<select class="my-combobox" name="input6_UNIT" id="input6_UNIT_t_1_1">
+    <option value="Ω">Ω</option>
+    <option value="TΩ">TΩ</option>
+    <option value="GΩ">GΩ</option>
+    <option value="MΩ">MΩ</option>
+    <option value="kΩ">kΩ</option>
+    <option value="mΩ">mΩ</option>
+    <option value="μΩ">μΩ</option>
+</select>)
+        </th>
+    </tr>
+</thead>
+
+<tbody id="tbody_moban">
+    <!--表体-->
+
+</tbody>
+<tfoot>
+    <!--表尾-->
+    <tr>
+        <td colspan="8">
+            <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加行数</a>
+
+        </td>
+    </tr>
+    <tr>
+        <td align="center" colspan="3">
+            允许误差(%)
+        </td>
+        <td align="right">
+            ±
+        </td>
+        <td align="left" >
+            <input class="my-textbox input-width" value="" type="text" name="input7" id="input7_t_1_1">
+
+        </td>
+        <td align="right">
+            ±
+        </td>
+        <td align="left" >
+            <input class="my-textbox input-width" value="" type="text" name="input8" id="input8_t_1_1">
+
+        </td>
+
+    </tr>
+</tfoot>
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        function set(tbodyIndex) {
+
+          //  $('#dlg').dialog('open');//打开弹出框
+
+            $("#hideDangQianTongDao").val(tbodyIndex);
+            CreateRow();
+        }
+        //增加行
+        function CreateRow() {
+
+
+            var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+            var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
+            LiangChengShuLiang++;
+          //  var txtNumber = $("#txtNumber").val();     //量程值
+            var txtPoint = $("#txtPoint").val();     //检测点数
+            var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+            var htmlString = [];
+            var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
+
+            var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
+
+
+
+            for (var rowidx = 0; rowidx < txtPoint; rowidx++) {
+                rowLength++;
+                htmlString.push("<tr rowindex='" + rowLength + "'>");
+
+                var rowspan = 1; //合并单元格行数
+
+                var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
+                //计算默认值
+                if (rowidx == 0) {
+                    //需要合并的列 //量程
+                  
+                   
+                }
+                //序号
+                htmlString.push(SetTDHtml(rowspan, "RANGE", HangHaoID, rowidx, rowLength.toString(), "", "", "changeValue"));
+                //Ui(mV)
+                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, "", "", "", "changeValue"));
+                //Mi(mΩ)
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "changeValue"));
+         
+                //∆i(mΩ)
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, "", "", "", "changeValue"));
+             
+                    //开关变差(mΩ)
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, "", "", "", "changeValue"));
+                //平均值
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, "", "", "", "changeValue"));
+                //基本误差(%)
+                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, "", "", "", "changeValue"));
+              
+                htmlString.push("</tr>");
+            }
+            htmlString = htmlString.join("");
+
+            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
+            $.parser.parse(tagRow);//渲染easyui组建
+            $('#dlg').window('close');//关闭弹出框
+
+            $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+        }
+        //离开事件，用于计算
+        //计算标准值
+        function changeValue(obj) {
+
+            jiSuanWuCha(obj, "RANGE", "OUTPUTVALUE", "READVALUE", "ACTUALVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR", "UNCERTAINTYDEGREE");
+
+        }
+        //误差
+        //obj 自身对象
+        //T1 序号
+        //T2 Ui(mV)
+        //T3 Mi(mΩ)
+        //T4 ∆i(mΩ)
+        //T5 开关变差(mΩ)
+        function jiSuanWuCha(obj, T1, T2, T3, T4, T5, T6, T7) {
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+            var liangCheng = id.split('_')[2];
+            var rowLength = id.split('_')[3];
+            T1 = T1 + id;//改动的地方，误差的列的name值
+            T2 = T2 + id;//改动的地方，误差的列的name值
+            T3 = T3 + id;//改动的地方，误差的列的name值
+            T4 = T4 + id;//有功分量 相对误差(%
+            T5 = T5 + id;//改动的地方，参与计算的列的name值
+            T6 = T6 + id;//有功分量 相对误差(%
+            T7 = T7 + id;//改动的地方，参与计算的列的name值
+
+            var input1 = "input1" + "_" + tongdao + "_1_1";
+            var input1Data = $("#" + input1).val();//电阻值
+            var input2 = "input2" + "_" + tongdao + "_1_1";
+            var input2Data = $("#" + input2).val();//电阻值
+            var input7 = "input7" + "_" + tongdao + "_1_1";
+            var input7Data = $("#" + input7).val();//允许误差
+            var input8 = "input8" + "_" + tongdao + "_1_1";
+            var input8Data = $("#" + input8).val();//允许误差
+
+
+
+            var T1Data = $(obj).parent().parent().find("#" + T1).val(); //T1 序号
+            var T2Data = $(obj).parent().parent().find("#" + T2).val();  //T2 电压示值
+            var T3Data = $(obj).parent().parent().find("#" + T3).val();  //T3实际值
+            var T4Data = $(obj).parent().parent().find("#" + T4).val();  //T4【误差】
+            var T5Data = $(obj).parent().parent().find("#" + T5).val();   //T5电压示值
+            var T6Data = $(obj).parent().parent().find("#" + T6).val();  //T4 实际值
+            var T7Data = $(obj).parent().parent().find("#" + T7).val();   //T5 【误差】
+           
+            var r1, r2;
+            try { r1 = input7Data.toString().split(".")[1].length+1 } catch (e) { r1 = 1 }
+            try { r2 = input8Data.toString().split(".")[1].length + 1 } catch (e) { r2 = 1 }
+
+            var input3 = "input3" + "_" + tongdao + "_1_1";
+            var input3Data = $("#" + input3).val();//检定电流
+            var input9 = "input9" + "_" + tongdao + "_1_1";
+            var input9Data = $("#" + input9).val();//残余电阻平均值
+
+            var input4 = "input4" + "_" + tongdao + "_1_1";
+            var input4Data = $("#" + input4).val();//检定电流
+            var input10 = "input10" + "_" + tongdao + "_1_1";
+            var input10Data = $("#" + input10).val();//残余电阻平均值
+
+            var input12_UNIT = "input12_UNIT" + "_" + tongdao + "_1_1";
+            var input12_UNITData = $("#" + input12_UNIT).val();//当电压示值单位为V
+            var input14_UNIT = "input14_UNIT" + "_" + tongdao + "_1_1";
+            var input14_UNITData = $("#" + input14_UNIT).val();//当电压示值单位为V
+            var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+            txtPointLen = parseFloat(txtPointLen);
+            
+//"当电压示值单位为V:
+//【实际值】=【电压示值】/【检定电流】-【残余电阻平均值】/1000
+// 当电压示值单位为mV:
+//【实际值】=【电压示值】/(【检定电流】*1000)-【残余电阻平均值】/1000
+//            备注：
+//            1、以电压示值单位等级为参考，要求电压示值、检定电流、残余电阻平均值的单位等级一致，如果不一致进行换算
+            //            2、残余电阻：手动输入值"		
+
+            if (T2Data != "" && input3Data != "" && input9Data != "") {
+                T2Data = parseFloat(T2Data);
+             
+                input3Data = parseFloat(input3Data);
+                if (input12_UNITData == "mV") {
+                    input3Data = accMul(input3Data, 1000);
+                }
+                input9Data = parseFloat(input9Data);
+
+                var jian1 = accDiv(T2Data, input3Data);
+                var jian2 = accDiv(input9Data,1000);
+                var jianfa = accSub(jian1,jian2);
+
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                $(obj).parent().parent().find("#" + T3).val(data);
+            }
+            var T3Data = $(obj).parent().parent().find("#" + T3).val();  //T3实际值
+            if (T5Data != "" && input4Data != "" && input10Data != "") {
+                T5Data = parseFloat(T5Data);
+               
+                input4Data = parseFloat(input4Data);
+                if (input14_UNITData == "mV") {
+                    input4Data = accMul(input4Data, 1000);
+                }
+                input10Data = parseFloat(input10Data);
+
+                var jian1 = accDiv(T5Data, input4Data);
+                var jian2 = accDiv(input10Data, 1000);
+                var jianfa = accSub(jian1, jian2);
+
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                $(obj).parent().parent().find("#" + T6).val(data);
+            }
+            var T6Data = $(obj).parent().parent().find("#" + T6).val();  //T4 实际值
+//【误差】=(【×电阻值】*序号-【实际值】)/【实际值】*100%，比允许误差多一位，四舍六入，逢五奇进偶不进																																																								
+
+            if (input1Data != "" && T1Data != "" && T3Data != "") {
+                T1Data = parseFloat(T1Data);
+                T3Data = parseFloat(T3Data);
+                input1Data = parseFloat(input1Data);
+                var jian1= accMul(input1Data, T1Data);
+                var jian2 = accSub(jian1, T3Data);
+                var jianfa = accMul(accDiv(jian2, T3Data), 100);
+
+                var data = fomatFloat(jianfa, txtPointLen+1);
+                $(obj).parent().parent().find("#" + T5).val(data);
+            }
+            //【误差】=(【×电阻值】*序号-【实际值】)/【实际值】*100%，比允许误差多一位，四舍六入，逢五奇进偶不进																																																								
+            if (input2Data != "" && T1Data != "" && T6Data != "") {
+                T1Data = parseFloat(T1Data);
+                T6Data = parseFloat(T6Data);
+                input2Data = parseFloat(input2Data);
+                var jian1 = accMul(input2Data, T1Data);
+                var jian2 = accSub(jian1, T6Data);
+                var jianfa = accMul(accDiv(jian2, T6Data), 100);
+
+                var data = fomatFloat(jianfa, txtPointLen + 1);
+                $(obj).parent().parent().find("#" + T7).val(data);
+            }
+        }
+
+
+       																																							
+
+    </script>
+
+
+}
+@section TanKuang {
+    <!--弹框的位置-->
+    <!--增加量程弹层-->
+    <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return CreateRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+        <table>
+
+            <tr>
+                <td align="right">检测点数：</td>
+                <td><input type="text" id="txtPoint" value="1" name="txtPoint" class="easyui-textbox  required digits" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">小数点位数：</td>
+                <td><input type="text" id="txtPointLen" value="3" name="txtPointLen" class="easyui-textbox  required digits" value="2" style="width:200px" /></td>
+            </tr>
+        </table>
+    </div>
+    <!--/增加量程弹层-->
+}
+
+
+

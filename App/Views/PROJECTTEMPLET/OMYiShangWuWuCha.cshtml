@@ -49,6 +49,10 @@
 </tfoot>
 @section JS {
     <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $('#REMARK').parent('td').html('Rn —  二等标准电阻的上级检定结果。 <br> Rx —  被测电阻的实际值。 <br>Ax —  本装置检定被测电阻时电压表示值 <br>An —  本装置检定二等标准电阻时电压表示值  Rx=Rn+(Ax/I-An/I)');
+            
+        });
         //一个量程的需要这个方法
         //重写set方法，只准对增加空白行
         function set(tbodyIndex) {
@@ -92,25 +96,25 @@
                 //需要合并的列
                  
 
-                htmlString.push(SetTDHtml(rowspan, "WE", HangHaoID, rowidx, "", "", "", 'BEICEDIANZU',""));
+                htmlString.push(SetTDHtml(rowspan, "WE", HangHaoID, rowidx, "", "", "", 'BEICEDIANZU', ""));
                 htmlString.push(SetTDHtml(rowspan, "TYEW", HangHaoID, rowidx, "", ""));
                 htmlString.push(SetTDHtml(rowspan, "UI", HangHaoID, rowidx, "", ""));
-                htmlString.push(SetTDHtml(rowspan, "OP", HangHaoID, rowidx, "", ""));
+                htmlString.push(SetTDHtml(rowspan, "OP", HangHaoID, rowidx, "", "")); 
                 htmlString.push(SetTDHtml(rowspan, "ASF", HangHaoID, rowidx, "", ""));
                 htmlString.push(SetTDHtml(rowspan, "GHJ", HangHaoID, rowidx, "", "", "", 'blurValue', ""));
 
 
                 //标准值 增加下拉框单位V
-                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, '', "classstyle100", "", ""));
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, '', "classstyle100", "", "blurValue", ""));
 
                 //赫兹 增加下拉框单位赫兹
-                htmlString.push(SetTDHtml(rowspan, "HZMY", HangHaoID, rowidx, '', "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "HZMY", HangHaoID, rowidx, '', "classstyle100", "", "blurValue", ""));
 
                 //显示值 增加下拉框单位V
                 htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100", '', ""));
 
                 //相对误差
-                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100", "", "blurValue", ""));
 
 
                 //校准结果的不确定度 U(K =
@@ -130,8 +134,17 @@
         //离开事件，用于计算
         function BEICEDIANZU(obj) {
 
-            erDengBiaoChenZhi(obj, "OP_1_1_1");
-
+            erDengBiaoChenZhi(obj, "OP");
+            var biaochenzhi = $(obj).val();
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+            var rowidx = id.split('_')[3];
+            var JianDing = "RELATIVEERROR" + "_" + tongdao + "_1_" + rowidx;
+            if (biaochenzhi == '10000' || biaochenzhi == '100000') {
+                $(obj).parent().parent().find("#" + JianDing).val(0.0001);
+            }  
         }
         //离开事件，用于计算
         function blurValue(obj) {
