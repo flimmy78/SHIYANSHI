@@ -1096,6 +1096,22 @@ function SetAllControlHtml() {
 
         }
     });
+    $("textarea").each(function () {
+
+        //除了隐藏模板中的输入框，其他所有的输入框
+        if (this.id != "") {
+
+            if (this.attributes.value != undefined) {
+                this.attributes.value.value = $(this).val();
+            } else {//如果没有写value属性，则加上
+                var value = $(this).val();
+                $(this).attr("value", value);
+            }
+            $(this).html($(this).val());
+
+
+        }
+    });
 
     $("select").not('#tongdao_moban select').each(function () {
         //除了隐藏模板中的下拉框，其他所有的下拉框
