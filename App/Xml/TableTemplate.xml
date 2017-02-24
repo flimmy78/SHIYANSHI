@@ -8190,7 +8190,7 @@
 					<Code>READVALUE</Code>
 					<ColIndex>4</ColIndex>
 					<ColCount>0</ColCount>
-					<IsMergeSameValue>N</IsMergeSameValue>
+					<IsMergeSameValue>Y</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
@@ -8240,7 +8240,7 @@
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
-					<IsMergeNullValue>N</IsMergeNullValue>
+					<IsMergeNullValue>Y</IsMergeNullValue>
 				</Cell>
 			</CellList>
 			<TableTitleList>
@@ -8248,14 +8248,14 @@
 					<RowNumber>2</RowNumber>
 					<RowIndex>925</RowIndex>
 					<CellList>
-						<Cell>
+						<!--<Cell>
 							<Code>zhidingwucha</Code>
 							<ColIndex>-1</ColIndex>
 							<ColCount>0</ColCount>
 							<IsMergeSameValue>N</IsMergeSameValue>
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
-						</Cell>
+						</Cell>-->
 						<Cell>
 							<Code>K</Code>
 							<ColIndex>0</ColIndex>
@@ -8383,7 +8383,7 @@
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
-					<IsMergeNullValue>N</IsMergeNullValue>
+					<IsMergeNullValue>Y</IsMergeNullValue>
 				</Cell>
 			</CellList>
 			<TableTitleList>
@@ -8391,14 +8391,14 @@
 					<RowNumber>2</RowNumber>
 					<RowIndex>936</RowIndex>
 					<CellList>
-						<Cell>
+						<!--<Cell>
 							<Code>zhidingwucha</Code>
 							<ColIndex>-1</ColIndex>
 							<ColCount>0</ColCount>
 							<IsMergeSameValue>N</IsMergeSameValue>
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
-						</Cell>
+						</Cell>-->
 						<Cell>
 							<Code>K</Code>
 							<ColIndex>0</ColIndex>
@@ -8468,7 +8468,7 @@
 					<Code>READVALUE</Code>
 					<ColIndex>4</ColIndex>
 					<ColCount>0</ColCount>
-					<IsMergeSameValue>N</IsMergeSameValue>
+					<IsMergeSameValue>Y</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
@@ -8518,7 +8518,7 @@
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
-					<IsMergeNullValue>N</IsMergeNullValue>
+					<IsMergeNullValue>Y</IsMergeNullValue>
 				</Cell>
 			</CellList>
 			<TableTitleList>
@@ -8526,14 +8526,14 @@
 					<RowNumber>2</RowNumber>
 					<RowIndex>973</RowIndex>
 					<CellList>
-						<Cell>
+						<!--<Cell>
 							<Code>zhidingwucha</Code>
 							<ColIndex>-1</ColIndex>
 							<ColCount>0</ColCount>
 							<IsMergeSameValue>N</IsMergeSameValue>
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
-						</Cell>
+						</Cell>-->
 						<Cell>
 							<Code>K</Code>
 							<ColIndex>0</ColIndex>

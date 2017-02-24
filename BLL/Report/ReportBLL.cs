@@ -2553,6 +2553,19 @@ namespace Langben.Report
                     {
                         continue;
                     }
+                    //if(iVTEST_ITE.RULEID!= "1085-2013_8" && iVTEST_ITE.RULEID!= "1085-2013_9" && iVTEST_ITE.RULEID != "1085-2013_10")
+                    //{
+                    //    continue;
+                    //}
+                    //if (iVTEST_ITE.RULEID== "1085-2013_6_2" || iVTEST_ITE.RULEID == "1085 -2013_8" || iVTEST_ITE.RULEID == "1085-2013_9" || iVTEST_ITE.RULEID == "1085-2013_10")
+                    //{
+                    //    continue;
+                    //}
+                    //1085-2013_7电能标准偏差估计值报告不打印
+                    if ((type == ExportType.Report_JianDing || type == ExportType.Report_XiaoZhun || type == ExportType.Report_XiaoZhun_CNAS) && iVTEST_ITE.RULEID == "1085-2013_7")
+                    {
+                        continue;
+                    }
                     if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE != null && entity.QUALIFIED_UNQUALIFIED_TEST_ITE.Count > 0 && entity.QUALIFIED_UNQUALIFIED_TEST_ITE.FirstOrDefault(p => p.RULEID == iVTEST_ITE.RULEID) != null)
                     {
                         iEntity = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.FirstOrDefault(p => p.RULEID == iVTEST_ITE.RULEID);
@@ -2587,10 +2600,10 @@ namespace Langben.Report
                         {
                             celStr = celStr + msg;
                         }
-                        //else
-                        //{
-                        //    celStr = celStr + "/";
-                        //}                       
+                        else
+                        {
+                            celStr = celStr + "/";
+                        }
 
                     }
                     else if (iEntity == null)
@@ -4092,7 +4105,7 @@ namespace Langben.Report
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <param name="iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan">电能标准偏差估计值检测项（为了解决s化整问题）</param>
         /// <returns></returns>
-        private int paserData_1(QUALIFIED_UNQUALIFIED_TEST_ITE iEntity, bool IsSameRuleName, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, SpecialCharacters allSpecialCharacters = null, ExportType type = ExportType.OriginalRecord_JianDing, QUALIFIED_UNQUALIFIED_TEST_ITE iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan=null)
+        private int paserData_1(QUALIFIED_UNQUALIFIED_TEST_ITE iEntity, bool IsSameRuleName, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, SpecialCharacters allSpecialCharacters = null, ExportType type = ExportType.OriginalRecord_JianDing, QUALIFIED_UNQUALIFIED_TEST_ITE iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan = null)
         {
             int RowIndexT = rowIndex_Destination;
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
@@ -4100,7 +4113,7 @@ namespace Langben.Report
             Dictionary<int, DataValue> dataDic = AnalyticHTML.GetData(doc);//数据
 
             #region s化整
-            if(iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan!=null)
+            if (iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan != null)
             {
                 HtmlAgilityPack.HtmlDocument doc_DianNengBiaoZhunPianChaGuZhiJiSuan = new HtmlAgilityPack.HtmlDocument();
                 doc_DianNengBiaoZhunPianChaGuZhiJiSuan.LoadHtml(iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan.HTMLVALUE);
@@ -4117,7 +4130,10 @@ namespace Langben.Report
                 buDueDingDu_DiBu = AnalyticHTML.GetBuDueDingDu_DiBu(doc);//底部不确定度
             }
 
-
+            //if (iEntity.RULEID == "1085-2013_8" || iEntity.RULEID == "1085-2013_9" || iEntity.RULEID == "1085-2013_10")
+            //{
+            //   // continue;
+            //}
             #region 处理下一行数据为空需要单元格合并数据
             if (temp != null && temp.Cells != null && temp.Cells.Count > 0 && dataDic != null && dataDic.Count > 0)
             {
@@ -4181,7 +4197,7 @@ namespace Langben.Report
                     #region 画表头
                     #region 画格子 同时填充数据                   
 
-                    if (temp != null && temp.TableTitleList != null && temp.TableTitleList.Count > 0 && temp.TableTitleList!=null )
+                    if (temp != null && temp.TableTitleList != null && temp.TableTitleList.Count > 0 && temp.TableTitleList != null)
                     {
                         RowInfo t = temp.TableTitleList.FirstOrDefault();
                         if (t.RowIndex >= 0)
@@ -4200,7 +4216,7 @@ namespace Langben.Report
                     #endregion
                     #region 画数据部分
                     int startRowIndex = rowIndex_Destination;
-                    if (dataDic != null && dataDic.ContainsKey(tongDaoID) && dataDic[tongDaoID] != null && dataDic[tongDaoID].Count > 0 && dataDic[tongDaoID].Data != null && dataDic[tongDaoID].Data.Count > 0 && temp.DataRowIndex>=0)
+                    if (dataDic != null && dataDic.ContainsKey(tongDaoID) && dataDic[tongDaoID] != null && dataDic[tongDaoID].Count > 0 && dataDic[tongDaoID].Data != null && dataDic[tongDaoID].Data.Count > 0 && temp.DataRowIndex >= 0)
                     {
                         #region 画数据  
                         #region 画格子                       
@@ -4211,7 +4227,7 @@ namespace Langben.Report
 
                         foreach (MYData d in dataDic[tongDaoID].Data)
                         {
-                            if(cellAddressList==null || cellAddressList.Count==0)
+                            if (cellAddressList == null || cellAddressList.Count == 0)
                             {
                                 break;
                             }
@@ -4290,7 +4306,7 @@ namespace Langben.Report
                     #region 画表尾
                     #region 画格子 同时填充数据                   
 
-                    if (temp != null && temp.TableFooterList != null && temp.TableFooterList.Count > 0 && footDic!=null && footDic.Count>0)
+                    if (temp != null && temp.TableFooterList != null && temp.TableFooterList.Count > 0 && footDic != null && footDic.Count > 0)
                     {
                         RowInfo t = temp.TableFooterList.FirstOrDefault();
                         if (t.RowIndex >= 0)
@@ -4334,7 +4350,7 @@ namespace Langben.Report
             {
                 CopyRow(sheet_Source, sheet_Destination, temp.RemarkRowIndex, rowIndex_Destination, 1, true);
 
-                HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, RemarkStr,sIndexList);
+                HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, RemarkStr, sIndexList);
                 sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).CellStyle.WrapText = true;//自动换行
                 sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
                 rowIndex_Destination++;
@@ -4342,7 +4358,7 @@ namespace Langben.Report
             else if (iEntity.REMARK != null && iEntity.REMARK.Trim() != "")
             {
                 CopyRow(sheet_Source, sheet_Destination, temp.RemarkRowIndex, rowIndex_Destination, 1, true);
-                
+
                 sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue("注：" + iEntity.REMARK);
                 rowIndex_Destination++;
             }
@@ -4397,8 +4413,23 @@ namespace Langben.Report
 
             #endregion
 
-            //为了表格底部没有线
+            //为了表格底部没有线           
             CopyRow(sheet_Source, sheet_Destination, 4, rowIndex_Destination, 1, true);
+            // 
+            if (iEntity.RULEID == "1085-2013_8" || iEntity.RULEID == "1085-2013_9")
+            {                
+                ICellStyle style = sheet_Destination.Workbook.CreateCellStyle();
+                style.BorderBottom = BorderStyle.None;
+                style.BorderTop = BorderStyle.None;
+                for (int col = 0; col < 57; col++)
+                {
+                    ICell targetCell = sheet_Destination.GetRow(rowIndex_Destination).GetCell(col);
+                    targetCell.CellStyle = style;
+                }                
+
+            }
+
+
 
             return rowIndex_Destination;
         }
