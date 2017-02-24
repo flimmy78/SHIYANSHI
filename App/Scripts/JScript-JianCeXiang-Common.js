@@ -3058,7 +3058,7 @@ RuleAttributeArray = [
                 //检测项属性名称后需要加自动或者按钮不确定计算
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
-                JiSuanBuQueDingDu: '',
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
                 //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
                 JiSuanBuQueDingDu_DiBu: ''
             }]
@@ -3087,7 +3087,7 @@ RuleAttributeArray = [
                 //检测项属性名称后需要加自动或者按钮不确定计算
                 //自动计算不确定(Z:检测项属性名称1,检测项属性名称2)
                 //按钮计算不确定(A:检测项属性名称1,检测项属性名称2)
-                JiSuanBuQueDingDu: '',
+                JiSuanBuQueDingDu: 'A:UNCERTAINTYDEGREE',
                 //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
                 JiSuanBuQueDingDu_DiBu: ''
             }]
