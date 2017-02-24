@@ -2796,7 +2796,7 @@ namespace Langben.Report
                             SHuaZheng dData = new SHuaZheng();
                             foreach (SHuaZhengData ddItem in ddList)
                             {
-                              
+                                dData = new SHuaZheng();
 
                                 //功率因素
                                 SHuaZhengData dREADVALUE = dList.LastOrDefault(p => p.name == "READVALUE" && p.index <= ddItem.index);
@@ -2910,7 +2910,7 @@ namespace Langben.Report
                             pData.ACTUALVALUE = ACTUALVALUE.values;
                             //功率因素
                             SHuaZhengData READVALUE = pList.LastOrDefault(p => p.name == "READVALUE" && p.index < ppItem.index);
-                            if (READVALUE == null || (READVALUE.values.Trim() != "1.0" && READVALUE.values.Trim() != "0.5"))
+                            if (READVALUE == null || (READVALUE.values.Trim() != "1.0" && READVALUE.values.Trim() != "0.5L"))
                             {
                                 dataDic_PingHengFuZaiShiYouGongDianNengWuCha[ppItem.tongtao].Data.Insert(ppItem.index + count, item);
                                 count++;
@@ -3495,6 +3495,15 @@ namespace Langben.Report
                 notItalicStartIndex = speStartIndex + 1;//非斜体开始位置
                 notItalicEndIndex = speStartIndex + 2;//非斜体结束位置
             }
+            if (value != null && value.Trim() != "" && value.Trim().ToUpper().IndexOf("U(%)(k") >= 0)
+            {
+                speStartIndex = value.Trim().ToUpper().IndexOf("U(%)(k");
+                SpecialStr = "U(%)(k";
+
+                notItalicStartIndex = speStartIndex + 1;//非斜体开始位置
+                notItalicEndIndex = speStartIndex + 2;//非斜体结束位置
+            }
+
             else if (value != null && value.Trim() != "" && value.Trim().ToUpper().IndexOf("UI") >= 0)
             {
                 speStartIndex = value.Trim().ToUpper().IndexOf("UI");
