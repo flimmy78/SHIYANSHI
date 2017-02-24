@@ -10679,7 +10679,7 @@
 					<RowNumber>1</RowNumber>
 					<RowIndex>1310</RowIndex>
 					<CellList>
-						<Cell>
+						<!--<Cell>
 							<Code>statestandard</Code>
 							<ColIndex>-1</ColIndex>
 							<ColCount>0</ColCount>
@@ -10694,7 +10694,7 @@
 							<IsMergeSameValue>N</IsMergeSameValue>
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
-						</Cell>
+						</Cell>-->
 						<Cell>
 							<Code>K</Code>
 							<ColIndex>1</ColIndex>
