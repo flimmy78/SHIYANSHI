@@ -845,6 +845,10 @@ namespace Langben.Report
             string errors = "";
             string xpath = @"//table[@id='tongdao_1']/thead//input | //table[@id='tongdao_1']/thead//select";
             var collection = doc.DocumentNode.SelectNodes(xpath);
+            if(collection==null)
+            {
+                return errors;
+            }
             Dictionary<string, string> ids = new Dictionary<string, string>();
             foreach (var item in collection)
             {

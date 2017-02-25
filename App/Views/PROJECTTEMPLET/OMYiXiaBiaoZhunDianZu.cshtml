@@ -99,7 +99,7 @@
 
                 //htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "calculate1.erdengbiaozhundianzubiaochenzhi", ""));
                 var id = "READVALUE_" + HangHaoID;
-                htmlString.push("<td align='center' ><select onchange='calculate1.erdengbiaozhundianzubiaochenzhi(this)' class=\"my-combobox\" name=\"select\" id='" + id + "'>   <option value=\"\"></option> <option value=\"0.0001\">0.0001</option> <option value=\"0.001\">0.001</option> <option value=\"0.01\">0.01</option><option value=\"0.1\">0.1</option><option value=\"1\">1</option><option value=\"10\">10</option><option value=\"100\">100</option><option value=\"1000\">1000</option><option value=\"10000\">10000</option><option value=\"100000\">100000</option></td>");
+                htmlString.push("<td align='center' ><select onchange='calculate1.erdengbiaozhundianzubiaochenzhi(this)' class=\"my-combobox\" name=\"READVALUE\" id='" + id + "'>   <option value=\"\"></option> <option value=\"0.0001\">0.0001</option> <option value=\"0.001\">0.001</option> <option value=\"0.01\">0.01</option><option value=\"0.1\">0.1</option><option value=\"1\">1</option><option value=\"10\">10</option><option value=\"100\">100</option><option value=\"1000\">1000</option><option value=\"10000\">10000</option><option value=\"100000\">100000</option></td>");
                 htmlString.push(SetTDHtml(rowspan, "WE", HangHaoID, rowidx, "", ""));
                 htmlString.push(SetTDHtml(rowspan, "TYEW", HangHaoID, rowidx, "", ""));
                 htmlString.push(SetTDHtml(rowspan, "UI", HangHaoID, rowidx, "", ""));
@@ -117,12 +117,12 @@
                 //显示值 增加下拉框单位V
                 //htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100", '', ""));
                 var sid = "SHIJISHUCHUZHI_" + HangHaoID;
-                htmlString.push("<td align='center' >±<select class=\"my-combobox\" name=\"select\" id='" + sid + "'>   <option value=\"\"></option> <option value=\"0.01\">0.01</option><option value=\"0.05\">0.05</option><option value=\"0.02\">0.02</option><option value=\"0.1\">0.1</option></td>");
+                htmlString.push("<td align='center' >±<select class=\"my-combobox\" name=\"SHIJISHUCHUZHI\" id='" + sid + "'>   <option value=\"\"></option> <option value=\"0.01\">0.01</option><option value=\"0.05\">0.05</option><option value=\"0.02\">0.02</option><option value=\"0.1\">0.1</option></td>");
 
                 //相对误差
                 //htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, '', "classstyle100"));
                 var rid = "RELATIVEERROR_" + HangHaoID;
-                htmlString.push("<td align='center' ><select class=\"my-combobox\" name=\"select\" id='" + rid + "'> <option value=\"\"></option><option value=\"5\">5</option><option value=\"2\">2</option><option value=\"0.3\">0.3</option><option value=\"0.1\">0.1</option><option value=\"0.03\">0.03</option><option value=\"0.01\">0.01</option><option value=\"0.003\">0.003</option><option value=\"0.0001\">0.0001</option></td>");
+                htmlString.push("<td align='center' ><select class=\"my-combobox\" name=\"RELATIVEERROR\" id='" + rid + "'> <option value=\"\"></option><option value=\"5\">5</option><option value=\"2\">2</option><option value=\"0.3\">0.3</option><option value=\"0.1\">0.1</option><option value=\"0.03\">0.03</option><option value=\"0.01\">0.01</option><option value=\"0.003\">0.003</option><option value=\"0.0001\">0.0001</option></td>");
 
                 //校准结果的不确定度 U(K =
                 htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, '', "classstyle"));
