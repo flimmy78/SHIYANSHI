@@ -2561,6 +2561,10 @@ namespace Langben.Report
                     //{
                     //    continue;
                     //}
+                    //if (iVTEST_ITE.RULEID != "622-1997_4" &&  iVTEST_ITE.RULEID != "1005-2005_4" )
+                    //{
+                    //    continue;
+                    //}
                     //1085-2013_7电能标准偏差估计值报告不打印
                     if ((type == ExportType.Report_JianDing || type == ExportType.Report_XiaoZhun || type == ExportType.Report_XiaoZhun_CNAS) && iVTEST_ITE.RULEID == "1085-2013_7")
                     {
@@ -2592,18 +2596,18 @@ namespace Langben.Report
                     {
                         celStr = celStr + iEntity.CONCLUSION.Trim();
                     }
-                    else if(type== ExportType.Report_JianDing)//处理检定报告
+                    else if(iEntity != null && type == ExportType.Report_JianDing)//处理检定报告
                     {
                         string msg = string.Empty;
                         IsBiaoGe = IsBiaoGeByDengJi(iEntity, ref msg);
-                        if(msg!=null && msg.Trim()!="")
+                        if(!IsBiaoGe && (msg != null && msg.Trim()!=""))
                         {
                             celStr = celStr + msg;
                         }
-                        else
-                        {
-                            celStr = celStr + "/";
-                        }
+                        //else
+                        //{
+                        //    celStr = celStr + "/";
+                        //}
 
                     }
                     else if (iEntity == null)
@@ -4416,7 +4420,7 @@ namespace Langben.Report
             //为了表格底部没有线           
             CopyRow(sheet_Source, sheet_Destination, 4, rowIndex_Destination, 1, true);
             // 
-            if (iEntity.RULEID == "1085-2013_8" || iEntity.RULEID == "1085-2013_9" || iEntity.RULEID== "124-2005_3")
+            if (iEntity.RULEID == "1085-2013_8" || iEntity.RULEID == "1085-2013_9" || iEntity.RULEID== "124-2005_3" || (iEntity.RULEID== "440-2008_9" && type== ExportType.Report_JianDing))
             {                
                 ICellStyle style = sheet_Destination.Workbook.CreateCellStyle();
                 style.BorderBottom = BorderStyle.None;
