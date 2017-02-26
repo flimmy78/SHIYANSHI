@@ -2553,6 +2553,10 @@ namespace Langben.Report
                     {
                         continue;
                     }
+                    //if(iVTEST_ITE.RULEID!= "440-2008_10")
+                    //{
+                    //    continue;
+                    //}
                     //if(iVTEST_ITE.RULEID!= "1085-2013_8" && iVTEST_ITE.RULEID!= "1085-2013_9" && iVTEST_ITE.RULEID != "1085-2013_10")
                     //{
                     //    continue;
@@ -4286,6 +4290,16 @@ namespace Langben.Report
                                 sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).SetCellValue(value);
                                 if (d.mergedRowNum > 1)//多行单元格合并
                                 {
+                                    //for (int j = c.FirstRow; j < c.FirstRow+d.mergedRowNum; j++)//将已合并或者已使用的区域移除
+                                    //{
+                                    //    for(int jj=c.FirstColumn;jj<=c.LastColumn;jj++)
+                                    //    {
+                                    //        //if(j!=c.FirstRow && jj!=c.FirstColumn)
+                                    //        //{
+                                    //            sheet_Destination.GetRow(j).GetCell(jj).SetCellValue(new HSSFRichTextString(""));
+                                    //        //}
+                                    //    }                                       
+                                    //}
                                     sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
 
                                 }
@@ -4294,7 +4308,7 @@ namespace Langben.Report
                                 {
                                     KeyValuePair<string, CellRangeAddress> cc = cellAddressList.FirstOrDefault(p => p.Value.FirstColumn == c.FirstColumn && p.Value.LastColumn == c.LastColumn);
                                     if (!string.IsNullOrWhiteSpace(cc.Key) && cc.Value != null && cc.Value.FirstColumn == c.FirstColumn && cc.Value.LastColumn == c.LastColumn)
-                                    {
+                                    {                                       
                                         cellAddressList.Remove(cc.Key);
                                     }
                                 }
