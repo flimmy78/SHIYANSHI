@@ -136,6 +136,11 @@ namespace Langben.App.Controllers
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
+        public ActionResult BuPingHengFuZaiShiYouGongDianNengWuChaTest(string RULEID = "1085-2013_6_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
         /// <summary>
         ///工作电流
         /// </summary>
