@@ -69,11 +69,14 @@ namespace Langben.Report
                 string outHead = "";
 
                 //只遍历通道1
-                var tongdao1 = theadOfInputAndSelect[1];
-                for (int i = 0; i < tongdao1.Count; i++)
+                if (theadOfInputAndSelect != null && theadOfInputAndSelect.Count > 0)
                 {
-                    outHead += string.Format(tempCell, tongdao1[i].Attributes["name"].Value, i);
+                    var tongdao1 = theadOfInputAndSelect[1];
+                    for (int i = 0; i < tongdao1.Count; i++)
+                    {
+                        outHead += string.Format(tempCell, tongdao1[i].Attributes["name"].Value, i);
 
+                    }
                 }
                 outHead = string.Format(tempCellList, outHead);
 

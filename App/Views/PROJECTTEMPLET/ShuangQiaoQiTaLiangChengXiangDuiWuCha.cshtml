@@ -96,15 +96,17 @@
                 //量程
                 //htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, (rowLength).toString(), "classstyle120", ""));
                 var yanShiPanId = "OUTPUTVALUE_" + HangHaoID;
-                var strTd = "<select class=\"my-combobox\" name=\"state_1_\" id=\state_UNIT_1_\">" +
+                var stateId = "state_UNIT_1_" + HangHaoID;
+                var strTd = "<select class=\"my-combobox\" name=\"state\" id='" + stateId + "'>" +
                                 "<option value=\"×\" selected>×</option>" +
                             "</select> <input name=\"OUTPUTVALUE\" id='" + yanShiPanId + "' type=\"text\" class=\"my-textbox\" value=\"\" style=\"width:50px\" onblur=\"changeValue(this)\" />"
                 htmlString.push("<td align='center' >" + strTd + "</td>");
                 //测量盘示值(Ω)
                 var yanShiPanId = "YanShiPan_" + HangHaoID;
                 var yanShiPanId2 = "YanShiPan1_" + HangHaoID;
+                var state1Id = "state1_UNIT_1_" + HangHaoID;
                 var strTd = "<input name=\"YanShiPan\" id='" + yanShiPanId + "' type=\"text\" class=\"my-textbox\" value=\"\" style=\"width:50px\"  />" +
-                            "<select class=\"my-combobox\" name=\"state_1_\" id=\state_UNIT_1_\">" +
+                            "<select class=\"my-combobox\" name=\"state1\" id='" + state1Id + "'>" +
                                 "<option value=\"plus\" selected>+</option>" +
                             "</select> <input name=\"YanShiPan1\" id='" + yanShiPanId2 + "' type=\"text\" class=\"my-textbox\" value=\"\" style=\"width:50px\" onblur=\"changeValue(this)\" />"
                 htmlString.push("<td align='center' >" + strTd + "</td>");
