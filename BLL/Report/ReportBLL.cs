@@ -2553,7 +2553,7 @@ namespace Langben.Report
                     {
                         continue;
                     }
-                    //if(iVTEST_ITE.RULEID!= "440-2008_10")
+                    //if (iVTEST_ITE.RULEID != "440-2008_10")
                     //{
                     //    continue;
                     //}
@@ -4289,18 +4289,22 @@ namespace Langben.Report
                                 }
                                 sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).SetCellValue(value);
                                 if (d.mergedRowNum > 1)//多行单元格合并
-                                {
-                                    //for (int j = c.FirstRow; j < c.FirstRow+d.mergedRowNum; j++)//将已合并或者已使用的区域移除
-                                    //{
-                                    //    for(int jj=c.FirstColumn;jj<=c.LastColumn;jj++)
-                                    //    {
-                                    //        //if(j!=c.FirstRow && jj!=c.FirstColumn)
-                                    //        //{
-                                    //            sheet_Destination.GetRow(j).GetCell(jj).SetCellValue(new HSSFRichTextString(""));
-                                    //        //}
-                                    //    }                                       
-                                    //}
-                                    sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
+                                {                                    
+                                    if (iEntity.RULEID == "440 - 2008_10" && type== ExportType.Report_JianDing)//解决单元格无法合并问题，目前没找到原因
+                                    {
+                                        for (int k = 0; k < 5; k++)
+                                        {
+                                            sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
+                                        }
+                                    }
+                                    else
+                                    {
+                                        sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
+
+                                    }
+                                    //sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
+                                    //sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
+                                    //sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
 
                                 }
 
