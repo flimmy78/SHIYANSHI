@@ -381,10 +381,10 @@
             }
             htmlString = htmlString.join("");
 
-            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find(".myliangcheng_" + LiangChengShuLiang).append(htmlString);
+            var tagRow = $("#tongdao_" + hideDangQianTongDao).find(".myliangcheng_" + LiangChengShuLiang).append(htmlString);
             $.parser.parse(tagRow);//渲染easyui组建
             //$('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
-            $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find(".myliangcheng_" + LiangChengShuLiang).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+            $("#tongdao_" + hideDangQianTongDao).find(".myliangcheng_" + LiangChengShuLiang).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
         //计算标准值
         function changeValue(obj) {
