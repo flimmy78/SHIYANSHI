@@ -1024,6 +1024,11 @@ namespace Langben.App.Controllers
             entity.SCHEMEID = SCHEMEID;
             entity.HTMLVALUE = Server.UrlDecode(HTMLVALUE);//解码
 
+            PROJECTTEMPLET pEntity= m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
+            if(pEntity!=null)
+            {
+                OldID = pEntity.ID;
+            }
             if (OldID != null && OldID.Trim() != "")
             {
                 m_BLL.Delete(ref validationErrors, OldID);

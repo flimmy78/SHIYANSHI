@@ -125,6 +125,123 @@ namespace Langben.Report
             return result;
         }
         /// <summary>
+        ///  /// <summary>
+        /// 以上传附件的形式添加记录签名位置
+        /// </summary>
+        /// <param name="ID">预备方案ID</param>
+        /// <param name="err">返回错误信息</param>
+        /// <returns></returns>
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="err"></param>
+        /// <returns></returns>
+        public bool UpdateFuJianRemark(string ID, out string err)
+        {
+            string errMsg = "";            
+            bool BaoGao= UpdateFuJianRemark_BaoGao(ID, out errMsg);
+            err = errMsg;
+            bool YuanShiJiLu = UpdateFuJianRemark2_YuanShiJiLu(ID, out errMsg);
+            err += errMsg;
+            if(BaoGao && YuanShiJiLu)
+            {
+                return true;
+            }
+            return false;
+
+        }
+        /// <summary>
+        /// 以上传附件的形式添加报告记录，设置报告中批准人、核验员、检定员\校准员位置
+        /// </summary>
+        /// <param name="ID">预备方案ID</param>
+        /// <param name="err">返回错误信息</param>
+        /// <returns></returns>
+        public bool UpdateFuJianRemark_BaoGao(string ID,out string err)
+        {
+            err = "";
+            try
+            {
+                ValidationErrors validationErrors = new ValidationErrors();
+                IBLL.IFILE_UPLOADERBLL fBll = new BLL.FILE_UPLOADERBLL();
+                FILE_UPLOADER fEntity = fBll.GetEntityByPREPARE_SCHEMEID(ID);
+                if (fEntity == null)
+                {
+                    err = "未找到附件表数据";
+                    return false;
+                }
+                IBLL.IPREPARE_SCHEMEBLL m_BLL = new PREPARE_SCHEMEBLL();
+                PREPARE_SCHEME entity = m_BLL.GetById(ID);
+
+                if (entity == null)
+                {
+                    err = "未找到预备方案数据" + ID;
+                    return false;
+                }
+                string xlsPath = fEntity.FULLPATH;
+                if (!System.IO.File.Exists(xlsPath))
+                {
+                    err = "未找附件" + xlsPath;
+                    return false;
+                }
+
+                FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.ReadWrite);
+                IWorkbook hssfworkbook = new HSSFWorkbook(file);
+
+                string sheetName_Destination = "第二页";//查找CNAS
+                ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);               
+                int rowIndex = -1;
+                if (sheet_Destination != null)
+                {
+                    for (int i = 0; i <= sheet_Destination.LastRowNum; i++)
+                    {
+                        if (sheet_Destination.GetRow(i).Cells[2].StringCellValue == "校准员：")
+                        {
+                            rowIndex = i;
+                            break;
+                        }
+                    }
+                }
+                if (rowIndex >= 0)//CNAS
+                {
+                    string fRemark = "";//批准人行号_批准人列号|核验员行号_核验员列号|检定员/校准员行号_检定员/校准员列号                   
+                    fRemark = "|" + rowIndex.ToString() + "_15|" + rowIndex.ToString() + "_5";
+                    fEntity.REMARK = fRemark;
+                }                
+                 else//非CNAS
+                {
+                    //批准人行号_批准人列号|核验员行号_核验员列号|检定员/校准员行号_检定员/校准员列号  
+                    fEntity.REMARK = "33_13|35_13|37_13";//添加签名位置
+                }
+
+                if (fBll.Edit(ref validationErrors, fEntity))
+                {
+                    return true;
+                }
+                else
+                {
+                    if (validationErrors != null && validationErrors.Count > 0)
+                    {
+                        string err1 = "";
+                        validationErrors.All(a =>
+                        {
+                            err1 += a.ErrorMessage;
+                            return true;
+                        });
+                        err = err1;
+                    }
+
+                    return false;
+                }               
+               
+               
+            }
+            catch (Exception ex)
+            {
+                err = ex.Message;
+                return false;
+
+            }
+        }
+        /// <summary>
         /// 以上传附件的形式添加原始记录，设置原始报告中检定员、核验员位置
         /// </summary>
         /// <param name="ID">预备方案ID</param>
@@ -152,14 +269,18 @@ namespace Langben.Report
                     return false;
                 }
                 string xlsPath = fEntity.FULLPATH2;
-
+                if (!System.IO.File.Exists(xlsPath))
+                {
+                    err = "未找附件" + xlsPath;
+                    return false;
+                }
                 FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.ReadWrite);
                 IWorkbook hssfworkbook = new HSSFWorkbook(file);
 
                 string sheetName_Destination = "封皮";
                 ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
                 int rowIndex = -1;
-                for (int i = 0; i < sheet_Destination.LastRowNum; i++)
+                for (int i = 0; i <= sheet_Destination.LastRowNum; i++)
                 {
                     if (sheet_Destination.GetRow(i).Cells[0].StringCellValue == "检定员：")
                     {
