@@ -2708,7 +2708,7 @@ namespace Langben.Report
                     {
                         continue;
                     }
-                    //if (iVTEST_ITE.RULEID != "440-2008_10")
+                    //if (iVTEST_ITE.RULEID != "1052-2009_2_1" && iVTEST_ITE.RULEID!= "1052-2009_2_2" && iVTEST_ITE.RULEID!= "315 - 1983_2_6")
                     //{
                     //    continue;
                     //}
