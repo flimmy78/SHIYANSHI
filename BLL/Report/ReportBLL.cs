@@ -281,6 +281,10 @@ namespace Langben.Report
             {
                 sheetName_Destination = "通知书封皮";
             }
+            else if(type== ExportType.Report_XiaoZhun_CNAS)//CNAS只有第二页
+            {
+                sheetName_Destination = "第二页";
+            }
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
 
 
@@ -300,7 +304,15 @@ namespace Langben.Report
                             bytes = System.IO.File.ReadAllBytes(picPath);
                             int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
                             IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
-                            IClientAnchor anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen + 3, fEntity.Row_PiZhunRen + 1);
+                            IClientAnchor anchor = null;
+                            if (type == ExportType.Report_XiaoZhun_CNAS)
+                            {
+                                anchor = new HSSFClientAnchor(50, 50, 200, 200, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen + 4, fEntity.Row_PiZhunRen);
+                            }
+                            else
+                            {
+                                anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen + 3, fEntity.Row_PiZhunRen + 1);
+                            }
                             IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
                             //pict.Resize();
                             sheet_Destination.GetRow(fEntity.Row_PiZhunRen).GetCell(fEntity.Col_PiZhunRen).SetCellValue("");
@@ -348,7 +360,15 @@ namespace Langben.Report
                             bytes = System.IO.File.ReadAllBytes(picPath);
                             int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
                             IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
-                            IClientAnchor anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_HeYanYuan, fEntity.Row_HeYanYuan, fEntity.Col_HeYanYuan + 3, fEntity.Row_HeYanYuan + 1);
+                            IClientAnchor anchor = null;
+                            if (type == ExportType.Report_XiaoZhun_CNAS)
+                            {
+                                anchor = new HSSFClientAnchor(50, 50, 200, 200, fEntity.Col_HeYanYuan, fEntity.Row_HeYanYuan, fEntity.Col_HeYanYuan + 4, fEntity.Row_HeYanYuan );
+                            }
+                            else
+                            {
+                                anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_HeYanYuan, fEntity.Row_HeYanYuan, fEntity.Col_HeYanYuan + 3, fEntity.Row_HeYanYuan + 1);
+                            }
                             IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
                             //pict.Resize();
                             sheet_Destination.GetRow(fEntity.Row_HeYanYuan).GetCell(fEntity.Col_HeYanYuan).SetCellValue("");
@@ -396,7 +416,15 @@ namespace Langben.Report
                             bytes = System.IO.File.ReadAllBytes(picPath);
                             int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
                             IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
-                            IClientAnchor anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_JianDingYuan, fEntity.Row_JianDingYuan, fEntity.Col_JianDingYuan + 3, fEntity.Row_JianDingYuan + 1);
+                            IClientAnchor anchor = null;
+                            if (type == ExportType.Report_XiaoZhun_CNAS)
+                            {
+                                anchor = new HSSFClientAnchor(50, 50, 200, 200, fEntity.Col_JianDingYuan, fEntity.Row_JianDingYuan, fEntity.Col_JianDingYuan + 4, fEntity.Row_JianDingYuan);
+                            }
+                            else
+                            {
+                                anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_JianDingYuan, fEntity.Row_JianDingYuan, fEntity.Col_JianDingYuan + 3, fEntity.Row_JianDingYuan + 1);
+                            }
                             IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
                             //pict.Resize();
                             sheet_Destination.GetRow(fEntity.Row_JianDingYuan).GetCell(fEntity.Col_JianDingYuan).SetCellValue("");
@@ -669,7 +697,7 @@ namespace Langben.Report
                 }
 
                 //第二页数据
-                SetSecond_BaoGao(hssfworkbook, entity, type);
+                SetSecond_BaoGao(hssfworkbook, entity, ref fRemark, type);
 
                 //设置数据
                 SetShuJu(hssfworkbook, entity, type);
@@ -1193,9 +1221,11 @@ namespace Langben.Report
         /// </summary>
         /// <param name="hssfworkbook"></param>
         /// <param name="entity"></param>
-        private void SetSecond_BaoGao(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing)
+        /// <param name="fRemark">签名位置</param>
+        /// <param name="type">报告类型</param>
+        private void SetSecond_BaoGao(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ref string fRemark, ExportType type = ExportType.OriginalRecord_JianDing)
         {
-
+            //fRemark = "";
             string sheetName_Destination = "第二页";
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
             #region 第二页
@@ -1298,6 +1328,7 @@ namespace Langben.Report
                 {
                     sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue("/");
                 }
+                
                 //核验员
                 if (entity.DETECTERID != null && entity.DETECTERID.Trim() != "")
                 {
@@ -1307,6 +1338,9 @@ namespace Langben.Report
                 {
                     sheet_Destination.GetRow(RowIndex).GetCell(15).SetCellValue("/");
                 }
+                fRemark = "_";//批 准 人
+                fRemark += "|" + RowIndex.ToString() + "_15";//核 验 员
+                fRemark += "|" + RowIndex.ToString() + "_5";//检 定 员
             }
             #endregion
 

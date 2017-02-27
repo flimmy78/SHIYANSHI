@@ -29,11 +29,14 @@ namespace Langben.DAL
                 {
                     try
                     {
-                        index = Convert.ToInt32(REMARK.Split('|')[0].Split('_')[0]);
+                        if (REMARK.Split('|')[0].Split('_')[0].Trim() != "")
+                        {
+                            index = Convert.ToInt32(REMARK.Split('|')[0].Split('_')[0]);
+                        }
                     }
                     catch
                     {
-
+                        index = -1;
                     }
                 }
                 return index;
@@ -51,11 +54,15 @@ namespace Langben.DAL
                 {
                     try
                     {
-                        index = Convert.ToInt32(REMARK.Split('|')[1].Split('_')[0]);
+                        if (REMARK.Split('|')[1].Split('_')[0].Trim() != "")
+                        {
+                            index = Convert.ToInt32(REMARK.Split('|')[1].Split('_')[0]);
+                        }
+
                     }
                     catch
                     {
-
+                        index = -1;
                     }
                 }
                 if (index == -1 && Row_PiZhunRen != -1)
@@ -77,11 +84,14 @@ namespace Langben.DAL
                 {
                     try
                     {
-                        index = Convert.ToInt32(REMARK.Split('|')[2].Split('_')[0]);
+                        if (REMARK.Split('|')[2].Split('_')[0].Trim() != "")
+                        {
+                            index = Convert.ToInt32(REMARK.Split('|')[2].Split('_')[0]);
+                        }
                     }
                     catch
                     {
-
+                        index = -1;
                     }
                 }
                 if (index == -1 && Row_HeYanYuan != -1)
@@ -103,11 +113,14 @@ namespace Langben.DAL
                 {
                     try
                     {
-                        index = Convert.ToInt32(REMARK.Split('|')[0].Split('_')[1]);
+                        if (REMARK.Split('|')[0].Split('_')[1].Trim() != "")
+                        {
+                            index = Convert.ToInt32(REMARK.Split('|')[0].Split('_')[1]);
+                        }
                     }
                     catch
                     {
-
+                        index = -1;
                     }
                 }
                 return index;
@@ -125,11 +138,14 @@ namespace Langben.DAL
                 {
                     try
                     {
-                        index = Convert.ToInt32(REMARK.Split('|')[1].Split('_')[1]);
+                        if (REMARK.Split('|')[1].Split('_')[1].Trim() != "")
+                        {
+                            index = Convert.ToInt32(REMARK.Split('|')[1].Split('_')[1]);
+                        }
                     }
                     catch
                     {
-
+                        index = -1;
                     }
                 }
                 if (index == -1 && Col_PiZhunRen != -1)
@@ -151,11 +167,14 @@ namespace Langben.DAL
                 {
                     try
                     {
-                        index = Convert.ToInt32(REMARK.Split('|')[2].Split('_')[1]);
+                        if (REMARK.Split('|')[2].Split('_')[1].Trim() != "")
+                        {
+                            index = Convert.ToInt32(REMARK.Split('|')[2].Split('_')[1]);
+                        }
                     }
                     catch
                     {
-
+                        index = -1;
                     }
                 }
                 if (index == -1 && Col_HeYanYuan != -1)
@@ -179,11 +198,14 @@ namespace Langben.DAL
                 {
                     try
                     {
-                        index = Convert.ToInt32(REMARK2.Split('|')[0].Split('_')[0]);
+                        if (REMARK2.Split('|')[0].Split('_')[0].Trim() != "")
+                        {
+                            index = Convert.ToInt32(REMARK2.Split('|')[0].Split('_')[0]);
+                        }
                     }
                     catch
                     {
-
+                        index = -1;
                     }
                 }               
                 return index;
@@ -201,11 +223,14 @@ namespace Langben.DAL
                 {
                     try
                     {
-                        index = Convert.ToInt32(REMARK2.Split('|')[0].Split('_')[1]);
+                        if (REMARK2.Split('|')[0].Split('_')[1].Trim() != "")
+                        {
+                            index = Convert.ToInt32(REMARK2.Split('|')[0].Split('_')[1]);
+                        }
                     }
                     catch
                     {
-
+                        index = -1;
                     }
                 }
                 return index;
@@ -223,11 +248,14 @@ namespace Langben.DAL
                 {
                     try
                     {
-                        index = Convert.ToInt32(REMARK2.Split('|')[1].Split('_')[0]);
+                        if (REMARK2.Split('|')[1].Split('_')[0].Trim() != "")
+                        {
+                            index = Convert.ToInt32(REMARK2.Split('|')[1].Split('_')[0]);
+                        }
                     }
                     catch
                     {
-
+                        index = -1;
                     }
                 }
                 if (index == -1 && Row_JianDingYuan_YuanShiJiLu != -1)
@@ -249,11 +277,14 @@ namespace Langben.DAL
                 {
                     try
                     {
-                        index = Convert.ToInt32(REMARK2.Split('|')[1].Split('_')[1]);
+                        if (REMARK2.Split('|')[1].Split('_')[1].Trim() != "")
+                        {
+                            index = Convert.ToInt32(REMARK2.Split('|')[1].Split('_')[1]);
+                        }
                     }
                     catch
                     {
-
+                        index = -1;
                     }
                 }
                 if (index == -1 && Col_JianDingYuan_YuanShiJiLu != -1)
