@@ -117,9 +117,11 @@ namespace Langben.Report
                         {
                             if (j == 67)
                             {
+                                 
                                 var datadouhoa = s.Split(',');
                                 foreach (var item in datadouhoa)
                                 {
+                                    rr = new Report.ReportRule();
                                     rr.ruleid = item.Trim();
 
                                     rr.ruleidnum = i;
@@ -257,16 +259,26 @@ namespace Langben.Report
                 }
 
                 //if (item.IsHaveTableFooter)
-                {
-                    var countData = (from f in rrbiaoshi
-                                     where f.biaoshi == "BUQUEDINGDU"
+                //{
+                //    var countData = (from f in rrbiaoshi
+                //                     where f.biaoshi == "BUQUEDINGDU"
+                //                     select f);
+                //    if (countData != null&& countData.Count()>0)
+                //    {
+                //        item.TableFooterList.First().RowIndex = countData.First().biaoshinum + 2;
+                //        item.TableFooterList.First().RowNumber = countData.Count();
+                //    }
+
+                //}
+                { 
+                var countData = (from f in rrbiaoshi
+                                     where f.biaoshi == "wucha"
                                      select f);
-                    if (countData != null&& countData.Count()>0)
+                    if (countData != null && countData.Count() > 0)
                     {
                         item.TableFooterList.First().RowIndex = countData.First().biaoshinum + 2;
                         item.TableFooterList.First().RowNumber = countData.Count();
                     }
-
                 }
                 t.TableTemplateList.Add(item);
 
