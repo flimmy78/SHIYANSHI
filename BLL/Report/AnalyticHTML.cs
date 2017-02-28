@@ -80,7 +80,7 @@ namespace Langben.Report
             for (int i = 1; i < 99; i++)
             {
 
-                string xpath = @"//table[@id='tongdao_" + i + @"']/tbody//input[@type='hidden'][@name='BuQueDingDuLuJing']";
+                string xpath = @"//table[@id='tongdao_" + i + @"']/tbody//input[@type='hidden'][@name='BuQueDingDuLuJing'] | //tbody[@class='dibubuque1']/tr/td/input[@type='hidden'][@name='BuQueDingDuLuJing']";
                 var thead = doc.DocumentNode.SelectNodes(xpath);
                 if (thead == null)
                 {
