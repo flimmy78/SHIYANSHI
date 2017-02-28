@@ -1441,9 +1441,28 @@ namespace Langben.Report
             {
                 RowIndex = RowIndex + 7;
                 //检定员\校准员
-                if (entity.CHECKERID != null && entity.CHECKERID.Trim() != "")
+                //if (entity.CHECKERID != null && entity.CHECKERID.Trim() != "")
+                if (entity.CREATEPERSON != null && entity.CREATEPERSON.Trim() != "")
                 {
-                    sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CHECKERID);
+
+                    AccountBLL aBll = new BLL.AccountBLL();
+                    ////批 准 人(改为审批人)2017.1.21
+                    //personName.Add(entity.APPROVALEPERSON);
+                    ////核验员（改成审核人）2017.1.21
+                    //personName.Add(entity.AUDITTEPERSON);
+                    List<string> personName = new List<string>();
+                    //检定员（改为创建人）2017.1.21
+                    personName.Add(entity.CREATEPERSON);
+                    Dictionary<string, SysPerson> picList = aBll.GetPictureByName(personName);
+                    if(picList!=null && picList.Count>0 && !string.IsNullOrWhiteSpace(picList.Values.FirstOrDefault().MyName))
+                    {
+                        sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(picList.Values.FirstOrDefault().MyName);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CREATEPERSON);
+                    }
+                    //sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CHECKERID);
                 }
                 else
                 {
@@ -2709,10 +2728,10 @@ namespace Langben.Report
                         continue;
                     }
 
-                    if (iVTEST_ITE.RULEID != "166-1993_3_2" && iVTEST_ITE.RULEID != "1052-2009_2_2" && iVTEST_ITE.RULEID != "315 - 1983_2_6")
-                    {
-                        continue;
-                    }
+                    //if (iVTEST_ITE.RULEID != "166-1993_3_2" && iVTEST_ITE.RULEID != "1052-2009_2_2" && iVTEST_ITE.RULEID != "315 - 1983_2_6")
+                    //{
+                    //    continue;
+                    //}
                     //if(iVTEST_ITE.RULEID!= "1085-2013_8" && iVTEST_ITE.RULEID!= "1085-2013_9" && iVTEST_ITE.RULEID != "1085-2013_10")
                     //{
                     //    continue;
