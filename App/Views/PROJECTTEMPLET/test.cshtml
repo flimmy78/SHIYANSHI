@@ -1,1 +1,220 @@
 ﻿
+<input id="hideDangQianTongDao" value="1" type="hidden"><!--当前通道-->
+<input id="hideTongDaoShuLiang" value="1" type="hidden"><!--通道数量-->
+
+
+
+<div class="mt10" id="tongdao">
+    <table class="tbl" id="tongdao_moban" style="display:none" width="100%" cellspacing="0" cellpadding="0" border="0">
+
+
+        <thead>
+            <!--表头-->
+            <tr>
+                <td colspan="6">
+                    <span>基本量程：</span>×
+
+                    <select class="my-combobox" name="state" id="state_t_1_1" onchange="blurValue1(this)">
+                        <option value="1000" selected="selected">1000</option>
+                        <option value="100">100</option>
+                        <option value="10">10</option>
+                        <option value="1">1</option>
+                        <option value="0.1">0.1</option>
+                        <option value="0.01">0.01</option>
+                        <option value="0.001">0.001</option>
+                    </select>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <select class="my-combobox" name="state1" id="state1_t_1_1" onchange="blurValue1(this)">
+                        <option value="滑线盘" selected="selected">滑线盘</option>
+                        <option value="步进盘">步进盘</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <th width="70" align="center">序号</th>
+                <th width="160" align="center">测量盘示值(Ω)</th>
+                <th width="110" align="center">
+                    标称值(Ω)
+                </th>
+                <th width="110" align="center">实际值(Ω)</th>
+                <th width="110" align="center">误差(%)</th>
+                <th align="center">允许误差(%)</th>
+            </tr>
+
+        </thead>
+        <tbody id="tbody_moban">
+            <!--默认0行 -->
+            <!--/默认0行 -->
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6" style="background:#F7F7F7">
+                    <input id="hideLiangChengShuLiang" value="0" type="hidden"> <!--默认量程是0-->
+                    <a href="javascript:void(0)" class="easyui-linkbutton l-btn l-btn-small l-btn-plain" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng" group="" style="display: none;"><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text">增加行数</span><span class="l-btn-icon icon-add">&nbsp;</span></span></a>
+                </td>
+            </tr>
+        </tfoot>
+
+
+    </table>
+    <table class="tbl clone mt10" id="tongdao_1" style="" width="100%" cellspacing="0" cellpadding="0" border="0">
+
+
+        <thead>
+            <!--表头-->
+            <tr>
+                <td colspan="6">
+                    <span>基本量程：</span>×
+
+                    <select class="my-combobox" name="state" id="state_1_1_1" onchange="blurValue1(this)">
+                        <option value="1000" selected="selected">1000</option>
+                        <option value="100">100</option>
+                        <option value="10">10</option>
+                        <option value="1">1</option>
+                        <option value="0.1">0.1</option>
+                        <option value="0.01">0.01</option>
+                        <option value="0.001">0.001</option>
+                    </select>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <select class="my-combobox" name="state1" id="state1_1_1_1" onchange="blurValue1(this)">
+                        <option value="滑线盘" selected="selected">滑线盘</option>
+                        <option value="步进盘">步进盘</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <th width="70" align="center">序号</th>
+                <th width="160" align="center">测量盘示值(Ω)</th>
+                <th width="110" align="center">
+                    标称值(Ω)
+                </th>
+                <th width="110" align="center">实际值(Ω)</th>
+                <th width="110" align="center">误差(%)</th>
+                <th align="center">允许误差(%)</th>
+            </tr>
+
+        </thead>
+        <tbody id="tbody_1">
+            <!--默认0行 -->
+            <!--/默认0行 -->
+
+            <tr rowindex="1">
+                <td class="classstyle120" rowspan="1" align="center">
+                    <input class="my-textbox input-width" value="1" id="OUTPUTVALUE_1_1_1" name="OUTPUTVALUE" onblur="LianDongBuQueDingDu(this);" type="text">
+                </td>
+                <td align="center">
+                    <input name="YanShiPan" id="YanShiPan_1_1_1" class="my-textbox" value="3" style="width:50px" onblur="blurValue1(this)" type="text">
+                    <select class="my-combobox" name="state_UNIT_1_1_1" id="state_UNIT_1_1_1">
+                        <option value="" selected="selected"> </option>
+                        <option value="plus">+</option>
+                    </select> 
+                    <input name="YanShiPan" id="YanShiPan2_1_1_1" class="my-textbox" value="" style="width:50px" onblur="blurValue1(this)" type="text">
+                </td>
+                <td class="classstyle100" rowspan="1" align="center"> 
+                <input class="my-textbox input-width" value="3000.00000" id="ACTUALVALUE_1_1_1" name="ACTUALVALUE" onblur="blurValue(this);LianDongBuQueDingDu(this);" type="text"></td>
+                <td class="classstyle100" rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_1" name="SHIJISHUCHUZHI" onblur="blurValue(this);LianDongBuQueDingDu(this);" type="text"></td>
+                <td class="classstyle100" rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_1" name="RELATIVEERROR" onblur="LianDongBuQueDingDu(this);" type="text"></td>
+                <td align="center">±<select class="my-combobox" name="select" id="select_1_1_1">  <option value="" selected="selected"> </option><option value="2">2</option><option value="1">1</option><option value="0.5">0.5</option><option value="0.2">0.2</option><option value="0.1">0.1</option></select></td>
+            </tr>
+            <tr rowindex="2">
+                <td class="classstyle120" rowspan="1" align="center">
+                    <input class="my-textbox input-width" value="2" id="OUTPUTVALUE_1_1_2" name="OUTPUTVALUE" onblur="LianDongBuQueDingDu(this);" type="text">
+                </td>
+                <td align="center"><input name="YanShiPan" id="YanShiPan_1_1_2" class="my-textbox" value="3" style="width:50px" onblur="blurValue1(this)" type="text"><select class="my-combobox" name="state_UNIT_1_1_2" id="state_UNIT_1_1_2"><option value="" selected="selected"> </option><option value="plus">+</option></select> <input name="YanShiPan" id="YanShiPan2_1_1_2" class="my-textbox" value="" style="width:50px" onblur="blurValue1(this)" type="text"></td>
+                <td class="classstyle100" rowspan="1" align="center"> <input class="my-textbox input-width" value="3000.00000" id="ACTUALVALUE_1_1_2" name="ACTUALVALUE" onblur="blurValue(this);LianDongBuQueDingDu(this);" type="text"></td>
+                <td class="classstyle100" rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_2" name="SHIJISHUCHUZHI" onblur="blurValue(this);LianDongBuQueDingDu(this);" type="text"></td>
+                <td class="classstyle100" rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_2" name="RELATIVEERROR" onblur="LianDongBuQueDingDu(this);" type="text"></td>
+                <td align="center">±<select class="my-combobox" name="select" id="select_1_1_2">  <option value="" selected="selected"> </option><option value="2">2</option><option value="1">1</option><option value="0.5">0.5</option><option value="0.2">0.2</option><option value="0.1">0.1</option></select></td>
+            </tr>
+            <tr rowindex="3">
+                <td class="classstyle120" rowspan="1" align="center">
+                    <input class="my-textbox input-width" value="3" id="OUTPUTVALUE_1_1_3" name="OUTPUTVALUE" onblur="LianDongBuQueDingDu(this);" type="text">
+                </td>
+                <td align="center"><input name="YanShiPan" id="YanShiPan_1_1_3" class="my-textbox" value="3" style="width:50px" onblur="blurValue1(this)" type="text"><select class="my-combobox" name="state_UNIT_1_1_3" id="state_UNIT_1_1_3"><option value="" selected="selected"> </option><option value="plus">+</option></select> <input name="YanShiPan" id="YanShiPan2_1_1_3" class="my-textbox" value="" style="width:50px" onblur="blurValue1(this)" type="text"></td>
+                <td class="classstyle100" rowspan="1" align="center"> <input class="my-textbox input-width" value="3000.00000" id="ACTUALVALUE_1_1_3" name="ACTUALVALUE" onblur="blurValue(this);LianDongBuQueDingDu(this);" type="text"></td>
+                <td class="classstyle100" rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_1_1_3" name="SHIJISHUCHUZHI" onblur="blurValue(this);LianDongBuQueDingDu(this);" type="text"></td>
+                <td class="classstyle100" rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_1_1_3" name="RELATIVEERROR" onblur="LianDongBuQueDingDu(this);" type="text"></td>
+                <td align="center">±<select class="my-combobox" name="select" id="select_1_1_3">  <option value="" selected="selected"> </option><option value="2">2</option><option value="1">1</option><option value="0.5">0.5</option><option value="0.2">0.2</option><option value="0.1">0.1</option></select></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6" style="background:#F7F7F7">
+                    <input id="hideLiangChengShuLiang" value="0" type="hidden"> <!--默认量程是0-->
+                    <a href="javascript:void(0)" class="easyui-linkbutton l-btn l-btn-small l-btn-plain" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng" group="" onclick="set(1,this);" style="display: none;"><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text">增加行数</span><span class="l-btn-icon icon-add">&nbsp;</span></span></a>
+                </td>
+            </tr>
+        </tfoot>
+
+
+    </table>
+</div>
+
+
+<div class="mt10">
+    <table class="tbl" width="100%" cellspacing="0" cellpadding="0" border="0">
+
+        <tbody>
+            <tr>
+                <th width="40">注：</th>
+                <td>
+                    <textarea name="REMARK" id="REMARK" class="" height:40px;="" width:95%"="" value=""></textarea>
+
+                </td>
+            </tr>
+            <tr>
+                <th width="40">结论：</th>
+                <td>
+                    <input class="" name="CONCLUSION" data-options="multiline:true" style="height:40px; width:95%" id="CONCLUSION" value="" type="text">
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <div id="BUQueDingDuDiBu">
+        <table class="tbl mt10" id="tbBuQueDingDuD" width="100%" cellspacing="0" cellpadding="0" border="0">
+            <tbody id="tbodyBuQueDingDuD_2">
+                <tr>
+                    <td width="40%" align="center"><input name="D1" id="D1_1" class="my-textbox tr" value="" style="width:96%" type="text"></td>
+                    <td>
+                        <i>U</i><small>rel</small>(k =
+                        <select class="my-combobox" name="KD" id="KD_1">
+                            <option value="2" selected="selected">2 </option>
+                            <option value="3">3</option>
+                            <option value="√3">√3</option>
+                        </select>
+                        ) =
+                        <input class="my-textbox " value="" name="txtvalueD" style="width:300px" id="txtvalueD_1" type="text">
+                        <input name="BuQueDingDuLuJing" id="BuQueDingDuLuJing_txtvalueD_1" value="" type="hidden">
+                        <input name="BuQueDingDuZhi" id="BuQueDingDuZhi_txtvalueD_1" value="" type="hidden">
+                        <input class="my-btn" value="计 算" name="btn_txtvalueD" id="btn_txtvalueD_1" onclick="JiSuanBuQueDingDu_DiBu(this);" type="button">
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td colspan="8" style="background:#F7F7F7"><a href="javascript:void(0)" class="easyui-linkbutton l-btn l-btn-small l-btn-plain" data-options="plain:true,iconCls:'icon-add'" onclick="addBuQueDingRow()" group="" id="" style="display: none;"><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text">增加不确定度计算行</span><span class="l-btn-icon icon-add">&nbsp;</span></span></a></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+<!--增加量程弹层-->
+<!--弹框的位置-->
+<!--增加量程弹层-->
+<!--/增加量程弹层-->
+<!--/增加量程弹层-->

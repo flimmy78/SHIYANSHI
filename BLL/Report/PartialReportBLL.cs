@@ -299,10 +299,7 @@ namespace Langben.Report
                         {
                             doc.LoadHtml(iEntity.HTMLVALUE);
                             string data = AnalyticHTML.Getinput(doc);
-                            if (iEntity.RULEID== "1052-2009_6")
-                            {
-
-                            }
+                            AnalyticHTML.GetData(doc);
                             string data2 = AnalyticHTML.GetinputHead(doc);
                             if (!string.IsNullOrWhiteSpace(data2))
                             {
