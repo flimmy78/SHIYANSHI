@@ -17,9 +17,52 @@ namespace Langben.Report
         /// <param name="doc"></param>
         /// <returns></returns>
         public static HeadValue GetBuDueDingDu_DiBu(HtmlAgilityPack.HtmlDocument doc)
-        {
+        {     var buDueDingDu_DiBu = new HeadValue();
+            string xpath = @"//tbody[@class='dibubuque1']/tr/td/input[@type='text'] | //tbody[@class='dibubuque1']/tr/td/select";
+            var thead = doc.DocumentNode.SelectNodes(xpath);
+            if (thead != null)
+            {
+                List<MYDataHead> list = new List<MYDataHead>();
+                foreach (var b in thead)
+                {
+                    MYDataHead mydata = new MYDataHead();
+                    mydata.id = b.Attributes["id"].Value;
+                    mydata.name = b.Attributes["name"].Value;
 
-            var buDueDingDu_DiBu = new HeadValue();
+                    if (b.Name == "input")
+                    {
+                        if (b.Attributes["value"] != null)
+                        {
+                            mydata.value = b.Attributes["value"].Value;
+
+                        }
+                    }
+                    else if (b.Name == "select")
+                    {
+                        var nodes = b.ChildNodes
+                      .Where(w => (w.Name == "option" && w.Attributes["selected"] != null))
+                      .Select(s => s.Attributes["value"].Value).FirstOrDefault();
+
+                        if (null == (nodes))
+                        {
+                            mydata.value = b.ChildNodes
+                   .Where(w => (w.Name == "option"))
+                   .Select(s => s.Attributes["value"].Value).First();
+                        }
+                        else
+                        {
+                            mydata.value = nodes;
+                        }
+
+                    }
+
+                    list.Add(mydata);
+                }
+                buDueDingDu_DiBu.Data = list;
+                buDueDingDu_DiBu.Count = list.Count/3;
+            }
+           
+       
             return buDueDingDu_DiBu;
         }
 
@@ -37,7 +80,7 @@ namespace Langben.Report
             for (int i = 1; i < 99; i++)
             {
 
-                string xpath = @"//table[@id='tongdao_" + i + @"']/tbody//input[@type='hidden'][@name='BuQueDingDuLuJing']";
+                string xpath = @"//table[@id='tongdao_" + i + @"']/tbody//input[@type='hidden'][@name='BuQueDingDuLuJing'] | //tbody[@class='dibubuque1']/tr/td/input[@type='hidden'][@name='BuQueDingDuLuJing']";
                 var thead = doc.DocumentNode.SelectNodes(xpath);
                 if (thead == null)
                 {
