@@ -59,7 +59,7 @@ namespace Langben.Report
                     list.Add(mydata);
                 }
                 buDueDingDu_DiBu.Data = list;
-                buDueDingDu_DiBu.Count = list.Count;
+                buDueDingDu_DiBu.Count = list.Count/3;
             }
            
        
