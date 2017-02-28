@@ -2708,10 +2708,11 @@ namespace Langben.Report
                     {
                         continue;
                     }
-                    //if (iVTEST_ITE.RULEID != "1052-2009_2_1" && iVTEST_ITE.RULEID!= "1052-2009_2_2" && iVTEST_ITE.RULEID!= "315 - 1983_2_6")
-                    //{
-                    //    continue;
-                    //}
+
+                    if (iVTEST_ITE.RULEID != "166-1993_3_2" && iVTEST_ITE.RULEID != "1052-2009_2_2" && iVTEST_ITE.RULEID != "315 - 1983_2_6")
+                    {
+                        continue;
+                    }
                     //if(iVTEST_ITE.RULEID!= "1085-2013_8" && iVTEST_ITE.RULEID!= "1085-2013_9" && iVTEST_ITE.RULEID != "1085-2013_10")
                     //{
                     //    continue;
@@ -4285,8 +4286,36 @@ namespace Langben.Report
             }
             #endregion 
 
-            Dictionary<int, List<MYDataHead>> headDic = AnalyticHTML.GetHeadData(doc);//表头
+            Dictionary<int, List<MYDataHead>> headDic = AnalyticHTML.GetHeadData(doc);//表头           
             Dictionary<int, List<MYDataHead>> footDic = AnalyticHTML.GetFootData(doc);//表尾
+
+            #region 处理没有表头的数据
+            if (headDic == null || headDic.Count == 0)
+            {
+                headDic = new Dictionary<int, List<MYDataHead>>();
+                if (dataDic != null && dataDic.Count > 0)
+                {
+                    foreach (int key in dataDic.Keys)
+                    {
+                        if (!headDic.ContainsKey(key))
+                        {
+                            headDic.Add(key, null);
+                        }
+                    }
+                }
+                if (footDic!=null && footDic.Count>0)
+                {
+                    foreach(int key in footDic.Keys)
+                    {
+
+                        if (!headDic.ContainsKey(key))
+                        {
+                            headDic.Add(key, null);
+                        }
+                    }
+                }
+            }
+            #endregion 
             HeadValue buDueDingDu_DiBu = null;//底部不确定度
             if (type != ExportType.Report_JianDing)//除了检定报告不打底部不确定度，其他都打
             {

@@ -423,7 +423,7 @@ namespace Langben.Report
             item = new Remark_Rules();
             item.RuleID = "166-1993_3_2";
             item.RuleName = "1000Ω以下-标准电阻-相对误差-无型号编号";
-            item.Remark = "注：δn为标准电阻的相对修正值。</br>　　δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。</br>　　δx =（δx1+δx2）/2".Replace(" </br>", Environment.NewLine);
+            item.Remark = "注：δn为标准电阻的相对修正值。</br>　　δx1、δx2分别为由正向及反向测量结果所得到的被测电阻的相对修正值。</br>　　δx =（δx1+δx2）/2".Replace("</br>", Environment.NewLine);
             //item.ImgUrl = "/Images/73_74.png";
             result.Add(item);
             #endregion
