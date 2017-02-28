@@ -190,6 +190,8 @@
     //导航到创建的按钮
     function flexiCreate() {
         $("#w").dialog('open');
+        //$("#THESUPERIOR").val("");
+        $("#checkTHESUPERIOR").html("");
         $('#w').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
             $(this).val("");
         });
@@ -209,6 +211,7 @@
                 dataType: "json",
                 success: function (data) {
                     if (data.IS == "1") {
+                        $("#checkTHESUPERIOR").html("");
                         $("#ID").val(data.ID);
                         $("#NAME").val(data.NAME);
                         $("#TEST_RANGE").val(data.TEST_RANGE);
@@ -216,7 +219,7 @@
                         $("#FACTORY_NUM").val(data.FACTORY_NUM);
                         $("#CATEGORY").val(data.CATEGORY);
                         $("#UNDERTAKE_LABORATORYID").val(data.UNDERTAKE_LABORATORYID);
-                        if (data.THESUPERIORNAME!=null) {
+                        if (data.THESUPERIORNAME != null) {
                             $("#checkTHESUPERIOR").html('<table id="' + data.THESUPERIORNAME + '" class="deleteStyle"><tr><td>' + data.THESUPERIORNAME.split('&')[1] + '</td><td><img alt="删除" style="cursor:pointer" title="点击删除" as="' + data.THESUPERIORNAME + '" onclick="deleteTable2(this);" src="../../../Images/deleteimge.png" /></td></tr></table>');
                             $("#THESUPERIOR").val(data.THESUPERIORNAME.split('&')[0]);
                         }                       

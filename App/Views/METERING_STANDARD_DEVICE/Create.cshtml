@@ -612,7 +612,10 @@
                     success: function (data) {
                         if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
                         else if (data.Code == 1) {
-                            $.messager.alert('操作提示', "新增成功！", 'info');
+                            $.messager.alert('操作提示', "新增成功！", 'info', function () {
+                                window.location.href = '/METERING_STANDARD_DEVICE/Index';
+                            });
+                           
                             return false;
                         }
                         else {
@@ -668,7 +671,10 @@
                     success: function (data) {
                         if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
                         else if (data.Code == 1) {
-                            $.messager.alert('操作提示', "新增成功！", 'info');
+                            $.messager.alert('操作提示', "新增成功！", 'info', function () {
+                                window.location.href = '/METERING_STANDARD_DEVICE/Index';
+                            });
+                           
                             return false;
                         }
                         else {
@@ -729,7 +735,10 @@
                     success: function (data) {
                         if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
                         else if (data.Code == 1) {
-                            $.messager.alert('操作提示', "新增成功！", 'info');
+                            $.messager.alert('操作提示', "新增成功！", 'info', function () {
+                                window.location.href = '/METERING_STANDARD_DEVICE/Index';
+                            });
+                           
                             return false;
                         }
                         else {
