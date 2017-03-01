@@ -4618,9 +4618,9 @@ namespace Langben.Report
 
             #region 注、说明
             //为了表格底部没有线
-            CopyRow(sheet_Source, sheet_Destination, 3, rowIndex_Destination, 1, true);
-            HideRow(sheet_Destination, rowIndex_Destination, 1);
-            rowIndex_Destination++;
+            //CopyRow(sheet_Source, sheet_Destination, 3, rowIndex_Destination, 1, true);
+            //HideRow(sheet_Destination, rowIndex_Destination, 1);
+            //rowIndex_Destination++;
 
             //表格注
             string RemarkStr = string.Empty;
