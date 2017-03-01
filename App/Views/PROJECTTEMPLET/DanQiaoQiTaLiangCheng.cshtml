@@ -8,9 +8,22 @@
 <thead>
     <!--表头-->
     <tr id="top-only">
+        <td colspan="3" align="left">
+            <select class="my-combobox" name="statestandard" id="statestandard_t_1_1">
+                <option value="合格">合格</option>
+                <option value="不合格">不合格</option>
+            </select>
+        </td>
         <td colspan="7">
-               
-                <div class="fl mr">准确度等级：<input class="my-textbox " value="" type="text" name="zhidingwucha" id="zhidingwucha_t_1_1"></div>
+            @*<div class="">
+                <span>基本误差：</span>×
+
+                <select class="my-combobox" name="statestandard" id="statestandard_t_1_1" onchange="changeValue(this)">
+                    <option value="合格" selected="selected">合格</option>
+                    <option value="不合格">不合格</option>
+                </select>
+            </div>*@
+            <div class="fl mr">准确度等级：<input class="my-textbox " value="" type="text" name="zhidingwucha" id="zhidingwucha_t_1_1"></div>
 
         </td>
     </tr>
