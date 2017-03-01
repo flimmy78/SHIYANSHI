@@ -685,7 +685,7 @@ namespace Langben.Report
                     {
                         if (it.mergedRowNum > 1)
                         {
-                            throw new System.Exception("我没有遇到这要的情况");
+                           // throw new System.Exception("我没有遇到这要的情况");
                         }
                         it.mergedRowNum = max;
 
@@ -695,7 +695,7 @@ namespace Langben.Report
                 {
                     if (dat != null && dat.Count() > 0)
                     {
-                        throw new System.Exception("估计要出错，因为所有列的行数不一样");
+                       // throw new System.Exception("估计要出错，因为所有列的行数不一样");
                     }
                 }
 
