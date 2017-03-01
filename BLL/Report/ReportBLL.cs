@@ -2734,10 +2734,10 @@ namespace Langben.Report
                         continue;
                     }
 
-                    if (iVTEST_ITE.RULEID != "315-1983_2_6")
-                    {
-                        continue;
-                    }
+                    //if (iVTEST_ITE.RULEID != "315-1983_2_6")
+                    //{
+                    //    continue;
+                    //}
                     //if(iVTEST_ITE.RULEID!= "1085-2013_8" && iVTEST_ITE.RULEID!= "1085-2013_9" && iVTEST_ITE.RULEID != "1085-2013_10")
                     //{
                     //    continue;
@@ -4351,9 +4351,10 @@ namespace Langben.Report
             //{
             //   // continue;
             //}
-            #region 处理下一行数据为空需要单元格合并数据
+            #region 处理单元格合并数据
             if (temp != null && temp.Cells != null && temp.Cells.Count > 0 && dataDic != null && dataDic.Count > 0)
             {
+                #region 处理下一行数据为空需要单元格合并数据
                 List<Cell> cList = temp.Cells.FindAll(p => p.IsMergeNullValue == "Y");
                 if (cList != null && cList.Count > 0)
                 {
@@ -4400,6 +4401,56 @@ namespace Langben.Report
                         }
                     }
                 }
+                #endregion
+
+                #region 处理下一行数据相同需要单元格合并数据
+                cList = temp.Cells.FindAll(p => p.IsMergeSameValue == "Y");
+                if (cList != null && cList.Count > 0)
+                {
+                    foreach (Cell c in cList)
+                    {
+                        foreach (DataValue d in dataDic.Values)
+                        {
+                            if (d != null && d.Data != null && d.Data.Count > 0)
+                            {
+                                List<MYData> cData = d.Data.FindAll(p => p.name == c.Code);
+
+                                MYData mdd = null;
+                                List<MYData> removeList = new List<MYData>();
+                                int indexCount = 1;
+                                if (cData != null && cData.Count > 0)
+                                {                                   
+                                    foreach (MYData md in cData)
+                                    {
+                                        if (indexCount == 1)
+                                        {
+                                            mdd = md;                                            
+                                        }
+                                        else
+                                        {
+                                            if (md != null && md.value!= mdd.value)
+                                            {
+                                                mdd = md;
+                                                mdd.mergedRowNum = md.mergedRowNum;
+                                            }
+                                            else if (md != null && md.value == mdd.value)
+                                            {
+                                                mdd.mergedRowNum = mdd.mergedRowNum + md.mergedRowNum;
+                                                removeList.Add(md);
+                                            }
+                                        }
+                                        indexCount++;
+                                    }
+                                    foreach (MYData md in removeList)
+                                    {
+                                        d.Data.Remove(md);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion 
 
             }
             #endregion 
