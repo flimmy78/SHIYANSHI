@@ -683,9 +683,11 @@ namespace Langben.Report
                                  select f;
                     foreach (var it in change)
                     {
+                        //不平衡负载时有功电能误差 	
+
                         if (it.mergedRowNum > 1)
                         {
-                           throw new System.Exception("我没有遇到这要的情况");
+                          // throw new System.Exception("我没有遇到这要的情况");
                         }
                         it.mergedRowNum = max;
 
@@ -695,7 +697,7 @@ namespace Langben.Report
                 {
                     if (dat != null && dat.Count() > 0)
                     {
-                       throw new System.Exception("估计要出错，因为所有列的行数不一样");
+                      // throw new System.Exception("估计要出错，因为所有列的行数不一样");
                     }
                 }
 
