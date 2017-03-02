@@ -10770,7 +10770,7 @@
 					<ColIndex>5</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
-					<IsHideRowNull>Y</IsHideRowNull>
+					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
 			</CellList>
@@ -11392,7 +11392,7 @@
 					<ColIndex>3</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
-					<IsHideRowNull>Y</IsHideRowNull>
+					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
 			</CellList>
@@ -11552,7 +11552,7 @@
 					<ColIndex>3</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
-					<IsHideRowNull>Y</IsHideRowNull>
+					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
 			</CellList>
@@ -11806,7 +11806,7 @@
 					<Code>UNCERTAINTYDEGREE_UNIT</Code>
 					<ColIndex>8</ColIndex>
 					<ColCount>0</ColCount>
-					<IsMergeSameValue>N</IsMergeSameValue>
+					<IsMergeSameValue>Y</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
@@ -11837,9 +11837,9 @@
 		</TableTemplate>
 		<TableTemplate>
 			<RuleID>166-1993_3_1</RuleID>
-			<DataRowIndex>743</DataRowIndex>
-			<RemarkRowIndex>744</RemarkRowIndex>
-			<ConclusionRowIndex>745</ConclusionRowIndex>
+			<DataRowIndex>742</DataRowIndex>
+			<RemarkRowIndex>743</RemarkRowIndex>
+			<ConclusionRowIndex>744</ConclusionRowIndex>
 			<CellList>
 				<Cell>
 					<Code>READVALUE</Code>
@@ -11940,7 +11940,7 @@
 			</CellList>
 			<TableTitleList>
 				<RowInfo>
-					<RowNumber>2</RowNumber>
+					<RowNumber>1</RowNumber>
 					<RowIndex>741</RowIndex>
 					<CellList>
 						<Cell>
@@ -12418,9 +12418,9 @@
 		</TableTemplate>
 		<TableTemplate>
 			<RuleID>166-1993_3_3</RuleID>
-			<DataRowIndex>765</DataRowIndex>
-			<RemarkRowIndex>766</RemarkRowIndex>
-			<ConclusionRowIndex>767</ConclusionRowIndex>
+			<DataRowIndex>764</DataRowIndex>
+			<RemarkRowIndex>765</RemarkRowIndex>
+			<ConclusionRowIndex>766</ConclusionRowIndex>
 			<CellList>
 				<Cell>
 					<Code>WE</Code>
@@ -12513,7 +12513,7 @@
 			</CellList>
 			<TableTitleList>
 				<RowInfo>
-					<RowNumber>2</RowNumber>
+					<RowNumber>1</RowNumber>
 					<RowIndex>763</RowIndex>
 					<CellList>
 						<Cell>
@@ -12537,9 +12537,9 @@
 		</TableTemplate>
 		<TableTemplate>
 			<RuleID>166-1993_3_2</RuleID>
-			<DataRowIndex>754</DataRowIndex>
-			<RemarkRowIndex>755</RemarkRowIndex>
-			<ConclusionRowIndex>756</ConclusionRowIndex>
+			<DataRowIndex>753</DataRowIndex>
+			<RemarkRowIndex>754</RemarkRowIndex>
+			<ConclusionRowIndex>755</ConclusionRowIndex>
 			<CellList>
 				<Cell>
 					<Code>READVALUE</Code>
@@ -12640,7 +12640,7 @@
 			</CellList>
 			<TableTitleList>
 				<RowInfo>
-					<RowNumber>2</RowNumber>
+					<RowNumber>1</RowNumber>
 					<RowIndex>752</RowIndex>
 					<CellList>
 						<Cell>

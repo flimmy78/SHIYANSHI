@@ -11282,7 +11282,7 @@
 					<ColIndex>5</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
-					<IsHideRowNull>Y</IsHideRowNull>
+					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
 			</CellList>
@@ -11904,7 +11904,7 @@
 					<ColIndex>3</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
-					<IsHideRowNull>Y</IsHideRowNull>
+					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
 			</CellList>
@@ -12064,7 +12064,7 @@
 					<ColIndex>3</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
-					<IsHideRowNull>Y</IsHideRowNull>
+					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
 			</CellList>
@@ -12192,7 +12192,7 @@
 					<ColIndex>3</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
-					<IsHideRowNull>N</IsHideRowNull>
+					<IsHideRowNull>Y</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
 				<Cell>
@@ -12200,7 +12200,7 @@
 					<ColIndex>4</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
-					<IsHideRowNull>Y</IsHideRowNull>
+					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
 				<Cell>
@@ -12318,7 +12318,7 @@
 					<Code>UNCERTAINTYDEGREE_UNIT</Code>
 					<ColIndex>8</ColIndex>
 					<ColCount>0</ColCount>
-					<IsMergeSameValue>N</IsMergeSameValue>
+					<IsMergeSameValue>Y</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>

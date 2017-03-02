@@ -1403,7 +1403,7 @@ namespace Langben.Report
             IVRULEBLL rBll = new VRULEBLL();
             List<VRULE> rList = rBll.GetBySCHEMEID(entity.SCHEMEID);
             int RowIndex = 0;
-            if (rList != null && rList.Count > 1)//两个以上规程
+            if (rList != null && (rList.Count > 1  || type== ExportType.Report_XiaoZhun || type == ExportType.Report_XiaoZhun_CNAS))//检定报告两个以上规程，校准报告无论多少都展示
             {
 
                 IRow GCTemplateRow = sheet_Destination.GetRow(8);//获取源格式行
@@ -1440,29 +1440,28 @@ namespace Langben.Report
             if (type == ExportType.Report_XiaoZhun_CNAS)
             {
                 RowIndex = RowIndex + 7;
-                //检定员\校准员
-                //if (entity.CHECKERID != null && entity.CHECKERID.Trim() != "")
-                if (entity.CREATEPERSON != null && entity.CREATEPERSON.Trim() != "")
-                {
 
-                    AccountBLL aBll = new BLL.AccountBLL();
-                    ////批 准 人(改为审批人)2017.1.21
-                    //personName.Add(entity.APPROVALEPERSON);
-                    ////核验员（改成审核人）2017.1.21
-                    //personName.Add(entity.AUDITTEPERSON);
-                    List<string> personName = new List<string>();
-                    //检定员（改为创建人）2017.1.21
-                    personName.Add(entity.CREATEPERSON);
-                    Dictionary<string, SysPerson> picList = aBll.GetPictureByName(personName);
-                    if(picList!=null && picList.Count>0 && !string.IsNullOrWhiteSpace(picList.Values.FirstOrDefault().MyName))
+                AccountBLL aBll = new BLL.AccountBLL();
+                List<string> personName = new List<string>();
+                //批 准 人(改为审批人)2017.1.21
+                personName.Add(entity.APPROVALEPERSON);
+                //核验员（改成审核人）2017.1.21
+                personName.Add(entity.AUDITTEPERSON);                
+                //检定员（改为创建人）2017.1.21
+                personName.Add(entity.CREATEPERSON);
+                Dictionary<string, SysPerson> picList = aBll.GetPictureByName(personName);
+
+                //检定员\校准员               
+                if (entity.CREATEPERSON != null && entity.CREATEPERSON.Trim() != "")
+                {                    
+                    if(picList!=null && picList.Count>0 && picList[entity.CREATEPERSON]!=null && picList[entity.CREATEPERSON].MyName!=null && picList[entity.CREATEPERSON].MyName.Trim()!="")
                     {
-                        sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(picList.Values.FirstOrDefault().MyName);
+                        sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(picList[entity.CREATEPERSON].MyName);
                     }
                     else
                     {
                         sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CREATEPERSON);
-                    }
-                    //sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CHECKERID);
+                    }                    
                 }
                 else
                 {
@@ -1470,9 +1469,16 @@ namespace Langben.Report
                 }
                 
                 //核验员
-                if (entity.DETECTERID != null && entity.DETECTERID.Trim() != "")
+                if (entity.AUDITTEPERSON != null && entity.AUDITTEPERSON.Trim() != "")
                 {
-                    sheet_Destination.GetRow(RowIndex).GetCell(15).SetCellValue(entity.DETECTERID);
+                    if (picList != null && picList.Count > 0 && picList[entity.AUDITTEPERSON] != null && picList[entity.AUDITTEPERSON].MyName != null && picList[entity.AUDITTEPERSON].MyName.Trim() != "")
+                    {
+                        sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(picList[entity.AUDITTEPERSON].MyName);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(RowIndex).GetCell(15).SetCellValue(entity.AUDITTEPERSON);
+                    }
                 }
                 else
                 {
@@ -2728,7 +2734,7 @@ namespace Langben.Report
                         continue;
                     }
 
-                    //if (iVTEST_ITE.RULEID != "166-1993_3_2" && iVTEST_ITE.RULEID != "1052-2009_2_2" && iVTEST_ITE.RULEID != "315 - 1983_2_6")
+                    //if (iVTEST_ITE.RULEID != "315-1983_2_6")
                     //{
                     //    continue;
                     //}
@@ -3353,8 +3359,8 @@ namespace Langben.Report
             {
                 sheet_Destination.Header.Left = header;
             }
-            //页脚控制编号
-            if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString() && entity.CNAS == ShiFouCNAS.Yes.ToString() && entity.CONTROL_NUMBER != null && entity.CONTROL_NUMBER.Trim() != "")
+            //页脚控制编号(只有类型为校准的CNAS原始记录才要这个编号，其他的都不要)
+            if (type == ExportType.OriginalRecord_XiaoZhun && entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString() && entity.CNAS == ShiFouCNAS.Yes.ToString() && entity.CONTROL_NUMBER != null && entity.CONTROL_NUMBER.Trim() != "")
             {
                 //if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
                 //{
@@ -4345,9 +4351,10 @@ namespace Langben.Report
             //{
             //   // continue;
             //}
-            #region 处理下一行数据为空需要单元格合并数据
+            #region 处理单元格合并数据
             if (temp != null && temp.Cells != null && temp.Cells.Count > 0 && dataDic != null && dataDic.Count > 0)
             {
+                #region 处理下一行数据为空需要单元格合并数据
                 List<Cell> cList = temp.Cells.FindAll(p => p.IsMergeNullValue == "Y");
                 if (cList != null && cList.Count > 0)
                 {
@@ -4394,6 +4401,56 @@ namespace Langben.Report
                         }
                     }
                 }
+                #endregion
+
+                #region 处理下一行数据相同需要单元格合并数据
+                cList = temp.Cells.FindAll(p => p.IsMergeSameValue == "Y");
+                if (cList != null && cList.Count > 0)
+                {
+                    foreach (Cell c in cList)
+                    {
+                        foreach (DataValue d in dataDic.Values)
+                        {
+                            if (d != null && d.Data != null && d.Data.Count > 0)
+                            {
+                                List<MYData> cData = d.Data.FindAll(p => p.name == c.Code);
+
+                                MYData mdd = null;
+                                List<MYData> removeList = new List<MYData>();
+                                int indexCount = 1;
+                                if (cData != null && cData.Count > 0)
+                                {                                   
+                                    foreach (MYData md in cData)
+                                    {
+                                        if (indexCount == 1)
+                                        {
+                                            mdd = md;                                            
+                                        }
+                                        else
+                                        {
+                                            if (md != null && md.value!= mdd.value)
+                                            {
+                                                mdd = md;
+                                                mdd.mergedRowNum = md.mergedRowNum;
+                                            }
+                                            else if (md != null && md.value == mdd.value)
+                                            {
+                                                mdd.mergedRowNum = mdd.mergedRowNum + md.mergedRowNum;
+                                                removeList.Add(md);
+                                            }
+                                        }
+                                        indexCount++;
+                                    }
+                                    foreach (MYData md in removeList)
+                                    {
+                                        d.Data.Remove(md);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion 
 
             }
             #endregion 
@@ -4493,7 +4550,7 @@ namespace Langben.Report
                                 sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).SetCellValue(value);
                                 if (d.mergedRowNum > 1)//多行单元格合并
                                 {                                    
-                                    if (iEntity.RULEID == "440 - 2008_10" && type== ExportType.Report_JianDing)//解决单元格无法合并问题，目前没找到原因
+                                    if (iEntity.RULEID == "440-2008_10" && type== ExportType.Report_JianDing)//解决单元格无法合并问题，目前没找到原因
                                     {
                                         for (int k = 0; k < 5; k++)
                                         {
@@ -4504,10 +4561,7 @@ namespace Langben.Report
                                     {
                                         sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
 
-                                    }
-                                    //sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
-                                    //sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
-                                    //sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
+                                    }                                  
 
                                 }
 
@@ -4564,9 +4618,9 @@ namespace Langben.Report
 
             #region 注、说明
             //为了表格底部没有线
-            CopyRow(sheet_Source, sheet_Destination, 3, rowIndex_Destination, 1, true);
-            HideRow(sheet_Destination, rowIndex_Destination, 1);
-            rowIndex_Destination++;
+            //CopyRow(sheet_Source, sheet_Destination, 3, rowIndex_Destination, 1, true);
+            //HideRow(sheet_Destination, rowIndex_Destination, 1);
+            //rowIndex_Destination++;
 
             //表格注
             string RemarkStr = string.Empty;
