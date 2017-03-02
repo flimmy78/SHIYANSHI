@@ -565,5 +565,27 @@ namespace Langben.Report
         /// </summary>
         public int SubCount { get; set; }
     }
+    /// <summary>
+    /// 受理单位信息
+    /// </summary>
+    public class ShouLiDangWeiXinXi
+    {
+        /// <summary>
+        /// 地址
+        /// </summary>
+        public string dizhi { get; set; }
+        /// <summary>
+        /// 邮编
+        /// </summary>
+        public string youbian { get; set; }
+        /// <summary>
+        /// 电话
+        /// </summary>
+        public string dianhua { get; set; }
+        /// <summary>
+        /// 传真
+        /// </summary>
+        public string chuanzhen { get; set; }
+    }
 
 }

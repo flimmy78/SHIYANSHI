@@ -203,7 +203,7 @@ namespace Langben.Report
                 if (rowIndex >= 0)//CNAS
                 {
                     string fRemark = "";//批准人行号_批准人列号|核验员行号_核验员列号|检定员/校准员行号_检定员/校准员列号                   
-                    fRemark = "|" + rowIndex.ToString() + "_15|" + rowIndex.ToString() + "_5";
+                    fRemark = "26_18|" + rowIndex.ToString() + "_15|" + rowIndex.ToString() + "_5";
                     fEntity.REMARK = fRemark;
                 }                
                  else//非CNAS
@@ -396,15 +396,18 @@ namespace Langben.Report
 
             FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.ReadWrite);
             IWorkbook hssfworkbook = new HSSFWorkbook(file);
+            ISheet sheet_Destination2 = null;
 
             string sheetName_Destination = "封皮";
+            string sheetName_Destination2 = "第二页";
             if (entity.CONCLUSION == "不合格" && type == ExportType.Report_JianDing)//不合格只有通知书封皮
             {
                 sheetName_Destination = "通知书封皮";
             }
             else if(type== ExportType.Report_XiaoZhun_CNAS)//CNAS只有第二页
             {
-                sheetName_Destination = "第二页";
+                sheetName_Destination2 = "第二页";
+                sheet_Destination2= hssfworkbook.GetSheet(sheetName_Destination2);
             }
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
 
@@ -428,7 +431,7 @@ namespace Langben.Report
                             IClientAnchor anchor = null;
                             if (type == ExportType.Report_XiaoZhun_CNAS)
                             {
-                                anchor = new HSSFClientAnchor(50, 50, 200, 200, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen + 4, fEntity.Row_PiZhunRen);
+                                anchor = new HSSFClientAnchor(50, 20, 250, 250, fEntity.Col_PiZhunRen-2, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen + 6, fEntity.Row_PiZhunRen);
                             }
                             else
                             {
@@ -468,6 +471,10 @@ namespace Langben.Report
 
             #endregion
 
+            if(type == ExportType.Report_XiaoZhun_CNAS)
+            {
+                sheet_Destination = sheet_Destination2;
+            }
             #region 核验员
             if (fEntity.Row_HeYanYuan != -1 && fEntity.Col_HeYanYuan != -1)
             {
@@ -815,8 +822,7 @@ namespace Langben.Report
                 else
                 {
                     SetFengPi_BaoGaoXiaoZhun(hssfworkbook, entity, out fRemark, type);
-                }
-
+                }                
                 //第二页数据
                 SetSecond_BaoGao(hssfworkbook, entity, ref fRemark, type);
 
@@ -957,6 +963,126 @@ namespace Langben.Report
             return result;
         }
         /// <summary>
+        /// 设置校准CNAS报告封皮信息
+        /// </summary>
+        /// <param name="hssfworkbook"></param>
+        /// <param name="entity"></param>    
+        /// <param name="fRemark">签名位置</param>
+        private void SetFengPi_BaoGaoXiaoZhun_CNAS(IWorkbook hssfworkbook, PREPARE_SCHEME entity, out string fRemark)
+        {
+            fRemark = "";            
+            string sheetName_Destination = "封皮";
+            ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
+
+            #region 封皮
+            //单元格从0开始
+            //证书编号
+            sheet_Destination.GetRow(12).GetCell(18).SetCellValue(entity.REPORTNUMBER);
+            if (entity.APPLIANCE_LABORATORY != null && entity.APPLIANCE_LABORATORY.Count > 0)
+            {
+                IAPPLIANCE_DETAIL_INFORMATIONBLL infBll = new APPLIANCE_DETAIL_INFORMATIONBLL();
+                APPLIANCE_DETAIL_INFORMATION infEntity = infBll.GetById(entity.APPLIANCE_LABORATORY.FirstOrDefault().APPLIANCE_DETAIL_INFORMATIONID);
+                if (infEntity != null)
+                {
+                    //器具名称
+                    if (infEntity.APPLIANCE_NAME != null && infEntity.APPLIANCE_NAME.Trim() != "")
+                    {
+                        sheet_Destination.GetRow(14).GetCell(18).SetCellValue(infEntity.APPLIANCE_NAME);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(14).GetCell(18).SetCellValue("/");
+                    }
+                    //型 号/规 格(有型号显示型号，没有显示规格)
+                    if (infEntity.VERSION != null && infEntity.VERSION.Trim() != "")//器具型号
+                    {
+                        sheet_Destination.GetRow(16).GetCell(18).SetCellValue(infEntity.VERSION);
+                    }
+                    else if (infEntity.APPLIANCE_NAME != null && infEntity.APPLIANCE_NAME.Trim() != "")//计量器具名称
+                    {
+                        sheet_Destination.GetRow(16).GetCell(18).SetCellValue(infEntity.APPLIANCE_NAME);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(16).GetCell(18).SetCellValue("/");
+                    }
+                    //生产厂家/制 造 单 位
+                    if (infEntity.MAKE_ORGANIZATION != null && infEntity.MAKE_ORGANIZATION.Trim() != "")
+                    {
+                        sheet_Destination.GetRow(18).GetCell(18).SetCellValue(infEntity.MAKE_ORGANIZATION);
+                    }
+                    else
+                    {
+                        sheet_Destination.GetRow(18).GetCell(18).SetCellValue("/");
+                    }
+                    IORDER_TASK_INFORMATIONBLL taskBll = new ORDER_TASK_INFORMATIONBLL();
+                    ORDER_TASK_INFORMATION taskEntity = taskBll.GetById(infEntity.ORDER_TASK_INFORMATIONID);
+                    if (taskEntity != null)
+                    {                       
+                        //委托单位 /送 检 单 位  (改为证书单位）     
+                        if (taskEntity.CERTIFICATE_ENTERPRISE != null && taskEntity.CERTIFICATE_ENTERPRISE.Trim() != "")
+                        {
+                            sheet_Destination.GetRow(20).GetCell(18).SetCellValue(taskEntity.CERTIFICATE_ENTERPRISE);
+                        }
+                        else
+                        {
+                            sheet_Destination.GetRow(20).GetCell(18).SetCellValue("/");
+                        }
+                        //证书单位地址
+                        if (taskEntity.CERTIFICATE_ENTERPRISE_ADDRESS != null && taskEntity.CERTIFICATE_ENTERPRISE_ADDRESS.Trim() != "")
+                        {
+                            sheet_Destination.GetRow(22).GetCell(18).SetCellValue(taskEntity.CERTIFICATE_ENTERPRISE_ADDRESS);
+                        }
+                        else
+                        {
+                            sheet_Destination.GetRow(22).GetCell(18).SetCellValue("/");
+                        }
+                    }
+                    else
+                    {
+                        //委托单位 /送 检 单 位  (改为证书单位）     
+                        sheet_Destination.GetRow(20).GetCell(18).SetCellValue("/");
+                        //证书单位地址
+                        sheet_Destination.GetRow(22).GetCell(18).SetCellValue("/");
+                    }
+                }
+            }
+
+            //检定日期\校 准 日 期
+            if (entity.CALIBRATION_DATE.HasValue)
+            {
+                sheet_Destination.GetRow(24).GetCell(18).SetCellValue(entity.CALIBRATION_DATE.Value.ToString("yyyy年MM月dd日"));
+            }
+            else
+            {
+                sheet_Destination.GetRow(24).GetCell(18).SetCellValue("/");
+            }
+
+            Dictionary<string, SysPerson> picList = GetPerson(entity);
+            //批 准 人(改为审批人)
+            if (entity.APPROVALEPERSON == null || entity.APPROVALEPERSON.Trim() == "")
+            {
+                sheet_Destination.GetRow(26).GetCell(18).SetCellValue("/");
+            }
+            else
+            {
+                if (picList != null && picList.ContainsKey(entity.APPROVALEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.APPROVALEPERSON].MyName))
+                {
+                    sheet_Destination.GetRow(26).GetCell(18).SetCellValue(picList[entity.APPROVALEPERSON].MyName);
+                }
+                else
+                {
+                    sheet_Destination.GetRow(26).GetCell(18).SetCellValue(entity.APPROVALEPERSON);
+                }
+            }
+            fRemark = "26_18";
+
+
+            #endregion
+
+            sheet_Destination.ForceFormulaRecalculation = true;
+        }
+        /// <summary>
         /// 设置校准报告封皮信息
         /// </summary>
         /// <param name="hssfworkbook"></param>
@@ -967,6 +1093,7 @@ namespace Langben.Report
             fRemark = "";
             if (type == ExportType.Report_XiaoZhun_CNAS)
             {
+                SetFengPi_BaoGaoXiaoZhun_CNAS(hssfworkbook, entity, out fRemark);
                 return;//待修改成Word
             }
             string sheetName_Destination = "封皮";
@@ -1484,7 +1611,7 @@ namespace Langben.Report
                 {
                     sheet_Destination.GetRow(RowIndex).GetCell(15).SetCellValue("/");
                 }
-                fRemark = "_";//批 准 人
+                //fRemark = "";//批 准 人,在首页上
                 fRemark += "|" + RowIndex.ToString() + "_15";//核 验 员
                 fRemark += "|" + RowIndex.ToString() + "_5";//检 定 员
             }
@@ -1707,35 +1834,45 @@ namespace Langben.Report
         /// 受理单位信息
         /// </summary>
         /// <param name="sheet_Destination">目标sheet</param>
-        /// <param name="ShouLiDangWei">受理单位名称</param>
+        /// <param name="ShouLiDangWei">受理单位名称</param>       
         private void SetShouLiDangWeiXinXi(ISheet sheet_Destination, string ShouLiDangWei)
-        {
-            #region 受理单位信息
+        {         
+            
+            ShouLiDangWeiXinXi model = GetShouLiDangWeiXinXi(ShouLiDangWei);
             //地址
-            string dizhi = "地址：北京市西城区复兴门外地藏庵南巷1号";
+            sheet_Destination.GetRow(46).GetCell(2).SetCellValue(model.dizhi);
             //邮编
-            string youbian = "邮编：100045";
+            sheet_Destination.GetRow(46).GetCell(14).SetCellValue(model.youbian);
             //电话
-            string dianhua = "电话：010-88071523";
+            sheet_Destination.GetRow(47).GetCell(2).SetCellValue(model.dianhua);
             //传真
-            string chuanzhen = "传真：010-88071504";
+            sheet_Destination.GetRow(47).GetCell(14).SetCellValue(model.chuanzhen);
+        }
+        /// <summary>
+        /// 获取受理单位信息
+        /// </summary>
+        /// <param name="ShouLiDangWei">受理单元名称</param>
+        /// <returns></returns>
+        private ShouLiDangWeiXinXi GetShouLiDangWeiXinXi(string ShouLiDangWei)
+        {
+            ShouLiDangWeiXinXi result = new ShouLiDangWeiXinXi();
+            //地址
+            result.dizhi = "地址：北京市西城区复兴门外地藏庵南巷1号";
+            //邮编
+            result.youbian = "邮编：100045";
+            //电话
+            result.dianhua = "电话：010-88071523";
+            //传真
+            result.chuanzhen = "传真：010-88071504";
             if (ShouLiDangWei != null && ShouLiDangWei.Trim() != "" && ShouLiDangWei.Trim() == "冀北电力有限公司计量中心")
             {
-                dizhi = "地址：北京市昌平区回龙观镇二拨子村";
-                youbian = "邮编：102208";
-                dianhua = "电话：010-56585812";
-                chuanzhen = "传真：010-56585804";
+                result.dizhi = "地址：北京市昌平区回龙观镇二拨子村";
+                result.youbian = "邮编：102208";
+                result.dianhua = "电话：010-56585812";
+                result.chuanzhen = "传真：010-56585804";
 
             }
-            //地址
-            sheet_Destination.GetRow(46).GetCell(2).SetCellValue(dizhi);
-            //邮编
-            sheet_Destination.GetRow(46).GetCell(14).SetCellValue(youbian);
-            //电话
-            sheet_Destination.GetRow(47).GetCell(2).SetCellValue(dianhua);
-            //传真
-            sheet_Destination.GetRow(47).GetCell(14).SetCellValue(chuanzhen);
-            #endregion
+            return result;
         }
 
         /// <summary>
@@ -1848,8 +1985,8 @@ namespace Langben.Report
                     hssfworkbook.SetSheetHidden(4, SheetState.Hidden);//数据模板
                     break;
                 case ExportType.Report_XiaoZhun_CNAS:
-                    hssfworkbook.SetSheetHidden(2, SheetState.Hidden);//第二页模板
-                    hssfworkbook.SetSheetHidden(3, SheetState.Hidden);//数据模板
+                    hssfworkbook.SetSheetHidden(3, SheetState.Hidden);//第二页模板
+                    hssfworkbook.SetSheetHidden(4, SheetState.Hidden);//数据模板
                     break;
             }
         }
