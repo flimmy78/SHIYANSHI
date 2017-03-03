@@ -17,7 +17,8 @@ namespace Langben.Report
         /// <param name="doc"></param>
         /// <returns></returns>
         public static HeadValue GetBuDueDingDu_DiBu(HtmlAgilityPack.HtmlDocument doc)
-        {     var buDueDingDu_DiBu = new HeadValue();
+        {
+            var buDueDingDu_DiBu = new HeadValue();
             string xpath = @"//tbody[@class='dibubuque1']/tr/td/input[@type='text'] | //tbody[@class='dibubuque1']/tr/td/select";
             var thead = doc.DocumentNode.SelectNodes(xpath);
             if (thead != null)
@@ -59,10 +60,10 @@ namespace Langben.Report
                     list.Add(mydata);
                 }
                 buDueDingDu_DiBu.Data = list;
-                buDueDingDu_DiBu.Count = list.Count/3;
+                buDueDingDu_DiBu.Count = list.Count / 3;
             }
-           
-       
+
+
             return buDueDingDu_DiBu;
         }
 
@@ -327,7 +328,7 @@ namespace Langben.Report
                         foreach (var b in pingdingb)
                         {
                             ib++;
-                            if(ib<=9)//第一行数据隐藏数据不要打印
+                            if (ib <= 9)//第一行数据隐藏数据不要打印
                             {
                                 continue;
                             }
@@ -352,7 +353,7 @@ namespace Langben.Report
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 buDueDingDu = null;
             }
@@ -439,7 +440,7 @@ namespace Langben.Report
             var list = new Dictionary<string, int>();
 
             Dictionary<int, HtmlAgilityPack.HtmlNodeCollection> body = GetTBodyOfInputAndSelect(doc);
-            if(body==null || body.Count==0)
+            if (body == null || body.Count == 0)
             {
                 return null;
             }
@@ -497,7 +498,7 @@ namespace Langben.Report
                         var nodes = b.ChildNodes
                       .Where(w => (w.Name == "option" && w.Attributes["selected"] != null))
                       .Select(s => s.Attributes["value"].Value).FirstOrDefault();
-                        
+
                         if (null == (nodes))
                         {
                             mydata.value = b.ChildNodes
@@ -553,7 +554,7 @@ namespace Langben.Report
                         var nodes = b.ChildNodes
                       .Where(w => (w.Name == "option" && w.Attributes["selected"] != null))
                       .Select(s => s.Attributes["value"].Value).FirstOrDefault();
-                        
+
                         if (null == (nodes))
                         {
                             mydata.value = b.ChildNodes
@@ -635,29 +636,99 @@ namespace Langben.Report
                     }
                     else
                     {
-                        int row = int.Parse(b.ParentNode.GetAttributeValue("rowspan", string.Empty));
-                        if (row > 1)
+                        if (tableCount == 6)
                         {
-                            var tr = 1;
-                            var node = b.SelectNodes("../parent::*/parent::tbody/tr");
-                            if (node != null)
+                            if (mydata.id == "READVALUE_1_1_1")
                             {
-                                tr = node.Count;
+                                var tr = 1;
+                                string xpath = @"//table[@id='tongdao_1']//tbody[@class='myliangcheng_1']/tr | //table[@id='tongdao_1']//tbody[@class='myliangcheng_2']/tr";
+
+                                var node = b.SelectNodes(xpath);
+                                if (node != null)
+                                {
+                                    tr = node.Count;
+
+                                }
+                                mydata.mergedRowNum = tr;
+                            }
+                            else if (mydata.id == "READVALUE_1_3_1")
+                            {
+                                var tr = 1;
+                                string xpath = @"//table[@id='tongdao_1']//tbody[@class='myliangcheng_3']/tr | //table[@id='tongdao_1']//tbody[@class='myliangcheng_4']/tr";
+
+                                var node = b.SelectNodes(xpath);
+                                if (node != null)
+                                {
+                                    tr = node.Count;
+
+                                }
+                                mydata.mergedRowNum = tr;
+                            }
+                            else if (mydata.id == "READVALUE_1_5_1")
+                            {
+                                var tr = 1;
+                                string xpath = @"//table[@id='tongdao_1']//tbody[@class='myliangcheng_5']/tr | //table[@id='tongdao_1']//tbody[@class='myliangcheng_6']/tr";
+
+                                var node = b.SelectNodes(xpath);
+                                if (node != null)
+                                {
+                                    tr = node.Count;
+
+                                }
+                                mydata.mergedRowNum = tr;
+                            }
+                            else if (mydata.name == "ACTUALVALUE")
+                            {
+
+                                var tr = 1;
+                                string xpath = @"../parent::*/child::td/table/tbody/tr";
+
+                                var node = b.SelectNodes(xpath);
+                                if (node != null)
+                                {
+                                    tr = node.Count;
+
+                                }
+                                mydata.mergedRowNum = tr;
+                            }
+                            else
+                            {
+                                int row = int.Parse(b.ParentNode.GetAttributeValue("rowspan", string.Empty));
+
+                                mydata.mergedRowNum = row;
 
                             }
-                            //谁小就是谁
-                            mydata.mergedRowNum = (tr > row) ? row : tr;
-
                         }
                         else
                         {
-                            mydata.mergedRowNum = 1;
+                            int row = int.Parse(b.ParentNode.GetAttributeValue("rowspan", string.Empty));
+                            if (row > 1)
+                            {
+                                var tr = 1;
+                                var node = b.SelectNodes("../parent::*/parent::tbody/tr");
+                                if (node != null)
+                                {
+                                    tr = node.Count;
+
+                                }
+                                //谁小就是谁
+                                mydata.mergedRowNum = (tr > row) ? row : tr;
+
+                            }
+                            else
+                            {
+                                mydata.mergedRowNum = 1;
+                            }
                         }
                     }
 
                     list.Add(mydata);
-                }
 
+                }
+                var dsa = from f in list
+                          where f.name == "ACTUALVALUE"
+                          select f;
+                var ds = 1;
                 var q =
      from p in list
      group p by p.name into g
@@ -683,11 +754,29 @@ namespace Langben.Report
                                  select f;
                     foreach (var it in change)
                     {
+                        //不平衡负载时有功电能误差 	
+
                         if (it.mergedRowNum > 1)
                         {
-                           throw new System.Exception("我没有遇到这要的情况");
+                            if (tableCount == 6)
+                            {
+                                if (it.mergedRowNum == 6)
+                                {
+                                    it.mergedRowNum = max;
+                                }
+
+                            }
+                            else
+                            {
+                                throw new System.Exception("我没有遇到这要的情况");
+                            }
+
                         }
-                        it.mergedRowNum = max;
+                        else
+                        {
+                            it.mergedRowNum = max;
+                        }
+
 
                     }
                 }
@@ -695,7 +784,7 @@ namespace Langben.Report
                 {
                     if (dat != null && dat.Count() > 0)
                     {
-                       throw new System.Exception("估计要出错，因为所有列的行数不一样");
+                        throw new System.Exception("估计要出错，因为所有列的行数不一样");
                     }
                 }
 
@@ -704,7 +793,7 @@ namespace Langben.Report
 
             return data;//
         }
-     
+
         /// <summary>
         /// 获取表头中的所有的input和select标签 此处有一个bug,如果通道1表头没有数据,就使用2通道 
         /// </summary>
@@ -888,7 +977,7 @@ namespace Langben.Report
             string errors = "";
             string xpath = @"//table[@id='tongdao_1']/thead//input | //table[@id='tongdao_1']/thead//select";
             var collection = doc.DocumentNode.SelectNodes(xpath);
-            if(collection==null)
+            if (collection == null)
             {
                 return errors;
             }
@@ -911,9 +1000,9 @@ namespace Langben.Report
                         if (item.Attributes["name"] != null)
                         {
                             ids.Add(item.Attributes["name"].Value, item.XPath);
-                           
+
                         }
-                       
+
                     }
                     catch (System.Exception ex)
                     {
@@ -926,7 +1015,7 @@ namespace Langben.Report
                     }
 
                 }
-               
+
             }
 
             return errors;
