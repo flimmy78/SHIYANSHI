@@ -39,22 +39,36 @@ namespace Langben.BLL
         }
         /// <summary>
         /// 根据方案ID获取检测项信息
-        /// </summary>
+        /// </summary>       
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
-        public List<VRULE> GetBySCHEMEID(string SCHEMEID="")
+        public List<VRULE> GetBySCHEMEID(string SCHEMEID)
         {
-            StringBuilder sb = new StringBuilder();
-            if (SCHEMEID != null && SCHEMEID.Trim() != "")
+            BLL.SCHEMEBLL sBLL = new SCHEMEBLL();
+            DAL.SCHEME sModel = sBLL.GetById(SCHEMEID);
+            if(sModel==null)
             {
-                sb.AppendFormat("SCHEMEID{0}&{1}^", ArgEnums.DDL_String, SCHEMEID);
+                return null;
             }
-            if (sb.ToString().Trim() != "")
-            {
-                sb = sb.Remove(sb.ToString().Length - 1, 1);
-            }
-            List<DAL.VRULE> list = repository.GetData(db, "asc", "SORT", sb.ToString()).ToList();
+
+            List<DAL.VRULE> list = (from m in db.VRULE
+                        where m.UNDERTAKE_LABORATORYID == sModel.UNDERTAKE_LABORATORYID &&
+                              m.SCHEMEID==SCHEMEID
+                    orderby m.SORT ascending
+                    select m).ToList();
             return list;
+
+            //StringBuilder sb = new StringBuilder();
+            //if (SCHEMEID != null && SCHEMEID.Trim() != "")
+            //{
+            //    sb.AppendFormat("SCHEMEID{0}&{1}^", ArgEnums.DDL_String, SCHEMEID);
+            //}
+            //if (sb.ToString().Trim() != "")
+            //{
+            //    sb = sb.Remove(sb.ToString().Length - 1, 1);
+            //}
+            //List<DAL.VRULE> list = repository.GetData(db, "asc", "SORT", sb.ToString()).ToList();            
+            //return list;
 
         }
         /// <summary>

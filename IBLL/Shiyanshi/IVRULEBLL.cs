@@ -16,11 +16,11 @@ namespace Langben.IBLL
     {
         /// <summary>
         /// 根据方案ID获取检测项信息
-        /// </summary>
+        /// </summary>        
         /// <param name="SCHEMEID">方案ID</param>
         /// <returns></returns>
         [OperationContract]
-        List<VRULE> GetBySCHEMEID(string SCHEMEID = "");
+        List<VRULE> GetBySCHEMEID(string SCHEMEID);
         /// <summary>
         /// 查询的数据
         /// </summary>
