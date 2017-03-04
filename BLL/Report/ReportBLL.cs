@@ -2587,7 +2587,7 @@ namespace Langben.Report
             SetZhuangZhis(hssfworkbook, sheet_Destination, ref RowIndex, entity, type);
             #endregion
             //设置页面页脚
-            SetHeaderAndFooter(sheet_Destination, entity);
+            SetHeaderAndFooter(sheet_Destination, entity,type);
             sheet_Destination.ForceFormulaRecalculation = true;
         }
         /// <summary>
