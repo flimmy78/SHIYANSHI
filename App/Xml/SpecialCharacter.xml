@@ -1,188 +1,13 @@
-<!-- 编辑使用 XMLSpy v2006 U (http://www.altova.com) 由 any (any) -->
 <!--特殊字符-->
 <SpecialCharacters>
 	<SpecialCharacterList>
 	<SpecialCharacter>
 			<!--特殊字符-->
-			<Code>k</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>0</SubscriptLastCount>
-		</SpecialCharacter>
-	<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>k=</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>0</SubscriptLastCount>
-		</SpecialCharacter>
-	<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>xi</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>I</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>-1</SubscriptLastCount>
-		</SpecialCharacter>
-	<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>/y6</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
-		</SpecialCharacter>
-	<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>/y7</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
-		</SpecialCharacter>
-	<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>/y8</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
-		</SpecialCharacter>
-	<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>/y9</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>k=Code</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>-1</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>Umin</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>3</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>Umax</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>3</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>ymax</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>3</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>R20</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>2</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>I </Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>-1</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>I0</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>Rx</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>XX</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>RX</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>XO</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>R0</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>RO</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>GO</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>BO</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code> y</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>0</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>d0</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>d5</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>d6</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>d11</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>2</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>y11</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>2</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
 			<Code>∆i</Code>
 			<!--下标后几位，如果没有填-1-->
 			<SubscriptLastCount>1</SubscriptLastCount>
 		</SpecialCharacter>
-		<SpecialCharacter>
+	<SpecialCharacter>
 			<!--特殊字符-->
 			<Code>Mi</Code>
 			<!--下标后几位，如果没有填-1-->
@@ -277,12 +102,6 @@
 			<Code>UREL(K=</Code>
 			<!--下标后几位，如果没有填-1-->
 			<SubscriptLastCount>6</SubscriptLastCount>
-		</SpecialCharacter>
-		<SpecialCharacter>
-			<!--特殊字符-->
-			<Code>Y0</Code>
-			<!--下标后几位，如果没有填-1-->
-			<SubscriptLastCount>1</SubscriptLastCount>
 		</SpecialCharacter>
 		<SpecialCharacter>
 			<!--特殊字符-->
