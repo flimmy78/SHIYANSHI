@@ -588,7 +588,7 @@ function GetDanWeiDDLHtml(ddlName, DanWeiCode) {
 //selectCode如果是下拉框，则为配置
 function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValue, selectCode) {
 
-    
+    //var num = id;
     //下拉框
     var ddlName = name + "_UNIT";//下拉框名
     var ddlId = ddlName + "_" + id;//下拉框ID    
@@ -636,6 +636,23 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     }
     if (unit) {
         htmlString.push(unit);
+        if(RuleID=="1075-2001_3_1")
+        {
+            var unitStr = "";
+            if(unit=="A")
+            {
+                unitStr = "(A";                
+            }
+            else if(unit=="mv/A")
+            {
+                unitStr = "mv/A)";                
+            }
+            if(unitStr!="")
+            {
+                htmlString.push("<input style=\"display:none\" value=\""+unitStr+"\" id=\"" + ddlId + "\" name=\"" + ddlName + "\" onblur=\"\" type=\"text\">");
+            }
+        }
+        
     }
 
     //不确定度
