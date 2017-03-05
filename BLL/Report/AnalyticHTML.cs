@@ -725,10 +725,7 @@ namespace Langben.Report
                     list.Add(mydata);
 
                 }
-                var dsa = from f in list
-                          where f.name == "ACTUALVALUE"
-                          select f;
-                var ds = 1;
+                
                 var q =
      from p in list
      group p by p.name into g
