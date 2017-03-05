@@ -2871,7 +2871,7 @@ namespace Langben.Report
                         continue;
                     }
 
-                    //if (iVTEST_ITE.RULEID == "1075-2001_3_2")
+                    //if (iVTEST_ITE.RULEID != "1075-2001_3_2")
                     //{
                     //    continue;
                     //}
@@ -4889,6 +4889,20 @@ namespace Langben.Report
                     targetCell.CellStyle = style;
                 }                
 
+            }
+            else if(iEntity.RULEID== "169-2010_5")
+            {
+                ICellStyle style = sheet_Destination.Workbook.CreateCellStyle();
+                style.BorderBottom = BorderStyle.None;
+                style.BorderTop = BorderStyle.None;
+                for (int col = 0; col < 57; col++)
+                {
+                    if ((col >= 0 && col <= 7) || (col >= 13 && col <= 20) || (col >= 26 && col <= 33) || (col >= 40 && col <= 47))
+                    {
+                        ICell targetCell = sheet_Destination.GetRow(rowIndex_Destination).GetCell(col);
+                        targetCell.CellStyle = style;
+                    }
+                }
             }
 
 
