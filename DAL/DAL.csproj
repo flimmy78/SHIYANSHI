@@ -456,6 +456,11 @@
     </Compile>
     <Compile Include="VBIAOZHUNLIANGCHUANGONGZHUOMeta.cs" />
     <Compile Include="VBIAOZHUNLIANGCHUANGONGZHUORepository.cs" />
+    <Compile Include="VBUHEGE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VBUHEGEMeta.cs" />
+    <Compile Include="VBUHEGERepository.cs" />
     <Compile Include="VGONGZUOSHICHANG.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

@@ -1428,6 +1428,20 @@
           <Property Name="TIAOXINGMA" Type="varchar2" MaxLength="200" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6002: 表/视图“TENGFEI.VBUHEGE”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="VBUHEGE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
+          <Property Name="ZHENGSHUBAOGAOBIANHAO" Type="varchar2" MaxLength="200" />
+          <Property Name="BUHEGEFENLEI" Type="varchar2" MaxLength="200" />
+          <Property Name="BUHEGESHUOMING" Type="varchar2" MaxLength="4000" />
+          <Property Name="SHIYANSHI" Type="varchar2" MaxLength="36" />
+          <Property Name="BAOGAOPIZHUNTONGGUOSHIJIAN" Type="date" />
+          <Property Name="SHOULIDANWEI" Type="varchar2" MaxLength="200" />
+        </EntityType>
+        <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VGONGZUOSHICHANG”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VGONGZUOSHICHANG">
           <Key>
@@ -2668,6 +2682,17 @@ FROM "TENGFEI"."VBAOGAODAYIN" "VBAOGAODAYIN"</DefiningQuery>
 "VBIAOZHUNLIANGCHUANGONGZHUO"."TIAOXINGMA" AS "TIAOXINGMA"
 FROM "TENGFEI"."VBIAOZHUNLIANGCHUANGONGZHUO" "VBIAOZHUNLIANGCHUANGONGZHUO"</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VBUHEGE" EntityType="Self.VBUHEGE" store:Type="Views" store:Schema="TENGFEI">
+            <DefiningQuery>SELECT 
+"VBUHEGE"."ID" AS "ID", 
+"VBUHEGE"."ZHENGSHUBAOGAOBIANHAO" AS "ZHENGSHUBAOGAOBIANHAO", 
+"VBUHEGE"."BUHEGEFENLEI" AS "BUHEGEFENLEI", 
+"VBUHEGE"."BUHEGESHUOMING" AS "BUHEGESHUOMING", 
+"VBUHEGE"."SHIYANSHI" AS "SHIYANSHI", 
+"VBUHEGE"."BAOGAOPIZHUNTONGGUOSHIJIAN" AS "BAOGAOPIZHUNTONGGUOSHIJIAN", 
+"VBUHEGE"."SHOULIDANWEI" AS "SHOULIDANWEI"
+FROM "TENGFEI"."VBUHEGE" "VBUHEGE"</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VGONGZUOSHICHANG" EntityType="Self.VGONGZUOSHICHANG" store:Type="Views" store:Schema="TENGFEI">
             <DefiningQuery>SELECT 
 "VGONGZUOSHICHANG"."ID" AS "ID", 
@@ -3533,6 +3558,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           </AssociationSet>
           <EntitySet Name="VXIANGQING" EntityType="Model.VXIANGQING" />
           <EntitySet Name="VTEST_ITE" EntityType="Model.VTEST_ITE" />
+          <EntitySet Name="VBUHEGE" EntityType="Model.VBUHEGE" />
           </EntityContainer>
         <ComplexType Name="SHIYANSHIGONGZUO_Result">
           <Property Type="String" Name="ID" Nullable="false" MaxLength="20" />
@@ -6021,6 +6047,18 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="SORT" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="PARENTID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="VBUHEGE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="ZHENGSHUBAOGAOBIANHAO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BUHEGEFENLEI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BUHEGESHUOMING" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="SHIYANSHI" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="BAOGAOPIZHUNTONGGUOSHIJIAN" Type="DateTime" />
+          <Property Name="SHOULIDANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7843,6 +7881,19 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
                 <ScalarProperty Name="PREPARE_SCHEMEID" ColumnName="PREPARE_SCHEMEID" />
                 <ScalarProperty Name="ROW_FLAG" ColumnName="ROW_FLAG" />
                 <ScalarProperty Name="RID" ColumnName="RID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VBUHEGE">
+            <EntityTypeMapping TypeName="Model.VBUHEGE">
+              <MappingFragment StoreEntitySet="VBUHEGE">
+                <ScalarProperty Name="SHOULIDANWEI" ColumnName="SHOULIDANWEI" />
+                <ScalarProperty Name="BAOGAOPIZHUNTONGGUOSHIJIAN" ColumnName="BAOGAOPIZHUNTONGGUOSHIJIAN" />
+                <ScalarProperty Name="SHIYANSHI" ColumnName="SHIYANSHI" />
+                <ScalarProperty Name="BUHEGESHUOMING" ColumnName="BUHEGESHUOMING" />
+                <ScalarProperty Name="BUHEGEFENLEI" ColumnName="BUHEGEFENLEI" />
+                <ScalarProperty Name="ZHENGSHUBAOGAOBIANHAO" ColumnName="ZHENGSHUBAOGAOBIANHAO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

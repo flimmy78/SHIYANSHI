@@ -431,7 +431,7 @@ namespace Langben.Report
                             IClientAnchor anchor = null;
                             if (type == ExportType.Report_XiaoZhun_CNAS)
                             {
-                                anchor = new HSSFClientAnchor(50, 20, 250, 250, fEntity.Col_PiZhunRen-2, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen + 6, fEntity.Row_PiZhunRen);
+                                anchor = new HSSFClientAnchor(55, 20, 250, 250, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen + 8, fEntity.Row_PiZhunRen);
                             }
                             else
                             {
@@ -2871,7 +2871,7 @@ namespace Langben.Report
                         continue;
                     }
 
-                    //if (iVTEST_ITE.RULEID != "315-1983_2_6")
+                    //if (iVTEST_ITE.RULEID != "1075-2001_3_2")
                     //{
                     //    continue;
                     //}
@@ -3239,8 +3239,9 @@ namespace Langben.Report
                             }
 
                             //Ib(%)
-                            SHuaZhengData ACTUALVALUE = pList.LastOrDefault(p => p.name == "ACTUALVALUE" && p.values == "100" && p.index < ppItem.index);
-                            if (ACTUALVALUE == null)
+                            //SHuaZhengData ACTUALVALUE = pList.LastOrDefault(p => p.name == "ACTUALVALUE" && p.values == "100" && p.index < ppItem.index);
+                            SHuaZhengData ACTUALVALUE = pList.LastOrDefault(p => p.name == "ACTUALVALUE" && p.index < ppItem.index);
+                            if (ACTUALVALUE == null || ACTUALVALUE.values!="100")
                             {
                                 dataDic_PingHengFuZaiShiYouGongDianNengWuCha[ppItem.tongtao].Data.Insert(ppItem.index + count, item);
                                 count++;
@@ -4451,6 +4452,48 @@ namespace Langben.Report
             Dictionary<int, List<MYDataHead>> headDic = AnalyticHTML.GetHeadData(doc);//表头           
             Dictionary<int, List<MYDataHead>> footDic = AnalyticHTML.GetFootData(doc);//表尾
 
+            #region 处理1075-2001_3_2最大基本误差整个页面只有一个,取第一个ACTUALVALUE，并且行数为通道行数
+            //if (iEntity.RULEID == "1075-2001_3_2")
+            //{
+            //    if (dataDic != null && dataDic.Count > 0)
+            //    {
+            //        foreach (DataValue d in dataDic.Values)
+            //        {
+            //            if (d != null && d.Data != null && d.Data.Count > 0)
+            //            {
+            //                List<MYData> cData = d.Data.FindAll(p => p.name == "ACTUALVALUE");
+            //                MYData mdd = null;
+            //                List<MYData> removeList = new List<MYData>();
+            //                int indexCount = 1;
+            //                if (cData != null && cData.Count > 0)
+            //                {
+            //                    foreach (MYData md in cData)
+            //                    {
+            //                        if (indexCount == 1)
+            //                        {
+            //                            mdd = md;
+            //                            mdd.mergedRowNum = d.Count;
+            //                        }
+            //                        else
+            //                        {
+
+            //                            removeList.Add(md);
+
+            //                        }
+            //                        indexCount++;
+            //                    }
+            //                    foreach (MYData md in removeList)
+            //                    {
+            //                        d.Data.Remove(md);
+            //                    }
+            //                }
+
+            //            }
+            //        }
+            //    }
+            //}
+            #endregion 
+
             #region 处理没有表头的数据
             if (headDic == null || headDic.Count == 0)
             {
@@ -4623,99 +4666,101 @@ namespace Langben.Report
                     int startRowIndex = rowIndex_Destination;
                     if (dataDic != null && dataDic.ContainsKey(tongDaoID) && dataDic[tongDaoID] != null && dataDic[tongDaoID].Count > 0 && dataDic[tongDaoID].Data != null && dataDic[tongDaoID].Data.Count > 0 && temp.DataRowIndex >= 0)
                     {
-                        #region 画数据  
-                        #region 画格子                       
-                        Dictionary<string, CellRangeAddress> cellAddressList = CopyRow_1(sheet_Source, sheet_Destination, temp.DataRowIndex, rowIndex_Destination, dataDic[tongDaoID].Count, true, null, allSpecialCharacters, null);
-                        rowIndex_Destination = rowIndex_Destination + dataDic[tongDaoID].Count;
-                        #endregion
-                        #region 填充数据
+                        
+                            #region 画数据  
+                            #region 画格子                                              
+                            Dictionary<string, CellRangeAddress> cellAddressList = CopyRow_1(sheet_Source, sheet_Destination, temp.DataRowIndex, rowIndex_Destination, dataDic[tongDaoID].Count, true, null, allSpecialCharacters, null);
+                            rowIndex_Destination = rowIndex_Destination + dataDic[tongDaoID].Count;
+                            #endregion
+                            #region 填充数据
 
-                        foreach (MYData d in dataDic[tongDaoID].Data)
-                        {
-                            if (cellAddressList == null || cellAddressList.Count == 0)
+                            foreach (MYData d in dataDic[tongDaoID].Data)
                             {
-                                break;
-                            }
-                            if (temp.Cells.Count(p => p.Code == d.name) > 0)//配置中存在说明需要打印
-                            {
-                                //如果模板中有数据表示固定数据，否则是动态数据，固定数据跳过
-                                string key = cellAddressList.Keys.FirstOrDefault();
-                                int colCount = Convert.ToInt32(key.Split('_')[1]);
-                                CellRangeAddress c = cellAddressList[key];
-                                string cValue = sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).StringCellValue;
-                                while (!string.IsNullOrWhiteSpace(cValue))
+                                if (cellAddressList == null || cellAddressList.Count == 0)
                                 {
-                                    if (temp.Cells.Count >= colCount && temp.Cells[colCount - 1].IsMergeSameValue == "Y")//固定值是否需要合并
+                                    break;
+                                }
+                                if (temp.Cells.Count(p => p.Code == d.name) > 0)//配置中存在说明需要打印
+                                {
+                                    //如果模板中有数据表示固定数据，否则是动态数据，固定数据跳过
+                                    string key = cellAddressList.Keys.FirstOrDefault();
+                                    int colCount = Convert.ToInt32(key.Split('_')[1]);
+                                    CellRangeAddress c = cellAddressList[key];
+                                    string cValue = sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).StringCellValue;
+                                    while (!string.IsNullOrWhiteSpace(cValue))
                                     {
-                                        sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + dataDic[tongDaoID].Count - 1, c.FirstColumn, c.LastColumn));
-                                        int ccCount = 0;
-                                        for (int j = 0; j < dataDic[tongDaoID].Count; j++)//将已合并或者已使用的区域移除
+                                        if (temp.Cells.Count >= colCount && temp.Cells[colCount - 1].IsMergeSameValue == "Y")//固定值是否需要合并
                                         {
-
-                                            KeyValuePair<string, CellRangeAddress> cc = cellAddressList.FirstOrDefault(p => p.Value.FirstColumn == c.FirstColumn && p.Value.LastColumn == c.LastColumn);
-                                            if (!string.IsNullOrWhiteSpace(cc.Key) && cc.Value != null && cc.Value.FirstColumn == c.FirstColumn && cc.Value.LastColumn == c.LastColumn)
+                                            sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + dataDic[tongDaoID].Count - 1, c.FirstColumn, c.LastColumn));
+                                            int ccCount = 0;
+                                            for (int j = 0; j < dataDic[tongDaoID].Count; j++)//将已合并或者已使用的区域移除
                                             {
-                                                if (ccCount > 0)
+
+                                                KeyValuePair<string, CellRangeAddress> cc = cellAddressList.FirstOrDefault(p => p.Value.FirstColumn == c.FirstColumn && p.Value.LastColumn == c.LastColumn);
+                                                if (!string.IsNullOrWhiteSpace(cc.Key) && cc.Value != null && cc.Value.FirstColumn == c.FirstColumn && cc.Value.LastColumn == c.LastColumn)
                                                 {
-                                                    sheet_Destination.GetRow(cc.Value.FirstRow).GetCell(cc.Value.FirstColumn).SetCellValue(new HSSFRichTextString(""));
+                                                    if (ccCount > 0)
+                                                    {
+                                                        sheet_Destination.GetRow(cc.Value.FirstRow).GetCell(cc.Value.FirstColumn).SetCellValue(new HSSFRichTextString(""));
+                                                    }
+                                                    cellAddressList.Remove(cc.Key);
+                                                    ccCount++;
                                                 }
-                                                cellAddressList.Remove(cc.Key);
-                                                ccCount++;
+
                                             }
 
                                         }
-
+                                        else
+                                        {
+                                            cellAddressList.Remove(key);
+                                        }
+                                        key = cellAddressList.Keys.FirstOrDefault();
+                                        c = cellAddressList[key];
+                                        cValue = sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).StringCellValue;
                                     }
-                                    else
-                                    {
-                                        cellAddressList.Remove(key);
-                                    }
-                                    key = cellAddressList.Keys.FirstOrDefault();
-                                    c = cellAddressList[key];
-                                    cValue = sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).StringCellValue;
-                                }
-                                HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, d.value);
+                                    HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, d.value);
 
-                                if ((value == null || string.IsNullOrWhiteSpace(value.String)) && temp.Cells.FirstOrDefault(p => p.Code == d.name) != null && temp.Cells.FirstOrDefault(p => p.Code == d.name).IsHideRowNull == "Y")
-                                {
-                                    HideRow(sheet_Destination, c.FirstRow, 1);
-                                }
-                                else if ((value == null || string.IsNullOrWhiteSpace(value.String)) && d.name.IndexOf("_UNIT") < 0)
-                                {
-                                    value = new HSSFRichTextString("/");
-                                }
-                                sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).SetCellValue(value);
-                                if (d.mergedRowNum > 1)//多行单元格合并
-                                {                                    
-                                    if (iEntity.RULEID == "440-2008_10" && type== ExportType.Report_JianDing)//解决单元格无法合并问题，目前没找到原因
+                                    if ((value == null || string.IsNullOrWhiteSpace(value.String)) && temp.Cells.FirstOrDefault(p => p.Code == d.name) != null && temp.Cells.FirstOrDefault(p => p.Code == d.name).IsHideRowNull == "Y")
                                     {
-                                        for (int k = 0; k < 5; k++)
+                                        HideRow(sheet_Destination, c.FirstRow, 1);
+                                    }
+                                    else if ((value == null || string.IsNullOrWhiteSpace(value.String)) && d.name.IndexOf("_UNIT") < 0)
+                                    {
+                                        value = new HSSFRichTextString("/");
+                                    }
+                                    sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).SetCellValue(value);
+                                    if (d.mergedRowNum > 1)//多行单元格合并
+                                    {
+                                        if (iEntity.RULEID == "440-2008_10" && type == ExportType.Report_JianDing)//解决单元格无法合并问题，目前没找到原因
+                                        {
+                                            for (int k = 0; k < 5; k++)
+                                            {
+                                                sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
+                                            }
+                                        }
+                                        else
                                         {
                                             sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
+
+                                        }
+
+                                    }
+
+                                    for (int j = 0; j < d.mergedRowNum; j++)//将已合并或者已使用的区域移除
+                                    {
+                                        KeyValuePair<string, CellRangeAddress> cc = cellAddressList.FirstOrDefault(p => p.Value.FirstColumn == c.FirstColumn && p.Value.LastColumn == c.LastColumn);
+                                        if (!string.IsNullOrWhiteSpace(cc.Key) && cc.Value != null && cc.Value.FirstColumn == c.FirstColumn && cc.Value.LastColumn == c.LastColumn)
+                                        {
+                                            cellAddressList.Remove(cc.Key);
                                         }
                                     }
-                                    else
-                                    {
-                                        sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
-
-                                    }                                  
 
                                 }
-
-                                for (int j = 0; j < d.mergedRowNum; j++)//将已合并或者已使用的区域移除
-                                {
-                                    KeyValuePair<string, CellRangeAddress> cc = cellAddressList.FirstOrDefault(p => p.Value.FirstColumn == c.FirstColumn && p.Value.LastColumn == c.LastColumn);
-                                    if (!string.IsNullOrWhiteSpace(cc.Key) && cc.Value != null && cc.Value.FirstColumn == c.FirstColumn && cc.Value.LastColumn == c.LastColumn)
-                                    {                                       
-                                        cellAddressList.Remove(cc.Key);
-                                    }
-                                }
-
                             }
-                        }
 
-                        #endregion
-                        #endregion
+                            #endregion
+                            #endregion
+                       
                     }
                     #endregion
 
@@ -4762,7 +4807,7 @@ namespace Langben.Report
             //表格注
             string RemarkStr = string.Empty;
             List<SpecialCharacter_Index> sIndexList = ReportStatic.GetSpecialCharacter_Indexs(iEntity.RULEID, out RemarkStr);
-            if (!string.IsNullOrWhiteSpace(RemarkStr))
+            if (!string.IsNullOrWhiteSpace(RemarkStr) && temp.RemarkRowIndex>=0)
             {
                 CopyRow(sheet_Source, sheet_Destination, temp.RemarkRowIndex, rowIndex_Destination, 1, true);
 
@@ -4771,7 +4816,7 @@ namespace Langben.Report
                 sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
                 rowIndex_Destination++;
             }
-            else if (iEntity.REMARK != null && iEntity.REMARK.Trim() != "")
+            else if (iEntity.REMARK != null && iEntity.REMARK.Trim() != "" && temp.RemarkRowIndex>=0)
             {
                 CopyRow(sheet_Source, sheet_Destination, temp.RemarkRowIndex, rowIndex_Destination, 1, true);
 
@@ -4780,7 +4825,7 @@ namespace Langben.Report
             }
 
             //表格结论
-            if (iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
+            if (iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "" && temp.ConclusionRowIndex>=0)
             {
                 CopyRow(sheet_Source, sheet_Destination, temp.ConclusionRowIndex, rowIndex_Destination, 1, true);
                 sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue("结论：" + iEntity.CONCLUSION);
@@ -4832,7 +4877,9 @@ namespace Langben.Report
             //为了表格底部没有线           
             CopyRow(sheet_Source, sheet_Destination, 4, rowIndex_Destination, 1, true);
             // 
-            if (iEntity.RULEID == "1085-2013_8" || iEntity.RULEID == "1085-2013_9" || iEntity.RULEID== "124-2005_3" || (iEntity.RULEID== "440-2008_9" && type== ExportType.Report_JianDing))
+            if (iEntity.RULEID == "1085-2013_8" || iEntity.RULEID == "1085-2013_9" || iEntity.RULEID== "124-2005_3" || 
+                ((iEntity.RULEID== "440-2008_9"  || iEntity.RULEID == "169-2010_4_2" || iEntity.RULEID == "169-2010_4_3" ||
+                 iEntity.RULEID == "169-2010_5" || iEntity.RULEID == "169-2010_6_1" || iEntity.RULEID == "169-2010_6_2") && type== ExportType.Report_JianDing))
             {                
                 ICellStyle style = sheet_Destination.Workbook.CreateCellStyle();
                 style.BorderBottom = BorderStyle.None;
@@ -4843,6 +4890,20 @@ namespace Langben.Report
                     targetCell.CellStyle = style;
                 }                
 
+            }
+            else if(iEntity.RULEID== "169-2010_5")
+            {
+                ICellStyle style = sheet_Destination.Workbook.CreateCellStyle();
+                style.BorderBottom = BorderStyle.None;
+                style.BorderTop = BorderStyle.None;
+                for (int col = 0; col < 57; col++)
+                {
+                    if ((col >= 0 && col <= 7) || (col >= 13 && col <= 20) || (col >= 26 && col <= 33) || (col >= 40 && col <= 47))
+                    {
+                        ICell targetCell = sheet_Destination.GetRow(rowIndex_Destination).GetCell(col);
+                        targetCell.CellStyle = style;
+                    }
+                }
             }
 
 
@@ -4875,6 +4936,7 @@ namespace Langben.Report
             List<string> result = new List<string>();
             result.Add("有功功率测量");
             result.Add("有功功率输出");
+            result.Add("电能基本误差");            
             return result;
 
         }
