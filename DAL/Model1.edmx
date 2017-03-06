@@ -2536,6 +2536,10 @@
           <Parameter Name="ENDDATE" Type="date" Mode="In" />
           <Parameter Name="DANWEI" Type="varchar2" Mode="In" />
         </Function>
+        <Function Name="SUOSHUDANWEI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TENGFEI">
+          <Parameter Name="STARTDATE" Type="date" Mode="In" />
+          <Parameter Name="ENDDATE" Type="date" Mode="In" />
+        </Function>
         <Function Name="ZHENGSHUHAOLEIBIE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TENGFEI">
           <Parameter Name="STARTDATE" Type="date" Mode="In" />
           <Parameter Name="ENDDATE" Type="date" Mode="In" />
@@ -3559,6 +3563,10 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySet Name="VXIANGQING" EntityType="Model.VXIANGQING" />
           <EntitySet Name="VTEST_ITE" EntityType="Model.VTEST_ITE" />
           <EntitySet Name="VBUHEGE" EntityType="Model.VBUHEGE" />
+          <FunctionImport Name="SUOSHUDANWEI">
+            <Parameter Name="STARTDATE" Mode="In" Type="DateTime" />
+            <Parameter Name="ENDDATE" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SHIYANSHIGONGZUO_Result">
           <Property Type="String" Name="ID" Nullable="false" MaxLength="20" />
@@ -7897,6 +7905,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SUOSHUDANWEI" FunctionName="Model.Store.SUOSHUDANWEI" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

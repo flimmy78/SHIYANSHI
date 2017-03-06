@@ -161,5 +161,18 @@ namespace Langben.DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ZHENGSHUHAOLEIBIE_Result>("ZHENGSHUHAOLEIBIE", sTARTDATEParameter, eNDDATEParameter, dANWEIParameter);
         }
+    
+        public virtual int SUOSHUDANWEI(Nullable<System.DateTime> sTARTDATE, Nullable<System.DateTime> eNDDATE)
+        {
+            var sTARTDATEParameter = sTARTDATE.HasValue ?
+                new ObjectParameter("STARTDATE", sTARTDATE) :
+                new ObjectParameter("STARTDATE", typeof(System.DateTime));
+    
+            var eNDDATEParameter = eNDDATE.HasValue ?
+                new ObjectParameter("ENDDATE", eNDDATE) :
+                new ObjectParameter("ENDDATE", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SUOSHUDANWEI", sTARTDATEParameter, eNDDATEParameter);
+        }
     }
 }
