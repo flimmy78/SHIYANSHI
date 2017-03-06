@@ -109,6 +109,7 @@ namespace Langben.DAL
         public virtual DbSet<VZHENGSHUXINXICHAXUN> VZHENGSHUXINXICHAXUN { get; set; }
         public virtual DbSet<VXIANGQING> VXIANGQING { get; set; }
         public virtual DbSet<VTEST_ITE> VTEST_ITE { get; set; }
+        public virtual DbSet<VBUHEGE> VBUHEGE { get; set; }
     
         public virtual ObjectResult<SHIYANSHIGONGZUO_Result> SHIYANSHIGONGZUO(Nullable<System.DateTime> sTARTDATE, Nullable<System.DateTime> eNDDATE, string dANWEI)
         {

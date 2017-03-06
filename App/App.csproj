@@ -226,6 +226,8 @@
     <Compile Include="Controllers\ApplianceController.cs" />
     <Compile Include="Controllers\VBIAOZHUNLIANGCHUANGONGZHUOApiController.cs" />
     <Compile Include="Controllers\VBIAOZHUNLIANGCHUANGONGZHUOController.cs" />
+    <Compile Include="Controllers\VBUHEGEApiController.cs" />
+    <Compile Include="Controllers\VBUHEGEController.cs" />
     <Compile Include="Controllers\VGONGZUOSHICHANGApiController.cs" />
     <Compile Include="Controllers\VGONGZUOSHICHANGController.cs" />
     <Compile Include="Controllers\VSHIYANSHIGONGZUOLIANGController.cs" />
@@ -1086,6 +1088,7 @@
     <Content Include="Views\PROJECTTEMPLET\ShiZhiWuChaWuDianYaShiZhi.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\ShiZhiWuChaYouDianYaShiZhi.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\BuPingHengFuZaiShiYouGongDianNengWuChaTest.cshtml" />
+    <Content Include="Views\VBUHEGE\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
