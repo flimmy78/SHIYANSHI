@@ -5,7 +5,7 @@
 }
 @using Common
 @using Models
-<thead>
+<thead id="thead_1">
     <!--表头-->
     <tr>
         <td>
@@ -46,11 +46,6 @@
     <tr>
         <th align="center" colspan="7">1分钟内开路电压输出值(V)</th>
     </tr>
-
-
-</thead>
-
-<tbody id="tbody_moban">
     <tr>
 
         <td width="140" align="center">
@@ -77,26 +72,26 @@
     </tr>
     <tr>
 
-        <td width="140" align="center"> 
-            <input class="my-textbox input-width celiangzhi" value="" type="text" name="celiangzhi1" id="celiangzhi1_t_1_2" onblur="blurValue(this)">
+        <td width="140" align="center">
+            <input class="my-textbox input-width celiangzhi" value="" type="text" name="celiangzhi11" id="celiangzhi11_t_1_2" onblur="blurValue(this)">
         </td>
         <td width="140" align="center">
-            <input class="my-textbox input-width celiangzhi" value="" type="text" name="celiangzhi2" id="celiangzhi2_t_1_2" onblur="blurValue(this)">
+            <input class="my-textbox input-width celiangzhi" value="" type="text" name="celiangzhi21" id="celiangzhi21_t_1_2" onblur="blurValue(this)">
         </td>
         <td width="140" align="center">
-            <input class="my-textbox input-width celiangzhi" value="" type="text" name="celiangzhi3" id="celiangzhi3_t_1_2" onblur="blurValue(this)">
+            <input class="my-textbox input-width celiangzhi" value="" type="text" name="celiangzhi31" id="celiangzhi31_t_1_2" onblur="blurValue(this)">
         </td>
         <td width="140" align="center">
-            <input class="my-textbox input-width celiangzhi" value="" type="text" name="celiangzhi4" id="celiangzhi4_t_1_2" onblur="blurValue(this)">
+            <input class="my-textbox input-width celiangzhi" value="" type="text" name="celiangzhi41" id="celiangzhi41_t_1_2" onblur="blurValue(this)">
         </td>
         <td width="140" align="center">
-            <input class="my-textbox input-width celiangzhi" value="" type="text" name="celiangzhi5" id="celiangzhi5_t_1_2" onblur="blurValue(this)">
+            <input class="my-textbox input-width celiangzhi" value="" type="text" name="celiangzhi51" id="celiangzhi51_t_1_2" onblur="blurValue(this)">
         </td>
         <td width="140" align="center">
-            <input class="my-textbox input-width celiangzhi" value="" type="text" name="celiangzhi6" id="celiangzhi6_t_1_2" onblur="blurValue(this)">
+            <input class="my-textbox input-width celiangzhi" value="" type="text" name="celiangzhi61" id="celiangzhi61_t_1_2" onblur="blurValue(this)">
         </td>
         <td width="140" align="center">
-            <input class="my-textbox input-width celiangzhi" value="" type="text" name="celiangzhi7" id="celiangzhi7_t_1_2" onblur="blurValue(this)">
+            <input class="my-textbox input-width celiangzhi" value="" type="text" name="celiangzhi71" id="celiangzhi71_t_1_2" onblur="blurValue(this)">
         </td>
     </tr>
     <tr>
@@ -133,6 +128,11 @@
         </td>
 
     </tr>
+
+</thead>
+
+<tbody id="tbody_moban">
+
     <!--表体-->
     <!--插入行的位置-->
 </tbody>
@@ -148,7 +148,8 @@
                         id = id.substring(id.indexOf('_'));
                         var tongdao = id.split('_')[1];
             //【最大指示值Umax(V)】为14个数据最大值
-           var els = $("#tbody_" + tongdao + "  .celiangzhi");//document.getElementsByName("celiangzhi");
+            //var els = $("#tbody_" + tongdao + "  .celiangzhi");//document.getElementsByName("celiangzhi");                      
+            var els = $("#thead_" + tongdao + "  .celiangzhi");
             var max = els[0].value;
             if (max != "") {
                 max = parseFloat(max);
