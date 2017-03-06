@@ -431,7 +431,7 @@ namespace Langben.Report
                             IClientAnchor anchor = null;
                             if (type == ExportType.Report_XiaoZhun_CNAS)
                             {
-                                anchor = new HSSFClientAnchor(50, 20, 250, 250, fEntity.Col_PiZhunRen-2, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen + 6, fEntity.Row_PiZhunRen);
+                                anchor = new HSSFClientAnchor(55, 20, 250, 250, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen + 8, fEntity.Row_PiZhunRen);
                             }
                             else
                             {
@@ -4935,6 +4935,7 @@ namespace Langben.Report
             List<string> result = new List<string>();
             result.Add("有功功率测量");
             result.Add("有功功率输出");
+            result.Add("电能基本误差");            
             return result;
 
         }
