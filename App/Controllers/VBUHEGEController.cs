@@ -65,7 +65,26 @@ namespace Langben.App.Controllers
             });
         }
 
+        /// <summary>
+        /// 导出报告
+        /// </summary>
+        /// <param name="page">页码</param>
+        /// <param name="rows">每页显示的行数</param>
+        /// <param name="order">排序字段</param>
+        /// <param name="sort">升序asc（默认）还是降序desc</param>
+        /// <param name="search">查询条件</param>
+        /// <returns></returns>
+        [HttpPost]
+        [SupportFilter]
+        public ActionResult GetData2(string order, string sort, string search)
+        {
+            int total = 0;
+            List<VBUHEGE> queryData = m_BLL.GetByParam(null, 1, 9999, "desc", "ID", search, ref total);       
+            string[] fields = "ZHENGSHUBAOGAOBIANHAO,BUHEGEFENLEI,BUHEGESHUOMING,SHIYANSHI,BAOGAOPIZHUNTONGGUOSHIJIAN,SHOULIDANWEI".Split(',');
+            var a = Content(WriteExcleVBUHEGE(fields, queryData.ToArray()));
+            return a;
 
+        }
         IBLL.IVBUHEGEBLL m_BLL;
 
         ValidationErrors validationErrors = new ValidationErrors();

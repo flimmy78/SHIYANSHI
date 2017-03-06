@@ -400,6 +400,95 @@ namespace Models
 
         }
         /// <summary>
+        /// 导出报表证书信息查询数据到excle
+        /// </summary>
+        /// <param name="fields">字段</param>
+        /// <param name="query">数据集</param>
+        /// <param name="path">excle模版的位置</param>
+        /// <param name="from">显示的标题默认行数为1</param>
+        /// <returns></returns>
+        public string WriteExcleVBUHEGE(string[] fields, dynamic[] query, string path = @"~/up/VBUHEGE.xls", int from = 1)
+        {
+            HSSFWorkbook _book = new HSSFWorkbook();
+            string xlsPath = System.Web.HttpContext.Current.Server.MapPath(path);//物理路径
+
+            FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);//打开文件
+            IWorkbook hssfworkbook = new HSSFWorkbook(file);//数据流进行编辑
+            ISheet sheet = hssfworkbook.GetSheet("不合格统计分析");//读取工作表
+            string guid = Guid.NewGuid().ToString();//生产唯一标识
+            string saveFileName = xlsPath.Path(@"BaoBiao/" + guid + "VBUHEGE");
+
+            Dictionary<string, string> propertyName;
+            PropertyInfo[] properties;
+            //标题行
+            var titles = "证书报告编号,不合格分类,不合格说明,实验室,报告证书批准通过时间,受理单位".Split(',');
+
+            var dd = sheet.GetRow(0).GetCell(1).CellStyle;
+
+
+
+            HSSFRow dataRow = sheet.CreateRow(0) as HSSFRow;
+
+
+            ICellStyle cellStyle = hssfworkbook.CreateCellStyle();
+            cellStyle.ShrinkToFit = true;
+            for (int i = 0; i < titles.Length; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(titles[i]))
+                {
+                    var cell = dataRow.CreateCell(i);
+                    cell.CellStyle = dd;
+                    cell.SetCellValue(titles[i]); //列值
+
+                }
+            }
+            //内容行
+            for (int i = 0; i < query.Length; i++)
+            {
+                propertyName = new Dictionary<string, string>();
+                if (query[i] == null)
+                {
+                    continue;
+                }
+                Type type = query[i].GetType();
+                properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+                foreach (PropertyInfo property in properties)
+                {
+                    object o = property.GetValue(query[i], null);
+                    if (!string.IsNullOrEmpty(property.Name) && o != null)
+                    {
+                        propertyName.Add(property.Name, o.ToString());
+                    }
+                }
+                int j = 0;
+                dataRow = sheet.CreateRow(i + from) as HSSFRow;
+                fields.All(a =>
+                {
+
+                    if (propertyName.ContainsKey(a)) //列名
+                    {
+                        var cell = dataRow.CreateCell(j);
+
+                        cell.SetCellValue(propertyName[a]);
+                        //列值
+                    }
+                    j++;
+                    return true;
+                });
+            }
+            sheet.ForceFormulaRecalculation = true;
+            using (FileStream fileWrite = new FileStream(saveFileName, FileMode.Create))
+            {
+                hssfworkbook.Write(fileWrite);
+            }
+
+
+            //一般只用写这一个就OK了，他会遍历并释放所有资源，但当前版本有问题所以只释放sheet  
+            return string.Format("../../up/BaoBiao/{0}.xls", guid + "VBUHEGE");
+            //记录日志
+
+        }
+        /// <summary>
         /// 导出数据集到excle
         /// </summary>
         /// <param name="titles">第一行显示的标题名称</param>
