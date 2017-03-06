@@ -192,9 +192,16 @@
         $("#w").dialog('open');
         //$("#THESUPERIOR").val("");
         $("#checkTHESUPERIOR").html("");
-        $('#w').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
-            $(this).val("");
-        });
+        $("#NAME").val("");
+        $("#TEST_RANGE").val("");
+        $("#XINGHAO").val("");
+        $("#FACTORY_NUM").val(""); 
+        $("#CATEGORY").val("");
+        $("#UNDERTAKE_LABORATORYID").val("");
+        $("#ID").val("");
+        //$('#w').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
+        //    $(this).val("");
+        //});
         //window.location.href = "../METERING_STANDARD_DEVICE/Create";
         //return false;
     }
@@ -261,9 +268,9 @@
         METERING_STANDARD_DEVICE.TEST_RANGE = $("#TEST_RANGE").val();//测量范围
         METERING_STANDARD_DEVICE.XINGHAO = $("#XINGHAO").val();//型号
         METERING_STANDARD_DEVICE.FACTORY_NUM = $("#FACTORY_NUM").val();//编号
-        METERING_STANDARD_DEVICE.CATEGORY = $("#CATEGORY option:selected").val();//类别
+        METERING_STANDARD_DEVICE.CATEGORY = $("#CATEGORY").find("option:selected").val();//类别
         debugger;
-        METERING_STANDARD_DEVICE.UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID").find("option:selected").text();//实验室
+        METERING_STANDARD_DEVICE.UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID").find("option:selected").val();//实验室
 
 
         METERING_STANDARD_DEVICE.THESUPERIOR = $("#THESUPERIOR").val();//上级
