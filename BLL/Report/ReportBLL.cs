@@ -3239,8 +3239,9 @@ namespace Langben.Report
                             }
 
                             //Ib(%)
-                            SHuaZhengData ACTUALVALUE = pList.LastOrDefault(p => p.name == "ACTUALVALUE" && p.values == "100" && p.index < ppItem.index);
-                            if (ACTUALVALUE == null)
+                            //SHuaZhengData ACTUALVALUE = pList.LastOrDefault(p => p.name == "ACTUALVALUE" && p.values == "100" && p.index < ppItem.index);
+                            SHuaZhengData ACTUALVALUE = pList.LastOrDefault(p => p.name == "ACTUALVALUE" && p.index < ppItem.index);
+                            if (ACTUALVALUE == null || ACTUALVALUE.values!="100")
                             {
                                 dataDic_PingHengFuZaiShiYouGongDianNengWuCha[ppItem.tongtao].Data.Insert(ppItem.index + count, item);
                                 count++;
