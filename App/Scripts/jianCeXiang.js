@@ -1510,8 +1510,9 @@ function erDengBiaoChenZhi(obj, targetControlName) {
     var id = $(obj).attr("id");
     id = id.substring(id.indexOf('_'));
     var tongdao = id.split('_')[1];
+    var liangcheng = id.split('_')[2];
     var rowidx = id.split('_')[3];
-    targetControlName = targetControlName + "_" + tongdao + "_1_" + rowidx;
+    targetControlName = targetControlName + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
     if ((biaochenzhi == '10000' || biaochenzhi == '100000') && biaochenzhi != "") {
         $(obj).parent().parent().find("#" + targetControlName).val(biaochenzhi);
     }
@@ -1567,12 +1568,13 @@ function wuCha1(obj, shiji, biaochen, target, point) {
     var id = $(obj).attr("id");
     id = id.substring(id.indexOf('_'));
     var tongdao = id.split('_')[1];
+    var liangcheng = id.split('_')[2];
     var rowidx = id.split('_')[3];
 
-    var biaochenName = biaochen + "_" + tongdao + "_1" + "_" + rowidx;
-    var shijiName = shiji + "_" + tongdao + "_1" + "_" + rowidx;
-    var targetName = target + "_" + tongdao + "_1" + "_" + rowidx;
-    var pointName = point + "_" + tongdao + "_1" + "_" + rowidx;
+    var biaochenName = biaochen + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
+    var shijiName = shiji + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
+    var targetName = target + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
+    var pointName = point + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
 
     var biaochenValue = $("#" + biaochenName).val();
     var shiJiValue = $("#" + shijiName).val();
@@ -1580,10 +1582,11 @@ function wuCha1(obj, shiji, biaochen, target, point) {
 
     var length = yuxunwucha.split(".").length == 2 ? yuxunwucha.split(".")[1].length : 0
     if (biaochenValue != "" && shiJiValue != "")
-        var wucha2 = parseFloat(fomatFloat(parseFloat((parseFloat(biaochenValue) - parseFloat(shiJiValue)) / parseFloat(biaochenValue) * 100), (length + 1))).toFixed((length + 1));
+        var wucha2 = parseFloat(fomatFloat(parseFloat((parseFloat(shiJiValue) - parseFloat(biaochenValue)) / parseFloat(biaochenValue) * 100), (length + 1))).toFixed((length + 1));
     $(obj).parent().parent().find("#" + targetName).val(wucha2);
 
 }
+
 
 ///标称值
 //liangcheng  量程,//celiangPan 测量盘,ceLiangDian 测量点,target 目标,标称值
@@ -1593,13 +1596,14 @@ function BiaoChenZhi1(obj, liangCheng, ceLiangPan, ceLiangDian, target, point) {
     var id = $(obj).attr("id");
     id = id.substring(id.indexOf('_'));
     var tongdao = id.split('_')[1];
+    var liangcheng = id.split('_')[2];
     var rowidx = id.split('_')[3];
 
-    var liangChengName = liangCheng + "_" + tongdao + "_1" + "_" + rowidx;
-    var ceLiangPanName = ceLiangPan + "_" + tongdao + "_1" + "_" + rowidx;
-    var targetName = target + "_" + tongdao + "_1" + "_" + rowidx;
-    var pointName = point + "_" + tongdao + "_1" + "_" + rowidx;
-    var ceLiangDianName = ceLiangDian + "_" + tongdao + "_1" + "_" + rowidx;
+    var liangChengName = liangCheng + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
+    var ceLiangPanName = ceLiangPan + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
+    var targetName = target + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
+    var pointName = point + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
+    var ceLiangDianName = ceLiangDian + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
 
     var liangChengValue = $("#" + liangChengName).val();
     var ceLiangPanValue = $("#" + ceLiangPanName).val();
@@ -1612,6 +1616,7 @@ function BiaoChenZhi1(obj, liangCheng, ceLiangPan, ceLiangDian, target, point) {
     $(obj).parent().parent().find("#" + targetName).val(biaocheng);
 
 }
+
 
 ///贝塞尔公式STDEV
 ///计算标准偏差
