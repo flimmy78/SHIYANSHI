@@ -16,7 +16,7 @@
         <th width="150" align="center">示值误差（%）</th>
         <th width="150" align="center">允许限值（%）</th>
         <th align="center">校准结果的不确定度U(k={0})</th>
-    </tr>
+    </tr> 
 
 </thead>
 
@@ -112,7 +112,7 @@
             $("#hideDangQianTongDao").val(tbodyIndex);
            
         }
-        var rowIdx = 1;
+        var rowIdx = 3;
         //增加行
         function CreateRow() {
 
@@ -145,9 +145,9 @@
                 //二次输入标准值
                 htmlString.push(SetTDHtml(rowspan, "STANDARDRESISTANCE", HangHaoID, rowidx, txtVal, "classstyle100","", "blurValue", ''));
                 //  //二次输入标准值
-                htmlString.push(SetTDHtml(rowspan, "DIANLIUZHIZHI", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurErCiShuRuBiaoZhunZhi'));
+                htmlString.push(SetTDHtml(rowspan, "DIANLIUZHIZHI", HangHaoID, rowidx, txtVal, "classstyle100", '', 'shiZhiWuCha'));
                 //标准输出值
-                htmlString.push(SetTDHtml(rowspan, "DIANLIUSHIJIZHI", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurBiaoZhunShuChuZhi'));
+                htmlString.push(SetTDHtml(rowspan, "DIANLIUSHIJIZHI", HangHaoID, rowidx, txtVal, "classstyle100", '', 'shiZhiWuCha'));
                 //实际输出值
                 htmlString.push(SetTDHtml(rowspan, "SHIZHIWUCHA", HangHaoID, rowidx, txtVal, "classstyle100", '', 'blurShiJiShuChuZhi'));
                 //引用误差
