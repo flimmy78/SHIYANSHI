@@ -281,6 +281,13 @@
             var T6Data = $(obj).parent().parent().find("#" + T6).val();  //T4 实际值
             var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
             txtPointLen = parseFloat(txtPointLen);
+            var input7 = "input7" + "_" + tongdao + "_1_1";
+            var input7Data = $("#" + input7).val();//允许误差
+            var input8 = "input8" + "_" + tongdao + "_1_1";
+            var input8Data = $("#" + input8).val();//允许误差
+            var r1, r2;
+            try { r1 = input7Data.toString().split(".")[1].length + 1 } catch (e) { r1 = 1 }
+            try { r2 = input8Data.toString().split(".")[1].length + 1 } catch (e) { r2 = 1 }
             //【误差】=(【乘盘值】*序号-【实际值】)/实际值*100%，比允许误差多一位，四舍六入，逢五奇进偶不进		
             if (input1Data != "" && T1Data != "" && T3Data != "") {
                 T1Data = parseFloat(T1Data);
@@ -290,7 +297,7 @@
                 var jian2 = accSub(jian1, T3Data);
                 var jianfa = accMul(accDiv(jian2, T3Data), 100);
 
-                var data = fomatFloat(jianfa, txtPointLen+1);
+                var data = zeroFloat(fomatFloat(jianfa, r1), r1);
                 $(obj).parent().parent().find("#" + T4).val(data);
             }
             //【误差】=(【乘盘值】*序号-【实际值】)/实际值*100%，比允许误差多一位，四舍六入，逢五奇进偶不进	
@@ -302,7 +309,7 @@
                 var jian2 = accSub(jian1, T6Data);
                 var jianfa = accMul(accDiv(jian2, T6Data), 100);
 
-                var data = fomatFloat(jianfa, txtPointLen + 1);
+                var data = zeroFloat(fomatFloat(jianfa, r2), r2);
                 $(obj).parent().parent().find("#" + T7).val(data);
             }
         }
