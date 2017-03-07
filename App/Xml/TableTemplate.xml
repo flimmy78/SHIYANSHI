@@ -11466,7 +11466,7 @@
 					<ColIndex>5</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
-					<IsHideRowNull>Y</IsHideRowNull>
+					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
 			</CellList>
