@@ -162,7 +162,7 @@ namespace Langben.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ZHENGSHUHAOLEIBIE_Result>("ZHENGSHUHAOLEIBIE", sTARTDATEParameter, eNDDATEParameter, dANWEIParameter);
         }
     
-        public virtual int SUOSHUDANWEI(Nullable<System.DateTime> sTARTDATE, Nullable<System.DateTime> eNDDATE)
+        public virtual ObjectResult<SUOSHUDANWEI_Result> SUOSHUDANWEI(Nullable<System.DateTime> sTARTDATE, Nullable<System.DateTime> eNDDATE)
         {
             var sTARTDATEParameter = sTARTDATE.HasValue ?
                 new ObjectParameter("STARTDATE", sTARTDATE) :
@@ -172,7 +172,7 @@ namespace Langben.DAL
                 new ObjectParameter("ENDDATE", eNDDATE) :
                 new ObjectParameter("ENDDATE", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SUOSHUDANWEI", sTARTDATEParameter, eNDDATEParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SUOSHUDANWEI_Result>("SUOSHUDANWEI", sTARTDATEParameter, eNDDATEParameter);
         }
     }
 }
