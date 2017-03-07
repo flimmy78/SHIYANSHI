@@ -3563,7 +3563,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySet Name="VXIANGQING" EntityType="Model.VXIANGQING" />
           <EntitySet Name="VTEST_ITE" EntityType="Model.VTEST_ITE" />
           <EntitySet Name="VBUHEGE" EntityType="Model.VBUHEGE" />
-          <FunctionImport Name="SUOSHUDANWEI">
+          <FunctionImport Name="SUOSHUDANWEI" ReturnType="Collection(Model.SUOSHUDANWEI_Result)">
             <Parameter Name="STARTDATE" Mode="In" Type="DateTime" />
             <Parameter Name="ENDDATE" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -6067,6 +6067,17 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="BAOGAOPIZHUNTONGGUOSHIJIAN" Type="DateTime" />
           <Property Name="SHOULIDANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="SUOSHUDANWEI_Result">
+          <Property Type="String" Name="SUOSHUDANWEI" Nullable="false" MaxLength="20" />
+          <Property Type="Decimal" Name="BIAOBIAO" Nullable="false" />
+          <Property Type="Decimal" Name="DIANBIAO" Nullable="false" />
+          <Property Type="Decimal" Name="NENGZHI" Nullable="false" />
+          <Property Type="Decimal" Name="SHUBIAO" Nullable="false" />
+          <Property Type="Decimal" Name="ZHILIUYIQI" Nullable="false" />
+          <Property Type="Decimal" Name="ZHISHIYIQI" Nullable="false" />
+          <Property Type="Decimal" Name="HUGANQI" Nullable="false" />
+          <Property Type="Decimal" Name="QITA" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7905,7 +7916,21 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SUOSHUDANWEI" FunctionName="Model.Store.SUOSHUDANWEI" />
+          <FunctionImportMapping FunctionImportName="SUOSHUDANWEI" FunctionName="Model.Store.SUOSHUDANWEI" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.SUOSHUDANWEI_Result">
+                <ScalarProperty Name="SUOSHUDANWEI" ColumnName="SUOSHUDANWEI" />
+                <ScalarProperty Name="BIAOBIAO" ColumnName="BIAOBIAO" />
+                <ScalarProperty Name="DIANBIAO" ColumnName="DIANBIAO" />
+                <ScalarProperty Name="NENGZHI" ColumnName="NENGZHI" />
+                <ScalarProperty Name="SHUBIAO" ColumnName="SHUBIAO" />
+                <ScalarProperty Name="ZHILIUYIQI" ColumnName="ZHILIUYIQI" />
+                <ScalarProperty Name="ZHISHIYIQI" ColumnName="ZHISHIYIQI" />
+                <ScalarProperty Name="HUGANQI" ColumnName="HUGANQI" />
+                <ScalarProperty Name="QITA" ColumnName="QITA" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
