@@ -84,21 +84,13 @@
             columns: [[
 
                 {
-                    field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', align: 'center',
+                    field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', width: 350, align: 'center',
                     formatter: function (value, row, index) {
                         var html = "<a href='/SCHEME/Create?ID=" + row.ID + "&OP='修改'>" + value + "</a>";
                         return html;
                     }}
                 , { field: 'UNDERTAKE_LABORATORYID', title: '@Html.DisplayNameFor(model => model.UNDERTAKE_LABORATORYIDOld)', width:150,align: 'center' }
-                @*, {
-                    field: 'PUBLISHTIME', title: '@Html.DisplayNameFor(model => model.PUBLISHTIME)', width:250,align: 'center'
-                , formatter: formatDatebox
-                  }*@
-                @*, { field: 'REPORT_CATEGORY', title: '@Html.DisplayNameFor(model => model.REPORT_CATEGORY)', width: 51 }*@
-                @*, { field: 'CERTIFICATE_CATEGORY', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 51 }*@
-                , { field: 'STATUS', title: '@Html.DisplayNameFor(model => model.STATUS)', width:140,align: 'center' }
-                @*, {
-                    field: 'ISSTOP', title: '@Html.DisplayNameFor(model => model.ISSTOP)', width: 140, align: 'center',*@
+               
                     , { field: 'ISSTOP', title: '操作', width:140,align: 'center' ,
                     formatter: function (value, row, index) {
                         if(value=="启用")
