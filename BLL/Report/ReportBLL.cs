@@ -3858,9 +3858,110 @@ namespace Langben.Report
                 notItalicEndIndex = speStartIndex + 5;//非斜体结束位置    
 
             }
+            else if (value.ToUpper().IndexOf("δx1".ToUpper()) >= 0)
+            {
+                speStartIndex = value.Trim().ToUpper().IndexOf("δx1".ToUpper());
+                SpecialStr = "δx1";
+            }
+            else if (value.ToUpper().IndexOf("δx2".ToUpper()) >= 0)
+            {
+                speStartIndex = value.Trim().ToUpper().IndexOf("δx2".ToUpper());
+                SpecialStr = "δx2";
+            }
+            else if (value.ToUpper().IndexOf("δx".ToUpper()) >= 0)
+            {
+                speStartIndex = value.Trim().ToUpper().IndexOf("δx".ToUpper());
+                SpecialStr = "δx";
+            }
+            else if (value.ToUpper().IndexOf("δn".ToUpper()) >= 0)
+            {
+                speStartIndex = value.Trim().ToUpper().IndexOf("δn".ToUpper());
+                SpecialStr = "δn";
+            }
+            //#region 设置上标
+            //#region 处理*10
+            //if (value.IndexOf("*10") > 0 || value.IndexOf("×10") > 0)
+            //{
+            //    //value = value.Replace(",", Environment.NewLine);
+            //    //result = new HSSFRichTextString(value.Trim().Replace("|", ""));
+
+            //    string[] vArray = value.Trim().Split('|');
+            //    int length = 0;
+            //    int startIndex = 0;
+            //    int endIndex = 0;
+            //    foreach (string v in vArray)
+            //    {
+
+            //        if (v.IndexOf("*10") >= 0 || value.IndexOf("×10") > 0)
+            //        {
+            //            if (v.IndexOf("*10") >= 0)
+            //            {
+            //                startIndex = length + v.IndexOf("*10") + 3;
+            //            }
+            //            else
+            //            {
+            //                startIndex = length + v.IndexOf("×10") + 3;
+            //            }
+            //            endIndex = length + v.Length;
+            //            HSSFFont superscript = (HSSFFont)workbook.CreateFont();
+            //            superscript.TypeOffset = FontSuperScript.Super;//上标
+            //            superscript.FontName = "宋体";
+            //            result.ApplyFont(startIndex, endIndex, superscript);
+            //        }
+            //        length = length + v.Length;
+
+            //    }
+            //}
+            //#endregion
+            //#endregion
 
             //处理特殊字符下标上标斜体
             result = new HSSFRichTextString(value);
+
+            #region 设置上标
+            #region 处理*10
+            if (value.IndexOf("*10") > 0 || value.IndexOf("×10") > 0)
+            {
+                //value = value.Replace(",", Environment.NewLine);
+                //result = new HSSFRichTextString(value.Trim().Replace("|", ""));
+
+                string[] vArray = value.Trim().Split('|');
+                int length = 0;
+                int startIndex = 0;
+                int endIndex = 0;
+                foreach (string v in vArray)
+                {
+
+                    if (v.IndexOf("*10") >= 0 || value.IndexOf("×10") > 0)
+                    {
+                        if (v.IndexOf("*10") >= 0)
+                        {
+                            startIndex = length + v.IndexOf("*10") + 3;
+                        }
+                        else
+                        {
+                            startIndex = length + v.IndexOf("×10") + 3;
+                        }
+                        if(v.LastIndexOf(")")==v.Length-1)
+                        {
+                            endIndex = length + v.Length-1;
+                        }
+                        else
+                        {
+                            endIndex = length + v.Length;
+                        }
+                        
+                        HSSFFont superscript = (HSSFFont)workbook.CreateFont();
+                        superscript.TypeOffset = FontSuperScript.Super;//上标
+                        superscript.FontName = "宋体";
+                        result.ApplyFont(startIndex, endIndex, superscript);
+                    }
+                    length = length + v.Length;
+
+                }
+            }
+            #endregion
+            #endregion
 
             if (!string.IsNullOrEmpty(SpecialStr) && SpecialStr.Trim() != "" && speStartIndex >= 0)
 
