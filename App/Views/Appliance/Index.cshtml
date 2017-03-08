@@ -390,15 +390,16 @@
         if (isNull(entity.CONTACT_PHONE2)) {
             zhi += "证书单位电话不能为空！<br>";
         }
-        else {
-            if (!checkPhone(entity.CONTACT_PHONE2)) {
-                zhi += "证书单位电话格式不对！<br>";
-            }
-        }
-        if (!isNull(entity.CONTACT_PHONE)) {
-            if (!checkPhone(entity.CONTACT_PHONE)) {
-                zhi += "送检单位电话格式不对！<br>";
-            }
+        //else {
+        //    if (!checkPhone(entity.CONTACT_PHONE2)) {
+        //        zhi += "证书单位电话格式不对！<br>";
+        //    }
+        //}
+        if (isNull(entity.CONTACT_PHONE)) {
+            zhi += "送检单位电话不能为空！<br>";
+            //if (!checkPhone(entity.CONTACT_PHONE)) {
+            //    zhi += "送检单位电话格式不对！<br>";
+            //}
         }
         if (!isNull(entity.INSPECTION_ENTERPRISE_POST)) {
             if (!isPOST(entity.INSPECTION_ENTERPRISE_POST)) {
