@@ -1,0 +1,236 @@
+﻿@model Langben.DAL.SUOSHUDANWEI_Result
+@{ Layout = "~/Views/Shared/Echart.cshtml"; }
+@using Common
+@using Models
+<div id="divQuery">
+    <div class="input_search">
+        <div class="input_search-label" style="width:100px">
+            报告审核通过时间:
+        </div>
+        <div class='input_search-field-time'>
+            <input type="text" id="sTARTDATEStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'sTARTDATEStart_Time\');}' })" />
+            <span>到</span>
+            <input type="text" id="eNDDATEEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'eNDDATEEnd_Time\');}' })" />
+        </div>
+    </div>
+    <div class='input_search' style="padding-top:10px;">
+        <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
+            查 询
+        </a>
+    </div>
+</div>
+<br style="clear: both;" />
+
+<script type="text/javascript" language="javascript">
+
+
+    $(function () {
+
+        $('#flexigridData').datagrid({
+            title: '工作量统计分析', //列表的标题
+            iconCls: 'icon-site',
+            width: 'auto',
+            height: 'auto',
+            //nowrap: false,
+            striped: true,
+            collapsible: true,
+            url: '/VSHIYANSHIGONGZUOLIANG/GetDataDW', //获取数据的url
+            sortName: 'ID',
+            sortOrder: 'desc',
+            idField: 'ID',
+            onLoadSuccess: function (data) {
+                var rows = $('#flexigridData').datagrid('getRows');
+                var danwei = [];
+                var dianneng = [];
+                var guankou = [];
+                var zhuangzi = [];
+                var shuzi = [];
+                var zhiliu = [];
+                var zishi = [];
+                var huganqi = [];
+                var qita = [];
+                for (var i = 0; i < rows.length; i++) {
+                    dianneng.push(rows[i].BIAOBIAO);
+                    guankou.push(rows[i].DIANBIAO);
+                    zhuangzi.push(rows[i].NENGZHI);
+                    shuzi.push(rows[i].SHUBIAO);
+                    zhiliu.push(rows[i].ZHILIUYIQI);
+                    zishi.push(rows[i].ZHISHIYIQI);
+                    huganqi.push(rows[i].HUGANQI);
+                    qita.push(rows[i].QITA);
+                    danwei.push(rows[i].SUOSHUDANWEI);
+                }
+                //图表
+                var myChart = echarts.init(document.getElementById('main'));
+                var option = {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    legend: {
+                        data: ['标准电能表（台）', '关口电能表检定（台）', '电能表检定装置（台）', '数字仪表(台)', '直流仪器(台)', '指示仪表（台）', '互感器校验仪（台）', '其它(台)']
+                    },
+                    grid: {
+                        left: '2%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'value'
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: danwei
+                    },
+                    series: [
+                        {
+                            name: '标准电能表（台）',
+                            type: 'bar',
+                            stack: '总量',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight'
+                                }
+                            },
+                            data: dianneng
+                        },
+                        {
+                            name: '关口电能表检定（台）',
+                            type: 'bar',
+                            stack: '总量',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight'
+                                }
+                            },
+                            data: guankou
+                        },
+                        {
+                            name: '电能表检定装置（台）',
+                            type: 'bar',
+                            stack: '总量',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight'
+                                }
+                            },
+                            data: zhuangzi
+                        },
+                        {
+                            name: '数字仪表(台)',
+                            type: 'bar',
+                            stack: '总量',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight'
+                                }
+                            },
+                            data: shuzi
+                        },
+                        {
+                            name: '直流仪器(台)',
+                            type: 'bar',
+                            stack: '总量',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight'
+                                }
+                            },
+                            data: zhiliu
+                        },
+                        {
+                              name: '指示仪表（台）',
+                              type: 'bar',
+                              stack: '总量',
+                              label: {
+                                  normal: {
+                                      show: true,
+                                      position: 'insideRight'
+                                  }
+                              },
+                              data: zishi
+                          },
+                        {
+                                name: '互感器校验仪（台）',
+                                type: 'bar',
+                                stack: '总量',
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'insideRight'
+                                    }
+                                },
+                                data: huganqi
+                            },
+                        {
+                                  name: '其它(台)',
+                                  type: 'bar',
+                                  stack: '总量',
+                                  label: {
+                                      normal: {
+                                          show: true,
+                                          position: 'insideRight'
+                                      }
+                                  },
+                                  data: qita
+                              }
+                    ]
+                };
+                myChart.setOption(option);
+            },
+            columns: [[
+					{ field: 'SUOSHUDANWEI', title: '送检单位', width: 120 }
+					, { field: 'BIAOBIAO', title: '标准电能表（台）', width: 120 }
+					, { field: 'DIANBIAO', title: '关口电能表检定（台）', width: 120 }
+					, { field: 'NENGZHI', title: '电能表检定装置（台）', width: 120 }
+					, { field: 'SHUBIAO', title: '数字仪表(台)', width: 120 }
+					, { field: 'ZHILIUYIQI', title: '直流仪器(台)', width: 120 }
+					, { field: 'ZHISHIYIQI', title: '指示仪表（台）', width: 120 }
+					, { field: 'HUGANQI', title: '互感器校验仪（台）', width: 120 }
+                    , { field: 'QITA', title: '其它(台)', width: 120 }
+                     , { field: 'HEJI', title: '合计', width: 120 }
+            ]],
+            pagination: false,
+            rownumbers: false
+
+        });
+
+        var parent = window.dialogArguments; //获取父页面
+        if (parent == "undefined" || parent == null) {
+            //    不是在iframe中打开的
+        } else {
+            //隐藏所有的按钮和分隔符
+            $(".l-btn.l-btn-plain").hide();
+            $(".datagrid-btn-separator").hide();
+            //添加选择按钮
+            $('#flexigridData').datagrid("addToolbarItem", [{ "text": "选择", "iconCls": "icon-ok", handler: function () { flexiSelect(); } }]);
+        }
+
+
+
+
+
+    });
+
+    //“查询”按钮，弹出查询框
+    function flexiQuery() {
+
+        //将查询条件按照分隔符拼接成字符串
+        var search = "";
+        search += "sTARTDATEStart_Time&" + $("#sTARTDATEStart_Time").val() + "^";
+        search += "eNDDATEEnd_Time&" + $("#eNDDATEEnd_Time").val() + "^";
+        search += "SHOULIDANWEI&" + $('#SHOULIDANWEI').combobox('getValue') + "^";
+        //执行查询
+        $('#flexigridData').datagrid('load', { search: search });
+    };
+
+
+</script>

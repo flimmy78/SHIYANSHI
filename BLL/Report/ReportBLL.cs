@@ -2871,7 +2871,7 @@ namespace Langben.Report
                         continue;
                     }
 
-                    //if (iVTEST_ITE.RULEID != "1075-2001_3_2")
+                    //if (iVTEST_ITE.RULEID != "166-1993_4")
                     //{
                     //    continue;
                     //}
