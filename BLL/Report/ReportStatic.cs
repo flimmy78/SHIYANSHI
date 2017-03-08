@@ -530,6 +530,10 @@ namespace Langben.Report
                         result.Add(item);
                         length = s.Code.Length;
                     }
+                    else if(index >=0)
+                    {
+                        length = s.Code.Length;
+                    }
                     else
                     {
                         break;
