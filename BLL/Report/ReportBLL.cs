@@ -2941,7 +2941,7 @@ namespace Langben.Report
 
                     //相同检测项只展示一个标题  
                     bool IsSameRuleName = false;
-                    if (((SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null) || (iVTEST_ITE.NAME=="基本误差" && iVTEST_ITE.PARENTID== "166-1993_3"))  && SameRuleName == iVTEST_ITE.NAME)
+                    if (((SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null) || (iVTEST_ITE.NAME=="基本误差" && iVTEST_ITE.PARENTID== "166-1993_3") ||(iVTEST_ITE.NAME=="基本误差" && iVTEST_ITE.PARENTID== "125-2004_9"))  && SameRuleName == iVTEST_ITE.NAME)
 
                     {
                         HideRow(sheet_Destination, RowIndex - 2, 2);
