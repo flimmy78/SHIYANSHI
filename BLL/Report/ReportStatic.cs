@@ -432,7 +432,7 @@ namespace Langben.Report
             item = new Remark_Rules();
             item.RuleID = "166-1993_3_3";
             item.RuleName = "1000Ω以上-无误差";
-            item.Remark = "注：Rn —  二等标准电阻的上级检定结果</br>                Rx —  被测电阻的实际值</br>                Ax —  本装置检定被测电阻时电压表示值</br>                An —  本装置检定二等标准电阻时电压表示值</br>                             Rx = Rn + (Ax / I - An / I)".Replace("</br>", Environment.NewLine);
+            item.Remark = "注：Rn —  二等标准电阻的上级检定结果</br>　　Rx —  被测电阻的实际值</br>　　Ax —  本装置检定被测电阻时电压表示值</br>　　An —  本装置检定二等标准电阻时电压表示值</br>                 Rx = Rn + (Ax / I - An / I)".Replace("</br>", Environment.NewLine);
             //item.ImgUrl = string.Empty;
             result.Add(item);
             #endregion
