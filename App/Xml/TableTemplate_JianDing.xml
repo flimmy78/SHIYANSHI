@@ -10740,7 +10740,7 @@
 				</RowInfo>
 			</TableFooterList>
 		</TableTemplate>
-		<TableTemplate>
+		
 			<TableTemplate>
 				<RuleID>1052-2009_2_1</RuleID>
 				<DataRowIndex>692</DataRowIndex>
@@ -10892,6 +10892,9 @@
 					</RowInfo>
 				</TableFooterList>
 			</TableTemplate>
+			
+		<TableTemplate>
+		
 			<RuleID>1052-2009_2_2</RuleID>
 			<DataRowIndex>702</DataRowIndex>
 			<RemarkRowIndex>703</RemarkRowIndex>
@@ -12419,7 +12422,6 @@
 			<DataRowIndex>998</DataRowIndex>
 			<RemarkRowIndex>1010</RemarkRowIndex>
 			<ConclusionRowIndex>1011</ConclusionRowIndex>
-			
 			<CellList>
 				<Cell>
 					<Code>shurukang1</Code>
@@ -12430,7 +12432,7 @@
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
 				<Cell>
-					<Code></Code>
+					<Code/>
 					<ColIndex>-1</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>Y</IsMergeSameValue>
@@ -12510,7 +12512,6 @@
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
 			</CellList>
-			
 			<TableTitleList>
 				<RowInfo>
 					<RowNumber>4</RowNumber>

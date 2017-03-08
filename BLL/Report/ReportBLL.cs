@@ -2871,7 +2871,7 @@ namespace Langben.Report
                         continue;
                     }
 
-                    //if (iVTEST_ITE.RULEID != "1072-2011_6_1")
+                    //if (iVTEST_ITE.RULEID != "1052-2009_2_1")
                     //{
                     //    continue;
                     //}
@@ -2955,7 +2955,7 @@ namespace Langben.Report
                     #endregion
 
                     #region 检测项目表格                   
-
+                   
 
                     if (iEntity != null
                         && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null && IsBiaoGe)
