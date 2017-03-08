@@ -1089,6 +1089,7 @@
     <Content Include="Views\PROJECTTEMPLET\ShiZhiWuChaYouDianYaShiZhi.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\BuPingHengFuZaiShiYouGongDianNengWuChaTest.cshtml" />
     <Content Include="Views\VBUHEGE\Index.cshtml" />
+    <Content Include="Views\VSHIYANSHIGONGZUOLIANG\DanWei.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
