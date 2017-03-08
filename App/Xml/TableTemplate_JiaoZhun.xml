@@ -11352,8 +11352,8 @@
 		<TableTemplate>
 			<RuleID>982-2003_6_1</RuleID>
 			<DataRowIndex>866</DataRowIndex>
-			<RemarkRowIndex>868</RemarkRowIndex>
-			<ConclusionRowIndex>869</ConclusionRowIndex>
+			<RemarkRowIndex>869</RemarkRowIndex>
+			<ConclusionRowIndex>870</ConclusionRowIndex>
 			<CellList>
 				<Cell>
 					<Code>RANGE</Code>
@@ -11487,7 +11487,7 @@
 			<TableFooterList>
 				<RowInfo>
 					<RowNumber>1</RowNumber>
-					<RowIndex>867</RowIndex>
+					<RowIndex>868</RowIndex>
 					<CellList>
 						<Cell>
 							<Code>input7</Code>
