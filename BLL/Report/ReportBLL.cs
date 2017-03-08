@@ -2871,7 +2871,7 @@ namespace Langben.Report
                         continue;
                     }
 
-                    //if (iVTEST_ITE.RULEID != "1052-2009_2_1")
+                    //if (iVTEST_ITE.RULEID != "166-1993_3_4")
                     //{
                     //    continue;
                     //}
@@ -4750,11 +4750,14 @@ namespace Langben.Report
 
             int rowIndex = rowIndex_Destination;
 
+            int headCount = 0;
+
             //循环通道
             if (headDic != null && headDic.Count > 0)
             {
                 foreach (int tongDaoID in headDic.Keys)
                 {
+                    headCount++;
                     #region 画表头
                     #region 画格子 同时填充数据                   
 
@@ -4766,9 +4769,17 @@ namespace Langben.Report
                             //数据与创建行同时进行 
                             for (int k = 0; k < t.RowNumber; k++)
                             {
-                                CopyRow_1(sheet_Source, sheet_Destination, t.RowIndex + k, rowIndex_Destination, 1, true, temp.TableTitleList, allSpecialCharacters, headDic[tongDaoID]);
+                                if (iEntity.RULEID == "166-1993_3_4" && headCount > 1 && k==0)//166-1993_3_4多个通道，只有第一个通道有二级标题
+                                {
+                                    continue;
+                                }
+                                else
+                                {
+                                    CopyRow_1(sheet_Source, sheet_Destination, t.RowIndex + k, rowIndex_Destination, 1, true, temp.TableTitleList, allSpecialCharacters, headDic[tongDaoID]);
+                                    rowIndex_Destination++;
+                                }
 
-                                rowIndex_Destination++;
+                                
                             }
                         }
                     }
