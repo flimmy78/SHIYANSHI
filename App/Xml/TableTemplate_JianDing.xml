@@ -12183,14 +12183,14 @@
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
-				<Cell>
+				<!--<Cell>
 					<Code>UNCERTAINTYDEGREE</Code>
 					<ColIndex>11</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>Y</IsMergeNullValue>
-				</Cell>
+				</Cell>-->
 			</CellList>
 			<TableTitleList>
 				<RowInfo>
