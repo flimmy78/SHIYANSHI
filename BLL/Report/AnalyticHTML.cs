@@ -69,7 +69,7 @@ namespace Langben.Report
 
         public static HtmlAgilityPack.HtmlDocument docBuQueDingDu = new HtmlAgilityPack.HtmlDocument();
         /// <summary>
-        /// 获取不确定度标签
+        /// 获取不确定度标签,0通道为底部不确定度
         /// </summary>
         /// <param name="doc"></param>
         /// <returns>按照通道+节点的方式返回</returns>
@@ -77,14 +77,35 @@ namespace Langben.Report
         {
 
             var buDueDingDu = new Dictionary<int, List<BuDueDingDu>>();
+            string xpath2 = @"//tbody[@class='dibubuque1']/tr/td/input[@type='hidden'][@name='BuQueDingDuLuJing']";
 
-            for (int i = 1; i < 99; i++)
+            var thead2 = doc.DocumentNode.SelectNodes(xpath2);
+            if (thead2 != null)
             {
 
-                string xpath = @"//table[@id='tongdao_" + i + @"']/tbody//input[@type='hidden'][@name='BuQueDingDuLuJing'] | //tbody[@class='dibubuque1']/tr/td/input[@type='hidden'][@name='BuQueDingDuLuJing']";
+                List<BuDueDingDu> list = new List<Report.BuDueDingDu>();
+                // 
+                foreach (var item in thead2)
+                {
+                    string url = item.Attributes["value"].Value;
+                    if (!string.IsNullOrWhiteSpace(url))
+                    {
+                        url = System.Web.HttpContext.Current.Server.MapPath(url);
+                        list.Add(GetBuDueDingDu(url));
+
+                    }
+                }
+                buDueDingDu.Add(0, list);
+
+            }
+
+            for (int i = 1; i < 99; i++)
+            { 
+                string xpath = @"//table[@id='tongdao_" + i + @"']/tbody//input[@type='hidden'][@name='BuQueDingDuLuJing']";
                 var thead = doc.DocumentNode.SelectNodes(xpath);
                 if (thead == null)
                 {
+                   
                     return buDueDingDu;
                 }
                 else
@@ -725,7 +746,7 @@ namespace Langben.Report
                     list.Add(mydata);
 
                 }
-                
+
                 var q =
      from p in list
      group p by p.name into g
