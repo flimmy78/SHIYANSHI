@@ -102,7 +102,7 @@
                 if (rowidx == 0) {
                     //需要合并的列 //电压
 
-                    htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, "", "", "", "blurValue"));
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, txtNumber, "", "", "blurValue"));
                     //等级
                     htmlString.push(SetTDHtml(txtPoint, "OUTPUTVALUE", lianChengID, rowidx, "", "", "", "blurValue"));
                 }
@@ -182,7 +182,7 @@
             txtPointLen = parseFloat(txtPointLen);
 //            【上升误差】=（指示值-标准上升）/HZ数*100，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进																																																								
 																																																																																																												
-            if (T3Data != "" && T4Data != "") {
+            if (T3Data != "" && T4Data != "" && HZData!="") {
                 T3Data = parseFloat(T3Data);
                 T4Data = parseFloat(T4Data);
                 var jianfa = accMul(accDiv(accSub(T3Data, T4Data), HZData), 100);
@@ -191,7 +191,7 @@
             }
             //【下降误差】=（指示值-标准下降）/HZ数*100，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进																																																								
           
-            if (T3Data != "" && T5Data != "") {
+            if (T3Data != "" && T5Data != "" && HZData != "") {
 
                 T3Data = parseFloat(T3Data);
                 T5Data = parseFloat(T5Data);
@@ -201,7 +201,7 @@
             }
             //【升降变差】=ABS(上升-下降)/HZ数*100，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进																																																								
             
-            if (T4Data != "" && T5Data != "" && T3Data != "") {
+            if (T4Data != "" && T5Data != "" && T3Data != "" && HZData != "") {
                 T3Data = parseFloat(T3Data);
                 T4Data = parseFloat(T4Data);
                 T5Data = parseFloat(T5Data);
