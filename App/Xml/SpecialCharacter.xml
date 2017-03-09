@@ -3,35 +3,47 @@
 	<SpecialCharacterList>
 		<SpecialCharacter>
 			<!--特殊字符-->
+			<Code>δ</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>-1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>ƒ</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>-1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
 			<Code>I</Code>
 			<!--下标后几位，如果没有填-1-->
 			<SubscriptLastCount>-1</SubscriptLastCount>
 		</SpecialCharacter>
-	<SpecialCharacter>
+		<SpecialCharacter>
 			<!--特殊字符-->
 			<Code>ymin</Code>
 			<!--下标后几位，如果没有填-1-->
 			<SubscriptLastCount>3</SubscriptLastCount>
 		</SpecialCharacter>
-	<SpecialCharacter>
+		<SpecialCharacter>
 			<!--特殊字符-->
 			<Code>i</Code>
 			<!--下标后几位，如果没有填-1-->
 			<SubscriptLastCount>1</SubscriptLastCount>
 		</SpecialCharacter>
-	<SpecialCharacter>
+		<SpecialCharacter>
 			<!--特殊字符-->
 			<Code>k</Code>
 			<!--下标后几位，如果没有填-1-->
 			<SubscriptLastCount>0</SubscriptLastCount>
 		</SpecialCharacter>
-	<SpecialCharacter>
+		<SpecialCharacter>
 			<!--特殊字符-->
 			<Code>k=</Code>
 			<!--下标后几位，如果没有填-1-->
 			<SubscriptLastCount>0</SubscriptLastCount>
 		</SpecialCharacter>
-	<SpecialCharacter>
+		<SpecialCharacter>
 			<!--特殊字符-->
 			<Code>xi</Code>
 			<!--下标后几位，如果没有填-1-->
@@ -43,25 +55,25 @@
 			<!--下标后几位，如果没有填-1-->
 			<SubscriptLastCount>-1</SubscriptLastCount>
 		</SpecialCharacter>
-	<SpecialCharacter>
+		<SpecialCharacter>
 			<!--特殊字符-->
 			<Code>/y6</Code>
 			<!--下标后几位，如果没有填-1-->
 			<SubscriptLastCount>1</SubscriptLastCount>
 		</SpecialCharacter>
-	<SpecialCharacter>
+		<SpecialCharacter>
 			<!--特殊字符-->
 			<Code>/y7</Code>
 			<!--下标后几位，如果没有填-1-->
 			<SubscriptLastCount>1</SubscriptLastCount>
 		</SpecialCharacter>
-	<SpecialCharacter>
+		<SpecialCharacter>
 			<!--特殊字符-->
 			<Code>/y8</Code>
 			<!--下标后几位，如果没有填-1-->
 			<SubscriptLastCount>1</SubscriptLastCount>
 		</SpecialCharacter>
-	<SpecialCharacter>
+		<SpecialCharacter>
 			<!--特殊字符-->
 			<Code>/y9</Code>
 			<!--下标后几位，如果没有填-1-->
