@@ -15015,14 +15015,14 @@
 					<RowNumber>2</RowNumber>
 					<RowIndex>1100</RowIndex>
 					<CellList>
-						<Cell>
+						<!--<Cell>
 							<Code>HeGe</Code>
 							<ColIndex>-1</ColIndex>
 							<ColCount>0</ColCount>
 							<IsMergeSameValue>N</IsMergeSameValue>
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
-						</Cell>
+						</Cell>-->
 						<Cell>
 							<Code>OUTPUTVALUE</Code>
 							<ColIndex>-1</ColIndex>
