@@ -2866,12 +2866,12 @@ namespace Langben.Report
                 QUALIFIED_UNQUALIFIED_TEST_ITE iEntity = null;
                 foreach (VTEST_ITE iVTEST_ITE in vList)
                 {
-                    if (string.IsNullOrWhiteSpace(iVTEST_ITE.PARENTID))//一级检测项不打印
-                    {
-                        continue;
-                    }
+                    //if (string.IsNullOrWhiteSpace(iVTEST_ITE.PARENTID))//一级检测项不打印
+                    //{
+                    //    continue;
+                    //}
 
-                    //if (iVTEST_ITE.RULEID != "166-1993_3_4")
+                    //if (iVTEST_ITE.RULEID != "596-2012")
                     //{
                     //    continue;
                     //}
@@ -2899,6 +2899,11 @@ namespace Langben.Report
                     else
                     {
                         iEntity = null;
+                    }
+
+                    if (string.IsNullOrWhiteSpace(iVTEST_ITE.PARENTID) && iEntity==null)//一级检测项并且未做不打印
+                    {
+                        continue;
                     }
 
                     bool IsBiaoGe = true;//是否画表格
