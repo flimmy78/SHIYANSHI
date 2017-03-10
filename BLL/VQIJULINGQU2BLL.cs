@@ -61,7 +61,7 @@ namespace Langben.BLL
                 {
                     queryData = queryData.Skip((page - 1) * rows).Take(rows);
                 }
-                 
+
             }
             return queryData.ToList();
         }

@@ -248,7 +248,7 @@ namespace Langben.App.Controllers
                         //System.Drawing.Image Image = System.Drawing.Image.FromStream(ms);
                         Graphics g = null;
                         g = Graphics.FromImage(imag);
-                        string xinghao = item.FACTORY_NUM;//需要写入的字
+                        string xinghao = item.VERSION;//需要写入的字
                         //string xinghao = "123456789abcd";//需要写入的字
                         int w = imag.Width;
                         int h = imag.Height;
@@ -351,7 +351,7 @@ namespace Langben.App.Controllers
             }
             catch (Exception lastError)
             {
-
+               // fss.Close();
                 ExceptionsHander.WriteExceptions(lastError);//将异常写入数据库
             }
             return Json(result);

@@ -44,7 +44,7 @@ namespace Langben.DAL
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "WEITUORIQIEnd_Time") //结束时间+1
                     {
-                        endTime = Convert.ToDateTime(item.Value).AddDays(1);
+                        endTime = Convert.ToDateTime(item.Value);
                         continue;
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "JIANDINGWANCHENGRIQIStart_Time") //开始时间
@@ -54,7 +54,7 @@ namespace Langben.DAL
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "JIANDINGWANCHENGRIQIEnd_Time") //结束时间+1
                     {
-                        endTime2 = Convert.ToDateTime(item.Value).AddDays(1);
+                        endTime2 = Convert.ToDateTime(item.Value);
                         continue;
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "SHENHERIQIStart_Time") //开始时间
@@ -64,7 +64,7 @@ namespace Langben.DAL
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "SHENHERIQIEnd_Time") //结束时间+1
                     {
-                        endTime3 = Convert.ToDateTime(item.Value).AddDays(1);
+                        endTime3 = Convert.ToDateTime(item.Value);
                         continue;
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "PIZHUNRIQIStart_Time") //开始时间
@@ -74,7 +74,7 @@ namespace Langben.DAL
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "PIZHUNRIQIEnd_Time") //结束时间+1
                     {
-                        endTime4 = Convert.ToDateTime(item.Value).AddDays(1);
+                        endTime4 = Convert.ToDateTime(item.Value);
                         continue;
                     }
                     if (flagWhere != 0)

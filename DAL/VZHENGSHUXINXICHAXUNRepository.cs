@@ -40,7 +40,7 @@ namespace Langben.DAL
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "JIANDINGRIQIEnd_Time") //结束时间+1
                     {
-                        endTime = Convert.ToDateTime(item.Value).AddDays(1);
+                        endTime = Convert.ToDateTime(item.Value);
                         continue;
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "YOUXIAOQIZHIStart_Time") //开始时间
@@ -50,7 +50,7 @@ namespace Langben.DAL
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "YOUXIAOQIZHIEnd_Time") //结束时间+1
                     {
-                        endTime2 = Convert.ToDateTime(item.Value).AddDays(1);
+                        endTime2 = Convert.ToDateTime(item.Value);
                         continue;
                     }
                     if (flagWhere != 0)
@@ -91,10 +91,12 @@ namespace Langben.DAL
                      .AsQueryable();
             if (null != startTime)
             {
-                data = data.Where(m => startTime <= m.JIANDINGRIQI);
+                //data = data.Where(m => m.JIANDINGRIQI>=startTime&& m.JIANDINGRIQI <= endTime);
+               data = data.Where(m => startTime <= m.JIANDINGRIQI);
             }
             if (null != endTime)
             {
+               // data = data.Where(m => m.JIANDINGRIQI <= endTime);
                 data = data.Where(m => endTime >= m.JIANDINGRIQI);
             }
             if (null != startTime2)

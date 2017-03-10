@@ -35,7 +35,7 @@ namespace Langben.DAL
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(End_Time)) //结束时间+1
                     {
-                        eNDDATE = Convert.ToDateTime(item.Value).AddDays(1);
+                        eNDDATE = Convert.ToDateTime(item.Value);
                         continue;
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key== "SHOULIDANWEI") //

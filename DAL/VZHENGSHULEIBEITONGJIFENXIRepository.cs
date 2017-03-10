@@ -38,7 +38,7 @@ namespace Langben.DAL
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(End_Time)) //结束时间+1
                     {
-                        endTime = Convert.ToDateTime(item.Value).AddDays(1);
+                        endTime = Convert.ToDateTime(item.Value);
                         continue;
                     }
                     if (flagWhere != 0)
