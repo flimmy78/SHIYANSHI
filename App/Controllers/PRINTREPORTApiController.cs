@@ -76,9 +76,9 @@ namespace Langben.App.Controllers
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
             {
-                string currentPerson = GetCurrentPerson();
+                Common.Account account = GetCurrentAccount();
                 entity.CREATETIME = DateTime.Now;//打印时间
-                entity.CREATEPERSON = currentPerson;//打印者
+                entity.CREATEPERSON = account.PersonName;//打印者
 
                 entity.ID = Result.GetNewId();
                 string returnValue = string.Empty;

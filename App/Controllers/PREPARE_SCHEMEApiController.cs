@@ -150,9 +150,9 @@ namespace Langben.App.Controllers
 
                 if (entity != null && ModelState.IsValid)
                 {
-                    string currentPerson = GetCurrentPerson();
+                  
                     entity.CREATETIME = DateTime.Now;
-                    entity.CREATEPERSON = currentPerson;
+                    entity.CREATEPERSON = account.PersonName;
                     //修改证书编号
                     entity.ID = Result.GetNewId();
                     string returnValue = string.Empty;
@@ -384,10 +384,10 @@ namespace Langben.App.Controllers
             {   //数据校验
                 Account acc = GetCurrentAccount();               
                 entity.UPDATETIME = DateTime.Now;
-                entity.UPDATEPERSON = acc.Name;
+                entity.UPDATEPERSON = acc.PersonName;
 
                 string returnValue = string.Empty;
-                entity.CHECKERID = acc.Name;
+                entity.CHECKERID = acc.PersonName;
 
                 if (m_BLL.EditInst(ref validationErrors, entity))
                 {
@@ -553,7 +553,7 @@ namespace Langben.App.Controllers
                     }
                     #region 审核过程记录
                     SH.ID = Result.GetNewId();//id
-                    SH.CREATEPERSON = account.Name;//审核者
+                    SH.CREATEPERSON = account.PersonName;//审核者
                     SH.CREATETIME = DateTime.Now;//审核时间
                     SH.REVIEWCONCLUSION = entity.ISAGGREY;
                     SH.REVIEWCONCLUSIONZI = entity.AUDITOPINION;//审核意见

@@ -199,11 +199,11 @@ namespace Langben.App.Controllers
             data.ORDER_STATUS = queryData.ORDER_STATUS;
             data.CREATETIME =  queryData.CREATETIME;
           
-            AccountBLL acc = new AccountBLL();
-            List<string> name = new List<string>();
-            name.Add(queryData.CREATEPERSON);
-            var myname = acc.GetPictureByName(name)[queryData.CREATEPERSON].MyName;
-            data.CREATEPERSON = myname;/////////
+            //AccountBLL acc = new AccountBLL();
+            //List<string> name = new List<string>();
+            //name.Add(queryData.CREATEPERSON);
+            //var myname = acc.GetPictureByName(name)[queryData.CREATEPERSON].MyName;
+            data.CREATEPERSON = queryData.CREATEPERSON;/////////
             data.UPDATETIME = queryData.UPDATETIME;
             data.UPDATEPERSON = queryData.UPDATEPERSON; 
             return data;

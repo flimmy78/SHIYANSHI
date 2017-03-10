@@ -74,13 +74,13 @@ namespace Langben.App.Controllers
 
 					,DAILINGQUSHICHANG = s.SHIYANSHIJIESHOUSHIJIAN==null?"0":(Convert.ToDateTime(s.SHIYANSHIJIESHOUSHIJIAN)- Convert.ToDateTime(s.WEITUORIQI)).Days.ToString()
                     ,
-                    JIANDINGSHICHANG = s.SHIYANSHIJIESHOUSHIJIAN == null && s.JIANDINGWANCHENGRIQI==null ? "0":(Convert.ToDateTime(s.JIANDINGWANCHENGRIQI) - Convert.ToDateTime(s.SHIYANSHIJIESHOUSHIJIAN)).Days.ToString() 
+                    JIANDINGSHICHANG = s.SHIYANSHIJIESHOUSHIJIAN == null || s.JIANDINGWANCHENGRIQI==null ? "0":(Convert.ToDateTime(s.JIANDINGWANCHENGRIQI) - Convert.ToDateTime(s.SHIYANSHIJIESHOUSHIJIAN)).Days.ToString() 
                     ,
-                    SHENHESHICHANG = s.SHENHERIQI == null && s.JIANDINGWANCHENGRIQI == null ?"0": (Convert.ToDateTime(s.SHENHERIQI) - Convert.ToDateTime(s.JIANDINGWANCHENGRIQI)).Days.ToString() 
+                    SHENHESHICHANG = s.SHENHERIQI == null || s.JIANDINGWANCHENGRIQI == null ?"0": (Convert.ToDateTime(s.SHENHERIQI) - Convert.ToDateTime(s.JIANDINGWANCHENGRIQI)).Days.ToString() 
                     ,
-                    PIZHUNSHICHANG = s.SHENHERIQI == null && s.PIZHUNRIQI == null ? "0":(Convert.ToDateTime(s.PIZHUNRIQI) - Convert.ToDateTime(s.SHENHERIQI)).Days.ToString()
+                    PIZHUNSHICHANG = s.SHENHERIQI == null || s.PIZHUNRIQI == null ? "0":(Convert.ToDateTime(s.PIZHUNRIQI) - Convert.ToDateTime(s.SHENHERIQI)).Days.ToString()
                     ,
-                    ZONGSHICHANG = s.WEITUORIQI == null && s.PIZHUNRIQI == null ?"0" :(Convert.ToDateTime(s.PIZHUNRIQI) - Convert.ToDateTime(s.WEITUORIQI)).Days.ToString()
+                    ZONGSHICHANG = s.WEITUORIQI == null || s.PIZHUNRIQI == null ?"0" :(Convert.ToDateTime(s.PIZHUNRIQI) - Convert.ToDateTime(s.WEITUORIQI)).Days.ToString()
                     ,
                     BEIZHU = s.BEIZHU
 					

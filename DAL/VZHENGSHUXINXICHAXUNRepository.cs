@@ -33,7 +33,7 @@ namespace Langben.DAL
                 foreach (var item in queryDic)
                 {
                     //oracle数据库使用linq对时间段查询
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key== "JIANDINGRIQIStart_Time") //开始时间
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "JIANDINGRIQIStart_Time") //开始时间
                     {
                         startTime = Convert.ToDateTime(item.Value);
                         continue;
@@ -58,9 +58,9 @@ namespace Langben.DAL
                         where += " and ";
                     }
                     flagWhere++;
-                  
 
-                   
+
+
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Int)) //开始数值
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Int)) + "] >= " + item.Value.GetInt();
@@ -71,7 +71,7 @@ namespace Langben.DAL
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(End_Int)) + "] <= " + item.Value.GetInt();
                         continue;
                     }
-     
+
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(DDL_Int)) //精确查询数值
                     {
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(DDL_Int)) + "] =" + item.Value;
@@ -82,21 +82,29 @@ namespace Langben.DAL
                         where += "it.[" + item.Key.Remove(item.Key.IndexOf(DDL_String)) + "] = '" + item.Value + "'";
                         continue;
                     }
-                    where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "SHOUQUANZIZHI")
+                    {
+                        where += "it.[" + item.Key + "] = '" + item.Value + "'";//模糊查询
+                    }
+                    else
+                    {
+                        where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
+                    }
+
                 }
             }
-            var data= ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext 
+            var data = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
                      .CreateObjectSet<VZHENGSHUXINXICHAXUN>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
                      .AsQueryable();
             if (null != startTime)
             {
                 //data = data.Where(m => m.JIANDINGRIQI>=startTime&& m.JIANDINGRIQI <= endTime);
-               data = data.Where(m => startTime <= m.JIANDINGRIQI);
+                data = data.Where(m => startTime <= m.JIANDINGRIQI);
             }
             if (null != endTime)
             {
-               // data = data.Where(m => m.JIANDINGRIQI <= endTime);
+                // data = data.Where(m => m.JIANDINGRIQI <= endTime);
                 data = data.Where(m => endTime >= m.JIANDINGRIQI);
             }
             if (null != startTime2)
@@ -119,7 +127,7 @@ namespace Langben.DAL
             using (SysEntities db = new SysEntities())
             {
                 return GetById(db, id);
-            }                   
+            }
         }
         /// <summary>
         /// 通过主键id，获取证书信息查询---查看详细，首次编辑
@@ -127,12 +135,12 @@ namespace Langben.DAL
         /// <param name="id">主键</param>
         /// <returns>证书信息查询</returns>
         public VZHENGSHUXINXICHAXUN GetById(SysEntities db, string id)
-        { 
-                 return db.VZHENGSHUXINXICHAXUN.SingleOrDefault(s => s.ID == id); 
+        {
+            return db.VZHENGSHUXINXICHAXUN.SingleOrDefault(s => s.ID == id);
         }
- 
+
         public void Dispose()
-        {            
+        {
         }
     }
 }

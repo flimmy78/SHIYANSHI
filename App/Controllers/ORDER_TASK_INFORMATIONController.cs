@@ -173,7 +173,7 @@ namespace Langben.App.Controllers
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             try
             {
-                string currentPerson = GetCurrentPerson();
+                Common.Account account = GetCurrentAccount();
                 if (string.IsNullOrWhiteSpace(entity.ID))
                 {
                     List<COMPANY> companylist = m_BLL2.GetByParam(null, "asc", "ID", "COMPANYNAME&" + entity.INSPECTION_ENTERPRISE + "");
@@ -201,7 +201,7 @@ namespace Langben.App.Controllers
                     entity.ORDER_STATUS = Common.ORDER_STATUS_INFORMATION.保存.ToString();
                     var ms = new System.IO.MemoryStream();
                     entity.CREATETIME = DateTime.Now;
-                    entity.CREATEPERSON = currentPerson;
+                    entity.CREATEPERSON = account.PersonName;
                     entity.ID = Result.GetNewId();
 
                     entity.ORDER_NUMBER = order[0].ToString();
@@ -215,7 +215,7 @@ namespace Langben.App.Controllers
                     {
                         item.ID = Result.GetNewId();
                         item.CREATETIME = DateTime.Now;
-                        item.CREATEPERSON = currentPerson;
+                        item.CREATEPERSON = account.PersonName;
                         item.BAR_CODE_NUM = item.ID;
                         //二维码生成
                         ErrorCorrectionLevel Ecl = ErrorCorrectionLevel.M; //误差校正水平   
@@ -302,9 +302,9 @@ namespace Langben.App.Controllers
                                 UNDERTAKE_LABORATORYID = it,
                                 ORDER_STATUS = Common.ORDER_STATUS.保存.ToString(),
                                 EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.保存.GetHashCode().ToString(),
-                                DISTRIBUTIONPERSON = currentPerson,
-                                DISTRIBUTIONTIME = DateTime.Now,
-                                CREATEPERSON = currentPerson,
+                                DISTRIBUTIONPERSON = account.PersonName,
+                            DISTRIBUTIONTIME = DateTime.Now,
+                                CREATEPERSON = account.PersonName,
                                 CREATETIME = DateTime.Now,
                                 ISRECEIVE = Common.ISRECEIVE.是.ToString(),
                                 RECYCLING = entity.RECYCLING
