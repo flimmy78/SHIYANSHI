@@ -59,7 +59,7 @@ namespace Langben.App.Controllers
             {
                 ZHEGNSHUBAOGAOLEIBIE = g.Key.ZHEGNSHUBAOGAOLEIBIE,
                 SHOUQUANZIZHI = g.Key.SHOUQUANZIZHI,
-                 BAOGAOSHULIANG = g.Key.ZHEGNSHUBAOGAOLEIBIE
+                BAOGAOSHULIANG = g.Count()
                 //BAOGAOSHULIANG =g.Count(t=>t.ZHEGNSHUBAOGAOLEIBIE)
             }));
             int w = date.Count();
