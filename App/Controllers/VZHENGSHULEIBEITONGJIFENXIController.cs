@@ -55,12 +55,12 @@ namespace Langben.App.Controllers
             // //g.Key,
             //BAOGAOSHULIANG = g.Count(p => p.ZHEGNSHUBAOGAOLEIBIE)
             // };
-            var date = queryData.GroupBy(m => (new { ZHEGNSHUBAOGAOLEIBIE = m.ZHEGNSHUBAOGAOLEIBIE, SHOUQUANZIZHI = m.SHOUQUANZIZHI })).Select(g => (new
+            var date = queryData.GroupBy(m => (new { ZHEGNSHUBAOGAOLEIBIE = m.ZHEGNSHUBAOGAOLEIBIE, SHOUQUANZIZHI = m.SHOUQUANZIZHI  })).Select(g => (new
             {
                 ZHEGNSHUBAOGAOLEIBIE = g.Key.ZHEGNSHUBAOGAOLEIBIE,
                 SHOUQUANZIZHI = g.Key.SHOUQUANZIZHI,
-                BAOGAOSHULIANG = g.Count()
-                //BAOGAOSHULIANG =g.Count(t=>t.ZHEGNSHUBAOGAOLEIBIE)
+                //  BAOGAOSHULIANG = g.Key.BAOGAOSHULIANG
+                 BAOGAOSHULIANG =g.Count()
             }));
             int w = date.Count();
             return Json(new datagrid
