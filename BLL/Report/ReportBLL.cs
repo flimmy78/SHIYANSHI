@@ -2925,11 +2925,25 @@ namespace Langben.Report
                     {
                         celStr = celStr + iEntity.CONCLUSION.Trim();
                     }
-                    else if(iEntity != null && type == ExportType.Report_JianDing)//处理检定报告
+                    else if(iEntity != null && type == ExportType.Report_JianDing&&entity.CONCLUSION=="合格")//处理检定报告 总结论是合格 ，如果不合格都出数据，不出合格不合格
                     {
                         string msg = string.Empty;
                         IsBiaoGe = IsBiaoGeByDengJi(iEntity, ref msg);
                         if(!IsBiaoGe && (msg != null && msg.Trim()!=""))
+                        {
+                            celStr = celStr + msg;
+                        }
+                        //else
+                        //{
+                        //    celStr = celStr + "/";
+                        //}
+
+                    }
+                    else if (iEntity != null && type == ExportType.Report_JianDing && entity.CONCLUSION == "不合格")//处理检定报告 总结论是合格 ，如果不合格都出数据，不出合格不合格
+                    {
+                        string msg = string.Empty;
+                        IsBiaoGe = true;// IsBiaoGeByDengJi(iEntity, ref msg);
+                        if (!IsBiaoGe && (msg != null && msg.Trim() != ""))
                         {
                             celStr = celStr + msg;
                         }
@@ -3408,6 +3422,7 @@ namespace Langben.Report
                 {
                     if(zhunquedingdudengjiValueNum>=rItem.DengJi)
                     {
+                        //
                         if(rItem.IsXuYaoHeGe==false)
                         {
                             result = false;
