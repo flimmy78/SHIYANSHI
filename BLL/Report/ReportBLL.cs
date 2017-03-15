@@ -4537,7 +4537,21 @@ namespace Langben.Report
                 #endregion
             }
         }
-
+        private bool RemoveState1(List<RowInfo> temp)
+        {
+            foreach (var f in temp)
+            {
+                foreach (var c in f.Cells)
+                {
+                    if (c.Code == "state1")
+                    {
+                        f.Cells.Remove(c);
+                        return true;
+                    }
+                }
+            }
+            return true;
+        }
         #endregion
         /// <summary>
         /// 设置表格
@@ -4776,6 +4790,13 @@ namespace Langben.Report
                             {
                                 if (iEntity.RULEID == "166-1993_3_4" && headCount > 1 && k==0)//166-1993_3_4多个通道，只有第一个通道有二级标题
                                 {
+                                    continue;
+                                }
+                                else if (iEntity.RULEID == "125-2004_9_1" && headCount > 1 && k == 0)//125-2004_9_1多个通道，只有第一个通道有二级标题
+                                {
+                                    RemoveState1(temp.TableTitleList);
+
+                                    
                                     continue;
                                 }
                                 else
