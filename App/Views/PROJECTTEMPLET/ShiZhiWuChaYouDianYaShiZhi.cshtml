@@ -333,6 +333,18 @@
             var input12_UNITData = $("#" + input12_UNIT).val();//当电压示值单位为V
             var input14_UNIT = "input14_UNIT" + "_" + tongdao + "_1_1";
             var input14_UNITData = $("#" + input14_UNIT).val();//当电压示值单位为V
+            var input9_UNIT = "input9_UNIT" + "_" + tongdao + "_1_1";
+            var input9_UNITData = $("#" + input9_UNIT).val();//残余电阻单位
+            var input19_UNIT = "input19_UNIT" + "_" + tongdao + "_1_1";
+            var input19_UNITData = $("#" + input19_UNIT).val();//残余电阻单位
+
+            var input13_UNIT = "input13_UNIT" + "_" + tongdao + "_1_1";
+            var input13_UNITData = $("#" + input13_UNIT).val();//实际电阻单位
+
+            var input6_UNIT = "input6_UNIT" + "_" + tongdao + "_1_1";
+            var input6_UNITData = $("#" + input6_UNIT).val();//实际电阻单位
+
+           
             var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
             txtPointLen = parseFloat(txtPointLen);
             
@@ -351,11 +363,12 @@
                 if (input12_UNITData == "mV") {
                     input3Data = accMul(input3Data, 1000);
                 }
-                input9Data = parseFloat(input9Data);
 
+                input9Data = parseFloat(input9Data);
+                input9Data = DanWeiHuanSuan(input13_UNITData, input9_UNITData, input9Data);// toΩ(input9_UNITData, input9Data);
                 var jian1 = accDiv(T2Data, input3Data);
-                var jian2 = accDiv(input9Data,1000);
-                var jianfa = accSub(jian1,jian2);
+               // var jian2 = accDiv(input9Data,1000);
+                var jianfa = accSub(jian1, input9Data);
 
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T3).val(data);
@@ -369,10 +382,10 @@
                     input4Data = accMul(input4Data, 1000);
                 }
                 input10Data = parseFloat(input10Data);
-
+                input10Data = DanWeiHuanSuan(input6_UNITData, input19_UNITData, input10Data);// toΩ(input19_UNITData, input10Data);
                 var jian1 = accDiv(T5Data, input4Data);
-                var jian2 = accDiv(input10Data, 1000);
-                var jianfa = accSub(jian1, jian2);
+             //   var jian2 = accDiv(input10Data, 1000);
+                var jianfa = accSub(jian1, input10Data);
 
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T6).val(data);
@@ -404,8 +417,261 @@
                 $(obj).parent().parent().find("#" + T7).val(data);
             }
         }
-
-
+        //单位换算
+        //最终单位
+        //当前单位
+        //值
+        function DanWeiHuanSuan(lastUnit, unit, value) {
+          //  unit = unit.toUpperCase();
+           // lastUnit = lastUnit.toUpperCase();
+            switch (lastUnit) {
+                case "TΩ":
+                    result = toTΩ(unit, value);
+                    break;
+                case "GΩ":
+                    result = toGΩ(unit, value);
+                    break;
+                case "MΩ":
+                    result = toMΩ(unit, value);
+                    break;
+                case "kΩ":
+                    result = tokΩ(unit, value);
+                    break;
+                case "Ω":
+                    result = toΩ(unit, value);
+                    break;
+                case "mΩ":
+                    result = tomΩ(unit, value);
+                    break;
+                case "μΩ":
+                    result = toμΩ(unit, value);
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
+        //转换为Ω
+        function toTΩ(danwei, value) {
+            value = parseFloat(value);
+          //  danwei = danwei.toUpperCase();
+            var result;
+            switch (danwei) {
+                case "TΩ":
+                    result = value;
+                    break;
+                case "GΩ":
+                    result = value * 0.001;
+                    break;
+                case "MΩ":
+                    result = value * 0.001 * 0.001;
+                    break;
+                case "kΩ":
+                    result = value * 0.001 * 0.001 * 0.001;
+                    break;
+                case "Ω":
+                    result = value * 0.001 * 0.001 * 0.001 * 0.001;
+                    break;
+                case "mΩ":
+                    result = value * 0.001 * 0.001 * 0.001 * 0.001 * 0.001;
+                    break;
+                case "μΩ":
+                    result = value * 0.001 * 0.001 * 0.001 * 0.001 * 0.001 * 0.001;
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
+        //转换为Ω
+        function toGΩ(danwei, value) {
+            value = parseFloat(value);
+          //  danwei = danwei.toUpperCase();
+            var result;
+            switch (danwei) {
+                case "TΩ":
+                    result = value * 1000;
+                    break;
+                case "GΩ":
+                    result = value;
+                    break;
+                case "MΩ":
+                    result = value * 0.001;
+                    break;
+                case "kΩ":
+                    result = value * 0.001 * 0.001;
+                    break;
+                case "Ω":
+                    result = value * 0.001 * 0.001 * 0.001;
+                    break;
+                case "mΩ":
+                    result = value * 0.001 * 0.001 * 0.001 * 0.001;
+                    break;
+                case "μΩ":
+                    result = value * 0.001 * 0.001 * 0.001 * 0.001 * 0.001;
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
+        //转换为Ω
+        function toMΩ(danwei, value) {
+            value = parseFloat(value);
+         //   danwei = danwei.toUpperCase();
+            var result;
+            switch (danwei) {
+                case "TΩ":
+                    result = value * 1000 * 1000 ;
+                    break;
+                case "GΩ":
+                    result = value * 1000 ;
+                    break;
+                case "MΩ":
+                    result = value;
+                    break;
+                case "kΩ":
+                    result = value * 0.001;
+                    break;
+                case "Ω":
+                    result = value * 0.001 * 0.001;
+                    break;
+                case "mΩ":
+                    result = value * 0.001 * 0.001 * 0.001;
+                    break;
+                case "μΩ":
+                    result = value * 0.001 * 0.001 * 0.001 * 0.001;
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
+        //转换为Ω
+        function tokΩ(danwei, value) {
+            value = parseFloat(value);
+          //  danwei = danwei.toUpperCase();
+            var result;
+            switch (danwei) {
+                case "TΩ":
+                    result = value * 1000 * 1000 * 1000;
+                    break;
+                case "GΩ":
+                    result = value*1000*1000;
+                    break;
+                case "MΩ":
+                    result = value * 1000;
+                    break;
+                case "kΩ":
+                    result = value*1000;
+                    break;
+                case "Ω":
+                    result = value * 0.001;
+                    break;
+                case "mΩ":
+                    result = value * 0.000001;
+                    break;
+                case "μΩ":
+                    result = value *0.000000001;
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
+        //转换为Ω
+        function toΩ(danwei, value) {
+            value = parseFloat(value);
+        //    danwei = danwei.toUpperCase();
+            var result;
+            switch (danwei) {
+                case "TΩ":
+                    result = value * 1000 * 1000 * 1000 * 1000;
+                    break;
+                case "GΩ":
+                    result = value * 1000 * 1000 * 1000;
+                    break;
+                case "MΩ":
+                    result = value * 1000000;
+                    break;
+                case "kΩ":
+                    result = value * 1000;
+                    break;
+                case "mΩ":
+                    result = value * 0.001;
+                    break;
+                case "μΩ":
+                    result = value * 0.000001;
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
+        //转换为Ω
+        function tomΩ(danwei, value) {
+            value = parseFloat(value);
+        //    danwei = danwei.toUpperCase();
+            var result;
+            switch (danwei) {
+                case "TΩ":
+                    result = value * 1000 * 1000 * 1000 * 1000*1000;
+                    break;
+                case "GΩ":
+                    result = value * 1000 * 1000 * 1000*1000;
+                    break;
+                case "MΩ":
+                    result = value * 1000000*1000;
+                    break;
+                case "kΩ":
+                    result = value * 1000*1000;
+                    break;
+                case "Ω":
+                    result = value * 1000;
+                    break;
+                case "mΩ":
+                    result = value;
+                    break;
+                case "μΩ":
+                    result = value * 0.001;
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
+        //转换为μΩ
+        function toμΩ(danwei, value) {
+            value = parseFloat(value);
+         //   danwei = danwei.toUpperCase();
+            var result;
+            switch (danwei) {
+                case "TΩ":
+                    result = value * 1000 * 1000 * 1000 * 1000*1000*1000;
+                    break;
+                case "GΩ":
+                    result = value * 1000 * 1000 * 1000*1000*1000;
+                    break;
+                case "MΩ":
+                    result = value * 1000000*1000*1000;
+                    break;
+                case "kΩ":
+                    result = value * 1000*1000*1000;
+                    break;
+                case "Ω":
+                    result = value * 1000 * 1000;
+                    break;
+                case "mΩ":
+                    result = value * 1000;
+                    break;
+                case "μΩ":
+                    result = value;
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
        																																							
 
     </script>
