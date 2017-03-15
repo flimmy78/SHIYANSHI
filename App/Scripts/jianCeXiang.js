@@ -1558,15 +1558,16 @@ function wuCha1(obj, shiji, biaochen, target, point) {
     var biaochenName = biaochen + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
     var shijiName = shiji + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
     var targetName = target + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
-    var pointName = point + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
+    var pointName = point// point + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
 
     var biaochenValue = $("#" + biaochenName).val();
     var shiJiValue = $("#" + shijiName).val();
     var yuxunwucha = $("#" + pointName).val();
-
-    var length = yuxunwucha.split(".").length == 2 ? yuxunwucha.split(".")[1].length : 0
+    var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+    var length = txtPointLen;// yuxunwucha.split(".").length == 2 ? yuxunwucha.split(".")[1].length : 0
     if (biaochenValue != "" && shiJiValue != "")
-        var wucha2 = parseFloat(fomatFloat(parseFloat((parseFloat(shiJiValue) - parseFloat(biaochenValue)) / parseFloat(biaochenValue) * 100), (length + 1))).toFixed((length + 1));
+        //var wucha2 = parseFloat(fomatFloat(parseFloat((parseFloat(shiJiValue) - parseFloat(biaochenValue)) / parseFloat(biaochenValue) * 100), (length + 1))).toFixed((length + 1));
+        var wucha2 = parseFloat(fomatFloat(parseFloat((parseFloat(shiJiValue) - parseFloat(biaochenValue)) / parseFloat(biaochenValue) * 100), (length ))).toFixed((length));
     $(obj).parent().parent().find("#" + targetName).val(wucha2);
 
 }
