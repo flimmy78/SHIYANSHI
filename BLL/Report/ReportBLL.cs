@@ -2912,6 +2912,8 @@ namespace Langben.Report
                     //相同检测项只展示一个标题      
 
                     CopyRow(sheet_Source, sheet_Destination, ruleTitleTemplateIndex, RowIndex, 1, false);
+
+
                     string celStr = i.ToString() + "、";
 
                     if (iVTEST_ITE.NAME != null && iVTEST_ITE.NAME.Trim() != "")
@@ -2946,10 +2948,12 @@ namespace Langben.Report
 
                     //相同检测项只展示一个标题  
                     bool IsSameRuleName = false;
-                    if (((SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null) || (iVTEST_ITE.NAME=="基本误差" && iVTEST_ITE.PARENTID== "166-1993_3") ||(iVTEST_ITE.NAME=="基本误差" && iVTEST_ITE.PARENTID== "125-2004_9"))  && SameRuleName == iVTEST_ITE.NAME)
+                    if (((SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null) || (iVTEST_ITE.NAME=="基本误差" && iVTEST_ITE.PARENTID== "166-1993_3") ||(iVTEST_ITE.NAME=="基本误差" && iVTEST_ITE.PARENTID== "125-2004_9") || (iVTEST_ITE.NAME == "基本误差" && iVTEST_ITE.PARENTID == "1072-2011_6"))
+                        && SameRuleName == iVTEST_ITE.NAME)
 
                     {
                         HideRow(sheet_Destination, RowIndex - 2, 2);
+           
                         IsSameRuleName = true;
                     }
                     else
@@ -4537,7 +4541,21 @@ namespace Langben.Report
                 #endregion
             }
         }
-
+        private bool RemoveState1(List<RowInfo> temp)
+        {
+            foreach (var f in temp)
+            {
+                foreach (var c in f.Cells)
+                {
+                    if (c.Code == "state1")
+                    {
+                        f.Cells.Remove(c);
+                        return true;
+                    }
+                }
+            }
+            return true;
+        }
         #endregion
         /// <summary>
         /// 设置表格
@@ -4776,6 +4794,13 @@ namespace Langben.Report
                             {
                                 if (iEntity.RULEID == "166-1993_3_4" && headCount > 1 && k==0)//166-1993_3_4多个通道，只有第一个通道有二级标题
                                 {
+                                    continue;
+                                }
+                                else if (iEntity.RULEID == "125-2004_9_1" && headCount > 1 && k == 0)//125-2004_9_1多个通道，只有第一个通道有二级标题
+                                {
+                                    RemoveState1(temp.TableTitleList);
+
+                                    
                                     continue;
                                 }
                                 else
@@ -5066,7 +5091,7 @@ namespace Langben.Report
             result.Add("有功功率测量");
             result.Add("有功功率输出");
             result.Add("电能基本误差");
-            //result.Add("基本误差");
+            result.Add("示值误差");
             return result;
 
         }
@@ -5086,18 +5111,7 @@ namespace Langben.Report
             return result;
 
         }
-        /// <summary>
-        /// 此规程如果等级数目>=2.0，比如7；那么检定证书合格，检定项目就标注合格/不合格。否则检定证书都要给出数据。校准证书无论等级如何都需要给出数据。
-        /// </summary>
-        /// <returns></returns>
-        private Dictionary<string, double> GetDengJi()
-        {
-            Dictionary<string, double> result = new Dictionary<string, double>();
-            result.Add("366-2004_6_2", 2.0);
-            
-            return result;
-
-        }
+    
 
     }
 }
