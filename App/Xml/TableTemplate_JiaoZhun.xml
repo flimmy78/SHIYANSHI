@@ -11511,9 +11511,9 @@
 		</TableTemplate>
 		<TableTemplate>
 			<RuleID>1072-2011_6_1</RuleID>
-			<DataRowIndex>894</DataRowIndex>
-			<RemarkRowIndex>896</RemarkRowIndex>
-			<ConclusionRowIndex>897</ConclusionRowIndex>
+			<DataRowIndex>895</DataRowIndex>
+			<RemarkRowIndex>897</RemarkRowIndex>
+			<ConclusionRowIndex>898</ConclusionRowIndex>
 			<CellList>
 				<Cell>
 					<Code>RANGE</Code>
@@ -11558,7 +11558,7 @@
 			</CellList>
 			<TableTitleList>
 				<RowInfo>
-					<RowNumber>2</RowNumber>
+					<RowNumber>3</RowNumber>
 					<RowIndex>892</RowIndex>
 					<CellList>
 						<Cell>
@@ -11615,7 +11615,7 @@
 			<TableFooterList>
 				<RowInfo>
 					<RowNumber>1</RowNumber>
-					<RowIndex>895</RowIndex>
+					<RowIndex>896</RowIndex>
 					<CellList>
 						<Cell>
 							<Code>input7</Code>
@@ -11639,9 +11639,9 @@
 		</TableTemplate>
 		<TableTemplate>
 			<RuleID>1072-2011_6_2</RuleID>
-			<DataRowIndex>906</DataRowIndex>
-			<RemarkRowIndex>907</RemarkRowIndex>
-			<ConclusionRowIndex>908</ConclusionRowIndex>
+			<DataRowIndex>907</DataRowIndex>
+			<RemarkRowIndex>908</RemarkRowIndex>
+			<ConclusionRowIndex>909</ConclusionRowIndex>
 			<CellList>
 				<Cell>
 					<Code>OUTPUTVALUE</Code>
@@ -11702,7 +11702,7 @@
 			</CellList>
 			<TableTitleList>
 				<RowInfo>
-					<RowNumber>1</RowNumber>
+					<RowNumber>2</RowNumber>
 					<RowIndex>905</RowIndex>
 					<CellList>
 						<Cell>
