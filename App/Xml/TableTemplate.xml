@@ -15273,7 +15273,7 @@
 			</TableFooterList>
 		</TableTemplate>
 		<TableTemplate>
-			<RuleID>169-2010_6_1</RuleID>
+			<RuleID>169-2010_6_2</RuleID>
 			<DataRowIndex>1124</DataRowIndex>
 			<RemarkRowIndex>1125</RemarkRowIndex>
 			<ConclusionRowIndex>1126</ConclusionRowIndex>
@@ -15408,7 +15408,7 @@
 			</TableFooterList>
 		</TableTemplate>
 		<TableTemplate>
-			<RuleID>169-2010_6_2</RuleID>
+			<RuleID>169-2010_6_1</RuleID>
 			<DataRowIndex>1111</DataRowIndex>
 			<RemarkRowIndex>1112</RemarkRowIndex>
 			<ConclusionRowIndex>1113</ConclusionRowIndex>

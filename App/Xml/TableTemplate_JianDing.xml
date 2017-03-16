@@ -10851,14 +10851,14 @@
 						<IsHideRowNull>N</IsHideRowNull>
 						<IsMergeNullValue>N</IsMergeNullValue>
 					</Cell>
-					<Cell>
+					<!--<Cell>
 						<Code>UNCERTAINTYDEGREE</Code>
 						<ColIndex>11</ColIndex>
 						<ColCount>0</ColCount>
 						<IsMergeSameValue>N</IsMergeSameValue>
 						<IsHideRowNull>N</IsHideRowNull>
 						<IsMergeNullValue>Y</IsMergeNullValue>
-					</Cell>
+					</Cell>-->
 				</CellList>
 				<TableTitleList>
 					<RowInfo>
@@ -12252,7 +12252,7 @@
 				</Cell>
 				<Cell>
 					<Code>TDB</Code>
-					<ColIndex>0</ColIndex>
+					<ColIndex>-1</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
@@ -13535,7 +13535,7 @@
 			</TableFooterList>
 		</TableTemplate>
 		<TableTemplate>
-			<RuleID>169-2010_6_1</RuleID>
+			<RuleID>169-2010_6_2</RuleID>
 			<DataRowIndex>-1</DataRowIndex>
 			<RemarkRowIndex>-1</RemarkRowIndex>
 			<ConclusionRowIndex>-1</ConclusionRowIndex>
@@ -13670,7 +13670,7 @@
 			</TableFooterList>
 		</TableTemplate>
 		<TableTemplate>
-			<RuleID>169-2010_6_2</RuleID>
+			<RuleID>169-2010_6_1</RuleID>
 			<DataRowIndex>-1</DataRowIndex>
 			<RemarkRowIndex>-1</RemarkRowIndex>
 			<ConclusionRowIndex>-1</ConclusionRowIndex>
