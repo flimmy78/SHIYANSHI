@@ -164,19 +164,21 @@
             //var T8Data = $(obj).parent().parent().find("#" + T8 + " option:selected").val(); //T8 额定电压(V)
             var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
             txtPointLen = parseFloat(txtPointLen);
-            //【有功分量-相对误差%】=100*(ABS（有功分量实测值）*0.001*额定电压平方-标称值*0.8)/(标称值*0.8)，小数点后两位，四舍六入，逢五奇进偶不进
-            if (T3Data != "" && T8Data != "" && T1Data != "") {
+            //【有功分量-相对误差%】=100*(ABS（有功分量实测值）*0.001*额定电压平方-标称值*cos)/(标称值*cos)，小数点后两位，四舍六入，逢五奇进偶不进
+            if (T3Data != "" && T8Data != "" && T1Data != "" && T7Data!="") {
                 T8Data = parseFloat(T8Data);
                 T3Data = parseFloat(T3Data);
                 T1Data = parseFloat(T1Data);
+                T7Data = parseFloat(T7Data);
                 var jianfa1 = Math.abs(T3Data).mul(0.001).mul(T8Data).mul(T8Data);
-                var jianfa2 =accMul( T1Data,0.8);
+                var jianfa2 = accMul(T1Data, T7Data);
                 var jianfa =accDiv(accMul(100 ,accSub(jianfa1, jianfa2)),jianfa2);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T4).val(data);
             }
             //【无功分量-相对误差%】=100*（ABS(无功分量实测值)*0.001*额定电压平方-标称值*0.6）/(标称值*0.6)，小数点后两位，四舍六入，逢五奇进偶不进
-            if (T5Data != "" && T8Data != "" && T1Data != "") {
+            T7Data = parseFloat(T7Data);
+            if (T5Data != "" && T8Data != "" && T1Data != "" && T7Data == 0.8) {
 
                 T8Data = parseFloat(T8Data);
                 T5Data=parseFloat(T5Data);
@@ -184,6 +186,15 @@
                 var jianfa1 = Math.abs(T5Data).mul(0.001).mul(T8Data).mul(T8Data);
                 var jianfa2 = accMul(T1Data, 0.6);
                 var jianfa = accDiv(accMul(100 ,accSub(jianfa1,jianfa2)), jianfa2);
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                $(obj).parent().parent().find("#" + T6).val(data);
+            }   //【无功分量-相对误差%】=100*ABS(无功分量实测值)/标称值，小数点后两位，四舍六入，逢五奇进偶不进
+            else if (T5Data != "" && T1Data != "" && T7Data == 1)
+            {
+                T5Data = parseFloat(T5Data);
+                T1Data = parseFloat(T1Data);
+                var jianfa1 = Math.abs(T5Data).mul(100);
+                var jianfa = accDiv(jianfa1, T1Data);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T6).val(data);
             }
