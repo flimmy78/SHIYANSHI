@@ -305,28 +305,27 @@
            
             var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
             txtPointLen = parseFloat(txtPointLen);
-            
-//"当电压示值单位为V:
+            	
+//            当电压示值单位为V:
 //【实际值】=【电压示值】/【检定电流】-【残余电阻平均值】/1000
-// 当电压示值单位为mV:
-//【实际值】=【电压示值】/(【检定电流】*1000)-【残余电阻平均值】/1000
-//            备注：
-//            1、以电压示值单位等级为参考，要求电压示值、检定电流、残余电阻平均值的单位等级一致，如果不一致进行换算
-            //            2、残余电阻：手动输入值"		
-
+//            当电压示值单位为mV:
+//【实际值】=（【电压示值】/(【检定电流】*1000)-【残余电阻平均值】）/1000
             if (T2Data != "" && input3Data != "" && input9Data != "") {
                 T2Data = parseFloat(T2Data);
-             
                 input3Data = parseFloat(input3Data);
+                input9Data = parseFloat(input9Data);
+                var jianfa = 0;
                 if (input12_UNITData == "mV") {
                     input3Data = accMul(input3Data, 1000);
+                    var jian1 = accDiv(T2Data, input3Data);
+                    var jian2 = accSub(jian1, input9Data);
+                    jianfa = accDiv(jian2, 1000);
+                } else {
+                  //  input9Data = DanWeiHuanSuan(input13_UNITData, input9_UNITData, input9Data);// toΩ(input9_UNITData, input9Data);
+                    var jian1 = accDiv(T2Data, input3Data);
+                    var jian2 = accDiv(input9Data,1000);
+                     jianfa = accSub(jian1, jian2);
                 }
-
-                input9Data = parseFloat(input9Data);
-                input9Data = DanWeiHuanSuan(input13_UNITData, input9_UNITData, input9Data);// toΩ(input9_UNITData, input9Data);
-                var jian1 = accDiv(T2Data, input3Data);
-               // var jian2 = accDiv(input9Data,1000);
-                var jianfa = accSub(jian1, input9Data);
 
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T3).val(data);
@@ -334,17 +333,20 @@
             var T3Data = $(obj).parent().parent().find("#" + T3).val();  //T3实际值
             if (T5Data != "" && input4Data != "" && input10Data != "") {
                 T5Data = parseFloat(T5Data);
-               
+                var jianfa = 0;
                 input4Data = parseFloat(input4Data);
                 if (input14_UNITData == "mV") {
                     input4Data = accMul(input4Data, 1000);
+                    var jian1 = accDiv(T5Data, input4Data);
+                    var jian2 = accSub(jian1, input10Data);
+                    jianfa = accDiv(jian2, 1000);
+                } else {
+                    input10Data = parseFloat(input10Data);
+                  //  input10Data = DanWeiHuanSuan(input6_UNITData, input19_UNITData, input10Data);// toΩ(input19_UNITData, input10Data);
+                    var jian1 = accDiv(T5Data, input4Data);
+                    var jian2 = accDiv(input10Data, 1000);
+                    jianfa = accSub(jian1, jian2);
                 }
-                input10Data = parseFloat(input10Data);
-                input10Data = DanWeiHuanSuan(input6_UNITData, input19_UNITData, input10Data);// toΩ(input19_UNITData, input10Data);
-                var jian1 = accDiv(T5Data, input4Data);
-             //   var jian2 = accDiv(input10Data, 1000);
-                var jianfa = accSub(jian1, input10Data);
-
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T6).val(data);
             }
