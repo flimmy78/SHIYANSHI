@@ -188,12 +188,12 @@
                 var jianfa = accDiv(accMul(100 ,accSub(jianfa1,jianfa2)), jianfa2);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T6).val(data);
-            }   //【无功分量-相对误差%】=100*ABS(无功分量实测值)/标称值，小数点后两位，四舍六入，逢五奇进偶不进
+            }   //【无功分量-相对误差%】=-100*ABS(无功分量实测值)/标称值，小数点后两位，四舍六入，逢五奇进偶不进
             else if (T5Data != "" && T1Data != "" && T7Data == 1)
             {
                 T5Data = parseFloat(T5Data);
                 T1Data = parseFloat(T1Data);
-                var jianfa1 = Math.abs(T5Data).mul(100);
+                var jianfa1 = Math.abs(T5Data).mul(-100);
                 var jianfa = accDiv(jianfa1, T1Data);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                 $(obj).parent().parent().find("#" + T6).val(data);
