@@ -4823,6 +4823,20 @@ namespace Langben.Report
 
                                     continue;
                                 }
+                                else if (iEntity.RULEID == "169-2010_6_2" && headCount > 1 && k == 0)//多个通道，只有第一个通道有二级标题
+                                {
+                                   // RemoveState1(temp.TableTitleList);
+
+
+                                    continue;
+                                }
+                                else if (iEntity.RULEID == "169-2010_6_1" && headCount > 1 && k == 0)//多个通道，只有第一个通道有二级标题
+                                {
+                                   // RemoveState1(temp.TableTitleList);
+
+
+                                    continue;
+                                }
                                 else
                                 {
                                     CopyRow_1(sheet_Source, sheet_Destination, t.RowIndex + k, rowIndex_Destination, 1, true, temp.TableTitleList, allSpecialCharacters, headDic[tongDaoID]);
