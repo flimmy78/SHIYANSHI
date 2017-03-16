@@ -77,8 +77,8 @@
                         data3.push({ value: rows[i].BAOGAOSHULIANG, name: rows[i].ZHEGNSHUBAOGAOLEIBIE });
                     }
                     else {
-                        data2.push(rows[i].SHOUQUANZIZHI);
-                        data3.push({ value: rows[i].BAOGAOSHULIANG, name: rows[i].SHOUQUANZIZHI });
+                        data2.push(rows[i].SHOUQUANZIZHI + "+" + rows[i].ZHEGNSHUBAOGAOLEIBIE);
+                        data3.push({ value: rows[i].BAOGAOSHULIANG, name: rows[i].SHOUQUANZIZHI + "+" + rows[i].ZHEGNSHUBAOGAOLEIBIE });
                     }
                     
                 }
