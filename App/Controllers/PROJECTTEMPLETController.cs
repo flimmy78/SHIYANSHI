@@ -20,13 +20,26 @@ namespace Langben.App.Controllers
     public class PROJECTTEMPLETController : BaseController
     {//  
      /// <summary>
-     ///示值误差-有电压示值-末盘值残余电阻参与运算
+     ///内附百分表-负荷仪
      /// </summary>
      /// <param name="id">canshu</param>
      /// <param name="RULEID">规程id</param>
      /// <param name="SCHEMEID">方案id</param>
      /// <param name="PREPARE_SCHEMEID">预备方案id</param>
      /// <returns></returns>
+        public ActionResult FuHeYi(string RULEID = "169-2010_4_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
+        ///示值误差-有电压示值-末盘值残余电阻参与运算
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
         public ActionResult ShiZhiWuChaYouDianYaShiZhi(string RULEID = "982-2003_6_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
 
