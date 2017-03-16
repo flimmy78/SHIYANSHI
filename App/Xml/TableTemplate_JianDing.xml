@@ -12252,7 +12252,7 @@
 				</Cell>
 				<Cell>
 					<Code>TDB</Code>
-					<ColIndex>0</ColIndex>
+					<ColIndex>-1</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
