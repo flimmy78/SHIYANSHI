@@ -225,6 +225,18 @@ DanWeiDDLHtmlArray = [
         }
         ,
         {
+            Code: 'DianYaM',
+            Remark: '电压单位',
+            Value: "<select class=\"my-combobox\" name=\"DianYa\" style=\"width:50px; \">" +
+                    "<option value=\"mV\">mV</option>" +
+                    "<option value=\"V\">V</option> " +
+                    "<option value=\"MV\">MV</option>" +
+                    "<option value=\"kV\">kV</option>  " +                   
+                    "<option value=\"μV\">μV</option> " +
+                   "</select>"
+        }
+        ,
+        {
             Code: 'DYDL',
             Remark: '电压单位',
             Value: "<select class=\"my-combobox\" name=\"DianYa\" style=\"width:50px; \">" +
@@ -557,6 +569,20 @@ DanWeiDDLHtmlArray = [
                     "<option value=\"MΩ\">MΩ</option>  " +
                     "<option value=\"kΩ\">kΩ</option>  " +
                     "<option value=\"mΩ\">mΩ</option>  " +
+                    "<option value=\"μΩ\">μΩ</option>  " +
+                   "</select>"
+        }
+                  ,
+        {
+            Code: 'OMM',
+            Remark: '欧姆',
+            Value: "<select class=\"my-combobox\" name=\"OM\" >" +
+                    "<option value=\"mΩ\">mΩ</option>  " +
+                    "<option value=\"Ω\">Ω</option> " +
+                    "<option value=\"TΩ\">TΩ</option>" +
+                    "<option value=\"GΩ\">GΩ</option>  " +
+                    "<option value=\"MΩ\">MΩ</option>  " +
+                    "<option value=\"kΩ\">kΩ</option>  " +                 
                     "<option value=\"μΩ\">μΩ</option>  " +
                    "</select>"
         }
@@ -2990,7 +3016,7 @@ RuleAttributeArray = [
                 //检测项属性单位下拉框选项单位类型1|检测项属性单位名称1,检测项属性单位名称2;单位类型2|检测项属性单位名称1,检测项属性单位名称2
                 //DianLiu:电流单位；DianYa:电压单位   
                 //DianLiu|RANGE_UNIT:量程,OUTPUT_VALUE_UNIT:输出示值,ACTUAL_OUTPUT_VALUE_UNIT：输出实际值;DianYa|READ_VALUE_UNIT:读数值',
-                DanWeiHtmlDDL: 'DianYa|OUTPUTVALUE;OM|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI,RELATIVEERROR',
+                DanWeiHtmlDDL: 'DianYaM|OUTPUTVALUE;OMM|READVALUE,ACTUALVALUE,SHIJISHUCHUZHI,RELATIVEERROR',
                 //READ_VALUE:读数值,ACTUAL_OUTPUT_VALUE:输出实际值,RELATIVE_ERROR:相对误差,UNCERTAINTY_DEGREE:不确定度,REMARK:注,CONCLUSION:结论
                 BuBaoCunShuJu: '',
                 //添加量程自动计算赋值列,检测项属性单位名称1,检测项属性单位名称2,
