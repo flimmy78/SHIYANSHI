@@ -641,7 +641,7 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
             var unitStr = "";
             if(unit=="A")
             {
-                unitStr = "(A";                
+                unitStr = "A(";                
             }
             else if(unit=="mv/A")
             {
