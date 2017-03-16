@@ -15356,5 +15356,37 @@
 			</TableFooterList>
 		</TableTemplate>
 
+    <TableTemplate>
+      <RuleID>169-2010_4_1</RuleID>
+      <DataRowIndex>-1</DataRowIndex>
+      <RemarkRowIndex>1366</RemarkRowIndex>
+      <ConclusionRowIndex>1367</ConclusionRowIndex>
+      <CellList>
+      </CellList>
+      <TableTitleList>
+        <RowInfo>
+          <RowNumber>1</RowNumber>
+          <RowIndex>1365</RowIndex>
+          <CellList>
+            <Cell>
+              <Code>statestandard</Code>
+              <ColIndex>-1</ColIndex>
+              <ColCount>0</ColCount>
+              <IsMergeSameValue>N</IsMergeSameValue>
+              <IsHideRowNull>N</IsHideRowNull>
+              <IsMergeNullValue>N</IsMergeNullValue>
+            </Cell>
+          </CellList>
+        </RowInfo>
+      </TableTitleList>
+      <TableFooterList>
+        <RowInfo>
+          <RowNumber>-1</RowNumber>
+          <RowIndex>-2</RowIndex>
+          <CellList/>
+        </RowInfo>
+      </TableFooterList>
+    </TableTemplate>
+
 	</TableTemplateList>
 </TableTemplates>
