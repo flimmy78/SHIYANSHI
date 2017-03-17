@@ -4256,6 +4256,22 @@ namespace Langben.Report
             HSSFRichTextString result = new HSSFRichTextString(value.Trim());
             if (workbook != null && value != null && value.Trim() != "")
             {
+                #region 处理第一位为斜体字符
+                List<string> firstList = ReportStatic.FirstSpecialCharacter();
+                if (firstList != null && firstList.FirstOrDefault(p => p.ToUpper() == value.Trim().ToUpper()) != null)
+                {
+                    #region 将字符设置成斜体
+
+                    HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                    normalFont.IsItalic = true;
+                    normalFont.FontName = "宋体";
+                    int startIndex = 0;
+                    int endIndex = 1;
+                    result.ApplyFont(startIndex, endIndex, normalFont);
+                    #endregion
+                }
+                #endregion
+
                 #region 处理备注特殊信息
                 if (remarkIndexList != null && remarkIndexList.Count > 0)
                 {
@@ -4399,7 +4415,7 @@ namespace Langben.Report
                     normalFont.IsItalic = true;
                     normalFont.FontName = "宋体";
                     int startIndex = 0;
-                    int endIndex = spec.Code.Trim().Length - 1;
+                    int endIndex = spec.Code.Trim().Length;
                     if (endIndex < 0)
                     {
                         endIndex = 0;

@@ -441,6 +441,19 @@ namespace Langben.Report
 
         }
         /// <summary>
+        /// 第一位斜体特殊字符信息
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> FirstSpecialCharacter()
+        {
+            List<string> result = new List<string>();
+            result.Add("U=100V");
+            result.Add("U=100/√3V");
+            result.Add("I=1A");
+            result.Add("I=5A");
+            return result;           
+        }
+        /// <summary>
         /// 备注特殊字符
         /// </summary>
         /// <returns></returns>
