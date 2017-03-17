@@ -454,6 +454,21 @@ namespace Langben.Report
             return result;           
         }
         /// <summary>
+        /// 特殊字符10号字体
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> SpecialCharacterFontHeightInPoints10()
+        {
+            List<string> result = new List<string>();
+            //result.Add("U=100V");
+            //result.Add("U=100/√3V");
+            //result.Add("I=1A");
+            //result.Add("I=5A");
+            result.Add("ΔI/I");
+            result.Add("ΔU/U");
+            return result;
+        }
+        /// <summary>
         /// 备注特殊字符
         /// </summary>
         /// <returns></returns>

@@ -4260,11 +4260,20 @@ namespace Langben.Report
                 List<string> firstList = ReportStatic.FirstSpecialCharacter();
                 if (firstList != null && firstList.FirstOrDefault(p => p.ToUpper() == value.Trim().ToUpper()) != null)
                 {
+                    #region 设置单元格字大小
+
+                    HSSFFont normalFont1 = (HSSFFont)workbook.CreateFont();
+                    //normalFont1.IsItalic = true;
+                    normalFont1.FontName = "宋体";
+                    normalFont1.FontHeightInPoints = 10;// 设置字体大小           
+                    result.ApplyFont(0, value.Trim().Length, normalFont1);
+                    #endregion 
                     #region 将字符设置成斜体
 
                     HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
                     normalFont.IsItalic = true;
                     normalFont.FontName = "宋体";
+                    //normalFont.FontHeightInPoints = 10;// 设置字体大小                 
                     int startIndex = 0;
                     int endIndex = 1;
                     result.ApplyFont(startIndex, endIndex, normalFont);
@@ -4414,6 +4423,11 @@ namespace Langben.Report
                     HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
                     normalFont.IsItalic = true;
                     normalFont.FontName = "宋体";
+                    List<string> FontHeightInPoints10List = ReportStatic.SpecialCharacterFontHeightInPoints10();
+                    if (FontHeightInPoints10List != null && FontHeightInPoints10List.FirstOrDefault(p=>p==value.Trim()) != null)
+                    {
+                        normalFont.FontHeightInPoints = 10;// 设置字体大小
+                    }
                     int startIndex = 0;
                     int endIndex = spec.Code.Trim().Length;
                     if (endIndex < 0)
