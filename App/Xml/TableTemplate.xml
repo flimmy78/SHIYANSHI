@@ -12830,9 +12830,9 @@
 					<Code>READVAL1</Code>
 					<ColIndex>3</ColIndex>
 					<ColCount>0</ColCount>
-					<IsMergeSameValue>Y</IsMergeSameValue>
+					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
-					<IsMergeNullValue>N</IsMergeNullValue>
+					<IsMergeNullValue>Y</IsMergeNullValue>
 				</Cell>
 				<Cell>
 					<Code>READVAL1_UNIT</Code>
