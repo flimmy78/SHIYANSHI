@@ -72,7 +72,10 @@ namespace Langben.App.Controllers
         public ActionResult Edit(string id)
         {
             ViewBag.Id = id;
-            return View();
+            COMPANYBLL combll = new COMPANYBLL();
+            COMPANY com = new COMPANY();
+            com = combll.GetById(id);
+            return View(com);
         }
 
         /// <summary>

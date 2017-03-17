@@ -61,27 +61,4 @@
 
 
 
-    <script type="text/javascript">
-
-        $(function () {
-            
-
-            // 获取待编辑内容并显示
-            var id = '@ViewBag.Id';
-            $.ajax({
-                url: "/api/COMPANYApi/Get/" + id,
-                type: "Get",
-                // async: false,
-                success: function (res) {
-                    $("#ID").val(res.ID); $("#COMPANYNAME").val(res.COMPANYNAME);
-                    $("#CREATEPERSON").val(res.CREATEPERSON);
-                    $("#CREATETIME").val(res.CREATETIME); 
-                }
-            })
-        });
-        
-
-    </script>
-
-
 
