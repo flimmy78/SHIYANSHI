@@ -11063,7 +11063,7 @@
 					<Code>bhzkhz</Code>
 					<ColIndex>0</ColIndex>
 					<ColCount>0</ColCount>
-					<IsMergeSameValue>N</IsMergeSameValue>
+					<IsMergeSameValue>Y</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
@@ -11097,7 +11097,7 @@
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
-					<IsMergeNullValue>Y</IsMergeNullValue>
+					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
 				<Cell>
 					<Code>READVAL1_UNIT</Code>
