@@ -2871,10 +2871,10 @@ namespace Langben.Report
                     //    continue;
                     //}
 
-                    //if (iVTEST_ITE.RULEID != "596-2012")
-                    //{
-                    //    continue;
-                    //}
+                    if (iVTEST_ITE.RULEID != "169-2010_6_2" && iVTEST_ITE.RULEID!= "169-2010_6_1")
+                    {
+                        continue;
+                    }
                     //if(iVTEST_ITE.RULEID!= "1085-2013_8" && iVTEST_ITE.RULEID!= "1085-2013_9" && iVTEST_ITE.RULEID != "1085-2013_10")
                     //{
                     //    continue;
@@ -5012,8 +5012,11 @@ namespace Langben.Report
 
             if (IsSameRuleName)
             {
-                //为了相同项表格底部没有线                     
-                SetBorderTop(sheet_Destination.Workbook, sheet_Destination, RowIndexT);
+                //为了相同项表格底部没有线   
+                if (iEntity.RULEID != "169-2010_6_2" && iEntity.RULEID != "169-2010_6_1" && type== ExportType.Report_JianDing)
+                {
+                    SetBorderTop(sheet_Destination.Workbook, sheet_Destination, RowIndexT);
+                }
             }
 
             #region 注、说明
