@@ -199,20 +199,20 @@
             if (BiaoChenData == "VA")
             {
                 //【有功分量-相对误差%】=100*（标称值/额定电流平方* cos-有功分量实测值）/有功分量实测值，小数点后两位，四舍六入，逢五奇进偶不进																																																																													
-                if (T1Data != "" && T9Data != "" && T4Data != "" && T7Data!="") {
+                if (T1Data != "" && T9Data != "" && T4Data != "" && T8Data != "") {
                     T1Data = parseFloat(T1Data);
                     T9Data = parseFloat(T9Data);
                     T4Data = parseFloat(T4Data);
-                    T7Data = parseFloat(T7Data);
-                    var jianfa1 = T1Data.div(accMul(T9Data, T9Data)).mul(T7Data);
+                    T8Data = parseFloat(T8Data);
+                    var jianfa1 = T1Data.div(accMul(T9Data, T9Data)).mul(T8Data);
                     var jianfa2 = accSub(jianfa1, T4Data);
                     var jianfa = accDiv(accMul(100, jianfa2), T4Data);
                     var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                     $(obj).parent().parent().find("#" + T5).val(data);
                 }
-                T7Data = parseFloat(T7Data);
+                T8Data = parseFloat(T8Data);
                 //【无功分量-相对误差%】=100*(标称值/额定电流平方*0.6-无功分量实测值)/无功分量实测值，小数点后两位，四舍六入，逢五奇进偶不进																																																																													
-                  if (T7Data == 0.8 && T1Data != "" && T9Data != "" && T6Data != "") {
+                if (T8Data == 0.8 && T1Data != "" && T9Data != "" && T6Data != "") {
                         T1Data = parseFloat(T1Data);
                         T9Data = parseFloat(T9Data);
                         T6Data = parseFloat(T6Data);
@@ -222,7 +222,7 @@
                         var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                         $(obj).parent().parent().find("#" + T7).val(data);
                       //【无功分量-相对误差%】=-(100*无功分量实测值/有功分量实测值)
-                  } else if (T7Data == 1 && T6Data != "" && T4Data != "") {
+                } else if (T8Data == 1 && T6Data != "" && T4Data != "") {
                       T6Data = parseFloat(T6Data);
                       T4Data = parseFloat(T4Data);
                       var jianfa1 = accMul(100, T6Data);
@@ -236,18 +236,18 @@
             } else if (BiaoChenData == "Ω") // // 标称值Ω		
             {
                 //电流Ω【有功分量-相对误差%】=100*（有功分量实测值-标称值*cos）/标称值，小数点后两位，四舍六入，逢五奇进偶不进		
-                if (T1Data != "" && T4Data != "" && T7Data != "") {
+                if (T1Data != "" && T4Data != "" && T8Data != "") {
                     T1Data = parseFloat(T1Data);
                     T4Data = parseFloat(T4Data);
-                    T7Data = parseFloat(T7Data);
-                    var jianfa1 = accSub(T4Data, accMul(T1Data,T7Data));
+                    T8Data = parseFloat(T8Data);
+                    var jianfa1 = accSub(T4Data, accMul(T1Data,T8Data));
                     var jianfa = accDiv(accMul(100, jianfa1), T1Data);
                     var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                     $(obj).parent().parent().find("#" + T5).val(data);
                 }
-                T7Data = parseFloat(T7Data);
+                T8Data = parseFloat(T8Data);
                 //电流Ω【无功分量-相对误差%】=100*(无功分量实测值-标称值*0.6)/标称值，小数点后两位，四舍六入，逢五奇进偶不进																																																																													
-                if (T1Data != "" && T6Data != "" && T7Data == 0.8) {
+                if (T1Data != "" && T6Data != "" && T8Data == 0.8) {
 
                     T1Data = parseFloat(T1Data);
                     T6Data = parseFloat(T6Data);
@@ -256,7 +256,7 @@
                     var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
                     $(obj).parent().parent().find("#" + T7).val(data);
                     //【无功分量-相对误差%】=-(100*无功分量实测值/有功分量实测值)
-                } else if (T7Data == 1 && T6Data != "" && T4Data != "") {
+                } else if (T8Data == 1 && T6Data != "" && T4Data != "") {
                     T6Data = parseFloat(T6Data);
                     T4Data = parseFloat(T4Data);
                     var jianfa1 = accMul(100, T6Data);

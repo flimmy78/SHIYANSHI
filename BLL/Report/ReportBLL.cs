@@ -4919,7 +4919,7 @@ namespace Langben.Report
                                 sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).SetCellValue(value);
                                 if (d.mergedRowNum > 1)//多行单元格合并
                                 {
-                                    if ((iEntity.RULEID == "440-2008_10" && type == ExportType.Report_JianDing) || (iEntity.RULEID == "1075-2001_3_1" && type == ExportType.Report_JianDing) || (iEntity.RULEID == "169-2010_4_2"))//解决单元格无法合并问题，目前没找到原因
+                                    if ((iEntity.RULEID == "440-2008_10" && type == ExportType.Report_JianDing) || (iEntity.RULEID == "1075-2001_3_1" && type == ExportType.Report_JianDing) || (iEntity.RULEID == "169-2010_4_2") || (iEntity.RULEID== "984-2004_2"))//解决单元格无法合并问题，目前没找到原因
                                     {
                                         for (int k = 0; k < 5; k++)
                                         {
