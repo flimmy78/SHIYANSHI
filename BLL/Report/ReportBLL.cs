@@ -2871,10 +2871,10 @@ namespace Langben.Report
                     //    continue;
                     //}
 
-                    //if (iVTEST_ITE.RULEID != "596-2012")
-                    //{
-                    //    continue;
-                    //}
+                    if (iVTEST_ITE.RULEID != "169-2010_6_2" && iVTEST_ITE.RULEID!= "169-2010_6_1")
+                    {
+                        continue;
+                    }
                     //if(iVTEST_ITE.RULEID!= "1085-2013_8" && iVTEST_ITE.RULEID!= "1085-2013_9" && iVTEST_ITE.RULEID != "1085-2013_10")
                     //{
                     //    continue;
@@ -4256,6 +4256,31 @@ namespace Langben.Report
             HSSFRichTextString result = new HSSFRichTextString(value.Trim());
             if (workbook != null && value != null && value.Trim() != "")
             {
+                #region 处理第一位为斜体字符
+                List<string> firstList = ReportStatic.FirstSpecialCharacter();
+                if (firstList != null && firstList.FirstOrDefault(p => p.ToUpper() == value.Trim().ToUpper()) != null)
+                {
+                    #region 设置单元格字大小
+
+                    HSSFFont normalFont1 = (HSSFFont)workbook.CreateFont();
+                    //normalFont1.IsItalic = true;
+                    normalFont1.FontName = "宋体";
+                    normalFont1.FontHeightInPoints = 10;// 设置字体大小           
+                    result.ApplyFont(0, value.Trim().Length, normalFont1);
+                    #endregion 
+                    #region 将字符设置成斜体
+
+                    HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                    normalFont.IsItalic = true;
+                    normalFont.FontName = "宋体";
+                    //normalFont.FontHeightInPoints = 10;// 设置字体大小                 
+                    int startIndex = 0;
+                    int endIndex = 1;
+                    result.ApplyFont(startIndex, endIndex, normalFont);
+                    #endregion
+                }
+                #endregion
+
                 #region 处理备注特殊信息
                 if (remarkIndexList != null && remarkIndexList.Count > 0)
                 {
@@ -4398,8 +4423,13 @@ namespace Langben.Report
                     HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
                     normalFont.IsItalic = true;
                     normalFont.FontName = "宋体";
+                    List<string> FontHeightInPoints10List = ReportStatic.SpecialCharacterFontHeightInPoints10();
+                    if (FontHeightInPoints10List != null && FontHeightInPoints10List.FirstOrDefault(p=>p==value.Trim()) != null)
+                    {
+                        normalFont.FontHeightInPoints = 10;// 设置字体大小
+                    }
                     int startIndex = 0;
-                    int endIndex = spec.Code.Trim().Length - 1;
+                    int endIndex = spec.Code.Trim().Length;
                     if (endIndex < 0)
                     {
                         endIndex = 0;
@@ -4919,7 +4949,7 @@ namespace Langben.Report
                                 sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).SetCellValue(value);
                                 if (d.mergedRowNum > 1)//多行单元格合并
                                 {
-                                    if ((iEntity.RULEID == "440-2008_10" && type == ExportType.Report_JianDing) || (iEntity.RULEID == "1075-2001_3_1" && type == ExportType.Report_JianDing) || (iEntity.RULEID == "169-2010_4_2"))//解决单元格无法合并问题，目前没找到原因
+                                    if ((iEntity.RULEID == "440-2008_10" && type == ExportType.Report_JianDing) || (iEntity.RULEID == "1075-2001_3_1" && type == ExportType.Report_JianDing) || (iEntity.RULEID == "169-2010_4_2") || (iEntity.RULEID== "984-2004_2"))//解决单元格无法合并问题，目前没找到原因
                                     {
                                         for (int k = 0; k < 5; k++)
                                         {
@@ -4982,8 +5012,11 @@ namespace Langben.Report
 
             if (IsSameRuleName)
             {
-                //为了相同项表格底部没有线                     
-                SetBorderTop(sheet_Destination.Workbook, sheet_Destination, RowIndexT);
+                //为了相同项表格底部没有线   
+                if (iEntity.RULEID != "169-2010_6_2" && iEntity.RULEID != "169-2010_6_1" && type== ExportType.Report_JianDing)
+                {
+                    SetBorderTop(sheet_Destination.Workbook, sheet_Destination, RowIndexT);
+                }
             }
 
             #region 注、说明
