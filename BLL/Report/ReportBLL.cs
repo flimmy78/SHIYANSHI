@@ -2871,10 +2871,10 @@ namespace Langben.Report
                     //    continue;
                     //}
 
-                    if (iVTEST_ITE.RULEID != "169-2010_6_2" && iVTEST_ITE.RULEID!= "169-2010_6_1")
-                    {
-                        continue;
-                    }
+                    //if (iVTEST_ITE.RULEID != "169-2010_6_2" && iVTEST_ITE.RULEID!= "169-2010_6_1")
+                    //{
+                    //    continue;
+                    //}
                     //if(iVTEST_ITE.RULEID!= "1085-2013_8" && iVTEST_ITE.RULEID!= "1085-2013_9" && iVTEST_ITE.RULEID != "1085-2013_10")
                     //{
                     //    continue;
