@@ -27,9 +27,9 @@
                 <br>
 
                 <div id="divtable">
-                    <h2 class="f14 mt10"> 不确定度/准确度等级/最大允许误差 </h2>
+                    <h2 class="f14 mt10" style="color:red;"> 不确定度,准确度等级,最大允许误差,3个必须选择填写其中一个的数据</h2>
                     <label>
-                        <input type="radio" name="three" id="three_1" onclick="radio.check()" checked="checked" />
+                        <input type="radio" name="three" id="three_1" onclick="radio.check()"   />
                         准确度等级
                     </label>
                     <div class="mt10" id="div1">
@@ -553,7 +553,7 @@
     function ifshujuA(m) {
         var zhi = "";
         if (m.ALLOWABLE_ERROR == null) {
-            zhi += "不确定度/准确度等级/最大允许误差不能为空！<br>";
+            zhi += "不确定度,准确度等级,最大允许误差,3个必须选择填写其中一个的数据！<br>";
         }
         if (m.METERING_STANDARD_DEVICE_CHECK.length == 0) {
             zhi += "证书信息不能为空！<br>";
