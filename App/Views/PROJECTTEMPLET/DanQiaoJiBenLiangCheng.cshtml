@@ -34,14 +34,14 @@
                         <option value="0.001">0.001</option>
                     </select>
                 </div>
-                    <div class="fl mr">准确度等级：<input class="my-textbox " value="" type="text" name="zhidingwucha" id="zhidingwucha_t_1_1"></div>
-                </div>
-                
+                <div class="fl mr">准确度等级：<input class="my-textbox " value="" type="text" name="zhidingwucha" id="zhidingwucha_t_1_1"></div>
+            </div>
+
 
 
         </td>
     </tr>
-   
+
     <tr>
         <th width="80" rowspan="3" align="center">序号</th>
         <th colspan="3" align="center">
@@ -171,7 +171,7 @@
 
             // $('#dlg').dialog('open');//一个量程的需要注释这一行，打开弹出框
             $("#hideDangQianTongDao").val(tbodyIndex); CreateRow();
-           
+
 
         }
         //增加行
@@ -203,7 +203,7 @@
                 //需要合并的列
 
                 //测量点
-               htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, (rowLength).toString(), "classstyle120"));
+                htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, (rowLength).toString(), "classstyle120"));
                 //二次输入标准值
                 htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100", '', 'resetXianShiZhi'));
                 //标准输出值
@@ -229,14 +229,42 @@
         //计算显示值
         function resetXianShiZhi(obj) {
             //重新计算当前行
-            xiangDuiWuCha(obj, "ACTUALVALUE", "READVALUE", "SHIJISHUCHUZHI");
+            pageWuCha(obj, "ACTUALVALUE", "READVALUE", "ACTUALVALUE", "SHIJISHUCHUZHI", "yunxuwucha");
+
+
         }
         function resetXianShiZhi2(obj) {
             //重新计算当前行
-            xiangDuiWuCha(obj, "UNCERTAINTYDEGREE", "RELATIVEERROR", "UNCERTAINTYDEGREE2");
+            pageWuCha(obj, "UNCERTAINTYDEGREE", "RELATIVEERROR", "UNCERTAINTYDEGREE", "UNCERTAINTYDEGREE2", "yunxuwucha2");
         }
 
-       
+        function pageWuCha(obj, first, second, third, gold, pointObj) {
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+
+            first = first + id;//改动的地方，参与计算的列的name值
+            second = second + id;//改动的地方，参与计算的列的name值
+            third = third + id;
+            gold = gold + id;//改动的地方，误差的列的name值
+
+            pointObj = pointObj + id;
+
+            var firstData = $(obj).parent().parent().find("#" + first).val();
+            var secondData = $(obj).parent().parent().find("#" + second).val();
+            var thirdData = $(obj).parent().parent().find("#" + third).val();
+            if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
+                var txtPoint = $("#" + pointObj).val().toString(); //小数点位数
+                var pointLength = (txtPoint.split('.').length > 1 ? txtPoint.split('.')[1].length + 1 : 1);
+
+                var jianfa = accDiv(accSub(firstData, secondData), thirdData) * 100;
+                var data1 = (fomatFloat(jianfa, pointLength), pointLength);
+
+                var data = zeroFloat(fomatFloat(jianfa, pointLength), pointLength);
+                $(obj).parent().parent().find("#" + gold).val(data);
+            }
+        }
+
 
     </script>
 
