@@ -380,43 +380,24 @@
         var id = 0;
         //*******************************************不确定度
         $("#div6").find("ul").each(function () {
-
-            //var ASSESSMENTITEM = $(this).find("li :selected").eq(0).val();//评定项
-            //var THERANGESCOPE = $(this).find("li :input").eq(3).val();//量程范围起
-            //var THEUNIT = $(this).find("li :selected").eq(1).val();//起单位
-            //var THERELATIONSHIP = $(this).find("li :selected").eq(2).val();//起关系
-            //var ENDRANGESCOPE = $(this).find("li :input").eq(2).val();//量程范围止
-            //var ENDUNIT = $(this).find("li :selected").eq(3).val();//止单位
-            //var ENDRELATIONSHIP = $(this).find("li :selected").eq(4).val();//止关系
-            //var THEFREQUENCY = $(this).find("li :input").eq(10).val();//频率范围起
-            //var THEUNITFREQUENCY = $(this).find("li :selected").eq(5).val();//起单位
-            //var THERELATIONSHIPFREQUENCY = $(this).find("li :selected").eq(6).val();//频率起关系
-            //var ENDFREQUENCY = $(this).find("li :input").eq(13).val();//频率范围止
-            //var ENDUNITFREQUENCY = $(this).find("li :selected").eq(7).val();//频率止单位
-            //var ENDRELATIONSHIPFREQUENCY = $(this).find("li :selected").eq(8).val();//频率止关系
-            //var INDEX1 = $(this).find("li :input").eq(16).val();//指标1
-            //var INDEX1UNIT = $(this).find("li :selected").eq(9).val();//指标1单位
-            //var INDEX2 = $(this).find("li :input").eq(18).val();//指标2
-            //var INDEX2UNIT = $(this).find("li :selected").eq(10).val();//指标2单位
-            //var NOTE = $(this).find("li :input").eq(20).val();//备注
-            var ASSESSMENTITEM = $("#ASSESSMENTITEM_"+id+"").val();//评定项
-            var THERANGESCOPE = $("#THERANGESCOPE_" + id + "").val();//量程范围起
-            var THEUNIT = $("#THEUNIT_" + id + "").val();//起单位
-            var THERELATIONSHIP = $("#THERELATIONSHIP_" + id + "").val();//起关系
-            var ENDRANGESCOPE = $("#ENDRANGESCOPE_" + id + "").val();//量程范围止
-            var ENDUNIT = $("#ENDUNIT_" + id + "").val();//止单位
-            var ENDRELATIONSHIP = $("#ENDRELATIONSHIP_" + id + "").val()//止关系
-            var THEFREQUENCY = $("#THEFREQUENCY_" + id + "").val();//频率范围起
-            var THEUNITFREQUENCY = $("#THEUNITFREQUENCY_" + id + "").val();//起单位
-            var THERELATIONSHIPFREQUENCY = $("#THERELATIONSHIPFREQUENCY_" + id + "").val();//频率起关系
-            var ENDFREQUENCY = $("#ENDFREQUENCY_" + id + "").val();//频率范围止
-            var ENDUNITFREQUENCY = $("#ENDUNITFREQUENCY_" + id + "").val();//频率止单位
-            var ENDRELATIONSHIPFREQUENCY = $("#ENDRELATIONSHIPFREQUENCY_" + id + "").val();//频率止关系
-            var INDEX1 = $("#INDEX1_" + id + "").val();//指标1
-            var INDEX1UNIT = $("#INDEX1UNIT_" + id + "").val();//指标1单位
-            var INDEX2 = $("#INDEX2_" + id + "").val();//指标2
-            var INDEX2UNIT = $("#INDEX2UNIT_" + id + "").val();//指标2单位
-            var NOTE = $("#NOTE_" + id + "").val();//备注
+            var ASSESSMENTITEM = $(this).find("[name=ASSESSMENTITEM]").val();//评定项
+            var THERANGESCOPE = $(this).find("[name=THERANGESCOPE]").val();//量程范围起
+            var THEUNIT = $(this).find("[name=THEUNIT]").val();//起单位
+            var THERELATIONSHIP = $(this).find("[name=THERELATIONSHIP]").val();//起关系
+            var ENDRANGESCOPE = $(this).find("[name=ENDRANGESCOPE]").val();//量程范围止
+            var ENDUNIT = $(this).find("[name=ENDUNIT]").val();//止单位
+            var ENDRELATIONSHIP = $(this).find("[name=ENDRELATIONSHIP]").val();//止关系
+            var THEFREQUENCY = $(this).find("[name=THEFREQUENCY]").val();//频率范围起
+            var THEUNITFREQUENCY = $(this).find("[name=THEUNITFREQUENCY]").val();//起单位
+            var THERELATIONSHIPFREQUENCY = $(this).find("[name=THERELATIONSHIPFREQUENCY]").val();//频率起关系
+            var ENDFREQUENCY = $(this).find("[name=ENDFREQUENCY]").val();//频率范围止
+            var ENDUNITFREQUENCY = $(this).find("[name=ENDUNITFREQUENCY]").val();//频率止单位
+            var ENDRELATIONSHIPFREQUENCY = $(this).find("[name=ENDRELATIONSHIPFREQUENCY]").val();//频率止关系
+            var INDEX1 = $(this).find("[name=INDEX1]").val();//指标1
+            var INDEX1UNIT = $(this).find("[name=INDEX1UNIT]").val();//指标1单位
+            var INDEX2 = $(this).find("[name=INDEX2]").val();//指标2
+            var INDEX2UNIT = $(this).find("[name=INDEX2UNIT]").val();//指标2单位
+            var NOTE = $(this).find("[name=NOTE]").val();//备注        
             var CATEGORY = "UB";
             var GROUPS = "@ViewBag.groups";
             var ID = $("#XID_" + id + "").html();
@@ -440,7 +421,9 @@
                 success: function (data) {
                     if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
                     else if (data.Code == 1) {
-                        $.messager.alert('操作提示', "修改成功！", 'info');
+                        $.messager.alert('操作提示', "修改成功！", 'info', function myfunction() {
+                            BackList('UNCERTAINTYTABLE/IndexUB');
+                        });
                         return false;
                     }
                     else {
