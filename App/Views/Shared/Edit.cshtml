@@ -65,13 +65,13 @@
         });
     </script>
 </head>
-<body class=""> 
+<body class="easyui-layout">
     <div class="mbx">
         @RenderSection("CurentPlace", false)
     </div>
 
-        @Html.ValidationSummary(true)
-        @RenderBody()
+    @Html.ValidationSummary(true)
+    @RenderBody()
 
 </body>
 </html>
