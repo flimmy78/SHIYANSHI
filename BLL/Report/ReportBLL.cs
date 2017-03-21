@@ -33,6 +33,7 @@ namespace Langben.Report
         /// 模板中所有的合并的单元格
         /// </summary>
         Dictionary<string, List<CellRangeAddress>> returnList = new Dictionary<string, List<CellRangeAddress>>();
+        List<int> DeleteRowList = new List<int>();
         /// <summary>
         ///  获取合并区域信息
         /// </summary>
@@ -2981,6 +2982,7 @@ namespace Langben.Report
             string sheetName_Destination = "数据";
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
+            bool IsHaveHideData = false;//是否有隐藏数据 解决缺少线问题 
             #region 检测项目            
             if (vList != null && vList.Count > 0)
             {
@@ -3001,7 +3003,7 @@ namespace Langben.Report
                     //    continue;
                     //}
 
-                    //if (iVTEST_ITE.RULEID != "169-2010_6_2" && iVTEST_ITE.RULEID!= "169-2010_6_1")
+                    //if (iVTEST_ITE.RULEID != "1264-2010_3_1" && iVTEST_ITE.RULEID != "1264-2010_3_2")
                     //{
                     //    continue;
                     //}
@@ -3101,12 +3103,21 @@ namespace Langben.Report
                         )
                         && SameRuleName == iVTEST_ITE.NAME)
                     {
-                        HideRow(sheet_Destination, RowIndex - 2, 2);
+                        // HideRow(sheet_Destination, RowIndex - 2, 2);
+
+                        //DeleteRow(sheet_Destination, RowIndex);
+                        //RowIndex--;
+                        DeleteRow(sheet_Destination, RowIndex - 2);
+                        DeleteRow(sheet_Destination, RowIndex - 2);
+                        RowIndex = RowIndex - 2;
 
                         IsSameRuleName = true;
                     }
                     else
                     {
+                        //sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue(celStr);
+                        //RowIndex++;
+                        IsHaveHideData = false;
                         i++;
                     }
 
@@ -3130,7 +3141,7 @@ namespace Langben.Report
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
                         //解析html表格数据    
                         //int RowIndexT = RowIndex;                       
-                        RowIndex = paserData_1(iEntity, IsSameRuleName, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters, type, iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan);
+                        RowIndex = paserData_1(iEntity, IsSameRuleName, sheet_Source, sheet_Destination, RowIndex, temp,ref IsHaveHideData, allSpecialCharacters, type, iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan);
 
                         //if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
 
@@ -3180,12 +3191,37 @@ namespace Langben.Report
 
                 }
             }
+
+           
+            
             #endregion
             //结尾             
             CopyRow(sheet_Source, sheet_Destination, JWTemplateIndex, RowIndex, 1, true);
+            //删除所有无用行数据
+            DeleteAllRow(sheet_Destination);
             //设置页面页脚
             SetHeaderAndFooter(sheet_Destination, entity, type);
+
+
+
+
             sheet_Destination.ForceFormulaRecalculation = true;
+        }
+        /// <summary>
+        /// 删除所有没用的行，解决线问题
+        /// </summary>
+        private void DeleteAllRow(ISheet sheet)
+        {
+            if(DeleteRowList!=null && DeleteRowList.Count>0)
+            {
+                DeleteRowList = DeleteRowList.Distinct().ToList();
+                int count = 0;
+                for(int i=0;i<DeleteRowList.Count;i++)
+                {
+                    DeleteRow(sheet, DeleteRowList[i]-count);
+                    count++;
+                }
+            }
         }
         /// <summary>
         /// S化整合并数据
@@ -4748,8 +4784,10 @@ namespace Langben.Report
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <param name="iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan">电能标准偏差估计值检测项（为了解决s化整问题）</param>
         /// <returns></returns>
-        private int paserData_1(QUALIFIED_UNQUALIFIED_TEST_ITE iEntity, bool IsSameRuleName, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, SpecialCharacters allSpecialCharacters = null, ExportType type = ExportType.OriginalRecord_JianDing, QUALIFIED_UNQUALIFIED_TEST_ITE iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan = null)
+        private int paserData_1(QUALIFIED_UNQUALIFIED_TEST_ITE iEntity, bool IsSameRuleName, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, ref bool isHaveHideData,SpecialCharacters allSpecialCharacters = null, ExportType type = ExportType.OriginalRecord_JianDing, QUALIFIED_UNQUALIFIED_TEST_ITE iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan = null)
         {
+            //isHaveHideData = false;
+            bool IsHaveHideData1 = isHaveHideData;
             int RowIndexT = rowIndex_Destination;
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(iEntity.HTMLVALUE);
@@ -5002,6 +5040,10 @@ namespace Langben.Report
                                     CopyRow_1(sheet_Source, sheet_Destination, t.RowIndex + k, rowIndex_Destination, 1, true, temp.TableTitleList, allSpecialCharacters, headDic[tongDaoID]);
                                     rowIndex_Destination++;
                                 }
+                                if(IsHaveHideData1 && k==0)
+                                {
+                                    SetBorderTop(sheet_Destination.Workbook, sheet_Destination, rowIndex_Destination - 1);
+                                }
 
 
                             }
@@ -5071,6 +5113,8 @@ namespace Langben.Report
                                 if ((value == null || string.IsNullOrWhiteSpace(value.String)) && temp.Cells.FirstOrDefault(p => p.Code == d.name) != null && temp.Cells.FirstOrDefault(p => p.Code == d.name).IsHideRowNull == "Y")
                                 {
                                     HideRow(sheet_Destination, c.FirstRow, 1);
+                                    isHaveHideData = true;
+                                    //DeleteRowList.Add(c.FirstRow);
                                 }
                                 else if ((value == null || string.IsNullOrWhiteSpace(value.String)) && d.name.IndexOf("_UNIT") < 0)
                                 {
@@ -5083,7 +5127,8 @@ namespace Langben.Report
                                         (iEntity.RULEID == "1075-2001_3_1") || 
                                         (iEntity.RULEID == "169-2010_4_2") || 
                                         (iEntity.RULEID== "984-2004_2") ||
-                                        (iEntity.RULEID== "1085-2013_6_1"))//解决单元格无法合并问题，目前没找到原因
+                                        (iEntity.RULEID== "1085-2013_6_1") ||
+                                        (iEntity.RULEID== "169-2010_4_3"))//解决单元格无法合并问题，目前没找到原因
                                     {
                                         for (int k = 0; k <= d.mergedRowNum+1; k++)
                                         {
@@ -5147,7 +5192,8 @@ namespace Langben.Report
             if (IsSameRuleName)
             {
                 //为了相同项表格底部没有线   
-                if (iEntity.RULEID != "169-2010_6_2" && iEntity.RULEID != "169-2010_6_1" && type== ExportType.Report_JianDing)
+                if ((iEntity.RULEID != "169-2010_6_2" && iEntity.RULEID != "169-2010_6_1" && iEntity.RULEID!= "169-2010_6_3" && iEntity.RULEID!= "169-2010_6_4" && type== ExportType.Report_JianDing) &&
+                    (iEntity.RULEID != "169-2010_4_2" && iEntity.RULEID != "169-2010_4_3" && iEntity.RULEID!= "169-2010_4_1" && type== ExportType.Report_JianDing))
                 {
                     SetBorderTop(sheet_Destination.Workbook, sheet_Destination, RowIndexT);
                 }
@@ -5208,7 +5254,7 @@ namespace Langben.Report
                 //画底部不确定表格及填充数据
                 for (int i = 0; i < buDueDingDu_DiBu.Count; i++)
                 {
-                    CopyRow_1(sheet_Source, sheet_Destination, 1368, rowIndex_Destination, 1, true, rowInfoList, allSpecialCharacters, buDueDingDu_DiBu.Data);
+                    CopyRow_1(sheet_Source, sheet_Destination, 1368, rowIndex_Destination, 1, true, rowInfoList, allSpecialCharacters, buDueDingDu_DiBu.Data,true);
                     rowIndex_Destination = rowIndex_Destination + 1;
                 }
 
@@ -5218,8 +5264,8 @@ namespace Langben.Report
 
             //为了表格底部没有线           
             CopyRow(sheet_Source, sheet_Destination, 4, rowIndex_Destination, 1, true);
-            // 
-            if (iEntity.RULEID == "1085-2013_8" || iEntity.RULEID == "1085-2013_9" || iEntity.RULEID == "124-2005_3" ||
+                        
+            if (iEntity.RULEID == "1085-2013_8" || iEntity.RULEID == "1085-2013_9" || iEntity.RULEID == "124-2005_3" || iEntity.RULEID== "169-2010_4_1"||
                 ((iEntity.RULEID == "440-2008_9" || iEntity.RULEID == "169-2010_4_2" || iEntity.RULEID == "169-2010_4_3" ||
                  iEntity.RULEID == "169-2010_5" || iEntity.RULEID == "169-2010_6_1" || iEntity.RULEID == "169-2010_6_2") && type == ExportType.Report_JianDing))
             {
@@ -5232,9 +5278,11 @@ namespace Langben.Report
                     targetCell.CellStyle = style;
                 }
 
+
             }
             else if (iEntity.RULEID == "169-2010_5")
-            {
+            {              
+
                 ICellStyle style = sheet_Destination.Workbook.CreateCellStyle();
                 style.BorderBottom = BorderStyle.None;
                 style.BorderTop = BorderStyle.None;
@@ -5247,9 +5295,6 @@ namespace Langben.Report
                     }
                 }
             }
-
-
-
             return rowIndex_Destination;
         }
 
@@ -5267,6 +5312,17 @@ namespace Langben.Report
                 sourceRow.Height = 0;
                 startRowIndex++;
             }
+        }
+        /// <summary>
+        /// 删除行
+        /// </summary>
+        /// <param name="sheet"></param>
+        /// <param name="fowIndex">行号</param>        
+        private void DeleteRow(ISheet sheet,int RowIndex)
+        {
+            IRow sourceRow = sheet.GetRow(RowIndex);
+            sheet.RemoveRow(sourceRow);
+            sheet.ShiftRows(RowIndex+1, sheet.LastRowNum, -1);
         }
 
         /// <summary>
