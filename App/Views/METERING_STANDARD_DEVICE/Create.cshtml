@@ -610,68 +610,6 @@
             return true;
         }
     }
-    function ifshujuUB(m) {
-        var zhi = "";
-        if (isNull(m.UNCERTAINTYTABLE.ASSESSMENTITEM)) {
-            zhi += "评定项不能为空！<br>";
-        }
-        if (isNull(m.UNCERTAINTYTABLE.THERANGESCOPE)) {
-            zhi += "量程范围起不能为空！<br>";
-        }
-        if (isNull(m.UNCERTAINTYTABLE.ERRORLIMITS)) {
-            zhi += "起单位不能为空！<br>";
-        }
-        if (isNull(m.UNCERTAINTYTABLE.THERELATIONSHIP)) {
-            zhi += "起关系不能为空！<br>";
-        }
-        if (isNull(m.UNCERTAINTYTABLE.ENDRANGESCOPE)) {
-            zhi += "量程范围止不能为空！<br>";
-        }
-        if (isNull(m.UNCERTAINTYTABLE.ENDUNIT)) {
-            zhi += "止单位不能为空！<br>";
-        }
-        if (isNull(m.UNCERTAINTYTABLE.ENDRELATIONSHIP)) {
-            zhi += "止关系不能为空！<br>";
-        }
-        if (isNull(m.UNCERTAINTYTABLE.THEFREQUENCY)) {
-            zhi += "频率范围起不能为空！<br>";
-        }
-        if (isNull(m.UNCERTAINTYTABLE.THEUNITFREQUENCY)) {
-            zhi += "频率范围起单位不能为空！<br>";
-        }
-        if (isNull(m.UNCERTAINTYTABLE.THERELATIONSHIPFREQUENCY)) {
-            zhi += "频率范围起关系不能为空！<br>";
-        }
-        if (isNull(m.UNCERTAINTYTABLE.ENDFREQUENCY)) {
-            zhi += "频率范围止不能为空！<br>";
-        }
-        if (isNull(m.UNCERTAINTYTABLE.ENDUNITFREQUENCY)) {
-            zhi += "频率范围止单位不能为空！<br>";
-        }
-        if (isNull(m.UNCERTAINTYTABLE.ENDRELATIONSHIPFREQUENCY)) {
-            zhi += "频率范围止关系指标不能为空！<br>";
-        }
-        if (isNull(m.UNCERTAINTYTABLE.INDEX1)) {
-            zhi += "指标1不能为空！<br>";
-        }
-        if (isNull(m.UNCERTAINTYTABLE.INDEX1UNIT)) {
-            zhi += "指标1单位不能为空！<br>";
-        }
-        if (isNull(m.UNCERTAINTYTABLE.INDEX2)) {
-            zhi += "指标2不能为空！<br>";
-        }
-        if (isNull(m.UNCERTAINTYTABLE.INDEX2UNIT)) {
-            zhi += "指标2单位不能为空！<br>";
-        }
-        if (zhi != "") {
-            $.messager.alert('操作提示', "" + zhi + "", 'info');
-            return false;
-        }
-        else {
-            //return false;
-            return true;
-        }
-    }
     function isNull(str) {
         if (str == "") return true;
         var regu = "^[ ]+$";
