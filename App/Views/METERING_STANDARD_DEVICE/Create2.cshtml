@@ -144,7 +144,7 @@
                     </li>
                     <li class="fl mr10">
                         指标2：
-                        <input class="my-textbox " value="" name="ENDUNITFREQUENCY">
+                        <input class="my-textbox " value="" name="INDEX1">
                     </li>
                     <li class="fl mr10">
                         指标2单位：
@@ -300,7 +300,7 @@
             getCity($("#INDEX2UNIT_" + idx));
             tianjiazhi("THEUNIT_" + +idx + ",ENDUNIT_" + +idx + ",INDEX1UNIT_" + +idx + ",INDEX2UNIT_" + +idx + "", "电压")
         }
-        else if (zhi == "5720A直流电阻输出" || zhi == "8508A直流电阻测量") {
+        else if (zhi == "8508A直流电阻输出" || zhi == "5720A直流电阻测量") {
             getCity($("#THEUNIT_" + idx));
             getCity($("#ENDUNIT_" + idx));
             getCity($("#INDEX1UNIT_" + idx));
@@ -386,7 +386,9 @@
                 success: function (data) {
                     if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
                     else if (data.Code == 1) {
-                        $.messager.alert('操作提示', "新增成功！", 'info');
+                        $.messager.alert('操作提示', "新增成功！", 'info', function myfunction() {
+                            window.location.href = '/UNCERTAINTYTABLE/IndexUB';
+                        });
                         return false;
                     }
                     else {

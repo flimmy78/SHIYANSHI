@@ -122,7 +122,7 @@ namespace Langben.App.Controllers
                 //entity.CreateTime = DateTime.Now;
                 //entity.CreatePerson = currentPerson;
                 int groups = 1;
-                string currentPerson = GetCurrentPerson();
+                Account acc = GetCurrentAccount();
 
                 List<UNCERTAINTYTABLE> list = m_BLL.GetByRefMETERING_STANDARD_DEVICEID(entity.ID);
                 var data = (from f in list select f.GROUPS).Max();
@@ -134,7 +134,7 @@ namespace Langben.App.Controllers
                 foreach (var item in entity.UNCERTAINTYTABLE)
                 {
                     item.CREATETIME = DateTime.Now;
-                    item.CREATEPERSON = currentPerson;
+                    item.CREATEPERSON = acc.PersonName;
                     item.ID = Result.GetNewId();
                     item.GROUPS = groups;
                     if (m_BLL.Create(ref validationErrors, item))
@@ -169,20 +169,31 @@ namespace Langben.App.Controllers
             result.Message = Suggestion.InsertFail + "，请核对输入的数据的格式"; //提示输入的数据的格式不对 
             return result;
         }
+
+        /// <summary>
+        /// 指标保存
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         [System.Web.Http.HttpPost]
         public Common.ClientResult.Result InstUAUB2([FromBody]List<UNCERTAINTYTABLE> entity)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             if (entity != null && ModelState.IsValid)
             {
+                var data1 = m_BLL.GetAll();
+                var data2 = (from f in data1 select f.GROUPS).Max();
                 foreach (var item in entity)
                 {
-                    string currentPerson = GetCurrentPerson();
+                    Account acc = GetCurrentAccount();
                     string returnValue = string.Empty;
                     item.CREATETIME = DateTime.Now;
-                    item.CREATEPERSON = currentPerson;
+                    item.CREATEPERSON = acc.PersonName;
                     item.ID = Result.GetNewId();
-
+                    if (data2 != null)
+                    {
+                        item.GROUPS = data2 + 1;
+                    }
                     if (m_BLL.Create(ref validationErrors, item))
                     {
                         LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，不确定度的信息的Id为" + item.ID, "不确定度"
@@ -205,15 +216,89 @@ namespace Langben.App.Controllers
                             );//写入日志                      
                         result.Code = Common.ClientCode.Fail;
                         result.Message = Suggestion.InsertFail + returnValue;
-                      //  return result; //提示插入失败
+                        return result; //提示插入失败
                     }
                     //return result;
                 }
             }
-        
+
             return result;
         }
+        /// <summary>
+        /// 指标修改
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        [System.Web.Http.HttpPost]
+        public Common.ClientResult.Result ZhiShiUpdate([FromBody]List<UNCERTAINTYTABLE> entity)
+        {
+            Common.ClientResult.Result result = new Common.ClientResult.Result();
+            if (entity != null && ModelState.IsValid)
+            {
+                foreach (var item in entity)
+                {
+                    Account acc = GetCurrentAccount();
+                    string returnValue = string.Empty;
+                    item.CREATETIME = DateTime.Now;
+                    item.CREATEPERSON = acc.PersonName;
+                    if (item.ID == null)
+                    {
+                        item.ID = Result.GetNewId();
+                        if (m_BLL.Create(ref validationErrors, item))
+                        {
+                            LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，不确定度的信息的Id为" + item.ID, "不确定度"
+                                );//写入日志 
+                            result.Code = Common.ClientCode.Succeed;
+                            result.Message = Suggestion.InsertSucceed;
+                            //return result; //提示创建成功
+                        }
+                        else
+                        {
+                            if (validationErrors != null && validationErrors.Count > 0)
+                            {
+                                validationErrors.All(a =>
+                                {
+                                    returnValue += a.ErrorMessage;
+                                    return true;
+                                });
+                            }
+                            LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，不确定度的信息，" + returnValue, "不确定度"
+                                );//写入日志                      
+                            result.Code = Common.ClientCode.Fail;
+                            result.Message = Suggestion.InsertFail + returnValue;
+                            return result; //提示插入失败
+                        }
+                    }
+                    if (m_BLL.EditField(ref validationErrors, item))
+                    {
+                        LogClassModels.WriteServiceLog(Suggestion.InsertSucceed + "，不确定度的信息的Id为" + item.ID, "不确定度"
+                            );//写入日志 
+                        result.Code = Common.ClientCode.Succeed;
+                        result.Message = Suggestion.UpdateSucceed;
+                        //return result; //提示创建成功
+                    }
+                    else
+                    {
+                        if (validationErrors != null && validationErrors.Count > 0)
+                        {
+                            validationErrors.All(a =>
+                            {
+                                returnValue += a.ErrorMessage;
+                                return true;
+                            });
+                        }
+                        LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，不确定度的信息，" + returnValue, "不确定度"
+                            );//写入日志                      
+                        result.Code = Common.ClientCode.Fail;
+                        result.Message = Suggestion.UpdateFail + returnValue;
+                        return result; //提示插入失败
+                    }
+                    //return result;
+                }
+            }
 
+            return result;
+        }
 
         // PUT api/<controller>/5
         /// <summary>
@@ -413,11 +498,11 @@ namespace Langben.App.Controllers
                     ASSESSMENTITEM = s.ASSESSMENTITEM,
                     ERRORSOURCES = s.ERRORSOURCES,
                     ERRORLIMITS = s.ERRORLIMITS,
-                    ERRORLIMITUNIT=s.ERRORLIMITUNIT,
+                    ERRORLIMITUNIT = s.ERRORLIMITUNIT,
                     THEERRODISTRIBUTION = s.THEERRODISTRIBUTION,
                     KVALE = s.KVALE,
                     UNCERTAINTYUI = s.UNCERTAINTYUI,
-                    UNCERTAINTYUIUNIT=s.UNCERTAINTYUIUNIT,
+                    UNCERTAINTYUIUNIT = s.UNCERTAINTYUIUNIT,
                     GROUPS = s.GROUPS,
                     METERING_STANDARD_DEVICEID = id,
                     CATEGORY = s.CATEGORY
@@ -441,12 +526,14 @@ namespace Langben.App.Controllers
             string INDEX2 = string.Empty;//指标2
             decimal? GROUPS = 0;
             string CATEGORY = string.Empty;//类型
+            string ID = string.Empty;
+            //id
             //分组
             //var data = (from f in msd
             //            select f.CATEGORY).Distinct();
-            var data = msd.Where(w => w.ASSESSMENTITEM != null).Select(m => m.ASSESSMENTITEM).Distinct();
+            // var data = msd.Where(w => w.CATEGORY == "UB").Select(m => m.ASSESSMENTITEM).Distinct();
 
-
+            var data = msd.Where(w => w.CATEGORY == "UB").Select(m => m.GROUPS).Distinct();
             List<UNCERTAINTYTABLE> alldata = new List<UNCERTAINTYTABLE>();
 
             foreach (var item in data)
@@ -456,9 +543,11 @@ namespace Langben.App.Controllers
                 THEFREQUENCY = null;
                 INDEX1 = null;
                 INDEX2 = null;
+                ID = null;
                 //计量标准装置检定/校准信息
-                foreach (var it in msd.Where(w => w.ASSESSMENTITEM == item))
+                foreach (var it in msd.Where(w => w.GROUPS == item))
                 {
+                    ID += it.ID + ",";
                     ASSESSMENTITEM = it.ASSESSMENTITEM;
                     THERANGESCOPE += it.THERANGESCOPE + it.THEUNIT + it.THERELATIONSHIP + it.ENDRANGESCOPE + it.ENDUNIT + it.ENDRELATIONSHIP + ",";
                     THEFREQUENCY += it.THEFREQUENCY + it.THEUNITFREQUENCY + it.THERELATIONSHIPFREQUENCY + it.ENDFREQUENCY + it.ENDUNITFREQUENCY + it.ENDRELATIONSHIPFREQUENCY + ",";
@@ -469,6 +558,7 @@ namespace Langben.App.Controllers
                 }
                 alldata.Add(new UNCERTAINTYTABLE()
                 {
+                    ID = ID,
                     ASSESSMENTITEM = ASSESSMENTITEM,
                     THERANGESCOPE = THERANGESCOPE,
                     THEFREQUENCY = THEFREQUENCY,
@@ -484,6 +574,7 @@ namespace Langben.App.Controllers
                 total = alldata.Count,
                 rows = alldata.Select(s => new
                 {
+                    ID = s.ID.TrimEnd(','),
                     ASSESSMENTITEM = s.ASSESSMENTITEM.TrimEnd(','),
                     THERANGESCOPE = s.THERANGESCOPE.TrimEnd(','),
                     THEFREQUENCY = s.THEFREQUENCY.TrimEnd(','),

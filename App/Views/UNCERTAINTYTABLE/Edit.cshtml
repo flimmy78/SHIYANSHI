@@ -1,242 +1,509 @@
-﻿@model Langben.DAL.UNCERTAINTYTABLE
+﻿@model Langben.App.Models.METERING_STANDARD_DEVICEShow
 
 @{
     Layout = "~/Views/Shared/Edit.cshtml";
 }
 @using Common
 @using Models
- @section CurentPlace {
-    修改  
+@section CurentPlace {
+    修改
 }
 
 @using (Html.BeginForm("", "api/UNCERTAINTYTABLEApi/Put"))
 {
+    <style type="text/css">
+    ul {
+        border-bottom: 1px solid #d4d4d4;
+        padding-bottom: 5px;
+    }
+
+    li {
+        width: 235px;
+        height: 26px;
+        margin-bottom: 5px;
+    }
+
+        li label {
+            display: inline;
+            width: 40px;
+        }
+
+        li .my-textbox {
+            width: 150px;
+        }
+
+    .divcss5-b {
+        margin-left: 10px;
+        overflow:auto; 
+    }
+</style>
     <fieldset>
         <legend>
-            <input class="a2 f2" type="submit" value="修改" />
-            <input class="a2 f2" type="button" onclick="BackList('UNCERTAINTYTABLE')" value="返回列表" />
+            <input class="a2 f2" type="button" value="修改"  onclick="baocun()"/>
+            <input class="a2 f2" type="button" onclick="BackList('UNCERTAINTYTABLE/IndexUB')" value="返回列表" />
         </legend>
-        <div class="bigdiv">
-                 
-            <div class="editor-label">
-                @Html.LabelFor(model => model.NOTE)：
+        <div class="divcss5-b">
+            <label>
+                范围指标
+            </label>
+            <div class="mt10" id="div6">
+                @foreach (var item in Model.UNCERTAINTYTABLEShow)
+                {                 
+                    <ul class="clear mt10">
+                        <li id="XID_@item.GROUPS" style="display:none">@item.ID</li>                       
+                        <li class="fl mr10">
+                            <label>评定项：</label>
+                            <input type="hidden" id="ASSESSMENTITEM_x_@item.GROUPS" value="@item.ASSESSMENTITEM" />
+                            <select class="my-combobox" name="ASSESSMENTITEM" onchange="gradeChange(this)" id="ASSESSMENTITEM_@item.GROUPS">
+                                <option value="">请选择</option>
+                                <option value="5720A交流电流测量">5720A交流电流测量</option>
+                                <option value="5720A交流电压测量单相">5720A交流电压测量单相</option>
+                                <option value="5720A交流电压测量三相">5720A交流电压测量三相</option>
+                                <option value="5720A直流电流测量">5720A直流电流测量</option>
+                                <option value="5720A直流电压测量">5720A直流电压测量</option>
+                                <option value="5720A直流电阻测量">5720A直流电阻测量</option>
+                                <option value="8508A交流电流输出">85080A交流电流输出</option>
+                                <option value="8508A交流电压变换器">8508A交流电压变换器</option>
+                                <option value="8508A交流电压输出">8508A交流电压输出</option>
+                                <option value="8508A直流电流输出">8508A直流电流输出</option>
+                                <option value="8508A直流电压输出">8508A直流电压输出</option>
+                                <option value="8508A直流电阻输出">8508A直流电阻输出</option>
+                            </select>
+                        </li>
+                        <li class="fl mr10">
+                            量程范围起：
+                            <input type="hidden" id="THERANGESCOPE_x_@item.GROUPS" value="@item.THERANGESCOPE" />
+                            <input class="my-textbox " value="" name="THERANGESCOPE" id="THERANGESCOPE_@item.GROUPS">
+                        </li>
+                        <li class="fl mr10">
+                            起单位：
+                            <input type="hidden" id="THEUNIT_x_@item.GROUPS" value="@item.THEUNIT" />
+                            <select class="my-combobox" name="THEUNIT" id="THEUNIT_@item.GROUPS">
+                                <option value="">请选择</option>
+                            </select>
+                        </li>
+                        <li class="fl mr10">
+                            起关系：
+                            <input type="hidden" id="THERELATIONSHIP_x_@item.GROUPS" value="@item.THERELATIONSHIP" />
+                            <select class="my-combobox" name="THERELATIONSHIP" id="THERELATIONSHIP_@item.GROUPS">
+                                <option value="">请选择</option>
+                                <option value=">">></option>
+                                <option value=">=">>=</option>
+
+                            </select>
+                        </li>
+                        <li class="fl mr10">
+                            量程范围止：
+                            <input type="hidden" id="ENDRANGESCOPE_x_@item.GROUPS" value="@item.ENDRANGESCOPE" />
+                            <input class="my-textbox " value="" name="ENDRANGESCOPE" id="ENDRANGESCOPE_@item.GROUPS">
+                        </li>
+                        <li class="fl mr10">
+                            止单位：
+                            <input type="hidden" id="ENDUNIT_x_@item.GROUPS" value="@item.ENDUNIT" />
+                            <select class="my-combobox" name="ENDUNIT" id="ENDUNIT_@item.GROUPS">
+                                <option value="">请选择</option>
+                            </select>
+                        </li>
+                        <li class="fl mr10">
+                            止关系：
+                            <input type="hidden" id="ENDRELATIONSHIP_x_@item.GROUPS" value="@item.ENDRELATIONSHIP" />
+                            <select class="my-combobox" name="ENDRELATIONSHIP" id="ENDRELATIONSHIP_@item.GROUPS">
+                                <option value="">请选择</option>
+                                <option value="<"><</option>
+                                <option value="<="><=</option>
+
+                            </select>
+                        </li>
+                        <li class="fl mr10">
+                            频率范围起：
+                            <input type="hidden" id="THEFREQUENCY_x_@item.GROUPS" value="@item.THEFREQUENCY" />
+                            <input class="my-textbox " value="" name="THEFREQUENCY" id="THEFREQUENCY_@item.GROUPS">
+                        </li>
+                        <li class="fl mr10">
+                            起单位：
+                            <input type="hidden" id="THEUNITFREQUENCY_x_@item.GROUPS" value="@item.THEUNITFREQUENCY" />
+                            <select class="my-combobox" name="THEUNITFREQUENCY" id="THEUNITFREQUENCY_@item.GROUPS">
+                                <option value="">请选择</option>
+                                <option value="Hz">Hz</option>
+                                <option value="kHz">kHz</option>
+                                <option value="MHz">MHz</option>
+                                <option value="GHz">GHz</option>
+                            </select>
+                        </li>
+                        <li class="fl mr10">
+                            频率起关系：
+                            <input type="hidden" id="THERELATIONSHIPFREQUENCY_x_@item.GROUPS" value="@item.THERELATIONSHIPFREQUENCY" />
+                            <select class="my-combobox" name="THERELATIONSHIPFREQUENCY" id="THERELATIONSHIPFREQUENCY_@item.GROUPS">
+                                <option value="">请选择</option>
+                                <option value=">">></option>
+                                <option value=">=">>=</option>
+
+                            </select>
+                        </li>
+                        <li class="fl mr10">
+                            频率范围止：
+                            <input type="hidden" id="ENDFREQUENCY_x_@item.GROUPS" value="@item.ENDFREQUENCY" />
+                            <input class="my-textbox " value="" name="ENDFREQUENCY" id="ENDFREQUENCY_@item.GROUPS">
+                        </li>
+                        <li class="fl mr10">
+                            频率止单位：
+                            <input type="hidden" id="ENDUNITFREQUENCY_x_@item.GROUPS" value="@item.ENDUNITFREQUENCY" />
+                            <select class="my-combobox" name="ENDUNITFREQUENCY" id="ENDUNITFREQUENCY_@item.GROUPS">
+                                <option value="">请选择</option>
+                                <option value="Hz">Hz</option>
+                                <option value="kHz">kHz</option>
+                                <option value="MHz">MHz</option>
+                                <option value="GHz">GHz</option>
+                            </select>
+                        </li>
+                        <li class="fl mr10">
+                            频率止关系：
+                            <input type="hidden" id="ENDRELATIONSHIPFREQUENCY_x_@item.GROUPS" value="@item.ENDRELATIONSHIPFREQUENCY" />
+                            <select class="my-combobox" name="ENDRELATIONSHIPFREQUENCY" id="ENDRELATIONSHIPFREQUENCY_@item.GROUPS">
+                                <option value="">请选择</option>
+                                <option value="<"><</option>
+                                <option value="<="><=</option>
+
+                            </select>
+                        </li>
+                        <li class="fl mr10">
+                            指标1：
+                            <input type="hidden" id="INDEX1_x_@item.GROUPS" value="@item.INDEX1" />
+                            <input class="my-textbox " value="" name="INDEX1" id="INDEX1_@item.GROUPS">
+
+                        </li>
+                        <li class="fl mr10">
+                            指标1单位：
+                            <input type="hidden" id="INDEX1UNIT_x_@item.GROUPS" value="@item.INDEX1UNIT" />
+                            <select class="my-combobox" name="INDEX1UNIT" id="INDEX1UNIT_@item.GROUPS">
+                                <option value="">请选择</option>
+                            </select>
+                        </li>
+                        <li class="fl mr10">
+                            指标2：
+                            <input type="hidden" id="INDEX2_x_@item.GROUPS" value="@item.INDEX2" />
+                            <input class="my-textbox " value="" name="INDEX2" id="INDEX2_@item.GROUPS">
+                        </li>
+                        <li class="fl mr10">
+                            指标2单位：
+                            <input type="hidden" id="INDEX2UNIT_x_@item.GROUPS" value="@item.INDEX2UNIT" />
+                            <select class="my-combobox" name="INDEX2UNIT" id="INDEX2UNIT_@item.GROUPS">
+                                <option value="">请选择</option>
+                            </select>
+                        </li>
+                        <li class="fl mr10">
+                            备注：
+                            <input type="hidden" id="NOTE_x_@item.GROUPS" value="@item.NOTE" />
+                            <input class="my-textbox" value="" name="NOTE" id="NOTE_@item.GROUPS">
+                        </li>
+                        <li class="fr " style="width:auto"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a></li>
+                    </ul>
+
+                }
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.NOTE)
-                @Html.ValidationMessageFor(model => model.NOTE)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.INDEX2UNIT)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.INDEX2UNIT)
-                @Html.ValidationMessageFor(model => model.INDEX2UNIT)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.INDEX2)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.INDEX2)
-                @Html.ValidationMessageFor(model => model.INDEX2)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.INDEX1UNIT)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.INDEX1UNIT)
-                @Html.ValidationMessageFor(model => model.INDEX1UNIT)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.INDEX1)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.INDEX1)
-                @Html.ValidationMessageFor(model => model.INDEX1)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ENDUNITFREQUENCY)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.ENDUNITFREQUENCY)
-                @Html.ValidationMessageFor(model => model.ENDUNITFREQUENCY)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ENDRELATIONSHIPFREQUENCY)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.ENDRELATIONSHIPFREQUENCY)
-                @Html.ValidationMessageFor(model => model.ENDRELATIONSHIPFREQUENCY)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.THERELATIONSHIPFREQUENCY)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.THERELATIONSHIPFREQUENCY)
-                @Html.ValidationMessageFor(model => model.THERELATIONSHIPFREQUENCY)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.THEUNITFREQUENCY)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.THEUNITFREQUENCY)
-                @Html.ValidationMessageFor(model => model.THEUNITFREQUENCY)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.THEFREQUENCY)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.THEFREQUENCY)
-                @Html.ValidationMessageFor(model => model.THEFREQUENCY)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ENDRELATIONSHIP)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.ENDRELATIONSHIP)
-                @Html.ValidationMessageFor(model => model.ENDRELATIONSHIP)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ENDUNIT)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.ENDUNIT)
-                @Html.ValidationMessageFor(model => model.ENDUNIT)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ENDRANGESCOPE)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.ENDRANGESCOPE)
-                @Html.ValidationMessageFor(model => model.ENDRANGESCOPE)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.THERELATIONSHIP)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.THERELATIONSHIP)
-                @Html.ValidationMessageFor(model => model.THERELATIONSHIP)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.THEUNIT)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.THEUNIT)
-                @Html.ValidationMessageFor(model => model.THEUNIT)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.THERANGESCOPE)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.THERANGESCOPE)
-                @Html.ValidationMessageFor(model => model.THERANGESCOPE)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.KVALE)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.KVALE)
-                @Html.ValidationMessageFor(model => model.KVALE)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.THEERRODISTRIBUTION)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.THEERRODISTRIBUTION)
-                @Html.ValidationMessageFor(model => model.THEERRODISTRIBUTION)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ERRORLIMITUNIT)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.ERRORLIMITUNIT)
-                @Html.ValidationMessageFor(model => model.ERRORLIMITUNIT)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ERRORLIMITS)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.ERRORLIMITS)
-                @Html.ValidationMessageFor(model => model.ERRORLIMITS)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ERRORSOURCES)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.ERRORSOURCES)
-                @Html.ValidationMessageFor(model => model.ERRORSOURCES)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ASSESSMENTITEM)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.ASSESSMENTITEM)
-                @Html.ValidationMessageFor(model => model.ASSESSMENTITEM)
-            </div>@Html.HiddenFor(model => model.CREATETIME )      
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CREATEPERSON)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CREATEPERSON)
-                @Html.ValidationMessageFor(model => model.CREATEPERSON)
-            </div>     
-            <div class="editor-label">
-                @Html.LabelFor(model => model.UPDATEPERSON)：
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.UPDATEPERSON)
-                @Html.ValidationMessageFor(model => model.UPDATEPERSON)
-            </div>      
-            <div class="editor-label">
-                <a class="anUnderLine" onclick="showModalOnly('METERING_STANDARD_DEVICEID','../../METERING_STANDARD_DEVICE');">
-                    @Html.LabelFor(model => model.METERING_STANDARD_DEVICEID) 
-                </a>：
-            </div>
-            <div class="editor-field">
-                <div id="checkMETERING_STANDARD_DEVICEID">
-                        @if(Model!=null)
-                        {
-                        if (null != Model.METERING_STANDARD_DEVICEID)                      
-                        { 
-                    <table id="@Model.METERING_STANDARD_DEVICEID"
-                        class="deleteStyle">
-                        <tr>
-                            <td>
-                                <img alt="删除"  title="点击删除" onclick="deleteTable('@Model.METERING_STANDARD_DEVICEID ','METERING_STANDARD_DEVICEID');" src="../../../Images/deleteimge.png" />
-                            </td>
-                            <td>
-                                @Model.METERING_STANDARD_DEVICE.NAME
-                            </td>
-                        </tr>
-                    </table>
-                    }} 
-                </div>
-                @Html.HiddenFor(model => model.METERING_STANDARD_DEVICEID)
-            </div>@Html.HiddenFor(model => model.ID ) 
         </div>
+        <script>
+
+        var radio = {
+            check: function () {
+                var obj = $("input[name='three']:checked");
+                var id = obj.attr("id");
+                switch (id) {
+                    case ("three_1"):
+                        var row = $("#div2 ul");
+                        var row2 = $("#div3 ul");
+                        row.each(function () {
+                            if ($("#div2 ul").length > 1)
+                                $(this).remove();
+                            else
+                                $("#div2").find(":text,:selected,select,textarea").each(function () {
+                                    $(this).val("");
+                                    //$(this).combobox('select', "");
+                                })
+                        })
+                        row2.each(function () {
+                            if ($("#div3 ul").length > 1)
+                                $(this).remove();
+                            else
+                                $("#div3").find(":text,:selected,select,textarea").each(function () {
+                                    $(this).val("");
+                                    //$(this).combobox('select', "");
+                                })
+                        })
+                        break
+                    case ("three_2"):
+                        var row = $("#div1 ul");
+                        var row2 = $("#div3 ul");
+                        row.each(function () {
+                            if ($("#div1 ul").length > 1)
+                                $(this).remove();
+                            else
+                                $("#div1").find(":text,:selected,select,textarea").each(function () {
+                                    $(this).val("");
+                                    //$(this).combobox('select', "");
+                                })
+                        })
+                        row2.each(function () {
+                            if ($("#div3 ul").length > 1)
+                                $(this).remove();
+                            else
+                                $("#div3").find(":text,:selected,select,textarea").each(function () {
+                                    $(this).val("");
+                                    //$(this).combobox('select', "");
+                                })
+                        })
+                        break
+                    case ("three_3"):
+                        var row = $("#div2 ul");
+                        var row2 = $("#div1 ul");
+                        row.each(function () {
+                            if ($("#div2 ul").length > 1)
+                                $(this).remove();
+                            else
+                                $("#div2").find(":text,:selected,select,textarea").each(function () {
+                                    $(this).val("");
+                                    //$(this).combobox('select', "");
+                                })
+                        })
+                        row2.each(function () {
+                            if ($("#div1 ul").length > 1)
+                                $(this).remove();
+                            else
+                                $("#div1").find(":text,:selected,select,textarea").each(function () {
+                                    $(this).val("");
+                                    //$(this).combobox('select', "");
+                                })
+                        })
+                        break
+                    default:
+
+                }
+
+
+            }
+        }
+        var curIdx = 1;
+        var linkButton = {
+            add: function (obj) {
+                var h = $(obj).parents('div ul').clone();
+                curIdx = curIdx + 1;
+                $('li', h).each(function () {
+
+                    if ($(this).children('select'). attr("id") != undefined)
+                        $(this).children('select').attr("id", ($(this).children('select').attr("id").split("_")[0] +"_"+ curIdx))
+
+                })
+                var html = $(obj).parents('div ul').html();
+               // var html2 = html.replace(/id="\w*"/, "");
+               // var html2 = html2.replace("onchange=\"gradeChange(this)\"", "");
+                var newRow = " <ul class=\"clear mt10\">" + $(h).html() + "</ul>";
+                var parDiv = $(obj).parents('div ul').parent()
+                var newobj = $(parDiv).append(newRow);
+
+                // $.parser.parse();
+            },
+            del: function (obj) {
+                var row = $(obj).parents('div ul');
+                if ($(row).parent().children().length > 1)
+                    $(row).remove();
+                else
+                    alert('就剩一行了你还删除呀？');
+            }
+        }
+
+        </script>
     </fieldset>
 }
 
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
+    //下拉框选择事件
+    function gradeChange(ex) {
+        var zhi = $(ex).val();
+        var idx = $(ex).attr("id").split("_")[1];
+        if (zhi == "5720A交流电流测量" || zhi == "5720A直流电流测量" || zhi == "85080A交流电流输出" || zhi == "8508A直流电流输出") {
+            getCity($("#THEUNIT_" + idx));
+            getCity($("#ENDUNIT_" + idx));
+            getCity($("#INDEX1UNIT_" + idx));
+            getCity($("#INDEX2UNIT_" + idx));
+            tianjiazhi("THEUNIT_" + +idx + ",ENDUNIT_" + +idx + ",INDEX1UNIT_" + +idx + ",INDEX2UNIT_" + +idx + "", "电流")
+        }
+        else if (zhi == "5720A交流电压测量单相" || zhi == "5720A交流电压测量三相" || zhi == "5720A直流电压测量" || zhi == "8508A交流电压变换器" || zhi == "8508A交流电压输出" || zhi == "8508A直流电压输出") {
+            getCity($("#THEUNIT_" + idx));
+            getCity($("#ENDUNIT_" + idx));
+            getCity($("#INDEX1UNIT_" + idx));
+            getCity($("#INDEX2UNIT_" + idx));
+            tianjiazhi("THEUNIT_" + +idx + ",ENDUNIT_" + +idx + ",INDEX1UNIT_" + +idx + ",INDEX2UNIT_" + +idx + "", "电压")
+        }
+        else if (zhi == "8508A直流电阻输出" || zhi == "5720A直流电阻测量") {
+            getCity($("#THEUNIT_" + idx));
+            getCity($("#ENDUNIT_" + idx));
+            getCity($("#INDEX1UNIT_" + idx));
+            getCity($("#INDEX2UNIT_" + idx));
+            tianjiazhi("THEUNIT_" + +idx + ",ENDUNIT_" + +idx + ",INDEX1UNIT_" + +idx + ",INDEX2UNIT_" + +idx + "", "电阻")
+        }
+    }
+    function tianjiazhi(sun, lei) {
+        var lst = sun.split(',');
+        if (lei == "电流") {
+            for (var i = 0; i < lst.length; i++) {
+                $("#" + lst[i] + "").append('<option value="A">A</option><option value="mA">mA</option><option value="μA">μA</option><option value="nA">nA</option><option value="pA">pA</option><option value="kA">kA</option>');
+            }
+        }
+        else if (lei == "电压") {
+            for (var i = 0; i < lst.length; i++) {
+                $("#" + lst[i] + "").append('<option value="V">V</option><option value="mV">mV</option><option value="μV">μV</option><option value="kV">kV</option><option value="MV">MV</option>');
+            }
+        }
+        else if (lei == "电阻") {
+            for (var i = 0; i < lst.length; i++) {
+                $("#" + lst[i] + "").append('<option value="Ω">Ω</option><option value="TΩ">TΩ</option><option value="GΩ">GΩ</option><option value="MΩ">MΩ</option><option value="kΩ">kΩ</option><option value="mΩ">mΩ</option><option value="μΩ">μΩ</option>');
+            }
+        }
+    }
+    function getCity(City) {
+        $(City).empty();
+        $("<option></option>")
+                .val("")
+                .text("请选择")
+                .appendTo($(City));
+    }
+    //保存
+    function baocun() {
 
-        $(function () {
-            
+        debugger;
 
-            // 获取待编辑内容并显示
-            var id = '@ViewBag.Id';
+        var myArray6 = new Array();
+        var UNCERTAINTYTABLE = new Object();
+        var id = 0;
+        //*******************************************不确定度
+        $("#div6").find("ul").each(function () {
+            var ASSESSMENTITEM = $(this).find("[name=ASSESSMENTITEM]").val();//评定项
+            var THERANGESCOPE = $(this).find("[name=THERANGESCOPE]").val();//量程范围起
+            var THEUNIT = $(this).find("[name=THEUNIT]").val();//起单位
+            var THERELATIONSHIP = $(this).find("[name=THERELATIONSHIP]").val();//起关系
+            var ENDRANGESCOPE = $(this).find("[name=ENDRANGESCOPE]").val();//量程范围止
+            var ENDUNIT = $(this).find("[name=ENDUNIT]").val();//止单位
+            var ENDRELATIONSHIP = $(this).find("[name=ENDRELATIONSHIP]").val();//止关系
+            var THEFREQUENCY = $(this).find("[name=THEFREQUENCY]").val();//频率范围起
+            var THEUNITFREQUENCY = $(this).find("[name=THEUNITFREQUENCY]").val();//起单位
+            var THERELATIONSHIPFREQUENCY = $(this).find("[name=THERELATIONSHIPFREQUENCY]").val();//频率起关系
+            var ENDFREQUENCY = $(this).find("[name=ENDFREQUENCY]").val();//频率范围止
+            var ENDUNITFREQUENCY = $(this).find("[name=ENDUNITFREQUENCY]").val();//频率止单位
+            var ENDRELATIONSHIPFREQUENCY = $(this).find("[name=ENDRELATIONSHIPFREQUENCY]").val();//频率止关系
+            var INDEX1 = $(this).find("[name=INDEX1]").val();//指标1
+            var INDEX1UNIT = $(this).find("[name=INDEX1UNIT]").val();//指标1单位
+            var INDEX2 = $(this).find("[name=INDEX2]").val();//指标2
+            var INDEX2UNIT = $(this).find("[name=INDEX2UNIT]").val();//指标2单位
+            var NOTE = $(this).find("[name=NOTE]").val();//备注        
+            var CATEGORY = "UB";
+            var GROUPS = "@ViewBag.groups";
+            var ID = $("#XID_" + id + "").html();
+            if (ASSESSMENTITEM != null || THERANGESCOPE != null || THEUNIT != null || THERELATIONSHIP != null || ENDRANGESCOPE != null || ENDUNIT != null || ENDRELATIONSHIP != null || THEFREQUENCY != null || THEUNITFREQUENCY != null || THERELATIONSHIPFREQUENCY != null || ENDFREQUENCY != null || ENDUNITFREQUENCY != null || ENDRELATIONSHIPFREQUENCY != null || INDEX1 != null || INDEX1UNIT != null || INDEX2 != null || INDEX2UNIT != null || NOTE != null) {
+                myArray6.push({GROUPS:GROUPS, ID: ID, METERING_STANDARD_DEVICEID: null, ASSESSMENTITEM: ASSESSMENTITEM, THERANGESCOPE: THERANGESCOPE, THEUNIT: THEUNIT, THERELATIONSHIP: THERELATIONSHIP, ENDRANGESCOPE: ENDRANGESCOPE, ENDUNIT: ENDUNIT, ENDRELATIONSHIP: ENDRELATIONSHIP, THEFREQUENCY: THEFREQUENCY, THEUNITFREQUENCY: THEUNITFREQUENCY, THERELATIONSHIPFREQUENCY: THERELATIONSHIPFREQUENCY, ENDFREQUENCY: ENDFREQUENCY, ENDUNITFREQUENCY: ENDUNITFREQUENCY, ENDRELATIONSHIPFREQUENCY: ENDRELATIONSHIPFREQUENCY, INDEX1: INDEX1, INDEX1UNIT: INDEX1UNIT, INDEX2: INDEX2, INDEX2UNIT: INDEX2UNIT, NOTE: NOTE, CATEGORY: CATEGORY });
+            }
+            id++;
+        })
+        //*****************************************************
+
+
+        //调用后台方法
+        if (ifshujuUB(myArray6[0])) {
             $.ajax({
-                url: "/api/UNCERTAINTYTABLEApi/" + id,
-                type: "POST",
-                // async: false,
-                success: function (res) {
-                    $("#NOTE").val(res.NOTE);$("#INDEX2UNIT").val(res.INDEX2UNIT);$("#INDEX2").val(res.INDEX2);$("#INDEX1UNIT").val(res.INDEX1UNIT);$("#INDEX1").val(res.INDEX1);$("#ENDUNITFREQUENCY").val(res.ENDUNITFREQUENCY);$("#ENDRELATIONSHIPFREQUENCY").val(res.ENDRELATIONSHIPFREQUENCY);$("#THERELATIONSHIPFREQUENCY").val(res.THERELATIONSHIPFREQUENCY);$("#THEUNITFREQUENCY").val(res.THEUNITFREQUENCY);$("#THEFREQUENCY").val(res.THEFREQUENCY);$("#ENDRELATIONSHIP").val(res.ENDRELATIONSHIP);$("#ENDUNIT").val(res.ENDUNIT);$("#ENDRANGESCOPE").val(res.ENDRANGESCOPE);$("#THERELATIONSHIP").val(res.THERELATIONSHIP);$("#THEUNIT").val(res.THEUNIT);$("#THERANGESCOPE").val(res.THERANGESCOPE);$("#KVALE").val(res.KVALE);$("#THEERRODISTRIBUTION").val(res.THEERRODISTRIBUTION);$("#ERRORLIMITUNIT").val(res.ERRORLIMITUNIT);$("#ERRORLIMITS").val(res.ERRORLIMITS);$("#ERRORSOURCES").val(res.ERRORSOURCES);$("#ASSESSMENTITEM").val(res.ASSESSMENTITEM);$("#CREATETIME").val(res.CREATETIME);$("#CREATEPERSON").val(res.CREATEPERSON);$("#UPDATEPERSON").val(res.UPDATEPERSON);$("#ID").val(res.ID);
+                url: "/api/UNCERTAINTYTABLEApi/ZhiShiUpdate",
+                type: "Post",
+
+                dataType: "json",
+                data: JSON.stringify(myArray6),
+                contentType: 'application/json; charset=utf-8',//将json数据以request payload的形式发起请求
+                success: function (data) {
+                    if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                    else if (data.Code == 1) {
+                        $.messager.alert('操作提示', "修改成功！", 'info', function myfunction() {
+                            BackList('UNCERTAINTYTABLE/IndexUB');
+                        });
+                        return false;
+                    }
+                    else {
+                        if ($.messager) {
+                            $.messager.defaults.ok = '继续';
+                            $.messager.defaults.cancel = '返回';
+
+                            $.messager.confirm('操作提示', "修改失败！", function (r) {
+                                if (!r) {
+                                    window.location.href = '/UNCERTAINTYTABLE/IndexUB';
+                                }
+                            });
+                        }
+                    }
                 }
             })
-        });
-        
+        }
 
-    </script>
+    }
+    function ifshujuUB(m) {
+        var zhi = "";
+
+        if (m.ASSESSMENTITEM == '' || m.ASSESSMENTITEM == 'undefined') {
+            zhi += "评定项不能为空！<br>";
+        }
 
 
 
+
+        if (zhi != "") {
+            $.messager.alert('操作提示', "" + zhi + "", 'info');
+            return false;
+        }
+        else {
+            //return false;
+            return true;
+        }
+    }
+    function isNull(str) {
+        if (str == '' || str == 'undefined') {
+            return true;
+        }
+
+        var regu = "^[ ]+$";
+        var re = new RegExp(regu);
+        return re.test(str);
+    }
+    $(function () {
+        var s = "@Model.UNCERTAINTYTABLEShow.Count";
+        for (var i = 0; i < s; i++) {
+            var zhi = $("#ASSESSMENTITEM_x_" + i + "").val();
+            if (zhi == "5720A交流电流测量" || zhi == "5720A直流电流测量" || zhi == "85080A交流电流输出" || zhi == "8508A直流电流输出") {
+                tianjiazhi("THEUNIT_" + +i + ",ENDUNIT_" + +i + ",INDEX1UNIT_" + +i + ",INDEX2UNIT_" + +i + "", "电流")
+            }
+            else if (zhi == "5720A交流电压测量单相" || zhi == "5720A交流电压测量三相" || zhi == "5720A直流电压测量" || zhi == "8508A交流电压变换器" || zhi == "8508A交流电压输出" || zhi == "8508A直流电压输出") {
+                tianjiazhi("THEUNIT_" + +i + ",ENDUNIT_" + +i + ",INDEX1UNIT_" + +i + ",INDEX2UNIT_" + +i + "", "电压")
+            }
+            else if (zhi == "8508A直流电阻输出" || zhi == "5720A直流电阻测量") {
+                tianjiazhi("THEUNIT_" + +i + ",ENDUNIT_" + +i + ",INDEX1UNIT_" + +i + ",INDEX2UNIT_" + +i + "", "电阻")
+            }
+            $("#ASSESSMENTITEM_" + i + "").val($("#ASSESSMENTITEM_x_" + i + "").val());//评定项
+            $("#THERANGESCOPE_" + i + "").val($("#THERANGESCOPE_x_" + i + "").val());//量程范围起          
+            $("#THEUNIT_" + i + "").val($("#THEUNIT_x_" + i + "").val());//起单位
+            $("#THERELATIONSHIP_" + i + "").val($("#THERELATIONSHIP_x_" + i + "").val());//起关系            
+            $("#ENDRANGESCOPE_" + i + "").val($("#ENDRANGESCOPE_x_" + i + "").val());//量程范围止
+            $("#ENDUNIT_" + i + "").val($("#ENDUNIT_x_" + i + "").val());//量程范围止
+            $("#ENDRELATIONSHIP_" + i + "").val($("#ENDRELATIONSHIP_x_" + i + "").val());//止关系
+            $("#THEFREQUENCY_" + i + "").val($("#THEFREQUENCY_x_" + i + "").val());//频率范围起
+            var b = $("#THEUNITFREQUENCY_x_" + i + "").val();
+            $("#THEUNITFREQUENCY_" + i + "").val(b);//起单位
+            $("#THERELATIONSHIPFREQUENCY_" + i + "").val($("#THERELATIONSHIPFREQUENCY_x_" + i + "").val());//频率起关系
+            $("#ENDFREQUENCY_" + i + "").val($("#ENDFREQUENCY_x_" + i + "").val());//频率范围止
+            $("#ENDUNITFREQUENCY_" + i + "").val($("#ENDUNITFREQUENCY_x_" + i + "").val());//频率止单位
+            $("#ENDRELATIONSHIPFREQUENCY_" + i + "").val($("#ENDRELATIONSHIPFREQUENCY_x_" + i + "").val());//频率止关系
+            $("#INDEX1_" + i + "").val($("#INDEX1_x_" + i + "").val());//指标1
+            $("#INDEX1UNIT_" + i + "").val($("#INDEX1UNIT_x_" + i + "").val());//指标1单位
+            $("#INDEX2_" + i + "").val($("#INDEX2_x_" + i + "").val());//指标2
+            $("#INDEX2UNIT_" + i + "").val($("#INDEX2UNIT_x_" + i + "").val());//指标2单位
+            $("#NOTE_" + i + "").val($("#NOTE_x_" + i + "").val());//备注
+        }
+    });
+
+
+</script>
