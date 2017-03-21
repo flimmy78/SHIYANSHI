@@ -8415,7 +8415,7 @@
 			<ConclusionRowIndex>1358</ConclusionRowIndex>
 			<CellList>
 				<Cell>
-					<Code/>
+					 <Code>myx</Code>
 					<ColIndex>-1</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>Y</IsMergeSameValue>
@@ -9003,7 +9003,7 @@
 			<ConclusionRowIndex>1324</ConclusionRowIndex>
 			<CellList>
 				<Cell>
-					<Code/>
+					<Code>myx</Code>
 					<ColIndex>-1</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>Y</IsMergeSameValue>
@@ -12175,7 +12175,7 @@
 					<ColIndex>9</ColIndex>
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
-					<IsHideRowNull>N</IsHideRowNull>
+					<IsHideRowNull>Y</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
 				<Cell>
