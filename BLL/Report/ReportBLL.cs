@@ -3007,7 +3007,7 @@ namespace Langben.Report
                     //{
                     //    continue;
                     //}
-                    //if(iVTEST_ITE.RULEID!= "1085-2013_8" && iVTEST_ITE.RULEID!= "1085-2013_9" && iVTEST_ITE.RULEID != "1085-2013_10")
+                    //if (iVTEST_ITE.RULEID != "1264-2010_3_1")
                     //{
                     //    continue;
                     //}
@@ -4777,13 +4777,13 @@ namespace Langben.Report
                 #endregion
             }
         }
-        private bool RemoveState1(List<RowInfo> temp)
+        private bool RemoveState1(List<RowInfo> temp,string code= "state1")
         {
             foreach (var f in temp)
             {
                 foreach (var c in f.Cells)
                 {
-                    if (c.Code == "state1")
+                    if (c.Code == code)
                     {
                         f.Cells.Remove(c);
                         return true;
@@ -5072,7 +5072,7 @@ namespace Langben.Report
                                 }
                                 else if (iEntity.RULEID == "125-2004_9_3" && headCount > 1 && k == 0)//多个通道，只有第一个通道有二级标题
                                 {
-                                    RemoveState1(temp.TableTitleList);
+                                    RemoveState1(temp.TableTitleList, "state");
                                     continue;
                                 }                                
                                 else
@@ -5179,9 +5179,10 @@ namespace Langben.Report
                                         (iEntity.RULEID == "169-2010_4_2") || 
                                         (iEntity.RULEID== "984-2004_2") ||
                                         (iEntity.RULEID== "1085-2013_6_1") ||
-                                        (iEntity.RULEID== "169-2010_4_3"))//解决单元格无法合并问题，目前没找到原因
+                                        (iEntity.RULEID== "169-2010_4_3") ||
+                                        (iEntity.RULEID== "1264-2010_3_1"))//解决单元格无法合并问题，目前没找到原因
                                     {
-                                        for (int k = 0; k <= d.mergedRowNum+1; k++)
+                                        for (int k = 0; k <= d.mergedRowNum*3; k++)
                                         {
                                             sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
                                         }
