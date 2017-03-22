@@ -20,7 +20,7 @@ using Langben.BLL;
 using System.IO;
 using Langben.IBLL;
 using Common;
-using Microsoft.Office.Interop.Word;
+//using Microsoft.Office.Interop.Word;
 
 namespace Langben.Report
 {
@@ -390,125 +390,125 @@ namespace Langben.Report
 
 
         }
-        /// <summary>
-        /// Word签名
-        /// </summary>
-        /// <param name="entity">预备方案对象</param>
-        /// <param name="hssfworkbook">exel</param>
-        /// <param name="picList">操作人信息集合</param>
-        /// <param name="fEntity">附件对象</param>
-        /// <returns></returns>
-        public void AddQianMing_Word(PREPARE_SCHEME entity, Dictionary<string, SysPerson> picList, FILE_UPLOADER fEntity, ExportType type)
-        {
+        ///// <summary>
+        ///// Word签名
+        ///// </summary>
+        ///// <param name="entity">预备方案对象</param>
+        ///// <param name="hssfworkbook">exel</param>
+        ///// <param name="picList">操作人信息集合</param>
+        ///// <param name="fEntity">附件对象</param>
+        ///// <returns></returns>
+        //public void AddQianMing_Word(PREPARE_SCHEME entity, Dictionary<string, SysPerson> picList, FILE_UPLOADER fEntity, ExportType type)
+        //{
             
-            string filePath = @"F:\Projects\国家电网实验室项目\Doc\报告\电测所20110508003压降报-1.doc";//Word地址            
-            string picPath = @"F:\Projects\国家电网实验室项目\NewCode\App\up\image\11.png";//签名图片地址
+        //    string filePath = @"F:\Projects\国家电网实验室项目\Doc\报告\电测所20110508003压降报-1.doc";//Word地址            
+        //    string picPath = @"F:\Projects\国家电网实验室项目\NewCode\App\up\image\11.png";//签名图片地址
 
-            if (fEntity.SUFFIX == null || (fEntity.SUFFIX.Trim() != ".doc" && fEntity.SUFFIX.Trim() != "doc" && fEntity.SUFFIX.Trim()!=".docx" && fEntity.SUFFIX.Trim()!="docx"))
-            {
-                //err = "附件后缀不是.doc\.docx";
-                return;
-            }
+        //    if (fEntity.SUFFIX == null || (fEntity.SUFFIX.Trim() != ".doc" && fEntity.SUFFIX.Trim() != "doc" && fEntity.SUFFIX.Trim()!=".docx" && fEntity.SUFFIX.Trim()!="docx"))
+        //    {
+        //        //err = "附件后缀不是.doc\.docx";
+        //        return;
+        //    }
 
-            object Nothing = System.Reflection.Missing.Value;
-            Microsoft.Office.Interop.Word.Application app = new Microsoft.Office.Interop.Word.Application();
-            Microsoft.Office.Interop.Word.Document doc = new Microsoft.Office.Interop.Word.Document();
-            object Obj_FileName = filePath;
-            object Visible = false;
-            object ReadOnly = false;
-            object missing = System.Reflection.Missing.Value;           
-            try
-            {
-                //打开文件
-                doc = app.Documents.Open(ref Obj_FileName, ref missing, ref ReadOnly, ref missing,
-                    ref missing, ref missing, ref missing, ref missing,
-                    ref missing, ref missing, ref missing, ref Visible,
-                    ref missing, ref missing, ref missing,
-                    ref missing);
-                doc.Activate();
+        //    object Nothing = System.Reflection.Missing.Value;
+        //    Microsoft.Office.Interop.Word.Application app = new Microsoft.Office.Interop.Word.Application();
+        //    Microsoft.Office.Interop.Word.Document doc = new Microsoft.Office.Interop.Word.Document();
+        //    object Obj_FileName = filePath;
+        //    object Visible = false;
+        //    object ReadOnly = false;
+        //    object missing = System.Reflection.Missing.Value;           
+        //    try
+        //    {
+        //        //打开文件
+        //        doc = app.Documents.Open(ref Obj_FileName, ref missing, ref ReadOnly, ref missing,
+        //            ref missing, ref missing, ref missing, ref missing,
+        //            ref missing, ref missing, ref missing, ref Visible,
+        //            ref missing, ref missing, ref missing,
+        //            ref missing);
+        //        doc.Activate();
 
-                //--判断word文件是否存在·不存在则略过插入。
-                if (!System.IO.File.Exists(filePath))
-                {
-                    return;
-                }
-
-
-                foreach (Microsoft.Office.Interop.Word.Bookmark bm in doc.Bookmarks)
-                {
-                    if (bm.Name == "批准签字处")
-                    {
-                        bm.Select();
-                        //要插入的图片文件
-                        app.Selection.InlineShapes.AddPicture(picPath, ref missing, ref missing, ref missing);
-                        doc.Application.ActiveDocument.InlineShapes[1].Width = (float)140; // 图片宽度 
-                        doc.Application.ActiveDocument.InlineShapes[1].Height = (float)30; // 图片高度                            
-                    }
-                    else if(bm.Name == "批准签字处")
-                    {
-                        bm.Select();
-                        //要插入的图片文件
-                        app.Selection.InlineShapes.AddPicture(picPath, ref missing, ref missing, ref missing);
-                        doc.Application.ActiveDocument.InlineShapes[1].Width = (float)140; // 图片宽度 
-                        doc.Application.ActiveDocument.InlineShapes[1].Height = (float)30; // 图片高度    
-                    }
-                    else if(bm.Name == "批准签字处")
-                    {
-                        bm.Select();
-                        //要插入的图片文件
-                        app.Selection.InlineShapes.AddPicture(picPath, ref missing, ref missing, ref missing);
-                        doc.Application.ActiveDocument.InlineShapes[1].Width = (float)140; // 图片宽度 
-                        doc.Application.ActiveDocument.InlineShapes[1].Height = (float)30; // 图片高度    
-                    }
-
-                }              
-                doc.Save();
+        //        //--判断word文件是否存在·不存在则略过插入。
+        //        if (!System.IO.File.Exists(filePath))
+        //        {
+        //            return;
+        //        }
 
 
-            }
-            catch (Exception mage)
-            {
-                //写入系统日志
-                /*暂略*/
-            }
-            finally
-            {
+        //        foreach (Microsoft.Office.Interop.Word.Bookmark bm in doc.Bookmarks)
+        //        {
+        //            if (bm.Name == "批准签字处")
+        //            {
+        //                bm.Select();
+        //                //要插入的图片文件
+        //                app.Selection.InlineShapes.AddPicture(picPath, ref missing, ref missing, ref missing);
+        //                doc.Application.ActiveDocument.InlineShapes[1].Width = (float)140; // 图片宽度 
+        //                doc.Application.ActiveDocument.InlineShapes[1].Height = (float)30; // 图片高度                            
+        //            }
+        //            else if(bm.Name == "批准签字处")
+        //            {
+        //                bm.Select();
+        //                //要插入的图片文件
+        //                app.Selection.InlineShapes.AddPicture(picPath, ref missing, ref missing, ref missing);
+        //                doc.Application.ActiveDocument.InlineShapes[1].Width = (float)140; // 图片宽度 
+        //                doc.Application.ActiveDocument.InlineShapes[1].Height = (float)30; // 图片高度    
+        //            }
+        //            else if(bm.Name == "批准签字处")
+        //            {
+        //                bm.Select();
+        //                //要插入的图片文件
+        //                app.Selection.InlineShapes.AddPicture(picPath, ref missing, ref missing, ref missing);
+        //                doc.Application.ActiveDocument.InlineShapes[1].Width = (float)140; // 图片宽度 
+        //                doc.Application.ActiveDocument.InlineShapes[1].Height = (float)30; // 图片高度    
+        //            }
 
-                /*--- C# 读写Word ：提示将 Word 用作自动化服务器时提示保存 Normal.dot (解决方案之1)   ----*/
-                /////使用 Quit 方法的 SaveChanges 参数，如下所示： 
-                ////object SaveOption, OriginalFormat, RouteDocument;
-                ////SaveOption = Word.WdSaveOptions.wdPromptToSaveChanges;
-                ////OriginalFormat = Word.WdOriginalFormat.wdPromptUser;
-                ////RouteDocument = Missing.Value;
-                ////if (wa != null)
-                ////{
-                ////    wa.Quit(ref SaveOption, ref OriginalFormat, ref RouteDocument);
-                ////    wa = null;
-                ////}
-
-                /*--- C# 读写Word ：提示将 Word 用作自动化服务器时提示保存 Normal.dot (解决方案之2)   ----*/
-                ///// wdApp2.Quit 方法的调用语句之前，添加以下行：
-                app.NormalTemplate.Saved = true;
+        //        }              
+        //        doc.Save();
 
 
-                //关闭网页doc
-                doc.Close(ref Nothing, ref Nothing, ref Nothing);
-                if (doc != null)
-                {
-                    System.Runtime.InteropServices.Marshal.ReleaseComObject(doc);
-                    doc = null;
-                }
-                //关闭wordApp
-                app.Quit(ref Nothing, ref Nothing, ref Nothing);
-                if (app != null)
-                {
-                    System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
-                    app = null;
-                }
-                //释放word进程
-                GC.Collect();
-            }
-        }
+        //    }
+        //    catch (Exception mage)
+        //    {
+        //        //写入系统日志
+        //        /*暂略*/
+        //    }
+        //    finally
+        //    {
+
+        //        /*--- C# 读写Word ：提示将 Word 用作自动化服务器时提示保存 Normal.dot (解决方案之1)   ----*/
+        //        /////使用 Quit 方法的 SaveChanges 参数，如下所示： 
+        //        ////object SaveOption, OriginalFormat, RouteDocument;
+        //        ////SaveOption = Word.WdSaveOptions.wdPromptToSaveChanges;
+        //        ////OriginalFormat = Word.WdOriginalFormat.wdPromptUser;
+        //        ////RouteDocument = Missing.Value;
+        //        ////if (wa != null)
+        //        ////{
+        //        ////    wa.Quit(ref SaveOption, ref OriginalFormat, ref RouteDocument);
+        //        ////    wa = null;
+        //        ////}
+
+        //        /*--- C# 读写Word ：提示将 Word 用作自动化服务器时提示保存 Normal.dot (解决方案之2)   ----*/
+        //        ///// wdApp2.Quit 方法的调用语句之前，添加以下行：
+        //        app.NormalTemplate.Saved = true;
+
+
+        //        //关闭网页doc
+        //        doc.Close(ref Nothing, ref Nothing, ref Nothing);
+        //        if (doc != null)
+        //        {
+        //            System.Runtime.InteropServices.Marshal.ReleaseComObject(doc);
+        //            doc = null;
+        //        }
+        //        //关闭wordApp
+        //        app.Quit(ref Nothing, ref Nothing, ref Nothing);
+        //        if (app != null)
+        //        {
+        //            System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
+        //            app = null;
+        //        }
+        //        //释放word进程
+        //        GC.Collect();
+        //    }
+        //}
         /// <summary>
         /// 报告添加签名（需要图片签名）
         /// </summary>
@@ -4821,7 +4821,38 @@ namespace Langben.Report
                 Dictionary<int, DataValue> dataDic_DianNengBiaoZhunPianChaGuZhiJiSuan = AnalyticHTML.GetData(doc_DianNengBiaoZhunPianChaGuZhiJiSuan);//数据
                 dataDic = SHuaZhengHeBing(dataDic, dataDic_DianNengBiaoZhunPianChaGuZhiJiSuan);
             }
-            #endregion 
+            #endregion
+
+            #region 处理空数据行删除
+            //if (dataDic!=null && dataDic.Count>0 && temp != null && temp.Cells!=null && temp.Cells.Count>0 && temp.Cells.Count(p => p.IsHideRowNull == "Y") == 1)
+            //{
+            //    string hideCode =  temp.Cells.FirstOrDefault(p => p.IsHideRowNull == "Y").Code;
+            //    bool IsEnd = false;
+            //    foreach (int tongDaoID in dataDic.Keys)
+            //    {
+            //        if (dataDic[tongDaoID] != null && dataDic[tongDaoID].Count > 0)
+            //        {
+            //            DataValue d = dataDic[tongDaoID];
+                        
+            //            if (d != null && d.Count > 0)
+            //            {
+            //                while (!IsEnd)
+            //                {
+            //                    foreach (Cell c in temp.Cells)
+            //                    {
+            //                        if (c.Code != null && c.Code.Trim() != "" && d.Data.FirstOrDefault(p=>p.name==)
+            //                        {
+
+            //                        }
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+                
+
+            //}
+            #endregion
 
             Dictionary<int, List<MYDataHead>> headDic = AnalyticHTML.GetHeadData(doc);//表头           
             Dictionary<int, List<MYDataHead>> footDic = AnalyticHTML.GetFootData(doc);//表尾
