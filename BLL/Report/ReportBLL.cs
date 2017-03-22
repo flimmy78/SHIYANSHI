@@ -342,9 +342,9 @@ namespace Langben.Report
         /// 添加签名
         /// </summary>
         /// <param name="ID">预备方案ID</param>
-        /// <param name="Message"></param>
-        /// <param name="Person">操作人</param>
-        public bool AddQianMing(string ID, out string err)
+        ///<param name="REPORTSTATUS">报告状态</param>
+        ///<param name="err">错误信息</param>
+        public bool AddQianMing(string ID,string REPORTSTATUS, out string err)
         {
             err = "";
 
@@ -376,9 +376,9 @@ namespace Langben.Report
 
                 ExportType type = GetExportType(entity, "Report");
 
-                AddQianMing_YuanShiJiLu(entity, picList, fEntity);//更新原始记录签名
+                AddQianMing_YuanShiJiLu(entity, picList, fEntity, REPORTSTATUS);//更新原始记录签名
 
-                AddQianMing_BaoGao(entity, picList, fEntity, type);//更新报告签名
+                AddQianMing_BaoGao(entity, picList, fEntity, type, REPORTSTATUS);//更新报告签名
                 //AddQianMing_Word(entity, picList, fEntity, type);//更新Word签名
                 return true;
             }
@@ -516,7 +516,9 @@ namespace Langben.Report
         /// <param name="hssfworkbook">exel</param>
         /// <param name="picList">操作人信息集合</param>
         /// <param name="fEntity">附件对象</param>
-        public void AddQianMing_BaoGao(PREPARE_SCHEME entity, Dictionary<string, SysPerson> picList, FILE_UPLOADER fEntity, ExportType type)
+        /// <param name="type">报告类型</param>
+        /// <param name="REPORTSTATUS">报告状态</param>
+        public void AddQianMing_BaoGao(PREPARE_SCHEME entity, Dictionary<string, SysPerson> picList, FILE_UPLOADER fEntity, ExportType type,string REPORTSTATUS)
         {
             string xlsPath = fEntity.FULLPATH;
 
@@ -553,7 +555,7 @@ namespace Langben.Report
                     if (picList != null && picList.ContainsKey(entity.APPROVALEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.APPROVALEPERSON].HDpic))
                     {
                         picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.APPROVALEPERSON].HDpic);
-                        if (System.IO.File.Exists(picPath))
+                        if (System.IO.File.Exists(picPath) && REPORTSTATUS==Common.REPORTSTATUS.已批准.ToString())//只有批准同意后才添加图片签名，其他时候都只是改名字 2017.3.22
                         {
 
                             bytes = System.IO.File.ReadAllBytes(picPath);
@@ -614,7 +616,7 @@ namespace Langben.Report
                     if (picList != null && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].HDpic))
                     {
                         picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.AUDITTEPERSON].HDpic);
-                        if (System.IO.File.Exists(picPath))
+                        if (System.IO.File.Exists(picPath) && REPORTSTATUS == Common.REPORTSTATUS.已批准.ToString())//只有批准同意后才添加图片签名，其他时候都只是改名字 2017.3.22
                         {
                             bytes = System.IO.File.ReadAllBytes(picPath);
                             int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
@@ -670,7 +672,7 @@ namespace Langben.Report
                     if (picList != null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].HDpic))
                     {
                         picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.CREATEPERSON].HDpic);
-                        if (System.IO.File.Exists(picPath))
+                        if (System.IO.File.Exists(picPath) && REPORTSTATUS == Common.REPORTSTATUS.已批准.ToString())//只有批准同意后才添加图片签名，其他时候都只是改名字 2017.3.22
                         {
                             bytes = System.IO.File.ReadAllBytes(picPath);
                             int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
@@ -730,7 +732,8 @@ namespace Langben.Report
         /// <param name="hssfworkbook">exel</param>
         /// <param name="picList">操作人信息集合</param>
         /// <param name="fEntity">附件对象</param>
-        public void AddQianMing_YuanShiJiLu(PREPARE_SCHEME entity, Dictionary<string, SysPerson> picList, FILE_UPLOADER fEntity)
+        /// <param name="REPORTSTATUS">报告状态</param>
+        public void AddQianMing_YuanShiJiLu(PREPARE_SCHEME entity, Dictionary<string, SysPerson> picList, FILE_UPLOADER fEntity,string REPORTSTATUS)
         {
             string xlsPath = fEntity.FULLPATH2;
 
@@ -764,7 +767,7 @@ namespace Langben.Report
                     if (picList != null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].HDpic))
                     {
                         picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.CREATEPERSON].HDpic);
-                        if (System.IO.File.Exists(picPath))
+                        if (System.IO.File.Exists(picPath) && REPORTSTATUS == Common.REPORTSTATUS.已批准.ToString())//只有批准同意后才添加图片签名，其他时候都只是改名字 2017.3.22
                         {
                             bytes = System.IO.File.ReadAllBytes(picPath);
                             int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
@@ -820,7 +823,7 @@ namespace Langben.Report
                     if (picList != null && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].HDpic))
                     {
                         picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.AUDITTEPERSON].HDpic);
-                        if (System.IO.File.Exists(picPath))
+                        if (System.IO.File.Exists(picPath) && REPORTSTATUS == Common.REPORTSTATUS.已批准.ToString())//只有批准同意后才添加图片签名，其他时候都只是改名字 2017.3.22
                         {
                             bytes = System.IO.File.ReadAllBytes(picPath);
                             int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);

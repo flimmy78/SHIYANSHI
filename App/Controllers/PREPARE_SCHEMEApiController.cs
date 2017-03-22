@@ -677,7 +677,7 @@ namespace Langben.App.Controllers
                     {
                         Langben.Report.ReportBLL rBLL = new Langben.Report.ReportBLL();
                         string err = "";
-                        rBLL.AddQianMing(entity.ID, out err);
+                        rBLL.AddQianMing(entity.ID, entity.REPORTSTATUS, out err);
                     }
                 }
                 catch (Exception ex)
