@@ -46,9 +46,10 @@ namespace Langben.BLL
                 if (file!=null)
                 {
                     //上传的报告没有路径
-                    if (!file.PATH2.Contains("up/Report/"))
-                    {
-                        return "up/Report/" + file.PATH2;
+                    if (!file.PATH2.Contains("up"))
+                    {//D:\codes\App\up\TheReport\20170323\20170323111049_7264.xls
+                        string   str = file.FULLPATH2.Substring(file.FULLPATH2.IndexOf("up"));
+                        return str;
                     }
                     return file.PATH2;
                 }
