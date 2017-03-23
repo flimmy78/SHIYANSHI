@@ -669,6 +669,12 @@ namespace Langben.Report
             {
                 if (!string.IsNullOrWhiteSpace(entity.CREATEPERSON))
                 {
+                    #region 由于检定员/校准员改为存的是真实姓名，刘腾飞要求改为取名字相同的第一个人，风险如果真实名字有多个的情况下有可能签名显示会不对 2017.3.23
+                    if (picList!=null && picList.Count>0 &&  picList.Values.FirstOrDefault(p=>p.MyName==entity.CREATEPERSON)!=null)
+                    {
+                        entity.CREATEPERSON = picList.Values.FirstOrDefault(p => p.MyName == entity.CREATEPERSON).Name;
+                    }
+                    #endregion 
                     if (picList != null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].HDpic))
                     {
                         picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.CREATEPERSON].HDpic);
@@ -762,7 +768,12 @@ namespace Langben.Report
                     //{
                     //    sheet_Destination.GetRow(fEntity.Row_JianDingYuan_YuanShiJiLu).GetCell(fEntity.Col_JianDingYuan_YuanShiJiLu).SetCellValue(entity.CREATEPERSON);
                     //}
-
+                    #region 由于检定员/校准员改为存的是真实姓名，刘腾飞要求改为取名字相同的第一个人，风险存在如果真实名字有多个的情况下有可能签名显示会不对 2017.3.23
+                    if (picList != null && picList.Count > 0 && picList.Values.FirstOrDefault(p => p.MyName == entity.CREATEPERSON) != null)
+                    {
+                        entity.CREATEPERSON = picList.Values.FirstOrDefault(p => p.MyName == entity.CREATEPERSON).Name;
+                    }
+                    #endregion 
 
                     if (picList != null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].HDpic))
                     {
