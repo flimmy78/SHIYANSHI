@@ -294,7 +294,7 @@ namespace Langben.Report
                 int rowIndex = -1;
                 for (int i = 0; i <= sheet_Destination.LastRowNum; i++)
                 {
-                    if (sheet_Destination.GetRow(i).Cells[0].StringCellValue == "检定员：")
+                    if (sheet_Destination.GetRow(i).Cells[0].StringCellValue == "检定员：" || sheet_Destination.GetRow(i).Cells[0].StringCellValue== "校准员：")
                     {
                         rowIndex = i;
                         break;
@@ -533,7 +533,7 @@ namespace Langben.Report
 
             string sheetName_Destination = "封皮";
             string sheetName_Destination2 = "第二页";
-            if (entity.CONCLUSION == "不合格" && type == ExportType.Report_JianDing)//不合格只有通知书封皮
+            if ((entity.CONCLUSION == "不合格" || fEntity.CONCLUSION=="不合格")&& type == ExportType.Report_JianDing)//不合格只有通知书封皮
             {
                 sheetName_Destination = "通知书封皮";
             }
@@ -1726,14 +1726,16 @@ namespace Langben.Report
                 //检定员\校准员               
                 if (entity.CREATEPERSON != null && entity.CREATEPERSON.Trim() != "")
                 {
-                    if (picList != null && picList.Count > 0 && picList[entity.CREATEPERSON] != null && picList[entity.CREATEPERSON].MyName != null && picList[entity.CREATEPERSON].MyName.Trim() != "")
-                    {
-                        sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(picList[entity.CREATEPERSON].MyName);
-                    }
-                    else
-                    {
-                        sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CREATEPERSON);
-                    }
+                    //if (picList != null && picList.Count > 0 && picList.ContainsKey[entity.CREATEPERSON]&& picList[entity.CREATEPERSON].MyName != null && picList[entity.CREATEPERSON].MyName.Trim() != "")
+                    //{
+                    //    sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(picList[entity.CREATEPERSON].MyName);
+                    //}
+                    //else
+                    //{
+                    //    sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CREATEPERSON);
+                    //}
+                    //由于检定员/校准员改为存的是真实姓名直接取就可以 2017.3.23
+                    sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CREATEPERSON);
                 }
                 else
                 {
