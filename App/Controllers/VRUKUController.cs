@@ -43,6 +43,8 @@ namespace Langben.App.Controllers
         [SupportFilter]
         public JsonResult GetData(string id, int page, int rows, string order, string sort, string search)
         {
+            int total = 0;
+            List<VRUKU> queryData = new List<VRUKU>();//m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total).Where(w => w.EQUIPMENT_STATUS_VALUUMN != "器具已领取").ToList();
             string STORAGEINSTRUCTI_STATU = string.Empty;
             Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
             foreach (var item in queryDic)
@@ -62,20 +64,25 @@ namespace Langben.App.Controllers
                 }
                 search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.待入库.GetHashCode() + "^";
                 search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.批准驳回.GetHashCode() + "*" + Common.REPORTSTATUS.已批准.GetHashCode() + "*" + Common.REPORTSTATUS.待批准.GetHashCode() + "*" + Common.REPORTSTATUS.报告已打印.GetHashCode() + "*" + Common.REPORTSTATUS.报告已领取.GetHashCode() + "";
+               
+                queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total).Where(w => w.EQUIPMENT_STATUS_VALUUMN != Common.ORDER_STATUS.器具已入库.GetHashCode().ToString() && w.EQUIPMENT_STATUS_VALUUMN != Common.ORDER_STATUS.器具已领取.GetHashCode().ToString()).ToList();
+                total = queryData.Count;
             }
             else if (STORAGEINSTRUCTI_STATU == Common.ORDER_STATUS.器具已入库.ToString())
             {
                 int end = search.LastIndexOf("^STORAGEINSTRUCTI_STATU&");
                 search = search.Substring(0, end);
                 search += "^EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "";
+                queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total).Where(w => w.EQUIPMENT_STATUS_VALUUMN != Common.ORDER_STATUS.器具已领取.GetHashCode().ToString()).ToList();
+                total = queryData.Count;
             }
             else
             {
                 search += "^EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.待入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "";
                 search += "^REPORTSTATUSZI&" + Common.REPORTSTATUS.批准驳回.GetHashCode() + "*" + Common.REPORTSTATUS.已批准.GetHashCode() + "*" + Common.REPORTSTATUS.待批准.GetHashCode() + "*" + Common.REPORTSTATUS.报告已打印.GetHashCode() + "*" + Common.REPORTSTATUS.报告已领取.GetHashCode() + "";
+                queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total).Where(w => w.EQUIPMENT_STATUS_VALUUMN != Common.ORDER_STATUS.器具已领取.GetHashCode().ToString()).ToList();
+                total = queryData.Count;
             }
-            int total = 0;
-            List<VRUKU> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
             return Json(new datagrid
             {
                 total = total,
@@ -160,10 +167,10 @@ namespace Langben.App.Controllers
             List<VRUKU> queryData = m_BLL.GetByParamX(null, 1, 9999, "desc", "APPROVALDATE", search, ref total);
             //string[] titles = title.Split(',');//如果确定显示的名称，可以直接定义
             string[] fields = "ORDER_NUMBER,APPLIANCE_NAME,VERSION,FACTORY_NUM,CERTIFICATE_ENTERPRISE,CUSTOMER_SPECIFIC_REQUIREMENTS,APPLIANCE_PROGRESS,ORDER_STATUS,STORAGEINSTRUCTIONS".Split(',');
-          
+
             return Content(WriteExcleRuKu(fields, queryData.ToArray()));
 
-              
+
         }
 
 
