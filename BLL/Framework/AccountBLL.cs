@@ -26,6 +26,11 @@ namespace Langben.BLL
                 foreach (var item in person)
                 {
                     // name.Add(item.Name, item.HDpic);
+                    if (item.Name!= item.MyName)
+                    {
+                        name.Add(item.MyName, item);
+                    }
+                    
                     name.Add(item.Name, item);
                 }
             }
