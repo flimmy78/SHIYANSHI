@@ -21,7 +21,8 @@ namespace Langben.BLL
 
             using (SysEntities db = new SysEntities())
             {
-                var person = db.SysPerson.Where(p => (personName.Contains(p.Name))).ToList();
+                //根据用户名或者姓名查询
+                var person = db.SysPerson.Where(p => (personName.Contains(p.Name)|| personName.Contains(p.MyName))).ToList();
                 foreach (var item in person)
                 {
                     // name.Add(item.Name, item.HDpic);
@@ -30,23 +31,7 @@ namespace Langben.BLL
             }
             return name;
         }
-        /// <summary>
-        /// 根据登录名获取真实姓名
-        /// </summary>
-        /// <param name="personName">登录名</param>
-        /// <returns></returns>
-        public string GetMyNameByName(string Name)
-        {
-            using (SysEntities db = new SysEntities())
-            {
-                var Item = db.SysPerson.FirstOrDefault(p => p.Name == Name);   
-                if(Item!=null)
-                {
-                    return Item.MyName;
-                }             
-            }
-            return null;
-        }
+       
         /// <summary>
         /// 验证用户名和密码是否正确
         /// </summary>
