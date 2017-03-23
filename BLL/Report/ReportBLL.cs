@@ -533,7 +533,7 @@ namespace Langben.Report
 
             string sheetName_Destination = "封皮";
             string sheetName_Destination2 = "第二页";
-            if ((entity.CONCLUSION == "不合格" || fEntity.CONCLUSION=="不合格")&& type == ExportType.Report_JianDing)//不合格只有通知书封皮
+            if ((entity.CONCLUSION == "不合格" || fEntity.CONCLUSION=="不合格")&& type == ExportType.Report_JianDing)//不合格只有通知书封皮，上传的结论存在附件 FILE_UPLOADER中了，非上传存在预备方案PREPARE_SCHEME中 2017.3.23
             {
                 sheetName_Destination = "通知书封皮";
             }
