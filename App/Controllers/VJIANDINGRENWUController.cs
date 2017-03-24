@@ -86,7 +86,7 @@ namespace Langben.App.Controllers
                 string[] bs = id.Split('|');
                 ViewBag.PREPARE_SCHEMEID = bs[0];
                 PREPARE_SCHEME prepare = m_BLL3.GetById(bs[0]);
-
+                string acc = GetCurrentPerson();
                 // List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(bs[0]);
                 foreach (var item in prepare.FILE_UPLOADER)
                 {
@@ -112,6 +112,7 @@ namespace Langben.App.Controllers
                 ViewBag.DETECTERID = prepare.DETECTERID;//核验员
                 ViewBag.CERTIFICATE_CATEGORY = prepare.CERTIFICATE_CATEGORY;//报告类别
                 ViewBag.CALIBRATION_DATE = prepare.CALIBRATION_DATE;//检定/校准时间
+                ViewBag.CHECKERID = acc;//登入用户名
             }
 
             return View();
@@ -123,6 +124,7 @@ namespace Langben.App.Controllers
         [HttpPost]
         public ActionResult BaoGaoShangChuan(FILE_UPLOADER file, string REPORTNUMBER)//文档上传
         {
+            string acc = GetCurrentPerson();
             PREPARE_SCHEME pre = new PREPARE_SCHEME();
             pre.REPORTNUMBER = REPORTNUMBER;//证书编号
             pre.PACKAGETYPE = Common.PACKAGETYPE.上传.ToString();
@@ -266,6 +268,7 @@ namespace Langben.App.Controllers
             ViewBag.DETECTERID = ps.DETECTERID;//核验员
             ViewBag.CERTIFICATE_CATEGORY = ps.CERTIFICATE_CATEGORY;//报告类别
             ViewBag.CALIBRATION_DATE = ps.CALIBRATION_DATE;//检定/校准时间
+            ViewBag.CHECKERID = acc;//登入用户名
             return View();
         }
         /// <summary>

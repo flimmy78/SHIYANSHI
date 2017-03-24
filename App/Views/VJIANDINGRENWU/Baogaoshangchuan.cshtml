@@ -193,7 +193,7 @@
         }
     })
     //发送审核
-    function songwangshenghe() {      
+    function songwangshenghe() {
         var DETECTERID = $("#DETECTERID").combobox('getValue');
         var CALIBRATION_DATE = $('#CALIBRATION_DATE').datebox('getValue');//检定/校准日期
         var arr = {
@@ -202,8 +202,9 @@
             REPORTSTATUSZI: "@Common.REPORTSTATUS.待审核.GetHashCode()",
             AUDITDATE: "@DateTime.Now;",
             DETECTERID: DETECTERID,
-            CALIBRATION_DATE: CALIBRATION_DATE
-        }
+            CALIBRATION_DATE: CALIBRATION_DATE,
+            CHECKERID:"@ViewBag.CHECKERID"
+            }
         if (arr.DETECTERID!=""&&arr.CALIBRATION_DATE!="") {
             if ("@ViewBag.NAME2" != "") {
                 $.ajax({
