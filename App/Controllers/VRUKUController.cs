@@ -63,26 +63,26 @@ namespace Langben.App.Controllers
                     search = search.Substring(0, end) + "^";
                 }
                 search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.待入库.GetHashCode() + "^";
+                id = Common.ORDER_STATUS.器具已入库.GetHashCode().ToString();
                 search += "REPORTSTATUSZI&" + Common.REPORTSTATUS.批准驳回.GetHashCode() + "*" + Common.REPORTSTATUS.已批准.GetHashCode() + "*" + Common.REPORTSTATUS.待批准.GetHashCode() + "*" + Common.REPORTSTATUS.报告已打印.GetHashCode() + "*" + Common.REPORTSTATUS.报告已领取.GetHashCode() + "";
-                //queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total).Where(w => w.EQUIPMENT_STATUS_VALUUMN != Common.ORDER_STATUS.器具已入库.GetHashCode().ToString() && w.EQUIPMENT_STATUS_VALUUMN != Common.ORDER_STATUS.器具已领取.GetHashCode().ToString()).ToList();
-                queryData = m_BLL.GetByParamX(id, page, 10, order, sort, search, ref total);
-                total = queryData.Count;
+                
             }
             else if (STORAGEINSTRUCTI_STATU == Common.ORDER_STATUS.器具已入库.ToString())
             {
                 int end = search.LastIndexOf("^STORAGEINSTRUCTI_STATU&");
                 search = search.Substring(0, end);
                 search += "^EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "";
-                queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total).Where(w => w.EQUIPMENT_STATUS_VALUUMN != Common.ORDER_STATUS.器具已领取.GetHashCode().ToString()).ToList();
-                total = queryData.Count;
+           
             }
             else
             {
                 search += "^EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.待入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "";
                 search += "^REPORTSTATUSZI&" + Common.REPORTSTATUS.批准驳回.GetHashCode() + "*" + Common.REPORTSTATUS.已批准.GetHashCode() + "*" + Common.REPORTSTATUS.待批准.GetHashCode() + "*" + Common.REPORTSTATUS.报告已打印.GetHashCode() + "*" + Common.REPORTSTATUS.报告已领取.GetHashCode() + "";
-                queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total).Where(w => w.EQUIPMENT_STATUS_VALUUMN != Common.ORDER_STATUS.器具已领取.GetHashCode().ToString()).ToList();
-                total = queryData.Count;
+            
             }
+            queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
+           
+
             return Json(new datagrid
             {
                 total = total,
