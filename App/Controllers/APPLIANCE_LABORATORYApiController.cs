@@ -425,6 +425,10 @@ namespace Langben.App.Controllers
                                 if (aryTwo!=null)
                                 {
                                     result.Message = "请通知" + aryTwo.UNDERTAKE_LABORATORYID + "该器具不能检测";
+                                }
+                                else
+                                {
+                                    result.Message = "退回成功！";
                                 }                                                                                       
                             }
                             else
