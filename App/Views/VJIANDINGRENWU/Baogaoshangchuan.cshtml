@@ -85,7 +85,24 @@
                 </div>
             </div><br style="clear:both;" />
 
-
+            <div class="input_search">
+                @*检定日期*@
+                @if (ViewBag.CERTIFICATE_CATEGORY == "检定")
+            {
+                    <div class="input_search-label">
+                        <span style='color:#F00'>*</span>检定日期：
+                    </div>
+                }
+                else if (ViewBag.CERTIFICATE_CATEGORY == "校准")
+                {
+                    <div class="input_search-label">
+                        <span style='color:#F00'>*</span>校准日期：
+                    </div>
+                }
+                <div class="input_search-field">
+                    <input type="text" id="CALIBRATION_DATE" value="@ViewBag.CALIBRATION_DATE" />
+                </div>
+            </div>
 
             <input type="hidden" name="PREPARE_SCHEMEID" value="@ViewBag.PREPARE_SCHEMEID" />
             <input type="hidden" name="ID" value="@ViewBag.FILE_UPLOADERID" id="hiddenID" />
@@ -139,6 +156,8 @@
 
 <script type="text/javascript">
     $(function () {
+        //添加日期控件
+        $("#CALIBRATION_DATE").datebox({ "required": true });//true为必填项
         //加载核验员
         if ("@ViewBag.DETECTERID"!="") {
             $("#DETECTERID").val(@ViewBag.DETECTERID);
@@ -176,14 +195,16 @@
     //发送审核
     function songwangshenghe() {      
         var DETECTERID = $("#DETECTERID").combobox('getValue');
+        var CALIBRATION_DATE = $('#CALIBRATION_DATE').datebox('getValue');//检定/校准日期
         var arr = {
             ID: "@ViewBag.PREPARE_SCHEMEID",
             REPORTSTATUS: "@Common.REPORTSTATUS.待审核",
             REPORTSTATUSZI: "@Common.REPORTSTATUS.待审核.GetHashCode()",
             AUDITDATE: "@DateTime.Now;",
-            DETECTERID: DETECTERID
+            DETECTERID: DETECTERID,
+            CALIBRATION_DATE: CALIBRATION_DATE
         }
-        if (arr.DETECTERID!="") {
+        if (arr.DETECTERID!=""&&arr.CALIBRATION_DATE!="") {
             if ("@ViewBag.NAME2" != "") {
                 $.ajax({
                     url: "/api/PREPARE_SCHEMEApi/EditField",
@@ -208,7 +229,7 @@
             }
         }
         else {
-            $.messager.alert('操作提示', "请选择核验员！", 'info');
+            $.messager.alert('操作提示', "请选择核验员和检定/校准时间！", 'info');
             return false;
         }
     }

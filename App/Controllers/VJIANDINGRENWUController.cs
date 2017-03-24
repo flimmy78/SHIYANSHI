@@ -110,6 +110,8 @@ namespace Langben.App.Controllers
                 }
                 ViewBag.APPLIANCE_DETAIL_INFORMATIONID = bs[1];//器具明细id
                 ViewBag.DETECTERID = prepare.DETECTERID;//核验员
+                ViewBag.CERTIFICATE_CATEGORY = prepare.CERTIFICATE_CATEGORY;//报告类别
+                ViewBag.CALIBRATION_DATE = prepare.CALIBRATION_DATE;//检定/校准时间
             }
 
             return View();
@@ -260,6 +262,10 @@ namespace Langben.App.Controllers
             ViewBag.REPORTNUMBER = REPORTNUMBER;//证书编号          
             ViewBag.CONCLUSION = uplo.CONCLUSION;//结论
             ViewBag.PREPARE_SCHEMEID = pre.ID;//预备方案id
+            PREPARE_SCHEME ps = m_BLL3.GetById(pre.ID);
+            ViewBag.DETECTERID = ps.DETECTERID;//核验员
+            ViewBag.CERTIFICATE_CATEGORY = ps.CERTIFICATE_CATEGORY;//报告类别
+            ViewBag.CALIBRATION_DATE = ps.CALIBRATION_DATE;//检定/校准时间
             return View();
         }
         /// <summary>
