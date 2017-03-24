@@ -29,5 +29,7 @@ namespace Langben.DAL
         public string REPORTTORECEVESTATE { get; set; }
         public string PREPARE_SCHEMEID { get; set; }
         public string REPORTSTATUS { get; set; }
+        public string REPORTSTATUSZI { get; set; }
+        public string EQUIPMENT_STATUS_VALUUMN { get; set; }
     }
 }
