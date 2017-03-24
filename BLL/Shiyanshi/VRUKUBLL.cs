@@ -27,7 +27,21 @@ namespace Langben.BLL
         /// <returns>结果集</returns>
         public List<VRUKU> GetByParamX(string id, int page, int rows, string order, string sort, string search, ref int total)
         {
-            var queryData = repository.GetDataX(db, order, sort, search).Distinct().ToList();          
+            IQueryable<VRUKU> queryData = null;
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                queryData = repository.GetDataX(db, order, sort, search)
+                    .Where(w => w.EQUIPMENT_STATUS_VALUUMN != Common.ORDER_STATUS.器具已入库.GetHashCode().ToString() && w.EQUIPMENT_STATUS_VALUUMN != Common.ORDER_STATUS.器具已领取.GetHashCode().ToString())
+                    .Distinct();
+
+            }
+            else
+            {
+                queryData = repository.GetDataX(db, order, sort, search)
+                 .Where(w => w.EQUIPMENT_STATUS_VALUUMN != Common.ORDER_STATUS.器具已领取.GetHashCode().ToString()).Distinct();
+
+            }
+
             List<VRUKU> collection = new List<VRUKU>();
             string ids = string.Empty;
             foreach (var item in queryData)
@@ -55,7 +69,7 @@ namespace Langben.BLL
                 }
 
             }
-            return collection;          
+            return collection;
         }
 
     }
