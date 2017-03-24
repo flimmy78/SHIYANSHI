@@ -83,7 +83,7 @@ namespace Langben.App.Controllers
 					,BAOGAOSHENPITONGGUORIQI = s.BAOGAOSHENPITONGGUORIQI
 					,MOCHONGCHANGSHU = s.MOCHONGCHANGSHU
 					,SONGJIANYUEDU = s.SONGJIANYUEDU
-					,JIANDINGSHIJIAN = s.JIANDINGSHIJIAN == null ? "0" : ((Convert.ToDateTime(s.JIANDINGRIQI) - Convert.ToDateTime(s.SONGJIANRIQI)).Days + 1).ToString()          
+					,JIANDINGSHIJIAN = s.JIANDINGSHIJIAN == null||s.JIANDINGRIQI==null ? "0" : ((Convert.ToDateTime(s.JIANDINGRIQI) - Convert.ToDateTime(s.SONGJIANRIQI)).Days + 1).ToString()          
                     ,
                     JIANDINGYUEDU =s.JIANDINGRIQI==null? "0" : Convert.ToDateTime(s.JIANDINGRIQI).Month.ToString()
                     ,
