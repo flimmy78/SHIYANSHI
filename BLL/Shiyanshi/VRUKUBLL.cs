@@ -29,7 +29,8 @@ namespace Langben.BLL
         {
             var queryData = repository.GetDataX(db, order, sort, search).Distinct().ToList();          
             List<VRUKU> collection = new List<VRUKU>();
-            string ids = string.Empty;
+             string ids = string.Empty;
+            int a = queryData.Count;
             foreach (var item in queryData)
             {
                 if (string.IsNullOrWhiteSpace(item.ID))
