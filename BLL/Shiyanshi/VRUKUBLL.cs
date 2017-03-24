@@ -28,17 +28,18 @@ namespace Langben.BLL
         public List<VRUKU> GetByParamX(string id, int page, int rows, string order, string sort, string search, ref int total)
         {
             IQueryable<VRUKU> queryData = null;
+            string lingqu = Common.ORDER_STATUS.器具已领取.GetHashCode().ToString();
             if (!string.IsNullOrWhiteSpace(id))
             {
                 queryData = repository.GetDataX(db, order, sort, search)
-                    .Where(w => w.EQUIPMENT_STATUS_VALUUMN != Common.ORDER_STATUS.器具已入库.GetHashCode().ToString() && w.EQUIPMENT_STATUS_VALUUMN != Common.ORDER_STATUS.器具已领取.GetHashCode().ToString())
+                    .Where(w => w.EQUIPMENT_STATUS_VALUUMN != id && w.EQUIPMENT_STATUS_VALUUMN != lingqu)
                     .Distinct();
 
             }
             else
             {
                 queryData = repository.GetDataX(db, order, sort, search)
-                 .Where(w => w.EQUIPMENT_STATUS_VALUUMN != Common.ORDER_STATUS.器具已领取.GetHashCode().ToString()).Distinct();
+                 .Where(w => w.EQUIPMENT_STATUS_VALUUMN != lingqu).Distinct();
 
             }
 
