@@ -227,7 +227,7 @@
         var search = "";
         search += "sTARTDATEStart_Time&" + $("#sTARTDATEStart_Time").val() + "^";
         search += "eNDDATEEnd_Time&" + $("#eNDDATEEnd_Time").val() + "^";
-        search += "SHOULIDANWEI&" + $('#SHOULIDANWEI').combobox('getValue') + "^";
+      
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
