@@ -418,11 +418,18 @@ namespace Langben.App.Controllers
 
                         entity.APPLIANCE_DETAIL_INFORMATION.STORAGEINSTRUCTIONS = entity.STORAGEINSTRUCTIONS.ToString();//入库说明
                         if (m_BLL2.EditField(ref validationErrors, entity.APPLIANCE_DETAIL_INFORMATION))//修改器具明细表中的入库说明
-                        {
+                        {                           
                             if (appory.Remove(aryOne))
                             {
                                 var aryTwo = appory.FirstOrDefault();
-                                result.Message = "请通知" + aryTwo.UNDERTAKE_LABORATORYID + "该器具不能检测";
+                                if (aryTwo!=null)
+                                {
+                                    result.Message = "请通知" + aryTwo.UNDERTAKE_LABORATORYID + "该器具不能检测";
+                                }
+                                else
+                                {
+                                    result.Message = "退回成功！";
+                                }                                                                                       
                             }
                             else
                             {

@@ -44,7 +44,7 @@ namespace Langben.BLL
             }
 
             List<VRUKU> collection = new List<VRUKU>();
-            string ids = string.Empty;
+             string ids = string.Empty;           
             foreach (var item in queryData)
             {
                 if (string.IsNullOrWhiteSpace(item.ID))
