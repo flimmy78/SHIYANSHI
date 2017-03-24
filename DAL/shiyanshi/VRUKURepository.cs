@@ -122,11 +122,11 @@ namespace Langben.DAL
                                      .AsQueryable();
                 if (null != startTime)
                 {
-                    data = data.Where(m => startTime >= m.APPROVALDATE);
+                    data = data.Where(m => startTime <= m.APPROVALDATE);
                 }
                 if (null != endTime)
                 {
-                    data = data.Where(m => endTime <= m.APPROVALDATE);
+                    data = data.Where(m => endTime >= m.APPROVALDATE);
                 }
                 return data;
             }           

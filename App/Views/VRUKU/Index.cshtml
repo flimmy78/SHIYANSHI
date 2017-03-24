@@ -33,9 +33,9 @@
             @Html.LabelFor(model => model.APPROVALDATE):
         </div>
         <div class='input_search-field-time'>
-            <input type="text" id="APPROVALDATEStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'APPROVALDATEStart_Time\');}' })" />
+            <input type="text" id="APPROVALDATEStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'APPROVALDATEEnd_Time\');}' })" />
             <span>到</span>
-            <input type="text" id="APPROVALDATEEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'APPROVALDATEEnd_Time\');}' })" />
+            <input type="text" id="APPROVALDATEEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'APPROVALDATEStart_Time\');}' })" />
         </div>
     </div>
     <div class="input_search">
