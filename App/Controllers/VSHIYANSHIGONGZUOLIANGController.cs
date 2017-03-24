@@ -72,41 +72,119 @@ namespace Langben.App.Controllers
         //工作量统计分析
         public JsonResult GetData(string id = "", int page = 11, int rows = 11, string order = "", string sort = "", string search = "")
         {
-
-            int total = 0;
-            page = 1;
-            rows = 9999;
-            List<SHIYANSHIGONGZUO_Result> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
-            return Json(new datagrid
+            try
             {
-                total = total,
-                rows = queryData.Select(s => new
+                int total = 0;
+                page = 1;
+                rows = 9999;
+                List<SHIYANSHIGONGZUO_Result> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
+                return Json(new datagrid
                 {
-                    ID = s.ID
-                    ,
-                    WEITUODAN = s.WEITUODAN
-                    ,
-                    JIANDINGWANCHENG = s.JIANDINGWANCHENG
-                    ,
-                    SHEBEIGUZHANG = s.SHEBEIGUZHANG
-                    ,
-                    PIZHUNTONGGUO = s.PIZHUNTONGGUO
-                    ,
-                    HEGE = s.HEGE
-                    ,
-                    BUHEGE = s.BUHEGE
-                    ,
-                    CHAOQI = s.CHAOQI
+                    total = total,
+                    rows = queryData.Select(s => new
+                    {
+                        ID = s.ID
+                        ,
+                        WEITUODAN = s.WEITUODAN
+                        ,
+                        JIANDINGWANCHENG = s.JIANDINGWANCHENG
+                        ,
+                        SHEBEIGUZHANG = s.SHEBEIGUZHANG
+                        ,
+                        PIZHUNTONGGUO = s.PIZHUNTONGGUO
+                        ,
+                        HEGE = s.HEGE
+                        ,
+                        BUHEGE = s.BUHEGE
+                        ,
+                        CHAOQI = s.CHAOQI
 
+                    }
+
+                        )
+                });
+            }
+            catch (Exception ex)
+            {
+                validationErrors.Add(ex.Message + "@");
+                validationErrors.Add(ex.Source + "@");
+                validationErrors.Add(ex.StackTrace + "@");
+                validationErrors.Add(ex.HelpLink + "@");
+                validationErrors.Add(ex.HResult.ToString() + "@");
+
+                if (ex.InnerException != null && !string.IsNullOrWhiteSpace(ex.InnerException.Message))
+                {
+                    validationErrors.Add(ex.InnerException.Message);
+                }
+                if (ex.InnerException != null && !string.IsNullOrWhiteSpace(ex.InnerException.Source))
+                {
+                    validationErrors.Add(ex.InnerException.Source);
+                }
+                if (ex.InnerException != null && !string.IsNullOrWhiteSpace(ex.InnerException.StackTrace))
+                {
+                    validationErrors.Add(ex.InnerException.StackTrace);
+                }
+                if (ex.InnerException != null && null != (ex.InnerException.TargetSite))
+                {
+                    validationErrors.Add(ex.InnerException.TargetSite.Name);
                 }
 
-                    )
-            });
+                if (ex.Data != null)
+                {
+                    validationErrors.Add(ex.Data.Count.ToString());
+                }
+                if (ex.Data != null)
+                {
+                    foreach (KeyValuePair<string, string> kvp in ex.Data.Keys)
+                    {
+                        validationErrors.Add(string.Format("姓名：{0},电影：{1}", kvp.Key, kvp.Value));
+                    }
+                }
+
+                if (ex.TargetSite != null)
+                {
+                    validationErrors.Add(ex.TargetSite.Name);
+                }
+                if (ex.TargetSite != null)
+                {
+                    validationErrors.Add(ex.TargetSite.ReflectedType.ToString());
+                }
+                if (ex.TargetSite != null)
+                {
+                    validationErrors.Add(ex.TargetSite.Module.ToString());
+                }
+                if (ex.TargetSite != null)
+                {
+                    validationErrors.Add(ex.TargetSite.MethodImplementationFlags.ToString());
+                }
+                if (ex.TargetSite != null)
+                {
+                    validationErrors.Add(ex.TargetSite.MethodHandle.ToString());
+                }
+                if (ex.TargetSite != null)
+                {
+                    validationErrors.Add(ex.TargetSite.MetadataToken.ToString());
+                }
+
+                string returnValue = string.Empty;
+                if (validationErrors != null && validationErrors.Count > 0)
+                {
+                    validationErrors.All(a =>
+                    {
+                        returnValue += a.ErrorMessage;
+                        return true;
+                    });
+                }
+                LogClassModels.WriteServiceLog(Suggestion.InsertFail + "，人员的信息，dd" + returnValue, "人员"
+                    );//写入日志   
+                ExceptionsHander.WriteExceptions(ex);
+                throw ex;
+            }
         }
         //人员别工作量统计分析
         public JsonResult GetDataRE(string id = "", int page = 11, int rows = 11, string order = "", string sort = "", string search = "")
         {
-
+            
             int total = 0;
             page = 1;
             rows = 9999;
