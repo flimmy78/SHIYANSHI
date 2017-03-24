@@ -316,14 +316,14 @@
                 input9Data = parseFloat(input9Data);
                 var jianfa = 0;
                 if (input12_UNITData == "mV") {
-                    input3Data = accMul(input3Data, 1000);
+                    input3Data =input3Data*1000;
                     var jian1 = accDiv(T2Data, input3Data);
                     var jian2 = accSub(jian1, input9Data);
-                    jianfa = accDiv(jian2, 1000);
+                    jianfa =jian2/1000;
                 } else {
                   //  input9Data = DanWeiHuanSuan(input13_UNITData, input9_UNITData, input9Data);// toΩ(input9_UNITData, input9Data);
                     var jian1 = accDiv(T2Data, input3Data);
-                    var jian2 = accDiv(input9Data,1000);
+                    var jian2 = input9Data/1000;
                      jianfa = accSub(jian1, jian2);
                 }
 
@@ -336,15 +336,15 @@
                 var jianfa = 0;
                 input4Data = parseFloat(input4Data);
                 if (input14_UNITData == "mV") {
-                    input4Data = accMul(input4Data, 1000);
+                    input4Data = input4Data*1000;
                     var jian1 = accDiv(T5Data, input4Data);
                     var jian2 = accSub(jian1, input10Data);
-                    jianfa = accDiv(jian2, 1000);
+                    jianfa =jian2/1000;
                 } else {
                     input10Data = parseFloat(input10Data);
                   //  input10Data = DanWeiHuanSuan(input6_UNITData, input19_UNITData, input10Data);// toΩ(input19_UNITData, input10Data);
                     var jian1 = accDiv(T5Data, input4Data);
-                    var jian2 = accDiv(input10Data, 1000);
+                    var jian2 = input10Data/1000;
                     jianfa = accSub(jian1, jian2);
                 }
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
@@ -359,7 +359,7 @@
                 input1Data = parseFloat(input1Data);
                 var jian1= accMul(input1Data, T1Data);
                 var jian2 = accSub(jian1, T3Data);
-                var jianfa = accMul(accDiv(jian2, T3Data), 100);
+                var jianfa =accDiv(jian2, T3Data)*100;
 
                 var data =zeroFloat( fomatFloat(jianfa, r1),r1);
                 $(obj).parent().parent().find("#" + T4).val(data);
@@ -371,7 +371,7 @@
                 input2Data = parseFloat(input2Data);
                 var jian1 = accMul(input2Data, T1Data);
                 var jian2 = accSub(jian1, T6Data);
-                var jianfa = accMul(accDiv(jian2, T6Data), 100);
+                var jianfa = accDiv(jian2, T6Data)*100;
 
                 var data =zeroFloat( fomatFloat(jianfa, r2),r2);
                 $(obj).parent().parent().find("#" + T7).val(data);

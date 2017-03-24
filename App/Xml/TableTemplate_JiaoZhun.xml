@@ -8964,7 +8964,7 @@
 			<TableFooterList>
 				<RowInfo>
 					<RowNumber>1</RowNumber>
-					<RowIndex>1197</RowIndex>
+					<RowIndex>1196</RowIndex>
 					<CellList>
 						<Cell>
 							<Code>ZDJBWC</Code>
@@ -9639,7 +9639,7 @@
 					 <Code>myx</Code>
 					<ColIndex>-1</ColIndex>
 					<ColCount>0</ColCount>
-					<IsMergeSameValue>Y</IsMergeSameValue>
+					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
@@ -10227,7 +10227,7 @@
 					<Code>myx</Code>
 					<ColIndex>-1</ColIndex>
 					<ColCount>0</ColCount>
-					<IsMergeSameValue>Y</IsMergeSameValue>
+					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>

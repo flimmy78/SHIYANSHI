@@ -20,7 +20,7 @@ using Langben.BLL;
 using System.IO;
 using Langben.IBLL;
 using Common;
-using Microsoft.Office.Interop.Word;
+//using Microsoft.Office.Interop.Word;
 
 namespace Langben.Report
 {
@@ -33,6 +33,7 @@ namespace Langben.Report
         /// 模板中所有的合并的单元格
         /// </summary>
         Dictionary<string, List<CellRangeAddress>> returnList = new Dictionary<string, List<CellRangeAddress>>();
+        List<int> DeleteRowList = new List<int>();
         /// <summary>
         ///  获取合并区域信息
         /// </summary>
@@ -293,7 +294,7 @@ namespace Langben.Report
                 int rowIndex = -1;
                 for (int i = 0; i <= sheet_Destination.LastRowNum; i++)
                 {
-                    if (sheet_Destination.GetRow(i).Cells[0].StringCellValue == "检定员：")
+                    if (sheet_Destination.GetRow(i).Cells[0].StringCellValue == "检定员：" || sheet_Destination.GetRow(i).Cells[0].StringCellValue== "校准员：")
                     {
                         rowIndex = i;
                         break;
@@ -341,9 +342,9 @@ namespace Langben.Report
         /// 添加签名
         /// </summary>
         /// <param name="ID">预备方案ID</param>
-        /// <param name="Message"></param>
-        /// <param name="Person">操作人</param>
-        public bool AddQianMing(string ID, out string err)
+        ///<param name="REPORTSTATUS">报告状态</param>
+        ///<param name="err">错误信息</param>
+        public bool AddQianMing(string ID,string REPORTSTATUS, out string err)
         {
             err = "";
 
@@ -375,9 +376,9 @@ namespace Langben.Report
 
                 ExportType type = GetExportType(entity, "Report");
 
-                AddQianMing_YuanShiJiLu(entity, picList, fEntity);//更新原始记录签名
+                AddQianMing_YuanShiJiLu(entity, picList, fEntity, REPORTSTATUS);//更新原始记录签名
 
-                AddQianMing_BaoGao(entity, picList, fEntity, type);//更新报告签名
+                AddQianMing_BaoGao(entity, picList, fEntity, type, REPORTSTATUS);//更新报告签名
                 //AddQianMing_Word(entity, picList, fEntity, type);//更新Word签名
                 return true;
             }
@@ -389,125 +390,125 @@ namespace Langben.Report
 
 
         }
-        /// <summary>
-        /// Word签名
-        /// </summary>
-        /// <param name="entity">预备方案对象</param>
-        /// <param name="hssfworkbook">exel</param>
-        /// <param name="picList">操作人信息集合</param>
-        /// <param name="fEntity">附件对象</param>
-        /// <returns></returns>
-        public void AddQianMing_Word(PREPARE_SCHEME entity, Dictionary<string, SysPerson> picList, FILE_UPLOADER fEntity, ExportType type)
-        {
+        ///// <summary>
+        ///// Word签名
+        ///// </summary>
+        ///// <param name="entity">预备方案对象</param>
+        ///// <param name="hssfworkbook">exel</param>
+        ///// <param name="picList">操作人信息集合</param>
+        ///// <param name="fEntity">附件对象</param>
+        ///// <returns></returns>
+        //public void AddQianMing_Word(PREPARE_SCHEME entity, Dictionary<string, SysPerson> picList, FILE_UPLOADER fEntity, ExportType type)
+        //{
             
-            string filePath = @"F:\Projects\国家电网实验室项目\Doc\报告\电测所20110508003压降报-1.doc";//Word地址            
-            string picPath = @"F:\Projects\国家电网实验室项目\NewCode\App\up\image\11.png";//签名图片地址
+        //    string filePath = @"F:\Projects\国家电网实验室项目\Doc\报告\电测所20110508003压降报-1.doc";//Word地址            
+        //    string picPath = @"F:\Projects\国家电网实验室项目\NewCode\App\up\image\11.png";//签名图片地址
 
-            if (fEntity.SUFFIX == null || (fEntity.SUFFIX.Trim() != ".doc" && fEntity.SUFFIX.Trim() != "doc" && fEntity.SUFFIX.Trim()!=".docx" && fEntity.SUFFIX.Trim()!="docx"))
-            {
-                //err = "附件后缀不是.doc\.docx";
-                return;
-            }
+        //    if (fEntity.SUFFIX == null || (fEntity.SUFFIX.Trim() != ".doc" && fEntity.SUFFIX.Trim() != "doc" && fEntity.SUFFIX.Trim()!=".docx" && fEntity.SUFFIX.Trim()!="docx"))
+        //    {
+        //        //err = "附件后缀不是.doc\.docx";
+        //        return;
+        //    }
 
-            object Nothing = System.Reflection.Missing.Value;
-            Microsoft.Office.Interop.Word.Application app = new Microsoft.Office.Interop.Word.Application();
-            Microsoft.Office.Interop.Word.Document doc = new Microsoft.Office.Interop.Word.Document();
-            object Obj_FileName = filePath;
-            object Visible = false;
-            object ReadOnly = false;
-            object missing = System.Reflection.Missing.Value;           
-            try
-            {
-                //打开文件
-                doc = app.Documents.Open(ref Obj_FileName, ref missing, ref ReadOnly, ref missing,
-                    ref missing, ref missing, ref missing, ref missing,
-                    ref missing, ref missing, ref missing, ref Visible,
-                    ref missing, ref missing, ref missing,
-                    ref missing);
-                doc.Activate();
+        //    object Nothing = System.Reflection.Missing.Value;
+        //    Microsoft.Office.Interop.Word.Application app = new Microsoft.Office.Interop.Word.Application();
+        //    Microsoft.Office.Interop.Word.Document doc = new Microsoft.Office.Interop.Word.Document();
+        //    object Obj_FileName = filePath;
+        //    object Visible = false;
+        //    object ReadOnly = false;
+        //    object missing = System.Reflection.Missing.Value;           
+        //    try
+        //    {
+        //        //打开文件
+        //        doc = app.Documents.Open(ref Obj_FileName, ref missing, ref ReadOnly, ref missing,
+        //            ref missing, ref missing, ref missing, ref missing,
+        //            ref missing, ref missing, ref missing, ref Visible,
+        //            ref missing, ref missing, ref missing,
+        //            ref missing);
+        //        doc.Activate();
 
-                //--判断word文件是否存在·不存在则略过插入。
-                if (!System.IO.File.Exists(filePath))
-                {
-                    return;
-                }
-
-
-                foreach (Microsoft.Office.Interop.Word.Bookmark bm in doc.Bookmarks)
-                {
-                    if (bm.Name == "批准签字处")
-                    {
-                        bm.Select();
-                        //要插入的图片文件
-                        app.Selection.InlineShapes.AddPicture(picPath, ref missing, ref missing, ref missing);
-                        doc.Application.ActiveDocument.InlineShapes[1].Width = (float)140; // 图片宽度 
-                        doc.Application.ActiveDocument.InlineShapes[1].Height = (float)30; // 图片高度                            
-                    }
-                    else if(bm.Name == "批准签字处")
-                    {
-                        bm.Select();
-                        //要插入的图片文件
-                        app.Selection.InlineShapes.AddPicture(picPath, ref missing, ref missing, ref missing);
-                        doc.Application.ActiveDocument.InlineShapes[1].Width = (float)140; // 图片宽度 
-                        doc.Application.ActiveDocument.InlineShapes[1].Height = (float)30; // 图片高度    
-                    }
-                    else if(bm.Name == "批准签字处")
-                    {
-                        bm.Select();
-                        //要插入的图片文件
-                        app.Selection.InlineShapes.AddPicture(picPath, ref missing, ref missing, ref missing);
-                        doc.Application.ActiveDocument.InlineShapes[1].Width = (float)140; // 图片宽度 
-                        doc.Application.ActiveDocument.InlineShapes[1].Height = (float)30; // 图片高度    
-                    }
-
-                }              
-                doc.Save();
+        //        //--判断word文件是否存在·不存在则略过插入。
+        //        if (!System.IO.File.Exists(filePath))
+        //        {
+        //            return;
+        //        }
 
 
-            }
-            catch (Exception mage)
-            {
-                //写入系统日志
-                /*暂略*/
-            }
-            finally
-            {
+        //        foreach (Microsoft.Office.Interop.Word.Bookmark bm in doc.Bookmarks)
+        //        {
+        //            if (bm.Name == "批准签字处")
+        //            {
+        //                bm.Select();
+        //                //要插入的图片文件
+        //                app.Selection.InlineShapes.AddPicture(picPath, ref missing, ref missing, ref missing);
+        //                doc.Application.ActiveDocument.InlineShapes[1].Width = (float)140; // 图片宽度 
+        //                doc.Application.ActiveDocument.InlineShapes[1].Height = (float)30; // 图片高度                            
+        //            }
+        //            else if(bm.Name == "批准签字处")
+        //            {
+        //                bm.Select();
+        //                //要插入的图片文件
+        //                app.Selection.InlineShapes.AddPicture(picPath, ref missing, ref missing, ref missing);
+        //                doc.Application.ActiveDocument.InlineShapes[1].Width = (float)140; // 图片宽度 
+        //                doc.Application.ActiveDocument.InlineShapes[1].Height = (float)30; // 图片高度    
+        //            }
+        //            else if(bm.Name == "批准签字处")
+        //            {
+        //                bm.Select();
+        //                //要插入的图片文件
+        //                app.Selection.InlineShapes.AddPicture(picPath, ref missing, ref missing, ref missing);
+        //                doc.Application.ActiveDocument.InlineShapes[1].Width = (float)140; // 图片宽度 
+        //                doc.Application.ActiveDocument.InlineShapes[1].Height = (float)30; // 图片高度    
+        //            }
 
-                /*--- C# 读写Word ：提示将 Word 用作自动化服务器时提示保存 Normal.dot (解决方案之1)   ----*/
-                /////使用 Quit 方法的 SaveChanges 参数，如下所示： 
-                ////object SaveOption, OriginalFormat, RouteDocument;
-                ////SaveOption = Word.WdSaveOptions.wdPromptToSaveChanges;
-                ////OriginalFormat = Word.WdOriginalFormat.wdPromptUser;
-                ////RouteDocument = Missing.Value;
-                ////if (wa != null)
-                ////{
-                ////    wa.Quit(ref SaveOption, ref OriginalFormat, ref RouteDocument);
-                ////    wa = null;
-                ////}
-
-                /*--- C# 读写Word ：提示将 Word 用作自动化服务器时提示保存 Normal.dot (解决方案之2)   ----*/
-                ///// wdApp2.Quit 方法的调用语句之前，添加以下行：
-                app.NormalTemplate.Saved = true;
+        //        }              
+        //        doc.Save();
 
 
-                //关闭网页doc
-                doc.Close(ref Nothing, ref Nothing, ref Nothing);
-                if (doc != null)
-                {
-                    System.Runtime.InteropServices.Marshal.ReleaseComObject(doc);
-                    doc = null;
-                }
-                //关闭wordApp
-                app.Quit(ref Nothing, ref Nothing, ref Nothing);
-                if (app != null)
-                {
-                    System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
-                    app = null;
-                }
-                //释放word进程
-                GC.Collect();
-            }
-        }
+        //    }
+        //    catch (Exception mage)
+        //    {
+        //        //写入系统日志
+        //        /*暂略*/
+        //    }
+        //    finally
+        //    {
+
+        //        /*--- C# 读写Word ：提示将 Word 用作自动化服务器时提示保存 Normal.dot (解决方案之1)   ----*/
+        //        /////使用 Quit 方法的 SaveChanges 参数，如下所示： 
+        //        ////object SaveOption, OriginalFormat, RouteDocument;
+        //        ////SaveOption = Word.WdSaveOptions.wdPromptToSaveChanges;
+        //        ////OriginalFormat = Word.WdOriginalFormat.wdPromptUser;
+        //        ////RouteDocument = Missing.Value;
+        //        ////if (wa != null)
+        //        ////{
+        //        ////    wa.Quit(ref SaveOption, ref OriginalFormat, ref RouteDocument);
+        //        ////    wa = null;
+        //        ////}
+
+        //        /*--- C# 读写Word ：提示将 Word 用作自动化服务器时提示保存 Normal.dot (解决方案之2)   ----*/
+        //        ///// wdApp2.Quit 方法的调用语句之前，添加以下行：
+        //        app.NormalTemplate.Saved = true;
+
+
+        //        //关闭网页doc
+        //        doc.Close(ref Nothing, ref Nothing, ref Nothing);
+        //        if (doc != null)
+        //        {
+        //            System.Runtime.InteropServices.Marshal.ReleaseComObject(doc);
+        //            doc = null;
+        //        }
+        //        //关闭wordApp
+        //        app.Quit(ref Nothing, ref Nothing, ref Nothing);
+        //        if (app != null)
+        //        {
+        //            System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
+        //            app = null;
+        //        }
+        //        //释放word进程
+        //        GC.Collect();
+        //    }
+        //}
         /// <summary>
         /// 报告添加签名（需要图片签名）
         /// </summary>
@@ -515,7 +516,9 @@ namespace Langben.Report
         /// <param name="hssfworkbook">exel</param>
         /// <param name="picList">操作人信息集合</param>
         /// <param name="fEntity">附件对象</param>
-        public void AddQianMing_BaoGao(PREPARE_SCHEME entity, Dictionary<string, SysPerson> picList, FILE_UPLOADER fEntity, ExportType type)
+        /// <param name="type">报告类型</param>
+        /// <param name="REPORTSTATUS">报告状态</param>
+        public void AddQianMing_BaoGao(PREPARE_SCHEME entity, Dictionary<string, SysPerson> picList, FILE_UPLOADER fEntity, ExportType type,string REPORTSTATUS)
         {
             string xlsPath = fEntity.FULLPATH;
 
@@ -530,7 +533,7 @@ namespace Langben.Report
 
             string sheetName_Destination = "封皮";
             string sheetName_Destination2 = "第二页";
-            if (entity.CONCLUSION == "不合格" && type == ExportType.Report_JianDing)//不合格只有通知书封皮
+            if ((entity.CONCLUSION == "不合格" || fEntity.CONCLUSION=="不合格")&& type == ExportType.Report_JianDing)//不合格只有通知书封皮，上传的结论存在附件 FILE_UPLOADER中了，非上传存在预备方案PREPARE_SCHEME中 2017.3.23
             {
                 sheetName_Destination = "通知书封皮";
             }
@@ -552,7 +555,7 @@ namespace Langben.Report
                     if (picList != null && picList.ContainsKey(entity.APPROVALEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.APPROVALEPERSON].HDpic))
                     {
                         picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.APPROVALEPERSON].HDpic);
-                        if (System.IO.File.Exists(picPath))
+                        if (System.IO.File.Exists(picPath) && REPORTSTATUS==Common.REPORTSTATUS.已批准.ToString())//只有批准同意后才添加图片签名，其他时候都只是改名字 2017.3.22
                         {
 
                             bytes = System.IO.File.ReadAllBytes(picPath);
@@ -613,7 +616,7 @@ namespace Langben.Report
                     if (picList != null && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].HDpic))
                     {
                         picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.AUDITTEPERSON].HDpic);
-                        if (System.IO.File.Exists(picPath))
+                        if (System.IO.File.Exists(picPath) && REPORTSTATUS == Common.REPORTSTATUS.已批准.ToString())//只有批准同意后才添加图片签名，其他时候都只是改名字 2017.3.22
                         {
                             bytes = System.IO.File.ReadAllBytes(picPath);
                             int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
@@ -666,10 +669,16 @@ namespace Langben.Report
             {
                 if (!string.IsNullOrWhiteSpace(entity.CREATEPERSON))
                 {
+                    #region 由于检定员/校准员改为存的是真实姓名，刘腾飞要求改为取名字相同的第一个人，风险如果真实名字有多个的情况下有可能签名显示会不对 2017.3.23
+                    if (picList!=null && picList.Count>0 &&  picList.Values.FirstOrDefault(p=>p.MyName==entity.CREATEPERSON)!=null)
+                    {
+                        entity.CREATEPERSON = picList.Values.FirstOrDefault(p => p.MyName == entity.CREATEPERSON).Name;
+                    }
+                    #endregion 
                     if (picList != null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].HDpic))
                     {
                         picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.CREATEPERSON].HDpic);
-                        if (System.IO.File.Exists(picPath))
+                        if (System.IO.File.Exists(picPath) && REPORTSTATUS == Common.REPORTSTATUS.已批准.ToString())//只有批准同意后才添加图片签名，其他时候都只是改名字 2017.3.22
                         {
                             bytes = System.IO.File.ReadAllBytes(picPath);
                             int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
@@ -729,7 +738,8 @@ namespace Langben.Report
         /// <param name="hssfworkbook">exel</param>
         /// <param name="picList">操作人信息集合</param>
         /// <param name="fEntity">附件对象</param>
-        public void AddQianMing_YuanShiJiLu(PREPARE_SCHEME entity, Dictionary<string, SysPerson> picList, FILE_UPLOADER fEntity)
+        /// <param name="REPORTSTATUS">报告状态</param>
+        public void AddQianMing_YuanShiJiLu(PREPARE_SCHEME entity, Dictionary<string, SysPerson> picList, FILE_UPLOADER fEntity,string REPORTSTATUS)
         {
             string xlsPath = fEntity.FULLPATH2;
 
@@ -758,12 +768,17 @@ namespace Langben.Report
                     //{
                     //    sheet_Destination.GetRow(fEntity.Row_JianDingYuan_YuanShiJiLu).GetCell(fEntity.Col_JianDingYuan_YuanShiJiLu).SetCellValue(entity.CREATEPERSON);
                     //}
-
+                    #region 由于检定员/校准员改为存的是真实姓名，刘腾飞要求改为取名字相同的第一个人，风险存在如果真实名字有多个的情况下有可能签名显示会不对 2017.3.23
+                    if (picList != null && picList.Count > 0 && picList.Values.FirstOrDefault(p => p.MyName == entity.CREATEPERSON) != null)
+                    {
+                        entity.CREATEPERSON = picList.Values.FirstOrDefault(p => p.MyName == entity.CREATEPERSON).Name;
+                    }
+                    #endregion 
 
                     if (picList != null && picList.ContainsKey(entity.CREATEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.CREATEPERSON].HDpic))
                     {
                         picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.CREATEPERSON].HDpic);
-                        if (System.IO.File.Exists(picPath))
+                        if (System.IO.File.Exists(picPath) && REPORTSTATUS == Common.REPORTSTATUS.已批准.ToString())//只有批准同意后才添加图片签名，其他时候都只是改名字 2017.3.22
                         {
                             bytes = System.IO.File.ReadAllBytes(picPath);
                             int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
@@ -819,7 +834,7 @@ namespace Langben.Report
                     if (picList != null && picList.ContainsKey(entity.AUDITTEPERSON) && !string.IsNullOrWhiteSpace(picList[entity.AUDITTEPERSON].HDpic))
                     {
                         picPath = System.Web.HttpContext.Current.Server.MapPath(picList[entity.AUDITTEPERSON].HDpic);
-                        if (System.IO.File.Exists(picPath))
+                        if (System.IO.File.Exists(picPath) && REPORTSTATUS == Common.REPORTSTATUS.已批准.ToString())//只有批准同意后才添加图片签名，其他时候都只是改名字 2017.3.22
                         {
                             bytes = System.IO.File.ReadAllBytes(picPath);
                             int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
@@ -1711,14 +1726,16 @@ namespace Langben.Report
                 //检定员\校准员               
                 if (entity.CREATEPERSON != null && entity.CREATEPERSON.Trim() != "")
                 {
-                    if (picList != null && picList.Count > 0 && picList[entity.CREATEPERSON] != null && picList[entity.CREATEPERSON].MyName != null && picList[entity.CREATEPERSON].MyName.Trim() != "")
-                    {
-                        sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(picList[entity.CREATEPERSON].MyName);
-                    }
-                    else
-                    {
-                        sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CREATEPERSON);
-                    }
+                    //if (picList != null && picList.Count > 0 && picList.ContainsKey[entity.CREATEPERSON]&& picList[entity.CREATEPERSON].MyName != null && picList[entity.CREATEPERSON].MyName.Trim() != "")
+                    //{
+                    //    sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(picList[entity.CREATEPERSON].MyName);
+                    //}
+                    //else
+                    //{
+                    //    sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CREATEPERSON);
+                    //}
+                    //由于检定员/校准员改为存的是真实姓名直接取就可以 2017.3.23
+                    sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue(entity.CREATEPERSON);
                 }
                 else
                 {
@@ -2981,6 +2998,7 @@ namespace Langben.Report
             string sheetName_Destination = "数据";
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
+            bool IsHaveHideData = false;//是否有隐藏数据 解决缺少线问题 
             #region 检测项目            
             if (vList != null && vList.Count > 0)
             {
@@ -3001,11 +3019,11 @@ namespace Langben.Report
                     //    continue;
                     //}
 
-                    //if (iVTEST_ITE.RULEID != "169-2010_6_2" && iVTEST_ITE.RULEID!= "169-2010_6_1")
+                    //if (iVTEST_ITE.PARENTID != "982-2003_6")
                     //{
                     //    continue;
                     //}
-                    //if(iVTEST_ITE.RULEID!= "1085-2013_8" && iVTEST_ITE.RULEID!= "1085-2013_9" && iVTEST_ITE.RULEID != "1085-2013_10")
+                    //if (iVTEST_ITE.RULEID != "1264-2010_3_1")
                     //{
                     //    continue;
                     //}
@@ -3039,59 +3057,9 @@ namespace Langben.Report
                     bool IsBiaoGe = true;//是否画表格
 
                     #region 检测项目标题     
-                    //相同检测项只展示一个标题      
-
-                    CopyRow(sheet_Source, sheet_Destination, ruleTitleTemplateIndex, RowIndex, 1, false);
-
-
-                    string celStr = i.ToString() + "、";
-
-                    if (iVTEST_ITE.NAME != null && iVTEST_ITE.NAME.Trim() != "")
-                    {
-                        celStr = celStr + iVTEST_ITE.NAME.Trim() + "：";
-                    }
-                    //结论,只有非表格的才需要打结论
-                    if (iEntity != null && (iVTEST_ITE.INPUTSTATE == InputStateEnums.HGBHG.ToString() || iVTEST_ITE.INPUTSTATE == InputStateEnums.WBK.ToString()) && iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
-                    {
-                        celStr = celStr + iEntity.CONCLUSION.Trim();
-                    }
-                    else if (iEntity != null && type == ExportType.Report_JianDing && entity.CONCLUSION == "合格")//处理检定报告 总结论是合格 ，如果不合格都出数据，不出合格不合格
-                    {
-                        string msg = string.Empty;
-                        IsBiaoGe = IsBiaoGeByDengJi(iEntity, ref msg);
-                        if (!IsBiaoGe && (msg != null && msg.Trim() != ""))
-                        {
-                            celStr = celStr + msg;
-                        }
-                        //else
-                        //{
-                        //    celStr = celStr + "/";
-                        //}
-
-                    }
-                    else if (iEntity != null && type == ExportType.Report_JianDing && entity.CONCLUSION == "不合格")//处理检定报告 总结论是合格 ，如果不合格都出数据，不出合格不合格
-                    {
-                        string msg = string.Empty;
-                        IsBiaoGe = true;// IsBiaoGeByDengJi(iEntity, ref msg);
-                        if (!IsBiaoGe && (msg != null && msg.Trim() != ""))
-                        {
-                            celStr = celStr + msg;
-                        }
-                        //else
-                        //{
-                        //    celStr = celStr + "/";
-                        //}
-
-                    }
-                    else if (iEntity == null)
-                    {
-                        celStr = celStr + "/";
-                    }
-                    sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue(celStr);
-                    RowIndex++;
-
                     //相同检测项只展示一个标题  
-                    bool IsSameRuleName = false;
+
+                    bool IsSameRuleName = false;                   
                     if (((SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null)
                         || (iVTEST_ITE.NAME == "基本误差" && iVTEST_ITE.PARENTID == "166-1993_3")
                         || (iVTEST_ITE.NAME == "基本误差" && iVTEST_ITE.PARENTID == "125-2004_9")
@@ -3100,15 +3068,94 @@ namespace Langben.Report
                         || (iVTEST_ITE.NAME == "示值误差" && iVTEST_ITE.PARENTID == "982-2003_6")//示值误差982-2003_6
                         )
                         && SameRuleName == iVTEST_ITE.NAME)
-                    {
-                        HideRow(sheet_Destination, RowIndex - 2, 2);
+                    {                        
 
                         IsSameRuleName = true;
                     }
                     else
-                    {
+                    {                       
+
+                        CopyRow(sheet_Source, sheet_Destination, ruleTitleTemplateIndex, RowIndex, 1, false);
+
+
+                        string celStr = i.ToString() + "、";
+
+                        if (iVTEST_ITE.NAME != null && iVTEST_ITE.NAME.Trim() != "")
+                        {
+                            celStr = celStr + iVTEST_ITE.NAME.Trim() + "：";
+                        }
+                        //结论,只有非表格的才需要打结论
+                        if (iEntity != null && (iVTEST_ITE.INPUTSTATE == InputStateEnums.HGBHG.ToString() || iVTEST_ITE.INPUTSTATE == InputStateEnums.WBK.ToString()) && iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
+                        {
+                            celStr = celStr + iEntity.CONCLUSION.Trim();
+                        }
+                        else if (iEntity != null && type == ExportType.Report_JianDing && entity.CONCLUSION == "合格")//处理检定报告 总结论是合格 ，如果不合格都出数据，不出合格不合格
+                        {
+                            string msg = string.Empty;
+                            IsBiaoGe = IsBiaoGeByDengJi(iEntity, ref msg);
+                            if (!IsBiaoGe && (msg != null && msg.Trim() != ""))
+                            {
+                                celStr = celStr + msg;
+                            }
+                            //else
+                            //{
+                            //    celStr = celStr + "/";
+                            //}
+
+                        }
+                        else if (iEntity != null && type == ExportType.Report_JianDing && entity.CONCLUSION == "不合格")//处理检定报告 总结论是合格 ，如果不合格都出数据，不出合格不合格
+                        {
+                            string msg = string.Empty;
+                            IsBiaoGe = true;// IsBiaoGeByDengJi(iEntity, ref msg);
+                            if (!IsBiaoGe && (msg != null && msg.Trim() != ""))
+                            {
+                                celStr = celStr + msg;
+                            }
+                            //else
+                            //{
+                            //    celStr = celStr + "/";
+                            //}
+
+                        }
+                        else if (iEntity == null)
+                        {
+                            celStr = celStr + "/";
+                        }
+                        sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue(celStr);
+                        RowIndex++;
+                        IsHaveHideData = false;
                         i++;
                     }
+
+                    ////相同检测项只展示一个标题  
+                    //bool IsSameRuleName = false;
+                    //if (((SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null)
+                    //    || (iVTEST_ITE.NAME == "基本误差" && iVTEST_ITE.PARENTID == "166-1993_3")
+                    //    || (iVTEST_ITE.NAME == "基本误差" && iVTEST_ITE.PARENTID == "125-2004_9")
+                    //    || (iVTEST_ITE.NAME == "基本误差" && iVTEST_ITE.PARENTID == "1072-2011_6")
+                    //   || (iVTEST_ITE.NAME == "基本误差" && iVTEST_ITE.PARENTID == "1072-2011_6")
+                    //    || (iVTEST_ITE.NAME == "示值误差" && iVTEST_ITE.PARENTID == "982-2003_6")//示值误差982-2003_6
+                    //    )
+                    //    && SameRuleName == iVTEST_ITE.NAME)
+                    //{
+                    //    // HideRow(sheet_Destination, RowIndex - 2, 2);
+
+                    //    //DeleteRow(sheet_Destination, RowIndex);
+                    //    //RowIndex--;
+                    //    //DeleteRow(sheet_Destination, RowIndex - 2);
+                    //    //DeleteRow(sheet_Destination, RowIndex - 2);
+                    //    //RowIndex = RowIndex - 2;
+
+                    //    DeleteRow(sheet_Destination, RowIndex - 1);
+                    //    RowIndex = RowIndex - 1;
+
+                    //    IsSameRuleName = true;
+                    //}
+                    //else
+                    //{                        
+                    //    IsHaveHideData = false;
+                    //    i++;
+                    //}
 
                     #endregion
 
@@ -3130,7 +3177,7 @@ namespace Langben.Report
                         TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
                         //解析html表格数据    
                         //int RowIndexT = RowIndex;                       
-                        RowIndex = paserData_1(iEntity, IsSameRuleName, sheet_Source, sheet_Destination, RowIndex, temp, allSpecialCharacters, type, iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan);
+                        RowIndex = paserData_1(iEntity, IsSameRuleName, sheet_Source, sheet_Destination, RowIndex, temp,ref IsHaveHideData, allSpecialCharacters, type, iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan);
 
                         //if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
 
@@ -3180,12 +3227,37 @@ namespace Langben.Report
 
                 }
             }
+
+           
+            
             #endregion
             //结尾             
             CopyRow(sheet_Source, sheet_Destination, JWTemplateIndex, RowIndex, 1, true);
+            //删除所有无用行数据
+            DeleteAllRow(sheet_Destination);
             //设置页面页脚
             SetHeaderAndFooter(sheet_Destination, entity, type);
+
+
+
+
             sheet_Destination.ForceFormulaRecalculation = true;
+        }
+        /// <summary>
+        /// 删除所有没用的行，解决线问题
+        /// </summary>
+        private void DeleteAllRow(ISheet sheet)
+        {
+            if(DeleteRowList!=null && DeleteRowList.Count>0)
+            {
+                DeleteRowList = DeleteRowList.Distinct().ToList();
+                int count = 0;
+                for(int i=0;i<DeleteRowList.Count;i++)
+                {
+                    DeleteRow(sheet, DeleteRowList[i]-count);
+                    count++;
+                }
+            }
         }
         /// <summary>
         /// S化整合并数据
@@ -4721,13 +4793,13 @@ namespace Langben.Report
                 #endregion
             }
         }
-        private bool RemoveState1(List<RowInfo> temp)
+        private bool RemoveState1(List<RowInfo> temp,string code= "state1")
         {
             foreach (var f in temp)
             {
                 foreach (var c in f.Cells)
                 {
-                    if (c.Code == "state1")
+                    if (c.Code == code)
                     {
                         f.Cells.Remove(c);
                         return true;
@@ -4748,8 +4820,10 @@ namespace Langben.Report
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <param name="iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan">电能标准偏差估计值检测项（为了解决s化整问题）</param>
         /// <returns></returns>
-        private int paserData_1(QUALIFIED_UNQUALIFIED_TEST_ITE iEntity, bool IsSameRuleName, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, SpecialCharacters allSpecialCharacters = null, ExportType type = ExportType.OriginalRecord_JianDing, QUALIFIED_UNQUALIFIED_TEST_ITE iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan = null)
+        private int paserData_1(QUALIFIED_UNQUALIFIED_TEST_ITE iEntity, bool IsSameRuleName, ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Destination, TableTemplate temp, ref bool isHaveHideData,SpecialCharacters allSpecialCharacters = null, ExportType type = ExportType.OriginalRecord_JianDing, QUALIFIED_UNQUALIFIED_TEST_ITE iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan = null)
         {
+            //isHaveHideData = false;
+            bool IsHaveHideData1 = isHaveHideData;
             int RowIndexT = rowIndex_Destination;
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(iEntity.HTMLVALUE);
@@ -4763,7 +4837,38 @@ namespace Langben.Report
                 Dictionary<int, DataValue> dataDic_DianNengBiaoZhunPianChaGuZhiJiSuan = AnalyticHTML.GetData(doc_DianNengBiaoZhunPianChaGuZhiJiSuan);//数据
                 dataDic = SHuaZhengHeBing(dataDic, dataDic_DianNengBiaoZhunPianChaGuZhiJiSuan);
             }
-            #endregion 
+            #endregion
+
+            #region 处理空数据行删除
+            //if (dataDic!=null && dataDic.Count>0 && temp != null && temp.Cells!=null && temp.Cells.Count>0 && temp.Cells.Count(p => p.IsHideRowNull == "Y") == 1)
+            //{
+            //    string hideCode =  temp.Cells.FirstOrDefault(p => p.IsHideRowNull == "Y").Code;
+            //    bool IsEnd = false;
+            //    foreach (int tongDaoID in dataDic.Keys)
+            //    {
+            //        if (dataDic[tongDaoID] != null && dataDic[tongDaoID].Count > 0)
+            //        {
+            //            DataValue d = dataDic[tongDaoID];
+                        
+            //            if (d != null && d.Count > 0)
+            //            {
+            //                while (!IsEnd)
+            //                {
+            //                    foreach (Cell c in temp.Cells)
+            //                    {
+            //                        if (c.Code != null && c.Code.Trim() != "" && d.Data.FirstOrDefault(p=>p.name==)
+            //                        {
+
+            //                        }
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+                
+
+            //}
+            #endregion
 
             Dictionary<int, List<MYDataHead>> headDic = AnalyticHTML.GetHeadData(doc);//表头           
             Dictionary<int, List<MYDataHead>> footDic = AnalyticHTML.GetFootData(doc);//表尾
@@ -4997,10 +5102,45 @@ namespace Langben.Report
 
                                     continue;
                                 }
+                                else if (iEntity.RULEID == "1072-2011_6_1" && headCount > 1 && k == 0)//多个通道，只有第一个通道有二级标题
+                                {
+                                    RemoveState1(temp.TableTitleList);
+                                    continue;
+                                }
+                                else if (iEntity.RULEID == "1072-2011_6_2" && headCount > 1 && k == 0)//多个通道，只有第一个通道有二级标题
+                                {
+                                    RemoveState1(temp.TableTitleList);
+                                    continue;
+                                }
+                                else if (iEntity.RULEID == "125-2004_9_2" && headCount > 1 && k == 0)//多个通道，只有第一个通道有二级标题
+                                {
+                                    RemoveState1(temp.TableTitleList);
+                                    continue;
+                                }
+                                else if (iEntity.RULEID == "125-2004_9_3" && headCount > 1 && k == 0)//多个通道，只有第一个通道有二级标题
+                                {
+                                    RemoveState1(temp.TableTitleList, "state");
+                                    continue;
+                                }                                
                                 else
                                 {
-                                    CopyRow_1(sheet_Source, sheet_Destination, t.RowIndex + k, rowIndex_Destination, 1, true, temp.TableTitleList, allSpecialCharacters, headDic[tongDaoID]);
+                                    //解决有的表头为空时需要显示/
+                                    if (iEntity.RULEID == "125-2004_9_1" || iEntity.RULEID== "982-2003_6_1" || 
+                                        iEntity.RULEID== "982-2003_6_2" || iEntity.RULEID== "1072-2011_6_1" ||
+                                        iEntity.RULEID== "166-1993_3_4")
+                                    {
+                                        CopyRow_1(sheet_Source, sheet_Destination, t.RowIndex + k, rowIndex_Destination, 1, true, temp.TableTitleList, allSpecialCharacters, headDic[tongDaoID],true);
+                                    }
+                                    else
+                                    {
+                                        CopyRow_1(sheet_Source, sheet_Destination, t.RowIndex + k, rowIndex_Destination, 1, true, temp.TableTitleList, allSpecialCharacters, headDic[tongDaoID]);
+                                    }
                                     rowIndex_Destination++;
+                                }
+                                if (IsHaveHideData1 && k == 0 && iEntity.RULEID != "982-2003_6_2")
+                                {
+                                    //SetBorderTop(sheet_Destination.Workbook, sheet_Destination, rowIndex_Destination - 1);
+                                    SetBorderTop(sheet_Destination.Workbook, sheet_Destination, rowIndex_Destination - 2);
                                 }
 
 
@@ -5071,6 +5211,8 @@ namespace Langben.Report
                                 if ((value == null || string.IsNullOrWhiteSpace(value.String)) && temp.Cells.FirstOrDefault(p => p.Code == d.name) != null && temp.Cells.FirstOrDefault(p => p.Code == d.name).IsHideRowNull == "Y")
                                 {
                                     HideRow(sheet_Destination, c.FirstRow, 1);
+                                    isHaveHideData = true;
+                                    //DeleteRowList.Add(c.FirstRow);
                                 }
                                 else if ((value == null || string.IsNullOrWhiteSpace(value.String)) && d.name.IndexOf("_UNIT") < 0)
                                 {
@@ -5083,9 +5225,11 @@ namespace Langben.Report
                                         (iEntity.RULEID == "1075-2001_3_1") || 
                                         (iEntity.RULEID == "169-2010_4_2") || 
                                         (iEntity.RULEID== "984-2004_2") ||
-                                        (iEntity.RULEID== "1085-2013_6_1"))//解决单元格无法合并问题，目前没找到原因
+                                        (iEntity.RULEID== "1085-2013_6_1") ||
+                                        (iEntity.RULEID== "169-2010_4_3") ||
+                                        (iEntity.RULEID== "1264-2010_3_1"))//解决单元格无法合并问题，目前没找到原因
                                     {
-                                        for (int k = 0; k <= d.mergedRowNum+1; k++)
+                                        for (int k = 0; k <= d.mergedRowNum*3; k++)
                                         {
                                             sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
                                         }
@@ -5147,10 +5291,11 @@ namespace Langben.Report
             if (IsSameRuleName)
             {
                 //为了相同项表格底部没有线   
-                if (iEntity.RULEID != "169-2010_6_2" && iEntity.RULEID != "169-2010_6_1" && type== ExportType.Report_JianDing)
-                {
-                    SetBorderTop(sheet_Destination.Workbook, sheet_Destination, RowIndexT);
-                }
+                //if ((iEntity.RULEID!= "982-2003_6_2" && iEntity.RULEID != "169 -2010_6_2" && iEntity.RULEID != "169-2010_6_1" && iEntity.RULEID!= "169-2010_6_3" && iEntity.RULEID!= "169-2010_6_4" && type== ExportType.Report_JianDing) &&
+                //    (iEntity.RULEID != "169-2010_4_2" && iEntity.RULEID != "169-2010_4_3" && iEntity.RULEID!= "169-2010_4_1" && type== ExportType.Report_JianDing))
+                //{
+                //    SetBorderTop(sheet_Destination.Workbook, sheet_Destination, RowIndexT);
+                //}
             }
 
             #region 注、说明
@@ -5208,7 +5353,7 @@ namespace Langben.Report
                 //画底部不确定表格及填充数据
                 for (int i = 0; i < buDueDingDu_DiBu.Count; i++)
                 {
-                    CopyRow_1(sheet_Source, sheet_Destination, 1368, rowIndex_Destination, 1, true, rowInfoList, allSpecialCharacters, buDueDingDu_DiBu.Data);
+                    CopyRow_1(sheet_Source, sheet_Destination, 1368, rowIndex_Destination, 1, true, rowInfoList, allSpecialCharacters, buDueDingDu_DiBu.Data,true);
                     rowIndex_Destination = rowIndex_Destination + 1;
                 }
 
@@ -5218,8 +5363,8 @@ namespace Langben.Report
 
             //为了表格底部没有线           
             CopyRow(sheet_Source, sheet_Destination, 4, rowIndex_Destination, 1, true);
-            // 
-            if (iEntity.RULEID == "1085-2013_8" || iEntity.RULEID == "1085-2013_9" || iEntity.RULEID == "124-2005_3" ||
+                        
+            if (iEntity.RULEID == "1085-2013_8" || iEntity.RULEID == "1085-2013_9" || iEntity.RULEID == "124-2005_3" || iEntity.RULEID== "169-2010_4_1"||
                 ((iEntity.RULEID == "440-2008_9" || iEntity.RULEID == "169-2010_4_2" || iEntity.RULEID == "169-2010_4_3" ||
                  iEntity.RULEID == "169-2010_5" || iEntity.RULEID == "169-2010_6_1" || iEntity.RULEID == "169-2010_6_2") && type == ExportType.Report_JianDing))
             {
@@ -5232,9 +5377,11 @@ namespace Langben.Report
                     targetCell.CellStyle = style;
                 }
 
+
             }
             else if (iEntity.RULEID == "169-2010_5")
-            {
+            {              
+
                 ICellStyle style = sheet_Destination.Workbook.CreateCellStyle();
                 style.BorderBottom = BorderStyle.None;
                 style.BorderTop = BorderStyle.None;
@@ -5247,9 +5394,6 @@ namespace Langben.Report
                     }
                 }
             }
-
-
-
             return rowIndex_Destination;
         }
 
@@ -5267,6 +5411,17 @@ namespace Langben.Report
                 sourceRow.Height = 0;
                 startRowIndex++;
             }
+        }
+        /// <summary>
+        /// 删除行
+        /// </summary>
+        /// <param name="sheet"></param>
+        /// <param name="fowIndex">行号</param>        
+        private void DeleteRow(ISheet sheet,int RowIndex)
+        {
+            IRow sourceRow = sheet.GetRow(RowIndex);
+            sheet.RemoveRow(sourceRow);
+            sheet.ShiftRows(RowIndex+1, sheet.LastRowNum, -1);
         }
 
         /// <summary>

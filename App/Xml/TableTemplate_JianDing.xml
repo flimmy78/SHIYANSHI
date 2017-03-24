@@ -8418,7 +8418,7 @@
 					 <Code>myx</Code>
 					<ColIndex>-1</ColIndex>
 					<ColCount>0</ColCount>
-					<IsMergeSameValue>Y</IsMergeSameValue>
+					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
@@ -9006,7 +9006,7 @@
 					<Code>myx</Code>
 					<ColIndex>-1</ColIndex>
 					<ColCount>0</ColCount>
-					<IsMergeSameValue>Y</IsMergeSameValue>
+					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>

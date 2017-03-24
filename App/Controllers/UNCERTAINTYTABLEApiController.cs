@@ -574,14 +574,14 @@ namespace Langben.App.Controllers
                 total = alldata.Count,
                 rows = alldata.Select(s => new
                 {
-                    ID = s.ID.TrimEnd(','),
-                    ASSESSMENTITEM = s.ASSESSMENTITEM.TrimEnd(','),
-                    THERANGESCOPE = s.THERANGESCOPE.TrimEnd(','),
-                    THEFREQUENCY = s.THEFREQUENCY.TrimEnd(','),
-                    INDEX1 = s.INDEX1.TrimEnd(','),
-                    INDEX2 = s.INDEX2.TrimEnd(','),
+                    ID = (!string.IsNullOrWhiteSpace(s.ID))?s.ID.TrimEnd(','):"",
+                    ASSESSMENTITEM = (!string.IsNullOrWhiteSpace(s.ASSESSMENTITEM)) ? s.ASSESSMENTITEM.TrimEnd(',') : "",
+                    THERANGESCOPE = (!string.IsNullOrWhiteSpace(s.THERANGESCOPE)) ? s.THERANGESCOPE.TrimEnd(',') : "",
+                    THEFREQUENCY = (!string.IsNullOrWhiteSpace(s.THEFREQUENCY)) ? s.THEFREQUENCY.TrimEnd(',') : "",
+                    INDEX1 = (!string.IsNullOrWhiteSpace(s.THEFREQUENCY)) ? s.INDEX1.TrimEnd(',') : "",
+                    INDEX2 = (!string.IsNullOrWhiteSpace(s.THEFREQUENCY)) ? s.INDEX2.TrimEnd(',') : "",
                     GROUPS = s.GROUPS,
-                    CATEGORY = s.CATEGORY
+                    CATEGORY = (!string.IsNullOrWhiteSpace(s.CATEGORY)) ? s.CATEGORY: ""
                 })
             };
             return show;

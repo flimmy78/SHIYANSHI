@@ -42,9 +42,15 @@ namespace Langben.BLL
                             where f.APPLIANCE_DETAIL_INFORMATIONID == id && f.UNDERTAKE_LABORATORYID == shiyanshi
                             select f).First();
 
-                var file = db.FILE_UPLOADER.Where(w => w.PREPARE_SCHEMEID == data.PREPARE_SCHEMEID && w.STATE2 == "已上传").OrderBy(o => o.CREATETIME).FirstOrDefault();
+                var file = db.FILE_UPLOADER.Where(w => (w.PREPARE_SCHEMEID == data.PREPARE_SCHEMEID && w.STATE == "已上传")||(w.PREPARE_SCHEMEID == data.PREPARE_SCHEMEID && w.STATE2 == "已上传")).OrderBy(o => o.CREATETIME).FirstOrDefault();
                 if (file!=null)
                 {
+                    //上传的报告没有路径
+                    if (!file.PATH2.Contains("up"))
+                    {//D:\codes\App\up\TheReport\20170323\20170323111049_7264.xls
+                        string   str = file.FULLPATH2.Substring(file.FULLPATH2.IndexOf("up"));
+                        return str;
+                    }
                     return file.PATH2;
                 }
             

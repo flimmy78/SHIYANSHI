@@ -34,15 +34,7 @@ namespace Common
                 return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, strPath);
             }
         }
-        /// <summary>
-        ///用时间生成文件名
-        /// </summary>
-        /// <returns></returns>
-        public string GetFileNameByTime()
-        {
-            String newFileName = DateTime.Now.ToString("yyyyMMddHHmmss_ffff", DateTimeFormatInfo.InvariantInfo);
-            return newFileName;
-        }
+      
         /// <summary>
         /// 获取文件的扩展名
         /// </summary>
@@ -65,7 +57,7 @@ namespace Common
         {
             string ramName = fileName.Substring(0, fileName.LastIndexOf('.'));
             string fileExt = GetPostfixStr(fileName); //文件扩展名，不含“.”
-            string ramFileName = GetFileNameByTime() + "." + fileExt; //随机文件名
+            string ramFileName = Common.Result.GetNewId()+ "." + fileExt; //随机文件名
             string dirPath = GetUpLoadPath(); //上传目录相对路径
             string serverFileName = dirPath + ramFileName;
             //物理完整路径                    
@@ -96,7 +88,7 @@ namespace Common
         {
             string ramName = fileName.Substring(0, fileName.LastIndexOf('.'));
             string fileExt = GetPostfixStr(fileName); //文件扩展名，不含“.”
-            string ramFileName = GetFileNameByTime() + "." + fileExt; //随机文件名
+            string ramFileName =Common.Result.GetNewId() + "." + fileExt; //随机文件名
             string dirPath = GetUpLoadUpload(); //上传目录相对路径
             string serverFileName = dirPath + ramFileName;
             string toFileFullPath = GetMapPath(dirPath);  //物理完整路径          

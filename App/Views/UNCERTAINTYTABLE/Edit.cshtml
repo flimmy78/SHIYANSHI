@@ -11,7 +11,32 @@
 
 @using (Html.BeginForm("", "api/UNCERTAINTYTABLEApi/Put"))
 {
+    <style type="text/css">
+    ul {
+        border-bottom: 1px solid #d4d4d4;
+        padding-bottom: 5px;
+    }
 
+    li {
+        width: 235px;
+        height: 26px;
+        margin-bottom: 5px;
+    }
+
+        li label {
+            display: inline;
+            width: 40px;
+        }
+
+        li .my-textbox {
+            width: 150px;
+        }
+
+    .divcss5-b {
+        margin-left: 10px;
+        overflow:auto; height:450px
+    }
+</style>
     <fieldset>
         <legend>
             <input class="a2 f2" type="button" value="修改"  onclick="baocun()"/>
@@ -291,33 +316,7 @@
 }
 
 
-<style type="text/css">
-    ul {
-        border-bottom: 1px solid #d4d4d4;
-        padding-bottom: 5px;
-    }
 
-    li {
-        width: 235px;
-        height: 26px;
-        margin-bottom: 5px;
-    }
-
-        li label {
-            display: inline;
-            width: 40px;
-        }
-
-        li .my-textbox {
-            width: 150px;
-        }
-
-    .divcss5-b {
-        margin-left: 10px;
-        overflow-y: scroll;
-        overflow-x: scroll;
-    }
-</style>
 <script type="text/javascript">
     //下拉框选择事件
     function gradeChange(ex) {
