@@ -19,7 +19,7 @@ namespace Common
         [DataMember]
         public string Id { get; set; }
         /// <summary>
-        /// 姓名
+        /// 用户名
         /// </summary>
         [DataMember]
         public string Name { get; set; }
@@ -29,7 +29,7 @@ namespace Common
         [DataMember]
         public string UNDERTAKE_LABORATORYName { get; set; }
         /// <summary>
-        /// 登录的用户名
+        /// 登录的姓名
         /// </summary>
         [DataMember]
         public string PersonName { get; set; }

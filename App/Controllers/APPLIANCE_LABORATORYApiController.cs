@@ -307,6 +307,7 @@ namespace Langben.App.Controllers
                             }
                             app.ID = item3.ID;
                             app.RECEIVETIME = DateTime.Now;
+                            app.RECEIVEPERSON = account.PersonName;
                             app.ISRECEIVE = Common.ISRECEIVE.否.ToString();
                             if (m_BLL.EditField(ref validationErrors, app))
                             {

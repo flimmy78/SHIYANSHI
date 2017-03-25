@@ -127,7 +127,8 @@ namespace Langben.App.Controllers
         [HttpPost]
         public ActionResult BaoGaoShangChuan(FILE_UPLOADER file, string REPORTNUMBER)//文档上传
         {
-            string acc = GetCurrentPerson();
+            Account acc = GetCurrentAccount();
+             
             PREPARE_SCHEME pre = new PREPARE_SCHEME();
             pre.REPORTNUMBER = REPORTNUMBER;//证书编号
             pre.PACKAGETYPE = Common.PACKAGETYPE.上传.ToString();
@@ -271,7 +272,7 @@ namespace Langben.App.Controllers
             ViewBag.DETECTERID = ps.DETECTERID;//核验员
             ViewBag.CERTIFICATE_CATEGORY = ps.CERTIFICATE_CATEGORY;//报告类别
             ViewBag.CALIBRATION_DATE = ps.CALIBRATION_DATE;//检定/校准时间
-            ViewBag.CHECKERID = acc;//登入用户名
+            ViewBag.CHECKERID = acc.PersonName;//登入姓名
             //ViewBag.VALIDITYEND = ps.VALIDITYEND;//有效期至
             ViewBag.VALIDITY_PERIOD = ps.VALIDITY_PERIOD;//有效期VALIDITY_PERIOD
             ViewBag.CONCLUSION_EXPLAIN = ps.CONCLUSION_EXPLAIN;//
