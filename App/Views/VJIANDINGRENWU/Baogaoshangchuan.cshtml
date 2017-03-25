@@ -232,17 +232,16 @@
             VALIDITY_PERIOD: VALIDITY_PERIOD,
             CONCLUSION_EXPLAIN:$("#CONCLUSION_EXPLAIN").val()
         }
-        debugger;
+    
         if (arr.DETECTERID != "" && arr.CALIBRATION_DATE != "") {
-            debugger;
+           
             if (isNumber(arr.VALIDITY_PERIOD)) {
-                alert(1);
-                debugger;
+               
                 var zhi = (CALIBRATION_DATE + "").split('-');
                 var nian = parseInt(zhi[0]) + parseInt(arr.VALIDITY_PERIOD);
                 var ri = parseInt(zhi[2]) - 1;
                 arr.VALIDITYEND = nian + "-" + zhi[1] + "-" + ri;
-                debugger;
+                 
                 if ("@ViewBag.NAME2" != "") {
                     $.ajax({
                         url: "/api/PREPARE_SCHEMEApi/EditField",
