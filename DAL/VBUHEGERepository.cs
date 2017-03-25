@@ -39,7 +39,7 @@ namespace Langben.DAL
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "BAOGAOPIZHUNTONGGUOSHIJIANEnd_Time") //结束时间+1
                     {
-                        endTime = Convert.ToDateTime(item.Value);
+                        endTime = Convert.ToDateTime(item.Value).AddDays(1);
                         continue;
                     }
                     if (flagWhere != 0)

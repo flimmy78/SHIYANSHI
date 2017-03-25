@@ -62,19 +62,19 @@
                      }
                  } ],
             columns: [[               
-					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 259, hidden: true }
-					,{ field: 'ZHENGSHUBAOGAOBIANHAO', title:  '@Html.DisplayNameFor(model => model.ZHENGSHUBAOGAOBIANHAO)', width: 259 }
-					,{ field: 'BUHEGEFENLEI', title:  '@Html.DisplayNameFor(model => model.BUHEGEFENLEI)', width: 259 }
-					,{ field: 'BUHEGESHUOMING', title:  '@Html.DisplayNameFor(model => model.BUHEGESHUOMING)', width: 259 }
-					,{ field: 'SHIYANSHI', title:  '@Html.DisplayNameFor(model => model.SHIYANSHI)', width: 259 }
+					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 159, hidden: true }
+					,{ field: 'ZHENGSHUBAOGAOBIANHAO', title:  '@Html.DisplayNameFor(model => model.ZHENGSHUBAOGAOBIANHAO)', width: 159 }
+					,{ field: 'BUHEGEFENLEI', title:  '@Html.DisplayNameFor(model => model.BUHEGEFENLEI)', width: 159 }
+					,{ field: 'BUHEGESHUOMING', title:  '@Html.DisplayNameFor(model => model.BUHEGESHUOMING)', width: 159 }
+					,{ field: 'SHIYANSHI', title:  '@Html.DisplayNameFor(model => model.SHIYANSHI)', width: 159 }
 					, {
-					    field: 'BAOGAOPIZHUNTONGGUOSHIJIAN', title: '@Html.DisplayNameFor(model => model.BAOGAOPIZHUNTONGGUOSHIJIAN)', width: 259, formatter: function (value, row, index) {
+					    field: 'BAOGAOPIZHUNTONGGUOSHIJIAN', title: '@Html.DisplayNameFor(model => model.BAOGAOPIZHUNTONGGUOSHIJIAN)', width: 159, formatter: function (value, row, index) {
 					        if (value) {
 					            return dateConvert(value);
 					        }
 					    }
 					}
-					,{ field: 'SHOULIDANWEI', title:  '@Html.DisplayNameFor(model => model.SHOULIDANWEI)', width: 259 }
+					,{ field: 'SHOULIDANWEI', title:  '@Html.DisplayNameFor(model => model.SHOULIDANWEI)', width: 199 }
                 ]],
             pagination: true,
             rownumbers: true
