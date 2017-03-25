@@ -8,9 +8,9 @@
             统计期间:
         </div>
         <div class='input_search-field-time'>
-            <input type="text" id="sTARTDATEStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'sTARTDATEStart_Time\');}' })" />
+            <input type="text" id="sTARTDATEStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'eNDDATEEnd_Time\');}' })" />
             <span>到</span>
-            <input type="text" id="eNDDATEEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'eNDDATEEnd_Time\');}' })" />
+            <input type="text" id="eNDDATEEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'sTARTDATEStart_Time\');}' })" />
         </div>
     </div>
     <div class="input_search">
@@ -165,7 +165,7 @@
             },
             columns: [[
 					{ field: 'ID', title: '检定/校准员', width: 120 }
-					, { field: 'WEITUODAN', title: '委托单', width: 120 }
+					, { field: 'WEITUODAN', title: '委托数量', width: 120 }
 					, { field: 'JIANDINGWANCHENG', title: '检定完成数量', width: 120 }
 					, { field: 'SHEBEIGUZHANG', title: '设备故障数量', width: 120 }
 					, { field: 'PIZHUNTONGGUO', title: '批准通过数量', width: 120 }

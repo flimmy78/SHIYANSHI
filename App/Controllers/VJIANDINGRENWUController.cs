@@ -113,7 +113,9 @@ namespace Langben.App.Controllers
                 ViewBag.CERTIFICATE_CATEGORY = prepare.CERTIFICATE_CATEGORY;//报告类别
                 ViewBag.CALIBRATION_DATE = prepare.CALIBRATION_DATE;//检定/校准时间
                 ViewBag.CHECKERID = acc;//登入用户名
-                ViewBag.VALIDITYEND = prepare.VALIDITYEND;//有效期至
+                ViewBag.VALIDITY_PERIOD = prepare.VALIDITY_PERIOD;//有效期VALIDITY_PERIOD
+                ViewBag.CONCLUSION_EXPLAIN = prepare.CONCLUSION_EXPLAIN;//
+                
             }
 
             return View();
@@ -270,7 +272,10 @@ namespace Langben.App.Controllers
             ViewBag.CERTIFICATE_CATEGORY = ps.CERTIFICATE_CATEGORY;//报告类别
             ViewBag.CALIBRATION_DATE = ps.CALIBRATION_DATE;//检定/校准时间
             ViewBag.CHECKERID = acc;//登入用户名
-            ViewBag.VALIDITYEND = ps.VALIDITYEND;//有效期至
+            //ViewBag.VALIDITYEND = ps.VALIDITYEND;//有效期至
+            ViewBag.VALIDITY_PERIOD = ps.VALIDITY_PERIOD;//有效期VALIDITY_PERIOD
+            ViewBag.CONCLUSION_EXPLAIN = ps.CONCLUSION_EXPLAIN;//
+
             return View();
         }
         /// <summary>

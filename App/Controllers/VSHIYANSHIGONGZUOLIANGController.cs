@@ -181,7 +181,7 @@ namespace Langben.App.Controllers
                 throw ex;
             }
         }
-        //人员别工作量统计分析
+        //人员工作量统计分析
         public JsonResult GetDataRE(string id = "", int page = 11, int rows = 11, string order = "", string sort = "", string search = "")
         {
             

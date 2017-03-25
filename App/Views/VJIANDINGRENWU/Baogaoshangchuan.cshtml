@@ -71,9 +71,11 @@
 
                 <p class="static">
 
-                    <label><input type="radio" name="CONCLUSION" value="合格" id="CONCLUSION1" onclick="jielun(1)" />合格</label>   <label><input type="radio" name="CONCLUSION" value="不合格" id="CONCLUSION2" onclick="jielun(2)" />不合格</label>
+                    <label><input type="radio" checked="checked" name="CONCLUSION" value="合格" id="CONCLUSION1" onclick="jielun(1)" />合格</label>
+                    <label><input type="radio" name="CONCLUSION" value="不合格" id="CONCLUSION2" onclick="jielun(2)" />不合格</label>
                 </p>
                 @Html.DropDownList("UNQUALIFIEDTYPE", Models.SysFieldModels.GetSysField("PREPARE_SCHEME", "UNQUALIFIEDTYPE"), "请选择不合格类型", new { @style = "width:60%;display:none" })
+                <input type="text" id="CONCLUSION_EXPLAIN" name="CONCLUSION_EXPLAIN" value="@ViewBag.CONCLUSION_EXPLAIN" />
             </div>
 
             <div class="input_search">
@@ -100,24 +102,24 @@
                     </div>
                 }
                 <div class="input_search-field">
-                    <input type="text" id="CALIBRATION_DATE" value="@ViewBag.CALIBRATION_DATE" />
+                    <input type="text" id="CALIBRATION_DATE" name="CALIBRATION_DATE" value="@ViewBag.CALIBRATION_DATE" />
                 </div>
             </div>
             <div class="input_search">
                 @if (ViewBag.CERTIFICATE_CATEGORY == "检定")
                 {
                     <div class="input_search-label">
-                        <span style='color:#F00'>*</span>有效期至：
+                        <span style='color:#F00'>*</span>有效期：
                     </div>
                 }
                 else if (ViewBag.CERTIFICATE_CATEGORY == "校准")
                 {
                     <div class="input_search-label">
-                        有效期至：
+                        有效期：
                     </div>
                 }
                 <div class="input_search-field">
-                    <input type="text" id="VALIDITYEND" value="@ViewBag.VALIDITYEND" />
+                    <input type="text" id="VALIDITY_PERIOD"  name="VALIDITY_PERIOD"value="@ViewBag.VALIDITY_PERIOD" />年
                 </div>
             </div>
 
@@ -177,7 +179,7 @@
         $("#CALIBRATION_DATE").datebox({ "required": true });//true为必填项
         //加载核验员
         if ("@ViewBag.DETECTERID" != "") {
-            $("#DETECTERID").val(@ViewBag.DETECTERID);
+            $("#DETECTERID").val('@ViewBag.DETECTERID');
         }
         //输入框的禁用
         if ("@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.审核驳回.ToString()" || "@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.批准驳回.ToString()" || "@ViewBag.REPORTSTATUS" == "") {
@@ -190,10 +192,15 @@
             @*$("input[type=radio]").attr("checked", "@ViewBag.CONCLUSION");*@
             if ("@ViewBag.CONCLUSION" == "合格") {
                 $("#CONCLUSION1").attr("checked", "checked");
+                $("#CONCLUSION_EXPLAIN").hide();
             }
             else if ("@ViewBag.CONCLUSION" == "不合格") {
                 $("#CONCLUSION2").attr("checked", "checked");
+                $("#UNQUALIFIEDTYPE").show();
+                $("#CONCLUSION_EXPLAIN").show();
             }
+        } else {
+            $("#CONCLUSION_EXPLAIN").hide();
         }
         if ("@ViewBag.Create" == "True") {
             $.messager.alert('操作提示', "上传成功！", 'info');
@@ -213,7 +220,7 @@
     function songwangshenghe() {
         var DETECTERID = $("#DETECTERID").combobox('getValue');
         var CALIBRATION_DATE = $('#CALIBRATION_DATE').datebox('getValue');//检定/校准日期
-        var VALIDITYEND = $("#VALIDITYEND").val();
+        var VALIDITY_PERIOD = $("#VALIDITY_PERIOD").val();//
         var arr = {
             ID: "@ViewBag.PREPARE_SCHEMEID",
             REPORTSTATUS: "@Common.REPORTSTATUS.待审核",
@@ -222,15 +229,20 @@
             DETECTERID: DETECTERID,
             CALIBRATION_DATE: CALIBRATION_DATE,
             CHECKERID: "@ViewBag.CHECKERID",
-            VALIDITYEND: VALIDITYEND
+            VALIDITY_PERIOD: VALIDITY_PERIOD,
+            CONCLUSION_EXPLAIN:$("#CONCLUSION_EXPLAIN").val()
         }
+        debugger;
         if (arr.DETECTERID != "" && arr.CALIBRATION_DATE != "") {
-            if (jaoyanshijian(arr.CALIBRATION_DATE) && isNumber(arr.VALIDITYEND)) {
-                var zhi = arr.CALIBRATION_DATE.split('-');
-                var nian = zhi[0] + arr.VALIDITYEND;
-                var ri = zhi[2] - 1;
+            debugger;
+            if (isNumber(arr.VALIDITY_PERIOD)) {
+                alert(1);
+                debugger;
+                var zhi = (CALIBRATION_DATE + "").split('-');
+                var nian = parseInt(zhi[0]) + parseInt(arr.VALIDITY_PERIOD);
+                var ri = parseInt(zhi[2]) - 1;
                 arr.VALIDITYEND = nian + "-" + zhi[1] + "-" + ri;
-                debugger
+                debugger;
                 if ("@ViewBag.NAME2" != "") {
                     $.ajax({
                         url: "/api/PREPARE_SCHEMEApi/EditField",
@@ -287,9 +299,13 @@
         if (e == 1) {
             $("#UNQUALIFIEDTYPE").hide();
             $("#UNQUALIFIEDTYPE").val("");
+            $("#CONCLUSION_EXPLAIN").hide();
+            
         }
         else if (e == 2) {
             $("#UNQUALIFIEDTYPE").show();
+            $("#CONCLUSION_EXPLAIN").show();
+            
         }
     }
 </script>
