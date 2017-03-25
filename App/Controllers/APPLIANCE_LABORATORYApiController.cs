@@ -385,9 +385,9 @@ namespace Langben.App.Controllers
                     return result;
                 }
 
-                string currentPerson = GetCurrentPerson();
+                var currentPerson = GetCurrentAccount();
                 entity.BACKTIME = DateTime.Now;
-                entity.BACKPERSON = currentPerson;
+                entity.BACKPERSON = currentPerson.PersonName;
                 string returnValue = string.Empty;
                 //通过前端传过来的值来判断枚举中属于什么值给器具状态值赋值        
                 if (!string.IsNullOrEmpty(entity.ORDER_STATUS))
