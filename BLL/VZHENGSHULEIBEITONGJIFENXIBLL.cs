@@ -49,6 +49,9 @@ namespace Langben.BLL
         /// <returns>结果集</returns>
         public List<VZHENGSHULEIBEITONGJIFENXI> GetByParam(string id, int page, int rows, string order, string sort, string search, ref int total)
         {
+
+
+
             IQueryable<VZHENGSHULEIBEITONGJIFENXI> queryData = repository.GetData(db, order, sort, search);
             total = queryData.Count();
             if (total > 0)

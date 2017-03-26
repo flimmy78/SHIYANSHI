@@ -21,8 +21,8 @@ namespace Langben.DAL
         /// <returns></returns>      
         public IQueryable<VZHENGSHULEIBEITONGJIFENXI> GetData(SysEntities db, string order, string sort, string search, params object[] listQuery)
         {
-            string where = string.Empty;
-            int flagWhere = 0;
+            string SUOSHUDANWEI = string.Empty, ZHENGSHUDANWEI = string.Empty, SHOULIDANWEI = string.Empty;
+
             DateTime? startTime = null;
             DateTime? endTime = null;
             Dictionary<string, string> queryDic = ValueConvert.StringToDictionary(search.GetString());
@@ -38,53 +38,63 @@ namespace Langben.DAL
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(End_Time)) //结束时间+1
                     {
-                        endTime = Convert.ToDateTime(item.Value);
+                        endTime = Convert.ToDateTime(item.Value).AddDays(1);
                         continue;
                     }
-                    if (flagWhere != 0)
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(SUOSHUDANWEI)) //所属单位
                     {
-                        where += " and ";
-                    }
-                    flagWhere++;
-
-
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(Start_Int)) //开始数值
-                    {
-                        where += "it.[" + item.Key.Remove(item.Key.IndexOf(Start_Int)) + "] >= " + item.Value.GetInt();
+                        SUOSHUDANWEI = (item.Value);
                         continue;
                     }
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(End_Int)) //结束数值
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(ZHENGSHUDANWEI)) //证书单位
                     {
-                        where += "it.[" + item.Key.Remove(item.Key.IndexOf(End_Int)) + "] <= " + item.Value.GetInt();
+                        ZHENGSHUDANWEI = (item.Value);
+                        continue;
+                    }
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(SHOULIDANWEI)) //受理单位
+                    {
+                        SHOULIDANWEI = (item.Value);
                         continue;
                     }
 
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(DDL_Int)) //精确查询数值
-                    {
-                        where += "it.[" + item.Key.Remove(item.Key.IndexOf(DDL_Int)) + "] =" + item.Value;
-                        continue;
-                    }
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(DDL_String)) //精确查询字符串
-                    {
-                        where += "it.[" + item.Key.Remove(item.Key.IndexOf(DDL_String)) + "] = '" + item.Value + "'";
-                        continue;
-                    }
-                    where += "it.[" + item.Key + "] like '%" + item.Value + "%'";//模糊查询
                 }
             }
-            var data = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
-                     .CreateObjectSet<VZHENGSHULEIBEITONGJIFENXI>().Where(string.IsNullOrEmpty(where) ? "true" : where)
-                     .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
-                     .AsQueryable();
+            var data = db.ORDER_TASK_INFORMATION;
+            if (!string.IsNullOrWhiteSpace(SUOSHUDANWEI))
+            {
+                data.Where(w => w.CERTIFICATE_ENTERPRISEHELLD == SUOSHUDANWEI);
+            }
+            if (!string.IsNullOrWhiteSpace(ZHENGSHUDANWEI))
+            {
+                data.Where(w => w.CERTIFICATE_ENTERPRISE == ZHENGSHUDANWEI);
+            }
+            if (!string.IsNullOrWhiteSpace(SHOULIDANWEI))
+            {
+                data.Where(w => w.ACCEPT_ORGNIZATION == SHOULIDANWEI);
+            }
+
+            var ids = data.Select(s => s.ID).ToList();
+            var ps = from p in db.PREPARE_SCHEME
+                     from a in p.APPLIANCE_LABORATORY
+                     where ids.Contains(a.APPLIANCE_DETAIL_INFORMATION.ORDER_TASK_INFORMATION.ID) && p.APPROVALISAGGREY == "同意"
+                     && p.CERTIFICATE_CATEGORY != null && p.AUTHORIZATION != null
+                     select p;
+
             if (null != startTime)
             {
-                data = data.Where(m => startTime < m.PIZHUNSHIJIAN);
+                ps = ps.Where(m => startTime < m.APPROVALDATE);
             }
             if (null != endTime)
             {
-                data = data.Where(m => endTime > m.PIZHUNSHIJIAN);
-            }           
-            return data;
+                ps = ps.Where(m => endTime > m.APPROVALDATE);
+            }
+            var dataps = ps.ToList();
+            var pp = (from l in dataps
+                      group l by new { AUTHORIZATION = l.AUTHORIZATION, CERTIFICATE_CATEGORY = l.CERTIFICATE_CATEGORY } into grouped
+
+                      select new VZHENGSHULEIBEITONGJIFENXI() { SHOUQUANZIZHI = grouped.Key.AUTHORIZATION, ZHEGNSHUBAOGAOLEIBIE = grouped.Key.CERTIFICATE_CATEGORY, BAOGAOSHULIANG = grouped.Count() }).AsQueryable();
+
+            return pp;
         }
         /// <summary>
         /// 通过主键id，获取证书类别统计分析---查看详细，首次编辑

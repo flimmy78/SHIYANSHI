@@ -42,7 +42,7 @@ namespace Langben.DAL
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "SONGJIANRIQIEnd_Time") //结束时间+1
                     {
-                        endTime = Convert.ToDateTime(item.Value);
+                        endTime = Convert.ToDateTime(item.Value).AddDays(1);
                         continue;
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "JIANDINGRIQIStart_Time") //开始时间
@@ -52,7 +52,7 @@ namespace Langben.DAL
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "JIANDINGRIQIEnd_Time") //结束时间+1
                     {
-                        endTime2 = Convert.ToDateTime(item.Value);
+                        endTime2 = Convert.ToDateTime(item.Value).AddDays(1);
                         continue;
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "BAOGAOSHENPITONGGUORIQIStart_Time") //开始时间
@@ -62,7 +62,7 @@ namespace Langben.DAL
                     }
                     if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key == "BAOGAOSHENPITONGGUORIQIEnd_Time") //结束时间+1
                     {
-                        endTime3 = Convert.ToDateTime(item.Value);
+                        endTime3 = Convert.ToDateTime(item.Value).AddDays(1);
                         continue;
                     }
                     if (flagWhere != 0)

@@ -46,27 +46,13 @@ namespace Langben.App.Controllers
 
             int total = 0;
             List<VZHENGSHULEIBEITONGJIFENXI> queryData = m_BLL.GetByParam(id, page, rows, order, sort, search, ref total);
-            //List<VZHENGSHULEIBEITONGJIFENXI> queryData2 = new List<VZHENGSHULEIBEITONGJIFENXI>();
-            //var q =
-            //from p in queryData
-            //group p by new { p.ZHEGNSHUBAOGAOLEIBIE, p.SHOUQUANZIZHI } into g
-            //select new
-            //{
-            // //g.Key,
-            //BAOGAOSHULIANG = g.Count(p => p.ZHEGNSHUBAOGAOLEIBIE)
-            // };
-            var date = queryData.GroupBy(m => (new { ZHEGNSHUBAOGAOLEIBIE = m.ZHEGNSHUBAOGAOLEIBIE, SHOUQUANZIZHI = m.SHOUQUANZIZHI  })).Select(g => (new
-            {
-                ZHEGNSHUBAOGAOLEIBIE = g.Key.ZHEGNSHUBAOGAOLEIBIE,
-                SHOUQUANZIZHI = g.Key.SHOUQUANZIZHI,
-                //  BAOGAOSHULIANG = g.Key.BAOGAOSHULIANG
-                 BAOGAOSHULIANG =g.Count()
-            }));
-            int w = date.Count();
+           
+          
+            int w = queryData.Count();
             return Json(new datagrid
             {
                 total = total,
-                rows = date.Select(s => new
+                rows = queryData.Select(s => new
                 {
                     ID = ""
                     ,
