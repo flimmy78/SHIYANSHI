@@ -149,7 +149,7 @@
                 return true;
             };
             if ($('input[name=CONCLUSION]:checked').val() == '不合格') {
-                var con=$('#CONCLUSION option:selected').val();
+                var con=$('#CONCLUSION2 option:selected').val();
                 if (con==''||con==null) {
                     $.messager.alert('操作提示', '请选择不合格类型！', 'info');
                 }
