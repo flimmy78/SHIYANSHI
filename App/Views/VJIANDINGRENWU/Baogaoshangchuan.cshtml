@@ -119,7 +119,7 @@
                     </div>
                 }
                 <div class="input_search-field">
-                    <input type="text" id="VALIDITY_PERIOD"  name="VALIDITY_PERIOD"value="@ViewBag.VALIDITY_PERIOD" />年
+                    <input type="text" id="VALIDITY_PERIOD" name="VALIDITY_PERIOD" value="@ViewBag.VALIDITY_PERIOD" />年
                 </div>
             </div>
 
@@ -218,16 +218,16 @@
     })
     //发送审核
     function songwangshenghe() {
+
         if ($('input[name=CONCLUSION]:checked').val() == undefined) {
             $.messager.alert('操作提示', '请选择结论！', 'info');
             return false;
-        } else {
-            return true;
-        };
+        }
         if ($('input[name=CONCLUSION]:checked').val() == '不合格') {
             var con = $('#CONCLUSION option:selected').val();
             if (con == '' || con == null) {
                 $.messager.alert('操作提示', '请选择不合格类型！', 'info');
+                return false;
             }
         }
 
@@ -245,41 +245,41 @@
             VALIDITY_PERIOD: VALIDITY_PERIOD,
             CONCLUSION: $('input[name=CONCLUSION]:checked').val(),
             UNQUALIFIEDTYPE: $('#UNQUALIFIEDTYPE').find("option:selected").val(),
-            CONCLUSION_EXPLAIN:$("#CONCLUSION_EXPLAIN").val()
+            CONCLUSION_EXPLAIN: $("#CONCLUSION_EXPLAIN").val()
         }
-     
+
         if (arr.DETECTERID != "" && arr.CALIBRATION_DATE != "") {
-           
-            if (isNumber(arr.VALIDITY_PERIOD)) {
-               
-                var zhi = (CALIBRATION_DATE + "").split('-');
-                var nian = parseInt(zhi[0]) + parseInt(arr.VALIDITY_PERIOD);
-                var ri = parseInt(zhi[2]) - 1;
-                arr.VALIDITYEND = nian + "-" + zhi[1] + "-" + ri;
-                 
-                if ("@ViewBag.NAME2" != "") {
-                    $.ajax({
-                        url: "/api/PREPARE_SCHEMEApi/EditField",
-                        type: "Put",
-                        data: arr,
-                        // async: false,
-                        success: function (res) {
-                            if (res.Code == 1) {
-                                $("#Submit1,#fashongid").attr("disabled", true);
-                                $.messager.alert('操作提示', "发送审核成功！", 'info');
-                            }
-                            else {
-                                $.messager.alert('操作提示', "发送审核失败！", 'error');
-                            }
+
+
+
+            var zhi = (CALIBRATION_DATE + "").split('-');
+            var nian = parseInt(zhi[0]) + parseInt(arr.VALIDITY_PERIOD);
+            var ri = parseInt(zhi[2]) - 1;
+            arr.VALIDITYEND = nian + "-" + zhi[1] + "-" + ri;
+
+            if ("@ViewBag.NAME2" != "") {
+                $.ajax({
+                    url: "/api/PREPARE_SCHEMEApi/EditField",
+                    type: "Put",
+                    data: arr,
+                    // async: false,
+                    success: function (res) {
+                        if (res.Code == 1) {
+                            $("#Submit1,#fashongid").attr("disabled", true);
+                            $.messager.alert('操作提示', "发送审核成功！", 'info');
                         }
-                    })
-                    return true;
-                }
-                else {
-                    $.messager.alert('操作提示', "请先上传文件！", 'info');
-                    return false;
-                }
+                        else {
+                            $.messager.alert('操作提示', "发送审核失败！", 'error');
+                        }
+                    }
+                })
+                return true;
             }
+            else {
+                $.messager.alert('操作提示', "请先上传文件！", 'info');
+                return false;
+            }
+
         }
         else {
             $.messager.alert('操作提示', "请选择核验员和检定/校准时间！", 'info');
@@ -314,12 +314,12 @@
             $("#UNQUALIFIEDTYPE").hide();
             $("#UNQUALIFIEDTYPE").val("");
             $("#CONCLUSION_EXPLAIN").hide();
-            
+
         }
         else if (e == 2) {
             $("#UNQUALIFIEDTYPE").show();
             $("#CONCLUSION_EXPLAIN").show();
-            
+
         }
     }
 </script>
