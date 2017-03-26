@@ -195,6 +195,11 @@ namespace Langben.App.Controllers
                             entity.CERTIFICATE_ENTERPRISEHELLD = item.COMPANY2.COMPANYNAME;
                             break;
                         }
+                        else
+                        {
+                            entity.CERTIFICATE_ENTERPRISEHELLD = entity.CERTIFICATE_ENTERPRISE;
+                            break;
+                        }
                     }
                     string ORDER_NUMBER = m_BLL.GetORDER_NUMBER(ref validationErrors);
                     var order = ORDER_NUMBER.Split('*');// DC2016001 * 1 * 2016
