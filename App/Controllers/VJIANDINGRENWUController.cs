@@ -86,7 +86,7 @@ namespace Langben.App.Controllers
                 string[] bs = id.Split('|');
                 ViewBag.PREPARE_SCHEMEID = bs[0];
                 PREPARE_SCHEME prepare = m_BLL3.GetById(bs[0]);
-                string acc = GetCurrentPerson();
+                Account acc = GetCurrentAccount();
                 // List<FILE_UPLOADER> list = m_BLL2.GetByRefPREPARE_SCHEMEID(bs[0]);
                 foreach (var item in prepare.FILE_UPLOADER)
                 {
@@ -112,7 +112,7 @@ namespace Langben.App.Controllers
                 ViewBag.DETECTERID = prepare.DETECTERID;//核验员
                 ViewBag.CERTIFICATE_CATEGORY = prepare.CERTIFICATE_CATEGORY;//报告类别
                 ViewBag.CALIBRATION_DATE = prepare.CALIBRATION_DATE;//检定/校准时间
-                ViewBag.CHECKERID = acc;//登入用户名
+                ViewBag.CHECKERID = acc.PersonName;//登入用户名
                 ViewBag.VALIDITY_PERIOD = prepare.VALIDITY_PERIOD;//有效期VALIDITY_PERIOD
                 ViewBag.CONCLUSION_EXPLAIN = prepare.CONCLUSION_EXPLAIN;//
                 

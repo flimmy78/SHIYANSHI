@@ -8,9 +8,9 @@
             报告审核通过时间:
         </div>
         <div class='input_search-field-time'>
-            <input type="text" id="sTARTDATEStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'sTARTDATEStart_Time\');}' })" />
+            <input type="text" id="sTARTDATEStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'eNDDATEEnd_Time\');}' })" />
             <span>到</span>
-            <input type="text" id="eNDDATEEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'eNDDATEEnd_Time\');}' })" />
+            <input type="text" id="eNDDATEEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'sTARTDATEStart_Time\');}' })" />
         </div>
     </div>
     <div class='input_search' style="padding-top:10px;">
@@ -187,7 +187,7 @@
                 myChart.setOption(option);
             },
             columns: [[
-					{ field: 'SUOSHUDANWEI', title: '送检单位', width: 120 }
+					{ field: 'SUOSHUDANWEI', title: '所属单位', width: 120 }
 					, { field: 'BIAOBIAO', title: '标准电能表（台）', width: 120 }
 					, { field: 'DIANBIAO', title: '关口电能表检定（台）', width: 120 }
 					, { field: 'NENGZHI', title: '电能表检定装置（台）', width: 120 }
