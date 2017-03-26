@@ -257,6 +257,12 @@
                 var ri = parseInt(zhi[2]) - 1;
                 arr.VALIDITYEND = nian + "-" + zhi[1] + "-" + ri;
             }
+            else if (null != (arr.VALIDITY_PERIOD) || '' != (arr.VALIDITY_PERIOD)) {
+                 
+                $.messager.alert('操作提示', '请输入数字', 'info');
+            }
+
+
             if ("@ViewBag.NAME2" != "") {
                 $.ajax({
                     url: "/api/PREPARE_SCHEMEApi/EditField",
