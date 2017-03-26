@@ -34,9 +34,9 @@
             @Html.LabelFor(model => model.CREATETIME):
         </div>
         <div class='input_search-field-time'>
-            <input type="text" id="CREATETIMEStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'CREATETIMEStart_Time\');}' })" />
+            <input type="text" id="CREATETIMEStart_Time" onclick="WdatePicker({ maxDate: '#F{$dp.$D(\'CREATETIMEEnd_Time\');}' })" />
             <span>到</span>
-            <input type="text" id="CREATETIMEEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'CREATETIMEEnd_Time\');}' })" />
+            <input type="text" id="CREATETIMEEnd_Time" onclick="WdatePicker({ minDate: '#F{$dp.$D(\'CREATETIMEStart_Time\');}' })" />
         </div>
     </div>
     <div class="input_search">

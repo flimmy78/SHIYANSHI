@@ -98,11 +98,11 @@ namespace Langben.DAL
                      .AsQueryable();
             if (null != startTime)
             {
-                data = data.Where(m => startTime >= m.CREATETIME);
+                data = data.Where(m => startTime <= m.CREATETIME);
             }
             if (null != endTime)
             {
-                data = data.Where(m => endTime <= m.CREATETIME);
+                data = data.Where(m => endTime >= m.CREATETIME);
             }
             return data;
         }
