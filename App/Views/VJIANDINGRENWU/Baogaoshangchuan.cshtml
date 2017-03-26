@@ -260,6 +260,7 @@
             else if (null != (arr.VALIDITY_PERIOD) || '' != (arr.VALIDITY_PERIOD)) {
                  
                 $.messager.alert('操作提示', '请输入数字', 'info');
+                return;
             }
 
 
@@ -298,7 +299,7 @@
         if (regu.test(s)) {
             return true;
         } else {
-            $.messager.alert('操作提示', "有效期至请输入正整数!", 'info');
+            
             return false;
         }
     }
