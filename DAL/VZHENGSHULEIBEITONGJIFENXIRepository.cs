@@ -41,17 +41,17 @@ namespace Langben.DAL
                         endTime = Convert.ToDateTime(item.Value).AddDays(1);
                         continue;
                     }
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(SUOSHUDANWEI)) //所属单位
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains("SUOSHUDANWEI")) //所属单位
                     {
                         SUOSHUDANWEI = (item.Value);
                         continue;
                     }
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(ZHENGSHUDANWEI)) //证书单位
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains("ZHENGSHUDANWEI")) //证书单位
                     {
                         ZHENGSHUDANWEI = (item.Value);
                         continue;
                     }
-                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains(SHOULIDANWEI)) //受理单位
+                    if (!string.IsNullOrWhiteSpace(item.Key) && !string.IsNullOrWhiteSpace(item.Value) && item.Key.Contains("SHOULIDANWEI")) //受理单位
                     {
                         SHOULIDANWEI = (item.Value);
                         continue;
@@ -59,18 +59,18 @@ namespace Langben.DAL
 
                 }
             }
-            var data = db.ORDER_TASK_INFORMATION;
+            var data = db.ORDER_TASK_INFORMATION.AsQueryable();
             if (!string.IsNullOrWhiteSpace(SUOSHUDANWEI))
             {
-                data.Where(w => w.CERTIFICATE_ENTERPRISEHELLD == SUOSHUDANWEI);
+           data=     data.Where(w => w.CERTIFICATE_ENTERPRISEHELLD == SUOSHUDANWEI);
             }
             if (!string.IsNullOrWhiteSpace(ZHENGSHUDANWEI))
             {
-                data.Where(w => w.CERTIFICATE_ENTERPRISE == ZHENGSHUDANWEI);
+                data = data.Where(w => w.CERTIFICATE_ENTERPRISE == ZHENGSHUDANWEI);
             }
             if (!string.IsNullOrWhiteSpace(SHOULIDANWEI))
             {
-                data.Where(w => w.ACCEPT_ORGNIZATION == SHOULIDANWEI);
+                data = data.Where(w => w.ACCEPT_ORGNIZATION == SHOULIDANWEI);
             }
 
             var ids = data.Select(s => s.ID).ToList();
