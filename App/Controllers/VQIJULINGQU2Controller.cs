@@ -107,6 +107,7 @@ namespace Langben.App.Controllers
                 total = total,
                 rows = queryData.Select(s => new
                 {
+                    EQUIPMENT_STATUS_VALUUMN=   s.EQUIPMENT_STATUS_VALUUMN,
                     ID = s.ID
                     ,
                     APPLIANCE_NAME = s.APPLIANCE_NAME
