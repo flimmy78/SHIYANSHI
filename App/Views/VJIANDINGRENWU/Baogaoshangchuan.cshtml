@@ -155,8 +155,8 @@
                     </select>
                 }
 
-                
-                 <input type="text" id="CONCLUSION_EXPLAIN" name="CONCLUSION_EXPLAIN" value="@ViewBag.CONCLUSION_EXPLAIN" />
+
+                <input type="text" id="CONCLUSION_EXPLAIN" name="CONCLUSION_EXPLAIN" value="@ViewBag.CONCLUSION_EXPLAIN" />
             </div>
 
             <div class="input_search">
@@ -223,7 +223,7 @@
                     <input id="Submit1" type="submit" value="上传" class="my-btn" onclick="javascript:
         if ($('#file').val() != '' && $('#file2').val() != '')
         {
-            
+
         }
         else {
             $.messager.alert('操作提示', '请选择上传文件！', 'info');
@@ -289,9 +289,9 @@
     //发送审核
     function songwangshenghe() {
 
-       
+
         if ($('input[name=CONCLUSION]:checked').val() == '不合格') {
-           
+
             var con = $('#UNQUALIFIEDTYPE').find("option:selected").val();
             if (con == '' || con == null) {
                 $.messager.alert('操作提示', '请选择不合格类型！', 'info');
@@ -325,12 +325,15 @@
                 var ri = parseInt(zhi[2]) - 1;
                 arr.VALIDITYEND = nian + "-" + zhi[1] + "-" + ri;
             }
-            else if (null != (arr.VALIDITY_PERIOD) || '' != (arr.VALIDITY_PERIOD)) {
-                 
+            else if (null == (arr.VALIDITY_PERIOD) || '' == (arr.VALIDITY_PERIOD)) {
+
+
+            }
+            else {
+
                 $.messager.alert('操作提示', '请输入数字', 'info');
                 return;
             }
-
 
             if ("@ViewBag.NAME2" != "") {
                 $.ajax({
@@ -367,7 +370,7 @@
         if (regu.test(s)) {
             return true;
         } else {
-            
+
             return false;
         }
     }
