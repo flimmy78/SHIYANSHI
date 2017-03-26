@@ -250,13 +250,13 @@
 
         if (arr.DETECTERID != "" && arr.CALIBRATION_DATE != "") {
 
+            if (isNumber(arr.VALIDITY_PERIOD)) {
 
-
-            var zhi = (CALIBRATION_DATE + "").split('-');
-            var nian = parseInt(zhi[0]) + parseInt(arr.VALIDITY_PERIOD);
-            var ri = parseInt(zhi[2]) - 1;
-            arr.VALIDITYEND = nian + "-" + zhi[1] + "-" + ri;
-
+                var zhi = (CALIBRATION_DATE + "").split('-');
+                var nian = parseInt(zhi[0]) + parseInt(arr.VALIDITY_PERIOD);
+                var ri = parseInt(zhi[2]) - 1;
+                arr.VALIDITYEND = nian + "-" + zhi[1] + "-" + ri;
+            }
             if ("@ViewBag.NAME2" != "") {
                 $.ajax({
                     url: "/api/PREPARE_SCHEMEApi/EditField",
