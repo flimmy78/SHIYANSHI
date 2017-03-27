@@ -1083,6 +1083,7 @@
     <Content Include="Views\VQIJULINGQU1\Edit.cshtml" />
     <Content Include="Views\VBUHEGE\Index.cshtml" />
     <Content Include="Views\VSHIYANSHIGONGZUOLIANG\DanWei.cshtml" />
+    <Content Include="Views\VSHENHE\ZaiXianShenHe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
