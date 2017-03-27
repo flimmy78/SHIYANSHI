@@ -142,8 +142,8 @@
                     <td>@item.ATTACHMENT</td>
                     <td>@item.UNDERTAKE_LABORATORYID</td>
                     <td>@item.APPLIANCE_RECIVE</td>
-                    <td>@((item.APPLIANCECOLLECTIONSATE != null) ? item.APPLIANCECOLLECTIONSATE : "未领取")</td>
-                    <td>@((item.REPORTTORECEVESTATE != null) ? item.REPORTTORECEVESTATE : "未领取")</td>
+                    <td>@((!string.IsNullOrWhiteSpace(item.APPLIANCECOLLECTIONSATE) && item.APPLIANCECOLLECTIONSATE == "已领取") ? item.APPLIANCECOLLECTIONSATE : "未领取")</td>
+                    <td>@((!string.IsNullOrWhiteSpace(item.REPORTTORECEVESTATE)) ? item.REPORTTORECEVESTATE : "未领取")</td>
                 </tr>
             }
         </table>
@@ -173,7 +173,7 @@
 
     </div>
     <div class="tr mt10">
-        <input id="Button15" type="button" value="签字成功，确认返回" class="my-btn" onclick="return Button15_onclick()" />
+        @*<input id="Button15" type="button" value="签字成功，确认返回" class="my-btn" onclick="return Button15_onclick()" />*@
         <input id="Button3" type="button" value="重新签字" class="my-btn" onclick="return Button3_onclick()" />
         <input id="Button14" type="button" value="确定" class="my-btn" onclick="baocun()" />
     </div>

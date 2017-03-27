@@ -73,8 +73,14 @@ namespace Langben.App.Controllers
             if (!string.IsNullOrWhiteSpace(ORDER_TASK_INFORMATIONID))
             {
                 List<VQIJULINGQU2> queryData = m_BLL5.GetByParam(null, 1, 100, "DESC", "ID", "ORDER_TASK_INFORMATIONID&" + ORDER_TASK_INFORMATIONID, ref total).Distinct().ToList();
+                foreach (var q in queryData)
+                {
+                    q.REPORTTORECEVESTATE = string.Empty;
+
+                }
                 foreach (var item in Bao)
                 {
+                  
                     foreach (var q in queryData)
                     {
                         if (item == q.PREPARE_SCHEMEID)
