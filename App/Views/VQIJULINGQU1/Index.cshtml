@@ -136,7 +136,7 @@
                                     return "已领取";
                                 }
                                 else {
-                                    if (row.EQUIPMENT_STATUS_VALUUMN == "@Common.ORDER_STATUS.器具已入库") {
+                                    if (row.EQUIPMENT_STATUS_VALUUMN == "@Common.ORDER_STATUS.器具已入库.GetHashCode()") {
 
                                         return "<input id='qiju' type='checkbox' name='qiju' value='" + row.ID + "~" + row.ORDER_TASK_INFORMATIONID + "'/>";
                                     }
