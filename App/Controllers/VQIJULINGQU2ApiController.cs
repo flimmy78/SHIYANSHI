@@ -162,6 +162,8 @@ namespace Langben.App.Controllers
                     }
                 }
                 #endregion
+                result.Code = Common.ClientCode.Succeed;
+                result.Message = Suggestion.InsertSucceed;
                 return result;
             }
             result.Code = Common.ClientCode.FindNull;
