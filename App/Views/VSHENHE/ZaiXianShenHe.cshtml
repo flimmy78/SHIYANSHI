@@ -1,0 +1,219 @@
+﻿
+@{
+    Layout = "~/Views/Shared/AppCreate.cshtml";
+}
+
+<style type="text/css">
+    .textarea-box textarea {
+        color: #333;
+    }
+
+    .display-label {
+        width: 120px;
+        height: 24px;
+        float: left;
+        text-align: right;
+        margin: 11px 0;
+        line-height: 24px;
+    }
+
+    .display-field {
+        height: 24px;
+        float: left;
+        margin: 11px 0 11px 6px;
+        color: #333;
+        width: 290px;
+        text-align: left;
+        display: inline;
+        line-height: 24px;
+    }
+</style>
+
+@using (Html.BeginForm("", "api/PREPARE_SCHEMEApi/SheIsPi"))
+{
+    <fieldset>
+        <iframe src="https://www.baidu.com"></iframe>
+        <iframe src="https://www.baidu.com"></iframe>
+        <div class="bigdiv" id="shenghediv">
+            @*<div class="display-label">
+                <label> 原始记录：</label>
+            </div>
+            <div class="display-field">
+                <iframe src="https://www.baidu.com"  >
+                    
+                </iframe>
+                <a id="yuanshi" href="@ViewBag.FULLPATH2"> @ViewBag.NAME2</a>
+            </div>
+
+            <br style="clear:both;" />
+            <div class="display-label">
+                <label>  证书：</label>
+            </div>
+            <div class="display-field">
+                <a id="zhenshu" href="@ViewBag.FULLPATH">@ViewBag.NAME</a>
+            </div>*@
+
+            <br style="clear:both;" />
+            <div class="display-label">
+                <label>    结论：</label>
+            </div>
+            <div class="display-field">
+                @ViewBag.CONCLUSION
+            </div>
+
+            <br style="clear:both;" />
+
+
+            @if (ViewBag.HEIFSP == "H")
+            {
+                <div class="display-label">
+                    <label>     审核意见：</label>
+                </div>
+                <div class="textarea-box">
+                    <textarea name="AUDITOPINION">@ViewBag.AUDITOPINION</textarea>
+                </div>
+                <input type="hidden" name="ID" value="@ViewBag.PREPARE_SCHEME_ID" />
+                <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
+                <input type="hidden" name="SHPI" value="@ViewBag.HEIFSP" />
+                    <input type="hidden" name="ISAGGREY" value="" id="ISAGGREY" />
+                    <div class="display-label">
+                        <label>  </label>
+                    </div>
+                    <div class="display-field">
+                        <input type="submit" value="同意送批准" onclick="patongyi(this)" disabled="disabled" />
+                        <input type="submit" value="不同意" onclick="patongyi(this)" disabled="disabled" />
+                        <input type="button" onclick="fanhui()" value="返回" />
+                    </div>
+
+
+            }
+            else if (ViewBag.HEIFSP == "P")
+            {
+
+                <div class="display-label">
+                    <label>
+                        审批意见：
+                    </label>
+                </div>
+                <div class="textarea-box">
+                    <textarea name="APPROVAL" style="height:80px;">@ViewBag.APPROVAL</textarea>
+                </div>
+
+                <input type="hidden" name="ID" value="@ViewBag.PREPARE_SCHEME_ID" />
+                <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
+                    <input type="hidden" name="SHPI" value="@ViewBag.HEIFSP" />
+                    <input type="hidden" name="APPROVALISAGGREY" value="" id="APPROVALISAGGREY" />
+
+                    <div class="display-label">
+                        <label>  </label>
+                    </div>
+                    <div class="display-field">
+                        <input type="submit" value="同意" onclick="patongyi(this)" disabled="disabled" />
+                        <input type="submit" value="不同意" onclick="patongyi(this)" disabled="disabled" />
+                        <input type="button" onclick="fanhui()" value="返回" />
+                    </div>
+            }
+
+
+        </div>
+
+    </fieldset>
+}
+<script type="text/javascript">
+    function fanhui() {
+        if ('@ViewBag.HEIFSP' == 'P') {
+            window.location.href = '/VSHENPI/Index';
+        }
+        else if ('@ViewBag.HEIFSP' == 'H') {
+            window.location.href = '/VSHENHE/Index';
+        }
+    }
+    function patongyi(arr) {
+        var zhi = $(arr).val();
+        if ("@ViewBag.HEIFSP" == "H") {
+            if (zhi == "同意送批准") {
+                $("#ISAGGREY").val("同意");
+            }
+            else if (zhi == "不同意") {
+                $("#ISAGGREY").val("不同意");
+            }
+        }
+        else if ("@ViewBag.HEIFSP" == "P") {
+            if (zhi == "同意") {
+                $("#APPROVALISAGGREY").val("同意");
+            }
+            else if (zhi == "不同意") {
+                $("#APPROVALISAGGREY").val("不同意");
+            }
+        }
+
+    }
+</script>
+<script type="text/javascript">
+    $(function () {
+        if ("@ViewBag.REPORTSTATUS" != "") {
+            if (("@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.待审核.ToString()" && "@ViewBag.HEIFSP" == "H" )|| ("@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.待批准.ToString()" && "@ViewBag.HEIFSP" == "P")) {
+                $('#shenghediv').find(":submit").each(function () {
+                    //$(this).removeAttr("disabled");
+                    $(this).attr("disabled", false);
+                });
+            }
+        }
+    })
+    function ajaxFrom(form, url) {
+
+        $.ajax({
+            url: url,
+            type: "Post",
+            data: $(form).serialize(),
+            dataType: "json",
+
+            success: function (data) {
+                if (data.Code == 0) { $.messager.alert('操作提示', data.Message, 'info'); }
+                else if (data.Code == 1) {
+                    $('#shenghediv').find(":submit").each(function () {
+                        $(this).attr("disabled", true);
+                    });
+                    $.messager.alert('操作提示', "发送成功！", 'info', function () {
+                        fanhui();
+                    });
+                    return false;
+                }
+                else {
+                    if ($.messager) {
+                        $.messager.defaults.ok = '继续';
+                        $.messager.defaults.cancel = '返回';
+
+                        $.messager.confirm('操作提示', "发送失败！", function (r) {
+                            if (!r) {
+                                fanhui();
+                            }
+                        });
+                    }
+                }
+
+
+            }
+        });
+
+    }
+
+    $(function () {
+        $('.easyui-combobox').combobox({
+            width: 243,
+            onSelect: function (record) {
+                var strs = record.text.split("—");
+                $(this).combobox('setValue', strs[0]);
+            }
+        });
+        $("form").submit(function (form) {
+            if (form.result) {
+                ajaxFrom(this, this.action);
+            }
+            return false;
+        });
+        //按钮样式
+        $('.a2').mouseover(function () { this.style.color = "#ae1121"; }).mouseout(function () { this.style.color = "#333"; });
+
+    })
+</script>

@@ -1032,6 +1032,9 @@
     <Content Include="Views\RULETree\GetTree.cshtml" />
     <Content Include="Views\Shared\TempleOnly.cshtml" />
     <Content Include="Views\Shared\TempleMany.cshtml" />
+    <Content Include="Template\原始记录-检定.xls" />
+    <Content Include="Template\校准证书.xls" />
+    <Content Include="Template\检定证书.xls" />
     <Content Include="Views\VQIJULINGQU1\Show.cshtml" />
     <Content Include="Views\UNCERTAINTYTABLE\Create.cshtml" />
     <Content Include="Views\UNCERTAINTYTABLE\Details.cshtml" />
@@ -1083,6 +1086,7 @@
     <Content Include="Views\VQIJULINGQU1\Edit.cshtml" />
     <Content Include="Views\VBUHEGE\Index.cshtml" />
     <Content Include="Views\VSHIYANSHIGONGZUOLIANG\DanWei.cshtml" />
+    <Content Include="Views\VSHENHE\ZaiXianShenHe.cshtml" />
     <Content Include="Template\原始记录-校准.xlsx" />
     <Content Include="Template\原始记录-检定.xlsx" />
     <Content Include="Template\校准证书-CNAS.xlsx" />
