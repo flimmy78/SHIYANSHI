@@ -95,7 +95,7 @@ namespace Langben.App.Controllers
                     {
                         if (item == q.ID)
                         {
-                            q.APPLIANCECOLLECTIONSATE = "已领取";
+                            q.APPLIANCECOLLECTIONSATE = "本次领取";
                         }
                     }
                 }

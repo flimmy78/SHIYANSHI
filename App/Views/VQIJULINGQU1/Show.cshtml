@@ -142,8 +142,8 @@
                     <td>@item.ATTACHMENT</td>
                     <td>@item.UNDERTAKE_LABORATORYID</td>
                     <td>@item.APPLIANCE_RECIVE</td>
-                    <td>@((!string.IsNullOrWhiteSpace(item.APPLIANCECOLLECTIONSATE) && item.APPLIANCECOLLECTIONSATE == "已领取") ? item.APPLIANCECOLLECTIONSATE : "未领取")</td>
-                    <td>@((!string.IsNullOrWhiteSpace(item.REPORTTORECEVESTATE)) ? item.REPORTTORECEVESTATE : "未领取")</td>
+                    <td>@((!string.IsNullOrWhiteSpace(item.APPLIANCECOLLECTIONSATE) && item.APPLIANCECOLLECTIONSATE == "本次领取") ? item.APPLIANCECOLLECTIONSATE : "本次未领取")</td>
+                    <td>@((!string.IsNullOrWhiteSpace(item.REPORTTORECEVESTATE)) ? item.REPORTTORECEVESTATE : "本次未领取")</td>
                 </tr>
             }
         </table>
