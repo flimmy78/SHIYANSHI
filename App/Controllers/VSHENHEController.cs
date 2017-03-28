@@ -62,7 +62,7 @@ namespace Langben.App.Controllers
             PageOffice.PageOfficeCtrl pc = new PageOffice.PageOfficeCtrl();
             pc.ID = "PageOfficeCtrl1";
             pc.ServerPage = "/pageoffice/server.aspx";
-            pc.AddCustomToolButton("保存", "Save()", 1);
+          
             string filePath = Server.MapPath(id.Replace("..", "~"));
 
             pc.SetWriter(workBook);
