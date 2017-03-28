@@ -961,10 +961,7 @@
     <Content Include="Views\VRUKU\Index.cshtml" />
     <Content Include="Views\VSHENHE\Index.cshtml" />
     <Content Include="Views\VSHENHE\XiaZaiShenHe.cshtml" />
-    <Content Include="Views\VSHENHE\YuLanShenHe.cshtml" />
     <Content Include="Views\VSHENPI\Index.cshtml" />
-    <Content Include="Views\VSHENPI\XiaZaiShenPi.cshtml" />
-    <Content Include="Views\VSHENPI\YuLanShenPi.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Web.config">
@@ -1118,8 +1115,6 @@
     <Content Include="Views\PREPARE_SCHEME\Show.cshtml" />
     <Content Include="Views\VSHENHE\Yuanshi.cshtml" />
     <Content Include="Views\VSHENHE\BaoGao.cshtml" />
-    <Content Include="Views\VSHENPI\ZaiXianShenPi.cshtml" />
-    <Content Include="Views\VSHENPI\BaoGao.cshtml" />
     <Content Include="Views\VSHENPI\Yuanshi.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -12,26 +12,6 @@
     <div style="width:770px;height:568px;">
         @Html.Raw(ViewBag.EditorHtml22)
     </div>
-    <script>
-       
-        function OnWordDataRegionClick(Name, Value, Left, Bottom) {
-
-            if (Name == "PO_dept") {
-                //连接Views/Home/Contact.cshtml
-                var strRet = document.getElementById("PageOfficeCtrl11").ShowHtmlModalDialog("/Home/Contact", Value, "left=" + Left + "px;top=" + Bottom + "px;width=400px;height=300px;frame=no;");
-                //if (strRet != "") {
-                // return (strRet);
-                //}
-                // else {
-                // if ((Value == undefined) || (Value == ""))
-                // return " ";
-                //else
-                //return Value;
-                //}
-            }
-        }
-
-
-    </script>
+  
 </body>
 </html>
