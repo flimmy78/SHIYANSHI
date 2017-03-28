@@ -62,7 +62,7 @@ namespace Langben.App.Controllers
                 }
             }
             ViewBag.EditorHtml22 = controlOutput;
-            ViewBag.id = id;
+         
             return View();
         }
         public ActionResult SaveFile(string id)

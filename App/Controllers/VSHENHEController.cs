@@ -10,6 +10,8 @@ using System.Text;
 using System.EnterpriseServices;
 using System.Configuration;
 using Models;
+using System.Web.UI;
+using System.IO;
 
 namespace Langben.App.Controllers
 {
@@ -18,7 +20,68 @@ namespace Langben.App.Controllers
     /// </summary>
     public class VSHENHEController : BaseController
     {
+        public ActionResult Yuanshi(string id)
+        {
+            //定义Workbook对象
+            PageOffice.ExcelWriter.Workbook workBook = new PageOffice.ExcelWriter.Workbook();
+            //定义Sheet对象，"Sheet1"是打开的Excel表单的名称
+            PageOffice.ExcelWriter.Sheet sheet = workBook.OpenSheet("Sheet1");
+            System.Web.UI.Page page = new System.Web.UI.Page();
 
+            string controlOutput = string.Empty;
+            PageOffice.PageOfficeCtrl pc = new PageOffice.PageOfficeCtrl();
+            pc.ID = "PageOfficeCtrl1";
+            pc.ServerPage = "/pageoffice/server.aspx";
+            pc.AddCustomToolButton("保存", "Save()", 1);
+            string filePath = Server.MapPath(id.Replace("..", "~"));
+            
+            pc.SetWriter(workBook);
+            pc.WebOpen(filePath, PageOffice.OpenModeType.xlsReadOnly, "Tom");
+
+            page.Controls.Add(pc);
+            StringBuilder sb = new StringBuilder();
+            using (StringWriter sw = new StringWriter(sb))
+            {
+                using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+                {
+                    Server.Execute(page, htw, false); controlOutput = sb.ToString();
+                }
+            }
+            ViewBag.EditorHtml22 = controlOutput;
+          
+            return View();
+        }
+        public ActionResult BaoGao(string id)
+        { //定义Workbook对象
+            PageOffice.ExcelWriter.Workbook workBook = new PageOffice.ExcelWriter.Workbook();
+            //定义Sheet对象，"Sheet1"是打开的Excel表单的名称
+            PageOffice.ExcelWriter.Sheet sheet = workBook.OpenSheet("Sheet1");
+            System.Web.UI.Page page = new System.Web.UI.Page();
+
+            string controlOutput = string.Empty;
+            PageOffice.PageOfficeCtrl pc = new PageOffice.PageOfficeCtrl();
+            pc.ID = "PageOfficeCtrl1";
+            pc.ServerPage = "/pageoffice/server.aspx";
+            pc.AddCustomToolButton("保存", "Save()", 1);
+            string filePath = Server.MapPath(id.Replace("..", "~"));
+
+            pc.SetWriter(workBook);
+            pc.WebOpen(filePath, PageOffice.OpenModeType.xlsReadOnly, "Tom");
+
+            page.Controls.Add(pc);
+            StringBuilder sb = new StringBuilder();
+            using (StringWriter sw = new StringWriter(sb))
+            {
+                using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+                {
+                    Server.Execute(page, htw, false); controlOutput = sb.ToString();
+                }
+            }
+            ViewBag.EditorHtml22 = controlOutput;
+
+
+            return View();
+        }
         /// <summary>
         /// 列表
         /// </summary>
