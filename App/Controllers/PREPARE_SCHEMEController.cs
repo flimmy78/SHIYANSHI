@@ -23,6 +23,7 @@ using Winista.Text.HtmlParser.Util;
 using Winista.Text.HtmlParser.Tags;
 using Winista.Text.HtmlParser.Filters;
 using Langben.Report;
+using System.Web.UI;
 
 namespace Langben.App.Controllers
 {
@@ -32,7 +33,46 @@ namespace Langben.App.Controllers
     public class PREPARE_SCHEMEController : BaseController
     {
         IList<int> start = new List<int>();
+        public ActionResult Show(string id)
+        {
+            //定义Workbook对象
+            PageOffice.ExcelWriter.Workbook workBook = new PageOffice.ExcelWriter.Workbook();
+            //定义Sheet对象，"Sheet1"是打开的Excel表单的名称
+            PageOffice.ExcelWriter.Sheet sheet = workBook.OpenSheet("Sheet1");
+            System.Web.UI.Page page = new System.Web.UI.Page();
 
+            string controlOutput = string.Empty;
+            PageOffice.PageOfficeCtrl pc = new PageOffice.PageOfficeCtrl();
+            pc.ID = "PageOfficeCtrl1";
+            pc.ServerPage = "/pageoffice/server.aspx";
+            pc.AddCustomToolButton("保存", "Save()", 1);
+            string filePath = Server.MapPath(id.Replace("..","~"));
+            pc.SaveFilePage = "/PREPARE_SCHEME/SaveFile/?id=" + id.Replace("..", "~");
+          
+            pc.SetWriter(workBook);
+            pc.WebOpen(filePath, PageOffice.OpenModeType.xlsNormalEdit, "Tom");
+
+            page.Controls.Add(pc);
+            StringBuilder sb = new StringBuilder();
+            using (StringWriter sw = new StringWriter(sb))
+            {
+                using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+                {
+                    Server.Execute(page, htw, false); controlOutput = sb.ToString();
+                }
+            }
+            ViewBag.EditorHtml22 = controlOutput;
+            ViewBag.id = id;
+            return View();
+        }
+        public ActionResult SaveFile(string id)
+        { 
+            string filePath = Server.MapPath(id.Replace("..", "~"));
+            PageOffice.FileSaver fs = new PageOffice.FileSaver();
+            fs.SaveToFile(filePath);
+            fs.Close();
+            return View();
+        }
         /// <summary>
         /// 列表
         /// </summary>

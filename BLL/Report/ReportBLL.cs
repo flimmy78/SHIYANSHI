@@ -1045,26 +1045,26 @@ namespace Langben.Report
         /// <returns></returns>
         private string SetFileName(ExportType type = ExportType.OriginalRecord_JianDing)
         {
-            string result = "检定原始记录";
+            string result = "jiandingyuanshijilu";
             switch (type)
             {
                 case ExportType.OriginalRecord_JianDing:
-                    result = "检定原始记录";
+                    result = "jiandingyuanshijilu";
                     break;
                 case ExportType.OriginalRecord_XiaoZhun:
-                    result = "校准原始记录";
+                    result = "jiaozhunyuanshijilu";
                     break;
                 case ExportType.Report_JianDing:
-                    result = "检定报告";
+                    result = "jiandingbaogao";
                     break;
                 case ExportType.Report_XiaoZhun:
-                    result = "校准报告";
+                    result = "jiaozhunbaogao";
                     break;
                 case ExportType.Report_XiaoZhun_CNAS:
-                    result = "校准报告_CNAS";
+                    result = "CNAS";
                     break;
             }
-            result = result + "_" + Result.GetNewId();
+            result = result + Result.GetNewId();
             return result;
         }
         /// <summary>
