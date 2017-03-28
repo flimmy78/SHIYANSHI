@@ -32,11 +32,11 @@ namespace Langben.App.Controllers
             PageOffice.PageOfficeCtrl pc = new PageOffice.PageOfficeCtrl();
             pc.ID = "PageOfficeCtrl1";
             pc.ServerPage = "/pageoffice/server.aspx";
-            pc.AddCustomToolButton("保存", "Save()", 1);
+           
             string filePath = Server.MapPath(id.Replace("..", "~"));
-            
+            pc.Caption = "原始记录";
             pc.SetWriter(workBook);
-            pc.WebOpen(filePath, PageOffice.OpenModeType.xlsReadOnly, "Tom");
+            pc.WebOpen(filePath, PageOffice.OpenModeType.xlsReadOnly, "13718511828");
 
             page.Controls.Add(pc);
             StringBuilder sb = new StringBuilder();
@@ -62,11 +62,12 @@ namespace Langben.App.Controllers
             PageOffice.PageOfficeCtrl pc = new PageOffice.PageOfficeCtrl();
             pc.ID = "PageOfficeCtrl1";
             pc.ServerPage = "/pageoffice/server.aspx";
-            pc.AddCustomToolButton("保存", "Save()", 1);
+            pc.Caption = "报告";
+        
             string filePath = Server.MapPath(id.Replace("..", "~"));
 
             pc.SetWriter(workBook);
-            pc.WebOpen(filePath, PageOffice.OpenModeType.xlsReadOnly, "Tom");
+            pc.WebOpen(filePath, PageOffice.OpenModeType.xlsReadOnly, "13718511828");
 
             page.Controls.Add(pc);
             StringBuilder sb = new StringBuilder();
