@@ -25,16 +25,16 @@ namespace Langben.App.Controllers
             //定义Workbook对象
             PageOffice.ExcelWriter.Workbook workBook = new PageOffice.ExcelWriter.Workbook();
             //定义Sheet对象，"Sheet1"是打开的Excel表单的名称
-            PageOffice.ExcelWriter.Sheet sheet = workBook.OpenSheet("Sheet1");
+          //  PageOffice.ExcelWriter.Sheet sheet = workBook.OpenSheet("Sheet1");
             System.Web.UI.Page page = new System.Web.UI.Page();
 
             string controlOutput = string.Empty;
             PageOffice.PageOfficeCtrl pc = new PageOffice.PageOfficeCtrl();
             pc.ID = "PageOfficeCtrl1";
             pc.ServerPage = "/pageoffice/server.aspx";
-            pc.AddCustomToolButton("保存", "Save()", 1);
+            pc.JsFunction_OnExcelCellClick = "OnWordDataRegionClick()";
             string filePath = Server.MapPath(id.Replace("..", "~"));
-            
+
             pc.SetWriter(workBook);
             pc.WebOpen(filePath, PageOffice.OpenModeType.xlsReadOnly, "Tom");
 
@@ -48,7 +48,7 @@ namespace Langben.App.Controllers
                 }
             }
             ViewBag.EditorHtml22 = controlOutput;
-          
+
             return View();
         }
         public ActionResult BaoGao(string id)
@@ -62,7 +62,7 @@ namespace Langben.App.Controllers
             PageOffice.PageOfficeCtrl pc = new PageOffice.PageOfficeCtrl();
             pc.ID = "PageOfficeCtrl1";
             pc.ServerPage = "/pageoffice/server.aspx";
-            pc.AddCustomToolButton("保存", "Save()", 1);
+            pc.JsFunction_OnExcelCellClick = "OnWordDataRegionClick()";
             string filePath = Server.MapPath(id.Replace("..", "~"));
 
             pc.SetWriter(workBook);
@@ -144,6 +144,7 @@ namespace Langben.App.Controllers
             ViewBag.CONCLUSION = file.CONCLUSION;//结论
             ViewBag.AUDITOPINION = pr.AUDITOPINION;//审核意见
             ViewBag.APPROVAL = pr.APPROVAL;//审批意见
+
             return View();
         }
         /// <summary>
