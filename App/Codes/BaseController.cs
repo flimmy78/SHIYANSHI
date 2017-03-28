@@ -52,12 +52,11 @@ namespace Models
         /// <param name="from">显示的标题默认行数为1</param>
         /// <returns></returns>
         public string WriteExcleRuKu( string[] fields, dynamic[] query, string path = @"~/up/ruku.xls", int from = 1)
-        {
-            HSSFWorkbook _book = new HSSFWorkbook();
+        { 
             string xlsPath = System.Web.HttpContext.Current.Server.MapPath(path);
 
             FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
-            IWorkbook hssfworkbook = new HSSFWorkbook(file);
+            IWorkbook hssfworkbook = WorkbookFactory.Create(file);  //new HSSFWorkbook(file);
             ISheet sheet = hssfworkbook.GetSheet("入库单");
             string guid = Guid.NewGuid().ToString();
             string saveFileName = xlsPath.Path(@"RuKu/"+guid);

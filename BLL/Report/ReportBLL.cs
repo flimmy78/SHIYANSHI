@@ -6,10 +6,10 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NPOI.HSSF.UserModel;
+//using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.SS.Util;
-
+using NPOI.XSSF.UserModel;
 //using NPOI.HSSF.UserModel;
 using NPOI.HPSF;
 using NPOI.HSSF.Util;
@@ -184,14 +184,14 @@ namespace Langben.Report
                     err = "未找附件" + xlsPath;
                     return false;
                 }
-                if(fEntity.SUFFIX==null || (fEntity.SUFFIX.Trim()!= ".xls" && fEntity.SUFFIX.Trim()!= "xls"))
+                if(fEntity.SUFFIX==null || (fEntity.SUFFIX.Trim()!= ".xlsx" && fEntity.SUFFIX.Trim()!= "xlsx"))
                 {
-                    err = "附件后缀不是.xls";
+                    err = "附件后缀不是.xlsx";
                     return false;
                 }              
 
                 FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.ReadWrite);
-                IWorkbook hssfworkbook = new HSSFWorkbook(file);
+                IWorkbook hssfworkbook = WorkbookFactory.Create(file);// new HSSFWorkbook(file);
 
                 string sheetName_Destination = "第二页";//查找CNAS
                 ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
@@ -281,13 +281,13 @@ namespace Langben.Report
                     err = "未找附件" + xlsPath;
                     return false;
                 }
-                if (fEntity.SUFFIX2 == null || (fEntity.SUFFIX2.Trim() != ".xls" && fEntity.SUFFIX2.Trim() != "xls"))
+                if (fEntity.SUFFIX2 == null || (fEntity.SUFFIX2.Trim() != ".xlsx" && fEntity.SUFFIX2.Trim() != "xlsx"))
                 {
-                    err = "附件后缀不是.xls";
+                    err = "附件后缀不是.xlsx";
                     return false;
                 }
                 FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.ReadWrite);
-                IWorkbook hssfworkbook = new HSSFWorkbook(file);
+                IWorkbook hssfworkbook = WorkbookFactory.Create(file);// new HSSFWorkbook(file);
 
                 string sheetName_Destination = "封皮";
                 ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
@@ -528,7 +528,7 @@ namespace Langben.Report
             }
 
             FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.ReadWrite);
-            IWorkbook hssfworkbook = new HSSFWorkbook(file);
+            IWorkbook hssfworkbook = WorkbookFactory.Create(file);// new HSSFWorkbook(file);
             ISheet sheet_Destination2 = null;
 
             string sheetName_Destination = "封皮";
@@ -564,11 +564,11 @@ namespace Langben.Report
                             IClientAnchor anchor = null;
                             if (type == ExportType.Report_XiaoZhun_CNAS)
                             {
-                                anchor = new HSSFClientAnchor(55, 20, 250, 250, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen + 8, fEntity.Row_PiZhunRen);
+                                anchor = new XSSFClientAnchor(55, 20, 250, 250, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen + 8, fEntity.Row_PiZhunRen);
                             }
                             else
                             {
-                                anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen + 3, fEntity.Row_PiZhunRen + 1);
+                                anchor = new XSSFClientAnchor(160, 160, 160, 160, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen + 3, fEntity.Row_PiZhunRen + 1);
                             }
                             IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
                             //pict.Resize();
@@ -624,11 +624,11 @@ namespace Langben.Report
                             IClientAnchor anchor = null;
                             if (type == ExportType.Report_XiaoZhun_CNAS)
                             {
-                                anchor = new HSSFClientAnchor(50, 50, 200, 200, fEntity.Col_HeYanYuan, fEntity.Row_HeYanYuan, fEntity.Col_HeYanYuan + 4, fEntity.Row_HeYanYuan);
+                                anchor = new XSSFClientAnchor(50, 50, 200, 200, fEntity.Col_HeYanYuan, fEntity.Row_HeYanYuan, fEntity.Col_HeYanYuan + 4, fEntity.Row_HeYanYuan);
                             }
                             else
                             {
-                                anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_HeYanYuan, fEntity.Row_HeYanYuan, fEntity.Col_HeYanYuan + 3, fEntity.Row_HeYanYuan + 1);
+                                anchor = new XSSFClientAnchor(160, 160, 160, 160, fEntity.Col_HeYanYuan, fEntity.Row_HeYanYuan, fEntity.Col_HeYanYuan + 3, fEntity.Row_HeYanYuan + 1);
                             }
                             IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
                             //pict.Resize();
@@ -686,11 +686,11 @@ namespace Langben.Report
                             IClientAnchor anchor = null;
                             if (type == ExportType.Report_XiaoZhun_CNAS)
                             {
-                                anchor = new HSSFClientAnchor(50, 50, 200, 200, fEntity.Col_JianDingYuan, fEntity.Row_JianDingYuan, fEntity.Col_JianDingYuan + 4, fEntity.Row_JianDingYuan);
+                                anchor = new XSSFClientAnchor(50, 50, 200, 200, fEntity.Col_JianDingYuan, fEntity.Row_JianDingYuan, fEntity.Col_JianDingYuan + 4, fEntity.Row_JianDingYuan);
                             }
                             else
                             {
-                                anchor = new HSSFClientAnchor(160, 160, 160, 160, fEntity.Col_JianDingYuan, fEntity.Row_JianDingYuan, fEntity.Col_JianDingYuan + 3, fEntity.Row_JianDingYuan + 1);
+                                anchor = new XSSFClientAnchor(160, 160, 160, 160, fEntity.Col_JianDingYuan, fEntity.Row_JianDingYuan, fEntity.Col_JianDingYuan + 3, fEntity.Row_JianDingYuan + 1);
                             }
                             IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
                             //pict.Resize();
@@ -748,7 +748,7 @@ namespace Langben.Report
                 return;
             }
             FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.ReadWrite);
-            IWorkbook hssfworkbook = new HSSFWorkbook(file);
+            IWorkbook hssfworkbook = WorkbookFactory.Create(file);//  
 
             string sheetName_Destination = "封皮";
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
@@ -783,7 +783,7 @@ namespace Langben.Report
                             bytes = System.IO.File.ReadAllBytes(picPath);
                             int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
                             IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
-                            IClientAnchor anchor = new HSSFClientAnchor(50, 50, 200, 200, fEntity.Col_JianDingYuan_YuanShiJiLu, fEntity.Row_JianDingYuan_YuanShiJiLu, fEntity.Col_JianDingYuan_YuanShiJiLu + 7, fEntity.Row_JianDingYuan_YuanShiJiLu);
+                            IClientAnchor anchor = new XSSFClientAnchor(50, 50, 200, 200, fEntity.Col_JianDingYuan_YuanShiJiLu, fEntity.Row_JianDingYuan_YuanShiJiLu, fEntity.Col_JianDingYuan_YuanShiJiLu + 7, fEntity.Row_JianDingYuan_YuanShiJiLu);
                             IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
                             //pict.Resize();
                             sheet_Destination.GetRow(fEntity.Row_JianDingYuan_YuanShiJiLu).GetCell(fEntity.Col_JianDingYuan_YuanShiJiLu).SetCellValue("");
@@ -839,7 +839,7 @@ namespace Langben.Report
                             bytes = System.IO.File.ReadAllBytes(picPath);
                             int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
                             IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
-                            IClientAnchor anchor = new HSSFClientAnchor(50, 50, 200, 200, fEntity.Col_HeYanYuan_YuanShiJiLu, fEntity.Row_HeYanYuan_YuanShiJiLu, fEntity.Col_HeYanYuan_YuanShiJiLu + 7, fEntity.Row_HeYanYuan_YuanShiJiLu);
+                            IClientAnchor anchor = new XSSFClientAnchor(50, 50, 200, 200, fEntity.Col_HeYanYuan_YuanShiJiLu, fEntity.Row_HeYanYuan_YuanShiJiLu, fEntity.Col_HeYanYuan_YuanShiJiLu + 7, fEntity.Row_HeYanYuan_YuanShiJiLu);
                             IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
                             //pict.Resize();
                             sheet_Destination.GetRow(fEntity.Row_HeYanYuan_YuanShiJiLu).GetCell(fEntity.Col_HeYanYuan_YuanShiJiLu).SetCellValue("");
@@ -952,11 +952,9 @@ namespace Langben.Report
             {
                 ExportType type = GetExportType(entity, "Report");
                 string xlsPath = GetTemplatePath(type);
-
-
-                HSSFWorkbook _book = new HSSFWorkbook();
+                 
                 FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
-                IWorkbook hssfworkbook = new HSSFWorkbook(file);
+                IWorkbook hssfworkbook = WorkbookFactory.Create(file);// 
 
                 //设置封皮
                 string fRemark = "";//用于记录批准人行号_批准人列号|核验员行号_核验员列号|检定员/校准员行号_检定员/校准员列号                
@@ -978,14 +976,14 @@ namespace Langben.Report
                 HiddenSheet(hssfworkbook, type, false, entity.CONCLUSION);
 
                 string fileName = SetFileName(type);
-                //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";
-                saveFileName = "/up/Report/" + fileName + ".xls";
+
+                saveFileName = "/up/Report/" + fileName + ".xlsx";
                 string saveFileNamePath = System.Web.HttpContext.Current.Server.MapPath(saveFileName);
                 using (FileStream fileWrite = new FileStream(saveFileNamePath, FileMode.Create))
                 {
                     hssfworkbook.Write(fileWrite);
                 }
-                Message = "../up/Report/" + fileName + ".xls";
+                Message = "../up/Report/" + fileName + ".xlsx";
                 //if (IsSavePath)
                 //{
 
@@ -997,7 +995,7 @@ namespace Langben.Report
                 fEntity.PATH = saveFileName;
                 fEntity.FULLPATH = saveFileNamePath;
                 fEntity.NAME = fileName;
-                fEntity.SUFFIX = ".xls";
+                fEntity.SUFFIX = ".xlsx";
                 fEntity.PREPARE_SCHEMEID = entity.ID;
                 fEntity.STATE = "已上传";
                 fEntity.CREATEPERSON = Person;
@@ -1045,23 +1043,23 @@ namespace Langben.Report
         /// <returns></returns>
         private string SetFileName(ExportType type = ExportType.OriginalRecord_JianDing)
         {
-            string result = "检定原始记录";
+            string result = "jiandingyuanshijilu";
             switch (type)
             {
                 case ExportType.OriginalRecord_JianDing:
-                    result = "检定原始记录";
+                    result = "jiandingyuanshijilu";
                     break;
                 case ExportType.OriginalRecord_XiaoZhun:
-                    result = "校准原始记录";
+                    result = "jiaozhunyuanshijilu";
                     break;
                 case ExportType.Report_JianDing:
-                    result = "检定报告";
+                    result = "jiandingbaogao";
                     break;
                 case ExportType.Report_XiaoZhun:
-                    result = "校准报告";
+                    result = "jiaozhunbaogao";
                     break;
                 case ExportType.Report_XiaoZhun_CNAS:
-                    result = "校准报告_CNAS";
+                    result = "CNAS";
                     break;
             }
             result = result + "_" + Result.GetNewId();
@@ -2039,15 +2037,11 @@ namespace Langben.Report
             if (entity != null)
             {
                 ExportType type = GetExportType(entity, "ExportOriginal");
-                //string xlsPath = ReportStatic.YuanShiJiLuJianDingPath;
-                //if (entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString())
-                //{
-                //    xlsPath = ReportStatic.YuanShiJiLuXiaoZhunPath;
-                //}
+                
                 string xlsPath = GetTemplatePath(type);
-                //HSSFWorkbook _book = new HSSFWorkbook();
+                
                 FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
-                IWorkbook hssfworkbook = new HSSFWorkbook(file);
+                IWorkbook hssfworkbook = WorkbookFactory.Create(file);// 
                 //设置封皮                
                 string fRemark = "";//用于记录检定员/校准员行号_检定员/校准员列号|核验员行号_核验员列号
                 //设置封皮               
@@ -2061,23 +2055,22 @@ namespace Langben.Report
 
                 //隐藏不需要的sheet
                 HiddenSheet(hssfworkbook, type, IsIsHaveBuQueDingDu, entity.CONCLUSION);
-
-                //saveFileName = "../up/Report/" + entity.CERTIFICATE_CATEGORY + "_" + Result.GetNewId() + ".xls";                
+                               
                 string fileName = SetFileName(type);
-                saveFileName = "/up/Report/" + fileName + ".xls";
+                saveFileName = "/up/Report/" + fileName + ".xlsx";
 
                 string saveFileNamePath = System.Web.HttpContext.Current.Server.MapPath(saveFileName);
                 using (FileStream fileWrite = new FileStream(saveFileNamePath, FileMode.Create))
                 {
                     hssfworkbook.Write(fileWrite);
                 }
-                Message = "../up/Report/" + fileName + ".xls";
+                Message = "../up/Report/" + fileName + ".xlsx";
                 fEntity.CONCLUSION = entity.CONCLUSION;
                 fEntity.CREATETIME = DateTime.Now;
                 fEntity.PATH2 = saveFileName;
                 fEntity.FULLPATH2 = saveFileNamePath;
                 fEntity.NAME2 = fileName;
-                fEntity.SUFFIX2 = ".xls";
+                fEntity.SUFFIX2 = ".xlsx";
                 fEntity.PREPARE_SCHEMEID = entity.ID;
                 fEntity.STATE2 = "已上传";
                 fEntity.CREATEPERSON = Person;
@@ -2256,10 +2249,10 @@ namespace Langben.Report
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 4, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
 
-                                    HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUA);
+                                    XSSFRichTextString value = SetSub((XSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUA);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
 
-                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.txtBuQueDingA);
+                                    value = SetSub((XSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.txtBuQueDingA);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(value);
 
                                     rowIndex_Destination++;
@@ -2332,10 +2325,10 @@ namespace Langben.Report
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 10, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
 
-                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUB);
+                                    value = SetSub((XSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUB);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
 
-                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.txtBuQueDingB);
+                                    value = SetSub((XSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.txtBuQueDingB);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(value);
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 11, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
@@ -2356,7 +2349,7 @@ namespace Langben.Report
                                                     {
                                                         d.value = "/";
                                                     }
-                                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, d.value);
+                                                    value = SetSub((XSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, d.value);
 
                                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue(value);
                                                     buQueDingDu.buDueDingDuB.Remove(d);
@@ -2375,10 +2368,10 @@ namespace Langben.Report
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 15, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
 
-                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUC);
+                                    value = SetSub((XSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUC);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
 
-                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.txtBuQueDingC);
+                                    value = SetSub((XSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.txtBuQueDingC);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(value);
                                     rowIndex_Destination++;
                                     #endregion
@@ -2391,10 +2384,10 @@ namespace Langben.Report
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 18, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
 
-                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUrel);
+                                    value = SetSub((XSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.ddlUrel);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
 
-                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.txtvalueD);
+                                    value = SetSub((XSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.txtvalueD);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(5).SetCellValue(value);
                                     rowIndex_Destination++;
                                     #endregion
@@ -2406,7 +2399,7 @@ namespace Langben.Report
                                     rowIndex_Destination++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 21, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
 
-                                    value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.txtValueE);
+                                    value = SetSub((XSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, buQueDingDu.txtValueE);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(11).SetCellValue(value);
 
                                     //sheet_Destination.GetRow(rowIndex_Destination).GetCell(11).CellStyle.DataFormat = HSSFDataFormat.GetBuiltinFormat("0.00E+00");
@@ -2917,7 +2910,7 @@ namespace Langben.Report
                                 maxRowCount = aValue.Split(',').Length;
                             }
                             //aValue = aValue.Replace(",", Environment.NewLine);
-                            HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, null, aValue);
+                            XSSFRichTextString value = SetSub((XSSFWorkbook)sheet_Destination.Workbook, null, aValue);
                             sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(value);
                         }
                         else
@@ -3827,7 +3820,7 @@ namespace Langben.Report
                                 }
                                 if (IsCopyContent && rowIndex_Source == cellAddress.FirstRow)
                                 {
-                                    HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters, IsNullShow);
+                                    XSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters, IsNullShow);
                                     targetRow.Cells[m].SetCellValue(value);
 
                                 }
@@ -3850,7 +3843,7 @@ namespace Langben.Report
                             result.Add(key, new CellRangeAddress(targetRow.RowNum, targetRow.RowNum, m, m));
                             if (IsCopyContent)
                             {
-                                HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters, IsNullShow);
+                                XSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters, IsNullShow);
                                 targetRow.Cells[m].SetCellValue(value);
                             }
                         }
@@ -3951,7 +3944,7 @@ namespace Langben.Report
 
                         //        if (IsCopyContent)
                         //        {
-                        //            HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell], targetRow.Cells[startMergeCell], allSpecialCharacters);
+                        //            XSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[startMergeCell], targetRow.Cells[startMergeCell], allSpecialCharacters);
                         //            targetRow.Cells[startMergeCell].SetCellValue(value);
                         //            startMergeCell = -1;
 
@@ -3963,7 +3956,7 @@ namespace Langben.Report
                         //    if (IsCopyContent)
                         //    {
 
-                        //        HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
+                        //        XSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
                         //        targetRow.Cells[m].SetCellValue(value);
 
                         //    }
@@ -3983,7 +3976,7 @@ namespace Langben.Report
                                 }
                                 if (IsCopyContent && rowIndex_Source == cellAddress.FirstRow)
                                 {
-                                    HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
+                                    XSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
                                     targetRow.Cells[m].SetCellValue(value);
                                 }
                             }
@@ -3993,7 +3986,7 @@ namespace Langben.Report
                         {
                             if (IsCopyContent)
                             {
-                                HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
+                                XSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters);
                                 targetRow.Cells[m].SetCellValue(value);
                             }
                         }
@@ -4013,17 +4006,17 @@ namespace Langben.Report
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <param name="IsNullShow">动态空数据是否显示/</param>
         /// <returns></returns>
-        private HSSFRichTextString GetDongTaiShuJu(List<MYDataHead> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, ICell sourceCell = null, ICell targetCell = null, SpecialCharacters allSpecialCharacters = null, bool IsNullShow = false)
+        private XSSFRichTextString GetDongTaiShuJu(List<MYDataHead> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, ICell sourceCell = null, ICell targetCell = null, SpecialCharacters allSpecialCharacters = null, bool IsNullShow = false)
         {
-            HSSFWorkbook workbook = null;
+            XSSFWorkbook workbook = null;
             if (targetCell != null && targetCell.Sheet != null && targetCell.Sheet.Workbook != null)
             {
-                workbook = (HSSFWorkbook)targetCell.Sheet.Workbook;
+                workbook =  (XSSFWorkbook)targetCell.Sheet.Workbook;
             }
-            HSSFRichTextString result = null;
+            XSSFRichTextString result = null;
             if (sourceCell == null)
             {
-                return new HSSFRichTextString("");
+                return new XSSFRichTextString("");
             }
 
             int speStartIndex = sourceCell.StringCellValue.IndexOf("{0}");//动态字符位置
@@ -4126,7 +4119,7 @@ namespace Langben.Report
             //if (value.IndexOf("*10") > 0 || value.IndexOf("×10") > 0)
             //{
             //    //value = value.Replace(",", Environment.NewLine);
-            //    //result = new HSSFRichTextString(value.Trim().Replace("|", ""));
+            //    //result = new XSSFRichTextString(value.Trim().Replace("|", ""));
 
             //    string[] vArray = value.Trim().Split('|');
             //    int length = 0;
@@ -4146,7 +4139,7 @@ namespace Langben.Report
             //                startIndex = length + v.IndexOf("×10") + 3;
             //            }
             //            endIndex = length + v.Length;
-            //            HSSFFont superscript = (HSSFFont)workbook.CreateFont();
+            //            XSSFFont superscript = (XSSFFont)workbook.CreateFont();
             //            superscript.TypeOffset = FontSuperScript.Super;//上标
             //            superscript.FontName = "宋体";
             //            result.ApplyFont(startIndex, endIndex, superscript);
@@ -4159,14 +4152,14 @@ namespace Langben.Report
             //#endregion
 
             //处理特殊字符下标上标斜体
-            result = new HSSFRichTextString(value);
+            result = new XSSFRichTextString(value);
 
             #region 设置上标
             #region 处理*10
             if (value.IndexOf("*10") > 0 || value.IndexOf("×10") > 0)
             {
                 //value = value.Replace(",", Environment.NewLine);
-                //result = new HSSFRichTextString(value.Trim().Replace("|", ""));
+                //result = new XSSFRichTextString(value.Trim().Replace("|", ""));
 
                 string[] vArray = value.Trim().Split('|');
                 int length = 0;
@@ -4194,7 +4187,7 @@ namespace Langben.Report
                             endIndex = length + v.Length;
                         }
 
-                        HSSFFont superscript = (HSSFFont)workbook.CreateFont();
+                        XSSFFont superscript = (XSSFFont)workbook.CreateFont();
                         superscript.TypeOffset = FontSuperScript.Super;//上标
                         superscript.FontName = "宋体";
                         result.ApplyFont(startIndex, endIndex, superscript);
@@ -4217,7 +4210,7 @@ namespace Langben.Report
                     SpecialCharacter spec = allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == SpecialStr.Trim().ToUpper());
                     #region 将字符设置成斜体
 
-                    HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                    XSSFFont normalFont = (XSSFFont)workbook.CreateFont();
                     normalFont.IsItalic = true;
                     normalFont.FontName = "宋体";
                     int startIndex = speStartIndex;
@@ -4241,7 +4234,7 @@ namespace Langben.Report
                     #region 设置非斜体
                     if (notItalicStartIndex >= 0 && notItalicEndIndex >= 0)
                     {
-                        HSSFFont notItalicFont = (HSSFFont)workbook.CreateFont();
+                        XSSFFont notItalicFont = (XSSFFont)workbook.CreateFont();
                         notItalicFont.IsItalic = false;
                         notItalicFont.FontName = "宋体";
 
@@ -4254,17 +4247,17 @@ namespace Langben.Report
                     #region 设置下标
                     if (spec.SubscriptLastCount > 0)
                     {
-                        //result = new HSSFRichTextString(value);
-                        // superscript = (HSSFFont)workbook.CreateFont();
+                        //result = new XSSFRichTextString(value);
+                        // superscript = (XSSFFont)workbook.CreateFont();
                         //superscript.TypeOffset = FontSuperScript.Super;//上标
                         //superscript.Color = HSSFColor.RED.index;
 
-                        HSSFFont subscript = (HSSFFont)workbook.CreateFont();
+                        XSSFFont subscript = (XSSFFont)workbook.CreateFont();
                         subscript.TypeOffset = FontSuperScript.Sub; //下标  
                         //subscript.IsItalic = true;
                         subscript.FontName = "宋体";
                         //subscript.Color = HSSFColor.Red.Index;
-                        //HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                        //XSSFFont normalFont = (XSSFFont)workbook.CreateFont();
                         if (SpecialStr == "UREL(K=")//特殊处理
                         {
                             startIndex = speStartIndex + 1;
@@ -4292,7 +4285,7 @@ namespace Langben.Report
             }
             else
             {
-                result = new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
+                result = new XSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
             }
             return result;
         }
@@ -4307,18 +4300,18 @@ namespace Langben.Report
         /// <param name="targetCell">目标单元格</param>
         /// <param name="allSpecialCharacters">特殊字符配置信息</param>
         /// <returns></returns>
-        private HSSFRichTextString GetDongTaiShuJu(Dictionary<string, string> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, ICell sourceCell = null, ICell targetCell = null, SpecialCharacters allSpecialCharacters = null)
+        private XSSFRichTextString GetDongTaiShuJu(Dictionary<string, string> DongTaiShuJuList = null, List<RowInfo> rowInfoList = null, ICell sourceCell = null, ICell targetCell = null, SpecialCharacters allSpecialCharacters = null)
         {
 
-            HSSFWorkbook workbook = null;
+            XSSFWorkbook workbook = null;
             if (targetCell != null && targetCell.Sheet != null && targetCell.Sheet.Workbook != null)
             {
-                workbook = (HSSFWorkbook)targetCell.Sheet.Workbook;
+                workbook = (XSSFWorkbook)targetCell.Sheet.Workbook;
             }
-            HSSFRichTextString result = null;
+            XSSFRichTextString result = null;
             if (sourceCell == null)
             {
-                return new HSSFRichTextString("");
+                return new XSSFRichTextString("");
             }
             string key = "";
             //xml是否配置了信息
@@ -4375,7 +4368,7 @@ namespace Langben.Report
                 SpecialStr = "U(K";
             }
             //处理特殊字符下标上标斜体
-            result = new HSSFRichTextString(value);
+            result = new XSSFRichTextString(value);
 
             if (!string.IsNullOrEmpty(SpecialStr) && SpecialStr.Trim() != "" && speStartIndex >= 0)
             {
@@ -4387,7 +4380,7 @@ namespace Langben.Report
                     SpecialCharacter spec = allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == SpecialStr.Trim().ToUpper());
                     #region 将字符设置成斜体
 
-                    HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                    XSSFFont normalFont = (XSSFFont)workbook.CreateFont();
                     normalFont.IsItalic = true;
                     normalFont.FontName = "宋体";
                     int startIndex = speStartIndex;
@@ -4406,17 +4399,17 @@ namespace Langben.Report
                     #region 设置下标
                     if (spec.SubscriptLastCount > 0)
                     {
-                        //result = new HSSFRichTextString(value);
-                        // superscript = (HSSFFont)workbook.CreateFont();
+                        //result = new XSSFRichTextString(value);
+                        // superscript = (XSSFFont)workbook.CreateFont();
                         //superscript.TypeOffset = FontSuperScript.Super;//上标
                         //superscript.Color = HSSFColor.RED.index;
 
-                        HSSFFont subscript = (HSSFFont)workbook.CreateFont();
+                        XSSFFont subscript = (XSSFFont)workbook.CreateFont();
                         subscript.TypeOffset = FontSuperScript.Sub; //下标  
                         //subscript.IsItalic = true;
                         subscript.FontName = "宋体";
                         //subscript.Color = HSSFColor.Red.Index;
-                        //HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                        //XSSFFont normalFont = (XSSFFont)workbook.CreateFont();
                         startIndex = speStartIndex + spec.Code.Trim().Length - spec.SubscriptLastCount;
                         if (startIndex < 0)
                         {
@@ -4439,7 +4432,7 @@ namespace Langben.Report
                 return result;
             }
 
-            return new HSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
+            return new XSSFRichTextString(string.Format(sourceCell.StringCellValue, ""));
         }
         /// <summary>
         /// 设置下标\斜体\宋体
@@ -4449,13 +4442,13 @@ namespace Langben.Report
         /// <param name="value">特殊字符</param>
         /// <param name="remarkIndexList">备注特殊字符索引信息,非备注不用传</param>
         /// <returns></returns>
-        private HSSFRichTextString SetSub(HSSFWorkbook workbook = null, SpecialCharacters allSpecialCharacters = null, string value = "", List<SpecialCharacter_Index> remarkIndexList = null)
+        private XSSFRichTextString SetSub(XSSFWorkbook workbook = null, SpecialCharacters allSpecialCharacters = null, string value = "", List<SpecialCharacter_Index> remarkIndexList = null)
         {
             if (value == null)
             {
                 value = "";
             }
-            HSSFRichTextString result = new HSSFRichTextString(value.Trim());
+            XSSFRichTextString result = new XSSFRichTextString(value.Trim());
             if (workbook != null && value != null && value.Trim() != "")
             {
                 #region 处理第一位为斜体字符
@@ -4464,7 +4457,7 @@ namespace Langben.Report
                 {
                     #region 设置单元格字大小
 
-                    HSSFFont normalFont1 = (HSSFFont)workbook.CreateFont();
+                    XSSFFont normalFont1 = (XSSFFont)workbook.CreateFont();
                     //normalFont1.IsItalic = true;
                     normalFont1.FontName = "宋体";
                     normalFont1.FontHeightInPoints = 10;// 设置字体大小           
@@ -4472,7 +4465,7 @@ namespace Langben.Report
                     #endregion 
                     #region 将字符设置成斜体
 
-                    HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                    XSSFFont normalFont = (XSSFFont)workbook.CreateFont();
                     normalFont.IsItalic = true;
                     normalFont.FontName = "宋体";
                     //normalFont.FontHeightInPoints = 10;// 设置字体大小                 
@@ -4490,7 +4483,7 @@ namespace Langben.Report
                     {
                         #region 将字符设置成斜体
 
-                        HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                        XSSFFont normalFont = (XSSFFont)workbook.CreateFont();
                         normalFont.IsItalic = true;
                         normalFont.FontName = "宋体";
                         int startIndex = remark.StartIndex;
@@ -4501,17 +4494,17 @@ namespace Langben.Report
                         #region 设置下标
                         if (remark.SubCount > 0)
                         {
-                            //result = new HSSFRichTextString(value);
-                            // superscript = (HSSFFont)workbook.CreateFont();
+                            //result = new XSSFRichTextString(value);
+                            // superscript = (XSSFFont)workbook.CreateFont();
                             //superscript.TypeOffset = FontSuperScript.Super;//上标
                             //superscript.Color = HSSFColor.RED.index;
 
-                            HSSFFont subscript = (HSSFFont)workbook.CreateFont();
+                            XSSFFont subscript = (XSSFFont)workbook.CreateFont();
                             subscript.TypeOffset = FontSuperScript.Sub; //下标  
                             //subscript.IsItalic = true;
                             subscript.FontName = "宋体";
                             //subscript.Color = HSSFColor.Red.Index;
-                            //HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                            //XSSFFont normalFont = (XSSFFont)workbook.CreateFont();
                             startIndex = startIndex + remark.Code.Trim().Length - remark.SubCount;
                             if (startIndex < 0)
                             {
@@ -4531,7 +4524,7 @@ namespace Langben.Report
                 if (value.IndexOf("|,") >= 0)
                 {
                     value = value.Replace(",", Environment.NewLine);
-                    result = new HSSFRichTextString(value.Trim().Replace("|", ""));
+                    result = new XSSFRichTextString(value.Trim().Replace("|", ""));
 
                 }
 
@@ -4556,14 +4549,14 @@ namespace Langben.Report
                                 {
                                     startIndex = length + v.ToUpper().IndexOf(xt);
                                     endIndex = startIndex + xt.Length;
-                                    HSSFFont superscriptX = (HSSFFont)workbook.CreateFont();
+                                    XSSFFont superscriptX = (XSSFFont)workbook.CreateFont();
                                     superscriptX.IsItalic = true;
                                     superscriptX.FontName = "宋体";
                                     result.ApplyFont(startIndex, endIndex, superscriptX);
                                     if (xt.ToUpper() == "UREL")
                                     {
 
-                                        HSSFFont subscriptX = (HSSFFont)workbook.CreateFont();
+                                        XSSFFont subscriptX = (XSSFFont)workbook.CreateFont();
                                         subscriptX.TypeOffset = FontSuperScript.Sub; //下标                                     
                                         subscriptX.FontName = "宋体";
                                         result.ApplyFont(startIndex + 1, endIndex, subscriptX);
@@ -4583,7 +4576,7 @@ namespace Langben.Report
                 if (value.IndexOf("*10") > 0 || value.IndexOf("×10") > 0)
                 {
                     //value = value.Replace(",", Environment.NewLine);
-                    //result = new HSSFRichTextString(value.Trim().Replace("|", ""));
+                    //result = new XSSFRichTextString(value.Trim().Replace("|", ""));
 
                     string[] vArray = value.Trim().Split('|');
                     int length = 0;
@@ -4603,7 +4596,7 @@ namespace Langben.Report
                                 startIndex = length + v.IndexOf("×10") + 3;
                             }
                             endIndex = length + v.Length;
-                            HSSFFont superscript = (HSSFFont)workbook.CreateFont();
+                            XSSFFont superscript = (XSSFFont)workbook.CreateFont();
                             superscript.TypeOffset = FontSuperScript.Super;//上标
                             superscript.FontName = "宋体";
                             result.ApplyFont(startIndex, endIndex, superscript);
@@ -4622,7 +4615,7 @@ namespace Langben.Report
                     SpecialCharacter spec = allSpecialCharacters.SpecialCharacterList.FirstOrDefault(p => p.Code.Trim().ToUpper() == value.Trim().ToUpper());
                     #region 将字符设置成斜体
 
-                    HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                    XSSFFont normalFont = (XSSFFont)workbook.CreateFont();
                     normalFont.IsItalic = true;
                     normalFont.FontName = "宋体";
                     List<string> FontHeightInPoints10List = ReportStatic.SpecialCharacterFontHeightInPoints10();
@@ -4642,17 +4635,17 @@ namespace Langben.Report
                     #region 设置下标
                     if (spec.SubscriptLastCount > 0)
                     {
-                        //result = new HSSFRichTextString(value);
-                        // superscript = (HSSFFont)workbook.CreateFont();
+                        //result = new XSSFRichTextString(value);
+                        // superscript = (XSSFFont)workbook.CreateFont();
                         //superscript.TypeOffset = FontSuperScript.Super;//上标
                         //superscript.Color = HSSFColor.RED.index;
 
-                        HSSFFont subscript = (HSSFFont)workbook.CreateFont();
+                        XSSFFont subscript = (XSSFFont)workbook.CreateFont();
                         subscript.TypeOffset = FontSuperScript.Sub; //下标  
                         //subscript.IsItalic = true;
                         subscript.FontName = "宋体";
                         //subscript.Color = HSSFColor.Red.Index;
-                        //HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
+                        //XSSFFont normalFont = (XSSFFont)workbook.CreateFont();
                         startIndex = spec.Code.Trim().Length - spec.SubscriptLastCount;
                         if (startIndex < 0)
                         {
@@ -5189,7 +5182,7 @@ namespace Langben.Report
                                             {
                                                 if (ccCount > 0)
                                                 {
-                                                    sheet_Destination.GetRow(cc.Value.FirstRow).GetCell(cc.Value.FirstColumn).SetCellValue(new HSSFRichTextString(""));
+                                                    sheet_Destination.GetRow(cc.Value.FirstRow).GetCell(cc.Value.FirstColumn).SetCellValue(new XSSFRichTextString(""));
                                                 }
                                                 cellAddressList.Remove(cc.Key);
                                                 ccCount++;
@@ -5206,7 +5199,7 @@ namespace Langben.Report
                                     c = cellAddressList[key];
                                     cValue = sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).StringCellValue;
                                 }
-                                HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, d.value);
+                                XSSFRichTextString value = SetSub((XSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, d.value);
 
                                 if ((value == null || string.IsNullOrWhiteSpace(value.String)) && temp.Cells.FirstOrDefault(p => p.Code == d.name) != null && temp.Cells.FirstOrDefault(p => p.Code == d.name).IsHideRowNull == "Y")
                                 {
@@ -5216,7 +5209,7 @@ namespace Langben.Report
                                 }
                                 else if ((value == null || string.IsNullOrWhiteSpace(value.String)) && d.name.IndexOf("_UNIT") < 0)
                                 {
-                                    value = new HSSFRichTextString("/");
+                                    value = new XSSFRichTextString("/");
                                 }
                                 sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).SetCellValue(value);
                                 if (d.mergedRowNum > 1)//多行单元格合并
@@ -5311,7 +5304,7 @@ namespace Langben.Report
             {
                 CopyRow(sheet_Source, sheet_Destination, temp.RemarkRowIndex, rowIndex_Destination, 1, true);
 
-                HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, RemarkStr, sIndexList);
+                XSSFRichTextString value = SetSub((XSSFWorkbook)sheet_Destination.Workbook, allSpecialCharacters, RemarkStr, sIndexList);
                 sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).CellStyle.WrapText = true;//自动换行
                 sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(value);
                 rowIndex_Destination++;

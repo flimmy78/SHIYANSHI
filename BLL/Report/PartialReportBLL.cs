@@ -90,13 +90,11 @@ namespace Langben.Report
 
 
 
-            // string xlsPath = @"D:\codes\SHIYANSHI\App\Template\原始记录-数据模板-数表三相.xls";//TableTemplateXml
-            //原始记录 - /*校准*/
-                string xlsPath = @"D:\codes\SHIYANSHI\App\Template\原始记录-校准.xls";//TableTemplateXml
-
-            HSSFWorkbook _book = new HSSFWorkbook();
+              //原始记录 - /*校准*/
+                string xlsPath = @"D:\codes\SHIYANSHI\App\Template\原始记录-校准.xlsx";//TableTemplateXml
+             
             FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
-            IWorkbook hssfworkbook = new HSSFWorkbook(file);
+            IWorkbook hssfworkbook = WorkbookFactory.Create(file);// HSSFWorkbook(file);
             string sheetName_Destination = "数据模板";
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
             int rowCount = sheet_Destination.LastRowNum;
