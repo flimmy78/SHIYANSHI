@@ -102,7 +102,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    path = "~/Template/原始记录-校准.xlsx";
+                    path = "~/Template/原始记录-校准.xls";
                 }
                 path = System.Web.HttpContext.Current.Server.MapPath(path);
                 return path;
@@ -123,7 +123,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    path = "~/Template/原始记录-检定.xlsx";
+                    path = "~/Template/原始记录-检定.xls";
                 }
                 path = System.Web.HttpContext.Current.Server.MapPath(path);
                 return path;
@@ -144,7 +144,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    path = "~/Template/检定证书.xlsx";
+                    path = "~/Template/检定证书.xls";
                 }
                 path = System.Web.HttpContext.Current.Server.MapPath(path);
                 return path;
@@ -165,7 +165,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    path = "~/Template/校准证书.xlsx";
+                    path = "~/Template/校准证书.xls";
                 }
                 path = System.Web.HttpContext.Current.Server.MapPath(path);
                 return path;
@@ -185,7 +185,7 @@ namespace Langben.Report
                 }
                 else
                 {
-                    path = "~/Template/校准证书-CNAS.xlsx";
+                    path = "~/Template/校准证书-CNAS.xls";
                 }
                 path = System.Web.HttpContext.Current.Server.MapPath(path);
                 return path;
@@ -376,7 +376,7 @@ namespace Langben.Report
             #endregion
 
             #region 电能标准偏差估计值   
-            list = new List<string>();      
+            list = new List<string>();
             list.Add("READVALUE");//功率因素
             list.Add("OUTPUTVAL1_UNIT");//量程Ib单位
             list.Add("OUTPUTVAL1");//量程Ib值
@@ -451,7 +451,7 @@ namespace Langben.Report
             result.Add("U=100/√3V");
             result.Add("I=1A");
             result.Add("I=5A");
-            return result;           
+            return result;
         }
         /// <summary>
         /// 特殊字符10号字体
@@ -522,7 +522,7 @@ namespace Langben.Report
         /// <param name="RuleID">检测项ID</param>
         /// <param name="RemarkStr">备注</param>
         /// <returns></returns>
-        public static List<SpecialCharacter_Index> GetSpecialCharacter_Indexs(string RuleID,out string RemarkStr)
+        public static List<SpecialCharacter_Index> GetSpecialCharacter_Indexs(string RuleID, out string RemarkStr)
         {
             //RuleID = "166-1993_3_1";//测试
             RemarkStr = string.Empty;
@@ -536,7 +536,7 @@ namespace Langben.Report
 
             List<SpecialCharacter> Speciallist = RemarkSpecialCharacterDic[RuleID];
             Remark_Rules Remark = RemarkRulesList.FirstOrDefault(p => p.RuleID == RuleID);
-            if(Remark!=null)
+            if (Remark != null)
             {
                 RemarkStr = Remark.Remark;
             }
@@ -558,7 +558,7 @@ namespace Langben.Report
                         result.Add(item);
                         length = s.Code.Length;
                     }
-                    else if(index >=0)
+                    else if (index >= 0)
                     {
                         length = s.Code.Length;
                     }

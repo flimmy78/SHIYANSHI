@@ -90,11 +90,13 @@ namespace Langben.Report
 
 
 
-              //原始记录 - /*校准*/
-                string xlsPath = @"D:\codes\SHIYANSHI\App\Template\原始记录-校准.xlsx";//TableTemplateXml
-             
+            // string xlsPath = @"D:\codes\SHIYANSHI\App\Template\原始记录-数据模板-数表三相.xls";//TableTemplateXml
+            //原始记录 - /*校准*/
+            string xlsPath = @"D:\codes\SHIYANSHI\App\Template\原始记录-校准.xls";//TableTemplateXml
+
+            HSSFWorkbook _book = new HSSFWorkbook();
             FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
-            IWorkbook hssfworkbook = WorkbookFactory.Create(file);// HSSFWorkbook(file);
+            IWorkbook hssfworkbook = new HSSFWorkbook(file);
             string sheetName_Destination = "数据模板";
             ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
             int rowCount = sheet_Destination.LastRowNum;
@@ -115,7 +117,7 @@ namespace Langben.Report
                         {
                             if (j == 67)
                             {
-                                 
+
                                 var datadouhoa = s.Split(',');
                                 foreach (var item in datadouhoa)
                                 {
@@ -194,28 +196,28 @@ namespace Langben.Report
                         select f2).Distinct().ToList();
             TableTemplates t = new TableTemplates();
             t.TableTemplateList = new List<TableTemplate>();
-            var dsaf =new List<string>();
+            var dsaf = new List<string>();
             foreach (var item in data)
             {
                 var rrd = (from l in list
-                          where l.ruleid != null
-                          select l);
+                           where l.ruleid != null
+                           select l);
                 var rr = (from l in list
                           where l.ruleid == item.RuleID
                           select l).FirstOrDefault();
-                if (rr==null)
+                if (rr == null)
                 {
                     dsaf.Add(item.RuleID);
                     continue;
                 }
                 ReportRule rr2 = (from l in list
-                           where l.ruleid != null && l.ruleidnum > rr.ruleidnum
-                           select l).FirstOrDefault();
+                                  where l.ruleid != null && l.ruleidnum > rr.ruleidnum
+                                  select l).FirstOrDefault();
 
-                if (rr2==null)
+                if (rr2 == null)
                 {
                     rr2 = (from l in list
-                          
+
                            select l).Last();
                 }
                 ////////////////
@@ -233,7 +235,7 @@ namespace Langben.Report
 
                 if (ZHU != null)
                 {
-                    item.RemarkRowIndex = ZHU.biaoshinum+2;//备注模板行号
+                    item.RemarkRowIndex = ZHU.biaoshinum + 2;//备注模板行号
                 }
                 var JIELUN = rrbiaoshi.Where(c => c.biaoshi == "JIELUN").FirstOrDefault();
 
@@ -244,16 +246,16 @@ namespace Langben.Report
 
                 //if (item.IsHaveTableTitle)
                 {
-                    var countData= (from f in rrbiaoshi
-                                where f.biaoshi == "HEAD"
-                                select f);
-                    if (countData!=null && countData.Count() > 0)
+                    var countData = (from f in rrbiaoshi
+                                     where f.biaoshi == "HEAD"
+                                     select f);
+                    if (countData != null && countData.Count() > 0)
                     {
                         item.TableTitleList.First().RowIndex = countData.First().biaoshinum + 2;
                         item.TableTitleList.First().RowNumber = countData.Count();
                     }
 
-                  
+
                 }
 
                 //if (item.IsHaveTableFooter)
@@ -268,8 +270,8 @@ namespace Langben.Report
                 //    }
 
                 //}
-                { 
-                var countData = (from f in rrbiaoshi
+                {
+                    var countData = (from f in rrbiaoshi
                                      where f.biaoshi == "wucha"
                                      select f);
                     if (countData != null && countData.Count() > 0)
