@@ -64,7 +64,7 @@ namespace Langben.App.Controllers
             pc.ServerPage = "/pageoffice/server.aspx";
           
             string filePath = Server.MapPath(id.Replace("..", "~"));
-
+            pc.Caption = "报告";
             pc.SetWriter(workBook);
             pc.WebOpen(filePath, PageOffice.OpenModeType.xlsReadOnly, "13718511828");
 
