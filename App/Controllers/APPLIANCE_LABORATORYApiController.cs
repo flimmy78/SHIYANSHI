@@ -251,7 +251,7 @@ namespace Langben.App.Controllers
                     });
                 }
                 result.Code = Common.ClientCode.Fail;
-                result.Message = Suggestion.UpdateFail + returnValue;
+                result.Message = "努力找啊找，发现尚未找到";
                 return result; //提示更新失败
             }
 
