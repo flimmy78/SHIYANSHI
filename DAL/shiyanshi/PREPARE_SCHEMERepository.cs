@@ -84,6 +84,7 @@ namespace Langben.DAL
                 deleteItem.VALIDITYEND = entity.VALIDITYEND == null ? deleteItem.VALIDITYEND : entity.VALIDITYEND;
                 deleteItem.UNQUALIFIEDTYPE = entity.UNQUALIFIEDTYPE == null ? deleteItem.UNQUALIFIEDTYPE : entity.UNQUALIFIEDTYPE;
                 deleteItem.AUDITDATE = entity.AUDITDATE == null ? deleteItem.AUDITDATE : entity.AUDITDATE;
+                deleteItem.OTHER = entity.OTHER == null ? deleteItem.OTHER : entity.OTHER;
             }
         }
 
@@ -145,6 +146,7 @@ namespace Langben.DAL
             deleteItem.VALIDITYEND = entity.VALIDITYEND == null ? deleteItem.VALIDITYEND : entity.VALIDITYEND;
             deleteItem.UNQUALIFIEDTYPE = entity.UNQUALIFIEDTYPE == null ? deleteItem.UNQUALIFIEDTYPE : entity.UNQUALIFIEDTYPE;
             deleteItem.AUDITDATE = entity.AUDITDATE == null ? deleteItem.AUDITDATE : entity.AUDITDATE;
+            deleteItem.OTHER = entity.OTHER == null ? deleteItem.OTHER : entity.OTHER;
             return deleteItem;
         }
     }
