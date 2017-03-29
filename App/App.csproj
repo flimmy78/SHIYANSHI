@@ -1116,6 +1116,7 @@
     <Content Include="Views\VSHENHE\Yuanshi.cshtml" />
     <Content Include="Views\VSHENHE\BaoGao.cshtml" />
     <Content Include="Views\VSHENPI\Yuanshi.cshtml" />
+    <Content Include="Views\PREPARE_SCHEME\SaveFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
