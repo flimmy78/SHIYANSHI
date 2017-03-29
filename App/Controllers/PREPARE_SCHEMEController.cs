@@ -48,7 +48,7 @@ namespace Langben.App.Controllers
             pc.AddCustomToolButton("保存", "Save()", 1);
             string filePath = Server.MapPath(id.Replace("..","~"));
             pc.SaveFilePage = "/PREPARE_SCHEME/SaveFile/?id=" + id.Replace("..", "~");
-          
+            pc.Caption = "实验室系统";
             pc.SetWriter(workBook);
             pc.WebOpen(filePath, PageOffice.OpenModeType.xlsNormalEdit, "Tom");
 
@@ -66,11 +66,25 @@ namespace Langben.App.Controllers
             return View();
         }
         public ActionResult SaveFile(string id)
-        { 
-            string filePath = Server.MapPath(id.Replace("..", "~"));
+        {
+            string filePath = string.Empty;
+            if (!string.IsNullOrWhiteSpace(id) && id.Contains(".."))
+            {
+                filePath = Server.MapPath(id.Replace("..", "~"));
+            }
+            else
+            {
+                filePath = Server.MapPath(id);
+            }
+            //LogClassModels.WriteServiceLog(Suggestion.InsertFail + filePath+"，相位的信息888，" + id, "相位"
+            //          );//写入日志    
             PageOffice.FileSaver fs = new PageOffice.FileSaver();
+            //LogClassModels.WriteServiceLog(Suggestion.InsertFail + filePath + "，相位的信息8883，" + id, "相位"
+            //        );//写入日志   
             fs.SaveToFile(filePath);
             fs.Close();
+            //LogClassModels.WriteServiceLog(Suggestion.InsertFail + filePath + "，相位的信息88838，" + id, "相位"
+            //        );//写入日志   
             return View();
         }
         /// <summary>
