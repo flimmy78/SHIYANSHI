@@ -534,12 +534,10 @@ namespace Langben.App.Controllers
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.待批准.ToString();
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.待批准.GetHashCode().ToString();
-
+                        applianceOne.ORDER_STATUS = Common.ORDER_STATUS.试验完成.ToString();//自己改变状态
+                        applianceOne.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.试验完成.GetHashCode().ToString();//自己改变状态
                         if (applianceTwo != null)
-                        {
-
-                            applianceOne.ORDER_STATUS = Common.ORDER_STATUS.试验完成.ToString();
-                            applianceOne.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.试验完成.GetHashCode().ToString();
+                        {                          
                             applianceOne.ISRECEIVE = Common.ISRECEIVE.否.ToString();
                             m_BLL2.EditField(ref validationErrors, applianceOne);
                             applianceTwo.ISRECEIVE = Common.ISRECEIVE.是.ToString();
