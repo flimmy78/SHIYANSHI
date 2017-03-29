@@ -205,7 +205,7 @@ namespace Langben.App.Controllers
                 ATTACHMENT = queryData.ATTACHMENT,//附件
                 APPEARANCE_STATUS = queryData.APPEARANCE_STATUS,//外观状态
                 MAKE_ORGANIZATION = queryData.MAKE_ORGANIZATION,//制造单位
-                UNDERTAKE_LABORATORYIDString = UNDERTAKE_LABORATORYID,//实验室
+                UNDERTAKE_LABORATORYIDString = UNDERTAKE_LABORATORYID.TrimEnd(','),//实验室
                 REMARKS = queryData.REMARKS,//备注
                 ORDER_STATUS = ORDER_STATUS//状态
             });
