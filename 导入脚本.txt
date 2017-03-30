@@ -1,0 +1,1 @@
+ impdp tengfei/tengfei@shiyanshi dumpfile=shiyanshibak3.dmp logfile=shiys.log directory=dump_dir1 full=y

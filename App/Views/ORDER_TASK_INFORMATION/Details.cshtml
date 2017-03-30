@@ -355,7 +355,7 @@ s：字符串
         </div>
     </div>
 
-  
+
     <div style="clear:both;"></div>
     <input type="hidden" id="ORDER_TASK_INFORMATIONID" />
     <div class="p5 mt10">
@@ -472,7 +472,25 @@ s：字符串
 
     //委托单打印
     function dayingweituodan() {
-        window.location.href = '/ORDER_TASK_INFORMATION/Show/'+"@ViewBag.Id";
+
+        var fulls = "left=0,screenX=0,top=0,screenY=0,scrollbars=1";    //定义弹出窗口的参数
+        if (window.screen) {
+            var ah = screen.availHeight - 30;
+            var aw = screen.availWidth - 10;
+            fulls += ",height=" + ah;
+            fulls += ",innerHeight=" + ah;
+            fulls += ",width=" + aw;
+            fulls += ",innerWidth=" + aw;
+            fulls += ",resizable"
+        } else {
+            fulls += ",resizable"; // 对于不支持screen属性的浏览器，可以手工进行最大化。 manually
+        }
+
+
+        WindowObjectReference = window.open('/ORDER_TASK_INFORMATION/Show/' + "@ViewBag.Id",
+"签字",
+fulls);
+
     }
     //查看委托单
     function chakanweituodan() {

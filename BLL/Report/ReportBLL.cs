@@ -2834,146 +2834,158 @@ namespace Langben.Report
         /// <param name="listZhuanZhi">装置实体</param>
         private void SetZhuangZhi(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, ref int rowIndex_Destination, CATEGORYType type = CATEGORYType.标准装置, List<METERING_STANDARD_DEVICE> listZhuanZhi = null)
         {
-            if (listZhuanZhi != null && listZhuanZhi.Count > 0)
+            try
             {
-                //标题
-                CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true);
-                rowIndex_Source++;
-                rowIndex_Destination++;
-                //表头
-                CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true);
-                rowIndex_Source++;
-                rowIndex_Destination++;
 
-                #region 数据
-                foreach (METERING_STANDARD_DEVICE item in listZhuanZhi)
+
+                if (listZhuanZhi != null && listZhuanZhi.Count > 0)
                 {
-                    CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, false);
+                    //标题
+                    CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true);
+                    rowIndex_Source++;
+                    rowIndex_Destination++;
+                    //表头
+                    CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, true);
+                    rowIndex_Source++;
+                    rowIndex_Destination++;
 
-                    int row_SourceHeight = sheet_Source.GetRow(rowIndex_Source).Height;//源行高
-                    int maxRowCount = 1;//最大换行数用来控制行高
-
-                    //名称
-                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(item.NAME);
-                    if (type == CATEGORYType.标准装置)
+                    #region 数据
+                    foreach (METERING_STANDARD_DEVICE item in listZhuanZhi)
                     {
-                        //测量范围
-                        if (item.TEST_RANGE != null)
+                        CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, false);
+
+                        int row_SourceHeight = sheet_Source.GetRow(rowIndex_Source).Height;//源行高
+                        int maxRowCount = 1;//最大换行数用来控制行高
+
+                        //名称
+                        sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(item.NAME);
+                        if (type == CATEGORYType.标准装置)
                         {
-                            maxRowCount = item.TEST_RANGE.Split(';').Length;
-                        }
-                        item.TEST_RANGE = item.TEST_RANGE.Replace(";", Environment.NewLine);
-                        sheet_Destination.GetRow(rowIndex_Destination).GetCell(7).SetCellValue(item.TEST_RANGE);
-                    }
-                    else
-                    {
-                        //型号
-                        sheet_Destination.GetRow(rowIndex_Destination).GetCell(7).SetCellValue(item.XINGHAO);
-                        //编号
-                        sheet_Destination.GetRow(rowIndex_Destination).GetCell(10).SetCellValue(item.FACTORY_NUM);
-                    }
 
-                    #region 不确定度/准确度等级/最大允许误差
-                    //不确定度/准确度等级/最大允许误差
-                    List<ALLOWABLE_ERROR> aList = item.ALLOWABLE_ERROR.ToList();
-                    if (aList != null && aList.Count > 0)
-                    {
-                        //rowIndex_Source++;
-                        string aValue = "";
-                        foreach (ALLOWABLE_ERROR aItem in aList)
-                        {
-                            if (!string.IsNullOrWhiteSpace(aItem.THEACCURACYLEVEL))
+                            //测量范围
+                            if (!string.IsNullOrWhiteSpace(item.TEST_RANGE))
                             {
-
-                                aValue += aItem.THEACCURACYLEVEL + "|,";
+                                maxRowCount = item.TEST_RANGE.Split(';').Length;
+                                item.TEST_RANGE = item.TEST_RANGE.Replace(";", Environment.NewLine);
+                                sheet_Destination.GetRow(rowIndex_Destination).GetCell(7).SetCellValue(item.TEST_RANGE);
                             }
-                            else if (!string.IsNullOrWhiteSpace(aItem.MAXCATEGORIES) || !string.IsNullOrWhiteSpace(aItem.MAXVALUE))
-                            {
-
-                                aValue += aItem.MAXCATEGORIES + aItem.MAXVALUE + "|,";
-                            }
-                            else if (!string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTY) || !string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTYVALUE) || !string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTYNDEXL) || !string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTYVALUEK))
-                            {
-
-                                // aValue += aItem.THEUNCERTAINTY + aItem.THEUNCERTAINTYVALUE + aItem.THEUNCERTAINTYNDEXL +"|"+ aItem.THEUNCERTAINTYVALUEK + ",";
-                                aValue += aItem.THEUNCERTAINTY + aItem.THEUNCERTAINTYVALUE + aItem.THEUNCERTAINTYNDEXL + "|,";
-                            }
-
-                        }
-                        if (!string.IsNullOrEmpty(aValue) && aValue.Trim() != "")
-                        {
-                            if (aValue.IndexOf("|,") > 0)
-                            {
-                                aValue = aValue.Trim().Remove(aValue.Trim().Length - 2);
-                            }
-                            else
-                            {
-                                aValue = aValue.Trim().Remove(aValue.Trim().Length - 1);
-                            }
-
-                            //aValue = aValue.Replace(",", Environment.NewLine);
-                            if (maxRowCount < aValue.Split(',').Length)
-                            {
-                                maxRowCount = aValue.Split(',').Length;
-                            }
-                            //aValue = aValue.Replace(",", Environment.NewLine);
-                            HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, null, aValue);
-                            sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(value);
+                           
                         }
                         else
                         {
-                            sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(aValue);
+                            //型号
+                            sheet_Destination.GetRow(rowIndex_Destination).GetCell(7).SetCellValue(item.XINGHAO);
+                            //编号
+                            sheet_Destination.GetRow(rowIndex_Destination).GetCell(10).SetCellValue(item.FACTORY_NUM);
                         }
+
+                        #region 不确定度/准确度等级/最大允许误差
+                        //不确定度/准确度等级/最大允许误差
+                        List<ALLOWABLE_ERROR> aList = item.ALLOWABLE_ERROR.ToList();
+                        if (aList != null && aList.Count > 0)
+                        {
+                            //rowIndex_Source++;
+                            string aValue = "";
+                            foreach (ALLOWABLE_ERROR aItem in aList)
+                            {
+                                if (!string.IsNullOrWhiteSpace(aItem.THEACCURACYLEVEL))
+                                {
+
+                                    aValue += aItem.THEACCURACYLEVEL + "|,";
+                                }
+                                else if (!string.IsNullOrWhiteSpace(aItem.MAXCATEGORIES) || !string.IsNullOrWhiteSpace(aItem.MAXVALUE))
+                                {
+
+                                    aValue += aItem.MAXCATEGORIES + aItem.MAXVALUE + "|,";
+                                }
+                                else if (!string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTY) || !string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTYVALUE) || !string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTYNDEXL) || !string.IsNullOrWhiteSpace(aItem.THEUNCERTAINTYVALUEK))
+                                {
+
+                                    // aValue += aItem.THEUNCERTAINTY + aItem.THEUNCERTAINTYVALUE + aItem.THEUNCERTAINTYNDEXL +"|"+ aItem.THEUNCERTAINTYVALUEK + ",";
+                                    aValue += aItem.THEUNCERTAINTY + aItem.THEUNCERTAINTYVALUE + aItem.THEUNCERTAINTYNDEXL + "|,";
+                                }
+
+                            }
+                            if (!string.IsNullOrEmpty(aValue) && aValue.Trim() != "")
+                            {
+                                if (aValue.IndexOf("|,") > 0)
+                                {
+                                    aValue = aValue.Trim().Remove(aValue.Trim().Length - 2);
+                                }
+                                else
+                                {
+                                    aValue = aValue.Trim().Remove(aValue.Trim().Length - 1);
+                                }
+
+                                //aValue = aValue.Replace(",", Environment.NewLine);
+                                if (maxRowCount < aValue.Split(',').Length)
+                                {
+                                    maxRowCount = aValue.Split(',').Length;
+                                }
+                                //aValue = aValue.Replace(",", Environment.NewLine);
+                                HSSFRichTextString value = SetSub((HSSFWorkbook)sheet_Destination.Workbook, null, aValue);
+                                sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(value);
+                            }
+                            else
+                            {
+                                sheet_Destination.GetRow(rowIndex_Destination).GetCell(13).SetCellValue(aValue);
+                            }
+                        }
+                        #endregion
+
+                        #region 证书编号 有效期至
+                        List<METERING_STANDARD_DEVICE_CHECK> mList = item.METERING_STANDARD_DEVICE_CHECK.ToList();
+                        if (mList != null && mList.Count > 0)
+                        {
+                            string cValue = "";//证书编号
+                            string vValue = "";//有效期
+                            foreach (METERING_STANDARD_DEVICE_CHECK mItem in mList)
+                            {
+                                if (mItem != null && !string.IsNullOrEmpty(mItem.CERTIFICATE_NUM) && mItem.CERTIFICATE_NUM.Trim() != "")
+                                {
+                                    cValue += mItem.CERTIFICATE_NUM + ",";
+                                }
+                                if (mItem != null && mItem.VALID_TO.HasValue)
+                                {
+                                    vValue += mItem.VALID_TO.Value.ToString("yyyy/MM/dd") + ",";
+                                }
+
+                            }
+                            if (!string.IsNullOrEmpty(cValue) && cValue.Trim() != "")
+                            {
+                                if (maxRowCount < cValue.Split(',').Length)
+                                {
+                                    maxRowCount = cValue.Split(',').Length;
+                                }
+                                cValue = cValue.Trim().Remove(cValue.Trim().Length - 1);
+                                cValue = cValue.Replace(",", Environment.NewLine);
+                            }
+                            if (!string.IsNullOrEmpty(vValue) && vValue.Trim() != "")
+                            {
+                                if (maxRowCount < vValue.Split(',').Length)
+                                {
+                                    maxRowCount = vValue.Split(',').Length;
+                                }
+                                vValue = vValue.Trim().Remove(vValue.Trim().Length - 1);
+                                vValue = vValue.Replace(",", Environment.NewLine);
+                            }
+                            sheet_Destination.GetRow(rowIndex_Destination).GetCell(20).SetCellValue(cValue);
+                            sheet_Destination.GetRow(rowIndex_Destination).GetCell(27).SetCellValue(vValue);
+
+                            //重新设置行高
+                            sheet_Destination.GetRow(rowIndex_Destination).Height = (short)(row_SourceHeight * maxRowCount);
+                        }
+                        #endregion
+                        rowIndex_Destination++;
                     }
+
                     #endregion
-
-                    #region 证书编号 有效期至
-                    List<METERING_STANDARD_DEVICE_CHECK> mList = item.METERING_STANDARD_DEVICE_CHECK.ToList();
-                    if (mList != null && mList.Count > 0)
-                    {
-                        string cValue = "";//证书编号
-                        string vValue = "";//有效期
-                        foreach (METERING_STANDARD_DEVICE_CHECK mItem in mList)
-                        {
-                            if (mItem != null && !string.IsNullOrEmpty(mItem.CERTIFICATE_NUM) && mItem.CERTIFICATE_NUM.Trim() != "")
-                            {
-                                cValue += mItem.CERTIFICATE_NUM + ",";
-                            }
-                            if (mItem != null && mItem.VALID_TO.HasValue)
-                            {
-                                vValue += mItem.VALID_TO.Value.ToString("yyyy/MM/dd") + ",";
-                            }
-
-                        }
-                        if (!string.IsNullOrEmpty(cValue) && cValue.Trim() != "")
-                        {
-                            if (maxRowCount < cValue.Split(',').Length)
-                            {
-                                maxRowCount = cValue.Split(',').Length;
-                            }
-                            cValue = cValue.Trim().Remove(cValue.Trim().Length - 1);
-                            cValue = cValue.Replace(",", Environment.NewLine);
-                        }
-                        if (!string.IsNullOrEmpty(vValue) && vValue.Trim() != "")
-                        {
-                            if (maxRowCount < vValue.Split(',').Length)
-                            {
-                                maxRowCount = vValue.Split(',').Length;
-                            }
-                            vValue = vValue.Trim().Remove(vValue.Trim().Length - 1);
-                            vValue = vValue.Replace(",", Environment.NewLine);
-                        }
-                        sheet_Destination.GetRow(rowIndex_Destination).GetCell(20).SetCellValue(cValue);
-                        sheet_Destination.GetRow(rowIndex_Destination).GetCell(27).SetCellValue(vValue);
-
-                        //重新设置行高
-                        sheet_Destination.GetRow(rowIndex_Destination).Height = (short)(row_SourceHeight * maxRowCount);
-                    }
-                    #endregion
-                    rowIndex_Destination++;
                 }
-
-                #endregion
+            }
+            catch (Exception ex)
+            {
+                ExceptionsHander.WriteExceptions(ex);
+                throw;
             }
         }
 
