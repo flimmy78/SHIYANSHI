@@ -1523,6 +1523,7 @@
         <EntityType Name="VQIJULINGQU2">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="UNDERTAKE_LABORATORYID" />
           </Key>
           <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="APPLIANCE_NAME" Type="varchar2" MaxLength="200" />
@@ -1530,7 +1531,7 @@
           <Property Name="FACTORY_NUM" Type="varchar2" MaxLength="200" />
           <Property Name="NUM" Type="number" Precision="38" Scale="0" />
           <Property Name="ATTACHMENT" Type="varchar2" MaxLength="200" />
-          <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
+          <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="APPLIANCE_RECIVE" Type="varchar2" MaxLength="200" />
           <Property Name="REPORTNUMBER" Type="varchar2" MaxLength="200" />
           <Property Name="REMARKS" Type="varchar2" MaxLength="4000" />
@@ -5198,6 +5199,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
         <EntityType Name="VQIJULINGQU2">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="UNDERTAKE_LABORATORYID" />
           </Key>
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -5205,7 +5207,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="NUM" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="ATTACHMENT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="APPLIANCE_RECIVE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="REPORTNUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="REMARKS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
