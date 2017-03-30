@@ -150,7 +150,7 @@ namespace Langben.App.Controllers
 
                 if (entity != null && ModelState.IsValid)
                 {
-                  
+
                     entity.CREATETIME = DateTime.Now;
                     entity.CREATEPERSON = account.PersonName;
                     //修改证书编号
@@ -255,7 +255,7 @@ namespace Langben.App.Controllers
                         }
                         return result;
                     }
-                  
+
                 }
 
             }
@@ -382,7 +382,7 @@ namespace Langben.App.Controllers
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             if (entity != null && ModelState.IsValid)
             {   //数据校验
-                Account acc = GetCurrentAccount();               
+                Account acc = GetCurrentAccount();
                 entity.UPDATETIME = DateTime.Now;
                 entity.UPDATEPERSON = acc.PersonName;
 
@@ -537,7 +537,7 @@ namespace Langben.App.Controllers
                         applianceOne.ORDER_STATUS = Common.ORDER_STATUS.试验完成.ToString();//自己改变状态
                         applianceOne.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.试验完成.GetHashCode().ToString();//自己改变状态
                         if (applianceTwo != null)
-                        {                          
+                        {
                             applianceOne.ISRECEIVE = Common.ISRECEIVE.否.ToString();
                             m_BLL2.EditField(ref validationErrors, applianceOne);
                             applianceTwo.ISRECEIVE = Common.ISRECEIVE.是.ToString();
@@ -569,7 +569,7 @@ namespace Langben.App.Controllers
                         LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，预备方案信息的Id为" + entity.ID, "审核过程记录");//写入日志  
                     }
                     #endregion
-                   
+
                 }
                 else if (entity.SHPI == "P")
                 {
@@ -619,26 +619,12 @@ namespace Langben.App.Controllers
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.已批准.ToString();
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.已批准.GetHashCode().ToString();
-                        //判断器具是否满足入库条件
-                        if (ISAPPLIANCE(entity.APPLIANCE_DETAIL_INFORMATIONID))
-                        {
-                            if (applianceTwo != null)
-                            {
-                                applianceOne.ORDER_STATUS = Common.ORDER_STATUS.待入库.ToString();
-                                applianceOne.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.待入库.GetHashCode().ToString();
-                                applianceOne.ISRECEIVE = Common.ISRECEIVE.否.ToString();
-                                m_BLL2.EditField(ref validationErrors, applianceOne);
-                                applianceTwo.ISRECEIVE = Common.ISRECEIVE.是.ToString();
-                                m_BLL2.EditField(ref validationErrors, applianceTwo);
-                            }
-                            else
-                            {
-                                applianceOne.ORDER_STATUS = Common.ORDER_STATUS.待入库.ToString();
-                                applianceOne.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.待入库.GetHashCode().ToString();
-                                applianceOne.ISRECEIVE = Common.ISRECEIVE.否.ToString();
-                                m_BLL2.EditField(ref validationErrors, applianceOne);
-                            }
-                        }
+
+                        applianceOne.ORDER_STATUS = Common.ORDER_STATUS.待入库.ToString();
+                        applianceOne.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.待入库.GetHashCode().ToString();
+                        applianceOne.ISRECEIVE = Common.ISRECEIVE.否.ToString();
+                        m_BLL2.EditField(ref validationErrors, applianceOne);
+                       
                     }
                     #region 审批过程记录
                     SP.ID = Result.GetNewId();//id
@@ -659,7 +645,7 @@ namespace Langben.App.Controllers
                         }
                         LogClassModels.WriteServiceLog(Suggestion.UpdateFail + "，预备方案信息的Id为" + entity.ID, "审批过程记录");//写入日志  
                     }
-                    
+
                     #endregion
                 }
 
@@ -753,34 +739,7 @@ namespace Langben.App.Controllers
             return result;
         }
 
-        /// <summary>
-        /// 判断器具是否满足入库条件
-        /// </summary>
-        /// <param name="id">器具明细表id</param>
-        /// <returns>满足：true；不满足：false</returns>
-        public bool ISAPPLIANCE(string id)
-        {
-            bool JG = false;
-            List<APPLIANCE_LABORATORY> list = m_BLL2.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(id);
-            if (list.Count == 1)
-            {
-                foreach (var item in list)
-                {
-                    PREPARE_SCHEME prepare = m_BLL.GetById(item.PREPARE_SCHEMEID);
-                    if (prepare.REPORTSTATUS == Common.REPORTSTATUS.待批准.ToString())//判断当前报告是否满足条件
-                    {
-                        JG = true;
-                    }
-                    else
-                    {
-                        JG = false;
-                        return JG;
-                    }
-                }
-            }
-            return JG;
-        }
-
+      
         IBLL.IPREPARE_SCHEMEBLL m_BLL;
         IBLL.IAPPLIANCE_LABORATORYBLL m_BLL2;
         IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL m_BLL3;
