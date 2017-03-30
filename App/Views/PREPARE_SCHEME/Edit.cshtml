@@ -369,8 +369,11 @@
                 // async: false,
                 success: function (res) {
                     if (res.Code == 1) {
-                        $("#Submit1,#fashongid").attr("disabled", true);
-                        $.messager.alert('操作提示', res.Message, 'info');
+                       // $("#Submit1,#fashongid").attr("disabled", true);
+                        $.messager.alert('操作提示', res.Message, 'info', function () {
+                            window.location.href = '../VJIANDINGRENWU/Index';
+                        });
+
                     }
                     else {
                         $.messager.alert('操作提示', res.Message, 'error');
