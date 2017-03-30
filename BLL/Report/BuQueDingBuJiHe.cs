@@ -16,21 +16,7 @@ namespace Langben.BLL.Report
         public static List<BuQueDingDu> jihe { get; set; }
         static BuQueDingBuJiHe()
         {
-            /*
-  <option value="5720A交流电流测量">5720A交流电流测量</option>
-                            <option value="5720A交流电压测量单相">5720A交流电压测量单相</option>
-                            <option value="5720A交流电压测量三相">5720A交流电压测量三相</option>
-                            <option value="5720A直流电流测量">5720A/5725A直流电流测量</option>
-                            <option value="5720A直流电压测量">5720A/5725A直流电压测量</option>
-                            <option value="5720A直流电阻输出">5720A/5725A直流电阻输出</option>
-                            <option value="8508A交流电流输出">85080A交流电流输出</option>
-                            <option value="8508A交流电压变换器">8508A交流电压变换器</option>
-                            <option value="8508A交流电压输出">8508A交流电压输出</option>
-                            <option value="8508A直流电流输出">8508A直流电流输出</option>
-                            <option value="8508A直流电压输出">8508A直流电压输出</option>
-                            <option value="8508A直流电阻测量">8508A直流电阻测量</option>
-
-*/
+            
             jihe = new List<BuQueDingDu>();
             jihe.Add(new BuQueDingDu() { RuleID = "315-1983_2_4", GongShi = "2", MingChen = "5720A直流电压测量", DianZu="N", ShuChu = "N" });
             jihe.Add(new BuQueDingDu() { RuleID = "d315-1983_2_4", GongShi = "2", MingChen = "5720A直流电压测量", DianZu = "N", ShuChu = "N" });
