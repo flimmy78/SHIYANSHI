@@ -2477,7 +2477,7 @@ namespace Langben.Report
             }
             else
             {
-                sheet_Destination.GetRow(11).GetCell(23).SetCellValue(entity.RATED_FREQUENCY);
+                sheet_Destination.GetRow(11).GetCell(23).SetCellValue(entity.RATED_FREQUENCY+"Hz");
             }
             //脉冲常数
             if (entity.PULSE_CONSTANT == null || entity.PULSE_CONSTANT.Trim() == "")
@@ -3738,7 +3738,8 @@ namespace Langben.Report
             }
             else
             {
-                sheet_Destination.Header.Left = header;
+                sheet_Destination.Header.Left = header;               
+
             }
             //页脚控制编号(只有类型为校准的CNAS原始记录才要这个编号，其他的都不要)
             if (type == ExportType.OriginalRecord_XiaoZhun && entity.CERTIFICATE_CATEGORY == ZhengShuLeiBieEnums.校准.ToString() && entity.CNAS == ShiFouCNAS.Yes.ToString() && entity.CONTROL_NUMBER != null && entity.CONTROL_NUMBER.Trim() != "")
