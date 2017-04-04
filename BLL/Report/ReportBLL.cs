@@ -3004,6 +3004,10 @@ namespace Langben.Report
                 vList = vBLL.GetByPREPARE_SCHEMEID(entity.ID);
             }
             int RowIndex = 1;
+            if (type == ExportType.Report_JianDing || type == ExportType.Report_XiaoZhun || type == ExportType.Report_XiaoZhun_CNAS)
+            {
+                RowIndex = 2;
+            }
             int JWTemplateIndex = 0;//规程标题获取源格式行   
             int ruleTitleTemplateIndex = 1;//检测项目名称
             string sheetName_Source = "数据模板";
