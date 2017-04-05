@@ -5238,24 +5238,24 @@ namespace Langben.Report
                                 sheet_Destination.GetRow(c.FirstRow).GetCell(c.FirstColumn).SetCellValue(value);
                                 if (d.mergedRowNum > 1)//多行单元格合并
                                 {
-                                    if ((iEntity.RULEID == "440-2008_10") ||
-                                        (iEntity.RULEID == "1075-2001_3_1") ||
-                                        (iEntity.RULEID == "169-2010_4_2") ||
-                                        (iEntity.RULEID == "984-2004_2") ||
-                                        (iEntity.RULEID == "1085-2013_6_1") ||
-                                        (iEntity.RULEID == "169-2010_4_3") ||
-                                        (iEntity.RULEID == "1264-2010_3_1"))//解决单元格无法合并问题，目前没找到原因
-                                    {
+                                    //if ((iEntity.RULEID == "440-2008_10") ||
+                                    //    (iEntity.RULEID == "1075-2001_3_1") ||
+                                    //    (iEntity.RULEID == "169-2010_4_2") ||
+                                    //    (iEntity.RULEID == "984-2004_2") ||
+                                    //    (iEntity.RULEID == "1085-2013_6_1") ||
+                                    //    (iEntity.RULEID == "169-2010_4_3") ||
+                                    //    (iEntity.RULEID == "1264-2010_3_1"))//解决单元格无法合并问题，目前没找到原因
+                                    //{
                                         for (int k = 0; k <= d.mergedRowNum * 3; k++)
                                         {
                                             sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
                                         }
-                                    }
-                                    else
-                                    {
-                                        sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
+                                    //}
+                                    //else
+                                    //{
+                                    //    sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
 
-                                    }
+                                    //}
 
                                 }
 

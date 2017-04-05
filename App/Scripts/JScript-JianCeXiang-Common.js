@@ -705,7 +705,7 @@ RuleAttributeArray = [
                 //按钮计算不确定(A:检测项属性名称)
                 JiSuanBuQueDingDu: 'Z:UNCERTAINTYDEGREE|SHIJISHUCHUZHI;RANGE;K;OUTPUTVALUE;READVALUE;;',
                 //是否有底部计算不确定度按钮,(D:动态可添加行、G:固定两行,如果没有可不设置)                
-                JiSuanBuQueDingDu_DiBu: 'G'
+                JiSuanBuQueDingDu_DiBu: ''
             }]
     }
     ,
