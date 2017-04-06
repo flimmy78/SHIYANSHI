@@ -2099,6 +2099,107 @@ namespace Langben.Report
         /// <param name="type"></param
         /// <param name="IsHaveBuQueDingDu">是否有不确定度</param
         /// <param name="CONCLUSION">总结论</param>
+        private void HiddenSheet_1(IWorkbook hssfworkbook, ExportType type, bool IsHaveBuQueDingDu = true, string CONCLUSION = "合格")
+        {
+            int index = -1;
+            switch (type)
+            {
+                case ExportType.OriginalRecord_JianDing:
+                case ExportType.OriginalRecord_XiaoZhun:
+
+                    if (IsHaveBuQueDingDu == false)
+                    {
+                        index = hssfworkbook.GetSheetIndex("不确定度");
+                        if (index >= 0)
+                        {
+                            hssfworkbook.RemoveSheetAt(index);
+                        }
+
+                    }
+                    index = hssfworkbook.GetSheetIndex("封皮模板");
+                    if (index >= 0)
+                    {
+                        hssfworkbook.RemoveSheetAt(index);
+                    }
+                    index = hssfworkbook.GetSheetIndex("数据模板");
+                    if (index >= 0)
+                    {
+                        hssfworkbook.RemoveSheetAt(index);
+                    }
+                    index = hssfworkbook.GetSheetIndex("不确定度模板");
+                    if (index >= 0)
+                    {
+                        hssfworkbook.RemoveSheetAt(index);
+                    }
+
+
+                    break;
+
+
+                case ExportType.Report_JianDing:
+
+                    if (CONCLUSION == "合格")
+                    {
+                        index = hssfworkbook.GetSheetIndex("通知书封皮");
+                        if (index >= 0)
+                        {
+                            hssfworkbook.RemoveSheetAt(index);//通知书
+                        }
+
+                    }
+                    else
+                    {
+                        index = hssfworkbook.GetSheetIndex("封皮");
+                        if (index >= 0)
+                        {
+                            hssfworkbook.RemoveSheetAt(index);
+                        }
+                    }
+                    index = hssfworkbook.GetSheetIndex("第二页模板");
+                    if (index >= 0)
+                    {
+                        hssfworkbook.RemoveSheetAt(index);
+                    }
+                    index = hssfworkbook.GetSheetIndex("数据模板");
+                    if (index >= 0)
+                    {
+                        hssfworkbook.RemoveSheetAt(index);
+                    }
+
+                    break;
+                case ExportType.Report_XiaoZhun:
+                    index = hssfworkbook.GetSheetIndex("第二页模板");
+                    if (index >= 0)
+                    {
+                        hssfworkbook.RemoveSheetAt(index);
+                    }
+                    index = hssfworkbook.GetSheetIndex("数据模板");
+                    if (index >= 0)
+                    {
+                        hssfworkbook.RemoveSheetAt(index);
+                    }
+                    break;
+                case ExportType.Report_XiaoZhun_CNAS:
+                    index = hssfworkbook.GetSheetIndex("第二页模板");
+                    if (index >= 0)
+                    {
+                        hssfworkbook.RemoveSheetAt(index);
+                    }
+                    index = hssfworkbook.GetSheetIndex("数据模板");
+                    if (index >= 0)
+                    {
+                        hssfworkbook.RemoveSheetAt(index);
+                    }
+                    break;
+            }
+        }
+        /// <summary>
+        /// 隐藏不需要的sheet(模板需要隐藏)
+        /// </summary>
+        /// <param name="hssfworkbook"></param>
+        /// <param name="type"></param
+        /// <param name="IsHaveBuQueDingDu">是否有不确定度</param
+        /// <param name="CONCLUSION">总结论</param>
         private void HiddenSheet(IWorkbook hssfworkbook, ExportType type, bool IsHaveBuQueDingDu = true, string CONCLUSION = "合格")
         {
             switch (type)
@@ -3738,11 +3839,11 @@ namespace Langben.Report
             }
             if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
             {
-                sheet_Destination.Header.Left = header + REPORTNUMBER;
+                sheet_Destination.Header.Left = "&9" + header + REPORTNUMBER;
             }
             else
             {
-                sheet_Destination.Header.Left = header;               
+                sheet_Destination.Header.Left = "&9" + header;
 
             }
             //页脚控制编号(只有类型为校准的CNAS原始记录才要这个编号，其他的都不要)
@@ -3750,7 +3851,7 @@ namespace Langben.Report
             {
                 //if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
                 //{
-                sheet_Destination.Footer.Left = entity.CONTROL_NUMBER;
+                sheet_Destination.Footer.Left = "&9" + entity.CONTROL_NUMBER;
                 //}
             }
         }
