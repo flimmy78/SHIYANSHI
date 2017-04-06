@@ -130,6 +130,10 @@ namespace Langben.App.Controllers
                 {
                     groups = (int)data + 1;
                 }
+                else
+                {
+                    groups = 1;
+                }
                 string returnValue = string.Empty;
                 foreach (var item in entity.UNCERTAINTYTABLE)
                 {
@@ -193,6 +197,10 @@ namespace Langben.App.Controllers
                     if (data2 != null)
                     {
                         item.GROUPS = data2 + 1;
+                    }
+                    else
+                    {
+                        item.GROUPS = 1;
                     }
                     if (m_BLL.Create(ref validationErrors, item))
                     {
