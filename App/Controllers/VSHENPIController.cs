@@ -172,7 +172,7 @@ namespace Langben.App.Controllers
             // 设置文件打开后执行的js function
             pc.JsFunction_AfterDocumentOpened = "AfterDocumentOpened()";
             string filePath = Server.MapPath(id.Replace("..", "~"));
-            pc.Caption = "------------------------------------^o^------------------双击我，报告最大化------------------^o^------------------------------------";
+            pc.Caption = "报告";
 
             pc.SetWriter(workBook);
             pc.WebOpen(filePath, PageOffice.OpenModeType.xlsReadOnly, "13718511828");
