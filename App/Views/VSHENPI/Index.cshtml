@@ -75,18 +75,18 @@
 
 
 					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 77, hidden: true }
-					, { field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 97 }
+					, { field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 119 }
 					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 87 }
 					, { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 77 }
-					, { field: 'VERSION', title: '@Html.DisplayNameFor(model => model.VERSION)', width: 77 }
-					, { field: 'FACTORY_NUM', title: '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 77 }
-					, { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 77 }
+					, { field: 'VERSION', title: '@Html.DisplayNameFor(model => model.VERSION)', width: 67 }
+					, { field: 'FACTORY_NUM', title: '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 67 }
+					, { field: 'CERTIFICATE_ENTERPRISE', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_ENTERPRISE)', width: 67 }
 					, { field: 'CUSTOMER_SPECIFIC_REQUIREMENTS', title: '@Html.DisplayNameFor(model => model.CUSTOMER_SPECIFIC_REQUIREMENTS)', width: 77 }
-					, { field: 'CERTIFICATE_CATEGORY', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 77 }
+					//, { field: 'CERTIFICATE_CATEGORY', title: '@Html.DisplayNameFor(model => model.CERTIFICATE_CATEGORY)', width: 67 }
 					, { field: 'QUALIFICATIONS', title: '@Html.DisplayNameFor(model => model.QUALIFICATIONS)', width: 77 }
-					, { field: 'CONCLUSION_EXPLAIN', title: '@Html.DisplayNameFor(model => model.CONCLUSION_EXPLAIN)', width: 77 }
+					//, { field: 'CONCLUSION_EXPLAIN', title: '@Html.DisplayNameFor(model => model.CONCLUSION_EXPLAIN)', width: 67 }
 					, {
-					    field: 'CONCLUSION', title: '@Html.DisplayNameFor(model => model.CONCLUSION)', width: 86, formatter: function (value, row, index) {
+					    field: 'CONCLUSION', title: '@Html.DisplayNameFor(model => model.CONCLUSION)', width: 66, formatter: function (value, row, index) {
 					        if (row.PACKAGETYPE == "上传") {
 					            return row.FILECONCLUSION;
 					        }
@@ -95,15 +95,15 @@
 					        }
 					    }
 					}
-                    , { field: 'REPORTSTATUS', title: '@Html.DisplayNameFor(model => model.REPORTSTATUS)', width: 77 }
-                    , { field: 'APPROVALISAGGREY', title: '@Html.DisplayNameFor(model => model.APPROVALISAGGREY)', width: 77 }
+                    , { field: 'REPORTSTATUS', title: '@Html.DisplayNameFor(model => model.REPORTSTATUS)', width: 67 }
+                    , { field: 'APPROVALISAGGREY', title: '@Html.DisplayNameFor(model => model.APPROVALISAGGREY)', width:67 }
                     , {
                         field: 'aa', title: '操作', width: 86, formatter: function (value, row, index) {
                             if (row.PACKAGETYPE == "上传") {
                                 var html = "<a href='/VSHENHE/XiaZaiShenHe/" + row.ID + "^P'>下载审批</a>";
                             }
                             else if (row.PACKAGETYPE == "生成") {
-                                var html = "<a href='/VSHENHE/ZaiXianShenHe/" + row.ID + "^P'>预览审批</a>";
+                                var html = "<a href='/VSHENPI/ZaiXianShenHe/" + row.ID + "^P'>预览审批</a>";
                             }
                             return html;
                         }

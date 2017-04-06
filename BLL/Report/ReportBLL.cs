@@ -2099,144 +2099,70 @@ namespace Langben.Report
         /// <param name="type"></param
         /// <param name="IsHaveBuQueDingDu">是否有不确定度</param
         /// <param name="CONCLUSION">总结论</param>
-        private void HiddenSheet_1(IWorkbook hssfworkbook, ExportType type, bool IsHaveBuQueDingDu = true, string CONCLUSION = "合格")
-        {
-            int index = -1;
-            switch (type)
-            {
-                case ExportType.OriginalRecord_JianDing:
-                case ExportType.OriginalRecord_XiaoZhun:
-
-                    if (IsHaveBuQueDingDu == false)
-                    {
-                        index = hssfworkbook.GetSheetIndex("不确定度");
-                        if (index >= 0)
-                        {
-                            hssfworkbook.RemoveSheetAt(index);
-                        }
-
-                    }
-                    index = hssfworkbook.GetSheetIndex("封皮模板");
-                    if (index >= 0)
-                    {
-                        hssfworkbook.RemoveSheetAt(index);
-                    }
-                    index = hssfworkbook.GetSheetIndex("数据模板");
-                    if (index >= 0)
-                    {
-                        hssfworkbook.RemoveSheetAt(index);
-                    }
-                    index = hssfworkbook.GetSheetIndex("不确定度模板");
-                    if (index >= 0)
-                    {
-                        hssfworkbook.RemoveSheetAt(index);
-                    }
-
-
-                    break;
-
-
-                case ExportType.Report_JianDing:
-
-                    if (CONCLUSION == "合格")
-                    {
-                        index = hssfworkbook.GetSheetIndex("通知书封皮");
-                        if (index >= 0)
-                        {
-                            hssfworkbook.RemoveSheetAt(index);//通知书
-                        }
-
-                    }
-                    else
-                    {
-                        index = hssfworkbook.GetSheetIndex("封皮");
-                        if (index >= 0)
-                        {
-                            hssfworkbook.RemoveSheetAt(index);
-                        }
-                    }
-                    index = hssfworkbook.GetSheetIndex("第二页模板");
-                    if (index >= 0)
-                    {
-                        hssfworkbook.RemoveSheetAt(index);
-                    }
-                    index = hssfworkbook.GetSheetIndex("数据模板");
-                    if (index >= 0)
-                    {
-                        hssfworkbook.RemoveSheetAt(index);
-                    }
-
-                    break;
-                case ExportType.Report_XiaoZhun:
-                    index = hssfworkbook.GetSheetIndex("第二页模板");
-                    if (index >= 0)
-                    {
-                        hssfworkbook.RemoveSheetAt(index);
-                    }
-                    index = hssfworkbook.GetSheetIndex("数据模板");
-                    if (index >= 0)
-                    {
-                        hssfworkbook.RemoveSheetAt(index);
-                    }
-                    break;
-                case ExportType.Report_XiaoZhun_CNAS:
-                    index = hssfworkbook.GetSheetIndex("第二页模板");
-                    if (index >= 0)
-                    {
-                        hssfworkbook.RemoveSheetAt(index);
-                    }
-                    index = hssfworkbook.GetSheetIndex("数据模板");
-                    if (index >= 0)
-                    {
-                        hssfworkbook.RemoveSheetAt(index);
-                    }
-                    break;
-            }
-        }
-        /// <summary>
-        /// 隐藏不需要的sheet(模板需要隐藏)
-        /// </summary>
-        /// <param name="hssfworkbook"></param>
-        /// <param name="type"></param
-        /// <param name="IsHaveBuQueDingDu">是否有不确定度</param
-        /// <param name="CONCLUSION">总结论</param>
         private void HiddenSheet(IWorkbook hssfworkbook, ExportType type, bool IsHaveBuQueDingDu = true, string CONCLUSION = "合格")
         {
+            int s = 0;
             switch (type)
             {
                 case ExportType.OriginalRecord_JianDing:
                 case ExportType.OriginalRecord_XiaoZhun:
                     if (IsHaveBuQueDingDu == false)
                     {
-                        hssfworkbook.SetSheetHidden(2, SheetState.Hidden);//不确定度,没有不确定度需要隐藏该sheet
+                        s= 2;
+                       // hssfworkbook.RemoveSheetAt(2);//不确定度,没有不确定度需要隐藏该sheet
                     }
-                    hssfworkbook.SetSheetHidden(3, SheetState.Hidden);//封皮模板
-                    hssfworkbook.SetSheetHidden(4, SheetState.Hidden);//数据模板
-                    hssfworkbook.SetSheetHidden(5, SheetState.Hidden);//不确定度模板
+                    else
+                    {
+                        s = 3;
+                    }
+                    while (s!= hssfworkbook.NumberOfSheets)
+                    {
+                        hssfworkbook.RemoveSheetAt(s);//封皮模板
+                    }
+                    //for (int i =s; i < hssfworkbook.NumberOfSheets; i++)
+                    //{
+                    //    hssfworkbook.RemoveSheetAt(s);//封皮模板
+                    //}
+                    //hssfworkbook.RemoveSheetAt(3);//封皮模板
+                    //hssfworkbook.RemoveSheetAt(4);//数据模板
+                  //  hssfworkbook.RemoveSheetAt(5);//不确定度模板
                     break;
 
 
                 case ExportType.Report_JianDing:
                     if (CONCLUSION == "合格")
                     {
-                        hssfworkbook.SetSheetHidden(1, SheetState.Hidden);//通知书
+                        hssfworkbook.RemoveSheetAt(1);//通知书
                     }
                     else
                     {
-                        hssfworkbook.SetSheetHidden(0, SheetState.Hidden);//封皮
+                        hssfworkbook.RemoveSheetAt(0);//封皮
                     }
-                    hssfworkbook.SetSheetHidden(4, SheetState.Hidden);//第二页模板
-                    hssfworkbook.SetSheetHidden(5, SheetState.Hidden);//数据模板                
+                    while (3 != hssfworkbook.NumberOfSheets)
+                    {
+                        hssfworkbook.RemoveSheetAt(3);//封皮模板
+                    }
+                    //hssfworkbook.RemoveSheetAt(4);//第二页模板
+                    //hssfworkbook.RemoveSheetAt(5);//数据模板                
                     break;
                 case ExportType.Report_XiaoZhun:
-                    hssfworkbook.SetSheetHidden(3, SheetState.Hidden);//第二页模板
-                    hssfworkbook.SetSheetHidden(4, SheetState.Hidden);//数据模板
+                    while (3 != hssfworkbook.NumberOfSheets)
+                    {
+                        hssfworkbook.RemoveSheetAt(3);//封皮模板
+                    }
+                    //hssfworkbook.RemoveSheetAt(3);//第二页模板
+                    //hssfworkbook.RemoveSheetAt(4);//数据模板
                     break;
                 case ExportType.Report_XiaoZhun_CNAS:
-                    hssfworkbook.SetSheetHidden(3, SheetState.Hidden);//第二页模板
-                    hssfworkbook.SetSheetHidden(4, SheetState.Hidden);//数据模板
+                    while (3 != hssfworkbook.NumberOfSheets)
+                    {
+                        hssfworkbook.RemoveSheetAt(3);//封皮模板
+                    }
+                    //hssfworkbook.RemoveSheetAt(3);//第二页模板
+                    //hssfworkbook.RemoveSheetAt(4);//数据模板
                     break;
             }
+            hssfworkbook.FirstVisibleTab = 0;//在做RemoveSheetAt()后，设置第一个可视的表单，保证总有一个表单Sheet是可视的。
         }
 
         /// <summary>
@@ -2578,7 +2504,7 @@ namespace Langben.Report
             }
             else
             {
-                sheet_Destination.GetRow(11).GetCell(23).SetCellValue(entity.RATED_FREQUENCY+"Hz");
+                sheet_Destination.GetRow(11).GetCell(23).SetCellValue(entity.RATED_FREQUENCY + "Hz");
             }
             //脉冲常数
             if (entity.PULSE_CONSTANT == null || entity.PULSE_CONSTANT.Trim() == "")
@@ -2970,7 +2896,7 @@ namespace Langben.Report
                                 item.TEST_RANGE = item.TEST_RANGE.Replace(";", Environment.NewLine);
                                 sheet_Destination.GetRow(rowIndex_Destination).GetCell(7).SetCellValue(item.TEST_RANGE);
                             }
-                           
+
                         }
                         else
                         {
@@ -3827,10 +3753,10 @@ namespace Langben.Report
         {
             string REPORTNUMBER = entity.REPORTNUMBER;
             //页眉
-            string header = "原始记录编号：";
+            string header = "&9原始记录编号：";
             if (type != ExportType.OriginalRecord_JianDing && type != ExportType.OriginalRecord_XiaoZhun)
             {
-                header = "证书编号：";
+                header = "&9证书编号：";
             }
             else if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
             {
@@ -3839,11 +3765,11 @@ namespace Langben.Report
             }
             if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
             {
-                sheet_Destination.Header.Left = "&9" + header + REPORTNUMBER;
+                sheet_Destination.Header.Left = header + REPORTNUMBER;
             }
             else
             {
-                sheet_Destination.Header.Left = "&9" + header;
+                sheet_Destination.Header.Left = header;
 
             }
             //页脚控制编号(只有类型为校准的CNAS原始记录才要这个编号，其他的都不要)
@@ -3851,7 +3777,7 @@ namespace Langben.Report
             {
                 //if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
                 //{
-                sheet_Destination.Footer.Left = "&9" + entity.CONTROL_NUMBER;
+                sheet_Destination.Footer.Left = entity.CONTROL_NUMBER;
                 //}
             }
         }
@@ -5347,10 +5273,10 @@ namespace Langben.Report
                                     //    (iEntity.RULEID == "169-2010_4_3") ||
                                     //    (iEntity.RULEID == "1264-2010_3_1"))//解决单元格无法合并问题，目前没找到原因
                                     //{
-                                        for (int k = 0; k <= d.mergedRowNum * 3; k++)
-                                        {
-                                            sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
-                                        }
+                                    for (int k = 0; k <= d.mergedRowNum * 3; k++)
+                                    {
+                                        sheet_Destination.AddMergedRegion(new CellRangeAddress(c.FirstRow, c.FirstRow + d.mergedRowNum - 1, c.FirstColumn, c.LastColumn));
+                                    }
                                     //}
                                     //else
                                     //{

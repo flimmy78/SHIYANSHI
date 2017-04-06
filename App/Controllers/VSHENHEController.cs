@@ -24,8 +24,7 @@ namespace Langben.App.Controllers
         {
             //定义Workbook对象
             PageOffice.ExcelWriter.Workbook workBook = new PageOffice.ExcelWriter.Workbook();
-            //定义Sheet对象，"Sheet1"是打开的Excel表单的名称
-          //  PageOffice.ExcelWriter.Sheet sheet = workBook.OpenSheet("Sheet1");
+        
             System.Web.UI.Page page = new System.Web.UI.Page();
 
             string controlOutput = string.Empty;
@@ -34,7 +33,8 @@ namespace Langben.App.Controllers
             pc.ServerPage = "/pageoffice/server.aspx";
            
             string filePath = Server.MapPath(id.Replace("..", "~"));
-            pc.Caption = "原始记录";
+            pc.Caption = "------------------------------------^o^------------------双击我，原始记录最大化------------------^o^------------------------------------";
+
             pc.SetWriter(workBook);
             pc.WebOpen(filePath, PageOffice.OpenModeType.xlsReadOnly, "13718511828");
 
@@ -54,8 +54,7 @@ namespace Langben.App.Controllers
         public ActionResult BaoGao(string id)
         { //定义Workbook对象
             PageOffice.ExcelWriter.Workbook workBook = new PageOffice.ExcelWriter.Workbook();
-            //定义Sheet对象，"Sheet1"是打开的Excel表单的名称
-            PageOffice.ExcelWriter.Sheet sheet = workBook.OpenSheet("Sheet1");
+ 
             System.Web.UI.Page page = new System.Web.UI.Page();
 
             string controlOutput = string.Empty;
@@ -64,7 +63,8 @@ namespace Langben.App.Controllers
             pc.ServerPage = "/pageoffice/server.aspx";
           
             string filePath = Server.MapPath(id.Replace("..", "~"));
-            pc.Caption = "报告";
+            pc.Caption = "------------------------------------^o^------------------双击我，报告最大化------------------^o^------------------------------------";
+
             pc.SetWriter(workBook);
             pc.WebOpen(filePath, PageOffice.OpenModeType.xlsReadOnly, "13718511828");
 

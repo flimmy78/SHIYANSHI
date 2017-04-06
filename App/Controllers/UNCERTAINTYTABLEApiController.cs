@@ -130,6 +130,10 @@ namespace Langben.App.Controllers
                 {
                     groups = (int)data + 1;
                 }
+                else
+                {
+                    groups = 1;
+                }
                 string returnValue = string.Empty;
                 foreach (var item in entity.UNCERTAINTYTABLE)
                 {
@@ -193,6 +197,10 @@ namespace Langben.App.Controllers
                     if (data2 != null)
                     {
                         item.GROUPS = data2 + 1;
+                    }
+                    else
+                    {
+                        item.GROUPS = 1;
                     }
                     if (m_BLL.Create(ref validationErrors, item))
                     {
@@ -535,7 +543,6 @@ namespace Langben.App.Controllers
 
             var data = msd.Where(w => w.CATEGORY == "UB").Select(m => m.GROUPS).Distinct();
             List<UNCERTAINTYTABLE> alldata = new List<UNCERTAINTYTABLE>();
-
             foreach (var item in data)
             {
                 ASSESSMENTITEM = null;
@@ -545,7 +552,7 @@ namespace Langben.App.Controllers
                 INDEX2 = null;
                 ID = null;
                 //计量标准装置检定/校准信息
-                foreach (var it in msd.Where(w => w.GROUPS == item))
+                foreach (var it in msd.Where(w => w.GROUPS == item&&w.CATEGORY=="UB"))
                 {
                     ID += it.ID + ",";
                     ASSESSMENTITEM = it.ASSESSMENTITEM;
