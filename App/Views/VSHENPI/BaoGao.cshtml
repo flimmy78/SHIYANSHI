@@ -1,0 +1,31 @@
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <title>成功</title>
+
+</head>
+
+<body>
+    <div style="width:900px;height:768px;">
+        @Html.Raw(ViewBag.EditorHtml22)
+        </div>
+    <script>
+       
+        function AfterDocumentOpened() {
+            // 打开文件的时候
+            // document.getElementById("PageOfficeCtrl1").Alert("测试");
+            var d = "sub myfunc() \r\n"
+                           + "Worksheets.Select \r\n"
+                           + "end sub";
+            document.getElementById('PageOfficeCtrl1').RunMacro('myfunc', d);
+            setTimeout("document.getElementById('PageOfficeCtrl1').PrintPreview();", 1000)
+            //var t = setTimeout("", 5000);
+            //document.getElementById("PageOfficeCtrl1").PrintPreview();
+        }
+
+    </script>
+</body>
+</html>
