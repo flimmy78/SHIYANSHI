@@ -48,7 +48,9 @@ namespace Langben.App.Controllers
             pc.AddCustomToolButton("保存", "Save()", 1);
             string filePath = Server.MapPath(id.Replace("..","~"));
             pc.SaveFilePage = "/PREPARE_SCHEME/SaveFile/?id=" + id.Replace("..", "~");
-            pc.Caption = "实验室系统";
+            pc.Caption = "------------------------------------^o^------------------双击我，最大化------------------^o^------------------------------------";
+            // 设置文件打开后执行的js function
+            pc.JsFunction_AfterDocumentOpened = "AfterDocumentOpened()";
             pc.SetWriter(workBook);
             pc.WebOpen(filePath, PageOffice.OpenModeType.xlsNormalEdit, "Tom");
 
