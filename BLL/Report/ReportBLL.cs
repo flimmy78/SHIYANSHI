@@ -3756,7 +3756,7 @@ namespace Langben.Report
             string header = "&9原始记录编号：";
             if (type != ExportType.OriginalRecord_JianDing && type != ExportType.OriginalRecord_XiaoZhun)
             {
-                header = "证书编号：";
+                header = "&9证书编号：";
             }
             else if (REPORTNUMBER != null && REPORTNUMBER.Trim() != "")
             {
