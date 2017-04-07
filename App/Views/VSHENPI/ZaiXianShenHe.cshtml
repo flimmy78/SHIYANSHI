@@ -33,91 +33,90 @@
 {
     <table width="100%">
         <tr>
-            @*<td width="50%" height="600px" valign="top"><iframe width="100%" frameborder="0" height="100%" src="/VSHENHE/Yuanshi/?id=@ViewBag.FULLPATH2"></iframe></td>*@
-            <td width="width:900px;" height="768px"  valign="top"><iframe width="100%" frameborder="0" height="100%" src="/VSHENPI/BaoGao/?id=@ViewBag.FULLPATH"></iframe></td>
+            <td width="70%" height="768px" valign="top"><iframe width="100%" frameborder="0" height="100%" src="/VSHENPI/BaoGao/?id=@ViewBag.FULLPATH"></iframe></td>
+            <td width="30%" height="600px" valign="top">
+
+                <div class="bigdiv" id="shenghediv">
+                    <div class="display-label">
+                        <label> 原始记录：</label>
+                    </div>
+                    <div class="display-field">
+
+                        <a id="yuanshi" href="/VSHENPI/Show/?path=@ViewBag.id&id=@ViewBag.FULLPATH2"> @ViewBag.NAME2</a>
+                    </div>
+                    <br style="clear:both;" />
+
+
+
+
+                    <div class="display-label">
+                        <label>    结论：</label>
+                    </div>
+                    <div class="display-field">
+                        @ViewBag.CONCLUSION
+                    </div>
+
+                    <br style="clear:both;" />
+
+
+                    @if (ViewBag.HEIFSP == "H")
+                    {
+                        <div class="display-label">
+                            <label>     审核意见：</label>
+                        </div>
+                        <div class="textarea-box">
+                            <textarea name="AUDITOPINION">@ViewBag.AUDITOPINION</textarea>
+                        </div>
+                        <input type="hidden" name="ID" value="@ViewBag.PREPARE_SCHEME_ID" />
+                        <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
+                        <input type="hidden" name="SHPI" value="@ViewBag.HEIFSP" />
+                        <input type="hidden" name="ISAGGREY" value="" id="ISAGGREY" />
+                        <div class="display-label">
+                            <label>  </label>
+                        </div>
+                        <div class="display-field">
+                            <input type="submit" value="同意送批准" onclick="patongyi(this)" disabled="disabled" class="my-btn" />
+                            <input type="submit" value="不同意" onclick="patongyi(this)" disabled="disabled" class="my-btn" />
+                            <input type="button" onclick="fanhui()" value="返回" class="my-btn" />
+                        </div>
+
+
+                    }
+                    else if (ViewBag.HEIFSP == "P")
+                    {
+
+                        <div class="display-label">
+                            <label>
+                                审批意见：
+                            </label>
+                        </div>
+                        <div class="textarea-box">
+                            <textarea name="APPROVAL" style="height:80px;">@ViewBag.APPROVAL</textarea>
+                        </div>
+
+                        <input type="hidden" name="ID" value="@ViewBag.PREPARE_SCHEME_ID" />
+                        <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
+                        <input type="hidden" name="SHPI" value="@ViewBag.HEIFSP" />
+                        <input type="hidden" name="APPROVALISAGGREY" value="" id="APPROVALISAGGREY" />
+
+                        <div class="display-label">
+                            <label>  </label>
+                        </div>
+                        <div class="display-field">
+                            <input type="submit" value="同意" onclick="patongyi(this)" disabled="disabled" class="my-btn" />
+                            <input type="submit" value="不同意" onclick="patongyi(this)" disabled="disabled" class="my-btn" />
+                            <input type="button" onclick="fanhui()" value="返回" class="my-btn" />
+                        </div>
+                    }
+
+
+                </div>
+            </td>
+           
         </tr>
     </table>
        
-        <div class="bigdiv" id="shenghediv">
-           <div class="display-label">
-                <label> 原始记录：</label>
-            </div>
-            <div class="display-field">
-               
-                <a id="yuanshi" href="@ViewBag.FULLPATH2"> @ViewBag.NAME2</a>
-            </div>
-
-          @*  <br style="clear:both;" />
-    <div class="display-label">
-        <label>  证书：</label>
-    </div>
-    <div class="display-field">
-        <a id="zhenshu" href="@ViewBag.FULLPATH">@ViewBag.NAME</a>
-    </div>*@
-
-            
-            <div class="display-label">
-                <label>    结论：</label>
-            </div>
-            <div class="display-field">
-                @ViewBag.CONCLUSION
-            </div>
-
-            <br style="clear:both;" />
-
-
-            @if (ViewBag.HEIFSP == "H")
-            {
-                <div class="display-label">
-                    <label>     审核意见：</label>
-                </div>
-                <div class="textarea-box">
-                    <textarea name="AUDITOPINION">@ViewBag.AUDITOPINION</textarea>
-                </div>
-                <input type="hidden" name="ID" value="@ViewBag.PREPARE_SCHEME_ID" />
-                <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
-                <input type="hidden" name="SHPI" value="@ViewBag.HEIFSP" />
-                    <input type="hidden" name="ISAGGREY" value="" id="ISAGGREY" />
-                    <div class="display-label">
-                        <label>  </label>
-                    </div>
-                    <div class="display-field">
-                        <input type="submit" value="同意送批准" onclick="patongyi(this)" disabled="disabled" class="my-btn" />
-                        <input type="submit" value="不同意" onclick="patongyi(this)" disabled="disabled" class="my-btn" />
-                        <input type="button" onclick="fanhui()" value="返回" class="my-btn" />
-                    </div>
-
-
-            }
-            else if (ViewBag.HEIFSP == "P")
-            {
-
-                <div class="display-label">
-                    <label>
-                        审批意见：
-                    </label>
-                </div>
-                <div class="textarea-box">
-                    <textarea name="APPROVAL" style="height:80px;">@ViewBag.APPROVAL</textarea>
-                </div>
-
-                <input type="hidden" name="ID" value="@ViewBag.PREPARE_SCHEME_ID" />
-                <input type="hidden" name="APPLIANCE_DETAIL_INFORMATIONID" value="@ViewBag.APPLIANCE_DETAIL_INFORMATIONID" />
-                    <input type="hidden" name="SHPI" value="@ViewBag.HEIFSP" />
-                    <input type="hidden" name="APPROVALISAGGREY" value="" id="APPROVALISAGGREY" />
-
-                    <div class="display-label">
-                        <label>  </label>
-                    </div>
-                    <div class="display-field">
-                        <input type="submit" value="同意" onclick="patongyi(this)" disabled="disabled" class="my-btn" />
-                        <input type="submit" value="不同意" onclick="patongyi(this)" disabled="disabled" class="my-btn" />
-                        <input type="button" onclick="fanhui()" value="返回" class="my-btn" />
-                    </div>
-            }
-
-
-        </div>
+        
 
     
 }

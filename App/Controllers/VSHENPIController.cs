@@ -62,7 +62,7 @@ namespace Langben.App.Controllers
             ViewBag.CONCLUSION = file.CONCLUSION;//结论
             ViewBag.AUDITOPINION = pr.AUDITOPINION;//审核意见
             ViewBag.APPROVAL = pr.APPROVAL;//审批意见
-
+            ViewBag.id = id;
             return View();
         }
         /// <summary>
@@ -192,7 +192,39 @@ namespace Langben.App.Controllers
 
             return View();
         }
+        public ActionResult Show(string id,string path)
+        {
+            ViewBag.path = path;
 
+            //定义Workbook对象
+            PageOffice.ExcelWriter.Workbook workBook = new PageOffice.ExcelWriter.Workbook();
+         
+            System.Web.UI.Page page = new System.Web.UI.Page();
+
+            string controlOutput = string.Empty;
+            PageOffice.PageOfficeCtrl pc = new PageOffice.PageOfficeCtrl();
+            pc.ID = "PageOfficeCtrl1";
+           
+            string filePath = Server.MapPath(id.Replace("..", "~"));
+            pc.ServerPage = "/pageoffice/server.aspx";
+            pc.Caption = "------------------------------------^o^------------------双击我，最大化------------------^o^------------------------------------";
+
+            pc.SetWriter(workBook);
+            pc.WebOpen(filePath, PageOffice.OpenModeType.xlsReadOnly, "Tom");
+
+            page.Controls.Add(pc);
+            StringBuilder sb = new StringBuilder();
+            using (StringWriter sw = new StringWriter(sb))
+            {
+                using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+                {
+                    Server.Execute(page, htw, false); controlOutput = sb.ToString();
+                }
+            }
+            ViewBag.EditorHtml22 = controlOutput;
+
+            return View();
+        }
         IBLL.IVSHENPIBLL m_BLL;
         IBLL.IFILE_UPLOADERBLL m_BLL2;
   

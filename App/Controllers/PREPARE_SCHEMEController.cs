@@ -37,8 +37,7 @@ namespace Langben.App.Controllers
         {
             //定义Workbook对象
             PageOffice.ExcelWriter.Workbook workBook = new PageOffice.ExcelWriter.Workbook();
-            //定义Sheet对象，"Sheet1"是打开的Excel表单的名称
-            PageOffice.ExcelWriter.Sheet sheet = workBook.OpenSheet("Sheet1");
+   
             System.Web.UI.Page page = new System.Web.UI.Page();
 
             string controlOutput = string.Empty;

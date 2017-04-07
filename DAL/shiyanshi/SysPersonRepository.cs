@@ -18,7 +18,7 @@ namespace Langben.DAL
         public IQueryable<SysPerson> GetMyName(SysEntities db, string Province)
         {
             return from c in db.SysPerson
-                        where c.Province == Province
+                       // where c.Province == Province
                    select c;
                       
         }    
