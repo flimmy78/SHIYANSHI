@@ -9,20 +9,20 @@
     }
 
     .display-label {
-        width: 120px;
+        width: 60px;
         height: 24px;
         float: left;
         text-align: right;
-        margin: 11px 0;
+        margin: 5px 0;
         line-height: 24px;
     }
 
     .display-field {
         height: 24px;
         float: left;
-        margin: 11px 0 11px 6px;
+        margin: 5px 0 5px 6px;
         color: #333;
-        width: 290px;
+        width: auto;
         text-align: left;
         display: inline;
         line-height: 24px;
@@ -42,7 +42,7 @@
                     </div>
                     <div class="display-field">
 
-                        <a id="yuanshi" href="/VSHENPI/Show/?path=@ViewBag.id&id=@ViewBag.FULLPATH2"> 查看</a>
+                        <a id="yuanshi" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-detail'" href="/VSHENPI/Show/?path=@ViewBag.id&id=@ViewBag.FULLPATH2"> 查看</a>
                     </div>
                     <br style="clear:both;" />
 

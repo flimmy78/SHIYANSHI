@@ -83,9 +83,8 @@
       <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.12.1.2400\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PageOffice, Version=3.0.0.1, Culture=neutral, PublicKeyToken=1d75ee5788809228, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\PageOffice.dll</HintPath>
+    <Reference Include="PageOffice">
+      <HintPath>C:\Users\Administrator\Desktop\screenShoot\PageOffice.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
