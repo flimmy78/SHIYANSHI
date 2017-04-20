@@ -30,5 +30,6 @@ namespace Langben.DAL
         public string REPORTSTATUS { get; set; }
         public string REPORTSTATUSZI { get; set; }
         public string EQUIPMENT_STATUS_VALUUMN { get; set; }
+        public string BAR_CODE_NUM { get; set; }
     }
 }

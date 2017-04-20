@@ -64,7 +64,7 @@ namespace Models
             Dictionary<string, string> propertyName;
             PropertyInfo[] properties;
             //标题行  委托单号	器具名称	型号	出厂编号	证书单位	客户特殊要求	器具所在位置	器具状态	入库说明
-            var titles = "委托单号,器具名称,型号,出厂编号,证书单位,客户特殊要求,器具所在位置,器具状态,入库说明".Split(',');
+            var titles = "条码,委托单号,器具名称,型号,出厂编号,证书单位,客户特殊要求,器具所在位置,器具状态,入库说明".Split(',');
       
             var dd = sheet.GetRow(0).GetCell(1).CellStyle;
          

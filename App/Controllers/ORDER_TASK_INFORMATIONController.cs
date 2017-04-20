@@ -221,7 +221,9 @@ namespace Langben.App.Controllers
                         item.ID = Result.GetNewId();
                         item.CREATETIME = DateTime.Now;
                         item.CREATEPERSON = account.PersonName;
-                        item.BAR_CODE_NUM = item.ID;
+                        string date= DateTime.Now.ToString("yyyy/MM/dd/HH/mm/ss/ffff");
+                        string bianma = date.Split('/')[4]+ date.Split('/')[5]+ date.Split('/')[6];
+                        item.BAR_CODE_NUM = "0" + bianma;
                         //二维码生成
                         ErrorCorrectionLevel Ecl = ErrorCorrectionLevel.M; //误差校正水平   
                         string Content = item.ID;//待编码内容  
@@ -253,7 +255,7 @@ namespace Langben.App.Controllers
                         //System.Drawing.Image Image = System.Drawing.Image.FromStream(ms);
                         Graphics g = null;
                         g = Graphics.FromImage(imag);
-                        string xinghao = item.VERSION;//需要写入的字
+                        string xinghao = item.BAR_CODE_NUM;//需要写入的字
                         //string xinghao = "123456789abcd";//需要写入的字
                         int w = imag.Width;
                         int h = imag.Height;

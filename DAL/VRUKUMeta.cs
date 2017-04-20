@@ -67,7 +67,9 @@ namespace Langben.DAL
         [Display(Name = "器具状态值", Order = 17)]
         public object EQUIPMENT_STATUS_VALUUMN { get; set; }
 
-
+        [Display(Name = "条形码", Order = 18)]
+        public object BAR_CODE_NUM { get; set; }
+        
     }
 
 

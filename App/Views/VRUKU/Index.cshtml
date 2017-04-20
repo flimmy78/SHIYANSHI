@@ -9,7 +9,7 @@
             @Html.LabelFor(model => model.ORDER_NUMBER):
         </div>
         <div class="input_search-field">
-            <input type='text' id='ORDER_NUMBER' />   
+            <input type='text' id='ORDER_NUMBER' />
         </div>
     </div>
     <div class="input_search">
@@ -17,7 +17,7 @@
             @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE):
         </div>
         <div class="input_search-field">
-           @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
+            @Html.DropDownList("CERTIFICATE_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
         </div>
     </div>
     <div class="input_search">
@@ -48,7 +48,7 @@
                 <option value="器具已入库">器具已入库</option>
                 <option selected="selected" value="待入库">待入库</option>
             </select>
-          @*  @Html.DropDownList("STORAGEINSTRUCTI_STATU", Models.SysFieldModels.GetSysField("VRUKU", "STORAGEINSTRUCTI_STATU"), "请选择", new { id = "STORAGEINSTRUCTI_STATU" })*@
+            @*  @Html.DropDownList("STORAGEINSTRUCTI_STATU", Models.SysFieldModels.GetSysField("VRUKU", "STORAGEINSTRUCTI_STATU"), "请选择", new { id = "STORAGEINSTRUCTI_STATU" })*@
         </div>
     </div>
     <div class='input_search' style="padding-top:10px;">
@@ -96,6 +96,7 @@
             ],
             columns: [[
 					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 77, hidden: true }
+                    , { field: 'BAR_CODE_NUM', title: '@Html.DisplayNameFor(model => model.BAR_CODE_NUM)', width: 77, hidden: true }
 					//, { field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 77 }
 					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 97 }
 					, { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', width: 97 }
@@ -129,22 +130,22 @@
 
         //将查询条件按照分隔符拼接成字符串
         var search = "";
-        $('#divQuery').find(":text,:selected,select,textarea,:hidden,:checked,:password").each(function () {
-            search = search + this.id + "&" + this.value + "^";
-        });
-
- 
+        var rows = $('#flexigridData').datagrid('getSelections');
+        if (rows.length == 0) {
+            $.messager.alert('操作提示', '请选择数据!', 'warning');
+            return false;
+        } else {
+            for (var i = 0; i < rows.length; i++) {
+                search += rows[i].ID+",";
+            }
+        }
         $.post('../VRUKU/GetData2',
             {
-             
                 sortName: $('#flexigridData').datagrid('options').sortName,
                 sortOrder: $('#flexigridData').datagrid('options').sortOrder,
                 search: search
             }, function (res) {
-               
-                    window.location.href = res;
-               
-
+                window.location.href = res;
             });
     };
     //“查询”按钮，弹出查询框
@@ -194,37 +195,37 @@
             $.messager.alert('操作提示', '请选择数据!', 'warning');
             return false;
         }
-            var arr = [];
-            for (var i = 0; i < rows.length; i++) {              
-                if (rows[i].STORAGEINSTRUCTI_STATU!="@Common.ORDER_STATUS.器具已入库.ToString()") {
-                    arr.push(rows[i].ID);
-                }
-                else {
-                    $.messager.alert('操作提示', "器具已入库不能重复入库！", 'info');
-                    return false;
-                }
-            } 
-           
-            $.messager.confirm('操作提示', "确认入库这 " + arr.length + " 项吗？", function (r) {
-                if (r) {
-                    $.ajax({
-                        url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/PutSTORAGEINSTRUCTI_STATU/" + arr.join(","),
-                        type: "Post",
-                        success: function (res) {
-                            if (res.Code == 1) {
-                                //移除删除的数据
-                                $.messager.alert('操作提示', "入库成功！", 'info');
-                                $("#flexigridData").datagrid("reload");
-                                $("#flexigridData").datagrid("clearSelections");
-                            }
-                            else {
-                                $.messager.alert('操作提示', "入库失败！", 'error');
-                            }
+        var arr = [];
+        for (var i = 0; i < rows.length; i++) {
+            if (rows[i].STORAGEINSTRUCTI_STATU != "@Common.ORDER_STATUS.器具已入库.ToString()") {
+                arr.push(rows[i].ID);
+            }
+            else {
+                $.messager.alert('操作提示', "器具已入库不能重复入库！", 'info');
+                return false;
+            }
+        }
 
+        $.messager.confirm('操作提示', "确认入库这 " + arr.length + " 项吗？", function (r) {
+            if (r) {
+                $.ajax({
+                    url: "/api/VAPPLIANCE_DETAIL_INFORMATIONApi/PutSTORAGEINSTRUCTI_STATU/" + arr.join(","),
+                    type: "Post",
+                    success: function (res) {
+                        if (res.Code == 1) {
+                            //移除删除的数据
+                            $.messager.alert('操作提示', "入库成功！", 'info');
+                            $("#flexigridData").datagrid("reload");
+                            $("#flexigridData").datagrid("clearSelections");
                         }
-                    })
-                }
-            });
+                        else {
+                            $.messager.alert('操作提示', "入库失败！", 'error');
+                        }
+
+                    }
+                })
+            }
+        });
     };
 
 </script>

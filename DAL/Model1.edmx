@@ -1523,7 +1523,6 @@
         <EntityType Name="VQIJULINGQU2">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="UNDERTAKE_LABORATORYID" />
           </Key>
           <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="APPLIANCE_NAME" Type="varchar2" MaxLength="200" />
@@ -1531,7 +1530,7 @@
           <Property Name="FACTORY_NUM" Type="varchar2" MaxLength="200" />
           <Property Name="NUM" Type="number" Precision="38" Scale="0" />
           <Property Name="ATTACHMENT" Type="varchar2" MaxLength="200" />
-          <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" Nullable="false" />
+          <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
           <Property Name="APPLIANCE_RECIVE" Type="varchar2" MaxLength="200" />
           <Property Name="REPORTNUMBER" Type="varchar2" MaxLength="200" />
           <Property Name="REMARKS" Type="varchar2" MaxLength="4000" />
@@ -1566,6 +1565,7 @@
           <Property Name="REPORTSTATUS" Type="varchar2" MaxLength="200" />
           <Property Name="REPORTSTATUSZI" Type="varchar2" MaxLength="200" />
           <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="nvarchar2" MaxLength="200" />
+          <Property Name="BAR_CODE_NUM" Type="varchar2" MaxLength="200" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VRULE”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -1699,6 +1699,10 @@
           <Property Name="CREATETIME" Type="date" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VZHENGSHULEIBEITONGJIFENXI”中的列“PIZHUNJIELUN”。
+警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VZHENGSHULEIBEITONGJIFENXI”中的列“PIZHUNSHIJIAN”。
+警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VZHENGSHULEIBEITONGJIFENXI”中的列“SHOUQUANZIZHI”。
+警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VZHENGSHULEIBEITONGJIFENXI”中的列“ZHEGNSHUBAOGAOLEIBIE”。
 警告 6002: 表/视图“TENGFEI.VZHENGSHULEIBEITONGJIFENXI”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VZHENGSHULEIBEITONGJIFENXI">
           <Key>
@@ -1708,10 +1712,6 @@
           <Property Name="SUOSHUDANWEI" Type="nvarchar2" MaxLength="200" />
           <Property Name="ZHENGSHUDANWEI" Type="varchar2" MaxLength="200" />
           <Property Name="SHOULIDANWEI" Type="varchar2" MaxLength="200" />
-          <Property Name="PIZHUNJIELUN" Type="varchar2" MaxLength="200" />
-          <Property Name="PIZHUNSHIJIAN" Type="date" />
-          <Property Name="SHOUQUANZIZHI" Type="varchar2" MaxLength="200" />
-          <Property Name="ZHEGNSHUBAOGAOLEIBIE" Type="varchar2" MaxLength="206" />
           <Property Name="BAOGAOSHULIANG" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <!--生成过程中发现错误:
@@ -2805,7 +2805,8 @@ FROM "TENGFEI"."VQIJULINGQU2" "VQIJULINGQU2"</DefiningQuery>
 "VRUKU"."STORAGEINSTRUCTI_STATU" AS "STORAGEINSTRUCTI_STATU", 
 "VRUKU"."REPORTSTATUS" AS "REPORTSTATUS", 
 "VRUKU"."REPORTSTATUSZI" AS "REPORTSTATUSZI", 
-"VRUKU"."EQUIPMENT_STATUS_VALUUMN" AS "EQUIPMENT_STATUS_VALUUMN"
+"VRUKU"."EQUIPMENT_STATUS_VALUUMN" AS "EQUIPMENT_STATUS_VALUUMN", 
+"VRUKU"."BAR_CODE_NUM" AS "BAR_CODE_NUM"
 FROM "TENGFEI"."VRUKU" "VRUKU"</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VRULE" EntityType="Self.VRULE" store:Type="Views" store:Schema="TENGFEI">
@@ -2925,10 +2926,6 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
 "VZHENGSHULEIBEITONGJIFENXI"."SUOSHUDANWEI" AS "SUOSHUDANWEI", 
 "VZHENGSHULEIBEITONGJIFENXI"."ZHENGSHUDANWEI" AS "ZHENGSHUDANWEI", 
 "VZHENGSHULEIBEITONGJIFENXI"."SHOULIDANWEI" AS "SHOULIDANWEI", 
-"VZHENGSHULEIBEITONGJIFENXI"."PIZHUNJIELUN" AS "PIZHUNJIELUN", 
-"VZHENGSHULEIBEITONGJIFENXI"."PIZHUNSHIJIAN" AS "PIZHUNSHIJIAN", 
-"VZHENGSHULEIBEITONGJIFENXI"."SHOUQUANZIZHI" AS "SHOUQUANZIZHI", 
-"VZHENGSHULEIBEITONGJIFENXI"."ZHEGNSHUBAOGAOLEIBIE" AS "ZHEGNSHUBAOGAOLEIBIE", 
 "VZHENGSHULEIBEITONGJIFENXI"."BAOGAOSHULIANG" AS "BAOGAOSHULIANG"
 FROM "TENGFEI"."VZHENGSHULEIBEITONGJIFENXI" "VZHENGSHULEIBEITONGJIFENXI"</DefiningQuery>
           </EntitySet>
@@ -5199,7 +5196,6 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
         <EntityType Name="VQIJULINGQU2">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="UNDERTAKE_LABORATORYID" />
           </Key>
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -5207,7 +5203,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="NUM" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="ATTACHMENT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="APPLIANCE_RECIVE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="REPORTNUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="REMARKS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
@@ -5239,6 +5235,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="REPORTSTATUS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="REPORTSTATUSZI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="EQUIPMENT_STATUS_VALUUMN" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BAR_CODE_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VRULE">
           <Key>
@@ -5366,10 +5363,6 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="SUOSHUDANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ZHENGSHUDANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="SHOULIDANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="PIZHUNJIELUN" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="PIZHUNSHIJIAN" Type="DateTime" />
-          <Property Name="SHOUQUANZIZHI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="ZHEGNSHUBAOGAOLEIBIE" Type="String" MaxLength="206" FixedLength="false" Unicode="false" />
           <Property Name="BAOGAOSHULIANG" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="VZHENGSHUXINXICHAXUN">
@@ -7709,6 +7702,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="VRUKU">
             <EntityTypeMapping TypeName="Model.VRUKU">
               <MappingFragment StoreEntitySet="VRUKU">
+                <ScalarProperty Name="BAR_CODE_NUM" ColumnName="BAR_CODE_NUM" />
                 <ScalarProperty Name="EQUIPMENT_STATUS_VALUUMN" ColumnName="EQUIPMENT_STATUS_VALUUMN" />
                 <ScalarProperty Name="REPORTSTATUSZI" ColumnName="REPORTSTATUSZI" />
                 <ScalarProperty Name="REPORTSTATUS" ColumnName="REPORTSTATUS" />
@@ -7855,10 +7849,6 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
             <EntityTypeMapping TypeName="Model.VZHENGSHULEIBEITONGJIFENXI">
               <MappingFragment StoreEntitySet="VZHENGSHULEIBEITONGJIFENXI">
                 <ScalarProperty Name="BAOGAOSHULIANG" ColumnName="BAOGAOSHULIANG" />
-                <ScalarProperty Name="ZHEGNSHUBAOGAOLEIBIE" ColumnName="ZHEGNSHUBAOGAOLEIBIE" />
-                <ScalarProperty Name="SHOUQUANZIZHI" ColumnName="SHOUQUANZIZHI" />
-                <ScalarProperty Name="PIZHUNSHIJIAN" ColumnName="PIZHUNSHIJIAN" />
-                <ScalarProperty Name="PIZHUNJIELUN" ColumnName="PIZHUNJIELUN" />
                 <ScalarProperty Name="SHOULIDANWEI" ColumnName="SHOULIDANWEI" />
                 <ScalarProperty Name="ZHENGSHUDANWEI" ColumnName="ZHENGSHUDANWEI" />
                 <ScalarProperty Name="SUOSHUDANWEI" ColumnName="SUOSHUDANWEI" />
