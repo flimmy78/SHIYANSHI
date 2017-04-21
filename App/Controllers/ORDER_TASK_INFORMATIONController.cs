@@ -15,7 +15,7 @@ using System.Drawing;
 using Gma.QrCodeNet.Encoding;
 using Gma.QrCodeNet.Encoding.Windows.Controls;
 using System.Drawing.Imaging;
- 
+using System.Text.RegularExpressions;
 
 namespace Langben.App.Controllers
 {
@@ -221,8 +221,7 @@ namespace Langben.App.Controllers
                         item.ID = Result.GetNewId();
                         item.CREATETIME = DateTime.Now;
                         item.CREATEPERSON = account.PersonName;
-                        string date= DateTime.Now.ToString("yyyy/MM/dd/HH/mm/ss/ffff");
-                        string bianma = date.Split('/')[4]+ date.Split('/')[5]+ date.Split('/')[6];
+                        string bianma = Regex.Replace(Guid.NewGuid().ToString().Replace("-", ""), "[a-z]", "", RegexOptions.IgnoreCase).Substring(0,11);
                         item.BAR_CODE_NUM = "0" + bianma;
                         //二维码生成
                         ErrorCorrectionLevel Ecl = ErrorCorrectionLevel.M; //误差校正水平   
