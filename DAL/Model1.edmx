@@ -1523,6 +1523,7 @@
         <EntityType Name="VQIJULINGQU2">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="UNDERTAKE_LABORATORYID" />
           </Key>
           <Property Name="ID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="APPLIANCE_NAME" Type="varchar2" MaxLength="200" />
@@ -1530,7 +1531,7 @@
           <Property Name="FACTORY_NUM" Type="varchar2" MaxLength="200" />
           <Property Name="NUM" Type="number" Precision="38" Scale="0" />
           <Property Name="ATTACHMENT" Type="varchar2" MaxLength="200" />
-          <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" />
+          <Property Name="UNDERTAKE_LABORATORYID" Type="varchar2" MaxLength="36" Nullable="false" />
           <Property Name="APPLIANCE_RECIVE" Type="varchar2" MaxLength="200" />
           <Property Name="REPORTNUMBER" Type="varchar2" MaxLength="200" />
           <Property Name="REMARKS" Type="varchar2" MaxLength="4000" />
@@ -1699,10 +1700,6 @@
           <Property Name="CREATETIME" Type="date" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VZHENGSHULEIBEITONGJIFENXI”中的列“PIZHUNJIELUN”。
-警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VZHENGSHULEIBEITONGJIFENXI”中的列“PIZHUNSHIJIAN”。
-警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VZHENGSHULEIBEITONGJIFENXI”中的列“SHOUQUANZIZHI”。
-警告 6006: 具有值“0”的方面“MaxLength”超出了方面说明所指定的范围 1-2000。已排除表“TENGFEI.VZHENGSHULEIBEITONGJIFENXI”中的列“ZHEGNSHUBAOGAOLEIBIE”。
 警告 6002: 表/视图“TENGFEI.VZHENGSHULEIBEITONGJIFENXI”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="VZHENGSHULEIBEITONGJIFENXI">
           <Key>
@@ -1712,6 +1709,10 @@
           <Property Name="SUOSHUDANWEI" Type="nvarchar2" MaxLength="200" />
           <Property Name="ZHENGSHUDANWEI" Type="varchar2" MaxLength="200" />
           <Property Name="SHOULIDANWEI" Type="varchar2" MaxLength="200" />
+          <Property Name="PIZHUNJIELUN" Type="char" MaxLength="1" />
+          <Property Name="PIZHUNSHIJIAN" Type="char" MaxLength="1" />
+          <Property Name="SHOUQUANZIZHI" Type="char" MaxLength="1" />
+          <Property Name="ZHEGNSHUBAOGAOLEIBIE" Type="char" MaxLength="1" />
           <Property Name="BAOGAOSHULIANG" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <!--生成过程中发现错误:
@@ -2926,6 +2927,10 @@ FROM "TENGFEI"."VXIANGQING" "VXIANGQING"</DefiningQuery>
 "VZHENGSHULEIBEITONGJIFENXI"."SUOSHUDANWEI" AS "SUOSHUDANWEI", 
 "VZHENGSHULEIBEITONGJIFENXI"."ZHENGSHUDANWEI" AS "ZHENGSHUDANWEI", 
 "VZHENGSHULEIBEITONGJIFENXI"."SHOULIDANWEI" AS "SHOULIDANWEI", 
+"VZHENGSHULEIBEITONGJIFENXI"."PIZHUNJIELUN" AS "PIZHUNJIELUN", 
+"VZHENGSHULEIBEITONGJIFENXI"."PIZHUNSHIJIAN" AS "PIZHUNSHIJIAN", 
+"VZHENGSHULEIBEITONGJIFENXI"."SHOUQUANZIZHI" AS "SHOUQUANZIZHI", 
+"VZHENGSHULEIBEITONGJIFENXI"."ZHEGNSHUBAOGAOLEIBIE" AS "ZHEGNSHUBAOGAOLEIBIE", 
 "VZHENGSHULEIBEITONGJIFENXI"."BAOGAOSHULIANG" AS "BAOGAOSHULIANG"
 FROM "TENGFEI"."VZHENGSHULEIBEITONGJIFENXI" "VZHENGSHULEIBEITONGJIFENXI"</DefiningQuery>
           </EntitySet>
@@ -3326,7 +3331,6 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySet Name="VSHIYANSHIGONGZUOLIANG" EntityType="Model.VSHIYANSHIGONGZUOLIANG" />
           <EntitySet Name="VTEST_ITE" EntityType="Model.VTEST_ITE" />
           <EntitySet Name="VXIANGQING" EntityType="Model.VXIANGQING" />
-          <EntitySet Name="VZHENGSHULEIBEITONGJIFENXI" EntityType="Model.VZHENGSHULEIBEITONGJIFENXI" />
           <EntitySet Name="VZHENGSHUXINXICHAXUN" EntityType="Model.VZHENGSHUXINXICHAXUN" />
           <AssociationSet Name="FK_AC_VOLTA_REFERENCE_OVERALL_" Association="Model.FK_AC_VOLTA_REFERENCE_OVERALL_">
             <End Role="OVERALL_TABLE" EntitySet="OVERALL_TABLE" />
@@ -3568,6 +3572,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
             <End Role="SysPerson" EntitySet="SysPerson" />
             <End Role="SysRole" EntitySet="SysRole" />
           </AssociationSet>
+          <EntitySet Name="VZHENGSHULEIBEITONGJIFENXI" EntityType="Model.VZHENGSHULEIBEITONGJIFENXI" />
           </EntityContainer>
         <ComplexType Name="SHIYANSHIGONGZUO_Result">
           <Property Type="String" Name="ID" Nullable="false" MaxLength="20" />
@@ -5196,6 +5201,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
         <EntityType Name="VQIJULINGQU2">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="UNDERTAKE_LABORATORYID" />
           </Key>
           <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="APPLIANCE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -5203,7 +5209,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="FACTORY_NUM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="NUM" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="ATTACHMENT" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="UNDERTAKE_LABORATORYID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="APPLIANCE_RECIVE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="REPORTNUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="REMARKS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
@@ -5354,16 +5360,6 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="RECEIVEINS" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CREATEPERSON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CREATETIME" Type="DateTime" />
-        </EntityType>
-        <EntityType Name="VZHENGSHULEIBEITONGJIFENXI">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="SUOSHUDANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ZHENGSHUDANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="SHOULIDANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="BAOGAOSHULIANG" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="VZHENGSHUXINXICHAXUN">
           <Key>
@@ -6077,6 +6073,20 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <End Type="Model.SysPerson" Role="SysPerson" Multiplicity="*" />
           <End Type="Model.SysRole" Role="SysRole" Multiplicity="*" />
         </Association>
+        <EntityType Name="VZHENGSHULEIBEITONGJIFENXI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="SUOSHUDANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ZHENGSHUDANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SHOULIDANWEI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PIZHUNJIELUN" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="PIZHUNSHIJIAN" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="SHOUQUANZIZHI" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ZHEGNSHUBAOGAOLEIBIE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="BAOGAOSHULIANG" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7845,17 +7855,6 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VZHENGSHULEIBEITONGJIFENXI">
-            <EntityTypeMapping TypeName="Model.VZHENGSHULEIBEITONGJIFENXI">
-              <MappingFragment StoreEntitySet="VZHENGSHULEIBEITONGJIFENXI">
-                <ScalarProperty Name="BAOGAOSHULIANG" ColumnName="BAOGAOSHULIANG" />
-                <ScalarProperty Name="SHOULIDANWEI" ColumnName="SHOULIDANWEI" />
-                <ScalarProperty Name="ZHENGSHUDANWEI" ColumnName="ZHENGSHUDANWEI" />
-                <ScalarProperty Name="SUOSHUDANWEI" ColumnName="SUOSHUDANWEI" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VZHENGSHUXINXICHAXUN">
             <EntityTypeMapping TypeName="Model.VZHENGSHUXINXICHAXUN">
               <MappingFragment StoreEntitySet="VZHENGSHUXINXICHAXUN">
@@ -7929,6 +7928,21 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
               <ScalarProperty Name="Id" ColumnName="SysPersonId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="VZHENGSHULEIBEITONGJIFENXI">
+            <EntityTypeMapping TypeName="Model.VZHENGSHULEIBEITONGJIFENXI">
+              <MappingFragment StoreEntitySet="VZHENGSHULEIBEITONGJIFENXI">
+                <ScalarProperty Name="BAOGAOSHULIANG" ColumnName="BAOGAOSHULIANG" />
+                <ScalarProperty Name="ZHEGNSHUBAOGAOLEIBIE" ColumnName="ZHEGNSHUBAOGAOLEIBIE" />
+                <ScalarProperty Name="SHOUQUANZIZHI" ColumnName="SHOUQUANZIZHI" />
+                <ScalarProperty Name="PIZHUNSHIJIAN" ColumnName="PIZHUNSHIJIAN" />
+                <ScalarProperty Name="PIZHUNJIELUN" ColumnName="PIZHUNJIELUN" />
+                <ScalarProperty Name="SHOULIDANWEI" ColumnName="SHOULIDANWEI" />
+                <ScalarProperty Name="ZHENGSHUDANWEI" ColumnName="ZHENGSHUDANWEI" />
+                <ScalarProperty Name="SUOSHUDANWEI" ColumnName="SUOSHUDANWEI" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
