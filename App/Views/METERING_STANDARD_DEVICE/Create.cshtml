@@ -29,7 +29,7 @@
                 <div id="divtable">
                     <h2 class="f14 mt10" style="color:red;"> 不确定度,准确度等级,最大允许误差,3个必须选择填写其中一个的数据</h2>
                     <label>
-                        <input type="radio" name="three" id="three_1" onclick="radio.check()"   />
+                        <input type="radio" name="three" checked="checked" id="three_1" onclick="radio.check()"   />
                         准确度等级
                     </label>
                     <div class="mt10" id="div1">
@@ -124,7 +124,7 @@
                         </li>
                         <li class="fl mr10" style="width:400px">
                             有效期至(如:2016-01-01)：
-                            <input class="my-textbox" value="" name="VALID_TO" onblur="jaoyanshijian(this)">
+                            <input class="my-textbox" value="" placeholder="不能小于当前时间" name="VALID_TO" onblur="jaoyanshijian(this)">
                         </li>
                         <li class="fl mr10"><a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.add(this)">添加</a> <a href="javascript:;" class="easyui-linkbutton" onclick="linkButton.del(this)">移除</a></li>
                     </ul>
