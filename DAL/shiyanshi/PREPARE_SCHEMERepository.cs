@@ -16,9 +16,9 @@ namespace Langben.DAL
         /// 查找编号最大值
         /// </summary>
         /// <returns>编号最大值</returns>
-        public decimal? GetSERIALNUMBERmax(SysEntities db, string time)
+        public decimal? GetSERIALNUMBERmax(SysEntities db, string time,string REPORT_CATEGORY)
         {
-            return db.PREPARE_SCHEME.Where(s => s.YEARS == time).Select(s => s.SERIALNUMBER).Max();
+            return db.PREPARE_SCHEME.Where(s => s.YEARS == time&&s.REPORT_CATEGORY==REPORT_CATEGORY).Select(s => s.SERIALNUMBER).Max();
         }
         /// <summary>
         /// 修改对象(公用)

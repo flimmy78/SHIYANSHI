@@ -30,7 +30,7 @@ namespace Langben.BLL
             PREPARE_SCHEME scheme = new PREPARE_SCHEME();
             if (ser == null)
             {
-                decimal? max = repository.GetSERIALNUMBERmax(db, time); //调用方法获取表格中最大的编号 
+                decimal? max = repository.GetSERIALNUMBERmax(db, time,prepare.REPORT_CATEGORY); //调用方法获取表格中最大的编号 
                 if (max != null)
                 {
                     scheme.SERIALNUMBER = max + 1;
@@ -60,7 +60,7 @@ namespace Langben.BLL
             if (prepare.SERIALNUMBER != null)
             {
                 string SERIALNUMBER = prepare.SERIALNUMBER.ToString();
-                SERIALNUMBER = SERIALNUMBER.PadLeft(4, '0');
+                SERIALNUMBER = SERIALNUMBER.PadLeft(3, '0');
                 REPORTNUMBER = "DC/" + prepare.REPORT_CATEGORY + "-" + SERIALNUMBER + "-" + time;
             }
             return REPORTNUMBER;
