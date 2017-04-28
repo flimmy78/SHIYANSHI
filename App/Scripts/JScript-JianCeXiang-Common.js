@@ -192,6 +192,7 @@ DanWeiDDLHtmlArray = [
         Remark: '额定电压',
         Value: "<select class=\"my-combobox\" name=\"EDingDianYa\" style=\"width:79px; \">" +
                 "<option value=\"50\">50</option> " +
+                 "<option value=\125\">125</option>" +
                  "<option value=\100\">100</option>" +
                  "<option value=\"250\">250</option>  " +
                  "<option value=\"500\">500</option>  " +
