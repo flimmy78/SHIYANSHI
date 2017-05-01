@@ -86,10 +86,10 @@
                         //(txtPoint, "RANGE", lianChengID, rowidx, "", "", "", ""));
                     //量程
                     htmlString.push(SetTDHtml(txtPoint, "OUTPUTVALUE", lianChengID, rowidx, txtNumber, "", "", ""));
-                    //等级指数
-                    htmlString.push(SetTDHtml(txtPoint, "READVALUE", lianChengID, rowidx, "", "", "", ""));
+                   
                 }
-               
+                //等级指数
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", ""));
                 //标准值
                 htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, "", "", "", "changeValue"));
                 //显示值
@@ -132,7 +132,7 @@
             var liangCheng = id.split('_')[2];
             T1 = T1 + "_" + tongdao + "_1";            //改动的地方，参与计算的列的name值
             T2 = T2 + "_" + tongdao + "_1";           //改动的地方，参与计算的列的name值
-            T3 = T3 + id;                            //改动的地方，误差的列的name值
+        //    T3 = T3 + id;                            //改动的地方，误差的列的name值
             T4 = T4 + id;//有功分量 相对误差(%
             T5 = T5 + id;//改动的地方，参与计算的列的name值
             T6 = T6 + id;//无功分量 相对误差(%
