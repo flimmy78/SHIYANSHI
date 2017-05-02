@@ -7660,7 +7660,7 @@
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
-					<IsMergeNullValue>N</IsMergeNullValue>
+					<IsMergeNullValue>Y</IsMergeNullValue>
 				</Cell>
 				<Cell>
 					<Code>ACTUALVALUE</Code>
