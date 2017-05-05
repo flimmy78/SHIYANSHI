@@ -221,8 +221,8 @@ namespace Langben.App.Controllers
                         item.ID = Result.GetNewId();
                         item.CREATETIME = DateTime.Now;
                         item.CREATEPERSON = account.PersonName;
-                        string bianma = Regex.Replace(Guid.NewGuid().ToString().Replace("-", ""), "[a-z]", "", RegexOptions.IgnoreCase).Substring(0,11);
-                        item.BAR_CODE_NUM = "0" + bianma;
+                        string bianma = Regex.Replace(Guid.NewGuid().ToString().Replace("-", ""), "[a-z]", "", RegexOptions.IgnoreCase).Substring(0,8);
+                        item.BAR_CODE_NUM = entity.ORSERIALNUMBER.ToString().PadLeft(4, '0')+ bianma;
                         //二维码生成
                         ErrorCorrectionLevel Ecl = ErrorCorrectionLevel.M; //误差校正水平   
                         string Content = item.ID;//待编码内容  

@@ -4,7 +4,7 @@
 }
 @using Common
 @using Models
- 
+
 <script src="~/Scripts/jquery.edatagrid.js"></script>
 <style type="text/css">
     body {
@@ -15,6 +15,7 @@
     td {
         height: 25px;
     }
+
     .editor-field {
         width: 200px;
         height: 24px;
@@ -386,7 +387,7 @@
         }
         if (isNull(entity.INSPECTION_ENTERPRISE)) {
             zhi += "送检单位不能为空！<br>";
-        } 
+        }
         if (isNull(entity.CONTACT_PHONE2)) {
             zhi += "证书单位电话不能为空！<br>";
         }
@@ -602,9 +603,15 @@ s：字符串
         })
     }
     $(function () {
+        //单位选择联动
+        $("#INSPECTION_ENTERPRISE").combobox({
+            onChange: function (a,b) {
+                $("#CERTIFICATE_ENTERPRISE").combobox('select', a)
+            }
+        })
         //删除
         function flexiDelete() {
-          
+
             $('#ApplianceDate').edatagrid('destroyRow');
 
         }
@@ -690,7 +697,7 @@ s：字符串
                             },
                             success: function (data) {
                                 if (data.Code == 1) {
-                                    var fulls = "left=0,screenX=0,top=0,screenY=0,scrollbars=1";    //定义弹出窗口的参数  
+                                    var fulls = "left=0,screenX=0,top=0,screenY=0,scrollbars=1";    //定义弹出窗口的参数
                                     if (window.screen) {
                                         var ah = screen.availHeight - 30;
                                         var aw = screen.availWidth - 10;
@@ -700,15 +707,15 @@ s：字符串
                                         fulls += ",innerWidth=" + aw;
                                         fulls += ",resizable"
                                     } else {
-                                        fulls += ",resizable"; // 对于不支持screen属性的浏览器，可以手工进行最大化。 manually  
+                                        fulls += ",resizable"; // 对于不支持screen属性的浏览器，可以手工进行最大化。 manually
                                     }
-                                     
-                                     
+
+
                                     WindowObjectReference = window.open('/ORDER_TASK_INFORMATION/Show/' + data.Id,
        "签字",
       fulls);
-                                    
-                                     
+
+
                                 }
                                 else {
                                     $.messager.alert('操作提示', data.Message, 'error');
@@ -816,6 +823,6 @@ s：字符串
             ]]
 
         });
-
+       
     });
 </script>

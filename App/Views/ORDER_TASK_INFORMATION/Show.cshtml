@@ -254,7 +254,7 @@
             type: "Post",
             // async: false,
             success: function (row) {
-                var html = '<tr><td width="40px" height="32">序号</td><td>器具名称</td><td>型号</td><td>出厂编号</td><td width="40px">数量</td><td>附件</td><td width="">外观说明</td><td>承接实验室</td><td>器具接收</td><td>提取日期</td></tr>';
+                var html = '<tr><td width="40px" height="32">序号</td><td>条码</td><td>器具名称</td><td>型号</td><td>出厂编号</td><td width="40px">数量</td><td>附件</td><td width="">外观说明</td><td>承接实验室</td><td>器具接收</td><td>提取日期</td></tr>';
                 for (var i = 0; i < row.APPLIANCE_DETAIL_INFORMATIONShows.length; i++) {
                     var x = i + 1;
                     var APPLIANCE_NAME = row.APPLIANCE_DETAIL_INFORMATIONShows[i].APPLIANCE_NAME == null ? '/' : row.APPLIANCE_DETAIL_INFORMATIONShows[i].APPLIANCE_NAME;
@@ -267,7 +267,9 @@
                     var APPLIANCE_RECIVE = row.APPLIANCE_DETAIL_INFORMATIONShows[i].APPLIANCE_RECIVE == null ? '/' : row.APPLIANCE_DETAIL_INFORMATIONShows[i].APPLIANCE_RECIVE;
                     //var REMARKS = row.APPLIANCE_DETAIL_INFORMATIONShows[i].REMARKS == null ? '/' : row.APPLIANCE_DETAIL_INFORMATIONShows[i].REMARKS;
                     var TIQURIQI = row.APPLIANCE_DETAIL_INFORMATIONShows[i].TIQURIQI == null ? '/' : row.APPLIANCE_DETAIL_INFORMATIONShows[i].TIQURIQI;
+                    var BAR_CODE_NUM = row.APPLIANCE_DETAIL_INFORMATIONShows[i].BAR_CODE_NUM == null ? '/' : row.APPLIANCE_DETAIL_INFORMATIONShows[i].BAR_CODE_NUM;
                     html += '<tr><td width="40px" height="32">' + x +
+                        '</td><td>' + BAR_CODE_NUM +
                         '</td><td>' + APPLIANCE_NAME +
                         '</td><td width="">' + VERSION +
                         '</td><td>' + FACTORY_NUM +
