@@ -305,7 +305,8 @@
         </div>
         <div class="editor-form">
             <div class="editor-label">
-                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
+                @*<span style="color:#F00">*</span>*@
+                @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
@@ -324,7 +325,8 @@
         </div>
         <div class="editor-form">
             <div class="editor-label">
-                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACTS2)：
+                @*<span style="color:#F00">*</span>*@
+                @Html.LabelFor(model => model.CONTACTS2)：
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.CONTACTS2)
@@ -333,7 +335,8 @@
         </div>
         <div class="editor-form">
             <div class="editor-label">
-                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACT_PHONE2)：
+                @*<span style="color:#F00">*</span>*@
+                @Html.LabelFor(model => model.CONTACT_PHONE2)：
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.CONTACT_PHONE2)
@@ -370,6 +373,29 @@
     </div>
 </div>
 <script type="text/javascript">
+    $(function () {
+        //输入框联动
+        //送检单位地址
+        $("#INSPECTION_ENTERPRISE_ADDRESS").blur(function () {
+            $("#CERTIFICATE_ENTERPRISE_ADDRESS").val($("#INSPECTION_ENTERPRISE_ADDRESS").val());
+        })
+        //送检单位邮政编码
+        $("#INSPECTION_ENTERPRISE_POST").blur(function () {
+            $("#CERTIFICATE_ENTERPRISE_POST").val($("#INSPECTION_ENTERPRISE_POST").val());
+        })
+        //联系人
+        $("#CONTACTS").blur(function () {
+            $("#CONTACTS2").val($("#CONTACTS").val());
+        })
+        //联系电话
+        $("#CONTACT_PHONE").blur(function () {
+            $("#CONTACT_PHONE2").val($("#CONTACT_PHONE").val());
+        })
+        //传真
+        $("#FAX").blur(function () {
+            $("#FAX2").val($("#FAX").val());
+        })
+    })
     //数据验证
     function ifshuju(entity) {
         var zhi = "";
@@ -379,18 +405,18 @@
         if (isNull(entity.CERTIFICATE_ENTERPRISE)) {
             zhi += "证书单位不能为空！<br>";
         }
-        if (isNull(entity.CERTIFICATE_ENTERPRISE_ADDRESS)) {
-            zhi += "证书单位地址不能为空！<br>";
-        }
-        if (isNull(entity.CONTACTS2)) {
-            zhi += "证书单位联系人不能为空！<br>";
-        }
+        //if (isNull(entity.CERTIFICATE_ENTERPRISE_ADDRESS)) {
+        //    zhi += "证书单位地址不能为空！<br>";
+        //}
+        //if (isNull(entity.CONTACTS2)) {
+        //    zhi += "证书单位联系人不能为空！<br>";
+        //}
         if (isNull(entity.INSPECTION_ENTERPRISE)) {
             zhi += "送检单位不能为空！<br>";
         }
-        if (isNull(entity.CONTACT_PHONE2)) {
-            zhi += "证书单位电话不能为空！<br>";
-        }
+        //if (isNull(entity.CONTACT_PHONE2)) {
+        //    zhi += "证书单位电话不能为空！<br>";
+        //}
         //else {
         //    if (!checkPhone(entity.CONTACT_PHONE2)) {
         //        zhi += "证书单位电话格式不对！<br>";
@@ -402,26 +428,26 @@
         //    //    zhi += "送检单位电话格式不对！<br>";
         //    //}
         //}
-        if (!isNull(entity.INSPECTION_ENTERPRISE_POST)) {
-            if (!isPOST(entity.INSPECTION_ENTERPRISE_POST)) {
-                zhi += "送检单位邮编格式不对！<br>";
-            }
-        }
-        if (!isNull(entity.CERTIFICATE_ENTERPRISE_POST)) {
-            if (!isPOST(entity.CERTIFICATE_ENTERPRISE_POST)) {
-                zhi += "证书单位邮编格式不对！<br>";
-            }
-        }
-        if (!isNull(entity.FAX)) {
-            if (!isFAX(entity.FAX)) {
-                zhi += "送检单位传真格式不对！<br>";
-            }
-        }
-        if (!isNull(entity.FAX2)) {
-            if (!isFAX(entity.FAX2)) {
-                zhi += "证书单位传真格式不对！<br>";
-            }
-        }
+        //if (!isNull(entity.INSPECTION_ENTERPRISE_POST)) {
+        //    if (!isPOST(entity.INSPECTION_ENTERPRISE_POST)) {
+        //        zhi += "送检单位邮编格式不对！<br>";
+        //    }
+        //}
+        //if (!isNull(entity.CERTIFICATE_ENTERPRISE_POST)) {
+        //    if (!isPOST(entity.CERTIFICATE_ENTERPRISE_POST)) {
+        //        zhi += "证书单位邮编格式不对！<br>";
+        //    }
+        //}
+        //if (!isNull(entity.FAX)) {
+        //    if (!isFAX(entity.FAX)) {
+        //        zhi += "送检单位传真格式不对！<br>";
+        //    }
+        //}
+        //if (!isNull(entity.FAX2)) {
+        //    if (!isFAX(entity.FAX2)) {
+        //        zhi += "证书单位传真格式不对！<br>";
+        //    }
+        //}
         if (entity.APPLIANCE_DETAIL_INFORMATION.length >= 1) {
             for (var i = 0; i < entity.APPLIANCE_DETAIL_INFORMATION.length; i++) {
                 if (entity.APPLIANCE_DETAIL_INFORMATION[i].APPLIANCE_NAME == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].VERSION == "undefined"
