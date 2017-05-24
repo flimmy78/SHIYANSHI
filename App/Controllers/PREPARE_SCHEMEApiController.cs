@@ -619,9 +619,21 @@ namespace Langben.App.Controllers
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.已批准.ToString();
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.已批准.GetHashCode().ToString();
-
-                        applianceOne.ORDER_STATUS = Common.ORDER_STATUS.待入库.ToString();
-                        applianceOne.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.待入库.GetHashCode().ToString();
+                        APPLIANCE_DETAIL_INFORMATION adi= m_BLL3.GetById(applianceOne.ID);
+                        if (adi!=null)
+                        {
+                            if (adi.APPLIANCE_RECIVE=="是")
+                            {
+                                applianceOne.ORDER_STATUS = Common.ORDER_STATUS.待入库.ToString();
+                                applianceOne.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.待入库.GetHashCode().ToString();
+                            }
+                            else
+                            {
+                                applianceOne.ORDER_STATUS = Common.ORDER_STATUS.器具未收.ToString();
+                                applianceOne.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.器具未收.GetHashCode().ToString();
+                            }
+                        }
+                       
                         applianceOne.ISRECEIVE = Common.ISRECEIVE.否.ToString();
                         m_BLL2.EditField(ref validationErrors, applianceOne);
                        

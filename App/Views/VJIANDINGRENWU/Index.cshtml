@@ -217,7 +217,7 @@
                 return;
             }
         }
-       
+
         if (is) {
             //实例化一个委托单对象
             var entity = new Object();
@@ -239,12 +239,12 @@
                 success: function (res) {
                     $.messager.alert('操作提示', res.Message, 'info');
                     if (res.Code == 1) {
-                      
+
                         $("#flexigridData").datagrid("reload");
                         $("#flexigridData").datagrid("clearSelections");
                         $('#d').dialog('close');
                     }
-                   
+
                 }
             })
         }
@@ -288,7 +288,47 @@
             url: '../VJIANDINGRENWU/GetData', //获取数据的url
             sortName: 'EQUIPMENT_STATUS_VALUUMN',
             sortOrder: 'asc',
-
+            //bind数据成功设置列宽度
+            onLoadSuccess: function (data) {
+                //datagrid头部 table 的第一个tr 的td们，即columns的集合
+                var headerTds = $(".datagrid-header-inner table tr:first-child").children();
+                //datagrid主体 table 的第一个tr 的td们，即第一个数据行
+                var bodyTds = $(".datagrid-body table tr:first-child").children();
+                var totalWidth = 0; //合计宽度，用来为datagrid头部和主体设置宽度
+                //循环设置宽度
+                bodyTds.each(function (i, obj) {
+                    var headerTd = $(headerTds.get(i));
+                    var bodyTd = $(bodyTds.get(i));
+                    $("div:first-child", headerTds.get(i)).css("text-align", "center");
+                    var headerTdWidth = headerTd.width(); //获取第i个头部td的宽度
+                    //这里加5个像素 是因为数据主体我们取的是第一行数据，不能确保第一行数据宽度最宽，预留5个像素。有兴趣的朋友可以先判断最大的td宽度都在进行设置
+                    var bodyTdWidth = bodyTd.width() + 5;
+                    var width = 0;
+                    //如果头部列名宽度比主体数据宽度宽，则它们的宽度都设为头部的宽度。反之亦然
+                    if (headerTdWidth > bodyTdWidth) {
+                        width = headerTdWidth;
+                        bodyTd.width(width);
+                        headerTd.width(width);
+                        totalWidth += width;
+                    } else {
+                        width = bodyTdWidth;
+                        headerTd.width(width);
+                        bodyTd.width(width);
+                        totalWidth += width;
+                    }
+                });
+                var headerTable = $(".datagrid-header-inner table:first-child");
+                var bodyTable = $(".datagrid-body table:first-child");
+                //循环完毕即能得到总得宽度设置到头部table和数据主体table中
+                headerTable.width(totalWidth);
+                bodyTable.width(totalWidth);
+                bodyTds.each(function (i, obj) {
+                    var headerTd = $(headerTds.get(i));
+                    var bodyTd = $(bodyTds.get(i));
+                    var headerTdWidth = headerTd.width();
+                    bodyTd.width(headerTdWidth);
+                });
+            },
             rowStyler: function (value, row, index) {
                 if (row.ISRECEIVE != "是") {
                     if (row.CREATETIME != null) {
@@ -346,10 +386,19 @@
                      return getView();
                  }
              }
+             ,
+             {
+                 text: '导出数据',
+                 iconCls: 'icon-detail',
+                 handler: function () {
+                     return flexiExport();
+                 }
+             }
             ],
             columns: [[
                     { field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 64, hidden: true }
                     , { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 100 }
+                    , { field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 100 }
                     , { field: 'ISRECEIVE', title: '是否可以领取', align: 'center', width: 80 }
                     , { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', align: 'center', width: 100 }
                     , { field: 'VERSION', title: '@Html.DisplayNameFor(model => model.VERSION)', align: 'center', width: 90 }
@@ -440,6 +489,30 @@
         $('#flexigridData').datagrid('load', { search: search });
     };
 
+    //“导出”按钮     在6.0版本中修改
+    //function flexiExport() {
+
+    //    //将查询条件按照分隔符拼接成字符串
+    //    var search = "";
+    //    var rows = $('#flexigridData').datagrid('getSelections');
+    //    if (rows.length == 0) {
+    //        $.messager.alert('操作提示', '请选择数据!', 'warning');
+    //        return false;
+    //    } else {
+    //        for (var i = 0; i < rows.length; i++) {
+    //            search += rows[i].ID + ",";
+    //        }
+    //    }
+    //    $.post('../VRUKU/GetData2',
+    //        {
+    //            sortName: $('#flexigridData').datagrid('options').sortName,
+    //            sortOrder: $('#flexigridData').datagrid('options').sortOrder,
+    //            search: search
+    //        }, function (res) {
+    //            window.location.href = res;
+    //        });
+    //};
+
     //判断是否为领取的器具
     function panduanlingqu() {
         var arr = $('#flexigridData').datagrid('getSelections');
@@ -451,8 +524,8 @@
             }
             else {
                 if (arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()" &&
-                    arr[0].REPORTSTATUS == null||
-                    arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()"&&
+                    arr[0].REPORTSTATUS == null ||
+                    arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()" &&
                     arr[0].REPORTSTATUS == "@Common.REPORTSTATUS.审核驳回.ToString()" ||
                     arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()" &&
                     arr[0].REPORTSTATUS == "@Common.REPORTSTATUS.批准驳回.ToString()") {

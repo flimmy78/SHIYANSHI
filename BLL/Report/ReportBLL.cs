@@ -1014,6 +1014,11 @@ namespace Langben.Report
             Message = "未找到预备方案ID为【" + ID + "】的数据";
             return false;
         }
+        /// <summary>
+        /// 获取报告模板路径
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         private string GetTemplatePath(ExportType type = ExportType.OriginalRecord_JianDing)
         {
             string result = ReportStatic.YuanShiJiLuJianDingPath;

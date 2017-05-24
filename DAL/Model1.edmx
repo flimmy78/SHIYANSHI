@@ -1501,6 +1501,7 @@
           <Property Name="UPDATETIME" Type="date" />
           <Property Name="ISRECEIVE" Type="nvarchar2" MaxLength="200" />
           <Property Name="RETURNREASON" Type="varchar2" MaxLength="200" />
+          <Property Name="REPORTNUMBER" Type="varchar2" MaxLength="200" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“TENGFEI.VQIJULINGQU1”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -2752,7 +2753,8 @@ FROM "TENGFEI"."VGONGZUOSHICHANG" "VGONGZUOSHICHANG"</DefiningQuery>
 "VJIANDINGRENWU"."EQUIPMENT_STATUS_VALUUMN" AS "EQUIPMENT_STATUS_VALUUMN", 
 "VJIANDINGRENWU"."UPDATETIME" AS "UPDATETIME", 
 "VJIANDINGRENWU"."ISRECEIVE" AS "ISRECEIVE", 
-"VJIANDINGRENWU"."RETURNREASON" AS "RETURNREASON"
+"VJIANDINGRENWU"."RETURNREASON" AS "RETURNREASON", 
+"VJIANDINGRENWU"."REPORTNUMBER" AS "REPORTNUMBER"
 FROM "TENGFEI"."VJIANDINGRENWU" "VJIANDINGRENWU"</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VQIJULINGQU1" EntityType="Self.VQIJULINGQU1" store:Type="Views" store:Schema="TENGFEI">
@@ -5183,6 +5185,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <Property Name="UPDATETIME" Type="DateTime" />
           <Property Name="ISRECEIVE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="RETURNREASON" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="REPORTNUMBER" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VQIJULINGQU1">
           <Key>
@@ -7647,6 +7650,7 @@ FROM "TENGFEI"."VZHENGSHUXINXICHAXUN" "VZHENGSHUXINXICHAXUN"</DefiningQuery>
           <EntitySetMapping Name="VJIANDINGRENWU">
             <EntityTypeMapping TypeName="Model.VJIANDINGRENWU">
               <MappingFragment StoreEntitySet="VJIANDINGRENWU">
+                <ScalarProperty Name="REPORTNUMBER" ColumnName="REPORTNUMBER" />
                 <ScalarProperty Name="RETURNREASON" ColumnName="RETURNREASON" />
                 <ScalarProperty Name="ISRECEIVE" ColumnName="ISRECEIVE" />
                 <ScalarProperty Name="UPDATETIME" ColumnName="UPDATETIME" />
