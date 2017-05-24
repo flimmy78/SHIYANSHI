@@ -648,7 +648,8 @@ fulls);
                field: 'APPLIANCE_RECIVE', title: '器具接收', width: 65,
                editor: {
                    type: 'combobox', options: {
-                       data: [{ value: '是', text: '是' }, { value: '否', text: '否' }], panelHeight: 'auto', formatter: function (value, row, index) {
+                       data: [{ value: '是', text: '是' }, { value: '否', text: '否' }], panelHeight: 'auto', required: true,
+                       missingMessage: '必填', formatter: function (value, row, index) {
                            //$(this).combobox('disable');
                        }
                    }
