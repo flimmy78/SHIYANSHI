@@ -3785,6 +3785,11 @@ namespace Langben.Report
                 sheet_Destination.Footer.Left = entity.CONTROL_NUMBER;
                 //}
             }
+            sheet_Destination.SetMargin(MarginType.RightMargin, (double)0.5);
+            sheet_Destination.SetMargin(MarginType.TopMargin, (double)0.6);
+            sheet_Destination.SetMargin(MarginType.LeftMargin, (double)0.4);
+            sheet_Destination.SetMargin(MarginType.BottomMargin, (double)0.3);
+            sheet_Destination.RepeatingRows = new CellRangeAddress(0, 0, 0, 57);
         }
         #region 复制行
 
