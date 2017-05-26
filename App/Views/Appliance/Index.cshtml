@@ -631,7 +631,7 @@ s：字符串
     $(function () {
         //单位选择联动
         $("#INSPECTION_ENTERPRISE").combobox({
-            onChange: function (a,b) {
+            onChange: function (a, b) {
                 $("#CERTIFICATE_ENTERPRISE").combobox('select', a)
             }
         })
@@ -842,13 +842,16 @@ s：字符串
               }
            , {
                field: 'APPLIANCE_RECIVE', title: '器具接收', width: 65, editor: {
-                   type: 'combobox', options: { data: [{ value: '是', text: '是' }, { value: '否', text: '否' }], panelHeight: 'auto' }
+                   type: 'combobox', options: {
+                       data: [{ value: '是', text: '是' }, { value: '否', text: '否' }], panelHeight: 'auto', required: true,
+                       missingMessage: '必填'
+                   }
                }
            }
            , { field: 'REMARKS', title: '备注', width: 170, editor: 'text' }
             ]]
 
         });
-       
+
     });
 </script>

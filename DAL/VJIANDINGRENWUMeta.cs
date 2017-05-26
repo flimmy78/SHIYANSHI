@@ -76,6 +76,8 @@ namespace Langben.DAL
         [Display(Name = "退回原因", Order = 19)]
         public object RETURNREASON { get; set; }
 
+        [Display(Name = "报告编号", Order = 20)]
+        public object REPORTNUMBER { get; set; }
     }
 
 

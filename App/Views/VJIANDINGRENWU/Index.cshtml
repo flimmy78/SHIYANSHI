@@ -217,7 +217,7 @@
                 return;
             }
         }
-       
+
         if (is) {
             //实例化一个委托单对象
             var entity = new Object();
@@ -239,12 +239,12 @@
                 success: function (res) {
                     $.messager.alert('操作提示', res.Message, 'info');
                     if (res.Code == 1) {
-                      
+
                         $("#flexigridData").datagrid("reload");
                         $("#flexigridData").datagrid("clearSelections");
                         $('#d').dialog('close');
                     }
-                   
+
                 }
             })
         }
@@ -288,7 +288,6 @@
             url: '../VJIANDINGRENWU/GetData', //获取数据的url
             sortName: 'EQUIPMENT_STATUS_VALUUMN',
             sortOrder: 'asc',
-
             rowStyler: function (value, row, index) {
                 if (row.ISRECEIVE != "是") {
                     if (row.CREATETIME != null) {
@@ -346,10 +345,19 @@
                      return getView();
                  }
              }
+             ,
+             {
+                 text: '导出数据',
+                 iconCls: 'icon-detail',
+                 handler: function () {
+                     return flexiExport();
+                 }
+             }
             ],
             columns: [[
                     { field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 64, hidden: true }
                     , { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 100 }
+                    , { field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 100 }
                     , { field: 'ISRECEIVE', title: '是否可以领取', align: 'center', width: 80 }
                     , { field: 'APPLIANCE_NAME', title: '@Html.DisplayNameFor(model => model.APPLIANCE_NAME)', align: 'center', width: 100 }
                     , { field: 'VERSION', title: '@Html.DisplayNameFor(model => model.VERSION)', align: 'center', width: 90 }
@@ -440,6 +448,30 @@
         $('#flexigridData').datagrid('load', { search: search });
     };
 
+    //“导出”按钮     在6.0版本中修改
+    //function flexiExport() {
+
+    //    //将查询条件按照分隔符拼接成字符串
+    //    var search = "";
+    //    var rows = $('#flexigridData').datagrid('getSelections');
+    //    if (rows.length == 0) {
+    //        $.messager.alert('操作提示', '请选择数据!', 'warning');
+    //        return false;
+    //    } else {
+    //        for (var i = 0; i < rows.length; i++) {
+    //            search += rows[i].ID + ",";
+    //        }
+    //    }
+    //    $.post('../VRUKU/GetData2',
+    //        {
+    //            sortName: $('#flexigridData').datagrid('options').sortName,
+    //            sortOrder: $('#flexigridData').datagrid('options').sortOrder,
+    //            search: search
+    //        }, function (res) {
+    //            window.location.href = res;
+    //        });
+    //};
+
     //判断是否为领取的器具
     function panduanlingqu() {
         var arr = $('#flexigridData').datagrid('getSelections');
@@ -451,8 +483,8 @@
             }
             else {
                 if (arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()" &&
-                    arr[0].REPORTSTATUS == null||
-                    arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()"&&
+                    arr[0].REPORTSTATUS == null ||
+                    arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()" &&
                     arr[0].REPORTSTATUS == "@Common.REPORTSTATUS.审核驳回.ToString()" ||
                     arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()" &&
                     arr[0].REPORTSTATUS == "@Common.REPORTSTATUS.批准驳回.ToString()") {
