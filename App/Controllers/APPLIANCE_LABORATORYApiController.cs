@@ -295,6 +295,7 @@ namespace Langben.App.Controllers
                     foreach (var item2 in deleteId)//修改器具状态
                     {
                         APPLIANCE_DETAIL_INFORMATION appion = new APPLIANCE_DETAIL_INFORMATION();
+                        APPLIANCE_DETAIL_INFORMATION adi = m_BLL2.GetById(item2);
                         List<APPLIANCE_LABORATORY> listry = m_BLL.GetByRefAPPLIANCE_DETAIL_INFORMATIOID(item2);
                         foreach (var item3 in listry)
                         {
@@ -336,7 +337,10 @@ namespace Langben.App.Controllers
 
                         }
                         appion.ID = item2;
-                        appion.APPLIANCE_PROGRESS = account.UNDERTAKE_LABORATORYName;
+                        if (adi.APPLIANCE_RECIVE=="是")
+                        {
+                            appion.APPLIANCE_PROGRESS = account.UNDERTAKE_LABORATORYName;
+                        }
                         if (m_BLL2.EditField(ref validationErrors, appion))
                         {
                             LogClassModels.WriteServiceLog(Suggestion.UpdateSucceed + "，器具明细信息信息的Id为" + appion.ID, "器具领取所在实验室修改");//写入日志                   
