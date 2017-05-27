@@ -505,7 +505,7 @@ namespace Langben.App.Controllers
                 {
                     applianceTwo = APPlist.FirstOrDefault();
                 }
-
+                APPLIANCE_DETAIL_INFORMATION adi = m_BLL3.GetById(applianceOne.APPLIANCE_DETAIL_INFORMATIONID);
                 if (entity.SHPI == "H")
                 {
                     entity.AUDITTIME = DateTime.Now;//审核时间
@@ -534,8 +534,11 @@ namespace Langben.App.Controllers
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.待批准.ToString();
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.待批准.GetHashCode().ToString();
-                        applianceOne.ORDER_STATUS = Common.ORDER_STATUS.试验完成.ToString();//自己改变状态
-                        applianceOne.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.试验完成.GetHashCode().ToString();//自己改变状态
+                        if (adi.APPLIANCE_RECIVE == "是")
+                        {
+                            applianceOne.ORDER_STATUS = Common.ORDER_STATUS.试验完成.ToString();//自己改变状态
+                            applianceOne.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.试验完成.GetHashCode().ToString();//自己改变状态
+                        }
                         if (applianceTwo != null)
                         {
                             applianceOne.ISRECEIVE = Common.ISRECEIVE.否.ToString();
@@ -619,10 +622,9 @@ namespace Langben.App.Controllers
                     {
                         entity.REPORTSTATUS = Common.REPORTSTATUS.已批准.ToString();
                         entity.REPORTSTATUSZI = Common.REPORTSTATUS.已批准.GetHashCode().ToString();
-                        APPLIANCE_DETAIL_INFORMATION adi= m_BLL3.GetById(applianceOne.ID);
-                        if (adi!=null)
+                        if (adi != null)
                         {
-                            if (adi.APPLIANCE_RECIVE=="是")
+                            if (adi.APPLIANCE_RECIVE == "是")
                             {
                                 applianceOne.ORDER_STATUS = Common.ORDER_STATUS.待入库.ToString();
                                 applianceOne.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.待入库.GetHashCode().ToString();
@@ -633,10 +635,10 @@ namespace Langben.App.Controllers
                                 applianceOne.EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.器具未收.GetHashCode().ToString();
                             }
                         }
-                       
+
                         applianceOne.ISRECEIVE = Common.ISRECEIVE.否.ToString();
                         m_BLL2.EditField(ref validationErrors, applianceOne);
-                       
+
                     }
                     #region 审批过程记录
                     SP.ID = Result.GetNewId();//id
@@ -751,7 +753,7 @@ namespace Langben.App.Controllers
             return result;
         }
 
-      
+
         IBLL.IPREPARE_SCHEMEBLL m_BLL;
         IBLL.IAPPLIANCE_LABORATORYBLL m_BLL2;
         IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL m_BLL3;
