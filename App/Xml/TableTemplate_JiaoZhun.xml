@@ -2872,7 +2872,7 @@
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 				</Cell>
-				<Cell>
+				<!--<Cell>
 					<Code>HZMY</Code>
 					<ColIndex>3</ColIndex>
 					<ColCount>0</ColCount>
@@ -2885,7 +2885,7 @@
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
-				</Cell>
+				</Cell>-->
 				<Cell>
 					<Code>SHIJISHUCHUZHI</Code>
 					<ColIndex>5</ColIndex>
@@ -2980,7 +2980,7 @@
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 				</Cell>
-				<Cell>
+				<!--<Cell>
 					<Code>HZMY</Code>
 					<ColIndex>3</ColIndex>
 					<ColCount>0</ColCount>
@@ -2993,7 +2993,7 @@
 					<ColCount>0</ColCount>
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
-				</Cell>
+				</Cell>-->
 				<Cell>
 					<Code>SHIJISHUCHUZHI</Code>
 					<ColIndex>5</ColIndex>
