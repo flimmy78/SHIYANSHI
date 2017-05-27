@@ -115,7 +115,7 @@ namespace Langben.App.Controllers
                 ViewBag.CHECKERID = acc.PersonName;//登入用户名
                 ViewBag.VALIDITY_PERIOD = prepare.VALIDITY_PERIOD;//有效期VALIDITY_PERIOD
                 ViewBag.CONCLUSION_EXPLAIN = prepare.CONCLUSION_EXPLAIN;//
-                
+
             }
 
             return View();
@@ -128,7 +128,7 @@ namespace Langben.App.Controllers
         public ActionResult BaoGaoShangChuan(FILE_UPLOADER file, string REPORTNUMBER)//文档上传
         {
             Account acc = GetCurrentAccount();
-             
+
             PREPARE_SCHEME pre = new PREPARE_SCHEME();
             pre.REPORTNUMBER = REPORTNUMBER;//证书编号
             pre.PACKAGETYPE = Common.PACKAGETYPE.上传.ToString();
@@ -421,6 +421,8 @@ namespace Langben.App.Controllers
                     VERSION = s.VERSION,
                     ISRECEIVE = s.ISRECEIVE,
                     RETURNREASON = s.RETURNREASON
+                    ,
+                    REPORTNUMBER=s.REPORTNUMBER
                 }
 
                     )

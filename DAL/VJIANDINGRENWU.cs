@@ -35,5 +35,6 @@ namespace Langben.DAL
         public Nullable<System.DateTime> UPDATETIME { get; set; }
         public string ISRECEIVE { get; set; }
         public string RETURNREASON { get; set; }
+        public string REPORTNUMBER { get; set; }
     }
 }

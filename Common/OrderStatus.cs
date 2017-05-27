@@ -65,7 +65,10 @@ namespace Common
         /// 器具领取环节1
         /// </summary>
         器具已领取 = 1043,
-
+        /// <summary>
+        /// 器具登记环节未领取的器具状态
+        /// </summary>
+        器具未收=1044,
     }
 
     /// <summary>
