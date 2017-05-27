@@ -40,12 +40,12 @@
                 @Html.LabelFor(model => model.ACCEPT_ORGNIZATION)：
             </div>
             <div class="editor-field">
-                @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), "华北电力科学研究院有限责任公司", new { @class = "easyui-combobox" })
+                @Html.DropDownList("ACCEPT_ORGNIZATION", Models.SysFieldModels.GetSysField("Appliance", "ACCEPT_ORGNIZATION"), new { @class = "easyui-combobox" })
             </div>
         </div>
         <div class="editor-form">
             <div class="editor-label">
-                @Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
+                <span style="color:#F00">*</span>@Html.LabelFor(model => model.INSPECTION_ENTERPRISE)：
             </div>
             <div class="editor-field">
                 @Html.DropDownList("INSPECTION_ENTERPRISE", Models.COMPANYModels.GetCOMPANY(), "请选择", new { @class = "easyui-combobox" })
@@ -62,6 +62,7 @@
         </div>
 
         <div class="editor-form">
+
             <div class="editor-label">
                 @Html.LabelFor(model => model.INSPECTION_ENTERPRISE_POST)：
             </div>
@@ -89,6 +90,7 @@
             </div>
         </div>
         <div class="editor-form">
+
             <div class="editor-label">
                 @Html.LabelFor(model => model.FAX)：
             </div>
@@ -107,7 +109,8 @@
         </div>
         <div class="editor-form">
             <div class="editor-label">
-                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
+                @*<span style="color:#F00">*</span>*@
+                @Html.LabelFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)：
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.CERTIFICATE_ENTERPRISE_ADDRESS)
@@ -126,7 +129,8 @@
         </div>
         <div class="editor-form">
             <div class="editor-label">
-                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACTS2)：
+                @*<span style="color:#F00">*</span>*@
+                @Html.LabelFor(model => model.CONTACTS2)：
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.CONTACTS2)
@@ -135,7 +139,8 @@
         </div>
         <div class="editor-form">
             <div class="editor-label">
-                <span style="color:#F00">*</span>@Html.LabelFor(model => model.CONTACT_PHONE2)：
+                @*<span style="color:#F00">*</span>*@
+                @Html.LabelFor(model => model.CONTACT_PHONE2)：
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.CONTACT_PHONE2)
@@ -174,6 +179,29 @@
     </div>
 
 <script type="text/javascript">
+    $(function () {
+        //输入框联动
+        //送检单位地址
+        $("#INSPECTION_ENTERPRISE_ADDRESS").blur(function () {
+            $("#CERTIFICATE_ENTERPRISE_ADDRESS").val($("#INSPECTION_ENTERPRISE_ADDRESS").val());
+        })
+        //送检单位邮政编码
+        $("#INSPECTION_ENTERPRISE_POST").blur(function () {
+            $("#CERTIFICATE_ENTERPRISE_POST").val($("#INSPECTION_ENTERPRISE_POST").val());
+        })
+        //联系人
+        $("#CONTACTS").blur(function () {
+            $("#CONTACTS2").val($("#CONTACTS").val());
+        })
+        //联系电话
+        $("#CONTACT_PHONE").blur(function () {
+            $("#CONTACT_PHONE2").val($("#CONTACT_PHONE").val());
+        })
+        //传真
+        $("#FAX").blur(function () {
+            $("#FAX2").val($("#FAX").val());
+        })
+    })
     $(function () {
 
         $('#ApplianceDate').edatagrid({
@@ -343,7 +371,7 @@
 </script>
 <script type="text/javascript">
     //数据验证
-    function ifshuju(entity) {
+  function ifshuju(entity) {
         var zhi = "";
         if (isNull(entity.ACCEPT_ORGNIZATION)) {
             zhi += "受理单位不能为空！<br>";
@@ -351,15 +379,18 @@
         if (isNull(entity.CERTIFICATE_ENTERPRISE)) {
             zhi += "证书单位不能为空！<br>";
         }
-        if (isNull(entity.CERTIFICATE_ENTERPRISE_ADDRESS)) {
-            zhi += "证书单位地址不能为空！<br>";
+        //if (isNull(entity.CERTIFICATE_ENTERPRISE_ADDRESS)) {
+        //    zhi += "证书单位地址不能为空！<br>";
+        //}
+        //if (isNull(entity.CONTACTS2)) {
+        //    zhi += "证书单位联系人不能为空！<br>";
+        //}
+        if (isNull(entity.INSPECTION_ENTERPRISE)) {
+            zhi += "送检单位不能为空！<br>";
         }
-        if (isNull(entity.CONTACTS2)) {
-            zhi += "证书单位联系人不能为空！<br>";
-        }
-        if (isNull(entity.CONTACT_PHONE2)) {
-            zhi += "证书单位电话不能为空！<br>";
-        }
+        //if (isNull(entity.CONTACT_PHONE2)) {
+        //    zhi += "证书单位电话不能为空！<br>";
+        //}
         //else {
         //    if (!checkPhone(entity.CONTACT_PHONE2)) {
         //        zhi += "证书单位电话格式不对！<br>";
@@ -371,30 +402,30 @@
         //    //    zhi += "送检单位电话格式不对！<br>";
         //    //}
         //}
-        if (!isNull(entity.INSPECTION_ENTERPRISE_POST)) {
-            if (!isPOST(entity.INSPECTION_ENTERPRISE_POST)) {
-                zhi += "送检单位邮编格式不对！<br>";
-            }
-        }
-        if (!isNull(entity.CERTIFICATE_ENTERPRISE_POST)) {
-            if (!isPOST(entity.CERTIFICATE_ENTERPRISE_POST)) {
-                zhi += "证书单位邮编格式不对！<br>";
-            }
-        }
-        if (!isNull(entity.FAX)) {
-            if (!isFAX(entity.FAX)) {
-                zhi += "送检单位传真格式不对！<br>";
-            }
-        }
-        if (!isNull(entity.FAX2)) {
-            if (!isFAX(entity.FAX2)) {
-                zhi += "证书单位传真格式不对！<br>";
-            }
-        }
+        //if (!isNull(entity.INSPECTION_ENTERPRISE_POST)) {
+        //    if (!isPOST(entity.INSPECTION_ENTERPRISE_POST)) {
+        //        zhi += "送检单位邮编格式不对！<br>";
+        //    }
+        //}
+        //if (!isNull(entity.CERTIFICATE_ENTERPRISE_POST)) {
+        //    if (!isPOST(entity.CERTIFICATE_ENTERPRISE_POST)) {
+        //        zhi += "证书单位邮编格式不对！<br>";
+        //    }
+        //}
+        //if (!isNull(entity.FAX)) {
+        //    if (!isFAX(entity.FAX)) {
+        //        zhi += "送检单位传真格式不对！<br>";
+        //    }
+        //}
+        //if (!isNull(entity.FAX2)) {
+        //    if (!isFAX(entity.FAX2)) {
+        //        zhi += "证书单位传真格式不对！<br>";
+        //    }
+        //}
         if (entity.APPLIANCE_DETAIL_INFORMATION.length >= 1) {
             for (var i = 0; i < entity.APPLIANCE_DETAIL_INFORMATION.length; i++) {
                 if (entity.APPLIANCE_DETAIL_INFORMATION[i].APPLIANCE_NAME == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].VERSION == "undefined"
-                    || entity.APPLIANCE_DETAIL_INFORMATION[i].NUM == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].APPEARANCE_STATUS == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID == "undefined") {
+                   || entity.APPLIANCE_DETAIL_INFORMATION[i].NUM == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].APPEARANCE_STATUS == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID == "undefined") {
                     zhi += "器具数据有误！<br>";
                     break;
                 }
@@ -425,11 +456,9 @@
                         zhi += "实验室不能超过2个！<br>";
                     }
                     else {
-                        var s = "@Common.LABORATORYNAME.互感器.ToString(),@Common.LABORATORYNAME.指示仪表.ToString(),@Common.LABORATORYNAME.数表三相.ToString(),@Common.LABORATORYNAME.数表单相.ToString(),@Common.LABORATORYNAME.电能.ToString(),@Common.LABORATORYNAME.直流仪器.ToString()";
-                        for (var i = 0; i < b.length; i++) {
-                            if (s.indexOf(b[i]) == -1) {
-                                zhi += "实验室名错误！<br>";
-                            }
+                        var b = a.replace(/互感器/g, "").replace(/指示仪表/g, "").replace(/数表三相/g, "").replace(/电能/g, "").replace(/直流仪器/g, "").replace(/数表单相/g, "").replace(/,/g, "");
+                        if (b != "") {
+                            zhi += "实验室名错误！<br>";
                         }
                     }
                 }
@@ -438,7 +467,6 @@
         else {
             zhi += "器具数据不能为空！<br>";
         }
-
         if (zhi != "") {
             $.messager.alert('操作提示', "" + zhi + "", 'info');
             return false;
