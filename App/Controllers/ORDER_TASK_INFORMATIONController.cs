@@ -31,7 +31,7 @@ namespace Langben.App.Controllers
         /// <returns></returns>
         public ActionResult ShowPicture(string id = "1611081523323547325feb23206e5")
         {
-            
+
             ViewBag.Id = id;
             return View();
         }
@@ -74,7 +74,7 @@ namespace Langben.App.Controllers
                     fs.Close();
                     stream.Close();
                 }
-                  pic = "/up/QianZi/" + id + ".png";
+                pic = "/up/QianZi/" + id + ".png";
             }
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             SIGN sign = new SIGN();
@@ -96,13 +96,13 @@ namespace Langben.App.Controllers
         public ActionResult QianZi2(string id, string PICTURE, string HTMLVALUE)
         {
             SIGN sign = new SIGN();
-         
+
             sign.ID = Result.GetNewId();
             var pic = "";
             if (!string.IsNullOrWhiteSpace(PICTURE))
             {
                 string path = Server.MapPath("~/up/QianZi/");
-                var  pathErWeiMa = path + sign.ID + ".png";
+                var pathErWeiMa = path + sign.ID + ".png";
                 using (System.IO.FileStream fs = new System.IO.FileStream(pathErWeiMa, System.IO.FileMode.OpenOrCreate))
                 {
                     byte[] byt = Convert.FromBase64String(PICTURE);
@@ -115,14 +115,14 @@ namespace Langben.App.Controllers
                 pic = "/up/QianZi/" + sign.ID + ".png";
             }
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
-            
+
             sign.PICTURE = pic;
             sign.HTMLVALUE = Server.UrlDecode(HTMLVALUE);//解码
             string currentPerson = GetCurrentPerson();
             sign.CREATETIME = DateTime.Now;
             sign.CREATEPERSON = currentPerson;
-          
-            sign.UPDATEPERSON = id; 
+
+            sign.UPDATEPERSON = id;
             result.Code = Common.ClientCode.Succeed;
             result.Message = Suggestion.InsertSucceed;
             m_BLL.EditSTATUS2(ref validationErrors, sign);
@@ -221,8 +221,8 @@ namespace Langben.App.Controllers
                         item.ID = Result.GetNewId();
                         item.CREATETIME = DateTime.Now;
                         item.CREATEPERSON = account.PersonName;
-                        string bianma = Regex.Replace(Guid.NewGuid().ToString().Replace("-", ""), "[a-z]", "", RegexOptions.IgnoreCase).Substring(0,8);
-                        item.BAR_CODE_NUM = entity.ORSERIALNUMBER.ToString().PadLeft(4, '0')+ bianma;
+                        string bianma = Regex.Replace(Guid.NewGuid().ToString().Replace("-", ""), "[a-z]", "", RegexOptions.IgnoreCase).Substring(0, 8);
+                        item.BAR_CODE_NUM = entity.ORSERIALNUMBER.ToString().PadLeft(4, '0') + bianma;
                         //二维码生成
                         ErrorCorrectionLevel Ecl = ErrorCorrectionLevel.M; //误差校正水平   
                         string Content = item.ID;//待编码内容  
@@ -257,35 +257,20 @@ namespace Langben.App.Controllers
                         string xinghao = item.BAR_CODE_NUM;//需要写入的字
                         //string xinghao = "123456789abcd";//需要写入的字
                         int w = imag.Width;
-                        int h = imag.Height;
-                        int y = 0;
-                        int x = 380;
-                        for (int i = 0; i < xinghao.Length; i++)
+                        int h = imag.Height; //entity.INSPECTION_ENTERPRISE
+                        g.DrawString("编号:"+ item.BAR_CODE_NUM, new Font("宋体", 14), Brushes.Red, new PointF(0, 260));//x:值越大越靠右；y：值越小越靠上
+                        if (entity.INSPECTION_ENTERPRISE.Length>9)
                         {
-                            if (x > w)
-                            {
-                                result.Code = Common.ClientCode.Fail;
-                                result.Message = "内容太多二维码生成失败！";
-                                return Json(result);
-                            }
-                            else
-                            {
-                                if (i % 6 == 0)
-                                {
-                                    x = x + 50;
-                                    y = 0;
-                                    y = y + 45;
-                                    g.DrawString(xinghao[i].ToString(), new Font("宋体", 14), Brushes.Red, new PointF(x, y));//x:值越大越靠右；y：值越小越靠上
-
-                                }
-                                else
-                                {
-                                    y = y + 45;
-                                    g.DrawString(xinghao[i].ToString(), new Font("宋体", 14), Brushes.Red, new PointF(x, y));//x:值越大越靠右；y：值越小越靠上
-                                }
-                            }
-
+                            string zhi = entity.INSPECTION_ENTERPRISE.Substring(0, 9);
+                            string zhi2= entity.INSPECTION_ENTERPRISE.Remove(0, 9);
+                            g.DrawString(zhi, new Font("宋体", 14), Brushes.Red, new PointF(0, 320));//x:值越大越靠右；y：值越小越靠上
+                            g.DrawString(zhi2, new Font("宋体", 14), Brushes.Red, new PointF(0, 380));//x:值越大越靠右；y：值越小越靠上
                         }
+                        else
+                        {
+                            g.DrawString(entity.INSPECTION_ENTERPRISE, new Font("宋体", 14), Brushes.Red, new PointF(0, 320));//x:值越大越靠右；y：值越小越靠上
+                        }
+
                         System.Drawing.Image ig = CombinImage(imag, ms);
                         fss.Close();
                         TuPanBaoCun(ig, pathErWeiMa);
@@ -309,7 +294,7 @@ namespace Langben.App.Controllers
                                 ORDER_STATUS = Common.ORDER_STATUS.保存.ToString(),
                                 EQUIPMENT_STATUS_VALUUMN = Common.ORDER_STATUS.保存.GetHashCode().ToString(),
                                 DISTRIBUTIONPERSON = account.PersonName,
-                            DISTRIBUTIONTIME = DateTime.Now,
+                                DISTRIBUTIONTIME = DateTime.Now,
                                 CREATEPERSON = account.PersonName,
                                 CREATETIME = DateTime.Now,
                                 ISRECEIVE = Common.ISRECEIVE.是.ToString(),
@@ -357,7 +342,7 @@ namespace Langben.App.Controllers
             }
             catch (Exception lastError)
             {
-               // fss.Close();
+                // fss.Close();
                 ExceptionsHander.WriteExceptions(lastError);//将异常写入数据库
             }
             return Json(result);
@@ -379,10 +364,10 @@ namespace Langben.App.Controllers
             //g.FillRectangle(System.Drawing.Brushes.Black, -50, -50, (int)212, ((int)203));//相片四周刷一层黑色边框，这里没有，需要调尺寸
             //g.DrawImage(img, 照片与相框的左边距, 照片与相框的上边距, 照片宽, 照片高);
 
-            int x = 30;
-            int y = 30;
-            int w = imgBack.Width - 200;
-            int h = imgBack.Height - 100;
+            int x = 120;
+            int y = 0;
+            int w = imgBack.Width - 300;
+            int h = imgBack.Height - 200;
             g.DrawImage(img, x, y, w, h);
             GC.Collect();
             //string saveImagePath = @"D:\shiyanshi\App\up\sss.png";
@@ -453,15 +438,15 @@ namespace Langben.App.Controllers
         {
             ORDER_TASK_INFORMATION ont = m_BLL.GetById(id);
             var data = (from f in ont.SIGN.AsQueryable()
-                       orderby f.CREATETIME
-                       select f).FirstOrDefault();
-            if (data!=null)
+                        orderby f.CREATETIME
+                        select f).FirstOrDefault();
+            if (data != null)
             {
                 ViewBag.HTML = data.HTMLVALUE;
                 ViewBag.Img = data.PICTURE;
             }
-                
-          
+
+
             return View();
         }
         IBLL.IORDER_TASK_INFORMATIONBLL m_BLL;
