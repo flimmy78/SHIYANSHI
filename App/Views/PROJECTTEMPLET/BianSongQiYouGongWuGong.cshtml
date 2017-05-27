@@ -128,11 +128,12 @@
                             <input type="text" class="my-textbox tr" value="1.0" style="width:44px" name="ZHONGJIANZHI" id="ZHONGJIANZHI_t_1_1">
                         </td>
 
-                        <td rowspan="1" align="center" width="99"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_1" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center" width="99"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_1" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"></td>
                         <td rowspan="1" align="center" width="99"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_1" name="ACTUALVALUE" onblur="ACTUALVALUE(this)" type="text"></td>
                         <td rowspan="1" align="center" width="99"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_1" name="SHIJISHUCHUZHI" onblur="SHIJISHUCHUZHI(this)" type="text"></td>
                         <td rowspan="1" align="center" width="98"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_1" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
+                        <td rowspan="1" align="center">
+                            <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
                             <input id="BuQueDingDuZhi_UNCERTAINTYDEGREE_t_1_1" name="BuQueDingDuZhi" value="" type="hidden">
                             <input id="BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_1" name="BuQueDingDuLuJing" value="" type="hidden">
                             <a class="my-linkbutton" href="#" name="btnBuQueDing" onclick="showModal('BuQueDingDuZhi_UNCERTAINTYDEGREE_t_1_1&BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_1^BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_1^UNCERTAINTYDEGREE_t_1_1', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=UNCERTAINTYDEGREE_t_1_1&RuleID='+$('#hideRULEID').val());">计算</a>
@@ -140,11 +141,12 @@
                     </tr>
                     <tr rowindex="2">
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="80%" id="OUTPUTVALUE_t_1_2" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_2" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_2" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_2" name="ACTUALVALUE" onblur="ACTUALVALUE(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_2" name="SHIJISHUCHUZHI" onblur="SHIJISHUCHUZHI(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_2" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_2" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
+                        <td rowspan="1" align="center">
+                            <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_2" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
                             <input id="BuQueDingDuZhi_UNCERTAINTYDEGREE_t_1_2" name="BuQueDingDuZhi" value="" type="hidden">
                             <input id="BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_2" name="BuQueDingDuLuJing" value="" type="hidden">
                             <a class="my-linkbutton" href="#" name="btnBuQueDing" onclick="showModal('BuQueDingDuZhi_UNCERTAINTYDEGREE_t_1_2&BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_2^BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_2^UNCERTAINTYDEGREE_t_1_2', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=UNCERTAINTYDEGREE_t_1_2&RuleID='+$('#hideRULEID').val());">计算</a>
@@ -152,11 +154,12 @@
                     </tr>
                     <tr rowindex="3">
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="60%" id="OUTPUTVALUE_t_1_3" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_3" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_3" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_3" name="ACTUALVALUE" onblur="ACTUALVALUE(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_3" name="SHIJISHUCHUZHI" onblur="SHIJISHUCHUZHI(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_3" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_3" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
+                        <td rowspan="1" align="center">
+                            <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_3" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
                             <input id="BuQueDingDuZhi_UNCERTAINTYDEGREE_t_1_3" name="BuQueDingDuZhi" value="" type="hidden">
                             <input id="BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_3" name="BuQueDingDuLuJing" value="" type="hidden">
                             <a class="my-linkbutton" href="#" name="btnBuQueDing" onclick="showModal('BuQueDingDuZhi_UNCERTAINTYDEGREE_t_1_3&BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_3^BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_3^UNCERTAINTYDEGREE_t_1_3', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=UNCERTAINTYDEGREE_t_1_3&RuleID='+$('#hideRULEID').val());">计算</a>
@@ -164,11 +167,12 @@
                     </tr>
                     <tr rowindex="4">
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="40%" id="OUTPUTVALUE_t_1_4" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_4" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_4" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_4" name="ACTUALVALUE" onblur="ACTUALVALUE(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_4" name="SHIJISHUCHUZHI" onblur="SHIJISHUCHUZHI(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_4" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_4" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
+                        <td rowspan="1" align="center">
+                            <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_4" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
                             <input id="BuQueDingDuZhi_UNCERTAINTYDEGREE_t_1_4" name="BuQueDingDuZhi" value="" type="hidden">
                             <input id="BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_4" name="BuQueDingDuLuJing" value="" type="hidden">
                             <a class="my-linkbutton" href="#" name="btnBuQueDing" onclick="showModal('BuQueDingDuZhi_UNCERTAINTYDEGREE_t_1_4&BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_4^BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_4^UNCERTAINTYDEGREE_t_1_4', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=UNCERTAINTYDEGREE_t_1_4&RuleID='+$('#hideRULEID').val());">计算</a>
@@ -176,11 +180,12 @@
                     </tr>
                     <tr rowindex="5">
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="20%" id="OUTPUTVALUE_t_1_5" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_5" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_5" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_5" name="ACTUALVALUE" onblur="ACTUALVALUE(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_5" name="SHIJISHUCHUZHI" onblur="SHIJISHUCHUZHI(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_5" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_5" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
+                        <td rowspan="1" align="center">
+                            <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_5" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
                             <input id="BuQueDingDuZhi_UNCERTAINTYDEGREE_t_1_5" name="BuQueDingDuZhi" value="" type="hidden">
                             <input id="BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_5" name="BuQueDingDuLuJing" value="" type="hidden">
                             <a class="my-linkbutton" href="#" name="btnBuQueDing" onclick="showModal('BuQueDingDuZhi_UNCERTAINTYDEGREE_t_1_5&BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_5^BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_5^UNCERTAINTYDEGREE_t_1_5', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=UNCERTAINTYDEGREE_t_1_5&RuleID='+$('#hideRULEID').val());">计算</a>
@@ -188,11 +193,12 @@
                     </tr>
                     <tr rowindex="6">
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0%" id="OUTPUTVALUE_t_1_6" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_6" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_1_6" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_6" name="ACTUALVALUE" onblur="ACTUALVALUE(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_1_6" name="SHIJISHUCHUZHI" onblur="SHIJISHUCHUZHI(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_1_6" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_6" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
+                        <td rowspan="1" align="center">
+                            <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_1_6" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
                             <input id="BuQueDingDuZhi_UNCERTAINTYDEGREE_t_1_6" name="BuQueDingDuZhi" value="" type="hidden">
                             <input id="BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_6" name="BuQueDingDuLuJing" value="" type="hidden">
                             <a class="my-linkbutton" href="#" name="btnBuQueDing" onclick="showModal('BuQueDingDuZhi_UNCERTAINTYDEGREE_t_1_6&BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_6^BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_1_6^UNCERTAINTYDEGREE_t_1_6', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=UNCERTAINTYDEGREE_t_1_6&RuleID='+$('#hideRULEID').val());">计算</a>
@@ -220,11 +226,12 @@
 
                         </td>
 
-                        <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="READVALUE_t_2_1" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="READVALUE_t_2_1" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"></td>
                         <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_2_1" name="ACTUALVALUE" onblur="ACTUALVALUE(this)" type="text"></td>
                         <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_2_1" name="SHIJISHUCHUZHI" onblur="SHIJISHUCHUZHI(this)" type="text"></td>
                         <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_2_1" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_2_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
+                        <td rowspan="1" align="center">
+                            <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_2_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
                             <input id="BuQueDingDuZhi_UNCERTAINTYDEGREE_t_2_1" name="BuQueDingDuZhi" value="" type="hidden">
                             <input id="BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_2_1" name="BuQueDingDuLuJing" value="" type="hidden">
                             <a class="my-linkbutton" href="#" name="btnBuQueDing" onclick="showModal('BuQueDingDuZhi_UNCERTAINTYDEGREE_t_2_1&BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_2_1^BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_2_1^UNCERTAINTYDEGREE_t_2_1', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=UNCERTAINTYDEGREE_t_2_1&RuleID='+$('#hideRULEID').val());">计算</a>
@@ -233,11 +240,12 @@
 
                     <tr rowindex="2">
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="0%" id="OUTPUTVALUE_t_2_2" name="OUTPUTVALUE" onblur="blurValue(this)" type="text">@((ViewBag.canshu == "有功功率") ? "Pn" : "In")</td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_2_2" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="READVALUE_t_2_2" name="READVALUE" onblur="blurErCiShuRuBiaoZhunZhi(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_2_2" name="ACTUALVALUE" onblur="ACTUALVALUE(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_2_2" name="SHIJISHUCHUZHI" onblur="SHIJISHUCHUZHI(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_2_2" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_2_2" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
+                        <td rowspan="1" align="center">
+                            <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_2_2" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
                             <input id="BuQueDingDuZhi_UNCERTAINTYDEGREE_t_2_2" name="BuQueDingDuZhi" value="" type="hidden">
                             <input id="BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_2_2" name="BuQueDingDuLuJing" value="" type="hidden">
                             <a class="my-linkbutton" href="#" name="btnBuQueDing" onclick="showModal('BuQueDingDuZhi_UNCERTAINTYDEGREE_t_2_2&BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_2_2^BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_2_2^UNCERTAINTYDEGREE_t_2_2', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=UNCERTAINTYDEGREE_t_2_2&RuleID='+$('#hideRULEID').val());">计算</a>
@@ -266,15 +274,17 @@
                         </td>
 
                         <td rowspan="1" align="center" width="100">
-                         <input class="my-textbox input-width" value="" id="READVALUE_t_3_1" name="READVALUE" onblur="blurValue(this)" type="text"></td>
+                            <input class="my-textbox input-width" value="" id="READVALUE_t_3_1" name="READVALUE" onblur="blurValue(this)" type="text">
+                        </td>
                         <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_3_1" name="ACTUALVALUE" onblur="ACTUALVALUE(this)" type="text"></td>
                         <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_3_1" name="SHIJISHUCHUZHI" onblur="SHIJISHUCHUZHI(this)" type="text"></td>
                         <td rowspan="1" align="center" width="100"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_3_1" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_3_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
+                        <td rowspan="1" align="center">
+                            <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_3_1" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
                             <input id="BuQueDingDuZhi_UNCERTAINTYDEGREE_t_3_1" name="BuQueDingDuZhi" value="" type="hidden">
                             <input id="BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_3_1" name="BuQueDingDuLuJing" value="" type="hidden">
                             <a class="my-linkbutton" href="#" name="btnBuQueDing" onclick="showModal('BuQueDingDuZhi_UNCERTAINTYDEGREE_t_3_1&BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_3_1^BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_3_1^UNCERTAINTYDEGREE_t_3_1', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=UNCERTAINTYDEGREE_t_3_1&RuleID='+$('#hideRULEID').val());">计算</a>
-                        
+
                         </td>
                     </tr>
 
@@ -284,7 +294,8 @@
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_3_2" name="ACTUALVALUE" onblur="ACTUALVALUE(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="SHIJISHUCHUZHI_t_3_2" name="SHIJISHUCHUZHI" onblur="SHIJISHUCHUZHI(this)" type="text"></td>
                         <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="RELATIVEERROR_t_3_2" name="RELATIVEERROR" onblur="blurValue(this)" type="text"></td>
-                        <td rowspan="1" align="center"> <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_3_2" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
+                        <td rowspan="1" align="center">
+                            <input class="my-textbox input-width" value="" id="UNCERTAINTYDEGREE_t_3_2" name="UNCERTAINTYDEGREE" onblur="blurValue(this)" type="text">
                             <input id="BuQueDingDuZhi_UNCERTAINTYDEGREE_t_3_2" name="BuQueDingDuZhi" value="" type="hidden">
                             <input id="BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_3_2" name="BuQueDingDuLuJing" value="" type="hidden">
                             <a class="my-linkbutton" href="#" name="btnBuQueDing" onclick="showModal('BuQueDingDuZhi_UNCERTAINTYDEGREE_t_3_2&BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_3_2^BuQueDingDuLuJing_UNCERTAINTYDEGREE_t_3_2^UNCERTAINTYDEGREE_t_3_2', '/PROJECTTEMPLET/JiSuanBuQueDingDu?ID=UNCERTAINTYDEGREE_t_3_2&RuleID='+$('#hideRULEID').val());">计算</a>
@@ -351,7 +362,7 @@
                 //测量点 需要下拉框
                 htmlString.push(SetTDHtml(rowspan, "OUTPUTVALUE", HangHaoID, rowidx, txtVal, "classstyle120", unit));
                 //二次输入标准值
-                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100"));
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, txtVal, "classstyle100", "", "blurErCiShuRuBiaoZhunZhi"));
                 //标准输出值
                 htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, txtVal, "classstyle100", "", "ACTUALVALUE"));
                 //实际输出值
@@ -369,10 +380,10 @@
             //$('#dlg').window('close');//一个量程的需要注释这一行，关闭弹出框
             $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).find(".myliangcheng_" + LiangChengShuLiang).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
         }
-       
+
         //离开事件，用于计算
         function SHIJISHUCHUZHI(obj) {
-         
+
             yinYongWuCha(obj, "SHIJISHUCHUZHI", "ACTUALVALUE", "dianmyya", "dianmyliu", "DengJi", "RELATIVEERROR");
 
 
@@ -381,13 +392,48 @@
             yinYongWuCha(obj, "SHIJISHUCHUZHI", "ACTUALVALUE", "dianmyya", "dianmyliu", "DengJi", "RELATIVEERROR");
 
 
-        } 
-        //离开事件，用于计算
-        function blurValue(obj) {
 
-            //   LianDongShiJiZhi(obj);
         }
 
+        //离开事件，用于计算 二次输入标准值
+        function blurErCiShuRuBiaoZhunZhi(obj) {
+            //注意多通道
+
+            var id = $(obj).attr("id");
+            ids= id.split("_");
+            var idx = 3;
+            if (ids[3] > 1) idx = 2;
+            $(obj).parents('tr:eq(0)').find("td:eq("+idx+") input").val(BiaoZhunZhi($(obj).val()))
+            $(obj).parents('tr:eq(0)').find("td:eq(" + idx + ") input").blur();
+            $(obj).parents('tr:eq(0)').find("td:eq(" + (idx+1) + ") input").blur();
+        }
+
+
+        //离开事件，用于计算
+        function BiaoZhunZhi(erciBiaoZhun) {
+
+            var datas = GetValue();
+           // var edingTiaoJian = parseFloat($("#mAVdianliu_" + GetTongDao() + "_1_1").val());
+           // if ($.trim(edingTiaoJian) != "" && edingTiaoJian != "0")
+            return (parseFloat(erciBiaoZhun) / (datas.inputMaxValue - datas.inputMinValue) * (datas.outputMaxValue - datas.outputMinValue) + datas.outputMinValue).toFixed(4);
+           // else
+              //  return "";
+        }
+        function GetValue() {
+            var hideDangQianTongDao = GetTongDao();//当前操作第几通道
+            var datas = {
+                inputMinValue: $.trim($(".clone #shurufanwei_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #shurufanwei_" + hideDangQianTongDao + "_1_1").val())),
+                inputMaxValue: $.trim($(".clone #shurufanweijian_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #shurufanweijian_" + hideDangQianTongDao + "_1_1").val())),
+                outputMinValue: $.trim($(".clone #dianmyliu_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #dianmyliu_" + hideDangQianTongDao + "_1_1").val())),
+                outputMaxValue: $.trim($(".clone #dianmyya_" + hideDangQianTongDao + "_1_1").val()) == "" ? "" : parseFloat($.trim($(".clone #dianmyya_" + hideDangQianTongDao + "_1_1").val())),
+                level: $(".clone #DengJi_" + $("#hideDangQianTongDao").val() + "_1_1").val(),
+                levellength: $(".clone #DengJi_" + $("#hideDangQianTongDao").val() + "_1_1").val().split('.')[1].length
+            }
+            return datas;
+        }
+        function GetTongDao() {
+            return $("#hideDangQianTongDao").val();//当前操作第几通道
+        }
 
     </script>
 
@@ -397,7 +443,6 @@
     <!--弹框的位置-->
     <input type="hidden" id="txtPoint" value="1" /><!--检测点数值，就是加几行-->
     <input type="hidden" id="txtPointLen" value="1" /><!--小数点位数-->
-
 }
 
 
