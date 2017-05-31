@@ -2058,11 +2058,13 @@ namespace Langben.Report
                 //设置封皮               
                 SetFengPi(hssfworkbook, entity, out fRemark, type);
 
-                //设置数据
-                SetShuJu(hssfworkbook, entity, type);
-
                 //设置不确定度
                 bool IsIsHaveBuQueDingDu = SetBuQueDingDu(hssfworkbook, entity, type);
+
+                //设置数据
+                SetShuJu(hssfworkbook, entity, type, IsIsHaveBuQueDingDu);
+
+               
 
                 //隐藏不需要的sheet
                 HiddenSheet(hssfworkbook, type, IsIsHaveBuQueDingDu, entity.CONCLUSION);
@@ -2188,6 +2190,9 @@ namespace Langben.Report
                 string sheetName_Destination = "不确定度";
                 ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
                 ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
+
+                int rowIndex_Destination = 1;
+
                 #region 检测项目            
                 if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE != null &&
                     entity.QUALIFIED_UNQUALIFIED_TEST_ITE.Count > 0)
@@ -2195,7 +2200,7 @@ namespace Langben.Report
                     SpecialCharacters allSpecialCharacters = GetSpecialCharacters();
                     entity.QUALIFIED_UNQUALIFIED_TEST_ITE = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.OrderBy(p => p.SORT).ToList();
 
-                    int rowIndex_Destination = 1;
+                   
 
                     foreach (QUALIFIED_UNQUALIFIED_TEST_ITE iEntity in entity.QUALIFIED_UNQUALIFIED_TEST_ITE)
                     {
@@ -2475,6 +2480,19 @@ namespace Langben.Report
 
                 if (ruleCount > 0)//如果不确定过程一个都没有需要隐藏不确定sheet
                 {
+                   
+                   
+                    int JWTemplateIndex = 0;//结尾格式                      
+                    sheetName_Source = "数据模板";                  
+                    sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
+                    rowIndex_Destination++;
+                    //插入一行空行
+                    CopyRow_1(sheet_Source, sheet_Destination, 2, rowIndex_Destination, 1, true, null, null, null);
+                    rowIndex_Destination++;
+                    //结尾 有不确定度将结尾打到不确定度页                   
+                    CopyRow(sheet_Source, sheet_Destination, JWTemplateIndex, rowIndex_Destination, 1, true);
+                   
+
                     //设置页面页脚
                     SetHeaderAndFooter(sheet_Destination, entity);
                     sheet_Destination.ForceFormulaRecalculation = true;
@@ -3030,7 +3048,8 @@ namespace Langben.Report
         /// <param name="hssfworkbook">工作文件</param>
         /// <param name="entity">预备方案对象</param>
         /// <param name="type">导出类型</param>
-        private void SetShuJu(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing)
+        /// <param name="IsIsHaveBuQueDingDu">是否有不确定，无不确定度需要打印结尾最后一行，否则不需要打印结尾最后一行（只有原始记录才有不确定度）</param>
+        private void SetShuJu(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing,bool IsIsHaveBuQueDingDu = false)
         {
             List<VTEST_ITE> vList = null;
             if (entity != null)
@@ -3043,7 +3062,7 @@ namespace Langben.Report
             {
                 RowIndex = 2;
             }
-            int JWTemplateIndex = 0;//规程标题获取源格式行   
+            int JWTemplateIndex = 0;//结尾格式   
             int ruleTitleTemplateIndex = 1;//检测项目名称
             string sheetName_Source = "数据模板";
             string sheetName_Destination = "数据";
@@ -3282,8 +3301,11 @@ namespace Langben.Report
 
 
             #endregion
-            //结尾             
-            CopyRow(sheet_Source, sheet_Destination, JWTemplateIndex, RowIndex, 1, true);
+            //结尾 是否有不确定，无不确定度需要打印结尾最后一行，否则不需要打印结尾最后一行（只有原始记录才有不确定度）
+            if (IsIsHaveBuQueDingDu == false)
+            {                            
+                CopyRow(sheet_Source, sheet_Destination, JWTemplateIndex, RowIndex, 1, true);
+            }
             //删除所有无用行数据
             DeleteAllRow(sheet_Destination);
             //设置页面页脚
