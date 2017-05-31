@@ -2137,15 +2137,18 @@ namespace Langben.Report
                 case ExportType.Report_JianDing:
                     if (CONCLUSION == "合格")
                     {
-                        hssfworkbook.RemoveSheetAt(1);//通知书
+                         
+                        hssfworkbook.SetSheetHidden(1, SheetState.VeryHidden);//调用这个方法就行了。
+                        //hssfworkbook.RemoveSheetAt(1);//通知书
                     }
                     else
                     {
-                        hssfworkbook.RemoveSheetAt(0);//封皮
+                        hssfworkbook.SetSheetHidden(0, SheetState.VeryHidden);//调用这个方法就行了。
+                       // hssfworkbook.RemoveSheetAt(0);//封皮
                     }
-                    while (3 != hssfworkbook.NumberOfSheets)
+                    while (4 != hssfworkbook.NumberOfSheets)
                     {
-                        hssfworkbook.RemoveSheetAt(3);//封皮模板
+                        hssfworkbook.RemoveSheetAt(4);//封皮模板
                     }
                     //hssfworkbook.RemoveSheetAt(4);//第二页模板
                     //hssfworkbook.RemoveSheetAt(5);//数据模板                
