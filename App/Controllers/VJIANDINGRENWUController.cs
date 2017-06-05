@@ -429,6 +429,18 @@ namespace Langben.App.Controllers
             });
         }
 
+        [SupportFilter]
+        public ActionResult GetData2(string id, int page=1, int rows=999999, string order= "asc", string sort="ID", string search=null)
+        {
+
+            int total = 0;
+            Common.Account account = GetCurrentAccount();
+            search += "EQUIPMENT_STATUS_VALUUMN&" + Common.ORDER_STATUS.已分配.GetHashCode() + "*" + Common.ORDER_STATUS.已领取.GetHashCode() + "*" + Common.ORDER_STATUS.试验完成.GetHashCode() + "*" + Common.ORDER_STATUS.待入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已入库.GetHashCode() + "*" + Common.ORDER_STATUS.器具已领取.GetHashCode() + "";
+            search += "^NAME&" + account.UNDERTAKE_LABORATORYName;
+            List<VJIANDINGRENWU> queryData = m_BLL.GetByParamX(id, page, rows, order, sort, search, ref total);
+            string[] fields = "ORDER_NUMBER,REPORTNUMBER,ISRECEIVE,APPLIANCE_NAME,VERSION,FACTORY_NUM,CERTIFICATE_ENTERPRISE,CUSTOMER_SPECIFIC_REQUIREMENTS,APPLIANCE_PROGRESS,ORDER_STATUS,CREATETIME,OVERDUE,STATE,REPORTSTATUS,APPROVAL,INSPECTION_ENTERPRISE".Split(',');
+            return Content(WriteExcleVJianDingRenWu(fields, queryData.ToArray()));
+        }
         IBLL.IVJIANDINGRENWUBLL m_BLL;
         IBLL.IFILE_UPLOADERBLL m_BLL2;
         IBLL.IPREPARE_SCHEMEBLL m_BLL3;

@@ -435,11 +435,11 @@
         search += "APPLIANCE_NAME&" + $("#APPLIANCE_NAME").val() + "^";
         search += "VERSION&" + $("#VERSION").val() + "^";
         search += "FACTORY_NUM&" + $("#FACTORY_NUM").val() + "^";
-        search += "CERTIFICATE_ENTERPRISE&" + $('#CERTIFICATE_ENTERPRISE').combobox('getText') + "^";
+        search += "CERTIFICATE_ENTERPRISE&" + $('#CERTIFICATE_ENTERPRISE').combobox('getValue') + "^";
         search += "ORDER_STATUSDDL_String&" + $('#ORDER_STATUSDDL_String').val() + "^";
-        search += "INSPECTION_ENTERPRISE&" + $('#INSPECTION_ENTERPRISE').combobox('getText') + "^";
-        if ($('#ISOVERDUE').combobox('getText') == "是") {
-            search += "ISOVERDUE&" + $('#ISOVERDUE').combobox('getText') + "^";
+        search += "INSPECTION_ENTERPRISE&" + $('#INSPECTION_ENTERPRISE').combobox('getValue') + "^";
+        if ($('#ISOVERDUE').combobox('getValue') == "是") {
+            search += "ISOVERDUE&" + $('#ISOVERDUE').combobox('getValue') + "^";
         }
         else {
             search += "ISOVERDUE&" + "" + "^";
@@ -572,4 +572,31 @@
             $.messager.alert('操作提示', '请选择一条数据!', 'warning');
         }
     }
+
+    //“导出”按钮     在6.0版本中修改
+    function flexiExport() {
+
+        //将查询条件按照分隔符拼接成字符串
+        var search = "";
+        search += "ORDER_NUMBER&" + $("#ORDER_NUMBER").val() + "^";
+        search += "APPLIANCE_NAME&" + $("#APPLIANCE_NAME").val() + "^";
+        search += "VERSION&" + $("#VERSION").val() + "^";
+        search += "FACTORY_NUM&" + $("#FACTORY_NUM").val() + "^";
+        search += "CERTIFICATE_ENTERPRISE&" + $('#CERTIFICATE_ENTERPRISE').combobox('getValue') + "^";
+        search += "ORDER_STATUSDDL_String&" + $('#ORDER_STATUSDDL_String').val() + "^";
+        search += "INSPECTION_ENTERPRISE&" + $('#INSPECTION_ENTERPRISE').combobox('getValue') + "^";
+        if ($('#ISOVERDUE').combobox('getValue') == "是") {
+            search += "ISOVERDUE&" + $('#ISOVERDUE').combobox('getValue') + "^";
+        }
+        else {
+            search += "ISOVERDUE&" + "" + "^";
+        };
+
+        $.post('../VJIANDINGRENWU/GetData2',
+            {
+                search: search
+            }, function (res) {
+                window.location.href = res;
+            });
+    };
 </script>
