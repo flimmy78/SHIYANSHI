@@ -8,9 +8,11 @@
 <thead>
     <!--表头-->
     <tr>
-        <th align="center" width="140">量程</th>
-        <th width="140" align="center">@((ViewBag.canshu == "输出") ? "输出示值" : "标准值")</th>
         <th width="140" align="center">频率</th>
+        <th width="140" align="center">@((ViewBag.canshu == "输出") ? "输出示值" : "标准值")</th>
+        <th align="center" width="140">量程</th>
+        
+        
         <th width="140" align="center">
             @if (ViewBag.canshu == "输出")
             {
@@ -224,6 +226,9 @@
 
                 var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
 
+                //赫兹 增加下拉框单位赫兹
+                htmlString.push(SetTDHtml(rowspan, "HZMY", HangHaoID, rowidx, '', "classstyle100"));
+
                 //计算默认值
 
                 if (rowidx == 0) {
@@ -239,8 +244,7 @@
                 //标准值 增加下拉框单位V
                 htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, '', "classstyle100", "", "@((ViewBag.wucha == "相对误差") ? "resetBiaoZhunZhi" : "jueDuiWuChaBiaoZhunZhi")"));
 
-                //赫兹 增加下拉框单位赫兹
-                htmlString.push(SetTDHtml(rowspan, "HZMY", HangHaoID, rowidx, '', "classstyle100"));
+                
 
                 //显示值 增加下拉框单位V
                 htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, '', "classstyle100", '', "@((ViewBag.wucha == "相对误差") ? "resetBiaoZhunZhi" : "jueDuiWuChaBiaoZhunZhi")"));
