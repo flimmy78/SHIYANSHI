@@ -1230,10 +1230,12 @@ namespace Langben.App.Controllers
         /// 直流电压（电流）测量-相对误差（多通道）
         /// </summary>
         /// <returns></returns>
-        public ActionResult ZhiLiuDianLiuDianYa()
-        {
-            ViewBag.Message = "Your default page.";
-            return View();
+        public ActionResult ZhiLiuDianLiuDianYa(string id =  "绝对误差", string RULEID = "315-1983_2_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        { //输出 测量
+            ViewBag.canshu = id;
+            //绝对误差 相对误差 
+    
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
     }
 }
