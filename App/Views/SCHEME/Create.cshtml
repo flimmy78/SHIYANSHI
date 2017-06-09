@@ -70,7 +70,7 @@
 
                     </td>
                     <td>
-                        <a href="javascript:Save()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" style=" margin-left 10px; margin-right:10px">提交方案模板</a>
+                        <a id="aSave" href="javascript:Save();" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" style=" margin-left 10px; margin-right:10px">提交方案模板</a>
                         <a href="../SCHEME/Index" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-back'" style=" margin-left 10px; margin-right:10px">返回</a>
 
                     </td>
@@ -208,7 +208,7 @@
         if (!CheckData()) {
             return;
         }
-        
+        $('#aSave').removeAttr('href');
         //var UNDERTAKE_LABORATORYID = $("#UNDERTAKE_LABORATORYID").val();//实验室
         var UNDERTAKE_LABORATORYID = $("#hideUNDERTAKE_LABORATORYID").val();//没明白取下拉框的选中数据取不到
         var NAME = $("#NAME").val();//方案名称           
@@ -226,6 +226,7 @@
         var COPYID = $("#hideCOPYID").val();//复制方案ID
         //获取空对象用于保存添加的信息
         $.ajax({
+            async:false,
             type: 'post', //使用post方法访问后台
             dataType: "json", //返回json格式的数据       
             url: '/SCHEME/Save',//要访问的后台地址
@@ -256,6 +257,7 @@
                 $.messager.alert('操作提示', '操作失败!' + errorThrown.messager, 'warning');
             }
         });
+        $('#aSave').attr('href', 'javascript:Save();');
     } 
 </script>
 
