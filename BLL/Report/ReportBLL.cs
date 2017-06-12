@@ -2231,7 +2231,7 @@ namespace Langben.Report
                                             rowIndex_Destination = rowIndex_Destination + (30 - yuShu) + 1;
                                         }
                                     }
-                                    #region 不确定度的评定
+                                    #region 不确定度的评定 
                                     ruleCount++;
                                     CopyRow_1(sheet_Source, sheet_Destination, 0, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
                                     sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue(ruleCount.ToString() + "." + iEntity.RULENAME + "不确定度的评定");
