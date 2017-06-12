@@ -2244,48 +2244,83 @@ namespace Langben.Report
                                     int pingdingIndex = 1;
                                     if (buQueDingDu.pingding != null && buQueDingDu.pingding.Count > 0)
                                     {
+                                        #region 原评定点
+                                        //while (buQueDingDu.pingding != null && buQueDingDu.pingding.Count > 0)
+                                        //{
+                                        //    Dictionary<string, CellRangeAddress> cellAddressList = CopyRow_1(sheet_Source, sheet_Destination, 1, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                        //    int cIndex = 1;
+                                        //    string pingDing2 = "";//第二项数据
+                                        //    if (cellAddressList != null && cellAddressList.Count > 0)
+                                        //    {
+                                        //        foreach (CellRangeAddress c in cellAddressList.Values)
+                                        //        {
+                                        //            MYData d = buQueDingDu.pingding.FirstOrDefault();
+                                        //            if (cIndex == 1 && pingdingIndex == 1)//第一行第一个数
+                                        //            {
+                                        //                sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue("评定点：");
+                                        //            }
+                                        //            else if (cIndex == 1)//除第一行外的第一个数
+                                        //            {
+                                        //                sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue("");
+                                        //            }
+                                        //            else
+                                        //            {
+                                        //                sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue(d.value);
+                                        //                buQueDingDu.pingding.Remove(d);
+                                        //            }
+                                        //            if (cIndex == 2)
+                                        //            {
+                                        //                pingDing2 = d.value;
+                                        //            }
+                                        //            cIndex++;
+                                        //        }
+                                        //        if (pingDing2 == null || pingDing2.Trim() == "")//评定点第一项如果未输入整行隐藏
+                                        //        {
+                                        //            HideRow(sheet_Destination, rowIndex_Destination, 1);
+                                        //        }
+                                        //        else
+                                        //        {
+                                        //            pingdingIndex++;
+                                        //        }
+                                        //    }
+                                        //    rowIndex_Destination++;
 
-                                        while (buQueDingDu.pingding != null && buQueDingDu.pingding.Count > 0)
+                                        //}
+                                        #endregion
+
+                                        #region 将评定点合并到一个单元格                                        
+                                        while (buQueDingDu.pingding != null && buQueDingDu.pingding.Count > 0 && buQueDingDu.pingding.Count >= 3)
                                         {
-                                            Dictionary<string, CellRangeAddress> cellAddressList = CopyRow_1(sheet_Source, sheet_Destination, 1, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
-                                            int cIndex = 1;
-                                            string pingDing2 = "";//第二项数据
-                                            if (cellAddressList != null && cellAddressList.Count > 0)
+
+                                            string pingDingValue = "";
+                                            for (int i = 0; i < 3; i++)
                                             {
-                                                foreach (CellRangeAddress c in cellAddressList.Values)
+                                                MYData d = buQueDingDu.pingding.FirstOrDefault();
+                                                pingDingValue += d.value == null ? "" : d.value;
+                                                buQueDingDu.pingding.Remove(d);
+                                            }
+                                            if (pingDingValue != null && pingDingValue.Trim() != "")
+                                            {
+                                                Dictionary<string, CellRangeAddress> cellAddressList = CopyRow_1(sheet_Source, sheet_Destination, 1, rowIndex_Destination, 1, true, null, allSpecialCharacters, null);
+                                                if (pingdingIndex == 1)//第一行第一个数
                                                 {
-                                                    MYData d = buQueDingDu.pingding.FirstOrDefault();
-                                                    if (cIndex == 1 && pingdingIndex == 1)//第一行第一个数
-                                                    {
-                                                        sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue("评定点：");
-                                                    }
-                                                    else if (cIndex == 1)//除第一行外的第一个数
-                                                    {
-                                                        sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue("");
-                                                    }
-                                                    else
-                                                    {
-                                                        sheet_Destination.GetRow(rowIndex_Destination).GetCell(c.FirstColumn).SetCellValue(d.value);
-                                                        buQueDingDu.pingding.Remove(d);
-                                                    }
-                                                    if (cIndex == 2)
-                                                    {
-                                                        pingDing2 = d.value;
-                                                    }
-                                                    cIndex++;
-                                                }
-                                                if (pingDing2 == null || pingDing2.Trim() == "")//评定点第一项如果未输入整行隐藏
-                                                {
-                                                    HideRow(sheet_Destination, rowIndex_Destination, 1);
+                                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue("评定点：");
+
                                                 }
                                                 else
                                                 {
-                                                    pingdingIndex++;
+                                                    sheet_Destination.GetRow(rowIndex_Destination).GetCell(0).SetCellValue("");
                                                 }
-                                            }
-                                            rowIndex_Destination++;
+                                                sheet_Destination.GetRow(rowIndex_Destination).GetCell(7).SetCellValue(pingDingValue);
+                                                pingdingIndex++;
+                                                rowIndex_Destination++;
 
-                                        }
+                                            }
+
+                                        }                                    
+                                        
+
+                                        #endregion
                                     }
                                     #endregion
 
