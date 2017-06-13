@@ -1356,6 +1356,7 @@ function wuCha(obj, first, second, third, gold) {
     second = second + id;//改动的地方，参与计算的列的name值
     third = third + id;
     gold = gold + id;//改动的地方，误差的列的name值
+   
 
     var firstData = $(obj).parent().parent().find("#" + first).val();
     var secondData = $(obj).parent().parent().find("#" + second).val();
@@ -1365,8 +1366,14 @@ function wuCha(obj, first, second, third, gold) {
         
         var jianfa = accDiv(accSub(firstData, secondData), thirdData) * 100;
         var data1 = (fomatFloat(jianfa, txtPointLen), txtPointLen);
-
-        var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+        var data=0;
+        if ($("#" + first).parent().find('select').val() == "μΩ" && $("#" + second).parent().find('select').val() == "mΩ") {
+            //【相对误差】=（显示值/1000-标准值）/标准值*100%
+            data = accDiv(accDiv(firstData, accSub(1000, secondData)), secondData) * 100;
+            data = zeroFloat(fomatFloat(data, txtPointLen), txtPointLen);
+        }
+        else
+            data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
         $(obj).parent().parent().find("#" + gold).val(data);
     }
 
