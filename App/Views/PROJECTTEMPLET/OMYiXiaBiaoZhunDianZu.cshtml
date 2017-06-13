@@ -225,7 +225,7 @@
                 if (beijiancedianzubiaochenzhi != "" && shijizhi != "") {
                     var wucha = (parseFloat(beijiancedianzubiaochenzhi) - parseFloat(shijizhi)) / parseFloat(shijizhi) * 100;
                    // var wucha =accMul(accDiv(accSub(parseFloat(beijiancedianzubiaochenzhi), parseFloat(shijizhi)), parseFloat(shijizhi)), 100)
-                    $(tr).children().eq(8).find('input').val(fomatFloat(wucha, 3));
+                    $(tr).children().eq(8).find('input').val(zeroFloat(wucha, 3));
                 }
 
 
