@@ -119,6 +119,7 @@ namespace Langben.App.Controllers
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             QUALIFIED_UNQUALIFIED_TEST_ITE entity = new QUALIFIED_UNQUALIFIED_TEST_ITE();
             string currentPerson = GetCurrentPerson();
+       
             entity.CREATETIME = DateTime.Now;
             entity.CREATEPERSON = currentPerson;
             entity.RULEID = RULEID;

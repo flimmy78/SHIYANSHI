@@ -1031,6 +1031,13 @@ namespace Langben.App.Controllers
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             PROJECTTEMPLET entity = new PROJECTTEMPLET();
             string currentPerson = GetCurrentPerson();
+            if (string.IsNullOrWhiteSpace(currentPerson))
+            {
+
+                result.Code = Common.ClientCode.Fail;
+                result.Message = "超时，请点击右上角的 安全退出，重新登陆";
+                return Json(result); //提示插入失败
+            }
             entity.CREATETIME = DateTime.Now;
             entity.CREATEPERSON = currentPerson;
             entity.RULEID = RULEID;
