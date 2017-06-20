@@ -239,6 +239,7 @@
         }
 
         function pageWuCha(obj, first, second, third, gold, pointObj) {
+            debugger
             var name = $(obj).attr("name");
             var id = $(obj).attr("id");
             id = id.substring(id.indexOf('_'));
@@ -247,8 +248,8 @@
             second = second + id;//改动的地方，参与计算的列的name值
             third = third + id;
             gold = gold + id;//改动的地方，误差的列的name值
-
-            pointObj = pointObj + id;
+            var tongdaoid = id.split('_')[1]
+            pointObj = pointObj +"_"+ tongdaoid + "_1_1";
 
             var firstData = $(obj).parent().parent().find("#" + first).val();
             var secondData = $(obj).parent().parent().find("#" + second).val();
