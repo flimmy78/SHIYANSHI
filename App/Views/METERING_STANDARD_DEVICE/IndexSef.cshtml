@@ -10,6 +10,9 @@
         <div class="editor-form">
             &nbsp&nbsp @Html.Label("编号")：@Html.Editor("bianhao")
         </div>
+        <div class="editor-form">           
+            &nbsp&nbsp @Html.Label("型号")：@Html.Editor("xinghao")
+        </div>
         <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
             查 询
         </a>
@@ -106,7 +109,8 @@
 
         //将查询条件按照分隔符拼接成字符串
         var search = "";
-        search += "FACTORY_NUM" + "&" + $("#bianhao").val();
+        search += "FACTORY_NUM" + "&" + $("#bianhao").val() + "^";
+        search += "XINGHAO" + "&" + $("#xinghao").val() + "^";
         //执行查询
         $('#flexigridData').datagrid('load', { search: search });
     };
