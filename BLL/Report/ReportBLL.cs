@@ -3140,6 +3140,10 @@ namespace Langben.Report
                     //{
                     //    continue;
                     //}
+                    //if (iVTEST_ITE.RULEID != "1264-2010_3_1")
+                    //{
+                    //    continue;
+                    //}
                     //1085-2013_7电能标准偏差估计值报告不打印
                     if ((type == ExportType.Report_JianDing || type == ExportType.Report_XiaoZhun || type == ExportType.Report_XiaoZhun_CNAS) && iVTEST_ITE.RULEID == "1085-2013_7")
                     {
@@ -3165,6 +3169,12 @@ namespace Langben.Report
                     //相同检测项只展示一个标题  
 
                     bool IsSameRuleName = false;
+
+                    if(type== ExportType.Report_JianDing && (iEntity.RULEID== "169-2010_4_2" || iEntity.RULEID== "169-2010_4_3"))//检定报告中检测项不打印
+                    {
+                        continue;
+                    }
+
                     if (((SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null)
                         || (iVTEST_ITE.NAME == "基本误差" && iVTEST_ITE.PARENTID == "166-1993_3")
                         || (iVTEST_ITE.NAME == "基本误差" && iVTEST_ITE.PARENTID == "125-2004_9")
@@ -4336,7 +4346,14 @@ namespace Langben.Report
 
                     HSSFFont normalFont = (HSSFFont)workbook.CreateFont();
                     normalFont.IsItalic = true;
-                    normalFont.FontName = "宋体";
+                    if (spec.Code.Trim() == "cosφ")
+                    {
+                        normalFont.FontName = "Times New Roman";
+                    }
+                    else
+                    {
+                        normalFont.FontName = "宋体";
+                    }
                     int startIndex = speStartIndex;
                     if (startIndex < 0)
                     {
