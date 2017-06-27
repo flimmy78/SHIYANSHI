@@ -173,17 +173,41 @@
     
         //离开事件，用于计算
         function blurValue(obj) { 
-            wuCha1(obj, "ACTUALVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR", "select")
+            wuChateshu(obj, "ACTUALVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR", "select")
            // wuCha(obj, "RANGE", "OUTPUTVALUE", "READVALUE", "SHIJISHUCHUZHI", "ACTUALVALUE")
         }
         //离开事件，用于计算
         function blurValue1(obj) { 
             BiaoChenZhi1(obj, "RANGE", "OUTPUTVALUE", "READVALUE", "SHIJISHUCHUZHI", "ACTUALVALUE")
-            wuCha1(obj, "ACTUALVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR", "select")
+            wuChateshu(obj, "ACTUALVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR", "select")
         }
         ///重新计算页面上标准输出值
 
-     
+        function wuChateshu(obj, shiji, biaochen, target, point) {
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+            var liangcheng = id.split('_')[2];
+            var rowidx = id.split('_')[3];
+
+            var biaochenName = biaochen + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
+            var shijiName = shiji + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
+            var targetName = target + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
+            var pointName = point// point + "_" + tongdao + "_" + liangcheng + "_" + rowidx;
+
+            var biaochenValue = $("#" + biaochenName).val();
+            var shiJiValue = $("#" + shijiName).val();
+            var yuxunwucha = $("#" + pointName).val();
+            var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+            var length = txtPointLen;// yuxunwucha.split(".").length == 2 ? yuxunwucha.split(".")[1].length : 0
+            if (biaochenValue != "" && shiJiValue != "")
+                //var wucha2 = parseFloat(fomatFloat(parseFloat((parseFloat(shiJiValue) - parseFloat(biaochenValue)) / parseFloat(biaochenValue) * 100), (length + 1))).toFixed((length + 1));
+                var wucha2 = parseFloat(fomatFloat(parseFloat((parseFloat(biaochenValue) - parseFloat(shiJiValue)) / parseFloat(biaochenValue) * 100), (length))).toFixed((length));
+            $(obj).parent().parent().find("#" + targetName).val(wucha2);
+
+        }
   
          
    
