@@ -193,7 +193,7 @@
                 var celiangpingjunzhi = $(tr).children().eq(6).find('input').val();
                 var erdengbiaozhundianzu = $(tr).children().eq(3).find('input').val();
 
-                if ((beicebiaozhunzhi != "" && celiangpingjunzhi != "" && erdengbiaozhundianzu != "") && (beicebiaozhunzhi == "0.0001" || beicebiaozhunzhi == "0.001" || beicebiaozhunzhi != "0.01" || beicebiaozhunzhi != "0.1")) {
+                if ((beicebiaozhunzhi != "" && celiangpingjunzhi != "" && erdengbiaozhundianzu != "") && (beicebiaozhunzhi == "0.0001" || beicebiaozhunzhi == "0.001" || beicebiaozhunzhi == "0.01" || beicebiaozhunzhi == "0.1")) {
                     var shijizhi = fomatFloat(accAdd(accMul(accMul(parseFloat(beicebiaozhunzhi), Math.pow(10, -6)), accAdd(parseFloat(celiangpingjunzhi), parseFloat(erdengbiaozhundianzu))), parseFloat(beicebiaozhunzhi)), arry[0].length);
                     $(tr).children().eq(7).find('input').val(parseFloat(shijizhi).toFixed(arry[0].length));;
                 }

@@ -338,7 +338,7 @@ function LianDongBuQueDingDu(obj) {
             var ShuChuShiZhiID = JiSuanBuQueDingDuPara.ShuChuShiZhi + id;
             var ShuChuShiZhiObj = document.getElementById(ShuChuShiZhiID);
             if (ShuChuShiZhiObj != null) {
-                ShuChuShiZhi = ShuChuShiZhiObj.value;
+                ShuChuShiZhi = Math.abs(ShuChuShiZhiObj.value);
             }
         }
         if (ShuChuShiZhi == "NaN") {
@@ -853,9 +853,25 @@ function CalculateForAddLianCheng(Rowidx, objName) {
         arry.push((number * 0.6).toFixed(pointLen));
         arry.push((number * 0.1).toFixed(pointLen));
     }
+    if (point == 4) {
+        //输入的检测点是4的时候，规则为按照输入是3的计算，第二行的值是第一行值的负数
+        arry.push((number * 1).toFixed(pointLen));
+        arry.push((-(number * 1)).toFixed(pointLen));
+        arry.push((number * 0.6).toFixed(pointLen));
+        arry.push((number * 0.1).toFixed(pointLen));
+    }
     if (point == 5) {
         //输入的检测点是5的时候，按照量程*100%，量程*80%，量程*60%，量程*40%，量程*20%作为默认标准值显示
         arry.push((number * 1).toFixed(pointLen));
+        arry.push((number * 0.8).toFixed(pointLen));
+        arry.push((number * 0.6).toFixed(pointLen));
+        arry.push((number * 0.4).toFixed(pointLen));
+        arry.push((number * 0.2).toFixed(pointLen));
+    }
+    if (point == 6) {
+        //输入的检测点是6的时候，规则为按照输入是5的计算，第二行的值是第一行值的负数
+        arry.push((number * 1).toFixed(pointLen));
+        arry.push((-(number * 1)).toFixed(pointLen));
         arry.push((number * 0.8).toFixed(pointLen));
         arry.push((number * 0.6).toFixed(pointLen));
         arry.push((number * 0.4).toFixed(pointLen));
