@@ -3187,7 +3187,7 @@ namespace Langben.Report
 
                         IsSameRuleName = true;
                     }
-                    else
+                    if(IsSameRuleName==false ||(iVTEST_ITE.RULEID== "125-2004_9_2" && type== ExportType.Report_JianDing))
                     {
 
                         CopyRow(sheet_Source, sheet_Destination, ruleTitleTemplateIndex, RowIndex, 1, false);
