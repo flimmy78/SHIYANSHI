@@ -778,7 +778,7 @@ function showModal(me, url) { //弹出窗体
             ShowBuQueDingDuId = me.split("^")[2];
         }
     }
-    var reValue = window.showModalDialog(url, window, "dialogHeight:500px; dialogWidth:987px;  status:off; scroll:auto");
+    var reValue = window.showModalDialog(url, window, "dialogHeight:600px; dialogWidth:1024px;  status:off; scroll:auto");
 
     if (reValue == null || reValue == "undefined" || reValue == "") {
         return; //如果返回值为空，就返回
