@@ -3170,7 +3170,7 @@ namespace Langben.Report
 
                     bool IsSameRuleName = false;
 
-                    if(type== ExportType.Report_JianDing && (iEntity.RULEID== "169-2010_4_2" || iEntity.RULEID== "169-2010_4_3"))//检定报告中检测项不打印
+                    if(type== ExportType.Report_JianDing && (iVTEST_ITE.RULEID== "169-2010_4_2" || iVTEST_ITE.RULEID== "169-2010_4_3"))//检定报告中检测项不打印
                     {
                         continue;
                     }
