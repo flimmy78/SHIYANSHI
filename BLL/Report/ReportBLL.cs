@@ -3187,12 +3187,15 @@ namespace Langben.Report
 
                         IsSameRuleName = true;
                     }
-                    if(IsSameRuleName==false ||(iVTEST_ITE.RULEID== "125-2004_9_2" && type== ExportType.Report_JianDing))
+                    string msg = string.Empty;
+                    if (iEntity != null && type == ExportType.Report_JianDing)//处理检定报告 是否出表格
                     {
+                       
+                        IsBiaoGe = IsBiaoGeByDengJi(iEntity, ref msg);
+                    }
 
-                        CopyRow(sheet_Source, sheet_Destination, ruleTitleTemplateIndex, RowIndex, 1, false);
-
-
+                    if (IsSameRuleName==false)
+                    {
                         string celStr = i.ToString() + "、";
 
                         if (iVTEST_ITE.NAME != null && iVTEST_ITE.NAME.Trim() != "")
@@ -3206,8 +3209,8 @@ namespace Langben.Report
                         }
                         else if (iEntity != null && type == ExportType.Report_JianDing && entity.CONCLUSION == "合格")//处理检定报告 总结论是合格 ，如果不合格都出数据，不出合格不合格
                         {
-                            string msg = string.Empty;
-                            IsBiaoGe = IsBiaoGeByDengJi(iEntity, ref msg);
+                            //string msg = string.Empty;
+                            //IsBiaoGe = IsBiaoGeByDengJi(iEntity, ref msg);
                             if (!IsBiaoGe && (msg != null && msg.Trim() != ""))
                             {
                                 celStr = celStr + msg;
@@ -3220,7 +3223,7 @@ namespace Langben.Report
                         }
                         else if (iEntity != null && type == ExportType.Report_JianDing && entity.CONCLUSION == "不合格")//处理检定报告 总结论是合格 ，如果不合格都出数据，不出合格不合格
                         {
-                            string msg = string.Empty;
+                            //string msg = string.Empty;
                             IsBiaoGe = true;// IsBiaoGeByDengJi(iEntity, ref msg);
                             if (!IsBiaoGe && (msg != null && msg.Trim() != ""))
                             {
@@ -3235,7 +3238,10 @@ namespace Langben.Report
                         else if (iEntity == null)
                         {
                             celStr = celStr + "/";
-                        }
+                        }                      
+
+                        CopyRow(sheet_Source, sheet_Destination, ruleTitleTemplateIndex, RowIndex, 1, false);
+
                         sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue(celStr);
                         RowIndex++;
                         IsHaveHideData = false;
@@ -3293,7 +3299,7 @@ namespace Langben.Report
                         //解析html表格数据    
                         //int RowIndexT = RowIndex;                       
                         RowIndex = paserData_1(iEntity, IsSameRuleName, sheet_Source, sheet_Destination, RowIndex, temp, ref IsHaveHideData, allSpecialCharacters, type, iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan);
-
+                        RowIndex++;
                         //if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
 
                         //{
@@ -3329,12 +3335,14 @@ namespace Langben.Report
                     }
                     else
                     {
-                        //增加一行空行
-                        CopyRow(sheet_Source, sheet_Destination, 5, RowIndex, 1, true);
+
+                        if (IsSameRuleName == false)
+                        {                            //增加一行空行
+                            CopyRow(sheet_Source, sheet_Destination, 5, RowIndex, 1, true);
+                            RowIndex++;
+                        }
                     }
 
-
-                    RowIndex++;
                     SameRuleName = iVTEST_ITE.NAME;
 
                     #endregion
