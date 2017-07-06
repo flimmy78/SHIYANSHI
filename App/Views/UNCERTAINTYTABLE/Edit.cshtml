@@ -62,7 +62,7 @@
                                 <option value="5720A直流电流测量">5720A直流电流测量</option>
                                 <option value="5720A直流电压测量">5720A直流电压测量</option>
                                 <option value="5720A直流电阻测量">5720A直流电阻测量</option>
-                                <option value="8508A交流电流输出">85080A交流电流输出</option>
+                                <option value="8508A交流电流输出">8508A交流电流输出</option>
                                 <option value="8508A交流电压变换器">8508A交流电压变换器</option>
                                 <option value="8508A交流电压输出">8508A交流电压输出</option>
                                 <option value="8508A直流电流输出">8508A直流电流输出</option>
@@ -322,7 +322,7 @@
     function gradeChange(ex) {
         var zhi = $(ex).val();
         var idx = $(ex).attr("id").split("_")[1];
-        if (zhi == "5720A交流电流测量" || zhi == "5720A直流电流测量" || zhi == "85080A交流电流输出" || zhi == "8508A直流电流输出") {
+        if (zhi == "5720A交流电流测量" || zhi == "5720A直流电流测量"  || zhi == "8508A直流电流输出" || zhi == "8508A交流电流输出") {
             getCity($("#THEUNIT_" + idx));
             getCity($("#ENDUNIT_" + idx));
             getCity($("#INDEX1UNIT_" + idx));
@@ -474,7 +474,7 @@
         var s = "@Model.UNCERTAINTYTABLEShow.Count";
         for (var i = 0; i < s; i++) {
             var zhi = $("#ASSESSMENTITEM_x_" + i + "").val();
-            if (zhi == "5720A交流电流测量" || zhi == "5720A直流电流测量" || zhi == "85080A交流电流输出" || zhi == "8508A直流电流输出") {
+            if (zhi == "5720A交流电流测量" || zhi == "5720A直流电流测量" || zhi == "8508A交流电流输出" || zhi == "8508A直流电流输出") {
                 tianjiazhi("THEUNIT_" + +i + ",ENDUNIT_" + +i + ",INDEX1UNIT_" + +i + ",INDEX2UNIT_" + +i + "", "电流")
             }
             else if (zhi == "5720A交流电压测量单相" || zhi == "5720A交流电压测量三相" || zhi == "5720A直流电压测量" || zhi == "8508A交流电压变换器" || zhi == "8508A交流电压输出" || zhi == "8508A直流电压输出") {
