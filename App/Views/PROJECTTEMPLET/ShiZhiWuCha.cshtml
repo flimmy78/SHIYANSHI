@@ -82,7 +82,8 @@
                 //计算默认值
                 if (rowidx == 0) {
                     //需要合并的列 //额定电压
-                    htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, "", "", "", "", "EDingDianYa"));
+                    //     htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, "", "", "", "", "EDingDianYa"));
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, "", "", "", ""));
                         //(txtPoint, "RANGE", lianChengID, rowidx, "", "", "", ""));
                     //量程
                     htmlString.push(SetTDHtml(txtPoint, "OUTPUTVALUE", lianChengID, rowidx, txtNumber, "", "", ""));

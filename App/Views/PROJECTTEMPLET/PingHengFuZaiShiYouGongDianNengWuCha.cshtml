@@ -24,7 +24,7 @@
         <th  align="center">y1(%)</th>
         <th  align="center">y2(%)</th>
         <th  align="center">y平均(%)</th>
-        <th  align="center">y化整(%)</th>
+        <th  align="center">γ(%)</th>
         <th align="center" >
             校准结果的不确定度<br>
             U(k =
@@ -74,7 +74,7 @@
             LiangChengShuLiang++;
             var txtNumber = $("#txtNumber").val();     //量程值
             var txtPoint = $("#txtPoint").val();     //检测点数
-            var txtPointLen = $("#txtPointLen").val(); //小数点位数
+            var txtPointLen = 0; //$("#txtPointLen").val(); //小数点位数
 
             var htmlString = [];
             var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
@@ -222,10 +222,10 @@
                 <td align="right">检测点数：</td>
                 <td><input type="text" id="txtPoint" name="txtPoint" value="" class="my-textbox  required digits" style="width:200px" /></td>
             </tr>
-            <tr>
+          <!--  <tr>
                 <td align="right">小数点位数：</td>
                 <td><input type="text" id="txtPointLen" name="txtPointLen" value="" class="my-textbox  required digits" style="width:200px" /></td>
-            </tr>
+            </tr>-->
         </table>
     </div>
     <!--/增加量程弹层-->

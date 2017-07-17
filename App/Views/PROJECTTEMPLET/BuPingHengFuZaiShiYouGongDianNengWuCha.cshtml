@@ -22,7 +22,7 @@
         <th align="center" width="100">y1(%)</th>
         <th align="center" width="100">y2(%)</th>
         <th align="center" width="100">y平均(%)</th>
-        <th align="center" width="100">y化整(%)</th>
+        <th align="center" width="100">γ化整(%)</th>
         <th align="center">
             校准结果的不确定度<br>
             U(k =
@@ -447,8 +447,11 @@
                 $(obj).parent().parent().find("#" + T8).val(data);
             }
             var T8Data = $(obj).parent().parent().find("#" + T8).val(); //T8 y平均(%)
-            var txtPointLen1 = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-            txtPointLen1 = parseFloat(txtPointLen1);
+            var txtPointLen1 = 0; //小数点位数
+            try { txtPointLen1 = arg1.toString().split(".")[1].length } catch (e) {
+                txtPointLen1 = 0;
+            }
+            txtPointLen1 = parseFloat(txtPointLen1)+1;
             //y化整(%)=Round(横杠y/等级,1)*等级,比准确度等级多一位。
             if (T8Data != "" && zhidingwuchaData != "") {
                 T8Data = parseFloat(T8Data);
