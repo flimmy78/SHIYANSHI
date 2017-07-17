@@ -211,13 +211,19 @@
             @if (ViewBag.ACCEPT_ORGNIZATION == "华北电力科学研究院有限责任公司")
             {
                 <div class="input_search-field">
-                    @Html.DropDownList("CHECK_PLACE", Models.SysFieldModels.GetSysField("JianLiFangAn", "CHECK_PLACE"), "请选择", new { id = "CHECK_PLACE", @class = "easyui-combobox" })
+                    <select id="CHECK_PLACE" name="CHECK_PLACE">
+                        <option value="">请选择</option>
+                    </select>
+                    @*@Html.DropDownList("CHECK_PLACE", Models.SysFieldModels.GetSysField("JianLiFangAn", "CHECK_PLACE"), "请选择", new { id = "CHECK_PLACE", @class = "easyui-combobox" })*@
                 </div>
             }
             else if (ViewBag.ACCEPT_ORGNIZATION == "冀北电力有限公司计量中心")
             {
                 <div class="input_search-field">
-                    @Html.DropDownList("CHECK_PLACE", Models.SysFieldModels.GetSysField("JianLiFangAn", "CHECK_PLACE2"), "请选择", new { id = "CHECK_PLACE", @class = "easyui-combobox" })
+                    <select id="CHECK_PLACE" name="CHECK_PLACE">
+                        <option value="">请选择</option>
+                    </select>
+                    @*@Html.DropDownList("CHECK_PLACE", Models.SysFieldModels.GetSysField("JianLiFangAn", "CHECK_PLACE2"), "请选择", new { id = "CHECK_PLACE", @class = "easyui-combobox" })*@
                 </div>
             }
 
@@ -279,8 +285,8 @@
                     <tr>
                         <td width="120">
                             <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="showModalMany('METERING_STANDARD_DEVICEID', '../../METERING_STANDARD_DEVICE/IndexSef/@ViewBag.UNDERTAKE_LABORATORY_NAME');">选择测试器具</a>
-                           
-                            </td>
+
+                        </td>
                         <td>
                             <div id="checkMETERING_STANDARD_DEVICEID">
 
@@ -325,7 +331,7 @@
             </div>
             <div class="input_search-field">
                 <a class="easyui-linkbutton" onclick="javascript: window.location.href = '/VJIANDINGRENWU/Index';">返回</a>
-                <a class="easyui-linkbutton" onclick="xiayibu()">下一步</a>
+                @*<a class="easyui-linkbutton" onclick="xiayibu()">下一步</a>*@
                 <a class="easyui-linkbutton" onclick="baochun()">保存下一步</a>
             </div>
         </div>
@@ -339,8 +345,62 @@
         $("#CALIBRATION_DATE").datebox({ "required": true });//true为必填项
         //核验员数据加载
         $("#DETECTERID").combobox('select', "@Model.DETECTERID");
+
+        //鉴定地点判断
+        if ("@ViewBag.ACCEPT_ORGNIZATION" == "华北电力科学研究院有限责任公司") {
+            getCity($("#CHECK_PLACE"));
+            if ("@ViewBag.UNDERTAKE_LABORATORY_NAME" == "@Common.LABORATORYNAME.电能.ToString()") {
+                $("<option></option>")
+                           .val("电研大厦A座711")
+                           .text("电研大厦A座711")
+                           .appendTo($("#CHECK_PLACE"));
+                $("<option></option>")
+                          .val("电研大厦A座712")
+                          .text("电研大厦A座712")
+                          .appendTo($("#CHECK_PLACE"));
+            }
+            else if ("@ViewBag.UNDERTAKE_LABORATORY_NAME" == "@Common.LABORATORYNAME.互感器.ToString()") {
+                $("<option></option>")
+                       .val("电研大厦A座709")
+                       .text("电研大厦A座709")
+                       .appendTo($("#CHECK_PLACE"));
+            }
+            else if ("@ViewBag.UNDERTAKE_LABORATORY_NAME" == "@Common.LABORATORYNAME.指示仪表.ToString()") {
+                $("<option></option>")
+                     .val("电研大厦A座713")
+                     .text("电研大厦A座713")
+                     .appendTo($("#CHECK_PLACE"));
+            }
+            else if ("@ViewBag.UNDERTAKE_LABORATORY_NAME" == "@Common.LABORATORYNAME.数表三相.ToString()" || "@ViewBag.UNDERTAKE_LABORATORY_NAME" == "@Common.LABORATORYNAME.数表单相.ToString()") {
+                $("<option></option>")
+                .val("电研大厦A座712")
+                .text("电研大厦A座712")
+                .appendTo($("#CHECK_PLACE"));
+            }
+            else if ("@ViewBag.UNDERTAKE_LABORATORY_NAME" == "@Common.LABORATORYNAME.直流仪器.ToString()") {
+
+                $("<option></option>")
+            .val("电研大厦A座715")
+            .text("电研大厦A座715")
+            .appendTo($("#CHECK_PLACE"));
+            }
+        }
+        else if ("@ViewBag.ACCEPT_ORGNIZATION" == "冀北电力有限公司计量中心") {
+            getCity($("#CHECK_PLACE"));
+            if ("@ViewBag.UNDERTAKE_LABORATORY_NAME" == "@Common.LABORATORYNAME.电能.ToString()") {
+                $("<option></option>")
+                    .val("计量中心309电能实验室")
+                    .text("计量中心309电能实验室")
+                    .appendTo($("#CHECK_PLACE"));
+                $("<option></option>")
+                    .val("计量中心310电能实验室")
+                    .text("计量中心310电能实验室")
+                    .appendTo($("#CHECK_PLACE"));
+            }
+        }
         //校准地点数据加载
-        $("#CHECK_PLACE").combobox('select', "@Model.CHECK_PLACE");
+        $("#CHECK_PLACE").val("@Model.CHECK_PLACE");
+        @*$("#CHECK_PLACE").combobox('select', "@Model.CHECK_PLACE");*@
         //************************
         //输入框的禁用
         if ("@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.审核驳回.ToString()" || "@ViewBag.REPORTSTATUS" == "@Common.REPORTSTATUS.批准驳回.ToString()" || "@ViewBag.REPORTSTATUS" == "") {
@@ -351,8 +411,16 @@
                 $(this).attr("disabled", true);
             });
         }
-    })
 
+    })
+    //清空下拉框
+    function getCity(City) {
+        $(City).empty();
+        $("<option></option>")
+                .val("")
+                .text("请选择")
+                .appendTo($(City));
+    }
     //下一步
     function xiayibu() {
         window.location.href = "/PREPARE_SCHEME/Edit?ID=" + "@Model.ID";
@@ -367,13 +435,14 @@
         arr.RATED_FREQUENCY = $("#RATED_FREQUENCY").val();//额定频率
         arr.TEMPERATURE = $("#TEMPERATURE").val();//环境温度
         arr.HUMIDITY = $("#HUMIDITY").val();//相对湿度
-        arr.CHECK_PLACE = $('#CHECK_PLACE').combobox('getValue');//检定/校准地点
+        //arr.CHECK_PLACE = $('#CHECK_PLACE').combobox('getValue');//检定/校准地点
+        arr.CHECK_PLACE = $('#CHECK_PLACE').val();
         arr.CALIBRATION_DATE = $('#CALIBRATION_DATE').datebox('getValue');//检定/校准日期
         arr.DETECTERID = $('#DETECTERID').combobox('getValue');//核验员
         arr.RATED_FREQUENCY = $("#RATED_FREQUENCY").val();//额定频率
         arr.OTHER = $("#OTHER").val();//其他
         arr.METERING_STANDARD_DEVICEID = $("#METERING_STANDARD_DEVICEID").val();//新的标准器id
-        arr.METERING_STANDARD_DEVICEIDOld = $("#METERING_STANDARD_DEVICEIDOld").val();//旧的标准器id 
+        arr.METERING_STANDARD_DEVICEIDOld = $("#METERING_STANDARD_DEVICEIDOld").val();//旧的标准器id
         arr.ID = "@Model.ID";
         if (arr.SCHEMEID == '') {
             $.messager.alert('操作提示', "请选择方案模板！", 'error');
