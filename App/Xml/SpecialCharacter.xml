@@ -1,19 +1,139 @@
 <!--特殊字符-->
 <SpecialCharacters>
 	<SpecialCharacterList>
-	<SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γ</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>-1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γ0</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γ1</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γ2</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γ3</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γ4</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γ5</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γ6</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γ7</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γ8</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γ9</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>1</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γ10</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>2</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γ11</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>2</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γ12</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>2</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γ平均</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>2</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γ化整</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>2</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γmax</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>3</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γmax</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>3</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γmin</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>3</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
+			<!--特殊字符-->
+			<Code>γmax</Code>
+			<!--下标后几位，如果没有填-1-->
+			<SubscriptLastCount>3</SubscriptLastCount>
+		</SpecialCharacter>
+		<SpecialCharacter>
 			<!--特殊字符-->
 			<Code>ΔI/I</Code>
 			<!--下标后几位，如果没有填-1-->
 			<SubscriptLastCount>-1</SubscriptLastCount>
 		</SpecialCharacter>
-	<SpecialCharacter>
+		<SpecialCharacter>
 			<!--特殊字符-->
 			<Code>ΔU/U</Code>
 			<!--下标后几位，如果没有填-1-->
 			<SubscriptLastCount>-1</SubscriptLastCount>
 		</SpecialCharacter>
-	<SpecialCharacter>
+		<SpecialCharacter>
 			<!--特殊字符-->
 			<Code>∆i</Code>
 			<!--下标后几位，如果没有填-1-->
