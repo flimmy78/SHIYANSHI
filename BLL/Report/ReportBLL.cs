@@ -2036,7 +2036,7 @@ namespace Langben.Report
         /// <param name="fEntity">返回附件实体</param>
         /// <returns></returns>
         public bool ExportOriginalRecord(string ID, string Person, out string Message, out FILE_UPLOADER fEntity)
-        {
+        { 
             fEntity = new FILE_UPLOADER();
             IBLL.IPREPARE_SCHEMEBLL m_BLL = new PREPARE_SCHEMEBLL();
             PREPARE_SCHEME entity = m_BLL.GetById(ID);
