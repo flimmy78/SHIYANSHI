@@ -4237,6 +4237,13 @@ namespace Langben.Report
                 notItalicEndIndex = speStartIndex + 5;//非斜体结束位置    
 
             }
+            else if(value.ToUpper().IndexOf("COS")>=0)
+            {
+                SpecialStr = value.ToUpper().Substring(value.ToUpper().IndexOf("COS"));
+                speStartIndex= value.ToUpper().IndexOf("COS");
+                notItalicStartIndex = value.ToUpper().IndexOf("COS");//非斜体开始位置
+                notItalicEndIndex = notItalicStartIndex + 2;//非斜体结束位置   
+            }
             else if (value.ToUpper().IndexOf("δx1".ToUpper()) >= 0)
             {
                 speStartIndex = value.Trim().ToUpper().IndexOf("δx1".ToUpper());
