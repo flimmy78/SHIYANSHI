@@ -173,7 +173,15 @@
                 }
                        
         <tr>
-            <td style="background:#FCFCFC">结论说明：</td>
+            @if (Model != null && Model.prepare_scheme != null && Model.prepare_scheme.CERTIFICATE_CATEGORY == "检定")
+            {
+
+            <td style="background:#FCFCFC">其他说明:</td>
+            }
+            else
+            {
+                <td style="background:#FCFCFC">校准说明:</td>
+            }
             <td colspan="2" align="left"><textarea rows="1" style="width:97%; height:26px" id="CONCLUSION_EXPLAIN">@Model.prepare_scheme.CONCLUSION_EXPLAIN</textarea></td>
 
         </tr>
