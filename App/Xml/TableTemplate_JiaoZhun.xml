@@ -11089,6 +11089,7 @@
 							<IsMergeSameValue>N</IsMergeSameValue>
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
+							<IsNullShow>N</IsNullShow>
 						</Cell>
 					</CellList>
 				</RowInfo>
@@ -11127,6 +11128,7 @@
 							<IsMergeSameValue>N</IsMergeSameValue>
 							<IsHideRowNull>N</IsHideRowNull>
 							<IsMergeNullValue>N</IsMergeNullValue>
+							<IsNullShow>N</IsNullShow>
 						</Cell>
 					</CellList>
 				</RowInfo>

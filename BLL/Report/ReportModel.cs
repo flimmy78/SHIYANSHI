@@ -380,6 +380,17 @@ namespace Langben.Report
             set { _IsMergeNullValue = value; }
         }
 
+        private string _IsNullShow = "Y";
+        /// <summary>
+        /// 空值是否显示，用于整行都需要显示，有个别不用显示的（例如：1085-2013_8、1085-2013_9表头最后一列如果为空不要展示/
+        /// </summary>
+        [XmlElement("IsNullShow")]
+        public string IsNullShow
+        {
+            get { return _IsNullShow; }
+            set { _IsNullShow = value; }
+        }
+
 
     }
     /// <summary>

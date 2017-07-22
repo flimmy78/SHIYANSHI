@@ -4177,10 +4177,11 @@ namespace Langben.Report
                 }
                 if (DongTaiShuJuList != null && DongTaiShuJuList.Count > 0)
                 {
+                    Cell c = rowInfoList.FirstOrDefault().Cells.FirstOrDefault(p => p.Code == DongTaiShuJuList.FirstOrDefault().name);
 
                     value = string.Format(sourceCell.StringCellValue, DongTaiShuJuList.FirstOrDefault().value).Trim();
 
-                    if (IsNullShow && (string.IsNullOrEmpty(value) || value.Trim() == ""))
+                    if (IsNullShow && (c!=null && c.IsNullShow=="Y") && (string.IsNullOrEmpty(value) || value.Trim() == ""))
                     {
                         value = "/";
                         SpecialStr = "/";
@@ -5269,7 +5270,8 @@ namespace Langben.Report
                                     //解决有的表头为空时需要显示/
                                     if (iEntity.RULEID == "125-2004_9_1" || iEntity.RULEID == "982-2003_6_1" ||
                                         iEntity.RULEID == "982-2003_6_2" || iEntity.RULEID == "1072-2011_6_1" ||
-                                        iEntity.RULEID == "166-1993_3_4" || iEntity.RULEID== "124-2005_3")
+                                        iEntity.RULEID == "166-1993_3_4" || iEntity.RULEID== "124-2005_3" || 
+                                        iEntity.RULEID== "1085-2013_8" || iEntity.RULEID== "1085-2013_9")
                                     {
                                         CopyRow_1(sheet_Source, sheet_Destination, t.RowIndex + k, rowIndex_Destination, 1, true, temp.TableTitleList, allSpecialCharacters, headDic[tongDaoID], true);
                                     }
