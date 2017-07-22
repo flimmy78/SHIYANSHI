@@ -2796,7 +2796,7 @@ namespace Langben.Report
             else
             {
                 //检定结论  
-                RowIndex = RowIndex + 2;
+                RowIndex++;
                 if (entity.CALIBRATION_INSTRUCTIONS == null || entity.CALIBRATION_INSTRUCTIONS.Trim() == "")
                 {
                     sheet_Destination.GetRow(RowIndex).GetCell(5).SetCellValue("/");
