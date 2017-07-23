@@ -2569,7 +2569,7 @@ namespace Langben.Report
             }
             //脉冲常数
             if (entity.PULSE_CONSTANT == null || entity.PULSE_CONSTANT.Trim() == "")
-            {
+            { 
                 HideRow(sheet_Destination, 12, 1);
             }
             else
