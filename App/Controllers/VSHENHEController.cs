@@ -114,11 +114,11 @@ namespace Langben.App.Controllers
             {
                 if (IDD[1] == "H")
                 {
-                    if (account.UNDERTAKE_LABORATORYName == item.UNDERTAKE_LABORATORYID)
-                    {
+                    //if (account.UNDERTAKE_LABORATORYName == item.UNDERTAKE_LABORATORYID)
+                    //{
                         APPLIANCE_DETAIL_INFORMATIONID = item.APPLIANCE_DETAIL_INFORMATIONID;
                         ViewBag.REPORTSTATUS = item.PREPARE_SCHEME.REPORTSTATUS;//报告状态用来判断是否启用
-                    }
+                    //}
                 }
                 else
                 {
