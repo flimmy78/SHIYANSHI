@@ -96,6 +96,7 @@
             ],
             columns: [[
 					{ field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 77, hidden: true }
+                    , { field: '123', title: '', width: 64, checkbox: true }
                     , { field: 'BAR_CODE_NUM', title: '@Html.DisplayNameFor(model => model.BAR_CODE_NUM)' }
 					//, { field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 77 }
 					, { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width:100 }
@@ -130,7 +131,7 @@
 
         //将查询条件按照分隔符拼接成字符串
         var search = "";
-        var rows = $('#flexigridData').datagrid('getSelections');
+        var rows = $('#flexigridData').datagrid('getChecked');
         if (rows.length == 0) {
             $.messager.alert('操作提示', '请选择数据!', 'warning');
             return false;
@@ -166,7 +167,7 @@
     //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
     function flexiSelect() {
 
-        var rows = $('#flexigridData').datagrid('getSelections');
+        var rows = $('#flexigridData').datagrid('getChecked');
         if (rows.length == 0) {
             $.messager.alert('操作提示', '请选择数据!', 'warning');
             return false;
@@ -190,7 +191,7 @@
 
     //入库
     function flexiDelete() {
-        var rows = $('#flexigridData').datagrid('getSelections');
+        var rows = $('#flexigridData').datagrid('getChecked');
         if (rows.length == 0) {
             $.messager.alert('操作提示', '请选择数据!', 'warning');
             return false;

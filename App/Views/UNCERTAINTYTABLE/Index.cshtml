@@ -47,6 +47,7 @@
             ],
             columns: [[
                  { field: 'ID', title: 'ID', width: 29, hidden: true }
+                , { field: '123', title: '', width: 64, checkbox: true }
                , { field: 'ASSESSMENTITEM', title: '评定项/范围', width: 100 }
                , { field: 'ERRORSOURCES', title: '误差来源', width: 100 }
                , { field: 'ERRORLIMITS', title: '误差限', width: 100 }
@@ -77,7 +78,7 @@
     //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
     function flexiSelect() {
 
-        var rows = $('#flexigridData').datagrid('getSelections');
+        var rows = $('#flexigridData').datagrid('getChecked');
         if (rows.length == 0) {
             $.messager.alert('操作提示', '请选择数据!', 'warning');
             return false;
@@ -107,7 +108,7 @@
     //导航到修改的按钮
     function flexiModify() {
 
-        var arr = $('#flexigridData').datagrid('getSelections');
+        var arr = $('#flexigridData').datagrid('getChecked');
 
         if (arr.length == 1) {
             window.location.href = "/METERING_STANDARD_DEVICE/Edit/" + arr[0].METERING_STANDARD_DEVICEID + "^" + arr[0].GROUPS + "^" + "UA" + "^" + arr[0].CATEGORY;
@@ -121,7 +122,7 @@
     //删除的按钮
     function flexiDelete() {
 
-        var rows = $('#flexigridData').datagrid('getSelections');
+        var rows = $('#flexigridData').datagrid('getChecked');
         if (rows.length == 0) {
             $.messager.alert('操作提示', '请选择数据!', 'warning');
             return false;

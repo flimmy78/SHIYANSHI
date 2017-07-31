@@ -118,7 +118,7 @@
     })
     //追加超期原因
     function chaoqi() {
-        var arr = $('#flexigridData').datagrid('getSelections');
+        var arr = $('#flexigridData').datagrid('getChecked');
         if (arr.length == 1) {
             if (arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.试验完成.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.待入库.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.器具已入库.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.器具已领取.ToString()") {
                 if (arr[0].CREATETIME != null) {
@@ -175,7 +175,7 @@
     }
     //退回
     function tuihui() {
-        var arr = $('#flexigridData').datagrid('getSelections');
+        var arr = $('#flexigridData').datagrid('getChecked');
         if (arr.length == 1) {
             if (arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已分配.ToString()" || arr[0].ORDER_STATUS == "@Common.ORDER_STATUS.已领取.ToString()") {
                 $("#d").dialog('open');
@@ -223,7 +223,7 @@
             var entity = new Object();
             debugger;
             var arr = { ID: $("#tuihuiid").val() };
-            var arrt = $('#flexigridData').datagrid('getSelections');
+            var arrt = $('#flexigridData').datagrid('getChecked');
 
             //entity.ID =arrt[0].ORDER_NUMBER;
             entity.APPLIANCE_DETAIL_INFORMATION = arr,
@@ -277,7 +277,7 @@
 
         //&&&&&&&&&&&&&&&&&&&获取当前时间&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
         $('#flexigridData').datagrid({
-            title: '检定任务', //列表的标题
+            title: '检定任务&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;红色为超期（第15天开始）、黄色为预警（第11天开始）', //列表的标题
             iconCls: 'icon-site',
             width: 'auto',
             height: 'auto',
@@ -353,9 +353,11 @@
                      return flexiExport();
                  }
              }
+             
             ],
             columns: [[
                     { field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 64, hidden: true }
+                    , { field: '123', title: '', width: 64, checkbox: true }
                     , { field: 'ORDER_NUMBER', title: '@Html.DisplayNameFor(model => model.ORDER_NUMBER)', width: 100 }
                     , { field: 'REPORTNUMBER', title: '@Html.DisplayNameFor(model => model.REPORTNUMBER)', width: 100 }
                     , { field: 'ISRECEIVE', title: '是否可以领取', align: 'center', width: 80 }
@@ -399,7 +401,7 @@
     });
     //查看原始记录
     function getView() {
-        var arr = $('#flexigridData').datagrid('getSelections');
+        var arr = $('#flexigridData').datagrid('getChecked');
         if (arr.length == 1) {
 
             var id = arr[0].ID;
@@ -474,7 +476,7 @@
 
     //判断是否为领取的器具
     function panduanlingqu() {
-        var arr = $('#flexigridData').datagrid('getSelections');
+        var arr = $('#flexigridData').datagrid('getChecked');
         if (arr.length == 1) {
             if (arr[0].ORDER_STATUS == null) {
                 $.messager.alert('操作提示', '请选择已领取的数据!', 'warning');
@@ -504,7 +506,7 @@
 
     //判断是否选择一条数据
     function panduanyitiao() {
-        var arr = $('#flexigridData').datagrid('getSelections');
+        var arr = $('#flexigridData').datagrid('getChecked');
         if (arr.length == 1) {
             return arr;
         }
@@ -516,7 +518,7 @@
     }
     //领取
     function lingqu() {
-        var arr = $('#flexigridData').datagrid('getSelections');
+        var arr = $('#flexigridData').datagrid('getChecked');
         if (arr.length >= 1) {
             var id = "";
             var APPLIANCECOLLECTIONSATE = "";
@@ -557,14 +559,14 @@
     //选择方案
     function xuanzhefanan() {
         if (panduanlingqu()) {
-            var arr = $('#flexigridData').datagrid('getSelections');
+            var arr = $('#flexigridData').datagrid('getChecked');
             window.location.href = "../VJIANDINGRENWU/Xuanzhefangan/" + arr[0].ID;
         }
     }
 
     //器具修改
     function UpdateView() {
-        var arr = $('#flexigridData').datagrid('getSelections');
+        var arr = $('#flexigridData').datagrid('getChecked');
         if (arr.length >= 1) {
             window.location.href = "../VJIANDINGRENWU/QiJuXiuGai/" + arr[0].ID;
         }

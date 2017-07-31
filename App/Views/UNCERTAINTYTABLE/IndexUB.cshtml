@@ -43,6 +43,7 @@
             ],
             columns: [[
                 { field: 'ID', title: 'ID', width: 200, hidden: true },
+                 { field: '123', title: '', width: 64, checkbox: true },
                    { field: 'ASSESSMENTITEM', title: '评定项', width: 200 }
                   , { field: 'THERANGESCOPE', title: '量程范围', width: 200 }
                   , { field: 'THEFREQUENCY', title: '频率范围', width: 200 }
@@ -73,7 +74,7 @@
     function flexiSelect() {
         debugger
 
-        var rows = $('#flexigridData').datagrid('getSelections');
+        var rows = $('#flexigridData').datagrid('getChecked');
         if (rows.length == 0) {
             $.messager.alert('操作提示', '请选择数据!', 'warning');
             return false;
@@ -102,7 +103,7 @@
     //导航到修改的按钮
     function flexiModify() {
 
-        var arr = $('#flexigridData').datagrid('getSelections');
+        var arr = $('#flexigridData').datagrid('getChecked');
 
         if (arr.length == 1) {
             window.location.href = "/UNCERTAINTYTABLE/Edit/" + arr[0].GROUPS
@@ -115,7 +116,7 @@
     //删除的按钮
     function flexiDelete() {
 
-        var rows = $('#flexigridData').datagrid('getSelections');
+        var rows = $('#flexigridData').datagrid('getChecked');
         if (rows.length == 0) {
             $.messager.alert('操作提示', '请选择数据!', 'warning');
             return false;

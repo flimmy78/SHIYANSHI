@@ -67,7 +67,7 @@
                      }
                  }],
             columns: [[
-                { field: 'ID', title: 'ID', width: 86, hidden: true }
+                { field: 'ID', title: 'ID', width: 86, hidden: true }               
                 , { field: 'NAME', title: '@Html.DisplayNameFor(model => model.NAME)', width: 200, align: 'center' }
                 , { field: 'TEST_RANGE', title: '@Html.DisplayNameFor(model => model.TEST_RANGE)', width: 130, align: 'center' }
                 , { field: 'FACTORY_NUM', title: '@Html.DisplayNameFor(model => model.FACTORY_NUM)', width: 130, align: 'center' }
@@ -204,7 +204,7 @@
     //导航到修改的按钮
     function flexiModify() {
 
-        var arr = $('#flexigridData').datagrid('getSelections');
+        var arr = $('#flexigridData').datagrid('getChecked');
 
         if (arr.length == 1) {
             window.location.href = "../METERING_STANDARD_DEVICE/Edit/" + arr[0].ID;

@@ -44,6 +44,7 @@
             ],
             columns: [[
                 { field: 'ID', title: 'id', width: 129, hidden: true },
+                 { field: '123', title: '', width: 64, checkbox: true },
                 { field: 'MAXCATEGORIES', title: '不确定度/准确度等级/最大允许误差', width: 129 }
                 , { field: 'CERTIFICATE_NUM', title: '证书编号', width: 129 }
                 , { field: 'VALID_TO', title: '有效期', width: 129 }
@@ -69,7 +70,7 @@
     //“选择”按钮，在其他（与此页面有关联）的页面中，此页面以弹出框的形式出现，选择页面中的数据
     function flexiSelect() {
         debugger
-        var rows = $('#flexigridData').datagrid('getSelections');
+        var rows = $('#flexigridData').datagrid('getChecked');
         if (rows.length == 0) {
             $.messager.alert('操作提示', '请选择数据!', 'warning');
             return false;
@@ -98,7 +99,7 @@
     //导航到修改的按钮
     function flexiModify() {
 
-        var arr = $('#flexigridData').datagrid('getSelections');
+        var arr = $('#flexigridData').datagrid('getChecked');
 
         if (arr.length == 1) {
             window.location.href = "/METERING_STANDARD_DEVICE/Edit/" + arr[0].ID + "^" + arr[0].GROUPS + "^" + "A" + "^" + arr[0].CATEGORY;
@@ -112,7 +113,7 @@
     //删除的按钮
     function flexiDelete() {
 
-        var rows = $('#flexigridData').datagrid('getSelections');
+        var rows = $('#flexigridData').datagrid('getChecked');
         if (rows.length == 0) {
             $.messager.alert('操作提示', '请选择数据!', 'warning');
             return false;
