@@ -388,7 +388,9 @@ namespace Langben.App.Controllers
         {
             Common.ClientResult.OrderTaskGong result = new Common.ClientResult.OrderTaskGong();
             {
-                string currentPerson = GetCurrentPerson();
+                Account ac = GetCurrentAccount();
+                string currentPerson =ac.PersonName;
+                
                 if (!string.IsNullOrEmpty(entity.ID))
                 {
                     entity.CREATETIME = DateTime.Now;
