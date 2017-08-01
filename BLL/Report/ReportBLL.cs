@@ -3035,7 +3035,7 @@ namespace Langben.Report
                                 }
                                 if (mItem != null && mItem.VALID_TO.HasValue)
                                 {
-                                    vValue += mItem.VALID_TO.Value.ToString("yyyy/MM/dd") + ",";
+                                    vValue += mItem.VALID_TO.Value.ToString("yyyy-MM-dd") + ",";
                                 }
 
                             }
