@@ -200,7 +200,8 @@ namespace Langben.Report
                 {
                     for (int i = 0; i <= sheet_Destination.LastRowNum; i++)
                     {
-                        if (sheet_Destination.GetRow(i).Cells[2].StringCellValue == "校准员：")
+                        //if (sheet_Destination.GetRow(i).Cells[2].StringCellValue == "校准员：")
+                        if (sheet_Destination.GetRow(i).Cells[2].StringCellValue == "校准：")
                         {
                             rowIndex = i;
                             break;
@@ -294,7 +295,8 @@ namespace Langben.Report
                 int rowIndex = -1;
                 for (int i = 0; i <= sheet_Destination.LastRowNum; i++)
                 {
-                    if (sheet_Destination.GetRow(i).Cells[0].StringCellValue == "检定员：" || sheet_Destination.GetRow(i).Cells[0].StringCellValue == "校准员：")
+                    //if (sheet_Destination.GetRow(i).Cells[0].StringCellValue == "检定员：" || sheet_Destination.GetRow(i).Cells[0].StringCellValue == "校准员：")
+                    if (sheet_Destination.GetRow(i).Cells[0].StringCellValue == "检定员：" || sheet_Destination.GetRow(i).Cells[0].StringCellValue == "校准：")
                     {
                         rowIndex = i;
                         break;
