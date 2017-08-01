@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Common;
 using Langben.DAL;
 using Langben.BLL;
 using System.Web.Mvc;
-using System.Text;
-using System.EnterpriseServices;
-using System.Configuration;
 using Models;
 using System.Web;
-using System.Web.Script.Serialization;
 using Langben.App.Models;
-
+using System.Collections;
 
 namespace Langben.App.Controllers
 {
@@ -79,7 +74,7 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
-        public ActionResult BaoGaoShangChuan(string id)
+        public ActionResult BaoGaoShangChuan(string id = "1707311802097309769c7f869e9da|1705271109564378912a877f09add")
         {
             if (!string.IsNullOrWhiteSpace(id))
             {
@@ -120,42 +115,76 @@ namespace Langben.App.Controllers
 
             return View();
         }
+
         /// <summary>
-        /// 报告上传(上传按钮)
+        /// 报告上传功能
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         /// <returns></returns>
-        [HttpPost]
-        public ActionResult BaoGaoShangChuan(FILE_UPLOADER file, string REPORTNUMBER)//文档上传
+        public JsonResult ShangChuang(object sender, EventArgs e)
         {
-            Account acc = GetCurrentAccount();
-
-            PREPARE_SCHEME pre = new PREPARE_SCHEME();
-            pre.REPORTNUMBER = REPORTNUMBER;//证书编号
-            pre.PACKAGETYPE = Common.PACKAGETYPE.上传.ToString();
-            if (!string.IsNullOrWhiteSpace(file.UNQUALIFIEDTYPE))
+            HttpPostedFileBase files = Request.Files["file"];
+            string chuanzhi = Request["chuanzhi"].ToString();
+            string PREPARE_SCHEMEID = Request["PREPARE_SCHEMEID"].ToString();
+            string FILE_UPLOADERID = Request["FILE_UPLOADERID"].ToString();
+            FILE_UPLOADER file = JieXi((new UploadFiles()).ReportToUpload(files, files.FileName, chuanzhi == "Y" ? 0 : 1));//上传文件,解析
+            file.PREPARE_SCHEMEID = PREPARE_SCHEMEID;
+            file.REMARK = "33_13|35_13|37_13";//添加签名位置
+            file.STATE = Common.PACKAGETYPE.已上传.ToString();
+            if (string.IsNullOrWhiteSpace(FILE_UPLOADERID))
             {
-                pre.UNQUALIFIEDTYPE = file.UNQUALIFIEDTYPE.ToString();//不合格类型
+                file.ID = Result.GetNewId();
+                file.CREATETIME = DateTime.Now;//创建时间
+                file.CREATEPERSON = GetCurrentPerson();//创建人
+                bool fh = m_BLL2.Create(ref validationErrors, file);
+                Hashtable hash = new Hashtable();
+                hash.Add("FH", fh);
+                hash.Add("Name", files.FileName);
+                hash.Add("FILE_UPLOADERID", file.ID);
+                return Json(hash);
             }
-
-            string msg = string.Empty;
-            if (Request.Files.Count > 0)//前端获取文件选择控件值
+            else
             {
-                for (int i = 0; i < Request.Files.Count; i++)
-                {
-                    HttpPostedFileBase pstFile = Request.Files[i];//获取页面选择的文件
-                    string upfile = pstFile.FileName;//文件名
-                    UploadFiles upFiles = new UploadFiles();
-                    msg += upFiles.ReportToUpload(pstFile, upfile, i);//上传文件
-
-                }
+                file.ID = FILE_UPLOADERID;
+                file.UPDATETIME = DateTime.Now;
+                file.UPDATEPERSON = GetCurrentPerson();
+                bool fh = m_BLL2.EditField(ref validationErrors, file);//上传信息修改附件表中                            
+                Hashtable hash = new Hashtable();
+                hash.Add("FH", fh);
+                hash.Add("Name", files.FileName);
+                hash.Add("FILE_UPLOADERID", FILE_UPLOADERID);
+                return Json(hash);
             }
-            //JavaScriptSerializer js = new JavaScriptSerializer();
-            //FILE_UPLOADER jg = js.Deserialize<FILE_UPLOADER>(msg);
-            //jg.PREPARE_SCHEMEID = file.ID;
-            //jg.CONCLUSION = file.CONCLUSION;
+        }
+
+        [HttpPost]
+        public JsonResult ShengHe(PREPARE_SCHEME ps)
+        {
+            string[] id = ps.ID.Split('|');
+            ps.ID = id[0];
+            ps.PACKAGETYPE = Common.PACKAGETYPE.上传.ToString();
+            
+            bool ef = m_BLL3.EditField(ref validationErrors, ps);
+            FILE_UPLOADER fu = new FILE_UPLOADER();
+            fu.ID = id[1];
+            fu.CONCLUSION = ps.CONCLUSION;
+            bool ef2 = m_BLL2.EditField(ref validationErrors, fu);
+            Hashtable hb = new Hashtable();
+            hb.Add("FX",ef==true&&ef2==true?true:false);
+            return Json(hb);
+        }
+        /// <summary>
+        /// 解析上传返回字符串
+        /// </summary>
+        /// <param name="rod"></param>
+        /// <returns></returns>
+        public FILE_UPLOADER JieXi(string rod)
+        {
             FILE_UPLOADER uplo = new FILE_UPLOADER();
-            msg = msg.Substring(1, msg.Length - 1).TrimEnd('}');//去掉头尾｛｝
-            string[] mg = msg.Split(',');
+            rod = rod.TrimStart('{').TrimEnd('}');
+            //rod = rod.Substring(0, rod.Length - 1).TrimEnd('}');//去掉头尾｛｝
+            string[] mg = rod.Split(',');
             for (int i = 0; i < mg.Length; i++)//解析上传文件方法返回的字符串
             {
                 string[] m = mg[i].Split('*');
@@ -195,89 +224,7 @@ namespace Langben.App.Controllers
                         break;
                 }
             }
-            uplo.PREPARE_SCHEMEID = file.PREPARE_SCHEMEID;//预备方案ID
-            pre.ID = file.PREPARE_SCHEMEID;//预备方案ID(修改)
-            uplo.CONCLUSION = file.CONCLUSION;//结论
-            uplo.REMARK = "33_13|35_13|37_13";//添加签名位置
-            bool Create = false;
-            bool Edit = false;
-            if (string.IsNullOrEmpty(file.ID))//判断是否为第一次进入
-            {
-                uplo.ID = Result.GetNewId();
-                uplo.CREATETIME = DateTime.Now;//创建时间
-                uplo.CREATEPERSON = GetCurrentPerson();//创建人
-                uplo.STATE = Common.PACKAGETYPE.已上传.ToString();
-                Create = m_BLL2.Create(ref validationErrors, uplo);//上传信息写入附件表中
-                if (Create)
-                {
-                    Create = m_BLL3.EditField(ref validationErrors, pre);
-                }
-                if (Create)
-                {
-                    ViewBag.Create = "True";
-                    ViewBag.Edit = "";
-                    ViewBag.NAME2 = uplo.NAME2;//原始记录名称
-                    ViewBag.NAME = uplo.NAME;//证书名称
-                }
-                else
-                {
-                    ViewBag.Create = "False";
-                    ViewBag.Edit = "";
-                    ViewBag.NAME2 = file.NAME2;//原始记录名称
-                    ViewBag.NAME = file.NAME;//证书名称
-                }
-            }
-            else
-            {
-                uplo.ID = file.ID;
-                uplo.UPDATETIME = DateTime.Now;//修改时间
-                uplo.UPDATEPERSON = GetCurrentPerson();//修改人
-
-                Edit = m_BLL2.EditField(ref validationErrors, uplo);//上传信息修改附件表中
-                if (Edit)
-                {
-                    //FILE_UPLOADER file_uplo = m_BLL2.GetById(uplo.ID);//取预备方案id
-                    // pre.ID = file_uplo.PREPARE_SCHEMEID;
-                    Edit = m_BLL3.EditField(ref validationErrors, pre);
-                }
-                if (Edit)
-                {
-                    ViewBag.Edit = "True";
-                    ViewBag.Create = "";
-                    ViewBag.NAME2 = uplo.NAME2;//原始记录名称
-                    ViewBag.NAME = uplo.NAME;//证书名称
-                }
-                else
-                {
-                    ViewBag.Edit = "False";
-                    ViewBag.Create = "";
-                    ViewBag.NAME2 = file.NAME2;//原始记录名称
-                    ViewBag.NAME = file.NAME;//证书名称
-                };
-
-            }
-            Langben.Report.ReportBLL rbll = new Report.ReportBLL();
-            string err = "";
-            //rbll.UpdateFuJianRemark2_YuanShiJiLu(uplo.PREPARE_SCHEMEID, out err);
-            rbll.UpdateFuJianRemark(uplo.PREPARE_SCHEMEID, out err);
-
-            //返回执行结果是新增还是修改并给出结论
-            ViewBag.FILE_UPLOADERID = uplo.ID;
-
-            ViewBag.REPORTSTATUS = null;
-            ViewBag.REPORTNUMBER = REPORTNUMBER;//证书编号          
-            ViewBag.CONCLUSION = uplo.CONCLUSION;//结论
-            ViewBag.PREPARE_SCHEMEID = pre.ID;//预备方案id
-            PREPARE_SCHEME ps = m_BLL3.GetById(pre.ID);
-            ViewBag.DETECTERID = ps.DETECTERID;//核验员
-            ViewBag.CERTIFICATE_CATEGORY = ps.CERTIFICATE_CATEGORY;//报告类别
-            ViewBag.CALIBRATION_DATE = ps.CALIBRATION_DATE;//检定/校准时间
-            ViewBag.CHECKERID = acc.PersonName;//登入姓名
-            //ViewBag.VALIDITYEND = ps.VALIDITYEND;//有效期至
-            ViewBag.VALIDITY_PERIOD = ps.VALIDITY_PERIOD;//有效期VALIDITY_PERIOD
-            ViewBag.CONCLUSION_EXPLAIN = ps.CONCLUSION_EXPLAIN;//
-
-            return View();
+            return uplo;
         }
         /// <summary>
         /// 建立方案
@@ -422,7 +369,7 @@ namespace Langben.App.Controllers
                     ISRECEIVE = s.ISRECEIVE,
                     RETURNREASON = s.RETURNREASON
                     ,
-                    REPORTNUMBER=s.REPORTNUMBER
+                    REPORTNUMBER = s.REPORTNUMBER
                 }
 
                     )
@@ -430,7 +377,7 @@ namespace Langben.App.Controllers
         }
 
         [SupportFilter]
-        public ActionResult GetData2(string id, int page=1, int rows=999999, string order= "asc", string sort="ID", string search=null)
+        public ActionResult GetData2(string id, int page = 1, int rows = 999999, string order = "asc", string sort = "ID", string search = null)
         {
 
             int total = 0;

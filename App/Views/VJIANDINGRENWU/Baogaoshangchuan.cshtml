@@ -6,7 +6,7 @@
 <fieldset>
 
     <div>
-        <form id="form1" method="post" enctype="multipart/form-data" action="/VJIANDINGRENWU/BaoGaoShangChuan">
+        <form id="form1" method="post" enctype="multipart/form-data">
 
 
 
@@ -18,7 +18,7 @@
                     <p class="static">
                         <label>@ViewBag.REPORTNUMBER</label>
                     </p>
-                    <input type="hidden" name="REPORTNUMBER" value="@ViewBag.REPORTNUMBER" />
+                    <input type="hidden" name="REPORTNUMBER" value="@ViewBag.REPORTNUMBER" id="REPORTNUMBER"/>
                 </div>
             </div>
             <br style="clear:both" />
@@ -27,7 +27,7 @@
                     原始记录：
                 </div>
                 <div class="input_search-field">
-                    <input name="name" type="file" id="file" /><br />
+                    <input name="name" type="file" id="file" onChange="sc(this,'Y')"/><br />
 
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="input_search-field">
                     <input type="hidden" name="NAME2" value="@ViewBag.NAME2" />
-                    <label>@ViewBag.NAME2</label>
+                    <label id="NAMEys">@ViewBag.NAME2</label>
                 </div>
             </div>
             <br style="clear:both" />
@@ -46,7 +46,7 @@
                     上传证书：
                 </div>
                 <div class="input_search-field">
-                    <input name="name2" type="file" id="file2" />
+                    <input name="name2" type="file" id="file2" onChange="sc(this,'Z')"/>
                 </div>
             </div>
 
@@ -56,7 +56,7 @@
                 </div>
                 <div class="input_search-field" style="width:400px">
                     <p class="static">
-                        <label>@ViewBag.NAME</label>
+                        <label id="NAMEzs">@ViewBag.NAME</label>
                     </p>
                     <input type="hidden" name="NAME" value="@ViewBag.NAME" />
                 </div>
@@ -204,8 +204,8 @@
                 </div>
             </div>
 
-            <input type="hidden" name="PREPARE_SCHEMEID" value="@ViewBag.PREPARE_SCHEMEID" />
-            <input type="hidden" name="ID" value="@ViewBag.FILE_UPLOADERID" id="hiddenID" />
+            <input type="hidden" name="PREPARE_SCHEMEID" value="@ViewBag.PREPARE_SCHEMEID" id="PREPARE_SCHEMEID"/>
+            <input type="hidden" name="ID" value="@ViewBag.FILE_UPLOADERID" id="FILE_UPLOADERID" />
 
 
 
@@ -215,21 +215,7 @@
                 <div class="input_search-label">
 
                 </div>
-                <div class="input_search-field">
-
-
-
-                    @*上传按钮不能提到form外面*@
-                    <input id="Submit1" type="submit" value="上传" class="my-btn" onclick="javascript:
-        if ($('#file').val() != '' && $('#file2').val() != '')
-        {
-
-        }
-        else {
-            $.messager.alert('操作提示', '请选择上传文件！', 'info');
-            return false;
-        };
-  " />
+                <div class="input_search-field">               
 
                     <input id="fashongid" type="button" class="my-btn" value="发送审核" onclick="songwangshenghe()" />
 
@@ -303,7 +289,7 @@
         var CALIBRATION_DATE = $('#CALIBRATION_DATE').datebox('getValue');//检定/校准日期
         var VALIDITY_PERIOD = $("#VALIDITY_PERIOD").val();//
         var arr = {
-            ID: "@ViewBag.PREPARE_SCHEMEID",
+            ID: "@ViewBag.PREPARE_SCHEMEID"+"|"+$("#FILE_UPLOADERID").val(),
             REPORTSTATUS: "@Common.REPORTSTATUS.待审核",
             REPORTSTATUSZI: "@Common.REPORTSTATUS.待审核.GetHashCode()",
             AUDITDATE: "@DateTime.Now;",
@@ -313,7 +299,8 @@
             VALIDITY_PERIOD: VALIDITY_PERIOD,
             CONCLUSION: $('input[name=CONCLUSION]:checked').val(),
             UNQUALIFIEDTYPE: $('#UNQUALIFIEDTYPE').find("option:selected").val(),
-            CONCLUSION_EXPLAIN: $("#CONCLUSION_EXPLAIN").val()
+            CONCLUSION_EXPLAIN: $("#CONCLUSION_EXPLAIN").val(),
+            REPORTNUMBER: $("#REPORTNUMBER").val()
         }
 
         if (arr.DETECTERID != "" && arr.CALIBRATION_DATE != "") {
@@ -331,18 +318,18 @@
             }
             else {
 
-                $.messager.alert('操作提示', '请输入数字', 'info');
+                $.messager.alert('操作提示', '请输入年限！', 'info');
                 return;
             }
 
-            if ("@ViewBag.NAME2" != "") {
+            if ($("#NAMEzs").html() != "" && $("#NAMEys").html() != "") {
                 $.ajax({
-                    url: "/api/PREPARE_SCHEMEApi/EditField",
-                    type: "Put",
+                    url: "/VJIANDINGRENWU/ShengHe",
+                    type: "POST",
                     data: arr,
                     // async: false,
                     success: function (res) {
-                        if (res.Code == 1) {
+                        if (res.FX) {
                             $("#Submit1,#fashongid").attr("disabled", true);
                             $.messager.alert('操作提示', "发送审核成功！", 'info');
                         }
@@ -399,5 +386,43 @@
             $("#CONCLUSION_EXPLAIN").show();
 
         }
+    }
+
+    //上传
+    function sc(fi,zhi) {        
+        var file = fi.files[0];
+        var formData = new FormData();
+        //formData.append('file', $('#file')[0].files[0]);
+        formData.append('file', file);//文件
+        formData.append('chuanzhi', zhi);//类型
+        formData.append('PREPARE_SCHEMEID', $('#PREPARE_SCHEMEID').val());//预备方案表ID
+        formData.append('FILE_UPLOADERID', $('#FILE_UPLOADERID').val());//附件表ID
+        $.ajax({
+            url: '/VJIANDINGRENWU/ShangChuang',
+            type: 'POST',
+            cache: false,
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function (res) {
+            if (res.FH) {
+                if (zhi=="Z") {
+                    $("#NAMEzs").html(res.Name);
+                }
+                else if (zhi == "Y") {
+                    $("#NAMEys").html(res.Name);
+                }
+                $("#FILE_UPLOADERID").val(res.FILE_UPLOADERID);
+            } else {
+                $.messager.alert('操作提示', "出错！", 'info');
+                return false;
+            }
+            var file = $(fi);
+            file.after(file.clone().val(""));
+            file.remove();          
+        }).fail(function (res) {
+            $.messager.alert('操作提示', "出错！", 'info');
+            return false;
+        });
     }
 </script>
