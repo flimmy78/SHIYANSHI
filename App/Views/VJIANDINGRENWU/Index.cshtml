@@ -277,7 +277,7 @@
 
         //&&&&&&&&&&&&&&&&&&&获取当前时间&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
         $('#flexigridData').datagrid({
-            title: '检定任务&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;红色为超期（第15天开始）、黄色为预警（第11天开始）', //列表的标题
+            title: '检定任务&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="background:#F00;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>红色为超期（第15天开始）、<strong style="background:#FFFF33;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>黄色为预警（第11天开始）', //列表的标题
             iconCls: 'icon-site',
             width: 'auto',
             height: 'auto',
@@ -289,71 +289,71 @@
             sortName: 'EQUIPMENT_STATUS_VALUUMN',
             sortOrder: 'asc',
             rowStyler: function (value, row, index) {
-                if (row.ISRECEIVE != "是") {
-                    if (row.CREATETIME != null) {
-                        var datea = dateConvert(row.CREATETIME);
-                        var distance = shijianjishuan(datea, tame);
-                        if (distance >= 15) {
-                            return 'background-color:#E63F00;';
-                        }
-                        else if (distance >= 11) {
-                            return 'background-color:#EEEE00;';
+                    if (row.ISRECEIVE != "是") {
+                        if (row.CREATETIME != null) {
+                            var datea = dateConvert(row.CREATETIME);
+                            var distance = shijianjishuan(datea, tame);
+                            if (distance >= 15) {
+                                return 'background-color:#E63F00;';
+                            }
+                            else if (distance >= 11) {
+                                return 'background-color:#EEEE00;';
+                            }
                         }
                     }
-                }
-            },
+                },
             toolbar: [
                  {
-                     text: '领取',
+                text: '领取',
                      iconCls: 'icon-ok',
                      handler: function () {
-                         return lingqu();
-                     }
-                 },
+                        return lingqu();
+                    }
+                },
                   {
-                      text: '选择方案',
+                text: '选择方案',
                       iconCls: 'icon-search',
                       handler: function () {
-                          return xuanzhefanan();
-                      }
-                  },
+                        return xuanzhefanan();
+                    }
+                },
                    {
-                       text: '器具信息修改',
+                text: '器具信息修改',
                        iconCls: 'icon-edit',
                        handler: function () {
-                           return UpdateView();
-                       }
-                   },
+                        return UpdateView();
+                    }
+                },
                     {
-                        text: '追加超期原因',
+                text: '追加超期原因',
                         iconCls: 'icon-add',
                         handler: function () {
-                            return chaoqi();
-                        }
-                    },
+                        return chaoqi();
+                    }
+                },
             {
                 text: '退回',
                 iconCls: 'icon-back',
                 handler: function () {
-                    return tuihui();
-                }
-            },
+                        return tuihui();
+                    }
+                },
              {
-                 text: '查看原始记录',
+                text: '查看原始记录',
                  iconCls: 'icon-detail',
                  handler: function () {
-                     return getView();
-                 }
-             }
+                        return getView();
+                    }
+                }
              ,
              {
-                 text: '导出数据',
+                text: '导出数据',
                  iconCls: 'icon-detail',
                  handler: function () {
-                     return flexiExport();
-                 }
-             }
-             
+                        return flexiExport();
+                    }
+                }
+
             ],
             columns: [[
                     { field: 'ID', title: '@Html.DisplayNameFor(model => model.ID)', width: 64, hidden: true }
@@ -369,12 +369,12 @@
                     , { field: 'APPLIANCE_PROGRESS', title: '@Html.DisplayNameFor(model => model.APPLIANCE_PROGRESS)', align: 'center', width: 70 }
                     , { field: 'ORDER_STATUS', title: '@Html.DisplayNameFor(model => model.ORDER_STATUS)', align: 'center', width: 70 }
                     , {
-                        field: 'CREATETIME', title: '@Html.DisplayNameFor(model => model.CREATETIME)', align: 'center', width: 80, formatter: function (value, row, index) {
-                            if (value) {
-                                return dateConvert(value);
-                            }
+                field: 'CREATETIME', title: '@Html.DisplayNameFor(model => model.CREATETIME)', align: 'center', width: 80, formatter: function (value, row, index) {
+                        if (value) {
+                            return dateConvert(value);
                         }
                     }
+                }
                     , { field: 'OVERDUE', title: '@Html.DisplayNameFor(model => model.OVERDUE)', align: 'center', width: 55 }
                     , { field: 'STATE', title: '@Html.DisplayNameFor(model => model.STATE)', align: 'center', width: 55 }
                     , { field: 'REPORTSTATUS', title: '@Html.DisplayNameFor(model => model.REPORTSTATUS)', align: 'center', width: 55 }
