@@ -616,6 +616,7 @@
     <Content Include="Scripts\datagrid-detailview.js" />
     <Content Include="Scripts\echarts.js" />
     <Content Include="Scripts\jquery.jqprint-0.3.js" />
+    <Content Include="Scripts\keyboard.js" />
     <Content Include="Scripts\numeral.js" />
     <Content Include="Scripts\shine.js" />
     <Content Include="Template\原始记录-校准.xls" />
