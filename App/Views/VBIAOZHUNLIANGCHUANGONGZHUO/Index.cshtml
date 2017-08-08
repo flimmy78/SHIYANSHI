@@ -128,7 +128,7 @@
     $(function () {
 
         $('#flexigridData').datagrid({
-            title: '标准量传部工作信息查询', //列表的标题
+            title: '标准量传部工作信息查询&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="background:#DDFF77;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>绿色为审批通过（小于12天开始）、<strong style="background:#FFFF33;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>黄色为预警（第11天开始）、<strong style="background:#FFFF33;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>黄色为预警（第11天开始）', //列表的标题
             iconCls: 'icon-site',
             width: 'auto',
             height: 'auto',
@@ -141,13 +141,13 @@
             idField: 'ID',
             rowStyler: function (value, row, index) {
                 if (row.ZONGSHIJIAN < 12) {
-                    return 'background-color:#DDFF77;';
+                    //return 'background-color:#DDFF77;';
                 }
                 else if (row.ZONGSHIJIAN >= 12 && row.ZONGSHIJIAN <= 14) {
-                    return 'background-color:#FFFF77;';
+                    //return 'background-color:#FFFF77;';
                 }
-                else if ( row.ZONGSHIJIAN > 14) {
-                    return 'background-color:#FF88C2;';
+                else if (row.ZONGSHIJIAN > 14 && row.MOCHONGCHANGSHU=="") {
+                    //return 'background-color:#FF88C2;';
                 }
             },
             toolbar: [
