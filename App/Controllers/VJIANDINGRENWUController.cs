@@ -74,7 +74,7 @@ namespace Langben.App.Controllers
         /// </summary>
         /// <returns></returns>
         [SupportFilter]
-        public ActionResult BaoGaoShangChuan(string id = "1707311802097309769c7f869e9da|1705271109564378912a877f09add")
+        public ActionResult BaoGaoShangChuan(string id)
         {
             if (!string.IsNullOrWhiteSpace(id))
             {

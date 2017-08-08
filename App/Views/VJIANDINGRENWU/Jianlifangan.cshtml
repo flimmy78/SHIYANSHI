@@ -212,7 +212,7 @@
             {
                 <div class="input_search-field">
                     <select id="CHECK_PLACE" name="CHECK_PLACE">
-                        <option value="">请选择</option>
+                        
                     </select>
                     @*@Html.DropDownList("CHECK_PLACE", Models.SysFieldModels.GetSysField("JianLiFangAn", "CHECK_PLACE"), "请选择", new { id = "CHECK_PLACE", @class = "easyui-combobox" })*@
                 </div>
@@ -221,7 +221,7 @@
             {
                 <div class="input_search-field">
                     <select id="CHECK_PLACE" name="CHECK_PLACE">
-                        <option value="">请选择</option>
+                       
                     </select>
                     @*@Html.DropDownList("CHECK_PLACE", Models.SysFieldModels.GetSysField("JianLiFangAn", "CHECK_PLACE2"), "请选择", new { id = "CHECK_PLACE", @class = "easyui-combobox" })*@
                 </div>
@@ -348,7 +348,7 @@
 
         //鉴定地点判断
         if ("@ViewBag.ACCEPT_ORGNIZATION" == "华北电力科学研究院有限责任公司") {
-            getCity($("#CHECK_PLACE"));
+            //getCity($("#CHECK_PLACE"));
             if ("@ViewBag.UNDERTAKE_LABORATORY_NAME" == "@Common.LABORATORYNAME.电能.ToString()") {
                 $("<option></option>")
                            .val("电研大厦A座711")
@@ -358,35 +358,40 @@
                           .val("电研大厦A座712")
                           .text("电研大厦A座712")
                           .appendTo($("#CHECK_PLACE"));
+                $("#CHECK_PLACE").val("电研大厦A座712");
             }
             else if ("@ViewBag.UNDERTAKE_LABORATORY_NAME" == "@Common.LABORATORYNAME.互感器.ToString()") {
                 $("<option></option>")
                        .val("电研大厦A座709")
                        .text("电研大厦A座709")
                        .appendTo($("#CHECK_PLACE"));
+                $("#CHECK_PLACE").val("电研大厦A座709");
             }
             else if ("@ViewBag.UNDERTAKE_LABORATORY_NAME" == "@Common.LABORATORYNAME.指示仪表.ToString()") {
                 $("<option></option>")
                      .val("电研大厦A座713")
                      .text("电研大厦A座713")
                      .appendTo($("#CHECK_PLACE"));
+                $("#CHECK_PLACE").val("电研大厦A座713");
             }
             else if ("@ViewBag.UNDERTAKE_LABORATORY_NAME" == "@Common.LABORATORYNAME.数表三相.ToString()" || "@ViewBag.UNDERTAKE_LABORATORY_NAME" == "@Common.LABORATORYNAME.数表单相.ToString()") {
                 $("<option></option>")
                 .val("电研大厦A座712")
                 .text("电研大厦A座712")
                 .appendTo($("#CHECK_PLACE"));
+                $("#CHECK_PLACE").val("电研大厦A座712");
             }
             else if ("@ViewBag.UNDERTAKE_LABORATORY_NAME" == "@Common.LABORATORYNAME.直流仪器.ToString()") {
 
-                $("<option></option>")
+            $("<option></option>")
             .val("电研大厦A座715")
             .text("电研大厦A座715")
             .appendTo($("#CHECK_PLACE"));
+            $("#CHECK_PLACE").val("电研大厦A座715");
             }
         }
         else if ("@ViewBag.ACCEPT_ORGNIZATION" == "冀北电力有限公司计量中心") {
-            getCity($("#CHECK_PLACE"));
+            //getCity($("#CHECK_PLACE"));
             if ("@ViewBag.UNDERTAKE_LABORATORY_NAME" == "@Common.LABORATORYNAME.电能.ToString()") {
                 $("<option></option>")
                     .val("计量中心309电能实验室")
@@ -396,10 +401,14 @@
                     .val("计量中心310电能实验室")
                     .text("计量中心310电能实验室")
                     .appendTo($("#CHECK_PLACE"));
+                $("#CHECK_PLACE").val("计量中心309电能实验室");
             }
         }
         //校准地点数据加载
-        $("#CHECK_PLACE").val("@Model.CHECK_PLACE");
+        if ("@Model.CHECK_PLACE"!="") {
+            $("#CHECK_PLACE").val("@Model.CHECK_PLACE");
+        }
+
         @*$("#CHECK_PLACE").combobox('select', "@Model.CHECK_PLACE");*@
         //************************
         //输入框的禁用
@@ -417,8 +426,6 @@
     function getCity(City) {
         $(City).empty();
         $("<option></option>")
-                .val("")
-                .text("请选择")
                 .appendTo($(City));
     }
     //下一步

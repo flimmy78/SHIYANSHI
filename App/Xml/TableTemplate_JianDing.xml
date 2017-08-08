@@ -9536,7 +9536,7 @@
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
-				<!--<Cell>
+				<Cell>
 					<Code>SHIJISHUCHUZHI</Code>
 					<ColIndex>6</ColIndex>
 					<ColCount>0</ColCount>
@@ -9544,7 +9544,7 @@
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
 				</Cell>
-				<Cell>
+				<!--<Cell>
 					<Code>RELATIVEERROR</Code>
 					<ColIndex>7</ColIndex>
 					<ColCount>0</ColCount>
@@ -9559,7 +9559,7 @@
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
-				</Cell>-->
+				</Cell>
 				<Cell>
 					<Code>BUQUEDINGDU</Code>
 					<ColIndex>9</ColIndex>
@@ -9567,7 +9567,7 @@
 					<IsMergeSameValue>N</IsMergeSameValue>
 					<IsHideRowNull>N</IsHideRowNull>
 					<IsMergeNullValue>N</IsMergeNullValue>
-				</Cell>
+				</Cell>-->
 				<Cell>
 					<Code>JISUANWUCHA</Code>
 					<ColIndex>10</ColIndex>
