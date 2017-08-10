@@ -29,7 +29,7 @@ namespace Langben.IBLL
         /// <returns></returns>
         [OperationContract]
         bool EditSTORAGEINSTRUCTI_STATU(ref Common.ValidationErrors validationErrors, string[] deleteCollection);
-        string GetYuanShiJILu(ref ValidationErrors validationErrors, string id, string shiyanshi);
+        string GetYuanShiJILu(ref ValidationErrors validationErrors, string id, string shiyanshi,string leixin);
 
     }
 }

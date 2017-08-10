@@ -131,7 +131,15 @@ namespace Langben.App.Controllers
             FILE_UPLOADER file = JieXi((new UploadFiles()).ReportToUpload(files, files.FileName, chuanzhi == "Y" ? 0 : 1));//上传文件,解析
             file.PREPARE_SCHEMEID = PREPARE_SCHEMEID;
             file.REMARK = "33_13|35_13|37_13";//添加签名位置
-            file.STATE = Common.PACKAGETYPE.已上传.ToString();
+            if (chuanzhi == "Y")
+            {
+                file.STATE2 = Common.PACKAGETYPE.已上传.ToString();
+            }
+            else
+            {
+                file.STATE = Common.PACKAGETYPE.已上传.ToString();
+            }
+           
             if (string.IsNullOrWhiteSpace(FILE_UPLOADERID))
             {
                 file.ID = Result.GetNewId();

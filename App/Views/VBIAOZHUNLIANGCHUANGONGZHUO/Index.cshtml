@@ -114,7 +114,22 @@
         </div>
     </div>
 
-
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.WEITUODANWEI):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='WEITUODANWEI' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.ZHENGSHUBAOGAOBIANHAO):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='ZHENGSHUBAOGAOBIANHAO' />
+        </div>
+    </div>
 
     <div class='input_search' style="padding-top:10px;">
         <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
@@ -128,7 +143,7 @@
     $(function () {
 
         $('#flexigridData').datagrid({
-            title: '标准量传部工作信息查询&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="background:#DDFF77;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>绿色为审批通过（小于12天开始）、<strong style="background:#FFFF33;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>黄色为预警（第11天开始）、<strong style="background:#FFFF33;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>黄色为预警（第11天开始）', //列表的标题
+            title: '标准量传部工作信息查询', //列表的标题
             iconCls: 'icon-site',
             width: 'auto',
             height: 'auto',
