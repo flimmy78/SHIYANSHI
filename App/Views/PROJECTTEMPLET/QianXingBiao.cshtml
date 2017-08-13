@@ -211,15 +211,22 @@
                     var tr_up = $("[rowindex=" + ($(tr).attr("rowindex") - 1) + "]", $(inputs[i]).parents("table")[0])[0];      //当前所在的行数的上一行
 
                     if ($(tr_up).attr("rowindex") == 1)  //如果是第一行
-                        $(tr_up).find("td").eq(td + rowspan).find('input').focus();    //此模板没有有rowspan合并行等,所以如果向上到第一行,td不增减;
-                    else {
-                        if ($(tr).find("td").length < $(tr_up).find("td").length)
-                            $(tr_up).find("td").eq(td + rowspan).find('input').focus();
-                        if ($(tr).find("td").length == $(tr_up).find("td").length)
-                            $(tr_up).find("td").eq(td).find('input').focus();
-                        if ($(tr).find("td").length > $(tr_up).find("td").length)
-                            $(tr_up).find("td").eq(td - rowspan).find('input').focus();
-                    }
+                    {
+                        if (td < 2) {
+                            $(tr_up).find("td").eq(td + rowspan).find('input').focus();    //此模板没有有rowspan合并行等,所以如果向上到第一行,td不增减;
+                        } else {
+                            $(tr_up).find("td").eq(td + rowspan+1).find('input').focus();    //此模板没有有rowspan合并行等,所以如果向上到第一行,td不增减;
+                        }
+                   
+                }
+                else {
+                    if ($(tr).find("td").length < $(tr_up).find("td").length)
+                        $(tr_up).find("td").eq(td + rowspan).find('input').focus();
+                    if ($(tr).find("td").length == $(tr_up).find("td").length)
+                        $(tr_up).find("td").eq(td).find('input').focus();
+                    if ($(tr).find("td").length > $(tr_up).find("td").length)
+                        $(tr_up).find("td").eq(td - rowspan).find('input').focus();
+                }
                 }
                 else {
                     //没有则找上一个table
@@ -248,8 +255,13 @@
                         if ($(tr).find("td").length > $(tr_down).find("td").length)
                             $(tr_down).find("td").eq(td - rowspan).find('input').focus();
                     }
-                    else
-                        $(tr_down).find("td").eq(td - rowspan).find('input').focus();//第一列没有合并行，td数量不变
+                    else {
+                        if (td<3){
+                            $(tr_down).find("td").eq(td - rowspan).find('input').focus();//第一列没有合并行，td数量不变
+                        } else {
+                            $(tr_down).find("td").eq(td - rowspan-1).find('input').focus();//第一列没有合并行，td数量不变
+                        }
+                    }
                 }
                 else {
                     var table = $(inputs[i]).parents("table").next();

@@ -50,7 +50,7 @@
 </thead>
 
 <tbody id="tbody_moban">
-    <tr>
+    <tr rowindex ="1">
         <td rowspan="95" align="center" width="230">
             <input class="my-textbox input-width" value="" id="shurukang1_t_1_1" name="shurukang1" onblur="" type="text">/
             <input class="my-textbox input-width" value="" id="shurukang2_t_1_1" name="shurukang2" onblur="" type="text">
@@ -86,7 +86,7 @@
             </select>
         </td>
     </tr>
-    <tr>
+    <tr rowindex ="2">
         <td rowspan="1" align="center" width="100">
             常规差流法<input style="display:none" value="常规差流法" id="ceshifangfa_t_1_2" name="ceshifangfa" onblur="" type="text">
         </td>
@@ -103,7 +103,7 @@
             <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_2" name="ACTUALVALUE" onblur="blurXianShiZhi2(this)" type="text">
         </td>
     </tr>
-    <tr>
+    <tr rowindex ="3">
         <td rowspan="1" align="center" width="100">
             测量比对结果<input style="display:none" value="测量比对结果" id="ceshifangfa_t_1_3" name="ceshifangfa" onblur="" type="text">
         </td>
@@ -121,7 +121,7 @@
         </td>
     </tr>
 
-    <tr>
+    <tr rowindex ="4">
         <td rowspan="1" align="center" width="100">
             CT分析测试仪<input style="display:none" value="CT分析测试仪" id="ceshifangfa_t_1_4" name="ceshifangfa" onblur="" type="text">
         </td>
@@ -141,7 +141,7 @@
             <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_4" name="ACTUALVALUE" onblur="blurXianShiZhi(this)" type="text">
         </td>
     </tr>
-    <tr>
+    <tr  rowindex ="5">
         <td rowspan="1" align="center" width="100">
             常规差流法<input style="display:none" value="常规差流法" id="ceshifangfa_t_1_5" name="ceshifangfa" onblur="" type="text">
         </td>
@@ -158,7 +158,7 @@
             <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_5" name="ACTUALVALUE" onblur="blurXianShiZhi2(this)" type="text">
         </td>
     </tr>
-    <tr>
+    <tr rowindex ="6">
         <td rowspan="1" align="center" width="100">
             测量比对结果<input style="display:none" value="测量比对结果" id="ceshifangfa_t_1_6" name="ceshifangfa" onblur="" type="text">
         </td>
@@ -176,7 +176,7 @@
         </td>
     </tr>
 
-    <tr>
+    <tr rowindex ="7">
         <td rowspan="1" align="center" width="100">
             CT分析测试仪<input style="display:none" value="CT分析测试仪" id="ceshifangfa_t_1_7" name="ceshifangfa" onblur="" type="text">
         </td>
@@ -203,7 +203,7 @@
             </select>
         </td>
     </tr>
-    <tr>
+    <tr rowindex ="8">
         <td rowspan="1" align="center" width="100">
             常规差流法<input style="display:none" value="常规差流法" id="ceshifangfa_t_1_8" name="ceshifangfa" onblur="" type="text">
         </td>
@@ -220,7 +220,7 @@
             <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_8" name="ACTUALVALUE" onblur="blurXianShiZhi2(this)" type="text">
         </td>
     </tr>
-    <tr>
+    <tr rowindex ="9">
         <td rowspan="1" align="center" width="100">
             测量比对结果<input style="display:none" value="测量比对结果" id="ceshifangfa_t_1_9" name="ceshifangfa" onblur="" type="text">
         </td>
@@ -238,7 +238,7 @@
         </td>
     </tr>
 
-    <tr>
+    <tr rowindex ="10">
         <td rowspan="1" align="center" width="100">
             CT分析测试仪<input style="display:none" value="CT分析测试仪" id="ceshifangfa_t_1_10" name="ceshifangfa" onblur="" type="text">
         </td>
@@ -258,7 +258,7 @@
             <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_10" name="ACTUALVALUE" onblur="blurXianShiZhi(this)" type="text">
         </td>
     </tr>
-    <tr>
+    <tr rowindex ="11">
         <td rowspan="1" align="center" width="100">
             常规差流法<input style="display:none" value="常规差流法" id="ceshifangfa_t_1_11" name="ceshifangfa" onblur="" type="text">
         </td>
@@ -275,7 +275,7 @@
             <input class="my-textbox input-width" value="" id="ACTUALVALUE_t_1_11" name="ACTUALVALUE" onblur="blurXianShiZhi2(this)" type="text">
         </td>
     </tr>
-    <tr>
+    <tr rowindex ="12">
         <td rowspan="1" align="center" width="100">
             测量比对结果<input style="display:none" value="测量比对结果" id="ceshifangfa_t_1_12" name="ceshifangfa" onblur="" type="text">
         </td>
@@ -476,7 +476,7 @@
 <script>
     //方向键控制页面控件焦点移动
     function keyDown(event) {
-        var rowspan =0;
+        var rowspan =3;
         var colunmIdx = "";
         var inputs = $(".my-textbox")                              //通过class属性值获取控件组合
         var focus = document.activeElement;                 //得到处于激活状态的控件
