@@ -448,7 +448,7 @@
             }
             var T8Data = $(obj).parent().parent().find("#" + T8).val(); //T8 y平均(%)
             var txtPointLen1 = 0; //小数点位数
-            try { txtPointLen1 = arg1.toString().split(".")[1].length } catch (e) {
+            try { txtPointLen1 = zhidingwuchaData.toString().split(".")[1].length } catch (e) {
                 txtPointLen1 = 0;
             }
             txtPointLen1 = parseFloat(txtPointLen1)+1;
