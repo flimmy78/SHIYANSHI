@@ -38,7 +38,7 @@
                     <td>
                         <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" onclick="CreateTongDao()" id="btnDuoTongDao" style="display:none">增加</a>
                         <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" id="btnSave" onclick="Save()">保存检测项</a>
-                        <div style="@ViewBag.UNDERTAKE_LABORATORYName">
+                        <span style="@ViewBag.UNDERTAKE_LABORATORYName">
                             误差小数位数：<input name="mywuchaxiaoshuweishu" id="mywuchaxiaoshuweishu" value="2" type="text" class="my-textbox tc" style="width:16px">
                             不确定度展示模式：<select class="my-combobox" name="BuQueDingDuShowType" id="ddlBuQueDingDuShowType" onchange="ChangeBuQueDingDuShowTypeOrBuQueDingDuXiaoShuWeiShu();">
                                 <option value="A">原始模式 </option>
@@ -46,7 +46,7 @@
                                 <option value="K">科学计算法模式</option>
                             </select>
                             不确定度小数位数：<input name="BuQueDingDuXiaoShuWeiShu" id="BuQueDingDuXiaoShuWeiShu" value="2" type="text" class="my-textbox tc" style="width:16px" onchange="">
-                        </div>
+                        </span>
                     </td>
                     <td align="right">
                         <a href="javascript:;" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'" id="btnReset" onclick="Reset()">重置检测项</a>
