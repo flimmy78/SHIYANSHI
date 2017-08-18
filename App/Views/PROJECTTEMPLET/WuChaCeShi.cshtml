@@ -427,7 +427,7 @@
         }
 
         function blurXianShiZhi(obj) {
-            debugger;
+            //debugger;
 
             var id = $(obj).attr("id");
             var arr = id.split('_');
@@ -449,7 +449,7 @@
 
         }
         function blurXianShiZhi2(obj) {
-            debugger;
+            //debugger;
 
             var id = $(obj).attr("id");
             var arr = id.split('_');
@@ -507,14 +507,14 @@
                     var tr_up = $("[rowindex=" + ($(tr).attr("rowindex") - 1) + "]", $(inputs[i]).parents("table")[0])[0];      //当前所在的行数的上一行
 
                     if ($(tr_up).attr("rowindex") == 1)  //如果是第一行
-                        $(tr_up).find("td").eq(td + rowspan).find('input').focus();    //此模板没有有rowspan合并行等,所以如果向上到第一行,td不增减;
+                        $(tr_up).find("td").eq(td + 2).find('input').focus();    //此模板没有有rowspan合并行等,所以如果向上到第一行,td不增减;
                     else {
                         if ($(tr).find("td").length < $(tr_up).find("td").length)
-                            $(tr_up).find("td").eq(td + rowspan).find('input').focus();
+                            $(tr_up).find("td").eq(td + 1).find('input').focus();
                         if ($(tr).find("td").length == $(tr_up).find("td").length)
                             $(tr_up).find("td").eq(td).find('input').focus();
                         if ($(tr).find("td").length > $(tr_up).find("td").length)
-                            $(tr_up).find("td").eq(td - rowspan).find('input').focus();
+                            $(tr_up).find("td").eq(td - 1).find('input').focus();
                     }
                 }
                 else {
@@ -538,14 +538,14 @@
                     var tr_down = $(inputs[i]).parents("tr").next();      //当前所在的行数的下一行
                     if ($(tr).attr("rowindex") != 1) {
                         if ($(tr).find("td").length < $(tr_down).find("td").length)
-                            $(tr_down).find("td").eq(td + rowspan).find('input').focus();
+                            $(tr_down).find("td").eq(td + 1).find('input').focus();
                         if ($(tr).find("td").length == $(tr_down).find("td").length)
                             $(tr_down).find("td").eq(td).find('input').focus();
                         if ($(tr).find("td").length > $(tr_down).find("td").length)
-                            $(tr_down).find("td").eq(td - rowspan).find('input').focus();
+                            $(tr_down).find("td").eq(td - 1).find('input').focus();
                     }
                     else
-                        $(tr_down).find("td").eq(td - rowspan).find('input').focus();//第一列没有合并行，td数量不变
+                        $(tr_down).find("td").eq(td - 2).find('input').focus();//第一列没有合并行，td数量不变
                 }
                 else {
                     var table = $(inputs[i]).parents("table").next();
