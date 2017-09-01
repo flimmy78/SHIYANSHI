@@ -19470,14 +19470,14 @@
           <IsHideRowNull>N</IsHideRowNull>
           <IsMergeNullValue>N</IsMergeNullValue>
         </Cell>
-        <Cell>
+        <!--<Cell>
           <Code>READVALUE_UNIT</Code>
           <ColIndex>6</ColIndex>
           <ColCount>0</ColCount>
           <IsMergeSameValue>N</IsMergeSameValue>
           <IsHideRowNull>N</IsHideRowNull>
           <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
+        </Cell>-->
         <Cell>
           <Code>ACTUALVALUE</Code>
           <ColIndex>7</ColIndex>
