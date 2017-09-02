@@ -1197,6 +1197,12 @@
 			<!--下标后几位，如果没有填-1-->
 			<SubscriptLastCount>2</SubscriptLastCount>
 		</SpecialCharacter>
+    <SpecialCharacter>
+      <!--特殊字符-->
+      <Code>UBC</Code>
+      <!--下标后几位，如果没有填-1-->
+      <SubscriptLastCount>2</SubscriptLastCount>
+    </SpecialCharacter>
 		<SpecialCharacter>
 			<!--特殊字符-->
 			<Code>Pn</Code>
