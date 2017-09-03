@@ -962,6 +962,16 @@ namespace Langben.App.Controllers
 
         public ActionResult Detail(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
+            Account account = GetCurrentAccount();
+            if (account.UNDERTAKE_LABORATORYName=="电能")
+            {
+                ViewBag.UNDERTAKE_LABORATORYName = "display:none";
+            }
+            else
+            {
+                ViewBag.UNDERTAKE_LABORATORYName = "";
+            }
+            //account.RoleIds
             if (!string.IsNullOrWhiteSpace(PREPARE_SCHEMEID))
             {//预备方案
                 QUALIFIED_UNQUALIFIED_TEST_ITE qEntity = null;

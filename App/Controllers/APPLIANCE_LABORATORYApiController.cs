@@ -221,7 +221,7 @@ namespace Langben.App.Controllers
         }
 
         /// <summary>
-        /// 编辑集合（领取功能）
+        /// 查看原始记录
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>  
@@ -232,7 +232,9 @@ namespace Langben.App.Controllers
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             string returnValue = string.Empty;
             Common.Account account = GetCurrentAccount();
-            var data = m_BLL.GetYuanShiJILu(ref validationErrors, id, account.UNDERTAKE_LABORATORYName);
+            string ID = id.Split('|')[0];
+            string leixin = id.Split('|')[1];
+            var data = m_BLL.GetYuanShiJILu(ref validationErrors, ID, account.UNDERTAKE_LABORATORYName, leixin);
 
             if (!string.IsNullOrWhiteSpace(data))
             {

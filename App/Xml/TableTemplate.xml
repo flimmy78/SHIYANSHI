@@ -19410,9 +19410,9 @@
 		</TableTemplate>
     <TableTemplate>
       <RuleID>124-2005_4</RuleID>
-      <DataRowIndex>1196</DataRowIndex>
-      <RemarkRowIndex>1198</RemarkRowIndex>
-      <ConclusionRowIndex>1199</ConclusionRowIndex>
+      <DataRowIndex>1400</DataRowIndex>
+      <RemarkRowIndex>1402</RemarkRowIndex>
+      <ConclusionRowIndex>1403</ConclusionRowIndex>
       <CellList>
         <Cell>
           <Code>RANGE1</Code>
@@ -19470,14 +19470,14 @@
           <IsHideRowNull>N</IsHideRowNull>
           <IsMergeNullValue>N</IsMergeNullValue>
         </Cell>
-        <Cell>
+        <!--<Cell>
           <Code>READVALUE_UNIT</Code>
           <ColIndex>6</ColIndex>
           <ColCount>0</ColCount>
           <IsMergeSameValue>N</IsMergeSameValue>
           <IsHideRowNull>N</IsHideRowNull>
           <IsMergeNullValue>N</IsMergeNullValue>
-        </Cell>
+        </Cell>-->
         <Cell>
           <Code>ACTUALVALUE</Code>
           <ColIndex>7</ColIndex>
@@ -19530,7 +19530,7 @@
       <TableTitleList>
         <RowInfo>
           <RowNumber>2</RowNumber>
-          <RowIndex>1194</RowIndex>
+          <RowIndex>1398</RowIndex>
           <CellList>
             <Cell>
               <Code>K</Code>
@@ -19546,7 +19546,7 @@
       <TableFooterList>
         <RowInfo>
           <RowNumber>1</RowNumber>
-          <RowIndex>1197</RowIndex>
+          <RowIndex>1401</RowIndex>
           <CellList>
             <Cell>
               <Code>ZDJBWC</Code>

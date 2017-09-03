@@ -342,9 +342,16 @@
                 text: '查看原始记录',
                  iconCls: 'icon-detail',
                  handler: function () {
-                        return getView();
+                     return getView("Yuan");
                     }
-                }
+             },
+             {
+                 text: '查看证书',
+                 iconCls: 'icon-detail',
+                 handler: function () {
+                     return getView("Zhenshu");
+                 }
+             }
              ,
              {
                 text: '导出数据',
@@ -400,11 +407,11 @@
         }
     });
     //查看原始记录
-    function getView() {
+    function getView(r) {
         var arr = $('#flexigridData').datagrid('getChecked');
         if (arr.length == 1) {
 
-            var id = arr[0].ID;
+            var id = arr[0].ID+"|"+r;
 
             $.ajax({
                 url: "/api/APPLIANCE_LABORATORYApi/ChaKan/" + id,

@@ -140,6 +140,7 @@ namespace Langben.App.Controllers
                     where d.ID == i
                     select d;
             List<VRUKU> queryData = a.ToList();
+            queryData = queryData.Distinct().ToList();
             string[] fields = "BAR_CODE_NUM,ORDER_NUMBER,APPLIANCE_NAME,VERSION,FACTORY_NUM,CERTIFICATE_ENTERPRISE,CUSTOMER_SPECIFIC_REQUIREMENTS,APPLIANCE_PROGRESS,ORDER_STATUS,STORAGEINSTRUCTIONS".Split(',');
             return Content(WriteExcleRuKu(fields, queryData.ToArray()));
         }

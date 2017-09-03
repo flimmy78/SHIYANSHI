@@ -34,7 +34,7 @@ namespace Langben.BLL
             }
             return false;
         }
-        public string GetYuanShiJILu(ref ValidationErrors validationErrors, string id, string shiyanshi)
+        public string GetYuanShiJILu(ref ValidationErrors validationErrors, string id, string shiyanshi,string leixin)
         {
             try
             {
@@ -45,13 +45,29 @@ namespace Langben.BLL
                 var file = db.FILE_UPLOADER.Where(w => (w.PREPARE_SCHEMEID == data.PREPARE_SCHEMEID && w.STATE == "已上传")||(w.PREPARE_SCHEMEID == data.PREPARE_SCHEMEID && w.STATE2 == "已上传")).OrderBy(o => o.CREATETIME).FirstOrDefault();
                 if (file!=null)
                 {
-                    //上传的报告没有路径
-                    if (!file.PATH2.Contains("up"))
-                    {//D:\codes\App\up\TheReport\20170323\20170323111049_7264.xls
-                        string   str = file.FULLPATH2.Substring(file.FULLPATH2.IndexOf("up"));
-                        return str;
+                    if (leixin=="Yuan")
+                    {
+                        //上传的报告没有路径
+                        if (!file.PATH2.Contains("up"))
+                        {//D:\codes\App\up\TheReport\20170323\20170323111049_7264.xls
+                            string str = file.FULLPATH2.Substring(file.FULLPATH2.IndexOf("up"));
+                            str = str.Replace(@"\",@"/");
+                            return str;
+                        }
+                        return file.PATH2;
                     }
-                    return file.PATH2;
+                    else if(leixin == "Zhenshu")
+                    {
+                        //上传的报告没有路径
+                        if (!file.PATH.Contains("up"))
+                        {//D:\codes\App\up\TheReport\20170323\20170323111049_7264.xls
+                            string str = file.FULLPATH.Substring(file.FULLPATH.IndexOf("up"));
+                            str = str.Replace(@"\", @"/");
+                            return str;
+                        }
+                        return file.PATH;
+                    }
+                   
                 }
             
             }

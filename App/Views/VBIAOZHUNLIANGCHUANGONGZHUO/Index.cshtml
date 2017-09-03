@@ -114,7 +114,22 @@
         </div>
     </div>
 
-
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.WEITUODANWEI):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='WEITUODANWEI' />
+        </div>
+    </div>
+    <div class="input_search">
+        <div class="input_search-label">
+            @Html.LabelFor(model => model.ZHENGSHUBAOGAOBIANHAO):
+        </div>
+        <div class="input_search-field">
+            <input type='text' id='ZHENGSHUBAOGAOBIANHAO' />
+        </div>
+    </div>
 
     <div class='input_search' style="padding-top:10px;">
         <a href="#" onclick="flexiQuery()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">
@@ -141,13 +156,13 @@
             idField: 'ID',
             rowStyler: function (value, row, index) {
                 if (row.ZONGSHIJIAN < 12) {
-                    return 'background-color:#DDFF77;';
+                    //return 'background-color:#DDFF77;';
                 }
                 else if (row.ZONGSHIJIAN >= 12 && row.ZONGSHIJIAN <= 14) {
-                    return 'background-color:#FFFF77;';
+                    //return 'background-color:#FFFF77;';
                 }
-                else if ( row.ZONGSHIJIAN > 14) {
-                    return 'background-color:#FF88C2;';
+                else if (row.ZONGSHIJIAN > 14 && row.MOCHONGCHANGSHU=="") {
+                    //return 'background-color:#FF88C2;';
                 }
             },
             toolbar: [
