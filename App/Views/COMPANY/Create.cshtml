@@ -27,7 +27,13 @@
                 @Html.EditorFor(model => model.COMPANYNAME)
                 @Html.ValidationMessageFor(model => model.COMPANYNAME)
             </div>     
-          
+            <div class="editor-label">
+                <label for="POSTCODE">单位简称：</label>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.POSTCODE)
+                @Html.ValidationMessageFor(model => model.POSTCODE)
+            </div>  
         <div class="editor-label">
             <a class="anUnderLine" onclick="showModalOnly('PARENTID','../../COMPANY');">
                 @Html.LabelFor(model => model.PARENTID) 
