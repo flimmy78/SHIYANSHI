@@ -5,6 +5,7 @@ using System.Text;
 using System.Transactions;
 using Langben.DAL;
 using Common;
+using System.Diagnostics;
 
 namespace Langben.BLL
 {
@@ -44,19 +45,30 @@ namespace Langben.BLL
             }
 
             List<VRUKU> collection = new List<VRUKU>();
-             string ids = string.Empty;           
-            foreach (var item in queryData)
+             string ids = string.Empty;
+            Debug.WriteLine("开始");
+            try
             {
-                if (string.IsNullOrWhiteSpace(item.ID))
+                foreach (var item in queryData)
                 {
-                    continue;
-                }
-                if (!ids.Contains(item.ID))
-                {
-                    ids += item.ID + ",";
-                    collection.Add(item);
+                    Debug.WriteLine(item);
+                    if (string.IsNullOrWhiteSpace(item.ID))
+                    {
+                        continue;
+                    }
+                    if (!ids.Contains(item.ID))
+                    {
+                        ids += item.ID + ",";
+                        collection.Add(item);
+                    }
                 }
             }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+        
             total = collection.Count;
             if (total > 0)
             {

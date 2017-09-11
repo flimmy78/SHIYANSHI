@@ -16,6 +16,7 @@ using Gma.QrCodeNet.Encoding;
 using Gma.QrCodeNet.Encoding.Windows.Controls;
 using System.Drawing.Imaging;
 using System.Text.RegularExpressions;
+using System.Drawing.Drawing2D;
 
 namespace Langben.App.Controllers
 {
@@ -258,20 +259,28 @@ namespace Langben.App.Controllers
                         //string xinghao = "123456789abcd";//需要写入的字
                         int w = imag.Width;
                         int h = imag.Height; //entity.INSPECTION_ENTERPRISE
-                        g.DrawString("编号:"+ item.BAR_CODE_NUM, new Font("宋体", 14), Brushes.Red, new PointF(0, 260));//x:值越大越靠右；y：值越小越靠上
-                        if (entity.INSPECTION_ENTERPRISE.Length>9)
-                        {
-                            string zhi = entity.INSPECTION_ENTERPRISE.Substring(0, 9);
-                            string zhi2= entity.INSPECTION_ENTERPRISE.Remove(0, 9);
-                            g.DrawString(zhi, new Font("宋体", 14), Brushes.Red, new PointF(0, 320));//x:值越大越靠右；y：值越小越靠上
-                            g.DrawString(zhi2, new Font("宋体", 14), Brushes.Red, new PointF(0, 380));//x:值越大越靠右；y：值越小越靠上
-                        }
-                        else
-                        {
-                            g.DrawString(entity.INSPECTION_ENTERPRISE, new Font("宋体", 14), Brushes.Red, new PointF(0, 320));//x:值越大越靠右；y：值越小越靠上
-                        }
+                        StringFormat format = new StringFormat();
+                        format.Alignment = StringAlignment.Center;
+                        format.LineAlignment = StringAlignment.Center;
+                        DrawString(g, item.BAR_CODE_NUM, new Font("宋体", 14), new SolidBrush(Color.Black), new PointF(430, 200), format, -90f);
+                        var COMPANY = m_BLL2.GetAll();
+                        var dw = COMPANY.Where(m => m.COMPANYNAME == entity.INSPECTION_ENTERPRISE).Select(s => s.POSTCODE).Single();
+                        DrawString(g, dw, new Font("宋体", 14), new SolidBrush(Color.Black), new PointF(490, 200), format, -90f);
+                        //g.DrawString(item.BAR_CODE_NUM, new Font("宋体", 10), Brushes.Red, new PointF(350, 0));//x:值越大越靠右；y：值越小越靠上
+                        //if (entity.INSPECTION_ENTERPRISE.Length>9)
+                        //{
+                        //    string zhi = entity.INSPECTION_ENTERPRISE.Substring(0, 9);
+                        //    string zhi2= entity.INSPECTION_ENTERPRISE.Remove(0, 9);
+                        //    g.DrawString(zhi, new Font("宋体", 14), Brushes.Red, new PointF(0, 320));//x:值越大越靠右；y：值越小越靠上
+                        //    g.DrawString(zhi2, new Font("宋体", 14), Brushes.Red, new PointF(0, 380));//x:值越大越靠右；y：值越小越靠上
+                        //}
+                        //else
+                        //{
+                        //    g.DrawString(entity.INSPECTION_ENTERPRISE, new Font("宋体", 14), Brushes.Red, new PointF(0, 320));//x:值越大越靠右；y：值越小越靠上
+                        //}
 
                         System.Drawing.Image ig = CombinImage(imag, ms);
+                        //System.Drawing.Image ig = imag;
                         fss.Close();
                         TuPanBaoCun(ig, pathErWeiMa);
                         //生成pdf
@@ -364,10 +373,10 @@ namespace Langben.App.Controllers
             //g.FillRectangle(System.Drawing.Brushes.Black, -50, -50, (int)212, ((int)203));//相片四周刷一层黑色边框，这里没有，需要调尺寸
             //g.DrawImage(img, 照片与相框的左边距, 照片与相框的上边距, 照片宽, 照片高);
 
-            int x = 120;
+            int x = 0;
             int y = 0;
-            int w = imgBack.Width - 300;
-            int h = imgBack.Height - 200;
+            int w = imgBack.Width - 200;
+            int h = imgBack.Height - 80;
             g.DrawImage(img, x, y, w, h);
             GC.Collect();
             //string saveImagePath = @"D:\shiyanshi\App\up\sss.png";
@@ -451,7 +460,7 @@ namespace Langben.App.Controllers
         }
         IBLL.IORDER_TASK_INFORMATIONBLL m_BLL;
         IBLL.ICOMPANYBLL m_BLL2;
-
+        
         ValidationErrors validationErrors = new ValidationErrors();
 
         public ORDER_TASK_INFORMATIONController()
@@ -463,6 +472,31 @@ namespace Langben.App.Controllers
             m_BLL2 = bll2;
         }
 
+
+        //private Graphics _graphics;
+        /// <summary>  
+        /// 绘制根据点旋转文本，一般旋转点给定位文本包围盒中心点  
+        /// </summary>  
+        /// <param name="s">文本</param>  
+        /// <param name="font">字体</param>  
+        /// <param name="brush">填充</param>  
+        /// <param name="point">旋转点</param>  
+        /// <param name="format">布局方式</param>  
+        /// <param name="angle">角度</param>  
+        public void DrawString(Graphics ipg, string s, Font font, Brush brush, PointF point, StringFormat format, float angle)
+        {
+            // Save the matrix  
+            Matrix mtxSave = ipg.Transform;
+
+            Matrix mtxRotate = ipg.Transform;
+            mtxRotate.RotateAt(angle, point);
+            ipg.Transform = mtxRotate;
+
+            ipg.DrawString(s, font, brush, point, format);
+
+            // Reset the matrix  
+            ipg.Transform = mtxSave;
+        }
     }
 }
 
