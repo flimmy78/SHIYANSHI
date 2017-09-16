@@ -168,6 +168,33 @@ namespace Langben.DAL.shiyanshi
 
     }
     /// <summary>
+    /// 线类型
+    /// </summary>
+    public enum BorderType
+    {
+        /// <summary>
+        /// 检定原始记录
+        /// </summary>          
+        OriginalRecord_JianDing = 0,
+        /// <summary>
+        /// 校准原始记录
+        /// </summary>          
+        OriginalRecord_XiaoZhun = 1,
+        /// <summary>
+        /// 检定报告
+        /// </summary>
+        Report_JianDing = 2,
+        /// <summary>
+        /// 校准报告(非CNAS)
+        /// </summary>
+        Report_XiaoZhun = 3,
+        /// <summary>
+        /// 校准报告(CNAS)
+        /// </summary>
+        Report_XiaoZhun_CNAS = 4
+
+    }
+    /// <summary>
     /// 装置类型
     /// </summary>
     public enum CATEGORYType

@@ -2864,9 +2864,9 @@ namespace Langben.Report
             //标准装置
             int rowIndex_Source_ZhuangZhi = 29;
             //计量器具
-            int rowIndex_Source_QiJu = 32;
+            int rowIndex_Source_QiJu = 35;
             //中间试品
-            int rowIndex_Source_ShiPin = 35;
+            int rowIndex_Source_ShiPin = 41;
             string sheetName_Source = "封皮模板";
             switch (type)
             {
@@ -2874,16 +2874,16 @@ namespace Langben.Report
                 case ExportType.OriginalRecord_XiaoZhun:
                     sheetName_Source = "封皮模板";
                     rowIndex_Source_ZhuangZhi = 29;
-                    rowIndex_Source_QiJu = 32;
-                    rowIndex_Source_ShiPin = 35;
+                    rowIndex_Source_QiJu = 35;
+                    rowIndex_Source_ShiPin = 41;
                     break;
                 case ExportType.Report_JianDing:
                 case ExportType.Report_XiaoZhun:
                 case ExportType.Report_XiaoZhun_CNAS:
                     sheetName_Source = "第二页模板";
                     rowIndex_Source_ZhuangZhi = 11;
-                    rowIndex_Source_QiJu = 14;
-                    rowIndex_Source_ShiPin = 17;
+                    rowIndex_Source_QiJu = 17;
+                    rowIndex_Source_ShiPin = 23;
                     break;
             }
             ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
@@ -2900,6 +2900,8 @@ namespace Langben.Report
                 //CopyRow(sheet_Source, sheet_Destination, 2, rowIndex_Destination, 3, true);
                 //rowIndex_Destination = rowIndex_Destination + 3;
 
+             
+
                 //标准装置
                 List<METERING_STANDARD_DEVICE> listZhuanZhi = list.FindAll(p => p.CATEGORY == "标准装置");
                 SetZhuangZhi(sheet_Source, sheet_Destination, rowIndex_Source_ZhuangZhi, ref rowIndex_Destination, CATEGORYType.标准装置, listZhuanZhi);
@@ -2909,10 +2911,51 @@ namespace Langben.Report
                 //中间试品
                 List<METERING_STANDARD_DEVICE> listShiPin = list.FindAll(p => p.CATEGORY == "中间试品");
                 SetZhuangZhi(sheet_Source, sheet_Destination, rowIndex_Source_ShiPin, ref rowIndex_Destination, CATEGORYType.中间试品, listShiPin);
+
+
+
             }
             //}
 
         }
+
+        /// <summary>
+        /// 设置顶部底部不画线
+        /// </summary>
+        /// <param name="hssfworkbook"></param>
+        /// <param name="sheet_Destination"></param>
+        /// <param name="RowIndex">行号</param>
+        /// <param name="Top">顶部是否不画线</param>
+        /// <param name="Bottom">底部是否不画线</param>
+        private void SetBorder(IWorkbook hssfworkbook, ISheet sheet_Destination, int RowIndex,bool Top,bool Bottom)
+        {
+            //为了相同项表格底部没有线                           
+            ICellStyle style = hssfworkbook.CreateCellStyle();
+            
+
+            IRow targetRow = sheet_Destination.GetRow(RowIndex);
+            ICell targetCell = null;
+            //每行单元格处理               
+            for (int m = targetRow.FirstCellNum; m < targetRow.LastCellNum; m++)
+            {
+                if (m < 31)
+                {
+                    targetCell = targetRow.GetCell(m);
+                    style = targetCell.CellStyle;
+                    if (Top)
+                    {
+                        style.BorderTop = BorderStyle.None;
+                    }
+                    if (Bottom)
+                    {
+                        style.BorderBottom = BorderStyle.None;
+                    }
+                   
+                    targetCell.CellStyle = style;//样式                                  
+                }
+            }
+        }
+
         /// <summary>
         /// 设置标准装置/计量标准器信息
         /// </summary>
@@ -2940,9 +2983,34 @@ namespace Langben.Report
                     rowIndex_Destination++;
 
                     #region 数据
+
+                    int startRow = rowIndex_Destination;
+
+                    int count = 1;
+
                     foreach (METERING_STANDARD_DEVICE item in listZhuanZhi)
                     {
-                        CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, false);
+                        if (listZhuanZhi.Count == 1)
+                        {
+                            CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, false);
+                        }
+                        else if(listZhuanZhi.Count>1)
+                        {
+                            if(count==1)
+                            {
+                                CopyRow(sheet_Source, sheet_Destination, rowIndex_Source+1, rowIndex_Destination, 1, false);
+                            }
+                            else if(count== listZhuanZhi.Count)
+                            {
+                                CopyRow(sheet_Source, sheet_Destination, rowIndex_Source + 3, rowIndex_Destination, 1, false);
+                            }
+                            else
+                            {
+                                CopyRow(sheet_Source, sheet_Destination, rowIndex_Source + 2, rowIndex_Destination, 1, false);
+                            }
+
+                        }
+                        count++;
 
                         int row_SourceHeight = sheet_Source.GetRow(rowIndex_Source).Height;//源行高
                         int maxRowCount = 1;//最大换行数用来控制行高
@@ -3068,6 +3136,27 @@ namespace Langben.Report
                         #endregion
                         rowIndex_Destination++;
                     }
+
+                    #region 去掉中间线(第一行顶部跟最后一行底部有线，其他没线)（不好使）
+                    //int rowCount = 0;
+                    //if (listZhuanZhi != null && listZhuanZhi.Count > 0)
+                    //{
+                    //    rowCount = listZhuanZhi.Count;
+                    //}                    
+
+                    //if (rowCount > 1 && rowCount == 2)
+                    //{
+                    //    SetBorder(sheet_Destination.Workbook, sheet_Destination, startRow-1, false, true);
+                    //    //SetBorder(sheet_Destination.Workbook, sheet_Destination, startRow+1, true, false);
+                    //}
+                    //else if (rowCount > 2)
+                    //{
+                    //    for (int i = 1; i <= rowCount - 2; i++)
+                    //    {
+                    //        SetBorder(sheet_Destination.Workbook, sheet_Destination, startRow + i, false, true);
+                    //    }
+                    //}
+                    #endregion
 
                     #endregion
                 }
