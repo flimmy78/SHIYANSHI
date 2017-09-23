@@ -3215,10 +3215,10 @@ namespace Langben.Report
                     //    continue;
                     //}
 
-                    //if (iVTEST_ITE.PARENTID != "982-2003_6")
-                    //{
-                    //    continue;
-                    //}
+                    if (iVTEST_ITE.RULEID != "1085-2013_9")
+                    {
+                        continue;
+                    }
                     //if (iVTEST_ITE.RULEID != "1264-2010_3_1")
                     //{
                     //    continue;
@@ -4335,6 +4335,14 @@ namespace Langben.Report
                 notItalicStartIndex = value.ToUpper().IndexOf("COS");//非斜体开始位置
                 notItalicEndIndex = notItalicStartIndex + 2;//非斜体结束位置   
             }
+            else if (value.IndexOf("/γ6") >= 0 || value.IndexOf("/γ7") >= 0 || value.IndexOf("/γ8") >= 0 || value.IndexOf("/γ9") >= 0)
+            {
+                SpecialStr = value.ToUpper().Substring(1);
+                speStartIndex = 1;
+                notItalicStartIndex = 0;//非斜体开始位置
+                notItalicEndIndex = 0;//非斜体结束位置   
+            }
+
             else if (value.ToUpper().IndexOf("δx1".ToUpper()) >= 0)
             {
                 speStartIndex = value.Trim().ToUpper().IndexOf("δx1".ToUpper());
