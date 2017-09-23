@@ -3215,10 +3215,10 @@ namespace Langben.Report
                     //    continue;
                     //}
 
-                    if (iVTEST_ITE.RULEID != "1085-2013_9")
-                    {
-                        continue;
-                    }
+                    //if (iVTEST_ITE.RULEID != "1085-2013_9")
+                    //{
+                    //    continue;
+                    //}
                     //if (iVTEST_ITE.RULEID != "1264-2010_3_1")
                     //{
                     //    continue;
@@ -5621,10 +5621,19 @@ namespace Langben.Report
                 ICellStyle style = sheet_Destination.Workbook.CreateCellStyle();
                 style.BorderBottom = BorderStyle.None;
                 style.BorderTop = BorderStyle.None;
+                
                 for (int col = 0; col < 57; col++)
                 {
                     ICell targetCell = sheet_Destination.GetRow(rowIndex_Destination).GetCell(col);
                     targetCell.CellStyle = style;
+                }
+                if (iEntity.RULEID == "169-2010_4_1")
+                {
+                    for (int col = 0; col < 57; col++)
+                    {
+                        ICell targetCell = sheet_Destination.GetRow(rowIndex_Destination-1).GetCell(col);
+                        targetCell.CellStyle = style;
+                    }
                 }
 
 
