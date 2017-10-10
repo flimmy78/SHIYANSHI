@@ -14,7 +14,7 @@ using Langben.App.Models;
 
 namespace Langben.App.Controllers
 {
-    
+
     /// <summary>
     /// 检定项目模板
     /// </summary>
@@ -163,7 +163,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult GongZuoDianliuDianYa(string id= "电流", string RULEID = "169-2010_4_3", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult GongZuoDianliuDianYa(string id = "电流", string RULEID = "169-2010_4_3", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             ViewBag.canshu = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
@@ -176,7 +176,7 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult PingHengFuZaiShiYouGongDianNengWuCha(string id="", string RULEID = "1085-2013_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult PingHengFuZaiShiYouGongDianNengWuCha(string id = "", string RULEID = "1085-2013_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             ViewBag.id = id;
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
@@ -533,7 +533,7 @@ namespace Langben.App.Controllers
 
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
- 
+
         /// <summary>
         ///8h变差改变量
         /// </summary>
@@ -622,7 +622,7 @@ namespace Langben.App.Controllers
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
         public ActionResult OMYiXiaBiaoZhunDianZu(string RULEID = "166-1993_3_2", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
-        {           
+        {
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -635,7 +635,7 @@ namespace Langben.App.Controllers
         /// <returns></returns>
         public ActionResult DanQiaoJiBenLiangCheng(string RULEID = "125-2004_9_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-             
+
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -648,7 +648,7 @@ namespace Langben.App.Controllers
         /// <returns></returns>
         public ActionResult JiBenWuChaDianZuShiZhi(string RULEID = "1072-2011_6_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-            
+
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -659,9 +659,9 @@ namespace Langben.App.Controllers
         /// <param name="SCHEMEID">方案id</param>
         /// <param name="PREPARE_SCHEMEID">预备方案id</param>
         /// <returns></returns>
-        public ActionResult OMYiXiaWuWuCha( string RULEID = "166-1993_3_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult OMYiXiaWuWuCha(string RULEID = "166-1993_3_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-             
+
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -674,7 +674,7 @@ namespace Langben.App.Controllers
         /// <returns></returns>
         public ActionResult JueYuanDianZu(string RULEID = "1052-2009_10", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-             
+
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -687,7 +687,7 @@ namespace Langben.App.Controllers
         /// <returns></returns>
         public ActionResult GongZuoDianLiuShiZhiWuCha(string RULEID = "1052-2009_6", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
-             
+
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
@@ -963,14 +963,22 @@ namespace Langben.App.Controllers
         public ActionResult Detail(string RULEID = "", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         {
             Account account = GetCurrentAccount();
-            if (account.UNDERTAKE_LABORATORYName=="电能")
+            if (account != null)
             {
-                ViewBag.UNDERTAKE_LABORATORYName = "display:none";
+                if (account.UNDERTAKE_LABORATORYName == "电能")
+                {
+                    ViewBag.UNDERTAKE_LABORATORYName = "display:none";
+                }
+                else
+                {
+                    ViewBag.UNDERTAKE_LABORATORYName = "";
+                }
             }
             else
             {
                 ViewBag.UNDERTAKE_LABORATORYName = "";
             }
+
             //account.RoleIds
             if (!string.IsNullOrWhiteSpace(PREPARE_SCHEMEID))
             {//预备方案
@@ -1055,8 +1063,8 @@ namespace Langben.App.Controllers
             entity.SCHEMEID = SCHEMEID;
             entity.HTMLVALUE = Server.UrlDecode(HTMLVALUE);//解码
 
-            PROJECTTEMPLET pEntity= m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
-            if(pEntity!=null)
+            PROJECTTEMPLET pEntity = m_BLL.GetModelByRULEID_SCHEMEID(RULEID, SCHEMEID);
+            if (pEntity != null)
             {
                 OldID = pEntity.ID;
             }
@@ -1189,7 +1197,7 @@ namespace Langben.App.Controllers
         /// <param name="PinLv">频率</param>
         /// <param name="PinLvDanWei">频率单位</param>
         /// <returns></returns>
-        public ActionResult GetSuanBuQueDingDu(string RuleID, string ShuChuShiJiZhi, string ShuChuShiJiZhiDanWei, string LiangCheng,string LiangChengDanWei, string K, string XuanYongDianZu, string XuanYongDianZuDanWei, string ShuChuShiZhi, string ShuChuShiZhiDanWei, string PinLv, string PinLvDanWei)
+        public ActionResult GetSuanBuQueDingDu(string RuleID, string ShuChuShiJiZhi, string ShuChuShiJiZhiDanWei, string LiangCheng, string LiangChengDanWei, string K, string XuanYongDianZu, string XuanYongDianZuDanWei, string ShuChuShiZhi, string ShuChuShiZhiDanWei, string PinLv, string PinLvDanWei)
         {
             Common.ClientResult.Result result = new Common.ClientResult.Result();
             try
@@ -1211,12 +1219,12 @@ namespace Langben.App.Controllers
                 result.Code = Common.ClientCode.Succeed;
                 result.Message = value;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 result.Code = Common.ClientCode.Fail;
-                result.Message = ex.Message;               
+                result.Message = ex.Message;
             }
-            return Json(result); 
+            return Json(result);
 
 
         }
@@ -1247,11 +1255,11 @@ namespace Langben.App.Controllers
         /// 直流电压（电流）测量-相对误差（多通道）
         /// </summary>
         /// <returns></returns>
-        public ActionResult ZhiLiuDianLiuDianYa(string id =  "绝对误差", string RULEID = "315-1983_2_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        public ActionResult ZhiLiuDianLiuDianYa(string id = "绝对误差", string RULEID = "315-1983_2_1", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
         { //输出 测量
             ViewBag.canshu = id;
             //绝对误差 相对误差 
-    
+
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
     }
