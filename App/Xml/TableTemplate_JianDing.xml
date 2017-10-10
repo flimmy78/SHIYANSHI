@@ -12672,8 +12672,8 @@
 		<TableTemplate>
 			<RuleID>982-2003_6_2</RuleID>
 			<DataRowIndex>882</DataRowIndex>
-			<RemarkRowIndex>883</RemarkRowIndex>
-			<ConclusionRowIndex>884</ConclusionRowIndex>
+			<RemarkRowIndex>884</RemarkRowIndex>
+			<ConclusionRowIndex>885</ConclusionRowIndex>
 			<CellList>
 				<Cell>
 					<Code>RANGE</Code>
