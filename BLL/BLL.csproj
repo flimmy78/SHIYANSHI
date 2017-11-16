@@ -91,6 +91,7 @@
     <Compile Include="Report\BuQueDingBuJiHe.cs" />
     <Compile Include="Report\BuQueDingBuInput.cs" />
     <Compile Include="Report\BuQueDingBuGongShi.cs" />
+    <Compile Include="Report\MergedCellRegion.cs" />
     <Compile Include="Report\MYData.cs" />
     <Compile Include="Report\DataValue.cs" />
     <Compile Include="Report\KeyValue.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Report\ReportModel.cs" />
     <Compile Include="Report\ReportModelBase.cs" />
     <Compile Include="Report\ReportStatic.cs" />
+    <Compile Include="Report\RowMyHero.cs" />
     <Compile Include="Shiyanshi\ALLOWABLE_ERRORBLL.cs" />
     <Compile Include="Shiyanshi\APPLIANCE_DETAIL_INFORMATIONBLL.cs" />
     <Compile Include="Shiyanshi\APPLIANCE_LABORATORYBLL.cs" />
