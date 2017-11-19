@@ -976,7 +976,7 @@ namespace Langben.Report
                 //设置数据
                 SetShuJuBaoGao(hssfworkbook, entity, type);
 
-             
+
                 //隐藏不需要的sheet
                 HiddenSheet(hssfworkbook, type, false, entity.CONCLUSION);
                 //////////////////////////////////////////////////////
@@ -3829,7 +3829,7 @@ namespace Langben.Report
             //最新的表头有几行
             int headMyLength = 1;
             //一个页面多高开始分页
-            int startPageMy = 830;
+            int startPageMy = 750;
             float total = 0;
             rowCount = sheet.LastRowNum;
             for (int i = 0; i < rowCount; i++)
@@ -3885,17 +3885,12 @@ namespace Langben.Report
                         headMyLength = height[i].CurrentMyRow;
                         //在表头中的高度
                         float currentHeightMiddle = currentHeight;
-
-                        var lastRowData1 = (from rc in result
-                                            where height[i].I - 1 + headMyLength == rc.FirstRow
-                                            select rc.LastRow).OrderByDescending(r => r).FirstOrDefault();
-                        if (lastRowData1 > 0)
+                        //表头的行高
+                        for (int r = 0; r <headMyLength; r++)
                         {
-                            for (int r = i; r <= lastRowData1; r++)
-                            {
-                                currentHeightMiddle += height[r].HeightInPoints;
-                            }
+                            currentHeightMiddle += height[i + r].HeightInPoints;
                         }
+                        currentHeightMiddle += 25;//1列内高度
 
                         if ((startPageMy - currentHeightMiddle) <= 0)
                         {//剩下的高度不足，直接分页
@@ -3930,16 +3925,12 @@ namespace Langben.Report
                     else
                     {//不是表头
                         float currentHeightMiddle = currentHeight;
-                        var lastRowData1 = (from rc in result
-                                            where height[i].I - 1 == rc.FirstRow
-                                            select rc.LastRow).OrderByDescending(r => r).FirstOrDefault();
-                        if (lastRowData1 > 0)
+                        //表头的行高
+                        for (int r = 0; r < headMyLength; r++)
                         {
-                            for (int r = i; r <= lastRowData1; r++)
-                            {
-                                currentHeightMiddle += height[r].HeightInPoints;
-                            }
+                            currentHeightMiddle += height[i + r].HeightInPoints;
                         }
+                        currentHeightMiddle += 25;//1列内高度
 
                         if ((startPageMy - currentHeightMiddle) <= 0)
                         {//剩下的高度不足，直接分页
