@@ -974,242 +974,12 @@ namespace Langben.Report
                 SetSecond_BaoGao(hssfworkbook, entity, ref fRemark, type);
 
                 //设置数据
-                SetShuJu(hssfworkbook, entity, type);
+                SetShuJuBaoGao(hssfworkbook, entity, type);
 
+             
                 //隐藏不需要的sheet
                 HiddenSheet(hssfworkbook, type, false, entity.CONCLUSION);
                 //////////////////////////////////////////////////////
-
-                /// <summary>
-                /// 模板中所有的合并的单元格
-                /// </summary>
-            List<CellRangeAddress> newCellRangeAddress = new List<CellRangeAddress>();
-        /// <summary>
-        /// 最后一行的标号  即总的行数
-        /// </summary>
-            int rowCount = 1;
-
-            List<RowMyHero> height = new List<RowMyHero>();
-
-         var  sheetName_Destination = "数据";
-                var sheet = hssfworkbook.GetSheet(sheetName_Destination);
-                //需要v插入分页的地方
-                List<int> rowBreak = new List<int>();
-
-                //最新的表头所在行
-                int headMyRow = 29;
-                //最新的表头有几行
-                int headMyLength = 1;
-                //一个页面多高开始分页
-                int startPageMy = 830;
-                float total = 0;
-                rowCount = sheet.LastRowNum;
-                for (int i = 0; i < rowCount; i++)
-                {
-                    var row = sheet.GetRow(i);
-                    if (row == null)
-                    {
-                        rowCount = i;
-                        break;
-                    }
-                    total += row.HeightInPoints;
-
-                    RowMyHero hero = new RowMyHero();
-                    hero.I = i + 1;
-                    hero.HeightInPoints = row.HeightInPoints;
-                    hero.Total = total;
-
-                    if (row.Cells != null && row.Cells.Count > 0)
-                    {
-
-                        if (row.Cells.Count > 57 && row.Cells[57] != null)
-                        {
-                            var d = row.Cells[57].StringCellValue;
-                            if (!string.IsNullOrWhiteSpace(d))
-                            {
-                                hero.CurrentHeight = (float)Convert.ToDouble(d.Split(',')[1]);
-                                hero.CurrentMyRow = Convert.ToInt32(d.Split(',')[0]);
-                            }
-                        }
-                    }
-                    height.Add(hero);
-                }
-                int hiddenMyRow = rowCount;
-                //当前第几行
-                int currentMyRow = rowCount;
-                //当前高度
-                float currentHeight = 0;
-                if (total > startPageMy)
-                {//满足分页的前提
-                    sheet.FitToPage = false;
-
-                    MergedCellRegion c = new MergedCellRegion();
-                    var result = c.GetMergedCellRegion(sheet);//获取所有的合并单元格
-                                                              //////////////////////////////////////////////////////////////////////////////////////////
-                    for (int i = 0; i < height.Count; i++)
-                    {
-                        //是表头,在列58告诉需要多高
-                        if (height[i].CurrentMyRow > 0)
-                        {
-                            //最新的表头所在行
-                            headMyRow = height[i].I;
-                            //最新的表头有几行
-                            headMyLength = height[i].CurrentMyRow;
-                            //在表头中的高度
-                            float currentHeightMiddle = currentHeight;
-
-                            var lastRowData1 = (from rc in result
-                                                where height[i].I - 1 + headMyLength == rc.FirstRow
-                                                select rc.LastRow).OrderByDescending(r => r).FirstOrDefault();
-                            if (lastRowData1 > 0)
-                            {
-                                for (int r = i; r <= lastRowData1; r++)
-                                {
-                                    currentHeightMiddle += height[r].HeightInPoints;
-                                }
-                            }
-
-                            if ((startPageMy - currentHeightMiddle) <= 0)
-                            {//剩下的高度不足，直接分页
-                                rowBreak.Add(currentMyRow - 1);
-                                //空白行
-                                currentMyRow++;
-                                var r = sheet.CreateRow(currentMyRow);
-
-                                r.HeightInPoints = 13;
-                                //当前高度
-                                currentHeight = 13;
-                            }
-                            currentMyRow++;
-                            currentHeight += CopyRow(sheet, currentMyRow, height[i].I);//复制样式和数据
-
-                            var lastRowData = (from rc in result
-                                               where height[i].I - 1 == rc.LastRow
-                                               select rc);
-                            if (lastRowData != null && lastRowData.Count() > 0)
-                            {
-                                //添加合并区域    
-                                foreach (var item in lastRowData)
-                                {//复制合并单元格
-                                    var dc = item.Copy();
-                                    dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
-                                    dc.LastRow = currentMyRow - 1;
-
-                                    newCellRangeAddress.Add(dc);
-                                }
-                            }
-                        }
-                        else
-                        {//不是表头
-                            float currentHeightMiddle = currentHeight;
-                            var lastRowData1 = (from rc in result
-                                                where height[i].I - 1 == rc.FirstRow
-                                                select rc.LastRow).OrderByDescending(r => r).FirstOrDefault();
-                            if (lastRowData1 > 0)
-                            {
-                                for (int r = i; r <= lastRowData1; r++)
-                                {
-                                    currentHeightMiddle += height[r].HeightInPoints;
-                                }
-                            }
-
-                            if ((startPageMy - currentHeightMiddle) <= 0)
-                            {//剩下的高度不足，直接分页
-                                rowBreak.Add(currentMyRow - 1);//上一行打分页符
-                                                               //空白行
-                                currentMyRow++;
-                                var r = sheet.CreateRow(currentMyRow);
-                                r.HeightInPoints = 13;
-                                ////当前高度
-                                currentHeight = 13;
-
-                                //复制表头 
-                                for (int h = headMyRow; h < headMyRow + headMyLength; h++)
-                                {
-                                    currentMyRow++;
-                                    currentHeight += CopyRow(sheet, currentMyRow, h);//复制样式和数据
-                                    var lastRowDataHead = (from rc in result
-                                                           where h - 1 == rc.LastRow
-                                                           select rc);
-                                    if (lastRowDataHead != null && lastRowDataHead.Count() > 0)
-                                    {
-                                        //添加合并区域    
-                                        foreach (var item in lastRowDataHead)
-                                        {//复制合并单元格
-                                            var dc = item.Copy();
-                                            dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
-
-                                            dc.LastRow = currentMyRow - 1;
-
-                                            newCellRangeAddress.Add(dc);
-                                        }
-                                    }
-
-                                }
-                                //继续复制内容
-                                currentMyRow++;
-                                currentHeight += CopyRow(sheet, currentMyRow, height[i].I);//复制样式和数据
-                                var lastRowDataCurrent = (from rc in result
-                                                          where height[i].I - 1 == rc.LastRow
-                                                          select rc);
-                                if (lastRowDataCurrent != null && lastRowDataCurrent.Count() > 0)
-                                {
-                                    //添加合并区域    
-                                    foreach (var item in lastRowDataCurrent)
-                                    {//复制合并单元格
-                                        var dc = item.Copy();
-                                        dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
-                                        dc.LastRow = currentMyRow - 1;
-
-                                        newCellRangeAddress.Add(dc);
-                                    }
-                                }
-
-                            }
-                            else
-                            {//正常
-                                currentMyRow++;
-                                currentHeight += CopyRow(sheet, currentMyRow, height[i].I);//复制样式和数据
-
-                                var lastRowData = (from rc in result
-                                                   where height[i].I - 1 == rc.LastRow
-                                                   select rc);
-                                if (lastRowData != null && lastRowData.Count() > 0)
-                                {
-                                    //添加合并区域    
-                                    foreach (var item in lastRowData)
-                                    {//复制合并单元格
-                                        var dc = item.Copy();
-                                        dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
-
-                                        dc.LastRow = currentMyRow - 1;
-
-                                        newCellRangeAddress.Add(dc);
-                                    }
-                                }
-                            }
-
-                        }
-                    }
-                    for (int i = 0; i < hiddenMyRow; i++)
-                    {
-                        IRow sourceRow = sheet.GetRow(i);
-                        if (sourceRow != null)
-                        {
-                            sourceRow.Height = 0;
-                        }
-                    }
-                    foreach (var item in newCellRangeAddress)
-                    {
-                        sheet.AddMergedRegion(item);
-                    }
-                    foreach (var item in rowBreak)
-                    {
-                        sheet.SetRowBreak(item);
-                    }
-                }
-
-
 
 
 
@@ -2330,7 +2100,7 @@ namespace Langben.Report
         /// <param name="fEntity">返回附件实体</param>
         /// <returns></returns>
         public bool ExportOriginalRecord(string ID, string Person, out string Message, out FILE_UPLOADER fEntity)
-        { 
+        {
             fEntity = new FILE_UPLOADER();
             IBLL.IPREPARE_SCHEMEBLL m_BLL = new PREPARE_SCHEMEBLL();
             PREPARE_SCHEME entity = m_BLL.GetById(ID);
@@ -2358,7 +2128,7 @@ namespace Langben.Report
                 //设置数据
                 SetShuJu(hssfworkbook, entity, type, IsIsHaveBuQueDingDu);
 
-               
+
 
                 //隐藏不需要的sheet
                 HiddenSheet(hssfworkbook, type, IsIsHaveBuQueDingDu, entity.CONCLUSION);
@@ -2409,14 +2179,14 @@ namespace Langben.Report
                 case ExportType.OriginalRecord_XiaoZhun:
                     if (IsHaveBuQueDingDu == false)
                     {
-                        s= 2;
-                       // hssfworkbook.RemoveSheetAt(2);//不确定度,没有不确定度需要隐藏该sheet
+                        s = 2;
+                        // hssfworkbook.RemoveSheetAt(2);//不确定度,没有不确定度需要隐藏该sheet
                     }
                     else
                     {
                         s = 3;
                     }
-                    while (s!= hssfworkbook.NumberOfSheets)
+                    while (s != hssfworkbook.NumberOfSheets)
                     {
                         hssfworkbook.RemoveSheetAt(s);//封皮模板
                     }
@@ -2426,21 +2196,21 @@ namespace Langben.Report
                     //}
                     //hssfworkbook.RemoveSheetAt(3);//封皮模板
                     //hssfworkbook.RemoveSheetAt(4);//数据模板
-                  //  hssfworkbook.RemoveSheetAt(5);//不确定度模板
+                    //  hssfworkbook.RemoveSheetAt(5);//不确定度模板
                     break;
 
 
                 case ExportType.Report_JianDing:
                     if (CONCLUSION == "合格")
                     {
-                         
+
                         hssfworkbook.SetSheetHidden(1, SheetState.VeryHidden);//调用这个方法就行了。
                         //hssfworkbook.RemoveSheetAt(1);//通知书
                     }
                     else
                     {
                         hssfworkbook.SetSheetHidden(0, SheetState.VeryHidden);//调用这个方法就行了。
-                       // hssfworkbook.RemoveSheetAt(0);//封皮
+                                                                              // hssfworkbook.RemoveSheetAt(0);//封皮
                     }
                     while (4 != hssfworkbook.NumberOfSheets)
                     {
@@ -2494,7 +2264,7 @@ namespace Langben.Report
                     SpecialCharacters allSpecialCharacters = GetSpecialCharacters();
                     entity.QUALIFIED_UNQUALIFIED_TEST_ITE = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.OrderBy(p => p.SORT).ToList();
 
-                   
+
 
                     foreach (QUALIFIED_UNQUALIFIED_TEST_ITE iEntity in entity.QUALIFIED_UNQUALIFIED_TEST_ITE)
                     {
@@ -2611,8 +2381,8 @@ namespace Langben.Report
 
                                             }
 
-                                        }                                    
-                                        
+                                        }
+
 
                                         #endregion
                                     }
@@ -2809,10 +2579,10 @@ namespace Langben.Report
 
                 if (ruleCount > 0)//如果不确定过程一个都没有需要隐藏不确定sheet
                 {
-                   
-                   
+
+
                     int JWTemplateIndex = 0;//结尾格式                      
-                    sheetName_Source = "数据模板";                  
+                    sheetName_Source = "数据模板";
                     sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
                     rowIndex_Destination++;
                     //插入一行空行
@@ -2820,7 +2590,7 @@ namespace Langben.Report
                     rowIndex_Destination++;
                     //结尾 有不确定度将结尾打到不确定度页                   
                     CopyRow(sheet_Source, sheet_Destination, JWTemplateIndex, rowIndex_Destination, 1, true);
-                   
+
 
                     //设置页面页脚
                     SetHeaderAndFooter(sheet_Destination, entity);
@@ -2863,7 +2633,7 @@ namespace Langben.Report
             }
             //脉冲常数
             if (entity.PULSE_CONSTANT == null || entity.PULSE_CONSTANT.Trim() == "")
-            { 
+            {
                 HideRow(sheet_Destination, 12, 1);
             }
             else
@@ -3192,7 +2962,7 @@ namespace Langben.Report
                 //CopyRow(sheet_Source, sheet_Destination, 2, rowIndex_Destination, 3, true);
                 //rowIndex_Destination = rowIndex_Destination + 3;
 
-             
+
 
                 //标准装置
                 List<METERING_STANDARD_DEVICE> listZhuanZhi = list.FindAll(p => p.CATEGORY == "标准装置");
@@ -3219,11 +2989,11 @@ namespace Langben.Report
         /// <param name="RowIndex">行号</param>
         /// <param name="Top">顶部是否不画线</param>
         /// <param name="Bottom">底部是否不画线</param>
-        private void SetBorder(IWorkbook hssfworkbook, ISheet sheet_Destination, int RowIndex,bool Top,bool Bottom)
+        private void SetBorder(IWorkbook hssfworkbook, ISheet sheet_Destination, int RowIndex, bool Top, bool Bottom)
         {
             //为了相同项表格底部没有线                           
             ICellStyle style = hssfworkbook.CreateCellStyle();
-            
+
 
             IRow targetRow = sheet_Destination.GetRow(RowIndex);
             ICell targetCell = null;
@@ -3242,7 +3012,7 @@ namespace Langben.Report
                     {
                         style.BorderBottom = BorderStyle.None;
                     }
-                   
+
                     targetCell.CellStyle = style;//样式                                  
                 }
             }
@@ -3286,13 +3056,13 @@ namespace Langben.Report
                         {
                             CopyRow(sheet_Source, sheet_Destination, rowIndex_Source, rowIndex_Destination, 1, false);
                         }
-                        else if(listZhuanZhi.Count>1)
+                        else if (listZhuanZhi.Count > 1)
                         {
-                            if(count==1)
+                            if (count == 1)
                             {
-                                CopyRow(sheet_Source, sheet_Destination, rowIndex_Source+1, rowIndex_Destination, 1, false);
+                                CopyRow(sheet_Source, sheet_Destination, rowIndex_Source + 1, rowIndex_Destination, 1, false);
                             }
-                            else if(count== listZhuanZhi.Count)
+                            else if (count == listZhuanZhi.Count)
                             {
                                 CopyRow(sheet_Source, sheet_Destination, rowIndex_Source + 3, rowIndex_Destination, 1, false);
                             }
@@ -3459,7 +3229,6 @@ namespace Langben.Report
                 throw;
             }
         }
-
         /// <summary>
         /// 设置数据信息
         /// </summary>
@@ -3467,7 +3236,7 @@ namespace Langben.Report
         /// <param name="entity">预备方案对象</param>
         /// <param name="type">导出类型</param>
         /// <param name="IsIsHaveBuQueDingDu">是否有不确定，无不确定度需要打印结尾最后一行，否则不需要打印结尾最后一行（只有原始记录才有不确定度）</param>
-        private void SetShuJu(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing,bool IsIsHaveBuQueDingDu = false)
+        private void SetShuJu(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing, bool IsIsHaveBuQueDingDu = false)
         {
             List<VTEST_ITE> vList = null;
             if (entity != null)
@@ -3553,7 +3322,7 @@ namespace Langben.Report
 
                     bool IsSameRuleName = false;
 
-                    if(type== ExportType.Report_JianDing && (iVTEST_ITE.RULEID== "169-2010_4_2" || iVTEST_ITE.RULEID== "169-2010_4_3"))//检定报告中检测项不打印
+                    if (type == ExportType.Report_JianDing && (iVTEST_ITE.RULEID == "169-2010_4_2" || iVTEST_ITE.RULEID == "169-2010_4_3"))//检定报告中检测项不打印
                     {
                         continue;
                     }
@@ -3573,11 +3342,11 @@ namespace Langben.Report
                     string msg = string.Empty;
                     if (iEntity != null && type == ExportType.Report_JianDing)//处理检定报告 是否出表格
                     {
-                       
+
                         IsBiaoGe = IsBiaoGeByDengJi(iEntity, ref msg);
                     }
 
-                    if (IsSameRuleName==false)
+                    if (IsSameRuleName == false)
                     {
                         string celStr = i.ToString() + "、";
 
@@ -3621,7 +3390,7 @@ namespace Langben.Report
                         else if (iEntity == null)
                         {
                             celStr = celStr + "/";
-                        }                      
+                        }
 
                         CopyRow(sheet_Source, sheet_Destination, ruleTitleTemplateIndex, RowIndex, 1, false);
 
@@ -3739,11 +3508,537 @@ namespace Langben.Report
             #endregion
             //结尾 是否有不确定，无不确定度需要打印结尾最后一行，否则不需要打印结尾最后一行（只有原始记录才有不确定度）
             if (IsIsHaveBuQueDingDu == false)
-            {                            
+            {
                 CopyRow(sheet_Source, sheet_Destination, JWTemplateIndex, RowIndex, 1, true);
             }
             //删除所有无用行数据
             DeleteAllRow(sheet_Destination);
+            //设置页面页脚
+            SetHeaderAndFooter(sheet_Destination, entity, type);
+
+
+
+
+            sheet_Destination.ForceFormulaRecalculation = true;
+        }
+
+        /// <summary>
+        /// 设置数据信息
+        /// </summary>
+        /// <param name="hssfworkbook">工作文件</param>
+        /// <param name="entity">预备方案对象</param>
+        /// <param name="type">导出类型</param>
+        /// <param name="IsIsHaveBuQueDingDu">是否有不确定，无不确定度需要打印结尾最后一行，否则不需要打印结尾最后一行（只有原始记录才有不确定度）</param>
+        private void SetShuJuBaoGao(IWorkbook hssfworkbook, PREPARE_SCHEME entity, ExportType type = ExportType.OriginalRecord_JianDing, bool IsIsHaveBuQueDingDu = false)
+        {
+            List<VTEST_ITE> vList = null;
+            if (entity != null)
+            {
+                IBLL.IVTEST_ITEBLL vBLL = new VTEST_ITEBLL();
+                vList = vBLL.GetByPREPARE_SCHEMEID(entity.ID);
+            }
+            int RowIndex = 1;
+            if (type == ExportType.Report_JianDing || type == ExportType.Report_XiaoZhun || type == ExportType.Report_XiaoZhun_CNAS)
+            {
+                RowIndex = 2;
+            }
+            int JWTemplateIndex = 0;//结尾格式   
+            int ruleTitleTemplateIndex = 1;//检测项目名称
+            string sheetName_Source = "数据模板";
+            string sheetName_Destination = "数据";
+            ISheet sheet_Source = hssfworkbook.GetSheet(sheetName_Source);
+            ISheet sheet_Destination = hssfworkbook.GetSheet(sheetName_Destination);
+            bool IsHaveHideData = false;//是否有隐藏数据 解决缺少线问题 
+            #region 检测项目            
+            if (vList != null && vList.Count > 0)
+            {
+
+                TableTemplates allTableTemplates = GetTableTemplates(type);
+                SpecialCharacters allSpecialCharacters = GetSpecialCharacters();
+
+
+                entity.QUALIFIED_UNQUALIFIED_TEST_ITE = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.OrderBy(p => p.SORT).ToList();
+                int i = 1;
+                string SameRuleName = "";
+                List<string> SameRuleNameList = GetSameRuleName();
+                QUALIFIED_UNQUALIFIED_TEST_ITE iEntity = null;
+                foreach (VTEST_ITE iVTEST_ITE in vList)
+                {
+                    //if (string.IsNullOrWhiteSpace(iVTEST_ITE.PARENTID))//一级检测项不打印
+                    //{
+                    //    continue;
+                    //}
+
+                    //if (iVTEST_ITE.RULEID != "1085-2013_9")
+                    //{
+                    //    continue;
+                    //}
+                    //if (iVTEST_ITE.RULEID != "1264-2010_3_1")
+                    //{
+                    //    continue;
+                    //}
+                    //if (iVTEST_ITE.RULEID== "1085-2013_6_2" || iVTEST_ITE.RULEID == "1085 -2013_8" || iVTEST_ITE.RULEID == "1085-2013_9" || iVTEST_ITE.RULEID == "1085-2013_10")
+                    //{
+                    //    continue;
+                    //}
+                    //if (iVTEST_ITE.RULEID != "622-1997_4" &&  iVTEST_ITE.RULEID != "1005-2005_4" )
+                    //{
+                    //    continue;
+                    //}
+                    //if (iVTEST_ITE.RULEID != "1264-2010_3_1")
+                    //{
+                    //    continue;
+                    //}
+                    //1085-2013_7电能标准偏差估计值报告不打印
+                    if ((type == ExportType.Report_JianDing || type == ExportType.Report_XiaoZhun || type == ExportType.Report_XiaoZhun_CNAS) && iVTEST_ITE.RULEID == "1085-2013_7")
+                    {
+                        continue;
+                    }
+                    if (entity.QUALIFIED_UNQUALIFIED_TEST_ITE != null && entity.QUALIFIED_UNQUALIFIED_TEST_ITE.Count > 0 && entity.QUALIFIED_UNQUALIFIED_TEST_ITE.FirstOrDefault(p => p.RULEID == iVTEST_ITE.RULEID) != null)
+                    {
+                        iEntity = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.FirstOrDefault(p => p.RULEID == iVTEST_ITE.RULEID);
+                    }
+                    else
+                    {
+                        iEntity = null;
+                    }
+
+                    if (string.IsNullOrWhiteSpace(iVTEST_ITE.PARENTID) && iEntity == null)//一级检测项并且未做不打印
+                    {
+                        continue;
+                    }
+
+                    bool IsBiaoGe = true;//是否画表格
+
+                    #region 检测项目标题     
+                    //相同检测项只展示一个标题  
+
+                    bool IsSameRuleName = false;
+
+                    if (type == ExportType.Report_JianDing && (iVTEST_ITE.RULEID == "169-2010_4_2" || iVTEST_ITE.RULEID == "169-2010_4_3"))//检定报告中检测项不打印
+                    {
+                        continue;
+                    }
+
+                    if (((SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null)
+                        || (iVTEST_ITE.NAME == "基本误差" && iVTEST_ITE.PARENTID == "166-1993_3")
+                        || (iVTEST_ITE.NAME == "基本误差" && iVTEST_ITE.PARENTID == "125-2004_9")
+                        || (iVTEST_ITE.NAME == "基本误差" && iVTEST_ITE.PARENTID == "1072-2011_6")
+                       || (iVTEST_ITE.NAME == "基本误差" && iVTEST_ITE.PARENTID == "1072-2011_6")
+                        || (iVTEST_ITE.NAME == "示值误差" && iVTEST_ITE.PARENTID == "982-2003_6")//示值误差982-2003_6
+                        )
+                        && SameRuleName == iVTEST_ITE.NAME)
+                    {
+
+                        IsSameRuleName = true;
+                    }
+                    string msg = string.Empty;
+                    if (iEntity != null && type == ExportType.Report_JianDing)//处理检定报告 是否出表格
+                    {
+
+                        IsBiaoGe = IsBiaoGeByDengJi(iEntity, ref msg);
+                    }
+
+                    if (IsSameRuleName == false)
+                    {
+                        string celStr = i.ToString() + "、";
+
+                        if (iVTEST_ITE.NAME != null && iVTEST_ITE.NAME.Trim() != "")
+                        {
+                            celStr = celStr + iVTEST_ITE.NAME.Trim() + "：";
+                        }
+                        //结论,只有非表格的才需要打结论
+                        if (iEntity != null && (iVTEST_ITE.INPUTSTATE == InputStateEnums.HGBHG.ToString() || iVTEST_ITE.INPUTSTATE == InputStateEnums.WBK.ToString()) && iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
+                        {
+                            celStr = celStr + iEntity.CONCLUSION.Trim();
+                        }
+                        else if (iEntity != null && type == ExportType.Report_JianDing && entity.CONCLUSION == "合格")//处理检定报告 总结论是合格 ，如果不合格都出数据，不出合格不合格
+                        {
+                            //string msg = string.Empty;
+                            //IsBiaoGe = IsBiaoGeByDengJi(iEntity, ref msg);
+                            if (!IsBiaoGe && (msg != null && msg.Trim() != ""))
+                            {
+                                celStr = celStr + msg;
+                            }
+                            //else
+                            //{
+                            //    celStr = celStr + "/";
+                            //}
+
+                        }
+                        else if (iEntity != null && type == ExportType.Report_JianDing && entity.CONCLUSION == "不合格")//处理检定报告 总结论是合格 ，如果不合格都出数据，不出合格不合格
+                        {
+                            //string msg = string.Empty;
+                            IsBiaoGe = true;// IsBiaoGeByDengJi(iEntity, ref msg);
+                            if (!IsBiaoGe && (msg != null && msg.Trim() != ""))
+                            {
+                                celStr = celStr + msg;
+                            }
+                            //else
+                            //{
+                            //    celStr = celStr + "/";
+                            //}
+
+                        }
+                        else if (iEntity == null)
+                        {
+                            celStr = celStr + "/";
+                        }
+
+                        CopyRow(sheet_Source, sheet_Destination, ruleTitleTemplateIndex, RowIndex, 1, false);
+
+                        sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue(celStr);
+                        RowIndex++;
+                        IsHaveHideData = false;
+                        i++;
+                    }
+
+                    ////相同检测项只展示一个标题  
+                    //bool IsSameRuleName = false;
+                    //if (((SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null)
+                    //    || (iVTEST_ITE.NAME == "基本误差" && iVTEST_ITE.PARENTID == "166-1993_3")
+                    //    || (iVTEST_ITE.NAME == "基本误差" && iVTEST_ITE.PARENTID == "125-2004_9")
+                    //    || (iVTEST_ITE.NAME == "基本误差" && iVTEST_ITE.PARENTID == "1072-2011_6")
+                    //   || (iVTEST_ITE.NAME == "基本误差" && iVTEST_ITE.PARENTID == "1072-2011_6")
+                    //    || (iVTEST_ITE.NAME == "示值误差" && iVTEST_ITE.PARENTID == "982-2003_6")//示值误差982-2003_6
+                    //    )
+                    //    && SameRuleName == iVTEST_ITE.NAME)
+                    //{
+                    //    // HideRow(sheet_Destination, RowIndex - 2, 2);
+
+                    //    //DeleteRow(sheet_Destination, RowIndex);
+                    //    //RowIndex--;
+                    //    //DeleteRow(sheet_Destination, RowIndex - 2);
+                    //    //DeleteRow(sheet_Destination, RowIndex - 2);
+                    //    //RowIndex = RowIndex - 2;
+
+                    //    DeleteRow(sheet_Destination, RowIndex - 1);
+                    //    RowIndex = RowIndex - 1;
+
+                    //    IsSameRuleName = true;
+                    //}
+                    //else
+                    //{                        
+                    //    IsHaveHideData = false;
+                    //    i++;
+                    //}
+
+                    #endregion
+
+                    #region 检测项目表格                   
+
+
+                    if (iEntity != null
+                        && allTableTemplates != null && allTableTemplates.TableTemplateList != null && allTableTemplates.TableTemplateList.Count > 0 && allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID) != null && IsBiaoGe)
+                    {
+                        #region s化整
+                        SHuaZhengRule SHuaZhengRules = ReportStatic.SHuaZhengRules();
+                        QUALIFIED_UNQUALIFIED_TEST_ITE iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan = null;
+                        if (SHuaZhengRules != null && SHuaZhengRules.DianNengBiaoZhunPianChaGuZhiJiSuan != null && SHuaZhengRules.DianNengBiaoZhunPianChaGuZhiJiSuan.Trim() != "" && SHuaZhengRules.PingHengFuZaiShiYouGongDianNengWuCha != null && SHuaZhengRules.PingHengFuZaiShiYouGongDianNengWuCha.Count > 0 && SHuaZhengRules.PingHengFuZaiShiYouGongDianNengWuCha.FirstOrDefault(p => p == iEntity.RULEID) != null)
+                        {
+                            iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan = entity.QUALIFIED_UNQUALIFIED_TEST_ITE.FirstOrDefault(p => p.RULEID == SHuaZhengRules.DianNengBiaoZhunPianChaGuZhiJiSuan);
+                        }
+                        #endregion 
+
+                        TableTemplate temp = allTableTemplates.TableTemplateList.FirstOrDefault(p => p.RuleID == iEntity.RULEID);
+                        //解析html表格数据    
+                        //int RowIndexT = RowIndex;                       
+                        RowIndex = paserData_1(iEntity, IsSameRuleName, sheet_Source, sheet_Destination, RowIndex, temp, ref IsHaveHideData, allSpecialCharacters, type, iEntity_DianNengBiaoZhunPianChaGuZhiJiSuan);
+                        RowIndex++;
+                        //if (SameRuleNameList != null && SameRuleNameList.Count > 0 && SameRuleNameList.FirstOrDefault(p => p == iVTEST_ITE.NAME) != null && SameRuleName == iVTEST_ITE.NAME)
+
+                        //{
+                        //    //为了相同项表格底部没有线                     
+                        //    SetBorderTop(hssfworkbook, sheet_Destination, RowIndexT);
+                        //}
+
+
+                        ////为了表格底部没有线
+                        //CopyRow(sheet_Source, sheet_Destination, 3, RowIndex, 1, true);
+                        //HideRow(sheet_Destination, RowIndex, 1);                        
+                        //RowIndex++;
+
+                        ////表格注
+                        //if (iEntity.REMARK != null && iEntity.REMARK.Trim() != "")
+                        //{
+                        //    CopyRow(sheet_Source, sheet_Destination, temp.RemarkRowIndex, RowIndex, 1, true);
+                        //    sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue("注：" + iEntity.REMARK);
+                        //    RowIndex++;
+                        //}
+
+                        ////表格结论
+                        //if (iEntity.CONCLUSION != null && iEntity.CONCLUSION.Trim() != "")
+                        //{
+                        //    CopyRow(sheet_Source, sheet_Destination, temp.ConclusionRowIndex, RowIndex, 1, true);
+                        //    sheet_Destination.GetRow(RowIndex).GetCell(0).SetCellValue("结论：" + iEntity.CONCLUSION);
+                        //    RowIndex++;
+                        //}                      
+
+                        ////为了表格底部没有线
+                        //CopyRow(sheet_Source, sheet_Destination, 4, RowIndex, 1, true);
+
+                    }
+                    else
+                    {
+
+                        if (IsSameRuleName == false)
+                        {                            //增加一行空行
+                            CopyRow(sheet_Source, sheet_Destination, 5, RowIndex, 1, true);
+                            RowIndex++;
+                        }
+                    }
+
+                    SameRuleName = iVTEST_ITE.NAME;
+
+                    #endregion
+                    //i++;
+
+                }
+            }
+
+
+
+            #endregion
+            //结尾 是否有不确定，无不确定度需要打印结尾最后一行，否则不需要打印结尾最后一行（只有原始记录才有不确定度）
+            if (IsIsHaveBuQueDingDu == false)
+            {
+                CopyRow(sheet_Source, sheet_Destination, JWTemplateIndex, RowIndex, 1, true);
+            }
+            //删除所有无用行数据
+            DeleteAllRow(sheet_Destination);
+
+            #region
+            /// <summary>
+            /// 模板中所有的合并的单元格
+            /// </summary>
+            List<CellRangeAddress> newCellRangeAddress = new List<CellRangeAddress>();
+            /// <summary>
+            /// 最后一行的标号  即总的行数
+            /// </summary>
+            int rowCount = 1;
+
+            List<RowMyHero> height = new List<RowMyHero>();
+
+            var sheetName_DestinationMy = "数据";
+            var sheet = hssfworkbook.GetSheet(sheetName_DestinationMy);
+            //需要v插入分页的地方
+            List<int> rowBreak = new List<int>();
+
+            //最新的表头所在行
+            int headMyRow = 29;
+            //最新的表头有几行
+            int headMyLength = 1;
+            //一个页面多高开始分页
+            int startPageMy = 830;
+            float total = 0;
+            rowCount = sheet.LastRowNum;
+            for (int i = 0; i < rowCount; i++)
+            {
+                var row = sheet.GetRow(i);
+                if (row == null)
+                {
+                    rowCount = i;
+                    break;
+                }
+                total += row.HeightInPoints;
+
+                RowMyHero hero = new RowMyHero();
+                hero.I = i + 1;
+                hero.HeightInPoints = row.HeightInPoints;
+                hero.Total = total;
+
+                if (row.Cells != null && row.Cells.Count > 0)
+                {
+
+                    if (row.Cells.Count > 57 && row.Cells[57] != null)
+                    {
+                        var d = row.Cells[57].StringCellValue;
+                        if (!string.IsNullOrWhiteSpace(d))
+                        {
+                            hero.CurrentHeight = (float)Convert.ToDouble(d.Split(',')[1]);
+                            hero.CurrentMyRow = Convert.ToInt32(d.Split(',')[0]);
+                        }
+                    }
+                }
+                height.Add(hero);
+            }
+            int hiddenMyRow = rowCount;
+            //当前第几行
+            int currentMyRow = rowCount;
+            //当前高度
+            float currentHeight = 0;
+            if (total > startPageMy)
+            {//满足分页的前提
+                sheet.FitToPage = false;
+
+                MergedCellRegion c = new MergedCellRegion();
+                var result = c.GetMergedCellRegion(sheet);//获取所有的合并单元格
+                                                          //////////////////////////////////////////////////////////////////////////////////////////
+                for (int i = 0; i < height.Count; i++)
+                {
+                    //是表头,在列58告诉需要多高
+                    if (height[i].CurrentMyRow > 0)
+                    {
+                        //最新的表头所在行
+                        headMyRow = height[i].I;
+                        //最新的表头有几行
+                        headMyLength = height[i].CurrentMyRow;
+                        //在表头中的高度
+                        float currentHeightMiddle = currentHeight;
+
+                        var lastRowData1 = (from rc in result
+                                            where height[i].I - 1 + headMyLength == rc.FirstRow
+                                            select rc.LastRow).OrderByDescending(r => r).FirstOrDefault();
+                        if (lastRowData1 > 0)
+                        {
+                            for (int r = i; r <= lastRowData1; r++)
+                            {
+                                currentHeightMiddle += height[r].HeightInPoints;
+                            }
+                        }
+
+                        if ((startPageMy - currentHeightMiddle) <= 0)
+                        {//剩下的高度不足，直接分页
+                            rowBreak.Add(currentMyRow - 1);
+                            //空白行
+                            currentMyRow++;
+                            var r = sheet.CreateRow(currentMyRow);
+
+                            r.HeightInPoints = 13;
+                            //当前高度
+                            currentHeight = 13;
+                        }
+                        currentMyRow++;
+                        currentHeight += CopyRow(sheet, currentMyRow, height[i].I);//复制样式和数据
+
+                        var lastRowData = (from rc in result
+                                           where height[i].I - 1 == rc.LastRow
+                                           select rc);
+                        if (lastRowData != null && lastRowData.Count() > 0)
+                        {
+                            //添加合并区域    
+                            foreach (var item in lastRowData)
+                            {//复制合并单元格
+                                var dc = item.Copy();
+                                dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
+                                dc.LastRow = currentMyRow - 1;
+
+                                newCellRangeAddress.Add(dc);
+                            }
+                        }
+                    }
+                    else
+                    {//不是表头
+                        float currentHeightMiddle = currentHeight;
+                        var lastRowData1 = (from rc in result
+                                            where height[i].I - 1 == rc.FirstRow
+                                            select rc.LastRow).OrderByDescending(r => r).FirstOrDefault();
+                        if (lastRowData1 > 0)
+                        {
+                            for (int r = i; r <= lastRowData1; r++)
+                            {
+                                currentHeightMiddle += height[r].HeightInPoints;
+                            }
+                        }
+
+                        if ((startPageMy - currentHeightMiddle) <= 0)
+                        {//剩下的高度不足，直接分页
+                            rowBreak.Add(currentMyRow - 1);//上一行打分页符
+                                                           //空白行
+                            currentMyRow++;
+                            var r = sheet.CreateRow(currentMyRow);
+                            r.HeightInPoints = 13;
+                            ////当前高度
+                            currentHeight = 13;
+
+                            //复制表头 
+                            for (int h = headMyRow; h < headMyRow + headMyLength; h++)
+                            {
+                                currentMyRow++;
+                                currentHeight += CopyRow(sheet, currentMyRow, h);//复制样式和数据
+                                var lastRowDataHead = (from rc in result
+                                                       where h - 1 == rc.LastRow
+                                                       select rc);
+                                if (lastRowDataHead != null && lastRowDataHead.Count() > 0)
+                                {
+                                    //添加合并区域    
+                                    foreach (var item in lastRowDataHead)
+                                    {//复制合并单元格
+                                        var dc = item.Copy();
+                                        dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
+
+                                        dc.LastRow = currentMyRow - 1;
+
+                                        newCellRangeAddress.Add(dc);
+                                    }
+                                }
+
+                            }
+                            //继续复制内容
+                            currentMyRow++;
+                            currentHeight += CopyRow(sheet, currentMyRow, height[i].I);//复制样式和数据
+                            var lastRowDataCurrent = (from rc in result
+                                                      where height[i].I - 1 == rc.LastRow
+                                                      select rc);
+                            if (lastRowDataCurrent != null && lastRowDataCurrent.Count() > 0)
+                            {
+                                //添加合并区域    
+                                foreach (var item in lastRowDataCurrent)
+                                {//复制合并单元格
+                                    var dc = item.Copy();
+                                    dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
+                                    dc.LastRow = currentMyRow - 1;
+
+                                    newCellRangeAddress.Add(dc);
+                                }
+                            }
+
+                        }
+                        else
+                        {//正常
+                            currentMyRow++;
+                            currentHeight += CopyRow(sheet, currentMyRow, height[i].I);//复制样式和数据
+
+                            var lastRowData = (from rc in result
+                                               where height[i].I - 1 == rc.LastRow
+                                               select rc);
+                            if (lastRowData != null && lastRowData.Count() > 0)
+                            {
+                                //添加合并区域    
+                                foreach (var item in lastRowData)
+                                {//复制合并单元格
+                                    var dc = item.Copy();
+                                    dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
+
+                                    dc.LastRow = currentMyRow - 1;
+
+                                    newCellRangeAddress.Add(dc);
+                                }
+                            }
+                        }
+
+                    }
+                }
+                for (int i = 0; i < hiddenMyRow; i++)
+                {
+                    IRow sourceRow = sheet.GetRow(i);
+                    if (sourceRow != null)
+                    {
+                        sourceRow.Height = 0;
+                    }
+                }
+                foreach (var item in newCellRangeAddress)
+                {
+                    sheet.AddMergedRegion(item);
+                }
+                foreach (var item in rowBreak)
+                {
+                    sheet.SetRowBreak(item);
+                }
+            }
+
+            #endregion
+
             //设置页面页脚
             SetHeaderAndFooter(sheet_Destination, entity, type);
 
@@ -4423,7 +4718,7 @@ namespace Langben.Report
                 {
                     if (m < 57 && m < row_Source.Cells.Count)
                     {
-                      
+
                         sourceCell = row_Source.GetCell(m);
                         row_Source.Cells[m].SetCellType(CellType.String);
                         if (m + 1 != row_Source.LastCellNum && m < row_Source.Cells.Count - 1)
@@ -4432,7 +4727,7 @@ namespace Langben.Report
                         }
                         if (sourceCell == null)
                             continue;
-                       
+
                         targetCell = targetRow.CreateCell(m);
                         targetCell.CellStyle = sourceCell.CellStyle;//赋值单元格格式
                         targetCell.SetCellType(sourceCell.CellType);
@@ -4566,7 +4861,7 @@ namespace Langben.Report
 
                     value = string.Format(sourceCell.StringCellValue, DongTaiShuJuList.FirstOrDefault().value).Trim();
 
-                    if (IsNullShow && (c!=null && c.IsNullShow=="Y") && (string.IsNullOrEmpty(value) || value.Trim() == ""))
+                    if (IsNullShow && (c != null && c.IsNullShow == "Y") && (string.IsNullOrEmpty(value) || value.Trim() == ""))
                     {
                         value = "/";
                         SpecialStr = "/";
@@ -4622,10 +4917,10 @@ namespace Langben.Report
                 notItalicEndIndex = speStartIndex + 5;//非斜体结束位置    
 
             }
-            else if(value.ToUpper().IndexOf("COS")>=0)
+            else if (value.ToUpper().IndexOf("COS") >= 0)
             {
                 SpecialStr = value.ToUpper().Substring(value.ToUpper().IndexOf("COS"));
-                speStartIndex= value.ToUpper().IndexOf("COS");
+                speStartIndex = value.ToUpper().IndexOf("COS");
                 notItalicStartIndex = value.ToUpper().IndexOf("COS");//非斜体开始位置
                 notItalicEndIndex = notItalicStartIndex + 2;//非斜体结束位置   
             }
@@ -5670,8 +5965,8 @@ namespace Langben.Report
                                     //解决有的表头为空时需要显示/
                                     if (iEntity.RULEID == "125-2004_9_1" || iEntity.RULEID == "982-2003_6_1" ||
                                         iEntity.RULEID == "982-2003_6_2" || iEntity.RULEID == "1072-2011_6_1" ||
-                                        iEntity.RULEID == "166-1993_3_4" || iEntity.RULEID== "124-2005_3" || 
-                                        iEntity.RULEID== "1085-2013_8" || iEntity.RULEID== "1085-2013_9")
+                                        iEntity.RULEID == "166-1993_3_4" || iEntity.RULEID == "124-2005_3" ||
+                                        iEntity.RULEID == "1085-2013_8" || iEntity.RULEID == "1085-2013_9")
                                     {
                                         CopyRow_1(sheet_Source, sheet_Destination, t.RowIndex + k, rowIndex_Destination, 1, true, temp.TableTitleList, allSpecialCharacters, headDic[tongDaoID], true);
                                     }
@@ -5915,7 +6210,7 @@ namespace Langben.Report
                 ICellStyle style = sheet_Destination.Workbook.CreateCellStyle();
                 style.BorderBottom = BorderStyle.None;
                 style.BorderTop = BorderStyle.None;
-                
+
                 for (int col = 0; col < 57; col++)
                 {
                     ICell targetCell = sheet_Destination.GetRow(rowIndex_Destination).GetCell(col);
@@ -5925,7 +6220,7 @@ namespace Langben.Report
                 {
                     for (int col = 0; col < 57; col++)
                     {
-                        ICell targetCell = sheet_Destination.GetRow(rowIndex_Destination-1).GetCell(col);
+                        ICell targetCell = sheet_Destination.GetRow(rowIndex_Destination - 1).GetCell(col);
                         targetCell.CellStyle = style;
                     }
                 }
