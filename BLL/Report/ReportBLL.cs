@@ -3806,6 +3806,8 @@ namespace Langben.Report
             }
             //删除所有无用行数据
             DeleteAllRow(sheet_Destination);
+           // try
+            {
 
             #region
             /// <summary>
@@ -3996,16 +3998,16 @@ namespace Langben.Report
                                 {//复制合并单元格
                                     var sourceRow = sheet.GetRow(item.FirstRow);
                                     var sourceCell = sourceRow.GetCell(item.FirstColumn);
-                                    var targetRow = sheet.GetRow(currentMyRow);
+                                    var targetRow = sheet.GetRow(currentMyRow-1);
                                     targetRow.GetCell(item.FirstColumn).SetCellValue(sourceCell.StringCellValue);
 
                                     var dc = item.Copy();
-                                    dc.FirstRow = currentMyRow - 1 - headMyRow - (i - dc.FirstRow);
-                                    dc.LastRow = currentMyRow  - 1- headMyRow;
+                                    dc.FirstRow = currentMyRow - 1 - headMyLength - (i - dc.FirstRow);
+                                    dc.LastRow = currentMyRow  - 1- headMyLength;
                                     newCellRangeAddress.Add(dc);
 
 
-                                    item.FirstRow = i;//这样不一定管用，把数据源给动了
+                                   // item.FirstRow = i;//这样不一定管用，把数据源给动了
 
                                 }
 
@@ -4021,13 +4023,13 @@ namespace Langben.Report
                                 {//复制合并单元格
                                     var sourceRow = sheet.GetRow(item.FirstRow);
                                     var sourceCell = sourceRow.GetCell(item.FirstColumn);
-                                    var targetRow = sheet.GetRow(currentMyRow);
+                                    var targetRow = sheet.GetRow(currentMyRow-1);
                                     targetRow.GetCell(item.FirstColumn).SetCellValue(sourceCell.StringCellValue);
 
 
                                     var dc = item.Copy();
-                                    dc.FirstRow = currentMyRow - 1 - headMyRow - (dc.LastRow - dc.FirstRow - 1);
-                                    dc.LastRow = currentMyRow - 1 - headMyRow;
+                                    dc.FirstRow = currentMyRow - 1 - headMyLength - (dc.LastRow - dc.FirstRow - 1);
+                                    dc.LastRow = currentMyRow - 1 - headMyLength;
 
                                     newCellRangeAddress.Add(dc);
 
@@ -4085,8 +4087,14 @@ namespace Langben.Report
                 }
             }
 
-            #endregion
+                #endregion
 
+            }
+            //catch (Exception ex)
+            //{
+
+            //    throw;
+            //}
             //设置页面页脚
             SetHeaderAndFooter(sheet_Destination, entity, type);
 
