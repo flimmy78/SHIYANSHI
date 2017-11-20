@@ -3878,10 +3878,6 @@ namespace Langben.Report
                                                           //////////////////////////////////////////////////////////////////////////////////////////
                 for (int i = 0; i < height.Count; i++)
                 {
-                        if (i==80)
-                        {
-
-                        }
                     //是表头,在列58告诉需要多高
                     if (height[i].CurrentMyRow > 0)
                     {
@@ -4122,7 +4118,7 @@ namespace Langben.Report
 
                     }
                 }
-                for (int i = 0; i < hiddenMyRow; i++)
+                for (int i = 1; i <= hiddenMyRow; i++)
                 {
                     IRow sourceRow = sheet.GetRow(i);
                     if (sourceRow != null)
