@@ -4001,13 +4001,13 @@ namespace Langben.Report
                                     var targetRow = sheet.GetRow(currentMyRow-1);
                                     targetRow.GetCell(item.FirstColumn).SetCellValue(sourceCell.StringCellValue);
 
-                                    var dc = item.Copy();
-                                    dc.FirstRow = currentMyRow - 1 - headMyLength - (i - dc.FirstRow);
-                                    dc.LastRow = currentMyRow  - 1- headMyLength;
-                                    newCellRangeAddress.Add(dc);
+                                        var dc = item.Copy();
+                                        dc.FirstRow = currentMyRow - 1 - 1 - headMyLength - (i - dc.FirstRow);
+                                        dc.LastRow = currentMyRow - 1 - 1 - 1 - headMyLength;
+                                        newCellRangeAddress.Add(dc);
 
 
-                                   // item.FirstRow = i;//这样不一定管用，把数据源给动了
+                                        item.FirstRow = i;//这样不一定管用，把数据源给动了
 
                                 }
 
@@ -4028,8 +4028,8 @@ namespace Langben.Report
 
 
                                     var dc = item.Copy();
-                                    dc.FirstRow = currentMyRow - 1 - headMyLength - (dc.LastRow - dc.FirstRow - 1);
-                                    dc.LastRow = currentMyRow - 1 - headMyLength;
+                                    dc.FirstRow = currentMyRow - 1 - 1 - headMyLength - (dc.LastRow - dc.FirstRow - 1);
+                                    dc.LastRow = currentMyRow - 1 - 1 - 1 - headMyLength;
 
                                     newCellRangeAddress.Add(dc);
 
