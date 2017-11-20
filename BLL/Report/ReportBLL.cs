@@ -3999,8 +3999,32 @@ namespace Langben.Report
                                     var sourceRow = sheet.GetRow(item.FirstRow);
                                     var sourceCell = sourceRow.GetCell(item.FirstColumn);
                                     var targetRow = sheet.GetRow(currentMyRow-1);
-                                    targetRow.GetCell(item.FirstColumn).SetCellValue(sourceCell.StringCellValue);
-
+                                        // targetRow.GetCell(item.FirstColumn).SetCellValue(sourceCell.StringCellValue);
+                                        var targetCell = targetRow.GetCell(item.FirstColumn);
+                                        switch (sourceCell.CellType)
+                                        {
+                                            case CellType.Blank:
+                                                targetCell.SetCellValue(sourceCell.StringCellValue);
+                                                break;
+                                            case CellType.Boolean:
+                                                targetCell.SetCellValue(sourceCell.BooleanCellValue);
+                                                break;
+                                            case CellType.Error:
+                                                targetCell.SetCellErrorValue(sourceCell.ErrorCellValue);
+                                                break;
+                                            case CellType.Formula:
+                                                targetCell.SetCellFormula(sourceCell.CellFormula);
+                                                break;
+                                            case CellType.Numeric:
+                                                targetCell.SetCellValue(sourceCell.NumericCellValue);
+                                                break;
+                                            case CellType.String:
+                                                targetCell.SetCellValue(sourceCell.StringCellValue);
+                                                break;
+                                            case CellType.Unknown:
+                                                targetCell.SetCellValue(sourceCell.StringCellValue);
+                                                break;
+                                        }
                                         var dc = item.Copy();
                                         dc.FirstRow = currentMyRow - 1 - 1 - headMyLength - (i - dc.FirstRow);
                                         dc.LastRow = currentMyRow - 1 - 1 - 1 - headMyLength;
@@ -4024,7 +4048,32 @@ namespace Langben.Report
                                     var sourceRow = sheet.GetRow(item.FirstRow);
                                     var sourceCell = sourceRow.GetCell(item.FirstColumn);
                                     var targetRow = sheet.GetRow(currentMyRow-1);
-                                    targetRow.GetCell(item.FirstColumn).SetCellValue(sourceCell.StringCellValue);
+                                        var targetCell = targetRow.GetCell(item.FirstColumn);
+                                        switch (sourceCell.CellType)
+                                        {
+                                            case CellType.Blank:
+                                                targetCell.SetCellValue(sourceCell.StringCellValue);
+                                                break;
+                                            case CellType.Boolean:
+                                                targetCell.SetCellValue(sourceCell.BooleanCellValue);
+                                                break;
+                                            case CellType.Error:
+                                                targetCell.SetCellErrorValue(sourceCell.ErrorCellValue);
+                                                break;
+                                            case CellType.Formula:
+                                                targetCell.SetCellFormula(sourceCell.CellFormula);
+                                                break;
+                                            case CellType.Numeric:
+                                                targetCell.SetCellValue(sourceCell.NumericCellValue);
+                                                break;
+                                            case CellType.String:
+                                                targetCell.SetCellValue(sourceCell.StringCellValue);
+                                                break;
+                                            case CellType.Unknown:
+                                                targetCell.SetCellValue(sourceCell.StringCellValue);
+                                                break;
+                                        }
+                                       // targetRow.GetCell(item.FirstColumn).SetCellValue(sourceCell.StringCellValue);
 
 
                                     var dc = item.Copy();
