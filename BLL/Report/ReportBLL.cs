@@ -3806,7 +3806,7 @@ namespace Langben.Report
             }
             //删除所有无用行数据
             DeleteAllRow(sheet_Destination);
-           // try
+            try
             {
 
             #region
@@ -3878,6 +3878,10 @@ namespace Langben.Report
                                                           //////////////////////////////////////////////////////////////////////////////////////////
                 for (int i = 0; i < height.Count; i++)
                 {
+                        if (i==80)
+                        {
+
+                        }
                     //是表头,在列58告诉需要多高
                     if (height[i].CurrentMyRow > 0)
                     {
@@ -3928,10 +3932,10 @@ namespace Langben.Report
                     {//不是表头
                         float currentHeightMiddle = currentHeight;
                         //表头的行高
-                        for (int r = 0; r < headMyLength; r++)
-                        {
-                            currentHeightMiddle += height[i + r].HeightInPoints;
-                        }
+                        //for (int r = 0; r < headMyLength; r++)
+                        //{
+                        //    currentHeightMiddle += height[i + r].HeightInPoints;
+                        //}
                         currentHeightMiddle += 25;//1列内高度
 
                         if ((startPageMy - currentHeightMiddle) <= 0)
@@ -4139,11 +4143,11 @@ namespace Langben.Report
                 #endregion
 
             }
-            //catch (Exception ex)
-            //{
+            catch (Exception ex)
+            {
 
-            //    throw;
-            //}
+                throw;
+            }
             //设置页面页脚
             SetHeaderAndFooter(sheet_Destination, entity, type);
 
