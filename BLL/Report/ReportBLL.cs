@@ -3809,175 +3809,128 @@ namespace Langben.Report
             try
             {
 
-            #region
-            /// <summary>
-            /// 模板中所有的合并的单元格
-            /// </summary>
-            List<CellRangeAddress> newCellRangeAddress = new List<CellRangeAddress>();
-            /// <summary>
-            /// 最后一行的标号  即总的行数
-            /// </summary>
-            int rowCount = 1;
+                #region
+                /// <summary>
+                /// 模板中所有的合并的单元格
+                /// </summary>
+                List<CellRangeAddress> newCellRangeAddress = new List<CellRangeAddress>();
+                /// <summary>
+                /// 最后一行的标号  即总的行数
+                /// </summary>
+                int rowCount = 1;
 
-            List<RowMyHero> height = new List<RowMyHero>();
+                List<RowMyHero> height = new List<RowMyHero>();
 
-            var sheetName_DestinationMy = "数据";
-            var sheet = hssfworkbook.GetSheet(sheetName_DestinationMy);
-            //需要v插入分页的地方
-            List<int> rowBreak = new List<int>();
+                var sheetName_DestinationMy = "数据";
+                var sheet = hssfworkbook.GetSheet(sheetName_DestinationMy);
+                //需要v插入分页的地方
+                List<int> rowBreak = new List<int>();
 
-            //最新的表头所在行
-            int headMyRow = 29;
-            //最新的表头有几行
-            int headMyLength = 1;
-            //一个页面多高开始分页
-            int startPageMy = 750;
-            float total = 0;
-            rowCount = sheet.LastRowNum;
-            for (int i = 0; i < rowCount; i++)
-            {
-                var row = sheet.GetRow(i);
-                if (row == null)
+                //最新的表头所在行
+                int headMyRow = 29;
+                //最新的表头有几行
+                int headMyLength = 1;
+                //一个页面多高开始分页
+                int startPageMy = 750;
+                float total = 0;
+                rowCount = sheet.LastRowNum;
+                for (int i = 0; i < rowCount; i++)
                 {
-                    rowCount = i;
-                    break;
-                }
-                total += row.HeightInPoints;
-
-                RowMyHero hero = new RowMyHero();
-                hero.I = i + 1;
-                hero.HeightInPoints = row.HeightInPoints;
-                hero.Total = total;
-
-                if (row.Cells != null && row.Cells.Count > 0)
-                {
-
-                    if (row.Cells.Count > 57 && row.Cells[57] != null)
+                    var row = sheet.GetRow(i);
+                    if (row == null)
                     {
-                        var d = row.Cells[57].StringCellValue;
-                        if (!string.IsNullOrWhiteSpace(d))
-                        {
-                            hero.CurrentHeight = (float)Convert.ToDouble(d.Split(',')[1]);
-                            hero.CurrentMyRow = Convert.ToInt32(d.Split(',')[0]);
-                        }
+                        rowCount = i;
+                        break;
                     }
-                }
-                height.Add(hero);
-            }
-            int hiddenMyRow = rowCount;
-            //当前第几行
-            int currentMyRow = rowCount;
-            //当前高度
-            float currentHeight = 0;
-            if (total > startPageMy)
-            {//满足分页的前提
-                sheet.FitToPage = false;
-
-                MergedCellRegion c = new MergedCellRegion();
-                var result = c.GetMergedCellRegion(sheet);//获取所有的合并单元格
-                                                          //////////////////////////////////////////////////////////////////////////////////////////
-                for (int i = 0; i < height.Count; i++)
-                {
-                    //是表头,在列58告诉需要多高
-                    if (height[i].CurrentMyRow > 0)
+                    else if (row == null)
                     {
-                        //最新的表头所在行
-                        headMyRow = height[i].I;
-                        //最新的表头有几行
-                        headMyLength = height[i].CurrentMyRow;
-                        //在表头中的高度
-                        float currentHeightMiddle = currentHeight;
-                        //表头的行高
-                        for (int r = 0; r < headMyLength; r++)
-                        {
-                            currentHeightMiddle += height[i + r].HeightInPoints;
-                        }
-                        currentHeightMiddle += 25;//1列内高度
 
-                        if ((startPageMy - currentHeightMiddle) <= 0)
-                        {//剩下的高度不足，直接分页
-                            rowBreak.Add(currentMyRow - 1);
-                            //空白行
-                            currentMyRow++;
-                            var r = sheet.CreateRow(currentMyRow);
-
-                            r.HeightInPoints = 13;
-                            //当前高度
-                            currentHeight = 13;
-                        }
-                        currentMyRow++;
-                        currentHeight += CopyRow(sheet, currentMyRow, height[i].I);//复制样式和数据
-
-                        var lastRowData = (from rc in result
-                                           where height[i].I - 1 == rc.LastRow
-                                           select rc);
-                        if (lastRowData != null && lastRowData.Count() > 0)
-                        {
-                            //添加合并区域    
-                            foreach (var item in lastRowData)
-                            {//复制合并单元格
-                                var dc = item.Copy();
-                                dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
-                                dc.LastRow = currentMyRow - 1;
-
-                                newCellRangeAddress.Add(dc);
-                            }
-                        }
+                        rowCount = i;
+                        break;
                     }
-                    else
-                    {//不是表头
-                        float currentHeightMiddle = currentHeight;
-                        //表头的行高
-                        //for (int r = 0; r < headMyLength; r++)
-                        //{
-                        //    currentHeightMiddle += height[i + r].HeightInPoints;
-                        //}
-                        currentHeightMiddle += 25;//1列内高度
+                    total += row.HeightInPoints;
 
-                        if ((startPageMy - currentHeightMiddle) <= 0)
-                        {//剩下的高度不足，直接分页
-                            rowBreak.Add(currentMyRow - 1);//上一行打分页符
-                                                           //空白行
-                            currentMyRow++;
-                            var r = sheet.CreateRow(currentMyRow);
-                            r.HeightInPoints = 13;
-                            ////当前高度
-                            currentHeight = 13;
+                    RowMyHero hero = new RowMyHero();
+                    hero.I = i + 1;
+                    hero.HeightInPoints = row.HeightInPoints;
+                    hero.Total = total;
 
-                            //复制表头 
-                            for (int h = headMyRow; h < headMyRow + headMyLength; h++)
+                    if (row.Cells != null && row.Cells.Count > 0)
+                    {
+
+                        if (row.Cells.Count > 57 && row.Cells[57] != null)
+                        {
+                            var d = row.Cells[57].StringCellValue;
+                            if (!string.IsNullOrWhiteSpace(d))
                             {
-                                currentMyRow++;
-                                currentHeight += CopyRow(sheet, currentMyRow, h);//复制样式和数据
-                                var lastRowDataHead = (from rc in result
-                                                       where h - 1 == rc.LastRow
-                                                       select rc);
-                                if (lastRowDataHead != null && lastRowDataHead.Count() > 0)
-                                {
-                                    //添加合并区域    
-                                    foreach (var item in lastRowDataHead)
-                                    {//复制合并单元格
-                                        var dc = item.Copy();
-                                        dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
-
-                                        dc.LastRow = currentMyRow - 1;
-
-                                        newCellRangeAddress.Add(dc);
-                                    }
-                                }
-
+                                hero.CurrentHeight = (float)Convert.ToDouble(d.Split(',')[1]);
+                                hero.CurrentMyRow = Convert.ToInt32(d.Split(',')[0]);
                             }
-                            //继续复制内容
+                        }
+                        else if (row.Cells.Count > 0 && row.Cells[0] != null)
+                        {
+                            var d = row.Cells[0].StringCellValue;
+                            if (!string.IsNullOrWhiteSpace(d) && d.Contains("以下空白"))
+                            {
+                                rowCount = i;
+                                height.Add(hero);
+                                break;
+                            }
+                        }
+                    }
+                    height.Add(hero);
+                }
+                int hiddenMyRow = rowCount+2;
+                //当前第几行
+                int currentMyRow = rowCount+2;
+                //当前高度
+                float currentHeight = 0;
+                if (total > startPageMy)
+                {//满足分页的前提
+                    sheet.FitToPage = false;
+
+                    MergedCellRegion c = new MergedCellRegion();
+                    var result = c.GetMergedCellRegion(sheet);//获取所有的合并单元格
+                                                              //////////////////////////////////////////////////////////////////////////////////////////
+                    for (int i = 0; i < height.Count; i++)
+                    {
+                        //是表头,在列58告诉需要多高
+                        if (height[i].CurrentMyRow > 0)
+                        {
+                            //最新的表头所在行
+                            headMyRow = height[i].I;
+                            //最新的表头有几行
+                            headMyLength = height[i].CurrentMyRow;
+                            //在表头中的高度
+                            float currentHeightMiddle = currentHeight;
+                            //表头的行高
+                            for (int r = 0; r < headMyLength; r++)
+                            {
+                                currentHeightMiddle += height[i + r].HeightInPoints;
+                            }
+                            currentHeightMiddle += 25;//1列内高度
+
+                            if ((startPageMy - currentHeightMiddle) <= 0)
+                            {//剩下的高度不足，直接分页
+                                rowBreak.Add(currentMyRow - 1);
+                                //空白行
+                                currentMyRow++;
+                                var r = sheet.CreateRow(currentMyRow);
+
+                                r.HeightInPoints = 13;
+                                //当前高度
+                                currentHeight = 13;
+                            }
                             currentMyRow++;
                             currentHeight += CopyRow(sheet, currentMyRow, height[i].I);//复制样式和数据
-                            //单行的
-                            var lastRowDataCurrent = (from rc in result
-                                                      where height[i].I - 1 == rc.LastRow && rc.FirstRow == rc.LastRow
-                                                      select rc);
-                            if (lastRowDataCurrent != null && lastRowDataCurrent.Count() > 0)
+
+                            var lastRowData = (from rc in result
+                                               where height[i].I - 1 == rc.LastRow
+                                               select rc);
+                            if (lastRowData != null && lastRowData.Count() > 0)
                             {
                                 //添加合并区域    
-                                foreach (var item in lastRowDataCurrent)
+                                foreach (var item in lastRowData)
                                 {//复制合并单元格
                                     var dc = item.Copy();
                                     dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
@@ -3986,19 +3939,82 @@ namespace Langben.Report
                                     newCellRangeAddress.Add(dc);
                                 }
                             }
+                        }
+                        else
+                        {//不是表头
+                            float currentHeightMiddle = currentHeight;
+                            //表头的行高
+                            //for (int r = 0; r < headMyLength; r++)
+                            //{
+                            //    currentHeightMiddle += height[i + r].HeightInPoints;
+                            //}
+                            currentHeightMiddle += 25;//1列内高度
 
-                            //多行的，夹在中间的
-                            var lastRowData2 = (from rc in result
-                                                where height[i].I < rc.LastRow && height[i].I > rc.FirstRow
-                                                select rc);
-                            if (lastRowData2 != null && lastRowData2.Count() > 0)
-                            {
-                                //添加合并区域    取值，赋值
-                                foreach (var item in lastRowData2)
-                                {//复制合并单元格
-                                    var sourceRow = sheet.GetRow(item.FirstRow);
-                                    var sourceCell = sourceRow.GetCell(item.FirstColumn);
-                                    var targetRow = sheet.GetRow(currentMyRow-1);
+                            if ((startPageMy - currentHeightMiddle) <= 0)
+                            {//剩下的高度不足，直接分页
+                                rowBreak.Add(currentMyRow - 1);//上一行打分页符
+                                                               //空白行
+                                currentMyRow++;
+                                var r = sheet.CreateRow(currentMyRow);
+                                r.HeightInPoints = 13;
+                                ////当前高度
+                                currentHeight = 13;
+
+                                //复制表头 
+                                for (int h = headMyRow; h < headMyRow + headMyLength; h++)
+                                {
+                                    currentMyRow++;
+                                    currentHeight += CopyRow(sheet, currentMyRow, h);//复制样式和数据
+                                    var lastRowDataHead = (from rc in result
+                                                           where h - 1 == rc.LastRow
+                                                           select rc);
+                                    if (lastRowDataHead != null && lastRowDataHead.Count() > 0)
+                                    {
+                                        //添加合并区域    
+                                        foreach (var item in lastRowDataHead)
+                                        {//复制合并单元格
+                                            var dc = item.Copy();
+                                            dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
+
+                                            dc.LastRow = currentMyRow - 1;
+
+                                            newCellRangeAddress.Add(dc);
+                                        }
+                                    }
+
+                                }
+                                //继续复制内容
+                                currentMyRow++;
+                                currentHeight += CopyRow(sheet, currentMyRow, height[i].I);//复制样式和数据
+                                                                                           //单行的
+                                var lastRowDataCurrent = (from rc in result
+                                                          where height[i].I - 1 == rc.LastRow && rc.FirstRow == rc.LastRow
+                                                          select rc);
+                                if (lastRowDataCurrent != null && lastRowDataCurrent.Count() > 0)
+                                {
+                                    //添加合并区域    
+                                    foreach (var item in lastRowDataCurrent)
+                                    {//复制合并单元格
+                                        var dc = item.Copy();
+                                        dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
+                                        dc.LastRow = currentMyRow - 1;
+
+                                        newCellRangeAddress.Add(dc);
+                                    }
+                                }
+
+                                //多行的，夹在中间的
+                                var lastRowData2 = (from rc in result
+                                                    where height[i].I < rc.LastRow && height[i].I > rc.FirstRow
+                                                    select rc);
+                                if (lastRowData2 != null && lastRowData2.Count() > 0)
+                                {
+                                    //添加合并区域    取值，赋值
+                                    foreach (var item in lastRowData2)
+                                    {//复制合并单元格
+                                        var sourceRow = sheet.GetRow(item.FirstRow);
+                                        var sourceCell = sourceRow.GetCell(item.FirstColumn);
+                                        var targetRow = sheet.GetRow(currentMyRow - 1);
                                         // targetRow.GetCell(item.FirstColumn).SetCellValue(sourceCell.StringCellValue);
                                         var targetCell = targetRow.GetCell(item.FirstColumn);
                                         switch (sourceCell.CellType)
@@ -4033,21 +4049,21 @@ namespace Langben.Report
 
                                         item.FirstRow = i;//这样不一定管用，把数据源给动了
 
-                                }
+                                    }
 
-                            }
-                            //多行的，以此行结尾的
-                            var lastRowDataCurrent3 = (from rc in result
-                                                       where height[i].I - 1 == rc.LastRow && rc.FirstRow != rc.LastRow
-                                                       select rc);
-                            if (lastRowDataCurrent3 != null && lastRowDataCurrent3.Count() > 0)
-                            {
-                                //添加合并区域    
-                                foreach (var item in lastRowDataCurrent3)
-                                {//复制合并单元格
-                                    var sourceRow = sheet.GetRow(item.FirstRow);
-                                    var sourceCell = sourceRow.GetCell(item.FirstColumn);
-                                    var targetRow = sheet.GetRow(currentMyRow-1);
+                                }
+                                //多行的，以此行结尾的
+                                var lastRowDataCurrent3 = (from rc in result
+                                                           where height[i].I - 1 == rc.LastRow && rc.FirstRow != rc.LastRow
+                                                           select rc);
+                                if (lastRowDataCurrent3 != null && lastRowDataCurrent3.Count() > 0)
+                                {
+                                    //添加合并区域    
+                                    foreach (var item in lastRowDataCurrent3)
+                                    {//复制合并单元格
+                                        var sourceRow = sheet.GetRow(item.FirstRow);
+                                        var sourceCell = sourceRow.GetCell(item.FirstColumn);
+                                        var targetRow = sheet.GetRow(currentMyRow - 1);
                                         var targetCell = targetRow.GetCell(item.FirstColumn);
                                         switch (sourceCell.CellType)
                                         {
@@ -4073,69 +4089,69 @@ namespace Langben.Report
                                                 targetCell.SetCellValue(sourceCell.StringCellValue);
                                                 break;
                                         }
-                                       // targetRow.GetCell(item.FirstColumn).SetCellValue(sourceCell.StringCellValue);
+                                        // targetRow.GetCell(item.FirstColumn).SetCellValue(sourceCell.StringCellValue);
 
 
-                                    var dc = item.Copy();
-                                //    dc.FirstRow = currentMyRow - 1 - 1 - headMyLength - (dc.LastRow - dc.FirstRow - 1);
+                                        var dc = item.Copy();
+                                        //    dc.FirstRow = currentMyRow - 1 - 1 - headMyLength - (dc.LastRow - dc.FirstRow - 1);
                                         dc.FirstRow = currentMyRow - 1 - 1 - headMyLength - (i - dc.FirstRow);
                                         dc.LastRow = currentMyRow - 1 - 1 - 1 - headMyLength;
 
-                                    newCellRangeAddress.Add(dc);
+                                        newCellRangeAddress.Add(dc);
 
-                                    var dc2 = item.Copy();
-                                    dc2.FirstRow = currentMyRow - 1;
-                                    dc2.LastRow = currentMyRow - 1;
+                                        var dc2 = item.Copy();
+                                        dc2.FirstRow = currentMyRow - 1;
+                                        dc2.LastRow = currentMyRow - 1;
 
-                                    newCellRangeAddress.Add(dc2);
+                                        newCellRangeAddress.Add(dc2);
 
 
 
+                                    }
                                 }
                             }
-                        }
-                        else
-                        {//正常
-                            currentMyRow++;
-                            currentHeight += CopyRow(sheet, currentMyRow, height[i].I);//复制样式和数据
+                            else
+                            {//正常
+                                currentMyRow++;
+                                currentHeight += CopyRow(sheet, currentMyRow, height[i].I);//复制样式和数据
 
-                            var lastRowData = (from rc in result
-                                               where height[i].I - 1 == rc.LastRow
-                                               select rc);
-                            if (lastRowData != null && lastRowData.Count() > 0)
-                            {
-                                //添加合并区域    
-                                foreach (var item in lastRowData)
-                                {//复制合并单元格
-                                    var dc = item.Copy();
-                                    dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
+                                var lastRowData = (from rc in result
+                                                   where height[i].I - 1 == rc.LastRow
+                                                   select rc);
+                                if (lastRowData != null && lastRowData.Count() > 0)
+                                {
+                                    //添加合并区域    
+                                    foreach (var item in lastRowData)
+                                    {//复制合并单元格
+                                        var dc = item.Copy();
+                                        dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
 
-                                    dc.LastRow = currentMyRow - 1;
+                                        dc.LastRow = currentMyRow - 1;
 
-                                    newCellRangeAddress.Add(dc);
+                                        newCellRangeAddress.Add(dc);
+                                    }
                                 }
                             }
-                        }
 
+                        }
                     }
-                }
-                for (int i = 1; i <= hiddenMyRow; i++)
-                {
-                    IRow sourceRow = sheet.GetRow(i);
-                    if (sourceRow != null)
+                    for (int i = 1; i <= hiddenMyRow; i++)
                     {
-                        sourceRow.Height = 0;
+                        IRow sourceRow = sheet.GetRow(i);
+                        if (sourceRow != null)
+                        {
+                            sourceRow.Height = 0;
+                        }
+                    }
+                    foreach (var item in newCellRangeAddress)
+                    {
+                        sheet.AddMergedRegion(item);
+                    }
+                    foreach (var item in rowBreak)
+                    {
+                        sheet.SetRowBreak(item);
                     }
                 }
-                foreach (var item in newCellRangeAddress)
-                {
-                    sheet.AddMergedRegion(item);
-                }
-                foreach (var item in rowBreak)
-                {
-                    sheet.SetRowBreak(item);
-                }
-            }
 
                 #endregion
 
