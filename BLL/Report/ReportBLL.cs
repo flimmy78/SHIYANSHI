@@ -4077,8 +4077,9 @@ namespace Langben.Report
 
 
                                     var dc = item.Copy();
-                                    dc.FirstRow = currentMyRow - 1 - 1 - headMyLength - (dc.LastRow - dc.FirstRow - 1);
-                                    dc.LastRow = currentMyRow - 1 - 1 - 1 - headMyLength;
+                                //    dc.FirstRow = currentMyRow - 1 - 1 - headMyLength - (dc.LastRow - dc.FirstRow - 1);
+                                        dc.FirstRow = currentMyRow - 1 - 1 - headMyLength - (i - dc.FirstRow);
+                                        dc.LastRow = currentMyRow - 1 - 1 - 1 - headMyLength;
 
                                     newCellRangeAddress.Add(dc);
 
@@ -4653,6 +4654,7 @@ namespace Langben.Report
             //sheet_Destination.SetMargin(MarginType.HeaderMargin, (double)0.4);
             sheet_Destination.SetMargin(MarginType.FooterMargin, (double)0.2);
             sheet_Destination.RepeatingRows = new CellRangeAddress(0, 0, 0, 57);
+
 
         }
         #region 复制行
