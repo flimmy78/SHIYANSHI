@@ -3094,9 +3094,9 @@ namespace Langben.Report
                         else
                         {
                             //型号
-                            sheet_Destination.GetRow(rowIndex_Destination).GetCell(7).SetCellValue(item.XINGHAO);
+                            sheet_Destination.GetRow(rowIndex_Destination).GetCell(6).SetCellValue(item.XINGHAO);
                             //编号
-                            sheet_Destination.GetRow(rowIndex_Destination).GetCell(10).SetCellValue(item.FACTORY_NUM);
+                            sheet_Destination.GetRow(rowIndex_Destination).GetCell(9).SetCellValue(item.FACTORY_NUM);
                         }
 
                         #region 不确定度/准确度等级/最大允许误差
