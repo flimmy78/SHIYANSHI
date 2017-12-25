@@ -3935,7 +3935,10 @@ namespace Langben.Report
                                     var dc = item.Copy();
                                     dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
                                     dc.LastRow = currentMyRow - 1;
-
+                                    if (dc.FirstRow > dc.LastRow)
+                                    {
+                                        dc.FirstRow = dc.LastRow;
+                                    }
                                     newCellRangeAddress.Add(dc);
                                 }
                             }
@@ -3975,9 +3978,11 @@ namespace Langben.Report
                                         {//复制合并单元格
                                             var dc = item.Copy();
                                             dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
-
                                             dc.LastRow = currentMyRow - 1;
-
+                                            if (dc.FirstRow > dc.LastRow)
+                                            {
+                                                dc.FirstRow = dc.LastRow;
+                                            }
                                             newCellRangeAddress.Add(dc);
                                         }
                                     }
@@ -3998,7 +4003,10 @@ namespace Langben.Report
                                         var dc = item.Copy();
                                         dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
                                         dc.LastRow = currentMyRow - 1;
-
+                                        if (dc.FirstRow > dc.LastRow)
+                                        {
+                                            dc.FirstRow = dc.LastRow;
+                                        }
                                         newCellRangeAddress.Add(dc);
                                     }
                                 }
@@ -4044,6 +4052,10 @@ namespace Langben.Report
                                         var dc = item.Copy();
                                         dc.FirstRow = currentMyRow - 1 - 1 - headMyLength - (i - dc.FirstRow);
                                         dc.LastRow = currentMyRow - 1 - 1 - 1 - headMyLength;
+                                        if (dc.FirstRow > dc.LastRow)
+                                        {
+                                            dc.FirstRow = dc.LastRow;
+                                        }
                                         newCellRangeAddress.Add(dc);
 
 
@@ -4096,13 +4108,20 @@ namespace Langben.Report
                                         //    dc.FirstRow = currentMyRow - 1 - 1 - headMyLength - (dc.LastRow - dc.FirstRow - 1);
                                         dc.FirstRow = currentMyRow - 1 - 1 - headMyLength - (i - dc.FirstRow);
                                         dc.LastRow = currentMyRow - 1 - 1 - 1 - headMyLength;
+                                        if (dc.FirstRow > dc.LastRow)
+                                        {
+                                            dc.FirstRow = dc.LastRow;
+                                        }
 
                                         newCellRangeAddress.Add(dc);
 
                                         var dc2 = item.Copy();
                                         dc2.FirstRow = currentMyRow - 1;
                                         dc2.LastRow = currentMyRow - 1;
-
+                                        if (dc2.FirstRow > dc2.LastRow)
+                                        {
+                                            dc2.FirstRow = dc2.LastRow;
+                                        }
                                         newCellRangeAddress.Add(dc2);
 
 
@@ -4127,7 +4146,10 @@ namespace Langben.Report
                                         dc.FirstRow = currentMyRow - 1 - (dc.LastRow - dc.FirstRow);
 
                                         dc.LastRow = currentMyRow - 1;
-
+                                        if (dc.FirstRow > dc.LastRow)
+                                        {
+                                            dc.FirstRow = dc.LastRow;
+                                        }
                                         newCellRangeAddress.Add(dc);
                                     }
                                 }
@@ -4168,6 +4190,8 @@ namespace Langben.Report
 
 
             sheet_Destination.ForceFormulaRecalculation = true;
+            //隐藏不需要的列
+            HideCol(sheet_Destination,type);
         }
         /// <summary>
         /// 删除所有没用的行，解决线问题
@@ -4936,7 +4960,7 @@ namespace Langben.Report
                             }
                         }
                         #endregion
-                    }
+                    }                   
                 }
             }
         }
@@ -6393,6 +6417,28 @@ namespace Langben.Report
             IRow sourceRow = sheet.GetRow(RowIndex);
             sheet.RemoveRow(sourceRow);
             sheet.ShiftRows(RowIndex + 1, sheet.LastRowNum, -1);
+        }
+
+        /// <summary>
+        /// 隐藏不需要的列
+        /// </summary>
+        /// <param name="sheet"></param>    
+        /// <param name="type">报告类型</param>
+        private void HideCol(ISheet sheet, ExportType type)
+        {
+            if(type== ExportType.Report_XiaoZhun_CNAS)
+            {
+                sheet.SetColumnHidden(57, true);
+            }
+            //IRow row_Source = sheet.GetRow(0);
+            //int count = row_Source.Cells.Count;
+            //if (count > 57)
+            //{
+            //    for(int i=57;i<count;i++)
+            //    {
+            //        sheet.SetColumnHidden(i, true);
+            //    }
+            //}
         }
 
         /// <summary>
