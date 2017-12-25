@@ -798,13 +798,13 @@ namespace Langben.Report
 
                     }
                 }
-                else
-                {
-                    if (dat != null && dat.Count() > 0)
-                    {
-                        throw new System.Exception("估计要出错，因为所有列的行数不一样");
-                    }
-                }
+                //else
+                //{
+                //    if (dat != null && dat.Count() > 0)
+                //    {
+                //        throw new System.Exception("估计要出错，因为所有列的行数不一样");
+                //    }
+                //}
 
                 data.Add(item, new DataValue() { Count = max, Data = list });
             }
@@ -899,7 +899,8 @@ namespace Langben.Report
 
             for (int i = 1; i < 99; i++)
             {
-                string xpath = @"//table[@id='tongdao_" + i + @"']/tfoot//input[@type='text']";
+                string xpath = @"//table[@id='tongdao_" + i + @"']/tfoot//input[@type='text'] | //table[@id='tongdao_" + i + @"']/tbody/tfoot//input[@type='text']";
+                //string xpath = @"//table[@id='tongdao_" + i + @"']/tfoot";
                 var thead = doc.DocumentNode.SelectNodes(xpath);
                 if (thead == null)
                 {
