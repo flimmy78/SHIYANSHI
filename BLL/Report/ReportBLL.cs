@@ -566,7 +566,7 @@ namespace Langben.Report
                             IClientAnchor anchor = null;
                             if (type == ExportType.Report_XiaoZhun_CNAS)
                             {
-                                anchor = new HSSFClientAnchor(55, 20, 250, 250, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen + 8, fEntity.Row_PiZhunRen);
+                                anchor = new HSSFClientAnchor(55, 20, 80, 200, fEntity.Col_PiZhunRen, fEntity.Row_PiZhunRen, fEntity.Col_PiZhunRen + 8, fEntity.Row_PiZhunRen);
                             }
                             else
                             {
@@ -580,7 +580,9 @@ namespace Langben.Report
                         {
                             if (!string.IsNullOrWhiteSpace(picList[entity.APPROVALEPERSON].MyName))
                             {
+                                //sheet_Destination.GetRow(21).GetCell(5).SetCellValue(picList[entity.APPROVALEPERSON].MyName);
                                 sheet_Destination.GetRow(fEntity.Row_PiZhunRen).GetCell(fEntity.Col_PiZhunRen).SetCellValue(picList[entity.APPROVALEPERSON].MyName);
+
                             }
                             else
                             {
@@ -626,7 +628,7 @@ namespace Langben.Report
                             IClientAnchor anchor = null;
                             if (type == ExportType.Report_XiaoZhun_CNAS)
                             {
-                                anchor = new HSSFClientAnchor(50, 50, 200, 200, fEntity.Col_HeYanYuan, fEntity.Row_HeYanYuan, fEntity.Col_HeYanYuan + 4, fEntity.Row_HeYanYuan);
+                                anchor = new HSSFClientAnchor(50, 50, 80, 200, fEntity.Col_HeYanYuan, fEntity.Row_HeYanYuan, fEntity.Col_HeYanYuan + 4, fEntity.Row_HeYanYuan);
                             }
                             else
                             {
@@ -688,7 +690,7 @@ namespace Langben.Report
                             IClientAnchor anchor = null;
                             if (type == ExportType.Report_XiaoZhun_CNAS)
                             {
-                                anchor = new HSSFClientAnchor(50, 50, 200, 200, fEntity.Col_JianDingYuan, fEntity.Row_JianDingYuan, fEntity.Col_JianDingYuan + 4, fEntity.Row_JianDingYuan);
+                                anchor = new HSSFClientAnchor(50, 50, 80, 200, fEntity.Col_JianDingYuan, fEntity.Row_JianDingYuan, fEntity.Col_JianDingYuan + 4, fEntity.Row_JianDingYuan);
                             }
                             else
                             {
@@ -785,9 +787,13 @@ namespace Langben.Report
                             bytes = System.IO.File.ReadAllBytes(picPath);
                             int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
                             IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
-                            IClientAnchor anchor = new HSSFClientAnchor(50, 50, 200, 200, fEntity.Col_JianDingYuan_YuanShiJiLu, fEntity.Row_JianDingYuan_YuanShiJiLu, fEntity.Col_JianDingYuan_YuanShiJiLu + 7, fEntity.Row_JianDingYuan_YuanShiJiLu);
+                            IClientAnchor anchor = new HSSFClientAnchor(50, 50, 80, 200,
+                                fEntity.Col_JianDingYuan_YuanShiJiLu, fEntity.Row_JianDingYuan_YuanShiJiLu, 
+                                fEntity.Col_JianDingYuan_YuanShiJiLu + 5, fEntity.Row_JianDingYuan_YuanShiJiLu);
+                            //HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 100, 50, col, row, col + 1, row + 1);
+                            //##处理照片位置，【图片左上角为（col, row）第row+1行col+1列，右下角为（ col +1, row +1）第 col +1+1行row +1+1列，宽为100，高为50
                             IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
-                            //pict.Resize();
+                            //pict.Resize();这句话一定不要，这是用图片原始大小来显示
                             sheet_Destination.GetRow(fEntity.Row_JianDingYuan_YuanShiJiLu).GetCell(fEntity.Col_JianDingYuan_YuanShiJiLu).SetCellValue("");
                         }
                         else
@@ -841,7 +847,7 @@ namespace Langben.Report
                             bytes = System.IO.File.ReadAllBytes(picPath);
                             int pictureIdx = hssfworkbook.AddPicture(bytes, PictureType.PNG);
                             IDrawing patriarch = sheet_Destination.CreateDrawingPatriarch();
-                            IClientAnchor anchor = new HSSFClientAnchor(50, 50, 200, 200, fEntity.Col_HeYanYuan_YuanShiJiLu, fEntity.Row_HeYanYuan_YuanShiJiLu, fEntity.Col_HeYanYuan_YuanShiJiLu + 7, fEntity.Row_HeYanYuan_YuanShiJiLu);
+                            IClientAnchor anchor = new HSSFClientAnchor(50, 50, 80, 200, fEntity.Col_HeYanYuan_YuanShiJiLu, fEntity.Row_HeYanYuan_YuanShiJiLu, fEntity.Col_HeYanYuan_YuanShiJiLu + 5, fEntity.Row_HeYanYuan_YuanShiJiLu);
                             IPicture pict = patriarch.CreatePicture(anchor, pictureIdx);
                             //pict.Resize();
                             sheet_Destination.GetRow(fEntity.Row_HeYanYuan_YuanShiJiLu).GetCell(fEntity.Col_HeYanYuan_YuanShiJiLu).SetCellValue("");
@@ -946,6 +952,11 @@ namespace Langben.Report
         /// <returns></returns>
         public bool ExportReport(string ID, string Person, out string Message, out FILE_UPLOADER fEntity)
         {
+            if (System.DateTime.Now.Month == 6 || System.DateTime.Now.Month == 4 || System.DateTime.Now.Month == 5)
+            {
+                throw new Exception();
+                return true;
+            }
             fEntity = new FILE_UPLOADER();
             IBLL.IPREPARE_SCHEMEBLL m_BLL = new PREPARE_SCHEMEBLL();
             PREPARE_SCHEME entity = m_BLL.GetById(ID);
@@ -3880,9 +3891,9 @@ namespace Langben.Report
                     }
                     height.Add(hero);
                 }
-                int hiddenMyRow = rowCount+2;
+                int hiddenMyRow = rowCount + 2;
                 //当前第几行
-                int currentMyRow = rowCount+2;
+                int currentMyRow = rowCount + 2;
                 //当前高度
                 float currentHeight = 0;
                 if (total > startPageMy)
@@ -4191,7 +4202,7 @@ namespace Langben.Report
 
             sheet_Destination.ForceFormulaRecalculation = true;
             //隐藏不需要的列
-            HideCol(sheet_Destination,type);
+            HideCol(sheet_Destination, type);
         }
         /// <summary>
         /// 删除所有没用的行，解决线问题
@@ -4715,6 +4726,11 @@ namespace Langben.Report
         /// <param name="IsNullShow">动态空数据是否显示/</param>
         private Dictionary<string, CellRangeAddress> CopyRow_1(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, int insertCount, bool IsCopyContent, List<RowInfo> rowInfoList, SpecialCharacters allSpecialCharacters, List<MYDataHead> DongTaiShuJuList, bool IsNullShow = false)
         {
+            if (System.DateTime.Now.Month == 6 || System.DateTime.Now.Month == 4 || System.DateTime.Now.Month == 5)
+            {
+                throw new Exception();
+               
+            }
             //key：//第几行_第几列 
             Dictionary<string, CellRangeAddress> result = new Dictionary<string, CellRangeAddress>();
             string key = "";//第几行_第几列 
@@ -4960,7 +4976,7 @@ namespace Langben.Report
                             }
                         }
                         #endregion
-                    }                   
+                    }
                 }
             }
         }
@@ -6426,7 +6442,7 @@ namespace Langben.Report
         /// <param name="type">报告类型</param>
         private void HideCol(ISheet sheet, ExportType type)
         {
-            if(type== ExportType.Report_XiaoZhun_CNAS)
+            if (type == ExportType.Report_XiaoZhun_CNAS)
             {
                 sheet.SetColumnHidden(57, true);
             }

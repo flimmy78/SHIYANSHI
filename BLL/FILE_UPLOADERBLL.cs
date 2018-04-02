@@ -11,7 +11,7 @@ namespace Langben.BLL
     /// <summary>
     /// 附件 
     /// </summary>
-    public partial class FILE_UPLOADERBLL :  IBLL.IFILE_UPLOADERBLL, IDisposable
+    public partial class FILE_UPLOADERBLL : IBLL.IFILE_UPLOADERBLL, IDisposable
     {
         /// <summary>
         /// 私有的数据访问上下文
@@ -47,13 +47,13 @@ namespace Langben.BLL
 
             using (SysEntities db = new SysEntities())
             {
-                list = db.FILE_UPLOADER.Where(p => p.PREPARE_SCHEMEID == PREPARE_SCHEMEID && p.STATE!="已删除").ToList();
+                list = db.FILE_UPLOADER.Where(p => p.PREPARE_SCHEMEID == PREPARE_SCHEMEID && p.STATE != "已删除").ToList();
             }
-            if(list!=null && list.Count>0)
+            if (list != null && list.Count > 0)
             {
                 return list[0];
             }
-            return null;         
+            return null;
         }
         /// <summary>
         /// 查询的数据
@@ -80,16 +80,16 @@ namespace Langben.BLL
                 {
                     queryData = queryData.Skip((page - 1) * rows).Take(rows);
                 }
-                
-                    foreach (var item in queryData)
-                    {
-                        if (item.PREPARE_SCHEMEID != null && item.PREPARE_SCHEME != null)
-                        { 
-                                item.PREPARE_SCHEMEIDOld = item.PREPARE_SCHEME.REPORT_CATEGORY.GetString();//                            
-                        }                  
 
+                foreach (var item in queryData)
+                {
+                    if (item.PREPARE_SCHEMEID != null && item.PREPARE_SCHEME != null)
+                    {
+                        item.PREPARE_SCHEMEIDOld = item.PREPARE_SCHEME.REPORT_CATEGORY.GetString();//                            
                     }
- 
+
+                }
+
             }
             return queryData.ToList();
         }
@@ -98,7 +98,7 @@ namespace Langben.BLL
         /// </summary>
         /// <param name="PREPARE_SCHEMEID">预备方案ID</param>
         /// <param name="Person">操作人</param>
-        public void DeleteByPREPARE_SCHEMEID(string PREPARE_SCHEMEID,string Person)
+        public void DeleteByPREPARE_SCHEMEID(string PREPARE_SCHEMEID, string Person)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace Langben.BLL
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -139,7 +139,7 @@ namespace Langben.BLL
         public List<FILE_UPLOADER> GetByParam(string id, string order, string sort, string search)
         {
             IQueryable<FILE_UPLOADER> queryData = repository.GetData(db, order, sort, search);
-            
+
             return queryData.ToList();
         }
         /// <summary>
@@ -153,15 +153,32 @@ namespace Langben.BLL
         {
             try
             {
-                //DeleteByPREPARE_SCHEMEID(entity.PREPARE_SCHEMEID,entity.CREATEPERSON);
+                string err = string.Empty;
+
+                //  DeleteByPREPARE_SCHEMEID(entity.PREPARE_SCHEMEID,entity.CREATEPERSON);
                 repository.Create(entity);
+                if (!string.IsNullOrWhiteSpace(entity.STATE2)&& entity.STATE2== "已上传")//原始记录
+                {
+                    Langben.Report.ReportBLL re = new Langben.Report.ReportBLL();
+                    return re.UpdateFuJianRemark(entity.PREPARE_SCHEMEID, out err);
+                }
+                //if (chuanzhi == "Y")
+                //{
+                //    file.STATE2 = Common.PACKAGETYPE.已上传.ToString();
+                //}
+                //else
+                //{
+                //    file.STATE = Common.PACKAGETYPE.已上传.ToString();
+                //}
+
+             
                 return true;
             }
             catch (Exception ex)
             {
-                validationErrors.Add(ex.Message+"创建错误");
+                validationErrors.Add(ex.Message + "创建错误");
                 validationErrors.Add(ex.Source);
-                ExceptionsHander.WriteExceptions(ex);                
+                ExceptionsHander.WriteExceptions(ex);
             }
             return false;
         }
@@ -185,7 +202,7 @@ namespace Langben.BLL
                     else if (count > 1)
                     {
                         //using (TransactionScope transactionScope = new TransactionScope())
-                        { 
+                        {
                             repository.Create(db, entitys);
                             if (count == repository.Save(db))
                             {
@@ -195,7 +212,7 @@ namespace Langben.BLL
                             else
                             {
                                 //Transaction.Current.Rollback();
-                            }                          
+                            }
                         }
                     }
                 }
@@ -203,7 +220,7 @@ namespace Langben.BLL
             catch (Exception ex)
             {
                 validationErrors.Add(ex.Message);
-                ExceptionsHander.WriteExceptions(ex);                
+                ExceptionsHander.WriteExceptions(ex);
             }
             return false;
         }
@@ -222,7 +239,7 @@ namespace Langben.BLL
             catch (Exception ex)
             {
                 validationErrors.Add(ex.Message);
-                ExceptionsHander.WriteExceptions(ex);                
+                ExceptionsHander.WriteExceptions(ex);
             }
             return false;
         }
@@ -237,27 +254,27 @@ namespace Langben.BLL
             try
             {
                 if (deleteCollection != null)
-                { 
-                        //using (TransactionScope transactionScope = new TransactionScope())
-                        { 
-                            repository.Delete(db, deleteCollection);
-                            if (deleteCollection.Length == repository.Save(db))
-                            {
-                                //transactionScope.Complete();
-                                return true;
-                            }
-                            else
-                            {
-                                //Transaction.Current.Rollback();
-                            }
+                {
+                    //using (TransactionScope transactionScope = new TransactionScope())
+                    {
+                        repository.Delete(db, deleteCollection);
+                        if (deleteCollection.Length == repository.Save(db))
+                        {
+                            //transactionScope.Complete();
+                            return true;
+                        }
+                        else
+                        {
+                            //Transaction.Current.Rollback();
                         }
                     }
-             
+                }
+
             }
             catch (Exception ex)
             {
                 validationErrors.Add(ex.Message);
-                ExceptionsHander.WriteExceptions(ex);                
+                ExceptionsHander.WriteExceptions(ex);
             }
             return false;
         }
@@ -281,7 +298,7 @@ namespace Langben.BLL
                     else if (count > 1)
                     {
                         //using (TransactionScope transactionScope = new TransactionScope())
-                        { 
+                        {
                             repository.Edit(db, entitys);
                             if (count == repository.Save(db))
                             {
@@ -299,11 +316,11 @@ namespace Langben.BLL
             catch (Exception ex)
             {
                 validationErrors.Add(ex.Message);
-                ExceptionsHander.WriteExceptions(ex);                
+                ExceptionsHander.WriteExceptions(ex);
             }
             return false;
         }
-         /// <summary>
+        /// <summary>
         /// 编辑一个附件
         /// </summary>
         /// <param name="validationErrors">返回的错误信息</param>
@@ -312,7 +329,7 @@ namespace Langben.BLL
         public bool Edit(ref ValidationErrors validationErrors, FILE_UPLOADER entity)
         {
             try
-            { 
+            {
                 repository.Edit(db, entity);
                 repository.Save(db);
                 return true;
@@ -320,24 +337,24 @@ namespace Langben.BLL
             catch (Exception ex)
             {
                 validationErrors.Add(ex.Message);
-                ExceptionsHander.WriteExceptions(ex);                
+                ExceptionsHander.WriteExceptions(ex);
             }
             return false;
         }
-      
+
         public List<FILE_UPLOADER> GetAll()
-        {           
-            return repository.GetAll(db).ToList();          
-        }   
-        
+        {
+            return repository.GetAll(db).ToList();
+        }
+
         /// <summary>
         /// 根据主键获取一个附件
         /// </summary>
         /// <param name="id">附件的主键</param>
         /// <returns>一个附件</returns>
         public FILE_UPLOADER GetById(string id)
-        {           
-            return repository.GetById(db, id);           
+        {
+            return repository.GetById(db, id);
         }
 
         /// <summary>
@@ -357,12 +374,12 @@ namespace Langben.BLL
         /// <returns></returns>
         public List<FILE_UPLOADER> GetByRefPREPARE_SCHEMEID(string id)
         {
-            return repository.GetByRefPREPARE_SCHEMEID(db, id).ToList();                      
+            return repository.GetByRefPREPARE_SCHEMEID(db, id).ToList();
         }
 
         public void Dispose()
         {
-           
+
         }
     }
 }

