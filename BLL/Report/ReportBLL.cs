@@ -4799,7 +4799,10 @@ namespace Langben.Report
                                     }
                                     key = (i - (cellAddress.LastRow - cellAddress.FirstRow)).ToString() + "_" + colCount.ToString();//第几行_第几列 
                                                                                                                                     //result.Add(new CellRangeAddress(i - (cellAddress.LastRow - cellAddress.FirstRow), i, cellAddress.FirstColumn, cellAddress.LastColumn));
-                                    result.Add(key, new CellRangeAddress(i - (cellAddress.LastRow - cellAddress.FirstRow), i, cellAddress.FirstColumn, cellAddress.LastColumn));
+                                    if (m < 57)
+                                    {
+                                        result.Add(key, new CellRangeAddress(i - (cellAddress.LastRow - cellAddress.FirstRow), i, cellAddress.FirstColumn, cellAddress.LastColumn));
+                                    }
                                 }
                                 if (IsCopyContent && rowIndex_Source == cellAddress.FirstRow)
                                 {
@@ -4822,8 +4825,11 @@ namespace Langben.Report
                             {
                                 colCount++;
                             }
-                            key = targetRow.RowNum.ToString() + "_" + colCount.ToString();//第几行_第几列 
-                            result.Add(key, new CellRangeAddress(targetRow.RowNum, targetRow.RowNum, m, m));
+                            key = targetRow.RowNum.ToString() + "_" + colCount.ToString();//第几行_第几列
+                            if (m < 57)
+                            {
+                                result.Add(key, new CellRangeAddress(targetRow.RowNum, targetRow.RowNum, m, m));
+                            }
                             if (IsCopyContent)
                             {
                                 HSSFRichTextString value = GetDongTaiShuJu(DongTaiShuJuList, rowInfoList, row_Source.Cells[m], targetRow.Cells[m], allSpecialCharacters, IsNullShow);
