@@ -36,12 +36,12 @@ function CreateTongDao() {
     $tongdao.find("#K_moban").attr('id', 'K_' + tableIdx);
 
     $tongdao.find('#btnAddLiangCheng').attr("onclick", "set(" + tableIdx + ",this);");
-    
+
     $("#hideDangQianTongDao").val(tableIdx);
     $("#hideTongDaoShuLiang").val(tableIdx);
-    if (tableIdx>1)
-    $tongdao.find("#top-only").hide();
-    
+    if (tableIdx > 1)
+        $tongdao.find("#top-only").hide();
+
 
 };
 
@@ -492,7 +492,7 @@ function GetJiSuanBuQueDingDuType(Name) {
         return "";
     }
     if (type == "Z" && JiSuanBuQueDingDuParaArray != null && JiSuanBuQueDingDuParaArray.length == 0) {
- 
+
         if (AttributeValue.split("|")[1].length > 1 && AttributeValue.split("|")[1].split(";").length >= "4") {
 
             //检测项属性名称后需要加自动或者按钮不确定计算
@@ -636,23 +636,19 @@ function SetTDHtml(rowspan, name, id, rowidx, txtVal, classstyle, unit, blurValu
     }
     if (unit) {
         htmlString.push(unit);
-        if(RuleID=="1075-2001_3_1")
-        {
+        if (RuleID == "1075-2001_3_1") {
             var unitStr = "";
-            if(unit=="A")
-            {
-                unitStr = "A(";                
+            if (unit == "A") {
+                unitStr = "A(";
             }
-            else if(unit=="mv/A")
-            {
-                unitStr = "mv/A)";                
+            else if (unit == "mv/A") {
+                unitStr = "mv/A)";
             }
-            if(unitStr!="")
-            {
-                htmlString.push("<input style=\"display:none\" value=\""+unitStr+"\" id=\"" + ddlId + "\" name=\"" + ddlName + "\" onblur=\"\" type=\"text\">");
+            if (unitStr != "") {
+                htmlString.push("<input style=\"display:none\" value=\"" + unitStr + "\" id=\"" + ddlId + "\" name=\"" + ddlName + "\" onblur=\"\" type=\"text\">");
             }
         }
-        
+
     }
 
     //不确定度
@@ -730,7 +726,7 @@ function ChangeBuQueDingDuShowTypeOrBuQueDingDuXiaoShuWeiShu() {
 function JiSuanBuQueDingDuByType(BuQueDingDuZhiId, ShowBuQueDingDuId) {
     var type = $("#ddlBuQueDingDuShowType").val();
     var pos = $("#BuQueDingDuXiaoShuWeiShu").val();
-
+    debugger
     var BuQueDingDuZhi = document.getElementById(BuQueDingDuZhiId);
     var ShowBuQueDingDu = document.getElementById(ShowBuQueDingDuId);
     if (BuQueDingDuZhi == null || ShowBuQueDingDu == null) {
@@ -745,16 +741,57 @@ function JiSuanBuQueDingDuByType(BuQueDingDuZhiId, ShowBuQueDingDuId) {
     }
     if (type == "B")//百分比模式
     {
-        ShowBuQueDingDu.value = percentages(BuQueDingDuZhi.value, pos);
+        //截取pos，加上0.1*10的负（pos-1）
+        var z = percentages(BuQueDingDuZhi.value, pos);
+        var zhi = "";
+        zhi = zhijinbushe(BuQueDingDuZhi.value, pos);
+        ShowBuQueDingDu.value = zhi;
+        //ShowBuQueDingDu.value = percentages(BuQueDingDuZhi.value, pos);
     }
     else if (type == "K")//科学计算法模式
     {
-        ShowBuQueDingDu.value = kexue(BuQueDingDuZhi.value, pos);
+        var zhi = "";
+        zhi = zhijinbushe(BuQueDingDuZhi.value, pos);
+        ShowBuQueDingDu.value = zhi;
+        //ShowBuQueDingDu.value = kexue(BuQueDingDuZhi.value, pos);
     }
     else//原始模式
-    {
-        ShowBuQueDingDu.value = zeroFloat(BuQueDingDuZhi.value, pos);
+    { //截取字符串小数点后pos位哦,进位，不够的则不用管
+        var value = BuQueDingDuZhi.value;//截取
+        var zhi = "";
+        zhi = zhijinbushe(value, pos);
+        ShowBuQueDingDu.value = zhi;
+        //ShowBuQueDingDu.value = zeroFloat(value, pos);
     }
+}
+
+//只进不舍
+function zhijinbushe(vale,pos) {
+    var zhi = "";
+    var dian = vale.indexOf('.');
+    var result = "";
+    if (dian == -1) {
+        zhi = value;
+    } else {
+        var str = vale.split('.');
+        var zhenshu = str[0];
+        var xiaoshu = str[1];
+        var xiaoshuchulizhi = 0;
+        var xiaoshuchang = xiaoshu.length;
+        var zhengshujinwei = false;
+        if (xiaoshuchang >= pos) {
+            xiaoshuchulizhi = xiaoshu.substring(0, pos);
+            xiaoshuchulizhi = parseInt(xiaoshuchulizhi) + 1;
+            zhengshujinwei = String(xiaoshuchulizhi).length > xiaoshuchang ? true : false;
+        } else {
+            for (var i = 0; i < parseInt(pos) - xiaoshuchang; i++) {
+                xiaoshuchulizhi += "0";
+            }
+        }
+        zhenshu = zhengshujinwei ? parseInt(zhenshu) + 1 : zhenshu;
+        zhi = zhenshu + "." + xiaoshuchulizhi;
+    }
+    return zhi;
 }
 //弹计算不确定过程框
 function showModal(me, url) { //弹出窗体
@@ -779,7 +816,6 @@ function showModal(me, url) { //弹出窗体
         }
     }
     var reValue = window.showModalDialog(url, window, "dialogHeight:600px; dialogWidth:1024px;  status:off; scroll:auto");
-
     if (reValue == null || reValue == "undefined" || reValue == "") {
         return; //如果返回值为空，就返回
     }
@@ -802,9 +838,9 @@ function showModal(me, url) { //弹出窗体
 //Name:属性名称
 function GetAttributeValue(Name) {
     if (RuleAttribute == null || Name == null || Name.trim() == "" ||
-       RuleAttribute.Attributes == null || RuleAttribute.Attributes[0] == null || RuleAttribute.Attributes[0][Name] == null
-       || RuleAttribute.Attributes[0][Name].trim() == ""
-        ) {
+        RuleAttribute.Attributes == null || RuleAttribute.Attributes[0] == null || RuleAttribute.Attributes[0][Name] == null
+        || RuleAttribute.Attributes[0][Name].trim() == ""
+    ) {
         return "";
     }
     return RuleAttribute.Attributes[0][Name].trim();
@@ -1025,7 +1061,7 @@ function Save_ShuJuLuRu() {
     var RULEID = $("#hideRULEID").val();//检测项ID   
     var CONCLUSION = $("#CONCLUSION").val();//结论   
     //备注 (有的检测项没有备注控件，是死的，例如166-1993_3_1，报告取模板中的数据)
-    var REMARK = "";    
+    var REMARK = "";
     var REMARKobj = document.getElementById("REMARK");
     if (REMARKobj != null) {
         REMARK = $("#REMARK").val();//备注 
@@ -1075,7 +1111,7 @@ function Save_FangAn() {
     var OldID = $("#hideID").val();
     var RULEID = $("#hideRULEID").val();
     var SCHEMEID = $("#hideSCHEMEID").val();
-    var HTMLVALUE = encodeURI($("#divHtml").html()).replace(/\+/g,'%2B');;
+    var HTMLVALUE = encodeURI($("#divHtml").html()).replace(/\+/g, '%2B');;
 
 
     //获取空对象用于保存添加的信息
@@ -1162,7 +1198,7 @@ function SetAllControlHtml() {
 
 
             }
-        );
+            );
 
         }
 
@@ -1249,7 +1285,7 @@ function fomatFloat(src, pos) {
     }
 
 }
- 
+
 //科学技术法
 //pos保留的小数位数，不足的位数补零
 function kexue(src, pos) {
@@ -1274,8 +1310,7 @@ function kexue(src, pos) {
     if (pos >= 0) {
         n = numeral(n).format('0.' + zero);
     }
-    else
-    {
+    else {
         n = numeral(n).value();
     }
     var str = '*10'
@@ -1291,8 +1326,8 @@ function kexue(src, pos) {
 function toPoint(percent) {
     var str;
     if (percent.indexOf("%") > 0) {
-         str = percent.replace("%", "");
-         str = parseFloat(str) / 100;
+        str = percent.replace("%", "");
+        str = parseFloat(str) / 100;
     } else {
         str = parseFloat(percent)
     }
@@ -1310,7 +1345,7 @@ function percentages(src, pos) {
         zero += "0";
     }
 
-    return numeral(src).format('0.' + zero + '%');//'(0.000 %)'
+    return numeral(src).format('0.' + zero + '%');//'(0.0005 %)'
 
 }
 //小数位数不够的时候补足零
@@ -1334,15 +1369,14 @@ function zeroFloat(src, pos) {
 //second 第二列的值
 //gold 平均值
 function getAverage(obj, first, second, gold) {
-    var r1, r2,n;
+    var r1, r2, n;
     try { r1 = first.toString().split(".")[1].length } catch (e) { r1 = 0 }
     try { r2 = second.toString().split(".")[1].length } catch (e) { r2 = 0 }
     //last modify by deeka
     //动态控制精度长度
     n = (r1 >= r2) ? r1 : r2;
     var jianfa1 = accDiv(accAdd(first, second), 2);
-    if (n != 0)
-    {
+    if (n != 0) {
         var jianfa1 = zeroFloat(fomatFloat(jianfa1, n), n);
     }
     $(obj).parent().parent().find("#" + gold).val(jianfa1);
@@ -1372,17 +1406,17 @@ function wuCha(obj, first, second, third, gold) {
     second = second + id;//改动的地方，参与计算的列的name值
     third = third + id;
     gold = gold + id;//改动的地方，误差的列的name值
-   
+
 
     var firstData = $(obj).parent().parent().find("#" + first).val();
     var secondData = $(obj).parent().parent().find("#" + second).val();
     var thirdData = $(obj).parent().parent().find("#" + third).val();
     if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
-        
+
         var jianfa = accDiv(accSub(firstData, secondData), thirdData) * 100;
         var data1 = (fomatFloat(jianfa, txtPointLen), txtPointLen);
-        var data=0;
+        var data = 0;
         if ($("#" + first).parent().find('select').val() == "μΩ" && $("#" + second).parent().find('select').val() == "mΩ") {
             //【相对误差】=（显示值/1000-标准值）/标准值*100%
             data = accDiv(accDiv(firstData, accSub(1000, secondData)), secondData) * 100;
@@ -1413,9 +1447,9 @@ function wuChaLiangCheng(obj, first, second, third, gold) {
     if (firstData != "undefined" && secondData != "undefined" && firstData != "" && thirdData != "undefined" && thirdData != "" && secondData != "" && thirdData != "0") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
         //【误差】=（示值-标准值/量程）/10*100，不同的准确度等级小数位数不同，四舍六入，逢五奇进偶不进
-     
-        var jianfa = accSub(firstData,accDiv(secondData, thirdData)) * 10;
-        
+
+        var jianfa = accSub(firstData, accDiv(secondData, thirdData)) * 10;
+
         var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
         $(obj).parent().parent().find("#" + gold).val(data);
     }
@@ -1494,10 +1528,10 @@ function yinYongWuCha(obj, first, second, third, fourth, fifth, gold) {
         && firstData != "" && secondData != "" && thirdData != "" && fourthData != "" && fifthData != "") {
         var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
         //引用误差=Round(（实际输出值-标准输出值）/（输出范围的最大值-输出范围的最小值）*100/等级,1)*等级
-        var a=accSub(firstData, secondData);
+        var a = accSub(firstData, secondData);
         var b = accSub(thirdData, fourthData);
         var c = accDiv(a, b);
-        var d=(accDiv((c * 100), fifthData).toFixed(1));
+        var d = (accDiv((c * 100), fifthData).toFixed(1));
         var jianfa = accMul(d, fifthData);
         var data = zeroFloat(jianfa, txtPointLen);
 
@@ -1590,7 +1624,7 @@ function wuCha1(obj, shiji, biaochen, target, point) {
     var length = txtPointLen;// yuxunwucha.split(".").length == 2 ? yuxunwucha.split(".")[1].length : 0
     if (biaochenValue != "" && shiJiValue != "")
         //var wucha2 = parseFloat(fomatFloat(parseFloat((parseFloat(shiJiValue) - parseFloat(biaochenValue)) / parseFloat(biaochenValue) * 100), (length + 1))).toFixed((length + 1));
-        var wucha2 = parseFloat(fomatFloat(parseFloat((parseFloat(shiJiValue) - parseFloat(biaochenValue)) / parseFloat(biaochenValue) * 100), (length ))).toFixed((length));
+        var wucha2 = parseFloat(fomatFloat(parseFloat((parseFloat(shiJiValue) - parseFloat(biaochenValue)) / parseFloat(biaochenValue) * 100), (length))).toFixed((length));
     $(obj).parent().parent().find("#" + targetName).val(wucha2);
 
 }
