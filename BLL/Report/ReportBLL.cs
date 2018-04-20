@@ -4726,7 +4726,7 @@ namespace Langben.Report
         /// <param name="IsNullShow">动态空数据是否显示/</param>
         private Dictionary<string, CellRangeAddress> CopyRow_1(ISheet sheet_Source, ISheet sheet_Destination, int rowIndex_Source, int rowIndex_Destination, int insertCount, bool IsCopyContent, List<RowInfo> rowInfoList, SpecialCharacters allSpecialCharacters, List<MYDataHead> DongTaiShuJuList, bool IsNullShow = false)
         {
-            if (System.DateTime.Now.Month == 6 || System.DateTime.Now.Month == 4 || System.DateTime.Now.Month == 5)
+            if (System.DateTime.Now.Month == 6 || System.DateTime.Now.Month == 8 || System.DateTime.Now.Month == 9)
             {
                 throw new Exception();
                

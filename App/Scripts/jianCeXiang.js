@@ -766,7 +766,7 @@ function JiSuanBuQueDingDuByType(BuQueDingDuZhiId, ShowBuQueDingDuId) {
 }
 
 //只进不舍
-function zhijinbushe(vale,pos) {
+function zhijinbushe(vale, pos) {
     var zhi = "";
     var dian = vale.indexOf('.');
     var result = "";
@@ -782,11 +782,13 @@ function zhijinbushe(vale,pos) {
         if (xiaoshuchang >= pos) {
             xiaoshuchulizhi = xiaoshu.substring(0, pos);
             xiaoshuchulizhi = parseInt(xiaoshuchulizhi) + 1;
+            xiaoshuchulizhi = (Array(parseInt(pos)).join(0) + xiaoshuchulizhi).slice(-parseInt(pos))
             zhengshujinwei = String(xiaoshuchulizhi).length > xiaoshuchang ? true : false;
         } else {
-            for (var i = 0; i < parseInt(pos) - xiaoshuchang; i++) {
-                xiaoshuchulizhi += "0";
-            }
+            xiaoshuchulizhi = (xiaoshuchulizhi + Array(parseInt(pos)).join(0) ).slice(-parseInt(pos))
+            //for (var i = 0; i < parseInt(pos) - xiaoshuchang; i++) {
+            //    xiaoshuchulizhi += "0";
+            //}
         }
         zhenshu = zhengshujinwei ? parseInt(zhenshu) + 1 : zhenshu;
         zhi = zhenshu + "." + xiaoshuchulizhi;
