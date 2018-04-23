@@ -94,7 +94,7 @@ namespace Langben.DAL
                     .CreateObjectSet<VJIANDINGRENWU>().Where(string.IsNullOrEmpty(where) ? "true" : where)
                      .OrderBy("it.[" + sort.GetString() + "] " + order.GetString())
                      .OrderBy("it.[CREATETIME] " + "desc")
-                     .Where(w => EQUIPMENT_STATUS_VALUUMNarr.Contains(w.EQUIPMENT_STATUS_VALUUMN) && w.NAME == NAME)
+                     .Where(w => EQUIPMENT_STATUS_VALUUMNarr.Contains(w.EQUIPMENT_STATUS_VALUUMN) && NAME.Contains(w.NAME))
                      .AsQueryable();
 
         }
