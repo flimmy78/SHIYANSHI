@@ -8,7 +8,25 @@
 @section CurentPlace {
     修改
 }
+<script type="text/javascript">
+    $(function () {
+        $('#Province2').combobox({
+           multiple: true,
+          data: [{ value: '@Common.LABORATORYNAME.电能.ToString()', text: '@Common.LABORATORYNAME.电能.ToString()' }, { value: '@Common.LABORATORYNAME.指示仪表.ToString()', text: '@Common.LABORATORYNAME.指示仪表.ToString()' },
+            { value: '@Common.LABORATORYNAME.数表单相.ToString()', text: '@Common.LABORATORYNAME.数表单相.ToString()' }, { value: '@Common.LABORATORYNAME.互感器.ToString()', text: '@Common.LABORATORYNAME.互感器.ToString()' }, { value: '@Common.LABORATORYNAME.数表三相.ToString()', text: '@Common.LABORATORYNAME.数表三相.ToString()' }, { value: '@Common.LABORATORYNAME.直流仪器.ToString()', text: '@Common.LABORATORYNAME.直流仪器.ToString()' }],
+           panelHeight: 'auto',
+           required: true,
+            missingMessage: '必填',
+            onSelect: function (s) {
 
+            }
+        })
+        $("#Province2").combobox('setValues', '@Model.Province'.split(','));
+    })
+    function ti() {
+        $('#Province').val($("#Province2").combobox('getText'));
+    }
+</script>
 <fieldset>
 
     <div class="bigdiv">
@@ -96,16 +114,17 @@
                 <label for="Province">实验室</label>
             </div>
             <div class="editor-field">
-                <select id="Province" name="Province">
-                    <option value="">请选择</option>
-                    <option value="数表三相">数表三相</option>
-                    <option value="数表单相">数表单相</option>
-                    <option value="电能">电能</option>
-                    <option value="指示仪表">指示仪表</option>
-                    <option value="直流仪器">直流仪器</option>
-                    <option value="互感器">互感器</option>
+                <select id="Province2" name="Province2">
+                    @*<option value="">请选择</option>
+                <option value="数表三相">数表三相</option>
+                <option value="数表单相">数表单相</option>
+                <option value="电能">电能</option>
+                <option value="指示仪表">指示仪表</option>
+                <option value="直流仪器">直流仪器</option>
+                <option value="互感器">互感器</option>*@
                 </select>
             </div>
+            <input type="hidden" id="Province" name="Province" value="" />
         </div>
         <div class="search-form">
             <div class="editor-label">
@@ -151,7 +170,7 @@
         <div class="editor-label"></div>
         <div class="editor-field">
 
-            <input class="a2 f2" type="submit" value="修改" />
+            <input class="a2 f2" type="submit" value="修改" onclick="ti()"/>
             <input class="a2 f2" type="button" onclick="BackList('SysPerson')" value="返回列表" />
 
         </div>
