@@ -26,7 +26,8 @@ namespace Langben.BLL
             { 
                 repository.EditField(db, entity);
                 Langben.Report.ReportBLL re = new Langben.Report.ReportBLL();
-                re.UpdateFuJianRemark(entity.PREPARE_SCHEMEID, out string err);
+                string err  = string.Empty;
+                re.UpdateFuJianRemark(entity.PREPARE_SCHEMEID, out  err);
                 repository.Save(db);
                 return true;
             }
