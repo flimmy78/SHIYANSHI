@@ -451,7 +451,7 @@
         if (entity.APPLIANCE_DETAIL_INFORMATION.length >= 1) {
             for (var i = 0; i < entity.APPLIANCE_DETAIL_INFORMATION.length; i++) {
                 if (entity.APPLIANCE_DETAIL_INFORMATION[i].APPLIANCE_NAME == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].VERSION == "undefined"
-                   || entity.APPLIANCE_DETAIL_INFORMATION[i].NUM == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].APPEARANCE_STATUS == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID == "undefined") {
+                    || entity.APPLIANCE_DETAIL_INFORMATION[i].NUM == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].APPEARANCE_STATUS == "undefined" || entity.APPLIANCE_DETAIL_INFORMATION[i].UNDERTAKE_LABORATORYID == "undefined") {
                     zhi += "器具数据有误！<br>";
                     break;
                 }
@@ -632,7 +632,46 @@ s：字符串
         //单位选择联动
         $("#INSPECTION_ENTERPRISE").combobox({
             onChange: function (a, b) {
-                $("#CERTIFICATE_ENTERPRISE").combobox('select', a)
+                $("#CERTIFICATE_ENTERPRISE").combobox('select', a);
+                $.ajax({
+                    url: "/Appliance/GetVasedate/" + a + "",
+                    type: "post",
+                    data: {
+                        //传值，还是JSON数据
+                        COMPANYNAME:a
+                    },
+                    //重要，如果写jsonp会报转换错误，此处不写都可以
+                    dataType: "json",
+                    success: function (data) {
+                        debugger
+                        //关键步骤，遍历一个MAP对象
+                        //var items = $.map(data, function (item) {
+                        //    return {
+                        //        id: item.id,
+                        //        name: item.value,
+                        //        show: item.label
+                        //    };
+                        //});
+                        ////执行loader的success方法
+                        //success(items);
+                        var fax = data.FAX != null ? data.FAX.split('$')[0] : null;
+                        var posts = data.FAX != null ? data.FAX.split('$')[1] : null;
+                        $("#INSPECTION_ENTERPRISE_ADDRESS").val(data.COMPANYADDRES);//送检单位地址
+                        $("#INSPECTION_ENTERPRISE_POST").val(posts);//送检单位邮政编码
+                        $("#CONTACTS").val(data.CONTACTS);//联系人
+                        $("#CONTACT_PHONE").val(data.CONTACTSNUMBER);//联系电话
+                        $("#FAX").val(fax);//传真
+                        $("#CERTIFICATE_ENTERPRISE_ADDRESS").val(data.COMPANYADDRES);//证书单位地址
+                        $("#CERTIFICATE_ENTERPRISE_POST").val(posts);//证书单位邮政编码
+                        $("#CONTACTS2").val(data.CONTACTS);//联系人2
+                        $("#CONTACT_PHONE2").val(data.CONTACTSNUMBER);//联系电话2
+                        $("#FAX2").val(fax);//传真2
+                    },
+                    //异常处理
+                    error: function (xml, text, msg) {
+                        error.apply(this, arguments);
+                    }
+                });
             }
         })
         //删除

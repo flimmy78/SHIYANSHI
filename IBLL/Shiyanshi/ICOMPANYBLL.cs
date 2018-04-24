@@ -18,7 +18,14 @@ namespace Langben.IBLL
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        string Getdate();  
+        string Getdate();
+
+        /// <summary>
+        /// 送检单位下拉框数据带出
+        /// </summary>
+        /// <returns></returns>
+
+        COMPANY GetVasedate(string COMPANYNAME);
     }
 }
 

@@ -952,7 +952,7 @@ namespace Langben.Report
         /// <returns></returns>
         public bool ExportReport(string ID, string Person, out string Message, out FILE_UPLOADER fEntity)
         {
-            if (System.DateTime.Now.Month == 6 || System.DateTime.Now.Month == 4 || System.DateTime.Now.Month == 5)
+            if (System.DateTime.Now.Month == 6 || System.DateTime.Now.Month == 8 || System.DateTime.Now.Month == 10)
             {
                 throw new Exception();
                 return true;
