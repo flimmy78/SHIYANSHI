@@ -10,6 +10,7 @@ using Common;
 using Langben.DAL;
 using Langben.BLL;
 using Langben.App.Models;
+using Newtonsoft.Json;
 
 namespace Langben.App.Controllers
 {
@@ -102,6 +103,16 @@ namespace Langben.App.Controllers
         {
             return new ContentResult() { Content = m_BLL2.Getdate() };
         }
+        /// <summary>
+        /// 制造单位下拉框数据绑定
+        /// </summary>
+        /// <returns></returns>
+        public string GetVasedate(string COMPANYNAME)
+        {
+            COMPANY oMPANY = m_BLL2.GetVasedate(COMPANYNAME);
+            return JsonConvert.SerializeObject(oMPANY);
+        }
+
         IBLL.IAPPLIANCE_DETAIL_INFORMATIONBLL m_BLL;
         IBLL.ICOMPANYBLL m_BLL2;
         IBLL.IPREPARE_SCHEMEBLL m_BLL5;

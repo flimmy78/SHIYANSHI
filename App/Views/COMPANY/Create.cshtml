@@ -5,49 +5,126 @@
 }
 @using Common
 @using Models
- 
+
 @section CurentPlace {
- 
-      创建  
- 
- }
+
+    创建
+
+}
 @using (Html.BeginForm("", "api/COMPANYApi/Post/1"))
 {
     <fieldset>
         <legend>
-            <input class="a2 f2" type="submit" value="创建" />
+            <input class="a2 f2" type="submit" value="创建" onclick="zuhe()" />
             <input class="a2 f2" type="button" onclick="BackList('COMPANY')" value="返回" />
         </legend>
         <div class="bigdiv">
-                 
-            <div class="editor-label">
-                <label for="COMPANYNAME">单位名称：</label>
+            <div class="editor-form">
+                <div class="editor-label">
+                    <label for="COMPANYNAME">单位名称：</label>
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.COMPANYNAME)
+                    @Html.ValidationMessageFor(model => model.COMPANYNAME)
+                </div>
+            </div>
+            <div class="editor-form">
+                <div class="editor-label">
+                    <label for="POSTCODE">单位简称：</label>
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.POSTCODE)
+                    @Html.ValidationMessageFor(model => model.POSTCODE)
+                </div>
+            </div>
+            <div class="editor-form">
+                <div class="editor-label">
+                    <a class="anUnderLine" onclick="showModalOnly('PARENTID','../../COMPANY');">
+                        @Html.LabelFor(model => model.PARENTID)
+                    </a>：
+                </div>
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.COMPANYNAME)
-                @Html.ValidationMessageFor(model => model.COMPANYNAME)
-            </div>     
-            <div class="editor-label">
-                <label for="POSTCODE">单位简称：</label>
+                <div id="checkPARENTID">
+                </div>
+                @Html.HiddenFor(model => model.PARENTID)
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.POSTCODE)
-                @Html.ValidationMessageFor(model => model.POSTCODE)
-            </div>  
-        <div class="editor-label">
-            <a class="anUnderLine" onclick="showModalOnly('PARENTID','../../COMPANY');">
-                @Html.LabelFor(model => model.PARENTID) 
-            </a>：
+
         </div>
-        <div class="editor-field">
-            <div id="checkPARENTID">               
-            </div>
-            @Html.HiddenFor(model => model.PARENTID)
-        </div>     
+        <div class="bigdiv">
             
         </div>
+        <div class="bigdiv">
+            <div class="editor-form">
+                <div class="editor-label">
+                    <label for="POSTCODE">邮政编码：</label>
+                </div>
+                <div class="editor-field">
+                    <input type="text" id="youbian" value="" class="text-box single-line" />
+                </div>
+            </div>
+            <div class="editor-form">
+                <div class="editor-label">
+                    <label for="POSTCODE">联系人：</label>
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.CONTACTS)
+                    @Html.ValidationMessageFor(model => model.CONTACTS)
+                </div>
+            </div>
+            <div class="editor-form">
+                <div class="editor-label">
+                    <label for="POSTCODE">联系电话：</label>
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.CONTACTSNUMBER)
+                    @Html.ValidationMessageFor(model => model.CONTACTSNUMBER)
+                </div>
+            </div>
+            <div class="editor-form">
+                <div class="editor-label">
+                    <label for="POSTCODE">传真：</label>
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.FAX)
+                    @Html.ValidationMessageFor(model => model.FAX)
+                </div>
+            </div>
+        </div>
     </fieldset>
-} 
+}
+<script type="text/javascript">
+    function zuhe() {
+        var fax = $("#FAX").val();
+        var youbian = $("#youbian").val();
+        $("#FAX").val(fax + "$" + youbian);
+    }
+</script>
 
- 
+<style type="text/css">
+    body {
+        height: auto;
+        font-size: 12px;
+    }
+
+    td {
+        height: 25px;
+    }
+
+    .editor-field {
+        width: 200px;
+        height: 24px;
+        float: left;
+        margin: 11px 0 11px 6px;
+        display: inline;
+    }
+
+        .editor-field .text-box {
+            width: 180px;
+        }
+
+        .editor-field .easyui-combobox {
+            width: 180px;
+        }
+</style>
 
