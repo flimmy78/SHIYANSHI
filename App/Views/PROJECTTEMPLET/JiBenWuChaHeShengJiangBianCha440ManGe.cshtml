@@ -1,0 +1,558 @@
+﻿@model Langben.DAL.PROJECTTEMPLET
+@{
+    Layout = "~/Views/Shared/TempleOnly.cshtml";
+    ViewBag.title = "基本误差和升降变差440";
+}
+@using Common
+@using Models
+<thead>
+    <!--表头-->
+    <tr>
+        <th colspan="10" align="center"><input class="my-textbox input-width" value="" type="text" name="MGS" id="MGS_t_1_1"></th>
+
+    </tr>
+    <tr>
+        <th width="160" rowspan="2" colspan="3" align="center">量程</th>
+        <th width="160" rowspan="2" align="center">等级</th>
+
+        <th width="160" rowspan="2" align="center">指示值</th>
+        <th width="160" colspan="2" align="center">标准值</th>
+        <th width="160" rowspan="2" align="center">平均值</th>
+        <th width="160" rowspan="2" align="center">基本误差(%)</th>
+        <th width="160" rowspan="2" align="center">升降变差(%)</th>
+        <th align="center" rowspan="2">
+            校准结果的不确定度<br>
+            U(k =
+            <select class="my-combobox" name="K" id="K_t_1_1">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="√3">√3</option>
+            </select>
+            )
+        </th>
+    </tr>
+    <tr>
+        <th width="160" align="center">上升</th>
+        <th width="160" align="center">下降</th>
+    </tr>
+</thead>
+
+<tbody id="tbody_moban">
+
+    <!--表体-->
+    <!--插入行的位置-->
+</tbody>
+<tr>
+    <td colspan="11">
+        <input type="hidden" id="hideLiangChengShuLiang" value="0" /> <!--默认量程是0-->
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="btnAddLiangCheng">增加量程</a>
+     </td>
+</tr>
+<tfoot tag="tag">
+    <tr>
+        <th width="80" align="right" colspan="2">最大基本误差(%):</th>
+        <th width="80" align="left" colspan="2"><input class="my-textbox input-width" value="" type="text" name="ZDJBWC" id="ZDJBWC_t_1_1"></th>
+        <th width="80" align="right" colspan="2">最大升降变差(%):</th>
+        <th width="80" align="left" colspan="2"><input class="my-textbox input-width" value="" type="text" name="ZDSJBC" id="ZDSJBC_t_1_1"></th>
+        <th width="80" align="center"></th>
+
+    </tr>
+    <!--表尾-->
+
+</tfoot>
+
+@section JS {
+    <script type="text/javascript" language="javascript">
+        //一个量程的需要这个方法
+        //重写set方法，只准对增加空白行
+        function set(tbodyIndex) {
+
+            $('#dlg').dialog('open');//打开弹出框
+
+            $("#hideDangQianTongDao").val(tbodyIndex);
+
+        }
+        //增加行
+        function CreateRow() {
+
+
+            var hideDangQianTongDao = $("#hideDangQianTongDao").val();//当前操作第几通道
+            var LiangChengShuLiang = $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val();//某个通道量程数量
+            LiangChengShuLiang++;
+            var txtNumber = $("#txtNumber").val();     //量程值
+            var txtPoint = $("#txtPoint").val();     //检测点数
+            var txtPointLen = $("#txtPointLen").val(); //小数点位数
+
+            var htmlString = [];
+            var rowLength = $("#tbody_" + hideDangQianTongDao + " tr").length;//行号
+
+            var lianChengID = hideDangQianTongDao + "_" + LiangChengShuLiang;//例如：第几个通道_第几个量程
+
+
+
+            for (var rowidx = 0; rowidx < txtPoint; rowidx++) {
+                rowLength++;
+                htmlString.push("<tr rowindex='" + rowLength + "'>");
+
+                var rowspan = 1; //合并单元格行数
+
+                var HangHaoID = lianChengID + "_" + rowLength;//量程ID_第几行
+                //计算默认值
+                if (rowidx == 0) {
+                    //需要合并的列 //量程
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE1", lianChengID, rowidx, txtNumber, "", "", "blurValue"));
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE2", lianChengID, rowidx, "/", "", "", "blurValue"));
+                    htmlString.push(SetTDHtml(txtPoint, "RANGE", lianChengID, rowidx, txtNumber, "", "", "blurValue"));
+                    //等级
+                    htmlString.push(SetTDHtml(txtPoint, "OUTPUTVALUE", lianChengID, rowidx, "", "", "", "blurValue"));
+                }
+
+
+                //指示值(格)
+                htmlString.push(SetTDHtml(rowspan, "READVALUE", HangHaoID, rowidx, "", "", "", "blurValue"));
+
+                //标准表读数 上升
+                htmlString.push(SetTDHtml(rowspan, "ACTUALVALUE", HangHaoID, rowidx, "", "", "", "blurValue"));
+
+                //标准表读数 下降
+                htmlString.push(SetTDHtml(rowspan, "SHIJISHUCHUZHI", HangHaoID, rowidx, "", "", "", "blurValue"));
+                //平均值
+                htmlString.push(SetTDHtml(rowspan, "RELATIVEERROR", HangHaoID, rowidx, "", "", "", ""));
+                //基本误差(%)
+                htmlString.push(SetTDHtml(rowspan, "UNCERTAINTYDEGREE", HangHaoID, rowidx, "", "", "", ""));
+                //升降变差(%)
+                htmlString.push(SetTDHtml(rowspan, "BUQUEDINGDU", HangHaoID, rowidx, "", "", "", ""));
+                //校准结果的不确定度U(k={0})
+                htmlString.push(SetTDHtml(rowspan, "JISUANWUCHA", HangHaoID, rowidx, "", "", "", ""));
+                htmlString.push("</tr>");
+            }
+            htmlString = htmlString.join("");
+
+            var tagRow = $("#tongdao_" + hideDangQianTongDao).find("#tbody_" + hideDangQianTongDao).append(htmlString);
+            $.parser.parse(tagRow);//渲染easyui组建
+            $('#dlg').window('close');//关闭弹出框
+
+            $("#tongdao_" + hideDangQianTongDao).find("#hideLiangChengShuLiang").val(LiangChengShuLiang);
+        }
+        //计算标准值
+        function blurValue(obj) {
+
+            jiSuanWuCha(obj, "RANGE", "OUTPUTVALUE", "READVALUE", "ACTUALVALUE", "SHIJISHUCHUZHI", "RELATIVEERROR", "UNCERTAINTYDEGREE", "BUQUEDINGDU", "JISUANWUCHA", "RANGE1");
+
+        }
+
+        //误差
+        //obj 自身对象
+        //T1 量程
+        //T2 等级
+        //T3 指示值(格)
+        //T4 标准表读数 上升
+        //T5 标准表读数 下降
+        //T6 平均值
+        //T7 基本误差(%)
+        //T8 升降变差(%)
+        //T9 校准结果的不确定度U(k={0})
+        function jiSuanWuCha(obj, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10) {
+            debugger;
+            //重新计算当前行
+            var name = $(obj).attr("name");
+            var id = $(obj).attr("id");
+            id = id.substring(id.indexOf('_'));
+            var tongdao = id.split('_')[1];
+            var liangCheng = id.split('_')[2];
+          var  T1_UNIT = T1 + "_UNIT" + "_" + tongdao + "_" + liangCheng;
+          var  T10_UNIT = T10 + "_UNIT" + "_" + tongdao + "_" + liangCheng;
+          T1 = T1 + "_" + tongdao + "_" + liangCheng;            //改动的地方，参与计算的列的name值
+          T10 = T10 + "_" + tongdao + "_" + liangCheng;            //改动的地方，参与计算的列的name值
+            T2 = T2 + "_" + tongdao + "_" + liangCheng;//改动的地方，参与计算的列的name值
+            T3 = T3 + id;//改动的地方，误差的列的name值
+           // T4_UNIT = T4 + "_UNIT" + id;//有功分量 相对误差(%
+            T4 = T4 + id;//有功分量 相对误差(%
+            //T5_UNIT = T5 + "_UNIT" + id;//有功分量 相对误差(%
+            T5 = T5 + id;//改动的地方，参与计算的列的name值
+          var  T6_UNIT = T6 + "_UNIT" + id;//有功分量 相对误差(%
+            T6 = T6 + id;//无功分量 相对误差(%
+            T7 = T7 + id; //T7 cosφ
+            T8 = T8 + id; //T8 额定电压(V)
+            var MG = "MGS" + "_" + tongdao + "_1_1";
+            var T1Data = $("#" + T1).val();//T1 量程
+            var lastUnit = $("#" + T1_UNIT).val();//量程单位
+            var T1Data2 = $("#" + T10).val();//T1 量程
+            var lastUnit2 = $("#" + T10_UNIT).val();//量程单位
+            T1Data = accMul(T1Data , T1Data2);
+            var T2Data = $("#" + T2).val();//T1 等级
+
+            var T3Data = $(obj).parent().parent().find("#" + T3).val(); //T3 指示值(格)
+            var T4Data = $(obj).parent().parent().find("#" + T4).val(); //T4 标准表读数 上升
+            //var T4Data_UNIT = $(obj).parent().parent().find("#" + T4_UNIT).val(); //T4 标准表读数 上升
+            var T5Data = $(obj).parent().parent().find("#" + T5).val(); //T5 标准表读数 下降
+           // var T5Data_UNIT = $(obj).parent().parent().find("#" + T5_UNIT).val(); //T5 标准表读数 下降
+            //   var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T6 平均值
+            //var T6Data_UNIT = $(obj).parent().parent().find("#" + T6_UNIT).val(); //T6 平均值单位
+            //   var T7Data = $(obj).parent().parent().find("#" + T7).val(); //T7 基本误差(%)
+            // var T8Data = $(obj).parent().parent().find("#" + T8).val(); //T8 升降变差(%)
+            var T9Data = $(obj).parent().parent().find("#" + T9).val(); //T9 校准结果的不确定度U(k={0})
+            var MGData = $("#" + MG).val();//满格
+            var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
+            txtPointLen = parseFloat(txtPointLen);
+            //SHIJISHUCHUZHI_UNIT_1_1_1
+
+
+            //【平均值】=（上升+下降）/2
+            if (T4Data != "" && T5Data != "") {
+
+                // T4Data = DanWeiHuanSuan(T6Data_UNIT, T4Data_UNIT, T4Data);
+                // T5Data = DanWeiHuanSuan(T6Data_UNIT, T5Data_UNIT, T5Data);
+                getAverage(obj, T4Data, T5Data, T6);
+
+            }
+            var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T6 平均值
+            //【基本误差】为=（指示值格/满格*当前量程-平均值）/当前量程*100，注意参与运算值要保持单位一致，如果不一致进行换算。四舍六入，逢五奇进偶不进。
+            if (T3Data != "" && MGData != "" && T1Data != "" && T6Data != "") {
+
+                T3Data = parseFloat(T3Data);
+                MGData = parseFloat(MGData);
+                T1Data = parseFloat(T1Data);
+               // T6Data = DanWeiHuanSuan(lastUnit, T6Data_UNIT, T6Data);
+                var jian1 = accDiv(T3Data, MGData);
+                var jian2 = accMul(jian1, T1Data);
+                var jian3 = accSub(jian2, T6Data);
+                var jian4 = accDiv(jian3, T1Data);
+
+                var jianfa = accMul(jian4, 100);      //accMul(accDiv(accSub(accDiv(T3Data,accMul(MGData,T1Data)),T6Data),T1Data),100);
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                $(obj).parent().parent().find("#" + T7).val(data);
+            }
+            //【升降变差】=绝对值(上升-下降）/当前量程，注意单位换算一致，四舍六入，逢五奇进偶不进，与误差小数位数一致。
+            if (T4Data != "" && T5Data != "" && T1Data != "") {
+               // T4Data = DanWeiHuanSuan(lastUnit, T4Data_UNIT, T4Data);
+               // T5Data = DanWeiHuanSuan(lastUnit, T5Data_UNIT, T5Data);
+                T1Data = parseFloat(T1Data);
+                var jianfa = accMul(accDiv(Math.abs(accSub(T4Data, T5Data)), T1Data), 100);
+                var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
+                $(obj).parent().parent().find("#" + T8).val(data);
+            }
+            //【最大基本误差】所有量程中误差绝对值最大的误差	ZDJBWC
+            var els = document.getElementsByName("UNCERTAINTYDEGREE");
+            var max = els[0].value;
+            var maxValue = els[0].value;
+            //var r1, r2, n;
+            //try { r1 = maxValue.toString().split(".")[1].length } catch (e) { r1 = 0 }
+            //n = r1;
+            if (max != "") { max = Math.abs(max); }
+            for (var i = 0, j = els.length; i < j; i++) {
+                var val = els[i].value;
+                if (val != "") {
+                    val = Math.abs(val);
+                    if (max == "") {
+                        max = val;
+                        maxValue = els[i].value;
+                        //try { r1 = maxValue.toString().split(".")[1].length } catch (e) { r1 = 0 }
+                        //n = r1 > n?r1:n;
+                    } else if (max < val) {
+                        max = val;
+                        maxValue = els[i].value;
+                        //try { r1 = maxValue.toString().split(".")[1].length } catch (e) { r1 = 0 }
+                        //n = r1 > n ? r1 : n;
+                    }
+                }
+
+            }
+            $("#ZDJBWC" + "_" + tongdao + "_1_1").val(maxValue);
+            //【最大升降变差】所有量程中升降变差绝对值最大的升降变差	ZDSJBC
+            var els = document.getElementsByName("BUQUEDINGDU");
+            var max = els[0].value;
+            var maxValue = els[0].value;
+            if (max != "") { max = Math.abs(max); }
+            for (var i = 0, j = els.length; i < j; i++) {
+                var val = els[i].value;
+                if (val != "") {
+                    val = Math.abs(val);
+                    if (max == "") {
+                        max = val;
+                        maxValue = els[i].value;
+                    } else if (max < val) {
+                        max = val;
+                        maxValue = els[i].value;
+                    }
+                }
+
+            }
+            $("#ZDSJBC" + "_" + tongdao + "_1_1").val(maxValue);
+        }
+        //单位换算
+        //最终单位
+        //当前单位
+        //值
+        function DanWeiHuanSuan(lastUnit, unit, value) {
+            unit = unit.toUpperCase();
+            lastUnit = lastUnit.toUpperCase();
+            switch (lastUnit) {
+                case "V":
+                    result = toV(unit, value);
+                    break;
+                case "MV":
+                    result = toMV(unit, value);
+                    break;
+                case "A":
+                    result = toA(unit, value);
+                    break;
+                case "MA":
+                    result = toMA(unit, value);
+                    break;
+                case "W":
+                    result = value;
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
+        //转换为V
+        function toV(danwei, value) {
+            //1KV=1000V, 1V=1000mV,  1mV=1000μV, 1μV=1000nV, 1nV=1000pV.
+            value = parseFloat(value);
+            danwei = danwei.toUpperCase();
+            var result;
+            switch (danwei) {
+                case "KV":
+                    result = value * 1000;
+                    break;
+                case "V":
+                    result = value;
+                    break;
+                case "MV":
+                    result = value / 1000;
+                    break;
+                case "μV":
+                    result = value / 1000 / 1000;
+                    break;
+                case "NV":
+                    result = value / 1000 / 1000 / 1000;
+                    break;
+                case "PV":
+                    result = value / 1000 / 1000 / 1000 / 1000;
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
+        //转换为MV
+        function toMV(danwei, value) {
+            //1KV=1000V, 1V=1000mV,  1mV=1000μV, 1μV=1000nV, 1nV=1000pV.
+            value = parseFloat(value);
+            danwei = danwei.toUpperCase();
+            var result;
+            switch (danwei) {
+                case "KV":
+                    result = value * 1000 * 1000;
+                    break;
+                case "V":
+                    result = value * 1000;
+                    break;
+                case "MV":
+                    result = value
+                    break;
+                case "μV":
+                    result = value / 1000;
+                    break;
+                case "NV":
+                    result = value / 1000 / 1000;
+                    break;
+                case "PV":
+                    result = value / 1000 / 1000 / 1000;
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
+        //转换为A
+        function toA(danwei, value) {
+            //1MA（兆安）=1000kA（千安） kA（千安）=1000A（安）  1A（安）=1000mA（毫安）=1000000μA（微安）
+            value = parseFloat(value);
+            danwei = danwei.toUpperCase();
+            var result;
+            switch (danwei) {
+                case "KA":
+                    result = value * 1000;
+                    break;
+                case "A":
+                    result = value;
+                    break;
+                case "MA":
+                    result = value / 1000;
+                    break;
+                case "μA":
+                    result = value / 1000 / 1000;
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
+        //转换为MA
+        function toMA(danwei, value) {
+            //1MA（兆安）=1000kA（千安） kA（千安）=1000A（安）  1A（安）=1000mA（毫安）=1000000μA（微安）
+            value = parseFloat(value);
+            danwei = danwei.toUpperCase();
+            var result;
+            switch (danwei) {
+                case "KA":
+                    result = value * 1000 * 1000;
+                    break;
+                case "A":
+                    result = value * 1000;
+                    break;
+                case "MA":
+                    result = value
+                    break;
+                case "μA":
+                    result = value / 1000;
+                    break;
+                default:
+                    result = value;
+            }
+            return result;
+        }
+    </script>
+    <script>
+        //方向键控制页面控件焦点移动
+        function keyDown(event) {
+            var rowspan = 4;
+            var colunmIdx = "";
+            var inputs = $(".my-textbox")                              //通过class属性值获取控件组合
+            var focus = document.activeElement;                 //得到处于激活状态的控件
+            if (!document.getElementById("tongdao").contains(focus)) return;     //判断是否包含激活控件在指定的Table下
+            //if (!$(".tbl").contains(focus)) return;
+            var event = window.event || event;                              //获取事件
+            var key = event.keyCode;                                        //得到按下的键盘Ascii码
+            var flag = -1;
+
+            //得到激活控件在组合中的具体位置
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i] === focus) {
+                    // alert(i);
+                    break;
+                }
+            }
+
+            switch (key) {
+
+                case 37: //向左键
+                    if (i > 0) inputs[i - 1].focus();
+                    break;
+                case 38:                //向上键
+                    var td = $(inputs[i]).parents("td").index();      //当前所在的列数
+                    var tr = $(inputs[i]).parents("tr");
+                    var tr_up = $(inputs[i]).parents("tr").prev();      //当前所在的行数的上一行
+                    if ($(inputs[i]).parents("tr").prev().length >= 1) {   //判断上一行是否还有行
+                        var tr_up = $("[rowindex=" + ($(tr).attr("rowindex") - 1) + "]", $(inputs[i]).parents("table")[0])[0];      //当前所在的行数的上一行
+
+                        if ($(tr_up).attr("rowindex") == 1)  //如果是第一行
+                            $(tr_up).find("td").eq(td + rowspan).find('input').focus();    //此模板没有有rowspan合并行等,所以如果向上到第一行,td不增减;
+                        else {
+                            if ($(tr).find("td").length < $(tr_up).find("td").length)
+                                $(tr_up).find("td").eq(td + rowspan).find('input').focus();
+                            if ($(tr).find("td").length == $(tr_up).find("td").length)
+                                $(tr_up).find("td").eq(td).find('input').focus();
+                            if ($(tr).find("td").length > $(tr_up).find("td").length)
+                                $(tr_up).find("td").eq(td - rowspan).find('input').focus();
+                        }
+                    }
+                    else {
+                        //没有则找上一个table
+                        var prevtable = $(inputs[i]).parents("table").prev()[0];
+
+                        var tr_up = $(prevtable).find("tr:eq(" + ($('tr', $(prevtable)).length - 2) + ")");
+                        if ($(tr_up).attr("rowindex") == 1)
+                            $(tr_up).find('td').eq(td + rowspan).find('input').focus();
+                        else
+                            $(tr_up).find('td').eq(td).find('input').focus();
+                    }
+                    break;
+                case 39: //向右键
+                    if (i < inputs.length - 1) inputs[i + 1].focus();
+                    break;
+                case 40: //向下键
+                    var td = $(inputs[i]).parents("td").index();      //当前所在的列数
+                    var tr = $(inputs[i]).parents("tr");
+                    if ($(inputs[i]).parents("tr").next().length >= 1) {
+                        var tr_down = $(inputs[i]).parents("tr").next();      //当前所在的行数的下一行
+                        if ($(tr).attr("rowindex") != 1) {
+                            if ($(tr).find("td").length < $(tr_down).find("td").length)
+                                $(tr_down).find("td").eq(td + rowspan).find('input').focus();
+                            if ($(tr).find("td").length == $(tr_down).find("td").length)
+                                $(tr_down).find("td").eq(td).find('input').focus();
+                            if ($(tr).find("td").length > $(tr_down).find("td").length)
+                                $(tr_down).find("td").eq(td - rowspan).find('input').focus();
+                        }
+                        else
+                            $(tr_down).find("td").eq(td - rowspan).find('input').focus();//第一列没有合并行，td数量不变
+                    }
+                    else {
+                        var table = $(inputs[i]).parents("table").next();
+                        var tr = $('[rowindex]', table).eq(0);
+                        if ($(tr).attr("rowindex") != 1)
+                            $(tr).find('td').eq(td).find('input').focus();
+                        else
+                            $(tr).find('td').eq(td + rowspan).find('input').focus();
+                    }
+                    break;
+                case 13:                //回车键
+                    event.returnValue = false;                          //阻止自动提交
+                    var j = i + 1;
+                    var flag = false;
+                    if (inputs.get(j).disabled == false) {
+                        flag = true;
+                    } else {
+                        for (j = i + 4; j <= inputs.length - 1; j = j + 2) {
+                            if (inputs.get(j).disabled == false) {
+                                flag = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (flag) {
+                        inputs[j].focus();
+                    }
+                    break;
+            }
+        }
+    </script>
+}
+
+@section TanKuang {
+    <!--弹框的位置-->
+    <!--增加量程弹层-->
+    <div id="dlg" class="easyui-dialog" title="设置检测点" closed="true" data-options="buttons: [{
+					text:'确定',
+					iconCls:'icon-ok',
+					handler:function(){
+					  return CreateRow()
+					}
+				},{
+					text:'取消',
+					handler:function(){
+                    $('#dlg').window('close');
+         }
+         }]" style="width:400px;height:200px;padding:10px">
+        <table>
+            <tr>
+                <td width="80" align="right">量程值：</td>
+                <td><input type="text" id="txtNumber" name="txtNumber" value="" class="my-textbox  required digits" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">检测点数：</td>
+                <td><input type="text" id="txtPoint" name="txtPoint" value="" class="my-textbox  required digits" style="width:200px" /></td>
+            </tr>
+            <tr>
+                <td align="right">小数点位数：</td>
+                <td><input type="text" id="txtPointLen" name="txtPointLen" value="" class="my-textbox  required digits" style="width:200px" /></td>
+            </tr>
+        </table>
+    </div>
+    <!--/增加量程弹层-->
+}
+

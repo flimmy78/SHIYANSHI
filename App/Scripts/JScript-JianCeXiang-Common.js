@@ -4924,7 +4924,7 @@ RuleAttributeArray = [
     },
     {
         RuleID: '124-2005_4',//检测项编号
-        Remark: '基本误差和升降变差440',//检测项说明
+        Remark: '基本误差和升降变差440ManGe',//检测项说明 功率表
         Attributes:
             [{
                 //添加通道按钮是否显示show:显示，hidden:不显示

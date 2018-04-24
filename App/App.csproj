@@ -1580,6 +1580,7 @@
     <Content Include="up\Report\jiaozhunyuanshijilu171219141251898457597df0f4af2.xls" />
     <Content Include="up\Report\jiaozhunyuanshijilu1712191619242098411681e7a34e4.xls" />
     <Content Include="up\Report\jiaozhunyuanshijilu17122517385767362891dd5c940ff.xls" />
+    <Content Include="Views\PROJECTTEMPLET\JiBenWuChaHeShengJiangBianCha440ManGe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

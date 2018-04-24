@@ -299,6 +299,19 @@ namespace Langben.App.Controllers
             return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
         }
         /// <summary>
+        ///基本误差和升降变差440 功率表
+        /// </summary>
+        /// <param name="id">canshu</param>
+        /// <param name="RULEID">规程id</param>
+        /// <param name="SCHEMEID">方案id</param>
+        /// <param name="PREPARE_SCHEMEID">预备方案id</param>
+        /// <returns></returns>
+        public ActionResult JiBenWuChaHeShengJiangBianCha440ManGe(string RULEID = "124-2005_4", string SCHEMEID = "", string PREPARE_SCHEMEID = "")
+        {
+
+            return Detail(RULEID, SCHEMEID, PREPARE_SCHEMEID);
+        }
+        /// <summary>
         ///基本误差和升降变差
         /// </summary>
         /// <param name="id">canshu</param>
