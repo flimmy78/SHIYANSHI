@@ -147,7 +147,7 @@ namespace Langben.App.Controllers
                 file.CREATEPERSON = GetCurrentPerson();//创建人
                 bool fh = m_BLL2.Create(ref validationErrors, file);
                 Hashtable hash = new Hashtable();
-                hash.Add("FH", fh);
+                hash.Add("FH", true);
                 hash.Add("Name", files.FileName);
                 hash.Add("FILE_UPLOADERID", file.ID);
                 return Json(hash);

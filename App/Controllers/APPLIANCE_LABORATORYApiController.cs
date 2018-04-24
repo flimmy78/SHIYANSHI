@@ -239,7 +239,7 @@ namespace Langben.App.Controllers
             if (!string.IsNullOrWhiteSpace(data))
             {
                 result.Code = Common.ClientCode.Succeed;
-                result.Message = data;
+                result.Message ="../"+data;
                 return result; //提示更新失败
             }
             else
