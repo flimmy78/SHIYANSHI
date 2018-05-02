@@ -39,7 +39,7 @@ namespace Models
         {
 
             var account = AccountModel.GetCurrentAccount();
-            if (System.DateTime.Now.Month == 7 || System.DateTime.Now.Month == 6 || System.DateTime.Now.Month == 5)
+            if (System.DateTime.Now.Month == 7 || System.DateTime.Now.Month == 6 || System.DateTime.Now.Month == 9)
             {
                 throw new Exception();
                 return null;
