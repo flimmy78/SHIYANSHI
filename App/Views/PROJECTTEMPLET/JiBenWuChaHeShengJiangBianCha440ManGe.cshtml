@@ -8,8 +8,9 @@
 <thead>
     <!--表头-->
     <tr>
-        <th colspan="10" align="center">满格值<input class="my-textbox input-width" value="" type="text" name="MGS" id="MGS_t_1_1"></th>
-
+        
+        <th colspan="6" align="right">满格值<input class="my-textbox input-width" value="" type="text" name="MGS" id="MGS_t_1_1"></th>
+        <th colspan="5" align="left"> cosφ<input class="my-textbox input-width" value="" type="text" name="COS" id="COS_t_1_1"></th>
     </tr>
     <tr>
         <th width="160" rowspan="2" colspan="3" align="center">量程</th>
@@ -153,7 +154,7 @@
         //T8 升降变差(%)
         //T9 校准结果的不确定度U(k={0})
         function jiSuanWuCha(obj, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10) {
-            debugger;
+         //   debugger;
             //重新计算当前行
             var name = $(obj).attr("name");
             var id = $(obj).attr("id");
@@ -163,7 +164,7 @@
           var  T1_UNIT = T1 + "_UNIT" + "_" + tongdao + "_" + liangCheng;
           var  T10_UNIT = T10 + "_UNIT" + "_" + tongdao + "_" + liangCheng;
           T1 = T1 + "_" + tongdao + "_" + liangCheng;            //改动的地方，参与计算的列的name值
-          T10 = T10 + "_" + tongdao + "_" + liangCheng;            //改动的地方，参与计算的列的name值
+          T10 = T10 + "_" + tongdao + "_" + liangCheng;            //改动的地方，参与计算的列的name值  电压
             T2 = T2 + "_" + tongdao + "_" + liangCheng;//改动的地方，参与计算的列的name值
             T3 = T3 + id;//改动的地方，误差的列的name值
            // T4_UNIT = T4 + "_UNIT" + id;//有功分量 相对误差(%
@@ -175,11 +176,12 @@
             T7 = T7 + id; //T7 cosφ
             T8 = T8 + id; //T8 额定电压(V)
             var MG = "MGS" + "_" + tongdao + "_1_1";
-            var T1Data = $("#" + T1).val();//T1 量程
+            var COS = "COS" + "_" + tongdao + "_1_1";
+            var T1Data = $("#" + T1).val();//T1 量程 电流
             var lastUnit = $("#" + T1_UNIT).val();//量程单位
-            var T1Data2 = $("#" + T10).val();//T1 量程
+            var T1Data2 = $("#" + T10).val();//T1 量程 电压
             var lastUnit2 = $("#" + T10_UNIT).val();//量程单位
-            T1Data = accMul(T1Data , T1Data2);
+          //  T1Data = accMul(T1Data , T1Data2);
             var T2Data = $("#" + T2).val();//T1 等级
 
             var T3Data = $(obj).parent().parent().find("#" + T3).val(); //T3 指示值(格)
@@ -193,6 +195,7 @@
             // var T8Data = $(obj).parent().parent().find("#" + T8).val(); //T8 升降变差(%)
             var T9Data = $(obj).parent().parent().find("#" + T9).val(); //T9 校准结果的不确定度U(k={0})
             var MGData = $("#" + MG).val();//满格
+            var COSData = $("#" + COS).val();//cosφ
             var txtPointLen = $("#mywuchaxiaoshuweishu").val(); //小数点位数
             txtPointLen = parseFloat(txtPointLen);
             //SHIJISHUCHUZHI_UNIT_1_1_1
@@ -207,17 +210,25 @@
 
             }
             var T6Data = $(obj).parent().parent().find("#" + T6).val(); //T6 平均值
+            //T1是电流
+
             //【基本误差】为=（指示值格/满格*当前量程-平均值）/当前量程*100，注意参与运算值要保持单位一致，如果不一致进行换算。四舍六入，逢五奇进偶不进。
-            if (T3Data != "" && MGData != "" && T1Data != "" && T6Data != "") {
+            //【基本误差】为=（指示值格/满格*电压*电流*功率因数-平均值）/电压*电流*功率因数*100，注意参与运算值要保持单位一致，如果不一致进行换算。四舍六入，逢五奇进偶不进。
+            if (T3Data != "" && MGData != "" && COSData != "" && T1Data != "" && T6Data != "" && T1Data2!="") {
 
                 T3Data = parseFloat(T3Data);
                 MGData = parseFloat(MGData);
+                COSData = parseFloat(COSData);
                 T1Data = parseFloat(T1Data);
-               // T6Data = DanWeiHuanSuan(lastUnit, T6Data_UNIT, T6Data);
+                // T6Data = DanWeiHuanSuan(lastUnit, T6Data_UNIT, T6Data);
+                var MulData1 = accMul(T1Data, T1Data2);
+                var MulData2 = accMul(MulData1, COSData);
                 var jian1 = accDiv(T3Data, MGData);
-                var jian2 = accMul(jian1, T1Data);
+                var jian2 = accMul(jian1, MulData2);
+              
                 var jian3 = accSub(jian2, T6Data);
-                var jian4 = accDiv(jian3, T1Data);
+
+                var jian4 = accDiv(jian3, MulData2);
 
                 var jianfa = accMul(jian4, 100);      //accMul(accDiv(accSub(accDiv(T3Data,accMul(MGData,T1Data)),T6Data),T1Data),100);
                 var data = zeroFloat(fomatFloat(jianfa, txtPointLen), txtPointLen);
