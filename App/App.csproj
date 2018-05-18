@@ -21,6 +21,7 @@
     <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -165,6 +166,7 @@
     <Folder Include="bin\" />
     <Folder Include="Res\webuploader\" />
     <Folder Include="up\ErWeiMa\" />
+    <Folder Include="up\QianZi\" />
     <Folder Include="up\RuKu\" />
   </ItemGroup>
   <ItemGroup>
@@ -622,19 +624,6 @@
     <Content Include="Template\校准证书-CNAS.xls" />
     <Content Include="Template\校准证书.xls" />
     <Content Include="Template\检定证书.xls" />
-    <Content Include="up\QianZi\1704101544253357765d770908709.png" />
-    <Content Include="up\QianZi\17042409252843078962c44495915.png" />
-    <Content Include="up\QianZi\1704241006472423735c580c84516.png" />
-    <Content Include="up\QianZi\17042510530931377002a0d0fe85c.png" />
-    <Content Include="up\QianZi\1704261034464910471d2553b591e.png" />
-    <Content Include="up\QianZi\1705221542377578300f641daeb52.png" />
-    <Content Include="up\QianZi\17052216002388441873b28fed6a4.png" />
-    <Content Include="up\QianZi\1705221627380918348d8145e2684.png" />
-    <Content Include="up\QianZi\1705221631040586348ba9e7af39f.png" />
-    <Content Include="up\QianZi\17052410195387219715c73f9600f.png" />
-    <Content Include="up\QianZi\17052410271273139711fed3f2f4e.png" />
-    <Content Include="up\QianZi\17052410335124899717f6a8faa71.png" />
-    <Content Include="up\QianZi\1705260940026079915abc007f36e.png" />
     <Content Include="Views\PROJECTTEMPLET\BianBiCeShi.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\BianBiShiZhi.cshtml" />
     <Content Include="Views\PROJECTTEMPLET\BianCha.cshtml" />
